@@ -150,6 +150,9 @@ static void Action_Network_MasterChangeState (Action *a)
     ASSERT(server_state == WNet::NETWORK_PLAYING);
     break;
 
+  case WNet::NETWORK_NEXT_GAME:
+    break;
+
   default:
     NET_ASSERT(false)
       {
