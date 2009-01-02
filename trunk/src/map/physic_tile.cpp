@@ -36,8 +36,8 @@
 static const double GROUND_FRICTION = 5.0;
 
 PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level):
-  is_subdivised(false),
-  is_containing_polygon(false),
+  m_is_subdivided(false),
+  m_is_containing_polygon(false),
   m_shape(NULL),
   m_parent_physic_tile(parent_physic_tile),
   m_parent_tile(tile),
@@ -74,15 +74,15 @@ void PhysicTile::Generate()
 
 void PhysicTile::GenerateEmpty()
 {
-  is_subdivised = false;
-  is_containing_polygon = false;
+  m_is_subdivided = false;
+  m_is_containing_polygon = false;
 
 }
 
 void PhysicTile::GenerateFull()
 {
-  is_subdivised = false;
-  is_containing_polygon = true;
+  m_is_subdivided = false;
+  m_is_containing_polygon = true;
 
   InitShape();
 
@@ -111,8 +111,8 @@ void PhysicTile::GenerateMixte()
 
    if (m_level > 0 || !is_generation_work) {
      //Subdivise
-     is_subdivised = true;
-     is_containing_polygon = false;
+     m_is_subdivided = true;
+     m_is_containing_polygon = false;
      int new_width1 = m_size.x/2;
      int new_width2 = m_size.x - new_width1;
      int new_height1 = m_size.y/2;;
@@ -136,12 +136,12 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness regroup 0&1&2" << std::endl;
 
-       ASSERT(m_physic_tiles[0]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->is_subdivised);
-       ASSERT(m_physic_tiles[1]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->is_subdivised);
-       ASSERT(m_physic_tiles[2]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->is_subdivised);
+       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
        delete m_physic_tiles[1];
        m_physic_tiles[1] = NULL;
        delete m_physic_tiles[2];
@@ -187,12 +187,12 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness regroup 0&2&3" << std::endl;
 
-       ASSERT(m_physic_tiles[0]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->is_subdivised);
-       ASSERT(m_physic_tiles[2]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->is_subdivised);
-       ASSERT(m_physic_tiles[3]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->is_subdivised);
+       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
+       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
        delete m_physic_tiles[2];
        m_physic_tiles[2] = NULL;
        delete m_physic_tiles[3];
@@ -238,12 +238,12 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness regroup 0&1&3" << std::endl;
 
-       ASSERT(m_physic_tiles[0]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->is_subdivised);
-       ASSERT(m_physic_tiles[1]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->is_subdivised);
-       ASSERT(m_physic_tiles[3]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->is_subdivised);
+       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
        delete m_physic_tiles[1];
        m_physic_tiles[1] = NULL;
        delete m_physic_tiles[3];
@@ -289,12 +289,12 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness regroup 1&2&3" << std::endl;
 
-       ASSERT(m_physic_tiles[1]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->is_subdivised);
-       ASSERT(m_physic_tiles[2]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->is_subdivised);
-       ASSERT(m_physic_tiles[3]->is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->is_subdivised);
+       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
+       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
        delete m_physic_tiles[2];
        m_physic_tiles[2] = NULL;
        delete m_physic_tiles[3];
@@ -341,10 +341,10 @@ void PhysicTile::GenerateMixte()
 
          //std::cout<<"PhysicTile::m_fullness regroup 0&1" << std::endl;
 
-         ASSERT(m_physic_tiles[0]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[0]->is_subdivised);
-         ASSERT(m_physic_tiles[1]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[1]->is_subdivised);
+         ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+         ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[1]->m_is_subdivided);
          delete m_physic_tiles[1];
          m_physic_tiles[1] = NULL;
 
@@ -380,10 +380,10 @@ void PhysicTile::GenerateMixte()
                   m_physic_tiles[3]->m_fullness == FULL) {
          //std::cout<<"PhysicTile::m_fullness regroup 2&3" << std::endl;
 
-         ASSERT(m_physic_tiles[2]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[2]->is_subdivised);
-         ASSERT(m_physic_tiles[3]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[3]->is_subdivised);
+         ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[2]->m_is_subdivided);
+         ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[3]->m_is_subdivided);
          delete m_physic_tiles[3];
          m_physic_tiles[3] = NULL;
 
@@ -421,10 +421,10 @@ void PhysicTile::GenerateMixte()
 
          // seems to be buggy...
 
-         ASSERT(m_physic_tiles[0]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[0]->is_subdivised);
-         ASSERT(m_physic_tiles[2]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[2]->is_subdivised);
+         ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+         ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[2]->m_is_subdivided);
          delete m_physic_tiles[2];
          m_physic_tiles[2] = NULL;
 
@@ -462,10 +462,10 @@ void PhysicTile::GenerateMixte()
 
          // seems to be buggy...
 
-         ASSERT(m_physic_tiles[1]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[1]->is_subdivised);
-         ASSERT(m_physic_tiles[3]->is_containing_polygon);
-         ASSERT(!m_physic_tiles[3]->is_subdivised);
+         ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+         ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+         ASSERT(!m_physic_tiles[3]->m_is_subdivided);
          delete m_physic_tiles[3];
          m_physic_tiles[3] = NULL;
 
@@ -502,7 +502,7 @@ void PhysicTile::GenerateMixte()
 
 }
 
-//Home make algoritm
+//Home made algorithm
 /*
 
 a  0->            <-1  b
@@ -525,12 +525,12 @@ d  5->            <-4  c
 
 bool PhysicTile::GeneratePolygone()
 {
-  is_containing_polygon = false;
+  m_is_containing_polygon = false;
   //8 verticles max
-  Point2d pts[8];
+  Point2i pts[8];
   bool pts_state[8];
   for (uint i=0; i < 8; i++) {
-      pts_state[i] =false;
+      pts_state[i] = false;
   }
 
   // pts 0 in 1;
@@ -539,7 +539,7 @@ bool PhysicTile::GeneratePolygone()
 
   //(0) search ground between (a) and (b)
   pts[0] = m_offset;
-  while ((pts[0].x < m_size.x+ m_offset.x) && !pts_state[0]) {
+  while ((pts[0].x < m_size.x + m_offset.x) && !pts_state[0]) {
     if (m_parent_tile->GetAlpha(pts[0])!= SDL_ALPHA_TRANSPARENT) {
       pts_state[0] = true; //lock position
     } else {
@@ -551,7 +551,7 @@ bool PhysicTile::GeneratePolygone()
   //if (0) found ground, send (1) from (b) to (a)
   if (pts_state[0]) {
     pts[1] = m_offset;
-    pts[1].x += m_size.x-1;
+    pts[1].x += m_size.x - 1;
     while ((pts[1].x >= m_offset.x) && !pts_state[1]) {
       if (m_parent_tile->GetAlpha(pts[1]) != SDL_ALPHA_TRANSPARENT) {
         pts_state[1] = true; //lock position
@@ -565,7 +565,7 @@ bool PhysicTile::GeneratePolygone()
   //(2) search ground between (b) and (c)
   pts[2] = m_offset;
   pts[2].x += m_size.x-1;
-  while ((pts[2].y < m_size.y+m_offset.y) && !pts_state[2]) {
+  while ((pts[2].y < m_size.y + m_offset.y) && !pts_state[2]) {
     if (m_parent_tile->GetAlpha(pts[2]) != SDL_ALPHA_TRANSPARENT) {
       pts_state[2] = true; //lock position
     } else {
@@ -616,7 +616,7 @@ bool PhysicTile::GeneratePolygone()
   }
   //std::cout<<"PhysicTile::pt6 done"<<std::endl;
 
-     //(6) search ground between (d) and (a)
+  //(6) search ground between (d) and (a)
   pts[6] = m_offset;
   pts[6].y += m_size.y-1;
   while ((pts[6].y >= m_offset.y ) && !pts_state[6]) {
@@ -663,7 +663,7 @@ bool PhysicTile::GeneratePolygone()
 
     if (pts_state[i]) {
 
-      for (uint j=i+1; j < 8 ;j++) {
+      for (uint j=i+1; j < 8; j++) {
 
         if (pts_state[j]) {
 
@@ -671,10 +671,7 @@ bool PhysicTile::GeneratePolygone()
             pts_state[j] = false;
            }*/
 
-	  int dx2 = (pts[i].x - pts[j].x) *(pts[i].x - pts[j].x);
-	  int dy2 = (pts[i].y - pts[j].y) *(pts[i].y - pts[j].y);
-
-	  if ((dx2 + dy2) < 2) {
+	  if (pts[i].Distance(pts[j]) < 3) {
             pts_state[j] = false;
 	  }
 
@@ -710,19 +707,18 @@ bool PhysicTile::GeneratePolygone()
       }
     }
 
-
-    is_containing_polygon = true;
-    int index = 0;
+    m_is_containing_polygon = true;
 
     PhysicalPolygon* shape = new PhysicalPolygon();
     shape->SetBody(m_parent_tile->GetBody());
+
     for (uint i=0; i < 8; i++) {
       if (pts_state[i]) {
-	//    std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
-	//   std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
-	shape->AddPoint(Point2d((double(pts[i].x+m_tile_offset.x) / PIXEL_PER_METER),
+	//std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
+	//std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
+
+	shape->AddPoint(Point2d((double(pts[i].x + m_tile_offset.x) / PIXEL_PER_METER),
 				(double(pts[i].y + m_tile_offset.y) / PIXEL_PER_METER)));
-	index++;
       }
     }
     shape->SetFriction(GROUND_FRICTION);
@@ -747,7 +743,7 @@ bool PhysicTile::GeneratePolygone()
 
 void PhysicTile::Clean()
 {
-  if (is_subdivised) {
+  if (m_is_subdivided) {
     delete m_physic_tiles[0];
     delete m_physic_tiles[1];
     delete m_physic_tiles[2];
@@ -756,13 +752,13 @@ void PhysicTile::Clean()
     m_physic_tiles[1] =NULL;
     m_physic_tiles[2] =NULL;
     m_physic_tiles[3] =NULL;
-    is_subdivised = false;
+    m_is_subdivided = false;
   }
 
-  if (is_containing_polygon) {
+  if (m_is_containing_polygon) {
     delete m_shape;
     m_shape = NULL;
-    is_containing_polygon = false;
+    m_is_containing_polygon = false;
   }
 }
 
@@ -816,10 +812,10 @@ void PhysicTile::InitShape()
 #ifdef DEBUG
 void PhysicTile::DrawBorder(const Color& color) const
 {
-  if (!is_subdivised && is_containing_polygon) {
+  if (!m_is_subdivided && m_is_containing_polygon) {
     ASSERT(m_shape != NULL);
     m_shape->DrawBorder(color);
-  } else if (is_subdivised) {
+  } else if (m_is_subdivided) {
     for (uint i=0; i < 4; i++) {
       if (m_physic_tiles[i] != NULL)
 	m_physic_tiles[i]->DrawBorder(color);
