@@ -105,11 +105,11 @@ void PhysicTile::GenerateFull()
 void PhysicTile::GenerateMixte()
 {
    bool is_generation_work = true; // WARNING: is true the right default value ??
-   if (m_level<=0) {
+   if (m_level <= 0) {
      is_generation_work = GeneratePolygone();
    }
 
-   if (m_level > 0  || !is_generation_work) {
+   if (m_level > 0 || !is_generation_work) {
      //Subdivise
      is_subdivised = true;
      is_containing_polygon = false;
@@ -200,7 +200,8 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
        PhysicalPolygon* shape = new PhysicalPolygon();
- shape->SetBody(m_parent_tile->GetBody());
+       shape->SetBody(m_parent_tile->GetBody());
+
        shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
                                (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
@@ -250,7 +251,8 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
        PhysicalPolygon* shape = new PhysicalPolygon();
- shape->SetBody(m_parent_tile->GetBody());
+       shape->SetBody(m_parent_tile->GetBody());
+
        shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
                                (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
@@ -300,7 +302,8 @@ void PhysicTile::GenerateMixte()
 
        //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
        PhysicalPolygon* shape = new PhysicalPolygon();
- shape->SetBody(m_parent_tile->GetBody());
+       shape->SetBody(m_parent_tile->GetBody());
+
        shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
                                (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
@@ -347,7 +350,8 @@ void PhysicTile::GenerateMixte()
 
          //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
          PhysicalPolygon* shape = new PhysicalPolygon();
-   shape->SetBody(m_parent_tile->GetBody());
+	 shape->SetBody(m_parent_tile->GetBody());
+
          shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
                                  (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
@@ -385,7 +389,8 @@ void PhysicTile::GenerateMixte()
 
          //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
          PhysicalPolygon* shape = new PhysicalPolygon();
-   shape->SetBody(m_parent_tile->GetBody());
+	 shape->SetBody(m_parent_tile->GetBody());
+
          shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
                                  (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
 
@@ -425,7 +430,8 @@ void PhysicTile::GenerateMixte()
 
          //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
          PhysicalPolygon* shape = new PhysicalPolygon();
-   shape->SetBody(m_parent_tile->GetBody());
+	 shape->SetBody(m_parent_tile->GetBody());
+
          shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
                                  (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
@@ -465,7 +471,8 @@ void PhysicTile::GenerateMixte()
 
          //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
          PhysicalPolygon* shape = new PhysicalPolygon();
-   shape->SetBody(m_parent_tile->GetBody());
+	 shape->SetBody(m_parent_tile->GetBody());
+
          shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
                                  (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
@@ -522,7 +529,7 @@ bool PhysicTile::GeneratePolygone()
   //8 verticles max
   Point2d pts[8];
   bool pts_state[8];
-  for(unsigned i=0;i<8;i++){
+  for (uint i=0; i < 8; i++) {
       pts_state[i] =false;
   }
 
@@ -532,64 +539,64 @@ bool PhysicTile::GeneratePolygone()
 
   //(0) search ground between (a) and (b)
   pts[0] = m_offset;
-  while((pts[0].x < m_size.x+ m_offset.x) && !pts_state[0]){
-    if( m_parent_tile->GetAlpha(pts[0])!= SDL_ALPHA_TRANSPARENT){
+  while ((pts[0].x < m_size.x+ m_offset.x) && !pts_state[0]) {
+    if (m_parent_tile->GetAlpha(pts[0])!= SDL_ALPHA_TRANSPARENT) {
       pts_state[0] = true; //lock position
-    }else{
+    } else {
       pts[0].x++;
     }
   }
- // std::cout<<"PhysicTile::pt1 done"<<std::endl;
+  // std::cout<<"PhysicTile::pt1 done"<<std::endl;
 
   //if (0) found ground, send (1) from (b) to (a)
-  if(pts_state[0]){
+  if (pts_state[0]) {
     pts[1] = m_offset;
     pts[1].x += m_size.x-1;
-    while((pts[1].x >= m_offset.x) && !pts_state[1]){
-      if(m_parent_tile->GetAlpha(pts[1])!= SDL_ALPHA_TRANSPARENT){
+    while ((pts[1].x >= m_offset.x) && !pts_state[1]) {
+      if (m_parent_tile->GetAlpha(pts[1]) != SDL_ALPHA_TRANSPARENT) {
         pts_state[1] = true; //lock position
-      }else{
+      } else {
         pts[1].x--;
       }
     }
   }
- // std::cout<<"PhysicTile::pt2 done"<<std::endl;
+  // std::cout<<"PhysicTile::pt2 done"<<std::endl;
 
-   //(2) search ground between (b) and (c)
+  //(2) search ground between (b) and (c)
   pts[2] = m_offset;
   pts[2].x += m_size.x-1;
-  while((pts[2].y <  m_size.y+m_offset.y ) && !pts_state[2]){
-    if( m_parent_tile->GetAlpha(pts[2])!= SDL_ALPHA_TRANSPARENT){
+  while ((pts[2].y < m_size.y+m_offset.y) && !pts_state[2]) {
+    if (m_parent_tile->GetAlpha(pts[2]) != SDL_ALPHA_TRANSPARENT) {
       pts_state[2] = true; //lock position
-    }else{
+    } else {
       pts[2].y++;
     }
   }
   //std::cout<<"PhysicTile::pt3 done"<<std::endl;
 
-  //if (2) found ground, send (3) from (c) to (b)
-  if(pts_state[2]){
+  // if (2) found ground, send (3) from (c) to (b)
+  if (pts_state[2]) {
     pts[3] = m_offset;
     pts[3].x += m_size.x-1;
     pts[3].y += m_size.y-1;
-    while((pts[3].y >= m_offset.y) && !pts_state[3]){
-      if( m_parent_tile->GetAlpha(pts[3])!= SDL_ALPHA_TRANSPARENT){
+    while ((pts[3].y >= m_offset.y) && !pts_state[3]) {
+      if (m_parent_tile->GetAlpha(pts[3]) != SDL_ALPHA_TRANSPARENT) {
         pts_state[3] = true; //lock position
-      }else{
+      } else {
         pts[3].y--;
       }
     }
   }
   //std::cout<<"PhysicTile::pt4 done"<<std::endl;
 
-   //(4) search ground between (c) and (d)
+  //(4) search ground between (c) and (d)
   pts[4] = m_offset + m_size;
   pts[4].x--;
   pts[4].y--;
-  while((pts[4].x >= m_offset.x ) && !pts_state[4]){
-    if( m_parent_tile->GetAlpha(pts[4])!= SDL_ALPHA_TRANSPARENT){
+  while ((pts[4].x >= m_offset.x) && !pts_state[4]) {
+    if (m_parent_tile->GetAlpha(pts[4])!= SDL_ALPHA_TRANSPARENT){
       pts_state[4] = true; //lock position
-    }else{
+    } else {
       pts[4].x--;
     }
   }
@@ -599,10 +606,10 @@ bool PhysicTile::GeneratePolygone()
   if(pts_state[4]){
     pts[5] = m_offset;
     pts[5].y += m_size.y-1;
-    while((pts[5].x < m_size.x+m_offset.x) && !pts_state[5]){
-      if( m_parent_tile->GetAlpha(pts[5])!= SDL_ALPHA_TRANSPARENT){
+    while ((pts[5].x < m_size.x+m_offset.x) && !pts_state[5]) {
+      if (m_parent_tile->GetAlpha(pts[5]) != SDL_ALPHA_TRANSPARENT) {
         pts_state[5] = true; //lock position
-      }else{
+      } else {
         pts[5].x++;
       }
     }
@@ -612,21 +619,21 @@ bool PhysicTile::GeneratePolygone()
      //(6) search ground between (d) and (a)
   pts[6] = m_offset;
   pts[6].y += m_size.y-1;
-  while((pts[6].y >= m_offset.y ) && !pts_state[6]){
-    if( m_parent_tile->GetAlpha(pts[6])!= SDL_ALPHA_TRANSPARENT){
+  while ((pts[6].y >= m_offset.y ) && !pts_state[6]) {
+    if (m_parent_tile->GetAlpha(pts[6]) != SDL_ALPHA_TRANSPARENT) {
       pts_state[6] = true; //lock position
-    }else{
+    } else {
       pts[6].y--;
     }
   }
   //std::cout<<"PhysicTile::pt7 done"<<std::endl;
   //if (6) found ground, send (7) from (a) to (d)
-  if(pts_state[6]){
+  if (pts_state[6]) {
     pts[7] = m_offset;
-    while((pts[7].y < m_size.y+m_offset.y ) && !pts_state[7]){
-      if( m_parent_tile->GetAlpha(pts[7])!= SDL_ALPHA_TRANSPARENT){
+    while ((pts[7].y < m_size.y+m_offset.y ) && !pts_state[7]) {
+      if (m_parent_tile->GetAlpha(pts[7]) != SDL_ALPHA_TRANSPARENT) {
         pts_state[7] = true; //lock position
-      }else{
+      } else {
         pts[7].y++;
       }
     }
@@ -634,14 +641,14 @@ bool PhysicTile::GeneratePolygone()
  // std::cout<<"PhysicTile::pt8 done"<<std::endl;
 
   //TODO : Second pass
-  if(!pts_state[0]){
+  if (!pts_state[0]) {
     //(0) search ground between (e) and (j)
     pts[0] = m_offset;
     pts[0].x += m_size.x/3;
-    while((pts[2].y <  m_size.y+m_offset.y ) && !pts_state[2]){
-      if( m_parent_tile->GetAlpha(pts[2])!= SDL_ALPHA_TRANSPARENT){
+    while ((pts[2].y <  m_size.y+m_offset.y ) && !pts_state[2]) {
+      if (m_parent_tile->GetAlpha(pts[2]) != SDL_ALPHA_TRANSPARENT) {
 	pts_state[2] = true; //lock position
-      }else{
+      } else {
 	pts[2].y++;
       }
     }
@@ -651,24 +658,25 @@ bool PhysicTile::GeneratePolygone()
   b2PolygonDef rect;
   rect.vertexCount = 0;
 
-  //Delete double point
+  // Delete double point
+  for (uint i=0; i < 7 ; i++) {
 
+    if (pts_state[i]) {
 
-  for(unsigned i=0;i<7; i++){
-    if(pts_state[i]==true){
-      for(unsigned j=i+1;j<8;j++){
-        if(pts_state[j]==true){
+      for (uint j=i+1; j < 8 ;j++) {
 
-           /*if((pts[i].x == pts[j].x)&&(pts[i].y == pts[j].y)) {
+        if (pts_state[j]) {
+
+	  /*if((pts[i].x == pts[j].x)&&(pts[i].y == pts[j].y)) {
             pts_state[j] = false;
            }*/
 
-           int dx2 = (pts[i].x - pts[j].x) *(pts[i].x - pts[j].x);
-           int dy2 = (pts[i].y - pts[j].y) *(pts[i].y - pts[j].y);
+	  int dx2 = (pts[i].x - pts[j].x) *(pts[i].x - pts[j].x);
+	  int dy2 = (pts[i].y - pts[j].y) *(pts[i].y - pts[j].y);
 
-           if((dx2+dy2)<2) {
+	  if ((dx2 + dy2) < 2) {
             pts_state[j] = false;
-           }
+	  }
 
         }
       }
@@ -677,22 +685,23 @@ bool PhysicTile::GeneratePolygone()
 
 
   //Count found point
-  for (unsigned i=0;i<8; i++){
-    if (pts_state[i])    {
-        rect.vertexCount++;
+  for (uint i=0; i < 8; i++) {
+    if (pts_state[i]) {
+      rect.vertexCount++;
     }
   }
 
-  if (rect.vertexCount >2) {
-
+  if (rect.vertexCount > 2) {
 
     //Verify
-    if(m_level >-1){
-      for(uint i = 0;i<8;i++){
-	if(pts_state[i]){
-	  for(uint j = i;j<8;j++){
-	    if(pts_state[j]){
-	      if(m_parent_tile->GetAlpha(Point2i(m_offset.x+abs(pts[i].x-pts[j].x),m_offset.y+abs(pts[i].y-pts[j].y))) == SDL_ALPHA_TRANSPARENT){
+    if (m_level > -1) {
+
+      for (uint i=0; i<8; i++) {
+	if (pts_state[i]) {
+	  for (uint j=i; j < 8; j++) {
+	    if (pts_state[j]) {
+	      if (m_parent_tile->GetAlpha(Point2i(m_offset.x+abs(pts[i].x-pts[j].x),
+						  m_offset.y+abs(pts[i].y-pts[j].y))) == SDL_ALPHA_TRANSPARENT) {
 		return false;
 	      }
 	    }
@@ -708,7 +717,7 @@ bool PhysicTile::GeneratePolygone()
     PhysicalPolygon* shape = new PhysicalPolygon();
     shape->SetBody(m_parent_tile->GetBody());
     for (uint i=0; i < 8; i++) {
-      if(pts_state[i])      {
+      if (pts_state[i]) {
 	//    std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
 	//   std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
 	shape->AddPoint(Point2d((double(pts[i].x+m_tile_offset.x) / PIXEL_PER_METER),
@@ -727,7 +736,7 @@ bool PhysicTile::GeneratePolygone()
     shape->Generate();
     m_shape = shape;
 
-  }else{
+  } else {
     return true;
   }
 
@@ -738,7 +747,7 @@ bool PhysicTile::GeneratePolygone()
 
 void PhysicTile::Clean()
 {
-  if (is_subdivised)  {
+  if (is_subdivised) {
     delete m_physic_tiles[0];
     delete m_physic_tiles[1];
     delete m_physic_tiles[2];
