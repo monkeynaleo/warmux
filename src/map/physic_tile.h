@@ -38,8 +38,8 @@ private:
 
   Fullness m_fullness;
 
-  bool is_subdivised;
-  bool is_containing_polygon;
+  bool m_is_subdivided;
+  bool m_is_containing_polygon;
 
   PhysicalPolygon *m_shape;
   PhysicTile *m_physic_tiles[4];

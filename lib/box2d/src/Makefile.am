@@ -37,4 +37,3 @@ libbox2d_a_SOURCES = \
 #	./Contrib/b2Polygon.cpp \
 #	./Contrib/b2Triangle.cpp
 
-libbox2d_a_CXXFLAGS = -O2
