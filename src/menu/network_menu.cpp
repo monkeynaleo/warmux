@@ -276,7 +276,8 @@ bool NetworkMenu::signal_ok()
 
     Game::GetInstance()->Start();
 
-    if (Network::GetInstance()->IsConnected() && !Network::GetInstance()->cpu.empty()
+    if (Network::GetInstance()->IsConnected()
+	&& Network::GetInstance()->GetNbHostsConnected() != 0
 	&& play_in_loop->GetValue()) {
       PrepareForNewGame();
       return false;
