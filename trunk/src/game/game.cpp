@@ -469,7 +469,7 @@ bool Game::Run()
 bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
-  return !net->IsLocal() && net->cpu.empty();
+  return !net->IsLocal() && (net->GetNbHostsConnected() == 0);
 }
 
 void Game::MessageEndOfGame() const
