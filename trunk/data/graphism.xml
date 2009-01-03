@@ -86,11 +86,16 @@
   <surface name="password_lock" file="menu/padlock.png" />
 
   <!-- For team editor menu -->
-
- <surface name="add_custom_team" file="menu/add_custom_team.png" />
- <surface name="del_custom_team" file="menu/del_custom_team.png" />
-
-
+  <sprite name="add_custom_team">
+    <image file="menu/add_custom_team.png">
+      <grid pos="0,0" size="32,32" array="1,1" />
+    </image>
+  </sprite>
+  <sprite name="del_custom_team">
+    <image file="menu/del_custom_team.png">
+      <grid pos="0,0" size="32,32" array="1,1" />
+    </image>
+  </sprite>
 
   <!-- Buttons -->
 

@@ -132,40 +132,36 @@ OptionMenu::OptionMenu() :
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
   if (Game::GetInstance()->IsGameFinished()) {
-    Box * teams_editor = new VBox(max_width, false, true);
-    Box * teams_editor_sup = new GridBox(max_width, option_size, true);
-    Box * teams_editor_inf = new VBox(max_width, true,false);
+    Box * teams_editor = new HBox(option_size.x, false, true);
+    Box * teams_editor_inf = new VBox(max_width - option_size.x - 10, true, false);
 
-    add_team = new ButtonPic(_("Add custom team"), "menu/add_custom_team",Point2i(100,100));
-    teams_editor_sup->AddWidget(add_team);
+    lbox_teams = new ListBox(option_size, false);
+    teams_editor->AddWidget(lbox_teams);
 
-    delete_team = new ButtonPic(_("Delete custom team"), "menu/del_custom_team",Point2i(100,100));
-    teams_editor_sup->AddWidget(delete_team);
+    Box * box_team_name = new HBox(30, false, true);
 
-    lbox_teams = new ListBox(option_size,false);
-    teams_editor_sup->AddWidget(lbox_teams);
+    team_name = new Label(_("Head commander:"), 150, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    box_team_name->AddWidget(team_name);
 
-    std::string s = _("Player name");
-    s +=" : ";
+    tbox_team_name = new TextBox("", 100, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    box_team_name->AddWidget(tbox_team_name);
 
-    team_name = new Label(s, 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
-    teams_editor_inf->AddWidget(team_name);
+    teams_editor_inf->AddWidget(box_team_name);
 
-    tbox_team_name = new TextBox("", 100,
-				 Font::FONT_MEDIUM, Font::FONT_NORMAL);
-    teams_editor_inf->AddWidget(tbox_team_name);
+    Label* label_ch_names = new Label(_("Characters names:"), 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    teams_editor_inf->AddWidget(label_ch_names);
 
-    Point2i names_size(140, 50);
+    Point2i names_size(140, 20);
 
-    Box * teams_editor_names = new GridBox(max_width, names_size, false);
-    s = _("Character");
-    for(unsigned i=0; i < 10 ; i++) {
+    Box * teams_editor_names = new GridBox(max_width - option_size.x - 40, names_size, false);
+    for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
-      oss << i+1;
+      oss << i+1 << ":";
       tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
-      Label * lab = new Label(s+oss.str()+" : ",0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+      Label * lab = new Label(oss.str(), 30, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
-      Box * name_box = new VBox(max_width, true, true);
+      Box * name_box = new HBox(20, false, true);
+      name_box->SetNoBorder();
 
       name_box->AddWidget(lab);
       name_box->AddWidget(tbox_character_name_list[i]);
@@ -175,8 +171,18 @@ OptionMenu::OptionMenu() :
 
     teams_editor_inf->AddWidget(teams_editor_names);
 
+    Box * team_action_box = new HBox(35, false, true);
+    team_action_box->SetNoBorder();
+
+    add_team = new Button(res, "menu/add_custom_team");
+    team_action_box->AddWidget(add_team);
+
+    delete_team = new Button(res, "menu/del_custom_team");
+    team_action_box->AddWidget(delete_team);
+
+    teams_editor_inf->AddWidget(team_action_box);
+
     teams_editor_inf->Pack();
-    teams_editor->AddWidget(teams_editor_sup);
     teams_editor->AddWidget(teams_editor_inf);
     tabs->AddNewTab("unused", _("Teams editor"), teams_editor);
     selected_team = NULL;
