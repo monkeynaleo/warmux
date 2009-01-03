@@ -76,6 +76,8 @@ private:
   /*********************************************/
   static int num_objects;
 
+  std::list<DistantComputer*> cpu; // list of the connected computer
+
   std::string game_name;
   std::string password;
 
@@ -104,8 +106,6 @@ protected:
   void SetGameName(const std::string& game_name);
 public:
   NetworkMenu* network_menu;
-
-  std::list<DistantComputer*> cpu; // list of the connected computer
   bool sync_lock;
 
   virtual ~Network();
@@ -135,6 +135,9 @@ public:
   const std::string& GetPassword() const;
   Player& GetPlayer();
   const Player& GetPlayer() const;
+
+  std::list<DistantComputer*>& GetRemoteHosts();
+  const std::list<DistantComputer*>& GetRemoteHosts() const;
 
   // Action handling
   void SendActionToAll(const Action& action) const;

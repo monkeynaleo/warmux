@@ -125,6 +125,7 @@ NetworkServer * Network::GetInstanceServer()
 }
 
 Network::Network(const std::string& _game_name, const std::string& passwd) :
+  cpu(),
   game_name(_game_name),
   password(passwd),
   turn_master_player(false),
@@ -136,7 +137,6 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   fin(0),
 #endif
   network_menu(NULL),
-  cpu(),
   sync_lock(false)
 {
   player.SetNickname(Player::GetDefaultNickname());
@@ -157,6 +157,18 @@ Network::~Network()
   if (num_objects == 0) {
     WNet::Quit();
   }
+}
+
+//-----------------------------------------------------------------------------
+
+std::list<DistantComputer*>& Network::GetRemoteHosts()
+{
+  return cpu;
+}
+
+const std::list<DistantComputer*>& Network::GetRemoteHosts() const
+{
+  return cpu;
 }
 
 //-----------------------------------------------------------------------------

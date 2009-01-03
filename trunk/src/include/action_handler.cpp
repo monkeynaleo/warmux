@@ -841,8 +841,8 @@ void SendInitialGameInfo(DistantComputer* client)
   std::list<DistantComputer*>::const_iterator it;
   std::list<Player>::const_iterator player;
 
-  for (it = Network::GetInstance()->cpu.begin();
-       it != Network::GetInstance()->cpu.end();
+  for (it = Network::GetInstance()->GetRemoteHosts().begin();
+       it != Network::GetInstance()->GetRemoteHosts().end();
        it++) {
     nb_players += (*it)->GetPlayers().size();
   }
@@ -852,8 +852,8 @@ void SendInitialGameInfo(DistantComputer* client)
   // Teams infos of each player
   add_player_info_to_action(a, Network::GetInstance()->GetPlayer());
 
-  for (it = Network::GetInstance()->cpu.begin();
-       it != Network::GetInstance()->cpu.end();
+  for (it = Network::GetInstance()->GetRemoteHosts().begin();
+       it != Network::GetInstance()->GetRemoteHosts().end();
        it++) {
 
     const std::list<Player>& players = (*it)->GetPlayers();

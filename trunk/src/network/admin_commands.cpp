@@ -38,8 +38,8 @@ static void PrintHelp()
 static void Kick(const std::string& nick)
 {
   std::string msg;
-  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
-       cpu != Network::GetInstance()->cpu.end();
+  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->GetRemoteHosts().begin();
+       cpu != Network::GetInstance()->GetRemoteHosts().end();
        ++cpu) {
 
     if ((*cpu)->GetNicknames() == nick) {
@@ -56,15 +56,15 @@ static void Kick(const std::string& nick)
 
 static void ListPlayers()
 {
-  if (Network::GetInstance()->cpu.empty()) {
+  if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
     AppWormux::GetInstance()->ReceiveMsgCallback(_("No player connected"));
     return;
   }
 
   AppWormux::GetInstance()->ReceiveMsgCallback(_("Connected players: "));
 
-  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
-      cpu != Network::GetInstance()->cpu.end();
+  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->GetRemoteHosts().begin();
+      cpu != Network::GetInstance()->GetRemoteHosts().end();
       ++cpu) {
     std::string msg = std::string(Format("%s (%s)", (*cpu)->GetNicknames().c_str(), (*cpu)->GetAddress().c_str()));
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
