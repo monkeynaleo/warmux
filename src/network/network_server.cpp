@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include <SDL_thread.h>
-#include <WORMUX_distant_cpu.h>
 #include <WORMUX_socket.h>
 #include "include/action_handler.h"
 #include "network/network_server.h"
@@ -66,7 +65,7 @@ uint NetworkServer::NextPlayerId() const
 
   std::list<DistantComputer*>::const_iterator it;
   std::list<Player>::const_iterator player;
-  for (it = cpu.begin(); it != cpu.end(); it++) {
+  for (it = GetRemoteHosts().begin(); it != GetRemoteHosts().end(); it++) {
 
     const std::list<Player>& players = (*it)->GetPlayers();
 
@@ -101,7 +100,7 @@ void NetworkServer::WaitActionSleep()
 
       DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
       SendInitialGameInfo(client);
-      cpu.push_back(client);
+      GetRemoteHosts().push_back(client);
 
       if (GetNbHostsConnected() >= max_nb_players)
         RejectIncoming();
@@ -124,7 +123,7 @@ connection_state_t NetworkServer::StartServer(const std::string &net_port, uint 
   // The server starts listening for clients
   printf("o Starting server on port %s...\n", net_port.c_str());
 
-  cpu.clear();
+  GetRemoteHosts().clear();
   // Convert port number (std::string port) into SDL port number format:
   if (!str2int(net_port, port)) {
     return CONN_BAD_PORT;
@@ -153,7 +152,7 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   std::list<DistantComputer*>::iterator it;
 
-  it = cpu.erase(closed);
+  it = GetRemoteHosts().erase(closed);
   delete *closed;
 
   if (GetNbHostsConnected() == max_nb_players)

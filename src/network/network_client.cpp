@@ -18,17 +18,16 @@
  ******************************************************************************
  * Network client layer for Wormux.
  *****************************************************************************/
-
-#include "network/network_client.h"
-//-----------------------------------------------------------------------------
 #include <WORMUX_socket.h>
 #include <SDL_thread.h>
+#include <WORMUX_debug.h>
+
+//-----------------------------------------------------------------------------
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include <WORMUX_distant_cpu.h>
+#include "network/network_client.h"
 #include "network/net_error_msg.h"
-#include <WORMUX_debug.h>
 #include "tool/string_tools.h"
 
 #include <sys/types.h>
@@ -59,7 +58,7 @@ std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<D
 
   printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
-  it = cpu.erase(closed);
+  it = GetRemoteHosts().erase(closed);
   delete *closed;
 
   return it;
@@ -190,7 +189,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   socket_set->AddSocket(socket);
   server = new DistantComputer(socket, "server", 0);
 
-  cpu.push_back(server);
+  GetRemoteHosts().push_back(server);
 
   NetworkThread::Start();
   return CONNECTED;

@@ -29,5 +29,5 @@ void NetworkLocal::SendAction(const Action& /*a*/, DistantComputer* /*client*/, 
 
 std::list<DistantComputer*>::iterator NetworkLocal::CloseConnection(std::list<DistantComputer*>::iterator /*closed*/)
 {
-  return cpu.end();
+  return GetRemoteHosts().end();
 }
