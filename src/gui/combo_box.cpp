@@ -47,7 +47,7 @@ ComboBox::ComboBox (const std::string &label,
   m_progress_color = GetResourceManager().LoadColor(res, "menu/annulus_progress_color");
   GetResourceManager().UnLoadXMLProfile( res);
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
   txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
