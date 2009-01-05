@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banan %s hittades inte :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:320
+#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i spelare ansluten"
 msgstr[1] "%i spelare anslutna"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:326
+#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -55,6 +55,11 @@ msgstr "Lag %s"
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Lag %s - Fjärr"
+
+#: src/ai/ai_shoot_module.cpp:439
+#, c-format
+msgid "%s changes target to %s"
+msgstr ""
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -92,7 +97,12 @@ msgstr "%s från lag %s föll och slog sig fördärvad!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s från lag %s dog för att han var klumpig!"
 
-#: src/object/medkit.cpp:70
+#: src/ai/ai_shoot_module.cpp:355
+#, c-format
+msgid "%s has decided to injure %s"
+msgstr ""
+
+#: src/object/medkit.cpp:69
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -248,7 +258,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Lag %s har belönats med %u amerikansk fotbollsbomb!"
 msgstr[1] "Lag %s har belönats med %u amerikanska fotbollsbomber!"
 
-#: src/weapon/grapple.cpp:332
+#: src/weapon/grapple.cpp:377
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -393,12 +403,17 @@ msgstr "Lag %s har blivit utplånat."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog en medlem från lag %s med sig ner i graven!"
 
+#: src/ai/ai_shoot_module.cpp:370
+#, c-format
+msgid "%s will shoot %s"
+msgstr ""
+
 #: src/interface/interface.cpp:185
 msgid "(dead)"
 msgstr "(död)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:264
+#: src/menu/options_menu.cpp:270
 msgid "(system language)"
 msgstr "(systemets språk)"
 
@@ -411,7 +426,7 @@ msgstr "(okänd tid)"
 msgid "(unlimited)"
 msgstr "(obegränsat)"
 
-#: src/menu/options_menu.cpp:443
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -419,10 +434,6 @@ msgid ""
 msgstr ""
 "En ny version %s är tillgänglig, medan din version är %s. Du kanske vill "
 "kolla om det finns en uppdatering tillgänglig för ditt operativsystem!"
-
-#: src/menu/options_menu.cpp:139
-msgid "Add custom team"
-msgstr "Lägg till eget lag"
 
 #: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
@@ -544,15 +555,16 @@ msgstr "Ändra vapenkategori"
 msgid "Change weapon countdown"
 msgstr "Ändra nedräkningstid för vapen"
 
-#: src/menu/options_menu.cpp:161
-msgid "Character"
-msgstr "Lagmedlem"
-
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Växla mellan lagmedlemmar"
 
-#: src/menu/options_menu.cpp:195
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Characters names:"
+msgstr "Lagmedlem"
+
+#: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
 msgstr "Leta uppdateringar online?"
 
@@ -632,10 +644,6 @@ msgstr "Tack till"
 msgid "Damage per turn during death mode"
 msgstr "Sudden Death rondskada"
 
-#: src/menu/options_menu.cpp:142
-msgid "Delete custom team"
-msgstr "Radera eget lag"
-
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Discogranat"
@@ -665,7 +673,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SPELET ÄR ÖVER"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:225
 msgid "Effects volume"
 msgstr "Ljudeffektvolym"
 
@@ -673,7 +681,7 @@ msgstr "Ljudeffektvolym"
 msgid "Energy"
 msgstr "Energi"
 
-#: src/include/action_handler.cpp:220
+#: src/include/action_handler.cpp:247
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
@@ -789,7 +797,7 @@ msgstr "Gnu"
 msgid "Graphic"
 msgstr "Grafik"
 
-#: src/weapon/grapple.cpp:85
+#: src/weapon/grapple.cpp:96
 msgid "Grapple"
 msgstr "Ninjarep"
 
@@ -821,6 +829,11 @@ msgstr "Lycka till i spelet!"
 #: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Ledare"
+
+#: src/menu/options_menu.cpp:143
+#, fuzzy
+msgid "Head commander:"
+msgstr "Befälhavare: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -905,19 +918,19 @@ msgstr ""
 "Eld : håll ner mellanslag tills önskad kraft uppnås\n"
 "ett skott per omgång"
 
-#: src/game/game_init.cpp:155
+#: src/game/game_init.cpp:162
 msgid "Initialisation"
 msgstr "Initiering"
 
-#: src/game/game_init.cpp:108
+#: src/game/game_init.cpp:115
 msgid "Initialise map"
 msgstr "Initiera bana"
 
-#: src/game/game_init.cpp:142
+#: src/game/game_init.cpp:149
 msgid "Initialise sounds"
 msgstr "Initiera ljud"
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:125
 msgid "Initialise teams"
 msgstr "Initera lag"
 
@@ -986,13 +999,13 @@ msgstr "Bana"
 msgid "Map %s, a creation of: "
 msgstr "Banan \"%s\", skapad av: "
 
-#: src/game/game_init.cpp:111
+#: src/game/game_init.cpp:118
 msgid "Maps"
 msgstr "Banor"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
 #, fuzzy
 msgid "Master mode"
 msgstr "Spelläge"
@@ -1013,7 +1026,7 @@ msgstr "Max bilder/s"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:205
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1045,11 +1058,11 @@ msgstr "Flytta bilden med mus eller piltangenterna"
 msgid "Move character"
 msgstr "Flytta lagmedlem"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:215
 msgid "Music volume"
 msgstr "Musikvolym"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:211
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1066,7 +1079,7 @@ msgstr "Aldrig"
 msgid "New network game at "
 msgstr "Nytt nätverksspel "
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:250
 msgid "New player warning?"
 msgstr "Signal vid ny spelare?"
 
@@ -1141,10 +1154,6 @@ msgstr "Spelare"
 #: src/menu/options_menu.cpp:80
 msgid "Player energy?"
 msgstr "Spelarens energi?"
-
-#: src/menu/options_menu.cpp:148
-msgid "Player name"
-msgstr "Spelarens namn"
 
 #: src/menu/options_menu.cpp:83
 msgid "Player's name?"
@@ -1282,20 +1291,20 @@ msgstr ""
 "Din version stöds tyvärr inte längre. Version som stöds är %s. Du kan ladda "
 "hem en uppdaterad version på http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:253
 msgid "Sound"
 msgstr "Ljud"
 
-#: src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:221
 msgid "Sound effects?"
 msgstr "Ljudeffekter?"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:246
 msgid "Sound frequency"
 msgstr "Ljudfrekvens"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:145
+#: src/game/game_init.cpp:152
 msgid "Sounds"
 msgstr "Ljud"
 
@@ -1331,11 +1340,11 @@ msgstr "Grafer"
 msgid "Team stats"
 msgstr "Lagstatistik"
 
-#: src/game/game_init.cpp:120 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Lag"
 
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:187
 msgid "Teams editor"
 msgstr "Lageditor"
 
@@ -1369,7 +1378,7 @@ msgstr "Den målsökande raketen har lämnat slagfältet..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bollen har lämnat slagfältet innan den exploderade"
 
-#: src/network/network_client.cpp:102
+#: src/network/network_client.cpp:101
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1396,7 +1405,7 @@ msgstr "Spelet avbröts eftersom anslutningen bröts."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten lämnade slagfältet innan den exploderade"
 
-#: src/menu/network_menu.cpp:333
+#: src/menu/network_menu.cpp:336
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "De andra väntar på dig! Vakna :-)"
 
@@ -1413,7 +1422,7 @@ msgstr "Servern nekade anslutningen."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Servern nekade anslutningen: fel lösenord!"
 
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:242
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1483,19 +1492,19 @@ msgstr "Obegränsat"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:452
+#: src/menu/options_menu.cpp:458
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versionsverifikationen misslyckades pga: %s\n"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:257
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vänta! %i spelare är inte klara än!"
 msgstr[1] "Vänta! %i spelare är inte klara än!"
 
-#: src/menu/network_menu.cpp:410
+#: src/menu/network_menu.cpp:415
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 
@@ -1505,7 +1514,7 @@ msgstr "Vapen: avfyra / Bonuslåda: faller snabbt"
 
 #. Initialization of teams' energy
 #. Adding label
-#: src/game/game_init.cpp:131 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
 msgid "Weapons"
 msgstr "Vapen"
 
@@ -1541,27 +1550,27 @@ msgstr "Wormux startar..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/include/action_handler.cpp:194
+#: src/include/action_handler.cpp:221
 msgid "Wrong map CRC!"
 msgstr "Felaktig CRC-kontrollsumma för bana!"
 
-#: src/include/action_handler.cpp:191
+#: src/include/action_handler.cpp:218
 msgid "Wrong map name!"
 msgstr "Fel bannamn!"
 
-#: src/include/action_handler.cpp:197
+#: src/include/action_handler.cpp:224
 msgid "Wrong team!"
 msgstr "Fel lag!"
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:339
 msgid "You are alone :-/"
 msgstr "Du är ensam :-/"
 
-#: src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:251
 msgid "You are alone..."
 msgstr "Du är ensam..."
 
-#: src/menu/network_menu.cpp:391
+#: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1569,11 +1578,11 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr "Du behöver åtminstone en giltig bana!"
 
-#: src/game/game_init.cpp:124 src/team/teams_list.cpp:178
+#: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Du behöver åtminstone två giltiga lag!"
 
-#: src/menu/network_menu.cpp:229
+#: src/menu/network_menu.cpp:226
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 
@@ -1633,6 +1642,15 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#~ msgid "Add custom team"
+#~ msgstr "Lägg till eget lag"
+
+#~ msgid "Delete custom team"
+#~ msgstr "Radera eget lag"
+
+#~ msgid "Player name"
+#~ msgstr "Spelarens namn"
 
 #~ msgid " has joined the party"
 #~ msgstr " har gått med i spelet"
