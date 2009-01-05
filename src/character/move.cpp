@@ -103,27 +103,26 @@ void MoveCharacter(Character &character, bool slowly)
   }
 
 
-if(character.GetDirection() == DIRECTION_LEFT){
-  /*
-  if(character.GetSpeedXY().x>-2){
+  if(character.GetDirection() == DIRECTION_LEFT){
+    /*
+      if(character.GetSpeedXY().x>-2){
 
 
-    character.AddSpeedXY(Point2d(0,-1));
+      character.AddSpeedXY(Point2d(0,-1));
 
+      }
+      character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));*/
+
+    character.Impulse(10,0);
+  }else{
+    character.Impulse(100,90);
+    /*if(character.GetSpeedXY().x<2){
+      character.AddSpeedXY(Point2d(0,-1));
+
+      }
+      character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
+    */
   }
-  character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));*/
-
-  character.Impulse(10,0);
-}else{
-  character.Impulse(100,90);
-  /*if(character.GetSpeedXY().x<2){
-    character.AddSpeedXY(Point2d(0,-1));
-
-  }
-  character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
-*/
-}
-
 
   // Compute fall height
   /*if (!ComputeHeightMovement (character, height, true)) return;
