@@ -568,14 +568,14 @@ msgstr "Wapencategorie veranderen"
 msgid "Change weapon countdown"
 msgstr "Wapenteller veranderen"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Karakter"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Karakter schakeling"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Karakter"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -839,14 +839,10 @@ msgstr "Kon HOME directory (omgevingsvariabele $HOME) niet vinden!"
 msgid "Have a good game!"
 msgstr "Succes!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Hoofdcommandant"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Hoofdcommandant: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1650,6 +1646,10 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hoofdcommandant: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Aangepast team toevoegen"

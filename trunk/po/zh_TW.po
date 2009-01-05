@@ -541,14 +541,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "降落傘"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "降落傘"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "降落傘"
 
 #: src/menu/options_menu.cpp:201
@@ -807,15 +807,10 @@ msgstr " 找不到家目錄 (environment variable $HOME) !"
 msgid "Have a good game!"
 msgstr "來吧!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "指揮官"
-
-#
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "指揮官: "
 
 #
 #. Display player's name
@@ -1630,6 +1625,11 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "指揮官: "
 
 #, fuzzy
 #~ msgid "Player name"

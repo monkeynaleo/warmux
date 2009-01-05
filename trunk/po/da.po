@@ -551,14 +551,14 @@ msgstr "Ændr våbenkatalog"
 msgid "Change weapon countdown"
 msgstr "Ændr våbennedtælling"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Kriger"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Skift kriger"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Kriger"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -821,14 +821,10 @@ msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 msgid "Have a good game!"
 msgstr "Hav et godt spil!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Hovedkommandør"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Hovedkommandør: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1633,6 +1629,10 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hovedkommandør: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Tilføj brugerdefineret hold"

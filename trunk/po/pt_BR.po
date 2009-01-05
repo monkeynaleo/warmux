@@ -560,14 +560,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Paraquedas"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Paraquedas"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Paraquedas"
 
 #: src/menu/options_menu.cpp:201
@@ -837,14 +837,10 @@ msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrado!
 msgid "Have a good game!"
 msgstr "Tenha um bom jogo!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Comandante"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Comandante: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1661,6 +1657,10 @@ msgstr "o Carregando perfil de som: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio carregado a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandante: "
 
 #, fuzzy
 #~ msgid "Player name"

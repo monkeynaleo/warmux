@@ -624,14 +624,14 @@ msgstr "Spremeni skupino orožja"
 msgid "Change weapon countdown"
 msgstr "Spremeni čas orožja"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Imena članov:"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Menjava članov"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Član"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -894,14 +894,10 @@ msgstr "Imenik HOME (okoljska spremenljivka $HOME) ni bila najden!"
 msgid "Have a good game!"
 msgstr "Uživajte v igri!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Poveljnik"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Poveljnik: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1709,6 +1705,10 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Poveljnik: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Dodaj ekipo"

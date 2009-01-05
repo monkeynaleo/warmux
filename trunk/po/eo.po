@@ -549,14 +549,14 @@ msgstr "Ŝanĝi kategorion de armilo"
 msgid "Change weapon countdown"
 msgstr "Ŝanĝi templimon de armilo"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Ulo"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Ulŝanĝo"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Ulo"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -815,14 +815,10 @@ msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas!"
 msgid "Have a good game!"
 msgstr "Bone amuzu!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Ĉefkomandoro"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Ĉefkomandoro:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1622,6 +1618,10 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Ĉefkomandoro:"
 
 #~ msgid "Add custom team"
 #~ msgstr "Aldoni propran teamon"

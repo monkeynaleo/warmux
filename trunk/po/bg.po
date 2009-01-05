@@ -554,14 +554,14 @@ msgstr "Смени категорията на оъжието"
 msgid "Change weapon countdown"
 msgstr "Смени времето на обратно броене на оръжието"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Войник"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Избери друг войник"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Войник"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -824,14 +824,10 @@ msgstr "Не мога да намеря HOME директорията (или г
 msgid "Have a good game!"
 msgstr "Приятна игра!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Главен Командир"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Главен Командир:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1636,6 +1632,10 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Главен Командир:"
 
 #~ msgid "Add custom team"
 #~ msgstr "Добави личен отбор"

@@ -555,14 +555,14 @@ msgstr "Ändra vapenkategori"
 msgid "Change weapon countdown"
 msgstr "Ändra nedräkningstid för vapen"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Lagmedlem"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Växla mellan lagmedlemmar"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Lagmedlem"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -826,14 +826,10 @@ msgstr "Hemkatalog (miljövariabeln $HOME) kunde inte hittas!"
 msgid "Have a good game!"
 msgstr "Lycka till i spelet!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Ledare"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Befälhavare: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1642,6 +1638,10 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Befälhavare: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Lägg till eget lag"

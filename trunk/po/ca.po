@@ -544,14 +544,14 @@ msgstr "Canviar la categoria d'arma "
 msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Personatge"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Canviar de personatge"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Personatge"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -816,14 +816,10 @@ msgstr "El directori HOME (la variable d'entorn $HOME) no pot ser trobat!"
 msgid "Have a good game!"
 msgstr "Que tinguis una bona partida!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Comandant cap"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Comandant cap:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1639,6 +1635,10 @@ msgstr "o Carregant perfil de so: %s "
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandant cap:"
 
 #~ msgid "Add custom team"
 #~ msgstr "Afegir equip personalitzat"

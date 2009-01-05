@@ -739,14 +739,14 @@ msgstr "Schimbă categoria armei"
 msgid "Change weapon countdown"
 msgstr "Schimbă cronometrul armei"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Personaj"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Schimb de personaje"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Personaj"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -1013,15 +1013,10 @@ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 msgid "Have a good game!"
 msgstr "Distracție plăcută!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Comandant șef"
-
-#
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Comandant șef: "
 
 #
 #. Display player's name
@@ -1837,6 +1832,11 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandant șef: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Adaugă o echipă particularizată"

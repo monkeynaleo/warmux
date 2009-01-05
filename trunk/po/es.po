@@ -555,14 +555,14 @@ msgstr "Cambiar la categoría de arma"
 msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Personaje"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Cambiar de personaje"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Personaje"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -827,14 +827,10 @@ msgstr "¡El directorio HOME (la variable de entorno $HOME) no se encuentra!"
 msgid "Have a good game!"
 msgstr "¡Que tengas una buena partida!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Comandante jefe"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Comandante jefe: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1652,6 +1648,10 @@ msgstr "o Cargando perfil de sonido: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Abierto audio a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandante jefe: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Añadir equipo personalizado"

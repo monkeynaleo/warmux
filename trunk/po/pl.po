@@ -615,14 +615,14 @@ msgstr "Zmień kategorię uzbrojenia"
 msgid "Change weapon countdown"
 msgstr "Zmień uzbrojenie"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Postać"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Przełączanie postaci"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Postać"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -886,14 +886,10 @@ msgstr ""
 msgid "Have a good game!"
 msgstr "Życzymy miłej gry!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Głównodowodzący"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Głównodowodzący: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1701,6 +1697,10 @@ msgstr "o Wczytywanie profilu dźwięków: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otworzono plik audio - %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Głównodowodzący: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Dodaj własną drużynę"

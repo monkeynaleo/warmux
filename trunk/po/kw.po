@@ -641,14 +641,14 @@ msgstr "Chanjya ehen arv"
 msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Person"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Chanjya person"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Person"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -907,14 +907,10 @@ msgstr "Ny gavas arayel HOME (plethen gyrhynedhel $HOME)!"
 msgid "Have a good game!"
 msgstr "Omlowenhewgh!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Penn an para"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Penn an para: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1724,6 +1720,10 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Penn an para: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Keworra para personelhes"

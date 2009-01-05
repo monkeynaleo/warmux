@@ -571,14 +571,14 @@ msgstr "Αλλαγή κατηγορίας όπλου"
 msgid "Change weapon countdown"
 msgstr "Αλλαγή αντίστροφης μέτρησης όπλου"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Χαρακτήρας"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Εναλλαγή χαρακτήρα"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Χαρακτήρας"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -853,14 +853,10 @@ msgstr "Φάκελος HOME (μεταβλητή περιβάλλοντος $HOME
 msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Διοικητής"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Διοικητής: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1691,6 +1687,10 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Διοικητής: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Πρόσθεσε προσωπική ομάδα."

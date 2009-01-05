@@ -549,14 +549,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Parachute"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Parachute"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Parachute"
 
 #: src/menu/options_menu.cpp:201
@@ -827,14 +827,10 @@ msgstr ""
 msgid "Have a good game!"
 msgstr "Bonne partie !"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Lo chef"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Lo chef:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1650,6 +1646,10 @@ msgstr "o Profile son en train'e charger : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Lo chef:"
 
 #, fuzzy
 #~ msgid "Delete custom team"

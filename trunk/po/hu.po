@@ -543,14 +543,14 @@ msgstr "Fegyverkategória váltása"
 msgid "Change weapon countdown"
 msgstr "Fegyver idõzítésének megváltoztatása"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Karakter"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Karakterváltás lehetõsége"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Karakter"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -814,14 +814,10 @@ msgstr "Nem található a felhasználó könyvtára!"
 msgid "Have a good game!"
 msgstr "Jó játékot!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Parancsnok"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Parancsnok: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1626,6 +1622,10 @@ msgstr "Hangprofil betöltése: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Parancsnok: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Egyéni csapat hozzáadása"

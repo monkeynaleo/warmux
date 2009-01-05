@@ -565,14 +565,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Padák"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Padák"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Padák"
 
 #: src/menu/options_menu.cpp:201
@@ -843,13 +843,9 @@ msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
 msgid "Have a good game!"
 msgstr "Prajem dobrú hru!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
-msgstr "Hlavný veliteľ"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
 msgstr "Hlavný veliteľ"
 
 #. Display player's name
@@ -1656,6 +1652,10 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hlavný veliteľ"
 
 #, fuzzy
 #~ msgid "Delete custom team"

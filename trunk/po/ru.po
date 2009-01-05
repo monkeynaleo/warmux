@@ -609,14 +609,14 @@ msgstr "Сменить вид оружия"
 msgid "Change weapon countdown"
 msgstr "Изменить время запала"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Игрок"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Выбор игрока"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Игрок"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -876,14 +876,10 @@ msgstr "Домашний каталог (переменная окружения
 msgid "Have a good game!"
 msgstr "Удачной игры!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Командующий"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Командующий: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1692,6 +1688,10 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Командующий: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Добавить свою команду"

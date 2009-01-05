@@ -548,14 +548,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Padobran"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Padobran"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Padobran"
 
 #: src/menu/options_menu.cpp:201
@@ -826,14 +826,10 @@ msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 msgid "Have a good game!"
 msgstr "Uživaj u igri!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Vojskovođa"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Vojskovođa:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1653,6 +1649,10 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Vojskovođa:"
 
 #, fuzzy
 #~ msgid "Player name"
