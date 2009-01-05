@@ -176,7 +176,7 @@ public:
 
   // Can we move (check a timeout)
   bool CanMoveRL() const;
-  bool CanJump() const { return CanMoveRL(); };
+  bool CanJump() const;
   bool FootsInVacuum() const;
 
   virtual void AddContact(const PhysicalShape * shape);

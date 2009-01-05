@@ -477,6 +477,11 @@ void Character::Draw()
 #endif
 }
 
+bool Character::CanJump() const
+{
+  return (!FootsInVacuum());
+}
+
 void Character::Jump(double strength, double angle /*in radian */)
 {
   Camera::GetInstance()->FollowObject(this, true);
@@ -492,14 +497,15 @@ void Character::Jump(double strength, double angle /*in radian */)
   if (GetDirection() == DIRECTION_LEFT)
     angle = InverseAngle(angle);
 
-//  SetSpeed (strength, angle);
-  Impulse( strength,angle);
+  //  SetSpeed (strength, angle);
+  Impulse(strength,angle);
 }
 
 void Character::Jump()
 {
   MSG_DEBUG("character", "Jump");
   JukeBox::GetInstance()->Play (ActiveTeam().GetSoundProfile(), "jump");
+
   Jump(GameMode::GetInstance()->character.jump_strength,
        GameMode::GetInstance()->character.jump_angle);
 }
@@ -759,8 +765,9 @@ void Character::PrepareTurn()
 bool Character::CanMoveRL() const
 {
   if (FootsInVacuum()) return false;
-  return rl_motion_pause < Time::GetInstance()->Read();
+  return (rl_motion_pause < Time::GetInstance()->Read());
 }
+
 bool Character::FootsInVacuum() const
 {
   return (m_nbr_foot_contact == 0);
