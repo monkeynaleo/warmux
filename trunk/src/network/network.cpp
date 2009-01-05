@@ -73,7 +73,7 @@ bool NetworkThread::stop_thread = false;
 int NetworkThread::ThreadRun(void* /*no_param*/)
 {
   MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
-  Network::GetInstance()->ReceiveActions();
+  ReceiveActions();
   return 0;
 }
 
@@ -101,6 +101,113 @@ void NetworkThread::Wait()
 
   thread = NULL;
   stop_thread = false;
+}
+
+void NetworkThread::ReceiveActions()
+{
+  char* buffer;
+  size_t packet_size;
+  Network* net = Network::GetInstance();
+  std::list<DistantComputer*>::iterator dst_cpu;
+  std::list<DistantComputer*>& cpu = net->GetRemoteHosts();
+
+  while (Continue()) // While the connection is up
+  {
+    if (net->GetState() == WNet::NETWORK_PLAYING && cpu.empty())
+    {
+      // If while playing everybody disconnected, just quit
+      break;
+    }
+
+    //Loop while nothing is received
+    while (Continue())
+    {
+      net->WaitActionSleep();
+
+      // Check forced disconnections
+      for (dst_cpu = cpu.begin();
+           Continue() && dst_cpu != cpu.end();
+           dst_cpu++)
+      {
+	// Disconnection is in 2 phases to be handled by one thread
+        if ((*dst_cpu)->MustBeDisconnected()) {
+          dst_cpu = net->CloseConnection(dst_cpu);
+        }
+      }
+
+      // List is now maybe empty
+      if (cpu.empty()) {
+        if (net->IsClient()) {
+          fprintf(stderr, "you are alone!\n");
+	  Stop();
+          return; // We really don't need to go through the loops
+        }
+        // Even for server, as Visual Studio in debug mode has trouble with that loop
+	continue;
+      }
+
+      int num_ready = net->CheckActivity(100);
+      // Means something is available
+      if (num_ready>0)
+        break;
+      // Means an error
+      else if (num_ready == -1)
+      {
+        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+        continue; //Or break?
+      }
+    }
+
+    for (dst_cpu = cpu.begin();
+         Continue() && dst_cpu != cpu.end();
+         dst_cpu++)
+    {
+      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
+      {
+	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
+
+	  // An error occured during the reception
+          dst_cpu = net->CloseConnection(dst_cpu);
+
+          // Please Visual Studio that in debug mode has trouble with continuing
+          if (cpu.empty()) {
+            if (net->IsClient()) {
+              fprintf(stderr, "you are alone!\n");
+	      Stop();
+              return; // We really don't need to go through the loops
+            }
+            break;
+          }
+          continue;
+        }
+
+#ifdef LOG_NETWORK
+        if (fin != 0) {
+          int tmp = 0xFFFFFFFF;
+          write(fin, &packet_size, 4);
+          write(fin, buffer, packet_size);
+          write(fin, &tmp, 4);
+        }
+#endif
+
+        Action* a = new Action(buffer, (*dst_cpu));
+        free(buffer);
+
+	MSG_DEBUG("network.traffic", "Received action %s",
+		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+	net->HandleAction(a, *dst_cpu);
+
+        if (cpu.empty()) {
+          if (net->IsClient()) {
+            fprintf(stderr, "you are alone!\n");
+            Stop();
+            return; // We really don't need to go through the loops
+          }
+          break;
+        }
+      }
+    }
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -171,112 +278,6 @@ const std::list<DistantComputer*>& Network::GetRemoteHosts() const
   return cpu;
 }
 
-//-----------------------------------------------------------------------------
-
-void Network::ReceiveActions()
-{
-  char* buffer;
-  size_t packet_size;
-  std::list<DistantComputer*>::iterator dst_cpu;
-
-  while (NetworkThread::Continue()) // While the connection is up
-  {
-    if (state == WNet::NETWORK_PLAYING && cpu.empty())
-    {
-      // If while playing everybody disconnected, just quit
-      break;
-    }
-
-    //Loop while nothing is received
-    while (NetworkThread::Continue())
-    {
-      WaitActionSleep();
-
-      // Check forced disconnections
-      for (dst_cpu = cpu.begin();
-           NetworkThread::Continue() && dst_cpu != cpu.end();
-           dst_cpu++)
-      {
-	// Disconnection is in 2 phases to be handled by one thread
-        if ((*dst_cpu)->MustBeDisconnected()) {
-          dst_cpu = CloseConnection(dst_cpu);
-        }
-      }
-
-      // List is now maybe empty
-      if (cpu.empty()) {
-        if (IsClient()) {
-          fprintf(stderr, "you are alone!\n");
-	  NetworkThread::Stop();
-          return; // We really don't need to go through the loops
-        }
-        // Even for server, as Visual Studio in debug mode has trouble with that loop
-	continue;
-      }
-
-      int num_ready = socket_set->CheckActivity(100);
-      // Means something is available
-      if (num_ready>0)
-        break;
-      // Means an error
-      else if (num_ready == -1)
-      {
-        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
-        continue; //Or break?
-      }
-    }
-
-    for (dst_cpu = cpu.begin();
-         NetworkThread::Continue() && dst_cpu != cpu.end();
-         dst_cpu++)
-    {
-      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
-      {
-	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
-
-	  // An error occured during the reception
-          dst_cpu = CloseConnection(dst_cpu);
-
-          // Please Visual Studio that in debug mode has trouble with continuing
-          if (cpu.empty()) {
-            if (IsClient()) {
-              fprintf(stderr, "you are alone!\n");
-	      NetworkThread::Stop();
-              return; // We really don't need to go through the loops
-            }
-            break;
-          }
-          continue;
-        }
-
-#ifdef LOG_NETWORK
-        if (fin != 0) {
-          int tmp = 0xFFFFFFFF;
-          write(fin, &packet_size, 4);
-          write(fin, buffer, packet_size);
-          write(fin, &tmp, 4);
-        }
-#endif
-
-        Action* a = new Action(buffer, (*dst_cpu));
-        free(buffer);
-
-	MSG_DEBUG("network.traffic", "Received action %s",
-		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-	HandleAction(a, *dst_cpu);
-
-        if (cpu.empty()) {
-          if (IsClient()) {
-            fprintf(stderr, "you are alone!\n");
-            NetworkThread::Stop();
-            return; // We really don't need to go through the loops
-          }
-          break;
-        }
-      }
-    }
-  }
-}
 //-----------------------------------------------------------------------------
 
 // Static method
@@ -525,6 +526,11 @@ const std::string& Network::GetGameName() const
 const std::string& Network::GetPassword() const
 {
   return password;
+}
+
+int Network::CheckActivity(int timeout)
+{
+  return socket_set->CheckActivity(timeout);
 }
 
 //-----------------------------------------------------------------------------
