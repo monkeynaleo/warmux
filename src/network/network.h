@@ -57,6 +57,7 @@ private:
   static SDL_Thread* thread; // network thread, where we receive data from network
   static bool stop_thread;
 
+  static void ReceiveActions();
   static int ThreadRun(void* no_param);
 public:
   static void Start();
@@ -97,8 +98,6 @@ protected:
   int fin;
 #endif
 
-  virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
-  virtual void WaitActionSleep() = 0;
   virtual void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
 
   void DisconnectNetwork();
@@ -139,14 +138,15 @@ public:
   std::list<DistantComputer*>& GetRemoteHosts();
   const std::list<DistantComputer*>& GetRemoteHosts() const;
 
+  int CheckActivity(int timeout);
+  virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
+  virtual void WaitActionSleep() = 0;
+  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
+
   // Action handling
   void SendActionToAll(const Action& action) const;
   void SendActionToOne(const Action& action, DistantComputer* client) const;
   void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
-
-  void ReceiveActions();
-
-  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
   // Manage network state
   void SetState(WNet::net_game_state_t state);
