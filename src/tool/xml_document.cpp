@@ -26,6 +26,7 @@
 #include <WORMUX_debug.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <libxml/xinclude.h>
 
 #ifdef DEBUG
 #include <cstring>
@@ -69,6 +70,16 @@ bool XmlReader::Load(const std::string &filename)
   Reset();
   // Read file
   doc = xmlParseFile(filename.c_str());
+
+  // Activate XInclude (to include content of other files)
+  int nb_subst = xmlXIncludeProcess(doc);
+  if (nb_subst != 0) {
+    printf("%s: %d substitutions\n", filename.c_str(), nb_subst);
+    ASSERT(nb_subst != -1);
+  }
+
+  // Activate Entities
+  xmlSubstituteEntitiesDefault(1);
 
   // Activate DTD validation parser
   //  parser.set_validate (true);
