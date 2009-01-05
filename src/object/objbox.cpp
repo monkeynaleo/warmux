@@ -93,9 +93,9 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
 void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-  if (obj->IsCharacter()){
-     ApplyBonus((Character *)obj);
-   }
+  if (obj->IsCharacter()) {
+    ApplyBonus((Character *)obj);
+  }
 }
 void ObjBox::SignalDrowning()
 {
@@ -104,7 +104,7 @@ void ObjBox::SignalDrowning()
 
 void ObjBox::DropBox()
 {
-  if(parachute) {
+  if (parachute) {
     SetAirResistFactor(1.0);
     parachute = false;
     anim->SetCurrentFrame(anim->GetFrameCount() - 1);
@@ -115,7 +115,7 @@ void ObjBox::DropBox()
 
 void ObjBox::Draw()
 {
-anim->SetRotation_HotSpot(Point2i(0,0));
+  anim->SetRotation_HotSpot(Point2i(0,0));
   anim->SetRotation_rad(- GetAngle());
   anim->Draw(GetPosition());
 }
@@ -125,7 +125,7 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if(Overlapse(**character)) {
+    if (Overlapse(**character)) {
       ApplyBonus((*character));
       Ghost();
       return;
@@ -140,7 +140,7 @@ void ObjBox::Explode()
 {
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
-};
+}
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {

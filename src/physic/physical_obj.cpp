@@ -1531,12 +1531,10 @@ void PhysicalObj::SetFixedRotation(bool i_fixed_rotation)
   m_body_def->fixedRotation = i_fixed_rotation;
 }
 
-void PhysicalObj::SetFixed(bool i_fixed){
+void PhysicalObj::SetFixed(bool i_fixed)
+{
   if(i_fixed != m_fixed){
     m_fixed = i_fixed;
     GenerateMass();
-
   }
-
-
 }
