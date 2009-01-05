@@ -1,16 +1,15 @@
-# translation of sl.po to
 # Slovenian translations for Wormux package
 # Slovenski prevodi paketa Wormux.
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the Wormux package.
 #
 # Marko Burjek <email4marko@gmail.com>, 2007.
-# Jaka Kranjc <mokovec@gmail.com>, 2007, 2008.
+# Jaka Kranjc <mokovec@gmail.com>, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-07-07 18:30+0100\n"
+"PO-Revision-Date: 2009-01-05 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +66,7 @@ msgstr "Ekipa %s - Oddaljena"
 #: src/ai/ai_shoot_module.cpp:439
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s si je premislil in za tarčo vzel %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -107,7 +106,7 @@ msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
 #: src/ai/ai_shoot_module.cpp:355
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s se je odločil poškodovati %s"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -475,7 +474,7 @@ msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 #: src/ai/ai_shoot_module.cpp:370
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s bo ustrelil %s"
 
 #: src/interface/interface.cpp:185
 msgid "(dead)"
@@ -625,7 +624,6 @@ msgid "Change weapon countdown"
 msgstr "Spremeni čas orožja"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
 msgstr "Imena članov:"
 
