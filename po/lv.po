@@ -577,14 +577,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Paršūts"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Paršūts"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Paršūts"
 
 #: src/menu/options_menu.cpp:201
@@ -846,14 +846,10 @@ msgstr "MĀJAS mape (vides mainīgias $HOME) nav atrasts!"
 msgid "Have a good game!"
 msgstr "Lai jums jauka spēle!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Virspavēlnieks"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Virspavēlnieks: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1677,6 +1673,10 @@ msgstr "o Ielādē skaņas profilu: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Atver skaņu %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Virspavēlnieks: "
 
 #, fuzzy
 #~ msgid "Player name"

@@ -554,14 +554,14 @@ msgstr "Vaihda aseluokkaa"
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Hahmo"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Hahmon vaihto"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Hahmo"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -822,14 +822,10 @@ msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Ylikomentaja"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Ylikomentaja: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1630,6 +1626,10 @@ msgstr "o Ladataan ääniprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Ylikomentaja: "
 
 #~ msgid "Add custom team"
 #~ msgstr "Lisää henkilökohtainen joukkue"

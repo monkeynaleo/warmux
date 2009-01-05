@@ -554,14 +554,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Fallskjerm"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Fallskjerm"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Fallskjerm"
 
 #: src/menu/options_menu.cpp:201
@@ -824,13 +824,9 @@ msgstr "HOME mappen(miljøvariabel $HOME) kunne ikke bli funnet !"
 msgid "Have a good game!"
 msgstr "Ha et godt spill !"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
-msgstr "Kommandant"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
 msgstr "Kommandant"
 
 #. Display player's name
@@ -1626,6 +1622,10 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åpnet lydfilen på %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Kommandant"
 
 #, fuzzy
 #~ msgid "Player name"

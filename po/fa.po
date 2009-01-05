@@ -511,14 +511,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "بادکنک نجات"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "بادکنک نجات"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "بادکنک نجات"
 
 #: src/menu/options_menu.cpp:201
@@ -779,14 +779,10 @@ msgstr "پوشه‌ی خانگی پیدا نشد!"
 msgid "Have a good game!"
 msgstr "بازی خوبی داشته باشید!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "رئیس ارتش"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "رئیس ارتش: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1588,6 +1584,10 @@ msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "رئیس ارتش: "
 
 #, fuzzy
 #~ msgid "Player name"

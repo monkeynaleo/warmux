@@ -539,14 +539,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "מצנח"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "מצנח"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "מצנח"
 
 #: src/menu/options_menu.cpp:201
@@ -807,14 +807,10 @@ msgstr "לא ניתן למצוא את תיקיית הבית (משתנה סביב
 msgid "Have a good game!"
 msgstr "משחק מוצלח!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "מפקד"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "מפקד: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1629,6 +1625,10 @@ msgstr "o טוען פרופיל סאונד: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "מפקד: "
 
 #, fuzzy
 #~ msgid "Player name"

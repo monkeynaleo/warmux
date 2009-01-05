@@ -594,14 +594,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Padák"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Padák"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Padák"
 
 #: src/menu/options_menu.cpp:201
@@ -864,14 +864,10 @@ msgstr "Nemůžu nalézt domovský adresář (proměnná prostředí $HOME)!"
 msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Velitel"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Velitel: "
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1678,6 +1674,10 @@ msgstr "o Načítám hudební profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Velitel: "
 
 #, fuzzy
 #~ msgid "Player name"

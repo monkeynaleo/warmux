@@ -571,14 +571,14 @@ msgstr "Wechsle Waffenkategorie"
 msgid "Change weapon countdown"
 msgstr "Ändere Waffencountdown"
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Charakter"
+
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
 msgstr "Wechsle Charakter"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
-msgstr "Charakter"
 
 #: src/menu/options_menu.cpp:201
 msgid "Check updates online?"
@@ -844,14 +844,10 @@ msgstr ""
 msgid "Have a good game!"
 msgstr "Viel Spaß beim Spiel!"
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Hauptkommandant"
-
-#: src/menu/options_menu.cpp:143
-#, fuzzy
-msgid "Head commander:"
-msgstr "Hauptkommandant:"
 
 #. Display player's name
 #: src/interface/interface.cpp:176
@@ -1670,6 +1666,10 @@ msgstr "o Lade Sound Profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hauptkommandant:"
 
 #, fuzzy
 #~ msgid "Add custom team"

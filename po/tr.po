@@ -502,14 +502,14 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
+#: src/menu/options_menu.cpp:151
+#, fuzzy
+msgid "Character names:"
+msgstr "Paraşüt"
+
 #: src/menu/game_mode_editor.cpp:61
 #, fuzzy
 msgid "Character switching"
-msgstr "Paraşüt"
-
-#: src/menu/options_menu.cpp:151
-#, fuzzy
-msgid "Characters names:"
 msgstr "Paraşüt"
 
 #: src/menu/options_menu.cpp:201
@@ -770,12 +770,9 @@ msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 msgid "Have a good game!"
 msgstr ""
 
-#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:74
+#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/team_box.cpp:74
 msgid "Head commander"
-msgstr ""
-
-#: src/menu/options_menu.cpp:143
-msgid "Head commander:"
 msgstr ""
 
 #. Display player's name
