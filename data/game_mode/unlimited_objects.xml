@@ -31,6 +31,13 @@
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="bonus_box-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="19" y="78" />
+      <point x="47" y="78" />
+      <point x="47" y="100" />
+      <point x="19" y="100" />
+    </shape>
   </bonus_box>
 
   <medkit>
@@ -40,6 +47,13 @@
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="bonus_box-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="19" y="78" />
+      <point x="47" y="78" />
+      <point x="47" y="100" />
+      <point x="19" y="100" />
+    </shape>
   </medkit>
 
   <barrel>
