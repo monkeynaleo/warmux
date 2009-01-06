@@ -22,11 +22,14 @@
 #ifndef AI_SHOOT_MODULE_H
 #define AI_SHOOT_MODULE_H
 
+#include <vector>
 #include "include/base.h"
+#include "weapon/weapon.h"
 
 // Forward declararion
 class AIMovementModule;
 class Character;
+class Weapon;
 
 class AIShootModule
 {
@@ -69,6 +72,7 @@ class AIShootModule
                                              double& shoot_angle);
 
   bool SelectFiringWeapon(double shoot_angle) const;
+  void GetUsableFiringWeapons(std::vector<Weapon::Weapon_type>& usable_weapons) const;
 
   void ShootWithBazooka();
   const Character* FindBazookaShootableEnemy(const Character& shooter) const;

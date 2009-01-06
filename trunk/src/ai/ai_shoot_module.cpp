@@ -144,8 +144,9 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
         // Skip only if this character has the same team of shooter
         // otherwises he's a enemy. (more reachable than the current)
         if ((*other_character)->GetTestRect().Contains(pos)
-            && (&(*other_character)->GetTeam()) == (&shooter.GetTeam()))
+            && (&(*other_character)->GetTeam()) == (&shooter.GetTeam())) {
           return false;
+        }
       }
     }
       pos.x += delta_x;
@@ -189,38 +190,47 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
 bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 {
-  // we choose between gun, sniper_rifle, shotgun and submachine gun
-  uint selected = uint(RandomSync().GetDouble(0.0, 3.5));
-  switch (selected) {
-  case 0:
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
-    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-  case 1:
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
-    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-  case 2:
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SUBMACHINE_GUN);
-    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-  case 3:
-  default:
-    ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
-  }
+  // first create a list of usable weapons
+  std::vector<Weapon::Weapon_type> usable_weapons;
+  GetUsableFiringWeapons(usable_weapons);
 
-  // Check the angle
-  double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
-                             - (ActiveTeam().GetWeapon().GetMinAngle()) );
+  uint count = usable_weapons.size();
+  if (count == 0) return false;
 
-  if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) {
-    // angle is too wide for the weapon
-    return false;
-  }
-
-  // Check number of ammo
-  if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
-    return false;
-  }
+  // randomly choose a good one
+  // TODO: in the future add logic to discriminate between weapons
+  uint selected = RandomSync().GetUint(0, count-1);
+  ActiveTeam().SetWeapon(usable_weapons.at(selected));
 
   return true;
+}
+
+void AIShootModule::GetUsableFiringWeapons(std::vector<Weapon::Weapon_type>& usable_weapons) const
+{
+  Weapon::Weapon_type weapon;
+
+  // all weapons from the RIFLE category minus the flamethrower
+  Weapon::Weapon_type weapons[4] = {Weapon::WEAPON_GUN, Weapon::WEAPON_SHOTGUN, Weapon::WEAPON_SNIPE_RIFLE, Weapon::WEAPON_SUBMACHINE_GUN };
+
+  // we choose between gun, sniper_rifle, shotgun and submachine gun
+  for (int i=0; i < 3; i++) {
+    weapon = weapons[i];
+    ActiveTeam().SetWeapon(weapon);
+
+    // Check the ammo
+    if (! ActiveTeam().GetWeapon().EnoughAmmo()) continue;
+
+    // Check the angle
+    double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+                             - (ActiveTeam().GetWeapon().GetMinAngle()) );
+    if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) {
+      // angle is too wide for the weapon
+      continue;
+    }
+
+    // the weapon is usable
+    usable_weapons.push_back(weapon);
+  }
 }
 
 // =================================================
@@ -257,6 +267,7 @@ bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
 //   }
 
   // Dynamite
+  //TODO: also check there is no friendly character near
   if (life_points > 50) {
     ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
     if (ActiveTeam().GetWeapon().EnoughAmmo())
@@ -346,6 +357,29 @@ const Character* AIShootModule::FindEnemy()
 
   SetStrategy(NO_STRATEGY);
 
+  // "Gun-able" enemy ?
+  m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
+  if ( m_enemy != NULL ) {
+
+    SetStrategy(SHOOT_FROM_POINT);
+
+    GameMessages::GetInstance()->Add(Format(_("%s will shoot %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
+
+    // we choose between gun, sniper_rifle, shotgun and submachine gun
+    if ( SelectFiringWeapon(m_angle) ) {
+      ActiveCharacter().SetFiringAngle(m_angle);
+      return m_enemy;
+    } else {
+      m_enemy = NULL;
+    }
+  }
+
+  m_enemy = FindBazookaShootableEnemy(ActiveCharacter());
+  if (m_enemy != NULL) {
+    SetStrategy(SHOOT_BAZOOKA);
+    return m_enemy;
+  }
+
   // Proximity enemy ?
   m_enemy = FindProximityEnemy(ActiveCharacter());
   if ( m_enemy != NULL ) {
@@ -359,27 +393,6 @@ const Character* AIShootModule::FindEnemy()
       ActiveCharacter().SetFiringAngle(m_angle);
       return m_enemy;
     }
-  }
-
-  // "Gun-able" enemy ?
-  m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
-  if ( m_enemy != NULL ) {
-
-    SetStrategy(SHOOT_FROM_POINT);
-
-    GameMessages::GetInstance()->Add(Format(_("%s will shoot %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
-
-    // we choose between gun, sniper_rifle, shotgun and submachine gun
-    if ( SelectFiringWeapon(m_angle) ) {
-      ActiveCharacter().SetFiringAngle(m_angle);
-      return m_enemy;
-    }
-  }
-
-  m_enemy = FindBazookaShootableEnemy(ActiveCharacter());
-  if (m_enemy != NULL) {
-    SetStrategy(SHOOT_BAZOOKA);
-    return m_enemy;
   }
 
   m_current_strategy = NO_STRATEGY;
