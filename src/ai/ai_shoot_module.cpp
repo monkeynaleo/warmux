@@ -47,6 +47,7 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
   {
     if ( IsDirectlyShootable(shooter, **character, shoot_angle) ) {
+      //TODO: don't return as soon as a match is found, but return the best
       return &(**character);
     }
   }
@@ -66,6 +67,7 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 bool AIShootModule::IsBazookable(const Character& shooter,
                                  double& angle)
 {
+  ActiveTeam().SetWeapon(Weapon::WEAPON_BAZOOKA); //see note in IsDirectlyShootable
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
   // Set the rotation of "angle" radians
   Point2i pos = Point2i::FromPolarCoordinates(sqrt(double(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
@@ -108,8 +110,11 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
 
+  // HACK: use the gun to get a gunhole position
+  ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
+
   // TODO: Please find an alternative to solve this tempory solution
-  Point2d pos = ActiveCharacter().GetCenter();
+  Point2d pos = POINT2I_2_POINT2D(ActiveTeam().GetWeapon().GetGunHolePosition());
   Point2d arrival = enemy.GetCenter();
 
   double original_angle = pos.ComputeAngle(arrival);
@@ -117,7 +122,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   int delta_x = (pos.x > arrival.x) ? -1 : 1;
   double a = tan(original_angle);
   double b = pos.y - (a * pos.x);
-
+  uint ground_hitcount = 0;
 
   // compute to see if there any part of ground between the 2 characters
   // While test is not finished
@@ -133,7 +138,13 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     // is there a collision on the ground ??
     if (!GetWorld().IsInVacuum(posi)) {
-      return false;
+      // allow two pixels of slack - rifles have more than one shot, so
+      // don't let a thin wall or a top of a hill (shotgun) deter us
+      if (ground_hitcount < 3) {
+        ground_hitcount++;
+      } else {
+        return false;
+      }
     }
 
     // is there a collision with another character ?
