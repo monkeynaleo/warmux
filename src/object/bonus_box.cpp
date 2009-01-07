@@ -36,17 +36,13 @@
 #include "weapon/weapons_list.h"
 #include "network/randomsync.h"
 
-BonusBox::BonusBox():
-  ObjBox("bonus_box")
+BonusBox::BonusBox() : ObjBox("bonus_box")
 {
-  // SetTestRect (29, 29, 63, 6);
-
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/bonus_box");
   GetResourceManager().UnLoadXMLProfile(res);
   weapon_num = 0;
 
-  //SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
 }
