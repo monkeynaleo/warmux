@@ -147,17 +147,15 @@ Grapple::Refresh()
    }*/
 }
 
-void
-Grapple::Draw()
+void Grapple::Draw()
 {
   Weapon::Draw();
 
-  if (!IsInUse())
-  {
-  return ;
+  if (!IsInUse()) {
+    return ;
   }
 
-  if(m_rope) {
+  if (m_rope) {
     m_rope->Draw();
   }
   /* int x, y;

@@ -135,12 +135,6 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, name);
   image->EnableRotationCache(32);
-  SetSize(image->GetSize());
-
-  // Set rectangle test
-  // int dx = image->GetWidth()/2-1;
-  // int dy = image->GetHeight()/2-1;
-  // SetTestRect(dx, dx, dy, dy);
 
   ResetTimeOut();
 
@@ -215,8 +209,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  //std::cout<<"GetSizeMax "<<image->GetSizeMax().x<<" "<<image->GetSizeMax().y<<std::endl;
-  //SetSize(image->GetSizeMax());
+
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 

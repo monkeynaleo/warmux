@@ -88,9 +88,8 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   SetCollisionModel(false, false, false);
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
-  SetSize(image->GetSize());
   obus_dx = 100;
-  obus_dy = GetY() + GetHeight();
+  obus_dy = GetY() + GetInitialHeight();
 
   flying_sound.Play("share", "weapon/aircraft_flying");
 }

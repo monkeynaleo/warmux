@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE objects_physics SYSTEM "objects.dtd" []>
+
 <objects_physics>
 
   <!-- Various objects configs -->
@@ -81,6 +82,15 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="anvil-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="2" y="3" />
+      <point x="91" y="3" />
+      <point x="70" y="24" />
+      <point x="92" y="63" />
+      <point x="1" y="63" />
+      <point x="22" y="24" />
+    </shape>
   </anvil>
 
   <!-- Dummy value, will be overwritten by the value contained in each
@@ -212,6 +222,12 @@
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="gun_bullet-main" type="polygon">
+    <position x="0" y="0" />
+      <point x="1" y="1" />
+      <point x="6" y="2" />
+      <point x="1" y="4" />
+    </shape>
   </gun_bullet>
 
   <buckshot> <!-- shotgun ammo -->
@@ -221,6 +237,10 @@
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="buckshot-main" type="circle">
+      <position x="2" y="2" />
+      <radius>2</radius>
+    </shape>
   </buckshot>
 
   <m16_bullet>
@@ -230,6 +250,12 @@
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="m16_bullet-main" type="polygon">
+    <position x="0" y="0" />
+      <point x="1" y="1" />
+      <point x="6" y="2" />
+      <point x="1" y="4" />
+    </shape>
   </m16_bullet>
 
   <snipe_rifle_bullet>
@@ -239,6 +265,12 @@
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="snipe_rifle_bullet-main" type="polygon">
+    <position x="0" y="0" />
+      <point x="1" y="1" />
+      <point x="6" y="2" />
+      <point x="1" y="4" />
+    </shape>
   </snipe_rifle_bullet>
 
   <flamethrower_bullet>
@@ -248,6 +280,13 @@
     <gravity_factor>0.2</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="snipe_rifle_bullet-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="7" y="3" />
+      <point x="14" y="13" />
+      <point x="8" y="17" />
+      <point x="2" y="13" />
+    </shape>
   </flamethrower_bullet>
 
   <rope>
@@ -276,6 +315,16 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="rocket-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="1" y="4" />
+      <point x="17" y="4" />
+      <point x="22" y="1" />
+      <point x="34" y="5" />
+      <point x="22" y="10" />
+      <point x="17" y="8" />
+      <point x="1" y="8" />
+    </shape>
   </rocket>
 
   <cluz_rocket>
@@ -285,6 +334,16 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.9</rebound_factor>
+    <shape name="cluz_rocket-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="1" y="4" />
+      <point x="17" y="4" />
+      <point x="22" y="1" />
+      <point x="34" y="5" />
+      <point x="22" y="10" />
+      <point x="17" y="8" />
+      <point x="1" y="8" />
+    </shape>
   </cluz_rocket>
 
   <cluz_cluster>
@@ -294,6 +353,10 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.9</rebound_factor>
+    <shape name="cluz_cluster-main" type="circle">
+      <position x="4" y="4" />
+      <radius>4</radius>
+    </shape>
   </cluz_cluster>
 
   <riot_rocket>
@@ -303,6 +366,14 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="riot_rocket-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="2" y="3" />
+      <point x="12" y="1" />
+      <point x="22" y="6" />
+      <point x="13" y="12" />
+      <point x="2" y="9" />
+    </shape>
   </riot_rocket>
 
   <grenade>
@@ -312,6 +383,10 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
+    <shape name="grenade-main" type="circle">
+      <position x="9" y="10" />
+      <radius>5</radius>
+    </shape>
   </grenade>
 
   <disco_grenade>
@@ -321,6 +396,10 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.4</rebound_factor>
+    <shape name="disco_grenade-main" type="circle">
+      <position x="9" y="9" />
+      <radius>6</radius>
+    </shape>
   </disco_grenade>
 
   <cluster_bomb>
@@ -330,6 +409,10 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
+    <shape name="cluster_bomb-main" type="circle">
+      <position x="8" y="8" />
+      <radius>5</radius>
+    </shape>
   </cluster_bomb>
 
   <cluster>
@@ -339,6 +422,13 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="cluster-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="3" y="0" />
+      <point x="8" y="3" />
+      <point x="5" y="8" />
+      <point x="0" y="5" />
+    </shape>
   </cluster>
 
   <footbomb>
@@ -348,6 +438,17 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.9</rebound_factor>
+    <shape name="footbomb-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="0" y="7" />
+      <point x="5" y="2" />
+      <point x="11" y="0" />
+      <point x="17" y="2" />
+      <point x="22" y="7" />
+      <point x="17" y="12" />
+      <point x="11" y="14" />
+      <point x="5" y="12" />
+    </shape>
   </footbomb>
 
   <dynamite_bullet>
@@ -357,6 +458,13 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="dynamite-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="4" y="6" />
+      <point x="9" y="6" />
+      <point x="9" y="17" />
+      <point x="4" y="17" />
+    </shape>
   </dynamite_bullet>
 
   <air_attack_plane>
@@ -366,6 +474,13 @@
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="air_attack_plane-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="2" y="42" />
+      <point x="112" y="0" />
+      <point x="200" y="39" />
+      <point x="102" y="57" />
+    </shape>
   </air_attack_plane>
 
   <air_attack_projectile>
@@ -375,6 +490,14 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="air_attack_projectile-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="0" y="0" />
+      <point x="0" y="14" />
+      <point x="12" y="23" />
+      <point x="7" y="30" />
+      <point x="2" y="23" />
+    </shape>
   </air_attack_projectile>
 
   <supertux>
@@ -384,6 +507,17 @@
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="supertux-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="9" y="4" />
+      <point x="0" y="25" />
+      <point x="5" y="37" />
+      <point x="18" y="37" />
+      <point x="22" y="33" />
+      <point x="21" y="0" />
+      <point x="17" y="6" />
+      <point x="14" y="4" />
+    </shape>
   </supertux>
 
   <gnu>
@@ -393,6 +527,17 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
+    <shape name="gnu-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="1" y="18" />
+      <point x="29" y="16" />
+      <point x="41" y="1" />
+      <point x="44" y="24" />
+      <point x="34" y="20" />
+      <point x="30" y="38" />
+      <point x="11" y="17" />
+      <point x="10" y="26" />
+    </shape>
   </gnu>
 
   <polecat>
@@ -402,6 +547,14 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
+    <shape name="polecat-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="1" y="1" />
+      <point x="52" y="12" />
+      <point x="37" y="23" />
+      <point x="25" y="15" />
+      <point x="17" y="23" />
+    </shape>
   </polecat>
 
   <bounce_ball>
@@ -411,6 +564,10 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>1.1</rebound_factor>
+    <shape name="bounce_ball-main" type="circle">
+      <position x="6" y="6" />
+      <radius>6</radius>
+    </shape>
   </bounce_ball>
 
   <mine>
@@ -420,6 +577,15 @@
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.01</rebound_factor>
+    <shape name="mine-main" type="polygon">
+      <position x="0" y="0" />
+      <point x="6" y="3" />
+      <point x="12" y="3" />
+      <point x="14" y="8" />
+      <point x="12" y="14" />
+      <point x="6" y="14" />
+      <point x="2" y="8" />
+    </shape>
   </mine>
 
 </objects_physics>

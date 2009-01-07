@@ -43,15 +43,12 @@
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"
 
-Medkit::Medkit()
-  : ObjBox("medkit") {
-  // SetTestRect (29, 29, 63, 6);
-
+Medkit::Medkit() : ObjBox("medkit")
+{
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/medkit");
   GetResourceManager().UnLoadXMLProfile(res);
 
-  //SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
 }
