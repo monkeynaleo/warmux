@@ -29,6 +29,13 @@ class b2BroadPhase;
 /// This holds the mass data computed for a shape.
 struct b2MassData
 {
+	b2MassData()
+	{
+		mass = 0.0f;
+		center.SetZero();
+		I = 0.0f;
+	}
+
 	/// The mass of the shape, usually in kilograms.
 	float32 mass;
 
@@ -42,7 +49,14 @@ struct b2MassData
 /// This holds contact filtering data.
 struct b2FilterData
 {
-	/// The collision category bits. Normally you would just set one bit.
+	b2FilterData()
+	{
+		categoryBits = 0;
+		maskBits = 0;
+		groupIndex = 0;
+	}
+
+        /// The collision category bits. Normally you would just set one bit.
 	uint16 categoryBits;
 
 	/// The collision mask bits. This states the categories that this
