@@ -133,7 +133,7 @@ void PhysicalObj::InitShape(const std::string &xml_config)
 
     shape->SetMass(GetMass());
 
-    b2FilterData filter_data = {0,0,0};
+    b2FilterData filter_data;
     filter_data.categoryBits = 0x0001;
     filter_data.maskBits = 0x0000;
     filter_data.maskBits = 0;
@@ -189,11 +189,11 @@ void PhysicalObj::Desactivate()
 
 void PhysicalObj::GenerateMass()
 {
-  if(m_fixed){
+  if (m_fixed) {
      b2MassData massData;
      m_body->SetMass(&massData);
 
-   }else{
+  } else {
 
      if (m_body_def->fixedRotation) {
        b2MassData massData;
@@ -204,7 +204,7 @@ void PhysicalObj::GenerateMass()
      } else {
        m_body->SetMassFromShapes();
      }
-   }
+  }
 }
 
 //---------------------------------------------------------------------------//
@@ -409,7 +409,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   shape->AddPoint(Point2d(0 , phys_height));
   shape->SetMass(GetMass());
 
-  b2FilterData filter_data = {0,0,0};
+  b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
   filter_data.maskBits = 0;
@@ -1533,7 +1533,7 @@ void PhysicalObj::SetFixedRotation(bool i_fixed_rotation)
 
 void PhysicalObj::SetFixed(bool i_fixed)
 {
-  if(i_fixed != m_fixed){
+  if (i_fixed != m_fixed) {
     m_fixed = i_fixed;
     GenerateMass();
   }
