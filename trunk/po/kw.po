@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
-"Language-Team:   <treylyansow@kernewegva.com>\n"
+"Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,7 @@ msgstr ""
 #: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
-msgstr "Ny gavas mappa %s  :-("
+msgstr "Ny gavas mappa %s :-("
 
 #: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
 #, c-format
@@ -61,7 +61,7 @@ msgstr "Para %s - Pell"
 #: src/ai/ai_shoot_module.cpp:439
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s a janj kosten dhe %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -101,7 +101,7 @@ msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
 #: src/ai/ai_shoot_module.cpp:355
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s re erviras shyndya %s"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -372,13 +372,13 @@ msgstr[2] "Para %s re waynyas %u lammlen!"
 msgstr[3] "Para %s re waynyas %u lammlen!"
 
 #: src/weapon/polecat.cpp:182
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
 msgstr[0] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
-msgstr[1] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
-msgstr[2] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
-msgstr[3] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
+msgstr[1] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
+msgstr[2] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
+msgstr[3] "Para %s re waynyas %u yewgen! Omwisk agas visours gass!"
 
 #: src/weapon/riot_bomb.cpp:133
 #, c-format
@@ -403,9 +403,9 @@ msgstr[3] "Para %s re waynyas %u helghwon!"
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "Para %s re waynyas %u beltynk! Skap hemma!"
-msgstr[1] "Para %s re waynyas %u veltynk! Skap hemma!"
-msgstr[2] "Para %s re waynyas %u beltynk! Skap hemma!"
-msgstr[3] "Para %s re waynyas %u beltynk! Skap hemma!"
+msgstr[1] "Para %s re waynyas %u veltynk! Skap hemma!"
+msgstr[2] "Para %s re waynyas %u beltynk! Skap hemma!"
+msgstr[3] "Para %s re waynyas %u beltynk! Skap hemma!"
 
 #: src/weapon/snipe_rifle.cpp:247
 #, c-format
@@ -492,7 +492,7 @@ msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
 #: src/ai/ai_shoot_module.cpp:370
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s a vynn tenna %s"
 
 #: src/interface/interface.cpp:185
 msgid "(dead)"
@@ -617,7 +617,7 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow (%s)!"
 
 #: src/team/custom_teams_list.cpp:93
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow personal (%s)!"
 
@@ -642,9 +642,8 @@ msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Person"
+msgstr "Henwyn an bersons:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -780,14 +779,14 @@ msgstr "Gwall pan gargas para:"
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Gwall pan wrug an arayel \"%s\": ny allas gwitha restransow an gwari."
+msgstr "Gwall pan wrug an arayel \"%s\": ny allas gwitha restransow an gwari."
 
 #: src/team/custom_team.cpp:104
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
-"Gwall pan dhileas an arayel \"%s\". Ny allas dilea an para personelhes."
+"Gwall pan dhileas an arayel \"%s\". Ny allas dilea an para personelhes."
 
 #: src/team/custom_team.cpp:95
 #, c-format
@@ -840,7 +839,7 @@ msgstr ""
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
+msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
 
 #: src/weapon/flamethrower.cpp:136
 msgid "Flame Thrower"
@@ -930,7 +929,6 @@ msgid "Host a game"
 msgstr "Ostya gwari"
 
 #: src/weapon/auto_bazooka.cpp:224
-#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -938,7 +936,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Usyans : klyck kledh orth an gosten\n"
-"Elin tenna dalethek: Yn-Bann/Yn-Nans\n"
+"Elin tenna dalethek: Yn-Bann/Yn-Nans\n"
 "Tenna : pesya gweskel war an alhwedhen spas bys pan dhrehedhydh an krevder a "
 "vyn'ta\n"
 "unn bellen orth an dro"
@@ -978,8 +976,8 @@ msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
 msgstr ""
-"Mar kevydh pryv na dal bos y'n gwari ma, po mar krysydh del fyll neppyth dhe "
-"Wormux, danvon e-bost (yn Sowsnek, soweth) dhe: "
+"Mar kevydh pryv na dal bos y'n gwari ma, po mar krysydh del fyll neppyth dhe "
+"Wormux, danvon e-bost (yn Sowsnek, soweth) dhe: "
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:66
@@ -993,8 +991,8 @@ msgid ""
 "Fire : keep space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Elin tenna orth an dalleth : Yn-Bann/Yn-Nans\n"
-"Tenna : pesya gweskel war an alhwedhen spas bys pan dhrehedhydh an krevder a "
+"Elin tenna orth an dalleth : Yn-Bann/Yn-Nans\n"
+"Tenna : pesya gweskel war an alhwedhen spas bys pan dhrehedhydh an krevder a "
 "vyn'ta\n"
 "unn bellen orth an dro"
 
@@ -1517,7 +1515,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Termyn-dhe-dardha : Ros an logosen po Folen Kyns/Nessa\n"
-"Elin : Yn-Bann/Yn-Nans\n"
+"Elin : Yn-Bann/Yn-Nans\n"
 "Tenna : pesya gweskel war an alhwedhen spas bys pan dhrehedhydh an krevder a "
 "vyn'ta\n"
 "unn bellen orth an dro"
@@ -1530,7 +1528,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Termyn-dhe-dardha : Ros an logosen po Folen Kyns/Nessa\n"
-"Elin : Yn-Bann/Yn-Nans\n"
+"Elin : Yn-Bann/Yn-Nans\n"
 "Tenna : spas\n"
 "unn bellen orth an dro"
 
@@ -1650,7 +1648,7 @@ msgstr "Genes dha honan th esos..."
 
 #: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Mester nowyth an dro os ta!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1721,7 +1719,6 @@ msgstr "o Ow karga an profil-son: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
 
-#, fuzzy
 #~ msgid "Head commander:"
 #~ msgstr "Penn an para: "
 
@@ -1750,7 +1747,6 @@ msgstr "o Awdio ygerys orth %d Hz %d byt"
 #~ msgid "Network initialization"
 #~ msgstr "Lonchyans an rosweyth"
 
-#, fuzzy
 #~ msgid ""
 #~ "No public servers available and incorrect manual connection settings. Try "
 #~ "connecting manually."
