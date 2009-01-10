@@ -418,7 +418,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   for (uint i=0; i<v.size(); i++)
   {
     const Team* team = v[i]->getTeam();
-    const char* name = (team) ? team->GetName().c_str() : _("All teams");
+    const std::string name = (team) ? team->GetName() : _("All teams");
     stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
   }
   tabs->AddNewTab("TAB_team", _("Team stats"), stats);
