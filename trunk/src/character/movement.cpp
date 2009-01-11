@@ -24,7 +24,7 @@
 #include "tool/xml_document.h"
 #include <WORMUX_debug.h>
 
-Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), speed(15), always_moving(false)
+Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per_frame(15), always_moving(false)
 {
   frames.clear();
 
@@ -32,7 +32,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), speed(15), a
   ASSERT(type != "");
   MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
 
-  XmlReader::ReadUintAttr(xml, "speed", speed);
+  XmlReader::ReadUintAttr(xml, "duration_per_frame", duration_per_frame);
   XmlReader::ReadUintAttr(xml, "nb_loops", nb_loops);
 
   // Load the test rectangle
@@ -125,9 +125,9 @@ const std::string& Movement::GetType() const
   return type;
 }
 
-uint Movement::GetSpeed() const
+uint Movement::GetFrameDuration() const
 {
-  return speed;
+  return duration_per_frame;
 }
 
 uint Movement::GetNbLoops() const

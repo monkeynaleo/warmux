@@ -372,11 +372,11 @@ void Body::Build()
 
   if (walk_events > 0 || current_mvt->GetType() != "walk") {
 
-    if (Time::GetInstance()->Read() > last_refresh + current_mvt->GetSpeed()) {
+    if (Time::GetInstance()->Read() > last_refresh + current_mvt->GetFrameDuration()) {
 
       // Compute the new frame number
-      current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed();
-      last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed()) * current_mvt->GetSpeed();
+      current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetFrameDuration();
+      last_refresh += (current_frame-last_frame) * current_mvt->GetFrameDuration();
 
       // This is the end of the animation
       if (current_frame >= current_mvt->GetFrames().size()) {
@@ -690,7 +690,7 @@ bool Body::IsWalking() const
 
 uint Body::GetMovementDuration() const
 {
-  return current_mvt->GetFrames().size() * current_mvt->GetSpeed();
+  return current_mvt->GetFrames().size() * current_mvt->GetFrameDuration();
 }
 
 uint Body::GetFrameCount() const
