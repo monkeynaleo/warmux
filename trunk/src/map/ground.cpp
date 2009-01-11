@@ -93,7 +93,7 @@ bool Ground::IsEmpty(const Point2i &pos) const
 {
         ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
 
-        return GetAlpha( pos ) != 255; // IsTransparent
+        return GetAlpha( pos ) == SDL_ALPHA_TRANSPARENT;
 }
 
 /*
@@ -494,23 +494,23 @@ void Ground::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, c
       t->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
 
       while (t->need_check_empty)
-  t->CheckEmpty();
+	t->CheckEmpty();
 
       if (t->NeedDelete()) {
 #ifdef DBG_TILE
-  printf("\nDeleting tile %i",i);
+	printf("\nDeleting tile %i",i);
 #endif
-  delete t;
-  item.push_back((TileItem*)&EmptyTile);
+	delete t;
+	item.push_back((TileItem*)&EmptyTile);
       } else {
 #ifdef DBG_TILE
-  if (i % nbCells.x % 2 == (i / nbCells.x) % 2)
-    item[i]->FillWithRGB(0, 0, 255);
-  else
-    item[i]->FillWithRGB(0, 255, 0);
+	if (i % nbCells.x % 2 == (i / nbCells.x) % 2)
+	  item[i]->FillWithRGB(0, 0, 255);
+	else
+	  item[i]->FillWithRGB(0, 255, 0);
 #endif
-  t->InitShape();
-  item.push_back(t);
+	t->InitShape();
+	item.push_back(t);
       }
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
@@ -591,29 +591,31 @@ Surface Ground::GetPart(const Rectanglei& rec)
   Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize()) / CELL_SIZE);
   Point2i i = nbCells - 1;
 
-  for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
-  for( i.x = firstCell.x; i.x <= lastCell.x; i.x++ )
-  {
-    if(item[i.y*nbCells.x + i.x]->IsTotallyEmpty()) continue;
+  for ( i.y = firstCell.y; i.y <= lastCell.y; i.y++ ) {
+    for( i.x = firstCell.x; i.x <= lastCell.x; i.x++ ) {
 
-    Point2i cell_pos = i * CELL_SIZE;
-    Rectanglei src;
-    Point2i dst;
-    src.SetPosition( rec.GetPosition() - cell_pos );
-    if(src.GetPositionX() < 0) src.SetPositionX(0);
-    if(src.GetPositionY() < 0) src.SetPositionY(0);
+      if (item[i.y*nbCells.x + i.x]->IsTotallyEmpty()) continue;
 
-    src.SetSize( rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
-    if(src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x) src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
-    if(src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y) src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+      Point2i cell_pos = i * CELL_SIZE;
+      Rectanglei src;
+      Point2i dst;
+      src.SetPosition( rec.GetPosition() - cell_pos );
 
-    dst =  cell_pos - rec.GetPosition();
-    if(dst.x < 0) dst.x = 0;
-    if(dst.y < 0) dst.y = 0;
+      if (src.GetPositionX() < 0) src.SetPositionX(0);
+      if (src.GetPositionY() < 0) src.SetPositionY(0);
 
-    item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(0, 0);
-    part.Blit(item[i.y*nbCells.x + i.x]->GetSurface(), src, dst);
-    item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
+      src.SetSize( rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
+      if (src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x) src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
+      if (src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y) src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+
+      dst =  cell_pos - rec.GetPosition();
+      if (dst.x < 0) dst.x = 0;
+      if (dst.y < 0) dst.y = 0;
+
+      item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(0, 0);
+      part.Blit(item[i.y*nbCells.x + i.x]->GetSurface(), src, dst);
+      item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
+    }
   }
   return part;
 }
