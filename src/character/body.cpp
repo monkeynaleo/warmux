@@ -21,6 +21,7 @@
 #include <sstream>
 #include <iostream>
 #include <map>
+#include <WORMUX_debug.h>
 #include "character/body.h"
 #include "character/character.h"
 #include "character/clothe.h"
@@ -33,7 +34,6 @@
 #include "particles/teleport_member.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
@@ -441,8 +441,9 @@ void Body::Build()
 
 std::string Body::GetFrameLoop() const
 {
-  char str[16];
-  snprintf(str, 16, "%u-%u", current_loop, current_frame);
+  char str[32];
+  snprintf(str, 32, "%u/%u-%u/%u", current_loop+1, current_mvt->GetNbLoops(),
+	   current_frame+1, current_mvt->GetFrames().size());
 
   return std::string(str);
 }
