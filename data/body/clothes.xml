@@ -1,26 +1,6 @@
 <!-- ###### Normal ###### -->
 <clothe name="normal">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-L"/>
-	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-L"/>
+	&standard_lefthanded_clothe;
 </clothe>
 
 <!-- ###### Jetpack ###### -->
@@ -40,17 +20,14 @@
 	<c_member name="head"/>
 	<c_member name="hornright"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="belt"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-R"/>
 </clothe>
 
-<clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
+<clothe name="jetpack-fire">
 	<c_member name="tail"/>
 	<c_member name="jetpack-left-fire"/>
 	<c_member name="jetpack-left"/>
@@ -68,10 +45,7 @@
 	<c_member name="head"/>
 	<c_member name="hornright"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="belt"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
@@ -93,10 +67,7 @@
 	<c_member name="head"/>
 	<c_member name="hornright"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-L"/>
@@ -118,10 +89,7 @@
 	<c_member name="head"/>
 	<c_member name="hornright"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="yoyo"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
@@ -144,10 +112,7 @@
 	<c_member name="head"/>
 	<c_member name="hornright"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
 	<c_member name="arm3-right-L"/>
@@ -223,10 +188,7 @@
 	<c_member name="body"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="construct"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
@@ -246,10 +208,7 @@
 	<c_member name="body"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="construct"/>
 	<c_member name="arm-right"/>
 	<c_member name="arm2-right"/>
@@ -279,10 +238,7 @@
 	<c_member name="baseball_tshirt"/>
 	<c_member name="head"/>
 	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
+	&standard_eyes;
 	<c_member name="baseball_cap"/>
 	<c_member name="weapon"/>
 	<c_member name="arm-right"/>
@@ -342,24 +298,5 @@
 
 <!-- ###### Gun ###### -->
 <clothe name="weapon-gun">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-L"/>
-	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="head"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="belt"/>
-	<c_member name="hat"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-L"/>
+	&standard_lefthanded_clothe;
 </clothe>

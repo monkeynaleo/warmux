@@ -11,7 +11,7 @@
 <c_member name="head"/>
 <c_member name="hornright"/>
 <c_member name="noze"/>
-&standard_eyes;
+&eyes;
 <c_member name="weapon"/>
 <c_member name="arm-right"/>
 <c_member name="arm2-right"/>
