@@ -3,7 +3,8 @@
 
 <!ENTITY standard_lefthanded_clothe SYSTEM "../standard_lefthanded_clothe.xml">
 <!ENTITY standard_righthanded_clothe SYSTEM "../standard_righthanded_clothe.xml">
-<!ENTITY standard_eyes SYSTEM "../standard_eyes.xml">
+<!ENTITY standard_black SYSTEM "../standard_black.xml">
+<!ENTITY standard_eyes "<c_member name='eyes'/><c_member name='pupil-right'/><c_member name='pupil-left'/><c_member name='eyelid'/>">
 
 <!ENTITY alias SYSTEM "../alias.xml">
 <!ENTITY clothes SYSTEM "../clothes.xml">
