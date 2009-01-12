@@ -12,10 +12,7 @@
 <c_member name="head"/>
 <c_member name="hornright"/>
 <c_member name="noze"/>
-<c_member name="eyes"/>
-<c_member name="pupil-right"/>
-<c_member name="pupil-left"/>
-<c_member name="eyelid"/>
+&standard_eyes;
 <c_member name="arm-right"/>
 <c_member name="arm2-right"/>
 <c_member name="arm3-right-L"/>
