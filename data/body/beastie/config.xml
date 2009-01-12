@@ -5,6 +5,10 @@
 <!ENTITY standard_righthanded_clothe SYSTEM "../standard_righthanded_clothe.xml">
 <!ENTITY standard_black SYSTEM "../standard_black.xml">
 <!ENTITY standard_eyes "<c_member name='eyes'/><c_member name='pupil-right'/><c_member name='pupil-left'/><c_member name='eyelid'/>">
+<!ENTITY complete_arm-left-righthanded "<c_member name='arm-left'/><c_member name='arm2-left'/><c_member name='arm3-left-R'/>">
+<!ENTITY complete_arm-left-lefthanded "<c_member name='arm-left'/><c_member name='arm2-left'/><c_member name='arm3-left-L'/>">
+<!ENTITY complete_arm-right-righthanded "<c_member name='arm-right'/><c_member name='arm2-right'/><c_member name='arm3-right-R'/>">
+<!ENTITY complete_arm-right-lefthanded "<c_member name='arm-right'/><c_member name='arm2-right'/><c_member name='arm3-right-L'/>">
 
 <!ENTITY alias SYSTEM "../alias.xml">
 <!ENTITY clothes SYSTEM "../clothes.xml">
