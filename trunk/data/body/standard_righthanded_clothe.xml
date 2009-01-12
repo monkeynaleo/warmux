@@ -4,11 +4,6 @@
 <c_member name="foot-right"/>
 <c_member name="back"/>
 <c_member name="body"/>
-<c_member name="hair"/>
-<c_member name="hornleft"/>
-<c_member name="head"/>
-<c_member name="hornright"/>
-<c_member name="noze"/>
-&standard_eyes;
+&complete_standard-head;
 <c_member name="weapon"/>
 &complete_arm-right-righthanded;

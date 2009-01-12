@@ -1,7 +1,19 @@
-<!-- ###### Normal ###### -->
-<clothe name="normal">
-	&standard_lefthanded_clothe;
-</clothe>
+<!-- ###### some standard clothes ###### -->
+<clothe name="normal">&standard_lefthanded_clothe;</clothe>
+<clothe name="weapon-dynamite">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-slap">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-grenade">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-gnulauncher">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-polecatlauncher">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-minelauncher">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-syringe">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-parachute">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-bounce_ball">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-cluster_bomb">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-disco_grenade">&standard_righthanded_clothe;</clothe>
+<clothe name="black">&standard_black;</clothe>
+<clothe name="fly-black">&standard_black;</clothe>
+<clothe name="dead"><c_member name="body-dead"/></clothe>
 
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack">
@@ -13,12 +25,7 @@
 	<c_member name="foot-left"/>
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_standard-head;
 	<c_member name="belt"/>
 	&complete_arm-right-righthanded;
 </clothe>
@@ -34,12 +41,7 @@
 	<c_member name="foot-left"/>
 	<c_member name="foot-right"/>
 	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_standard-head;
 	<c_member name="belt"/>
 	&complete_arm-right-righthanded;
 </clothe>
@@ -70,12 +72,7 @@
 	<c_member name="foot-right"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_standard-head;
 	<c_member name="yoyo"/>
 	&complete_arm-right-lefthanded;
 </clothe>
@@ -89,29 +86,9 @@
 	<c_member name="foot-right"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_standard-head;
 	&complete_arm-right-lefthanded;
 	<c_member name="hoop"/>
-</clothe>
-
-<!-- ###### Dead ###### -->
-<clothe name="dead">
-	<c_member name="body-dead"/>
-</clothe>
-
-<!-- ###### Black ###### -->
-<clothe name="black">
-	&standard_black;
-</clothe>
-
-<!-- ###### Fly-Black ###### -->
-<clothe name="fly-black">
-	&standard_black;
 </clothe>
 
 <!-- # Construct/Airhammer helmet # -->
@@ -124,9 +101,7 @@
 	<c_member name="foot-right"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
-	<c_member name="head"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_withhat-head;
 	<c_member name="construct"/>
 	&complete_arm-right-lefthanded;
 </clothe>
@@ -140,21 +115,9 @@
 	<c_member name="foot-right"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
-	<c_member name="head"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_withhat-head;
 	<c_member name="construct"/>
 	&complete_arm-right-lefthanded;
-</clothe>
-
-<!-- ###### weapon-dynamite ###### -->
-<clothe name="weapon-dynamite">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-slap ###### -->
-<clothe name="weapon-slap">
-	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-baseball ###### -->
@@ -166,65 +129,38 @@
 	<c_member name="back"/>
 	<c_member name="body"/>
 	<c_member name="baseball_tshirt"/>
-	<c_member name="head"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&complete_withhat-head;
 	<c_member name="baseball_cap"/>
 	<c_member name="weapon"/>
 	&complete_arm-right-righthanded;
 </clothe>
 
-<!-- ###### weapon-bounce_ball ###### -->
-<clothe name="weapon-bounce_ball">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-cluster_bomb ###### -->
-<clothe name="weapon-cluster_bomb">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-disco_grenade ###### -->
-<clothe name="weapon-disco_grenade">
-	&standard_righthanded_clothe;
-</clothe>
-
 <!-- ###### weapon-footbomb ###### -->
 <clothe name="weapon-footbomb">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-grenade ###### -->
-<clothe name="weapon-grenade">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-gnulauncher ###### -->
-<clothe name="weapon-gnulauncher">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-polecatlauncher ###### -->
-<clothe name="weapon-polecatlauncher">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-minelauncher ###### -->
-<clothe name="weapon-minelauncher">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- ###### weapon-syringe ###### -->
-<clothe name="weapon-syringe">
-	&standard_righthanded_clothe;
-</clothe>
-
-<!-- # Parachute # -->
-<clothe name="weapon-parachute">
-	&standard_righthanded_clothe;
+	<c_member name="foothelmet2"/>
+	&complete_arm-left-righthanded;
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	&complete_withhat-head;
+	<c_member name="foothelmet1"/>
+	<c_member name="weapon"/>
+	&complete_arm-right-righthanded;
 </clothe>
 
 <!-- ###### Gun ###### -->
 <clothe name="weapon-gun">
-	&standard_lefthanded_clothe;
+	&complete_arm-left-lefthanded;
+	<c_member name="weapon"/>
+	<c_member name="foot-left"/>
+	<c_member name="tail"/>
+	<c_member name="foot-right"/>
+	<c_member name="back"/>
+	<c_member name="body"/>
+	&complete_withhat-head;
+	<c_member name="belt"/>
+	<c_member name="hat"/>
+	&complete_arm-right-lefthanded;
 </clothe>
