@@ -126,52 +126,12 @@
 
 <!-- ###### Black ###### -->
 <clothe name="black">
-	<c_member name="arm-left-black"/>
-	<c_member name="arm2-left-black"/>
-	<c_member name="arm3-left-black-L"/>
-	<c_member name="weapon"/>
-	<c_member name="foot-left-black"/>
-	<c_member name="tail-black"/>
-	<c_member name="foot-right-black"/>
-	<c_member name="back-black"/>
-	<c_member name="body-black"/>
-	<c_member name="hair-black"/>
-	<c_member name="hornleft-black"/>
-	<c_member name="head-black"/>
-	<c_member name="hornright-black"/>
-	<c_member name="noze-black"/>
-	<c_member name="eyes-black"/>
-	<c_member name="pupil-right-black"/>
-	<c_member name="pupil-left-black"/>
-	<c_member name="eyelid-black"/>
-	<c_member name="arm-right-black"/>
-	<c_member name="arm2-right-black"/>
-	<c_member name="arm3-right-black-L"/>
+	&standard_black;
 </clothe>
 
 <!-- ###### Fly-Black ###### -->
 <clothe name="fly-black">
-	<c_member name="arm-left-black"/>
-	<c_member name="arm2-left-black"/>
-	<c_member name="arm3-left-black-L"/>
-	<c_member name="weapon"/>
-	<c_member name="foot-left-black"/>
-	<c_member name="tail-black"/>
-	<c_member name="foot-right-black"/>
-	<c_member name="back-black"/>
-	<c_member name="body-black"/>
-	<c_member name="hair-black"/>
-	<c_member name="hornleft-black"/>
-	<c_member name="head-black"/>
-	<c_member name="hornright-black"/>
-	<c_member name="noze-black"/>
-	<c_member name="eyes-black"/>
-	<c_member name="pupil-right-black"/>
-	<c_member name="pupil-left-black"/>
-	<c_member name="eyelid-black"/>
-	<c_member name="arm-right-black"/>
-	<c_member name="arm2-right-black"/>
-	<c_member name="arm3-right-black-L"/>
+	&standard_black;
 </clothe>
 
 <!-- # Construct/Airhammer helmet # -->
