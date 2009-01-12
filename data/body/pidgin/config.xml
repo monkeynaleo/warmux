@@ -9,6 +9,9 @@
 <!ENTITY complete_arm-left-lefthanded "<c_member name='arm-left'/><c_member name='arm2-left'/><c_member name='arm3-left-L'/>">
 <!ENTITY complete_arm-right-righthanded "<c_member name='arm-right'/><c_member name='arm2-right'/><c_member name='arm3-right-R'/>">
 <!ENTITY complete_arm-right-lefthanded "<c_member name='arm-right'/><c_member name='arm2-right'/><c_member name='arm3-right-L'/>">
+<!ENTITY complete_standard-head "<c_member name='hair'/><c_member name='hornleft'/><c_member name='head'/><c_member name='hornright'/><c_member name='noze'/>&standard_eyes;">
+<!ENTITY complete_withhat-head "<c_member name='head'/><c_member name='noze'/>&standard_eyes;">
+	
 
 <!ENTITY alias SYSTEM "../alias.xml">
 <!ENTITY clothes SYSTEM "../clothes.xml">
