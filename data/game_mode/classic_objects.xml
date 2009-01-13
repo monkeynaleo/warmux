@@ -487,10 +487,10 @@
     <shape name="air_attack_projectile-main" type="polygon">
       <position x="0" y="0" />
       <point x="0" y="0" />
-      <point x="0" y="14" />
+      <point x="14" y="0" />
       <point x="12" y="23" />
       <point x="7" y="30" />
-      <point x="2" y="23" />
+      <point x="2" y="23" />     
     </shape>
   </air_attack_projectile>
 

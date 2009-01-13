@@ -137,15 +137,15 @@ void Plane::Shoot(double speed, const Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY(Point2i(GetX(), obus_dy) );
+  instance->SetXY(Point2i(GetX(), GetY()+GetHeight()) );
 
   Point2d speed_vector = GetSpeedXY();
 
   int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
-  int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
+  //int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
-  speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
+  speed_vector.SetValues(speed_vector.x + fx/30.0, 0);
   instance->SetSpeedXY(speed_vector);
 
   ObjectsList::GetRef().AddObject(instance);
@@ -163,16 +163,17 @@ void Plane::Refresh()
 
   UpdatePosition();
   image->Update();
+  SetY(0);
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
     DropBomb();
     m_ignore_movements = true;
-    next_height = RandomLocal().GetInt(20,100);
+    next_height = RandomLocal().GetInt(50,200);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
     {
-      next_height = RandomLocal().GetInt(20,100);
+      next_height = RandomLocal().GetInt(50,200);
       DropBomb();
     }
   }
