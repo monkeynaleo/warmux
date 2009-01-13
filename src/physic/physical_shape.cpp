@@ -190,6 +190,43 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 }
 // =============================================================================
 
+#ifdef DEBUG
+static bool is_ccw(const std::vector<Point2d> P, int i, int j, int k)
+{
+  bool r;
+
+  double a = P[i].x - P[j].x;
+  double b = P[i].y - P[j].y;
+  double c = P[k].x - P[j].x;
+  double d = P[k].y - P[j].y;
+
+  r = (a*d - b*c <= 0); // true if points i, j, k are counterclockwise
+  return r;
+}
+
+static bool check_polygon_is_convex(const std::vector<Point2d>& point_list)
+{
+  ASSERT(point_list.size() >= 3);
+
+  if (point_list.size() == 3)
+    return true;
+
+  bool ccw = is_ccw(point_list, point_list.size()-1, 0, 1);
+  bool ccw2;
+  for (uint i = 0; i < point_list.size() - 2; i++) {
+    ccw2 = is_ccw(point_list, i, i+1, i+2);
+    if (ccw != ccw2)
+      return false;
+    ccw = ccw2;
+  }
+  ccw2 = is_ccw(point_list, point_list.size()-2, point_list.size()-1, 0);
+  if (ccw != ccw2)
+    return false;
+
+  return true;
+}
+#endif
+
 /////////////////////////////////
 // PhysicalPolygon
 
@@ -210,10 +247,17 @@ void PhysicalPolygon::Generate()
     m_shape = NULL;
   }
 
+#ifdef DEBUG
+  if (!check_polygon_is_convex(m_point_list)) {
+    fprintf(stderr, "ERROR: PhysicalPolygon %s is not convex!\n", GetName().c_str());
+    ASSERT(false);
+  }
+#endif
+
   b2PolygonDef shapeDef;
   shapeDef.vertexCount = m_point_list.size();
 
-  for (uint i = 0; i<m_point_list.size();i++) {
+  for (uint i = 0; i < m_point_list.size(); i++) {
     shapeDef.vertices[i].Set(m_point_list[i].x, m_point_list[i].y);
   }
 
