@@ -59,7 +59,7 @@
 <clothe name="animation0">
 	&complete_arm-left-lefthanded;
 	&feet;
-<c_member name="tail"/>
+	<c_member name="tail"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
 	&complete_standard-head;
