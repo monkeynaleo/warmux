@@ -104,402 +104,197 @@ void PhysicTile::GenerateFull()
 
 void PhysicTile::GenerateMixte()
 {
-   bool is_generation_work = true; // WARNING: is true the right default value ??
-   if (m_level <= 0) {
-     is_generation_work = GeneratePolygone();
-   }
-
-   if (m_level > 0 || !is_generation_work) {
-     //Subdivise
-     m_is_subdivided = true;
-     m_is_containing_polygon = false;
-     int new_width1 = m_size.x/2;
-     int new_width2 = m_size.x - new_width1;
-     int new_height1 = m_size.y/2;;
-     int new_height2 = m_size.y - new_height1;
-
-     //std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height1<<" m_offset "<<m_offset.x<<""<<m_offset.y<<std::endl;
-
-     m_physic_tiles[0] = new PhysicTile(Point2d(new_width1,new_height1),m_offset,m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-     //std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height1<<" m_offset "<<m_offset.x + new_width1<<" "<<m_offset.y<<std::endl;
-     m_physic_tiles[1] = new PhysicTile(Point2d(new_width2,new_height1),Point2d(m_offset.x + new_width1, m_offset.y),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-     // std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width1<<" "<<new_height2<<" m_offset "<<m_offset.x<<" "<< m_offset.y+ new_height1<<std::endl;
-     m_physic_tiles[2] = new PhysicTile(Point2d(new_width1,new_height2),Point2d(m_offset.x , m_offset.y+ new_height1),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-     //  std::cout<<"PhysicTile::m_fullness = MIXTE, Tile1 : size"<<new_width2<<" "<<new_height2<<" m_offset "<<m_offset.x + new_width1<<" "<< m_offset.y+ new_height1<<std::endl;
-     m_physic_tiles[3] = new PhysicTile(Point2d(new_width2,new_height2),Point2d(m_offset.x + new_width1, m_offset.y+ new_height1),m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
-
-
-     // Group some physic tile together if it's possible
-     if (m_physic_tiles[0]->m_fullness == FULL &&
-         m_physic_tiles[1]->m_fullness == FULL &&
-         m_physic_tiles[2]->m_fullness == FULL) {
-
-       //std::cout<<"PhysicTile::m_fullness regroup 0&1&2" << std::endl;
-
-       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
-       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
-       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
-       delete m_physic_tiles[1];
-       m_physic_tiles[1] = NULL;
-       delete m_physic_tiles[2];
-       m_physic_tiles[2] = NULL;
-
-       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-       PhysicalPolygon* shape = new PhysicalPolygon();
-       shape->SetBody(m_parent_tile->GetBody());
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-       shape->SetFriction(GROUND_FRICTION);
-
-       b2FilterData filter_data;
-       filter_data.categoryBits = 0x000B;
-       filter_data.maskBits = 0xFFFF;
-       shape->SetFilter(filter_data);
-
-       shape->SetMass(0);
-       shape->Generate();
-       delete (m_physic_tiles[0]->m_shape);
-       m_physic_tiles[0]->m_shape = shape;
-
-     } else if (m_physic_tiles[0]->m_fullness == FULL &&
-                m_physic_tiles[2]->m_fullness == FULL &&
-                m_physic_tiles[3]->m_fullness == FULL) {
-
-       //std::cout<<"PhysicTile::m_fullness regroup 0&2&3" << std::endl;
-
-       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
-       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
-       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
-       delete m_physic_tiles[2];
-       m_physic_tiles[2] = NULL;
-       delete m_physic_tiles[3];
-       m_physic_tiles[3] = NULL;
-
-       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-       PhysicalPolygon* shape = new PhysicalPolygon();
-       shape->SetBody(m_parent_tile->GetBody());
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
-
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+  bool is_generation_work = true; // WARNING: is true the right default value ??
+  if (m_level <= 0) {
+    is_generation_work = GeneratePolygone();
+  }
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+  if (m_level > 0 || !is_generation_work) {
+    //Subdivise
+    m_is_subdivided = true;
+    m_is_containing_polygon = false;
+    int new_width1 = m_size.x/2;
+    int new_width2 = m_size.x - new_width1;
+    int new_height1 = m_size.y/2;;
+    int new_height2 = m_size.y - new_height1;
+
+    m_physic_tiles[0] = new PhysicTile(Point2d(new_width1,new_height1),
+				       m_offset,
+				       m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+    m_physic_tiles[1] = new PhysicTile(Point2d(new_width2,new_height1),
+				       Point2d(m_offset.x + new_width1, m_offset.y),
+				       m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
+
+    m_physic_tiles[2] = new PhysicTile(Point2d(new_width1,new_height2),
+				       Point2d(m_offset.x , m_offset.y+ new_height1),
+				       m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
+
+    m_physic_tiles[3] = new PhysicTile(Point2d(new_width2,new_height2),
+				       Point2d(m_offset.x + new_width1, m_offset.y+ new_height1),
+				       m_tile_offset, m_parent_tile, m_parent_physic_tile, m_level -1);
+
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+    // Group some physic tile together if it's possible (WARNING: we must not create concav polygon such as L)
+    if (m_physic_tiles[0]->m_fullness == FULL &&
+	m_physic_tiles[1]->m_fullness == FULL) {
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      //std::cout<<"PhysicTile::m_fullness regroup 0&1" << std::endl;
 
-       shape->SetFriction(GROUND_FRICTION);
+      ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+      ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+      delete m_physic_tiles[1];
+      m_physic_tiles[1] = NULL;
 
-       b2FilterData filter_data;
-       filter_data.categoryBits = 0x000B;
-       filter_data.maskBits = 0xFFFF;
-       shape->SetFilter(filter_data);
+      //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
+      PhysicalPolygon* shape = new PhysicalPolygon();
+      shape->SetBody(m_parent_tile->GetBody());
 
-       shape->SetMass(0);
-       shape->Generate();
-       delete (m_physic_tiles[0]->m_shape);
-       m_physic_tiles[0]->m_shape = shape;
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
-     } else if (m_physic_tiles[0]->m_fullness == FULL &&
-                m_physic_tiles[1]->m_fullness == FULL &&
-                m_physic_tiles[3]->m_fullness == FULL) {
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
 
-       //std::cout<<"PhysicTile::m_fullness regroup 0&1&3" << std::endl;
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
 
-       ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[0]->m_is_subdivided);
-       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
-       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
-       delete m_physic_tiles[1];
-       m_physic_tiles[1] = NULL;
-       delete m_physic_tiles[3];
-       m_physic_tiles[3] = NULL;
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
 
-       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-       PhysicalPolygon* shape = new PhysicalPolygon();
-       shape->SetBody(m_parent_tile->GetBody());
+      shape->SetFriction(GROUND_FRICTION);
+
+      b2FilterData filter_data;
+      filter_data.categoryBits = 0x000B;
+      filter_data.maskBits = 0xFFFF;
+      shape->SetFilter(filter_data);
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      shape->SetMass(0);
+      shape->Generate();
+      delete (m_physic_tiles[0]->m_shape);
+      m_physic_tiles[0]->m_shape = shape;
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+    } else if (m_physic_tiles[2]->m_fullness == FULL &&
+	       m_physic_tiles[3]->m_fullness == FULL) {
+      //std::cout<<"PhysicTile::m_fullness regroup 2&3" << std::endl;
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[2]->m_is_subdivided);
+      ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[3]->m_is_subdivided);
+      delete m_physic_tiles[3];
+      m_physic_tiles[3] = NULL;
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
+      PhysicalPolygon* shape = new PhysicalPolygon();
+      shape->SetBody(m_parent_tile->GetBody());
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
 
-       shape->SetFriction(GROUND_FRICTION);
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-       b2FilterData filter_data;
-       filter_data.categoryBits = 0x000B;
-       filter_data.maskBits = 0xFFFF;
-       shape->SetFilter(filter_data);
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-       shape->SetMass(0);
-       shape->Generate();
-       delete (m_physic_tiles[0]->m_shape);
-       m_physic_tiles[0]->m_shape = shape;
+      shape->SetFriction(GROUND_FRICTION);
 
-     } else if (m_physic_tiles[1]->m_fullness == FULL &&
-                m_physic_tiles[2]->m_fullness == FULL &&
-                m_physic_tiles[3]->m_fullness == FULL) {
+      b2FilterData filter_data;
+      filter_data.categoryBits = 0x000B;
+      filter_data.maskBits = 0xFFFF;
+      shape->SetFilter(filter_data);
 
-       //std::cout<<"PhysicTile::m_fullness regroup 1&2&3" << std::endl;
+      shape->SetMass(0);
+      shape->Generate();
+      delete (m_physic_tiles[2]->m_shape);
+      m_physic_tiles[2]->m_shape = shape;
 
-       ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[1]->m_is_subdivided);
-       ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[2]->m_is_subdivided);
-       ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
-       ASSERT(!m_physic_tiles[3]->m_is_subdivided);
-       delete m_physic_tiles[2];
-       m_physic_tiles[2] = NULL;
-       delete m_physic_tiles[3];
-       m_physic_tiles[3] = NULL;
+    } else if (m_physic_tiles[0]->m_fullness == FULL &&
+	       m_physic_tiles[2]->m_fullness == FULL) {
 
-       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-       PhysicalPolygon* shape = new PhysicalPolygon();
-       shape->SetBody(m_parent_tile->GetBody());
+      //std::cout<<"PhysicTile::m_fullness regroup 0&2" << std::endl;
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[0]->m_is_subdivided);
+      ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[2]->m_is_subdivided);
+      delete m_physic_tiles[2];
+      m_physic_tiles[2] = NULL;
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
+      PhysicalPolygon* shape = new PhysicalPolygon();
+      shape->SetBody(m_parent_tile->GetBody());
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                               (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-       shape->SetFriction(GROUND_FRICTION);
+      shape->SetFriction(GROUND_FRICTION);
 
-       b2FilterData filter_data;
-       filter_data.categoryBits = 0x000B;
-       filter_data.maskBits = 0xFFFF;
-       shape->SetFilter(filter_data);
+      b2FilterData filter_data;
+      filter_data.categoryBits = 0x000B;
+      filter_data.maskBits = 0xFFFF;
+      shape->SetFilter(filter_data);
 
-       shape->SetMass(0);
-       shape->Generate();
-       delete (m_physic_tiles[1]->m_shape);
-       m_physic_tiles[1]->m_shape = shape;
+      shape->SetMass(0);
+      shape->Generate();
+      delete (m_physic_tiles[0]->m_shape);
+      m_physic_tiles[0]->m_shape = shape;
 
-     } else {
+    } else if (m_physic_tiles[1]->m_fullness == FULL &&
+	       m_physic_tiles[3]->m_fullness == FULL) {
+      //std::cout<<"PhysicTile::m_fullness regroup 0&2" << std::endl;
 
-       if (m_physic_tiles[0]->m_fullness == FULL &&
-           m_physic_tiles[1]->m_fullness == FULL) {
+      ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[1]->m_is_subdivided);
+      ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
+      ASSERT(!m_physic_tiles[3]->m_is_subdivided);
+      delete m_physic_tiles[3];
+      m_physic_tiles[3] = NULL;
 
-         //std::cout<<"PhysicTile::m_fullness regroup 0&1" << std::endl;
+      //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
+      PhysicalPolygon* shape = new PhysicalPolygon();
+      shape->SetBody(m_parent_tile->GetBody());
 
-         ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[0]->m_is_subdivided);
-         ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[1]->m_is_subdivided);
-         delete m_physic_tiles[1];
-         m_physic_tiles[1] = NULL;
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
-         //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-         PhysicalPolygon* shape = new PhysicalPolygon();
-	 shape->SetBody(m_parent_tile->GetBody());
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
 
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
 
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->SetFriction(GROUND_FRICTION);
 
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      b2FilterData filter_data;
+      filter_data.categoryBits = 0x000B;
+      filter_data.maskBits = 0xFFFF;
+      shape->SetFilter(filter_data);
 
-         shape->SetFriction(GROUND_FRICTION);
-
-         b2FilterData filter_data;
-         filter_data.categoryBits = 0x000B;
-         filter_data.maskBits = 0xFFFF;
-         shape->SetFilter(filter_data);
-
-         shape->SetMass(0);
-         shape->Generate();
-         delete (m_physic_tiles[0]->m_shape);
-         m_physic_tiles[0]->m_shape = shape;
-
-       } else if (m_physic_tiles[2]->m_fullness == FULL &&
-                  m_physic_tiles[3]->m_fullness == FULL) {
-         //std::cout<<"PhysicTile::m_fullness regroup 2&3" << std::endl;
-
-         ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[2]->m_is_subdivided);
-         ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[3]->m_is_subdivided);
-         delete m_physic_tiles[3];
-         m_physic_tiles[3] = NULL;
-
-         //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-         PhysicalPolygon* shape = new PhysicalPolygon();
-	 shape->SetBody(m_parent_tile->GetBody());
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->SetFriction(GROUND_FRICTION);
-
-         b2FilterData filter_data;
-         filter_data.categoryBits = 0x000B;
-         filter_data.maskBits = 0xFFFF;
-         shape->SetFilter(filter_data);
-
-         shape->SetMass(0);
-         shape->Generate();
-         delete (m_physic_tiles[2]->m_shape);
-         m_physic_tiles[2]->m_shape = shape;
-
-       } else if (m_physic_tiles[0]->m_fullness == FULL &&
-                  m_physic_tiles[2]->m_fullness == FULL) {
-         //std::cout<<"PhysicTile::m_fullness regroup 0&2" << std::endl;
-
-         // seems to be buggy...
-
-         ASSERT(m_physic_tiles[0]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[0]->m_is_subdivided);
-         ASSERT(m_physic_tiles[2]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[2]->m_is_subdivided);
-         delete m_physic_tiles[2];
-         m_physic_tiles[2] = NULL;
-
-         //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-         PhysicalPolygon* shape = new PhysicalPolygon();
-	 shape->SetBody(m_parent_tile->GetBody());
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->SetFriction(GROUND_FRICTION);
-
-         b2FilterData filter_data;
-         filter_data.categoryBits = 0x000B;
-         filter_data.maskBits = 0xFFFF;
-         shape->SetFilter(filter_data);
-
-         shape->SetMass(0);
-         shape->Generate();
-         delete (m_physic_tiles[0]->m_shape);
-         m_physic_tiles[0]->m_shape = shape;
-
-       } else if (m_physic_tiles[1]->m_fullness == FULL &&
-                  m_physic_tiles[3]->m_fullness == FULL) {
-         //std::cout<<"PhysicTile::m_fullness regroup 0&2" << std::endl;
-
-         // seems to be buggy...
-
-         ASSERT(m_physic_tiles[1]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[1]->m_is_subdivided);
-         ASSERT(m_physic_tiles[3]->m_is_containing_polygon);
-         ASSERT(!m_physic_tiles[3]->m_is_subdivided);
-         delete m_physic_tiles[3];
-         m_physic_tiles[3] = NULL;
-
-         //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-         PhysicalPolygon* shape = new PhysicalPolygon();
-	 shape->SetBody(m_parent_tile->GetBody());
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-                                 (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
-
-         shape->SetFriction(GROUND_FRICTION);
-
-         b2FilterData filter_data;
-         filter_data.categoryBits = 0x000B;
-         filter_data.maskBits = 0xFFFF;
-         shape->SetFilter(filter_data);
-
-         shape->SetMass(0);
-         shape->Generate();
-         delete (m_physic_tiles[1]->m_shape);
-         m_physic_tiles[1]->m_shape = shape;
-       }
-     }
-   }
-
+      shape->SetMass(0);
+      shape->Generate();
+      delete (m_physic_tiles[1]->m_shape);
+      m_physic_tiles[1]->m_shape = shape;
+    }
+  }
 }
 
 //Home made algorithm
