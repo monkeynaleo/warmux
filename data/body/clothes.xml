@@ -22,8 +22,7 @@
 	<c_member name="jetpack-right"/>
 	&complete_arm-left-righthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="foot-right"/>
+	&feet;
 	<c_member name="body"/>
 	&complete_standard-head;
 	<c_member name="belt"/>
@@ -38,8 +37,7 @@
 	<c_member name="jetpack-right"/>
 	&complete_arm-left-righthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="foot-right"/>
+	&feet;
 	<c_member name="body"/>
 	&complete_standard-head;
 	<c_member name="belt"/>
@@ -50,16 +48,9 @@
 <clothe name="helmet">
 	&complete_arm-left-lefthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	&standard_eyes;
+	&feet;
+	&complete_body-tail;
+	&complete_skinhead;
 	&complete_arm-right-lefthanded;
 	<c_member name="helmet"/>
 </clothe>
@@ -67,9 +58,8 @@
 <!-- ###### Animation Yoyo ###### -->
 <clothe name="animation0">
 	&complete_arm-left-lefthanded;
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
+	&feet;
+<c_member name="tail"/>
 	<c_member name="back"/>
 	<c_member name="body"/>
 	&complete_standard-head;
@@ -81,11 +71,8 @@
 <clothe name="animation2">
 	&complete_arm-left-lefthanded;
 	<c_member name="hula"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
+	&feet;
+	&complete_body-tail;
 	&complete_standard-head;
 	&complete_arm-right-lefthanded;
 	<c_member name="hoop"/>
@@ -96,12 +83,9 @@
 	<c_member name="c2"/>
 	&complete_arm-left-lefthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	&complete_withhat-head;
+	&feet;
+	&complete_body-tail;
+	&complete_face;
 	<c_member name="construct"/>
 	&complete_arm-right-lefthanded;
 </clothe>
@@ -110,12 +94,9 @@
 	<c_member name="c2"/>
 	&complete_arm-left-lefthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	&complete_withhat-head;
+	&feet;
+	&complete_body-tail;
+	&complete_face;
 	<c_member name="construct"/>
 	&complete_arm-right-lefthanded;
 </clothe>
@@ -123,13 +104,10 @@
 <!-- ###### weapon-baseball ###### -->
 <clothe name="weapon-baseball">
 	&complete_arm-left-righthanded;
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
+	&feet;
+	&complete_body-tail;
 	<c_member name="baseball_tshirt"/>
-	&complete_withhat-head;
+	&complete_face;
 	<c_member name="baseball_cap"/>
 	<c_member name="weapon"/>
 	&complete_arm-right-righthanded;
@@ -139,12 +117,9 @@
 <clothe name="weapon-footbomb">
 	<c_member name="foothelmet2"/>
 	&complete_arm-left-righthanded;
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	&complete_withhat-head;
+	&feet;
+	&complete_body-tail;
+	&complete_face;
 	<c_member name="foothelmet1"/>
 	<c_member name="weapon"/>
 	&complete_arm-right-righthanded;
@@ -154,12 +129,9 @@
 <clothe name="weapon-gun">
 	&complete_arm-left-lefthanded;
 	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	&complete_withhat-head;
+	&feet;
+	&complete_body-tail;
+	&complete_face;
 	<c_member name="belt"/>
 	<c_member name="hat"/>
 	&complete_arm-right-lefthanded;

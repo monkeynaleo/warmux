@@ -1,9 +1,0 @@
-&complete_arm-left-lefthanded;
-<c_member name="weapon"/>
-<c_member name="foot-left"/>
-<c_member name="tail"/>
-<c_member name="foot-right"/>
-<c_member name="back"/>
-<c_member name="body"/>
-&complete_standard-head;
-&complete_arm-right-lefthanded;
