@@ -160,6 +160,8 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
       if (i > 8) {
 	fprintf(stderr, "You cannot set more than 8 points for a polygon!\n");
+	ASSERT(false);
+
 	delete polygon;
 	return NULL;
       }
@@ -172,12 +174,22 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
       if (!r) {
 	fprintf(stderr, "Invalid point definition!\n");
+	ASSERT(false);
+
 	delete polygon;
 	return NULL;
       }
 
 
       polygon->AddPoint(Point2d(double(x)/PIXEL_PER_METER, double(y)/PIXEL_PER_METER));
+    }
+
+    if (!polygon->IsConvex()) {
+      fprintf(stderr, "ERROR: PhysicalPolygon %s is not convex!\n", shape_name.c_str());
+      ASSERT(false);
+
+      delete polygon;
+      return NULL;
     }
 
     shape = polygon;
@@ -190,7 +202,6 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 }
 // =============================================================================
 
-#ifdef DEBUG
 static bool is_ccw(const std::vector<Point2d> P, int i, int j, int k)
 {
   bool r;
@@ -203,29 +214,6 @@ static bool is_ccw(const std::vector<Point2d> P, int i, int j, int k)
   r = (a*d - b*c <= 0); // true if points i, j, k are counterclockwise
   return r;
 }
-
-static bool check_polygon_is_convex(const std::vector<Point2d>& point_list)
-{
-  ASSERT(point_list.size() >= 3);
-
-  if (point_list.size() == 3)
-    return true;
-
-  bool ccw = is_ccw(point_list, point_list.size()-1, 0, 1);
-  bool ccw2;
-  for (uint i = 0; i < point_list.size() - 2; i++) {
-    ccw2 = is_ccw(point_list, i, i+1, i+2);
-    if (ccw != ccw2)
-      return false;
-    ccw = ccw2;
-  }
-  ccw2 = is_ccw(point_list, point_list.size()-2, point_list.size()-1, 0);
-  if (ccw != ccw2)
-    return false;
-
-  return true;
-}
-#endif
 
 /////////////////////////////////
 // PhysicalPolygon
@@ -240,6 +228,28 @@ void PhysicalPolygon::AddPoint(Point2d point)
   m_point_list.push_back(point);
 }
 
+bool PhysicalPolygon::IsConvex()
+{
+  ASSERT(m_point_list.size() >= 3);
+
+  if (m_point_list.size() == 3)
+    return true;
+
+  bool ccw = is_ccw(m_point_list, m_point_list.size()-1, 0, 1);
+  bool ccw2;
+  for (uint i = 0; i < m_point_list.size() - 2; i++) {
+    ccw2 = is_ccw(m_point_list, i, i+1, i+2);
+    if (ccw != ccw2)
+      return false;
+    ccw = ccw2;
+  }
+  ccw2 = is_ccw(m_point_list, m_point_list.size()-2, m_point_list.size()-1, 0);
+  if (ccw != ccw2)
+    return false;
+
+  return true;
+}
+
 void PhysicalPolygon::Generate()
 {
   if (m_shape) {
@@ -248,7 +258,7 @@ void PhysicalPolygon::Generate()
   }
 
 #ifdef DEBUG
-  if (!check_polygon_is_convex(m_point_list)) {
+  if (!IsConvex()) {
     fprintf(stderr, "ERROR: PhysicalPolygon %s is not convex!\n", GetName().c_str());
     ASSERT(false);
   }

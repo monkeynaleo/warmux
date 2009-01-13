@@ -99,6 +99,10 @@ public:
   PhysicalPolygon();
   void AddPoint(Point2d point);
   void Clear();
+
+  // Box2D support only convex polygons
+  bool IsConvex();
+
   virtual void Generate();
   virtual double GetCurrentWidth() const;
   virtual double GetCurrentHeight() const;
