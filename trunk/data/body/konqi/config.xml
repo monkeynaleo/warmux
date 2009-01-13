@@ -27,10 +27,6 @@
 ]>
 
 <resources>
-	<author>
-		<name>yeKcim</name>
-		<email>yekcim AT crocobox DOT org</email>
-	</author>
 	&alias;
 	&skeletons;
 	&clothes;
