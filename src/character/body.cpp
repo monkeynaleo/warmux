@@ -38,7 +38,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-Body::Body(const xmlNode* xml, const Profile* res):
+Body::Body(const xmlNode* xml, const std::string& main_folder):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -59,28 +59,36 @@ Body::Body(const xmlNode* xml, const Profile* res):
   need_rebuild(false),
   owner(NULL)
 {
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "sprite");
+  const xmlNode *skeletons = XmlReader::GetMarker(xml, "skeletons");
+  ASSERT(skeletons);
+
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
   xmlNodeArray::const_iterator it;
 
   // Load members
-  MSG_DEBUG("body", "Found %i sprites\n", nodes.size());
+  MSG_DEBUG("body", "Found %i sprites", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
     std::string name;
     XmlReader::ReadStringAttr(*it, "name", name);
 
-    Member* member = new Member(*it, res);
-    if (members_lst.find(name) != members_lst.end())
+    MSG_DEBUG("body", "Loading member %s", name.c_str());
+    Member* member = new Member(*it, main_folder);
+    if (members_lst.find(name) != members_lst.end()) {
       std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
-    else
+      ASSERT(false);
+    } else
       members_lst[name] = member;
   }
 
   members_lst["weapon"] = weapon_member;
 
   // Load clothes
-  nodes = XmlReader::GetNamedChildren(xml, "clothe");
-  MSG_DEBUG("body", "Found %i clothes\n", nodes.size());
+  const xmlNode *clothes = XmlReader::GetMarker(xml, "clothes");
+  ASSERT(clothes);
+
+  nodes = XmlReader::GetNamedChildren(clothes, "clothe");
+  MSG_DEBUG("body", "Found %i clothes", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
     std::string name;
@@ -94,9 +102,12 @@ Body::Body(const xmlNode* xml, const Profile* res):
   }
 
   // Load movements alias
+  const xmlNode *aliases = XmlReader::GetMarker(xml, "aliases");
+  ASSERT(aliases);
+
   std::map<std::string, std::string> mvt_alias;
-  nodes = XmlReader::GetNamedChildren(xml, "alias");
-  MSG_DEBUG("body", "Found %i aliases\n", nodes.size());
+  nodes = XmlReader::GetNamedChildren(aliases, "alias");
+  MSG_DEBUG("body", "Found %i aliases", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
     std::string mvt, corresp;
@@ -107,8 +118,11 @@ Body::Body(const xmlNode* xml, const Profile* res):
   }
 
   // Load movements
-  nodes = XmlReader::GetNamedChildren(xml, "movement");
-  MSG_DEBUG("body", "Found %i movements\n", nodes.size());
+  const xmlNode *movements = XmlReader::GetMarker(xml, "movements");
+  ASSERT(movements);
+
+  nodes = XmlReader::GetNamedChildren(movements, "movement");
+  MSG_DEBUG("body", "Found %i movements", nodes.size());
   for (it = nodes.begin(); it != nodes.end(); ++it)
   {
     std::string name;

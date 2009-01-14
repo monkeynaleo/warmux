@@ -210,7 +210,7 @@ const xmlNode*  ResourceManager::GetElement( const Profile *profile, const std::
 {
   const xmlNode* elem = profile->doc->Access(profile->doc->GetRoot(), resource_type, resource_name);
 
-  if(elem == NULL) {
+  if (elem == NULL) {
     std::string r_name = resource_name;
     const xmlNode* cur_elem = profile->doc->GetRoot();
 
@@ -218,7 +218,7 @@ const xmlNode*  ResourceManager::GetElement( const Profile *profile, const std::
       cur_elem = profile->doc->Access(cur_elem, "section", r_name.substr(0, r_name.find("/")));
       r_name = r_name.substr( r_name.find("/") + 1, r_name.length());
     }
-    if(cur_elem)
+    if (cur_elem)
       elem = profile->doc->Access(cur_elem, resource_type, r_name);
   }
   return elem;
@@ -245,16 +245,22 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string& r
 Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& resource_name) const
 {
   const xmlNode* elem_sprite = GetElement(profile, "sprite", resource_name);
-  if(elem_sprite == NULL)
-    Error("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);;
+  if (elem_sprite == NULL)
+    Error("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);
 
-  const xmlNode* elem_image = profile->doc->GetMarker(elem_sprite, "image");
+  return LoadSprite(elem_sprite, resource_name, profile->relative_path);
+}
+
+Sprite *ResourceManager::LoadSprite(const xmlNode* elem_sprite, const std::string& resource_name,
+				    const std::string& main_folder) const
+{
+  const xmlNode* elem_image = XmlReader::GetMarker(elem_sprite, "image");
 
   if(elem_image == NULL)
     Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
   std::string image_filename;
-  if (!profile->doc->ReadStringAttr(elem_image, "file", image_filename) )
+  if (!XmlReader::ReadStringAttr(elem_image, "file", image_filename) )
     Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
   // TODO load more properties in xml : alpha, colorkey....
@@ -263,12 +269,12 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
   bool alpha = true;
   Sprite *sprite = NULL;
 
-  const xmlNode* elem_grid = profile->doc->GetMarker(elem_image, "grid");
+  const xmlNode* elem_grid = XmlReader::GetMarker(elem_image, "grid");
 
   if ( elem_grid == NULL ) {
     ASSERT(resource_name != "barrel");
     // No grid element, Load the Sprite like a normal image
-    Surface surface = LoadImage(profile->relative_path+image_filename, alpha);
+    Surface surface = LoadImage(main_folder+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init(surface, surface.GetSize(), 1, 1);
   } else {
@@ -277,7 +283,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
     int nb_frames_y = 0;
     std::string size;
 
-    if(!profile->doc->ReadStringAttr(elem_grid, "size", size))
+    if(!XmlReader::ReadStringAttr(elem_grid, "size", size))
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute size");
 
     if(size.find(",") != size.npos) {
@@ -287,7 +293,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
 
     std::string array;
-    if(!profile->doc->ReadStringAttr( elem_grid, "array", array))
+    if(!XmlReader::ReadStringAttr( elem_grid, "array", array))
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute array");
 
     if(array.find(",") != array.npos) {
@@ -300,21 +306,21 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
     } else
       Error("ResourceManager: can't load (sprite) resource "+resource_name);
 
-    Surface surface = LoadImage(profile->relative_path+image_filename, alpha);
+    Surface surface = LoadImage(main_folder+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init(surface, frameSize, nb_frames_x, nb_frames_y);
   }
 
   ASSERT(sprite != NULL);
 
-  const xmlNode* elem = profile->doc->GetMarker(elem_sprite, "animation");
+  const xmlNode* elem = XmlReader::GetMarker(elem_sprite, "animation");
   if ( elem != NULL ) {
     std::string str;
     // Set the frame speed
-    if(profile->doc->ReadStringAttr(elem, "speed", str))
+    if(XmlReader::ReadStringAttr(elem, "speed", str))
       sprite->SetFrameSpeed(atoi(str.c_str()));
 
-    if(profile->doc->ReadStringAttr(elem, "loop_mode", str)) {
+    if(XmlReader::ReadStringAttr(elem, "loop_mode", str)) {
       bool loop_value;
       if(str2bool(str, loop_value))
         sprite->animation.SetLoopMode(loop_value);
@@ -325,12 +331,12 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& r
         std::cerr << "Unrecognized xml option loop_mode=\"" << str << "\" in resource " << resource_name;
     }
 
-    if(profile->doc->ReadStringAttr(elem, "loop_wait", str))
+    if(XmlReader::ReadStringAttr(elem, "loop_wait", str))
     {
         sprite->animation.SetLoopWait(atoi(str.c_str()));
     }
 
-    if(profile->doc->ReadStringAttr(elem, "loop_wait_random", str))
+    if(XmlReader::ReadStringAttr(elem, "loop_wait_random", str))
     {
         sprite->animation.SetLoopWaitRandom(atoi(str.c_str()));
     }
