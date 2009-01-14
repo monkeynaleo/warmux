@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources SYSTEM "body.dtd">
+
+<aliases>
+
+
 <alias movement="weapon-riot_bomb-end-shoot" correspond_to="weapon-bazooka-end-shoot"/>
 <alias movement="weapon-riot_bomb-select" correspond_to="weapon-bazooka-select"/>
 <alias movement="weapon-automatic_bazooka-select" correspond_to="weapon-bazooka-select"/>
@@ -20,3 +26,6 @@
 <alias movement="weapon-flamethrower-select" correspond_to="weapon-gun-select"/>
 <alias movement="fly-black" correspond_to="fly"/>
 <alias movement="weapon-polecatlauncher-select" correspond_to="weapon-gnulauncher-select"/>
+
+
+</aliases>
