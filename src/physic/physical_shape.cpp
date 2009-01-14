@@ -88,9 +88,37 @@ const std::string &PhysicalShape::GetName() const
 {
   return m_name;
 }
+
 const b2Shape *PhysicalShape::GetShape() const
 {
   return m_shape;
+}
+
+Point2d PhysicalShape::PosWithRotation(const b2Vec2& point) const
+{
+  if (m_body->GetAngle() == 0)
+    return Point2d(point.x + m_body->GetPosition().x,
+		   point.y + m_body->GetPosition().y);
+
+  Point2d p;
+
+  p.x = point.x * cos(-m_body->GetAngle())
+    + point.y  * sin(-m_body->GetAngle())
+    + m_body->GetPosition().x;
+
+  p.y =  -point.x * sin(-m_body->GetAngle())
+    + point.y * cos(-m_body->GetAngle())
+    + m_body->GetPosition().y;
+
+  printf("Body pos %s: %f\t %f - angle: %f\n"
+	 "original point: %f \t %f\n"
+	 "point rotated: %f \t %f\n\n",
+	 GetName().c_str(),
+	 m_body->GetPosition().x, m_body->GetPosition().y, m_body->GetAngle(),
+	 point.x, point.y,
+	 p.x, p.y);
+
+  return p;
 }
 
 // =============================================================================
@@ -301,15 +329,16 @@ double PhysicalPolygon::GetCurrentMinX() const
   b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
   ASSERT(polygon->GetVertexCount() > 0);
 
-  double minx = (polygon->GetVertices())[0].x;
+  double minx = PosWithRotation(polygon->GetVertices()[0]).x;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].x < minx)
-      minx = (polygon->GetVertices())[i].x;
+    double _x = PosWithRotation(polygon->GetVertices()[i]).x;
+    if (_x < minx)
+      minx = _x;
   }
 
-  return m_body->GetPosition().x + minx;
+  return minx;
 }
 
 double PhysicalPolygon::GetCurrentMaxX() const
@@ -320,15 +349,16 @@ double PhysicalPolygon::GetCurrentMaxX() const
 
   ASSERT(polygon->GetVertexCount() > 0);
 
-  double maxx = (polygon->GetVertices())[0].x;
+  double maxx = PosWithRotation(polygon->GetVertices()[0]).x;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].x > maxx)
-      maxx = (polygon->GetVertices())[i].x;
+    double _x = PosWithRotation(polygon->GetVertices()[i]).x;
+    if (_x > maxx)
+      maxx = _x;
   }
 
-  return m_body->GetPosition().x + maxx;
+  return maxx;
 }
 
 double PhysicalPolygon::GetCurrentMinY() const
@@ -339,15 +369,16 @@ double PhysicalPolygon::GetCurrentMinY() const
 
   ASSERT(polygon->GetVertexCount() > 0);
 
-  double miny = (polygon->GetVertices())[0].y;
+  double miny = PosWithRotation(polygon->GetVertices()[0]).y;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].y < miny)
-      miny = (polygon->GetVertices())[i].y;
+    double _y = PosWithRotation(polygon->GetVertices()[i]).y;
+    if (_y < miny)
+      miny = _y;
   }
 
-  return m_body->GetPosition().y + miny;
+  return miny;
 }
 
 double PhysicalPolygon::GetCurrentMaxY() const
@@ -358,15 +389,16 @@ double PhysicalPolygon::GetCurrentMaxY() const
 
   ASSERT(polygon->GetVertexCount() > 0);
 
-  double maxy = (polygon->GetVertices())[0].y;
+  double maxy = PosWithRotation(polygon->GetVertices()[0]).y;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].y > maxy)
-      maxy = (polygon->GetVertices())[i].y;
+    double _y = (polygon->GetVertices()[i]).y;
+    if (_y > maxy)
+      maxy = _y;
   }
 
-  return m_body->GetPosition().y + maxy;
+  return maxy;
 }
 
 double PhysicalPolygon::GetCurrentWidth() const
@@ -378,16 +410,18 @@ double PhysicalPolygon::GetCurrentWidth() const
   ASSERT(polygon->GetVertexCount() > 0);
 
   double width = 0;
-  double minx = (polygon->GetVertices())[0].x;
-  double maxx = (polygon->GetVertices())[0].x;
+  double minx = PosWithRotation(polygon->GetVertices()[0]).x;
+  double maxx = minx;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].x > maxx)
-      maxx = (polygon->GetVertices())[i].x;
+    double _x = PosWithRotation(polygon->GetVertices()[i]).x;
 
-    if ((polygon->GetVertices())[i].x < minx)
-      minx = (polygon->GetVertices())[i].x;
+    if (_x > maxx)
+      maxx = _x;
+
+    if (_x < minx)
+      minx = _x;
   }
   width = maxx - minx;
   return width;
@@ -402,16 +436,18 @@ double PhysicalPolygon::GetCurrentHeight() const
   ASSERT(polygon->GetVertexCount() > 0);
 
   double height = 0;
-  double miny = (polygon->GetVertices())[0].y;
-  double maxy = (polygon->GetVertices())[0].y;
+  double miny = (polygon->GetVertices()[0]).y;
+  double maxy = (polygon->GetVertices()[0]).y;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    if ((polygon->GetVertices())[i].y > maxy)
-      maxy = (polygon->GetVertices())[i].y;
+    double _y = PosWithRotation(polygon->GetVertices()[i]).y;
 
-    if ((polygon->GetVertices())[i].y < miny)
-      miny = (polygon->GetVertices())[i].y;
+    if (_y > maxy)
+      maxy = _y;
+
+    if (_y < miny)
+      miny = _y;
   }
   height = maxy - miny;
   return height;

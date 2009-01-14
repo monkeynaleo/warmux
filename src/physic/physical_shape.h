@@ -45,7 +45,7 @@ protected:
   double m_friction;
   double m_density;
   std::string m_name;
-
+  Point2d PosWithRotation(const b2Vec2& point) const;
 
 public:
   PhysicalShape();
