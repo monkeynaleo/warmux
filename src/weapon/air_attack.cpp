@@ -34,7 +34,6 @@
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
-
 #include "tool/resource_manager.h"
 #include "tool/random.h"
 #include "tool/xml_document.h"
@@ -143,7 +142,6 @@ void Plane::DropBomb()
 
   int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
-  //int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
   speed_vector.SetValues(speed_vector.x + fx/30.0, 0);
   instance->SetSpeedXY(speed_vector);
