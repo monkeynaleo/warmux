@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources [
+<!DOCTYPE clothes [
 
 <!ENTITY complete_arm-left-righthanded "<c_member name='arm-left'/><c_member name='arm2-left'/><c_member name='arm3-left-R'/>">
 <!ENTITY complete_arm-left-lefthanded "<c_member name='arm-left'/><c_member name='arm2-left'/><c_member name='arm3-left-L'/>">
