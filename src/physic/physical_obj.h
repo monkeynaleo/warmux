@@ -142,7 +142,6 @@ public:
   double GetPhysX() const;
   double GetPhysY() const;
   Point2d GetPhysXY() const;
-  Point2d GetPos() const;
 
   ///////////////////
   // Speed
