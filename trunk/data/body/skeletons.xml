@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE skeletons [
-<!ENTITY c-o "../all_skins_compatible_-_clothes_and_objects/">
+<!ENTITY aso "../all_skins_objects/">
 
 ]>
 
@@ -26,13 +26,13 @@
 
 <!-- ###### Hoop (foreground part) ###### -->
 <sprite name="hoop" type="hoop">
-	<image file="&c-o;hoop.png"/>
+	<image file="&aso;hoop.png"/>
 	<anchor dx="18" dy="3"/>
 </sprite>
 
 <!-- ###### Hula (foreground part) ###### -->
 <sprite name="hula" type="hula">
-	<image file="&c-o;hula.png"/>
+	<image file="&aso;hula.png"/>
 	<anchor dx="18" dy="6"/>
 </sprite>
 
@@ -50,7 +50,7 @@
 
 <!-- ###### Back ###### -->
 <sprite name="baseball_tshirt" type="baseball_tshirt">
-	<image file="&c-o;baseball_tshirt.png"/>
+	<image file="&aso;baseball_tshirt.png"/>
 	<anchor dx="9" dy="16"/>
 </sprite>
 
@@ -104,7 +104,7 @@
 
 <!-- ###### Hair ###### -->
 <sprite name="hat" type="hat">
-	<image file="&c-o;hat.png"/>
+	<image file="&aso;hat.png"/>
 	<anchor dx="14" dy="12"/>
 </sprite>
 
@@ -188,19 +188,19 @@
 
 <!-- ###### Helmet ###### -->
 <sprite name="helmet" type="helmet">
-	<image file="&c-o;helmet.png"/>
+	<image file="&aso;helmet.png"/>
 	<anchor dx="15" dy="15"/>
 </sprite>
 
 <!-- ###### baseball_cap ###### -->
 <sprite name="baseball_cap" type="baseball_cap">
-	<image file="&c-o;baseball_cap.png"/>
+	<image file="&aso;baseball_cap.png"/>
 	<anchor dx="13" dy="12"/>
 </sprite>
 
 <!-- ###### Yoyo ###### -->
 <sprite name="yoyo" type="yoyo" go_through_ground="true">
-	<image file="&c-o;yoyo.png">
+	<image file="&aso;yoyo.png">
 		<grid pos="0,0" size="32,42" array="36,1"/>
 	</image>
 	<anchor dx="29" dy="25"/>
@@ -370,55 +370,55 @@
 
 <!-- ###### Construct ###### -->
 <sprite name="construct" type="construct">
-	<image file="&c-o;c1.png"/>
+	<image file="&aso;c1.png"/>
 	<anchor dx="17" dy="12"/>
 	<attached member_type="c2" frame="*" dx="17" dy="12"/>
 </sprite>
 
 <sprite name="c2" type="c2">
-	<image file="&c-o;c2.png"/>
+	<image file="&aso;c2.png"/>
 	<anchor dx="17" dy="12"/>
 </sprite>
 
 <!-- ###### Foothelmet ###### -->
 <sprite name="foothelmet1" type="foothelmet1">
-	<image file="&c-o;foothelmet1.png"/>
+	<image file="&aso;foothelmet1.png"/>
 	<anchor dx="13" dy="14"/>
 	<attached member_type="foothelmet2" frame="*" dx="15" dy="15"/>
 </sprite>
 
 <sprite name="foothelmet2" type="foothelmet2">
-	<image file="&c-o;foothelmet2.png"/>
+	<image file="&aso;foothelmet2.png"/>
 	<anchor dx="13" dy="14"/>
 </sprite>
 
 <!-- ###### Belt ###### -->
 <sprite name="belt" type="belt">
-	<image file="&c-o;belt.png"/>
+	<image file="&aso;belt.png"/>
 	<anchor dx="10" dy="4"/>
 	<attached member_type="jetpack-left" frame="*" dx="9" dy="-5"/>
 	<attached member_type="jetpack-right" frame="*" dx="-1" dy="-3"/>
 </sprite>
 
 <sprite name="jetpack-left" type="jetpack-left">
-	<image file="&c-o;jetpack.png"/>
+	<image file="&aso;jetpack.png"/>
 	<anchor dx="5" dy="11"/>
 	<attached member_type="jetpack-left-fire" frame="*" dx="4" dy="5"/>
 </sprite>
 
 <sprite name="jetpack-left-fire" type="jetpack-left-fire">
-	<image file="&c-o;jetpack-fire.png"/>
+	<image file="&aso;jetpack-fire.png"/>
 	<anchor dx="5" dy="1"/>
 </sprite>
 
 <sprite name="jetpack-right" type="jetpack-right">
-	<image file="&c-o;jetpack.png"/>
+	<image file="&aso;jetpack.png"/>
 	<anchor dx="5" dy="11"/>
 	<attached member_type="jetpack-right-fire" frame="*" dx="4" dy="5"/>
 </sprite>
 
 <sprite name="jetpack-right-fire" type="jetpack-right-fire">
-	<image file="&c-o;jetpack-fire.png"/>
+	<image file="&aso;jetpack-fire.png"/>
 	<anchor dx="5" dy="1"/>
 </sprite>
 
