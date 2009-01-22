@@ -110,13 +110,13 @@ Point2d PhysicalShape::PosWithRotation(const b2Vec2& point) const
     + point.y * cos(-m_body->GetAngle())
     + m_body->GetPosition().y;
 
-  printf("Body pos %s: %f\t %f - angle: %f\n"
-	 "original point: %f \t %f\n"
-	 "point rotated: %f \t %f\n\n",
-	 GetName().c_str(),
-	 m_body->GetPosition().x, m_body->GetPosition().y, m_body->GetAngle(),
-	 point.x, point.y,
-	 p.x, p.y);
+  MSG_DEBUG("shape.rotate", "Body pos %s: %f\t %f - angle: %f\n"
+	    "original point: %f \t %f\n"
+	    "point rotated: %f \t %f\n\n",
+	    GetName().c_str(),
+	    m_body->GetPosition().x, m_body->GetPosition().y, m_body->GetAngle(),
+	    point.x, point.y,
+	    p.x, p.y);
 
   return p;
 }
