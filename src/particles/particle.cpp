@@ -22,12 +22,12 @@
 #include "particles/particle.h"
 #include <SDL.h>
 #include <map>
+#include <WORMUX_point.h>
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
 #include "tool/random.h"
-#include <WORMUX_point.h>
 #include "weapon/explosion.h"
 #include "map/map.h"
 
@@ -45,6 +45,10 @@
 #include "particles/smoke.h"
 #include "particles/star.h"
 #include "particles/water_drop.h"
+
+#ifdef DEBUG
+#include "graphic/colors.h"
+#endif
 
 Particle::Particle(const std::string &name) :
   PhysicalObj(name),
@@ -69,6 +73,11 @@ void Particle::Draw()
 {
   if (m_left_time_to_live > 0) {
     image->Draw(GetPosition());
+#ifdef DEBUG
+    if (IsLOGGING("polygon.particle")) {
+      DrawPolygon(primary_red_color);
+    }
+#endif
   }
 }
 
