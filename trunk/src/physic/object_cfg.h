@@ -28,9 +28,6 @@
 class ObjectConfig
 {
 public:
-  // Masse of the objct
-  double m_mass;
-
   // Wind effect factor on the object. 0 means not affected.
   double m_wind_factor;
 

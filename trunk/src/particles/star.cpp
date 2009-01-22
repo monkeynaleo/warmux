@@ -32,5 +32,5 @@ StarParticle::StarParticle() :
 
   image = ParticleEngine::GetSprite(STAR_spr);
   image->Scale(0.0, 0.0);
-  SetSize( Point2i(1, 1) );
+  SetBasicShape(Point2i(1, 1), GetInitialMass());
 }

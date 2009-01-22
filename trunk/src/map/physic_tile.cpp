@@ -171,7 +171,6 @@ void PhysicTile::GenerateMixte()
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
 
-      shape->SetMass(0);
       shape->Generate();
       delete (m_physic_tiles[0]->m_shape);
       m_physic_tiles[0]->m_shape = shape;
@@ -210,7 +209,6 @@ void PhysicTile::GenerateMixte()
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
 
-      shape->SetMass(0);
       shape->Generate();
       delete (m_physic_tiles[2]->m_shape);
       m_physic_tiles[2]->m_shape = shape;
@@ -250,7 +248,6 @@ void PhysicTile::GenerateMixte()
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
 
-      shape->SetMass(0);
       shape->Generate();
       delete (m_physic_tiles[0]->m_shape);
       m_physic_tiles[0]->m_shape = shape;
@@ -289,7 +286,6 @@ void PhysicTile::GenerateMixte()
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
 
-      shape->SetMass(0);
       shape->Generate();
       delete (m_physic_tiles[1]->m_shape);
       m_physic_tiles[1]->m_shape = shape;
@@ -523,7 +519,6 @@ bool PhysicTile::GeneratePolygone()
     filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
     shape->SetFilter(filter_data);
 
-    shape->SetMass(0);
     shape->Generate();
     m_shape = shape;
 
@@ -597,8 +592,6 @@ void PhysicTile::InitShape()
   filter_data.categoryBits = 0x0004; // Why this is different than upper ??
   filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
   shape->SetFilter(filter_data);
-
-  shape->SetMass(0);
 
   m_shape = shape;
 }

@@ -52,7 +52,7 @@ FireParticle::FireParticle() :
 
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetSize(image->GetSize());
+  SetBasicShape(image->GetSize(), GetInitialMass());
 }
 
 FireParticle::~FireParticle()

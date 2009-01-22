@@ -35,7 +35,7 @@ WaterParticle::WaterParticle() :
 
   image = ParticleEngine::GetSprite(WATER_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetSize(image->GetSize());
+  SetBasicShape(image->GetSize(), GetInitialMass());
 }
 
 WaterParticle::~WaterParticle()

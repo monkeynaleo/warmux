@@ -104,7 +104,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      //SetSize(image->GetSize());
+      SetBasicShape(image->GetSize(), GetInitialMass());
       image->SetAlpha(1.0);
     }
     else
