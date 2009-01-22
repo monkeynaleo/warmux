@@ -53,6 +53,7 @@ void LowGrav::UpdateTranslationStrings()
 
 void LowGrav::p_Deselect()
 {
+  use.Stop();
   ActiveCharacter().ResetConstants();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");
