@@ -85,7 +85,7 @@
   <sound sample="weapon/lowgrav"                 file="weapons/lowgravity.ogg" />
   <sound sample="weapon/polecat_fart"            file="weapons/polecat.ogg" />
   <sound sample="weapon/blowtorch"               file="weapons/flame.ogg" />
-  <sound sample="weapon/syringe"                 file="weapons/syringe.ogg" />  
+  <sound sample="weapon/syringe_shoot"           file="weapons/syringe.ogg" />  
   
   <!-- MISC  -->
   
