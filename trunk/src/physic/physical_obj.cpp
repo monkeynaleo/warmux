@@ -1322,6 +1322,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 #ifdef DEBUG
 #include "map/camera.h"
 #include "graphic/colors.h"
+#include "graphic/text.h"
 #include "graphic/video.h"
 
 void PhysicalObj::DrawPolygon(const Color& color) const
@@ -1338,6 +1339,12 @@ void PhysicalObj::DrawPolygon(const Color& color) const
 		  test_rect.GetSize());
 
   GetMainWindow().RectangleColor(rect, primary_blue_color);
+
+  if (m_body->GetMass()) {
+    std::string txt = Format("%.2f kg", m_body->GetMass());
+    Text mass_text(txt, white_color, Font::FONT_TINY, Font::FONT_NORMAL, false);
+    mass_text.DrawTopLeft(GetPosition() - Camera::GetRef().GetPosition());
+  }
 }
 #endif
 
