@@ -35,7 +35,6 @@ PhysicalShape::PhysicalShape() :
   m_body(NULL),
   m_shape(NULL),
   m_position(0,0),
-  m_mass(1),
   m_friction(0.8f),
   m_density(30),
   m_name("")
@@ -59,9 +58,10 @@ void PhysicalShape::SetFilter(b2FilterData filter)
   m_filter = filter;
 }
 
-void PhysicalShape::SetMass(int mass)
+void PhysicalShape::SetMass(double mass)
 {
-  m_mass = mass;
+  // Compute density from mass and area
+  m_density = mass / Area();
 }
 
 void PhysicalShape::SetFriction(double friction)
@@ -92,6 +92,12 @@ const std::string &PhysicalShape::GetName() const
 const b2Shape *PhysicalShape::GetShape() const
 {
   return m_shape;
+}
+
+// TODO: REMOVE IT IN NEAR FUTURE
+double PhysicalShape::GetMass() const
+{
+  return m_density * Area();
 }
 
 Point2d PhysicalShape::PosWithRotation(const b2Vec2& point) const
@@ -146,7 +152,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
   elem = XmlReader::GetMarker(root_shape, "position");
   if (!elem) {
-    fprintf(stderr, "Fails to read shape position from XML file\n");
+    fprintf(stderr, "Fails to read shape (%s) position from XML file\n", shape_name.c_str());
     return NULL;
   }
 
@@ -156,7 +162,14 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     r = XmlReader::ReadUintAttr(elem, "y", pos_y);
 
   if (!r) {
-    fprintf(stderr, "Fails to read shape position from XML file\n");
+    fprintf(stderr, "Fails to read shape (%s) position from XML file\n", shape_name.c_str());
+    return NULL;
+  }
+
+  double mass;
+  r = XmlReader::ReadDouble(root_shape, "mass", mass);
+  if (!elem) {
+    fprintf(stderr, "Fails to read shape  (%s) mass from XML file\n", shape_name.c_str());
     return NULL;
   }
 
@@ -167,7 +180,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     uint radius;
     r = XmlReader::ReadUint(root_shape, "radius", radius);
     if (!r) {
-      fprintf(stderr, "Fails to read circle radius from XML file\n");
+      fprintf(stderr, "Fails to read circle  (%s) radius from XML file\n", shape_name.c_str());
       return NULL;
     }
 
@@ -187,7 +200,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     for (point = points.begin(); point != points.end(); point++) {
 
       if (i > 8) {
-	fprintf(stderr, "You cannot set more than 8 points for a polygon!\n");
+	fprintf(stderr, "You cannot set more than 8 points for a polygon (%s) !\n", shape_name.c_str());
 	ASSERT(false);
 
 	delete polygon;
@@ -201,7 +214,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 	r = XmlReader::ReadUintAttr(*point, "y", y);
 
       if (!r) {
-	fprintf(stderr, "Invalid point definition!\n");
+	fprintf(stderr, "Invalid point definition (%s) !\n", shape_name.c_str());
 	ASSERT(false);
 
 	delete polygon;
@@ -222,7 +235,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
     shape = polygon;
   }
-
+  shape->SetMass(mass);
   shape->SetName(shape_name);
   shape->SetPosition(Point2d(double(pos_x)/PIXEL_PER_METER, double(pos_y)/PIXEL_PER_METER));
 
@@ -315,6 +328,39 @@ void PhysicalPolygon::Generate()
 
 
   //m_body->SetMass(&massData);
+}
+
+double PhysicalPolygon::Area() const
+{
+  if (m_shape) {
+    b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+    float32 area = 0.0f;
+
+    for (int32 i = 0; i < polygon->GetVertexCount(); i++) {
+      // Triangle vertices.
+      b2Vec2 p1 = polygon->GetVertices()[i];
+      b2Vec2 p2 = i + 1 < polygon->GetVertexCount() ? polygon->GetVertices()[i+1] : polygon->GetVertices()[0];
+
+      float32 D = b2Cross(p1, p2);
+
+      float32 triangleArea = 0.5f * D;
+      area += triangleArea;
+    }
+    return area;
+
+  }
+
+  Point2d pRef(0, 0);
+  double area = 0;
+  for (uint i = 0; i < m_point_list.size(); i++) {
+    Point2d p1 = m_point_list[i];
+    Point2d p2 = i + 1 < m_point_list.size() ? m_point_list[i+1] : m_point_list[0];
+    float32 D = b2Cross(b2Vec2(p1.x, p1.y), b2Vec2(p2.x, p2.y));
+    float32 triangleArea = 0.5f * D;
+    area += triangleArea;
+  }
+  return area;
 }
 
 void PhysicalPolygon::Clear()
@@ -607,6 +653,11 @@ void PhysicalCircle::SetRadius(double radius)
   m_radius = radius;
 }
 
+double PhysicalCircle::Area() const
+{
+  return b2_pi * m_radius * m_radius;
+}
+
 void PhysicalCircle::Generate()
 {
   if (m_shape) {
@@ -624,13 +675,6 @@ void PhysicalCircle::Generate()
   shapeDef.filter.maskBits = m_filter.maskBits;
   shapeDef.filter.groupIndex = m_filter.groupIndex;
   m_shape = m_body->CreateShape(&shapeDef);
-
-  b2MassData massData;
-  massData.mass = m_mass;
-  massData.center.SetZero();
-  massData.I = 1.0f;
-
-  m_body->SetMass(&massData);
 }
 
 double PhysicalCircle::GetCurrentMinX() const

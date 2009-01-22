@@ -37,7 +37,6 @@ ObjectConfig::ObjectConfig()
   m_air_resist_factor = 1.0;
   m_wind_factor = 1.0;
   m_gravity_factor = 1.0;
-  m_mass = 1.0;
 }
 
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
@@ -65,7 +64,6 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   }
 
   ASSERT(elem != NULL);
-  XmlReader::ReadDouble(elem, "mass", m_mass);
   XmlReader::ReadDouble(elem, "wind_factor", m_wind_factor);
   XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);
   XmlReader::ReadDouble(elem, "gravity_factor", m_gravity_factor);

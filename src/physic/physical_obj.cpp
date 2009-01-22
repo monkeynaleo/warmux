@@ -93,7 +93,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->position.Set(0.0f, 4.0f);
 
   m_body_def->fixedRotation = true;
-  m_cfg = Config::GetInstance()->GetObjectConfig(m_name,xml_config);
+  m_cfg = Config::GetInstance()->GetObjectConfig(m_name, xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
   InitShape(xml_config);
@@ -131,8 +131,6 @@ void PhysicalObj::InitShape(const std::string &xml_config)
     PhysicalShape* shape = PhysicalShape::LoadFromXml(*shape_it);
     ASSERT(shape);
 
-    shape->SetMass(GetMass());
-
     b2FilterData filter_data;
     filter_data.categoryBits = 0x0001;
     filter_data.maskBits = 0x0000;
@@ -143,8 +141,17 @@ void PhysicalObj::InitShape(const std::string &xml_config)
   }
 
   if (m_shapes.empty()) {
-    SetSize(Point2i(1,1));
+    double mass = 1.0;
+    XmlReader::ReadDouble(elem, "mass", mass);
+    SetBasicShape(Point2i(1,1), mass);
     return;
+  } else {
+    double mass;
+    bool r = XmlReader::ReadDouble(elem, "mass", mass);
+    if (r)
+      Error(Format("Body (%s) mass defition is forbidden when you define shape(s)", m_name.c_str()));
+
+    ASSERT(!r);
   }
 
   Generate();
@@ -190,20 +197,10 @@ void PhysicalObj::Desactivate()
 void PhysicalObj::GenerateMass()
 {
   if (m_fixed) {
-     b2MassData massData;
-     m_body->SetMass(&massData);
-
+    b2MassData massData;
+    m_body->SetMass(&massData);
   } else {
-
-     if (m_body_def->fixedRotation) {
-       b2MassData massData;
-       massData.mass = m_mass;
-       massData.center.SetZero();
-       m_body->SetMass(&massData);
-
-     } else {
-       m_body->SetMassFromShapes();
-     }
+    m_body->SetMassFromShapes();
   }
 }
 
@@ -395,7 +392,27 @@ double PhysicalObj::GetSpeedAngle() const
   return GetSpeedXY().ComputeAngle();
 }
 
-void PhysicalObj::SetSize(const Point2i &newSize)
+// TODO: REMOVE IT IN NEAR FUTURE
+double PhysicalObj::GetInitialMass() const
+{
+  double mass = 0.0;
+  for (std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
+       it != m_shapes.end();
+       it++) {
+    mass += (*it)->GetMass();
+  }
+
+  return mass;
+}
+
+double PhysicalObj::GetMass() const
+{
+  ASSERT(m_body);
+
+  return m_body->GetMass();
+}
+
+void PhysicalObj::SetBasicShape(const Point2i &newSize, double mass)
 {
   double phys_width = double(newSize.x)/PIXEL_PER_METER;
   double phys_height = double(newSize.y)/PIXEL_PER_METER;
@@ -407,7 +424,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   shape->AddPoint(Point2d(phys_width, 0));
   shape->AddPoint(Point2d(phys_width, phys_height));
   shape->AddPoint(Point2d(0 , phys_height));
-  shape->SetMass(GetMass());
+  shape->SetMass(mass);
 
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
@@ -601,9 +618,6 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push(GetPhysXY());
   a->Push(GetAngle());
 
-  // Mass
-  a->Push(GetMass());
-
   // Speed
   double norm, angle;
   GetSpeed(norm, angle);
@@ -629,9 +643,8 @@ void PhysicalObj::StoreValue(Action *a)
   //  a->Push(m_balancing_damping);
   //  a->Push(m_elasticity_off);
 
-  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
-	    typeid(*this).name(), GetPhysXY().x, GetPhysXY().y, GetMass(),
-	    GetSpeed().x,  GetSpeed().y,GetAngularSpeed());
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(), GetPhysXY().x, GetPhysXY().y, GetSpeed().x, GetSpeed().y, GetAngularSpeed());
 
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
@@ -647,10 +660,6 @@ void PhysicalObj::GetValueFromAction(Action *a)
   SetPhysXY(position);
   double angle = a->PopDouble();
   SetAngle(angle);
-
-  // Mass
-  double mass = a->PopDouble();
-  SetMass(mass);
 
   // Speed
   double norm = a->PopDouble();
@@ -679,9 +688,8 @@ void PhysicalObj::GetValueFromAction(Action *a)
   //  m_balancing_damping  = a->PopDouble();
   //  m_elasticity_off     = !!a->PopInt();
 
-  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - mass: %f - speed x:%f, y:%f, angle:%f",
-	    typeid(*this).name(),  GetPhysXY().x, GetPhysXY().y, GetMass(),
-	    GetSpeed().x, GetSpeed().y, GetAngularSpeed());
+  MSG_DEBUG("physic.sync", "%s now - position x:%f, y:%f - speed x:%f, y:%f, angle:%f",
+	    typeid(*this).name(),  GetPhysXY().x, GetPhysXY().y, GetSpeed().x, GetSpeed().y, GetAngularSpeed());
 
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
@@ -1332,13 +1340,6 @@ void PhysicalObj::DrawPolygon(const Color& color) const
   GetMainWindow().RectangleColor(rect, primary_blue_color);
 }
 #endif
-
-void PhysicalObj::SetMass(double mass)
-{
-  m_mass = mass;
-  Generate();
-}
-
 
 void PhysicalObj::ImpulseXY(const Point2d& vector)
 {

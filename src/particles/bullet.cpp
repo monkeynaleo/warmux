@@ -36,7 +36,7 @@ BulletParticle::BulletParticle() :
 
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
-  SetSize(Point2i(1, 1));
+  SetBasicShape(Point2i(1, 1), GetInitialMass());
 }
 
 void BulletParticle::Refresh()

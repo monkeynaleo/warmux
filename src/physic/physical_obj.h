@@ -163,7 +163,7 @@ public:
   double GetSpeedAngle() const;
 
   // Set/Get size
-  void SetSize(const Point2i &newSize);
+  void SetBasicShape(const Point2i &newSize, double mass);
   int GetWidth() const;
   int GetHeight() const;
   Point2i GetSize() const;
@@ -197,8 +197,10 @@ public:
 
   //----------- Physics related function ----------
 
-  void SetMass(double mass);
-  double GetMass() const { return m_mass; }
+  // TODO: REMOVE IT IN NEAR FUTURE
+  double GetInitialMass() const;
+
+  double GetMass() const;
 
   void SetFixedRotation(bool i_fixed_rotation);
   void SetFixed(bool i_fixed);

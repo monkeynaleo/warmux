@@ -48,10 +48,9 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   // Physic constants
   double mass, wind_factor ;
   //Mass = mass_mean + or - 25%
-  mass = GetMass();
+  mass = GetInitialMass();
   mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
-  SetMass (mass);
-  SetSize( Point2i(20,20) );
+  SetBasicShape(Point2i(20,20), mass);
   wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);

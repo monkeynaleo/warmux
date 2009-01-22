@@ -431,7 +431,6 @@ Rope::Rope():PhysicalObj("rope")
 
   // Shape position is relative to body
   hook_shape->SetRadius(0.5);
-  hook_shape->SetMass(1);
   hook_shape->SetPosition(Point2d(0,0));
   hook_shape->SetFriction(1.2f);
   hook_shape->SetFilter(filter_data);
@@ -598,7 +597,6 @@ RopeNode::RopeNode():PhysicalObj("rope_node")
 
   // Shape position is relative to body
   node_shape->SetRadius(0.1);
-  node_shape->SetMass(0.01);
   node_shape->SetPosition(Point2d(0,0));
   node_shape->SetFriction(1.2f);
   node_shape->SetFilter(filter_data);

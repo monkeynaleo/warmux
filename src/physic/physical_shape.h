@@ -41,7 +41,6 @@ protected:
   b2Body *m_body;
   b2Shape *m_shape;
   Point2d m_position;
-  int m_mass;
   double m_friction;
   double m_density;
   std::string m_name;
@@ -51,11 +50,12 @@ public:
   PhysicalShape();
   virtual ~PhysicalShape();
   virtual void Generate() = 0;
+  virtual double Area() const = 0;
 
   const b2FilterData& GetFilter() const;
   void SetFilter(b2FilterData filter);
   void SetFriction(double friction);
-  void SetMass(int mass);
+  void SetMass(double mass); // compute the density from mass and area
   void SetPosition(Point2d position);
   void SetName(const std::string &name);
 
@@ -82,6 +82,9 @@ public:
   virtual double GetInitialMinY() const = 0;
   virtual double GetInitialMaxY() const = 0;
 
+  // TODO: REMOVE IT IN NEAR FUTURE
+  double GetMass() const;
+
   static PhysicalShape* LoadFromXml(const xmlNode* root_shape);
 
 #ifdef DEBUG
@@ -104,6 +107,8 @@ public:
   bool IsConvex();
 
   virtual void Generate();
+  virtual double Area() const;
+
   virtual double GetCurrentWidth() const;
   virtual double GetCurrentHeight() const;
   virtual double GetInitialWidth() const;
@@ -144,7 +149,10 @@ protected:
 public:
   PhysicalCircle();
   void SetRadius(double radius);
+
   virtual void Generate();
+  virtual double Area() const;
+
   virtual double GetCurrentWidth() const;
   virtual double GetCurrentHeight() const;
   virtual double GetInitialWidth() const;
