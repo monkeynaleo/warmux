@@ -72,10 +72,14 @@ m_last_minimap_redraw(0)
   rounding_style[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_right");
   rounding_style[1][1] = GetResourceManager().LoadImage( res, "interface/rounding_center");
 
+  rounding_style_mask[1][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom");
   rounding_style_mask[0][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_left");
   rounding_style_mask[2][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_right");
+  rounding_style_mask[1][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top");
   rounding_style_mask[0][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_left");
   rounding_style_mask[2][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_right");
+  rounding_style_mask[0][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_left");
+  rounding_style_mask[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_right");
 
   // energy bar
   energy_bar.InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
@@ -451,10 +455,21 @@ void Interface::GenerateStyledBox(Surface & source)
     }
   }
 
+  //Corner
   save_surf.MergeAlphaSurface(rounding_style_mask[0][0],Point2i(0,0));
   save_surf.MergeAlphaSurface(rounding_style_mask[2][0],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,0));
   save_surf.MergeAlphaSurface(rounding_style_mask[0][2],Point2i(0,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
   save_surf.MergeAlphaSurface(rounding_style_mask[2][2],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+
+  //Top
+  save_surf.MergeAlphaSurface(rounding_style_mask[1][0],Point2i(rounding_style_mask[0][0].GetSize().x,0));
+  //Bottom
+  save_surf.MergeAlphaSurface(rounding_style_mask[1][2],Point2i(rounding_style_mask[0][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+  //Left
+  save_surf.MergeAlphaSurface(rounding_style_mask[0][1],Point2i(0,rounding_style_mask[0][0].GetSize().y));
+  //Right
+  save_surf.MergeAlphaSurface(rounding_style_mask[2][1],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,rounding_style_mask[0][0].GetSize().y));
+
 
    source.MergeSurface(save_surf, Point2i(0,0));
 }
