@@ -67,6 +67,11 @@ PhysicalEngine::~PhysicalEngine()
   delete physic_world;
 }
 
+b2World *PhysicalEngine::GetPhysicWorld()
+{
+  return physic_world;
+}
+
 b2Body *PhysicalEngine::GetNewGroundBody()
 {
   b2BodyDef groundBodyDef;

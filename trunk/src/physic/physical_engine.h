@@ -43,6 +43,7 @@ public:
   PhysicalEngine();
   ~PhysicalEngine();
 
+  b2World *GetPhysicWorld();
   b2Body *GetNewGroundBody() ;
   b2Body *AddObject(PhysicalObj *new_obj);
   void RemoveObject(PhysicalObj *obj);
@@ -52,6 +53,8 @@ public:
 
   void AddForce(Force * force);
   void RemoveForce(Force *force);
+
+
 
   typedef enum {ADD,PERSIST,REMOVE} ContactType;
 
