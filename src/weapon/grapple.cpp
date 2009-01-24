@@ -109,10 +109,12 @@ Grapple::p_Shoot()
 {
   ASSERT(m_rope == NULL);
   m_rope = new Rope();
-  m_rope->SetXY(ActiveCharacter().GetPosition());
+  Point2d pos(ActiveCharacter().GetPosition().x,ActiveCharacter().GetPosition().y-10);
+  m_rope->SetXY(pos);
   m_rope->Activate();
   m_initial_angle = ActiveCharacter().GetFiringAngle();
-  m_rope->Impulse(2000, m_initial_angle);
+  m_rope->Impulse(500, m_initial_angle);
+
 
   //m_attaching = true;
   //  m_launch_time = Time::GetInstance()->Read() ;
@@ -145,6 +147,19 @@ Grapple::Refresh()
     ActiveCharacter().UpdatePosition();
     SendActiveCharacterInfo(true);
     }*/
+}
+
+void Grapple::SignalTurnEnd()
+{
+  p_Deselect();
+}
+
+void Grapple::p_Deselect()
+{
+
+ // DetachRope();
+  delete m_rope;
+  m_rope = NULL;
 }
 
 void Grapple::Draw()
@@ -228,6 +243,8 @@ void Grapple::Draw()
 
   }
 */
+
+
 
 // =========================== Keys management
 
@@ -412,7 +429,7 @@ GrappleConfig::LoadXml(const xmlNode* elem)
 Rope::Rope():PhysicalObj("rope")
 {
 
-  for(int i = 0; i< 50 ; i++) {
+  for(int i = 0; i< 70 ; i++) {
     m_rope_nodes.push_back(new RopeNode());
   }
 
@@ -430,9 +447,9 @@ Rope::Rope():PhysicalObj("rope")
   filter_data.groupIndex = -1;
 
   // Shape position is relative to body
-  hook_shape->SetRadius(0.5);
+  hook_shape->SetRadius(0.8);
   hook_shape->SetPosition(Point2d(0,0));
-  hook_shape->SetFriction(1.2f);
+  hook_shape->SetFriction(0.02f);
   hook_shape->SetFilter(filter_data);
   hook_shape->SetName("hook");
 
@@ -448,6 +465,9 @@ Rope::~Rope()
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     delete m_rope_nodes[i];
   }
+  for(unsigned i = 0; i< m_rope_anchor.size() ; i++) {
+    PhysicalEngine::GetInstance()->GetPhysicWorld()->DestroyBody(m_rope_anchor[i]);
+  }
 
 }
 
@@ -455,47 +475,136 @@ void Rope::Activate()
 {
   PhysicalObj::Activate();
 
+  //place nodes for generation
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
-    m_rope_nodes[i]->SetY(GetY());
-    m_rope_nodes[i]->SetX(GetX()+ i*5);
-
+    m_rope_nodes[i]->SetY(GetY() - i*5);
+    m_rope_nodes[i]->SetX(GetX());
     m_rope_nodes[i]->Activate();
   }
 
-  b2RevoluteJointDef jointDef;
-  //jointDef.Initialize(myBody1, myBody2, myBody1->GetWorldCenter());
+  //place hook for generation
+  SetY(GetY() - m_rope_nodes.size()*5  );
 
-  // b2DistanceJointDef jointDef;
-  jointDef.collideConnected = false;
-  // jointDef.dampingRatio = 10.0;
-  for(unsigned i = 1; i< m_rope_nodes.size() ; i++) {
+  //prepare joint template
+  b2BodyDef body_def;
 
-    // jointDef.Initialize(m_rope_nodes[i]->GetBody(), m_rope_nodes[i-1]->GetBody(), m_rope_nodes[i]->GetBody()->GetWorldCenter(), m_rope_nodes[i-1]->GetBody()->GetWorldCenter());
-    jointDef.Initialize(m_rope_nodes[i]->GetBody(), m_rope_nodes[i-1]->GetBody(), m_rope_nodes[i]->GetBody()->GetWorldCenter());
-    PhysicalEngine::GetInstance()->CreateJoint(&jointDef);
 
-  }
+  b2MassData mass;
+  b2RevoluteJointDef joint_def_revolution;
+  joint_def_revolution.collideConnected = false;
 
-  //Attach Hook
-  //jointDef.Initialize(m_rope_nodes[0]->GetBody(), GetBody(), m_rope_nodes[0]->GetBody()->GetWorldCenter(), GetBody()->GetWorldCenter());
-  jointDef.Initialize(m_rope_nodes[0]->GetBody(), GetBody(), m_rope_nodes[0]->GetBody()->GetWorldCenter());
-  PhysicalEngine::GetInstance()->CreateJoint(&jointDef);
+  b2DistanceJointDef joint_def_distance;
+  joint_def_distance.collideConnected = false;
+  joint_def_distance.dampingRatio = 0;
 
-  //Attach character
-  //jointDef.Initialize(m_rope_nodes[m_rope_nodes.size()-1]->GetBody(), ActiveCharacter().PhysicalObj::GetBody(), GetBody()->GetWorldCenter(), ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter());
-  jointDef.Initialize(m_rope_nodes[m_rope_nodes.size()-1]->GetBody(), ActiveCharacter().PhysicalObj::GetBody(), GetBody()->GetWorldCenter());
-  // PhysicalEngine::GetInstance()->CreateJoint(&jointDef);
 
+  b2PrismaticJointDef joint_def_prismatic;
+  joint_def_prismatic.enableLimit = true;
+  joint_def_prismatic.lowerTranslation = 0.1;
+
+  ///////////////////////////
+  //Attach character to nodes
+  b2Body *node_anchor;
+  body_def.position = ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter();
 
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
+    //create anchor
+    node_anchor = PhysicalEngine::GetInstance()->GetPhysicWorld()->CreateBody(&body_def);
+    m_rope_anchor.push_back(node_anchor);
+    //set anchor mass
+    mass.mass = m_rope_nodes[i]->GetBody()->GetMass();
+    mass.I = m_rope_nodes[i]->GetBody()->GetInertia();
+    node_anchor->SetMass(&mass);
 
-    m_rope_nodes[i]->SetY(GetY());
-    m_rope_nodes[i]->SetX(GetX());
+    //attach anchor
+    joint_def_revolution.Initialize(node_anchor, ActiveCharacter().PhysicalObj::GetBody(), ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter() );
+    PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
+
+    //attach prismatic link
+    joint_def_prismatic.Initialize(node_anchor,m_rope_nodes[i]->GetBody(),m_rope_nodes[i]->GetBody()->GetWorldCenter(), b2Vec2(0, 1));
+    joint_def_prismatic.upperTranslation = ( node_anchor->GetWorldCenter().y - m_rope_nodes[i]->GetBody()->GetWorldCenter().y);
+  //  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_prismatic);
+  }
+
+  ///////////////////////////
+  //Attach hook to nodes
+  b2Body *node_hook;
+  body_def.position = GetBody()->GetWorldCenter();
+  joint_def_prismatic.enableLimit = true;
+  for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
+    //create anchor
+    node_hook = PhysicalEngine::GetInstance()->GetPhysicWorld()->CreateBody(&body_def);
+    m_rope_anchor.push_back(node_hook);
+    //set anchor mass
+    mass.mass = m_rope_nodes[i]->GetBody()->GetMass();
+    mass.I = m_rope_nodes[i]->GetBody()->GetInertia();
+    node_hook->SetMass(&mass);
+
+    //attach anchor
+    joint_def_revolution.Initialize(node_hook, GetBody(), GetBody()->GetWorldCenter() );
+  //  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
+
+    //attach prismatic link
+    joint_def_prismatic.Initialize(node_hook,m_rope_nodes[i]->GetBody(),m_rope_nodes[i]->GetBody()->GetWorldCenter(), b2Vec2(0, -1));
+    joint_def_prismatic.upperTranslation = (  m_rope_nodes[i]->GetBody()->GetWorldCenter().y - node_anchor->GetWorldCenter().y);
+  //  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_prismatic);
+  }
+
+  ///////////////////////////
+  //Attach character to hook
+  body_def.position = ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter();
+  //create anchor
+  b2Body *hook_anchor = PhysicalEngine::GetInstance()->GetPhysicWorld()->CreateBody(&body_def);
+  m_rope_anchor.push_back(hook_anchor);
+
+  //set anchor mass
+  mass.mass = GetBody()->GetMass();
+  mass.I = GetBody()->GetInertia();
+  hook_anchor->SetMass(&mass);
+
+
+  //attach anchor
+  joint_def_revolution.Initialize(hook_anchor, ActiveCharacter().PhysicalObj::GetBody(), ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter() );
+  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
+
+  //attach prismatic link
+  joint_def_prismatic.Initialize(hook_anchor,GetBody(),GetBody()->GetWorldCenter(), b2Vec2(0, 1));
+  joint_def_prismatic.upperTranslation = ( hook_anchor->GetWorldCenter().y - GetBody()->GetWorldCenter().y );
+  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_prismatic);
+
+  ///////////////////////
+  // Unify rope
+  for(unsigned i = 1; i< m_rope_nodes.size() ; i++) {
+
+    joint_def_distance.Initialize(m_rope_nodes[i]->GetBody(), m_rope_nodes[i-1]->GetBody(), m_rope_nodes[i]->GetBody()->GetWorldCenter(), m_rope_nodes[i-1]->GetBody()->GetWorldCenter());
+    PhysicalEngine::GetInstance()->CreateJoint(&joint_def_distance);
+    //joint_def_revolution.Initialize(m_rope_nodes[i]->GetBody(), m_rope_nodes[i-1]->GetBody(), m_rope_nodes[i]->GetBody()->GetWorldCenter());
+    //PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
 
   }
 
-  // m_rope_nodes[m_rope_nodes.size()-1]->SetY(ActiveCharacter().GetY());
-  // m_rope_nodes[m_rope_nodes.size()-1]->SetX(ActiveCharacter().GetX());
+  /////////////////////
+  // Attach rope to hook
+  joint_def_distance.Initialize(m_rope_nodes[m_rope_nodes.size()-1]->GetBody(), GetBody(), m_rope_nodes[m_rope_nodes.size()-1]->GetBody()->GetWorldCenter() ,GetBody()->GetWorldCenter());
+  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_distance);
+
+  /////////////////////////
+  // Attach rope to Character
+  joint_def_distance.Initialize(m_rope_nodes[0]->GetBody(), ActiveCharacter().PhysicalObj::GetBody(), m_rope_nodes[0]->GetBody()->GetWorldCenter() ,ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter());
+  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_distance);
+
+
+  ///////////////////
+  // Compact generated rope
+
+  //compact hook
+  SetY(GetY() + m_rope_nodes.size()*5 );
+  //compact nodes
+  for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
+    m_rope_nodes[i]->SetY(GetY());
+    m_rope_nodes[i]->SetX(GetX());
+  }
+
 }
 
 void Rope::Generate()
@@ -573,7 +682,12 @@ void Rope::Draw()
 
 void Rope::SignalGroundCollision(const Point2d&)
 {
-  SetFixed(true);
+  b2RevoluteJointDef joint_def_revolution;
+  joint_def_revolution.collideConnected = false;
+
+  joint_def_revolution.Initialize(PhysicalEngine::GetInstance()->GetPhysicWorld()->GetGroundBody(), GetBody(), GetBody()->GetWorldCenter() );
+  PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
+
 }
 
 
@@ -596,9 +710,9 @@ RopeNode::RopeNode():PhysicalObj("rope_node")
   filter_data.groupIndex = -1;
 
   // Shape position is relative to body
-  node_shape->SetRadius(0.1);
+  node_shape->SetRadius(0.10);
   node_shape->SetPosition(Point2d(0,0));
-  node_shape->SetFriction(1.2f);
+  node_shape->SetFriction(0.01f);
   node_shape->SetFilter(filter_data);
   node_shape->SetName("node");
 

@@ -48,7 +48,7 @@ class Grapple : public Weapon
 
   protected:
     void Refresh();
-    void p_Deselect() {/* DetachRope(); */};
+    void p_Deselect() ;
     bool p_Shoot();
 
 
@@ -63,7 +63,7 @@ class Grapple : public Weapon
 
     virtual void ActionStopUse() {/* DetachRope(); */};
     // force detaching rope if time is out
-    virtual void SignalTurnEnd() { p_Deselect(); };
+    virtual void SignalTurnEnd();
 
 
     void UpdateTranslationStrings();
@@ -134,6 +134,7 @@ protected:
   Sprite* m_hook_sprite;
 
   std::vector<RopeNode *> m_rope_nodes;
+  std::vector<b2Body *> m_rope_anchor;
   bool AttachRope();
   void Refresh() { };
 

@@ -246,6 +246,10 @@ public:
   void SetCollisionModel(bool collides_with_ground,
                          bool collides_with_characters,
                          bool collides_with_objects);
+
+  void SetCollisionGroup(int group);
+  void SetCollisionCategory(int category);
+
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
   void ClearOverlappingObject();
 

@@ -164,6 +164,7 @@ void PhysicalObj::Activate()
     return;
 
   m_body = PhysicalEngine::GetInstance()->AddObject(this);
+  SetAngle(0);
   SetSpeedXY(m_initial_speed);
   Generate();
 }
@@ -1035,6 +1036,21 @@ void PhysicalObj::SignalRebound()
   if (!m_rebound_sound.empty())
     JukeBox::GetInstance()->Play("share", m_rebound_sound) ;
 }
+
+void PhysicalObj::SetCollisionGroup(int group)
+{
+  b2FilterData data = GetCollisionFilter();
+  data.groupIndex = group;
+  SetCollisionFilter(data);
+}
+
+void PhysicalObj::SetCollisionCategory(int category)
+{
+  b2FilterData data = GetCollisionFilter();
+  data.categoryBits = category;
+  SetCollisionFilter(data);
+}
+
 
 void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
