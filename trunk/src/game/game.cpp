@@ -43,6 +43,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
+#include "map/wind.h"
 #include "menu/pause_menu.h"
 #include "menu/results_menu.h"
 #include "network/network.h"
@@ -155,6 +156,7 @@ void Game::UnloadDatas(bool game_finished) const
   GetWorld().FreeMem();
   ActiveMap()->FreeData();
   ObjectsList::GetRef().FreeMem();
+  Wind::GetRef().FreeMem();
   ParticleEngine::Stop();
 
   if (!Network::IsConnected() || !game_finished) {
