@@ -171,7 +171,7 @@ Wind::Wind() : m_val(0), m_nv_val(0), m_last_move(0), m_last_part_mvt(0)
 
 Wind::~Wind()
 {
-  RemoveAllParticles();
+  FreeMem();
 }
 
 double Wind::GetStrength() const
@@ -184,7 +184,7 @@ void Wind::SetVal(long val)
   m_nv_val = val;
 }
 
-void Wind::RemoveAllParticles()
+void Wind::FreeMem()
 {
   iterator it=particles.begin(), end=particles.end();
   while (it != end) {
@@ -200,7 +200,7 @@ void Wind::Reset()
   m_val = m_nv_val = 0;
   Interface::GetInstance()->UpdateWindIndicator(m_val);
 
-  RemoveAllParticles();
+  FreeMem();
 
   if (!Config::GetInstance()->GetDisplayWindParticles())
     return;
