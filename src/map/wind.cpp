@@ -18,24 +18,22 @@
  ******************************************************************************
  *  wind Refresh (you may get cold ;) )
  *****************************************************************************/
+#include <SDL.h>
+#include <WORMUX_debug.h>
 
-#include "map/wind.h"
-#include "map/camera.h"
 #include "game/config.h"
 #include "game/time.h"
+#include "gui/progress_bar.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
+#include "interface/interface.h"
+#include "map/wind.h"
+#include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
-#include <WORMUX_debug.h>
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
-#include "interface/interface.h"
-#include <SDL.h>
-#include "game/config.h"
-#include "graphic/sprite.h"
-#include "gui/progress_bar.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 20;
