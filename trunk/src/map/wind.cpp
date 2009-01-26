@@ -72,7 +72,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   sprite->SetAlpha(scale);
   sprite->SetCurrentFrame(RandomLocal().GetLong(0, sprite->GetFrameCount() - 1));
 
-  if(ActiveMap()->GetWind().need_flip) {
+  if (ActiveMap()->GetWind().need_flip) {
     flipped = new Sprite(*sprite);
     flipped->Scale(-scale, scale);
     flipped->RefreshSurface();
@@ -82,10 +82,10 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
     flipped = NULL;
   }
 
-  if(ActiveMap()->GetWind().rotation_speed != 0.0) {
+  if (ActiveMap()->GetWind().rotation_speed != 0.0) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
-    if(flipped) {
+    if (flipped) {
       flipped->EnableRotationCache(64);
       flipped->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
@@ -96,21 +96,22 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
 WindParticle::~WindParticle()
 {
   delete sprite;
-  if(flipped) delete flipped;
+  if (flipped)
+    delete flipped;
 }
 
 void WindParticle::Refresh()
 {
 
-  if(flipped && GetSpeed().x < 0)
+  if (flipped && GetSpeed().x < 0)
     flipped->Update();
   else
     sprite->Update();
 
   // Rotate the sprite if needed
-  if(ActiveMap()->GetWind().rotation_speed != 0.0)
+  if (ActiveMap()->GetWind().rotation_speed != 0.0)
   {
-    if(flipped && GetSpeed().x < 0)
+    if (flipped && GetSpeed().x < 0)
     {
       float new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
       flipped->SetRotation_rad(new_angle);
@@ -126,23 +127,23 @@ void WindParticle::Refresh()
   int x = GetX();
   int y = GetY();
 
-  if(GetX() > Camera::GetInstance()->GetPositionX() + Camera::GetInstance()->GetSizeX())
+  if (GetX() > Camera::GetInstance()->GetPositionX() + Camera::GetInstance()->GetSizeX())
     x -= Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if(GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
+  if (GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
     x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if(GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY()){
+  if (GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY()){
     y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
     StopMoving();
   }
 
-  if(GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
+  if (GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
     y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
 
   m_alive = ALIVE;
 
-  if (m_alive != ALIVE || x!=GetX() || y!=GetY())
+  if (m_alive != ALIVE || x != GetX() || y != GetY())
   {
     m_alive = ALIVE;
     StartMoving();
@@ -156,7 +157,7 @@ void WindParticle::Refresh()
 void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
-  if(flipped && GetSpeed().x < 0)
+  if (flipped && GetSpeed().x < 0)
     flipped->Draw(GetPosition());
   else
     sprite->Draw(GetPosition());
@@ -233,11 +234,10 @@ void Wind::DrawParticles()
 
 void Wind::Refresh()
 {
-  if(m_last_move + bar_speed < Time::GetInstance()->Read()){
-    if(m_val>m_nv_val)
+  if (m_last_move + bar_speed < Time::GetInstance()->Read()){
+    if (m_val>m_nv_val)
       --m_val;
-    else
-    if(m_val<m_nv_val)
+    else if(m_val<m_nv_val)
       ++m_val;
     m_last_move = Time::GetInstance()->Read();
     Interface::GetInstance()->UpdateWindIndicator(m_val);
