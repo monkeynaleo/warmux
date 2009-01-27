@@ -124,7 +124,7 @@ Grapple::p_Shoot()
 
 
 
-  //   if (TryAttachRope()) JukeBox::GetInstance()->Play("share", "weapon/grapple_attaching");*/
+  //   if (TryAttachRope()) JukeBox::GetInstance()->Play("default", "weapon/grapple_attaching");*/
   return true;
 }
 
@@ -253,7 +253,7 @@ Grapple::HandleKeyPressed_Up(bool shift)
 {
   if (IsInUse())
     {
-      cable_sound.Play("share", "weapon/grapple_cable", -1);
+      cable_sound.Play("default", "weapon/grapple_cable", -1);
       //  GoUp();
     }
   // else
@@ -283,7 +283,7 @@ Grapple::HandleKeyPressed_Down(bool shift)
 {
   if (IsInUse())
     {
-      cable_sound.Play("share", "weapon/grapple_cable", -1);
+      cable_sound.Play("default", "weapon/grapple_cable", -1);
       // GoDown();
     }// else
   ActiveCharacter().HandleKeyPressed_Down(shift);

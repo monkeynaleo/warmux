@@ -65,7 +65,7 @@ bool Baseball::p_Shoot()
   double rayon = 0.0;
   bool end = false;
 
-  JukeBox::GetInstance()->Play ("share","weapon/baseball");
+  JukeBox::GetInstance()->Play ("default","weapon/baseball");
 
   do
   {

@@ -54,7 +54,7 @@ GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
 
 void GunBullet::ShootSound()
 {
-  JukeBox::GetInstance()->Play("share","weapon/gun");
+  JukeBox::GetInstance()->Play("default","weapon/gun");
 }
 
 //-----------------------------------------------------------------------------

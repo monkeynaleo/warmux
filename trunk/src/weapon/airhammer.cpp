@@ -82,7 +82,7 @@ bool Airhammer::p_Shoot()
   //if the sound isn't already playing, play it again.
   select_sound.Stop();
   if (!drill_sound.IsPlaying()) {
-    drill_sound.Play("share","weapon/airhammer", -1);
+    drill_sound.Play("default","weapon/airhammer", -1);
   }
 
   // initiate movement ;-)
@@ -163,7 +163,7 @@ bool Airhammer::IsInUse() const
 
 void Airhammer::p_Select()
 {
-  select_sound.Play("share","weapon/airhammer_select",-1);
+  select_sound.Play("default","weapon/airhammer_select",-1);
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const

@@ -106,14 +106,14 @@ void GameBlitz::RefreshClock()
 
       case PLAYING:
         if (duration <= 1) {
-          JukeBox::GetInstance()->Play("share", "end_turn");
+          JukeBox::GetInstance()->Play("default", "end_turn");
           cur = KillTeam(cur);
           SetState(END_TURN);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
           if (duration <= 10) {
-            JukeBox::GetInstance()->Play("share", "time/bip");
+            JukeBox::GetInstance()->Play("default", "time/bip");
           }
         }
         break;

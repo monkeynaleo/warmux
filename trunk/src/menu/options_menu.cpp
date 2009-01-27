@@ -327,7 +327,7 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
     Config::GetInstance()->SetVolumeMusic(toVolume(volume_music->GetValue()));
   else if (w == volume_effects) {
     Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
-    JukeBox::GetInstance()->Play("share", "menu/clic");
+    JukeBox::GetInstance()->Play("default", "menu/clic");
   }
   else if (w == music_cbox) {
     JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
