@@ -73,11 +73,6 @@ void Particle::Draw()
 {
   if (m_left_time_to_live > 0) {
     image->Draw(GetPosition());
-#ifdef DEBUG
-    if (IsLOGGING("polygon.particle")) {
-      DrawPolygon(primary_red_color);
-    }
-#endif
   }
 }
 
@@ -359,6 +354,11 @@ void ParticleEngine::Draw(bool upper)
   for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it){
     if ( (*Particle_it)->IsOnTop() == upper) {
       (*Particle_it)->Draw();
+#ifdef DEBUG
+      if (IsLOGGING("polygon.particle")) {
+	(*Particle_it)->DrawPolygon(primary_red_color);
+      }
+#endif
     }
   }
 
