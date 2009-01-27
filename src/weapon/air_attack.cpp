@@ -70,7 +70,7 @@ Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
   explode_colliding_character = true;
-  falling_sound.Play("share", "weapon/aircraft_bomb_falling");
+  falling_sound.Play("default", "weapon/aircraft_bomb_falling");
 }
 
 Obus::~Obus()
@@ -90,7 +90,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   obus_dx = 100;
   obus_dy = GetY() + GetInitialHeight();
 
-  flying_sound.Play("share", "weapon/aircraft_flying");
+  flying_sound.Play("default", "weapon/aircraft_flying");
 }
 
 Plane::~Plane()

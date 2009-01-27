@@ -92,7 +92,7 @@ bool Slap::p_Shoot (){
   double radius = 0.0;
   bool end = false;
 
-  JukeBox::GetInstance()->Play ("share","weapon/slap");
+  JukeBox::GetInstance()->Play ("default","weapon/slap");
 
   do
   {

@@ -61,7 +61,7 @@ ObjBox::ObjBox(const std::string &name)
   SetSpeed (SPEED, M_PI_2);
   SetCollisionModel(true, false, true);
   std::cout<<"super called"<<std::endl;
-  JukeBox::GetInstance()->Play("share","box/falling");
+  JukeBox::GetInstance()->Play("default","box/falling");
 
 }
 
@@ -76,7 +76,7 @@ void ObjBox::CloseParachute()
   SetAirResistFactor(1.0);
   Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
-  hit.Play("share", "box/hitting_ground");
+  hit.Play("default", "box/hitting_ground");
   if (!parachute) return;
 
   MSG_DEBUG("box", "Start of the animation 'fold of the parachute'.");

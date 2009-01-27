@@ -56,7 +56,7 @@ protected:
 #endif
 
         // fake explosion
-        JukeBox::GetInstance()->Play( "share", "weapon/cluzooka_shot" );
+        JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
         ParticleEngine::AddExplosionSmoke( pos,
             50,
             ParticleEngine::LittleESmoke );
@@ -326,7 +326,7 @@ void CluzookaRocket::Shoot(double strength)
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
-  flying_sound.Play("share","weapon/rocket_flying", -1);
+  flying_sound.Play("default","weapon/rocket_flying", -1);
 
   WeaponProjectile::Shoot(strength);
 }

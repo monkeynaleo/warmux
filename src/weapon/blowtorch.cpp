@@ -92,7 +92,7 @@ bool Blowtorch::p_Shoot()
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
   GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2);
-  JukeBox::GetInstance()->Play("share", "weapon/polecat_fart");
+  JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
   MoveCharacter(ActiveCharacter());
 
   return true;

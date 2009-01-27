@@ -84,7 +84,7 @@ void FireParticle::Refresh()
   if (on_ground || IsColliding())
   {
     if (!on_ground) {
-      JukeBox::GetInstance()->Play("share","fire/touch_ground");
+      JukeBox::GetInstance()->Play("default","fire/touch_ground");
     }
     on_ground = true;
     if ((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
@@ -119,7 +119,7 @@ void FireParticle::Draw()
 void FireParticle::SignalDrowning()
 {
   m_left_time_to_live = 0;
-  // JukeBox::GetInstance()->Play("share","fire/pschiit");
+  // JukeBox::GetInstance()->Play("default","fire/pschiit");
 }
 
 void FireParticle::SignalOutOfMap()

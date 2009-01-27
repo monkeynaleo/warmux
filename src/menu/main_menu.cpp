@@ -99,7 +99,7 @@ MainMenu::MainMenu() :
 
 void MainMenu::button_click() const
 {
-  JukeBox::GetInstance()->Play("share", "menu/clic");
+  JukeBox::GetInstance()->Play("default", "menu/clic");
 }
 
 void MainMenu::SelectAction(const Widget *w)
