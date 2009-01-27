@@ -72,24 +72,22 @@ void FireParticle::Refresh()
   scale = 1.0 - scale;
   image->Scale(scale, scale);
 
-  if(image->GetSize().x != 0 && image->GetSize().y != 0)
+  if (image->GetSize().x != 0 && image->GetSize().y != 0)
   {
-    // int dx = (GetWidth() - image->GetWidth()) / 2;
-
-    // SetTestRect(dx, dx - 1, GetHeight() - 2,1);
+    SetBasicShape(image->GetSize(), GetInitialMass());
   }
 
   // The position of the object represents its top left corner
   // So, since we are resizing the object, we have to move it
   // to make it appear at the same place
 
-  if(on_ground || IsColliding())
+  if (on_ground || IsColliding())
   {
-    if ( !on_ground){
+    if (!on_ground) {
       JukeBox::GetInstance()->Play("share","fire/touch_ground");
     }
     on_ground = true;
-    if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
+    if ((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
     {
       Point2i expl_pos = GetPosition() + GetSize();
       expl_pos.x -= GetWidth()/2;
