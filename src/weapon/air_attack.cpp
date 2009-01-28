@@ -88,7 +88,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
   obus_dx = 100;
-  obus_dy = GetY() + GetInitialHeight();
+  obus_dy = GetY() + GetHeight();
 
   flying_sound.Play("default", "weapon/aircraft_flying");
 }
