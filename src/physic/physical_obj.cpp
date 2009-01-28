@@ -554,20 +554,7 @@ const Rectanglei PhysicalObj::GetTestRect() const
   if (height < 1)
     height = 1;
 
-
-  std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
-  double shape_pos_x = (*it)->GetCurrentMinX();
-  double shape_pos_y = (*it)->GetCurrentMinY();
-
-  for (it++; it != m_shapes.end(); it++) {
-    if ((*it)->GetCurrentMinX() < shape_pos_x)
-      shape_pos_x = (*it)->GetCurrentMinX();
-
-    if ((*it)->GetCurrentMinY() < shape_pos_y)
-      shape_pos_y = (*it)->GetCurrentMinY();
-  }
-
-  return Rectanglei(int(shape_pos_x * PIXEL_PER_METER), int(shape_pos_y * PIXEL_PER_METER), width, height);
+  return Rectanglei(GetMinX(), GetMinY(), width, height);
 }
 
 int PhysicalObj::GetMinX() const
