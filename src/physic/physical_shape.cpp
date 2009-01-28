@@ -439,7 +439,7 @@ double PhysicalPolygon::GetCurrentMaxY() const
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
-    double _y = (polygon->GetVertices()[i]).y;
+    double _y = PosWithRotation(polygon->GetVertices()[i]).y;
     if (_y > maxy)
       maxy = _y;
   }
@@ -482,8 +482,8 @@ double PhysicalPolygon::GetCurrentHeight() const
   ASSERT(polygon->GetVertexCount() > 0);
 
   double height = 0;
-  double miny = (polygon->GetVertices()[0]).y;
-  double maxy = (polygon->GetVertices()[0]).y;
+  double miny = PosWithRotation(polygon->GetVertices()[0]).y;
+  double maxy = miny;
 
   for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
 
