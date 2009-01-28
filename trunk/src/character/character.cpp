@@ -696,9 +696,9 @@ void Character::Refresh()
     Camera::GetInstance()->FollowObject(this, true);
   }
 
-  if (IsOutsideWorldXY(Point2i(GetX(),GetY()))) {
-       Ghost();
-       SignalOutOfMap();
+  if (IsOutsideWorld()) {
+    Ghost();
+    SignalOutOfMap();
   }
 
   if (IsDiseased())
