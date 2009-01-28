@@ -448,15 +448,35 @@ double PhysicalObj::GetWdouble() const
   ASSERT(m_shapes.size() != 0);
 
   std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
-  double phys_min_x = (*it)->GetCurrentMinX();
-  double phys_max_x = (*it)->GetCurrentMaxX();
+  double phys_min_x;
+  double phys_max_x;
+  double tmp_x;
+
+  if (m_body) {
+    phys_min_x = (*it)->GetCurrentMinX();
+    phys_max_x = (*it)->GetCurrentMaxX();
+  } else {
+    phys_min_x = (*it)->GetInitialMinX();
+    phys_max_x = (*it)->GetInitialMaxX();
+  }
 
   for (it++; it != m_shapes.end(); it++) {
-    if ((*it)->GetCurrentMinX() < phys_min_x)
-      phys_min_x = (*it)->GetCurrentMinX();
 
-    if ((*it)->GetCurrentMaxX() > phys_max_x)
-      phys_max_x = (*it)->GetCurrentMaxX();
+    if (m_body)
+      tmp_x = (*it)->GetCurrentMinX();
+    else
+      tmp_x = (*it)->GetInitialMinX();
+
+    if (tmp_x < phys_min_x)
+      phys_min_x = tmp_x;
+
+    if (m_body)
+      tmp_x = (*it)->GetCurrentMaxX();
+    else
+      tmp_x = (*it)->GetInitialMaxX();
+
+    if (tmp_x > phys_max_x)
+      phys_max_x = tmp_x;
   }
   double phys_width = phys_max_x - phys_min_x;
 
@@ -474,16 +494,35 @@ double PhysicalObj::GetHdouble() const
   ASSERT(m_shapes.size() != 0);
 
   std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
-  double phys_min_y = (*it)->GetCurrentMinY();
-  double phys_max_y = (*it)->GetCurrentMaxY();
+  double phys_min_y;
+  double phys_max_y;
+  double tmp_y;
+
+  if (m_body) {
+    phys_min_y = (*it)->GetCurrentMinY();
+    phys_max_y = (*it)->GetCurrentMaxY();
+  } else {
+    phys_min_y = (*it)->GetInitialMinY();
+    phys_max_y = (*it)->GetInitialMaxY();
+  }
 
   for (it++; it != m_shapes.end(); it++) {
 
-    if ((*it)->GetCurrentMinY() < phys_min_y)
-      phys_min_y = (*it)->GetCurrentMinY();
+    if (m_body)
+      tmp_y = (*it)->GetCurrentMinY();
+    else
+      tmp_y = (*it)->GetInitialMinY();
 
-    if ((*it)->GetCurrentMaxY() > phys_max_y)
-      phys_max_y = (*it)->GetCurrentMaxY();
+    if (tmp_y < phys_min_y)
+      phys_min_y = tmp_y;
+
+    if (m_body)
+      tmp_y = (*it)->GetCurrentMaxY();
+    else
+      tmp_y = (*it)->GetInitialMaxY();
+
+    if (tmp_y > phys_max_y)
+      phys_max_y = tmp_y;
   }
   double phys_height = phys_max_y - phys_min_y;
 
@@ -592,24 +631,56 @@ const Rectanglei PhysicalObj::GetTestRect() const
 int PhysicalObj::GetMinX() const
 {
   std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
-  double shape_pos_x = (*it)->GetCurrentMinX();
+  double shape_pos_x;
+  double tmp_x;
+
+  if (m_body)
+    shape_pos_x = (*it)->GetCurrentMinX();
+  else
+    shape_pos_x = (*it)->GetInitialMinX();
 
   for (it++; it != m_shapes.end(); it++) {
-    if ((*it)->GetCurrentMinX() < shape_pos_x)
-      shape_pos_x = (*it)->GetCurrentMinX();
+
+    if (m_body)
+      tmp_x = (*it)->GetCurrentMinX();
+    else
+      tmp_x = (*it)->GetInitialMinX();
+
+    if (tmp_x < shape_pos_x)
+      shape_pos_x = tmp_x;
   }
+
+  if (!m_body)
+    return int((GetPhysX() + shape_pos_x) * PIXEL_PER_METER);
+
   return int(shape_pos_x * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetMinY() const
 {
   std::list<PhysicalShape*>::const_iterator it = m_shapes.begin();
-  double shape_pos_y = (*it)->GetCurrentMinY();
+  double shape_pos_y;
+  double tmp_y;
+
+  if (m_body)
+    shape_pos_y = (*it)->GetCurrentMinY();
+  else
+    shape_pos_y = (*it)->GetInitialMinY();
 
   for (it++; it != m_shapes.end(); it++) {
-    if ((*it)->GetCurrentMinY() < shape_pos_y)
-      shape_pos_y = (*it)->GetCurrentMinY();
+
+    if (m_body)
+      tmp_y = (*it)->GetCurrentMinY();
+    else
+      tmp_y = (*it)->GetInitialMinY();
+
+    if (tmp_y < shape_pos_y)
+      shape_pos_y = tmp_y;
   }
+
+  if (!m_body)
+    return int((GetPhysY() + shape_pos_y) * PIXEL_PER_METER);
+
   return int(shape_pos_y * PIXEL_PER_METER);
 }
 
@@ -1093,10 +1164,7 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
 
 bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
 {
-  if (!m_body) {
-    return true;
-  }
-
+  // to take object rotation into account
   int x = GetMinX() - GetX() + position.x;
   int y = GetMinY() - GetY() + position.y;
 
@@ -1127,6 +1195,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   if (check_object && CollidedObjectXY(position))
     return false;
 
+  // to take object rotation into account
   Rectanglei rect(GetMinX() - GetX() + position.x, GetMinY() - GetY() + position.y,
 		  GetWidth(), GetHeight());
 
@@ -1146,6 +1215,7 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
   if (IsOutsideWorldXY(position))
     return NULL;
 
+  // to take object rotation into account
   Rectanglei rect(GetMinX() - GetX() + position.x, GetMinY() - GetY() + position.y,
 		  GetWidth(), GetHeight());
 
