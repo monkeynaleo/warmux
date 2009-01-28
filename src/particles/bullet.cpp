@@ -41,7 +41,7 @@ BulletParticle::BulletParticle() :
 
 void BulletParticle::Refresh()
 {
-  if(IsOutsideWorldXY(GetPosition())) {
+  if (IsOutsideWorld()) {
     m_left_time_to_live = 0;
     return;
   }
