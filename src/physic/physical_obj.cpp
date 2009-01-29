@@ -66,6 +66,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
+  m_rebounding(true),
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
   m_nbr_contact(0),
@@ -179,7 +180,10 @@ void PhysicalObj::Generate()
   std::list<PhysicalShape*>::iterator it;
   for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
     (*it)->SetBody(m_body);
-    (*it)->SetReboundFactor(m_rebound_factor);
+    if (m_rebounding)
+      (*it)->SetReboundFactor(m_rebound_factor);
+    else
+      (*it)->SetReboundFactor(0.0);
     (*it)->Generate();
   }
   GenerateMass();
@@ -823,7 +827,11 @@ void PhysicalObj::CheckOverlapping()
 
 void PhysicalObj::SetRebounding(bool rebounding)
 {
-  printf("PhysicalObj::SetRebounding(%d) not implemented!!\n", rebounding);
+  if (m_rebounding == rebounding)
+    return;
+
+  m_rebounding = rebounding;
+  Generate();
 }
 
 uint PhysicalObj::AddExternForce (double norm, double angle)
