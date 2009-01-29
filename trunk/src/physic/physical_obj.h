@@ -64,6 +64,8 @@ private:
   bool m_collides_with_characters;
   bool m_collides_with_objects;
 
+  bool m_rebounding;
+
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   uint m_nbr_contact;
