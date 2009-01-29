@@ -37,10 +37,8 @@ public:
   // Define how the object is affected by gravity.
   double m_gravity_factor ;
 
-  // Tell if it's a rebounding object...
-  bool  m_rebounding;
-
   // Object rebound factor when the object collide with the ground.
+  // 0.0f for no rebound
   double m_rebound_factor;
 
   ObjectConfig();

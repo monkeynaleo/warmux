@@ -179,6 +179,7 @@ void PhysicalObj::Generate()
   std::list<PhysicalShape*>::iterator it;
   for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
     (*it)->SetBody(m_body);
+    (*it)->SetReboundFactor(m_rebound_factor);
     (*it)->Generate();
   }
   GenerateMass();
@@ -818,6 +819,11 @@ void PhysicalObj::CheckOverlapping()
       MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",
 		GetName().c_str(), m_overlapping_object->GetName().c_str());
     }
+}
+
+void PhysicalObj::SetRebounding(bool rebounding)
+{
+  printf("PhysicalObj::SetRebounding(%d) not implemented!!\n", rebounding);
 }
 
 uint PhysicalObj::AddExternForce (double norm, double angle)

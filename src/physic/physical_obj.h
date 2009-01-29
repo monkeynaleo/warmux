@@ -247,8 +247,7 @@ public:
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
   void ClearOverlappingObject();
 
-  void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
-  bool GetRebounding () const { return m_rebounding; }
+  void SetRebounding(bool rebounding);
 
   const PhysicalObj* GetOverlappingObject() const;
   virtual bool IsOverlapping(const PhysicalObj* obj) const;

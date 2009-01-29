@@ -36,6 +36,7 @@ PhysicalShape::PhysicalShape() :
   m_shape(NULL),
   m_position(0,0),
   m_friction(0.8f),
+  m_rebound_factor(0.1f),
   m_density(30),
   m_name("")
 {
@@ -67,6 +68,11 @@ void PhysicalShape::SetMass(double mass)
 void PhysicalShape::SetFriction(double friction)
 {
   m_friction = friction;
+}
+
+void PhysicalShape::SetReboundFactor(double rebound_factor)
+{
+  m_rebound_factor = rebound_factor;
 }
 
 void PhysicalShape::SetPosition(Point2d position)
@@ -314,7 +320,7 @@ void PhysicalPolygon::Generate()
 
   shapeDef.density = m_density;
   shapeDef.friction = m_friction;
-  shapeDef.restitution = 0.1f;
+  shapeDef.restitution = m_rebound_factor;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
   shapeDef.filter.maskBits = m_filter.maskBits;
   shapeDef.filter.groupIndex = m_filter.groupIndex;
@@ -670,7 +676,7 @@ void PhysicalCircle::Generate()
   shapeDef.localPosition.Set(m_position.x, m_position.y);
   shapeDef.density = m_density;
   shapeDef.friction = m_friction;
-  shapeDef.restitution = 0.1f;
+  shapeDef.restitution = m_rebound_factor;
   shapeDef.filter.categoryBits = m_filter.categoryBits;
   shapeDef.filter.maskBits = m_filter.maskBits;
   shapeDef.filter.groupIndex = m_filter.groupIndex;
