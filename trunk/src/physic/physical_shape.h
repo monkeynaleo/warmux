@@ -42,6 +42,7 @@ protected:
   b2Shape *m_shape;
   Point2d m_position;
   double m_friction;
+  double m_rebound_factor;
   double m_density;
   std::string m_name;
   Point2d PosWithRotation(const b2Vec2& point) const;
@@ -55,6 +56,7 @@ public:
   const b2FilterData& GetFilter() const;
   void SetFilter(b2FilterData filter);
   void SetFriction(double friction);
+  void SetReboundFactor(double rebound_factor);
   void SetMass(double mass); // compute the density from mass and area
   void SetPosition(Point2d position);
   void SetName(const std::string &name);

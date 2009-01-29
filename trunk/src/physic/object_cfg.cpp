@@ -32,7 +32,6 @@
 
 ObjectConfig::ObjectConfig()
 {
-  m_rebounding = false;
   m_rebound_factor = 0.01;
   m_air_resist_factor = 1.0;
   m_wind_factor = 1.0;
@@ -68,5 +67,4 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);
   XmlReader::ReadDouble(elem, "gravity_factor", m_gravity_factor);
   XmlReader::ReadDouble(elem, "rebound_factor", m_rebound_factor);
-  XmlReader::ReadBool(elem, "rebounding", m_rebounding);
 }
