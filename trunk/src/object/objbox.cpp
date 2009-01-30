@@ -48,8 +48,7 @@ const uint SPEED = 5; // meter / seconde
 // const uint NB_MAX_TRY = 20;
 // const uint SPEED_PARACHUTE = 170; // ms par image
 
-ObjBox::ObjBox(const std::string &name)
-  : PhysicalObj(name)
+ObjBox::ObjBox(const std::string &name) : PhysicalObj(name)
 {
   m_allow_negative_y = true;
 
@@ -62,7 +61,6 @@ ObjBox::ObjBox(const std::string &name)
   SetCollisionModel(true, false, true);
   std::cout<<"super called"<<std::endl;
   JukeBox::GetInstance()->Play("default","box/falling");
-
 }
 
 ObjBox::~ObjBox()
@@ -73,7 +71,7 @@ ObjBox::~ObjBox()
 
 void ObjBox::CloseParachute()
 {
-  SetAirResistFactor(1.0);
+  SetAirResistFactor(0.0);
   Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
   hit.Play("default", "box/hitting_ground");
@@ -105,7 +103,7 @@ void ObjBox::SignalDrowning()
 void ObjBox::DropBox()
 {
   if (parachute) {
-    SetAirResistFactor(1.0);
+    SetAirResistFactor(0.0);
     parachute = false;
     anim->SetCurrentFrame(anim->GetFrameCount() - 1);
   } else {

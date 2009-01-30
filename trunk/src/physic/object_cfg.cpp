@@ -33,7 +33,7 @@
 ObjectConfig::ObjectConfig()
 {
   m_rebound_factor = 0.01;
-  m_air_resist_factor = 1.0;
+  m_air_resist_factor = 0.0;
   m_wind_factor = 1.0;
   m_gravity_factor = 1.0;
 }
