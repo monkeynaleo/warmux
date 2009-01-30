@@ -94,8 +94,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->linearDamping = m_air_resist_factor;
   m_body_def->angularDamping = m_air_resist_factor;
   m_body_def->position.Set(0.0f, 0.0f);
-
-  m_body_def->fixedRotation = true;
+  m_body_def->fixedRotation = !m_rotating;
 
   InitShape(xml_config);
 
@@ -1572,11 +1571,6 @@ PhysicalShape *PhysicalObj::GetShape(std::string name)
     }
   }
   return NULL;
-}
-
-void PhysicalObj::SetFixedRotation(bool i_fixed_rotation)
-{
-  m_body_def->fixedRotation = i_fixed_rotation;
 }
 
 void PhysicalObj::SetFixed(bool i_fixed)

@@ -41,6 +41,9 @@ public:
   // 0.0f for no rebound
   double m_rebound_factor;
 
+  // Object supports rotation ?
+  bool m_rotating;
+
   ObjectConfig();
   virtual ~ObjectConfig() { };
 

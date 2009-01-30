@@ -197,7 +197,6 @@ public:
 
   double GetMass() const;
 
-  void SetFixedRotation(bool i_fixed_rotation);
   void SetFixed(bool i_fixed);
 
   void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };

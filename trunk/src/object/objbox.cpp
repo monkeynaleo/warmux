@@ -53,8 +53,6 @@ ObjBox::ObjBox(const std::string &name) : PhysicalObj(name)
   m_allow_negative_y = true;
 
   parachute = true;
-
-  SetFixedRotation(false);
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);

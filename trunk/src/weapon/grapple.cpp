@@ -457,7 +457,6 @@ Rope::Rope():PhysicalObj("rope")
   m_shapes.push_back(hook_shape);
 
   SetCollisionModel(true,false, true);
-  SetFixedRotation(false);
 }
 
 Rope::~Rope()
@@ -720,8 +719,6 @@ RopeNode::RopeNode():PhysicalObj("rope_node")
   m_shapes.push_back(node_shape);
 
   SetCollisionModel(true,false, true);
-  SetFixedRotation(false);
-
 }
 
 
