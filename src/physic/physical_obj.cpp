@@ -86,16 +86,16 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_energy(-1),
   m_allow_negative_y(false)
 {
+  m_cfg = Config::GetInstance()->GetObjectConfig(m_name, xml_config);
+  ResetConstants();       // Set physics constants from the xml file
 
   m_body_def = new b2BodyDef();
   m_body_def->allowSleep = true;
-  m_body_def->linearDamping = 0.0f;
-  m_body_def->angularDamping = 0.01f;
-  m_body_def->position.Set(0.0f, 4.0f);
+  m_body_def->linearDamping = m_air_resist_factor;
+  m_body_def->angularDamping = m_air_resist_factor;
+  m_body_def->position.Set(0.0f, 0.0f);
 
   m_body_def->fixedRotation = true;
-  m_cfg = Config::GetInstance()->GetObjectConfig(m_name, xml_config);
-  ResetConstants();       // Set physics constants from the xml file
 
   InitShape(xml_config);
 
@@ -616,6 +616,17 @@ int PhysicalObj::GetMinY() const
     return int((GetPhysY() + shape_pos_y) * PIXEL_PER_METER);
 
   return int(shape_pos_y * PIXEL_PER_METER);
+}
+
+void PhysicalObj::SetAirResistFactor(double factor)
+{
+  if (m_air_resist_factor == factor)
+    return;
+
+  m_air_resist_factor = factor;
+
+  if (m_body)
+    printf("%s PhysicalObj::SetAirResistFactor(%f)\n", m_name.c_str(), factor);
 }
 
 void PhysicalObj::StoreValue(Action *a)

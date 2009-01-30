@@ -174,8 +174,7 @@ public:
   double GetHdouble() const;
   Point2d GetSizeDouble() const;
 
-  // WARNING: MUST BE REMOVED
-  // Set/Get test rectangles
+  // Get test rectangle
   const Rectanglei GetTestRect() const;
 
   //----------- Access to datas (read only) ----------
@@ -204,7 +203,7 @@ public:
   void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };
   double GetWindFactor () const { return m_wind_factor; }
 
-  void SetAirResistFactor (double factor) { m_air_resist_factor = factor; };
+  void SetAirResistFactor (double factor);
   double GetAirResistFactor () const{ return m_air_resist_factor; }
 
   void SetGravityFactor (double factor) { m_gravity_factor = factor; };

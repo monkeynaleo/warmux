@@ -54,7 +54,7 @@ GameMode::GameMode():
   character.init_energy = 100; /* overwritten when reading XML */
   character.max_energy = 100; /* overwritten when reading XML */
   character.mass = 100;
-  character.air_resist_factor = 1.0;
+  character.air_resist_factor = 0.0;
   character.jump_strength = 8;
   character.jump_angle = -60;
   character.super_jump_strength = 11;
