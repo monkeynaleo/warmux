@@ -18,6 +18,8 @@
 <!ENTITY standard_righthanded_clothe "&complete_arm-left-righthanded;&feet;&complete_body-tail;&complete_standard-head;<c_member name='weapon'/>&complete_arm-right-righthanded;">
 <!ENTITY standard_black "<c_member name='arm-left-black'/><c_member name='arm2-left-black'/><c_member name='arm3-left-black-L'/><c_member name='weapon'/><c_member name='foot-left-black'/><c_member name='tail-black'/><c_member name='foot-right-black'/><c_member name='back-black'/><c_member name='body-black'/><c_member name='hair-black'/><c_member name='hornleft-black'/><c_member name='head-black'/><c_member name='hornright-black'/><c_member name='noze-black'/><c_member name='eyes-black'/><c_member name='pupil-right-black'/><c_member name='pupil-left-black'/><c_member name='eyelid-black'/><c_member name='arm-right-black'/><c_member name='arm2-right-black'/><c_member name='arm3-right-black-L'/>">
 
+<!ENTITY jetpacks "<c_member name='jetpack-left'/><c_member name='jetpack-right'/>">
+
 ]>
 
 <clothes>
@@ -43,8 +45,7 @@
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack">
 	<c_member name="tail"/>
-	<c_member name="jetpack-left"/>
-	<c_member name="jetpack-right"/>
+	&jetpacks;
 	&complete_arm-left-righthanded;
 	<c_member name="weapon"/>
 	&feet;
@@ -57,9 +58,8 @@
 <clothe name="jetpack-fire">
 	<c_member name="tail"/>
 	<c_member name="jetpack-left-fire"/>
-	<c_member name="jetpack-left"/>
 	<c_member name="jetpack-right-fire"/>
-	<c_member name="jetpack-right"/>
+	&jetpacks;
 	&complete_arm-left-righthanded;
 	<c_member name="weapon"/>
 	&feet;
