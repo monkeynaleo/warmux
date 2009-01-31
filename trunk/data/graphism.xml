@@ -234,6 +234,26 @@
   <surface name="rounding_mask_right" file="interface/hide_right.png" />
   <surface name="rounding_mask_left" file="interface/hide_left.png" />
   <surface name="rounding_mask_top" file="interface/hide_top.png" />
+  
+  <surface name="square_bottom" file="interface/square_bottom.png" />
+  <surface name="square_bottom_left" file="interface/square_bottomleft.png" />
+  <surface name="square_bottom_right" file="interface/square_bottomright.png" />
+  <surface name="square_top" file="interface/square_top.png" />
+  <surface name="square_top_left" file="interface/square_topleft.png" />
+  <surface name="square_top_right" file="interface/square_topright.png" />
+  <surface name="square_center" file="interface/square_center.png" />
+  <surface name="square_left" file="interface/square_left.png" />
+  <surface name="square_right" file="interface/square_right.png" />
+  <surface name="square_mask_bottom_left" file="interface/hide_bottomleft.png" />
+  <surface name="square_mask_bottom_right" file="interface/hide_bottomright.png" />
+  <surface name="square_mask_top_left" file="interface/hide_topleft.png" />
+  <surface name="square_mask_top_right" file="interface/hide_topright.png" />
+  <surface name="square_mask_bottom" file="interface/hide_bottom.png" />
+  <surface name="square_mask_right" file="interface/hide_right.png" />
+  <surface name="square_mask_left" file="interface/hide_left.png" />
+  <surface name="square_mask_top" file="interface/hide_top.png" />
+  
+  
 </section>
 
 <section name="loading_screen">
