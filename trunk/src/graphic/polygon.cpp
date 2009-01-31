@@ -25,6 +25,7 @@
 #include "include/app.h"
 #include "map/map.h"
 #include "network/randomsync.h"
+#include "tool/resource_manager.h"
 #include "tool/affine_transform.h"
 
 
@@ -698,3 +699,183 @@ void Polygon::DrawOnScreen()
   Draw(&GetMainWindow());
   GetWorld().ToRedrawOnScreen(GetRectangleToRefresh());
 }
+
+////////////////////////////
+// DecoratedBox
+
+DecoratedBox::DecoratedBox(double width, double height):Polygon(),
+m_border(NULL)
+{
+  min =  Point2d(0.0, 0.0);
+  max = Point2d(width, height);
+  original_min = min;
+  original_max = max;
+
+
+}
+
+DecoratedBox::~DecoratedBox()
+{
+  delete m_border;
+}
+
+void DecoratedBox::Draw(Surface * dest)
+{
+  if(!m_border){
+    m_border = new Surface(Point2i(GetSize().x,GetSize().y),SDL_SWSURFACE, true);
+    GenerateBorder(*m_border);
+  }
+  dest->Blit(*m_border, min);
+
+
+  // Draw Item
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+    (*item)->Draw(dest);
+  }
+}
+
+void DecoratedBox::GenerateBorder(Surface & source)
+{
+
+  Surface rounding_style [3][3];
+  Surface rounding_style_mask [3][3];
+
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+
+  // styled box
+  rounding_style[1][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom");
+  rounding_style[0][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom_left");
+  rounding_style[2][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom_right");
+  rounding_style[1][0] = GetResourceManager().LoadImage( res, "interface/rounding_top");
+  rounding_style[0][0] = GetResourceManager().LoadImage( res, "interface/rounding_top_left");
+  rounding_style[2][0] = GetResourceManager().LoadImage( res, "interface/rounding_top_right");
+  rounding_style[0][1] = GetResourceManager().LoadImage( res, "interface/rounding_left");
+  rounding_style[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_right");
+  rounding_style[1][1] = GetResourceManager().LoadImage( res, "interface/rounding_center");
+
+  rounding_style_mask[1][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom");
+  rounding_style_mask[0][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_left");
+  rounding_style_mask[2][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_right");
+  rounding_style_mask[1][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top");
+  rounding_style_mask[0][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_left");
+  rounding_style_mask[2][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_right");
+  rounding_style_mask[0][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_left");
+  rounding_style_mask[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_right");
+
+  Surface save_surf(source.GetSize(),SDL_SWSURFACE, true);
+  save_surf.MergeSurface(source, Point2i(0,0));
+  Rectanglei temp_rect;
+
+  source = Surface(Surface(source.GetSize(),SDL_SWSURFACE, true));
+
+  temp_rect.SetPosition(Point2i(0,0));
+  temp_rect.SetSize(source.GetSize());
+
+  Point2i temp_position;
+
+  temp_position = temp_rect.GetPosition();
+  source.MergeSurface(rounding_style[0][0], temp_position);
+
+  temp_position = temp_rect.GetPosition();
+  temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
+  source.MergeSurface(rounding_style[2][0],temp_position);
+
+  temp_position = temp_rect.GetPosition();
+  temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
+  source.MergeSurface(rounding_style[0][2],temp_position);
+
+  temp_position = temp_rect.GetPosition();
+  temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
+  temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
+  source.MergeSurface(rounding_style[2][2],temp_position);
+
+
+  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+    temp_position = temp_rect.GetPosition();
+    temp_position.x += i;
+    source.MergeSurface(rounding_style[1][0],temp_position);
+
+    temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
+    source.MergeSurface(rounding_style[1][2],temp_position);
+
+  }
+
+  for(int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
+    temp_position = temp_rect.GetPosition();
+    temp_position.y += i;
+    source.MergeSurface(rounding_style[0][1],temp_position);
+
+    temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
+    source.MergeSurface(rounding_style[2][1],temp_position);
+
+  }
+
+  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+
+    for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
+      temp_position = temp_rect.GetPosition() + Point2i(i,j);
+      source.MergeSurface(rounding_style[1][1],temp_position);
+    }
+  }
+
+  //Corner
+  save_surf.MergeAlphaSurface(rounding_style_mask[0][0],Point2i(0,0));
+  save_surf.MergeAlphaSurface(rounding_style_mask[2][0],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,0));
+  save_surf.MergeAlphaSurface(rounding_style_mask[0][2],Point2i(0,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+  save_surf.MergeAlphaSurface(rounding_style_mask[2][2],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+
+  //Top
+  save_surf.MergeAlphaSurface(rounding_style_mask[1][0],Point2i(rounding_style_mask[0][0].GetSize().x,0));
+  //Bottom
+  save_surf.MergeAlphaSurface(rounding_style_mask[1][2],Point2i(rounding_style_mask[0][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+  //Left
+  save_surf.MergeAlphaSurface(rounding_style_mask[0][1],Point2i(0,rounding_style_mask[0][0].GetSize().y));
+  //Right
+  save_surf.MergeAlphaSurface(rounding_style_mask[2][1],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,rounding_style_mask[0][0].GetSize().y));
+
+
+   source.MergeSurface(save_surf, Point2i(0,0));
+}
+
+
+void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
+{
+  Point2d new_min =  trans * original_min;
+  Point2d new_max = trans * original_max;
+
+  if(((max.x - min.x )!=( new_max.x -new_min.x)) || ((max.y - min.y )!=( new_max.y -new_min.y)))
+  {
+      delete m_border;
+      m_border = NULL;
+  }
+
+  min = new_min;
+  max = new_max;
+
+  if(save_transformation)
+  {
+
+   original_min = min;
+   original_max = max;
+  }
+
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+    (*item)->ApplyTransformation(trans);
+  }
+}
+
+void DecoratedBox::ResetTransformation()
+{
+  if(((max.x - min.x )!=( original_max.x -original_min.x)) || ((max.y - min.y )!=( original_max.y -original_min.y)))
+   {
+      delete m_border;
+      m_border = NULL;
+   }
+
+   min = original_min;
+   max = original_max;
+
+}
+
