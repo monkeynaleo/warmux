@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    version="1.0"
-   sodipodi:docname="interface better boxes.svg"
+   sodipodi:docname="interface all boxes one style.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs5219">
@@ -448,8 +448,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="8"
-     inkscape:cx="31.110622"
-     inkscape:cy="38.135314"
+     inkscape:cx="180.66351"
+     inkscape:cy="7.6792949"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1167,6 +1167,24 @@
          width="1"
          id="rect2581"
          style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:4, 8;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </g>
+    <g
+       transform="matrix(1,0,0,-1,1390.0462,1251.4867)"
+       id="g2569"
+       clip-path="url(#clipPath5379)"
+       inkscape:export-filename="/home/yekcim/Desktop/1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.80000007;stroke-linecap:butt;stroke-linejoin:round;marker:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         d="M -796.59691,790.93311 L -796.6275,802.6224 L -632.5025,802.6224 L -632.5338,790.00436 L -795.82389,790.00436 C -796.14279,790.00436 -796.59691,790.49102 -796.59691,790.93311 z"
+         id="path2571"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#ffffff;fill-opacity:0.5098038;fill-rule:nonzero;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.90196078;visibility:visible;display:inline;overflow:visible"
+         d="M -633.5025,801.68275 L -633.5338,790.93097 L -795.5962,790.93097 L -795.6275,801.68275 L -633.5025,801.68275 z"
+         id="path2573"
+         sodipodi:nodetypes="ccccc" />
     </g>
   </g>
 </svg>
