@@ -96,14 +96,8 @@ void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int rec
 void FootBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-//  image->SetRotation_rad(GetSpeedAngle());
-  if ( IsMoving() )
-  {
-    uint time = Time::GetInstance()->Read();
-    float flying_time = ( float )( time - begin_time );
-    const float rotations_per_second = 4;
-    image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
-  }
+  image->SetRotation_HotSpot(Point2i(0,0));
+  image->SetRotation_rad(-GetAngle());
 }
 
 void FootBomb::SignalOutOfMap()
