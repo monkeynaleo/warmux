@@ -164,7 +164,6 @@ void PhysicalObj::Activate()
     return;
 
   m_body = PhysicalEngine::GetInstance()->AddObject(this);
-  SetAngle(0);
   SetSpeedXY(m_initial_speed);
   Generate();
 }
@@ -1536,6 +1535,8 @@ double PhysicalObj::GetAngle() const
 
 void PhysicalObj::SetAngle(double angle)
 {
+  ASSERT(m_rotating || angle == 0);
+
   if (m_body) {
     m_body->SetXForm(m_body->GetPosition(), angle);
   } else {
