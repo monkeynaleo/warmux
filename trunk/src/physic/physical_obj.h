@@ -149,16 +149,16 @@ public:
   // Speed
 
  // Set initial speed.
-  void SetSpeedXY (Point2d vector);
-  void SetSpeed (double norm, double angle);
-  void SetAngle(double angle);
+  void SetSpeedXY(Point2d vector);
+  void SetSpeed(double norm, double angle_rad);
+  void SetAngle(double angle_rad);
   // Add a initial speed to the current speed.
-  void AddSpeedXY (Point2d vector);
-  void AddSpeed (double norm, double angle);
+  void AddSpeedXY(Point2d vector);
+  void AddSpeed(double norm, double angle_rad);
 
   // Get current object speed
-  void GetSpeed (double &norm, double &angle) const;
-  Point2d GetSpeedXY () const;
+  void GetSpeed(double &norm, double &angle_rad) const;
+  Point2d GetSpeedXY() const;
   Point2d GetSpeed() const;
   double GetAngularSpeed() const;
   double GetAngle() const;
