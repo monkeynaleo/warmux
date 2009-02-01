@@ -1537,9 +1537,9 @@ double PhysicalObj::GetAngle() const
 void PhysicalObj::SetAngle(double angle)
 {
   if (m_body) {
-    m_body->SetXForm(m_body->GetPosition(), -angle/180.0f * b2_pi);
+    m_body->SetXForm(m_body->GetPosition(), angle);
   } else {
-    m_body_def->angle = -angle/180.0f * b2_pi;
+    m_body_def->angle = angle;
   }
 }
 
