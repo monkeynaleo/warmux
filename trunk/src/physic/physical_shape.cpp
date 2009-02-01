@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include "include/base.h"
+#include "physic/physical_engine.h"
 #include "physic/physical_shape.h"
 #include "tool/math_tools.h"
 #include "tool/xml_document.h"
@@ -35,7 +36,9 @@ PhysicalShape::PhysicalShape() :
   m_body(NULL),
   m_shape(NULL),
   m_position(0,0),
+  m_force_application_point(0,0),
   m_friction(0.8f),
+  m_air_friction(0),
   m_rebound_factor(0.1f),
   m_density(30),
   m_name("")
@@ -44,9 +47,11 @@ PhysicalShape::PhysicalShape() :
 
 PhysicalShape::~PhysicalShape()
 {
+  PhysicalEngine::GetInstance()->RemoveAirFrictionShape(this);
   if (m_shape && m_body) {
     m_body->DestroyShape(m_shape);
   }
+
 }
 
 const b2FilterData& PhysicalShape::GetFilter() const
@@ -133,6 +138,34 @@ Point2d PhysicalShape::PosWithRotation(const b2Vec2& point) const
   return p;
 }
 
+
+void PhysicalShape::ComputeAirFriction()
+{
+  if(m_body){
+  b2Vec2 force(m_body->GetLinearVelocity().x * m_air_friction *-1,m_body->GetLinearVelocity().y * m_air_friction *-1);
+  m_body->ApplyForce( force,
+                      m_body->GetWorldPoint(b2Vec2( m_position.x+m_force_application_point.x,
+                                                    m_position.y+m_force_application_point.y)));
+  }
+}
+
+
+void PhysicalShape::SetForceApplicationPoint(Point2d point)
+{
+  m_force_application_point = point;
+}
+
+void PhysicalShape::SetAirFriction(double air_friction)
+{
+  if(air_friction == 0 && m_air_friction != 0)
+  {
+    PhysicalEngine::GetInstance()->RemoveAirFrictionShape(this);
+  } else if( air_friction > 0 && m_air_friction == 0)
+  {
+    PhysicalEngine::GetInstance()->AddAirFrictionShape(this);
+  }
+  m_air_friction = air_friction;
+}
 // =============================================================================
 // Static method
 PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
@@ -172,12 +205,31 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     return NULL;
   }
 
+
+  elem = XmlReader::GetMarker(root_shape, "application_point");
+   uint force_x, force_y;
+  if(elem){
+    r = XmlReader::ReadUintAttr(elem, "x", force_x);
+    if (r)
+      r = XmlReader::ReadUintAttr(elem, "y", force_y);
+
+    if (!r) {
+      fprintf(stderr, "Fails to read shape (%s) force application point from XML file\n", shape_name.c_str());
+      return NULL;
+    }
+  }
+
+
   double mass;
-  r = XmlReader::ReadDouble(root_shape, "mass", mass);
-  if (!elem) {
+  r = XmlReader::ReadDouble(root_shape
+  , "mass", mass);
+  if (!r) {
     fprintf(stderr, "Fails to read shape  (%s) mass from XML file\n", shape_name.c_str());
     return NULL;
   }
+
+  double air_friction = 0;
+  r = XmlReader::ReadDouble(root_shape, "air_friction", air_friction);
 
   // =============== Circle
 
@@ -244,9 +296,14 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
   shape->SetMass(mass);
   shape->SetName(shape_name);
   shape->SetPosition(Point2d(double(pos_x)/PIXEL_PER_METER, double(pos_y)/PIXEL_PER_METER));
+  shape->SetAirFriction(air_friction);
+  shape->SetForceApplicationPoint(Point2d(force_x, force_y));
+
 
   return shape;
 }
+
+
 // =============================================================================
 
 static bool is_ccw(const std::vector<Point2d> P, int i, int j, int k)

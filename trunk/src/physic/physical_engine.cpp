@@ -23,6 +23,7 @@
 #include "physic/force.h"
 #include "physic/physical_engine.h"
 #include "physic/physical_obj.h"
+#include "physic/physical_shape.h"
 #include "tool/math_tools.h"
 #include "tool/debug_physics.h"
 #include <iostream>
@@ -109,6 +110,9 @@ void PhysicalEngine::Step()
 
   for (uint i = 0; i< m_force_list.size();i++) {
     m_force_list[i]->ComputeForce();
+  }
+  for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
+    m_air_friction_shape_list[i]->ComputeAirFriction();
   }
 
 
@@ -231,6 +235,25 @@ void PhysicalEngine::RemoveForce(Force *force)
   for (it = m_force_list.begin(); it != m_force_list.end(); it++){
     if (*it == force) {
       m_force_list.erase(it);
+      break;
+    }
+
+  }
+
+}
+
+void PhysicalEngine::AddAirFrictionShape(PhysicalShape * shape)
+{
+    m_air_friction_shape_list.push_back(shape);
+}
+
+void PhysicalEngine::RemoveAirFrictionShape(PhysicalShape *shape)
+{
+
+  std::vector<PhysicalShape *>::iterator it;
+  for (it = m_air_friction_shape_list.begin(); it != m_air_friction_shape_list.end(); it++){
+    if (*it == shape) {
+      m_air_friction_shape_list.erase(it);
       break;
     }
 

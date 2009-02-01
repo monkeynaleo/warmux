@@ -321,6 +321,16 @@
       <point x="22" y="10" />
       <point x="1" y="8" />
     </shape>
+    <shape name="rocket-queue" type="polygon">
+      <mass>2.0</mass>
+      <air_friction>0.2</air_friction>
+      <application_point x="4" y="6" />
+      <position x="0" y="0" />
+      <point x="1" y="4" />
+      <point x="10" y="4" />
+      <point x="10" y="8" />
+      <point x="1" y="8" />
+    </shape>
   </rocket>
 
   <cluz_rocket>
