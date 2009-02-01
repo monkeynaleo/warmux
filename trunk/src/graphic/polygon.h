@@ -201,7 +201,7 @@ class DecoratedBox : public Polygon
   virtual void Draw(Surface * dest);
   virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation);
   virtual void ResetTransformation();
-
+  void SetPosition(double x, double y);
   void SetStyle(Style style);
 
  private :

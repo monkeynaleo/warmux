@@ -94,7 +94,7 @@ m_last_minimap_redraw(0)
   wind_bar.SetReferenceValue (true, 0);
 
   // strength bar initialisation
-  weapon_strength_bar.InitPos (0, 0, 400, 20);
+  weapon_strength_bar.InitPos (0, 0, 300, 15);
   weapon_strength_bar.InitVal (0, 0, 100);
 
   weapon_strength_bar.SetValueColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_value"));
