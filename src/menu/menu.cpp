@@ -223,6 +223,12 @@ void Menu::Run (bool skip_menu)
     if (!SDL_WaitEvent(&event))
       continue;
 
+    //Emergency exit
+    if(event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL) )
+    {
+       exit(0);
+    }
+
     Point2i mousePosition(event.button.x, event.button.y);
 
     if (event.type == SDL_QUIT) {
