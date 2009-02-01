@@ -96,7 +96,6 @@ void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int rec
 void FootBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_HotSpot(Point2i(0,0));
   image->SetRotation_rad(-GetAngle());
 }
 

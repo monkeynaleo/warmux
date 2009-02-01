@@ -19,12 +19,9 @@
  * WeaponLauncher: generic weapon to launch a projectile
  *****************************************************************************/
 
-#include "weapon/weapon_launcher.h"
-#include "weapon/weapon_cfg.h"
-
 #include <sstream>
+#include <WORMUX_debug.h>
 
-#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
@@ -40,10 +37,12 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
-
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_launcher.h"
+#include "weapon/weapon_cfg.h"
+
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
@@ -106,7 +105,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*sha
 void WeaponBullet::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
+  image->SetRotation_rad(-GetAngle());
 }
 
 void WeaponBullet::DoExplosion()
@@ -135,6 +134,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, name);
   image->EnableRotationCache(32);
+  image->SetRotation_HotSpot(Point2i(0,0));
 
   ResetTimeOut();
 
@@ -159,11 +159,6 @@ void WeaponProjectile::Shoot(double strength)
   // Set the physical factors
   ResetConstants();
 
-  // Set the initial position.
-  SetOverlappingObject(&ActiveCharacter(), 100);
-  ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
-
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
 
@@ -187,13 +182,20 @@ void WeaponProjectile::Shoot(double strength)
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
+
+  SetOverlappingObject(&ActiveCharacter(), 100);
   SetXY(hand_position);
+  SetAngle(angle);
   SetSpeed(strength, angle);
+
+  ObjectsList::GetRef().AddObject(this);
+  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
+
   //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
   //if (collision == NO_COLLISION) {
     // Set the initial position and speed.
-    SetXY(hole_position);
-    SetSpeed(strength, angle);
+    //SetXY(hole_position);
+    //SetSpeed(strength, angle);
     PutOutOfGround(angle);
  // }
 }
@@ -251,16 +253,15 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,
+					     PhysicalShape * /*shape*/,
+					     const Point2d& /* my_speed_before */)
 {
-
-
-      ASSERT(obj != NULL);
-      MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
-          m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
-      if (explode_colliding_character)
-        Explosion();
-
+  ASSERT(obj != NULL);
+  MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
+	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
+  if (explode_colliding_character)
+    Explosion();
 }
 
 // projectile explode when hiting the ground

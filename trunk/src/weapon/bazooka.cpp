@@ -58,7 +58,7 @@ void BazookaRocket::Refresh()
   WeaponProjectile::Refresh();
   if(!IsDrowned())
   {
-    image->SetRotation_rad(GetSpeedAngle());
+    image->SetRotation_rad(-GetAngle());
     smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                      GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
   }
