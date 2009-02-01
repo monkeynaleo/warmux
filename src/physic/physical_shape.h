@@ -41,7 +41,9 @@ protected:
   b2Body *m_body;
   b2Shape *m_shape;
   Point2d m_position;
+  Point2d m_force_application_point;
   double m_friction;
+  double m_air_friction;
   double m_rebound_factor;
   double m_density;
   std::string m_name;
@@ -60,6 +62,8 @@ public:
   void SetMass(double mass); // compute the density from mass and area
   void SetPosition(Point2d position);
   void SetName(const std::string &name);
+  void SetAirFriction(double air_friction);
+  void SetForceApplicationPoint(Point2d point);
 
   void SetBody(b2Body *body);
 
@@ -83,6 +87,8 @@ public:
   virtual double GetInitialMaxX() const = 0;
   virtual double GetInitialMinY() const = 0;
   virtual double GetInitialMaxY() const = 0;
+
+  void ComputeAirFriction();
 
   // TODO: REMOVE IT IN NEAR FUTURE
   double GetMass() const;

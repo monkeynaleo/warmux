@@ -35,6 +35,7 @@ class PhysicalObj;
 class Force;
 class ContactListener;
 class DebugDraw;
+class PhysicalShape;
 
 class PhysicalEngine : public Singleton<PhysicalEngine>
 {
@@ -53,6 +54,9 @@ public:
 
   void AddForce(Force * force);
   void RemoveForce(Force *force);
+
+  void AddAirFrictionShape(PhysicalShape* shape);
+  void RemoveAirFrictionShape(PhysicalShape* shape);
 
 
 
@@ -83,6 +87,7 @@ protected:
   std::vector<b2ContactResult> result_contact_list;
 
   std::vector<Force *> m_force_list;
+  std::vector<PhysicalShape *>m_air_friction_shape_list;
   void ClearContact();
 
   friend class Singleton<PhysicalEngine>;
