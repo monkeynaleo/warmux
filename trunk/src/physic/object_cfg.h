@@ -44,6 +44,9 @@ public:
   // Object supports rotation ?
   bool m_rotating;
 
+  // Object try to align with movement direction
+  double m_auto_align_force;
+
   ObjectConfig();
   virtual ~ObjectConfig() { };
 

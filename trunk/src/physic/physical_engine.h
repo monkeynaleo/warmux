@@ -59,6 +59,9 @@ public:
   void RemoveAirFrictionShape(PhysicalShape* shape);
 
 
+  void AddAutoAlignObject(PhysicalObj* object);
+  void RemoveAutoAlignObject(PhysicalObj* object);
+
 
   typedef enum {ADD,PERSIST,REMOVE} ContactType;
 
@@ -88,6 +91,7 @@ protected:
 
   std::vector<Force *> m_force_list;
   std::vector<PhysicalShape *>m_air_friction_shape_list;
+  std::vector<PhysicalObj *>m_auto_align_object_list;
   void ClearContact();
 
   friend class Singleton<PhysicalEngine>;

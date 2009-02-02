@@ -97,15 +97,24 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def->fixedRotation = !m_rotating;
 
   InitShape(xml_config);
+  if(m_auto_align_force >0)
+  {
+      PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
+  }
 
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
 PhysicalObj::~PhysicalObj ()
 {
+
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
   //ClearShapes();
   Desactivate();
+  if(m_auto_align_force > 0)
+  {
+    PhysicalEngine::GetInstance()->RemoveAutoAlignObject(this);
+  }
 }
 
 void PhysicalObj::InitShape(const std::string &xml_config)
@@ -885,6 +894,14 @@ void PhysicalObj::RemoveAllExternForce()
   }
 }
 
+void PhysicalObj::ComputeAutoAlign()
+{
+  if(m_body){
+    double delta = sin (GetAngle() +GetSpeedAngle());
+    b2Vec2 velocity = m_body->GetLinearVelocity();
+    m_body->ApplyTorque( delta  * m_auto_align_force * (velocity.x * velocity.x  + velocity.y * velocity.y));
+  }
+}
 
 bool PhysicalObj::IsSleeping() const
 {

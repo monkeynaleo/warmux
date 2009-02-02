@@ -114,6 +114,9 @@ void PhysicalEngine::Step()
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
     m_air_friction_shape_list[i]->ComputeAirFriction();
   }
+  for (uint i = 0; i< m_auto_align_object_list.size(); i++){
+    m_auto_align_object_list[i]->ComputeAutoAlign();
+  }
 
 
   physic_world->Step(timeStep, iterations);
@@ -254,6 +257,25 @@ void PhysicalEngine::RemoveAirFrictionShape(PhysicalShape *shape)
   for (it = m_air_friction_shape_list.begin(); it != m_air_friction_shape_list.end(); it++){
     if (*it == shape) {
       m_air_friction_shape_list.erase(it);
+      break;
+    }
+
+  }
+
+}
+
+void PhysicalEngine::AddAutoAlignObject(PhysicalObj * object)
+{
+    m_auto_align_object_list.push_back(object);
+}
+
+void PhysicalEngine::RemoveAutoAlignObject(PhysicalObj *object)
+{
+
+  std::vector<PhysicalObj *>::iterator it;
+  for (it = m_auto_align_object_list.begin(); it != m_auto_align_object_list.end(); it++){
+    if (*it == object) {
+      m_auto_align_object_list.erase(it);
       break;
     }
 
