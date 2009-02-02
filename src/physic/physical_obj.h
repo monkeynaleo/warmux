@@ -90,11 +90,13 @@ protected:
   std::string m_unique_id;
   std::string m_rebound_sound;
   Point2d m_initial_speed;
+
   bool m_fixed;
   alive_t m_alive;
   int m_energy;
 
   bool m_allow_negative_y;
+
 
   std::vector<b2ContactPoint> added_contact_list;
   std::vector<b2ContactPoint> persist_contact_list;
@@ -216,6 +218,8 @@ public:
   virtual void AddContact(const PhysicalShape * shape);
   virtual void RemoveContact(const PhysicalShape * shape);
   virtual void ClearContact();
+
+  void ComputeAutoAlign();
 
   void SetBullet(bool is_bullet);
 

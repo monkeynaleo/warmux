@@ -312,6 +312,7 @@
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
+    <auto_align_force>0.2</auto_align_force>
     <shape name="rocket-main" type="polygon">
       <mass>20.0</mass>
       <position x="0" y="0" />
@@ -319,16 +320,6 @@
       <point x="22" y="1" />
       <point x="34" y="5" />
       <point x="22" y="10" />
-      <point x="1" y="8" />
-    </shape>
-    <shape name="rocket-queue" type="polygon">
-      <mass>2.0</mass>
-      <air_friction>0.2</air_friction>
-      <application_point x="4" y="6" />
-      <position x="0" y="0" />
-      <point x="1" y="4" />
-      <point x="10" y="4" />
-      <point x="10" y="8" />
       <point x="1" y="8" />
     </shape>
   </rocket>
