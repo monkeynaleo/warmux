@@ -92,7 +92,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def = new b2BodyDef();
   m_body_def->allowSleep = true;
   m_body_def->linearDamping = m_air_resist_factor;
-  m_body_def->angularDamping = m_air_resist_factor;
+  m_body_def->angularDamping = 0.1;
   m_body_def->position.Set(0.0f, 0.0f);
   m_body_def->fixedRotation = !m_rotating;
 
@@ -897,9 +897,27 @@ void PhysicalObj::RemoveAllExternForce()
 void PhysicalObj::ComputeAutoAlign()
 {
   if(m_body){
-    double delta = sin (GetAngle() +GetSpeedAngle());
+    double delta = GetAngle() +GetSpeedAngle();
+    while(delta >= 2 * M_PI)
+    delta -= 2 * M_PI;
+    while(delta < 0.0)
+    delta += 2 * M_PI;
+
+    double response = 0.0;
+    if ( delta < M_PI/2 ){
+        response = 1 - sin(delta + M_PI/2);
+    } else if ( delta < M_PI ){
+        response = 1 - sin(delta - M_PI/2);
+    } else if ( delta < 3*M_PI/2 ){
+        response = -1 + sin(delta - M_PI/2);
+    } else {
+        response = -1 + sin(delta + M_PI/2);
+    }
+
+    //double delta = sin (GetAngle() +GetSpeedAngle());
+
     b2Vec2 velocity = m_body->GetLinearVelocity();
-    m_body->ApplyTorque( delta  * m_auto_align_force * (velocity.x * velocity.x  + velocity.y * velocity.y));
+    m_body->ApplyTorque( response  * m_auto_align_force * (velocity.x * velocity.x  + velocity.y * velocity.y));
   }
 }
 
