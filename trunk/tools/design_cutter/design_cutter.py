@@ -61,7 +61,7 @@ try:
     out.save(prefix+"_left.png", "PNG")
     print prefix+"_left.png generated"
     out = sub_box(im, w+1, h, xsize, h+1)
-    out.save(prefix+"_rigth.png", "PNG")
+    out.save(prefix+"_right.png", "PNG")
     print prefix+"_right.png generated"
 
     #Center 
