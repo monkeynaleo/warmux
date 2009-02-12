@@ -81,3 +81,13 @@ Clothe::~Clothe()
 {
   layers.clear();
 }
+
+const std::string & Clothe::GetName() const
+{
+  return name;
+}
+
+const std::vector<Member*>& Clothe::GetLayers() const
+{
+  return layers;
+}

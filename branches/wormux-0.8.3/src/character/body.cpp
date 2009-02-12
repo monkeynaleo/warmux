@@ -229,8 +229,8 @@ Body::~Body()
 
 void Body::ResetMovement() const
 {
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-    current_clothe->layers[layer]->ResetMovement();
+  for (size_t layer=0; layer < current_clothe->GetLayers().size(); layer++)
+    current_clothe->GetLayers()[layer]->ResetMovement();
 }
 
 void Body::ApplyMovement(Movement* mvt, uint frame)
@@ -380,7 +380,7 @@ void Body::Build()
 		{
 		  current_frame = current_mvt->GetFrames().size() - 1;
 		  if (play_once_clothe_sauv)
-		    SetClothe(play_once_clothe_sauv->name);
+		    SetClothe(play_once_clothe_sauv->GetName());
 		  if (play_once_mvt_sauv)
 		    {
 		      SetMovement(play_once_mvt_sauv->GetType());
@@ -402,19 +402,19 @@ void Body::Build()
 
   // Rotate each sprite, because the next part need to know the height
   // of the sprite once it is rotated
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
-    if (current_clothe->layers[layer]->name != "weapon")
-      current_clothe->layers[layer]->RotateSprite();
+  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+    if (current_clothe->GetLayers()[layer]->name != "weapon")
+      current_clothe->GetLayers()[layer]->RotateSprite();
   }
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
   member_mvt body_mvt;
   float y_max = 0;
 
-  for (int lay=0;lay < (int)current_clothe->layers.size() ;lay++) {
-    if (current_clothe->layers[lay]->name != "weapon")
+  for (int lay=0;lay < (int)current_clothe->GetLayers().size() ;lay++) {
+    if (current_clothe->GetLayers()[lay]->name != "weapon")
       {
-	Member* member = current_clothe->layers[lay];
+	Member* member = current_clothe->GetLayers()[lay];
 	if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
 	   && !member->go_through_ground)
 	  y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
@@ -452,18 +452,18 @@ void Body::Draw(const Point2i& _pos)
   int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
+  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
 
-    if (current_clothe->layers[layer]->name == "weapon") {
+    if (current_clothe->GetLayers()[layer]->name == "weapon") {
       // We draw the weapon member only if currently drawing the active character
       if (owner->IsActiveCharacter()) {
 	ASSERT(draw_weapon_member == 0);
-	ASSERT(current_clothe->layers[layer] == weapon_member);
+	ASSERT(current_clothe->GetLayers()[layer] == weapon_member);
 	DrawWeaponMember(_pos);
 	draw_weapon_member++;
       }
     } else {
-      current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+      current_clothe->GetLayers()[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
     }
   }
 
@@ -483,18 +483,18 @@ void Body::AddChildMembers(Member* parent)
       child++)
   {
     // Find if the current clothe uses this member:
-    for(uint lay = 0; lay < current_clothe->layers.size(); lay++)
+    for(uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
     {
-      if(current_clothe->layers[lay]->type == child->first)
+      if(current_clothe->GetLayers()[lay]->type == child->first)
       {
         // This child member is attached to his parent
         junction body;
-        body.member = current_clothe->layers[lay];
+        body.member = current_clothe->GetLayers()[lay];
         body.parent = parent;
         skel_lst.push_back(body);
 
         // continue recursively
-        AddChildMembers(current_clothe->layers[lay]);
+        AddChildMembers(current_clothe->GetLayers()[lay]);
       }
     }
   }
@@ -507,17 +507,17 @@ void Body::BuildSqueleton()
   skel_lst.clear();
 
   // Find the "body" member as it is the top of the skeleton
-  for(uint lay = 0; lay < current_clothe->layers.size(); lay++)
-    if(current_clothe->layers[lay]->type == "body")
+  for(uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
+    if (current_clothe->GetLayers()[lay]->type == "body")
     {
       junction body;
-      body.member = current_clothe->layers[lay];
+      body.member = current_clothe->GetLayers()[lay];
       body.parent = NULL;
       skel_lst.push_back(body);
       break;
     }
 
-  if(skel_lst.size() == 0)
+  if (skel_lst.size() == 0)
   {
     std::cerr << "Unable to find the \"body\" member in the current clothe" << std::endl;
     ASSERT(false);
@@ -529,7 +529,7 @@ void Body::BuildSqueleton()
 void Body::SetClothe(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
-  if (current_clothe && current_clothe->name == name)
+  if (current_clothe && current_clothe->GetName() == name)
     return;
 
   if (clothes_lst.find(name) != clothes_lst.end())
@@ -552,9 +552,9 @@ void Body::SetMovement(const std::string& name)
   if (current_mvt && current_mvt->GetType() == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
-  if (current_clothe && current_clothe->name == "black") return;
+  if (current_clothe && current_clothe->GetName() == "black") return;
 
-  if(mvt_lst.find(name) != mvt_lst.end())
+  if (mvt_lst.find(name) != mvt_lst.end())
   {
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
@@ -580,11 +580,11 @@ void Body::PlayAnimation()
 void Body::SetClotheOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s once", owner->GetName().c_str(), name.c_str());
-  if(current_clothe && current_clothe->name == name) return;
+  if (current_clothe && current_clothe->GetName() == name) return;
 
-  if(clothes_lst.find(name) != clothes_lst.end())
+  if (clothes_lst.find(name) != clothes_lst.end())
   {
-    if(!play_once_clothe_sauv)
+    if (!play_once_clothe_sauv)
       play_once_clothe_sauv = current_clothe;
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
@@ -600,14 +600,14 @@ void Body::SetClotheOnce(const std::string& name)
 void Body::SetMovementOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
-  if(current_mvt && current_mvt->GetType() == name) return;
+  if (current_mvt && current_mvt->GetType() == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
-  if(current_clothe && current_clothe->name == "black"  && name != "black") return;
+  if(current_clothe && current_clothe->GetName() == "black"  && name != "black") return;
 
-  if(mvt_lst.find(name) != mvt_lst.end())
+  if (mvt_lst.find(name) != mvt_lst.end())
   {
-    if(!play_once_mvt_sauv)
+    if (!play_once_mvt_sauv)
     {
       play_once_mvt_sauv = current_mvt;
       play_once_frame_sauv = current_frame;
@@ -689,10 +689,10 @@ void Body::MakeParticles(const Point2i& pos)
 {
   Build();
 
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
-    if (current_clothe->layers[layer]->type != "weapon")
-      ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
-						    current_clothe->layers[layer]->GetPos()+pos));
+  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+    if (current_clothe->GetLayers()[layer]->type != "weapon")
+      ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->GetLayers()[layer]->spr,
+						    current_clothe->GetLayers()[layer]->GetPos()+pos));
   }
 }
 
@@ -700,11 +700,11 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 {
   Build();
 
-  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
-    if (current_clothe->layers[layer]->type != "weapon")
-      ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
-                                                      current_clothe->layers[layer]->GetPos()+pos,
-                                                      current_clothe->layers[layer]->GetPos()+dst,
+  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+    if (current_clothe->GetLayers()[layer]->type != "weapon")
+      ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->GetLayers()[layer]->spr,
+							current_clothe->GetLayers()[layer]->GetPos()+pos,
+							current_clothe->GetLayers()[layer]->GetPos()+dst,
 							int(direction)));
   }
 }
@@ -723,15 +723,16 @@ const std::string& Body::GetMovement() const
 
 const std::string& Body::GetClothe() const
 {
-  return current_clothe->name;
+  return current_clothe->GetName();
 }
 
 void Body::DebugState() const
 {
-  MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
+  MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->GetName().c_str(),
+	    current_mvt->GetType().c_str(), current_frame);
   MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
-            (play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
-            (play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
+            (play_once_clothe_sauv?play_once_clothe_sauv->GetName().c_str():"(NULL)"),
+            (play_once_mvt_sauv?play_once_mvt_sauv->GetType().c_str():"(NULL)"),
             play_once_frame_sauv);
   MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
 }
