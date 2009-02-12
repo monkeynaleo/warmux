@@ -147,7 +147,7 @@ void GameClassic::__SetState_PLAYING()
   pause_seconde = Time::GetInstance()->Read();
 
   if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
-    wind.ChooseRandomVal();
+    Wind::GetRef().ChooseRandomVal();
 
   character_already_chosen = false;
 

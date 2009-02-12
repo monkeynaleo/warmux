@@ -426,7 +426,7 @@ void Physics::ComputeFallNextXY (double delta_t)
 
   // Wind force
 
-  wind_force = wind.GetStrength() * m_wind_factor ;
+  wind_force = Wind::GetRef().GetStrength() * m_wind_factor ;
 
   // Air resistanceance factor
 

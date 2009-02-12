@@ -45,23 +45,23 @@ msgstr[0] "%i игрок готов"
 msgstr[1] "%i игрока готовы"
 msgstr[2] "%i игроков готовы"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s>, также известный как %s из %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Команда %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
@@ -465,7 +465,7 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:437
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -736,8 +736,8 @@ msgstr "Ошибка инициализации сети: Клиент %s не �
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1026,7 +1026,7 @@ msgstr "Соединение вручную"
 msgid "Map"
 msgstr "Карта"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:296
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Карту %s создал: "
@@ -1522,7 +1522,7 @@ msgstr "Без имени"
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка версии не удалась из-за: %s\n"
@@ -1627,12 +1627,12 @@ msgstr ""
 "Бомбежка : щелкните левой кнопкой мыши на цели\n"
 "Одна бомбардировка за ход"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "не могу загрузить конфиг"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr "созданный игрок"
 
@@ -1640,7 +1640,7 @@ msgstr "созданный игрок"
 msgid "done"
 msgstr "готово"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "ошибка разбора конфигурационного файла"
 
@@ -1648,7 +1648,7 @@ msgstr "ошибка разбора конфигурационного файл�
 msgid "from"
 msgstr "из"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "нет конфигурационного файла!"
 

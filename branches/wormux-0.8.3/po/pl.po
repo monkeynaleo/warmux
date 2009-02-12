@@ -43,23 +43,23 @@ msgstr[0] "%i gracz jest gotowy"
 msgstr[1] "%i graczy jest gotowych"
 msgstr[2] "%i graczy jest gotowych"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> znany jako %s z %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Drużyna %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
@@ -471,7 +471,7 @@ msgstr "(brak danych)"
 msgid "(unlimited)"
 msgstr "(bez ograniczeń)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:437
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -742,8 +742,8 @@ msgstr "Błąd inicjalizacji sieci: Klient %s nie jest zgodny z Twoim - %s"
 msgid "Error loading team :"
 msgstr "Błąd podczas wczytywania drużyny:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1037,7 +1037,7 @@ msgstr "Połączenie manualne"
 msgid "Map"
 msgstr "Mapa"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:296
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, stworzona przez:"
@@ -1535,7 +1535,7 @@ msgstr "Nienazwane"
 msgid "Version"
 msgstr "Wersja"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Weryfikacja wersji nie powiodła się, gdyż: %s\n"
@@ -1639,12 +1639,12 @@ msgstr ""
 "Bombardowanie: kliknij lewym klawiszem na celu\n"
 "bombardowań na turę"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "błąd odczytu pliku konfiguracyjnego"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr "Nazwa własnej drużyny"
 
@@ -1652,7 +1652,7 @@ msgstr "Nazwa własnej drużyny"
 msgid "done"
 msgstr "gotowe"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "błąd podczas interpretowania pliku konfiguracyjnego"
 
@@ -1660,7 +1660,7 @@ msgstr "błąd podczas interpretowania pliku konfiguracyjnego"
 msgid "from"
 msgstr "do"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "brak pliku konfiguracyjnego!"
 

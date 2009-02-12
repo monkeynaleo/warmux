@@ -40,8 +40,6 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 20;
 
-Wind wind;
-
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   PhysicalObj("wind", xml_file)
 {

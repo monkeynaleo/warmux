@@ -24,6 +24,7 @@
 
 #include <list>
 #include "include/base.h"
+#include "include/singleton.h"
 #include "object/physical_obj.h"
 
 // Forward declarations
@@ -50,7 +51,7 @@ public:
   void Refresh();
 };
 
-class Wind
+class Wind : public Singleton<Wind>
 {
 private:
   long m_val, m_nv_val;
@@ -62,9 +63,11 @@ private:
   void RemoveAllParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
-public:
   Wind();
   ~Wind();
+  friend class Singleton<Wind>;
+
+public:
   double GetStrength() const;
   void ChooseRandomVal() const;
 
@@ -74,6 +77,5 @@ public:
   void DrawParticles();
 };
 
-extern Wind wind;
 #endif
 

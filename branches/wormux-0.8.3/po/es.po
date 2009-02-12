@@ -39,23 +39,23 @@ msgid_plural "%i players ready"
 msgstr[0] "%i jugador listo"
 msgstr[1] "%i jugadores listos"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s de %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "%s Equipo"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equipo - Remoto"
@@ -411,7 +411,7 @@ msgstr "(tiempo desconocido)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:437
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -682,8 +682,8 @@ msgstr "Error al iniciar la red: Cliente %s no está de acuerdo con usted - %s"
 msgid "Error loading team :"
 msgstr "Error cargando el equipo:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -977,7 +977,7 @@ msgstr "Conexión manual"
 msgid "Map"
 msgstr "Mapa"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:296
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, hecho por:"
@@ -1482,7 +1482,7 @@ msgstr "Sin nombre"
 msgid "Version"
 msgstr "Versión"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificación de versión ha fallado por: %s\n"
@@ -1587,12 +1587,12 @@ msgstr ""
 "Para bombardear: clic derecho sobre el objetivo\n"
 "un ataque por turno"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "No se puede cargar el fichero de configuración"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr "jugador personalizado"
 
@@ -1600,7 +1600,7 @@ msgstr "jugador personalizado"
 msgid "done"
 msgstr "Terminado"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "Leyendo fichero de configuración"
 
@@ -1608,7 +1608,7 @@ msgstr "Leyendo fichero de configuración"
 msgid "from"
 msgstr "de "
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "no hay un fichero de configuración"
 

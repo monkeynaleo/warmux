@@ -34,23 +34,23 @@ msgid_plural "%i players ready"
 msgstr[0] " %i spiller klar"
 msgstr[1] " %i spillere klare"
 
-#: src/map/maps_list.cpp:117
+#: src/map/maps_list.cpp:116
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> dit %s fra %s"
 
-#: src/map/maps_list.cpp:124
+#: src/map/maps_list.cpp:123
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "%s -laget"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
@@ -408,7 +408,7 @@ msgstr "(ukjent tid)"
 msgid "(unlimited)"
 msgstr "(uendelig)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:437
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -684,8 +684,8 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Lasting av %s-laget feilet :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -966,7 +966,7 @@ msgstr "Manuell tilkobling"
 msgid "Map"
 msgstr "Kart"
 
-#: src/map/map.cpp:294
+#: src/map/map.cpp:296
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "%s-kartet, er laget av :"
@@ -1463,7 +1463,7 @@ msgstr "Uten navn"
 msgid "Version"
 msgstr "Versjon"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Versjonsjekken feilet fordi: %s\n"
@@ -1563,12 +1563,12 @@ msgid ""
 msgstr ""
 "angrepsretning: venstre/høyreå bombe: ventreklikk på måleten bombe per runde"
 
-#: src/map/maps_list.cpp:78
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "Kunne ikke laste konfigurasjonsfilen"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr ""
 
@@ -1576,7 +1576,7 @@ msgstr ""
 msgid "done"
 msgstr "ferdig"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
 msgstr "Feil under lasting av konfigurasjonsfil"
 
@@ -1584,7 +1584,7 @@ msgstr "Feil under lasting av konfigurasjonsfil"
 msgid "from"
 msgstr "fra"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "Konfigurasjonsfilen ble ikke funnet!"
 

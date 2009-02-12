@@ -673,7 +673,7 @@ void Action_Weapon_Grapple (Action *a)
 
 void Action_Wind (Action *a)
 {
-  wind.SetVal (a->PopInt());
+  Wind::GetRef().SetVal (a->PopInt());
 }
 
 void Action_Network_RandomInit (Action *a)
