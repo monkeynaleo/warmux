@@ -60,24 +60,27 @@ public:
 
 class Movement
 {
+private:
   typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
-
+  std::string type;
+  uint speed;
 public:
   std::vector<member_def> frames;
-  bool always_moving;
-  int speed;
-  int repeat;
   uint test_left, test_right, test_top, test_bottom;
+  bool always_moving;
   enum
   {
     LOOP,
     PLAY_ONCE
   } play_mode;
 
-  std::string type;
 
-  ~Movement();
   Movement(const xmlNode* xml);
+  ~Movement();
+
+  void SetType(const std::string& type);
+  const std::string& GetType() const;
+  uint GetSpeed() const;
 };
 
 #endif //MEMBER_H

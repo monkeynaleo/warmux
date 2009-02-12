@@ -127,7 +127,7 @@ Body::Body(const xmlNode* xml, const Profile* res):
       if (iter->second == name)
       {
         Movement* mvt = new Movement(*it);
-        mvt->type = iter->first;
+        mvt->SetType(iter->first);
         mvt_lst[iter->first] = mvt;
       }
   }
@@ -236,11 +236,11 @@ void Body::ResetMovement() const
 void Body::ApplyMovement(Movement* mvt, uint frame)
 {
 #ifdef DEBUG
-  if (mvt->type != "breathe")
+  if (mvt->GetType() != "breathe")
     MSG_DEBUG("body_anim", " %s uses %s-%s:%u",
 	      owner->GetName().c_str(),
 	      current_clothe->name.c_str(),
-	      mvt->type.c_str(),
+	      mvt->GetType().c_str(),
 	      frame);
 #endif
 
@@ -361,13 +361,13 @@ void Body::Build()
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
 
-  if (walk_events > 0 || current_mvt->type != "walk")
+  if (walk_events > 0 || current_mvt->GetType() != "walk")
     {
-      if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
+      if(Time::GetInstance()->Read() > last_refresh + current_mvt->GetSpeed())
 	{
 	  // Compute the new frame number
-	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
-	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
+	  current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed();
+	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed()) * current_mvt->GetSpeed();
 
 	  // Depending on playmode loop if we have exceeded the nbr of frames of this movement
 	  if(current_frame >= current_mvt->frames.size())
@@ -383,7 +383,7 @@ void Body::Build()
 		    SetClothe(play_once_clothe_sauv->name);
 		  if (play_once_mvt_sauv)
 		    {
-		      SetMovement(play_once_mvt_sauv->type);
+		      SetMovement(play_once_mvt_sauv->GetType());
 		      current_frame = play_once_frame_sauv;
 		    }
 		}
@@ -549,10 +549,10 @@ void Body::SetClothe(const std::string& name)
 void Body::SetMovement(const std::string& name)
 {
   MSG_DEBUG("body", " %s use movement %s", owner->GetName().c_str(), name.c_str());
-  if(current_mvt && current_mvt->type == name) return;
+  if (current_mvt && current_mvt->GetType() == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
-  if(current_clothe && current_clothe->name == "black") return;
+  if (current_clothe && current_clothe->name == "black") return;
 
   if(mvt_lst.find(name) != mvt_lst.end())
   {
@@ -600,7 +600,7 @@ void Body::SetClotheOnce(const std::string& name)
 void Body::SetMovementOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
-  if(current_mvt && current_mvt->type == name) return;
+  if(current_mvt && current_mvt->GetType() == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
   if(current_clothe && current_clothe->name == "black"  && name != "black") return;
@@ -656,7 +656,7 @@ void Body::StopWalk()
 {
   if(walk_events > 0)
     walk_events--;
-  if(current_mvt->type == "walk")
+  if(current_mvt->GetType() == "walk")
   {
     SetMovement("breathe");
     SetFrame(0);
@@ -670,7 +670,7 @@ bool Body::IsWalking() const
 
 uint Body::GetMovementDuration() const
 {
-  return current_mvt->frames.size() * current_mvt->speed;
+  return current_mvt->frames.size() * current_mvt->GetSpeed();
 }
 
 uint Body::GetFrameCount() const
@@ -689,23 +689,23 @@ void Body::MakeParticles(const Point2i& pos)
 {
   Build();
 
-  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-  if(current_clothe->layers[layer]->type != "weapon")
-    ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
-                                                  current_clothe->layers[layer]->GetPos()+pos));
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
+    if (current_clothe->layers[layer]->type != "weapon")
+      ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
+						    current_clothe->layers[layer]->GetPos()+pos));
+  }
 }
 
 void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 {
   Build();
 
-  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-  if(current_clothe->layers[layer]->type != "weapon")
-  {
-    ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
+  for (int layer=0;layer < (int)current_clothe->layers.size() ;layer++) {
+    if (current_clothe->layers[layer]->type != "weapon")
+      ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
                                                       current_clothe->layers[layer]->GetPos()+pos,
                                                       current_clothe->layers[layer]->GetPos()+dst,
-                                                      int(direction)));
+							int(direction)));
   }
 }
 
@@ -716,8 +716,15 @@ void Body::SetRotation(double angle)
   need_rebuild = true;
 }
 
-const std::string& Body::GetMovement() const { return current_mvt->type; }
-const std::string& Body::GetClothe() const { return current_clothe->name; }
+const std::string& Body::GetMovement() const
+{
+  return current_mvt->GetType();
+}
+
+const std::string& Body::GetClothe() const
+{
+  return current_clothe->name;
+}
 
 void Body::DebugState() const
 {
