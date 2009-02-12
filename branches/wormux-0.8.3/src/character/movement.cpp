@@ -24,7 +24,7 @@
 #include "tool/xml_document.h"
 #include "tool/debug.h"
 
-Movement::Movement(const xmlNode* xml) : speed(15), always_moving(false), play_mode(LOOP)
+Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(false), play_mode(LOOP)
 {
   uint repeat = 1;
 
@@ -163,4 +163,20 @@ uint Movement::GetTestTop() const
 uint Movement::GetTestBottom() const
 {
   return test_bottom;
+}
+
+// ===============================================================
+
+void Movement::ShareMovement(Movement* mvt)
+{
+  ASSERT(mvt);
+  mvt->ref_count++;
+}
+
+void Movement::UnshareMovement(Movement* mvt)
+{
+  mvt->ref_count--;
+
+  if (mvt->ref_count == 0)
+    delete mvt;
 }

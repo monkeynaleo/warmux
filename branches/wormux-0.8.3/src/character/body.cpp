@@ -138,7 +138,6 @@ Body::Body(const xmlNode* xml, const Profile* res):
     std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
     exit(EXIT_FAILURE);
   }
-
 }
 
 Body::Body(const Body& _body):
@@ -198,6 +197,7 @@ Body::Body(const Body& _body):
     std::pair<std::string,Movement*> p;
     p.first = it3->first;
     p.second = it3->second;
+    Movement::ShareMovement(p.second);
     mvt_lst.insert(p);
     it3++;
   }
@@ -220,6 +220,14 @@ Body::~Body()
   {
     delete it2->second;
     it2++;
+  }
+
+  // Unshare the movements
+  std::map<std::string, Movement*>::iterator it3 = mvt_lst.begin();
+  while(it3 != mvt_lst.end())
+  {
+    Movement::UnshareMovement(it3->second);
+    it3++;
   }
 
   members_lst.clear();

@@ -60,10 +60,16 @@ public:
 
 class Movement
 {
+  /* If you need this, implement it (correctly) */
+  const Movement& operator=(const Movement&);
+  Movement(const Movement&);
+  /**********************************************/
 public:
   typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
 
 private:
+  uint ref_count;
+
   std::vector<member_def> frames;
   std::string type;
   uint speed;
@@ -94,6 +100,9 @@ public:
   uint GetTestRight() const;
   uint GetTestTop() const;
   uint GetTestBottom() const;
+
+  static void ShareMovement(Movement* mvt);
+  static void UnshareMovement(Movement* mvt);
 };
 
 #endif //MEMBER_H
