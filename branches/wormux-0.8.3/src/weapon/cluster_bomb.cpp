@@ -165,7 +165,7 @@ void ClusterBomb::DoExplosion()
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
     cluster->Shoot( pos, speed, angle + cluster_deviation );
 
-    lst_objects.AddObject(cluster);
+    ObjectsList::GetRef().AddObject(cluster);
   }
 }
 

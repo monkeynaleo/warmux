@@ -70,7 +70,7 @@ protected:
             cluster = new ClusterType( cfg, p_launcher );
             cluster->Shoot( pos, speed, angle + cluster_deviation, recursion_depth );
 
-            lst_objects.AddObject(cluster);
+            ObjectsList::GetRef().AddObject(cluster);
         }
         m_spawned_clusters = true;
     }
