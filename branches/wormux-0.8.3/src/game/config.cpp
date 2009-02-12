@@ -243,7 +243,7 @@ Config::Config():
   }
 
   dir = TranslateDirectory(data_dir);
-  resource_manager.AddDataPath(dir + PATH_SEPARATOR);
+  resource_manager.SetDataPath(dir + PATH_SEPARATOR);
 }
 
 bool Config::MkdirChatLogDir() const

@@ -47,7 +47,7 @@ Profile::~Profile()
   if (doc != NULL) delete doc;
 }
 
-ResourceManager::ResourceManager()
+ResourceManager::ResourceManager() : base_path("")
 {
 }
 
@@ -55,7 +55,7 @@ ResourceManager::~ResourceManager()
 {
 }
 
-void ResourceManager::AddDataPath(const std::string& base_path)
+void ResourceManager::SetDataPath(const std::string& base_path)
 {
   this->base_path = base_path;
 }
