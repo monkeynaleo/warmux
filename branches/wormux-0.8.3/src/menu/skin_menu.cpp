@@ -92,8 +92,8 @@ SkinMenu::~SkinMenu()
 void SkinMenu::LoadBody(const std::string& name)
 {
   printf("Should load %s\n", name.c_str());
-  body_list.FreeMem();
-  body = body_list.GetBody(name);
+  BodyList::GetRef().FreeMem();
+  body = BodyList::GetRef().GetBody(name);
 
   clothe_list->ClearItems();
   for (std::map<std::string, Clothe*>::const_iterator it = body->clothes_lst.begin();
