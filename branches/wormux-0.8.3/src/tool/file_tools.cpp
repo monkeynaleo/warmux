@@ -23,6 +23,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
+#include <unistd.h>
 
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
