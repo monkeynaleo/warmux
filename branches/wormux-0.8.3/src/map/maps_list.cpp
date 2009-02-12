@@ -54,7 +54,6 @@ InfoMap::InfoMap(const std::string &map_name,
   random_generated(false),
   island_type(RANDOM_GENERATED),
   water_type(Water::NO_WATER),
-  water_name(),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -133,6 +132,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadBool(xml, "is_open", is_opened);
 
   // reading water type
+  std::string water_name;
   XmlReader::ReadString(xml, "water", water_name);
   water_type = (Water::Water_type)Water::GetWaterType(water_name);
 
@@ -367,22 +367,5 @@ InfoMap* MapsList::ActiveMap()
 InfoMap* ActiveMap()
 {
   return MapsList::GetInstance()->ActiveMap();
-}
-
-std::string InfoMap::GetWaterName()
-{
-  LoadBasicInfo();
-  int water;
-  if(str2int(water_name, water) && water < Water::MAX_WATER_TYPE) {
-    if(water == Water::WATER) {
-      return "water";
-    } else if(water == Water::LAVA) {
-      return "lava";
-    } else if(water == Water::RADIOACTIVE) {
-      return "radioactive";
-    }
-  }
-  // not an old water definition or invalid type
-  return water_name;
 }
 

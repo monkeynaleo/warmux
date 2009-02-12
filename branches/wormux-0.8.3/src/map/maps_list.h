@@ -75,7 +75,6 @@ private:
   Point2i lower_right_pad;
   Island_type island_type;
   Water::Water_type water_type;
-  std::string water_name;
 
   struct s_wind wind;
 
@@ -109,7 +108,6 @@ public:
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; }
   bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; }
-  std::string GetWaterName();
   const Water::Water_type& GetWaterType() { return water_type; }
 
   Point2i GetUpperLeftPad() { return upper_left_pad; }
