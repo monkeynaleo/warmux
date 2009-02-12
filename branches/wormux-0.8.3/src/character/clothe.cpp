@@ -73,7 +73,7 @@ Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst):
       it != c->layers.end();
       ++it)
   {
-    layers.push_back(members_lst.find((*it)->name)->second);
+    layers.push_back(members_lst.find((*it)->GetName())->second);
   }
 }
 

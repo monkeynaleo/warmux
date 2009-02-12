@@ -35,14 +35,14 @@
 Member::Member(const xmlNode* xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
+  name(""),
+  type(""),
   anchor(0,0),
   spr(NULL),
-  name(""),
   attached_members(),
   pos(0,0),
   scale(0,0),
   alpha(0),
-  type(""),
   go_through_ground(false)
 {
   if (xml == NULL)
@@ -125,14 +125,14 @@ Member::Member(const xmlNode* xml, const Profile* res):
 Member::Member(const Member& m):
   parent(NULL),
   angle_rad(m.angle_rad),
+  name(m.name),
+  type(m.type),
   anchor(m.anchor),
   spr(new Sprite(*m.spr)),
-  name(m.name),
   attached_members(),
   pos(m.pos),
   scale(m.scale),
   alpha(m.alpha),
-  type(m.type),
   go_through_ground(m.go_through_ground)
 {
   Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
@@ -272,6 +272,16 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& skel_ls
   pos += mvt.pos;
   alpha *= mvt.alpha;
   scale = scale * mvt.scale;
+}
+
+const std::string& Member::GetName() const
+{
+  return name;
+}
+
+const std::string& Member::GetType() const
+{
+  return type;
 }
 
 WeaponMember::WeaponMember() : Member(NULL, NULL)

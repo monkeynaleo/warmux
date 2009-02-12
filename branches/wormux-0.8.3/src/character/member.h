@@ -29,31 +29,35 @@ typedef std::vector<Point2f> v_attached;
 // Forward declaration
 class Sprite;
 class c_junction; //defined in body.h
+class Movement;
 class member_mvt; //defined in movement.h
 class Profile;
 typedef struct _xmlNode xmlNode;
 
 class Member
 {
+private:
   /* If you need this, implement it (correctly) */
   Member operator=(const Member&);
   /**********************************************/
 
   Member* parent;
   double angle_rad;
+
 protected:
+  std::string name;
+  std::string type;
+
   Point2f anchor;
 
 public:
   Sprite* spr;
 
-  std::string name;
   std::map<std::string, v_attached> attached_members;
 
   Point2f pos;
   Point2f scale;
   float alpha;
-  std::string type;
   bool go_through_ground;
 
   virtual ~Member();
@@ -75,6 +79,9 @@ public:
   const Point2i GetPos() { return Point2i((int)pos.x, (int)pos.y); };
   const Point2i GetAnchorPos() { return Point2i((int)anchor.x, (int)anchor.y); };
   void SetAngle(const double &angle) { angle_rad = angle; };
+
+  const std::string& GetName() const;
+  const std::string& GetType() const;
 };
 
 class WeaponMember : public Member
