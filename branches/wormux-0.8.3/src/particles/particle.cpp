@@ -163,6 +163,7 @@ void ParticleEngine::Load()
   particle_sprite[WATER_spr] = resource_manager.LoadSprite(res,"water_drop");
   particle_sprite[LAVA_spr] = resource_manager.LoadSprite(res,"lava_drop");
   particle_sprite[RADIOACTIVE_spr] = resource_manager.LoadSprite(res,"radioactive_drop");
+  particle_sprite[DIRTYWATER_spr] = resource_manager.LoadSprite(res,"dirtywater_drop");
   resource_manager.UnLoadXMLProfile(res);
 
   sprites_loaded = true;

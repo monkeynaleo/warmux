@@ -47,4 +47,10 @@ public:
   RadioactiveParticle();
 };
 
+class DirtyWaterParticle : public WaterParticle
+{
+public:
+  DirtyWaterParticle();
+};
+
 #endif /* WATER_DROP_H */
