@@ -28,11 +28,12 @@
 #include <string>
 #include <iostream>
 #include <errno.h>
-#include <unistd.h>
 #include <libxml/tree.h>
+
 #ifdef __APPLE__
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
+
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -62,14 +63,14 @@ static std::string GetWormuxPath()
 {
   char  buffer[MAX_PATH];
   DWORD size = MAX_PATH;
-#if 0
+#  if 0
   HKEY  hK;
   DWORD type;
 
   buffer[0] = 0;
   if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\Games\\Wormux", 0, KEY_READ, &hK) != ERROR_SUCCESS ||
       RegQueryValueEx(hK, "Path", NULL, &type, buffer, &size) != ERROR_SUCCESS && type != REG_SZ)
-#endif
+#  endif
   {
     size = GetModuleFileName(NULL, buffer, MAX_PATH);
     if (size<1) return std::string("");
