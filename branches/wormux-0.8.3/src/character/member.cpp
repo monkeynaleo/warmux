@@ -37,11 +37,11 @@ Member::Member(const xmlNode* xml, const Profile* res):
   angle_rad(0),
   alpha(0),
   go_through_ground(false),
+  attached_members(),
   name(""),
   type(""),
   anchor(0,0),
   spr(NULL),
-  attached_members(),
   pos(0,0),
   scale(0,0)
 {
@@ -127,11 +127,11 @@ Member::Member(const Member& m):
   angle_rad(m.angle_rad),
   alpha(m.alpha),
   go_through_ground(m.go_through_ground),
+  attached_members(),
   name(m.name),
   type(m.type),
   anchor(m.anchor),
   spr(new Sprite(*m.spr)),
-  attached_members(),
   pos(m.pos),
   scale(m.scale)
 {
@@ -312,6 +312,11 @@ const std::string& Member::GetType() const
 bool Member::IsGoingThroughGround() const
 {
   return go_through_ground;
+}
+
+const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
+{
+  return attached_members;
 }
 
 
