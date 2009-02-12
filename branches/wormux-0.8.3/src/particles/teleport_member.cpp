@@ -26,11 +26,11 @@
 #include "graphic/sprite.h"
 #include "map/camera.h"
 
-TeleportMemberParticle::TeleportMemberParticle(const Sprite* spr, const Point2i& position, const Point2i& dest, int direction) :
+TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i& position, const Point2i& dest, int direction) :
   Particle("teleport_member_particle")
 {
   SetCollisionModel(true, false, false);
-  image = new Sprite(spr->GetSurface());
+  image = new Sprite(spr.GetSurface());
 
   float scale_x, scale_y;
   image->GetScaleFactors(scale_x, scale_y);

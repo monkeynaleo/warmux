@@ -24,12 +24,12 @@
 #include "graphic/sprite.h"
 #include "tool/random.h"
 
-BodyMemberParticle::BodyMemberParticle(const Sprite* spr, const Point2i& position) :
+BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
   Particle("body_member_particle")
 {
   SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
-  image = new Sprite(spr->GetSurface());
+  image = new Sprite(spr.GetSurface());
   image->EnableRotationCache(32);
   ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
@@ -37,7 +37,7 @@ BodyMemberParticle::BodyMemberParticle(const Sprite* spr, const Point2i& positio
   SetSize(image->GetSize());
   SetOnTop(true);
   SetSpeed( (double)RandomLocal().GetLong(10, 15),
-        - (double)RandomLocal().GetLong(0, 3000)/1000.0);
+	    - (double)RandomLocal().GetLong(0, 3000)/1000.0);
 }
 
 void BodyMemberParticle::Refresh()

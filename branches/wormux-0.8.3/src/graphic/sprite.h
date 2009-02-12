@@ -96,7 +96,7 @@ public:
   const double &GetRotation_rad() const;
   void SetRotation_HotSpot( const Point2i& new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
-  const Point2i& GetRotationPoint() { return rotation_point; };
+  const Point2i& GetRotationPoint() const { return rotation_point; };
 
   SpriteFrame& operator[] (unsigned int frame_no);
   const SpriteFrame& operator[] (unsigned int frame_no) const;
