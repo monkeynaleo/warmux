@@ -35,6 +35,7 @@
 Member::Member(const xmlNode* xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
+  alpha(0),
   name(""),
   type(""),
   anchor(0,0),
@@ -42,7 +43,6 @@ Member::Member(const xmlNode* xml, const Profile* res):
   attached_members(),
   pos(0,0),
   scale(0,0),
-  alpha(0),
   go_through_ground(false)
 {
   if (xml == NULL)
@@ -125,6 +125,7 @@ Member::Member(const xmlNode* xml, const Profile* res):
 Member::Member(const Member& m):
   parent(NULL),
   angle_rad(m.angle_rad),
+  alpha(m.alpha),
   name(m.name),
   type(m.type),
   anchor(m.anchor),
@@ -132,7 +133,6 @@ Member::Member(const Member& m):
   attached_members(),
   pos(m.pos),
   scale(m.scale),
-  alpha(m.alpha),
   go_through_ground(m.go_through_ground)
 {
   Point2i rot = Point2i((int)anchor.x, (int)anchor.y);

@@ -43,6 +43,7 @@ private:
 
   Member* parent;
   double angle_rad;
+  float alpha;
 
 protected:
   std::string name;
@@ -57,7 +58,6 @@ public:
 
   Point2f pos;
   Point2f scale;
-  float alpha;
   bool go_through_ground;
 
   virtual ~Member();
