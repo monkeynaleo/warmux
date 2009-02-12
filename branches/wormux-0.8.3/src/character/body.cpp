@@ -251,11 +251,11 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
   for (;member != skel_lst.end();
        member++)
   {
-    ASSERT( frame < mvt->frames.size() );
-    if(mvt->frames[frame].find(member->member->type) != mvt->frames[frame].end())
+    ASSERT( frame < mvt->GetFrames().size() );
+    if(mvt->GetFrames()[frame].find(member->member->type) != mvt->GetFrames()[frame].end())
     {
       // This member needs to be moved :
-      member_mvt mb_mvt = mvt->frames[frame].find(member->member->type)->second;
+      member_mvt mb_mvt = mvt->GetFrames()[frame].find(member->member->type)->second;
       if(mb_mvt.follow_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
@@ -370,15 +370,15 @@ void Body::Build()
 	  last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->GetSpeed()) * current_mvt->GetSpeed();
 
 	  // Depending on playmode loop if we have exceeded the nbr of frames of this movement
-	  if(current_frame >= current_mvt->frames.size())
+	  if(current_frame >= current_mvt->GetFrames().size())
 	    {
 	      if(current_mvt->play_mode == Movement::LOOP)
 		{
-		  current_frame %= current_mvt->frames.size();
+		  current_frame %= current_mvt->GetFrames().size();
 		}
 	      else if(current_mvt->play_mode == Movement::PLAY_ONCE)
 		{
-		  current_frame = current_mvt->frames.size() - 1;
+		  current_frame = current_mvt->GetFrames().size() - 1;
 		  if (play_once_clothe_sauv)
 		    SetClothe(play_once_clothe_sauv->name);
 		  if (play_once_mvt_sauv)
@@ -670,17 +670,17 @@ bool Body::IsWalking() const
 
 uint Body::GetMovementDuration() const
 {
-  return current_mvt->frames.size() * current_mvt->GetSpeed();
+  return current_mvt->GetFrames().size() * current_mvt->GetSpeed();
 }
 
 uint Body::GetFrameCount() const
 {
-  return current_mvt->frames.size();
+  return current_mvt->GetFrames().size();
 }
 
 void Body::SetFrame(uint no)
 {
-  ASSERT(no < current_mvt->frames.size());
+  ASSERT(no < current_mvt->GetFrames().size());
   current_frame = no;
   need_rebuild = true;
 }
