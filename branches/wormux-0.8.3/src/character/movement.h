@@ -68,9 +68,9 @@ private:
   std::string type;
   uint speed;
   bool always_moving;
+  uint test_left, test_right, test_top, test_bottom;
 
 public:
-  uint test_left, test_right, test_top, test_bottom;
   enum
   {
     LOOP,
@@ -89,6 +89,11 @@ public:
   bool IsAlwaysMoving() const;
 
   const std::vector<Movement::member_def> & GetFrames() const;
+
+  uint GetTestLeft() const;
+  uint GetTestRight() const;
+  uint GetTestTop() const;
+  uint GetTestBottom() const;
 };
 
 #endif //MEMBER_H

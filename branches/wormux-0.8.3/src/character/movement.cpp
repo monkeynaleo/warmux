@@ -144,3 +144,23 @@ const std::vector<Movement::member_def> & Movement::GetFrames() const
 {
   return frames;
 }
+
+uint Movement::GetTestLeft() const
+{
+  return test_left;
+}
+
+uint Movement::GetTestRight() const
+{
+  return test_right;
+}
+
+uint Movement::GetTestTop() const
+{
+  return test_top;
+}
+
+uint Movement::GetTestBottom() const
+{
+  return test_bottom;
+}
