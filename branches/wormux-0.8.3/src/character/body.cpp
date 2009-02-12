@@ -344,7 +344,7 @@ void Body::ApplySqueleton()
   // Move each member following the skeleton
   std::vector<junction>::iterator member = skel_lst.begin();
   // The first member is the body, we set it to pos:
-  member->member->pos = Point2f(0.0, 0.0);
+  member->member->SetPos(Point2f(0.0, 0.0));
   member->member->SetAngle(0.0);
   member++;
 
@@ -415,9 +415,9 @@ void Body::Build()
     if (current_clothe->GetLayers()[lay]->GetName() != "weapon")
       {
 	Member* member = current_clothe->GetLayers()[lay];
-	if (member->pos.y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
+	if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
 	   && !member->IsGoingThroughGround())
-	  y_max = member->pos.y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
+	  y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
       }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
@@ -432,9 +432,9 @@ void Body::UpdateWeaponPosition(const Point2i& _pos)
 {
   // update the weapon position
   if (direction == DIRECTION_RIGHT)
-    weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
+    weapon_pos = weapon_member->GetPos();
   else
-    weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
+    weapon_pos = Point2i(GetSize().x - weapon_member->GetPos().x,weapon_member->GetPos().y);
   weapon_pos += _pos;
 }
 

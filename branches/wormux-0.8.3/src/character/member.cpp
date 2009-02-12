@@ -38,12 +38,12 @@ Member::Member(const xmlNode* xml, const Profile* res):
   alpha(0),
   go_through_ground(false),
   attached_members(),
+  pos(0,0),
+  scale(0,0),
   spr(NULL),
   name(""),
   type(""),
-  anchor(0,0),
-  pos(0,0),
-  scale(0,0)
+  anchor(0,0)
 {
   if (xml == NULL)
     return;
@@ -128,12 +128,12 @@ Member::Member(const Member& m):
   alpha(m.alpha),
   go_through_ground(m.go_through_ground),
   attached_members(),
+  pos(m.pos),
+  scale(m.scale),
   spr(new Sprite(*m.spr)),
   name(m.name),
   type(m.type),
-  anchor(m.anchor),
-  pos(m.pos),
-  scale(m.scale)
+  anchor(m.anchor)
 {
   Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
   spr->SetRotation_HotSpot(rot);
@@ -292,6 +292,16 @@ void Member::SetAngle(const double &angle)
 const Sprite& Member::GetSprite() const
 {
   return *spr;
+}
+
+void Member::SetPos(const Point2f &_pos)
+{
+  pos = _pos;
+}
+
+const Point2f& Member::GetPosFloat() const
+{
+  return pos;
 }
 
 const Point2i Member::GetPos() const
