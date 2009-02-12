@@ -72,11 +72,11 @@ void InfoMap::LoadBasicInfo()
   if (!DoesFileExist(nomfich))
     throw _("no configuration file!");
   // FIXME: not freed
-  res_profile = resource_manager.LoadXMLProfile(nomfich, true);
+  res_profile = GetResourceManager().LoadXMLProfile(nomfich, true);
   if (!res_profile)
     throw _("couldn't load config");
   // Load preview
-  preview = resource_manager.LoadImage(res_profile, "preview");
+  preview = GetResourceManager().LoadImage(res_profile, "preview");
   is_basic_info_loaded = true;
   // Load other informations
   XmlReader doc;
@@ -140,8 +140,8 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   bool add_pad = false;
   XmlReader::ReadBool(xml, "add_pad", add_pad);
   if(is_opened && add_pad) {
-    upper_left_pad = resource_manager.LoadPoint2i(res_profile, "upper_left_pad");
-    lower_right_pad = resource_manager.LoadPoint2i(res_profile, "lower_right_pad");
+    upper_left_pad = GetResourceManager().LoadPoint2i(res_profile, "upper_left_pad");
+    lower_right_pad = GetResourceManager().LoadPoint2i(res_profile, "lower_right_pad");
   }
 
   const xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
@@ -179,11 +179,11 @@ void InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_sky = resource_manager.LoadImage(res_profile,"sky");
+  img_sky = GetResourceManager().LoadImage(res_profile,"sky");
   if(!random_generated) {
-    img_ground = resource_manager.LoadImage(res_profile, "map");
+    img_ground = GetResourceManager().LoadImage(res_profile, "map");
   } else {
-    img_ground = resource_manager.GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
+    img_ground = GetResourceManager().GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
   }
 }
 

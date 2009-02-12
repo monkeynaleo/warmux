@@ -29,7 +29,7 @@
 Button::Button (const Profile *res_profile,
                 const std::string& resource_id, bool _img_scale):
   img_scale(_img_scale),
-  image(resource_manager.LoadSprite(res_profile,resource_id))
+  image(GetResourceManager().LoadSprite(res_profile,resource_id))
 {
   position = Point2i(-1, -1);
   size = image->GetSize();

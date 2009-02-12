@@ -38,12 +38,12 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
   position = Point2i(-1, -1);
   size = _size;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  m_image = resource_manager.LoadImage(res, resource_id);
-  m_annulus_background = resource_manager.LoadImage(res, "menu/annulus_background");
-  m_annulus_foreground = resource_manager.LoadImage(res, "menu/annulus_foreground");
-  m_progress_color = resource_manager.LoadColor(res, "menu/annulus_progress_color");
-  resource_manager.UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  m_image = GetResourceManager().LoadImage(res, resource_id);
+  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background");
+  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground");
+  m_progress_color = GetResourceManager().LoadColor(res, "menu/annulus_progress_color");
+  GetResourceManager().UnLoadXMLProfile( res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());

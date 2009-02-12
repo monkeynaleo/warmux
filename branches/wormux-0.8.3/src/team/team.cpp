@@ -62,12 +62,12 @@ Team::Team (const std::string& teams_dir, const std::string& id)
     throw "Invalid file structure: cannot find a name for team ";
 
   // Load flag
-  Profile *res = resource_manager.LoadXMLProfile(nomfich, true);
-  flag = resource_manager.LoadImage(res, "flag");
+  Profile *res = GetResourceManager().LoadXMLProfile(nomfich, true);
+  flag = GetResourceManager().LoadImage(res, "flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
-  death_flag = resource_manager.LoadImage(res, "death_flag");
-  big_flag = resource_manager.LoadImage(res, "big_flag");
-  resource_manager.UnLoadXMLProfile(res);
+  death_flag = GetResourceManager().LoadImage(res, "death_flag");
+  big_flag = GetResourceManager().LoadImage(res, "big_flag");
+  GetResourceManager().UnLoadXMLProfile(res);
 
   // Get sound profile
   if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))

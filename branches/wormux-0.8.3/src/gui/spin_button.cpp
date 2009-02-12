@@ -35,7 +35,7 @@ SpinButton::SpinButton (const std::string &label, int width,
   size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   shadowed = _shadowed;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
 
   txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
   txt_label->SetMaxWidth(size.x - 30);
@@ -51,7 +51,7 @@ SpinButton::SpinButton (const std::string &label, int width,
   m_plus->SetPosition(position.x + size.x - 5, position.y);
   m_minus = new Button(res, "menu/minus");
   m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
-  resource_manager.UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile( res);
 
   ValueHasChanged();
 }

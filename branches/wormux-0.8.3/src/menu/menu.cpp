@@ -44,8 +44,8 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   uint x = app->video->window.GetWidth() / 2;
   uint y = app->video->window.GetHeight() - 50;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  background = new Sprite( resource_manager.LoadImage( res, bg), true);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  background = new Sprite( GetResourceManager().LoadImage( res, bg), true);
   background->cache.EnableLastFrameCache();
 
   b_ok = NULL;
@@ -72,7 +72,7 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   }
 
   widgets.SetContainer(this);
-  resource_manager.UnLoadXMLProfile(res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Menu::~Menu()

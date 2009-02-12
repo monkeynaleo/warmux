@@ -60,12 +60,12 @@ RandomMap::RandomMap(Profile *profile, const int width, const int height)
   XmlReader::ReadDouble(profile->doc->GetRoot(), "border_size", border_size);
 
   // Loading resources
-  border_color = resource_manager.LoadColor(profile, "border_color");
-  texture = resource_manager.LoadImage(profile, "texture");
+  border_color = GetResourceManager().LoadColor(profile, "border_color");
+  texture = GetResourceManager().LoadImage(profile, "texture");
   for(uint i = 0; i < number_of_element; i++) {
     std::stringstream ss;
     ss << "element_" << (i + 1);
-    element = resource_manager.LoadImage(profile, ss.str());
+    element = GetResourceManager().LoadImage(profile, ss.str());
     random_element_list.AddElement(&element);
   }
   element_list.clear();

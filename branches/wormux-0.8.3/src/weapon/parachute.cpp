@@ -59,8 +59,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_x_strength.x_extern = 0.0;
   m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
-
-  img = resource_manager.LoadSprite(weapons_res_profile, "parachute_sprite");
+  img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
 void Parachute::UpdateTranslationStrings()

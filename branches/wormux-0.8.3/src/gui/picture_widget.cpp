@@ -39,9 +39,9 @@ PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_
   spr = NULL;
   disabled = false;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  SetSurface(resource_manager.LoadImage(res, resource_id), scale, scale);
-  resource_manager.UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  SetSurface(GetResourceManager().LoadImage(res, resource_id), scale, scale);
+  GetResourceManager().UnLoadXMLProfile( res);
 }
 
 PictureWidget::~PictureWidget()
