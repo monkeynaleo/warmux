@@ -62,7 +62,7 @@ private:
 
 
 public:
-  Water() : type_color(NULL) { }
+  Water();
   ~Water();
   void Reset();
   void Free();
