@@ -36,14 +36,14 @@ Member::Member(const xmlNode* xml, const Profile* res):
   parent(NULL),
   angle_rad(0),
   alpha(0),
+  go_through_ground(false),
   name(""),
   type(""),
   anchor(0,0),
   spr(NULL),
   attached_members(),
   pos(0,0),
-  scale(0,0),
-  go_through_ground(false)
+  scale(0,0)
 {
   if (xml == NULL)
     return;
@@ -126,14 +126,14 @@ Member::Member(const Member& m):
   parent(NULL),
   angle_rad(m.angle_rad),
   alpha(m.alpha),
+  go_through_ground(m.go_through_ground),
   name(m.name),
   type(m.type),
   anchor(m.anchor),
   spr(new Sprite(*m.spr)),
   attached_members(),
   pos(m.pos),
-  scale(m.scale),
-  go_through_ground(m.go_through_ground)
+  scale(m.scale)
 {
   Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
   spr->SetRotation_HotSpot(rot);
@@ -283,6 +283,12 @@ const std::string& Member::GetType() const
 {
   return type;
 }
+
+bool Member::IsGoingThroughGround() const
+{
+  return go_through_ground;
+}
+
 
 WeaponMember::WeaponMember() : Member(NULL, NULL)
 {

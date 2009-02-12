@@ -44,6 +44,7 @@ private:
   Member* parent;
   double angle_rad;
   float alpha;
+  bool go_through_ground;
 
 protected:
   std::string name;
@@ -58,7 +59,6 @@ public:
 
   Point2f pos;
   Point2f scale;
-  bool go_through_ground;
 
   virtual ~Member();
   Member(const xmlNode* xml, const Profile* res);
@@ -82,6 +82,8 @@ public:
 
   const std::string& GetName() const;
   const std::string& GetType() const;
+
+  bool IsGoingThroughGround() const;
 };
 
 class WeaponMember : public Member
