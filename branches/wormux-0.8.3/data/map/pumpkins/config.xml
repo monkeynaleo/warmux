@@ -14,7 +14,7 @@
  <surface name="preview" file="preview.jpg" />
  
  <name>Pumpkins</name>
- <water>0</water>
+ <water>no</water>
  <nb_mine>8</nb_mine>
  <is_open>1</is_open>
    <!-- pad is given in pixel count. -->

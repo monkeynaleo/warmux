@@ -13,7 +13,7 @@
   <surface name="preview" file="battlenight-all.jpg" />
 
   <name>Battle Night</name>
-  <water>0</water>
+  <water>no</water>
   <nb_mine>3</nb_mine>
   <is_open>1</is_open>
   <!-- pad is given in pixel count. -->
