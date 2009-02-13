@@ -266,7 +266,7 @@ for PNG in png png12 png13 dummypng; do
     break
   fi
 done
-if test "$LIBPNG_LIB" = "dummypng"; then
+if test "$PNG" = "dummypng"; then
   AC_MSG_ERROR([*** libpng not found])
 else
   AC_MSG_RESULT(lib$PNG)
