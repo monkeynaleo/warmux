@@ -94,7 +94,7 @@ void JukeBox::Init()
 
   m_init = true;
 
-  LoadXML("share");
+  LoadXML("default");
   LoadMusicXML();
 }
 
