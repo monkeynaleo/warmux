@@ -21,8 +21,10 @@ test -d $1 || usage
 test -e $2 || usage
 
 test -d $IMAGES_DIR || mkdir -p $IMAGES_DIR
+rm -f $IMAGES_DIR/translation_stats
 for po in `ls $PO_DIR/*.po`; do
-    echo -n "Generating stats for locale "`basename $po .po`"..."
+    image=`basename $po .po`.png
+    echo -n "Generating stats for locale ${image%.png}..."
     fuzzy_x=`$MSGSTATS $POT_FILE $po | \
 	awk -v width=$WIDTH '/fuzzy:/ {fuzzy = $2} 
              /total:/ {total = $2}
@@ -39,6 +41,12 @@ for po in `ls $PO_DIR/*.po`; do
     convert -size ${WIDTH}x${HEIGHT} xc:${TRTD_COLOR} \
 	    -draw "fill $FUZZY_COLOR rectangle $fuzzy_x0,0 $fuzzy_x1,19
                    fill $UNTRTD_COLOR rectangle $untrtd_x0,0 $untrtd_x1,19" \
-	    $IMAGES_DIR/`basename $po .po`.png
+	    $IMAGES_DIR/$image
+    tran_fuzzy=`$MSGSTATS $POT_FILE $po | \
+      awk '/untranslated:/ {untr = $2} 
+           /fuzzy:/ {fuzzy = $2; if(fuzzy < 1) fuzzy = 0; }
+           /total:/ {total = $2}
+           END {print total-untr-fuzzy, fuzzy}'`
+    echo "$image $tran_fuzzy" >> $IMAGES_DIR/translation_stats
     echo " done"
 done
