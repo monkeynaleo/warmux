@@ -385,11 +385,11 @@ void Body::Build()
 	current_loop++;
 
 	// Number of loops
-	if (current_mvt->GetRepeatNb() != -1
-	    && int(current_loop) > current_mvt->GetRepeatNb()) {
+	if (current_mvt->GetNbLoops() != 0
+	    && current_loop >= current_mvt->GetNbLoops()) {
 
 	  // animation is finished - set it to the very last frame
-	  current_loop = current_mvt->GetRepeatNb();
+	  current_loop = current_mvt->GetNbLoops() -1;
 	  current_frame = current_mvt->GetFrames().size() -1;
 
 	  if (previous_clothe)
