@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE resources SYSTEM "../body.dtd">
+<!DOCTYPE resources [
+
+<!ENTITY standard_lefthanded_clothe SYSTEM "./standard_lefthanded_clothe.xml">
+<!ENTITY standard_righthanded_clothe SYSTEM "./standard_righthanded_clothe.xml">
+
+]>
+
 <resources>
 
 <!--   ###########################################
@@ -739,52 +745,12 @@
 
 <!-- ###### weapon-dynamite ###### -->
 <clothe name="weapon-dynamite">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-slap ###### -->
 <clothe name="weapon-slap">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-baseball ###### -->
@@ -813,251 +779,52 @@
 
 <!-- ###### weapon-bounce_ball ###### -->
 <clothe name="weapon-bounce_ball">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-cluster_bomb ###### -->
 <clothe name="weapon-cluster_bomb">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-disco_grenade ###### -->
 <clothe name="weapon-disco_grenade">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-footbomb ###### -->
 <clothe name="weapon-footbomb">
-	<c_member name="foothelmet2"/>
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="head"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="foothelmet1"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-grenade ###### -->
 <clothe name="weapon-grenade">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-gnulauncher ###### -->
 <clothe name="weapon-gnulauncher">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-polecatlauncher ###### -->
 <clothe name="weapon-polecatlauncher">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-minelauncher ###### -->
 <clothe name="weapon-minelauncher">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### weapon-syringe ###### -->
 <clothe name="weapon-syringe">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="weapon"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- # Parachute # -->
 <clothe name="weapon-parachute">
-	<c_member name="arm-left"/>
-	<c_member name="arm2-left"/>
-	<c_member name="arm3-left-R"/>
-	<c_member name="weapon"/>
-	<c_member name="foot-left"/>
-	<c_member name="tail"/>
-	<c_member name="foot-right"/>
-	<c_member name="back"/>
-	<c_member name="body"/>
-	<c_member name="hair"/>
-	<c_member name="hornleft"/>
-	<c_member name="head"/>
-	<c_member name="hornright"/>
-	<c_member name="noze"/>
-	<c_member name="eyes"/>
-	<c_member name="pupil-right"/>
-	<c_member name="pupil-left"/>
-	<c_member name="eyelid"/>
-	<c_member name="arm-right"/>
-	<c_member name="arm2-right"/>
-	<c_member name="arm3-right-R"/>
+	&standard_righthanded_clothe;
 </clothe>
 
 <!-- ###### Gun ###### -->
