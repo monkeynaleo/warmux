@@ -38,9 +38,6 @@ public:
   static const std::string ENV_LOCALEDIR;
   static const std::string ENV_FONT_PATH;
 
-  // Maximum number of loops for the test ...
-  static const uint NBR_BCL_MAX_EST_VIDE; // Is an object in vacuum ?
-
   // Authors list
   std::vector<std::string> AUTHORS;
 
@@ -51,9 +48,6 @@ public:
   // Dimension min/max of playground (in pixel)
   static const Point2i MAP_MIN_SIZE;
   static const int MAP_MAX_SIZE;
-
-  // Minimal free heigth (in pixel) for the playground to be said "open"
-  static const uint HAUT_MIN_TERRAIN_OUVERT;
 
 protected:
   friend class Singleton<Constants>;
