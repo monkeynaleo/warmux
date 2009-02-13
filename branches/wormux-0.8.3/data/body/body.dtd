@@ -39,6 +39,8 @@
 <!ELEMENT animation EMPTY>
 <!ATTLIST animation
           speed %integer; #IMPLIED
+          loop_wait %integer; #IMPLIED
+          loop_wait_random %integer; #IMPLIED
           loop_mode (pingpong) #IMPLIED >
 
 <!ELEMENT anchor EMPTY>
@@ -75,6 +77,7 @@
 <!ATTLIST movement
           name CDATA #REQUIRED
           speed %integer; #REQUIRED
+          nb_loops %integer; #IMPLIED
           play_mode (play_once|loop) "loop">
 
 <!ELEMENT collision_rect EMPTY>
