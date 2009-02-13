@@ -224,7 +224,7 @@ void GameClassic::ApplyDeathMode () const
 {
   if (IsGameFinished()) return;
 
-  if(Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
+  if (Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
   {
     GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
     FOR_ALL_LIVING_CHARACTERS(team, character)
