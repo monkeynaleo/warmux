@@ -73,7 +73,7 @@ private:
   std::vector<member_def> frames;
   std::string type;
   uint nb_loops; // 0 means forever
-  uint speed;
+  uint duration_per_frame; // in milli-second
   bool always_moving;
   uint test_left, test_right, test_top, test_bottom;
 
@@ -84,7 +84,7 @@ public:
   void SetType(const std::string& type);
   const std::string& GetType() const;
 
-  uint GetSpeed() const;
+  uint GetFrameDuration() const;
   uint GetNbLoops() const;
 
   bool IsAlwaysMoving() const;
