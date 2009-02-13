@@ -211,6 +211,16 @@
   <surface name="wind" file="interface/wind.png"/>
   <surface name="wind_indicator" file="interface/wind_indicator.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
+  <!-- Game mode options -->
+  <surface name="rounding_bottom" file="interface/rounding_bottom.png" />
+  <surface name="rounding_bottom_left" file="interface/rounding_bottomleft.png" />
+  <surface name="rounding_bottom_right" file="interface/rounding_bottomright.png" />
+  <surface name="rounding_top" file="interface/rounding_top.png" />
+  <surface name="rounding_top_left" file="interface/rounding_topleft.png" />
+  <surface name="rounding_top_right" file="interface/rounding_topright.png" />
+  <surface name="rounding_center" file="interface/rounding_center.png" />
+  <surface name="rounding_left" file="interface/rounding_left.png" />
+  <surface name="rounding_right" file="interface/rounding_right.png" />
 </section>
 
 <section name="loading_screen">
