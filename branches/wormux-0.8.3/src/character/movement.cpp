@@ -35,7 +35,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), speed(15), always_moving(
   XmlReader::ReadUintAttr(xml, "speed", speed);
   XmlReader::ReadIntAttr(xml, "repeat", repeat);
 
-   // Load the test rectangle
+  // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
   const xmlNode* collision_rect = XmlReader::GetMarker(xml, "collision_rect");
 

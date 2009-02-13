@@ -388,7 +388,10 @@ void Body::Build()
 	if (current_mvt->GetRepeatNb() != -1
 	    && int(current_loop) > current_mvt->GetRepeatNb()) {
 
-	  current_loop = 0;
+	  // animation is finished - set it to the very last frame
+	  current_loop = current_mvt->GetRepeatNb();
+	  current_frame = current_mvt->GetFrames().size() -1;
+
 	  if (previous_clothe)
 	    SetClothe(previous_clothe->GetName());
 	  if (previous_mvt)
@@ -434,6 +437,14 @@ void Body::Build()
   skel_lst.front().member->ApplyMovement(body_mvt, skel_lst);
 
   need_rebuild = false;
+}
+
+std::string Body::GetFrameLoop() const
+{
+  char str[16];
+  snprintf(str, 16, "%u-%u", current_loop, current_frame);
+
+  return std::string(str);
 }
 
 void Body::UpdateWeaponPosition(const Point2i& _pos)
@@ -691,6 +702,7 @@ void Body::SetFrame(uint no)
 {
   ASSERT(no < current_mvt->GetFrames().size());
   current_frame = no;
+  current_loop = 0;
   need_rebuild = true;
 }
 

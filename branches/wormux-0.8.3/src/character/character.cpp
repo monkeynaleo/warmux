@@ -451,7 +451,7 @@ void Character::Draw()
   if (IsLOGGING("body"))
   {
     dy -= HAUT_FONT_MIX;
-    std::string txt = body->GetClothe() + " " + body->GetMovement();
+    std::string txt = body->GetClothe() + " " + body->GetMovement() + " " + body->GetFrameLoop();
     Text skin_text(txt);
     skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
   }
