@@ -441,9 +441,9 @@ void OptionMenu::CheckUpdates()
       new_version.Ask();
     }
   }
-  catch (const char* err)
+  catch (const std::string err)
   {
-    std::cerr << Format(_("Version verification failed because: %s\n"), err);
+    AppWormux::DisplayError(Format(_("Version verification failed because: %s\n"), err.c_str()));
   }
 }
 
