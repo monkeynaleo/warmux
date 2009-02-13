@@ -126,11 +126,8 @@ OptionMenu::OptionMenu() :
   tabs->AddNewTab("unused", _("Graphic"), graphic_options);
 
   /* Language selection */
-  Box * language_options = new GridBox(max_width, option_size, false);
   lbox_languages = new ListBox(option_size);
-  language_options->AddWidget(lbox_languages);
-
-  tabs->AddNewTab("unused", _("Language"), language_options);
+  tabs->AddNewTab("unused", _("Language"), lbox_languages);
 
   /* Team editor */
 
