@@ -32,7 +32,6 @@
 #include <fribidi/fribidi.h>
 #include <cstring>
 
-FriBidiCharSet utf8;
 FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
 FriBidiChar unicode_buffer[2048];
 char buffer[2048];
@@ -40,10 +39,10 @@ char buffer[2048];
 char* localization(const char * message) {
   char* string = gettext(message);
   int l        = strlen(string);
-  int l_u      = fribidi_charset_to_unicode(utf8, string, l, unicode_buffer);
+  int l_u      = fribidi_charset_to_unicode(FRIBIDI_CHAR_SET_UTF8, string, l, unicode_buffer);
 
   fribidi_log2vis(unicode_buffer, l_u, &pbase_dir, unicode_buffer, NULL, NULL, NULL);
-  fribidi_unicode_to_charset(utf8, unicode_buffer, l_u, (char *)buffer);
+  fribidi_unicode_to_charset(FRIBIDI_CHAR_SET_UTF8, unicode_buffer, l_u, (char *)buffer);
   return buffer;
 }
 #endif /* USE_FRIBIDI */
@@ -92,13 +91,6 @@ static void I18N_SetDir(const std::string &dir)
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
   setlocale(LC_ALL, "");
-
-#ifdef USE_FRIBIDI
-  // Load UTF-8 charset
-  utf8 = fribidi_parse_charset ("UTF-8");
-  if (!utf8)
-    Error("Error in fribidi parsing charset UTF-8 !?");
-#endif
 
 #ifdef _WIN32
   std::string variable = "LANGUAGE=";
