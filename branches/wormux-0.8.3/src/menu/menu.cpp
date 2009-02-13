@@ -207,6 +207,10 @@ void Menu::Run (bool skip_menu)
   // Display the background
   DrawBackground();
 
+  SDL_GetMouseState( &x, &y);
+  Point2i mousePosition(x, y);
+  Display(mousePosition);
+
   do
   {
     // this is the current menu (here in case we had run a submenu)
@@ -215,59 +219,59 @@ void Menu::Run (bool skip_menu)
     // Poll and treat events
     SDL_Event event;
 
-    while (SDL_PollEvent(&event))
-    {
-      Point2i mousePosition(event.button.x, event.button.y);
+    if (!SDL_WaitEvent(&event))
+      continue;
 
-      if (event.type == SDL_QUIT) {
-        key_cancel();
-      } else if (event.type == SDL_KEYDOWN) {
-	bool used_by_widget = false;
+    Point2i mousePosition(event.button.x, event.button.y);
 
-	if (event.key.keysym.sym != SDLK_ESCAPE &&
-	    event.key.keysym.sym != SDLK_RETURN &&
-	    event.key.keysym.sym != SDLK_KP_ENTER)
+    if (event.type == SDL_QUIT) {
+      key_cancel();
+    } else if (event.type == SDL_KEYDOWN) {
+      bool used_by_widget = false;
+
+      if (event.key.keysym.sym != SDLK_ESCAPE &&
+	  event.key.keysym.sym != SDLK_RETURN &&
+	  event.key.keysym.sym != SDLK_KP_ENTER)
 	  used_by_widget = widgets.SendKey(event.key.keysym);
 
-	if (!used_by_widget) {
-	  switch (event.key.keysym.sym)
-	    {
-	    case SDLK_ESCAPE:
-	      key_cancel();
-	      break;
-	    case SDLK_RETURN:
-	    case SDLK_KP_ENTER:
-	      key_ok();
-	      break;
-	    case SDLK_UP:
-	      key_up();
-	      break;
-	    case SDLK_DOWN:
-	      key_down();
-	      break;
-	    case SDLK_LEFT:
-	      key_left();
-	      break;
-	    case SDLK_RIGHT:
-	      key_right();
-	      break;
-	    case SDLK_TAB:
-	      key_tab();
-	      break;
-	    case SDLK_F10:
-	      AppWormux::GetInstance()->video->ToggleFullscreen();
-	      break;
-	    default:
-	      // should have been handle upper!
-	      break;
-	    }
-	}
-      } else if (event.type == SDL_MOUSEBUTTONUP) {
-        if (!BasicOnClickUp(mousePosition))
-          OnClickUp(mousePosition, event.button.button);
-      } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-        OnClick(mousePosition, event.button.button);
+      if (!used_by_widget) {
+	switch (event.key.keysym.sym)
+	  {
+	  case SDLK_ESCAPE:
+	    key_cancel();
+	    break;
+	  case SDLK_RETURN:
+	  case SDLK_KP_ENTER:
+	    key_ok();
+	    break;
+	  case SDLK_UP:
+	    key_up();
+	    break;
+	  case SDLK_DOWN:
+	    key_down();
+	    break;
+	  case SDLK_LEFT:
+	    key_left();
+	    break;
+	  case SDLK_RIGHT:
+	    key_right();
+	    break;
+	  case SDLK_TAB:
+	    key_tab();
+	    break;
+	  case SDLK_F10:
+	    AppWormux::GetInstance()->video->ToggleFullscreen();
+	    break;
+	  default:
+	    // should have been handle upper!
+	    break;
+	  }
       }
+    } else if (event.type == SDL_MOUSEBUTTONUP) {
+      if (!BasicOnClickUp(mousePosition))
+	OnClickUp(mousePosition, event.button.button);
+    } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+      OnClick(mousePosition, event.button.button);
     }
 
     // Avoid to calculate redraw menu when comming back for closing.
@@ -287,16 +291,16 @@ void Menu::Run (bool skip_menu)
 void Menu::Display(const Point2i& mousePosition)
 {
   // to limit CPU
-  uint start = SDL_GetTicks();
+  //uint start = SDL_GetTicks();
 
   widgets.Update(mousePosition);
   Draw(mousePosition);
   AppWormux::GetInstance()->video->Flip();
 
   // to limit CPU
-  int delay = MENU_DELAY - (SDL_GetTicks()-start);
-  if (delay > 0)
-    SDL_Delay(delay);
+  // int delay = MENU_DELAY - (SDL_GetTicks()-start);
+//   if (delay > 0)
+//     SDL_Delay(delay);
 }
 
 void Menu::SetActionButtonsXY(int x, int y)
