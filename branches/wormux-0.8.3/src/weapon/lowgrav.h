@@ -22,6 +22,7 @@
 #ifndef LOWGRAV_H
 #define LOWGRAV_H
 #include "weapon.h"
+#include "sound/sound_sample.h"
 
 class LowGrav : public Weapon
 {
@@ -38,6 +39,7 @@ class LowGrav : public Weapon
     void Refresh() { };
     void p_Deselect();
     bool p_Shoot();
+    SoundSample use;
 };
 
 #endif /* LOWGRAV_H */
