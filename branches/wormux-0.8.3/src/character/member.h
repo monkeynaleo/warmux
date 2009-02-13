@@ -60,7 +60,7 @@ protected:
 public:
 
   virtual ~Member();
-  Member(const xmlNode* xml, const Profile* res);
+  Member(const xmlNode* xml, const std::string& main_folder);
   Member(const Member& m);
 
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);

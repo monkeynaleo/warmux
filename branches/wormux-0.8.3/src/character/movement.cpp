@@ -30,7 +30,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 
   XmlReader::ReadStringAttr(xml, "name", type);
   ASSERT(type != "");
-  MSG_DEBUG("body.movement", "  Loading movement %s\n", type.c_str());
+  MSG_DEBUG("body.movement", "  Loading movement %s", type.c_str());
 
   XmlReader::ReadUintAttr(xml, "duration_per_frame", duration_per_frame);
   XmlReader::ReadUintAttr(xml, "nb_loops", nb_loops);
@@ -53,8 +53,8 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 
   xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "frame");
   xmlNodeArray::const_iterator it = nodes.begin(), end = nodes.end();
-  MSG_DEBUG("body.movement", "  Found %i movement frames\n", nodes.size());
-  MSG_DEBUG("body.movement", "  Nb loops: %i\n", nb_loops);
+  MSG_DEBUG("body.movement", "  Found %i movement frames", nodes.size());
+  MSG_DEBUG("body.movement", "  Nb loops: %i", nb_loops);
 
   /* We know the number of member frame that are being read so we can resize
    * thr array to be able to get all of them. */
@@ -64,7 +64,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 
     xmlNodeArray members = XmlReader::GetNamedChildren(*it, "member");
     xmlNodeArray::const_iterator it2;
-    MSG_DEBUG("body.movement", "    Found %i frame members\n", members.size());
+    MSG_DEBUG("body.movement", "    Found %i frame members", members.size());
 
     for (it2 = members.begin(); it2 != members.end(); ++it2) {
 

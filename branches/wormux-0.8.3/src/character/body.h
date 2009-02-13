@@ -108,7 +108,7 @@ class Body
 
 public:
 
-  Body(const xmlNode* xml, const Profile* res);
+  Body(const xmlNode* xml, const std::string& main_folder);
   Body(const Body&);
   ~Body();
 

@@ -49,7 +49,8 @@ void BodyList::FreeMem()
 
 void BodyList::Load(const std::string &name)
 {
-  std::string fn = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "body" + PATH_SEPARATOR + name + PATH_SEPARATOR + CONFIG_FN;
+  std::string dir = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "body" + PATH_SEPARATOR + name + PATH_SEPARATOR;
+  std::string fn = dir + CONFIG_FN;
 
   XmlReader doc;
   if (!doc.Load(fn)) {
@@ -57,12 +58,8 @@ void BodyList::Load(const std::string &name)
      return;
   }
 
-  Profile *res = GetResourceManager().LoadXMLProfile( fn, true);
-
-  Body* body = new Body(doc.GetRoot(), res);
+  Body* body = new Body(doc.GetRoot(), dir);
   list[name] = body;
-
-  GetResourceManager().UnLoadXMLProfile( res);
 }
 
 Body* BodyList::GetBody(const std::string &name)

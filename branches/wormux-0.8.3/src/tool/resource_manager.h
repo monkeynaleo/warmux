@@ -51,7 +51,7 @@ class Profile
   const Profile& operator=(const Profile&);
   /*********************************************/
 
- public:
+public:
   XmlReader *doc;
   std::string filename;
   std::string relative_path;
@@ -63,31 +63,36 @@ class Profile
 class ResourceManager : public Singleton<ResourceManager>
 {
 private:
-   ResourceManager();
-   ~ResourceManager();
-   friend class Singleton<ResourceManager>;
+  ResourceManager();
+  ~ResourceManager();
+  friend class Singleton<ResourceManager>;
 public:
 
-   void SetDataPath(const std::string& base_path);
-   Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
+  void SetDataPath(const std::string& base_path);
+  Surface LoadImage(const std::string& ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0) const;
 
-   Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
-   void UnLoadXMLProfile(Profile *profile) const;
+  Profile *LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const;
+  void UnLoadXMLProfile(Profile *profile) const;
 
-   MouseCursor LoadMouseCursor(const Profile *profile, const std::string& resource_name, Mouse::pointer_t pointer_id) const;
-   Color LoadColor(const Profile *profile, const std::string& resource_name) const;
-   int LoadInt(const Profile *profile, const std::string& resource_name) const;
-   double LoadDouble(const Profile *profile, const std::string& resource_name) const;
-   Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
-   Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
-   Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
-   Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
-   Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
-   const xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type,
-			      const std::string& ressource_name) const;
+  MouseCursor LoadMouseCursor(const Profile *profile, const std::string& resource_name, Mouse::pointer_t pointer_id) const;
+  Color LoadColor(const Profile *profile, const std::string& resource_name) const;
+  int LoadInt(const Profile *profile, const std::string& resource_name) const;
+  double LoadDouble(const Profile *profile, const std::string& resource_name) const;
+  Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
+  Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
+  Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
+
+  Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
+
+  // the following method is usefull if you have direct access to the xml file
+  Sprite *LoadSprite(const xmlNode* sprite_elem, const std::string& resource_name, const std::string& main_folder) const;
+
+  Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
+  const xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type,
+			     const std::string& ressource_name) const;
 
  private:
-   std::string base_path;
+  std::string base_path;
 };
 
 ResourceManager& GetResourceManager();

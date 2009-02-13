@@ -32,7 +32,7 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-Member::Member(const xmlNode* xml, const Profile* res):
+Member::Member(const xmlNode* xml, const std::string& main_folder):
   parent(NULL),
   angle_rad(0),
   alpha(0),
@@ -51,7 +51,7 @@ Member::Member(const xmlNode* xml, const Profile* res):
   ASSERT(name!="");
 
   // Load the sprite
-  spr = GetResourceManager().LoadSprite( res, name);
+  spr = GetResourceManager().LoadSprite(xml, name, main_folder);
   //spr->EnableRotationCache(32);
   //spr->EnableFlippingCache();
   spr->cache.EnableLastFrameCache();
@@ -335,7 +335,7 @@ const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
 }
 
 
-WeaponMember::WeaponMember() : Member(NULL, NULL)
+WeaponMember::WeaponMember() : Member(NULL, "")
 {
   name = "weapon";
   type = "weapon";
