@@ -25,7 +25,7 @@
 #include "graphic/spritecache.h"
 #include "graphic/sprite.h"
 
-SpriteFrameCache::SpriteFrameCache() 
+SpriteFrameCache::SpriteFrameCache()
 {
   use_rotation = false;
 }
@@ -56,12 +56,13 @@ Surface SpriteFrameCache::GetFlippedSurfaceForAngle(double angle) const
 Surface SpriteFrameCache::GetSurfaceForAngle(double angle) const
 {
   double angle_tmp = angle;
+  while(angle_tmp < 0.0)
+      angle_tmp += 2 * M_PI;
   while(angle_tmp >= 2 * M_PI)
     angle_tmp -= 2 * M_PI;
-  while(angle_tmp < 0.0)
-    angle_tmp += 2 * M_PI;
 
-  int index = static_cast<uint>(angle_tmp*static_cast<double>(rotated_surface.size()) / (2*M_PI));
+  unsigned int index = static_cast<uint>(angle_tmp*static_cast<double>(rotated_surface.size()) / (2*M_PI));
+  ASSERT (rotated_surface.size()>index);
   return rotated_surface[index];
 }
 
