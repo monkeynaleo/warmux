@@ -264,6 +264,13 @@ void Game::RefreshInput()
   SDL_Event event;
   bool refresh_joystick =  Joystick::GetInstance()->GetNumberOfJoystick() > 0;
   while(SDL_PollEvent(&event)) {
+
+     //Emergency exit
+    if(event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL) )
+    {
+       exit(0);
+    }
+
     if ( event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       UserAsksForMenu();
