@@ -85,8 +85,8 @@ class OptionMenu : public Menu
    /* Teams controllers */
 
    ListBox *lbox_teams;
-   ButtonPic *add_team;
-   ButtonPic *delete_team;
+   Button *add_team;
+   Button *delete_team;
    CustomTeam  *selected_team;
    TextBox *tbox_team_name;
    Label *team_name;
