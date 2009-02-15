@@ -142,7 +142,6 @@ void GameInit::InitSounds()
   // Load teams' sound profiles
   loading_sreen.StartLoading(4, "sound_icon", _("Sounds"));
 
-  JukeBox::GetInstance()->LoadXML("default");
   FOR_EACH_TEAM(team)
     if ( (**team).GetSoundProfile() != "default" )
       JukeBox::GetInstance()->LoadXML((**team).GetSoundProfile()) ;
