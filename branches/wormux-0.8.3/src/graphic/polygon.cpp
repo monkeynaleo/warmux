@@ -742,6 +742,17 @@ void DecoratedBox::SetStyle(DecoratedBox::Style style)
   m_style = style;
 }
 
+void DecoratedBox::SetPosition(double x, double y)
+{
+    max.x = x - min.x +max.x ;
+    max.y = y - min.y +max.y;
+    min.x = x;
+    min.y = y;
+    original_min = min;
+    original_max = max;
+
+}
+
 void DecoratedBox::GenerateBorder(Surface & source)
 {
 

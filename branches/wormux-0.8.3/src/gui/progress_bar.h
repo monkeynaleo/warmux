@@ -27,6 +27,8 @@
 #include "graphic/color.h"
 #include "graphic/surface.h"
 
+class DecoratedBox;
+
 class ProgressBar
 {
 public:
@@ -37,13 +39,14 @@ public:
     PROG_BAR_HORIZONTAL
   };
 
-private:
+protected:
   uint x, y, larg, haut; // Position
   long val, min, max; // current, min and max values
   bool m_use_ref_val; // use reference value ?
   long m_ref_val; // reference value
   uint val_barre; // current value in the progress bar
   enum orientation orientation;
+
 
   long ComputeValue (long val) const;
   uint ComputeBarValue (long val) const;
@@ -57,7 +60,7 @@ private:
   void SetBorderColor(const Color& color) { border_color = color; };
   void SetBackgroundColor(const Color& color) { background_color = color; };
   void SetValueColor(const Color& color) { value_color = color; };
- private:
+ protected:
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;
   std::list<marqueur_t> marqueur;
@@ -74,7 +77,7 @@ public:
   void UpdateValue (long val);
 
   // Initialise la position
-  void InitPos (uint x, uint y, uint larg, uint haut);
+  virtual void InitPos (uint x, uint y, uint larg, uint haut);
 
   // Initialise les valeurs
   void InitVal (long val, long min, long max, enum orientation orientation = PROG_BAR_HORIZONTAL);
@@ -87,7 +90,7 @@ public:
   void Draw() const {  DrawXY( Point2i(x, y) ); };
 
   // Draw the progress bar
-  void DrawXY(const Point2i &pos) const;
+  virtual void DrawXY(const Point2i &pos) const;
 
   inline const long & GetMaxVal() const { return max; }
   inline const long & GetVal() const { return val; }

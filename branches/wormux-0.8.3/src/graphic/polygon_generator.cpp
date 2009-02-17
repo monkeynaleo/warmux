@@ -182,9 +182,9 @@ Polygon * PolygonGenerator::GeneratePartialTorus(double diameter, double min_dia
   return tmp;
 }
 
-Polygon * PolygonGenerator::GenerateDecoratedBox(double width, double height)
+DecoratedBox * PolygonGenerator::GenerateDecoratedBox(double width, double height)
 {
-  Polygon * tmp = new DecoratedBox(width, height);
+  DecoratedBox * tmp = new DecoratedBox(width, height);
 
   return tmp;
 }
