@@ -98,3 +98,10 @@ DirtyWaterParticle::DirtyWaterParticle()
   delete image;
   image = ParticleEngine::GetSprite(DIRTYWATER_spr);
 }
+
+ChocolateWaterParticle::ChocolateWaterParticle()
+{
+  // delete std water image
+  delete image;
+  image = ParticleEngine::GetSprite(CHOCOLATEWATER_spr);
+}

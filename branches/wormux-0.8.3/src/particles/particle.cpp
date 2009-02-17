@@ -164,6 +164,7 @@ void ParticleEngine::Load()
   particle_sprite[LAVA_spr] = GetResourceManager().LoadSprite(res,"lava_drop");
   particle_sprite[RADIOACTIVE_spr] = GetResourceManager().LoadSprite(res,"radioactive_drop");
   particle_sprite[DIRTYWATER_spr] = GetResourceManager().LoadSprite(res,"dirtywater_drop");
+  particle_sprite[CHOCOLATEWATER_spr] = GetResourceManager().LoadSprite(res,"chocolate_drop");
   GetResourceManager().UnLoadXMLProfile(res);
 
   sprites_loaded = true;
@@ -227,8 +228,12 @@ void ParticleEngine::AddNow(const Point2i &position,
       break;
     case particle_RADIOACTIVE: particle = new RadioactiveParticle();
       break;
-    default : particle = NULL;
-      ASSERT(0);
+    case particle_DIRTYWATER: particle = new DirtyWaterParticle();
+      break;
+    case particle_CHOCOLATEWATER: particle = new ChocolateWaterParticle();
+      break;
+    case particle_BODY_MEMBER:
+    case particle_TELEPORT_MEMBER:
       break;
     }
 
