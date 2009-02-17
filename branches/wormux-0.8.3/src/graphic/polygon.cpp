@@ -27,6 +27,7 @@
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
 #include "tool/affine_transform.h"
+#include "tool/math_tools.h"
 
 
 //=========== POLYGON BUFFER ============ //
@@ -844,7 +845,7 @@ void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool sav
   Point2d new_min =  trans * original_min;
   Point2d new_max = trans * original_max;
 
-  if(((max.x - min.x )!=( new_max.x -new_min.x)) || ((max.y - min.y )!=( new_max.y -new_min.y)))
+  if((round(max.x - min.x +0.5)!=round( new_max.x -new_min.x+0.5)) || (round(max.y - min.y )!=round( new_max.y -new_min.y)))
   {
       delete m_border;
       m_border = NULL;
@@ -868,7 +869,7 @@ void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool sav
 
 void DecoratedBox::ResetTransformation()
 {
-  if(((max.x - min.x )!=( original_max.x -original_min.x)) || ((max.y - min.y )!=( original_max.y -original_min.y)))
+  if((round(max.x - min.x )!=round( original_max.x -original_min.x)) || (round(max.y - min.y )!=round( original_max.y -original_min.y)))
    {
       delete m_border;
       m_border = NULL;
