@@ -20,6 +20,7 @@
 #include "map/tile.h"
 #include "map/tileitem.h"
 #include "game/game.h"
+#include "game/time.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
@@ -30,11 +31,13 @@
 TileItem_Empty EmptyTile;
 
 Tile::Tile()
-: m_preview(NULL)
+  : m_preview(NULL),
+    m_last_preview_redraw(0)
 {
 }
 
-void Tile::FreeMem(){
+void Tile::FreeMem()
+{
   for (uint i=0; i<nbr_cell; ++i) {
     // Don't delete empty tile as we use only one instance for empty tile
     if(item[i] != &EmptyTile)
@@ -47,11 +50,13 @@ void Tile::FreeMem(){
   m_preview = NULL;
 }
 
-Tile::~Tile(){
+Tile::~Tile()
+{
   FreeMem();
 }
 
-void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
+void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset)
+{
   m_upper_left_offset = upper_left_offset;
   m_lower_right_offset = lower_right_offset;
   size = pSize + upper_left_offset + lower_right_offset;
@@ -66,7 +71,8 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
   nbr_cell = nbCells.x * nbCells.y;
 }
 
-void Tile::Dig(const Point2i &position, const Surface& dig){
+void Tile::Dig(const Point2i &position, const Surface& dig)
+{
   Point2i firstCell = Clamp(position / CELL_SIZE);
   Point2i lastCell = Clamp((position + dig.GetSize()) / CELL_SIZE);
   Point2i c;
@@ -88,9 +94,12 @@ void Tile::Dig(const Point2i &position, const Surface& dig){
     dst += (CELL_SIZE.y>>m_shift)*pitch;
     index += nbCells.x;
   }
+
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
-void Tile::Dig(const Point2i &center, const uint radius){
+void Tile::Dig(const Point2i &center, const uint radius)
+{
   Point2i size = Point2i(2 * (radius + EXPLOSION_BORDER_SIZE),
                          2 * (radius + EXPLOSION_BORDER_SIZE));
   Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
@@ -115,6 +124,8 @@ void Tile::Dig(const Point2i &center, const uint radius){
     dst += (CELL_SIZE.y>>m_shift)*pitch;
     index += nbCells.x;
   }
+
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
@@ -167,6 +178,8 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
   }
 
   s.SetAlpha(SDL_SRCALPHA, 0);
+
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf){
@@ -196,6 +209,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf){
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
   }
+
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
 // Initialize preview depending on current video and map sizes
@@ -218,11 +233,17 @@ void Tile::InitPreview()
 
   m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
   m_preview_rect = Rectanglei(m_upper_left_offset / (1<<m_shift), m_preview_size);
+
+  m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
 // Rerender all of the preview
 void Tile::CheckPreview()
 {
+  if (m_last_preview_redraw == 0) {
+    m_last_preview_redraw = Time::GetInstance()->Read();
+  }
+
   if (GetMainWindow().GetSize() == m_last_video_size)
     return;
 
@@ -242,7 +263,8 @@ void Tile::CheckPreview()
   }
 }
 
-void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset){
+void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset)
+{
   Point2i offset = upper_left_offset + lower_right_offset;
   FreeMem();
   InitTile(terrain.GetSize(), upper_left_offset, lower_right_offset);
@@ -298,12 +320,14 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   }
 }
 
-uchar Tile::GetAlpha(const Point2i &pos) const{
+uchar Tile::GetAlpha(const Point2i &pos) const
+{
   int cell = pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x;
   return item[cell]->GetAlpha(pos % CELL_SIZE);
 }
 
-void Tile::DrawTile() {
+void Tile::DrawTile()
+{
   Point2i firstCell = Clamp(Camera::GetInstance()->GetPosition() / CELL_SIZE);
   Point2i lastCell = Clamp((Camera::GetInstance()->GetPosition() + Camera::GetInstance()->GetSize()) / CELL_SIZE);
   Point2i i;

@@ -69,6 +69,8 @@ public:
   void  CheckPreview();
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
+  uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
+
   // Translate world coordinates into a preview ones
   // @warning assumes CELL_SIZE is 64x64
   Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
@@ -87,6 +89,7 @@ protected:
 
   void InitPreview();
   Surface*   m_preview;
+  uint       m_last_preview_redraw;
   uint       m_shift;
   Point2i    m_last_video_size;
   Point2i    m_preview_size;

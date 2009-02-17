@@ -58,6 +58,7 @@ private:
   Surface bottom;
   Surface wpattern;
   Water_type water_type;
+  uint       m_last_preview_redraw;
 
   void Init();
 
@@ -77,6 +78,7 @@ public:
 
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;
+   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
 
   static Water_type GetWaterType(const std::string & water);
   static const std::string GetWaterName(const Water_type water_type);

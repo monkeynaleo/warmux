@@ -89,7 +89,7 @@ public:
    
    //Minimap
    Surface *minimap;
-   
+   uint       m_last_minimap_redraw;
    //Styled box
    Surface rounding_style [3][3];
    Surface rounding_style_mask [3][3];
