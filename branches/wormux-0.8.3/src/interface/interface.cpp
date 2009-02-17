@@ -133,6 +133,8 @@ Interface::~Interface()
 
 void Interface::Reset()
 {
+  delete minimap;
+  minimap = NULL;
   start_hide_display = 0;
   start_show_display = 0;
   character_under_cursor = NULL;
