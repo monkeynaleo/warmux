@@ -219,7 +219,7 @@ void WeaponsMenu::Show()
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
 
-    JukeBox::GetInstance()->Play("share", "menu/weapon_menu_show");
+    JukeBox::GetInstance()->Play("default", "menu/weapon_menu_show");
 
     old_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   }
@@ -236,7 +236,7 @@ void WeaponsMenu::Hide(bool play_sound)
     show = false;
 
     if (play_sound)
-      JukeBox::GetInstance()->Play("share", "menu/weapon_menu_hide");
+      JukeBox::GetInstance()->Play("default", "menu/weapon_menu_hide");
 
     Mouse::GetInstance()->SetPointer(old_pointer);
   }

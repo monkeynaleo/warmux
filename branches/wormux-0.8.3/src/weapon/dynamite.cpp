@@ -73,7 +73,7 @@ void DynamiteStick::Shoot(double strength)
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
-  timeout_sound.Play("share","weapon/dynamite_fuze", -1);
+  timeout_sound.Play("default","weapon/dynamite_fuze", -1);
 
   WeaponProjectile::Shoot(strength);
 }

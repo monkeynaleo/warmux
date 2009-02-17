@@ -62,7 +62,7 @@ SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
 
 void SnipeBullet::ShootSound()
 {
-  JukeBox::GetInstance()->Play("share","weapon/gun");
+  JukeBox::GetInstance()->Play("default","weapon/gun");
 }
 
 //-----------------------------------------------------------------------------

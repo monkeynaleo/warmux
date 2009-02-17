@@ -63,7 +63,7 @@ bool LowGrav::p_Shoot()
 {
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
   ActiveCharacter().SetClothe("helmet");
-  use.Play("share","weapon/lowgrav",-1);
+  use.Play("default","weapon/lowgrav",-1);
 
   return true;
 }

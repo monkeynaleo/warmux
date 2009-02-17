@@ -99,7 +99,7 @@ void SuperTux::Shoot(double strength)
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
   swimming = false;
-  flying_sound.Play("share","weapon/supertux_flying", -1);
+  flying_sound.Play("default","weapon/supertux_flying", -1);
 
   WeaponProjectile::Shoot(strength);
   angle_rad = ActiveCharacter().GetFiringAngle();
@@ -161,7 +161,7 @@ void SuperTux::SignalDrowning()
   swimming = true;
   WeaponProjectile::SignalDrowning();
   flying_sound.Stop();
-  flying_sound.Play("share","weapon/supertux_swimming", -1);
+  flying_sound.Play("default","weapon/supertux_swimming", -1);
 }
 
 void SuperTux::SignalGoingOutOfWater()
@@ -169,7 +169,7 @@ void SuperTux::SignalGoingOutOfWater()
   swimming = false;
   WeaponProjectile::SignalGoingOutOfWater();
   flying_sound.Stop();
-  flying_sound.Play("share","weapon/supertux_flying", -1);
+  flying_sound.Play("default","weapon/supertux_flying", -1);
 }
 
 void SuperTux::SignalOutOfMap()

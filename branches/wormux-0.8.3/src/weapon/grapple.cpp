@@ -183,7 +183,7 @@ bool Grapple::p_Shoot()
   m_initial_angle = ActiveCharacter().GetFiringAngle();
   last_mvt=Time::GetInstance()->Read();
 
-  if (TryAttachRope()) JukeBox::GetInstance()->Play("share", "weapon/grapple_attaching");
+  if (TryAttachRope()) JukeBox::GetInstance()->Play("default", "weapon/grapple_attaching");
   return true;
 }
 
@@ -643,7 +643,7 @@ void Grapple::StopDown()
 void Grapple::GoRight()
 {
   if (!go_right) {
-    cable_sound.Play("share", "weapon/grapple_cable");
+    cable_sound.Play("default", "weapon/grapple_cable");
   }
   go_right = true ;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
@@ -664,7 +664,7 @@ void Grapple::StopRight()
 void Grapple::GoLeft()
 {
   if (!go_left) {
-    cable_sound.Play("share", "weapon/grapple_cable");
+    cable_sound.Play("default", "weapon/grapple_cable");
   }
   go_left = true ;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
@@ -687,7 +687,7 @@ void Grapple::StopLeft()
 void Grapple::HandleKeyPressed_Up(bool shift)
 {
   if (IsInUse())  {
-    cable_sound.Play("share", "weapon/grapple_cable", -1);
+    cable_sound.Play("default", "weapon/grapple_cable", -1);
     GoUp();
   }
   else
@@ -713,7 +713,7 @@ void Grapple::HandleKeyReleased_Up(bool shift)
 void Grapple::HandleKeyPressed_Down(bool shift)
 {
   if (IsInUse()) {
-    cable_sound.Play("share", "weapon/grapple_cable", -1);
+    cable_sound.Play("default", "weapon/grapple_cable", -1);
     GoDown();
   } else
     ActiveCharacter().HandleKeyPressed_Down(shift);

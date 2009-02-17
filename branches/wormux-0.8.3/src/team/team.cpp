@@ -291,7 +291,7 @@ void Team::PrepareTurn()
 
   // Sound the bell, so the local players know when it is their turn
   if (IsLocal())
-    JukeBox::GetInstance()->Play("share", "start_turn");
+    JukeBox::GetInstance()->Play("default", "start_turn");
 }
 
 Character& Team::ActiveCharacter() const

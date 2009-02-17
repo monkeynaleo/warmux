@@ -59,7 +59,7 @@ Medkit::Medkit()
 
 void Medkit::ApplyBonus(Character * c)
 {
-  JukeBox::GetInstance()->Play("share","box/medkit_picking_up");
+  JukeBox::GetInstance()->Play("default","box/medkit_picking_up");
   ApplyMedkit(c->AccessTeam(), *c);
   Ghost();
 }

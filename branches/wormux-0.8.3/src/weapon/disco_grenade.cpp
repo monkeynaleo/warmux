@@ -68,7 +68,7 @@ void DiscoGrenade::Shoot(double strength)
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
-  disco_sound.Play("share","weapon/disco_grenade_music", -1);
+  disco_sound.Play("default","weapon/disco_grenade_music", -1);
 
   WeaponProjectile::Shoot(strength);
 }
@@ -116,7 +116,7 @@ void DiscoGrenade::Refresh()
   double tmp = Time::GetInstance()->Read() - begin_time;
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
   if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
-    //JukeBox::GetInstance()->Play("share","weapon/alleluia") ;
+    //JukeBox::GetInstance()->Play("default","weapon/alleluia") ;
     have_played_music = true;
   }
   image->SetRotation_rad(GetSpeedAngle());

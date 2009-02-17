@@ -575,7 +575,7 @@ void PhysicalObj::SignalRebound()
 {
   // TO CLEAN...
    if (!m_rebound_sound.empty())
-     JukeBox::GetInstance()->Play("share", m_rebound_sound) ;
+     JukeBox::GetInstance()->Play("default", m_rebound_sound) ;
 }
 
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,

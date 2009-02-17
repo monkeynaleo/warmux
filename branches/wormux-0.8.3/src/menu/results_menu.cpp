@@ -373,7 +373,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // And the winner is :
   if (first_team) {
-    JukeBox::GetInstance()->Play("share","victory");
+    JukeBox::GetInstance()->Play("default","victory");
 
     winner_box = new VBox(240, true);
     winner_box->AddWidget(new Label(_("Winner"), 240, Font::FONT_BIG, Font::FONT_BOLD,

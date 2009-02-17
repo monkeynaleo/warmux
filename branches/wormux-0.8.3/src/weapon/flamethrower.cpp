@@ -85,7 +85,7 @@ void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
 
 void FlameThrowerBullet::ShootSound()
 {
-  JukeBox::GetInstance()->Play("share", "weapon/flamethrower");
+  JukeBox::GetInstance()->Play("default", "weapon/flamethrower");
 }
 
 void FlameThrowerBullet::DoExplosion()

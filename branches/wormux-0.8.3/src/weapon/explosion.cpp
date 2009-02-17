@@ -74,7 +74,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Play a sound
   if (son != "") {
-    JukeBox::GetInstance()->Play("share", son);
+    JukeBox::GetInstance()->Play("default", son);
   }
 
   // Apply damage on the character.

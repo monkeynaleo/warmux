@@ -257,13 +257,13 @@ void Action_Network_Check_Phase2 (Action *a)
 
 void Action_Player_ChangeWeapon (Action *a)
 {
-  JukeBox::GetInstance()->Play("share", "change_weapon");
+  JukeBox::GetInstance()->Play("default", "change_weapon");
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
 void Action_Player_NextCharacter (Action *a)
 {
-  JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
+  JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve next character information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
@@ -271,7 +271,7 @@ void Action_Player_NextCharacter (Action *a)
 
 void Action_Player_PreviousCharacter (Action *a)
 {
-  JukeBox::GetInstance()->Play("share", "character/change_in_same_team");
+  JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve previous character's information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
@@ -709,7 +709,7 @@ void Action_Network_Connect(Action *a)
   else if (Network::GetInstance()->network_menu != NULL) {
     // Play some sound to warn server player
     if (Config::GetInstance()->GetWarnOnNewPlayer())
-      JukeBox::GetInstance()->Play("share", "menu/newcomer");
+      JukeBox::GetInstance()->Play("default", "menu/newcomer");
     // Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   }

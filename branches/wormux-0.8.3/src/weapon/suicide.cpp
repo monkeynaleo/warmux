@@ -46,7 +46,7 @@ void Suicide::UpdateTranslationStrings()
 
 bool Suicide::p_Shoot()
 {
-  suicide_sound.Play ("share", "weapon/suicide");
+  suicide_sound.Play ("default", "weapon/suicide");
   return true;
 }
 

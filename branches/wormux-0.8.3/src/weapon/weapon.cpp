@@ -448,7 +448,7 @@ void Weapon::InitLoading(){
   if (max_strength == 0)
     return ;
 
-  loading_sound.Play("share","weapon/load");
+  loading_sound.Play("default","weapon/load");
 
   m_first_time_loading = Time::GetInstance()->Read();
 

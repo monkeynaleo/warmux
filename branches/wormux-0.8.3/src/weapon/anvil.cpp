@@ -104,13 +104,13 @@ void Anvil::Refresh()
 
 void Anvil::PlayFallSound()
 {
-  falling_sound.Play("share", "weapon/anvil_fall", -1);
+  falling_sound.Play("default", "weapon/anvil_fall", -1);
 }
 
 void Anvil::PlayCollisionSound()
 {
   falling_sound.Stop();
-  JukeBox::GetInstance()->Play("share", "weapon/anvil_collision");
+  JukeBox::GetInstance()->Play("default", "weapon/anvil_collision");
 }
 
 //-----------------------------------------------------------------------------

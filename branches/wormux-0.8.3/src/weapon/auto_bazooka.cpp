@@ -91,7 +91,7 @@ void RPG::Shoot(double strength)
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield
   // during WeaponProjectile::Shoot (#bug 10241)
-  flying_sound.Play("share","weapon/automatic_rocket_flying", -1);
+  flying_sound.Play("default","weapon/automatic_rocket_flying", -1);
 
   WeaponProjectile::Shoot(strength);
   angle_local=ActiveCharacter().GetFiringAngle();

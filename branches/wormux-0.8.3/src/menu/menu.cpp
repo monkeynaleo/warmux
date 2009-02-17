@@ -82,17 +82,17 @@ Menu::~Menu()
 
 void Menu::play_ok_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/ok");
+  JukeBox::GetInstance()->Play("default", "menu/ok");
 }
 
 void Menu::play_cancel_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/cancel");
+  JukeBox::GetInstance()->Play("default", "menu/cancel");
 }
 
 void Menu::play_error_sound()
 {
-  JukeBox::GetInstance()->Play("share", "menu/error");
+  JukeBox::GetInstance()->Play("default", "menu/error");
 }
 
 void Menu::mouse_ok()

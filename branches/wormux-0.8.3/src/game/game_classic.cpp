@@ -74,12 +74,12 @@ void GameClassic::RefreshClock()
 
       case PLAYING:
         if (duration <= 1) {
-	  JukeBox::GetInstance()->Play("share", "end_turn");
+	  JukeBox::GetInstance()->Play("default", "end_turn");
 	  SetState(END_TURN);
         } else {
           duration--;
 	  if (duration == 12) {
-	    countdown_sample.Play("share", "countdown-end_turn");
+	    countdown_sample.Play("default", "countdown-end_turn");
 	  }
 	  if (duration > 10) {
 	    Interface::GetInstance()->UpdateTimer(duration, black_color);
