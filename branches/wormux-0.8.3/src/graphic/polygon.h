@@ -118,8 +118,8 @@ class Polygon {
   void AddPoint(const Point2d & p);
   void InsertPoint(int index, const Point2d & p);
   void DeletePoint(int index);
-  void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation = false);
-  void ResetTransformation();
+  virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation = false);
+  virtual void ResetTransformation();
   void SaveTransformation(const AffineTransform2D & trans);
 
   // Test
@@ -153,7 +153,7 @@ class Polygon {
   Point2i GetIntMin() const;
   Point2d GetMax() const;
   Point2i GetIntMax() const;
-  Rectanglei GetRectangleToRefresh() const;
+  virtual Rectanglei GetRectangleToRefresh() const;
 
   // Buffer of transformed point
   PolygonBuffer * GetPolygonBuffer();
@@ -177,8 +177,8 @@ class Polygon {
   const Color & GetPlaneColor() const;
 
   // Drawing
-  void Draw(Surface * dest);
-  void DrawOnScreen();
+  virtual void Draw(Surface * dest);
+  virtual void DrawOnScreen();
 
   // Item management
   void AddItem(const Sprite * sprite, const Point2d & pos,
@@ -188,6 +188,29 @@ class Polygon {
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;
   void ClearItem(bool free_mem = true);
+};
+
+
+class DecoratedBox : public Polygon
+{
+ public :
+  DecoratedBox(double width, double height);
+  ~DecoratedBox();
+  virtual void Draw(Surface * dest);
+  virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation);
+  virtual void ResetTransformation();
+
+ private :
+  Point2d max_refresh;
+  Point2d min_refresh;
+  Point2d original_max;
+  Point2d original_min;
+  Surface *m_border;
+
+  void GenerateBorder(Surface & source);
+
+
+
 };
 
 #endif /* POLYGON_H */
