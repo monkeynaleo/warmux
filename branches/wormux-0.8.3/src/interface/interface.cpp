@@ -317,8 +317,11 @@ void Interface::DrawMapPreview()
   Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
   DrawStyledBox( rect_preview);
+
   window.Blit(*preview, GetWorld().ground.GetPreviewRect(), offset);
 
+
+ 
   // Draw water
   if (GetWorld().water.IsActive()) {
     const Color *color = GetWorld().water.GetColor();
@@ -329,11 +332,14 @@ void Interface::DrawMapPreview()
                  / GetWorld().GetSize().GetY();
     Rectanglei water(offset.x, offset.y+rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
 
-
+  
     // Draw box with color according to water type
     window.BoxColor(water, *color);
-
+    
   }
+
+ 
+  //window.RectangleColor(rect_preview, white_color);
 
   FOR_EACH_TEAM(team) {
     const Surface& icon = (*team)->GetMiniFlag();
@@ -341,11 +347,11 @@ void Interface::DrawMapPreview()
            end_character = (*(team))->end();
          character != end_character;
          ++character) {
-      if (!character -> IsDead()) {
-        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character).GetPosition()) + offset;
+      if (!(*character) -> IsDead()) {
+        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character)->GetPosition()) + offset;
 
         window.Blit(icon, coord - icon.GetSize()/2);
-        if (character->IsActiveCharacter()) {
+        if ((*character)->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
           radius = (radius/2) + 1;
           window.CircleColor(coord.x, coord.y, radius, c_white);
@@ -356,8 +362,8 @@ void Interface::DrawMapPreview()
       }
     }
   }
-
-
+ 
+  
 }
 
 void Interface::DrawStyledBox(const Rectanglei & rect) const
@@ -365,54 +371,54 @@ void Interface::DrawStyledBox(const Rectanglei & rect) const
   Rectanglei temp_rect = rect;
   //temp_rect.SetPosition(rect.GetPosition().x - MARGIN,rect.GetPosition().y - MARGIN);
   //temp_rect.SetSize(rect.GetSize().x + 2* MARGIN,rect.GetSize().y + 2 * MARGIN);
-
-
+  
+  
   Point2i temp_position;
   Surface&       window  = GetMainWindow();
-
+  
   temp_position = temp_rect.GetPosition();
   window.Blit(rounding_style[0][0], temp_position);
-
+  
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
   window.Blit(rounding_style[2][0],temp_position);
-
+  
   temp_position = temp_rect.GetPosition();
   temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
   window.Blit(rounding_style[0][2],temp_position);
-
+  
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
   window.Blit(rounding_style[2][2],temp_position);
-
-
+  
+  
   for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.x += i;
     window.Blit(rounding_style[1][0],temp_position);
-
+    
     temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
     window.Blit(rounding_style[1][2],temp_position);
-
+  	
   }
-
+  
   for(int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.y += i;
     window.Blit(rounding_style[0][1],temp_position);
-
+    
     temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
     window.Blit(rounding_style[2][1],temp_position);
-
+  	
   }
-
+  
   for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
-
+     
     for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
       window.Blit(rounding_style[1][1],temp_position);
-    }
+    }	
   }
    GetWorld().ToRedrawOnScreen(temp_rect);
 }
