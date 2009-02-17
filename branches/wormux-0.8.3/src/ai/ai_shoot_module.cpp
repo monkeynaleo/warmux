@@ -80,10 +80,10 @@ bool AIShootModule::IsBazookable(const Character& shooter,
 
   while (distance < 30)
     {
-      if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) {
+      if ( GetWorld().IsOutsideWorldX(pos.x) || GetWorld().IsOutsideWorldY(pos.y) ) {
         break;
       }
-      if (!world.IsInVacuum(pos.x, pos.y))
+      if (!GetWorld().IsInVacuum(pos.x, pos.y))
         return false;
       pos += delta;
       pos.y = int(a * pos.x + b);
@@ -126,13 +126,13 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
     Point2i posi(int(pos.x+0.5), int(pos.y+0.5));
 
     // the point is outside the map
-    if ( world.IsOutsideWorld(posi) )
+    if ( GetWorld().IsOutsideWorld(posi) )
       {
         return false;
       }
 
     // is there a collision on the ground ??
-    if (!world.IsInVacuum(posi)) {
+    if (!GetWorld().IsInVacuum(posi)) {
       return false;
     }
 

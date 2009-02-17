@@ -113,7 +113,7 @@ void GameClassic::RefreshClock()
             break;
           }
 
-          if (Network::GetInstance()->IsTurnMaster() && give_objbox && world.IsOpen()) {
+          if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
             NewBox();
             give_objbox = false;
             break;

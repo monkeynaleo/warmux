@@ -230,8 +230,8 @@ void AppWormux::SetCurrentMenu(Menu* _menu)
 void AppWormux::RefreshDisplay()
 {
   if (Game::GetInstance()->IsGameLaunched()) {
-    world.DrawSky(true);
-    world.Draw(true);
+    GetWorld().DrawSky(true);
+    GetWorld().Draw(true);
   }
   else if (menu) {
     menu->RedrawMenu();

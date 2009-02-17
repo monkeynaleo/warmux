@@ -68,7 +68,7 @@ void Ground::Reset(){
 
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i &pos) const{
-        ASSERT( !world.IsOutsideWorldXY(pos.x, pos.y) );
+        ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
 
         return GetAlpha( pos ) != 255; // IsTransparent
 }
@@ -134,10 +134,10 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
   //return true (and set p_x and p_y) if this point have been found
-  if(world.IsOutsideWorld(Point2i(x-1,y))
-  || world.IsOutsideWorld(Point2i(x+1,y))
-  || world.IsOutsideWorld(Point2i(x,y-1))
-  || world.IsOutsideWorld(Point2i(x,y+1)) )
+  if(GetWorld().IsOutsideWorld(Point2i(x-1,y))
+  || GetWorld().IsOutsideWorld(Point2i(x+1,y))
+  || GetWorld().IsOutsideWorld(Point2i(x,y-1))
+  || GetWorld().IsOutsideWorld(Point2i(x,y+1)) )
     return false;
 
   // check adjacents pixels one by one:
@@ -257,13 +257,13 @@ void Ground::Draw(bool redraw_all)
     return;
   }
 
-  RedrawParticleList(*world.to_redraw_now);
+  RedrawParticleList(*GetWorld().to_redraw_now);
 
   // Draw on top of sky (redisplayed on top of particles)
-  RedrawParticleList(*world.to_redraw_particles_now);
+  RedrawParticleList(*GetWorld().to_redraw_particles_now);
 
   // Draw on top of new position of particles (redisplayed on top of particles)
-  RedrawParticleList(*world.to_redraw_particles);
+  RedrawParticleList(*GetWorld().to_redraw_particles);
 
   CheckPreview();
 }

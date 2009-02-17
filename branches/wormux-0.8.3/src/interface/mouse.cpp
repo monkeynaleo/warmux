@@ -311,7 +311,7 @@ void Mouse::Draw() const
   const MouseCursor& cursor = GetCursor(current_pointer);
   const Surface& surf = cursor.GetSurface();
   GetMainWindow().Blit(surf, GetPosition() - cursor.GetClicPos());
-  world.ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
+  GetWorld().ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
                                     GetPosition().y - cursor.GetClicPos().y,
 				    surf.GetWidth(), surf.GetHeight()));
 }

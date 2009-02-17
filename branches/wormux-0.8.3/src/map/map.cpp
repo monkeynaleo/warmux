@@ -41,6 +41,11 @@ const uint AUTHOR_INFO_Y = 50;
 
 Map world;
 
+Map& GetWorld()
+{
+  return world;
+}
+
 Map::Map()
 {
   min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
@@ -376,7 +381,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
   Point2d iterated_point = ( Point2d )( start );
   while( !IsOutsideWorld( new_point ) && ( length >= 0 ) )
   {
-    if (!world.IsInVacuum( new_point ))
+    if (!GetWorld().IsInVacuum( new_point ))
     {
       if ( trace_flags & COMPUTE_HIT )
       {

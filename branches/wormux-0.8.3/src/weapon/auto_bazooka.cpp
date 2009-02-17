@@ -258,7 +258,7 @@ void AutomaticBazooka::p_Deselect()
   WeaponLauncher::p_Deselect();
   if (m_target->selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                         m_target->pos.y-m_target->image.GetHeight()/2,
                         m_target->image.GetWidth(),
                         m_target->image.GetHeight()));
@@ -271,7 +271,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
   if (m_target->selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                         m_target->pos.y-m_target->image.GetHeight()/2,
                         m_target->image.GetWidth(),
                         m_target->image.GetHeight()));
@@ -292,7 +292,7 @@ void AutomaticBazooka::DrawTarget() const
 
   GetMainWindow().Blit(m_target->image, m_target->pos - m_target->image.GetSize()/2 - Camera::GetInstance()->GetPosition());
 
-  world.ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
+  GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos.x-m_target->image.GetWidth()/2,
                                  m_target->pos.y-m_target->image.GetHeight()/2,
                                  m_target->image.GetWidth(),
                                  m_target->image.GetHeight()));

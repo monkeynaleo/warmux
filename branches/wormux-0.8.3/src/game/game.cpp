@@ -152,7 +152,7 @@ void Game::Start()
 
 void Game::UnloadDatas(bool game_finished) const
 {
-  world.FreeMem();
+  GetWorld().FreeMem();
   ActiveMap()->FreeData();
   ObjectsList::GetRef().FreeMem();
   ParticleEngine::Stop();
@@ -335,12 +335,12 @@ void Game::Draw ()
 {
   // Draw the sky
   StatStart("GameDraw:sky");
-  world.DrawSky();
+  GetWorld().DrawSky();
   StatStop("GameDraw:sky");
 
   // Draw the map
   StatStart("GameDraw:world");
-  world.Draw();
+  GetWorld().Draw();
   StatStop("GameDraw:world");
 
   // Draw objects
@@ -371,7 +371,7 @@ void Game::Draw ()
 
   // Draw waters
   StatStart("GameDraw:water");
-  world.DrawWater();
+  GetWorld().DrawWater();
   StatStop("GameDraw:water");
 
   // Draw game messages
@@ -381,7 +381,7 @@ void Game::Draw ()
 
   // Draw optionals
   StatStart("GameDraw:fps_and_map_author_name");
-  world.DrawAuthorName();
+  GetWorld().DrawAuthorName();
   fps->Draw();
   StatStop("GameDraw:fps_and_map_author_name");
 
@@ -516,7 +516,7 @@ void Game::MainLoop()
   StatStop("Game:RefreshObject()");
 
   // Refresh the map
-  world.Refresh();
+  GetWorld().Refresh();
 
   // try to adjust to max Frame by seconds
 #ifndef USE_VALGRIND

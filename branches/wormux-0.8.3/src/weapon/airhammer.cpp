@@ -96,7 +96,7 @@ bool Airhammer::p_Shoot()
                          true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
   ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
-  world.Dig( pos, impact );
+  GetWorld().Dig( pos, impact );
 
   uint range = 0;
   int x,y; // Testing coordinates
