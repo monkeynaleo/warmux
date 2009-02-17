@@ -184,7 +184,7 @@ class Polygon {
   void AddItem(const Sprite * sprite, const Point2d & pos,
                PolygonItem::H_align h_a = PolygonItem::H_CENTERED,
                PolygonItem::V_align v_a = PolygonItem::V_CENTERED);
-  void AddItem(PolygonItem * item);
+  virtual void AddItem(PolygonItem * item);
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;
   void ClearItem(bool free_mem = true);
@@ -200,6 +200,7 @@ class DecoratedBox : public Polygon
   ~DecoratedBox();
   virtual void Draw(Surface * dest);
   virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation);
+  virtual void AddItem(PolygonItem * item);
   virtual void ResetTransformation();
   void SetPosition(double x, double y);
   void SetStyle(Style style);

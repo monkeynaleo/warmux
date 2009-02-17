@@ -744,13 +744,19 @@ void DecoratedBox::SetStyle(DecoratedBox::Style style)
 
 void DecoratedBox::SetPosition(double x, double y)
 {
+    for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+      Point2d old_pos = (*item)->GetPosition();
+      old_pos.x += x - min.x;
+      old_pos.y += y - min.y;
+      (*item)->SetPosition(old_pos);
+    }
     max.x = x - min.x +max.x ;
     max.y = y - min.y +max.y;
     min.x = x;
     min.y = y;
     original_min = min;
     original_max = max;
-
 }
 
 void DecoratedBox::GenerateBorder(Surface & source)
@@ -909,3 +915,11 @@ void DecoratedBox::ResetTransformation()
 
 }
 
+void DecoratedBox::AddItem(PolygonItem * item)
+{
+  Point2d old_pos = item->GetPosition();
+  old_pos.x += min.x;
+  old_pos.y += min.y;
+  item->SetPosition(old_pos);
+  Polygon::AddItem(item);
+}

@@ -22,19 +22,34 @@
 #include "graphic/color.h"
 #include "weapon/weapon_strength_bar.h"
 
+#include "graphic/sprite.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/video.h"
+
 #include "map/map.h"
+#include "tool/resource_manager.h"
 
 
 WeaponStrengthBar::WeaponStrengthBar() :ProgressBar(),
-m_box(NULL)
+m_box(NULL),
+last_fire(NULL),
+m_item_last_fire(NULL)
 {
 
 }
 
+WeaponStrengthBar::~WeaponStrengthBar()
+{
+  delete last_fire;
+  delete m_box;
+}
+
 void WeaponStrengthBar::InitPos (uint px, uint py, uint plarg, uint phaut){
   ProgressBar::InitPos(px,py,plarg,phaut);
+
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  if(last_fire) {delete last_fire;}
+  last_fire = new Sprite(GetResourceManager().LoadImage( res, "interface/weapon_strength_bar_last_fire"),true);
 
   if(m_box) { delete m_box;}
   m_box = PolygonGenerator::GenerateDecoratedBox(plarg, phaut);
@@ -49,16 +64,9 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) const{
   int begin, end;
 
 
-  // Bordure
+  // Clear image
   Color clear(0,0,0,0);
   image.Fill(clear);
-
-
-/*
-   Fond
-  Rectanglei r_back(1, 1, larg - 2, haut - 2);
-  image.FillRect(r_back, background_color);
-*/
 
   // Valeur
   if (m_use_ref_val) {
@@ -78,9 +86,6 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) const{
 
   Color bar_color = ComputeValueColor(val);
 
-
-
-
   Rectanglei r_value;
   if(orientation == PROG_BAR_HORIZONTAL)
     r_value = Rectanglei(begin, 1, end - begin, haut - 2);
@@ -89,35 +94,32 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) const{
 
   image.FillRect(r_value, bar_color);
 
-  if (m_use_ref_val) {
-    int ref = ComputeBarValue (m_ref_val);
-    Rectanglei r_ref;
-    if(orientation == PROG_BAR_HORIZONTAL)
-       r_ref = Rectanglei(1 + ref, 1, 1, haut - 2);
-    else
-       r_ref = Rectanglei(1, 1 + ref, larg - 2, 1);
-    image.FillRect(r_ref, bar_color);
-  }
   // Marqueurs
   marqueur_it_const it=marqueur.begin(), it_end = marqueur.end();
   for (; it != it_end; ++it)
   {
-    Rectanglei r_marq;
-    if(orientation == PROG_BAR_HORIZONTAL)
-      r_marq = Rectanglei(1 + it->val, 1, 1, haut - 2);
-    else
-      r_marq = Rectanglei(1, 1 + it->val, larg -2, 1);
-    image.FillRect( r_marq, it->color);
-  }
 
+    Point2i p_marq(1+it->val,haut/2);
+
+    if(m_item_last_fire){
+      m_box->DelItem(0);
+      delete m_item_last_fire;
+    }
+
+    PolygonItem * item = new PolygonItem(last_fire, p_marq);
+    const_cast<PolygonItem *&>(m_item_last_fire) = item;
+    m_box->AddItem(m_item_last_fire);
+
+  }
 
   Rectanglei dst(pos.x, pos.y, larg, haut);
   GetMainWindow().Blit(image, pos);
 
   m_box->SetPosition(pos.x,pos.y);
   m_box->DrawOnScreen();
-  GetWorld().ToRedrawOnScreen(dst);
 
+
+  GetWorld().ToRedrawOnScreen(dst);
 
 }
 
