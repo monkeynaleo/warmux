@@ -31,6 +31,7 @@
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/i18n.h"
@@ -91,7 +92,7 @@ bool Blowtorch::p_Shoot()
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
   world.Dig(pos, ActiveCharacter().GetHeight()/2 + 2);
-
+  JukeBox::GetInstance()->Play("share", "weapon/blowtorch");
   MoveCharacter(ActiveCharacter());
 
   return true;
