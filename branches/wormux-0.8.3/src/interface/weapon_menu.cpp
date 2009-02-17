@@ -152,9 +152,9 @@ WeaponsMenu::WeaponsMenu():
   cross = new Sprite(GetResourceManager().LoadImage(res, "interface/cross"));
   // Polygon Size
   Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
-  weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
+  weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
-  tools_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
+  tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   help = NULL;
   // Setting colors
   Color plane_color = GetResourceManager().LoadColor(res, "interface/background_color");
