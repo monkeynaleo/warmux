@@ -34,6 +34,7 @@
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/debug.h"
@@ -62,7 +63,7 @@ ObjBox::ObjBox(const std::string &name)
 
   SetSpeed (SPEED, M_PI_2);
   SetCollisionModel(false, false, true);
-  std::cout<<"super called"<<std::endl;
+  JukeBox::GetInstance()->Play("share","box/falling");
 }
 
 ObjBox::~ObjBox(){
