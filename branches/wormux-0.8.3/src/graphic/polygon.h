@@ -194,11 +194,15 @@ class Polygon {
 class DecoratedBox : public Polygon
 {
  public :
+  enum Style {STYLE_ROUNDED, STYLE_SQUARE};
+
   DecoratedBox(double width, double height);
   ~DecoratedBox();
   virtual void Draw(Surface * dest);
   virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation);
   virtual void ResetTransformation();
+
+  void SetStyle(Style style);
 
  private :
   Point2d max_refresh;
@@ -206,6 +210,7 @@ class DecoratedBox : public Polygon
   Point2d original_max;
   Point2d original_min;
   Surface *m_border;
+  Style m_style;
 
   void GenerateBorder(Surface & source);
 
