@@ -87,8 +87,13 @@ public:
    Surface wind_indicator;
    Point2i bottom_bar_pos;
    
+   //Minimap
+   Surface *minimap;
+   
    //Styled box
    Surface rounding_style [3][3];
+   Surface rounding_style_mask [3][3];
+   
    /*Surface rounding_bottom;
    Surface rounding_bottom_left;
    Surface rounding_bottom_right;
@@ -119,7 +124,7 @@ protected:
    void DrawTimeInfo() const;
    void DrawMapPreview();
    void DrawSmallInterface() const;
-   void DrawStyledBox(const Rectanglei &rect) const;
+   void GenerateStyledBox(  Surface & source);
 
    bool IsDisplayed () const { return display; };
    void EnableDisplay(bool _display);
