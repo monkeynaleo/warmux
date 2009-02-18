@@ -469,23 +469,34 @@ uint OptionMenu::fromVolume(uint vol)
 
 
 // Team editor function
+bool OptionMenu::TeamInfoValid()
+{
+  if (tbox_team_name->GetText().empty())
+    return false;
+
+  for (uint i = 0; i < tbox_character_name_list.size(); i++) {
+    if (tbox_character_name_list[i]->GetText().empty()) {
+      return false;
+    }
+  }
+
+  return true;
+}
 
 void OptionMenu::AddTeam()
 {
   if (!Game::GetInstance()->IsGameFinished())
     return;
 
-  SaveTeam();
-  CustomTeam *new_team = new CustomTeam();
-  new_team->NewTeam();
-  new_team->Save();
+  if (!TeamInfoValid())
+    return;
 
-  if ((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0)) {
-    selected_team = new_team;
-    SaveTeam();
-  }
+  CustomTeam *new_team = new CustomTeam(tbox_team_name->GetText());
+  new_team->NewTeam();
 
   selected_team = new_team;
+  SaveTeam();
+
   ReloadTeamList();
   lbox_teams->NeedRedrawing();
 }
@@ -516,14 +527,14 @@ void OptionMenu::LoadTeam()
     tbox_team_name->SetText(selected_team->GetName());
     std::vector<std::string> character_names = selected_team->GetCharactersNameList();
 
-    for (uint i=0; i < character_names.size() && i < tbox_character_name_list.size(); i++) {
+    for (uint i = 0; i < character_names.size() && i < tbox_character_name_list.size(); i++) {
       tbox_character_name_list[i]->SetText(character_names[i]);
     }
 
   } else {
     tbox_team_name->SetText("");
 
-    for (uint i=0; i< tbox_character_name_list.size(); i++) {
+    for (uint i = 0; i < tbox_character_name_list.size(); i++) {
       tbox_character_name_list[i]->SetText("");
     }
   }
@@ -536,14 +547,14 @@ void OptionMenu::ReloadTeamList()
 
   lbox_teams->ClearItems();
   std::string selected_team_name ="";
-  if (selected_team){
+  if (selected_team) {
     selected_team_name = selected_team->GetName();
   }
 
   GetCustomTeamsList().LoadList();
   std::vector<CustomTeam *> custom_team_list = GetCustomTeamsList().GetList();
 
-  for (uint i=0; i < custom_team_list.size() ; i++) {
+  for (uint i = 0; i < custom_team_list.size(); i++) {
     if (custom_team_list[i]->GetName() == selected_team_name) {
       selected_team = custom_team_list[i];
       LoadTeam();
@@ -561,16 +572,10 @@ bool OptionMenu::SaveTeam()
   if (!Game::GetInstance()->IsGameFinished())
     return false;
 
+  if (!TeamInfoValid())
+    return false;
+
   if (selected_team) {
-    if (tbox_team_name->GetText().empty())
-      return false;
-
-    for (uint i = 0; i < tbox_character_name_list.size(); i++) {
-      if (tbox_character_name_list[i]->GetText().empty()) {
-	return false;
-      }
-    }
-
     bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
     selected_team->SetName(tbox_team_name->GetText());
     for (uint i = 0; i < tbox_character_name_list.size(); i++) {
