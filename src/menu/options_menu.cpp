@@ -408,8 +408,7 @@ void OptionMenu::SaveOptions()
 
   //Team editor
   if (Game::GetInstance()->IsGameFinished()) {
-    if ((!lbox_teams->IsSelectedItem())
-	&& (tbox_team_name->GetText().size()>0)) {
+    if (!lbox_teams->IsSelectedItem()) {
       AddTeam();
     }
     SaveTeam();
@@ -563,9 +562,18 @@ bool OptionMenu::SaveTeam()
     return false;
 
   if (selected_team) {
+    if (tbox_team_name->GetText().empty())
+      return false;
+
+    for (uint i = 0; i < tbox_character_name_list.size(); i++) {
+      if (tbox_character_name_list[i]->GetText().empty()) {
+	return false;
+      }
+    }
+
     bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
     selected_team->SetName(tbox_team_name->GetText());
-    for (uint i=0; i < tbox_character_name_list.size(); i++) {
+    for (uint i = 0; i < tbox_character_name_list.size(); i++) {
       selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
     }
     selected_team->Save();
