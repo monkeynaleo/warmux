@@ -338,10 +338,10 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   else if (w == lbox_teams) {
     SelectTeam();
   }
-  else if (w ==add_team){
+  else if (w == add_team) {
     AddTeam();
   }
-  else if (w ==delete_team){
+  else if (w == delete_team) {
     DeleteTeam();
   }
 }
@@ -359,7 +359,7 @@ void OptionMenu::SaveOptions()
   // Graphic options
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
-  if(!Game::GetInstance()->IsGameFinished())
+  if (!Game::GetInstance()->IsGameFinished())
     Wind::GetRef().Reset();
 
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
@@ -408,10 +408,10 @@ void OptionMenu::SaveOptions()
 
   //Team editor
   if (Game::GetInstance()->IsGameFinished()) {
-    if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
-      {
-	AddTeam();
-      }
+    if ((!lbox_teams->IsSelectedItem())
+	&& (tbox_team_name->GetText().size()>0)) {
+      AddTeam();
+    }
     SaveTeam();
   }
 }
@@ -436,25 +436,23 @@ void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 
 void OptionMenu::CheckUpdates()
 {
-  if (!Config::GetInstance()->GetCheckUpdates() || Constants::WORMUX_VERSION.find("svn") != std::string::npos)
+  if (!Config::GetInstance()->GetCheckUpdates()
+      || Constants::WORMUX_VERSION.find("svn") != std::string::npos)
     return;
 
-  try
-  {
-    std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
-    const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
-    if (latest_version != cur_version)
-    {
-      Question new_version;
-      std::string txt = Format(_("A new version %s is available, while your version is %s."
-                                 "You may want to check whether an update is available for your OS!"),
-                               latest_version.c_str(), cur_version);
-      new_version.Set(txt, true, 0);
-      new_version.Ask();
-    }
+  try {
+      std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
+      const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
+      if (latest_version != cur_version) {
+	Question new_version;
+	std::string txt = Format(_("A new version %s is available, while your version is %s."
+				   "You may want to check whether an update is available for your OS!"),
+				 latest_version.c_str(), cur_version);
+	new_version.Set(txt, true, 0);
+	new_version.Ask();
+      }
   }
-  catch (const std::string err)
-  {
+  catch (const std::string err) {
     AppWormux::DisplayError(Format(_("Version verification failed because: %s\n"), err.c_str()));
   }
 }
@@ -482,11 +480,12 @@ void OptionMenu::AddTeam()
   CustomTeam *new_team = new CustomTeam();
   new_team->NewTeam();
   new_team->Save();
-  if((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0))
-    {
-      selected_team = new_team;
-      SaveTeam();
-    }
+
+  if ((!lbox_teams->IsSelectedItem()) && (tbox_team_name->GetText().size()>0)) {
+    selected_team = new_team;
+    SaveTeam();
+  }
+
   selected_team = new_team;
   ReloadTeamList();
   lbox_teams->NeedRedrawing();
@@ -497,20 +496,16 @@ void OptionMenu::DeleteTeam()
   if (!Game::GetInstance()->IsGameFinished())
     return;
 
-
-  if(selected_team !=NULL)
-    {
-      selected_team->Delete();
-      selected_team = NULL;
-      if(lbox_teams->IsSelectedItem())
-	{
-	  lbox_teams->Deselect();
-
-	}
-      ReloadTeamList();
-      LoadTeam();
-      lbox_teams->NeedRedrawing();
+  if (selected_team) {
+    selected_team->Delete();
+    selected_team = NULL;
+    if (lbox_teams->IsSelectedItem()) {
+      lbox_teams->Deselect();
     }
+    ReloadTeamList();
+    LoadTeam();
+    lbox_teams->NeedRedrawing();
+  }
 }
 
 void OptionMenu::LoadTeam()
@@ -518,27 +513,21 @@ void OptionMenu::LoadTeam()
   if (!Game::GetInstance()->IsGameFinished())
     return;
 
-  if(selected_team != NULL)
-    {
-      tbox_team_name->SetText(selected_team->GetName());
-      std::vector<std::string> character_names = selected_team->GetCharactersNameList();
+  if (selected_team) {
+    tbox_team_name->SetText(selected_team->GetName());
+    std::vector<std::string> character_names = selected_team->GetCharactersNameList();
 
-      for(unsigned i=0; i< character_names.size() && i<tbox_character_name_list.size(); i++)
-	{
-	  tbox_character_name_list[i]->SetText(character_names[i]);
-	}
-
+    for (uint i=0; i < character_names.size() && i < tbox_character_name_list.size(); i++) {
+      tbox_character_name_list[i]->SetText(character_names[i]);
     }
-  else
-    {
+
+  } else {
     tbox_team_name->SetText("");
 
-    for(unsigned i=0; i< tbox_character_name_list.size(); i++)
-      {
-        tbox_character_name_list[i]->SetText("");
-
-      }
+    for (uint i=0; i< tbox_character_name_list.size(); i++) {
+      tbox_character_name_list[i]->SetText("");
     }
+  }
 }
 
 void OptionMenu::ReloadTeamList()
@@ -548,42 +537,40 @@ void OptionMenu::ReloadTeamList()
 
   lbox_teams->ClearItems();
   std::string selected_team_name ="";
-  if(selected_team != NULL){
+  if (selected_team){
     selected_team_name = selected_team->GetName();
   }
 
   GetCustomTeamsList().LoadList();
   std::vector<CustomTeam *> custom_team_list = GetCustomTeamsList().GetList();
 
-  for(unsigned i=0; i< custom_team_list.size() ; i++)
-  {
-      if( custom_team_list[i]->GetName() == selected_team_name){
-          selected_team = custom_team_list[i];
-          LoadTeam();
-      }
+  for (uint i=0; i < custom_team_list.size() ; i++) {
+    if (custom_team_list[i]->GetName() == selected_team_name) {
+      selected_team = custom_team_list[i];
+      LoadTeam();
+    }
 
-      lbox_teams->AddItem((selected_team == custom_team_list[i]),   custom_team_list[i]->GetName(),  custom_team_list[i]->GetName());
+    lbox_teams->AddItem((selected_team == custom_team_list[i]),
+			custom_team_list[i]->GetName(),
+			custom_team_list[i]->GetName());
 
   }
 }
-
 
 bool OptionMenu::SaveTeam()
 {
   if (!Game::GetInstance()->IsGameFinished())
     return false;
 
-  if (selected_team !=NULL)
-    {
-      bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
-      selected_team->SetName(tbox_team_name->GetText());
-      for(unsigned i=0; i<tbox_character_name_list.size(); i++)
-	{
-	  selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
-	}
-      selected_team->Save();
-      return is_name_changed;
+  if (selected_team) {
+    bool is_name_changed = (selected_team->GetName().compare(tbox_team_name->GetText()) != 0);
+    selected_team->SetName(tbox_team_name->GetText());
+    for (uint i=0; i < tbox_character_name_list.size(); i++) {
+      selected_team->SetCharacterName(i,tbox_character_name_list[i]->GetText());
     }
+    selected_team->Save();
+    return is_name_changed;
+  }
 
   return false;
 }
@@ -593,15 +580,13 @@ void OptionMenu::SelectTeam()
   if (!Game::GetInstance()->IsGameFinished())
     return;
 
-
-  if(lbox_teams->IsSelectedItem())
-    {
-      bool is_changed_name = SaveTeam();
-      std::string s_selected_team = lbox_teams->ReadValue();
-      selected_team = GetCustomTeamsList().GetByName(s_selected_team);
-      LoadTeam();
-      if (is_changed_name) {
-	ReloadTeamList();
-      }
+  if (lbox_teams->IsSelectedItem()) {
+    bool is_changed_name = SaveTeam();
+    std::string s_selected_team = lbox_teams->ReadValue();
+    selected_team = GetCustomTeamsList().GetByName(s_selected_team);
+    LoadTeam();
+    if (is_changed_name) {
+      ReloadTeamList();
     }
+  }
 }
