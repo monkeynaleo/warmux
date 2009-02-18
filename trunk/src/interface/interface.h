@@ -86,14 +86,14 @@ public:
    Surface wind_icon;
    Surface wind_indicator;
    Point2i bottom_bar_pos;
-   
+
    //Minimap
    Surface *minimap;
    uint       m_last_minimap_redraw;
    //Styled box
    Surface rounding_style [3][3];
    Surface rounding_style_mask [3][3];
-   
+
    /*Surface rounding_bottom;
    Surface rounding_bottom_left;
    Surface rounding_bottom_right;
@@ -135,6 +135,7 @@ protected:
    int GetHeight() const;
    int GetMenuHeight() const;
    Point2i GetSize() const;
+   Point2i GetMenuPosition() const;
 
    void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
    void UpdateTimer(uint utimer, const Color& color = black_color);
