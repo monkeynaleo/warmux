@@ -55,7 +55,7 @@ msgstr "%s -laget"
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -65,49 +65,49 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s bps"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s tok selvmord !"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) døde."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s har falt i vannet"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s har falt av kartet !"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s døde fordi han klønet det til!"
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fått %u livspoeng !"
 msgstr[1] "%s har fått %u livspoeng !"
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
@@ -117,7 +117,7 @@ msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 msgid "%s is next to a mine!"
 msgstr "%s er i nærheten av en mine !"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s-laget har allere uendelig med ammunisjon for %s !"
@@ -142,7 +142,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "%s-laget har vunnet %u Gnu, Spreng alle Cowboy !"
 msgstr[1] "%s-laget har vunnet %u Gnuer, Spreng alle Cowboy !"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -235,7 +235,7 @@ msgid_plural ""
 msgstr[0] "%s-laget har vunnet %u diskogranat, shake it når du kaster den !"
 msgstr[1] "%s-laget har vunnet %u diskogranater, shake it når du kaster dem !"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -249,14 +249,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s-laget har vunnet %u flammekaster !"
 msgstr[1] "%s-laget har vunnet %u flammekastere !"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s-laget har vunnet %u fotballbombe !"
 msgstr[1] "%s-laget har vunnet %u fotballbomber !"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -284,7 +284,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "%s-laget har vunnet %u jetmotor !"
 msgstr[1] "%s-laget har vunnet %u jetmotorer !"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -381,7 +381,7 @@ msgstr[1] ""
 "%s-laget har vunnet %u muligheter til å hoppe over en runde, du vil elske "
 "det !"
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -395,17 +395,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s laget ble meiet ned"
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#: src/ai/ai_shoot_module.cpp:370
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(død)"
 
@@ -419,7 +419,7 @@ msgid "(unknown time)"
 msgstr "(ukjent tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(uendelig)"
 
@@ -432,7 +432,7 @@ msgstr ""
 "En ny versjon, %s, er tilgjengelig, din versjon er %s. Du bør sjekke om en "
 "oppdatering er tilgjengelig for ditt operativsystem!"
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Luftangrep"
 
@@ -507,7 +507,7 @@ msgstr "Sveiseapparat"
 msgid "Bounce Ball"
 msgstr "Sprettball"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Hadé tux!!"
 
@@ -666,11 +666,11 @@ msgstr "Tidsrom før dødsmodus"
 msgid "Duration of a turn"
 msgstr "Varighet per runde"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "Spillet er slutt"
 
@@ -712,7 +712,7 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -762,7 +762,7 @@ msgstr "Kan ikke finne utseendet \"%s\" til \"%s\"-laget."
 msgid "Flame Thrower"
 msgstr "Flammekaster"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Fotballbombe"
 
@@ -830,7 +830,7 @@ msgid "Head commander"
 msgstr "Kommandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Kommandant"
 
@@ -904,7 +904,7 @@ msgstr ""
 "Første skytevinkel : Opp/NedSkyt : Hold mellomromstasten nede til riktig "
 "styrke er nådden ammo per runde"
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Starter"
 
@@ -920,7 +920,7 @@ msgstr "Laster lyder"
 msgid "Initialise teams"
 msgstr "Laster lagene"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Det er en gave !"
 
@@ -1262,7 +1262,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Snikskytterrifle"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Noen har plassert en felle i krateret!"
 
@@ -1294,11 +1294,11 @@ msgstr "Lydstyrke ?"
 msgid "Sounds"
 msgstr "Lyder"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Laster et nytt spill"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Lager :"
 
@@ -1306,7 +1306,7 @@ msgstr "Lager :"
 msgid "Submachine Gun"
 msgstr "Mitraljøse"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1343,7 +1343,7 @@ msgstr "Teleportering"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Klasebomben forsvant fra kampplassen uten å eksplodere."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Fotballbomben forsvant fra kampplassen uten å eksplodere."
 
@@ -1380,7 +1380,7 @@ msgstr "Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Diskogranaten har forlatt dansegulvet uten å eksplodere"
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spillet ble avbrutt fordi du ble frakoblet."
 
@@ -1417,7 +1417,7 @@ msgstr[1] "Det er i øyeblikket %i lag."
 msgid "Time"
 msgstr "Tid"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1438,10 +1438,6 @@ msgstr ""
 "Timeout : Rull på musehjulet eller trykk på Page Up/DownFørste skytevinkel : "
 "Opp/NedSkyt : Hold mellomromstasten nede til riktig styrke er nådden ammo "
 "per runde"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Verktøy"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1495,8 +1491,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Våpen"
 
@@ -1510,7 +1505,7 @@ msgstr "Webside : "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "For en skam for %s : han ble drept av en liten pistol !"
@@ -1568,7 +1563,7 @@ msgstr "Du må ha minst to godkjente lag!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 
@@ -1576,7 +1571,7 @@ msgstr "Du bommet"
 msgid "aka"
 msgstr "kjent som"
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1622,6 +1617,9 @@ msgstr "o Kunne ikke laste lydprofilen : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åpnet lydfilen på %d Hz %d bit"
+
+#~ msgid "Tools"
+#~ msgstr "Verktøy"
 
 #, fuzzy
 #~ msgid "Head commander:"

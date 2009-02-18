@@ -57,7 +57,7 @@ msgstr "Mannschaft %s"
 msgid "%s Team - Remote"
 msgstr "Mannschaft %s - Entfernt"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s ändert Ziel auf %s"
@@ -67,49 +67,49 @@ msgstr "%s ändert Ziel auf %s"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s von Team %s beging Selbstmord!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s von Team %s ist gestorben."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s von Team %s ist ins Wasser gefallen."
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s von Team %s ist von der Karte gefallen!"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s von Team %s hat es zu stark auf den Boden gehauen!"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s von Team %s stirbt durch seine Tollpatschigkeit!"
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s hat sich entschlossen %s zu verletzen"
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
@@ -119,7 +119,7 @@ msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Team %s hat bereits unendlich Munition für %s!"
@@ -144,7 +144,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "Mannschaft %s hat %u Gnu gewonnen! Spreng sie in die Luft, Cowboy!"
 msgstr[1] "Mannschaft %s hat %u Gnus gewonnen! Spreng sie in die Luft, Cowboy!"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -243,7 +243,7 @@ msgstr[1] ""
 "Mannschaft %s hat %u Diskogranaten gewonnen! Schwing deinen Körper nach dem "
 "Wurf!"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -257,14 +257,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "Mannschaft %s hat %u Flammenwerfer gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Flammenwerfer gewonnen!"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Mannschaft %s hat %u Lärmbombe gewonnen!"
 msgstr[1] "Mannschaft %s hat %u Lärmbomben gewonnen!"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -292,7 +292,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Mannschaft %s hat %u Jetpack gewonnen! Sehr cool!"
 msgstr[1] "Mannschaft %s hat %u Jetpacks gewonnen! Sehr cool!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -396,7 +396,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Mannschaft %s hat %u Rundensprünge gewonnen! Ich weiß dass du es liebst."
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -412,18 +412,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "team %s wurde aufgerieben"
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nahm einen Kämpfer von Mannschaft %s mit ins Grab!"
 
-#: src/ai/ai_shoot_module.cpp:370
-#, c-format
-#, fuzzy
+#: src/ai/ai_shoot_module.cpp:377
+#, fuzzy, c-format
 msgid "%s will shoot %s"
 msgstr "%s erschießt %s"
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(tot)"
 
@@ -437,7 +436,7 @@ msgid "(unknown time)"
 msgstr "(unbekannte Zeit)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(unbegrenzt)"
 
@@ -451,7 +450,7 @@ msgstr ""
 "Überprüfe, ob für dein Betriebssystem bereits eine Aktualisierung bereit "
 "steht."
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Luftangriff"
 
@@ -526,7 +525,7 @@ msgstr "Schneidbrenner"
 msgid "Bounce Ball"
 msgstr "Springball"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Und tschüss Tux..."
 
@@ -682,11 +681,11 @@ msgstr "Zeit bevor Todesmodus anfängt"
 msgid "Duration of a turn"
 msgstr "Dauer einer Runde"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "ENDE DES SPIELS"
 
@@ -729,10 +728,9 @@ msgstr ""
 #: src/team/custom_team.cpp:95
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr ""
-"Fehler beim Löschen der Datei \"%s\": kann eigenes Team nicht Löschen."
+msgstr "Fehler beim Löschen der Datei \"%s\": kann eigenes Team nicht Löschen."
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -783,7 +781,7 @@ msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 msgid "Flame Thrower"
 msgstr "Flammenwerfer"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Fussballbombe"
 
@@ -851,7 +849,7 @@ msgid "Head commander"
 msgstr "Hauptkommandant"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Hauptkommandant:"
 
@@ -933,7 +931,7 @@ msgstr ""
 "Feuer : Leertaste gedrückt halten bis die gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Initialisierung"
 
@@ -949,7 +947,7 @@ msgstr "Initialisiere Sounds"
 msgid "Initialise teams"
 msgstr "Initialisiere Mannschaft"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Es ist ein Geschenk!"
 
@@ -972,8 +970,8 @@ msgstr "Sprung rückwärts"
 #: src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
-"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler "
-"\"kicken\")"
+"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler \"kicken"
+"\")"
 
 #: src/menu/options_menu.cpp:129
 msgid "Language"
@@ -1293,7 +1291,7 @@ msgstr "Kleinerer Zielwinkel und einen Schritt laufen"
 msgid "Sniper Rifle"
 msgstr "Scharfschützengewehr"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Eine Sprengfalle wurde in einer Holzkiste versteckt."
 
@@ -1328,11 +1326,11 @@ msgstr "Tonfrequenz"
 msgid "Sounds"
 msgstr "Geräusche"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Starte ein neues Spiel"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Vorrat:"
 
@@ -1340,7 +1338,7 @@ msgstr "Vorrat:"
 msgid "Submachine Gun"
 msgstr "Maschinenpistole"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1378,7 +1376,7 @@ msgstr ""
 "Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
 "konnte."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
 "Die Lärmbombe hat das Schlachtfeld verlassen bevor sie explodieren konnte."
@@ -1420,7 +1418,7 @@ msgid "The disco grenade has left the dance floor before exploding"
 msgstr ""
 "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "Das Spiel wurde unterbrochen, da keine Verbindung mehr besteht."
 
@@ -1458,7 +1456,7 @@ msgstr[1] "Es gibt nur %i Mannschaften."
 msgid "Time"
 msgstr "Zeit"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1481,10 +1479,6 @@ msgstr ""
 "Winkel : Hoch/Runter\n"
 "Feuer : Leertaste\n"
 "eine Munition pro Runde"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Werkzeuge"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1537,8 +1531,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Waffe: Feuer / Bonus-Box: Fällt schnell"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Waffen"
 
@@ -1552,7 +1545,7 @@ msgstr "Webseite: "
 msgid "Welcome to %s!"
 msgstr "Willkommen bei %s!"
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -1610,7 +1603,7 @@ msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kannst nicht spielen bevor du eine Mannschaft gewählt hast!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
@@ -1618,7 +1611,7 @@ msgstr "Dein Schuss ging daneben!"
 msgid "aka"
 msgstr "aka"
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1666,6 +1659,9 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#~ msgid "Tools"
+#~ msgstr "Werkzeuge"
 
 #, fuzzy
 #~ msgid "Head commander:"
