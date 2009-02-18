@@ -92,6 +92,7 @@ class OptionMenu : public Menu
    Label *team_name;
    std::vector<TextBox *> tbox_character_name_list;
 
+   bool TeamInfoValid();
    void AddTeam();
    void DeleteTeam();
    void LoadTeam();
@@ -101,7 +102,6 @@ class OptionMenu : public Menu
 
    bool signal_ok();
    bool signal_cancel();
-   void key_tab();
 };
 
 #endif

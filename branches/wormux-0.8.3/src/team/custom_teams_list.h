@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2008 Wormux Team.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@
 #define CUSTOM_TEAMS_LIST_H
 //-----------------------------------------------------------------------------
 
-#include "include/singleton.h"
 #include <string>
 #include <vector>
+#include "include/singleton.h"
 
 //-----------------------------------------------------------------------------
 
@@ -34,9 +34,7 @@ class CustomTeam;
 
 class CustomTeamsList : public Singleton<CustomTeamsList>
 {
-
 public:
-
   CustomTeamsList();
   ~CustomTeamsList();
   void LoadList();
@@ -44,10 +42,11 @@ public:
   CustomTeam* GetByName(std::string name);
   unsigned GetNumCustomTeam();
 
-protected :
+private:
+  std::vector<CustomTeam *> full_list;
+
   void Clear();
   void Sort();
-  std::vector<CustomTeam *> full_list;
   void LoadOneTeam (const std::string &dir, const std::string &file);
   static bool CompareItems( CustomTeam* p1, CustomTeam* p2 );
 };
