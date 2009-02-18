@@ -140,10 +140,10 @@ OptionMenu::OptionMenu() :
 
     Box * box_team_name = new HBox(30, false, true);
 
-    team_name = new Label(_("Head commander")+':', 150, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    team_name = new Label(Format("%s:", _("Head commander")), 150, Font::FONT_MEDIUM, Font::FONT_NORMAL);
     box_team_name->AddWidget(team_name);
 
-    tbox_team_name = new TextBox("", 100, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    tbox_team_name = new TextBox("", 160, Font::FONT_MEDIUM, Font::FONT_NORMAL);
     box_team_name->AddWidget(tbox_team_name);
 
     teams_editor_inf->AddWidget(box_team_name);
@@ -151,13 +151,13 @@ OptionMenu::OptionMenu() :
     Label* label_ch_names = new Label(_("Character names:"), 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
     teams_editor_inf->AddWidget(label_ch_names);
 
-    Point2i names_size(140, 20);
+    Point2i names_size(190, 20);
 
     Box * teams_editor_names = new GridBox(max_width - option_size.x - 40, names_size, false);
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("",100,Font::FONT_MEDIUM, Font::FONT_NORMAL));
+      tbox_character_name_list.push_back(new TextBox("",160,Font::FONT_MEDIUM, Font::FONT_NORMAL));
       Label * lab = new Label(oss.str(), 30, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
       Box * name_box = new HBox(20, false, true);
