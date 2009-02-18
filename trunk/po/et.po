@@ -56,7 +56,7 @@ msgstr "Meeskond %s"
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -66,49 +66,49 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s kaadrit/sek"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s meestkonnast %s sooritas enesetapu!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s meeskonnast %s on kutu."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s meeskonnast %s kukkus vette."
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s meeskonnast %s lendas auti!"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s meeskonnast %s prantsatas liiga kõvasti vastu maad!"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s meeskonnast %s sai surma omaenda lollusest!"
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s võitis %u elupunkti!"
 msgstr[1] "%s võitis %u elupunkti!"
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
@@ -118,7 +118,7 @@ msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
 msgid "%s is next to a mine!"
 msgstr "%s seisab miini kõrval!"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Meeskonnal %s on nüüd %s jaoks lõputult laskemoona!"
@@ -143,7 +143,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "Meeskond %s võitlis %u Gnu! Lase nad vastu taevast, kauboi!"
 msgstr[1] "Meeskond %s võitlis %u Gnud! Lase nad vastu taevast, kauboi!"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -236,7 +236,7 @@ msgid_plural ""
 msgstr[0] "Meeskond %s võitis %u diskogranaadi! Puus nõksuma ja hopp!"
 msgstr[1] "Meeskond %s võitis %u diskogranaati! Puus nõksuma ja hopp!"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -250,14 +250,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "Meeskond %s võitis %u leegiheitja!"
 msgstr[1] "Meeskond %s võitis %u leegiheitjat!"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Meeskond %s võitis %u jalgpommi!"
 msgstr[1] "Meeskond %s võitis %u jalgpommi!"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -285,7 +285,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Meeskond %s võitis %u reaktiivranitsa! Jõud olgu sinuga!"
 msgstr[1] "Meeskond %s võitis %u reaktiivranitsat! Jõud olgu sinuga!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -377,7 +377,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Meeskond %s võitis %u vahelejäämise! Ma tean, et see on su lemmik!"
 msgstr[1] "Meeskond %s võitis %u vahelejäämist! Ma tean, et see on su lemmik!"
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -391,17 +391,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Meeskond %s lasti ribadeks."
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s võttis %s meeskonna liikme hauda kaasa!"
 
-#: src/ai/ai_shoot_module.cpp:370
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(kutu)"
 
@@ -415,7 +415,7 @@ msgid "(unknown time)"
 msgstr "(teadmata aeg)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(piiramatu)"
 
@@ -428,7 +428,7 @@ msgstr ""
 "Uus väljalase %s on saadaval. Kasutatav väljalase on %s. Võiksid "
 "kontrollida, kas on olemas uuendus sinu süsteemi jaoks!"
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Õhurünnak"
 
@@ -502,7 +502,7 @@ msgstr "Leeklamp"
 msgid "Bounce Ball"
 msgstr "Põrkepall"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Hüvasti, Tux..."
 
@@ -657,11 +657,11 @@ msgstr "Aega enne surmare¸iimi minekut"
 msgid "Duration of a turn"
 msgstr "Käigu kestvus"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dünamiit"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "MÄNGU LÕPP"
 
@@ -701,7 +701,7 @@ msgstr ""
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Viga faili \"%s\" kustutamisel. Ei suuda kustutada kohandet meeskonda."
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -751,7 +751,7 @@ msgstr "Viga: Ei suuda leida keha \"%s\" meeskonna \"%s\" jaoks."
 msgid "Flame Thrower"
 msgstr "Leegiheitja"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Jalgpomm"
 
@@ -818,7 +818,7 @@ msgid "Head commander"
 msgstr "Pealik"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Pealik:"
 
@@ -900,7 +900,7 @@ msgstr ""
 "Tulistamine: Hoida tühikut all, kuni soovitud võimsuse saavutamiseni\n"
 "üks soru käigu kohta"
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Sättimine"
 
@@ -916,7 +916,7 @@ msgstr "Sätin helisid"
 msgid "Initialise teams"
 msgstr "Sätin meeskondi"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Teile on pakk!"
 
@@ -1252,7 +1252,7 @@ msgstr "Väiksem sihtimisnurk ja liikumissamm"
 msgid "Sniper Rifle"
 msgstr "Täpsuspüss"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Keegi oli na üllatuse kasti pistnud!"
 
@@ -1286,11 +1286,11 @@ msgstr "Helisagedus"
 msgid "Sounds"
 msgstr "Helid"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Alusta uut mängu"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Tagavara:"
 
@@ -1298,7 +1298,7 @@ msgstr "Tagavara:"
 msgid "Submachine Gun"
 msgstr "Automaat"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1334,7 +1334,7 @@ msgstr "Teleport"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Granaat lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Jalgpomm lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
@@ -1371,7 +1371,7 @@ msgstr "Ühenduse ootamise aeg läbi. Kontrolli, ega tulemüüri ees pole!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Diskogranaat lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "Mäng katkestati, sest ühendus kadus ära."
 
@@ -1408,7 +1408,7 @@ msgstr[1] "On vaid %i meeskonda."
 msgid "Time"
 msgstr "Aeg"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1431,10 +1431,6 @@ msgstr ""
 "Nurk: Üles/alla\n"
 "Tulistamine: Tühik\n"
 "üks soru käigu kohta"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Tööriistad"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1487,8 +1483,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Relv: Tule/hüve laegas: Kukub kähku"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Relvad"
 
@@ -1502,7 +1497,7 @@ msgstr "Veebileht:"
 msgid "Welcome to %s!"
 msgstr "%s tervitab!"
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Häbilugu! %s lasti lihtsalt püstoliga maha!"
@@ -1560,7 +1555,7 @@ msgstr "Sul on vaja vähemalt kahte meeskonda!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Sa ei saa mängida enne, kui oled meeskonna valinud!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Mööda lasid!"
 
@@ -1568,7 +1563,7 @@ msgstr "Mööda lasid!"
 msgid "aka"
 msgstr "elik"
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1616,6 +1611,9 @@ msgstr "o Laadin heliprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio sätitud %d Hz ja %d biti peale"
+
+#~ msgid "Tools"
+#~ msgstr "Tööriistad"
 
 #, fuzzy
 #~ msgid "Head commander:"

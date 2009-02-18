@@ -58,7 +58,7 @@ msgstr "Para %s"
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s a janj kosten dhe %s"
@@ -68,42 +68,42 @@ msgstr "%s a janj kosten dhe %s"
 msgid "%s fps"
 msgstr "%s imaj/s"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s re erviras shyndya %s"
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -112,7 +112,7 @@ msgstr[1] "Gwarier %s re gavas %u boynt a nerth!"
 msgstr[2] "Gwarier %s re gavas %u foynt a nerth!"
 msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -122,7 +122,7 @@ msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
 msgid "%s is next to a mine!"
 msgstr "Yma %s ogas dhe grampothen dardhus!"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
@@ -151,7 +151,7 @@ msgstr[1] "Para %s re waynyas %u Nu! Tardh-i, bughwas!"
 msgstr[2] "Para %s re waynyas %u Gnu! Tardh-i, bughwas!"
 msgstr[3] "Para %s re waynyas %u Gnu! Tardh-i, bughwas!"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -281,7 +281,7 @@ msgstr[3] ""
 "Para %s re waynyas %u pinaval tardhus disco! Gwayewgh agas korfow pan y's "
 "tewlowgh!"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -299,7 +299,7 @@ msgstr[1] "Para %s re waynyas %u stifeller-tan"
 msgstr[2] "Para %s re waynyas %u stifeller-tan!"
 msgstr[3] "Para %s re waynyas %u stifeller-tan!"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -308,7 +308,7 @@ msgstr[1] "Para %s re waynyas %u danbellen beldroos!"
 msgstr[2] "Para %s re waynyas %u thanbellen beldroos!"
 msgstr[3] "Para %s re waynyas %u tanbellen beldroos!"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -344,7 +344,7 @@ msgstr[1] "Para %s re waynyas %u stifelback! Splann!"
 msgstr[2] "Para %s re waynyas %u stifelback! Splann!"
 msgstr[3] "Para %s re waynyas %u stifelback! Splann!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -466,7 +466,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Para %s re waynyas %u koll-tro! Pur lowen vedhowgh gansans, yn surredi!"
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -484,17 +484,17 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
 
-#: src/ai/ai_shoot_module.cpp:370
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s a vynn tenna %s"
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(marow)"
 
@@ -508,7 +508,7 @@ msgid "(unknown time)"
 msgstr "(prys ankoth)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
@@ -521,7 +521,7 @@ msgstr ""
 "Versyon nowyth %s yw kavadow, mes dha versyon jy yw %s. Martesen y fo hwans "
 "dhis a jeckya mars eus nowedhans kavadow rag dha SO!"
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Omsettyans Ayr"
 
@@ -595,7 +595,7 @@ msgstr "Torchen leski"
 msgid "Bounce Ball"
 msgstr "Pel derlemmel"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Duw genes tux..."
 
@@ -749,11 +749,11 @@ msgstr "Pesyans kyns modh marwel"
 msgid "Duration of a turn"
 msgstr "Pesyans unn dro"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "DIWEDH AN GWARI"
 
@@ -794,7 +794,7 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Gwall pan dhileas an restren \"%s\". Ny allas dilea an para personelhes."
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -845,7 +845,7 @@ msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
 msgid "Flame Thrower"
 msgstr "Stifeller-Tan"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
@@ -912,7 +912,7 @@ msgid "Head commander"
 msgstr "Penn an para"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Penn an para: "
 
@@ -996,7 +996,7 @@ msgstr ""
 "vyn'ta\n"
 "unn bellen orth an dro"
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Darbaryans"
 
@@ -1012,7 +1012,7 @@ msgstr "Darbari sonyow"
 msgid "Initialise teams"
 msgstr "Darbari paraow"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Ro ywa!"
 
@@ -1348,7 +1348,7 @@ msgstr "Lehe elin medra ha kamm kerdhes"
 msgid "Sniper Rifle"
 msgstr "Kelsethwon"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 
@@ -1383,11 +1383,11 @@ msgstr "Menowghder an son"
 msgid "Sounds"
 msgstr "Sonyow"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Ow lonchya gwari nowyth"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Daffar:"
 
@@ -1395,7 +1395,7 @@ msgstr "Daffar:"
 msgid "Submachine Gun"
 msgstr "Gojynn-gonn"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1431,7 +1431,7 @@ msgstr "Pellbortyans"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "An Danbellen Omvrewus re asas an gaslan kyns omdardha."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "An Danbellen Beldroos re asas an gaslan kyns omdardha."
 
@@ -1468,7 +1468,7 @@ msgstr "An junyans a verwis. Check mars eus problem gans dha fos-tan!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "An pinaval tardhus disco re asas an leur-donsya kyns omdardha."
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 
@@ -1507,7 +1507,7 @@ msgstr[3] "Nyns eus saw %i para."
 msgid "Time"
 msgstr "Termyn"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1531,10 +1531,6 @@ msgstr ""
 "Elin : Yn-Bann/Yn-Nans\n"
 "Tenna : spas\n"
 "unn bellen orth an dro"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Toulys"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1589,8 +1585,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Arvow"
 
@@ -1604,7 +1599,7 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
@@ -1662,7 +1657,7 @@ msgstr "Res yw bos dhe'n leha dew bara da!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Ny yllydh gwari kyns dewis para!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
@@ -1670,7 +1665,7 @@ msgstr "Dha denn re fyllis!"
 msgid "aka"
 msgstr "leshenwys"
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1718,6 +1713,9 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#~ msgid "Tools"
+#~ msgstr "Toulys"
 
 #~ msgid "Head commander:"
 #~ msgstr "Penn an para: "

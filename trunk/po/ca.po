@@ -62,7 +62,7 @@ msgstr "Equip %s"
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -72,49 +72,49 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s de l'equip %s és un suicida!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s de l'equip %s ha mort."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s de l'equip %s ha caigut dins l'aigua!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s de l'equip %s ha caigut del mapa!"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s de l'equip %s ha picat massa fort a terra!"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'equip %s s'ha mort per pocatraça!"
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "¡El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip: %s"
@@ -124,7 +124,7 @@ msgstr "%s es un psicopata!!, ha mort un company del seu equip: %s"
 msgid "%s is next to a mine!"
 msgstr "¡%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s es un psicòpata!!, ha mort a un membre des seu equip %s"
@@ -149,7 +149,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "L'equip %s aconsegueix %u Gnu!"
 msgstr[1] "L'equip %s aconsegueix %u Gnus!"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -234,7 +234,7 @@ msgid_plural ""
 msgstr[0] "L'equip %s aconsegueix %u disc explosiu!"
 msgstr[1] "L'equip %s aconsegueix %u discs explosius!"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -248,14 +248,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "L'equip %s aconsegueix %u llançaflames!"
 msgstr[1] "L'equip %s aconsegueix %u llançaflames!"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "L'equip %s aconsegueix %u  football bomb!"
 msgstr[1] "L'equip %s aconsegueix %u football bombs!"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -283,7 +283,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "L'equip %s aconsegueix %u jetpack!"
 msgstr[1] "L'equip %s aconsegueix %u jetpacks!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -375,7 +375,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'equip %s aconsegueix %u perd torn!"
 msgstr[1] "L'equip %s aconsegueix %u perd torns!"
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -387,17 +387,17 @@ msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 msgid "%s team was fragged down."
 msgstr "L'equip %s ha guanyat."
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s s'ha emportat un membre de %s a la tomba amb ell!"
 
-#: src/ai/ai_shoot_module.cpp:370
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -411,7 +411,7 @@ msgid "(unknown time)"
 msgstr "(temps desconegut)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -424,7 +424,7 @@ msgstr ""
 "La versió %s està disponible, però tens la versió %s. Potser vols veure si "
 "hi ha una actualització disponible per al teu sistema operatiu. "
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Atac aeri"
 
@@ -498,7 +498,7 @@ msgstr "Bufador"
 msgid "Bounce Ball"
 msgstr "Bounce Ball"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Fins ara tux... "
 
@@ -654,11 +654,11 @@ msgstr "Durada de la mort sobtada"
 msgid "Duration of a turn"
 msgstr "Duració del torn"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "Fi del joc"
 
@@ -703,7 +703,7 @@ msgstr ""
 "Error mentre s'esborrava l'arxiu \"%s\". No es pot esborrar l'equip "
 "personalitzat."
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -755,7 +755,7 @@ msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 msgid "Flame Thrower"
 msgstr "Llançaflames"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Pantalla completa?"
 
@@ -822,7 +822,7 @@ msgid "Head commander"
 msgstr "Comandant cap"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Comandant cap:"
 
@@ -906,7 +906,7 @@ msgstr ""
 "desitjada\n"
 " un arma per torn "
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Inicialització"
 
@@ -922,7 +922,7 @@ msgstr "Inicialització de sons"
 msgid "Initialise teams"
 msgstr "Inicialització d'equips"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Això és un regal! "
 
@@ -1262,7 +1262,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Fusell de franctirador"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 
@@ -1297,11 +1297,11 @@ msgstr "Freqüència del so"
 msgid "Sounds"
 msgstr "Sons"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Munició:"
 
@@ -1309,7 +1309,7 @@ msgstr "Munició:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1347,7 +1347,7 @@ msgstr ""
 "La bomba de fragmentació ha abandonat el camp de batalla abans que pogués "
 "explotar."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
 "La bomba de fragmentació ha abandonat es camp de batalla abans de poder "
@@ -1388,7 +1388,7 @@ msgstr "Ha passat el temps de connexió. Mira si no hi ha algun firewall."
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "El disc bomba ha abandonat la pista de ball abans d'explotar. "
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "El joc es va interrompre per que t'has desconnectat. "
 
@@ -1425,7 +1425,7 @@ msgstr[1] "Solament hi ha %i equips."
 msgid "Time"
 msgstr "Temps"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1448,10 +1448,6 @@ msgstr ""
 "Angle: Dalt/Baix\n"
 " Foc: barra espaciadora\n"
 "un arma per torn"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Eines"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1506,8 +1502,7 @@ msgstr ""
 " Caixes: Accelera la caiguda"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Armes"
 
@@ -1521,7 +1516,7 @@ msgstr "Pagina web: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s: ha estat mort per una simple pistola!"
@@ -1579,7 +1574,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
@@ -1587,7 +1582,7 @@ msgstr "Has fallat el tir!"
 msgid "aka"
 msgstr "aqui "
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1635,6 +1630,9 @@ msgstr "o Carregant perfil de so: %s "
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
+
+#~ msgid "Tools"
+#~ msgstr "Eines"
 
 #, fuzzy
 #~ msgid "Head commander:"

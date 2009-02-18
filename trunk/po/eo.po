@@ -56,7 +56,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/ai/ai_shoot_module.cpp:439
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -66,49 +66,49 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s bildoj po sekundo (fps)"
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (teamo %s) mortigis sin!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (teamo %s) mortis."
 
-#: src/game/game.cpp:714
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (teamo %s) droniĝis!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (teamo %s) falis el la mapo!"
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (teamo %s) grundtrafis tro perforte!"
 
-#: src/game/game.cpp:736
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
 
-#: src/ai/ai_shoot_module.cpp:355
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
 
-#: src/object/medkit.cpp:69
+#: src/object/medkit.cpp:66
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
@@ -118,7 +118,7 @@ msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino..."
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:93
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s teamo jam havas senlimajn municiojn por la %s!"
@@ -143,7 +143,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "%s teamo gajnis %u Gnuon! Eksplodigu ĉiujn, vakero!"
 msgstr[1] "%s teamo gajnis %u Gnuon! Eksplodigu ĉiujn, vakero!"
 
-#: src/weapon/air_attack.cpp:272
+#: src/weapon/air_attack.cpp:270
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -235,7 +235,7 @@ msgid_plural ""
 msgstr[0] "%s teamo gajnis %u diskogrenadon! Ekskuu dum vi lanĉas ĝin!"
 msgstr[1] "%s teamo gajnis %u diskogrenadojn! Ekskuu dum vi lanĉas ĝin!"
 
-#: src/weapon/dynamite.cpp:145
+#: src/weapon/dynamite.cpp:143
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -249,14 +249,14 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s teamo gajnis %u flamĵetilon!"
 msgstr[1] "%s teamo gajnis %u flamĵetilojn!"
 
-#: src/weapon/footbomb.cpp:176
+#: src/weapon/footbomb.cpp:169
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s teamo gajnis %u futbalbombon!"
 msgstr[1] "%s teamo gajnis %u futbalbombojn!"
 
-#: src/weapon/grapple.cpp:377
+#: src/weapon/grapple.cpp:392
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -284,7 +284,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "%s teamo gajnis %u jetpakon! Ŭaŭ!"
 msgstr[1] "%s teamo gajnis %u jetpakojn! Ŭaŭ!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -378,7 +378,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s teamo gajnis %u vicpasigon! Mi scias, ke vi amos ĝin."
 msgstr[1] "%s teamo gajnis %u vicpasigojn! Mi scias, ke vi amos ilin."
 
-#: src/weapon/supertux.cpp:318
+#: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -392,17 +392,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s teamo primurditis."
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s entombigis membron de la %s teamo kun li!"
 
-#: src/ai/ai_shoot_module.cpp:370
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
 
-#: src/interface/interface.cpp:185
+#: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(mortinta)"
 
@@ -416,7 +416,7 @@ msgid "(unknown time)"
 msgstr "(nekonata tempo)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -429,7 +429,7 @@ msgstr ""
 "Nova versio %s estas havebla, dum via estas %s. Vi eble volas kontroli ĉu "
 "estas ĝisdatigaĵo por via mastruma sistemo!"
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Aeratako"
 
@@ -503,7 +503,7 @@ msgstr "Torĉo"
 msgid "Bounce Ball"
 msgstr "Resaltanta pilko"
 
-#: src/weapon/supertux.cpp:179
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye tux..."
 msgstr "Adiaŭ, tukso..."
 
@@ -659,11 +659,11 @@ msgstr "Daŭro antaŭ subitmorta modo"
 msgid "Duration of a turn"
 msgstr "Vicdaŭro"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:114
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:279
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
@@ -704,7 +704,7 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Eraro forigante dosierujon \"%s\": ne eblas forigi la dosieron de agordo."
 
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -754,7 +754,7 @@ msgstr "Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 msgid "Flame Thrower"
 msgstr "Flamĵetilo"
 
-#: src/weapon/footbomb.cpp:158
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "Futbalbombo"
 
@@ -821,7 +821,7 @@ msgid "Head commander"
 msgstr "Ĉefkomandoro"
 
 #. Display player's name
-#: src/interface/interface.cpp:176
+#: src/interface/interface.cpp:180
 msgid "Head commander: "
 msgstr "Ĉefkomandoro:"
 
@@ -901,7 +901,7 @@ msgstr ""
 "Pafo: apogu kontinue spacetosignon ĝis la vola forto\n"
 "Unu pafo vice"
 
-#: src/game/game_init.cpp:162
+#: src/game/game_init.cpp:161
 msgid "Initialisation"
 msgstr "Preparanto"
 
@@ -917,7 +917,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:592
+#: src/game/game.cpp:601
 msgid "It's a present!"
 msgstr "Tio estas donaco!"
 
@@ -1255,7 +1255,7 @@ msgstr "Pli malgranda celangulo kaj paŝo"
 msgid "Sniper Rifle"
 msgstr "Tiraljora fusilo"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:82
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
@@ -1289,11 +1289,11 @@ msgstr "Sona frekvenco"
 msgid "Sounds"
 msgstr "Sonoj"
 
-#: src/game/game.cpp:114
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "Komencante novan ludon"
 
-#: src/interface/interface.cpp:216
+#: src/interface/interface.cpp:220
 msgid "Stock:"
 msgstr "Municioj:"
 
@@ -1301,7 +1301,7 @@ msgstr "Municioj:"
 msgid "Submachine Gun"
 msgstr "Mitraleto"
 
-#: src/weapon/supertux.cpp:231
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTukso"
 
@@ -1337,7 +1337,7 @@ msgstr "Teleportilo"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "La disgrenado foriris de la batalejo antaŭ ol explodi."
 
-#: src/weapon/footbomb.cpp:111
+#: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "La futbalbombo foriris de la batalejo antaŭ ol explodi."
 
@@ -1374,7 +1374,7 @@ msgstr "La konekto tempolimis. Certiĝu, ke ne estas ie fajroŝirmilo!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "La diskogrenado foriris de la diskejo antaŭ ol explodi"
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:491
 msgid "The game was interrupted because you got disconnected."
 msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 
@@ -1411,7 +1411,7 @@ msgstr[1] "Estas nur %i teamoj."
 msgid "Time"
 msgstr "Tempo"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:159
+#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1432,10 +1432,6 @@ msgstr ""
 "Tempolimo: Radmuso aŭ Paĝa Supren/Malsupren\n"
 "Angulo: Supren/Malsupren\n"
 "Pafo: spacetosignoUnu pafo vice"
-
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Iloj"
 
 #: src/network/net_error_msg.cpp:35
 msgid "Unable to contact host."
@@ -1489,8 +1485,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:138 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:138
 msgid "Weapons"
 msgstr "Armiloj"
 
@@ -1504,7 +1499,7 @@ msgstr "TTT-ejo: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
@@ -1562,7 +1557,7 @@ msgstr "Vi bezonas almenaŭ du teamojn!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 
-#: src/weapon/weapon_launcher.cpp:493
+#: src/weapon/weapon_launcher.cpp:487
 msgid "Your shot has missed!"
 msgstr "Vi mispafis!"
 
@@ -1570,7 +1565,7 @@ msgstr "Vi mispafis!"
 msgid "aka"
 msgstr "alinome"
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:218
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
@@ -1618,6 +1613,9 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Tools"
+#~ msgstr "Iloj"
 
 #, fuzzy
 #~ msgid "Head commander:"
