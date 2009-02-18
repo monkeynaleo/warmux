@@ -34,9 +34,7 @@ class CustomTeam;
 
 class CustomTeamsList : public Singleton<CustomTeamsList>
 {
-
 public:
-
   CustomTeamsList();
   ~CustomTeamsList();
   void LoadList();
@@ -44,10 +42,11 @@ public:
   CustomTeam* GetByName(std::string name);
   unsigned GetNumCustomTeam();
 
-protected :
+private:
+  std::vector<CustomTeam *> full_list;
+
   void Clear();
   void Sort();
-  std::vector<CustomTeam *> full_list;
   void LoadOneTeam (const std::string &dir, const std::string &file);
   static bool CompareItems( CustomTeam* p1, CustomTeam* p2 );
 };
