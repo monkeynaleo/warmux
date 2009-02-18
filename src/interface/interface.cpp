@@ -532,6 +532,11 @@ Point2i Interface::GetSize() const
   return Point2i(GetWidth(), GetHeight());
 }
 
+Point2i Interface::GetMenuPosition() const
+{
+  return bottom_bar_pos;
+}
+
 void Interface::EnableDisplay(bool _display)
 {
   display = _display;
