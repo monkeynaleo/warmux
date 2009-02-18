@@ -30,28 +30,27 @@
 
 class CustomTeam
 {
-  public :
-    CustomTeam();
-    CustomTeam (const std::string &teams_dir, const std::string &id);
-    ~CustomTeam();
-    std::string GetName();
-    std::vector<std::string> GetCharactersNameList();
-    void NewTeam();
-    bool Save();
-    void Delete();
+private:
+  bool is_name_changed;
+  uint nb_characters;
+  std::string name;
+  std::string directory_name;
+  std::vector<std::string> characters_name_list;
 
-    void SetName(const std::string &new_name);
-    void SetCharacterName(unsigned id, const std::string &new_name);
+  bool SaveXml();
 
-    protected :
-    bool is_name_changed;
-    uint nb_characters;
-    std::string name;
-    std::string directory_name;
-    std::vector<std::string> characters_name_list;
+public:
+  CustomTeam();
+  CustomTeam(const std::string &teams_dir, const std::string &id);
+  ~CustomTeam();
+  std::string GetName();
+  std::vector<std::string> GetCharactersNameList();
+  void NewTeam();
+  bool Save();
+  void Delete();
 
-    bool SaveXml();
-
+  void SetName(const std::string &new_name);
+  void SetCharacterName(unsigned id, const std::string &new_name);
 };
 
 
