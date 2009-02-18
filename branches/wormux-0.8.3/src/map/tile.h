@@ -85,7 +85,6 @@ protected:
 
   // Ground dimensions
   Point2i nbCells;
-  unsigned int nbr_cell;
 
   void InitPreview();
   Surface*   m_preview;
