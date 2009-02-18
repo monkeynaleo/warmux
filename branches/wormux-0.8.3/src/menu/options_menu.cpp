@@ -141,7 +141,7 @@ OptionMenu::OptionMenu() :
 
     Box * box_team_name = new HBox(30, false, true);
 
-    team_name = new Label(_("Head commander:"), 150, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    team_name = new Label(_("Head commander")+':', 150, Font::FONT_MEDIUM, Font::FONT_NORMAL);
     box_team_name->AddWidget(team_name);
 
     tbox_team_name = new TextBox("", 100, Font::FONT_MEDIUM, Font::FONT_NORMAL);
@@ -149,7 +149,7 @@ OptionMenu::OptionMenu() :
 
     teams_editor_inf->AddWidget(box_team_name);
 
-    Label* label_ch_names = new Label(_("Characters names:"), 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+    Label* label_ch_names = new Label(_("Character names:"), 0, Font::FONT_MEDIUM, Font::FONT_NORMAL);
     teams_editor_inf->AddWidget(label_ch_names);
 
     Point2i names_size(140, 20);
