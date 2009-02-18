@@ -32,22 +32,23 @@
 
 #include "tool/xml_document.h"
 
-CustomTeam::CustomTeam() : characters_name_list()
+CustomTeam::CustomTeam(const std::string &team_name)
 {
   nb_characters = 10;
   is_name_changed = false;
+  name = team_name;
 }
 
-CustomTeam::CustomTeam (const std::string &custom_teams_dir, const std::string &id) :
+CustomTeam::CustomTeam(const std::string &custom_teams_dir, const std::string &id) :
   characters_name_list()
 {
   std::string nomfich;
   XmlReader   doc;
 
-  directory_name = custom_teams_dir+id+PATH_SEPARATOR;
+  directory_name = custom_teams_dir + id +PATH_SEPARATOR;
 
   // Load XML
-  nomfich = custom_teams_dir+id+ PATH_SEPARATOR "team.xml";
+  nomfich = custom_teams_dir + id + PATH_SEPARATOR "team.xml";
 
   if (!doc.Load(nomfich))
     throw "unable to load file of team data";
@@ -133,7 +134,7 @@ void CustomTeam::NewTeam()
 
   } while (IsFolderExist(directory_name));
 
-  for(uint i = 1; i < nb_characters + 1; i++) {
+  for (uint i = 1; i < nb_characters + 1; i++) {
     characters_name_list.push_back("");
   }
 }
@@ -202,7 +203,7 @@ bool CustomTeam::SaveXml()
 
   xmlNode* team_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"team"));
 
-  for (uint i=0 ; i < characters_name_list.size() ; i++) {
+  for (uint i = 0 ; i < characters_name_list.size(); i++) {
     xmlNode* character = xmlAddChild(team_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"character"));
     doc.WriteElement(character, "name", characters_name_list[i]);
   }
@@ -217,13 +218,12 @@ void CustomTeam::SetName(const std::string &new_name)
     is_name_changed = true;
   }
   name = new_name;
-
 }
 
 void CustomTeam::SetCharacterName(unsigned id, const std::string &new_name)
 {
   if (id < nb_characters) {
-    characters_name_list[id]=new_name;
+    characters_name_list[id] = new_name;
   }
 }
 

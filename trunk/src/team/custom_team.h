@@ -40,7 +40,7 @@ private:
   bool SaveXml();
 
 public:
-  CustomTeam();
+  CustomTeam(const std::string &team_name);
   CustomTeam(const std::string &teams_dir, const std::string &id);
   ~CustomTeam();
   std::string GetName();
