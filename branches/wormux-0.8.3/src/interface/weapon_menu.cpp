@@ -288,10 +288,17 @@ void WeaponsMenu::RefreshWeaponList()
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
   // Init animation parameter
-  Point2d start(GetMainWindow().GetWidth() - tools_menu->GetWidth()-5, GetMainWindow().GetHeight() + weapons_menu->GetHeight() +50);
-  Point2i pos(GetMainWindow().GetWidth() - tools_menu->GetWidth()-5, GetMainWindow().GetHeight()- tools_menu->GetHeight()-5 );
-  Point2d end(POINT2I_2_POINT2D(pos));
+  Point2d start(GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5,
+		GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
+  Point2i pos(GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5,
+	      GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5 );
 
+  if (Interface::GetRef().GetMenuPosition().GetX() + Interface::GetRef().GetWidth() > start.GetX()) {
+    start.y -= Interface::GetRef().GetHeight();
+    pos.y -= Interface::GetRef().GetHeight();
+  }
+
+  Point2d end(POINT2I_2_POINT2D(pos));
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
@@ -302,8 +309,16 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
   // Init animation parameter
-  Point2d start(GetMainWindow().GetWidth() - weapons_menu->GetWidth()-5, GetMainWindow().GetHeight());
-  Point2i pos(GetMainWindow().GetWidth() - weapons_menu->GetWidth()-5, GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight()-10 );
+  Point2d start(GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5,
+		GetMainWindow().GetHeight());
+  Point2i pos(GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5,
+	      GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10 );
+
+  if (Interface::GetRef().GetMenuPosition().GetX() + Interface::GetRef().GetWidth() > start.GetX()) {
+    start.y -= Interface::GetRef().GetHeight();
+    pos.y -= Interface::GetRef().GetHeight();
+  }
+
   Point2d end(POINT2I_2_POINT2D(pos));
 
  // Define the animation
