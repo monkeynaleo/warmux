@@ -13,7 +13,7 @@ BINDIR=/mingw
 HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
-WORMUX_VERSION=r$(LC_ALL=C svn info 2> /dev/null | grep Revision | cut -d' ' -f2)
+WORMUX_VERSION=0.8.3
 
 #0.8.1
 
