@@ -50,7 +50,9 @@
 
 // Standard header, only needed for the following method
 #ifdef WIN32
+#  include <ws2tcpip.h>
 #  include <winsock.h>
+#  include <wspiapi.h>
 #else
 #  include <sys/socket.h>
 #  include <netdb.h>
@@ -347,12 +349,11 @@ typedef int SOCKET;
 # define SOCKET_ERROR    (-1)
 # define INVALID_SOCKET  (-1)
 # define closesocket(fd) close(fd)
-
-// For Mac OS X
-#ifndef AI_NUMERICSERV
-#define AI_NUMERICSERV 0
 #endif
 
+// For Mac OS X and Windows
+#ifndef AI_NUMERICSERV
+# define AI_NUMERICSERV 0
 #endif
 
 // static method
@@ -409,9 +410,11 @@ connection_state_t WIN32_CheckHost(const std::string &host, int prt)
     fprintf(stderr, "getaddrinfo returns %d\n", r);
 
     switch (r) {
+#ifndef WIN32
     case EAI_ADDRFAMILY:
       fprintf(stderr, "The specified network host does not have any network addresses in the requested address family.\n");
       break;
+#endif
     case EAI_AGAIN:
       fprintf(stderr, "The name server returned a temporary failure indication.  Try again later.\n");
       break;
@@ -440,9 +443,11 @@ connection_state_t WIN32_CheckHost(const std::string &host, int prt)
     case EAI_SOCKTYPE:
       fprintf(stderr, "The requested socket type is not supported at all.\n");
       break;
+#ifndef WIN32
     case EAI_SYSTEM:
       fprintf(stderr, "Other system error, check errno for details.\n");
       break;
+#endif
     }
 
     if (r == EAI_NONAME) {
