@@ -50,8 +50,8 @@
 
 // Standard header, only needed for the following method
 #ifdef WIN32
+#  include <winsock2.h>
 #  include <ws2tcpip.h>
-#  include <winsock.h>
 #  include <wspiapi.h>
 #else
 #  include <sys/socket.h>
@@ -430,9 +430,6 @@ connection_state_t WIN32_CheckHost(const std::string &host, int prt)
     case EAI_MEMORY:
       fprintf(stderr, "Out of memory.\n");
       break;
-    case EAI_NODATA:
-      fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
-      break;
     case EAI_NONAME:
       fprintf(stderr, "The node or service is not known; or both node and service are NULL; "
 	      "or AI_NUMERICSERV was specified in hints.ai_flags and  service  was  not  a  numeric port-number string.\n");
@@ -444,6 +441,9 @@ connection_state_t WIN32_CheckHost(const std::string &host, int prt)
       fprintf(stderr, "The requested socket type is not supported at all.\n");
       break;
 #ifndef WIN32
+    case EAI_NODATA:
+      fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
+      break;
     case EAI_SYSTEM:
       fprintf(stderr, "Other system error, check errno for details.\n");
       break;
