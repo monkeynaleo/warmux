@@ -8,8 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-06-18 00:01-0300\n"
-"Last-Translator: Renan Valente Rangel <rvr777@gmail.com>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-02-20 10:21-0300\n"
+"Last-Translator: Renan de Castro Messias <renandecastromessias@hotmail.com>\n"
 "Language-Team: Portuguese/Brazil <razor85@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +60,7 @@ msgstr "Equipe %s - Remoto"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s mudou alvo para %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -89,7 +90,7 @@ msgstr "%s caiu pra fora do mapa!"
 #: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr ""
+msgstr "%s do time %s atingiu o chão com muita força!"
 
 #: src/game/game.cpp:745
 #, fuzzy, c-format
@@ -99,7 +100,7 @@ msgstr "%s está morto porque é um desajeitado!"
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s decidiu atacar %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -403,12 +404,12 @@ msgstr "A equipe %s foi derrotada."
 #: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
-msgstr ""
+msgstr "%s levou um integrante do time %s para a cova com ele!"
 
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s vai atirar em %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -421,7 +422,7 @@ msgstr "(idioma do sistema)"
 
 #: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
 msgid "(unknown time)"
-msgstr ""
+msgstr "(tempo desconhecido)"
 
 #. Display number of ammo
 #: src/interface/interface.cpp:220
@@ -503,7 +504,7 @@ msgstr "Teleporte"
 
 #: src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
-msgstr ""
+msgstr "Blitz"
 
 #: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
@@ -546,19 +547,19 @@ msgstr "Número de personagens"
 
 #: src/menu/help_menu.cpp:90
 msgid "Change active character"
-msgstr ""
+msgstr "Mudar personagem ativo"
 
 #: src/menu/help_menu.cpp:79
 msgid "Change aim angle"
-msgstr ""
+msgstr "Mudar ângulo da arma"
 
 #: src/menu/help_menu.cpp:73
 msgid "Change weapon category"
-msgstr ""
+msgstr "Mudar categoria da arma"
 
 #: src/menu/help_menu.cpp:78
 msgid "Change weapon countdown"
-msgstr ""
+msgstr "Mudar contagem regressiva da arma"
 
 #: src/menu/options_menu.cpp:151
 #, fuzzy
@@ -580,11 +581,11 @@ msgstr "Escolher de format aleatória entre os mapas"
 
 #: src/menu/game_mode_editor.cpp:42
 msgid "Classic"
-msgstr ""
+msgstr "Classico"
 
 #: src/menu/help_menu.cpp:77
 msgid "Click: Center camera on character"
-msgstr ""
+msgstr "Clique: Centralizar câmera no personagem"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:120
@@ -650,7 +651,7 @@ msgstr "Créditos"
 
 #: src/menu/game_mode_editor.cpp:87
 msgid "Damage per turn during death mode"
-msgstr ""
+msgstr "Dano por rodada durante modo de morte"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -662,12 +663,12 @@ msgstr "Mostrar essa mensagem"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move camera"
-msgstr ""
+msgstr "Clicar & arrastar: Mover câmera"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:81
 msgid "Duration before death mode"
-msgstr ""
+msgstr "Duração depois do modo de morte"
 
 #: src/menu/game_mode_editor.cpp:50
 msgid "Duration of a turn"
@@ -692,7 +693,7 @@ msgstr "Energia"
 #: src/include/action_handler.cpp:247
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr ""
+msgstr "Erro inicialisando conexão: Cliente %s não aceita você!! - %s"
 
 #: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
 msgid "Error loading team :"
@@ -763,6 +764,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
+"Erro: Seu servidor não é conectável da internet. Veja a configuração do seu "
+"firewall: Porta TCP %s precisa aceitar conexão de fora. Se você não está "
+"diretamente conectado com a internet, veja a configuração do seu roteador: "
+"Porta TCP %s precisa ester na frente em seu computador."
 
 #: src/team/team.cpp:124
 #, c-format
@@ -853,7 +858,7 @@ msgstr "Ajuda"
 
 #: src/menu/help_menu.cpp:71
 msgid "High jump"
-msgstr ""
+msgstr "Pulo alto"
 
 #: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
@@ -957,11 +962,11 @@ msgstr "Visite #wormux em irc.freenode.net para saber mais"
 
 #: src/menu/help_menu.cpp:75
 msgid "Jump"
-msgstr ""
+msgstr "Pular"
 
 #: src/menu/help_menu.cpp:85
 msgid "Jump backwards"
-msgstr ""
+msgstr "Pular para trás"
 
 #: src/network/admin_commands.cpp:32
 #, fuzzy
@@ -974,7 +979,7 @@ msgstr "Idioma"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Listar os jogadores conectados"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1062,7 +1067,7 @@ msgstr "Mais violento"
 
 #: src/menu/help_menu.cpp:87
 msgid "Move camera with mouse or arrows"
-msgstr ""
+msgstr "Mova a câmera com o mouse ou com as setas direcionais"
 
 #: src/menu/help_menu.cpp:80
 #, fuzzy
@@ -1083,7 +1088,7 @@ msgstr "Jogo em Rede"
 
 #: src/menu/game_mode_editor.cpp:59
 msgid "Never"
-msgstr ""
+msgstr "Nunca"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:49
@@ -1093,7 +1098,7 @@ msgstr "Novo jogo em rede "
 
 #: src/menu/options_menu.cpp:250
 msgid "New player warning?"
-msgstr ""
+msgstr "Aviso ao novo jogador?"
 
 #: src/weapon/weapon.cpp:658
 #, c-format
@@ -1119,11 +1124,11 @@ msgstr "Número de equipes:"
 
 #: src/menu/help_menu.cpp:82
 msgid "On a character: Changes active one"
-msgstr ""
+msgstr "No personagem: Selecionar personagem ativo"
 
 #: src/menu/help_menu.cpp:81
 msgid "On map: Select a target"
-msgstr ""
+msgstr "No mapa: Selecionar alvo"
 
 #: src/menu/main_menu.cpp:65
 msgid "Options"
@@ -1149,7 +1154,7 @@ msgstr "Senha:"
 
 #: src/menu/help_menu.cpp:86
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1157,7 +1162,7 @@ msgstr "Jogar"
 
 #: src/menu/network_menu.cpp:134
 msgid "Play several times"
-msgstr ""
+msgstr "Jogar várias veses"
 
 #: src/menu/teams_selection_box.cpp:64
 msgid "Player"
@@ -1263,11 +1268,11 @@ msgstr "Menu de opções"
 
 #: src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
-msgstr ""
+msgstr "Mostrar interface?"
 
 #: src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
-msgstr ""
+msgstr "Mostrar mini-mapa?"
 
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
@@ -1280,11 +1285,11 @@ msgstr "Tapa"
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
-msgstr ""
+msgstr "Dê um tapa no inimigo para fazer ele dar um pulo."
 
 #: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
-msgstr ""
+msgstr "Ângulo de mira pequeno e andar em passos"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1304,6 +1309,8 @@ msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
+"Desculpe, sua versão já está desuatualisada. Versão atualisada é %s. Você "
+"pode baixar uma versão atualisada em http://www.wormux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:253
 msgid "Sound"
@@ -1361,7 +1368,7 @@ msgstr "Equipes"
 
 #: src/menu/options_menu.cpp:187
 msgid "Teams editor"
-msgstr ""
+msgstr "Editor de Times"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1444,7 +1451,7 @@ msgstr[1] "Existe apenas %i equipes"
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:321
 msgid "Time"
-msgstr ""
+msgstr "Time"
 
 #: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
 msgid ""
@@ -1521,7 +1528,7 @@ msgstr ""
 
 #: src/menu/help_menu.cpp:88
 msgid "Weapon: Fire / Bonus box: falls fast"
-msgstr ""
+msgstr "Arma: Fogo / Caixa bônus: cai rápido"
 
 #. Initialization of teams' energy
 #: src/game/game_init.cpp:138
@@ -1536,7 +1543,7 @@ msgstr "Site: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Welcome ao %s!"
 
 #: src/game/game.cpp:762
 #, c-format
@@ -1562,15 +1569,15 @@ msgstr "Wormux versão "
 
 #: src/include/action_handler.cpp:221
 msgid "Wrong map CRC!"
-msgstr ""
+msgstr "CRC do mapa errado!"
 
 #: src/include/action_handler.cpp:218
 msgid "Wrong map name!"
-msgstr ""
+msgstr "Nome do mapa errado!"
 
 #: src/include/action_handler.cpp:224
 msgid "Wrong team!"
-msgstr ""
+msgstr "Time errado!"
 
 #: src/menu/network_menu.cpp:339
 msgid "You are alone :-/"
@@ -1582,7 +1589,7 @@ msgstr "Você está sozinho..."
 
 #: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Você é o novo jogador mestre da rodada!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1621,7 +1628,7 @@ msgstr "falha ao carregar configuração"
 #. the default player name for custom teams
 #: src/team/custom_team.cpp:136
 msgid "custom player"
-msgstr ""
+msgstr "jogador custumisado"
 
 #: src/map/ground.cpp:82
 msgid "done"
