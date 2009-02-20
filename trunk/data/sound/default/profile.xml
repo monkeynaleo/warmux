@@ -53,6 +53,7 @@
   <sound sample="weapon/explosion"               file="weapons/explosion.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion2.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion3.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion4.ogg" />
   <sound sample="weapon/flamethrower"            file="weapons/flame.ogg" />
   <sound sample="weapon/gnu_bounce"              file="weapons/gnu_bounce.ogg" />
   <sound sample="weapon/grapple_attaching"       file="weapons/grapple_attaching.ogg" />
@@ -63,6 +64,7 @@
   <sound sample="weapon/gun"                     file="weapons/gun.ogg" />
   <sound sample="weapon/load"                    file="weapons/load.ogg" />
   <sound sample="weapon/m16"                     file="weapons/m16.ogg" />
+  <sound sample="weapon/m16_cartridge"           file="weapons/m16_cartridge.ogg" />
   <sound sample="weapon/mine_beep"               file="weapons/mine_beep.ogg" />
   <sound sample="weapon/ricoche1"                file="weapons/ricoche1.ogg" />
   <sound sample="weapon/ricoche2"                file="weapons/ricoche2.ogg" />
