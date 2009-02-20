@@ -5,11 +5,11 @@
   <team>
     <section title="Active Team">
       <author>
-	<nickname>drayan</nickname>
-	<name>Yannig PERRÉ</name>
+	<nickname>Fredb219</nickname>
+	<name>Frédéric BERTOLUS</name>
 	<description>Programmer</description>
-	<website>http://jb.berland.free.fr/dotclear/index.php/</website>
-	<email>yannig.perre_AT_gmail_DOT_com</email>
+	<website>http://fred.b219.org/</website>
+	<email>fredb219_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>
@@ -52,6 +52,14 @@
 	<website>http://www.reiner-h.de/</website>
 	<email>reiner_AT_reiner-h_DOT_de</email>
 	<country>Germany</country>
+      </author>
+      <author>
+	<nickname>drayan</nickname>
+	<name>Yannig PERRÉ</name>
+	<description>Programmer</description>
+	<website>http://jb.berland.free.fr/dotclear/index.php/</website>
+	<email>yannig.perre_AT_gmail_DOT_com</email>
+	<country>France</country>
       </author>
       <author>
 	<nickname>jcduberga</nickname>
@@ -168,6 +176,13 @@
 	<name>Alexandre PROKOUDINE</name>
 	<description>Translate Wormux into Russian</description>
 	<email>alexandre.prokoudine_AT_gmail_DOT_com</email>
+	<country>Russia</country>
+      </author>
+      <author>
+	<nickname>Rhot</nickname>
+	<name>Vladimir Naumov</name>
+	<description>Translated Wormux into Russian</description>
+	<email>rhot_AT_rambler_DOR_ru</email>
 	<country>Russia</country>
       </author>
       <author>
@@ -352,6 +367,13 @@
 	<country>Brazil</country>
       </author>
       <author>
+	<nickname>rvr777</nickname>
+	<name>Renan Valente Rangel</name>
+	<description>Updated the Brazilian translation</description>
+	<email>rvr777_AT_gmail_DOT_com</email>
+	<country>Brazil</country>
+      </author>
+      <author>
 	<nickname>Stefan</nickname>
 	<name>Stefan MARTENS</name>
 	<description>German translation</description>
@@ -483,13 +505,13 @@
 	<country>Germany</country>
       </author>
       <author>
-    <nickname>Plorf</nickname>
-    <name>Yoann Katchourine</name>
-    <description>Prepare Mac OS X (Intel) packages</description>
-    <website>http://plorf.homeip.net/</website>
-    <email>yplorf_AT_gmail_DOT_com</email>
-    <country>France</country>
-        </author>
+   	<nickname>Plorf</nickname>
+   	<name>Yoann Katchourine</name>
+   	<description>Prepare Mac OS X (Intel) packages</description>
+   	<website>http://plorf.homeip.net/</website>
+   	<email>yplorf_AT_gmail_DOT_com</email>
+   	<country>France</country>
+      </author>
         <author>
 	<nickname>Serge</nickname>
 	<name>Serge CLAUS</name>
@@ -497,6 +519,14 @@
 	<website>http://serge.claus.free.fr/</website>
 	<email>serge.claus_AT_free_DOT_fr</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>yaloki</nickname>
+	<name>Pascal BLESER</name>
+	<description>openSUSE packager</description>
+	<website>http://dev-loki.blogspot.com</website>
+	<email>pascal.bleser_AT_opensuse_DOT_org</email>
+	<country>Belgium</country>
       </author>
     </section>
 
@@ -520,13 +550,6 @@
 	<name>François BLEIBEL</name>
 	<description>Write first network patch with Jerome Glatigny</description>
 	<email>maisola_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>Fredb219</nickname>
-	<name>Frédéric BERTOLUS</name>
-	<description>Code</description>
-	<email>fredb219_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>
@@ -698,6 +721,14 @@
       </author>
     </section>
     <section title="Sounds">
+      <author>
+	<nickname>BeBeLiOuS</nickname>
+	<name>Guillaume BELVAL</name>
+	<description>Sounds, Additional maps</description>
+	<website>www.bebelious.fr</website>
+	<email>contact_AT_bebelious_DOT_fr</email>
+	<country>France</country>
+      </author>
       <author>
 	<nickname>Gottfried</nickname>
 	<name>Gottfried HOFMANN</name>
