@@ -537,45 +537,10 @@ connection_state_t POSIX_CheckHost(const std::string &host, int prt)
   if (r != 0) {
 
     fprintf(stderr, "getaddrinfo returns %d\n", r);
-
-    switch (r) {
-    case EAI_ADDRFAMILY:
-      fprintf(stderr, "The specified network host does not have any network addresses in the requested address family.\n");
-      break;
-    case EAI_AGAIN:
-      fprintf(stderr, "The name server returned a temporary failure indication.  Try again later.\n");
-      break;
-    case EAI_BADFLAGS:
-      fprintf(stderr, "ai_flags contains invalid flags.\n");
-      break;
-    case EAI_FAIL:
-      fprintf(stderr, "The name server returned a permanent failure indication.\n");
-      break;
-    case EAI_FAMILY:
-      fprintf(stderr, "The requested address family is not supported at all.\n");
-      break;
-    case EAI_MEMORY:
-      fprintf(stderr, "Out of memory.\n");
-      break;
-    case EAI_NODATA:
-      fprintf(stderr, "The specified network host exists, but does not have any network addresses defined.\n");
-      break;
-#ifndef WIN32 // AI_NUMERICSERV not defined under Windows
-    case EAI_NONAME:
-      fprintf(stderr, "The node or service is not known; or both node and service are NULL; "
-	      "or AI_NUMERICSERV was specified in hints.ai_flags and  service  was  not  a  numeric port-number string.\n");
-      break;
-#endif
-    case EAI_SERVICE:
-      fprintf(stderr, "The requested service is not available for the requested socket type.  It may be available through another socket type.\n");
-      break;
-    case EAI_SOCKTYPE:
-      fprintf(stderr, "The requested socket type is not supported at all.\n");
-      break;
-    case EAI_SYSTEM:
-      fprintf(stderr, "Other system error, check errno for details.\n");
-      break;
-    }
+    
+    const char * gai_errmsg = gai_strerror(r);
+    assert(NULL != gai_errmsg);
+    fprintf(stderr, "%s\n", gai_errmsg);
 
     if (r == EAI_NONAME) {
       s = CONN_BAD_HOST;
