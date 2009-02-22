@@ -46,6 +46,9 @@
 #    include <io.h>
 #  endif
 #endif
+
+#include <assert.h>
+
 //-----------------------------------------------------------------------------
 
 // Standard header, only needed for the following method
