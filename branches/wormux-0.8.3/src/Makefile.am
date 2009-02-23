@@ -235,10 +235,6 @@ endif
 
 LIBS+=@LIBINTL@
 
-if FREEBSD
-LIBS += -lintl
-endif
-
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread
 else
