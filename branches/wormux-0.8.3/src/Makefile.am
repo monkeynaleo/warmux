@@ -233,9 +233,7 @@ wormux_SOURCES += wormux.rc wormux.ico
 	@WINDRES@ -o $@ -i $<
 endif
 
-if !INCLUDEDINTL
 LIBS+=@LIBINTL@
-endif
 
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread

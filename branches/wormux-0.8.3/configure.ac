@@ -22,7 +22,7 @@ AC_CANONICAL_TARGET
 #AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([foreign 1.5])
 
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT([external], [need-ngettext])
 
 if test "x$USE_NLS" != "xyes"; then
   AC_MSG_WARN([gettext is disabled. If you want internationalisation, please install gettext package.])
@@ -142,7 +142,6 @@ AM_CONDITIONAL([AUTOPACKAGE], [test "$enable_autopackage" = "yes"])
 
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
-AM_CONDITIONAL([INCLUDEDINTL], [test x$nls_cv_use_gnu_gettext = xyes])
 
 
 dnl ========================================================================
