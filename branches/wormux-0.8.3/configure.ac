@@ -97,6 +97,7 @@ case "${host}" in
      fi
      AC_SUBST(WINDRES)
      ;;
+  *freebsd*) FREEBSD="yes" ;;
   *cygwin*) WIN32="yes" ;;
   *-apple-darwin*)
      OSX="yes"
@@ -105,6 +106,7 @@ case "${host}" in
   *) WIN32="no" ;;
 esac
 AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
+AM_CONDITIONAL([FREEBSD], test "$FREEBSD" = "yes")
 
 
 if test "${WIN32}" = "yes"; then DATADIR="data"
