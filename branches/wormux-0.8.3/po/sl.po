@@ -611,9 +611,8 @@ msgid "Change weapon countdown"
 msgstr "Spremeni čas orožja"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
-msgstr "Član"
+msgstr "Imena članov:"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Character switching"

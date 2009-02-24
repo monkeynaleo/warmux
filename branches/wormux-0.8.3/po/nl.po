@@ -555,9 +555,8 @@ msgid "Change weapon countdown"
 msgstr "Wapenteller veranderen"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
-msgstr "Karakter"
+msgstr "Karakter namen:"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Character switching"
