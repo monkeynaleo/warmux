@@ -1,15 +1,15 @@
 # translation of ro.po to Romanian
 # Romanian translation of the Wormux messages.
 # Copyright (C) YEAR Wormux Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the wormux package.
 #
-# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006.
-# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006, 2007, 2008.
+# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-11-25 00:14+0200\n"
+"POT-Creation-Date: 2009-02-24 13:43+0200\n"
+"PO-Revision-Date: 2009-02-24 13:46+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "Echipa %s - la distanță"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s schimbă ținta către %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -108,7 +108,7 @@ msgstr "%s din echipa %s decedat prin propria stângăcie!"
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s s-a decis să-l rănească pe %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -588,7 +588,7 @@ msgstr "%s a luat cu el în mormânt un membru al echipei %s!"
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s îl va împușca pe %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -608,7 +608,7 @@ msgstr "(un moment necunoscut)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:447
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -714,7 +714,7 @@ msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
@@ -740,9 +740,8 @@ msgid "Change weapon countdown"
 msgstr "Schimbă cronometrul armei"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Personaj"
+msgstr "Numele personajelor:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -869,12 +868,12 @@ msgstr "Energie"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Eroare de inițializare a rețelei: Clientul %s nu este de acord!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -882,7 +881,7 @@ msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -890,7 +889,7 @@ msgstr ""
 "Eroare în timpul ștergerii directorului „%s”: echipa particularizată nu "
 "poate fi ștearsă."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -1674,7 +1673,7 @@ msgstr "nelimitat"
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:458
+#: src/menu/options_menu.cpp:455
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
@@ -1755,7 +1754,7 @@ msgstr "Nu mai e nimeni altcineva..."
 
 #: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Ești noul șef de tură!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1793,7 +1792,7 @@ msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "jucător personalizat"
 
