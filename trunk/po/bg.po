@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-09-08 19:18+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@yahoo.com>\n"
 "Language-Team: Bulgarian <thedeadly91@yahoo.com>\n"
@@ -425,7 +426,7 @@ msgstr "(незнайно време)"
 msgid "(unlimited)"
 msgstr "(безкраен)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:447
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -529,7 +530,7 @@ msgstr "Не мога да отворя личната директория на
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не мога да отворя личната директорията на отбора (%s)!"
@@ -686,12 +687,12 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Грешка при стартиране на мрежата: Клиентът %s не е съгласен с теб!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбор %s:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -699,7 +700,7 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -707,7 +708,7 @@ msgstr ""
 "Грешка при изтриване на папката \"%s\". Невъзможно изтриването на личния "
 "отбор."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -1476,7 +1477,7 @@ msgstr "Безкраен"
 msgid "Version"
 msgstr "версия"
 
-#: src/menu/options_menu.cpp:458
+#: src/menu/options_menu.cpp:455
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка на версията се провали заради: %s\n"
@@ -1594,7 +1595,7 @@ msgid "couldn't load config"
 msgstr "не мога да заредя конфигурацията"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "личен играч"
 

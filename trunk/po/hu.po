@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-11-09 22:37+0100\n"
 "Last-Translator: Varady Tamas <tvarady@freemail.hu>\n"
 "Language-Team: Hungarian\n"
@@ -414,7 +415,7 @@ msgstr "(ismeretlen idõ)"
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:447
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -518,7 +519,7 @@ msgstr "Nem tudom megnyitni a személyes csapatok könyvtárát (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nem tudom megnyitni az egyéni csapatok könyvtárát (%s)!"
@@ -674,12 +675,12 @@ msgstr "Energia"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Hiba a hálózat inicializálásakor: %s kliens nem ért veled egyet!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Hiba a csapat betöltése közben:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -687,7 +688,7 @@ msgstr ""
 "Hiba a(z) \"%s\" könyvtár létrehozása közben: nem lehet a konfigurációs "
 "fájlt menteni."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -695,7 +696,7 @@ msgstr ""
 "Hiba a(z) \"%s\" könyvtár törlése közben: nem lehet az egyéni csapatot "
 "törölni."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -1468,7 +1469,7 @@ msgstr "Korlátlan"
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:458
+#: src/menu/options_menu.cpp:455
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
@@ -1584,7 +1585,7 @@ msgid "couldn't load config"
 msgstr "nem tudom betölteni a konfigurációt"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "egyéni játékos"
 
