@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2009-02-24 12:46+0200\n"
 "PO-Revision-Date: 2008-09-11 20:59+0100\n"
 "Last-Translator: Bruno Queirós <brunoqueiros@portugalmail.com>\n"
 "Language-Team: portuguese <pt@li.org>\n"
@@ -64,44 +65,44 @@ msgstr "Equipa - Remota %s"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:725
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s da equipa %s suicidou-se !"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s da equipa %s morreu."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:716
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s da equipa %s caiu à água."
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:710
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s da equipa %s saiu do mapa!"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:731
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s da equipa %s bateu no chão com muita força!"
 
-#: src/game/game.cpp:731
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s da equipa %s morreu porque é um trapalhão!"
 
-#: src/object/medkit.cpp:68
+#: src/object/medkit.cpp:70
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s ganhou %u ponto de energia !"
 msgstr[1] "%s ganhou %u pontos de energia !"
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:750
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s é um psicopata, matou um membro da equipa %s !"
@@ -186,7 +187,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "A equipa %s ganhou %u bazooka!"
 msgstr[1] "A equipa %s ganhou %u bazookas!"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:138
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -255,7 +256,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "A equipa %s ganhou %u bomba futebol!"
 msgstr[1] "A equipa %s ganhou %u bombas futebol!"
 
-#: src/weapon/grapple.cpp:809
+#: src/weapon/grapple.cpp:808
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -283,7 +284,7 @@ msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "A equipa %s ganhou %u jetpack! Porreiro!"
 msgstr[1] "A equipa %s ganhou %u jetpacks! Porreiro!"
 
-#: src/weapon/lowgrav.cpp:79
+#: src/weapon/lowgrav.cpp:85
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -297,14 +298,14 @@ msgid_plural "%s team has won %u mines!"
 msgstr[0] "A equipa %s ganhou %u mina!"
 msgstr[1] "A equipa %s ganhou %u minas!"
 
-#: src/weapon/parachute.cpp:166
+#: src/weapon/parachute.cpp:165
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "A equipa %s ganhou %u páraquedas!"
 msgstr[1] "A equipa %s ganhou %u páraquedas!"
 
-#: src/weapon/polecat.cpp:181
+#: src/weapon/polecat.cpp:182
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
@@ -394,17 +395,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "A equipa %s foi team was fragged down."
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s levou um membro da equipa %s para a sepultura com ele!"
 
-#: src/interface/interface.cpp:165
+#: src/interface/interface.cpp:190
 msgid "(dead)"
 msgstr "(morto)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:271
 msgid "(system language)"
 msgstr "(linguagem do sistema)"
 
@@ -413,11 +414,11 @@ msgid "(unknown time)"
 msgstr "(tempo desconhecido)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:196
+#: src/interface/interface.cpp:221
 msgid "(unlimited)"
 msgstr "(ilimitadas)"
 
-#: src/menu/options_menu.cpp:437
+#: src/menu/options_menu.cpp:448
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -425,10 +426,6 @@ msgid ""
 msgstr ""
 "Uma nova versão %s está dispoinível, a sua versão actual é is %s.Pode "
 "verificar se existe uma actualização disponível para o seu SO!"
-
-#: src/menu/options_menu.cpp:141
-msgid "Add custom team"
-msgstr "Adicionar uma equipa personalizada"
 
 #: src/weapon/air_attack.cpp:219
 msgid "Air Attack"
@@ -496,7 +493,7 @@ msgstr "Antes da acção"
 msgid "Blitz"
 msgstr "Blitz"
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "Maçarico"
 
@@ -525,7 +522,7 @@ msgstr "Incapaz de abrir o directório dA equipa pessoais (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Incapaz de abrir o directório dA equipa (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Incapaz de abrir o directório das equipas personalizadas (%s)!"
@@ -550,15 +547,16 @@ msgstr "Mudar categoria das armas"
 msgid "Change weapon countdown"
 msgstr "Mudar contagem decrescente da arma"
 
-#: src/menu/options_menu.cpp:166
-msgid "Character"
+#: src/menu/options_menu.cpp:152
+#, fuzzy
+msgid "Character names:"
 msgstr "Personagem"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Character switching"
 msgstr "Alteração de personagem"
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:202
 msgid "Check updates online?"
 msgstr "Procurar por actualizações online?"
 
@@ -633,10 +631,6 @@ msgstr "Créditos"
 msgid "Damage per turn during death mode"
 msgstr "Estragos por turno durante o modo de morte"
 
-#: src/menu/options_menu.cpp:144
-msgid "Delete custom team"
-msgstr "Apagar equipa personalizada"
-
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "Granada Disco"
@@ -662,11 +656,11 @@ msgstr "Duração do turno:"
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: src/game/game.cpp:270
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "FIM DE JOGO"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:226
 msgid "Effects volume"
 msgstr "Volume dos efeitos"
 
@@ -684,12 +678,12 @@ msgstr "Erro em %s:%lu (Wormux %s) : %s"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Erro ao iniciar rede: O cliente %s não concorda consigo!! - %s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:124
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:124
 msgid "Error loading team :"
 msgstr "Erro ao carregar a equipa :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:163
-#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -697,14 +691,14 @@ msgstr ""
 "Erro ao criar o directório \"%s\": incapaz de guardar o ficheiro de "
 "configuração."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Erro ao apagar o directório \"%s\": incapaz de apagar a equipa personalizada."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -754,7 +748,7 @@ msgstr ""
 "configuração do seu router: Porta TCP %s tem que ser re-encaminhada para o "
 "seu computador."
 
-#: src/team/team.cpp:118
+#: src/team/team.cpp:119
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
@@ -815,7 +809,7 @@ msgstr "Iniciando o jogo..."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/tool/file_tools.cpp:186
+#: src/tool/file_tools.cpp:189
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrada!"
 
@@ -824,12 +818,13 @@ msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrada!
 msgid "Have a good game!"
 msgstr "Tenha um bom jogo!"
 
-#: src/menu/team_box.cpp:68 src/menu/team_box.cpp:75
+#: src/menu/options_menu.cpp:144 src/menu/team_box.cpp:68
+#: src/menu/team_box.cpp:75
 msgid "Head commander"
 msgstr "Comandante principal"
 
 #. Display player's name
-#: src/interface/interface.cpp:156
+#: src/interface/interface.cpp:181
 msgid "Head commander: "
 msgstr "Comandante principal: "
 
@@ -845,7 +840,7 @@ msgstr "Salto alto"
 msgid "Host a game"
 msgstr "Criar um Jogo"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:64
 msgid ""
 "Howto use it : keep space key pressed\n"
 "Angle : Up/Down\n"
@@ -913,7 +908,7 @@ msgstr ""
 "desejada\n"
 "uma munição por turno"
 
-#: src/game/game_init.cpp:153
+#: src/game/game_init.cpp:152
 msgid "Initialisation"
 msgstr "Inicialização"
 
@@ -929,7 +924,7 @@ msgstr "Inicialização dos sons"
 msgid "Initialise teams"
 msgstr "Inicialização dA equipa"
 
-#: src/game/game.cpp:587
+#: src/game/game.cpp:594
 msgid "It's a present!"
 msgstr "É um presente!"
 
@@ -953,7 +948,7 @@ msgstr "Salto atrás"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Expulsa os jogadores designados por <nickname> do jogo"
 
-#: src/menu/options_menu.cpp:133
+#: src/menu/options_menu.cpp:130
 msgid "Language"
 msgstr "Linguagem"
 
@@ -983,7 +978,7 @@ msgstr "Ligação manual"
 msgid "Map"
 msgstr "Mapa"
 
-#: src/map/map.cpp:296
+#: src/map/map.cpp:305
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "O mapa %s, é uma criação de :"
@@ -1008,7 +1003,7 @@ msgstr "Máximo de FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:206
 msgid "Misc"
 msgstr "Misc"
 
@@ -1040,11 +1035,11 @@ msgstr "Mover camera com o rato ou setas"
 msgid "Move character"
 msgstr "Mover personagem"
 
-#: src/menu/options_menu.cpp:207
+#: src/menu/options_menu.cpp:216
 msgid "Music volume"
 msgstr "Volume da música"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:212
 msgid "Music?"
 msgstr "Música?"
 
@@ -1052,7 +1047,7 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr "Jogo em Rede"
 
-#: src/network/network.cpp:298
+#: src/network/network.cpp:303
 msgid "Network initialization"
 msgstr "Iniciando a rede"
 
@@ -1065,7 +1060,7 @@ msgstr "Nunca"
 msgid "New network game at "
 msgstr "Novo jogo em rede em "
 
-#: src/menu/options_menu.cpp:242
+#: src/menu/options_menu.cpp:251
 msgid "New player warning?"
 msgstr "Aviso de novo jogador?"
 
@@ -1102,11 +1097,11 @@ msgstr "Opções"
 msgid "Options menu"
 msgstr "Menu Opções"
 
-#: src/weapon/parachute.cpp:68
+#: src/weapon/parachute.cpp:67
 msgid "Parachute"
 msgstr "Pára-quedas"
 
-#: src/weapon/parachute.cpp:101
+#: src/weapon/parachute.cpp:100
 msgid "Parachute is activated automatically."
 msgstr "Pára-quedas activado automaticamente."
 
@@ -1136,15 +1131,11 @@ msgstr "Jogador"
 msgid "Player energy?"
 msgstr "Mostrar a energia dos jogadores?"
 
-#: src/menu/options_menu.cpp:150
-msgid "Player name"
-msgstr "Nome do jogador"
-
 #: src/menu/options_menu.cpp:84
 msgid "Player's name?"
 msgstr "Mostrar o nome dos jogadores?"
 
-#: src/weapon/polecat.cpp:167
+#: src/weapon/polecat.cpp:168
 msgid "Polecat Launcher"
 msgstr "Lança-Doninhas"
 
@@ -1177,11 +1168,11 @@ msgstr "Sair do jogo"
 msgid "Random map"
 msgstr "Mapa aleatório"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:351
 msgid "Reading default config file"
 msgstr "Lendo o ficheiro de configuração por defeito"
 
-#: src/game/config.cpp:399
+#: src/game/config.cpp:400
 msgid "Reading personal config file"
 msgstr "Lendo ficheiro de configuração pessoal"
 
@@ -1277,15 +1268,15 @@ msgstr ""
 "Você pode fazer o download de uma versão actualizada em http://www.wormux."
 "org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:254
 msgid "Sound"
 msgstr "Som"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:222
 msgid "Sound effects?"
 msgstr "Efeitos sonoros?"
 
-#: src/menu/options_menu.cpp:238
+#: src/menu/options_menu.cpp:247
 msgid "Sound frequency"
 msgstr "Frequência sonora"
 
@@ -1298,7 +1289,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Iniciando um novo jogo"
 
-#: src/interface/interface.cpp:196
+#: src/interface/interface.cpp:221
 msgid "Stock:"
 msgstr "Munição:"
 
@@ -1330,7 +1321,7 @@ msgstr "Estatísticas das equipas"
 msgid "Teams"
 msgstr "Equipas"
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:188
 msgid "Teams editor"
 msgstr "Editor de equipas"
 
@@ -1350,7 +1341,7 @@ msgstr "A Bomba Futebol saiu do campo de batalha antes que pudesse explodir."
 msgid "The Gnu left the battlefield before exploding"
 msgstr "O Gnu saiu do campo de batalha antes de explodir"
 
-#: src/weapon/polecat.cpp:150
+#: src/weapon/polecat.cpp:151
 msgid "The Polecat left the battlefield before exploding"
 msgstr "A Doninha saiu do campo de batalha antes de explodir"
 
@@ -1379,7 +1370,7 @@ msgstr "A ligação expirou. Verifique a firewall!"
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "A Granada Disco saiu da pista de dança antes que pudesse explodir"
 
-#: src/game/game.cpp:482
+#: src/game/game.cpp:489
 msgid "The game was interrupted because you got disconnected."
 msgstr "O jogo foi interrompido porque você foi desligado."
 
@@ -1441,10 +1432,6 @@ msgstr ""
 "Disparar : barra de espaços\n"
 "uma munição por turno"
 
-#: src/interface/weapon_menu.cpp:170
-msgid "Tools"
-msgstr "Ferramentas"
-
 #: src/network/net_error_msg.cpp:36
 msgid "Unable to contact host."
 msgstr "Incapaz de contactar servidor."
@@ -1471,7 +1458,7 @@ msgstr "Comando desconhecido"
 msgid "Unlimited"
 msgstr "Ilimitada"
 
-#: src/network/network.cpp:145
+#: src/network/network.cpp:150
 msgid "Unnamed"
 msgstr "Sem nome"
 
@@ -1479,7 +1466,7 @@ msgstr "Sem nome"
 msgid "Version"
 msgstr "Versão"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:456
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "A verificação da versão falhou porque: %s\n"
@@ -1500,8 +1487,7 @@ msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Arma: Caixa Fogo / Bonus: cai mais depressa"
 
 #. Initialization of teams' energy
-#. Adding label
-#: src/game/game_init.cpp:129 src/interface/weapon_menu.cpp:168
+#: src/game/game_init.cpp:129
 msgid "Weapons"
 msgstr "Armas"
 
@@ -1509,7 +1495,7 @@ msgstr "Armas"
 msgid "Website: "
 msgstr "Página Internet: "
 
-#: src/game/game.cpp:748
+#: src/game/game.cpp:755
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergonha para o %s : foi morto por uma simples pistola!"
@@ -1586,7 +1572,7 @@ msgid "couldn't load config"
 msgstr "não foi possível carregar a configuração"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:134
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "jogador personalizado"
 
@@ -1619,3 +1605,15 @@ msgstr "o carregar o perfil de som : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio aberto a %d Hz %d bit"
+
+#~ msgid "Add custom team"
+#~ msgstr "Adicionar uma equipa personalizada"
+
+#~ msgid "Delete custom team"
+#~ msgstr "Apagar equipa personalizada"
+
+#~ msgid "Player name"
+#~ msgstr "Nome do jogador"
+
+#~ msgid "Tools"
+#~ msgstr "Ferramentas"
