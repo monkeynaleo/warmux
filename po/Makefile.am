@@ -415,7 +415,30 @@ POTFILES = \
         src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
-        src/weapon/weapon_strength_bar.h
+        src/weapon/weapon_strength_bar.cpp \
+        src/weapon/weapon_strength_bar.h \
+        tools/servers/headless_server/config.cpp \
+        tools/servers/headless_server/config.h \
+        tools/servers/headless_server/main.cpp \
+        tools/servers/headless_server/server.cpp \
+        tools/servers/headless_server/server.h \
+        tools/servers/index_server/client.cpp \
+        tools/servers/index_server/client.h \
+        tools/servers/index_server/clock.cpp \
+        tools/servers/index_server/clock.h \
+        tools/servers/index_server/config.cpp \
+        tools/servers/index_server/config.h \
+        tools/servers/index_server/download.cpp \
+        tools/servers/index_server/download.h \
+        tools/servers/index_server/main.cpp \
+        tools/servers/index_server/net_data.cpp \
+        tools/servers/index_server/net_data.h \
+        tools/servers/index_server/server.cpp \
+        tools/servers/index_server/server.h \
+        tools/servers/index_server/stat.cpp \
+        tools/servers/index_server/stat.h \
+        tools/servers/index_server/sync_slave.cpp \
+        tools/servers/index_server/sync_slave.h 
 
 DOMAIN = $(PACKAGE)
 
