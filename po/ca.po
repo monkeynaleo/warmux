@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-09-06 15:07+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -415,7 +416,7 @@ msgstr "(temps desconegut)"
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:447
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -519,7 +520,7 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips personalitzats (%s)!"
@@ -675,12 +676,12 @@ msgstr "Enemic"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -688,7 +689,7 @@ msgstr ""
 "Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
 "configuració."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -696,7 +697,7 @@ msgstr ""
 "Error mentre s'esborrava el directori \"%s\". No es pot esborrar l'equip "
 "personalitzat."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -1479,7 +1480,7 @@ msgstr "Il·limitat"
 msgid "Version"
 msgstr "Versió"
 
-#: src/menu/options_menu.cpp:458
+#: src/menu/options_menu.cpp:455
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificació de versió ha fallat per: %s\n"
@@ -1597,7 +1598,7 @@ msgid "couldn't load config"
 msgstr "No es pot carregar el fitxer de configuració"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "jugador personalitzat"
 

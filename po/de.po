@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-12-05 14:40+0100\n"
 "Last-Translator: Martin Thoma <info@martin-thoma.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -440,7 +441,7 @@ msgstr "(unbekannte Zeit)"
 msgid "(unlimited)"
 msgstr "(unbegrenzt)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:447
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -546,7 +547,7 @@ msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öfnen!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öfnen!"
 
-#: src/team/custom_teams_list.cpp:93
+#: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öfnen!"
@@ -704,12 +705,12 @@ msgstr ""
 "Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit ihnen einverstanden!! - "
 "%s"
 
-#: src/team/custom_teams_list.cpp:120 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Fehler beim Laden der Mannschaft:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -717,7 +718,7 @@ msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:102
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -725,7 +726,7 @@ msgstr ""
 "Fehler beim Löschen des Verzeichnisses  \"%s\": kann eigenes Team nicht "
 "Löschen."
 
-#: src/team/custom_team.cpp:95
+#: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Fehler beim Löschen der Datei \"%s\": kann eigenes Team nicht Löschen."
@@ -1510,7 +1511,7 @@ msgstr "Unbegrenzt"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:458
+#: src/menu/options_menu.cpp:455
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Die Überprüfung der Version schlug fehl, da: %s\n"
@@ -1626,7 +1627,7 @@ msgid "couldn't load config"
 msgstr "konnte Konfiguration nicht laden"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:131
 msgid "custom player"
 msgstr "Eigener Spieler"
 
