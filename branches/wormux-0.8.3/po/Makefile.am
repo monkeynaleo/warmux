@@ -425,6 +425,7 @@ POTFILES = \
         src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
+        src/weapon/weapon_strength_bar.cpp \
         src/weapon/weapon_strength_bar.h \
         tools/index_server/client.cpp \
         tools/index_server/client.h \
