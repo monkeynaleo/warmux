@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 13:52+0200\n"
-"PO-Revision-Date: 2009-02-25 22:04+0100\n"
+"PO-Revision-Date: 2009-02-25 23:17+0100\n"
 "Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,14 +21,16 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Le terrain %s est introuvable :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:110
+#: src/menu/network_menu.cpp:323
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i joueur connecté"
 msgstr[1] "%i joueurs connectés"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:114
+#: src/menu/network_menu.cpp:329
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -59,7 +61,7 @@ msgstr "Équipe %s - Distante"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s change de cible pour %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -99,7 +101,7 @@ msgstr "%s de l'équipe %s est mort à cause de sa maladresse !"
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s a décidé de s'attaquer à %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -152,18 +154,10 @@ msgstr[1] "L'équipe %s a gagné %u Frappes Aériennes !"
 
 #: src/weapon/airhammer.cpp:172
 #, c-format
-msgid ""
-"%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
-"your neighbours."
-msgid_plural ""
-"%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
-"your neighbours."
-msgstr[0] ""
-"L'équipe %s a gagné %u Marteau-piqueur! Ne faîtes pas trop de bruit pour vos "
-"voisins!"
-msgstr[1] ""
-"L'équipe %s a gagné %u Marteaux-piqueurs! Ne faîtes pas trop de bruit pour "
-"vos voisins!"
+msgid "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours."
+msgid_plural "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours."
+msgstr[0] "L'équipe %s a gagné %u Marteau-piqueur! Ne faîtes pas trop de bruit pour vos voisins!"
+msgstr[1] "L'équipe %s a gagné %u Marteaux-piqueurs! Ne faîtes pas trop de bruit pour vos voisins!"
 
 #: src/weapon/anvil.cpp:176
 #, c-format
@@ -195,17 +189,10 @@ msgstr[1] "L'équipe %s a gagné %u Bazookas !"
 
 #: src/weapon/blowtorch.cpp:138
 #, c-format
-msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
-msgid_plural ""
-"%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
-"it."
-msgstr[0] ""
-"L'équipe %s a gagné %u Chalumeau! Si vous êtes mineur, demandez à vos "
-"parents avant de l'utiliser!"
-msgstr[1] ""
-"L'équipe %s a gagné %u Chalumeaux! Si vous êtes mineur, demandez à vos "
-"parents avant de l'utiliser!"
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it."
+msgstr[0] "L'équipe %s a gagné %u Chalumeau! Si vous êtes mineur, demandez à vos parents avant de l'utiliser!"
+msgstr[1] "L'équipe %s a gagné %u Chalumeaux! Si vous êtes mineur, demandez à vos parents avant de l'utiliser!"
 
 #: src/weapon/bounce_ball.cpp:113
 #, c-format
@@ -218,29 +205,20 @@ msgstr[1] "L'équipe %s a gagné %u Balles Rebondissantes ! Boing !"
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
-msgstr[0] ""
-"L'équipe %s a gagné %u Grenade à Fragmentation ! Attention à ne pas trop se "
-"disperser !"
-msgstr[1] ""
-"L'équipe %s a gagné %u Grenades à Fragmentation ! Attention à ne pas trop se "
-"disperser !"
+msgstr[0] "L'équipe %s a gagné %u Grenade à Fragmentation ! Attention à ne pas trop se disperser !"
+msgstr[1] "L'équipe %s a gagné %u Grenades à Fragmentation ! Attention à ne pas trop se disperser !"
 
 #: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] ""
-"L'équipe %s a gagné %u Kit de Construction ! N'oublie pas ton casque de "
-"chantier !"
-msgstr[1] ""
-"L'équipe %s a gagné %u Kits de Construction ! N'oublie pas ton casque de "
-"chantier !"
+msgstr[0] "L'équipe %s a gagné %u Kit de Construction ! N'oublie pas ton casque de chantier !"
+msgstr[1] "L'équipe %s a gagné %u Kits de Construction ! N'oublie pas ton casque de chantier !"
 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural ""
-"%s team has won %u disco grenades! Shake your body when throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "L'équipe %s a gagné %u Grenade Disco ! Bouge ton corps !"
 msgstr[1] "L'équipe %s a gagné %u Grenades Disco ! Bouge ton corps !"
 
@@ -345,8 +323,7 @@ msgstr[1] "L'équipe %s a gagné %u Baffes !"
 #: src/weapon/snipe_rifle.cpp:247
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural ""
-"%s team has won %u sniper rifles! Aim and shoot between the eyes!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "L'équipe %s a gagné %u Fusil à lunette ! Vise entre les yeux !"
 msgstr[1] "L'équipe %s a gagné %u Fusils à lunette ! Vise entre les yeux !"
 
@@ -382,19 +359,15 @@ msgstr[1] "L'équipe %s a gagné %u Téléportations !"
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] ""
-"L'équipe %s a gagné %u passage de tour ! Wouw, quel arme sur-puissante !"
-msgstr[1] ""
-"L'équipe %s a gagné %u passages de tour ! Wouw, quel arme sur-puissante !"
+msgstr[0] "L'équipe %s a gagné %u passage de tour ! Wouw, quel arme sur-puissante !"
+msgstr[1] "L'équipe %s a gagné %u passages de tour ! Wouw, quel arme sur-puissante !"
 
 #: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] ""
-"L'équipe %s a gagné %u Lance-Tux ! Depuis quand les manchots savent voler ??"
-msgstr[1] ""
-"L'équipe %s a gagné %u Lances-Tux ! Depuis quand les manchots savent voler ??"
+msgstr[0] "L'équipe %s a gagné %u Lance-Tux ! Depuis quand les manchots savent voler ??"
+msgstr[1] "L'équipe %s a gagné %u Lances-Tux ! Depuis quand les manchots savent voler ??"
 
 #: src/game/game_blitz.cpp:70
 #, c-format
@@ -409,7 +382,7 @@ msgstr "%s a emmené un membre de l'équipe %s dans la tombe avec lui !"
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s va tirer sur %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -420,7 +393,8 @@ msgstr "(mort)"
 msgid "(system language)"
 msgstr "(langue du système)"
 
-#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
+#: src/network/chatlogger.cpp:29
+#: src/network/chatlogger.cpp:76
 msgid "(unknown time)"
 msgstr "(temps inconnu)"
 
@@ -431,13 +405,8 @@ msgstr "(illimitées)"
 
 #: src/menu/options_menu.cpp:447
 #, c-format
-msgid ""
-"A new version %s is available, while your version is %s.You may want to "
-"check whether an update is available for your OS!"
-msgstr ""
-"Une nouvelle version %s est disponible alors que vous utilisez la version %"
-"s. Vous devriez vérifier s'il existe une mise à jour disponible pour votre "
-"système !"
+msgid "A new version %s is available, while your version is %s.You may want to check whether an update is available for your OS!"
+msgstr "Une nouvelle version %s est disponible alors que vous utilisez la version %s. Vous devriez vérifier s'il existe une mise à jour disponible pour votre système !"
 
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
@@ -455,7 +424,8 @@ msgstr "Toutes les équipes"
 msgid "Always"
 msgstr "Toujours"
 
-#: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
+#: src/game/game_blitz.cpp:50
+#: src/game/game_classic.cpp:56
 msgid "And the winner is..."
 msgstr "Et le vainqueur est..."
 
@@ -517,9 +487,12 @@ msgstr "Balle Rebondissante"
 msgid "Bye bye tux..."
 msgstr "Adieu tux !"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235
+#: src/team/teams_list.cpp:506
+#: src/team/teams_list.cpp:537
+#: src/team/teams_list.cpp:546
+#: src/team/teams_list.cpp:552
+#: src/team/teams_list.cpp:614
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
@@ -529,7 +502,8 @@ msgstr "Impossible de trouver l'équipe %s !"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire personnel des équipes(%s) !"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
+#: src/menu/skin_menu.cpp:76
+#: src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
@@ -560,9 +534,8 @@ msgid "Change weapon countdown"
 msgstr "Modifier le délai avant détonation"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Personnage"
+msgstr "Nom des personnages :"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -589,7 +562,8 @@ msgstr "Cliquer : centrer la caméra sur le personnage"
 msgid "Client mode"
 msgstr "Mode client"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:168
+#: src/menu/results_menu.cpp:170
 msgid "Clumsiest"
 msgstr "Le plus maladroit"
 
@@ -621,7 +595,8 @@ msgstr "Connecté !"
 msgid "Connected players: "
 msgstr "Joueurs connectés :"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
+#: src/weapon/construct.cpp:60
+#: src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Construction"
 
@@ -634,7 +609,8 @@ msgstr "Contrôlé par :"
 msgid "Couldn't fetch last version from %s"
 msgstr "Impossible de récupérer la version depuis %s"
 
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55
+#: src/network/download.cpp:88
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Impossible d'ouvrir le fichier %s"
@@ -687,37 +663,30 @@ msgstr "Énergie"
 #: src/include/action_handler.cpp:247
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr ""
-"Erreur durant l'initialisation du réseau : le Client %s n'est pas d'accord "
-"avec vous !! - %s"
+msgstr "Erreur durant l'initialisation du réseau : le Client %s n'est pas d'accord avec vous !! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:111
+#: src/team/teams_list.cpp:134
 msgid "Error loading team :"
 msgstr "Erreur au chargement de l'équipe :"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:156
-#: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
+#: src/game/config.cpp:513
+#: src/team/custom_team.cpp:156
+#: src/team/custom_team.cpp:167
+#: src/team/custom_team.cpp:178
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder "
-"la configuration du jeu."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Erreur lors de la création du répertoire \"%s\" : impossible de sauvegarder la configuration du jeu."
 
 #: src/team/custom_team.cpp:102
 #, c-format
-msgid ""
-"Error while deleting the directory \"%s\". Unable to delete the custom team."
-msgstr ""
-"Erreur lors de la suppression du répertoire \"%s\" : impossible de supprimer "
-"l'équipe personnalisée."
+msgid "Error while deleting the directory \"%s\". Unable to delete the custom team."
+msgstr "Erreur lors de la suppression du répertoire \"%s\" : impossible de supprimer l'équipe personnalisée."
 
 #: src/team/custom_team.cpp:93
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr ""
-"Erreur lors de la suppression du fichier \"%s\" : impossible de supprimer "
-"l'équipe personnalisée."
+msgstr "Erreur lors de la suppression du fichier \"%s\" : impossible de supprimer l'équipe personnalisée."
 
 #: src/game/game.cpp:144
 #, c-format
@@ -736,16 +705,11 @@ msgstr "Erreur : Impossible de se connecter à %s : %s"
 
 #: src/menu/network_connection_menu.cpp:341
 msgid "Error: Unable to contact the index server to host a game"
-msgstr ""
-"Erreur : Impossible de contacter le serveur d'index pour la création d'une "
-"partie"
+msgstr "Erreur : Impossible de contacter le serveur d'index pour la création d'une partie"
 
 #: src/menu/network_connection_menu.cpp:281
-msgid ""
-"Error: Unable to contact the index server to search for an internet game"
-msgstr ""
-"Erreur : Impossible de contacter le serveur d'index pour rechercher une "
-"partie sur internet"
+msgid "Error: Unable to contact the index server to search for an internet game"
+msgstr "Erreur : Impossible de contacter le serveur d'index pour rechercher une partie sur internet"
 
 #: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
@@ -753,17 +717,8 @@ msgstr "Erreur : Impossible de démarrer le serveur"
 
 #: src/menu/network_connection_menu.cpp:360
 #, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
-"configuration de votre firewall : le port TCP %s doit accepter les "
-"connexions extérieures. Si vous n'êtes pas directement connecté à Internet, "
-"vérifiez la configuration de votre routeur : le port TCP %s doit être "
-"redirigé vers votre ordinateur."
+msgid "Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."
+msgstr "Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifiez la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur."
 
 #: src/team/team.cpp:124
 #, c-format
@@ -835,7 +790,8 @@ msgstr "Répertoire HOME (variable d'environnement $HOME) introuvable !"
 msgid "Have a good game!"
 msgstr "Bonne partie !"
 
-#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:143
+#: src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:74
 msgid "Head commander"
 msgstr "Commandant"
@@ -845,7 +801,8 @@ msgstr "Commandant"
 msgid "Head commander: "
 msgstr "Commandant : "
 
-#: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
+#: src/menu/main_menu.cpp:68
+#: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Aide"
 
@@ -858,7 +815,6 @@ msgid "Host a game"
 msgstr "Héberger une partie"
 
 #: src/weapon/auto_bazooka.cpp:224
-#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -901,19 +857,16 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Dépêchez-vous, vous êtes trop lents !!"
 
 #: src/main.cpp:283
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
-"Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à "
-"Wormux, envoyez un mail (en anglais, svp) :"
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
 msgstr "Énergie initiale"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124
+#: src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -948,10 +901,10 @@ msgstr "C'est un cadeau !"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:235
+#: src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
-"Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
+msgstr "Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
 
 #: src/menu/help_menu.cpp:75
 msgid "Jump"
@@ -1010,7 +963,8 @@ msgstr "Terrains"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130
+#: src/menu/network_menu.cpp:389
 msgid "Master mode"
 msgstr "Mode joueur principal"
 
@@ -1034,23 +988,28 @@ msgstr "Mine"
 msgid "Misc"
 msgstr "Divers"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:176
+#: src/menu/results_menu.cpp:178
 msgid "Most accurate"
 msgstr "Le plus précis"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:160
+#: src/menu/results_menu.cpp:162
 msgid "Most sold-out"
 msgstr "Le plus traître"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:144
+#: src/menu/results_menu.cpp:146
 msgid "Most useful"
 msgstr "Le plus utile"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:152
+#: src/menu/results_menu.cpp:154
 msgid "Most useless"
 msgstr "Le plus inutile"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:136
+#: src/menu/results_menu.cpp:138
 msgid "Most violent"
 msgstr "Le plus violent"
 
@@ -1090,8 +1049,7 @@ msgstr "Avertissement de nouveau joueur ?"
 #: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr ""
-"Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
+msgstr "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/network/admin_commands.cpp:60
 msgid "No player connected"
@@ -1288,13 +1246,8 @@ msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
 #: src/network/index_server.cpp:252
 #, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Désolé, votre version du jeu n'est plus supporté. Les versions supportées "
-"sont les versions %s. Vous pouvez télécharger une version à jour sur http://"
-"www.wormux.org/wiki/download.php"
+msgid "Sorry, your version is not supported anymore. Supported version are %s. You can download a updated version on http://www.wormux.org/wiki/download.php"
+msgstr "Désolé, votre version du jeu n'est plus supporté. Les versions supportées sont les versions %s. Vous pouvez télécharger une version à jour sur http://www.wormux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:253
 msgid "Sound"
@@ -1345,7 +1298,8 @@ msgstr "Graphes des équipes"
 msgid "Team stats"
 msgstr "Statistiques des équipes"
 
-#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:127
+#: src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Équipes"
 
@@ -1359,8 +1313,7 @@ msgstr "Téléportation"
 
 #: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr ""
-"La Grenade à Fragmentation a quitté le champ de bataille avant d'exploser."
+msgstr "La Grenade à Fragmentation a quitté le champ de bataille avant d'exploser."
 
 #: src/weapon/footbomb.cpp:104
 msgid "The Football Bomb has left the battlefield before it could explode."
@@ -1384,12 +1337,8 @@ msgstr "La Balle a quitté le champ de bataille avant d'exploser."
 
 #: src/network/network_client.cpp:101
 #, c-format
-msgid ""
-"The client and server versions are incompatible (local=%s, server=%s). "
-"Please try another server."
-msgstr ""
-"Les versions client et serveur sont incompatibles (local=%s, serveur=%s). "
-"Essayez un autre serveur SVP."
+msgid "The client and server versions are incompatible (local=%s, server=%s). Please try another server."
+msgstr "Les versions client et serveur sont incompatibles (local=%s, serveur=%s). Essayez un autre serveur SVP."
 
 #: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1411,7 +1360,8 @@ msgstr "La Grenade a quitté le champ de bataille avant d'exploser."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Les autres t'attendent! Réveille-toi :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83
+#: src/weapon/cluzooka.cpp:336
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "La Roquette est partie dans un autre monde..."
@@ -1436,7 +1386,8 @@ msgstr[1] "Il n'y a que %i équipes."
 msgid "Time"
 msgstr "Temps"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:189
+#: src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1569,13 +1520,14 @@ msgstr "Vous voulez vraiment jouer tout seul ?!"
 
 #: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Vous êtes le nouveau maître du jeu!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
 msgstr "Il faut au minimum un terrain valide !"
 
-#: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
+#: src/game/game_init.cpp:131
+#: src/team/teams_list.cpp:178
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes valides !"
 
@@ -1646,30 +1598,24 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 #, fuzzy
 #~ msgid "Head commander:"
 #~ msgstr "Commandant : "
-
 #~ msgid "Add custom team"
 #~ msgstr "Ajouter une équipe personnalisée"
-
 #~ msgid "Delete custom team"
 #~ msgstr "Supprimer l'équipe personnalisée"
-
 #~ msgid "Player name"
 #~ msgstr "Nom du joueur"
 
 #, fuzzy
 #~ msgid "Automatically join a game"
 #~ msgstr "Joindre automatiquement une partie (si possible)."
-
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Erreur dans %s:%lu (Wormux %s) : %s"
-
 #~ msgid ""
 #~ "Error: Your server is not reachable from the internet. Check your "
 #~ "firewall configuration"
 #~ msgstr ""
 #~ "Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les "
 #~ "paramètres de votre firewall."
-
 #~ msgid "Network initialization"
 #~ msgstr "Initialisation du réseau"
 
@@ -1680,9 +1626,8 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 #~ msgstr ""
 #~ "Pas de serveur public sans mot de passe et paramètres de connexion "
 #~ "manuelles incorrects. Veuillez essayer en connexion manuelle."
-
 #~ msgid "Unnamed"
 #~ msgstr "Anonyme"
-
 #~ msgid "Warn when a new player joins?"
 #~ msgstr "Prévenir lorsqu'un nouveau joueur arrive?"
+
