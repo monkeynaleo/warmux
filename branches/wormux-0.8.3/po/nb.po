@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8\n"
+"Project-Id-Version: 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 12:46+0200\n"
-"PO-Revision-Date: 2008-05-26 21:38+0100\n"
+"POT-Creation-Date: 2009-02-24 14:23+0200\n"
+"PO-Revision-Date: 2009-02-25 21:03+0100\n"
 "Last-Translator: Christian Lomsdalen <christian@vindstille.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,34 +62,34 @@ msgid "%s fps"
 msgstr "%s bps"
 
 #: src/game/game.cpp:725
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team commited suicide!"
-msgstr "%s tok selvmord !"
+msgstr "%s fra %s laget tok selvmord !"
 
 #: src/game/game.cpp:758
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has died."
-msgstr "%s (%s) døde."
+msgstr "%s fra %s laget døde."
 
 #: src/game/game.cpp:716
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen into the water!"
-msgstr "%s har falt i vannet"
+msgstr "%s fra %s laget har falt i vannet!"
 
 #: src/game/game.cpp:710
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team has fallen off the map!"
-msgstr "%s har falt av kartet !"
+msgstr "%s fra %s laget har falt av kartet !"
 
 #: src/game/game.cpp:731
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr ""
+msgstr "%s fra %s laget har truffet bakken altfor hardt!"
 
 #: src/game/game.cpp:738
-#, fuzzy, c-format
+#, c-format
 msgid "%s from %s team is dead because he is clumsy!"
-msgstr "%s døde fordi han klønet det til!"
+msgstr "%s fra %s laget døde fordi han klønet det til!"
 
 #: src/object/medkit.cpp:70
 #, c-format
@@ -389,7 +389,7 @@ msgstr "%s laget ble meiet ned"
 #: src/game/game.cpp:746
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
-msgstr ""
+msgstr "%s tok et medlem fra %s laget til graven med han!"
 
 #: src/interface/interface.cpp:190
 msgid "(dead)"
@@ -431,9 +431,8 @@ msgid "All teams"
 msgstr "Alle lag"
 
 #: src/menu/game_mode_editor.cpp:58
-#, fuzzy
 msgid "Always"
-msgstr "Spill"
+msgstr "Alltid"
 
 #: src/game/game_blitz.cpp:50 src/game/game_classic.cpp:56
 msgid "And the winner is..."
@@ -477,13 +476,12 @@ msgid "Bazooka"
 msgstr "Rakettkaster"
 
 #: src/menu/game_mode_editor.cpp:59
-#, fuzzy
 msgid "Before action"
-msgstr "Teleportering"
+msgstr "Før handling"
 
 #: src/menu/game_mode_editor.cpp:45
 msgid "Blitz"
-msgstr ""
+msgstr "Blitz"
 
 #: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
@@ -515,40 +513,37 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åpne lagmappen (%s) !"
 
 #: src/team/custom_teams_list.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot open the custom teams directory (%s)!"
-msgstr "Kan ikke åpne den personlige lagmappen (%s) !"
+msgstr "Kan ikke åpne den personlige lagmappen (%s)!"
 
 #: src/menu/help_menu.cpp:92
-#, fuzzy
 msgid "Center camera to character"
-msgstr "Antall lagmedlemmer"
+msgstr "Sentrer kameraet på karakteren"
 
 #: src/menu/help_menu.cpp:91
 msgid "Change active character"
-msgstr ""
+msgstr "Bytt aktiv karakter"
 
 #: src/menu/help_menu.cpp:80
 msgid "Change aim angle"
-msgstr ""
+msgstr "Bytt ladevinkel"
 
 #: src/menu/help_menu.cpp:74
 msgid "Change weapon category"
-msgstr ""
+msgstr "Bytt våpenkategori"
 
 #: src/menu/help_menu.cpp:79
 msgid "Change weapon countdown"
-msgstr ""
+msgstr "Bytt våpenets nedtelling"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
-msgstr "Fallskjerm"
+msgstr "Karakter navn:"
 
 #: src/menu/game_mode_editor.cpp:62
-#, fuzzy
 msgid "Character switching"
-msgstr "Fallskjerm"
+msgstr "Bytt mellom karakterer"
 
 #: src/menu/options_menu.cpp:202
 msgid "Check updates online?"
@@ -560,11 +555,11 @@ msgstr "Velg tilfeldig mellom forskjellige kart"
 
 #: src/menu/game_mode_editor.cpp:43
 msgid "Classic"
-msgstr ""
+msgstr "Klassisk"
 
 #: src/menu/help_menu.cpp:78
 msgid "Click: Center camera on character"
-msgstr ""
+msgstr "Trykk: Sentrer kamera på karakteren."
 
 #. Client Mode
 #: src/menu/network_menu.cpp:105
@@ -588,9 +583,8 @@ msgid "Commit Suicide"
 msgstr "Ta selvmord"
 
 #: src/menu/help_menu.cpp:75
-#, fuzzy
 msgid "Configuration menu"
-msgstr "Konfigurasjonsfilen ble ikke funnet!"
+msgstr "Konfigurasjonsmeny"
 
 #: src/menu/network_connection_menu.cpp:164
 msgid "Connect to game"
@@ -636,7 +630,7 @@ msgstr "Viser denne meldingen"
 
 #: src/menu/help_menu.cpp:77
 msgid "Drag&drop: Move camera"
-msgstr ""
+msgstr "Dra&slipp: Flytt kameraet"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -664,14 +658,14 @@ msgid "Energy"
 msgstr "Liv"
 
 #: src/tool/error.cpp:63
-#, fuzzy, c-format
+#, c-format
 msgid "Error in %s:%lu (Wormux %s) : %s"
-msgstr "Feil i %s:%lu"
+msgstr "Feil i %s:%lu (Wormux %s) : %s"
 
 #: src/include/action_handler.cpp:210
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr ""
+msgstr "Klarte ikke å starte nettverk: Klienten %s er ikke enig med deg!! - %s"
 
 #: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:124
 msgid "Error loading team :"
@@ -686,17 +680,17 @@ msgstr ""
 "Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
 
 #: src/team/custom_team.cpp:102
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
-"Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
+"Feil under sletting av katalogen \"%s\". Det valgte laget kunne ikke slettes."
 
 #: src/team/custom_team.cpp:93
-#, fuzzy, c-format
+#, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
-"Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
+"Feil under sletting av filen \"%s\". Kunne ikke slettes det valgfrie laget."
 
 #: src/game/game.cpp:143
 #, c-format
@@ -714,16 +708,14 @@ msgid "Error: Unable to connect to %s:%s"
 msgstr "Tilkobling til %s:%s feilet"
 
 #: src/menu/network_connection_menu.cpp:340
-#, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
-msgstr "Tilkobling til Oversiktstjener for å starte et spill feilet"
+msgstr "Feil: Tilkobling til Oversiktstjener for å starte et spill var umulig"
 
 #: src/menu/network_connection_menu.cpp:281
-#, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
-"Tilkobling til Oversiktstjener feilet i forsøket på å søke etter et "
+"Feil: Tilkobling til Oversiktstjener feilet i forsøket på å søke etter et "
 "internettspill"
 
 #: src/menu/network_connection_menu.cpp:359
@@ -738,6 +730,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
+"Feil: Serveren din kan ikke nås fra internett. Sjekk brannmurinstillingene "
+"dine: TCP Port %s må akseptere tilkoblinger utenfra. Hvis du ikke er koblet "
+"direkte til internet, så må du sjekke ruterkonfigurasjonen: TCP port %s må "
+"videreformidles til din datamaskin."
 
 #: src/team/team.cpp:119
 #, c-format
@@ -753,9 +749,8 @@ msgid "Football Bomb"
 msgstr "Fotballbombe"
 
 #: src/menu/help_menu.cpp:71
-#, fuzzy
 msgid "Fullscreen / window"
-msgstr "Full skjerm ?"
+msgstr "Full skjerm / vindu"
 
 #: src/menu/options_menu.cpp:96
 msgid "Fullscreen?"
@@ -826,7 +821,7 @@ msgstr "Hjelp"
 
 #: src/menu/help_menu.cpp:72
 msgid "High jump"
-msgstr ""
+msgstr "Høyt hopp"
 
 #: src/menu/network_connection_menu.cpp:211
 msgid "Host a game"
@@ -920,11 +915,11 @@ msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 
 #: src/menu/help_menu.cpp:76
 msgid "Jump"
-msgstr ""
+msgstr "Hopp"
 
 #: src/menu/help_menu.cpp:86
 msgid "Jump backwards"
-msgstr ""
+msgstr "Hopp bakover"
 
 #: src/network/admin_commands.cpp:33
 msgid "Kicks the players designated by <nickname> out of the game"
@@ -970,9 +965,8 @@ msgid "Maps"
 msgstr "Kart"
 
 #: src/menu/game_mode_editor.cpp:73
-#, fuzzy
 msgid "Max energy"
-msgstr "Livspoeng ved start"
+msgstr "Max livpoeng"
 
 #: src/menu/network_menu.cpp:117
 msgid "Max number of players:"
@@ -1012,12 +1006,11 @@ msgstr "Mest voldelig"
 
 #: src/menu/help_menu.cpp:88
 msgid "Move camera with mouse or arrows"
-msgstr ""
+msgstr "Flytt kamera med mus eller piltaster"
 
 #: src/menu/help_menu.cpp:81
-#, fuzzy
 msgid "Move character"
-msgstr "Fallskjerm"
+msgstr "Flytt karakteren"
 
 #: src/menu/options_menu.cpp:216
 msgid "Music volume"
@@ -1037,7 +1030,7 @@ msgstr "Starter nettverk ..."
 
 #: src/menu/game_mode_editor.cpp:60
 msgid "Never"
-msgstr ""
+msgstr "Aldri"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:51
@@ -1046,7 +1039,7 @@ msgstr "Nytt nettverksspill på"
 
 #: src/menu/options_menu.cpp:251
 msgid "New player warning?"
-msgstr ""
+msgstr "Advarsel ved ny spiller?"
 
 #: src/weapon/weapon.cpp:658
 #, c-format
@@ -1067,11 +1060,11 @@ msgstr "Antall lag :"
 
 #: src/menu/help_menu.cpp:83
 msgid "On a character: Changes active one"
-msgstr ""
+msgstr "På en karakter: Bytter aktiv"
 
 #: src/menu/help_menu.cpp:82
 msgid "On map: Select a target"
-msgstr ""
+msgstr "På kartet: Velg et mål"
 
 #: src/menu/main_menu.cpp:66
 msgid "Options"
@@ -1097,7 +1090,7 @@ msgstr "Passord:"
 
 #: src/menu/help_menu.cpp:87
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: src/menu/main_menu.cpp:60
 msgid "Play"
@@ -1105,7 +1098,7 @@ msgstr "Spill"
 
 #: src/menu/network_menu.cpp:132
 msgid "Play several times"
-msgstr ""
+msgstr "Spill flere ganger"
 
 #: src/menu/teams_selection_box.cpp:65
 msgid "Player"
@@ -1145,9 +1138,8 @@ msgid "Quit battle"
 msgstr "Forlat slaget"
 
 #: src/menu/help_menu.cpp:66
-#, fuzzy
 msgid "Quit game"
-msgstr "Spill spillet"
+msgstr "Avslutt spillet"
 
 #: src/menu/map_selection_box.cpp:228
 msgid "Random map"
@@ -1204,17 +1196,16 @@ msgid "Shotgun"
 msgstr "Hagle"
 
 #: src/menu/help_menu.cpp:84
-#, fuzzy
 msgid "Show weapons menu"
-msgstr "Alternativer"
+msgstr "Vis våpen-menyen"
 
 #: src/menu/help_menu.cpp:70
 msgid "Show/hide interface"
-msgstr ""
+msgstr "Vis/skjul brukergrensesnittet"
 
 #: src/menu/help_menu.cpp:90
 msgid "Show/hide minimap"
-msgstr ""
+msgstr "Vis/skjul minikartet"
 
 #: src/weapon/skip_turn.cpp:47
 msgid "Skip turn"
@@ -1230,7 +1221,7 @@ msgstr "Slå fienden for å få han til å hoppe litt"
 
 #: src/menu/help_menu.cpp:85
 msgid "Smaller aim angle and walk step"
-msgstr ""
+msgstr "Mindre siktevinkel og gangsteg"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1250,6 +1241,8 @@ msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
+"Beklager, din versjon er ikke lenger støttet. Støttet versjon er %s. Dyu kan "
+"laste ned en oppdatert utgave fra http://www.wormux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:254
 msgid "Sound"
@@ -1289,9 +1282,8 @@ msgid "Syringe"
 msgstr "Sprøyte"
 
 #: src/menu/help_menu.cpp:73
-#, fuzzy
 msgid "Talk in network battle"
-msgstr "Tilbake til slaget"
+msgstr "Snakk i nettverks-slaget"
 
 #: src/menu/results_menu.cpp:427
 msgid "Team graphs"
@@ -1307,7 +1299,7 @@ msgstr "Lag"
 
 #: src/menu/options_menu.cpp:188
 msgid "Teams editor"
-msgstr ""
+msgstr "Lag-redigerer"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1436,9 +1428,8 @@ msgid "Unknown command"
 msgstr "Ukjent kommando"
 
 #: src/menu/game_mode_editor.cpp:44
-#, fuzzy
 msgid "Unlimited"
-msgstr "(uendelig)"
+msgstr "Ubegrenset"
 
 #: src/network/network.cpp:150
 msgid "Unnamed"
@@ -1466,7 +1457,7 @@ msgstr "Venter på server, alt du kan gjøre er å avbryte eller chatte"
 
 #: src/menu/help_menu.cpp:89
 msgid "Weapon: Fire / Bonus box: falls fast"
-msgstr ""
+msgstr "Våpen: Skudd / Bonus boks: faller fort"
 
 #. Initialization of teams' energy
 #: src/game/game_init.cpp:129
@@ -1501,15 +1492,15 @@ msgstr "Wormux versjon "
 
 #: src/include/action_handler.cpp:184
 msgid "Wrong map CRC!"
-msgstr ""
+msgstr "Feil kart CRC!"
 
 #: src/include/action_handler.cpp:181
 msgid "Wrong map name!"
-msgstr ""
+msgstr "Feil kartnavn!"
 
 #: src/include/action_handler.cpp:187
 msgid "Wrong team!"
-msgstr ""
+msgstr "Feil lag!"
 
 #: src/menu/network_menu.cpp:331
 msgid "You are alone :-/"
@@ -1554,7 +1545,7 @@ msgstr "Kunne ikke laste konfigurasjonsfilen"
 #. the default player name for custom teams
 #: src/team/custom_team.cpp:131
 msgid "custom player"
-msgstr ""
+msgstr "Valgfri spiller"
 
 #: src/map/ground.cpp:61
 msgid "done"
