@@ -6,10 +6,10 @@
 # Bastian Salmela <basse@kulma.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: fi\n"
+"Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 12:46+0200\n"
-"PO-Revision-Date: 2008-09-21 00:19+0200\n"
+"PO-Revision-Date: 2009-02-25 23:10+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -541,9 +541,8 @@ msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
-msgstr "Hahmo"
+msgstr "Hahmonimet:"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Character switching"
