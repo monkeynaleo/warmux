@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 13:52+0200\n"
-"PO-Revision-Date: 2008-09-15 21:11+0100\n"
-"Last-Translator: Frédéric Bertolus <fredb219@gmail.com>\n"
+"PO-Revision-Date: 2009-02-25 22:04+0100\n"
+"Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/map/maps_list.cpp:325
-#, fuzzy, c-format
+#, c-format
 msgid "! Map %s not found :-("
 msgstr "Le terrain %s est introuvable :-("
 
@@ -54,7 +54,7 @@ msgstr "Équipe %s"
 #: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
-msgstr "Équipe %s - Distant"
+msgstr "Équipe %s - Distante"
 
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
@@ -105,8 +105,8 @@ msgstr ""
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
-msgstr[0] "Le joueur %s a gagné %u point de vie !"
-msgstr[1] "Le joueur %s a gagné %u points de vie !"
+msgstr[0] "%s a gagné %u point de vie !"
+msgstr[1] "%s a gagné %u points de vie !"
 
 #: src/game/game.cpp:757
 #, c-format
@@ -116,7 +116,7 @@ msgstr "%s est un psychopathe, il a tué un membre de son équipe (%s) !"
 #: src/weapon/mine.cpp:123
 #, c-format
 msgid "%s is next to a mine!"
-msgstr "%s est près d'une Mine !"
+msgstr "%s est près d'une mine !"
 
 #: src/object/bonus_box.cpp:93
 #, c-format
@@ -436,7 +436,7 @@ msgid ""
 "check whether an update is available for your OS!"
 msgstr ""
 "Une nouvelle version %s est disponible alors que vous utilisez la version %"
-"s. Vous devriez vérifier s'il existe une mise à jour diponible pour votre "
+"s. Vous devriez vérifier s'il existe une mise à jour disponible pour votre "
 "système !"
 
 #: src/weapon/air_attack.cpp:217
@@ -541,7 +541,7 @@ msgstr "Impossible d'ouvrir le répertoire des équipes personnalisées (%s) !"
 
 #: src/menu/help_menu.cpp:91
 msgid "Center camera to character"
-msgstr "Centre la caméra sur le personnage"
+msgstr "Centrer la caméra sur le personnage"
 
 #: src/menu/help_menu.cpp:90
 msgid "Change active character"
@@ -553,10 +553,9 @@ msgstr "Modifier l'angle de visée"
 
 #: src/menu/help_menu.cpp:73
 msgid "Change weapon category"
-msgstr "Changer de catégories d'armement"
+msgstr "Changer de catégorie d'armes"
 
 #: src/menu/help_menu.cpp:78
-#, fuzzy
 msgid "Change weapon countdown"
 msgstr "Modifier le délai avant détonation"
 
@@ -575,7 +574,7 @@ msgstr "Vérifier les mises à jour ?"
 
 #: src/menu/map_selection_box.cpp:223
 msgid "Choose randomly between the different maps"
-msgstr "Choisire aléatoirement parmi les différents terrains"
+msgstr "Choisir aléatoirement parmi les différents terrains"
 
 #: src/menu/game_mode_editor.cpp:42
 msgid "Classic"
@@ -619,9 +618,8 @@ msgid "Connected !"
 msgstr "Connecté !"
 
 #: src/network/admin_commands.cpp:64
-#, fuzzy
 msgid "Connected players: "
-msgstr "Connecté !"
+msgstr "Joueurs connectés :"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -684,13 +682,13 @@ msgstr "Volume des effets sonores"
 
 #: src/menu/results_menu.cpp:323
 msgid "Energy"
-msgstr "Energie"
+msgstr "Énergie"
 
 #: src/include/action_handler.cpp:247
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
-"Erreur dans l'initialisation du réseau : le Client %s n'est pas d'accord "
+"Erreur durant l'initialisation du réseau : le Client %s n'est pas d'accord "
 "avec vous !! - %s"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
@@ -712,7 +710,7 @@ msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Erreur lors de la suppression du répertoire \"%s\" : impossible de supprimer "
-"l'équipe personnalisé."
+"l'équipe personnalisée."
 
 #: src/team/custom_team.cpp:93
 #, c-format
@@ -734,26 +732,24 @@ msgstr ""
 #: src/menu/network_connection_menu.cpp:386
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
-msgstr "Impossible de se connecter à %s : %s"
+msgstr "Erreur : Impossible de se connecter à %s : %s"
 
 #: src/menu/network_connection_menu.cpp:341
-#, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Erreur : Impossible de contacter le serveur d'index pour la création d'une "
 "partie"
 
 #: src/menu/network_connection_menu.cpp:281
-#, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
-"Impossible de contacter le serveur d'index pour rechercher une partie sur "
-"internet"
+"Erreur : Impossible de contacter le serveur d'index pour rechercher une "
+"partie sur internet"
 
 #: src/menu/network_connection_menu.cpp:366
 msgid "Error: Unable to start server"
-msgstr "Impossible de démarrer le serveur"
+msgstr "Erreur : Impossible de démarrer le serveur"
 
 #: src/menu/network_connection_menu.cpp:360
 #, c-format
@@ -763,10 +759,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la "
+"Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
 "configuration de votre firewall : le port TCP %s doit accepter les "
 "connexions extérieures. Si vous n'êtes pas directement connecté à Internet, "
-"vérifier la configuration de votre routeur : le port TCP %s doit être "
+"vérifiez la configuration de votre routeur : le port TCP %s doit être "
 "redirigé vers votre ordinateur."
 
 #: src/team/team.cpp:124
@@ -862,6 +858,7 @@ msgid "Host a game"
 msgstr "Héberger une partie"
 
 #: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -933,7 +930,7 @@ msgstr "Initialisation"
 
 #: src/game/game_init.cpp:115
 msgid "Initialise map"
-msgstr "Initialisation des données"
+msgstr "Initialisation du terrain"
 
 #: src/game/game_init.cpp:149
 msgid "Initialise sounds"
@@ -974,7 +971,7 @@ msgstr "Langue"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Liste des joueurs connectés"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -996,7 +993,7 @@ msgstr "Anti-Gravité"
 #. Manual connection
 #: src/menu/network_connection_menu.cpp:129
 msgid "Manual connection"
-msgstr "Connection manuelle"
+msgstr "Connexion manuelle"
 
 #: src/menu/game_menu.cpp:77
 msgid "Map"
@@ -1014,9 +1011,8 @@ msgstr "Terrains"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
-#, fuzzy
 msgid "Master mode"
-msgstr "Mode de jeu"
+msgstr "Mode joueur principal"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1088,7 +1084,6 @@ msgid "New network game at "
 msgstr "Nouvelle partie en réseau à "
 
 #: src/menu/options_menu.cpp:250
-#, fuzzy
 msgid "New player warning?"
 msgstr "Avertissement de nouveau joueur ?"
 
@@ -1099,9 +1094,8 @@ msgstr ""
 "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/network/admin_commands.cpp:60
-#, fuzzy
 msgid "No player connected"
-msgstr "%i joueur connecté"
+msgstr "Aucun joueur connecté"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1258,7 +1252,7 @@ msgstr "Afficher le menu d'armement"
 
 #: src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
-msgstr "Afficher/Masque l'interface"
+msgstr "Afficher/Masquer l'interface"
 
 #: src/menu/help_menu.cpp:89
 msgid "Show/hide minimap"
@@ -1278,7 +1272,7 @@ msgstr "Baffez l'ennemi pour le faire un peu décoller."
 
 #: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
-msgstr "Angle de visé et déplacement plus précis"
+msgstr "Angle de visée et déplacement plus précis"
 
 #: src/weapon/snipe_rifle.cpp:93
 msgid "Sniper Rifle"
@@ -1298,7 +1292,7 @@ msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
-"Désolé, votre version du jeu n'est plus supporté. Les versions supportés "
+"Désolé, votre version du jeu n'est plus supporté. Les versions supportées "
 "sont les versions %s. Vous pouvez télécharger une version à jour sur http://"
 "www.wormux.org/wiki/download.php"
 
@@ -1340,7 +1334,6 @@ msgid "Syringe"
 msgstr "Seringue"
 
 #: src/menu/help_menu.cpp:72
-#, fuzzy
 msgid "Talk in network battle"
 msgstr "Parler dans la bataille en réseau"
 
@@ -1530,7 +1523,7 @@ msgstr "Site web : "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Bienvenue dans %s!"
 
 #: src/game/game.cpp:762
 #, c-format
@@ -1556,7 +1549,7 @@ msgstr "version de Wormux"
 
 #: src/include/action_handler.cpp:221
 msgid "Wrong map CRC!"
-msgstr "CRC terrain erroné !"
+msgstr "CRC du terrain erroné !"
 
 #: src/include/action_handler.cpp:218
 msgid "Wrong map name!"
