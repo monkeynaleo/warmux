@@ -1,21 +1,23 @@
 # Tradución do Wormux ao Galego
 # Wormux Galician translation
 # Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the Wormux package.
 #
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
-# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008-2009. (Proxecto Trasno <proxecto@trasno.net>).
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 12:46+0200\n"
-"PO-Revision-Date: 2009-02-25 17:17+0100\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"PO-Revision-Date: 2009-02-25 19:23+0100\n"
+"Last-Translator: Adrian Chaves Fernandez <adriyetichaves@gmail.com>\n"
+"Language-Team: Proxecto Trasno <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Generator: Lokalize 0.3\n"
@@ -134,8 +136,8 @@ msgstr[1] "O equipo %s gañou %u bazucas de fragmentación!"
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
-msgstr[0] "O equipo %s gañou %u GÑU! Dálles duro, vaqueiro!"
-msgstr[1] "O equipo %s gañou %u GÑUs! Dálles duro, vaqueiro!"
+msgstr[0] "O equipo %s gañou %u ñu! Dálles duro, vaqueiro!"
+msgstr[1] "O equipo %s gañou %u ñus! Dálles duro, vaqueiro!"
 
 #: src/weapon/air_attack.cpp:272
 #, c-format
@@ -212,29 +214,29 @@ msgstr[1] "O equipo %s gañou %u saltariñas! A botar!"
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
-msgstr[0] "O equipo %s gañou %u bomba de fragmentación!"
-msgstr[1] "O equipo %s gañou %u bombas de fragmentación!"
+msgstr[0] "O equipo %s gañou %u granada de fragmentación!"
+msgstr[1] "O equipo %s gañou %u granadas de fragmentación!"
 
 #: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
-msgstr[0] "O equipo %s gañou %u kit de construción! Non esquezas o casco."
-msgstr[1] "O equipo %s gañou %u kits de construción! Non esquezas o casco."
+msgstr[0] "O equipo %s gañou %u arma de construción! Non esquezas o casco."
+msgstr[1] "O equipo %s gañou %u armas de construción! Non esquezas o casco."
 
 #: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "O equipo %s gañou %u aleluia! Move o corpo ao tirala!"
-msgstr[1] "O equipo %s gañou %u aleluias! Move o corpo ao tiralas!"
+msgstr[0] "O equipo %s gañou %u granada de disco! Move o corpo ao tirala!"
+msgstr[1] "O equipo %s gañou %u granadas de disco! Move o corpo ao tiralas!"
 
 #: src/weapon/dynamite.cpp:145
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
-msgstr[0] "O equipo %s gañou %u dinamita!"
+msgstr[0] "O equipo %s gañou %u cartucho de dinamita!"
 msgstr[1] "O equipo %s gañou %u cartuchos de dinamita!"
 
 #: src/weapon/flamethrower.cpp:178
@@ -269,8 +271,8 @@ msgstr[1] "O equipo %s gañou %u granadas!"
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
-msgstr[0] "O equipo %s gañou %u pistola!"
-msgstr[1] "O equipo %s gañou %u pistolas!"
+msgstr[0] "O equipo %s gañou %u revólver!"
+msgstr[1] "O equipo %s gañou %u revólvers!"
 
 #: src/weapon/jetpack.cpp:247
 #, c-format
@@ -315,12 +317,8 @@ msgstr[1] "O equipo %s gañou %u mofetas! Porías a máscara de gas, non si?"
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] ""
-"O equipo %s gañou %u bomba antimateria! Que espelidos son estes científicos "
-"do software libre!"
-msgstr[1] ""
-"O equipo %s gañou %u bombas antimateria! Que espelidos son estes científicos "
-"do software libre!"
+msgstr[0] "O equipo %s gañou %u proxectil antimateria!"
+msgstr[1] "O equipo %s gañou %u proxectís antimateria!"
 
 #: src/weapon/shotgun.cpp:134
 #, c-format
@@ -342,10 +340,9 @@ msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
 "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] ""
-"O equipo %s gañou %u rifle francotirador! Procura acertarlles entre os ollos!"
+"O equipo %s gañou %u rifle francotirador! Procura atinarlles entre os ollos!"
 msgstr[1] ""
-"O equipo %s gañou %u rifles francotirador! Procura acertarlles entre os "
-"ollos!"
+"O equipo %s gañou %u rifles francotirador! Procura atinarlles entre os ollos!"
 
 #: src/weapon/submachine_gun.cpp:144
 #, c-format
@@ -359,7 +356,8 @@ msgstr[1] "O equipo %s gañou %u metralletas!"
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "O equipo %s gañou %u suicidio!"
-msgstr[1] "O equipo %s gañou %u suicidios! Úsaos todos para un bonus extra!"
+msgstr[1] ""
+"O equipo %s gañou %u suicidios! Úsaos todos para unha bonificación adicional!"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -379,15 +377,17 @@ msgstr[1] "O equipo %s gañou %u teleportes!"
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
-msgstr[0] "O equipo %s gañou %u salto de turno! Gustarache, xa verás."
-msgstr[1] "O equipo %s gañou %u saltos de turno! Gustaranche, xa verás."
+msgstr[0] "O equipo %s gañou %u salto de turno! Hache gustar, xa verás."
+msgstr[1] "O equipo %s gañou %u saltos de turno! Hache gustar, xa verás."
 
 #: src/weapon/supertux.cpp:316
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
-msgstr[0] "O equipo %s gañou %u Super Tux! Nunca antes viras voar un pingüín?"
-msgstr[1] "O equipo %s gañou %u SuperTux! Nunca antes viras voar un pingüín?"
+msgstr[0] ""
+"O equipo %s gañou %u Super Tux! Nunca antes viras un pingüín voador?"
+msgstr[1] ""
+"O equipo %s gañou %u SuperTux! Nunca antes viras uns pingüíns voadores?"
 
 #: src/game/game_blitz.cpp:70
 #, c-format
@@ -581,7 +581,7 @@ msgstr "O máis patoso"
 
 #: src/weapon/cluster_bomb.cpp:188
 msgid "Cluster Bomb"
-msgstr "Bomba de fragmentación"
+msgstr "Granada de fragmentación"
 
 #: src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
@@ -631,7 +631,7 @@ msgstr "Daño por turno durante o modo morte"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
-msgstr "Aleluia"
+msgstr "Granada de disco"
 
 #: src/network/admin_commands.cpp:31
 msgid "Displays this message"
@@ -785,7 +785,7 @@ msgstr "Nome da partida:"
 
 #: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
-msgstr "GÑU"
+msgstr "Ñu"
 
 #: src/menu/options_menu.cpp:126
 msgid "Graphic"
@@ -809,7 +809,7 @@ msgstr "Inicialización do escenario..."
 
 #: src/weapon/gun.cpp:74
 msgid "Gun"
-msgstr "Pistola"
+msgstr "Revólver"
 
 #: src/tool/file_tools.cpp:189
 msgid "HOME directory (environment variable $HOME) could not be found!"
@@ -1182,7 +1182,7 @@ msgstr "Resolución"
 
 #: src/weapon/riot_bomb.cpp:120
 msgid "Riot Bomb"
-msgstr "Bomba antimateria"
+msgstr "Proxectil antimateria"
 
 #: src/main.cpp:83
 msgid "Run game"
@@ -1333,7 +1333,7 @@ msgstr "Teleportación"
 #: src/weapon/cluster_bomb.cpp:146
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
-"A bomba de fragmentación saiu do campo de batalla antes de poder explotar."
+"A granada de fragmentación saiu do campo de batalla antes de poder explotar."
 
 #: src/weapon/footbomb.cpp:111
 msgid "The Football Bomb has left the battlefield before it could explode."
@@ -1503,7 +1503,7 @@ msgstr "Sitio web:"
 #: src/game/game.cpp:755
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
-msgstr "Que vergoña estará a pasar %s - asasinado cunha simple pistola!"
+msgstr "Que vergoña estará a pasar %s - asasinado cun simple revólver!"
 
 #. Various options
 #: src/menu/options_menu.cpp:78
