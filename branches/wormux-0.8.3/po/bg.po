@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 12:46+0200\n"
-"PO-Revision-Date: 2008-09-08 19:18+0200\n"
+"POT-Creation-Date: 2009-02-24 14:23+0200\n"
+"PO-Revision-Date: 2009-02-26 16:33+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@yahoo.com>\n"
 "Language-Team: Bulgarian <thedeadly91@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -196,10 +196,10 @@ msgid_plural ""
 "it."
 msgstr[0] ""
 "Отборът %s спечели %u Горелка! Ако нямаш 18, питай родителите си как да я "
-"иползваш."
+"използваш."
 msgstr[1] ""
 "Отборът %s спечели %u Горелки! Ако нямаш 18, питай родителите си как да ги "
-"иползваш."
+"използваш."
 
 #: src/weapon/bounce_ball.cpp:113
 #, c-format
@@ -349,7 +349,7 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "Отборът %s спечели %u Самоубийство !"
 msgstr[1] ""
-"Отборът %s спечели %u самоубийства! Използвай ги всичките за екстра бонус!\v"
+"Отборът %s спечели %u самоубийства! Използвай ги всичките за екстра бонус!"
 
 #: src/weapon/syringe.cpp:115
 #, c-format
@@ -541,9 +541,8 @@ msgid "Change weapon countdown"
 msgstr "Смени времето на обратно броене на оръжието"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
-msgstr "Войник"
+msgstr "Имена на войниците:"
 
 #: src/menu/game_mode_editor.cpp:62
 msgid "Character switching"
@@ -1513,11 +1512,11 @@ msgstr "Грешка при CRC на картата!"
 
 #: src/include/action_handler.cpp:181
 msgid "Wrong map name!"
-msgstr "Грешно име на картата."
+msgstr "Грешно име на картата !"
 
 #: src/include/action_handler.cpp:187
 msgid "Wrong team!"
-msgstr "Грешен отбор."
+msgstr "Грешен отбор !"
 
 #: src/menu/network_menu.cpp:331
 msgid "You are alone :-/"
@@ -1572,7 +1571,7 @@ msgstr "готово"
 
 #: src/map/maps_list.cpp:84
 msgid "error parsing the config file"
-msgstr "грешка при четенето на персоналния конфигурационен файл"
+msgstr "грешка при четенето на конфигурационния файл"
 
 #: src/menu/credits_menu.cpp:79
 msgid "from"
