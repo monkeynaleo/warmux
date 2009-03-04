@@ -495,7 +495,6 @@ msgid "Bazooka"
 msgstr "Panzerfaust"
 
 #: src/menu/game_mode_editor.cpp:59
-#, fuzzy
 msgid "Before action"
 msgstr "Vor Aktion"
 
@@ -542,7 +541,6 @@ msgid "Center camera to character"
 msgstr "Zentriere Kamera auf Charakter"
 
 #: src/menu/help_menu.cpp:91
-#, fuzzy
 msgid "Change active character"
 msgstr "Wechsle aktiven Charakter"
 
@@ -559,7 +557,6 @@ msgid "Change weapon countdown"
 msgstr "Ändere Waffencountdown"
 
 #: src/menu/options_menu.cpp:152
-#, fuzzy
 msgid "Character names:"
 msgstr "Charakternamen:"
 
@@ -1223,7 +1220,7 @@ msgstr "Serveradresse:"
 #. Available on internet ?
 #: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
-msgstr "Im Internet verfügbare Server"
+msgstr "Im Internet verfügbarer Server"
 
 #. Server Mode
 #: src/menu/network_menu.cpp:114
@@ -1254,7 +1251,7 @@ msgstr "Runde überspringen"
 
 #: src/weapon/slap.cpp:73
 msgid "Slap"
-msgstr "Schlagen"
+msgstr "Schlag"
 
 #: src/weapon/slap.cpp:74
 msgid "Slap the enemy to make him jump a bit."
