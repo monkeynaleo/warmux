@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 #include "team/team.h"
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
@@ -109,7 +110,6 @@ Team* TeamBox::GetTeam() const
 
 CustomTeam* TeamBox::GetCustomTeam()
 {
-  std::cout<<"TeamBox::GetCustomTeam"<<std::endl;
   if( custom_team_list.size() == 0)
   {
     return NULL;
@@ -241,9 +241,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
-      Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM);
-      a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
-      a->Push(old_team_id);
+      Action* a = new Action(Action::ACTION_MENU_UPDATE_TEAM, old_team_id);
       a->Push(associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));

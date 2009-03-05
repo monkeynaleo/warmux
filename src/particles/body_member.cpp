@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,14 +27,14 @@
 BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
   Particle("body_member_particle")
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   image = new Sprite(spr.GetSurface());
   image->EnableRotationCache(32);
   ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
 
-  SetBasicShape(image->GetSize(), GetInitialMass());
+  SetSize(image->GetSize());
   SetOnTop(true);
   SetSpeed( (double)RandomLocal().GetLong(10, 15),
 	    - (double)RandomLocal().GetLong(0, 3000)/1000.0);

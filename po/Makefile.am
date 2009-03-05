@@ -141,6 +141,8 @@ POTFILES = \
         src/include/binreloc.h \
         src/include/constant.cpp \
         src/include/constant.h \
+        src/include/singleton.cpp \
+        src/include/singleton.h \
         src/interface/cursor.cpp \
         src/interface/cursor.h \
         src/interface/game_msg.cpp \
@@ -170,12 +172,12 @@ POTFILES = \
         src/map/map.h \
         src/map/maps_list.cpp \
         src/map/maps_list.h \
-        src/map/physic_tile.cpp \
-        src/map/physic_tile.h \
         src/map/random_map.cpp \
         src/map/random_map.h \
         src/map/sky.cpp \
         src/map/sky.h \
+        src/map/tile.cpp \
+        src/map/tile.h \
         src/map/tileitem.cpp \
         src/map/tileitem.h \
         src/map/water.cpp \
@@ -222,6 +224,8 @@ POTFILES = \
         src/network/chat.h \
         src/network/chatlogger.cpp \
         src/network/chatlogger.h \
+        src/network/distant_cpu.cpp \
+        src/network/distant_cpu.h \
         src/network/download.cpp \
         src/network/download.h \
         src/network/index_server.cpp \
@@ -251,8 +255,14 @@ POTFILES = \
         src/object/medkit.h \
         src/object/objbox.cpp \
         src/object/objbox.h \
+        src/object/object_cfg.cpp \
+        src/object/object_cfg.h \
         src/object/objects_list.cpp \
         src/object/objects_list.h \
+        src/object/physical_obj.cpp \
+        src/object/physical_obj.h \
+        src/object/physics.cpp \
+        src/object/physics.h \
         src/particles/body_member.cpp \
         src/particles/body_member.h \
         src/particles/bullet.cpp \
@@ -283,16 +293,6 @@ POTFILES = \
         src/particles/teleport_member.h \
         src/particles/water_drop.cpp \
         src/particles/water_drop.h \
-        src/physic/force.cpp \
-        src/physic/force.h \
-        src/physic/object_cfg.cpp \
-        src/physic/object_cfg.h \
-        src/physic/physical_engine.cpp \
-        src/physic/physical_engine.h \
-        src/physic/physical_obj.cpp \
-        src/physic/physical_obj.h \
-        src/physic/physical_shape.cpp \
-        src/physic/physical_shape.h \
         src/sound/jukebox.cpp \
         src/sound/jukebox.h \
         src/sound/sample_cache.cpp \
@@ -306,6 +306,7 @@ POTFILES = \
         src/team/macro.h \
         src/team/results.cpp \
         src/team/results.h \
+        src/team/team_config.h \
         src/team/team.cpp \
         src/team/team_energy.cpp \
         src/team/team_energy.h \
@@ -316,14 +317,22 @@ POTFILES = \
         src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
         src/tool/copynpaste.h \
-        src/tool/debug_physics.cpp \
-        src/tool/debug_physics.h \
+        src/tool/debug.cpp \
+        src/tool/debug.h \
+        src/tool/error.cpp \
+        src/tool/error.h \
+        src/tool/euler_vector.cpp \
+        src/tool/euler_vector.h \
         src/tool/file_tools.cpp \
         src/tool/file_tools.h \
+        src/tool/i18n.cpp \
+        src/tool/i18n.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
+        src/tool/point.h \
         src/tool/random.cpp \
         src/tool/random.h \
+        src/tool/rectangle.h \
         src/tool/resource_manager.cpp \
         src/tool/resource_manager.h \
         src/tool/stats.cpp \
@@ -332,6 +341,7 @@ POTFILES = \
         src/tool/string_tools.h \
         src/tool/text_handling.cpp \
         src/tool/text_handling.h \
+        src/tool/vector2.h \
         src/tool/xml_document.cpp \
         src/tool/xml_document.h \
         src/weapon/air_attack.cpp \
@@ -417,28 +427,24 @@ POTFILES = \
         src/weapon/weapons_list.h \
         src/weapon/weapon_strength_bar.cpp \
         src/weapon/weapon_strength_bar.h \
-        tools/servers/headless_server/config.cpp \
-        tools/servers/headless_server/config.h \
-        tools/servers/headless_server/main.cpp \
-        tools/servers/headless_server/server.cpp \
-        tools/servers/headless_server/server.h \
-        tools/servers/index_server/client.cpp \
-        tools/servers/index_server/client.h \
-        tools/servers/index_server/clock.cpp \
-        tools/servers/index_server/clock.h \
-        tools/servers/index_server/config.cpp \
-        tools/servers/index_server/config.h \
-        tools/servers/index_server/download.cpp \
-        tools/servers/index_server/download.h \
-        tools/servers/index_server/main.cpp \
-        tools/servers/index_server/net_data.cpp \
-        tools/servers/index_server/net_data.h \
-        tools/servers/index_server/server.cpp \
-        tools/servers/index_server/server.h \
-        tools/servers/index_server/stat.cpp \
-        tools/servers/index_server/stat.h \
-        tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h 
+        tools/index_server/client.cpp \
+        tools/index_server/client.h \
+        tools/index_server/clock.cpp \
+        tools/index_server/clock.h \
+        tools/index_server/config.cpp \
+        tools/index_server/config.h \
+        tools/index_server/debug.h \
+        tools/index_server/download.cpp \
+        tools/index_server/download.h \
+        tools/index_server/main.cpp \
+        tools/index_server/net_data.cpp \
+        tools/index_server/net_data.h \
+        tools/index_server/server.cpp \
+        tools/index_server/server.h \
+        tools/index_server/stat.cpp \
+        tools/index_server/stat.h \
+        tools/index_server/sync_slave.cpp \
+        tools/index_server/sync_slave.h 
 
 DOMAIN = $(PACKAGE)
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
  ******************************************************************************
  * Specialization of Game methods for the classic mode.
  *****************************************************************************/
-
 
 #include "character/character.h"
 #include "game/game_classic.h"
@@ -40,7 +39,8 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/random.h"
 
 GameClassic::GameClassic()
@@ -153,23 +153,42 @@ void GameClassic::__SetState_PLAYING()
 
   // Prepare each character for a new turn
   FOR_ALL_LIVING_CHARACTERS(team,character)
-    (*character)->PrepareTurn();
+    character->PrepareTurn();
 
   // Select the next team
   ASSERT (!IsGameFinished());
 
-  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal()) {
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
+    {
+      GetTeamsList().NextTeam();
 
-    GetTeamsList().NextTeam();
+      if ( GameMode::GetInstance()->auto_change_character)
+        {
+          ActiveTeam().NextCharacter();
+        }
 
-    Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
+      Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
 
-    // Are we turn master for next turn ?
-    if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-      Network::GetInstance()->SetTurnMaster(true);
-    else
-      Network::GetInstance()->SetTurnMaster(false);
-  }
+      if ( Network::GetInstance()->IsTurnMaster() )
+        {
+          // Tell clients which character in the team is now playing
+          Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
+          playing_char.StoreActiveCharacter();
+          Network::GetInstance()->SendAction(playing_char);
+
+          printf("Action_ChangeCharacter:\n");
+          printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
+          printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+          printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+          printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+        }
+
+      // Are we turn master for next turn ?
+      if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+        Network::GetInstance()->SetTurnMaster(true);
+      else
+        Network::GetInstance()->SetTurnMaster(false);
+    }
 
   give_objbox = true; //hack: make it so that there is no more than one objbox per turn
 }
@@ -212,12 +231,12 @@ void GameClassic::ApplyDeathMode () const
     {
       // If the character energy is lower than damage
       // per turn we reduce the character's health to 1
-      if (static_cast<uint>((*character)->GetEnergy()) >
+      if (static_cast<uint>(character->GetEnergy()) >
           GameMode::GetInstance()->damage_per_turn_during_death_mode)
         // Don't report damage to the active character, it's not the responsible for this damage
-        (*character)->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
+        character->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, false);
       else
-        (*character)->SetEnergy(1);
+        character->SetEnergy(1);
     }
   }
 }

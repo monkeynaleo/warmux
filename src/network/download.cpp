@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,12 +22,13 @@
 #include <map>
 #include <fstream>
 #include <cstdlib>
-
-#include <WORMUX_debug.h>
-
+#include <curl/curl.h>
 #include "game/config.h"
 #include "include/base.h"
 #include "network/download.h"
+#include "tool/debug.h"
+#include "tool/error.h"
+#include "tool/i18n.h"
 
 Downloader::Downloader():
   curl(curl_easy_init())
@@ -41,10 +42,11 @@ Downloader::~Downloader()
 
 size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
 {
-  return fwrite(buf, size, nmemb, (FILE*)fd);
+  fwrite(buf, size, nmemb, (FILE*)fd);
+  return nmemb;
 }
 
-bool Downloader::Get(const char* url, const char* save_as) const
+bool Downloader::Get(const char* url, const char* save_as)
 {
   FILE* fd = fopen( save_as, "w");
   if (fd == NULL) {
@@ -63,14 +65,14 @@ bool Downloader::Get(const char* url, const char* save_as) const
 
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
-  line.clear();
-  std::getline(file, line);
-  if(file.eof())
-    return -1;
-  return line.size();
+	  line.clear();
+	    std::getline(file, line);
+	      if(file.eof())
+		          return -1;
+	        return line.size();
 }
 
-std::string Downloader::GetLatestVersion() const
+std::string Downloader::GetLatestVersion()
 {
   static const char url[] = "http://www.wormux.org/last";
   const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
@@ -96,7 +98,7 @@ std::string Downloader::GetLatestVersion() const
   return line;
 }
 
-std::map<std::string, int> Downloader::GetServerList(std::string list_name) const
+std::map<std::string, int> Downloader::GetServerList(std::string list_name)
 {
   std::map<std::string, int> server_lst;
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());

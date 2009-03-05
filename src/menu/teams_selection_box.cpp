@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
+#include "tool/i18n.h"
 
 #include <iostream>
 
@@ -246,7 +247,6 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
 
 void TeamsSelectionBox::ValidTeamsSelection()
 {
-  std::cout<<"TeamsSelectionBox::ValidTeamsSelection"<<std::endl;
   uint nb_teams=0;
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL)

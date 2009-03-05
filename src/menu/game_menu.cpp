@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 #include "gui/tabs.h"
 #include "gui/combo_box.h"
 #include "include/app.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 const uint MARGIN_TOP    = 5;

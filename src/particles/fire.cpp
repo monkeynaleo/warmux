@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ FireParticle::FireParticle() :
   on_ground(false),
   oscil_delta(RandomLocal().GetLong(0, dig_ground_time))
 {
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = true;
   m_is_fire = true;
@@ -52,7 +52,7 @@ FireParticle::FireParticle() :
 
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetBasicShape(image->GetSize(), GetInitialMass());
+  SetSize(image->GetSize());
 }
 
 FireParticle::~FireParticle()
@@ -72,22 +72,24 @@ void FireParticle::Refresh()
   scale = 1.0 - scale;
   image->Scale(scale, scale);
 
-  if (image->GetSize().x != 0 && image->GetSize().y != 0)
+  if(image->GetSize().x != 0 && image->GetSize().y != 0)
   {
-    SetBasicShape(image->GetSize(), GetInitialMass());
+    int dx = (GetWidth() - image->GetWidth()) / 2;
+
+    SetTestRect(dx, dx - 1, GetHeight() - 2,1);
   }
 
   // The position of the object represents its top left corner
   // So, since we are resizing the object, we have to move it
   // to make it appear at the same place
 
-  if (on_ground || IsColliding())
+  if(on_ground || !FootsInVacuum())
   {
-    if (!on_ground) {
+    if ( !on_ground){
       JukeBox::GetInstance()->Play("default","fire/touch_ground");
     }
     on_ground = true;
-    if ((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
+    if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
     {
       Point2i expl_pos = GetPosition() + GetSize();
       expl_pos.x -= GetWidth()/2;

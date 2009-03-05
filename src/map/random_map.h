@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define RANDOM_MAP_H
 
 #include <vector>
-#include <WORMUX_point.h>
+#include "tool/point.h"
 #include "graphic/surface.h"
 #include "map/maps_list.h"
 

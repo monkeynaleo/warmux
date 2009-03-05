@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/random.h"
 #include "tool/xml_document.h"
@@ -84,9 +85,10 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
+  SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
 
@@ -136,14 +138,15 @@ void Plane::Shoot(double speed, const Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY(Point2i(GetX(), GetY()+GetHeight()) );
+  instance->SetXY(Point2i(GetX(), obus_dy) );
 
   Point2d speed_vector = GetSpeedXY();
 
   int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
+  int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
-  speed_vector.SetValues(speed_vector.x + fx/30.0, 0);
+  speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
   instance->SetSpeedXY(speed_vector);
 
   ObjectsList::GetRef().AddObject(instance);
@@ -161,17 +164,16 @@ void Plane::Refresh()
 
   UpdatePosition();
   image->Update();
-  SetY(0);
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
     DropBomb();
     m_ignore_movements = true;
-    next_height = RandomLocal().GetInt(50,200);
+    next_height = RandomLocal().GetInt(20,100);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
     {
-      next_height = RandomLocal().GetInt(50,200);
+      next_height = RandomLocal().GetInt(20,100);
       DropBomb();
     }
   }

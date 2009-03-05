@@ -58,9 +58,9 @@ AUTOHEADER=$(find_tool_version autoheader "${AUTOCONF_MIN_VERSION}" \
 
 echo "[+] Run aclocal"
 if [ -d /usr/local/share/aclocal ]; then
-    $ACLOCAL -I build/m4 -I /usr/local/share/aclocal || exit 1
+    $ACLOCAL -I m4 -I /usr/local/share/aclocal || exit 1
 else
-    $ACLOCAL -I build/m4 || exit 1
+    $ACLOCAL -I m4 || exit 1
 fi
 
 echo "[+] Run autoheader"

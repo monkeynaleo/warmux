@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
-
+#include "tool/i18n.h"
 #include "tool/xml_document.h"
 
 const uint time_delta = 40;
@@ -58,7 +58,7 @@ class SuperTux : public WeaponProjectile
     ParticleEngine particle_engine;
     double angle_rad;
     SoundSample flying_sound;
-    unsigned m_force_index;
+
   public:
     uint speed;
     uint time_now;
@@ -89,7 +89,8 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 {
   swimming = false;
   explode_colliding_character = true;
-  m_force_index = 0;
+  SetSize(image->GetSize());
+  SetTestRect(1, 1, 2, 2);
 }
 
 void SuperTux::Shoot(double strength)
@@ -116,8 +117,7 @@ void SuperTux::Refresh()
   image->SetRotation_rad(angle_rad + M_PI_2);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+    SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
     image->Update();
     last_move = Time::GetInstance()->Read();
   }
@@ -126,8 +126,8 @@ void SuperTux::Refresh()
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
-    a.Push(GetPhysXY());
-    Network::GetInstance()->SendActionToAll(a);
+    a.Push(GetPos());
+    Network::GetInstance()->SendAction(a);
   }
 
   if (!swimming)

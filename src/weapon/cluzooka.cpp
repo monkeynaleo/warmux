@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
+#include "tool/i18n.h"
 #include "sound/jukebox.h"
 #include "network/randomsync.h"
 #include "tool/xml_document.h"
@@ -55,15 +55,15 @@ protected:
         ASSERT(recursion_depth == 0);
 #endif
 
-        // fake explosion
+        // fake explosion 
         JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
-        ParticleEngine::AddExplosionSmoke( pos,
-            50,
+        ParticleEngine::AddExplosionSmoke( pos, 
+            50, 
             ParticleEngine::LittleESmoke );
 
         ClusterType * cluster;
 
-        for (uint i = 0; i < fragments; ++i )
+        for (uint i = 0; i < fragments; ++i ) 
         {
             float cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
 
@@ -139,7 +139,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
 
   Camera::GetInstance()->FollowObject(this, true);
   ResetConstants();
-  SetCollisionModel( true, true, false ); // a bit hackish...
+  SetCollisionModel( false, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
   SetXY(start_pos);
@@ -175,7 +175,7 @@ void CluzookaCluster::Refresh()
 }
 
 void CluzookaCluster::DoSpawn()
-{
+{  
   const uint fragments = 2;
   double angle;
   double speed;
@@ -267,7 +267,7 @@ void CluzookaRocket::Refresh()
         // rotate speed is max when t is close to 0, and slows down to 1
         // when t is approaching 1
         //float rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
-        image->SetRotation_rad( speed_angle +
+        image->SetRotation_rad( speed_angle + 
                  2 * M_PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
     }
     else
@@ -285,7 +285,7 @@ void CluzookaRocket::Refresh()
 }
 
 void CluzookaRocket::DoSpawn()
-{
+{  
   const uint fragments = static_cast<CluzookaConfig &>(cfg).m_fragments;
   const float angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * M_PI / 180.0f;
 

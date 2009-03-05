@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #ifndef OBJBOX_H
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "sound/sound_sample.h"
 
 class Team;
@@ -30,7 +30,6 @@ class Character;
 class Sprite;
 typedef struct _xmlNode xmlNode;
 class Action;
-class PhysicalShape;
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
@@ -65,7 +64,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     void Explode();
     // Signal Fall ending
     virtual void SignalCollision(const Point2d& my_speed_before);
-    virtual void SignalObjectCollision(PhysicalObj *,PhysicalShape *,const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj *, const Point2d& my_speed_before);
     virtual void SignalDrowning();
     virtual void SignalGhostState(bool was_already_dead);
 };

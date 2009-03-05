@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "include/action_handler.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 #include "tool/random.h"
 
 void RandomSyncGen::InitRandom()
@@ -37,14 +37,16 @@ void RandomSyncGen::InitRandom()
   if (Network::GetInstance()->IsLocal()) {
     int seed = time(NULL);
     SetRand(seed);
-  } else if (Network::GetInstance()->IsGameMaster()) {
+  }
+
+  if (Network::GetInstance()->IsServer()) {
     int seed = time(NULL);
     SetRand(seed);
 
     MSG_DEBUG("random", "Server sending seed %d", seed);
 
     Action a(Action::ACTION_NETWORK_RANDOM_INIT, seed);
-    Network::GetInstance()->SendActionToAll(a);
+    Network::GetInstance()->SendAction(a);
   }
 }
 
@@ -56,8 +58,8 @@ uint RandomSyncGen::GetRand()
   MSG_DEBUG("random.get", "Get %04d: %u", nb_get, nbr);
 
   if (Network::IsConnected())
-    ASSERT(Network::GetInstance()->GetState() == WNet::NETWORK_LOADING_DATA
-	   || Network::GetInstance()->GetState() == WNet::NETWORK_PLAYING);
+    ASSERT(Network::GetInstance()->GetState() == Network::NETWORK_LOADING_DATA
+	   || Network::GetInstance()->GetState() == Network::NETWORK_PLAYING);
 #endif
   return nbr;
 }

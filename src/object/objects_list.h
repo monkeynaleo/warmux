@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@
 #define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include <WORMUX_singleton.h>
-#include "physic/physical_obj.h"
+#include "include/singleton.h"
+#include "object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
@@ -70,10 +70,14 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
 
     void FreeMem();
 
-    void AddObject(PhysicalObj * obj);
+    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
 
     // Overlapse handling
-    void RemoveObject(PhysicalObj * obj);
+    inline void RemoveObject(PhysicalObj * obj)
+    {
+      remove(obj);
+      RemoveOverlappedObjectReference(obj);
+    };
     void AddOverlappedObject(PhysicalObj * obj) { overlapped_objects.push_back(obj); };
     void RemoveOverlappedObjectReference(const PhysicalObj * obj);
     void RemoveOverlappedObject(PhysicalObj * obj) { overlapped_objects.remove(obj); };

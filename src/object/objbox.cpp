@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,42 +34,46 @@
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
-#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
-
+#include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
+
+#ifdef DEBUG
+#include "graphic/video.h"
+#include "include/app.h"
+#include "map/camera.h"
+#endif
 
 const uint SPEED = 5; // meter / seconde
 // XXX Unused !?
 // const uint NB_MAX_TRY = 20;
 // const uint SPEED_PARACHUTE = 170; // ms par image
 
-ObjBox::ObjBox(const std::string &name) : PhysicalObj(name)
-{
+ObjBox::ObjBox(const std::string &name)
+  : PhysicalObj(name) {
   m_allow_negative_y = true;
 
   parachute = true;
+
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(true, false, true);
-  std::cout<<"super called"<<std::endl;
+  SetCollisionModel(false, false, true);
   JukeBox::GetInstance()->Play("default","box/falling");
 }
 
-ObjBox::~ObjBox()
-{
+ObjBox::~ObjBox(){
   delete anim;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
 
 void ObjBox::CloseParachute()
 {
-  SetAirResistFactor(0.0);
+  SetAirResistFactor(1.0);
   Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
   hit.Play("default", "box/hitting_ground");
@@ -86,12 +90,11 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
   CloseParachute();
 }
 
-void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
+void ObjBox::SignalObjectCollision(PhysicalObj * obj, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-  if (obj->IsCharacter()) {
+  if (obj->IsCharacter())
     ApplyBonus((Character *)obj);
-  }
 }
 void ObjBox::SignalDrowning()
 {
@@ -100,8 +103,8 @@ void ObjBox::SignalDrowning()
 
 void ObjBox::DropBox()
 {
-  if (parachute) {
-    SetAirResistFactor(0.0);
+  if(parachute) {
+    SetAirResistFactor(1.0);
     parachute = false;
     anim->SetCurrentFrame(anim->GetFrameCount() - 1);
   } else {
@@ -111,9 +114,19 @@ void ObjBox::DropBox()
 
 void ObjBox::Draw()
 {
-  anim->SetRotation_HotSpot(Point2i(0,0));
-  anim->SetRotation_rad(- GetAngle());
   anim->Draw(GetPosition());
+
+#ifdef DEBUG
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 void ObjBox::Refresh()
@@ -121,8 +134,8 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if (Overlapse(**character)) {
-      ApplyBonus((*character));
+    if(Overlapse(*character)) {
+      ApplyBonus(&(*character));
       Ghost();
       return;
     }
@@ -136,7 +149,7 @@ void ObjBox::Explode()
 {
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
-}
+};
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {

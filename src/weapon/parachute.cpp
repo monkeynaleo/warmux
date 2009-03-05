@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,11 +31,11 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -59,7 +59,6 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_x_strength.x_extern = 0.0;
   m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
-  m_force_index = 0;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -152,8 +151,7 @@ void Parachute::Refresh()
   }
   // If parachute is open => character can move a little to the left or to the right
   if (open && Network::GetInstance()->IsTurnMaster()) {
-     ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForce(m_x_strength.x_extern, 0.0);
+    ActiveCharacter().SetExternForce(m_x_strength.x_extern, 0.0);
     if (m_x_strength.changing) {
       m_x_strength.changing = false;
       SendActiveCharacterInfo(false);

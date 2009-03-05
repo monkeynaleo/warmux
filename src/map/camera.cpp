@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,9 @@
 #include "interface/cursor.h"
 #include "interface/mouse.h"
 #include "interface/interface.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 #include "tool/math_tools.h"
 #include "game/time.h"
 #include "tool/random.h"
@@ -315,10 +315,10 @@ void Camera::Refresh(){
 void Camera::FollowObject(const PhysicalObj *obj, bool follow,
 			  bool _in_advance)
 {
-  MSG_DEBUG( "camera.tracking", "Following object %s", obj->GetName().c_str());
+  MSG_DEBUG( "camera.tracking", "Following object %s",
+                                 obj->GetName().c_str());
 
   Mouse::GetInstance()->Hide();
-
   if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 
@@ -349,7 +349,7 @@ Point2i Camera::ComputeShake() const
     if ( time > m_started_shaking + m_shake_duration || m_shake_duration == 0 )
     {
         return Point2i( 0, 0 ); // not shaking now
-    }
+    };
 
     if ( time == m_last_time_shake_calculated )
         return m_shake;
@@ -364,7 +364,7 @@ Point2i Camera::ComputeShake() const
         float arg = k_scale_angle * t;
         // denormalized sinc
         func_val = ( 1 - t ) * sin( arg ) / arg;
-    }
+    };
 
     float x_ampl = ( float )RandomLocal().GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
     float y_ampl = ( float )RandomLocal().GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
@@ -381,11 +381,11 @@ Point2i Camera::ComputeShake() const
             t, func_val, m_shake.x, m_shake.y );
 
         t_last_time_logged = time;
-    }
+    };
 
     m_last_time_shake_calculated = time;
     return m_shake;
-}
+};
 
 void Camera::Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint )
 {
@@ -410,8 +410,8 @@ void Camera::Shake( uint how_long_msec, const Point2i & amplitude, const Point2i
         m_shake_duration = how_long_msec;
         m_shake_amplitude = amplitude;
         m_shake_centerpoint = centerpoint;
-    }
-}
+    };
+};
 
 void Camera::ResetShake()
 {
@@ -419,4 +419,4 @@ void Camera::ResetShake()
     m_shake_duration = 0;
     m_last_time_shake_calculated = 0;
     m_shake = Point2i( 0, 0 );
-}
+};

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -86,6 +86,9 @@ public:
   // Find a team by its id or index (in playing full_list)
   Team* FindPlayingById(const std::string &id, int &index);
   Team* FindPlayingByIndex(uint index);
+
+  // returns name1+name2+name3
+  std::string GetLocalHeadCommanders() const;
 };
 
 //-----------------------------------------------------------------------------

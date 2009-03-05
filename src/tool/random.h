@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include "include/singleton.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 class RandomGenerator
 {

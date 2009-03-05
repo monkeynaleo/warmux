@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
+#include "tool/i18n.h"
 
 class BazookaRocket : public WeaponProjectile
 {
@@ -58,7 +58,7 @@ void BazookaRocket::Refresh()
   WeaponProjectile::Refresh();
   if(!IsDrowned())
   {
-    image->SetRotation_rad(-GetAngle());
+    image->SetRotation_rad(GetSpeedAngle());
     smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                      GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
   }

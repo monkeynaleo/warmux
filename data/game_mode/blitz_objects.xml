@@ -1,94 +1,52 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE objects_physics SYSTEM "objects.dtd" []>
-
 <objects_physics>
 
   <!-- Various objects configs -->
 
   <character>
+    <mass>100.0</mass>
     <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.1</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.25</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="body" type="polygon">
-      <mass>80.0</mass>
-      <position x="0" y="0" />
-      <point x="8" y="0" />
-      <point x="22" y="0" />
-      <point x="22" y="32" />
-      <point x="8" y="32" />
-    </shape>
-    <shape name="feet" type="circle">
-      <mass>20.0</mass>
-      <position x="15" y="30" />
-      <radius>15</radius>
-    </shape>
   </character>
 
   <bonus_box>
+    <mass>100.0</mass>
     <wind_factor>13.0</wind_factor>
-    <air_resist_factor>1.0</air_resist_factor>
+    <air_resist_factor>16.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="bonus_box-main" type="polygon">
-      <mass>100.0</mass>
-      <position x="0" y="0" />
-      <point x="19" y="78" />
-      <point x="47" y="78" />
-      <point x="47" y="100" />
-      <point x="19" y="100" />
-    </shape>
   </bonus_box>
 
   <medkit>
+    <mass>100.0</mass>
     <wind_factor>13.0</wind_factor>
-    <air_resist_factor>1.0</air_resist_factor>
+    <air_resist_factor>16.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="bonus_box-main" type="polygon">
-      <mass>100.0</mass>
-      <position x="0" y="0" />
-      <point x="19" y="78" />
-      <point x="47" y="78" />
-      <point x="47" y="100" />
-      <point x="19" y="100" />
-    </shape>
   </medkit>
 
   <barrel>
+    <mass>1000.0</mass>
     <wind_factor>0.3</wind_factor>
-    <air_resist_factor>1.0</air_resist_factor>
+    <air_resist_factor>20.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="barrel-main" type="polygon">
-      <mass>1000.0</mass>
-      <position x="0" y="0" />
-      <point x="2" y="2" />
-      <point x="28" y="2" />
-      <point x="28" y="23" />
-      <point x="15" y="31" />
-      <point x="2" y="23" />
-    </shape>
   </barrel>
 
   <anvil>
+    <mass>10000.0</mass>
     <wind_factor>0.3</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>20.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="anvil-main" type="polygon">
-      <mass>10000.0</mass>
-      <position x="0" y="0" />
-      <point x="2" y="3" />
-      <point x="91" y="3" />
-      <point x="92" y="63" />
-      <point x="1" y="63" />
-    </shape>
   </anvil>
 
   <!-- Dummy value, will be overwritten by the value contained in each
@@ -96,485 +54,321 @@
   <wind_particle>
     <mass>50.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </wind_particle>
 
   <!-- Particles Configs -->
   <smoke_particle>  <!-- Unused particle -->
     <mass>0.5</mass>
     <wind_factor>0.8</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>-1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </smoke_particle>
 
   <polecat_fart_particle>  <!-- Polecat Fart -->
     <mass>0.5</mass>
     <wind_factor>1.5</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.1</air_resist_factor>
     <gravity_factor>-0.2</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </polecat_fart_particle>
 
   <fire_particle>  <!-- Particle used during explosions -->
     <mass>100.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </fire_particle>
 
   <explosion_smoke_particle> <!-- Particle used during explosions -->
     <mass>0.5</mass>
     <wind_factor>10.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>  <!-- Randomly set in the code -->
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </explosion_smoke_particle>
 
   <dark_smoke>  <!-- Particle bazooka and auto-bazooka... -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.5</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </dark_smoke>
 
   <star_particle>  <!-- Particle for tux weapon -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </star_particle>
 
   <magic_star_particle> <!-- Particle for the disco grenade -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </magic_star_particle>
 
   <bullet_particle> <!-- the gun and M16 -->
     <mass>2.0</mass>
     <wind_factor>0.01</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.01</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
-    <rotating>false</rotating>
   </bullet_particle>
 
   <ground_particle> <!-- with airhammer -->
-    <mass>100.0</mass>
-    <wind_factor>0.01</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
-    <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.2</rebound_factor>
-    <rotating>false</rotating>
+      <mass>100.0</mass>
+      <wind_factor>0.01</wind_factor>
+      <air_resist_factor>0.01</air_resist_factor>
+      <gravity_factor>1.0</gravity_factor>
+      <rebounding>false</rebounding>
+      <rebound_factor>0.7</rebound_factor>
   </ground_particle>
 
   <body_member_particle> <!-- during suicide -->
     <mass>100.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.5</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>true</rebounding>
+    <rebound_factor>0.7</rebound_factor>
   </body_member_particle>
 
   <teleport_member_particle> <!-- during teleportation -->
     <mass>1.0</mass>
     <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.7</rebound_factor>
   </teleport_member_particle>
 
   <water_particle>  <!-- when falling into water -->
     <mass>2.0</mass>
     <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
   </water_particle>
 
   <!-- Weapons Configs -->
   <!-- Weapons bullets -->
   <gun_bullet>
+    <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.1</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="gun_bullet-main" type="polygon">
-      <mass>2.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="1" />
-      <point x="6" y="2" />
-      <point x="1" y="4" />
-    </shape>
   </gun_bullet>
 
   <buckshot> <!-- shotgun ammo -->
+    <mass>1.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.1</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="buckshot-main" type="circle">
-      <mass>1.0</mass>
-      <position x="2" y="2" />
-      <radius>2</radius>
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </buckshot>
 
   <m16_bullet>
+    <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.1</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="m16_bullet-main" type="polygon">
-      <mass>2.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="1" />
-      <point x="6" y="2" />
-      <point x="1" y="4" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </m16_bullet>
 
   <snipe_rifle_bullet>
+    <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="snipe_rifle_bullet-main" type="polygon">
-      <mass>2.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="1" />
-      <point x="6" y="2" />
-      <point x="1" y="4" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </snipe_rifle_bullet>
 
   <flamethrower_bullet>
+    <mass>5.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.2</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="snipe_rifle_bullet-main" type="polygon">
-      <mass>5.0</mass>
-      <position x="0" y="0" />
-      <point x="7" y="3" />
-      <point x="14" y="13" />
-      <point x="8" y="17" />
-      <point x="2" y="13" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </flamethrower_bullet>
-
-  <rope>
-    <mass>2.0</mass>
-    <wind_factor>0.8</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
-    <gravity_factor>0.1</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-  </rope>
-
-  <rope_node>
-    <mass>2.0</mass>
-    <wind_factor>0.8</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
-    <gravity_factor>0.1</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-  </rope_node>
 
   <!-- Weapons projectiles -->
   <!-- Bazooka and automatic bazookas rockets -->
   <rocket>
+    <mass>20.0</mass>
     <wind_factor>75.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <auto_align_force>0.1</auto_align_force>
-    <shape name="rocket-main" type="polygon">
-      <mass>20.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="4" />
-      <point x="22" y="1" />
-      <point x="34" y="5" />
-      <point x="22" y="10" />
-      <point x="1" y="8" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </rocket>
 
   <cluz_rocket>
+    <mass>15.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="cluz_rocket-main" type="polygon">
-      <mass>15.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="4" />
-      <point x="22" y="1" />
-      <point x="34" y="5" />
-      <point x="22" y="10" />
-      <point x="1" y="8" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.9</rebound_factor>
   </cluz_rocket>
 
   <cluz_cluster>
+    <mass>5.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="cluz_cluster-main" type="circle">
-      <mass>5.0</mass>
-      <position x="4" y="4" />
-      <radius>4</radius>
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.9</rebound_factor>
   </cluz_cluster>
 
   <riot_rocket>
+    <mass>50.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.8</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="riot_rocket-main" type="polygon">
-      <mass>50.0</mass>
-      <position x="0" y="0" />
-      <point x="2" y="3" />
-      <point x="12" y="1" />
-      <point x="22" y="6" />
-      <point x="13" y="12" />
-      <point x="2" y="9" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </riot_rocket>
 
   <grenade>
+    <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="grenade-main" type="circle">
-      <mass>30.0</mass>
-      <position x="9" y="10" />
-      <radius>5</radius>
-    </shape>
   </grenade>
 
   <disco_grenade>
+    <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.4</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="disco_grenade-main" type="circle">
-      <mass>2.0</mass>
-      <position x="9" y="9" />
-      <radius>6</radius>
-    </shape>
   </disco_grenade>
 
   <cluster_bomb>
+    <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.3</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="cluster_bomb-main" type="circle">
-      <mass>30.0</mass>
-      <position x="8" y="8" />
-      <radius>5</radius>
-    </shape>
   </cluster_bomb>
 
   <cluster>
+    <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="cluster-main" type="polygon">
-      <mass>30.0</mass>
-      <position x="0" y="0" />
-      <point x="3" y="0" />
-      <point x="8" y="3" />
-      <point x="5" y="8" />
-      <point x="0" y="5" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </cluster>
 
   <footbomb>
+    <mass>50.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.3</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.9</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="footbomb-main" type="polygon">
-      <mass>50.0</mass>
-      <position x="0" y="0" />
-      <point x="0" y="7" />
-      <point x="5" y="2" />
-      <point x="11" y="0" />
-      <point x="17" y="2" />
-      <point x="22" y="7" />
-      <point x="17" y="12" />
-      <point x="11" y="14" />
-      <point x="5" y="12" />
-    </shape>
   </footbomb>
 
   <dynamite_bullet>
+    <mass>100.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="dynamite-main" type="polygon">
-      <mass>100.0</mass>
-      <position x="0" y="0" />
-      <point x="4" y="6" />
-      <point x="9" y="6" />
-      <point x="9" y="17" />
-      <point x="4" y="17" />
-    </shape>
   </dynamite_bullet>
 
   <air_attack_plane>
+    <mass>1.0</mass>
     <wind_factor>0.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="air_attack_plane-main" type="polygon">
-      <mass>1.0</mass>
-      <position x="0" y="0" />
-      <point x="2" y="42" />
-      <point x="112" y="0" />
-      <point x="200" y="39" />
-      <point x="102" y="57" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </air_attack_plane>
 
   <air_attack_projectile>
+    <mass>200.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.5</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="air_attack_projectile-main" type="polygon">
-      <mass>200.0</mass>
-      <position x="0" y="0" />
-      <point x="0" y="0" />
-      <point x="14" y="0" />
-      <point x="12" y="23" />
-      <point x="7" y="30" />
-      <point x="2" y="23" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </air_attack_projectile>
 
   <supertux>
+    <mass>20.0</mass>
     <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="supertux-main" type="polygon">
-      <mass>20.0</mass>
-      <position x="0" y="0" />
-      <point x="0" y="25" />
-      <point x="9" y="4" />
-      <point x="21" y="0" />
-      <point x="22" y="33" />
-      <point x="18" y="37" />
-      <point x="5" y="37" />
-    </shape>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
   </supertux>
 
   <gnu>
+    <mass>40.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor><!-- bouncing handled in the code  -->
-    <rotating>true</rotating>
-    <shape name="gnu-main" type="polygon">
-      <mass>40.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="18" />
-      <point x="41" y="1" />
-      <point x="44" y="24" />
-      <point x="30" y="38" />
-      <point x="10" y="26" />
-    </shape>
+    <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
+    <rebound_factor>0.01</rebound_factor>
   </gnu>
 
   <polecat>
+    <mass>5.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.0</rebound_factor><!-- bouncing handled in the code  -->
-    <rotating>true</rotating>
-    <shape name="polecat-main" type="polygon">
-      <mass>5.0</mass>
-      <position x="0" y="0" />
-      <point x="1" y="1" />
-      <point x="52" y="12" />
-      <point x="37" y="23" />
-      <point x="17" y="23" />
-    </shape>
+    <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
+    <rebound_factor>0.01</rebound_factor>
   </polecat>
 
   <bounce_ball>
+    <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>1.0</rebound_factor>
-    <rotating>true</rotating>
-    <shape name="bounce_ball-main" type="circle">
-      <mass>2.0</mass>
-      <position x="6" y="6" />
-      <radius>6</radius>
-    </shape>
+    <rebounding>true</rebounding>
+    <rebound_factor>1.1</rebound_factor>
   </bounce_ball>
 
   <mine>
+    <mass>500.0</mass>
     <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>false</rotating>
-    <shape name="mine-main" type="polygon">
-      <mass>500.0</mass>
-      <position x="0" y="0" />
-      <point x="6" y="3" />
-      <point x="12" y="3" />
-      <point x="14" y="8" />
-      <point x="12" y="14" />
-      <point x="6" y="14" />
-      <point x="2" y="8" />
-    </shape>
   </mine>
 
 </objects_physics>

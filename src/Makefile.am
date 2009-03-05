@@ -60,8 +60,8 @@ wormux_SOURCES = \
         gui/spin_button_big.cpp gui/spin_button_big.h \
         gui/spin_button.cpp gui/spin_button.h \
         gui/spin_button_picture.cpp gui/spin_button_picture.h \
-        gui/tabs.cpp gui/tabs.h \
-        gui/talk_box.cpp gui/talk_box.h \
+	gui/tabs.cpp gui/tabs.h \
+	gui/talk_box.cpp gui/talk_box.h \
         gui/text_box.cpp gui/text_box.h \
         gui/widget.cpp gui/widget.h \
         gui/widget_list.cpp gui/widget_list.h \
@@ -72,6 +72,7 @@ wormux_SOURCES = \
         include/base.h \
         include/binreloc.h include/binreloc.c \
         include/constant.cpp include/constant.h \
+        include/singleton.cpp include/singleton.h \
         interface/cursor.cpp interface/cursor.h \
         interface/game_msg.cpp interface/game_msg.h \
         interface/interface.cpp interface/interface.h \
@@ -86,9 +87,9 @@ wormux_SOURCES = \
         map/ground.cpp map/ground.h \
         map/map.cpp map/map.h \
         map/maps_list.cpp map/maps_list.h \
-	map/physic_tile.cpp map/physic_tile.h \
         map/random_map.cpp map/random_map.h \
         map/sky.cpp map/sky.h \
+        map/tile.cpp map/tile.h \
         map/tileitem.cpp map/tileitem.h \
         map/water.cpp map/water.h \
         map/wind.cpp map/wind.h \
@@ -111,6 +112,7 @@ wormux_SOURCES = \
         network/admin_commands.cpp network/admin_commands.h \
         network/chat.cpp network/chat.h \
         network/chatlogger.cpp network/chatlogger.h \
+        network/distant_cpu.cpp network/distant_cpu.h \
         network/download.cpp network/download.h \
         network/index_server.cpp network/index_server.h \
         network/index_svr_msg.h \
@@ -126,7 +128,10 @@ wormux_SOURCES = \
         object/bonus_box.cpp object/bonus_box.h \
         object/medkit.cpp  object/medkit.h \
         object/objbox.cpp object/objbox.h \
+        object/object_cfg.cpp object/object_cfg.h \
         object/objects_list.cpp object/objects_list.h \
+        object/physical_obj.cpp object/physical_obj.h \
+        object/physics.cpp object/physics.h \
         particles/body_member.cpp particles/body_member.h \
         particles/bullet.cpp particles/bullet.h \
         particles/dark_smoke.cpp particles/dark_smoke.h \
@@ -142,32 +147,33 @@ wormux_SOURCES = \
         particles/star.cpp particles/star.h \
         particles/teleport_member.cpp particles/teleport_member.h \
         particles/water_drop.cpp particles/water_drop.h \
-        physic/force.cpp physic/force.h \
-        physic/object_cfg.cpp physic/object_cfg.h \
-	physic/physical_engine.cpp physic/physical_engine.h \
-        physic/physical_obj.cpp physic/physical_obj.h \
-        physic/physical_shape.cpp physic/physical_shape.h \
         sound/jukebox.cpp sound/jukebox.h \
         sound/sound_sample.cpp sound/sound_sample.h \
         sound/sample_cache.cpp sound/sample_cache.h \
         team/custom_team.cpp team/custom_team.h \
         team/custom_teams_list.cpp team/custom_teams_list.h \
-	team/macro.h \
+		team/macro.h \
         team/results.cpp team/results.h \
+        team/team_config.h \
         team/team.cpp team/team.h \
         team/team_energy.cpp team/team_energy.h \
         team/teams_list.cpp team/teams_list.h \
         tool/affine_transform.cpp tool/affine_transform.h \
         tool/copynpaste.cpp tool/copynpaste.h \
-        tool/debug_physics.cpp tool/debug_physics.h \
+        tool/debug.cpp tool/debug.h \
+        tool/error.cpp tool/error.h \
+        tool/euler_vector.cpp tool/euler_vector.h \
         tool/file_tools.cpp tool/file_tools.h \
+        tool/i18n.cpp tool/i18n.h \
         tool/isnan.h \
         tool/math_tools.h \
         tool/random.cpp tool/random.h \
+        tool/rectangle.h tool/point.h \
         tool/resource_manager.cpp tool/resource_manager.h \
         tool/stats.cpp tool/stats.h \
         tool/string_tools.cpp tool/string_tools.h \
         tool/text_handling.cpp tool/text_handling.h \
+        tool/vector2.h \
         tool/xml_document.cpp tool/xml_document.h \
         weapon/air_attack.cpp weapon/air_attack.h \
         weapon/airhammer.cpp weapon/airhammer.h \
@@ -216,11 +222,10 @@ if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
 endif
 
-AM_CXXFLAGS += -DINSTALL_DATADIR=\"@DATADIR@\"      \
+AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/box2d/include/ -I$(top_srcdir)/lib/box2d/src/ \
-  -I$(top_srcdir)/lib/wormux/include
+  @LIBCURL_CPPFLAGS@
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -228,15 +233,10 @@ wormux_SOURCES += wormux.rc wormux.ico
 	@WINDRES@ -o $@ -i $<
 endif
 
-if !INCLUDEDINTL
 LIBS+=@LIBINTL@
-endif
 
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread
 else
 LIBS += @LIBCURL@
 endif
-
-wormux_LDADD=$(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a
-wormux_DEPENDENCIES=$(top_srcdir)/lib/box2d/src/libbox2d.a $(top_srcdir)/lib/wormux/libwormux.a

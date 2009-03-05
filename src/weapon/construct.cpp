@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 #ifdef DEBUG
@@ -132,7 +132,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
   // Check collision with characters and other physical objects
   FOR_ALL_CHARACTERS(team, c) {
-    if (((*c)->GetTestRect()).Intersect(rect))
+    if ((c->GetTestRect()).Intersect(rect))
       return;
   }
 

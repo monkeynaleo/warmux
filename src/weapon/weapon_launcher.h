@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define WEAPON_LAUNCHER_H
 
 #include "weapon.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 
 class Sprite;
 class WeaponLauncher;
@@ -68,7 +68,7 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
@@ -96,7 +96,7 @@ class WeaponBullet : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before);
     void DoExplosion();
 };
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,8 +27,8 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_point.h>
-
+#include "tool/point.h"
+#include "tool/i18n.h"
 #include "tool/xml_document.h"
 
 class SyringeConfig : public WeaponConfig
@@ -94,13 +94,13 @@ bool Syringe::p_Shoot (){
                          static_cast<int>(radius * sin(angle)) );
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetDiseaseDamage(cfg().damage, cfg().turns);
+        character->SetDiseaseDamage(cfg().damage, cfg().turns);
         end = true;
       }
     }

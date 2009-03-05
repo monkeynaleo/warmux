@@ -21,9 +21,9 @@
 
   <character>
     <energy initial="100" maximum="200" />
-    <jump strength="600" angle="-60" />
-    <super_jump strength="775" angle="-80" />
-    <back_jump strength="675" angle="-100" />
+    <jump strength="8" angle="-60" />
+    <super_jump strength="11" angle="-80" />
+    <back_jump strength="9" angle="-100" />
     <death_explosion>
       <damage>10</damage>
       <explosion_range>50</explosion_range>
@@ -188,7 +188,7 @@
       <min_angle>-45</min_angle>
       <max_angle>45</max_angle>
       <unit_per_ammo>20</unit_per_ammo>
-      <range>2</range>
+      <range>10</range>
     </blowtorch>
 
     <bounce_ball>
@@ -305,7 +305,7 @@
     </grapple>
 
     <grenade>
-      <max_strength>105</max_strength>
+      <max_strength>55</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <min_angle>-89</min_angle>
@@ -327,7 +327,7 @@
       <explosion_range>5</explosion_range>
       <particle_range>5</particle_range>
       <blast_range>2</blast_range>
-      <blast_force>15</blast_force>
+      <blast_force>5</blast_force>
     </gun>
 
     <jetpack>
@@ -368,7 +368,7 @@
       <nb_ammo>2</nb_ammo>
       <change_weapon>1</change_weapon>
       <wind_factor>400.0</wind_factor>
-      <air_resist_factor>1.0</air_resist_factor>
+      <air_resist_factor>40.0</air_resist_factor>
       <force_side_displacement>2000.0</force_side_displacement>
     </parachute>
 

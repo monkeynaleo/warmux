@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "character/move.h"
+//#include <math.h>
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"
@@ -27,7 +28,7 @@
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;
@@ -43,18 +44,18 @@ const uint PAUSE_CHG_DIRECTION=80; // ms
 bool ComputeHeightMovement(Character &character, int &height,
                            bool falling)
 {
-  if (character.IsInVacuum( Point2i(character.GetDirection(), 0))
-      && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ) {
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
+  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ){
     //Land is flat, we can move!
     height = 0;
     return true;
   }
 
   //Compute height of the step:
-  if (character.IsInVacuum( Point2i(character.GetDirection(), 0)) ) {
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) ){
     //Try to go down:
-    for (height = 2; height <= MAX_FALLING_HEIGHT ; height++) {
-      if (!character.IsInVacuum(Point2i(character.GetDirection(), height))) {
+    for(height = 2; height <= MAX_FALLING_HEIGHT ; height++){
+      if( !character.IsInVacuum(Point2i(character.GetDirection(), height))) {
         height--;
         return true;
       }
@@ -66,14 +67,12 @@ bool ComputeHeightMovement(Character &character, int &height,
       character.SetMovement("fall");
     }
     return false;
-
-  } else{
+  }
+  else{
     //Try to go up:
-    for (height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--) {
-      if (character.IsInVacuum( Point2i(character.GetDirection(), height))) {
+    for(height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--)
+      if( character.IsInVacuum( Point2i(character.GetDirection(), height) ) )
         return true;
-      }
-    }
   }
   //We can't move!
   return false;
@@ -82,7 +81,7 @@ bool ComputeHeightMovement(Character &character, int &height,
 // Moves a character to the right/left depending the signess of direction
 void MoveCharacter(Character &character, bool slowly)
 {
- // int height;
+  int height;
   bool ghost;
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
 
@@ -102,30 +101,8 @@ void MoveCharacter(Character &character, bool slowly)
     return;
   }
 
-
-  if(character.GetDirection() == DIRECTION_LEFT){
-    /*
-      if(character.GetSpeedXY().x>-2){
-
-
-      character.AddSpeedXY(Point2d(0,-1));
-
-      }
-      character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));*/
-
-    character.Impulse(10,0);
-  }else{
-    character.Impulse(100,90);
-    /*if(character.GetSpeedXY().x<2){
-      character.AddSpeedXY(Point2d(0,-1));
-
-      }
-      character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
-    */
-  }
-
   // Compute fall height
-  /*if (!ComputeHeightMovement (character, height, true)) return;
+  if (!ComputeHeightMovement (character, height, true)) return;
 
   // Check we can move (to go not too fast)
   while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
@@ -139,13 +116,13 @@ void MoveCharacter(Character &character, bool slowly)
 
     // If no collision, let gravity do its job
     character.UpdatePosition();
-  }*/
+  }
 }
 
 // Move the active character to the left
 void MoveActiveCharacterLeft(bool shift){
   // character is ready to move ?
-    //if (!ActiveCharacter().CanMoveRL()) return;
+  if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
   if (move) {
@@ -164,7 +141,7 @@ void MoveActiveCharacterLeft(bool shift){
 void MoveActiveCharacterRight(bool shift)
 {
   // character is ready to move ?
- // if (!ActiveCharacter().CanMoveRL()) return;
+  if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
   if (move) {

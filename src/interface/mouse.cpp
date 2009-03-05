@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@
 #include "map/map.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_point.h>
+#include "tool/point.h"
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 #include "game/time.h"
@@ -108,9 +108,9 @@ void Mouse::ActionLeftClic(bool) const
                          end = ActiveTeam().end();
 
     for( ; it != end; ++it) {
-      if( (*it) != &ActiveCharacter()
-        && !(*it) -> IsDead()
-        && (*it)->GetRect().Contains( pos_monde ) ){
+      if( &(*it) != &ActiveCharacter()
+        && !it -> IsDead()
+        && it->GetRect().Contains( pos_monde ) ){
 
         character_found = true;
         break;
@@ -118,13 +118,13 @@ void Mouse::ActionLeftClic(bool) const
     }
 
     if (character_found) {
-      Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-      Character::StoreActiveCharacter(next_character);
+      Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
+      next_character->StoreActiveCharacter();
 
-      while ( (*it) != &ActiveCharacter() )
+      while ( &(*it) != &ActiveCharacter() )
         ActiveTeam().NextCharacter ();
 
-      Character::StoreActiveCharacter(next_character);
+      next_character->StoreActiveCharacter();
       ActionHandler::GetInstance()->NewAction(next_character);
 
       return;
@@ -210,9 +210,9 @@ void Mouse::GetDesignatedCharacter() const
   // Which character is pointed by the mouse ? (appart from the active one)
   Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(team, character){
-    if (((*character) != &ActiveCharacter())
-       && (*character)->GetRect().Contains(pos_monde) ){
-      Interface::GetInstance()->character_under_cursor = (*character);
+    if ((&(*character) != &ActiveCharacter())
+       && character->GetRect().Contains(pos_monde) ){
+      Interface::GetInstance()->character_under_cursor = &(*character);
     }
   }
 

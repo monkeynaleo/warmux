@@ -1,7 +1,7 @@
 
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   SetGravityFactor(RandomLocal().GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
-  SetBasicShape(Point2i(1, 1), GetInitialMass());
+  SetSize( Point2i(1, 1) );
   StartMoving();
 }
 

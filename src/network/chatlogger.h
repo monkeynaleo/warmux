@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 
 class ChatLogger: public Singleton<ChatLogger>
 {

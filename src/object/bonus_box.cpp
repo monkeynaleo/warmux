@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,20 +29,24 @@
 #include "interface/game_msg.h"
 #include "team/macro.h"
 #include "team/team.h"
-
+#include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 #include "network/randomsync.h"
 
-BonusBox::BonusBox() : ObjBox("bonus_box")
+BonusBox::BonusBox():
+  ObjBox("bonus_box")
 {
+  SetTestRect (29, 29, 63, 6);
+
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/bonus_box");
   GetResourceManager().UnLoadXMLProfile(res);
   weapon_num = 0;
 
+  SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
 }

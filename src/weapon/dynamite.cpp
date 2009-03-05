@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,9 +29,9 @@
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "team/teams_list.h"
-
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 
 class DynamiteStick : public WeaponProjectile
 {
@@ -57,6 +57,8 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
 
   image->animation.SetLoopMode(false);
+  SetSize(image->GetSize());
+  SetTestRect (0, 0, 2, 3);
 }
 
 void DynamiteStick::Shoot(double strength)
@@ -127,7 +129,7 @@ bool Dynamite::p_Shoot ()
 {
   projectile->Shoot(0);
   // add the character speed
-  if (ActiveCharacter().GetDirection() == 1)
+  if(ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(3.0, -M_PI_4);
   else
     projectile->SetSpeed(3.0, -3.0 * M_PI_4);
@@ -140,8 +142,8 @@ bool Dynamite::p_Shoot ()
 std::string Dynamite::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
-                         "%s team has won %u dynamite!",
-                         "%s team has won %u dynamites!",
-                         items_count), TeamName, items_count);
+            "%s team has won %u dynamite!",
+            "%s team has won %u dynamites!",
+            items_count), TeamName, items_count);
 }
 

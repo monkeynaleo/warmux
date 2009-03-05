@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "character/body.h"
 
 class Text;
@@ -34,7 +34,7 @@ class Team;
 class ParticleEngine;
 class DamageStatistics;
 class Body;
-class PhysicalShape;
+
 #ifdef DEBUG
 //#define DEBUG_SKIN
 #endif
@@ -54,12 +54,12 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
-  uint m_nbr_foot_contact;
+
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
-  uint m_force_walk_index;
+
   // survived games
   int survivals;
 
@@ -73,7 +73,6 @@ private:
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
-
 
   // Channel used for sound
   int channel_step;
@@ -143,14 +142,8 @@ public:
   }
 
   // Used to sync value across network
-  // ================================================
   virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
-
-  static void RetrieveCharacterFromAction(Action *);
-  static void StoreActiveCharacter(Action *);
-  static void StoreCharacter(Action *, uint team_no, uint char_no);
-  // ================================================
 
   void Draw();
   void Refresh();
@@ -176,20 +169,7 @@ public:
 
   // Can we move (check a timeout)
   bool CanMoveRL() const;
-  bool CanJump() const;
-  bool FootsInVacuum() const;
-
-  virtual void AddContact(const PhysicalShape * shape);
-  virtual void RemoveContact(const PhysicalShape * shape);
-
-
-
-  void Move (bool slowly);
-  void StopMove();
-
-  // Move the active character to the left/right
-  void MoveRight(bool shift);
-  void MoveLeft(bool shift);
+  bool CanJump() const { return CanMoveRL(); };
 
   // Jumps
   void Jump(double strength, double angle);
@@ -234,11 +214,11 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
-  void HandleKeyRefreshed_MoveRight(bool shift) ;
+  void HandleKeyRefreshed_MoveRight(bool shift) const;
   void HandleKeyReleased_MoveRight(bool shift);
 
   void HandleKeyPressed_MoveLeft(bool shift);
-  void HandleKeyRefreshed_MoveLeft(bool shift) ;
+  void HandleKeyRefreshed_MoveLeft(bool shift) const;
   void HandleKeyReleased_MoveLeft(bool shift);
 
   void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };

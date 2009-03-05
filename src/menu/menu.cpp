@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -77,7 +77,6 @@ Menu::Menu(const std::string& bg, t_action _actions) :
 
 Menu::~Menu()
 {
-  AppWormux::GetInstance()->SetCurrentMenu(NULL);
   delete background;
 }
 

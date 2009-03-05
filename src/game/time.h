@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 #include <string>
 #include "include/base.h"
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 
 // XXX uint wrap-around (or at least system timer) not handled
 class Time : public Singleton<Time>

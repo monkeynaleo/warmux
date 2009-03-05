@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,9 +28,9 @@
 #include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "include/action_handler.h"
-#include "network/network.h"
 #include "team/teams_list.h"
 #include "team/team.h"
+#include "tool/i18n.h"
 #include "tool/string_tools.h"
 
 NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) :
@@ -246,10 +246,8 @@ void NetworkTeamsSelectionBox::RemoveLocalTeam(uint i)
 {
   ASSERT(teams_selections.at(i)->GetTeam() != NULL);
 
-  Action* a = new Action(Action::ACTION_GAME_DEL_TEAM);
-  a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
-  a->Push(teams_selections.at(i)->GetTeam()->GetId());
-  ActionHandler::GetInstance()->NewAction(a);
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM,
+						     teams_selections.at(i)->GetTeam()->GetId()));
   ActionHandler::GetInstance()->ExecActions();
 }
 
@@ -262,9 +260,7 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team)
     teams_selections.at(i)->SetTeam(team, false);
 
   } else {
-    Action* a = new Action(Action::ACTION_GAME_ADD_TEAM);
-    a->Push(int(Network::GetInstance()->GetPlayer().GetId()));
-    a->Push(team.GetId());
+    Action* a = new Action(Action::ACTION_MENU_ADD_TEAM, team.GetId());
     a->Push(team.GetPlayerName());
     a->Push(int(team.GetNbCharacters()));
     ActionHandler::GetInstance()->NewAction(a);

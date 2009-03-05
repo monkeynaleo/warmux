@@ -1,4 +1,4 @@
-SUBDIRS = data lib/box2d/ lib/wormux/ src po doc
+SUBDIRS = data src po doc
 
 EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
@@ -18,11 +18,11 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/howto_play/pl.pdf                 \
              doc/howto_play/sk.pdf                 \
              doc/howto_play/sv.pdf                 \
-             mac/Info.plist.in                     \
-             mac/PkgInfo.in                        \
-             mac/README-mac.txt                    \
-             mac/README-mac.txt                    \
-             mac/cmake_build.sh                    \
+	     mac/Info.plist.in			   \
+	     mac/PkgInfo.in			   \
+	     mac/README-mac.txt			   \
+	     mac/README-mac.txt			   \
+	     mac/cmake_build.sh                    \
              visual/wormux.vcproj                  \
              src/msvc/config.h                     \
              src/msvc/getopt.c                     \
@@ -30,19 +30,17 @@ EXTRA_DIST = data/wormux.desktop                   \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
-             tools/win32_setup/Greek.nsh           \
-             tools/win32_setup/Polish.nsh          \
              tools/win32_setup/langmacros.nsh      \
              tools/win32_setup/install.ico         \
              tools/win32_setup/uninstall.ico
 
 if WIN32
-setup: all
-	@echo "Building Win32 .exe installer in build/win32_setup"
-	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
+install: all
+	@echo "Building Win32 .exe installer in tools/win32_setup"
+	@(cd tools/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
-          echo "Check build/win32_setup/installer.log for details"; \
+          echo "Check tools/win32_setup/installer.log for details"; \
           exit 1)
 endif
 

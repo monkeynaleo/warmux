@@ -133,7 +133,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
   // Search best/worst performers
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    top->rankPlayer((*(player)));
+    top->rankPlayer(&(*(player)));
   }
 
   return new TeamResults(team, top);
@@ -145,7 +145,7 @@ TeamResults* TeamResults::createGlobalResults()
 
   FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, player)
   {
-    top->rankPlayer((*(player)));
+    top->rankPlayer(&(*(player)));
   }
 
   // We'll do as if NULL is for all teams

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,21 +19,21 @@
  * Team handling
  *****************************************************************************/
 
-#include <algorithm>
-#include <iostream>
+#include "team/team.h"
+#include "team/team_config.h"
+#include "team/teams_list.h"
+//-----------------------------------------------------------------------------
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
 #include "game/config.h"
-#include "game/game_mode.h"
 #include "network/network.h"
-#include "network/randomsync.h"
 #include "tool/file_tools.h"
-#include "team/team.h"
-#include <WORMUX_team_config.h>
+#include "tool/i18n.h"
 #include "team/team_energy.h"
-#include "team/teams_list.h"
-
+#include <algorithm>
+#include <iostream>
+#include "network/randomsync.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -74,19 +74,9 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  SetActive (next->GetId());
-
-  if (GameMode::GetInstance()->auto_change_character) {
-    ActiveTeam().NextCharacter();
-  }
-
+  GetTeamsList().SetActive (next->GetId());
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
-  Character::StoreActiveCharacter(&a);
-  Network::GetInstance()->SendActionToAll(a);
-
-  printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
-  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+  Network::GetInstance()->SendAction(a);
 }
 
 //-----------------------------------------------------------------------------
@@ -612,6 +602,25 @@ void TeamsList::SetActive(const std::string &id)
     }
   }
   Error (Format(_("Can't find team %s!"), id.c_str()));
+}
+
+//-----------------------------------------------------------------------------
+
+std::string TeamsList::GetLocalHeadCommanders() const
+{
+  std::string nickname;
+
+  for (std::vector<Team*>::iterator it = GetTeamsList().playing_list.begin();
+       it != GetTeamsList().playing_list.end();
+       it++) {
+    if ((*it)->IsLocal()) {
+      if (nickname != "") nickname += "+";
+
+      nickname += (*it)->GetPlayerName();
+    }
+  }
+
+  return nickname;
 }
 
 //-----------------------------------------------------------------------------

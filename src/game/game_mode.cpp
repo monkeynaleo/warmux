@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@
  * value here. They should all be modifiable using the xml config file
  *****************************************************************************/
 
+#include "game/game_mode.h"
 #include <iostream>
-
 #include "game/config.h"
 #include "game/game.h"
-#include "game/game_mode.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"
 #include "tool/file_tools.h"
+#include "tool/i18n.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
@@ -54,7 +54,7 @@ GameMode::GameMode():
   character.init_energy = 100; /* overwritten when reading XML */
   character.max_energy = 100; /* overwritten when reading XML */
   character.mass = 100;
-  character.air_resist_factor = 0.0;
+  character.air_resist_factor = 1.0;
   character.jump_strength = 8;
   character.jump_angle = -60;
   character.super_jump_strength = 11;
@@ -116,7 +116,6 @@ bool GameMode::LoadXml(const xmlNode* xml)
     }
     XmlReader::ReadUint(character_xml, "mass", character.mass);
     XmlReader::ReadDouble(character_xml, "air_resist_factor", character.air_resist_factor);
-
     item = XmlReader::GetMarker(character_xml, "jump");
     if (item != NULL) {
       int angle_deg;
@@ -132,7 +131,6 @@ bool GameMode::LoadXml(const xmlNode* xml)
       XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.super_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
-
     item = XmlReader::GetMarker(character_xml, "back_jump");
     if (item != NULL) {
       int angle_deg;
@@ -140,7 +138,6 @@ bool GameMode::LoadXml(const xmlNode* xml)
       XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.back_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
-
     XmlReader::ReadUint(character_xml, "walking_pause", character.walking_pause);
     const xmlNode* explosion = XmlReader::GetMarker(character_xml, "death_explosion");
     if (explosion != NULL)

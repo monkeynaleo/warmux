@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include "include/base.h"
 #include "network/network.h"
 #include "network/socket.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 
 Socket::Socket()
 {
@@ -46,11 +46,11 @@ connection_state_t Socket::Connect(std::string host, int port)
 {
   ASSERT(!connected);
 
-  //WNet::Init();
+  //Network::GetInstance()->Init();
 
   MSG_DEBUG("socket", "Client connect to %s:%s", host.c_str(), port);
 
-  connection_state_t r = WNet::CheckHost(host, port);
+  connection_state_t r = Network::GetInstance()->CheckHost(host, port);
   if (r != CONNECTED)
     return r;
 
@@ -150,7 +150,7 @@ connection_state_t Socket::Receive()
         }
 
         int r = SDLNet_TCP_Recv(*sock, buf + buf_size, to_receive);
-
+        
         if(r <= 0)
         {
           free(buf);

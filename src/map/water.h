@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ private:
   int height_mvt;
   double shift1;
   uint water_height;
-  uint temps_montee;
+  uint time_raise;
   int height[pattern_width];
   Surface surface;
   Surface pattern;

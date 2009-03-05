@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,14 +23,14 @@
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_socket.h>
+#include <SDL_net.h>
 #include <map>
 #include <list>
 #include <string>
 #include <utility>
 #include "network/network.h"
 #include "network/index_svr_msg.h"
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 
 class GameServerInfo
 {
@@ -52,7 +52,9 @@ class IndexServer : public Singleton<IndexServer>
   /*********************************************/
 
   // Connection to the server
-  WSocket socket;
+  TCPsocket socket;
+  IPaddress ip;
+  SDLNet_SocketSet sock_set;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
   uint    used;
 
@@ -66,11 +68,15 @@ class IndexServer : public Singleton<IndexServer>
   // If we are a server, tell if we are visible on internet
   bool hidden_server;
 
+  bool connected;
+
   // Transfer functions
   void NewMsg(IndexServerMsg msg_id);
   void Batch(const int &nbr);
   void Batch(const std::string &str);
   bool SendMsg();
+  int ReceiveInt();
+  std::string ReceiveStr(size_t maxlen);
 
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
@@ -79,9 +85,6 @@ class IndexServer : public Singleton<IndexServer>
 
   // Perform a handshake with the server
   connection_state_t HandShake();
-
-  bool IsConnected();
-
 public:
   IndexServer();
   ~IndexServer();
@@ -100,7 +103,7 @@ public:
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
-  bool SendServerStatus(const std::string& game_name, bool passwd, int port);
+  bool SendServerStatus(const std::string& game_name, bool passwd);
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();

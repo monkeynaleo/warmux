@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,21 +22,16 @@
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "object/barrel.h"
-#include "physic/physical_engine.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/camera.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_rectangle.h>
+#include "tool/debug.h"
+#include "tool/rectangle.h"
 #include "game/time.h"
 #include "weapon/mine.h"
 #include <vector>
 #include <iostream>
-
-#ifdef DEBUG
-#include "graphic/colors.h"
-#endif
 
 ObjectsList::ObjectsList()
 {}
@@ -55,7 +50,7 @@ void ObjectsList::PlaceMines()
 
     if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
       // detection range is in meter
-      AddObject(obj);
+      push_back(obj);
     else
       delete obj;
   }
@@ -69,26 +64,12 @@ void ObjectsList::PlaceBarrels()
     PetrolBarrel *obj = new PetrolBarrel();
 
     if (obj->PutRandomly(false, 20.0))
-      AddObject(obj);
+      push_back(obj);
     else
       delete obj;
   }
 }
 
-//-----------------------------------------------------------------------------
-void ObjectsList::AddObject(PhysicalObj * obj)
-{
-  push_back(obj);
-  obj->Activate();
-}
-
-//-----------------------------------------------------------------------------
-void ObjectsList::RemoveObject(PhysicalObj * obj)
-{
-  obj->Desactivate();
-  remove(obj);
-  RemoveOverlappedObjectReference(obj);
-};
 
 //-----------------------------------------------------------------------------
 void ObjectsList::Refresh()
@@ -120,14 +101,8 @@ void ObjectsList::Draw()
   {
     ASSERT((*it) != NULL);
 
-    if (!(*it)->IsGhost()) {
+    if (!(*it)->IsGhost())
       (*it)->Draw();
-#ifdef DEBUG
-      if (IsLOGGING("polygon.object")) {
-	(*it)->DrawPolygon(primary_red_color);
-      }
-#endif
-    }
   }
 }
 
@@ -167,7 +142,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
     if((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
                 obj->GetName().c_str(), (*it)->GetName().c_str());
-      (*it)->ClearOverlappingObject();
+      (*it)->SetOverlappingObject(NULL);
       it = overlapped_objects.erase(it);
     }
   }

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,14 +20,15 @@
  *****************************************************************************/
 
 #include <iostream>
-#include <WORMUX_error.h>
-#include "ai/ai_movement_module.h"
 #include "include/action_handler.h"
 #include "character/character.h"
 #include "character/move.h"
 #include "map/map.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
+#include "tool/error.h"
+
+#include "ai/ai_movement_module.h"
 
 // TODO:
 // - Be sure to not go out of the map

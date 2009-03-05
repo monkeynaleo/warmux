@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@
 #include "graphic/surface.h"
 #include "gui/box.h"
 #include "include/base.h"
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 // Forward declarations
 class Button;
@@ -63,7 +63,6 @@ class MapSelectionBox : public VBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
-  void AllowSelection();
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);

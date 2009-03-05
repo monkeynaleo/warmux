@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,27 +33,28 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
+#include "tool/i18n.h"
 #include "tool/math_tools.h"
 //-----------------------------------------------------------------------------
 
 class Anvil : public WeaponProjectile
 {
   private:
+    uint merge_time;
     SoundSample falling_sound;
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
     ~Anvil();
+    void Refresh();
 
     void PlayFallSound();
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -63,9 +64,9 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
   explode_with_collision = false;
-  explode_with_timeout = false;
   explode_colliding_character = false;
-  // SetTestRect(0, 0, 0, 0);
+  merge_time = 0;
+  SetTestRect(0, 0, 0, 0);
 }
 
 Anvil::~Anvil()
@@ -73,20 +74,32 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /* speed_before */)
+void Anvil::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* speed_before */)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   obj->SetEnergyDelta(-200);
   PlayCollisionSound();
 }
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();
 }
 
 void Anvil::SignalOutOfMap()
 {
   falling_sound.Stop();
+}
+
+void Anvil::Refresh()
+{
+  if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
+    GetWorld().MergeSprite(GetPosition(), image);
+    Ghost();
+  } else {
+    WeaponProjectile::Refresh();
+  }
 }
 
 void Anvil::PlayFallSound()

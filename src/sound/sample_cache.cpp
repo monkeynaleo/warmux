@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <assert.h>
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
 #include "sample_cache.h"
 
 SampleCache::SampleCache( size_t memory_limit )

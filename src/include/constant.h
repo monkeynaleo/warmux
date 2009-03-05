@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@
 #include "base.h"
 #include <string>
 #include <vector>
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
+#include "include/singleton.h"
+#include "tool/point.h"
 
 class Constants : public Singleton<Constants>
 {

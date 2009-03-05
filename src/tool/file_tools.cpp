@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,9 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
+#ifndef _MSC_VER
+# include <unistd.h>
+#endif
 
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
@@ -36,7 +39,7 @@
 #  include <unistd.h> // not needed by mingw
 #endif
 
-
+#include "tool/i18n.h"
 
 // Test if a file exists
 bool DoesFileExist(const std::string &name)

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
  *  Starting file. (the 'main' function is here.)
  *****************************************************************************/
 
+#include "include/app.h"
 #include <algorithm>
 #include <exception>
 #include <sstream>
@@ -29,6 +30,8 @@
 #ifndef WIN32
 #include <signal.h>
 #endif
+using namespace std;
+
 #include <SDL.h>
 #include "game/config.h"
 #include "game/game.h"
@@ -38,10 +41,8 @@
 #include "graphic/text.h"
 #include "graphic/video.h"
 #include "include/action_handler.h"
-#include "include/app.h"
-#include "include/base.h"
 #include "include/constant.h"
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 #include "map/map.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
@@ -53,7 +54,8 @@
 #include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
-#include <WORMUX_debug.h>
+#include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/random.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
@@ -78,7 +80,7 @@ AppWormux::AppWormux():
 {
   JukeBox::GetInstance()->Init();
   RandomLocal().InitRandom();
-  std::cout << "[ " << _("Run game") << " ]" << std::endl;
+  cout << "[ " << _("Run game") << " ]" << endl;
 }
 
 AppWormux::~AppWormux()
@@ -100,15 +102,13 @@ int AppWormux::Main(void)
 
     OptionMenu::CheckUpdates();
 
-    Action_Handler_Init();
-
     do
     {
 
       if (choice == MainMenu::NONE)
       {
         MainMenu main_menu;
-        SetCurrentMenu(&main_menu);
+        menu = &main_menu;
         choice = main_menu.Run();
       }
 
@@ -119,35 +119,35 @@ int AppWormux::Main(void)
         case MainMenu::PLAY:
         {
           GameMenu game_menu;
-          SetCurrentMenu(&game_menu);
+          menu = &game_menu;
           game_menu.Run(skip_menu);
           break;
         }
         case MainMenu::NETWORK:
         {
           NetworkConnectionMenu network_connection_menu(net_action);
-          SetCurrentMenu(&network_connection_menu);
+          menu = &network_connection_menu;
           network_connection_menu.Run(skip_menu);
           break;
         }
         case MainMenu::HELP:
         {
           HelpMenu help_menu;
-          SetCurrentMenu(&help_menu);
+          menu = &help_menu;
           help_menu.Run();
           break;
         }
         case MainMenu::OPTIONS:
         {
           OptionMenu options_menu;
-          SetCurrentMenu(&options_menu);
+          menu = &options_menu;
           options_menu.Run();
           break;
         }
         case MainMenu::CREDITS:
         {
           CreditsMenu credits_menu;
-          SetCurrentMenu(&credits_menu);
+          menu = &credits_menu;
           credits_menu.Run();
           break;
         }
@@ -157,14 +157,14 @@ int AppWormux::Main(void)
         case MainMenu::SKIN_VIEWER:
         {
           SkinMenu skin_menu(skin);
-          SetCurrentMenu(&skin_menu);
+          menu = &skin_menu;
           skin_menu.Run();
           break;
         }
         default:
           break;
       }
-      SetCurrentMenu(NULL);
+      menu = NULL;
       choice = MainMenu::NONE;
       skip_menu = false;
       net_action = NetworkConnectionMenu::NET_NOTHING;
@@ -173,18 +173,18 @@ int AppWormux::Main(void)
 
     End();
   }
-  catch(const std::exception & e)
+  catch(const exception & e)
   {
-    std::cerr << std::endl
-	 << "C++ exception caught:" << std::endl
-	 << e.what() << std::endl << std::endl;
+    cerr << endl
+	 << "C++ exception caught:" << endl
+	 << e.what() << endl << endl;
     AppWormux::DisplayError(e.what());
     WakeUpDebugger();
   }
   catch(...)
   {
-    std::cerr << std::endl
-      << "Unexpected exception caught..." << std::endl << std::endl;
+    cerr << endl
+      << "Unexpected exception caught..." << endl << endl;
     WakeUpDebugger();
   }
 
@@ -195,9 +195,9 @@ void AppWormux::DisplayLoadingPicture()
 {
   Config *config = Config::GetInstance();
 
-  std::string txt_version =
-    _("Version") + std::string(" ") + Constants::WORMUX_VERSION;
-  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
+  string txt_version =
+    _("Version") + string(" ") + Constants::WORMUX_VERSION;
+  string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
 
   Surface surfaceLoading(filename.c_str());
   Sprite loading_image(surfaceLoading, true);
@@ -227,19 +227,14 @@ void AppWormux::SetCurrentMenu(Menu* _menu)
   menu = _menu;
 }
 
-Menu* AppWormux::GetCurrentMenu() const
-{
-  return menu;
-}
-
 void AppWormux::RefreshDisplay()
 {
   if (Game::GetInstance()->IsGameLaunched()) {
     GetWorld().DrawSky(true);
     GetWorld().Draw(true);
   }
-  else if (GetCurrentMenu()) {
-    GetCurrentMenu()->RedrawMenu();
+  else if (menu) {
+    menu->RedrawMenu();
   }
 }
 
@@ -252,8 +247,8 @@ void AppWormux::DisplayError(const std::string &msg)
 
   if (Game::GetInstance()->IsGameLaunched()) {
     // nothing to do
-  } else if (singleton->GetCurrentMenu()) {
-    singleton->GetCurrentMenu()->DisplayError(msg);
+  } else if (singleton->menu) {
+      singleton->menu->DisplayError(msg);
   }
 }
 
@@ -262,14 +257,14 @@ void AppWormux::ReceiveMsgCallback(const std::string& msg)
   if (Game::GetInstance()->IsGameLaunched()) {
     //Add message to chat session in Game
     Game::GetInstance()->chatsession.NewMessage(msg);
-  } else if (GetCurrentMenu()) {
-    GetCurrentMenu()->ReceiveMsgCallback(msg);
+  } else if (menu) {
+    menu->ReceiveMsgCallback(msg);
   }
 }
 
 void AppWormux::End() const
 {
-  std::cout << std::endl << "[ " << _("Quit Wormux") << " ]" << std::endl;
+  cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
 
   /* FIXME calling Config->Save here sucks: it nothing was ever done, it loads
    * the whole stuff just before exiting... This should be moved, but where? */
@@ -280,37 +275,37 @@ void AppWormux::End() const
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
 #endif
-  std::cout << "o " << _("If you found a bug or have a feature request "
+  cout << "o " << _("If you found a bug or have a feature request "
                     "send us a email (in english, please):")
-    << " " << Constants::EMAIL << std::endl;
+    << " " << Constants::EMAIL << endl;
 }
 
 void DisplayWelcomeMessage()
 {
-  std::cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << std::endl;
-  std::cout << "=== " << _("Authors:") << ' ';
-  for (std::vector < std::string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
+  cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << endl;
+  cout << "=== " << _("Authors:") << ' ';
+  for (vector < string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
     {
       if (it != Constants::GetInstance()->AUTHORS.begin())
-        std::cout << ", ";
-      std::cout << *it;
+        cout << ", ";
+      cout << *it;
     }
-  std::cout << std::endl
-    << "=== " << _("Website: ") << Constants::WEB_SITE << std::endl
-    << std::endl;
+  cout << endl
+    << "=== " << _("Website: ") << Constants::WEB_SITE << endl
+    << endl;
 
   // print the disclaimer
-  std::cout << "Wormux version " << Constants::WORMUX_VERSION
-    << ", Copyright (C) 2001-2009 Wormux Team" << std::endl
-    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
-    << "This is free software and you are welcome to redistribute it" << std::endl
-    << "under certain conditions." << std::endl << std::endl
-    << "Read the file COPYING for details." << std::endl << std::endl;
+  cout << "Wormux version " << Constants::WORMUX_VERSION
+    << ", Copyright (C) 2001-2008 Wormux Team" << endl
+    << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
+    << "This is free software and you are welcome to redistribute it" << endl
+    << "under certain conditions." << endl << endl
+    << "Read the file COPYING for details." << endl << endl;
 
 #ifdef DEBUG
-  std::cout << "This program was compiled in DEBUG mode (development version)"
-       << std::endl << std::endl;
+  cout << "This program was compiled in DEBUG mode (development version)"
+       << endl << endl;
 #endif
 }
 

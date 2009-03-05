@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@
 #include "graphic/color.h"
 #include "graphic/font.h"
 #include "gui/container.h"
-#include <WORMUX_rectangle.h>
-#include <WORMUX_point.h>
+#include "tool/rectangle.h"
+#include "tool/point.h"
 
 class Surface;
 struct SDL_keysym;
@@ -36,7 +36,6 @@ struct SDL_keysym;
 
 class Widget : public Rectanglei, public Container
 {
-private:
   bool has_focus;
   bool visible;
   bool is_highlighted;

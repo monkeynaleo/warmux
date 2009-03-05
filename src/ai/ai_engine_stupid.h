@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #ifndef AI_STUPID_ENGINE
 #define AI_STUPID_ENGINE
 
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 #include "ai/ai_movement_module.h"
 #include "ai/ai_shoot_module.h"
 

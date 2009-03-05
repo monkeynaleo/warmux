@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@
 #include "include/app.h"
 #include "network/net_error_msg.h"
 #include "team/teams_list.h"
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
-#include "tool/string_tools.h"
 
 class GameInfoBox : public HBox
 {
@@ -330,7 +330,6 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
                                           bool internet)
 {
   bool r = false;
-  int net_port;
 
   if (!internet)
     IndexServer::GetInstance()->SetHiddenServer();
@@ -342,19 +341,13 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
     goto out;
   }
 
-  conn = Network::ServerStart(port, game_name, password);
+  conn = Network::GetInstance()->ServerStart(port, password);
   if (conn != CONNECTED) {
     DisplayNetError(conn);
     goto out;
   }
 
-  r = str2int(port, net_port);
-  if (false == r) {
-    DisplayNetError(CONN_BAD_PORT);
-    goto out;
-  }
-
-  r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", net_port);
+  r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "");
   if (false == r) {
     DisplayNetError(CONN_BAD_PORT);
     msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
@@ -404,9 +397,9 @@ bool NetworkConnectionMenu::signal_ok()
   if (id == "TAB_server") {
     // Hosting your own server
     r = HostingServer(srv_port_number->GetText(),
-		      srv_game_name->GetText(),
-		      srv_game_pwd->GetPassword(),
-		      srv_internet_server->GetValue());
+                        srv_game_name->GetText(),
+                        srv_game_pwd->GetPassword(),
+                        srv_internet_server->GetValue());
     if (!r)
       goto out;
 

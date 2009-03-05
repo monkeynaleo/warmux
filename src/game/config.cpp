@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,20 +34,20 @@
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
 
-
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/network.h"
-#include "physic/object_cfg.h"
+#include "object/object_cfg.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_team_config.h>
+#include "team/team_config.h"
 #include "tool/resource_manager.h"
 #include "tool/file_tools.h"
 #include "tool/string_tools.h"
+#include "tool/i18n.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 #ifdef USE_AUTOPACKAGE

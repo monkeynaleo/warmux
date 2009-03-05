@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@
 #include "team/team.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
+#include "tool/i18n.h"
 #include "weapon/weapon.h"
 #include "weapon/weapon_strength_bar.h"
 
@@ -328,7 +329,7 @@ void Interface::DrawMapPreview()
   Point2i        offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
   Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
-  if(minimap == NULL ||
+  if (minimap == NULL ||
       GetWorld().ground.GetLastPreviewRedrawTime()>m_last_minimap_redraw ||
       GetWorld().water.GetLastPreviewRedrawTime()>m_last_minimap_redraw){
 
@@ -376,11 +377,11 @@ void Interface::DrawMapPreview()
            end_character = (*(team))->end();
          character != end_character;
          ++character) {
-      if (!(*character) -> IsDead()) {
-        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character)->GetPosition()) + offset;
+      if (!character->IsDead()) {
+        Point2i     coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
 
         window.Blit(icon, coord - icon.GetSize()/2);
-        if ((*character)->IsActiveCharacter()) {
+        if (character->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
           radius = (radius/2) + 1;
           window.CircleColor(coord.x, coord.y, radius, c_white);

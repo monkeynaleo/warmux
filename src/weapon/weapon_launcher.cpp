@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,12 @@
  * WeaponLauncher: generic weapon to launch a projectile
  *****************************************************************************/
 
-#include <sstream>
-#include <WORMUX_debug.h>
+#include "weapon/weapon_launcher.h"
+#include "weapon/weapon_cfg.h"
 
+#include <sstream>
+
+#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
@@ -31,21 +34,19 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
-#include "physic/physical_engine.h"
-#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
+#include "tool/debug.h"
+#include "tool/i18n.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_launcher.h"
-#include "weapon/weapon_cfg.h"
-
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
+#include "graphic/video.h"
+#include "include/app.h"
 #endif
 
 WeaponBullet::WeaponBullet(const std::string &name,
@@ -73,18 +74,14 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
 {
-
 #if 1
   if (!obj->IsCharacter())
-  {
     Explosion();
-  }
   obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
   Ghost();
-
 #else
   // multiply by ten to get something more funny
   double bullet_mass = GetMass()/* * 10*/;
@@ -105,7 +102,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*sha
 void WeaponBullet::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(-GetAngle());
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void WeaponBullet::DoExplosion()
@@ -122,9 +119,8 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   : PhysicalObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
-  SetCollisionModel(true, true, true);
+  SetCollisionModel(false, true, true);
   launcher = p_launcher;
-  SetBullet(true);
 
   explode_colliding_character = false;
   explode_with_timeout = true;
@@ -132,9 +128,14 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   can_drown = true;
   camera_in_advance = true;
 
-  image = GetResourceManager().LoadSprite(weapons_res_profile, name);
+  image = GetResourceManager().LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
-  image->SetRotation_HotSpot(Point2i(0,0));
+  SetSize(image->GetSize());
+
+  // Set rectangle test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect(dx, dx, dy, dy);
 
   ResetTimeOut();
 
@@ -159,6 +160,11 @@ void WeaponProjectile::Shoot(double strength)
   // Set the physical factors
   ResetConstants();
 
+  // Set the initial position.
+  SetOverlappingObject(&ActiveCharacter(), 100);
+  ObjectsList::GetRef().AddObject(this);
+  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
+
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
 
@@ -182,22 +188,15 @@ void WeaponProjectile::Shoot(double strength)
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
-
-  SetOverlappingObject(&ActiveCharacter(), 100);
   SetXY(hand_position);
-  SetAngle(angle);
   SetSpeed(strength, angle);
-
-  ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
-
-  //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  //if (collision == NO_COLLISION) {
+  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
+  if (collision == NO_COLLISION) {
     // Set the initial position and speed.
-    //SetXY(hole_position);
-    //SetSpeed(strength, angle);
+    SetXY(hole_position);
+    SetSpeed(strength, angle);
     PutOutOfGround(angle);
- // }
+  }
 }
 
 void WeaponProjectile::ShootSound()
@@ -211,7 +210,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-
+  SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -243,19 +242,29 @@ void WeaponProjectile::Draw()
       ss.str(), white_color);
     }
   }
+
+#ifdef DEBUG
+  if (IsLOGGING("test_rectangle"))
+  {
+    Rectanglei test_rect(GetTestRect());
+    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
+
+    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
+    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
+  }
+#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
 {
-  if (explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
+  if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
     return false;
   return PhysicalObj::IsImmobile();
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,
-					     PhysicalShape * /*shape*/,
-					     const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
 {
   ASSERT(obj != NULL);
   MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",

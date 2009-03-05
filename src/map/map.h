@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #define MAP_H
 
 #include "include/base.h"
-#include <WORMUX_singleton.h>
+#include "include/singleton.h"
 #include "map/ground.h"
 #include "map/sky.h"
 #include "map/water.h"
@@ -120,6 +120,8 @@ public:
   // Dig a circle hole in the map
   void Dig(const Point2i& center, const uint radius);
 
+  // Insert a sprite into the ground
+  void PutSprite(const Point2i& pos, const Sprite* spr);
   // Merge a sprite into the ground
   void MergeSprite(const Point2i& pos, const Sprite* spr);
 

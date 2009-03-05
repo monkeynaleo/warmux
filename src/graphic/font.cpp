@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,13 +18,13 @@
  ******************************************************************************/
 
 #include <iostream>
-
-#include "include/app.h"
-#include "game/config.h"
 #include "graphic/font.h"
+#include "game/config.h"
 #include "graphic/video.h"
+#include "include/app.h"
 #include "map/map.h"
 #include "tool/file_tools.h"
+#include "tool/i18n.h"
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};

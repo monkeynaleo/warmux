@@ -22,8 +22,9 @@
 #include <string>
 #include "include/app.h"
 #include "network/admin_commands.h"
-#include <WORMUX_distant_cpu.h>
+#include "network/distant_cpu.h"
 #include "network/network.h"
+#include "tool/i18n.h"
 
 static void PrintHelp()
 {
@@ -31,59 +32,41 @@ static void PrintHelp()
   AppWormux::GetInstance()->ReceiveMsgCallback(msg);
   msg = "kick <nickname>: " + std::string(_("Kicks the players designated by <nickname> out of the game"));
   AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-  msg = "list: " + std::string(_("List the connected players"));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-}
-
-static void Kick(const std::string& nick)
-{
-  std::string msg;
-  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->GetRemoteHosts().begin();
-       cpu != Network::GetInstance()->GetRemoteHosts().end();
-       ++cpu) {
-
-    if ((*cpu)->GetNicknames() == nick) {
-      (*cpu)->ForceDisconnection();
-      msg = std::string(Format("%s kicked", nick.c_str()));
-      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-      return;
-    }
-  }
-
-  msg = std::string(Format("%s: no such nickame", nick.c_str()));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-}
-
-static void ListPlayers()
-{
-  if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
-    AppWormux::GetInstance()->ReceiveMsgCallback(_("No player connected"));
-    return;
-  }
-
-  AppWormux::GetInstance()->ReceiveMsgCallback(_("Connected players: "));
-
-  for (std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->GetRemoteHosts().begin();
-      cpu != Network::GetInstance()->GetRemoteHosts().end();
-      ++cpu) {
-    std::string msg = std::string(Format("%s (%s)", (*cpu)->GetNicknames().c_str(), (*cpu)->GetAddress().c_str()));
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
-  }
-
 }
 
 void ProcessCommand(const std::string & cmd)
 {
-  if (cmd == "/help") {
+  if(cmd == "/help")
+  {
     PrintHelp();
-  } else if (cmd.substr(0, 6) == "/kick ") {
-    std::string nick = cmd.substr(6, cmd.size() - 6);
-    Kick(nick);
-  } else if (cmd.substr(0, 5) == "/list") {
-    ListPlayers();
-  } else {
-    AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"));
-    PrintHelp();
+  }
+  else
+  {
+    std::string msg;
+    if(cmd.substr(0, 6) == "/kick ")
+    {
+      std::string nick = cmd.substr(6, cmd.size() - 6);
+      for(std::list<DistantComputer*>::iterator cpu = Network::GetInstance()->cpu.begin();
+          cpu != Network::GetInstance()->cpu.end();
+	  ++cpu)
+      {
+        if((*cpu)->GetNickname() == nick)
+        {
+          (*cpu)->force_disconnect = true;
+          msg = std::string(Format("%s kicked", nick.c_str()));
+          AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+	  return;
+        }
+        printf("Nick: %s\n", (*cpu)->GetNickname().c_str());
+      }
+      msg = std::string(Format("%s: no such nickame", nick.c_str()));
+      AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+    }
+    else
+    {
+      AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"));
+      PrintHelp();
+    }
   }
 }
 

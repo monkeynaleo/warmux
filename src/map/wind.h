@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@
 
 #include <list>
 #include "include/base.h"
-#include <WORMUX_singleton.h>
-#include "physic/physical_obj.h"
+#include "include/singleton.h"
+#include "object/physical_obj.h"
 
 // Forward declarations
 class Sprite;
@@ -60,6 +60,7 @@ private:
 
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
+  void RemoveAllParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
   Wind();
@@ -69,9 +70,8 @@ private:
 public:
   double GetStrength() const;
   void ChooseRandomVal() const;
-  void SetVal(long val);
 
-  void FreeMem();
+  void SetVal(long val);
   void Refresh();
   void Reset();
   void DrawParticles();

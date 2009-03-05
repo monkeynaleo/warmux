@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,10 +32,10 @@
 #include "network/randomsync.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
-const uint   SHOTGUN_BUCKSHOT_SPEED  = 60;
+const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
 const double SHOTGUN_RANDOM_ANGLE    = 0.04;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
@@ -67,9 +67,8 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 
 bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 {
-  if (GetName() == obj->GetName()) return true;
-
-  return (GetOverlappingObject() == obj);
+  if(GetName() == obj->GetName()) return true;
+  return m_overlapping_object == obj;
 }
 
 //-----------------------------------------------------------------------------

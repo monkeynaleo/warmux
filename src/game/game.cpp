@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
-
 #include "ai/ai_engine.h"
 #include "character/character.h"
 #include "game/config.h"
@@ -48,7 +47,6 @@
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "physic/physical_engine.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
@@ -58,6 +56,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/results.h"
+#include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/stats.h"
 
@@ -156,7 +155,6 @@ void Game::UnloadDatas(bool game_finished) const
   GetWorld().FreeMem();
   ActiveMap()->FreeData();
   ObjectsList::GetRef().FreeMem();
-  Wind::GetRef().FreeMem();
   ParticleEngine::Stop();
 
   if (!Network::IsConnected() || !game_finished) {
@@ -244,7 +242,7 @@ void Game::Init()
   ActionHandler::GetInstance()->ExecActions();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character)->ResetDamageStats();
+    (*character).ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
 }
@@ -320,7 +318,7 @@ void Game::RefreshInput()
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
-    (*character)->Refresh();
+    character->Refresh();
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
@@ -354,8 +352,8 @@ void Game::Draw ()
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
-    if (!(*character)->IsActiveCharacter())
-      (*character)->Draw();
+    if (!character->IsActiveCharacter())
+      character->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -478,7 +476,7 @@ bool Game::Run()
 bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
-  return !net->IsLocal() && (net->GetNbHostsConnected() == 0);
+  return !net->IsLocal() && net->cpu.empty();
 }
 
 void Game::MessageEndOfGame() const
@@ -508,15 +506,11 @@ void Game::MainLoop()
   RefreshClock();
   time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
 
-  if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
+  if(Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsServer())
     PingClient();
   StatStart("Game:RefreshInput()");
   RefreshInput();
   StatStop("Game:RefreshInput()");
-  StatStart("Game:PhysicalEngine::GetInstance()->Step()");
-  PhysicalEngine::GetInstance()->Step();
-  StatStop("Game:PhysicalEngine::GetInstance()->Step()");
-
   StatStart("Game:RefreshObject()");
   RefreshObject();
   StatStop("Game:RefreshObject()");
@@ -587,7 +581,6 @@ bool Game::NewBox()
        using action handling (see include/action_handler.cpp */
     box->StoreValue(a);
     ActionHandler::GetInstance()->NewAction(a);
-
     delete box;
     return true;
   }
@@ -633,7 +626,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
 void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 {
   if (begin_game &&
-      (Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal()))
+      (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()))
     Network::GetInstance()->SetTurnMaster(true);
 
   if (!Network::GetInstance()->IsTurnMaster())
@@ -668,10 +661,10 @@ PhysicalObj* Game::GetMovingObject() const
 
   FOR_ALL_CHARACTERS(team,character)
   {
-    if (!(*character)->IsImmobile() && !(*character)->IsGhost())
+    if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", (*character)->GetName().c_str());
-      return (*character);
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
+      return &(*character);
     }
   }
 
@@ -788,9 +781,9 @@ void Game::SignalCharacterDamage(const Character *character) const
 void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if ((*character)->IsDiseased()) {
-      (*character)->SetEnergyDelta(-(int)(*character)->GetDiseaseDamage());
-      (*character)->DecDiseaseDuration();
+    if (character->IsDiseased()) {
+      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
+      character->DecDiseaseDuration();
     }
   }
 }

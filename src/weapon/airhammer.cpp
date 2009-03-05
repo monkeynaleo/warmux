@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@
 #include "team/teams_list.h"
 #include "team/macro.h"
 #include "team/team.h"
-
+#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -116,13 +116,13 @@ bool Airhammer::p_Shoot()
     x = ActiveCharacter().GetHandPosition().x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(Point2i(x, y)) )
+      if( character->Contain(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetEnergyDelta(-(int)cfg().damage);
+        character->SetEnergyDelta(-(int)cfg().damage);
         end = true;
       }
     }

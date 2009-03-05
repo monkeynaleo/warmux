@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2009 Wormux Team.
+ *  Copyright (C) 2001-2008 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,11 +19,14 @@
  * Network server layer for Wormux.
  *****************************************************************************/
 
-#include <SDL_thread.h>
-#include <WORMUX_socket.h>
-#include "include/action_handler.h"
 #include "network/network_server.h"
-#include "tool/string_tools.h"
+//-----------------------------------------------------------------------------
+#include <SDL_thread.h>
+#include "include/action_handler.h"
+#include "include/constant.h"
+#include "game/game_mode.h"
+#include "tool/debug.h"
+#include "network/distant_cpu.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -36,137 +39,250 @@
 
 //-----------------------------------------------------------------------------
 
-NetworkServer::NetworkServer(const std::string& game_name, const std::string& password) :
-  Network(game_name, password),
-  port(0)
+NetworkServer::NetworkServer(const std::string& password) : Network(password)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_server.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
   fout = open("./network_server.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
 #endif
-  game_master_player = true;
 }
 
 NetworkServer::~NetworkServer()
 {
+  SDLNet_TCP_Close(server_socket);
 }
 
-void NetworkServer::HandleAction(Action* a, DistantComputer* sender)
+void NetworkServer::HandleAction(Action* a, DistantComputer* sender) const
 {
-  // Repeat the packet to other clients
-  SendActionToAllExceptOne(*a, sender);
+  // Repeat the packet to other clients:
+  if (a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
+      && a->GetType() != Action::ACTION_NETWORK_CHECK_PHASE2)
+  {
+    char* packet;
+    int packet_size;
+    a->WriteToPacket(packet, packet_size);
+
+    for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+         client != cpu.end();
+         client++)
+      if (*client != sender)
+      {
+        (*client)->SendDatas(packet, packet_size);
+      }
+    free(packet);
+  }
 
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
-uint NetworkServer::NextPlayerId() const
+bool NetworkServer::HandShake(TCPsocket& client_socket)
 {
-  uint player_id = GetPlayer().GetId() + 1;
+  int r;
+  bool ret = false;
+  std::string version;
+  std::string _password;
 
-  std::list<DistantComputer*>::const_iterator it;
-  std::list<Player>::const_iterator player;
-  for (it = GetRemoteHosts().begin(); it != GetRemoteHosts().end(); it++) {
+  MSG_DEBUG("network", "server: Handshake!");
 
-    const std::list<Player>& players = (*it)->GetPlayers();
+  // Adding the socket to a temporary socket set
+  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
+  SDLNet_TCP_AddSocket(tmp_socket_set, client_socket);
 
-    for (player = players.begin(); player != players.end(); player++) {
-      if (player_id <= player->GetId()) {
-	player_id = player->GetId() + 1;
-      }
-    }
+  // 1) Receive the version number
+  MSG_DEBUG("network", "Server: waiting for client version number");
+
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, version, 40);
+  if (r) {
+    std::cerr << "Error " << r << " when receiving version number"
+	      << std::endl;
+    goto error;
   }
-  return player_id;
-}
 
-bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const
-{
-  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(), nickname, player_id, false);
+  MSG_DEBUG("network", "Server: sending version number to client");
+
+  Network::Send(client_socket, Constants::WORMUX_VERSION);
+
+  if (Constants::WORMUX_VERSION != version) {
+    std::cerr << "Client disconnected: wrong version " << version.c_str()
+	     << std::endl;
+    goto error;
+  }
+
+  // 2) Check the password
+  MSG_DEBUG("network", "Server: waiting for password");
+
+  r = Network::ReceiveStr(tmp_socket_set, client_socket, _password, 100);
+  if (r)
+    goto error;
+
+  if (_password != GetPassword()) {
+    std::cerr << "Client disconnected: wrong password " << _password.c_str()
+	      << std::endl;
+    Network::Send(client_socket, 1);
+    goto error;
+  }
+  MSG_DEBUG("network", "Server: password OK");
+
+  Network::Send(client_socket, 0);
+
+  MSG_DEBUG("network", "server: Handshake done successfully :)");
+  ret = true;
+
+ error:
+  if (!ret) {
+    std::cerr << "Server: HandShake with client has failed!" << std::endl;
+  }
+  SDLNet_TCP_DelSocket(tmp_socket_set, client_socket);
+  SDLNet_FreeSocketSet(tmp_socket_set);
+  return ret;
 }
 
 void NetworkServer::WaitActionSleep()
 {
-  if (server_socket.IsConnected()) {
-
+  if (server_socket)
+  {
     // Check for an incoming connection
-    WSocket* incoming = server_socket.LookForClient();
-    if (incoming) {
-      std::string nickname;
-      uint player_id = NextPlayerId();
-
-      if (!HandShake(*incoming, nickname, player_id))
+    TCPsocket incoming = SDLNet_TCP_Accept(server_socket);
+    if (incoming)
+    {
+      if (!HandShake(incoming))
  	return;
 
-      socket_set->AddSocket(incoming);
+      DistantComputer * client = new DistantComputer(incoming);
+      cpu.push_back(client);
 
-      DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
-      SendInitialGameInfo(client);
-      GetRemoteHosts().push_back(client);
-
-      if (GetNbHostsConnected() >= max_nb_players)
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT,
+							 client->GetAddress()));
+      printf("New client connected\n");
+      if (GetNbConnectedPlayers() >= max_nb_players)
         RejectIncoming();
     }
     SDL_Delay(100);
   }
 }
-
-void NetworkServer::RejectIncoming()
-{
-  server_socket.Disconnect();
-}
-
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkServer::StartServer(const std::string &net_port, uint _max_nb_players)
+connection_state_t NetworkServer::ServerStart(const std::string &port)
 {
-  WNet::Init();
+  Init();
 
   // The server starts listening for clients
-  printf("o Starting server on port %s...\n", net_port.c_str());
+  MSG_DEBUG("network", "Start server on port %s", port.c_str());
 
-  GetRemoteHosts().clear();
+  cpu.clear();
   // Convert port number (std::string port) into SDL port number format:
-  if (!str2int(net_port, port)) {
+  int prt = strtol(port.c_str(), NULL, 10);
+
+  if (SDLNet_ResolveHost(&ip,NULL,(Uint16)prt) != 0)
+  {
+    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return CONN_BAD_PORT;
   }
+
+  max_nb_players = GameMode::GetInstance()->max_teams;
 
   // Open the port to listen to
-  if (!server_socket.AcceptIncoming(port)) {
+  if (!AcceptIncoming()) {
     return CONN_BAD_PORT;
   }
-
-  printf("o Server successfully started\n");
-  max_nb_players = _max_nb_players;
-  socket_set = WSocketSet::GetSocketSet(max_nb_players);
-  if (!socket_set) {
-    return CONN_REJECTED;
-  }
-
-  NetworkThread::Start();
-
-  SetState(WNet::NETWORK_MENU_INIT);
+  printf("\nConnected\n");
+  socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
+  thread = SDL_CreateThread(Network::ThreadRun, NULL);
+  MSG_DEBUG("network", "Thread %u created by thread %u\n", SDL_GetThreadID(thread), SDL_ThreadID());
   return CONNECTED;
 }
 
 std::list<DistantComputer*>::iterator
 NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  std::list<DistantComputer*>::iterator it;
-
-  it = GetRemoteHosts().erase(closed);
+  printf("Client disconnected\n");
   delete *closed;
-
-  if (GetNbHostsConnected() == max_nb_players)
+  if (GetNbConnectedPlayers() == max_nb_players)
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
     printf("Allowing new connections\n");
-    server_socket.AcceptIncoming(port);
+    AcceptIncoming();
   }
 
-  return it;
+  return cpu.erase(closed);
+}
+
+bool NetworkServer::AcceptIncoming()
+{
+  if (!IsServer()) return false;
+
+  server_socket = SDLNet_TCP_Open(&ip);
+  if (!server_socket)
+  {
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    return false;
+  }
+  printf("\nStart listening");
+  return true;
+}
+
+void NetworkServer::RejectIncoming()
+{
+  ASSERT(IsServer());
+  if (!server_socket) return;
+  SDLNet_TCP_Close(server_socket);
+  server_socket = NULL;
+  printf("\noo Stop listening\n");
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
 {
-  max_nb_players = _max_nb_players;
+  if (_max_nb_players <= GameMode::GetInstance()->max_teams) {
+    max_nb_players = _max_nb_players;
+  } else {
+    max_nb_players = GameMode::GetInstance()->max_teams;
+  }
+}
+
+uint NetworkServer::GetNbConnectedPlayers() const
+{
+  return cpu.size() + 1;
+}
+
+uint NetworkServer::GetNbInitializedPlayers() const
+{
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
+      r++;
+  }
+
+  return r;
+}
+
+uint NetworkServer::GetNbReadyPlayers() const
+{
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_READY)
+      r++;
+  }
+
+  return r;
+}
+
+uint NetworkServer::GetNbCheckedPlayers() const
+{
+  uint r = 0;
+
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
+      r++;
+  }
+
+  return r;
 }
