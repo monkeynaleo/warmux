@@ -25,6 +25,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
+#include "game/game_mode.h"
 #include "game/time.h"
 #include "interface/interface.h"
 #include "particles/particle.h"
@@ -47,7 +48,7 @@ Water::Water() :
   height_mvt(0),
   shift1(0),
   water_height(0),
-  temps_montee(0),
+  time_raise(0),
   water_type(NO_WATER),
   m_last_preview_redraw(0)
 {
@@ -133,7 +134,7 @@ void Water::Reset()
 
   Init();
   water_height = WATER_INITIAL_HEIGHT;
-  temps_montee = GO_UP_TIME * 60 * 1000;
+  time_raise = 1000 * GameMode::GetInstance()->duration_before_death_mode;
 
   Refresh(); // Calculate first height position
 }
@@ -158,11 +159,11 @@ void Water::Refresh()
 
   // Height Calculation:
   Time * global_time = Time::GetInstance();
-  if (temps_montee < global_time->Read())
+  if (time_raise < global_time->Read())
   {
-    m_last_preview_redraw = Time::GetInstance()->Read();
-    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()){
-      uint dt=global_time->Read()- temps_montee;
+    m_last_preview_redraw = global_time->Read();
+    if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()) {
+      uint dt = global_time->Read() - time_raise;
       height_mvt = GO_UP_STEP +
         (uint)(((float)GO_UP_STEP *
                sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))
@@ -170,7 +171,7 @@ void Water::Refresh()
                )/(a*dt+b));
     }
     else{
-      temps_montee += GO_UP_TIME * 60 * 1000;
+      time_raise += GO_UP_TIME * 60 * 1000;
       water_height += GO_UP_STEP;
     }
   }

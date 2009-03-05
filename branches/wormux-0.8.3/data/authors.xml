@@ -545,6 +545,14 @@
 	<country>Bosnia-Herzegovina</country>
       </author>
       <author>
+	<nickname>black silence</nickname>
+	<name>Pat</name>
+	<description>Patch concerning the rise in the water level</description>
+	<country>Germany</country>
+	<website>http://psycho3d.de</website>
+	<email>-</email>
+      </author>
+      <author>
 	<nickname>Eric</nickname>
 	<name>Eric HOFFMANN</name>
 	<description>Wrote CPU limiter patch with Olivier SERRES</description>

@@ -51,7 +51,7 @@ private:
   int height_mvt;
   double shift1;
   uint water_height;
-  uint temps_montee;
+  uint time_raise;
   int height[pattern_width];
   Surface surface;
   Surface pattern;
