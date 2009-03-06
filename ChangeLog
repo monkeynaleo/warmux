@@ -1,3 +1,13 @@
+> 2009/03/05 - 0.8.3 release
+  - New skins with new animations
+  - New sounds thanks to Bebelious
+  - Better team menu editor
+  - New game interface
+  - Small AI enhancements
+  - Fix crash when leaving options menu during a game
+  - Fix crash when checking for new version without internet connection
+  - Fix some small graphical bugs
+
 > 2008/10/19 - 0.8.2 release
   - Fix Blowtorch weapon
   - Fix behavior of floor on closed maps
