@@ -27,14 +27,14 @@ EXTRA_DIST = data/wormux.desktop                   \
              src/msvc/config.h                     \
              src/msvc/getopt.c                     \
              src/msvc/getopt.h                     \
-             tools/win32_setup/create_setup.sh     \
-             tools/win32_setup/English.nsh         \
-             tools/win32_setup/French.nsh          \
-             tools/win32_setup/Greek.nsh           \
-             tools/win32_setup/Polish.nsh          \
-             tools/win32_setup/langmacros.nsh      \
-             tools/win32_setup/install.ico         \
-             tools/win32_setup/uninstall.ico
+             build/win32_setup/create_setup.sh     \
+             build/win32_setup/English.nsh         \
+             build/win32_setup/French.nsh          \
+             build/win32_setup/Greek.nsh           \
+             build/win32_setup/Polish.nsh          \
+             build/win32_setup/langmacros.nsh      \
+             build/win32_setup/install.ico         \
+             build/win32_setup/uninstall.ico
 
 if WIN32
 setup: all
