@@ -74,6 +74,11 @@ void GameClassic::RefreshClock()
 
       case PLAYING:
         if (duration <= 1) {
+
+	  /* let the user release the key to shoot */
+	  if (ActiveTeam().GetWeapon().IsLoading())
+	    break;
+
 	  JukeBox::GetInstance()->Play("default", "end_turn");
 	  SetState(END_TURN);
         } else {
