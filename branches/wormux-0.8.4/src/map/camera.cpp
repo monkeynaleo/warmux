@@ -299,8 +299,7 @@ void Camera::TestCamera()
 
   last_mouse_pos = curr_pos;
 
-  if (!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
-      Config::GetInstance()->GetScrollOnBorder())
+  if (Config::GetInstance()->GetScrollOnBorder())
     ScrollCamera();
 }
 
