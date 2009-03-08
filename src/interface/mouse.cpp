@@ -334,7 +334,7 @@ void Mouse::Hide()
 {
   if(visible == MOUSE_VISIBLE)
   {
-  last_hide_time = Time::GetInstance()->Read();
+    last_hide_time = Time::GetInstance()->Read();
   }
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
