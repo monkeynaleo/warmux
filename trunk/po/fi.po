@@ -6,10 +6,10 @@
 # Bastian Salmela <basse@kulma.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: fi\n"
+"Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 13:52+0200\n"
-"PO-Revision-Date: 2008-09-21 00:19+0200\n"
+"PO-Revision-Date: 2009-03-13 15:08+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,12 +43,12 @@ msgstr[1] "%i pelaajaa valmiina"
 #: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
-msgstr "%s < %s > aka %s %s:stä"
+msgstr "%s <%s> aka %s maasta %s"
 
 #: src/map/maps_list.cpp:122
 #, c-format
 msgid "%s <%s> from %s"
-msgstr "%s < %s > %s:stä"
+msgstr "%s <%s> maasta %s"
 
 #: src/menu/team_box.cpp:216
 #, c-format
@@ -138,7 +138,7 @@ msgstr "Joukkue %s luovutti vuoron."
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
-msgstr[0] "Joukkue %s voitti %u rypäle singon!"
+msgstr[0] "Joukkue %s voitti %u rypälesingon!"
 msgstr[1] "Joukkue %s voitti %u rypälesinkoa!"
 
 #: src/weapon/gnu.cpp:175
@@ -289,8 +289,8 @@ msgstr[1] "Joukkue %s voitti %u asetta!"
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
-msgstr[0] "Joukkue %s voitti %u ilmaiskun."
-msgstr[1] "Joukkue %s voitti %u lentorepun! Siistiä!"
+msgstr[0] "Joukkue %s voitti %u lentorepun."
+msgstr[1] "Joukkue %s voitti %u lentoreppua! Siistiä!"
 
 #: src/weapon/lowgrav.cpp:85
 #, c-format
@@ -389,9 +389,9 @@ msgstr[1] "Joukkue %s voitti %u vuoron skippausta! Mahtavaa."
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] ""
-"Joukkue %s voitti %u Tux laukaisijan! Lentäviä pingviinejä, viimeinkin!"
+"Joukkue %s voitti %u Tux-laukaisijan! Lentäviä pingviinejä, viimeinkin!"
 msgstr[1] ""
-"Joukkue %s voitti %u Tux laukaisijaa! Lentäviä pingviinejä, viimeinkin!"
+"Joukkue %s voitti %u Tux-laukaisijaa! Lentäviä pingviinejä, viimeinkin!"
 
 #: src/game/game_blitz.cpp:70
 #, c-format
@@ -523,7 +523,7 @@ msgstr "Ei löydy joukkuetta %s!"
 #: src/team/teams_list.cpp:170
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
-msgstr "Ei voida avata henkilökohtaista joukkue hakemistoa (%s)!"
+msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
 #: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
 #, c-format
@@ -556,9 +556,8 @@ msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Hahmo"
+msgstr "Hahmonimet:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -583,7 +582,7 @@ msgstr "Klikkaus: Keskitä kamera hahmoon"
 #. Client Mode
 #: src/menu/network_menu.cpp:120
 msgid "Client mode"
-msgstr "Client tila"
+msgstr "Asiakastila"
 
 #: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Clumsiest"
@@ -595,7 +594,7 @@ msgstr "Rypälepommi"
 
 #: src/weapon/cluzooka.cpp:389
 msgid "Cluzooka"
-msgstr "Sinko"
+msgstr "Rypälesinko"
 
 #: src/weapon/suicide.cpp:42
 msgid "Commit Suicide"
@@ -684,18 +683,19 @@ msgstr "Energia"
 #: src/include/action_handler.cpp:247
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
-msgstr "Virhe alustettaessa verkkoa: Client %s ei hyväksy sinua!! - %s"
+msgstr "Virhe alustettaessa verkkoa: Asiakas %s ei hyväksy sinua!! - %s"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:134
 msgid "Error loading team :"
-msgstr "Virhe ladattessa joukkuetta :"
+msgstr "Virhe ladattaessa joukkuetta :"
 
 #: src/game/config.cpp:513 src/team/custom_team.cpp:156
 #: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
+msgstr ""
+"Virhe luotaessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
 #: src/team/custom_team.cpp:102
 #, c-format
@@ -792,7 +792,7 @@ msgstr "Gnu"
 
 #: src/menu/options_menu.cpp:125
 msgid "Graphic"
-msgstr "Grafiikka asetukset"
+msgstr "Grafiikka-asetukset"
 
 #: src/weapon/grapple.cpp:96
 msgid "Grapple"
@@ -846,6 +846,7 @@ msgid "Host a game"
 msgstr "Isännöi peli"
 
 #: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -853,7 +854,8 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 "Käyttöohje : valitse kohde vasemmalla hiirennapilla\n"
-"Lähtökulma: Ylös/Alas Ammu : pidä välilyönti painettuna\n"
+"Lähtökulma: Ylös/Alas\n"
+"Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
 #: src/weapon/blowtorch.cpp:64
@@ -897,7 +899,7 @@ msgstr ""
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:66
 msgid "Initial energy"
-msgstr "Aloitus voimat:"
+msgstr "Aloitusvoimat:"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
 #: src/weapon/riot_bomb.cpp:121
@@ -936,7 +938,8 @@ msgstr "Lentoreppu"
 
 #: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr "Liity #wormux kanavalle irc.freenode.netissä löytääksesi vastustajia."
+msgstr ""
+"Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
 #: src/menu/help_menu.cpp:75
 msgid "Jump"
@@ -948,7 +951,7 @@ msgstr "Hyppää taaksepäin"
 
 #: src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
-msgstr "Potkaisee henkilön <nickname> nimeämät pelaajat ulos pelistä"
+msgstr "Potkaisee <nickname>-nimiset pelaajat ulos pelistä"
 
 #: src/menu/options_menu.cpp:129
 msgid "Language"
@@ -1002,7 +1005,7 @@ msgstr "Pelitila"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
-msgstr "Maksimi energia"
+msgstr "Maksimienergia"
 
 #: src/menu/network_menu.cpp:105
 msgid "Max number of players:"
@@ -1076,7 +1079,7 @@ msgstr "Varoitus uudesta pelaajasta?"
 #: src/weapon/weapon.cpp:658
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
+msgstr "Elementtiä <%s> ei löytynyt xml-tiedostosta !"
 
 #: src/network/admin_commands.cpp:60
 #, fuzzy
@@ -1234,7 +1237,7 @@ msgstr "Haulikko"
 
 #: src/menu/help_menu.cpp:83
 msgid "Show weapons menu"
-msgstr "Näytä"
+msgstr "Näytä asevalikko"
 
 #: src/menu/help_menu.cpp:69
 msgid "Show/hide interface"
@@ -1270,7 +1273,7 @@ msgstr "Joku viritti ansan laatikkoon!"
 
 #: src/menu/network_connection_menu.cpp:289
 msgid "Sorry, currently, no game is waiting for players"
-msgstr "Valitettavasti tällähetkellä yksikään peli ei odota pelaajia"
+msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
 #: src/network/index_server.cpp:252
 #, c-format
@@ -1283,7 +1286,7 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:253
 msgid "Sound"
-msgstr "Ääni asetukset"
+msgstr "Ääniasetukset"
 
 #: src/menu/options_menu.cpp:221
 msgid "Sound effects?"
@@ -1296,7 +1299,7 @@ msgstr "Äänitaajuus"
 #. Load teams' sound profiles
 #: src/game/game_init.cpp:152
 msgid "Sounds"
-msgstr "Ääni asetukset"
+msgstr "Ääniasetukset"
 
 #: src/game/game.cpp:115
 msgid "Starting a new game"
@@ -1372,8 +1375,8 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
-"Client ja palvelin versiot eivät ole yhteensopivia (paikallinen=%s, palvelin="
-"%s). Kokeile toista palvelinta."
+"Asiakas ja palvelin versiot eivät ole yhteensopivia (paikallinen=%s, "
+"palvelin=%s). Kokeile toista palvelinta."
 
 #: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1402,7 +1405,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 
 #: src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
-msgstr "Palvelimen hylkäsi yhteyden."
+msgstr "Palvelin hylkäsi yhteyden."
 
 #: src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"
@@ -1533,7 +1536,7 @@ msgstr "Wormux versio"
 
 #: src/include/action_handler.cpp:221
 msgid "Wrong map CRC!"
-msgstr "Väärä kartta CRC!"
+msgstr "Kartan tarkistussumma väärin!"
 
 #: src/include/action_handler.cpp:218
 msgid "Wrong map name!"
