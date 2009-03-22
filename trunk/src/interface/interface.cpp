@@ -479,6 +479,9 @@ void Interface::Draw()
   AppWormux * app = AppWormux::GetInstance();
   bottom_bar_pos = (app->video->window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
+  if (display_minimap)
+    DrawMapPreview();
+
   if ( Game::GetInstance()->ReadState() == Game::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
@@ -503,8 +506,6 @@ void Interface::Draw()
   DrawCharacterInfo();
   DrawTeamEnergy();
   DrawWeaponInfo();
-  if (display_minimap)
-    DrawMapPreview();
   DrawSmallInterface();
 }
 
