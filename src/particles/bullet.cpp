@@ -30,7 +30,7 @@ BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
   SetCollisionModel(true, false, false);
-  m_rebound_sound = "weapon/grenade_bounce";
+  m_rebound_sound = "weapon/m16_cartridge";
   m_left_time_to_live = 1;
   start_to_fade = 0;
 
