@@ -27,14 +27,15 @@
 #include "graphic/sprite.h"
 #include "include/action.h"
 #include "interface/game_msg.h"
+#include "network/randomsync.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
-#include "network/randomsync.h"
+
 
 BonusBox::BonusBox() : ObjBox("bonus_box")
 {
@@ -94,6 +95,7 @@ void BonusBox::ApplyBonus(Character * c)
            c->AccessTeam().GetName().c_str(), weapon_list[weapon_num].weapon->GetName().c_str());
   }
   GameMessages::GetInstance()->Add(txt.str());
+  JukeBox::GetInstance()->Play("default","box/picking_up");
 }
 
 bool BonusBox::ExplodesInsteadOfBonus(Character * c)
