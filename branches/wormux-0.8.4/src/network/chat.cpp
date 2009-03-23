@@ -76,7 +76,13 @@ void Chat::Show()
 
 void Chat::ShowInput()
 {
-  check_input = true;
+  if (!check_input) {
+    check_input = true;
+
+    /* Enable key repeat when chatting :) */
+    SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+  }
+
   if (input == NULL){
     input = new Text("", c_white);
     msg = new Text(_("Say: "), c_red);
@@ -138,6 +144,9 @@ void Chat::HandleKey(const SDL_Event& event)
 
       input->Set("");
       cursor_pos = 0;
+
+      // Disable key repeat during the game!
+      SDL_EnableKeyRepeat(0, 0);
       break;
 
     default:
