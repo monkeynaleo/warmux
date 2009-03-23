@@ -212,6 +212,8 @@ void Menu::Run (bool skip_menu)
   Point2i mousePosition(x, y);
   Display(mousePosition);
 
+  SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+
   do
   {
     // this is the current menu (here in case we had run a submenu)
