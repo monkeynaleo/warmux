@@ -224,10 +224,8 @@ void Menu::Run (bool skip_menu)
       continue;
 
     //Emergency exit
-    if(event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL) )
-    {
-       exit(0);
-    }
+    if (event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
+      AppWormux::EmergencyExit();
 
     Point2i mousePosition(event.button.x, event.button.y);
 
