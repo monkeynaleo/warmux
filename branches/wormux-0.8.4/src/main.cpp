@@ -280,6 +280,12 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << endl;
 }
 
+void AppWormux::EmergencyExit()
+{
+  delete AppWormux::GetInstance();
+  exit(EXIT_SUCCESS);
+}
+
 void DisplayWelcomeMessage()
 {
   cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << endl;

@@ -51,6 +51,7 @@ public:
   void ReceiveMsgCallback(const std::string& msg);
   static AppWormux * GetInstance();
   ~AppWormux();
+  static void EmergencyExit();
 
   int Main(void);
 };
