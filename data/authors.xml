@@ -21,13 +21,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>Kurosu</nickname>
-	<name>Christophe GISQUET</name>
-	<description>Win32 port, programmer</description>
-	<email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
 	<nickname>lynxlynxlynx</nickname>
 	<name>Jaka KRANJC</name>
 	<description>i18n manager, misc</description>
@@ -45,6 +38,13 @@
     </section>
 
     <section title="Inactive Team">
+      <author>
+      <nickname>Kurosu</nickname>
+    <name>Christophe GISQUET</name>
+    <description>Win32 port, programmer</description>
+    <email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
+    <country>France</country>
+      </author>
       <author>
 	<nickname>deki</nickname>
 	<name>Reiner HERRMANN</name>
