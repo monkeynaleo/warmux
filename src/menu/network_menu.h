@@ -60,6 +60,7 @@ class NetworkMenu : public Menu
   void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
   void WaitingForGameMaster();
+  void HandleEvent(const SDL_Event& event);
 
   void key_ok();
   bool signal_ok();

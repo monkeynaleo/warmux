@@ -1081,6 +1081,10 @@ void ActionHandler::ExecActions()
     if (!a->GetCreator()
 	|| Network::IsConnected()) {
       Exec (a);
+
+      // To refresh the menu even if it is waiting in SDL_WaitEvent
+      // One new event will be needed.
+      Menu::WakeUpOnCallback();
     }
     delete *it;
     it = queue.erase(it);
@@ -1093,6 +1097,10 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 
   if (repeat_to_network)
     Network::GetInstance()->SendActionToAll(*a);
+
+  // To make action executed even if the menu is waiting in SDL_WaitEvent
+  // One new event will be needed (see ExecActions).
+  Menu::WakeUpOnCallback();
 }
 
 void ActionHandler::NewActionActiveCharacter(Action* a)

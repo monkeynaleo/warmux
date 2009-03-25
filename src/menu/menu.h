@@ -63,11 +63,16 @@ public:
    // for receiving message from network
    virtual void ReceiveMsgCallback(const std::string& /*msg*/) {};
 
+   // Push a stupid user event to make the menu exits for SDL_WaitEvent
+   // To be called only by the ActionHandler
+   static void WakeUpOnCallback();
+
 private:
    Sprite *background;
    Widget *selected_widget;
 
    bool BasicOnClickUp(const Point2i &mousePosition);
+   bool HandleGlobalEvent(const SDL_Event& event);
 
 protected:
    Button *b_cancel;
@@ -100,6 +105,10 @@ protected:
 
    // we have clicked but still not released the button
    virtual void OnClick(const Point2i &mousePosition, int button) = 0;
+
+   // for heavy modification of menu behavior
+   virtual void HandleEvent(const SDL_Event& event);
+   void HandleEvents();
 
    void SetActionButtonsXY(int x, int y);
    void Display(const Point2i& mousePosition);
