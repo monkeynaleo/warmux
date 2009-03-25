@@ -50,7 +50,7 @@ public:
   connection_state_t StartServer(const std::string &port, uint max_nb_players);
 
   void RejectIncoming();
-  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+  void CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
 
 };

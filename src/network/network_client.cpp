@@ -52,16 +52,11 @@ NetworkClient::~NetworkClient()
 {
 }
 
-std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
+void NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  std::list<DistantComputer*>::iterator it;
-
   printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
-  it = GetRemoteHosts().erase(closed);
-  delete *closed;
-
-  return it;
+  RemoveRemoteHost(closed);
 }
 
 void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/)
@@ -189,7 +184,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   socket_set->AddSocket(socket);
   server = new DistantComputer(socket, "server", 0);
 
-  GetRemoteHosts().push_back(server);
+  AddRemoteHost(server);
 
   NetworkThread::Start();
   return CONNECTED;

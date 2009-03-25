@@ -27,7 +27,6 @@ NetworkLocal::~NetworkLocal() {}
 
 void NetworkLocal::SendAction(const Action& /*a*/, DistantComputer* /*client*/, bool /*clt_as_rcver*/) const {}
 
-std::list<DistantComputer*>::iterator NetworkLocal::CloseConnection(std::list<DistantComputer*>::iterator /*closed*/)
+void NetworkLocal::CloseConnection(std::list<DistantComputer*>::iterator /*closed*/)
 {
-  return GetRemoteHosts().end();
 }

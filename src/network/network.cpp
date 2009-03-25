@@ -22,14 +22,14 @@
 #include <SDL_thread.h>
 #include <SDL_timer.h>
 #include <WORMUX_debug.h>
+#include <WORMUX_distant_cpu.h>
+#include <WORMUX_player.h>
 
 #include "network/network.h"
 #include "network/network_local.h"
 #include "network/network_client.h"
 #include "network/network_server.h"
-#include <WORMUX_distant_cpu.h>
 #include "network/chatlogger.h"
-#include <WORMUX_player.h>
 //-----------------------------------------------------------------------------
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -122,29 +122,26 @@ void NetworkThread::ReceiveActions()
     //Loop while nothing is received
     while (Continue())
     {
-      net->WaitActionSleep();
-
       // Check forced disconnections
-      for (dst_cpu = cpu.begin();
-           Continue() && dst_cpu != cpu.end();
-           dst_cpu++)
-      {
+      dst_cpu = cpu.begin();
+      while (Continue() && dst_cpu != cpu.end()) {
 	// Disconnection is in 2 phases to be handled by one thread
         if ((*dst_cpu)->MustBeDisconnected()) {
-          dst_cpu = net->CloseConnection(dst_cpu);
-        }
+          net->CloseConnection(dst_cpu);
+	  dst_cpu = cpu.begin();
+	}
+	else
+	  dst_cpu++;
       }
 
       // List is now maybe empty
-      if (cpu.empty()) {
-        if (net->IsClient()) {
-          fprintf(stderr, "you are alone!\n");
-	  Stop();
-          return; // We really don't need to go through the loops
-        }
-        // Even for server, as Visual Studio in debug mode has trouble with that loop
-	continue;
+      if (cpu.empty() && net->IsClient()) {
+	fprintf(stderr, "you are alone!\n");
+	Stop();
+	return; // We really don't need to go through the loops
       }
+
+      net->WaitActionSleep();
 
       int num_ready = net->CheckActivity(100);
       // Means something is available
@@ -162,22 +159,11 @@ void NetworkThread::ReceiveActions()
          Continue() && dst_cpu != cpu.end();
          dst_cpu++)
     {
-      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
-      {
+      if((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
+
 	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
-
 	  // An error occured during the reception
-          dst_cpu = net->CloseConnection(dst_cpu);
-
-          // Please Visual Studio that in debug mode has trouble with continuing
-          if (cpu.empty()) {
-            if (net->IsClient()) {
-              fprintf(stderr, "you are alone!\n");
-	      Stop();
-              return; // We really don't need to go through the loops
-            }
-            break;
-          }
+          (*dst_cpu)->ForceDisconnection();
           continue;
         }
 
@@ -196,15 +182,6 @@ void NetworkThread::ReceiveActions()
 	MSG_DEBUG("network.traffic", "Received action %s",
 		  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 	net->HandleAction(a, *dst_cpu);
-
-        if (cpu.empty()) {
-          if (net->IsClient()) {
-            fprintf(stderr, "you are alone!\n");
-            Stop();
-            return; // We really don't need to go through the loops
-          }
-          break;
-        }
       }
     }
   }
@@ -246,6 +223,7 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   network_menu(NULL),
   sync_lock(false)
 {
+  cpus_lock = SDL_CreateMutex();
   player.SetNickname(Player::GetDefaultNickname());
   num_objects++;
 }
@@ -261,6 +239,7 @@ Network::~Network()
 #endif
 
   num_objects--;
+  SDL_DestroyMutex(cpus_lock);
   if (num_objects == 0) {
     WNet::Quit();
   }
@@ -273,9 +252,36 @@ std::list<DistantComputer*>& Network::GetRemoteHosts()
   return cpu;
 }
 
-const std::list<DistantComputer*>& Network::GetRemoteHosts() const
+std::list<DistantComputer*>& Network::LockRemoteHosts()
 {
+  SDL_LockMutex(cpus_lock);
   return cpu;
+}
+
+const std::list<DistantComputer*>& Network::LockRemoteHosts() const
+{
+  SDL_LockMutex(cpus_lock);
+  return cpu;
+}
+
+void Network::UnlockRemoteHosts() const
+{
+  SDL_UnlockMutex(cpus_lock);
+}
+
+void Network::AddRemoteHost(DistantComputer *host)
+{
+  SDL_LockMutex(cpus_lock);
+  cpu.push_back(host);
+  SDL_UnlockMutex(cpus_lock);
+}
+
+void Network::RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it)
+{
+  SDL_LockMutex(cpus_lock);
+  cpu.erase(host_it);
+  delete *host_it;
+  SDL_UnlockMutex(cpus_lock);
 }
 
 //-----------------------------------------------------------------------------
