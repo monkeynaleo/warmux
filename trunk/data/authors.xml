@@ -39,13 +39,6 @@
 
     <section title="Inactive Team">
       <author>
-      <nickname>Kurosu</nickname>
-    <name>Christophe GISQUET</name>
-    <description>Win32 port, programmer</description>
-    <email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
-    <country>France</country>
-      </author>
-      <author>
 	<nickname>deki</nickname>
 	<name>Reiner HERRMANN</name>
 	<description>Programmer</description>
@@ -62,6 +55,14 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>haypo</nickname>
+	<name>Victor STINNER</name>
+	<description>Programmer and webmaster</description>
+	<website>http://www.haypocalc.com/</website>
+	<email>victor.stinner_AT_haypocalc_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>jcduberga</nickname>
 	<name>Jean-Christophe DUBERGA</name>
 	<description>Programmer</description>
@@ -69,11 +70,10 @@
 	<country>Germany</country>
       </author>
       <author>
-	<nickname>haypo</nickname>
-	<name>Victor STINNER</name>
-	<description>Programmer and webmaster</description>
-	<website>http://www.haypocalc.com/</website>
-	<email>victor.stinner_AT_haypocalc_DOT_com</email>
+	<nickname>Kurosu</nickname>
+	<name>Christophe GISQUET</name>
+	<description>Win32 port, programmer</description>
+	<email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>
@@ -282,6 +282,12 @@
 	<description>First Hungarian version of Wormux</description>
 	<email>gabo_AT_linuxportal_DOT_hu</email>
 	<country>Hungary</country>
+      </author>
+      <author>
+	<nickname>Uno</nickname>
+	<description>Updated Italian translation for Wormux 0.8.3</description>
+	<email>uno_AT_p2pforum_DOT_it</email>
+	<country>Italia</country>
       </author>
       <author>
 	<nickname>Gaia</nickname>
