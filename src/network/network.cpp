@@ -312,6 +312,8 @@ void Network::DisconnectNetwork()
   NetworkThread::Wait();
 
   DistantComputer* tmp;
+
+  SDL_LockMutex(cpus_lock);
   std::list<DistantComputer*>::iterator client = cpu.begin();
 
   while (client != cpu.end()) {
@@ -319,6 +321,7 @@ void Network::DisconnectNetwork()
     client = cpu.erase(client);
     delete tmp;
   }
+  SDL_UnlockMutex(cpus_lock);
 
   if (socket_set != NULL) {
     delete socket_set;
@@ -381,6 +384,7 @@ void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_r
     client->SendData(packet, size);
   } else {
 
+    SDL_LockMutex(cpus_lock);
     for (std::list<DistantComputer*>::const_iterator it = cpu.begin();
 	 it != cpu.end(); it++) {
 
@@ -388,6 +392,7 @@ void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_r
 	(*it)->SendData(packet, size);
       }
     }
+    SDL_UnlockMutex(cpus_lock);
   }
 
   free(packet);
@@ -544,11 +549,14 @@ int Network::CheckActivity(int timeout)
 uint Network::GetNbPlayersConnected() const
 {
   uint r = 0;
+
+  SDL_LockMutex(cpus_lock);
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
     r += (*client)->GetPlayers().size();
   }
+  SDL_UnlockMutex(cpus_lock);
 
   return r;
 }
@@ -562,12 +570,14 @@ uint Network::GetNbHostsInitialized() const
 {
   uint r = 0;
 
+  SDL_LockMutex(cpus_lock);
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
     if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
       r++;
   }
+  SDL_UnlockMutex(cpus_lock);
 
   return r;
 }
@@ -576,12 +586,14 @@ uint Network::GetNbHostsReady() const
 {
   uint r = 0;
 
+  SDL_LockMutex(cpus_lock);
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
     if ((*client)->GetState() == DistantComputer::STATE_READY)
       r++;
   }
+  SDL_UnlockMutex(cpus_lock);
 
   return r;
 }
@@ -590,12 +602,14 @@ uint Network::GetNbHostsChecked() const
 {
   uint r = 0;
 
+  SDL_LockMutex(cpus_lock);
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
     if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
       r++;
   }
+  SDL_UnlockMutex(cpus_lock);
 
   return r;
 }
