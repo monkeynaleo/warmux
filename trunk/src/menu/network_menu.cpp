@@ -364,7 +364,6 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
     return;
 
   team_box->AddTeamCallback(team_id);
-//  msg_box->NewMessage(team_id + " selected");
 }
 
 void NetworkMenu::UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id)
@@ -401,6 +400,44 @@ void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
   msg_box->NewMessage(msg);
 }
 
+// to be call from NetworkMenu::WaitingForGameMaster()
+void NetworkMenu::HandleEvent(const SDL_Event& event)
+{
+  if (!waiting_for_server) {
+    Menu::HandleEvent(event);
+    return;
+  }
+
+  if (event.type == SDL_QUIT) {
+    Menu::mouse_cancel();
+  } else if (event.type == SDL_KEYDOWN) {
+    switch (event.key.keysym.sym)
+      {
+      case SDLK_ESCAPE:
+	Menu::mouse_cancel();
+	break;
+      case SDLK_RETURN:
+      case SDLK_KP_ENTER:
+	msg_box->SendChatMsg();
+	break;
+      case SDLK_F10:
+	AppWormux::GetInstance()->video->ToggleFullscreen();
+	break;
+      default:
+	widgets.SendKey(event.key.keysym);
+	break;
+      }
+  } else if (event.type == SDL_MOUSEBUTTONUP) {
+
+    int x=0, y=0;
+    SDL_GetMouseState( &x, &y );
+    Point2i mousePosition(x, y);
+
+    if (b_cancel->Contains(mousePosition))
+      Menu::mouse_cancel();
+  }
+}
+
 void NetworkMenu::WaitingForGameMaster()
 {
   Network::GetInstance()->SetState(WNet::NETWORK_MENU_OK);
@@ -416,44 +453,15 @@ void NetworkMenu::WaitingForGameMaster()
 
   widgets.SetFocusOn(msg_box->GetTextBox());
 
-  int x=0, y=0;
-  SDL_GetMouseState( &x, &y );
-  Point2i mousePosition(x, y);
-
   do
   {
-    // Poll and treat events
-    SDL_Event event;
+    HandleEvents();
 
-    while (SDL_PollEvent(&event))
-    {
-      Point2i mousePosition(event.button.x, event.button.y);
+    int x=0, y=0;
+    SDL_GetMouseState( &x, &y );
+    Point2i mousePosition(x, y);
 
-      if (event.type == SDL_QUIT) {
-        Menu::mouse_cancel();
-      } else if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym)
-          {
-          case SDLK_ESCAPE:
-            Menu::mouse_cancel();
-            break;
-	  case SDLK_RETURN:
-          case SDLK_KP_ENTER:
-            msg_box->SendChatMsg();
-            break;
-          case SDLK_F10:
-            AppWormux::GetInstance()->video->ToggleFullscreen();
-            break;
-          default:
-            widgets.SendKey(event.key.keysym);
-            break;
-          }
-      } else if (event.type == SDL_MOUSEBUTTONUP) {
-        if (b_cancel->Contains(mousePosition))
-          Menu::mouse_cancel();
-      }
-    }
-
+    Display(mousePosition);
     Menu::Display(mousePosition);
 
   } while (Network::GetInstance()->IsConnected() &&
