@@ -44,7 +44,7 @@
   <sound sample="weapon/airhammer_select"        file="weapons/airhammer_selected.ogg" />
   <sound sample="weapon/anvil_collision"         file="weapons/anvil_collision.ogg" />
   <sound sample="weapon/anvil_fall"              file="weapons/anvil_fall.ogg" />
-  <sound sample="weapon/automatic_rocket_flying" file="weapons/supertux_flying.ogg" />
+  <sound sample="weapon/automatic_rocket_flying" file="weapons/auto_rocket_flying.ogg" />
   <sound sample="weapon/baseball"                file="weapons/baseball.ogg" />
   <sound sample="weapon/disco_grenade_bounce"    file="weapons/grenade_bounce.ogg" />
   <sound sample="weapon/disco_grenade_music"     file="weapons/disco_grenade_music.ogg" />
@@ -70,8 +70,8 @@
   <sound sample="weapon/ricoche2"                file="weapons/ricoche2.ogg" />
   <sound sample="weapon/ricoche3"                file="weapons/ricoche3.ogg" />
   <sound sample="weapon/riot_bomb_exp"           file="weapons/riot_bomb_exp.ogg" />
-  <sound sample="weapon/riotbomb_rocket_flying"  file="weapons/supertux_flying.ogg" />
-  <sound sample="weapon/rocket_flying"           file="weapons/supertux_flying.ogg" />
+  <sound sample="weapon/riotbomb_rocket_flying"  file="weapons/riot_flying.ogg" />
+  <sound sample="weapon/rocket_flying"           file="weapons/rocket_flying.ogg" />
   <sound sample="weapon/shotgun"                 file="weapons/shotgun.ogg" />
   <sound sample="weapon/suicide"                 file="weapons/suicide.ogg" />
   <sound sample="weapon/slap"                    file="weapons/slap.ogg" />
@@ -83,10 +83,11 @@
   <sound sample="weapon/cluzooka_hit"            file="weapons/cluzooka_hit.ogg" />
   <sound sample="weapon/jetpack"                 file="weapons/jetpack.ogg" />
   <sound sample="fire/touch_ground"              file="weapons/embers.ogg" />
+  <sound sample="fire/touch_ground"              file="weapons/embers2.ogg" />
   <sound sample="weapon/construct"               file="weapons/construct.ogg" />
   <sound sample="weapon/lowgrav"                 file="weapons/lowgravity.ogg" />
   <sound sample="weapon/polecat_fart"            file="weapons/polecat.ogg" />
-  <sound sample="weapon/blowtorch"               file="weapons/flame.ogg" />
+  <sound sample="weapon/blowtorch"               file="weapons/blowtorch.ogg" />
   <sound sample="weapon/syringe_shoot"           file="weapons/syringe.ogg" />  
   
   <!-- MISC  -->
