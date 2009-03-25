@@ -41,7 +41,7 @@ public:
   //virtual const bool IsConnected() const { return true; }
   virtual bool IsClient() const { return true; }
 
-  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator);
+  void CloseConnection(std::list<DistantComputer*>::iterator);
 
   // Client specific methods
   connection_state_t ClientConnect(const std::string& host,

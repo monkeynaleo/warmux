@@ -78,6 +78,7 @@ private:
   static int num_objects;
 
   std::list<DistantComputer*> cpu; // list of the connected computer
+  SDL_mutex *cpus_lock;
 
   std::string game_name;
   std::string password;
@@ -136,12 +137,17 @@ public:
   const Player& GetPlayer() const;
 
   std::list<DistantComputer*>& GetRemoteHosts();
-  const std::list<DistantComputer*>& GetRemoteHosts() const;
+
+  std::list<DistantComputer*>& LockRemoteHosts();
+  const std::list<DistantComputer*>& LockRemoteHosts() const;
+  void UnlockRemoteHosts() const;
+  void AddRemoteHost(DistantComputer *host);
+  void RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it);
 
   int CheckActivity(int timeout);
   virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
   virtual void WaitActionSleep() = 0;
-  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
+  virtual void CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
   // Action handling
   void SendActionToAll(const Action& action) const;

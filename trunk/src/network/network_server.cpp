@@ -63,9 +63,10 @@ uint NetworkServer::NextPlayerId() const
 {
   uint player_id = GetPlayer().GetId() + 1;
 
+  const std::list<DistantComputer*>& hosts = LockRemoteHosts();
   std::list<DistantComputer*>::const_iterator it;
   std::list<Player>::const_iterator player;
-  for (it = GetRemoteHosts().begin(); it != GetRemoteHosts().end(); it++) {
+  for (it = hosts.begin(); it != hosts.end(); it++) {
 
     const std::list<Player>& players = (*it)->GetPlayers();
 
@@ -75,6 +76,8 @@ uint NetworkServer::NextPlayerId() const
       }
     }
   }
+  UnlockRemoteHosts();
+
   return player_id;
 }
 
@@ -100,7 +103,7 @@ void NetworkServer::WaitActionSleep()
 
       DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
       SendInitialGameInfo(client);
-      GetRemoteHosts().push_back(client);
+      AddRemoteHost(client);
 
       if (GetNbHostsConnected() >= max_nb_players)
         RejectIncoming();
@@ -122,7 +125,10 @@ connection_state_t NetworkServer::StartServer(const std::string &net_port, uint 
   // The server starts listening for clients
   printf("o Starting server on port %s...\n", net_port.c_str());
 
-  GetRemoteHosts().clear();
+  std::list<DistantComputer*>& hosts = LockRemoteHosts();
+  hosts.clear();
+  UnlockRemoteHosts();
+
   // Convert port number (std::string port) into SDL port number format:
   if (!str2int(net_port, port)) {
     return CONN_BAD_PORT;
@@ -146,13 +152,10 @@ connection_state_t NetworkServer::StartServer(const std::string &net_port, uint 
   return CONNECTED;
 }
 
-std::list<DistantComputer*>::iterator
-NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
-{
-  std::list<DistantComputer*>::iterator it;
 
-  it = GetRemoteHosts().erase(closed);
-  delete *closed;
+void NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
+{
+  RemoveRemoteHost(closed);
 
   if (GetNbHostsConnected() == max_nb_players)
   {
@@ -161,8 +164,6 @@ NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed)
     printf("Allowing new connections\n");
     server_socket.AcceptIncoming(port);
   }
-
-  return it;
 }
 
 void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)

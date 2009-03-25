@@ -39,7 +39,7 @@ public:
   virtual bool IsConnected() const { return false; }
   virtual bool IsLocal() const { return true; }
 
-  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+  virtual void CloseConnection(std::list<DistantComputer*>::iterator closed);
 };
 
 //-----------------------------------------------------------------------------
