@@ -63,16 +63,15 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   player_name = new TextBox(_player_name, 100,
                             Font::FONT_SMALL, Font::FONT_NORMAL);
 
-  if(custom_team_list.size()==0){
-  tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
+  if (custom_team_list.empty()) {
+    tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
                                       Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
     tmp_player_box->AddWidget(player_name);
-  }
-  else
-  {
+
+  } else {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
-                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+					Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
     next_custom_team = new Button(res, "menu/plus");
 
@@ -109,15 +108,11 @@ Team* TeamBox::GetTeam() const
 
 CustomTeam* TeamBox::GetCustomTeam()
 {
-  std::cout<<"TeamBox::GetCustomTeam"<<std::endl;
-  if( custom_team_list.size() == 0)
-  {
+  if (custom_team_list.empty()) {
     return NULL;
   }
-  else
-  {
-    return GetCustomTeamsList().GetByName(player_name->GetText());
-  }
+
+  return GetCustomTeamsList().GetByName(player_name->GetText());
 }
 
 void TeamBox::Update(const Point2i &mousePosition,
@@ -162,31 +157,26 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
     if (w == player_name) {
       return w;
     }
-    if(custom_team_list.size()>0)
-    {
-      if (w == next_custom_team)
-      {
+
+    if (!custom_team_list.empty()) {
+
+      if (w == next_custom_team) {
         player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-        if(custom_team_current_id == custom_team_list.size()-1)
-        {
+        if(custom_team_current_id == custom_team_list.size()-1) {
           custom_team_current_id = 0;
-        }
-        else
-        {
+        } else {
           custom_team_current_id++;
         }
       }
-      if (w == previous_custom_team)
-      {
+
+      if (w == previous_custom_team) {
+
         player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-        if(custom_team_current_id == 0)
-        {
+        if(custom_team_current_id == 0) {
           custom_team_current_id = custom_team_list.size()-1;
-        }
-        else
-        {
+        } else {
           custom_team_current_id--;
         }
       }
