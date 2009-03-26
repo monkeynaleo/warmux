@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,49 +17,20 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef STAT_H
-#define STAT_H
-#include <stdio.h>
-#include <string>
+#ifndef CLOCK_H
+#define CLOCK_H
+#include <WSERVER_clock.h>
 
-class ConnectionStats
+class Clock : public BasicClock
 {
-  FILE* fd;
-  std::string filename;
+private:
+  time_t last_refresh;
 
-  void CloseFile();
- public:
-  unsigned long servers;
-  unsigned long fake_servers;
-  unsigned long clients;
-
-  ConnectionStats(const std::string & fn);
-  ~ConnectionStats();
-  void OpenFile();
-  void Reset();
-  void Write();
-  void Rotate();
+public:
+  Clock();
+  void HandleJobs(bool local=false);
 };
 
-class Stats
-{
- public:
-  // Keeps records of connections
-  // done hourly. File is rotated
-  // every day
-  ConnectionStats hourly;
+extern Clock wx_clock;
+#endif //CLOCK_H
 
-  // Keeps records of connections
-  // done daily. File is never changed
-  ConnectionStats daily;
-
-  Stats();
-  void Init();
-  void NewServer();
-  void NewFakeServer();
-  void NewClient();
-};
-
-extern Stats stats;
-
-#endif

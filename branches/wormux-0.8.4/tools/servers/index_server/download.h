@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,38 +15,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************/
+ ******************************************************************************
+ * Download a file using libcurl
+ *****************************************************************************/
 
-#ifndef CONFIG_H
-#define CONFIG_H
-#include <map>
-#include <string>
+#ifndef DOWNLOAD_H
+#define DOWNLOAD_H
 
-const int VERSION = 1;
-
-class Config
-{
-  std::map<std::string, std::string> str_value;
-  std::map<std::string, int> int_value;
-  std::map<std::string, bool> bool_value;
-
-  void SetDefault(const std::string & name, const std::string & value);
-  void SetDefault(const std::string & name, const int & value);
-  void SetDefault(const std::string & name, const bool & value);
-
-  void Load();
-  void Display();
- public:
-  Config();
-
-  bool Get( const std::string & name,
-            std::string & value);
-  bool Get( const std::string & name,
-            int & value);
-  bool Get( const std::string & name,
-            bool & value);
-};
-
-extern Config config;
-
+void DownloadServerList();
 #endif

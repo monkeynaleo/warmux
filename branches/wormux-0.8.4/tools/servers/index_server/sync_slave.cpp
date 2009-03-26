@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
+#include <WSERVER_debug.h>
+#include <WSERVER_index_msg.h>
 #include "sync_slave.h"
 #include "config.h"
 #include "client.h"
 #include "net_data.h"
 #include "download.h"
-#include "debug.h"
 #include "stat.h"
-#include "../../src/network/index_svr_msg.h"
 
 SyncSlave sync_slave;
 
@@ -197,9 +197,9 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
       {
         int ip;
         int port;
-        std::string server_id;
+        std::string version;
 
-        if (!ReceiveStr(server_id))
+        if (!ReceiveStr(version))
             return false;
 
         if (BytesReceived() < 2*sizeof(uint32_t)) // The message is not completely received
@@ -211,20 +211,18 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 
         if (port < 0) // means it disconnected
           {
-            std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( server_id );
-            if( serv != fake_clients.end() )
-              {
-                do
-                  {
-                    if( serv->second.ip == ip
-                        &&  serv->second.port == -port )
-                      {
-                        fake_clients.erase(serv);
-                        DPRINT(MSG, "A fake server disconnected");
-                        break;
-                      }
-                  } while (serv != fake_clients.upper_bound(server_id));
-              }
+	    for (std::multimap<std::string, FakeClient>::iterator serv = fake_clients.lower_bound(version);
+		 serv != fake_clients.upper_bound(version);
+		 serv++) {
+
+	      if( serv->second.ip == ip
+		  &&  serv->second.port == -port )
+		{
+		  fake_clients.erase(serv);
+		  DPRINT(MSG, "A fake server disconnected");
+		  break;
+		}
+	    }
           }
         else
           {
@@ -245,8 +243,8 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
               options.Set(game_name, passwd);
             }
 
-            fake_clients.insert( std::make_pair(server_id, FakeClient(ip, port, options)));
-            stats.NewFakeServer();
+            fake_clients.insert(std::make_pair(version, FakeClient(ip, port, options)));
+            stats.NewFakeServer(version);
           }
       }
       break;

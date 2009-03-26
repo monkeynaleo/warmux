@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #define CLIENT_H
 #include <netinet/in.h>
 #include <string>
-#include "../../src/network/index_svr_msg.h"
+#include <WSERVER_index_msg.h>
 #include "net_data.h"
 
 class HostOptions {

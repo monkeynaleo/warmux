@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,40 +17,41 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef SYNC_SLAVE_H
-#define SYNC_SLAVE_H
-#include <map>
-#include <string>
-#include "net_data.h"
+#include <time.h>
+#include <stdio.h>
+#include <WSERVER_debug.h>
+#include "clock.h"
+#include "sync_slave.h"
+#include "stat.h"
 
-const std::string sync_serv_version = "WIS";
+Clock wx_clock;
 
-// Connection to an other index server
-// We don't send anything to this connection (except the handshake+version), we just receive information
-// about new games on this server (this server will open a socket by itself to receive information about
-// connections on us).
-class IndexServerConn : public NetData
+Clock::Clock() : BasicClock()
 {
- private:
-  bool HandShake();
+  last_refresh = time(NULL);
+}
 
- public:
-  IndexServerConn(const std::string &addr, int port);
-  ~IndexServerConn();
-  bool HandleMsg(enum IndexServerMsg msg_id);
-};
-
-// List that contains informations about wormux client/server connected
-// on other index servers
-class SyncSlave : public std::map<std::string, IndexServerConn*>
+void Clock::HandleJobs(bool local)
 {
- public:
-  SyncSlave();
-  ~SyncSlave();
-  bool Start();
-  void CheckGames();
-};
+  if (time(NULL) == last_refresh)
+    return;
 
-extern SyncSlave sync_slave;
+  // Every day
+  if (time(NULL) % (60 * 60 * 24) == 0) {
+    DPRINT(INFO, "%s", UpTimeStr());
+    DPRINT(INFO, "Day changed to : %s", DateStr());
+    stats.hourly.Rotate();
+    stats.daily.Write();
+  }
+  // Every hour
+  else if (time(NULL) % (60 * 60) == 0) {
+    stats.hourly.Write();
+  }
 
-#endif
+  // Refresh connections to the servers every minutes
+  else if (time(NULL) % 60 == 0 && !local) {
+    sync_slave.Start();
+  }
+
+  last_refresh = time(NULL);
+}

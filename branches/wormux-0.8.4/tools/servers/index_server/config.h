@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,12 +15,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Download a file using libcurl
- *****************************************************************************/
+ ******************************************************************************/
 
-#ifndef DOWNLOAD_H
-#define DOWNLOAD_H
+#ifndef CONFIG_H
+#define CONFIG_H
 
-void DownloadServerList();
+#include <WSERVER_config.h>
+
+const int VERSION = 2;
+
+class Config : public BasicConfig
+{
+public:
+  Config();
+};
+
+extern Config config;
+
 #endif

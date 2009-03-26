@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <WSERVER_debug.h>
 #include "server.h"
 #include "client.h"
-#include "debug.h"
 
 Server::Server(int port)
 {

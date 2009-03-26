@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@
 #include <curl/curl.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <WSERVER_debug.h>
+#include <WSERVER_index_msg.h>
 #include "download.h"
-#include "debug.h"
 #include "config.h"
-#include "../../src/network/index_svr_msg.h"
 
 class Downloader
 {
@@ -50,8 +50,7 @@ Downloader::~Downloader()
 
 size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
 {
-  fwrite(buf, size, nmemb, (FILE*)fd);
-  return nmemb;
+  return fwrite(buf, size, nmemb, (FILE*)fd);
 }
 
 bool Downloader::Get(const char* url, const char* save_as)

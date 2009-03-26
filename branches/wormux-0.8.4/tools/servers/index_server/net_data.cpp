@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,8 +28,9 @@
 #include <unistd.h>
 #include <list>
 #include <time.h>
+#include <WSERVER_debug.h>
+
 #include "net_data.h"
-#include "debug.h"
 
 #ifdef WIN32
 # define SOCKET_PARAM    char

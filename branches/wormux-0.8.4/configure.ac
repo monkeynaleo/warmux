@@ -37,6 +37,7 @@ AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
+AC_PROG_RANLIB
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -388,8 +389,10 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
+		 lib/wormux-server/Makefile
                  doc/Makefile
                  po/Makefile
+		 tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)

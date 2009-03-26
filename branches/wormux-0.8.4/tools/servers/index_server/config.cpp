@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2009 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,26 +17,21 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef CLOCK_H
-#define CLOCK_H
-#include <time.h>
+#include <string>
+#include <fstream>
+#include "config.h"
 
-class Clock
+Config config;
+
+Config::Config() : BasicConfig("wormux_index_server.conf")
 {
-  time_t start_time;
-  time_t last_refresh;
-
-  char time_str[1024];
-  char date_str[1024];
-
- public:
-  Clock();
-  void HandleJobs(bool local=false);
-  const char* TimeStr();
-  const char* DateStr();
-  void ShowUpTime();
-};
-
-extern Clock wx_clock;
-#endif //CLOCK_H
-
+  Load();
+  SetDefault("port", 9997);
+  SetDefault("working_dir", "wormux_log/");
+  SetDefault("chroot", true);
+  SetDefault("chroot_gid", 500);
+  SetDefault("chroot_uid", 500);
+  SetDefault("connexion_max", -2);
+  SetDefault("local", false);
+  Display();
+}
