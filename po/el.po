@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 13:52+0200\n"
-"PO-Revision-Date: 2008-10-15 15:56+0200\n"
+"PO-Revision-Date: 2009-03-25 15:19+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -324,8 +324,8 @@ msgstr[1] "Η ομάδα %s κέρδισε %u αλεξίπτωτα!"
 #, c-format
 msgid "%s team has won %u polecat! You have you're gas mask, right ?"
 msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
-msgstr[0] "Η ομάδα %s κέρδισε %u ασβό! Βγάλτε τις μάσκες αερίου!"
-msgstr[1] "Η ομάδα %s κέρδισε %u ασβούς! Βγάλτε τις μάσκες αερίου!"
+msgstr[0] "Η ομάδα %s κέρδισε %u ασβό! Βγάλτε τις αντιασφυξιογόνες μάσκες!"
+msgstr[1] "Η ομάδα %s κέρδισε %u ασβούς! Βγάλτε τις αντιασφυξιογόνες μάσκες!"
 
 # bombe incendiaire
 #: src/weapon/riot_bomb.cpp:133
@@ -573,9 +573,8 @@ msgid "Change weapon countdown"
 msgstr "Αλλαγή αντίστροφης μέτρησης όπλου"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Χαρακτήρας"
+msgstr "Ονόματα χαρακτήρα:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -662,7 +661,7 @@ msgstr "Απόδοση Τιμών"
 
 #: src/menu/game_mode_editor.cpp:87
 msgid "Damage per turn during death mode"
-msgstr "Τραυματισμός ανά γύρο κατά την διάρκεια της κατάστασης θανάτου"
+msgstr "Τραυματισμός ανά γύρο κατά τη διάρκεια της κατάστασης θανάτου"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -847,7 +846,7 @@ msgstr "Πιστόλι"
 
 #: src/tool/file_tools.cpp:186
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Φάκελος HOME (μεταβλητή περιβάλλοντος $HOME) δεν μπορεί να βρεθεί!"
+msgstr "Ο φάκελος HOME (μεταβλητή περιβάλλοντος $HOME) δεν μπορεί να βρεθεί!"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:237
@@ -877,6 +876,7 @@ msgid "Host a game"
 msgstr "Δημιουργήστε ένα παιχνίδι"
 
 #: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1371,7 +1371,7 @@ msgstr "Γράφημα ομάδων"
 
 #: src/menu/results_menu.cpp:424
 msgid "Team stats"
-msgstr "Στατιστικά ομάδας"
+msgstr "Στατιστικά ομάδων"
 
 #: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
 msgid "Teams"
@@ -1426,7 +1426,7 @@ msgstr ""
 # La connexion a expiré. Vérifiez qu'il n'y a pas de firewall !
 #: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr "Η σύνδεση κόπηκε. Επιβεβαίωσε ότι δεν υπάρχει τείχος προστασίας!"
+msgstr "Η σύνδεση έληξε. Επιβεβαίωσε ότι δεν υπάρχει τείχος προστασίας!"
 
 # La grenade disco a quitté la piste de danse avant d'exploser.
 #: src/weapon/disco_grenade.cpp:127
@@ -1570,7 +1570,7 @@ msgstr ""
 #: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
-msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστολάκι!"
+msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
 
 #. Various options
 #: src/menu/options_menu.cpp:77
@@ -1589,9 +1589,11 @@ msgstr "Έναρξη του Wormux..."
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
+# cyclic redundancy check (CRC) checksum
+# CRC terrain erroné !
 #: src/include/action_handler.cpp:221
 msgid "Wrong map CRC!"
-msgstr "Λάθος χάρτης CRC!"
+msgstr "Λάθος CRC χάρτη!"
 
 #: src/include/action_handler.cpp:218
 msgid "Wrong map name!"
