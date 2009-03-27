@@ -389,6 +389,7 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
+		 lib/wormux/Makefile
 		 lib/wormux-server/Makefile
                  doc/Makefile
                  po/Makefile
