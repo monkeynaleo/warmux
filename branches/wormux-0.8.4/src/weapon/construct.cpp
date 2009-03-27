@@ -37,7 +37,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 #ifdef DEBUG

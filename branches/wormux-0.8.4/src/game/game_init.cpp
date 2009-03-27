@@ -19,13 +19,14 @@
  * Game loop : drawing and data handling
  *****************************************************************************/
 
-#include "game/game_init.h"
 #include <SDL.h>
 #include <iostream>
+
+#include "character/character.h"
 #include "game/game.h"
+#include "game/game_init.h"
 #include "game/game_mode.h"
 #include "game/time.h"
-#include "character/character.h"
 #include "include/action_handler.h"
 #include "interface/cursor.h"
 #include "interface/game_msg.h"
@@ -44,57 +45,65 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/i18n.h"
 
-void GameInit::InitGameData_NetServer()
+void GameInit::InitGameData_NetGameMaster()
 {
-  Network::GetInstanceServer()->RejectIncoming();
+  if (Network::GetInstance()->IsServer()) {
+    Network::GetInstanceServer()->RejectIncoming();
+  }
 
   RandomSync().InitRandom();
 
   GameMode::GetInstance()->Load();
   SendGameMode();
 
-  Network::GetInstance()->SetState(Network::NETWORK_LOADING_DATA);
+  Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
   Network::GetInstance()->SendNetworkState();
 }
 
-void GameInit::EndInitGameData_NetServer()
+void GameInit::EndInitGameData_NetGameMaster()
 {
   // Wait for all clients to be ready to play
+
+  // If we are connected to a dedicated server, we must check there are still some players connected
   while (Network::IsConnected()
-         && Network::GetInstanceServer()->GetNbReadyPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
-  {
+         && Network::GetInstance()->GetNbHostsReady() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
 
   // Before playing we should check that init phase happens correctly on all clients
   Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
-  Network::GetInstance()->SendAction(a);
+  Network::GetInstance()->SendActionToAll(a);
 
+  // If we are connected to a dedicated server, we must check there are still some players connected
   while (Network::IsConnected()
-         && Network::GetInstanceServer()->GetNbCheckedPlayers() + 1  != Network::GetInstanceServer()->GetNbConnectedPlayers())
-    {
-      ActionHandler::GetInstance()->ExecActions();
-      SDL_Delay(200);
-    }
+         && Network::GetInstance()->GetNbHostsChecked() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
+    ActionHandler::GetInstance()->ExecActions();
+    SDL_Delay(200);
+  }
 
   // Let's play !
-  Network::GetInstance()->SetState(Network::NETWORK_PLAYING);
+  Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
   Network::GetInstance()->SendNetworkState();
 }
 
 void GameInit::EndInitGameData_NetClient()
 {
   // Tells server that client is ready
-  Network::GetInstance()->SetState(Network::NETWORK_READY_TO_PLAY);
+  Network::GetInstance()->SetState(WNet::NETWORK_READY_TO_PLAY);
   Network::GetInstance()->SendNetworkState();
 
   // Waiting for other clients
   std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
-  while (Network::GetInstance()->GetState() == Network::NETWORK_READY_TO_PLAY
-         && Network::IsConnected())
+
+  while (Network::IsConnected()
+	 && !Network::GetInstance()->IsGameMaster()
+	 && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
   {
     ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(100);
@@ -153,8 +162,8 @@ void GameInit::InitData()
   Time::GetInstance()->Reset();
 
   // initialize gaming data
-  if (Network::GetInstance()->IsServer())
-    InitGameData_NetServer();
+  if (Network::GetInstance()->IsGameMaster())
+    InitGameData_NetGameMaster();
   else if (Network::GetInstance()->IsLocal())
     RandomSync().InitRandom();
 
@@ -202,10 +211,17 @@ GameInit::GameInit():
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
   // Waiting for others players
-  if  (Network::GetInstance()->IsServer())
-    EndInitGameData_NetServer();
-  else if (Network::GetInstance()->IsClient())
-    EndInitGameData_NetClient();
+  if (!Network::GetInstance()->IsLocal()) {
+    if  (Network::GetInstance()->IsGameMaster())
+      EndInitGameData_NetGameMaster();
+    else {
+      EndInitGameData_NetClient();
+
+      // We have been elected as game master (the previous one has been disconnected)
+      if (Network::GetInstance()->IsGameMaster())
+	EndInitGameData_NetGameMaster();
+    }
+  }
 
   Game::GetInstance()->Init();
 

@@ -30,7 +30,7 @@
 
 #include <string>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "graphic/surface.h"
 #include "interface/mouse.h"
 #include "map/maps_list.h"

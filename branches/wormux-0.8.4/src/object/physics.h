@@ -28,8 +28,8 @@
 #define PHYSICS_H
 
 #include "include/base.h"
-#include "tool/euler_vector.h"
-#include "tool/point.h"
+#include <WORMUX_euler_vector.h>
+#include <WORMUX_point.h>
 #include "object_cfg.h"
 
 enum MotionType_t

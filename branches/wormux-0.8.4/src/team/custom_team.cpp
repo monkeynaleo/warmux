@@ -29,7 +29,6 @@
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
 #include "tool/xml_document.h"
 
 CustomTeam::CustomTeam(const std::string &team_name)

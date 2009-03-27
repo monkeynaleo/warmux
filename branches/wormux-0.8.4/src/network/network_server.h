@@ -22,37 +22,37 @@
 #ifndef NETWORK_SERVER_H
 #define NETWORK_SERVER_H
 //-----------------------------------------------------------------------------
+#include <WORMUX_socket.h>
 #include "network.h"
 //-----------------------------------------------------------------------------
 
 class NetworkServer : public Network
 {
   uint max_nb_players;
-  TCPsocket server_socket; // Wait for incoming connections on this socket
+  WSocket server_socket; // Wait for incoming connections on this socket
+  int port; // store listening port
+
+  uint NextPlayerId() const;
+  bool HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const;
 
 protected:
-  bool HandShake(TCPsocket& client_socket);
-  virtual void HandleAction(Action* a, DistantComputer* sender) const;
+  virtual void HandleAction(Action* a, DistantComputer* sender);
   virtual void WaitActionSleep();
 
 public:
-  NetworkServer(const std::string& password);
+  NetworkServer(const std::string& game_name, const std::string& password);
   ~NetworkServer();
 
   //virtual const bool IsConnected() const { return true; }
   virtual bool IsServer() const { return true; }
 
   // Serveur specific methods
-  connection_state_t ServerStart(const std::string &port);
+  connection_state_t StartServer(const std::string &port, uint max_nb_players);
 
-  bool AcceptIncoming();
   void RejectIncoming();
-  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+  void CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
-  uint GetNbConnectedPlayers() const;
-  uint GetNbInitializedPlayers() const;
-  uint GetNbReadyPlayers() const;
-  uint GetNbCheckedPlayers() const;
+
 };
 
 //-----------------------------------------------------------------------------

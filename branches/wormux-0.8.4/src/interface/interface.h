@@ -23,7 +23,7 @@
 #define INTERFACE_H
 #include <vector>
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "weapon_menu.h"
 #include "graphic/colors.h"
 #include "gui/energy_bar.h"

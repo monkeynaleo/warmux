@@ -50,7 +50,6 @@
 #include "team/teams_list.h"
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
-#include "tool/i18n.h"
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
 #include <sstream>

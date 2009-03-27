@@ -56,7 +56,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/results.h"
-#include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/stats.h"
 
@@ -476,7 +475,7 @@ bool Game::Run()
 bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
-  return !net->IsLocal() && net->cpu.empty();
+  return !net->IsLocal() && (net->GetNbHostsConnected() == 0);
 }
 
 void Game::MessageEndOfGame() const
@@ -506,7 +505,7 @@ void Game::MainLoop()
   RefreshClock();
   time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
 
-  if(Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsServer())
+  if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
     PingClient();
   StatStart("Game:RefreshInput()");
   RefreshInput();
@@ -626,7 +625,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
 void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 {
   if (begin_game &&
-      (Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()))
+      (Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal()))
     Network::GetInstance()->SetTurnMaster(true);
 
   if (!Network::GetInstance()->IsTurnMaster())

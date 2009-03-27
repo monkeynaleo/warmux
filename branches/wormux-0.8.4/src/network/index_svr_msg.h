@@ -22,6 +22,7 @@
 
 #ifndef TOP_SERVER_MSG_H
 #define TOP_SERVER_MSG_H
+
 #include <string>
 
 enum IndexServerMsg

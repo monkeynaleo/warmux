@@ -23,7 +23,7 @@
 #include <map>
 #include <vector>
 #include "include/base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 typedef struct _xmlNode xmlNode;
 

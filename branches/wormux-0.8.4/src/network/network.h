@@ -22,11 +22,12 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
 #include <list>
 #include <string>
+#include <WORMUX_network.h>
+#include <WORMUX_player.h>
+#include <WORMUX_singleton.h>
 #include "include/base.h"
-#include "include/singleton.h"
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file
@@ -41,88 +42,70 @@
 #  define O_SYNC  O_BINARY
 #endif
 
-const std::string WORMUX_NETWORK_PORT = "3826";
-const uint WORMUX_NETWORK_PORT_INT = 3826;
-
 // Some forward declarations
 struct SDL_Thread;
 class Action;
 class DistantComputer;
 class NetworkServer;
 class NetworkMenu;
+class WSocketSet;
 
-typedef enum
+
+class NetworkThread
 {
-  CONNECTED,
-  CONN_BAD_HOST,
-  CONN_BAD_PORT,
-  CONN_BAD_SOCKET,
-  CONN_REJECTED,
-  CONN_TIMEOUT,
-  CONN_WRONG_PASSWORD,
-  CONN_WRONG_VERSION
-} connection_state_t;
+private:
+  static SDL_Thread* thread; // network thread, where we receive data from network
+  static bool stop_thread;
+
+  static void ReceiveActions();
+  static int ThreadRun(void* no_param);
+public:
+  static void Start();
+  static void Stop();
+
+  static bool Continue();
+  static void Wait();
+};
+
 
 class Network : public Singleton<Network>
 {
-public:
-  typedef enum
-    {
-      NO_NETWORK,
-      NETWORK_MENU_OK,
-      NETWORK_LOADING_DATA,
-      NETWORK_READY_TO_PLAY,
-      NETWORK_PLAYING,
-      NETWORK_NEXT_GAME
-    } network_state_t;
-
 private:
-
+  /* if you need that, implement it (correctly)*/
   Network(const Network&);
   const Network& operator=(const Network&);
-  friend class DistantComputer;
+  /*********************************************/
+  static int num_objects;
 
+  std::list<DistantComputer*> cpu; // list of the connected computer
+  SDL_mutex *cpus_lock;
+
+  std::string game_name;
   std::string password;
-  static connection_state_t GetError();
 
-  static bool sdlnet_initialized;
-  static int  num_objects;
-
-  static bool stop_thread;
+  Player player;
   bool turn_master_player;
 
-  std::string nickname; //Clients: Send to Server at connect
-                        //Server: Send in chat messages
-
-  void ReceiveActions();
-
 protected:
-  network_state_t state;
+  bool game_master_player;
+  WNet::net_game_state_t state;
 
-  Network(const std::string& password); // pattern singleton
+  Network(const std::string& game_name, const std::string& password); // pattern singleton
 
-  SDL_Thread* thread; // network thread, where we receive data from network
-  SDLNet_SocketSet socket_set;
-  IPaddress ip; // for server : store listening port
-                // for client : store server address/port
+  WSocketSet* socket_set;
 
 #ifdef LOG_NETWORK
   int fout;
   int fin;
 #endif
 
-  bool ThreadToContinue() const;
-  static int ThreadRun(void* no_param);
-
-  virtual void HandleAction(Action* a, DistantComputer* sender) const = 0;
-  virtual void WaitActionSleep() = 0;
+  virtual void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
 
   void DisconnectNetwork();
 
+  void SetGameName(const std::string& game_name);
 public:
   NetworkMenu* network_menu;
-
-  std::list<DistantComputer*> cpu; // list of the connected computer
   bool sync_lock;
 
   virtual ~Network();
@@ -130,52 +113,60 @@ public:
   static Network* GetInstance();
   static NetworkServer* GetInstanceServer(); // WARNING: return NULL if not server!!
 
-  static void Init();
-  static void Disconnect();
-
-  static bool IsConnected();
-  virtual bool IsLocal() const { return false ; }
-  virtual bool IsServer() const { return false ; }
-  virtual bool IsClient() const { return false ; }
-  uint GetPort() const;
-  const std::string& GetPassword() const { return password; }
-
-  void SetNickname(const std::string& nickname);
-  const std::string& GetNickname() const;
-  std::string GetDefaultNickname() const;
-
-  // Action handling
-  void SendPacket(char* packet, int size) const;
-  virtual void SendAction(const Action& action) const;
-
-  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
-
   // Start a client
   static connection_state_t ClientStart(const std::string &host, const std::string &port,
 					const std::string& password);
 
   // Start a server
   static connection_state_t ServerStart(const std::string &port,
+					const std::string& game_name,
 					const std::string& password);
 
+  static void Disconnect();
+  static bool IsConnected();
+
+  virtual bool IsLocal() const { return false; }
+  virtual bool IsServer() const { return false; }
+  virtual bool IsClient() const { return false; }
+
+  void SetGameMaster(); // useful when we re-electing a game master
+  bool IsGameMaster() const;
+  const std::string& GetGameName() const;
+  const std::string& GetPassword() const;
+  Player& GetPlayer();
+  const Player& GetPlayer() const;
+
+  std::list<DistantComputer*>& GetRemoteHosts();
+
+  std::list<DistantComputer*>& LockRemoteHosts();
+  const std::list<DistantComputer*>& LockRemoteHosts() const;
+  void UnlockRemoteHosts() const;
+  void AddRemoteHost(DistantComputer *host);
+  void RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it);
+
+  int CheckActivity(int timeout);
+  virtual void HandleAction(Action* a, DistantComputer* sender) = 0;
+  virtual void WaitActionSleep() = 0;
+  virtual void CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
+
+  // Action handling
+  void SendActionToAll(const Action& action) const;
+  void SendActionToOne(const Action& action, DistantComputer* client) const;
+  void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
+
   // Manage network state
-  static connection_state_t CheckHost(const std::string &host, int prt);
-  void SetState(Network::network_state_t state);
-  Network::network_state_t GetState() const;
-  void SendNetworkState() const;
+  void SetState(WNet::net_game_state_t state);
+  WNet::net_game_state_t GetState() const;
+  void SendNetworkState();
 
   void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
 
-  static bool Send(TCPsocket& socket, const int& nbr);
-  static bool Send(TCPsocket& socket, const std::string &str);
-
-  static uint Batch(void* buffer, const int& nbr);
-  static uint Batch(void* buffer, const std::string &str);
-  static bool SendBatch(TCPsocket& socket, void* data, size_t len);
-
-  static int ReceiveInt(SDLNet_SocketSet& sock_set, TCPsocket& socket, int& nbr);
-  static int ReceiveStr(SDLNet_SocketSet& sock_set, TCPsocket& socket, std::string &str, size_t maxlen);
+  uint GetNbPlayersConnected() const;
+  uint GetNbHostsConnected() const;
+  uint GetNbHostsInitialized() const;
+  uint GetNbHostsReady() const;
+  uint GetNbHostsChecked() const;
 };
 
 //-----------------------------------------------------------------------------

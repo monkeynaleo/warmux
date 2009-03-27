@@ -35,10 +35,9 @@
 #include "network/network.h"
 #include "sound/jukebox.h"
 #include "team/custom_team.h"
-#include "tool/debug.h"
-#include "tool/i18n.h"
+#include <WORMUX_debug.h>
 #include "tool/file_tools.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"

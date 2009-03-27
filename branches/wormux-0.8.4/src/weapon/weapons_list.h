@@ -26,7 +26,7 @@
 #include <map>
 #include "weapon.h"
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 // Classe de gestion des armes

@@ -34,9 +34,9 @@
 #include <string>
 #include <map>
 #include "include/base.h"
-#include "include/singleton.h"
-#include "tool/point.h"
-#include "team/team_config.h"
+#include <WORMUX_singleton.h>
+#include <WORMUX_point.h>
+#include <WORMUX_team_config.h>
 
 // Forward declarations
 class ObjectConfig;

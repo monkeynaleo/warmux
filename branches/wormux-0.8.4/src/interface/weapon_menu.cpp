@@ -19,9 +19,9 @@
  * Interface showing various informations about the game.
  *****************************************************************************/
 
-#include "interface/weapon_menu.h"
 #include <sstream>
-#include "interface/interface.h"
+
+#include "game/config.h"
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"
@@ -29,16 +29,16 @@
 #include "graphic/video.h"
 #include "include/action_handler.h"
 #include "include/app.h"
+#include "interface/interface.h"
 #include "interface/mouse.h"
+#include "interface/weapon_menu.h"
 #include "map/maps_list.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 #include "sound/jukebox.h"
 #include "weapon/weapon.h"
 #include "weapon/weapons_list.h"
-#include "game/config.h"
 
 // Weapon menu
 const uint ICONS_DRAW_TIME = 400;       // Time to display all icons (in ms)

@@ -31,8 +31,8 @@ public:
 private:
   LoadingScreen loading_sreen;
   // Initialization
-  void InitGameData_NetServer();
-  void EndInitGameData_NetServer();
+  void InitGameData_NetGameMaster();
+  void EndInitGameData_NetGameMaster();
   void EndInitGameData_NetClient();
 
   void InitMap();

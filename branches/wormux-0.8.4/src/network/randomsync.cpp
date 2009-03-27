@@ -23,7 +23,7 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "include/action_handler.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/random.h"
 
 void RandomSyncGen::InitRandom()
@@ -37,16 +37,14 @@ void RandomSyncGen::InitRandom()
   if (Network::GetInstance()->IsLocal()) {
     int seed = time(NULL);
     SetRand(seed);
-  }
-
-  if (Network::GetInstance()->IsServer()) {
+  } else if (Network::GetInstance()->IsGameMaster()) {
     int seed = time(NULL);
     SetRand(seed);
 
     MSG_DEBUG("random", "Server sending seed %d", seed);
 
     Action a(Action::ACTION_NETWORK_RANDOM_INIT, seed);
-    Network::GetInstance()->SendAction(a);
+    Network::GetInstance()->SendActionToAll(a);
   }
 }
 
@@ -58,8 +56,8 @@ uint RandomSyncGen::GetRand()
   MSG_DEBUG("random.get", "Get %04d: %u", nb_get, nbr);
 
   if (Network::IsConnected())
-    ASSERT(Network::GetInstance()->GetState() == Network::NETWORK_LOADING_DATA
-	   || Network::GetInstance()->GetState() == Network::NETWORK_PLAYING);
+    ASSERT(Network::GetInstance()->GetState() == WNet::NETWORK_LOADING_DATA
+	   || Network::GetInstance()->GetState() == WNet::NETWORK_PLAYING);
 #endif
   return nbr;
 }

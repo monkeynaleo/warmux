@@ -20,12 +20,12 @@
 #include <algorithm>
 #include <iostream>
 #include <SDL_image.h>
+
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "map/camera.h"
-#include "tool/i18n.h"
 
 
 Video::Video()

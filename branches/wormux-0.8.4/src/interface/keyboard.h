@@ -23,7 +23,7 @@
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 class Keyboard : public ManMachineInterface, public Singleton<Keyboard>

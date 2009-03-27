@@ -24,54 +24,31 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
+#include <WORMUX_action_handler.h>
 #include "include/action.h"
 #include "include/base.h"
-#include "include/singleton.h"
+
 //-----------------------------------------------------------------------------
 
 // Forward declarations
 struct SDL_mutex;
+class Player;
 
-class ActionHandler : public Singleton<ActionHandler>
+class ActionHandler : public WActionHandler, public Singleton<ActionHandler>
 {
 private:
-  // Mutex needed to be thread safe for the network
-  SDL_mutex* mutex;
-
-  // Handler for each action
-  typedef void (*callback_t) (Action *a);
-  std::map<Action::Action_t, callback_t> handler;
-  typedef std::map<Action::Action_t, callback_t>::const_iterator handler_it;
-
-  // Action strings
-  std::map<Action::Action_t, std::string> action_name;
-  typedef std::map<Action::Action_t, std::string>::const_iterator name_it;
-
-  // Action queue
-  std::list<Action*> queue;
+  friend class Singleton<ActionHandler>;
+  ActionHandler();
+  ~ActionHandler();
 
 public:
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
-  void Flush();
   void ExecActions();
-  const std::string &GetActionName(Action::Action_t action) const;
-
-protected:
-  friend class Singleton<ActionHandler>;
-  ActionHandler();
-  ~ActionHandler();
-
-private:
-  /* If you need this, you probably made an error in your code... */
-  ActionHandler(const ActionHandler&);
-  const ActionHandler& operator=(const ActionHandler&);
-  /****************************************************************/
-
-  void Exec(Action *a);
-  void Register(Action::Action_t action, const std::string &name, callback_t fct);
 };
+
+void Action_Handler_Init();
 
 // TODO: Move it in an object !
 
@@ -86,7 +63,11 @@ void SendActiveCharacterAction(const Action& a);
 void SendGameMode();
 void SyncCharacters();
 
+void SendInitialGameInfo(DistantComputer* client);
 
+void WORMUX_ConnectHost(DistantComputer& host);
+void WORMUX_DisconnectHost(DistantComputer& host);
+void WORMUX_DisconnectPlayer(Player& player);
 
 //-----------------------------------------------------------------------------
 #endif

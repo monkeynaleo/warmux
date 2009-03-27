@@ -36,7 +36,6 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
-#include "tool/i18n.h"
 #include "tool/xml_document.h"
 
 const uint time_delta = 40;
@@ -127,7 +126,7 @@ void SuperTux::Refresh()
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
     a.Push(GetPos());
-    Network::GetInstance()->SendAction(a);
+    Network::GetInstance()->SendActionToAll(a);
   }
 
   if (!swimming)

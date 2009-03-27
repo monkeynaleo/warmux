@@ -150,6 +150,13 @@ void Action::Push(const Point2d& val)
   Push(val.y);
 }
 
+void Action::Push(const EulerVector &val)
+{
+  Push(val.x0);
+  Push(val.x1);
+  Push(val.x2);
+}
+
 void Action::Push(const std::string& val)
 {
   //Cut the string into 32bit values
@@ -276,6 +283,15 @@ Point2d Action::PopPoint2d()
   x = PopDouble();
   y = PopDouble();
   return Point2d(x, y);
+}
+
+EulerVector Action::PopEulerVector()
+{
+  double x0, x1, x2;
+  x0 = PopDouble();
+  x1 = PopDouble();
+  x2 = PopDouble();
+  return EulerVector(x0, x1, x2);
 }
 
 //-----------------------------------------------------------------------------

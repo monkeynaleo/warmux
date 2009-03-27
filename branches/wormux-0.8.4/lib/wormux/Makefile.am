@@ -8,6 +8,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_debug.h \
 	./include/WORMUX_distant_cpu.h \
 	./include/WORMUX_error.h \
+	./include/WORMUX_euler_vector.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_network.h \
 	./include/WORMUX_player.h \
@@ -23,6 +24,7 @@ libwormux_a_SOURCES = \
 	./base/error.cpp \
 	./base/i18n.cpp \
 	./base/singleton.cpp \
+	./maths/euler_vector.cpp \
 	./net/distant_cpu.cpp \
 	./net/network.cpp \
 	./net/player.cpp \

@@ -31,7 +31,7 @@
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "map/wind.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "include/action.h"

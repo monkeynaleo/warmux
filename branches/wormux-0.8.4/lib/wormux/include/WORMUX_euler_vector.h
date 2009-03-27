@@ -15,28 +15,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Point.h:    Standard C++ 2D Point template
- ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
- *             Initial version
  *****************************************************************************/
 
-#ifndef _POINT_H
-#define _POINT_H
+#ifndef WORMUX_EULER_VECTOR_H
+#define WORMUX_EULER_VECTOR_H
 
-#include "vector2.h"
+class EulerVector{
+  public:
+    double x0, x1, x2;
 
-typedef Vector2<int>    Point2i;
-typedef Vector2<float>  Point2f;
-typedef Vector2<double> Point2d;
+    EulerVector() :
+                  x0(0.0), x1(0.0), x2(0.0)
+                { };
+    EulerVector(double v0, double v1, double v2) :
+                  x0(v0), x1(v1), x2(v2)
+                { };
+    void Clear();
+    void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
+};
 
-#define POINT2D_2_POINT2I(point) \
-    (Point2i)( point )
-//  Point2i((int)point.x, (int)point.y)
-
-#define POINT2I_2_POINT2D(point) \
-    (Point2d)( point )
-//  Point2d((double)point.x, (double)point.y)
-
-#endif // _POINT_H
+#endif

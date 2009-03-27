@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <assert.h>
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "sample_cache.h"
 
 SampleCache::SampleCache( size_t memory_limit )

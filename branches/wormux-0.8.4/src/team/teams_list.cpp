@@ -18,22 +18,20 @@
  ******************************************************************************
  * Team handling
  *****************************************************************************/
-
-#include "team/team.h"
-#include "team/team_config.h"
-#include "team/teams_list.h"
-//-----------------------------------------------------------------------------
+#include <algorithm>
+#include <iostream>
+#include <WORMUX_team_config.h>
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
 #include "game/config.h"
+#include "game/game_mode.h"
 #include "network/network.h"
-#include "tool/file_tools.h"
-#include "tool/i18n.h"
-#include "team/team_energy.h"
-#include <algorithm>
-#include <iostream>
 #include "network/randomsync.h"
+#include "team/team.h"
+#include "team/team_energy.h"
+#include "team/teams_list.h"
+#include "tool/file_tools.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -74,9 +72,19 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  GetTeamsList().SetActive (next->GetId());
+  SetActive(next->GetId());
+
+  if (GameMode::GetInstance()->auto_change_character) {
+    ActiveTeam().NextCharacter();
+  }
+
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
-  Network::GetInstance()->SendAction(a);
+  Character::StoreActiveCharacter(&a);
+  Network::GetInstance()->SendActionToAll(a);
+
+  printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
 }
 
 //-----------------------------------------------------------------------------
@@ -602,25 +610,6 @@ void TeamsList::SetActive(const std::string &id)
     }
   }
   Error (Format(_("Can't find team %s!"), id.c_str()));
-}
-
-//-----------------------------------------------------------------------------
-
-std::string TeamsList::GetLocalHeadCommanders() const
-{
-  std::string nickname;
-
-  for (std::vector<Team*>::iterator it = GetTeamsList().playing_list.begin();
-       it != GetTeamsList().playing_list.end();
-       it++) {
-    if ((*it)->IsLocal()) {
-      if (nickname != "") nickname += "+";
-
-      nickname += (*it)->GetPlayerName();
-    }
-  }
-
-  return nickname;
 }
 
 //-----------------------------------------------------------------------------

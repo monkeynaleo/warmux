@@ -38,12 +38,12 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #include "tool/random.h"
-#include "tool/rectangle.h"
+#include <WORMUX_rectangle.h>
 #include "weapon/weapon_launcher.h"
 
 const int Y_OBJET_MIN = -10000;

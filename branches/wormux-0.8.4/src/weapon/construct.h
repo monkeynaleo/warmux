@@ -23,7 +23,7 @@
 #define CONSTRUCT_H
 #include "weapon.h"
 #include "include/base.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 class Sprite;
 class WeaponConfig;

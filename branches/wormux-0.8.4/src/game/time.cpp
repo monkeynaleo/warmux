@@ -24,11 +24,13 @@
 #include <sstream>
 #include <iomanip>
 
-bool Time::IsGamePaused() const {
+bool Time::IsGamePaused() const
+{
   return is_game_paused;
 }
 
-Time::Time(){
+Time::Time()
+{
   is_game_paused = false;
   delta_t = 20;
   current_time = 0;
@@ -37,7 +39,8 @@ Time::Time(){
   real_time_pause_dt = 0;
 }
 
-void Time::Reset(){
+void Time::Reset()
+{
   current_time = 0;
   is_game_paused = false;
   real_time_game_start = SDL_GetTicks();
@@ -45,11 +48,13 @@ void Time::Reset(){
   real_time_pause_begin = 0;
 }
 
-uint Time::ReadRealTime() const {
+uint Time::ReadRealTime() const
+{
   return SDL_GetTicks() - real_time_game_start - real_time_pause_dt;
 }
 
-void Time::Refresh(){
+void Time::Refresh()
+{
   /*
   TODO : Activate this condition later.
   Refresh time condition :
@@ -73,20 +78,23 @@ void Time::TogglePause()
     Pause();
 }
 
-void Time::Pause(){
+void Time::Pause()
+{
   if (is_game_paused)
     return;
   is_game_paused = true;
   real_time_pause_begin = SDL_GetTicks();
 }
 
-void Time::Continue(){
+void Time::Continue()
+{
   ASSERT (is_game_paused);
   is_game_paused = false;
   real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
 }
 
-std::string Time::GetString() const {
+std::string Time::GetString() const
+{
   std::ostringstream ss;
 
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();

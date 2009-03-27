@@ -28,8 +28,8 @@
 #define PHYSICAL_OBJECT_H
 
 #include "physics.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 // Alive state
 typedef enum

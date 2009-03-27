@@ -32,7 +32,6 @@
 #include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "tool/i18n.h"
 #include "tool/isnan.h"
 #include "tool/resource_manager.h"
 

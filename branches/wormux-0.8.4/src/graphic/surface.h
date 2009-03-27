@@ -26,8 +26,8 @@
 #include <list>
 #include "color.h"
 #include "include/base.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 struct SDL_Surface;
 

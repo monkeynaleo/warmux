@@ -23,7 +23,7 @@
 #define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------

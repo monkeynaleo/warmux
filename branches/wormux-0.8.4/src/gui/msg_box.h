@@ -24,7 +24,7 @@
 
 #include "include/base.h"
 #include "graphic/font.h"
-#include "tool/rectangle.h"
+#include <WORMUX_rectangle.h>
 #include "widget.h"
 #include <list>
 

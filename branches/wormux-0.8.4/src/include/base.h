@@ -16,37 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Declarations et types de base.
+ * Declare types and error functions
  *****************************************************************************/
 
 #ifndef BASE_H
 #define BASE_H
-//-----------------------------------------------------------------------------
 
-#ifndef _MSC_VER
-typedef unsigned char  uchar;
-typedef unsigned short ushort;
-typedef unsigned int   uint;
-typedef unsigned long  ulong;
-typedef unsigned char  uint8;
-//typedef unsigned long uint32;
-typedef signed char    sint8;
-typedef signed long    sint32;
-#else
-typedef unsigned __int8  uchar;
-typedef unsigned __int16 ushort;
-typedef unsigned int     uint;
-typedef unsigned long    ulong;
-typedef unsigned __int8  uint8;
-typedef signed __int8    sint8;
-typedef signed __int32   sint32;
-typedef long int         ssize_t;
+#include <WORMUX_types.h>
+#include <WORMUX_i18n.h>
+#include <WORMUX_error.h>
 
-typedef signed   __int16  int16_t;
-typedef unsigned __int32  uint32_t;
-#endif
-
-//-----------------------------------------------------------------------------
-#include "tool/error.h"
-//-----------------------------------------------------------------------------
 #endif

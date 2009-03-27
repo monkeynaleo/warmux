@@ -16,8 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
-
-#include "tool/euler_vector.h"
+#include <WORMUX_euler_vector.h>
 
 /**
  *  Set the euler vector to (0, 0, 0).

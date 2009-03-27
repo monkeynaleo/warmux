@@ -952,22 +952,49 @@ void Character::GetValueFromAction(Action *a)
   }
 }
 
+// Static method
+void Character::RetrieveCharacterFromAction(Action *a)
+{
+  int team_no = a->PopInt();
+  int char_no = a->PopInt();
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->GetValueFromAction(a);
+}
+
+// Static method
+void Character::StoreActiveCharacter(Action *a)
+{
+  Character::StoreCharacter(a, ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+// Static method
+void Character::StoreCharacter(Action *a, uint team_no, uint char_no)
+{
+  a->Push((int)team_no);
+  a->Push((int)char_no);
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->StoreValue(a);
+}
+
+// ###################################################################
+// ###################################################################
+// ###################################################################
+
 
 const std::string& Character::GetName() const
 {
     return character_name;
- }
+}
 
 void Character::SetCustomName(const std::string name)
 {
-   if(name.size()>0)
+  if (!name.empty())
   {
     name_text->Set(name);
     character_name = name;
   }
-
-
 }
+
 // ###################################################################
 // ###################################################################
 // ###################################################################

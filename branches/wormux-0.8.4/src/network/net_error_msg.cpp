@@ -21,7 +21,6 @@
 
 #include "network/net_error_msg.h"
 #include "network/network.h"
-#include "tool/i18n.h"
 #include "gui/question.h"
 
 const std::string NetworkErrorToString(connection_state_t err)

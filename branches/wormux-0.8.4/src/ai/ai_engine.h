@@ -21,7 +21,7 @@
 #ifndef AI_ENGINE
 #define AI_ENGINE
 
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 
 class AIengine : public Singleton<AIengine>
 {

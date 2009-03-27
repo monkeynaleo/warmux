@@ -18,18 +18,17 @@
  ******************************************************************************
  * Network client layer for Wormux.
  *****************************************************************************/
-
-#include "network/network_client.h"
-//-----------------------------------------------------------------------------
+#include <WORMUX_socket.h>
 #include <SDL_thread.h>
+#include <WORMUX_debug.h>
+
+//-----------------------------------------------------------------------------
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "game/game_mode.h"
-#include "network/distant_cpu.h"
+#include "network/network_client.h"
 #include "network/net_error_msg.h"
-#include "tool/debug.h"
-#include "tool/i18n.h"
+#include "tool/string_tools.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -41,7 +40,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-NetworkClient::NetworkClient(const std::string& password) : Network(password)
+NetworkClient::NetworkClient(const std::string& password) : Network("-", password)
 {
 #ifdef LOG_NETWORK
   fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
@@ -53,45 +52,45 @@ NetworkClient::~NetworkClient()
 {
 }
 
-std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
+void NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
-  printf("Client disconnected\n");
-  delete *closed;
+  printf("- client disconnected: %s\n", (*closed)->ToString().c_str());
 
-  return cpu.erase(closed);
+  RemoveRemoteHost(closed);
 }
 
-void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/) const
+void NetworkClient::HandleAction(Action* a, DistantComputer* /*sender*/)
 {
   ActionHandler::GetInstance()->NewAction(a, false);
 }
 
 //-----------------------------------------------------------------------------
 
-connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
+connection_state_t NetworkClient::HandShake(WSocket& server_socket)
 {
-  int r, ack;
+  int ack;
+  int player_id;
   connection_state_t ret = CONN_REJECTED;
   std::string version;
+  std::string game_name;
 
   MSG_DEBUG("network", "Client: Handshake !");
 
   // Adding the socket to a temporary socket set
-  SDLNet_SocketSet tmp_socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(tmp_socket_set, server_socket);
+  if (!server_socket.AddToTmpSocketSet())
+    goto error_no_socket_set;
 
   // 1) Send the version number
   MSG_DEBUG("network", "Client: sending version number");
 
-  Network::Send(server_socket, Constants::WORMUX_VERSION);
+  if (!server_socket.SendStr(Constants::WORMUX_VERSION))
+    goto error;
 
   // is it ok ?
-  r = Network::ReceiveStr(tmp_socket_set, server_socket, version, 40);
+  if (!server_socket.ReceiveStr(version, 40))
+    goto error;
 
   MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
-
-  if (r)
-    goto error;
 
   if (Constants::WORMUX_VERSION != version) {
     std::string str = Format(_("The client and server versions are incompatible "
@@ -104,11 +103,11 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
   // 2) Send the password
 
   MSG_DEBUG("network", "Client: sending password");
-  Network::Send(server_socket, GetPassword());
+  if (!server_socket.SendStr(GetPassword()))
+    goto error;
 
   // is it ok ?
-  r = Network::ReceiveInt(tmp_socket_set, server_socket, ack);
-  if (r)
+  if (!server_socket.ReceiveInt(ack))
     goto error;
 
   if (ack) {
@@ -116,64 +115,82 @@ connection_state_t NetworkClient::HandShake(TCPsocket& server_socket)
     goto error;
   }
 
+  // 3) Am I the game master ?
+  if (!server_socket.ReceiveInt(ack))
+    goto error;
+
+  if (ack) {
+    game_master_player = true;
+    MSG_DEBUG("network", "Client will be master! (%d)", ack);
+  }
+
+  // 4) Send my nickname
+  if (!server_socket.SendStr(GetPlayer().GetNickname()))
+    goto error;
+
+  // 5) Receive the game name
+  if (!server_socket.ReceiveStr(game_name, 100))
+    goto error;
+
+  // 6) Receive my player id
+  if (!server_socket.ReceiveInt(player_id))
+    goto error;
+
+  GetPlayer().SetId(uint(player_id));
+
+  SetGameName(game_name);
+
   MSG_DEBUG("network", "Client: Handshake done successfully :)");
   ret = CONNECTED;
 
  error:
+  server_socket.RemoveFromTmpSocketSet();
+
+ error_no_socket_set:
   if (ret != CONNECTED)
     std::cerr << "Client: HandShake with server has failed!" << std::endl;
-
-  SDLNet_TCP_DelSocket(tmp_socket_set, server_socket);
-  SDLNet_FreeSocketSet(tmp_socket_set);
   return ret;
 }
 
 connection_state_t
 NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 {
-  Init();
+  connection_state_t r;
+  WSocket* socket;
+  DistantComputer* server;
+  int prt;
 
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
-  int prt = strtol(port.c_str(), NULL, 10);
-
-  connection_state_t r = CheckHost(host, prt);
-  if (r != CONNECTED)
-    return r;
-
-  if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
-  {
-    fprintf(stderr, "SDLNet_ResolveHost: %s to %s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_BAD_HOST;
+  if (!str2int(port, prt)) {
+    r = CONN_BAD_PORT;
+    goto err_no_socket;
   }
 
-  // CheckHost opens and closes a connection to the server, so before reconnecting
-  // wait a bit, so the connection really gets closed ..
-  SDL_Delay(500);
-
-  TCPsocket socket = SDLNet_TCP_Open(&ip);
-
-  if (!socket)
-  {
-    fprintf(stderr, "SDLNet_TCP_Open: %s to%s:%i\n", SDLNet_GetError(), host.c_str(), prt);
-    return CONN_REJECTED;
-  }
-
-  r = HandShake(socket);
+  socket = new WSocket();
+  r = socket->ConnectTo(host, prt);
   if (r != CONNECTED)
-    return r;
+    goto error;
 
-  socket_set = SDLNet_AllocSocketSet(1);
+  r = HandShake(*socket);
+  if (r != CONNECTED)
+    goto error;
 
-  DistantComputer * server = new DistantComputer(socket);
+  socket_set = WSocketSet::GetSocketSet(1);
+  if (!socket_set) {
+    r = CONN_REJECTED;
+    goto error;
+  }
+  socket_set->AddSocket(socket);
+  server = new DistantComputer(socket, "server", 0);
 
-  cpu.push_back(server);
+  AddRemoteHost(server);
 
-  //Send nickname to server
-  Action a(Action::ACTION_NICKNAME, GetNickname());
-  SendAction(a);
-
-  //Control to net_thread_func
-  thread = SDL_CreateThread(Network::ThreadRun, NULL);
+  NetworkThread::Start();
   return CONNECTED;
+
+ error:
+  delete socket;
+ err_no_socket:
+  return r;
 }

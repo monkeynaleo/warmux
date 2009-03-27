@@ -25,8 +25,8 @@
 #include <map>
 #include "graphic/surface.h"
 #include "include/base.h"
-#include "include/singleton.h"
-#include "tool/point.h"
+#include <WORMUX_singleton.h>
+#include <WORMUX_point.h>
 
 // Forward declarations
 struct SDL_event;

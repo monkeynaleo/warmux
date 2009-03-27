@@ -26,9 +26,8 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
-#include "tool/error.h"
 #include "tool/math_tools.h"
-#include "tool/point.h"
+#include <WORMUX_point.h>
 #ifdef DBG_TILE
 #include "graphic/colors.h"
 #endif

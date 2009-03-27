@@ -29,7 +29,6 @@
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
@@ -76,12 +75,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   previews_box->SetMargin(margin);
 
-  if (!display_only) {
-    previews_box->AddWidget(bt_map_minus);
-  } else {
-    previews_box->AddWidget(new NullWidget(bt_map_minus->GetSize()));
-    delete bt_map_minus;
-  }
+  previews_box->AddWidget(bt_map_minus);
 
   map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
@@ -99,12 +93,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   map_preview_after2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after2);
 
-  if (!display_only) {
-    previews_box->AddWidget(bt_map_plus);
-  }else {
-    previews_box->AddWidget(new NullWidget(bt_map_plus->GetSize()));
-    delete bt_map_plus;
-  }
+  previews_box->AddWidget(bt_map_plus);
 
   AddWidget(previews_box);
 
@@ -119,6 +108,11 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
 
   // Load Maps' list
   uint i = MapsList::GetInstance()->GetActiveMapIndex();
+
+  if (display_only) {
+    bt_map_minus->SetVisible(false);
+    bt_map_plus->SetVisible(false);
+  }
 
   ChangeMap(i);
 }
@@ -141,7 +135,7 @@ void MapSelectionBox::ChangeMap(uint index)
   if (index > MapsList::GetInstance()->lst.size()+1) return;
 
   // Callback other network players
-  if (Network::GetInstance()->IsServer()) {
+  if (Network::GetInstance()->IsGameMaster()) {
 
     selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
@@ -153,9 +147,9 @@ void MapSelectionBox::ChangeMap(uint index)
       MapsList::GetInstance()->SelectMapByIndex(index);
     }
 
-    Action* a = new Action(Action::ACTION_MENU_SET_MAP);
-    MapsList::GetInstance()->FillActionMenuSetMap(*a);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_GAME_SET_MAP);
+    MapsList::GetInstance()->FillActionMenuSetMap(a);
+    Network::GetInstance()->SendActionToAll(a);
   } else {
     selected_map_index = index;
   }
@@ -287,6 +281,18 @@ void MapSelectionBox::ChangeMapCallback()
 {
   int index = MapsList::GetInstance()->GetActiveMapIndex();
   ChangeMap(index);
+}
+
+void MapSelectionBox::AllowSelection()
+{
+  display_only = false;
+  bt_map_minus->SetVisible(true);
+  bt_map_plus->SetVisible(true);
+  map_preview_before2->Enable();
+  map_preview_before->Enable();
+  map_preview_after->Enable();
+  map_preview_after2->Enable();
+  NeedRedrawing();
 }
 
 void MapSelectionBox::Pack()

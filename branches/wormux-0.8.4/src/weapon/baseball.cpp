@@ -28,8 +28,7 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/point.h"
-#include "tool/i18n.h"
+#include <WORMUX_point.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"

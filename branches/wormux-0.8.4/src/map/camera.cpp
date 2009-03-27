@@ -31,7 +31,7 @@
 #include "interface/interface.h"
 #include "object/physical_obj.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "game/time.h"
 #include "tool/random.h"
@@ -314,10 +314,10 @@ void Camera::Refresh(){
 void Camera::FollowObject(const PhysicalObj *obj, bool follow,
 			  bool _in_advance)
 {
-  MSG_DEBUG( "camera.tracking", "Following object %s",
-                                 obj->GetName().c_str());
+  MSG_DEBUG( "camera.tracking", "Following object %s", obj->GetName().c_str());
 
   Mouse::GetInstance()->Hide();
+
   if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 

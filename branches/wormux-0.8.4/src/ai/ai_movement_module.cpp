@@ -25,8 +25,7 @@
 #include "character/move.h"
 #include "map/map.h"
 #include "team/teams_list.h"
-#include "tool/debug.h"
-#include "tool/error.h"
+#include <WORMUX_debug.h>
 
 #include "ai/ai_movement_module.h"
 

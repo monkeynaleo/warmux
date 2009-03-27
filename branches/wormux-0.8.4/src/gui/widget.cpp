@@ -26,7 +26,7 @@
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 
 
 Widget::Widget():

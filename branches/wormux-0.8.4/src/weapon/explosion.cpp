@@ -35,7 +35,7 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/debug.h"
+#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/random.h"
@@ -220,7 +220,7 @@ void ApplyExplosion_master (const Point2i &pos,
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(a_begin_sync);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
 
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),
@@ -245,12 +245,12 @@ void ApplyExplosion_master (const Point2i &pos,
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
         // clients : Place characters
-        a_characters_info.StoreCharacter(team_no, char_no);
+	Character::StoreCharacter(&a_characters_info, team_no, char_no);
       }
     }
   }
   // send characters infos on network
-  Network::GetInstance()->SendAction(a_characters_info);
+  Network::GetInstance()->SendActionToAll(a_characters_info);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
   a->Push(pos);
@@ -267,7 +267,7 @@ void ApplyExplosion_master (const Point2i &pos,
 
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(a_sync_end);
+  Network::GetInstance()->SendActionToAll(a_sync_end);
 }
 
 

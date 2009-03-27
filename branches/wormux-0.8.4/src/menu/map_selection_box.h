@@ -25,8 +25,8 @@
 #include "graphic/surface.h"
 #include "gui/box.h"
 #include "include/base.h"
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 // Forward declarations
 class Button;
@@ -63,6 +63,7 @@ class MapSelectionBox : public VBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
+  void AllowSelection();
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);

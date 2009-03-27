@@ -29,7 +29,6 @@
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "tool/i18n.h"
 
 #include <iostream>
 

@@ -21,7 +21,7 @@
 #ifndef AI_STUPID_ENGINE
 #define AI_STUPID_ENGINE
 
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "ai/ai_movement_module.h"
 #include "ai/ai_shoot_module.h"
 

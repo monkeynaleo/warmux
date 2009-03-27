@@ -32,7 +32,6 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
 #include "menu/skin_menu.h"
 
 static const uint BORDER        = 20;

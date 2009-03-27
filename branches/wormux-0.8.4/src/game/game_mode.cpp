@@ -27,7 +27,6 @@
 #include "object/medkit.h"
 #include "object/bonus_box.h"
 #include "tool/file_tools.h"
-#include "tool/i18n.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 

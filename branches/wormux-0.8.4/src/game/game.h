@@ -24,7 +24,7 @@
 #define GAME_H
 
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 #include "network/chat.h"
 #include "sound/sound_sample.h"
 

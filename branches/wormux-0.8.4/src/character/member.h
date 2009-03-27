@@ -22,7 +22,7 @@
 #define MEMBER_H
 #include <map>
 #include <vector>
-#include "tool/point.h"
+#include <WORMUX_point.h>
 
 typedef std::vector<Point2f> v_attached;
 

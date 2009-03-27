@@ -41,7 +41,6 @@
 #include "network/network_server.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 const uint MARGIN_TOP    = 5;
@@ -77,10 +76,12 @@ NetworkMenu::NetworkMenu() :
   widgets.AddWidget(team_box);
   widgets.Pack();
 
+  team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
+
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  if(Network::GetInstance()->IsServer()) {
+  if (Network::GetInstance()->IsGameMaster()) {
     map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
   } else {
     map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true);
@@ -98,35 +99,36 @@ NetworkMenu::NetworkMenu() :
 
   Box* options_box = new VBox(200, true);
 
-  Label* mode = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
+  mode_label = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
+  options_box->AddWidget(mode_label);
 
-  if (Network::GetInstance()->IsClient()) {
-    // Client Mode
-    mode->SetText(_("Client mode"));
-    options_box->AddWidget(mode);
+  player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
+				     GameMode::GetInstance()->max_teams, 1, 2,
+				     GameMode::GetInstance()->max_teams);
+  options_box->AddWidget(player_number);
 
-    player_number = NULL;
-    connected_players = NULL;
-    initialized_players = NULL;
-  } else {
+  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
+				0, Font::FONT_SMALL, Font::FONT_NORMAL);
+  options_box->AddWidget(connected_players);
 
-    // Server Mode
-    mode->SetText(_("Server mode"));
-    options_box->AddWidget(mode);
-
-    player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
-                                   GameMode::GetInstance()->max_teams, 1, 2,
-                                   GameMode::GetInstance()->max_teams);
-    team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
-    options_box->AddWidget(player_number);
-
-    connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
+  initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
 				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
-    options_box->AddWidget(connected_players);
+  options_box->AddWidget(initialized_players);
 
-    initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-                                    0, Font::FONT_SMALL, Font::FONT_NORMAL);
-    options_box->AddWidget(initialized_players);
+  if (!Network::GetInstance()->IsGameMaster()) {
+    // Client Mode
+    mode_label->SetText(_("Client mode"));
+    player_number->SetVisible(false);
+    connected_players->SetVisible(false);
+    initialized_players->SetVisible(false);
+  } else if (Network::GetInstance()->IsServer()) {
+    // Server Mode
+    mode_label->SetText(_("Server mode"));
+
+  } else {
+    // The first player to connect to a headless server asumes the game master role
+    mode_label->SetText(_("Master mode"));
+    player_number->SetVisible(false);
   }
 
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
@@ -141,7 +143,13 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
                         Font::FONT_SMALL, Font::FONT_NORMAL);
-  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
+  if (Network::GetInstance()->IsGameMaster()) {
+    msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."), c_red);
+  } else {
+    // %s will be replaced with the name of the network game
+    msg_box->NewMessage(Format(_("Welcome to %s!"), Network::GetInstance()->GetGameName().c_str()), c_red);
+  }
+
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
                        options_box->GetPositionY());
 
@@ -191,18 +199,15 @@ void NetworkMenu::PrepareForNewGame()
   msg_box->Clear();
   b_ok->SetVisible(true);
 
-  Network::GetInstance()->SetState(Network::NETWORK_NEXT_GAME);
-
-  if (Network::GetInstance()->IsClient()) {
-    Network::GetInstance()->SendNetworkState();
-  }
+  Network::GetInstance()->SetState(WNet::NETWORK_NEXT_GAME);
+  Network::GetInstance()->SendNetworkState();
 
   RedrawMenu();
 }
 
 bool NetworkMenu::signal_ok()
 {
-  if (Network::GetInstance()->IsClient())
+  if (!Network::GetInstance()->IsGameMaster())
   {
     // Check the user have selected a team:
     bool found = false;
@@ -222,11 +227,15 @@ bool NetworkMenu::signal_ok()
       goto error;
     }
 
-    // Wait for the server, and stay in the menu map / team can still be changed
-    WaitingForServer();
+    // Wait for the game master, and stay in the menu map / team can still be changed
+    WaitingForGameMaster();
+
+    if (Network::GetInstance()->IsGameMaster()) {
+      goto error;
+    }
 
   }
-  else if (Network::GetInstance()->IsServer())
+  else
   {
     if (GetTeamsList().playing_list.size() <= 1)
     {
@@ -236,14 +245,15 @@ bool NetworkMenu::signal_ok()
                                  GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
+    if (Network::GetInstance()->GetNbHostsConnected() == 0
+	|| Network::GetInstance()->GetNbPlayersConnected() == 0)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       goto error;
     }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers()+1)
+    if (Network::GetInstance()->GetNbHostsConnected() != Network::GetInstance()->GetNbHostsInitialized())
     {
-      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers() - 1;
+      int nbr = Network::GetInstance()->GetNbHostsConnected() - Network::GetInstance()->GetNbHostsInitialized();
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       goto error;
@@ -266,7 +276,8 @@ bool NetworkMenu::signal_ok()
 
     Game::GetInstance()->Start();
 
-    if (Network::GetInstance()->IsConnected() && !Network::GetInstance()->cpu.empty()
+    if (Network::GetInstance()->IsConnected()
+	&& Network::GetInstance()->GetNbHostsConnected() != 0
 	&& play_in_loop->GetValue()) {
       PrepareForNewGame();
       return false;
@@ -305,31 +316,27 @@ bool NetworkMenu::signal_cancel()
 
 void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 {
-  if(Network::GetInstance()->IsConnected())
+  if (Network::GetInstance()->IsConnected())
   {
-    if (connected_players != NULL) {
-      //Refresh the number of connected players:
-      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers();
-      std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-      if (connected_players->GetText() != pl)
-        connected_players->SetText(pl);
-    }
+    //Refresh the number of connected players:
+    int nbr = Network::GetInstance()->GetNbHostsConnected();
+    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
+    if (connected_players->GetText() != pl)
+      connected_players->SetText(pl);
 
-    if (initialized_players != NULL) {
-      //Refresh the number of players ready:
-      int nbr = Network::GetInstanceServer()->GetNbInitializedPlayers();
-      std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-      if (initialized_players->GetText() != pl) {
-        initialized_players->SetText(pl);
-        msg_box->NewMessage(pl, c_red);
-        if (Network::GetInstanceServer()->GetNbConnectedPlayers() -
-            Network::GetInstanceServer()->GetNbInitializedPlayers() == 1
-            && Network::GetInstanceServer()->GetNbConnectedPlayers() >= 1) {
-          msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
-        }
-        else if (Network::GetInstanceServer()->GetNbConnectedPlayers() == 1) {
-          msg_box->NewMessage(_("You are alone :-/"), c_red);
-        }
+    //Refresh the number of players ready:
+    nbr = Network::GetInstance()->GetNbHostsInitialized();
+    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+    if (initialized_players->GetText() != pl) {
+      initialized_players->SetText(pl);
+      msg_box->NewMessage(pl, c_red);
+      if (Network::GetInstance()->GetNbHostsConnected() ==
+	  Network::GetInstance()->GetNbHostsInitialized()
+	  && Network::GetInstance()->GetNbHostsInitialized() != 0) {
+	msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+      }
+      else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
+	msg_box->NewMessage(_("You are alone :-/"), c_red);
       }
     }
 
@@ -357,7 +364,6 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
     return;
 
   team_box->AddTeamCallback(team_id);
-//  msg_box->NewMessage(team_id + " selected");
 }
 
 void NetworkMenu::UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id)
@@ -376,14 +382,65 @@ void NetworkMenu::ChangeMapCallback()
   map_box->ChangeMapCallback();
 }
 
+void NetworkMenu::SetGameMasterCallback()
+{
+  // We are becoming game master, updating the menu...
+  mode_label->SetText(_("Master mode"));
+  player_number->SetVisible(false);
+  connected_players->SetVisible(true);
+  initialized_players->SetVisible(true);
+  map_box->AllowSelection();
+  b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
+  waiting_for_server = false;
+  msg_box->NewMessage(_("You are the new turn master!"), c_red);
+}
+
 void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
 {
   msg_box->NewMessage(msg);
 }
 
-void NetworkMenu::WaitingForServer()
+// to be call from NetworkMenu::WaitingForGameMaster()
+void NetworkMenu::HandleEvent(const SDL_Event& event)
 {
-  Network::GetInstance()->SetState(Network::NETWORK_MENU_OK);
+  if (!waiting_for_server) {
+    Menu::HandleEvent(event);
+    return;
+  }
+
+  if (event.type == SDL_QUIT) {
+    Menu::mouse_cancel();
+  } else if (event.type == SDL_KEYDOWN) {
+    switch (event.key.keysym.sym)
+      {
+      case SDLK_ESCAPE:
+	Menu::mouse_cancel();
+	break;
+      case SDLK_RETURN:
+      case SDLK_KP_ENTER:
+	msg_box->SendChatMsg();
+	break;
+      case SDLK_F10:
+	AppWormux::GetInstance()->video->ToggleFullscreen();
+	break;
+      default:
+	widgets.SendKey(event.key.keysym);
+	break;
+      }
+  } else if (event.type == SDL_MOUSEBUTTONUP) {
+
+    int x=0, y=0;
+    SDL_GetMouseState( &x, &y );
+    Point2i mousePosition(x, y);
+
+    if (b_cancel->Contains(mousePosition))
+      Menu::mouse_cancel();
+  }
+}
+
+void NetworkMenu::WaitingForGameMaster()
+{
+  Network::GetInstance()->SetState(WNet::NETWORK_MENU_OK);
 
   // warn the server that we have validated the menu
   Network::GetInstance()->SendNetworkState();
@@ -396,46 +453,17 @@ void NetworkMenu::WaitingForServer()
 
   widgets.SetFocusOn(msg_box->GetTextBox());
 
-  int x=0, y=0;
-  SDL_GetMouseState( &x, &y );
-  Point2i mousePosition(x, y);
-
   do
   {
-    // Poll and treat events
-    SDL_Event event;
+    HandleEvents();
 
-    while (SDL_PollEvent(&event))
-    {
-      Point2i mousePosition(event.button.x, event.button.y);
+    int x=0, y=0;
+    SDL_GetMouseState( &x, &y );
+    Point2i mousePosition(x, y);
 
-      if (event.type == SDL_QUIT) {
-        Menu::mouse_cancel();
-      } else if (event.type == SDL_KEYDOWN) {
-        switch (event.key.keysym.sym)
-          {
-          case SDLK_ESCAPE:
-            Menu::mouse_cancel();
-            break;
-	  case SDLK_RETURN:
-          case SDLK_KP_ENTER:
-            msg_box->SendChatMsg();
-            break;
-          case SDLK_F10:
-            AppWormux::GetInstance()->video->ToggleFullscreen();
-            break;
-          default:
-            widgets.SendKey(event.key.keysym);
-            break;
-          }
-      } else if (event.type == SDL_MOUSEBUTTONUP) {
-        if (b_cancel->Contains(mousePosition))
-          Menu::mouse_cancel();
-      }
-    }
-
+    Display(mousePosition);
     Menu::Display(mousePosition);
 
-  } while (Network::GetInstance()->GetState() == Network::NETWORK_MENU_OK &&
-           Network::GetInstance()->IsConnected());
+  } while (Network::GetInstance()->IsConnected() &&
+	   Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
 }

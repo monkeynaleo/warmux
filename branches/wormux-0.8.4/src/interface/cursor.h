@@ -23,7 +23,7 @@
 #define CURSOR_H
 //-----------------------------------------------------------------------------
 #include "include/base.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 class Sprite;

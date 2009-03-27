@@ -23,7 +23,7 @@
 #define JOYSTICK_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
-#include "include/singleton.h"
+#include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 class Joystick : public ManMachineInterface, public Singleton<Joystick>

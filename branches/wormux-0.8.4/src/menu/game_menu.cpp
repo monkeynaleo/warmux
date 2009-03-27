@@ -31,7 +31,6 @@
 #include "gui/tabs.h"
 #include "gui/combo_box.h"
 #include "include/app.h"
-#include "tool/i18n.h"
 #include "tool/resource_manager.h"
 
 const uint MARGIN_TOP    = 5;

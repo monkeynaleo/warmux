@@ -21,8 +21,8 @@
 #define _TILE_H
 
 #include <vector>
-#include "tool/point.h"
-#include "tool/rectangle.h"
+#include <WORMUX_point.h>
+#include <WORMUX_rectangle.h>
 
 // Forward declarations
 class Surface;
