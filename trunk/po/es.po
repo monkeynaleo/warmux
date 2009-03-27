@@ -1,26 +1,26 @@
 # Spanish translation of the Wormux Game.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2009 THE Wormux'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Wormux package.
 # Eduard BERMEJO <templer@iespana.es>, 2005?
 # Jean Parpaillon <artefact@altern.org>, 2006, 2007
 # Danigm ???, 2007
 # Juan Pujol Rojas <jua56@hotmail.com>, 2008
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2009-02-24 13:52+0200\n"
-"PO-Revision-Date: 2008-09-06 15:07+0100\n"
+"PO-Revision-Date: 2009-03-27 09:22+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n == 1);\n"
+"X-Generator: KBabel 1.0.2\n"
 
+# "Plural-Forms: nplurals=2; plural=(n > 1);"
 #: src/map/maps_list.cpp:325
 #, c-format
 msgid "! Map %s not found :-("
@@ -64,7 +64,7 @@ msgstr "%s Equipo - Remoto"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s cambia el objetivo a %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -104,7 +104,7 @@ msgstr "¡%s del equipo %s ha muerto porque es torpe!"
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s ha decidido herir a %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -168,8 +168,8 @@ msgstr[0] ""
 "¡El equipo %s ha conseguido %u martillo volador! No hagas demasiado ruido "
 "con el. ¡Gracias! Tus vecinos."
 msgstr[1] ""
-"¡El equipo %s ha conseguido %u martillos voladores! No hagas demasiado ruido "
-"con ellos! Gracias! Vuestros vecinos."
+"¡El equipo %s ha conseguido %u martillos "
+"voladores! No hagas demasiado ruido con ellos! Gracias! Vuestros vecinos."
 
 #: src/weapon/anvil.cpp:176
 #, c-format
@@ -239,7 +239,7 @@ msgstr[1] ""
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
-msgstr[0] "¡El equipo %s ha conseguido %u granadas disco!"
+msgstr[0] "¡El equipo %s ha conseguido %u granada disco!"
 msgstr[1] "¡El equipo %s ha conseguido %u granadas disco!"
 
 #: src/weapon/dynamite.cpp:143
@@ -349,8 +349,8 @@ msgstr[0] ""
 "¡El equipo %s ha conseguido %u fusil de francotirador! Apunta y dispara "
 "entre los ojos."
 msgstr[1] ""
-"¡El equipo %s ha conseguido %u fusiles de francotirador! Apuntad y disparad "
-"entre los ojos."
+"¡El equipo %s ha conseguido %u fusiles de francotirador! "
+"Apuntad y disparad entre los ojos."
 
 #: src/weapon/submachine_gun.cpp:144
 #, c-format
@@ -407,7 +407,7 @@ msgstr "¡%s se ha llevado un miembro de %s a la tumba con él! "
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s disparará %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -557,9 +557,8 @@ msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
 
 #: src/menu/options_menu.cpp:151
-#, fuzzy
 msgid "Character names:"
-msgstr "Personaje"
+msgstr "Nombres de personaje:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -615,9 +614,8 @@ msgid "Connected !"
 msgstr "¡Conectado!"
 
 #: src/network/admin_commands.cpp:64
-#, fuzzy
 msgid "Connected players: "
-msgstr "¡Conectado!"
+msgstr "Jugadores conectados:"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -963,7 +961,7 @@ msgstr "Idioma"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Lista de jugadores conectados"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1003,9 +1001,8 @@ msgstr "Mapas"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
-#, fuzzy
 msgid "Master mode"
-msgstr "Estilo de juego"
+msgstr "Modo dueño"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1086,9 +1083,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el archivo de configuración xml!"
 
 #: src/network/admin_commands.cpp:60
-#, fuzzy
 msgid "No player connected"
-msgstr "%i jugador conectado"
+msgstr "Jugador no conectado"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1528,7 +1524,7 @@ msgstr "Sitio web: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "¡Bien venido a %s!"
 
 #: src/game/game.cpp:762
 #, c-format
@@ -1574,7 +1570,7 @@ msgstr "Estás solo..."
 
 #: src/menu/network_menu.cpp:396
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "¡Eres el nuevo dueño del turno!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
