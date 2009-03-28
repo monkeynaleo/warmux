@@ -444,10 +444,9 @@ bool WSocket::SendBuffer(const void* data, size_t len)
 
 bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
 {
-  size_t total_received = 0;
   int received = 0;
 
-  while (total_received != len) {
+  while (len) {
     // Documentation says that SDLNet_TCP_Recv receives data of *exactly* length "len" bytes
     // from the socket "socket" into the memory pointed to by "data".
     // BUT I have observed the contrary if len is big (len > 16384)
@@ -461,7 +460,8 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
       fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d\n", received);
       return false;
     }
-    total_received += received;
+    data = (char*)data + received;
+    len -= received;
   }
 
   return true;
@@ -571,9 +571,9 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
 uint32_t WSocket::ComputeCRC(const void* data, size_t len)
 {
   uint32_t crc = 0;
-  const uint32_t* buf = reinterpret_cast<const uint*>(data);
+  const uint32_t* buf = reinterpret_cast<const uint32_t*>(data);
 
-  for (uint i = 0; i < len/sizeof(uint32_t); i++) {
+  for (uint32_t i = 0; i < len/sizeof(uint32_t); i++) {
     crc += buf[i];
   }
 
