@@ -494,6 +494,8 @@ void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
 void TeamsList::AddTeam(const ConfigTeam &the_team_cfg, bool is_local,
 			bool generate_error)
 {
+  MSG_DEBUG("team", "%s, local: %d\n", the_team_cfg.id.c_str(), is_local);
+
   int pos;
   Team *the_team = FindById (the_team_cfg.id, pos);
   if (the_team != NULL) {
@@ -524,6 +526,8 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
 			    const ConfigTeam &the_team_cfg)
 {
   int pos;
+
+  MSG_DEBUG("team", "%s/%s\n", old_team_id.c_str(), the_team_cfg.id.c_str());
 
   if (old_team_id == the_team_cfg.id) {
     // this is a simple update
@@ -565,6 +569,8 @@ void TeamsList::DelTeam(Team* the_team)
   uint pos = 0;
 
   ASSERT(the_team != NULL);
+
+  MSG_DEBUG("team", "%s\n", the_team->GetId().c_str());
 
   the_team->SetDefaultPlayingConfig();
 
