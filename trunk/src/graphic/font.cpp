@@ -90,7 +90,7 @@ Font::Font(int size):
   {
     m_font = TTF_OpenFont(filename.c_str(), size);
     if (!m_font)
-      Error("Error in font file");
+      Error(Format("Error in font file %s (size:%d): %s", filename.c_str(), size, TTF_GetError()));
   }
   else
     Error("Can't find font file");
