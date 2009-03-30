@@ -2,29 +2,20 @@
 Use of mac scripts
 ******************
 
-For compile wormux you have to get some libraries
+* The XCode package have to be installed in order to have gcc and other staff.
+* Install mac deps from http://download.gna.org/wormux/mac/mac_dependencies.zip - copy frameworks to [hard disk]/Library/Frameworks/
+* Install gettext (or at least libintl headers)
 
-Some parts are commented, you can uncomment them if you need it.
+Then simply cd into this directory from terminal and launch "./cmake_build.sh"
+For universal binaries (a universal box2D build will be necessary, the one included here is i386 only) : "./cmake_build.sh universal"
+For dual-cores : "./cmake_build.sh 2" (disabled for now, didn't work for some reason and caused more trouble)
 
-You can see 3 scripts :
-launch first.sh
-fink.sh
-macports.sh
-
-You have to edit the first one, select if you prefer fink or macports (comment)
-And select the good name for several tools.
-Maybe you'll don't need to use the first, but just uncomment the fink or macports script,
-but on my computer i need to do all exports in order to have fink release working.
-
-Give me feedbacks about all this scripts
-
-The XCode package have to be installed in order to have gcc and other staff.
+Then, to make the generated .app distributable, simply copy the frameworks from the mac deps package to /Wormux.app/Contents/Frameworks
 
 Have fun :)
 
-Yoann Katchourine
-post your problem on the forum at http://wormux.org/forum
 
-thanks to :
-Hanspeter Niederstrasser for fink script
-Ingo Hoffman for macports script
+Plorf (Yoann Katchourine)
+Auria (Marianne Gagnon)
+lynxlynxlynx
+Snaggle

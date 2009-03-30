@@ -91,7 +91,7 @@ FIND_PACKAGE(FriBiDi)
 IF(APPLE)
   # to ease packaging, we'll use a static libintl
   # we also need to link against the SDL_main library (required by the mac version of SDL)
-  SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB -lBox2D ${WORMUX_LDFLAGS}")
+  SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WORMUX_LDFLAGS}")
   # to ease packaging, we'll use a framework version of libpng
   # (with a different name so there is no confusion with the UNIX version of libpng)
   SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
