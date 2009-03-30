@@ -24,10 +24,12 @@ SRC=${ROOT}src/
 
 export MACOSX_DEPLOYMENT_TARGET=10.4
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
-#export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
-export FAT_LDFLAGS="-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+export COMPAT_FLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.3.9"
 
-APP_VERSION=0.8.1svn
+export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I${MAC}tmpbuild/lib/box2d/src "
+
+APP_VERSION=0.8.3
 BUNDLE_NAME=Wormux
 DMG_TARGET="${BUNDLE_NAME}-${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
@@ -53,9 +55,8 @@ then
         echo "Universal build mode enabled !"
         echo ""
         echo "*******************************"
-        export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
-        export CXXFLAGS="${CFLAGS}"
-        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+        export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${COMPAT_FLAGS}"
+        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS} ${COMPAT_FLAGS}"
         BUNDLE_NAME=Wormux
         DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
     else
@@ -79,22 +80,22 @@ then
         echo "Universal build mode enabled !"
         echo ""
         echo "*******************************"
-        export CFLAGS="${FAT_CFLAGS} ${CFLAGS}"
-        export CXXFLAGS="${CFLAGS}"
-        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+        export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${COMPAT_FLAGS}"
+        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS} ${COMPAT_FLAGS}"
         BUNDLE_NAME=Wormux
         DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
-
         NBTHREADS=$TMP2
         echo "Launch with ${NBTHREADS} !"
 fi
 
+export CFLAGS="${CFLAGS} ${INCLUDES}"
+export CXXFLAGS="${CFLAGS} ${COMPAT_FLAGS}"
 
 #
 # Set files for CMake and compilation
 #
 
-# Copy the library libSDLmain_UB.a
+# Copy library libSDLmain_UB.a
 if [ -e libSDLmain_UB.a ]
 then
     cp libSDLmain_UB.a ${ROOT}
@@ -103,7 +104,7 @@ else
     exit
 fi
 
-# Copy the library libintl.a
+# Copy library libintl.a
 if [ -e libintl.a ]
 then
     cp libintl.a ${ROOT}
@@ -112,31 +113,20 @@ else
     exit
 fi
 
-# Copy the library libbox2d.a
-if [ -e libbox2d.a ]
-then
-    cp libbox2d.a ${ROOT}
-else
-    echo "*** ${MAC}libbox2d.a Not Found ***"
-    exit
-fi
 
 #
 # Clean temps files, and create Folders
 #
 
-if [ ! "$1" = "continue" ]
-then
-    TMP=${MAC}tmpbuild/
-    if [ -e ${TMP} ]
-    then
-        echo "*****************"
-        echo "Clean tmpbuild"
-        rm -rf ${TMP}
-        echo "*****************"
-    fi
-    mkdir ${TMP}
-fi
+TMP=${MAC}tmpbuild/
+#if [ -e ${TMP} ]
+#then
+#    echo "*****************"
+#    echo "Clean tmpbuild"
+#    rm -rf ${TMP}
+#    echo "*****************"
+#fi
+mkdir -p ${TMP}
 
 APP=${MAC}Wormux.app
 if [ -e ${APP} ]
@@ -163,8 +153,7 @@ then
     echo "******************"
 fi
 
-echo "Create Wormux.app file"
-#mkdir -p ${APP}
+echo "Create Wormux.app tree"
 mkdir -p ${APP}/Contents/MacOS/
 mkdir -p ${APP}/Contents/Frameworks/
 RES=${APP}/Contents/Resources/
@@ -177,16 +166,6 @@ cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
 cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 
 
-
-#ARCHIVE=${MAC}Wormux-0.8.1svn.tar.bz2
-#if [ -e ${ARCHIVE} ]
-#then
-#    echo "******************"
-#    echo "Remove old archive" 
-#    rm -f ${ARCHIVE}
-#    echo "******************"
-#fi
-
 #export CMAKE_INSTALL_PREFIX=${RES}
 
 #
@@ -194,16 +173,17 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 #
 
 cd ${TMP}
+echo "Configuring CMake build"
 
-if ! cmake ../../.. --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES}
+if ! cmake ${ROOT} --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES} #-DGETTEXT_LIBRARY="../../libintl.a"
 then
     echo "CMake error"
     exit 1
 fi
 
-if ! make ${NBTHREADS} 
+if ! make # -j${NBTHREADS}
 then
-    echo "make ${NBTHREADS} error"
+    echo "make error"
     exit 1
 fi
 if ! make install
@@ -214,7 +194,7 @@ fi
 
 
 #
-# Generate .app File
+# Copy resources inside bundle
 #
 
 
@@ -235,69 +215,55 @@ fi
 # Copy frameworks into package
 #
 
-echo "Copy all frameworks"
+#echo "Copy all frameworks"
 cd ${MAC};
 
 # If frameworks are not available, they'll be download from this mirror
-MIRROR=http://plorf.homeip.net/wormux/lib/
-if [ ! -e "${MAC}frameworks.tar.bz2" ]
-then 
-    echo "Frameworks will be downloaded from ${MIRROR} (3MB)";
-    curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2;
-fi
-    tar xfj ${MAC}frameworks.tar.bz2 -C ${APP}/Contents/Frameworks;
-    echo "Frameworks copy done"
+#MIRROR=http://plorf.homeip.net/wormux/lib/
+#if [ ! -e "${MAC}frameworks.tar.bz2" ]
+#then 
+#    echo "Frameworks will be downloaded from ${MIRROR} (3MB)";
+#    curl ${MIRROR}frameworks.tar.bz2 -o ${MAC}frameworks.tar.bz2;
+#fi
+#    tar xfj ${MAC}frameworks.tar.bz2 -C ${APP}/Contents/Frameworks;
+#    echo "Frameworks copy done"
 
 
 #
-# Make .dmg and .tar.bz2 file
+# Make .dmg file
 #
 
-echo ""
-echo "Creating the distributable disk image"
-echo ""
-
-/bin/mv ${APP} ${DMG_OUT}.app
-APP=${DMG_OUT}.app
-
-/usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
-/bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
-
-/usr/bin/hdiutil unmount "/Volumes/${DMG_TARGET}"
-/usr/bin/hdiutil convert -imagekey zlib-level=9 -format UDZO ${BUNDLE_NAME}-${APP_VERSION}.sparseimage -o ${DMG_OUT}.dmg
-/bin/rm -f ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
-
-
+#echo ""
+#echo "Creating the distributable disk image"
+#echo ""
 #
-# Create Archive
-#
-#echo "Make archive ${ARCHIVE}"
-#tar cfj ${ARCHIVE} ${APP}
-#echo "Archive ${ARCHIVE} done"
-    
+#/bin/mv ${APP} ${DMG_OUT}.app
+#APP=${DMG_OUT}.app
+
+#/usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
+#/bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
+
+#/usr/bin/hdiutil detach "/Volumes/${DMG_TARGET}"
+#/usr/bin/hdiutil convert -imagekey zlib-level=9 -format UDZO ${BUNDLE_NAME}-${APP_VERSION}.sparseimage -o ${DMG_OUT}.dmg
+#/bin/rm -f ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
+
 
 #
 # Clean environment
 #
 
 # Remove copy of libSDLmain_UB.a
-if [ -e ${ROOT}libSDLmain_UB.a ]
-then
-    rm ${ROOT}libSDLmain_UB.a
-fi
+#if [ -e ${ROOT}libSDLmain_UB.a ]
+#then
+#    rm ${ROOT}libSDLmain_UB.a
+#fi
 
 # Remove copy of libintl.a
-if [ -e ${ROOT}libintl.a ]
-then
-    rm ${ROOT}libintl.a
-fi
+#if [ -e ${ROOT}libintl.a ]
+#then
+#    rm ${ROOT}libintl.a
+#fi
 
-# Remove copy of libintl.a
-if [ -e ${ROOT}libbox2d.a ]
-then
-    rm ${ROOT}libbox2d.a
-fi
-    
 echo "Build done"
 
 exit 0

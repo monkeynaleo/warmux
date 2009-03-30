@@ -457,7 +457,7 @@ std::string Body::GetFrameLoop() const
 {
   char str[32];
   snprintf(str, 32, "%u/%u-%u/%u", current_loop+1, current_mvt->GetNbLoops(),
-	   current_frame+1, current_mvt->GetFrames().size());
+	   current_frame+1, (unsigned int)current_mvt->GetFrames().size());
 
   return std::string(str);
 }
