@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #################################################
-#  Script for compile with cmake under MacOS X  #
+#  Script to compile with cmake under MacOS X   #
 #           For     W O R M U X                 #
 #           done by Plorf, Auria,               #
 #         lynxlynxlynx and Snaggle              #
@@ -229,23 +229,6 @@ cd ${MAC};
 #    echo "Frameworks copy done"
 
 
-#
-# Make .dmg file
-#
-
-#echo ""
-#echo "Creating the distributable disk image"
-#echo ""
-#
-#/bin/mv ${APP} ${DMG_OUT}.app
-#APP=${DMG_OUT}.app
-
-#/usr/bin/hdiutil create -type SPARSE -size 85m -fs HFS+ -volname "${DMG_TARGET}" -attach ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
-#/bin/cp -R ${APP} "/Volumes/${DMG_TARGET}"
-
-#/usr/bin/hdiutil detach "/Volumes/${DMG_TARGET}"
-#/usr/bin/hdiutil convert -imagekey zlib-level=9 -format UDZO ${BUNDLE_NAME}-${APP_VERSION}.sparseimage -o ${DMG_OUT}.dmg
-#/bin/rm -f ${BUNDLE_NAME}-${APP_VERSION}.sparseimage
 
 
 #
