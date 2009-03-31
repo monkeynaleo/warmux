@@ -27,6 +27,7 @@
 #include <Box2D.h>
 #include <map>
 #include <vector>
+#include <WORMUX_point.h>
 //-----------------------------------------------------------------------------
 
 extern const double PIXEL_PER_METER;
@@ -36,6 +37,7 @@ class Force;
 class ContactListener;
 class DebugDraw;
 class PhysicalShape;
+
 
 class PhysicalEngine : public Singleton<PhysicalEngine>
 {
@@ -58,6 +60,8 @@ public:
   void AddAirFrictionShape(PhysicalShape* shape);
   void RemoveAirFrictionShape(PhysicalShape* shape);
 
+  void AddWindObject(PhysicalObj* i_object);
+  void RemoveWindObject(PhysicalObj* i_object);
 
   void AddAutoAlignObject(PhysicalObj* object);
   void RemoveAutoAlignObject(PhysicalObj* object);
@@ -67,6 +71,8 @@ public:
 
   void AddContactPoint(b2ContactPoint contact,ContactType type);
   void AddContactResult(b2ContactResult contact);
+
+  void SetWindVector(const Point2d &i_wind_vector);
 
 protected:
 
@@ -79,8 +85,10 @@ protected:
   ContactListener *m_contact_listener;
   DebugDraw *m_debug_draw;
   bool m_static_step_in_progress;
+  Point2d m_wind_vector;
 
   void ComputeContacts();
+  void ComputeWind();
 
   std::map<b2Body *,PhysicalObj *> objects_list;
 
@@ -90,8 +98,9 @@ protected:
   std::vector<b2ContactResult> result_contact_list;
 
   std::vector<Force *> m_force_list;
-  std::vector<PhysicalShape *>m_air_friction_shape_list;
-  std::vector<PhysicalObj *>m_auto_align_object_list;
+  std::vector<PhysicalShape *> m_air_friction_shape_list;
+  std::vector<PhysicalObj *> m_wind_object_list;
+  std::vector<PhysicalObj *> m_auto_align_object_list;
   void ClearContact();
 
   friend class Singleton<PhysicalEngine>;

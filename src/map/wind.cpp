@@ -34,6 +34,7 @@
 #include "tool/random.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+#include "physic/physical_engine.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 20;
@@ -223,6 +224,7 @@ void Wind::ChooseRandomVal() const
 {
   int val = RandomLocal().GetLong(-100, 100);
   ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
+  PhysicalEngine::GetInstance()->SetWindVector(Point2d(((double)val)/10,0));
 }
 
 void Wind::DrawParticles()
