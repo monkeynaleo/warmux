@@ -91,6 +91,12 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 
   m_body_def = new b2BodyDef();
   m_body_def->allowSleep = true;
+
+  if(m_wind_factor != 0)
+  {
+    PhysicalEngine::GetInstance()->AddWindObject(this);
+  }
+
   m_body_def->linearDamping = m_air_resist_factor;
   m_body_def->angularDamping = 0.1;
   m_body_def->position.Set(0.0f, 0.0f);
@@ -202,9 +208,12 @@ void PhysicalObj::Desactivate()
   if (!m_body)
     return;
 
+
+  PhysicalEngine::GetInstance()->RemoveWindObject(this);
   RemoveAllExternForce();
   PhysicalEngine::GetInstance()->RemoveObject(this);
   m_body = NULL;
+
 }
 
 void PhysicalObj::GenerateMass()
@@ -923,7 +932,8 @@ void PhysicalObj::ComputeAutoAlign()
 
 bool PhysicalObj::IsSleeping() const
 {
-  return m_body->IsSleeping();
+  //TODO Correct this because you must check that the only force is wind and that the speed is stable
+  return (GetSpeed().x < 0.001 && GetSpeed().y < 0.001);
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -1041,7 +1051,7 @@ void PhysicalObj::Ghost ()
   if (m_alive == GHOST)
     return;
 
-  //bool was_dead = IsDead();
+  bool was_dead = IsDead();
   m_alive = GHOST;
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
   SignalGhostState(m_energy==0);

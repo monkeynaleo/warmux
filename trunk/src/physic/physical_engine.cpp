@@ -34,7 +34,8 @@ PhysicalEngine::PhysicalEngine() :
   frame_rate(60),
   last_step_time(0),
   iterations(10),
-  m_static_step_in_progress(false)
+  m_static_step_in_progress(false),
+  m_wind_vector(0,0)
 {
   worldAABB.lowerBound.Set(-10000.0f, -10000.0f);
   worldAABB.upperBound.Set(10000.0f, 10000.0f);
@@ -81,6 +82,11 @@ b2Body *PhysicalEngine::GetNewGroundBody()
   return physic_world->CreateBody(&groundBodyDef);
 }
 
+void PhysicalEngine::SetWindVector(const Point2d & i_wind_vector)
+{
+  m_wind_vector = i_wind_vector;
+}
+
 b2Body *PhysicalEngine::AddObject(PhysicalObj *new_obj)
 {
   b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
@@ -118,6 +124,7 @@ void PhysicalEngine::Step()
     m_auto_align_object_list[i]->ComputeAutoAlign();
   }
 
+  ComputeWind();
 
   physic_world->Step(timeStep, iterations);
 
@@ -133,6 +140,22 @@ void PhysicalEngine::StaticStep()
     physic_world->Step(0,0);
     ComputeContacts();
     m_static_step_in_progress = false;
+  }
+}
+
+void PhysicalEngine::ComputeWind()
+{
+  //Apply wind and air resistance forces
+  for (uint i = 0; i< m_wind_object_list.size();i++){
+    //Extract object's b2body
+    b2Body *body = m_wind_object_list[i]->GetBody();
+    //  b2Vec2 relative_speed;
+	  if(body)
+	  {
+      b2Vec2 force(m_wind_vector.x * m_wind_object_list[i]->GetWindFactor(),
+                   m_wind_vector.y * m_wind_object_list[i]->GetWindFactor());
+      body->ApplyForce(force, body->GetWorldPoint(b2Vec2(0,0)));
+	  }
   }
 }
 
@@ -245,23 +268,39 @@ void PhysicalEngine::RemoveForce(Force *force)
 
 }
 
+
 void PhysicalEngine::AddAirFrictionShape(PhysicalShape * shape)
 {
-    m_air_friction_shape_list.push_back(shape);
+  m_air_friction_shape_list.push_back(shape);
 }
 
 void PhysicalEngine::RemoveAirFrictionShape(PhysicalShape *shape)
 {
-
   std::vector<PhysicalShape *>::iterator it;
   for (it = m_air_friction_shape_list.begin(); it != m_air_friction_shape_list.end(); it++){
     if (*it == shape) {
       m_air_friction_shape_list.erase(it);
       break;
     }
-
   }
+}
 
+
+
+void PhysicalEngine::AddWindObject(PhysicalObj *i_object)
+{
+	m_wind_object_list.push_back(i_object);
+}
+
+void PhysicalEngine::RemoveWindObject(PhysicalObj *i_object)
+{
+  std::vector<PhysicalObj *>::iterator it;
+  for (it = m_wind_object_list.begin(); it != m_wind_object_list.end(); it++){
+    if (*it == i_object) {
+      m_wind_object_list.erase(it);
+      break;
+    }
+  }
 }
 
 void PhysicalEngine::AddAutoAlignObject(PhysicalObj * object)
@@ -271,16 +310,13 @@ void PhysicalEngine::AddAutoAlignObject(PhysicalObj * object)
 
 void PhysicalEngine::RemoveAutoAlignObject(PhysicalObj *object)
 {
-
   std::vector<PhysicalObj *>::iterator it;
   for (it = m_auto_align_object_list.begin(); it != m_auto_align_object_list.end(); it++){
     if (*it == object) {
       m_auto_align_object_list.erase(it);
       break;
     }
-
   }
-
 }
 
 
