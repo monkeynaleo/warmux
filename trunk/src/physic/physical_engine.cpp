@@ -154,7 +154,7 @@ void PhysicalEngine::ComputeWind()
 	  {
       b2Vec2 force(m_wind_vector.x * m_wind_object_list[i]->GetWindFactor(),
                    m_wind_vector.y * m_wind_object_list[i]->GetWindFactor());
-      body->ApplyForce(force, body->GetWorldPoint(b2Vec2(0,0)));
+      body->ApplyForce(force, body->GetWorldCenter());
 	  }
   }
 }
