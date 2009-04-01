@@ -503,6 +503,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>mikkov</nickname>
+	<name>Mikko Vartiainen</name>
+	<description>Make Maemo port</description>
+	<email>mvartiainen_AT_gmail_DOT_com</email>
+	<country>Finland</country>
+      </author>
+      <author>
 	<nickname>Miwi</nickname>
 	<name>Martin WILKE</name>
 	<description>Made FreeBSD package</description>
