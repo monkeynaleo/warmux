@@ -293,7 +293,7 @@ public:
 
   //-------- state ----
   void Init();
-  void Ghost();
+  virtual void Ghost();
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
 
