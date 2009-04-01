@@ -61,7 +61,7 @@ ObjBox::ObjBox(const std::string &name)
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(false, false, true);
+  SetCollisionModel(true, false, true);
   JukeBox::GetInstance()->Play("default","box/falling");
 }
 

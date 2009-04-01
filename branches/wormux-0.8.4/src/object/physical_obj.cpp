@@ -57,7 +57,7 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
 }
 
 PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
-  m_goes_through_wall(false),
+  m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   m_rebound_position(-1,-1),
@@ -133,7 +133,7 @@ void PhysicalObj::SetSize(const Point2i &newSize){
 void PhysicalObj::StoreValue(Action *a)
 {
   Physics::StoreValue(a);
-  a->Push(m_goes_through_wall);
+  a->Push(m_collides_with_ground);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
   a->Push(m_rebound_position);
@@ -154,7 +154,7 @@ void PhysicalObj::StoreValue(Action *a)
 void PhysicalObj::GetValueFromAction(Action *a)
 {
   Physics::GetValueFromAction(a);
-  m_goes_through_wall        = !!a->PopInt();
+  m_collides_with_ground     = !!a->PopInt();
   m_collides_with_characters = !!a->PopInt();
   m_collides_with_objects    = !!a->PopInt();
   m_rebound_position         = a->PopPoint2i();
@@ -266,11 +266,11 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   // First iteration position.
   pos = oldPos + offset;
 
-  if (m_goes_through_wall || IsInWater())
+  if (!m_collides_with_ground || IsInWater())
   {
-    MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), thr_wall:%d, water:%d",
+    MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), collides ground:%d, water:%d",
               typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
-              m_goes_through_wall, IsInWater());
+              m_collides_with_ground, IsInWater());
 
     SetXY(newPos);
     return NO_COLLISION;
@@ -435,7 +435,7 @@ void PhysicalObj::UpdatePosition ()
   // No ghost allowed here !
   if (IsGhost()) return;
 
-  if ( !m_goes_through_wall )
+  if (m_collides_with_ground)
     {
       // object is not moving and has no reason to move
       if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
@@ -450,7 +450,7 @@ void PhysicalObj::UpdatePosition ()
   if (IsGhost()) return;
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
-  if ( !m_goes_through_wall )
+  if (m_collides_with_ground)
     {
       if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
       else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
@@ -578,22 +578,22 @@ void PhysicalObj::SignalRebound()
      JukeBox::GetInstance()->Play("default", m_rebound_sound) ;
 }
 
-void PhysicalObj::SetCollisionModel(bool goes_through_wall,
+void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
                                     bool collides_with_objects)
 {
-  m_goes_through_wall = goes_through_wall;
+  m_collides_with_ground = collides_with_ground;
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
 
   // Check boolean values
   {
     if (m_collides_with_characters || m_collides_with_objects)
-      ASSERT(m_goes_through_wall == false);
+      ASSERT(m_collides_with_ground);
 
-    if (m_goes_through_wall) {
-      ASSERT(m_collides_with_characters == false);
-      ASSERT(m_collides_with_objects == false);
+    if (!m_collides_with_ground) {
+      ASSERT(!m_collides_with_characters);
+      ASSERT(!m_collides_with_objects);
     }
   }
 }

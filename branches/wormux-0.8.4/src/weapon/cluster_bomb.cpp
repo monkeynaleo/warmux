@@ -81,7 +81,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot(const Point2i & pos, double strength, double angle)
 {
-  SetCollisionModel( false, true, false ); // a bit hackish...
+  SetCollisionModel(true, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
 

@@ -54,7 +54,7 @@ class PhysicalObj : public Physics
 
 private:
   // collision management
-  bool m_goes_through_wall;
+  bool m_collides_with_ground;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
   Point2i m_rebound_position;
@@ -138,7 +138,7 @@ public:
   int GetCenterY() const { return GetY() +m_test_top +GetTestHeight()/2; };
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
-  bool GoesThroughWall() const { return m_goes_through_wall; }
+  bool CollidesWithGround() const { return m_collides_with_ground; }
   bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------
@@ -153,7 +153,7 @@ public:
                                          // and max_distance is max distance allowed when putting out
 
   // Collision management
-  void SetCollisionModel(bool goes_through_wall,
+  void SetCollisionModel(bool collides_with_ground,
                          bool collides_with_characters,
                          bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);

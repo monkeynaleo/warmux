@@ -27,7 +27,7 @@
 BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
   Particle("body_member_particle")
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
   image = new Sprite(spr.GetSurface());
   image->EnableRotationCache(32);
