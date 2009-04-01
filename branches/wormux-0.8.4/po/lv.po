@@ -159,7 +159,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -470,7 +470,7 @@ msgstr ""
 "Šaušana : platais taustiņš (atstarpe)\n"
 "šāviens gājienā"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Lakta"
 
@@ -884,7 +884,7 @@ msgstr ""
 "spēks\n"
 "munīcija gājienā"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 #, fuzzy
 msgid ""
 "Howto use it : left click on target\n"
@@ -1595,7 +1595,7 @@ msgstr "Jums nepieciešamas vismaz divas derīgas komandas !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Jūs netrāpijāt!"
 

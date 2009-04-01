@@ -156,7 +156,7 @@ msgstr[1] ""
 "Mannschaft %s hat %u Presslufthammer gewonnen! Mach nicht zuviel Lärm damit! "
 "Danke, die Nachbarschaft."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -465,7 +465,7 @@ msgstr ""
 "Feuer : Leertaste\n"
 "ein Schlag pro Runde"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Amboss"
 
@@ -878,7 +878,7 @@ msgstr ""
 "Feuer : Leertaste gedrückt halten bis die gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1586,7 +1586,7 @@ msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kannst nicht spielen bevor du eine Mannschaft gewählt hast!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 

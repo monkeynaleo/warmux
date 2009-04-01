@@ -73,14 +73,12 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
+					 PhysicalObj * obj,
+					 const Point2d& /*obj_speed*/)
 {
 #if 1
-  if (!obj->IsCharacter())
-    Explosion();
-  obj->SetEnergyDelta(-(int)cfg.damage);
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
-  Ghost();
 #else
   // multiply by ten to get something more funny
   double bullet_mass = GetMass()/* * 10*/;
@@ -91,11 +89,14 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj, const Point2d& my_sp
   // Pushing a little upward character to allow him to be pushed by the projectile
   obj->SetXY(Point2i(obj->GetX(), obj->GetY() - 3));
   obj->SetSpeedXY(v2);
+#endif
+
   obj->SetEnergyDelta(-(int)cfg.damage);
   if (!obj->IsCharacter())
     Explosion();
   Ghost();
-#endif
+
+  WeaponProjectile::Collision();
 }
 
 void WeaponBullet::Refresh()
@@ -263,13 +264,17 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj, const Point2d& /* my_speed_before */)
+void WeaponProjectile::SignalObjectCollision(const Point2d& /* my_speed_before */,
+					     PhysicalObj * obj,
+					     const Point2d& /* obj_speed_before */)
 {
   ASSERT(obj != NULL);
   MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
 	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();
+
+  Collision();
 }
 
 // projectile explode when hiting the ground
@@ -278,14 +283,16 @@ void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/)
   MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_with_collision)
     Explosion();
+
+  Collision();
 }
 
-// Default behavior : signal to launcher a collision and explode
-void WeaponProjectile::SignalCollision(const Point2d& speed_before)
+// Signal to launcher a collision
+void WeaponProjectile::Collision()
 {
-  MSG_DEBUG("weapon.projectile", "SignalCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "Collision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (launcher != NULL && !launcher->ignore_collision_signal)
-    launcher->SignalProjectileCollision(speed_before);
+    launcher->SignalProjectileCollision();
 }
 
 // Default behavior : signal to launcher projectile is drowning

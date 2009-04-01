@@ -178,7 +178,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de ciocane pneumatice! Nu face prea mult zgomot cu "
 "ele! Îți mulțumim, vecinii tăi."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -633,7 +633,7 @@ msgstr ""
 "Foc : tasta spațiu\n"
 "o lovitură per rundă"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Nicovală"
 
@@ -1051,7 +1051,7 @@ msgstr ""
 "Foc : țineți tasta spațiu apăsată până la puterea dorită\n"
 "un proiectil per rundă"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1756,7 +1756,7 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 

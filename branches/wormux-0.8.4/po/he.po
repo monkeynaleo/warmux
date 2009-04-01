@@ -151,7 +151,7 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -432,7 +432,7 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "סדן"
 
@@ -844,7 +844,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1549,7 +1549,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 

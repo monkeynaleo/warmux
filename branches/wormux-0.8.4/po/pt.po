@@ -157,7 +157,7 @@ msgstr[1] ""
 "A equipa %s ganhou %u martelos pneumáticos! Não faças muito barulho com "
 "eles! Obrigado, os teus vizinhos."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -455,7 +455,7 @@ msgstr ""
 "Disparar : barra de espaços\n"
 "um tiro por turno"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Bigorna"
 
@@ -868,7 +868,7 @@ msgstr ""
 "desejada\n"
 "uma munição por turno"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1564,7 +1564,7 @@ msgstr "Você precisa de pelo menos duA equipa válidas!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Não será capaz de jogar antes de escolher uma equipa !"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 

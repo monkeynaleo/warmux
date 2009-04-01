@@ -155,7 +155,7 @@ msgstr[1] ""
 "Holdet %s har fået %u tryklufthammere! Lav ikke for meget larm med dem! På "
 "forhånd tak. Hilsen, dine naboer."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -446,7 +446,7 @@ msgstr ""
 "Affyr: mellemrum\n"
 "Et skud per tur"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Ambolt"
 
@@ -858,7 +858,7 @@ msgstr ""
 "Affyr: Hold mellemrum nede indtil den ønskede styrke er nået\n"
 "Et stykke ammunition per tur"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1553,7 +1553,7 @@ msgstr "Du skal vælge mindst to gyldige hold!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Du ramte ved siden af!"
 

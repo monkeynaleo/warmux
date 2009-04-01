@@ -94,9 +94,13 @@ private:
   void DrawEnergyBar(int dy) const;
   void DrawName(int dy) const;
 
-  void SignalDrowning();
-  void SignalGhostState(bool was_dead);
-  void SignalCollision(const Point2d& speed_vector);
+  virtual void SignalDrowning();
+  virtual void SignalGhostState(bool was_dead);
+  virtual void SignalGroundCollision(const Point2d& speed_before);
+  virtual void SignalObjectCollision(const Point2d& my_speed_before,
+				     PhysicalObj * obj,
+				     const Point2d& obj_speed);
+  void Collision(const Point2d& speed_vector);
   void SetBody(Body* char_body);
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
@@ -107,7 +111,7 @@ public:
   Character (const Character& acharacter);
   ~Character();
 
-  void SignalExplosion();
+  virtual void SignalExplosion();
 
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);

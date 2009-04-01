@@ -147,7 +147,7 @@ msgid_plural ""
 "your neighbours."
 msgstr[0] ""
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -396,7 +396,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Örs"
 
@@ -798,7 +798,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1492,7 +1492,7 @@ msgstr "En az iki geçerli takıma ihtiyacınız var !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 

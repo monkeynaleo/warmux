@@ -154,7 +154,7 @@ msgstr[1] ""
 "%s laget har vunnet %u lufthammere! Ikke bråk for mye med dem! På forhånd "
 "takk,Naboene"
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -446,7 +446,7 @@ msgstr ""
 "Retning : Opp/ned\n"
 "Skyt : mellomromstastenEt treff per runde"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Ambolt"
 
@@ -851,7 +851,7 @@ msgstr ""
 "Hvordan bruke den : venstreklikk på måletFørste skytevinkel : Opp/NedSkyt : "
 "Hold mellomromstasten nede til riktig styrke er nådden ammo per runde"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1539,7 +1539,7 @@ msgstr "Du må ha minst to godkjente lag!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 

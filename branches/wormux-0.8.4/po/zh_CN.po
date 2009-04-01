@@ -152,7 +152,7 @@ msgid_plural ""
 msgstr[0] "%s 队得到 %u 气锤! （邻居们：不要太响了，谢谢。）."
 msgstr[1] "%s 队得到 %u 气锤! （邻居们：不要太响了，谢谢。）."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -434,7 +434,7 @@ msgstr ""
 "开火 : 空格键\n"
 "每回合一击"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "铁砧"
 
@@ -845,7 +845,7 @@ msgstr ""
 "开火: 按住空格键积攒到需要的力量\n"
 "每回合一个弹夹"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1547,7 +1547,7 @@ msgstr "至少有2组才能开始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "没有队伍，就不会有战斗!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 

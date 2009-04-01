@@ -165,7 +165,7 @@ msgstr[2] ""
 "Tým %s získal %u pneumatických kladiv. Nedělejte s nimi moc hluku! Vaši "
 "sousedé vám poděkují."
 
-#: src/weapon/anvil.cpp:188
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -487,7 +487,7 @@ msgstr ""
 "Střelba: mezerník\n"
 "zásah obloukem"
 
-#: src/weapon/anvil.cpp:131
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Kovadlina"
 
@@ -901,7 +901,7 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/weapon/anvil.cpp:132
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1598,7 +1598,7 @@ msgstr "Potřebujete nejméně dva použitelné týmy!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 
