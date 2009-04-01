@@ -49,6 +49,8 @@ public:
   ~WindParticle();
   void Draw();
   void Refresh();
+  void Ghost();
+
 };
 
 class Wind : public Singleton<Wind>
@@ -61,6 +63,7 @@ private:
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
   void RandomizeParticlesPos(); // Put particles randomly on the screen
+
 
   Wind();
   ~Wind();

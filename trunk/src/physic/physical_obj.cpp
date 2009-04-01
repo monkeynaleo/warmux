@@ -925,8 +925,16 @@ void PhysicalObj::ComputeAutoAlign()
 
     //double delta = sin (GetAngle() +GetSpeedAngle());
 
-    b2Vec2 velocity = m_body->GetLinearVelocity();
-    m_body->ApplyTorque( response  * m_auto_align_force * (velocity.x * velocity.x  + velocity.y * velocity.y));
+    if(abs(delta) <0.1)
+    {
+      //Fast stabilization
+      m_body->SetAngularVelocity(m_body->GetAngularVelocity()/1.1);
+    }else
+    {
+      b2Vec2 velocity = m_body->GetLinearVelocity();
+      m_body->ApplyTorque( response  * m_auto_align_force * (velocity.x * velocity.x  + velocity.y * velocity.y));
+    }
+
   }
 }
 

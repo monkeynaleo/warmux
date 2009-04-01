@@ -164,6 +164,12 @@ void WindParticle::Draw()
     sprite->Draw(GetPosition());
 }
 
+void WindParticle::Ghost ()
+{
+  // WindParticle can't be ghost
+ return;
+}
+
 //---------------------------------------------------
 
 Wind::Wind() : m_val(0), m_nv_val(0), m_last_move(0), m_last_part_mvt(0)
