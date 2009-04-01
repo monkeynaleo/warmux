@@ -267,7 +267,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "%s teamo gajnis %u fusilon!"
 msgstr[1] "%s teamo gajnis %u fusilojn!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -906,7 +906,7 @@ msgstr "Preparante teamon"
 msgid "It's a present!"
 msgstr "Tio estas donaco!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Jetpako"
 

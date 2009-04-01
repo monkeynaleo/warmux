@@ -307,7 +307,7 @@ msgstr[0] "Drużyna %s zyskała %u pistolet!"
 msgstr[1] "Drużyna %s zyskała %u pistolety!"
 msgstr[2] "Drużyna %s zyskała %u pistoletów!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -979,7 +979,7 @@ msgstr "Inicjalizacja drużyn"
 msgid "It's a present!"
 msgstr "To prezent!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Plecak odrzutowy"
 

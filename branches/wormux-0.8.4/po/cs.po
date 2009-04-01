@@ -295,7 +295,7 @@ msgstr[0] "Tým %s získal %u pistoli!"
 msgstr[1] "Tým %s získal %u pistole!"
 msgstr[2] "Tým %s získal %u pistolí!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -957,7 +957,7 @@ msgstr "Inicializovat týmy"
 msgid "It's a present!"
 msgstr "To je dáreček!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 

@@ -308,7 +308,7 @@ msgstr[1] "Ekipa %s je osvojila %u pištoli!"
 msgstr[2] "Ekipa %s je osvojila %u pištole!"
 msgstr[3] "Ekipa %s je osvojila %u pištol!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -987,7 +987,7 @@ msgstr "Inicializacija ekip"
 msgid "It's a present!"
 msgstr "To je darilo!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Raketni nahrbtnik"
 

@@ -283,7 +283,7 @@ msgstr[0] "%s komanda ir ieguvusi %u pistoli!"
 msgstr[1] "%s komanda ir ieguvusi %u pistoles!"
 msgstr[2] "%s komanda ir ieguvusi %u pistoles!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, fuzzy, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -941,7 +941,7 @@ msgstr "Gatavo komandas"
 msgid "It's a present!"
 msgstr "Tā ir dāvana!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Raķešsoma"
 

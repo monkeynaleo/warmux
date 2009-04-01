@@ -261,7 +261,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "%s 隊得到 %u 槍了!"
 msgstr[1] "%s 隊得到 %u 槍了!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -899,7 +899,7 @@ msgstr "隊伍起始化"
 msgid "It's a present!"
 msgstr "就是現在!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "噴射包"
 

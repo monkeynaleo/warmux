@@ -269,7 +269,7 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "Holdet %s har fået %u pistol!"
 msgstr[1] "Holdet %s har fået %u pistoler!"
 
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -914,7 +914,7 @@ msgstr "Klargører hold"
 msgid "It's a present!"
 msgstr "Det er en gave!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Jetpack"
 

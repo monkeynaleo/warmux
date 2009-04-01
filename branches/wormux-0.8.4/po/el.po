@@ -280,7 +280,7 @@ msgstr[0] "Η ομάδα %s κέρδισε %u πιστόλι!"
 msgstr[1] "Η ομάδα %s κέρδισε %u πιστόλια!"
 
 # Ça plane pour l'équipe %s ! Elle a gagné %u jetpack !
-#: src/weapon/jetpack.cpp:246
+#: src/weapon/jetpack.cpp:278
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -949,7 +949,7 @@ msgstr "Αρχικοποίηση ομάδων"
 msgid "It's a present!"
 msgstr "Πάρε ένα δωράκι!"
 
-#: src/weapon/jetpack.cpp:59
+#: src/weapon/jetpack.cpp:60
 msgid "Jetpack"
 msgstr "Σακίδιο Τζετ"
 
