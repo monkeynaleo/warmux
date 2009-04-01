@@ -358,7 +358,7 @@
       <particle_range>55</particle_range>
       <blast_range>55</blast_range>
       <blast_force>250</blast_force>
-      <detection_range>1</detection_range>
+      <detection_range>3</detection_range>
       <speed_detection>2</speed_detection>
       <timeout>1</timeout>
       <escape_time>2</escape_time>
