@@ -303,6 +303,22 @@ void PhysicalEngine::RemoveWindObject(PhysicalObj *i_object)
   }
 }
 
+void PhysicalEngine::AddModifiedGravityObject(PhysicalObj *i_object)
+{
+	m_modified_gravity_object_list.push_back(i_object);
+}
+
+void PhysicalEngine::RemoveModifiedGravityObject(PhysicalObj *i_object)
+{
+  std::vector<PhysicalObj *>::iterator it;
+  for (it = m_modified_gravity_object_list.begin(); it != m_modified_gravity_object_list.end(); it++){
+    if (*it == i_object) {
+      m_modified_gravity_object_list.erase(it);
+      break;
+    }
+  }
+}
+
 void PhysicalEngine::AddAutoAlignObject(PhysicalObj * object)
 {
     m_auto_align_object_list.push_back(object);

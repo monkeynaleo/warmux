@@ -66,6 +66,9 @@ public:
   void AddAutoAlignObject(PhysicalObj* object);
   void RemoveAutoAlignObject(PhysicalObj* object);
 
+  void AddModifiedGravityObject(PhysicalObj* i_object);
+  void RemoveModifiedGravityObject(PhysicalObj* i_object);
+
 
   typedef enum {ADD,PERSIST,REMOVE} ContactType;
 
@@ -89,6 +92,7 @@ protected:
 
   void ComputeContacts();
   void ComputeWind();
+  void ComputeModifiedGravity();
 
   std::map<b2Body *,PhysicalObj *> objects_list;
 
@@ -100,6 +104,7 @@ protected:
   std::vector<Force *> m_force_list;
   std::vector<PhysicalShape *> m_air_friction_shape_list;
   std::vector<PhysicalObj *> m_wind_object_list;
+  std::vector<PhysicalObj *> m_modified_gravity_object_list;
   std::vector<PhysicalObj *> m_auto_align_object_list;
   void ClearContact();
 
