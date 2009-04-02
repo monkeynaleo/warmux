@@ -23,10 +23,6 @@ EXTRA_DIST = data/wormux.desktop                   \
 	     mac/README-mac.txt			   \
 	     mac/README-mac.txt			   \
 	     mac/cmake_build.sh                    \
-             visual/wormux.vcproj                  \
-             src/msvc/config.h                     \
-             src/msvc/getopt.c                     \
-             src/msvc/getopt.h                     \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
