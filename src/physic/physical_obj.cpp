@@ -92,10 +92,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_body_def = new b2BodyDef();
   m_body_def->allowSleep = true;
 
-  if(m_wind_factor != 0)
-  {
-    PhysicalEngine::GetInstance()->AddWindObject(this);
-  }
+
 
   m_body_def->linearDamping = m_air_resist_factor;
   m_body_def->angularDamping = 0.1;
@@ -179,6 +176,17 @@ void PhysicalObj::Activate()
     return;
 
   m_body = PhysicalEngine::GetInstance()->AddObject(this);
+
+  if(m_wind_factor != 0)
+  {
+    PhysicalEngine::GetInstance()->AddWindObject(this);
+  }
+
+  if(m_gravity_factor != 1)
+  {
+    PhysicalEngine::GetInstance()->AddModifiedGravityObject(this);
+  }
+
   SetSpeedXY(m_initial_speed);
   Generate();
 }
@@ -208,7 +216,7 @@ void PhysicalObj::Desactivate()
   if (!m_body)
     return;
 
-
+  PhysicalEngine::
   PhysicalEngine::GetInstance()->RemoveWindObject(this);
   RemoveAllExternForce();
   PhysicalEngine::GetInstance()->RemoveObject(this);
@@ -640,7 +648,7 @@ void PhysicalObj::SetAirResistFactor(double factor)
     return;
 
   m_air_resist_factor = factor;
-
+  m_body_def->linearDamping = m_air_resist_factor;
   if (m_body)
     printf("%s PhysicalObj::SetAirResistFactor(%f)\n", m_name.c_str(), factor);
 }

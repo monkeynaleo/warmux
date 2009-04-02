@@ -53,8 +53,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
-  SetAirResistFactor(GetAirResistFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
-
+  SetAirResistFactor( GetAirResistFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
   MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
   // Fixe test rectangle
@@ -134,23 +133,29 @@ void WindParticle::Refresh()
   if (GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX() )
     x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if (GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY()){
+  if (GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY())
     y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
-    StopMoving();
-  }
 
   if (GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
     y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
 
-  m_alive = ALIVE;
+
+  if (x != GetX() || y != GetY())
+  {
+    SetXY(Point2i(x,y));
+  }
+  /*m_alive = ALIVE;
 
   if (m_alive != ALIVE || x != GetX() || y != GetY())
   {
+    SetXY(Point2i(x,y));
+  }
     m_alive = ALIVE;
     StartMoving();
     SetXY( Point2i(x, y) );
     MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f", x, y, GetMass(), GetWindFactor());
   }
+  */
 
   UpdatePosition();
 }
