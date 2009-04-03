@@ -114,9 +114,12 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
 
   r = HandShake();
   if (r != CONNECTED)
-    goto error;
+    goto err_handshake;
 
   return r;
+
+ err_handshake:
+  socket.RemoveFromTmpSocketSet();
 
  error:
   socket.Disconnect();
@@ -139,6 +142,7 @@ void IndexServer::Disconnect()
 
   MSG_DEBUG("index_server", "Closing connection");
 
+  socket.RemoveFromTmpSocketSet();
   socket.Disconnect();
 }
 
