@@ -125,6 +125,7 @@ void PhysicalEngine::Step()
   }
 
   ComputeWind();
+  ComputeModifiedGravity();
 
   physic_world->Step(timeStep, iterations);
 
@@ -154,6 +155,21 @@ void PhysicalEngine::ComputeWind()
 	  {
       b2Vec2 force(m_wind_vector.x * m_wind_object_list[i]->GetWindFactor(),
                    m_wind_vector.y * m_wind_object_list[i]->GetWindFactor());
+      body->ApplyForce(force, body->GetWorldCenter());
+	  }
+  }
+}
+
+void PhysicalEngine::ComputeModifiedGravity()
+{
+  for (uint i = 0; i< m_modified_gravity_object_list.size();i++){
+    //Extract object's b2body
+    b2Body *body = m_modified_gravity_object_list[i]->GetBody();
+    //  b2Vec2 relative_speed;
+	  if(body)
+	  {
+	    // mass* G * (gravity_factor-1)
+      b2Vec2 force(0,30.0f * body->GetMass() * (m_modified_gravity_object_list[i]->GetGravityFactor()-1));
       body->ApplyForce(force, body->GetWorldCenter());
 	  }
   }

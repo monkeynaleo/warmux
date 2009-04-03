@@ -207,7 +207,7 @@ public:
   void SetAirResistFactor (double factor);
   double GetAirResistFactor () const{ return m_air_resist_factor; }
 
-  void SetGravityFactor (double factor) { m_gravity_factor = factor; };
+  void SetGravityFactor (double factor);
   double GetGravityFactor () const { return m_gravity_factor; }
 
   void AddAddedContactPoint(b2ContactPoint contact);

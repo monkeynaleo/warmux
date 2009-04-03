@@ -216,7 +216,7 @@ void PhysicalObj::Desactivate()
   if (!m_body)
     return;
 
-  PhysicalEngine::
+  PhysicalEngine::GetInstance()->RemoveModifiedGravityObject(this);
   PhysicalEngine::GetInstance()->RemoveWindObject(this);
   RemoveAllExternForce();
   PhysicalEngine::GetInstance()->RemoveObject(this);
@@ -651,6 +651,13 @@ void PhysicalObj::SetAirResistFactor(double factor)
   m_body_def->linearDamping = m_air_resist_factor;
   if (m_body)
     printf("%s PhysicalObj::SetAirResistFactor(%f)\n", m_name.c_str(), factor);
+}
+
+void PhysicalObj::SetGravityFactor (double factor) {
+  m_gravity_factor = factor;
+  if(m_body && m_gravity_factor != 1){
+    PhysicalEngine::GetInstance()->AddModifiedGravityObject(this);
+  }
 }
 
 void PhysicalObj::StoreValue(Action *a)
