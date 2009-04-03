@@ -211,7 +211,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-
+  image->SetRotation_rad(-GetAngle());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
