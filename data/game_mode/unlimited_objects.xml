@@ -141,7 +141,7 @@
   <dark_smoke>  <!-- Particle bazooka and auto-bazooka... -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>false</rotating>
@@ -451,7 +451,7 @@
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.01</rebound_factor>
-    <rotating>false</rotating>
+    <rotating>true</rotating>
     <shape name="dynamite-main" type="polygon">
       <mass>100.0</mass>
       <position x="0" y="0" />
