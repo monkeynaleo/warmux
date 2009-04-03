@@ -68,8 +68,6 @@ class IndexServer : public Singleton<IndexServer>
 
   // Transfer functions
   static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
-  static void Batch(const int &nbr, char* buffer, uint& used);
-  static void Batch(const std::string &str, char* buffer, uint& used);
   static bool SendMsg(WSocket& socket, char* buffer, uint& used);
 
   // Gives the address of a server in the list

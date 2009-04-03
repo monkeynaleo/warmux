@@ -189,19 +189,9 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 void IndexServer::NewMsg(IndexServerMsg msg_id, char* buffer, uint& used)
 {
   assert(used == 0);
-  Batch((int)msg_id, buffer, used);
+  used += WNet::Batch(buffer+used, (int)msg_id);
   // Reserve 4 bytes for the total message length.
   used += 4;
-}
-
-void IndexServer::Batch(const int& nbr, char* buffer, uint& used)
-{
-  used += WNet::Batch(buffer+used, nbr);
-}
-
-void IndexServer::Batch(const std::string &str, char* buffer, uint& used)
-{
-  used += WNet::Batch(buffer+used, str);
 }
 
 bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
@@ -224,7 +214,7 @@ connection_state_t IndexServer::HandShake()
   MSG_DEBUG("index_server", "Beginning handshake...");
 
   NewMsg(TS_MSG_VERSION, buffer, used);
-  Batch(Constants::WORMUX_VERSION, buffer, used);
+  used += WNet::Batch(buffer+used, Constants::WORMUX_VERSION);
 
   MSG_DEBUG("index_server", "Sending information...");
 
@@ -282,11 +272,12 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
     return true;
 
   NewMsg(TS_MSG_REGISTER_GAME, buffer, used);
-  Batch(game_name, buffer, used);
-  Batch((int)pwd, buffer, used);
+  used += WNet::Batch(buffer+used, game_name);
+  used += WNet::Batch(buffer+used, (int)pwd);
+
   SendMsg(socket, buffer, used);
   NewMsg(TS_MSG_HOSTING, buffer, used);
-  Batch(port, buffer, used);
+  used += WNet::Batch(buffer+used, port);
   SendMsg(socket, buffer, used);
 
   bool r = socket.ReceiveStr(ack, 5);
