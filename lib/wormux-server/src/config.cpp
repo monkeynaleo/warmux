@@ -36,6 +36,27 @@ static ssize_t getline(std::string& line, std::ifstream& file)
   return line.size();
 }
 
+void BasicConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
+{
+  // split the string on ','
+  std::string::size_type prev_pos = 0;
+  std::string::size_type comma_pos = 0;
+  std::string version;
+
+  do {
+    comma_pos = val.find(',', prev_pos);
+
+    if  (comma_pos != std::string::npos) {
+      version = val.substr(prev_pos, comma_pos - prev_pos);
+      prev_pos = comma_pos+1;
+    } else {
+      version = val.substr(prev_pos);
+    }
+    versions_lst.push_back(version);
+
+  } while (comma_pos != std::string::npos);
+}
+
 void BasicConfig::Load()
 {
   DPRINT(INFO, "Loading config file");
@@ -70,29 +91,13 @@ void BasicConfig::Load()
       std::string opt = line.substr(0, equ_pos);
       std::string val = line.substr(equ_pos+1);
 
-      if (opt == "versions")
-	{
-	  // split the string on ','
-	  std::string::size_type prev_pos = 0;
-	  std::string::size_type comma_pos = 0;
-	  std::string version;
-
-	  do {
-	    comma_pos = val.find(',', prev_pos);
-
-	    if  (comma_pos != std::string::npos) {
-	      version = val.substr(prev_pos, comma_pos - prev_pos);
-	      prev_pos = comma_pos+1;
-	    } else {
-	      version = val.substr(prev_pos);
-	    }
-	    supported_versions.push_back(version);
-
-	  } while (comma_pos != std::string::npos);
-
-
-	  continue;
-	}
+      if (opt == "versions") {
+	BasicConfig::SplitVersionsString(val, supported_versions);
+	continue;
+      } else if (opt == "hidden_versions") {
+	BasicConfig::SplitVersionsString(val, hidden_supported_versions);
+	continue;
+      }
 
       // val is considered to be an int if it doesn't contain
       // a '.' (ip address have to be handled as string...
@@ -149,7 +154,10 @@ void BasicConfig::Display() const
       DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
     }
 
-  DPRINT(INFO, "Supported versions: %s", SupportedVersions2Str().c_str());
+  DPRINT(INFO, "Supported versions: %s",
+	 BasicConfig::SupportedVersions2Str(supported_versions).c_str());
+  DPRINT(INFO, "Hidden but supported versions: %s",
+	 BasicConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
 }
 
 bool BasicConfig::Get(const std::string & name, bool & value) const
@@ -232,18 +240,33 @@ bool BasicConfig::IsVersionSupported(const std::string & version) const
       return true;
   }
 
+  for (it = hidden_supported_versions.begin();
+       it != hidden_supported_versions.end();
+       it++) {
+    if (version == *it)
+      return true;
+  }
+
   return false;
 }
 
-const std::string BasicConfig::SupportedVersions2Str() const
+// static method
+const std::string BasicConfig::SupportedVersions2Str(const std::list<std::string>& versions_lst)
 {
-  std::string versions = "";
+ std::string versions = "";
   std::list<std::string>::const_iterator it;
-  for (it = supported_versions.begin();
-       it != supported_versions.end();
+  for (it = versions_lst.begin();
+       it != versions_lst.end();
        it++) {
     versions += *it + ',';
   }
 
   return versions.substr(0, versions.size()-1);
+}
+
+// returns only the officially supported versions
+const std::string BasicConfig::SupportedVersions2Str() const
+{
+  return BasicConfig::SupportedVersions2Str(supported_versions);
+
 }
