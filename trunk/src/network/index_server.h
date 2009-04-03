@@ -67,10 +67,10 @@ class IndexServer : public Singleton<IndexServer>
   bool hidden_server;
 
   // Transfer functions
-  void NewMsg(IndexServerMsg msg_id);
-  void Batch(const int &nbr);
-  void Batch(const std::string &str);
-  bool SendMsg();
+  static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
+  static void Batch(const int &nbr, char* buffer, uint& used);
+  static void Batch(const std::string &str, char* buffer, uint& used);
+  static bool SendMsg(WSocket& socket, char* buffer, uint& used);
 
   // Gives the address of a server in the list
   bool GetServerAddress(std::string & address, int & port, uint& nb_tries);

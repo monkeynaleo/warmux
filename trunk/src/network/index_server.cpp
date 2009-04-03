@@ -186,29 +186,28 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 }
 
 /*************  Basic transmissions  ******************/
-void IndexServer::NewMsg(IndexServerMsg msg_id)
+void IndexServer::NewMsg(IndexServerMsg msg_id, char* buffer, uint& used)
 {
   assert(used == 0);
-  Batch((int)msg_id);
+  Batch((int)msg_id, buffer, used);
   // Reserve 4 bytes for the total message length.
   used += 4;
 }
 
-void IndexServer::Batch(const int& nbr)
+void IndexServer::Batch(const int& nbr, char* buffer, uint& used)
 {
-  assert(used+4 < INDEX_SERVER_BUFFER_LENGTH);
   used += WNet::Batch(buffer+used, nbr);
 }
 
-void IndexServer::Batch(const std::string &str)
+void IndexServer::Batch(const std::string &str, char* buffer, uint& used)
 {
-  assert(used+4+str.size() < INDEX_SERVER_BUFFER_LENGTH);
   used += WNet::Batch(buffer+used, str);
 }
 
-bool IndexServer::SendMsg()
+bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
 {
   WNet::FinalizeBatch(buffer, used);
+  assert(used < INDEX_SERVER_BUFFER_LENGTH);
 
   bool r = socket.SendBuffer(buffer, used);
   used = 0;
@@ -224,12 +223,12 @@ connection_state_t IndexServer::HandShake()
 
   MSG_DEBUG("index_server", "Beginning handshake...");
 
-  NewMsg(TS_MSG_VERSION);
-  Batch(Constants::WORMUX_VERSION);
+  NewMsg(TS_MSG_VERSION, buffer, used);
+  Batch(Constants::WORMUX_VERSION, buffer, used);
 
   MSG_DEBUG("index_server", "Sending information...");
 
-  r = SendMsg();
+  r = SendMsg(socket, buffer, used);
   if (!r)
     goto error;
 
@@ -282,13 +281,13 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (hidden_server)
     return true;
 
-  NewMsg(TS_MSG_REGISTER_GAME);
-  Batch(game_name);
-  Batch((int)pwd);
-  SendMsg();
-  NewMsg(TS_MSG_HOSTING);
-  Batch(port);
-  SendMsg();
+  NewMsg(TS_MSG_REGISTER_GAME, buffer, used);
+  Batch(game_name, buffer, used);
+  Batch((int)pwd, buffer, used);
+  SendMsg(socket, buffer, used);
+  NewMsg(TS_MSG_HOSTING, buffer, used);
+  Batch(port, buffer, used);
+  SendMsg(socket, buffer, used);
 
   bool r = socket.ReceiveStr(ack, 5);
   if (r && ack == "OK")
@@ -303,8 +302,8 @@ std::list<GameServerInfo> IndexServer::GetHostList()
   std::list<GameServerInfo> lst;
   bool r;
 
-  NewMsg(TS_MSG_GET_LIST);
-  SendMsg();
+  NewMsg(TS_MSG_GET_LIST, buffer, used);
+  SendMsg(socket, buffer, used);
 
   int lst_size;
   r = socket.ReceiveInt(lst_size);
@@ -377,8 +376,8 @@ void IndexServer::Refresh()
   r = socket.ReceiveInt(msg_id);
 
   if (r && msg_id == TS_MSG_PING) {
-    NewMsg(TS_MSG_PONG);
-    SendMsg();
+    NewMsg(TS_MSG_PONG, buffer, used);
+    SendMsg(socket, buffer, used);
     return;
   }
 
