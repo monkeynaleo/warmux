@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Wormux Fa <behdadp@farsiweb.info>\n"
@@ -43,13 +42,13 @@ msgstr "%s <%s> مشهور به %s از %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> از %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "تیم %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "تیم %s- از راه دور"
@@ -115,7 +114,7 @@ msgstr "%s یک موجود روانی است، او یکی از اعضای تی�
 msgid "%s is next to a mine!"
 msgstr "%s نزدیک یک مین است!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -424,7 +423,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "سندان"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "نویسندگان:"
 
@@ -469,9 +468,9 @@ msgstr "شیطونک"
 msgid "Bye bye tux..."
 msgstr "بای بای تاکس..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "نمی‌توان تیم %s را پیدا کرد!"
@@ -573,7 +572,7 @@ msgstr "اتصال به بازی"
 msgid "Connected !"
 msgstr "اتصال برقرار شد!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "اتصال برقرار شد!"
@@ -629,7 +628,7 @@ msgstr "زمان یک نوبت"
 msgid "Dynamite"
 msgstr "دینامیت"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "پایان بازی"
 
@@ -781,7 +780,7 @@ msgid "Have a good game!"
 msgstr "بازی خوبی داشته باشید!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "رئیس ارتش"
 
@@ -838,7 +837,7 @@ msgstr ""
 "چگونگی استفاده از آن: کلیک چپ روی هدف\n"
 "یک بار در هر نوبت"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
@@ -953,7 +952,7 @@ msgstr "نقشه‌ها"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "حالت کارگیر (کلاینت)"
@@ -1040,7 +1039,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "هیچ عنصر <%s> در پرونده‌ی تنظیم xml پیدا نشد!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "بازیکن %i وصل شد"
@@ -1049,7 +1048,7 @@ msgstr "بازیکن %i وصل شد"
 msgid "Nobody!"
 msgstr "هیچکس"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "تعداد کاراکترها"
 
@@ -1166,7 +1165,7 @@ msgstr "بمب تخریبی"
 msgid "Run game"
 msgstr "اجرای بازی"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "بگو: "
 
@@ -1230,7 +1229,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "تفنگ دوربین‌دار"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1238,7 +1237,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1334,7 +1333,7 @@ msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 msgid "The ball left the battlefield before exploding"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1420,7 +1419,7 @@ msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌های ش�
 msgid "Unable to use this port!"
 msgstr "ناتوان در استفاده از این پورت!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr ""
 
@@ -1444,7 +1443,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "صبر کنید! بازیکن %i آماده نیست!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
 
@@ -1457,7 +1456,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "وب‌سایت: "
 
@@ -1485,7 +1484,7 @@ msgstr "برنده"
 msgid "Wormux launching..."
 msgstr "ورموکس در حال اجراست..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
 
@@ -1509,7 +1508,7 @@ msgstr "شما تنهایید!"
 msgid "You are alone..."
 msgstr "شما تنهایید..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

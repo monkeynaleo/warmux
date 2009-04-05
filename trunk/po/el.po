@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2009-03-25 15:19+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -49,13 +48,13 @@ msgstr "%s <%s> γνωστός και ως %s από %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> από %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Ομάδα %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ομάδα %s - Απομακρυσμένη"
@@ -122,7 +121,7 @@ msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος τ�
 msgid "%s is next to a mine!"
 msgstr "O %s είναι δίπλα σε νάρκη!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Η ομάδα %s έχει ήδη άπειρα πυρομαχικά για  %s!"
@@ -486,7 +485,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Αμόνι"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
@@ -530,9 +529,9 @@ msgstr "Μπάλα Αναπήδησης"
 msgid "Bye bye tux..."
 msgstr "Άντε γεια tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Αδύνατον να βρεθεί η ομάδα %s!"
@@ -631,7 +630,7 @@ msgstr "Συνδεθείτε σε παιχνίδι"
 msgid "Connected !"
 msgstr "Συνδεδεμένος!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "Συνδεδεμένος!"
@@ -688,7 +687,7 @@ msgstr "Διάρκεια ενός γύρου"
 msgid "Dynamite"
 msgstr "Δυναμίτης"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ"
 
@@ -854,7 +853,7 @@ msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Διοικητής"
 
@@ -916,7 +915,7 @@ msgstr ""
 "Χρήση: αριστερό κλικ στο στόχο\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Κάνε γρήγορα, είσαι πολύ αργός!!"
 
@@ -1031,7 +1030,7 @@ msgstr "Χάρτες"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "Κατάσταση παιχνιδιού"
@@ -1114,7 +1113,7 @@ msgstr "Προειδοποίηση νέου παίκτη;"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Κανένα στοιχείο <%s> δεν βρέθηκε στο αρχείο διαμόρφωσης XML!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "%i παίκτης συνδέθηκε"
@@ -1123,7 +1122,7 @@ msgstr "%i παίκτης συνδέθηκε"
 msgid "Nobody!"
 msgstr "Κανένας!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Πλήθος παικτών ανά ομάδα"
 
@@ -1241,7 +1240,7 @@ msgstr "Βόμβα διατάραξης"
 msgid "Run game"
 msgstr "Έναρξη παιχνιδιού"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Πες: "
 
@@ -1305,7 +1304,7 @@ msgstr "Μικρότερη γωνία σκόπευσης και βηματισμ
 msgid "Sniper Rifle"
 msgstr "Τουφέκι με σκόπευτρο"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 
@@ -1314,7 +1313,7 @@ msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1414,7 +1413,7 @@ msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσ
 msgid "The ball left the battlefield before exploding"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1518,7 +1517,7 @@ msgstr "Αδύνατον να ανοίξει ο φάκελος με τους π�
 msgid "Unable to use this port!"
 msgstr "Αδύνατον να χρησιμοποιηθεί αυτή η θύρα!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Άγνωστη εντολή"
 
@@ -1543,7 +1542,7 @@ msgstr[0] "Περίμενε! %i παίκτης δεν είναι έτοιμος 
 msgstr[1] "Περίμενε! %i παίκτες δεν είναι έτοιμοι ακόμα!"
 
 # Attente du serveur, vous pouvez annuler ou discuter !
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
@@ -1556,7 +1555,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
 msgid "Weapons"
 msgstr "Όπλα"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
@@ -1585,7 +1584,7 @@ msgstr "Νικητής"
 msgid "Wormux launching..."
 msgstr "Έναρξη του Wormux..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 
@@ -1612,7 +1611,7 @@ msgstr "Είσαι μονάχος :-/"
 msgid "You are alone..."
 msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

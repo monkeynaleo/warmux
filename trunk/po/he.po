@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-05-26 21:06+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -45,13 +44,13 @@ msgstr "%s <%s> נקרא %s מ-%s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> מ-%s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "צוות %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
@@ -118,7 +117,7 @@ msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 msgid "%s is next to a mine!"
 msgstr "%s סמוך למוקש!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "לצוות %s יש כבר תחמושת בלתי מוגבלת עבור ה-%s!"
@@ -452,7 +451,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "סדן"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "מחברים:"
 
@@ -497,9 +496,9 @@ msgstr "כדור מקפץ"
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "לא ניתן למצוא את צוות %s !"
@@ -601,7 +600,7 @@ msgstr "התחבר למשחק"
 msgid "Connected !"
 msgstr "מחובר!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "מחובר!"
@@ -657,7 +656,7 @@ msgstr "משך תור"
 msgid "Dynamite"
 msgstr "דינמיט"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
@@ -809,7 +808,7 @@ msgid "Have a good game!"
 msgstr "משחק מוצלח!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "מפקד"
 
@@ -868,7 +867,7 @@ msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
 "תחמושת לתור"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
@@ -982,7 +981,7 @@ msgstr "מפות"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "מצב לקוח"
@@ -1069,7 +1068,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "לא נמצא אלמנט <%s> בקובץ ה-xml!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "שחקן %i מחובר"
@@ -1078,7 +1077,7 @@ msgstr "שחקן %i מחובר"
 msgid "Nobody!"
 msgstr "אף אחד!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "מספר דמויותe"
 
@@ -1195,7 +1194,7 @@ msgstr "מפזר הפגנות"
 msgid "Run game"
 msgstr "הרץ משחק"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "אמור: "
 
@@ -1259,7 +1258,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "רובה צלפים"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1267,7 +1266,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1364,7 +1363,7 @@ msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1459,7 +1458,7 @@ msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!
 msgid "Unable to use this port!"
 msgstr "לא ניתן להשתמש בפורט זה!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr ""
 
@@ -1484,7 +1483,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "רגע! שחקן %i אינו מוכן עדיין!"
 msgstr[1] "רגע! %i שחקנים אינם מוכנים עדיין!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
@@ -1497,7 +1496,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "אתר: "
 
@@ -1525,7 +1524,7 @@ msgstr "מנצח"
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "גירסת Wormux "
 
@@ -1549,7 +1548,7 @@ msgstr "אתה לבדך :-/"
 msgid "You are alone..."
 msgstr "אתה לבדך..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

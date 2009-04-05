@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -48,13 +47,13 @@ msgstr "%s <%s> leshenwys %s (%s)"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Para %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
@@ -123,7 +122,7 @@ msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
 msgid "%s is next to a mine!"
 msgstr "Yma %s ogas dhe grampothen dardhus!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
@@ -556,7 +555,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Anwan"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Awtours:"
 
@@ -600,9 +599,9 @@ msgstr "Pel derlemmel"
 msgid "Bye bye tux..."
 msgstr "Duw genes tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ny yllir kavos para %s !"
@@ -699,7 +698,7 @@ msgstr "Omjunya dhe'n gwari"
 msgid "Connected !"
 msgstr "Junys!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 msgid "Connected players: "
 msgstr "Gwarioryon junys: "
 
@@ -754,7 +753,7 @@ msgstr "Pesyans unn dro"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "DIWEDH AN GWARI"
 
@@ -908,7 +907,7 @@ msgid "Have a good game!"
 msgstr "Omlowenhewgh!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Penn an para"
 
@@ -968,7 +967,7 @@ msgstr ""
 "Usyans: klyck kledh orth an gosten\n"
 "unn bellen orth an dro"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Gwra feski, re lent os ta!!"
 
@@ -1082,7 +1081,7 @@ msgstr "Mappaow"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 msgid "Master mode"
 msgstr "Modh arludh"
 
@@ -1164,7 +1163,7 @@ msgstr "Gwarnyans gwarier nowyth?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ny gavas elven <%s> yn restren restransow xml!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 msgid "No player connected"
 msgstr "Nyns eus gwarier vyth junys"
 
@@ -1172,7 +1171,7 @@ msgstr "Nyns eus gwarier vyth junys"
 msgid "Nobody!"
 msgstr "Den vyth!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Niver a bersons"
 
@@ -1287,7 +1286,7 @@ msgstr "Tanbellen Wustel"
 msgid "Run game"
 msgstr "Lonchya an gwari"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Leverel:"
 
@@ -1349,7 +1348,7 @@ msgstr "Lehe elin medra ha kamm kerdhes"
 msgid "Sniper Rifle"
 msgstr "Kelsethwon"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 
@@ -1357,7 +1356,7 @@ msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1452,7 +1451,7 @@ msgstr "An fusen awtomatek re asas an gaslan..."
 msgid "The ball left the battlefield before exploding"
 msgstr "An bel a asas an gaslan kyns omdardha."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1551,7 +1550,7 @@ msgstr "Ny yllir ygeri an arayel vappaow personel (%s) !"
 msgid "Unable to use this port!"
 msgstr "Ny yllir usya an port ma!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Gorhemmyn ankoth"
 
@@ -1577,7 +1576,7 @@ msgstr[1] "Gortewgh! %i warier nyns yns parys hwath!"
 msgstr[2] "Gortewgh! %i gwarier nyns yns parys hwath!"
 msgstr[3] "Gortewgh! %i gwarier nyns yns parys hwath!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
 
@@ -1590,7 +1589,7 @@ msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 msgid "Weapons"
 msgstr "Arvow"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Gwiasva: "
 
@@ -1618,7 +1617,7 @@ msgstr "Gwaynyer"
 msgid "Wormux launching..."
 msgstr "Yma Wormux ow lonchya..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Versyon Wormux"
 
@@ -1642,7 +1641,7 @@ msgstr "Genes dha honan th esos :-/"
 msgid "You are alone..."
 msgstr "Genes dha honan th esos..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr "Mester nowyth an dro os ta!"
 
