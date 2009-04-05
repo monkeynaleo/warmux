@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-11-23 21:59+0300\n"
 "Last-Translator: Guido Tabbernuk <guido.tabbernuk@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -46,13 +45,13 @@ msgstr "%s <%s> elik %s asukohast %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> asukohast %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Meeskond %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
@@ -119,7 +118,7 @@ msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
 msgid "%s is next to a mine!"
 msgstr "%s seisab miini kõrval!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Meeskonnal %s on nüüd %s jaoks lõputult laskemoona!"
@@ -463,7 +462,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasi"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Autorid:"
 
@@ -507,9 +506,9 @@ msgstr "Põrkepall"
 msgid "Bye bye tux..."
 msgstr "Hüvasti, Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei leia meeskonda %s!"
@@ -607,7 +606,7 @@ msgstr "Ühendu mängu"
 msgid "Connected !"
 msgstr "Ühendatud!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 msgid "Connected players: "
 msgstr "Ühendet mängijaid:"
 
@@ -662,7 +661,7 @@ msgstr "Käigu kestvus"
 msgid "Dynamite"
 msgstr "Dünamiit"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "MÄNGU LÕPP"
 
@@ -814,7 +813,7 @@ msgid "Have a good game!"
 msgstr "Õnn kaasa!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Pealik"
 
@@ -873,7 +872,7 @@ msgstr ""
 "Kasutamine: Vasak hiirklõps sihtmärgil\n"
 "üks soru käigu kohta"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Kiirusta! Ära ole nii aeglane!"
 
@@ -986,7 +985,7 @@ msgstr "Mänguväljad"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 msgid "Master mode"
 msgstr "Mängu tüüp:"
 
@@ -1068,7 +1067,7 @@ msgstr "Hoiatus uue mängija puhul?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ei leia elementi <%s> XML-seadistuste säilikust!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 msgid "No player connected"
 msgstr "Ühtki mängijat pole ühendet"
 
@@ -1076,7 +1075,7 @@ msgstr "Ühtki mängijat pole ühendet"
 msgid "Nobody!"
 msgstr "Eikedagi!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Tegelaskujusid:"
 
@@ -1191,7 +1190,7 @@ msgstr "Raketiheitja"
 msgid "Run game"
 msgstr "Mäng käima"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Ütle:"
 
@@ -1253,7 +1252,7 @@ msgstr "Väiksem sihtimisnurk ja liikumissamm"
 msgid "Sniper Rifle"
 msgstr "Täpsuspüss"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "Keegi oli na üllatuse kasti pistnud!"
 
@@ -1261,7 +1260,7 @@ msgstr "Keegi oli na üllatuse kasti pistnud!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1355,7 +1354,7 @@ msgstr "Automaatmürsk lahkus mänguväljalt..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Pall lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1451,7 +1450,7 @@ msgstr "Ei suuda avada isiklikku mängväljade kausta (%s)!"
 msgid "Unable to use this port!"
 msgstr "Ei saa seda porti kasutada!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Tundmatu käsk"
 
@@ -1475,7 +1474,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Kannatust! %i mängijatest pole veel valmis!"
 msgstr[1] "Kannatust! %i mängijat pole veel valmis!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Ootan serverit. Sa saad kas katkestada või lobiseda!"
 
@@ -1488,7 +1487,7 @@ msgstr "Relv: Tule/hüve laegas: Kukub kähku"
 msgid "Weapons"
 msgstr "Relvad"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Veebileht:"
 
@@ -1516,7 +1515,7 @@ msgstr "Võitja"
 msgid "Wormux launching..."
 msgstr "Wormux käivitub..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Wormuxi väljalase "
 
@@ -1540,7 +1539,7 @@ msgstr "Sa oled üksi :-/"
 msgid "You are alone..."
 msgstr "Sa oled üksi..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

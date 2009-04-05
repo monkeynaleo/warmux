@@ -11,7 +11,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-09-15 22:12+0100\n"
 "Last-Translator: Vladimir Naumov <rhot@rambler.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -56,13 +55,13 @@ msgstr "%s <%s>, также известный как %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Команда %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
@@ -130,7 +129,7 @@ msgstr "%s - псих, он убил члена команды %s!"
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Команда %s уже имеет бесконечный запас боеприпасов для %s!"
@@ -524,7 +523,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковальня"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -568,9 +567,9 @@ msgstr "Прыгучий мяч"
 msgid "Bye bye tux..."
 msgstr "Прощай tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
@@ -668,7 +667,7 @@ msgstr "Подключиться к игре"
 msgid "Connected !"
 msgstr "Подключен !"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "Подключен !"
@@ -724,7 +723,7 @@ msgstr "Продолжительность хода"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
@@ -878,7 +877,7 @@ msgid "Have a good game!"
 msgstr "Удачной игры!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Командующий"
 
@@ -937,7 +936,7 @@ msgstr ""
 "Правила использования : щелкните левой кнопкой мыши на цели\n"
 "патрон за ход"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Торопитесь, вы слишком медленные!!"
 
@@ -1051,7 +1050,7 @@ msgstr "Карты"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "Режим игры"
@@ -1134,7 +1133,7 @@ msgstr "Предупреждение о появлении нового игро
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "%i игрок присоединился"
@@ -1143,7 +1142,7 @@ msgstr "%i игрок присоединился"
 msgid "Nobody!"
 msgstr "Никто!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Количество игроков"
 
@@ -1258,7 +1257,7 @@ msgstr "Пустотная бомба"
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Говорите: "
 
@@ -1320,7 +1319,7 @@ msgstr "Меньший угол прицела и шаг хода"
 msgid "Sniper Rifle"
 msgstr "Снайперская винтовка"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнере была мина-ловушка!"
 
@@ -1328,7 +1327,7 @@ msgstr "В контейнере была мина-ловушка!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Извините, в данный момент нет игр ожидающих игроков"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1423,7 +1422,7 @@ msgstr "Автоматическая ракета улетела за преде
 msgid "The ball left the battlefield before exploding"
 msgstr "Мяч улетел за пределы поля битвы"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1520,7 +1519,7 @@ msgstr "Невозможно открыть личный каталог с ка�
 msgid "Unable to use this port!"
 msgstr "Не получается использовать этот порт!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Неизвестная команда"
 
@@ -1545,7 +1544,7 @@ msgstr[0] "Подождите! %i-й игрок пока не готов!"
 msgstr[1] "Подождите! %i игрока пока не готовы!"
 msgstr[2] "Подождите! %i игроков пока не готовы!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Ожидание действий сервера - всё что вы можете сделать, это отменить свою "
@@ -1560,7 +1559,7 @@ msgstr "Оружие: Огонь/Подарки: падают быстрее"
 msgid "Weapons"
 msgstr "Оружие"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Веб-сайт: "
 
@@ -1588,7 +1587,7 @@ msgstr "Победитель"
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Wormux версии "
 
@@ -1612,7 +1611,7 @@ msgstr "Вы один :-/"
 msgid "You are alone..."
 msgstr "Вы один..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

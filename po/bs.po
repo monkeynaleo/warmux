@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -47,13 +46,13 @@ msgstr "%s <%s> aka %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "%s Tim"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
@@ -120,7 +119,7 @@ msgstr "%s je psihopata, ubio je člana %s tima!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -461,7 +460,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovanj"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -506,9 +505,9 @@ msgstr "Bomba odskočica"
 msgid "Bye bye tux..."
 msgstr "Ćao ćao tux ..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ne može naći tim %s!"
@@ -611,7 +610,7 @@ msgstr "Konektuj se na igru"
 msgid "Connected !"
 msgstr "Konektovan !"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "Konektovan !"
@@ -667,7 +666,7 @@ msgstr "Trajanje reda"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "KRAJ IGRE"
 
@@ -828,7 +827,7 @@ msgid "Have a good game!"
 msgstr "Uživaj u igri!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Vojskovođa"
 
@@ -886,7 +885,7 @@ msgstr ""
 "Kako koristiti : lijevi klik na metu\n"
 "municija po redu"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
@@ -998,7 +997,7 @@ msgstr "Mape"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "Klijent mod"
@@ -1085,7 +1084,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "%i igrač konektovan"
@@ -1094,7 +1093,7 @@ msgstr "%i igrač konektovan"
 msgid "Nobody!"
 msgstr "Niko!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Broj likova"
 
@@ -1213,7 +1212,7 @@ msgstr "Džumbus bomba"
 msgid "Run game"
 msgstr "Pokreni igru"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Reci:"
 
@@ -1277,7 +1276,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Snajper"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1285,7 +1284,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1381,7 +1380,7 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Odskočica je napustila bojište prije nego je explodirala"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1477,7 +1476,7 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 msgid "Unable to use this port!"
 msgstr "Nije u mogućnosti koristit ovaj port!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr ""
 
@@ -1502,7 +1501,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Čekaj! %i igrač još nije spreman!"
 msgstr[1] "Čekaj! %i igrač nije još spreman!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Čekanje za server, sve što sad možeš uraditi je odustati ili chatati!"
 
@@ -1515,7 +1514,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Oružje:"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Web stranica:"
 
@@ -1544,7 +1543,7 @@ msgstr "Mina"
 msgid "Wormux launching..."
 msgstr "Wormux se učitava..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
@@ -1569,7 +1568,7 @@ msgstr "Sami ste ..."
 msgid "You are alone..."
 msgstr "Sami ste ..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2009-03-27 09:22+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -50,13 +49,13 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "%s Equipo"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equipo - Remoto"
@@ -123,7 +122,7 @@ msgstr "¡¡%s es un psicopata!!, ha matado a un miembro de su equipo %s "
 msgid "%s is next to a mine!"
 msgstr "¡%s esta cerca de una mina!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "¡el equipo %s ahora tiene municion infinita para %s!"
@@ -168,8 +167,8 @@ msgstr[0] ""
 "¡El equipo %s ha conseguido %u martillo volador! No hagas demasiado ruido "
 "con el. ¡Gracias! Tus vecinos."
 msgstr[1] ""
-"¡El equipo %s ha conseguido %u martillos "
-"voladores! No hagas demasiado ruido con ellos! Gracias! Vuestros vecinos."
+"¡El equipo %s ha conseguido %u martillos voladores! No hagas demasiado ruido "
+"con ellos! Gracias! Vuestros vecinos."
 
 #: src/weapon/anvil.cpp:176
 #, c-format
@@ -349,8 +348,8 @@ msgstr[0] ""
 "¡El equipo %s ha conseguido %u fusil de francotirador! Apunta y dispara "
 "entre los ojos."
 msgstr[1] ""
-"¡El equipo %s ha conseguido %u fusiles de francotirador! "
-"Apuntad y disparad entre los ojos."
+"¡El equipo %s ha conseguido %u fusiles de francotirador! Apuntad y disparad "
+"entre los ojos."
 
 #: src/weapon/submachine_gun.cpp:144
 #, c-format
@@ -470,7 +469,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Yunque"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -514,9 +513,9 @@ msgstr "Bounce Ball"
 msgid "Bye bye tux..."
 msgstr "Hasta luego tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "¡Equipo %s no encontrado!"
@@ -613,7 +612,7 @@ msgstr "Conectar a una partida"
 msgid "Connected !"
 msgstr "¡Conectado!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 msgid "Connected players: "
 msgstr "Jugadores conectados:"
 
@@ -668,7 +667,7 @@ msgstr "Duración del turno"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "FIN DEL JUEGO"
 
@@ -827,7 +826,7 @@ msgid "Have a good game!"
 msgstr "¡Que tengas una buena partida!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Comandante jefe"
 
@@ -886,7 +885,7 @@ msgstr ""
 "Como usarlo: botón derecho sobre el objetivo\n"
 "un arma por turno"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Date prisa, eres demasiado lento"
 
@@ -1000,7 +999,7 @@ msgstr "Mapas"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 msgid "Master mode"
 msgstr "Modo dueño"
 
@@ -1082,7 +1081,7 @@ msgstr "¿Alarma de un nuevo jugador?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el archivo de configuración xml!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 msgid "No player connected"
 msgstr "Jugador no conectado"
 
@@ -1090,7 +1089,7 @@ msgstr "Jugador no conectado"
 msgid "Nobody!"
 msgstr "¡Nadie!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Numero de jugadores por equipo"
 
@@ -1205,7 +1204,7 @@ msgstr "Bomba Antidisturbio"
 msgid "Run game"
 msgstr "Empieza el juego"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Habla:"
 
@@ -1269,7 +1268,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Fusil de francotirador"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "¡Alguien puso una trampa explosiva camuflada en la caja!"
 
@@ -1277,7 +1276,7 @@ msgstr "¡Alguien puso una trampa explosiva camuflada en la caja!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1380,7 +1379,7 @@ msgstr "El cohete automático ha ido a otro mundo..."
 msgid "The ball left the battlefield before exploding"
 msgstr "La pelota ha abandonado el campo de batalla antes de explotar."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1476,7 +1475,7 @@ msgstr "¡Imposible abrir el directorio personal de mapas (%s)!"
 msgid "Unable to use this port!"
 msgstr "¡Imposible usar este puerto!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Comando desconocido"
 
@@ -1500,7 +1499,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "¡Espera! %i jugador no está preparado todavía!"
 msgstr[1] "¡Espera! %i jugadores no están preparados todavía!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "¡Esperando al servidor, todo lo que puedes hacer es cancelar o charlar!"
@@ -1516,7 +1515,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Sitio web: "
 
@@ -1544,7 +1543,7 @@ msgstr "Ganador"
 msgid "Wormux launching..."
 msgstr "Arrancando Wormux..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Versión de Wormux"
 
@@ -1568,7 +1567,7 @@ msgstr "Estás solo..."
 msgid "You are alone..."
 msgstr "Estás solo..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr "¡Eres el nuevo dueño del turno!"
 

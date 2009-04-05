@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-11-05 19:53+0100\n"
 "Last-Translator: Peter Olsson <peterdenbra@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -46,13 +45,13 @@ msgstr "%s <%s> även känd som %s från %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> från %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Lag %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Lag %s - Fjärr"
@@ -120,7 +119,7 @@ msgstr "%s är en psykopat! Han har dödat en medlem av sitt eget lag %s!"
 msgid "%s is next to a mine!"
 msgstr "%s står bredvid en mina!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Lag %s har oändligt med ammunition för %s!"
@@ -470,7 +469,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -514,9 +513,9 @@ msgstr "Studsboll"
 msgid "Bye bye tux..."
 msgstr "Hej då Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan inte hitta lag %s!"
@@ -614,7 +613,7 @@ msgstr "Anslut till spel"
 msgid "Connected !"
 msgstr "Ansluten!"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "Ansluten till "
@@ -670,7 +669,7 @@ msgstr "Längd per omgång"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "SPELET ÄR ÖVER"
 
@@ -828,7 +827,7 @@ msgid "Have a good game!"
 msgstr "Lycka till i spelet!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Ledare"
 
@@ -887,7 +886,7 @@ msgstr ""
 "Hur man använder den : vänsterklicka på målet\n"
 "ett skott per omgång"
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
@@ -1002,7 +1001,7 @@ msgstr "Banor"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "Spelläge"
@@ -1085,7 +1084,7 @@ msgstr "Signal vid ny spelare?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Inget <%s>-element hittades i xml-konfigurationsfilen!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "%i spelare ansluten"
@@ -1094,7 +1093,7 @@ msgstr "%i spelare ansluten"
 msgid "Nobody!"
 msgstr "Ingen!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Antal lagmedlemmar"
 
@@ -1209,7 +1208,7 @@ msgstr "Massbomb"
 msgid "Run game"
 msgstr "Kör spel"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Säg: "
 
@@ -1271,7 +1270,7 @@ msgstr "Långsammare sikte och gång"
 msgid "Sniper Rifle"
 msgstr "Prickskyttegevär"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "Någon har lagt en fälla i lådan!"
 
@@ -1279,7 +1278,7 @@ msgstr "Någon har lagt en fälla i lådan!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Tyvärr, inget spel väntar just nu på spelare"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1375,7 +1374,7 @@ msgstr "Den målsökande raketen har lämnat slagfältet..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Bollen har lämnat slagfältet innan den exploderade"
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1473,7 +1472,7 @@ msgstr "Kunde inte öppna den personliga bankatalogen (%s)!"
 msgid "Unable to use this port!"
 msgstr "Kan inte använda den här porten!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Okänt kommando"
 
@@ -1497,7 +1496,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vänta! %i spelare är inte klara än!"
 msgstr[1] "Vänta! %i spelare är inte klara än!"
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Väntar på servern, allt du kan göra är att avbryta eller chatta!"
 
@@ -1510,7 +1509,7 @@ msgstr "Vapen: avfyra / Bonuslåda: faller snabbt"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Webbplats: "
 
@@ -1538,7 +1537,7 @@ msgstr "Vinnare"
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1562,7 +1561,7 @@ msgstr "Du är ensam :-/"
 msgid "You are alone..."
 msgstr "Du är ensam..."
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 

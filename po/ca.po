@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-02-24 13:52+0200\n"
 "PO-Revision-Date: 2008-09-06 15:07+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -52,13 +51,13 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:206
 #, c-format
 msgid "%s Team"
 msgstr "Equip %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:203
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
@@ -125,7 +124,7 @@ msgstr "%s es un psicopata!!, ha mort un company del seu equip: %s"
 msgid "%s is next to a mine!"
 msgstr "¡%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:93
+#: src/object/bonus_box.cpp:94
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s es un psicòpata!!, ha mort a un membre des seu equip %s"
@@ -459,7 +458,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Enclusa"
 
-#: src/main.cpp:291
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Autors:"
 
@@ -503,9 +502,9 @@ msgstr "Bounce Ball"
 msgid "Bye bye tux..."
 msgstr "Fins ara tux... "
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:546
-#: src/team/teams_list.cpp:552 src/team/teams_list.cpp:614
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
+#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equip %s no disponible!"
@@ -603,7 +602,7 @@ msgstr "Connectar a una partida"
 msgid "Connected !"
 msgstr "Connectat"
 
-#: src/network/admin_commands.cpp:64
+#: src/network/admin_commands.cpp:72
 #, fuzzy
 msgid "Connected players: "
 msgstr "Connectat"
@@ -659,7 +658,7 @@ msgstr "Duració del torn"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:277
 msgid "END OF GAME"
 msgstr "Fi del joc"
 
@@ -818,7 +817,7 @@ msgid "Have a good game!"
 msgstr "Que tinguis una bona partida!"
 
 #: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:74
+#: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Comandant cap"
 
@@ -878,7 +877,7 @@ msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
 
-#: src/game/game_classic.cpp:210
+#: src/game/game_classic.cpp:215
 msgid "Hurry up, you are too slow !!"
 msgstr "Apressa't, ets massa lent"
 
@@ -992,7 +991,7 @@ msgstr "Mapes"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:389
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "Master mode"
 msgstr "Estil de joc"
@@ -1075,7 +1074,7 @@ msgstr "Avís de nou jugador?"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml!"
 
-#: src/network/admin_commands.cpp:60
+#: src/network/admin_commands.cpp:68
 #, fuzzy
 msgid "No player connected"
 msgstr "%i jugador connectat"
@@ -1084,7 +1083,7 @@ msgstr "%i jugador connectat"
 msgid "Nobody!"
 msgstr "Ningú!"
 
-#: src/menu/team_box.cpp:86
+#: src/menu/team_box.cpp:85
 msgid "Number of characters"
 msgstr "Nombre de jugadors"
 
@@ -1199,7 +1198,7 @@ msgstr "Bomba antidisturbis"
 msgid "Run game"
 msgstr "Arrenca el joc"
 
-#: src/network/chat.cpp:81
+#: src/network/chat.cpp:87
 msgid "Say: "
 msgstr "Parla:"
 
@@ -1263,7 +1262,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Fusell de franctirador"
 
-#: src/object/bonus_box.cpp:82
+#: src/object/bonus_box.cpp:83
 msgid "Someone put a booby trap into the crate!"
 msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 
@@ -1271,7 +1270,7 @@ msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: src/network/index_server.cpp:252
+#: src/network/index_server.cpp:245
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1372,7 +1371,7 @@ msgstr "El coet automàtic ha anat a altre món... "
 msgid "The ball left the battlefield before exploding"
 msgstr "La pilota ha abandonat el camp de batalla abans d'explotar."
 
-#: src/network/network_client.cpp:101
+#: src/network/network_client.cpp:96
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -1468,7 +1467,7 @@ msgstr "Impossible obrir el directori dels mapes (%s)!"
 msgid "Unable to use this port!"
 msgstr "Impossible usar aquest port!"
 
-#: src/network/admin_commands.cpp:85
+#: src/network/admin_commands.cpp:96
 msgid "Unknown command"
 msgstr "Comando desconegut"
 
@@ -1492,7 +1491,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espera! %i jugador no està preparat encara! "
 msgstr[1] "Espera! %i jugadors no estan preparats encara! "
 
-#: src/menu/network_menu.cpp:415
+#: src/menu/network_menu.cpp:452
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Esperant al servidor, tot el que pots fer és cancel·lar o xerrar!"
 
@@ -1507,7 +1506,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armes"
 
-#: src/main.cpp:300
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Pagina web: "
 
@@ -1535,7 +1534,7 @@ msgstr "Guanyador"
 msgid "Wormux launching..."
 msgstr "Arrencant Wormux..."
 
-#: src/main.cpp:290
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
@@ -1559,7 +1558,7 @@ msgstr "Estàs solament..."
 msgid "You are alone..."
 msgstr "Estàs solament... "
 
-#: src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
 msgstr ""
 
