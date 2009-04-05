@@ -547,7 +547,7 @@
       <author>
 	<nickname>AbsintheSyringe</nickname>
 	<name>Adnan HODZIC</name>
-	<description>Physics constant for wind particles, Bug fixes, Prepares Wormux SlackBuilds for Slackware, First Bosnian translation of Wormux.</description>
+	<description>Physics constant for wind particles, Bug fixes, SlackBuilds, Bosnian translation</description>
 	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
 	<country>Bosnia-Herzegovina</country>
       </author>
@@ -870,7 +870,7 @@
       <author>
 	<nickname>Michael</nickname>
 	<name>Michael PRAGER</name>
-	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation of Wormux</description>
+	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation</description>
 	<email>X_X_L_AT_gmx_DOT_net</email>
 	<country>Germany</country>
       </author>
