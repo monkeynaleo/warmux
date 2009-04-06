@@ -21,9 +21,9 @@
 
   <character>
     <energy initial="5" maximum="200" />
-    <jump strength="600" angle="-60" />
-    <super_jump strength="775" angle="-80" />
-    <back_jump strength="675" angle="-100" />
+    <jump strength="1000" angle="-60" />
+    <super_jump strength="1650" angle="-80" />
+    <back_jump strength="1150" angle="-100" />
     <death_explosion>
       <damage>10</damage>
       <explosion_range>50</explosion_range>
