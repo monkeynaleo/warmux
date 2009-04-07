@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.4.4)
 # Project name
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
-SET(WORMUX_MINOR "8.3")
-SET(WORMUX_PATCH "")
+SET(WORMUX_MINOR "8")
+SET(WORMUX_PATCH "4")
 SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
 
 # change the default install prefix to /usr
@@ -21,9 +21,9 @@ IF(PREFIX)
 ENDIF(PREFIX)
 
 # Set some global variables
-SET(WORMUX_CFLAGS "-Wall")	# additional compile flags for wormux
+SET(WORMUX_CFLAGS "-Wall") # additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
-SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/build/cmake)
 
 IF(BIN_PATH)
   # If user specified a path for binary, use it
@@ -39,13 +39,13 @@ ENDIF(BIN_PATH)
 
 IF(DATA_PATH)
   # If user specified a path for data, use it
-  
+
   SET(INSTALL_DATADIR ${DATA_PATH}/data/)
   SET(INSTALL_LOCALEDIR ${DATA_PATH}/locale/)
   SET(DATA_DESTINATION ${DATA_PATH}/data)
   SET(PO_DESTINATION ${DATA_PATH}/locale)
   SET(FONT_FILE ${DATA_PATH}/data/font/DejaVuSans.ttf)
-  
+
 ELSE(DATA_PATH)
 
   # Otherwise use defaults
@@ -62,8 +62,12 @@ ELSE(DATA_PATH)
     SET(PO_DESTINATION "locale")
     SET(FONT_FILE data/font/DejaVuSans.ttf)
   ENDIF(UNIX AND NOT WIN32)
-  
+
 ENDIF(DATA_PATH)
+
+IF(COMMAND cmake_policy)
+  cmake_policy(SET CMP0011 NEW)
+ENDIF(COMMAND cmake_policy)
 
 # Optional package CPack
 INCLUDE(CPackConfig OPTIONAL)
@@ -84,6 +88,9 @@ FIND_PACKAGE(SDL_gfx REQUIRED)
 FIND_PACKAGE(SDL_net REQUIRED)
 FIND_PACKAGE(LibXml2 REQUIRED)
 FIND_PACKAGE(CURL REQUIRED)
+FIND_PACKAGE(GLUT REQUIRED)
+FIND_PACKAGE(OpenGL REQUIRED)
+FIND_PACKAGE(FriBiDi)
 
 IF(APPLE)
   # to ease packaging, we'll use a static libintl
@@ -100,10 +107,14 @@ ENDIF(APPLE)
 # CMP0005 - ADD_DEFINITION is now properly autoescaped
 IF(COMMAND cmake_policy)
   cmake_policy(SET CMP0005 OLD)
+  cmake_policy(SET CMP0003 NEW)
+  cmake_policy(SET CMP0011 NEW)
 ENDIF(COMMAND cmake_policy)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
-
+IF(FRIBIDI_FOUND)
+  ADD_DEFINITIONS(-DUSE_FRIBIDI)
+ENDIF(FRIBIDI_FOUND)
 
 # config.h and compile-flags
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/src/config.h.cmake ${PROJECT_SOURCE_DIR}/src/config.h)
@@ -124,6 +135,7 @@ IF(NOT WIN32)
 ENDIF(NOT WIN32)
 IF(CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
   ADD_DEFINITIONS(-DDEBUG)
+  ADD_DEFINITIONS(-DWMX_LOG)
   IF(PROFILE)
     SET(WORMUX_CFLAGS "-pg ${WORMUX_CFLAGS}")
     SET(WORMUX_LDFLAGS "-pg ${WORMUX_LDFLAGS}")
@@ -138,19 +150,21 @@ ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebIn
 
 
 # Subdirectories
+ADD_SUBDIRECTORY(lib)
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(po)
+ADD_SUBDIRECTORY(tools/servers)
 
 
 # install data/
 INSTALL(DIRECTORY data/ DESTINATION ${DATA_DESTINATION}
   FILE_PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ
-  DIRECTORY_PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE GROUP_READ 
+  DIRECTORY_PERMISSIONS OWNER_WRITE OWNER_READ OWNER_EXECUTE GROUP_READ
                         GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
   PATTERN ".svn" EXCLUDE
-  PATTERN "Makefile.am" EXCLUDE
+  PATTERN "Makefile*" EXCLUDE
   PATTERN "wormux.desktop" EXCLUDE
-  PATTERN ".dtd" EXCLUDE
+  PATTERN "*.dtd" EXCLUDE
 )
 
 # Install desktop file and icon
@@ -158,3 +172,22 @@ IF(UNIX AND NOT APPLE)
   INSTALL(FILES data/wormux.desktop DESTINATION share/applications)
   INSTALL(FILES data/wormux_128x128.png DESTINATION share/pixmaps)
 ENDIF(UNIX AND NOT APPLE)
+
+# Install docs
+INSTALL(DIRECTORY doc DESTINATION share/
+  PATTERN ".svn" EXCLUDE
+  PATTERN "Makefile*" EXCLUDE
+  PATTERN "wormux.man" EXCLUDE
+)
+INSTALL(FILES README README.cmake INSTALL AUTHORS AUTHORS BUGS DESTINATION share/doc)
+IF(UNIX)
+  INSTALL(FILES doc/wormux.man DESTINATION share/man/man6 RENAME wormux.6)
+ENDIF(UNIX)
+
+CONFIGURE_FILE(
+  "${CMAKE_CURRENT_SOURCE_DIR}/build/cmake/cmake_uninstall.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+  IMMEDIATE @ONLY)
+
+ADD_CUSTOM_TARGET(uninstall
+  "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
