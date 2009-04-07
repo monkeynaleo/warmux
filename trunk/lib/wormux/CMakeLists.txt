@@ -1,4 +1,4 @@
-FILE(GLOB_RECURSE LIBWORMUX_SRCS base/*.cpp action/*.cpp net/*.cpp tools/*.cpp)
+FILE(GLOB_RECURSE LIBWORMUX_SRCS *.cpp)
 
 INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_SOURCE_DIR}/include
