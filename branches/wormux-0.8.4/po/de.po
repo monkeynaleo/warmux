@@ -124,8 +124,8 @@ msgstr "Team %s hat seine Runde übersprungen."
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
-msgstr[0] "Mannschaft %s hat %u Splitter-Panzerfaust gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Splitter-Panzerfäuste gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Cluster-Bazooka gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Cluster-Bazookas gewonnen!"
 
 #: src/weapon/gnu.cpp:174
 #, c-format
@@ -167,8 +167,8 @@ msgstr[1] "Mannschaft %s hat %u Ambosse gewonnen! Zerquetsche sie alle!"
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "Mannschaft %s hat %u Lenkrakete gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Lenkraketen gewonnen!"
+msgstr[0] "Mannschaft %s hat %u automatische Bazooka gewonnen!"
+msgstr[1] "Mannschaft %s hat %u automatische Bazookas gewonnen!"
 
 #: src/weapon/baseball.cpp:115
 #, c-format
@@ -181,8 +181,8 @@ msgstr[1] "Mannschaft %s hat %u Baseballschläger gewonnen!"
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "Mannschaft %s hat %u Panzerfaust gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Panzerfäuste gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Bazooka gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Bazookas gewonnen!"
 
 #: src/weapon/blowtorch.cpp:137
 #, c-format
@@ -251,8 +251,8 @@ msgstr[1] "Mannschaft %s hat %u Flammenwerfer gewonnen!"
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
-msgstr[0] "Mannschaft %s hat %u Fußballbombe gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Fußballbomben gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Lärmbombe gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Lärmbomben gewonnen!"
 
 #: src/weapon/grapple.cpp:807
 #, c-format
@@ -332,8 +332,8 @@ msgstr[1] "Mannschaft %s hat %u Schrotflinten gewonnen!"
 #, fuzzy, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
-msgstr[0] "Mannschaft %s hat %u Schlag gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Schläge gewonnen! Weiche aus!"
+msgstr[0] "Mannschaft %s hat %u Enterhaken gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Enterhaken gewonnen!"
 
 #: src/weapon/snipe_rifle.cpp:246
 #, c-format
@@ -341,10 +341,10 @@ msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
 "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] ""
-"Mannschaft %s hat %u Scharfschützengewehr gewonnen! Ziel und schieß zwischen "
-"die Augen!"
+"Mannschaft %s hat %u Scharfschützengewehr gewonnen! Ziel und schieß ihm "
+"zwischen die Augen!"
 msgstr[1] ""
-"Mannschaft %s hat %u Scharfschützengewehre gewonnen! Ziel und schieß "
+"Mannschaft %s hat %u Scharfschützengewehre gewonnen! Ziel und schieß ihm "
 "zwischen die Augen!"
 
 #: src/weapon/submachine_gun.cpp:143
@@ -382,9 +382,9 @@ msgstr[1] "Mannschaft %s hat %u Teleportationen gewonnen!"
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] ""
-"Mannschaft %s hat %u Rundensprung gewonnen! Ich weiß, dass du es liebst."
+"Mannschaft %s hat %u Rundensprung gewonnen! Ich weiß dass du es liebst."
 msgstr[1] ""
-"Mannschaft %s hat %u Rundensprünge gewonnen! Ich weiß, dass du es liebst."
+"Mannschaft %s hat %u Rundensprünge gewonnen! Ich weiß dass du es liebst."
 
 #: src/weapon/supertux.cpp:315
 #, c-format
@@ -400,7 +400,7 @@ msgstr[1] ""
 #: src/game/game_blitz.cpp:69
 #, c-format
 msgid "%s team was fragged down."
-msgstr "Team %s wurde aufgerieben."
+msgstr "team %s wurde aufgerieben"
 
 #: src/game/game.cpp:745
 #, c-format
@@ -463,7 +463,7 @@ msgid ""
 msgstr ""
 "Winkel : Hoch/Runter\n"
 "Feuer : Leertaste\n"
-"ein Schlag pro Runde"
+"ein Schuss pro Runde"
 
 #: src/weapon/anvil.cpp:139
 msgid "Anvil"
@@ -494,8 +494,9 @@ msgid "Bazooka"
 msgstr "Panzerfaust"
 
 #: src/menu/game_mode_editor.cpp:58
+#, fuzzy
 msgid "Before action"
-msgstr "Vor Aktion"
+msgstr "Aktion vorher"
 
 #: src/menu/game_mode_editor.cpp:44
 msgid "Blitz"
@@ -523,23 +524,24 @@ msgstr "Kann Mannschaft %s nicht finden!"
 #: src/team/teams_list.cpp:168
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
-msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öffnen!"
+msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öfnen!"
 
 #: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open teams directory (%s)!"
-msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öffnen!"
+msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öfnen!"
 
 #: src/team/custom_teams_list.cpp:89
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
-msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öffnen!"
+msgstr "Kann das persönliche Mannschaftenverzeichnis (%s) nicht öfnen!"
 
 #: src/menu/help_menu.cpp:91
 msgid "Center camera to character"
 msgstr "Zentriere Kamera auf Charakter"
 
 #: src/menu/help_menu.cpp:90
+#, fuzzy
 msgid "Change active character"
 msgstr "Wechsle aktiven Charakter"
 
@@ -556,8 +558,9 @@ msgid "Change weapon countdown"
 msgstr "Ändere Waffencountdown"
 
 #: src/menu/options_menu.cpp:151
+#, fuzzy
 msgid "Character names:"
-msgstr "Charakternamen:"
+msgstr "Charakter"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -594,7 +597,7 @@ msgstr "Splittergranate"
 
 #: src/weapon/cluzooka.cpp:388
 msgid "Cluzooka"
-msgstr "Splitter-Panzerfaust"
+msgstr "Cluster-Panzerfaust"
 
 #: src/weapon/suicide.cpp:41
 msgid "Commit Suicide"
@@ -614,7 +617,7 @@ msgstr "Verbunden !"
 
 #: src/network/admin_commands.cpp:72
 msgid "Connected players: "
-msgstr "Verbundene Spieler: "
+msgstr "Verbundene Spieler"
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -683,7 +686,7 @@ msgstr "Energie"
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
-"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit Ihnen einverstanden!! - "
+"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit ihnen einverstanden!! - "
 "%s"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
@@ -705,12 +708,12 @@ msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Fehler beim Löschen des Verzeichnisses  \"%s\": kann eigenes Team nicht "
-"löschen."
+"Löschen."
 
 #: src/team/custom_team.cpp:92
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr "Fehler beim Löschen der Datei \"%s\": kann eigenes Team nicht löschen."
+msgstr "Fehler beim Löschen der Datei \"%s\": kann eigenes Team nicht Löschen."
 
 #: src/game/game.cpp:142
 #, c-format
@@ -749,10 +752,10 @@ msgid ""
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie Ihre "
+"Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie ihre "
 "Firewallkonfiguration: TCP-Port %s muss Verbindungen von aussen akzeptieren. "
-"Prüfen Sie Ihre Routerkonfiguration, falls Sie nicht direkt mit dem Internet "
-"verbunden sind: TCP-Port %s muss an Ihren Computer weitergeleitet werden."
+"Prüfen sie ihre Routerkonfiguration, falls sie nicht direkt mit dem Internet "
+"verbunden sind: TCP-Port %s muss an ihren Computer weitergeleitet werden."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -765,7 +768,7 @@ msgstr "Flammenwerfer"
 
 #: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
-msgstr "Fußballbombe"
+msgstr "Fussballbombe"
 
 #: src/menu/help_menu.cpp:70
 msgid "Fullscreen / window"
@@ -833,7 +836,7 @@ msgstr "Hauptkommandant"
 #. Display player's name
 #: src/interface/interface.cpp:180
 msgid "Head commander: "
-msgstr "Hauptkommandant: "
+msgstr "Hauptkommandant:"
 
 #: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
 msgid "Help"
@@ -866,7 +869,6 @@ msgstr ""
 "eine Munition pro Runde"
 
 #: src/weapon/auto_bazooka.cpp:220
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1168,7 +1170,7 @@ msgstr "Port:"
 
 #: src/menu/network_connection_menu.cpp:108
 msgid "Public battles"
-msgstr "Öffentliche Schlachten"
+msgstr "Schlacht verlassen"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1229,7 +1231,7 @@ msgstr "Serveradresse:"
 #. Available on internet ?
 #: src/menu/network_connection_menu.cpp:207
 msgid "Server available on Internet"
-msgstr "Im Internet verfügbarer Server"
+msgstr "Im Internert verfügbare Server"
 
 #. Server Mode
 #: src/menu/network_menu.cpp:126
@@ -1247,7 +1249,7 @@ msgstr "Zeige Waffenmenu"
 #: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "Show/hide interface"
-msgstr "Zeige/Verstecke Oberfläche"
+msgstr "Zeige/Verstecke Interface"
 
 #: src/menu/help_menu.cpp:89
 #, fuzzy
@@ -1260,7 +1262,7 @@ msgstr "Runde überspringen"
 
 #: src/weapon/slap.cpp:72
 msgid "Slap"
-msgstr "Schlag"
+msgstr "Schlage"
 
 #: src/weapon/slap.cpp:73
 msgid "Slap the enemy to make him jump a bit."
@@ -1268,7 +1270,7 @@ msgstr "Schlage den Gegner, so dass er ein wenig springt."
 
 #: src/menu/help_menu.cpp:84
 msgid "Smaller aim angle and walk step"
-msgstr "Kleinerer Zielwinkel und kürzere Schritte"
+msgstr "Kleinerer Zielwinkel und einen Schritt laufen"
 
 #: src/weapon/snipe_rifle.cpp:92
 msgid "Sniper Rifle"
@@ -1331,7 +1333,7 @@ msgstr "Spritze"
 
 #: src/menu/help_menu.cpp:72
 msgid "Talk in network battle"
-msgstr "In einer Netzwerkschlacht sprechen"
+msgstr "Spreche im Schlachtnetzwerk"
 
 #: src/menu/results_menu.cpp:426
 msgid "Team graphs"
@@ -1343,7 +1345,7 @@ msgstr "Mannschaftsstatistiken"
 
 #: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
 msgid "Teams"
-msgstr "Mannschaften"
+msgstr "Manschaften"
 
 #: src/menu/options_menu.cpp:187
 msgid "Teams editor"
@@ -1362,7 +1364,7 @@ msgstr ""
 #: src/weapon/footbomb.cpp:110
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
-"Die Fußballbombe hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+"Die Lärmbombe hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/weapon/gnu.cpp:143
 msgid "The Gnu left the battlefield before exploding"
@@ -1371,7 +1373,7 @@ msgstr "Das Gnu hat das Schlachtfeld verlassen bevor es explodieren konnte."
 #: src/weapon/polecat.cpp:150
 msgid "The Polecat left the battlefield before exploding"
 msgstr ""
-"Das Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
+"Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:174
 msgid "The automatic rocket has left the battlefield..."
@@ -1421,7 +1423,7 @@ msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
 #: src/network/net_error_msg.cpp:44
 msgid "The server rejected the connection."
-msgstr "Der Server hat die Verbindung abgelehnt."
+msgstr "Der Server hat die Verbindung zurückgesetzt."
 
 #: src/network/net_error_msg.cpp:50
 msgid "The server rejected the connection: wrong password!"

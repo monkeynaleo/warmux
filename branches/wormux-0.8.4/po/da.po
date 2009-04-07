@@ -1630,3 +1630,7 @@ msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 
 #~ msgid "Tools"
 #~ msgstr "Værktøj"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hovedkommandør: "

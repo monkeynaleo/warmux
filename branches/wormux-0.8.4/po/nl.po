@@ -5,13 +5,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Wormux 0.5\n"
+"Project-Id-Version: Wormux 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-09-03 19:11+0100\n"
+"PO-Revision-Date: 2009-04-05 15:24+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Language: Dutch\n"
@@ -196,8 +196,8 @@ msgstr[0] ""
 "Team %s heeft %u snijbrander gekregen! Vraag of uw ouders het willen "
 "gebruiken als u onder de 18 bent."
 msgstr[1] ""
-"Team %s heeft %u snijbranders gekregen! Vraag of uw ouders het willen "
-"gebruiken als u onder de 18 bent."
+"Team %s heeft %u snijbranders gekregen! Vraag of je ouders het willen "
+"gebruiken als je nog geen 18 bent."
 
 #: src/weapon/bounce_ball.cpp:112
 #, c-format
@@ -611,9 +611,8 @@ msgid "Connected !"
 msgstr "Verbonden !"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Einde van het spel"
+msgstr "Verbonden spelers: "
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -958,7 +957,7 @@ msgstr "Taal"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Een lijst met verbonden spelers weergeven"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -998,9 +997,8 @@ msgstr "Kaarten"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
-#, fuzzy
 msgid "Master mode"
-msgstr "Spelmodus"
+msgstr "Beheermodus"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1028,7 +1026,7 @@ msgstr "Nauwkeurigste"
 
 #: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most sold-out"
-msgstr "Meest uitverkocht"
+msgstr "Grootste verrader"
 
 #: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most useful"
@@ -1081,9 +1079,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> niet gevonden het xml config bestand!"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "%i speler maakte verbinding"
+msgstr "Geen spelers verbonden"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1091,7 +1088,7 @@ msgstr "Niemand!"
 
 #: src/menu/team_box.cpp:85
 msgid "Number of characters"
-msgstr "Aantal tekens"
+msgstr "Aantal karakters"
 
 #: src/menu/teams_selection_box.cpp:49
 msgid "Number of teams:"
@@ -1512,7 +1509,7 @@ msgstr "Website: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Welkom bij %s!"
 
 #: src/game/game.cpp:754
 #, c-format
@@ -1558,7 +1555,7 @@ msgstr "U bent alleen..."
 
 #: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Jij bent de nieuwe Beurtmeester!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1993,3 +1990,16 @@ msgstr "o Audio geopend met %d Hz %d bit"
 
 #~ msgid "general: "
 #~ msgstr "algemeen:"
+
+#~ msgid "%s changes target to %s"
+#~ msgstr "%s verandert het doelwit naar %s"
+
+#~ msgid "%s has decided to injure %s"
+#~ msgstr "%s heeft besloten om %s te verwonden"
+
+#~ msgid "%s will shoot %s"
+#~ msgstr "%s gaat op %s schieten"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Hoofdcommandant: "

@@ -1678,3 +1678,7 @@ msgstr "o Otevřena hudba o %d Hz %d bitech"
 #~ msgstr ""
 #~ "Chyba: Váš server není dostupný z internetu. Zkontrolujte nastavení "
 #~ "vašeho firewallu"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Velitel: "

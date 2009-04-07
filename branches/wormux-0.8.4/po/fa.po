@@ -1612,3 +1612,7 @@ msgstr "صدا با %d هرتز و %d بیت باز شد"
 #, fuzzy
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "مشکل xml در هنگام بارگذاری نقشه‌ی '%s': "
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "رئیس ارتش: "

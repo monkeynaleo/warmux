@@ -1683,3 +1683,7 @@ msgstr "o Otvoren audio na %d Hz %d bit"
 #, fuzzy
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "XML greška tokom lodiranja mape '%s' :"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Vojskovođa:"

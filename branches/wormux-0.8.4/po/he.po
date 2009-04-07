@@ -1658,3 +1658,7 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "שגיאת XML במהלך טעינת המפה '%s' :"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "מפקד: "

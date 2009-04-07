@@ -1910,3 +1910,7 @@ msgstr "o Démarrage du son à %d Hz %d bit"
 #, fuzzy
 #~ msgid "some opponents."
 #~ msgstr "pour trouver des adversaires"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Lo chef:"

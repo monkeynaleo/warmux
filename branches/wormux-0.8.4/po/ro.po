@@ -1,15 +1,14 @@
 # translation of ro.po to Romanian
 # Romanian translation of the Wormux messages.
 # Copyright (C) YEAR Wormux Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the wormux package.
 #
-# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006.
 # Eddy Petrișor <eddy.petrisor@gmail.com>, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-02-24 12:56+0200\n"
+"PO-Revision-Date: 2009-02-24 13:46+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -782,9 +781,8 @@ msgid "Connected !"
 msgstr "Conectat!"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Conectat!"
+msgstr "Jucători conectați: "
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -1136,7 +1134,7 @@ msgstr "Limba"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Afișează jucătorii conectați"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1177,9 +1175,8 @@ msgstr "Hărți"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
-#, fuzzy
 msgid "Master mode"
-msgstr "Modul jocului"
+msgstr "Modul server"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1260,9 +1257,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fișierul xml de configurare!"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "%i jucător conectat"
+msgstr "Nici un jucător conectat"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1693,9 +1689,9 @@ msgstr "Saitul web: "
 
 #. %s will be replaced with the name of the network game
 #: src/menu/network_menu.cpp:150
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to %s!"
-msgstr "Selectați echipele:"
+msgstr "Bine ați venit la %s!"
 
 #: src/game/game.cpp:754
 #, c-format
@@ -1742,7 +1738,7 @@ msgstr "Nu mai e nimeni altcineva..."
 
 #: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Ești noul șef de tură!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -2817,3 +2813,17 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "weapons.xml"
 #~ msgstr "Arme"
+
+#~ msgid "%s changes target to %s"
+#~ msgstr "%s schimbă ținta către %s"
+
+#~ msgid "%s has decided to injure %s"
+#~ msgstr "%s s-a decis să-l rănească pe %s"
+
+#~ msgid "%s will shoot %s"
+#~ msgstr "%s îl va împușca pe %s"
+
+#
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandant șef: "

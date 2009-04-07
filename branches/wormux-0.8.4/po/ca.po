@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-03-01 10:03+0100\n"
+"PO-Revision-Date: 2008-09-06 15:07+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -530,8 +530,9 @@ msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
 
 #: src/menu/options_menu.cpp:151
+#, fuzzy
 msgid "Character names:"
-msgstr "Nom del personatge:"
+msgstr "Personatge"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -587,8 +588,9 @@ msgid "Connected !"
 msgstr "Connectat"
 
 #: src/network/admin_commands.cpp:72
+#, fuzzy
 msgid "Connected players: "
-msgstr "Jugadors connectats:"
+msgstr "Connectat"
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -935,7 +937,7 @@ msgstr "Idioma"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr "Llista dels jugadors connectats "
+msgstr ""
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -975,8 +977,9 @@ msgstr "Mapes"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
+#, fuzzy
 msgid "Master mode"
-msgstr "Manera de joc principal"
+msgstr "Estil de joc"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1057,8 +1060,9 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml!"
 
 #: src/network/admin_commands.cpp:68
+#, fuzzy
 msgid "No player connected"
-msgstr "Jugador no connectat"
+msgstr "%i jugador connectat"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1495,7 +1499,7 @@ msgstr "Pagina web: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr "Benvingut a %s "
+msgstr ""
 
 #: src/game/game.cpp:754
 #, c-format
@@ -1541,7 +1545,7 @@ msgstr "Estàs solament... "
 
 #: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
-msgstr "Ets el nou amo del torn! "
+msgstr ""
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1620,15 +1624,6 @@ msgstr "o Obert àudio a %d Hz %d bit "
 
 #~ msgid "Unnamed"
 #~ msgstr "Sense nom"
-
-#~ msgid "%s changes target to %s"
-#~ msgstr "%s ha canviat per %s"
-
-#~ msgid "%s has decided to injure %s"
-#~ msgstr "%s ha decidit ferir a %s "
-
-#~ msgid "%s will shoot %s"
-#~ msgstr "%s dispara a %s"
 
 #~ msgid "Tools"
 #~ msgstr "Eines"

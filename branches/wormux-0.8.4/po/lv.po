@@ -1759,3 +1759,7 @@ msgstr "o Atver skaņu %d Hz %d bit"
 #, fuzzy
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "XML kļūda ielādējot karti '%s' :"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Virspavēlnieks: "

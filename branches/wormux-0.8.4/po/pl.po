@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-02-24 19:18+0100\n"
+"PO-Revision-Date: 2009-02-24 19:06+0100\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -658,9 +658,8 @@ msgid "Connected !"
 msgstr "Dołączono!"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Dołączono!"
+msgstr "Połączeni gracze: "
 
 #: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
 msgid "Construct"
@@ -1006,7 +1005,7 @@ msgstr "Język"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Wypisuje połączonych graczy"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1046,9 +1045,8 @@ msgstr "Mapy"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
-#, fuzzy
 msgid "Master mode"
-msgstr "Tryb gry"
+msgstr "Tryb zarządcy"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1129,9 +1127,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> nie został odnaleziony w pliku konfiguracyjnym xml!"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "%i podłączony gracz"
+msgstr "Brak połączonych graczy"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1563,7 +1560,7 @@ msgstr "Strona domowa: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Witaj w %s!"
 
 #: src/game/game.cpp:754
 #, c-format
@@ -1609,7 +1606,7 @@ msgstr "Nikogo tu nie ma..."
 
 #: src/menu/network_menu.cpp:395
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Jesteś nowym mistrzem ceremonii!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1707,3 +1704,16 @@ msgstr "o Otworzono plik audio - %d Hz %d bit"
 #~ msgstr ""
 #~ "Żaden publiczny serwer nie jest dostępny i wprowadzono nieprawidłowe "
 #~ "ustawienia połączenia. Spróbuj innych ustawień połączenia."
+
+#~ msgid "%s changes target to %s"
+#~ msgstr "%s zmienił cel na %s"
+
+#~ msgid "%s has decided to injure %s"
+#~ msgstr "%s zdecydował się zranić %s"
+
+#~ msgid "%s will shoot %s"
+#~ msgstr "%s strzeli do %s"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Głównodowodzący: "

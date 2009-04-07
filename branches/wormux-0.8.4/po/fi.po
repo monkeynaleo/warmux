@@ -1635,3 +1635,7 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #~ "firewall configuration"
 #~ msgstr ""
 #~ "Virhe: Palvelimellesi ei pääse internetistä. Tarkista palomuuriasetuksesi."
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Ylikomentaja: "

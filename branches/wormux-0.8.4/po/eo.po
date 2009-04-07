@@ -1629,3 +1629,7 @@ msgstr "o Malferminte %d Hz %d bit-an sonon"
 #~ msgstr ""
 #~ "Neniu publika servilo kaj malbona manuma konektagordo. Provu konekti "
 #~ "manume."
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Ĉefkomandoro:"

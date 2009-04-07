@@ -1,10 +1,11 @@
-# translation of pt.po to Português
+# translation of pt.po to portuguese
 # This file is distributed under the same license as the wormux package.
 # Copyright (C) 2007 THE wormux'S COPYRIGHT HOLDER, 2004.
 #
 # Bruno Pires <bruno.pires@utbm.fr>, 2006.
 # Bruno Queiros <brunomiguelqueiros@gmail.com>, 2006-2008.
-# Bruno Queirós <brunoqueiros@portugalmail.com>, 2008, 2009.
+# Bruno Queiros <brunoqueiros@portugalmail.com>, 2008.
+# Bruno Queirós <brunoqueiros@portugalmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
@@ -546,8 +547,9 @@ msgid "Change weapon countdown"
 msgstr "Mudar contagem decrescente da arma"
 
 #: src/menu/options_menu.cpp:151
+#, fuzzy
 msgid "Character names:"
-msgstr "Nomes das personagens:"
+msgstr "Personagem"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -1641,3 +1643,7 @@ msgstr "o Audio aberto a %d Hz %d bit"
 
 #~ msgid "Tools"
 #~ msgstr "Ferramentas"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandante principal: "

@@ -1660,3 +1660,8 @@ msgstr "o音樂 %d Hz %d bit"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "讀取地圖 '%s' 時出現XML錯誤"
+
+#
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "指揮官: "
