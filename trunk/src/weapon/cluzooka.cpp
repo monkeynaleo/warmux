@@ -126,6 +126,7 @@ CluzookaCluster::CluzookaCluster(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher) :
   WeaponProjectile ("cluz_cluster", cfg, p_launcher)
 {
+  SetTimeOut(1000);
   explode_colliding_character = true;
 }
 
@@ -162,8 +163,9 @@ void CluzookaCluster::Refresh()
 
       if ( flying_time >= m_time_before_spawn )
       {
-          DoSpawn();
           Explosion();
+          DoSpawn();
+
           return;
       };
   };
@@ -244,6 +246,7 @@ CluzookaRocket::CluzookaRocket(ExplosiveWeaponConfig& cfg,
 {
   explode_colliding_character = true;
   explode_with_timeout = true;
+  explode_with_collision = true;
 }
 
 void CluzookaRocket::Refresh()
@@ -309,7 +312,7 @@ void CluzookaRocket::DoExplosion()
 {
     if ( !m_spawned_clusters )
     {
-        ASSERT( !m_timed_out );
+        //ASSERT( !m_timed_out );
         WeaponProjectile::DoExplosion();
     };
 /*
@@ -349,15 +352,10 @@ void CluzookaRocket::SignalDrowning()
 
 void CluzookaRocket::Explosion()
 {
-  if ( m_timed_out )
-  {
-    DoSpawn();
-    Ghost();
-  }
-  else
     WeaponProjectile::Explosion();
+    DoSpawn();
+    flying_sound.Stop();
 
-  flying_sound.Stop();
 }
 
 void CluzookaRocket::SignalTimeout()

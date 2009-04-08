@@ -154,16 +154,15 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const float angle_range = M_PI / 2;
+  const float base_angle = GetSpeedAngle();
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i )
   {
-    double angle = -M_PI / 2; // this angle is "upwards" here
-    double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
+    double cluster_deviation = base_angle +  i * 2 * M_PI / ( float )fragments;
     double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
-    cluster->Shoot( pos, speed, angle + cluster_deviation );
+    cluster->Shoot( pos, speed,  cluster_deviation );
 
     ObjectsList::GetRef().AddObject(cluster);
   }
