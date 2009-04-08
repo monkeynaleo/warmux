@@ -30,10 +30,10 @@
   ; String labels should match those from the default language file.
 
   ; License Page
-  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_BUTTON             ${CUR_LANG}
-  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_BOTTOM_TEXT        ${CUR_LANG}
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_TITLE              ${CUR_LANG}
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_DESC               ${CUR_LANG}
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_BUTTON             ${CUR_LANG}
+  !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_BOTTOM_TEXT        ${CUR_LANG}
 
   ; Components Page
   !insertmacro WORMUX_MACRO_LANGSTRING_INSERT WORMUX_SHORTCUTS_DESC     ${CUR_LANG}
