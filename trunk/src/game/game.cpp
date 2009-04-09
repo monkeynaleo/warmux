@@ -625,6 +625,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
 
   // Little pause at the end of the turn
   case END_TURN:
+    ActiveCharacter().StopMove();
     __SetState_END_TURN();
     break;
   }
