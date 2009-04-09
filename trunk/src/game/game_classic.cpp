@@ -191,6 +191,7 @@ void GameClassic::__SetState_HAS_PLAYED()
 void GameClassic::__SetState_END_TURN()
 {
   MSG_DEBUG("game.statechange", "End of turn");
+  ActiveCharacter().StopMove();
   countdown_sample.Stop();
   ActiveTeam().AccessWeapon().SignalTurnEnd();
   ActiveTeam().AccessWeapon().Deselect();

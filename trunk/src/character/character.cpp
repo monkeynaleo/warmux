@@ -901,6 +901,7 @@ void Character::StopPlaying()
   SetClothe("normal");
   SetMovement("breathe");
   body->ResetWalk();
+  StopMoving();
   SetRebounding(true);
 }
 
