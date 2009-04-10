@@ -862,8 +862,9 @@ void PhysicalObj::CheckOverlapping()
     }
   else
     {
-      MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",
-		GetName().c_str(), m_overlapping_object->GetName().c_str());
+      MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\" (%d ms left)",
+		GetName().c_str(), m_overlapping_object->GetName().c_str(),
+		(m_minimum_overlapse_time - Time::GetInstance()->Read()));
     }
 }
 
@@ -1006,6 +1007,7 @@ void PhysicalObj::UpdatePosition ()
     else if ( !IsInWater() && m_alive == DROWNED )
       GoOutOfWater();
   }
+  CheckOverlapping();
 }
 
 bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
