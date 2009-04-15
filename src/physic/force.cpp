@@ -24,7 +24,8 @@
 #include "physic/physical_engine.h"
 
 
-Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local)
+Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local):
+m_target_center(false)
 {
   ASSERT(target);
   m_target = target;
@@ -42,6 +43,17 @@ Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_l
 
 }
 
+Force::Force(PhysicalObj *i_target, Point2d i_force):
+m_target_center(true)
+{
+  ASSERT(i_target);
+  m_target = i_target;
+  m_force = b2Vec2(i_force.x/ PIXEL_PER_METER, i_force.y/PIXEL_PER_METER);
+
+  PhysicalEngine::GetInstance()->AddForce(this);
+
+}
+
 Force::~Force()
 {
   PhysicalEngine::GetInstance()->RemoveForce(this);
@@ -50,6 +62,13 @@ Force::~Force()
 
 void Force::ComputeForce()
 {
- m_target->GetBody()->ApplyForce(m_force, m_target_point);
+  if(!m_target_center)
+  {
+    m_target->GetBody()->ApplyForce(m_force, m_target_point);
+  }
+  else
+  {
+    m_target->GetBody()->ApplyForce(m_force, m_target->GetBody()->GetWorldCenter());
+  }
 
 }
