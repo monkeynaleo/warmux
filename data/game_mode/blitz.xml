@@ -466,7 +466,7 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>1000</blast_force>
-      <speed>600</speed>
+      <speed>1200</speed>
       <timeout>20</timeout>
       <display_crosshair>0</display_crosshair>
     </tux>

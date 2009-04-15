@@ -899,7 +899,9 @@ uint PhysicalObj::AddExternForceXY (const Point2d& vector)
   if (!m_body)
     return 0;
 
-  m_extern_force_map[m_extern_force_index] =  new Force(this, GetPhysXY(), vector, false) ;
+  b2Vec2 center = m_body->GetWorldCenter();
+
+  m_extern_force_map[m_extern_force_index] =  new Force(this, vector) ;
   PhysicalEngine::GetInstance()->AddForce(m_extern_force_map[m_extern_force_index] );
   m_extern_force_index++;
 
@@ -1608,7 +1610,13 @@ void PhysicalObj::SetAngle(double angle)
   ASSERT(m_rotating || angle == 0);
 
   if (m_body) {
+    b2Vec2 initial_center = m_body->GetWorldCenter();
     m_body->SetXForm(m_body->GetPosition(), angle);
+    b2Vec2 final_center = m_body->GetWorldCenter();
+    b2Vec2 new_position = m_body->GetPosition();
+    new_position.x = new_position.x - (final_center.x - initial_center.x);
+    new_position.y = new_position.y - (final_center.y - initial_center.y);
+    m_body->SetXForm(new_position,angle);
   } else {
     m_body_def->angle = angle;
   }

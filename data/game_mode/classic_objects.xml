@@ -496,13 +496,13 @@
   </air_attack_projectile>
 
   <supertux>
-    <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
-    <gravity_factor>0.0</gravity_factor>
+    <wind_factor>0.2</wind_factor>
+    <air_resist_factor>2.0</air_resist_factor>
+    <gravity_factor>0.3</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
     <shape name="supertux-main" type="polygon">
-      <mass>20.0</mass>
+      <mass>2.0</mass>
       <position x="0" y="0" />
       <point x="0" y="25" />
       <point x="9" y="4" />
