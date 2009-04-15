@@ -69,7 +69,7 @@ class SuperTux : public WeaponProjectile
              WeaponLauncher * p_launcher);
     void Refresh();
 
-    inline void SetAngle(double angle) {angle_rad = angle;}
+    void SetAngle(double angle);
     void turn_left();
     void turn_right();
     void Shoot(double strength);
@@ -92,6 +92,12 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   m_force_index = 0;
 }
 
+void SuperTux::SetAngle(double angle)
+{
+  angle_rad = angle;
+  PhysicalObj::SetAngle(angle+M_PI_2);
+}
+
 void SuperTux::Shoot(double strength)
 {
   // Sound must be launched before WeaponProjectile::Shoot
@@ -101,7 +107,10 @@ void SuperTux::Shoot(double strength)
   flying_sound.Play("default","weapon/supertux_flying", -1);
 
   WeaponProjectile::Shoot(strength);
-  angle_rad = ActiveCharacter().GetFiringAngle();
+  SetAngle(ActiveCharacter().GetFiringAngle());
+
+  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+
 
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();
@@ -114,10 +123,12 @@ void SuperTux::Refresh()
   WeaponProjectile::Refresh();
 
   image->SetRotation_rad(angle_rad + M_PI_2);
+
+  RemoveExternForce(m_force_index);
+  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
     image->Update();
     last_move = Time::GetInstance()->Read();
   }
@@ -131,7 +142,8 @@ void SuperTux::Refresh()
   }
 
   if (!swimming)
-    particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
+    particle_engine.AddPeriodic(GetCenter(), particle_STAR, false, angle_rad, 0);
+
   // else
   // particle_engine.AddPeriodic(GetPosition(), particle_WATERBUBBLE, false, angle_rad, 0);
 }
@@ -142,7 +154,7 @@ void SuperTux::turn_left()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle_rad = angle_rad - M_PI / 12;
+      SetAngle(angle_rad - M_PI / 12);
     }
 }
 
@@ -152,7 +164,7 @@ void SuperTux::turn_right()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle_rad = angle_rad + M_PI / 12;
+      SetAngle(angle_rad + M_PI / 12);
     }
 }
 
