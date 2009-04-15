@@ -33,11 +33,15 @@ class Force
 
 public:
   Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local = true);
+
+  //Apply Force to center
+  Force(PhysicalObj *i_target, Point2d i_force);
   ~Force();
   PhysicalObj *m_target;
   b2Vec2 m_target_point;
   b2Vec2 m_force;
 
+  bool m_target_center;
   void ComputeForce();
 
 protected:
