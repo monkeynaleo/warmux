@@ -313,7 +313,6 @@ void GameServer::WaitClients()
       if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
 	RejectIncoming();
     }
-    SDL_Delay(100);
   }
 }
 
