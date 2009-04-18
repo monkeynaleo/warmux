@@ -60,6 +60,12 @@ int main(int /*argc*/, char* /*argv*/[])
     exit(EXIT_FAILURE);
   }
 
+  int max_nb_games = 10;
+  if (!config.Get("max_nb_games", max_nb_games)) {
+    DPRINT(INFO, "ERROR: max_nb_games not specified");
+    exit(EXIT_FAILURE);
+  }
+
   int max_nb_clients = 50;
   if (!config.Get("max_nb_clients", max_nb_clients)) {
     DPRINT(INFO, "ERROR: max_nb_clients not specified");
@@ -67,7 +73,8 @@ int main(int /*argc*/, char* /*argv*/[])
   }
 
   std::string password = "";
-  if (!GameServer::GetInstance()->ServerStart(uint(port), uint(max_nb_clients), "dedicated", password)) {
+  if (!GameServer::GetInstance()->ServerStart(uint(port), uint(max_nb_games), uint(max_nb_clients),
+					      "dedicated", password)) {
     DPRINT(INFO, "ERROR: Server not started");
     exit(EXIT_FAILURE);
   }

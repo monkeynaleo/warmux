@@ -71,6 +71,7 @@ private:
   friend class Singleton<GameServer>;
   GameServer();
 
+  uint max_nb_games;
   std::string game_name;
   std::string password;
   uint port;
@@ -82,6 +83,8 @@ private:
   void CreateGame(uint game_id);
   void DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it);
 
+  uint CreateGameIfNeeded();
+
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
 
@@ -90,7 +93,8 @@ private:
   void RejectIncoming();
 
 public:
-  bool ServerStart(uint port, uint max_nb_clients, const std::string& game_name, std::string& password);
+  bool ServerStart(uint port, uint max_nb_games, uint max_nb_clients,
+		   const std::string& game_name, std::string& password);
   void RunLoop();
 
   NetworkGame& GetGame(uint game_id);
