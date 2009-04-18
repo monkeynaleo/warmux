@@ -188,11 +188,17 @@ void GameServer::CreateGame(uint game_id)
   char gamename_c_str[32];
   snprintf(gamename_c_str, 32, "%s-%d", game_name.c_str(), game_id);
   std::string gamename_str(gamename_c_str);
+
   NetworkGame netgame(gamename_str, password);
+  games.insert(std::make_pair(game_id, netgame));
 
   DPRINT(INFO, "Game - %s - created", gamename_str.c_str());
+}
 
-  games.insert(std::make_pair(game_id, netgame));
+void GameServer::DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it)
+{
+  DPRINT(INFO, "Game - %s - deleted", gamelst_it->second.GetName().c_str());
+  games.erase(gamelst_it);
 }
 
 const NetworkGame& GameServer::GetGame(uint game_id) const
@@ -363,7 +369,7 @@ void GameServer::RunLoop()
 		GetGame(gamelst_it->first).ElectGameMaster();
 	      }
 	    } else {
-	      games.erase(gamelst_it);
+	      DeleteGame(gamelst_it);
 	      goto loop;
 	    }
 
