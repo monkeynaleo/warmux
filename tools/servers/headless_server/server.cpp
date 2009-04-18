@@ -58,8 +58,6 @@ bool NetworkGame::AcceptNewComputers() const
     return false;
   }
 
-  DPRINT(INFO, "Game %s accepts connexion", game_name.c_str());
-
   return true;
 }
 
@@ -180,7 +178,7 @@ GameServer::GameServer() :
   port(0),
   clients_socket_set(NULL)
 {
-  CreateGame(0);
+  CreateGame(1);
 }
 
 void GameServer::CreateGame(uint game_id)
@@ -233,8 +231,10 @@ std::list<DistantComputer*>& GameServer::GetCpus(uint game_id)
   return GetGame(game_id).GetCpus();
 }
 
-bool GameServer::ServerStart(uint _port, uint max_nb_clients, const std::string& _game_name, std::string& _password)
+bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
+			     const std::string& _game_name, std::string& _password)
 {
+  max_nb_games = _max_nb_games;
   game_name = _game_name;
   password = _password;
   port = _port;
@@ -272,53 +272,62 @@ void GameServer::RejectIncoming()
   server_socket.Disconnect();
 }
 
+uint GameServer::CreateGameIfNeeded()
+{
+  if (games.size() >= max_nb_games) {
+    DPRINT(INFO, "Max number of games already reached : %d", max_nb_games);
+    return 0;
+  }
+
+  uint game_id = 0;
+  std::map<uint, NetworkGame>::const_iterator gamelst_it;
+  for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
+
+    if (gamelst_it->second.AcceptNewComputers()) {
+      return gamelst_it->first;
+    }
+
+    if (gamelst_it->first > game_id)
+      game_id = gamelst_it->first;
+  }
+
+  game_id++;
+  CreateGame(game_id);
+
+  return game_id;
+}
+
 void GameServer::WaitClients()
 {
-  if (server_socket.IsConnected()) {
+  if (!server_socket.IsConnected())
+    return;
 
-    // Check for an incoming connection
-    WSocket* incoming = server_socket.LookForClient();
-    if (incoming) {
+  // Create a new game if there is no more games accepting players
+  uint game_id = CreateGameIfNeeded();
+  if (!game_id)
+    return;
 
-      DPRINT(INFO, "Connexion from %s\n", incoming->GetAddress().c_str());
+  // Check for an incoming connection
+  WSocket* incoming = server_socket.LookForClient();
+  if (incoming) {
 
-      // Finding first game accepting players
-      uint game_id = 0;
-      uint max_game_id = 0;
-      std::map<uint, NetworkGame>::const_iterator gamelst_it;
-      for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
+    DPRINT(INFO, "Connexion from %s\n", incoming->GetAddress().c_str());
 
-	if (gamelst_it->first > max_game_id)
-	  max_game_id = gamelst_it->first;
+    std::string client_nickname;
+    uint player_id = GetGame(game_id).NextPlayerId();
 
-	if (gamelst_it->second.AcceptNewComputers()) {
-	  game_id = gamelst_it->first;
-	  break;
-	}
-      }
-
-      // Creating game if needed
-      if (gamelst_it == games.end()) {
-	game_id = max_game_id+1;
-	CreateGame(game_id);
-      }
-
-      std::string client_nickname;
-      uint player_id = GetGame(game_id).NextPlayerId();
-
-      if (!HandShake(game_id, *incoming, client_nickname, player_id)) {
-	incoming->Disconnect();
- 	return;
-      }
-
-      clients_socket_set->AddSocket(incoming);
-
-      DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
-      GetGame(game_id).AddCpu(client);
-
-      if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
-	RejectIncoming();
+    if (!HandShake(game_id, *incoming, client_nickname, player_id)) {
+      incoming->Disconnect();
+      return;
     }
+
+    clients_socket_set->AddSocket(incoming);
+
+    DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
+    GetGame(game_id).AddCpu(client);
+
+    if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
+      RejectIncoming();
   }
 }
 
