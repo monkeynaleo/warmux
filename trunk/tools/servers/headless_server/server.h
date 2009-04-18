@@ -80,6 +80,7 @@ private:
   std::map<uint, NetworkGame> games; // list of the connected computer
 
   void CreateGame(uint game_id);
+  void DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it);
 
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
