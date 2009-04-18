@@ -131,11 +131,25 @@ bool Client::HandShake(const std::string & version)
 
 bool Client::RegisterWormuxServer()
 {
-  if (BytesReceived() < 4)
-    return true;
+  bool r;
+  std::string game_name;
+  r = ReceiveStr(game_name);
+  if (!r)
+    return false;
 
-  DPRINT(MSG, "This is a server (%s)", version.c_str());
+  int passwd;
+  r = ReceiveInt(passwd);
+  if (!r)
+    return false;
+
+  passwd = !!passwd;
+  r = options.Set(game_name, passwd);
+  if (!r)
+    return false;
+
   is_hosting = true;
+
+  DPRINT(MSG, "game: version=%s name=%s pwd=%s", version.c_str(), game_name.c_str(), (passwd) ? "yes" : "no");
 
   if (nb_server.find(version) != nb_server.end())
     nb_server[ version ]++;
@@ -213,24 +227,6 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
         r = false;
       } else {
         r = SendList();
-      }
-      break;
-
-    case TS_MSG_REGISTER_GAME:
-      {
-        std::string game_name;
-        r = ReceiveStr(game_name);
-        if (!r)
-          goto next_msg;
-
-        int passwd;
-        r = ReceiveInt(passwd);
-        if (!r)
-          goto next_msg;
-
-        passwd = !!passwd;
-        r = options.Set(game_name, passwd);
-        DPRINT(MSG, "game: name=%s pwd=%s", game_name.c_str(), (passwd) ? "yes" : "no");
       }
       break;
 

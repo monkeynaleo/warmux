@@ -271,12 +271,9 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (hidden_server)
     return true;
 
-  NewMsg(TS_MSG_REGISTER_GAME, buffer, used);
+  NewMsg(TS_MSG_HOSTING, buffer, used);
   used += WNet::Batch(buffer+used, game_name);
   used += WNet::Batch(buffer+used, (int)pwd);
-
-  SendMsg(socket, buffer, used);
-  NewMsg(TS_MSG_HOSTING, buffer, used);
   used += WNet::Batch(buffer+used, port);
   SendMsg(socket, buffer, used);
 
