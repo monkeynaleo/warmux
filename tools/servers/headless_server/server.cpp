@@ -192,29 +192,29 @@ void GameServer::CreateGame(uint game_id)
 
   DPRINT(INFO, "Game - %s - created", gamename_str.c_str());
 
-  cpu.insert(std::make_pair(game_id, netgame));
+  games.insert(std::make_pair(game_id, netgame));
 }
 
 const NetworkGame& GameServer::GetGame(uint game_id) const
 {
-  std::map<uint, NetworkGame>::const_iterator cpulst_it;
-  cpulst_it = cpu.find(game_id);
+  std::map<uint, NetworkGame>::const_iterator gamelst_it;
+  gamelst_it = games.find(game_id);
 
-  if (cpulst_it == cpu.end()) {
+  if (gamelst_it == games.end()) {
     ASSERT(false);
   }
-  return (cpulst_it->second);
+  return (gamelst_it->second);
 }
 
 NetworkGame& GameServer::GetGame(uint game_id)
 {
-  std::map<uint, NetworkGame>::iterator cpulst_it;
-  cpulst_it = cpu.find(game_id);
+  std::map<uint, NetworkGame>::iterator gamelst_it;
+  gamelst_it = games.find(game_id);
 
-  if (cpulst_it == cpu.end()) {
+  if (gamelst_it == games.end()) {
     ASSERT(false);
   }
-  return (cpulst_it->second);
+  return (gamelst_it->second);
 }
 
 const std::list<DistantComputer*>& GameServer::GetCpus(uint game_id) const
@@ -279,20 +279,20 @@ void GameServer::WaitClients()
       // Finding first game accepting players
       uint game_id = 0;
       uint max_game_id = 0;
-      std::map<uint, NetworkGame>::const_iterator cpulst_it;
-      for (cpulst_it = cpu.begin(); cpulst_it != cpu.end(); cpulst_it++) {
+      std::map<uint, NetworkGame>::const_iterator gamelst_it;
+      for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
 
-	if (cpulst_it->first > max_game_id)
-	  max_game_id = cpulst_it->first;
+	if (gamelst_it->first > max_game_id)
+	  max_game_id = gamelst_it->first;
 
-	if (cpulst_it->second.AcceptNewComputers()) {
-	  game_id = cpulst_it->first;
+	if (gamelst_it->second.AcceptNewComputers()) {
+	  game_id = gamelst_it->first;
 	  break;
 	}
       }
 
       // Creating game if needed
-      if (cpulst_it == cpu.end()) {
+      if (gamelst_it == games.end()) {
 	game_id = max_game_id+1;
 	CreateGame(game_id);
       }
@@ -333,13 +333,13 @@ void GameServer::RunLoop()
     void * buffer;
     size_t packet_size;
 
-    std::map<uint, NetworkGame>::iterator cpulst_it;
+    std::map<uint, NetworkGame>::iterator gamelst_it;
     std::list<DistantComputer*>::iterator dst_cpu;
 
-    for (cpulst_it = cpu.begin(); cpulst_it != cpu.end(); cpulst_it++) {
+    for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
 
-      for (dst_cpu = cpulst_it->second.GetCpus().begin();
-	   dst_cpu != cpulst_it->second.GetCpus().end();
+      for (dst_cpu = gamelst_it->second.GetCpus().begin();
+	   dst_cpu != gamelst_it->second.GetCpus().end();
 	   dst_cpu++) {
 
 	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
@@ -347,8 +347,8 @@ void GameServer::RunLoop()
 	  if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
 	    // An error occured during the reception
 
-	    bool turn_master_lost = (dst_cpu == cpulst_it->second.GetCpus().begin());
-	    dst_cpu = cpulst_it->second.CloseConnection(dst_cpu);
+	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
+	    dst_cpu = gamelst_it->second.CloseConnection(dst_cpu);
 
 	    if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
 	      // A new player will be able to connect, so we reopen the socket
@@ -358,18 +358,18 @@ void GameServer::RunLoop()
 	      server_socket.AcceptIncoming(port);
 	    }
 
-	    if (cpulst_it->second.GetCpus().size() != 0) {
+	    if (gamelst_it->second.GetCpus().size() != 0) {
 	      if (turn_master_lost) {
-		GetGame(cpulst_it->first).ElectGameMaster();
+		GetGame(gamelst_it->first).ElectGameMaster();
 	      }
 	    } else {
-	      cpu.erase(cpulst_it);
+	      games.erase(gamelst_it);
 	      goto loop;
 	    }
 
 	  } else {
 
-	    GetGame(cpulst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
+	    GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
 	    free(buffer);
 	  }
 	}
