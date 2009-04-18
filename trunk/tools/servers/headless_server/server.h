@@ -77,7 +77,7 @@ private:
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
-  std::map<uint, NetworkGame> cpu; // list of the connected computer
+  std::map<uint, NetworkGame> games; // list of the connected computer
 
   void CreateGame(uint game_id);
 
