@@ -122,8 +122,9 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   : PhysicalObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
-  SetCollisionModel(true, true, true);
+  SetCollisionModel(true, true, true,false);
   launcher = p_launcher;
+  SetCollisionCategory(PROJECTILE);
   SetBullet(true);
 
   explode_colliding_character = false;

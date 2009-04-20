@@ -37,7 +37,7 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
 
   m_energy = 25;
 
-  SetCollisionModel(true, true, true);
+  SetCollisionModel(true, true, true,true);
   // SetTestRect (1, 1, 2, 2);
 }
 

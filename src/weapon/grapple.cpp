@@ -456,7 +456,7 @@ Rope::Rope():PhysicalObj("rope")
   ClearShapes();
   m_shapes.push_back(hook_shape);
 
-  SetCollisionModel(true,false, true);
+  SetCollisionModel(true,false, true,false);
 }
 
 Rope::~Rope()
@@ -718,7 +718,7 @@ RopeNode::RopeNode():PhysicalObj("rope_node")
   ClearShapes();
   m_shapes.push_back(node_shape);
 
-  SetCollisionModel(true,false, true);
+  SetCollisionModel(true,false, true, false);
 }
 
 

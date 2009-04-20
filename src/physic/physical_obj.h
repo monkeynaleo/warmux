@@ -63,6 +63,7 @@ private:
   bool m_collides_with_ground;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
+  bool m_collides_with_projectiles;
 
   bool m_rebounding;
 
@@ -111,6 +112,7 @@ public:
    * FIXME what happen if the object is deleted meanwhile ???*/
   virtual ~PhysicalObj ();
 
+  enum CollisionCategory {GROUND=4,CHARACTER=2,OBJECT=1,PROJECTILE=8};
 
   virtual void Activate();
   virtual void Generate();
@@ -243,10 +245,11 @@ public:
   // Collision management
   void SetCollisionModel(bool collides_with_ground,
                          bool collides_with_characters,
-                         bool collides_with_objects);
+                         bool collides_with_objects,
+                         bool collides_with_projectiles);
 
   void SetCollisionGroup(int group);
-  void SetCollisionCategory(int category);
+  void SetCollisionCategory(CollisionCategory category);
 
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
   void ClearOverlappingObject();

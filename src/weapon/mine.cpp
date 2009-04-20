@@ -77,7 +77,7 @@ void ObjMine::FakeExplosion()
     launcher->SignalProjectileTimeout();
 
   // Mine fall into the ground after a fake explosion
-  SetCollisionModel(true, false, false);
+  SetCollisionModel(true, false, false,true);
 }
 
 void ObjMine::StartTimeout()
