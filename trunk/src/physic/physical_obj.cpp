@@ -66,6 +66,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
+  m_collides_with_projectiles(true),
   m_rebounding(true),
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -676,6 +677,7 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push(m_collides_with_ground);
   a->Push(m_collides_with_characters);
   a->Push(m_collides_with_objects);
+  a->Push(m_collides_with_projectiles);
   a->Push((int)m_minimum_overlapse_time);
 
   // other information (mostly about rope)
@@ -715,11 +717,12 @@ void PhysicalObj::GetValueFromAction(Action *a)
   SetSpeed(norm, speed_angle);
 
   // Collision information
-  bool collides_with_ground, collides_with_characters, collides_with_objects;
+  bool collides_with_ground, collides_with_characters, collides_with_objects,collides_with_projectiles;
   collides_with_ground     = !!a->PopInt();
   collides_with_characters = !!a->PopInt();
   collides_with_objects    = !!a->PopInt();
-  SetCollisionModel(collides_with_ground, collides_with_characters, collides_with_objects);
+  collides_with_projectiles= !!a->PopInt();
+  SetCollisionModel(collides_with_ground, collides_with_characters, collides_with_objects,collides_with_projectiles);
   m_minimum_overlapse_time   = (uint)a->PopInt();
 
   // other information (mostly about rope)
@@ -998,7 +1001,7 @@ void PhysicalObj::UpdatePosition ()
     return;
 
   if (IsInWater()) {
-    SetCollisionModel(false,false,false);
+    SetCollisionModel(false,false,false,false);
   }
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
@@ -1139,7 +1142,7 @@ void PhysicalObj::SetCollisionGroup(int group)
   SetCollisionFilter(data);
 }
 
-void PhysicalObj::SetCollisionCategory(int category)
+void PhysicalObj::SetCollisionCategory(PhysicalObj::CollisionCategory category)
 {
   b2FilterData data = GetCollisionFilter();
   data.categoryBits = category;
@@ -1149,13 +1152,15 @@ void PhysicalObj::SetCollisionCategory(int category)
 
 void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
-                                    bool collides_with_objects)
+                                    bool collides_with_objects,
+                                    bool collides_with_projectiles)
 {
   // SetSize() must be called before
 
   m_collides_with_ground = collides_with_ground;
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
+  m_collides_with_projectiles = collides_with_projectiles;
 
   b2FilterData data = GetCollisionFilter();
   data.maskBits = 0x0000;
@@ -1170,6 +1175,10 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
 
   if (m_collides_with_ground) {
     data.maskBits |= 0x0004;
+  }
+
+    if (m_collides_with_projectiles) {
+    data.maskBits |= 0x0008;
   }
 
   SetCollisionFilter(data);

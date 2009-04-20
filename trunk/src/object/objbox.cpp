@@ -56,7 +56,7 @@ ObjBox::ObjBox(const std::string &name) : PhysicalObj(name)
   m_energy = start_life_points;
 
   SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(true, false, true);
+  SetCollisionModel(true, false, true,true);
   std::cout<<"super called"<<std::endl;
   JukeBox::GetInstance()->Play("default","box/falling");
 }
