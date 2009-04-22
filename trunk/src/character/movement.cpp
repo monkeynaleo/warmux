@@ -20,6 +20,7 @@
 
 #include <map>
 #include <iostream>
+#include <cstdio>
 #include "character/movement.h"
 #include "tool/xml_document.h"
 #include <WORMUX_debug.h>

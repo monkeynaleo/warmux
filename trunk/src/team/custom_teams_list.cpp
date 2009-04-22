@@ -26,6 +26,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cstdio>
 
 CustomTeamsList::CustomTeamsList()
 {
