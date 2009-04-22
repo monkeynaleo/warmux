@@ -23,6 +23,7 @@
 #define POLYGON_H
 
 #include <vector>
+#include <stdint.h>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
 
