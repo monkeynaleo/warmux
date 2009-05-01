@@ -25,7 +25,7 @@
 #include "graphic/spriteanimation.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
   sprite(p_sprite)

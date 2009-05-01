@@ -159,7 +159,6 @@ wormux_SOURCES = \
         tool/debug_physics.cpp tool/debug_physics.h \
         tool/isnan.h \
         tool/math_tools.h \
-        tool/random.cpp tool/random.h \
         tool/resource_manager.cpp tool/resource_manager.h \
         tool/stats.cpp tool/stats.h \
         tool/string_tools.cpp tool/string_tools.h \

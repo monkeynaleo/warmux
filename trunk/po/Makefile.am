@@ -315,8 +315,6 @@ POTFILES = \
         src/tool/debug_physics.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
-        src/tool/random.cpp \
-        src/tool/random.h \
         src/tool/resource_manager.cpp \
         src/tool/resource_manager.h \
         src/tool/stats.cpp \

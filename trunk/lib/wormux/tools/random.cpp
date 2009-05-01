@@ -21,7 +21,7 @@
 
 #include <time.h>
 #include <WORMUX_debug.h>
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 RandomGenerator::RandomGenerator() :
   next(0), initialized(false)

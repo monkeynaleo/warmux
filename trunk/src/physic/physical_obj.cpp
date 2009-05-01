@@ -47,7 +47,7 @@
 #include "team/teams_list.h"
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "weapon/weapon_launcher.h"
 
 #ifdef DEBUG
