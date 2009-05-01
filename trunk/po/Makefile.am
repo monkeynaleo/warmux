@@ -222,8 +222,6 @@ POTFILES = \
         src/network/chat.h \
         src/network/chatlogger.cpp \
         src/network/chatlogger.h \
-        src/network/download.cpp \
-        src/network/download.h \
         src/network/index_server.cpp \
         src/network/index_server.h \
         src/network/irc.cpp \
