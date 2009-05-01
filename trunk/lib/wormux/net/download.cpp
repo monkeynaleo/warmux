@@ -18,13 +18,17 @@
  ******************************************************************************
  * Download a file using libcurl
  *****************************************************************************/
+#include <cerrno>
 #include <stdio.h>
 #include <map>
 #include <fstream>
 #include <cstdlib>
+#include <cstring>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
+#include <WORMUX_error.h>
 #include <WORMUX_i18n.h>
+#include <WORMUX_file_tools.h>
 
 Downloader::Downloader():
   curl(curl_easy_init())
@@ -41,56 +45,48 @@ size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
   return fwrite(buf, size, nmemb, (FILE*)fd);
 }
 
-bool Downloader::Get(const char* url, const char* save_as) const
+bool Downloader::Get(const char* url, FILE* file) const
 {
-  FILE* fd = fopen( save_as, "w");
-  if (fd == NULL) {
-    perror("Downloader::Get");
-    printf("\t%s\n\n", save_as);
-    return false;
-  }
-  curl_easy_setopt(curl, CURLOPT_FILE, fd);
+  curl_easy_setopt(curl, CURLOPT_FILE, file);
   curl_easy_setopt(curl, CURLOPT_URL, url);
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
   CURLcode r = curl_easy_perform(curl);
-  fclose(fd);
 
   return (r == CURLE_OK);
 }
 
-static ssize_t getline(std::string& line, std::ifstream& file)
+static ssize_t getline(std::string& line, FILE* file)
 {
   line.clear();
-  std::getline(file, line);
-  if(file.eof())
-    return -1;
+  char buffer[1024];
+  fscanf(file, "%1024s\n", buffer);
+
+  line = buffer;
   return line.size();
 }
 
 std::string Downloader::GetLatestVersion() const
 {
   static const char url[] = "http://www.wormux.org/last";
-  std::string last_file = tmpnam(NULL);
-  last_file += "-wormux_version";
+  int fd;
+  const std::string last_file = CreateTmpFile("wormux_version", &fd);
 
-  if( !Get(url, last_file.c_str()) )
-  {
+  if (fd == -1) {
+    std::string err = Format(_("Fail to create temporary file: %s"), strerror(errno));
+    throw err;
+  }
+
+  FILE* file = fdopen(fd, "r");
+
+  if (!Get(url, file)) {
     std::string err = Format(_("Couldn't fetch last version from %s"), url);
     throw err;
   }
 
   // Parse the file
-  std::ifstream fin;
-  fin.open(last_file.c_str(), std::ios::in);
-  if(!fin)
-  {
-    std::string err = Format(_("Couldn't open file %s"), last_file.c_str());
-    throw err;
-  }
-
   std::string line;
-  getline(line, fin);
-  fin.close();
+  getline(line, file);
+  fclose(file);
 
   // remove the file
   remove(last_file.c_str());
@@ -104,32 +100,31 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  std::string server_file = tmpnam(NULL);
-  server_file += "-";
-  server_file += list_name;
   const std::string list_url = "http://www.wormux.org/" + list_name;
+  int fd;
+  const std::string server_file = CreateTmpFile("wormux_servers", &fd);
 
-  if( !Get(list_url.c_str(), server_file.c_str()) )
+  if (fd == -1) {
+    std::string err = Format(_("Fail to create temporary file: %s"), strerror(errno));
+    throw err;
+  }
+
+  FILE* file = fdopen(fd, "r");
+  if (!Get(list_url.c_str(), file))
     return server_lst;
 
   // Parse the file
-  std::ifstream fin;
-  fin.open(server_file.c_str(), std::ios::in);
-  if(!fin)
-   return server_lst;
-
-  /*char * line = NULL;
-  size_t len = 0;*/
   std::string line;
 
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while (getline(line, fin) >= 0)
-  {
-    if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
+  while (getline(line, file) >= 0) {
+    if (line.at(0) == '#'
+	|| line.at(0) == '\n'
+	|| line.at(0) == '\0')
       continue;
 
     std::string::size_type port_pos = line.find(':', 0);
-    if(port_pos == std::string::npos)
+    if (port_pos == std::string::npos)
       continue;
 
     std::string hostname = line.substr(0, port_pos);
@@ -139,7 +134,7 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
     server_lst[ hostname ] = port;
   }
 
-  fin.close();
+  fclose(file);
   remove(server_file.c_str());
 
   MSG_DEBUG("downloader", "Server list retrieved. %i servers are running", server_lst.size());
