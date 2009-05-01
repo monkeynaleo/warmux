@@ -19,7 +19,6 @@
  * Refresh des fichiers.
  *****************************************************************************/
 
-#include "tool/file_tools.h"
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
@@ -37,6 +36,8 @@
 #  include <unistd.h> // not needed by mingw
 #endif
 
+#include <WORMUX_error.h>
+#include <WORMUX_file_tools.h>
 
 
 // Test if a file exists

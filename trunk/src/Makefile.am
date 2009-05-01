@@ -158,7 +158,6 @@ wormux_SOURCES = \
         tool/affine_transform.cpp tool/affine_transform.h \
         tool/copynpaste.cpp tool/copynpaste.h \
         tool/debug_physics.cpp tool/debug_physics.h \
-        tool/file_tools.cpp tool/file_tools.h \
         tool/isnan.h \
         tool/math_tools.h \
         tool/random.cpp tool/random.h \

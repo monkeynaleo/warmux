@@ -315,8 +315,6 @@ POTFILES = \
         src/tool/copynpaste.h \
         src/tool/debug_physics.cpp \
         src/tool/debug_physics.h \
-        src/tool/file_tools.cpp \
-        src/tool/file_tools.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
         src/tool/random.cpp \

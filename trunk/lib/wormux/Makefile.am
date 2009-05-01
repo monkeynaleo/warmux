@@ -9,6 +9,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_distant_cpu.h \
 	./include/WORMUX_download.h \
 	./include/WORMUX_error.h \
+	./include/WORMUX_file_tools.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_index_svr_msg.h \
 	./include/WORMUX_network.h \
@@ -30,6 +31,7 @@ libwormux_a_SOURCES = \
 	./net/network.cpp \
 	./net/player.cpp \
 	./net/socket.cpp \
-	./tools/debug.cpp
+	./tools/debug.cpp \
+	./tools/file_tools.cpp
 
 AM_CXXFLAGS += -I$(top_srcdir)/lib/wormux/include
