@@ -226,22 +226,16 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
           }
         else
           {
-            int host_options;
-            if (!ReceiveInt(host_options)) // Does the server publish a name and a passwd ?
-              return false;
-
             HostOptions options;
-            options.used = host_options;
-            if (options.used) {
-              std::string game_name;
-              if (!ReceiveStr(game_name))
-                return false;
 
-              int passwd;
-              if (!ReceiveInt(passwd))
-                return false;
-              options.Set(game_name, passwd);
-            }
+	    std::string game_name;
+	    if (!ReceiveStr(game_name))
+	      return false;
+
+	    int passwd;
+	    if (!ReceiveInt(passwd))
+	      return false;
+	    options.Set(game_name, passwd);
 
             fake_clients.insert(std::make_pair(version, FakeClient(ip, port, options)));
             stats.NewFakeServer(version);
