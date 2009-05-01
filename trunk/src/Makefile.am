@@ -113,7 +113,6 @@ wormux_SOURCES = \
         network/chatlogger.cpp network/chatlogger.h \
         network/download.cpp network/download.h \
         network/index_server.cpp network/index_server.h \
-        network/index_svr_msg.h \
         network/irc.cpp network/irc.h \
         network/net_error_msg.cpp network/net_error_msg.h \
         network/network_client.cpp network/network_client.h \

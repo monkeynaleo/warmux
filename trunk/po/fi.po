@@ -70,32 +70,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -112,7 +112,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -133,7 +133,7 @@ msgstr "Joukkueella %s on jo loputtomat ammukset aseelle %s!"
 msgid "%s team has skipped its turn."
 msgstr "Joukkue %s luovutti vuoron."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -218,7 +218,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Joukkue %s voitti %u pomppupallon! Bojoing!"
 msgstr[1] "Joukkue %s voitti %u pomppupalloa! Bojoing!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -326,7 +326,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Joukkue %s voitti %u mellakkapommin!"
 msgstr[1] "Joukkue %s voitti %u mellakkapommia!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -383,7 +383,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Joukkue %s voitti %u vuoron skippauksen! Mahtavaa."
 msgstr[1] "Joukkue %s voitti %u vuoron skippausta! Mahtavaa."
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -397,7 +397,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -508,7 +508,7 @@ msgstr "Puhalluslamppu"
 msgid "Bounce Ball"
 msgstr "Pomppupallo"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Hei hei tux..."
 
@@ -534,11 +534,11 @@ msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Keskitä kamera hahmoon"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Vaihda aktiivista hahmoa"
 
@@ -587,11 +587,11 @@ msgstr "Asiakastila"
 msgid "Clumsiest"
 msgstr "Kömpelöin"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Rypälepommi"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Rypälesinko"
 
@@ -900,7 +900,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Aloitusvoimat:"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1042,7 +1042,7 @@ msgstr "Hyödyttömin"
 msgid "Most violent"
 msgstr "Väkivaltaisin"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Siirrä kameraa hiirellä tai nuolilla"
 
@@ -1126,10 +1126,6 @@ msgstr "Laskuvarjo aukeaa automaattisesti."
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Salasana:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Tauko"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1230,7 +1226,7 @@ msgstr "Palvelimelle on pääsy internetistä"
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Haulikko"
 
@@ -1242,7 +1238,7 @@ msgstr "Näytä asevalikko"
 msgid "Show/hide interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Näytä/piilota minikartta"
 
@@ -1274,7 +1270,7 @@ msgstr "Joku viritti ansan laatikkoon!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1312,7 +1308,7 @@ msgstr "Varasto:"
 msgid "Submachine Gun"
 msgstr "Puoliautomaattiase"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1397,7 +1393,7 @@ msgstr "Kranaatti on poistunut taistelukentältä..."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Kaikki muut odottavat sinua! Herätys!! :)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
@@ -1422,7 +1418,7 @@ msgstr[1] "On olemassa vain %i joukkuetta."
 msgid "Time"
 msgstr "Aika"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1492,7 +1488,7 @@ msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Ase: Ammu / Bonuslaatikko: putoaa nopeasti"
 
@@ -1511,7 +1507,7 @@ msgstr "Verkkosivu:"
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -1624,6 +1620,9 @@ msgstr "o Ladataan ääniprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
+
+#~ msgid "Pause"
+#~ msgstr "Tauko"
 
 #~ msgid "Tools"
 #~ msgstr "Työkalut"

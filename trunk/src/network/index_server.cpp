@@ -22,19 +22,17 @@
 
 #include <assert.h>
 #include <SDL_net.h>
+#include <WORMUX_debug.h>
 #include "network/download.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/index_server.h"
-#include "network/index_svr_msg.h"
 #include "network/network.h"
-#include <WORMUX_debug.h>
 #include "tool/random.h"
 
 IndexServer::IndexServer():
-  used(0),
   server_lst(),
   first_server(server_lst.end()),
   current_server(server_lst.end()),
@@ -213,6 +211,7 @@ connection_state_t IndexServer::HandShake()
 
   MSG_DEBUG("index_server", "Beginning handshake...");
 
+  uint used = 0;
   NewMsg(TS_MSG_VERSION, buffer, used);
   used += WNet::Batch(buffer+used, Constants::WORMUX_VERSION);
 
@@ -271,18 +270,11 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (hidden_server)
     return true;
 
-  NewMsg(TS_MSG_HOSTING, buffer, used);
-  used += WNet::Batch(buffer+used, game_name);
-  used += WNet::Batch(buffer+used, (int)pwd);
-  used += WNet::Batch(buffer+used, port);
-  SendMsg(socket, buffer, used);
+  bool r = WNet::Server_SendStatusToIndexServer(socket, game_name, pwd, port);
+  if (!r)
+    Disconnect();
 
-  bool r = socket.ReceiveStr(ack, 5);
-  if (r && ack == "OK")
-    return true;
-
-  Disconnect();
-  return false;
+  return r;
 }
 
 std::list<GameServerInfo> IndexServer::GetHostList()
@@ -290,6 +282,7 @@ std::list<GameServerInfo> IndexServer::GetHostList()
   std::list<GameServerInfo> lst;
   bool r;
 
+  uint used = 0;
   NewMsg(TS_MSG_GET_LIST, buffer, used);
   SendMsg(socket, buffer, used);
 
@@ -356,18 +349,8 @@ std::list<GameServerInfo> IndexServer::GetHostList()
 
 void IndexServer::Refresh()
 {
-  if (!socket.IsReady(100))
+  if (WNet::KeepConnectionWithIndexServer(socket))
     return;
-
-  int msg_id;
-  bool r;
-  r = socket.ReceiveInt(msg_id);
-
-  if (r && msg_id == TS_MSG_PING) {
-    NewMsg(TS_MSG_PONG, buffer, used);
-    SendMsg(socket, buffer, used);
-    return;
-  }
 
   Disconnect();
 }

@@ -69,32 +69,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s от %s се самоуби!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s от отбора %s умря."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s от отбора %s падна във водата!"
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s от отбора %s изпадна извън картата!"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s от отбора %s се удари в земята твърде силно!"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s от отбора %s умря заради несръчността си!"
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s спечели %u точка здраве!"
 msgstr[1] "%s спечели %u точки здраве!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
@@ -132,7 +132,7 @@ msgstr "Ехее, %s вече си имат безкрайни муниции з
 msgid "%s team has skipped its turn."
 msgstr "Отборът %s галантно отстъпва ход..."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -217,7 +217,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "Отборът %s спечели %u Супер-топче!"
 msgstr[1] "Отборът %s спечели %u Супер-топче-та!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -323,7 +323,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Отборът %s спечели %u Звуков заряд!"
 msgstr[1] "Отборът %s спечели %u Звукови заряди!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -381,7 +381,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Отборът %s спечели %u Отстъпване на хода !"
 msgstr[1] "Отборът %s спечели %u Отстъпванета на ходове !"
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -397,7 +397,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Всички от отбора %s са убити."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
@@ -508,7 +508,7 @@ msgstr "Горелка"
 msgid "Bounce Ball"
 msgstr "Супер-топче"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Tux e свободен!!!"
 
@@ -534,11 +534,11 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не мога да отворя личната директорията на отбора (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Центрирай войника"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Смени активен войник"
 
@@ -588,11 +588,11 @@ msgstr "Клиентски режим"
 msgid "Clumsiest"
 msgstr "Най-несръчният"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Шрапнелна граната"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Шрапнел РПГ"
 
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Начално здраве"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1042,7 +1042,7 @@ msgstr "Най-Безполезен"
 msgid "Most violent"
 msgstr "Най-Буен"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Движи камерата с мишката или стрелкичките"
 
@@ -1126,10 +1126,6 @@ msgstr "Парашутът се активира автоматично при �
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Парола:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Пауза"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1230,7 +1226,7 @@ msgstr "Достъпен сървър в интернет"
 msgid "Server mode"
 msgstr "Сървъров режим"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Помпа"
 
@@ -1242,7 +1238,7 @@ msgstr "Показване на менюто с оръжията"
 msgid "Show/hide interface"
 msgstr "Покажи/Скрий интерфейса"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Покажи/Скрий Картата"
 
@@ -1274,7 +1270,7 @@ msgstr "Някой е сложил капан в съндъка!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Съжалявам, в момента няма игра, която да изчаква за играчи"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1312,7 +1308,7 @@ msgstr "Наличност:"
 msgid "Submachine Gun"
 msgstr "Картечен пистолет"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "Супер-Tux!"
 
@@ -1397,7 +1393,7 @@ msgstr "Ходи я търси..."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Ехаааа...."
@@ -1422,7 +1418,7 @@ msgstr[1] "Има само %i отбора."
 msgid "Time"
 msgstr "Време"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1493,7 +1489,7 @@ msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 
@@ -1512,7 +1508,7 @@ msgstr "Страница: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -1627,6 +1623,9 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#~ msgid "Pause"
+#~ msgstr "Пауза"
 
 #~ msgid "Tools"
 #~ msgstr "Други"

@@ -226,7 +226,6 @@ POTFILES = \
         src/network/download.h \
         src/network/index_server.cpp \
         src/network/index_server.h \
-        src/network/index_svr_msg.h \
         src/network/irc.cpp \
         src/network/irc.h \
         src/network/net_error_msg.cpp \
@@ -438,7 +437,7 @@ POTFILES = \
         tools/servers/index_server/stat.cpp \
         tools/servers/index_server/stat.h \
         tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h 
+        tools/servers/index_server/sync_slave.h
 
 DOMAIN = $(PACKAGE)
 

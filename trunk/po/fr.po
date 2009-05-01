@@ -65,32 +65,32 @@ msgstr "%s change de cible pour %s"
 msgid "%s fps"
 msgstr "%s img/s"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s de l'équipe %s s'est suicidé !"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s de l'équipe %s est mort."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s de l'équipe %s est tombé dans l'eau."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s de l'équipe %s est sorti du terrain !"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s de l'équipe %s a touché le sol trop fort !"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'équipe %s est mort à cause de sa maladresse !"
@@ -107,7 +107,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s a gagné %u point de vie !"
 msgstr[1] "%s a gagné %u points de vie !"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s est un psychopathe, il a tué un membre de son équipe (%s) !"
@@ -128,7 +128,7 @@ msgstr "L'équipe %s a déjà un nombre illimité de munitions pour l'arme %s !"
 msgid "%s team has skipped its turn."
 msgstr "L'équipe %s a sauté son tour."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -213,7 +213,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "L'équipe %s a gagné %u Balle Rebondissante ! Boing !"
 msgstr[1] "L'équipe %s a gagné %u Balles Rebondissantes ! Boing !"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -327,7 +327,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "L'équipe %s a gagné %u Bombe Anti-émeutes !"
 msgstr[1] "L'équipe %s a gagné %u Bombes Anti-émeutes !"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -386,7 +386,7 @@ msgstr[0] ""
 msgstr[1] ""
 "L'équipe %s a gagné %u passages de tour ! Wouw, quel arme sur-puissante !"
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -400,7 +400,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "L'équipe %s a été décimée."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a emmené un membre de l'équipe %s dans la tombe avec lui !"
@@ -512,7 +512,7 @@ msgstr "Chalumeau"
 msgid "Bounce Ball"
 msgstr "Balle Rebondissante"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Adieu tux !"
 
@@ -538,11 +538,11 @@ msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes personnalisées (%s) !"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Centrer la caméra sur le personnage"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Changer de personnage courant"
 
@@ -591,11 +591,11 @@ msgstr "Mode client"
 msgid "Clumsiest"
 msgstr "Le plus maladroit"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Grenade à Fragmentation"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Bazooka à Fragmentation"
 
@@ -910,7 +910,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Énergie initiale"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1051,7 +1051,7 @@ msgstr "Le plus inutile"
 msgid "Most violent"
 msgstr "Le plus violent"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Déplacez la caméra avec la souris ou avec les flèches"
 
@@ -1135,10 +1135,6 @@ msgstr "Le parachute est activé automatiquement."
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Mot de passe :"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Pause"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1239,7 +1235,7 @@ msgstr "Serveur disponible sur Internet"
 msgid "Server mode"
 msgstr "Mode serveur"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Fusil à Pompe"
 
@@ -1251,7 +1247,7 @@ msgstr "Afficher le menu d'armement"
 msgid "Show/hide interface"
 msgstr "Afficher/Masquer l'interface"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Afficher/Masquer la mini-carte"
 
@@ -1283,7 +1279,7 @@ msgstr "Quelqu'un a placé un piège dans cette boîte !"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1322,7 +1318,7 @@ msgstr "Munitions :"
 msgid "Submachine Gun"
 msgstr "Mitraillette"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1408,7 +1404,7 @@ msgstr "La Grenade a quitté le champ de bataille avant d'exploser."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Les autres t'attendent! Réveille-toi :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "La Roquette est partie dans un autre monde..."
@@ -1433,7 +1429,7 @@ msgstr[1] "Il n'y a que %i équipes."
 msgid "Time"
 msgstr "Temps"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1503,7 +1499,7 @@ msgstr[1] "Attendez ! %i joueurs ne sont pas encore prêts !"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Attente du serveur, vous pouvez seulement annuler ou discuter !"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Arme : Tirer / Boite de bonus : Chute rapide"
 
@@ -1522,7 +1518,7 @@ msgstr "Site web : "
 msgid "Welcome to %s!"
 msgstr "Bienvenue dans %s!"
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
@@ -1636,6 +1632,9 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#~ msgid "Pause"
+#~ msgstr "Pause"
 
 #~ msgid "Tools"
 #~ msgstr "Outils"

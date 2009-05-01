@@ -66,32 +66,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s bildoj po sekundo (fps)"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (teamo %s) mortigis sin!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (teamo %s) mortis."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (teamo %s) droniĝis!"
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (teamo %s) falis el la mapo!"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (teamo %s) grundtrafis tro perforte!"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
@@ -108,7 +108,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
@@ -129,7 +129,7 @@ msgstr "%s teamo jam havas senlimajn municiojn por la %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s teamo malhavis lian vicon."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -213,7 +213,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "%s teamo gajnis %u resaltantan pilkon! Ŝpruc!"
 msgstr[1] "%s teamo gajnis %u resaltantajn pilkojn! Ŝpruc!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -319,7 +319,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s teamo gajnis %u tumultbombon!"
 msgstr[1] "%s teamo gajnis %u tumultbombojn!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -378,7 +378,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s teamo gajnis %u vicpasigon! Mi scias, ke vi amos ĝin."
 msgstr[1] "%s teamo gajnis %u vicpasigojn! Mi scias, ke vi amos ilin."
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -392,7 +392,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s teamo primurditis."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s entombigis membron de la %s teamo kun li!"
@@ -503,7 +503,7 @@ msgstr "Torĉo"
 msgid "Bounce Ball"
 msgstr "Resaltanta pilko"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Adiaŭ, tukso..."
 
@@ -529,11 +529,11 @@ msgstr "Ne eblas malfermi la dosierujon de teamoj (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Centrigi la kameraon ĉe la ulo"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Ŝanĝi aktivan ulon"
 
@@ -583,11 +583,11 @@ msgstr "Klientmodo"
 msgid "Clumsiest"
 msgstr "La plej mallerta"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Disgrenado"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Disbazuko"
 
@@ -890,7 +890,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Komenca energio"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1031,7 +1031,7 @@ msgstr "La plej malutila"
 msgid "Most violent"
 msgstr "La plej perforta"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Movi la kameraon per muso aŭ sagoj"
 
@@ -1115,10 +1115,6 @@ msgstr "Paraŝuto aŭtomatike uziĝis."
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Pasvorto:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Paŭzi"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1219,7 +1215,7 @@ msgstr "Interretebla servilo"
 msgid "Server mode"
 msgstr "Servila modo"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Blovfusilo"
 
@@ -1231,7 +1227,7 @@ msgstr "Montri la menuon de armiloj"
 msgid "Show/hide interface"
 msgstr "Montri/Kaŝi interfacon"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Montri/Kaŝi minimapon"
 
@@ -1263,7 +1259,7 @@ msgstr "Iu metis insidon en la skatolo!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1301,7 +1297,7 @@ msgstr "Municioj:"
 msgid "Submachine Gun"
 msgstr "Mitraleto"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "SuperTukso"
 
@@ -1386,7 +1382,7 @@ msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "La alioj estas atendando vin! Vekiĝu:-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "La raketo foriris de la batalejo..."
@@ -1411,7 +1407,7 @@ msgstr[1] "Estas nur %i teamoj."
 msgid "Time"
 msgstr "Tempo"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1480,7 +1476,7 @@ msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 
@@ -1499,7 +1495,7 @@ msgstr "TTT-ejo: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
@@ -1613,6 +1609,9 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Pause"
+#~ msgstr "Paŭzi"
 
 #~ msgid "Tools"
 #~ msgstr "Iloj"
