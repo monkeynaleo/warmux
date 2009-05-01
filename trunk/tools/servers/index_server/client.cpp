@@ -371,18 +371,18 @@ void Client::NotifyServers(bool joining)
 
     if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
       return /*false*/;
-    if (! serv->second->SendStr(version))
+    if (!serv->second->SendStr(version))
       return /*false*/;
-    if (! serv->second->SendInt(GetIP()))
+    if (!serv->second->SendInt(GetIP()))
       return /*false*/;
     // Send the port number : if this client is leaving, send -port
-    if (! serv->second->SendInt(joining? port : -port))
+    if (!serv->second->SendInt(joining? port : -port))
       return /*false*/;
 
     if (joining) {
-      if (!SendStr(serv->second->options.GetGameName()))
+      if (!serv->second->SendStr(serv->second->options.GetGameName()))
 	return /*false*/;
-      if (!SendInt(serv->second->options.UsePassword()))
+      if (!serv->second->SendInt(serv->second->options.UsePassword()))
 	return /*false*/;
     }
   }
