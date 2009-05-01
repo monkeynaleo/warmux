@@ -252,6 +252,21 @@ std::string GetTmpDir()
   return txt;
 }
 
+std::string CreateTmpFile(const std::string& prefix, int* fd)
+{
+  ASSERT(fd);
+  char path[512];
+  snprintf(path, 512, "%s/%sXXXXXX", GetTmpDir().c_str(), prefix.c_str());
+
+#ifdef WIN32
+  mktemp(path);
+  *fd = open(path, O_RDWR|O_BINARY|O_CREAT|O_EXCL|_O_SHORT_LIVED, _S_IREAD|_S_IWRITE);
+#else
+  *fd = mkstemp(path);
+#endif
+  return path;
+}
+
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory)
 {

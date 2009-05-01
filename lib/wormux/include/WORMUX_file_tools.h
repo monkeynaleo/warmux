@@ -48,6 +48,9 @@ std::string GetHome();
 // Return the path to the tmp directory
 std::string GetTmpDir();
 
+// Create a tmp file
+std::string CreateTmpFile(const std::string& prefix, int *fd);
+
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
 

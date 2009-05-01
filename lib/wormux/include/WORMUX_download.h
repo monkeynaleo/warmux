@@ -44,7 +44,7 @@ class Downloader : public Singleton<Downloader>
   CURL* curl;
 
   // Return true if the download was successful
-  bool Get(const char* url, const char* save_as) const;
+  bool Get(const char* url, FILE* file) const;
 
 protected:
   friend class Singleton<Downloader>;
