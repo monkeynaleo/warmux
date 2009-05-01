@@ -28,7 +28,7 @@
 #include "game/game_mode.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include "team/team.h"
 #include <WORMUX_team_config.h>
 #include "team/team_energy.h"

@@ -22,7 +22,7 @@
 #include <iostream>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include <WORMUX_debug.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>

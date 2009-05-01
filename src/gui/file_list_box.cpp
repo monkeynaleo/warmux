@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 #include "file_list_box.h"
 #include "game/config.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 
 #if !defined(WIN32) && !defined(_WIN32)
 # include <dirent.h>

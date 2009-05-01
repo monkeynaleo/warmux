@@ -31,7 +31,7 @@
 #include "game/config.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include "menu/skin_menu.h"
 
 static const uint BORDER        = 20;
