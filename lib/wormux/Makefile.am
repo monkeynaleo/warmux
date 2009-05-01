@@ -7,6 +7,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_action_handler.h \
 	./include/WORMUX_debug.h \
 	./include/WORMUX_distant_cpu.h \
+	./include/WORMUX_download.h \
 	./include/WORMUX_error.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_index_svr_msg.h \
@@ -25,6 +26,7 @@ libwormux_a_SOURCES = \
 	./base/i18n.cpp \
 	./base/singleton.cpp \
 	./net/distant_cpu.cpp \
+	./net/download.cpp \
 	./net/network.cpp \
 	./net/player.cpp \
 	./net/socket.cpp \

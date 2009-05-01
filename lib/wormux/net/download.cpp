@@ -23,8 +23,8 @@
 #include <fstream>
 #include <cstdlib>
 #include <WORMUX_debug.h>
-#include "include/base.h"
-#include "network/download.h"
+#include <WORMUX_download.h>
+#include <WORMUX_i18n.h>
 
 Downloader::Downloader():
   curl(curl_easy_init())
