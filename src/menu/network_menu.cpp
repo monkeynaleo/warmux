@@ -339,8 +339,6 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 	msg_box->NewMessage(_("You are alone :-/"), c_red);
       }
     }
-
-    IndexServer::GetInstance()->Refresh();
   }
   else {
     close_menu = true;
