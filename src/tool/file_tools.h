@@ -43,7 +43,10 @@ bool DeleteFile(const std::string &name);
 std::string FileExtension(const std::string &name);
 
 // Return the path to the home directory of the user
-std::string GetHome ();
+std::string GetHome();
+
+// Return the path to the tmp directory
+std::string GetTmpDir();
 
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
