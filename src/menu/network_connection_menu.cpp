@@ -36,6 +36,7 @@
 #include "gui/tabs.h"
 #include "gui/text_box.h"
 #include "include/app.h"
+#include "include/constant.h"
 #include "network/net_error_msg.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
@@ -273,7 +274,7 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
   std::list<GameServerInfo> lst;
 
   // Connect to the index server
-  connection_state_t conn = IndexServer::GetInstance()->Connect();
+  connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
   if (conn != CONNECTED) {
     if (conn != CONN_WRONG_VERSION) {
       DisplayNetError(conn);
@@ -335,7 +336,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   if (!internet)
     IndexServer::GetInstance()->SetHiddenServer();
 
-  connection_state_t conn = IndexServer::GetInstance()->Connect();
+  connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
   if (conn != CONNECTED) {
     DisplayNetError(conn);
     msg_box->NewMessage(_("Error: Unable to contact the index server to host a game"), c_red);

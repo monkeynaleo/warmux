@@ -24,11 +24,10 @@
 #include <SDL_net.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
+#include <WORMUX_random.h>
 #include "graphic/video.h"
 #include "include/app.h"
-#include "include/constant.h"
 #include "network/index_server.h"
-#include <WORMUX_random.h>
 
 IndexServer::IndexServer():
   server_lst(),
@@ -52,7 +51,7 @@ bool IndexServer::IsConnected()
 
 
 /*************  Connection  /  Disconnection  ******************/
-connection_state_t IndexServer::Connect()
+connection_state_t IndexServer::Connect(const std::string& wormux_version)
 {
   connection_state_t r = CONN_REJECTED;
 
@@ -81,7 +80,7 @@ connection_state_t IndexServer::Connect()
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried))
   {
-    r = ConnectTo(addr, port);
+    r = ConnectTo(addr, port, wormux_version);
     if (r == CONNECTED)
       return r;
   }
@@ -92,7 +91,8 @@ connection_state_t IndexServer::Connect()
   return r;
 }
 
-connection_state_t IndexServer::ConnectTo(const std::string & address, const int & port)
+connection_state_t IndexServer::ConnectTo(const std::string& address, const int& port,
+					  const std::string& wormux_version)
 {
   connection_state_t r;
 
@@ -108,7 +108,7 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
     goto error;
   }
 
-  r = HandShake();
+  r = HandShake(wormux_version);
   if (r != CONNECTED)
     goto err_handshake;
 
@@ -200,7 +200,7 @@ bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
   return r;
 }
 
-connection_state_t IndexServer::HandShake()
+connection_state_t IndexServer::HandShake(const std::string& wormux_version)
 {
   connection_state_t status = CONN_REJECTED;
   bool r;
@@ -211,7 +211,7 @@ connection_state_t IndexServer::HandShake()
 
   uint used = 0;
   NewMsg(TS_MSG_VERSION, buffer, used);
-  used += WNet::Batch(buffer+used, Constants::WORMUX_VERSION);
+  used += WNet::Batch(buffer+used, wormux_version);
 
   MSG_DEBUG("index_server", "Sending information...");
 

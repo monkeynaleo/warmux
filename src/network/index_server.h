@@ -69,12 +69,13 @@ class IndexServer : public Singleton<IndexServer>
   static bool SendMsg(WSocket& socket, char* buffer, uint& used);
 
   // Gives the address of a server in the list
-  bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
+  bool GetServerAddress(std::string& address, int& port, uint& nb_tries);
   // Connect to a server
-  connection_state_t ConnectTo(const std::string & address, const int & port);
+  connection_state_t ConnectTo(const std::string& address, const int& port,
+			       const std::string& wormux_version);
 
   // Perform a handshake with the server
-  connection_state_t HandShake();
+  connection_state_t HandShake(const std::string& wormux_version);
 
   bool IsConnected();
 
@@ -83,7 +84,7 @@ public:
   ~IndexServer();
 
   // Connect/disconnect to a server
-  connection_state_t Connect();
+  connection_state_t Connect(const std::string& wormux_version);
   void Disconnect();
 
   // Answers to pings from the server / close connection if distantly closed
