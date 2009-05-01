@@ -30,7 +30,6 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "network/network.h"
 
 class GameServerInfo
 {
