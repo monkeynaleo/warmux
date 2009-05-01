@@ -18,14 +18,11 @@
  ******************************************************************************
  * Download a file using libcurl
  *****************************************************************************/
-
+#include <stdio.h>
 #include <map>
 #include <fstream>
 #include <cstdlib>
-
 #include <WORMUX_debug.h>
-
-#include "game/config.h"
 #include "include/base.h"
 #include "network/download.h"
 
@@ -73,7 +70,9 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 std::string Downloader::GetLatestVersion() const
 {
   static const char url[] = "http://www.wormux.org/last";
-  const std::string last_file = Config::GetInstance()->GetPersonalDataDir() + "last";
+  std::string last_file = tmpnam(NULL);
+  last_file += "-wormux_version";
+
   if( !Get(url, last_file.c_str()) )
   {
     std::string err = Format(_("Couldn't fetch last version from %s"), url);
@@ -93,6 +92,9 @@ std::string Downloader::GetLatestVersion() const
   getline(line, fin);
   fin.close();
 
+  // remove the file
+  remove(last_file.c_str());
+
   return line;
 }
 
@@ -102,7 +104,9 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  const std::string server_file = Config::GetInstance()->GetPersonalDataDir() + list_name;
+  std::string server_file = tmpnam(NULL);
+  server_file += "-";
+  server_file += list_name;
   const std::string list_url = "http://www.wormux.org/" + list_name;
 
   if( !Get(list_url.c_str(), server_file.c_str()) )
@@ -136,6 +140,7 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
   }
 
   fin.close();
+  remove(server_file.c_str());
 
   MSG_DEBUG("downloader", "Server list retrieved. %i servers are running", server_lst.size());
 
