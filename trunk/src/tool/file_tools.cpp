@@ -23,6 +23,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
+#include <cstdlib>
 
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
@@ -180,7 +181,7 @@ void CloseFolder(FolderSearch *f)
 // Return the path to the home directory of the user
 std::string GetHome()
 {
-  char *txt = getenv("HOME");
+  char *txt = std::getenv("HOME");
 
   if (txt == NULL)
     Error (_("HOME directory (environment variable $HOME) could not be found!"));
@@ -224,6 +225,31 @@ void CloseFolder(FolderSearch *f)
   }
 }
 #endif
+
+// Return the path to the home directory of the user
+std::string GetTmpDir()
+{
+  char *txt = std::getenv("TMPDIR");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TMP");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TEMP");
+  if (txt != NULL)
+    return txt;
+
+#ifndef WIN32
+  return "/tmp";
+#endif
+
+  if (txt == NULL)
+    Error (_("TEMP directory could not be found!"));
+
+  return txt;
+}
 
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory)
