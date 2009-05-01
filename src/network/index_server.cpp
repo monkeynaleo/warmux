@@ -25,8 +25,6 @@
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
 #include <WORMUX_random.h>
-#include "graphic/video.h"
-#include "include/app.h"
 #include "network/index_server.h"
 
 IndexServer::IndexServer():
@@ -239,11 +237,8 @@ connection_state_t IndexServer::HandShake(const std::string& wormux_version)
     r = socket.ReceiveStr(sign, 20);
     if (!r)
       sign = "";
-    AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
-				     "Supported version are %s. "
-				     "You can download a updated version "
-				     "on http://www.wormux.org/wiki/download.php"),
-				   sign.c_str()));
+
+    supported_versions = sign;
     goto error;
   }
 
@@ -340,6 +335,11 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     lst.push_back(game_server_info);
   }
   return lst;
+}
+
+const std::string& IndexServer::GetSupportedVersions() const
+{
+  return supported_versions;
 }
 
 void IndexServer::Refresh()

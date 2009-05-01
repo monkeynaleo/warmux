@@ -276,9 +276,7 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
   // Connect to the index server
   connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
   if (conn != CONNECTED) {
-    if (conn != CONN_WRONG_VERSION) {
-      DisplayNetError(conn);
-    }
+    DisplayNetError(conn);
     msg_box->NewMessage(_("Error: Unable to contact the index server to search for an internet game"), c_red);
     return lst;
   }
@@ -322,7 +320,15 @@ void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
 void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 {
-  Menu::DisplayError(NetworkErrorToString(conn));
+  if (conn == CONN_WRONG_VERSION) {
+    AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
+				     "Supported version are %s. "
+				     "You can download a updated version "
+				     "on http://www.wormux.org/wiki/download.php"),
+				   IndexServer::GetInstance()->GetSupportedVersions().c_str()));
+  } else {
+    Menu::DisplayError(NetworkErrorToString(conn));
+  }
 }
 
 bool NetworkConnectionMenu::HostingServer(const std::string& port,

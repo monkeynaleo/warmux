@@ -64,6 +64,8 @@ class IndexServer : public Singleton<IndexServer>
   // If we are a server, tell if we are visible on internet
   bool hidden_server;
 
+  std::string supported_versions;
+
   // Transfer functions
   static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
   static bool SendMsg(WSocket& socket, char* buffer, uint& used);
@@ -101,6 +103,8 @@ public:
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();
+
+  const std::string& GetSupportedVersions() const;
 };
 
 #endif
