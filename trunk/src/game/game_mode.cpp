@@ -27,7 +27,7 @@
 #include "game/game_mode.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 

@@ -23,7 +23,7 @@
 #include <assert.h>
 #include <SDL_net.h>
 #include <WORMUX_debug.h>
-#include "network/download.h"
+#include <WORMUX_download.h>
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"

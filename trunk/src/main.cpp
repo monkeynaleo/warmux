@@ -94,7 +94,9 @@ int AppWormux::Main(void)
 {
   bool quit = false;
 
+#ifndef DEBUG
   try
+#endif
   {
     DisplayLoadingPicture();
 
@@ -173,6 +175,7 @@ int AppWormux::Main(void)
 
     End();
   }
+#ifndef DEBUG
   catch(const std::exception & e)
   {
     std::cerr << std::endl
@@ -187,6 +190,7 @@ int AppWormux::Main(void)
       << "Unexpected exception caught..." << std::endl << std::endl;
     WakeUpDebugger();
   }
+#endif
 
   return 0;
 }
@@ -245,10 +249,7 @@ void AppWormux::RefreshDisplay()
 
 void AppWormux::DisplayError(const std::string &msg)
 {
-  if (singleton == NULL) {
-    std::cerr << msg << std::endl;
-    return;
-  }
+  std::cerr << msg << std::endl;
 
   if (Game::GetInstance()->IsGameLaunched()) {
     // nothing to do

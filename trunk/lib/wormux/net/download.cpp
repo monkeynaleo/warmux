@@ -51,7 +51,7 @@ bool Downloader::Get(const char* url, FILE* file) const
   curl_easy_setopt(curl, CURLOPT_URL, url);
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
   CURLcode r = curl_easy_perform(curl);
-
+  fflush(file);
   return (r == CURLE_OK);
 }
 
@@ -59,9 +59,11 @@ static ssize_t getline(std::string& line, FILE* file)
 {
   line.clear();
   char buffer[1024];
-  fscanf(file, "%1024s\n", buffer);
 
-  line = buffer;
+  int r = fscanf(file, "%1024s\n", buffer);
+  if (r == 1)
+    line = buffer;
+
   return line.size();
 }
 
@@ -73,17 +75,25 @@ std::string Downloader::GetLatestVersion() const
 
   if (fd == -1) {
     std::string err = Format(_("Fail to create temporary file: %s"), strerror(errno));
+    fprintf(stderr, "%s\n", err.c_str());
     throw err;
   }
 
-  FILE* file = fdopen(fd, "r");
+  FILE* file = fdopen(fd, "r+");
+  if (!file) {
+    std::string err = Format(_("Fail to open temporary file: %s"), strerror(errno));
+    fprintf(stderr, "%s\n", err.c_str());
+    throw err;
+  }
 
   if (!Get(url, file)) {
     std::string err = Format(_("Couldn't fetch last version from %s"), url);
+    fprintf(stderr, "%s\n", err.c_str());
     throw err;
   }
 
   // Parse the file
+  rewind(file);
   std::string line;
   getline(line, file);
   fclose(file);
@@ -109,15 +119,16 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
     throw err;
   }
 
-  FILE* file = fdopen(fd, "r");
+  FILE* file = fdopen(fd, "r+");
   if (!Get(list_url.c_str(), file))
     return server_lst;
 
   // Parse the file
   std::string line;
+  rewind(file);
 
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while (getline(line, file) >= 0) {
+  while (getline(line, file) > 0) {
     if (line.at(0) == '#'
 	|| line.at(0) == '\n'
 	|| line.at(0) == '\0')

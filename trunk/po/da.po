@@ -409,7 +409,7 @@ msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:270
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(systemsprog)"
 
@@ -422,7 +422,7 @@ msgstr "(ukendt tid)"
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/menu/options_menu.cpp:447
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -465,7 +465,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Forfattere:"
 
@@ -551,7 +551,7 @@ msgstr "Ændr våbenkatalog"
 msgid "Change weapon countdown"
 msgstr "Ændr våbennedtælling"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:149
 #, fuzzy
 msgid "Character names:"
 msgstr "Kriger"
@@ -560,7 +560,7 @@ msgstr "Kriger"
 msgid "Character switching"
 msgstr "Skift kriger"
 
-#: src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr "Check for opdateringer på nettet?"
 
@@ -622,12 +622,7 @@ msgstr "Konstruér"
 msgid "Controlled by: "
 msgstr "Kontrolleret af: "
 
-#: src/network/download.cpp:79
-#, c-format
-msgid "Couldn't fetch last version from %s"
-msgstr "Kunne ikke checkke efter ny version på %s"
-
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Kunne ikke åbne filen %s"
@@ -669,7 +664,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "SLUT PÅ SPILLET"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr "Lydeffekt volume"
 
@@ -768,7 +763,7 @@ msgstr "Fodboldbombe"
 msgid "Fullscreen / window"
 msgstr "Fuld skærm/vindue"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:93
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
@@ -788,7 +783,7 @@ msgstr "Spil navn:"
 msgid "Gnu Launcher"
 msgstr "Gnukaster"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:123
 msgid "Graphic"
 msgstr "Grafik"
 
@@ -812,16 +807,12 @@ msgstr "Banen klargøres..."
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/tool/file_tools.cpp:186
-msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
-
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:237
 msgid "Have a good game!"
 msgstr "Hav et godt spil!"
 
-#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Hovedkommandør"
@@ -885,7 +876,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynd dig, du er for langsom!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -949,7 +940,7 @@ msgstr "Hop baglæns"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Fjerner spilleren under navnet <nickname> fra spillet"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr "Sprog"
 
@@ -994,7 +985,7 @@ msgstr "Baner"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Spilmodus"
@@ -1007,7 +998,7 @@ msgstr "Maksimum energi"
 msgid "Max number of players:"
 msgstr "Maksimum antal spillere:"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:97
 msgid "Maximum FPS"
 msgstr "Maksimum FPS"
 
@@ -1015,7 +1006,7 @@ msgstr "Maksimum FPS"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:203
 msgid "Misc"
 msgstr "Andet"
 
@@ -1047,11 +1038,11 @@ msgstr "Flyt kameraet med mus eller piletaster"
 msgid "Move character"
 msgstr "Flyt kriger"
 
-#: src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr "Musik volume"
 
-#: src/menu/options_menu.cpp:211
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Musik?"
 
@@ -1068,7 +1059,7 @@ msgstr "Aldrig"
 msgid "New network game at "
 msgstr "Nyt netværksspil på"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr "Ny spiller notifikation?"
 
@@ -1136,11 +1127,11 @@ msgstr "Spil flere gange"
 msgid "Player"
 msgstr "Spiller"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Vis krigernes energi?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Vis krigernes navne?"
 
@@ -1161,7 +1152,7 @@ msgstr "Offentlige kampe"
 msgid "Quit"
 msgstr "Afslut"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
@@ -1185,7 +1176,7 @@ msgstr "Læser standard konfigureringsfil"
 msgid "Reading personal config file"
 msgstr "Læser personlig konfigureringsfil"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:119
 msgid "Resolution"
 msgstr "Opløsning"
 
@@ -1201,11 +1192,11 @@ msgstr "Kører spillet"
 msgid "Say: "
 msgstr "Sig: "
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 msgid "Scroll border size"
 msgstr "Scroll-kant-størrelse"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Scroll on border"
 msgstr "Rul ved kanten"
 
@@ -1277,15 +1268,15 @@ msgstr ""
 "version er %s. Du kan downloade en opdateret version af Wormux på http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:253
+#: src/menu/options_menu.cpp:251
 msgid "Sound"
 msgstr "Lyd"
 
-#: src/menu/options_menu.cpp:221
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
@@ -1330,7 +1321,7 @@ msgstr "Hold-statistik"
 msgid "Teams"
 msgstr "Hold"
 
-#: src/menu/options_menu.cpp:187
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr "Holdeditor"
 
@@ -1466,13 +1457,13 @@ msgstr "Ukendt kommando"
 msgid "Unlimited"
 msgstr "Ubegrænset"
 
-#: src/main.cpp:199
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:455
-#, c-format
-msgid "Version verification failed because: %s\n"
+#: src/menu/options_menu.cpp:453
+#, fuzzy, c-format
+msgid "Version verification failed because: %s"
 msgstr "Version-verifikation fejlede fordi: %s\n"
 
 #: src/menu/network_menu.cpp:257
@@ -1482,7 +1473,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! Spiller %i er ikke klar endnu!"
 msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
-#: src/menu/network_menu.cpp:452
+#: src/menu/network_menu.cpp:450
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
@@ -1496,7 +1487,7 @@ msgstr "Våben: Affyr / bonusboks: falder hurtigt"
 msgid "Weapons"
 msgstr "Våben"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Hjemmeside: "
 
@@ -1512,7 +1503,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s – han blev dræbt af en simpel pistol!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
@@ -1520,11 +1511,11 @@ msgstr "Vindpartikler?"
 msgid "Winner"
 msgstr "Vinder"
 
-#: src/main.cpp:211
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1548,7 +1539,7 @@ msgstr "Du er alene :-/"
 msgid "You are alone..."
 msgstr "Du er alene..."
 
-#: src/menu/network_menu.cpp:395
+#: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1620,6 +1611,12 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#~ msgid "Couldn't fetch last version from %s"
+#~ msgstr "Kunne ikke checkke efter ny version på %s"
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
 #~ msgid "Pause"
 #~ msgstr "Pause"

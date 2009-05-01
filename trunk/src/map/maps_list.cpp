@@ -28,7 +28,7 @@
 #include "graphic/surface.h"
 #include "tool/resource_manager.h"
 #include <WORMUX_debug.h>
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include "tool/random.h"
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
