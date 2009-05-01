@@ -468,7 +468,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковалня"
 
-#: src/main.cpp:298
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1155,7 +1155,7 @@ msgstr "Публични Битки"
 msgid "Quit"
 msgstr "Излез!"
 
-#: src/main.cpp:273
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
@@ -1187,7 +1187,7 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:81
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Пусни играта"
 
@@ -1261,7 +1261,7 @@ msgstr "Някой е сложил капан в съндъка!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Съжалявам, в момента няма игра, която да изчаква за играчи"
 
-#: src/menu/network_connection_menu.cpp:324 src/network/index_server.cpp:244
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1459,7 +1459,7 @@ msgstr "Непозната команда"
 msgid "Unlimited"
 msgstr "Безкраен"
 
-#: src/main.cpp:203
+#: src/main.cpp:202
 msgid "Version"
 msgstr "версия"
 
@@ -1489,7 +1489,7 @@ msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:307
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Страница: "
 
@@ -1514,11 +1514,11 @@ msgstr "Красотички носени от вятъра?"
 msgid "Winner"
 msgstr "Победител"
 
-#: src/main.cpp:215
+#: src/main.cpp:214
 msgid "Wormux launching..."
 msgstr "Wormux се зарежда..."
 
-#: src/main.cpp:297
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 

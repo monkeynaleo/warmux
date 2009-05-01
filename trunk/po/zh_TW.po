@@ -453,7 +453,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "鐵砧"
 
-#: src/main.cpp:298
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "作者:"
 
@@ -863,7 +863,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快點,伙計你也太慢了!"
 
-#: src/main.cpp:284
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1143,7 +1143,7 @@ msgstr "推出戰斗"
 msgid "Quit"
 msgstr "結束"
 
-#: src/main.cpp:273
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "結束"
 
@@ -1176,7 +1176,7 @@ msgstr "解析度"
 msgid "Riot Bomb"
 msgstr "爆炸彈"
 
-#: src/main.cpp:81
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "執行游戲"
 
@@ -1252,7 +1252,7 @@ msgstr "有人在箱子裡布置了炸彈作禮物!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
-#: src/menu/network_connection_menu.cpp:324 src/network/index_server.cpp:244
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1451,7 +1451,7 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(無限的)"
 
-#: src/main.cpp:203
+#: src/main.cpp:202
 msgid "Version"
 msgstr "版本"
 
@@ -1480,7 +1480,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:307
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "網站Website: "
 
@@ -1505,11 +1505,11 @@ msgstr "風來了?"
 msgid "Winner"
 msgstr "勝者"
 
-#: src/main.cpp:215
+#: src/main.cpp:214
 msgid "Wormux launching..."
 msgstr "准備中, Wormux!!!"
 
-#: src/main.cpp:297
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr " Wormux 版本"
 

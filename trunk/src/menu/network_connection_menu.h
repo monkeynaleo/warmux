@@ -26,7 +26,7 @@
 #include <list>
 #include "menu.h"
 #include "network/network.h"
-#include "network/index_server.h" // for GameServerInfo
+#include <WORMUX_index_server.h> // for GameServerInfo
 
 // Forward declarations
 class Button;

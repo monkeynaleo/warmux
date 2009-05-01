@@ -471,7 +471,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Bigorna"
 
-#: src/main.cpp:298
+#: src/main.cpp:297
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Corra, você está muito devagar !!"
 
-#: src/main.cpp:284
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1159,7 +1159,7 @@ msgstr "Batalhas públicas"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:273
+#: src/main.cpp:272
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
@@ -1191,7 +1191,7 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:81
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "Iniciar jogo"
 
@@ -1265,7 +1265,7 @@ msgstr "Alguém colocou uma armadilha no caixote!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpe, atualmente nenhum jogo está esperando jogadores"
 
-#: src/menu/network_connection_menu.cpp:324 src/network/index_server.cpp:244
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1464,7 +1464,7 @@ msgstr "Comando desconhecido"
 msgid "Unlimited"
 msgstr "Ilimitado"
 
-#: src/main.cpp:203
+#: src/main.cpp:202
 msgid "Version"
 msgstr "Versão"
 
@@ -1494,7 +1494,7 @@ msgstr "Arma: Fogo / Caixa bônus: cai rápido"
 msgid "Weapons"
 msgstr "Armas:"
 
-#: src/main.cpp:307
+#: src/main.cpp:306
 msgid "Website: "
 msgstr "Site: "
 
@@ -1518,11 +1518,11 @@ msgstr "Partículas de vento?"
 msgid "Winner"
 msgstr "Vencedor"
 
-#: src/main.cpp:215
+#: src/main.cpp:214
 msgid "Wormux launching..."
 msgstr "Iniciando wormux..."
 
-#: src/main.cpp:297
+#: src/main.cpp:296
 msgid "Wormux version "
 msgstr "Wormux versão "
 
