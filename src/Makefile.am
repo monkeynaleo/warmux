@@ -111,7 +111,6 @@ wormux_SOURCES = \
         network/admin_commands.cpp network/admin_commands.h \
         network/chat.cpp network/chat.h \
         network/chatlogger.cpp network/chatlogger.h \
-        network/index_server.cpp network/index_server.h \
         network/net_error_msg.cpp network/net_error_msg.h \
         network/network_client.cpp network/network_client.h \
         network/network.cpp network/network.h \

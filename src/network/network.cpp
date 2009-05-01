@@ -24,7 +24,7 @@
 #include <WORMUX_debug.h>
 #include <WORMUX_distant_cpu.h>
 #include <WORMUX_player.h>
-#include "network/index_server.h"
+#include <WORMUX_index_server.h>
 #include "network/network.h"
 #include "network/network_local.h"
 #include "network/network_client.h"

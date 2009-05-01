@@ -24,8 +24,8 @@
 #include <SDL_net.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
+#include <WORMUX_index_server.h>
 #include <WORMUX_random.h>
-#include "network/index_server.h"
 
 IndexServer::IndexServer():
   server_lst(),

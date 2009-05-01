@@ -31,6 +31,7 @@
 #endif
 #include <SDL.h>
 #include <WORMUX_debug.h>
+#include <WORMUX_index_server.h>
 #include <WORMUX_random.h>
 #include <WORMUX_singleton.h>
 #include "game/config.h"
@@ -52,7 +53,6 @@
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
 #include "menu/skin_menu.h"
-#include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 
