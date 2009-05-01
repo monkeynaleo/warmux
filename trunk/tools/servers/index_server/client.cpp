@@ -48,23 +48,28 @@ HostOptions::HostOptions()
 {
   game_name = "";
   passwd = false;
-  used = false;
 }
 
 bool HostOptions::Set(const std::string & _game_name, bool _passwd)
 {
-  if (used) {
-    DPRINT(MSG, "Game Name and passwd already set");
+  if (game_name != "")
     return false;
-  }
 
   game_name = _game_name;
   passwd = _passwd;
-  used = true;
 
   return true;
 }
 
+bool HostOptions::UsePassword() const
+{
+  return passwd;
+}
+
+const std::string& HostOptions::GetGameName() const
+{
+  return game_name;
+}
 
 Client::Client(int client_fd, unsigned int & ip)
 {
@@ -330,13 +335,10 @@ bool Client::SendList()
 	return false;
       if (!SendInt(client->second->port))
 	return false;
-      if (!SendInt(client->second->options.passwd))
+      if (!SendInt(client->second->options.UsePassword()))
 	return false;
-
-      if (client->second->options.used) {
-	if (!SendStr(client->second->options.game_name))
+      if (!SendStr(client->second->options.GetGameName()))
 	  return false;
-      }
     }
   }
 
@@ -348,13 +350,10 @@ bool Client::SendList()
       return false;
     if (!SendInt(client->second.port))
       return false;
-    if (!SendInt(client->second.options.passwd))
+    if (!SendInt(client->second.options.UsePassword()))
       return false;
-
-    if (client->second.options.used) {
-      if (!SendStr(client->second.options.game_name))
-	return false;
-    }
+    if (!SendStr(client->second.options.GetGameName()))
+      return false;
   }
 
   return true;
@@ -381,15 +380,10 @@ void Client::NotifyServers(bool joining)
       return /*false*/;
 
     if (joining) {
-      if (!SendInt(serv->second->options.used))
+      if (!SendStr(serv->second->options.GetGameName()))
 	return /*false*/;
-
-      if (serv->second->options.used) {
-	if (!SendStr(serv->second->options.game_name))
-	  return /*false*/;
-	if (!SendInt(serv->second->options.passwd))
-	  return /*false*/;
-      }
+      if (!SendInt(serv->second->options.UsePassword()))
+	return /*false*/;
     }
   }
 
