@@ -63,32 +63,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s فریم بر ثانیه"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s خودکشی کرد!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) مرد."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s در آب افتاد."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s از نقشه بیرون افتاد."
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s کشته شد، بخاطر اینکه او یک احمق بود!"
@@ -104,7 +104,7 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s %u انرژی برنده شد!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s یک موجود روانی است، او یکی از اعضای تیم %s را به کشتن داد."
@@ -125,7 +125,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "تیم %s نوبت خود را خارج کرد."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -194,7 +194,7 @@ msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "تیم %s برنده‌ی %u شیطونک شد! کووورتییییش!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -289,7 +289,7 @@ msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "تیم %s برنده‌ی %u بمب تخریبی شد!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -341,7 +341,7 @@ msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "تیم %s برنده‌ی %u خروج از نوبت شد! می‌دونم خیلی دوسش داری!"
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -353,7 +353,7 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -464,7 +464,7 @@ msgstr "مشعل"
 msgid "Bounce Ball"
 msgstr "شیطونک"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "بای بای تاکس..."
 
@@ -490,12 +490,12 @@ msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کرد (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Center camera to character"
 msgstr "تعداد کاراکترها"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr ""
 
@@ -546,11 +546,11 @@ msgstr "حالت کارگیر (کلاینت)"
 msgid "Clumsiest"
 msgstr "احمق‌ترین"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "بمب خوشه‌ای"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 #, fuzzy
 msgid "Cluzooka"
 msgstr "باوکا"
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "انرژی آغازی"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -999,7 +999,7 @@ msgstr "بی‌مصرف‌ترین"
 msgid "Most violent"
 msgstr "وحشی‌ترین"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
@@ -1085,10 +1085,6 @@ msgstr "بادکنک نجات به صورت اتوماتیم فعال خواهد
 #: src/menu/network_connection_menu.cpp:159
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
-msgstr ""
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
 msgstr ""
 
 #: src/menu/main_menu.cpp:59
@@ -1192,7 +1188,7 @@ msgstr "کارگزار حاضر در اینترنت"
 msgid "Server mode"
 msgstr "حالت کارگزار"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "شاتگان"
 
@@ -1205,7 +1201,7 @@ msgstr "گزینه‌ها"
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr ""
 
@@ -1237,7 +1233,7 @@ msgstr ""
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1274,7 +1270,7 @@ msgstr "استوک: "
 msgid "Submachine Gun"
 msgstr "مسلسل"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "سوپر تاکس"
 
@@ -1360,7 +1356,7 @@ msgstr "نارنجک قبل از اینکه عمل کند از زمین جنگ �
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "بقیه منتظر شما هستند! بجنب دیگه!"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "موشک از زمین جنگ خارج شد..."
@@ -1385,7 +1381,7 @@ msgstr[0] "فقط %i تیم وجود دارد."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1447,7 +1443,7 @@ msgstr[0] "صبر کنید! بازیکن %i آماده نیست!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
@@ -1466,7 +1462,7 @@ msgstr "وب‌سایت: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته شد!"

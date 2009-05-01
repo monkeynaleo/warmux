@@ -79,6 +79,13 @@ public:
 			       std::string& client_nickname,
 			       uint client_player_id,
 			       bool client_will_be_master);
+
+  static bool Server_SendStatusToIndexServer(WSocket& index_server_socket,
+					     const std::string& game_name,
+					     bool passwd,
+					     int port);
+
+  static bool KeepConnectionWithIndexServer(WSocket& index_server_socket);
 };
 
 //-----------------------------------------------------------------------------

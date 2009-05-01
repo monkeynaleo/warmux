@@ -69,32 +69,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s εικ./δευτ."
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "O %s από την ομάδα %s αυτοκτόνησε!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "O %s από την ομάδα %s πέθανε."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "O %s από την ομάδα %s έπεσε στο νερό!"
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "O %s από την ομάδα %s έπεσε εκτός χάρτη!"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Ο %s από την ομάδα %s χτύπησε στο έδαφος πολύ δυνατά!"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητα!"
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Ο παίκτης %s κέρδισε %u πόντο ζωής!"
 msgstr[1] "Ο παίκτης %s κέρδισε %u πόντους ζωής!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος της ομάδας του (%s)!"
@@ -132,7 +132,7 @@ msgstr "Η ομάδα %s έχει ήδη άπειρα πυρομαχικά γι�
 msgid "%s team has skipped its turn."
 msgstr "Η ομάδα %s παρέλειψε το γύρο της."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -219,7 +219,7 @@ msgstr[0] "Η ομάδα %s κέρδισε %u μπάλα αναπήδησης! �
 msgstr[1] "Η ομάδα %s κέρδισε %u μπάλες αναπήδησης! Φσσστ Μπόινγκ!"
 
 # L'équipe %s a gagné %u bombe à fragmentation ! Attention à ne pas trop se disperser !
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -334,7 +334,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Η ομάδα %s κέρδισε %u βόμβα διατάραξης!"
 msgstr[1] "Η ομάδα %s κέρδισε %u βόμβες διατάραξης!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -396,7 +396,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u παραλείψεις γύρου!  Ωωω, τι όπλο μεγάλης ισχύος!"
 
 # Depuis quand les pingouins savent voler ??
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -412,7 +412,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Η ομάδα %s αποδεκατίστηκε."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
@@ -525,7 +525,7 @@ msgstr "Λυχνία Συγκόλλησης"
 msgid "Bounce Ball"
 msgstr "Μπάλα Αναπήδησης"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Άντε γεια tux..."
 
@@ -551,11 +551,11 @@ msgstr "Αδύνατον να ανοίξει ο φάκελος με τις ομ�
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις προσωπικές ομάδες (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Κέντραρε την κάμερα στο χαρακτήρα σου"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
@@ -605,12 +605,12 @@ msgid "Clumsiest"
 msgstr "Πιο αδέξιος"
 
 # Grenade à fragmentation
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Χειροβομβίδα διασποράς"
 
 # Bazooka à fragmentation
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Μπαζούκα διασποράς"
 
@@ -933,7 +933,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Αρχική ενέργεια"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1075,7 +1075,7 @@ msgstr "Πιο άχρηστος"
 msgid "Most violent"
 msgstr "Πιο βίαιος"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Μετακίνησε την κάμερα με το ποντίκι ή με τα βέλη"
 
@@ -1159,10 +1159,6 @@ msgstr "Το αλεξίπτωτο ενεργοποιείται αυτομάτω�
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Κωδικός:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Παύση"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1266,7 +1262,7 @@ msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 msgid "Server mode"
 msgstr "Κατάσταση διακομιστή"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Καραμπίνα"
 
@@ -1278,7 +1274,7 @@ msgstr "Δείξε το μενού με τα όπλα"
 msgid "Show/hide interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Δείξε/Κρύψε το μίνι χάρτη"
 
@@ -1313,7 +1309,7 @@ msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1352,7 +1348,7 @@ msgstr "Απόθεμα:"
 msgid "Submachine Gun"
 msgstr "Οπλοπολυβόλο"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "Υπέρ-Tux"
 
@@ -1447,7 +1443,7 @@ msgid "The others are waiting for you! Wake up :-)"
 msgstr "Εσένα θα περιμένουμε; Ξύπνα :-)"
 
 # La roquette est partie dans un autre monde...
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Η ρουκέτα έφυγε για άλλους κόσμους..."
@@ -1475,7 +1471,7 @@ msgstr[1] "Υπάρχουν μόνο %i ομάδες."
 msgid "Time"
 msgstr "Χρόνος"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1546,7 +1542,7 @@ msgstr[1] "Περίμενε! %i παίκτες δεν είναι έτοιμοι 
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
 
@@ -1566,7 +1562,7 @@ msgid "Welcome to %s!"
 msgstr ""
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
@@ -1684,6 +1680,9 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
+
+#~ msgid "Pause"
+#~ msgstr "Παύση"
 
 #~ msgid "Tools"
 #~ msgstr "Εργαλεία"

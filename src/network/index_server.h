@@ -23,14 +23,14 @@
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
+#include <WORMUX_index_svr_msg.h>
+#include <WORMUX_singleton.h>
 #include <WORMUX_socket.h>
 #include <map>
 #include <list>
 #include <string>
 #include <utility>
 #include "network/network.h"
-#include "network/index_svr_msg.h"
-#include <WORMUX_singleton.h>
 
 class GameServerInfo
 {
@@ -54,7 +54,6 @@ class IndexServer : public Singleton<IndexServer>
   // Connection to the server
   WSocket socket;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
-  uint    used;
 
   // Stores the hostname / port of all online servers
   std::map<std::string, int> server_lst;

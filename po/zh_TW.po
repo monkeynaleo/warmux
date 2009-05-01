@@ -66,33 +66,33 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s 自殺啦 !"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 # what about female names?
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -109,7 +109,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他幹掉了 %s 的一個!"
@@ -130,7 +130,7 @@ msgstr "%s 隊有無窮的 %s彈夾!"
 msgid "%s team has skipped its turn."
 msgstr "%s隊本回合沒用啥."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -207,7 +207,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "%s 隊得到 %u 彈力球!"
 msgstr[1] "%s 隊得到 %u 彈力球!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -313,7 +313,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s 隊得到 %u 爆炸彈!"
 msgstr[1] "%s 隊得到 %u 爆炸彈!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -370,7 +370,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 隊得到 %u 暫停! 我知道你喜歡."
 msgstr[1] "%s 隊得到 %u 暫停! 我知道你喜歡."
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -382,7 +382,7 @@ msgstr[1] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -494,7 +494,7 @@ msgstr "吹管"
 msgid "Bounce Ball"
 msgstr "彈力球"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
@@ -520,12 +520,12 @@ msgstr "打不開團隊目錄 (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不開個人團隊目錄(%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Center camera to character"
 msgstr "角色數目"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr ""
 
@@ -576,11 +576,11 @@ msgstr "用戶端型態 "
 msgid "Clumsiest"
 msgstr "最笨手笨腳的"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "集束炸彈"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "開花彈"
 
@@ -883,7 +883,7 @@ msgstr "假如你發現Bug或想要什么游戲特徴, 請發英文郵件給我�
 msgid "Initial energy"
 msgstr "初始耐久"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1028,7 +1028,7 @@ msgstr "最失敗的"
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
@@ -1112,10 +1112,6 @@ msgstr "自動使用"
 #: src/menu/network_connection_menu.cpp:159
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
-msgstr ""
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
 msgstr ""
 
 #: src/menu/main_menu.cpp:59
@@ -1220,7 +1216,7 @@ msgstr "Internet可用伺服器"
 msgid "Server mode"
 msgstr "伺服器設定"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "獵槍"
 
@@ -1233,7 +1229,7 @@ msgstr "選項功能表"
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr ""
 
@@ -1265,7 +1261,7 @@ msgstr "有人在箱子裡布置了炸彈作禮物!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1302,7 +1298,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "沖鋒槍"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "SuperTux-超級企鵝"
 
@@ -1388,7 +1384,7 @@ msgstr "手榴彈離開戰場前發生爆炸"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "別人在等你! 快醒吧:-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "火箭離開了戰場..."
@@ -1413,7 +1409,7 @@ msgstr[1] "只有%i隊"
 msgid "Time"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1484,7 +1480,7 @@ msgstr[1] "請等待! %i沒准備好!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 !"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
@@ -1503,7 +1499,7 @@ msgstr "網站Website: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...無法瞑目!"

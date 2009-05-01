@@ -68,32 +68,32 @@ msgstr "%s a janj kosten dhe %s"
 msgid "%s fps"
 msgstr "%s imaj/s"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:733
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:766
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:724
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:718
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:739
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:746
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
@@ -112,7 +112,7 @@ msgstr[1] "Gwarier %s re gavas %u boynt a nerth!"
 msgstr[2] "Gwarier %s re gavas %u foynt a nerth!"
 msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -133,7 +133,7 @@ msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
 msgid "%s team has skipped its turn."
 msgstr "Para %s re gollas aga thro."
 
-#: src/weapon/cluzooka.cpp:396
+#: src/weapon/cluzooka.cpp:394
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -246,7 +246,7 @@ msgstr[1] "Para %s re waynyas %u bel derlemmel! Boyng!"
 msgstr[2] "Para %s re waynyas %u fel derlemmel! Boyng!"
 msgstr[3] "Para %s re waynyas %u pel derlemmel! Boyng!"
 
-#: src/weapon/cluster_bomb.cpp:206
+#: src/weapon/cluster_bomb.cpp:205
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -389,7 +389,7 @@ msgstr[1] "Para %s re waynyas %u danbellen wustel!"
 msgstr[2] "Para %s re waynyas %u thanbellen wustel!"
 msgstr[3] "Para %s re waynyas %u tanbellen wustel!"
 
-#: src/weapon/shotgun.cpp:135
+#: src/weapon/shotgun.cpp:171
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -466,7 +466,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Para %s re waynyas %u koll-tro! Pur lowen vedhowgh gansans, yn surredi!"
 
-#: src/weapon/supertux.cpp:316
+#: src/weapon/supertux.cpp:328
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -484,7 +484,7 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:753
+#: src/game/game.cpp:754
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
@@ -595,7 +595,7 @@ msgstr "Torchen leski"
 msgid "Bounce Ball"
 msgstr "Pel derlemmel"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:189
 msgid "Bye bye tux..."
 msgstr "Duw genes tux..."
 
@@ -621,11 +621,11 @@ msgstr "Ny yllir ygeri arayel an paraow (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow personal (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Kresenni kamera war berson"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Chanjya person a-lemmyn"
 
@@ -674,11 +674,11 @@ msgstr "Modh omajer"
 msgid "Clumsiest"
 msgstr "Brassa lorden"
 
-#: src/weapon/cluster_bomb.cpp:188
+#: src/weapon/cluster_bomb.cpp:187
 msgid "Cluster Bomb"
 msgstr "Tanbellen Omvrewus"
 
-#: src/weapon/cluzooka.cpp:389
+#: src/weapon/cluzooka.cpp:387
 msgid "Cluzooka"
 msgstr "Omvrewzooka"
 
@@ -984,7 +984,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Nerth orth an dalleth"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:390
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1125,7 +1125,7 @@ msgstr "Moyha heb les"
 msgid "Most violent"
 msgstr "Moyha freudhek"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Movya an kamera gans logosen po sethow"
 
@@ -1208,10 +1208,6 @@ msgstr "An lammlen yw bewhes yn awtomatek."
 #: src/menu/network_connection_menu.cpp:199
 msgid "Password:"
 msgstr "Ger-tremena:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Powes"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1312,7 +1308,7 @@ msgstr "Servyer kavadow y'n Gesrosweyth"
 msgid "Server mode"
 msgstr "Modh servyer"
 
-#: src/weapon/shotgun.cpp:92
+#: src/weapon/shotgun.cpp:128
 msgid "Shotgun"
 msgstr "Helghwon"
 
@@ -1324,7 +1320,7 @@ msgstr "Diskwedhes dewisel arvow"
 msgid "Show/hide interface"
 msgstr "Displegya/kudha ynterfas"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Displegya/kudha korrvappa"
 
@@ -1356,7 +1352,7 @@ msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
-#: src/network/index_server.cpp:245
+#: src/network/index_server.cpp:244
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1395,7 +1391,7 @@ msgstr "Daffar:"
 msgid "Submachine Gun"
 msgstr "Gojynn-gonn"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:241
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1480,7 +1476,7 @@ msgstr "An pinaval tardhus re asas an gaslan kyns omdardha."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "An re erel usi orth dha wortos! Difun! :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:336
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "An fusen awtomatek re asas an gaslan..."
@@ -1507,7 +1503,7 @@ msgstr[3] "Nyns eus saw %i para."
 msgid "Time"
 msgstr "Termyn"
 
-#: src/weapon/cluster_bomb.cpp:189 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1580,7 +1576,7 @@ msgstr[3] "Gortewgh! %i gwarier nyns yns parys hwath!"
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 
@@ -1599,7 +1595,7 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
@@ -1713,6 +1709,9 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#~ msgid "Pause"
+#~ msgstr "Powes"
 
 #~ msgid "Tools"
 #~ msgstr "Toulys"
