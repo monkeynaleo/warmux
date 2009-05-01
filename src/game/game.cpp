@@ -58,7 +58,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/results.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "tool/stats.h"
 
 #ifdef DEBUG

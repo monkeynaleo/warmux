@@ -15,6 +15,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_network.h \
 	./include/WORMUX_player.h \
 	./include/WORMUX_point.h \
+	./include/WORMUX_random.h \
 	./include/WORMUX_rectangle.h \
 	./include/WORMUX_singleton.h \
 	./include/WORMUX_socket.h \
@@ -32,6 +33,7 @@ libwormux_a_SOURCES = \
 	./net/player.cpp \
 	./net/socket.cpp \
 	./tools/debug.cpp \
-	./tools/file_tools.cpp
+	./tools/file_tools.cpp \
+	./tools/random.cpp
 
 AM_CXXFLAGS += -I$(top_srcdir)/lib/wormux/include

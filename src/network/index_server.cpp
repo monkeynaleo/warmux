@@ -28,8 +28,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/index_server.h"
-#include "network/network.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 IndexServer::IndexServer():
   server_lst(),
@@ -263,9 +262,6 @@ connection_state_t IndexServer::HandShake()
 
 bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int port)
 {
-  std::string ack;
-  ASSERT(Network::GetInstance()->IsServer());
-
   if (hidden_server)
     return true;
 

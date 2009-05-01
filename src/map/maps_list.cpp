@@ -29,7 +29,7 @@
 #include "tool/resource_manager.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_file_tools.h>
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 

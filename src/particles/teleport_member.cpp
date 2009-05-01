@@ -21,7 +21,7 @@
 
 #include "particles/teleport_member.h"
 #include "particles/particle.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "map/camera.h"

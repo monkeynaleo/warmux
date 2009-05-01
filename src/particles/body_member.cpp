@@ -22,7 +22,7 @@
 #include "particles/body_member.h"
 #include "particles/particle.h"
 #include "graphic/sprite.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
   Particle("body_member_particle")

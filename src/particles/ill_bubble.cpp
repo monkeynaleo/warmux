@@ -24,7 +24,7 @@
 #include "particles/explosion_smoke.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 // Vibration period of the bubble
 const uint vib_period = 250;

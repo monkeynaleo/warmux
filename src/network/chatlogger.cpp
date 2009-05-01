@@ -3,7 +3,7 @@
 #include <fstream>
 #include "include/base.h"
 #ifdef DEBUG
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #endif
 #include "network/chatlogger.h"
 #include "game/config.h"

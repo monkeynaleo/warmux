@@ -24,7 +24,7 @@
 #include "network/network.h"
 #include "include/action_handler.h"
 #include <WORMUX_debug.h>
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 void RandomSyncGen::InitRandom()
 {
