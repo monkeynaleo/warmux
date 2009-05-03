@@ -92,9 +92,12 @@ private:
   void WaitClients();
   void RejectIncoming();
 
+  bool RegisterToIndexServer(bool is_public);
+
 public:
   bool ServerStart(uint port, uint max_nb_games, uint max_nb_clients,
-		   const std::string& game_name, std::string& password);
+		   const std::string& game_name, std::string& password,
+		   bool is_public);
   void RunLoop();
 
   NetworkGame& GetGame(uint game_id);

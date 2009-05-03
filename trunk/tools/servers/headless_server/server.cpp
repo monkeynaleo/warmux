@@ -17,8 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <WORMUX_error.h>
 #include <WORMUX_action.h>
+#include <WORMUX_error.h>
+#include <WORMUX_i18n.h>
+#include <WORMUX_index_server.h>
+#include <WSERVER_config.h>
 #include <server.h>
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
@@ -178,7 +181,6 @@ GameServer::GameServer() :
   port(0),
   clients_socket_set(NULL)
 {
-  CreateGame(1);
 }
 
 void GameServer::CreateGame(uint game_id)
@@ -231,8 +233,47 @@ std::list<DistantComputer*>& GameServer::GetCpus(uint game_id)
   return GetGame(game_id).GetCpus();
 }
 
+bool GameServer::RegisterToIndexServer(bool is_public)
+{
+  // Register the game to the index server
+  if (!is_public) {
+    IndexServer::GetInstance()->SetHiddenServer();
+    return true;
+  }
+
+  bool index_server;
+  if (config.Get("local_index_server", index_server) && index_server) {
+    DPRINT(INFO, "WARNING: Connect to the LOCAL index server. Use this option only for debugging!");
+    IndexServer::GetInstance()->SetLocal();
+  }
+
+  connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
+  if (conn != CONNECTED) {
+    if (conn == CONN_WRONG_VERSION) {
+      fprintf(stderr, Format(_("Sorry, your version is not supported anymore. "
+			       "Supported version are %s. "
+			       "You can download a updated version "
+			       "on http://www.wormux.org/wiki/download.php"),
+			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
+    } else {
+      fprintf(stderr, "ERROR: Fail to connect to the index server");
+    }
+    return false;
+  }
+
+  bool r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", port);
+  if (!r) {
+    fprintf(stderr, Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %u must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %u must be forwarded on your computer."), port, port).c_str());
+    IndexServer::GetInstance()->Disconnect();
+    return false;
+  }
+
+  return true;
+}
+
 bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
-			     const std::string& _game_name, std::string& _password)
+			     const std::string& _game_name, std::string& _password,
+			     bool is_public)
 {
   max_nb_games = _max_nb_games;
   game_name = _game_name;
@@ -252,9 +293,13 @@ bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients
     return false;
   }
 
+  CreateGame(1);
+
+  if (!RegisterToIndexServer(is_public))
+    return false;
+
   return true;
 }
-
 
 bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& nickname, uint player_id)
 {
@@ -335,6 +380,8 @@ void GameServer::RunLoop()
 {
  loop:
   while (true) {
+
+    IndexServer::GetInstance()->Refresh();
 
     WaitClients();
 
