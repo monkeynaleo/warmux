@@ -24,6 +24,7 @@
 #define TOP_SERVER_MSG_H
 
 #include <string>
+#include <WORMUX_debug.h>
 
 enum IndexServerMsg
 {
@@ -44,6 +45,21 @@ enum IndexServerMsg
 };
 
 const std::string server_list_url = "http://www.wormux.org/server_list";
+
+static inline void DEBUG_PRINT_IDX_SVR_MSG_LIST()
+{
+  if (IsLOGGING("index_server")) {
+    fprintf(stderr, "TS_MSG_VERSION == %d\n", TS_MSG_VERSION);
+    fprintf(stderr, "TS_MSG_HOSTING == %d\n", TS_MSG_HOSTING);
+    fprintf(stderr, "TS_MSG_GET_LIST == %d\n", TS_MSG_GET_LIST);
+    fprintf(stderr, "TS_MSG_PING == %d\n", TS_MSG_PING);
+    fprintf(stderr, "TS_MSG_PONG == %d\n", TS_MSG_PONG);
+    fprintf(stderr, "TS_MSG_WIS_VERSION == %d\n", TS_MSG_WIS_VERSION);
+    fprintf(stderr, "TS_MSG_JOIN_LEAVE == %d\n", TS_MSG_JOIN_LEAVE);
+  } else {
+    fprintf(stderr, "not logging index_server...\n");
+  }
+}
 
 #endif
 
