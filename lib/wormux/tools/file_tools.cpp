@@ -29,6 +29,7 @@
 #  define _WIN32_IE   0x400
 #  include <shlobj.h>
 #  include <io.h>
+#  include <fcntl.h>
 #  include <direct.h>
 #  undef DeleteFile  // windows.h defines it I think
 #else
