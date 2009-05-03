@@ -66,6 +66,10 @@ class IndexServer : public Singleton<IndexServer>
 
   std::string supported_versions;
 
+  // Used to avoid race condition between ping (handled by the network thread)
+  // and other receive (handled by the main thread)
+  SDL_sem* action_sem;
+
   // Transfer functions
   static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
   static bool SendMsg(WSocket& socket, char* buffer, uint& used);
