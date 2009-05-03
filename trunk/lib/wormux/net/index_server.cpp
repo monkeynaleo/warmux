@@ -33,7 +33,6 @@ IndexServer::IndexServer():
   current_server(server_lst.end()),
   hidden_server(false)
 {
-  DEBUG_PRINT_IDX_SVR_MSG_LIST();
   action_sem = SDL_CreateSemaphore(1);
   ASSERT(action_sem);
 }
@@ -276,9 +275,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   uint used = 0;
   char buffer[1024];
 
-  used += WNet::Batch(buffer, (int)TS_MSG_HOSTING);
-  // Reserve 4 bytes for the total message length.
-  used += 4;
+  NewMsg(TS_MSG_HOSTING, buffer, used);
   used += WNet::Batch(buffer+used, game_name);
   used += WNet::Batch(buffer+used, (int)pwd);
   used += WNet::Batch(buffer+used, port);
@@ -403,12 +400,11 @@ void IndexServer::Refresh()
     goto out;
 
   r = socket.ReceiveInt(msg_id);
-  DEBUG_PRINT_IDX_SVR_MSG_LIST();
   MSG_DEBUG("index_server", "received %d\n", msg_id);
   if (!r || msg_id != TS_MSG_PING)
     goto disconnect;
 
-  used += WNet::Batch(buffer, (int)TS_MSG_PONG);
+  NewMsg(TS_MSG_PONG, buffer, used);
   WNet::FinalizeBatch(buffer, used);
   r = socket.SendBuffer(buffer, used);
   if (!r)
