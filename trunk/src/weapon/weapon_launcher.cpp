@@ -265,7 +265,7 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,
     Explosion();
 }
 
-// projectile explode when hiting the ground
+// projectile explode when hitting the ground
 void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/)
 {
   MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());

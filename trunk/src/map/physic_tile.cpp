@@ -479,22 +479,25 @@ bool PhysicTile::GeneratePolygone()
     }
   }
 
+  Point2d min_pixel(0,0);
+  Point2d max_pixel(0,0);
+ 
   if (rect.vertexCount > 2) {
 
     //Verify
     if (m_level > -1) {
 
       for (uint i=0; i<8; i++) {
-	if (pts_state[i]) {
-	  for (uint j=i; j < 8; j++) {
-	    if (pts_state[j]) {
-	      if (m_parent_tile->GetAlpha(Point2i(m_offset.x+abs(pts[i].x-pts[j].x),
+	    if (pts_state[i]) {
+	      for (uint j=i; j < 8; j++) {
+	        if (pts_state[j]) {
+	          if (m_parent_tile->GetAlpha(Point2i(m_offset.x+abs(pts[i].x-pts[j].x),
 						  m_offset.y+abs(pts[i].y-pts[j].y))) == SDL_ALPHA_TRANSPARENT) {
-		return false;
+		        return false;
+	          }
+	        }
 	      }
 	    }
-	  }
-	}
       }
     }
 
@@ -503,24 +506,51 @@ bool PhysicTile::GeneratePolygone()
     PhysicalPolygon* shape = new PhysicalPolygon();
     shape->SetBody(m_parent_tile->GetBody());
 
+
     for (uint i=0; i < 8; i++) {
       if (pts_state[i]) {
 	//std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
 	//std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
 
-	shape->AddPoint(Point2d((double(pts[i].x + m_tile_offset.x) / PIXEL_PER_METER),
-				(double(pts[i].y + m_tile_offset.y) / PIXEL_PER_METER)));
+	    Point2d new_point((double(pts[i].x + m_tile_offset.x) / PIXEL_PER_METER),
+				(double(pts[i].y + m_tile_offset.y) / PIXEL_PER_METER));
+        shape->AddPoint(new_point);
+
+		if(new_point.x < min_pixel.x)
+		{
+			min_pixel.x = new_point.x;
+		}
+		if(new_point.y < min_pixel.y)
+		{
+			min_pixel.y = new_point.y;
+		}
+		if(new_point.x > max_pixel.x)
+		{
+			max_pixel.x = new_point.x;
+		}
+		if(new_point.y < max_pixel.y)
+		{
+			max_pixel.y = new_point.y;
+		}
+		}
       }
-    }
-    shape->SetFriction(GROUND_FRICTION);
+    
 
-    b2FilterData filter_data;
-    filter_data.categoryBits = 0x0004; // Why this is different than upper ??
-    filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
-    shape->SetFilter(filter_data);
-
-    shape->Generate();
-    m_shape = shape;
+	if ((max_pixel.x - min_pixel.x > 0.00001) || (max_pixel.y - min_pixel.y > 0.00001)) {
+	Point2d min_pixel(0,0);
+      shape->SetFriction(GROUND_FRICTION);
+  
+      b2FilterData filter_data;
+      filter_data.categoryBits = 0x0004; // Why this is different than upper ??
+      filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
+      shape->SetFilter(filter_data);
+  
+      shape->Generate();
+      m_shape = shape;
+	} else {
+	  delete shape;
+	  m_is_containing_polygon = false;
+	}
 
   } else {
     return true;

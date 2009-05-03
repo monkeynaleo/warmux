@@ -170,7 +170,7 @@ public:
   void Deselect();
 
   // Gestion de l'arme
-  void Manage();
+  virtual void Manage();
   bool CanChangeWeapon() const ;
 
   // Draw the weapon
