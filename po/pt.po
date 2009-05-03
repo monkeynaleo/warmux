@@ -475,7 +475,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Bigorna"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rápido, tu és lento demais !!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1165,7 +1165,7 @@ msgstr "Batalhas públicas"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
@@ -1197,7 +1197,7 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:80
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Iniciar jogo"
 
@@ -1471,7 +1471,7 @@ msgstr "Comando desconhecido"
 msgid "Unlimited"
 msgstr "Ilimitada"
 
-#: src/main.cpp:202
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Versão"
 
@@ -1500,7 +1500,7 @@ msgstr "Arma: Caixa Fogo / Bonus: cai mais depressa"
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Página Internet: "
 
@@ -1524,11 +1524,11 @@ msgstr "Mostrar as partículas do vento?"
 msgid "Winner"
 msgstr "Vencedor"
 
-#: src/main.cpp:214
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "A iniciar wormux..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormux versão "
 

@@ -555,7 +555,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Anwan"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Awtours:"
 
@@ -962,7 +962,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Gwra feski, re lent os ta!!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1237,7 +1237,7 @@ msgstr "Kasow poblek"
 msgid "Quit"
 msgstr "Kwitya"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Kwitya Wormux"
 
@@ -1269,7 +1269,7 @@ msgstr "Klerder"
 msgid "Riot Bomb"
 msgstr "Tanbellen Wustel"
 
-#: src/main.cpp:80
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Lonchya an gwari"
 
@@ -1545,7 +1545,7 @@ msgstr "Gorhemmyn ankoth"
 msgid "Unlimited"
 msgstr "Heb finwedh"
 
-#: src/main.cpp:202
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Versyon"
 
@@ -1576,7 +1576,7 @@ msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 msgid "Weapons"
 msgstr "Arvow"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Gwiasva: "
 
@@ -1600,11 +1600,11 @@ msgstr "Manylyon gwyns?"
 msgid "Winner"
 msgstr "Gwaynyer"
 
-#: src/main.cpp:214
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Yma Wormux ow lonchya..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Versyon Wormux"
 

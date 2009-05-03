@@ -462,7 +462,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasi"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Autorid:"
 
@@ -867,7 +867,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Kiirusta! Ära ole nii aeglane!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1141,7 +1141,7 @@ msgstr "Jäta lahing sinnapaika"
 msgid "Quit"
 msgstr "Välju"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Välju Wormuxist"
 
@@ -1173,7 +1173,7 @@ msgstr "Eraldusvõime"
 msgid "Riot Bomb"
 msgstr "Raketiheitja"
 
-#: src/main.cpp:80
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Mäng käima"
 
@@ -1445,7 +1445,7 @@ msgstr "Tundmatu käsk"
 msgid "Unlimited"
 msgstr "Piiramatu"
 
-#: src/main.cpp:202
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Väljalase"
 
@@ -1474,7 +1474,7 @@ msgstr "Relv: Tule/hüve laegas: Kukub kähku"
 msgid "Weapons"
 msgstr "Relvad"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Veebileht:"
 
@@ -1498,11 +1498,11 @@ msgstr "Tuuleosakesed?"
 msgid "Winner"
 msgstr "Võitja"
 
-#: src/main.cpp:214
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Wormux käivitub..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormuxi väljalase "
 
