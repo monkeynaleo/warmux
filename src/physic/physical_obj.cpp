@@ -473,6 +473,23 @@ void PhysicalObj::SetBasicShape(const Point2i &newSize, double mass)
   Generate();
 }
 
+
+void PhysicalObj::SetSphericalShape(int newSize, double mass)
+{
+  double phys_radius = double(newSize)/(PIXEL_PER_METER*2);
+
+  // Shape position is relative to body
+  PhysicalCircle *shape = new PhysicalCircle();
+
+  shape->SetRadius(phys_radius);
+  shape->SetMass(mass);
+
+  ClearShapes();
+  m_shapes.push_back(shape);
+
+  Generate();
+}
+
 double PhysicalObj::GetWdouble() const
 {
   ASSERT(m_shapes.size() != 0);

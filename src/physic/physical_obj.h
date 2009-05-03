@@ -170,6 +170,8 @@ public:
 
   // Set/Get size
   void SetBasicShape(const Point2i &newSize, double mass);
+  void SetSphericalShape(int newSize, double mass);
+
   int GetWidth() const;
   int GetHeight() const;
   Point2i GetSize() const;

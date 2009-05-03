@@ -33,9 +33,20 @@ class FireParticle : public Particle
     ~FireParticle();
     void Refresh();
     void Draw();
+
+    void SetVivacity(int i_vivacity) { m_vivacity = i_vivacity; };
+
   protected:
     void SignalDrowning();
     void SignalOutOfMap();
+    void SignalGroundCollision(const Point2d&);
+
+    void Split();
+
+    int m_rebound_count;
+    int m_vivacity;
+    uint m_living_time;
+
 };
 
 #endif /* FIRE_H */

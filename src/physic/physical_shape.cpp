@@ -728,6 +728,8 @@ void PhysicalCircle::Generate()
     m_shape = NULL;
   }
 
+  if(m_radius > 0.01)
+  {
   b2CircleDef shapeDef;
   shapeDef.radius = m_radius;
   shapeDef.localPosition.Set(m_position.x, m_position.y);
@@ -738,6 +740,7 @@ void PhysicalCircle::Generate()
   shapeDef.filter.maskBits = m_filter.maskBits;
   shapeDef.filter.groupIndex = m_filter.groupIndex;
   m_shape = m_body->CreateShape(&shapeDef);
+  }
 }
 
 double PhysicalCircle::GetCurrentMinX() const
