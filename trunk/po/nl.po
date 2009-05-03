@@ -482,7 +482,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1167,7 +1167,7 @@ msgstr "Openbare gevechten"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
@@ -1199,7 +1199,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:80
+#: src/main.cpp:81
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -1473,7 +1473,7 @@ msgstr "Onbekend commando"
 msgid "Unlimited"
 msgstr "Onbegrensd"
 
-#: src/main.cpp:202
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Versie"
 
@@ -1503,7 +1503,7 @@ msgstr "Wapen: Vuren / Bonuskist: snel laten vallen"
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Website: "
 
@@ -1527,11 +1527,11 @@ msgstr "Wind deeltjes?"
 msgid "Winner"
 msgstr "Winnaar"
 
-#: src/main.cpp:214
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormux versie "
 

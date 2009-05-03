@@ -368,6 +368,9 @@ void WSocket::UnLock()
 
 bool WSocket::SendInt_NoLock(const int& nbr)
 {
+  if (!IsConnected())
+    return false;
+
   char packet[4];
   // this is not cute, but we don't want an int -> uint conversion here
   Uint32 u_nbr = *((const Uint32*)&nbr);
@@ -421,6 +424,9 @@ bool WSocket::SendStr(const std::string &str)
 
 bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
 {
+  if (!IsConnected())
+    return false;
+
   // cast is needed to please SDL that does not use const keyword.
   int size = SDLNet_TCP_Send(socket, (void*)(data), len);
   if (size < int(len)) {
@@ -444,6 +450,9 @@ bool WSocket::SendBuffer(const void* data, size_t len)
 
 bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
 {
+  if (!IsConnected())
+    return false;
+
   int received = 0;
 
   while (len) {
@@ -486,6 +495,9 @@ bool WSocket::ReceiveBuffer(void* data, size_t len)
 
 bool WSocket::ReceiveInt_NoLock(int& nbr)
 {
+  if (!IsConnected())
+    return false;
+
   char packet[4];
   Uint32 u_nbr;
 

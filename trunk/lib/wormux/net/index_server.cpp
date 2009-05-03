@@ -260,11 +260,29 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (hidden_server)
     return true;
 
-  bool r = WNet::Server_SendStatusToIndexServer(socket, game_name, pwd, port);
-  if (!r)
-    Disconnect();
+  std::string ack;
+  uint used = 0;
+  char buffer[1024];
 
-  return r;
+  used += WNet::Batch(buffer, (int)TS_MSG_HOSTING);
+  // Reserve 4 bytes for the total message length.
+  used += 4;
+  used += WNet::Batch(buffer+used, game_name);
+  used += WNet::Batch(buffer+used, (int)pwd);
+  used += WNet::Batch(buffer+used, port);
+
+  WNet::FinalizeBatch(buffer, used);
+  bool r = socket.SendBuffer(buffer, used);
+  if (!r)
+    goto disconnect;
+
+  r = socket.ReceiveStr(ack, 5);
+  if (r && ack == "OK")
+    return true;
+
+ disconnect:
+  Disconnect();
+  return false;
 }
 
 std::list<GameServerInfo> IndexServer::GetHostList()
@@ -344,8 +362,24 @@ const std::string& IndexServer::GetSupportedVersions() const
 
 void IndexServer::Refresh()
 {
-  if (WNet::KeepConnectionWithIndexServer(socket))
+  if (!socket.IsReady(100))
     return;
 
+  int msg_id;
+  bool r;
+  uint used = 0;
+  char buffer[16];
+
+  r = socket.ReceiveInt(msg_id);
+  if (!r || msg_id != TS_MSG_PING)
+    goto disconnect;
+
+  used += WNet::Batch(buffer, (int)TS_MSG_PONG);
+  WNet::FinalizeBatch(buffer, used);
+  r = socket.SendBuffer(buffer, used);
+  if (r)
+    return;
+
+ disconnect:
   Disconnect();
 }
