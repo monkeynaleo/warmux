@@ -1535,9 +1535,9 @@ msgid "Version"
 msgstr "Različica"
 
 #: src/menu/options_menu.cpp:453
-#, fuzzy, c-format
+#, c-format
 msgid "Version verification failed because: %s"
-msgstr "Preverjanje različice je spodletelo zaradi: %s\n"
+msgstr "Preverjanje različice je spodletelo zaradi: %s"
 
 #: src/menu/network_menu.cpp:257
 #, c-format
