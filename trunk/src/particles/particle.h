@@ -91,7 +91,7 @@ class Particle : public PhysicalObj
 
  public:
   Particle(const std::string &name);
-  ~Particle();
+  virtual ~Particle();
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
