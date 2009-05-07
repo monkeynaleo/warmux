@@ -273,7 +273,7 @@
       <min_angle>-90</min_angle>
       <max_angle>90</max_angle>
       <nb_ammo>2</nb_ammo>
-      <unit_per_ammo>25</unit_per_ammo>
+      <unit_per_ammo>10</unit_per_ammo>
       <damage>2</damage>
       <explosion_range>3</explosion_range>
       <particle_range>16</particle_range>
