@@ -111,7 +111,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 
 PhysicalObj::~PhysicalObj ()
 {
-
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
   //ClearShapes();
   Desactivate();
