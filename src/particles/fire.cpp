@@ -66,6 +66,8 @@ FireParticle::~FireParticle()
 {
 }
 
+#include <iostream>
+
 void FireParticle::Refresh()
 {
   uint now = Time::GetInstance()->Read();
@@ -90,62 +92,30 @@ void FireParticle::Refresh()
   }
   }
 
-//  float scale = (now - creation_time)/(float)living_time;
- // scale = (1.0 - scale)/2;
-/*  image->Scale(scale, scale);
-
-
-  {
-    SetSphericalShape(image->GetSize().x/2, GetInitialMass());
-    SetCollisionCategory(PROJECTILE);
-    SetCollisionModel(true,false,false,true);
-    Generate();
-  }
-
-  // The position of the object represents its top left corner
-  // So, since we are resizing the object, we have to move it
-  // to make it appear at the same place
-*/
   if (on_ground || IsColliding())
   {
     if (!on_ground) {
       JukeBox::GetInstance()->Play("default","fire/touch_ground");
     }
     on_ground = true;
-
-
-    if ((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
-    {
-
-
-     Point2i expl_pos = GetPosition() /*+ GetSize()*/;
-    //  expl_pos.x -= GetWidth()/2;
-     // m_left_time_to_live = 0;
-     // ApplyExplosion(expl_pos, fire_cfg, "", false, ParticleEngine::LittleESmoke);
-   //   fire_cfg.explosion_range = (uint)(scale * image->GetWidth()) + 1;
-    //  fire_cfg.particle_range = (uint)(1.1 * scale * image->GetWidth()) + 1;
-      Point2i pos=GetPosition();
-
-      if(RandomSync().GetLong(0, 5000) < m_vivacity )
-      {
-       // ParticleEngine::AddNow(pos, 1, particle_FIRE, true, 0, 10);
-        if(RandomSync().GetLong(0, 5000) < m_vivacity )
-        {
-         //   ParticleEngine::AddNow(pos, 1, particle_FIRE, true, 0, 20);
-
-        }
-      }
-     // ParticleEngine::AddNow(pos, 2, particle_SMOKE, true, 0, 1);
-    }
-
-   // double angle = cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
-   // image->SetRotation_rad( angle);
   }
-  else
-  {
-   // double angle = GetSpeedAngle();
-   // image->SetRotation_rad((angle - M_PI_2));
-  }
+ 
+
+  double oscil_max =0.25; // 1 = 180°
+  double oscil_period = 1000;
+  std::cout<<"Now   : "<<now-m_living_time<<std::endl;
+  double oscil_pourcentage = (2 * double((now+m_living_time) % (uint) oscil_period)/oscil_period) - 1; //range [-1, 1]
+  if (oscil_pourcentage<0) { oscil_pourcentage *= -1;} //range [0,1]
+  std::cout<<"Perc  : "<<oscil_pourcentage<<std::endl;
+  std::cout<<"Cos   : "<<( (2*oscil_pourcentage - 1) * oscil_max)<<std::endl;
+
+  double angle =  acos( (2*oscil_pourcentage - 1) * oscil_max); // move range from [0,1] to [-oscil_max,oscil_max]
+  std::cout<<"Angle : "<<angle<<std::endl;
+  std::cout<<"Angle : "<<360*angle/(2 * M_PI)<<std::endl;
+  
+  image->SetRotation_rad( angle - M_PI /2);
+  
+
 
   m_last_refresh = now;
 }
