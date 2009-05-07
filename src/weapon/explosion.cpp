@@ -83,8 +83,7 @@ void ApplyExplosion_common (const Point2i &pos,
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(team, character)
   {
-	//Suppose that character radius is 20
-    double distance = pos.Distance((*character) -> GetCenter())- 20;
+    double distance = pos.Distance((*character) -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
 
