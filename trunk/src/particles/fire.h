@@ -40,6 +40,7 @@ class FireParticle : public Particle
     void SignalDrowning();
     void SignalOutOfMap();
     void SignalGroundCollision(const Point2d&);
+    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
 
     void Split();
 

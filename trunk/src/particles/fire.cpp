@@ -191,6 +191,14 @@ void FireParticle::SignalGroundCollision(const Point2d&)
 
 }
 
+void FireParticle::SignalObjectCollision(PhysicalObj * obj,
+		                                       PhysicalShape * /*shape*/,
+											   const Point2d& my_speed_before)
+{
+  obj->SetEnergyDelta(-1);
+  obj->AddSpeed(1, my_speed_before.ComputeAngle());
+}
+
 void FireParticle::Split()
 {
 
