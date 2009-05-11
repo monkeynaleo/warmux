@@ -80,7 +80,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   UpdateTranslationStrings();
 
   m_category = RIFLE;
-
+  m_shoot_in_burst = 0;
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
@@ -128,6 +128,12 @@ bool SubMachineGun::p_Shoot()
                   5.0 + (Time::GetInstance()->Read() % 6));
 
   announce_missed_shots = false;
+  if(m_shoot_in_burst >=3)
+  {
+   m_shoot_in_burst = 0;
+  }
+  m_shoot_in_burst++;
+  
   return true;
 }
 
@@ -144,5 +150,20 @@ std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_c
             "%s team has won %u submachine gun!",
             "%s team has won %u submachine guns!",
             items_count), TeamName, items_count);
+}
+
+void SubMachineGun::Manage()
+{
+   if(m_last_fire_time !=0 && EnoughAmmoUnit() && m_shoot_in_burst < 3)
+   {
+	   RepeatShoot();
+   }
+   WeaponLauncher::Manage();
+}
+
+void SubMachineGun::p_Select()
+{
+  WeaponLauncher::p_Select();
+  m_shoot_in_burst = 0;
 }
 
