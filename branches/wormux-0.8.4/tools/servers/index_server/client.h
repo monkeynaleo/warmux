@@ -24,14 +24,17 @@
 #include <WSERVER_index_msg.h>
 #include "net_data.h"
 
-class HostOptions {
- public:
+class HostOptions
+{
   std::string game_name;
-  bool        passwd;
-  bool        used;
+  bool passwd;
 
+public:
   HostOptions();
   bool Set(const std::string & game_name, bool pwd);
+
+  bool UsePassword() const;
+  const std::string& GetGameName() const;
 };
 
 class Client : public NetData

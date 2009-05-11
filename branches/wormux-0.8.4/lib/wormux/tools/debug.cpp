@@ -18,6 +18,7 @@
  ******************************************************************************/
 
 #include <iostream>
+#include <cstdio>
 #include <vector>
 #include <string>
 #include <string.h>

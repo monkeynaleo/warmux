@@ -42,7 +42,7 @@
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include <WORMUX_point.h>
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include <WORMUX_rectangle.h>
 #include "weapon/weapon_launcher.h"
 

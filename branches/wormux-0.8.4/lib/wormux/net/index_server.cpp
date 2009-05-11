@@ -22,24 +22,19 @@
 
 #include <assert.h>
 #include <SDL_net.h>
-#include "network/download.h"
-#include "game/config.h"
-#include "graphic/video.h"
-#include "include/app.h"
-#include "include/constant.h"
-#include "network/index_server.h"
-#include "network/index_svr_msg.h"
-#include "network/network.h"
 #include <WORMUX_debug.h>
-#include "tool/random.h"
+#include <WORMUX_download.h>
+#include <WORMUX_index_server.h>
+#include <WORMUX_random.h>
 
 IndexServer::IndexServer():
-  used(0),
   server_lst(),
   first_server(server_lst.end()),
   current_server(server_lst.end()),
   hidden_server(false)
 {
+  action_sem = SDL_CreateSemaphore(1);
+  ASSERT(action_sem);
 }
 
 IndexServer::~IndexServer()
@@ -47,6 +42,8 @@ IndexServer::~IndexServer()
   server_lst.clear();
   if (IsConnected())
     Disconnect();
+
+  SDL_DestroySemaphore(action_sem);
 }
 
 bool IndexServer::IsConnected()
@@ -56,7 +53,7 @@ bool IndexServer::IsConnected()
 
 
 /*************  Connection  /  Disconnection  ******************/
-connection_state_t IndexServer::Connect()
+connection_state_t IndexServer::Connect(const std::string& wormux_version)
 {
   connection_state_t r = CONN_REJECTED;
 
@@ -85,7 +82,7 @@ connection_state_t IndexServer::Connect()
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried))
   {
-    r = ConnectTo(addr, port);
+    r = ConnectTo(addr, port, wormux_version);
     if (r == CONNECTED)
       return r;
   }
@@ -96,7 +93,8 @@ connection_state_t IndexServer::Connect()
   return r;
 }
 
-connection_state_t IndexServer::ConnectTo(const std::string & address, const int & port)
+connection_state_t IndexServer::ConnectTo(const std::string& address, const int& port,
+					  const std::string& wormux_version)
 {
   connection_state_t r;
 
@@ -112,7 +110,7 @@ connection_state_t IndexServer::ConnectTo(const std::string & address, const int
     goto error;
   }
 
-  r = HandShake();
+  r = HandShake(wormux_version);
   if (r != CONNECTED)
     goto err_handshake;
 
@@ -186,50 +184,42 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 }
 
 /*************  Basic transmissions  ******************/
-void IndexServer::NewMsg(IndexServerMsg msg_id)
+void IndexServer::NewMsg(IndexServerMsg msg_id, char* buffer, uint& used)
 {
   assert(used == 0);
-  Batch((int)msg_id);
+  used += WNet::Batch(buffer+used, (int)msg_id);
   // Reserve 4 bytes for the total message length.
   used += 4;
 }
 
-void IndexServer::Batch(const int& nbr)
-{
-  assert(used+4 < INDEX_SERVER_BUFFER_LENGTH);
-  used += WNet::Batch(buffer+used, nbr);
-}
-
-void IndexServer::Batch(const std::string &str)
-{
-  assert(used+4+str.size() < INDEX_SERVER_BUFFER_LENGTH);
-  used += WNet::Batch(buffer+used, str);
-}
-
-bool IndexServer::SendMsg()
+bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
 {
   WNet::FinalizeBatch(buffer, used);
+  assert(used < INDEX_SERVER_BUFFER_LENGTH);
 
   bool r = socket.SendBuffer(buffer, used);
   used = 0;
   return r;
 }
 
-connection_state_t IndexServer::HandShake()
+connection_state_t IndexServer::HandShake(const std::string& wormux_version)
 {
   connection_state_t status = CONN_REJECTED;
   bool r;
   int msg;
   std::string sign;
 
+  SDL_SemWait(action_sem);
+
   MSG_DEBUG("index_server", "Beginning handshake...");
 
-  NewMsg(TS_MSG_VERSION);
-  Batch(Constants::WORMUX_VERSION);
+  uint used = 0;
+  NewMsg(TS_MSG_VERSION, buffer, used);
+  used += WNet::Batch(buffer+used, wormux_version);
 
   MSG_DEBUG("index_server", "Sending information...");
 
-  r = SendMsg();
+  r = SendMsg(socket, buffer, used);
   if (!r)
     goto error;
 
@@ -253,11 +243,8 @@ connection_state_t IndexServer::HandShake()
     r = socket.ReceiveStr(sign, 20);
     if (!r)
       sign = "";
-    AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
-				     "Supported version are %s. "
-				     "You can download a updated version "
-				     "on http://www.wormux.org/wiki/download.php"),
-				   sign.c_str()));
+
+    supported_versions = sign;
     goto error;
   }
 
@@ -267,34 +254,55 @@ connection_state_t IndexServer::HandShake()
   MSG_DEBUG("index_server", "Handshake : OK");
 
   status = CONNECTED;
+  SDL_SemPost(action_sem);
+
   return status;
 
  error:
   MSG_DEBUG("index_server", "Handshake : ERROR!");
+  SDL_SemPost(action_sem);
   return status;
 }
 
 bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int port)
 {
-  std::string ack;
-  ASSERT(Network::GetInstance()->IsServer());
-
   if (hidden_server)
     return true;
 
-  NewMsg(TS_MSG_REGISTER_GAME);
-  Batch(game_name);
-  Batch((int)pwd);
-  SendMsg();
-  NewMsg(TS_MSG_HOSTING);
-  Batch(port);
-  SendMsg();
+  SDL_SemWait(action_sem);
 
-  bool r = socket.ReceiveStr(ack, 5);
-  if (r && ack == "OK")
-    return true;
+  std::string ack;
+  uint used = 0;
+  char buffer[1024];
 
+  NewMsg(TS_MSG_HOSTING, buffer, used);
+  used += WNet::Batch(buffer+used, game_name);
+  used += WNet::Batch(buffer+used, (int)pwd);
+  used += WNet::Batch(buffer+used, port);
+
+  WNet::FinalizeBatch(buffer, used);
+
+  MSG_DEBUG("index_server", "Sending server information - name:%s, port:%d, use pwd:%d\n",
+	    game_name.c_str(), port, pwd);
+  bool r = socket.SendBuffer(buffer, used);
+  if (!r)
+    goto disconnect;
+
+
+  r = socket.ReceiveStr(ack, 5);
+  if (!r || ack != "OK")
+    goto disconnect;
+
+  MSG_DEBUG("index_server", "ACK received \\o/\n",
+	    game_name.c_str(), pwd, port);
+
+  SDL_SemPost(action_sem);
+  return true;
+
+ disconnect:
   Disconnect();
+  SDL_SemPost(action_sem);
+
   return false;
 }
 
@@ -303,13 +311,16 @@ std::list<GameServerInfo> IndexServer::GetHostList()
   std::list<GameServerInfo> lst;
   bool r;
 
-  NewMsg(TS_MSG_GET_LIST);
-  SendMsg();
+  SDL_SemWait(action_sem);
+
+  uint used = 0;
+  NewMsg(TS_MSG_GET_LIST, buffer, used);
+  SendMsg(socket, buffer, used);
 
   int lst_size;
   r = socket.ReceiveInt(lst_size);
   if (!r || lst_size == 0)
-    return lst;
+    goto out;
 
   while (lst_size--)
   {
@@ -318,23 +329,23 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     int nb;
     r = socket.ReceiveInt(nb);
     if (!r)
-      return lst;
+      goto out;
     ip.host = nb;
 
     r = socket.ReceiveInt(nb);
     if (!r)
-      return lst;
+      goto out;
     ip.port = nb;
 
     r = socket.ReceiveInt(nb);
     if (!r)
-      return lst;
+      goto out;
 
     game_server_info.passworded = !!(nb);
 
     r = socket.ReceiveStr(game_server_info.game_name, 40);
     if (!r)
-      return lst;
+      goto out;
 
     const char* dns_addr = SDLNet_ResolveIP(&ip);
     char port[10];
@@ -364,23 +375,46 @@ std::list<GameServerInfo> IndexServer::GetHostList()
 
     lst.push_back(game_server_info);
   }
+
+ out:
+  SDL_SemPost(action_sem);
   return lst;
+}
+
+const std::string& IndexServer::GetSupportedVersions() const
+{
+  return supported_versions;
 }
 
 void IndexServer::Refresh()
 {
-  if (!socket.IsReady(100))
+  if (SDL_SemTryWait(action_sem) != 0)
     return;
 
   int msg_id;
   bool r;
+  uint used = 0;
+  char buffer[16];
+
+  if (!socket.IsReady(100))
+    goto out;
+
   r = socket.ReceiveInt(msg_id);
+  MSG_DEBUG("index_server", "received %d\n", msg_id);
+  if (!r || msg_id != TS_MSG_PING)
+    goto disconnect;
 
-  if (r && msg_id == TS_MSG_PING) {
-    NewMsg(TS_MSG_PONG);
-    SendMsg();
-    return;
-  }
+  NewMsg(TS_MSG_PONG, buffer, used);
+  WNet::FinalizeBatch(buffer, used);
+  r = socket.SendBuffer(buffer, used);
+  if (!r)
+    goto disconnect;
 
+ out:
+  SDL_SemPost(action_sem);
+  return;
+
+ disconnect:
   Disconnect();
+  goto out;
 }

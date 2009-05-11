@@ -28,8 +28,8 @@
 #include "sound/sound_sample.h"
 #include <WORMUX_debug.h>
 
-#include "tool/random.h"
-#include "tool/file_tools.h"
+#include <WORMUX_random.h>
+#include <WORMUX_file_tools.h>
 #include "tool/xml_document.h"
 
 JukeBox::JukeBox()

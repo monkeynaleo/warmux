@@ -43,7 +43,7 @@
 #include "team/custom_team.h"
 #include "team/macro.h"
 #include "tool/math_tools.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "tool/string_tools.h"
 #include "weapon/explosion.h"
 

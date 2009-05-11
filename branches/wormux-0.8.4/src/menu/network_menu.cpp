@@ -36,7 +36,7 @@
 #include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "include/app.h"
-#include "network/index_server.h"
+#include <WORMUX_index_server.h>
 #include "network/network.h"
 #include "network/network_server.h"
 #include "team/teams_list.h"
@@ -339,8 +339,6 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 	msg_box->NewMessage(_("You are alone :-/"), c_red);
       }
     }
-
-    IndexServer::GetInstance()->Refresh();
   }
   else {
     close_menu = true;

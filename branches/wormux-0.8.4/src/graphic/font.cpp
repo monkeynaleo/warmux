@@ -24,7 +24,7 @@
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "map/map.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};

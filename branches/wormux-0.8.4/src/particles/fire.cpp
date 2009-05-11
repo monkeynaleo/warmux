@@ -24,7 +24,7 @@
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "sound/jukebox.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
 

@@ -24,7 +24,7 @@
 #include "particles/particle.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")

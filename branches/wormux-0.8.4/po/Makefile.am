@@ -222,13 +222,6 @@ POTFILES = \
         src/network/chat.h \
         src/network/chatlogger.cpp \
         src/network/chatlogger.h \
-        src/network/download.cpp \
-        src/network/download.h \
-        src/network/index_server.cpp \
-        src/network/index_server.h \
-        src/network/index_svr_msg.h \
-        src/network/irc.cpp \
-        src/network/irc.h \
         src/network/net_error_msg.cpp \
         src/network/net_error_msg.h \
         src/network/network.cpp \
@@ -241,8 +234,6 @@ POTFILES = \
         src/network/network_server.h \
         src/network/randomsync.cpp \
         src/network/randomsync.h \
-        src/network/socket.cpp \
-        src/network/socket.h \
         src/object/barrel.cpp \
         src/object/barrel.h \
         src/object/bonus_box.cpp \
@@ -312,12 +303,8 @@ POTFILES = \
         src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
         src/tool/copynpaste.h \
-        src/tool/file_tools.cpp \
-        src/tool/file_tools.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
-        src/tool/random.cpp \
-        src/tool/random.h \
         src/tool/resource_manager.cpp \
         src/tool/resource_manager.h \
         src/tool/stats.cpp \
@@ -427,7 +414,7 @@ POTFILES = \
         tools/servers/index_server/stat.cpp \
         tools/servers/index_server/stat.h \
         tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h 
+        tools/servers/index_server/sync_slave.h
 
 DOMAIN = $(PACKAGE)
 

@@ -37,6 +37,7 @@
 #include <SDL_timer.h>
 #include <WORMUX_error.h>
 #include <WORMUX_i18n.h>
+#include <WORMUX_index_svr_msg.h>
 #include <WORMUX_network.h>
 #include <WORMUX_socket.h>
 
@@ -400,3 +401,4 @@ bool WNet::Server_HandShake(WSocket& client_socket,
   }
   return ret;
 }
+

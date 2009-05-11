@@ -30,6 +30,10 @@
 #include <signal.h>
 #endif
 #include <SDL.h>
+#include <WORMUX_debug.h>
+#include <WORMUX_index_server.h>
+#include <WORMUX_random.h>
+#include <WORMUX_singleton.h>
 #include "game/config.h"
 #include "game/game.h"
 #include "game/time.h"
@@ -41,7 +45,6 @@
 #include "include/app.h"
 #include "include/base.h"
 #include "include/constant.h"
-#include <WORMUX_singleton.h>
 #include "map/map.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
@@ -50,11 +53,8 @@
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
 #include "menu/skin_menu.h"
-#include "network/index_server.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
-#include <WORMUX_debug.h>
-#include "tool/random.h"
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -94,7 +94,9 @@ int AppWormux::Main(void)
 {
   bool quit = false;
 
+#ifndef DEBUG
   try
+#endif
   {
     DisplayLoadingPicture();
 
@@ -173,6 +175,7 @@ int AppWormux::Main(void)
 
     End();
   }
+#ifndef DEBUG
   catch(const std::exception & e)
   {
     std::cerr << std::endl
@@ -187,6 +190,7 @@ int AppWormux::Main(void)
       << "Unexpected exception caught..." << std::endl << std::endl;
     WakeUpDebugger();
   }
+#endif
 
   return 0;
 }
@@ -245,10 +249,7 @@ void AppWormux::RefreshDisplay()
 
 void AppWormux::DisplayError(const std::string &msg)
 {
-  if (singleton == NULL) {
-    std::cerr << msg << std::endl;
-    return;
-  }
+  std::cerr << msg << std::endl;
 
   if (Game::GetInstance()->IsGameLaunched()) {
     // nothing to do

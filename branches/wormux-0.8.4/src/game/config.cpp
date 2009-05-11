@@ -45,7 +45,7 @@
 #include "team/teams_list.h"
 #include <WORMUX_team_config.h>
 #include "tool/resource_manager.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"

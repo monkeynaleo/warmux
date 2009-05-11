@@ -48,23 +48,28 @@ HostOptions::HostOptions()
 {
   game_name = "";
   passwd = false;
-  used = false;
 }
 
 bool HostOptions::Set(const std::string & _game_name, bool _passwd)
 {
-  if (used) {
-    DPRINT(MSG, "Game Name and passwd already set");
+  if (game_name != "")
     return false;
-  }
 
   game_name = _game_name;
   passwd = _passwd;
-  used = true;
 
   return true;
 }
 
+bool HostOptions::UsePassword() const
+{
+  return passwd;
+}
+
+const std::string& HostOptions::GetGameName() const
+{
+  return game_name;
+}
 
 Client::Client(int client_fd, unsigned int & ip)
 {
@@ -131,11 +136,25 @@ bool Client::HandShake(const std::string & version)
 
 bool Client::RegisterWormuxServer()
 {
-  if (BytesReceived() < 4)
-    return true;
+  bool r;
+  std::string game_name;
+  r = ReceiveStr(game_name);
+  if (!r)
+    return false;
 
-  DPRINT(MSG, "This is a server (%s)", version.c_str());
+  int passwd;
+  r = ReceiveInt(passwd);
+  if (!r)
+    return false;
+
+  passwd = !!passwd;
+  r = options.Set(game_name, passwd);
+  if (!r)
+    return false;
+
   is_hosting = true;
+
+  DPRINT(MSG, "game: version=%s name=%s pwd=%s", version.c_str(), game_name.c_str(), (passwd) ? "yes" : "no");
 
   if (nb_server.find(version) != nb_server.end())
     nb_server[ version ]++;
@@ -213,24 +232,6 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
         r = false;
       } else {
         r = SendList();
-      }
-      break;
-
-    case TS_MSG_REGISTER_GAME:
-      {
-        std::string game_name;
-        r = ReceiveStr(game_name);
-        if (!r)
-          goto next_msg;
-
-        int passwd;
-        r = ReceiveInt(passwd);
-        if (!r)
-          goto next_msg;
-
-        passwd = !!passwd;
-        r = options.Set(game_name, passwd);
-        DPRINT(MSG, "game: name=%s pwd=%s", game_name.c_str(), (passwd) ? "yes" : "no");
       }
       break;
 
@@ -334,13 +335,10 @@ bool Client::SendList()
 	return false;
       if (!SendInt(client->second->port))
 	return false;
-      if (!SendInt(client->second->options.passwd))
+      if (!SendInt(client->second->options.UsePassword()))
 	return false;
-
-      if (client->second->options.used) {
-	if (!SendStr(client->second->options.game_name))
+      if (!SendStr(client->second->options.GetGameName()))
 	  return false;
-      }
     }
   }
 
@@ -352,13 +350,10 @@ bool Client::SendList()
       return false;
     if (!SendInt(client->second.port))
       return false;
-    if (!SendInt(client->second.options.passwd))
+    if (!SendInt(client->second.options.UsePassword()))
       return false;
-
-    if (client->second.options.used) {
-      if (!SendStr(client->second.options.game_name))
-	return false;
-    }
+    if (!SendStr(client->second.options.GetGameName()))
+      return false;
   }
 
   return true;
@@ -376,24 +371,19 @@ void Client::NotifyServers(bool joining)
 
     if (!serv->second->SendInt(TS_MSG_JOIN_LEAVE))
       return /*false*/;
-    if (! serv->second->SendStr(version))
+    if (!serv->second->SendStr(version))
       return /*false*/;
-    if (! serv->second->SendInt(GetIP()))
+    if (!serv->second->SendInt(GetIP()))
       return /*false*/;
     // Send the port number : if this client is leaving, send -port
-    if (! serv->second->SendInt(joining? port : -port))
+    if (!serv->second->SendInt(joining? port : -port))
       return /*false*/;
 
     if (joining) {
-      if (!SendInt(serv->second->options.used))
+      if (!serv->second->SendStr(serv->second->options.GetGameName()))
 	return /*false*/;
-
-      if (serv->second->options.used) {
-	if (!SendStr(serv->second->options.game_name))
-	  return /*false*/;
-	if (!SendInt(serv->second->options.passwd))
-	  return /*false*/;
-      }
+      if (!serv->second->SendInt(serv->second->options.UsePassword()))
+	return /*false*/;
     }
   }
 

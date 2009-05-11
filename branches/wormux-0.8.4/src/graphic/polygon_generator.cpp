@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 #include "graphic/polygon_generator.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "tool/affine_transform.h"
 
 const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;

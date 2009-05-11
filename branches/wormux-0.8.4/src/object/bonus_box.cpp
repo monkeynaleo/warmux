@@ -31,7 +31,7 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"

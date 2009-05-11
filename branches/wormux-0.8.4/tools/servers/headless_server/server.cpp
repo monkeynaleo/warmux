@@ -17,8 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <WORMUX_error.h>
 #include <WORMUX_action.h>
+#include <WORMUX_error.h>
+#include <WORMUX_i18n.h>
+#include <WORMUX_index_server.h>
+#include <WSERVER_config.h>
 #include <server.h>
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
@@ -57,8 +60,6 @@ bool NetworkGame::AcceptNewComputers() const
     DPRINT(INFO, "Game %s denies connexion", game_name.c_str());
     return false;
   }
-
-  DPRINT(INFO, "Game %s accepts connexion", game_name.c_str());
 
   return true;
 }
@@ -180,7 +181,6 @@ GameServer::GameServer() :
   port(0),
   clients_socket_set(NULL)
 {
-  CreateGame(0);
 }
 
 void GameServer::CreateGame(uint game_id)
@@ -188,33 +188,39 @@ void GameServer::CreateGame(uint game_id)
   char gamename_c_str[32];
   snprintf(gamename_c_str, 32, "%s-%d", game_name.c_str(), game_id);
   std::string gamename_str(gamename_c_str);
+
   NetworkGame netgame(gamename_str, password);
+  games.insert(std::make_pair(game_id, netgame));
 
   DPRINT(INFO, "Game - %s - created", gamename_str.c_str());
+}
 
-  cpu.insert(std::make_pair(game_id, netgame));
+void GameServer::DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it)
+{
+  DPRINT(INFO, "Game - %s - deleted", gamelst_it->second.GetName().c_str());
+  games.erase(gamelst_it);
 }
 
 const NetworkGame& GameServer::GetGame(uint game_id) const
 {
-  std::map<uint, NetworkGame>::const_iterator cpulst_it;
-  cpulst_it = cpu.find(game_id);
+  std::map<uint, NetworkGame>::const_iterator gamelst_it;
+  gamelst_it = games.find(game_id);
 
-  if (cpulst_it == cpu.end()) {
+  if (gamelst_it == games.end()) {
     ASSERT(false);
   }
-  return (cpulst_it->second);
+  return (gamelst_it->second);
 }
 
 NetworkGame& GameServer::GetGame(uint game_id)
 {
-  std::map<uint, NetworkGame>::iterator cpulst_it;
-  cpulst_it = cpu.find(game_id);
+  std::map<uint, NetworkGame>::iterator gamelst_it;
+  gamelst_it = games.find(game_id);
 
-  if (cpulst_it == cpu.end()) {
+  if (gamelst_it == games.end()) {
     ASSERT(false);
   }
-  return (cpulst_it->second);
+  return (gamelst_it->second);
 }
 
 const std::list<DistantComputer*>& GameServer::GetCpus(uint game_id) const
@@ -227,8 +233,49 @@ std::list<DistantComputer*>& GameServer::GetCpus(uint game_id)
   return GetGame(game_id).GetCpus();
 }
 
-bool GameServer::ServerStart(uint _port, uint max_nb_clients, const std::string& _game_name, std::string& _password)
+bool GameServer::RegisterToIndexServer(bool is_public)
 {
+  // Register the game to the index server
+  if (!is_public) {
+    IndexServer::GetInstance()->SetHiddenServer();
+    return true;
+  }
+
+  bool index_server;
+  if (config.Get("local_index_server", index_server) && index_server) {
+    DPRINT(INFO, "WARNING: Connect to the LOCAL index server. Use this option only for debugging!");
+    IndexServer::GetInstance()->SetLocal();
+  }
+
+  connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
+  if (conn != CONNECTED) {
+    if (conn == CONN_WRONG_VERSION) {
+      fprintf(stderr, Format(_("Sorry, your version is not supported anymore. "
+			       "Supported version are %s. "
+			       "You can download a updated version "
+			       "on http://www.wormux.org/wiki/download.php"),
+			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
+    } else {
+      fprintf(stderr, "ERROR: Fail to connect to the index server");
+    }
+    return false;
+  }
+
+  bool r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", port);
+  if (!r) {
+    fprintf(stderr, Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %u must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %u must be forwarded on your computer."), port, port).c_str());
+    IndexServer::GetInstance()->Disconnect();
+    return false;
+  }
+
+  return true;
+}
+
+bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
+			     const std::string& _game_name, std::string& _password,
+			     bool is_public)
+{
+  max_nb_games = _max_nb_games;
   game_name = _game_name;
   password = _password;
   port = _port;
@@ -246,9 +293,13 @@ bool GameServer::ServerStart(uint _port, uint max_nb_clients, const std::string&
     return false;
   }
 
+  CreateGame(1);
+
+  if (!RegisterToIndexServer(is_public))
+    return false;
+
   return true;
 }
-
 
 bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& nickname, uint player_id)
 {
@@ -266,54 +317,62 @@ void GameServer::RejectIncoming()
   server_socket.Disconnect();
 }
 
+uint GameServer::CreateGameIfNeeded()
+{
+  if (games.size() >= max_nb_games) {
+    DPRINT(INFO, "Max number of games already reached : %d", max_nb_games);
+    return 0;
+  }
+
+  uint game_id = 0;
+  std::map<uint, NetworkGame>::const_iterator gamelst_it;
+  for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
+
+    if (gamelst_it->second.AcceptNewComputers()) {
+      return gamelst_it->first;
+    }
+
+    if (gamelst_it->first > game_id)
+      game_id = gamelst_it->first;
+  }
+
+  game_id++;
+  CreateGame(game_id);
+
+  return game_id;
+}
+
 void GameServer::WaitClients()
 {
-  if (server_socket.IsConnected()) {
+  if (!server_socket.IsConnected())
+    return;
 
-    // Check for an incoming connection
-    WSocket* incoming = server_socket.LookForClient();
-    if (incoming) {
+  // Create a new game if there is no more games accepting players
+  uint game_id = CreateGameIfNeeded();
+  if (!game_id)
+    return;
 
-      DPRINT(INFO, "Connexion from %s\n", incoming->GetAddress().c_str());
+  // Check for an incoming connection
+  WSocket* incoming = server_socket.LookForClient();
+  if (incoming) {
 
-      // Finding first game accepting players
-      uint game_id = 0;
-      uint max_game_id = 0;
-      std::map<uint, NetworkGame>::const_iterator cpulst_it;
-      for (cpulst_it = cpu.begin(); cpulst_it != cpu.end(); cpulst_it++) {
+    DPRINT(INFO, "Connexion from %s\n", incoming->GetAddress().c_str());
 
-	if (cpulst_it->first > max_game_id)
-	  max_game_id = cpulst_it->first;
+    std::string client_nickname;
+    uint player_id = GetGame(game_id).NextPlayerId();
 
-	if (cpulst_it->second.AcceptNewComputers()) {
-	  game_id = cpulst_it->first;
-	  break;
-	}
-      }
-
-      // Creating game if needed
-      if (cpulst_it == cpu.end()) {
-	game_id = max_game_id+1;
-	CreateGame(game_id);
-      }
-
-      std::string client_nickname;
-      uint player_id = GetGame(game_id).NextPlayerId();
-
-      if (!HandShake(game_id, *incoming, client_nickname, player_id)) {
-	incoming->Disconnect();
- 	return;
-      }
-
-      clients_socket_set->AddSocket(incoming);
-
-      DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
-      GetGame(game_id).AddCpu(client);
-
-      if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
-	RejectIncoming();
+    if (!HandShake(game_id, *incoming, client_nickname, player_id)) {
+      incoming->Disconnect();
+      return;
     }
-    SDL_Delay(100);
+
+    clients_socket_set->AddSocket(incoming);
+
+    DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
+    GetGame(game_id).AddCpu(client);
+
+    if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
+      RejectIncoming();
   }
 }
 
@@ -321,6 +380,8 @@ void GameServer::RunLoop()
 {
  loop:
   while (true) {
+
+    IndexServer::GetInstance()->Refresh();
 
     WaitClients();
 
@@ -334,13 +395,13 @@ void GameServer::RunLoop()
     void * buffer;
     size_t packet_size;
 
-    std::map<uint, NetworkGame>::iterator cpulst_it;
+    std::map<uint, NetworkGame>::iterator gamelst_it;
     std::list<DistantComputer*>::iterator dst_cpu;
 
-    for (cpulst_it = cpu.begin(); cpulst_it != cpu.end(); cpulst_it++) {
+    for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
 
-      for (dst_cpu = cpulst_it->second.GetCpus().begin();
-	   dst_cpu != cpulst_it->second.GetCpus().end();
+      for (dst_cpu = gamelst_it->second.GetCpus().begin();
+	   dst_cpu != gamelst_it->second.GetCpus().end();
 	   dst_cpu++) {
 
 	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
@@ -348,8 +409,8 @@ void GameServer::RunLoop()
 	  if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
 	    // An error occured during the reception
 
-	    bool turn_master_lost = (dst_cpu == cpulst_it->second.GetCpus().begin());
-	    dst_cpu = cpulst_it->second.CloseConnection(dst_cpu);
+	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
+	    dst_cpu = gamelst_it->second.CloseConnection(dst_cpu);
 
 	    if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
 	      // A new player will be able to connect, so we reopen the socket
@@ -359,18 +420,18 @@ void GameServer::RunLoop()
 	      server_socket.AcceptIncoming(port);
 	    }
 
-	    if (cpulst_it->second.GetCpus().size() != 0) {
+	    if (gamelst_it->second.GetCpus().size() != 0) {
 	      if (turn_master_lost) {
-		GetGame(cpulst_it->first).ElectGameMaster();
+		GetGame(gamelst_it->first).ElectGameMaster();
 	      }
 	    } else {
-	      cpu.erase(cpulst_it);
+	      DeleteGame(gamelst_it);
 	      goto loop;
 	    }
 
 	  } else {
 
-	    GetGame(cpulst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
+	    GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
 	    free(buffer);
 	  }
 	}

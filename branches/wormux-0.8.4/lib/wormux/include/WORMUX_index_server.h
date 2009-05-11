@@ -23,14 +23,13 @@
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
+#include <WORMUX_index_svr_msg.h>
+#include <WORMUX_singleton.h>
 #include <WORMUX_socket.h>
 #include <map>
 #include <list>
 #include <string>
 #include <utility>
-#include "network/network.h"
-#include "network/index_svr_msg.h"
-#include <WORMUX_singleton.h>
 
 class GameServerInfo
 {
@@ -54,7 +53,6 @@ class IndexServer : public Singleton<IndexServer>
   // Connection to the server
   WSocket socket;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
-  uint    used;
 
   // Stores the hostname / port of all online servers
   std::map<std::string, int> server_lst;
@@ -66,19 +64,24 @@ class IndexServer : public Singleton<IndexServer>
   // If we are a server, tell if we are visible on internet
   bool hidden_server;
 
+  std::string supported_versions;
+
+  // Used to avoid race condition between ping (handled by the network thread)
+  // and other receive (handled by the main thread)
+  SDL_sem* action_sem;
+
   // Transfer functions
-  void NewMsg(IndexServerMsg msg_id);
-  void Batch(const int &nbr);
-  void Batch(const std::string &str);
-  bool SendMsg();
+  static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
+  static bool SendMsg(WSocket& socket, char* buffer, uint& used);
 
   // Gives the address of a server in the list
-  bool GetServerAddress(std::string & address, int & port, uint& nb_tries);
+  bool GetServerAddress(std::string& address, int& port, uint& nb_tries);
   // Connect to a server
-  connection_state_t ConnectTo(const std::string & address, const int & port);
+  connection_state_t ConnectTo(const std::string& address, const int& port,
+			       const std::string& wormux_version);
 
   // Perform a handshake with the server
-  connection_state_t HandShake();
+  connection_state_t HandShake(const std::string& wormux_version);
 
   bool IsConnected();
 
@@ -87,7 +90,7 @@ public:
   ~IndexServer();
 
   // Connect/disconnect to a server
-  connection_state_t Connect();
+  connection_state_t Connect(const std::string& wormux_version);
   void Disconnect();
 
   // Answers to pings from the server / close connection if distantly closed
@@ -104,6 +107,8 @@ public:
 
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<GameServerInfo> GetHostList();
+
+  const std::string& GetSupportedVersions() const;
 };
 
 #endif

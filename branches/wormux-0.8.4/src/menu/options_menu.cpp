@@ -18,10 +18,11 @@
  ******************************************************************************
  * Options menu
  *****************************************************************************/
-
-#include "menu/options_menu.h"
-
+#include <sstream>
+#include <string>
 #include <iostream>
+#include <WORMUX_download.h>
+#include "menu/options_menu.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "game/game_mode.h"
@@ -45,15 +46,12 @@
 #include "gui/question.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
-#include "network/download.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
-#include <sstream>
-#include <string>
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
@@ -452,7 +450,7 @@ void OptionMenu::CheckUpdates()
       }
   }
   catch (const std::string err) {
-    AppWormux::DisplayError(Format(_("Version verification failed because: %s\n"), err.c_str()));
+    AppWormux::DisplayError(Format(_("Version verification failed because: %s"), err.c_str()));
   }
 }
 

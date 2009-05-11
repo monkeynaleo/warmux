@@ -23,7 +23,6 @@
 #define WORMUX_TEAM_CONFIG_H
 
 #include <string>
-#include <WORMUX_types.h> // For uint
 
 class ConfigTeam
 {

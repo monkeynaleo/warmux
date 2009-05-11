@@ -40,7 +40,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
-#include "tool/random.h"
+#include <WORMUX_random.h>
 
 GameClassic::GameClassic()
   : Game()

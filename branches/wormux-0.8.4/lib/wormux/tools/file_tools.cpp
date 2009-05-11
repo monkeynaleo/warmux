@@ -19,16 +19,17 @@
  * Refresh des fichiers.
  *****************************************************************************/
 
-#include "tool/file_tools.h"
 #include <fstream>
 #include <sys/stat.h>
 #include <errno.h>
+#include <cstdlib>
 
 #ifdef WIN32
    // To get SHGetSpecialFolderPath
 #  define _WIN32_IE   0x400
 #  include <shlobj.h>
 #  include <io.h>
+#  include <fcntl.h>
 #  include <direct.h>
 #  undef DeleteFile  // windows.h defines it I think
 #else
@@ -36,6 +37,8 @@
 #  include <unistd.h> // not needed by mingw
 #endif
 
+#include <WORMUX_error.h>
+#include <WORMUX_file_tools.h>
 
 
 // Test if a file exists
@@ -180,7 +183,7 @@ void CloseFolder(FolderSearch *f)
 // Return the path to the home directory of the user
 std::string GetHome()
 {
-  char *txt = getenv("HOME");
+  char *txt = std::getenv("HOME");
 
   if (txt == NULL)
     Error (_("HOME directory (environment variable $HOME) could not be found!"));
@@ -224,6 +227,46 @@ void CloseFolder(FolderSearch *f)
   }
 }
 #endif
+
+// Return the path to the home directory of the user
+std::string GetTmpDir()
+{
+  char *txt = std::getenv("TMPDIR");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TMP");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TEMP");
+  if (txt != NULL)
+    return txt;
+
+#ifndef WIN32
+  return "/tmp";
+#endif
+
+  if (txt == NULL)
+    Error (_("TEMP directory could not be found!"));
+
+  return txt;
+}
+
+std::string CreateTmpFile(const std::string& prefix, int* fd)
+{
+  ASSERT(fd);
+  char path[512];
+  snprintf(path, 512, "%s/%sXXXXXX", GetTmpDir().c_str(), prefix.c_str());
+
+#ifdef WIN32
+  mktemp(path);
+  *fd = open(path, O_RDWR|O_BINARY|O_CREAT|O_EXCL|_O_SHORT_LIVED, _S_IREAD|_S_IWRITE);
+#else
+  *fd = mkstemp(path);
+#endif
+  return path;
+}
 
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory)

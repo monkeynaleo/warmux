@@ -579,7 +579,7 @@ msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:270
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(limba sistemului)"
 
@@ -592,7 +592,7 @@ msgstr "(un moment necunoscut)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:447
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -636,7 +636,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nicovală"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -703,11 +703,11 @@ msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Centrează camera pe personaj"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Schimbă personajul curent"
 
@@ -723,7 +723,7 @@ msgstr "Schimbă categoria armei"
 msgid "Change weapon countdown"
 msgstr "Schimbă cronometrul armei"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:149
 msgid "Character names:"
 msgstr "Numele personajelor:"
 
@@ -731,7 +731,7 @@ msgstr "Numele personajelor:"
 msgid "Character switching"
 msgstr "Schimb de personaje"
 
-#: src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr "Se verifică actualizările online?"
 
@@ -772,7 +772,7 @@ msgstr "Comite suicid"
 msgid "Configuration menu"
 msgstr "Meniu de configurare"
 
-#: src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:165
 msgid "Connect to game"
 msgstr "Conectare la joc"
 
@@ -792,12 +792,7 @@ msgstr "Construiește"
 msgid "Controlled by: "
 msgstr "Controlat de: "
 
-#: src/network/download.cpp:79
-#, c-format
-msgid "Couldn't fetch last version from %s"
-msgstr "Nu s-a putut prelua ultima versiune de la %s"
-
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Nu a fost posibilă deschiderea fișierului %s"
@@ -839,7 +834,7 @@ msgstr "Dinamită"
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr "Volumul efectelor"
 
@@ -890,29 +885,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:393
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Nu a fost posibilă conectarea la %s:%s"
 
-#: src/menu/network_connection_menu.cpp:341
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a găzdui un "
 "joc"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:280
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a căuta un "
 "joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:366
+#: src/menu/network_connection_menu.cpp:373
 msgid "Error: Unable to start server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
-#: src/menu/network_connection_menu.cpp:360
+#: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -943,7 +938,7 @@ msgstr "Bombă-minge de fotbal"
 msgid "Fullscreen / window"
 msgstr "Tot ecranul / fereastră"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:93
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
@@ -955,7 +950,7 @@ msgstr "Joc"
 msgid "Game mode"
 msgstr "Modul jocului"
 
-#: src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:188
 msgid "Game name:"
 msgstr "Numele jocului:"
 
@@ -963,7 +958,7 @@ msgstr "Numele jocului:"
 msgid "Gnu Launcher"
 msgstr "Lansator de antilope gnu"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:123
 msgid "Graphic"
 msgstr "Grafică"
 
@@ -987,16 +982,12 @@ msgstr "Inițializare teren..."
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/tool/file_tools.cpp:186
-msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
-
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:238
 msgid "Have a good game!"
 msgstr "Distracție plăcută!"
 
-#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Comandant șef"
@@ -1015,7 +1006,7 @@ msgstr "Ajutor"
 msgid "High jump"
 msgstr "Salt înalt"
 
-#: src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:212
 msgid "Host a game"
 msgstr "Găzduiește un joc"
 
@@ -1061,7 +1052,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbește-te te miști prea încet!!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1110,7 +1101,7 @@ msgid "Jetpack"
 msgstr "Propulsor personal"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
@@ -1128,7 +1119,7 @@ msgstr "Salt înapoi"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr "Limba"
 
@@ -1155,7 +1146,7 @@ msgstr "Gravitație scăzută"
 # URM1-2
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:129
+#: src/menu/network_connection_menu.cpp:130
 msgid "Manual connection"
 msgstr "Conectare manuală"
 
@@ -1174,7 +1165,7 @@ msgstr "Hărți"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 msgid "Master mode"
 msgstr "Modul server"
 
@@ -1186,7 +1177,7 @@ msgstr "Energie maximă"
 msgid "Max number of players:"
 msgstr "Număr maxim de jucători:"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:97
 msgid "Maximum FPS"
 msgstr "Numărul maxim de C/S"
 
@@ -1194,7 +1185,7 @@ msgstr "Numărul maxim de C/S"
 msgid "Mine"
 msgstr "Mină"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:203
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1218,7 +1209,7 @@ msgstr "Cel mai inutil"
 msgid "Most violent"
 msgstr "Cel mai violent"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Mută camera cu mausul sau săgețile"
 
@@ -1226,11 +1217,11 @@ msgstr "Mută camera cu mausul sau săgețile"
 msgid "Move character"
 msgstr "Mută personajul"
 
-#: src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr "Volumul muzicii"
 
-#: src/menu/options_menu.cpp:211
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Muzică?"
 
@@ -1247,7 +1238,7 @@ msgstr "Niciodată"
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr "Avertisment la jucător nou?"
 
@@ -1297,15 +1288,11 @@ msgstr "Parașută"
 msgid "Parachute is activated automatically."
 msgstr "Parașuta se activează automat."
 
-#: src/menu/network_connection_menu.cpp:121
-#: src/menu/network_connection_menu.cpp:159
-#: src/menu/network_connection_menu.cpp:199
+#: src/menu/network_connection_menu.cpp:122
+#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:200
 msgid "Password:"
 msgstr "Parola:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Pauză"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1319,11 +1306,11 @@ msgstr "Joacă de câteva ori"
 msgid "Player"
 msgstr "Jucător"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Energia jucătorului?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Numele jucătorului?"
 
@@ -1331,12 +1318,12 @@ msgstr "Numele jucătorului?"
 msgid "Polecat Launcher"
 msgstr "Lansator de sconcși"
 
-#: src/menu/network_connection_menu.cpp:148
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:149
+#: src/menu/network_connection_menu.cpp:177
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:109
 msgid "Public battles"
 msgstr "Bătălii publice"
 
@@ -1344,7 +1331,7 @@ msgstr "Bătălii publice"
 msgid "Quit"
 msgstr "Ieșire"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
@@ -1368,7 +1355,7 @@ msgstr "Se citește fișierul implicit de configurare"
 msgid "Reading personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:119
 msgid "Resolution"
 msgstr "Rezoluție"
 
@@ -1384,20 +1371,20 @@ msgstr "Rulează jocul"
 msgid "Say: "
 msgstr "Spune: "
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 msgid "Scroll border size"
 msgstr "Dimensiunea marginii de derulare"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Scroll on border"
 msgstr "Derulare la margine"
 
-#: src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:138
 msgid "Server address:"
 msgstr "Adresa serverului:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:208
 msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
@@ -1419,7 +1406,7 @@ msgstr "Arată meniul de arme"
 msgid "Show/hide interface"
 msgstr "Arată/ascunde interfața"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Arată/ascunde mini-harta"
 
@@ -1447,11 +1434,11 @@ msgstr "Pușcă cu lunetă"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Cineva a pus o capcană în cutie!"
 
-#: src/menu/network_connection_menu.cpp:289
+#: src/menu/network_connection_menu.cpp:288
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
-#: src/network/index_server.cpp:252
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1461,15 +1448,15 @@ msgstr ""
 "Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
 "download.php"
 
-#: src/menu/options_menu.cpp:253
+#: src/menu/options_menu.cpp:251
 msgid "Sound"
 msgstr "Sunet"
 
-#: src/menu/options_menu.cpp:221
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Frecvența sunetului"
 
@@ -1514,7 +1501,7 @@ msgstr "Statistici echipe"
 msgid "Teams"
 msgstr "Echipe"
 
-#: src/menu/options_menu.cpp:187
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr "Editor de echipe"
 
@@ -1653,13 +1640,13 @@ msgstr "Comandă necunoscută"
 msgid "Unlimited"
 msgstr "nelimitat"
 
-#: src/main.cpp:199
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:455
-#, c-format
-msgid "Version verification failed because: %s\n"
+#: src/menu/options_menu.cpp:453
+#, fuzzy, c-format
+msgid "Version verification failed because: %s"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
 
 #: src/menu/network_menu.cpp:257
@@ -1670,11 +1657,11 @@ msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
-#: src/menu/network_menu.cpp:452
+#: src/menu/network_menu.cpp:450
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Armă: Foc / Cutie cu bonus: cade repede"
 
@@ -1683,7 +1670,7 @@ msgstr "Armă: Foc / Cutie cu bonus: cade repede"
 msgid "Weapons"
 msgstr "Arme"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Saitul web: "
 
@@ -1699,7 +1686,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
@@ -1708,11 +1695,11 @@ msgstr "Particulele de vânt?"
 msgid "Winner"
 msgstr "Câștigător"
 
-#: src/main.cpp:211
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Se lansează Wormux..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
@@ -1736,7 +1723,7 @@ msgstr "Nu mai e nimeni în afară de tine :-/"
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
-#: src/menu/network_menu.cpp:395
+#: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
 msgstr "Ești noul șef de tură!"
 
@@ -1810,6 +1797,15 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid "Couldn't fetch last version from %s"
+#~ msgstr "Nu s-a putut prelua ultima versiune de la %s"
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
+
+#~ msgid "Pause"
+#~ msgstr "Pauză"
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Eroare în %s:%lu (Wormux %s) : %s"

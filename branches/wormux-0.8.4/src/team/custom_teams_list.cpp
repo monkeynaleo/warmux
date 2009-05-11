@@ -22,7 +22,7 @@
 #include "game/config.h"
 #include "team/custom_teams_list.h"
 #include "team/custom_team.h"
-#include "tool/file_tools.h"
+#include <WORMUX_file_tools.h>
 
 #include <iostream>
 #include <algorithm>

@@ -214,13 +214,6 @@ wormux_SOURCES = \
         network/chat.h \
         network/chatlogger.cpp \
         network/chatlogger.h \
-        network/download.cpp \
-        network/download.h \
-        network/index_server.cpp \
-        network/index_server.h \
-        network/index_svr_msg.h \
-        network/irc.cpp \
-        network/irc.h \
         network/net_error_msg.cpp \
         network/net_error_msg.h \
         network/network.cpp \
@@ -233,8 +226,6 @@ wormux_SOURCES = \
         network/network_server.h \
         network/randomsync.cpp \
         network/randomsync.h \
-        network/socket.cpp \
-        network/socket.h \
         object/barrel.cpp \
         object/barrel.h \
         object/bonus_box.cpp \
@@ -304,12 +295,8 @@ wormux_SOURCES = \
         tool/affine_transform.h \
         tool/copynpaste.cpp \
         tool/copynpaste.h \
-        tool/file_tools.cpp \
-        tool/file_tools.h \
         tool/isnan.h \
         tool/math_tools.h \
-        tool/random.cpp \
-        tool/random.h \
         tool/resource_manager.cpp \
         tool/resource_manager.h \
         tool/stats.cpp \

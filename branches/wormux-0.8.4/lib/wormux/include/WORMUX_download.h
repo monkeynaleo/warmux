@@ -16,44 +16,45 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des fichiers.
+ * Download a file using libcurl
  *****************************************************************************/
 
-#ifndef FILE_TOOLS_H
-#define FILE_TOOLS_H
-#include "include/base.h"
+#ifndef DOWNLOAD_H
+#define DOWNLOAD_H
 
-// Check if a file exists
-bool DoesFileExist(const std::string &name);
+#include <map>
 
-// Check if the folder exists
-bool IsFolderExist(const std::string &name);
+// Load config about curl...
+#ifdef _MSC_VER
+#  include "msvc/config.h"
+#else
+#  include "config.h"
+#endif
+#include <curl/curl.h>
 
-// Create the folder if it does not exist yet
-bool CreateFolder(const std::string &name);
+#include <WORMUX_singleton.h>
 
-// Delete the folder if it exists
-bool DeleteFolder(const std::string &name);
+class Downloader : public Singleton<Downloader>
+{
+  /* If you need this, implement it (correctly) */
+  Downloader(const Downloader&);
+  const Downloader& operator=(const Downloader&);
+  /**********************************************/
 
+  CURL* curl;
 
-// Delete the file if it exists
-bool DeleteFile(const std::string &name);
+  // Return true if the download was successful
+  bool Get(const char* url, FILE* file) const;
 
-// Find the extension part of a filename
-std::string FileExtension(const std::string &name);
+protected:
+  friend class Singleton<Downloader>;
+  Downloader();
+  ~Downloader();
 
-// Return the path to the home directory of the user
-std::string GetHome ();
-
-// Replace ~ by its true name
-std::string TranslateDirectory(const std::string &directory);
-
-typedef struct _FolderSearch FolderSearch;
-
-FolderSearch *OpenFolder(const std::string& dirname);
-const char* FolderSearchNext(FolderSearch *f);
-void CloseFolder(FolderSearch *f);
-
-std::string FormatFileName(const std::string &name);
+public:
+  std::string GetLatestVersion() const;
+  std::map<std::string, int> GetServerList(std::string list_name) const;
+};
 
 #endif
+

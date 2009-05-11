@@ -392,7 +392,7 @@ msgid "(dead)"
 msgstr "(mortinta)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:270
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr "(sistema lingvo)"
 
@@ -405,7 +405,7 @@ msgstr "(nekonata tempo)"
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
-#: src/menu/options_menu.cpp:447
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -448,7 +448,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Aŭtoroj:"
 
@@ -514,11 +514,11 @@ msgstr "Ne eblas malfermi la dosierujon de teamoj (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 msgid "Center camera to character"
 msgstr "Centrigi la kameraon ĉe la ulo"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr "Ŝanĝi aktivan ulon"
 
@@ -534,7 +534,7 @@ msgstr "Ŝanĝi kategorion de armilo"
 msgid "Change weapon countdown"
 msgstr "Ŝanĝi templimon de armilo"
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:149
 #, fuzzy
 msgid "Character names:"
 msgstr "Ulo"
@@ -543,7 +543,7 @@ msgstr "Ulo"
 msgid "Character switching"
 msgstr "Ulŝanĝo"
 
-#: src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr "Ĉu kontroli la ĝisdatigaĵoj enrete?"
 
@@ -584,7 +584,7 @@ msgstr "Sinmortigi"
 msgid "Configuration menu"
 msgstr "Agordmenuo"
 
-#: src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:165
 msgid "Connect to game"
 msgstr "Konekti al ludo"
 
@@ -605,12 +605,7 @@ msgstr "Konstruilo"
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
-#: src/network/download.cpp:79
-#, c-format
-msgid "Couldn't fetch last version from %s"
-msgstr "Ne ebli elpreni la lastan version el %s"
-
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Ne eblis malfermi dosieron %s"
@@ -652,7 +647,7 @@ msgstr "Dinamito"
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr "Laŭteco de efektoj"
 
@@ -699,25 +694,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:393
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s: %s"
 
-#: src/menu/network_connection_menu.cpp:341
+#: src/menu/network_connection_menu.cpp:348
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:280
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:366
+#: src/menu/network_connection_menu.cpp:373
 msgid "Error: Unable to start server"
 msgstr "Eraro: Ne eblas starti servilon"
 
-#: src/menu/network_connection_menu.cpp:360
+#: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -747,7 +742,7 @@ msgstr "Futbalbombo"
 msgid "Fullscreen / window"
 msgstr "Plen-ekrane/fenestre"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:93
 msgid "Fullscreen?"
 msgstr "Plenekrane?"
 
@@ -759,7 +754,7 @@ msgstr "Ludo"
 msgid "Game mode"
 msgstr "Ludmodo"
 
-#: src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:188
 msgid "Game name:"
 msgstr "Ludnomo:"
 
@@ -767,7 +762,7 @@ msgstr "Ludnomo:"
 msgid "Gnu Launcher"
 msgstr "Gnuĵetilo"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:123
 msgid "Graphic"
 msgstr "Grafikoj"
 
@@ -791,16 +786,12 @@ msgstr "Preparante la grundon..."
 msgid "Gun"
 msgstr "Pistolo"
 
-#: src/tool/file_tools.cpp:186
-msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas!"
-
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:238
 msgid "Have a good game!"
 msgstr "Bone amuzu!"
 
-#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Ĉefkomandoro"
@@ -818,7 +809,7 @@ msgstr "Helpo"
 msgid "High jump"
 msgstr "Supersalti"
 
-#: src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:212
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
@@ -862,7 +853,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -910,7 +901,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Aliĝu #wormux en irc.freenode.net por trovi oponantojn."
 
@@ -926,7 +917,7 @@ msgstr "Salti malantaŭen"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Forĵetas la ludantojn nomitajn kiel <nickname> el la ludo"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr "Lingvo"
 
@@ -952,7 +943,7 @@ msgstr "Malpezigilo"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:129
+#: src/menu/network_connection_menu.cpp:130
 msgid "Manual connection"
 msgstr "Manuma konekto"
 
@@ -971,7 +962,7 @@ msgstr "Mapoj"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Ludmodo"
@@ -984,7 +975,7 @@ msgstr "Maks energio"
 msgid "Max number of players:"
 msgstr "Maksimuma kvanto da ludantoj:"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:97
 msgid "Maximum FPS"
 msgstr "Maksimumaj bildoj po sekundo (fps)"
 
@@ -992,7 +983,7 @@ msgstr "Maksimumaj bildoj po sekundo (fps)"
 msgid "Mine"
 msgstr "Mino"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:203
 msgid "Misc"
 msgstr "Diversaĵoj"
 
@@ -1016,7 +1007,7 @@ msgstr "La plej malutila"
 msgid "Most violent"
 msgstr "La plej perforta"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr "Movi la kameraon per muso aŭ sagoj"
 
@@ -1024,11 +1015,11 @@ msgstr "Movi la kameraon per muso aŭ sagoj"
 msgid "Move character"
 msgstr "Movi ulon"
 
-#: src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr "Muzika laŭteco"
 
-#: src/menu/options_menu.cpp:211
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Muziko?"
 
@@ -1045,7 +1036,7 @@ msgstr "Neniam"
 msgid "New network game at "
 msgstr "Nova reta ludo ĉe"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr "Ĉu averti pri nova ludanto?"
 
@@ -1095,15 +1086,11 @@ msgstr "Paraŝuto"
 msgid "Parachute is activated automatically."
 msgstr "Paraŝuto aŭtomatike uziĝis."
 
-#: src/menu/network_connection_menu.cpp:121
-#: src/menu/network_connection_menu.cpp:159
-#: src/menu/network_connection_menu.cpp:199
+#: src/menu/network_connection_menu.cpp:122
+#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:200
 msgid "Password:"
 msgstr "Pasvorto:"
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Paŭzi"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1117,11 +1104,11 @@ msgstr "Ludi plurfoje"
 msgid "Player"
 msgstr "Ludanto"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Energio de ludanto?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Nomo de ludanto?"
 
@@ -1129,12 +1116,12 @@ msgstr "Nomo de ludanto?"
 msgid "Polecat Launcher"
 msgstr "Putorĵetilo"
 
-#: src/menu/network_connection_menu.cpp:148
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:149
+#: src/menu/network_connection_menu.cpp:177
 msgid "Port:"
 msgstr "Pordo:"
 
-#: src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:109
 msgid "Public battles"
 msgstr "Publikaj bataloj"
 
@@ -1142,7 +1129,7 @@ msgstr "Publikaj bataloj"
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
@@ -1166,7 +1153,7 @@ msgstr "Legante norman agordaron"
 msgid "Reading personal config file"
 msgstr "Legante personan agordaron"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:119
 msgid "Resolution"
 msgstr "Difino"
 
@@ -1182,20 +1169,20 @@ msgstr "Komencas partion"
 msgid "Say: "
 msgstr "Diri: "
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 msgid "Scroll border size"
 msgstr "Grandeco de rulumrando"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Scroll on border"
 msgstr "Rulumi sur randoj"
 
-#: src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:138
 msgid "Server address:"
 msgstr "Servila adreso:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:208
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
@@ -1216,7 +1203,7 @@ msgstr "Montri la menuon de armiloj"
 msgid "Show/hide interface"
 msgstr "Montri/Kaŝi interfacon"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr "Montri/Kaŝi minimapon"
 
@@ -1244,11 +1231,11 @@ msgstr "Tiraljora fusilo"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
-#: src/menu/network_connection_menu.cpp:289
+#: src/menu/network_connection_menu.cpp:288
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/network/index_server.cpp:252
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1257,15 +1244,15 @@ msgstr ""
 "Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
 "povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:253
+#: src/menu/options_menu.cpp:251
 msgid "Sound"
 msgstr "Sono"
 
-#: src/menu/options_menu.cpp:221
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Sonaj efektoj?"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Sona frekvenco"
 
@@ -1310,7 +1297,7 @@ msgstr "Teamaj statistikoj"
 msgid "Teams"
 msgstr "Teamoj"
 
-#: src/menu/options_menu.cpp:187
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr "Teama redaktilo"
 
@@ -1445,13 +1432,13 @@ msgstr "Nekonata komando"
 msgid "Unlimited"
 msgstr "(senlimaj)"
 
-#: src/main.cpp:199
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:455
-#, c-format
-msgid "Version verification failed because: %s\n"
+#: src/menu/options_menu.cpp:453
+#, fuzzy, c-format
+msgid "Version verification failed because: %s"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
 
 #: src/menu/network_menu.cpp:257
@@ -1461,11 +1448,11 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu! %i ludanto ankoraŭ ne pretas!"
 msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 
-#: src/menu/network_menu.cpp:452
+#: src/menu/network_menu.cpp:450
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 
@@ -1474,7 +1461,7 @@ msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "TTT-ejo: "
 
@@ -1490,7 +1477,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Venterojn?"
 
@@ -1498,11 +1485,11 @@ msgstr "Venterojn?"
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:211
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Wormux ŝargante..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -1526,7 +1513,7 @@ msgstr "Vi estas sola:-/"
 msgid "You are alone..."
 msgstr "Vi estas sola..."
 
-#: src/menu/network_menu.cpp:395
+#: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1598,6 +1585,15 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Couldn't fetch last version from %s"
+#~ msgstr "Ne ebli elpreni la lastan version el %s"
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr "HOME dosiero (mediovariablo $HOME) ne troveblas!"
+
+#~ msgid "Pause"
+#~ msgstr "Paŭzi"
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Eraro en %s:%lu (Wormux %s) : %s"

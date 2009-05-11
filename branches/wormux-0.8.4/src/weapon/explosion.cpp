@@ -38,7 +38,7 @@
 #include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include "weapon/weapon.h"
 
 Profile *weapons_res_profile = NULL;

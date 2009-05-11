@@ -34,6 +34,7 @@
 
 #include <WORMUX_types.h>
 #include <WORMUX_network.h>
+#include <WORMUX_random.h>
 #include <WORMUX_socket.h>
 #include <WSERVER_config.h>
 #include <WSERVER_clock.h>
@@ -60,14 +61,39 @@ int main(int /*argc*/, char* /*argv*/[])
     exit(EXIT_FAILURE);
   }
 
+  int max_nb_games = 10;
+  if (!config.Get("max_nb_games", max_nb_games)) {
+    DPRINT(INFO, "ERROR: max_nb_games not specified");
+    exit(EXIT_FAILURE);
+  }
+
   int max_nb_clients = 50;
   if (!config.Get("max_nb_clients", max_nb_clients)) {
     DPRINT(INFO, "ERROR: max_nb_clients not specified");
     exit(EXIT_FAILURE);
   }
 
+  std::string game_name;
+  if (!config.Get("game_name", game_name)) {
+    DPRINT(INFO, "ERROR: game name not specified");
+    exit(EXIT_FAILURE);
+  }
+
   std::string password = "";
-  if (!GameServer::GetInstance()->ServerStart(uint(port), uint(max_nb_clients), "dedicated", password)) {
+  if (!config.Get("password", password)) {
+    DPRINT(INFO, "WARNING: password not specified (no password used)");
+  }
+
+  // Specify if the game will be visible in the index server or not
+  bool browsable = false;
+  if (!config.Get("public", browsable)) {
+    DPRINT(INFO, "WARNING: it is not specified if game is public or private (default: private)");
+  }
+
+  RandomLocal().InitRandom();
+
+  if (!GameServer::GetInstance()->ServerStart(uint(port), uint(max_nb_games), uint(max_nb_clients),
+					      game_name, password, browsable)) {
     DPRINT(INFO, "ERROR: Server not started");
     exit(EXIT_FAILURE);
   }

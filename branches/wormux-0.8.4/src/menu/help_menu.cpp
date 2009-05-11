@@ -83,7 +83,6 @@ void HelpMenu::DrawBackground()
   tmp.Set(_("Show weapons menu")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 284+BORDER+MIDDLE_Y));
   tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawCenter(Point2i(25+BORDER+MIDDLE_X, 253+BORDER+MIDDLE_Y));
   tmp.Set(_("Jump backwards")); tmp.DrawCenter(Point2i(188+BORDER+MIDDLE_X, 253+BORDER+MIDDLE_Y));
-  tmp.Set(_("Pause")); tmp.DrawCenter(Point2i(337+BORDER+MIDDLE_X, 253+BORDER+MIDDLE_Y));
   tmp.Set(_("Move camera with mouse or arrows")); tmp.DrawCenter(Point2i(25+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));
   tmp.Set(_("Weapon: Fire / Bonus box: falls fast")); tmp.DrawCenter(Point2i(188+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));
   tmp.Set(_("Show/hide minimap")); tmp.DrawCenter(Point2i(337+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));

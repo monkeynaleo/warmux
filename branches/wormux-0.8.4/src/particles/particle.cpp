@@ -26,7 +26,7 @@
 #include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
-#include "tool/random.h"
+#include <WORMUX_random.h>
 #include <WORMUX_point.h>
 #include "weapon/explosion.h"
 #include "map/map.h"

@@ -71,15 +71,19 @@ private:
   friend class Singleton<GameServer>;
   GameServer();
 
+  uint max_nb_games;
   std::string game_name;
   std::string password;
   uint port;
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
-  std::map<uint, NetworkGame> cpu; // list of the connected computer
+  std::map<uint, NetworkGame> games; // list of the connected computer
 
   void CreateGame(uint game_id);
+  void DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it);
+
+  uint CreateGameIfNeeded();
 
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
@@ -88,8 +92,12 @@ private:
   void WaitClients();
   void RejectIncoming();
 
+  bool RegisterToIndexServer(bool is_public);
+
 public:
-  bool ServerStart(uint port, uint max_nb_clients, const std::string& game_name, std::string& password);
+  bool ServerStart(uint port, uint max_nb_games, uint max_nb_clients,
+		   const std::string& game_name, std::string& password,
+		   bool is_public);
   void RunLoop();
 
   NetworkGame& GetGame(uint game_id);

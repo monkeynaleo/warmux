@@ -410,7 +410,7 @@ msgid "(dead)"
 msgstr "(mŕtvy)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:270
+#: src/menu/options_menu.cpp:268
 msgid "(system language)"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/menu/options_menu.cpp:447
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:297
+#: src/main.cpp:298
 msgid "Authors:"
 msgstr "Autory:"
 
@@ -529,12 +529,12 @@ msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Center camera to character"
 msgstr "Počet postáv"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:89
 msgid "Change active character"
 msgstr ""
 
@@ -550,7 +550,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:151
+#: src/menu/options_menu.cpp:149
 #, fuzzy
 msgid "Character names:"
 msgstr "Padák"
@@ -560,7 +560,7 @@ msgstr "Padák"
 msgid "Character switching"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:201
+#: src/menu/options_menu.cpp:199
 msgid "Check updates online?"
 msgstr ""
 
@@ -604,7 +604,7 @@ msgstr "Spáchať samovraždu"
 msgid "Configuration menu"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 
-#: src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:165
 msgid "Connect to game"
 msgstr "Pripojenie do hry"
 
@@ -625,12 +625,7 @@ msgstr "Stavať"
 msgid "Controlled by: "
 msgstr ""
 
-#: src/network/download.cpp:79
-#, c-format
-msgid "Couldn't fetch last version from %s"
-msgstr ""
-
-#: src/network/chatlogger.cpp:55 src/network/download.cpp:88
+#: src/network/chatlogger.cpp:55
 #, fuzzy, c-format
 msgid "Couldn't open file %s"
 msgstr "Nedá sa inicializovať SDL knižnca: %s"
@@ -672,7 +667,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "KONIEC HRY"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:223
 msgid "Effects volume"
 msgstr ""
 
@@ -722,28 +717,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:393
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nedá sa pripojiť na server %s:%s"
 
-#: src/menu/network_connection_menu.cpp:341
+#: src/menu/network_connection_menu.cpp:348
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nedá sa kontaktovať indexový server na hosťovanie hry"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:280
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nedá sa kontaktovať indexový server na vyhľadanie internetovej hry"
 
-#: src/menu/network_connection_menu.cpp:366
+#: src/menu/network_connection_menu.cpp:373
 msgid "Error: Unable to start server"
 msgstr "Chyba: Nedá sa spustiť server"
 
-#: src/menu/network_connection_menu.cpp:360
+#: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -771,7 +766,7 @@ msgstr "Riot Bomba"
 msgid "Fullscreen / window"
 msgstr "Celá obrazovka?"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:93
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
@@ -785,7 +780,7 @@ msgstr "Meno:"
 msgid "Game mode"
 msgstr "Nastavenie hry"
 
-#: src/menu/network_connection_menu.cpp:187
+#: src/menu/network_connection_menu.cpp:188
 #, fuzzy
 msgid "Game name:"
 msgstr "Nastavenie hry"
@@ -794,7 +789,7 @@ msgstr "Nastavenie hry"
 msgid "Gnu Launcher"
 msgstr "Gnu raketomet"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:123
 #, fuzzy
 msgid "Graphic"
 msgstr "Nastavenie grafiky"
@@ -819,16 +814,12 @@ msgstr "Inicializuje sa okolie..."
 msgid "Gun"
 msgstr "Pištoľ"
 
-#: src/tool/file_tools.cpp:186
-msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
-
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:238
 msgid "Have a good game!"
 msgstr "Prajem dobrú hru!"
 
-#: src/menu/options_menu.cpp:143 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Hlavný veliteľ"
@@ -847,7 +838,7 @@ msgstr ""
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:212
 msgid "Host a game"
 msgstr "Hosťuj hru"
 
@@ -882,7 +873,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Ponáhľaj sa, si príliš pomalý  !!"
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -929,7 +920,7 @@ msgstr "To je dar!"
 msgid "Jetpack"
 msgstr "Vznášadlo"
 
-#: src/menu/network_connection_menu.cpp:235 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Pripoj sa na kanál #wormux na irc.freenode.net a nájdi si súperov."
 
@@ -945,7 +936,7 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:127
 msgid "Language"
 msgstr ""
 
@@ -971,7 +962,7 @@ msgstr "NízkaGravitácia"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:129
+#: src/menu/network_connection_menu.cpp:130
 #, fuzzy
 msgid "Manual connection"
 msgstr "Koniec hry !"
@@ -992,7 +983,7 @@ msgstr "Mapy"
 
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:388
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
 #, fuzzy
 msgid "Master mode"
 msgstr "Nastavenie hry"
@@ -1006,7 +997,7 @@ msgstr "Základná energia"
 msgid "Max number of players:"
 msgstr "Maximálny počet hráčov:"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:97
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -1014,7 +1005,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Mína "
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:203
 #, fuzzy
 msgid "Misc"
 msgstr "Hudba?"
@@ -1039,7 +1030,7 @@ msgstr "Najneužitočnejší "
 msgid "Most violent"
 msgstr "Najnásilnejší "
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:86
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
@@ -1048,11 +1039,11 @@ msgstr ""
 msgid "Move character"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:215
+#: src/menu/options_menu.cpp:213
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:211
+#: src/menu/options_menu.cpp:209
 msgid "Music?"
 msgstr "Hudba?"
 
@@ -1070,7 +1061,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Sieťová hra"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:248
 msgid "New player warning?"
 msgstr ""
 
@@ -1121,15 +1112,11 @@ msgstr "Padák"
 msgid "Parachute is activated automatically."
 msgstr "Padák je aktivovaný automaticky"
 
-#: src/menu/network_connection_menu.cpp:121
-#: src/menu/network_connection_menu.cpp:159
-#: src/menu/network_connection_menu.cpp:199
+#: src/menu/network_connection_menu.cpp:122
+#: src/menu/network_connection_menu.cpp:160
+#: src/menu/network_connection_menu.cpp:200
 msgid "Password:"
 msgstr ""
-
-#: src/menu/help_menu.cpp:86
-msgid "Pause"
-msgstr "Pauza"
 
 #: src/menu/main_menu.cpp:59
 msgid "Play"
@@ -1143,11 +1130,11 @@ msgstr ""
 msgid "Player"
 msgstr "Hráč"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:78
 msgid "Player energy?"
 msgstr "Zobraziť energiu hráča?"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:81
 msgid "Player's name?"
 msgstr "Zobraziť hráčovo meno ?"
 
@@ -1155,12 +1142,12 @@ msgstr "Zobraziť hráčovo meno ?"
 msgid "Polecat Launcher"
 msgstr "Tchor raketomet"
 
-#: src/menu/network_connection_menu.cpp:148
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:149
+#: src/menu/network_connection_menu.cpp:177
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:108
+#: src/menu/network_connection_menu.cpp:109
 msgid "Public battles"
 msgstr ""
 
@@ -1168,7 +1155,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
@@ -1195,7 +1182,7 @@ msgstr "Čítam osobný konfiguračný súbor"
 msgid "Reading personal config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:119
 msgid "Resolution"
 msgstr "Rozlíšenie"
 
@@ -1211,21 +1198,21 @@ msgstr "Spusti hru"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:87
 #, fuzzy
 msgid "Scroll border size"
 msgstr "Posúvanie mapou"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:84
 msgid "Scroll on border"
 msgstr "Posúvanie mapou"
 
-#: src/menu/network_connection_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:138
 msgid "Server address:"
 msgstr "Adresa servera:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:208
 msgid "Server available on Internet"
 msgstr "Server dostupný na Internete"
 
@@ -1248,7 +1235,7 @@ msgstr "Nastavenie"
 msgid "Show/hide interface"
 msgstr ""
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:88
 msgid "Show/hide minimap"
 msgstr ""
 
@@ -1276,27 +1263,27 @@ msgstr "Sniper puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:289
+#: src/menu/network_connection_menu.cpp:288
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/network/index_server.cpp:252
+#: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:253
+#: src/menu/options_menu.cpp:251
 #, fuzzy
 msgid "Sound"
 msgstr "Zvuky"
 
-#: src/menu/options_menu.cpp:221
+#: src/menu/options_menu.cpp:219
 msgid "Sound effects?"
 msgstr "Zvukové efekty?"
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:244
 msgid "Sound frequency"
 msgstr "Zvuková frekvencia"
 
@@ -1343,7 +1330,7 @@ msgstr "Tími"
 msgid "Teams"
 msgstr "Tími"
 
-#: src/menu/options_menu.cpp:187
+#: src/menu/options_menu.cpp:185
 msgid "Teams editor"
 msgstr ""
 
@@ -1475,13 +1462,13 @@ msgstr "Neznáma akcia"
 msgid "Unlimited"
 msgstr "(neobmedzene)"
 
-#: src/main.cpp:199
+#: src/main.cpp:203
 msgid "Version"
 msgstr "Verzia"
 
-#: src/menu/options_menu.cpp:455
+#: src/menu/options_menu.cpp:453
 #, c-format
-msgid "Version verification failed because: %s\n"
+msgid "Version verification failed because: %s"
 msgstr ""
 
 #: src/menu/network_menu.cpp:257
@@ -1492,11 +1479,11 @@ msgstr[0] "Čakaj! %i hráč nie je ešte pripravený!"
 msgstr[1] "Čakaj! %i hráči nie sú ešte pripravení!"
 msgstr[2] "Čakaj! %i hráči nie sú ešte pripravení!"
 
-#: src/menu/network_menu.cpp:452
+#: src/menu/network_menu.cpp:450
 msgid "Waiting for server, all you can do is cancel or chat!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
 msgstr ""
 
@@ -1505,7 +1492,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Zbraňe"
 
-#: src/main.cpp:306
+#: src/main.cpp:307
 msgid "Website: "
 msgstr "Web stránka: "
 
@@ -1521,7 +1508,7 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 
 #. Various options
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:75
 msgid "Wind particles?"
 msgstr "Častice vetra?"
 
@@ -1530,11 +1517,11 @@ msgstr "Častice vetra?"
 msgid "Winner"
 msgstr "Mína "
 
-#: src/main.cpp:211
+#: src/main.cpp:215
 msgid "Wormux launching..."
 msgstr "Wormux sa spúšťa..."
 
-#: src/main.cpp:296
+#: src/main.cpp:297
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
@@ -1559,7 +1546,7 @@ msgstr "Si sáám..."
 msgid "You are alone..."
 msgstr "Si sáám..."
 
-#: src/menu/network_menu.cpp:395
+#: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1632,6 +1619,12 @@ msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
+
+#~ msgid "Pause"
+#~ msgstr "Pauza"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
