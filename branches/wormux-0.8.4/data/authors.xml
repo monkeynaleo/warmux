@@ -475,7 +475,7 @@
       <author>
 	<nickname>eddyp</nickname>
 	<name>Eddy PETRIȘOR </name>
-	<description>Debian packaging (in the Debian Games Team); Translated Wormux in Romanian; added chat logging</description>
+	<description>Debian packaging, Romanian translation, added chat logging</description>
 	<email>eddy.petrisor_AT_gmail_DOT_com</email>
 	<country>Romania</country>
       </author>
@@ -501,6 +501,13 @@
 	<website>http://julien.catalano.free.fr/</website>
 	<email>julien.catalano_AT_gmail_DOT_com</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>mikkov</nickname>
+	<name>Mikko Vartiainen</name>
+	<description>Make Maemo port</description>
+	<email>mvartiainen_AT_gmail_DOT_com</email>
+	<country>Finland</country>
       </author>
       <author>
 	<nickname>Miwi</nickname>
@@ -540,7 +547,7 @@
       <author>
 	<nickname>AbsintheSyringe</nickname>
 	<name>Adnan HODZIC</name>
-	<description>Physics constant for wind particles, Bug fixes, Prepares Wormux SlackBuilds for Slackware, First Bosnian translation of Wormux.</description>
+	<description>Physics constant for wind particles, Bug fixes, SlackBuilds, Bosnian translation</description>
 	<email>AbsintheSyringe_AT_gmail_DOT_com</email>
 	<country>Bosnia-Herzegovina</country>
       </author>
@@ -800,7 +807,7 @@
       <author>
 	<nickname>Ahriman</nickname>
 	<name>Tomasz MAJBAUM</name>
-	<description>Draw the map Hell</description>
+	<description>Drew the maps Hell and Wild West</description>
 	<email>anunnaki_AT_o2_DOT_pl</email>
 	<country>Poland</country>
       </author>
@@ -828,7 +835,7 @@
       <author>
 	<nickname>Colin</nickname>
 	<name>Colin DIDIER</name>
-	<description>SuperTux weapon</description>
+	<description>Drawings</description>
 	<email>colin.didier_AT_utbm_DOT_fr</email>
 	<country>France</country>
       </author>
@@ -856,14 +863,14 @@
       <author>
 	<nickname>Jeese</nickname>
 	<name>JS</name>
-	<description>Draw the map EasterIsland</description>
+	<description>Draw the map Pumpkins</description>
 	<email>jeeseverly_AT_yahoo_dot_fr</email>
 	<country>France</country>
       </author>
       <author>
 	<nickname>Michael</nickname>
 	<name>Michael PRAGER</name>
-	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation of Wormux</description>
+	<description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation</description>
 	<email>X_X_L_AT_gmx_DOT_net</email>
 	<country>Germany</country>
       </author>
@@ -904,14 +911,14 @@
       <author>
 	<nickname>Tutur</nickname>
 	<name>Wilfried DUMOUTIER</name>
-	<description>Map 'Contry'</description>
+	<description>Map 'Country'</description>
 	<email>wiltur_AT_gmail_DOT_com</email>
 	<country>France</country>
       </author>
       <author>
 	<nickname>Yann</nickname>
 	<name>Yann BARB</name>
-	<description>SuperTux weapon</description>
+	<description>Drawings</description>
 	<email>yann.barb_AT_utbm_DOT_fr</email>
 	<country>France</country>
       </author>
