@@ -807,9 +807,9 @@ double PhysicalCircle::GetInitialHeight() const
 void PhysicalCircle::DrawBorder(const Color& color) const
 {
   int radius = m_radius * PIXEL_PER_METER;
-
-  int x = lround((m_body->GetPosition().x + m_position.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  int y = lround((m_body->GetPosition().y + m_position.y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+b2Vec2 center = m_body->GetWorldPoint(b2Vec2(m_position.x, m_position.y));
+  int x = lround(( center.x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
+  int y = lround(( center.y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
 
   GetMainWindow().CircleColor(x, y, radius, color);
 }
