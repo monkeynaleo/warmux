@@ -43,6 +43,8 @@ private:
   mutable Point2i m_shake;
   mutable uint m_last_time_shake_calculated;
 
+  Point2d m_speed;
+
   void SaveMouseCursor();
   void RestoreMouseCursor();
 
