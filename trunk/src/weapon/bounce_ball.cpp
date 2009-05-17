@@ -29,6 +29,7 @@
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
+#include "character/character.h"
 #include <WORMUX_debug.h>
 
 #include "tool/math_tools.h"
@@ -40,7 +41,6 @@ class BounceBall : public WeaponProjectile
   public:
     BounceBall(ExplosiveWeaponConfig& cfg,
                WeaponLauncher * p_launcher);
-    void Refresh();
   protected:
     void SignalOutOfMap();
 };
@@ -54,16 +54,6 @@ BounceBall::BounceBall(ExplosiveWeaponConfig& cfg,
   explode_colliding_character = true;
   explode_with_collision = false;
 }
-
-//-----------------------------------------------------------------------------
-
-void BounceBall::Refresh()
-{
-  WeaponProjectile::Refresh();
-  // rotation of ball image...
-  image->SetRotation_rad(GetSpeedAngle());
-}
-
 
 //-----------------------------------------------------------------------------
 
@@ -98,6 +88,7 @@ WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
 
 bool BounceBallLauncher::p_Shoot ()
 {
+  projectile->SetOverlappingObject(&ActiveCharacter(),2000);
   if (max_strength == 0)
     projectile->Shoot (10);
   else
