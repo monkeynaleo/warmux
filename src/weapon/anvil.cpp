@@ -19,6 +19,9 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
+#include <signal.h>
+
+
 #include "weapon/weapon_cfg.h"
 #include "weapon/anvil.h"
 #include "weapon/explosion.h"
@@ -52,6 +55,7 @@ class Anvil : public WeaponProjectile
     void PlayFallSound();
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
+    virtual void Draw();
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
@@ -65,6 +69,8 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_with_timeout = false;
   explode_colliding_character = false;
+  SetCollisionModel(true, true, true,true);
+  SetCollisionCategory(GROUND);
   // SetTestRect(0, 0, 0, 0);
 }
 
@@ -73,9 +79,11 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /* speed_before */)
+void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
 {
-  obj->SetEnergyDelta(-200);
+  if ( this->GetSpeedXY().y > 10 ) {
+    obj->SetEnergyDelta(-200);
+  }
   PlayCollisionSound();
 }
 
@@ -87,6 +95,12 @@ void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 void Anvil::SignalOutOfMap()
 {
   falling_sound.Stop();
+}
+
+void Anvil::Draw()
+{
+  image->SetRotation_rad(-GetAngle());
+  WeaponProjectile::Draw();
 }
 
 void Anvil::PlayFallSound()
