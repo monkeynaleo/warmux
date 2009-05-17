@@ -134,7 +134,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   camera_in_advance = true;
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, name);
-  image->EnableRotationCache(32);
+  image->EnableRotationCache(360);
   image->SetRotation_HotSpot(Point2i(0,0));
 
   ResetTimeOut();
