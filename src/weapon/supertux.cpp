@@ -121,9 +121,6 @@ void SuperTux::Shoot(double strength)
 void SuperTux::Refresh()
 {
   WeaponProjectile::Refresh();
-
-  image->SetRotation_rad(angle_rad + M_PI_2);
-
   RemoveExternForce(m_force_index);
   m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
 
