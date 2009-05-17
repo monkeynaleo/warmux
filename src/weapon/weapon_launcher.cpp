@@ -105,7 +105,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*sha
 void WeaponBullet::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(-GetAngle());
+ 
 }
 
 void WeaponBullet::DoExplosion()
@@ -184,9 +184,12 @@ void WeaponProjectile::Shoot(double strength)
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
 
-  SetOverlappingObject(&ActiveCharacter(), 100);
+  SetOverlappingObject(&ActiveCharacter(), 500);
   SetXY(hand_position);
-  SetAngle(angle);
+  if(IsRotating())
+  {
+    SetAngle(angle);
+  }
   SetSpeed(strength, angle);
 
   ObjectsList::GetRef().AddObject(this);
