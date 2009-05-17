@@ -195,6 +195,7 @@ public:
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), 1, 1); };
   bool CollidesWithGround() const { return m_collides_with_ground; }
   bool IsCharacter() const { return m_is_character; }
+  bool IsRotating() const { return m_rotating; }
 
   //----------- Physics related function ----------
 
