@@ -50,6 +50,11 @@ PhysicalEngine::PhysicalEngine() :
   m_debug_draw = new DebugDraw();
   physic_world->SetDebugDraw(m_debug_draw);
 
+  #ifdef DEBUG
+  if (IsLOGGING("physic.slow")) {
+      frame_rate = 600;
+  }
+  #endif
   // uint32 flags = 0;
   // flags += 0 * b2DebugDraw::e_shapeBit;
   // flags += 0 * b2DebugDraw::e_jointBit;
