@@ -72,7 +72,7 @@ void FireParticle::Refresh()
 {
   uint now = Time::GetInstance()->Read();
   //UpdatePosition();
-  //image->Update();
+  image->Update();
 
   if (creation_time + m_living_time < now)
   {
@@ -101,8 +101,8 @@ void FireParticle::Refresh()
   }
  
 
-  double oscil_max =0.25; // 1 = 180°
-  double oscil_period = 1000;
+  double oscil_max =0.20; // 1 = 180°
+  double oscil_period = 2000;
   std::cout<<"Now   : "<<now-m_living_time<<std::endl;
   double oscil_pourcentage = (2 * double((now+m_living_time) % (uint) oscil_period)/oscil_period) - 1; //range [-1, 1]
   if (oscil_pourcentage<0) { oscil_pourcentage *= -1;} //range [0,1]
