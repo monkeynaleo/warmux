@@ -71,6 +71,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_colliding_character = false;
   SetCollisionModel(true, true, true,true);
   SetCollisionCategory(GROUND);
+  
   // SetTestRect(0, 0, 0, 0);
 }
 
@@ -81,7 +82,7 @@ Anvil::~Anvil()
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
 {
-  if ( this->GetSpeedXY().y > 10 ) {
+  if ( GetSpeed().y > 1 ) {
     obj->SetEnergyDelta(-200);
   }
   PlayCollisionSound();
@@ -99,8 +100,9 @@ void Anvil::SignalOutOfMap()
 
 void Anvil::Draw()
 {
-  image->SetRotation_rad(-GetAngle());
+  Anvil::Refresh();
   WeaponProjectile::Draw();
+ 
 }
 
 void Anvil::PlayFallSound()

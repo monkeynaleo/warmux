@@ -79,7 +79,7 @@
     <wind_factor>0.3</wind_factor>
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
-    <rebound_factor>0.00</rebound_factor>
+    <rebound_factor>0.01</rebound_factor>
     <rotating>true</rotating>
     <shape name="anvil-main" type="polygon">
       <mass>2000.0</mass>
