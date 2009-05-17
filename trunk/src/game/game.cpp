@@ -554,6 +554,11 @@ bool Game::NewBox()
     MSG_DEBUG("box", "There is less than 2 teams in the game");
     return false;
   }
+  // if started with "-d nobox", get no box will appear
+  if (IsLOGGING("nobox"))
+  {
+      return false;
+  }
 
   // if started with "-d box", get one box per turn
   if (!IsLOGGING("box")) {
