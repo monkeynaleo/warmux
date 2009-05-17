@@ -377,8 +377,8 @@
     <rotating>true</rotating>
     <shape name="grenade-main" type="circle">
       <mass>30.0</mass>
-      <position x="9" y="10" />
-      <radius>5</radius>
+      <position x="8" y="8" />
+      <radius>6</radius>
     </shape>
   </grenade>
 
