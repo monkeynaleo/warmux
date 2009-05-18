@@ -82,7 +82,7 @@ Anvil::~Anvil()
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
 {
-  if ( GetSpeed().y > 1 ) {
+  if ( GetSpeed().y > 0.5 ) {
     obj->SetEnergyDelta(-200);
   }
   PlayCollisionSound();
