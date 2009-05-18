@@ -231,6 +231,9 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
   double air_friction = 0;
   r = XmlReader::ReadDouble(root_shape, "air_friction", air_friction);
 
+  double friction = 0.8;
+   r = XmlReader::ReadDouble(root_shape, "friction", friction);
+  
   // =============== Circle
 
   if (shape_type == "circle") {
@@ -293,12 +296,14 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
 
     shape = polygon;
   }
+
+
   shape->SetMass(mass);
   shape->SetName(shape_name);
   shape->SetPosition(Point2d(double(pos_x)/PIXEL_PER_METER, double(pos_y)/PIXEL_PER_METER));
   shape->SetAirFriction(air_friction);
   shape->SetForceApplicationPoint(Point2d(force_x, force_y));
-
+  shape->SetFriction(friction);
 
   return shape;
 }
