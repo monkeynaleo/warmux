@@ -286,7 +286,8 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
   lbox_languages->AddItem(config->GetLanguage() == "kw",    "Kernewek",            "kw");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
-  lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk",               "nb");
+  lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk (bokmål)",      "nb");
+  lbox_languages->AddItem(config->GetLanguage() == "nn",    "Norsk (nynorsk)",     "nn");
   lbox_languages->AddItem(config->GetLanguage() == "nl",    "Nederlands",          "nl");
   lbox_languages->AddItem(config->GetLanguage() == "pl",    "Polski",              "pl");
   lbox_languages->AddItem(config->GetLanguage() == "pt",    "Português",           "pt");
