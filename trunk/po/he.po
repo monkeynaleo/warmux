@@ -65,32 +65,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s מאבד עצמו לדעת!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) נהרג."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s נפל מן המפה!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -107,7 +107,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
@@ -161,7 +161,7 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -199,7 +199,7 @@ msgid_plural ""
 msgstr[0] "צוות %s זכה במבער! אם אתה קטין, בקש את רשות הוריך."
 msgstr[1] "צוות %s זכה ב-%u מבערים! אם אתה קטין, בקש את רשות הוריך."
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -235,7 +235,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "צוות %s זכה בדינמיט!"
 msgstr[1] "צוות %s זכה ב-%u מקלות דינמיט!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -256,7 +256,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "צוות %s זכה בוו אחיזה!"
 msgstr[1] "צוות %s זכה ב-%u ווי אחיזה!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -334,7 +334,7 @@ msgid_plural ""
 msgstr[0] "צוות %s זכה ברובה צלפים! כוון אל בין העיניים!"
 msgstr[1] "צוות %s זכה ב-%u רובי צלפים! כוון אל בין העיניים!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -369,7 +369,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "צוות %s זכה בדילוג תור! ידעתי שתאהב את זה."
 msgstr[1] "צוות %s זכה ב-%u דילוגי תור! בטוח שתאהב את זה."
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -381,7 +381,7 @@ msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראי
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -409,7 +409,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -447,7 +447,7 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "סדן"
 
@@ -488,11 +488,11 @@ msgstr ""
 msgid "Blowtorch"
 msgstr "מבער"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "כדור מקפץ"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
@@ -729,12 +729,21 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
+#: tools/servers/headless_server/server.cpp:266
+#, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צוות \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "להביור"
 
@@ -781,7 +790,7 @@ msgstr "וו אחיזה"
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "רימון"
 
@@ -850,7 +859,7 @@ msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -902,7 +911,7 @@ msgstr "מאתחל סאונד"
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
@@ -1254,6 +1263,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1290,7 +1300,7 @@ msgstr "מלאי:"
 msgid "Submachine Gun"
 msgstr "תת מקלע"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "סופרטאקס"
 
@@ -1346,7 +1356,7 @@ msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 msgid "The automatic rocket has left the battlefield..."
 msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
@@ -1369,7 +1379,7 @@ msgstr "רימון הדיסקו יצא משדה הקרב לפני שהתפוצץ
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
@@ -1415,7 +1425,7 @@ msgstr ""
 "ירי: החזק את מקש הרווח לחוץ לקבלת העוצמה הרצויה\n"
 "תחמושת לתור"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1458,7 +1468,7 @@ msgstr "(ללא הגבלה)"
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1493,7 +1503,7 @@ msgstr "אתר: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
@@ -1551,7 +1561,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 

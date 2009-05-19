@@ -66,33 +66,33 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s 幀fps"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s 自殺啦 !"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了  ."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s 入水---深呼吸."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s 飛出地圖邊緣---"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 # what about female names?
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s 的死因是: 太笨 !"
@@ -109,7 +109,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點耐久!"
 msgstr[1] "%s 贏得 %u 點耐久!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是個瘋子, 他幹掉了 %s 的一個!"
@@ -162,7 +162,7 @@ msgid_plural ""
 msgstr[0] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 msgstr[1] "%s 隊得到 %u 氣錘! （鄰居們：不要太響了，謝謝。）."
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -200,7 +200,7 @@ msgid_plural ""
 msgstr[0] "%s 隊得到 %u 吹管! 18歲以下, 使用請請教父母."
 msgstr[1] "%s 隊得到 %u 吹管! 18歲以下, 使用請請教父母."
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -236,7 +236,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s 隊得到 %u 炸彈了!"
 msgstr[1] "%s 隊得到 %u 炸彈了!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -257,7 +257,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "%s隊得到 %u 飛索了!"
 msgstr[1] "%s隊得到 %u 飛索了!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -335,7 +335,7 @@ msgid_plural ""
 msgstr[0] "%s 隊得到了%u狙擊步槍! 看准,兩只眼中間！ "
 msgstr[1] "%s 隊得到了%u狙擊步槍! 看准,兩只眼中間！"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -370,7 +370,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 隊得到 %u 暫停! 我知道你喜歡."
 msgstr[1] "%s 隊得到 %u 暫停! 我知道你喜歡."
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -382,7 +382,7 @@ msgstr[1] "%s 隊得到 %u 企鵝發射器! 沒見過滿天飛的企鵝嗎?"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -410,7 +410,7 @@ msgstr "(未知時間)"
 msgid "(unlimited)"
 msgstr "(無限的)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -449,7 +449,7 @@ msgstr ""
 "開火 : 白字元鍵\n"
 "每回合一擊"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "鐵砧"
 
@@ -490,11 +490,11 @@ msgstr ""
 msgid "Blowtorch"
 msgstr "吹管"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "彈力球"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
@@ -730,12 +730,21 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
+#: tools/servers/headless_server/server.cpp:266
+#, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "錯誤: 找不到 body\"%s\" 隊伍 \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "噴火器"
 
@@ -781,7 +790,7 @@ msgstr "飛索"
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "手雷"
 
@@ -851,7 +860,7 @@ msgstr ""
 "如何使用: 按住白字元鍵\n"
 "每回合一個彈夾"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -901,7 +910,7 @@ msgstr "音響起始化"
 msgid "Initialise teams"
 msgstr "隊伍起始化"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "就是現在!"
 
@@ -1253,6 +1262,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1289,7 +1299,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "沖鋒槍"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "SuperTux-超級企鵝"
 
@@ -1344,7 +1354,7 @@ msgstr "臭鼬離開了戰場..."
 msgid "The automatic rocket has left the battlefield..."
 msgstr "制導火箭離開戰場..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "球膨脹前離開戰場"
 
@@ -1367,7 +1377,7 @@ msgstr "disco榴彈離開舞池前發生爆炸"
 msgid "The game was interrupted because you got disconnected."
 msgstr "您斷線了."
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "手榴彈離開戰場前發生爆炸"
 
@@ -1412,7 +1422,7 @@ msgstr ""
 "開火: 按住白字元鍵積攢到需要的力量\n"
 "每回合一個彈夾"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1455,7 +1465,7 @@ msgstr "(無限的)"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "版本改變失敗原因: %s\n"
@@ -1490,7 +1500,7 @@ msgstr "網站Website: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 慘死在小槍之下...無法瞑目!"
@@ -1549,7 +1559,7 @@ msgstr "至少有2組才能開始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 

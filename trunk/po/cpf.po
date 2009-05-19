@@ -69,32 +69,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s i/s"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s la jette son corps la mer !"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) lé mort."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s la tombe dans l'eau."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s la sorte du terrain !"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s lé mort à koz son 2 mains gauches..."
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Marmaille %s la gagné %u point d'vie !"
 msgstr[1] "Marmaille %s la gagné %u points d'vie !"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s l'est gazé ça !! Boug là, la kine son camarades (%s) !"
@@ -168,7 +168,7 @@ msgstr[1] ""
 "bande %s la gagne %u marteaux pneumatiques! Fé pas trop désorde avec ça "
 "sinon oute bandes voisins y ça totoshe à ou."
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -210,7 +210,7 @@ msgstr[1] ""
 "Bande %s la gagné %u torches ! Si ou na na moins de 18 ans, deman oute "
 "monmon avant utilise à lu."
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -246,7 +246,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'équipe %s a gagné %u baton de dynamite !"
 msgstr[1] "L'équipe %s a gagné %u batons de dynamite !!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -267,7 +267,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "L'équipe %s a gagné %u !!"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -345,7 +345,7 @@ msgid_plural ""
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -380,7 +380,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -392,7 +392,7 @@ msgstr[1] "L'équipe %s a gagné %u !"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -420,7 +420,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -457,7 +457,7 @@ msgstr ""
 "Angle: en haut/en basFeu: appui sur la grosse bar en basou gaingne pas fé "
 "plus d'une action par tour"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Enclume"
 
@@ -498,11 +498,11 @@ msgstr ""
 msgid "Blowtorch"
 msgstr "Chalumeau"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Balle y rebondi"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Nartrouvé tux!!"
 
@@ -746,12 +746,21 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
+#: tools/servers/headless_server/server.cpp:266
+#, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "lance-flammes"
 
@@ -800,7 +809,7 @@ msgstr "grappin"
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Grenade"
 
@@ -866,7 +875,7 @@ msgid ""
 msgstr ""
 "Comment utilises à lu: pèse sur la barre de l'espaceune munition par tour"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -917,7 +926,7 @@ msgstr "Initialisation du sond"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "Trape kado là pou ou !"
 
@@ -1274,6 +1283,7 @@ msgstr ""
 "Scuze, seulement, là, na point personne y attende pour d'autres joueurs"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1310,7 +1320,7 @@ msgstr "Munitions :"
 msgid "Submachine Gun"
 msgstr "Mitraillette"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1368,7 +1378,7 @@ msgstr "Le putois la barré avant lu pête."
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette que lé automatique la barré ailleurs ..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "La balle ki rebondi la sorte du champs de bataille avant lu pête."
 
@@ -1391,7 +1401,7 @@ msgstr "La grenade boite de nuit la barré de la piste avant lu pête."
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "La grenade la vole chemin avant lu pête."
 
@@ -1436,7 +1446,7 @@ msgstr ""
 "pagen en haut/page en basangle: en haut/en bastir: pèse dessus bar espace "
 "jusqu'à ce avoir la force que ou veut.une action par tour"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1478,7 +1488,7 @@ msgstr "(illimitées)"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1515,7 +1525,7 @@ msgstr "Site internet : "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : un simple pistolet la kine à lu !"
@@ -1573,7 +1583,7 @@ msgstr "Il faut au minimum deux équipes correctes !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Gaingne pas joué avant de prendre une équipe !"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

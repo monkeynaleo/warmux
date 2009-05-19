@@ -63,32 +63,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s فریم بر ثانیه"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s خودکشی کرد!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) مرد."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s در آب افتاد."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s از نقشه بیرون افتاد."
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s کشته شد، بخاطر اینکه او یک احمق بود!"
@@ -104,7 +104,7 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s %u انرژی برنده شد!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s یک موجود روانی است، او یکی از اعضای تیم %s را به کشتن داد."
@@ -155,7 +155,7 @@ msgstr[0] ""
 "تیم %s برنده‌ی %u بیل مکانیکی شد! لطفا زیادی سر و صدا نکنید! مرسی،از طرف "
 "همسایه‌ها!"
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -188,7 +188,7 @@ msgid_plural ""
 "it."
 msgstr[0] "تیم %s برنده‌ی %u مشعل شد! اگر زیر ۱۸ سال هستید، برو با بزرگترت بیا!"
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -220,7 +220,7 @@ msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "تیم %s برنده‌ی %u دینامیت شد!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -238,7 +238,7 @@ msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "تیم %s برنده‌ی %u چنگک شد! ببینم تو بهتری یا مرد عنکبوتی؟!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -309,7 +309,7 @@ msgid_plural ""
 msgstr[0] ""
 "تیم %s برنده‌ی %u تفنگ دوربین‌دار شد! ببینم می‌تونی بزنی بین دوتا ابروهاش؟!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -341,7 +341,7 @@ msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "تیم %s برنده‌ی %u خروج از نوبت شد! می‌دونم خیلی دوسش داری!"
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -353,7 +353,7 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -381,7 +381,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -419,7 +419,7 @@ msgstr ""
 "شلیک : کلید Space\n"
 "یک ضربه در هر نوبت"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "سندان"
 
@@ -460,11 +460,11 @@ msgstr ""
 msgid "Blowtorch"
 msgstr "مشعل"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "شیطونک"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "بای بای تاکس..."
 
@@ -701,12 +701,21 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
+#: tools/servers/headless_server/server.cpp:266
+#, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "مشکل: ناتوان در پیدا کردن \"%s\" از تیم \"%s\""
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "اسلحه‌ی آتیشی"
 
@@ -753,7 +762,7 @@ msgstr "چنگک"
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "نارنجک"
 
@@ -820,7 +829,7 @@ msgid ""
 "an ammo per turn"
 msgstr "چگونگی استفاده از آن : دکمه‌ی Space را نگه داریدیک بار در هر نوبت"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -873,7 +882,7 @@ msgstr "صداهای آغازین"
 msgid "Initialise teams"
 msgstr "تیم‌های آغازین"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "این یک هدیه است!"
 
@@ -1225,6 +1234,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1261,7 +1271,7 @@ msgstr "استوک: "
 msgid "Submachine Gun"
 msgstr "مسلسل"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "سوپر تاکس"
 
@@ -1316,7 +1326,7 @@ msgstr "راسوی بوگندو قبل از اینکه عمل کند از زمی
 msgid "The automatic rocket has left the battlefield..."
 msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
@@ -1339,7 +1349,7 @@ msgstr "نارنجک دیسکو قبل از اینکه عمل کند از زمی
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "نارنجک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
@@ -1380,7 +1390,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1419,7 +1429,7 @@ msgstr "(بی‌نهایت)"
 msgid "Version"
 msgstr "نسخه"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1453,7 +1463,7 @@ msgstr "وب‌سایت: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته شد!"
@@ -1511,7 +1521,7 @@ msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 
