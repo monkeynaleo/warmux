@@ -236,9 +236,17 @@
       <author>
 	<nickname>Christian</nickname>
 	<name>Christian LOMSDALEN</name>
-	<description>Translated Wormux 0.8 to Norwegian</description>
+	<description>Translated Wormux 0.8 into Norwegian Bokmål</description>
 	<website>http://vindstille.net</website>
 	<email>christian_AT_vindstille_DOT_net</email>
+	<country>Norway</country>
+      </author>
+      <author>
+	<nickname>Huftis</nickname>
+	<name>Karl Ove HUFTHAMMER</name>
+	<description>Translated Wormux 0.8.3 into Norwegian Nynorsk</description>
+  <website>http://blogg.huftis.org</website>
+	<email>karl_AT_huftis_DOT_org</email>
 	<country>Norway</country>
       </author>
       <author>

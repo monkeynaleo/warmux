@@ -60,32 +60,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s FPS"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a(z) %s csapatból öngyilkos lett!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a(z) %s csapatból meghalt."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a(z) %s csapatból vízbe esett."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a(z) %s csapatból kiesett a pályáról!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a(z) %s csapatból túl keményen érkezett a földre!"
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a(z) %s csapatból meghalt, mert egy kicsit ügyefogyott volt!"
@@ -102,7 +102,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiája %u egységgel nõtt!"
 msgstr[1] "%s energiája %u egységgel nõtt!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
@@ -159,7 +159,7 @@ msgstr[1] ""
 "%s csapat %u légkalapácsot kapott! Ne csapj túl nagy zajt velük! Kösz, a "
 "szomszédok."
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -201,7 +201,7 @@ msgstr[1] ""
 "%s csapat %u lángszórót kapott! Ha kiskorú vagy, kérd meg a szüleidet, hogy "
 "használják helyetted."
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -237,7 +237,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s csapat %u dinamitot kapott!"
 msgstr[1] "%s csapat %u dinamitot kapott!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -258,7 +258,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "%s csapat %u szigonyt kapott!"
 msgstr[1] "%s csapat %u szigonyt kapott!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -338,7 +338,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s csapat %u mesterlövész puskát kapott! Célozz és lõj a szemek közé!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -374,7 +374,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s csapat %u forduló kihagyást kapott! Tudom, hogy tetszeni fog."
 msgstr[1] "%s csapat %u forduló kihagyást kapott! Tudom, hogy tetszeni fog."
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -386,7 +386,7 @@ msgstr[1] "%s csapat %u pingvinkilövõt kapott! Sosem láttál repülõ pingvint?"
 msgid "%s team was fragged down."
 msgstr "%s csapat elpusztult."
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s sírba vitte magával a(z) %s csapat tagját!"
@@ -414,7 +414,7 @@ msgstr "(ismeretlen idõ)"
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -453,7 +453,7 @@ msgstr ""
 "Tûz : space\n"
 "egy ütés körönként"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Üllõ"
 
@@ -493,11 +493,11 @@ msgstr "Villámháború"
 msgid "Blowtorch"
 msgstr "Lángvágó"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Pattogó labda"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Viszlát, pingvin..."
 
@@ -739,12 +739,25 @@ msgstr ""
 "nem közvetlenül kapcsolódsz az internetre, ellenõrizd a routered "
 "beállítását: a(z) %s-s TCP portot át kell irányítanod a számítógépedre."
 
+#: tools/servers/headless_server/server.cpp:266
+#, fuzzy, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+"Hiba: A szervered nem érhetõ el az internetrõl. Ellenõrizd a tûzfalad "
+"beállításait: a(z) %s-s TCP portot engedélyezned kell a külvilág felõl. Ha "
+"nem közvetlenül kapcsolódsz az internetre, ellenõrizd a routered "
+"beállítását: a(z) %s-s TCP portot át kell irányítanod a számítógépedre."
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "Lángszóró"
 
@@ -788,7 +801,7 @@ msgstr "Szigony"
 msgid "Gravity"
 msgstr "Gravitáció"
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Gránát"
 
@@ -857,7 +870,7 @@ msgstr ""
 "Így használd : tartsd lenyomva a space-t\n"
 "egy lövés körönként"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -908,7 +921,7 @@ msgstr "Hangok elõkészítése"
 msgid "Initialise teams"
 msgstr "Csapatok elõkészítése"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "Ez egy ajándék!"
 
@@ -1252,6 +1265,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sajnálom, most egy játék sem vár játékosokat!"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1290,7 +1304,7 @@ msgstr "Készlet:"
 msgid "Submachine Gun"
 msgstr "Géppisztoly"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "Szuperpingvin"
 
@@ -1342,7 +1356,7 @@ msgstr "A borz elhagyta a csatateret robbanás elõtt"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Az automatikus rakéta elhagyta a csatamezõt..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "A labda elhagyta a csatateret robbanás elõtt"
 
@@ -1368,7 +1382,7 @@ msgstr "A diszkó-gránát elhagyta a táncparkettet robbanás elõtt"
 msgid "The game was interrupted because you got disconnected."
 msgstr "Megszakadt a játék, mert kijelentkeztél."
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "A gránát elhagyta a csatateret robbanás elõtt"
 
@@ -1413,7 +1427,7 @@ msgstr ""
 "Tûz : tartsd a space-t lenyomva a kívánt erõsség eléréséig\n"
 "egy lövés körönként"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1455,7 +1469,7 @@ msgstr "Korlátlan"
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
@@ -1490,7 +1504,7 @@ msgstr "Honlap: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
@@ -1548,7 +1562,7 @@ msgstr "Választanod kell legalább két csapatot!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nem tudsz játszani csapatválasztás nélkül!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 

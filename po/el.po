@@ -69,32 +69,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s εικ./δευτ."
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "O %s από την ομάδα %s αυτοκτόνησε!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, c-format
 msgid "%s from %s team has died."
 msgstr "O %s από την ομάδα %s πέθανε."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "O %s από την ομάδα %s έπεσε στο νερό!"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "O %s από την ομάδα %s έπεσε εκτός χάρτη!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Ο %s από την ομάδα %s χτύπησε στο έδαφος πολύ δυνατά!"
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητα!"
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Ο παίκτης %s κέρδισε %u πόντο ζωής!"
 msgstr[1] "Ο παίκτης %s κέρδισε %u πόντους ζωής!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος της ομάδας του (%s)!"
@@ -168,7 +168,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u τρυπάνια! Μην κάνεις πολύ φασαρία θα ξυπνήσεις τους "
 "γείτονες!"
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -211,7 +211,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u  λυχνίες συγκόλλησης! Αν είσαι κάτω από 18, ζήτα από "
 "τους γονείς σου να τις χρησιμοποιήσουν!"
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -254,7 +254,7 @@ msgstr[0] "Η ομάδα %s κέρδισε %u δυναμίτης!"
 msgstr[1] "Η ομάδα %s κέρδισε %u δυναμίτες!"
 
 #  Ça sent déjà le cramé...
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -275,7 +275,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Η ομάδα %s κέρδισε %u γάντζο!"
 msgstr[1] "Η ομάδα %s κέρδισε %u γάντζους!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -358,7 +358,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Η ομάδα %s κέρδισε %u τουφέκια με σκόπευτρο! Πέτυχέ τον στο δόξα πατρί!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -396,7 +396,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u παραλείψεις γύρου!  Ωωω, τι όπλο μεγάλης ισχύος!"
 
 # Depuis quand les pingouins savent voler ??
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -412,7 +412,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Η ομάδα %s αποδεκατίστηκε."
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
@@ -440,7 +440,7 @@ msgstr "(άγνωστο χρόνο)"
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -481,7 +481,7 @@ msgstr ""
 "ένα χτύπημα ανά γύρο"
 
 # Enclume
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Αμόνι"
 
@@ -521,11 +521,11 @@ msgstr "Αστραπιαίος πόλεμος"
 msgid "Blowtorch"
 msgstr "Λυχνία Συγκόλλησης"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Μπάλα Αναπήδησης"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Άντε γεια tux..."
 
@@ -776,12 +776,27 @@ msgstr ""
 "ρύθμιση του δρομολογητή:  Η TCP θύρα %s πρέπει να διαβιβάζεται στον "
 "υπολογιστή σας."
 
+# Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
+#: tools/servers/headless_server/server.cpp:266
+#, fuzzy, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+"Λάθος: Ο διακομιστής σας δεν είναι προσιτός από το διαδίκτυο. Ελέγξτε τις "
+"ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %s πρέπει να δέχεται σύνδεση "
+"από έξω. Αν δεν είστε απευθείας συνδεδεμένοι με το διαδίκτυο, ελέγξτε την "
+"ρύθμιση του δρομολογητή:  Η TCP θύρα %s πρέπει να διαβιβάζεται στον "
+"υπολογιστή σας."
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Λάθος: αδύνατον να βρεθεί το σώμα \"%s\" για την ομάδα \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "Φλογοβόλο"
 
@@ -826,7 +841,7 @@ msgstr "Γάντζος"
 msgid "Gravity"
 msgstr "Βαρύτητα"
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Χειροβομβίδα"
 
@@ -898,7 +913,7 @@ msgstr ""
 
 # Usage : clic gauche sur la cible\n
 # une munition par tour
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -951,7 +966,7 @@ msgstr "Αρχικοποίηση ήχων"
 msgid "Initialise teams"
 msgstr "Αρχικοποίηση ομάδων"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "Πάρε ένα δωράκι!"
 
@@ -1301,6 +1316,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1339,7 +1355,7 @@ msgstr "Απόθεμα:"
 msgid "Submachine Gun"
 msgstr "Οπλοπολυβόλο"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "Υπέρ-Tux"
 
@@ -1396,7 +1412,7 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσμους..."
 
 # La balle rebondissante a quitté le champ de bataille avant d'exploser.
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
@@ -1424,7 +1440,7 @@ msgid "The game was interrupted because you got disconnected."
 msgstr "Το παιχνίδι διακόπηκε διότι αποσυνδεθήκατε."
 
 # La grenade a quitté le champ de bataille avant d'exploser.
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "Η χειροβομβίδα εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
@@ -1474,7 +1490,7 @@ msgstr ""
 "Πυρ: κρατήστε το space μέχρι την επιθυμητή δύναμη\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1516,7 +1532,7 @@ msgstr "Απεριόριστο"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
@@ -1553,7 +1569,7 @@ msgid "Welcome to %s!"
 msgstr ""
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
@@ -1614,7 +1630,7 @@ msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομ
 msgid "You won't be able to play before selecting a team !"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Αστόχησες..."
 

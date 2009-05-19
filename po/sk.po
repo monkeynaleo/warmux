@@ -70,32 +70,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s spáchal samovraždu !"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s tím)  zomrel."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s spadol do vody."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s vypadol z mapy!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
@@ -113,7 +113,7 @@ msgstr[0] "%s zvíťazil %u bodom energie!"
 msgstr[1] "%s zvíťazil %u bodmi energie! "
 msgstr[2] "%s zvíťazil %u bodmi energie! "
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s tímu!"
@@ -168,7 +168,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, fuzzy, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -208,7 +208,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, fuzzy, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -247,7 +247,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s tím vyhral %u dynamitom!"
 msgstr[1] "%s tím vyhral %u dynamitmi!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -270,7 +270,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, fuzzy, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -358,7 +358,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, fuzzy, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -397,7 +397,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -410,7 +410,7 @@ msgstr[2] "%s tími vyhrali %u %s!"
 msgid "%s team was fragged down."
 msgstr "%s tím vyhral.\n"
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -438,7 +438,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -473,7 +473,7 @@ msgid ""
 "a hit per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Kovadlina"
 
@@ -514,11 +514,11 @@ msgstr ""
 msgid "Blowtorch"
 msgstr "Plameňomet"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Odrazená lopta"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Maj sa tux..."
 
@@ -762,12 +762,21 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
+#: tools/servers/headless_server/server.cpp:266
+#, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr ""
 
@@ -817,7 +826,7 @@ msgstr ""
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Granát"
 
@@ -878,7 +887,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -927,7 +936,7 @@ msgstr "Inicializácia tímov"
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "To je dar!"
 
@@ -1283,6 +1292,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1319,7 +1329,7 @@ msgstr "Munícia:"
 msgid "Submachine Gun"
 msgstr "SMG zbraň"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1374,7 +1384,7 @@ msgstr "Tchor opustil bojisko pred výbuchom"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatická raketa opustila bojisko ..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "Lopta opustila bojisko pred výbuchom"
 
@@ -1397,7 +1407,7 @@ msgstr "Disco granát opustil parket pred výbuchom"
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bojisko pred výbuchom"
 
@@ -1441,7 +1451,7 @@ msgid ""
 "an ammo per turn"
 msgstr ""
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1481,7 +1491,7 @@ msgstr "(neobmedzene)"
 msgid "Version"
 msgstr "Verzia"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1517,7 +1527,7 @@ msgstr "Web stránka: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
@@ -1577,7 +1587,7 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 

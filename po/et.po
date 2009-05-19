@@ -66,32 +66,32 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s kaadrit/sek"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s meestkonnast %s sooritas enesetapu!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s meeskonnast %s on kutu."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s meeskonnast %s kukkus vette."
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s meeskonnast %s lendas auti!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s meeskonnast %s prantsatas liiga kõvasti vastu maad!"
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s meeskonnast %s sai surma omaenda lollusest!"
@@ -108,7 +108,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s võitis %u elupunkti!"
 msgstr[1] "%s võitis %u elupunkti!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
@@ -165,7 +165,7 @@ msgstr[1] ""
 "Meeskond %s võitis %u suruõhuhaamrit! Ära kasuta lärmakaid kodumasinaid "
 "peale kella 11!"
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -207,7 +207,7 @@ msgstr[1] ""
 "Meeskond %s võitis %u leeklampi! Kui oled alla 18, siis on kasutamiseks vaja "
 "lapsevanema või hooldaja luba!"
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -243,7 +243,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Meeskond %s võitis %u dünamiidi!"
 msgstr[1] "Meeskond %s võitis %u dünamiiti!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -264,7 +264,7 @@ msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Meeskond %s võitis %u pootshaagi!"
 msgstr[1] "Meeskond %s võitis %u pootshaaki!"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -342,7 +342,7 @@ msgid_plural ""
 msgstr[0] "Meeskond %s võitis %u täpsuspüssi! Sihi täpselt silmade vahele!"
 msgstr[1] "Meeskond %s võitis %u täpsuspüssi! Sihi täpselt silmade vahele!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -377,7 +377,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Meeskond %s võitis %u vahelejäämise! Ma tean, et see on su lemmik!"
 msgstr[1] "Meeskond %s võitis %u vahelejäämist! Ma tean, et see on su lemmik!"
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -391,7 +391,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Meeskond %s lasti ribadeks."
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s võttis %s meeskonna liikme hauda kaasa!"
@@ -419,7 +419,7 @@ msgstr "(teadmata aeg)"
 msgid "(unlimited)"
 msgstr "(piiramatu)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -458,7 +458,7 @@ msgstr ""
 "Tulistamine : tühik\n"
 "üks lask käigu kohta"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Alasi"
 
@@ -498,11 +498,11 @@ msgstr "Välk"
 msgid "Blowtorch"
 msgstr "Leeklamp"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Põrkepall"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Hüvasti, Tux..."
 
@@ -737,12 +737,25 @@ msgstr ""
 "väljastpoolt. Kui sa pole ühendatud interneti otse, siis vaata üle ka oma "
 "ruuteri seadistused: TCP port %s peab olema tunneldatud sinu arvutisse."
 
+#: tools/servers/headless_server/server.cpp:266
+#, fuzzy, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+"Viga: Sinu server pole kättesaadav internetis. Vaata oma "
+"tulemüüriseadistused üle: TCP port %s peab olema avatud ühendustele "
+"väljastpoolt. Kui sa pole ühendatud interneti otse, siis vaata üle ka oma "
+"ruuteri seadistused: TCP port %s peab olema tunneldatud sinu arvutisse."
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Viga: Ei suuda leida keha \"%s\" meeskonna \"%s\" jaoks."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "Leegiheitja"
 
@@ -786,7 +799,7 @@ msgstr "Pootshaak"
 msgid "Gravity"
 msgstr "Gravitatsioon"
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Granaat"
 
@@ -855,7 +868,7 @@ msgstr ""
 "Kasutamine: Hoia tühikut all\n"
 "üks soru käigu kohta"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -907,7 +920,7 @@ msgstr "Sätin helisid"
 msgid "Initialise teams"
 msgstr "Sätin meeskondi"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "Teile on pakk!"
 
@@ -1248,6 +1261,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1285,7 +1299,7 @@ msgstr "Tagavara:"
 msgid "Submachine Gun"
 msgstr "Automaat"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1337,7 +1351,7 @@ msgstr "Haisutuhkur lahkus mänguväljalt enne, kui see jõudis plahvatada."
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaatmürsk lahkus mänguväljalt..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "Pall lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
@@ -1362,7 +1376,7 @@ msgstr "Diskogranaat lahkus mänguväljalt enne, kui see jõudis plahvatada."
 msgid "The game was interrupted because you got disconnected."
 msgstr "Mäng katkestati, sest ühendus kadus ära."
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaat lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
@@ -1407,7 +1421,7 @@ msgstr ""
 "Tulistamine: Hoida tühikut all, kuni soovitud võimsuse saavutamiseni\n"
 "üks soru käigu kohta"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1449,7 +1463,7 @@ msgstr "Piiramatu"
 msgid "Version"
 msgstr "Väljalase"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Väljalaske kontrollimine kukkus läbi, sest: %s\n"
@@ -1484,7 +1498,7 @@ msgstr "Veebileht:"
 msgid "Welcome to %s!"
 msgstr "%s tervitab!"
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Häbilugu! %s lasti lihtsalt püstoliga maha!"
@@ -1542,7 +1556,7 @@ msgstr "Sul on vaja vähemalt kahte meeskonda!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Sa ei saa mängida enne, kui oled meeskonna valinud!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Mööda lasid!"
 

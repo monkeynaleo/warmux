@@ -68,32 +68,32 @@ msgstr "%s a janj kosten dhe %s"
 msgid "%s fps"
 msgstr "%s imaj/s"
 
-#: src/game/game.cpp:733
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:771
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:729
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:718
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
-#: src/game/game.cpp:746
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
@@ -112,7 +112,7 @@ msgstr[1] "Gwarier %s re gavas %u boynt a nerth!"
 msgstr[2] "Gwarier %s re gavas %u foynt a nerth!"
 msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:763
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -181,7 +181,7 @@ msgstr[3] ""
 "Para %s re waynyas %u morthol-ayr! Na wrewgh re a dros gansans! Meur ras, "
 "Agas Kentrevogyon"
 
-#: src/weapon/anvil.cpp:176
+#: src/weapon/anvil.cpp:192
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -237,7 +237,7 @@ msgstr[3] ""
 "Para %s re waynyas %u torchen leski! Mars owgh yn-dann oos, govyn orth agas "
 "kerens kyns aga usya."
 
-#: src/weapon/bounce_ball.cpp:113
+#: src/weapon/bounce_ball.cpp:104
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -290,7 +290,7 @@ msgstr[1] "Para %s re waynyas %u bren a dhynamit!"
 msgstr[2] "Para %s re waynyas %u fren a dhynamit!"
 msgstr[3] "Para %s re waynyas %u pren a dhynamit!"
 
-#: src/weapon/flamethrower.cpp:180
+#: src/weapon/flamethrower.cpp:200
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -317,7 +317,7 @@ msgstr[1] "Para %s re waynyas %u rabel!"
 msgstr[2] "Para %s re waynyas %u grabel"
 msgstr[3] "Para %s re waynyas %u grabel"
 
-#: src/weapon/grenade.cpp:90
+#: src/weapon/grenade.cpp:82
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -417,7 +417,7 @@ msgstr[1] "Para %s re waynyas %u gelsethwon! Meder yntra'n dewlagas!"
 msgstr[2] "Para %s re waynyas %u helsethwon! Meder yntra'n dewlagas!"
 msgstr[3] "Para %s re waynyas %u kelsethwon! Meder yntra'n dewlagas!"
 
-#: src/weapon/submachine_gun.cpp:144
+#: src/weapon/submachine_gun.cpp:150
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -466,7 +466,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Para %s re waynyas %u koll-tro! Pur lowen vedhowgh gansans, yn surredi!"
 
-#: src/weapon/supertux.cpp:328
+#: src/weapon/supertux.cpp:325
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -484,7 +484,7 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:759
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
@@ -512,7 +512,7 @@ msgstr "(prys ankoth)"
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -551,7 +551,7 @@ msgstr ""
 "Tenna: Spas\n"
 "unn bellen orth an dro"
 
-#: src/weapon/anvil.cpp:119
+#: src/weapon/anvil.cpp:135
 msgid "Anvil"
 msgstr "Anwan"
 
@@ -591,11 +591,11 @@ msgstr "Blitz"
 msgid "Blowtorch"
 msgstr "Torchen leski"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:79
 msgid "Bounce Ball"
 msgstr "Pel derlemmel"
 
-#: src/weapon/supertux.cpp:189
+#: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
 msgstr "Duw genes tux..."
 
@@ -831,12 +831,25 @@ msgstr ""
 "osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
 "dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
+#: tools/servers/headless_server/server.cpp:266
+#, fuzzy, c-format
+msgid ""
+"Error: Your server is not reachable from the internet. Check your firewall "
+"configuration: TCP Port %u must accept connection from the outside. If you "
+"are not directly connected to the internet, check your router configuration: "
+"TCP Port %u must be forwarded on your computer."
+msgstr ""
+"Gwall: Nyns yw dha server hedhadow a'n Gesrosweyth. Check fyttyans dha fos-"
+"tan: res yw dhe'n Port TCP %s degemeres junyansow from the outside Mar nyns "
+"osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
+"dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
+
 #: src/team/team.cpp:124
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
 
-#: src/weapon/flamethrower.cpp:136
+#: src/weapon/flamethrower.cpp:146
 msgid "Flame Thrower"
 msgstr "Stifeller-Tan"
 
@@ -880,7 +893,7 @@ msgstr "Grabel"
 msgid "Gravity"
 msgstr "Gravedh"
 
-#: src/weapon/grenade.cpp:76
+#: src/weapon/grenade.cpp:68
 msgid "Grenade"
 msgstr "Pinaval tardhus"
 
@@ -950,7 +963,7 @@ msgstr ""
 "Usyans : pesya gweskel war an alhwedhen spas\n"
 "unn bellen orth an dro"
 
-#: src/weapon/anvil.cpp:120
+#: src/weapon/anvil.cpp:136
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -1003,7 +1016,7 @@ msgstr "Darbari sonyow"
 msgid "Initialise teams"
 msgstr "Darbari paraow"
 
-#: src/game/game.cpp:601
+#: src/game/game.cpp:606
 msgid "It's a present!"
 msgstr "Ro ywa!"
 
@@ -1344,6 +1357,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
 #: src/menu/network_connection_menu.cpp:324
+#: tools/servers/headless_server/server.cpp:253
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1382,7 +1396,7 @@ msgstr "Daffar:"
 msgid "Submachine Gun"
 msgstr "Gojynn-gonn"
 
-#: src/weapon/supertux.cpp:241
+#: src/weapon/supertux.cpp:238
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1434,7 +1448,7 @@ msgstr "An Yewgen re asas an gaslan kyns omdardha"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "An fusen awtomatek re asas an gaslan..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
 msgstr "An bel a asas an gaslan kyns omdardha."
 
@@ -1459,7 +1473,7 @@ msgstr "An pinaval tardhus disco re asas an leur-donsya kyns omdardha."
 msgid "The game was interrupted because you got disconnected."
 msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 
-#: src/weapon/grenade.cpp:58
+#: src/weapon/grenade.cpp:50
 msgid "The grenade left the battlefield before exploding"
 msgstr "An pinaval tardhus re asas an gaslan kyns omdardha."
 
@@ -1507,7 +1521,7 @@ msgstr ""
 "vyn'ta\n"
 "unn bellen orth an dro"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:80
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1549,7 +1563,7 @@ msgstr "Heb finwedh"
 msgid "Version"
 msgstr "Versyon"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
@@ -1586,7 +1600,7 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:768
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
@@ -1644,7 +1658,7 @@ msgstr "Res yw bos dhe'n leha dew bara da!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Ny yllydh gwari kyns dewis para!"
 
-#: src/weapon/weapon_launcher.cpp:488
+#: src/weapon/weapon_launcher.cpp:491
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
