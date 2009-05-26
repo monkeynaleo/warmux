@@ -7,7 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-03-25 15:19+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-05-21 18:23+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,7 +63,7 @@ msgstr "Ομάδα %s - Απομακρυσμένη"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "Ο %s αλλάζει τον στόχο στον %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -102,7 +103,7 @@ msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητ�
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "Ο %s αποφάσισε να τραυματίσει τον %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -420,7 +421,7 @@ msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του 
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "Ο %s θα πυροβολήσει τον %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -631,9 +632,8 @@ msgid "Connected !"
 msgstr "Συνδεδεμένος!"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Συνδεδεμένος!"
+msgstr "Συνδεδεμένοι παίκτες:"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -778,7 +778,7 @@ msgstr ""
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #: tools/servers/headless_server/server.cpp:266
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
@@ -786,9 +786,9 @@ msgid ""
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Λάθος: Ο διακομιστής σας δεν είναι προσιτός από το διαδίκτυο. Ελέγξτε τις "
-"ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %s πρέπει να δέχεται σύνδεση "
+"ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %u πρέπει να δέχεται σύνδεση "
 "από έξω. Αν δεν είστε απευθείας συνδεδεμένοι με το διαδίκτυο, ελέγξτε την "
-"ρύθμιση του δρομολογητή:  Η TCP θύρα %s πρέπει να διαβιβάζεται στον "
+"ρύθμιση του δρομολογητή:  Η TCP θύρα %u πρέπει να διαβιβάζεται στον "
 "υπολογιστή σας."
 
 #: src/team/team.cpp:124
@@ -881,7 +881,6 @@ msgid "Host a game"
 msgstr "Δημιουργήστε ένα παιχνίδι"
 
 #: src/weapon/auto_bazooka.cpp:224
-#, fuzzy
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -997,7 +996,7 @@ msgstr "Γλώσσα"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Λίστα συνδεδεμένων παικτών"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1037,9 +1036,8 @@ msgstr "Χάρτες"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
-#, fuzzy
 msgid "Master mode"
-msgstr "Κατάσταση παιχνιδιού"
+msgstr "Κατάσταση αφέντη"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1120,9 +1118,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Κανένα στοιχείο <%s> δεν βρέθηκε στο αρχείο διαμόρφωσης XML!"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "%i παίκτης συνδέθηκε"
+msgstr "Κανένας παίκτης συνδέδεμένος"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1533,9 +1530,9 @@ msgid "Version"
 msgstr "Έκδοση"
 
 #: src/menu/options_menu.cpp:454
-#, fuzzy, c-format
+#, c-format
 msgid "Version verification failed because: %s"
-msgstr "Επαλήθευση έκδοσης απέτυχε διότι: %s\n"
+msgstr "Η επαλήθευση της έκδοσης απέτυχε διότι: %s"
 
 #: src/menu/network_menu.cpp:257
 #, c-format
@@ -1566,7 +1563,7 @@ msgstr "Ιστοσελίδα: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Καλώς ήρθες στο παιχνίδι %s!"
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
 #: src/game/game.cpp:768
@@ -1616,7 +1613,7 @@ msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
 #: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Είσαι ο νέος αφέντης του γύρου!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
