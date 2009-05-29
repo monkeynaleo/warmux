@@ -133,6 +133,7 @@ wormux_SOURCES = \
         include/binreloc.h \
         include/constant.cpp \
         include/constant.h \
+	include/debugmasks.h \
         interface/cursor.cpp \
         interface/cursor.h \
         interface/game_msg.cpp \
