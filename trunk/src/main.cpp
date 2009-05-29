@@ -55,6 +55,9 @@
 #include "menu/skin_menu.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
+#ifdef DEBUG
+#include "include/debugmasks.h"
+#endif
 
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
@@ -337,7 +340,7 @@ void PrintUsage(const char* cmd_name)
 	 , cmd_name);
 #ifdef DEBUG
   printf("\nWith :\n");
-  printf(" <debug_masks> ::= { action | action_handler | action_handler.menu | ai | ai.move | ai.shoot | body | body_anim | body.state | bonus | box | camera.follow | camera.shake | camera.tracking | character | character.collision | character.energy | damage | downloader | explosion | game | game.endofturn | game_mode | game.statechange | ghost | grapple.break | grapple.hook | grapple.node | ground_generator.element | index_server | jukebox | jukebox.cache | jukebox.play | lst_objects | map | map.collision | map.load | map.random | menu | mine | mouse | network | network.crc | network.crc_bad | network.traffic | network.turn_master | physical | physical.mem | physic.compute | physic.fall | physic.move | physic.overlapping | physic.pendulum | physic.physic | physic.position | physic.state | physic.sync | random | random.get | singleton | socket | sprite | team | test_rectangle | weapon | weapon.change | weapon.handposition | weapon.projectile | weapon.shoot | widget.border | wind | xml | xml.tree }\n");
+  printf(" <debug_masks> ::= { %s }\n", used_debug_masks.c_str());
 #endif
 }
 
