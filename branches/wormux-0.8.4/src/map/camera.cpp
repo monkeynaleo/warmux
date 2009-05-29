@@ -118,7 +118,7 @@ void Camera::AutoCrop()
     /* compute the ideal position!
      * it takes the physical object direction into account
      */
-    obj_pos = followed_object->GetPosition();
+    obj_pos = followed_object->GetCenter();
     obj_size = followed_object->GetSize();
 
     if (followed_object->IsMoving() && in_advance)
