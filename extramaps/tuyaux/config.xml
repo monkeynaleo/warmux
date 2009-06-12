@@ -9,7 +9,10 @@
   <surface name="map" file="tuyaux_decor.png" />
   <surface name="preview" file="tuyaux_preview.jpg" />
   <name>Tuyaux</name>
-  <water>1</water>
+  <water>water</water>
+  <add_pad>1</add_pad>
+  <point name="upper_left_pad" x="120" y="400" />
+  <point name="lower_right_pad" x="120" y="0" />
   <nb_mine>4</nb_mine>
   <is_open>0</is_open>
   <sprite name="wind_particle">
