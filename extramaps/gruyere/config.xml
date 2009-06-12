@@ -11,7 +11,7 @@
   <surface name="map" file="map.png" />
   <surface name="preview" file="preview.png" />
 
-  <name>Le Gruyère Géant</name>
+  <name>Le Gruyere Geant</name>
 
   <water>0</water>
   <nb_mine>3</nb_mine>
