@@ -22,6 +22,7 @@
 
 #include "game/game_mode.h"
 #include <iostream>
+#include <cstdio>
 #include "game/config.h"
 #include "game/game.h"
 #include "object/medkit.h"

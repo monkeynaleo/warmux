@@ -19,6 +19,7 @@
  * Polygon class. Store point of a polygon and handle affine transformation
  *****************************************************************************/
 
+#include <WORMUX_types.h>
 #include "graphic/polygon.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"

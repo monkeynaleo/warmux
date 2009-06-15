@@ -25,6 +25,7 @@
 #include <vector>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
+#include <WORMUX_types.h>
 
 // Forward declarations
 class Color;
@@ -33,7 +34,8 @@ class Surface;
 class Sprite;
 
 /** Use to draw the polygon */
-class PolygonBuffer {
+class PolygonBuffer
+{
   /* if you need that, implement it (correctly)*/
   PolygonBuffer(const PolygonBuffer&);
   PolygonBuffer operator=(const PolygonBuffer&);
@@ -51,7 +53,8 @@ class PolygonBuffer {
 };
 
 /** Store information about a item (sprite) of the polygon */
-class PolygonItem {
+class PolygonItem
+{
 
   /* if you need that, implement it (correctly)*/
   PolygonItem( PolygonItem&);
@@ -89,7 +92,8 @@ class PolygonItem {
 };
 
 /** Store information about a simple shape */
-class Polygon {
+class Polygon
+{
  private:
   void Init();
 
