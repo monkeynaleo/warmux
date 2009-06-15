@@ -235,11 +235,11 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
 
     if (r == EAI_NONAME) {
       s = CONN_BAD_HOST;
-      goto error;
+      goto err_addrinfo;
     }
 
     s = CONN_BAD_SOCKET;
-    goto error;
+    goto err_addrinfo;
   }
 
   /* getaddrinfo() returns a list of address structures.
@@ -287,6 +287,8 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
 
  error:
   freeaddrinfo(result); /* No longer needed */
+
+ err_addrinfo:
   return s;
 }
 #endif
