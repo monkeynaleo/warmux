@@ -96,8 +96,8 @@ public:
   // Answers to pings from the server / close connection if distantly closed
   void Refresh();
 
-  // Set it local
-  void SetLocal(const char* hostname = "127.0.0.1") { server_lst[hostname] = 9997; }
+  // Set the address
+  void SetAddress(const char* hostname, int port = 9997) { server_lst[hostname] = port; }
 
   // We want to host a game hidden on internet
   void SetHiddenServer() { hidden_server = true; };

@@ -403,8 +403,8 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'l':
-          if (optarg) IndexServer::GetInstance()->SetLocal(optarg);
-          else        IndexServer::GetInstance()->SetLocal();
+          if (optarg) IndexServer::GetInstance()->SetAddress(optarg);
+          else        IndexServer::GetInstance()->SetAddress("127.0.0.1");
           break;
         case 'y':
           choice = MainMenu::SKIN_VIEWER;
