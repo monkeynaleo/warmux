@@ -241,10 +241,14 @@ bool GameServer::RegisterToIndexServer(bool is_public)
     return true;
   }
 
-  bool index_server;
-  if (config.Get("local_index_server", index_server) && index_server) {
-    DPRINT(INFO, "WARNING: Connect to the LOCAL index server. Use this option only for debugging!");
-    IndexServer::GetInstance()->SetLocal();
+  std::string index_server_address;
+  if (config.Get("index_server_address", index_server_address)) {
+    int index_server_port = 9997;
+    config.Get("index_server_port", index_server_port);
+
+    DPRINT(INFO, "Connect to the index server on %s:%d. Use this option only for debugging!",
+	   index_server_address.c_str(), index_server_port);
+    IndexServer::GetInstance()->SetAddress(index_server_address.c_str(), index_server_port);
   }
 
   connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
