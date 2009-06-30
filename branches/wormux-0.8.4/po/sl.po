@@ -479,7 +479,7 @@ msgstr "(čas ni znan)"
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -522,7 +522,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -583,7 +583,7 @@ msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
@@ -733,7 +733,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
@@ -932,7 +932,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1208,7 +1208,7 @@ msgstr "Javne bitke"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
@@ -1240,7 +1240,7 @@ msgstr "Ločljivost"
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1515,11 +1515,11 @@ msgstr "Neznan ukaz"
 msgid "Unlimited"
 msgstr "Neomejen"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Preverjanje različice je spodletelo zaradi: %s"
@@ -1546,7 +1546,7 @@ msgstr "Orožje: streljaj / Paket: hiter padec"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -1570,11 +1570,11 @@ msgstr "Vetrni delci?"
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux se zaganja..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux različica "
 

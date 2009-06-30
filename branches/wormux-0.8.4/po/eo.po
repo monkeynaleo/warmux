@@ -405,7 +405,7 @@ msgstr "(nekonata tempo)"
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -448,7 +448,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Amboso"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Aŭtoroj:"
 
@@ -509,7 +509,7 @@ msgstr "Ne eblas malfermi la dosierujon de personaj teamoj (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de teamoj (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
@@ -660,7 +660,7 @@ msgstr "Energio"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Eraro iniciatante reton: la kliento %s ne akordiĝas kun vi! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Eraro ŝargante teamon:"
 
@@ -853,7 +853,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1129,7 +1129,7 @@ msgstr "Publikaj bataloj"
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
@@ -1161,7 +1161,7 @@ msgstr "Difino"
 msgid "Riot Bomb"
 msgstr "Tumultbombo"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -1432,11 +1432,11 @@ msgstr "Nekonata komando"
 msgid "Unlimited"
 msgstr "(senlimaj)"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
@@ -1461,7 +1461,7 @@ msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 msgid "Weapons"
 msgstr "Armiloj"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "TTT-ejo: "
 
@@ -1485,11 +1485,11 @@ msgstr "Venterojn?"
 msgid "Winner"
 msgstr "Gajnanto"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux ŝargante..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux versio "
 

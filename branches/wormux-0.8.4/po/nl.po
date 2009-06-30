@@ -424,7 +424,7 @@ msgstr "(onbekende tijd)"
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -528,7 +528,7 @@ msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
@@ -679,7 +679,7 @@ msgstr ""
 "Fout bij het initialiseren van het netwerk: Client %s is het niet met je "
 "eens!! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
@@ -878,7 +878,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1152,7 +1152,7 @@ msgstr "Openbare gevechten"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
@@ -1184,7 +1184,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -1458,11 +1458,11 @@ msgstr "Onbekend commando"
 msgid "Unlimited"
 msgstr "Onbegrensd"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versie"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versie verificatie mislukt omdat: %s\n"
@@ -1488,7 +1488,7 @@ msgstr "Wapen: Vuren / Bonuskist: snel laten vallen"
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Website: "
 
@@ -1512,11 +1512,11 @@ msgstr "Wind deeltjes?"
 msgid "Winner"
 msgstr "Winnaar"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux versie "
 

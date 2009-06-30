@@ -416,7 +416,7 @@ msgstr "(tempo sconosciuto)"
 msgid "(unlimited)"
 msgstr "(illimitato)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -460,7 +460,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Incudine"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -522,7 +522,7 @@ msgstr "Impossibile aprire la directory personale delle squadre (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, fuzzy, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossibile aprire la cartella (%s) delle squadre personalizzate!"
@@ -679,7 +679,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Errore inizializzando  la rete: Il client %s non è d'accordo con te!! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Errore nel caricamento della squadra:"
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Muoviti, sei troppo lento !!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1156,7 +1156,7 @@ msgstr "batttaglie pubbliche"
 msgid "Quit"
 msgstr "Esci"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
@@ -1189,7 +1189,7 @@ msgstr "Risoluzione"
 msgid "Riot Bomb"
 msgstr "Bomba Antisommossa"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Avvia il gioco"
 
@@ -1466,11 +1466,11 @@ msgstr "Comando sconosciuto"
 msgid "Unlimited"
 msgstr "(illimitato)"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versione"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verifica versione fallita: %s\n"
@@ -1495,7 +1495,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armi"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Sito web: "
 
@@ -1519,11 +1519,11 @@ msgstr "Particelle di vento?"
 msgid "Winner"
 msgstr "Vincitore"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Avvio in corso..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Versione Wormux"
 

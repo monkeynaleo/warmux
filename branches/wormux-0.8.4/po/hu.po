@@ -399,7 +399,7 @@ msgstr "(ismeretlen idõ)"
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Üllõ"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Szerzõk:"
 
@@ -503,7 +503,7 @@ msgstr "Nem tudom megnyitni a személyes csapatok könyvtárát (%s)!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nem tudom megnyitni az egyéni csapatok könyvtárát (%s)!"
@@ -654,7 +654,7 @@ msgstr "Energia"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Hiba a hálózat inicializálásakor: %s kliens nem ért veled egyet!! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Hiba a csapat betöltése közben:"
 
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Siess, túl lassú vagy!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1130,7 +1130,7 @@ msgstr "Nyilvános játékok"
 msgid "Quit"
 msgstr "Kilépés"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
@@ -1162,7 +1162,7 @@ msgstr "Felbontás"
 msgid "Riot Bomb"
 msgstr "Rohambomba"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Játék futtatása"
 
@@ -1436,11 +1436,11 @@ msgstr "Ismeretlen parancs"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
@@ -1465,7 +1465,7 @@ msgstr "Lövés / Ajándék gyorsabban esik"
 msgid "Weapons"
 msgstr "Fegyverek"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Honlap: "
 
@@ -1489,11 +1489,11 @@ msgstr "Hulló dísztárgyak"
 msgid "Winner"
 msgstr "Gyõztes"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux indítása..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux verzió "
 

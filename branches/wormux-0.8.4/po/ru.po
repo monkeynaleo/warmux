@@ -465,7 +465,7 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:446
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -508,7 +508,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковальня"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -569,7 +569,7 @@ msgstr "Не удаётся открыть личный каталог кома�
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
 
-#: src/team/custom_teams_list.cpp:89
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не удаётся открыть личный каталог команд (%s)!"
@@ -720,7 +720,7 @@ msgstr "Энергия"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Ошибка инициализации сети: Клиент %s не согласен с Вами!! - %s"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
@@ -916,7 +916,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Торопитесь, вы слишком медленные!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1193,7 +1193,7 @@ msgstr "Доступные битвы"
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Выйти из Wormux"
 
@@ -1225,7 +1225,7 @@ msgstr "Разрешение"
 msgid "Riot Bomb"
 msgstr "Пустотная бомба"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Начать игру"
 
@@ -1499,11 +1499,11 @@ msgstr "Неизвестная команда"
 msgid "Unlimited"
 msgstr "(бесконечно)"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:453
+#: src/menu/options_menu.cpp:454
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Проверка версии не удалась из-за: %s\n"
@@ -1531,7 +1531,7 @@ msgstr "Оружие: Огонь/Подарки: падают быстрее"
 msgid "Weapons"
 msgstr "Оружие"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Веб-сайт: "
 
@@ -1555,11 +1555,11 @@ msgstr "Частицы в воздухе?"
 msgid "Winner"
 msgstr "Победитель"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux версии "
 
