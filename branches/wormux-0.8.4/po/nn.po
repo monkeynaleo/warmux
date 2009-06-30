@@ -833,7 +833,6 @@ msgstr ""
 "Éin bruk per runde"
 
 #: src/weapon/auto_bazooka.cpp:220
-#, fuzzy
 msgid ""
 "Howto use it : left clic on target\n"
 "Initial fire angle : Up/Down\n"
