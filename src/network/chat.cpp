@@ -88,10 +88,10 @@ void Chat::ShowInput()
   }
 
   /* FIXME where do those constants come from ?*/
-  msg->DrawTopLeft(Point2i(25, 500));
+  msg->DrawTopLeft(Point2i(25, 400));
   if (input->GetText() != "") {
-    input->DrawTopLeft(Point2i(25 + msg->GetWidth() + 5, 500));
-    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, 500), cursor_pos);
+    input->DrawTopLeft(Point2i(25 + msg->GetWidth() + 5, 400));
+    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, 400), cursor_pos);
   }
 }
 
