@@ -8,7 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-03-13 15:08+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-06-30 20:44+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -612,9 +613,8 @@ msgid "Connected !"
 msgstr "Yhdistetty!"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Yhdistetty!"
+msgstr "Liittyneet pelaajat: "
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -962,7 +962,7 @@ msgstr "Kieli"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Listaa liittyneet pelaajat"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -1002,9 +1002,8 @@ msgstr "Kartat"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
-#, fuzzy
 msgid "Master mode"
-msgstr "Pelitila"
+msgstr "Mestaritila"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1085,9 +1084,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml-tiedostosta !"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "%i pelaaja liittyneenä"
+msgstr "Ei liittyneitä pelaajia"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1478,9 +1476,9 @@ msgid "Version"
 msgstr "Versio"
 
 #: src/menu/options_menu.cpp:454
-#, fuzzy, c-format
+#, c-format
 msgid "Version verification failed because: %s"
-msgstr "Versiontarkistus epäonnistui koska: %s\n"
+msgstr "Version tarkistus epäonnistui koska: %s"
 
 #: src/menu/network_menu.cpp:257
 #, c-format
@@ -1510,7 +1508,7 @@ msgstr "Verkkosivu:"
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Tervetuloa kohteeseen %s!"
 
 #: src/game/game.cpp:768
 #, c-format
@@ -1556,7 +1554,7 @@ msgstr "Olet yksin..."
 
 #: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Sinä olet uusi vuoromestari!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
