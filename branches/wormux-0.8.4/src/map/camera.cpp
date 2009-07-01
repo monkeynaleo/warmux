@@ -37,8 +37,11 @@
 #include <WORMUX_random.h>
 #include <assert.h>
 
-const Point2i CAMERA_SPEED(20, 20);
-
+const Point2d MAX_CAMERA_SPEED(100, 100);
+const Point2d MAX_CAMERA_ACCELERATION(1.5,1.5);
+const double ANTICIPATION = 20;
+const double REACTIVITY = 0.6;
+const double ADVANCE_ANTICIPATION = 22;
 // minimum speed of an object that is followed in advance
 #define MIN_SPEED_ADVANCE 5
 
@@ -52,6 +55,7 @@ Camera::Camera():
   m_shake_centerpoint( 0, 0 ),
   m_shake( 0, 0 ),
   m_last_time_shake_calculated( 0 ),
+  m_speed( 0, 0 ),
   auto_crop(true),
   in_advance(false),
   followed_object(NULL)
@@ -108,10 +112,8 @@ void Camera::AutoCrop()
    * of the object the camera was following, in case it desapears. This
    * typically happen when something explodes or a character dies. */
   static Point2i obj_pos(0, 0);
-  static Point2i obj_size(1, 1);
-  static Point2d obj_speed(0, 0);
 
-  Point2i Camera_Speed = CAMERA_SPEED;
+  Point2i target(0,0);
 
   if (followed_object && !followed_object->IsGhost() )
   {
@@ -119,77 +121,59 @@ void Camera::AutoCrop()
      * it takes the physical object direction into account
      */
     obj_pos = followed_object->GetCenter();
-    obj_size = followed_object->GetSize();
-
+   
     if (followed_object->IsMoving() && in_advance)
     {
-      Point2d prev_speed(obj_speed);
-      obj_speed = followed_object->GetSpeed();
+        Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetSpeed();
 
-      if ((prev_speed.GetX() > 0 && obj_speed.GetX() < 0) ||
-	  (prev_speed.GetX() < 0 && obj_speed.GetX() > 0))
-      {
-	if ((prev_speed.GetY() > 0 && obj_speed.GetY() < 0) ||
-	    (prev_speed.GetY() < 0 && obj_speed.GetY() > 0))
-	{
-	  /* object has probably rebound, do not try anymore to follow it
-	   * in advance
-	   */
-	  MSG_DEBUG("camera.follow", "No more in advance!");
-	  in_advance = false;
-	}
-      }
+        Point2d anticipation_limit = GetSize()/3;
+        //limit anticipation to screen size/3
+        if(anticipation.x > anticipation_limit.x) { anticipation.x = anticipation_limit.x; }
+        if(anticipation.y > anticipation_limit.y) { anticipation.y = anticipation_limit.y; }
+        if(anticipation.x < -anticipation_limit.x) { anticipation.x = -anticipation_limit.x; }
+        if(anticipation.y < -anticipation_limit.y) { anticipation.y = -anticipation_limit.y; }
 
-      if (in_advance)
-      {
-	double speed_x = InRange_Double(fabs(obj_speed.GetX()), MIN_SPEED_ADVANCE,
-					MAX_SPEED_ADVANCE) - MIN_SPEED_ADVANCE;
-	uint diff_x = (uint)((speed_x * (GetSizeX()/3)) / (MAX_SPEED_ADVANCE - MIN_SPEED_ADVANCE));
+       target =  obj_pos + anticipation;
 
-	if (obj_speed.GetX() < -MIN_SPEED_ADVANCE) {
-	  obj_pos.SetValues(obj_pos.GetX() - diff_x, obj_pos.GetY());
-	} else if (obj_speed.GetX() > MIN_SPEED_ADVANCE) {
-	  obj_pos.SetValues(obj_pos.GetX() + diff_x, obj_pos.GetY());
-	}
-
-	double speed_y = InRange_Double(fabs(obj_speed.GetY()), MIN_SPEED_ADVANCE,
-					MAX_SPEED_ADVANCE) - MIN_SPEED_ADVANCE;
-	uint diff_y = (uint)((speed_y * (GetSizeY()/3)) / (MAX_SPEED_ADVANCE - MIN_SPEED_ADVANCE));
-
-	if (obj_speed.GetY() < -MIN_SPEED_ADVANCE) {
-	  obj_pos.SetValues(obj_pos.GetX(), obj_pos.GetY() - diff_y);
-	} else if (obj_speed.GetY() > MIN_SPEED_ADVANCE) {
-	  obj_pos.SetValues(obj_pos.GetX(), obj_pos.GetY() + diff_y);
-	}
-
-	MSG_DEBUG("camera.follow", "-> Diff position: %u, %u",
-		  diff_x, diff_y);
-
-	Camera_Speed *= 4;
-      }
     }
     else
     {
-      obj_speed = Point2d(0, 0);
+      target = obj_pos;
     }
+
+    target -= GetSize()/2;
+  }
+  else
+  {
+      target = GetPosition();
   }
 
-  if (obj_pos.y < 0)
-    obj_pos.y = 0;
+  //Compute new speed to reach target
+  Point2d acceleration(0,0);
+  acceleration.x = REACTIVITY * (target.x - ANTICIPATION * m_speed.x - position.x) ;
+  acceleration.y = REACTIVITY * (target.y - ANTICIPATION * m_speed.y - position.y) ;
+  // Limit acceleration
+  if(acceleration.x > MAX_CAMERA_ACCELERATION.x) { acceleration.x = MAX_CAMERA_ACCELERATION.x; }
+  if(acceleration.y > MAX_CAMERA_ACCELERATION.y) { acceleration.y = MAX_CAMERA_ACCELERATION.y; }
+  if(acceleration.x < -MAX_CAMERA_ACCELERATION.x) { acceleration.x = -MAX_CAMERA_ACCELERATION.x; }
+  if(acceleration.y < -MAX_CAMERA_ACCELERATION.y) { acceleration.y = -MAX_CAMERA_ACCELERATION.y; }
 
-  Point2i dstMax = GetSize()/2;
+  //Apply acceleration
+  m_speed = m_speed + acceleration;
 
-  ASSERT(!dstMax.IsNull());
+  //Limit
+  if(m_speed.x > MAX_CAMERA_SPEED.x) { m_speed.x = MAX_CAMERA_SPEED.x; }
+  if(m_speed.y > MAX_CAMERA_SPEED.y) { m_speed.y = MAX_CAMERA_SPEED.y; }
+  if(m_speed.x < -MAX_CAMERA_SPEED.x) { m_speed.x = -MAX_CAMERA_SPEED.x; }
+  if(m_speed.y < -MAX_CAMERA_SPEED.y) { m_speed.y = -MAX_CAMERA_SPEED.y; }
 
-  // BR-> bottom right
-  Point2i cameraBR = GetSize() + position;
-  Point2i objectBRmargin = obj_pos + obj_size + GetSize()/2;
-  Point2i dst(0, 0);
+  //Update position
+  Point2i next_position(0,0);
 
-  dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
-  dst += (obj_pos - GetSize()/2).inf(position) * (obj_pos - GetSize()/2 - position);
+  next_position.x =  m_speed.x;
+  next_position.y =  m_speed.y;
 
-  SetXY(dst * Camera_Speed / dstMax);
+  SetXY( next_position);
 }
 
 void Camera::SaveMouseCursor()
@@ -329,6 +313,8 @@ void Camera::StopFollowingObj(const PhysicalObj* obj){
 
   if (followed_object == obj)
     followed_object = NULL;
+
+  m_speed = Point2d(0,0);
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj) const {
