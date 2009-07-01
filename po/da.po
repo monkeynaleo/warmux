@@ -1,19 +1,19 @@
 # translation of da.po to danish
 # Copyright (C) 2007 Wormux Development Team
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the Wormux package.
 #
-# Janus Troelsen <ysangkok@gmail.com>, 2006, 2007, 2008.
+# Ysangkok <ysangkok@gmail.com>, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2008-09-05 18:21+0200\n"
-"Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
-"Language-Team: danish <da@li.org>\n"
+"PO-Revision-Date: 2009-07-01 16:01+0200\n"
+"Last-Translator: Ysangkok <ysangkok@gmail.com>\n"
+"Language-Team: Danish <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/map/maps_list.cpp:325
@@ -59,7 +59,7 @@ msgstr "Hold %s – Fjernt"
 #: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
-msgstr ""
+msgstr "%s ændrer mål til %s"
 
 #: src/graphic/fps.cpp:103
 #, c-format
@@ -99,7 +99,7 @@ msgstr "%s (%s) døde fordi han var klodset!"
 #: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
-msgstr ""
+msgstr "%s besluttede sig for at skade %s"
 
 #: src/object/medkit.cpp:66
 #, c-format
@@ -402,7 +402,7 @@ msgstr "%s tog et medlem af holdet %s med i graven!"
 #: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
-msgstr ""
+msgstr "%s vil skyde %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
@@ -552,9 +552,8 @@ msgid "Change weapon countdown"
 msgstr "Ændr våbennedtælling"
 
 #: src/menu/options_menu.cpp:149
-#, fuzzy
 msgid "Character names:"
-msgstr "Kriger"
+msgstr "Krigerenes navne:"
 
 #: src/menu/game_mode_editor.cpp:61
 msgid "Character switching"
@@ -610,9 +609,8 @@ msgid "Connected !"
 msgstr "Forbundet!"
 
 #: src/network/admin_commands.cpp:72
-#, fuzzy
 msgid "Connected players: "
-msgstr "Forbundet!"
+msgstr "Forbunde spillere:"
 
 #: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
@@ -746,8 +744,7 @@ msgstr ""
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
 "stedet. I så fald skal du forwarde TCP-port %s til din computer."
 
-#: tools/servers/headless_server/server.cpp:266
-#, fuzzy, c-format
+#: tools/servers/headless_server/server.cpp:266, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
@@ -755,9 +752,9 @@ msgid ""
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Fejl: Din server er ikke tilgængelig fra internettet. Check at din firewall-"
-"konfiguration: TCP-port %s skal acceptere forbindelser udefra. Hvis du ikke "
+"konfiguration: TCP-port %u skal acceptere forbindelser udefra. Hvis du ikke "
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
-"stedet. I så fald skal du forwarde TCP-port %s til din computer."
+"stedet. I så fald skal du forwarde TCP-port %u til din computer."
 
 #: src/team/team.cpp:124
 #, c-format
@@ -790,7 +787,7 @@ msgstr "Spilmodus"
 
 #: src/menu/network_connection_menu.cpp:188
 msgid "Game name:"
-msgstr "Spil navn:"
+msgstr "Spillets navn:"
 
 #: src/weapon/gnu.cpp:161
 msgid "Gnu Launcher"
@@ -959,7 +956,7 @@ msgstr "Sprog"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
-msgstr ""
+msgstr "Liste over forbunde spillere"
 
 #: src/map/maps_list.cpp:227
 msgid "Load maps:"
@@ -999,9 +996,8 @@ msgstr "Baner"
 #. The first player to connect to a headless server asumes the game master role
 #. We are becoming game master, updating the menu...
 #: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
-#, fuzzy
 msgid "Master mode"
-msgstr "Spilmodus"
+msgstr "Administratormodus"
 
 #: src/menu/game_mode_editor.cpp:72
 msgid "Max energy"
@@ -1082,9 +1078,8 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML-konfigurationsfilen!"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy
 msgid "No player connected"
-msgstr "Spiller %i er forbundet"
+msgstr "Ingen spillere forbundet"
 
 #: src/menu/results_menu.cpp:73
 msgid "Nobody!"
@@ -1475,10 +1470,9 @@ msgstr "Ubegrænset"
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:454
-#, fuzzy, c-format
+#: src/menu/options_menu.cpp:454, c-format
 msgid "Version verification failed because: %s"
-msgstr "Version-verifikation fejlede fordi: %s\n"
+msgstr "Version-verifikation fejlede fordi: %s"
 
 #: src/menu/network_menu.cpp:257
 #, c-format
@@ -1509,7 +1503,7 @@ msgstr "Hjemmeside: "
 #: src/menu/network_menu.cpp:150
 #, c-format
 msgid "Welcome to %s!"
-msgstr ""
+msgstr "Velkommen, %s!"
 
 #: src/game/game.cpp:768
 #, c-format
@@ -1555,7 +1549,7 @@ msgstr "Du er alene..."
 
 #: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"
-msgstr ""
+msgstr "Du er den nye tur-bestyrer!"
 
 #: src/map/maps_list.cpp:258
 msgid "You need at least one valid map !"
@@ -1638,9 +1632,8 @@ msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 #~ msgid "Tools"
 #~ msgstr "Værktøj"
 
-#, fuzzy
 #~ msgid "Head commander:"
-#~ msgstr "Hovedkommandør: "
+#~ msgstr "Hovedkommandør:"
 
 #~ msgid "Add custom team"
 #~ msgstr "Tilføj brugerdefineret hold"
