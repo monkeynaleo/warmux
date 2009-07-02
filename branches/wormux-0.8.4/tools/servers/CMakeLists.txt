@@ -1,2 +1,4 @@
-ADD_SUBDIRECTORY(game_server)
-ADD_SUBDIRECTORY(index_server)
+IF(BUILD_SERVERS)
+    ADD_SUBDIRECTORY(game_server)
+    ADD_SUBDIRECTORY(index_server)
+ENDIF(BUILD_SERVERS)
