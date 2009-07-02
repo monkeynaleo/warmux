@@ -27,7 +27,7 @@ export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i38
 export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 export COMPAT_FLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.3.9"
 
-export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I${MAC}tmpbuild/lib/box2d/src "
+export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I${MAC}tmpbuild/lib/box2d/src -I/Library/Frameworks/SDL.framework/Versions/A/Headers/ "
 
 APP_VERSION=0.8.3
 BUNDLE_NAME=Wormux
@@ -181,7 +181,7 @@ then
     exit 1
 fi
 
-if ! make # -j${NBTHREADS}
+if ! make VERBOSE=1 # -j${NBTHREADS}
 then
     echo "make error"
     exit 1
