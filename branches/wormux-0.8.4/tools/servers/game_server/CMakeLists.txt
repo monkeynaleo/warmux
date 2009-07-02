@@ -3,6 +3,7 @@ SET(EXE wormux-headless-server)
 
 INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/wormux/include
                      ${PROJECT_SOURCE_DIR}/lib/wormux-server/include
+                     ${PROJECT_SOURCE_DIR}/src
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${SDLNET_INCLUDE_DIR} )
 LINK_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/wormux
