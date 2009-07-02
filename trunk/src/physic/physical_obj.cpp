@@ -1097,7 +1097,7 @@ void PhysicalObj::Ghost ()
   if (m_alive == GHOST)
     return;
 
-  bool was_dead = IsDead();
+  //bool was_dead = IsDead();
   m_alive = GHOST;
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
   SignalGhostState(m_energy==0);
