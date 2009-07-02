@@ -20,7 +20,7 @@
 #include <string>
 #include <fstream>
 #include <WSERVER_debug.h>
-#include <config.h>
+#include "config.h"
 
 Config config;
 
