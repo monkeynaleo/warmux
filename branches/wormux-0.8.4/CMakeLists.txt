@@ -66,7 +66,7 @@ ELSE(DATA_PATH)
 ENDIF(DATA_PATH)
 
 IF(COMMAND cmake_policy)
-  cmake_policy(SET CMP0011 NEW)
+# cmake_policy(SET CMP0011 NEW)
 ENDIF(COMMAND cmake_policy)
 
 # Optional package CPack
@@ -79,7 +79,6 @@ ADD_CUSTOM_TARGET(debug WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_P
 
 
 # Required libraries
-FIND_PACKAGE(Gettext REQUIRED)
 FIND_PACKAGE(SDL REQUIRED)
 FIND_PACKAGE(SDL_image REQUIRED)
 FIND_PACKAGE(SDL_mixer REQUIRED)
@@ -93,14 +92,59 @@ FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(FriBiDi)
 
 IF(APPLE)
-  # to ease packaging, we'll use a static libintl
-  # we also need to link against the SDL_main library (required by the mac version of SDL)
-  SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WORMUX_LDFLAGS}")
-  # to ease packaging, we'll use a framework version of libpng
-  # (with a different name so there is no confusion with the UNIX version of libpng)
-  SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
+    # to ease packaging, we'll use a static libintl
+    # we also need to link against the SDL_main library (required by the mac version of SDL)
+    SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WORMUX_LDFLAGS}")
+    # to ease packaging, we'll use a framework version of libpng
+    # (with a different name so there is no confusion with the UNIX version of libpng)
+    SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
+    SET(GETTEXT_FOUND TRUE)
+    ADD_DEFINITIONS(-DENABLE_NLS)
+    #FIND_LIBRARY(GETTEXT_LIBRARY NAMES intl
+    #             PATHS ${PROJECT_SOURCE_DIR} )
+    
+    FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
+    FIND_PROGRAM(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
+    FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
+
+    # additional macro
+    MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
+    
+       SET(_gmoFiles)
+       GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
+       GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
+    
+       SET(_addToAll)
+       IF(${_firstPoFile} STREQUAL "ALL")
+          SET(_addToAll "ALL")
+          SET(_firstPoFile)
+       ENDIF(${_firstPoFile} STREQUAL "ALL")
+    
+       FOREACH (_currentPoFile ${ARGN})
+          GET_FILENAME_COMPONENT(_absFile ${_currentPoFile} ABSOLUTE)
+          GET_FILENAME_COMPONENT(_abs_PATH ${_absFile} PATH)
+          GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
+          SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+    
+          ADD_CUSTOM_COMMAND( 
+             OUTPUT ${_gmoFile} 
+             COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
+             COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
+             DEPENDS ${_absPotFile} ${_absFile} 
+          )
+    
+          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo) 
+          SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
+    
+       ENDFOREACH (_currentPoFile )
+    
+       ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_gmoFiles})
+
+    ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
+
 ELSE(APPLE)
   FIND_PACKAGE(PNG REQUIRED)
+  FIND_PACKAGE(Gettext REQUIRED)
 ENDIF(APPLE)
 
 # new stuff in 2.6; remove when it is widespread enough and we switch (see top)
@@ -108,7 +152,7 @@ ENDIF(APPLE)
 IF(COMMAND cmake_policy)
   cmake_policy(SET CMP0005 OLD)
   cmake_policy(SET CMP0003 NEW)
-  cmake_policy(SET CMP0011 NEW)
+#  cmake_policy(SET CMP0011 NEW)
 ENDIF(COMMAND cmake_policy)
 
 ADD_DEFINITIONS(${LIBXML2_DEFINITIONS})
