@@ -381,7 +381,10 @@ void OptionMenu::SaveOptions()
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-#ifndef __APPLE__
+#ifdef __APPLE__
+  // The mac version of SDL does not support fullscreen properly
+  app->video->SetConfig(w, h, false);
+#else
   app->video->SetConfig(w, h, full_screen->GetValue());
 #endif
 
