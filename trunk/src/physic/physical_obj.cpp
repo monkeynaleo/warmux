@@ -1097,9 +1097,13 @@ void PhysicalObj::Ghost ()
   if (m_alive == GHOST)
     return;
 
-  //bool was_dead = IsDead();
+#ifdef WMX_LOG
+  bool was_dead = IsDead();
+#endif
   m_alive = GHOST;
+#ifdef WMX_LOG
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
+#endif
   SignalGhostState(m_energy==0);
   // The object became a gost
   StopMoving();
