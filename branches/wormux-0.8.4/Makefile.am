@@ -15,9 +15,14 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/howto_play/de.pdf                 \
              doc/howto_play/en.pdf                 \
              doc/howto_play/fr.pdf                 \
+	     doc/howto_play/gl.pdf		   \
+	     doc/howto_play/nl.pdf		   \
              doc/howto_play/pl.pdf                 \
              doc/howto_play/sk.pdf                 \
              doc/howto_play/sv.pdf                 \
+	     doc/howto_play_online/de.pdf          \
+	     doc/howto_play_online/en.pdf          \
+	     doc/howto_play_online/nl.pdf          \
 	     mac/Info.plist.in			   \
 	     mac/PkgInfo.in			   \
 	     mac/README-mac.txt			   \
@@ -26,6 +31,8 @@ EXTRA_DIST = data/wormux.desktop                   \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
+             tools/win32_setup/Greek.nsh           \
+             tools/win32_setup/Polish.nsh          \
              tools/win32_setup/langmacros.nsh      \
              tools/win32_setup/install.ico         \
              tools/win32_setup/uninstall.ico
