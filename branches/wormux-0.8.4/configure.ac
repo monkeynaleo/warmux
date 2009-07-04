@@ -393,6 +393,8 @@ AC_CONFIG_FILES([Makefile
 		 lib/wormux-server/Makefile
                  doc/Makefile
                  po/Makefile
+		 tools/Makefile
+		 tools/servers/Makefile
 		 tools/servers/game_server/Makefile
 		 tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])

@@ -1,5 +1,7 @@
 SUBDIRS = .
 
+EXTRA_DIST = wormux_server.conf
+
 bin_PROGRAMS = wormux-server
 
 wormux_server_SOURCES = \
