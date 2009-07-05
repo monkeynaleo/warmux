@@ -32,6 +32,7 @@
 #include "weapon/weapons_list.h"
 
 GameMode::GameMode():
+  rules("none"),
   nb_characters(6),
   max_teams(4),
   duration_turn(60),
@@ -77,6 +78,14 @@ const std::string& GameMode::GetName() const
 // Load data options from the selected game_mode
 bool GameMode::LoadXml(const xmlNode* xml)
 {
+  bool r;
+
+  r = XmlReader::ReadString(xml, "rules", rules);
+  if (!r) {
+    fprintf(stderr, "Game mode: missing <rules>\n");
+    return false;
+  }
+
   XmlReader::ReadBool(xml, "auto_change_character", auto_change_character);
 
   std::string txt;
