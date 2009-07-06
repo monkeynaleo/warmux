@@ -1454,9 +1454,9 @@ msgid "Version"
 msgstr "Versão"
 
 #: src/menu/options_menu.cpp:454
-#, fuzzy, c-format
+#, c-format
 msgid "Version verification failed because: %s"
-msgstr "Verificação de versão falhou porque: %s\n"
+msgstr "Verificação de versão falhou porque: %s"
 
 #: src/menu/network_menu.cpp:257
 #, c-format
