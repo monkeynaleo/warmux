@@ -254,11 +254,11 @@ bool GameServer::RegisterToIndexServer(bool is_public)
   connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
   if (conn != CONNECTED) {
     if (conn == CONN_WRONG_VERSION) {
-      fprintf(stderr, Format(_("Sorry, your version is not supported anymore. "
-			       "Supported version are %s. "
-			       "You can download a updated version "
-			       "on http://www.wormux.org/wiki/download.php"),
-			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
+      fprintf(stderr, "%s", Format(_("Sorry, your version is not supported anymore. "
+				     "Supported version are %s. "
+				     "You can download a updated version "
+				     "on http://www.wormux.org/wiki/download.php"),
+				   IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
       fprintf(stderr, "ERROR: Fail to connect to the index server");
     }
@@ -267,7 +267,7 @@ bool GameServer::RegisterToIndexServer(bool is_public)
 
   bool r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", port);
   if (!r) {
-    fprintf(stderr, Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %u must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %u must be forwarded on your computer."), port, port).c_str());
+    fprintf(stderr, "%s", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %u must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %u must be forwarded on your computer."), port, port).c_str());
     IndexServer::GetInstance()->Disconnect();
     return false;
   }
