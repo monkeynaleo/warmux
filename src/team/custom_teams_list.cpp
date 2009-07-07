@@ -25,8 +25,8 @@
 #include <WORMUX_file_tools.h>
 
 #include <iostream>
-#include <algorithm>
 #include <cstdio>
+#include <algorithm>
 
 CustomTeamsList::CustomTeamsList()
 {

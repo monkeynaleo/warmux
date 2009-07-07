@@ -23,7 +23,7 @@
 #define WEAPON_LAUNCHER_H
 
 #include "weapon.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 
 class Sprite;
 class WeaponLauncher;
@@ -68,9 +68,12 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    void Collision();
+
     virtual void SignalGroundCollision(const Point2d& speed_before);
-    virtual void SignalCollision(const Point2d& speed_before);
+    virtual void SignalObjectCollision(const Point2d& my_speed_before,
+				       PhysicalObj * obj,
+				       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
@@ -95,8 +98,10 @@ class WeaponBullet : public WeaponProjectile
     virtual void Refresh();
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
+    virtual void SignalObjectCollision(const Point2d& my_speed_before,
+				       PhysicalObj * obj,
+				       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
     void DoExplosion();
 };
 
@@ -142,7 +147,7 @@ class WeaponLauncher : public Weapon
     // Signal that a projectile explosion
     virtual void SignalProjectileExplosion() { SignalEndOfProjectile(); };
     // Signal that a projectile fired by this weapon has hit something (ground, character etc)
-    virtual void SignalProjectileCollision(const Point2d& /*speed_before*/) { SignalEndOfProjectile(); };
+    virtual void SignalProjectileCollision() { SignalEndOfProjectile(); };
     // Signal a projectile is drowning
     virtual void SignalProjectileDrowning() { SignalEndOfProjectile(); };
     // Signal a projectile is fishing out of water (supertux)

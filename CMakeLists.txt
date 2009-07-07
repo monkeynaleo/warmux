@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 2.4.4)
 PROJECT(Wormux)
 SET(WORMUX_MAJOR "0")
 SET(WORMUX_MINOR "8")
-SET(WORMUX_PATCH "svn")
-SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}${WORMUX_PATCH}")
+SET(WORMUX_PATCH "4")
+SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}.${WORMUX_PATCH}")
 
 # change the default install prefix to /usr
 SET(CMAKE_INSTALL_PREFIX /usr)
@@ -21,7 +21,7 @@ IF(PREFIX)
 ENDIF(PREFIX)
 
 # Set some global variables
-SET(WORMUX_CFLAGS "-Wall -Werror") # additional compile flags for wormux
+SET(WORMUX_CFLAGS "-Wall") # additional compile flags for wormux
 SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/build/cmake)
 
@@ -65,6 +65,10 @@ ELSE(DATA_PATH)
 
 ENDIF(DATA_PATH)
 
+IF(COMMAND cmake_policy)
+# cmake_policy(SET CMP0011 NEW)
+ENDIF(COMMAND cmake_policy)
+
 # Optional package CPack
 INCLUDE(CPackConfig OPTIONAL)
 INCLUDE(XmlValidityTest OPTIONAL)
@@ -98,42 +102,42 @@ IF(APPLE)
     ADD_DEFINITIONS(-DENABLE_NLS)
     #FIND_LIBRARY(GETTEXT_LIBRARY NAMES intl
     #             PATHS ${PROJECT_SOURCE_DIR} )
-    
+
     FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
     FIND_PROGRAM(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
     FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 
     # additional macro
     MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
-    
+
        SET(_gmoFiles)
        GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
        GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
-    
+
        SET(_addToAll)
        IF(${_firstPoFile} STREQUAL "ALL")
           SET(_addToAll "ALL")
           SET(_firstPoFile)
        ENDIF(${_firstPoFile} STREQUAL "ALL")
-    
+
        FOREACH (_currentPoFile ${ARGN})
           GET_FILENAME_COMPONENT(_absFile ${_currentPoFile} ABSOLUTE)
           GET_FILENAME_COMPONENT(_abs_PATH ${_absFile} PATH)
           GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
           SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
-    
-          ADD_CUSTOM_COMMAND( 
-             OUTPUT ${_gmoFile} 
+
+          ADD_CUSTOM_COMMAND(
+             OUTPUT ${_gmoFile}
              COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
              COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
-             DEPENDS ${_absPotFile} ${_absFile} 
+             DEPENDS ${_absPotFile} ${_absFile}
           )
-    
-          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo) 
+
+          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo)
           SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
-    
+
        ENDFOREACH (_currentPoFile )
-    
+
        ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_gmoFiles})
 
     ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )

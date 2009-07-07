@@ -38,19 +38,22 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
-
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"
 
-Medkit::Medkit() : ObjBox("medkit")
-{
+Medkit::Medkit()
+  : ObjBox("medkit") {
+  SetTestRect (29, 29, 63, 6);
+
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/medkit");
   GetResourceManager().UnLoadXMLProfile(res);
 
+  SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
+  std::cout<<"anim set"<<std::endl;
 }
 
 void Medkit::ApplyBonus(Character * c)
@@ -62,11 +65,11 @@ void Medkit::ApplyBonus(Character * c)
 
 void Medkit::ApplyMedkit(Team &/*equipe*/, Character &ver) const {
   std::ostringstream txt;
-  txt << Format(ngettext(
+ txt << Format(ngettext(
                 "%s has won %u point of energy!",
                 "%s has won %u points of energy!",
                 nbr_health),
-		ver.GetName().c_str(), nbr_health);
+            ver.GetName().c_str(), nbr_health);
   ver.SetEnergyDelta (nbr_health);
   GameMessages::GetInstance()->Add (txt.str());
 }

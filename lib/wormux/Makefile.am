@@ -9,6 +9,7 @@ libwormux_a_SOURCES = \
 	./include/WORMUX_distant_cpu.h \
 	./include/WORMUX_download.h \
 	./include/WORMUX_error.h \
+	./include/WORMUX_euler_vector.h \
 	./include/WORMUX_file_tools.h \
 	./include/WORMUX_i18n.h \
 	./include/WORMUX_index_server.h \
@@ -28,6 +29,7 @@ libwormux_a_SOURCES = \
 	./base/error.cpp \
 	./base/i18n.cpp \
 	./base/singleton.cpp \
+	./maths/euler_vector.cpp \
 	./net/distant_cpu.cpp \
 	./net/download.cpp \
 	./net/index_server.cpp \
@@ -38,4 +40,4 @@ libwormux_a_SOURCES = \
 	./tools/file_tools.cpp \
 	./tools/random.cpp
 
-AM_CXXFLAGS += -I$(top_srcdir)/lib/wormux/include
+AM_CXXFLAGS = -I$(top_srcdir)/lib/wormux/include

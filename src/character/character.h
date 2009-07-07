@@ -26,7 +26,7 @@
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "character/body.h"
 
 class Text;
@@ -34,7 +34,7 @@ class Team;
 class ParticleEngine;
 class DamageStatistics;
 class Body;
-class PhysicalShape;
+
 #ifdef DEBUG
 //#define DEBUG_SKIN
 #endif
@@ -54,12 +54,12 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
-  uint m_nbr_foot_contact;
+
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
-  uint m_force_walk_index;
+
   // survived games
   int survivals;
 
@@ -73,7 +73,6 @@ private:
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
-
 
   // Channel used for sound
   int channel_step;
@@ -95,9 +94,13 @@ private:
   void DrawEnergyBar(int dy) const;
   void DrawName(int dy) const;
 
-  void SignalDrowning();
-  void SignalGhostState(bool was_dead);
-  void SignalCollision(const Point2d& speed_vector);
+  virtual void SignalDrowning();
+  virtual void SignalGhostState(bool was_dead);
+  virtual void SignalGroundCollision(const Point2d& speed_before);
+  virtual void SignalObjectCollision(const Point2d& my_speed_before,
+				     PhysicalObj * obj,
+				     const Point2d& obj_speed);
+  void Collision(const Point2d& speed_vector);
   void SetBody(Body* char_body);
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
@@ -108,7 +111,7 @@ public:
   Character (const Character& acharacter);
   ~Character();
 
-  void SignalExplosion();
+  virtual void SignalExplosion();
 
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
@@ -142,8 +145,8 @@ public:
     else disease_damage_per_turn = 0;
   }
 
-  // Used to sync value across network
   // ================================================
+  // Used to sync value across network
   virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
 
@@ -176,20 +179,7 @@ public:
 
   // Can we move (check a timeout)
   bool CanMoveRL() const;
-  bool CanJump() const;
-  bool FootsInVacuum() const;
-
-  virtual void AddContact(const PhysicalShape * shape);
-  virtual void RemoveContact(const PhysicalShape * shape);
-
-
-
-  void Move (bool slowly);
-  void StopMove();
-
-  // Move the active character to the left/right
-  void MoveRight(bool shift);
-  void MoveLeft(bool shift);
+  bool CanJump() const { return CanMoveRL(); };
 
   // Jumps
   void Jump(double strength, double angle);
@@ -234,11 +224,11 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
-  void HandleKeyRefreshed_MoveRight(bool shift) ;
+  void HandleKeyRefreshed_MoveRight(bool shift) const;
   void HandleKeyReleased_MoveRight(bool shift);
 
   void HandleKeyPressed_MoveLeft(bool shift);
-  void HandleKeyRefreshed_MoveLeft(bool shift) ;
+  void HandleKeyRefreshed_MoveLeft(bool shift) const;
   void HandleKeyReleased_MoveLeft(bool shift);
 
   void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };

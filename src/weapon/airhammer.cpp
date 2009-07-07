@@ -36,7 +36,6 @@
 #include "team/teams_list.h"
 #include "team/macro.h"
 #include "team/team.h"
-
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -116,13 +115,13 @@ bool Airhammer::p_Shoot()
     x = ActiveCharacter().GetHandPosition().x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(Point2i(x, y)) )
+      if( character->Contain(Point2i(x, y)) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetEnergyDelta(-(int)cfg().damage);
+        character->SetEnergyDelta(-(int)cfg().damage);
         end = true;
       }
     }

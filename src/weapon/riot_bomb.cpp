@@ -32,7 +32,6 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 
-
 // Roquette du bazooka
 class RiotBombRocket : public WeaponProjectile
 {

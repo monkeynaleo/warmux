@@ -29,7 +29,7 @@
 #include "interface/cursor.h"
 #include "interface/mouse.h"
 #include "interface/interface.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "team/teams_list.h"
 #include <WORMUX_debug.h>
 #include "tool/math_tools.h"

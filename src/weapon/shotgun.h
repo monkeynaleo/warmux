@@ -27,8 +27,6 @@
 #include "include/base.h"
 #include <WORMUX_point.h>
 
-class ShotgunConfig;
-
 class Shotgun : public WeaponLauncher
 {
   protected:
@@ -40,9 +38,6 @@ class Shotgun : public WeaponLauncher
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-
-    ShotgunConfig& cfg();
-
   private:
     void ShootSound() const;
 };

@@ -18,9 +18,9 @@
  ******************************************************************************
  * Team handling
  *****************************************************************************/
-
 #include <algorithm>
 #include <iostream>
+#include <WORMUX_team_config.h>
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
@@ -28,12 +28,10 @@
 #include "game/game_mode.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include <WORMUX_file_tools.h>
 #include "team/team.h"
-#include <WORMUX_team_config.h>
 #include "team/team_energy.h"
 #include "team/teams_list.h"
-
+#include <WORMUX_file_tools.h>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -74,7 +72,7 @@ TeamsList::~TeamsList()
 void TeamsList::NextTeam ()
 {
   Team* next = GetNextTeam();
-  SetActive (next->GetId());
+  SetActive(next->GetId());
 
   if (GameMode::GetInstance()->auto_change_character) {
     ActiveTeam().NextCharacter();

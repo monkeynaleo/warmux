@@ -23,9 +23,9 @@
 #define CUSTOM_TEAMS_LIST_H
 //-----------------------------------------------------------------------------
 
-#include <WORMUX_singleton.h>
 #include <string>
 #include <vector>
+#include <WORMUX_singleton.h>
 
 //-----------------------------------------------------------------------------
 

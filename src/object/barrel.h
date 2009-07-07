@@ -22,7 +22,7 @@
 #ifndef BARREL_H
 #define BARREL_H
 
-#include "physic/physical_obj.h"
+#include "physical_obj.h"
 
 class Sprite;
 

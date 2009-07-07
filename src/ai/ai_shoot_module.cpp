@@ -46,9 +46,8 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
   {
-    if ( IsDirectlyShootable(shooter, **character, shoot_angle) ) {
-      //TODO: don't return as soon as a match is found, but return the best
-      return &(**character);
+    if ( IsDirectlyShootable(shooter, *character, shoot_angle) ) {
+      return &(*character);
     }
   }
   return NULL;
@@ -67,7 +66,6 @@ const Character* AIShootModule::FindShootableEnemy(const Character& shooter,
 bool AIShootModule::IsBazookable(const Character& shooter,
                                  double& angle)
 {
-  ActiveTeam().SetWeapon(Weapon::WEAPON_BAZOOKA); //see note in IsDirectlyShootable
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition();
   // Set the rotation of "angle" radians
   Point2i pos = Point2i::FromPolarCoordinates(sqrt(double(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
@@ -110,11 +108,8 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
 
-  // HACK: use the gun to get a gunhole position
-  ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
-
   // TODO: Please find an alternative to solve this tempory solution
-  Point2d pos = POINT2I_2_POINT2D(ActiveTeam().GetWeapon().GetGunHolePosition());
+  Point2d pos = ActiveCharacter().GetCenter();
   Point2d arrival = enemy.GetCenter();
 
   double original_angle = pos.ComputeAngle(arrival);
@@ -122,7 +117,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   int delta_x = (pos.x > arrival.x) ? -1 : 1;
   double a = tan(original_angle);
   double b = pos.y - (a * pos.x);
-  uint ground_hitcount = 0;
+
 
   // compute to see if there any part of ground between the 2 characters
   // While test is not finished
@@ -138,26 +133,19 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
     // is there a collision on the ground ??
     if (!GetWorld().IsInVacuum(posi)) {
-      // allow two pixels of slack - rifles have more than one shot, so
-      // don't let a thin wall or a top of a hill (shotgun) deter us
-      if (ground_hitcount < 3) {
-        ground_hitcount++;
-      } else {
-        return false;
-      }
+      return false;
     }
 
     // is there a collision with another character ?
     FOR_ALL_CHARACTERS(team, other_character) {
-      if ( &(**other_character) != &shooter
-           && &(**other_character) != &enemy ) {
+      if ( &(*other_character) != &shooter
+           && &(*other_character) != &enemy ) {
 
         // Skip only if this character has the same team of shooter
         // otherwises he's a enemy. (more reachable than the current)
-        if ((*other_character)->GetTestRect().Contains(pos)
-            && (&(*other_character)->GetTeam()) == (&shooter.GetTeam())) {
+        if (other_character->GetTestRect().Contains(pos)
+            && (&other_character->GetTeam()) == (&shooter.GetTeam()))
           return false;
-        }
       }
     }
       pos.x += delta_x;
@@ -201,47 +189,38 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
 bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 {
-  // first create a list of usable weapons
-  std::vector<Weapon::Weapon_type> usable_weapons;
-  GetUsableFiringWeapons(usable_weapons);
+  // we choose between gun, sniper_rifle, shotgun and submachine gun
+  uint selected = uint(RandomSync().GetDouble(0.0, 3.5));
+  switch (selected) {
+  case 0:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 1:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 2:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SUBMACHINE_GUN);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 3:
+  default:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
+  }
 
-  uint count = usable_weapons.size();
-  if (count == 0) return false;
+  // Check the angle
+  double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+                             - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
-  // randomly choose a good one
-  // TODO: in the future add logic to discriminate between weapons
-  uint selected = RandomSync().GetUint(0, count-1);
-  ActiveTeam().SetWeapon(usable_weapons.at(selected));
+  if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) {
+    // angle is too wide for the weapon
+    return false;
+  }
+
+  // Check number of ammo
+  if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
+    return false;
+  }
 
   return true;
-}
-
-void AIShootModule::GetUsableFiringWeapons(std::vector<Weapon::Weapon_type>& usable_weapons) const
-{
-  Weapon::Weapon_type weapon;
-
-  // all weapons from the RIFLE category minus the flamethrower
-  Weapon::Weapon_type weapons[4] = {Weapon::WEAPON_GUN, Weapon::WEAPON_SHOTGUN, Weapon::WEAPON_SNIPE_RIFLE, Weapon::WEAPON_SUBMACHINE_GUN };
-
-  // we choose between gun, sniper_rifle, shotgun and submachine gun
-  for (int i=0; i < 3; i++) {
-    weapon = weapons[i];
-    ActiveTeam().SetWeapon(weapon);
-
-    // Check the ammo
-    if (! ActiveTeam().GetWeapon().EnoughAmmo()) continue;
-
-    // Check the angle
-    double angle = InRange_Double(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
-                             - (ActiveTeam().GetWeapon().GetMinAngle()) );
-    if (AbsoluteValue(angle-m_angle) > 0.03490/* 2 degrees */) {
-      // angle is too wide for the weapon
-      continue;
-    }
-
-    // the weapon is usable
-    usable_weapons.push_back(weapon);
-  }
 }
 
 // =================================================
@@ -251,8 +230,8 @@ void AIShootModule::GetUsableFiringWeapons(std::vector<Weapon::Weapon_type>& usa
 const Character* AIShootModule::FindProximityEnemy(const Character& shooter) const
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character) {
-    if ( m_AIMovementModule.SeemsToBeReachable(shooter, **character) ) {
-      return &(**character);
+    if ( m_AIMovementModule.SeemsToBeReachable(shooter, *character) ) {
+      return &(*character);
     }
   }
   return NULL;
@@ -278,7 +257,6 @@ bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
 //   }
 
   // Dynamite
-  //TODO: also check there is no friendly character near
   if (life_points > 50) {
     ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
     if (ActiveTeam().GetWeapon().EnoughAmmo())
@@ -353,7 +331,7 @@ void AIShootModule::Shoot()
 const Character* AIShootModule::FindBazookaShootableEnemy(const Character& shooter) const
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character)
-    return &(**character);
+    return &(*character);
   return NULL;
 }
 const Character* AIShootModule::FindEnemy()
@@ -368,20 +346,35 @@ const Character* AIShootModule::FindEnemy()
 
   SetStrategy(NO_STRATEGY);
 
+  // Proximity enemy ?
+  m_enemy = FindProximityEnemy(ActiveCharacter());
+  if ( m_enemy != NULL ) {
+
+    SetStrategy(NEAR_FROM_ENEMY);
+
+    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
+                                     + m_enemy->GetName());
+
+    if ( SelectProximityWeapon(*m_enemy) ) {
+      m_angle = 0;
+      ActiveCharacter().SetFiringAngle(m_angle);
+      return m_enemy;
+    }
+  }
+
   // "Gun-able" enemy ?
   m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
   if ( m_enemy != NULL ) {
 
     SetStrategy(SHOOT_FROM_POINT);
 
-    GameMessages::GetInstance()->Add(Format(_("%s will shoot %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
+    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
+                                     + m_enemy->GetName());
 
     // we choose between gun, sniper_rifle, shotgun and submachine gun
     if ( SelectFiringWeapon(m_angle) ) {
       ActiveCharacter().SetFiringAngle(m_angle);
       return m_enemy;
-    } else {
-      m_enemy = NULL;
     }
   }
 
@@ -389,21 +382,6 @@ const Character* AIShootModule::FindEnemy()
   if (m_enemy != NULL) {
     SetStrategy(SHOOT_BAZOOKA);
     return m_enemy;
-  }
-
-  // Proximity enemy ?
-  m_enemy = FindProximityEnemy(ActiveCharacter());
-  if ( m_enemy != NULL ) {
-
-    SetStrategy(NEAR_FROM_ENEMY);
-
-    GameMessages::GetInstance()->Add(Format(_("%s has decided to injure %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
-
-    if ( SelectProximityWeapon(*m_enemy) ) {
-      m_angle = 0;
-      ActiveCharacter().SetFiringAngle(m_angle);
-      return m_enemy;
-    }
   }
 
   m_current_strategy = NO_STRATEGY;
@@ -458,11 +436,12 @@ bool AIShootModule::Refresh(uint current_time)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
 //      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 //                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        if ( (**character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
-              if (&(**character) != m_enemy) {
-                GameMessages::GetInstance()->Add(Format(_("%s changes target to %s"), ActiveCharacter().GetName().c_str(), (**character).GetName().c_str()));
+        if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
+              if (&(*character) != m_enemy) {
+                GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
+                                                 + (*character).GetName());
               }
-               m_enemy = &(**character);
+               m_enemy = &(*character);
                Shoot();
                // If IA selected ProximityWeapon, he needs to go back, in the opposite direction (otherwises BOOM :-) )
                ActiveCharacter().SetDirection( (ActiveCharacter().GetDirection()==DIRECTION_RIGHT) ? DIRECTION_LEFT : DIRECTION_RIGHT);

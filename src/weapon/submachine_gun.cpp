@@ -34,14 +34,13 @@
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
 #include "tool/resource_manager.h"
 
 #include "weapon/explosion.h"
 #include "weapon/submachine_gun.h"
 #include "weapon/weapon_cfg.h"
 
-const uint    SUBMACHINE_BULLET_SPEED       = 60;
+const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
 
@@ -80,7 +79,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   UpdateTranslationStrings();
 
   m_category = RIFLE;
-  m_shoot_in_burst = 0;
+
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
@@ -128,12 +127,6 @@ bool SubMachineGun::p_Shoot()
                   5.0 + (Time::GetInstance()->Read() % 6));
 
   announce_missed_shots = false;
-  if(m_shoot_in_burst >=3)
-  {
-   m_shoot_in_burst = 0;
-  }
-  m_shoot_in_burst++;
-  
   return true;
 }
 
@@ -150,20 +143,5 @@ std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_c
             "%s team has won %u submachine gun!",
             "%s team has won %u submachine guns!",
             items_count), TeamName, items_count);
-}
-
-void SubMachineGun::Manage()
-{
-   if(m_last_fire_time !=0 && EnoughAmmoUnit() && m_shoot_in_burst < 3)
-   {
-	   RepeatShoot();
-   }
-   WeaponLauncher::Manage();
-}
-
-void SubMachineGun::p_Select()
-{
-  WeaponLauncher::p_Select();
-  m_shoot_in_burst = 0;
 }
 

@@ -24,6 +24,8 @@
 
 #include <string>
 
+#include "WORMUX_types.h"
+
 class ConfigTeam
 {
 public:

@@ -26,6 +26,7 @@
 #include <iostream>
 #include <list>
 #include <WORMUX_distant_cpu.h>
+#include <WORMUX_euler_vector.h>
 #include <WORMUX_point.h>
 #include <WORMUX_types.h>
 
@@ -146,12 +147,14 @@ public:
   void Push(const std::string& val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
+  void Push(const EulerVector& val);
 
   int PopInt();
   double PopDouble();
   std::string PopString();
   Point2i PopPoint2i();
   Point2d PopPoint2d();
+  EulerVector PopEulerVector();
 
   void WriteToPacket(char* & packet, int & size) const;
 

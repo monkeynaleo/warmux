@@ -32,7 +32,6 @@
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
 #include "tool/xml_document.h"
 #include "game/time.h"
 
@@ -82,7 +81,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot(const Point2i & pos, double strength, double angle)
 {
-  SetCollisionModel( true, true, false,false ); // a bit hackish...
+  SetCollisionModel(true, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
 
@@ -154,15 +153,16 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const float base_angle = GetSpeedAngle();
+  const float angle_range = M_PI / 2;
   Point2i pos = GetPosition();
-  for (uint i = 0; i < fragments; ++i )
+  for (uint i = 0; i < fragments; ++i ) 
   {
-    double cluster_deviation = base_angle +  i * 2 * M_PI / ( float )fragments;
+    double angle = -M_PI / 2; // this angle is "upwards" here
+    double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
     double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
-    cluster->Shoot( pos, speed,  cluster_deviation );
+    cluster->Shoot( pos, speed, angle + cluster_deviation );
 
     ObjectsList::GetRef().AddObject(cluster);
   }

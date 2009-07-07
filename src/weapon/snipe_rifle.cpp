@@ -35,12 +35,11 @@
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
 #include "tool/resource_manager.h"
 
 
 const uint SNIPE_RIFLE_BEAM_START = 5;
-const uint SNIPE_RIFLE_BULLET_SPEED = 100;
+const uint SNIPE_RIFLE_BULLET_SPEED = 28;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 const uint SNIPE_RIFLE_FADE_BEAM_SIZE = 400;
 

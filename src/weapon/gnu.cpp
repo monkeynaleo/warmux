@@ -35,7 +35,6 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
 #include "tool/resource_manager.h"
 
 const uint TIME_BETWEEN_REBOUND = 600;
@@ -90,7 +89,7 @@ void Gnu::Refresh()
 
   double norm, angle;
   //When we hit the ground, jump !
-  if(!IsMoving()&& IsColliding()) {
+  if(!IsMoving()&& !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
     if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
       image->SetRotation_rad(0.0);

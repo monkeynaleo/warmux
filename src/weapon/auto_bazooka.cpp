@@ -33,10 +33,10 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "map/wind.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "object/objects_list.h"
@@ -63,7 +63,6 @@ protected:
   bool m_targeted;
   double m_force;
   uint m_lastrefresh;
-  unsigned m_force_index;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
@@ -80,7 +79,6 @@ protected:
 RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
 {
-  m_force_index = 0;
   m_targeted = false;
   explode_colliding_character = true;
 }
@@ -118,16 +116,14 @@ void RPG::Refresh()
       SetSpeed(0,0);
       angle_local = GetPosition().ComputeAngle( m_targetPoint );
       m_force = acfg.rocket_force;
-      RemoveExternForce(m_force_index);
-      m_force_index = AddExternForce(m_force, angle_local);
+      SetExternForce(m_force, angle_local);
       SetGravityFactor(0);
       SetWindFactor(0);
     }
   }
   else
   {
-    RemoveExternForce(m_force_index);
-    //SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
+    SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
@@ -159,7 +155,7 @@ void RPG::Refresh()
       }
     }
 
-    m_force_index = AddExternForce(m_force, angle_local);
+    SetExternForce(m_force, angle_local);
 
   }
   image->SetRotation_rad(angle_local);
@@ -221,7 +217,7 @@ AutomaticBazooka::AutomaticBazooka() :
 void AutomaticBazooka::UpdateTranslationStrings()
 {
   m_name = _("Automatic Bazooka");
-  m_help = _("How to use it : left click on target\nInitial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  m_help = _("Howto use it : left clic on target\nInitial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
 }
 
 AutomaticBazooka::~AutomaticBazooka()

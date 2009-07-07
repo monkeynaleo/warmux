@@ -19,7 +19,6 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
-
 #include "ai/ai_engine.h"
 #include "character/character.h"
 #include "game/config.h"
@@ -48,7 +47,6 @@
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
-#include "physic/physical_engine.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
@@ -156,7 +154,6 @@ void Game::UnloadDatas(bool game_finished) const
   GetWorld().FreeMem();
   ActiveMap()->FreeData();
   ObjectsList::GetRef().FreeMem();
-  Wind::GetRef().FreeMem();
   ParticleEngine::Stop();
 
   if (!Network::IsConnected() || !game_finished) {
@@ -244,7 +241,7 @@ void Game::Init()
   ActionHandler::GetInstance()->ExecActions();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character)->ResetDamageStats();
+    (*character).ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
 }
@@ -318,7 +315,7 @@ void Game::RefreshInput()
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
-    (*character)->Refresh();
+    character->Refresh();
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
@@ -352,8 +349,8 @@ void Game::Draw ()
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
-    if (!(*character)->IsActiveCharacter())
-      (*character)->Draw();
+    if (!character->IsActiveCharacter())
+      character->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -513,10 +510,6 @@ void Game::MainLoop()
   StatStart("Game:RefreshInput()");
   RefreshInput();
   StatStop("Game:RefreshInput()");
-  StatStart("Game:PhysicalEngine::GetInstance()->Step()");
-  PhysicalEngine::GetInstance()->Step();
-  StatStop("Game:PhysicalEngine::GetInstance()->Step()");
-
   StatStart("Game:RefreshObject()");
   RefreshObject();
   StatStop("Game:RefreshObject()");
@@ -554,11 +547,6 @@ bool Game::NewBox()
     MSG_DEBUG("box", "There is less than 2 teams in the game");
     return false;
   }
-  // if started with "-d nobox", get no box will appear
-  if (IsLOGGING("nobox"))
-  {
-      return false;
-  }
 
   // if started with "-d box", get one box per turn
   if (!IsLOGGING("box")) {
@@ -592,7 +580,6 @@ bool Game::NewBox()
        using action handling (see include/action_handler.cpp */
     box->StoreValue(a);
     ActionHandler::GetInstance()->NewAction(a);
-
     delete box;
     return true;
   }
@@ -630,7 +617,6 @@ void Game::Really_SetState(game_loop_state_t new_state)
 
   // Little pause at the end of the turn
   case END_TURN:
-    ActiveCharacter().StopMove();
     __SetState_END_TURN();
     break;
   }
@@ -674,10 +660,10 @@ PhysicalObj* Game::GetMovingObject() const
 
   FOR_ALL_CHARACTERS(team,character)
   {
-    if (!(*character)->IsImmobile() && !(*character)->IsGhost())
+    if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", (*character)->GetName().c_str());
-      return (*character);
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
+      return &(*character);
     }
   }
 
@@ -794,9 +780,9 @@ void Game::SignalCharacterDamage(const Character *character) const
 void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if ((*character)->IsDiseased()) {
-      (*character)->SetEnergyDelta(-(int)(*character)->GetDiseaseDamage());
-      (*character)->DecDiseaseDuration();
+    if (character->IsDiseased()) {
+      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
+      character->DecDiseaseDuration();
     }
   }
 }

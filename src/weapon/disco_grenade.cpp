@@ -33,7 +33,6 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 
-
 // The Disco Grenade
 class DiscoGrenade : public WeaponProjectile
 {

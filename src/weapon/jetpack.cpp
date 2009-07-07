@@ -30,11 +30,10 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
-#include "physic/physical_obj.h"
+#include "object/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-
 
 const double JETPACK_FORCE = 1800.0;
 
@@ -51,10 +50,9 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   use_unit_on_first_shoot = false;
 
-  m_force_index =0;
-
   m_x_force = 0.0;
   m_y_force = 0.0;
+  m_flying = false;
 }
 
 void JetPack::UpdateTranslationStrings()
@@ -76,8 +74,7 @@ void JetPack::Refresh()
     F.x = m_x_force ;
     F.y = m_y_force ;
 
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForceXY(F);
+    ActiveCharacter().SetExternForceXY(F);
     SendActiveCharacterInfo();
 
     if (!F.IsNull())
@@ -119,10 +116,8 @@ void JetPack::p_Deselect()
 {
   m_x_force = 0;
   m_y_force = 0;
-   ActiveCharacter().RemoveExternForce(m_force_index);
-
-
-  StopUse();
+  ActiveCharacter().SetExternForce(0,0);
+  StopFlying();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");
 }
@@ -133,8 +128,11 @@ void JetPack::ActionStopUse()
   ActiveTeam().AccessNbUnits() = 0;
 }
 
-void JetPack::StartUse()
+void JetPack::StartFlying()
 {
+  if (m_flying)
+    return;
+
   ActiveCharacter().SetMovement("jetpack-fire");
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
@@ -150,26 +148,31 @@ void JetPack::StartUse()
   // do not display the character on top of the active character
   // else it will hide the ammo unit of the jetpack (bug #11479)
   CharacterCursor::GetInstance()->Hide();
+
+  m_flying = true;
 }
 
-void JetPack::StopUse()
+void JetPack::StopFlying()
 {
+  if (!m_flying)
+    return;
+
   ActiveCharacter().SetMovement("jetpack-nofire");
-  if (m_x_force == 0.0 && m_y_force == 0.0)
-  {
-    flying_sound.Stop();
-  }
+  m_x_force = 0.0;
+  m_y_force = 0.0;
+  flying_sound.Stop();
+  m_flying = false;
 }
 
 void JetPack::GoUp()
 {
-  StartUse();
+  StartFlying();
   m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
 }
 
 void JetPack::GoLeft()
 {
-  StartUse();
+  StartFlying();
   m_x_force = - JETPACK_FORCE ;
   if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
@@ -177,7 +180,7 @@ void JetPack::GoLeft()
 
 void JetPack::GoRight()
 {
-  StartUse();
+  StartFlying();
   m_x_force = JETPACK_FORCE ;
   if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
@@ -185,50 +188,73 @@ void JetPack::GoRight()
 
 void JetPack::HandleKeyPressed_Up(bool shift)
 {
-  if (IsInUse())
-    GoUp();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyPressed_Up(shift);
+    return;
+  }
+
+  GoUp();
 }
 
 void JetPack::HandleKeyReleased_Up(bool shift)
 {
-  if (IsInUse())
-    StopUp();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyReleased_Up(shift);
+    return;
+  }
+
+  StopFlying();
 }
 
 void JetPack::HandleKeyPressed_MoveLeft(bool shift)
 {
-  if (IsInUse())
-    GoLeft();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+    return;
+  }
+
+  if (!ActiveCharacter().FootsInVacuum()) {
+    StopFlying();
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+  } else if (IsInUse()) {
+    GoLeft();
+  }
 }
 
 void JetPack::HandleKeyReleased_MoveLeft(bool shift)
 {
-  if (IsInUse())
-    StopLeft();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+    return;
+  }
+
+  StopFlying();
 }
 
 void JetPack::HandleKeyPressed_MoveRight(bool shift)
 {
-  if (IsInUse())
-    GoRight();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+    return;
+  }
+
+  if (!ActiveCharacter().FootsInVacuum()) {
+    // the character is landing!
+    StopFlying();
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+  } else if (IsInUse()) {
+    GoRight();
+  }
 }
 
 void JetPack::HandleKeyReleased_MoveRight(bool shift)
 {
-  if (IsInUse())
-    StopRight();
-  else
+  if (!IsInUse()) {
     ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+    return;
+  }
+
+  StopFlying();
 }
 
 void JetPack::HandleKeyPressed_Shoot(bool)

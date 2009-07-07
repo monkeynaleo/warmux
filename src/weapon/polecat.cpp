@@ -34,7 +34,6 @@
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"
 
@@ -103,7 +102,7 @@ void Polecat::Refresh()
     JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
   }
   //When we hit the ground, jump !
-  if(!IsMoving() && IsColliding()) {
+  if(!IsMoving() && !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
     if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
       image->SetRotation_rad(0.0);

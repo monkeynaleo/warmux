@@ -30,24 +30,12 @@ class FireParticle : public Particle
   int oscil_delta;
   public:
     FireParticle();
-    virtual ~FireParticle();
+    ~FireParticle();
     void Refresh();
     void Draw();
-
-    void SetVivacity(int i_vivacity) { m_vivacity = i_vivacity; };
-
   protected:
     void SignalDrowning();
     void SignalOutOfMap();
-    void SignalGroundCollision(const Point2d&);
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
-
-    void Split();
-
-    int m_rebound_count;
-    int m_vivacity;
-    uint m_living_time;
-
 };
 
 #endif /* FIRE_H */

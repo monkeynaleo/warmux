@@ -29,7 +29,6 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_point.h>
-
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/explosion.h"
@@ -83,15 +82,15 @@ bool Baseball::p_Shoot()
     Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if ((*character) != &ActiveCharacter())
+    if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( character->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        (*character)->SetSpeed(cfg().strength / (*character)->GetMass(), angle);
-        (*character)->SetMovement("fly");
-        Camera::GetInstance()->FollowObject((*character), true, true);
+        character->SetSpeed(cfg().strength / character->GetMass(), angle);
+        character->SetMovement("fly");
+        Camera::GetInstance()->FollowObject(&(*character), true, true);
         return true;
       }
     }

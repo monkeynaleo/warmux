@@ -29,7 +29,9 @@ class JetPack : public Weapon
   private:
     double m_x_force;
     double m_y_force;
-    unsigned m_force_index;
+
+    bool m_flying;
+
     SoundSample flying_sound;
 
     // Jetpack fuel.
@@ -62,11 +64,8 @@ class JetPack : public Weapon
     void GoUp();
     void GoLeft();
     void GoRight();
-    void StopUp() { m_y_force = 0.0; StopUse(); };
-    void StopLeft() { m_x_force = 0.0; StopUse(); };
-    void StopRight() { m_x_force = 0.0; StopUse(); };
-    void StartUse();
-    void StopUse();
+    void StartFlying();
+    void StopFlying();
 };
 
 #endif /* JETPACK_H */

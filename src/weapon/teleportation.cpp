@@ -32,7 +32,6 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 
-
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
                                         new WeaponConfig(),
                                         VISIBLE_ONLY_WHEN_INACTIVE)

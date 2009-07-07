@@ -29,19 +29,19 @@ const int BULLET_PARTICLE_FADE_TIME = 2000;
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
-  SetCollisionModel(true, false, false,false);
+  SetCollisionModel(true, false, false);
   m_rebound_sound = "weapon/m16_cartridge";
   m_left_time_to_live = 1;
   start_to_fade = 0;
 
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
-  SetBasicShape(Point2i(1, 1), GetInitialMass());
+  SetSize(Point2i(1, 1));
 }
 
 void BulletParticle::Refresh()
 {
-  if (IsOutsideWorld()) {
+  if(IsOutsideWorldXY(GetPosition())) {
     m_left_time_to_live = 0;
     return;
   }

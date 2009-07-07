@@ -29,13 +29,13 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle() :
   Particle("water_particle")
 {
-  SetCollisionModel(false, false, false,false);
+  SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
   image = ParticleEngine::GetSprite(WATER_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetBasicShape(image->GetSize(), GetInitialMass());
+  SetSize(image->GetSize());
 }
 
 WaterParticle::~WaterParticle()
@@ -50,9 +50,9 @@ void WaterParticle::Refresh()
 
   if (image->GetSize().x != 0 && image->GetSize().y != 0)
   {
-    // int dx = (GetWidth() - image->GetWidth()) / 2;
+    int dx = (GetWidth() - image->GetWidth()) / 2;
 
-    // SetTestRect(dx, dx-1, GetHeight() - 2,1);
+    SetTestRect(dx, dx-1, GetHeight() - 2,1);
   }
 
   double angle = GetSpeedAngle();

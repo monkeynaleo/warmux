@@ -31,7 +31,6 @@
 #include "weapon/explosion.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
-
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 
@@ -41,6 +40,14 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg,
 {
   m_rebound_sound = "weapon/grenade_bounce";
   explode_with_collision = false;
+}
+
+//-----------------------------------------------------------------------------
+
+void Grenade::Refresh()
+{
+  WeaponProjectile::Refresh();
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 //-----------------------------------------------------------------------------

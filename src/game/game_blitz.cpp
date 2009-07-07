@@ -19,7 +19,6 @@
  * Specialization of Game methods for the blitz mode.
  *****************************************************************************/
 
-
 #include "character/character.h"
 #include "game/game_blitz.h"
 #include "game/game_mode.h"
@@ -65,7 +64,7 @@ GameBlitz::time_iterator GameBlitz::KillTeam(GameBlitz::time_iterator cur)
 {
   FOR_EACH_LIVING_CHARACTER(cur->first, character)
   {
-    (*character)->Die();
+    character->Die();
   }
   GameMessages::GetInstance()->Add (Format(_("%s team was fragged down."), cur->first->GetName().c_str()));
   cur->second = 0;
@@ -171,7 +170,7 @@ void GameBlitz::__SetState_PLAYING()
 
   // Prepare each character for a new turn
   FOR_ALL_LIVING_CHARACTERS(team,character)
-    (*character)->PrepareTurn();
+    character->PrepareTurn();
 
   // Select the next team
   ASSERT (!IsGameFinished());

@@ -36,15 +36,14 @@
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
 #include "tool/resource_manager.h"
 
 #include "explosion.h"
 #include "flamethrower.h"
 #include "weapon_cfg.h"
 
-const uint    FLAMETHROWER_BULLET_SPEED       = 20;
-const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 140;
+const uint    FLAMETHROWER_BULLET_SPEED       = 5;
+const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 40;
 const double  FLAMETHROWER_RANDOM_ANGLE       = 0.06;
 
 class FlameThrowerBullet : public WeaponBullet
@@ -60,7 +59,6 @@ class FlameThrowerBullet : public WeaponBullet
     void DoExplosion();
     void SignalGroundCollision(const Point2d& speed_before);
     void SignalDrowning();
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
 };
 
 
@@ -69,17 +67,14 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
-  explode_with_collision = true;
   m_is_fire = true;
   can_drown = false;
 }
 
 bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 {
-  if (GetName() == obj->GetName())
-    return false;
-
-  return (GetOverlappingObject() == obj);
+  if(GetName() == obj->GetName()) return true;
+  return m_overlapping_object == obj;
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
@@ -110,14 +105,6 @@ void FlameThrowerBullet::SignalDrowning()
   launcher->IncMissedShots();
   Ghost();
 }
-void FlameThrowerBullet::SignalObjectCollision(PhysicalObj * /*obj*/,
-		                                       PhysicalShape * /*shape*/,
-											   const Point2d& /*my_speed_before*/)
-{
-  Explosion();
-  Ghost();
-}
-
 
 //-----------------------------------------------------------------------------
 
@@ -162,16 +149,6 @@ void FlameThrower::IncMissedShots()
   WeaponLauncher::IncMissedShots();
 }
 
-void FlameThrower::Manage()
-{
-   if(m_last_fire_time !=0 && EnoughAmmoUnit())
-   {
-	   RepeatShoot();
-   }
-   WeaponLauncher::Manage();
-}
-
-
 bool FlameThrower::p_Shoot()
 {
   projectile->Shoot(FLAMETHROWER_BULLET_SPEED);
@@ -179,10 +156,10 @@ bool FlameThrower::p_Shoot()
   ReloadLauncher();
 
   Point2i pos = ActiveCharacter().GetHandPosition();
-// double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
- //              * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
-  //particle.AddNow(pos, 1, particle_SMOKE, true, angle,
-   //               5.0 + (Time::GetInstance()->Read() % 6));
+  double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
+               * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  particle.AddNow(pos, 1, particle_SMOKE, true, angle,
+                  5.0 + (Time::GetInstance()->Read() % 6));
   announce_missed_shots = false;
   return true;
 }

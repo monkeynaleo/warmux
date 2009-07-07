@@ -29,7 +29,6 @@
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-
 //-----------------------------------------------------------------------------
 
 SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())

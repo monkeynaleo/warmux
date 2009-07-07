@@ -31,6 +31,7 @@ class Grenade : public WeaponProjectile
 public:
   Grenade(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
+  void Refresh();
 protected:
   void SignalOutOfMap();
 };

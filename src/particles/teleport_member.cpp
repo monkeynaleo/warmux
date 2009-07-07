@@ -29,7 +29,7 @@
 TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i& position, const Point2i& dest, int direction) :
   Particle("teleport_member_particle")
 {
-  SetCollisionModel(false, false, false,false);
+  SetCollisionModel(false, false, false);
   image = new Sprite(spr.GetSurface());
 
   float scale_x, scale_y;
@@ -40,7 +40,7 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i&
   SetXY(position);
   m_left_time_to_live = 1;
 
-  SetBasicShape(image->GetSize(), GetInitialMass());
+  SetSize(image->GetSize());
   SetOnTop(true);
   destination = dest;
   start = position;

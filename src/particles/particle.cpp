@@ -22,12 +22,12 @@
 #include "particles/particle.h"
 #include <SDL.h>
 #include <map>
-#include <WORMUX_point.h>
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
 #include <WORMUX_random.h>
+#include <WORMUX_point.h>
 #include "weapon/explosion.h"
 #include "map/map.h"
 
@@ -46,10 +46,6 @@
 #include "particles/star.h"
 #include "particles/water_drop.h"
 
-#ifdef DEBUG
-#include "graphic/colors.h"
-#endif
-
 Particle::Particle(const std::string &name) :
   PhysicalObj(name),
   on_top(true), // if true displayed on top of characters and weapons
@@ -60,8 +56,7 @@ Particle::Particle(const std::string &name) :
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
-  SetCollisionModel(false, false, false,false);
-  Activate();
+  SetCollisionModel(false, false, false);
 }
 
 Particle::~Particle()
@@ -99,7 +94,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      SetBasicShape(image->GetSize(), GetInitialMass());
+      SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
@@ -316,7 +311,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
   const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
-  //Particle *particle = NULL;
+  Particle *particle = NULL;
   float norme;
   uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
@@ -329,11 +324,11 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
 
-      //particle = new ExplosionSmoke(size);
-      //particle->SetXY(pos);
-      //particle->SetOnTop(true);
+      particle = new ExplosionSmoke(size);
+      particle->SetXY(pos);
+      particle->SetOnTop(true);
 
-    //  lst_particles.push_back(particle);
+      lst_particles.push_back(particle);
   }
 }
 
@@ -344,7 +339,7 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
 
   if(style == NoESmoke) return;
   AddLittleESmoke (position, radius);
-  //if(style == BigESmoke) AddBigESmoke (position, radius);
+  if(style == BigESmoke) AddBigESmoke (position, radius);
 }
 
 void ParticleEngine::Draw(bool upper)
@@ -354,11 +349,6 @@ void ParticleEngine::Draw(bool upper)
   for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it){
     if ( (*Particle_it)->IsOnTop() == upper) {
       (*Particle_it)->Draw();
-#ifdef DEBUG
-      if (IsLOGGING("polygon.particle")) {
-	(*Particle_it)->DrawPolygon(primary_red_color);
-      }
-#endif
     }
   }
 

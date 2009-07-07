@@ -33,14 +33,10 @@ class SubMachineGun : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
     void IncMissedShots();
     bool p_Shoot();
-    virtual void p_Select();
-	
-	uint m_shoot_in_burst;
   public:
     SubMachineGun();
     virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
     virtual void HandleKeyRefreshed_Shoot(bool shift);
-    virtual void Manage();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

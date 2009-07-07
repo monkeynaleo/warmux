@@ -19,9 +19,6 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
-#include <signal.h>
-
-
 #include "weapon/weapon_cfg.h"
 #include "weapon/anvil.h"
 #include "weapon/explosion.h"
@@ -36,29 +33,30 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
-
 #include "tool/math_tools.h"
 //-----------------------------------------------------------------------------
 
 class Anvil : public WeaponProjectile
 {
   private:
+    uint merge_time;
     SoundSample falling_sound;
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
     ~Anvil();
+    void Refresh();
 
     void PlayFallSound();
     void PlayCollisionSound();
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
-    virtual void Draw();
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
+				       PhysicalObj * obj,
+				       const Point2d& /* obj_speed_before */);
     virtual void SignalOutOfMap();
 };
 
@@ -67,12 +65,9 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
   explode_with_collision = false;
-  explode_with_timeout = false;
   explode_colliding_character = false;
-  SetCollisionModel(true, true, true,true);
-  SetCollisionCategory(GROUND);
-  
-  // SetTestRect(0, 0, 0, 0);
+  merge_time = 0;
+  SetTestRect(0, 0, 0, 0);
 }
 
 Anvil::~Anvil()
@@ -80,17 +75,23 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
+void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
+				  PhysicalObj * obj,
+				  const Point2d& /* obj_speed_before */)
 {
-  if ( GetSpeed().y > 0.5 ) {
-    obj->SetEnergyDelta(-200);
-  }
+  merge_time = Time::GetInstance()->Read() + 5000;
+  obj->SetEnergyDelta(-200);
   PlayCollisionSound();
+
+  WeaponProjectile::Collision();
 }
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 {
+  merge_time = Time::GetInstance()->Read() + 5000;
   PlayCollisionSound();
+
+  WeaponProjectile::Collision();
 }
 
 void Anvil::SignalOutOfMap()
@@ -98,11 +99,14 @@ void Anvil::SignalOutOfMap()
   falling_sound.Stop();
 }
 
-void Anvil::Draw()
+void Anvil::Refresh()
 {
-  Anvil::Refresh();
-  WeaponProjectile::Draw();
- 
+  if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
+    GetWorld().MergeSprite(GetPosition(), image);
+    Ghost();
+  } else {
+    WeaponProjectile::Refresh();
+  }
 }
 
 void Anvil::PlayFallSound()

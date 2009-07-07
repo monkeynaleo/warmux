@@ -34,13 +34,12 @@
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
 
-
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/network.h"
-#include "physic/object_cfg.h"
+#include "object/object_cfg.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"

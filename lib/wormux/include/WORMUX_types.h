@@ -19,6 +19,7 @@
 
 #ifndef WORMUX_TYPES_H
 #define WORMUX_TYPES_H
+#include <stdint.h>
 //-----------------------------------------------------------------------------
 
 #ifndef _MSC_VER

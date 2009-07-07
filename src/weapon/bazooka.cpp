@@ -30,7 +30,6 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 
-
 class BazookaRocket : public WeaponProjectile
 {
 private:
@@ -58,7 +57,7 @@ void BazookaRocket::Refresh()
   WeaponProjectile::Refresh();
   if(!IsDrowned())
   {
-    image->SetRotation_rad(-GetAngle());
+    image->SetRotation_rad(GetSpeedAngle());
     smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                      GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
   }

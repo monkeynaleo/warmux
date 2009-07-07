@@ -1,5 +1,7 @@
 SUBDIRS = .
 
+EXTRA_DIST = wormux_server.conf
+
 bin_PROGRAMS = wormux-server
 
 wormux_server_SOURCES = \
@@ -7,7 +9,7 @@ wormux_server_SOURCES = \
 	server.h server.cpp \
 	main.cpp
 
-AM_CXXFLAGS += -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
+AM_CXXFLAGS = -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
 	  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux-server/include \
 	-I$(top_srcdir)/lib/wormux/include
 

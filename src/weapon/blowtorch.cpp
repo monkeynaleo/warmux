@@ -34,7 +34,6 @@
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
@@ -91,7 +90,7 @@ bool Blowtorch::p_Shoot()
   double dy = sin(angle) * h;
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-  GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2);
+  GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2 + 2);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
   MoveCharacter(ActiveCharacter());
 

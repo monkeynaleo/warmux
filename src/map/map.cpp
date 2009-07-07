@@ -20,17 +20,16 @@
  *****************************************************************************/
 
 #include <iostream>
-
-#include "game/time.h"
+#include "map/map.h"
+#include "object/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
 #include "map/camera.h"
-#include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
+#include "game/time.h"
 #include "object/objbox.h"
-#include "physic/physical_obj.h"
 #include "tool/math_tools.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
@@ -137,6 +136,12 @@ void Map::Dig(const Point2i& center, const uint radius)
    ground.Dig(center, radius);
    to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
                                    Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
+}
+
+void Map::PutSprite(const Point2i& pos, const Sprite* spr)
+{
+   ground.PutSprite(pos, spr);
+   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)

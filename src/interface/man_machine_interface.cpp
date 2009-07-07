@@ -383,7 +383,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
             ActiveTeam().PreviousCharacter();
           } else {
             ActiveTeam().NextCharacter();
-	  }
+          }
 	  Character::StoreActiveCharacter(change_character);
 	  ActionHandler::GetInstance()->NewAction(change_character);
         }

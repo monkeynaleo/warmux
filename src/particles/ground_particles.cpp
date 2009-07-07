@@ -28,8 +28,8 @@
 GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Particle("ground_particle")
 {
-  SetCollisionModel(false, false, false,false);
-  SetBasicShape(Point2i(1,1), GetInitialMass());
+  SetCollisionModel(false, false, false);
+  SetSize(Point2i(1,1));
   m_initial_time_to_live = 1; // used as a boolean because we redefine Refresh!
   m_left_time_to_live = 1; // used as a boolean because we redefine Refresh!
   image = NULL;

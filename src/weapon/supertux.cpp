@@ -36,7 +36,6 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
-
 #include "tool/xml_document.h"
 
 const uint time_delta = 40;
@@ -58,7 +57,7 @@ class SuperTux : public WeaponProjectile
     ParticleEngine particle_engine;
     double angle_rad;
     SoundSample flying_sound;
-    unsigned m_force_index;
+
   public:
     uint speed;
     uint time_now;
@@ -69,7 +68,7 @@ class SuperTux : public WeaponProjectile
              WeaponLauncher * p_launcher);
     void Refresh();
 
-    void SetAngle(double angle);
+    inline void SetAngle(double angle) {angle_rad = angle;}
     void turn_left();
     void turn_right();
     void Shoot(double strength);
@@ -89,13 +88,8 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 {
   swimming = false;
   explode_colliding_character = true;
-  m_force_index = 0;
-}
-
-void SuperTux::SetAngle(double angle)
-{
-  angle_rad = angle;
-  PhysicalObj::SetAngle(angle+M_PI_2);
+  SetSize(image->GetSize());
+  SetTestRect(1, 1, 2, 2);
 }
 
 void SuperTux::Shoot(double strength)
@@ -107,10 +101,7 @@ void SuperTux::Shoot(double strength)
   flying_sound.Play("default","weapon/supertux_flying", -1);
 
   WeaponProjectile::Shoot(strength);
-  SetAngle(ActiveCharacter().GetFiringAngle());
-
-  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
-
+  angle_rad = ActiveCharacter().GetFiringAngle();
 
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();
@@ -121,11 +112,11 @@ void SuperTux::Shoot(double strength)
 void SuperTux::Refresh()
 {
   WeaponProjectile::Refresh();
-  RemoveExternForce(m_force_index);
-  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
 
+  image->SetRotation_rad(angle_rad + M_PI_2);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
+    SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
     image->Update();
     last_move = Time::GetInstance()->Read();
   }
@@ -134,13 +125,12 @@ void SuperTux::Refresh()
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
-    a.Push(GetPhysXY());
+    a.Push(GetPos());
     Network::GetInstance()->SendActionToAll(a);
   }
 
   if (!swimming)
-    particle_engine.AddPeriodic(GetCenter(), particle_STAR, false, angle_rad, 0);
-
+    particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
   // else
   // particle_engine.AddPeriodic(GetPosition(), particle_WATERBUBBLE, false, angle_rad, 0);
 }
@@ -151,7 +141,7 @@ void SuperTux::turn_left()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      SetAngle(angle_rad - M_PI / 12);
+      angle_rad = angle_rad - M_PI / 12;
     }
 }
 
@@ -161,7 +151,7 @@ void SuperTux::turn_right()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      SetAngle(angle_rad + M_PI / 12);
+      angle_rad = angle_rad + M_PI / 12;
     }
 }
 
