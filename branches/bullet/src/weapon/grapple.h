@@ -94,7 +94,7 @@ class Grapple : public Weapon
 };
 
 
-class Rope : public PhysicalObj
+class Rope : public GameObj
 {
 public:
 
@@ -141,7 +141,7 @@ protected:
 
 };
 
-class RopeNode : public PhysicalObj
+class RopeNode : public GameObj
 {
 public :
   RopeNode();

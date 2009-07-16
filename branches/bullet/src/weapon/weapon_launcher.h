@@ -29,7 +29,7 @@ class Sprite;
 class WeaponLauncher;
 class ExplosiveWeaponConfig;
 
-class WeaponProjectile : public PhysicalObj
+class WeaponProjectile : public GameObj
 {
   protected:
     Sprite *image;
@@ -44,7 +44,7 @@ class WeaponProjectile : public PhysicalObj
 
   public:
     Character* dernier_ver_touche;
-    PhysicalObj* dernier_obj_touche;
+    GameObj* dernier_obj_touche;
     WeaponLauncher * launcher;
     int m_timeout_modifier;
 
@@ -68,7 +68,7 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
@@ -96,7 +96,7 @@ class WeaponBullet : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalOutOfMap();
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
     void DoExplosion();
 };
 

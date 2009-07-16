@@ -95,7 +95,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 void SuperTux::SetAngle(double angle)
 {
   angle_rad = angle;
-  PhysicalObj::SetAngle(angle+M_PI_2);
+  GameObj::SetAngle(angle+M_PI_2);
 }
 
 void SuperTux::Shoot(double strength)

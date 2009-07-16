@@ -44,7 +44,7 @@
 
 //-----------------------------------------------------------------------------
 
-class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList>
+class ObjectsList : public std::list<GameObj*>, public Singleton<ObjectsList>
 {
   private:
     ObjectsList();
@@ -52,8 +52,8 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
     friend class Singleton<ObjectsList>;
 
   public:
-    typedef std::list<PhysicalObj*>::iterator iterator;
-    std::list<PhysicalObj*> overlapped_objects;
+    typedef std::list<GameObj*>::iterator iterator;
+    std::list<GameObj*> overlapped_objects;
 
   public:
     // Call the Refresh method of all the objects
@@ -70,13 +70,13 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
 
     void FreeMem();
 
-    void AddObject(PhysicalObj * obj);
+    void AddObject(GameObj * obj);
 
     // Overlapse handling
-    void RemoveObject(PhysicalObj * obj);
-    void AddOverlappedObject(PhysicalObj * obj) { overlapped_objects.push_back(obj); };
-    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
-    void RemoveOverlappedObject(PhysicalObj * obj) { overlapped_objects.remove(obj); };
+    void RemoveObject(GameObj * obj);
+    void AddOverlappedObject(GameObj * obj) { overlapped_objects.push_back(obj); };
+    void RemoveOverlappedObjectReference(const GameObj * obj);
+    void RemoveOverlappedObject(GameObj * obj) { overlapped_objects.remove(obj); };
 };
 
 //-----------------------------------------------------------------------------

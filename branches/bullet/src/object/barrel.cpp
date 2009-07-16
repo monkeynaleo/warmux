@@ -28,7 +28,7 @@
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
 
-PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
+PetrolBarrel::PetrolBarrel() : GameObj("barrel")
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   img = GetResourceManager().LoadSprite(res, "object/barrel");

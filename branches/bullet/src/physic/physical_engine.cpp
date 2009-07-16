@@ -92,14 +92,14 @@ void PhysicalEngine::SetWindVector(const Point2d & i_wind_vector)
   m_wind_vector = i_wind_vector;
 }
 
-b2Body *PhysicalEngine::AddObject(PhysicalObj *new_obj)
+b2Body *PhysicalEngine::AddObject(GameObj *new_obj)
 {
   b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;
 }
 
-void PhysicalEngine::RemoveObject(PhysicalObj *obj)
+void PhysicalEngine::RemoveObject(GameObj *obj)
 {
   objects_list.erase(obj->GetBody());
   physic_world->DestroyBody(obj->GetBody());
@@ -189,7 +189,7 @@ void PhysicalEngine::ComputeContacts()
     if ((objects_list.count(contact.shape1->GetBody()) == 1)
 	&& (objects_list[contact.shape1->GetBody()] != NULL)) {
 
-      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
+      GameObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->AddContact(collider->GetShape(contact.shape1));
 
@@ -211,7 +211,7 @@ void PhysicalEngine::ComputeContacts()
     if ((objects_list.count(contact.shape2->GetBody()) == 1)
 	&& (objects_list[contact.shape2->GetBody()] != NULL)) {
 
-      PhysicalObj  *collider = objects_list[contact.shape2->GetBody()];
+      GameObj  *collider = objects_list[contact.shape2->GetBody()];
 
       collider->AddContact(collider->GetShape(contact.shape2));
 
@@ -244,14 +244,14 @@ void PhysicalEngine::ComputeContacts()
 
     if ((objects_list.count(contact.shape1->GetBody()) == 1)
 	&& (objects_list[contact.shape1->GetBody()] != NULL)) {
-      PhysicalObj  *collider =  objects_list[contact.shape1->GetBody()];
+      GameObj  *collider =  objects_list[contact.shape1->GetBody()];
 
       collider->RemoveContact(collider->GetShape(contact.shape1));
     }
 
     if ((objects_list.count(contact.shape2->GetBody()) == 1)
 	&& (objects_list[contact.shape2->GetBody()] != NULL)) {
-      PhysicalObj  *collider =  objects_list[contact.shape2->GetBody()];
+      GameObj  *collider =  objects_list[contact.shape2->GetBody()];
 
       collider->RemoveContact(collider->GetShape(contact.shape2));
     }
@@ -308,14 +308,14 @@ void PhysicalEngine::RemoveAirFrictionShape(PhysicalShape *shape)
 
 
 
-void PhysicalEngine::AddWindObject(PhysicalObj *i_object)
+void PhysicalEngine::AddWindObject(GameObj *i_object)
 {
 	m_wind_object_list.push_back(i_object);
 }
 
-void PhysicalEngine::RemoveWindObject(PhysicalObj *i_object)
+void PhysicalEngine::RemoveWindObject(GameObj *i_object)
 {
-  std::vector<PhysicalObj *>::iterator it;
+  std::vector<GameObj *>::iterator it;
   for (it = m_wind_object_list.begin(); it != m_wind_object_list.end(); it++){
     if (*it == i_object) {
       m_wind_object_list.erase(it);
@@ -324,14 +324,14 @@ void PhysicalEngine::RemoveWindObject(PhysicalObj *i_object)
   }
 }
 
-void PhysicalEngine::AddModifiedGravityObject(PhysicalObj *i_object)
+void PhysicalEngine::AddModifiedGravityObject(GameObj *i_object)
 {
 	m_modified_gravity_object_list.push_back(i_object);
 }
 
-void PhysicalEngine::RemoveModifiedGravityObject(PhysicalObj *i_object)
+void PhysicalEngine::RemoveModifiedGravityObject(GameObj *i_object)
 {
-  std::vector<PhysicalObj *>::iterator it;
+  std::vector<GameObj *>::iterator it;
   for (it = m_modified_gravity_object_list.begin(); it != m_modified_gravity_object_list.end(); it++){
     if (*it == i_object) {
       m_modified_gravity_object_list.erase(it);
@@ -340,14 +340,14 @@ void PhysicalEngine::RemoveModifiedGravityObject(PhysicalObj *i_object)
   }
 }
 
-void PhysicalEngine::AddAutoAlignObject(PhysicalObj * object)
+void PhysicalEngine::AddAutoAlignObject(GameObj * object)
 {
     m_auto_align_object_list.push_back(object);
 }
 
-void PhysicalEngine::RemoveAutoAlignObject(PhysicalObj *object)
+void PhysicalEngine::RemoveAutoAlignObject(GameObj *object)
 {
-  std::vector<PhysicalObj *>::iterator it;
+  std::vector<GameObj *>::iterator it;
   for (it = m_auto_align_object_list.begin(); it != m_auto_align_object_list.end(); it++){
     if (*it == object) {
       m_auto_align_object_list.erase(it);

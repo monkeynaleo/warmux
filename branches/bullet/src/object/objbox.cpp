@@ -48,7 +48,7 @@ const uint SPEED = 5; // meter / seconde
 // const uint NB_MAX_TRY = 20;
 // const uint SPEED_PARACHUTE = 170; // ms par image
 
-ObjBox::ObjBox(const std::string &name) : PhysicalObj(name)
+ObjBox::ObjBox(const std::string &name) : GameObj(name)
 {
   m_allow_negative_y = true;
 
@@ -86,7 +86,7 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
   CloseParachute();
 }
 
-void ObjBox::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
+void ObjBox::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
   if (obj->IsCharacter()) {
@@ -146,7 +146,7 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 
 void ObjBox::GetValueFromAction(Action * a)
 {
-  PhysicalObj::GetValueFromAction(a);
+  GameObj::GetValueFromAction(a);
   start_life_points = a->PopInt();
   SetXY(a->PopPoint2d());
   SetSpeedXY(a->PopPoint2d());
@@ -154,7 +154,7 @@ void ObjBox::GetValueFromAction(Action * a)
 
 void ObjBox::StoreValue(Action *a)
 {
-  PhysicalObj::StoreValue(a);
+  GameObj::StoreValue(a);
   a->Push(start_life_points);
   a->Push(GetPosition());
   a->Push(GetSpeed());

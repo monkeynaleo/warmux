@@ -75,7 +75,7 @@ class ShotgunBuckshot : public WeaponBullet
   public:
     ShotgunBuckshot(ShotgunConfig& cfg,
                     WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
+    bool IsOverlapping(const GameObj* obj) const;
     ShotgunConfig& cfg();
   protected:
     void RandomizeShoot(double &angle,double &strength);
@@ -97,7 +97,7 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
   strength += RandomSync().GetDouble(-cfg().m_random_strength,cfg().m_random_strength);
 }
 
-bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
+bool ShotgunBuckshot::IsOverlapping(const GameObj* obj) const
 {
   if (GetName() == obj->GetName()) return true;
 

@@ -426,7 +426,7 @@ GrappleConfig::LoadXml(const xmlNode* elem)
 //-----------------------------------------------------------------------------
 // Rope
 
-Rope::Rope():PhysicalObj("rope")
+Rope::Rope():GameObj("rope")
 {
 
   for(int i = 0; i< 70 ; i++) {
@@ -472,7 +472,7 @@ Rope::~Rope()
 
 void Rope::Activate()
 {
-  PhysicalObj::Activate();
+  GameObj::Activate();
 
   //place nodes for generation
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
@@ -504,7 +504,7 @@ void Rope::Activate()
   ///////////////////////////
   //Attach character to nodes
   b2Body *node_anchor;
-  body_def.position = ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter();
+  body_def.position = ActiveCharacter().GameObj::GetBody()->GetWorldCenter();
 
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     //create anchor
@@ -516,7 +516,7 @@ void Rope::Activate()
     node_anchor->SetMass(&mass);
 
     //attach anchor
-    joint_def_revolution.Initialize(node_anchor, ActiveCharacter().PhysicalObj::GetBody(), ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter() );
+    joint_def_revolution.Initialize(node_anchor, ActiveCharacter().GameObj::GetBody(), ActiveCharacter().GameObj::GetBody()->GetWorldCenter() );
     PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
 
     //attach prismatic link
@@ -551,7 +551,7 @@ void Rope::Activate()
 
   ///////////////////////////
   //Attach character to hook
-  body_def.position = ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter();
+  body_def.position = ActiveCharacter().GameObj::GetBody()->GetWorldCenter();
   //create anchor
   b2Body *hook_anchor = PhysicalEngine::GetInstance()->GetPhysicWorld()->CreateBody(&body_def);
   m_rope_anchor.push_back(hook_anchor);
@@ -563,7 +563,7 @@ void Rope::Activate()
 
 
   //attach anchor
-  joint_def_revolution.Initialize(hook_anchor, ActiveCharacter().PhysicalObj::GetBody(), ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter() );
+  joint_def_revolution.Initialize(hook_anchor, ActiveCharacter().GameObj::GetBody(), ActiveCharacter().GameObj::GetBody()->GetWorldCenter() );
   PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
 
   //attach prismatic link
@@ -589,7 +589,7 @@ void Rope::Activate()
 
   /////////////////////////
   // Attach rope to Character
-  joint_def_distance.Initialize(m_rope_nodes[0]->GetBody(), ActiveCharacter().PhysicalObj::GetBody(), m_rope_nodes[0]->GetBody()->GetWorldCenter() ,ActiveCharacter().PhysicalObj::GetBody()->GetWorldCenter());
+  joint_def_distance.Initialize(m_rope_nodes[0]->GetBody(), ActiveCharacter().GameObj::GetBody(), m_rope_nodes[0]->GetBody()->GetWorldCenter() ,ActiveCharacter().GameObj::GetBody()->GetWorldCenter());
   PhysicalEngine::GetInstance()->CreateJoint(&joint_def_distance);
 
 
@@ -608,7 +608,7 @@ void Rope::Activate()
 
 void Rope::Generate()
 {
-  PhysicalObj::Generate();
+  GameObj::Generate();
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->Generate();
   }
@@ -616,7 +616,7 @@ void Rope::Generate()
 
 void Rope::Desactivate()
 {
-  PhysicalObj::Desactivate();
+  GameObj::Desactivate();
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->Desactivate();
   }
@@ -693,7 +693,7 @@ void Rope::SignalGroundCollision(const Point2d&)
 //-----------------------------------------------------------------------------
 // RopeNode
 
-RopeNode::RopeNode():PhysicalObj("rope_node")
+RopeNode::RopeNode():GameObj("rope_node")
 {
   Profile *weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
   m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");

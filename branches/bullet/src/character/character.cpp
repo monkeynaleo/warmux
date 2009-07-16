@@ -109,7 +109,7 @@ void Character::SetBody(Body* char_body)
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
-  PhysicalObj("character"),
+  GameObj("character"),
   character_name(name),
   m_team(my_team),
   step_sound_played(true),
@@ -170,7 +170,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 }
 
 Character::Character (const Character& acharacter) :
-  PhysicalObj(acharacter),
+  GameObj(acharacter),
   character_name(acharacter.character_name),
   m_team(acharacter.m_team),
   step_sound_played(acharacter.step_sound_played),
@@ -777,13 +777,13 @@ bool Character::FootsInVacuum() const
 
 void Character::AddContact(const PhysicalShape * shape)
 {
-  PhysicalObj::AddContact(shape);
+  GameObj::AddContact(shape);
   m_nbr_foot_contact++;
 }
 
 void Character::RemoveContact(const PhysicalShape * shape)
 {
-  PhysicalObj::RemoveContact(shape);
+  GameObj::RemoveContact(shape);
   m_nbr_foot_contact--;
 }
 
@@ -1016,7 +1016,7 @@ uint Character::GetCharacterIndex() const
 
 void Character::StoreValue(Action *a)
 {
-  PhysicalObj::StoreValue(a);
+  GameObj::StoreValue(a);
   a->Push((int)GetDirection());
   a->Push(GetAbsFiringAngle());
   a->Push((int)disease_damage_per_turn);
@@ -1038,7 +1038,7 @@ void Character::GetValueFromAction(Action *a)
   int prev_energy = m_energy;
   Point2d prev_position = GetPhysXY();
 
-  PhysicalObj::GetValueFromAction(a);
+  GameObj::GetValueFromAction(a);
   SetDirection((BodyDirection_t)(a->PopInt()));
   SetFiringAngle(a->PopDouble());
 

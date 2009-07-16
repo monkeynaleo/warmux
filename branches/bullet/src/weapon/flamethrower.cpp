@@ -52,7 +52,7 @@ class FlameThrowerBullet : public WeaponBullet
   public:
     FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
                        WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
+    bool IsOverlapping(const GameObj* obj) const;
   protected:
     ParticleEngine particle;
     void ShootSound();
@@ -60,7 +60,7 @@ class FlameThrowerBullet : public WeaponBullet
     void DoExplosion();
     void SignalGroundCollision(const Point2d& speed_before);
     void SignalDrowning();
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
 };
 
 
@@ -74,7 +74,7 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   can_drown = false;
 }
 
-bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
+bool FlameThrowerBullet::IsOverlapping(const GameObj* obj) const
 {
   if (GetName() == obj->GetName())
     return false;
@@ -110,7 +110,7 @@ void FlameThrowerBullet::SignalDrowning()
   launcher->IncMissedShots();
   Ghost();
 }
-void FlameThrowerBullet::SignalObjectCollision(PhysicalObj * /*obj*/,
+void FlameThrowerBullet::SignalObjectCollision(GameObj * /*obj*/,
 		                                       PhysicalShape * /*shape*/,
 											   const Point2d& /*my_speed_before*/)
 {

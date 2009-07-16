@@ -60,7 +60,7 @@ void BulletParticle::Refresh()
 
 void BulletParticle::SignalRebound()
 {
-  PhysicalObj::SignalRebound();
+  GameObj::SignalRebound();
   //SetCollisionModel(false, false, false);
   StopMoving();
   start_to_fade = Time::GetInstance()->Read();

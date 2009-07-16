@@ -24,7 +24,7 @@
 #include "physic/physical_engine.h"
 
 
-Force::Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local):
+Force::Force(GameObj *target, Point2d target_point, Point2d force, bool is_local):
 m_target_center(false)
 {
   ASSERT(target);
@@ -43,7 +43,7 @@ m_target_center(false)
 
 }
 
-Force::Force(PhysicalObj *i_target, Point2d i_force):
+Force::Force(GameObj *i_target, Point2d i_force):
 m_target_center(true)
 {
   ASSERT(i_target);
