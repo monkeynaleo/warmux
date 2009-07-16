@@ -51,6 +51,8 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
     ~ObjectsList();
     friend class Singleton<ObjectsList>;
 
+    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
+
   public:
     typedef std::list<PhysicalObj*>::iterator iterator;
     std::list<PhysicalObj*> overlapped_objects;
@@ -78,9 +80,9 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
       remove(obj);
       RemoveOverlappedObjectReference(obj);
     };
-    void AddOverlappedObject(PhysicalObj * obj) { overlapped_objects.push_back(obj); };
-    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
-    void RemoveOverlappedObject(PhysicalObj * obj) { overlapped_objects.remove(obj); };
+
+    void AddOverlappedObject(PhysicalObj * obj);
+    void RemoveOverlappedObject(PhysicalObj * obj);
 };
 
 //-----------------------------------------------------------------------------
