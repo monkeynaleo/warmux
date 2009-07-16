@@ -28,7 +28,7 @@ class AirAttackConfig;
 class Sprite;
 class Obus;
 
-class Plane : public PhysicalObj
+class Plane : public GameObj
 {
   private:
     SoundSample flying_sound;

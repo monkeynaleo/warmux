@@ -57,7 +57,7 @@ class Anvil : public WeaponProjectile
     void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
     virtual void Draw();
   protected:
-    virtual void SignalObjectCollision(PhysicalObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& /* speed_before */);
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -80,7 +80,7 @@ Anvil::~Anvil()
   falling_sound.Stop(); // paranoiac sound stop
 }
 
-void Anvil::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
+void Anvil::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
 {
   if ( GetSpeed().y > 0.5 ) {
     obj->SetEnergyDelta(-200);

@@ -142,7 +142,7 @@ void ApplyExplosion_common (const Point2i &pos,
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
    {
-     PhysicalObj *obj = *it;
+     GameObj *obj = *it;
 
      if (obj->GetUniqueId() == network_id) {
        MSG_DEBUG("explosion", "!! skip blast for object %s", network_id.c_str());

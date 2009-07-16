@@ -161,7 +161,7 @@ void FireParticle::SignalGroundCollision(const Point2d&)
 
 }
 
-void FireParticle::SignalObjectCollision(PhysicalObj * obj,
+void FireParticle::SignalObjectCollision(GameObj * obj,
 		                                       PhysicalShape * /*shape*/,
 											   const Point2d& my_speed_before)
 {

@@ -22,34 +22,26 @@
 #ifndef PHYSICAL_ENGINE_H
 #define PHYSICAL_ENGINE_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
-#include <WORMUX_singleton.h>
-#include <Box2D.h>
-#include <map>
-#include <vector>
-#include <WORMUX_point.h>
 //-----------------------------------------------------------------------------
 
 extern const double PIXEL_PER_METER;
 
-class PhysicalObj;
+class GameObj;
 class Force;
 class ContactListener;
 class DebugDraw;
 class PhysicalShape;
 
 
-class PhysicalEngine : public Singleton<PhysicalEngine>
+class PhysicalEngine
 {
 public:
 
   PhysicalEngine();
   ~PhysicalEngine();
 
-  b2World *GetPhysicWorld();
-  b2Body *GetNewGroundBody() ;
-  b2Body *AddObject(PhysicalObj *new_obj);
-  void RemoveObject(PhysicalObj *obj);
+  b2Body *AddObject(GameObj *new_obj);
+  void RemoveObject(GameObj *obj);
   b2Joint* CreateJoint(b2JointDef* i_joint_def);
   void Step();
   void StaticStep();
@@ -60,14 +52,14 @@ public:
   void AddAirFrictionShape(PhysicalShape* shape);
   void RemoveAirFrictionShape(PhysicalShape* shape);
 
-  void AddWindObject(PhysicalObj* i_object);
-  void RemoveWindObject(PhysicalObj* i_object);
+  void AddWindObject(GameObj* i_object);
+  void RemoveWindObject(GameObj* i_object);
 
-  void AddAutoAlignObject(PhysicalObj* object);
-  void RemoveAutoAlignObject(PhysicalObj* object);
+  void AddAutoAlignObject(GameObj* object);
+  void RemoveAutoAlignObject(GameObj* object);
 
-  void AddModifiedGravityObject(PhysicalObj* i_object);
-  void RemoveModifiedGravityObject(PhysicalObj* i_object);
+  void AddModifiedGravityObject(GameObj* i_object);
+  void RemoveModifiedGravityObject(GameObj* i_object);
 
 
   typedef enum {ADD,PERSIST,REMOVE} ContactType;
@@ -94,7 +86,7 @@ protected:
   void ComputeWind();
   void ComputeModifiedGravity();
 
-  std::map<b2Body *,PhysicalObj *> objects_list;
+  std::map<b2Body *,GameObj *> objects_list;
 
   std::vector<b2ContactPoint> added_contact_list;
   std::vector<b2ContactPoint> persist_contact_list;
@@ -103,9 +95,9 @@ protected:
 
   std::vector<Force *> m_force_list;
   std::vector<PhysicalShape *> m_air_friction_shape_list;
-  std::vector<PhysicalObj *> m_wind_object_list;
-  std::vector<PhysicalObj *> m_modified_gravity_object_list;
-  std::vector<PhysicalObj *> m_auto_align_object_list;
+  std::vector<GameObj *> m_wind_object_list;
+  std::vector<GameObj *> m_modified_gravity_object_list;
+  std::vector<GameObj *> m_auto_align_object_list;
   void ClearContact();
 
   friend class Singleton<PhysicalEngine>;

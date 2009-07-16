@@ -52,11 +52,11 @@ class PhysicalShape;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
-class PhysicalObj : private ObjectConfig
+class GameObj : private ObjectConfig
 {
 private:
   /* If you need this, implement it (correctly)*/
-  const PhysicalObj& operator=(const PhysicalObj&);
+  const GameObj& operator=(const GameObj&);
   /*********************************************/
 
   // collision management
@@ -67,7 +67,7 @@ private:
 
   bool m_rebounding;
 
-  PhysicalObj* m_overlapping_object;
+  GameObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   uint m_nbr_contact;
 
@@ -105,12 +105,12 @@ protected:
   std::vector<b2ContactResult> result_contact_list;
 
 public:
-  PhysicalObj (const std::string &name, const std::string &xml_config="");
+  GameObj (const std::string &name, const std::string &xml_config="");
   /* Note : The copy constructor is not implemented (and this is not a bug)
    * because we can copy directly the pointer m_overlapping_object whereas this
    * object does not own it.
    * FIXME what happen if the object is deleted meanwhile ???*/
-  virtual ~PhysicalObj ();
+  virtual ~GameObj ();
 
   enum CollisionCategory {GROUND=4,CHARACTER=2,OBJECT=1,PROJECTILE=8};
 
@@ -254,13 +254,13 @@ public:
   void SetCollisionGroup(int group);
   void SetCollisionCategory(CollisionCategory category);
 
-  void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
+  void SetOverlappingObject(GameObj* obj, int timeout = 0);
   void ClearOverlappingObject();
 
   void SetRebounding(bool rebounding);
 
-  const PhysicalObj* GetOverlappingObject() const;
-  virtual bool IsOverlapping(const PhysicalObj* obj) const;
+  const GameObj* GetOverlappingObject() const;
+  virtual bool IsOverlapping(const GameObj* obj) const;
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   // Relative to current position
@@ -268,9 +268,9 @@ public:
 
   bool IsColliding() const;
 
-  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
+  GameObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
-  PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const;
+  GameObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const;
 
 
   bool IsInWater() const;
@@ -324,7 +324,7 @@ public:
   void ResetConstants() { *((ObjectConfig*)this) = m_cfg; };
 
   // Are the two object in contact ? (uses test rectangles)
-  bool Overlapse(const PhysicalObj &b) const;
+  bool Overlapse(const GameObj &b) const;
 
   // Do the point p touch the object ?
   bool Contain(const Point2i &p) const;
@@ -335,7 +335,7 @@ public:
   PhysicalShape *GetShape(std::string name);
 
   virtual void SignalRebound();
-  virtual void SignalObjectCollision(PhysicalObj *,PhysicalShape *, const Point2d&) { };
+  virtual void SignalObjectCollision(GameObj *,PhysicalShape *, const Point2d&) { };
   virtual void SignalGroundCollision(const Point2d&) { };
   virtual void SignalCollision(const Point2d&) { };
 

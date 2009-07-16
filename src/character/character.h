@@ -39,7 +39,7 @@ class PhysicalShape;
 //#define DEBUG_SKIN
 #endif
 
-class Character : public PhysicalObj
+class Character : public GameObj
 {
 private:
   /* If you need this, implement it (correctly) */

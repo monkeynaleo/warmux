@@ -137,7 +137,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   }
 
   FOR_ALL_OBJECTS(it) {
-    PhysicalObj *obj = *it;
+    GameObj *obj = *it;
     if ((obj->GetTestRect()).Intersect(rect))
       return;
   }

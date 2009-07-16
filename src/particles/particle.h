@@ -72,7 +72,7 @@ enum particle_spr
 
 const int particle_spr_nbr = CHOCOLATEWATER_spr + 1;
 
-class Particle : public PhysicalObj
+class Particle : public GameObj
 {
   /* If you need this, implement it (correctly)*/
   Particle(const Particle&);
@@ -136,7 +136,7 @@ class ParticleEngine
   static void Refresh();
   static void Draw(bool upper);
   static void Stop();
-  static PhysicalObj * IsSomethingMoving();
+  static GameObj * IsSomethingMoving();
 };
 
 #endif /* PARTICLE_H */

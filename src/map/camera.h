@@ -27,7 +27,7 @@
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
 
-class PhysicalObj;
+class GameObj;
 
 class Camera : public Rectanglei, public Singleton<Camera>
 {
@@ -53,7 +53,7 @@ private:
 
   bool auto_crop;
   bool in_advance;
-  const PhysicalObj* followed_object;
+  const GameObj* followed_object;
   void AutoCrop();
 
   Point2i FreeDegrees() const { return Point2i(HasFixedX()? 0 : 1, HasFixedY()? 0 : 1); };
@@ -78,12 +78,12 @@ public:
 
   // Auto crop on an object
   // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const PhysicalObj *obj, bool follow, bool in_advance = false);
-  void StopFollowingObj(const PhysicalObj* obj);
+  void FollowObject(const GameObj *obj, bool follow, bool in_advance = false);
+  void StopFollowingObj(const GameObj* obj);
 
   void CenterOnActiveCharacter();
 
-  bool IsVisible(const PhysicalObj &obj) const;
+  bool IsVisible(const GameObj &obj) const;
 
   void Refresh();
 

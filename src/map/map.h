@@ -31,7 +31,7 @@
 // Forward declarations
 class Text;
 class Surface;
-class PhysicalObj;
+class GameObj;
 
 extern const uint MAX_WIND_OBJECTS;
 
@@ -99,10 +99,10 @@ public:
 
   // Test only the border lines
   // Test occurs on test rectangle with dx, dy delta
-  bool IsInVacuum_top (const PhysicalObj &obj, int dx, int dy) const;
-  bool IsInVacuum_bottom (const PhysicalObj &obj, int dx, int dy) const;
-  bool IsInVacuum_left (const PhysicalObj &obj, int dx, int dy) const;
-  bool IsInVacuum_right (const PhysicalObj &obj, int dx, int dy) const;
+  bool IsInVacuum_top (const GameObj &obj, int dx, int dy) const;
+  bool IsInVacuum_bottom (const GameObj &obj, int dx, int dy) const;
+  bool IsInVacuum_left (const GameObj &obj, int dx, int dy) const;
+  bool IsInVacuum_right (const GameObj &obj, int dx, int dy) const;
 
   // Is outside of the world ?
   bool IsOutsideWorldX (int x) const { return (x < 0) || ((int)GetWidth() <= x); };

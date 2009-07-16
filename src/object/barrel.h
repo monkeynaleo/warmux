@@ -26,7 +26,7 @@
 
 class Sprite;
 
-class PetrolBarrel : public PhysicalObj
+class PetrolBarrel : public GameObj
 {
   Sprite* img;
   public:

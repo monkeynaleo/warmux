@@ -81,7 +81,7 @@ Obus::~Obus()
 //-----------------------------------------------------------------------------
 
 Plane::Plane(AirAttackConfig &p_cfg) :
-  PhysicalObj("air_attack_plane"),
+  GameObj("air_attack_plane"),
   cfg(p_cfg)
 {
   SetCollisionModel(false, false, false,false);

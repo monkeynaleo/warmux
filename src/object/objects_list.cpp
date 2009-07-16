@@ -76,14 +76,14 @@ void ObjectsList::PlaceBarrels()
 }
 
 //-----------------------------------------------------------------------------
-void ObjectsList::AddObject(PhysicalObj * obj)
+void ObjectsList::AddObject(GameObj * obj)
 {
   push_back(obj);
   obj->Activate();
 }
 
 //-----------------------------------------------------------------------------
-void ObjectsList::RemoveObject(PhysicalObj * obj)
+void ObjectsList::RemoveObject(GameObj * obj)
 {
   obj->Desactivate();
   remove(obj);
@@ -161,7 +161,7 @@ void ObjectsList::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
+void ObjectsList::RemoveOverlappedObjectReference(const GameObj * obj)
 {
   for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
     if((*it)->GetOverlappingObject() == obj) {
