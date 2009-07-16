@@ -37,11 +37,11 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
 
   image = ParticleEngine::GetSprite(EXPLOSION_SMOKE_spr);
   mvt_freq = RandomLocal().GetDouble(-2.0, 2.0);
-  SetGravityFactor(RandomLocal().GetDouble(-1.0,-2.0));
+  GetPhysic()->SetGravityFactor(RandomLocal().GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
-  SetBasicShape(Point2i(1, 1), GetInitialMass());
-  StartMoving();
+  //SetBasicShape(Point2i(1, 1), GetInitialMass());
+
 }
 
 void ExplosionSmoke::Refresh()
@@ -71,5 +71,5 @@ void ExplosionSmoke::Refresh()
 void ExplosionSmoke::Draw()
 {
   if (m_left_time_to_live > 0)
-    image->Draw(GetPosition()+Point2i(dx,0));
+    image->Draw(GetPhysic()->GetPosition()+Point2i(dx,0));
 }

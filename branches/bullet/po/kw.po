@@ -58,7 +58,7 @@ msgstr "Para %s"
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:462
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s a janj kosten dhe %s"
@@ -117,7 +117,7 @@ msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
 
-#: src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:127
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "Yma %s ogas dhe grampothen dardhus!"
@@ -133,7 +133,7 @@ msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
 msgid "%s team has skipped its turn."
 msgstr "Para %s re gollas aga thro."
 
-#: src/weapon/cluzooka.cpp:394
+#: src/weapon/cluzooka.cpp:397
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -151,7 +151,7 @@ msgstr[1] "Para %s re waynyas %u Nu! Tardh-i, bughwas!"
 msgstr[2] "Para %s re waynyas %u Gnu! Tardh-i, bughwas!"
 msgstr[3] "Para %s re waynyas %u Gnu! Tardh-i, bughwas!"
 
-#: src/weapon/air_attack.cpp:270
+#: src/weapon/air_attack.cpp:273
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -181,7 +181,7 @@ msgstr[3] ""
 "Para %s re waynyas %u morthol-ayr! Na wrewgh re a dros gansans! Meur ras, "
 "Agas Kentrevogyon"
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -246,7 +246,7 @@ msgstr[1] "Para %s re waynyas %u bel derlemmel! Boyng!"
 msgstr[2] "Para %s re waynyas %u fel derlemmel! Boyng!"
 msgstr[3] "Para %s re waynyas %u pel derlemmel! Boyng!"
 
-#: src/weapon/cluster_bomb.cpp:205
+#: src/weapon/cluster_bomb.cpp:211
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -299,7 +299,7 @@ msgstr[1] "Para %s re waynyas %u stifeller-tan"
 msgstr[2] "Para %s re waynyas %u stifeller-tan!"
 msgstr[3] "Para %s re waynyas %u stifeller-tan!"
 
-#: src/weapon/footbomb.cpp:169
+#: src/weapon/footbomb.cpp:172
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -353,7 +353,7 @@ msgstr[1] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[2] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[3] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:253
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -512,7 +512,7 @@ msgstr "(prys ankoth)"
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -521,7 +521,7 @@ msgstr ""
 "Versyon nowyth %s yw kavadow, mes dha versyon jy yw %s. Martesen y fo hwans "
 "dhis a jeckya mars eus nowedhans kavadow rag dha SO!"
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:220
 msgid "Air Attack"
 msgstr "Omsettyans Ayr"
 
@@ -551,11 +551,11 @@ msgstr ""
 "Tenna: Spas\n"
 "unn bellen orth an dro"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Anwan"
 
-#: src/main.cpp:298
+#: src/main.cpp:304
 msgid "Authors:"
 msgstr "Awtours:"
 
@@ -674,11 +674,11 @@ msgstr "Modh omajer"
 msgid "Clumsiest"
 msgstr "Brassa lorden"
 
-#: src/weapon/cluster_bomb.cpp:187
+#: src/weapon/cluster_bomb.cpp:193
 msgid "Cluster Bomb"
 msgstr "Tanbellen Omvrewus"
 
-#: src/weapon/cluzooka.cpp:387
+#: src/weapon/cluzooka.cpp:390
 msgid "Cluzooka"
 msgstr "Omvrewzooka"
 
@@ -831,7 +831,7 @@ msgstr ""
 "osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
 "dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -853,7 +853,7 @@ msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
 msgid "Flame Thrower"
 msgstr "Stifeller-Tan"
 
-#: src/weapon/footbomb.cpp:151
+#: src/weapon/footbomb.cpp:154
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
@@ -963,7 +963,7 @@ msgstr ""
 "Usyans : pesya gweskel war an alhwedhen spas\n"
 "unn bellen orth an dro"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -975,7 +975,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Gwra feski, re lent os ta!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -988,7 +988,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Nerth orth an dalleth"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:391
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1101,7 +1101,7 @@ msgstr "Brassa niver a warioryon:"
 msgid "Maximum FPS"
 msgstr "Brassa niver a skeusennow orth an eylen"
 
-#: src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:219
 msgid "Mine"
 msgstr "Krampothen dardhus"
 
@@ -1250,7 +1250,7 @@ msgstr "Kasow poblek"
 msgid "Quit"
 msgstr "Kwitya"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Wormux"
 msgstr "Kwitya Wormux"
 
@@ -1282,7 +1282,7 @@ msgstr "Klerder"
 msgid "Riot Bomb"
 msgstr "Tanbellen Wustel"
 
-#: src/main.cpp:81
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "Lonchya an gwari"
 
@@ -1357,7 +1357,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1428,11 +1428,11 @@ msgstr "Chanjyel baraow"
 msgid "Teleportation"
 msgstr "Pellbortyans"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:152
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "An Danbellen Omvrewus re asas an gaslan kyns omdardha."
 
-#: src/weapon/footbomb.cpp:104
+#: src/weapon/footbomb.cpp:107
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "An Danbellen Beldroos re asas an gaslan kyns omdardha."
 
@@ -1481,7 +1481,7 @@ msgstr "An pinaval tardhus re asas an gaslan kyns omdardha."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "An re erel usi orth dha wortos! Difun! :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:342
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "An fusen awtomatek re asas an gaslan..."
@@ -1508,7 +1508,7 @@ msgstr[3] "Nyns eus saw %i para."
 msgid "Time"
 msgstr "Termyn"
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:194 src/weapon/footbomb.cpp:155
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1559,11 +1559,11 @@ msgstr "Gorhemmyn ankoth"
 msgid "Unlimited"
 msgstr "Heb finwedh"
 
-#: src/main.cpp:203
+#: src/main.cpp:209
 msgid "Version"
 msgstr "Versyon"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
@@ -1590,7 +1590,7 @@ msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 msgid "Weapons"
 msgstr "Arvow"
 
-#: src/main.cpp:307
+#: src/main.cpp:313
 msgid "Website: "
 msgstr "Gwiasva: "
 
@@ -1614,11 +1614,11 @@ msgstr "Manylyon gwyns?"
 msgid "Winner"
 msgstr "Gwaynyer"
 
-#: src/main.cpp:215
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Yma Wormux ow lonchya..."
 
-#: src/main.cpp:297
+#: src/main.cpp:303
 msgid "Wormux version "
 msgstr "Versyon Wormux"
 
@@ -1658,7 +1658,7 @@ msgstr "Res yw bos dhe'n leha dew bara da!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Ny yllydh gwari kyns dewis para!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:495
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
@@ -1666,7 +1666,7 @@ msgstr "Dha denn re fyllis!"
 msgid "aka"
 msgstr "leshenwys"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:221
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"

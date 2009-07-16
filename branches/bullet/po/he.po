@@ -55,7 +55,7 @@ msgstr "צוות %s"
 msgid "%s Team - Remote"
 msgstr "צוות %s - מרוחק"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:462
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -112,7 +112,7 @@ msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
 
-#: src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:127
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s סמוך למוקש!"
@@ -128,7 +128,7 @@ msgstr "לצוות %s יש כבר תחמושת בלתי מוגבלת עבור ה
 msgid "%s team has skipped its turn."
 msgstr "צוות %s ויתר על תורו."
 
-#: src/weapon/cluzooka.cpp:394
+#: src/weapon/cluzooka.cpp:397
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -142,7 +142,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "צוות %s זכה בגנו! חסל אותם, קאובוי!"
 msgstr[1] "צוות %s זכה ב-%u גנואים! חסל אותם, קאובוי!"
 
-#: src/weapon/air_attack.cpp:270
+#: src/weapon/air_attack.cpp:273
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -161,7 +161,7 @@ msgstr[0] "צוות %s זכה בפטיש אוויר! נא לשמור על השק
 msgstr[1] ""
 "צוות %s זכה ב-%u פטיש אוויר! נא לשמור על השקט בעת השימוש! תודה, השכנים."
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -206,7 +206,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "צוות %s זכה בכדור מקפץ! בוינג!"
 msgstr[1] "צוות %s זכה ב-%u כדורים מקפצים! בוינג!"
 
-#: src/weapon/cluster_bomb.cpp:205
+#: src/weapon/cluster_bomb.cpp:211
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -242,7 +242,7 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "צוות %s זכה בלהביור!"
 msgstr[1] "צוות %s זכה ב-%u להביורים!"
 
-#: src/weapon/footbomb.cpp:169
+#: src/weapon/footbomb.cpp:172
 #, fuzzy, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -284,7 +284,7 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "צוות %s זכה באנטי-גרביטציה! אני ניל ארמסטרונג!"
 msgstr[1] "צוות %s זכה ב-%u מתקני אנטי-גרביטציה! אני ניל ארמסטרונג!"
 
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:253
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -409,14 +409,14 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:220
 msgid "Air Attack"
 msgstr "התקפה אווירית"
 
@@ -447,11 +447,11 @@ msgstr ""
 "אש: מקש הרווח\n"
 "פגיעה אחת לתור"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "סדן"
 
-#: src/main.cpp:298
+#: src/main.cpp:304
 msgid "Authors:"
 msgstr "מחברים:"
 
@@ -574,11 +574,11 @@ msgstr "מצב לקוח"
 msgid "Clumsiest"
 msgstr "המגושם ביותר"
 
-#: src/weapon/cluster_bomb.cpp:187
+#: src/weapon/cluster_bomb.cpp:193
 msgid "Cluster Bomb"
 msgstr "פצצת מצרר"
 
-#: src/weapon/cluzooka.cpp:387
+#: src/weapon/cluzooka.cpp:390
 #, fuzzy
 msgid "Cluzooka"
 msgstr "בזוקה"
@@ -729,7 +729,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -747,7 +747,7 @@ msgstr "שגיאה: לא ניתן למצוא את הגוף \"%s\" עבור צו�
 msgid "Flame Thrower"
 msgstr "להביור"
 
-#: src/weapon/footbomb.cpp:151
+#: src/weapon/footbomb.cpp:154
 #, fuzzy
 msgid "Football Bomb"
 msgstr "מפזר הפגנות"
@@ -859,7 +859,7 @@ msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -871,7 +871,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "אנרגיה ראשונית"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:391
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -999,7 +999,7 @@ msgstr "מספר שחקנים מירבי:"
 msgid "Maximum FPS"
 msgstr "ערך FPS מקסימלי"
 
-#: src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:219
 msgid "Mine"
 msgstr "מוקש"
 
@@ -1153,7 +1153,7 @@ msgstr "יציאה מן הקרב"
 msgid "Quit"
 msgstr "יציאה"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
@@ -1186,7 +1186,7 @@ msgstr "אבחנה"
 msgid "Riot Bomb"
 msgstr "מפזר הפגנות"
 
-#: src/main.cpp:81
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "הרץ משחק"
 
@@ -1263,7 +1263,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקנים"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1335,11 +1335,11 @@ msgstr ""
 msgid "Teleportation"
 msgstr "טלפורטציה"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:152
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה."
 
-#: src/weapon/footbomb.cpp:104
+#: src/weapon/footbomb.cpp:107
 #, fuzzy
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה."
@@ -1387,7 +1387,7 @@ msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:342
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "הרקטה יצאה משדה הקרב..."
@@ -1413,7 +1413,7 @@ msgstr[1] "יש רק %i צוותים."
 msgid "Time"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:194 src/weapon/footbomb.cpp:155
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1464,11 +1464,11 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(ללא הגבלה)"
 
-#: src/main.cpp:203
+#: src/main.cpp:209
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1493,7 +1493,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "כלי נשק"
 
-#: src/main.cpp:307
+#: src/main.cpp:313
 msgid "Website: "
 msgstr "אתר: "
 
@@ -1517,11 +1517,11 @@ msgstr "חלקיקי רוח?"
 msgid "Winner"
 msgstr "מנצח"
 
-#: src/main.cpp:215
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Wormux נטען..."
 
-#: src/main.cpp:297
+#: src/main.cpp:303
 msgid "Wormux version "
 msgstr "גירסת Wormux "
 
@@ -1561,7 +1561,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:495
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 
@@ -1569,7 +1569,7 @@ msgstr "הירייה שלך החטיאה!"
 msgid "aka"
 msgstr "המכונה"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:221
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"

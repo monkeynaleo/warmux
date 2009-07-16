@@ -25,11 +25,9 @@
 #include <WORMUX_point.h>
 #include <vector>
 #include <string>
-
-#include <Box2D.h>
 #include "tool/xml_document.h"
+#include "physical_obj.h"
 
-extern const double PIXEL_PER_METER;
 #ifdef DEBUG
 class Color;
 #endif
@@ -37,9 +35,8 @@ class Color;
 class PhysicalShape
 {
 protected:
-  b2FilterData m_filter;
-  b2Body *m_body;
-  b2Shape *m_shape;
+  PhysicalObj *m_parent;
+
   Point2d m_position;
   Point2d m_force_application_point;
   double m_friction;
@@ -47,7 +44,7 @@ protected:
   double m_rebound_factor;
   double m_density;
   std::string m_name;
-  Point2d PosWithRotation(const b2Vec2& point) const;
+  Point2d PosWithRotation(const Point2d& point) const;
 
 public:
   PhysicalShape();
@@ -55,8 +52,6 @@ public:
   virtual void Generate() = 0;
   virtual double Area() const = 0;
 
-  const b2FilterData& GetFilter() const;
-  void SetFilter(b2FilterData filter);
   void SetFriction(double friction);
   void SetReboundFactor(double rebound_factor);
   void SetMass(double mass); // compute the density from mass and area
@@ -65,10 +60,9 @@ public:
   void SetAirFriction(double air_friction);
   void SetForceApplicationPoint(Point2d point);
 
-  void SetBody(b2Body *body);
+  void SetParent(PhysicalObj *parent);
 
   const std::string &GetName() const;
-  const b2Shape *GetShape() const;
   // returns current max width (taking angle into account)
   virtual double GetCurrentWidth() const = 0;
 
@@ -87,6 +81,8 @@ public:
   virtual double GetInitialMaxX() const = 0;
   virtual double GetInitialMinY() const = 0;
   virtual double GetInitialMaxY() const = 0;
+
+  Point2d GetPosition() const;
 
   void ComputeAirFriction();
 
@@ -114,7 +110,7 @@ public:
   // Box2D support only convex polygons
   bool IsConvex();
 
-  virtual void Generate();
+  virtual void Generate() = 0;
   virtual double Area() const;
 
   virtual double GetCurrentWidth() const;
@@ -137,7 +133,7 @@ public:
 #endif
 };
 
-class PhysicalRectangle : public PhysicalPolygon
+class PhysicalRectangle : public PhysicalShape
 {
 protected:
   double m_width;
@@ -145,7 +141,30 @@ protected:
 
 public:
   PhysicalRectangle(double width, double height);
-  virtual void Generate();
+  virtual void Generate() = 0;
+
+
+
+  virtual double Area() const = 0;
+
+  virtual double GetCurrentWidth() const = 0;
+   virtual double GetCurrentHeight() const = 0;
+   virtual double GetInitialWidth() const = 0;
+   virtual double GetInitialHeight() const = 0;
+
+   virtual double GetCurrentMinX() const = 0;
+   virtual double GetCurrentMaxX() const = 0;
+   virtual double GetCurrentMinY() const = 0;
+   virtual double GetCurrentMaxY() const = 0;
+
+   virtual double GetInitialMinX() const = 0;
+   virtual double GetInitialMaxX() const = 0;
+   virtual double GetInitialMinY() const = 0;
+   virtual double GetInitialMaxY() const = 0;
+
+  #ifdef DEBUG
+    virtual void DrawBorder(const Color &color) const = 0;
+  #endif
 };
 
 
@@ -158,7 +177,7 @@ public:
   PhysicalCircle();
   void SetRadius(double radius);
 
-  virtual void Generate();
+  virtual void Generate() = 0;
   virtual double Area() const;
 
   virtual double GetCurrentWidth() const;

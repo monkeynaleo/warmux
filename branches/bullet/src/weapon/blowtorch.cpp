@@ -83,7 +83,7 @@ void Blowtorch::ActionStopUse()
 
 bool Blowtorch::p_Shoot()
 {
-  Point2i hole = ActiveCharacter().GetCenter();
+  Point2i hole = ActiveCharacter().GetPhysic()->GetPosition();
 
   double angle = ActiveCharacter().GetFiringAngle();
   uint h = cfg().range;
@@ -91,7 +91,7 @@ bool Blowtorch::p_Shoot()
   double dy = sin(angle) * h;
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-  GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2);
+  GetWorld().Dig(pos, ActiveCharacter().GetSize().y/2);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
   MoveCharacter(ActiveCharacter());
 
@@ -101,7 +101,7 @@ bool Blowtorch::p_Shoot()
 void Blowtorch::HandleKeyPressed_Shoot(bool shift)
 {
   ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
-  ActiveCharacter().SetRebounding(false);
+  ActiveCharacter().GetPhysic()->SetReboundFactor(0);
   ActiveCharacter().body->StartWalk();
 
   HandleKeyRefreshed_Shoot(shift);

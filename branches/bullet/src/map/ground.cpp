@@ -23,7 +23,7 @@
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <limits.h>
-#include <Box2D.h>
+
 
 #include "game/game.h"
 #include "game/time.h"

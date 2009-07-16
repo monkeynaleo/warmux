@@ -26,7 +26,7 @@
 #include <string>
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "physic/physical_obj.h"
+#include "physic/game_obj.h"
 #include "character/body.h"
 
 class Text;
@@ -109,12 +109,8 @@ public:
   ~Character();
 
   void SignalExplosion();
-
-  // Energy related
-  void SetEnergyDelta(int delta, bool do_report = true);
+   void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);
-  inline const int & GetEnergy() const { return m_energy; };
-
   bool GotInjured() const { return lost_energy < 0; };
   void Die();
   void DisableDeathExplosion() { death_explosion = false; };

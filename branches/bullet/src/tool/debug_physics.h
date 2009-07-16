@@ -22,11 +22,10 @@
 #ifndef DEBUG_PHYSICS_H
 #define DEBUG_PHYSICS_H
 
-#include "Box2D.h"
 
 // This class implements debug drawing callbacks that are invoked
 // inside b2World::Step.
-class DebugDraw : public b2DebugDraw
+/*class DebugDraw : public b2DebugDraw
 {
 public:
   void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
@@ -40,7 +39,7 @@ public:
   void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
 
   void DrawXForm(const b2XForm& xf);
-};
+};*/
 
 #endif
 

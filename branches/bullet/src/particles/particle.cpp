@@ -60,8 +60,12 @@ Particle::Particle(const std::string &name) :
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
-  SetCollisionModel(false, false, false,false);
-  Activate();
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
+  GetPhysic()->Activate();
 }
 
 Particle::~Particle()
@@ -72,7 +76,7 @@ Particle::~Particle()
 void Particle::Draw()
 {
   if (m_left_time_to_live > 0) {
-    image->Draw(GetPosition());
+    image->Draw(GetPhysic()->GetPosition());
   }
 }
 
@@ -99,7 +103,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      SetBasicShape(image->GetSize(), GetInitialMass());
+//      SetBasicShape(image->GetSize(), GetInitialMass());
       image->SetAlpha(1.0);
     }
     else
@@ -254,9 +258,9 @@ void ParticleEngine::AddNow(const Point2i &position,
       else
         tmp_angle = angle;
 
-      particle->SetXY(position);
+      particle->SetPosition(position);
       particle->SetOnTop(upper);
-      particle->SetSpeed(tmp_norme, tmp_angle);
+      particle->GetPhysic()->SetSpeed(tmp_norme, tmp_angle);
       lst_particles.push_back(particle);
     }
   }
@@ -299,7 +303,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * little_cos[i]),int(norme * little_sin[i])); //Put inside the circle of the explosion
 
-      particle->SetXY(pos);
+      particle->SetPosition(pos);
       lst_particles.push_back(particle);
   }
 }

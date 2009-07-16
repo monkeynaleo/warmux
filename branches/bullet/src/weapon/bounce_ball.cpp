@@ -88,7 +88,7 @@ WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
 
 bool BounceBallLauncher::p_Shoot ()
 {
-  projectile->SetOverlappingObject(&ActiveCharacter(),2000);
+  projectile->GetPhysic()->AddOverlappingObject(ActiveCharacter().GetPhysic(),2000);
   if (max_strength == 0)
     projectile->Shoot (10);
   else

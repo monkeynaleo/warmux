@@ -80,7 +80,7 @@ void DynamiteStick::Refresh()
 {
   image->Update();
   if (image->IsFinished())
-    m_energy = 0;
+    SetEnergy(0);
   WeaponProjectile::Refresh();
 }
 
@@ -128,9 +128,9 @@ bool Dynamite::p_Shoot ()
   projectile->Shoot(0);
   // add the character speed
   if (ActiveCharacter().GetDirection() == 1)
-    projectile->SetSpeed(3.0, -M_PI_4);
+    projectile->GetPhysic()->SetSpeed(3.0, -M_PI_4);
   else
-    projectile->SetSpeed(3.0, -3.0 * M_PI_4);
+    projectile->GetPhysic()->SetSpeed(3.0, -3.0 * M_PI_4);
 
   projectile = NULL;
   ReloadLauncher();

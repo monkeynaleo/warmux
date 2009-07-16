@@ -163,7 +163,9 @@ void NetworkThread::ReceiveActions()
     {
       if((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
+
 	if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
+
 	  // An error occured during the reception
           (*dst_cpu)->ForceDisconnection();
           continue;

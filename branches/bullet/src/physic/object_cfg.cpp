@@ -38,6 +38,7 @@ ObjectConfig::ObjectConfig()
   m_gravity_factor = 1.0;
   m_auto_align_force = 0.0;
   m_rotating = false;
+  m_type = PhysicalEngine::RIGID_BODY;
 }
 
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)

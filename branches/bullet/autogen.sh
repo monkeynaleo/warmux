@@ -66,6 +66,23 @@ fi
 echo "[+] Run autoheader"
 $AUTOHEADER || exit 1
 
+rc=$?
+
+#if test $rc -eq 0; then
+#	echo "[+] Run libtool"
+#	libtoolize --force --automake --copy
+#	rc=$?
+#else
+#	echo "An error occured, autogen.sh stopping."
+#	exit $rc
+#fi
+
+#if test $rc -ne 0; then
+#	echo "libtool not found. trying glibtool."
+#	glibtoolize --force --automake --copy
+#	rc=$?
+#fi
+
 echo "[+] Run automake"
 touch config.rpath # automake 1.10 has a bug and wants this file
 $AUTOMAKE --add-missing --copy || exit 1

@@ -29,13 +29,17 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle() :
   Particle("water_particle")
 {
-  SetCollisionModel(false, false, false,false);
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
   image = ParticleEngine::GetSprite(WATER_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetBasicShape(image->GetSize(), GetInitialMass());
+//  SetBasicShape(image->GetSize(), GetInitialMass());
 }
 
 WaterParticle::~WaterParticle()
@@ -55,7 +59,7 @@ void WaterParticle::Refresh()
     // SetTestRect(dx, dx-1, GetHeight() - 2,1);
   }
 
-  double angle = GetSpeedAngle();
+  double angle = GetPhysic()->GetAngularSpeed();
   image->SetRotation_rad((angle - M_PI_2));
 
   m_last_refresh = now;
@@ -63,8 +67,8 @@ void WaterParticle::Refresh()
 
 void WaterParticle::Draw()
 {
-  Point2i draw_pos = GetPosition();
-  draw_pos.y += GetHeight()/2;
+  Point2i draw_pos = GetPhysic()->GetPosition();
+  draw_pos.y += GetSize().y/2;
   image->Draw( draw_pos );
 }
 

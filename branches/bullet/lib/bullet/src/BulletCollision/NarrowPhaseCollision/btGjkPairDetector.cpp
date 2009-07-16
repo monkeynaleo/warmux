@@ -184,24 +184,36 @@ void btGjkPairDetector::getClosestPoints(const ClosestPointInput& input,Result& 
 #ifdef DEBUG_SPU_COLLISION_DETECTION
 		spu_printf("addVertex 2\n");
 #endif
+			btVector3 newCachedSeparatingAxis;
+
 			//calculate the closest point to the origin (update vector v)
-			if (!m_simplexSolver->closest(m_cachedSeparatingAxis))
+			if (!m_simplexSolver->closest(newCachedSeparatingAxis))
 			{
 				m_degenerateSimplex = 3;
 				checkSimplex = true;
 				break;
 			}
 
-			if(m_cachedSeparatingAxis.length2()<REL_ERROR2)
+			if(newCachedSeparatingAxis.length2()<REL_ERROR2)
             {
+				m_cachedSeparatingAxis = newCachedSeparatingAxis;
                 m_degenerateSimplex = 6;
                 checkSimplex = true;
                 break;
             }
 
 			btScalar previousSquaredDistance = squaredDistance;
-			squaredDistance = m_cachedSeparatingAxis.length2();
+			squaredDistance = newCachedSeparatingAxis.length2();
+			if (squaredDistance>previousSquaredDistance)
+			{
+				m_degenerateSimplex = 7;
+				squaredDistance = previousSquaredDistance;
+                checkSimplex = false;
+                break;
+			}
 			
+			m_cachedSeparatingAxis = newCachedSeparatingAxis;
+
 			//redundant m_simplexSolver->compute_points(pointOnA, pointOnB);
 
 			//are we getting any closer ?
@@ -298,33 +310,45 @@ void btGjkPairDetector::getClosestPoints(const ClosestPointInput& input,Result& 
 
 				if (isValid2)
 				{
-					btVector3 tmpNormalInB = tmpPointOnB-tmpPointOnA;
-					btScalar lenSqr = tmpNormalInB.length2();
-					if (lenSqr > (SIMD_EPSILON*SIMD_EPSILON))
+					btScalar distance2 = -(tmpPointOnA-tmpPointOnB).length();
+					//only replace valid penetrations when the result is deeper (check)
+					if (!isValid || (distance2 < distance))
 					{
-						tmpNormalInB /= btSqrt(lenSqr);
-						btScalar distance2 = -(tmpPointOnA-tmpPointOnB).length();
-						//only replace valid penetrations when the result is deeper (check)
-						if (!isValid || (distance2 < distance))
-						{
-							distance = distance2;
-							pointOnA = tmpPointOnA;
-							pointOnB = tmpPointOnB;
-							normalInB = tmpNormalInB;
-							isValid = true;
-							m_lastUsedMethod = 3;
-						} else
-						{
-							
-						}
-					} else
+						distance = distance2;
+						pointOnA = tmpPointOnA;
+						pointOnB = tmpPointOnB;
+						normalInB = m_cachedSeparatingAxis;
+						isValid = true;
+						m_lastUsedMethod = 3;
+					}  else
 					{
-						//isValid = false;
 						m_lastUsedMethod = 4;
 					}
 				} else
 				{
-					m_lastUsedMethod = 5;
+					///this is another degenerate case, where the initial GJK calculation reports a degenerate case
+					///EPA reports no penetration, and the second GJK (using the supporting vector without margin)
+					///reports a valid positive distance. Use the results of the second GJK instead of failing.
+					///thanks to Jacob.Langford for the reproduction case
+					///http://code.google.com/p/bullet/issues/detail?id=250
+
+				
+					btScalar distance2 = (tmpPointOnA-tmpPointOnB).length()-margin;
+					//only replace valid distances when the distance is less
+					if (!isValid || (distance2 < distance))
+					{
+						distance = distance2;
+						pointOnA = tmpPointOnA;
+						pointOnB = tmpPointOnB;
+						pointOnA -= m_cachedSeparatingAxis * marginA ;
+						pointOnB += m_cachedSeparatingAxis * marginB ;
+						normalInB = m_cachedSeparatingAxis;
+						isValid = true;
+						m_lastUsedMethod = 6;
+					} else
+					{
+						m_lastUsedMethod = 5;
+					}
 				}
 				
 			}

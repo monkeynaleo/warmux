@@ -28,8 +28,11 @@
 GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Particle("ground_particle")
 {
-  SetCollisionModel(false, false, false,false);
-  SetBasicShape(Point2i(1,1), GetInitialMass());
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
+ // SetBasicShape(Point2i(1,1), GetPhysic()->GetInitial());
   m_initial_time_to_live = 1; // used as a boolean because we redefine Refresh!
   m_left_time_to_live = 1; // used as a boolean because we redefine Refresh!
   image = NULL;

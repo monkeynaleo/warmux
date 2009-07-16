@@ -73,11 +73,11 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 }
 
-void WeaponBullet::SignalObjectCollision(PhysicalObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
+void WeaponBullet::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
 {
 
 #if 1
-  if (!obj->IsCharacter())
+  if (!obj->GetType() == GAME_CHARACTER)
   {
     Explosion();
   }
@@ -110,7 +110,7 @@ void WeaponBullet::Refresh()
 
 void WeaponBullet::DoExplosion()
 {
-  Point2i pos = GetCenter();
+  Point2i pos = GetPosition();
   ApplyExplosion(pos, cfg, "", false, ParticleEngine::LittleESmoke, GetUniqueId());
 }
 //-----------------------------------------------------------------------------
@@ -119,13 +119,17 @@ void WeaponBullet::DoExplosion()
 WeaponProjectile::WeaponProjectile(const std::string &name,
                                     ExplosiveWeaponConfig& p_cfg,
                                     WeaponLauncher * p_launcher)
-  : PhysicalObj(name), cfg(p_cfg)
+  : GameObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
-  SetCollisionModel(true, true, true,false);
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   launcher = p_launcher;
-  SetCollisionCategory(PROJECTILE);
-  SetBullet(true);
+  GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetFast(true);
 
   explode_colliding_character = false;
   explode_with_timeout = true;
@@ -158,7 +162,7 @@ void WeaponProjectile::Shoot(double strength)
     launcher->IncActiveProjectile();
 
   // Set the physical factors
-  ResetConstants();
+//  ResetConstants();
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
@@ -181,12 +185,12 @@ void WeaponProjectile::Shoot(double strength)
   // Check if the object is colliding something between hand position and gun hole
   Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
-  Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
-  Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
+  Point2d f_hand_position(hand_position.GetX() , hand_position.GetY());
+  Point2d f_hole_position(hole_position.GetX(), hole_position.GetY());
 
-  SetOverlappingObject(&ActiveCharacter(), 500);
-  SetXY(hand_position);
-  if(IsRotating())
+  GetPhysic()->AddOverlappingObject(ActiveCharacter().GetPhysic(), 500);
+  SetPosition(hand_position);
+  if(IsRotationFixed())
   {
     SetAngle(angle);
   }
@@ -211,7 +215,7 @@ void WeaponProjectile::ShootSound()
 
 void WeaponProjectile::Refresh()
 {
-  if (m_energy == 0) {
+  if (GetEnergy() == 0) {
     Explosion();
     return;
   }
@@ -225,7 +229,7 @@ void WeaponProjectile::Refresh()
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
   // Don't call Explosion here, we're already in an explosion
-  m_energy = 0;
+  SetEnergy(0);
 }
 
 void WeaponProjectile::Draw()
@@ -253,11 +257,11 @@ bool WeaponProjectile::IsImmobile() const
 {
   if (explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
     return false;
-  return PhysicalObj::IsImmobile();
+  return GameObj::IsImmobile();
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj,
+void WeaponProjectile::SignalObjectCollision(GameObj * obj,
 					     PhysicalShape * /*shape*/,
 					     const Point2d& /* my_speed_before */)
 {
@@ -288,7 +292,7 @@ void WeaponProjectile::SignalCollision(const Point2d& speed_before)
 void WeaponProjectile::SignalDrowning()
 {
   MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  PhysicalObj::SignalDrowning();
+  GameObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
 
@@ -300,7 +304,7 @@ void WeaponProjectile::SignalDrowning()
 void WeaponProjectile::SignalGoingOutOfWater()
 {
   MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  PhysicalObj::SignalGoingOutOfWater();
+  GameObj::SignalGoingOutOfWater();
   if (launcher != NULL && !launcher->ignore_going_out_of_water_signal)
     launcher->SignalProjectileGoingOutOfWater();
 }
@@ -336,7 +340,7 @@ void WeaponProjectile::SignalExplosion()
 
 void WeaponProjectile::DoExplosion()
 {
-  Point2i pos = GetCenter();
+  Point2i pos = GetPosition();
   ApplyExplosion(pos, cfg, "weapon/explosion", true, ParticleEngine::BigESmoke, GetUniqueId());
 }
 
@@ -436,7 +440,7 @@ bool WeaponLauncher::ReloadLauncher()
 // Direct Explosion when pushing weapon to max power !
 void WeaponLauncher::DirectExplosion()
 {
-  Point2i pos = ActiveCharacter().GetCenter();
+  Point2i pos = ActiveCharacter().GetPosition();
   ApplyExplosion(pos, cfg());
 }
 

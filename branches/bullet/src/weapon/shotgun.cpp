@@ -101,7 +101,7 @@ bool ShotgunBuckshot::IsOverlapping(const GameObj* obj) const
 {
   if (GetName() == obj->GetName()) return true;
 
-  return (GetOverlappingObject() == obj);
+  return (GetPhysic()->IsOverlappingObject(obj->GetPhysic()));
 }
 
 //-----------------------------------------------------------------------------

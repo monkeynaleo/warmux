@@ -26,25 +26,36 @@
 
 extern const double PIXEL_PER_METER;
 
-class GameObj;
+class PhysicalObj;
 class Force;
 class ContactListener;
 class DebugDraw;
 class PhysicalShape;
+class PhysicalCircle;
+class PhysicalPolygon;
+class PhysicalRectangle;
 
-
+#include "WORMUX_point.h"
+#include "WORMUX_types.h"
 class PhysicalEngine
 {
 public:
 
-  PhysicalEngine();
-  ~PhysicalEngine();
+    enum ObjectType { RIGID_BODY, SOFT_BODY };
 
-  b2Body *AddObject(GameObj *new_obj);
-  void RemoveObject(GameObj *obj);
-  b2Joint* CreateJoint(b2JointDef* i_joint_def);
-  void Step();
-  void StaticStep();
+  PhysicalEngine();
+  virtual ~PhysicalEngine();
+
+  virtual PhysicalObj *CreateObject(ObjectType type) = 0;
+  virtual PhysicalPolygon *CreatePolygonShape() = 0;
+  virtual PhysicalCircle *CreateCircleShape() = 0;
+  virtual PhysicalRectangle *CreateRectangleShape(double width, double height) = 0;
+
+  virtual void AddObject(PhysicalObj *new_obj) =0;
+  void RemoveObject(PhysicalObj *obj);
+  void AddConstraint();
+  virtual void Step() = 0;
+  void VirtualStep();
 
   void AddForce(Force * force);
   void RemoveForce(Force *force);
@@ -52,78 +63,26 @@ public:
   void AddAirFrictionShape(PhysicalShape* shape);
   void RemoveAirFrictionShape(PhysicalShape* shape);
 
-  void AddWindObject(GameObj* i_object);
-  void RemoveWindObject(GameObj* i_object);
+  void AddWindObject(PhysicalObj* i_object);
+  void RemoveWindObject(PhysicalObj* i_object);
 
-  void AddAutoAlignObject(GameObj* object);
-  void RemoveAutoAlignObject(GameObj* object);
+  void AddAutoAlignObject(PhysicalObj* object);
+  void RemoveAutoAlignObject(PhysicalObj* object);
 
-  void AddModifiedGravityObject(GameObj* i_object);
-  void RemoveModifiedGravityObject(GameObj* i_object);
-
-
-  typedef enum {ADD,PERSIST,REMOVE} ContactType;
-
-  void AddContactPoint(b2ContactPoint contact,ContactType type);
-  void AddContactResult(b2ContactResult contact);
+  void AddModifiedGravityObject(PhysicalObj* i_object);
+  void RemoveModifiedGravityObject(PhysicalObj* i_object);
 
   void SetWindVector(const Point2d &i_wind_vector);
 
-protected:
+  static PhysicalEngine *GetInstance();
+  static void SetInstance(PhysicalEngine * instance);
 
-  uint frame_rate;
-  uint last_step_time;
-  uint iterations;
-  b2AABB worldAABB;
-  b2World *physic_world;
-  b2Body *ground;
-  ContactListener *m_contact_listener;
-  DebugDraw *m_debug_draw;
-  bool m_static_step_in_progress;
+protected:
+  uint m_frame_rate;
+  uint m_last_step_time;
   Point2d m_wind_vector;
-
-  void ComputeContacts();
-  void ComputeWind();
-  void ComputeModifiedGravity();
-
-  std::map<b2Body *,GameObj *> objects_list;
-
-  std::vector<b2ContactPoint> added_contact_list;
-  std::vector<b2ContactPoint> persist_contact_list;
-  std::vector<b2ContactPoint> removed_contact_list;
-  std::vector<b2ContactResult> result_contact_list;
-
-  std::vector<Force *> m_force_list;
-  std::vector<PhysicalShape *> m_air_friction_shape_list;
-  std::vector<GameObj *> m_wind_object_list;
-  std::vector<GameObj *> m_modified_gravity_object_list;
-  std::vector<GameObj *> m_auto_align_object_list;
-  void ClearContact();
-
-  friend class Singleton<PhysicalEngine>;
+  static PhysicalEngine *g_instance;
 };
-
-class ContactListener : public b2ContactListener
-{
-public:
-  ContactListener(PhysicalEngine *);
-
-  virtual void Add(const b2ContactPoint* point);
-
-  virtual void Persist(const b2ContactPoint* point);
-
-
-  virtual void Remove(const b2ContactPoint* point);
-
-
-  virtual void Result(const b2ContactResult* point);
-
-protected:
-
-  PhysicalEngine *engine;
-};
-
-
 
 
 //-----------------------------------------------------------------------------

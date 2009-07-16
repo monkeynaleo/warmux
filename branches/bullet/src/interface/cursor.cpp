@@ -61,7 +61,7 @@ void CharacterCursor::Draw()
   if (ActiveCharacter().IsGhost()) return;
 
   // Draw cursor arround character
-  Point2i center = ActiveCharacter().GetCenter();
+  Point2i center = ActiveCharacter().GetPhysic()->GetPosition();
   uint x = center.x - image->GetWidth()/2;
   uint y = ActiveCharacter().GetY() - image->GetHeight() - y_min;
 

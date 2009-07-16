@@ -60,7 +60,7 @@ msgstr "%s Equipo"
 msgid "%s Team - Remote"
 msgstr "%s Equipo - Remoto"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:462
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s cambia el objetivo a %s"
@@ -117,7 +117,7 @@ msgstr[1] "¡El jugador %s ha conseguido %u puntos de vida!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "¡¡%s es un psicopata!!, ha matado a un miembro de su equipo %s "
 
-#: src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:127
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "¡%s esta cerca de una mina!"
@@ -133,7 +133,7 @@ msgstr "¡el equipo %s ahora tiene municion infinita para %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s ha perdido su turno."
 
-#: src/weapon/cluzooka.cpp:394
+#: src/weapon/cluzooka.cpp:397
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -148,7 +148,7 @@ msgstr[0] "¡El equipo %s ha conseguido %u Gnu! Cuidado hay animales sueltos :)"
 msgstr[1] ""
 "¡El equipo %s ha conseguido %u Gnus! Cuidado hay animales sueltos :)"
 
-#: src/weapon/air_attack.cpp:270
+#: src/weapon/air_attack.cpp:273
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -170,7 +170,7 @@ msgstr[1] ""
 "¡El equipo %s ha conseguido %u martillos voladores! No hagas demasiado ruido "
 "con ellos! Gracias! Vuestros vecinos."
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -215,7 +215,7 @@ msgid_plural "%s team has won %u bounce balls! Boing!"
 msgstr[0] "¡El equipo %s ha conseguido %u pelota!"
 msgstr[1] "¡El equipo %s ha conseguido %u pelotas!"
 
-#: src/weapon/cluster_bomb.cpp:205
+#: src/weapon/cluster_bomb.cpp:211
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -255,7 +255,7 @@ msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "¡El equipo %s ha conseguido %u lanzallamas!"
 msgstr[1] "¡El equipo %s ha conseguido %u lanzallamas!"
 
-#: src/weapon/footbomb.cpp:169
+#: src/weapon/footbomb.cpp:172
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -297,7 +297,7 @@ msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "¡El equipo %s ha conseguido %u bajagravedad! ¡Soy Neil Armstrong!"
 msgstr[1] "¡El equipo %s ha conseguido %u bajagravedades! ¡Soy Neil Armstrong!"
 
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:253
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -426,7 +426,7 @@ msgstr "(tiempo desconocido)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -435,7 +435,7 @@ msgstr ""
 "La versión %s está disponible, pero tienes la versión %s. A lo mejor quieres "
 "ver si hay una actualización disponible para tu sistema operativo."
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:220
 msgid "Air Attack"
 msgstr "Ataque aereo"
 
@@ -465,11 +465,11 @@ msgstr ""
 "Fuego: barra espaciadora\n"
 "un tiro por turno"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Yunque"
 
-#: src/main.cpp:298
+#: src/main.cpp:304
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -588,11 +588,11 @@ msgstr "Modo cliente"
 msgid "Clumsiest"
 msgstr "El más torpe"
 
-#: src/weapon/cluster_bomb.cpp:187
+#: src/weapon/cluster_bomb.cpp:193
 msgid "Cluster Bomb"
 msgstr "Granada de fragmentación"
 
-#: src/weapon/cluzooka.cpp:387
+#: src/weapon/cluzooka.cpp:390
 msgid "Cluzooka"
 msgstr "Bazooka"
 
@@ -750,7 +750,7 @@ msgstr ""
 "no está directamente conectado a Internet, comprueba la configuración de tu "
 "router: Puerto TCP %s debe ser dirigido a tu ordenador."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -772,7 +772,7 @@ msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
 msgid "Flame Thrower"
 msgstr "Lanzallamas"
 
-#: src/weapon/footbomb.cpp:151
+#: src/weapon/footbomb.cpp:154
 msgid "Football Bomb"
 msgstr "Bomba de futbol"
 
@@ -881,7 +881,7 @@ msgstr ""
 "Como usarlo: mantén pulsado la barra espaciadora\n"
 "un arma por turno"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Date prisa, eres demasiado lento"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -906,7 +906,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:391
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1019,7 +1019,7 @@ msgstr "Numero de jugadores por equipo:"
 msgid "Maximum FPS"
 msgstr "Numero máximo de FPS"
 
-#: src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:219
 msgid "Mine"
 msgstr "Mina"
 
@@ -1168,7 +1168,7 @@ msgstr "Batallas publicas"
 msgid "Quit"
 msgstr "Salir"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Wormux"
 msgstr "Salir de Wormux"
 
@@ -1200,7 +1200,7 @@ msgstr "Resolución"
 msgid "Riot Bomb"
 msgstr "Bomba Antidisturbio"
 
-#: src/main.cpp:81
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "Empieza el juego"
 
@@ -1277,7 +1277,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1348,13 +1348,13 @@ msgstr "Editor de equipos"
 msgid "Teleportation"
 msgstr "Teletransportación"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:152
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 "La bomba de fragmentación ha abandonado el campo de batalla antes de que "
 "pudiera explotar."
 
-#: src/weapon/footbomb.cpp:104
+#: src/weapon/footbomb.cpp:107
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr ""
 "La bomba de fragmentación ha abandonado el campo de batalla antes de que "
@@ -1409,7 +1409,7 @@ msgstr "La granada ha abandonado el campo de batalla antes de explotar."
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "¡Todos están esperando! Venga que todos están por ti :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:342
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "El cohete ha ido a otro mundo..."
@@ -1434,7 +1434,7 @@ msgstr[1] "Solo hay %i equipos."
 msgid "Time"
 msgstr "Tiempo"
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:194 src/weapon/footbomb.cpp:155
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1484,11 +1484,11 @@ msgstr "Comando desconocido"
 msgid "Unlimited"
 msgstr "Ilimitado"
 
-#: src/main.cpp:203
+#: src/main.cpp:209
 msgid "Version"
 msgstr "Versión"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "La verificación de versión ha fallado por: %s\n"
@@ -1516,7 +1516,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:307
+#: src/main.cpp:313
 msgid "Website: "
 msgstr "Sitio web: "
 
@@ -1540,11 +1540,11 @@ msgstr "¿Muestra las particulas del viento?"
 msgid "Winner"
 msgstr "Ganador"
 
-#: src/main.cpp:215
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Arrancando Wormux..."
 
-#: src/main.cpp:297
+#: src/main.cpp:303
 msgid "Wormux version "
 msgstr "Versión de Wormux"
 
@@ -1584,7 +1584,7 @@ msgstr "¡Necesitas al menos dos equipos válidos!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "¡No podrás jugar antes de seleccionar un equipo!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:495
 msgid "Your shot has missed!"
 msgstr "¡Has fallado el tiro!"
 
@@ -1592,7 +1592,7 @@ msgstr "¡Has fallado el tiro!"
 msgid "aka"
 msgstr "aqui"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:221
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"

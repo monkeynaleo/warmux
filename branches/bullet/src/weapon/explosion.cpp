@@ -83,7 +83,7 @@ void ApplyExplosion_common (const Point2i &pos,
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(team, character)
   {
-    double distance = pos.Distance((*character) -> GetCenter());
+    double distance = pos.Distance((*character) ->GetPhysic()->GetPosition());
     if(distance < 1.0)
       distance = 1.0;
 
@@ -121,7 +121,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
       if (!EqualsZero(distance))
       {
-        angle  = pos.ComputeAngle((*character) -> GetCenter());
+        angle  = pos.ComputeAngle((*character)->GetPhysic()->GetPosition());
         if( angle > 0 )
           angle  = - angle;
       }
@@ -130,8 +130,8 @@ void ApplyExplosion_common (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT((*character)->GetMass() != 0);
-      (*character)->AddSpeed (force / (*character)->GetMass(), angle);
+      ASSERT((*character)->GetPhysic()->GetMass() != 0);
+      (*character)->AddSpeed (force / (*character)->GetPhysic()->GetMass(), angle);
       (*character)->SignalExplosion();
     }
   }
@@ -151,7 +151,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
      if (obj->CollidesWithGround() && !obj->IsGhost())
      {
-       double distance = pos.Distance(obj->GetCenter());
+       double distance = pos.Distance(obj->GetPhysic()->GetPosition());
        if(distance < 1.0)
          distance = 1.0;
 
@@ -177,16 +177,16 @@ void ApplyExplosion_common (const Point2i &pos,
          force *= config.blast_force;
 
          if (!EqualsZero(distance))
-           angle  = pos.ComputeAngle(obj->GetCenter());
+           angle  = pos.ComputeAngle(obj->GetPhysic()->GetPosition());
          else
            angle = -M_PI_2;
 
          if(fastest_character != NULL)
            Camera::GetInstance()->FollowObject (obj, true);
-         ASSERT( obj->GetMass() != 0.0);
+         ASSERT( obj->GetPhysic()->GetMass() != 0.0);
 
 	 MSG_DEBUG("explosion", "!! blasting object %s", network_id.c_str());
-         obj->AddSpeed (force / obj->GetMass(), angle);
+         obj->AddSpeed (force / obj->GetPhysic()->GetMass(), angle);
        }
      }
    }
@@ -240,7 +240,7 @@ void ApplyExplosion_master (const Point2i &pos,
     {
       Character &character = **tit;
 
-      double distance = pos.Distance( character.GetCenter());
+      double distance = pos.Distance( character.GetPhysic()->GetPosition());
 
       // If the character is in the explosion range, apply damage on it !
       if (distance <= config.explosion_range || distance < config.blast_range)

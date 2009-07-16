@@ -97,7 +97,7 @@ bool Syringe::p_Shoot (){
     if ((*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( (*character)->Contain(pos_to_check) )
+      if( (*character)->GetPhysic()->Contain(pos_to_check) )
       {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         (*character)->SetDiseaseDamage(cfg().damage, cfg().turns);

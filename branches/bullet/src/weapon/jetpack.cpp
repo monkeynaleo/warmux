@@ -76,8 +76,8 @@ void JetPack::Refresh()
     F.x = m_x_force ;
     F.y = m_y_force ;
 
-    ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForceXY(F);
+    ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+    m_force_index = ActiveCharacter().GetPhysic()->AddExternForceXY(F);
     SendActiveCharacterInfo();
 
     if (!F.IsNull())
@@ -119,7 +119,7 @@ void JetPack::p_Deselect()
 {
   m_x_force = 0;
   m_y_force = 0;
-   ActiveCharacter().RemoveExternForce(m_force_index);
+   ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
 
 
   StopUse();
@@ -164,7 +164,7 @@ void JetPack::StopUse()
 void JetPack::GoUp()
 {
   StartUse();
-  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
+  m_y_force = -(ActiveCharacter().GetPhysic()->GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
 }
 
 void JetPack::GoLeft()

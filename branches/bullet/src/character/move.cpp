@@ -61,7 +61,7 @@ bool ComputeHeightMovement(Character &character, int &height,
     }
     //We can go down, but the step is too big -> the character will fall
     if (falling) {
-      character.SetX (character.GetXdouble() +character.GetDirection());
+      character.SetX(character.GetX() +character.GetDirection());
       character.UpdatePosition();
       character.SetMovement("fall");
     }
@@ -105,22 +105,22 @@ void MoveCharacter(Character &character, bool slowly)
 
   if(character.GetDirection() == DIRECTION_LEFT){
     /*
-      if(character.GetSpeedXY().x>-2){
+      if(character.GetSpeed().x>-2){
 
 
       character.AddSpeedXY(Point2d(0,-1));
 
       }
-      character.SetSpeedXY(Point2d(-5,character.GetSpeedXY().y ));*/
+      character.SetSpeedXY(Point2d(-5,character.GetSpeed().y ));*/
 
-    character.Impulse(10,0);
+    character.GetPhysic()->Impulse(10,0);
   }else{
-    character.Impulse(100,90);
-    /*if(character.GetSpeedXY().x<2){
+    character.GetPhysic()->Impulse(100,90);
+    /*if(character.GetSpeed().x<2){
       character.AddSpeedXY(Point2d(0,-1));
 
       }
-      character.SetSpeedXY(Point2d(5,character.GetSpeedXY().y));
+      character.SetSpeedXY(Point2d(5,character.GetSpeed().y));
     */
   }
 

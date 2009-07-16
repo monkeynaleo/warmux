@@ -21,7 +21,6 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
-#include <Box2D.h>
 #include "map/ground.h"
 #include "game/config.h"
 #include "graphic/video.h"
@@ -68,7 +67,8 @@ void TileItem_AlphaSoftware::Draw(const Point2i &pos)
 {
   GetMainWindow().Blit(GetSurface(),
 		       pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
-#ifdef DEBUG
+
+  #ifdef DEBUG
   if (IsLOGGING("polygon.tile")) {
     m_physic_tile->DrawBorder(primary_green_color);
   }
@@ -92,7 +92,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size, const Point2
   m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
   ResetEmptyCheck();
 
-  m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
+ // m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
 
   _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
   if( m_surface.GetBytesPerPixel() == 4 ){
