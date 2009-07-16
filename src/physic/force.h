@@ -24,9 +24,8 @@
 #define FORCE_H
 
 #include <WORMUX_point.h>
-#include <Box2D.h>
+
 class GameObj;
-struct b2Vec2;
 
 class Force
 {
@@ -38,8 +37,8 @@ public:
   Force(GameObj *i_target, Point2d i_force);
   ~Force();
   GameObj *m_target;
-  b2Vec2 m_target_point;
-  b2Vec2 m_force;
+  Point2d m_target_point;
+  Point2d m_force;
 
   bool m_target_center;
   void ComputeForce();

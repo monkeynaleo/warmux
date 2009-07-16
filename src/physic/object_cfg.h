@@ -23,6 +23,8 @@
 #define OBJECT_CFG_H
 //-----------------------------------------------------------------------------
 #include <string>
+
+#include "physical_engine.h"
 //-----------------------------------------------------------------------------
 
 class ObjectConfig
@@ -46,6 +48,8 @@ public:
 
   // Object try to align with movement direction
   double m_auto_align_force;
+
+  PhysicalEngine::ObjectType m_type;
 
   ObjectConfig();
   virtual ~ObjectConfig() { };

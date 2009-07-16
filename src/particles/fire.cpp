@@ -45,7 +45,8 @@ FireParticle::FireParticle() :
   m_vivacity = 500;
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = true;
-  m_is_fire = true;
+  
+  SetType(GAME_FIRE);
 
   fire_cfg.damage = 2;
   fire_cfg.explosion_range = 10;
@@ -55,11 +56,15 @@ FireParticle::FireParticle() :
 
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(bottom_center);
-  SetSphericalShape(image->GetSize().x/2, GetInitialMass());
-  SetCollisionCategory(PROJECTILE);
-  SetCollisionModel(true,true,true,true);
+//  SetSphericalShape(image->GetSize().x/2, GetInitialMass());
+  GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_PROJECTILE,true);
 
-  Generate();
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+
+  GetPhysic()->Generate();
 }
 
 FireParticle::~FireParticle()
@@ -83,7 +88,7 @@ void FireParticle::Refresh()
   {
   if(RandomSync().GetInt(0,10000)< m_vivacity)
   {
-    if(m_rebound_count == 0 || IsColliding())
+    if(m_rebound_count == 0 || GetPhysic()->IsColliding())
 	{
 	  Split();
 	  m_vivacity -= 100;
@@ -92,7 +97,7 @@ void FireParticle::Refresh()
   }
   }
 
-  if (on_ground || IsColliding())
+  if (on_ground || GetPhysic()->IsColliding())
   {
     if (!on_ground) {
       JukeBox::GetInstance()->Play("default","fire/touch_ground");
@@ -122,7 +127,7 @@ void FireParticle::Refresh()
 
 void FireParticle::Draw()
 {
-  Point2i draw_pos = GetPosition();
+  Point2i draw_pos = GetPhysic()->GetPosition();
   draw_pos.y -=  (image->GetSize().y/2)-4;
   draw_pos.x -=  image->GetSize().x/2;
 
@@ -146,15 +151,19 @@ void FireParticle::SignalGroundCollision(const Point2d&)
   m_rebound_count--;
   if(m_rebound_count == 0)
   {
-    SetSphericalShape(image->GetSize().x/2, 0);
-    SetCollisionCategory(PROJECTILE);
-    SetCollisionModel(true,false,false,true);
-    Generate();
+//    SetSphericalShape(image->GetSize().x/2, 0);
+    GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_PROJECTILE,true);
+
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+    GetPhysic()->Generate();
   }
 
   if(m_rebound_count >= 0)
   {
-      Point2i expl_pos = GetPosition();
+      Point2i expl_pos = GetPhysic()->GetPosition();
 	  expl_pos.y -= 4;
       ApplyExplosion(expl_pos, fire_cfg, "", false, ParticleEngine::LittleESmoke);
   }
@@ -173,18 +182,18 @@ void FireParticle::Split()
 {
 
   FireParticle * fire = new FireParticle();
-  fire->SetXY(GetPosition());
+  fire->SetPosition(GetPhysic()->GetPosition());
   fire->SetOnTop(true);
   fire->SetVivacity(m_vivacity - 100);
-  SetOverlappingObject(fire, 1000);
+  GetPhysic()->AddOverlappingObject(fire->GetPhysic(), 1000);
 
   double x = RandomSync().GetDouble(-10,10);
   double y = RandomSync().GetDouble(-10,-5);
-  fire->SetSpeedXY(Point2d(x, y));
+  fire->GetPhysic()->SetSpeedXY(Point2d(x, y));
   //fire->SetSpeed(10,  M_PI);
 
   ParticleEngine::AddNow(fire);
-  ParticleEngine::AddNow(GetPosition(), 2, particle_SMOKE, true, 0, 1);
+  ParticleEngine::AddNow(GetPhysic()->GetPosition(), 2, particle_SMOKE, true, 0, 1);
 
 
 }

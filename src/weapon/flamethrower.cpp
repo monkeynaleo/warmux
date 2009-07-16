@@ -70,7 +70,7 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
 {
   explode_colliding_character = true;
   explode_with_collision = true;
-  m_is_fire = true;
+  SetType(GAME_FIRE);
   can_drown = false;
 }
 
@@ -79,7 +79,7 @@ bool FlameThrowerBullet::IsOverlapping(const GameObj* obj) const
   if (GetName() == obj->GetName())
     return false;
 
-  return (GetOverlappingObject() == obj);
+  return (GetPhysic()->IsOverlappingObject(obj->GetPhysic()));
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
@@ -94,7 +94,7 @@ void FlameThrowerBullet::ShootSound()
 
 void FlameThrowerBullet::DoExplosion()
 {
-  Point2i pos=GetPosition();
+  Point2i pos=GetPhysic()->GetPosition();
   particle.AddNow(pos, 1, particle_FIRE, true, 0, 1);
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }

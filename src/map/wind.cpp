@@ -42,18 +42,21 @@ const uint bar_speed = 20;
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   GameObj("wind", xml_file)
 {
-  SetCollisionModel(false, false, false,false);
 
+GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   // Physic constants
   double mass, wind_factor ;
   //Mass = mass_mean + or - 25%
-  mass = GetInitialMass();
+  mass = GetPhysic()->GetMass();
   mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
-  SetBasicShape(Point2i(20,20), mass);
-  wind_factor = GetWindFactor() ;
+//  SetBasicShape(Point2i(20,20), mass);
+  wind_factor = GetPhysic()->GetWindFactor() ;
   wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
-  SetWindFactor(wind_factor);
-  SetAirResistFactor( GetAirResistFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
+  GetPhysic()->SetWindFactor(wind_factor);
+  GetPhysic()->SetAirFrictionFactor( GetPhysic()->GetAirFrictionFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
   MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
   // Fixe test rectangle
@@ -90,7 +93,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
       flipped->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
   }
-  Activate();
+  GetPhysic()->Activate();
 }
 
 WindParticle::~WindParticle()
@@ -103,7 +106,7 @@ WindParticle::~WindParticle()
 void WindParticle::Refresh()
 {
 
-  if (flipped && GetSpeed().x < 0)
+  if (flipped && GetPhysic()->GetSpeed().x < 0)
     flipped->Update();
   else
     sprite->Update();
@@ -111,7 +114,7 @@ void WindParticle::Refresh()
   // Rotate the sprite if needed
   if (ActiveMap()->GetWind().rotation_speed != 0.0)
   {
-    if (flipped && GetSpeed().x < 0)
+    if (flipped && GetPhysic()->GetSpeed().x < 0)
     {
       float new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
       flipped->SetRotation_rad(new_angle);
@@ -142,7 +145,7 @@ void WindParticle::Refresh()
 
   if (x != GetX() || y != GetY())
   {
-    SetXY(Point2i(x,y));
+    SetPosition(Point2i(x,y));
   }
   /*m_alive = ALIVE;
 
@@ -163,10 +166,10 @@ void WindParticle::Refresh()
 void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
-  if (flipped && GetSpeed().x < 0)
-    flipped->Draw(GetPosition());
+  if (flipped && GetPhysic()->GetSpeed().x < 0)
+    flipped->Draw(GetPhysic()->GetPosition());
   else
-    sprite->Draw(GetPosition());
+    sprite->Draw(GetPhysic()->GetPosition());
 }
 
 void WindParticle::Ghost ()
@@ -271,7 +274,7 @@ void Wind::RandomizeParticlesPos()
 
   for (; it != end; ++it)
   {
-    (*it)->SetXY(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(),
+    (*it)->SetPosition(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(),
 						Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
                           RandomLocal().GetLong(Camera::GetInstance()->GetPositionY(),
 						Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));

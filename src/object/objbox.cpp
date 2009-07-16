@@ -53,10 +53,14 @@ ObjBox::ObjBox(const std::string &name) : GameObj(name)
   m_allow_negative_y = true;
 
   parachute = true;
-  m_energy = start_life_points;
+  SetEnergy(start_life_points);
 
-  SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(true, false, true,true);
+  GetPhysic()->SetSpeed (SPEED, M_PI_2);
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
   std::cout<<"super called"<<std::endl;
   JukeBox::GetInstance()->Play("default","box/falling");
 }
@@ -69,7 +73,7 @@ ObjBox::~ObjBox()
 
 void ObjBox::CloseParachute()
 {
-  SetAirResistFactor(0.0);
+  GetPhysic()->SetAirFrictionFactor(0.0);
   Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
   hit.Play("default", "box/hitting_ground");
@@ -89,7 +93,7 @@ void ObjBox::SignalCollision(const Point2d& /*my_speed_before*/)
 void ObjBox::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/)
 {
   //  SignalCollision(); // this is done by the physical engine...
-  if (obj->IsCharacter()) {
+  if (obj->GetType() ==  GAME_CHARACTER) {
     ApplyBonus((Character *)obj);
   }
 }
@@ -101,7 +105,7 @@ void ObjBox::SignalDrowning()
 void ObjBox::DropBox()
 {
   if (parachute) {
-    SetAirResistFactor(0.0);
+    GetPhysic()->SetAirFrictionFactor(0.0);
     parachute = false;
     anim->SetCurrentFrame(anim->GetFrameCount() - 1);
   } else {
@@ -112,8 +116,8 @@ void ObjBox::DropBox()
 void ObjBox::Draw()
 {
   anim->SetRotation_HotSpot(Point2i(0,0));
-  anim->SetRotation_rad(- GetAngle());
-  anim->Draw(GetPosition());
+  anim->SetRotation_rad(- GetPhysic()->GetAngle());
+  anim->Draw(GetPhysic()->GetPosition());
 }
 
 void ObjBox::Refresh()
@@ -121,7 +125,7 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if (Overlapse(**character)) {
+    if (GetPhysic()->Overlapse((*character)->GetPhysic())) {
       ApplyBonus((*character));
       Ghost();
       return;
@@ -134,13 +138,13 @@ void ObjBox::Refresh()
 //Boxes can explode...
 void ObjBox::Explode()
 {
-  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
+  ParticleEngine::AddNow(GetPhysic()->GetPosition() , 10, particle_FIRE, true);
+  ApplyExplosion(GetPhysic()->GetPosition(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
 }
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
-  if (m_energy > 0) return;
+  if (GetEnergy() > 0) return;
   Explode();
 }
 
@@ -148,16 +152,16 @@ void ObjBox::GetValueFromAction(Action * a)
 {
   GameObj::GetValueFromAction(a);
   start_life_points = a->PopInt();
-  SetXY(a->PopPoint2d());
-  SetSpeedXY(a->PopPoint2d());
+  SetPosition(a->PopPoint2d());
+  GetPhysic()->SetSpeedXY(a->PopPoint2d());
 }
 
 void ObjBox::StoreValue(Action *a)
 {
   GameObj::StoreValue(a);
   a->Push(start_life_points);
-  a->Push(GetPosition());
-  a->Push(GetSpeed());
+  a->Push(GetPhysic()->GetPosition());
+  a->Push(GetPhysic()->GetSpeed());
 }
 
 //-----------------------------------------------------------------------------

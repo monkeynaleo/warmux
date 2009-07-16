@@ -26,342 +26,150 @@
 
 #ifndef PHYSICAL_OBJECT_H
 #define PHYSICAL_OBJECT_H
-
-#include <list>
-#include <map>
 #include <vector>
+#include <string>
+#include "WORMUX_point.h"
+#include "WORMUX_rectangle.h"
+#include "WORMUX_types.h"
+#include "tool/xml_document.h"
 
-#include <Box2D.h>
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
-#include "physic/object_cfg.h"
-
-// Alive state
-typedef enum
-{
-  ALIVE,
-  DEAD,
-  GHOST,
-  DROWNED
-} alive_t;
-
-class Action;
-class Color;
-class Force;
 class PhysicalShape;
+class PhysicalListener;
 
-double MeterDistance (const Point2i &p1, const Point2i &p2);
-
-class GameObj : private ObjectConfig
+class PhysicalObj
 {
-private:
-  /* If you need this, implement it (correctly)*/
-  const GameObj& operator=(const GameObj&);
-  /*********************************************/
-
-  // collision management
-  bool m_collides_with_ground;
-  bool m_collides_with_characters;
-  bool m_collides_with_objects;
-  bool m_collides_with_projectiles;
-
-  bool m_rebounding;
-
-  GameObj* m_overlapping_object;
-  uint m_minimum_overlapse_time;
-  uint m_nbr_contact;
-
-  // Other physics constants stored there :
-  ObjectConfig m_cfg;
-
-  std::map<unsigned,Force *> m_extern_force_map;
-  uint m_extern_force_index;
-
-protected:
-
-  bool m_ignore_movements;
-  bool m_is_character;
-  bool m_is_fire;
-  bool m_is_bullet;
-  b2Body *m_body;
-  b2BodyDef *m_body_def;
-  std::list<PhysicalShape *> m_shapes;
-  uint m_last_move;
-  std::string m_name;
-  std::string m_unique_id;
-  std::string m_rebound_sound;
-  Point2d m_initial_speed;
-
-  bool m_fixed;
-  alive_t m_alive;
-  int m_energy;
-
-  bool m_allow_negative_y;
-
-
-  std::vector<b2ContactPoint> added_contact_list;
-  std::vector<b2ContactPoint> persist_contact_list;
-  std::vector<b2ContactPoint> removed_contact_list;
-  std::vector<b2ContactResult> result_contact_list;
-
-public:
-  GameObj (const std::string &name, const std::string &xml_config="");
+  
+public: 
+  PhysicalObj();
   /* Note : The copy constructor is not implemented (and this is not a bug)
    * because we can copy directly the pointer m_overlapping_object whereas this
    * object does not own it.
    * FIXME what happen if the object is deleted meanwhile ???*/
-  virtual ~GameObj ();
+  virtual ~PhysicalObj ();
 
-  enum CollisionCategory {GROUND=4,CHARACTER=2,OBJECT=1,PROJECTILE=8};
+  virtual void LoadFromXml(const xmlNode &xml_obj) = 0;
 
-  virtual void Activate();
-  virtual void Generate();
-  virtual void Desactivate();
-
-  virtual void GenerateMass();
-
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
+  virtual void Activate() = 0;
+  virtual void Generate() = 0;
+  virtual void Desactivate() = 0;
 
   //-------- Position, speed and size -------
 
   // Set/Get position
-  void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
-  void SetY(double y) { SetXY( Point2d(GetXdouble(), y) ); };
-  void SetXY(const Point2i &position);
-  void SetXY(const Point2d &position);
-  int GetX() const;
-  int GetY() const;
-  double GetXdouble() const;
-  double GetYdouble() const;
-  const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
-  const Point2i GetRotationCenter();
+  virtual void SetPosition(const Point2d &position) = 0;
+  virtual const Point2d GetPosition() const  = 0;
+  virtual void SetAngle(double angle_rad) = 0;
+  virtual double GetAngle() const = 0;
+  
+  //State
+  virtual void SetFixed(bool i_fixed) = 0;
+  virtual bool IsFixed() = 0;
+  virtual void SetRotationFixed(bool rotating) = 0;
+  virtual bool IsRotationFixed() const { return m_rotating; }
+  virtual void StopMovement() = 0;
+  virtual void SetFast(bool is_fast) = 0;
+  virtual bool IsFast() = 0;
+  
+ // Speed
+  virtual void SetSpeedXY(Point2d vector) = 0;
+  virtual void SetSpeed(double norm, double angle_rad) = 0;
+  virtual void SetAngularSpeed(double speed) = 0;
+  virtual void GetSpeed(double &norm, double &angle_rad) const = 0;
+  virtual Point2d GetSpeed() const = 0;
+  virtual double GetAngularSpeed() const = 0;
+  virtual bool IsMoving() const = 0;
+  virtual bool IsSleeping() const = 0;
+  // Shape
+  virtual void AddShape(PhysicalShape *shape,std::string name) = 0;
+  virtual void RemoveShape(PhysicalShape *shape) = 0;
+  virtual void RemoveShape(std::string name) = 0;
+  virtual void ClearShapes() = 0;
+  virtual void LoadShapeFromXml(const xmlNode &xml_config) = 0;
 
-  // Set/Get position
-  void SetPhysXY(double x, double y);
-  void SetPhysXY(const Point2d &position);
+   virtual PhysicalShape *GetShape(const std::string &name) = 0;
+   virtual Rectangled GetBoundingBox() = 0;
+  //  Mass
+  virtual double GetMass() const = 0;
+ 
+  // Force
+  virtual uint AddExternForceXY (const Point2d& vector) = 0;
+  virtual uint AddExternForce (double nonrm, double angle) = 0;
+  virtual void RemoveExternForce(unsigned force_index) = 0;
+  virtual void RemoveAllExternForce() = 0;
+  virtual void ImpulseXY(const Point2d& vector) = 0;
+  virtual void Impulse(double norm, double angle) = 0;
+  
+  // Collision
+  
+    enum CollisionCategory {
+        COLLISION_GROUND,
+        COLLISION_CHARACTER,
+        COLLISION_ITEM,
+        COLLISION_PROJECTILE
+    };
 
-  b2Body *GetBody() { return m_body;};
-
-
-  double GetPhysX() const;
-  double GetPhysY() const;
-  Point2d GetPhysXY() const;
-
-  ///////////////////
-  // Speed
-
- // Set initial speed.
-  void SetSpeedXY(Point2d vector);
-  void SetSpeed(double norm, double angle_rad);
-  void SetAngle(double angle_rad);
-  // Add a initial speed to the current speed.
-  void AddSpeedXY(Point2d vector);
-  void AddSpeed(double norm, double angle_rad);
-
-  // Get current object speed
-  void GetSpeed(double &norm, double &angle_rad) const;
-  Point2d GetSpeedXY() const;
-  Point2d GetSpeed() const;
-  double GetAngularSpeed() const;
-  double GetAngle() const;
-  double GetSpeedAngle() const;
-
-  // Set/Get size
-  void SetBasicShape(const Point2i &newSize, double mass);
-  void SetSphericalShape(int newSize, double mass);
-
-  int GetWidth() const;
-  int GetHeight() const;
-  Point2i GetSize() const;
-
-  double GetWdouble() const;
-  double GetHdouble() const;
-  Point2d GetSizeDouble() const;
-
-  // Get test rectangle
-  const Rectanglei GetTestRect() const;
-
-  //----------- Access to datas (read only) ----------
-  virtual const std::string &GetName() const { return m_name; }
-
-  const std::string &GetUniqueId() const { return m_unique_id; }
-  void SetUniqueId(const std::string& s) { m_unique_id = s; }
-
-  int GetCenterX() const { return GetMinX() + GetWidth()/2; };
-  int GetCenterY() const { return GetMinY() + GetHeight()/2; };
-  const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
-  const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), 1, 1); };
-  bool CollidesWithGround() const { return m_collides_with_ground; }
-  bool IsCharacter() const { return m_is_character; }
-  bool IsRotating() const { return m_rotating; }
-
-  //----------- Physics related function ----------
-
-  // TODO: REMOVE IT IN NEAR FUTURE
-  double GetInitialMass() const;
-
-  double GetMass() const;
-
-  void SetFixed(bool i_fixed);
-
-  void SetWindFactor (double wind_factor) { m_wind_factor = wind_factor; };
-  double GetWindFactor () const { return m_wind_factor; }
-
-  void SetAirResistFactor (double factor);
-  double GetAirResistFactor () const{ return m_air_resist_factor; }
-
-  void SetGravityFactor (double factor);
-  double GetGravityFactor () const { return m_gravity_factor; }
-
-  void AddAddedContactPoint(b2ContactPoint contact);
-  void AddPersistContactPoint(b2ContactPoint contact);
-  void AddRemovedContactPoint(b2ContactPoint contact);
-  void AddContactResult(b2ContactResult contact);
-
-  virtual void AddContact(const PhysicalShape * shape);
-  virtual void RemoveContact(const PhysicalShape * shape);
-  virtual void ClearContact();
-
-  void ComputeAutoAlign();
-
-  void SetBullet(bool is_bullet);
-
-  // Add new strength
-  uint AddExternForceXY (const Point2d& vector);
-  uint AddExternForce (double nonrm, double angle);
-  void RemoveExternForce(unsigned force_index);
-  void RemoveAllExternForce();
-  void ImpulseXY(const Point2d& vector);
-  void Impulse(double norm, double angle);
-
-  // Update position (and state) with current time
-  void UpdatePosition();
-
-  // Move the character until he gets out of the ground
-  bool PutOutOfGround();
-  bool PutOutOfGround(double direction, double max_distance=30); //Where direction is the angle of the direction
-                                         // where the object is moved
-                                         // and max_distance is max distance allowed when putting out
-
-  // Collision management
-  void SetCollisionModel(bool collides_with_ground,
-                         bool collides_with_characters,
-                         bool collides_with_objects,
-                         bool collides_with_projectiles);
-
-  void SetCollisionGroup(int group);
-  void SetCollisionCategory(CollisionCategory category);
-
-  void SetOverlappingObject(GameObj* obj, int timeout = 0);
-  void ClearOverlappingObject();
-
-  void SetRebounding(bool rebounding);
-
-  const GameObj* GetOverlappingObject() const;
-  virtual bool IsOverlapping(const GameObj* obj) const;
-
-  bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
+  virtual void SetCollisionMembership(CollisionCategory category, bool state) = 0;
+  virtual void SetCollisionCategory(CollisionCategory category,bool state) = 0;
+  virtual bool IsColliding() const = 0;
+  
+  virtual PhysicalObj* CollidedObjectXY(const Point2i & position) const = 0;
   // Relative to current position
-  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const;
+  virtual PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const = 0;
 
-  bool IsColliding() const;
+  virtual void AddReboundListener(PhysicalListener *listener) = 0;
+  virtual void AddCollisionListener(PhysicalListener *listener) = 0;
 
-  GameObj* CollidedObjectXY(const Point2i & position) const;
-  // Relative to current position
-  GameObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const;
+  virtual bool Contain(const Point2d &pos_to_check) = 0;
+ 
+  //Overlapping
+  virtual void AddOverlappingObject(PhysicalObj* obj, int timeout = 0) = 0;
+  virtual void ClearOverlappingObject(PhysicalObj* obj) = 0;
+  virtual void ClearAllOverlappingObject() = 0;
+  virtual bool IsOverlappingObject(PhysicalObj *obj) = 0;
+  virtual bool Overlapse(const PhysicalObj* obj) const = 0;
+  virtual const std::vector<PhysicalObj*> *GetOverlappingObject() const = 0;
+  
+  //Properties
+  enum PhysicalProperty {
+      PROPERTY_FRICTION_FACTOR,
+      PROPERTY_REBOUND_FACTOR,
+      PROPERTY_AIR_FRICTION_FACTOR,
+      PROPERTY_WIND_FACTOR,
+      PROPERTY_AUTO_ALIGN_FACTOR,
+      PROPERTY_GRAVITY_FACTOR
+      
+  };
 
+  // Reset the physics constants (mass, air_resistance...) to the default values in the cfg
+  virtual void SetFrictionFactor( double value) = 0;
+  virtual void ResetFrictionFactor() = 0;
+  virtual double GetFritionFactor() = 0;
 
-  bool IsInWater() const;
+  virtual void SetReboundFactor( double value) = 0;
+  virtual void ResetReboundFactor() = 0;
+  virtual double GetReboundFactor() = 0;
 
+  virtual void SetAirFrictionFactor( double value) = 0;
+  virtual void ResetAirFrictionFactor() = 0;
+  virtual double GetAirFrictionFactor() = 0;
 
-  // The object is falling ?
-  bool IsFalling() const;
+  virtual void SetWindFactor( double value) = 0;
+  virtual void ResetWindFactor() = 0;
+  virtual double GetWindFactor() = 0;
 
-  b2BodyDef *GetBodyDef();
-  // The object is outside of the world
-  bool IsOutsideWorldXY(const Point2i& position) const;
-  // Relative to current position
-  bool IsOutsideWorld(const Point2i &offset = Point2i(0,0)) const;
+  virtual void SetAutoAlignFactor( double value) = 0;
+  virtual void ResetAutoAlignFactor() = 0;
+  virtual double GetAutoAlignFactor() = 0;
 
-  // Refresh datas
-  virtual void Refresh() = 0;
-
-  // Draw the object
-  virtual void Draw() = 0;
-#ifdef DEBUG
-  void DrawPolygon(const Color& color) const;
-#endif
-
-  // Damage handling
-  virtual void SetEnergyDelta(int delta, bool do_report = true);
-
-  //-------- state ----
-  void Init();
-  virtual void Ghost();
-  void Drown();
-  void GoOutOfWater(); // usefull for supertux.
-
-  // Start moving
-  void StartMoving();
-
-  // Stop moving
-  void StopMoving();
-  virtual bool IsImmobile() const;
-
-  bool IsGhost() const;
-  bool IsDrowned() const;
-  bool IsDead() const;
-
-  // The object is moving ?
-  bool IsMoving() const;
-  // Is this object not moving ?
-  virtual bool IsSleeping() const;
-
-
- // Reset the physics constants (mass, air_resistance...) to the default values in the cfg
-  void ResetConstants() { *((ObjectConfig*)this) = m_cfg; };
-
-  // Are the two object in contact ? (uses test rectangles)
-  bool Overlapse(const GameObj &b) const;
-
-  // Do the point p touch the object ?
-  bool Contain(const Point2i &p) const;
-
-  bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
-
-  PhysicalShape *GetShape(b2Shape *);
-  PhysicalShape *GetShape(std::string name);
-
-  virtual void SignalRebound();
-  virtual void SignalObjectCollision(GameObj *,PhysicalShape *, const Point2d&) { };
-  virtual void SignalGroundCollision(const Point2d&) { };
-  virtual void SignalCollision(const Point2d&) { };
+  virtual void SetGravityFactor( double value) = 0;
+  virtual void ResetGravityFactor() = 0;
+  virtual double GetGravityFactor() = 0;
 
 protected:
-  void AddShape( PhysicalShape *shape);
-  void ClearShapes();
-  virtual void SignalOutOfMap() { };
-  virtual void SignalDeath() { };
-  virtual void SignalGhostState (bool) { };
-  virtual void SignalDrowning() { };
-  virtual void SignalGoingOutOfWater() { };
-
-
-  const b2FilterData& GetCollisionFilter() const;
-
-private:
-  void InitShape(const std::string &xml_config);
-  int GetMinX() const;
-  int GetMinY() const;
-
-  // The object fall directly to the ground (or become a ghost)
-  void DirectFall();
-  void UpdateTimeOfLastMove();
-  void CheckOverlapping();
-
-  void SetCollisionFilter(const b2FilterData& filter);
+  virtual void SignalRebound() = 0;
+  virtual void SignalCollision(const Point2d&) = 0 ;
+  
+  bool m_rotating;
 
 };
 

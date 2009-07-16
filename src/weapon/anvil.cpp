@@ -69,8 +69,12 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_with_timeout = false;
   explode_colliding_character = false;
-  SetCollisionModel(true, true, true,true);
-  SetCollisionCategory(GROUND);
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_GROUND,true);
   
   // SetTestRect(0, 0, 0, 0);
 }
@@ -82,7 +86,7 @@ Anvil::~Anvil()
 
 void Anvil::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d&  /*speed_before*/ )
 {
-  if ( GetSpeed().y > 0.5 ) {
+  if ( GetPhysic()->GetSpeed().y > 0.5 ) {
     obj->SetEnergyDelta(-200);
   }
   PlayCollisionSound();
@@ -154,7 +158,7 @@ bool AnvilLauncher::p_Shoot ()
   if (!target_chosen)
     return false;
 
-  projectile->SetXY(target);
+  projectile->SetPosition(target);
   ((Anvil*)projectile)->PlayFallSound();
   ObjectsList::GetRef().AddObject(projectile);
   Camera::GetInstance()->FollowObject(projectile, true);

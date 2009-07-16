@@ -73,7 +73,7 @@ bool AIShootModule::IsBazookable(const Character& shooter,
   Point2i pos = Point2i::FromPolarCoordinates(sqrt(double(tmp.x * tmp.x + tmp.y * tmp.y)), double(tmp.ComputeAngle() + angle));
 
   Point2i delta = Point2i(1, 0);
-  Point2i shoot_pos = shooter.GetCenter();
+  Point2i shoot_pos = shooter.GetPhysic()->GetPosition();
 
   // Affine equation : y = ax + b.
   double a = tan(angle);
@@ -115,7 +115,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
   // TODO: Please find an alternative to solve this tempory solution
   Point2d pos = POINT2I_2_POINT2D(ActiveTeam().GetWeapon().GetGunHolePosition());
-  Point2d arrival = enemy.GetCenter();
+  Point2d arrival = enemy.GetPhysic()->GetPosition();
 
   double original_angle = pos.ComputeAngle(arrival);
 
@@ -154,7 +154,7 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
 
         // Skip only if this character has the same team of shooter
         // otherwises he's a enemy. (more reachable than the current)
-        if ((*other_character)->GetTestRect().Contains(pos)
+        if ((*other_character)->GetRect().Contains(pos)
             && (&(*other_character)->GetTeam()) == (&shooter.GetTeam())) {
           return false;
         }
@@ -299,10 +299,10 @@ void AIShootModule::ShootWithBazooka()
   if (m_current_time > m_last_shoot_time + 2 ||
       m_last_shoot_time == 0) {
     ActiveTeam().SetWeapon(Weapon::WEAPON_BAZOOKA);
-    double Xe = m_enemy->GetCenterX();
-    double Ye = m_enemy->GetCenterY();
-    double Xs = ActiveCharacter().GetCenterX();
-    double Ys = ActiveCharacter().GetCenterY();
+    double Xe = m_enemy->GetX();
+    double Ye = m_enemy->GetY();
+    double Xs = ActiveCharacter().GetX();
+    double Ys = ActiveCharacter().GetY();
     std::cout << "Xe = " << Xe << std::endl;
     std::cout << "Ye = " << Ye << std::endl;
     std::cout << "Xs = " << Xs << std::endl;
@@ -327,7 +327,7 @@ void AIShootModule::ShootWithBazooka()
 
 
         std::cout << "shooting " << V0x <<" "  <<"   " << V0y << " "<< " " <<  atan(V0y/V0x) << " " <<m_enemy->GetName() << std::endl;
-        ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetCenterX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
+        ActiveTeam().AccessWeapon().PrepareShoot(sqrt(V0y*V0y + V0x*V0x), /*Xe*/m_enemy->GetX() - Xs > 0 ? atan(V0y/V0x) - angle: -atan(V0y/V0x) + angle);
         m_last_shoot_time = m_current_time;
       }
   }
@@ -417,22 +417,21 @@ void AIShootModule::ChooseDirection() const
 {
   if ( m_enemy ) {
     // TODO : Replace by a cleverer function
-    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 10 )
+    if ( abs(ActiveCharacter().GetX() - m_enemy->GetX()) <= 10 )
       return;
-    if (m_enemy->GetTestRect().Intersect(ActiveCharacter().GetTestRect()))
+    if (m_enemy->GetRect().Intersect(ActiveCharacter().GetRect()))
       {
         MSG_DEBUG("ai.shoot","%s is on or next to %s", ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str());
         return;
       }
 
     MSG_DEBUG("ai", "Character: %d, enemy %d",
-              ActiveCharacter().GetCenterX(), m_enemy->GetCenterX());
+              ActiveCharacter().GetX(), m_enemy->GetX());
 
-    if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
+    if ( ActiveCharacter().GetX() < m_enemy->GetX())
       ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    else if ( ActiveCharacter().GetCenterX() > m_enemy->GetCenterX())
+    else if ( ActiveCharacter().GetX() > m_enemy->GetX())
       ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    // else ActiveCharacter().GetCenterX() == m_enemy->GetCenterX()
   }
 }
 
@@ -458,7 +457,7 @@ bool AIShootModule::Refresh(uint current_time)
     FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
 //      if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 //                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-        if ( (**character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
+        if ( (**character).GetPhysic()->GetPosition().Distance( ActiveCharacter().GetPhysic()->GetPosition()) < 40) {
               if (&(**character) != m_enemy) {
                 GameMessages::GetInstance()->Add(Format(_("%s changes target to %s"), ActiveCharacter().GetName().c_str(), (**character).GetName().c_str()));
               }

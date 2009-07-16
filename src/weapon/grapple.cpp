@@ -109,11 +109,11 @@ Grapple::p_Shoot()
 {
   ASSERT(m_rope == NULL);
   m_rope = new Rope();
-  Point2d pos(ActiveCharacter().GetPosition().x,ActiveCharacter().GetPosition().y-10);
-  m_rope->SetXY(pos);
-  m_rope->Activate();
+  Point2d pos(ActiveCharacter().GetPhysic()->GetPosition().x,ActiveCharacter().GetPhysic()->GetPosition().y-10);
+  m_rope->SetPosition(pos);
+  m_rope->GetPhysic()->Activate();
   m_initial_angle = ActiveCharacter().GetFiringAngle();
-  m_rope->Impulse(500, m_initial_angle);
+  m_rope->GetPhysic()->Impulse(500, m_initial_angle);
 
 
   //m_attaching = true;
@@ -439,48 +439,51 @@ Rope::Rope():GameObj("rope")
 
   //m_body->
   //Hook shape
-  PhysicalCircle *hook_shape = new PhysicalCircle();
-
+//  PhysicalCircle *hook_shape = new PhysicalCircle();
+/*
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0001;
   filter_data.maskBits = 0x0000;
   filter_data.groupIndex = -1;
-
+*/
   // Shape position is relative to body
-  hook_shape->SetRadius(0.8);
+/*  hook_shape->SetRadius(0.8);
   hook_shape->SetPosition(Point2d(0,0));
   hook_shape->SetFriction(0.02f);
   hook_shape->SetFilter(filter_data);
   hook_shape->SetName("hook");
-
-  ClearShapes();
+*/
+ /* ClearShapes();
   m_shapes.push_back(hook_shape);
-
-  SetCollisionModel(true,false, true,false);
+*/
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
 }
 
 Rope::~Rope()
 {
-  for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
+  /*for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     delete m_rope_nodes[i];
   }
   for(unsigned i = 0; i< m_rope_anchor.size() ; i++) {
     PhysicalEngine::GetInstance()->GetPhysicWorld()->DestroyBody(m_rope_anchor[i]);
-  }
+  }*/
 
 }
-
+/*
 void Rope::Activate()
 {
   GameObj::Activate();
-
+*/
   //place nodes for generation
-  for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
+ /* for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->SetY(GetY() - i*5);
     m_rope_nodes[i]->SetX(GetX());
     m_rope_nodes[i]->Activate();
-  }
-
+  }*/
+/*
   //place hook for generation
   SetY(GetY() - m_rope_nodes.size()*5  );
 
@@ -603,24 +606,24 @@ void Rope::Activate()
     m_rope_nodes[i]->SetY(GetY());
     m_rope_nodes[i]->SetX(GetX());
   }
-
-}
-
-void Rope::Generate()
-{
-  GameObj::Generate();
+*/
+/*}
+*/
+//void Rope::Generate()
+//{
+/*  GameObj::Generate();
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->Generate();
-  }
-}
+  }*/
+//}
 
-void Rope::Desactivate()
-{
-  GameObj::Desactivate();
+//void Rope::Desactivate()
+//{
+ /* GameObj::Desactivate();
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->Desactivate();
-  }
-}
+  }*/
+//}
 
 void Rope::Draw()
 {
@@ -668,25 +671,25 @@ void Rope::Draw()
   }
   */
 
-  m_hook_sprite->SetRotation_rad(-GetAngle());
-  m_hook_sprite->Draw( GetPosition() - m_hook_sprite->GetSize()/2);
+ /* m_hook_sprite->SetRotation_rad(-GetAngle());
+  m_hook_sprite->Draw( GetPhysic()->GetPosition() - m_hook_sprite->GetSize()/2);
 
   for(unsigned i = 0; i< m_rope_nodes.size() ; i++) {
     m_rope_nodes[i]->Draw();
   }
 #ifdef DEBUG
   DrawPolygon(Color(0,0,0));
-#endif
+#endif*/
 }
 
 void Rope::SignalGroundCollision(const Point2d&)
 {
-  b2RevoluteJointDef joint_def_revolution;
+ /* b2RevoluteJointDef joint_def_revolution;
   joint_def_revolution.collideConnected = false;
 
   joint_def_revolution.Initialize(PhysicalEngine::GetInstance()->GetPhysicWorld()->GetGroundBody(), GetBody(), GetBody()->GetWorldCenter() );
   PhysicalEngine::GetInstance()->CreateJoint(&joint_def_revolution);
-
+*/
 }
 
 
@@ -695,7 +698,7 @@ void Rope::SignalGroundCollision(const Point2d&)
 
 RopeNode::RopeNode():GameObj("rope_node")
 {
-  Profile *weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
+ /* Profile *weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
   m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
 
   m_node_sprite->EnableRotationCache(32);
@@ -718,18 +721,18 @@ RopeNode::RopeNode():GameObj("rope_node")
   ClearShapes();
   m_shapes.push_back(node_shape);
 
-  SetCollisionModel(true,false, true, false);
+  SetCollisionModel(true,false, true, false);*/
 }
 
 
 void RopeNode::Draw()
 {
-
+/*
   m_node_sprite->SetRotation_rad(-GetAngle());
-  m_node_sprite->Draw( GetPosition() - m_node_sprite->GetSize()/2);
+  m_node_sprite->Draw( GetPhysic()->GetPosition() - m_node_sprite->GetSize()/2);
 #ifdef DEBUG
   DrawPolygon(Color(0,0,0));
-#endif
+#endif*/
 }
 
 

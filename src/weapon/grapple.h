@@ -25,8 +25,7 @@
 #include "weapon.h"
 #include "include/base.h"
 #include <vector>
-#include <Box2D.h>
-#include "physic/physical_obj.h"
+#include "physic/game_obj.h"
 //-----------------------------------------------------------------------------
 class GrappleConfig;
 class Rope;
@@ -118,11 +117,11 @@ public:
   void SetAttachMode(bool i_attache_mode);
 
   virtual void Draw();
-
+/*
   virtual void Activate();
   virtual void Generate();
   virtual void Desactivate();
-
+*/
   virtual void SignalGroundCollision(const Point2d&);
 
 protected:
@@ -134,7 +133,7 @@ protected:
   Sprite* m_hook_sprite;
 
   std::vector<RopeNode *> m_rope_nodes;
-  std::vector<b2Body *> m_rope_anchor;
+ // std::vector<b2Body *> m_rope_anchor;
   bool AttachRope();
   void Refresh() { };
 

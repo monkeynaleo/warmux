@@ -19,6 +19,9 @@
  * Petrol barrels
  *****************************************************************************/
 
+
+
+
 #include "object/barrel.h"
 #include "object/objects_list.h"
 #include "physic/physical_obj.h"
@@ -35,10 +38,12 @@ PetrolBarrel::PetrolBarrel() : GameObj("barrel")
   ASSERT(img);
   GetResourceManager().UnLoadXMLProfile(res);
 
-  m_energy = 25;
+  SetEnergy(25);
 
-  SetCollisionModel(true, true, true,true);
-  // SetTestRect (1, 1, 2, 2);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
 }
 
 PetrolBarrel::~PetrolBarrel()
@@ -49,12 +54,12 @@ PetrolBarrel::~PetrolBarrel()
 void PetrolBarrel::Draw()
 {
   img->Update();
-  img->Draw(GetPosition());
+  img->Draw(GetPhysic()->GetPosition());
 }
 
 void PetrolBarrel::SignalGhostState(bool /*was_already_dead*/)
 {
-  ParticleEngine::AddNow(GetCenter(), 20, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->barrel_explosion_cfg,
+  ParticleEngine::AddNow(GetPhysic()->GetPosition(), 20, particle_FIRE, true);
+  ApplyExplosion(GetPhysic()->GetPosition(), GameMode::GetInstance()->barrel_explosion_cfg,
                  "weapon/explosion", false);
 }

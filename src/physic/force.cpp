@@ -22,33 +22,33 @@
 #include "physic/force.h"
 #include "physic/physical_obj.h"
 #include "physic/physical_engine.h"
+#include "WORMUX_error.h"
 
-
-Force::Force(GameObj *target, Point2d target_point, Point2d force, bool is_local):
+Force::Force(GameObj *target, Point2d /*target_point*/, Point2d /*force*/, bool is_local):
 m_target_center(false)
 {
   ASSERT(target);
   m_target = target;
 
-   m_force = b2Vec2(force.x/ PIXEL_PER_METER, force.y/PIXEL_PER_METER);
+//   m_force = b2Vec2(force.x/ PIXEL_PER_METER, force.y/PIXEL_PER_METER);
 
-  m_target_point = b2Vec2(target_point.x/PIXEL_PER_METER, target_point.y /PIXEL_PER_METER);
+  //m_target_point = b2Vec2(target_point.x/PIXEL_PER_METER, target_point.y /PIXEL_PER_METER);
 
 
   if(is_local)  {
-   m_target_point =  target->GetBody()->GetWorldPoint(m_target_point);
+//   m_target_point =  target->GetBody()->GetWorldPoint(m_target_point);
   }
 
   PhysicalEngine::GetInstance()->AddForce(this);
 
 }
 
-Force::Force(GameObj *i_target, Point2d i_force):
+Force::Force(GameObj *i_target, Point2d /*i_force*/):
 m_target_center(true)
 {
   ASSERT(i_target);
   m_target = i_target;
-  m_force = b2Vec2(i_force.x/ PIXEL_PER_METER, i_force.y/PIXEL_PER_METER);
+//  m_force = b2Vec2(i_force.x/ PIXEL_PER_METER, i_force.y/PIXEL_PER_METER);
 
   PhysicalEngine::GetInstance()->AddForce(this);
 
@@ -64,11 +64,11 @@ void Force::ComputeForce()
 {
   if(!m_target_center)
   {
-    m_target->GetBody()->ApplyForce(m_force, m_target_point);
+//    m_target->GetBody()->ApplyForce(m_force, m_target_point);
   }
   else
   {
-    m_target->GetBody()->ApplyForce(m_force, m_target->GetBody()->GetWorldCenter());
+ //   m_target->GetBody()->ApplyForce(m_force, m_target->GetBody()->GetWorldCenter());
   }
 
 }

@@ -53,7 +53,7 @@ void ObjectsList::PlaceMines()
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
-    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
+    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range  *1.5 ))
       // detection range is in meter
       AddObject(obj);
     else
@@ -79,13 +79,13 @@ void ObjectsList::PlaceBarrels()
 void ObjectsList::AddObject(GameObj * obj)
 {
   push_back(obj);
-  obj->Activate();
+  obj->GetPhysic()->Activate();
 }
 
 //-----------------------------------------------------------------------------
 void ObjectsList::RemoveObject(GameObj * obj)
 {
-  obj->Desactivate();
+  obj->GetPhysic()->Desactivate();
   remove(obj);
   RemoveOverlappedObjectReference(obj);
 };
@@ -161,14 +161,14 @@ void ObjectsList::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-void ObjectsList::RemoveOverlappedObjectReference(const GameObj * obj)
+void ObjectsList::RemoveOverlappedObjectReference(const GameObj * /*obj*/)
 {
-  for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
+ /* for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
     if((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" in \"%s\"",
                 obj->GetName().c_str(), (*it)->GetName().c_str());
       (*it)->ClearOverlappingObject();
       it = overlapped_objects.erase(it);
     }
-  }
+  }*/
 }

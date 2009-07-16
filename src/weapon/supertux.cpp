@@ -109,7 +109,7 @@ void SuperTux::Shoot(double strength)
   WeaponProjectile::Shoot(strength);
   SetAngle(ActiveCharacter().GetFiringAngle());
 
-  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+  m_force_index = GetPhysic()->AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
 
 
   Time * global_time = Time::GetInstance();
@@ -121,8 +121,8 @@ void SuperTux::Shoot(double strength)
 void SuperTux::Refresh()
 {
   WeaponProjectile::Refresh();
-  RemoveExternForce(m_force_index);
-  m_force_index = AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+  GetPhysic()->RemoveExternForce(m_force_index);
+  m_force_index = GetPhysic()->AddExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
 
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
@@ -134,12 +134,12 @@ void SuperTux::Refresh()
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
-    a.Push(GetPhysXY());
+    a.Push(GetPosition());
     Network::GetInstance()->SendActionToAll(a);
   }
 
   if (!swimming)
-    particle_engine.AddPeriodic(GetCenter(), particle_STAR, false, angle_rad, 0);
+    particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
 
   // else
   // particle_engine.AddPeriodic(GetPosition(), particle_WATERBUBBLE, false, angle_rad, 0);
@@ -333,7 +333,7 @@ void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
   if(current_tux == NULL)
     return;
   current_tux->SetAngle(angle);
-  current_tux->SetPhysXY(pos);
+  current_tux->SetPosition(pos);
   current_tux->SetSpeedXY(Point2d(0,0));
 }
 

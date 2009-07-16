@@ -132,13 +132,25 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
   // Check collision with characters and other physical objects
   FOR_ALL_CHARACTERS(team, c) {
-    if (((*c)->GetTestRect()).Intersect(rect))
+      Rectangled rectd = (*c)->GetRect();
+    Rectanglei recti;
+    recti.SetPositionX((int)rect.GetPositionX());
+    recti.SetPositionY((int)rect.GetPositionY());
+    recti.SetSizeX((int)rect.GetSizeX());
+    recti.SetSizeY((int)rect.GetSizeY());
+    if (recti.Intersect(rect))
       return;
   }
 
   FOR_ALL_OBJECTS(it) {
     GameObj *obj = *it;
-    if ((obj->GetTestRect()).Intersect(rect))
+     Rectangled rectd = obj->GetRect();
+    Rectanglei recti;
+    recti.SetPositionX((int)rect.GetPositionX());
+    recti.SetPositionY((int)rect.GetPositionY());
+    recti.SetSizeX((int)rect.GetSizeX());
+    recti.SetSizeY((int)rect.GetSizeY());
+    if (recti.Intersect(rect))
       return;
   }
 

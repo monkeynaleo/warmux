@@ -54,14 +54,14 @@ void LowGrav::UpdateTranslationStrings()
 void LowGrav::p_Deselect()
 {
   use.Stop();
-  ActiveCharacter().ResetConstants();
+//  ActiveCharacter().ResetConstants();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");
 }
 
 bool LowGrav::p_Shoot()
 {
-  ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
+  ActiveCharacter().GetPhysic()->SetGravityFactor(LOW_GRAVITY_FACTOR);
   ActiveCharacter().SetClothe("helmet");
   use.Play("default","weapon/lowgrav",-1);
 

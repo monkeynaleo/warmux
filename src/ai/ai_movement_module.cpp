@@ -19,6 +19,8 @@
  * Artificial intelligence Movement module
  *****************************************************************************/
 
+
+
 #include <iostream>
 #include <WORMUX_error.h>
 #include "ai/ai_movement_module.h"
@@ -26,6 +28,7 @@
 #include "character/character.h"
 #include "character/move.h"
 #include "map/map.h"
+#include "physic/game_obj.h"
 #include "team/teams_list.h"
 #include <WORMUX_debug.h>
 
@@ -122,7 +125,7 @@ void AIMovementModule::GoBackToJump()
   int height;
   bool blocked = !(ObstacleHeight(height));
 
-  if ( fabs(last_position.GetX() - ActiveCharacter().GetPosition().GetX()) >= 20.0
+  if ( fabs(last_position.GetX() - ActiveCharacter().GetX()) >= 20.0
        || time_at_last_position +1 < m_current_time
        || blocked) {
     //it's time to jump!
@@ -146,13 +149,13 @@ void AIMovementModule::EndOfJump()
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
 
-  if ( last_position.GetX() == ActiveCharacter().GetPosition().GetX() ) {
+  if ( last_position.GetX() == ActiveCharacter().GetX() ) {
     // we have not moved since last movement
 
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
-      max_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
+      max_reachable_x = (int)ActiveCharacter().GetX();
     } else {
-      min_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
+      min_reachable_x = (int)ActiveCharacter().GetX();
     }
     MSG_DEBUG("ai.move", "We are blocked");
     StopMoving();
@@ -187,9 +190,9 @@ void AIMovementModule::Walk()
   // we are blocked, what next ?
   if ( blocked ) {
 
-    if ( last_blocked_position.GetX() != ActiveCharacter().GetPosition().GetX() ) {
+    if ( last_blocked_position.GetX() != ActiveCharacter().GetX() ) {
 
-      last_blocked_position = ActiveCharacter().GetPosition();
+      last_blocked_position = ActiveCharacter().GetPhysic()->GetPosition();
 
       if (height < 0 ) {
         // There's a barrier
@@ -226,7 +229,7 @@ void AIMovementModule::Walk()
   }
 
   // Update position if we are not jumping
-  last_position = ActiveCharacter().GetPosition();
+  last_position = ActiveCharacter().GetPhysic()->GetPosition();
   time_at_last_position = m_current_time;
 }
 
@@ -243,8 +246,8 @@ void AIMovementModule::StopWalking()
 // =================================================
 void AIMovementModule::InverseDirection(bool completely_blocked)
 {
-  if ((max_reachable_x == ActiveCharacter().GetPosition().GetX())
-      || (min_reachable_x == ActiveCharacter().GetPosition().GetX()))
+  if ((max_reachable_x == ActiveCharacter().GetX())
+      || (min_reachable_x == ActiveCharacter().GetX()))
     {
       MSG_DEBUG("ai.move", "In %s : We turn around...\n", __func__);
       StopMoving();
@@ -256,13 +259,13 @@ void AIMovementModule::InverseDirection(bool completely_blocked)
 
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
     if (completely_blocked)
-      max_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
+      max_reachable_x = (int)ActiveCharacter().GetX();
 
   } else {
 
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     if (completely_blocked)
-      min_reachable_x = (int)ActiveCharacter().GetPosition().GetX();
+      min_reachable_x = (int)ActiveCharacter().GetX();
 
   }
 }
@@ -425,7 +428,7 @@ bool AIMovementModule::IsProgressing() const
 
 bool AIMovementModule::IsArrived() const
 {
-  return (ActiveCharacter().GetPosition() == destination_point);
+  return (ActiveCharacter().GetPhysic()->GetPosition() == destination_point);
 }
 
 // ======================================

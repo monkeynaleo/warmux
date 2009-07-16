@@ -86,7 +86,7 @@ void Parachute::p_Select()
 
 void Parachute::p_Deselect()
 {
-  ActiveCharacter().ResetConstants();
+//  ActiveCharacter().ResetConstants();
   ActiveCharacter().SetMovement("breathe");
 }
 
@@ -115,18 +115,18 @@ void Parachute::Refresh()
   double speed;
   double angle;
 
-  ActiveCharacter().GetSpeed(speed, angle);
+  ActiveCharacter().GetPhysic()->GetSpeed(speed, angle);
 
   if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
       if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
         UseAmmo();
-        ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
-        ActiveCharacter().SetWindFactor(cfg().wind_factor);
+        ActiveCharacter().GetPhysic()->SetAirFrictionFactor(cfg().air_resist_factor);
+        ActiveCharacter().GetPhysic()->SetWindFactor(cfg().wind_factor);
         open = true;
         img->animation.SetPlayBackward(false);
         img->Start();
-        ActiveCharacter().SetSpeedXY(Point2d(0,0));
+        ActiveCharacter().GetPhysic()->SetSpeedXY(Point2d(0,0));
         ActiveCharacter().SetMovement("parachute");
         Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
       }
@@ -152,8 +152,8 @@ void Parachute::Refresh()
   }
   // If parachute is open => character can move a little to the left or to the right
   if (open && Network::GetInstance()->IsTurnMaster()) {
-     ActiveCharacter().RemoveExternForce(m_force_index);
-    m_force_index = ActiveCharacter().AddExternForce(m_x_strength.x_extern, 0.0);
+     ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+    m_force_index = ActiveCharacter().GetPhysic()->AddExternForce(m_x_strength.x_extern, 0.0);
     if (m_x_strength.changing) {
       m_x_strength.changing = false;
       SendActiveCharacterInfo(false);

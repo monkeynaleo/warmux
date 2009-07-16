@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include "include/base.h"
 #include <WORMUX_singleton.h>
-#include "physic/physical_obj.h"
+#include "physic/game_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 

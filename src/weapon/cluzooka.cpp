@@ -139,12 +139,15 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
 #endif
 
   Camera::GetInstance()->FollowObject(this, true);
-  ResetConstants();
-  SetCollisionModel( true, true, false, false ); // a bit hackish...
+ 
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
-  SetXY(start_pos);
-  SetSpeed(strength, angle);
+  SetPosition(start_pos);
+  GetPhysic()->SetSpeed(strength, angle);
 
   begin_time = Time::GetInstance()->Read();
   m_time_before_spawn = 750;
@@ -173,7 +176,7 @@ void CluzookaCluster::Refresh()
 
   WeaponProjectile::Refresh();
 // no SetRotation needed as images are balls :)
-  //image->SetRotation_rad(GetSpeedAngle());
+  //image->SetRotation_rad(GetAngularSpeed());
 }
 
 void CluzookaCluster::DoSpawn()
@@ -181,9 +184,9 @@ void CluzookaCluster::DoSpawn()
   const uint fragments = 2;
   double angle;
   double speed;
-  GetSpeed( speed, angle );
+  GetPhysic()->GetSpeed( speed, angle );
   speed = 25;// always
-  Point2i parent_position = GetPosition();
+  Point2i parent_position = GetPhysic()->GetPosition();
 
   float angle_range = M_PI / 4;
 
@@ -205,7 +208,7 @@ void CluzookaCluster::DoExplosion()
 {
     if ( !m_spawned_clusters )
     {
-        ApplyExplosion ( GetPosition(), cfg, "weapon/cluzooka_hit", false, ParticleEngine::LittleESmoke );
+        ApplyExplosion ( GetPhysic()->GetPosition(), cfg, "weapon/cluzooka_hit", false, ParticleEngine::LittleESmoke );
     }
     else
         Ghost();    // just hide ourselvers
@@ -214,7 +217,7 @@ void CluzookaCluster::DoExplosion()
 void CluzookaCluster::Draw()
 {
     // custom Draw() is needed to avoid drawing timeout on top of clusters
-    image->Draw(GetPosition());
+    image->Draw(GetPhysic()->GetPosition());
 };
 
 void CluzookaCluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
@@ -254,11 +257,11 @@ void CluzookaRocket::Refresh()
   WeaponProjectile::Refresh();
   if(!IsDrowned())
   {
-    //image->SetRotation_rad(GetSpeedAngle());
+    //image->SetRotation_rad(GetAngularSpeed());
     uint time = Time::GetInstance()->Read();
     float flying_time = ( float )( time - begin_time );
 
-    float speed_angle = GetSpeedAngle();
+    float speed_angle = GetPhysic()->GetAngularSpeed();
     const float time_to_rotate = 500;
     const float num_of_full_rotates = 4;
 
@@ -300,9 +303,9 @@ void CluzookaRocket::DoSpawn()
 
   double angle;
   double speed;
-  GetSpeed( speed, angle );
+  GetPhysic()->GetSpeed( speed, angle );
   speed = 25;// always
-  Point2i parent_position = GetPosition();
+  Point2i parent_position = GetPhysic()->GetPosition();
 
   ClusterSpawner< CluzookaCluster >::SpawnClusters( fragments, recursion_depth,
     parent_position, speed, angle, angle_range, cfg, launcher );

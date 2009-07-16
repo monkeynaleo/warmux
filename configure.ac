@@ -39,6 +39,7 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
+
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
   AC_MSG_ERROR([*** No C++ compiler can be found!])
@@ -70,6 +71,10 @@ AC_ARG_ENABLE([static],
               [  --enable-static         Enable static building of wormux],
               [static=$enableval],
               [static=no])
+
+#Bullet config
+AM_CONDITIONAL([CONDITIONAL_BUILD_DEMOS], [false])
+AM_CONDITIONAL([CONDITIONAL_BUILD_MULTITHREADED], [false])
 
 # Check whether user supplied the option to statically link binaries.
 if test "$static" = yes; then
@@ -367,8 +372,8 @@ LIBS="$LIBS $LIBXML_LIBS $LIBPNG_LIBS"
 
 dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
 if test "x${debug}" = "xyes"; then
-   CFLAGS="$CFLAGS -Werror"
-   CXXFLAGS="$CXXFLAGS -Werror"
+   CFLAGS="$CFLAGS "
+   CXXFLAGS="$CXXFLAGS "
 fi
 
 dnl ========================================================================
@@ -393,8 +398,7 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
-		 lib/box2d/Makefile
-		 lib/box2d/src/Makefile
+                 lib/bullet/src/Makefile
 		 lib/wormux/Makefile
 		 lib/wormux-server/Makefile
                  doc/Makefile
@@ -404,7 +408,7 @@ AC_CONFIG_FILES([Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
-
+AC_CONFIG_HEADERS([lib/bullet/config.h])
 AC_OUTPUT
 
 echo "Configuration complete"
@@ -425,3 +429,5 @@ echo "Execute make to compile then execute make install to install..."
 if test "${WIN32}" = "yes"; then
    echo "Alternatively, type make setup to build an installer"
 fi
+
+

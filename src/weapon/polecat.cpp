@@ -86,7 +86,7 @@ void Polecat::Shoot(double strength)
 
 void Polecat::Refresh()
 {
-  if (m_energy == 0) {
+  if (GetEnergy() == 0) {
     Explosion();
     return;
   }
@@ -98,12 +98,12 @@ void Polecat::Refresh()
     // particles must be exactly the same accross the network
     double norme = double(RandomSync().GetLong(0, 500))/100;
     double angle = double(RandomSync().GetLong(0, 3000))/100;
-    ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
+    ParticleEngine::AddNow(GetPhysic()->GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
     last_fart_time = Time::GetInstance()->Read();
     JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
   }
   //When we hit the ground, jump !
-  if(!IsMoving() && IsColliding()) {
+  if(!GetPhysic()->IsMoving() && GetPhysic()->IsColliding()) {
     // Limiting number of rebound to avoid desync
     if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
       image->SetRotation_rad(0.0);
@@ -122,11 +122,11 @@ void Polecat::Refresh()
     //Do the jump
     norm = RandomSync().GetDouble(1.0, 2.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norm , -norm * 3.0));
+    GetPhysic()->SetSpeedXY(Point2d(m_sens * norm , -norm * 3.0));
   }
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
-  GetSpeed(norm, angle);
+  GetPhysic()->GetSpeed(norm, angle);
 
   while(angle < -M_PI)
     angle += M_PI;

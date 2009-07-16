@@ -120,11 +120,11 @@ void Camera::AutoCrop()
     /* compute the ideal position!
      * it takes the physical object direction into account
      */
-    obj_pos = followed_object->GetCenter();
+    obj_pos = followed_object->GetPhysic()->GetPosition();
    
-    if (followed_object->IsMoving() && in_advance)
+    if (!followed_object->IsImmobile() && in_advance)
     {
-        Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetSpeed();
+        Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetPhysic()->GetSpeed();
 
         Point2d anticipation_limit = GetSize()/3;
         //limit anticipation to screen size/3
@@ -318,7 +318,7 @@ void Camera::StopFollowingObj(const GameObj* obj){
 }
 
 bool Camera::IsVisible(const GameObj &obj) const {
-   return Intersect( obj.GetRect() );
+   return Intersect( obj.GetRectI() );
 }
 
 void Camera::CenterOnActiveCharacter()

@@ -377,7 +377,7 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
       if (!(*character) -> IsDead()) {
-        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character)->GetPosition()) + offset;
+        Point2i     coord = GetWorld().ground.PreviewCoordinates((*character)->GetPhysic()->GetPosition()) + offset;
 
         window.Blit(icon, coord - icon.GetSize()/2);
         if ((*character)->IsActiveCharacter()) {

@@ -84,8 +84,11 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   GameObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  SetCollisionModel(false, false, false,false);
 
+GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
@@ -126,7 +129,7 @@ void Plane::Shoot(double speed, const Point2i& target)
     if(distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx)) distance_to_release=0;
   }
 
-  SetSpeedXY (speed_vector);
+  GetPhysic()->SetSpeedXY (speed_vector);
 
   Camera::GetInstance()->FollowObject(this, true, true);
 
@@ -136,15 +139,15 @@ void Plane::Shoot(double speed, const Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY(Point2i(GetX(), GetY()+GetHeight()) );
+  instance->SetPosition(Point2i(GetX(), GetY()+GetSize().y) );
 
-  Point2d speed_vector = GetSpeedXY();
+  Point2d speed_vector = GetPhysic()->GetSpeed();
 
   int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
 
   speed_vector.SetValues(speed_vector.x + fx/30.0, 0);
-  instance->SetSpeedXY(speed_vector);
+  instance->GetPhysic()->SetSpeedXY(speed_vector);
 
   ObjectsList::GetRef().AddObject(instance);
 
@@ -169,7 +172,7 @@ void Plane::Refresh()
     next_height = RandomLocal().GetInt(50,200);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
+    if ( last_dropped_bomb->GetY() > GetY()+GetSize().y+next_height )
     {
       next_height = RandomLocal().GetInt(50,200);
       DropBomb();
@@ -187,7 +190,7 @@ int Plane::GetDirection() const
 void Plane::Draw()
 {
   if (IsGhost()) return;
-  image->Draw(GetPosition());
+  image->Draw(GetPhysic()->GetPosition());
 }
 
 bool Plane::OnTopOfTarget() const

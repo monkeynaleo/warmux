@@ -18,7 +18,7 @@
  ******************************************************************************
  * PhysicTile
  *****************************************************************************/
-#include <Box2D.h>
+
 #include <iostream>
 
 #include "map/physic_tile.h"
@@ -86,17 +86,17 @@ void PhysicTile::GenerateFull()
 
   InitShape();
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-                         (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
+                         (double(m_offset.y + m_tile_offset.y))));
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-                         (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+                         (double(m_offset.y + m_tile_offset.y))));
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_size.x-1 + m_tile_offset.x)/ PIXEL_PER_METER),
-                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y)/ PIXEL_PER_METER)));
+  m_shape->AddPoint(Point2d((double(m_offset.x + m_size.x-1 + m_tile_offset.x)),
+                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y))));
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y)/ PIXEL_PER_METER)));
+  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
+                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y))));
 
   m_shape->Generate();
 
@@ -149,27 +149,28 @@ void PhysicTile::GenerateMixte()
       m_physic_tiles[1] = NULL;
 
       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-      PhysicalPolygon* shape = new PhysicalPolygon();
-      shape->SetBody(m_parent_tile->GetBody());
+      PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+      //shape->SetBody(m_parent_tile->GetBody());
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) ),
+			      (double(m_offset.y + m_tile_offset.y))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y + new_height1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
+			      (double(m_offset.y + m_tile_offset.y + new_height1))));
 
       shape->SetFriction(GROUND_FRICTION);
 
-      b2FilterData filter_data;
+      //TODO : Fix collision filter
+     /* b2FilterData filter_data;
       filter_data.categoryBits = 0x000B;
       filter_data.maskBits = 0xFFFF;
-      shape->SetFilter(filter_data);
+      shape->SetFilter(filter_data);*/
 
       shape->Generate();
       delete (m_physic_tiles[0]->m_shape);
@@ -187,28 +188,29 @@ void PhysicTile::GenerateMixte()
       m_physic_tiles[3] = NULL;
 
       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-      PhysicalPolygon* shape = new PhysicalPolygon();
-      shape->SetBody(m_parent_tile->GetBody());
+      PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+      //shape->SetBody(m_parent_tile->GetBody());
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) ),
+			      (double(m_offset.y + m_tile_offset.y + new_height1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + new_height1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y + new_height1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
       shape->SetFriction(GROUND_FRICTION);
 
-      b2FilterData filter_data;
+      //TODO : Fix collision filter
+     /* b2FilterData filter_data;
       filter_data.categoryBits = 0x000B;
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
-
+*/
       shape->Generate();
       delete (m_physic_tiles[2]->m_shape);
       m_physic_tiles[2]->m_shape = shape;
@@ -226,28 +228,28 @@ void PhysicTile::GenerateMixte()
       m_physic_tiles[2] = NULL;
 
       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-      PhysicalPolygon* shape = new PhysicalPolygon();
-      shape->SetBody(m_parent_tile->GetBody());
+      PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+     // shape->SetBody(m_parent_tile->GetBody());
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) / PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) ),
+			      (double(m_offset.y + m_tile_offset.y) )));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)),
+			      (double(m_offset.y + m_tile_offset.y) )));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
       shape->SetFriction(GROUND_FRICTION);
-
-      b2FilterData filter_data;
+      //TODO : Fix collision filter
+     /* b2FilterData filter_data;
       filter_data.categoryBits = 0x000B;
       filter_data.maskBits = 0xFFFF;
       shape->SetFilter(filter_data);
-
+*/
       shape->Generate();
       delete (m_physic_tiles[0]->m_shape);
       m_physic_tiles[0]->m_shape = shape;
@@ -264,27 +266,28 @@ void PhysicTile::GenerateMixte()
       m_physic_tiles[3] = NULL;
 
       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
-      PhysicalPolygon* shape = new PhysicalPolygon();
-      shape->SetBody(m_parent_tile->GetBody());
+      PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+      //shape->SetBody(m_parent_tile->GetBody());
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1) / PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)),
+			      (double(m_offset.y + m_tile_offset.y) )));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y) / PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
-      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)/ PIXEL_PER_METER),
-			      (double(m_offset.y + m_tile_offset.y + m_size.y-1)/ PIXEL_PER_METER)));
+      shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + new_width1)),
+			      (double(m_offset.y + m_tile_offset.y + m_size.y-1))));
 
       shape->SetFriction(GROUND_FRICTION);
-
+      //TODO : Fix collision filter
+      /*
       b2FilterData filter_data;
       filter_data.categoryBits = 0x000B;
       filter_data.maskBits = 0xFFFF;
-      shape->SetFilter(filter_data);
+      shape->SetFilter(filter_data);*/
 
       shape->Generate();
       delete (m_physic_tiles[1]->m_shape);
@@ -445,9 +448,9 @@ bool PhysicTile::GeneratePolygone()
     }
   }
 
-  //Stop to try to place points and now generate the polygone
-  b2PolygonDef rect;
-  rect.vertexCount = 0;
+  //Stop to try to place points and now generate the polygon
+
+  int vertexCount = 0;
 
   // Delete double point
   for (uint i=0; i < 7 ; i++) {
@@ -458,9 +461,9 @@ bool PhysicTile::GeneratePolygone()
 
         if (pts_state[j]) {
 
-	  /*if((pts[i].x == pts[j].x)&&(pts[i].y == pts[j].y)) {
+	  if((pts[i].x == pts[j].x)&&(pts[i].y == pts[j].y)) {
             pts_state[j] = false;
-           }*/
+           }
 
 	  if (pts[i].Distance(pts[j]) < 3) {
             pts_state[j] = false;
@@ -475,14 +478,14 @@ bool PhysicTile::GeneratePolygone()
   //Count found point
   for (uint i=0; i < 8; i++) {
     if (pts_state[i]) {
-      rect.vertexCount++;
+      vertexCount++;
     }
   }
 
   Point2d min_pixel(0,0);
   Point2d max_pixel(0,0);
  
-  if (rect.vertexCount > 2) {
+  if (vertexCount > 2) {
 
     //Verify
     if (m_level > -1) {
@@ -503,8 +506,8 @@ bool PhysicTile::GeneratePolygone()
 
     m_is_containing_polygon = true;
 
-    PhysicalPolygon* shape = new PhysicalPolygon();
-    shape->SetBody(m_parent_tile->GetBody());
+    PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+//    shape->SetBody(m_parent_tile->GetBody());
 
 
     for (uint i=0; i < 8; i++) {
@@ -512,8 +515,8 @@ bool PhysicTile::GeneratePolygone()
 	//std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
 	//std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
 
-	    Point2d new_point((double(pts[i].x + m_tile_offset.x) / PIXEL_PER_METER),
-				(double(pts[i].y + m_tile_offset.y) / PIXEL_PER_METER));
+	    Point2d new_point((double(pts[i].x + m_tile_offset.x)),
+				(double(pts[i].y + m_tile_offset.y) ));
         shape->AddPoint(new_point);
 
 		if(new_point.x < min_pixel.x)
@@ -534,18 +537,19 @@ bool PhysicTile::GeneratePolygone()
 		}
 		}
       }
-    
+
 
 	if ((max_pixel.x - min_pixel.x > 0.00001) || (max_pixel.y - min_pixel.y > 0.00001)) {
 	Point2d min_pixel(0,0);
       shape->SetFriction(GROUND_FRICTION);
   
-      b2FilterData filter_data;
+      //TODO : Fix collision filters
+/*      b2FilterData filter_data;
       filter_data.categoryBits = 0x0004; // Why this is different than upper ??
       filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
       shape->SetFilter(filter_data);
-  
-      shape->Generate();
+  */
+     shape->Generate();
       m_shape = shape;
 	} else {
 	  delete shape;
@@ -563,7 +567,7 @@ bool PhysicTile::GeneratePolygone()
 
 void PhysicTile::Clean()
 {
-  if (m_is_subdivided) {
+ if (m_is_subdivided) {
     delete m_physic_tiles[0];
     delete m_physic_tiles[1];
     delete m_physic_tiles[2];
@@ -613,15 +617,19 @@ PhysicTile::Fullness PhysicTile::IsFull() const
 
 void PhysicTile::InitShape()
 {
-  PhysicalPolygon* shape = new PhysicalPolygon();
-  shape->SetBody(m_parent_tile->GetBody());
+  PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+//  shape->SetBody(m_parent_tile->GetBody());
 
   shape->SetFriction(GROUND_FRICTION);
 
+
+  //TODO Fix collision filters
+  /*
   b2FilterData filter_data;
   filter_data.categoryBits = 0x0004; // Why this is different than upper ??
   filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
   shape->SetFilter(filter_data);
+  */
 
   m_shape = shape;
 }

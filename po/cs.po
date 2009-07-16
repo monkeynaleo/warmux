@@ -59,7 +59,7 @@ msgstr "%s Tým"
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:462
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -117,7 +117,7 @@ msgstr[2] "%s získal %u životů!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychouš, zabil člena týmu %s!"
 
-#: src/weapon/mine.cpp:123
+#: src/weapon/mine.cpp:127
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s šlápl na minu!"
@@ -133,7 +133,7 @@ msgstr "Tým %s již má nekonečně nábojů pro %s!"
 msgid "%s team has skipped its turn."
 msgstr "Tým %s se vzdal tahu."
 
-#: src/weapon/cluzooka.cpp:394
+#: src/weapon/cluzooka.cpp:397
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -149,7 +149,7 @@ msgstr[0] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 msgstr[1] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 msgstr[2] "Tým %s získal %u Gnu! Rozmeťte je všechny!"
 
-#: src/weapon/air_attack.cpp:270
+#: src/weapon/air_attack.cpp:273
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -175,7 +175,7 @@ msgstr[2] ""
 "Tým %s získal %u pneumatických kladiv. Nedělejte s nimi moc hluku! Vaši "
 "sousedé vám poděkují."
 
-#: src/weapon/anvil.cpp:192
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -232,7 +232,7 @@ msgstr[0] "Tým %s získal %u skákací kuličku! Ping, ping, bum!"
 msgstr[1] "Tým %s získal %u skákací kuličky! Ping, ping, bum!"
 msgstr[2] "Tým %s získal %u skákacích kuliček! Ping, ping, bum!"
 
-#: src/weapon/cluster_bomb.cpp:205
+#: src/weapon/cluster_bomb.cpp:211
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -273,7 +273,7 @@ msgstr[0] "Tým %s získal %u plamenomet!"
 msgstr[1] "Tým %s získal %u plamenomety!"
 msgstr[2] "Tým %s získal %u plamenometů!"
 
-#: src/weapon/footbomb.cpp:169
+#: src/weapon/footbomb.cpp:172
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -321,7 +321,7 @@ msgstr[0] "Tým %s získal %u nízkou gravitaci! Jsem Neil Armstrong!"
 msgstr[1] "Tým %s získal %u nízké gravitace! Jsem Neil Armstrong!"
 msgstr[2] "Tým %s získal %u nízkých gravitací! Jsem Neil Armstrong!"
 
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:253
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -462,7 +462,7 @@ msgstr "(neznámý čas)"
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -471,7 +471,7 @@ msgstr ""
 "Je dostupná nová verze %s, pokud je vaše verze %s. Můžete zjistit, zda je "
 "dostupná aktualizace pro Váš operační systém!"
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:220
 msgid "Air Attack"
 msgstr "Vzdušný útok"
 
@@ -502,11 +502,11 @@ msgstr ""
 "Střelba: mezerník\n"
 "zásah obloukem"
 
-#: src/weapon/anvil.cpp:135
+#: src/weapon/anvil.cpp:139
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:298
+#: src/main.cpp:304
 msgid "Authors:"
 msgstr "Autoři:"
 
@@ -629,11 +629,11 @@ msgstr "Klientský režim"
 msgid "Clumsiest"
 msgstr "Největší trdlo"
 
-#: src/weapon/cluster_bomb.cpp:187
+#: src/weapon/cluster_bomb.cpp:193
 msgid "Cluster Bomb"
 msgstr "Tříštivá bomba"
 
-#: src/weapon/cluzooka.cpp:387
+#: src/weapon/cluzooka.cpp:390
 msgid "Cluzooka"
 msgstr "Cluzuka"
 
@@ -787,7 +787,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -805,7 +805,7 @@ msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
 msgid "Flame Thrower"
 msgstr "Plamenomet"
 
-#: src/weapon/footbomb.cpp:151
+#: src/weapon/footbomb.cpp:154
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
@@ -916,7 +916,7 @@ msgstr ""
 "Použití : držet stisknutý mezerník\n"
 "munice letí obloukem"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/anvil.cpp:140
 msgid ""
 "Howto use it : left click on target\n"
 "an ammo per turn"
@@ -928,7 +928,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -941,7 +941,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Počáteční energie"
 
-#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
+#: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:391
 #: src/weapon/riot_bomb.cpp:121
 msgid ""
 "Initial fire angle : Up/Down\n"
@@ -1055,7 +1055,7 @@ msgstr "Maximální počet hráčů:"
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:215
+#: src/weapon/mine.cpp:219
 msgid "Mine"
 msgstr "Mina"
 
@@ -1206,7 +1206,7 @@ msgstr "Veřejné hry"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
@@ -1239,7 +1239,7 @@ msgstr "Rozlišení"
 msgid "Riot Bomb"
 msgstr "Minomet"
 
-#: src/main.cpp:81
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "Spustit hru"
 
@@ -1315,7 +1315,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1384,11 +1384,11 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/cluster_bomb.cpp:146
+#: src/weapon/cluster_bomb.cpp:152
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Tříštivá bomba opustila bitevní pole předtím, než explodovala."
 
-#: src/weapon/footbomb.cpp:104
+#: src/weapon/footbomb.cpp:107
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Gnu opustil bitevní pole předtím, než explodoval."
 
@@ -1435,7 +1435,7 @@ msgstr "Granát opustil bitevní pole předtím, než explodoval"
 msgid "The others are waiting for you! Wake up :-)"
 msgstr "Ostatní na vás čekají! Vstávat :-)"
 
-#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
+#: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:342
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bitevní pole..."
@@ -1461,7 +1461,7 @@ msgstr[2] "Zde je jen %i týmů."
 msgid "Time"
 msgstr "Čas"
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:194 src/weapon/footbomb.cpp:155
 msgid ""
 "Timeout : Wheel mouse or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1512,11 +1512,11 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(neomezeně)"
 
-#: src/main.cpp:203
+#: src/main.cpp:209
 msgid "Version"
 msgstr "Verze"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Kontrola verze selhala: %s\n"
@@ -1542,7 +1542,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/main.cpp:307
+#: src/main.cpp:313
 msgid "Website: "
 msgstr "Webová stránka: "
 
@@ -1566,11 +1566,11 @@ msgstr "Poletující částice?"
 msgid "Winner"
 msgstr "Vítěz"
 
-#: src/main.cpp:215
+#: src/main.cpp:221
 msgid "Wormux launching..."
 msgstr "Spouští se Wormux..."
 
-#: src/main.cpp:297
+#: src/main.cpp:303
 msgid "Wormux version "
 msgstr "Wormux verze"
 
@@ -1610,7 +1610,7 @@ msgstr "Potřebujete nejméně dva použitelné týmy!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:491
+#: src/weapon/weapon_launcher.cpp:495
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 
@@ -1618,7 +1618,7 @@ msgstr "Vaše střela minula!"
 msgid "aka"
 msgstr "jako"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:221
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left clic on target\n"
