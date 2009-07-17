@@ -102,8 +102,8 @@ void Video::ComputeAvailableConfigs()
   if(modes != NULL){
     // We also had the current window resolution if it is not already in the list!
     for(int i=0;modes[i];++i) {
-      // We accept only modes that are bigger than 800x600
-      if (modes[i]->w < 800 || modes[i]->h < 600) break;
+      // We accept only modes that are bigger than 640x480
+      if (modes[i]->w < 640 || modes[i]->h < 480) break;
       available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
     }
   }
@@ -203,7 +203,7 @@ void Video::InitSDL()
 
   if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ) {
     Error(Format("Unable to initialize SDL library: %s", SDL_GetError()));
-    exit (1);
+    exit (EXIT_FAILURE);
   }
 
   SDL_EnableUNICODE(1);
