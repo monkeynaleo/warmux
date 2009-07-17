@@ -75,8 +75,8 @@ void FireParticle::Refresh()
   if(image->GetSize().x != 0 && image->GetSize().y != 0)
   {
     int dx = (GetWidth() - image->GetWidth()) / 2;
-
-    SetTestRect(dx, dx - 1, GetHeight() - 2,1);
+    int dy = std::max(0, GetHeight() - 2);
+    SetTestRect(dx, dx, dy, 1);
   }
 
   // The position of the object represents its top left corner
