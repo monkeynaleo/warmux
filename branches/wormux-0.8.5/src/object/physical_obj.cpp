@@ -61,6 +61,12 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_characters(false),
   m_collides_with_objects(false),
   m_rebound_position(-1,-1),
+  m_test_left(0),
+  m_test_right(0),
+  m_test_top(0),
+  m_test_bottom(0),
+  m_width(0),
+  m_height(0),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -68,12 +74,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_is_character(false),
   m_is_fire(false),
   m_name(name),
-  m_test_left(0),
-  m_test_right(0),
-  m_test_top(0),
-  m_test_bottom(0),
-  m_width(0),
-  m_height(0),
   m_rebound_sound(""),
   m_alive(ALIVE),
   m_energy(-1),
@@ -122,11 +122,15 @@ double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_MET
 int PhysicalObj::GetX() const { return (int)GetXdouble(); };
 int PhysicalObj::GetY() const { return (int)GetYdouble(); };
 
-void PhysicalObj::SetSize(const Point2i &newSize){
+void PhysicalObj::SetSize(const Point2i &newSize)
+{
   if( newSize == Point2i(0, 0) )
           Error( "New size of (0, 0) !");
   m_width = newSize.x;
   m_height = newSize.y;
+
+  ASSERT(m_width >= 0);
+  ASSERT(m_height >= 0);
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
@@ -140,13 +144,13 @@ void PhysicalObj::StoreValue(Action *a)
   a->Push((int)m_minimum_overlapse_time);
   a->Push(m_ignore_movements);
   a->Push(m_is_character);
-  a->Push((int)m_test_left);
-  a->Push((int)m_test_right);
-  a->Push((int)m_test_top);
-  a->Push((int)m_test_bottom);
-  a->Push((int)m_width);
-  a->Push((int)m_height);
-  a->Push((int)m_alive);
+  a->Push(m_test_left);
+  a->Push(m_test_right);
+  a->Push(m_test_top);
+  a->Push(m_test_bottom);
+  a->Push(m_width);
+  a->Push(m_height);
+  a->Push(m_alive);
   a->Push(m_energy);
   a->Push(m_allow_negative_y);
 }
@@ -161,15 +165,22 @@ void PhysicalObj::GetValueFromAction(Action *a)
   m_minimum_overlapse_time   = (uint)a->PopInt();
   m_ignore_movements         = !!a->PopInt();
   m_is_character             = !!a->PopInt();
-  m_test_left                = (uint)a->PopInt();
-  m_test_right               = (uint)a->PopInt();
-  m_test_top                 = (uint)a->PopInt();
-  m_test_bottom              = (uint)a->PopInt();
-  m_width                    = (uint)a->PopInt();
-  m_height                   = (uint)a->PopInt();
+  m_test_left                = a->PopInt();
+  m_test_right               = a->PopInt();
+  m_test_top                 = a->PopInt();
+  m_test_bottom              = a->PopInt();
+  m_width                    = a->PopInt();
+  m_height                   = a->PopInt();
   m_alive                    = (alive_t)a->PopInt();
   m_energy                   = a->PopInt();
   m_allow_negative_y         = !!a->PopInt();
+
+  ASSERT(m_test_left >= 0);
+  ASSERT(m_test_right >= 0);
+  ASSERT(m_test_top >= 0);
+  ASSERT(m_test_bottom >= 0);
+  ASSERT(m_width >= 0);
+  ASSERT(m_height >= 0);
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -221,6 +232,11 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_right = right;
   m_test_top = top;
   m_test_bottom = bottom;
+
+  ASSERT(m_test_left >= 0);
+  ASSERT(m_test_right >= 0);
+  ASSERT(m_test_top >= 0);
+  ASSERT(m_test_bottom >= 0);
 }
 
 void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
@@ -728,7 +744,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   // We are looking for a point in contact with the bottom of the object:
   y1 = GetY() + m_height - m_test_bottom;
   y2 = y1 - 1;
-  for (uint x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
+  for (int x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
     && GetWorld().ground.IsEmpty(Point2i(x,y2)) && !GetWorld().ground.IsEmpty(Point2i(x,y1)))
@@ -742,7 +758,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   // We are looking for a point in contact on the left hand of object:
   x1 = GetX() + m_test_left;
   x2 = x1 + 1;
-  for (uint y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
+  for (int y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x1,y)) && !GetWorld().IsOutsideWorld(Point2i(x2,y))
     && !GetWorld().ground.IsEmpty(Point2i(x1,y)) &&  GetWorld().ground.IsEmpty(Point2i(x2,y)))
@@ -756,7 +772,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   // We are looking for a point in contact on the rigth hand of object:
   x1 = GetX() + m_width - m_test_right;
   x2 = x1 - 1;
-  for (uint y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
+  for (int y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x1, y)) && !GetWorld().IsOutsideWorld(Point2i(x2, y))
        && !GetWorld().ground.IsEmpty(Point2i(x1, y)) && GetWorld().ground.IsEmpty(Point2i(x2, y)))
@@ -770,7 +786,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   // We are looking for a point in contact on top of object:
   y1 = GetY() + m_test_top;
   y2 = y1 - 1;
-  for (uint x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
+  for (int x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
     && !GetWorld().ground.IsEmpty(Point2i(x, y1)) && GetWorld().ground.IsEmpty(Point2i(x, y2)))

@@ -59,6 +59,12 @@ private:
   bool m_collides_with_objects;
   Point2i m_rebound_position;
 
+  // Rectangle used for collision tests
+  int m_test_left, m_test_right, m_test_top, m_test_bottom;
+
+  // Object size and position.
+  int m_width, m_height;
+
 protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -70,12 +76,6 @@ protected:
 
   std::string m_name;
   std::string m_unique_id;
-
-  // Rectangle used for collision tests
-  uint m_test_left, m_test_right, m_test_top, m_test_bottom;
-
-  // Object size and position.
-  uint m_width, m_height;
 
   std::string m_rebound_sound;
 
