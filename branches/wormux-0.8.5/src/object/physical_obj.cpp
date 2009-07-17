@@ -726,37 +726,37 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   int x1, x2, y1, y2;
 
   // We are looking for a point in contact with the bottom of the object:
-  y1 = (GetY()+m_height-m_test_bottom);
-  y2 = y1-1;
-  for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
+  y1 = GetY() + m_height - m_test_bottom;
+  y2 = y1 - 1;
+  for (uint x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
     && GetWorld().ground.IsEmpty(Point2i(x,y2)) && !GetWorld().ground.IsEmpty(Point2i(x,y1)))
     {
       contact_x = x;
-      contact_y = GetY() +m_height-m_test_bottom;
+      contact_y = GetY() + m_height - m_test_bottom;
       return true;
     }
   }
 
   // We are looking for a point in contact on the left hand of object:
-  x1 = GetX()+m_test_left;
-  x2 = x1+1;
-  for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
+  x1 = GetX() + m_test_left;
+  x2 = x1 + 1;
+  for (uint y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x1,y)) && !GetWorld().IsOutsideWorld(Point2i(x2,y))
     && !GetWorld().ground.IsEmpty(Point2i(x1,y)) &&  GetWorld().ground.IsEmpty(Point2i(x2,y)))
     {
-      contact_x = GetX() +m_test_left;
+      contact_x = GetX() + m_test_left;
       contact_y = y;
       return true;
     }
   }
 
   // We are looking for a point in contact on the rigth hand of object:
-  x1 = (GetX()+m_width-m_test_right);
-  x2 = x1-1;
-  for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
+  x1 = GetX() + m_width - m_test_right;
+  x2 = x1 - 1;
+  for (uint y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x1, y)) && !GetWorld().IsOutsideWorld(Point2i(x2, y))
        && !GetWorld().ground.IsEmpty(Point2i(x1, y)) && GetWorld().ground.IsEmpty(Point2i(x2, y)))
@@ -768,15 +768,15 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   }
 
   // We are looking for a point in contact on top of object:
-  y1 = GetY()+m_test_top;
+  y1 = GetY() + m_test_top;
   y2 = y1 - 1;
-  for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
+  for (uint x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++)
   {
     if(!GetWorld().IsOutsideWorld(Point2i(x,y1)) && !GetWorld().IsOutsideWorld(Point2i(x,y2))
     && !GetWorld().ground.IsEmpty(Point2i(x, y1)) && GetWorld().ground.IsEmpty(Point2i(x, y2)))
     {
-      contact_x =x;
-      contact_y = GetY() +m_test_top;
+      contact_x = x;
+      contact_y = GetY() + m_test_top;
       return true;
     }
   }
