@@ -473,6 +473,7 @@ void Ground::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, c
   ASSERT(nbCells.x != 0 && nbCells.y != 0);
 
   //m_tile_body->SetXForm(b2Vec2(upper_left_offset.x/PIXEL_PER_METER, upper_left_offset.y/PIXEL_PER_METER), m_tile_body->GetAngle());
+  //m_tile_physical_obj->SetPosition(upper_left_offset.x, upper_left_offset.y);
 
   InitPreview();
 
