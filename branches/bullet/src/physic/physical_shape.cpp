@@ -33,6 +33,7 @@
 #endif
 
 PhysicalShape::PhysicalShape() :
+  m_parent(NULL),
   m_position(0,0),
   m_force_application_point(0,0),
   m_friction(0.8f),
@@ -52,6 +53,11 @@ PhysicalShape::~PhysicalShape()
 
 }
 
+
+void PhysicalShape::SetParent(PhysicalObj *parent)
+{
+  m_parent = parent;
+}
 
 void PhysicalShape::SetMass(double mass)
 {

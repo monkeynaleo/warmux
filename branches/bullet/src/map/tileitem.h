@@ -22,8 +22,7 @@
 
 #include <WORMUX_point.h>
 #include "graphic/surface.h"
-
-class b2Body;
+class PhysicalObj;
 class PhysicTile;
 
 const Point2i CELL_SIZE(64, 64);
@@ -47,7 +46,7 @@ public:
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
-  virtual b2Body *GetBody() const =0;
+  virtual PhysicalObj *GetPhysicalObj() const =0;
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
@@ -69,7 +68,7 @@ public:
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
-  b2Body *GetBody() const {return NULL;};
+  PhysicalObj *GetPhysicalObj() const {return NULL;};
 };
 
 class TileItem_AlphaSoftware : public TileItem
@@ -81,7 +80,7 @@ class TileItem_AlphaSoftware : public TileItem
 
   Point2i m_size;
   Surface m_surface;
-  b2Body* m_tile_body;
+  PhysicalObj* m_tile_physical_obj;
   PhysicTile *m_physic_tile;
   Point2d m_shape_offset;
   int m_shape_level;
@@ -113,7 +112,7 @@ public:
   void MergeSprite(const Point2i &position, Surface& spr);
   void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
-  b2Body *GetBody() const;
+  PhysicalObj *GetPhysicalObj() const;
   bool NeedDelete() const {return need_delete; };
   void CheckEmpty();
   void ResetEmptyCheck();

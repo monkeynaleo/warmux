@@ -80,7 +80,7 @@ public:
   virtual bool IsMoving() const = 0;
   virtual bool IsSleeping() const = 0;
   // Shape
-  virtual void AddShape(PhysicalShape *shape,std::string name) = 0;
+  virtual void AddShape(PhysicalShape *shape,std::string name ="") = 0;
   virtual void RemoveShape(PhysicalShape *shape) = 0;
   virtual void RemoveShape(std::string name) = 0;
   virtual void ClearShapes() = 0;

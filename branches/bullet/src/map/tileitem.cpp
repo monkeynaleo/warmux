@@ -92,7 +92,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size, const Point2
   m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
   ResetEmptyCheck();
 
- // m_tile_body = PhysicalEngine::GetInstance()->GetNewGroundBody();
+  m_tile_physical_obj = PhysicalEngine::GetInstance()->CreateObject(PhysicalEngine::RIGID_BODY);
 
   _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
   if( m_surface.GetBytesPerPixel() == 4 ){
@@ -376,7 +376,7 @@ void TileItem_AlphaSoftware::CheckEmpty()
   }
 }
 
-b2Body * TileItem_AlphaSoftware::GetBody() const
+PhysicalObj * TileItem_AlphaSoftware::GetPhysicalObj() const
 {
-    return m_tile_body;
+    return m_tile_physical_obj;
 }

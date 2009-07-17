@@ -150,6 +150,8 @@ void PhysicTile::GenerateMixte()
 
       //std::cout<<"PhysicTile::m_fullness = FULL, level"<<m_level<<std::endl;
       PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+      m_parent_tile->GetPhysicalObj()->AddShape(shape);
+
       //shape->SetBody(m_parent_tile->GetBody());
 
       shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x) ),
@@ -618,6 +620,7 @@ PhysicTile::Fullness PhysicTile::IsFull() const
 void PhysicTile::InitShape()
 {
   PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
+  m_parent_tile->GetPhysicalObj()->AddShape(shape);
 //  shape->SetBody(m_parent_tile->GetBody());
 
   shape->SetFriction(GROUND_FRICTION);
@@ -641,6 +644,7 @@ void PhysicTile::DrawBorder(const Color& color) const
   if (!m_is_subdivided && m_is_containing_polygon) {
     ASSERT(m_shape != NULL);
     m_shape->DrawBorder(color);
+
   } else if (m_is_subdivided) {
     for (uint i=0; i < 4; i++) {
       if (m_physic_tiles[i] != NULL)
