@@ -85,6 +85,14 @@ Game * Game::GetInstance()
   return singleton;
 }
 
+bool Game::IsRunning()
+{
+  if (!singleton)
+    return false;
+
+  return (!singleton->IsGameFinished());
+}
+
 Game * Game::UpdateGameRules()
 {
   const std::string& config_rules = GameMode::GetRef().rules;

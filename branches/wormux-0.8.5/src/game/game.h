@@ -111,6 +111,7 @@ public:
   static Game * GetInstance();
   static std::string GetUniqueId();
   static void ResetUniqueIds();
+  static bool IsRunning();
 
   bool                character_already_chosen;
   Chat                chatsession;
