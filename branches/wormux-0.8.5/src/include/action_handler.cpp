@@ -537,7 +537,7 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
-  if (Game::GetInstance()->IsGameLaunched() && Network::GetInstance()->IsGameMaster()) {
+  if (Game::IsRunning() && Network::GetInstance()->IsGameMaster()) {
     int i;
     Team* the_team = GetTeamsList().FindById(team_id, i);
     if (the_team == &ActiveTeam()) // we have loose the turn master!!
@@ -796,7 +796,7 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
 
   ChatLogger::LogMessageIfOpen(msg);
 
-  if (Game::GetInstance()->IsGameLaunched())
+  if (Game::IsRunning())
     GameMessages::GetInstance()->Add(msg);
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
@@ -900,7 +900,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
 
   ChatLogger::LogMessageIfOpen(msg);
 
-  if (Game::GetInstance()->IsGameLaunched())
+  if (Game::IsRunning())
     GameMessages::GetInstance()->Add(msg);
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu

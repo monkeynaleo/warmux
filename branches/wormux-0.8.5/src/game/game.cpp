@@ -90,7 +90,7 @@ bool Game::IsRunning()
   if (!singleton)
     return false;
 
-  return (!singleton->IsGameFinished());
+  return (!singleton->IsGameLaunched());
 }
 
 Game * Game::UpdateGameRules()
@@ -187,7 +187,8 @@ void Game::UnloadDatas(bool game_finished) const
   JukeBox::GetInstance()->StopAll();
 }
 
-bool Game::IsGameLaunched() const{
+bool Game::IsGameLaunched() const
+{
   return isGameLaunched;
 }
 
