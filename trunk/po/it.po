@@ -315,9 +315,12 @@ msgstr[0] "La squadra %s ha vinto %u Paracadute!"
 msgstr[1] "La squadra %s ha vinto %u Paracaduti!"
 
 #: src/weapon/polecat.cpp:182
-#, c-format
-msgid "%s team has won %u polecat! You have you're gas mask, right ?"
-msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
+#, fuzzy, c-format
+#| msgid "%s team has won %u polecat! You have you're gas mask, right ?"
+#| msgid_plural ""
+#| "%s team has won %u polecats! You have you're gas mask, right ?"
+msgid "%s team has won %u polecat! You have your gas mask, right?"
+msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] ""
 "La squadra %s ha vinto %u Puzzola! Avete a portata di mano una maschera "
 "antigas?"
@@ -432,9 +435,12 @@ msgid "(unlimited)"
 msgstr "(illimitato)"
 
 #: src/menu/options_menu.cpp:449
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "A new version %s is available, while your version is %s.You may want to "
+#| "check whether an update is available for your OS!"
 msgid ""
-"A new version %s is available, while your version is %s.You may want to "
+"A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 "La nuova versione Wormux %s è disponibile, tu stai usando la %s. Puoi "
@@ -517,7 +523,9 @@ msgid "Bounce Ball"
 msgstr "Pallina Rimbalzina"
 
 #: src/weapon/supertux.cpp:186
-msgid "Bye bye tux..."
+#, fuzzy
+#| msgid "Bye bye tux..."
+msgid "Bye bye Tux..."
 msgstr "Ciao ciao tux..."
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
@@ -544,23 +552,24 @@ msgstr "Impossibile aprire la cartella (%s) delle squadre personalizzate!"
 
 #: src/menu/help_menu.cpp:90
 #, fuzzy
-msgid "Center camera to character"
+msgid "Center the camera on the character"
 msgstr "Numero di caratteri:"
 
 #: src/menu/help_menu.cpp:89
-msgid "Change active character"
-msgstr ""
+#, fuzzy
+msgid "Change the active character"
+msgstr "Numero di caratteri:"
 
 #: src/menu/help_menu.cpp:79
-msgid "Change aim angle"
+msgid "Change the aim angle"
 msgstr ""
 
 #: src/menu/help_menu.cpp:73
-msgid "Change weapon category"
+msgid "Change the weapon category"
 msgstr ""
 
 #: src/menu/help_menu.cpp:78
-msgid "Change weapon countdown"
+msgid "Change the weapon countdown"
 msgstr ""
 
 #: src/menu/options_menu.cpp:149
@@ -586,8 +595,9 @@ msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:77
-msgid "Click: Center camera on character"
-msgstr ""
+#, fuzzy
+msgid "Click: Center the camera on the character"
+msgstr "Numero di caratteri:"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:120
@@ -659,7 +669,7 @@ msgid "Displays this message"
 msgstr "Mostra questo messaggio"
 
 #: src/menu/help_menu.cpp:76
-msgid "Drag&drop: Move camera"
+msgid "Drag&drop: Move the camera"
 msgstr ""
 
 #. some death mode options
@@ -751,14 +761,16 @@ msgstr ""
 "su internet"
 
 #: src/menu/network_connection_menu.cpp:373
-msgid "Error: Unable to start server"
+#, fuzzy
+#| msgid "Error: Unable to start server"
+msgid "Error: Unable to start the server"
 msgstr "Errore: impossibile avviare il server"
 
 #: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
+"configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
@@ -767,7 +779,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
+"configuration: TCP Port %u must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
@@ -811,7 +823,9 @@ msgid "Gnu Launcher"
 msgstr "Lancia-Gnu"
 
 #: src/menu/options_menu.cpp:123
-msgid "Graphic"
+#, fuzzy
+#| msgid "Graphic"
+msgid "Graphics"
 msgstr "Grafica"
 
 #: src/weapon/grapple.cpp:96
@@ -861,21 +875,14 @@ msgstr ""
 msgid "Host a game"
 msgstr "Gestione della partita"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"How to use it : left click on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Utilizzo: Click Sinitro sull'obbiettivo\n"
-"Angolazione iniziale: Su/Giù\n"
-"Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
-"una munizione al turno"
-
 #: src/weapon/blowtorch.cpp:64
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "Angle : Up/Down\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
@@ -884,16 +891,42 @@ msgstr ""
 "una munizione al turno"
 
 #: src/weapon/airhammer.cpp:75
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
 "Utilizzo: tieni premuto Spazio\n"
 "una munizione al turno"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
+#| msgid ""
+#| "How to use it : left click on target\n"
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : left click on target\n"
+"How to use it : left click on the target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep the space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Utilizzo: Click Sinitro sull'obbiettivo\n"
+"Angolazione iniziale: Su/Giù\n"
+"Fuoco: tieni premuto Spazio fino alla potenza voluta\n"
+"una munizione al turno"
+
+#: src/weapon/anvil.cpp:136
+#, fuzzy
+#| msgid ""
+#| "Howto use it : left click on target\n"
+#| "an ammo per turn"
+msgid ""
+"How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
 "Utilizzo: Click Sinitro sull'obbiettivo\n"
@@ -904,8 +937,12 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Muoviti, sei troppo lento !!"
 
 #: src/main.cpp:287
+#, fuzzy
+#| msgid ""
+#| "If you found a bug or have a feature request send us a email (in english, "
+#| "please):"
 msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
+"If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr ""
 "Se trovi un bug o se vuoi fare una richiesta specifica invia un email (in "
@@ -918,9 +955,14 @@ msgstr "Energia iniziale"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
+#, fuzzy
+#| msgid ""
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Angolazione iniziale: Su/Giù\n"
@@ -1058,12 +1100,12 @@ msgid "Most violent"
 msgstr "Il più violento"
 
 #: src/menu/help_menu.cpp:86
-msgid "Move camera with mouse or arrows"
+msgid "Move the camera with mouse or arrows"
 msgstr ""
 
 #: src/menu/help_menu.cpp:80
 #, fuzzy
-msgid "Move character"
+msgid "Move the character"
 msgstr "Paracadute"
 
 #: src/menu/options_menu.cpp:213
@@ -1114,7 +1156,7 @@ msgid "Number of teams:"
 msgstr "Numero di squadre:"
 
 #: src/menu/help_menu.cpp:82
-msgid "On a character: Changes active one"
+msgid "On a character: Select it"
 msgstr ""
 
 #: src/menu/help_menu.cpp:81
@@ -1132,10 +1174,6 @@ msgstr "Opzioni"
 #: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Paracadute"
-
-#: src/weapon/parachute.cpp:101
-msgid "Parachute is activated automatically."
-msgstr "Il paracadute è attivato automaticamente."
 
 #: src/menu/network_connection_menu.cpp:122
 #: src/menu/network_connection_menu.cpp:160
@@ -1198,11 +1236,15 @@ msgid "Random map"
 msgstr "mappa casuale"
 
 #: src/game/config.cpp:351
-msgid "Reading default config file"
+#, fuzzy
+#| msgid "Reading default config file"
+msgid "Reading the default config file"
 msgstr "Lettura del file di configurazione default"
 
 #: src/game/config.cpp:400
-msgid "Reading personal config file"
+#, fuzzy
+#| msgid "Reading personal config file"
+msgid "Reading the personal config file"
 msgstr "Lettura di un file di configurazione personale"
 
 #: src/menu/options_menu.cpp:119
@@ -1249,15 +1291,15 @@ msgstr "Cannamozza"
 
 #: src/menu/help_menu.cpp:83
 #, fuzzy
-msgid "Show weapons menu"
+msgid "Show the weapons menu"
 msgstr "Opzioni"
 
 #: src/menu/help_menu.cpp:69
-msgid "Show/hide interface"
+msgid "Show/hide the interface"
 msgstr ""
 
 #: src/menu/help_menu.cpp:88
-msgid "Show/hide minimap"
+msgid "Show/hide the minimap"
 msgstr ""
 
 #: src/weapon/skip_turn.cpp:47
@@ -1289,12 +1331,18 @@ msgstr "Qualcuno ha messo una Trappola Esplosiva nella scatola!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Siacenti, attualmente non ci sono partite in attesa di giocatori"
 
-#: src/menu/network_connection_menu.cpp:324
 #: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
+"can download an updated version on http://www.wormux.org/wiki/download.php"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:324
+#, c-format
+msgid ""
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
 #: src/menu/options_menu.cpp:251
@@ -1336,7 +1384,7 @@ msgstr "Siringa"
 
 #: src/menu/help_menu.cpp:72
 #, fuzzy
-msgid "Talk in network battle"
+msgid "Talk in network battles"
 msgstr "Torna alla battaglia"
 
 #: src/menu/results_menu.cpp:426
@@ -1369,11 +1417,15 @@ msgstr ""
 "La Bomba Football  ha lasciato il campo di battaglia prima di esplodere"
 
 #: src/weapon/gnu.cpp:144
-msgid "The Gnu left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Gnu left the battlefield before exploding"
+msgid "The Gnu left the battlefield before exploding!"
 msgstr "Lo Gnu ha lasciato il campo di battaglia prima di esplodere"
 
 #: src/weapon/polecat.cpp:151
-msgid "The Polecat left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Polecat left the battlefield before exploding"
+msgid "The Polecat left the battlefield before exploding!"
 msgstr "La puzzola ha lasciato il campo di battaglia prima di esplodere"
 
 #: src/weapon/auto_bazooka.cpp:178
@@ -1381,7 +1433,9 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "Il razzo automatico è passato ad un altro mondo..."
 
 #: src/weapon/bounce_ball.cpp:62
-msgid "The ball left the battlefield before exploding"
+#, fuzzy
+#| msgid "The ball left the battlefield before exploding"
+msgid "The ball left the battlefield before exploding!"
 msgstr ""
 "La pallina rimbalzina ha lasciato il campo di battaglia prima di esplodere"
 
@@ -1400,7 +1454,9 @@ msgstr ""
 "La connessione è scaduta. verificate che non ci sia un firewall attivo!"
 
 #: src/weapon/disco_grenade.cpp:127
-msgid "The disco grenade has left the dance floor before exploding"
+#, fuzzy
+#| msgid "The disco grenade has left the dance floor before exploding"
+msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "La granata disco ha lasciato la pista daa ballo prima di esplodere"
 
 #: src/game/game.cpp:491
@@ -1408,12 +1464,22 @@ msgid "The game was interrupted because you got disconnected."
 msgstr "Il gioco è stato interrotto dato che ti sei disconnesso"
 
 #: src/weapon/grenade.cpp:50
-msgid "The grenade left the battlefield before exploding"
+#, fuzzy
+#| msgid "The grenade left the battlefield before exploding"
+msgid "The grenade left the battlefield before exploding!"
 msgstr "La granata ha lasciato il campo di battaglia prima di esplodere"
 
 #: src/menu/network_menu.cpp:336
-msgid "The others are waiting for you! Wake up :-)"
+#, fuzzy
+#| msgid "The others are waiting for you! Wake up :-)"
+msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Gli altri ti stanno aspettando! Muoviti! :-)"
+
+#: src/weapon/parachute.cpp:101
+#, fuzzy
+#| msgid "Parachute is activated automatically."
+msgid "The parachute is activated automatically."
+msgstr "Il paracadute è attivato automaticamente."
 
 #: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
@@ -1441,10 +1507,16 @@ msgid "Time"
 msgstr "Ora"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Tempo: rotellina del mouse o Page Up/Page Down\n"
@@ -1453,8 +1525,14 @@ msgstr ""
 "Una munizione epr turno"
 
 #: src/weapon/bounce_ball.cpp:80
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : space key\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
 "an ammo per turn"
@@ -1465,17 +1543,21 @@ msgstr ""
 "Una munizione epr turno"
 
 #: src/network/net_error_msg.cpp:35
-msgid "Unable to contact host."
+#, fuzzy
+#| msgid "Unable to contact host."
+msgid "Unable to contact the host."
 msgstr "Impossibile contattare l'host."
 
 #: src/map/maps_list.cpp:237
-#, c-format
-msgid "Unable to open maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open maps directory (%s)!"
+msgid "Unable to open the maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe (%s)!"
 
 #: src/map/maps_list.cpp:249
-#, c-format
-msgid "Unable to open personal maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open personal maps directory (%s)!"
+msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe personali (%s)!"
 
 #: src/network/net_error_msg.cpp:38
@@ -1508,11 +1590,13 @@ msgstr[0] "Attendere! %i giocatore non è ancora pronto!"
 msgstr[1] "Attendere! %i giocatori non sono ancora pronti!"
 
 #: src/menu/network_menu.cpp:450
-msgid "Waiting for server, all you can do is cancel or chat!"
+#, fuzzy
+#| msgid "Waiting for server, all you can do is cancel or chat!"
+msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "In attesa del server, puoi chattare o disconnetterti"
 
 #: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire / Bonus box: falls fast"
+msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr ""
 
 #. Initialization of teams' energy
@@ -1565,7 +1649,9 @@ msgid "Wrong team!"
 msgstr "Squadra errata!"
 
 #: src/menu/network_menu.cpp:339
-msgid "You are alone :-/"
+#, fuzzy
+#| msgid "You are alone :-/"
+msgid "You are alone. :-/"
 msgstr "Sei da solo :-/"
 
 #: src/menu/network_menu.cpp:251
@@ -1577,15 +1663,21 @@ msgid "You are the new turn master!"
 msgstr ""
 
 #: src/map/maps_list.cpp:258
-msgid "You need at least one valid map !"
+#, fuzzy
+#| msgid "You need at least one valid map !"
+msgid "You need at least one valid map!"
 msgstr "Hai bisogno almeno di una mappa valida!"
 
 #: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
-msgid "You need at least two valid teams !"
+#, fuzzy
+#| msgid "You need at least two valid teams !"
+msgid "You need at least two valid teams!"
 msgstr "Hai bisogno almeno di due squadre valide !"
 
 #: src/menu/network_menu.cpp:226
-msgid "You won't be able to play before selecting a team !"
+#, fuzzy
+#| msgid "You won't be able to play before selecting a team !"
+msgid "You won't be able to play before selecting a team!"
 msgstr "Non puoi giocare senza scegliere una squadra!"
 
 #: src/weapon/weapon_launcher.cpp:491
@@ -1597,10 +1689,15 @@ msgid "aka"
 msgstr "alias"
 
 #: src/weapon/air_attack.cpp:218
+#, fuzzy
+#| msgid ""
+#| "attack direction : Left/Right\n"
+#| "Bombing : left clic on target\n"
+#| "a bombing per turn"
 msgid ""
 "attack direction : Left/Right\n"
-"Bombing : left clic on target\n"
-"a bombing per turn"
+"Bombing : left click on the target\n"
+"one bombing per turn"
 msgstr ""
 "Direzione d'attacco: Sinistra/Destra\n"
 "Bombardamento: Click Sinistro sill'obbiettivo\n"

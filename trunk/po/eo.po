@@ -306,9 +306,12 @@ msgstr[0] "%s teamo gajnis %u paraŝuton!"
 msgstr[1] "%s teamo gajnis %u paraŝutojn!"
 
 #: src/weapon/polecat.cpp:182
-#, c-format
-msgid "%s team has won %u polecat! You have you're gas mask, right ?"
-msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
+#, fuzzy, c-format
+#| msgid "%s team has won %u polecat! You have you're gas mask, right ?"
+#| msgid_plural ""
+#| "%s team has won %u polecats! You have you're gas mask, right ?"
+msgid "%s team has won %u polecat! You have your gas mask, right?"
+msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "%s teamo gajnis %u putoron! Vi havas vian gasmaskon, ĉu ne?"
 msgstr[1] "%s teamo gajnis %u putorojn! Vi havas vian gasmaskon, ĉu ne?"
 
@@ -421,9 +424,12 @@ msgid "(unlimited)"
 msgstr "(senlimaj)"
 
 #: src/menu/options_menu.cpp:449
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "A new version %s is available, while your version is %s.You may want to "
+#| "check whether an update is available for your OS!"
 msgid ""
-"A new version %s is available, while your version is %s.You may want to "
+"A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 "Nova versio %s estas havebla, dum via estas %s. Vi eble volas kontroli ĉu "
@@ -504,7 +510,9 @@ msgid "Bounce Ball"
 msgstr "Resaltanta pilko"
 
 #: src/weapon/supertux.cpp:186
-msgid "Bye bye tux..."
+#, fuzzy
+#| msgid "Bye bye tux..."
+msgid "Bye bye Tux..."
 msgstr "Adiaŭ, tukso..."
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
@@ -530,23 +538,33 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
 
 #: src/menu/help_menu.cpp:90
-msgid "Center camera to character"
+#, fuzzy
+#| msgid "Center camera to character"
+msgid "Center the camera on the character"
 msgstr "Centrigi la kameraon ĉe la ulo"
 
 #: src/menu/help_menu.cpp:89
-msgid "Change active character"
+#, fuzzy
+#| msgid "Change active character"
+msgid "Change the active character"
 msgstr "Ŝanĝi aktivan ulon"
 
 #: src/menu/help_menu.cpp:79
-msgid "Change aim angle"
+#, fuzzy
+#| msgid "Change aim angle"
+msgid "Change the aim angle"
 msgstr "Ŝanĝi celangulon"
 
 #: src/menu/help_menu.cpp:73
-msgid "Change weapon category"
+#, fuzzy
+#| msgid "Change weapon category"
+msgid "Change the weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
 #: src/menu/help_menu.cpp:78
-msgid "Change weapon countdown"
+#, fuzzy
+#| msgid "Change weapon countdown"
+msgid "Change the weapon countdown"
 msgstr "Ŝanĝi templimon de armilo"
 
 #: src/menu/options_menu.cpp:149
@@ -571,7 +589,9 @@ msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:77
-msgid "Click: Center camera on character"
+#, fuzzy
+#| msgid "Click: Center camera on character"
+msgid "Click: Center the camera on the character"
 msgstr "Klako: Centrigi la kameraon ĉe la ulo"
 
 #. Client Mode
@@ -642,7 +662,9 @@ msgid "Displays this message"
 msgstr "Montri tiun mesaĝon"
 
 #: src/menu/help_menu.cpp:76
-msgid "Drag&drop: Move camera"
+#, fuzzy
+#| msgid "Drag&drop: Move camera"
+msgid "Drag&drop: Move the camera"
 msgstr "Ŝovi&demeti: movi kameraon"
 
 #. some death mode options
@@ -724,14 +746,21 @@ msgid ""
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por serĉi interretan ludon"
 
 #: src/menu/network_connection_menu.cpp:373
-msgid "Error: Unable to start server"
+#, fuzzy
+#| msgid "Error: Unable to start server"
+msgid "Error: Unable to start the server"
 msgstr "Eraro: Ne eblas starti servilon"
 
 #: src/menu/network_connection_menu.cpp:367
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Error: Your server is not reachable from the internet. Check your "
+#| "firewall configuration: TCP Port %s must accept connection from the "
+#| "outside. If you are not directly connected to the internet, check your "
+#| "router configuration: TCP Port %s must be forwarded on your computer."
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
+"configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
@@ -744,7 +773,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
+"configuration: TCP Port %u must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
@@ -791,7 +820,9 @@ msgid "Gnu Launcher"
 msgstr "Gnuĵetilo"
 
 #: src/menu/options_menu.cpp:123
-msgid "Graphic"
+#, fuzzy
+#| msgid "Graphic"
+msgid "Graphics"
 msgstr "Grafikoj"
 
 #: src/weapon/grapple.cpp:96
@@ -841,20 +872,14 @@ msgstr "Supersalti"
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"How to use it : left click on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Kiel uzi ĝin: maldekstrklaku sur celo\n"
-"Komenca pafangulo: Supren/Malsupren\n"
-"Pafo: apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
-
 #: src/weapon/blowtorch.cpp:64
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "Angle : Up/Down\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
@@ -862,16 +887,41 @@ msgstr ""
 "Unu uzo vice"
 
 #: src/weapon/airhammer.cpp:75
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin: apogu kontinue spacetosignon\n"
 "Unu uzo vice"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
+#| msgid ""
+#| "How to use it : left click on target\n"
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : left click on target\n"
+"How to use it : left click on the target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep the space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Kiel uzi ĝin: maldekstrklaku sur celo\n"
+"Komenca pafangulo: Supren/Malsupren\n"
+"Pafo: apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
+
+#: src/weapon/anvil.cpp:136
+#, fuzzy
+#| msgid ""
+#| "Howto use it : left click on target\n"
+#| "an ammo per turn"
+msgid ""
+"How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
 "Kiel uzi ĝin: maldekstrklaku sur celo\n"
@@ -882,8 +932,12 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Rapidegu, vi tro malrapidas!"
 
 #: src/main.cpp:287
+#, fuzzy
+#| msgid ""
+#| "If you found a bug or have a feature request send us a email (in english, "
+#| "please):"
 msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
+"If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr ""
 "Se vi trovas cimon aŭ havas demandon pri funcio, sendu retleteron al ni "
@@ -896,9 +950,14 @@ msgstr "Komenca energio"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
+#, fuzzy
+#| msgid ""
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Komenca pafangulo: Supren/Malsupren\n"
@@ -1036,11 +1095,15 @@ msgid "Most violent"
 msgstr "La plej perforta"
 
 #: src/menu/help_menu.cpp:86
-msgid "Move camera with mouse or arrows"
+#, fuzzy
+#| msgid "Move camera with mouse or arrows"
+msgid "Move the camera with mouse or arrows"
 msgstr "Movi la kameraon per muso aŭ sagoj"
 
 #: src/menu/help_menu.cpp:80
-msgid "Move character"
+#, fuzzy
+#| msgid "Move character"
+msgid "Move the character"
 msgstr "Movi ulon"
 
 #: src/menu/options_menu.cpp:213
@@ -1091,7 +1154,9 @@ msgid "Number of teams:"
 msgstr "Kvanto da teamoj:"
 
 #: src/menu/help_menu.cpp:82
-msgid "On a character: Changes active one"
+#, fuzzy
+#| msgid "On a character: Changes active one"
+msgid "On a character: Select it"
 msgstr "Sur ulo: ŝanĝi la aktiva ulon"
 
 #: src/menu/help_menu.cpp:81
@@ -1109,10 +1174,6 @@ msgstr "Opciomenuo"
 #: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "Paraŝuto"
-
-#: src/weapon/parachute.cpp:101
-msgid "Parachute is activated automatically."
-msgstr "Paraŝuto aŭtomatike uziĝis."
 
 #: src/menu/network_connection_menu.cpp:122
 #: src/menu/network_connection_menu.cpp:160
@@ -1174,11 +1235,15 @@ msgid "Random map"
 msgstr "Hazarda mapo"
 
 #: src/game/config.cpp:351
-msgid "Reading default config file"
+#, fuzzy
+#| msgid "Reading default config file"
+msgid "Reading the default config file"
 msgstr "Legante norman agordaron"
 
 #: src/game/config.cpp:400
-msgid "Reading personal config file"
+#, fuzzy
+#| msgid "Reading personal config file"
+msgid "Reading the personal config file"
 msgstr "Legante personan agordaron"
 
 #: src/menu/options_menu.cpp:119
@@ -1224,15 +1289,21 @@ msgid "Shotgun"
 msgstr "Blovfusilo"
 
 #: src/menu/help_menu.cpp:83
-msgid "Show weapons menu"
+#, fuzzy
+#| msgid "Show weapons menu"
+msgid "Show the weapons menu"
 msgstr "Montri la menuon de armiloj"
 
 #: src/menu/help_menu.cpp:69
-msgid "Show/hide interface"
+#, fuzzy
+#| msgid "Show/hide interface"
+msgid "Show/hide the interface"
 msgstr "Montri/Kaŝi interfacon"
 
 #: src/menu/help_menu.cpp:88
-msgid "Show/hide minimap"
+#, fuzzy
+#| msgid "Show/hide minimap"
+msgid "Show/hide the minimap"
 msgstr "Montri/Kaŝi minimapon"
 
 #: src/weapon/skip_turn.cpp:47
@@ -1263,12 +1334,28 @@ msgstr "Iu metis insidon en la skatolo!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/menu/network_connection_menu.cpp:324
 #: tools/servers/game_server/server.cpp:257
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "Sorry, your version is not supported anymore. Supported version are %s. "
+#| "You can download a updated version on http://www.wormux.org/wiki/download."
+#| "php"
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
+"can download an updated version on http://www.wormux.org/wiki/download.php"
+msgstr ""
+"Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
+"povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
+
+#: src/menu/network_connection_menu.cpp:324
+#, fuzzy, c-format
+#| msgid ""
+#| "Sorry, your version is not supported anymore. Supported version are %s. "
+#| "You can download a updated version on http://www.wormux.org/wiki/download."
+#| "php"
+msgid ""
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 "Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
 "povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
@@ -1311,7 +1398,9 @@ msgid "Syringe"
 msgstr "Injektilo"
 
 #: src/menu/help_menu.cpp:72
-msgid "Talk in network battle"
+#, fuzzy
+#| msgid "Talk in network battle"
+msgid "Talk in network battles"
 msgstr "Babili dum reta batalo"
 
 #: src/menu/results_menu.cpp:426
@@ -1343,11 +1432,15 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "La futbalbombo foriris de la batalejo antaŭ ol explodi."
 
 #: src/weapon/gnu.cpp:144
-msgid "The Gnu left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Gnu left the battlefield before exploding"
+msgid "The Gnu left the battlefield before exploding!"
 msgstr "La Gnuo foriris de la batalejo antaŭ ol explodi."
 
 #: src/weapon/polecat.cpp:151
-msgid "The Polecat left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Polecat left the battlefield before exploding"
+msgid "The Polecat left the battlefield before exploding!"
 msgstr "La putoro foriris de la batalejo antaŭ ol explodi."
 
 #: src/weapon/auto_bazooka.cpp:178
@@ -1355,7 +1448,9 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "La aŭtomatika raketo foriris de la batalejo..."
 
 #: src/weapon/bounce_ball.cpp:62
-msgid "The ball left the battlefield before exploding"
+#, fuzzy
+#| msgid "The ball left the battlefield before exploding"
+msgid "The ball left the battlefield before exploding!"
 msgstr "La pilko foriris de la batalejo antaŭ ol explodi."
 
 #: src/network/network_client.cpp:96
@@ -1372,7 +1467,9 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "La konekto tempolimis. Certiĝu, ke ne estas ie fajroŝirmilo!"
 
 #: src/weapon/disco_grenade.cpp:127
-msgid "The disco grenade has left the dance floor before exploding"
+#, fuzzy
+#| msgid "The disco grenade has left the dance floor before exploding"
+msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "La diskogrenado foriris de la diskejo antaŭ ol explodi"
 
 #: src/game/game.cpp:491
@@ -1380,12 +1477,22 @@ msgid "The game was interrupted because you got disconnected."
 msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 
 #: src/weapon/grenade.cpp:50
-msgid "The grenade left the battlefield before exploding"
+#, fuzzy
+#| msgid "The grenade left the battlefield before exploding"
+msgid "The grenade left the battlefield before exploding!"
 msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 
 #: src/menu/network_menu.cpp:336
-msgid "The others are waiting for you! Wake up :-)"
+#, fuzzy
+#| msgid "The others are waiting for you! Wake up :-)"
+msgid "The others are waiting for you! Wake up! :-)"
 msgstr "La alioj estas atendando vin! Vekiĝu:-)"
+
+#: src/weapon/parachute.cpp:101
+#, fuzzy
+#| msgid "Parachute is activated automatically."
+msgid "The parachute is activated automatically."
+msgstr "Paraŝuto aŭtomatike uziĝis."
 
 #: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
@@ -1413,10 +1520,16 @@ msgid "Time"
 msgstr "Tempo"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Tempolimo: Radmuso aŭ Paĝa Supren/Malsupren\n"
@@ -1424,8 +1537,14 @@ msgstr ""
 "Pafo: apogu kontinue spacetosignon ĝis la vola fortoUnu pafo vice"
 
 #: src/weapon/bounce_ball.cpp:80
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : space key\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
 "an ammo per turn"
@@ -1435,17 +1554,21 @@ msgstr ""
 "Pafo: spacetosignoUnu pafo vice"
 
 #: src/network/net_error_msg.cpp:35
-msgid "Unable to contact host."
+#, fuzzy
+#| msgid "Unable to contact host."
+msgid "Unable to contact the host."
 msgstr "Ne eblas kontakti foran komputilon."
 
 #: src/map/maps_list.cpp:237
-#, c-format
-msgid "Unable to open maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open maps directory (%s)!"
+msgid "Unable to open the maps directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de mapoj (%s)!"
 
 #: src/map/maps_list.cpp:249
-#, c-format
-msgid "Unable to open personal maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open personal maps directory (%s)!"
+msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de personaj mapoj (%s)!"
 
 #: src/network/net_error_msg.cpp:38
@@ -1478,11 +1601,15 @@ msgstr[0] "Atendu! %i ludanto ankoraŭ ne pretas!"
 msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 
 #: src/menu/network_menu.cpp:450
-msgid "Waiting for server, all you can do is cancel or chat!"
+#, fuzzy
+#| msgid "Waiting for server, all you can do is cancel or chat!"
+msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
 
 #: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire / Bonus box: falls fast"
+#, fuzzy
+#| msgid "Weapon: Fire / Bonus box: falls fast"
+msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 
 #. Initialization of teams' energy
@@ -1535,7 +1662,9 @@ msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
 #: src/menu/network_menu.cpp:339
-msgid "You are alone :-/"
+#, fuzzy
+#| msgid "You are alone :-/"
+msgid "You are alone. :-/"
 msgstr "Vi estas sola:-/"
 
 #: src/menu/network_menu.cpp:251
@@ -1547,15 +1676,21 @@ msgid "You are the new turn master!"
 msgstr ""
 
 #: src/map/maps_list.cpp:258
-msgid "You need at least one valid map !"
+#, fuzzy
+#| msgid "You need at least one valid map !"
+msgid "You need at least one valid map!"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 
 #: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
-msgid "You need at least two valid teams !"
+#, fuzzy
+#| msgid "You need at least two valid teams !"
+msgid "You need at least two valid teams!"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 
 #: src/menu/network_menu.cpp:226
-msgid "You won't be able to play before selecting a team !"
+#, fuzzy
+#| msgid "You won't be able to play before selecting a team !"
+msgid "You won't be able to play before selecting a team!"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 
 #: src/weapon/weapon_launcher.cpp:491
@@ -1567,10 +1702,15 @@ msgid "aka"
 msgstr "alinome"
 
 #: src/weapon/air_attack.cpp:218
+#, fuzzy
+#| msgid ""
+#| "attack direction : Left/Right\n"
+#| "Bombing : left clic on target\n"
+#| "a bombing per turn"
 msgid ""
 "attack direction : Left/Right\n"
-"Bombing : left clic on target\n"
-"a bombing per turn"
+"Bombing : left click on the target\n"
+"one bombing per turn"
 msgstr ""
 "Atakdirekto: Maldekstren/Dekstren\n"
 "Bombado: Maldekstrklaku sur celo\n"

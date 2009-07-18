@@ -300,9 +300,12 @@ msgstr[0] "%s 隊得到了 %u 降落傘！"
 msgstr[1] "%s 隊得到了 %u 降落傘！"
 
 #: src/weapon/polecat.cpp:182
-#, c-format
-msgid "%s team has won %u polecat! You have you're gas mask, right ?"
-msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
+#, fuzzy, c-format
+#| msgid "%s team has won %u polecat! You have you're gas mask, right ?"
+#| msgid_plural ""
+#| "%s team has won %u polecats! You have you're gas mask, right ?"
+msgid "%s team has won %u polecat! You have your gas mask, right?"
+msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "%s 隊得到了 %u 臭鼬！帶上面具嘍？"
 msgstr[1] "%s 隊得到了 %u 臭鼬！帶上面具嘍？"
 
@@ -411,9 +414,12 @@ msgid "(unlimited)"
 msgstr "(無限的)"
 
 #: src/menu/options_menu.cpp:449
-#, c-format
+#, fuzzy, c-format
+#| msgid ""
+#| "A new version %s is available, while your version is %s.You may want to "
+#| "check whether an update is available for your OS!"
 msgid ""
-"A new version %s is available, while your version is %s.You may want to "
+"A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 "新版本 %s 可用，您的版本是 %s。也許您想查下，是否有針對您的作業系統的升級。"
@@ -495,7 +501,9 @@ msgid "Bounce Ball"
 msgstr "彈力球"
 
 #: src/weapon/supertux.cpp:186
-msgid "Bye bye tux..."
+#, fuzzy
+#| msgid "Bye bye tux..."
+msgid "Bye bye Tux..."
 msgstr "Bye bye 企鵝…"
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
@@ -522,23 +530,26 @@ msgstr "打不開個人團隊目錄(%s)!"
 
 #: src/menu/help_menu.cpp:90
 #, fuzzy
-msgid "Center camera to character"
+msgid "Center the camera on the character"
 msgstr "角色數目"
 
 #: src/menu/help_menu.cpp:89
-msgid "Change active character"
-msgstr ""
+#, fuzzy
+msgid "Change the active character"
+msgstr "角色數目"
 
 #: src/menu/help_menu.cpp:79
-msgid "Change aim angle"
+#, fuzzy
+#| msgid "Change aim angle"
+msgid "Change the aim angle"
 msgstr "改變瞄準角度"
 
 #: src/menu/help_menu.cpp:73
-msgid "Change weapon category"
+msgid "Change the weapon category"
 msgstr ""
 
 #: src/menu/help_menu.cpp:78
-msgid "Change weapon countdown"
+msgid "Change the weapon countdown"
 msgstr ""
 
 #: src/menu/options_menu.cpp:149
@@ -564,8 +575,9 @@ msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:77
-msgid "Click: Center camera on character"
-msgstr ""
+#, fuzzy
+msgid "Click: Center the camera on the character"
+msgstr "角色數目"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:120
@@ -635,7 +647,7 @@ msgid "Displays this message"
 msgstr "顯示此訊息"
 
 #: src/menu/help_menu.cpp:76
-msgid "Drag&drop: Move camera"
+msgid "Drag&drop: Move the camera"
 msgstr ""
 
 #. some death mode options
@@ -717,14 +729,16 @@ msgid ""
 msgstr "錯誤: 無法聯繫索引伺服器搜尋游戲"
 
 #: src/menu/network_connection_menu.cpp:373
-msgid "Error: Unable to start server"
+#, fuzzy
+#| msgid "Error: Unable to start server"
+msgid "Error: Unable to start the server"
 msgstr "錯誤：無法開始伺服器"
 
 #: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
+"configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
@@ -733,7 +747,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
+"configuration: TCP Port %u must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
@@ -776,7 +790,7 @@ msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛發射器"
 
 #: src/menu/options_menu.cpp:123
-msgid "Graphic"
+msgid "Graphics"
 msgstr ""
 
 #: src/weapon/grapple.cpp:96
@@ -829,21 +843,14 @@ msgstr ""
 msgid "Host a game"
 msgstr "建立遊戲"
 
-#: src/weapon/auto_bazooka.cpp:224
-msgid ""
-"How to use it : left click on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"如何使用：滑鼠左鍵點擊目標\n"
-"初始射擊角度：上/下\n"
-"開火：按住白字元鍵積攢到需要的力量\n"
-"每回合一個彈夾"
-
 #: src/weapon/blowtorch.cpp:64
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "Angle : Up/Down\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
@@ -852,16 +859,42 @@ msgstr ""
 "每回合一個彈夾"
 
 #: src/weapon/airhammer.cpp:75
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
 "如何使用：按住白字元鍵\n"
 "每回合一個彈夾"
 
-#: src/weapon/anvil.cpp:136
+#: src/weapon/auto_bazooka.cpp:224
+#, fuzzy
+#| msgid ""
+#| "How to use it : left click on target\n"
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : left click on target\n"
+"How to use it : left click on the target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep the space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"如何使用：滑鼠左鍵點擊目標\n"
+"初始射擊角度：上/下\n"
+"開火：按住白字元鍵積攢到需要的力量\n"
+"每回合一個彈夾"
+
+#: src/weapon/anvil.cpp:136
+#, fuzzy
+#| msgid ""
+#| "Howto use it : left click on target\n"
+#| "an ammo per turn"
+msgid ""
+"How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
 "如何使用：滑鼠左鍵點擊目標\n"
@@ -874,7 +907,7 @@ msgstr "快點，你也太慢了！！"
 #: src/main.cpp:287
 #, fuzzy
 msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
+"If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr "假如你發現bug或想要甚麼遊戲特徵，請發英文電郵給我們："
 
@@ -885,9 +918,14 @@ msgstr "初始耐久"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:121
+#, fuzzy
+#| msgid ""
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "初始射擊角度：上/下\n"
@@ -1032,12 +1070,12 @@ msgstr "最暴力的"
 
 #: src/menu/help_menu.cpp:86
 #, fuzzy
-msgid "Move camera with mouse or arrows"
+msgid "Move the camera with mouse or arrows"
 msgstr "使用滑鼠或箭頭移動視野"
 
 #: src/menu/help_menu.cpp:80
 #, fuzzy
-msgid "Move character"
+msgid "Move the character"
 msgstr "降落傘"
 
 #: src/menu/options_menu.cpp:213
@@ -1090,7 +1128,7 @@ msgid "Number of teams:"
 msgstr "隊伍數量："
 
 #: src/menu/help_menu.cpp:82
-msgid "On a character: Changes active one"
+msgid "On a character: Select it"
 msgstr ""
 
 #: src/menu/help_menu.cpp:81
@@ -1109,10 +1147,6 @@ msgstr "選項功能表"
 #: src/weapon/parachute.cpp:68
 msgid "Parachute"
 msgstr "降落傘"
-
-#: src/weapon/parachute.cpp:101
-msgid "Parachute is activated automatically."
-msgstr "降落傘自動開啟。"
 
 #: src/menu/network_connection_menu.cpp:122
 #: src/menu/network_connection_menu.cpp:160
@@ -1177,11 +1211,15 @@ msgid "Random map"
 msgstr "隨機讀取地圖"
 
 #: src/game/config.cpp:351
-msgid "Reading default config file"
+#, fuzzy
+#| msgid "Reading default config file"
+msgid "Reading the default config file"
 msgstr "正讀取預設設定檔案"
 
 #: src/game/config.cpp:400
-msgid "Reading personal config file"
+#, fuzzy
+#| msgid "Reading personal config file"
+msgid "Reading the personal config file"
 msgstr "正讀取個人設定檔案"
 
 #: src/menu/options_menu.cpp:119
@@ -1229,15 +1267,19 @@ msgstr "獵槍"
 
 #: src/menu/help_menu.cpp:83
 #, fuzzy
-msgid "Show weapons menu"
+msgid "Show the weapons menu"
 msgstr "選項功能表"
 
 #: src/menu/help_menu.cpp:69
-msgid "Show/hide interface"
+#, fuzzy
+#| msgid "Show/hide interface"
+msgid "Show/hide the interface"
 msgstr "顯示/隱藏 界面"
 
 #: src/menu/help_menu.cpp:88
-msgid "Show/hide minimap"
+#, fuzzy
+#| msgid "Show/hide minimap"
+msgid "Show/hide the minimap"
 msgstr "顯示/隱藏 小地圖"
 
 #: src/weapon/skip_turn.cpp:47
@@ -1270,12 +1312,20 @@ msgstr "有人在箱子裡布置了炸彈作禮物！"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 沒人等你."
 
-#: src/menu/network_connection_menu.cpp:324
 #: tools/servers/game_server/server.cpp:257
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
+"can download an updated version on http://www.wormux.org/wiki/download.php"
+msgstr ""
+"抱歉，不支援你的版本。支援的版本有 %s。你可以到 http://www.wormux.org/wiki/"
+"download.php 下載更新版本。"
+
+#: src/menu/network_connection_menu.cpp:324
+#, fuzzy, c-format
+msgid ""
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 "抱歉，不支援你的版本。支援的版本有 %s。你可以到 http://www.wormux.org/wiki/"
 "download.php 下載更新版本。"
@@ -1322,7 +1372,7 @@ msgstr "注射器"
 
 #: src/menu/help_menu.cpp:72
 #, fuzzy
-msgid "Talk in network battle"
+msgid "Talk in network battles"
 msgstr "傳回戰鬥"
 
 #: src/menu/results_menu.cpp:426
@@ -1356,11 +1406,15 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "集束炸彈離開戰場。"
 
 #: src/weapon/gnu.cpp:144
-msgid "The Gnu left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Gnu left the battlefield before exploding"
+msgid "The Gnu left the battlefield before exploding!"
 msgstr "Gnu-野牛離開戰場"
 
 #: src/weapon/polecat.cpp:151
-msgid "The Polecat left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Polecat left the battlefield before exploding"
+msgid "The Polecat left the battlefield before exploding!"
 msgstr "臭鼬離開了戰場"
 
 #: src/weapon/auto_bazooka.cpp:178
@@ -1368,7 +1422,9 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "制導火箭離開戰場…"
 
 #: src/weapon/bounce_ball.cpp:62
-msgid "The ball left the battlefield before exploding"
+#, fuzzy
+#| msgid "The ball left the battlefield before exploding"
+msgid "The ball left the battlefield before exploding!"
 msgstr "球膨脹前離開戰場"
 
 #: src/network/network_client.cpp:96
@@ -1383,7 +1439,9 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "連線逾時。請檢查防火牆！"
 
 #: src/weapon/disco_grenade.cpp:127
-msgid "The disco grenade has left the dance floor before exploding"
+#, fuzzy
+#| msgid "The disco grenade has left the dance floor before exploding"
+msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "disco榴彈離開舞池前發生爆炸"
 
 #: src/game/game.cpp:491
@@ -1391,12 +1449,22 @@ msgid "The game was interrupted because you got disconnected."
 msgstr "您斷線了。"
 
 #: src/weapon/grenade.cpp:50
-msgid "The grenade left the battlefield before exploding"
+#, fuzzy
+#| msgid "The grenade left the battlefield before exploding"
+msgid "The grenade left the battlefield before exploding!"
 msgstr "手榴彈在爆炸前離開了戰場"
 
 #: src/menu/network_menu.cpp:336
-msgid "The others are waiting for you! Wake up :-)"
+#, fuzzy
+#| msgid "The others are waiting for you! Wake up :-)"
+msgid "The others are waiting for you! Wake up! :-)"
 msgstr "別人在等你！快醒吧 :-)"
+
+#: src/weapon/parachute.cpp:101
+#, fuzzy
+#| msgid "Parachute is activated automatically."
+msgid "The parachute is activated automatically."
+msgstr "降落傘自動開啟。"
 
 #: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
@@ -1424,10 +1492,16 @@ msgid "Time"
 msgstr "時間"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "時間設定：滑鼠滾輪或 Page Up/Down\n"
@@ -1436,8 +1510,14 @@ msgstr ""
 "每回合一個彈夾"
 
 #: src/weapon/bounce_ball.cpp:80
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : space key\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
 "an ammo per turn"
@@ -1448,17 +1528,21 @@ msgstr ""
 "每回合一個彈夾"
 
 #: src/network/net_error_msg.cpp:35
-msgid "Unable to contact host."
+#, fuzzy
+#| msgid "Unable to contact host."
+msgid "Unable to contact the host."
 msgstr "連不上主機。"
 
 #: src/map/maps_list.cpp:237
-#, c-format
-msgid "Unable to open maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open maps directory (%s)!"
+msgid "Unable to open the maps directory (%s)!"
 msgstr "打不開地圖目錄(%s)！"
 
 #: src/map/maps_list.cpp:249
-#, c-format
-msgid "Unable to open personal maps directory (%s)!"
+#, fuzzy, c-format
+#| msgid "Unable to open personal maps directory (%s)!"
+msgid "Unable to open the personal maps directory (%s)!"
 msgstr "無法開啟個人地圖目錄 (%s)！"
 
 #: src/network/net_error_msg.cpp:38
@@ -1492,11 +1576,11 @@ msgstr[1] "請等待！玩家%i沒准備好！"
 
 #: src/menu/network_menu.cpp:450
 #, fuzzy
-msgid "Waiting for server, all you can do is cancel or chat!"
+msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服務吧，現在先聊天！"
 
 #: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire / Bonus box: falls fast"
+msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr ""
 
 #. Initialization of teams' energy
@@ -1551,7 +1635,9 @@ msgid "Wrong team!"
 msgstr ""
 
 #: src/menu/network_menu.cpp:339
-msgid "You are alone :-/"
+#, fuzzy
+#| msgid "You are alone :-/"
+msgid "You are alone. :-/"
 msgstr "你是孤單的 :-/"
 
 #: src/menu/network_menu.cpp:251
@@ -1563,15 +1649,21 @@ msgid "You are the new turn master!"
 msgstr ""
 
 #: src/map/maps_list.cpp:258
-msgid "You need at least one valid map !"
+#, fuzzy
+#| msgid "You need at least one valid map !"
+msgid "You need at least one valid map!"
 msgstr "你需要可用的地圖！"
 
 #: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
-msgid "You need at least two valid teams !"
+#, fuzzy
+#| msgid "You need at least two valid teams !"
+msgid "You need at least two valid teams!"
 msgstr "至少有2組才能開始！"
 
 #: src/menu/network_menu.cpp:226
-msgid "You won't be able to play before selecting a team !"
+#, fuzzy
+#| msgid "You won't be able to play before selecting a team !"
+msgid "You won't be able to play before selecting a team!"
 msgstr "沒有隊伍，就不會有戰斗!"
 
 #: src/weapon/weapon_launcher.cpp:491
@@ -1584,10 +1676,15 @@ msgid "aka"
 msgstr "aka"
 
 #: src/weapon/air_attack.cpp:218
+#, fuzzy
+#| msgid ""
+#| "attack direction : Left/Right\n"
+#| "Bombing : left clic on target\n"
+#| "a bombing per turn"
 msgid ""
 "attack direction : Left/Right\n"
-"Bombing : left clic on target\n"
-"a bombing per turn"
+"Bombing : left click on the target\n"
+"one bombing per turn"
 msgstr ""
 "攻擊方向：左/右\n"
 "爆炸：左鍵點擊目標\n"

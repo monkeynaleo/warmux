@@ -234,7 +234,7 @@ MapsList::MapsList()
     while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
     CloseFolder(f);
   } else {
-    Error (Format(_("Unable to open maps directory (%s)!"), dirname.c_str()));
+    Error (Format(_("Unable to open the maps directory (%s)!"), dirname.c_str()));
   }
 
   // Load personal maps
@@ -246,7 +246,7 @@ MapsList::MapsList()
     CloseFolder(f);
   } else {
         std::cerr << std::endl
-          << Format(_("Unable to open personal maps directory (%s)!"),
+          << Format(_("Unable to open the personal maps directory (%s)!"),
                       dirname.c_str())
           << std::endl;
   }
@@ -255,7 +255,7 @@ MapsList::MapsList()
 
   // On a au moins une carte ?
   if (lst.size() < 1)
-    Error(_("You need at least one valid map !"));
+    Error(_("You need at least one valid map!"));
 
   /* Get the full set of map ordered */
   std::sort(lst.begin(), lst.end(), compareMaps);

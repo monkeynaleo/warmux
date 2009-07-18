@@ -148,7 +148,7 @@ void Polecat::Refresh()
 
 void Polecat::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Polecat left the battlefield before exploding"));
+  GameMessages::GetInstance()->Add (_("The Polecat left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -179,8 +179,8 @@ WeaponProjectile * PolecatLauncher::GetProjectileInstance()
 std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
-            "%s team has won %u polecat! You have you're gas mask, right ?",
-            "%s team has won %u polecats! You have you're gas mask, right ?",
+            "%s team has won %u polecat! You have your gas mask, right?",
+            "%s team has won %u polecats! You have your gas mask, right?",
             items_count), TeamName, items_count);
 }
 

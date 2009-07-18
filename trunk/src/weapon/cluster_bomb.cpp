@@ -185,7 +185,7 @@ ClusterLauncher::ClusterLauncher() :
 void ClusterLauncher::UpdateTranslationStrings()
 {
   m_name = _("Cluster Bomb");
-  m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  m_help = _("Timeout : Mouse wheel or Page Up/Down\nAngle : Up/Down\nFire : keep the space key pressed until the desired strength\nan ammo per turn");
 }
 
 WeaponProjectile * ClusterLauncher::GetProjectileInstance()

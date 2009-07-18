@@ -118,7 +118,7 @@ RiotBomb::RiotBomb() :
 void RiotBomb::UpdateTranslationStrings()
 {
   m_name = _("Riot Bomb");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep the space key pressed until the desired strength\nan ammo per turn");
 }
 
 WeaponProjectile * RiotBomb::GetProjectileInstance()

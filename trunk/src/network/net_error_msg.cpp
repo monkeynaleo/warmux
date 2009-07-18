@@ -32,7 +32,7 @@ const std::string NetworkErrorToString(connection_state_t err)
     msg = _("Connected !");
     break;
   case CONN_BAD_HOST:
-    msg = _("Unable to contact host.");
+    msg = _("Unable to contact the host.");
     break;
   case CONN_BAD_PORT:
     msg = _("Unable to use this port!");

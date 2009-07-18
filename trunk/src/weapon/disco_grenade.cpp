@@ -124,7 +124,7 @@ void DiscoGrenade::Refresh()
 
 void DiscoGrenade::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding"));
+  GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 
   disco_sound.Stop();
