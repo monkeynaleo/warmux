@@ -60,32 +60,32 @@ msgstr "צוות %s - מרוחק"
 msgid "%s fps"
 msgstr "%s תמונות בשניה"
 
-#: src/game/game.cpp:724
+#: src/game/game.cpp:726
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s מאבד עצמו לדעת!"
 
-#: src/game/game.cpp:757
+#: src/game/game.cpp:759
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) נהרג."
 
-#: src/game/game.cpp:715
+#: src/game/game.cpp:717
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s נפל למים."
 
-#: src/game/game.cpp:709
+#: src/game/game.cpp:711
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s נפל מן המפה!"
 
-#: src/game/game.cpp:730
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:739
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s מת כי הוא שלומיאל!"
@@ -97,7 +97,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s זכה ב-%u נקודת אנרגיה!"
 msgstr[1] "%s זכה ב-%u נקודות אנרגיה!"
 
-#: src/game/game.cpp:749
+#: src/game/game.cpp:751
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s הוא פסיכופת, הוא הרג חבר בצוות %s!"
@@ -289,9 +289,9 @@ msgstr[0] "צוות %s זכה במצנח!"
 msgstr[1] "צוות %s זכה ב-%u מצנחים!"
 
 #: src/weapon/polecat.cpp:181
-#, c-format
-msgid "%s team has won %u polecat! You have you're gas mask, right ?"
-msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
+#, fuzzy, c-format
+msgid "%s team has won %u polecat! You have your gas mask, right?"
+msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "צוות %s זכה בחמוס! שמרת על מסכת הגז שלך?"
 msgstr[1] "צוות %s זכה ב-%u חמוסים! שמרת על מסכת הגז שלך?"
 
@@ -371,7 +371,7 @@ msgstr[1] "צוות %s זכה ב-%u משגרי טאקס! אף פעם לא ראי
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:745
+#: src/game/game.cpp:747
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -394,10 +394,10 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
-"A new version %s is available, while your version is %s.You may want to "
+"A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgstr "פטיש אוויר"
 msgid "All teams"
 msgstr "כל הצוותים"
 
-#: src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:70
 #, fuzzy
 msgid "Always"
 msgstr "שחק"
@@ -460,7 +460,7 @@ msgstr "אלת בייסבול"
 msgid "Bazooka"
 msgstr "בזוקה"
 
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:71
 #, fuzzy
 msgid "Before action"
 msgstr "טלפורטציה"
@@ -478,7 +478,8 @@ msgid "Bounce Ball"
 msgstr "כדור מקפץ"
 
 #: src/weapon/supertux.cpp:176
-msgid "Bye bye tux..."
+#, fuzzy
+msgid "Bye bye Tux..."
 msgstr "היה שלום, טאקס..."
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
@@ -505,23 +506,24 @@ msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (
 
 #: src/menu/help_menu.cpp:90
 #, fuzzy
-msgid "Center camera to character"
+msgid "Center the camera on the character"
 msgstr "מספר דמויותe"
 
 #: src/menu/help_menu.cpp:89
-msgid "Change active character"
-msgstr ""
+#, fuzzy
+msgid "Change the active character"
+msgstr "מספר דמויותe"
 
 #: src/menu/help_menu.cpp:79
-msgid "Change aim angle"
+msgid "Change the aim angle"
 msgstr ""
 
 #: src/menu/help_menu.cpp:73
-msgid "Change weapon category"
+msgid "Change the weapon category"
 msgstr ""
 
 #: src/menu/help_menu.cpp:78
-msgid "Change weapon countdown"
+msgid "Change the weapon countdown"
 msgstr ""
 
 #: src/menu/options_menu.cpp:149
@@ -529,7 +531,7 @@ msgstr ""
 msgid "Character names:"
 msgstr "מצנח"
 
-#: src/menu/game_mode_editor.cpp:61
+#: src/menu/game_mode_editor.cpp:74
 #, fuzzy
 msgid "Character switching"
 msgstr "מצנח"
@@ -547,8 +549,9 @@ msgid "Classic"
 msgstr ""
 
 #: src/menu/help_menu.cpp:77
-msgid "Click: Center camera on character"
-msgstr ""
+#, fuzzy
+msgid "Click: Center the camera on the character"
+msgstr "מספר דמויותe"
 
 #. Client Mode
 #: src/menu/network_menu.cpp:120
@@ -607,7 +610,7 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "Credits"
 msgstr "קרדיטים"
 
-#: src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:100
 msgid "Damage per turn during death mode"
 msgstr ""
 
@@ -620,15 +623,15 @@ msgid "Displays this message"
 msgstr ""
 
 #: src/menu/help_menu.cpp:76
-msgid "Drag&drop: Move camera"
+msgid "Drag&drop: Move the camera"
 msgstr ""
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:94
 msgid "Duration before death mode"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:50
+#: src/menu/game_mode_editor.cpp:63
 msgid "Duration of a turn"
 msgstr "משך תור"
 
@@ -636,7 +639,7 @@ msgstr "משך תור"
 msgid "Dynamite"
 msgstr "דינמיט"
 
-#: src/game/game.cpp:274
+#: src/game/game.cpp:276
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
@@ -675,7 +678,7 @@ msgstr "שגיאה בעת טעינת תיקיית \"%s\": לא ניתן לאחס
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "שגיאה בעת טעינת תיקיית \"%s\": לא ניתן לאחסן קובץ הגדרות."
 
-#: src/game/game.cpp:142
+#: src/game/game.cpp:144
 #, c-format
 msgid ""
 "Error:\n"
@@ -702,14 +705,15 @@ msgid ""
 msgstr "שגיאה: לא ניתן ליצור קשר עם שרת אינדקסים כדי לחפש משחק באינטרנט"
 
 #: src/menu/network_connection_menu.cpp:373
-msgid "Error: Unable to start server"
+#, fuzzy
+msgid "Error: Unable to start the server"
 msgstr "שגיאה: לא ניתן להפעיל את השרת"
 
 #: src/menu/network_connection_menu.cpp:367
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
+"configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
@@ -741,7 +745,7 @@ msgstr "Plein Ã©cran ?"
 msgid "Game"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:46
+#: src/menu/game_mode_editor.cpp:59
 #, fuzzy
 msgid "Game mode"
 msgstr "מצב לקוח"
@@ -755,14 +759,14 @@ msgid "Gnu Launcher"
 msgstr "משגר גנו"
 
 #: src/menu/options_menu.cpp:123
-msgid "Graphic"
+msgid "Graphics"
 msgstr ""
 
 #: src/weapon/grapple.cpp:165
 msgid "Grapple"
 msgstr "וו אחיזה"
 
-#: src/menu/game_mode_editor.cpp:93
+#: src/menu/game_mode_editor.cpp:106
 msgid "Gravity"
 msgstr ""
 
@@ -806,8 +810,9 @@ msgid "Host a game"
 msgstr "ארח משחק"
 
 #: src/weapon/blowtorch.cpp:63
+#, fuzzy
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
@@ -816,18 +821,20 @@ msgstr ""
 "תחמושת לתור"
 
 #: src/weapon/airhammer.cpp:74
+#, fuzzy
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
 "לשימוש: החזק את מקש הרווח לחוץ\n"
 "תחמושת לתור"
 
 #: src/weapon/auto_bazooka.cpp:220
+#, fuzzy
 msgid ""
-"Howto use it : left clic on target\n"
+"How to use it : left click on the target\n"
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
@@ -836,8 +843,9 @@ msgstr ""
 "תחמושת לתור"
 
 #: src/weapon/anvil.cpp:140
+#, fuzzy
 msgid ""
-"Howto use it : left click on target\n"
+"How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
 "לשימוש: קליק שמאלי על המטרה\n"
@@ -848,23 +856,25 @@ msgid "Hurry up, you are too slow !!"
 msgstr "קדימה, אתה איטי מדי!!"
 
 #: src/main.cpp:287
+#, fuzzy
 msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
+"If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr ""
 "אם מצאת באג, או אם אתה מעוניין לבקש הוספת תכונה חדשה, שלח אלינו מסר(באנגלית "
 "בבקשה):"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:79
 msgid "Initial energy"
 msgstr "אנרגיה ראשונית"
 
 #: src/weapon/bazooka.cpp:123 src/weapon/cluzooka.cpp:389
 #: src/weapon/riot_bomb.cpp:120
+#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "זווית ירי ראשונית: מעלה-מטה\n"
@@ -887,7 +897,7 @@ msgstr "מאתחל סאונד"
 msgid "Initialise teams"
 msgstr "מאתחל צוותים"
 
-#: src/game/game.cpp:593
+#: src/game/game.cpp:595
 msgid "It's a present!"
 msgstr "קיבלת מתנה!"
 
@@ -962,7 +972,7 @@ msgstr "מפות"
 msgid "Master mode"
 msgstr "מצב לקוח"
 
-#: src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:85
 #, fuzzy
 msgid "Max energy"
 msgstr "אנרגיה ראשונית"
@@ -1005,12 +1015,12 @@ msgid "Most violent"
 msgstr "האלים ביותר"
 
 #: src/menu/help_menu.cpp:86
-msgid "Move camera with mouse or arrows"
+msgid "Move the camera with mouse or arrows"
 msgstr ""
 
 #: src/menu/help_menu.cpp:80
 #, fuzzy
-msgid "Move character"
+msgid "Move the character"
 msgstr "מצנח"
 
 #: src/menu/options_menu.cpp:213
@@ -1025,7 +1035,7 @@ msgstr "מוסיקה?"
 msgid "Network Game"
 msgstr "משחק רשת"
 
-#: src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:72
 msgid "Never"
 msgstr ""
 
@@ -1062,7 +1072,7 @@ msgid "Number of teams:"
 msgstr "מספר צוותים:"
 
 #: src/menu/help_menu.cpp:82
-msgid "On a character: Changes active one"
+msgid "On a character: Select it"
 msgstr ""
 
 #: src/menu/help_menu.cpp:81
@@ -1080,10 +1090,6 @@ msgstr "תפריט אפשרויות"
 #: src/weapon/parachute.cpp:66
 msgid "Parachute"
 msgstr "מצנח"
-
-#: src/weapon/parachute.cpp:99
-msgid "Parachute is activated automatically."
-msgstr "המצנח מופעל אוטומטית."
 
 #: src/menu/network_connection_menu.cpp:122
 #: src/menu/network_connection_menu.cpp:160
@@ -1147,11 +1153,13 @@ msgid "Random map"
 msgstr "מפה אקראית"
 
 #: src/game/config.cpp:350
-msgid "Reading default config file"
+#, fuzzy
+msgid "Reading the default config file"
 msgstr "קורא הגדרות מקובץ ברירת מחדל"
 
 #: src/game/config.cpp:399
-msgid "Reading personal config file"
+#, fuzzy
+msgid "Reading the personal config file"
 msgstr "קורא הגדרות מקובץ אישי"
 
 #: src/menu/options_menu.cpp:119
@@ -1199,15 +1207,15 @@ msgstr "שוטגאן"
 
 #: src/menu/help_menu.cpp:83
 #, fuzzy
-msgid "Show weapons menu"
+msgid "Show the weapons menu"
 msgstr "תפריט אפשרויות"
 
 #: src/menu/help_menu.cpp:69
-msgid "Show/hide interface"
+msgid "Show/hide the interface"
 msgstr ""
 
 #: src/menu/help_menu.cpp:88
-msgid "Show/hide minimap"
+msgid "Show/hide the minimap"
 msgstr ""
 
 #: src/weapon/skip_turn.cpp:46
@@ -1241,8 +1249,8 @@ msgstr "עמך הסליחה, אין כרגע משחק הממתין לשחקני�
 #: src/menu/network_connection_menu.cpp:324
 #, c-format
 msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
 #: src/menu/options_menu.cpp:251
@@ -1263,7 +1271,7 @@ msgstr "תדירות הסאונד"
 msgid "Sounds"
 msgstr "סאונד"
 
-#: src/game/game.cpp:113
+#: src/game/game.cpp:115
 msgid "Starting a new game"
 msgstr "מתחיל משחק חדש"
 
@@ -1285,7 +1293,7 @@ msgstr "מזרק"
 
 #: src/menu/help_menu.cpp:72
 #, fuzzy
-msgid "Talk in network battle"
+msgid "Talk in network battles"
 msgstr "בחזרה אל הקרב"
 
 #: src/menu/results_menu.cpp:426
@@ -1320,11 +1328,13 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "פצצת המצרר יצאה משדה הקרב לפני שהתפוצצה."
 
 #: src/weapon/gnu.cpp:143
-msgid "The Gnu left the battlefield before exploding"
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding!"
 msgstr "הגנו יצא משדה הקרב לפני שהתפוצץ."
 
 #: src/weapon/polecat.cpp:150
-msgid "The Polecat left the battlefield before exploding"
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding!"
 msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 
 #: src/weapon/auto_bazooka.cpp:174
@@ -1332,7 +1342,8 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 
 #: src/weapon/bounce_ball.cpp:71
-msgid "The ball left the battlefield before exploding"
+#, fuzzy
+msgid "The ball left the battlefield before exploding!"
 msgstr "הכדור המקפץ יצא משדה הקרב לפני שהתפוצץ."
 
 #: src/network/network_client.cpp:96
@@ -1347,20 +1358,28 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "זמן ההמתנה לחיבור עבר. בדוק אם אין חומת-אש שמפריעה!"
 
 #: src/weapon/disco_grenade.cpp:126
-msgid "The disco grenade has left the dance floor before exploding"
+#, fuzzy
+msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "רימון הדיסקו יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/game/game.cpp:488
+#: src/game/game.cpp:490
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
 #: src/weapon/grenade.cpp:57
-msgid "The grenade left the battlefield before exploding"
+#, fuzzy
+msgid "The grenade left the battlefield before exploding!"
 msgstr "הרימון יצא משדה הקרב לפני שהתפוצץ."
 
 #: src/menu/network_menu.cpp:336
-msgid "The others are waiting for you! Wake up :-)"
+#, fuzzy
+msgid "The others are waiting for you! Wake up! :-)"
 msgstr "כולם מחכים רק לך! זמן לקום :-)"
+
+#: src/weapon/parachute.cpp:99
+#, fuzzy
+msgid "The parachute is activated automatically."
+msgstr "המצנח מופעל אוטומטית."
 
 #: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:335
 #: src/weapon/riot_bomb.cpp:85
@@ -1389,10 +1408,11 @@ msgid "Time"
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
+#, fuzzy
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "תום הזמן: גלגל העכבר או Page Up/Down\n"
@@ -1401,8 +1421,9 @@ msgstr ""
 "תחמושת לתור"
 
 #: src/weapon/bounce_ball.cpp:89
+#, fuzzy
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
 "an ammo per turn"
@@ -1413,17 +1434,18 @@ msgstr ""
 "תחמושת לתור"
 
 #: src/network/net_error_msg.cpp:35
-msgid "Unable to contact host."
+#, fuzzy
+msgid "Unable to contact the host."
 msgstr "לא ניתן ליצור קשר עם השרת."
 
 #: src/map/maps_list.cpp:237
-#, c-format
-msgid "Unable to open maps directory (%s)!"
+#, fuzzy, c-format
+msgid "Unable to open the maps directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית המפות (%s)!"
 
 #: src/map/maps_list.cpp:249
-#, c-format
-msgid "Unable to open personal maps directory (%s)!"
+#, fuzzy, c-format
+msgid "Unable to open the personal maps directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית המפות האישית (%s)!"
 
 #: src/network/net_error_msg.cpp:38
@@ -1443,7 +1465,7 @@ msgstr "(ללא הגבלה)"
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1456,11 +1478,12 @@ msgstr[0] "רגע! שחקן %i אינו מוכן עדיין!"
 msgstr[1] "רגע! %i שחקנים אינם מוכנים עדיין!"
 
 #: src/menu/network_menu.cpp:450
-msgid "Waiting for server, all you can do is cancel or chat!"
+#, fuzzy
+msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
 #: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire / Bonus box: falls fast"
+msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr ""
 
 #. Initialization of teams' energy
@@ -1478,7 +1501,7 @@ msgstr "אתר: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:754
+#: src/game/game.cpp:756
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
@@ -1513,7 +1536,8 @@ msgid "Wrong team!"
 msgstr ""
 
 #: src/menu/network_menu.cpp:339
-msgid "You are alone :-/"
+#, fuzzy
+msgid "You are alone. :-/"
 msgstr "אתה לבדך :-/"
 
 #: src/menu/network_menu.cpp:251
@@ -1525,15 +1549,18 @@ msgid "You are the new turn master!"
 msgstr ""
 
 #: src/map/maps_list.cpp:258
-msgid "You need at least one valid map !"
+#, fuzzy
+msgid "You need at least one valid map!"
 msgstr "אתה זקוק למפה תקינה אחת לפחות!"
 
 #: src/game/game_init.cpp:131 src/team/teams_list.cpp:176
-msgid "You need at least two valid teams !"
+#, fuzzy
+msgid "You need at least two valid teams!"
 msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 
 #: src/menu/network_menu.cpp:226
-msgid "You won't be able to play before selecting a team !"
+#, fuzzy
+msgid "You won't be able to play before selecting a team!"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
 #: src/weapon/weapon_launcher.cpp:502
@@ -1545,10 +1572,11 @@ msgid "aka"
 msgstr "המכונה"
 
 #: src/weapon/air_attack.cpp:219
+#, fuzzy
 msgid ""
 "attack direction : Left/Right\n"
-"Bombing : left clic on target\n"
-"a bombing per turn"
+"Bombing : left click on the target\n"
+"one bombing per turn"
 msgstr ""
 "כיוון התקפה: שמאל-ימין\n"
 "התקפה: קליק שמאלי על המטרה\n"
@@ -1596,22 +1624,16 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 #~ msgid "HOME directory (environment variable $HOME) could not be found!"
 #~ msgstr "לא ניתן למצוא את תיקיית הבית (משתנה סביבה $HOME)!"
 
+#~ msgid "Tools"
+#~ msgstr "כלים"
+
 #, fuzzy
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "שגיאה ב-%s:%lu"
-
-#~ msgid "Network initialization"
-#~ msgstr "אתחול רשת"
-
-#~ msgid "Unnamed"
-#~ msgstr "ללא שם"
+#~ msgid "Head commander:"
+#~ msgstr "מפקד: "
 
 #, fuzzy
 #~ msgid "Player name"
 #~ msgstr "שם השחקן?"
-
-#~ msgid "Tools"
-#~ msgstr "כלים"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
@@ -1624,6 +1646,10 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "Voulez-vous vraiment quitter ? (O/N)"
+
+#, fuzzy
+#~ msgid "Error in %s:%lu (Wormux %s) : %s"
+#~ msgstr "שגיאה ב-%s:%lu"
 
 #~ msgid "Error loading team's data %s:"
 #~ msgstr "שגיאה בטעינת המידע של צוות %s:"
@@ -1643,12 +1669,14 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 #~ msgid "Most clumsy"
 #~ msgstr "המגושם ביותר"
 
+#~ msgid "Network initialization"
+#~ msgstr "אתחול רשת"
+
 #~ msgid "Refresh"
 #~ msgstr "רענן"
 
+#~ msgid "Unnamed"
+#~ msgstr "ללא שם"
+
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "שגיאת XML במהלך טעינת המפה '%s' :"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "מפקד: "
