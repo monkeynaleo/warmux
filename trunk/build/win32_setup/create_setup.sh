@@ -14,7 +14,7 @@ HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
 WORMUX_VERSION=r$(LC_ALL=C svn info 2> /dev/null | grep Revision | cut -d' ' -f2)
-if [ "$WORMUX_VERSION" -eq "r" ]; then
+if [ "$WORMUX_VERSION" == "r" ]; then
   WORMUX_VERSION=$(grep PACKAGE_VERSION src/config.h | cut -d'"' -f2)
 fi
 
@@ -400,7 +400,7 @@ SectionGroup /e \$(WORMUX_SHORCUTS_TITLE) Sec_Shortcuts
     SetOutPath "\$INSTDIR"
     SetOverwrite on
     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Wormux"
-    CreateShortcut  "\$SMPROGRAMS\\Wormux\\Config.lnk" "\$APPDATA\\Wormux" "" "" 0
+    CreateShortcut  "\$SMPROGRAMS\\Wormux\\Config.lnk" "%APPDATA%\\Wormux" "" "" 0
     SetOverwrite off
   SectionEnd
 
@@ -490,8 +490,7 @@ Section "Uninstall"
     ; Remove Language preference info
     DeleteRegValue HKCU "\${WORMUX_REG_KEY}" "Installer Language"
     ; remove shortcuts, if any.
-    Delete "\$SMPROGRAMS\\Wormux\\*.*"
-    RMDir  "\$SMPROGRAMS\\Wormux"
+    RMDir  /r "\$SMPROGRAMS\\Wormux"
     Delete "\$SMPROGRAMS\\Wormux.lnk"
     Delete "\$DESKTOP\\Wormux.lnk"
     ; remove files
