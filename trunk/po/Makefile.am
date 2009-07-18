@@ -171,6 +171,8 @@ POTFILES = \
         src/map/map.h \
         src/map/maps_list.cpp \
         src/map/maps_list.h \
+        src/map/physic_tile.cpp \
+        src/map/physic_tile.h \
         src/map/random_map.cpp \
         src/map/random_map.h \
         src/map/sky.cpp \
@@ -233,6 +235,8 @@ POTFILES = \
         src/network/network_server.h \
         src/network/randomsync.cpp \
         src/network/randomsync.h \
+        src/network/socket.cpp \
+        src/network/socket.h \
         src/object/barrel.cpp \
         src/object/barrel.h \
         src/object/bonus_box.cpp \
@@ -273,6 +277,16 @@ POTFILES = \
         src/particles/teleport_member.h \
         src/particles/water_drop.cpp \
         src/particles/water_drop.h \
+        src/physic/force.cpp \
+        src/physic/force.h \
+        src/physic/object_cfg.cpp \
+        src/physic/object_cfg.h \
+        src/physic/physical_engine.cpp \
+        src/physic/physical_engine.h \
+        src/physic/physical_obj.cpp \
+        src/physic/physical_obj.h \
+        src/physic/physical_shape.cpp \
+        src/physic/physical_shape.h \
         src/sound/jukebox.cpp \
         src/sound/jukebox.h \
         src/sound/sample_cache.cpp \
@@ -296,6 +310,8 @@ POTFILES = \
         src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
         src/tool/copynpaste.h \
+        src/tool/debug_physics.cpp \
+        src/tool/debug_physics.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
         src/tool/resource_manager.cpp \
