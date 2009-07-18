@@ -36,12 +36,12 @@ POTFILES = \
         src/config.h \
         src/game/config.cpp \
         src/game/config.h \
-        src/game/game.cpp \
-        src/game/game.h \
         src/game/game_blitz.cpp \
         src/game/game_blitz.h \
         src/game/game_classic.cpp \
         src/game/game_classic.h \
+        src/game/game.cpp \
+        src/game/game.h \
         src/game/game_init.cpp \
         src/game/game_init.h \
         src/game/game_mode.cpp \
@@ -61,17 +61,17 @@ POTFILES = \
         src/graphic/fps.cpp \
         src/graphic/fps.h \
         src/graphic/polygon.cpp \
-        src/graphic/polygon.h \
         src/graphic/polygon_generator.cpp \
         src/graphic/polygon_generator.h \
-        src/graphic/sprite.cpp \
-        src/graphic/sprite.h \
+        src/graphic/polygon.h \
         src/graphic/spriteanimation.cpp \
         src/graphic/spriteanimation.h \
         src/graphic/spritecache.cpp \
         src/graphic/spritecache.h \
+        src/graphic/sprite.cpp \
         src/graphic/spriteframe.cpp \
         src/graphic/spriteframe.h \
+        src/graphic/sprite.h \
         src/graphic/surface.cpp \
         src/graphic/surface.h \
         src/graphic/text.cpp \
@@ -116,10 +116,10 @@ POTFILES = \
         src/gui/progress_bar.h \
         src/gui/question.cpp \
         src/gui/question.h \
-        src/gui/spin_button.cpp \
-        src/gui/spin_button.h \
         src/gui/spin_button_big.cpp \
         src/gui/spin_button_big.h \
+        src/gui/spin_button.cpp \
+        src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
         src/gui/spin_button_picture.h \
         src/gui/tabs.cpp \
@@ -157,9 +157,9 @@ POTFILES = \
         src/interface/man_machine_interface.cpp \
         src/interface/man_machine_interface.h \
         src/interface/mouse.cpp \
-        src/interface/mouse.h \
         src/interface/mouse_cursor.cpp \
         src/interface/mouse_cursor.h \
+        src/interface/mouse.h \
         src/interface/weapon_menu.cpp \
         src/interface/weapon_menu.h \
         src/main.cpp \
@@ -225,10 +225,10 @@ POTFILES = \
         src/network/chatlogger.h \
         src/network/net_error_msg.cpp \
         src/network/net_error_msg.h \
-        src/network/network.cpp \
-        src/network/network.h \
         src/network/network_client.cpp \
         src/network/network_client.h \
+        src/network/network.cpp \
+        src/network/network.h \
         src/network/network_local.cpp \
         src/network/network_local.h \
         src/network/network_server.cpp \
@@ -301,9 +301,9 @@ POTFILES = \
         src/team/results.cpp \
         src/team/results.h \
         src/team/team.cpp \
-        src/team/team.h \
         src/team/team_energy.cpp \
         src/team/team_energy.h \
+        src/team/team.h \
         src/team/teams_list.cpp \
         src/team/teams_list.h \
         src/tool/affine_transform.cpp \
@@ -397,16 +397,16 @@ POTFILES = \
         src/weapon/syringe.h \
         src/weapon/teleportation.cpp \
         src/weapon/teleportation.h \
-        src/weapon/weapon.cpp \
-        src/weapon/weapon.h \
         src/weapon/weapon_cfg.cpp \
         src/weapon/weapon_cfg.h \
+        src/weapon/weapon.cpp \
+        src/weapon/weapon.h \
         src/weapon/weapon_launcher.cpp \
         src/weapon/weapon_launcher.h \
-        src/weapon/weapon_strength_bar.cpp \
-        src/weapon/weapon_strength_bar.h \
         src/weapon/weapons_list.cpp \
         src/weapon/weapons_list.h \
+        src/weapon/weapon_strength_bar.cpp \
+        src/weapon/weapon_strength_bar.h \
         tools/servers/game_server/config.cpp \
         tools/servers/game_server/config.h \
         tools/servers/game_server/main.cpp \
