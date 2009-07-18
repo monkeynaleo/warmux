@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2009-06-30 20:44+0200\n"
+"PO-Revision-Date: 2009-07-07 16:38+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr[1] "%i pelaajaa valmiina"
 #: src/map/maps_list.cpp:115
 #, c-format
 msgid "%s <%s> aka %s from %s"
-msgstr "%s <%s> aka %s maasta %s"
+msgstr "%s <%s> aka %s, kotipaikka: %s"
 
 #: src/map/maps_list.cpp:122
 #, c-format
@@ -1325,7 +1325,7 @@ msgstr "Puhu verkkotaistelussa"
 
 #: src/menu/results_menu.cpp:426
 msgid "Team graphs"
-msgstr "Joukkueen grafiikat"
+msgstr "Joukkueen graafi"
 
 #: src/menu/results_menu.cpp:424
 msgid "Team stats"
@@ -1493,7 +1493,7 @@ msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
 
 #: src/menu/help_menu.cpp:87
 msgid "Weapon: Fire / Bonus box: falls fast"
-msgstr "Ase: Ammu / Bonuslaatikko: putoaa nopeasti"
+msgstr "Ase: Ammu / Bonuslaatikko: pudota"
 
 #. Initialization of teams' energy
 #: src/game/game_init.cpp:138
