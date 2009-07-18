@@ -352,8 +352,7 @@ const Character* AIShootModule::FindEnemy()
 
     SetStrategy(NEAR_FROM_ENEMY);
 
-    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injure "
-                                     + m_enemy->GetName());
+    GameMessages::GetInstance()->Add(Format(_("%s has decided to injure %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
 
     if ( SelectProximityWeapon(*m_enemy) ) {
       m_angle = 0;
@@ -368,8 +367,7 @@ const Character* AIShootModule::FindEnemy()
 
     SetStrategy(SHOOT_FROM_POINT);
 
-    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
-                                     + m_enemy->GetName());
+    GameMessages::GetInstance()->Add(Format(_("%s will shoot %s"), ActiveCharacter().GetName().c_str(), m_enemy->GetName().c_str()));
 
     // we choose between gun, sniper_rifle, shotgun and submachine gun
     if ( SelectFiringWeapon(m_angle) ) {
@@ -438,8 +436,9 @@ bool AIShootModule::Refresh(uint current_time)
 //                 abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
         if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 40) {
               if (&(*character) != m_enemy) {
-                GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
-                                                 + (*character).GetName());
+                GameMessages::GetInstance()->Add(Format(_("%s changes target to %s"),
+							ActiveCharacter().GetName().c_str(),
+							(*character).GetName().c_str()));
               }
                m_enemy = &(*character);
                Shoot();
