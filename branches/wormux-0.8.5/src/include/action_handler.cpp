@@ -801,6 +801,9 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+
+  if (Config::GetInstance()->GetWarnOnNewPlayer())
+    JukeBox::GetInstance()->Play("default", "menu/newcomer");
 }
 
 static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
