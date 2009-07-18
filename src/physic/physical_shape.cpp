@@ -56,6 +56,7 @@ PhysicalShape::~PhysicalShape()
 
 void PhysicalShape::SetParent(PhysicalObj *parent)
 {
+  ASSERT(parent);
   m_parent = parent;
 }
 
