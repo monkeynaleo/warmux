@@ -18,6 +18,7 @@
  ******************************************************************************
  * Game menu
  *****************************************************************************/
+#include <WORMUX_index_server.h>
 
 #include "menu/network_menu.h"
 
@@ -36,7 +37,7 @@
 #include "gui/text_box.h"
 #include "include/action_handler.h"
 #include "include/app.h"
-#include <WORMUX_index_server.h>
+#include "include/constant.h"
 #include "network/network.h"
 #include "network/network_server.h"
 #include "team/teams_list.h"
@@ -115,22 +116,6 @@ NetworkMenu::NetworkMenu() :
 				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
   options_box->AddWidget(initialized_players);
 
-  if (!Network::GetInstance()->IsGameMaster()) {
-    // Client Mode
-    mode_label->SetText(_("Client mode"));
-    player_number->SetVisible(false);
-    connected_players->SetVisible(false);
-    initialized_players->SetVisible(false);
-  } else if (Network::GetInstance()->IsServer()) {
-    // Server Mode
-    mode_label->SetText(_("Server mode"));
-
-  } else {
-    // The first player to connect to a headless server asumes the game master role
-    mode_label->SetText(_("Master mode"));
-    player_number->SetVisible(false);
-  }
-
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
   options_box->AddWidget(play_in_loop);
 
@@ -160,6 +145,21 @@ NetworkMenu::NetworkMenu() :
   widgets.Pack();
 
   GetResourceManager().UnLoadXMLProfile(res);
+
+  if (!Network::GetInstance()->IsGameMaster()) {
+    // Client Mode
+    mode_label->SetText(_("Client mode"));
+    player_number->SetVisible(false);
+    connected_players->SetVisible(false);
+    initialized_players->SetVisible(false);
+  } else if (Network::GetInstance()->IsServer()) {
+    // Server Mode
+    mode_label->SetText(_("Server mode"));
+
+  } else {
+    // The first player to connect to a headless server asumes the game master role
+    SetGameMasterCallback();
+  }
 }
 
 NetworkMenu::~NetworkMenu()
@@ -383,6 +383,9 @@ void NetworkMenu::ChangeMapCallback()
 void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
+						     Constants::WORMUX_VERSION + " - " +
+						     _("Master mode"));
   mode_label->SetText(_("Master mode"));
   player_number->SetVisible(false);
   connected_players->SetVisible(true);

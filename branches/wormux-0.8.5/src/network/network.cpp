@@ -432,7 +432,9 @@ connection_state_t Network::ClientStart(const std::string& host,
   } else if (prev != NULL) {
     delete prev;
   }
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Client mode");
+  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
+						     Constants::WORMUX_VERSION + " - " +
+						     _("Client mode"));
   return error;
 }
 
@@ -460,7 +462,9 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
   }
 
   if (error == CONNECTED) {
-    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION + " - Server mode");
+    AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
+						       Constants::WORMUX_VERSION + " - " +
+						       _("Server mode"));
   }
 
   return error;
