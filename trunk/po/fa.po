@@ -381,7 +381,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "سندان"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "نویسندگان:"
 
@@ -701,7 +701,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -841,7 +841,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پشت!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1124,7 +1124,7 @@ msgstr ""
 msgid "Quit"
 msgstr "خروج"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "خروج از ورموکس"
 
@@ -1157,7 +1157,7 @@ msgstr "رزولوشن"
 msgid "Riot Bomb"
 msgstr "بمب تخریبی"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "اجرای بازی"
 
@@ -1234,7 +1234,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1425,11 +1425,11 @@ msgstr ""
 msgid "Unlimited"
 msgstr "(بی‌نهایت)"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "نسخه"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1453,7 +1453,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "وب‌سایت: "
 
@@ -1477,11 +1477,11 @@ msgstr "باد؟"
 msgid "Winner"
 msgstr "برنده"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "ورموکس در حال اجراست..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
 

@@ -426,7 +426,7 @@ msgstr "(okänd tid)"
 msgid "(unlimited)"
 msgstr "(obegränsat)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -751,7 +751,7 @@ msgstr ""
 "Om du inte är direktansluten till internet, kontrollera dina "
 "routerinställningar: TCP port %s måste släppas igenom."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -894,7 +894,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1172,7 +1172,7 @@ msgstr "Publika strider"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
@@ -1204,7 +1204,7 @@ msgstr "Upplösning"
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -1279,7 +1279,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Tyvärr, inget spel väntar just nu på spelare"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1481,11 +1481,11 @@ msgstr "Okänt kommando"
 msgid "Unlimited"
 msgstr "Obegränsat"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versionsverifikationen misslyckades pga: %s\n"
@@ -1510,7 +1510,7 @@ msgstr "Vapen: avfyra / Bonuslåda: faller snabbt"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Webbplats: "
 
@@ -1534,11 +1534,11 @@ msgstr "Vindpartiklar?"
 msgid "Winner"
 msgstr "Vinnare"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux version "
 

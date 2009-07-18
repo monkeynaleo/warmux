@@ -419,7 +419,7 @@ msgstr "(teadmata aeg)"
 msgid "(unlimited)"
 msgstr "(piiramatu)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasi"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Autorid:"
 
@@ -737,7 +737,7 @@ msgstr ""
 "väljastpoolt. Kui sa pole ühendatud interneti otse, siis vaata üle ka oma "
 "ruuteri seadistused: TCP port %s peab olema tunneldatud sinu arvutisse."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Kiirusta! Ära ole nii aeglane!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1154,7 +1154,7 @@ msgstr "Jäta lahing sinnapaika"
 msgid "Quit"
 msgstr "Välju"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Välju Wormuxist"
 
@@ -1186,7 +1186,7 @@ msgstr "Eraldusvõime"
 msgid "Riot Bomb"
 msgstr "Raketiheitja"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Mäng käima"
 
@@ -1261,7 +1261,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1459,11 +1459,11 @@ msgstr "Tundmatu käsk"
 msgid "Unlimited"
 msgstr "Piiramatu"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Väljalase"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Väljalaske kontrollimine kukkus läbi, sest: %s\n"
@@ -1488,7 +1488,7 @@ msgstr "Relv: Tule/hüve laegas: Kukub kähku"
 msgid "Weapons"
 msgstr "Relvad"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Veebileht:"
 
@@ -1512,11 +1512,11 @@ msgstr "Tuuleosakesed?"
 msgid "Winner"
 msgstr "Võitja"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux käivitub..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormuxi väljalase "
 

@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-05-27 18:40+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Chinese (China) <luojie-dune@operamail.com>\n"
@@ -411,7 +410,7 @@ msgstr "(未知时间)"
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -453,7 +452,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "铁砧"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "作者:"
 
@@ -725,7 +724,7 @@ msgstr ""
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -868,7 +867,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快点,伙计你也太慢了!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1141,7 +1140,7 @@ msgstr "公开战斗"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "退出"
 
@@ -1173,7 +1172,7 @@ msgstr "分辨率"
 msgid "Riot Bomb"
 msgstr "爆炸弹"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "运行游戏"
 
@@ -1248,7 +1247,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢. 没人等你."
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1444,11 +1443,11 @@ msgstr "未知命令"
 msgid "Unlimited"
 msgstr "无限"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "版本改变失败原因: %s"
@@ -1473,7 +1472,7 @@ msgstr "武器：开火/"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "网站Website: "
 
@@ -1498,11 +1497,11 @@ msgstr "风来了?"
 msgid "Winner"
 msgstr "胜者"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "准备中, Wormux!!!"
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr " Wormux 版本"
 

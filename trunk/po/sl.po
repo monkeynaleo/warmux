@@ -96,7 +96,7 @@ msgstr "%s iz ekipe %s je padel/a s karte!"
 #: src/game/game.cpp:744
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr "%s iz ekipe %s je premočno zadel tla!"
+msgstr "%s iz ekipe %s je premočno zadel ob tla!"
 
 #: src/game/game.cpp:751
 #, c-format
@@ -494,7 +494,7 @@ msgstr "(čas ni znan)"
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -537,7 +537,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Nakovalo"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -551,7 +551,7 @@ msgstr "Nazaj v bitko"
 
 #: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
-msgstr "Slab vtičnik..."
+msgstr "Slab vtičnik ..."
 
 #: src/weapon/baseball.cpp:57
 msgid "Baseball Bat"
@@ -579,7 +579,7 @@ msgstr "Skokica"
 
 #: src/weapon/supertux.cpp:186
 msgid "Bye bye tux..."
-msgstr "Adijo tux..."
+msgstr "Adijo Tux..."
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
 #: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
@@ -817,7 +817,7 @@ msgstr ""
 "Če na internet niste povezani neposredno, preverite nastavitve "
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -885,7 +885,7 @@ msgstr "Granata"
 
 #: src/map/ground.cpp:65
 msgid "Ground initialization..."
-msgstr "Inicializacija tal..."
+msgstr "Inicializacija tal ..."
 
 #: src/weapon/gun.cpp:74
 msgid "Gun"
@@ -960,7 +960,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1236,7 +1236,7 @@ msgstr "Javne bitke"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
@@ -1268,7 +1268,7 @@ msgstr "Ločljivost"
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1318,6 +1318,7 @@ msgstr "Pokaži/skrij minikarto"
 msgid "Skip turn"
 msgstr "Preskoči potezo"
 
+
 #: src/weapon/slap.cpp:73
 msgid "Slap"
 msgstr "Klofuta"
@@ -1343,7 +1344,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1432,7 +1433,7 @@ msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
 #: src/weapon/auto_bazooka.cpp:178
 msgid "The automatic rocket has left the battlefield..."
-msgstr "Avtomatska raketa je zapustila bojišče..."
+msgstr "Avtomatska raketa je zapustila bojišče ..."
 
 #: src/weapon/bounce_ball.cpp:62
 msgid "The ball left the battlefield before exploding"
@@ -1470,6 +1471,7 @@ msgstr "Ostali te čakajo! Zbudi se! :-)"
 #: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:339
 #: src/weapon/riot_bomb.cpp:86
 msgid "The rocket has left the battlefield..."
+
 msgstr "Raketa je zapustila bojišče..."
 
 #: src/network/net_error_msg.cpp:44
@@ -1544,11 +1546,11 @@ msgstr "Neznan ukaz"
 msgid "Unlimited"
 msgstr "Neomejen"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Preverjanje različice je spodletelo zaradi: %s"
@@ -1572,10 +1574,11 @@ msgstr "Orožje: streljaj / Paket: hiter padec"
 
 #. Initialization of teams' energy
 #: src/game/game_init.cpp:138
+
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -1599,11 +1602,11 @@ msgstr "Vetrni delci?"
 msgid "Winner"
 msgstr "Zmagovalec"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
-msgstr "Wormux se zaganja..."
+msgstr "Wormux se zaganja ..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux različica "
 
@@ -1621,11 +1624,11 @@ msgstr "Napačna ekipa!"
 
 #: src/menu/network_menu.cpp:339
 msgid "You are alone :-/"
-msgstr "Sami ste :-/"
+msgstr "Sami ste. :-/"
 
 #: src/menu/network_menu.cpp:251
 msgid "You are alone..."
-msgstr "Sami ste..."
+msgstr "Sami ste ..."
 
 #: src/menu/network_menu.cpp:393
 msgid "You are the new turn master!"

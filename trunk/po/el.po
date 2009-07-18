@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-05-21 18:23+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -441,7 +440,7 @@ msgstr "(άγνωστο χρόνο)"
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -486,7 +485,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Αμόνι"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
@@ -777,7 +776,7 @@ msgstr ""
 "υπολογιστή σας."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -925,7 +924,7 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Κάνε γρήγορα, είσαι πολύ αργός!!"
 
 # Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1202,7 +1201,7 @@ msgstr "Δημόσιες μάχες"
 msgid "Quit"
 msgstr "Εγκατάλειψε"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Εγκατάλειψε το  Wormux"
 
@@ -1235,7 +1234,7 @@ msgstr "Ανάλυση"
 msgid "Riot Bomb"
 msgstr "Βόμβα διατάραξης"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Έναρξη παιχνιδιού"
 
@@ -1313,7 +1312,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1525,11 +1524,11 @@ msgstr "Άγνωστη εντολή"
 msgid "Unlimited"
 msgstr "Απεριόριστο"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Η επαλήθευση της έκδοσης απέτυχε διότι: %s"
@@ -1555,7 +1554,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
 msgid "Weapons"
 msgstr "Όπλα"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
@@ -1580,11 +1579,11 @@ msgstr "Σωματίδια στον άνεμο;"
 msgid "Winner"
 msgstr "Νικητής"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Έναρξη του Wormux..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Έκδοση του Wormux"
 

@@ -423,7 +423,7 @@ msgstr "(ukjend tid)"
 msgid "(unlimited)"
 msgstr "(uendeleg)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Utviklarar:"
 
@@ -741,7 +741,7 @@ msgstr ""
 "Viss du ikkje er kopla direkte til Internett, må du sjå til at rutaren er "
 "sett opp slik at TCP-porten %s vert vidaresend til maskina."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg. Du er for treg!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1158,7 +1158,7 @@ msgstr "Offentlege kamper"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
@@ -1190,7 +1190,7 @@ msgstr "Oppløysing"
 msgid "Riot Bomb"
 msgstr "Opprørsbombe"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Start spelet"
 
@@ -1265,7 +1265,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Det er for tida ingen spel som ventar på spelarar."
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1466,11 +1466,11 @@ msgstr "Ukjend kommando"
 msgid "Unlimited"
 msgstr "Uendeleg"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versjon"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Feil ved versjonssjekk: %s"
@@ -1495,7 +1495,7 @@ msgstr "Våpen: skyt / Bonusboks: fall fort"
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Heimeside: "
 
@@ -1519,11 +1519,11 @@ msgstr "Vindpartiklar"
 msgid "Winner"
 msgstr "Vinnar"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Startar Wormux …"
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux-versjon "
 

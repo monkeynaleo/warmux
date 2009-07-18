@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-07-07 16:38+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -426,7 +425,7 @@ msgstr "(tuntematon aika)"
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -469,7 +468,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasin"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -747,7 +746,7 @@ msgstr ""
 "yhdistetty suoraan internetiin, tarkista reitittimesi asetukset: TCP-portin %"
 "s täytyy olla ohjattu koneellesi."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -891,7 +890,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Vauhtia, olette liian hitaita !!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1166,7 +1165,7 @@ msgstr "Julkiset taistelut"
 msgid "Quit"
 msgstr "Lopeta"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
@@ -1198,7 +1197,7 @@ msgstr "Tarkkuus"
 msgid "Riot Bomb"
 msgstr "Mellakkapommi"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Aloita peli"
 
@@ -1273,7 +1272,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1471,11 +1470,11 @@ msgstr "Tuntematon komento"
 msgid "Unlimited"
 msgstr "Rajaton"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Version tarkistus epäonnistui koska: %s"
@@ -1500,7 +1499,7 @@ msgstr "Ase: Ammu / Bonuslaatikko: pudota"
 msgid "Weapons"
 msgstr "Aseet"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Verkkosivu:"
 
@@ -1524,11 +1523,11 @@ msgstr "Näytä tuuli"
 msgid "Winner"
 msgstr "Voittaja"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Wormux versio"
 

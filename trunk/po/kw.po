@@ -512,7 +512,7 @@ msgstr "(prys ankoth)"
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
-#: src/menu/options_menu.cpp:446
+#: src/menu/options_menu.cpp:449
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Anwan"
 
-#: src/main.cpp:298
+#: src/main.cpp:301
 msgid "Authors:"
 msgstr "Awtours:"
 
@@ -831,7 +831,7 @@ msgstr ""
 "osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
 "dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
-#: tools/servers/headless_server/server.cpp:266
+#: tools/servers/game_server/server.cpp:270
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -975,7 +975,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Gwra feski, re lent os ta!!"
 
-#: src/main.cpp:284
+#: src/main.cpp:287
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -1250,7 +1250,7 @@ msgstr "Kasow poblek"
 msgid "Quit"
 msgstr "Kwitya"
 
-#: src/main.cpp:273
+#: src/main.cpp:276
 msgid "Quit Wormux"
 msgstr "Kwitya Wormux"
 
@@ -1282,7 +1282,7 @@ msgstr "Klerder"
 msgid "Riot Bomb"
 msgstr "Tanbellen Wustel"
 
-#: src/main.cpp:81
+#: src/main.cpp:84
 msgid "Run game"
 msgstr "Lonchya an gwari"
 
@@ -1357,7 +1357,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
 #: src/menu/network_connection_menu.cpp:324
-#: tools/servers/headless_server/server.cpp:253
+#: tools/servers/game_server/server.cpp:257
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
@@ -1559,11 +1559,11 @@ msgstr "Gorhemmyn ankoth"
 msgid "Unlimited"
 msgstr "Heb finwedh"
 
-#: src/main.cpp:203
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versyon"
 
-#: src/menu/options_menu.cpp:454
+#: src/menu/options_menu.cpp:457
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
@@ -1590,7 +1590,7 @@ msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 msgid "Weapons"
 msgstr "Arvow"
 
-#: src/main.cpp:307
+#: src/main.cpp:310
 msgid "Website: "
 msgstr "Gwiasva: "
 
@@ -1614,11 +1614,11 @@ msgstr "Manylyon gwyns?"
 msgid "Winner"
 msgstr "Gwaynyer"
 
-#: src/main.cpp:215
+#: src/main.cpp:218
 msgid "Wormux launching..."
 msgstr "Yma Wormux ow lonchya..."
 
-#: src/main.cpp:297
+#: src/main.cpp:300
 msgid "Wormux version "
 msgstr "Versyon Wormux"
 
