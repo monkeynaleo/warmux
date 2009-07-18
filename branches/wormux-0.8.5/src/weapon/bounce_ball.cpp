@@ -68,7 +68,7 @@ void BounceBall::Refresh()
 
 void BounceBall::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The ball left the battlefield before exploding"));
+  GameMessages::GetInstance()->Add (_("The ball left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -86,7 +86,7 @@ BounceBallLauncher::BounceBallLauncher() :
 void BounceBallLauncher::UpdateTranslationStrings()
 {
   m_name = _("Bounce Ball");
-  m_help = _("Timeout : Wheel mouse or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
+  m_help = _("Timeout : Mouse wheel or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
 }
 
 WeaponProjectile * BounceBallLauncher::GetProjectileInstance()

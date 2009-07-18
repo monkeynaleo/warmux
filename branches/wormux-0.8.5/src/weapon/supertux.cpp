@@ -173,7 +173,7 @@ void SuperTux::SignalGoingOutOfWater()
 
 void SuperTux::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("Bye bye tux..."));
+  GameMessages::GetInstance()->Add (_("Bye bye Tux..."));
   WeaponProjectile::SignalOutOfMap();
 
   flying_sound.Stop();

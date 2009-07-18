@@ -223,7 +223,7 @@ bool NetworkMenu::signal_ok()
     }
     if(!found)
     {
-      msg_box->NewMessage(_("You won't be able to play before selecting a team !"));
+      msg_box->NewMessage(_("You won't be able to play before selecting a team!"));
       goto error;
     }
 
@@ -333,10 +333,10 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       if (Network::GetInstance()->GetNbHostsConnected() ==
 	  Network::GetInstance()->GetNbHostsInitialized()
 	  && Network::GetInstance()->GetNbHostsInitialized() != 0) {
-	msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+	msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
       }
       else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
-	msg_box->NewMessage(_("You are alone :-/"), c_red);
+	msg_box->NewMessage(_("You are alone. :-/"), c_red);
       }
     }
   }
@@ -447,7 +447,7 @@ void NetworkMenu::WaitingForGameMaster()
   b_ok->SetVisible(false);
   actions_buttons->NeedRedrawing();
 
-  msg_box->NewMessage(_("Waiting for server, all you can do is cancel or chat!"), c_red);
+  msg_box->NewMessage(_("Waiting for the server. All you can do is cancel or chat!"), c_red);
 
   widgets.SetFocusOn(msg_box->GetTextBox());
 

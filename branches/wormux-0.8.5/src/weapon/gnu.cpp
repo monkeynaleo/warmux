@@ -140,7 +140,7 @@ void Gnu::Refresh()
 
 void Gnu::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Gnu left the battlefield before exploding"));
+  GameMessages::GetInstance()->Add (_("The Gnu left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 

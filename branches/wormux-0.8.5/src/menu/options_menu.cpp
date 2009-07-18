@@ -120,7 +120,7 @@ OptionMenu::OptionMenu() :
                                  video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
 
-  tabs->AddNewTab("unused", _("Graphic"), graphic_options);
+  tabs->AddNewTab("unused", _("Graphics"), graphic_options);
 
   /* Language selection */
   lbox_languages = new ListBox(option_size);
@@ -446,7 +446,7 @@ void OptionMenu::CheckUpdates()
       const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
       if (latest_version != cur_version) {
 	Question new_version;
-	std::string txt = Format(_("A new version %s is available, while your version is %s."
+	std::string txt = Format(_("A new version %s is available, while your version is %s. "
 				   "You may want to check whether an update is available for your OS!"),
 				 latest_version.c_str(), cur_version);
 	new_version.Set(txt, true, 0);

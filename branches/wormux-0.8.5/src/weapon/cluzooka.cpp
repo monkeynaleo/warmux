@@ -386,7 +386,7 @@ WeaponProjectile * Cluzooka::GetProjectileInstance()
 void Cluzooka::UpdateTranslationStrings()
 {
   m_name = _("Cluzooka");
-  m_help = _("Initial fire angle : Up/Down\nFire : keep space key pressed until the desired strength\nan ammo per turn");
+  m_help = _("Initial fire angle : Up/Down\nFire : keep the space key pressed until the desired strength\nan ammo per turn");
 }
 
 std::string Cluzooka::GetWeaponWinString(const char *TeamName, uint items_count ) const

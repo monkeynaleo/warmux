@@ -71,7 +71,7 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfi
 void Airhammer::UpdateTranslationStrings()
 {
   m_name = _("Airhammer");
-  m_help = _("Howto use it : keep space key pressed\nan ammo per turn");
+  m_help = _("How to use it : keep the space key pressed\nan ammo per turn");
 }
 
 //-----------------------------------------------------------------------------

@@ -96,7 +96,7 @@ bool Parachute::IsInUse() const
 
 bool Parachute::p_Shoot()
 {
-  GameMessages::GetInstance()->Add(_("Parachute is activated automatically."));
+  GameMessages::GetInstance()->Add(_("The parachute is activated automatically."));
   return false;
 }
 

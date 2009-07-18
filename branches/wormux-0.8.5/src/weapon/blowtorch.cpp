@@ -60,7 +60,7 @@ Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConf
 void Blowtorch::UpdateTranslationStrings()
 {
   m_name = _("Blowtorch");
-  m_help = _("Howto use it : keep space key pressed\nAngle : Up/Down\nan ammo per turn");
+  m_help = _("How to use it : keep the space key pressed\nAngle : Up/Down\nan ammo per turn");
 }
 
 void Blowtorch::p_Deselect()
