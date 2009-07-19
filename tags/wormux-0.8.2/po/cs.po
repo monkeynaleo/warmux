@@ -48,13 +48,13 @@ msgstr "%s <%s> jako %s z %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "%s Tým"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
@@ -447,7 +447,7 @@ msgstr "(neznámý čas)"
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:436
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -724,8 +724,8 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1512,7 +1512,7 @@ msgstr "Nepojmenovaný"
 msgid "Version"
 msgstr "Verze"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Kontrola verze selhala: %s\n"
@@ -1620,7 +1620,7 @@ msgid "couldn't load config"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr ""
 

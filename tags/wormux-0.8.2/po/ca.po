@@ -51,13 +51,13 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "Equip %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
@@ -400,7 +400,7 @@ msgstr "(temps desconegut)"
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:436
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -671,8 +671,8 @@ msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1470,7 +1470,7 @@ msgstr "Sense nom"
 msgid "Version"
 msgstr "Versió"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "La verificació de versió ha fallat per: %s\n"
@@ -1579,7 +1579,7 @@ msgid "couldn't load config"
 msgstr "No es pot carregar el fitxer de configuració"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr "jugador personalitzat"
 
