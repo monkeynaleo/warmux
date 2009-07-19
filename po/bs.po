@@ -46,13 +46,13 @@ msgstr "%s <%s> aka %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr "%s Tim"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
@@ -403,7 +403,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:436
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -680,8 +680,8 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja tima:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1483,7 +1483,7 @@ msgstr "Bezimeni"
 msgid "Version"
 msgstr "Verzija"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr ""
@@ -1593,7 +1593,7 @@ msgid "couldn't load config"
 msgstr ""
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr ""
 

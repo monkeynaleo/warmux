@@ -45,13 +45,13 @@ msgstr "%s <%s> aka %s 从 %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
 
-#: src/menu/team_box.cpp:217
+#: src/menu/team_box.cpp:216
 #, c-format
 msgid "%s Team"
 msgstr " %s 队伍"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:214
+#: src/menu/team_box.cpp:213
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
@@ -395,7 +395,7 @@ msgstr "(未知时间)"
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:435
+#: src/menu/options_menu.cpp:436
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -671,8 +671,8 @@ msgstr ""
 msgid "Error loading team :"
 msgstr "读取队伍出错 :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:165
-#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
+#: src/game/config.cpp:512 src/team/custom_team.cpp:163
+#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1461,7 +1461,7 @@ msgstr "未命名"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:444
+#: src/menu/options_menu.cpp:445
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "版本改变失败原因: %s\n"
@@ -1570,7 +1570,7 @@ msgid "couldn't load config"
 msgstr "无法读取设置"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:136
+#: src/team/custom_team.cpp:134
 msgid "custom player"
 msgstr ""
 
