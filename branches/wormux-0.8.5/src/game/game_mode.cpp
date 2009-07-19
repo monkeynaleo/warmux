@@ -32,7 +32,7 @@
 #include "weapon/weapons_list.h"
 
 GameMode::GameMode():
-  rules("none"),
+  rules("classic"),
   nb_characters(6),
   max_teams(4),
   duration_turn(60),
