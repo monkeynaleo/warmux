@@ -53,13 +53,13 @@ msgstr "%s <%s> cunoscut și ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:217
 #, c-format
 msgid "%s Team"
 msgstr "Echipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:214
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
@@ -593,7 +593,7 @@ msgstr "(un moment necunoscut)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:436
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -866,8 +866,8 @@ msgstr "Eroare de inițializare a rețelei: Clientul %s nu este de acord!! - %s"
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:163
-#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
+#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1668,7 +1668,7 @@ msgstr "Fără nume"
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Verificare versiunii a eșuat pentru că: %s\n"
@@ -1778,7 +1778,7 @@ msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:134
+#: src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr "jucător personalizat"
 
