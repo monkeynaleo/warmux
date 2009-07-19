@@ -54,6 +54,7 @@ void GameInit::InitGameData_NetGameMaster()
 
   RandomSync().InitRandom();
 
+  GameMode::GetInstance()->Load();
   SendGameMode();
 
   Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
