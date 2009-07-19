@@ -448,6 +448,11 @@
 	<email>gba2211_AT_gmail_DOT_com</email>
 	<country>Greece</country>
       </author>
+      <author>
+        <nickname>akicks</nickname>
+        <description>Japanese translation of Wormux</description>
+        <country>Japan</country>
+      </author>
     </section>
 
     <section title="Package maintainers">
