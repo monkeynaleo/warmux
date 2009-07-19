@@ -55,13 +55,13 @@ msgstr "%s <%s>, также известный как %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/menu/team_box.cpp:216
+#: src/menu/team_box.cpp:217
 #, c-format
 msgid "%s Team"
 msgstr "Команда %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:213
+#: src/menu/team_box.cpp:214
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
@@ -465,7 +465,7 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:436
+#: src/menu/options_menu.cpp:435
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s.You may want to "
@@ -736,8 +736,8 @@ msgstr "Ошибка инициализации сети: Клиент %s не �
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:163
-#: src/team/custom_team.cpp:173 src/team/custom_team.cpp:185
+#: src/game/config.cpp:512 src/team/custom_team.cpp:165
+#: src/team/custom_team.cpp:175 src/team/custom_team.cpp:187
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -1522,7 +1522,7 @@ msgstr "Без имени"
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:445
+#: src/menu/options_menu.cpp:444
 #, c-format
 msgid "Version verification failed because: %s\n"
 msgstr "Проверка версии не удалась из-за: %s\n"
@@ -1632,7 +1632,7 @@ msgid "couldn't load config"
 msgstr "не могу загрузить конфиг"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:134
+#: src/team/custom_team.cpp:136
 msgid "custom player"
 msgstr "созданный игрок"
 
