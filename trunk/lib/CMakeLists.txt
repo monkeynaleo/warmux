@@ -1,3 +1,0 @@
-ADD_SUBDIRECTORY(box2d)
-ADD_SUBDIRECTORY(wormux)
-ADD_SUBDIRECTORY(wormux-server)
