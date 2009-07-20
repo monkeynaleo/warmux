@@ -9,7 +9,7 @@
 
   <surface name="sky" file="sky.png" />
   <surface name="map" file="map.png" />
-  <surface name="preview" file="preview.png" />
+  <surface name="preview" file="preview.jpg" />
 
   <name>Le Gruyere Geant</name>
 
