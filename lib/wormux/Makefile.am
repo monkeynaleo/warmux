@@ -36,6 +36,8 @@ libwormux_a_SOURCES = \
 	./net/network.cpp \
 	./net/player.cpp \
 	./net/socket.cpp \
+	./net/extSDL_net.cpp \
+	./net/extSDL_net.h \
 	./tools/debug.cpp \
 	./tools/file_tools.cpp \
 	./tools/random.cpp

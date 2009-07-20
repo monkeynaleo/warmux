@@ -28,6 +28,7 @@
 #include <sys/types.h>
 #include <errno.h>
 
+#include "extSDL_net.h"
 //-----------------------------------------------------------------------------
 
 static const int MAX_PACKET_SIZE = 250*1024;
@@ -376,7 +377,7 @@ bool WSocket::SendInt_NoLock(const int& nbr)
   Uint32 u_nbr = *((const Uint32*)&nbr);
 
   SDLNet_Write32(u_nbr, packet);
-  int len = SDLNet_TCP_Send(socket, packet, sizeof(packet));
+  int len = SDLNet_TCP_Send_noBlocking(socket, packet, sizeof(packet));
   if (len < int(sizeof(packet))) {
     print_net_error("SDLNet_TCP_Send");
     return false;
@@ -402,7 +403,7 @@ bool WSocket::SendStr_NoLock(const std::string &str)
   if (!r)
     return false;
 
-  int len = SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
+  int len = SDLNet_TCP_Send_noBlocking(socket, (void*)str.c_str(), str.size());
   if (len < int(str.size())) {
     print_net_error("SDLNet_TCP_Send");
     return false;
@@ -428,7 +429,7 @@ bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
     return false;
 
   // cast is needed to please SDL that does not use const keyword.
-  int size = SDLNet_TCP_Send(socket, (void*)(data), len);
+  int size = SDLNet_TCP_Send_noBlocking(socket, (void*)(data), len);
   if (size < int(len)) {
     print_net_error("SDLNet_TCP_Send");
     return false;
