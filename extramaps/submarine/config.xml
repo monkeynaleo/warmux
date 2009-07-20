@@ -9,7 +9,7 @@
 
   <surface name="sky" file="back.jpg" />
   <surface name="map" file="map.png" />
-  <surface name="preview" file="prev.png" />
+  <surface name="preview" file="preview.jpg" />
 
   <name>Submarine</name>
 
