@@ -13,7 +13,7 @@
 
   <name>Le Gruyere Geant</name>
 
-  <water>0</water>
+  <water>no</water>
   <nb_mine>3</nb_mine>
   <is_open>0</is_open>
 </map>

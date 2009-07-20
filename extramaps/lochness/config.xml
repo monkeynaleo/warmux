@@ -13,7 +13,7 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Is that the Loch Ness Monster in your pocket or ar you just pleased to see me?</name>
-  <water>1</water>
+  <water>water</water>
   <nb_mine>8</nb_mine>
   <is_open>1</is_open>
  

@@ -14,7 +14,7 @@
 
 
 	<name>Glass Pyramids</name>
-	<water>1</water>
+	<water>water</water>
 	<nb_mine>3</nb_mine>
 	<nb_barrel>2</nb_barrel>
 	<is_open>1</is_open>

@@ -9,7 +9,7 @@
   <surface name="map" file="fleur_decor.png" />
   <surface name="preview" file="fleur_preview.jpg" />
   <name>Fleur</name>
-  <water>0</water>
+  <water>no</water>
   <nb_mine>2</nb_mine>
   <is_open>1</is_open>
 </resources>

@@ -11,7 +11,7 @@
   <surface name="map" file="motherdragon.png"/>
   <surface name="preview" file="preview.jpg"/>
   <name>Purple dragon</name>
-  <water>1</water>
+  <water>water</water>
   <nb_mine>15</nb_mine>
   <is_open>1</is_open>
   <sprite name="wind_particle">

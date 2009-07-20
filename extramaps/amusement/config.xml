@@ -14,7 +14,7 @@
 
 
 	<name>Amusement Park</name>
-	<water>0</water>
+	<water>no</water>
 	<nb_mine>10</nb_mine>
 	<nb_barrel>5</nb_barrel>
 	<is_open>1</is_open>

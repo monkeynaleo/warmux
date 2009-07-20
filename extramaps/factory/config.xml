@@ -14,7 +14,7 @@
 
 
 	<name>Factory</name>
-	<water>0</water>
+	<water>no</water>
 	<nb_barrel>10</nb_barrel>
 	<nb_mine>5</nb_mine>
 	<is_open>0</is_open>

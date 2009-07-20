@@ -12,7 +12,7 @@
   <surface name="preview" file="diag_thumb.jpg"/>
 
   <name>Diagram Chase</name>
-  <water>0</water>
+  <water>no</water>
   <nb_mine>30</nb_mine>
   <is_open>1</is_open>
 

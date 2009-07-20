@@ -13,7 +13,7 @@
 
   <name>Submarine</name>
 
-  <water>1</water>
+  <water>water</water>
   <nb_mine>2</nb_mine>
   <is_open>1</is_open>
 </map>
