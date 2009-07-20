@@ -274,6 +274,9 @@ bool NetworkMenu::signal_ok()
     if (Network::GetInstance()->IsServer())
       IndexServer::GetInstance()->Disconnect();
 
+    if (Network::GetInstance()->IsGameMaster())
+      GameMode::GetInstance()->Load();
+
     Game::GetInstance()->Start();
 
     if (Network::GetInstance()->IsConnected()
