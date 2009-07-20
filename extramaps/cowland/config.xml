@@ -9,7 +9,7 @@
 
   <surface name="sky" file="cowland_bg.png" />
   <surface name="map" file="cowland.png" />
-  <surface name="preview" file="preview.png" />
+  <surface name="preview" file="preview.jpg" />
 
   <name>Cowland</name>
   <water>0</water>
