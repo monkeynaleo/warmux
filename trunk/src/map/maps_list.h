@@ -27,6 +27,7 @@
 #include <WORMUX_singleton.h>
 #include "graphic/surface.h"
 #include "map/water.h"
+#include "tool/xml_document.h"
 
 // Forward declarations
 class Action;
@@ -63,6 +64,8 @@ private:
 
   Surface img_ground, img_sky;
   Surface preview;
+  std::vector<Surface> sky_layer;
+  XmlReader doc;
 
   uint nb_mine;
   uint nb_barrel;
@@ -98,6 +101,8 @@ public:
 
   Surface& ReadImgGround();
   Surface& ReadImgSky();
+  std::vector<Surface>& ReadSkyLayer();
+
   const Surface& ReadPreview() { LoadBasicInfo(); return preview; }
 
   const struct s_wind& GetWind() const { return wind; }
