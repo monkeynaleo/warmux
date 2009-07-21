@@ -23,6 +23,7 @@
 #define SKY_H
 
 #include <list>
+#include <vector>
 #include "graphic/surface.h"
 #include "include/base.h"
 #include <WORMUX_point.h>
@@ -30,11 +31,11 @@
 
 class Sky{
 private:
-  Surface image;
+  std::vector<Surface> images;
   Point2i last_pos;
   void RedrawParticleList(std::list<Rectanglei> &list) const;
   void RedrawParticle(const Rectanglei &particle) const;
-  Point2i GetSkyPos() const;
+  Point2i GetSkyPos(uint layer) const;
 
 public:
   Sky() {};

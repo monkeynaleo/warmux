@@ -32,19 +32,28 @@ void Sky::Init()
 {
   // That is temporary -> image will be loaded directly without alpha chanel
   Surface tmp_image = ActiveMap()->ReadImgSky();
-  tmp_image.SetAlpha( 0, 0);
-  image = tmp_image.DisplayFormat();
+  std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
+
+  tmp_image.SetAlpha(0, 0);
+  images.push_back(tmp_image.DisplayFormat());
+  ActiveMap()->ReadImgSky();
+  for (uint i = 0; i < sky_layer.size(); i++)
+    images.push_back(sky_layer[i]);
 }
 
 void Sky::Reset()
 {
+  Free();
   Init();
   last_pos.SetValues(INT_MAX, INT_MAX);
 }
 
 void Sky::Free()
 {
-  image.Free();
+  for (std::vector<Surface>::iterator it = images.begin(); it != images.end(); it++)
+    (*it).Free();
+
+  images.clear();
 }
 
 void Sky::Draw(bool redraw_all)
@@ -69,15 +78,19 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list) const
 
 void Sky::RedrawParticle(const Rectanglei &particle) const
 {
-  Rectanglei ds(GetSkyPos() + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
-                particle.GetSize());
-  GetMainWindow().Blit(image, ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
+  for (uint layer = 0; layer < images.size(); layer++) {
+    Rectanglei ds(GetSkyPos(layer) + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
+                  particle.GetSize());
+    GetMainWindow().Blit(images[layer], ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
+  }
 }
 
-Point2i Sky::GetSkyPos() const
+Point2i Sky::GetSkyPos(uint layer) const
 {
+  ASSERT(layer < images.size());
+
   Point2i min(0, 0);
-  Point2i max = image.GetSize() - GetMainWindow().GetSize();
+  Point2i max = images[layer].GetSize() - GetMainWindow().GetSize();
   Point2i tmp = Camera::GetInstance()->GetPosition();
   int w_w = GetWorld().GetWidth();
   int w_h = GetWorld().GetHeight();
