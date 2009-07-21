@@ -8,6 +8,9 @@
   </author>
 
   <surface name="sky" file="sky.jpg" />
+    <sky_layer>1</sky_layer>
+    <surface name="sky_layer_1" file="layer-1.png" />
+
   <surface name="map" file="map.png" />
   <surface name="preview" file="preview.jpg" />
 
