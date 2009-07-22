@@ -284,6 +284,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית (Hebrew)",      "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
+  lbox_languages->AddItem(config->GetLanguage() == "ja_JP", "日本語 (japanese)",   "ja_JP");
   lbox_languages->AddItem(config->GetLanguage() == "kw",    "Kernewek",            "kw");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
   lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk (bokmål)",      "nb");
@@ -300,7 +301,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "sv",    "Svenska",             "sv");
   lbox_languages->AddItem(config->GetLanguage() == "tr",    "Türkçe",              "tr");
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
-  lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",        "zh_TW");
+  lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
 
   opt_updates->SetValue(config->GetCheckUpdates());
 
