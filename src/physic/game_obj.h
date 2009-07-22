@@ -180,7 +180,7 @@ public:
   // Draw the object
   virtual void Draw() = 0;
 #ifdef DEBUG
-  void DrawPolygon(const Color& color) const;
+  void DrawShape(const Color& color) const;
 #endif
 
 // Energy related
@@ -210,6 +210,8 @@ protected:
   virtual void SignalGoingOutOfWater() { };
 
 private:
+  void InitShape(const std::string &xml_config);
+
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
   void UpdateTimeOfLastMove();

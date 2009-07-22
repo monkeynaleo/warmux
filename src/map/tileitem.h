@@ -46,10 +46,14 @@ public:
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
-  virtual PhysicalObj *GetPhysicalObj() const =0;
+  PhysicalObj *GetPhysicGround() const { return m_physic_ground;};
+  void SetPhysicGround(PhysicalObj * ground){ m_physic_ground = ground;};
+
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
+protected :
+  PhysicalObj *m_physic_ground;
 };
 
 class TileItem_Empty : public TileItem
@@ -68,7 +72,6 @@ public:
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
-  PhysicalObj *GetPhysicalObj() const {return NULL;};
 };
 
 class TileItem_AlphaSoftware : public TileItem
@@ -80,7 +83,7 @@ class TileItem_AlphaSoftware : public TileItem
 
   Point2i m_size;
   Surface m_surface;
-  PhysicalObj* m_tile_physical_obj;
+
   PhysicTile *m_physic_tile;
   Point2d m_shape_offset;
   int m_shape_level;
@@ -112,7 +115,6 @@ public:
   void MergeSprite(const Point2i &position, Surface& spr);
   void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
-  PhysicalObj *GetPhysicalObj() const;
   bool NeedDelete() const {return need_delete; };
   void CheckEmpty();
   void ResetEmptyCheck();

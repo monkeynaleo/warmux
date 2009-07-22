@@ -85,7 +85,7 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   m_body_def->position.Set(0.0f, 0.0f);
   m_body_def->fixedRotation = !m_rotating;
 */
- // InitShape(xml_config);
+  InitShape(xml_config);
  /* if(m_auto_align_force >0)
   {
       PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
@@ -100,6 +100,56 @@ GameObj::~GameObj ()
   delete m_physic;
 }
 
+void GameObj::InitShape(const std::string &xml_config)
+{
+  // Loading shape from file
+  const xmlNode *elem = NULL;
+  XmlReader doc;
+
+  if (xml_config == "") {
+    const XmlReader* ddoc = GameMode::GetInstance()->GetXmlObjects();
+    elem = XmlReader::GetMarker(ddoc->GetRoot(), m_name);
+  } else {
+    ASSERT(doc.Load(xml_config));
+    elem = XmlReader::GetMarker(doc.GetRoot(), m_name);
+  }
+
+  ASSERT(elem != NULL);
+
+  xmlNodeArray shapes = XmlReader::GetNamedChildren(elem, "shape");
+  xmlNodeArray::const_iterator shape_it;
+
+  for (shape_it = shapes.begin(); shape_it != shapes.end(); shape_it++) {
+    PhysicalShape* shape = PhysicalShape::LoadFromXml(*shape_it);
+    ASSERT(shape);
+/*
+    b2FilterData filter_data;
+    filter_data.categoryBits = 0x0001;
+    filter_data.maskBits = 0x0000;
+    filter_data.maskBits = 0;
+    shape->SetFilter(filter_data);
+*/
+    m_physic->AddShape(shape);
+  }
+
+
+/*
+  if (m_shapes.empty()) {
+    double mass = 1.0;
+    XmlReader::ReadDouble(elem, "mass", mass);
+    SetBasicShape(Point2i(1,1), mass);
+    return;
+  } else {
+    double mass;
+    bool r = XmlReader::ReadDouble(elem, "mass", mass);
+    if (r)
+      Error(Format("Body (%s) mass defition is forbidden when you define shape(s)", m_name.c_str()));
+
+    ASSERT(!r);
+  }*/
+
+  m_physic->Generate();
+}
 
 
 //-----------------------------------------------------------------------------
@@ -732,20 +782,21 @@ bool GameObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, 
 #include "graphic/text.h"
 #include "graphic/video.h"
 
-void GameObj::DrawPolygon(const Color& /*color*/) const
+void GameObj::DrawShape(const Color& color) const
 {
+  GetPhysic()->DrawShape(color);
  /* std::list<PhysicalShape*>::const_iterator it;
 
   for (it = m_shapes.begin(); it != m_shapes.end(); it++) {
     (*it)->DrawBorder(color);
   }*/
 
-  Rectanglei test_rect = GetRectI();
+  /*Rectanglei test_rect = GetRectI();
 
   Rectanglei rect(test_rect.GetPosition() - Camera::GetRef().GetPosition(),
-		  test_rect.GetSize());
+		  test_rect.GetSize());*/
 
-  GetMainWindow().RectangleColor(rect, primary_blue_color);
+  //GetMainWindow().RectangleColor(rect, primary_blue_color);
 
   if (GetMass()) {
 /*    std::string txt = Format("%.2f kg", m_body->GetMass());

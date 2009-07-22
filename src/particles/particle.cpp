@@ -360,7 +360,7 @@ void ParticleEngine::Draw(bool upper)
       (*Particle_it)->Draw();
 #ifdef DEBUG
       if (IsLOGGING("polygon.particle")) {
-	(*Particle_it)->DrawPolygon(primary_red_color);
+	(*Particle_it)->DrawShape(primary_red_color);
       }
 #endif
     }

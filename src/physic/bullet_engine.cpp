@@ -92,18 +92,25 @@ PhysicalRectangle *BulletEngine::CreateRectangleShape(double width, double heigh
 }
 
 
-void BulletEngine::AddObject(PhysicalObj *new_obj)
+void
+BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
     m_world->addRigidBody(obj->GetBody());
     obj->GetBody()->setActivationState(ACTIVE_TAG);
-std::cout<<"Add"<<std::endl;
+std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;*/
 }
 
+void BulletEngine::RemoveObject(PhysicalObj *obj)
+{
+  BulletObj *bobj = reinterpret_cast<BulletObj *>(obj);
+  m_world->removeRigidBody(bobj->GetBody());
+  std::cout<<"Remove "<<obj<<std::endl;
+}
 
 void BulletEngine::Step()
 {

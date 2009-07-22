@@ -32,6 +32,7 @@
 #include "WORMUX_rectangle.h"
 #include "WORMUX_types.h"
 #include "tool/xml_document.h"
+#include "graphic/color.h"
 
 class PhysicalShape;
 class PhysicalListener;
@@ -164,6 +165,10 @@ public:
   virtual void SetGravityFactor( double value) = 0;
   virtual void ResetGravityFactor() = 0;
   virtual double GetGravityFactor() = 0;
+
+  #ifdef DEBUG
+    virtual void DrawShape(const Color& color) const =0;
+  #endif
 
 protected:
   virtual void SignalRebound() = 0;
