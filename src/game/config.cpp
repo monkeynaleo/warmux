@@ -100,8 +100,6 @@ Config::Config():
   display_name_character(true),
   display_wind_particles(true),
   default_mouse_cursor(false),
-  disable_joystick(true),
-  disable_mouse(false),
   video_width(800),
   video_height(600),
   video_fullscreen(false),
@@ -114,6 +112,7 @@ Config::Config():
   sound_frequency(44100),
   warn_on_new_player(true),
   check_updates(false),
+  lefthanded_mouse(false),
   m_network_client_host("localhost"),
   m_network_client_port(WORMUX_NETWORK_PORT),
   m_network_server_game_name("Wormux party"),
@@ -437,8 +436,6 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
     XmlReader::ReadUint(elem, "scroll_border_size", scroll_border_size);
-    XmlReader::ReadBool(elem, "disable_mouse", disable_mouse);
-    XmlReader::ReadBool(elem, "disable_joystick", disable_joystick);
     XmlReader::ReadUint(elem, "width", video_width);
     XmlReader::ReadUint(elem, "height", video_height);
     XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
@@ -495,6 +492,7 @@ void Config::LoadXml(const xmlNode *xml)
   if ((elem = XmlReader::GetMarker(xml, "misc")) != NULL)
   {
     XmlReader::ReadBool(elem, "check_updates", check_updates);
+    XmlReader::ReadBool(elem, "left-handed_mouse", lefthanded_mouse);
   }
 
   //=== game mode ===
@@ -585,8 +583,6 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
   doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
   doc.WriteElement(video_node, "scroll_border_size", ulong2str(scroll_border_size));
-  doc.WriteElement(video_node, "disable_mouse", ulong2str(disable_mouse));
-  doc.WriteElement(video_node, "disable_joystick", ulong2str(disable_joystick));
   doc.WriteElement(video_node, "width", ulong2str(video->window.GetWidth()));
   doc.WriteElement(video_node, "height", ulong2str(video->window.GetHeight()));
   doc.WriteElement(video_node, "full_screen",
@@ -640,6 +636,7 @@ bool Config::SaveXml(bool save_current_teams)
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
   doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
+  doc.WriteElement(misc_node, "left-handed_mouse", ulong2str(lefthanded_mouse));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);

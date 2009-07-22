@@ -63,6 +63,9 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
   if(!IsRegistredEvent(event.type))
     return;
 
+  if (GetNumberOfJoystick() == 0)
+    return;
+
   Key_Event_t event_type;
   switch(event.type)
     {
