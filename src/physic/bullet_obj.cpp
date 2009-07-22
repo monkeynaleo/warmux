@@ -201,7 +201,7 @@ Point2d BulletObj::GetSpeed() const
 
     BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
     m_root_shape->removeChildShape(native_shape->GetNativeShape());
-    delete shape;
+    //delete shape;
   }
   void BulletObj::RemoveShape(std::string name)
   {
@@ -214,7 +214,7 @@ Point2d BulletObj::GetSpeed() const
         BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
         m_root_shape->removeChildShape(native_shape->GetNativeShape());
         m_shape_list.erase(it);
-        delete native_shape;
+        //delete native_shape;
       }
     }
   }
@@ -226,7 +226,7 @@ Point2d BulletObj::GetSpeed() const
     {
       BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
       m_root_shape->removeChildShape(native_shape->GetNativeShape());
-      delete native_shape;
+      //delete native_shape;
     }
     m_shape_list.clear();
   }
