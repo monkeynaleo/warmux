@@ -20,6 +20,7 @@
  *****************************************************************************/
 #include "physic/bullet_shape.h"
 #include "graphic/video.h"
+#include "map/camera.h"
 
 BulletShape::BulletShape()
 {
@@ -41,6 +42,13 @@ void BulletRectangle::Generate()
 {
   btBoxShape * new_shape = new btBoxShape(btVector3(m_width,m_height,10));
 
+
+
+  btScalar mass(1.0f);
+  btVector3 localInertia(0, 0, 0);
+
+
+  new_shape->calculateLocalInertia(mass,localInertia);
 
   if(m_native_shape)
   {
@@ -118,7 +126,15 @@ void BulletRectangle::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
 
-  GetMainWindow().LineColor(m_parent->GetPosition().x,m_parent->GetPosition().x+1,m_parent->GetPosition().y,m_parent->GetPosition().y+1, color);
+  ASSERT(m_parent);
+
+    btVector3 pos;
+    btScalar radius;
+    m_native_shape->getBoundingSphere(pos,radius);
+
+    GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
+
+
 /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 2);
@@ -156,7 +172,8 @@ void BulletRectangle::DrawBorder(const Color& color) const
       for(uint i=0;i < m_point_list.size(); i++)
       {
           new_shape->addPoint(btVector3(m_point_list[i].x,m_point_list[i].y,0));
-          new_shape->addPoint(btVector3(m_point_list[i].x,m_point_list[i].y,10));
+          new_shape->addPoint(btVector3(m_point_list[i].x,m_point_list[i].y,50));
+
       }
 
       if(m_native_shape)
@@ -165,36 +182,48 @@ void BulletRectangle::DrawBorder(const Color& color) const
       }
 
       m_native_shape = new_shape;
+
+
+     // btCollisionShape* new_shape = new btBoxShape(btVector3(100,100,100));
+     // m_native_shape = new_shape;
  }
 
 #ifdef DEBUG
+
+#include <iostream>
 void BulletPolygon::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
-  GetMainWindow().LineColor(m_parent->GetPosition().x,m_parent->GetPosition().x+1,m_parent->GetPosition().y,m_parent->GetPosition().y+1, color);
+
+  btVector3 pos;
+  btScalar radius;
+  m_native_shape->getBoundingSphere(pos,radius);
+
+  GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
 
 
-/*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+  std::cout<<"Draw x="<<pos.x()<<" y="<<pos.y()<<std::endl;
 
-  ASSERT(polygon->GetVertexCount() > 2);
-  b2XForm xf = m_body->GetXForm();
-  int init_x = lround(( b2Mul(xf,polygon->GetVertices()[0]).x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-  int init_y = lround(( b2Mul(xf,polygon->GetVertices()[0]).y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+  ASSERT(m_point_list.size() > 2);
+
+
+  int init_x = lround(m_point_list[0].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
+  int init_y = lround(m_point_list[0].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
   int prev_x = init_x;
   int prev_y = init_y;
-  int x, y;
+  int x;
+  int y;
 
-  for (uint i = 1; i< uint(polygon->GetVertexCount()); i++) {
+  for(uint i = 1; i < m_point_list.size();i++){
 
-    x = lround(( b2Mul(xf,polygon->GetVertices()[i]).x)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().x;
-    y = lround(( b2Mul(xf,polygon->GetVertices()[i]).y)*PIXEL_PER_METER) - Camera::GetInstance()->GetPosition().y;
+        x = lround(m_point_list[i].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
+        y =  lround(m_point_list[i].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
 
-    GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
-    prev_x = x;
-    prev_y = y;
+       GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
+       prev_x = x;
+       prev_y = y;
   }
-
-  GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);*/
+  GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);
 }
 #endif
 
@@ -226,7 +255,14 @@ void BulletPolygon::DrawBorder(const Color& color) const
 void BulletCircle::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
-  GetMainWindow().LineColor(m_parent->GetPosition().x,m_parent->GetPosition().x+1,m_parent->GetPosition().y,m_parent->GetPosition().y+1, color);
+
+
+    btVector3 pos;
+    btScalar radius;
+    m_native_shape->getBoundingSphere(pos,radius);
+
+    GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
+
 /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 2);

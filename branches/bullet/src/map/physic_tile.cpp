@@ -68,15 +68,15 @@ void PhysicTile::Generate()
     GenerateFull();
     break;
   case MIXTE:
-
-    GenerateMixte();
+    //TODO restore that
+    //GenerateMixte();
+    GenerateFull();
     break;
   }
 
   if(m_shape)
   {
-    ASSERT(m_parent_tile->GetPhysicalObj());
-    m_parent_tile->GetPhysicalObj()->AddShape(m_shape);
+    m_parent_tile->GetPhysicGround()->AddShape(m_shape);
   }
 
 

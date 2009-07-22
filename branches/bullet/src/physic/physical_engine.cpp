@@ -95,11 +95,7 @@ void PhysicalEngine::SetWindVector(const Point2d & i_wind_vector)
 
 
 
-void PhysicalEngine::RemoveObject(PhysicalObj */*obj*/)
-{
- /* objects_list.erase(obj->GetBody());
-  physic_world->DestroyBody(obj->GetBody());*/
-}
+
 /*
 b2Joint* PhysicalEngine::CreateJoint(b2JointDef* i_joint_def)
 {

@@ -296,7 +296,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
   shape->SetAirFriction(air_friction);
   shape->SetForceApplicationPoint(Point2d(force_x, force_y));
   shape->SetFriction(friction);
-
+  shape->Generate();
   return shape;
 }
 

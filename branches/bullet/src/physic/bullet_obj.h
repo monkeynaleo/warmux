@@ -145,6 +145,9 @@ public:
 
   //Bullet Method
   btRigidBody* GetBody();
+ #ifdef DEBUG
+  void DrawShape(const Color& color) const;
+ #endif
 
 protected:
   void SignalRebound() ;
@@ -153,7 +156,7 @@ protected:
   bool m_rotating;
   btRigidBody* m_body;
   btCompoundShape *m_root_shape;
-  std::map<std::string, BulletShape *> m_shape_list;
+  std::map<std::string, PhysicalShape *> m_shape_list;
 
 };
 

@@ -124,7 +124,7 @@ void ObjectsList::Draw()
       (*it)->Draw();
 #ifdef DEBUG
       if (IsLOGGING("polygon.object")) {
-	(*it)->DrawPolygon(primary_red_color);
+	(*it)->DrawShape(primary_red_color);
       }
 #endif
     }

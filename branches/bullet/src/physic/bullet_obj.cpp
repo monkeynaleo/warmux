@@ -28,28 +28,35 @@
 #include "physic/physical_engine.h"
 #include "bullet_obj.h"
 #include <iostream>
+#include <stdio.h>
+
 
 BulletObj::BulletObj() : PhysicalObj() {
     /// Create Dynamic Object
     btTransform startTransform;
     startTransform.setIdentity();
 
-    btScalar mass(0.f);
+    btScalar mass(1.0f);
     btVector3 localInertia(0, 0, 0);
 
 
     m_root_shape = new btCompoundShape(true);
 
-    /*startTransform.setOrigin(btVector3(0, 0, 0));
-    btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
+    startTransform.setOrigin(btVector3(0, 0, 0));
+    btCollisionShape* colShape = new btBoxShape(btVector3(10,10,10));
     colShape->calculateLocalInertia(mass,localInertia);
-*/
+
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, m_root_shape, localInertia);
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
+    m_body->setLinearFactor(btVector3(1,1,0));
+    m_body->setAngularFactor(btVector3(0,1,0));
+    m_body->setDamping(0.5,0.5);
+
+    m_root_shape->addChildShape(startTransform,colShape);
 
 }
 
@@ -58,6 +65,8 @@ BulletObj::BulletObj() : PhysicalObj() {
 BulletObj::~BulletObj()
 {
 
+  ClearShapes();
+  PhysicalEngine::GetInstance()->RemoveObject(this);
 }
 
  void BulletObj::LoadFromXml(const xmlNode &/*xml_obj*/){}
@@ -96,8 +105,10 @@ BulletObj::~BulletObj()
   }
 
   //State
-  void BulletObj::SetFixed(bool /*i_fixed*/){
-      //TODO
+  void BulletObj::SetFixed(bool i_fixed){
+    if(i_fixed){
+      m_body->setMassProps(0,btVector3(0,0,0));
+    }
   }
 
   bool BulletObj::IsFixed()
@@ -156,9 +167,15 @@ Point2d BulletObj::GetSpeed() const
   // Shape
 
   void BulletObj::AddShape(PhysicalShape *shape,std::string name){
-    if(name !=""){
-      m_shape_list[name] = reinterpret_cast<BulletShape *>(shape);
+    std::cout<<"AddShape "<<shape<<" x="<<shape->GetPosition().x<<" y="<<shape->GetPosition().y<<std::endl;
+
+    if(name ==""){
+      char buffer [50];
+      snprintf(buffer, 50, "%i", m_shape_list.size());
+      name = "unamed_shape_"+std::string(buffer);
     }
+
+    m_shape_list[name] = shape;
 
     shape->SetParent(this);
     btTransform startTransform;
@@ -171,30 +188,30 @@ Point2d BulletObj::GetSpeed() const
   }
   void BulletObj::RemoveShape(PhysicalShape *shape)
   {
-    std::map<std::string,BulletShape *>::iterator it;
+    std::map<std::string,PhysicalShape *>::iterator it;
 
     for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
     {
-      if(it->second == reinterpret_cast<BulletShape *>(shape))
+      if(it->second == shape)
       {
         m_shape_list.erase(it);
 
       }
     }
 
-    BulletShape * native_shape = reinterpret_cast<BulletShape *>(shape);
+    BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
     m_root_shape->removeChildShape(native_shape->GetNativeShape());
     delete shape;
   }
   void BulletObj::RemoveShape(std::string name)
   {
-    std::map<std::string,BulletShape *>::iterator it;
+    std::map<std::string,PhysicalShape *>::iterator it;
 
     for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
     {
       if(it->first == name)
       {
-        BulletShape * native_shape = reinterpret_cast<BulletShape *>(it->second);
+        BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
         m_root_shape->removeChildShape(native_shape->GetNativeShape());
         m_shape_list.erase(it);
         delete native_shape;
@@ -203,11 +220,11 @@ Point2d BulletObj::GetSpeed() const
   }
   void BulletObj::ClearShapes()
   {
-    std::map<std::string,BulletShape *>::iterator it;
+    std::map<std::string,PhysicalShape *>::iterator it;
 
     for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
     {
-      BulletShape * native_shape = reinterpret_cast<BulletShape *>(it->second);
+      BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
       m_root_shape->removeChildShape(native_shape->GetNativeShape());
       delete native_shape;
     }
@@ -319,3 +336,17 @@ Point2d BulletObj::GetSpeed() const
   {
       return m_body;
   }
+
+
+  #ifdef DEBUG
+  void BulletObj::DrawShape(const Color& color) const
+  {
+     std::map<std::string,PhysicalShape *>::const_iterator it;
+
+     for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
+     {
+      PhysicalShape * native_shape = it->second;
+     native_shape->DrawBorder(color);
+    }
+  }
+ #endif

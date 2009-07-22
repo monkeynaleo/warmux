@@ -484,7 +484,7 @@ void Character::Draw()
   }
 
   if (IsLOGGING("polygon.character")) {
-    DrawPolygon(primary_red_color);
+    DrawShape(primary_red_color);
   }
 #endif
 }
