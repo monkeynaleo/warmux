@@ -201,18 +201,21 @@ void Team::SelectCharacter(const Character * c)
 void Team::NextCharacter()
 {
   ASSERT (0 < NbAliveCharacter());
-  ActiveCharacter().StopPlaying();
-  do
-  {
-    ++active_character;
-    if (active_character == characters.end())
-      active_character = characters.begin();
-  } while (ActiveCharacter().IsDead());
-  ActiveCharacter().StartPlaying();
+
+  if (GameMode::GetInstance()->auto_change_character) {
+
+    ActiveCharacter().StopPlaying();
+    do {
+      ++active_character;
+      if (active_character == characters.end())
+	active_character = characters.begin();
+    } while (ActiveCharacter().IsDead());
+    ActiveCharacter().StartPlaying();
+  }
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  Camera::GetInstance()->FollowObject (&ActiveCharacter(), !is_camera_saved);
+
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
