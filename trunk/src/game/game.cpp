@@ -264,7 +264,6 @@ void Game::RefreshInput()
 {
   // Poll and treat keyboard and mouse events
   SDL_Event event;
-  bool refresh_joystick =  Joystick::GetInstance()->GetNumberOfJoystick() > 0;
   while(SDL_PollEvent(&event)) {
 
     // Emergency exit
@@ -285,16 +284,13 @@ void Game::RefreshInput()
     // Keyboard event
     Keyboard::GetInstance()->HandleKeyEvent(event);
     // Joystick event
-    if(refresh_joystick && !Config::GetInstance()->IsJoystickDisable())
-      Joystick::GetInstance()->HandleKeyEvent(event);
+    Joystick::GetInstance()->HandleKeyEvent(event);
   }
 
   // Keyboard, Joystick and mouse refresh
-  if(!Config::GetInstance()->IsMouseDisable())
-    Mouse::GetInstance()->Refresh();
+  Mouse::GetInstance()->Refresh();
   Keyboard::GetInstance()->Refresh();
-  if(refresh_joystick && !Config::GetInstance()->IsJoystickDisable())
-    Joystick::GetInstance()->Refresh();
+  Joystick::GetInstance()->Refresh();
   AIengine::GetInstance()->Refresh();
 
   // Execute action

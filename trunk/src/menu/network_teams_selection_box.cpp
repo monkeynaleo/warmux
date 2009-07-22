@@ -61,9 +61,9 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
                        60,
                        60);
           if ( r.Contains(mousePosition) ) {
-            if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+            if ( button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN ) {
               NextTeam(i);
-            } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+            } else if ( button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP ) {
               PrevTeam(i);
             }
           }

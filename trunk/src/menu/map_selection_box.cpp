@@ -231,19 +231,19 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 
   if (!Contains(mousePosition)) return NULL;
 
-  if (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition)) {
+  if (button == Mouse::BUTTON_LEFT() && bt_map_minus->Contains(mousePosition)) {
     ChangeMapDelta(-3);
-  } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition)) {
+  } else if (button == Mouse::BUTTON_LEFT() && map_preview_before2->Contains(mousePosition)) {
     ChangeMapDelta(-2);
-  } else if ((button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
+  } else if ((button == Mouse::BUTTON_LEFT() && map_preview_before->Contains(mousePosition))
              || (button == SDL_BUTTON_WHEELUP )) {
     ChangeMapDelta(-1);
-  } else if ((button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
+  } else if ((button == Mouse::BUTTON_LEFT() && map_preview_after->Contains(mousePosition))
              || (button == SDL_BUTTON_WHEELDOWN)) {
     ChangeMapDelta(+1);
-  } else if (button == SDL_BUTTON_LEFT && map_preview_after2->Contains(mousePosition)) {
+  } else if (button == Mouse::BUTTON_LEFT() && map_preview_after2->Contains(mousePosition)) {
     ChangeMapDelta(+2);
-  } else if (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition)) {
+  } else if (button == Mouse::BUTTON_LEFT() && bt_map_plus->Contains(mousePosition)) {
     ChangeMapDelta(+3);
   }
 
