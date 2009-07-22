@@ -21,12 +21,12 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:340
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -34,7 +34,7 @@ msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:332
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -63,41 +63,51 @@ msgstr "Echipa %s"
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
+#: src/ai/ai_shoot_module.cpp:463
+#, c-format
+msgid "%s changes target to %s"
+msgstr "%s schimbă ținta către %s"
+
 #: src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game.cpp:726
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s din echipa %s s-a sinucis !"
 
-#: src/game/game.cpp:759
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s din echipa %s a murit."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s din echipa %s a căzut în apă!"
 
-#: src/game/game.cpp:711
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s din echipa %s a căzut în afara hărții!"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s din echipa %s a lovit prea tare pământul!"
 
 # what about female names?
-#: src/game/game.cpp:739
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s din echipa %s decedat prin propria stângăcie!"
+
+#: src/ai/ai_shoot_module.cpp:400
+#, c-format
+msgid "%s has decided to injure %s"
+msgstr "%s s-a decis să-l rănească pe %s"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -107,7 +117,7 @@ msgstr[0] "%s a câștigat %u punct de energie!"
 msgstr[1] "%s a câștigat %u puncte de energie!"
 msgstr[2] "%s a câștigat %u de puncte de energie!"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
@@ -569,17 +579,22 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Echipa %s a fost nimicită."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a luat cu el în mormânt un membru al echipei %s!"
+
+#: src/ai/ai_shoot_module.cpp:377
+#, c-format
+msgid "%s will shoot %s"
+msgstr "%s îl va împușca pe %s"
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:268
+#: src/menu/options_menu.cpp:272
 msgid "(system language)"
 msgstr "(limba sistemului)"
 
@@ -592,7 +607,7 @@ msgstr "(un moment necunoscut)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:456
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -682,19 +697,19 @@ msgstr "Minge săltăreață"
 msgid "Bye bye Tux..."
 msgstr "Pa pa tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:539 src/team/teams_list.cpp:548
-#: src/team/teams_list.cpp:554 src/team/teams_list.cpp:618
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:536 src/team/teams_list.cpp:545
+#: src/team/teams_list.cpp:551 src/team/teams_list.cpp:615
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:165
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:156
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:153
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
@@ -755,7 +770,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Click: Centrează camera pe personaj"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:437
 msgid "Client mode"
 msgstr "Mod client"
 
@@ -842,7 +857,7 @@ msgstr "Dinamită"
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
-#: src/menu/options_menu.cpp:223
+#: src/menu/options_menu.cpp:227
 msgid "Effects volume"
 msgstr "Volumul efectelor"
 
@@ -855,11 +870,11 @@ msgstr "Energie"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Eroare de inițializare a rețelei: Clientul %s nu este de acord!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:155
+#: src/game/config.cpp:510 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -1062,7 +1077,7 @@ msgstr ""
 "Cum se folosește : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/game/game_classic.cpp:214
+#: src/game/game_classic.cpp:212
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbește-te te miști prea încet!!"
 
@@ -1092,23 +1107,23 @@ msgstr ""
 "Foc : țineți tasta spațiu apăsată până la puterea dorită\n"
 "un proiectil per rundă"
 
-#: src/game/game_init.cpp:161
+#: src/game/game_init.cpp:160
 msgid "Initialisation"
 msgstr "Inițializare"
 
-#: src/game/game_init.cpp:115
+#: src/game/game_init.cpp:114
 msgid "Initialise map"
 msgstr "Inițializare hartă"
 
-#: src/game/game_init.cpp:149
+#: src/game/game_init.cpp:148
 msgid "Initialise sounds"
 msgstr "Inițializare sunete"
 
-#: src/game/game_init.cpp:125
+#: src/game/game_init.cpp:124
 msgid "Initialise teams"
 msgstr "Inițializare echipe"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "E un cadou!"
 
@@ -1117,7 +1132,7 @@ msgid "Jetpack"
 msgstr "Propulsor personal"
 
 # URM0-1: search URM0-2 for next line
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intrați pe #wormux în rețeaua irc.freenode.net pentru a găsi parteneri de "
@@ -1139,15 +1154,19 @@ msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
 msgid "Language"
 msgstr "Limba"
 
+#: src/menu/options_menu.cpp:203
+msgid "Left-handed mouse?"
+msgstr ""
+
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr "Afișează jucătorii conectați"
 
-#: src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:242
 msgid "Load maps:"
 msgstr "Încărcare hărți:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:141
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
@@ -1175,13 +1194,11 @@ msgstr "Hartă"
 msgid "Map %s, a creation of: "
 msgstr "Harta %s, o creație a lui: "
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:117
 msgid "Maps"
 msgstr "Hărți"
 
-#. The first player to connect to a headless server asumes the game master role
-#. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:391 src/menu/network_menu.cpp:392
 msgid "Master mode"
 msgstr "Modul server"
 
@@ -1189,7 +1206,7 @@ msgstr "Modul server"
 msgid "Max energy"
 msgstr "Energie maximă"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:106
 msgid "Max number of players:"
 msgstr "Număr maxim de jucători:"
 
@@ -1201,7 +1218,7 @@ msgstr "Numărul maxim de C/S"
 msgid "Mine"
 msgstr "Mină"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:207
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1235,11 +1252,11 @@ msgstr "Mută camera cu mausul sau săgețile"
 msgid "Move the character"
 msgstr "Mută personajul"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:217
 msgid "Music volume"
 msgstr "Volumul muzicii"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:213
 msgid "Music?"
 msgstr "Muzică?"
 
@@ -1256,7 +1273,7 @@ msgstr "Niciodată"
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:252
 msgid "New player warning?"
 msgstr "Avertisment la jucător nou?"
 
@@ -1313,7 +1330,7 @@ msgstr "Parola:"
 msgid "Play"
 msgstr "Pornește jocul"
 
-#: src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:119
 msgid "Play several times"
 msgstr "Joacă de câteva ori"
 
@@ -1362,12 +1379,12 @@ msgstr "Părăsește jocul"
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:349
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:399
+#: src/game/config.cpp:398
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Se citește fișierul personal de configurare"
@@ -1406,7 +1423,7 @@ msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:467
 msgid "Server mode"
 msgstr "Mod server"
 
@@ -1468,20 +1485,20 @@ msgstr ""
 "Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
 "download.php"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:255
 msgid "Sound"
 msgstr "Sunet"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:223
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:248
 msgid "Sound frequency"
 msgstr "Frecvența sunetului"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:152
+#: src/game/game_init.cpp:151
 msgid "Sounds"
 msgstr "Sunete"
 
@@ -1518,7 +1535,7 @@ msgstr "Grafice echipe"
 msgid "Team stats"
 msgstr "Statistici echipe"
 
-#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:126 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Echipe"
 
@@ -1577,7 +1594,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda"
 
-#: src/game/game.cpp:490
+#: src/game/game.cpp:487
 msgid "The game was interrupted because you got disconnected."
 msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 
@@ -1586,7 +1603,7 @@ msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:339
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te :-)"
@@ -1653,12 +1670,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Nu a fost posibilă contactarea calculatorului."
 
-#: src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:252
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărți (%s)!"
 
-#: src/map/maps_list.cpp:249
+#: src/map/maps_list.cpp:264
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului personal cu hărți (%s)!"
@@ -1679,7 +1696,7 @@ msgstr "nelimitat"
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:457
+#: src/menu/options_menu.cpp:464
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verificarea versiunii a eșuat pentru că: %s"
@@ -1692,7 +1709,7 @@ msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
-#: src/menu/network_menu.cpp:450
+#: src/menu/network_menu.cpp:456
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Se așteaptă serverul, tot ce puteți face e să anulați sau să vorbiți!"
@@ -1703,7 +1720,7 @@ msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Armă: Foc / Cutie cu bonus: cade repede"
 
 #. Initialization of teams' energy
-#: src/game/game_init.cpp:138
+#: src/game/game_init.cpp:137
 msgid "Weapons"
 msgstr "Arme"
 
@@ -1712,12 +1729,17 @@ msgid "Website: "
 msgstr "Saitul web: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:135
 #, c-format
 msgid "Welcome to %s!"
 msgstr "Bine ați venit la %s!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:710
+#, c-format
+msgid "What a beautiful homerun! %s from %s team is in another world..."
+msgstr ""
+
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -1752,7 +1774,7 @@ msgstr "Numele hărții e greșit!"
 msgid "Wrong team!"
 msgstr "Echipa e greșită!"
 
-#: src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:342
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Nu mai e nimeni în afară de tine :-/"
@@ -1761,16 +1783,16 @@ msgstr "Nu mai e nimeni în afară de tine :-/"
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
-#: src/menu/network_menu.cpp:393
+#: src/menu/network_menu.cpp:399
 msgid "You are the new turn master!"
 msgstr "Ești noul șef de tură!"
 
-#: src/map/maps_list.cpp:258
+#: src/map/maps_list.cpp:273
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Aveți nevoie de cel puțin o hartă validă !"
 
-#: src/game/game_init.cpp:131 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:173
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Aveți nevoie de cel puțin două echipe valide !"
@@ -1800,7 +1822,7 @@ msgstr ""
 "bombardare : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
@@ -1822,7 +1844,7 @@ msgstr "eroare la analiza fișierului de configurare"
 msgid "from"
 msgstr "de la:"
 
-#: src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "nu există nici un fișier de configurare!"
 
@@ -1839,15 +1861,6 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
-
-#~ msgid "%s changes target to %s"
-#~ msgstr "%s schimbă ținta către %s"
-
-#~ msgid "%s has decided to injure %s"
-#~ msgstr "%s s-a decis să-l rănească pe %s"
-
-#~ msgid "%s will shoot %s"
-#~ msgstr "%s îl va împușca pe %s"
 
 #, fuzzy
 #~| msgid ""

@@ -20,19 +20,19 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:340
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:332
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -60,40 +60,50 @@ msgstr "Joukkue %s"
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
+#: src/ai/ai_shoot_module.cpp:463
+#, c-format
+msgid "%s changes target to %s"
+msgstr ""
+
 #: src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:726
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
-#: src/game/game.cpp:759
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:711
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
+
+#: src/ai/ai_shoot_module.cpp:400
+#, c-format
+msgid "%s has decided to injure %s"
+msgstr ""
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -102,7 +112,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -387,17 +397,22 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
+
+#: src/ai/ai_shoot_module.cpp:377
+#, c-format
+msgid "%s will shoot %s"
+msgstr ""
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:268
+#: src/menu/options_menu.cpp:272
 msgid "(system language)"
 msgstr "(järjestelmän kieli)"
 
@@ -410,7 +425,7 @@ msgstr "(tuntematon aika)"
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:456
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -498,19 +513,19 @@ msgstr "Pomppupallo"
 msgid "Bye bye Tux..."
 msgstr "Hei hei tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:539 src/team/teams_list.cpp:548
-#: src/team/teams_list.cpp:554 src/team/teams_list.cpp:618
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:536 src/team/teams_list.cpp:545
+#: src/team/teams_list.cpp:551 src/team/teams_list.cpp:615
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:165
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:156
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:153
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
@@ -571,7 +586,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klikkaus: Keskitä kamera hahmoon"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:437
 msgid "Client mode"
 msgstr "Asiakastila"
 
@@ -658,7 +673,7 @@ msgstr "Dynamiitti"
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
-#: src/menu/options_menu.cpp:223
+#: src/menu/options_menu.cpp:227
 msgid "Effects volume"
 msgstr "Efektien voimakkuus"
 
@@ -671,11 +686,11 @@ msgstr "Energia"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Virhe alustettaessa verkkoa: Asiakas %s ei hyväksy sinua!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
 msgid "Error loading team :"
 msgstr "Virhe ladattaessa joukkuetta :"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:155
+#: src/game/config.cpp:510 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -871,7 +886,7 @@ msgstr ""
 "Käyttöohje : valitse kohde vasemmalla hiirennapilla\n"
 "yksi ammus per vuoro"
 
-#: src/game/game_classic.cpp:214
+#: src/game/game_classic.cpp:212
 msgid "Hurry up, you are too slow !!"
 msgstr "Vauhtia, olette liian hitaita !!"
 
@@ -901,23 +916,23 @@ msgstr ""
 "Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/game/game_init.cpp:161
+#: src/game/game_init.cpp:160
 msgid "Initialisation"
 msgstr "Alustus"
 
-#: src/game/game_init.cpp:115
+#: src/game/game_init.cpp:114
 msgid "Initialise map"
 msgstr "Alusta kartta"
 
-#: src/game/game_init.cpp:149
+#: src/game/game_init.cpp:148
 msgid "Initialise sounds"
 msgstr "Alusta äänet"
 
-#: src/game/game_init.cpp:125
+#: src/game/game_init.cpp:124
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -925,7 +940,7 @@ msgstr "Taivaalta sataa lahjoja!"
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
@@ -946,15 +961,19 @@ msgstr "Potkaisee <nickname>-nimiset pelaajat ulos pelistä"
 msgid "Language"
 msgstr "Kieli"
 
+#: src/menu/options_menu.cpp:203
+msgid "Left-handed mouse?"
+msgstr ""
+
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr "Listaa liittyneet pelaajat"
 
-#: src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:242
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:141
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
@@ -981,13 +1000,11 @@ msgstr "Kartta"
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:117
 msgid "Maps"
 msgstr "Kartat"
 
-#. The first player to connect to a headless server asumes the game master role
-#. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:391 src/menu/network_menu.cpp:392
 msgid "Master mode"
 msgstr "Mestaritila"
 
@@ -995,7 +1012,7 @@ msgstr "Mestaritila"
 msgid "Max energy"
 msgstr "Maksimienergia"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:106
 msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
@@ -1007,7 +1024,7 @@ msgstr "Maksimi FPS"
 msgid "Mine"
 msgstr "Miina"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:207
 msgid "Misc"
 msgstr "Sekalaiset"
 
@@ -1041,11 +1058,11 @@ msgstr "Siirrä kameraa hiirellä tai nuolilla"
 msgid "Move the character"
 msgstr "Siirrä hahmoa"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:217
 msgid "Music volume"
 msgstr "Musiikin voimakkuus"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:213
 msgid "Music?"
 msgstr "Musiikki"
 
@@ -1062,7 +1079,7 @@ msgstr "Ei koskaan"
 msgid "New network game at "
 msgstr "Uusi verkkopeli paikassa"
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:252
 msgid "New player warning?"
 msgstr "Varoitus uudesta pelaajasta?"
 
@@ -1118,7 +1135,7 @@ msgstr "Salasana:"
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:119
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
@@ -1167,12 +1184,12 @@ msgstr "Lopeta peli"
 msgid "Random map"
 msgstr "Satunnainen kartta"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:349
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Luetaan oletus asetuksia"
 
-#: src/game/config.cpp:399
+#: src/game/config.cpp:398
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
@@ -1211,7 +1228,7 @@ msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:467
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
@@ -1271,20 +1288,20 @@ msgstr ""
 "Versiotasi ei enää tueta. Tuettu versio on %s. Voit ladata päivitetyn "
 "version osoitteesta http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:255
 msgid "Sound"
 msgstr "Ääniasetukset"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:223
 msgid "Sound effects?"
 msgstr "Ääniefektit"
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:248
 msgid "Sound frequency"
 msgstr "Äänitaajuus"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:152
+#: src/game/game_init.cpp:151
 msgid "Sounds"
 msgstr "Ääniasetukset"
 
@@ -1321,7 +1338,7 @@ msgstr "Joukkueen graafi"
 msgid "Team stats"
 msgstr "Joukkueen tilastot"
 
-#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:126 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Joukkueet"
 
@@ -1378,7 +1395,7 @@ msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskogranaatti on poistunut paremmille tanssilattioille"
 
-#: src/game/game.cpp:490
+#: src/game/game.cpp:487
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
@@ -1387,7 +1404,7 @@ msgstr "Peli keskeytyi koska yhteytesi katkesi."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Kranaatti on poistunut taistelukentältä..."
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:339
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Kaikki muut odottavat sinua! Herätys!! :)"
@@ -1453,12 +1470,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Ei saatu yhteyttä isäntään."
 
-#: src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:252
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/map/maps_list.cpp:249
+#: src/map/maps_list.cpp:264
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Henkilökohtaisten karttojen avaaminen epäonnistui (%s)!"
@@ -1479,7 +1496,7 @@ msgstr "Rajaton"
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:457
+#: src/menu/options_menu.cpp:464
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Version tarkistus epäonnistui koska: %s"
@@ -1491,7 +1508,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/menu/network_menu.cpp:450
+#: src/menu/network_menu.cpp:456
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta, voit ainoastaan keskeyttää tai jutella!"
@@ -1502,7 +1519,7 @@ msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
 
 #. Initialization of teams' energy
-#: src/game/game_init.cpp:138
+#: src/game/game_init.cpp:137
 msgid "Weapons"
 msgstr "Aseet"
 
@@ -1511,12 +1528,17 @@ msgid "Website: "
 msgstr "Verkkosivu:"
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:135
 #, c-format
 msgid "Welcome to %s!"
 msgstr "Tervetuloa kohteeseen %s!"
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:710
+#, c-format
+msgid "What a beautiful homerun! %s from %s team is in another world..."
+msgstr ""
+
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -1550,7 +1572,7 @@ msgstr "Väärä kartan nimi!"
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
-#: src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:342
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Olet yksin :-/"
@@ -1559,16 +1581,16 @@ msgstr "Olet yksin :-/"
 msgid "You are alone..."
 msgstr "Olet yksin..."
 
-#: src/menu/network_menu.cpp:393
+#: src/menu/network_menu.cpp:399
 msgid "You are the new turn master!"
 msgstr "Sinä olet uusi vuoromestari!"
 
-#: src/map/maps_list.cpp:258
+#: src/map/maps_list.cpp:273
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_init.cpp:131 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:173
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
@@ -1596,7 +1618,7 @@ msgstr ""
 "hyökkässuunta: Vasen/Oikea\n"
 "Pommitus : valitse kohde vasemmalla hiirennapilla yksi pommitus per vuoro"
 
-#: src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "ei voitu lukea asetuksia"
 
@@ -1617,7 +1639,7 @@ msgstr "virhe luettaessa asetustiedostoa"
 msgid "from"
 msgstr ", "
 
-#: src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 

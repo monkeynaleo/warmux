@@ -19,19 +19,19 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 
-#: src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:340
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:326
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Играчът %i се свърза"
 msgstr[1] "Играчите %i се свързаха"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:332
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -59,40 +59,50 @@ msgstr "%s Отбор"
 msgid "%s Team - Remote"
 msgstr "Отбор  %s - Отдалечен"
 
+#: src/ai/ai_shoot_module.cpp:463
+#, c-format
+msgid "%s changes target to %s"
+msgstr ""
+
 #: src/graphic/fps.cpp:103
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:726
+#: src/game/game.cpp:732
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s от %s се самоуби!"
 
-#: src/game/game.cpp:759
+#: src/game/game.cpp:765
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s от отбора %s умря."
 
-#: src/game/game.cpp:717
+#: src/game/game.cpp:723
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s от отбора %s падна във водата!"
 
-#: src/game/game.cpp:711
+#: src/game/game.cpp:717
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s от отбора %s изпадна извън картата!"
 
-#: src/game/game.cpp:732
+#: src/game/game.cpp:738
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s от отбора %s се удари в земята твърде силно!"
 
-#: src/game/game.cpp:739
+#: src/game/game.cpp:745
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s от отбора %s умря заради несръчността си!"
+
+#: src/ai/ai_shoot_module.cpp:400
+#, c-format
+msgid "%s has decided to injure %s"
+msgstr ""
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -101,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s спечели %u точка здраве!"
 msgstr[1] "%s спечели %u точки здраве!"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:757
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
@@ -387,17 +397,22 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Всички от отбора %s са убити."
 
-#: src/game/game.cpp:747
+#: src/game/game.cpp:753
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
+
+#: src/ai/ai_shoot_module.cpp:377
+#, c-format
+msgid "%s will shoot %s"
+msgstr ""
 
 #: src/interface/interface.cpp:189
 msgid "(dead)"
 msgstr "(мъртъв)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:268
+#: src/menu/options_menu.cpp:272
 msgid "(system language)"
 msgstr "(системен език)"
 
@@ -410,7 +425,7 @@ msgstr "(незнайно време)"
 msgid "(unlimited)"
 msgstr "(безкраен)"
 
-#: src/menu/options_menu.cpp:449
+#: src/menu/options_menu.cpp:456
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -498,19 +513,19 @@ msgstr "Супер-топче"
 msgid "Bye bye Tux..."
 msgstr "Tux e свободен!!!"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:506
-#: src/team/teams_list.cpp:539 src/team/teams_list.cpp:548
-#: src/team/teams_list.cpp:554 src/team/teams_list.cpp:618
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:536 src/team/teams_list.cpp:545
+#: src/team/teams_list.cpp:551 src/team/teams_list.cpp:615
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:168
+#: src/team/teams_list.cpp:165
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя личната директория на отборите (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:156
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:153
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -572,7 +587,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Клик: Центрирай камерата на войникът"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:437
 msgid "Client mode"
 msgstr "Клиентски режим"
 
@@ -660,7 +675,7 @@ msgstr "Шашка динамит"
 msgid "END OF GAME"
 msgstr "КРАЙ НА ИГРАТА"
 
-#: src/menu/options_menu.cpp:223
+#: src/menu/options_menu.cpp:227
 msgid "Effects volume"
 msgstr "Сила на звуковите ефекти"
 
@@ -674,11 +689,11 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Грешка при стартиране на мрежата: Клиентът %s не е съгласен с теб!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:132
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбор %s:"
 
-#: src/game/config.cpp:512 src/team/custom_team.cpp:155
+#: src/game/config.cpp:510 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -874,7 +889,7 @@ msgstr ""
 "Как да се използва : ляв клик на целта\n"
 "муниция на ход"
 
-#: src/game/game_classic.cpp:214
+#: src/game/game_classic.cpp:212
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
@@ -904,23 +919,23 @@ msgstr ""
 "Огън : дръж space натиснат до достигане на желаната сила\n"
 "муниция на ход"
 
-#: src/game/game_init.cpp:161
+#: src/game/game_init.cpp:160
 msgid "Initialisation"
 msgstr "Инициализация..."
 
-#: src/game/game_init.cpp:115
+#: src/game/game_init.cpp:114
 msgid "Initialise map"
 msgstr "Инициализирам карта..."
 
-#: src/game/game_init.cpp:149
+#: src/game/game_init.cpp:148
 msgid "Initialise sounds"
 msgstr "Инициализирам звук..."
 
-#: src/game/game_init.cpp:125
+#: src/game/game_init.cpp:124
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
-#: src/game/game.cpp:595
+#: src/game/game.cpp:592
 msgid "It's a present!"
 msgstr "Подаръче..."
 
@@ -928,7 +943,7 @@ msgstr "Подаръче..."
 msgid "Jetpack"
 msgstr "Реактивна раница"
 
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Свържи се с #wormux на  irc.freenode.net за опоненти"
 
@@ -948,15 +963,19 @@ msgstr "Kick-ва играчите избрани от <nickname> от игра�
 msgid "Language"
 msgstr "Език"
 
+#: src/menu/options_menu.cpp:203
+msgid "Left-handed mouse?"
+msgstr ""
+
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr ""
 
-#: src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:242
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:141
 msgid "Load teams:"
 msgstr "Отбори които да заредя:"
 
@@ -983,13 +1002,11 @@ msgstr "Карта"
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:117
 msgid "Maps"
 msgstr "Карти"
 
-#. The first player to connect to a headless server asumes the game master role
-#. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:391 src/menu/network_menu.cpp:392
 #, fuzzy
 msgid "Master mode"
 msgstr "Режим"
@@ -998,7 +1015,7 @@ msgstr "Режим"
 msgid "Max energy"
 msgstr "Максимално здраве"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:106
 msgid "Max number of players:"
 msgstr "Максимален брой играчи:"
 
@@ -1010,7 +1027,7 @@ msgstr "Максимални FPS"
 msgid "Mine"
 msgstr "Противопехотна мина"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:207
 msgid "Misc"
 msgstr "Разни"
 
@@ -1044,11 +1061,11 @@ msgstr "Движи камерата с мишката или стрелкичк�
 msgid "Move the character"
 msgstr "Премести войник"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:217
 msgid "Music volume"
 msgstr "Сила на звука"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:213
 msgid "Music?"
 msgstr "Музика?"
 
@@ -1065,7 +1082,7 @@ msgstr "Никога"
 msgid "New network game at "
 msgstr "Нова Мрежова игра в"
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:252
 msgid "New player warning?"
 msgstr "Предупреждение за нов играч?"
 
@@ -1122,7 +1139,7 @@ msgstr "Парола:"
 msgid "Play"
 msgstr "Играй!"
 
-#: src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:119
 msgid "Play several times"
 msgstr "Играй няколко пъти"
 
@@ -1171,12 +1188,12 @@ msgstr "Напусни играта"
 msgid "Random map"
 msgstr "Случайна карта"
 
-#: src/game/config.cpp:350
+#: src/game/config.cpp:349
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Чета първоначалния конфигурационен файл"
 
-#: src/game/config.cpp:399
+#: src/game/config.cpp:398
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
@@ -1215,7 +1232,7 @@ msgid "Server available on Internet"
 msgstr "Достъпен сървър в интернет"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:467
 msgid "Server mode"
 msgstr "Сървъров режим"
 
@@ -1275,20 +1292,20 @@ msgstr ""
 "Съжалявам, но твоята версия не е поддържана. Поддържаните версии са %s. Ти "
 "може да дръпнеш по-нова версия от  http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:255
 msgid "Sound"
 msgstr "Звук"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:223
 msgid "Sound effects?"
 msgstr "Звукови ефекти?"
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:248
 msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:152
+#: src/game/game_init.cpp:151
 msgid "Sounds"
 msgstr "Звуци"
 
@@ -1325,7 +1342,7 @@ msgstr "Графика на Отбора"
 msgid "Team stats"
 msgstr "Статистика на Отбора"
 
-#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:126 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Отбори"
 
@@ -1382,7 +1399,7 @@ msgstr "Връзката прекъсна. Виж дали има пречеща
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско гранатата си тръгна от партито..."
 
-#: src/game/game.cpp:490
+#: src/game/game.cpp:487
 msgid "The game was interrupted because you got disconnected."
 msgstr "Играта беше прекъсната, защото ти излезе."
 
@@ -1391,7 +1408,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:336
+#: src/menu/network_menu.cpp:339
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Другите те чакат! Събуди се :-)"
@@ -1457,12 +1474,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Не може да се свърже!"
 
-#: src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:252
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
 
-#: src/map/maps_list.cpp:249
+#: src/map/maps_list.cpp:264
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Не мога да отворя личната директорията за карти (%s) !"
@@ -1483,7 +1500,7 @@ msgstr "Безкраен"
 msgid "Version"
 msgstr "версия"
 
-#: src/menu/options_menu.cpp:457
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Проверка на версията се провали заради: %s\n"
@@ -1495,7 +1512,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Чакай! %i играч не е готов!"
 msgstr[1] "Чакай! %i играчи не са готови!"
 
-#: src/menu/network_menu.cpp:450
+#: src/menu/network_menu.cpp:456
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
@@ -1507,7 +1524,7 @@ msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 
 #. Initialization of teams' energy
-#: src/game/game_init.cpp:138
+#: src/game/game_init.cpp:137
 msgid "Weapons"
 msgstr "Оръжия"
 
@@ -1516,12 +1533,17 @@ msgid "Website: "
 msgstr "Страница: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:135
 #, c-format
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:756
+#: src/game/game.cpp:710
+#, c-format
+msgid "What a beautiful homerun! %s from %s team is in another world..."
+msgstr ""
+
+#: src/game/game.cpp:762
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -1556,7 +1578,7 @@ msgstr "Грешно име на картата."
 msgid "Wrong team!"
 msgstr "Грешен отбор."
 
-#: src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:342
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Ти си сам :-/"
@@ -1565,16 +1587,16 @@ msgstr "Ти си сам :-/"
 msgid "You are alone..."
 msgstr "Ти си сам..."
 
-#: src/menu/network_menu.cpp:393
+#: src/menu/network_menu.cpp:399
 msgid "You are the new turn master!"
 msgstr ""
 
-#: src/map/maps_list.cpp:258
+#: src/map/maps_list.cpp:273
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game_init.cpp:131 src/team/teams_list.cpp:176
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:173
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Трябват ми поне два валидни отбора!"
@@ -1603,7 +1625,7 @@ msgstr ""
 "Bombing : Ляв клик на целта\n"
 "едно бомбиране на ход"
 
-#: src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "не мога да заредя конфигурацията"
 
@@ -1624,7 +1646,7 @@ msgstr "грешка при четенето на персоналния кон�
 msgid "from"
 msgstr "от"
 
-#: src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "конфигурационният файл липсва!"
 
