@@ -34,6 +34,7 @@
   <surface name="ico_quit" file="menu/i_quit.png" />
 
   <surface name="ico_update" file="menu/i_update.png" />
+  <surface name="ico_lefthanded_mouse" file="menu/i_update.png" />
 
   <surface name="enabled" file="menu/enabled.png" />
   <surface name="disabled_front" file="menu/disabled_front.png" />
@@ -235,7 +236,7 @@
   <surface name="rounding_mask_right" file="interface/hide_right.png" />
   <surface name="rounding_mask_left" file="interface/hide_left.png" />
   <surface name="rounding_mask_top" file="interface/hide_top.png" />
-  
+
   <surface name="square_bottom" file="interface/square_bottom.png" />
   <surface name="square_bottom_left" file="interface/square_bottomleft.png" />
   <surface name="square_bottom_right" file="interface/square_bottomright.png" />
@@ -253,8 +254,8 @@
   <surface name="square_mask_right" file="interface/hide_right.png" />
   <surface name="square_mask_left" file="interface/hide_left.png" />
   <surface name="square_mask_top" file="interface/hide_top.png" />
-  
-  
+
+
 </section>
 
 <section name="loading_screen">

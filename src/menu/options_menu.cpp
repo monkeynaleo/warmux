@@ -200,6 +200,10 @@ OptionMenu::OptionMenu() :
                                     "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 
+  opt_lefthanded_mouse = new PictureTextCBox(_("Left-handed mouse?"),
+					     "menu/ico_lefthanded_mouse", option_size);
+  misc_options->AddWidget(opt_lefthanded_mouse);
+
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 
 
@@ -304,6 +308,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
 
   opt_updates->SetValue(config->GetCheckUpdates());
+  opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
 
   GetResourceManager().UnLoadXMLProfile(res);
 
@@ -369,6 +374,7 @@ void OptionMenu::SaveOptions()
 
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());
+  config->SetLeftHandedMouse(opt_lefthanded_mouse->GetValue());
 
   // Sound settings - volume already saved
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
