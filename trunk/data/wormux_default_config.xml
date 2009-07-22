@@ -2,7 +2,7 @@
 <resources>
 
 <section name="default_video_mode">
-  <int name="number_of_resolution_available" value="10" />
+  <int name="number_of_resolution_available" value="9" />
   <point name="1" x="1680" y="1050" />
   <point name="2" x="1600" y="1200" />
   <point name="3" x="1400" y="1050" />
@@ -12,7 +12,6 @@
   <point name="7" x="800"  y="600"  />
   <point name="8" x="800"  y="480"  />
   <point name="9" x="640"  y="480"  />
-  <point name="10" x="630" y="730"  />
 </section>
 
 <section name="default_keyboard_layout">
