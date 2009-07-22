@@ -679,18 +679,23 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
   goto out_unlock;
 }
 
-bool WSocket::IsReady(int timeout) const
+bool WSocket::IsReady(int timeout, bool force_check_activity) const
 {
   if (socket == NULL)
     return false;
 
-  if (timeout != 0) {
+  if (timeout != 0 || force_check_activity) {
     ASSERT(socket_set != NULL);
     if (socket_set->CheckActivity(timeout) == 0)
       return false;
   }
 
   return SDLNet_SocketReady(socket);
+}
+
+bool WSocket::IsReady(int timeout) const
+{
+  return IsReady(timeout, false);
 }
 
 std::string WSocket::GetAddress() const
