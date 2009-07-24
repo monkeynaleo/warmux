@@ -244,15 +244,19 @@ Point2d BulletObj::GetSpeed() const
        return rect;
    }
   //  Mass
-  double BulletObj::GetMass() const{ return 10;}
+  double BulletObj::GetMass() const{ return 1/m_body->getInvMass();}
 
   // Force
   uint BulletObj::AddExternForceXY (const Point2d& /*vector*/){ return 0;}
   uint BulletObj::AddExternForce (double /*norm*/, double /*angle*/) { return 0;}
   void BulletObj::RemoveExternForce(unsigned /*force_index*/) {}
   void BulletObj::RemoveAllExternForce() {}
-  void BulletObj::ImpulseXY(const Point2d& /*vector*/){}
-  void BulletObj::Impulse(double /*norm*/, double /*angle*/) {}
+  void BulletObj::ImpulseXY(const Point2d& vector){
+    m_body->internalApplyImpulse(btVector3(vector.x, vector.y,0),btVector3(0,0,0),1);
+  }
+  void BulletObj::Impulse(double norm, double angle) {
+    ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
+  }
 
   // Collision
 
