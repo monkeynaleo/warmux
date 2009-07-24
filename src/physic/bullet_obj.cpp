@@ -36,7 +36,7 @@ BulletObj::BulletObj() : PhysicalObj() {
     btTransform startTransform;
     startTransform.setIdentity();
 
-    btScalar mass(1.0f);
+    btScalar mass(100.0f);
     btVector3 localInertia(0, 0, 0);
 
 
@@ -107,7 +107,9 @@ BulletObj::~BulletObj()
   //State
   void BulletObj::SetFixed(bool i_fixed){
     if(i_fixed){
-      m_body->setMassProps(0,btVector3(0,0,0));
+      m_body->setLinearFactor(btVector3(0,0,0));
+    }else{
+      m_body->setLinearFactor(btVector3(1,1,0));
     }
   }
 
@@ -116,9 +118,20 @@ BulletObj::~BulletObj()
     return m_body->isStaticObject();
   }
 
-  void BulletObj::SetRotationFixed(bool /*rotating*/) {}
-  void BulletObj::StopMovement(){}
-  void BulletObj::SetFast(bool /*is_fast*/){}
+  void BulletObj::SetRotationFixed(bool rotating)
+  {
+    if(rotating){
+      m_body->setAngularFactor(btVector3(0,1,0));
+    }else{
+      m_body->setAngularFactor(btVector3(0,0,0));
+    }
+  }
+  void BulletObj::StopMovement(){
+    SetSpeedXY(Point2d(0,0));
+  }
+  void BulletObj::SetFast(bool /*is_fast*/){
+
+  }
   bool BulletObj::IsFast() { return false;}
 
  // Speed
@@ -259,9 +272,63 @@ Point2d BulletObj::GetSpeed() const
   }
 
   // Collision
+  int BulletObj::GetCollisionCategory(){
+    return m_collision_category;
+  }
+  int BulletObj::GetcollisionMask(){
+    return m_collision_mask;
+  }
+  void BulletObj::SetCollisionMembership(CollisionCategory category, bool state){
+    int bit = 0;
+    switch(category){
+      case COLLISION_CHARACTER:
+        bit = 0x01;
+        break;
+      case COLLISION_GROUND:
+        bit = 0x02;
+        break;
+      case COLLISION_ITEM:
+        bit = 0x04;
+        break;
+      case COLLISION_PROJECTILE:
+        bit = 0x08;
+        break;
+    }
 
-  void BulletObj::SetCollisionMembership(CollisionCategory /*category*/, bool /*state*/){}
-  void BulletObj::SetCollisionCategory(CollisionCategory /*category*/,bool /*state*/){}
+    if(state){
+      m_collision_category |= bit;
+    }else{
+      m_collision_category &= ~bit;
+    }
+
+
+
+
+  }
+  void BulletObj::SetCollisionCategory(CollisionCategory category,bool state){
+    int bit = 0;
+    switch(category){
+      case COLLISION_CHARACTER:
+        bit = 0x01;
+        break;
+      case COLLISION_GROUND:
+        bit = 0x02;
+        break;
+      case COLLISION_ITEM:
+        bit = 0x04;
+        break;
+      case COLLISION_PROJECTILE:
+        bit = 0x08;
+        break;
+    }
+
+    if(state){
+      m_collision_mask |= bit;
+    }else{
+      m_collision_mask &= ~bit;
+    }
+  }
+
   bool BulletObj::IsColliding() const {
     return false;
     //return m_body->hasContactResponse();
