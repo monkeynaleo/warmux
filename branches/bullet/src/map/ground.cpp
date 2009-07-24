@@ -68,7 +68,7 @@ void Ground::Init()
 
   m_physical_obj = PhysicalEngine::GetInstance()->CreateObject(PhysicalEngine::RIGID_BODY);
   m_physical_obj->SetFixed(true);
-  PhysicalEngine::GetInstance()->AddObject(m_physical_obj);
+ // PhysicalEngine::GetInstance()->AddObject(m_physical_obj);
 
   // Load ground data
   Surface& m_image = ActiveMap()->ReadImgGround();

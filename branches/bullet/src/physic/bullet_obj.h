@@ -95,6 +95,10 @@ public:
   
   // Collision
 
+  int GetCollisionCategory();
+  int GetcollisionMask();
+
+
   void SetCollisionMembership(CollisionCategory category, bool state);
   void SetCollisionCategory(CollisionCategory category,bool state);
   bool IsColliding() const ;
@@ -157,6 +161,8 @@ protected:
   btRigidBody* m_body;
   btCompoundShape *m_root_shape;
   std::map<std::string, PhysicalShape *> m_shape_list;
+  int m_collision_category;
+  int m_collision_mask;
 
 };
 

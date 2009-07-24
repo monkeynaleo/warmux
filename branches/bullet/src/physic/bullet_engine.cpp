@@ -97,7 +97,7 @@ BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
-    m_world->addRigidBody(obj->GetBody());
+    m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
     obj->GetBody()->setActivationState(ACTIVE_TAG);
 std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
@@ -120,7 +120,7 @@ void BulletEngine::Step()
   if ((Time::GetInstance()->Read()-m_last_step_time) < (uint)lround(timeStep)) {
     return;
   }
-  MSG_DEBUG("physical.step", "Engine step");
+ MSG_DEBUG("physical.step", "Engine step");
   m_world->stepSimulation(timeStep);
   m_last_step_time = m_last_step_time +lround(timeStep);
 
