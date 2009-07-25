@@ -20,6 +20,8 @@
 <!-- This is how to setup per language font files -->
 <section name="default_language_fonts">
   <language name="ja_JP" file="VL-Gothic-Regular.ttf" relative="true" />
+  <language name="zh_CN" file="wqy-microhei-lite.ttc" relative="true" />
+  <language name="zh_TW" file="wqy-microhei-lite.ttc" relative="true" />
 </section>
 
 </resources>
