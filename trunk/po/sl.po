@@ -1019,7 +1019,7 @@ msgstr "Jezik"
 
 #: src/menu/options_menu.cpp:203
 msgid "Left-handed mouse?"
-msgstr ""
+msgstr "Miška za levičarje?"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
@@ -1576,7 +1576,7 @@ msgstr "Dobrodošli v %s!"
 #: src/game/game.cpp:710
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr ""
+msgstr "Homerun! %s iz ekipe %s je poletel v drug svet!"
 
 #: src/game/game.cpp:762
 #, c-format
