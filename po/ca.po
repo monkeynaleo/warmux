@@ -440,7 +440,7 @@ msgstr "Tots els equips "
 msgid "Always"
 msgstr "Sempre "
 
-#: src/game/game_blitz.cpp:49 src/game/game_classic.cpp:55
+#: src/game/game_classic.cpp:55 src/game/game_blitz.cpp:49
 msgid "And the winner is..."
 msgstr "El guanyador és..."
 
@@ -678,7 +678,7 @@ msgstr "Enemic"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
+#: src/team/teams_list.cpp:129 src/team/custom_teams_list.cpp:112
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
@@ -817,8 +817,8 @@ msgstr "Pistola"
 msgid "Have a good game!"
 msgstr "Que tinguis una bona partida!"
 
-#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:73
+#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:73
+#: src/menu/options_menu.cpp:141
 msgid "Head commander"
 msgstr "Comandant cap"
 
@@ -937,7 +937,7 @@ msgstr "Això és un regal! "
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
+#: src/menu/network_menu.cpp:132 src/menu/network_connection_menu.cpp:236
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
 
@@ -1667,58 +1667,6 @@ msgstr "o Carregant perfil de so: %s "
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
 
-#, fuzzy
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration: TCP Port %u must accept connections from the "
-#~ "outside. If you are not directly connected to the internet, check your "
-#~ "router configuration: TCP Port %u must be forwarded on your computer."
-#~ msgstr ""
-#~ "Error: El servidor no és accessible des de la Internet. Mira la "
-#~ "configuració del firewall: El Port TCP %s ha d'acceptar connexió des de "
-#~ "l'exterior. Si no està directament connectat a Internet, comprova la "
-#~ "configuració de la teva router: Port TCP %s ha de ser dirigit al teu "
-#~ "ordinador."
-
-#, fuzzy
-#~| msgid ""
-#~| "Sorry, your version is not supported anymore. Supported version are %s. "
-#~| "You can download a updated version on http://www.wormux.org/wiki/"
-#~| "download.php"
-#~ msgid ""
-#~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download an updated version on http://www.wormux.org/wiki/"
-#~ "download.php"
-#~ msgstr ""
-#~ "Ho sentim, però la seva versió no té suport. La versió amb suport és %s. "
-#~ "Pot descarregar una versió actualitzada en http://www.wormux.org/wiki/"
-#~ "download.php "
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "No s'ha pogut tornar a la versió %s"
-
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr "El directori HOME (la variable d'entorn $HOME) no pot ser trobat!"
-
-#~ msgid "Pause"
-#~ msgstr "Pausa"
-
-#~ msgid "Tools"
-#~ msgstr "Eines"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Comandant cap:"
-
-#~ msgid "Add custom team"
-#~ msgstr "Afegir equip personalitzat"
-
-#~ msgid "Delete custom team"
-#~ msgstr "Elimina l'equip personalitzat "
-
-#~ msgid "Player name"
-#~ msgstr "Nom del jugador"
-
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opció il·legal -- %c\n"
 
@@ -1752,8 +1700,17 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ msgid "%s: unrecognized option `--%s'\n"
 #~ msgstr "%s: opció no reconeguda`--%s'\n"
 
+#~ msgid "Add custom team"
+#~ msgstr "Afegir equip personalitzat"
+
 #~ msgid "Automatically join a game"
 #~ msgstr "Unir-se automàticament a la partida"
+
+#~ msgid "Couldn't fetch last version from %s"
+#~ msgstr "No s'ha pogut tornar a la versió %s"
+
+#~ msgid "Delete custom team"
+#~ msgstr "Elimina l'equip personalitzat "
 
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"
 #~ msgstr "Error en %s:%lu (Wormux %s) : %s"
@@ -1765,6 +1722,26 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ "Error: El teu servidor no es pot connectar a internet. Comprova la "
 #~ "configuració del teu tallafoc. "
 
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connections from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Error: El servidor no és accessible des de la Internet. Mira la "
+#~ "configuració del firewall: El Port TCP %s ha d'acceptar connexió des de "
+#~ "l'exterior. Si no està directament connectat a Internet, comprova la "
+#~ "configuració de la teva router: Port TCP %s ha de ser dirigit al teu "
+#~ "ordinador."
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr "El directori HOME (la variable d'entorn $HOME) no pot ser trobat!"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Comandant cap:"
+
 #~ msgid "Network initialization"
 #~ msgstr "Inicialització de la xarxa"
 
@@ -1774,6 +1751,29 @@ msgstr "o Obert àudio a %d Hz %d bit "
 #~ msgstr ""
 #~ "No hi ha servidors públics disponibles i la connexió manual està mal "
 #~ "configurada. Prova connectant-te manualment."
+
+#~ msgid "Pause"
+#~ msgstr "Pausa"
+
+#~ msgid "Player name"
+#~ msgstr "Nom del jugador"
+
+#, fuzzy
+#~| msgid ""
+#~| "Sorry, your version is not supported anymore. Supported version are %s. "
+#~| "You can download a updated version on http://www.wormux.org/wiki/"
+#~| "download.php"
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download an updated version on http://www.wormux.org/wiki/"
+#~ "download.php"
+#~ msgstr ""
+#~ "Ho sentim, però la seva versió no té suport. La versió amb suport és %s. "
+#~ "Pot descarregar una versió actualitzada en http://www.wormux.org/wiki/"
+#~ "download.php "
+
+#~ msgid "Tools"
+#~ msgstr "Eines"
 
 #~ msgid "Unnamed"
 #~ msgstr "Sense nom"

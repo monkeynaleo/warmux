@@ -466,7 +466,7 @@ msgstr "Όλες οι ομάδες"
 msgid "Always"
 msgstr "Πάντα"
 
-#: src/game/game_blitz.cpp:49 src/game/game_classic.cpp:55
+#: src/game/game_classic.cpp:55 src/game/game_blitz.cpp:49
 msgid "And the winner is..."
 msgstr "Και ο νικητής είναι..."
 
@@ -707,7 +707,7 @@ msgstr "Ενέργεια"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Λάθος αρχικοποίησης δικτύου: Ο πελάτης %s δεν συμφωνεί μαζί σου!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
+#: src/team/teams_list.cpp:129 src/team/custom_teams_list.cpp:112
 msgid "Error loading team :"
 msgstr "Λάθος στη φόρτωση της ομάδας:"
 
@@ -852,8 +852,8 @@ msgstr "Πιστόλι"
 msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
-#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:73
+#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:73
+#: src/menu/options_menu.cpp:141
 msgid "Head commander"
 msgstr "Διοικητής"
 
@@ -974,7 +974,7 @@ msgid "Jetpack"
 msgstr "Σακίδιο Τζετ"
 
 # Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires.
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
+#: src/menu/network_menu.cpp:132 src/menu/network_connection_menu.cpp:236
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Μπείτε στο #wormux-fr στο irc.freenode.net για να βρείτε αντίπαλους."
 
@@ -1717,6 +1717,29 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 
+#~ msgid "Add custom team"
+#~ msgstr "Πρόσθεσε προσωπική ομάδα."
+
+#, fuzzy
+#~ msgid "Automatically join a game"
+#~ msgstr "Joindre automatiquement une partie (si possible)."
+
+#~ msgid "Couldn't fetch last version from %s"
+#~ msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδοση από τον %s"
+
+#~ msgid "Delete custom team"
+#~ msgstr "Διάγραψε προσωπική ομάδα."
+
+#~ msgid "Error in %s:%lu (Wormux %s) : %s"
+#~ msgstr "Λάθος στο %s:%lu (Wormux %s) : %s"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration"
+#~ msgstr ""
+#~ "Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les "
+#~ "paramètres de votre firewall."
+
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #, fuzzy
 #~| msgid ""
@@ -1736,6 +1759,31 @@ msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 #~ "ρύθμιση του δρομολογητή:  Η TCP θύρα %u πρέπει να διαβιβάζεται στον "
 #~ "υπολογιστή σας."
 
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr ""
+#~ "Ο φάκελος HOME (μεταβλητή περιβάλλοντος $HOME) δεν μπορεί να βρεθεί!"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Διοικητής: "
+
+#~ msgid "Network initialization"
+#~ msgstr "Αρχικοποίηση Δικτύου"
+
+#, fuzzy
+#~ msgid ""
+#~ "No public servers available and incorrect manual connection settings. Try "
+#~ "connecting manually."
+#~ msgstr ""
+#~ "Pas de serveur public sans mot de passe et paramètres de connexion "
+#~ "manuelles incorrects. Veuillez essayer en connexion manuelle."
+
+#~ msgid "Pause"
+#~ msgstr "Παύση"
+
+#~ msgid "Player name"
+#~ msgstr "Όνομα παίκτη"
+
 #, fuzzy
 #~| msgid ""
 #~| "Sorry, your version is not supported anymore. Supported version are %s. "
@@ -1750,56 +1798,8 @@ msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 #~ "εκδόσεις είναι οι %s. Μπορείτε να κατεβάσετε μία ενημερωμένη έκδοση στο  "
 #~ "http://www.wormux.org/wiki/download.php"
 
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδοση από τον %s"
-
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr ""
-#~ "Ο φάκελος HOME (μεταβλητή περιβάλλοντος $HOME) δεν μπορεί να βρεθεί!"
-
-#~ msgid "Pause"
-#~ msgstr "Παύση"
-
 #~ msgid "Tools"
 #~ msgstr "Εργαλεία"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Διοικητής: "
-
-#~ msgid "Add custom team"
-#~ msgstr "Πρόσθεσε προσωπική ομάδα."
-
-#~ msgid "Delete custom team"
-#~ msgstr "Διάγραψε προσωπική ομάδα."
-
-#~ msgid "Player name"
-#~ msgstr "Όνομα παίκτη"
-
-#, fuzzy
-#~ msgid "Automatically join a game"
-#~ msgstr "Joindre automatiquement une partie (si possible)."
-
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Λάθος στο %s:%lu (Wormux %s) : %s"
-
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration"
-#~ msgstr ""
-#~ "Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les "
-#~ "paramètres de votre firewall."
-
-#~ msgid "Network initialization"
-#~ msgstr "Αρχικοποίηση Δικτύου"
-
-#, fuzzy
-#~ msgid ""
-#~ "No public servers available and incorrect manual connection settings. Try "
-#~ "connecting manually."
-#~ msgstr ""
-#~ "Pas de serveur public sans mot de passe et paramètres de connexion "
-#~ "manuelles incorrects. Veuillez essayer en connexion manuelle."
 
 #~ msgid "Unnamed"
 #~ msgstr "Ανώνυμος"

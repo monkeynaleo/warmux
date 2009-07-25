@@ -442,7 +442,7 @@ msgstr "Svi timovi"
 msgid "Always"
 msgstr "Igraj"
 
-#: src/game/game_blitz.cpp:49 src/game/game_classic.cpp:55
+#: src/game/game_classic.cpp:55 src/game/game_blitz.cpp:49
 msgid "And the winner is..."
 msgstr "I pobjednik je ..."
 
@@ -681,7 +681,7 @@ msgstr ""
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:129
+#: src/team/teams_list.cpp:129 src/team/custom_teams_list.cpp:112
 msgid "Error loading team :"
 msgstr "Greška kod očitavanja tima:"
 
@@ -821,8 +821,8 @@ msgstr "Pištolj"
 msgid "Have a good game!"
 msgstr "Uživaj u igri!"
 
-#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:73
+#: src/menu/team_box.cpp:67 src/menu/team_box.cpp:73
+#: src/menu/options_menu.cpp:141
 msgid "Head commander"
 msgstr "Vojskovođa"
 
@@ -935,7 +935,7 @@ msgstr "Pa to je poklon!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:132
+#: src/menu/network_menu.cpp:132 src/menu/network_connection_menu.cpp:236
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Dođi na #wormux na irc.freenode.net da pronađeš protivnika"
 
@@ -1664,21 +1664,6 @@ msgstr "o Učitavam zvučne profile: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
 
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr ""
-#~ "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
-
-#~ msgid "Tools"
-#~ msgstr "Alati"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Vojskovođa:"
-
-#, fuzzy
-#~ msgid "Player name"
-#~ msgstr "Prikaži ime igrača?"
-
 #, fuzzy
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "Wormux verzije su drugačije : klijent=%s, server=%s."
@@ -1708,6 +1693,14 @@ msgstr "o Otvoren audio na %d Hz %d bit"
 #~ msgid "Error while loading game mode %s (file %s):"
 #~ msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr ""
+#~ "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Vojskovođa:"
+
 #, fuzzy
 #~ msgid "Network deinitialization"
 #~ msgstr "Initalaizacija baze ..."
@@ -1716,8 +1709,15 @@ msgstr "o Otvoren audio na %d Hz %d bit"
 #~ msgid "Network initialization"
 #~ msgstr "Initalaizacija baze ..."
 
+#, fuzzy
+#~ msgid "Player name"
+#~ msgstr "Prikaži ime igrača?"
+
 #~ msgid "Refresh"
 #~ msgstr "Osvježi"
+
+#~ msgid "Tools"
+#~ msgstr "Alati"
 
 #~ msgid "Unnamed"
 #~ msgstr "Bezimeni"
