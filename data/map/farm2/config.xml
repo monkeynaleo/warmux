@@ -39,7 +39,7 @@
   </wind>
 
   <!-- pad is given in pixel count. -->
-  <!-- <add_pad>1</add_pad>
-  <point name="upper_left_pad" x="200" y="400" />
-  <point name="lower_right_pad" x="200" y="0" /> -->
+  <add_pad>1</add_pad>
+  <point name="upper_left_pad" x="600" y="1000" />
+  <point name="lower_right_pad" x="500" y="0" />
 </resources>
