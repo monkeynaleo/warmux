@@ -67,7 +67,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_body->setActivationState(ISLAND_SLEEPING);
 
   //  m_world->addRigidBody(m_body,0xFFFF,0xFFFF);
-    m_world->addRigidBody(m_body);
+    m_world->addRigidBody(m_body,0x0002,0xFFFF);
     m_body->setActivationState(ACTIVE_TAG);
     m_body->setRestitution(0.5);
 }
@@ -102,8 +102,8 @@ BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
-   // m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
-    m_world->addRigidBody(obj->GetBody());
+    m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
+    //m_world->addRigidBody(obj->GetBody());
     obj->GetBody()->setActivationState(ACTIVE_TAG);
 std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
