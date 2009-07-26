@@ -196,11 +196,6 @@ void BulletPolygon::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
 
-  btVector3 pos;
-  btScalar radius;
-  m_native_shape->getBoundingSphere(pos,radius);
-
-  GetMainWindow().CircleColor(pos.x()*GetScale()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()*GetScale()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius*GetScale(),color);
 
 
 
@@ -260,11 +255,8 @@ void BulletCircle::DrawBorder(const Color& color) const
   ASSERT(m_parent);
 
 
-    btVector3 pos;
-    btScalar radius;
-    m_native_shape->getBoundingSphere(pos,radius);
 
-    GetMainWindow().CircleColor(pos.x()*GetScale()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()*GetScale()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
+    GetMainWindow().CircleColor(GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
 
 
     GetMainWindow().LineColor(0 ,1000   , 1400 - Camera::GetInstance()->GetPosition().y, 1400 - Camera::GetInstance()->GetPosition().y, color );
