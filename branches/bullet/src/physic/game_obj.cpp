@@ -85,12 +85,12 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   m_body_def->position.Set(0.0f, 0.0f);
   m_body_def->fixedRotation = !m_rotating;
 */
-  PhysicalCircle *circle =  PhysicalEngine::GetInstance()->CreateCircleShape();
+ /* PhysicalCircle *circle =  PhysicalEngine::GetInstance()->CreateCircleShape();
   circle->SetRadius(10);
   circle->SetPosition(Point2d(0,0));
   circle->Generate();
-  m_physic->AddShape(circle);
- // InitShape(xml_config);
+  m_physic->AddShape(circle);*/
+  InitShape(xml_config);
  /* if(m_auto_align_force >0)
   {
       PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
