@@ -421,6 +421,11 @@ Point2d BulletObj::GetSpeed() const
   }
 
 
+  void BulletObj::Reload(){
+    PhysicalEngine::GetInstance()->RemoveObject(this);
+    PhysicalEngine::GetInstance()->AddObject(this);
+  }
+
   #ifdef DEBUG
   void BulletObj::DrawShape(const Color& color) const
   {

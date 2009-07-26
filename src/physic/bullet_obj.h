@@ -158,6 +158,7 @@ public:
 protected:
   void SignalRebound() ;
   void SignalCollision(const Point2d&);
+  void Reload();
   
   bool m_rotating;
   btRigidBody* m_body;
