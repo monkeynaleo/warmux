@@ -313,7 +313,7 @@ Point2d BulletObj::GetSpeed() const
       m_collision_category &= ~bit;
     }
 
-
+    Reload();
 
 
   }
@@ -339,6 +339,7 @@ Point2d BulletObj::GetSpeed() const
     }else{
       m_collision_mask &= ~bit;
     }
+    Reload();
   }
 
   bool BulletObj::IsColliding() const {
