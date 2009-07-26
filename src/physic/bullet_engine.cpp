@@ -27,7 +27,7 @@
 #include <iostream>
 
 BulletEngine::BulletEngine() : PhysicalEngine() {
-    m_scale = 1.0/100.0;
+    m_scale = 100.0;
     m_frame_rate = 60;
     ///collision configuration contains default setup for memory, collision setup
     btDefaultCollisionConfiguration *collision_configuration = new btDefaultCollisionConfiguration();
@@ -55,8 +55,8 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     btScalar mass(0.f);
     btVector3 localInertia(0, 0, 0);
 
-    startTransform.setOrigin(btVector3(1500*GetScale(), 1500*GetScale(), 0));
-    btCollisionShape* colShape = new btBoxShape(btVector3(10000*GetScale(),100*GetScale(),100*GetScale()));
+    startTransform.setOrigin(btVector3(1500/GetScale(), 1500/GetScale(), 0));
+    btCollisionShape* colShape = new btBoxShape(btVector3(10000/GetScale(),100/GetScale(),100/GetScale()));
 
    // colShape->calculateLocalInertia(mass,localInertia);
 
