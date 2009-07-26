@@ -227,8 +227,8 @@ void Wind::Reset()
   std::string config_file = ActiveMap()->GetConfigFilepath();
 
   for (uint i=0; i<nb; ++i){
-    WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
-    particles.push_back(tmp);
+   // WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
+   // particles.push_back(tmp);
   }
 
   RandomizeParticlesPos();

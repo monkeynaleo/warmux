@@ -21,6 +21,7 @@
 #include "physic/bullet_shape.h"
 #include "graphic/video.h"
 #include "map/camera.h"
+#include "physic/bullet_engine.h"
 
 BulletShape::BulletShape()
 {
@@ -28,7 +29,7 @@ BulletShape::BulletShape()
 }
 
 BulletRectangle::BulletRectangle(double width, double height):PhysicalRectangle(width,height),
-m_shape(btVector3(width,height,20))
+m_shape(btVector3(width*GetScale(),height*GetScale(),100*GetScale()))
 {
 
 }
@@ -40,12 +41,12 @@ BulletRectangle::~BulletRectangle()
 
 void BulletRectangle::Generate()
 {
-  btBoxShape * new_shape = new btBoxShape(btVector3(m_width,m_height,10));
+  btBoxShape * new_shape = new btBoxShape(btVector3(m_width*GetScale(),m_height*GetScale(),100*GetScale()));
 
 
 
   btScalar mass(1.0f);
-  btVector3 localInertia(0, 0, 0);
+  btVector3 localInertia(0, 0, -50*GetScale());
 
 
   new_shape->calculateLocalInertia(mass,localInertia);
@@ -132,7 +133,7 @@ void BulletRectangle::DrawBorder(const Color& color) const
     btScalar radius;
     m_native_shape->getBoundingSphere(pos,radius);
 
-    GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
+    GetMainWindow().CircleColor(pos.x()/GetScale()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()/GetScale()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius/GetScale(),color);
 
 
 /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
@@ -171,8 +172,8 @@ void BulletRectangle::DrawBorder(const Color& color) const
 
       for(uint i=0;i < m_point_list.size(); i++)
       {
-          new_shape->addPoint(btVector3(m_point_list[i].x,m_point_list[i].y,0));
-          new_shape->addPoint(btVector3(m_point_list[i].x,m_point_list[i].y,50));
+          new_shape->addPoint(btVector3(m_point_list[i].x/GetScale(),m_point_list[i].y/GetScale(),-50/GetScale()));
+          new_shape->addPoint(btVector3(m_point_list[i].x/GetScale(),m_point_list[i].y/GetScale(),50/GetScale()));
 
       }
 
@@ -202,7 +203,6 @@ void BulletPolygon::DrawBorder(const Color& color) const
   GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
 
 
-  std::cout<<"Draw x="<<pos.x()<<" y="<<pos.y()<<std::endl;
 
   ASSERT(m_point_list.size() > 2);
 
@@ -238,7 +238,7 @@ void BulletPolygon::DrawBorder(const Color& color) const
 
   void BulletCircle::Generate()
   {
-    btCylinderShapeZ * new_shape = new btCylinderShapeZ(btVector3(m_radius,m_radius,10));
+    btCylinderShapeZ * new_shape = new btCylinderShapeZ(btVector3(m_radius*GetScale(),m_radius*GetScale(),100*GetScale()));
 
     //new_shape->setLocalScaling(btVector3(m_radius,m_radius,10));
 
@@ -261,7 +261,12 @@ void BulletCircle::DrawBorder(const Color& color) const
     btScalar radius;
     m_native_shape->getBoundingSphere(pos,radius);
 
-    GetMainWindow().CircleColor(pos.x()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius,color);
+    GetMainWindow().CircleColor(pos.x()/GetScale()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()/GetScale()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
+
+
+    GetMainWindow().LineColor(0 ,1000   , 1400 - Camera::GetInstance()->GetPosition().y, 1400 - Camera::GetInstance()->GetPosition().y, color );
+    GetMainWindow().LineColor(0 ,1000   , 1600 - Camera::GetInstance()->GetPosition().y, 1600 - Camera::GetInstance()->GetPosition().y, color );
+
 
 /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
@@ -286,4 +291,9 @@ void BulletCircle::DrawBorder(const Color& color) const
   GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);*/
 }
 #endif
+
+double BulletShape::GetScale() const
+  {
+   return (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetScale();
+  }
 

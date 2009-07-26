@@ -153,6 +153,8 @@ public:
   void DrawShape(const Color& color) const;
  #endif
 
+  double GetScale() const;
+
 protected:
   void SignalRebound() ;
   void SignalCollision(const Point2d&);

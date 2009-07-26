@@ -63,8 +63,11 @@ class BulletEngine : public PhysicalEngine
   static PhysicalEngine *GetInstance();
   static void SetInstance(PhysicalEngine * instance);
 
+
+  double GetScale() const;
 protected:
     btDiscreteDynamicsWorld *m_world;
+    double m_scale;
 };
 
 

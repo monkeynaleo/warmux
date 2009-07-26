@@ -85,7 +85,12 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   m_body_def->position.Set(0.0f, 0.0f);
   m_body_def->fixedRotation = !m_rotating;
 */
-  InitShape(xml_config);
+  PhysicalCircle *circle =  PhysicalEngine::GetInstance()->CreateCircleShape();
+  circle->SetRadius(10);
+  circle->SetPosition(Point2d(0,0));
+  circle->Generate();
+  m_physic->AddShape(circle);
+ // InitShape(xml_config);
  /* if(m_auto_align_force >0)
   {
       PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
@@ -419,6 +424,7 @@ void GameObj::SetEnergyDelta(int delta, bool /*do_report*/)
 
 void GameObj::UpdatePosition ()
 {
+  std::cout<<"Pos "<<this<<" x="<<GetX()<<" y="<<GetY()<<" sx="<<GetSpeed().x<<" sy="<<GetSpeed().y<<std::endl;
   if ( IsOutsideWorldXY( Point2i( GetX(),GetY()) )) {
     Ghost();
     SignalOutOfMap();
@@ -688,6 +694,8 @@ bool GameObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, 
   Point2i position;
 
   MSG_DEBUG("physic.position", "%s - Search a position...", m_name.c_str());
+
+
 
   do {
     bcl++;

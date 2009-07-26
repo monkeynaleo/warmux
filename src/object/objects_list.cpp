@@ -51,13 +51,13 @@ void ObjectsList::PlaceMines()
   MSG_DEBUG("lst_objects","Placing mines");
   for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
   {
-    ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
+   // ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
-    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range  *1.5 ))
+  //  if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range  *1.5 ))
       // detection range is in meter
-      AddObject(obj);
-    else
-      delete obj;
+   //   AddObject(obj);
+  //  else
+  //    delete obj;
   }
 }
 
