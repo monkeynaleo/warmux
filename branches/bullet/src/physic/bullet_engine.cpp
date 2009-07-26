@@ -27,7 +27,7 @@
 #include <iostream>
 
 BulletEngine::BulletEngine() : PhysicalEngine() {
-
+    m_scale = 1.0/100.0;
     m_frame_rate = 60;
     ///collision configuration contains default setup for memory, collision setup
     btDefaultCollisionConfiguration *collision_configuration = new btDefaultCollisionConfiguration();
@@ -42,7 +42,9 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
 
     m_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
-    m_world->setGravity(btVector3(0, 100, 0));
+    //m_world = new btContinuousDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
+
+    m_world->setGravity(btVector3(0, 10, 0));
 
 
     //Debug ground
@@ -53,8 +55,9 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     btScalar mass(0.f);
     btVector3 localInertia(0, 0, 0);
 
-    startTransform.setOrigin(btVector3(200, 1500, -50));
-    btCollisionShape* colShape = new btBoxShape(btVector3(2000,100,100));
+    startTransform.setOrigin(btVector3(1500*GetScale(), 1500*GetScale(), 0));
+    btCollisionShape* colShape = new btBoxShape(btVector3(10000*GetScale(),100*GetScale(),100*GetScale()));
+
    // colShape->calculateLocalInertia(mass,localInertia);
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
@@ -63,8 +66,10 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
 
+  //  m_world->addRigidBody(m_body,0xFFFF,0xFFFF);
     m_world->addRigidBody(m_body);
     m_body->setActivationState(ACTIVE_TAG);
+    m_body->setRestitution(0.5);
 }
 
 BulletEngine::~BulletEngine()
@@ -97,7 +102,8 @@ BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
-    m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
+   // m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
+    m_world->addRigidBody(obj->GetBody());
     obj->GetBody()->setActivationState(ACTIVE_TAG);
 std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
@@ -124,7 +130,6 @@ void BulletEngine::Step()
   m_world->stepSimulation(timeStep);
   m_last_step_time = m_last_step_time +lround(timeStep);
 
-
   /*
   
 
@@ -148,4 +153,8 @@ void BulletEngine::Step()
   */
 }
 
+double BulletEngine::GetScale() const
+{
+  return m_scale;
+}
 

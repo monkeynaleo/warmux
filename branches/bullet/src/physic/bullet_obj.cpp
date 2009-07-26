@@ -25,7 +25,7 @@
  *****************************************************************************/
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
-#include "physic/physical_engine.h"
+#include "physic/bullet_engine.h"
 #include "bullet_obj.h"
 #include <iostream>
 #include <stdio.h>
@@ -43,7 +43,7 @@ BulletObj::BulletObj() : PhysicalObj() {
     m_root_shape = new btCompoundShape(true);
 
     startTransform.setOrigin(btVector3(0, 0, 0));
-    btCollisionShape* colShape = new btBoxShape(btVector3(10,10,10));
+    btCollisionShape* colShape = new btBoxShape(btVector3(10*GetScale(),10*GetScale(),10*GetScale()));
     colShape->calculateLocalInertia(mass,localInertia);
 
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
@@ -52,11 +52,12 @@ BulletObj::BulletObj() : PhysicalObj() {
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, m_root_shape, localInertia);
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
-    m_body->setLinearFactor(btVector3(1,1,0));
-    m_body->setAngularFactor(btVector3(0,1,0));
-    m_body->setDamping(0.5,0.5);
+    m_body->setLinearFactor(btVector3(0,1,0));
+    m_body->setAngularFactor(btVector3(0,0,0));
+    m_body->setDamping(0.01,0.5);
+    m_body->setRestitution(0.5);
 
-    m_root_shape->addChildShape(startTransform,colShape);
+   // m_root_shape->addChildShape(startTransform,colShape);
 
 }
 
@@ -81,14 +82,22 @@ BulletObj::~BulletObj()
   void BulletObj::SetPosition(const Point2d &position)
   {
        btTransform current_transform = m_body->getWorldTransform();
-       current_transform.setOrigin(btVector3(position.x,position.y,0));
+       current_transform.setOrigin(btVector3(position.x*GetScale(),position.y*GetScale(),0));
        m_body->setWorldTransform(current_transform);
+
+  }
+
+  double BulletObj::GetScale() const
+  {
+   return (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetScale();
   }
  
   const Point2d BulletObj::GetPosition() const
   {
-    btTransform current_transform = m_body->getWorldTransform();
-    return Point2d(current_transform.getOrigin().getX(),current_transform.getOrigin().getY());
+    btTransform current_transform;
+    m_body->getMotionState()->getWorldTransform(current_transform);
+    ASSERT(current_transform.getOrigin().getZ() == 0);
+    return Point2d(current_transform.getOrigin().getX()/GetScale(),current_transform.getOrigin().getY()/GetScale());
   }
 
   void BulletObj::SetAngle(double angle_rad)
@@ -101,7 +110,9 @@ BulletObj::~BulletObj()
   }
 
   double BulletObj::GetAngle() const{
-    return m_body->getWorldTransform().getRotation().getZ();
+    btTransform current_transform;
+    m_body->getMotionState()->getWorldTransform(current_transform);
+    return current_transform.getRotation().getZ();
   }
 
   //State
@@ -137,7 +148,7 @@ BulletObj::~BulletObj()
  // Speed
   void BulletObj::SetSpeedXY(Point2d vector)
   {
-    m_body->setLinearVelocity(btVector3(vector.x,vector.y,0));
+    m_body->setLinearVelocity(btVector3(vector.x*GetScale(),vector.y*GetScale(),0));
   }
 
   void BulletObj::SetSpeed(double norm, double angle_rad)
@@ -161,7 +172,7 @@ BulletObj::~BulletObj()
 
 Point2d BulletObj::GetSpeed() const
   {
-      return Point2d(m_body->getLinearVelocity().getX(),m_body->getLinearVelocity().getY());
+      return Point2d(m_body->getLinearVelocity().getX()/GetScale(),m_body->getLinearVelocity().getY()/GetScale());
   }
 
   double BulletObj::GetAngularSpeed() const
@@ -193,7 +204,7 @@ Point2d BulletObj::GetSpeed() const
     shape->SetParent(this);
     btTransform startTransform;
     startTransform.setIdentity();
-    startTransform.setOrigin(btVector3(shape->GetPosition().x,shape->GetPosition().y,0));
+    startTransform.setOrigin(btVector3(shape->GetPosition().x*GetScale(),shape->GetPosition().y*GetScale(),0));
     BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
     ASSERT(native_shape->GetNativeShape());
     m_root_shape->addChildShape(startTransform,native_shape->GetNativeShape());
@@ -265,7 +276,8 @@ Point2d BulletObj::GetSpeed() const
   void BulletObj::RemoveExternForce(unsigned /*force_index*/) {}
   void BulletObj::RemoveAllExternForce() {}
   void BulletObj::ImpulseXY(const Point2d& vector){
-    m_body->internalApplyImpulse(btVector3(vector.x, vector.y,0),btVector3(0,0,0),1);
+    std::cout<<"Impulse"<<std::endl;
+    m_body->internalApplyImpulse(btVector3(vector.x*GetScale(), vector.y*GetScale(),0),btVector3(0,0,0),1);
   }
   void BulletObj::Impulse(double norm, double angle) {
     ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));

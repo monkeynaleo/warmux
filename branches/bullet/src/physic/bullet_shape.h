@@ -34,6 +34,7 @@ class BulletShape
 public :
   BulletShape();
   btCollisionShape *GetNativeShape() { return m_native_shape; }
+  double GetScale() const;
 protected :
   btCollisionShape *m_native_shape;
 
