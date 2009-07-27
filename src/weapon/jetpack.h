@@ -24,12 +24,14 @@
 
 #include "weapon.h"
 
+class Force;
+
 class JetPack : public Weapon
 {
   private:
     double m_x_force;
     double m_y_force;
-    unsigned m_force_index;
+    Force *m_force_index;
     SoundSample flying_sound;
 
     // Jetpack fuel.

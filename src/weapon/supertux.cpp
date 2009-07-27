@@ -33,6 +33,7 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "object/objects_list.h"
+#include "physic/force.h"
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
@@ -58,7 +59,7 @@ class SuperTux : public WeaponProjectile
     ParticleEngine particle_engine;
     double angle_rad;
     SoundSample flying_sound;
-    unsigned m_force_index;
+    Force *m_force_index;
   public:
     uint speed;
     uint time_now;

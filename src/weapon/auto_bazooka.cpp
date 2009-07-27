@@ -40,6 +40,7 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "object/objects_list.h"
+#include "physic/force.h"
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
@@ -63,7 +64,7 @@ protected:
   bool m_targeted;
   double m_force;
   uint m_lastrefresh;
-  unsigned m_force_index;
+  Force * m_force_index;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
