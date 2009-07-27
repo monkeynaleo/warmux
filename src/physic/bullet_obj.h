@@ -93,7 +93,7 @@ public:
   void RemoveAllExternForce() ;
   void ImpulseXY(const Point2d& vector) ;
   void Impulse(double norm, double angle) ;
-  
+  void ComputeForce(Force * force);
   // Collision
 
   int GetCollisionCategory();

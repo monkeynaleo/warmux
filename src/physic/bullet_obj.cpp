@@ -282,10 +282,12 @@ Point2d BulletObj::GetSpeed() const
 	  m_force_list.push_back(force);
 	  return force;
   }
+
   Force *BulletObj::AddExternForce (double norm, double angle_rad) {
 	  Point2d force = Point2d::FromPolarCoordinates(norm, angle_rad);
 	  return AddExternForce(force.x,force.y);
   }
+
   void BulletObj::RemoveExternForce(Force *force)
   {
 	  std::vector<Force *>::iterator it;
@@ -307,13 +309,21 @@ Point2d BulletObj::GetSpeed() const
 	  }
 	  m_force_list.clear();
   }
-  void BulletObj::ImpulseXY(const Point2d& vector){
+  void BulletObj::ImpulseXY(const Point2d& vector)
+  {
     std::cout<<"Impulse"<<std::endl;
     m_body->internalApplyImpulse(btVector3(vector.x/GetScale(), vector.y/GetScale(),0),btVector3(0,0,0),1);
   }
-  void BulletObj::Impulse(double norm, double angle) {
+  void BulletObj::Impulse(double norm, double angle)
+  {
     ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
   }
+
+  void BulletObj::ComputeForce(Force * force)
+  {
+    m_body->applyCentralForce(btVector3(force->m_force.x,force->m_force.y,0));
+  }
+
 
   // Collision
   int BulletObj::GetCollisionCategory(){

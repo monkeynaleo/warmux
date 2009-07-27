@@ -100,7 +100,7 @@ public:
   virtual void RemoveAllExternForce() = 0;
   virtual void ImpulseXY(const Point2d& vector) = 0;
   virtual void Impulse(double norm, double angle) = 0;
-  
+  virtual void ComputeForce(Force *force) = 0;
   // Collision
   
     enum CollisionCategory {
