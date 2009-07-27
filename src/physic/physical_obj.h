@@ -176,7 +176,6 @@ protected:
   virtual void SignalCollision(const Point2d&) = 0 ;
   
   bool m_rotating;
-
-};
+ };
 
 #endif

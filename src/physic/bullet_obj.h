@@ -29,6 +29,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "physic/physical_obj.h"
 #include <map>
+#include <vector>
 
 class BulletShape;
 
@@ -166,6 +167,7 @@ protected:
   std::map<std::string, PhysicalShape *> m_shape_list;
   int m_collision_category;
   int m_collision_mask;
+  std::vector<Force *> m_force_list;
 
 };
 

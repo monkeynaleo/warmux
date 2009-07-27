@@ -279,6 +279,7 @@ Point2d BulletObj::GetSpeed() const
   {
 	  Force * force = new Force(this,vector);
 	  PhysicalEngine::GetInstance()->AddForce(force);
+	  m_force_list.push_back(force);
 	  return force;
   }
   Force *BulletObj::AddExternForce (double norm, double angle_rad) {
@@ -287,9 +288,25 @@ Point2d BulletObj::GetSpeed() const
   }
   void BulletObj::RemoveExternForce(Force *force)
   {
+	  std::vector<Force *>::iterator it;
+	  for(it = m_force_list.begin(); it != m_force_list.end(); it++){
+		  if(*it == force){
+			  m_force_list.erase(it);
+			  break;
+		  }
+	  }
 	  PhysicalEngine::GetInstance()->RemoveForce(force);
+	  delete force;
   }
-  void BulletObj::RemoveAllExternForce() {}
+  void BulletObj::RemoveAllExternForce()
+  {
+	  std::vector<Force *>::iterator it;
+	  for(it = m_force_list.begin(); it != m_force_list.end(); it++){
+		PhysicalEngine::GetInstance()->RemoveForce(*it);
+		delete *it;
+	  }
+	  m_force_list.clear();
+  }
   void BulletObj::ImpulseXY(const Point2d& vector){
     std::cout<<"Impulse"<<std::endl;
     m_body->internalApplyImpulse(btVector3(vector.x/GetScale(), vector.y/GetScale(),0),btVector3(0,0,0),1);
