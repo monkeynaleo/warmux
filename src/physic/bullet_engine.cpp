@@ -27,6 +27,10 @@
 #include "bullet_engine.h"
 #include <iostream>
 
+extern ContactAddedCallback  gContactAddedCallback;
+extern ContactDestroyedCallback  gContactDestroyedCallback;
+
+
 BulletEngine::BulletEngine() : PhysicalEngine() {
     m_scale = 100.0;
     m_frame_rate = 60;
@@ -46,6 +50,9 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     //m_world = new btContinuousDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
 
     m_world->setGravity(btVector3(0, 10, 0));
+
+    gContactAddedCallback = BulletEngine::ContactAddedCallback;
+   gContactDestroyedCallback = BulletEngine::ContactDestroyedCallback;
 
 
     //Debug ground
@@ -175,4 +182,22 @@ void BulletEngine::RemoveForce(Force *force)
           break;
         }
     }
+}
+
+
+
+//Contact Callback
+
+bool BulletEngine::ContactAddedCallback(btManifoldPoint& /*cp*/,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
+{
+  PhysicalShape *shape1 = reinterpret_cast<PhysicalShape *>(colObj0->getCollisionShape()->getUserPointer());
+  PhysicalShape *shape2 = reinterpret_cast<PhysicalShape *>(colObj1->getCollisionShape()->getUserPointer());
+  shape1->AddContact(shape2);
+  return true;
+}
+
+bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
+{
+  PhysicalShape *shape = reinterpret_cast<PhysicalShape *>(userPersistentData);
+  shape->RemoveContact();
 }

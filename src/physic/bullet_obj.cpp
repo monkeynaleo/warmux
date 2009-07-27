@@ -32,6 +32,9 @@
 #include <stdio.h>
 
 
+
+
+
 BulletObj::BulletObj() : PhysicalObj() {
     /// Create Dynamic Object
     btTransform startTransform;
@@ -57,6 +60,10 @@ BulletObj::BulletObj() : PhysicalObj() {
     m_body->setAngularFactor(btVector3(0,0,0));
     m_body->setDamping(0.01,0.5);
     m_body->setRestitution(0.5);
+
+    m_body->setCollisionFlags(m_body->getCollisionFlags() |
+        btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 
    // m_root_shape->addChildShape(startTransform,colShape);
 

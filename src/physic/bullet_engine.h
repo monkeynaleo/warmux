@@ -66,9 +66,13 @@ class BulletEngine : public PhysicalEngine
 
   double GetScale() const;
 protected:
-    btDiscreteDynamicsWorld *m_world;
-    double m_scale;
-    std::vector<Force *> m_force_list;
+
+  static bool ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int partId0, int index0, const btCollisionObject* colObj1, int partId1, int index1);
+  static bool ContactDestroyedCallback(void* userPersistentData);
+
+  btDiscreteDynamicsWorld *m_world;
+  double m_scale;
+  std::vector<Force *> m_force_list;
 };
 
 
