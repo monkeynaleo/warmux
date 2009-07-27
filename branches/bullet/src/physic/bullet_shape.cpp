@@ -57,7 +57,7 @@ void BulletRectangle::Generate()
   }
 
   m_native_shape = new_shape;
-
+  m_native_shape->setUserPointer(this);
 }
  double BulletRectangle::Area() const
  {
@@ -183,7 +183,7 @@ void BulletRectangle::DrawBorder(const Color& color) const
       }
 
       m_native_shape = new_shape;
-
+      m_native_shape->setUserPointer(this);
 
      // btCollisionShape* new_shape = new btBoxShape(btVector3(100,100,100));
      // m_native_shape = new_shape;
@@ -246,7 +246,9 @@ void BulletPolygon::DrawBorder(const Color& color) const
      delete m_native_shape;
    }
 
+
    m_native_shape = new_shape;
+   m_native_shape->setUserPointer(this);
   }
 
 #ifdef DEBUG
