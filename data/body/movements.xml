@@ -897,22 +897,22 @@
 	</frame>
 </movement>
 
-<movement name="weapon-grenade-end-shoot" duration_per_frame="30" nb_loops="1">
+<movement name="weapon-grenade-end-shoot" duration_per_frame="30" nb_loops="50">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
+		<member type="head" follow_half_crosshair="false" angle="-90"/>
 		<member type="arm-right" follow_half_crosshair="true" angle="-90"/>
 		<member type="body" angle="-15"/>
 		<member type="foot-right" angle="15"/>
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
+		<member type="head" follow_half_crosshair="false" angle="-90"/>
 		<member type="arm-right" follow_half_crosshair="true" angle="-45"/>
 		<member type="body" angle="-10"/>
 		<member type="foot-right" angle="10"/>
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
+		<member type="head" follow_half_crosshair="false" angle="-90"/>
 		<member type="arm-right" follow_half_crosshair="true" angle="-10"/>
 		<member type="body" angle="-5"/>
 		<member type="foot-right" angle="5"/>
@@ -1393,7 +1393,7 @@
 </movement>
 
 <!-- ###### SuperTux ###### -->
-<movement name="weapon-tux-end-shoot" duration_per_frame="50" nb_loops="1">
+<movement name="weapon-tux-end-shoot" duration_per_frame="50" nb_loops="10">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
 		<member type="head" angle="-90"/>
