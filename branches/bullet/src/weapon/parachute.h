@@ -26,7 +26,7 @@
 
 class Sprite;
 class ParachuteConfig;
-
+class Force;
 //-----------------------------------------------------------------------------
 
 class Parachute : public Weapon
@@ -34,7 +34,7 @@ class Parachute : public Weapon
   private:
     bool open;
     bool closing;
-    unsigned m_force_index;
+    Force *m_force_index;
     struct {
       double x_extern;
       bool changing;

@@ -35,6 +35,7 @@ class ParticleEngine;
 class DamageStatistics;
 class Body;
 class PhysicalShape;
+class Force;
 #ifdef DEBUG
 //#define DEBUG_SKIN
 #endif
@@ -59,7 +60,7 @@ private:
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
-  uint m_force_walk_index;
+  Force *m_force_walk_index;
   // survived games
   int survivals;
 
