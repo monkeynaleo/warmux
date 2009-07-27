@@ -23,7 +23,7 @@
 #define	_BULLET_ENGINE_H
 #include "physical_engine.h"
 #include "btBulletDynamicsCommon.h"
-
+#include <vector>
 class BulletEngine : public PhysicalEngine
 {
     public:
@@ -68,6 +68,7 @@ class BulletEngine : public PhysicalEngine
 protected:
     btDiscreteDynamicsWorld *m_world;
     double m_scale;
+    std::vector<Force *> m_force_list;
 };
 
 

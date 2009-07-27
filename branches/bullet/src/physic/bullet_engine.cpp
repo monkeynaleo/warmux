@@ -21,6 +21,7 @@
 #include "physic/bullet_engine.h"
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
+#include "physic/force.h"
 #include "game/time.h"
 #include "physical_engine.h"
 #include "bullet_engine.h"
@@ -97,8 +98,7 @@ PhysicalRectangle *BulletEngine::CreateRectangleShape(double width, double heigh
 }
 
 
-void
-BulletEngine::AddObject(PhysicalObj *new_obj)
+void BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
@@ -130,13 +130,11 @@ void BulletEngine::Step()
   m_world->stepSimulation(timeStep);
   m_last_step_time = m_last_step_time +lround(timeStep);
 
-  /*
   
-
   for (uint i = 0; i< m_force_list.size();i++) {
-    m_force_list[i]->ComputeForce();
-
+    m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
   }
+  /*
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
     m_air_friction_shape_list[i]->ComputeAirFriction();
   }
@@ -160,4 +158,21 @@ double BulletEngine::GetScale() const
 }
 
 
+// Force
+void BulletEngine::AddForce(Force *force)
+{
+  m_force_list.push_back(force);
+}
 
+void BulletEngine::RemoveForce(Force *force)
+{
+  std::vector<Force *>::iterator it;
+  for (it = m_force_list.begin(); it != m_force_list.end(); it++)
+    {
+      if (*it == force)
+        {
+          m_force_list.erase(it);
+          break;
+        }
+    }
+}
