@@ -26,6 +26,7 @@
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
 #include "physic/bullet_engine.h"
+#include "physic/force.h"
 #include "bullet_obj.h"
 #include <iostream>
 #include <stdio.h>
@@ -195,7 +196,7 @@ Point2d BulletObj::GetSpeed() const
 
     if(name ==""){
       char buffer [50];
-      snprintf(buffer, 50, "%i", m_shape_list.size());
+      snprintf(buffer, 50, "%u", (unsigned int) m_shape_list.size());
       name = "unamed_shape_"+std::string(buffer);
     }
 
@@ -268,12 +269,26 @@ Point2d BulletObj::GetSpeed() const
        return rect;
    }
   //  Mass
-  double BulletObj::GetMass() const{ return 1/m_body->getInvMass();}
+  double BulletObj::GetMass() const
+  {
+	  return 1/m_body->getInvMass();
+  }
 
   // Force
-  uint BulletObj::AddExternForceXY (const Point2d& /*vector*/){ return 0;}
-  uint BulletObj::AddExternForce (double /*norm*/, double /*angle*/) { return 0;}
-  void BulletObj::RemoveExternForce(unsigned /*force_index*/) {}
+  Force *BulletObj::AddExternForceXY (const Point2d& vector)
+  {
+	  Force * force = new Force(this,vector);
+	  PhysicalEngine::GetInstance()->AddForce(force);
+	  return force;
+  }
+  Force *BulletObj::AddExternForce (double norm, double angle_rad) {
+	  Point2d force = Point2d::FromPolarCoordinates(norm, angle_rad);
+	  return AddExternForce(force.x,force.y);
+  }
+  void BulletObj::RemoveExternForce(Force *force)
+  {
+	  PhysicalEngine::GetInstance()->RemoveForce(force);
+  }
   void BulletObj::RemoveAllExternForce() {}
   void BulletObj::ImpulseXY(const Point2d& vector){
     std::cout<<"Impulse"<<std::endl;

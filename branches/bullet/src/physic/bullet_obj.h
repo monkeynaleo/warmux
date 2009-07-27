@@ -86,9 +86,9 @@ public:
   double GetMass() const ;
  
   // Force
-  uint AddExternForceXY (const Point2d& vector) ;
-  uint AddExternForce (double nonrm, double angle) ;
-  void RemoveExternForce(unsigned force_index) ;
+  Force *AddExternForceXY (const Point2d& vector) ;
+  Force *AddExternForce (double nonrm, double angle) ;
+  void RemoveExternForce(Force *force) ;
   void RemoveAllExternForce() ;
   void ImpulseXY(const Point2d& vector) ;
   void Impulse(double norm, double angle) ;

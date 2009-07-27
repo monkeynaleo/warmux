@@ -25,18 +25,18 @@
 
 #include <WORMUX_point.h>
 
-class GameObj;
+class PhysicalObj;
 
 class Force
 {
 
 public:
-  Force(GameObj *target, Point2d target_point, Point2d force, bool is_local = true);
+  Force(PhysicalObj *target, Point2d target_point, Point2d force, bool is_local = true);
 
   //Apply Force to center
-  Force(GameObj *i_target, Point2d i_force);
+  Force(PhysicalObj *i_target, Point2d i_force);
   ~Force();
-  GameObj *m_target;
+  PhysicalObj *m_target;
   Point2d m_target_point;
   Point2d m_force;
 

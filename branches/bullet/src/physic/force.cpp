@@ -24,13 +24,13 @@
 #include "physic/physical_engine.h"
 #include "WORMUX_error.h"
 
-Force::Force(GameObj *target, Point2d /*target_point*/, Point2d /*force*/, bool is_local):
+Force::Force(PhysicalObj *target, Point2d /*target_point*/, Point2d force, bool is_local):
 m_target_center(false)
 {
   ASSERT(target);
   m_target = target;
 
-//   m_force = b2Vec2(force.x/ PIXEL_PER_METER, force.y/PIXEL_PER_METER);
+  m_force = force;
 
   //m_target_point = b2Vec2(target_point.x/PIXEL_PER_METER, target_point.y /PIXEL_PER_METER);
 
@@ -43,12 +43,12 @@ m_target_center(false)
 
 }
 
-Force::Force(GameObj *i_target, Point2d /*i_force*/):
+Force::Force(PhysicalObj *i_target, Point2d i_force):
 m_target_center(true)
 {
   ASSERT(i_target);
   m_target = i_target;
-//  m_force = b2Vec2(i_force.x/ PIXEL_PER_METER, i_force.y/PIXEL_PER_METER);
+  m_force = i_force;
 
   PhysicalEngine::GetInstance()->AddForce(this);
 
@@ -62,6 +62,8 @@ Force::~Force()
 
 void Force::ComputeForce()
 {
+ //m_body->applyCentralForce(btVector3(vector.x,vector.y,0));
+
   if(!m_target_center)
   {
 //    m_target->GetBody()->ApplyForce(m_force, m_target_point);
