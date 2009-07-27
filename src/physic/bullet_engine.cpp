@@ -135,6 +135,7 @@ void BulletEngine::Step()
 
   for (uint i = 0; i< m_force_list.size();i++) {
     m_force_list[i]->ComputeForce();
+
   }
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
     m_air_friction_shape_list[i]->ComputeAirFriction();

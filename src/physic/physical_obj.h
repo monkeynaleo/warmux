@@ -36,6 +36,7 @@
 
 class PhysicalShape;
 class PhysicalListener;
+class Force;
 
 class PhysicalObj
 {
@@ -93,9 +94,9 @@ public:
   virtual double GetMass() const = 0;
  
   // Force
-  virtual uint AddExternForceXY (const Point2d& vector) = 0;
-  virtual uint AddExternForce (double nonrm, double angle) = 0;
-  virtual void RemoveExternForce(unsigned force_index) = 0;
+  virtual Force *AddExternForceXY (const Point2d& vector) = 0;
+  virtual Force *AddExternForce (double norm, double angle) = 0;
+  virtual void RemoveExternForce(Force *force_index) = 0;
   virtual void RemoveAllExternForce() = 0;
   virtual void ImpulseXY(const Point2d& vector) = 0;
   virtual void Impulse(double norm, double angle) = 0;
