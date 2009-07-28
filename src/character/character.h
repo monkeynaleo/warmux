@@ -55,7 +55,7 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
-  uint m_nbr_foot_contact;
+  PhysicalShape *m_feet_shape;
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
@@ -175,11 +175,6 @@ public:
   bool CanMoveRL() const;
   bool CanJump() const;
   bool FootsInVacuum() const;
-
-  virtual void AddContact(const PhysicalShape * shape);
-  virtual void RemoveContact(const PhysicalShape * shape);
-
-
 
   void Move (bool slowly);
   void StopMove();

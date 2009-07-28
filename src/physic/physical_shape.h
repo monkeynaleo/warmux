@@ -62,6 +62,7 @@ public:
   void SetParent(PhysicalObj *parent);
 
 
+  virtual bool IsColliding() const = 0;
 
   const std::string &GetName() const;
   // returns current max width (taking angle into account)

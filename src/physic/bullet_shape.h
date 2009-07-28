@@ -51,7 +51,7 @@ class BulletPolygon : public PhysicalPolygon, public BulletShape
 public:
   virtual ~BulletPolygon();
   virtual void Generate();
-
+  virtual bool IsColliding() const;
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
 #endif
@@ -63,6 +63,7 @@ public:
   virtual ~BulletRectangle();
   BulletRectangle(double width, double height);
   virtual void Generate();
+  virtual bool IsColliding() const;
   virtual double Area() const;
   virtual double GetCurrentWidth() const;
   virtual double GetCurrentHeight() const;
@@ -94,6 +95,7 @@ class BulletCircle : public PhysicalCircle, public BulletShape
 public:
   virtual ~BulletCircle();
   virtual void Generate();
+  virtual bool IsColliding() const;
 #ifdef DEBUG
   void DrawBorder(const Color &color) const;
 #endif

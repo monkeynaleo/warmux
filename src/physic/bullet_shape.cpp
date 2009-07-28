@@ -321,3 +321,21 @@ double BulletShape::GetScale() const
    return (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetScale();
   }
 
+//Commun
+
+bool BulletRectangle::IsColliding() const
+{
+  return (m_contact_count !=0);
+}
+
+bool BulletPolygon::IsColliding() const
+{
+  return (m_contact_count !=0);
+}
+
+bool BulletCircle::IsColliding() const
+{
+  return (m_contact_count !=0);
+}
+
+

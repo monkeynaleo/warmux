@@ -122,7 +122,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   back_jumping(false),
   death_explosion(true),
   firing_angle(0),
-  m_nbr_foot_contact(0),
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
@@ -147,6 +146,8 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
+
+  m_feet_shape = GetPhysic()->GetShape("feet");
 
   GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_CHARACTER,true);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
@@ -781,21 +782,8 @@ bool Character::CanMoveRL() const
 
 bool Character::FootsInVacuum() const
 {
-  return (m_nbr_foot_contact == 0);
+  return !m_feet_shape->IsColliding();
 }
-
-void Character::AddContact(const PhysicalShape * /*shape*/)
-{
- // GameObj::AddContact(shape);
-  m_nbr_foot_contact++;
-}
-
-void Character::RemoveContact(const PhysicalShape * /*shape*/)
-{
- // GameObj::RemoveContact(shape);
-  m_nbr_foot_contact--;
-}
-
 
 
 void Character::BeginMovementRL(uint pause, bool slowly)
