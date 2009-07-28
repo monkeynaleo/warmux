@@ -464,11 +464,31 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
     //
     //                 Gentildemon.
 
+    // BUT I have also observed that after a first return with received < len, a second call
+    // may never return (host probably disconnected)
+
+    // THUS, my conclusion is that SDLNet_TCP_Recv can return less data than requested when
+    // 1) host has been disconnected (or should be, there is an error)
+    // 2) the requested len is too big to stay in a buffer and thus cannot be received in
+    //    one time.
+
+    // So, here is an horrible hack...
+
     received = SDLNet_TCP_Recv(socket, data, len);
     if (received <= 0) {
       print_net_error("SDLNet_TCP_Recv");
       fprintf(stderr, "ERROR: SDLNet_TCP_Recv: %d\n", received);
       return false;
+    } else if (received != int(len)) {
+      // See above to understand this strange test
+
+      fprintf(stderr, "ERROR: SDLNet_TCP_Recv only %d bytes while requesting %d\n", received, len);
+      if (len > 4096) { // let's say it was a buffer pb
+	fprintf(stderr, "\t received=%d, len=%d - assume it was a buffer problem. Try it again\n", received, len);
+      } else {
+	fprintf(stderr, "\t received=%d, len=%d - assume it was a REAL problem\n", received, len);
+	return false;
+      }
     }
     data = (char*)data + received;
     len -= received;
