@@ -386,7 +386,7 @@ const std::string& IndexServer::GetSupportedVersions() const
   return supported_versions;
 }
 
-void IndexServer::Refresh()
+void IndexServer::Refresh(bool nowait)
 {
   if (SDL_SemTryWait(action_sem) != 0)
     return;
@@ -396,7 +396,12 @@ void IndexServer::Refresh()
   uint used = 0;
   char buffer[16];
 
-  if (!socket.IsReady(100))
+  if (nowait) {
+
+    if (!socket.IsReady(0, true))
+      goto out;
+
+  } else if (!socket.IsReady(100))
     goto out;
 
   r = socket.ReceiveInt(msg_id);

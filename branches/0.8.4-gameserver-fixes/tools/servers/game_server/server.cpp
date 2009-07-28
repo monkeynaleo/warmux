@@ -385,7 +385,7 @@ void GameServer::RunLoop()
  loop:
   while (true) {
 
-    IndexServer::GetInstance()->Refresh();
+    IndexServer::GetInstance()->Refresh(true);
 
     WaitClients();
 
