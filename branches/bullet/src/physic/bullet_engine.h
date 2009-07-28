@@ -24,6 +24,9 @@
 #include "physical_engine.h"
 #include "btBulletDynamicsCommon.h"
 #include <vector>
+
+class BulletObj;
+
 class BulletEngine : public PhysicalEngine
 {
     public:
@@ -69,10 +72,12 @@ protected:
 
   static bool ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int partId0, int index0, const btCollisionObject* colObj1, int partId1, int index1);
   static bool ContactDestroyedCallback(void* userPersistentData);
+  void ResetContacts();
 
   btDiscreteDynamicsWorld *m_world;
   double m_scale;
   std::vector<Force *> m_force_list;
+  std::vector<BulletObj *> m_object_list;
 };
 
 

@@ -52,7 +52,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_world->setGravity(btVector3(0, 10, 0));
 
     gContactAddedCallback = BulletEngine::ContactAddedCallback;
-   gContactDestroyedCallback = BulletEngine::ContactDestroyedCallback;
+   gContactDestroyedCallback= BulletEngine::ContactDestroyedCallback;
 
 
     //Debug ground
@@ -112,8 +112,11 @@ void BulletEngine::AddObject(PhysicalObj *new_obj)
     m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
     //m_world->addRigidBody(obj->GetBody());
     obj->GetBody()->setActivationState(ACTIVE_TAG);
+    m_object_list.push_back(obj);
 std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
-    /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
+
+
+/* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;*/
 }
@@ -121,6 +124,15 @@ std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->Get
 void BulletEngine::RemoveObject(PhysicalObj *obj)
 {
   BulletObj *bobj = reinterpret_cast<BulletObj *>(obj);
+
+  std::vector<BulletObj *>::iterator it;
+  for(it = m_object_list.begin(); it != m_object_list.end();it++){
+   if(*it == bobj){
+     m_object_list.erase(it);
+     break;
+   }
+  }
+
   m_world->removeRigidBody(bobj->GetBody());
   std::cout<<"Remove "<<obj<<std::endl;
 }
@@ -133,6 +145,9 @@ void BulletEngine::Step()
   if ((Time::GetInstance()->Read()-m_last_step_time) < (uint)lround(timeStep)) {
     return;
   }
+
+  ResetContacts();
+
  MSG_DEBUG("physical.step", "Engine step");
   m_world->stepSimulation(timeStep);
   m_last_step_time = m_last_step_time +lround(timeStep);
@@ -184,20 +199,26 @@ void BulletEngine::RemoveForce(Force *force)
     }
 }
 
-
-
+void BulletEngine::ResetContacts()
+{
+  std::vector<BulletObj *>::iterator it;
+  for(it = m_object_list.begin(); it != m_object_list.end();it++){
+    (*it)->ResetContacts();
+  }
+}
 //Contact Callback
 
 bool BulletEngine::ContactAddedCallback(btManifoldPoint& /*cp*/,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
 {
-  PhysicalShape *shape1 = reinterpret_cast<PhysicalShape *>(colObj0->getCollisionShape()->getUserPointer());
-  PhysicalShape *shape2 = reinterpret_cast<PhysicalShape *>(colObj1->getCollisionShape()->getUserPointer());
+  BulletShape *shape1 = reinterpret_cast<BulletShape *>(colObj0->getCollisionShape()->getUserPointer());
+  BulletShape *shape2 = reinterpret_cast<BulletShape *>(colObj1->getCollisionShape()->getUserPointer());
   shape1->AddContact(shape2);
   return true;
 }
 
 bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
 {
-  PhysicalShape *shape = reinterpret_cast<PhysicalShape *>(userPersistentData);
+  BulletShape *shape = reinterpret_cast<BulletShape  *>(userPersistentData);
   shape->RemoveContact();
+  return true;
 }

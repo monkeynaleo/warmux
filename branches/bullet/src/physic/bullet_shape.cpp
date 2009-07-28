@@ -23,11 +23,36 @@
 #include "map/camera.h"
 #include "physic/bullet_engine.h"
 
-BulletShape::BulletShape()
+BulletShape::BulletShape():
+m_contact_count(0),
+m_last_contact_count(0)
 {
   m_native_shape = NULL;
+
 }
 
+#include <iostream>
+
+void BulletShape::AddContact(BulletShape */*collider*/)
+{
+  m_contact_count++;
+  std::cout<<"AddContact "<<m_contact_count<<std::endl;
+}
+
+void BulletShape::RemoveContact()
+{
+   m_contact_count--;
+   std::cout<<"RemoveContact "<<m_contact_count<<std::endl;
+}
+
+void BulletShape::ResetContacts()
+{
+  m_last_contact_count = m_contact_count;
+  m_contact_count = 0;
+}
+
+
+//////////////Bullet Rectangle
 BulletRectangle::BulletRectangle(double width, double height):PhysicalRectangle(width,height),
 m_shape(btVector3(width*GetScale(),height*GetScale(),100*GetScale()))
 {
@@ -57,7 +82,7 @@ void BulletRectangle::Generate()
   }
 
   m_native_shape = new_shape;
-  m_native_shape->setUserPointer(this);
+  m_native_shape->setUserPointer(dynamic_cast<BulletShape *>(this));
 }
  double BulletRectangle::Area() const
  {
@@ -183,7 +208,7 @@ void BulletRectangle::DrawBorder(const Color& color) const
       }
 
       m_native_shape = new_shape;
-      m_native_shape->setUserPointer(this);
+      m_native_shape->setUserPointer(dynamic_cast<BulletShape *>(this));
 
      // btCollisionShape* new_shape = new btBoxShape(btVector3(100,100,100));
      // m_native_shape = new_shape;
@@ -248,8 +273,8 @@ void BulletPolygon::DrawBorder(const Color& color) const
 
 
    m_native_shape = new_shape;
-   m_native_shape->setUserPointer(this);
-  }
+   m_native_shape->setUserPointer(dynamic_cast<BulletShape *>(this));
+}
 
 #ifdef DEBUG
 void BulletCircle::DrawBorder(const Color& color) const

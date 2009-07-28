@@ -99,7 +99,7 @@ public:
   int GetCollisionCategory();
   int GetcollisionMask();
 
-
+  void ResetContacts();
   void SetCollisionMembership(CollisionCategory category, bool state);
   void SetCollisionCategory(CollisionCategory category,bool state);
   bool IsColliding() const ;

@@ -35,7 +35,12 @@ public :
   BulletShape();
   btCollisionShape *GetNativeShape() { return m_native_shape; }
   double GetScale() const;
+  void AddContact(BulletShape *collider);
+  void RemoveContact();
+  void ResetContacts();
 protected :
+  uint m_contact_count;
+  uint m_last_contact_count;
   btCollisionShape *m_native_shape;
 
 };

@@ -40,8 +40,7 @@ PhysicalShape::PhysicalShape() :
   m_air_friction(0),
   m_rebound_factor(0.1f),
   m_density(30),
-  m_name(""),
-  m_contact_count(0)
+  m_name("")
 {
 }
 
@@ -159,20 +158,6 @@ void PhysicalShape::SetAirFriction(double air_friction)
   }
   m_air_friction = air_friction;
 }
-#include <iostream>
-
-void PhysicalShape::AddContact(PhysicalShape *collider)
-{
-  m_contact_count++;
-  std::cout<<"AddContact "<<m_contact_count<<std::endl;
-}
-
-void PhysicalShape::RemoveContact()
-{
-   m_contact_count--;
-   std::cout<<"RemoveContact "<<m_contact_count<<std::endl;
-}
-
 
 // =============================================================================
 // Static method

@@ -400,6 +400,19 @@ Point2d BulletObj::GetSpeed() const
   // Relative to current position
   PhysicalObj* BulletObj::CollidedObject(const Point2i & /*offset*/) const { return NULL;}
 
+  void BulletObj::ResetContacts()
+  {
+    std::map<std::string,PhysicalShape *>::iterator it;
+
+       for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
+       {
+         BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
+         native_shape->ResetContacts();
+       }
+
+  }
+
+
   void BulletObj::AddReboundListener(PhysicalListener */*listener*/) {}
   void BulletObj::AddCollisionListener(PhysicalListener */*listener*/) {}
 

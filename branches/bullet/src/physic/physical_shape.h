@@ -45,7 +45,6 @@ protected:
   double m_density;
   std::string m_name;
   Point2d PosWithRotation(const Point2d& point) const;
-  uint m_contact_count;
 public:
   PhysicalShape();
   virtual ~PhysicalShape();
@@ -62,8 +61,7 @@ public:
 
   void SetParent(PhysicalObj *parent);
 
-  void AddContact(PhysicalShape *collider);
-  void RemoveContact();
+
 
   const std::string &GetName() const;
   // returns current max width (taking angle into account)
