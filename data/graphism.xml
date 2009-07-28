@@ -34,7 +34,7 @@
   <surface name="ico_quit" file="menu/i_quit.png" />
 
   <surface name="ico_update" file="menu/i_update.png" />
-  <surface name="ico_lefthanded_mouse" file="menu/i_update.png" />
+  <surface name="ico_lefthanded_mouse" file="menu/left-right_mouse.png" />
 
   <surface name="enabled" file="menu/enabled.png" />
   <surface name="disabled_front" file="menu/disabled_front.png" />
