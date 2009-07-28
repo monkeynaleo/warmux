@@ -148,14 +148,16 @@ void BulletEngine::Step()
 
   ResetContacts();
 
+  for (uint i = 0; i< m_force_list.size();i++) {
+        m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
+      }
+
  MSG_DEBUG("physical.step", "Engine step");
   m_world->stepSimulation(timeStep);
   m_last_step_time = m_last_step_time +lround(timeStep);
 
   
-  for (uint i = 0; i< m_force_list.size();i++) {
-    m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
-  }
+
   /*
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
     m_air_friction_shape_list[i]->ComputeAirFriction();

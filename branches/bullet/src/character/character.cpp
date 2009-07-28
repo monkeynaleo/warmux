@@ -607,11 +607,9 @@ void Character::Move( bool slowly)
 void Character::StopMove(){
     GetPhysic()->RemoveExternForce(m_force_walk_index);
 
-    m_force_walk_index = 0;
+    m_force_walk_index = NULL;
     body->StopWalk();
-    PhysicalShape * feet = GetPhysic()->GetShape("feet");
-    feet->SetFriction(10.0);
-    feet->Generate();
+    m_feet_shape->SetFriction(10.0);
     SendActiveCharacterInfo();
     GetPhysic()->SetSpeedXY(Point2d(GetPhysic()->GetSpeed().x/5,GetPhysic()->GetSpeed().y));
 }
