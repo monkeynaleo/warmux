@@ -201,10 +201,18 @@ Point2d BulletObj::GetSpeed() const
   void BulletObj::AddShape(PhysicalShape *shape,std::string name){
     std::cout<<"AddShape "<<shape<<" x="<<shape->GetPosition().x<<" y="<<shape->GetPosition().y<<std::endl;
 
-    if(name ==""){
-      char buffer [50];
-      snprintf(buffer, 50, "%u", (unsigned int) m_shape_list.size());
-      name = "unamed_shape_"+std::string(buffer);
+    if(name =="")
+      {
+      if(shape->GetName() == "")
+      {
+        char buffer [50];
+        snprintf(buffer, 50, "%u", (unsigned int) m_shape_list.size());
+        name = "unamed_shape_"+std::string(buffer);
+      }
+      else
+      {
+        name = shape->GetName();
+      }
     }
 
     m_shape_list[name] = shape;
@@ -262,11 +270,21 @@ Point2d BulletObj::GetSpeed() const
     }
     m_shape_list.clear();
   }
-  void BulletObj::LoadShapeFromXml(const xmlNode &/*xml_config*/) {}
+  void BulletObj::LoadShapeFromXml(const xmlNode &/*xml_config*/)
+  {
 
-   PhysicalShape *BulletObj::GetShape(const std::string &/*name*/){ 
-      //TODO : modify this horror
-       return PhysicalEngine::GetInstance()->CreateRectangleShape(10,10);
+  }
+
+   PhysicalShape *BulletObj::GetShape(const std::string &name){
+     if(m_shape_list.count(name))
+     {
+       return m_shape_list[name];
+     }
+     else
+       {
+       return NULL;
+     }
+
    }
    Rectangled BulletObj::GetBoundingBox()
    {
