@@ -70,10 +70,12 @@ TeamsList::~TeamsList()
 
 void TeamsList::NextTeam ()
 {
+  ActiveCharacter().StopPlaying();
+
   Team* next = GetNextTeam();
   SetActive(next->GetId());
 
-  ActiveTeam().NextCharacter();
+  ActiveTeam().NextCharacter(true);
 
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
   Character::StoreActiveCharacter(&a);

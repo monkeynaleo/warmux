@@ -101,7 +101,7 @@ class Team
     uint GetNbCharacters() const { return nb_characters; }
 
   // Switch to next worm.
-    void NextCharacter();
+    void NextCharacter(bool new_turn = false);
     void PreviousCharacter();
     void SelectCharacter(const Character * c);
 
