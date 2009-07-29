@@ -188,6 +188,8 @@ void Physics::GetValueFromAction(Action *a)
   m_balancing_damping  = a->PopDouble();
   m_elasticity_off     = !!a->PopInt();
 
+  ASSERT(Time::GetInstance()->Read() >= m_last_move);
+
   MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
 	     typeid(*this).name(),
              m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
