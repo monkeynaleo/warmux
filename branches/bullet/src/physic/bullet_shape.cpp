@@ -36,8 +36,7 @@ m_last_contact_count(0)
 void BulletShape::AddContact(BulletShape */*collider*/)
 {
   m_contact_count++;
-  std::cout<<"AddContact "<<m_contact_count<<std::endl;
-}
+ }
 
 void BulletShape::RemoveContact()
 {
