@@ -117,7 +117,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
   if (team_name[0] == '.') return;
 
   // Is it a directory ?
-  if (!IsFolderExist(dir+team_name)) return;
+  if (!DoesFolderExist(dir+team_name)) return;
 
   // Add the team
   try {

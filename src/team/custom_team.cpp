@@ -131,7 +131,7 @@ void CustomTeam::NewTeam()
     name +="  "+oss.str();
     directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
 
-  } while (IsFolderExist(directory_name));
+  } while (DoesFolderExist(directory_name));
 
   for (uint i = 1; i < nb_characters + 1; i++) {
     characters_name_list.push_back("");
