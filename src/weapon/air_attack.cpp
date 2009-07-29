@@ -19,11 +19,9 @@
  * Air attack.
  *****************************************************************************/
 
-#include "weapon/air_attack.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
-
 #include <sstream>
+#include <WORMUX_random.h>
+
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -31,12 +29,15 @@
 #include "interface/mouse.h"
 #include "map/map.h"
 #include "map/camera.h"
+#include "network/network.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_random.h>
 #include "tool/xml_document.h"
+#include "weapon/air_attack.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 
 
 const int FORCE_X_MIN = -50;
@@ -233,7 +234,8 @@ bool AirAttack::p_Shoot ()
     return false;
 
   // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  if (Network::GetInstance()->IsTurnMaster())
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
   Plane * plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
@@ -245,19 +247,13 @@ bool AirAttack::p_Shoot ()
 
 void AirAttack::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
+  if (Network::GetInstance()->IsTurnMaster())
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
 }
 
 bool AirAttack::IsInUse() const
 {
   return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
-}
-
-void AirAttack::p_Deselect()
-{
-  // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-  ActiveCharacter().SetMovement("breathe");
 }
 
 AirAttackConfig& AirAttack::cfg()

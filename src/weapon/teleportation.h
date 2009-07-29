@@ -35,7 +35,6 @@ class Teleportation : public Weapon
   protected:
     bool p_Shoot();
     void p_Select();
-    void p_Deselect();
     void Refresh();
   public:
     Teleportation();

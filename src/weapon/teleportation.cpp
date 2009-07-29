@@ -19,7 +19,6 @@
  * Teleportation : move a charecter anywhere on the map
  *****************************************************************************/
 
-#include "weapon/teleportation.h"
 #include "character/character.h"
 #include "character/body.h"
 #include "game/game_mode.h"
@@ -28,9 +27,11 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "network/network.h"
 #include "particles/teleport_member.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
+#include "weapon/teleportation.h"
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
                                         new WeaponConfig(),
@@ -64,7 +65,8 @@ bool Teleportation::p_Shoot ()
   rect.SetPosition(dst);
 
   // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  if (Network::GetInstance()->IsTurnMaster())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
   //  Game::GetInstance()->interaction_enabled = false;
 
@@ -91,16 +93,11 @@ void Teleportation::Refresh()
 
 void Teleportation::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+  if (Network::GetInstance()->IsTurnMaster())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+
   Weapon::p_Select();
   target_chosen = false;
-}
-
-void Teleportation::p_Deselect()
-{
-  // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-  Weapon::p_Deselect();
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)

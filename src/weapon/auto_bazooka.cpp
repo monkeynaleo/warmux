@@ -19,10 +19,6 @@
  * auto bazooka : launch a homing missile
  *****************************************************************************/
 
-#include "weapon/auto_bazooka.h"
-#include "weapon/explosion.h"
-#include "weapon/weapon_cfg.h"
-
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -34,12 +30,17 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/wind.h"
+#include "network/network.h"
+#include "object/objects_list.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
-#include "object/objects_list.h"
+#include "weapon/auto_bazooka.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
+
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
@@ -249,7 +250,8 @@ void AutomaticBazooka::p_Select()
   WeaponLauncher::p_Select();
   m_target->selected = false;
 
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
+  if (Network::GetInstance()->IsTurnMaster())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 }
 
 void AutomaticBazooka::p_Deselect()
@@ -262,8 +264,6 @@ void AutomaticBazooka::p_Deselect()
                         m_target->image.GetWidth(),
                         m_target->image.GetHeight()));
   }
-
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)

@@ -39,7 +39,6 @@ class AnvilLauncher : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
     virtual bool p_Shoot();
     virtual void p_Select();
-    virtual void p_Deselect();
 };
 
 #endif /* ANVIL_H */
