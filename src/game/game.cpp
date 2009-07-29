@@ -90,7 +90,7 @@ bool Game::IsRunning()
   if (!singleton)
     return false;
 
-  return (!singleton->IsGameLaunched());
+  return (singleton->IsGameLaunched());
 }
 
 Game * Game::UpdateGameRules()
