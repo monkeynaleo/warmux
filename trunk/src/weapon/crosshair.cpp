@@ -39,10 +39,15 @@
 CrossHair::CrossHair()
 {
   enable = false;
-  display = false;
+  hidden = false;
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   image = GetResourceManager().LoadImage(res, "gfx/pointeur1");
   GetResourceManager().UnLoadXMLProfile(res);
+}
+
+void CrossHair::SetActive(bool _enable)
+{
+  enable = _enable;
 }
 
 void CrossHair::Reset() const
@@ -58,7 +63,7 @@ void CrossHair::Refresh(double angle)
 
 void CrossHair::Draw() const
 {
-  if(!display || !enable)
+  if(!enable || hidden)
     return;
   if(ActiveCharacter().IsDead())
     return;
@@ -67,4 +72,14 @@ void CrossHair::Draw() const
   Point2i tmp = ActiveTeam().GetWeapon().GetGunHolePosition() + crosshair_position;
   GetMainWindow().Blit(image, tmp - Camera::GetInstance()->GetPosition());
   GetWorld().ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
+}
+
+void CrossHair::Show()
+{
+  hidden = false;
+}
+
+void CrossHair::Hide()
+{
+  hidden = true;
 }

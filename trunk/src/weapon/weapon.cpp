@@ -172,10 +172,7 @@ void Weapon::Select()
 
   // is there a crosshair ?
   if (m_display_crosshair)
-    ActiveTeam().crosshair.display = true;
-
-  if(!EqualsZero(min_angle - max_angle))
-    ActiveTeam().crosshair.enable = true;
+    ActiveTeam().crosshair.SetActive(true);
 
   p_Select();
 
@@ -196,8 +193,7 @@ void Weapon::Select()
 
 void Weapon::Deselect()
 {
-  ActiveTeam().crosshair.enable = false;
-  ActiveTeam().crosshair.display = false;
+  ActiveTeam().crosshair.SetActive(false);
   m_is_active = false;
   MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();

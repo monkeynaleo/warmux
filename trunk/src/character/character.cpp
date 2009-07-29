@@ -1032,6 +1032,8 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 {
   HideGameInterface();
 
+  ActiveTeam().crosshair.Hide();
+
   if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterRight(shift);
 }
@@ -1039,6 +1041,9 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift) const
 void Character::HandleKeyReleased_MoveRight(bool)
 {
   body->StopWalk();
+
+  ActiveTeam().crosshair.Show();
+
   SendActiveCharacterInfo();
 }
 
@@ -1055,6 +1060,8 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 {
   HideGameInterface();
 
+  ActiveTeam().crosshair.Hide();
+
   if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterLeft(shift);
 }
@@ -1062,6 +1069,9 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
 void Character::HandleKeyReleased_MoveLeft(bool)
 {
   body->StopWalk();
+
+  ActiveTeam().crosshair.Show();
+
   SendActiveCharacterInfo();
 }
 
@@ -1069,9 +1079,12 @@ void Character::HandleKeyReleased_MoveLeft(bool)
 void Character::HandleKeyRefreshed_Up(bool shift)
 {
   HideGameInterface();
+
+  ActiveTeam().crosshair.Show();
+
   if (ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().crosshair.enable)
+      if (ActiveTeam().crosshair.IsActive())
         {
 	  UpdateLastMovingTime();
           CharacterCursor::GetInstance()->Hide();
@@ -1086,9 +1099,12 @@ void Character::HandleKeyRefreshed_Up(bool shift)
 void Character::HandleKeyRefreshed_Down(bool shift)
 {
   HideGameInterface();
+
+  ActiveTeam().crosshair.Show();
+
   if(ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().crosshair.enable)
+      if (ActiveTeam().crosshair.IsActive())
         {
 	  UpdateLastMovingTime();
           CharacterCursor::GetInstance()->Hide();
@@ -1104,6 +1120,9 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
+
+  ActiveTeam().crosshair.Hide();
+
   if (ActiveCharacter().IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_JUMP);
     SendActiveCharacterAction(a);
@@ -1115,6 +1134,9 @@ void Character::HandleKeyPressed_Jump(bool)
 void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
+
+  ActiveTeam().crosshair.Hide();
+
   if (ActiveCharacter().IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
     SendActiveCharacterAction(a);
@@ -1126,6 +1148,9 @@ void Character::HandleKeyPressed_HighJump(bool)
 void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
+
+  ActiveTeam().crosshair.Hide();
+
   if (ActiveCharacter().IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_BACK_JUMP);
     SendActiveCharacterAction(a);
