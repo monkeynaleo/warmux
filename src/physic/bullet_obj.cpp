@@ -32,8 +32,8 @@
 #include <stdio.h>
 
 
-
-
+#define BULLET_SPEED_FACTOR 0.04
+#define BULLET_IMPULSE_FACTOR 3
 
 BulletObj::BulletObj() : PhysicalObj() {
     /// Create Dynamic Object
@@ -156,7 +156,7 @@ BulletObj::~BulletObj()
  // Speed
   void BulletObj::SetSpeedXY(Point2d vector)
   {
-    m_body->setLinearVelocity(btVector3(vector.x/GetScale(),vector.y/GetScale(),0));
+    m_body->setLinearVelocity(btVector3(vector.x/(GetScale()*BULLET_SPEED_FACTOR),vector.y/(GetScale()*BULLET_SPEED_FACTOR),0));
     m_body->setActivationState(ACTIVE_TAG);
   }
 
@@ -181,7 +181,7 @@ BulletObj::~BulletObj()
 
 Point2d BulletObj::GetSpeed() const
   {
-      return Point2d(m_body->getLinearVelocity().getX()*GetScale(),m_body->getLinearVelocity().getY()*GetScale());
+      return Point2d(m_body->getLinearVelocity().getX()*GetScale()*BULLET_SPEED_FACTOR,m_body->getLinearVelocity().getY()*GetScale()*BULLET_SPEED_FACTOR);
   }
 
   double BulletObj::GetAngularSpeed() const
@@ -337,17 +337,18 @@ Point2d BulletObj::GetSpeed() const
   void BulletObj::ImpulseXY(const Point2d& vector)
   {
     std::cout<<"Impulse"<<std::endl;
-    m_body->internalApplyImpulse(btVector3(vector.x/GetScale(), vector.y/GetScale(),0),btVector3(0,0,0),1);
+    m_body->internalApplyImpulse(btVector3(vector.x/(GetScale()*BULLET_IMPULSE_FACTOR), vector.y/(GetScale()*BULLET_IMPULSE_FACTOR),0),btVector3(0,0,0),1);
+    m_body->setActivationState(ACTIVE_TAG);
   }
   void BulletObj::Impulse(double norm, double angle)
   {
     ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
-    m_body->setActivationState(ACTIVE_TAG);
+
   }
 
   void BulletObj::ComputeForce(Force * force)
   {
-    m_body->applyCentralForce(btVector3(force->m_force.x/GetScale(),force->m_force.y/GetScale(),0));
+    m_body->applyCentralForce(btVector3(force->m_force.x/(GetScale()),force->m_force.y/(GetScale()),0));
     m_body->setActivationState(ACTIVE_TAG);
   }
 
