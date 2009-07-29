@@ -742,6 +742,8 @@ void Weapon::HandleKeyReleased_Shoot(bool)
 
 void Weapon::p_Deselect()
 {
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+
   ActiveCharacter().SetMovement("breathe");
 }
 

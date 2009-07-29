@@ -19,11 +19,8 @@
  * Anvil : appear in top of an enemy and crush down his head
  *****************************************************************************/
 
-#include "weapon/weapon_cfg.h"
-#include "weapon/anvil.h"
-#include "weapon/explosion.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
+
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
@@ -32,10 +29,15 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "network/network.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
+#include "weapon/weapon_cfg.h"
+#include "weapon/anvil.h"
+#include "weapon/explosion.h"
+
 //-----------------------------------------------------------------------------
 
 class Anvil : public WeaponProjectile
@@ -166,7 +168,8 @@ bool AnvilLauncher::p_Shoot ()
   ReloadLauncher();
 
   // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  if (Network::GetInstance()->IsTurnMaster())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
   target_chosen = false; // ensure next shoot cannot be done pressing key space
   return true;
@@ -174,14 +177,8 @@ bool AnvilLauncher::p_Shoot ()
 
 void AnvilLauncher::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
-}
-
-void AnvilLauncher::p_Deselect()
-{
-  // Go back to default cursor
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-  ActiveCharacter().SetMovement("breathe");
+  if (Network::GetInstance()->IsTurnMaster())
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 }
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()
