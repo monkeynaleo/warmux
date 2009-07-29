@@ -573,10 +573,7 @@ void Character::Move( bool slowly)
 
   if(!m_force_walk_index){
 
-    //PhysicalShape * feet = GetPhysic()->GetShape("feet");
-//       feet->SetFriction(0.0);
-  //     feet->Generate();
-
+    m_feet_shape->SetFriction(0);
 
 
     if(GetDirection() == DIRECTION_LEFT){
