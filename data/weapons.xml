@@ -50,23 +50,23 @@
   </sprite>
 
   <sprite name="water_drop">
-    <image file="gfx/water/water_drop.png" />
+    <image file="gfx/water/water/water_drop.png" />
   </sprite>
 
   <sprite name="lava_drop">
-    <image file="gfx/water/lava_drop.png" />
+    <image file="gfx/water/lava/lava_drop.png" />
   </sprite>
 
   <sprite name="radioactive_drop">
-    <image file="gfx/water/radioactive_drop.png" />
+    <image file="gfx/water/radioactive/radioactive_drop.png" />
   </sprite>
 
   <sprite name="dirtywater_drop">
-    <image file="gfx/water/dirtywater_drop.png" />
+    <image file="gfx/water/dirtywater/dirtywater_drop.png" />
   </sprite>
 
   <sprite name="chocolate_drop">
-    <image file="gfx/water/chocolate_drop.png" />
+    <image file="gfx/water/chocolate/chocolate_drop.png" />
   </sprite>
 
   <!-- Air attack ressources -->

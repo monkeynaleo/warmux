@@ -19,10 +19,11 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particles/water_drop.h"
-#include "particles/particle.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "particles/water_drop.h"
+#include "particles/particle.h"
+#include "tool/resource_manager.h"
 
 const uint living_time = 5000;
 
@@ -33,7 +34,10 @@ WaterParticle::WaterParticle() :
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
-  image = ParticleEngine::GetSprite(WATER_spr);
+  Profile *res = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
+  image = GetResourceManager().LoadSprite(res, ActiveMap()->GetWaterType() + "_drop");
+  GetResourceManager().UnLoadXMLProfile(res);
+
   image->SetRotation_HotSpot(bottom_center);
   SetSize(image->GetSize());
 }
@@ -76,6 +80,13 @@ void WaterParticle::SignalDrowning()
 void WaterParticle::SignalOutOfMap()
 {
   m_left_time_to_live = 0;
+}
+
+ClearWaterParticle::ClearWaterParticle()
+{
+  // delete std water image
+  delete image;
+  image = ParticleEngine::GetSprite(CLEARWATER_spr);
 }
 
 LavaParticle::LavaParticle()

@@ -34,17 +34,6 @@ class Color;
 
 class Water
 {
-public:
-  typedef enum {
-    NO_WATER,
-    WATER,
-    LAVA,
-    RADIOACTIVE,
-    DIRTY,
-    CHOCOLATE,
-    MAX_WATER_TYPE
-  } Water_type;
-
 private:
   static int pattern_height;
   Color* type_color;
@@ -57,11 +46,10 @@ private:
   Surface pattern;
   Surface bottom;
   Surface wpattern;
-  Water_type water_type;
+  std::string water_type;
   uint       m_last_preview_redraw;
 
   void Init();
-
 
 public:
   Water();
@@ -78,9 +66,6 @@ public:
 
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;
-   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
-
-  static Water_type GetWaterType(const std::string & water);
-  static const std::string GetWaterName(const Water_type water_type);
+  uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
 };
 #endif

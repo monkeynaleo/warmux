@@ -289,20 +289,20 @@
     <image file="gfx/arrow.png" />
   </sprite>
 
-  <surface name="water" file="gfx/water/water.png" />
-  <surface name="water_bottom" file="gfx/water/water_bottom.png" />
+  <surface name="water" file="gfx/water/water/water.png" />
+  <surface name="water_bottom" file="gfx/water/water/water_bottom.png" />
 
-  <surface name="lava" file="gfx/water/lava.png" />
-  <surface name="lava_bottom" file="gfx/water/lava_bottom.png" />
+  <surface name="lava" file="gfx/water/lava/lava.png" />
+  <surface name="lava_bottom" file="gfx/water/lava/lava_bottom.png" />
 
-  <surface name="radioactive" file="gfx/water/radioactive.png" />
-  <surface name="radioactive_bottom" file="gfx/water/radioactive_bottom.png" />
+  <surface name="radioactive" file="gfx/water/radioactive/radioactive.png" />
+  <surface name="radioactive_bottom" file="gfx/water/radioactive/radioactive_bottom.png" />
 
-  <surface name="dirtywater" file="gfx/water/dirtywater.png" />
-  <surface name="dirtywater_bottom" file="gfx/water/dirtywater_bottom.png" />
+  <surface name="dirtywater" file="gfx/water/dirtywater/dirtywater.png" />
+  <surface name="dirtywater_bottom" file="gfx/water/dirtywater/dirtywater_bottom.png" />
 
-  <surface name="chocolate" file="gfx/water/chocolate.png" />
-  <surface name="chocolate_bottom" file="gfx/water/chocolate_bottom.png" />
+  <surface name="chocolate" file="gfx/water/chocolate/chocolate.png" />
+  <surface name="chocolate_bottom" file="gfx/water/chocolate/chocolate_bottom.png" />
 
 </section>
 

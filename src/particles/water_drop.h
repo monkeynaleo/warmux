@@ -35,6 +35,12 @@ protected:
   void SignalOutOfMap();
 };
 
+class ClearWaterParticle : public WaterParticle
+{
+public:
+  ClearWaterParticle();
+};
+
 class LavaParticle : public WaterParticle
 {
 public:
