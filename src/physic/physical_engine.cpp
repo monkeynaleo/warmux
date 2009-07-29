@@ -113,26 +113,6 @@ void PhysicalEngine::VirtualStep()
   }*/
 }
 
-void PhysicalEngine::AddForce(Force * /*force*/)
-{
- //   m_force_list.push_back(force);
-}
-
-void PhysicalEngine::RemoveForce(Force */*force*/)
-{
-
-  /*std::vector<Force *>::iterator it;
-  for (it = m_force_list.begin(); it != m_force_list.end(); it++){
-    if (*it == force) {
-      m_force_list.erase(it);
-      break;
-    }
-
-  }*/
-
-}
-
-
 void PhysicalEngine::AddAirFrictionShape(PhysicalShape * /*shape*/)
 {
 //  m_air_friction_shape_list.push_back(shape);

@@ -39,8 +39,6 @@ m_target_center(false)
 //   m_target_point =  target->GetBody()->GetWorldPoint(m_target_point);
   }
 
-  PhysicalEngine::GetInstance()->AddForce(this);
-
 }
 
 Force::Force(PhysicalObj *i_target, Point2d i_force):
