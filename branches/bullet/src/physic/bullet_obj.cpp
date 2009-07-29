@@ -56,8 +56,8 @@ BulletObj::BulletObj() : PhysicalObj() {
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, m_root_shape, localInertia);
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
-    m_body->setLinearFactor(btVector3(0,1,0));
-    m_body->setAngularFactor(btVector3(0,0,0));
+    m_body->setLinearFactor(btVector3(1,1,0));
+    m_body->setAngularFactor(btVector3(0,1,0));
     m_body->setDamping(0.01,0.5);
     m_body->setRestitution(0.5);
 
@@ -157,6 +157,7 @@ BulletObj::~BulletObj()
   void BulletObj::SetSpeedXY(Point2d vector)
   {
     m_body->setLinearVelocity(btVector3(vector.x/GetScale(),vector.y/GetScale(),0));
+    m_body->setActivationState(ACTIVE_TAG);
   }
 
   void BulletObj::SetSpeed(double norm, double angle_rad)
@@ -342,11 +343,13 @@ Point2d BulletObj::GetSpeed() const
   void BulletObj::Impulse(double norm, double angle)
   {
     ImpulseXY(Point2d::FromPolarCoordinates(norm, angle));
+    m_body->setActivationState(ACTIVE_TAG);
   }
 
   void BulletObj::ComputeForce(Force * force)
   {
-    m_body->applyCentralForce(btVector3(force->m_force.x,force->m_force.y,0));
+    m_body->applyCentralForce(btVector3(force->m_force.x/GetScale(),force->m_force.y/GetScale(),0));
+    m_body->setActivationState(ACTIVE_TAG);
   }
 
 

@@ -57,8 +57,8 @@ public:
   virtual void Step() = 0;
   void VirtualStep();
 
-  void AddForce(Force * force);
-  void RemoveForce(Force *force);
+  virtual void AddForce(Force * force) = 0;
+  virtual void RemoveForce(Force *force) = 0;
 
   void AddAirFrictionShape(PhysicalShape* shape);
   void RemoveAirFrictionShape(PhysicalShape* shape);
