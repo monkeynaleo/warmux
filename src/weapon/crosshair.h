@@ -28,9 +28,9 @@
 
 class CrossHair
 {
-public:
+private:
   bool enable;
-  bool display;
+  bool hidden;
 
 private:
   Surface image;
@@ -47,6 +47,12 @@ public:
   // Draw crosshair
   void Draw() const;
 
+  void SetActive(bool enable);
+  bool IsActive() const { return enable; };
+
+  // Use it only for a few seconds (character walking, jumping, ...)
+  void Hide();
+  void Show();
 };
 
 #endif /* CROSSHAIR_H */
