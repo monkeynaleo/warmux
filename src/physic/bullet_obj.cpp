@@ -200,7 +200,6 @@ Point2d BulletObj::GetSpeed() const
   // Shape
 
   void BulletObj::AddShape(PhysicalShape *shape,std::string name){
-    std::cout<<"AddShape "<<shape<<" x="<<shape->GetPosition().x<<" y="<<shape->GetPosition().y<<std::endl;
 
     if(name =="")
       {

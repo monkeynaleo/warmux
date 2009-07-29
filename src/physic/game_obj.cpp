@@ -24,7 +24,6 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
-#include <iostream>
 #include <WORMUX_debug.h>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
@@ -424,7 +423,6 @@ void GameObj::SetEnergyDelta(int delta, bool /*do_report*/)
 
 void GameObj::UpdatePosition ()
 {
-  std::cout<<"Pos "<<this<<" x="<<GetX()<<" y="<<GetY()<<" sx="<<GetSpeed().x<<" sy="<<GetSpeed().y<<std::endl;
   if ( IsOutsideWorldXY( Point2i( GetX(),GetY()) )) {
     Ghost();
     SignalOutOfMap();
