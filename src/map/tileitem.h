@@ -46,8 +46,6 @@ public:
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
-  PhysicalObj *GetPhysicGround() const { return m_physic_ground;};
-  void SetPhysicGround(PhysicalObj * ground){ m_physic_ground = ground;};
 
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};

@@ -118,7 +118,6 @@ public:
 
   // Ground dimensions
   Point2i nbCells;
-  PhysicalObj *GetPhysicalObj() const ;
 
   void InitPreview();
   Surface*   m_preview;
@@ -130,7 +129,6 @@ public:
 
   Point2i m_upper_left_offset;
   Point2i m_lower_right_offset;
-  PhysicalObj* m_physical_obj;
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

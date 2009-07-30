@@ -74,11 +74,6 @@ void PhysicTile::Generate()
     break;
   }
 
-  if(m_shape)
-  {
-    m_parent_tile->GetPhysicGround()->AddShape(m_shape);
-  }
-
 
 }
 
@@ -95,7 +90,7 @@ void PhysicTile::GenerateFull()
   m_is_containing_polygon = true;
 
   InitShape();
-
+/*
   m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
                          (double(m_offset.y + m_tile_offset.y))));
 
@@ -107,9 +102,15 @@ void PhysicTile::GenerateFull()
 
   m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
                          (double(m_offset.y + m_size.y-1 + m_tile_offset.y))));
+*/
 
+  m_shape->AddPoint(Point2d(0,0));
+  m_shape->AddPoint(Point2d(0,64));
+  m_shape->AddPoint(Point2d(64,64));
+  m_shape->AddPoint(Point2d(64,0));
   m_shape->Generate();
-
+  m_physical_obj->SetPosition(m_offset);
+  m_physical_obj->AddShape(m_shape);
 }
 
 void PhysicTile::GenerateMixte()
@@ -486,6 +487,11 @@ void PhysicTile::InitShape()
   */
 
   m_shape = shape;
+  m_physical_obj = PhysicalEngine::GetInstance()->CreateObject(PhysicalEngine::RIGID_BODY);
+  m_physical_obj->SetFixed(true);
+  PhysicalEngine::GetInstance()->AddObject(m_physical_obj);
+
+
 }
 
 

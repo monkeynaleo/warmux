@@ -25,6 +25,7 @@
 #include <WORMUX_point.h>
 class TileItem;
 class PhysicalPolygon;
+class PhysicalObj;
 
 #ifdef DEBUG
 class Color;
@@ -50,6 +51,7 @@ private:
   Point2i m_size;
   Point2i m_offset;
   Point2i m_tile_offset;
+  PhysicalObj* m_physical_obj;
 
   int m_level;
 
