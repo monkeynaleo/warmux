@@ -66,9 +66,6 @@ void Ground::Init()
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
 
-  m_physical_obj = PhysicalEngine::GetInstance()->CreateObject(PhysicalEngine::RIGID_BODY);
-  m_physical_obj->SetFixed(true);
- // PhysicalEngine::GetInstance()->AddObject(m_physical_obj);
 
   // Load ground data
   Surface& m_image = ActiveMap()->ReadImgGround();
@@ -495,7 +492,6 @@ void Ground::LoadImage(Surface& ground_img, const Point2i & upper_left_offset, c
       Point2d offset = i* CELL_SIZE;
 
       TileItem_AlphaSoftware* t = new TileItem_AlphaSoftware(CELL_SIZE, offset);
-      t->SetPhysicGround(GetPhysicalObj());
       ground_img.SetAlpha(0, 0);
       t->GetSurface().Blit(ground_img, sr, Point2i(0, 0));
       t->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
@@ -650,8 +646,4 @@ void Ground::CheckEmptyTiles()
   }
 }
 
-PhysicalObj *Ground::GetPhysicalObj() const
-{
-  return m_physical_obj;
-}
 
