@@ -257,7 +257,15 @@ bool Config::MkdirPersonalConfigDir() const
 
 bool Config::MkdirPersonalDataDir() const
 {
-  return CreateFolder(personal_data_dir);
+  bool r = CreateFolder(personal_data_dir);
+
+  if (r) {
+    CreateFolder(personal_data_dir + "map");
+    CreateFolder(personal_data_dir + "team");
+    CreateFolder(personal_data_dir + "game_mode");
+  }
+
+  return r;
 }
 
 bool Config::RemovePersonalConfigFile() const
