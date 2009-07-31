@@ -779,6 +779,7 @@ bool GameObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, 
   } while (!ok);
 
   MSG_DEBUG("physic.position", "Put '%s' after %u tries", m_name.c_str(), bcl);
+
   return true;
 }
 

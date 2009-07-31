@@ -34,6 +34,7 @@ class PhysicalShape;
 class PhysicalCircle;
 class PhysicalPolygon;
 class PhysicalRectangle;
+class PhysicalGround;
 
 #include "WORMUX_point.h"
 #include "WORMUX_types.h"
@@ -46,12 +47,14 @@ public:
   PhysicalEngine();
   virtual ~PhysicalEngine();
 
+  virtual PhysicalGround *CreateGround() = 0;
   virtual PhysicalObj *CreateObject(ObjectType type) = 0;
   virtual PhysicalPolygon *CreatePolygonShape() = 0;
   virtual PhysicalCircle *CreateCircleShape() = 0;
   virtual PhysicalRectangle *CreateRectangleShape(double width, double height) = 0;
 
   virtual void AddObject(PhysicalObj *new_obj) =0;
+  virtual void AddGround(PhysicalGround *new_obj) =0;
   virtual void RemoveObject(PhysicalObj *obj) =0;
   void AddConstraint();
   virtual void Step() = 0;

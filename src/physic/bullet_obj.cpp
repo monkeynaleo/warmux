@@ -57,14 +57,14 @@ BulletObj::BulletObj() : PhysicalObj() {
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
     m_body->setLinearFactor(btVector3(1,1,0));
-    m_body->setAngularFactor(btVector3(0,1,0));
-    m_body->setDamping(0.01,0.5);
-    m_body->setRestitution(0.5);
+    m_body->setAngularFactor(btVector3(0,0,0));
+    m_body->setDamping(0.1,0.5);
+    m_body->setRestitution(0.1);
 
     m_body->setCollisionFlags(m_body->getCollisionFlags() |
         btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-
+    m_in_world = false;
    // m_root_shape->addChildShape(startTransform,colShape);
 
 }
@@ -73,9 +73,8 @@ BulletObj::BulletObj() : PhysicalObj() {
 
 BulletObj::~BulletObj()
 {
-
-  ClearShapes();
   PhysicalEngine::GetInstance()->RemoveObject(this);
+  ClearShapes();
 }
 
  void BulletObj::LoadFromXml(const xmlNode &/*xml_obj*/){}
@@ -92,7 +91,6 @@ BulletObj::~BulletObj()
        btTransform current_transform = m_body->getWorldTransform();
        current_transform.setOrigin(btVector3(position.x/GetScale(),position.y/GetScale(),0));
        m_body->setWorldTransform(current_transform);
-
   }
 
   double BulletObj::GetScale() const
@@ -100,12 +98,15 @@ BulletObj::~BulletObj()
    return (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetScale();
   }
  
-  const Point2d BulletObj::GetPosition() const
+  Point2d BulletObj::GetPosition() const
   {
-    btTransform current_transform;
+    /*btTransform current_transform;
     m_body->getMotionState()->getWorldTransform(current_transform);
     ASSERT(current_transform.getOrigin().getZ() == 0);
+    return Point2d(current_transform.getOrigin().getX()*GetScale(),current_transform.getOrigin().getY()*GetScale());*/
+    btTransform current_transform = m_body->getWorldTransform();
     return Point2d(current_transform.getOrigin().getX()*GetScale(),current_transform.getOrigin().getY()*GetScale());
+
   }
 
   void BulletObj::SetAngle(double angle_rad)
@@ -140,7 +141,7 @@ BulletObj::~BulletObj()
   void BulletObj::SetRotationFixed(bool rotating)
   {
     if(rotating){
-      m_body->setAngularFactor(btVector3(0,1,0));
+      m_body->setAngularFactor(btVector3(0,0,0));
     }else{
       m_body->setAngularFactor(btVector3(0,0,0));
     }
@@ -299,6 +300,11 @@ Point2d BulletObj::GetSpeed() const
 	  return 1/m_body->getInvMass();
   }
 
+  void BulletObj::SetMass(double mass)
+  {
+    m_body->setMassProps(mass,btVector3(0,0,0));
+  }
+
   // Force
   Force *BulletObj::AddExternForceXY (const Point2d& vector)
   {
@@ -428,6 +434,7 @@ Point2d BulletObj::GetSpeed() const
        for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
        {
          BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
+         ASSERT(native_shape);
          native_shape->ResetContacts();
        }
 
@@ -506,8 +513,19 @@ Point2d BulletObj::GetSpeed() const
 
 
   void BulletObj::Reload(){
-    PhysicalEngine::GetInstance()->RemoveObject(this);
-    PhysicalEngine::GetInstance()->AddObject(this);
+    if(IsInWorld()){
+      PhysicalEngine::GetInstance()->RemoveObject(this);
+      PhysicalEngine::GetInstance()->AddObject(this);
+    }
+  }
+
+  void BulletObj::SetInWorld(bool in_world){
+    m_in_world = in_world;
+  }
+
+  bool BulletObj::IsInWorld()
+  {
+    return m_in_world;
   }
 
   #ifdef DEBUG
@@ -522,3 +540,69 @@ Point2d BulletObj::GetSpeed() const
     }
   }
  #endif
+
+
+
+    BulletGround::BulletGround(){
+
+      // ground
+
+
+
+
+  }
+
+    void BulletGround::SetPosition(const Point2d &position)
+    {
+        m_position = position;
+    }
+
+    Point2d BulletGround::GetPosition() const{
+      return m_position;
+    }
+
+    void BulletGround::AddShape(PhysicalShape *shape){
+
+      m_shape_list.push_back(shape);
+      shape->SetParent(this);
+
+      BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
+      ASSERT(native_shape->GetNativeShape());
+
+
+      btTransform startTransform;
+      startTransform.setIdentity();
+
+      btScalar mass(0.f);
+      btVector3 localInertia(0, 0, 0);
+
+      startTransform.setOrigin(btVector3(m_position.x/GetScale(),m_position.y/GetScale(),0));
+
+       btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, native_shape->GetNativeShape(), localInertia);
+      m_body = new btRigidBody(rbInfo);
+
+    }
+
+    double BulletGround::GetScale() const
+    {
+     return (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetScale();
+    }
+
+    #ifdef DEBUG
+      void BulletGround::DrawShape(const Color& color) const{
+        std::vector<PhysicalShape *>::const_iterator it;
+
+        for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
+        {
+         PhysicalShape * native_shape = *it;
+        native_shape->DrawBorder(color);
+       }
+     }
+    #endif
+
+      btRigidBody* BulletGround::GetBody()
+      {
+          return m_body;
+      }
+

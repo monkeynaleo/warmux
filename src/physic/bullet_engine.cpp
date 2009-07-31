@@ -76,13 +76,19 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
 
   //  m_world->addRigidBody(m_body,0xFFFF,0xFFFF);
     m_world->addRigidBody(m_body,0x0002,0xFFFF);
-    m_body->setActivationState(ACTIVE_TAG);
+   // m_body->setActivationState(ACTIVE_TAG);
     m_body->setRestitution(0.5);
 }
 
 BulletEngine::~BulletEngine()
 {
 
+}
+
+PhysicalGround *BulletEngine::CreateGround()
+{
+
+    return new BulletGround();
 }
 
 PhysicalObj *BulletEngine::CreateObject(PhysicalEngine::ObjectType /*type*/)
@@ -108,23 +114,31 @@ PhysicalRectangle *BulletEngine::CreateRectangleShape(double width, double heigh
 void BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
+    ASSERT(!obj->IsInWorld());
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
     m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
     //m_world->addRigidBody(obj->GetBody());
-    obj->GetBody()->setActivationState(ACTIVE_TAG);
+    //obj->GetBody()->setActivationState(ACTIVE_TAG);
     m_object_list.push_back(obj);
-std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
-
+    std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
+    obj->SetInWorld(true);
 
 /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
   objects_list[body] = new_obj;
   return body;*/
 }
 
+void BulletEngine::AddGround(PhysicalGround *new_obj)
+{
+    BulletGround *obj = reinterpret_cast<BulletGround *>(new_obj);
+    obj->GetBody()->setActivationState(ISLAND_SLEEPING);
+    m_world->addRigidBody(obj->GetBody(),0x0002,0xFFFF);
+    obj->GetBody()->setRestitution(0.5);
+}
 void BulletEngine::RemoveObject(PhysicalObj *obj)
 {
   BulletObj *bobj = reinterpret_cast<BulletObj *>(obj);
-
+  ASSERT(bobj->IsInWorld());
   std::vector<BulletObj *>::iterator it;
   for(it = m_object_list.begin(); it != m_object_list.end();it++){
    if(*it == bobj){
@@ -132,7 +146,7 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
      break;
    }
   }
-
+  bobj->SetInWorld(false);
   m_world->removeRigidBody(bobj->GetBody());
   std::cout<<"Remove "<<obj<<std::endl;
 }
@@ -215,12 +229,12 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& /*cp*/,const btCollisio
   BulletShape *shape1 = reinterpret_cast<BulletShape *>(colObj0->getCollisionShape()->getUserPointer());
   BulletShape *shape2 = reinterpret_cast<BulletShape *>(colObj1->getCollisionShape()->getUserPointer());
   shape1->AddContact(shape2);
-  return true;
+  return false;
 }
 
 bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
 {
   BulletShape *shape = reinterpret_cast<BulletShape  *>(userPersistentData);
   shape->RemoveContact();
-  return true;
+  return false;
 }

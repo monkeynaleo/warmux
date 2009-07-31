@@ -38,7 +38,13 @@ class PhysicalShape;
 class PhysicalListener;
 class Force;
 
-class PhysicalObj
+class PhysicalEntity
+{
+public:
+  virtual Point2d GetPosition() const = 0;
+};
+
+class PhysicalObj : public PhysicalEntity
 {
   
 public: 
@@ -59,7 +65,6 @@ public:
 
   // Set/Get position
   virtual void SetPosition(const Point2d &position) = 0;
-  virtual const Point2d GetPosition() const  = 0;
   virtual void SetAngle(double angle_rad) = 0;
   virtual double GetAngle() const = 0;
   
@@ -92,6 +97,7 @@ public:
    virtual Rectangled GetBoundingBox() = 0;
   //  Mass
   virtual double GetMass() const = 0;
+  virtual void SetMass(double mass) = 0;
  
   // Force
   virtual Force *AddExternForceXY (const Point2d& vector) = 0;
@@ -177,5 +183,27 @@ protected:
   
   bool m_rotating;
  };
+
+
+class PhysicalGround : public PhysicalEntity
+{
+
+public:
+
+  // Set position
+  virtual void SetPosition(const Point2d &position) = 0;
+
+
+  // Shape
+  virtual void AddShape(PhysicalShape *shape) = 0;
+
+  #ifdef DEBUG
+    virtual void DrawShape(const Color& color) const =0;
+  #endif
+
+protected:
+
+ };
+
 
 #endif

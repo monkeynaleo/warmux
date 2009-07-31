@@ -51,7 +51,7 @@ public:
 
   // Set/Get position
   void SetPosition(const Point2d &position) ;
-  const Point2d GetPosition() const  ;
+  Point2d GetPosition() const  ;
   void SetAngle(double angle_rad) ;
   double GetAngle() const ;
   
@@ -85,6 +85,7 @@ public:
    Rectangled GetBoundingBox() ;
   //  Mass
   double GetMass() const ;
+  void SetMass(double mass);
  
   // Force
   Force *AddExternForceXY (const Point2d& vector) ;
@@ -155,6 +156,8 @@ public:
  #endif
 
   double GetScale() const;
+  void SetInWorld(bool in_world);
+  bool IsInWorld();
 
 protected:
   void SignalRebound() ;
@@ -169,6 +172,32 @@ protected:
   int m_collision_mask;
   std::vector<Force *> m_force_list;
 
+  bool m_in_world;
+
 };
+
+class BulletGround : public PhysicalGround
+{
+
+public:
+  BulletGround();
+  // Set position
+  void SetPosition(const Point2d &position);
+  Point2d GetPosition() const;
+
+  // Shape
+  void AddShape(PhysicalShape *shape);
+
+  #ifdef DEBUG
+    void DrawShape(const Color& color) const;
+  #endif
+
+    double GetScale() const;
+    btRigidBody* GetBody();
+protected:
+    std::vector<PhysicalShape *> m_shape_list;
+    btRigidBody* m_body;
+    Point2d m_position;
+ };
 
 #endif
