@@ -456,12 +456,13 @@ bool NetworkConnectionMenu::signal_ok()
     Network::GetInstance()->network_menu = NULL;
     IndexServer::GetInstance()->Disconnect();
 
-    // back to main menu after playing
     Network::Disconnect();
-    return true;
+
+    // Don't go back to main menu after playing
+    Menu::RedrawMenu();
+    return false;
   }
 
-  r = true;
  out:
   Network::Disconnect();
   return r;
