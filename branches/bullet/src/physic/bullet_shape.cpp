@@ -52,8 +52,7 @@ void BulletShape::ResetContacts()
 
 
 //////////////Bullet Rectangle
-BulletRectangle::BulletRectangle(double width, double height):PhysicalRectangle(width,height),
-m_shape(btVector3(width*GetScale(),height*GetScale(),100*GetScale()))
+BulletRectangle::BulletRectangle(double width, double height):PhysicalRectangle(width,height)
 {
 
 }
@@ -65,12 +64,12 @@ BulletRectangle::~BulletRectangle()
 
 void BulletRectangle::Generate()
 {
-  btBoxShape * new_shape = new btBoxShape(btVector3(m_width*GetScale(),m_height*GetScale(),100*GetScale()));
+  btBoxShape * new_shape = new btBoxShape(btVector3(m_width/GetScale(),m_height/GetScale(),100/GetScale()));
 
 
 
   btScalar mass(1.0f);
-  btVector3 localInertia(0, 0, -50*GetScale());
+  btVector3 localInertia(0, 0, -50/GetScale());
 
 
   new_shape->calculateLocalInertia(mass,localInertia);
@@ -149,7 +148,6 @@ void BulletRectangle::Generate()
 #ifdef DEBUG
 void BulletRectangle::DrawBorder(const Color& color) const
 {
-  ASSERT(m_parent);
 
   ASSERT(m_parent);
 

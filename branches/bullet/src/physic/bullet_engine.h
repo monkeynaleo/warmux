@@ -35,11 +35,13 @@ class BulletEngine : public PhysicalEngine
   BulletEngine();
   ~BulletEngine();
 
+  PhysicalGround *CreateGround();
   PhysicalObj *CreateObject(ObjectType type);
   PhysicalPolygon *CreatePolygonShape();
   PhysicalCircle *CreateCircleShape();
   PhysicalRectangle *CreateRectangleShape(double width, double height);
 
+  void AddGround(PhysicalGround *new_obj);
   void AddObject(PhysicalObj *new_obj);
   void RemoveObject(PhysicalObj *obj);
   void AddConstraint();

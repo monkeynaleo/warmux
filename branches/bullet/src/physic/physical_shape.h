@@ -35,7 +35,7 @@ class Color;
 class PhysicalShape
 {
 protected:
-  PhysicalObj *m_parent;
+  PhysicalEntity *m_parent;
 
   Point2d m_position;
   Point2d m_force_application_point;
@@ -59,7 +59,7 @@ public:
   void SetAirFriction(double air_friction);
   void SetForceApplicationPoint(Point2d point);
 
-  void SetParent(PhysicalObj *parent);
+  void SetParent(PhysicalEntity *parent);
 
 
   virtual bool IsColliding() const = 0;

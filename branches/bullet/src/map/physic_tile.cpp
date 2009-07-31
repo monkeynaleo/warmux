@@ -89,28 +89,18 @@ void PhysicTile::GenerateFull()
   m_is_subdivided = false;
   m_is_containing_polygon = true;
 
-  InitShape();
-/*
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
-                         (double(m_offset.y + m_tile_offset.y))));
+  m_physical_ground = PhysicalEngine::GetInstance()->CreateGround();
+  m_physical_ground->SetPosition(m_tile_offset);
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x + m_size.x-1)),
-                         (double(m_offset.y + m_tile_offset.y))));
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_size.x-1 + m_tile_offset.x)),
-                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y))));
+  PhysicalRectangle* shape = PhysicalEngine::GetInstance()->CreateRectangleShape(64,64);
+  shape->Generate();
 
-  m_shape->AddPoint(Point2d((double(m_offset.x + m_tile_offset.x)),
-                         (double(m_offset.y + m_size.y-1 + m_tile_offset.y))));
-*/
+  m_physical_ground->AddShape(shape);
+  m_shape = shape;
 
-  m_shape->AddPoint(Point2d(0,0));
-  m_shape->AddPoint(Point2d(0,64));
-  m_shape->AddPoint(Point2d(64,64));
-  m_shape->AddPoint(Point2d(64,0));
-  m_shape->Generate();
-  m_physical_obj->SetPosition(m_offset);
-  m_physical_obj->AddShape(m_shape);
+   PhysicalEngine::GetInstance()->AddGround(m_physical_ground);
+
 }
 
 void PhysicTile::GenerateMixte()
@@ -471,25 +461,7 @@ PhysicTile::Fullness PhysicTile::IsFull() const
 
 void PhysicTile::InitShape()
 {
-  PhysicalPolygon* shape = PhysicalEngine::GetInstance()->CreatePolygonShape();
-// m_parent_tile->GetPhysicalObj()->AddShape(shape);
-//  shape->SetBody(m_parent_tile->GetBody());
 
-  shape->SetFriction(GROUND_FRICTION);
-
-
-  //TODO Fix collision filters
-  /*
-  b2FilterData filter_data;
-  filter_data.categoryBits = 0x0004; // Why this is different than upper ??
-  filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
-  shape->SetFilter(filter_data);
-  */
-
-  m_shape = shape;
-  m_physical_obj = PhysicalEngine::GetInstance()->CreateObject(PhysicalEngine::RIGID_BODY);
-  m_physical_obj->SetFixed(true);
-  PhysicalEngine::GetInstance()->AddObject(m_physical_obj);
 
 
 }

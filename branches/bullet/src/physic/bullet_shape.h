@@ -85,7 +85,7 @@ public:
   void DrawBorder(const Color &color) const;
 #endif
 protected:
-  btBoxShape m_shape;
+
 };
 
 

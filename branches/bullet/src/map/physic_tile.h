@@ -24,8 +24,8 @@
 
 #include <WORMUX_point.h>
 class TileItem;
-class PhysicalPolygon;
-class PhysicalObj;
+class PhysicalShape;
+class PhysicalGround;
 
 #ifdef DEBUG
 class Color;
@@ -42,7 +42,7 @@ private:
   bool m_is_subdivided;
   bool m_is_containing_polygon;
 
-  PhysicalPolygon *m_shape;
+  PhysicalShape *m_shape;
   PhysicTile *m_physic_tiles[4];
 
   PhysicTile * m_parent_physic_tile;
@@ -51,7 +51,7 @@ private:
   Point2i m_size;
   Point2i m_offset;
   Point2i m_tile_offset;
-  PhysicalObj* m_physical_obj;
+  PhysicalGround* m_physical_ground;
 
   int m_level;
 
