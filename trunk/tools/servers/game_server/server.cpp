@@ -134,7 +134,7 @@ void NetworkGame::SendActionToAllExceptOne(const Action& a, DistantComputer* cli
 // if (!clt_as_rcver) sending to all EXCEPT client 'client'
 void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const
 {
-  char* packet;
+  char *packet;
   int size;
 
   a.WriteToPacket(packet, size);
@@ -176,7 +176,7 @@ void NetworkGame::StopGame()
   game_started = false;
 }
 
-void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* sender)
+void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
 
@@ -188,7 +188,7 @@ void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* send
   }
 
   if (sender == cpulist.front()) {
-    Action a(reinterpret_cast<const char*>(buffer), sender);
+    Action a(buffer, sender);
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
       if (net_state == WNet::NETWORK_LOADING_DATA) {
@@ -427,7 +427,7 @@ void GameServer::RunLoop()
       continue; //Or break?
     }
 
-    void * buffer;
+    char *buffer;
     size_t packet_size;
 
     std::map<uint, NetworkGame>::iterator gamelst_it;
@@ -441,7 +441,7 @@ void GameServer::RunLoop()
 
 	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
-	  if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
+	  if (!(*dst_cpu)->ReceiveData(&buffer, packet_size)) {
 	    // An error occured during the reception
 
 	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
