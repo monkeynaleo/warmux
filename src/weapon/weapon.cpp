@@ -194,6 +194,8 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.SetActive(false);
+  ActiveCharacter().SetFiringAngle(0);
+  ActiveCharacter().SetMovement("breathe");
   m_is_active = false;
   MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();
