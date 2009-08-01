@@ -121,8 +121,8 @@ public:
   bool ReceiveStr(std::string &_str, size_t maxlen);
 
   // Packet is composed of [ size (4 bytes),  data ]
-  bool SendPacket(const void* data, size_t len);
-  bool ReceivePacket(void* &data, size_t& len);
+  bool SendPacket(const char* data, size_t len);
+  bool ReceivePacket(char** data, size_t& len);
 };
 
 //-----------------------------------------------------------------------------

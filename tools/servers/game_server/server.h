@@ -61,7 +61,7 @@ public:
 
   uint NextPlayerId() const;
   void ElectGameMaster();
-  void ForwardPacket(void * buffer, size_t len, DistantComputer* sender);
+  void ForwardPacket(const char *buffer, size_t len, DistantComputer* sender);
   void SendActionToAll(const Action& action) const;
   void SendActionToOne(const Action& action, DistantComputer* client) const;
   void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
