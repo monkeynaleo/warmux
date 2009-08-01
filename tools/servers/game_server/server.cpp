@@ -42,6 +42,8 @@ const std::string& NetworkGame::GetPassword() const
 void NetworkGame::AddCpu(DistantComputer* cpu)
 {
   cpulist.push_back(cpu);
+  DPRINT(INFO, "[Game %s] New client connected: %s - total: %zd", game_name.c_str(),
+	 cpu->ToString().c_str(), cpulist.size());
 }
 
 std::list<DistantComputer*>& NetworkGame::GetCpus()
@@ -57,7 +59,6 @@ const std::list<DistantComputer*>& NetworkGame::GetCpus() const
 bool NetworkGame::AcceptNewComputers() const
 {
   if (game_started || cpulist.size() >= 4) {
-    DPRINT(INFO, "Game %s denies connexion", game_name.c_str());
     return false;
   }
 
@@ -70,8 +71,11 @@ NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
   std::list<DistantComputer*>::iterator it;
 
   it = cpulist.erase(closed);
-  delete *closed;
 
+  DPRINT(INFO, "[Game %s] Client disconnected: %s - total: %zd", game_name.c_str(),
+	 (*closed)->ToString().c_str(), cpulist.size());
+
+  delete *closed;
 
   return it;
 }
@@ -102,7 +106,8 @@ void NetworkGame::ElectGameMaster()
 
   DistantComputer* host = cpulist.front();
 
-  DPRINT(INFO, "New game master: %s", host->GetAddress().c_str());
+  DPRINT(INFO, "[Game %s] New game master: %s", game_name.c_str(),
+	 host->ToString().c_str());
 
   Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
   SendActionToOne(a, host);
@@ -152,6 +157,25 @@ void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_
   free(packet);
 }
 
+void NetworkGame::StartGame()
+{
+  DPRINT(INFO, "[Game %s] started with %zd players", game_name.c_str(), cpulist.size());
+
+  std::list<DistantComputer*>::iterator it;
+  int i = 0;
+  for (it = cpulist.begin(); it != cpulist.end(); it++, i++) {
+    DPRINT(INFO, "[Game %s] \t\t %d) %s", game_name.c_str(), i, (*it)->ToString().c_str());
+  }
+
+  game_started = true;
+}
+
+void NetworkGame::StopGame()
+{
+  DPRINT(INFO, "[Game %s] finished with %zd players", game_name.c_str(), cpulist.size());
+  game_started = false;
+}
+
 void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
@@ -167,10 +191,12 @@ void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* send
     Action a(reinterpret_cast<const char*>(buffer), sender);
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
-      if (net_state == WNet::NETWORK_LOADING_DATA)
-	game_started = true;
-      else if (net_state == WNet::NETWORK_NEXT_GAME)
-	game_started = false;
+      if (net_state == WNet::NETWORK_LOADING_DATA) {
+	StartGame();
+      }
+      else if (net_state == WNet::NETWORK_NEXT_GAME) {
+	StopGame();
+      }
     }
   }
 }
@@ -192,12 +218,12 @@ void GameServer::CreateGame(uint game_id)
   NetworkGame netgame(gamename_str, password);
   games.insert(std::make_pair(game_id, netgame));
 
-  DPRINT(INFO, "Game - %s - created", gamename_str.c_str());
+  DPRINT(INFO, "[Game %s] created", gamename_str.c_str());
 }
 
 void GameServer::DeleteGame(std::map<uint, NetworkGame>::iterator gamelst_it)
 {
-  DPRINT(INFO, "Game - %s - deleted", gamelst_it->second.GetName().c_str());
+  DPRINT(INFO, "[Game %s] deleted", gamelst_it->second.GetName().c_str());
   games.erase(gamelst_it);
 }
 
@@ -311,9 +337,14 @@ bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& ni
   if (GetCpus(game_id).empty())
     client_will_be_master = true;
 
-  DPRINT(INFO, "%s will be master ? %d", client_socket.GetAddress().c_str(), client_will_be_master);
-  return WNet::Server_HandShake(client_socket, GetGame(game_id).GetName(), GetGame(game_id).GetPassword(),
-				nickname, player_id, client_will_be_master);
+  bool r = WNet::Server_HandShake(client_socket, GetGame(game_id).GetName(), GetGame(game_id).GetPassword(),
+				  nickname, player_id, client_will_be_master);
+
+  if (r && client_will_be_master)
+    DPRINT(INFO, "[Game %s] %s (%s) will be game master", GetGame(game_id).GetName().c_str(),
+	   nickname.c_str(), client_socket.GetAddress().c_str());
+
+  return r;
 }
 
 void GameServer::RejectIncoming()
@@ -454,8 +485,6 @@ void WORMUX_ConnectHost(DistantComputer& host)
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();
 
-  DPRINT(INFO, "New client connected: %s (%s)", nicknames.c_str(), hostname.c_str());
-
   Action a(Action::ACTION_INFO_CLIENT_CONNECT);
   a.Push(hostname);
   a.Push(nicknames);
@@ -467,8 +496,6 @@ void WORMUX_DisconnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();
-
-  DPRINT(INFO, "Client disconnected: %s (%s)", nicknames.c_str(), hostname.c_str());
 
   Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
   a.Push(hostname);
