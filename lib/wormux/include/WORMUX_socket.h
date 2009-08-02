@@ -72,9 +72,15 @@ private:
 
   bool using_tmp_socket_set;
 
+  int packet_size;
+
   bool AddToSocketSet(WSocketSet* _socket_set);
   void RemoveFromSocketSet();
   uint32_t ComputeCRC(const void* data, size_t len);
+
+  bool NbBytesAvailable(size_t& nb_bytes);
+  bool ReceiveBuffer_NoLock(void* data, size_t len);
+  bool ReceiveBuffer(void* data, size_t len);
 
 public:
   WSocket(TCPsocket _socket, WSocketSet* _socket_set);
@@ -111,9 +117,6 @@ public:
   bool SendBuffer_NoLock(const void* data, size_t len);
   bool SendBuffer(const void* data, size_t len);
 
-  bool ReceiveBuffer_NoLock(void* data, size_t len);
-  bool ReceiveBuffer(void* data, size_t len);
-
   bool ReceiveInt_NoLock(int& nbr);
   bool ReceiveInt(int& nbr);
 
@@ -122,6 +125,9 @@ public:
 
   // Packet is composed of [ size (4 bytes),  data ]
   bool SendPacket(const char* data, size_t len);
+
+  // ReceivePacket may return true with *data = NULL and len = 0
+  // That means that client is still valid BUT there are not enough data CURRENTLY
   bool ReceivePacket(char** data, size_t& len);
 };
 
