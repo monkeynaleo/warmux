@@ -69,13 +69,14 @@ std::list<DistantComputer*>::iterator
 NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   std::list<DistantComputer*>::iterator it;
+  DistantComputer *host = *closed;
 
   it = cpulist.erase(closed);
 
   DPRINT(INFO, "[Game %s] Client disconnected: %s - total: %zd", game_name.c_str(),
-	 (*closed)->ToString().c_str(), cpulist.size());
+	 host->ToString().c_str(), cpulist.size());
 
-  delete *closed;
+  delete host;
 
   return it;
 }
