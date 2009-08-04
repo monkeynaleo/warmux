@@ -464,8 +464,9 @@ void GameServer::RunLoop()
 	      goto loop;
 	    }
 
-	  } else {
-
+	  } else if (buffer && packet_size) {
+	    // buffer may be NULL and packet_size equal to zero if there is not yet
+	    // enough data to read a packet.
 	    GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
 	    free(buffer);
 	  }
