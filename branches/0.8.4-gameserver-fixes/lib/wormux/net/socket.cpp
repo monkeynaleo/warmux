@@ -482,11 +482,11 @@ bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
     } else if (received != int(len)) {
       // See above to understand this strange test
 
-      fprintf(stderr, "ERROR: SDLNet_TCP_Recv only %d bytes while requesting %zd\n", received, len);
+      fprintf(stderr, "ERROR: SDLNet_TCP_Recv only %d bytes while requesting %d\n", received, len);
       if (len > 4096) { // let's say it was a buffer pb
-	fprintf(stderr, "\t received=%d, len=%zd - assume it was a buffer problem. Try it again\n", received, len);
+	fprintf(stderr, "\t received=%d, len=%d - assume it was a buffer problem. Try it again\n", received, len);
       } else {
-	fprintf(stderr, "\t received=%d, len=%zd - assume it was a REAL problem\n", received, len);
+	fprintf(stderr, "\t received=%d, len=%d - assume it was a REAL problem\n", received, len);
 	return false;
       }
     }
