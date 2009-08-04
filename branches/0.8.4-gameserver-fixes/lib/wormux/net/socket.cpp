@@ -593,7 +593,7 @@ uint32_t WSocket::ComputeCRC(const void* data, size_t len)
   return crc;
 }
 
-bool WSocket::SendPacket(const void* data, size_t len)
+bool WSocket::SendPacket(const char* data, size_t len)
 {
   bool r;
   uint32_t crc;
@@ -618,7 +618,7 @@ bool WSocket::SendPacket(const void* data, size_t len)
   return r;
 }
 
-bool WSocket::ReceivePacket(void* &data, size_t& len)
+bool WSocket::ReceivePacket(char** data, size_t& len)
 {
   bool r;
 
@@ -658,10 +658,10 @@ bool WSocket::ReceivePacket(void* &data, size_t& len)
     goto error;
   }
 
-  data = packet;
+  *data = packet;
   len = packet_size;
 
-  if (uint32_t(crc) != ComputeCRC(data, len)) {
+  if (uint32_t(crc) != ComputeCRC(packet, len)) {
     fprintf(stderr, "ERROR: wrong CRC check\n");
     goto error;
   }

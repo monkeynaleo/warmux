@@ -100,12 +100,12 @@ bool DistantComputer::SocketReady() const
   return sock->IsReady();
 }
 
-bool DistantComputer::ReceiveData(void* & data, size_t & len)
+bool DistantComputer::ReceiveData(char** data, size_t & len)
 {
   return sock->ReceivePacket(data, len);
 }
 
-bool DistantComputer::SendData(const void* data, size_t len)
+bool DistantComputer::SendData(const char* data, size_t len)
 {
   return sock->SendPacket(data, len);
 }
