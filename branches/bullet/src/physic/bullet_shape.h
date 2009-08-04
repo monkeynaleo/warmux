@@ -38,10 +38,12 @@ public :
   void AddContact(BulletShape *collider);
   void RemoveContact();
   void ResetContacts();
+  Point2d GetBulletPosition();
 protected :
   uint m_contact_count;
   uint m_last_contact_count;
   btCollisionShape *m_native_shape;
+  Point2d m_bullet_position;
 
 };
 

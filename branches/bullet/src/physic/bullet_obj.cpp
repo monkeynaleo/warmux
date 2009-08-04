@@ -219,11 +219,12 @@ Point2d BulletObj::GetSpeed() const
     m_shape_list[name] = shape;
 
     shape->SetParent(this);
+    BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
+        ASSERT(native_shape->GetNativeShape());
     btTransform startTransform;
     startTransform.setIdentity();
-    startTransform.setOrigin(btVector3(shape->GetPosition().x/GetScale(),shape->GetPosition().y/GetScale(),0));
-    BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
-    ASSERT(native_shape->GetNativeShape());
+    startTransform.setOrigin(btVector3((shape->GetPosition().x+native_shape->GetBulletPosition().x)/GetScale(),(shape->GetPosition().y+native_shape->GetBulletPosition().y)/GetScale(),0));
+
     m_root_shape->addChildShape(startTransform,native_shape->GetNativeShape());
 
   }
@@ -576,7 +577,7 @@ Point2d BulletObj::GetSpeed() const
       btScalar mass(0.f);
       btVector3 localInertia(0, 0, 0);
 
-      startTransform.setOrigin(btVector3(m_position.x/GetScale(),m_position.y/GetScale(),0));
+      startTransform.setOrigin(btVector3((m_position.x+native_shape->GetBulletPosition().x)/GetScale(),(m_position.y+native_shape->GetBulletPosition().y)/GetScale(),0));
 
        btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
       btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, native_shape->GetNativeShape(), localInertia);
