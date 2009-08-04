@@ -202,6 +202,10 @@ void NetworkMenu::PrepareForNewGame()
   Network::GetInstance()->SetState(WNet::NETWORK_NEXT_GAME);
   Network::GetInstance()->SendNetworkState();
 
+  // to choose another random map
+  if (Network::GetInstance()->IsGameMaster())
+    map_box->ChangeMapDelta(0);
+
   RedrawMenu();
 }
 
