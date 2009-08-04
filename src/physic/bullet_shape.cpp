@@ -28,7 +28,7 @@ m_contact_count(0),
 m_last_contact_count(0)
 {
   m_native_shape = NULL;
-
+  m_bullet_position = Point2d(0,0);
 }
 
 #include <iostream>
@@ -50,6 +50,10 @@ void BulletShape::ResetContacts()
   m_contact_count = 0;
 }
 
+Point2d BulletShape::GetBulletPosition()
+{
+  return m_bullet_position;
+}
 
 //////////////Bullet Rectangle
 BulletRectangle::BulletRectangle(double width, double height):PhysicalRectangle(width,height)
@@ -64,13 +68,11 @@ BulletRectangle::~BulletRectangle()
 
 void BulletRectangle::Generate()
 {
-  btBoxShape * new_shape = new btBoxShape(btVector3(m_width/GetScale(),m_height/GetScale(),100/GetScale()));
-
-
+  btBoxShape * new_shape = new btBoxShape(btVector3(m_width/(2*GetScale()),m_height/(2*GetScale()),100/(2*GetScale())));
 
   btScalar mass(1.0f);
-  btVector3 localInertia(0, 0, -50/GetScale());
-
+  btVector3 localInertia(0, 0, 0);
+  m_bullet_position = Point2d(m_width/2, m_height/2);
 
   new_shape->calculateLocalInertia(mass,localInertia);
 
@@ -151,14 +153,42 @@ void BulletRectangle::DrawBorder(const Color& color) const
 
   ASSERT(m_parent);
 
-    btVector3 pos;
-    btScalar radius;
-    m_native_shape->getBoundingSphere(pos,radius);
-
-    GetMainWindow().CircleColor(pos.x()*GetScale()+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,pos.y()*GetScale()+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,radius*GetScale(),color);
     GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
     GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
-/*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
+
+    GetMainWindow().LineColor(
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x + m_width,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+        color);
+
+    GetMainWindow().LineColor(
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x ,
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x + m_width,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y + m_height,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y + m_height,
+        color);
+
+    GetMainWindow().LineColor(
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x ,
+        m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y + m_height,
+        m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+        color);
+
+    GetMainWindow().LineColor(
+           m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x + m_width,
+           m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x + m_width,
+           m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y + m_height,
+           m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+           color);
+
+    GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
+    GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
+
+
+    /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
   ASSERT(polygon->GetVertexCount() > 2);
   b2XForm xf = m_body->GetXForm();
