@@ -470,4 +470,6 @@ void NetworkMenu::WaitingForGameMaster()
 
   } while (Network::GetInstance()->IsConnected() &&
 	   Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
+
+  waiting_for_server = false;
 }
