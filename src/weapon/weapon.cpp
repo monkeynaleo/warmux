@@ -703,8 +703,6 @@ void Weapon::HandleKeyPressed_Shoot(bool)
 {
   if(ActiveCharacter().IsPreparingShoot())
     return;
-  if(IsLoading())
-	return;
 
   if (max_strength == 0)
     NewActionWeaponShoot();
