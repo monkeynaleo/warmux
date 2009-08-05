@@ -1084,14 +1084,10 @@ void Character::HandleKeyRefreshed_Up(bool shift)
 
   if (ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().crosshair.IsActive())
-        {
-	  UpdateLastMovingTime();
-          CharacterCursor::GetInstance()->Hide();
-          if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
-          else       AddFiringAngle(-DELTA_CROSSHAIR);
-          SendActiveCharacterInfo();
-        }
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
+      else       AddFiringAngle(-DELTA_CROSSHAIR);
     }
 }
 
@@ -1104,14 +1100,11 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 
   if(ActiveCharacter().IsImmobile())
     {
-      if (ActiveTeam().crosshair.IsActive())
-        {
-	  UpdateLastMovingTime();
-          CharacterCursor::GetInstance()->Hide();
-          if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
-          else       AddFiringAngle(DELTA_CROSSHAIR);
-          SendActiveCharacterInfo();
-        }
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
+      else       AddFiringAngle(DELTA_CROSSHAIR);
+      SendActiveCharacterInfo();
     }
 }
 
