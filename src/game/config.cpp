@@ -99,6 +99,7 @@ Config::Config():
   display_energy_character(true),
   display_name_character(true),
   display_wind_particles(true),
+  display_multi_layer_sky(true),
   default_mouse_cursor(false),
   video_width(800),
   video_height(600),
@@ -439,6 +440,7 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "bling_bling_interface", bling_bling_interface);
     XmlReader::ReadUint(elem, "max_fps", max_fps);
     XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
+    XmlReader::ReadBool(elem, "display_multi_layer_sky", display_multi_layer_sky);
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
@@ -585,6 +587,7 @@ bool Config::SaveXml(bool save_current_teams)
   Video * video = AppWormux::GetInstance()->video;
   xmlNode* video_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"video"));
   doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
+  doc.WriteElement(video_node, "display_multi_layer_sky", ulong2str(display_multi_layer_sky));
   doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
   doc.WriteElement(video_node, "display_name_character", ulong2str(display_name_character));
   doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));

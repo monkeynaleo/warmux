@@ -192,7 +192,7 @@ void InfoMap::LoadData()
   XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
   for (uint i = 0; i < layer; i++) {
     std::ostringstream ss;
-    ss << "sky_layer_" << (i + 1);
+    ss << "sky_layer_" << i;
     sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()));
   }
 
