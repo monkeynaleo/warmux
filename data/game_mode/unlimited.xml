@@ -456,13 +456,14 @@
     </teleportation>
 
     <tux>
-      <nb_ammo>-1</nb_ammo>
-      <damage>50</damage>
+      <available_after_turn>7</available_after_turn>
+      <nb_ammo>1</nb_ammo>
+      <damage>120</damage>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>75</explosion_range>
-      <particle_range>80</particle_range>
-      <blast_range>75</blast_range>
+      <explosion_range>90</explosion_range>
+      <particle_range>130</particle_range>
+      <blast_range>130</blast_range>
       <blast_force>1000</blast_force>
       <speed>600</speed>
       <timeout>20</timeout>
