@@ -81,14 +81,6 @@ OptionMenu::OptionMenu() :
   opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
-  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
-  graphic_options->AddWidget(opt_scroll_on_border);
-
-  opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
-						     option_size,
-						     50, 5, 5, 80);
-  graphic_options->AddWidget(opt_scroll_border_size);
-
 #ifndef __APPLE__
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
@@ -204,6 +196,16 @@ OptionMenu::OptionMenu() :
 					     "menu/ico_lefthanded_mouse", option_size);
   misc_options->AddWidget(opt_lefthanded_mouse);
 
+  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
+  misc_options->AddWidget(opt_scroll_on_border);
+
+  opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
+						     option_size,
+						     50, 5, 5, 80);
+  misc_options->AddWidget(opt_scroll_border_size);
+
+
+
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 
 
@@ -259,8 +261,6 @@ OptionMenu::OptionMenu() :
   opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
-  opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
-  opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
 #ifndef __APPLE__
   full_screen->SetValue(app->video->IsFullScreen());
 #endif
@@ -309,6 +309,8 @@ OptionMenu::OptionMenu() :
 
   opt_updates->SetValue(config->GetCheckUpdates());
   opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
+  opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
+  opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
 
   GetResourceManager().UnLoadXMLProfile(res);
 
