@@ -7,10 +7,10 @@
     <email>yekcim_AT_crocobox_DOT_org</email>
   </author>
 
-  <surface name="one_layer_sky" file="one_layer_sky.jpg" />
+  <surface name="sky" file="one_layer_sky.jpg" />
 
-  <surface name="sky" file="sky_layer-0.jpg" />
-  <sky_layer>3</sky_layer>
+  <sky_layer>4</sky_layer>
+  <surface name="sky_layer_0" file="sky_layer-0.jpg" />
   <surface name="sky_layer_1" file="sky_layer-1.png" />
   <surface name="sky_layer_2" file="sky_layer-2.png" />
   <surface name="sky_layer_3" file="sky_layer-3.png" />

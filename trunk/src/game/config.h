@@ -73,6 +73,9 @@ public:
   bool GetDisplayWindParticles() const { return display_wind_particles; };
   void SetDisplayWindParticles(bool dwp) { display_wind_particles = dwp; };
 
+  bool GetDisplayMultiLayerSky() const { return display_multi_layer_sky; };
+  void GetDisplayMultiLayerSky(bool dmsl) { display_multi_layer_sky = dmsl; };
+
   bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
   void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
 
@@ -180,6 +183,7 @@ protected:
   bool display_energy_character;
   bool display_name_character;
   bool display_wind_particles;
+  bool display_multi_layer_sky;
   bool default_mouse_cursor;
 
   // Video settings
