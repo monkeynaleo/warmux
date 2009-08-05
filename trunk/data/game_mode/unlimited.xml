@@ -456,7 +456,6 @@
     </teleportation>
 
     <tux>
-      <available_after_turn>7</available_after_turn>
       <nb_ammo>1</nb_ammo>
       <damage>120</damage>
       <min_angle>-89</min_angle>
