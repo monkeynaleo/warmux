@@ -53,6 +53,7 @@ class OptionMenu : public Menu
    ComboBox *cbox_video_mode;
    ListBox *lbox_languages;
    CheckBox *opt_display_wind_particles;
+   CheckBox *opt_display_multisky;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
 #ifndef __APPLE__
