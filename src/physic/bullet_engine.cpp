@@ -129,6 +129,12 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
   std::cout<<"Remove "<<obj<<std::endl;
 }
 
+void BulletEngine::RemoveGround(PhysicalGround *obj)
+{
+  BulletGround *bobj = reinterpret_cast<BulletGround *>(obj);
+  m_world->removeRigidBody(bobj->GetBody());
+}
+
 void BulletEngine::Step()
 {
 

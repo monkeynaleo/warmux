@@ -544,14 +544,15 @@ Point2d BulletObj::GetSpeed() const
 
 
 
-    BulletGround::BulletGround(){
-
+   BulletGround::BulletGround(){
       // ground
-
-
-
-
   }
+
+   BulletGround::~BulletGround()
+   {
+     PhysicalEngine::GetInstance()->RemoveGround(this);
+     delete m_shape;
+   }
 
     void BulletGround::SetPosition(const Point2d &position)
     {
@@ -564,7 +565,7 @@ Point2d BulletObj::GetSpeed() const
 
     void BulletGround::AddShape(PhysicalShape *shape){
 
-      m_shape_list.push_back(shape);
+      m_shape = shape;
       shape->SetParent(this);
 
       BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
@@ -592,13 +593,10 @@ Point2d BulletObj::GetSpeed() const
 
     #ifdef DEBUG
       void BulletGround::DrawShape(const Color& color) const{
-        std::vector<PhysicalShape *>::const_iterator it;
 
-        for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
-        {
-         PhysicalShape * native_shape = *it;
+        PhysicalShape * native_shape = m_shape;
         native_shape->DrawBorder(color);
-       }
+
      }
     #endif
 
