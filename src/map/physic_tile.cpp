@@ -64,13 +64,10 @@ void PhysicTile::Generate()
     GenerateEmpty();
     break;
   case FULL:
-
     GenerateFull();
     break;
   case MIXTE:
-    //TODO restore that
-    //GenerateMixte();
-    GenerateFull();
+    GenerateMixte();
     break;
   }
 
@@ -90,10 +87,10 @@ void PhysicTile::GenerateFull()
   m_is_containing_polygon = true;
 
   m_physical_ground = PhysicalEngine::GetInstance()->CreateGround();
-  m_physical_ground->SetPosition(m_tile_offset);
+  m_physical_ground->SetPosition(m_tile_offset+m_offset);
 
 
-  PhysicalRectangle* shape = PhysicalEngine::GetInstance()->CreateRectangleShape(64,64);
+  PhysicalRectangle* shape = PhysicalEngine::GetInstance()->CreateRectangleShape(m_size.x,m_size.y);
   shape->Generate();
 
   m_physical_ground->AddShape(shape);
@@ -359,8 +356,8 @@ bool PhysicTile::GeneratePolygone()
 	//std::cout<<"PhysicTile::Add pt"<<i<<" x "<<pts[i].x<<" y "<<pts[i].y<<std::endl;
 	//std::cout<<"PhysicTile::Add ph"<<i<<" x "<<pts[i].x+m_tile_offset.x<<" y "<<pts[i].y+m_tile_offset.y<<std::endl;
 
-	    Point2d new_point((double(pts[i].x + m_tile_offset.x)),
-				(double(pts[i].y + m_tile_offset.y) ));
+	    Point2d new_point((double(pts[i].x )),
+				(double(pts[i].y ) ));
         shape->AddPoint(new_point);
 
 		if(new_point.x < min_pixel.x)
@@ -387,14 +384,18 @@ bool PhysicTile::GeneratePolygone()
 	Point2d min_pixel(0,0);
       shape->SetFriction(GROUND_FRICTION);
   
-      //TODO : Fix collision filters
-/*      b2FilterData filter_data;
-      filter_data.categoryBits = 0x0004; // Why this is different than upper ??
-      filter_data.maskBits = 0xFFFB; // Why this is different than upper ??
-      shape->SetFilter(filter_data);
-  */
+
      shape->Generate();
       m_shape = shape;
+
+
+       m_physical_ground = PhysicalEngine::GetInstance()->CreateGround();
+       m_physical_ground->SetPosition(m_tile_offset);
+
+       m_physical_ground->AddShape(shape);
+
+        PhysicalEngine::GetInstance()->AddGround(m_physical_ground);
+
 	} else {
 	  delete shape;
 	  m_is_containing_polygon = false;
