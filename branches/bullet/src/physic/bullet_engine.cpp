@@ -55,29 +55,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
    gContactDestroyedCallback= BulletEngine::ContactDestroyedCallback;
 
 
-    //Debug ground
-     btRigidBody* m_body;
-      btTransform startTransform;
-    startTransform.setIdentity();
 
-    btScalar mass(0.f);
-    btVector3 localInertia(0, 0, 0);
-
-    startTransform.setOrigin(btVector3(1500/GetScale(), 1500/GetScale(), 0));
-    btCollisionShape* colShape = new btBoxShape(btVector3(10000/GetScale(),100/GetScale(),100/GetScale()));
-
-   // colShape->calculateLocalInertia(mass,localInertia);
-
-    //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-    btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-    btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
-    m_body = new btRigidBody(rbInfo);
-    m_body->setActivationState(ISLAND_SLEEPING);
-
-  //  m_world->addRigidBody(m_body,0xFFFF,0xFFFF);
-    m_world->addRigidBody(m_body,0x0002,0xFFFF);
-   // m_body->setActivationState(ACTIVE_TAG);
-    m_body->setRestitution(0.5);
 }
 
 BulletEngine::~BulletEngine()
