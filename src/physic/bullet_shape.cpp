@@ -312,10 +312,6 @@ void BulletCircle::DrawBorder(const Color& color) const
 
     GetMainWindow().CircleColor(GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
 
-
-    GetMainWindow().LineColor(0 ,1000   , 1400 - Camera::GetInstance()->GetPosition().y, 1400 - Camera::GetInstance()->GetPosition().y, color );
-    GetMainWindow().LineColor(0 ,1000   , 1600 - Camera::GetInstance()->GetPosition().y, 1600 - Camera::GetInstance()->GetPosition().y, color );
-
     GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
    GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
 
