@@ -181,6 +181,8 @@ class BulletGround : public PhysicalGround
 
 public:
   BulletGround();
+  ~BulletGround();
+
   // Set position
   void SetPosition(const Point2d &position);
   Point2d GetPosition() const;
@@ -195,7 +197,7 @@ public:
     double GetScale() const;
     btRigidBody* GetBody();
 protected:
-    std::vector<PhysicalShape *> m_shape_list;
+    PhysicalShape * m_shape;
     btRigidBody* m_body;
     Point2d m_position;
  };

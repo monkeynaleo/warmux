@@ -38,7 +38,7 @@ static const double GROUND_FRICTION = 5.0;
 PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level):
   m_is_subdivided(false),
   m_is_containing_polygon(false),
-  m_shape(NULL),
+  m_physical_ground(NULL),
   m_parent_physic_tile(parent_physic_tile),
   m_parent_tile(tile),
   m_size(size),
@@ -94,7 +94,6 @@ void PhysicTile::GenerateFull()
   shape->Generate();
 
   m_physical_ground->AddShape(shape);
-  m_shape = shape;
 
    PhysicalEngine::GetInstance()->AddGround(m_physical_ground);
 
@@ -386,7 +385,6 @@ bool PhysicTile::GeneratePolygone()
   
 
      shape->Generate();
-      m_shape = shape;
 
 
        m_physical_ground = PhysicalEngine::GetInstance()->CreateGround();
@@ -425,8 +423,8 @@ void PhysicTile::Clean()
   }
 
   if (m_is_containing_polygon) {
-    delete m_shape;
-    m_shape = NULL;
+    delete m_physical_ground;
+    m_physical_ground = NULL;
     m_is_containing_polygon = false;
   }
 }
@@ -472,8 +470,8 @@ void PhysicTile::InitShape()
 void PhysicTile::DrawBorder(const Color& color) const
 {
   if (!m_is_subdivided && m_is_containing_polygon) {
-    ASSERT(m_shape != NULL);
-    m_shape->DrawBorder(color);
+    ASSERT(m_physical_ground != NULL);
+    m_physical_ground->DrawShape(color);
 
   } else if (m_is_subdivided) {
     for (uint i=0; i < 4; i++) {

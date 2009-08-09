@@ -42,7 +42,6 @@ private:
   bool m_is_subdivided;
   bool m_is_containing_polygon;
 
-  PhysicalShape *m_shape;
   PhysicTile *m_physic_tiles[4];
 
   PhysicTile * m_parent_physic_tile;

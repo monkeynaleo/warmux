@@ -44,6 +44,8 @@ class BulletEngine : public PhysicalEngine
   void AddGround(PhysicalGround *new_obj);
   void AddObject(PhysicalObj *new_obj);
   void RemoveObject(PhysicalObj *obj);
+  void RemoveGround(PhysicalGround *obj);
+
   void AddConstraint();
   void Step();
   void VirtualStep();

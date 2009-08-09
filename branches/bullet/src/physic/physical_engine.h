@@ -56,6 +56,8 @@ public:
   virtual void AddObject(PhysicalObj *new_obj) =0;
   virtual void AddGround(PhysicalGround *new_obj) =0;
   virtual void RemoveObject(PhysicalObj *obj) =0;
+  virtual void RemoveGround(PhysicalGround *obj) =0;
+
   void AddConstraint();
   virtual void Step() = 0;
   void VirtualStep();
