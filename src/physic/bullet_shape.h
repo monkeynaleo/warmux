@@ -29,14 +29,16 @@
 class Color;
 #endif
 
+class BulletContact;
+
 class BulletShape
 {
 public :
   BulletShape();
   btCollisionShape *GetNativeShape() { return m_native_shape; }
   double GetScale() const;
-  void AddContact(BulletShape *collider);
-  void RemoveContact();
+  void AddContact(BulletContact *contact);
+  void RemoveContact(BulletContact *contact);
   void ResetContacts();
   Point2d GetBulletPosition();
   PhysicalShape *GetPublicShape();
@@ -46,6 +48,8 @@ protected :
   btCollisionShape *m_native_shape;
   Point2d m_bullet_position;
   PhysicalShape *m_public_shape;
+  std::vector<BulletContact *> m_contact_list;
+
 
 };
 

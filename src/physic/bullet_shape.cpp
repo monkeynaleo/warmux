@@ -38,21 +38,31 @@ PhysicalShape *BulletShape::GetPublicShape(){
   return m_public_shape;
 }
 
-void BulletShape::AddContact(BulletShape */*collider*/)
+void BulletShape::AddContact(BulletContact *contact)
 {
+  m_contact_list.push_back(contact);
   m_contact_count++;
- }
+  }
 
-void BulletShape::RemoveContact()
+void BulletShape::RemoveContact(BulletContact *contact)
 {
+  std::vector<BulletContact *>::iterator it;
+   for(it = m_contact_list.begin(); it != m_contact_list.end(); it++ ){
+     BulletContact *c = *it;
+     if(c == contact){
+       m_contact_list.erase(it);
+       break;
+     }
+   }
    m_contact_count--;
-   std::cout<<"RemoveContact "<<m_contact_count<<std::endl;
+
 }
 
 void BulletShape::ResetContacts()
 {
-  m_last_contact_count = m_contact_count;
-  m_contact_count = 0;
+
+  //m_last_contact_count = m_contact_count;
+  //m_contact_count = 0;
 }
 
 Point2d BulletShape::GetBulletPosition()

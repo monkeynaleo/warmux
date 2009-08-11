@@ -39,6 +39,7 @@ public:
   void GetSpeedA(double &norm, double &angle_rad) const;
   Point2d GetSpeedA() const;
   PhysicalShape *GetShapeA();
+  BulletShape *GetBulletShapeA();
   void SetShapeA(BulletShape * shape);
 
 
@@ -49,6 +50,7 @@ public:
   void GetSpeedB(double &norm, double &angle_rad) const;
   Point2d GetSpeedB() const ;
   PhysicalShape *GetShapeB();
+  BulletShape *GetBulletShapeB();
   void SetShapeB(BulletShape * shape);
 
 
