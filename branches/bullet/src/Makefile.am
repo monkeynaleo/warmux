@@ -144,8 +144,10 @@ wormux_SOURCES = \
         physic/object_cfg.cpp physic/object_cfg.h \
         physic/physical_obj.cpp physic/physical_obj.h \
 	physic/physical_engine.cpp physic/physical_engine.h \
+	physic/physical_contact.cpp physic/physical_contact.h \
 	physic/bullet_engine.cpp physic/bullet_engine.h \
         physic/bullet_obj.cpp physic/bullet_obj.h \
+	physic/bullet_contact.cpp physic/bullet_contact.h \
         physic/bullet_shape.cpp physic/bullet_shape.h \
         physic/physical_shape.cpp physic/physical_shape.h \
         sound/jukebox.cpp sound/jukebox.h \

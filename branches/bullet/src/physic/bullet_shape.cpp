@@ -33,6 +33,11 @@ m_last_contact_count(0)
 
 #include <iostream>
 
+
+PhysicalShape *BulletShape::GetPublicShape(){
+  return m_public_shape;
+}
+
 void BulletShape::AddContact(BulletShape */*collider*/)
 {
   m_contact_count++;
@@ -68,6 +73,7 @@ BulletRectangle::~BulletRectangle()
 
 void BulletRectangle::Generate()
 {
+  m_public_shape = this;
   btBoxShape * new_shape = new btBoxShape(btVector3(m_width/(2*GetScale()),m_height/(2*GetScale()),100/(2*GetScale())));
 
   btScalar mass(1.0f);
@@ -220,6 +226,7 @@ void BulletRectangle::DrawBorder(const Color& color) const
 
   void BulletPolygon::Generate()
  {
+    m_public_shape = this;
       btConvexHullShape * new_shape = new btConvexHullShape();
 
       for(uint i=0;i < m_point_list.size(); i++)
@@ -288,6 +295,8 @@ void BulletPolygon::DrawBorder(const Color& color) const
 
   void BulletCircle::Generate()
   {
+
+    m_public_shape = this;
     btCylinderShapeZ * new_shape = new btCylinderShapeZ(btVector3(m_radius/GetScale(),m_radius/GetScale(),100/GetScale()));
 
     //new_shape->setLocalScaling(btVector3(m_radius,m_radius,10));
