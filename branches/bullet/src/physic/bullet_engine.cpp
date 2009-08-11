@@ -22,10 +22,13 @@
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
 #include "physic/force.h"
+#include "physic/bullet_contact.h"
 #include "game/time.h"
 #include "physical_engine.h"
 #include "bullet_engine.h"
+
 #include <iostream>
+
 
 extern ContactAddedCallback  gContactAddedCallback;
 extern ContactProcessedCallback gContactProcessedCallback;
@@ -100,7 +103,7 @@ void BulletEngine::AddObject(PhysicalObj *new_obj)
     //m_world->addRigidBody(obj->GetBody());
     //obj->GetBody()->setActivationState(ACTIVE_TAG);
     m_object_list.push_back(obj);
-    std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
+   // std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     obj->SetInWorld(true);
 
 /* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
@@ -128,7 +131,7 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
   }
   bobj->SetInWorld(false);
   m_world->removeRigidBody(bobj->GetBody());
-  std::cout<<"Remove "<<obj<<std::endl;
+//  std::cout<<"Remove "<<obj<<std::endl;
 }
 
 void BulletEngine::RemoveGround(PhysicalGround *obj)
@@ -146,7 +149,7 @@ void BulletEngine::Step()
     return;
   }
 
-  ResetContacts();
+  //ResetContacts();
 
   for (uint i = 0; i< m_force_list.size();i++) {
         m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
@@ -213,10 +216,44 @@ void BulletEngine::ResetContacts()
 bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
 {
  // std::cout<<"ContactAdded"<<std::endl;
-  BulletShape *shape1 = reinterpret_cast<BulletShape *>(colObj0->getCollisionShape()->getUserPointer());
-  BulletShape *shape2 = reinterpret_cast<BulletShape *>(colObj1->getCollisionShape()->getUserPointer());
-  shape1->AddContact(shape2);
-  cp.m_userPersistentData = (void *) 1;
+  if(cp.m_userPersistentData == NULL){
+    BulletContact * contact = new BulletContact();
+    cp.m_userPersistentData = contact;
+
+    if(colObj0->getCollisionShape()->getUserPointer()){
+
+      //const btCompoundShape *cshape = reinterpret_cast<const btCompoundShape *>(colObj0->getCollisionShape());
+      //const btCollisionShape *shape = cshape->getChildShape(partId0);
+      const btCollisionShape *shape = colObj0->getCollisionShape();
+      BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
+      contact->SetShapeA(bshape);
+    }else{
+
+      contact->SetShapeA(NULL);
+    }
+
+    if(colObj1->getCollisionShape()->getUserPointer()){
+
+      //const btCompoundShape *cshape = reinterpret_cast<const btCompoundShape *>(colObj1->getCollisionShape());
+      //const btCollisionShape *shape = cshape->getChildShape(partId1);
+      const btCollisionShape *shape = colObj1->getCollisionShape();
+      BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
+      contact->SetShapeB(bshape);
+    }else{
+
+         contact->SetShapeB(NULL);
+     }
+
+    if(contact->GetBulletShapeA()){
+
+      contact->GetBulletShapeA()->AddContact(contact);
+    }
+    if(contact->GetBulletShapeB()){
+
+      contact->GetBulletShapeB()->AddContact(contact);
+    }
+
+  }
   return false;
 }
 
@@ -226,10 +263,22 @@ bool BulletEngine::ContactProcessedCallback(btManifoldPoint& /*cp*/,void* /*colO
 }
 
 
-bool BulletEngine::ContactDestroyedCallback(void* /*userPersistentData*/)
+bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
 {
- std::cout<<"ContactDestroyed"<<std::endl;
-//  BulletShape *shape = reinterpret_cast<BulletShape  *>(userPersistentData);
-//  shape->RemoveContact();
+
+
+  BulletContact *contact = reinterpret_cast<BulletContact  *>(userPersistentData);
+  if(contact->GetBulletShapeA())
+  {
+    contact->GetBulletShapeA()->RemoveContact(contact);
+  }
+
+  if(contact->GetBulletShapeB())
+  {
+    contact->GetBulletShapeB()->RemoveContact(contact);
+  }
+
+  delete contact;
+  //  shape->RemoveContact();
   return false;
 }

@@ -49,7 +49,7 @@ BulletObj::BulletObj() : PhysicalObj() {
     startTransform.setOrigin(btVector3(0, 0, 0));
     btCollisionShape* colShape = new btBoxShape(btVector3(10/GetScale(),10/GetScale(),10/GetScale()));
     colShape->calculateLocalInertia(mass,localInertia);
-
+    colShape->setUserPointer(this);
     //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
 
     btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
@@ -571,7 +571,7 @@ Point2d BulletObj::GetSpeed() const
       BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
       ASSERT(native_shape->GetNativeShape());
 
-
+      native_shape->GetNativeShape()->setUserPointer(NULL);
       btTransform startTransform;
       startTransform.setIdentity();
 

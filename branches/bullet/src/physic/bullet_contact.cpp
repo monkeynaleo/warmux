@@ -55,6 +55,11 @@ Point2d BulletContact::GetSpeedA() const{
 PhysicalShape *BulletContact::GetShapeA(){
   return m_shape_A->GetPublicShape();
 }
+
+
+BulletShape *BulletContact::GetBulletShapeA(){
+  return m_shape_A;
+}
 void BulletContact::SetShapeA(BulletShape * shape){
   m_shape_A = shape;
 }
@@ -81,6 +86,11 @@ void BulletContact::SetShapeA(BulletShape * shape){
     return m_shape_B->GetPublicShape();
   }
 
+
+  BulletShape *BulletContact::GetBulletShapeB(){
+    return m_shape_B;
+  }
+
   void BulletContact::SetShapeB(BulletShape * shape){
-    m_shape_A = shape;
+    m_shape_B = shape;
   }

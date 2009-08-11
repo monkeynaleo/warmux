@@ -45,6 +45,7 @@ protected:
   double m_density;
   std::string m_name;
   Point2d PosWithRotation(const Point2d& point) const;
+
 public:
   PhysicalShape();
   virtual ~PhysicalShape();
