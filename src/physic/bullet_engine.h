@@ -75,6 +75,7 @@ class BulletEngine : public PhysicalEngine
 protected:
 
   static bool ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int partId0, int index0, const btCollisionObject* colObj1, int partId1, int index1);
+  static bool ContactProcessedCallback(btManifoldPoint& cp,void* colObj0, void* colObj1);
   static bool ContactDestroyedCallback(void* userPersistentData);
   void ResetContacts();
 

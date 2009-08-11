@@ -28,6 +28,7 @@
 #include <iostream>
 
 extern ContactAddedCallback  gContactAddedCallback;
+extern ContactProcessedCallback gContactProcessedCallback;
 extern ContactDestroyedCallback  gContactDestroyedCallback;
 
 
@@ -52,7 +53,8 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_world->setGravity(btVector3(0, 10, 0));
 
     gContactAddedCallback = BulletEngine::ContactAddedCallback;
-   gContactDestroyedCallback= BulletEngine::ContactDestroyedCallback;
+    gContactProcessedCallback = BulletEngine::ContactProcessedCallback;
+    gContactDestroyedCallback= BulletEngine::ContactDestroyedCallback;
 
 
 
@@ -208,17 +210,26 @@ void BulletEngine::ResetContacts()
 }
 //Contact Callback
 
-bool BulletEngine::ContactAddedCallback(btManifoldPoint& /*cp*/,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
+bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
 {
+ // std::cout<<"ContactAdded"<<std::endl;
   BulletShape *shape1 = reinterpret_cast<BulletShape *>(colObj0->getCollisionShape()->getUserPointer());
   BulletShape *shape2 = reinterpret_cast<BulletShape *>(colObj1->getCollisionShape()->getUserPointer());
   shape1->AddContact(shape2);
+  cp.m_userPersistentData = (void *) 1;
   return false;
 }
 
-bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
+bool BulletEngine::ContactProcessedCallback(btManifoldPoint& /*cp*/,void* /*colObj0*/, void* /*colObj1*/)
 {
-  BulletShape *shape = reinterpret_cast<BulletShape  *>(userPersistentData);
-  shape->RemoveContact();
+  return false;
+}
+
+
+bool BulletEngine::ContactDestroyedCallback(void* /*userPersistentData*/)
+{
+ std::cout<<"ContactDestroyed"<<std::endl;
+//  BulletShape *shape = reinterpret_cast<BulletShape  *>(userPersistentData);
+//  shape->RemoveContact();
   return false;
 }

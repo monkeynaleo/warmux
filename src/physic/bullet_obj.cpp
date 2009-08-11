@@ -583,6 +583,9 @@ Point2d BulletObj::GetSpeed() const
        btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
       btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, native_shape->GetNativeShape(), localInertia);
       m_body = new btRigidBody(rbInfo);
+      m_body->setCollisionFlags(m_body->getCollisionFlags() |
+              btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 
     }
 
