@@ -207,6 +207,7 @@ public:
   virtual void SignalGroundCollision(const Point2d& /*speed_before*/) {};
   virtual void SignalObjectCollision(GameObj * /*obj*/,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/) {};
   virtual void SignalRebound();
+  virtual void SignalCollision(const Point2d& /*speed_before*/) {};
 
 protected:
 

@@ -266,8 +266,11 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
 bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*/, void* /*colObj1*/)
 {
   if(cp.m_userPersistentData){
+
     BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
-    contact->Signal();
+    if(!contact->IsSignaled()){
+      contact->Signal();
+    }
   }
   return false;
 }

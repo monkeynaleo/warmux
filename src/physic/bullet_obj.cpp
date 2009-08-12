@@ -535,6 +535,7 @@ void BulletObj::SignalCollision(BulletContact *contact)
         if (contact->GetBulletShapeA()->GetBulletParent() == this)
         {
           //this is on A
+          m_contact_listener->SignalCollision(contact->GetSpeedA());
           m_contact_listener->SignalObjectCollision(
               contact->GetBulletShapeB()->GetBulletParent()->GetContactListener(), contact->GetShapeB(),
               contact->GetSpeedA());
@@ -542,6 +543,7 @@ void BulletObj::SignalCollision(BulletContact *contact)
         else
         {
           //this is on B
+          m_contact_listener->SignalCollision(contact->GetSpeedB());
           m_contact_listener->SignalObjectCollision(
               contact->GetBulletShapeA()->GetBulletParent()->GetContactListener(), contact->GetShapeA(),
               contact->GetSpeedB());
@@ -550,11 +552,13 @@ void BulletObj::SignalCollision(BulletContact *contact)
       else
       {
         //Collide ground
+        m_contact_listener->SignalCollision(contact->GetSpeedA());
         m_contact_listener->SignalGroundCollision(contact->GetSpeedA());
       }
 
     }else{
       //Collide ground
+      m_contact_listener->SignalCollision(contact->GetSpeedB());
       m_contact_listener->SignalGroundCollision(contact->GetSpeedB());
 
     }
