@@ -22,6 +22,7 @@
 #include "graphic/video.h"
 #include "map/camera.h"
 #include "physic/bullet_engine.h"
+#include "physic/bullet_contact.h"
 
 BulletShape::BulletShape():
 m_contact_count(0),
@@ -203,6 +204,10 @@ void BulletRectangle::DrawBorder(const Color& color) const
     GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
     GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
 
+    for(uint i = 0 ; i< m_contact_list.size() ; i++){
+          GetMainWindow().PointColor(m_contact_list[i]->GetPositionA() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+          GetMainWindow().PointColor(m_contact_list[i]->GetPositionB() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+        }
 
     /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
@@ -291,6 +296,10 @@ void BulletPolygon::DrawBorder(const Color& color) const
   GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
   GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
 
+  for(uint i = 0 ; i< m_contact_list.size() ; i++){
+        GetMainWindow().PointColor(m_contact_list[i]->GetPositionA() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+        GetMainWindow().PointColor(m_contact_list[i]->GetPositionB() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+      }
 }
 #endif
 
@@ -331,8 +340,12 @@ void BulletCircle::DrawBorder(const Color& color) const
 
     GetMainWindow().CircleColor(GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
 
-    GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
-   GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
+    GetMainWindow().PointColor(m_parent->GetPosition() - Camera::GetInstance()->GetPosition(),Color(0,0,0,255));
+
+    for(uint i = 0 ; i< m_contact_list.size() ; i++){
+      GetMainWindow().PointColor(m_contact_list[i]->GetPositionA() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+      GetMainWindow().PointColor(m_contact_list[i]->GetPositionB() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
+    }
 
 /*  b2PolygonShape* polygon = (b2PolygonShape*)m_shape;
 
