@@ -37,11 +37,13 @@ class PhysicalContact
 public: 
   
   // A
+  virtual Point2d GetPositionA() = 0;
   virtual void GetSpeedA(double &norm, double &angle_rad) const = 0;
   virtual Point2d GetSpeedA() const = 0;
   virtual PhysicalShape *GetShapeA() = 0;
 
   // B
+  virtual Point2d GetPositionB() = 0;
   virtual void GetSpeedB(double &norm, double &angle_rad) const = 0;
   virtual Point2d GetSpeedB() const = 0;
   virtual PhysicalShape *GetShapeB() = 0;
