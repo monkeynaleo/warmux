@@ -108,15 +108,15 @@ void FireParticle::Refresh()
 
   double oscil_max =0.20; // 1 = 180°
   double oscil_period = 2000;
-  std::cout<<"Now   : "<<now-m_living_time<<std::endl;
+//  std::cout<<"Now   : "<<now-m_living_time<<std::endl;
   double oscil_pourcentage = (2 * double((now+m_living_time) % (uint) oscil_period)/oscil_period) - 1; //range [-1, 1]
   if (oscil_pourcentage<0) { oscil_pourcentage *= -1;} //range [0,1]
-  std::cout<<"Perc  : "<<oscil_pourcentage<<std::endl;
-  std::cout<<"Cos   : "<<( (2*oscil_pourcentage - 1) * oscil_max)<<std::endl;
+//  std::cout<<"Perc  : "<<oscil_pourcentage<<std::endl;
+//  std::cout<<"Cos   : "<<( (2*oscil_pourcentage - 1) * oscil_max)<<std::endl;
 
   double angle =  acos( (2*oscil_pourcentage - 1) * oscil_max); // move range from [0,1] to [-oscil_max,oscil_max]
-  std::cout<<"Angle : "<<angle<<std::endl;
-  std::cout<<"Angle : "<<360*angle/(2 * M_PI)<<std::endl;
+//  std::cout<<"Angle : "<<angle<<std::endl;
+//  std::cout<<"Angle : "<<360*angle/(2 * M_PI)<<std::endl;
   
   image->SetRotation_rad( angle - M_PI /2);
   
