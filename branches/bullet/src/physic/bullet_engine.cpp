@@ -227,6 +227,9 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       const btCollisionShape *shape = colObj0->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
       contact->SetShapeA(bshape);
+      double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
+      Point2d position(cp.getPositionWorldOnA().getX() * scale,cp.getPositionWorldOnA().getY() * scale);
+      contact->SetPositionA(position);
     }else{
 
       contact->SetShapeA(NULL);
@@ -239,6 +242,9 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       const btCollisionShape *shape = colObj1->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
       contact->SetShapeB(bshape);
+      double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
+      Point2d position(cp.getPositionWorldOnB().getX() * scale,cp.getPositionWorldOnB().getY() * scale);
+      contact->SetPositionB(position);
     }else{
 
          contact->SetShapeB(NULL);
