@@ -23,17 +23,55 @@
 #include "map/camera.h"
 #include "physic/bullet_engine.h"
 #include "physic/bullet_contact.h"
+#include "physic/bullet_obj.h"
 
 BulletShape::BulletShape():
 m_contact_count(0),
 m_last_contact_count(0)
 {
+  m_bullet_parent = NULL;
   m_native_shape = NULL;
   m_bullet_position = Point2d(0,0);
 }
 
 #include <iostream>
 
+void BulletShape::SetBulletParent(BulletObj *parent)
+{
+ m_bullet_parent = parent;
+}
+
+BulletObj *BulletShape::GetBulletParent()
+{
+ return m_bullet_parent;
+}
+
+void BulletShape::SignalCollision(BulletContact * contact){
+
+  BulletShape *collider = NULL;
+  if(contact->GetBulletShapeA() == this){
+    collider = contact->GetBulletShapeB();
+  }else{
+    collider = contact->GetBulletShapeA();
+  }
+
+  bool exist = false;
+
+  std::vector<BulletContact *>::iterator it;
+  for(it = m_contact_list.begin(); it != m_contact_list.end(); it++ ){
+   BulletContact *c = *it;
+   if(c != contact){
+     if(c->GetBulletShapeA() == collider || c->GetBulletShapeB() == collider){
+       exist = true;
+       break;
+     }
+   }
+  }
+
+  if(!exist){
+    GetBulletParent()->SignalCollision(contact);
+  }
+}
 
 PhysicalShape *BulletShape::GetPublicShape(){
   return m_public_shape;

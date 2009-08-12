@@ -73,6 +73,7 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
 {
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name, xml_config);
   SetPhysic(PhysicalEngine::GetInstance()->CreateObject(m_cfg.m_type));
+  GetPhysic()->SetContactListener(this);
   PhysicalEngine::GetInstance()->AddObject(GetPhysic());
   //ResetConstants();       // Set physics constants from the xml file
 
@@ -577,13 +578,14 @@ void GameObj::GoOutOfWater()
   GetPhysic()->SetGravityFactor(m_cfg.m_gravity_factor);
   SignalGoingOutOfWater();
 }
-/*
+
 void GameObj::SignalRebound()
 {
   // TO CLEAN...:
   if (!m_rebound_sound.empty())
     JukeBox::GetInstance()->Play("default", m_rebound_sound) ;
-}*/
+}
+
 bool GameObj::IsSleeping() const {
     return GetPhysic()->IsSleeping();
 }

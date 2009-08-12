@@ -37,6 +37,7 @@
 class PhysicalShape;
 class PhysicalListener;
 class Force;
+class GameObj;
 
 class PhysicalEntity
 {
@@ -124,8 +125,7 @@ public:
   // Relative to current position
   virtual PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const = 0;
 
-  virtual void AddReboundListener(PhysicalListener *listener) = 0;
-  virtual void AddCollisionListener(PhysicalListener *listener) = 0;
+  virtual void SetContactListener(GameObj *listener) = 0;
 
   virtual bool Contain(const Point2d &pos_to_check) = 0;
  
@@ -178,9 +178,8 @@ public:
   #endif
 
 protected:
-  virtual void SignalRebound() = 0;
-  virtual void SignalCollision(const Point2d&) = 0 ;
   
+
   bool m_rotating;
  };
 

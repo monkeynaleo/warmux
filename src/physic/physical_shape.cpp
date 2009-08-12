@@ -60,6 +60,11 @@ void PhysicalShape::SetParent(PhysicalEntity *parent)
   m_parent = parent;
 }
 
+PhysicalEntity *PhysicalShape::GetParent()
+{
+  return m_parent;
+}
+
 void PhysicalShape::SetMass(double mass)
 {
   // Compute density from mass and area

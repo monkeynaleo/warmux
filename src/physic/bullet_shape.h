@@ -30,6 +30,7 @@ class Color;
 #endif
 
 class BulletContact;
+class BulletObj;
 
 class BulletShape
 {
@@ -42,6 +43,10 @@ public :
   void ResetContacts();
   Point2d GetBulletPosition();
   PhysicalShape *GetPublicShape();
+  void SetBulletParent(BulletObj *parent);
+  BulletObj *GetBulletParent();
+  void SignalCollision(BulletContact * contact);
+
 protected :
   uint m_contact_count;
   uint m_last_contact_count;
@@ -49,6 +54,7 @@ protected :
   Point2d m_bullet_position;
   PhysicalShape *m_public_shape;
   std::vector<BulletContact *> m_contact_list;
+  BulletObj *m_bullet_parent;
 
 
 };

@@ -23,8 +23,9 @@
  * You can : make the object move (with collision test), change state, etc.
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
-#include "physic/bullet_contact.h"
 #include "physic/bullet_shape.h"
+#include "physic/bullet_contact.h"
+#include "physic/bullet_obj.h"
 
 BulletContact::BulletContact():
 m_shape_A(NULL),
@@ -34,6 +35,16 @@ m_shape_B(NULL),
 m_position_B(0,0),
 m_speed_B(0,0){
 
+}
+
+void BulletContact::Signal(){
+
+  if(m_shape_A){
+    m_shape_A->SignalCollision(this);
+  }
+  if(m_shape_B){
+    m_shape_B->SignalCollision(this);
+  }
 }
 
 // A
@@ -57,6 +68,9 @@ Point2d BulletContact::GetSpeedA() const{
   return m_speed_A;
 }
 PhysicalShape *BulletContact::GetShapeA(){
+  if(!m_shape_A){
+    return NULL;
+  }
   return m_shape_A->GetPublicShape();
 }
 
@@ -91,6 +105,9 @@ Point2d BulletContact::GetSpeedB() const {
   return m_speed_B;
 }
 PhysicalShape *BulletContact::GetShapeB(){
+  if(!m_shape_B){
+      return NULL;
+    }
   return m_shape_B->GetPublicShape();
 }
 

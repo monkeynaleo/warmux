@@ -33,6 +33,8 @@ public:
 
   BulletContact();
 
+  void Signal();
+
   // A
   Point2d GetPositionA();
   void SetPositionA(const Point2d &position);

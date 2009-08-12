@@ -32,6 +32,8 @@
 #include <vector>
 
 class BulletShape;
+class GameObj;
+class BulletContact;
 
 class BulletObj : public PhysicalObj
 {
@@ -109,8 +111,8 @@ public:
   // Relative to current position
   PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const ;
 
-  void AddReboundListener(PhysicalListener *listener) ;
-  void AddCollisionListener(PhysicalListener *listener) ;
+  void SetContactListener(GameObj *listener);
+  GameObj *GetContactListener();
 
   bool Contain(const Point2d &pos_to_check) ;
  
@@ -158,10 +160,9 @@ public:
   double GetScale() const;
   void SetInWorld(bool in_world);
   bool IsInWorld();
+  void SignalCollision(BulletContact * contact);
 
 protected:
-  void SignalRebound() ;
-  void SignalCollision(const Point2d&);
   void Reload();
   
   bool m_rotating;
@@ -171,6 +172,7 @@ protected:
   int m_collision_category;
   int m_collision_mask;
   std::vector<Force *> m_force_list;
+  GameObj *m_contact_listener;
 
   bool m_in_world;
 
