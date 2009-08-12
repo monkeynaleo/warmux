@@ -46,10 +46,12 @@ class Color;
 class Force;
 class PhysicalShape;
 
+
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class GameObj
 {
+  friend class PhysicalObj;
 public :
     enum GameObjType {
         GAME_CHARACTER,
@@ -201,6 +203,11 @@ public:
   void SetAlive(alive_t alive) { m_alive = alive;}
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
   bool CollidesWithGround();
+
+  virtual void SignalGroundCollision(const Point2d& /*speed_before*/) {};
+  virtual void SignalObjectCollision(GameObj * /*obj*/,PhysicalShape * /*shape*/, const Point2d& /*my_speed_before*/) {};
+  virtual void SignalRebound();
+
 protected:
 
   virtual void SignalOutOfMap() { };

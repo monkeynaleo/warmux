@@ -26,8 +26,10 @@
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
 #include "physic/bullet_engine.h"
+#include "physic/bullet_contact.h"
 #include "physic/force.h"
 #include "bullet_obj.h"
+#include "physic/game_obj.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -35,7 +37,9 @@
 #define BULLET_SPEED_FACTOR 0.04
 #define BULLET_IMPULSE_FACTOR 3
 
-BulletObj::BulletObj() : PhysicalObj() {
+BulletObj::BulletObj() : PhysicalObj(),
+m_contact_listener(NULL)
+{
     /// Create Dynamic Object
     btTransform startTransform;
     startTransform.setIdentity();
@@ -221,6 +225,7 @@ Point2d BulletObj::GetSpeed() const
     shape->SetParent(this);
     BulletShape * native_shape = dynamic_cast<BulletShape *>(shape);
         ASSERT(native_shape->GetNativeShape());
+        native_shape->SetBulletParent(this);
     btTransform startTransform;
     startTransform.setIdentity();
     startTransform.setOrigin(btVector3((shape->GetPosition().x+native_shape->GetBulletPosition().x)/GetScale(),(shape->GetPosition().y+native_shape->GetBulletPosition().y)/GetScale(),0));
@@ -420,8 +425,15 @@ Point2d BulletObj::GetSpeed() const
   }
 
   bool BulletObj::IsColliding() const {
-    return false;
-    //return m_body->hasContactResponse();
+    std::map<std::string,PhysicalShape *>::const_iterator it;
+
+   for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
+   {
+     if(it->second->IsColliding()){
+       return true;
+     }
+   }
+   return false;
   }
 
   PhysicalObj* BulletObj::CollidedObjectXY(const Point2i & /*position*/) const { return NULL;}
@@ -442,8 +454,14 @@ Point2d BulletObj::GetSpeed() const
   }
 
 
-  void BulletObj::AddReboundListener(PhysicalListener */*listener*/) {}
-  void BulletObj::AddCollisionListener(PhysicalListener */*listener*/) {}
+  void BulletObj::SetContactListener(GameObj *listener) {
+    m_contact_listener = listener;
+  }
+
+
+  GameObj *BulletObj::GetContactListener(){
+    return m_contact_listener;
+  }
 
   bool BulletObj::Contain(const Point2d &/*pos_to_check*/){ return false;}
 
@@ -492,8 +510,7 @@ Point2d BulletObj::GetSpeed() const
   }
 
 
-  void BulletObj::SetWindFactor( double /*value*/){}
-  void BulletObj::ResetWindFactor(){}
+    void BulletObj::ResetWindFactor(){}
   double BulletObj::GetWindFactor(){ return 0;}
 
   void BulletObj::SetAutoAlignFactor( double /*value*/){}
@@ -505,8 +522,47 @@ Point2d BulletObj::GetSpeed() const
   double BulletObj::GetGravityFactor(){ return 0;}
 
 
-  void BulletObj::SignalRebound() {}
-  void BulletObj::SignalCollision(const Point2d&){}
+  void BulletObj::SetWindFactor( double /*value*/){}
+void BulletObj::SignalCollision(BulletContact *contact)
+{
+  if (m_contact_listener)
+  {
+    if (contact->GetShapeA())
+    {
+      if (contact->GetShapeB())
+      {
+        //Collide object
+        if (contact->GetBulletShapeA()->GetBulletParent() == this)
+        {
+          //this is on A
+          m_contact_listener->SignalObjectCollision(
+              contact->GetBulletShapeB()->GetBulletParent()->GetContactListener(), contact->GetShapeB(),
+              contact->GetSpeedA());
+        }
+        else
+        {
+          //this is on B
+          m_contact_listener->SignalObjectCollision(
+              contact->GetBulletShapeA()->GetBulletParent()->GetContactListener(), contact->GetShapeA(),
+              contact->GetSpeedB());
+        }
+      }
+      else
+      {
+        //Collide ground
+        m_contact_listener->SignalGroundCollision(contact->GetSpeedA());
+      }
+
+    }else{
+      //Collide ground
+      m_contact_listener->SignalGroundCollision(contact->GetSpeedB());
+
+    }
+    m_contact_listener->SignalRebound();
+  }
+}
+
+
   btRigidBody* BulletObj::GetBody()
   {
       return m_body;

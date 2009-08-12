@@ -61,6 +61,7 @@ public:
   void SetForceApplicationPoint(Point2d point);
 
   void SetParent(PhysicalEntity *parent);
+  PhysicalEntity *GetParent();
 
 
   virtual bool IsColliding() const = 0;
