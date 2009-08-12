@@ -56,10 +56,12 @@ public:
   PhysicalShape *GetShapeB();
   BulletShape *GetBulletShapeB();
   void SetShapeB(BulletShape * shape);
-
+  bool IsSignaled();
 
 
 protected:
+  bool m_signaled;
+
   BulletShape * m_shape_A;
   Point2d m_position_A;
   Point2d m_speed_A;

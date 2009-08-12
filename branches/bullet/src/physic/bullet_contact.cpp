@@ -33,7 +33,9 @@ m_position_A(0,0),
 m_speed_A(0,0),
 m_shape_B(NULL),
 m_position_B(0,0),
-m_speed_B(0,0){
+m_speed_B(0,0),
+m_signaled(false)
+{
 
 }
 
@@ -45,7 +47,13 @@ void BulletContact::Signal(){
   if(m_shape_B){
     m_shape_B->SignalCollision(this);
   }
+  m_signaled = true;
 }
+
+bool BulletContact::IsSignaled(){
+  return m_signaled;
+}
+
 
 // A
 Point2d BulletContact::GetPositionA(){
