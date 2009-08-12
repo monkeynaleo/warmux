@@ -28,13 +28,13 @@
 #include "physic/bullet_obj.h"
 
 BulletContact::BulletContact():
+m_signaled(false),
 m_shape_A(NULL),
 m_position_A(0,0),
 m_speed_A(0,0),
 m_shape_B(NULL),
 m_position_B(0,0),
-m_speed_B(0,0),
-m_signaled(false)
+m_speed_B(0,0)
 {
 
 }
