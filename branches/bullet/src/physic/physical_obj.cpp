@@ -172,3 +172,7 @@ void GameObj::SetSphericalShape(int newSize, double mass)
 
   Generate();
 }*/
+
+PhysicalGround::~PhysicalGround(){
+
+}
