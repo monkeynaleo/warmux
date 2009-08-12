@@ -189,6 +189,8 @@ class PhysicalGround : public PhysicalEntity
 
 public:
 
+  virtual ~PhysicalGround();
+
   // Set position
   virtual void SetPosition(const Point2d &position) = 0;
 
