@@ -1,4 +1,4 @@
-SUBDIRS = data lib/wormux lib/wormux-server src po doc tools
+SUBDIRS = data lib src po doc tools
 
 EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
