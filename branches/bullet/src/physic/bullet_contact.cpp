@@ -37,6 +37,10 @@ m_speed_B(0,0){
 }
 
 // A
+Point2d BulletContact::GetPositionA(){
+  return m_position_A;
+}
+
 void BulletContact::SetPositionA(const Point2d &position){
   m_position_A = position;
 }
@@ -67,30 +71,34 @@ void BulletContact::SetShapeA(BulletShape * shape){
 
 
   // B
-  void BulletContact::SetPositionB(const Point2d &position){
-    m_position_B = position;
-  }
-  void BulletContact::SetSpeedXYB(Point2d vector){
-    m_speed_B = vector;
-  }
-  void BulletContact::GetSpeedB(double &norm, double &angle_rad) const{
-    Point2d speed ;
-         speed = GetSpeedB();
-         norm = speed.Norm();
-         angle_rad = speed.ComputeAngle();
-  }
-  Point2d BulletContact::GetSpeedB() const {
-    return m_speed_B;
-  }
-  PhysicalShape *BulletContact::GetShapeB(){
-    return m_shape_B->GetPublicShape();
-  }
+Point2d BulletContact::GetPositionB(){
+  return m_position_B;
+}
+
+void BulletContact::SetPositionB(const Point2d &position){
+  m_position_B = position;
+}
+void BulletContact::SetSpeedXYB(Point2d vector){
+  m_speed_B = vector;
+}
+void BulletContact::GetSpeedB(double &norm, double &angle_rad) const{
+  Point2d speed ;
+       speed = GetSpeedB();
+       norm = speed.Norm();
+       angle_rad = speed.ComputeAngle();
+}
+Point2d BulletContact::GetSpeedB() const {
+  return m_speed_B;
+}
+PhysicalShape *BulletContact::GetShapeB(){
+  return m_shape_B->GetPublicShape();
+}
 
 
-  BulletShape *BulletContact::GetBulletShapeB(){
-    return m_shape_B;
-  }
+BulletShape *BulletContact::GetBulletShapeB(){
+  return m_shape_B;
+}
 
-  void BulletContact::SetShapeB(BulletShape * shape){
-    m_shape_B = shape;
-  }
+void BulletContact::SetShapeB(BulletShape * shape){
+  m_shape_B = shape;
+}

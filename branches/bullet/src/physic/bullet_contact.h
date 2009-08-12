@@ -34,6 +34,7 @@ public:
   BulletContact();
 
   // A
+  Point2d GetPositionA();
   void SetPositionA(const Point2d &position);
   void SetSpeedXYA(Point2d vector);
   void GetSpeedA(double &norm, double &angle_rad) const;
@@ -45,6 +46,7 @@ public:
 
 
   // B
+  Point2d GetPositionB();
   void SetPositionB(const Point2d &position);
   void SetSpeedXYB(Point2d vector);
   void GetSpeedB(double &norm, double &angle_rad) const;
