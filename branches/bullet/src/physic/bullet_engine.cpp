@@ -35,6 +35,42 @@ extern ContactProcessedCallback gContactProcessedCallback;
 extern ContactDestroyedCallback  gContactDestroyedCallback;
 
 
+struct BulletEngineFilterCallback : public btOverlapFilterCallback
+{
+         // return true when pairs need collision
+         virtual bool needBroadphaseCollision(btBroadphaseProxy* proxy0,btBroadphaseProxy* proxy1) const
+         {
+                  bool collides = (proxy0->m_collisionFilterGroup & proxy1->m_collisionFilterMask) != 0;
+                  collides = collides && (proxy1->m_collisionFilterGroup & proxy0->m_collisionFilterMask);
+
+                  btCollisionObject* colObj0 = (btCollisionObject*)proxy0->m_clientObject;
+                  btCollisionObject* colObj1 = (btCollisionObject*)proxy1->m_clientObject;
+
+                  BulletObj *bulObj0;
+                  BulletObj *bulObj1;
+
+                  if(colObj0->getUserPointer()){
+                    bulObj0 = reinterpret_cast<BulletObj *>(colObj0->getUserPointer());
+                  }else{
+                    return collides;
+                  }
+
+                  if(colObj1->getUserPointer()){
+                    bulObj1 = reinterpret_cast<BulletObj *>(colObj1->getUserPointer());
+                  }else{
+                    return collides;
+                  }
+
+                  if(bulObj0->IsOverlappingObject(bulObj1)){
+                    return false;
+                  }
+
+
+                  return collides;
+         }
+};
+
+
 BulletEngine::BulletEngine() : PhysicalEngine() {
     m_scale = 100.0;
     m_frame_rate = 60;
@@ -52,6 +88,10 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
 
     m_world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
     //m_world = new btContinuousDynamicsWorld(dispatcher, broadphase, solver, collision_configuration);
+
+    btOverlapFilterCallback * filterCallback = new BulletEngineFilterCallback();
+    m_world->getPairCache()->setOverlapFilterCallback(filterCallback);
+
 
     m_world->setGravity(btVector3(0, 10, 0));
 

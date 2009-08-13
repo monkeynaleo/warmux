@@ -173,6 +173,9 @@ protected:
   int m_collision_mask;
   std::vector<Force *> m_force_list;
   GameObj *m_contact_listener;
+  std::vector<PhysicalObj *> m_ovelapping_obj_list;
+  std::vector<int> m_ovelapping_time_list;
+
 
   bool m_in_world;
 
