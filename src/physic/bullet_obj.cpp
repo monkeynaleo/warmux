@@ -68,6 +68,7 @@ m_contact_listener(NULL)
     m_body->setCollisionFlags(m_body->getCollisionFlags() |
         btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
+    m_body->setUserPointer(this);
     m_in_world = false;
    // m_root_shape->addChildShape(startTransform,colShape);
 
@@ -643,6 +644,7 @@ void BulletObj::SignalCollision(BulletContact *contact)
        btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
       btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, native_shape->GetNativeShape(), localInertia);
       m_body = new btRigidBody(rbInfo);
+      m_body->setUserPointer(NULL);
       m_body->setCollisionFlags(m_body->getCollisionFlags() |
               btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
