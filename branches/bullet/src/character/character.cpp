@@ -147,6 +147,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   ASSERT(char_body);
   SetBody(char_body);
 
+  GetPhysic()->SetEnable(true);
   m_feet_shape = GetPhysic()->GetShape("feet");
 
   GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_CHARACTER,true);

@@ -66,6 +66,7 @@ public:
 
   virtual bool IsColliding() const = 0;
 
+
   const std::string &GetName() const;
   // returns current max width (taking angle into account)
   virtual double GetCurrentWidth() const = 0;

@@ -30,6 +30,7 @@
 #include "physic/force.h"
 #include "bullet_obj.h"
 #include "physic/game_obj.h"
+#include "game/time.h"
 #include <iostream>
 #include <stdio.h>
 
@@ -38,7 +39,8 @@
 #define BULLET_IMPULSE_FACTOR 3
 
 BulletObj::BulletObj() : PhysicalObj(),
-m_contact_listener(NULL)
+m_contact_listener(NULL),
+m_enable(false)
 {
     /// Create Dynamic Object
     btTransform startTransform;
@@ -88,6 +90,13 @@ BulletObj::~BulletObj()
   void BulletObj::Generate() {}
   void BulletObj::Desactivate() {}
 
+  void BulletObj::SetEnable(bool enable){
+    m_enable = true;
+  }
+
+  bool BulletObj::GetEnable(){
+    return m_enable;
+  }
   //-------- Position, speed and size -------
 
   // Set/Get position
@@ -467,11 +476,112 @@ Point2d BulletObj::GetSpeed() const
   bool BulletObj::Contain(const Point2d &/*pos_to_check*/){ return false;}
 
   //Overlapping
-  void BulletObj::AddOverlappingObject(PhysicalObj* /*obj*/, int /*timeout*/) {}
-  void BulletObj::ClearOverlappingObject(PhysicalObj* /*obj*/) {}
-  void BulletObj::ClearAllOverlappingObject() {}
-  bool BulletObj::IsOverlappingObject(PhysicalObj */*obj*/) { return false;}
-  bool BulletObj::Overlapse(const PhysicalObj* /*obj*/) const {return false;}
+  void BulletObj::AddOverlappingObject(PhysicalObj* obj, int timeout)
+  {
+    ClearOverlappingObject(NULL);
+
+    if(!IsOverlappingObject(obj)){
+      m_overlapping_obj_list.push_back(obj);
+      m_overlapping_time_list.push_back(timeout+ Time::GetInstance()->Read());
+      obj->AddOverlappingObject(this, timeout);
+    }
+  }
+
+  void BulletObj::ClearOverlappingObject(PhysicalObj* obj)
+  {
+    std::vector<PhysicalObj *>::iterator obj_it;
+    std::vector<int>::iterator time_it;
+
+    int current_time = Time::GetInstance()->Read();
+
+    bool found = false;
+
+    do{
+      found = false;
+    for(time_it = m_overlapping_time_list.begin(), obj_it = m_overlapping_obj_list.begin();
+        time_it != m_overlapping_time_list.end(); time_it++, obj_it++)
+    {
+      PhysicalObj * object = *obj_it;
+
+      if(*time_it < current_time){
+        m_overlapping_obj_list.erase(obj_it);
+        m_overlapping_time_list.erase(time_it);
+        if(obj){
+          obj->ClearOverlappingObject(this);
+        }
+        found = true;
+        break;
+
+      }
+
+      if(obj == object){
+        m_overlapping_obj_list.erase(obj_it);
+        m_overlapping_time_list.erase(time_it);
+        if(obj){
+          obj->ClearOverlappingObject(this);
+        }
+        found = true;
+        break;
+      }
+    }
+    }while(found);
+
+
+  }
+
+  void BulletObj::ClearAllOverlappingObject()
+  {
+    std::vector<PhysicalObj *>::iterator obj_it;
+    std::vector<int>::iterator time_it;
+    std::vector<PhysicalObj *> save =  m_overlapping_obj_list;
+
+    m_overlapping_obj_list.clear();
+    m_overlapping_time_list.clear();
+
+    for(obj_it = save.begin();obj_it != save.end(); obj_it++)
+    {
+
+        (*obj_it)->ClearOverlappingObject(this);
+    }
+
+  }
+
+  bool BulletObj::IsOverlappingObject(PhysicalObj *obj) {
+
+    std::vector<PhysicalObj *>::iterator obj_it;
+    std::vector<int>::iterator time_it;
+
+    ClearOverlappingObject(NULL);
+
+    for(time_it = m_overlapping_time_list.begin(), obj_it = m_overlapping_obj_list.begin();
+        time_it != m_overlapping_time_list.end(); time_it++, obj_it++)
+    {
+        if(*obj_it == obj){
+            return true;
+        }
+    }
+
+    return false;
+  }
+
+
+  bool BulletObj::IsColliding(const PhysicalObj* obj) const {
+    if(!IsColliding()){
+      return false;
+    }
+
+    std::map<std::string,PhysicalShape *>::const_iterator it;
+
+      for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
+      {
+        BulletShape * shape = dynamic_cast<BulletShape *>(it->second);
+        if(shape->IsColliding(obj)){
+          return true;
+        }
+      }
+
+    return false;
+  }
   const std::vector<PhysicalObj*> *BulletObj::GetOverlappingObject() const{ return NULL;}
 
   //Properties

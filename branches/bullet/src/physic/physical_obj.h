@@ -70,6 +70,7 @@ public:
   virtual double GetAngle() const = 0;
   
   //State
+  virtual void SetEnable(bool enable) = 0;
   virtual void SetFixed(bool i_fixed) = 0;
   virtual bool IsFixed() = 0;
   virtual void SetRotationFixed(bool rotating) = 0;
@@ -134,7 +135,7 @@ public:
   virtual void ClearOverlappingObject(PhysicalObj* obj) = 0;
   virtual void ClearAllOverlappingObject() = 0;
   virtual bool IsOverlappingObject(PhysicalObj *obj) = 0;
-  virtual bool Overlapse(const PhysicalObj* obj) const = 0;
+  virtual bool IsColliding(const PhysicalObj* obj) const = 0;
   virtual const std::vector<PhysicalObj*> *GetOverlappingObject() const = 0;
   
   //Properties

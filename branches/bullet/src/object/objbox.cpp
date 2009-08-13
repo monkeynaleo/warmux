@@ -125,7 +125,7 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if (GetPhysic()->Overlapse((*character)->GetPhysic())) {
+    if (GetPhysic()->IsColliding((*character)->GetPhysic())) {
       ApplyBonus((*character));
       Ghost();
       return;
