@@ -46,19 +46,31 @@ struct BulletEngineFilterCallback : public btOverlapFilterCallback
                   btCollisionObject* colObj0 = (btCollisionObject*)proxy0->m_clientObject;
                   btCollisionObject* colObj1 = (btCollisionObject*)proxy1->m_clientObject;
 
-                  BulletObj *bulObj0;
-                  BulletObj *bulObj1;
+                  BulletObj *bulObj0 = NULL;
+                  BulletObj *bulObj1 = NULL;
 
                   if(colObj0->getUserPointer()){
                     bulObj0 = reinterpret_cast<BulletObj *>(colObj0->getUserPointer());
-                  }else{
-                    return collides;
+                    if(!bulObj0->GetEnable()){
+                      return false;
+                    }
                   }
 
                   if(colObj1->getUserPointer()){
                     bulObj1 = reinterpret_cast<BulletObj *>(colObj1->getUserPointer());
-                  }else{
+                    if(!bulObj1->GetEnable()){
+                      return false;
+                    }
+                  }
+
+                  if(!bulObj0 || !bulObj1){
                     return collides;
+                  }
+
+
+
+                  if(!bulObj0->GetEnable() || !bulObj1->GetEnable()){
+                    return false;
                   }
 
                   if(bulObj0->IsOverlappingObject(bulObj1)){
@@ -281,6 +293,7 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       //const btCollisionShape *shape = cshape->getChildShape(partId1);
       const btCollisionShape *shape = colObj1->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
+      std::cout<<bshape->GetBulletParent()<<std::endl;
       contact->SetShapeB(bshape);
       double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
       Point2d position(cp.getPositionWorldOnB().getX() * scale,cp.getPositionWorldOnB().getY() * scale);
@@ -299,6 +312,10 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       contact->GetBulletShapeB()->AddContact(contact);
     }
 
+    if(!contact->IsSignaled()){
+      contact->Signal();
+    }
+
   }
   return false;
 }
@@ -307,11 +324,11 @@ bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*
 {
   if(cp.m_userPersistentData){
 
-    BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
+  /*  BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
     if(!contact->IsSignaled()){
       contact->Signal();
     }
-  }
+*/  }
   return false;
 }
 

@@ -36,6 +36,7 @@ class BulletShape
 {
 public :
   BulletShape();
+  virtual ~BulletShape();
   btCollisionShape *GetNativeShape() { return m_native_shape; }
   double GetScale() const;
   void AddContact(BulletContact *contact);
@@ -46,6 +47,7 @@ public :
   void SetBulletParent(BulletObj *parent);
   BulletObj *GetBulletParent();
   void SignalCollision(BulletContact * contact);
+  bool IsColliding(const PhysicalObj *obj) const;
 
 protected :
   uint m_contact_count;

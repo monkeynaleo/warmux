@@ -206,6 +206,7 @@ void WeaponProjectile::Shoot(double strength)
     //SetSpeed(strength, angle);
     PutOutOfGround(angle);
  // }
+    GetPhysic()->SetEnable(true);
 }
 
 void WeaponProjectile::ShootSound()
@@ -418,6 +419,7 @@ bool WeaponLauncher::p_Shoot()
 //     DirectExplosion();
 //     return true;
 //   }
+
   projectile->Shoot(m_strength);
   projectile = NULL;
   ReloadLauncher();

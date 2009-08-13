@@ -757,7 +757,7 @@ bool GameObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, 
       if ((*character) != this) {
 	if (min_dst_with_characters == 0) {
 
-	  if(GetPhysic()->Overlapse((**character).GetPhysic())) {
+	  if(GetPhysic()->IsColliding((**character).GetPhysic())) {
             MSG_DEBUG("physic.position", "%s - Object is too close from character %s", m_name.c_str(), (*character)->m_name.c_str());
             ok = false;
 	  }

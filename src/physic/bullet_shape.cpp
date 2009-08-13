@@ -34,6 +34,21 @@ m_last_contact_count(0)
   m_bullet_position = Point2d(0,0);
 }
 
+BulletShape::~BulletShape(){
+  std::vector<BulletContact *>::const_iterator it;
+  for(it = m_contact_list.begin(); it != m_contact_list.end(); it++ ){
+    BulletContact *c = *it;
+    if(c->GetBulletShapeA() == this){
+      c->SetShapeA(this);
+    }
+
+    if(c->GetBulletShapeB() == this){
+      c->SetShapeB(this);
+    }
+
+  }
+}
+
 #include <iostream>
 
 void BulletShape::SetBulletParent(BulletObj *parent)
@@ -45,6 +60,22 @@ BulletObj *BulletShape::GetBulletParent()
 {
  return m_bullet_parent;
 }
+
+bool BulletShape::IsColliding(const PhysicalObj *obj) const
+{
+  std::vector<BulletContact *>::const_iterator it;
+    for(it = m_contact_list.begin(); it != m_contact_list.end(); it++ ){
+      BulletContact *c = *it;
+      if(c->GetShapeA() && c->GetShapeA()->GetParent() == obj){
+        return true;
+      }
+      if(c->GetShapeB() && c->GetShapeB()->GetParent() == obj){
+              return true;
+      }
+    }
+    return false;
+}
+
 
 void BulletShape::SignalCollision(BulletContact * contact){
 
@@ -79,6 +110,7 @@ PhysicalShape *BulletShape::GetPublicShape(){
 
 void BulletShape::AddContact(BulletContact *contact)
 {
+  std::cout<<"AddContact "<<contact<<std::endl;
   m_contact_list.push_back(contact);
   m_contact_count++;
   }

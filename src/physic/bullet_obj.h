@@ -58,6 +58,8 @@ public:
   double GetAngle() const ;
   
   //State
+  void SetEnable(bool enable);
+  bool GetEnable();
   void SetFixed(bool i_fixed) ;
   bool IsFixed() ;
   void SetRotationFixed(bool rotating) ;
@@ -106,6 +108,7 @@ public:
   void SetCollisionMembership(CollisionCategory category, bool state);
   void SetCollisionCategory(CollisionCategory category,bool state);
   bool IsColliding() const ;
+  bool IsColliding(const PhysicalObj* obj) const;
   
   PhysicalObj* CollidedObjectXY(const Point2i & position) const ;
   // Relative to current position
@@ -121,7 +124,6 @@ public:
   void ClearOverlappingObject(PhysicalObj* obj) ;
   void ClearAllOverlappingObject() ;
   bool IsOverlappingObject(PhysicalObj *obj) ;
-  bool Overlapse(const PhysicalObj* obj) const ;
   const std::vector<PhysicalObj*> *GetOverlappingObject() const ;
   
   //Properties
@@ -173,9 +175,9 @@ protected:
   int m_collision_mask;
   std::vector<Force *> m_force_list;
   GameObj *m_contact_listener;
-  std::vector<PhysicalObj *> m_ovelapping_obj_list;
-  std::vector<int> m_ovelapping_time_list;
-
+  std::vector<PhysicalObj *> m_overlapping_obj_list;
+  std::vector<int> m_overlapping_time_list;
+  bool m_enable;
 
   bool m_in_world;
 
