@@ -26,6 +26,7 @@
 #include <vector>
 
 class BulletObj;
+class BulletGround;
 
 class BulletEngine : public PhysicalEngine
 {
@@ -79,10 +80,16 @@ protected:
   static bool ContactDestroyedCallback(void* userPersistentData);
   void ResetContacts();
 
+  void CleanGarbage();
+  void PerformAddList();
+
   btDiscreteDynamicsWorld *m_world;
   double m_scale;
   std::vector<Force *> m_force_list;
   std::vector<BulletObj *> m_object_list;
+  std::vector<BulletGround *> m_garbage_list;
+  std::vector<BulletGround *> m_add_list;
+  bool m_is_in_step;
 };
 
 

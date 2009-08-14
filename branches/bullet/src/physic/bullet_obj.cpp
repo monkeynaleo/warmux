@@ -721,7 +721,6 @@ void BulletObj::SignalCollision(BulletContact *contact)
 
    BulletGround::~BulletGround()
    {
-     PhysicalEngine::GetInstance()->RemoveGround(this);
      delete m_shape;
    }
 
