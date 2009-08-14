@@ -110,7 +110,7 @@ PhysicalShape *BulletShape::GetPublicShape(){
 
 void BulletShape::AddContact(BulletContact *contact)
 {
-  std::cout<<"AddContact "<<contact<<std::endl;
+  //std::cout<<"AddContact "<<contact<<std::endl;
   m_contact_list.push_back(contact);
   m_contact_count++;
   }

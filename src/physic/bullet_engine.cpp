@@ -86,6 +86,7 @@ struct BulletEngineFilterCallback : public btOverlapFilterCallback
 BulletEngine::BulletEngine() : PhysicalEngine() {
     m_scale = 100.0;
     m_frame_rate = 60;
+    m_is_in_step = false;
     ///collision configuration contains default setup for memory, collision setup
     btDefaultCollisionConfiguration *collision_configuration = new btDefaultCollisionConfiguration();
     //m_collisionConfiguration->setConvexConvexMultipointIterations();
@@ -167,9 +168,16 @@ void BulletEngine::AddGround(PhysicalGround *new_obj)
 {
     BulletGround *obj = reinterpret_cast<BulletGround *>(new_obj);
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
-    m_world->addRigidBody(obj->GetBody(),0x0002,0xFFFF);
     obj->GetBody()->setRestitution(0.5);
+
+    if(m_is_in_step){
+       m_add_list.push_back(obj);
+    }else{
+      m_world->addRigidBody(obj->GetBody(),0x0002,0xFFFF);
+
+    }
 }
+
 void BulletEngine::RemoveObject(PhysicalObj *obj)
 {
   BulletObj *bobj = reinterpret_cast<BulletObj *>(obj);
@@ -189,7 +197,7 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
 void BulletEngine::RemoveGround(PhysicalGround *obj)
 {
   BulletGround *bobj = reinterpret_cast<BulletGround *>(obj);
-  m_world->removeRigidBody(bobj->GetBody());
+  m_garbage_list.push_back(bobj);
 }
 
 void BulletEngine::Step()
@@ -203,15 +211,21 @@ void BulletEngine::Step()
 
   //ResetContacts();
 
+
   for (uint i = 0; i< m_force_list.size();i++) {
         m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
       }
 
  MSG_DEBUG("physical.step", "Engine step");
+  m_is_in_step = true;
   m_world->stepSimulation(timeStep);
+  m_is_in_step = false;
   m_last_step_time = m_last_step_time +lround(timeStep);
 
-  
+  CleanGarbage();
+  PerformAddList();
+
+
 
   /*
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
@@ -229,6 +243,23 @@ void BulletEngine::Step()
   ComputeContacts();
 
   */
+}
+
+void BulletEngine::PerformAddList(){
+  std::vector<BulletGround *>::iterator it;
+    for(it = m_add_list.begin(); it != m_add_list.end();it++){
+      m_world->addRigidBody((*it)->GetBody(),0x0002,0xFFFF);
+    }
+    m_add_list.clear();
+}
+
+void BulletEngine::CleanGarbage(){
+  std::vector<BulletGround *>::iterator it;
+    for(it = m_garbage_list.begin(); it != m_garbage_list.end();it++){
+      m_world->removeRigidBody((*it)->GetBody());
+      delete (*it);
+     }
+    m_garbage_list.clear();
 }
 
 double BulletEngine::GetScale() const
@@ -293,7 +324,6 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       //const btCollisionShape *shape = cshape->getChildShape(partId1);
       const btCollisionShape *shape = colObj1->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
-      std::cout<<bshape->GetBulletParent()<<std::endl;
       contact->SetShapeB(bshape);
       double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
       Point2d position(cp.getPositionWorldOnB().getX() * scale,cp.getPositionWorldOnB().getY() * scale);
@@ -312,10 +342,10 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
       contact->GetBulletShapeB()->AddContact(contact);
     }
 
-    if(!contact->IsSignaled()){
+  /*  if(!contact->IsSignaled()){
       contact->Signal();
     }
-
+*/
   }
   return false;
 }
@@ -324,11 +354,11 @@ bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*
 {
   if(cp.m_userPersistentData){
 
-  /*  BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
-    if(!contact->IsSignaled()){
+    BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
+  if(!contact->IsSignaled()){
       contact->Signal();
     }
-*/  }
+  }
   return false;
 }
 

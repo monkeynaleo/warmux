@@ -423,7 +423,8 @@ void PhysicTile::Clean()
   }
 
   if (m_is_containing_polygon) {
-    delete m_physical_ground;
+
+    PhysicalEngine::GetInstance()->RemoveGround(m_physical_ground);
     m_physical_ground = NULL;
     m_is_containing_polygon = false;
   }
