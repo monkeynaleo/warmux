@@ -147,6 +147,7 @@ void ParticleEngine::Load()
   Profile *res = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
   particle_sprite[SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke");
   particle_sprite[EXPLOSION_SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke_explosion");
+  particle_sprite[EXPLOSION_BIG_SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke_big_explosion");
   particle_sprite[ILL_BUBBLE_spr] = GetResourceManager().LoadSprite(res,"ill_bubble");
   particle_sprite[FIRE_spr]  = GetResourceManager().LoadSprite(res,"fire_particle");
   particle_sprite[STAR_spr]  = GetResourceManager().LoadSprite(res,"star_particle");
@@ -275,7 +276,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   //Add many little smoke particles
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
-  const uint little_partic_nbr = 10;
+  const uint little_partic_nbr = 1;
   const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
   const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
 
@@ -286,7 +287,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   for(uint i=0; i < little_partic_nbr ; i++)
   {
 //      angle = (float) i * M_PI * 2.0 / (float) little_partic_nbr;
-      size = uint(radius / 1.5);
+      size = radius *2;
       norme = 2.5 * radius / 3.0;
 
       particle = new ExplosionSmoke(size);
@@ -307,7 +308,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
     return;
 
   //Add a few big smoke particles
-  const uint big_partic_nbr = 5;
+  const uint big_partic_nbr = 1;
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
   const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
@@ -340,8 +341,13 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
     return;
 
   if(style == NoESmoke) return;
-  AddLittleESmoke (position, radius);
-  if(style == BigESmoke) AddBigESmoke (position, radius);
+
+
+  if(style == BigESmoke){
+    AddBigESmoke (position, radius);
+  }else{
+    AddLittleESmoke (position, radius);
+  }
 }
 
 void ParticleEngine::Draw(bool upper)

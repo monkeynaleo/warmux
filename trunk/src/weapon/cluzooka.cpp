@@ -57,7 +57,7 @@ protected:
         // fake explosion 
         JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
         ParticleEngine::AddExplosionSmoke( pos, 
-            50, 
+            50,
             ParticleEngine::LittleESmoke );
 
         ClusterType * cluster;

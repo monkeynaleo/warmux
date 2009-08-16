@@ -25,7 +25,6 @@
 
 class ExplosionSmoke : public Particle
 {
-  float mvt_freq;
  protected:
   uint m_initial_size, dx;
  public:

@@ -55,6 +55,7 @@ enum particle_spr
 {
   SMOKE_spr,
   EXPLOSION_SMOKE_spr,
+  EXPLOSION_BIG_SMOKE_spr,
   ILL_BUBBLE_spr,
   FIRE_spr,
   STAR_spr,
