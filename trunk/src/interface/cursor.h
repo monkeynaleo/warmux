@@ -30,22 +30,16 @@ class Sprite;
 
 class CharacterCursor : public Singleton<CharacterCursor>
 {
-public:
-   Sprite *image;
-
 private:
   /* If you need this, implement it (correctly)*/
   CharacterCursor(const CharacterCursor&);
   const CharacterCursor& operator=(const CharacterCursor&);
   /*********************************************/
 
-  uint time_begin_anim;
-  uint last_update;
-  int dy;
-  bool visible;
-  bool want_hide;
+  Sprite *arrow_jump;
+  Sprite *arrow_change;
 
-  bool IsDisplayed() const;
+  Sprite *arrow;
 
 public:
   void Reset();
