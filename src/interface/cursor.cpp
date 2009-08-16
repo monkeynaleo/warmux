@@ -21,6 +21,7 @@
 
 #include "interface/cursor.h"
 #include "character/character.h"
+#include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/effects.h"
 #include "graphic/sprite.h"
@@ -28,110 +29,75 @@
 #include "team/teams_list.h" // ActiveCharacter()
 #include "tool/resource_manager.h"
 
-const uint show_hide_time = 200; //time to show and hide the arrow
-const uint y_min = 20; //number of pixels between the bottom of the arrow and the top of the sprite
-const uint y_max = 90; //number of pixels between the bottom of the arrow and the top of the sprite
-                        //when the arrow is at the top of its movement
-const uint rebound_time = 1000; //Duration of a full rebound
+const uint y_min = 5; //number of pixels between the bottom of the arrow and the top of the sprite
 
 CharacterCursor::CharacterCursor()
 {
-  visible = false;
-  want_hide = false;
-  time_begin_anim = 0;
-  last_update = 0;
-  image = NULL;
-  dy = 0;
+  arrow = NULL;
 
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  image = GetResourceManager().LoadSprite( res, "gfx/curseur");
+  arrow_jump = GetResourceManager().LoadSprite( res, "gfx/arrow-jump");
+  arrow_change = GetResourceManager().LoadSprite( res, "gfx/arrow-change");
   GetResourceManager().UnLoadXMLProfile( res);
 }
 
 CharacterCursor::~CharacterCursor()
 {
-  if (image)
-    delete image;
+  delete arrow_jump;
+  delete arrow_change;
 }
 
 // Draw cursor
 void CharacterCursor::Draw()
 {
-  if (!IsDisplayed()) return;
+  if (!arrow) return;
   if (ActiveCharacter().IsGhost()) return;
 
   // Draw cursor arround character
   Point2i center = ActiveCharacter().GetCenter();
-  uint x = center.x - image->GetWidth()/2;
-  uint y = ActiveCharacter().GetY() - image->GetHeight() - y_min;
+  uint x = center.x - arrow_jump->GetWidth()/2;
+  uint y = ActiveCharacter().GetY() - arrow_jump->GetHeight() - y_min;
 
-  image->Draw( Point2i(x, y+dy) );
+  arrow->Draw( Point2i(x, y) );
 }
 
 void CharacterCursor::Refresh()
 {
-  if (!IsDisplayed()) return;
+  if (!arrow) return;
 
-  image->Scale(1.0, 1.0);
-
-  Time * global_time = Time::GetInstance();
-
-  //The arrow is appearing:
-  if( visible && global_time->Read() < time_begin_anim + show_hide_time )
-  {
-    dy = (int)((Camera::GetInstance()->GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time->Read() - time_begin_anim) / (float)show_hide_time));
+  if (arrow->IsFinished()) {
+    arrow = NULL;
     return;
   }
 
-  //If we want to hide the cursor, we have to wait the end of the current rebound to make the cursor disappear
-  if(want_hide)
-  {
-    if( ((global_time->Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
-    &&  ((last_update - (time_begin_anim + show_hide_time)) % rebound_time > rebound_time / 2))
-    {
-      //We are at the end of the rebound
-      visible = false;
-      time_begin_anim = global_time->Read();
-    }
-  }
-
-  //The arrow is disappearing:
-  if( !visible && global_time->Read() < time_begin_anim + show_hide_time )
-  {
-    dy = (int)((Camera::GetInstance()->GetPosition().y - ActiveCharacter().GetY()) * ((global_time->Read() - time_begin_anim) / (float)show_hide_time));
-    return;
-  }
-
-  //The arrow is rebounding:
-  Rebound(image, dy, time_begin_anim + show_hide_time, rebound_time, (int)y_min - (int)y_max);
-
-  last_update = global_time->Read();
+  arrow->Update();
 }
 
 // Hide the cursor
 void CharacterCursor::Hide()
 {
-  if (!visible) return;
-  want_hide = true;
+  if (!arrow) return;
+
+  arrow->animation.SetLoopMode(false);
 }
 
 void CharacterCursor::Reset()
 {
-  visible = false;
-  want_hide = false;
+  arrow_jump->animation.SetLoopMode(true);
+  arrow_change->animation.SetLoopMode(true);
+  arrow = NULL;
 }
 
 void CharacterCursor::FollowActiveCharacter()
 {
-  if (visible)
+  if (arrow)
     return;
 
-  visible = true;
-  want_hide = false;
-  time_begin_anim = Time::GetInstance()->Read();
-}
+  if (GameMode::GetInstance()->AllowCharacterSelection())
+    arrow = arrow_change;
+  else
+    arrow = arrow_jump;
 
-// Are we displaying the arrow on the screen ?
-bool CharacterCursor::IsDisplayed() const {
-  return visible || (Time::GetInstance()->Read() < time_begin_anim + show_hide_time);
+  arrow->animation.SetLoopMode(true);
+  arrow->Start();
 }
