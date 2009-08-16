@@ -30,13 +30,16 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")
 {
   m_initial_size = size_init;
-  m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live;
-  m_time_between_scale = 25;
-  dx = 0;
 
-  image = ParticleEngine::GetSprite(EXPLOSION_SMOKE_spr);
-  mvt_freq = RandomLocal().GetDouble(-2.0, 2.0);
+
+  image = ParticleEngine::GetSprite(EXPLOSION_BIG_SMOKE_spr);
+  m_initial_time_to_live = image->GetFrameCount();
+  m_left_time_to_live = m_initial_time_to_live;
+  m_time_between_scale = image->GetCurrentFrameObject().delay;
+
+  image->SetCurrentFrame(0);
+  image->Start();
+
   SetGravityFactor(RandomLocal().GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
@@ -57,19 +60,14 @@ void ExplosionSmoke::Refresh()
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;
-
-    float lived_time = m_initial_time_to_live - m_left_time_to_live;
-
-    float coeff = cos((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live)));
-    image->ScaleSize(int(coeff * m_initial_size),int(coeff * m_initial_size));
-
-    dx = int((int)m_initial_size * sin(5.0 * ((float)lived_time/((float)m_initial_time_to_live)) * M_PI * mvt_freq / 2.0) / 2);
     m_last_refresh = Time::GetInstance()->Read() ;
   }
 }
 
 void ExplosionSmoke::Draw()
 {
-  if (m_left_time_to_live > 0)
-    image->Draw(GetPosition()+Point2i(dx,0));
+  if (m_left_time_to_live > 0){
+    image->Draw(GetPosition()-Point2i(m_initial_size/2,0));
+  }
+
 }
