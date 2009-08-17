@@ -37,16 +37,23 @@
 #include <WORMUX_random.h>
 #include <assert.h>
 
-const Point2d MAX_CAMERA_SPEED(100, 100);
+#include <iostream>
+
+const Point2d MAX_CAMERA_SPEED(5000, 5000);
 const Point2d MAX_CAMERA_ACCELERATION(1.5,1.5);
-const double ANTICIPATION = 20;
+const double ANTICIPATION = 18;
 const double REACTIVITY = 0.6;
-const double ADVANCE_ANTICIPATION = 22;
+const double SPEED_REACTIVITY = 0.05;
+const double SPEED_REACTIVITY_CEIL = 4;
+
+const double ADVANCE_ANTICIPATION = 10;
+const double REALTIME_FOLLOW_LIMIT = 25;
+const double REALTIME_FOLLOW_FACTOR = 0.15;
 // minimum speed of an object that is followed in advance
-#define MIN_SPEED_ADVANCE 5
+//#define MIN_SPEED_ADVANCE 5
 
 // for this speed (and higher), the object can be in the corner of the screen
-#define MAX_SPEED_ADVANCE 15
+//#define MAX_SPEED_ADVANCE 15
 
 Camera::Camera():
   m_started_shaking( 0 ),
@@ -158,20 +165,51 @@ void Camera::AutoCrop()
   if(acceleration.x < -MAX_CAMERA_ACCELERATION.x) { acceleration.x = -MAX_CAMERA_ACCELERATION.x; }
   if(acceleration.y < -MAX_CAMERA_ACCELERATION.y) { acceleration.y = -MAX_CAMERA_ACCELERATION.y; }
 
+ // std::cout<<"acceleration before : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
+  if(abs(m_speed.x) > SPEED_REACTIVITY_CEIL){
+    acceleration.x *= (1 + SPEED_REACTIVITY * (abs(m_speed.x)-SPEED_REACTIVITY_CEIL));
+  }
+
+  if(abs(m_speed.y) > SPEED_REACTIVITY_CEIL){
+      acceleration.y *= (1 + SPEED_REACTIVITY * (abs(m_speed.y)-SPEED_REACTIVITY_CEIL));
+    }
+
+
+  //std::cout<<"acceleration after  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
+
+
   //Apply acceleration
   m_speed = m_speed + acceleration;
 
+
+
+
+
+//  std::cout<<"obj_position  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
+
+  //Realtime follow is enable if object is too fast to be correctly followed
+
+  if(abs(followed_object->GetSpeed().x)> REALTIME_FOLLOW_LIMIT){
+    m_speed.x =  (target.x - position.x)*REALTIME_FOLLOW_FACTOR;
+  }
+
+  if(abs(followed_object->GetSpeed().y)> REALTIME_FOLLOW_LIMIT){
+
+      m_speed.y =  (target.y - position.y)*REALTIME_FOLLOW_FACTOR;
+    }
+
   //Limit
-  if(m_speed.x > MAX_CAMERA_SPEED.x) { m_speed.x = MAX_CAMERA_SPEED.x; }
-  if(m_speed.y > MAX_CAMERA_SPEED.y) { m_speed.y = MAX_CAMERA_SPEED.y; }
-  if(m_speed.x < -MAX_CAMERA_SPEED.x) { m_speed.x = -MAX_CAMERA_SPEED.x; }
-  if(m_speed.y < -MAX_CAMERA_SPEED.y) { m_speed.y = -MAX_CAMERA_SPEED.y; }
+    if(m_speed.x > MAX_CAMERA_SPEED.x) { m_speed.x = MAX_CAMERA_SPEED.x; }
+    if(m_speed.y > MAX_CAMERA_SPEED.y) { m_speed.y = MAX_CAMERA_SPEED.y; }
+    if(m_speed.x < -MAX_CAMERA_SPEED.x) { m_speed.x = -MAX_CAMERA_SPEED.x; }
+    if(m_speed.y < -MAX_CAMERA_SPEED.y) { m_speed.y = -MAX_CAMERA_SPEED.y; }
 
-  //Update position
-  Point2i next_position(0,0);
+    //Update position
+    Point2i next_position(0,0);
 
-  next_position.x =  m_speed.x;
-  next_position.y =  m_speed.y;
+    next_position.x =  m_speed.x;
+    next_position.y =  m_speed.y;
+
 
   SetXY( next_position);
 }
