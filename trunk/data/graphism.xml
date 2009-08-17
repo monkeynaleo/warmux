@@ -295,7 +295,7 @@
 
   <sprite name="arrow-change">
     <image file="gfx/arrow_turn.png">
-      <grid pos="0,0" size="70,70" array="6,1" />
+      <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
