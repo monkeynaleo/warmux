@@ -648,10 +648,9 @@ bool GameObj::IsInWater () const
 
 void GameObj::DirectFall()
 {
-    //Todo fix this removing return
-    return;
+
   while (!IsGhost() && !IsInWater() && !GetPhysic()->IsColliding()) {
-/*    MSG_DEBUG("physic.fall", "%s - x=%f, y=%f\n", m_name.c_str(), GetXdouble(), GetYdouble());*/
+    MSG_DEBUG("physic.fall", "%s - x=%f, y=%f\n", m_name.c_str(), GetX(), GetY());
     SetY(GetY()+1.0);
 
   }

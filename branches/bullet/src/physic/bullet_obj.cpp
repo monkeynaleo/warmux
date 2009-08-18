@@ -105,6 +105,9 @@ BulletObj::~BulletObj()
        btTransform current_transform = m_body->getWorldTransform();
        current_transform.setOrigin(btVector3(position.x/GetScale(),position.y/GetScale(),0));
        m_body->setWorldTransform(current_transform);
+
+       (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->VirtualStep();
+
   }
 
   double BulletObj::GetScale() const
