@@ -245,6 +245,20 @@ void BulletEngine::Step()
   */
 }
 
+void BulletEngine::VirtualStep()
+{
+
+ MSG_DEBUG("physical.step", "Engine  virtual step");
+  m_is_in_step = true;
+  m_world->performDiscreteCollisionDetection();
+  m_is_in_step = false;
+
+  CleanGarbage();
+  PerformAddList();
+
+
+}
+
 void BulletEngine::PerformAddList(){
   std::vector<BulletGround *>::iterator it;
     for(it = m_add_list.begin(); it != m_add_list.end();it++){
