@@ -392,6 +392,8 @@ wormux_SOURCES = \
         weapon/weapons_list.cpp \
         weapon/weapons_list.h
 
+wormux_LDFLAGS = -Wl,--as-needed
+
 if AUTOPACKAGE
 DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
 endif
