@@ -30,6 +30,9 @@
 #include <iostream>
 
 
+static const double GROUND_RESTITUTION = 0.5;
+static const double GROUND_FRICTION = 0.5;
+
 extern ContactAddedCallback  gContactAddedCallback;
 extern ContactProcessedCallback gContactProcessedCallback;
 extern ContactDestroyedCallback  gContactDestroyedCallback;
@@ -153,15 +156,8 @@ void BulletEngine::AddObject(PhysicalObj *new_obj)
     ASSERT(!obj->IsInWorld());
     obj->GetBody()->setActivationState(ISLAND_SLEEPING);
     m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
-    //m_world->addRigidBody(obj->GetBody());
-    //obj->GetBody()->setActivationState(ACTIVE_TAG);
     m_object_list.push_back(obj);
-   // std::cout<<"Add "<<new_obj<<" x="<<new_obj->GetPosition().x<<" y="<<new_obj->GetPosition().y<<std::endl;
     obj->SetInWorld(true);
-
-/* b2Body * body = physic_world->CreateBody(new_obj->GetBodyDef());
-  objects_list[body] = new_obj;
-  return body;*/
 }
 
 void BulletEngine::AddGround(PhysicalGround *new_obj)
@@ -191,7 +187,6 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
   }
   bobj->SetInWorld(false);
   m_world->removeRigidBody(bobj->GetBody());
-//  std::cout<<"Remove "<<obj<<std::endl;
 }
 
 void BulletEngine::RemoveGround(PhysicalGround *obj)
@@ -205,16 +200,15 @@ void BulletEngine::Step()
 
   btScalar timeStep = 1.0f / m_frame_rate;
 
-  if ((Time::GetInstance()->Read()-m_last_step_time) < (uint)lround(timeStep)) {
+  if ((Time::GetInstance()->Read()-m_last_step_time) < (uint)lround(timeStep))
+  {
     return;
   }
 
-  //ResetContacts();
-
-
-  for (uint i = 0; i< m_force_list.size();i++) {
+  for (uint i = 0; i< m_force_list.size();i++)
+  {
         m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
-      }
+  }
 
  MSG_DEBUG("physical.step", "Engine step");
   m_is_in_step = true;
@@ -312,56 +306,79 @@ void BulletEngine::ResetContacts()
 
 bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int /*partId0*/, int /*index0*/, const btCollisionObject* colObj1, int /*partId1*/, int /*index1*/)
 {
- // std::cout<<"ContactAdded"<<std::endl;
-  if(cp.m_userPersistentData == NULL){
+  double friction0 = GROUND_FRICTION;
+  double friction1 = GROUND_FRICTION;
+  double restitution0 = GROUND_RESTITUTION;
+  double restitution1 = GROUND_RESTITUTION;
+
+  if(cp.m_userPersistentData == NULL)
+  {
     BulletContact * contact = new BulletContact();
     cp.m_userPersistentData = contact;
 
-    if(colObj0->getCollisionShape()->getUserPointer()){
-
-      //const btCompoundShape *cshape = reinterpret_cast<const btCompoundShape *>(colObj0->getCollisionShape());
-      //const btCollisionShape *shape = cshape->getChildShape(partId0);
+    if(colObj0->getCollisionShape()->getUserPointer())
+    {
       const btCollisionShape *shape = colObj0->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
       contact->SetShapeA(bshape);
       double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
       Point2d position(cp.getPositionWorldOnA().getX() * scale,cp.getPositionWorldOnA().getY() * scale);
       contact->SetPositionA(position);
-    }else{
-
+      friction0 = bshape->GetPublicShape()->GetFriction();
+      restitution0 = bshape->GetPublicShape()->GetRestitution();
+    }
+    else
+    {
       contact->SetShapeA(NULL);
     }
 
-    if(colObj1->getCollisionShape()->getUserPointer()){
-
-      //const btCompoundShape *cshape = reinterpret_cast<const btCompoundShape *>(colObj1->getCollisionShape());
-      //const btCollisionShape *shape = cshape->getChildShape(partId1);
+    if(colObj1->getCollisionShape()->getUserPointer())
+    {
       const btCollisionShape *shape = colObj1->getCollisionShape();
       BulletShape *bshape = reinterpret_cast<BulletShape *>(shape->getUserPointer());
       contact->SetShapeB(bshape);
       double scale = reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->GetScale();
       Point2d position(cp.getPositionWorldOnB().getX() * scale,cp.getPositionWorldOnB().getY() * scale);
       contact->SetPositionB(position);
-    }else{
 
+      friction1 = bshape->GetPublicShape()->GetFriction();
+      restitution1 = bshape->GetPublicShape()->GetRestitution();
+    }
+    else
+    {
          contact->SetShapeB(NULL);
-     }
+    }
 
-    if(contact->GetBulletShapeA()){
-
+    if(contact->GetBulletShapeA())
+    {
       contact->GetBulletShapeA()->AddContact(contact);
     }
-    if(contact->GetBulletShapeB()){
-
+    if(contact->GetBulletShapeB())
+    {
       contact->GetBulletShapeB()->AddContact(contact);
     }
 
-  /*  if(!contact->IsSignaled()){
-      contact->Signal();
-    }
-*/
   }
-  return false;
+  else
+  {
+    BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
+    if (contact->GetBulletShapeA())
+    {
+      friction0 = contact->GetBulletShapeA()->GetPublicShape()->GetFriction();
+      restitution0 = contact->GetBulletShapeA()->GetPublicShape()->GetRestitution();
+    }
+    if (contact->GetBulletShapeB())
+    {
+      friction1 = contact->GetBulletShapeB()->GetPublicShape()->GetFriction();
+      restitution1 = contact->GetBulletShapeB()->GetPublicShape()->GetRestitution();
+    }
+  }
+
+  //Compute friction and restitution
+  cp.m_combinedFriction = friction0 * friction1;
+  cp.m_combinedRestitution = restitution0 * restitution1;
+
+  return true;
 }
 
 bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*/, void* /*colObj1*/)
