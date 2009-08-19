@@ -38,7 +38,7 @@ PhysicalShape::PhysicalShape() :
   m_force_application_point(0,0),
   m_friction(0.8f),
   m_air_friction(0),
-  m_rebound_factor(0.1f),
+  m_restitution(0.1f),
   m_density(30),
   m_name("")
 {
@@ -71,14 +71,25 @@ void PhysicalShape::SetMass(double mass)
   m_density = mass / Area();
 }
 
-void PhysicalShape::SetFriction(double /*friction*/)
+void PhysicalShape::SetFriction(double friction)
 {
-  //m_friction = friction;
+  m_friction = friction;
 }
 
-void PhysicalShape::SetReboundFactor(double rebound_factor)
+double PhysicalShape::GetFriction()
 {
-  m_rebound_factor = rebound_factor;
+  return m_friction;
+}
+
+
+void PhysicalShape::SetRestitution(double rebound_factor)
+{
+  m_restitution = rebound_factor;
+}
+
+double PhysicalShape::GetRestitution()
+{
+  return m_restitution;
 }
 
 Point2d PhysicalShape::GetPosition() const
@@ -229,9 +240,11 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
   double air_friction = 0;
   r = XmlReader::ReadDouble(root_shape, "air_friction", air_friction);
 
-  double friction = 0.8;
+  double friction = 0.5;
    r = XmlReader::ReadDouble(root_shape, "friction", friction);
   
+   double restitution = 0.5;
+   r = XmlReader::ReadDouble(root_shape, "restitution", restitution);
   // =============== Circle
 
   if (shape_type == "circle") {
@@ -302,6 +315,7 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
   shape->SetAirFriction(air_friction);
   shape->SetForceApplicationPoint(Point2d(force_x, force_y));
   shape->SetFriction(friction);
+  shape->SetRestitution(restitution);
   shape->Generate();
   return shape;
 }

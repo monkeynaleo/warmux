@@ -41,7 +41,7 @@ protected:
   Point2d m_force_application_point;
   double m_friction;
   double m_air_friction;
-  double m_rebound_factor;
+  double m_restitution;
   double m_density;
   std::string m_name;
   Point2d PosWithRotation(const Point2d& point) const;
@@ -53,7 +53,10 @@ public:
   virtual double Area() const = 0;
 
   void SetFriction(double friction);
-  void SetReboundFactor(double rebound_factor);
+  void SetRestitution(double rebound_factor);
+  double GetFriction();
+  double GetRestitution();
+
   void SetMass(double mass); // compute the density from mass and area
   void SetPosition(Point2d position);
   void SetName(const std::string &name);
