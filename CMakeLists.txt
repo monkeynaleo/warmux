@@ -2,10 +2,7 @@ cmake_minimum_required(VERSION 2.4.4)
 
 # Project name
 PROJECT(Wormux)
-SET(WORMUX_MAJOR "0")
-SET(WORMUX_MINOR "8")
-SET(WORMUX_PATCH "4svn")
-SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}.${WORMUX_PATCH}")
+SET(VERSION "svn")
 
 # change the default install prefix to /usr
 SET(CMAKE_INSTALL_PREFIX /usr)
