@@ -313,6 +313,7 @@ void BulletRectangle::DrawBorder(const Color& color) const
  {
     m_public_shape = this;
       btConvexHullShape * new_shape = new btConvexHullShape();
+      new_shape->setMargin(0.0001);
 
       for(uint i=0;i < m_point_list.size(); i++)
       {
