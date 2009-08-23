@@ -50,10 +50,6 @@ protected:
 public:
   void Init();
 
-  // Weapon refresh
-  // Return true if end of turn
-  void Refresh() const;
-
   static void UpdateTranslation();
 
   // Return a list of  weapons
