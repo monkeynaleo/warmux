@@ -328,7 +328,7 @@ bool Weapon::Shoot()
 
   if (max_strength != 0) ActiveCharacter().previous_strength = m_strength;
 
-  Game::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->SetCharacterChosen(true);
 
   return true;
 }
@@ -451,7 +451,7 @@ void Weapon::InitLoading(){
 
   m_strength = 0;
 
-  Game::GetInstance()->character_already_chosen = true;
+  Game::GetInstance()->SetCharacterChosen(true);
 }
 
 void Weapon::StopLoading(){
