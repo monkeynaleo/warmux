@@ -97,8 +97,6 @@ POTFILES = \
         src/gui/container.h \
         src/gui/energy_bar.cpp \
         src/gui/energy_bar.h \
-        src/gui/file_list_box.cpp \
-        src/gui/file_list_box.h \
         src/gui/label.cpp \
         src/gui/label.h \
         src/gui/list_box.cpp \
