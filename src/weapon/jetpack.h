@@ -40,7 +40,6 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    virtual void SignalTurnEnd() { p_Deselect(); };
     virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Up(bool shift);

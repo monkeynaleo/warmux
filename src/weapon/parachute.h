@@ -49,7 +49,6 @@ class Parachute : public Weapon
     Parachute();
     ~Parachute();
     void Draw();
-    void SignalTurnEnd() { p_Deselect(); };
     bool IsInUse() const;
 
     void HandleKeyPressed_Shoot(bool shift);

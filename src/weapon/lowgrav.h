@@ -28,7 +28,6 @@ class LowGrav : public Weapon
 {
   public:
     LowGrav();
-    void SignalTurnEnd() { p_Deselect(); };
     void Draw() { };
     void ActionStopUse() { UseAmmoUnit(); };
     void HandleKeyPressed_Shoot(bool shift);
