@@ -139,7 +139,8 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
     std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
       "gfx" + PATH_SEPARATOR + "water" + PATH_SEPARATOR + water_type;
     if (!DoesFileExist(path)) {
-      fprintf(stderr, "Water type %s is not valid\n", water_type.c_str());
+      fprintf(stderr, "Map %s (%s) uses invalid water type %s\n",
+	      GetRawName().c_str(), ReadFullMapName().c_str(), water_type.c_str());
       water_type = "no";
     }
   }
