@@ -972,8 +972,8 @@ void Character::GetValueFromAction(Action *a)
 	    movement.c_str(), GetBody()->GetMovement().c_str(),
 	    frame, GetBody()->GetFrame());
 
-    SetClothe(clothe);
-    SetMovement(movement);
+    SetClothe(clothe, true);
+    SetMovement(movement, true);
     GetBody()->SetFrame(frame);
 
     GetBody()->UpdateWeaponPosition(GetPosition());
