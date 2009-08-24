@@ -311,6 +311,22 @@ void Game::RefreshInput()
 // ####################################################################
 // ####################################################################
 
+bool Game::IsCharacterAlreadyChosen() const
+{
+  return character_already_chosen;
+}
+
+void Game::SetCharacterChosen(bool chosen)
+{
+  if (character_already_chosen == chosen)
+    return;
+
+  character_already_chosen = chosen;
+  if (chosen) {
+    CharacterCursor::GetInstance()->Hide();
+  }
+}
+
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)

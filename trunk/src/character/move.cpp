@@ -108,7 +108,7 @@ void MoveCharacter(Character &character, bool slowly)
   while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
   {
     // Move !
-    Game::GetInstance()->character_already_chosen = true;
+    Game::GetInstance()->SetCharacterChosen(true);
 
     // Eventually moves the character
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),

@@ -166,7 +166,7 @@ void GameBlitz::__SetState_PLAYING()
   if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
     Wind::GetRef().ChooseRandomVal();
 
-  character_already_chosen = false;
+  SetCharacterChosen(false);
 
   // Prepare each character for a new turn
   FOR_ALL_LIVING_CHARACTERS(team,character)
