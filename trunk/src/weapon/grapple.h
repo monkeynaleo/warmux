@@ -92,8 +92,6 @@ class Grapple : public Weapon
     virtual void NotifyMove(bool collision);
 
     virtual void ActionStopUse() { DetachRope(); };
-    // force detaching rope if time is out
-    virtual void SignalTurnEnd() { p_Deselect(); };
 
     GrappleConfig& cfg();
 

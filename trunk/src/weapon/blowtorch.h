@@ -38,7 +38,6 @@ class Blowtorch : public Weapon
     Blowtorch();
     BlowtorchConfig& cfg();
 
-    virtual void SignalTurnEnd() { p_Deselect(); };
     virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Shoot(bool shift);
