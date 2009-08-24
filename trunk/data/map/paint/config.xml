@@ -13,7 +13,7 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Paint</name>
-  <water>1</water>
+  <water>water</water>
   <nb_mine>4</nb_mine>
   <nb_barrel>2</nb_barrel>
   <is_open>1</is_open>
