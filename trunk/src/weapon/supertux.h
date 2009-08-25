@@ -44,6 +44,11 @@ public:
 
   virtual void SignalEndOfProjectile();
 
+  // Key Shoot management
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
+
   virtual void HandleKeyPressed_MoveRight(bool shift);
   virtual void HandleKeyRefreshed_MoveRight(bool shift);
   virtual void HandleKeyReleased_MoveRight(bool shift);
@@ -73,6 +78,7 @@ public:
   virtual void HandleKeyReleased_BackJump(bool shift);
 
   void RefreshFromNetwork(double angle, Point2d pos);
+  void ExplosionFromNetwork(Point2d tux_pos);
 
 protected:
   WeaponProjectile * GetProjectileInstance();
