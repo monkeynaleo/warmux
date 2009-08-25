@@ -192,8 +192,6 @@ void GnuLauncher::Refresh()
   if (gnu_death_time != 0
       && gnu_death_time + 2000 < Time::GetInstance()->Read()) {
 
-    fprintf(stderr, "%s:%d\n", __PRETTY_FUNCTION__, __LINE__);
-
     UseAmmoUnit();
     gnu_death_time = 0;
   }
@@ -211,8 +209,6 @@ void GnuLauncher::SignalEndOfProjectile()
 
   current_gnu = NULL;
   gnu_death_time = Time::GetInstance()->Read();
-
-  fprintf(stderr, "%s:%d\n", __PRETTY_FUNCTION__, __LINE__);
 }
 
 void GnuLauncher::HandleKeyPressed_Shoot(bool shift)
