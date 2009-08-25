@@ -110,7 +110,14 @@ void Polecat::Refresh()
     return;
   }
   int tmp = Time::GetInstance()->Read() - begin_time;
-  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
+  if (cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
+    if (!last_fart_time) {
+      std::string txt = Format(_("%s has done something for the environment, he has not ordered the polecat to fart."),
+			       ActiveCharacter().GetName().c_str());
+      GameMessages::GetInstance()->Add (txt);
+    }
+    SignalTimeout();
+  }
 
   double norm, angle;
   if (last_fart_time && last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
