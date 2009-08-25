@@ -234,7 +234,12 @@ void Mine::Add(int x, int y)
   projectile->SetXY(Point2i(x, y));
   projectile->SetOverlappingObject(&ActiveCharacter());
 
-  projectile -> SetSpeedXY (ActiveCharacter().GetSpeedXY());
+  // add the character speed
+  if(ActiveCharacter().GetDirection() == 1)
+    projectile->SetSpeed(1.0, -M_PI_4);
+  else
+    projectile->SetSpeed(1.0, -3.0 * M_PI_4);
+
   ObjectsList::GetRef().AddObject (projectile);
   projectile = NULL;
   ReloadLauncher();
