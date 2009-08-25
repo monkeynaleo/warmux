@@ -22,20 +22,17 @@
  * std::list of projectile and override the Refresh and the management of the keys
  *****************************************************************************/
 
-#include <sstream>
-
 #include "character/character.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "interface/game_msg.h"
 #include "interface/game_msg.h"
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
+#include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
-
 #include "weapon/explosion.h"
 #include "weapon/submachine_gun.h"
 #include "weapon/weapon_cfg.h"
@@ -90,6 +87,8 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
+  shoot_started = false;
+
   ReloadLauncher();
 }
 
@@ -114,8 +113,15 @@ void SubMachineGun::IncMissedShots()
   WeaponLauncher::IncMissedShots();
 }
 
+void SubMachineGun::p_Deselect()
+{
+  shoot_started = false;
+}
+
 bool SubMachineGun::p_Shoot()
 {
+  fprintf(stderr, "SubMachineGun::p_Shoot\n");
+
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -127,14 +133,22 @@ bool SubMachineGun::p_Shoot()
                   5.0 + (Time::GetInstance()->Read() % 6));
 
   announce_missed_shots = false;
+
+  shoot_started = true;
   return true;
 }
 
-void SubMachineGun::HandleKeyRefreshed_Shoot(bool /*shift*/)
+void SubMachineGun::Refresh()
 {
-  if (EnoughAmmoUnit()) {
+  if (shoot_started
+      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())) {
     Weapon::RepeatShoot();
   }
+}
+
+bool SubMachineGun::IsInUse() const
+{
+  return shoot_started;
 }
 
 std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count ) const

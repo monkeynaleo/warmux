@@ -28,18 +28,22 @@
 
 class SubMachineGun : public WeaponLauncher
 {
-    ParticleEngine particle;
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-    void IncMissedShots();
-    bool p_Shoot();
-  public:
-    SubMachineGun();
-    virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
-    virtual void HandleKeyRefreshed_Shoot(bool shift);
+private:
+  ParticleEngine particle;
+  bool shoot_started;
+protected:
+  WeaponProjectile * GetProjectileInstance();
+  void IncMissedShots();
+  virtual void Refresh();
+  virtual bool p_Shoot();
+  virtual void p_Deselect();
+public:
+  SubMachineGun();
 
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+  virtual bool IsInUse() const;
+
+  virtual void UpdateTranslationStrings();
+  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
 
 #endif /* SUBMACHINE_GUN_H */
