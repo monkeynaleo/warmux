@@ -47,8 +47,6 @@
 #include "weapon/weapon_launcher.h"
 
 const int Y_OBJET_MIN = -10000;
-const int WATER_RESIST_FACTOR = 40;
-
 const double PIXEL_PER_METER = 40;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2)
@@ -553,7 +551,7 @@ void PhysicalObj::Drown()
   m_alive = DROWNED;
 
   // Set the air grab to water resist factor.
-  SetAirResistFactor(WATER_RESIST_FACTOR * GetAirResistFactor());
+  SetAirResistFactor(m_cfg.m_water_resist_factor);
 
   // Ensure the gravity factor is upper than 0.0
   if (EqualsZero(GetGravityFactor()))
