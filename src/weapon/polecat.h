@@ -25,14 +25,36 @@
 #include "weapon/weapon_launcher.h"
 #include "include/base.h"
 
+class Polecat;
+
 class PolecatLauncher : public WeaponLauncher
 {
+private:
+  Polecat *current_polecat;
+  uint polecat_death_time;
+
 public:
   PolecatLauncher();
+
+  virtual void SignalEndOfProjectile();
+  virtual void SignalProjectileCollision() { };
+  virtual void SignalProjectileDrowning() { };
+
+  virtual bool IsInUse() const;
+
+  // Key Shoot management
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
+
+  void ExplosionFromNetwork(Point2d gnu_pos);
+
 
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 protected:
+  virtual bool p_Shoot();
+  virtual void Refresh();
   WeaponProjectile * GetProjectileInstance();
 };
 

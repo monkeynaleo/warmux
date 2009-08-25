@@ -19,15 +19,11 @@
  * Polecat : send a polecat to the enemy. Close character get sick with the mefitic odor.
  *****************************************************************************/
 
-#include "weapon/polecat.h"
-#include "weapon/grenade.h"
-#include "weapon/weapon_cfg.h"
-
-#include <sstream>
 #include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/randomsync.h"
@@ -36,6 +32,8 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "weapon/explosion.h"
+#include "weapon/polecat.h"
+#include "weapon/weapon_cfg.h"
 
 const uint TIME_BETWEEN_FART = 500;
 const uint TIME_BETWEEN_REBOUND = 400;
@@ -48,6 +46,7 @@ class Polecat : public WeaponProjectile
   uint last_fart_time;
   uint last_rebound_time;
   double angle;
+  void Fart();
  protected:
   void SignalOutOfMap();
  public:
@@ -55,6 +54,8 @@ class Polecat : public WeaponProjectile
           WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
+
+  virtual void Explosion();
 };
 
 
@@ -70,7 +71,6 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
 void Polecat::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
-  last_fart_time = Time::GetInstance()->Read() + TIME_BETWEEN_FART;
 
   save_x=GetX();
   save_y=GetY();
@@ -83,6 +83,26 @@ void Polecat::Shoot(double strength)
     m_sens = -1;
 }
 
+void Polecat::Fart()
+{
+  // particles must be exactly the same accross the network
+  double norme = double(RandomSync().GetLong(0, 500))/100;
+  double angle = double(RandomSync().GetLong(0, 3000))/100;
+  ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
+  last_fart_time = Time::GetInstance()->Read();
+  JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
+}
+
+void Polecat::Explosion()
+{
+  if (!last_fart_time) {
+    Fart();
+    return;
+  }
+
+  WeaponProjectile::Explosion();
+}
+
 void Polecat::Refresh()
 {
   if (m_energy == 0) {
@@ -93,14 +113,10 @@ void Polecat::Refresh()
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 
   double norm, angle;
-  if(last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
-    // particles must be exactly the same accross the network
-    double norme = double(RandomSync().GetLong(0, 500))/100;
-    double angle = double(RandomSync().GetLong(0, 3000))/100;
-    ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
-    last_fart_time = Time::GetInstance()->Read();
-    JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
+  if (last_fart_time && last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
+    Fart();
   }
+
   //When we hit the ground, jump !
   if(!IsMoving() && !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
@@ -160,6 +176,10 @@ PolecatLauncher::PolecatLauncher() :
 
   m_category = SPECIAL;
   ReloadLauncher();
+
+  // unit will be used when the polecat disappears
+  use_unit_on_first_shoot = false;
+
 }
 
 void PolecatLauncher::UpdateTranslationStrings()
@@ -167,6 +187,82 @@ void PolecatLauncher::UpdateTranslationStrings()
   m_name = _("Polecat Launcher");
   /* TODO: FILL IT */
   /* m_help = _(""); */
+}
+
+bool PolecatLauncher::p_Shoot()
+{
+  if (current_polecat != NULL)
+    return false;
+
+  current_polecat = static_cast<Polecat *>(projectile);
+  polecat_death_time = 0;
+  bool r = WeaponLauncher::p_Shoot();
+
+  return r;
+}
+
+void PolecatLauncher::Refresh()
+{
+  if (current_polecat != NULL)
+    return;
+
+  if (polecat_death_time != 0
+      && polecat_death_time + 2000 < Time::GetInstance()->Read()) {
+
+    UseAmmoUnit();
+    polecat_death_time = 0;
+  }
+}
+
+bool PolecatLauncher::IsInUse() const
+{
+  return (current_polecat || polecat_death_time);
+}
+
+void PolecatLauncher::SignalEndOfProjectile()
+{
+  if (current_polecat == NULL)
+    return;
+
+  current_polecat = NULL;
+  polecat_death_time = Time::GetInstance()->Read();
+}
+
+void PolecatLauncher::HandleKeyPressed_Shoot(bool shift)
+{
+  if (current_polecat || polecat_death_time)
+    return;
+
+  Weapon::HandleKeyPressed_Shoot(shift);
+}
+
+void PolecatLauncher::HandleKeyRefreshed_Shoot(bool shift)
+{
+  if (current_polecat || polecat_death_time)
+    return;
+
+  Weapon::HandleKeyRefreshed_Shoot(shift);
+}
+
+void PolecatLauncher::HandleKeyReleased_Shoot(bool shift)
+{
+  if (current_polecat) {
+    Action* a = new Action(Action::ACTION_WEAPON_POLECAT);
+    a->Push(current_polecat->GetPos());
+    ActionHandler::GetInstance()->NewAction(a);
+    return;
+  }
+
+  Weapon::HandleKeyReleased_Shoot(shift);
+}
+
+void PolecatLauncher::ExplosionFromNetwork(Point2d polecat_pos)
+{
+  if (!current_polecat)
+    return;
+
+  current_polecat->SetPhysXY(polecat_pos);
+  current_polecat->Explosion();
 }
 
 WeaponProjectile * PolecatLauncher::GetProjectileInstance()
