@@ -57,6 +57,7 @@
 #include "weapon/explosion.h"
 #include "weapon/gnu.h"
 #include "weapon/grapple.h"
+#include "weapon/polecat.h"
 #include "weapon/supertux.h"
 #include "weapon/weapon.h"
 #include "weapon/weapon_launcher.h"
@@ -762,6 +763,18 @@ static void Action_Weapon_Grapple (Action *a)
   }
 }
 
+static void Action_Weapon_Polecat (Action *a)
+{
+  PolecatLauncher* launcher = dynamic_cast<PolecatLauncher*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(launcher != NULL)
+  {
+    return;
+  }
+
+  Point2d pos(a->PopPoint2d());
+  launcher->ExplosionFromNetwork(pos);
+}
+
 static void Action_Weapon_Supertux (Action *a)
 {
   TuxLauncher* launcher = dynamic_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
@@ -1057,6 +1070,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GNU, "WEAPON_gnu", &Action_Weapon_Gnu);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_POLECAT, "WEAPON_polecat", &Action_Weapon_Polecat);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
 
   // Bonus box
