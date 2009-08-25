@@ -661,7 +661,7 @@ void SendActiveCharacterInfo(bool can_be_dropped)
 {
   uint current_time = Time::GetInstance()->Read();
 
-  if (!can_be_dropped || last_time + 50 < Time::GetInstance()->Read()) {
+  if (!can_be_dropped || last_time + 100 < Time::GetInstance()->Read()) {
     last_time = current_time;
     SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
   }
