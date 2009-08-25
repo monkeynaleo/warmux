@@ -700,19 +700,6 @@ static void Action_Weapon_SetTimeout (Action *a)
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
-static void Action_Weapon_Supertux (Action *a)
-{
-  NET_ASSERT(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
-  {
-    return;
-  }
-  TuxLauncher* launcher = static_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
-
-  double angle = a->PopDouble();
-  Point2d pos(a->PopPoint2d());
-  launcher->RefreshFromNetwork(angle, pos);
-}
-
 static void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
@@ -771,6 +758,28 @@ static void Action_Weapon_Grapple (Action *a)
     break;
 
   default:
+    ASSERT(false);
+  }
+}
+
+static void Action_Weapon_Supertux (Action *a)
+{
+  TuxLauncher* launcher = dynamic_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(launcher != NULL)
+  {
+    return;
+  }
+
+  int subaction = a->PopInt();
+
+  if (subaction == 0) {
+    double angle = a->PopDouble();
+    Point2d pos(a->PopPoint2d());
+    launcher->RefreshFromNetwork(angle, pos);
+  } else if (subaction == 1) {
+    Point2d pos(a->PopPoint2d());
+    launcher->ExplosionFromNetwork(pos);
+  } else {
     ASSERT(false);
   }
 }

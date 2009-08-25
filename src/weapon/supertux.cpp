@@ -124,6 +124,7 @@ void SuperTux::Refresh()
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
     Action a(Action::ACTION_WEAPON_SUPERTUX);
+    a.Push(0); // to ask for a position refresh
     a.Push(angle_rad);
     a.Push(GetPos());
     Network::GetInstance()->SendActionToAll(a);
@@ -268,6 +269,36 @@ void TuxLauncher::SignalEndOfProjectile()
   current_tux = NULL;
   tux_death_time = Time::GetInstance()->Read();
 }
+
+void TuxLauncher::HandleKeyPressed_Shoot(bool shift)
+{
+  if (current_tux || tux_death_time)
+    return;
+
+  Weapon::HandleKeyPressed_Shoot(shift);
+}
+
+void TuxLauncher::HandleKeyRefreshed_Shoot(bool shift)
+{
+  if (current_tux || tux_death_time)
+    return;
+
+  Weapon::HandleKeyRefreshed_Shoot(shift);
+}
+
+void TuxLauncher::HandleKeyReleased_Shoot(bool shift)
+{
+  if (current_tux) {
+    Action* a = new Action(Action::ACTION_WEAPON_SUPERTUX);
+    a->Push(1); // to ask for an explosion
+    a->Push(current_tux->GetPos());
+    ActionHandler::GetInstance()->NewAction(a);
+    return;
+  }
+
+  Weapon::HandleKeyReleased_Shoot(shift);
+}
+
 
 // Move right
 void TuxLauncher::HandleKeyPressed_MoveRight(bool shift)
@@ -421,6 +452,15 @@ void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
   current_tux->SetAngle(angle);
   current_tux->SetPhysXY(pos);
   current_tux->SetSpeedXY(Point2d(0,0));
+}
+
+void TuxLauncher::ExplosionFromNetwork(Point2d tux_pos)
+{
+  if (!current_tux)
+    return;
+
+  current_tux->SetPhysXY(tux_pos);
+  current_tux->Explosion();
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()
