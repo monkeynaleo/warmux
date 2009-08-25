@@ -35,10 +35,13 @@ public:
   double m_wind_factor;
 
   // Air resistance factor. 1 = normal air resistance.
-  double m_air_resist_factor ;
+  double m_air_resist_factor;
+
+  // Water resistance factor. Related to air_resist_factor.
+  double m_water_resist_factor;
 
   // Define how the object is affected by gravity.
-  double m_gravity_factor ;
+  double m_gravity_factor;
 
   // Tell if it's a rebounding object...
   bool  m_rebounding;
