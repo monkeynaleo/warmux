@@ -19,15 +19,11 @@
  * Weapon gnu : a gnu jump in (more or less) random directions and explodes
  *****************************************************************************/
 
-#include "weapon/explosion.h"
-#include "weapon/gnu.h"
-#include "weapon/weapon_cfg.h"
-
-#include <sstream>
 #include "character/character.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/randomsync.h"
@@ -36,24 +32,28 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "weapon/explosion.h"
+#include "weapon/gnu.h"
+#include "weapon/weapon_cfg.h"
 
 const uint TIME_BETWEEN_REBOUND = 600;
 
 class Gnu : public WeaponProjectile
 {
- private:
+private:
   int m_sens;
   int save_x, save_y;
   uint last_rebound_time;
- protected:
+protected:
   void SignalOutOfMap();
 public:
   Gnu(ExplosiveWeaponConfig& cfg,
       WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
-};
 
+  virtual void Explosion();
+};
 
 Gnu::Gnu(ExplosiveWeaponConfig& cfg,
          WeaponLauncher * p_launcher) :
@@ -138,6 +138,11 @@ void Gnu::Refresh()
   image->Update();
 }
 
+void Gnu::Explosion()
+{
+  WeaponProjectile::Explosion();
+}
+
 void Gnu::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The Gnu left the battlefield before exploding!"));
@@ -147,12 +152,17 @@ void Gnu::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() :
-  WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+  WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  current_gnu(NULL),
+  gnu_death_time(0)
 {
   UpdateTranslationStrings();
 
   m_category = SPECIAL;
   ReloadLauncher();
+
+  // unit will be used when the gnu disappears
+  use_unit_on_first_shoot = false;
 }
 
 void GnuLauncher::UpdateTranslationStrings()
@@ -160,6 +170,86 @@ void GnuLauncher::UpdateTranslationStrings()
   m_name = _("Gnu Launcher");
   /* TODO: FILL IT */
   /* m_help = _(""); */
+}
+
+bool GnuLauncher::p_Shoot()
+{
+  if (current_gnu != NULL)
+    return false;
+
+  current_gnu = static_cast<Gnu *>(projectile);
+  gnu_death_time = 0;
+  bool r = WeaponLauncher::p_Shoot();
+
+  return r;
+}
+
+void GnuLauncher::Refresh()
+{
+  if (current_gnu != NULL)
+    return;
+
+  if (gnu_death_time != 0
+      && gnu_death_time + 2000 < Time::GetInstance()->Read()) {
+
+    fprintf(stderr, "%s:%d\n", __PRETTY_FUNCTION__, __LINE__);
+
+    UseAmmoUnit();
+    gnu_death_time = 0;
+  }
+}
+
+bool GnuLauncher::IsInUse() const
+{
+  return (current_gnu || gnu_death_time);
+}
+
+void GnuLauncher::SignalEndOfProjectile()
+{
+  if (current_gnu == NULL)
+    return;
+
+  current_gnu = NULL;
+  gnu_death_time = Time::GetInstance()->Read();
+
+  fprintf(stderr, "%s:%d\n", __PRETTY_FUNCTION__, __LINE__);
+}
+
+void GnuLauncher::HandleKeyPressed_Shoot(bool shift)
+{
+  if (current_gnu || gnu_death_time)
+    return;
+
+  Weapon::HandleKeyPressed_Shoot(shift);
+}
+
+void GnuLauncher::HandleKeyRefreshed_Shoot(bool shift)
+{
+  if (current_gnu || gnu_death_time)
+    return;
+
+  Weapon::HandleKeyRefreshed_Shoot(shift);
+}
+
+void GnuLauncher::HandleKeyReleased_Shoot(bool shift)
+{
+  if (current_gnu) {
+    Action* a = new Action(Action::ACTION_WEAPON_GNU);
+    a->Push(current_gnu->GetPos());
+    ActionHandler::GetInstance()->NewAction(a);
+    return;
+  }
+
+  Weapon::HandleKeyReleased_Shoot(shift);
+}
+
+void GnuLauncher::ExplosionFromNetwork(Point2d gnu_pos)
+{
+  if (!current_gnu)
+    return;
+
+  current_gnu->SetPhysXY(gnu_pos);
+  current_gnu->Explosion();
 }
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()

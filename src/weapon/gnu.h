@@ -24,15 +24,36 @@
 
 #include "weapon/weapon_launcher.h"
 
+class Gnu;
+
 // The GNU
 class GnuLauncher : public WeaponLauncher
 {
+private:
+  Gnu *current_gnu;
+  uint gnu_death_time;
 public:
   GnuLauncher();
 
+  virtual void SignalEndOfProjectile();
+  virtual void SignalProjectileCollision() { };
+  virtual void SignalProjectileDrowning() { };
+
+  virtual bool IsInUse() const;
+
+  // Key Shoot management
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
+
+  void ExplosionFromNetwork(Point2d gnu_pos);
+
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
+
 protected:
+  virtual bool p_Shoot();
+  virtual void Refresh();
   WeaponProjectile * GetProjectileInstance();
 };
 
