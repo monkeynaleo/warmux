@@ -174,7 +174,7 @@ void GnuLauncher::UpdateTranslationStrings()
 
 bool GnuLauncher::p_Shoot()
 {
-  if (current_gnu != NULL)
+  if (current_gnu || gnu_death_time)
     return false;
 
   current_gnu = static_cast<Gnu *>(projectile);
@@ -186,11 +186,10 @@ bool GnuLauncher::p_Shoot()
 
 void GnuLauncher::Refresh()
 {
-  if (current_gnu != NULL)
+  if (current_gnu)
     return;
 
-  if (gnu_death_time != 0
-      && gnu_death_time + 2000 < Time::GetInstance()->Read()) {
+  if (gnu_death_time && gnu_death_time + 2000 < Time::GetInstance()->Read()) {
 
     UseAmmoUnit();
     gnu_death_time = 0;
@@ -204,7 +203,7 @@ bool GnuLauncher::IsInUse() const
 
 void GnuLauncher::SignalEndOfProjectile()
 {
-  if (current_gnu == NULL)
+  if (!current_gnu)
     return;
 
   current_gnu = NULL;
@@ -234,9 +233,8 @@ void GnuLauncher::HandleKeyReleased_Shoot(bool shift)
     a->Push(current_gnu->GetPos());
     ActionHandler::GetInstance()->NewAction(a);
     return;
-  }
-
-  Weapon::HandleKeyReleased_Shoot(shift);
+  } else if (!gnu_death_time)
+    Weapon::HandleKeyReleased_Shoot(shift);
 }
 
 void GnuLauncher::ExplosionFromNetwork(Point2d gnu_pos)
