@@ -234,7 +234,7 @@ WeaponProjectile * TuxLauncher::GetProjectileInstance()
 
 bool TuxLauncher::p_Shoot ()
 {
-  if (current_tux != NULL)
+  if (current_tux || tux_death_time)
     return false;
 
   current_tux = static_cast<SuperTux *>(projectile);
@@ -246,11 +246,10 @@ bool TuxLauncher::p_Shoot ()
 
 void TuxLauncher::Refresh()
 {
-  if (current_tux != NULL)
+  if (current_tux)
     return;
 
-  if (tux_death_time != 0
-      && tux_death_time + 2000 < Time::GetInstance()->Read()) {
+  if (tux_death_time && tux_death_time + 2000 < Time::GetInstance()->Read()) {
     UseAmmoUnit();
     tux_death_time = 0;
   }
@@ -263,7 +262,7 @@ bool TuxLauncher::IsInUse() const
 
 void TuxLauncher::SignalEndOfProjectile()
 {
-  if (current_tux == NULL)
+  if (!current_tux)
     return;
 
   current_tux = NULL;
@@ -294,145 +293,143 @@ void TuxLauncher::HandleKeyReleased_Shoot(bool shift)
     a->Push(current_tux->GetPos());
     ActionHandler::GetInstance()->NewAction(a);
     return;
-  }
-
-  Weapon::HandleKeyReleased_Shoot(shift);
+  } else if (!tux_death_time)
+    Weapon::HandleKeyReleased_Shoot(shift);
 }
-
 
 // Move right
 void TuxLauncher::HandleKeyPressed_MoveRight(bool shift)
 {
-  if (current_tux != NULL)
+  if (current_tux)
     current_tux->turn_right();
-  else if (tux_death_time == 0)
+  else if (!tux_death_time)
     ActiveCharacter().HandleKeyPressed_MoveRight(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_MoveRight(bool shift)
 {
-  if (current_tux != NULL)
+  if (current_tux)
     current_tux->turn_right();
-  else if (tux_death_time == 0)
+  else if (!tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_MoveRight(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_MoveRight(shift);
 }
 
 // Move left
 void TuxLauncher::HandleKeyPressed_MoveLeft(bool shift)
 {
-  if (current_tux != NULL)
+  if (current_tux)
     current_tux->turn_left();
-  else if (tux_death_time == 0)
+  else if (!tux_death_time)
     ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool shift)
 {
-  if (current_tux != NULL)
+  if (current_tux)
     current_tux->turn_left();
-  else if (tux_death_time == 0)
+  else if (!tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_MoveLeft(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
 void TuxLauncher::HandleKeyPressed_Up(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_Up(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_Up(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_Up(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_Up(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_Up(shift);
 }
 
 void TuxLauncher::HandleKeyPressed_Down(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_Down(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_Down(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_Down(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_Down(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_Down(shift);
 }
 
 void TuxLauncher::HandleKeyPressed_Jump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_Jump(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_Jump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_Jump(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_Jump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_Jump(shift);
 }
 
 void TuxLauncher::HandleKeyPressed_HighJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_HighJump(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_HighJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_HighJump(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_HighJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_HighJump(shift);
 }
 
 void TuxLauncher::HandleKeyPressed_BackJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_BackJump(shift);
 }
 
 void TuxLauncher::HandleKeyRefreshed_BackJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_BackJump(shift);
 }
 
 void TuxLauncher::HandleKeyReleased_BackJump(bool shift)
 {
-  if (current_tux == NULL && tux_death_time == 0)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_BackJump(shift);
 }
 
@@ -447,7 +444,7 @@ std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_cou
 void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
 {
   // Fix bug #9815 : Crash when changing tux angle in network mode.
-  if(current_tux == NULL)
+  if (!current_tux)
     return;
   current_tux->SetAngle(angle);
   current_tux->SetPhysXY(pos);

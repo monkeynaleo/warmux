@@ -198,7 +198,7 @@ void PolecatLauncher::UpdateTranslationStrings()
 
 bool PolecatLauncher::p_Shoot()
 {
-  if (current_polecat != NULL)
+  if (current_polecat || polecat_death_time)
     return false;
 
   current_polecat = static_cast<Polecat *>(projectile);
@@ -210,11 +210,10 @@ bool PolecatLauncher::p_Shoot()
 
 void PolecatLauncher::Refresh()
 {
-  if (current_polecat != NULL)
+  if (current_polecat)
     return;
 
-  if (polecat_death_time != 0
-      && polecat_death_time + 2000 < Time::GetInstance()->Read()) {
+  if (polecat_death_time && polecat_death_time + 2000 < Time::GetInstance()->Read()) {
 
     UseAmmoUnit();
     polecat_death_time = 0;
@@ -228,7 +227,7 @@ bool PolecatLauncher::IsInUse() const
 
 void PolecatLauncher::SignalEndOfProjectile()
 {
-  if (current_polecat == NULL)
+  if (!current_polecat)
     return;
 
   current_polecat = NULL;
@@ -258,9 +257,8 @@ void PolecatLauncher::HandleKeyReleased_Shoot(bool shift)
     a->Push(current_polecat->GetPos());
     ActionHandler::GetInstance()->NewAction(a);
     return;
-  }
-
-  Weapon::HandleKeyReleased_Shoot(shift);
+  } else if (!polecat_death_time)
+    Weapon::HandleKeyReleased_Shoot(shift);
 }
 
 void PolecatLauncher::ExplosionFromNetwork(Point2d polecat_pos)
