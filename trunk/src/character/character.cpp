@@ -82,6 +82,9 @@ const uint HAUT_ENERGIE = 6;
 // Delta angle used to move the crosshair
 const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
 
+// Pause between changing direction
+const uint PAUSE_CHG_DIRECTION = 80; // ms
+
 /* FIXME This methode is really strange, all this should probably be done in
  * constructor of Body...*/
 void Character::SetBody(Body* char_body)
@@ -634,9 +637,9 @@ void Character::BeginMovementRL(uint pause, bool slowly)
 
   walking_time = Time::GetInstance()->Read();
   UpdateLastMovingTime();
-  if (!slowly) {
+  if (!slowly)
     SetMovement("walk");
-  }
+
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
   rl_motion_pause = Time::GetInstance()->Read()+pause;
@@ -651,6 +654,65 @@ bool Character::CanStillMoveRL(uint pause)
     return true;
   }
   return false;
+}
+
+void Character::StartWalk(bool slowly)
+{
+  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, slowly);
+  body->StartWalk();
+}
+
+void Character::StopWalk()
+{
+  body->StopWalk();
+}
+
+bool Character::IsWalking() const
+{
+  return body->IsWalking();
+}
+
+void Character::MoveRight(bool slowly)
+{
+  // character is ready to move ?
+  if (!CanMoveRL()) return;
+
+  if (!IsWalking()) StartWalk(slowly);
+
+  if (GetDirection() == DIRECTION_RIGHT) {
+    MoveCharacter(*this, slowly);
+  } else {
+    SetDirection(DIRECTION_RIGHT);
+    BeginMovementRL(PAUSE_CHG_DIRECTION, slowly);
+  }
+
+  ASSERT(&ActiveCharacter() == this);
+
+  //Refresh skin position across network
+  if (!Network::GetInstance()->IsLocal()
+      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    SendActiveCharacterInfo();
+}
+
+void Character::MoveLeft(bool slowly)
+{
+  if (!CanMoveRL()) return;
+
+  if (!IsWalking()) StartWalk(slowly);
+
+  if (GetDirection() == DIRECTION_LEFT) {
+    MoveCharacter(*this, slowly);
+  } else {
+    SetDirection(DIRECTION_LEFT);
+    BeginMovementRL(PAUSE_CHG_DIRECTION, slowly);
+  }
+
+  ASSERT(&ActiveCharacter() == this);
+
+  //Refresh skin position across network
+  if (!Network::GetInstance()->IsLocal()
+      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    SendActiveCharacterInfo();
 }
 
 // Signal the end of a fall
@@ -1037,25 +1099,24 @@ void Character::SetCustomName(const std::string name)
 // #################### MOVE_RIGHT
 void Character::HandleKeyPressed_MoveRight(bool shift)
 {
-  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, shift);
-  body->StartWalk();
+  StartWalk(shift);
 
   HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveRight(bool shift) const
+void Character::HandleKeyRefreshed_MoveRight(bool shift)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
-  if (ActiveCharacter().IsImmobile())
-    MoveActiveCharacterRight(shift);
+  if (IsImmobile())
+    MoveRight(shift);
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
 {
-  body->StopWalk();
+  StopWalk();
 
   ActiveTeam().crosshair.Show();
 
@@ -1065,20 +1126,19 @@ void Character::HandleKeyReleased_MoveRight(bool)
 // #################### MOVE_LEFT
 void Character::HandleKeyPressed_MoveLeft(bool shift)
 {
-  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, shift);
-  body->StartWalk();
+  StartWalk(shift);
 
   HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Character::HandleKeyRefreshed_MoveLeft(bool shift) const
+void Character::HandleKeyRefreshed_MoveLeft(bool shift)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
-  if (ActiveCharacter().IsImmobile())
-    MoveActiveCharacterLeft(shift);
+  if (IsImmobile())
+    MoveLeft(shift);
 }
 
 void Character::HandleKeyReleased_MoveLeft(bool)
@@ -1097,7 +1157,7 @@ void Character::HandleKeyRefreshed_Up(bool shift)
 
   ActiveTeam().crosshair.Show();
 
-  if (ActiveCharacter().IsImmobile())
+  if (IsImmobile())
     {
       UpdateLastMovingTime();
       CharacterCursor::GetInstance()->Hide();
@@ -1113,7 +1173,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 
   ActiveTeam().crosshair.Show();
 
-  if(ActiveCharacter().IsImmobile())
+  if (IsImmobile())
     {
       UpdateLastMovingTime();
       CharacterCursor::GetInstance()->Hide();
@@ -1131,7 +1191,7 @@ void Character::HandleKeyPressed_Jump(bool)
 
   ActiveTeam().crosshair.Hide();
 
-  if (ActiveCharacter().IsImmobile()) {
+  if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_JUMP);
     SendActiveCharacterAction(a);
     Jump();
@@ -1145,7 +1205,7 @@ void Character::HandleKeyPressed_HighJump(bool)
 
   ActiveTeam().crosshair.Hide();
 
-  if (ActiveCharacter().IsImmobile()) {
+  if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
     SendActiveCharacterAction(a);
     HighJump();
@@ -1159,7 +1219,7 @@ void Character::HandleKeyPressed_BackJump(bool)
 
   ActiveTeam().crosshair.Hide();
 
-  if (ActiveCharacter().IsImmobile()) {
+  if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_BACK_JUMP);
     SendActiveCharacterAction(a);
     BackJump();

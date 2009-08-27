@@ -19,25 +19,21 @@
  * Mouvement right/left for a character.
  *****************************************************************************/
 
-#include "character/move.h"
-//#include <math.h>
+#include <WORMUX_debug.h>
 #include "character/character.h"
+#include "character/move.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
 
 // Max climbing height walking
 const int MAX_CLIMBING_HEIGHT=30;
 
 // Max height for which we do not need to call the Physical Engine with gravity features
 const int MAX_FALLING_HEIGHT=20;
-
-// Pause between changing direction
-const uint PAUSE_CHG_DIRECTION=80; // ms
 
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
@@ -88,7 +84,7 @@ void MoveCharacter(Character &character, bool slowly)
   if (slowly)
     walking_pause *= 10;
   else
-    ActiveCharacter().SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
+    character.SetMovement("walk"); // avoid sliding effect when not right or left key is released while releasing shift
 
   // If character moves out of the world, no need to go further: it is dead
   if (character.GetDirection() == DIRECTION_LEFT)
@@ -118,41 +114,3 @@ void MoveCharacter(Character &character, bool slowly)
     character.UpdatePosition();
   }
 }
-
-// Move the active character to the left
-void MoveActiveCharacterLeft(bool shift){
-  // character is ready to move ?
-  if (!ActiveCharacter().CanMoveRL()) return;
-
-  bool move = (ActiveCharacter().GetDirection() == DIRECTION_LEFT);
-  if (move) {
-    MoveCharacter(ActiveCharacter(), shift);
-  } else {
-    ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
-  }
-
-  //Refresh skin position across network
-  if (!Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendActiveCharacterInfo();
-}
-
-// Move the active character to the right
-void MoveActiveCharacterRight(bool shift)
-{
-  // character is ready to move ?
-  if (!ActiveCharacter().CanMoveRL()) return;
-
-  bool move = (ActiveCharacter().GetDirection() == DIRECTION_RIGHT);
-  if (move) {
-    MoveCharacter(ActiveCharacter(), shift);
-  } else {
-    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION, shift);
-  }
-
-  //Refresh skin position across network
-  if (!Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
-    SendActiveCharacterInfo();
-}
-
