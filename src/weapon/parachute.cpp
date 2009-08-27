@@ -130,8 +130,8 @@ void Parachute::Refresh()
       }
     }
   } else { // We are on the ground
-    ActiveCharacter().SetMovement("walk");
-    if(open) { // The parachute is opened
+    if (open) { // The parachute is opened
+      ActiveCharacter().SetMovement("walk");
       if (!closing) { // We have just hit the ground. Start closing animation
         img->animation.SetPlayBackward(true);
         img->animation.SetShowOnFinish(SpriteAnimation::show_blank);
