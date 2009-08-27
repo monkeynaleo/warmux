@@ -105,6 +105,10 @@ private:
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
 
+  void StartWalk(bool slowly);
+  void StopWalk();
+  bool IsWalking() const;
+
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -180,6 +184,8 @@ public:
   // Can we move (check a timeout)
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
+  void MoveRight(bool slowly);
+  void MoveLeft(bool slowly);
 
   // Jumps
   void Jump(double strength, double angle);
@@ -224,11 +230,11 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool shift);
-  void HandleKeyRefreshed_MoveRight(bool shift) const;
+  void HandleKeyRefreshed_MoveRight(bool shift);
   void HandleKeyReleased_MoveRight(bool shift);
 
   void HandleKeyPressed_MoveLeft(bool shift);
-  void HandleKeyRefreshed_MoveLeft(bool shift) const;
+  void HandleKeyRefreshed_MoveLeft(bool shift);
   void HandleKeyReleased_MoveLeft(bool shift);
 
   void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };

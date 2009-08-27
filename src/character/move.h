@@ -33,8 +33,4 @@ bool ComputeHeightMovement (Character &character, int &height,
 
 void MoveCharacter (Character &character, bool slowly = false);
 
-// Move the active character to the left/right
-void MoveActiveCharacterRight(bool shift);
-void MoveActiveCharacterLeft(bool shift);
-
 #endif
