@@ -112,7 +112,7 @@ public:
   double GetMaxX() const;
   double GetMaxY() const;
 
-
+  Point2d GetCenterOffset();
 
   // Update position (and state) with current time
   void UpdatePosition();

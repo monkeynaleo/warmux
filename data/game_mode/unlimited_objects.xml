@@ -393,11 +393,12 @@
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.7</rebound_factor>
+	<center_position x="8" y="8" />
     <rotating>true</rotating>
     <shape name="grenade-main" type="circle">
       <mass>30.0</mass>
       <position x="8" y="8" />
-      <radius>6</radius>
+      <radius>4</radius>
 	  <friction>0.8</friction>
     </shape>
   </grenade>

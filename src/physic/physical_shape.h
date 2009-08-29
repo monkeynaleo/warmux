@@ -97,7 +97,7 @@ public:
   // TODO: REMOVE IT IN NEAR FUTURE
   double GetMass() const;
 
-  static PhysicalShape* LoadFromXml(const xmlNode* root_shape);
+  static PhysicalShape* LoadFromXml(const xmlNode* root_shape, Point2d offset);
 
 #ifdef DEBUG
   virtual void DrawBorder(const Color &color) const = 0;

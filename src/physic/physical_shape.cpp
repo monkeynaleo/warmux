@@ -177,7 +177,7 @@ void PhysicalShape::SetAirFriction(double air_friction)
 
 // =============================================================================
 // Static method
-PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
+PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape, Point2d offset)
 {
   bool r;
   const xmlNode* elem = NULL;
@@ -308,10 +308,9 @@ PhysicalShape * PhysicalShape::LoadFromXml(const xmlNode* root_shape)
     shape = polygon;
   }
 
-
   shape->SetMass(mass);
   shape->SetName(shape_name);
-  shape->SetPosition(Point2d(double(pos_x), double(pos_y)));
+  shape->SetPosition(Point2d(double(pos_x), double(pos_y)) - offset);
   shape->SetAirFriction(air_friction);
   shape->SetForceApplicationPoint(Point2d(force_x, force_y));
   shape->SetFriction(friction);

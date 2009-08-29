@@ -125,7 +125,7 @@ void GameObj::InitShape(const std::string &xml_config)
   xmlNodeArray::const_iterator shape_it;
 
   for (shape_it = shapes.begin(); shape_it != shapes.end(); shape_it++) {
-    PhysicalShape* shape = PhysicalShape::LoadFromXml(*shape_it);
+    PhysicalShape* shape = PhysicalShape::LoadFromXml(*shape_it,m_cfg.m_center_position);
     ASSERT(shape);
 /*
     b2FilterData filter_data;
@@ -304,6 +304,12 @@ const Rectanglei GameObj::GetRectI() const
     out.SetSize(rect.GetSize());
     return out;
 }
+
+Point2d GameObj::GetCenterOffset()
+{
+  return m_cfg.m_center_position;
+}
+
 void GameObj::SetEnergy(int energy){
     m_energy = energy;
 }

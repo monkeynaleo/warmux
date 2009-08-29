@@ -49,6 +49,10 @@ public:
   // Object try to align with movement direction
   double m_auto_align_force;
 
+  // Position of mass and rotation center
+  Point2d  m_center_position;
+
+
   PhysicalEngine::ObjectType m_type;
 
   ObjectConfig();

@@ -38,6 +38,7 @@ ObjectConfig::ObjectConfig()
   m_gravity_factor = 1.0;
   m_auto_align_force = 0.0;
   m_rotating = false;
+  m_center_position = Point2d(0,0);
   m_type = PhysicalEngine::RIGID_BODY;
 }
 
@@ -72,4 +73,21 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   XmlReader::ReadDouble(elem, "rebound_factor", m_rebound_factor);
   XmlReader::ReadBool(elem, "rotating", m_rotating);
   XmlReader::ReadDouble(elem, "auto_align_force", m_auto_align_force);
+
+
+  elem = XmlReader::GetMarker(elem, "center_position");
+  if(elem){
+    uint pos_x = 0;
+    uint pos_y = 0;
+    bool r;
+    r = XmlReader::ReadUintAttr(elem, "x", pos_x);
+    if (r)
+     r = XmlReader::ReadUintAttr(elem, "y", pos_y);
+
+    if(r)
+    {
+      m_center_position = Point2d(pos_x,pos_y);
+    }
+  }
+
 }
