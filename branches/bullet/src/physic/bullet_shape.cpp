@@ -110,10 +110,9 @@ PhysicalShape *BulletShape::GetPublicShape(){
 
 void BulletShape::AddContact(BulletContact *contact)
 {
-  //std::cout<<"AddContact "<<contact<<std::endl;
   m_contact_list.push_back(contact);
   m_contact_count++;
-  }
+}
 
 void BulletShape::RemoveContact(BulletContact *contact)
 {
@@ -390,7 +389,8 @@ void BulletPolygon::DrawBorder(const Color& color) const
     btCylinderShapeZ * new_shape = new btCylinderShapeZ(btVector3(m_radius/GetScale(),m_radius/GetScale(),100/GetScale()));
 
     //new_shape->setLocalScaling(btVector3(m_radius,m_radius,10));
-
+    btVector3 localInertia(0,0,0);
+    new_shape->calculateLocalInertia(m_mass,localInertia);
 
    if(m_native_shape)
    {
@@ -407,11 +407,18 @@ void BulletCircle::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
 
+    GetMainWindow().CircleColor(
+        GetPosition().x* cos(m_bullet_parent->GetAngle()) + GetPosition().y* sin(m_bullet_parent->GetAngle())+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,
+        GetPosition().x* sin(m_bullet_parent->GetAngle()) + GetPosition().y* cos(m_bullet_parent->GetAngle())+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+        m_radius,
+        color);
 
 
-    GetMainWindow().CircleColor(GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_radius,color);
+    GetMainWindow().LineColor(GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, GetPosition().x+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x + m_radius * cos(m_bullet_parent->GetAngle()),GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y, GetPosition().y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y + m_radius * sin(m_bullet_parent->GetAngle()),color);
 
     GetMainWindow().PointColor(m_parent->GetPosition() - Camera::GetInstance()->GetPosition(),Color(0,0,0,255));
+
+
 
     for(uint i = 0 ; i< m_contact_list.size() ; i++){
       GetMainWindow().PointColor(m_contact_list[i]->GetPositionA() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));

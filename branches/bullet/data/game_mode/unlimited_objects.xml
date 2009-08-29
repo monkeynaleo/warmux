@@ -398,6 +398,7 @@
       <mass>30.0</mass>
       <position x="8" y="8" />
       <radius>6</radius>
+	  <friction>0.8</friction>
     </shape>
   </grenade>
 

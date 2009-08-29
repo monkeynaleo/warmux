@@ -63,15 +63,17 @@ m_enable(false)
     m_body = new btRigidBody(rbInfo);
     m_body->setActivationState(ISLAND_SLEEPING);
     m_body->setLinearFactor(btVector3(1,1,0));
-    m_body->setAngularFactor(btVector3(0,0,0));
-    m_body->setDamping(0.1,0.5);
+    m_body->setAngularFactor(btVector3(0,0,1));
+    m_body->setDamping(0.1,0.01);
     m_body->setRestitution(0.1);
+    m_body->setFriction(0.8);
 
     m_body->setCollisionFlags(m_body->getCollisionFlags() |
         btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
     m_body->setUserPointer(this);
     m_in_world = false;
+
    // m_root_shape->addChildShape(startTransform,colShape);
 
 }
@@ -117,10 +119,6 @@ BulletObj::~BulletObj()
  
   Point2d BulletObj::GetPosition() const
   {
-    /*btTransform current_transform;
-    m_body->getMotionState()->getWorldTransform(current_transform);
-    ASSERT(current_transform.getOrigin().getZ() == 0);
-    return Point2d(current_transform.getOrigin().getX()*GetScale(),current_transform.getOrigin().getY()*GetScale());*/
     btTransform current_transform = m_body->getWorldTransform();
     return Point2d(current_transform.getOrigin().getX()*GetScale(),current_transform.getOrigin().getY()*GetScale());
 
@@ -136,9 +134,12 @@ BulletObj::~BulletObj()
   }
 
   double BulletObj::GetAngle() const{
-    btTransform current_transform;
-    m_body->getMotionState()->getWorldTransform(current_transform);
-    return current_transform.getRotation().getZ();
+    const btQuaternion &quat = m_body->getWorldTransform().getRotation();
+    double w=quat.getW();   double x=quat.getX();   double y=quat.getY();   double z=quat.getZ();
+    double sqw = w*w; double sqx = x*x; double sqy = y*y; double sqz = z*z;
+
+    return (atan2(2.0 * (x*y + z*w),(sqx - sqy - sqz + sqw)));
+
   }
 
   //State
@@ -155,12 +156,12 @@ BulletObj::~BulletObj()
     return m_body->isStaticObject();
   }
 
-  void BulletObj::SetRotationFixed(bool rotating)
+  void BulletObj::SetRotationFixed(bool not_rotating)
   {
-    if(rotating){
+    if(not_rotating){
       m_body->setAngularFactor(btVector3(0,0,0));
     }else{
-      m_body->setAngularFactor(btVector3(0,0,0));
+      m_body->setAngularFactor(btVector3(0,0,1));
     }
   }
   void BulletObj::StopMovement(){
