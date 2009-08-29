@@ -167,10 +167,21 @@ BulletObj::~BulletObj()
   void BulletObj::StopMovement(){
     SetSpeedXY(Point2d(0,0));
   }
-  void BulletObj::SetFast(bool /*is_fast*/){
+  void BulletObj::SetFast(bool is_fast){
+    if(is_fast){
+        m_body->setCcdMotionThreshold(0.001);
+        m_body->setCcdSweptSphereRadius(0.002);
+
+    }else{
+        m_body->setCcdMotionThreshold(0);
+        m_body->setCcdSweptSphereRadius(0);
+
+    }
 
   }
-  bool BulletObj::IsFast() { return false;}
+  bool BulletObj::IsFast() {
+    return m_body->getCcdMotionThreshold() !=0;
+  }
 
  // Speed
   void BulletObj::SetSpeedXY(Point2d vector)

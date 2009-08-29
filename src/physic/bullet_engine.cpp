@@ -111,6 +111,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
 
     m_world->setGravity(btVector3(0, 10, 0));
 
+
     gContactAddedCallback = BulletEngine::ContactAddedCallback;
     gContactProcessedCallback = BulletEngine::ContactProcessedCallback;
     gContactDestroyedCallback= BulletEngine::ContactDestroyedCallback;
@@ -212,7 +213,7 @@ void BulletEngine::Step()
 
  MSG_DEBUG("physical.step", "Engine step");
   m_is_in_step = true;
-  m_world->stepSimulation(timeStep);
+  m_world->stepSimulation(timeStep,20,btScalar(1.)/btScalar(180.));
   m_is_in_step = false;
   m_last_step_time = m_last_step_time +lround(timeStep);
 
