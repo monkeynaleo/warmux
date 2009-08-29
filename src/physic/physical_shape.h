@@ -42,7 +42,7 @@ protected:
   double m_friction;
   double m_air_friction;
   double m_restitution;
-  double m_density;
+  double m_mass;
   std::string m_name;
   Point2d PosWithRotation(const Point2d& point) const;
 

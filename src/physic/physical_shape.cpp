@@ -39,7 +39,7 @@ PhysicalShape::PhysicalShape() :
   m_friction(0.8f),
   m_air_friction(0),
   m_restitution(0.1f),
-  m_density(30),
+  m_mass(30),
   m_name("")
 {
 }
@@ -68,7 +68,7 @@ PhysicalEntity *PhysicalShape::GetParent()
 void PhysicalShape::SetMass(double mass)
 {
   // Compute density from mass and area
-  m_density = mass / Area();
+  m_mass = mass;
 }
 
 void PhysicalShape::SetFriction(double friction)
@@ -115,7 +115,7 @@ const std::string &PhysicalShape::GetName() const
 // TODO: REMOVE IT IN NEAR FUTURE
 double PhysicalShape::GetMass() const
 {
-  return m_density * Area();
+  return m_mass;
 }
 /*
 Point2d PhysicalShape::PosWithRotation(const b2Vec2& point) const

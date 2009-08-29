@@ -155,6 +155,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetRotationFixed(true);
 
   // Allow player to go outside of map by upper bound (bug #10420)
   m_allow_negative_y = true;
