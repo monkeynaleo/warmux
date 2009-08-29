@@ -312,7 +312,7 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>1000</blast_force>
-      <timeout>3</timeout>
+      <timeout>5</timeout>
       <allow_change_timeout>1</allow_change_timeout>
     </grenade>
 
