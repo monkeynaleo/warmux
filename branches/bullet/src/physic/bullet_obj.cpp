@@ -131,23 +131,10 @@ BulletObj::~BulletObj()
     rot.setEuler(0,0,angle_rad);
     current_transform.setRotation(rot);
     m_body->setWorldTransform(current_transform);
-
-
-
-/*
-    double c3 = cos(anlgle_rad / 2);
-    double s3 = sin(angle_rad / 2);
-
-    double w = sqrt(2 * (C3 + 1)) / 2;
-    double x = ( S3 ) / (2.0 * w);
-    double y = 0;
-    double  z = 0;
-    btTransform current_transform = m_body->getWorldTransform().getRotation().setW(w);
-    btTransform current_transform = m_body->getWorldTransform().getRotation().setW(w);*/
-
   }
 
-  double BulletObj::GetAngle() const{
+  double BulletObj::GetAngle() const
+  {
     const btQuaternion &quat = m_body->getWorldTransform().getRotation();
     double w=quat.getW();   double x=quat.getX();   double y=quat.getY();   double z=quat.getZ();
     double sqw = w*w; double sqx = x*x; double sqy = y*y; double sqz = z*z;
