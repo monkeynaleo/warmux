@@ -112,7 +112,6 @@ const std::string &PhysicalShape::GetName() const
   return m_name;
 }
 
-// TODO: REMOVE IT IN NEAR FUTURE
 double PhysicalShape::GetMass() const
 {
   return m_mass;

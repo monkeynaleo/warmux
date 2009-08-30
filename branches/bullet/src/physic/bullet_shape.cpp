@@ -340,31 +340,43 @@ void BulletPolygon::DrawBorder(const Color& color) const
 {
   ASSERT(m_parent);
 
+  std::vector<Point2d> rotated_point_list;
+  if(m_bullet_parent && m_bullet_parent->GetAngle() != 0){
+    for (uint i = 0; i < m_point_list.size(); i++) {
+      Point2d point;
+      point.x = (m_point_list[i].x+GetPosition().x)* cos(m_bullet_parent->GetAngle()) + (m_point_list[i].y+GetPosition().y)* sin(m_bullet_parent->GetAngle());
+      point.y = (m_point_list[i].y+GetPosition().y)* cos(m_bullet_parent->GetAngle()) - (m_point_list[i].x+GetPosition().x)* sin(m_bullet_parent->GetAngle());
+      rotated_point_list.push_back(point);
+    }
 
+  }else{
+    rotated_point_list = m_point_list;
+  }
 
 
   ASSERT(m_point_list.size() > 2);
 
 
-  int init_x = lround(m_point_list[0].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
-  int init_y = lround(m_point_list[0].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
+  int init_x = lround(rotated_point_list[0].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
+  int init_y = lround(rotated_point_list[0].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
   int prev_x = init_x;
   int prev_y = init_y;
   int x;
   int y;
 
-  for(uint i = 1; i < m_point_list.size();i++){
+  for(uint i = 1; i < rotated_point_list.size();i++){
 
-        x = lround(m_point_list[i].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
-        y =  lround(m_point_list[i].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
+        x = lround(rotated_point_list[i].x+m_parent->GetPosition().x- Camera::GetInstance()->GetPosition().x);
+        y =  lround(rotated_point_list[i].y+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y);
 
        GetMainWindow().LineColor(prev_x, x, prev_y, y, color);
        prev_x = x;
        prev_y = y;
   }
   GetMainWindow().LineColor(prev_x, init_x, prev_y, init_y, color);
-  GetMainWindow().LineColor(m_parent->GetPosition().x-1 - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x+1 - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
-  GetMainWindow().LineColor(m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x, m_parent->GetPosition().y-1 - Camera::GetInstance()->GetPosition().y,m_parent->GetPosition().y+1 - Camera::GetInstance()->GetPosition().y,Color(0,0,0,255));
+
+  //Draw origine point
+  GetMainWindow().PointColor(m_parent->GetPosition() - Camera::GetInstance()->GetPosition(),Color(0,0,0,255));
 
   for(uint i = 0 ; i< m_contact_list.size() ; i++){
         GetMainWindow().PointColor(m_contact_list[i]->GetPositionA() - Camera::GetInstance()->GetPosition(),Color(255,0,255,255));
@@ -409,7 +421,7 @@ void BulletCircle::DrawBorder(const Color& color) const
 
     GetMainWindow().CircleColor(
         GetPosition().x* cos(m_bullet_parent->GetAngle()) + GetPosition().y* sin(m_bullet_parent->GetAngle())+m_parent->GetPosition().x - Camera::GetInstance()->GetPosition().x,
-        GetPosition().x* sin(m_bullet_parent->GetAngle()) + GetPosition().y* cos(m_bullet_parent->GetAngle())+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
+         - GetPosition().x* sin(m_bullet_parent->GetAngle()) + GetPosition().y* cos(m_bullet_parent->GetAngle())+m_parent->GetPosition().y - Camera::GetInstance()->GetPosition().y,
         m_radius,
         color);
 

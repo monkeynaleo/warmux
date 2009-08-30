@@ -330,13 +330,14 @@
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
     <auto_align_force>0.1</auto_align_force>
+	<center_position x="22" y="6" />
     <shape name="rocket-main" type="polygon">
       <mass>20.0</mass>
       <position x="0" y="0" />
       <point x="1" y="4" />
       <point x="22" y="1" />
-      <point x="34" y="5" />
-      <point x="22" y="10" />
+      <point x="34" y="6" />
+      <point x="22" y="11" />
       <point x="1" y="8" />
     </shape>
   </rocket>

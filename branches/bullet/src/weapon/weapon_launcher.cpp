@@ -220,7 +220,7 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
-  image->SetRotation_rad( -GetAngle());
+  image->SetRotation_rad( - GetAngle());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -239,7 +239,7 @@ void WeaponProjectile::Draw()
   Point2d offset = GetCenterOffset();
   Point2d relative_position;
   relative_position.x = cos(angle) * offset.x + sin(angle) *offset.y;
-  relative_position.y = (cos(-angle) * offset.y + sin(-angle) *offset.x);
+  relative_position.y = (cos(angle) * offset.y - sin(angle) *offset.x);
   image->Draw(GetPosition() - relative_position);
 
   int tmp = GetTotalTimeout();
