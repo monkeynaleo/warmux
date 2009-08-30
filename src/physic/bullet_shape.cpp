@@ -345,7 +345,7 @@ void BulletPolygon::DrawBorder(const Color& color) const
     for (uint i = 0; i < m_point_list.size(); i++) {
       Point2d point;
       point.x = (m_point_list[i].x+GetPosition().x)* cos(m_bullet_parent->GetAngle()) + (m_point_list[i].y+GetPosition().y)* sin(m_bullet_parent->GetAngle());
-      point.y = (m_point_list[i].y+GetPosition().y)* cos(m_bullet_parent->GetAngle()) - (m_point_list[i].x+GetPosition().x)* sin(m_bullet_parent->GetAngle());
+      point.y = -( (m_point_list[i].y+GetPosition().y)* cos(m_bullet_parent->GetAngle()) - (m_point_list[i].x+GetPosition().x)* sin(m_bullet_parent->GetAngle()));
       rotated_point_list.push_back(point);
     }
 
