@@ -31,11 +31,14 @@
 
 // Forward declaration
 class Weapon;
+class WeaponsMenu;
 
 class WeaponMenuItem : public PolygonItem {
   WeaponMenuItem(const WeaponMenuItem&);
   const WeaponMenuItem& operator=(const WeaponMenuItem&);
   bool zoom;
+private:
+  WeaponsMenu *m_parent;
 
  public:
   Weapon* weapon;
@@ -51,12 +54,15 @@ class WeaponMenuItem : public PolygonItem {
   uint GetZoomTime() const { return zoom_time; };
   void SetZoomTime(uint time) { zoom_time = time; };
   Weapon * GetWeapon() const { return weapon; };
+  void SetParent(WeaponsMenu *);
 };
 
 class WeaponsMenu
 {
  public:
   static const int MAX_NUMBER_OF_WEAPON;
+  Sprite * cross;
+  Sprite * m_not_wet_available;
 
  private:
   Polygon * weapons_menu;
@@ -67,7 +73,6 @@ class WeaponsMenu
   AffineTransform2D shear;
   AffineTransform2D rotation;
   AffineTransform2D zoom;
-  Sprite * cross;
   bool show;
   uint motion_start_time;
   uint select_start_time;

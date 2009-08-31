@@ -81,6 +81,7 @@ private:
   bool                character_already_chosen;
 
   static uint         last_unique_id;
+  uint                m_current_turn;
 
   void Draw();        // Draw to screen
   void MessageLoading() const;
@@ -116,6 +117,7 @@ public:
   static std::string GetUniqueId();
   static void ResetUniqueIds();
   static bool IsRunning();
+  uint GetCurrentTurn();
 
   Chat                chatsession;
 
