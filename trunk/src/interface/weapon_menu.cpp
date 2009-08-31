@@ -23,6 +23,7 @@
 
 #include "game/config.h"
 #include "game/time.h"
+#include "game/game.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"
@@ -117,11 +118,24 @@ void WeaponMenuItem::Draw(Surface * dest)
   PolygonItem::Draw(dest);
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
+
   if(nb_bullets ==  INFINITE_AMMO) {
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
   } else if(nb_bullets == 0) {
-    tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
-    Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
+      if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
+        tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
+        m_parent->m_not_wet_available->Blit(*dest, tmp);
+
+        tmp.x += m_parent->m_not_wet_available->GetWidth();
+
+        std::ostringstream txt;
+        txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
+        txt << " ";
+        (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), c_red);
+      }  else{
+        tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
+        m_parent->cross->Blit(*dest, tmp);
+      }
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
@@ -129,7 +143,15 @@ void WeaponMenuItem::Draw(Surface * dest)
   }
 }
 
+void WeaponMenuItem::SetParent(WeaponsMenu *parent)
+{
+  m_parent = parent;
+}
+
+
 WeaponsMenu::WeaponsMenu():
+  cross(NULL),
+  m_not_wet_available(NULL),
   weapons_menu(NULL),
   tools_menu(NULL),
   current_overfly_item(NULL),
@@ -137,7 +159,7 @@ WeaponsMenu::WeaponsMenu():
   shear(),
   rotation(),
   zoom(),
-  cross(NULL),
+
   show(false),
   motion_start_time(0),
   icons_draw_time(ICONS_DRAW_TIME),
@@ -150,6 +172,8 @@ WeaponsMenu::WeaponsMenu():
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   cross = new Sprite(GetResourceManager().LoadImage(res, "interface/cross"));
+  m_not_wet_available = new Sprite(GetResourceManager().LoadImage(res, "interface/hourglass"));
+
   // Polygon Size
   Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
@@ -178,6 +202,8 @@ WeaponsMenu::~WeaponsMenu()
     delete help;
   if (cross)
     delete cross;
+  if (m_not_wet_available)
+    delete m_not_wet_available;
   if (nb_weapon_type)
     delete[] nb_weapon_type;
 }
@@ -193,10 +219,12 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
   if(num_sort < 6) {
     position = weapons_menu->GetMin() + Point2d(30 + nb_weapon_type[num_sort - 1] * 45, 25 + (num_sort - 1) * 45);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
+    item->SetParent(this);
     weapons_menu->AddItem(item);
   } else {
     position = tools_menu->GetMin() + Point2d(30 + nb_weapon_type[num_sort - 1] * 45, 25 + (num_sort - 6) * 45);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
+    item->SetParent(this);
     tools_menu->AddItem(item);
   }
 
@@ -294,9 +322,9 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 
   // Init animation parameter
   Point2d start(GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5 - scroll_border,
-		GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
+                GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
   Point2i pos(GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5 - scroll_border,
-	      GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5 );
+              GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5 );
 
   if (Interface::GetRef().GetMenuPosition().GetX() + Interface::GetRef().GetWidth() > start.GetX()) {
     start.y -= Interface::GetRef().GetHeight();
@@ -320,9 +348,9 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 
   // Init animation parameter
   Point2d start(GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5 - scroll_border,
-		GetMainWindow().GetHeight());
+                GetMainWindow().GetHeight());
   Point2i pos(GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5 - scroll_border,
-	      GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10 );
+              GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10 );
 
   if (Interface::GetRef().GetMenuPosition().GetX() + Interface::GetRef().GetWidth() > start.GetX()) {
     start.y -= Interface::GetRef().GetHeight();
