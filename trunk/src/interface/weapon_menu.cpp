@@ -125,12 +125,12 @@ void WeaponMenuItem::Draw(Surface * dest)
       if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
         m_parent->m_not_wet_available->Blit(*dest, tmp);
 
-        tmp.x += m_parent->m_not_wet_available->GetWidth();
-
+        tmp.x += m_parent->m_not_wet_available->GetWidth() + 1;
+        tmp.y += 6;
         std::ostringstream txt;
         txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
         txt << " ";
-        (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), c_red);
+        (*Font::GetInstance(Font::FONT_SMALL, Font::FONT_NORMAL)).WriteLeft(tmp, txt.str(), c_red);
       }  else{
         tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
         m_parent->cross->Blit(*dest, tmp);
