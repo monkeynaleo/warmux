@@ -422,11 +422,11 @@
     </slap>
 
     <snipe_rifle>
-      <min_angle>-30</min_angle>
-      <max_angle>45</max_angle>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
       <nb_ammo>-1</nb_ammo>
-      <unit_per_ammo>2</unit_per_ammo>
-      <damage>25</damage>
+      <unit_per_ammo>1</unit_per_ammo>
+      <damage>75</damage>
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
       <display_crosshair>0</display_crosshair>
