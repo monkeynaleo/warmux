@@ -130,7 +130,7 @@ void WeaponMenuItem::Draw(Surface * dest)
         std::ostringstream txt;
         txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
         txt << " ";
-        (*Font::GetInstance(Font::FONT_SMALL, Font::FONT_NORMAL)).WriteLeft(tmp, txt.str(), c_red);
+        (*Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_red_color);
       }  else{
         tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
         m_parent->cross->Blit(*dest, tmp);
