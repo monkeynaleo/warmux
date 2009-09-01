@@ -181,8 +181,6 @@ void ApplyExplosion_common (const Point2i &pos,
          else
            angle = -M_PI_2;
 
-         if(fastest_character != NULL)
-           Camera::GetInstance()->FollowObject (obj, true);
          ASSERT( obj->GetMass() != 0.0);
 
 	 MSG_DEBUG("explosion", "!! blasting object %s", network_id.c_str());
