@@ -63,6 +63,7 @@ Camera::Camera():
   m_shake( 0, 0 ),
   m_last_time_shake_calculated( 0 ),
   m_speed( 0, 0 ),
+  m_stop(false),
   auto_crop(true),
   in_advance(false),
   followed_object(NULL)
@@ -72,6 +73,7 @@ Camera::Camera():
 
 void Camera::Reset()
 {
+  m_stop = false;
   auto_crop = true;
   in_advance = false;
   followed_object = NULL;
@@ -121,6 +123,7 @@ void Camera::AutoCrop()
   static Point2i obj_pos(0, 0);
 
   Point2i target(0,0);
+  bool stop = false;
 
   if (followed_object && !followed_object->IsGhost() )
   {
@@ -129,6 +132,15 @@ void Camera::AutoCrop()
      */
     obj_pos = followed_object->GetCenter();
    
+    if (obj_pos > GetPosition()+GetSize()/8 && obj_pos < GetPosition()+7*GetSize()/8)
+    {
+      if(m_stop){
+        stop = true;
+      }
+    }else{
+      m_stop = false;
+    }
+
     if (followed_object->IsMoving() && in_advance)
     {
         Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetSpeed();
@@ -153,6 +165,7 @@ void Camera::AutoCrop()
   else
   {
       target = GetPosition();
+      m_stop = true;
   }
 
   //Compute new speed to reach target
@@ -177,33 +190,37 @@ void Camera::AutoCrop()
 
   //std::cout<<"acceleration after  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
 
-
-  //Apply acceleration
-  m_speed = m_speed + acceleration;
-
-
-
-
-
-//  std::cout<<"obj_position  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
-
-  //Realtime follow is enable if object is too fast to be correctly followed
-
-  if(abs(followed_object->GetSpeed().x)> REALTIME_FOLLOW_LIMIT){
-    m_speed.x =  (target.x - position.x)*REALTIME_FOLLOW_FACTOR;
+  if(stop){
+    m_speed = m_speed/2;
   }
+  else
+  {
+    //Apply acceleration
+    m_speed = m_speed + acceleration;
 
-  if(abs(followed_object->GetSpeed().y)> REALTIME_FOLLOW_LIMIT){
 
-      m_speed.y =  (target.y - position.y)*REALTIME_FOLLOW_FACTOR;
+
+
+
+  //  std::cout<<"obj_position  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
+
+    //Realtime follow is enable if object is too fast to be correctly followed
+
+    if(abs(followed_object->GetSpeed().x)> REALTIME_FOLLOW_LIMIT){
+      m_speed.x =  (target.x - position.x)*REALTIME_FOLLOW_FACTOR;
     }
 
-  //Limit
-    if(m_speed.x > MAX_CAMERA_SPEED.x) { m_speed.x = MAX_CAMERA_SPEED.x; }
-    if(m_speed.y > MAX_CAMERA_SPEED.y) { m_speed.y = MAX_CAMERA_SPEED.y; }
-    if(m_speed.x < -MAX_CAMERA_SPEED.x) { m_speed.x = -MAX_CAMERA_SPEED.x; }
-    if(m_speed.y < -MAX_CAMERA_SPEED.y) { m_speed.y = -MAX_CAMERA_SPEED.y; }
+    if(abs(followed_object->GetSpeed().y)> REALTIME_FOLLOW_LIMIT){
 
+        m_speed.y =  (target.y - position.y)*REALTIME_FOLLOW_FACTOR;
+      }
+
+    //Limit
+      if(m_speed.x > MAX_CAMERA_SPEED.x) { m_speed.x = MAX_CAMERA_SPEED.x; }
+      if(m_speed.y > MAX_CAMERA_SPEED.y) { m_speed.y = MAX_CAMERA_SPEED.y; }
+      if(m_speed.x < -MAX_CAMERA_SPEED.x) { m_speed.x = -MAX_CAMERA_SPEED.x; }
+      if(m_speed.y < -MAX_CAMERA_SPEED.y) { m_speed.y = -MAX_CAMERA_SPEED.y; }
+    }
     //Update position
     Point2i next_position(0,0);
 
@@ -211,7 +228,12 @@ void Camera::AutoCrop()
     next_position.y =  m_speed.y;
 
 
-  SetXY( next_position);
+    SetXY( next_position);
+
+    if( next_position.x == 0 && next_position.y == 0 && followed_object->GetSpeed().x == 0 && followed_object->GetSpeed().y == 0)
+    {
+      m_stop = true;
+    }
 }
 
 void Camera::SaveMouseCursor()
@@ -352,6 +374,7 @@ void Camera::StopFollowingObj(const PhysicalObj* obj){
   if (followed_object == obj)
     followed_object = NULL;
 
+  m_stop = true;
   m_speed = Point2d(0,0);
 }
 
