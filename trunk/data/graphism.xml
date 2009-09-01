@@ -214,7 +214,6 @@
   <point name="weapons_interface_size" x="290" y="235" />
   <point name="tools_interface_size" x="290" y="100" />
   <surface name="cross" file="interface/cross.png"/>
-  <surface name="hourglass" file="interface/hourglass.png"/>
   <surface name="clock_background" file="interface/clock_background.png"/>
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
@@ -257,6 +256,13 @@
   <surface name="square_mask_left" file="interface/hide_left.png" />
   <surface name="square_mask_top" file="interface/hide_top.png" />
 
+  <sprite name="hourglass">
+    <image file="interface/hourglass.png">
+      <grid pos="0,0" size="25,25" array="13,1" />
+    </image>
+    <animation loop_mode="true"/>
+    <animation speed="150"/>
+  </sprite>
 
 </section>
 
@@ -300,6 +306,8 @@
     </image>
     <animation loop_mode="true"/>
   </sprite>
+  
+ 
 
   <surface name="water" file="water/water/water.png" />
   <surface name="water_bottom" file="water/water/water_bottom.png" />
