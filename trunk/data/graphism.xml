@@ -306,8 +306,6 @@
     </image>
     <animation loop_mode="true"/>
   </sprite>
-  
- 
 
   <surface name="water" file="water/water/water.png" />
   <surface name="water_bottom" file="water/water/water_bottom.png" />

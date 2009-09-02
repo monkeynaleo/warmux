@@ -62,7 +62,7 @@ class WeaponsMenu
  public:
   static const int MAX_NUMBER_OF_WEAPON;
   Sprite * cross;
-  Sprite * m_not_wet_available;
+  Sprite * m_not_yet_available;
 
  private:
   Polygon * weapons_menu;
