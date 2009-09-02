@@ -114,15 +114,18 @@ void WeaponMenuItem::Draw(Surface * dest)
       scale = (scale > DEFAULT_ICON_SCALE ? scale : DEFAULT_ICON_SCALE);
     }
   }
+  item->SetAlpha(1);
   item->Scale((float)scale, (float)scale);
-  PolygonItem::Draw(dest);
+
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
 
   if(nb_bullets ==  INFINITE_AMMO) {
+    PolygonItem::Draw(dest);
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
   } else if(nb_bullets == 0) {
       if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
+        PolygonItem::Draw(dest);
         tmp.y -= 4;
         m_parent->m_not_yet_available->Blit(*dest, tmp);
 
@@ -134,10 +137,11 @@ void WeaponMenuItem::Draw(Surface * dest)
         txt << " ";
         (*Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_red_color);
       }  else{
-        tmp += Point2i(0, -(int)Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
-        m_parent->cross->Blit(*dest, tmp);
+        item->SetAlpha(0.3);
+        PolygonItem::Draw(dest);
       }
   } else {
+    PolygonItem::Draw(dest);
     std::ostringstream txt;
     txt << nb_bullets;
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_gray_color);
