@@ -64,6 +64,8 @@ Camera::Camera():
   m_last_time_shake_calculated( 0 ),
   m_speed( 0, 0 ),
   m_stop(false),
+  m_control_mode(NO_CAMERA_CONTROL),
+  m_begin_controlled_move_time(0),
   auto_crop(true),
   in_advance(false),
   followed_object(NULL)
@@ -77,6 +79,8 @@ void Camera::Reset()
   auto_crop = true;
   in_advance = false;
   followed_object = NULL;
+  m_begin_controlled_move_time = 0;
+  m_control_mode = NO_CAMERA_CONTROL;
   SetXYabs(GetWorld().GetSize() / 2);
 }
 
@@ -328,17 +332,38 @@ void Camera::TestCamera()
       SetAutoCrop(false);
       SetXY(last_mouse_pos - curr_pos);
       last_mouse_pos = curr_pos;
+
+      if(m_begin_controlled_move_time == 0){
+      m_begin_controlled_move_time = Time::GetInstance()->Read();
+      }
+
+      if(SDL_GetModState() & KMOD_CTRL){
+        m_control_mode = KEYBOARD_CAMERA_CONTROL;
+      }else{
+        m_control_mode = MOUSE_CAMERA_CONTROL;
+      }
       return;
     }
-  else if (Mouse::GetInstance()->GetPointer() == Mouse::POINTER_MOVE)
+  else if (m_control_mode == MOUSE_CAMERA_CONTROL)
     {
       // if the mouse has not moved at all since the user pressed the middle button, we center the camera!
-      if (first_mouse_pos == curr_pos)
+
+    if (abs(first_mouse_pos.x - curr_pos.x)<5 &&
+        abs(first_mouse_pos.y - curr_pos.y)<5 &&
+        Time::GetInstance()->Read() - m_begin_controlled_move_time < 500)
 	{
 	  CenterOnActiveCharacter();
 	}
       first_mouse_pos = Point2i(-1, -1);
       RestoreMouseCursor();
+      m_control_mode = NO_CAMERA_CONTROL;
+      m_begin_controlled_move_time = 0;
+    }
+    else if (m_control_mode == KEYBOARD_CAMERA_CONTROL){
+      first_mouse_pos = Point2i(-1, -1);
+      RestoreMouseCursor();
+      m_control_mode = NO_CAMERA_CONTROL;
+      m_begin_controlled_move_time = 0;
     }
 
   last_mouse_pos = curr_pos;
