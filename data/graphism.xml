@@ -258,10 +258,9 @@
 
   <sprite name="hourglass">
     <image file="interface/hourglass.png">
-      <grid pos="0,0" size="25,25" array="13,1" />
+      <grid pos="0,0" size="25,25" array="29,1" />
     </image>
-    <animation loop_mode="true"/>
-    <animation speed="150"/>
+    <animation loop_mode="true" speed="100" />
   </sprite>
 
 </section>
