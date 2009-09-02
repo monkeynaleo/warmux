@@ -115,10 +115,11 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
     if (item == -1)
       return NULL;
 
-    if (item == selected_item) {
-        //Deselect ();
-    } else
+    if (item == selected_item && !always_one_selected)
+      Deselect();
+    else
       Select (item);
+
     return this;
   }
 
@@ -265,18 +266,21 @@ void BaseListBox::RemoveSelected()
     m_items.erase( m_items.begin() + selected_item );
     selected_item =- 1;
   }
+  NeedRedrawing();
 }
 
 void BaseListBox::Select (uint index)
 {
   ASSERT(index < m_items.size());
   selected_item = index;
+  NeedRedrawing();
 }
 
 void BaseListBox::Deselect ()
 {
   ASSERT (always_one_selected == false);
   selected_item = -1;
+  NeedRedrawing();
 }
 
 //-----------------------------------------------------------------------------
