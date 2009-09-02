@@ -31,9 +31,16 @@ class PhysicalObj;
 
 class Camera : public Rectanglei, public Singleton<Camera>
 {
+
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
+public :
+  enum CameraControlMode {
+    NO_CAMERA_CONTROL,
+    MOUSE_CAMERA_CONTROL,
+    KEYBOARD_CAMERA_CONTROL
+  };
 private:
   Mouse::pointer_t pointer_used_before_scroll;
   uint m_started_shaking;
@@ -45,6 +52,8 @@ private:
 
   Point2d m_speed;
   bool m_stop;
+  CameraControlMode m_control_mode;
+  int m_begin_controlled_move_time;
 
   void SaveMouseCursor();
   void RestoreMouseCursor();
