@@ -37,27 +37,10 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-
-  std::vector<std::pair<std::string, std::string> > game_modes;
-  game_modes.push_back(std::pair<std::string, std::string>("classic", _("Classic")));
-  game_modes.push_back(std::pair<std::string, std::string>("unlimited", _("Unlimited")));
-  game_modes.push_back(std::pair<std::string, std::string>("blitz", _("Blitz")));
-#ifdef DEBUG
-  game_modes.push_back(std::pair<std::string, std::string>("skin_viewer", "Skin Viewer"));
-#endif
-
   std::string selected_gamemode = Config::GetInstance()->GetGameMode();
-  if (selected_gamemode != "classic"
-      && selected_gamemode != "unlimited"
-      && selected_gamemode != "blitz"
-#ifdef DEBUG
-      && selected_gamemode != "skin_viewer"
-#endif
-      )
-    game_modes.push_back(std::pair<std::string, std::string>(selected_gamemode, selected_gamemode));
 
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-			       game_modes, selected_gamemode);
+			       GameMode::ListGameModes(), selected_gamemode);
   AddWidget(opt_game_mode);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",

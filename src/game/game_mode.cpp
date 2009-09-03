@@ -20,14 +20,14 @@
  * value here. They should all be modifiable using the xml config file
  *****************************************************************************/
 
-#include "game/game_mode.h"
 #include <iostream>
 #include <cstdio>
+#include <WORMUX_file_tools.h>
 #include "game/config.h"
 #include "game/game.h"
+#include "game/game_mode.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"
-#include <WORMUX_file_tools.h>
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
@@ -335,3 +335,37 @@ std::string GameMode::GetObjectsFilename() const
   return fullname;
 }
 
+// Static method
+std::vector<std::pair<std::string, std::string> > GameMode::ListGameModes()
+{
+  std::vector<std::pair<std::string, std::string> > game_modes;
+  game_modes.push_back(std::pair<std::string, std::string>("classic", _("Classic")));
+  game_modes.push_back(std::pair<std::string, std::string>("unlimited", _("Unlimited")));
+  game_modes.push_back(std::pair<std::string, std::string>("blitz", _("Blitz")));
+#ifdef DEBUG
+  game_modes.push_back(std::pair<std::string, std::string>("skin_viewer", "Skin Viewer"));
+#endif
+
+  std::string personal_dir = Config::GetInstance()->GetPersonalDataDir() +
+    std::string("game_mode" PATH_SEPARATOR);
+
+  FolderSearch *f = OpenFolder(personal_dir);
+  if (f) {
+    const char *name;
+    while ((name = FolderSearchNext(f)) != NULL) {
+      std::string filename(name);
+
+      if (filename.size() >= 5
+	  && filename.compare(filename.size()-4, 4, ".xml") == 0
+	  && (filename.size() < 12
+	      || filename.compare(filename.size()-12, 12, "_objects.xml") != 0)) {
+
+	std::string game_mode_name = filename.substr(0, filename.size()-4);
+	game_modes.push_back(std::pair<std::string, std::string>(game_mode_name, game_mode_name));
+      }
+    }
+    CloseFolder(f);
+  }
+
+  return game_modes;
+}
