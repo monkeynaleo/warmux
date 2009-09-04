@@ -10,14 +10,14 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="300"
-   height="300.00003"
+   width="512.78467"
+   height="676.44672"
    id="svg8765"
    sodipodi:version="0.32"
    inkscape:version="0.46"
    sodipodi:modified="true"
    version="1.0"
-   sodipodi:docname="menu elements.svg"
+   sodipodi:docname="menu_elements.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs8767">
@@ -331,7 +331,7 @@
        xlink:href="#linearGradient6059"
        id="linearGradient8729"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.0018834,0,0,1,-1.5033139e-5,-72.078628)"
+       gradientTransform="matrix(1.0018834,0,0,1,-1.503314e-5,-72.078628)"
        x1="723.56995"
        y1="691.39264"
        x2="1372.9629"
@@ -11441,14 +11441,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="9.7112891"
-     inkscape:cy="368.83767"
+     inkscape:cx="169.51742"
+     inkscape:cy="227.41631"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
-     inkscape:window-width="1279"
+     inkscape:window-width="1278"
      inkscape:window-height="949"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="0"
      showgrid="false" />
   <metadata
      id="metadata8770">
@@ -11465,11 +11465,11 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(351.06606,-542.18036)">
+     transform="translate(351.06606,-250.8851)">
     <g
        id="g2427"
        inkscape:label="Calque 1"
-       transform="matrix(0.362206,0,0,0.362206,-128.29537,564.77393)"
+       transform="matrix(0.362206,0,0,0.362206,-121.90305,564.77392)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
@@ -11648,7 +11648,7 @@
     </g>
     <g
        id="g2509"
-       transform="matrix(0.328446,-3.432805e-2,3.432805e-2,0.328446,-108.73354,646.28922)"
+       transform="matrix(0.328446,-3.432805e-2,3.432805e-2,0.328446,-108.73355,350.73371)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
@@ -11681,7 +11681,7 @@
     </g>
     <g
        id="g2783"
-       transform="translate(-65.460778,-142.4527)">
+       transform="translate(-165.25875,154.49145)">
       <g
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -11749,7 +11749,7 @@
     </g>
     <g
        id="g2593"
-       transform="translate(-558.72477,283.10878)"
+       transform="translate(-345.94012,79.421316)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <path
@@ -11996,7 +11996,7 @@
     </g>
     <g
        id="g2733"
-       transform="matrix(0.676136,0,0,0.676136,-93.143983,7.40439)"
+       transform="matrix(0.676136,0,0,0.676136,16.444507,-196.28307)"
        style="font-weight:bold"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -12095,7 +12095,7 @@
     </g>
     <g
        id="g11483"
-       transform="matrix(0.953893,0,0,0.953893,-402.846,59.703102)">
+       transform="matrix(0.953893,0,0,0.953893,-396.45366,-143.98436)">
       <path
          style="fill:url(#linearGradient3501);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.01018655;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
          d="M 292.39761,530.48397 C 291.29909,531.73286 290.91112,533.37782 291.20892,534.90641 C 291.20849,534.90692 291.20405,534.91133 291.20368,534.91199 C 290.37197,535.03543 289.57693,535.42801 288.95762,536.08863 C 287.4991,537.64447 287.57808,540.09096 289.13391,541.54948 C 290.68974,543.00801 293.13625,542.92903 294.59478,541.37321 C 294.78528,541.16997 294.95077,540.9536 295.088,540.72402 L 336.32845,579.38513 C 335.24204,581.14533 335.50881,583.48243 337.07645,584.95202 C 338.86538,586.62906 341.67688,586.54371 343.3539,584.75479 C 344.3693,583.67165 344.73813,582.20872 344.47285,580.85419 C 345.1859,580.74866 345.86882,580.41657 346.39974,579.85023 C 347.64929,578.51729 347.57629,576.42308 346.24336,575.17353 C 344.91042,573.92397 342.82145,573.99141 341.57189,575.32432 C 341.51593,575.38403 341.46069,575.4456 341.41003,575.50816 L 300.40959,537.07205 C 302.01898,534.98315 301.80279,531.97097 299.83909,530.13008 C 297.75101,528.1726 294.47022,528.27309 292.51272,530.36117 C 292.47449,530.40196 292.43427,530.4423 292.39761,530.48397 z"
@@ -12120,7 +12120,7 @@
          style="fill:#f6f6f6;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.01018655;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible" />
     </g>
     <g
-       transform="matrix(1.08732,0,0,1.08732,-957.71357,-15.013845)"
+       transform="matrix(1.08732,0,0,1.08732,-1054.5174,-218.7013)"
        id="g9437"
        style="display:inline">
       <g
@@ -12312,7 +12312,7 @@
     </g>
     <g
        id="g25398"
-       transform="matrix(0.620117,0,0,0.620117,-190.141,210.70684)">
+       transform="matrix(0.620117,0,0,0.620117,-390.141,7.019381)">
       <rect
          rx="7.2884717"
          ry="7.2884717"
@@ -12425,7 +12425,7 @@
     </g>
     <g
        id="g25915"
-       transform="translate(-385.09512,-24.184622)">
+       transform="translate(-485.09513,-319.74013)">
       <rect
          rx="0.74309367"
          ry="4.810606"
@@ -12535,7 +12535,7 @@
        id="g4089"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       transform="translate(-13.408957,-131.6347)">
+       transform="translate(197.92005,-421.54848)">
       <rect
          ry="20.695086"
          rx="15.759514"
@@ -12583,7 +12583,7 @@
        inkscape:export-filename="/home/yekcim/Desktop/te.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       transform="translate(-431.33293,-268.07513)">
+       transform="translate(-314.04983,-68.075133)">
       <g
          transform="matrix(0.86632,0,0,0.86632,100.3162,324.0637)"
          id="g3085">
@@ -12832,7 +12832,7 @@
        id="g3275"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       transform="translate(-495.21979,-266.65477)">
+       transform="translate(-274.60246,-66.654776)">
       <g
          transform="matrix(0.86632,0,0,0.86632,165.0007,405.2899)"
          id="g3126">
@@ -13086,7 +13086,7 @@
     </g>
     <g
        id="g2794"
-       transform="translate(-171.31756,-142.45269)">
+       transform="translate(-64.640368,-437.01829)">
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
@@ -13197,7 +13197,7 @@
     </g>
     <g
        id="g6164"
-       transform="translate(-100.5668,-387.9388)"
+       transform="translate(-300.5668,-683.49432)"
        inkscape:export-filename="/home/yekcim/Desktop/flags.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -13451,7 +13451,7 @@
     </g>
     <g
        id="g8068"
-       transform="matrix(0.7569782,0,0,0.7569782,-125.41825,590.42329)">
+       transform="matrix(0.7569782,0,0,0.7569782,95.199077,690.42327)">
       <g
          transform="matrix(0.8203613,0,0,0.8203613,5.8555842,1.3883509)"
          id="g5991">
@@ -13886,7 +13886,7 @@
       </g>
     </g>
     <g
-       transform="translate(-450.06778,156.79619)"
+       transform="translate(-237.28313,47.901759)"
        id="g7261"
        style="display:inline">
       <g
@@ -13990,7 +13990,7 @@
     </g>
     <g
        id="g9231"
-       transform="translate(-616.60902,154.64877)">
+       transform="translate(-507.02051,45.754341)">
       <g
          style="display:inline"
          id="g6200"
@@ -14305,13 +14305,13 @@
       </g>
     </g>
     <path
-       d="M -127.02659,593.58051 L -126.20986,594.86395 L -125.74314,593.69718 L -125.15976,594.39724 L -124.80974,593.23047 L -124.80974,594.04721 L -124.10967,593.69718 L -123.99301,594.28056 L -123.52629,592.64709 L -122.94291,594.04721 L -122.70955,593.34715 L -122.70955,594.51392 L -121.4261,593.81386 L -121.4261,592.41374 L -120.95942,595.79736 L -120.4927,590.89694 L -119.67597,598.24757 L -118.85923,586.69658 L -118.74254,604.0814 L -117.69248,578.76258 L -117.57578,608.51512 L -117.69244,592.29707 L -116.52569,587.51332 L -116.9924,578.29587 L -116.75904,611.66539 L -116.29233,574.67889 L -115.82564,609.68188 L -115.70895,579.1126 L -115.00891,607.46502 L -114.65886,573.27877 L -114.07548,608.74847 L -113.84212,584.1297 L -113.25874,596.49741 L -113.02538,592.41374 L -112.79206,595.68069 L -112.32534,591.01362 L -112.09198,595.91404 L -111.62527,591.71368 L -111.27525,595.79736 L -111.15858,591.36365 L -111.04189,596.14739 L -110.45851,590.66359 L -110.45851,594.98063 L -109.64177,593.58051 L -109.29175,594.74727 L -109.17506,593.69718 L -109.05839,594.98063 L -108.12496,592.99712 L -108.12496,593.81386 L -107.65828,594.39724 L -106.84154,593.46383 L -106.84154,593.81386 L -105.90811,593.23047 L -106.14147,594.04721 L -105.20808,594.04721 L -103.92463,593.69718 L -102.87453,593.81386 M -106.9582,599.29765 L -107.42492,608.51511 L -107.19156,575.1456 L -106.72485,612.13209 L -106.25816,577.1291 L -106.14147,607.69837 L -105.44142,579.34596 L -105.09138,609.79855 L -104.50801,578.06251 L -104.27465,602.68128 L -103.69127,590.31356 L -103.45791,594.39724 L -103.22459,591.13029 L -102.75787,595.79736 L -102.40785,588.5634 L -102.0578,595.0973 L -101.70778,591.01362 L -101.59112,593.46383 L -101.47442,590.66359 L -100.89104,591.83035 L -100.07431,593.23047 L -99.72428,592.0637 L -99.60759,593.11379 L -99.49093,591.83035 L -98.5575,593.81385 L -98.5575,592.99712 L -98.09082,592.41374 L -97.27409,593.34715 L -97.27409,592.99712 L -96.34066,593.5805 L -96.57402,592.76377 L -95.64062,592.76377 L -94.35716,593.11379 L -93.30707,592.99712 M -75.10552,592.53042 L -75.92225,593.81386 L -76.38897,592.64709 L -76.97235,593.34715 L -77.32236,592.18038 L -77.32236,592.99712 L -78.02243,592.64709 L -78.1391,593.23047 L -78.60581,591.597 L -79.18919,592.99712 L -79.42255,592.29706 L -79.42255,593.46383 L -80.706,592.76377 L -80.706,591.36365 L -81.17269,594.74727 L -81.6394,589.84685 L -82.45614,597.19748 L -83.27288,585.64649 L -83.38957,603.03131 L -84.43964,577.71249 L -84.55632,607.46502 L -84.43967,591.24697 L -85.60642,586.46323 L -85.1397,577.24578 L -85.37307,610.61529 L -85.83978,573.6288 L -86.30646,608.63179 L -86.42315,578.06251 L -87.1232,603.29726 L -87.47326,572.22868 L -88.05663,607.69837 L -88.28998,583.0796 L -88.87336,595.44733 L -89.10673,591.36365 L -89.34005,594.63059 L -89.80676,589.96353 L -90.04012,594.86395 L -90.50684,590.66359 L -90.85687,594.74727 L -90.97352,590.31356 L -91.09022,595.0973 L -91.6736,589.6135 L -91.6736,593.93053 L -92.49033,592.53042 L -92.84035,593.69718 L -92.95705,592.64709 L -93.07371,593.93053 L -94.00714,591.94703 L -94.00714,592.76377 L -94.47383,593.34715 L -95.29056,592.41374 L -95.29056,592.76377 L -96.22399,592.18038 L -95.99064,592.99712 L -96.92404,592.99712 L -98.20747,592.64709 L -99.25757,592.76377"
+       d="M -120.63425,484.68607 L -119.81752,485.96951 L -119.3508,484.80274 L -118.76742,485.5028 L -118.4174,484.33603 L -118.4174,485.15277 L -117.71733,484.80274 L -117.60067,485.38612 L -117.13395,483.75265 L -116.55057,485.15277 L -116.31721,484.45271 L -116.31721,485.61948 L -115.03376,484.91942 L -115.03376,483.5193 L -114.56708,486.90292 L -114.10036,482.0025 L -113.28363,489.35313 L -112.46689,477.80214 L -112.3502,495.18696 L -111.30014,469.86814 L -111.18344,499.62068 L -111.3001,483.40263 L -110.13335,478.61888 L -110.60006,469.40143 L -110.3667,502.77095 L -109.89999,465.78445 L -109.4333,500.78744 L -109.31661,470.21816 L -108.61657,498.57058 L -108.26652,464.38433 L -107.68314,499.85403 L -107.44978,475.23526 L -106.8664,487.60297 L -106.63304,483.5193 L -106.39972,486.78625 L -105.933,482.11918 L -105.69964,487.0196 L -105.23293,482.81924 L -104.88291,486.90292 L -104.76624,482.46921 L -104.64955,487.25295 L -104.06617,481.76915 L -104.06617,486.08619 L -103.24943,484.68607 L -102.89941,485.85283 L -102.78272,484.80274 L -102.66605,486.08619 L -101.73262,484.10268 L -101.73262,484.91942 L -101.26594,485.5028 L -100.4492,484.56939 L -100.4492,484.91942 L -99.515772,484.33603 L -99.749132,485.15277 L -98.815742,485.15277 L -97.532292,484.80274 L -96.482192,484.91942 M -100.56586,490.40321 L -101.03258,499.62067 L -100.79922,466.25116 L -100.33251,503.23765 L -99.865822,468.23466 L -99.749132,498.80393 L -99.049082,470.45152 L -98.699042,500.90411 L -98.115672,469.16807 L -97.882312,493.78684 L -97.298932,481.41912 L -97.065572,485.5028 L -96.832252,482.23585 L -96.365542,486.90292 L -96.015522,479.66896 L -95.665472,486.20286 L -95.315452,482.11918 L -95.198792,484.56939 L -95.082092,481.76915 L -94.498712,482.93591 L -93.681982,484.33603 L -93.331949,483.16926 L -93.215259,484.21935 L -93.098599,482.93591 L -92.165169,484.91941 L -92.165169,484.10268 L -91.698489,483.5193 L -90.881759,484.45271 L -90.881759,484.10268 L -89.948329,484.68606 L -90.181689,483.86933 L -89.248289,483.86933 L -87.964829,484.21935 L -86.914739,484.10268 M -68.713189,483.63598 L -69.529919,484.91942 L -69.996639,483.75265 L -70.580019,484.45271 L -70.930029,483.28594 L -70.930029,484.10268 L -71.630099,483.75265 L -71.746769,484.33603 L -72.213479,482.70256 L -72.796859,484.10268 L -73.030219,483.40262 L -73.030219,484.56939 L -74.313669,483.86933 L -74.313669,482.46921 L -74.780359,485.85283 L -75.247069,480.95241 L -76.063809,488.30304 L -76.880549,476.75205 L -76.997239,494.13687 L -78.047309,468.81805 L -78.163989,498.57058 L -78.047339,482.35253 L -79.214089,477.56879 L -78.747369,468.35134 L -78.980739,501.72085 L -79.447449,464.73436 L -79.914129,499.73735 L -80.030819,469.16807 L -80.730869,494.40282 L -81.080929,463.33424 L -81.664299,498.80393 L -81.897649,474.18516 L -82.481029,486.55289 L -82.714399,482.46921 L -82.947719,485.73615 L -83.414429,481.06909 L -83.647789,485.96951 L -84.114509,481.76915 L -84.464539,485.85283 L -84.581189,481.41912 L -84.697889,486.20286 L -85.281269,480.71906 L -85.281269,485.03609 L -86.097999,483.63598 L -86.448019,484.80274 L -86.564719,483.75265 L -86.681379,485.03609 L -87.614809,483.05259 L -87.614809,483.86933 L -88.081499,484.45271 L -88.898229,483.5193 L -88.898229,483.86933 L -89.831659,483.28594 L -89.598309,484.10268 L -90.531709,484.10268 L -91.815139,483.75265 L -92.865239,483.86933"
        sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
        id="path3128"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.6072675;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;display:inline" />
     <g
        id="g5258"
-       transform="translate(2.5014755,537.46551)">
+       transform="translate(2.5014743,537.46551)">
       <rect
          style="opacity:1;fill:none;fill-opacity:0.78431373;fill-rule:nonzero;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect5201"
@@ -14563,7 +14563,7 @@
     </g>
     <g
        id="g5346"
-       transform="translate(-358.49852,120.46548)">
+       transform="translate(-356.58178,120.46548)">
       <rect
          style="opacity:1;fill:none;fill-opacity:0.78431373;fill-rule:nonzero;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect5203"
@@ -15079,7 +15079,7 @@
     </g>
     <g
        id="g5168"
-       transform="translate(-7.9985205,75.965531)">
+       transform="translate(-4.8023494,75.965538)">
       <g
          transform="translate(-642.49431,450.12841)"
          id="g15618">
@@ -15248,7 +15248,7 @@
     </g>
     <g
        id="g5483"
-       transform="translate(-23.498517,12.465463)">
+       transform="translate(-23.498517,12.465461)">
       <rect
          style="opacity:1;fill:none;fill-opacity:0.78431373;fill-rule:nonzero;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect5207"
@@ -15314,7 +15314,7 @@
     </g>
     <g
        id="g5507"
-       transform="translate(-241.49852,156.46549)">
+       transform="translate(-239.58178,156.46549)">
       <rect
          style="opacity:1;fill:none;fill-opacity:0.78431373;fill-rule:nonzero;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect5213"
@@ -15475,7 +15475,7 @@
     </g>
     <g
        id="g5556"
-       transform="translate(-472.49852,207.46549)">
+       transform="translate(-472.49852,207.4655)">
       <rect
          style="opacity:1;fill:none;fill-opacity:0.78431373;fill-rule:nonzero;stroke:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="rect5211"
@@ -15661,7 +15661,7 @@
     </g>
     <g
        id="g28051"
-       transform="translate(-340.66818,358.92049)"
+       transform="translate(-437.47202,250.02605)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <rect
@@ -15711,7 +15711,7 @@
     <g
        id="g2499"
        inkscape:label="Calque 1"
-       transform="translate(-149.94369,541.18466)">
+       transform="translate(-349.94369,432.29022)">
       <g
          transform="matrix(0.6805491,0,0,0.6805491,15.614004,16.290631)"
          id="g3377">
@@ -15863,7 +15863,7 @@
     <g
        id="g2565"
        inkscape:label="Calque 1"
-       transform="translate(-117.74357,576.48791)">
+       transform="translate(-0.4604816,676.48789)">
       <path
          id="path3225"
          d="M 6.5,11.59375 C 5.9139215,11.823627 6.2702106,12.656136 6.8125,12.71875 C 7.884849,13.461411 8.9767986,14.132139 9.8765927,15.001593 C 10.876358,16.078532 11.686327,17.288834 12.4375,18.59375 C 13.442312,20.395086 14.131464,22.381639 14.34375,24.4375 C 14.713746,25.302419 16.234415,24.647723 15.837861,23.782152 C 14.692183,21.254268 13.849293,18.555933 12.163,16.317051 C 10.816498,14.472026 9.0556989,12.89106 7.09375,11.71875 C 6.9130658,11.624975 6.7051038,11.482955 6.5,11.59375 z"
@@ -16018,7 +16018,7 @@
          style="fill:#668000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       transform="translate(-276.9295,343.91984)"
+       transform="translate(-482.7935,639.49047)"
        id="g3647"
        inkscape:label="Calque 1">
       <path
@@ -16043,7 +16043,7 @@
        inkscape:export-xdpi="90"
        inkscape:export-filename="/home/yekcim/Desktop/add.png"
        id="g32259"
-       transform="translate(-958.92513,834.75295)">
+       transform="translate(-746.14048,834.75294)">
       <g
          style="display:inline"
          id="g29394"
@@ -16642,7 +16642,7 @@
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
        inkscape:export-filename="/home/yekcim/Desktop/del.png"
-       transform="translate(-958.92513,834.75295)"
+       transform="translate(-849.33664,834.75294)"
        id="g32357"
        style="display:inline">
       <g
