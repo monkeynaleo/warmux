@@ -334,13 +334,16 @@ msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike! Juuuhu!"
 msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije!"
-msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
-msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
-msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije!"
+#, fuzzy, c-format
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
+msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije! Boooing!"
+msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije! Boooing!"
+msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije! Boooing!"
+msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije! Boooing!"
 
 #: src/weapon/mine.cpp:251
 #, c-format

@@ -290,9 +290,14 @@ msgstr[0] "%s チームは %u つのジェットパックを獲得！ブッ飛�
 msgstr[1] "%s チームは %u つのジェットパックを獲得！ブッ飛べ！"
 
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "%s チームは %u つの低重力装置を獲得！私がアームストロング船長だ！"
 msgstr[1] "%s チームは %u つの低重力装置を獲得！私がアームストロング船長だ！"
 

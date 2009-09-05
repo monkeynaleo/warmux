@@ -292,9 +292,14 @@ msgstr[0] "%s-laget vann %u rakettryggsekk! Kult!"
 msgstr[1] "%s-laget vann %u rakettryggsekker! Kult!"
 
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "%s-laget vann %u astronauthjelm! Eg er Neil Armstrong!"
 msgstr[1] "%s-laget vann %u astronauthjelmar! Eg er Neil Armstrong!"
 

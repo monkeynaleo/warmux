@@ -299,9 +299,14 @@ msgstr[0] "Joukkue %s voitti %u lentorepun."
 msgstr[1] "Joukkue %s voitti %u lentoreppua! Siistiä!"
 
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "Joukkue %s voitti %u painottomuuden! Neil Armstrong täältä tullaan!"
 msgstr[1] "Joukkue %s voitti %u painottomuutta! Neil Armstrong täältä tullaan!"
 

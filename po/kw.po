@@ -352,9 +352,14 @@ msgstr[2] "Para %s re waynyas %u stifelback! Splann!"
 msgstr[3] "Para %s re waynyas %u stifelback! Splann!"
 
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[1] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[2] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
