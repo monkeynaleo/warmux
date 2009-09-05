@@ -19,12 +19,9 @@
  * WeaponLauncher: generic weapon to launch a projectile
  *****************************************************************************/
 
-#include "weapon/weapon_launcher.h"
-#include "weapon/weapon_cfg.h"
-
 #include <sstream>
+#include <WORMUX_debug.h>
 
-#include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
@@ -38,9 +35,11 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
+#include "weapon/weapon_launcher.h"
 
 #ifdef DEBUG
 //#define DEBUG_EXPLOSION_CONFIG
@@ -126,7 +125,6 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   explode_with_timeout = true;
   explode_with_collision = true;
   can_drown = true;
-  camera_in_advance = true;
 
   image = GetResourceManager().LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -163,7 +161,7 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
   ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
+  Camera::GetInstance()->FollowObject(this, true);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
