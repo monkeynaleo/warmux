@@ -1303,17 +1303,8 @@ msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Ho sentim, però la seva versió no té suport. La versió amb suport és %s. Pot "
-"descarregar una versió actualitzada en http://www.wormux.org/wiki/download."
-"php "
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1700,6 +1691,16 @@ msgstr "o Carregant perfil de so: %s "
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Obert àudio a %d Hz %d bit "
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Ho sentim, però la seva versió no té suport. La versió amb suport és %s. "
+#~ "Pot descarregar una versió actualitzada en http://www.wormux.org/wiki/"
+#~ "download.php "
 
 #~ msgid "%s: illegal option -- %c\n"
 #~ msgstr "%s: opció il·legal -- %c\n"

@@ -1297,17 +1297,8 @@ msgstr "Nokon har lagt ei bombe i kassen!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Det er for tida ingen spel som ventar på spelarar."
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Spelversjonen du har er ikkje lenger støtta. Dei støtta versjonane er %s. Du "
-"kan lasta ned ein oppdatert versjon frå http://www.wormux.org/wiki/download."
-"php."
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1688,6 +1679,16 @@ msgstr "o Lastar lydprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Spelversjonen du har er ikkje lenger støtta. Dei støtta versjonane er %s. "
+#~ "Du kan lasta ned ein oppdatert versjon frå http://www.wormux.org/wiki/"
+#~ "download.php."
 
 #~ msgid "Connect !"
 #~ msgstr "Koble til !"

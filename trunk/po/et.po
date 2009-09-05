@@ -1293,16 +1293,8 @@ msgstr "Keegi oli na üllatuse kasti pistnud!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Vabandust, aga sinu väljalaset ei toetata enam. Toetatud väljalasked on %s. "
-"Uue väljalaske saate hankida http://www.wormux.org/wiki/download.php."
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1680,6 +1672,15 @@ msgstr "o Laadin heliprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio sätitud %d Hz ja %d biti peale"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Vabandust, aga sinu väljalaset ei toetata enam. Toetatud väljalasked on %"
+#~ "s. Uue väljalaske saate hankida http://www.wormux.org/wiki/download.php."
 
 #~ msgid "Add custom team"
 #~ msgstr "Lisa kohandet meeskond"

@@ -1327,17 +1327,8 @@ msgstr "Eine Sprengfalle wurde in einer Holzkiste versteckt."
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Im Moment gibt es leider keine offenen Spiele"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Entschuldigen Sie, ihre Version ist nicht mehr unterstützt. Die "
-"unterstützten Versionen sind %s. Sie können eine neue Version auf http://www."
-"wormux.org/wiki/download.php herunterlaten."
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1724,6 +1715,16 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Entschuldigen Sie, ihre Version ist nicht mehr unterstützt. Die "
+#~ "unterstützten Versionen sind %s. Sie können eine neue Version auf http://"
+#~ "www.wormux.org/wiki/download.php herunterlaten."
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr ""

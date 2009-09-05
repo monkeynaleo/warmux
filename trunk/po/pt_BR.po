@@ -1311,16 +1311,8 @@ msgstr "Alguém colocou uma armadilha no caixote!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpe, atualmente nenhum jogo está esperando jogadores"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Desculpe, sua versão já está desuatualisada. Versão atualisada é %s. Você "
-"pode baixar uma versão atualisada em http://www.wormux.org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1700,6 +1692,16 @@ msgstr "o Carregando perfil de som: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio carregado a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Desculpe, sua versão já está desuatualisada. Versão atualisada é %s. Você "
+#~ "pode baixar uma versão atualisada em http://www.wormux.org/wiki/download."
+#~ "php"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr ""
