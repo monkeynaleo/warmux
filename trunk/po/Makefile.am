@@ -433,7 +433,7 @@ XGETTEXT = @XGETTEXT@
 # since it seems that in most cases the comments are useful
 XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_
 MSGMERGE = @MSGMERGE@
-MSGMERGE_UPDATE = @MSGMERGE@ --quiet --update
+MSGMERGE_UPDATE = @MSGMERGE@ --quiet --update --previous
 MSGINIT = @MSGINIT@
 MSGCONV = @MSGCONV@
 MSGFILTER = @MSGFILTER@
