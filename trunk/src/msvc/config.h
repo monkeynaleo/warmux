@@ -13,6 +13,9 @@
 #include <iconv.h>
 #define HAVE_ICONV 1
 
+/* Define to 1 if you have a functional curl library. */
+#define HAVE_LIBCURL 1
+
 /* `SDL_gfx' library (-lSDL_gfx). */
 #define HAVE_LIBSDL_GFX 1
 
@@ -46,6 +49,30 @@
 /* <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
 
+/* Defined if libcurl supports libz */
+#define LIBCURL_FEATURE_LIBZ 1
+
+/* Defined if libcurl supports DICT */
+#define LIBCURL_PROTOCOL_DICT 1
+
+/* Defined if libcurl supports FILE */
+#define LIBCURL_PROTOCOL_FILE 1
+
+/* Defined if libcurl supports FTP */
+#define LIBCURL_PROTOCOL_FTP 1
+
+/* Defined if libcurl supports HTTP */
+#define LIBCURL_PROTOCOL_HTTP 1
+
+/* Defined if libcurl supports LDAP */
+#define LIBCURL_PROTOCOL_LDAP 1
+
+/* Defined if libcurl supports TELNET */
+#define LIBCURL_PROTOCOL_TELNET 1
+
+/* Defined if libcurl supports TFTP */
+#define LIBCURL_PROTOCOL_TFTP 1
+
 /* Name of package */
 #define PACKAGE "wormux"
 
@@ -67,5 +94,8 @@
 /* ANSI C header files. */
 #define STDC_HEADERS 1
 
+/* Define to use FriBidi */
+#define USE_FRIBIDI 1
+
 /* Version number of package */
-#define VERSION "0.8svn"
+#define VERSION "svn"
