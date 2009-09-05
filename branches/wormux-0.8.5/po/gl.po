@@ -1295,17 +1295,8 @@ msgstr "Alguén puxo unha bomba trampa na caixa!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpa, pero neste momento non hai partidas agardando por xogadores"
 
-#: tools/servers/game_server/server.cpp:284
-#, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Sentímolo, pero a túa versión xa non ten soporte. A versión con soporte é a %"
-"s. Podes baixar unha versión actualizada en http://www.wormux.org/wiki/"
-"download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1671,6 +1662,15 @@ msgstr "o Cargando o perfil de son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bits"
+
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Sentímolo, pero a túa versión xa non ten soporte. A versión con soporte é "
+#~ "a %s. Podes baixar unha versión actualizada en http://www.wormux.org/wiki/"
+#~ "download.php"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s tenta conectar cunha versión diferente: cliente=%s, eu=%s."

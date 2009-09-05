@@ -1296,16 +1296,8 @@ msgstr "Iu metis insidon en la skatolo!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
-"povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1682,6 +1674,15 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
+#~ "povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
 
 #~ msgid "Add custom team"
 #~ msgstr "Aldoni propran teamon"

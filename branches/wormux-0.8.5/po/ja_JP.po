@@ -1297,17 +1297,8 @@ msgstr "誰かが箱に罠を仕掛けたぞ！"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "このゲームはプレイヤーを受け付けていません"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"既にこのバージョンはサポート対象外です。サポートされているバージョンは %s で"
-"す。http://www.wormux.org/wiki/download.php からダウンロードしてアップデート"
-"して下さい。"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1689,6 +1680,16 @@ msgstr "o 音楽設定を読込中 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 音楽 %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "既にこのバージョンはサポート対象外です。サポートされているバージョンは %s "
+#~ "です。http://www.wormux.org/wiki/download.php からダウンロードしてアップ"
+#~ "デートして下さい。"
 
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s は異なるバージョンで接続を試みました : client=%s, me=%s."

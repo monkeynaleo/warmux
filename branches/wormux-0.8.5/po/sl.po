@@ -1351,17 +1351,8 @@ msgstr "Nekdo je v zaboj podtaknil bombo!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: tools/servers/game_server/server.cpp:284
-#, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Oprostite, vaša različica ni več podprta. Podprte različice so %s. "
-"Posodobljeno različico lahko dobite na http://www.wormux.org/wiki/download."
-"php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1726,6 +1717,15 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Oprostite, vaša različica ni več podprta. Podprte različice so %s. "
+#~ "Posodobljeno različico lahko dobite na http://www.wormux.org/wiki/"
+#~ "download.php"
 
 #~ msgid "%s team has won %u Gnu!"
 #~ msgid_plural "%s team has won %u Gnus!"

@@ -1307,16 +1307,8 @@ msgstr "Някой е сложил капан в съндъка!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Съжалявам, в момента няма игра, която да изчаква за играчи"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Съжалявам, но твоята версия не е поддържана. Поддържаните версии са %s. Ти "
-"може да дръпнеш по-нова версия от  http://www.wormux.org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1696,6 +1688,16 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Съжалявам, но твоята версия не е поддържана. Поддържаните версии са %s. "
+#~ "Ти може да дръпнеш по-нова версия от  http://www.wormux.org/wiki/download."
+#~ "php"
 
 #~ msgid " "
 #~ msgstr " "

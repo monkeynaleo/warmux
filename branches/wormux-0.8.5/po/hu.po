@@ -1297,17 +1297,8 @@ msgstr "Valaki bombát rejtett a ládába!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sajnálom, most egy játék sem vár játékosokat!"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Sajnáljuk, a te verziód többé nem támogatott. A támogatott verzió: %s. A "
-"http://www.wormux.org/wiki/download.php címen találod a frissített verziót. "
-"cí"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1687,6 +1678,16 @@ msgstr "Hangprofil betöltése: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Sajnáljuk, a te verziód többé nem támogatott. A támogatott verzió: %s. A "
+#~ "http://www.wormux.org/wiki/download.php címen találod a frissített "
+#~ "verziót. cí"
 
 #, fuzzy
 #~ msgid " has joined the party"
