@@ -74,7 +74,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
   active_character = characters.end();
 
-  is_camera_saved = false;
   active_weapon = NULL;
   attached_custom_team = NULL;
 
@@ -217,8 +216,7 @@ void Team::NextCharacter(bool newturn)
   }
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(), !is_camera_saved);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
 
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
@@ -239,9 +237,7 @@ void Team::PreviousCharacter()
 
   ActiveCharacter().StartPlaying();
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
@@ -265,15 +261,11 @@ void Team::PrepareTurn()
   current_turn++;
 
   // Get a living character if possible
-  if (ActiveCharacter().IsDead())
-  {
-    is_camera_saved = false;
+  if (ActiveCharacter().IsDead()) {
     NextCharacter();
   }
 
-  if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Updating weapon ammos (some weapons are not available from the beginning)
@@ -403,7 +395,6 @@ void Team::LoadGamingData()
   }
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
-  is_camera_saved = false;
 
   LoadCharacters();
 }
