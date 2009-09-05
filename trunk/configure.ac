@@ -415,6 +415,7 @@ AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
 
+echo "***********************************************************"
 echo "Configuration complete"
 echo ""
 if test "$enable_autopackage" = "yes"; then
@@ -428,6 +429,7 @@ else
    echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
    echo "* [[Optional]] Index and game servers             : ${enable_servers:-no}"
 fi
+echo "***********************************************************"
 echo ""
 echo "Execute make to compile then execute make install to install..."
 
