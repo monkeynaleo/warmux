@@ -88,6 +88,8 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 {
   swimming = false;
   explode_colliding_character = true;
+  camera_follow_closely = true;
+
   SetSize(image->GetSize());
   SetTestRect(1, 1, 2, 2);
 }
@@ -99,6 +101,9 @@ void SuperTux::Shoot(double strength)
   // during WeaponProjectile::Shoot (#bug 10241)
   swimming = false;
   flying_sound.Play("default","weapon/supertux_flying", -1);
+
+  if (strength == 0)
+    strength = 1; // To please the camera with follow_closely
 
   WeaponProjectile::Shoot(strength);
   angle_rad = ActiveCharacter().GetFiringAngle();

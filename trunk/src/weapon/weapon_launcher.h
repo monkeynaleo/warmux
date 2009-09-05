@@ -37,6 +37,7 @@ class WeaponProjectile : public PhysicalObj
     bool explode_with_timeout;
     bool explode_with_collision;
     bool can_drown;
+    bool camera_follow_closely;
     uint begin_time;
 
     ExplosiveWeaponConfig& cfg;
