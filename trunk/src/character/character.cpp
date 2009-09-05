@@ -559,7 +559,10 @@ void Character::Refresh()
 
   // center on character who is falling
   if (FootsInVacuum()) {
-    Camera::GetInstance()->FollowObject(this);
+    bool closely = false;
+    if (IsActiveCharacter())
+      closely = true;
+    Camera::GetInstance()->FollowObject(this, closely);
   }
 
   if (IsDiseased())
