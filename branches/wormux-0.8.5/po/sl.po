@@ -113,7 +113,7 @@ msgstr "%s se je odločil poškodovati %s"
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
-msgstr ""
+msgstr "%s je naredil nekaj za okolje - dihurju ni ukazal naj prdne!"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -337,10 +337,10 @@ msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 #, c-format
 msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije!"
-msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
-msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
-msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije!"
+msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije! Boooing!"
+msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije! Boooing!"
+msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije! Boooing!"
+msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije! Boooing!"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -825,7 +825,7 @@ msgstr ""
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
 #: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
@@ -1134,7 +1134,7 @@ msgstr "Premakni člana"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "Večplastno nebo?"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
@@ -1352,7 +1352,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
@@ -1847,3 +1847,15 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Napaka v XML med nalaganjem karte '%s': "
+
+#, fuzzy
+#~ msgid ""
+#~ "%s team has won %u lowgrav! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgid_plural ""
+#~ "%s team has won %u lowgravs! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije! Boooing!"
+#~ msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije! Boooing!"
+#~ msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije! Boooing!"
+#~ msgstr[3] "Ekipa %s je osvojila %u zmanjševalnikov gravitacije! Boooing!"
