@@ -388,9 +388,14 @@ msgstr[2] "Echipa %s a câștigat %u de propulsoare personale! Tare!"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
 #: src/weapon/lowgrav.cpp:84
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "Echipa %s a câștigat %u gravitație scăzută! Sunt Neil Armstrong!"
 msgstr[1] "Echipa %s a câștigat %u gravitații scăzute! Sunt Neil Armstrong!"
 msgstr[2] "Echipa %s a câștigat %u de gravitații scăzute! Sunt Neil Armstrong!"

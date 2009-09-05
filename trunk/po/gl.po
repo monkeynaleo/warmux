@@ -298,8 +298,11 @@ msgstr[1] "O equipo %s gañou %u jetpacks! E a voar!"
 
 #: src/weapon/lowgrav.cpp:84
 #, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] ""
 "O equipo %s gañou %u casco antigravidade! Un pequeno paso para o home, un "
 "gran paso para o software libre!"
