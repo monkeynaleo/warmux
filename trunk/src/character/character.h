@@ -24,6 +24,7 @@
 
 #include <limits>
 #include <string>
+#include "character/body.h"
 #include "gui/energy_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
@@ -33,7 +34,6 @@ class Text;
 class Team;
 class ParticleEngine;
 class DamageStatistics;
-class Body;
 
 #ifdef DEBUG
 //#define DEBUG_SKIN
@@ -184,8 +184,7 @@ public:
   // Can we move (check a timeout)
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
-  void MoveRight(bool slowly);
-  void MoveLeft(bool slowly);
+  void Move(enum BodyDirection direction, bool slowly);
 
   // Jumps
   void Jump(double strength, double angle);
