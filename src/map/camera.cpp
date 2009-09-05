@@ -19,25 +19,23 @@
  * Camera : follow an object, center on it or follow mouse interaction.
  *****************************************************************************/
 
-#include "map/camera.h"
-#include "map/map.h"
+#include <WORMUX_debug.h>
+#include <WORMUX_random.h>
+
 #include "character/character.h"
-#include "game/game.h"
 #include "game/config.h"
+#include "game/game.h"
+#include "game/time.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "interface/cursor.h"
-#include "interface/mouse.h"
 #include "interface/interface.h"
+#include "interface/mouse.h"
+#include "map/camera.h"
+#include "map/map.h"
 #include "object/physical_obj.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
 #include "tool/math_tools.h"
-#include "game/time.h"
-#include <WORMUX_random.h>
-#include <assert.h>
-
-#include <iostream>
 
 const Point2d MAX_CAMERA_SPEED(5000, 5000);
 const Point2d MAX_CAMERA_ACCELERATION(1.5,1.5);
@@ -49,11 +47,6 @@ const double SPEED_REACTIVITY_CEIL = 4;
 const double ADVANCE_ANTICIPATION = 10;
 const double REALTIME_FOLLOW_LIMIT = 25;
 const double REALTIME_FOLLOW_FACTOR = 0.15;
-// minimum speed of an object that is followed in advance
-//#define MIN_SPEED_ADVANCE 5
-
-// for this speed (and higher), the object can be in the corner of the screen
-//#define MAX_SPEED_ADVANCE 15
 
 Camera::Camera():
   m_started_shaking( 0 ),
@@ -217,7 +210,8 @@ void Camera::AutoCrop()
   next_position.y = m_speed.y;
   SetXY(next_position);
 
-  if (next_position.x == 0 && next_position.y == 0 &&
+  if (!m_stop &&
+      next_position.x == 0 && next_position.y == 0 &&
       followed_object->GetSpeed().x == 0 &&
       followed_object->GetSpeed().y == 0) {
     m_stop = true;
@@ -361,20 +355,21 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj)
+void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
 {
-  MSG_DEBUG( "camera.tracking", "Following object %s", obj->GetName().c_str());
+  MSG_DEBUG( "camera.tracking", "Following object %s (%d)", obj->GetName().c_str(), follow_closely);
 
   Mouse::GetInstance()->Hide();
 
-  if (followed_object != obj || !IsVisible(*obj))
+  if (!IsVisible(*obj))
     auto_crop = true;
 
+  m_stop = !follow_closely;
   followed_object = obj;
 }
 
-void Camera::StopFollowingObj(const PhysicalObj* obj){
-
+void Camera::StopFollowingObj(const PhysicalObj* obj)
+{
   if (followed_object == obj)
     followed_object = NULL;
 
@@ -382,7 +377,8 @@ void Camera::StopFollowingObj(const PhysicalObj* obj){
   m_speed = Point2d(0,0);
 }
 
-bool Camera::IsVisible(const PhysicalObj &obj) const {
+bool Camera::IsVisible(const PhysicalObj &obj) const
+{
    return Intersect( obj.GetRect() );
 }
 

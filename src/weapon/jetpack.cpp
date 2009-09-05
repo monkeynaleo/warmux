@@ -139,7 +139,7 @@ void JetPack::StartFlying()
       m_last_fuel_down = Time::GetInstance()->Read();
       flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
-      Camera::GetInstance()->FollowObject(&ActiveCharacter());
+      Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
     }
 
   // this avoids to show the arrow on top of character that can hide the ammo units
