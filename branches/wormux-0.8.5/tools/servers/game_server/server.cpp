@@ -282,9 +282,9 @@ bool GameServer::RegisterToIndexServer(bool is_public)
   if (conn != CONNECTED) {
     if (conn == CONN_WRONG_VERSION) {
       fprintf(stderr,"%s", Format(_("Sorry, your version is not supported anymore. "
-			       "Supported version are %s. "
-			       "You can download a updated version "
-			       "on http://www.wormux.org/wiki/download.php"),
+			       "Supported versions are %s. "
+			       "You can download an updated version "
+			       "from http://www.wormux.org/wiki/download.php"),
 			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
       fprintf(stderr, "ERROR: Fail to connect to the index server");
