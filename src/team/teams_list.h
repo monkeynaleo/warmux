@@ -51,13 +51,14 @@ private:
   void AddTeam(Team* the_team, int pos, const ConfigTeam& the_team_cfg, bool is_local);
   void UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg);
   void DelTeam(Team* the_team);
+  TeamsList();
 
 protected:
   friend class Singleton<TeamsList>;
-  TeamsList();
-  ~TeamsList();
 
 public:
+  ~TeamsList();
+
   friend TeamsList &GetTeamsList(void);
   void NextTeam();
   Team* GetNextTeam();
