@@ -113,7 +113,7 @@ msgstr "%s se je odločil poškodovati %s"
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
-msgstr ""
+msgstr "%s je naredil nekaj za okolje - dihurju ni ukazal naj prdne!"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -825,7 +825,7 @@ msgstr ""
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
 #: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
@@ -1134,7 +1134,7 @@ msgstr "Premakni člana"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "Večplastno nebo?"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
@@ -1352,7 +1352,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported version are %s. You "
 "can download a updated version on http://www.wormux.org/wiki/download.php"
