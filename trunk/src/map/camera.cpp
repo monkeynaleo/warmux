@@ -361,14 +361,14 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow)
+void Camera::FollowObject(const PhysicalObj *obj)
 {
   MSG_DEBUG( "camera.tracking", "Following object %s", obj->GetName().c_str());
 
   Mouse::GetInstance()->Hide();
 
-  if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
-    auto_crop = follow;
+  if (followed_object != obj || !IsVisible(*obj))
+    auto_crop = true;
 
   followed_object = obj;
 }
@@ -389,7 +389,7 @@ bool Camera::IsVisible(const PhysicalObj &obj) const {
 void Camera::CenterOnActiveCharacter()
 {
   CharacterCursor::GetInstance()->FollowActiveCharacter();
-  FollowObject(&ActiveCharacter(), true);
+  FollowObject(&ActiveCharacter());
 }
 
 Point2i Camera::ComputeShake() const

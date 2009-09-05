@@ -136,7 +136,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
   recurse_times = 0; // to keep compiler happy
 #endif
 
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
   ResetConstants();
   SetCollisionModel(true, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters

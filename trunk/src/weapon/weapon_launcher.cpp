@@ -69,7 +69,7 @@ void WeaponBullet::SignalOutOfMap()
 {
   WeaponProjectile::SignalOutOfMap();
   launcher->IncMissedShots();
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
 }
 
 void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
@@ -161,7 +161,7 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
   ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
