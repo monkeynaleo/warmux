@@ -205,7 +205,7 @@ Character::~Character()
 void Character::SignalDrowning()
 {
   // Follow character
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
 
   // Set energy
   SetEnergy(0);
@@ -473,7 +473,7 @@ void Character::Draw()
 
 void Character::Jump(double strength, double angle /*in radian */)
 {
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
 
   UpdateLastMovingTime();
   walking_time = Time::GetInstance()->Read();
@@ -559,7 +559,7 @@ void Character::Refresh()
 
   // center on character who is falling
   if (FootsInVacuum()) {
-    Camera::GetInstance()->FollowObject(this, true);
+    Camera::GetInstance()->FollowObject(this);
   }
 
   if (IsDiseased())
@@ -633,7 +633,7 @@ bool Character::CanMoveRL() const
 
 void Character::BeginMovementRL(uint pause, bool slowly)
 {
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
 
   walking_time = Time::GetInstance()->Read();
   UpdateLastMovingTime();
@@ -1044,7 +1044,7 @@ void Character::GetValueFromAction(Action *a)
   // If the player has moved, the camera should follow it!
   Point2d current_position = Physics::GetPos();
   if (IsActiveCharacter() && prev_position != current_position) {
-    Camera::GetInstance()->FollowObject(this, true);
+    Camera::GetInstance()->FollowObject(this);
     HideGameInterface();
   }
 }

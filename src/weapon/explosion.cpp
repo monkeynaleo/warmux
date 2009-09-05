@@ -137,7 +137,7 @@ void ApplyExplosion_common (const Point2i &pos,
   }
 
   if(fastest_character != NULL)
-    Camera::GetInstance()->FollowObject (fastest_character, true);
+    Camera::GetInstance()->FollowObject(fastest_character);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
