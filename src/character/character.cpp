@@ -21,7 +21,6 @@
 
 #include <sstream>
 #include <iostream>
-#include "character/body.h"
 #include "character/character.h"
 #include "character/move.h"
 #include "character/damage_stats.h"
@@ -675,38 +674,17 @@ bool Character::IsWalking() const
   return body->IsWalking();
 }
 
-void Character::MoveRight(bool slowly)
+void Character::Move(enum BodyDirection direction, bool slowly)
 {
   // character is ready to move ?
   if (!CanMoveRL()) return;
 
   if (!IsWalking()) StartWalk(slowly);
 
-  if (GetDirection() == DIRECTION_RIGHT) {
+  if (GetDirection() == direction) {
     MoveCharacter(*this, slowly);
   } else {
-    SetDirection(DIRECTION_RIGHT);
-    BeginMovementRL(PAUSE_CHG_DIRECTION, slowly);
-  }
-
-  ASSERT(&ActiveCharacter() == this);
-
-  //Refresh skin position across network
-  if (!Network::GetInstance()->IsLocal()
-      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendActiveCharacterInfo();
-}
-
-void Character::MoveLeft(bool slowly)
-{
-  if (!CanMoveRL()) return;
-
-  if (!IsWalking()) StartWalk(slowly);
-
-  if (GetDirection() == DIRECTION_LEFT) {
-    MoveCharacter(*this, slowly);
-  } else {
-    SetDirection(DIRECTION_LEFT);
+    SetDirection(direction);
     BeginMovementRL(PAUSE_CHG_DIRECTION, slowly);
   }
 
@@ -1114,7 +1092,7 @@ void Character::HandleKeyRefreshed_MoveRight(bool shift)
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile())
-    MoveRight(shift);
+    Move(DIRECTION_RIGHT, shift);
 }
 
 void Character::HandleKeyReleased_MoveRight(bool)
@@ -1141,7 +1119,7 @@ void Character::HandleKeyRefreshed_MoveLeft(bool shift)
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile())
-    MoveLeft(shift);
+    Move(DIRECTION_LEFT, shift);
 }
 
 void Character::HandleKeyReleased_MoveLeft(bool)
