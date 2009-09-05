@@ -1360,17 +1360,8 @@ msgstr "В контейнере была мина-ловушка!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Извините, в данный момент нет игр ожидающих игроков"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Извините Ваша версия программы больше не поддерживается. Поддерживаемые "
-"версии следующие: %s. Вы можете загрузить свежую версию по адресу http://www."
-"wormux.org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1753,6 +1744,16 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Извините Ваша версия программы больше не поддерживается. Поддерживаемые "
+#~ "версии следующие: %s. Вы можете загрузить свежую версию по адресу http://"
+#~ "www.wormux.org/wiki/download.php"
 
 #~ msgid "Add custom team"
 #~ msgstr "Добавить свою команду"

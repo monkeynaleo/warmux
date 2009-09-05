@@ -1319,17 +1319,8 @@ msgstr "Iemand heeft een fopcadeau gemaakt!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Sorry, uw versie wordt niet meer ondersteund. Ondersteunde versies zijn %s. "
-"U kunt een nieuwere versie downloaden op http://www.wormux.org/wiki/download."
-"php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1710,6 +1701,16 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Sorry, uw versie wordt niet meer ondersteund. Ondersteunde versies zijn %"
+#~ "s. U kunt een nieuwere versie downloaden op http://www.wormux.org/wiki/"
+#~ "download.php"
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "

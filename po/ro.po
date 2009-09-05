@@ -1499,17 +1499,8 @@ msgstr "Cineva a pus o capcană în cutie!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Ne pare rău, versiunea ta nu mai este suportată. Versiuni suportate sunt %s. "
-"Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
-"download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1895,6 +1886,16 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Ne pare rău, versiunea ta nu mai este suportată. Versiuni suportate sunt %"
+#~ "s. Poți descărca o versiune actualizată de la http://www.wormux.org/wiki/"
+#~ "download.php"
 
 #, fuzzy
 #~ msgid ""

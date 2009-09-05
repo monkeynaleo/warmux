@@ -1389,17 +1389,8 @@ msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Gav dhyn, mes ny skodhir dha versyon a'n gwari na fella. An versyonow "
-"skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://www."
-"wormux.org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1783,6 +1774,16 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Gav dhyn, mes ny skodhir dha versyon a'n gwari na fella. An versyonow "
+#~ "skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://"
+#~ "www.wormux.org/wiki/download.php"
 
 #~ msgid "Add custom team"
 #~ msgstr "Keworra para personelhes"

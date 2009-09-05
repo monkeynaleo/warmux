@@ -1318,17 +1318,8 @@ msgstr "Alguém colocou uma armadilha no baú!"
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpa, de momento, nenhum jogo está à espera de jogadores"
 
-#: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
-msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
-msgstr ""
-"Desculpe, a sua versão já não é suportada. As versões suportadas são %s. "
-"Você pode fazer o download de uma versão actualizada em http://www.wormux."
-"org/wiki/download.php"
-
 #: src/menu/network_connection_menu.cpp:353
+#: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1708,6 +1699,16 @@ msgstr "o carregar o perfil de som : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio aberto a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Desculpe, a sua versão já não é suportada. As versões suportadas são %s. "
+#~ "Você pode fazer o download de uma versão actualizada em http://www.wormux."
+#~ "org/wiki/download.php"
 
 #~ msgid "Add custom team"
 #~ msgstr "Adicionar uma equipa personalizada"
