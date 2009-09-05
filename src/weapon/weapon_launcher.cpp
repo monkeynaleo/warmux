@@ -125,6 +125,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   explode_with_timeout = true;
   explode_with_collision = true;
   can_drown = true;
+  camera_follow_closely = false;
 
   image = GetResourceManager().LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -161,7 +162,6 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial position.
   SetOverlappingObject(&ActiveCharacter(), 100);
   ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
@@ -188,6 +188,11 @@ void WeaponProjectile::Shoot(double strength)
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
   SetXY(hand_position);
   SetSpeed(strength, angle);
+
+  // Camera::FollowObject must be called after setting initial speed else
+  // camera_follow_closely will have no effect
+  Camera::GetInstance()->FollowObject(this, camera_follow_closely);
+
   collision_t collision = NotifyMove(f_hand_position, f_hole_position);
   if (collision == NO_COLLISION) {
     // Set the initial position and speed.
