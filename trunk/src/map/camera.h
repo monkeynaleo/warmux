@@ -62,7 +62,6 @@ private:
   void ScrollCamera();
 
   bool auto_crop;
-  bool in_advance;
   const PhysicalObj* followed_object;
   void AutoCrop();
 
@@ -88,7 +87,7 @@ public:
 
   // Auto crop on an object
   // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const PhysicalObj *obj, bool follow, bool in_advance = true);
+  void FollowObject(const PhysicalObj *obj, bool follow);
   void StopFollowingObj(const PhysicalObj* obj);
 
   void CenterOnActiveCharacter();

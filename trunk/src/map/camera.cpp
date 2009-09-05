@@ -67,7 +67,6 @@ Camera::Camera():
   m_control_mode(NO_CAMERA_CONTROL),
   m_begin_controlled_move_time(0),
   auto_crop(true),
-  in_advance(false),
   followed_object(NULL)
 {
   pointer_used_before_scroll = Mouse::POINTER_SELECT;
@@ -77,7 +76,6 @@ void Camera::Reset()
 {
   m_stop = false;
   auto_crop = true;
-  in_advance = false;
   followed_object = NULL;
   m_begin_controlled_move_time = 0;
   m_control_mode = NO_CAMERA_CONTROL;
@@ -144,7 +142,9 @@ void Camera::AutoCrop()
       m_stop = false;
     }
 
-    if (followed_object->IsMoving() && in_advance) {
+    target = obj_pos;
+
+    if (followed_object->IsMoving()) {
       Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetSpeed();
 
       Point2d anticipation_limit = GetSize()/3;
@@ -154,10 +154,7 @@ void Camera::AutoCrop()
       if (anticipation.x < -anticipation_limit.x) anticipation.x = -anticipation_limit.x;
       if (anticipation.y < -anticipation_limit.y) anticipation.y = -anticipation_limit.y;
 
-      target =  obj_pos + anticipation;
-
-    } else {
-      target = obj_pos;
+      target += anticipation;
     }
 
     target -= GetSize()/2;
@@ -364,8 +361,7 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow,
-			  bool _in_advance)
+void Camera::FollowObject(const PhysicalObj *obj, bool follow)
 {
   MSG_DEBUG( "camera.tracking", "Following object %s", obj->GetName().c_str());
 
@@ -374,7 +370,6 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow,
   if (followed_object != obj || !IsVisible(*obj) || auto_crop != follow)
     auto_crop = follow;
 
-  in_advance = _in_advance;
   followed_object = obj;
 }
 
