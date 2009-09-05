@@ -46,24 +46,11 @@ TeamsList::TeamsList():
 
 TeamsList::~TeamsList()
 {
-  /* The teamslist was never built... nothing to delete.
-   * FIXME This is needed because we are lead to delete things even if they
-   * were not created completely. IMHO, this reflects the fact that the object
-   * life time is not well known...
-   * Actually, this is not that bad whereas free(NULL) is accepted... but it
-   * remains spurious. */
-  if (!singleton)
-  {
-    fprintf(stderr, "Destructor still called on unexisting TeamsList\n");
-    return;
-  }
-
   UnloadGamingData();
   Clear();
   for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
   full_list.clear();
-  singleton = NULL;
 }
 
 //-----------------------------------------------------------------------------
