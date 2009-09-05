@@ -334,7 +334,7 @@ msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike! Juuuhu!"
 msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
