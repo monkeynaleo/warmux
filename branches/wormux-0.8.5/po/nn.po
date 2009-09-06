@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-05-17 18:36+0200\n"
+"POT-Creation-Date: 2009-09-05 22:40+0200\n"
+"PO-Revision-Date: 2009-09-05 22:59+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.0\n"
 
 #: src/map/maps_list.cpp:362
 #, c-format
@@ -106,6 +107,7 @@ msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
 msgstr ""
+"%s har gjort noko bra for miljøet: Han har ikkje bedt stinkdyret om å fisa."
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -313,7 +315,7 @@ msgstr[0] "%s-laget vann %u fallskjerm!"
 msgstr[1] "%s-laget vann %u fallskjermar!"
 
 #: src/weapon/polecat.cpp:282
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "%s-laget vann %u stinkdyr! Du har hugsa gassmaske, ikkje sant?"
@@ -431,7 +433,7 @@ msgid "(unlimited)"
 msgstr "(uendeleg)"
 
 #: src/menu/options_menu.cpp:463
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
@@ -483,7 +485,7 @@ msgstr "Laserstyrd rakett"
 
 #: src/menu/pause_menu.cpp:47
 msgid "Back to battle"
-msgstr "Tilbake til slaget"
+msgstr "Tilbake til kampen"
 
 #: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
@@ -514,7 +516,6 @@ msgid "Bounce Ball"
 msgstr "Sprettball"
 
 #: src/weapon/supertux.cpp:177
-#, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Ha det, Tux …"
 
@@ -541,27 +542,22 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Klarte ikkje opna den tilpassa lagmappa (%s)!"
 
 #: src/menu/help_menu.cpp:90
-#, fuzzy
 msgid "Center the camera on the character"
 msgstr "Rett kameraet mot spelaren"
 
 #: src/menu/help_menu.cpp:89
-#, fuzzy
 msgid "Change the active character"
 msgstr "Byt person"
 
 #: src/menu/help_menu.cpp:79
-#, fuzzy
 msgid "Change the aim angle"
 msgstr "Endra sikteretning"
 
 #: src/menu/help_menu.cpp:73
-#, fuzzy
 msgid "Change the weapon category"
 msgstr "Endra våpenkategori"
 
 #: src/menu/help_menu.cpp:78
-#, fuzzy
 msgid "Change the weapon countdown"
 msgstr "Endra våpennedteljing"
 
@@ -586,7 +582,6 @@ msgid "Classic"
 msgstr "Klassisk"
 
 #: src/menu/help_menu.cpp:77
-#, fuzzy
 msgid "Click: Center the camera on the character"
 msgstr "Klikk: Rett kameraet mot spelaren"
 
@@ -657,7 +652,6 @@ msgid "Displays this message"
 msgstr "Vis denne meldinga"
 
 #: src/menu/help_menu.cpp:76
-#, fuzzy
 msgid "Drag&drop: Move the camera"
 msgstr "Dra: flytt kameraet"
 
@@ -740,12 +734,11 @@ msgid ""
 msgstr "Feil: Klarte ikkje kontakta hovudtenaren for å søkje etter spel."
 
 #: src/menu/network_connection_menu.cpp:407
-#, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Feil: Klarte ikkje starta tenaren."
 
 #: src/menu/network_connection_menu.cpp:401
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
@@ -758,7 +751,7 @@ msgstr ""
 "sett opp slik at TCP-porten %s vert vidaresend til maskina."
 
 #: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
@@ -808,7 +801,6 @@ msgid "Gnu Launcher"
 msgstr "Gnu"
 
 #: src/menu/options_menu.cpp:118
-#, fuzzy
 msgid "Graphics"
 msgstr "Grafikk"
 
@@ -860,7 +852,6 @@ msgid "Host a game"
 msgstr "Ver vert for spel"
 
 #: src/weapon/blowtorch.cpp:63
-#, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
@@ -871,7 +862,6 @@ msgstr ""
 "Éin bruk per runde"
 
 #: src/weapon/airhammer.cpp:74
-#, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
 "an ammo per turn"
@@ -880,7 +870,6 @@ msgstr ""
 "Éin bruk per runde"
 
 #: src/weapon/auto_bazooka.cpp:221
-#, fuzzy
 msgid ""
 "How to use it : left click on the target\n"
 "Initial fire angle : Up/Down\n"
@@ -893,7 +882,6 @@ msgstr ""
 "Eitt skot per runde"
 
 #: src/weapon/anvil.cpp:142
-#, fuzzy
 msgid ""
 "How to use it : left click on the target\n"
 "an ammo per turn"
@@ -906,7 +894,6 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg. Du er for treg!"
 
 #: src/main.cpp:287
-#, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -921,7 +908,6 @@ msgstr "Energi ved start"
 
 #: src/weapon/bazooka.cpp:123 src/weapon/cluzooka.cpp:389
 #: src/weapon/riot_bomb.cpp:120
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep the space key pressed until the desired strength\n"
@@ -977,7 +963,7 @@ msgstr "Språk"
 
 #: src/menu/options_menu.cpp:198
 msgid "Left-handed mouse?"
-msgstr ""
+msgstr "Venstrehandsmus"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
@@ -1063,18 +1049,16 @@ msgid "Most violent"
 msgstr "Mest voldeleg"
 
 #: src/menu/help_menu.cpp:86
-#, fuzzy
 msgid "Move the camera with mouse or arrows"
 msgstr "Flytt kameraet med musa eller pilene"
 
 #: src/menu/help_menu.cpp:80
-#, fuzzy
 msgid "Move the character"
 msgstr "Flytt spelaren"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "Fleirlagshimmel"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
@@ -1123,7 +1107,6 @@ msgid "Number of teams:"
 msgstr "Talet på lag:"
 
 #: src/menu/help_menu.cpp:82
-#, fuzzy
 msgid "On a character: Select it"
 msgstr "På spelar: byt spelar"
 
@@ -1203,12 +1186,10 @@ msgid "Random map"
 msgstr "Tilfeldig kart"
 
 #: src/game/config.cpp:358
-#, fuzzy
 msgid "Reading the default config file"
 msgstr "Laster standard oppsettfil"
 
 #: src/game/config.cpp:407
-#, fuzzy
 msgid "Reading the personal config file"
 msgstr "Laster personleg oppsettfil"
 
@@ -1255,17 +1236,14 @@ msgid "Shotgun"
 msgstr "Hagle"
 
 #: src/menu/help_menu.cpp:83
-#, fuzzy
 msgid "Show the weapons menu"
 msgstr "Vis våpenmeny"
 
 #: src/menu/help_menu.cpp:69
-#, fuzzy
 msgid "Show/hide the interface"
 msgstr "Vis/gøym grensesnitt"
 
 #: src/menu/help_menu.cpp:88
-#, fuzzy
 msgid "Show/hide the minimap"
 msgstr "Vis/gøym minikart"
 
@@ -1299,7 +1277,7 @@ msgstr "Det er for tida ingen spel som ventar på spelarar."
 
 #: src/menu/network_connection_menu.cpp:353
 #: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
 "can download an updated version from http://www.wormux.org/wiki/download.php"
@@ -1346,7 +1324,6 @@ msgid "Syringe"
 msgstr "Sprøyte"
 
 #: src/menu/help_menu.cpp:72
-#, fuzzy
 msgid "Talk in network battles"
 msgstr "Snakk i nettverksspel"
 
@@ -1379,23 +1356,20 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Fotballbomba forsvann frå kartet før ho eksploderte."
 
 #: src/weapon/gnu.cpp:148
-#, fuzzy
 msgid "The Gnu left the battlefield before exploding!"
-msgstr "Gnuen forsvann frå kartet før han eksploderte."
+msgstr "Gnuen forsvann frå kartet før han eksploderte!"
 
 #: src/weapon/polecat.cpp:173
-#, fuzzy
 msgid "The Polecat left the battlefield before exploding!"
-msgstr "Stinkdyret forsvann frå kartet før det eksploderte."
+msgstr "Stinkdyret forsvann frå kartet før det eksploderte!"
 
 #: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Den laserstyrde raketten forsvann frå kartet før han eksploderte."
 
 #: src/weapon/bounce_ball.cpp:71
-#, fuzzy
 msgid "The ball left the battlefield before exploding!"
-msgstr "Sprettballen forsvann frå karten før han eksploderte."
+msgstr "Sprettballen forsvann frå karten før han eksploderte!"
 
 #: src/network/network_client.cpp:96
 #, c-format
@@ -1413,26 +1387,22 @@ msgstr ""
 "blokkerer."
 
 #: src/weapon/disco_grenade.cpp:126
-#, fuzzy
 msgid "The disco grenade has left the dance floor before exploding!"
-msgstr "Diskogranaten forlot dansegolvet før han eksploderte."
+msgstr "Diskogranaten forlot dansegolvet før han eksploderte!"
 
 #: src/game/game.cpp:506
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spelet vart avbrote fordi du mista nettsambandet."
 
 #: src/weapon/grenade.cpp:57
-#, fuzzy
 msgid "The grenade left the battlefield before exploding!"
-msgstr "Granaten forsvann frå kartet før han eksploderte."
+msgstr "Granaten forsvann frå kartet før han eksploderte!"
 
 #: src/menu/network_menu.cpp:343
-#, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Dei andre ventar på deg! Vakna! :–)"
 
 #: src/weapon/parachute.cpp:99
-#, fuzzy
 msgid "The parachute is activated automatically."
 msgstr "Fallskjermen vert automatisk løyst ut."
 
@@ -1462,7 +1432,6 @@ msgid "Time"
 msgstr "Tid"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
-#, fuzzy
 msgid ""
 "Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1475,7 +1444,6 @@ msgstr ""
 "Eitt skot per runde"
 
 #: src/weapon/bounce_ball.cpp:89
-#, fuzzy
 msgid ""
 "Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1488,17 +1456,16 @@ msgstr ""
 "Eitt skot per runde"
 
 #: src/network/net_error_msg.cpp:35
-#, fuzzy
 msgid "Unable to contact the host."
 msgstr "Får ikkje kontakt med verten."
 
 #: src/map/maps_list.cpp:274
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Klarte ikkje opna kartmappa (%s)."
 
 #: src/map/maps_list.cpp:286
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Klarte ikkje opna den personlege kartmappa (%s)."
 
@@ -1531,12 +1498,10 @@ msgstr[0] "Vent! %i spelar er ikkje klar enno!"
 msgstr[1] "Vent! %i spelarar er ikkje klare enno!"
 
 #: src/menu/network_menu.cpp:460
-#, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ventar på tenaren. Du kan avbryta, eller snakka med dei andre."
 
 #: src/menu/help_menu.cpp:87
-#, fuzzy
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Våpen: skyt / Bonusboks: fall fort"
 
@@ -1558,7 +1523,7 @@ msgstr "Velkommen til %s!"
 #: src/game/game.cpp:730
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr ""
+msgstr "Og for eit slag! %s frå %s-laget er i ei anna verd …"
 
 #: src/game/game.cpp:782
 #, c-format
@@ -1595,9 +1560,8 @@ msgid "Wrong team!"
 msgstr "Feil lag."
 
 #: src/menu/network_menu.cpp:346
-#, fuzzy
 msgid "You are alone. :-/"
-msgstr "Du er åleine :–/"
+msgstr "Du er åleine. :–/"
 
 #: src/menu/network_menu.cpp:255
 msgid "You are alone..."
@@ -1608,17 +1572,14 @@ msgid "You are the new turn master!"
 msgstr "Du er den nye turleiaren!"
 
 #: src/map/maps_list.cpp:295
-#, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Du må har minst eitt gyldig kart!"
 
 #: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
-#, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Du må har minst to gyldige lag!"
 
 #: src/menu/network_menu.cpp:230
-#, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du må velja eit lag før du kan spela!"
 
@@ -1631,7 +1592,6 @@ msgid "aka"
 msgstr "alias"
 
 #: src/weapon/air_attack.cpp:220
-#, fuzzy
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left click on the target\n"
@@ -1681,6 +1641,10 @@ msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"
 
 #, fuzzy
+#~| msgid ""
+#~| "Sorry, your version is not supported anymore. Supported versions are %s. "
+#~| "You can download an updated version from http://www.wormux.org/wiki/"
+#~| "download.php"
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
 #~ "You can download a updated version on http://www.wormux.org/wiki/download."
@@ -1732,3 +1696,16 @@ msgstr "o Opna lydfil: %d Hz og %d bits"
 
 #~ msgid "Unnamed"
 #~ msgstr "Uten navn"
+
+#~ msgid ""
+#~ "%s team has won %u lowgrav! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgid_plural ""
+#~ "%s team has won %u lowgravs! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgstr[0] ""
+#~ "%s-laget vann %u astronauthjelm! Eit lite steg for mennesket, men eit "
+#~ "stort steg for fri programvare!"
+#~ msgstr[1] ""
+#~ "%s-laget vann %u astronauthjelmar! Eit lite steg for mennesket, men eit "
+#~ "stort steg for fri programvare!"
