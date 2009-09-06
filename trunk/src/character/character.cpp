@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <WORMUX_random.h>
 #include "character/character.h"
 #include "character/move.h"
 #include "character/damage_stats.h"
@@ -42,7 +43,6 @@
 #include "team/custom_team.h"
 #include "team/macro.h"
 #include "tool/math_tools.h"
-#include <WORMUX_random.h>
 #include "tool/string_tools.h"
 #include "weapon/explosion.h"
 
@@ -559,7 +559,7 @@ void Character::Refresh()
   // center on character who is falling
   if (FootsInVacuum()) {
     bool closely = false;
-    if (IsActiveCharacter())
+    if (IsActiveCharacter() && ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK)
       closely = true;
     Camera::GetInstance()->FollowObject(this, closely);
   }
