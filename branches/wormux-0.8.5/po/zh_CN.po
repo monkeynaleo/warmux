@@ -7,12 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-07-18 20:57+1000\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-09-06 10:39+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -107,7 +108,7 @@ msgstr "%s 决定攻击 %s"
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
-msgstr ""
+msgstr "%s 造成了环境影响，明明没给那只臭鼬下命令！"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -732,16 +733,15 @@ msgstr ""
 "之前。"
 
 #: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %u must accept connection from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %u must be forwarded on your computer."
 msgstr ""
-"错误：你的服务器无法从Internet连接到。检查防火墙设置：TCP端口 %u 必须接受外部"
-"连接。假如你不能直接连接互联网，检查路由器设置：TCP端口 %u 必须在你计算机端口"
-"之前。"
+"错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够接受"
+"外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须在前。"
 
 #: src/team/team.cpp:118
 #, c-format
@@ -943,7 +943,7 @@ msgstr "语言"
 
 #: src/menu/options_menu.cpp:198
 msgid "Left-handed mouse?"
-msgstr ""
+msgstr "左手鼠标？"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
@@ -1038,7 +1038,7 @@ msgstr "移动"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "多层次天空？"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
@@ -1498,7 +1498,7 @@ msgstr "欢迎来到%s！"
 #: src/game/game.cpp:730
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr ""
+msgstr "多么美妙的还乡之旅！%s 已经离开 %s ，到达了另一个世界。"
 
 #: src/game/game.cpp:782
 #, c-format
