@@ -120,8 +120,6 @@ void SubMachineGun::p_Deselect()
 
 bool SubMachineGun::p_Shoot()
 {
-  fprintf(stderr, "SubMachineGun::p_Shoot\n");
-
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
