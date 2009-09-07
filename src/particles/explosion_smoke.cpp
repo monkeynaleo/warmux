@@ -24,7 +24,7 @@
 #include "particles/particle.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include <WORMUX_random.h>
+#include "network/randomsync.h"
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")
@@ -40,7 +40,8 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   image->SetCurrentFrame(0);
   image->Start();
 
-  SetGravityFactor(RandomLocal().GetDouble(-1.0,-2.0));
+  MSG_DEBUG("random.get", "ExplosionSmoke::ExplosionSmoke(...)");
+  SetGravityFactor(RandomSync().GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
   SetSize( Point2i(1, 1) );
