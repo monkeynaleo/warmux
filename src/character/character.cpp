@@ -93,7 +93,8 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("breathe");
 
-  SetDirection(RandomLocal().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
+  MSG_DEBUG("random.get", "Character::SetBody(...)");
+  SetDirection(RandomSync().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   body->SetFrame(RandomLocal().GetLong(0, body->GetFrameCount() - 1));
   SetSize(body->GetSize());
 }
