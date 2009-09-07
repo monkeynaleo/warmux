@@ -24,7 +24,7 @@
 #include "particles/explosion_smoke.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include <WORMUX_random.h>
+#include "network/randomsync.h"
 
 // Vibration period of the bubble
 const uint vib_period = 250;
@@ -35,7 +35,9 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   delete image;
   image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
   SetAirResistFactor( GetAirResistFactor() * 3.0 );
-  vib_phi = RandomLocal().GetLong(0, vib_period);
+
+  MSG_DEBUG("random.get", "IllBubble::IllBubble()");
+  vib_phi = RandomSync().GetLong(0, vib_period);
 }
 
 void IllBubble::Draw()
