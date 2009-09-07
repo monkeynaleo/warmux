@@ -30,10 +30,6 @@ void RandomSyncGen::InitRandom()
 {
   MSG_DEBUG("random", "Initialization...");
 
-#ifdef DEBUG
-  nb_get = 0;
-#endif
-
   if (Network::GetInstance()->IsLocal()) {
     int seed = time(NULL);
     SetRand(seed);
@@ -64,6 +60,9 @@ uint RandomSyncGen::GetRand()
 
 void RandomSyncGen::SetRand(uint seed)
 {
+#ifdef DEBUG
+  nb_get = 0;
+#endif
   RandomGenerator::SetRand(seed);
 }
 
