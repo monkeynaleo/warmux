@@ -526,7 +526,9 @@ void Character::Refresh()
   // center on character who is falling
   if (FootsInVacuum()) {
     bool closely = false;
-    if (IsActiveCharacter() && ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK)
+    if (IsActiveCharacter() &&
+	(ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK
+	 || ActiveTeam().GetWeaponType() == Weapon::WEAPON_PARACHUTE))
       closely = true;
     Camera::GetInstance()->FollowObject(this, closely);
   }
