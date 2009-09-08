@@ -93,10 +93,17 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("breathe");
 
-  MSG_DEBUG("random.get", "Character::SetBody(...)");
+  MSG_DEBUG("random.get", "Character::SetBody(...) direction");
   SetDirection(RandomSync().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
-  body->SetFrame(RandomLocal().GetLong(0, body->GetFrameCount() - 1));
+  MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
+  body->SetFrame(RandomSync().GetLong(0, body->GetFrameCount() - 1));
   SetSize(body->GetSize());
+}
+
+static uint GetRandomAnimationTimeValue()
+{
+  MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
+  return Time::GetInstance()->Read() + RandomSync().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
@@ -117,7 +124,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   rl_motion_pause(0),
   do_nothing_time(0),
   walking_time(0),
-  animation_time(Time::GetInstance()->Read() + RandomLocal().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
+  animation_time(GetRandomAnimationTimeValue()),
   lost_energy(0),
   hidden(false),
   channel_step(-1),
@@ -370,47 +377,6 @@ void Character::Draw()
       || IsDead())
     draw_loosing_energy = false;
 
-  if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
-    body->ResetWalk();
-
-  if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
-      && body->GetMovement().substr(0,9) != "animation"
-      &&  body->GetClothe().substr(0,9) != "animation")
-  {
-    body->PlayAnimation();
-    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + RandomLocal().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
-  }
-
-  // Stop the animation or the black skin if we are playing
-  if (IsActiveCharacter()
-      && Game::GetInstance()->ReadState() == Game::PLAYING
-      && (body->GetMovement().substr(0,9) == "animation"
-	  || body->GetClothe().substr(0,9) == "animation"
-	  || body->GetClothe() == "black"))
-  {
-    SetClothe("normal");
-    SetMovement("breathe");
-  }
-
-  // Stop flying if we don't go fast enough
-  double n, a;
-  GetSpeed(n, a);
-  if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
-    SetMovement("breathe");
-
-
-  // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
-  body->Build();
-
-  if (prepare_shoot)
-  {
-    if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
-    {
-      // if the movement is finnished, shoot !
-      DoShoot();
-      prepare_shoot = false;
-    }
-  }
 
   Point2i pos = GetPosition();
   body->Draw(pos);
@@ -617,6 +583,49 @@ void Character::Refresh()
     Point2d speed = GetSpeedXY();
     rotation = M_PI * speed.y / speed_init;
     body->SetRotation(rotation);
+  }
+
+  if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
+    body->ResetWalk();
+
+  if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
+      && body->GetMovement().substr(0,9) != "animation"
+      &&  body->GetClothe().substr(0,9) != "animation")
+  {
+    body->PlayAnimation();
+    MSG_DEBUG("random.get", "Character::Refresh()");
+    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + RandomSync().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
+  }
+
+  // Stop the animation or the black skin if we are playing
+  if (IsActiveCharacter()
+      && Game::GetInstance()->ReadState() == Game::PLAYING
+      && (body->GetMovement().substr(0,9) == "animation"
+	  || body->GetClothe().substr(0,9) == "animation"
+	  || body->GetClothe() == "black"))
+  {
+    SetClothe("normal");
+    SetMovement("breathe");
+  }
+
+  // Stop flying if we don't go fast enough
+  double n, a;
+  GetSpeed(n, a);
+  if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
+    SetMovement("breathe");
+
+
+  // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
+  body->Build();
+
+  if (prepare_shoot)
+  {
+    if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
+    {
+      // if the movement is finnished, shoot !
+      DoShoot();
+      prepare_shoot = false;
+    }
   }
 }
 
