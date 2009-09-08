@@ -743,25 +743,13 @@ msgid "Error: Unable to start the server"
 msgstr "エラー: サーバーが開始できません"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"エラー: あなたのサーバーはインターネットまで接続されていません。firewall 構成"
-"を確認し、TCP Port %s は外側からの接続できるようにする必要があります。もし、"
-"あなたは直接インターネットに接続していないなら、ルーターを確認してください。"
-"TCP Port %s は、あなたのコンピュータにフォワーディングする必要があります。"
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "エラー: あなたのサーバーはインターネットまで接続されていません。firewall 構成"
 "を確認し、TCP Port %s は外側からの接続できるようにする必要があります。もし、"
@@ -1680,6 +1668,19 @@ msgstr "o 音楽設定を読込中 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 音楽 %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "エラー: あなたのサーバーはインターネットまで接続されていません。firewall "
+#~ "構成を確認し、TCP Port %s は外側からの接続できるようにする必要があります。"
+#~ "もし、あなたは直接インターネットに接続していないなら、ルーターを確認してく"
+#~ "ださい。TCP Port %s は、あなたのコンピュータにフォワーディングする必要があ"
+#~ "ります。"
 
 #, fuzzy
 #~ msgid ""

@@ -761,26 +761,13 @@ msgid "Error: Unable to start the server"
 msgstr "Erreur : Impossible de démarrer le serveur"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
-"configuration de votre firewall : le port TCP %s doit accepter les "
-"connexions extérieures. Si vous n'êtes pas directement connecté à Internet, "
-"vérifiez la configuration de votre routeur : le port TCP %s doit être "
-"redirigé vers votre ordinateur."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
 "configuration de votre firewall : le port TCP %s doit accepter les "
@@ -1698,6 +1685,19 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
+#~ "configuration de votre firewall : le port TCP %s doit accepter les "
+#~ "connexions extérieures. Si vous n'êtes pas directement connecté à "
+#~ "Internet, vérifiez la configuration de votre routeur : le port TCP %s "
+#~ "doit être redirigé vers votre ordinateur."
 
 #, fuzzy
 #~ msgid ""

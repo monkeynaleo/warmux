@@ -744,25 +744,13 @@ msgid "Error: Unable to start the server"
 msgstr "Eraro: Ne eblas starti servilon"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Eraro: via servilo ne estas atingebla el la interreto. Kontroli la agordon "
-"de via fajroŝirmilo: la TCP pordo %s devas akcepti konektojn el ekstero. Se "
-"vi ne estas senpere konektita al la interreto, kontroli la agordon de via "
-"kursilo: la TCP pordo %s devas trasendiĝi al via komputilo."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Eraro: via servilo ne estas atingebla el la interreto. Kontroli la agordon "
 "de via fajroŝirmilo: la TCP pordo %s devas akcepti konektojn el ekstero. Se "
@@ -1674,6 +1662,18 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Eraro: via servilo ne estas atingebla el la interreto. Kontroli la "
+#~ "agordon de via fajroŝirmilo: la TCP pordo %s devas akcepti konektojn el "
+#~ "ekstero. Se vi ne estas senpere konektita al la interreto, kontroli la "
+#~ "agordon de via kursilo: la TCP pordo %s devas trasendiĝi al via komputilo."
 
 #, fuzzy
 #~ msgid ""

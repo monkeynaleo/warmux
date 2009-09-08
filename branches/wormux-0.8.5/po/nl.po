@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-07 22:47+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -761,6 +760,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fout: Kon server niet starten"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -772,19 +772,6 @@ msgstr ""
 "firewall instellingen: TCP Poort %s moet connecties van buitenaf toestaan. "
 "Contoleer uw router configuratie wanneer u niet direct met het internet "
 "verbonden bent: TCP Poort %s moet doorgestuurd worden naar deze computer."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Fout: Uw server is niet bereikbaar vanaf het internet. Controleer uw "
-"firewall instellingen: TCP Poort %u moet connecties van buitenaf toestaan. "
-"Contoleer uw router configuratie wanneer u niet direct met het internet "
-"verbonden bent: TCP Poort %u moet doorgestuurd worden naar deze computer."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1662,6 +1649,18 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fout: Uw server is niet bereikbaar vanaf het internet. Controleer uw "
+#~ "firewall instellingen: TCP Poort %u moet connecties van buitenaf "
+#~ "toestaan. Contoleer uw router configuratie wanneer u niet direct met het "
+#~ "internet verbonden bent: TCP Poort %u moet doorgestuurd worden naar deze "
+#~ "computer."
 
 #, fuzzy
 #~ msgid ""

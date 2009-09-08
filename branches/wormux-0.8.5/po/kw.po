@@ -835,25 +835,13 @@ msgid "Error: Unable to start the server"
 msgstr "Gwall: Ny allas lonchya an servyer"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Gwall: Nyns yw dha server hedhadow a'n Gesrosweyth. Check fyttyans dha fos-"
-"tan: res yw dhe'n Port TCP %s degemeres junyansow from the outside Mar nyns "
-"osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
-"dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Gwall: Nyns yw dha server hedhadow a'n Gesrosweyth. Check fyttyans dha fos-"
 "tan: res yw dhe'n Port TCP %s degemeres junyansow from the outside Mar nyns "
@@ -1774,6 +1762,18 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Gwall: Nyns yw dha server hedhadow a'n Gesrosweyth. Check fyttyans dha "
+#~ "fos-tan: res yw dhe'n Port TCP %s degemeres junyansow from the outside "
+#~ "Mar nyns osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha "
+#~ "routyer: Res yw dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
 #, fuzzy
 #~ msgid ""

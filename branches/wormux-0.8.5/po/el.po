@@ -778,6 +778,7 @@ msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -789,21 +790,6 @@ msgstr ""
 "ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %s πρέπει να δέχεται σύνδεση "
 "από έξω. Αν δεν είστε απευθείας συνδεδεμένοι με το διαδίκτυο, ελέγξτε την "
 "ρύθμιση του δρομολογητή:  Η TCP θύρα %s πρέπει να διαβιβάζεται στον "
-"υπολογιστή σας."
-
-# Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Λάθος: Ο διακομιστής σας δεν είναι προσιτός από το διαδίκτυο. Ελέγξτε τις "
-"ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %u πρέπει να δέχεται σύνδεση "
-"από έξω. Αν δεν είστε απευθείας συνδεδεμένοι με το διαδίκτυο, ελέγξτε την "
-"ρύθμιση του δρομολογητή:  Η TCP θύρα %u πρέπει να διαβιβάζεται στον "
 "υπολογιστή σας."
 
 #: src/team/team.cpp:118
@@ -1743,6 +1729,20 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
+
+# Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Λάθος: Ο διακομιστής σας δεν είναι προσιτός από το διαδίκτυο. Ελέγξτε τις "
+#~ "ρυθμίσεις του τείχους προστασίας: Η TCP θύρα %u πρέπει να δέχεται σύνδεση "
+#~ "από έξω. Αν δεν είστε απευθείας συνδεδεμένοι με το διαδίκτυο, ελέγξτε την "
+#~ "ρύθμιση του δρομολογητή:  Η TCP θύρα %u πρέπει να διαβιβάζεται στον "
+#~ "υπολογιστή σας."
 
 #, fuzzy
 #~ msgid ""

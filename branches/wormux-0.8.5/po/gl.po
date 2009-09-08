@@ -754,6 +754,7 @@ msgid "Error: Unable to start the server"
 msgstr "Erro: Non se pode iniciar o servidor"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -766,20 +767,6 @@ msgstr ""
 "externa. Se non estás conectado directamente á internet, bótalle unha ollada "
 "á configuración do teu router: o porto TCP %s ten que estarlle permitido á "
 "túa computadora."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Erro: o teu servidor non é accesible dende a Internet. Comproba a "
-"configuración do teu firewall: o porto TCP %u ten que aceptar conexións "
-"externas. Se non estás conectado directamente á Internet, bótalle unha "
-"ollada á configuración do teu router: o porto TCP %u ten que estarlle "
-"permitido á túa computadora."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1662,6 +1649,18 @@ msgstr "o Cargando o perfil de son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bits"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Erro: o teu servidor non é accesible dende a Internet. Comproba a "
+#~ "configuración do teu firewall: o porto TCP %u ten que aceptar conexións "
+#~ "externas. Se non estás conectado directamente á Internet, bótalle unha "
+#~ "ollada á configuración do teu router: o porto TCP %u ten que estarlle "
+#~ "permitido á túa computadora."
 
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "

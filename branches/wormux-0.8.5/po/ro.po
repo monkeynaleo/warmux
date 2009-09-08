@@ -931,6 +931,7 @@ msgid "Error: Unable to start the server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -942,19 +943,6 @@ msgstr ""
 "firewall-ului: Portul TCP %s trebuie să accepte conexiuni dinspre exterior. "
 "Dacă nu ai conexiune directă la internet, verifică configurația router-ului: "
 "Portul TCP %s trebuie să fie redirectat către calculatorul tău."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Eroare: Serverul tău nu poate fi accesat din internet. Verifică configurația "
-"firewall-ului: Portul TCP %u trebuie să accepte conexiuni dinspre exterior. "
-"Dacă nu ai conexiune directă la internet, verifică configurația router-ului: "
-"Portul TCP %u trebuie să fie redirectat către calculatorul tău."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1847,6 +1835,18 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Eroare: Serverul tău nu poate fi accesat din internet. Verifică "
+#~ "configurația firewall-ului: Portul TCP %u trebuie să accepte conexiuni "
+#~ "dinspre exterior. Dacă nu ai conexiune directă la internet, verifică "
+#~ "configurația router-ului: Portul TCP %u trebuie să fie redirectat către "
+#~ "calculatorul tău."
 
 #, fuzzy
 #~ msgid ""

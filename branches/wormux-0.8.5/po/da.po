@@ -748,6 +748,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fejl: Kan ikke starte server"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -759,19 +760,6 @@ msgstr ""
 "konfiguration: TCP-port %s skal acceptere forbindelser udefra. Hvis du ikke "
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
 "stedet. I så fald skal du forwarde TCP-port %s til din computer."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Fejl: Din server er ikke tilgængelig fra internettet. Check at din firewall-"
-"konfiguration: TCP-port %u skal acceptere forbindelser udefra. Hvis du ikke "
-"er forbundet direkte til internettet, så check din routerkonfiguration i "
-"stedet. I så fald skal du forwarde TCP-port %u til din computer."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1681,6 +1669,19 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fejl: Din server er ikke tilgængelig fra internettet. Check at din "
+#~ "firewall-konfiguration: TCP-port %u skal acceptere forbindelser udefra. "
+#~ "Hvis du ikke er forbundet direkte til internettet, så check din "
+#~ "routerkonfiguration i stedet. I så fald skal du forwarde TCP-port %u til "
+#~ "din computer."
 
 #, fuzzy
 #~ msgid ""

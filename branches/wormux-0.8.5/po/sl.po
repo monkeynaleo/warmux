@@ -812,6 +812,7 @@ msgid "Error: Unable to start the server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -823,19 +824,6 @@ msgstr ""
 "vašega požarnega zidu: vrata TCP %s morajo biti odprta za zunanje povezave. "
 "Če na internet niste povezani neposredno, preverite nastavitve "
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
-"vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje povezave. "
-"Če na internet niste povezani neposredno, preverite nastavitve "
-"usmerjevalnika:  vrata TCP %u morajo biti posredovana."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1717,6 +1705,17 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
+#~ "vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje "
+#~ "povezave. Če na internet niste povezani neposredno, preverite nastavitve "
+#~ "usmerjevalnika:  vrata TCP %u morajo biti posredovana."
 
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "

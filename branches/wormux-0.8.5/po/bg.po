@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-06 19:01+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@gmail.com>\n"
 "Language-Team: Bulgarian <thedeadly91@gmail.com>\n"
@@ -741,6 +740,7 @@ msgid "Error: Unable to start the server"
 msgstr "Грешка: Не мога да стартирам сървър"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -752,19 +752,6 @@ msgstr ""
 "защитната стена: TCP Порт %s трябва да приема връзки от вън. Ако не си "
 "свързан директно към интернет, провери конфигурацията на рутера си: TCP Порт "
 "%s трябва да е препратен към твоя компютър."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Грешка: Твоят сървър не е достъпен от интернет. Провери конфигурацията на "
-"защитната стена: TCP Порт %u трябва да приема връзка от вън. Ако не си "
-"свързан директно към интернет, провери конфигурацията на рутера си: TCP Порт "
-"%u трябва да е препратен към твоя компютър."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1641,6 +1628,17 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Грешка: Твоят сървър не е достъпен от интернет. Провери конфигурацията на "
+#~ "защитната стена: TCP Порт %u трябва да приема връзка от вън. Ако не си "
+#~ "свързан директно към интернет, провери конфигурацията на рутера си: TCP "
+#~ "Порт %u трябва да е препратен към твоя компютър."
 
 #, fuzzy
 #~ msgid ""

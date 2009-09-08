@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-06 10:39+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
@@ -721,6 +720,7 @@ msgid "Error: Unable to start the server"
 msgstr "错误: 无法开始服务器"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -731,17 +731,6 @@ msgstr ""
 "错误：你的服务器无法从Internet连接到。检查防火墙设置：TCP端口 %s 必须允许外部"
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够接受"
-"外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须在前。"
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1617,6 +1606,16 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够"
+#~ "接受外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须"
+#~ "在前。"
 
 #, fuzzy
 #~ msgid ""

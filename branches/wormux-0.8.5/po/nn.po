@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2009-09-05 22:40+0200\n"
 "PO-Revision-Date: 2009-09-05 22:59+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -738,6 +737,7 @@ msgid "Error: Unable to start the server"
 msgstr "Feil: Klarte ikkje starta tenaren."
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -749,19 +749,6 @@ msgstr ""
 "brannmuren er rett sett opp, slik at TCP-porten %s godtek samband utanfrå. "
 "Viss du ikkje er kopla direkte til Internett, må du sjå til at rutaren er "
 "sett opp slik at TCP-porten %s vert vidaresend til maskina."
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Feil: Tenaren din er ikkje tilgjengeleg over Internett. Sjå til at "
-"brannmuren er rett sett opp, slik at TCP-porten %u godtek samband utanfrå. "
-"Viss du ikkje er kopla direkte til Internett, må du sjå til at rutaren er "
-"sett opp slik at TCP-porten %u vert vidaresend til maskina."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -1639,6 +1626,17 @@ msgstr "o Lastar lydprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Feil: Tenaren din er ikkje tilgjengeleg over Internett. Sjå til at "
+#~ "brannmuren er rett sett opp, slik at TCP-porten %u godtek samband "
+#~ "utanfrå. Viss du ikkje er kopla direkte til Internett, må du sjå til at "
+#~ "rutaren er sett opp slik at TCP-porten %u vert vidaresend til maskina."
 
 #, fuzzy
 #~| msgid ""

@@ -729,6 +729,7 @@ msgid "Error: Unable to start the server"
 msgstr "錯誤: 無法開始伺服器"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -738,18 +739,6 @@ msgid ""
 msgstr ""
 "錯誤：你的伺服器無法從Internet連線到。檢查防火牆設定：TCP通訊埠 %s 必須允許外"
 "部連線。加入你無法直接連線互聯網，檢查路線器設定：TCP通訊埠 %s 必須在你電腦通"
-"訊埠之前。"
-
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"錯誤：你的伺服器無法從Internet連線到。檢查防火牆設定：TCP通訊埠 %u 必須接受外"
-"部連線。假如你無法直接連線互聯網，檢查路線器設定：TCP通訊埠 %u 必須在你電腦通"
 "訊埠之前。"
 
 #: src/team/team.cpp:118
@@ -1659,6 +1648,16 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "錯誤：你的伺服器無法從Internet連線到。檢查防火牆設定：TCP通訊埠 %u 必須接"
+#~ "受外部連線。假如你無法直接連線互聯網，檢查路線器設定：TCP通訊埠 %u 必須在"
+#~ "你電腦通訊埠之前。"
 
 #, fuzzy
 #~ msgid ""

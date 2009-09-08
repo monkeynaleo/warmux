@@ -745,25 +745,13 @@ msgid "Error: Unable to start the server"
 msgstr "Error: Imposible iniciar servidor"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Error: El servidor no es accesible desde la Internet. Mira la configuración "
-"del firewall: El Puerto TCP %s debe aceptar conexión desde el exterior. Si "
-"no está directamente conectado a Internet, comprueba la configuración de tu "
-"router: Puerto TCP %s debe ser dirigido a tu ordenador."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Error: El servidor no es accesible desde la Internet. Mira la configuración "
 "del firewall: El Puerto TCP %s debe aceptar conexión desde el exterior. Si "
@@ -1654,6 +1642,19 @@ msgstr "o Cargando perfil de sonido: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Abierto audio a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Error: El servidor no es accesible desde la Internet. Mira la "
+#~ "configuración del firewall: El Puerto TCP %s debe aceptar conexión desde "
+#~ "el exterior. Si no está directamente conectado a Internet, comprueba la "
+#~ "configuración de tu router: Puerto TCP %s debe ser dirigido a tu "
+#~ "ordenador."
 
 #, fuzzy
 #~ msgid ""

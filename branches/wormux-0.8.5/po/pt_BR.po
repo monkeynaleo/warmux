@@ -757,25 +757,13 @@ msgid "Error: Unable to start the server"
 msgstr "Não foi possível iniciar o servidor"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Erro: Seu servidor não é conectável da internet. Veja a configuração do seu "
-"firewall: Porta TCP %s precisa aceitar conexão de fora. Se você não está "
-"diretamente conectado com a internet, veja a configuração do seu roteador: "
-"Porta TCP %s precisa ester na frente em seu computador."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Erro: Seu servidor não é conectável da internet. Veja a configuração do seu "
 "firewall: Porta TCP %s precisa aceitar conexão de fora. Se você não está "
@@ -1692,6 +1680,18 @@ msgstr "o Carregando perfil de som: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio carregado a %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Erro: Seu servidor não é conectável da internet. Veja a configuração do "
+#~ "seu firewall: Porta TCP %s precisa aceitar conexão de fora. Se você não "
+#~ "está diretamente conectado com a internet, veja a configuração do seu "
+#~ "roteador: Porta TCP %s precisa ester na frente em seu computador."
 
 #, fuzzy
 #~ msgid ""

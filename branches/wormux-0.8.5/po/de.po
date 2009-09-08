@@ -770,25 +770,13 @@ msgid "Error: Unable to start the server"
 msgstr "Fehler: Kann Server nicht starten"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie ihre "
-"Firewallkonfiguration: TCP-Port %s muss Verbindungen von aussen akzeptieren. "
-"Prüfen sie ihre Routerkonfiguration, falls sie nicht direkt mit dem Internet "
-"verbunden sind: TCP-Port %s muss an ihren Computer weitergeleitet werden."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie ihre "
 "Firewallkonfiguration: TCP-Port %s muss Verbindungen von aussen akzeptieren. "
@@ -1715,6 +1703,19 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie ihre "
+#~ "Firewallkonfiguration: TCP-Port %s muss Verbindungen von aussen "
+#~ "akzeptieren. Prüfen sie ihre Routerkonfiguration, falls sie nicht direkt "
+#~ "mit dem Internet verbunden sind: TCP-Port %s muss an ihren Computer "
+#~ "weitergeleitet werden."
 
 #, fuzzy
 #~ msgid ""

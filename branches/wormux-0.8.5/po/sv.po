@@ -755,25 +755,13 @@ msgid "Error: Unable to start the server"
 msgstr "Fel: Kunde inte starta servern"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
-msgstr ""
-"Fel: Din server kan inte nås från internet. kontrollera dina "
-"brandväggsinställningar: TCP port %s måste kunna anslutas till från utsidan. "
-"Om du inte är direktansluten till internet, kontrollera dina "
-"routerinställningar: TCP port %s måste släppas igenom."
-
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
 msgstr ""
 "Fel: Din server kan inte nås från internet. kontrollera dina "
 "brandväggsinställningar: TCP port %s måste kunna anslutas till från utsidan. "
@@ -1694,6 +1682,18 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fel: Din server kan inte nås från internet. kontrollera dina "
+#~ "brandväggsinställningar: TCP port %s måste kunna anslutas till från "
+#~ "utsidan. Om du inte är direktansluten till internet, kontrollera dina "
+#~ "routerinställningar: TCP port %s måste släppas igenom."
 
 #, fuzzy
 #~ msgid ""
