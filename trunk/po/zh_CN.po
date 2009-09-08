@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-06 10:39+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
@@ -57,7 +56,7 @@ msgstr " %s 队伍"
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:464
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s 把目标改为 %s"
@@ -98,7 +97,7 @@ msgstr "%s (%s) 亲吻大地，可是对方太硬了！"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s)的死因是: 太笨 ！"
 
-#: src/ai/ai_shoot_module.cpp:400
+#: src/ai/ai_shoot_module.cpp:401
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s 决定攻击 %s"
@@ -348,7 +347,7 @@ msgid_plural ""
 msgstr[0] "%s 队得到了%u狙击步枪！ 看准,两只眼中间！ "
 msgstr[1] "%s 队得到了%u狙击步枪！ 看准,两只眼中间！"
 
-#: src/weapon/submachine_gun.cpp:157
+#: src/weapon/submachine_gun.cpp:155
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -383,7 +382,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 队得到 %u 暂停！ 我知道你喜欢。"
 msgstr[1] "%s 队得到 %u 暂停！ 我知道你喜欢。"
 
-#: src/weapon/supertux.cpp:439
+#: src/weapon/supertux.cpp:444
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -400,7 +399,7 @@ msgstr "%s 被打垮了。"
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s 带走了 %s 的一员！"
 
-#: src/ai/ai_shoot_module.cpp:377
+#: src/ai/ai_shoot_module.cpp:378
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s 将要攻击 %s"
@@ -505,28 +504,28 @@ msgstr "吹管"
 msgid "Bounce Ball"
 msgstr "弹力球"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:182
 msgid "Bye bye Tux..."
 msgstr "Bye bye 企鹅。。。"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
-#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
+#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
 #, c-format
 msgid "Can't find team %s!"
 msgstr "没找到队伍 %s！"
 
-#: src/team/teams_list.cpp:167
+#: src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "打不开个人团队目录(%s)！"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不开团队目录 (%s)！"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不开定制的团队目录 (%s)！"
@@ -576,7 +575,7 @@ msgid "Click: Center the camera on the character"
 msgstr "点击：镜头对准角色"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
 msgid "Client mode"
 msgstr "客户端模式 "
 
@@ -675,7 +674,7 @@ msgstr "能量"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "网络初始错误：客户端 %s 不同意你！ - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "读取队伍出错 :"
 
@@ -726,6 +725,7 @@ msgid "Error: Unable to start the server"
 msgstr "错误: 无法开始服务器"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -737,18 +737,7 @@ msgstr ""
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
 
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够接受"
-"外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须在前。"
-
-#: src/team/team.cpp:118
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"。"
@@ -958,7 +947,7 @@ msgstr "列出已经连接的玩家"
 msgid "Load maps:"
 msgstr "读取地图:"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "读取队伍:"
 
@@ -1212,7 +1201,7 @@ msgid "Server available on Internet"
 msgstr "Internet可用服务器"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "服务器设置"
 
@@ -1299,7 +1288,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "冲锋枪"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux-超级企鹅"
 
@@ -1556,7 +1545,7 @@ msgstr "你是这回合的控制者！"
 msgid "You need at least one valid map!"
 msgstr "你需要可用的地图！"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
 msgid "You need at least two valid teams!"
 msgstr "至少有2组才能开始 ！"
 
@@ -1564,7 +1553,7 @@ msgstr "至少有2组才能开始 ！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "没有队伍，就不会有战斗！"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:505
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 
@@ -1622,6 +1611,16 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够"
+#~ "接受外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须"
+#~ "在前。"
 
 #, fuzzy
 #~ msgid ""

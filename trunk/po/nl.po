@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-07 22:47+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -59,7 +58,7 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:464
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s verandert het doelwit naar %s"
@@ -99,7 +98,7 @@ msgstr "%s van team %s heeft de grond te hard geraakt!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
 
-#: src/ai/ai_shoot_module.cpp:400
+#: src/ai/ai_shoot_module.cpp:401
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s heeft besloten om %s te verwonden"
@@ -371,7 +370,7 @@ msgstr[1] ""
 "Team %s heeft %u sluipschuttersgeweren gekregen! Schiet ermee tussen zijn "
 "ogen!"
 
-#: src/weapon/submachine_gun.cpp:157
+#: src/weapon/submachine_gun.cpp:155
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -411,7 +410,7 @@ msgstr[1] ""
 "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek "
 "op bent."
 
-#: src/weapon/supertux.cpp:439
+#: src/weapon/supertux.cpp:444
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -431,7 +430,7 @@ msgstr "Team %s is afgeslacht."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
 
-#: src/ai/ai_shoot_module.cpp:377
+#: src/ai/ai_shoot_module.cpp:378
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s gaat op %s schieten"
@@ -537,28 +536,28 @@ msgstr "Snijbrander"
 msgid "Bounce Ball"
 msgstr "Stuiterbal"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:182
 msgid "Bye bye Tux..."
 msgstr "Dag dag tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
-#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
+#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
 
-#: src/team/teams_list.cpp:167
+#: src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
@@ -608,7 +607,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klik: Camera op het karakter centreren"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
 msgid "Client mode"
 msgstr "Client modus"
 
@@ -709,7 +708,7 @@ msgstr ""
 "Fout bij het initialiseren van het netwerk: Client %s is het niet met je "
 "eens!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
@@ -766,6 +765,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fout: Kon server niet starten"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -778,20 +778,7 @@ msgstr ""
 "Contoleer uw router configuratie wanneer u niet direct met het internet "
 "verbonden bent: TCP Poort %s moet doorgestuurd worden naar deze computer."
 
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Fout: Uw server is niet bereikbaar vanaf het internet. Controleer uw "
-"firewall instellingen: TCP Poort %u moet connecties van buitenaf toestaan. "
-"Contoleer uw router configuratie wanneer u niet direct met het internet "
-"verbonden bent: TCP Poort %u moet doorgestuurd worden naar deze computer."
-
-#: src/team/team.cpp:118
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
@@ -1001,7 +988,7 @@ msgstr "Een lijst met verbonden spelers weergeven"
 msgid "Load maps:"
 msgstr "Kaarten worden geladen:"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Teams worden geladen:"
 
@@ -1255,7 +1242,7 @@ msgid "Server available on Internet"
 msgstr "Server beschikbaar op internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "Server modus"
 
@@ -1343,7 +1330,7 @@ msgstr "Voorraad:"
 msgid "Submachine Gun"
 msgstr "Automatisch Geweer"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1603,7 +1590,7 @@ msgstr "Jij bent de nieuwe Beurtmeester!"
 msgid "You need at least one valid map!"
 msgstr "U heeft minimaal één geldige kaart nodig!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
 msgid "You need at least two valid teams!"
 msgstr "U heeft minimaal twee geldige teams nodig!"
 
@@ -1611,7 +1598,7 @@ msgstr "U heeft minimaal twee geldige teams nodig!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd!"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:505
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
@@ -1667,6 +1654,18 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fout: Uw server is niet bereikbaar vanaf het internet. Controleer uw "
+#~ "firewall instellingen: TCP Poort %u moet connecties van buitenaf "
+#~ "toestaan. Contoleer uw router configuratie wanneer u niet direct met het "
+#~ "internet verbonden bent: TCP Poort %u moet doorgestuurd worden naar deze "
+#~ "computer."
 
 #, fuzzy
 #~ msgid ""

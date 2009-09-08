@@ -56,7 +56,7 @@ msgstr "Lag %s"
 msgid "%s Team - Remote"
 msgstr "Lag %s - Fjärr"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:464
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -97,7 +97,7 @@ msgstr "%s från lag %s föll och slog sig fördärvad!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s från lag %s dog för att han var klumpig!"
 
-#: src/ai/ai_shoot_module.cpp:400
+#: src/ai/ai_shoot_module.cpp:401
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
@@ -359,7 +359,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Lag %s har belönats med %u prickskyttegevär! Sikta och skjut mellan ögonen!"
 
-#: src/weapon/submachine_gun.cpp:157
+#: src/weapon/submachine_gun.cpp:155
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -396,7 +396,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Lag %s har belönats med %u hoppa över omgångar! Jag vet att du älskar dem."
 
-#: src/weapon/supertux.cpp:439
+#: src/weapon/supertux.cpp:444
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -415,7 +415,7 @@ msgstr "Lag %s har blivit utplånat."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog en medlem från lag %s med sig ner i graven!"
 
-#: src/ai/ai_shoot_module.cpp:377
+#: src/ai/ai_shoot_module.cpp:378
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
@@ -521,29 +521,29 @@ msgstr "Blåslampa"
 msgid "Bounce Ball"
 msgstr "Studsboll"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:182
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Hej då Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
-#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
+#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan inte hitta lag %s!"
 
-#: src/team/teams_list.cpp:167
+#: src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan inte öppna personliga lagkatalogen (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan inte öppna lagkatalogen (%s)!"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan inte öppna det katalogen med egna lag (%s)!"
@@ -600,7 +600,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klicka: Centrera bilden till vald lagmedlem"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
 msgid "Client mode"
 msgstr "Klientläge"
 
@@ -702,7 +702,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Fel vid nätverksinitiering: Klient %s kommer inte överens med dig!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Fel vid inläsning av lag :"
 
@@ -760,6 +760,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fel: Kunde inte starta servern"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -772,20 +773,7 @@ msgstr ""
 "Om du inte är direktansluten till internet, kontrollera dina "
 "routerinställningar: TCP port %s måste släppas igenom."
 
-#: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Fel: Din server kan inte nås från internet. kontrollera dina "
-"brandväggsinställningar: TCP port %s måste kunna anslutas till från utsidan. "
-"Om du inte är direktansluten till internet, kontrollera dina "
-"routerinställningar: TCP port %s måste släppas igenom."
-
-#: src/team/team.cpp:118
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fel: kan inte hitta kroppen \"%s\" för lag \"%s\"."
@@ -1004,7 +992,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Läs in banor:"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Läs in lag:"
 
@@ -1265,7 +1253,7 @@ msgid "Server available on Internet"
 msgstr "Server tillgänglig på Internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "Serverläge"
 
@@ -1355,7 +1343,7 @@ msgstr "Antal:"
 msgid "Submachine Gun"
 msgstr "K-pist"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1632,7 +1620,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Du behöver åtminstone en giltig bana!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Du behöver åtminstone två giltiga lag!"
@@ -1642,7 +1630,7 @@ msgstr "Du behöver åtminstone två giltiga lag!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:505
 msgid "Your shot has missed!"
 msgstr "Ditt skott missade!"
 
@@ -1699,6 +1687,18 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#, fuzzy
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Fel: Din server kan inte nås från internet. kontrollera dina "
+#~ "brandväggsinställningar: TCP port %s måste kunna anslutas till från "
+#~ "utsidan. Om du inte är direktansluten till internet, kontrollera dina "
+#~ "routerinställningar: TCP port %s måste släppas igenom."
 
 #, fuzzy
 #~ msgid ""

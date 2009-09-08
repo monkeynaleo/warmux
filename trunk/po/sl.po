@@ -63,7 +63,7 @@ msgstr "Ekipa %s"
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:464
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s si je premislil in za tarčo vzel %s"
@@ -103,7 +103,7 @@ msgstr "%s iz ekipe %s je premočno zadel ob tla!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
 
-#: src/ai/ai_shoot_module.cpp:400
+#: src/ai/ai_shoot_module.cpp:401
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s se je odločil poškodovati %s"
@@ -413,7 +413,7 @@ msgstr[1] "Ekipa %s je osvojila %u ostrostrelski puški! Merite med oči!"
 msgstr[2] "Ekipa %s je osvojila %u ostrostrelske puške! Merite med oči!"
 msgstr[3] "Ekipa %s je osvojila %u ostrostrelskih pušk! Merite med oči!"
 
-#: src/weapon/submachine_gun.cpp:157
+#: src/weapon/submachine_gun.cpp:155
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -458,7 +458,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: src/weapon/supertux.cpp:439
+#: src/weapon/supertux.cpp:444
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -481,7 +481,7 @@ msgstr "Ekipa %s je bila uničena."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 
-#: src/ai/ai_shoot_module.cpp:377
+#: src/ai/ai_shoot_module.cpp:378
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s bo ustrelil %s"
@@ -587,28 +587,28 @@ msgstr "Varilnik"
 msgid "Bounce Ball"
 msgstr "Skokica"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:182
 msgid "Bye bye Tux..."
 msgstr "Adijo Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
-#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
+#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ni mogoče najti ekipe %s!"
 
-#: src/team/teams_list.cpp:167
+#: src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
@@ -658,7 +658,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klik: osredotoči kamero na člana"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
 msgid "Client mode"
 msgstr "Odjemalski način"
 
@@ -758,7 +758,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
@@ -815,6 +815,7 @@ msgid "Error: Unable to start the server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -827,20 +828,7 @@ msgstr ""
 "Če na internet niste povezani neposredno, preverite nastavitve "
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
 
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
-"vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje povezave. "
-"Če na internet niste povezani neposredno, preverite nastavitve "
-"usmerjevalnika:  vrata TCP %u morajo biti posredovana."
-
-#: src/team/team.cpp:118
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Napaka: ni bilo mogoče najti telesa \"%s\" za ekipo \"%s\"."
@@ -1052,7 +1040,7 @@ msgstr "Izpiši seznam povezanih igralcev"
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Nalaganje ekip:"
 
@@ -1306,7 +1294,7 @@ msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "Strežniški način"
 
@@ -1394,7 +1382,7 @@ msgstr "Zaloga:"
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1656,7 +1644,7 @@ msgstr "Postali ste novi vodja igre!"
 msgid "You need at least one valid map!"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
 msgid "You need at least two valid teams!"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
@@ -1664,7 +1652,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:505
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
@@ -1720,6 +1708,17 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
+#~ "vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje "
+#~ "povezave. Če na internet niste povezani neposredno, preverite nastavitve "
+#~ "usmerjevalnika:  vrata TCP %u morajo biti posredovana."
 
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
