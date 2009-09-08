@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2009-09-06 19:01+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@gmail.com>\n"
 "Language-Team: Bulgarian <thedeadly91@gmail.com>\n"
@@ -60,7 +59,7 @@ msgstr "%s Отбор"
 msgid "%s Team - Remote"
 msgstr "Отбор  %s - Отдалечен"
 
-#: src/ai/ai_shoot_module.cpp:463
+#: src/ai/ai_shoot_module.cpp:464
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s смени целта си на %s"
@@ -100,7 +99,7 @@ msgstr "%s от отбора %s падна от прекалено високо!
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s от отбора %s умря заради несръчността си!"
 
-#: src/ai/ai_shoot_module.cpp:400
+#: src/ai/ai_shoot_module.cpp:401
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s реши да рани %s"
@@ -358,7 +357,7 @@ msgid_plural ""
 msgstr[0] "Отборът %s спечели %u Снайперистка пушка! Стреляй между очите!"
 msgstr[1] "Отборът %s спечели %u Снайперистки пушки! Стреляй между очите!"
 
-#: src/weapon/submachine_gun.cpp:157
+#: src/weapon/submachine_gun.cpp:155
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -394,7 +393,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Отборът %s спечели %u Отстъпване на хода !"
 msgstr[1] "Отборът %s спечели %u Отстъпванета на ходове !"
 
-#: src/weapon/supertux.cpp:439
+#: src/weapon/supertux.cpp:444
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -415,7 +414,7 @@ msgstr "Всички от отбора %s са убити."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
 
-#: src/ai/ai_shoot_module.cpp:377
+#: src/ai/ai_shoot_module.cpp:378
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s ще стреля по %s"
@@ -521,28 +520,28 @@ msgstr "Горелка"
 msgid "Bounce Ball"
 msgstr "Супер-топче"
 
-#: src/weapon/supertux.cpp:177
+#: src/weapon/supertux.cpp:182
 msgid "Bye bye Tux..."
 msgstr "Tux e свободен !!!"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
-#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
-#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
+#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
+#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:167
+#: src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя личната директория на отборите (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не мога да отворя личната директорията на отбора (%s)!"
@@ -592,7 +591,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Клик: Центрирай войника"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
 msgid "Client mode"
 msgstr "Клиентски режим"
 
@@ -692,7 +691,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Грешка при стартиране на мрежата: Клиентът %s не е съгласен с теб!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбор %s:"
 
@@ -746,6 +745,7 @@ msgid "Error: Unable to start the server"
 msgstr "Грешка: Не мога да стартирам сървър"
 
 #: src/menu/network_connection_menu.cpp:401
+#: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -758,20 +758,7 @@ msgstr ""
 "свързан директно към интернет, провери конфигурацията на рутера си: TCP Порт "
 "%s трябва да е препратен към твоя компютър."
 
-#: tools/servers/game_server/server.cpp:297
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Грешка: Твоят сървър не е достъпен от интернет. Провери конфигурацията на "
-"защитната стена: TCP Порт %u трябва да приема връзка от вън. Ако не си "
-"свързан директно към интернет, провери конфигурацията на рутера си: TCP Порт "
-"%u трябва да е препратен към твоя компютър."
-
-#: src/team/team.cpp:118
+#: src/team/team.cpp:117
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Грешка: Не мога да намеря телата на \"%s\" отбора \"%s\"."
@@ -981,7 +968,7 @@ msgstr "Покажи свързаните играчи"
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "Отбори които да заредя:"
 
@@ -1235,7 +1222,7 @@ msgid "Server available on Internet"
 msgstr "Достъпен сървър в интернет"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "Сървъров Режим"
 
@@ -1322,7 +1309,7 @@ msgstr "Наличност:"
 msgid "Submachine Gun"
 msgstr "Картечен пистолет"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:229
 msgid "SuperTux"
 msgstr "Супер-Tux"
 
@@ -1582,7 +1569,7 @@ msgstr "Ти си новия господар на хода!"
 msgid "You need at least one valid map!"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
 msgid "You need at least two valid teams!"
 msgstr "Трябват ми поне два валидни отбора!"
 
@@ -1590,7 +1577,7 @@ msgstr "Трябват ми поне два валидни отбора!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Не може да играеш без отбор. Избери един!"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:505
 msgid "Your shot has missed!"
 msgstr "Не точно там..."
 
@@ -1646,6 +1633,17 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Грешка: Твоят сървър не е достъпен от интернет. Провери конфигурацията на "
+#~ "защитната стена: TCP Порт %u трябва да приема връзка от вън. Ако не си "
+#~ "свързан директно към интернет, провери конфигурацията на рутера си: TCP "
+#~ "Порт %u трябва да е препратен към твоя компютър."
 
 #, fuzzy
 #~ msgid ""
