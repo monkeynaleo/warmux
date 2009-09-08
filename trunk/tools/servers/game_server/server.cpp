@@ -426,6 +426,9 @@ void GameServer::RunLoop()
     if (num_ready == -1) { // Means an error
       fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
       continue; //Or break?
+    } else if (num_ready == 0) {
+      // nothing to do
+      continue;
     }
 
     char *buffer;
@@ -472,9 +475,9 @@ void GameServer::RunLoop()
 	    free(buffer);
 	  }
 	}
-      }
-    } // for
-  }
+      } // loop on distant cpu
+    } // loop on games
+  } // while (true)
 }
 
 uint Action_TimeStamp()
