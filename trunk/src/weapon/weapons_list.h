@@ -51,6 +51,7 @@ public:
   void Init();
 
   static void UpdateTranslation();
+  static void LoadXml(const xmlNode* weapons_xml);
 
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };
