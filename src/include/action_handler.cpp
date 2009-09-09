@@ -355,8 +355,15 @@ static void Action_DropBonusBox (Action *a)
 static void Action_Game_SetState (Action *a)
 {
   // to re-synchronize random number generator
-  uint seed = a->PopInt();
-  RandomSync().SetRand(seed);
+  uint seed = (uint)(a->PopInt());
+#ifdef DEBUG
+  if (IsLOGGING("random")) {
+    uint nb = RandomSync().GetSeed();
+    MSG_DEBUG("random.get", "Action_Game_SetState(...): %d", nb);
+    ASSERT(nb == seed);
+  }
+#endif
+  RandomSync().SetSeed(seed);
 
   Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
   Game::GetInstance()->Really_SetState(state);
@@ -805,7 +812,7 @@ static void Action_Wind (Action *a)
 static void Action_Network_RandomInit (Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
-  RandomSync().SetRand(a->PopInt());
+  RandomSync().SetSeed(a->PopInt());
 }
 
 static void Action_Network_SyncBegin (Action */*a*/)

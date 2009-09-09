@@ -43,6 +43,15 @@ void RandomGenerator::SetRand(uint seed)
   initialized = true;
 }
 
+void RandomGenerator::SetSeed(uint seed)
+{
+  SetRand(seed);
+}
+
+uint RandomGenerator::GetSeed()
+{
+  return next;
+}
 
 /******************************************************************************
  * From "man 3 rand"
