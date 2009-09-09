@@ -70,18 +70,17 @@ private:
 
   MsgBox *msg_box;
 
-  SDL_sem* lock_refresh_list;
+  virtual void OnClick(const Point2i &mousePosition, int button);
+  virtual void OnClickUp(const Point2i &mousePosition, int button);
+  virtual void Draw(const Point2i &mousePosition);
+  virtual void HandleEvent(const SDL_Event& event);
 
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
-  void Draw(const Point2i &mousePosition);
+  void DisplayNetError(connection_state_t conn);
 
-  void DisplayNetError(connection_state_t conn, bool background = false);
+  virtual bool signal_ok();
+  virtual bool signal_cancel();
 
-  bool signal_ok();
-  bool signal_cancel();
-
-  std::list<GameServerInfo> GetList(bool background);
+  void __RefreshList();
 
   bool HostingServer(const std::string& port,
 		     const std::string& game_name,
@@ -97,8 +96,6 @@ private:
 public:
   NetworkConnectionMenu(network_menu_action_t action);
   ~NetworkConnectionMenu();
-
-  void __RefreshList(bool background);
 };
 
 #endif
