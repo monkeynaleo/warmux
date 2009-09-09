@@ -8,8 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-02-22 22:00-0300\n"
-"Last-Translator: Renan de Castro Messias <renandecastromessias@hotmail.com>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-09-08 23:52-0300\n"
+"Last-Translator: Renan Valente Rangel <rvr777@gmail.com>\n"
 "Language-Team: Portuguese/Brazil <razor85@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,7 +107,7 @@ msgstr "%s decidiu atacar %s"
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
-msgstr ""
+msgstr "%s fez algo pelo meio ambiente, ele não mandou a doninha soltar gases."
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -318,7 +319,7 @@ msgstr[0] "A equipe '%s' ganhou %u paraquedas!"
 msgstr[1] "A equipe '%s' ganhou %u paraquedas!"
 
 #: src/weapon/polecat.cpp:282
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] ""
@@ -436,12 +437,12 @@ msgid "(unlimited)"
 msgstr "(ilimitado)"
 
 #: src/menu/options_menu.cpp:463
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
-"Uma nova versão %s está disponível. Sua versao é a %s. Você pode querer "
+"Uma nova versão %s está disponível. Sua versão é a %s. Você pode querer "
 "checar se uma atualização está disponível para o seu SO!"
 
 #: src/weapon/air_attack.cpp:219
@@ -519,9 +520,8 @@ msgid "Bounce Ball"
 msgstr "Bola pula pula"
 
 #: src/weapon/supertux.cpp:177
-#, fuzzy
 msgid "Bye bye Tux..."
-msgstr "Adeus tux..."
+msgstr "Adeus Tux..."
 
 #: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
 #: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
@@ -546,27 +546,22 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
 #: src/menu/help_menu.cpp:90
-#, fuzzy
 msgid "Center the camera on the character"
 msgstr "Centralizar câmera no personagem"
 
 #: src/menu/help_menu.cpp:89
-#, fuzzy
 msgid "Change the active character"
 msgstr "Mudar personagem ativo"
 
 #: src/menu/help_menu.cpp:79
-#, fuzzy
 msgid "Change the aim angle"
 msgstr "Mudar ângulo da arma"
 
 #: src/menu/help_menu.cpp:73
-#, fuzzy
 msgid "Change the weapon category"
 msgstr "Mudar categoria da arma"
 
 #: src/menu/help_menu.cpp:78
-#, fuzzy
 msgid "Change the weapon countdown"
 msgstr "Mudar contagem regressiva da arma"
 
@@ -591,7 +586,6 @@ msgid "Classic"
 msgstr "Classico"
 
 #: src/menu/help_menu.cpp:77
-#, fuzzy
 msgid "Click: Center the camera on the character"
 msgstr "Clique: Centralizar câmera no personagem"
 
@@ -662,7 +656,6 @@ msgid "Displays this message"
 msgstr "Mostrar essa mensagem"
 
 #: src/menu/help_menu.cpp:76
-#, fuzzy
 msgid "Drag&drop: Move the camera"
 msgstr "Clicar & arrastar: Mover câmera"
 
@@ -752,23 +745,22 @@ msgstr ""
 "internet!"
 
 #: src/menu/network_connection_menu.cpp:407
-#, fuzzy
 msgid "Error: Unable to start the server"
-msgstr "Não foi possível iniciar o servidor"
+msgstr "Erro: Não foi possível iniciar o servidor"
 
 #: src/menu/network_connection_menu.cpp:401
 #: tools/servers/game_server/server.cpp:297
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
-"Erro: Seu servidor não é conectável da internet. Veja a configuração do seu "
-"firewall: Porta TCP %s precisa aceitar conexão de fora. Se você não está "
-"diretamente conectado com a internet, veja a configuração do seu roteador: "
-"Porta TCP %s precisa ester na frente em seu computador."
+"Erro: Seu servidor não pode receber conexões pela internet. Verifique a "
+"configuração do firewall: Porta TCP %s precisa aceitar conexões de fora. Se "
+"você não está conectado diretamente à internet, verifique a configuração do "
+"seu roteador: Porta TCP %s precisa estar redirecionada para o seu computador."
 
 #: src/team/team.cpp:118
 #, c-format
@@ -808,7 +800,6 @@ msgid "Gnu Launcher"
 msgstr "Lançador Gnu"
 
 #: src/menu/options_menu.cpp:118
-#, fuzzy
 msgid "Graphics"
 msgstr "Gráficos"
 
@@ -860,7 +851,6 @@ msgid "Host a game"
 msgstr "Sediar um jogo"
 
 #: src/weapon/blowtorch.cpp:63
-#, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
@@ -871,7 +861,6 @@ msgstr ""
 "uma munição por rodada"
 
 #: src/weapon/airhammer.cpp:74
-#, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
 "an ammo per turn"
@@ -880,7 +869,6 @@ msgstr ""
 "uma munição por rodada"
 
 #: src/weapon/auto_bazooka.cpp:221
-#, fuzzy
 msgid ""
 "How to use it : left click on the target\n"
 "Initial fire angle : Up/Down\n"
@@ -894,7 +882,6 @@ msgstr ""
 "uma munição por rodada"
 
 #: src/weapon/anvil.cpp:142
-#, fuzzy
 msgid ""
 "How to use it : left click on the target\n"
 "an ammo per turn"
@@ -907,7 +894,6 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Corra, você está muito devagar !!"
 
 #: src/main.cpp:287
-#, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -922,7 +908,6 @@ msgstr "Energia inicial"
 
 #: src/weapon/bazooka.cpp:123 src/weapon/cluzooka.cpp:389
 #: src/weapon/riot_bomb.cpp:120
-#, fuzzy
 msgid ""
 "Initial fire angle : Up/Down\n"
 "Fire : keep the space key pressed until the desired strength\n"
@@ -979,7 +964,7 @@ msgstr "Idioma"
 
 #: src/menu/options_menu.cpp:198
 msgid "Left-handed mouse?"
-msgstr ""
+msgstr "Mouse canhoto?"
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
@@ -1065,18 +1050,16 @@ msgid "Most violent"
 msgstr "Mais violento"
 
 #: src/menu/help_menu.cpp:86
-#, fuzzy
 msgid "Move the camera with mouse or arrows"
 msgstr "Mova a câmera com o mouse ou com as setas direcionais"
 
 #: src/menu/help_menu.cpp:80
-#, fuzzy
 msgid "Move the character"
-msgstr "Mover personagem"
+msgstr "Mover o personagem"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "Céu multi-camada?"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
@@ -1125,7 +1108,6 @@ msgid "Number of teams:"
 msgstr "Número de equipes:"
 
 #: src/menu/help_menu.cpp:82
-#, fuzzy
 msgid "On a character: Select it"
 msgstr "No personagem: Selecionar personagem ativo"
 
@@ -1205,12 +1187,10 @@ msgid "Random map"
 msgstr "Mapa aleatório:"
 
 #: src/game/config.cpp:358
-#, fuzzy
 msgid "Reading the default config file"
 msgstr "Lendo arquivo de configuração padrão"
 
 #: src/game/config.cpp:407
-#, fuzzy
 msgid "Reading the personal config file"
 msgstr "Lendo arquivo de configuração pessoal"
 
@@ -1257,17 +1237,14 @@ msgid "Shotgun"
 msgstr "Espingarda"
 
 #: src/menu/help_menu.cpp:83
-#, fuzzy
 msgid "Show the weapons menu"
 msgstr "Mostrar menu de armas"
 
 #: src/menu/help_menu.cpp:69
-#, fuzzy
 msgid "Show/hide the interface"
 msgstr "Mostrar interface?"
 
 #: src/menu/help_menu.cpp:88
-#, fuzzy
 msgid "Show/hide the minimap"
 msgstr "Mostrar mini-mapa?"
 
@@ -1301,13 +1278,13 @@ msgstr "Desculpe, atualmente nenhum jogo está esperando jogadores"
 
 #: src/menu/network_connection_menu.cpp:353
 #: tools/servers/game_server/server.cpp:284
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
 "can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
-"Desculpe, sua versão já está desuatualisada. Versão atualisada é %s. Você "
-"pode baixar uma versão atualisada em http://www.wormux.org/wiki/download.php"
+"Desculpe, sua versão já está desatualizada. Versão suportadas são %s. Você "
+"pode baixar uma versão atualizada em http://www.wormux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:260
 msgid "Sound"
@@ -1347,7 +1324,6 @@ msgid "Syringe"
 msgstr "Seringa"
 
 #: src/menu/help_menu.cpp:72
-#, fuzzy
 msgid "Talk in network battles"
 msgstr "Falar em batalha multiplayer"
 
@@ -1380,23 +1356,20 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "A Futebomba deixou o cenário antes que explodisse."
 
 #: src/weapon/gnu.cpp:148
-#, fuzzy
 msgid "The Gnu left the battlefield before exploding!"
-msgstr "O Gnu deixou o cenário antes que explodisse"
+msgstr "O Gnu deixou o campo de batalha antes de explodir!"
 
 #: src/weapon/polecat.cpp:173
-#, fuzzy
 msgid "The Polecat left the battlefield before exploding!"
-msgstr "A doninha deixou o cenário antes que explodisse"
+msgstr "A doninha deixou o cenário antes de explodir!"
 
 #: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O míssil automático deixou o campo de batalha..."
 
 #: src/weapon/bounce_ball.cpp:71
-#, fuzzy
 msgid "The ball left the battlefield before exploding!"
-msgstr "A bola pula pula deixou o cenário antes que explodisse"
+msgstr "A bola pula pula deixou o campo de batalha antes de explodir!"
 
 #: src/network/network_client.cpp:96
 #, c-format
@@ -1412,28 +1385,24 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "A conexão expirou. Verifique se não existe um firewall no caminho!"
 
 #: src/weapon/disco_grenade.cpp:126
-#, fuzzy
 msgid "The disco grenade has left the dance floor before exploding!"
-msgstr "A granada festiva deixou o cenário antes que explodisse"
+msgstr "A granada festiva deixou a pista de dança antes de explodir!"
 
 #: src/game/game.cpp:506
 msgid "The game was interrupted because you got disconnected."
 msgstr "O jogo foi interrompido porque você foi desconectado."
 
 #: src/weapon/grenade.cpp:57
-#, fuzzy
 msgid "The grenade left the battlefield before exploding!"
-msgstr "A granada deixou o cenário antes que explodisse"
+msgstr "A granada deixou o campo de batalha antes de explodir!"
 
 #: src/menu/network_menu.cpp:343
-#, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
-msgstr "Os outros estão esperando por você! ACORDA!"
+msgstr "Os outros estão esperando por você! ACORDA! :-)"
 
 #: src/weapon/parachute.cpp:99
-#, fuzzy
 msgid "The parachute is activated automatically."
-msgstr "Paraquedas é ativado automaticamente."
+msgstr "O paraquedas é ativado automaticamente."
 
 #: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:335
 #: src/weapon/riot_bomb.cpp:85
@@ -1461,7 +1430,6 @@ msgid "Time"
 msgstr "Time"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
-#, fuzzy
 msgid ""
 "Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1475,7 +1443,6 @@ msgstr ""
 "uma munição por rodada"
 
 #: src/weapon/bounce_ball.cpp:89
-#, fuzzy
 msgid ""
 "Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
@@ -1488,19 +1455,18 @@ msgstr ""
 "uma munição por rodada"
 
 #: src/network/net_error_msg.cpp:35
-#, fuzzy
 msgid "Unable to contact the host."
-msgstr "Não foi possível fazer contato com o servidor!"
+msgstr "Não foi possível conectar ao servidor!"
 
 #: src/map/maps_list.cpp:274
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open the maps directory (%s)!"
-msgstr "Não foi possível abrir diretório (%s) dos mapas!"
+msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
 #: src/map/maps_list.cpp:286
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open the personal maps directory (%s)!"
-msgstr "Não foi possível abrir diretório (%s) dos mapas!"
+msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
 #: src/network/net_error_msg.cpp:38
 msgid "Unable to use this port!"
@@ -1519,9 +1485,9 @@ msgid "Version"
 msgstr "Versão"
 
 #: src/menu/options_menu.cpp:471
-#, fuzzy, c-format
+#, c-format
 msgid "Version verification failed because: %s"
-msgstr "Verificação de versão falhou porque: %s\n"
+msgstr "Verificação de versão falhou porque: %s"
 
 #: src/menu/network_menu.cpp:261
 #, c-format
@@ -1531,13 +1497,11 @@ msgstr[0] "Espere! %i jogador ainda não está pronto!"
 msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 
 #: src/menu/network_menu.cpp:460
-#, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Esperando pelo servidor, tudo que você pode fazer é conversar ou cancelar!"
 
 #: src/menu/help_menu.cpp:87
-#, fuzzy
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Arma: Fogo / Caixa bônus: cai rápido"
 
@@ -1559,7 +1523,7 @@ msgstr "Welcome ao %s!"
 #: src/game/game.cpp:730
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr ""
+msgstr "Que belo homerun! %s da equipe %s está em outro mundo..."
 
 #: src/game/game.cpp:782
 #, c-format
@@ -1596,7 +1560,6 @@ msgid "Wrong team!"
 msgstr "Time errado!"
 
 #: src/menu/network_menu.cpp:346
-#, fuzzy
 msgid "You are alone. :-/"
 msgstr "Você está sozinho :-/"
 
@@ -1609,19 +1572,16 @@ msgid "You are the new turn master!"
 msgstr "Você é o novo jogador mestre da rodada!"
 
 #: src/map/maps_list.cpp:295
-#, fuzzy
 msgid "You need at least one valid map!"
-msgstr "Você precisa de pelo menos um mapa válido !"
+msgstr "Você precisa de pelo menos um mapa válido!"
 
 #: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
-#, fuzzy
 msgid "You need at least two valid teams!"
-msgstr "Você precisa de pelo menos duas equipes válidas !"
+msgstr "Você precisa de pelo menos duas equipes válidas!"
 
 #: src/menu/network_menu.cpp:230
-#, fuzzy
 msgid "You won't be able to play before selecting a team!"
-msgstr "Você não vai conseguir jogar antes de selecionar uma equipe !"
+msgstr "Você não conseguirá jogar antes de selecionar uma equipe!"
 
 #: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
@@ -1632,13 +1592,12 @@ msgid "aka"
 msgstr "aka"
 
 #: src/weapon/air_attack.cpp:220
-#, fuzzy
 msgid ""
 "attack direction : Left/Right\n"
 "Bombing : left click on the target\n"
 "one bombing per turn"
 msgstr ""
-"direçao de ataque : Esquerda/Direita\n"
+"direção de ataque : Esquerda/Direita\n"
 "Bombardear : clicar com o botão esquerdo no alvo\n"
 "um bombardeio por rodada"
 
