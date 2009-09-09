@@ -32,28 +32,29 @@
 #include "weapon/weapons_list.h"
 
 GameMode::GameMode():
-  rules("none"),
-  nb_characters(6),
-  max_teams(4),
-  duration_turn(60),
-  duration_move_player(3),
-  duration_exchange_player(2),
-  duration_before_death_mode(20 * 60),
-  damage_per_turn_during_death_mode(5),
-  gravity(9.81),
-  safe_fall(10),
-  damage_per_fall_unit(7),
-  death_explosion_cfg(),
-  barrel_explosion_cfg(),
-  bonus_box_explosion_cfg(),
-  character(),
-  auto_change_character(true),
-  allow_character_selection(BEFORE_FIRST_ACTION),
-  m_current("classic"),
-  doc_objects(new XmlReader)
+  doc_objects(NULL)
 {
-  character.init_energy = 100; /* overwritten when reading XML */
-  character.max_energy = 100; /* overwritten when reading XML */
+  m_current = "classic";
+
+  LoadDefaultValues();
+}
+
+void GameMode::LoadDefaultValues()
+{
+  rules = "none";
+  nb_characters = 6;
+  max_teams = 4;
+  duration_turn = 60;
+  duration_move_player = 3;
+  duration_exchange_player = 2;
+  duration_before_death_mode = 20 * 60;
+  damage_per_turn_during_death_mode = 5;
+  gravity = 9.81;
+  safe_fall = 10;
+  damage_per_fall_unit = 7;
+
+  character.init_energy = 100;
+  character.max_energy = 100;
   character.mass = 100;
   character.air_resist_factor = 1.0;
   character.jump_strength = 8;
@@ -63,6 +64,15 @@ GameMode::GameMode():
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
   character.walking_pause = 50;
+
+  auto_change_character = true;
+
+  allow_character_selection = BEFORE_FIRST_ACTION;
+
+  if (doc_objects)
+    delete doc_objects;
+
+  doc_objects = new XmlReader();
 }
 
 GameMode::~GameMode()
@@ -155,7 +165,7 @@ bool GameMode::LoadXml(const xmlNode* xml)
 
   // Barrel explosion
   const xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
-  if(barrel_xml != NULL) {
+  if (barrel_xml != NULL) {
     const xmlNode* barrel_explosion = XmlReader::GetMarker(barrel_xml, "explosion");
     if (barrel_explosion != NULL)
       barrel_explosion_cfg.LoadXml(barrel_explosion);
@@ -163,20 +173,13 @@ bool GameMode::LoadXml(const xmlNode* xml)
 
   //=== Weapons ===
   const xmlNode* weapons_xml = XmlReader::GetMarker(xml, "weapons");
-  if (weapons_xml != NULL)
-  {
-    std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
-    std::list<Weapon*>::iterator
-      itw = l_weapons_list.begin(),
-      end = l_weapons_list.end();
-
-    for (; itw != end ; ++itw)
-      (*itw)->LoadXml(weapons_xml);
+  if (weapons_xml != NULL) {
+    WeaponsList::LoadXml(weapons_xml);
   }
 
   // Bonus box explosion - must be loaded after the weapons.
   const xmlNode* bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
-  if(bonus_box_xml != NULL) {
+  if (bonus_box_xml != NULL) {
     BonusBox::LoadXml(bonus_box_xml);
 
     const xmlNode* bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
@@ -186,7 +189,7 @@ bool GameMode::LoadXml(const xmlNode* xml)
 
   // Medkit - reuses the bonus_box explosion.
   const xmlNode* medkit_xml = XmlReader::GetMarker(xml, "medkit");
-  if(medkit_xml != NULL) {
+  if (medkit_xml != NULL) {
     Medkit::LoadXml(medkit_xml);
   }
 
@@ -197,6 +200,8 @@ bool GameMode::Load(void)
 {
   Config * config = Config::GetInstance();
   m_current = config->GetGameMode();
+
+  LoadDefaultValues();
 
   // Game mode objects configuration file
   if(!doc_objects->Load(GetObjectsFilename()))

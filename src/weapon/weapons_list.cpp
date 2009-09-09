@@ -88,6 +88,28 @@ WeaponsList::WeaponsList()
 
 //-----------------------------------------------------------------------------
 
+// Static method
+void WeaponsList::LoadXml(const xmlNode* weapons_xml)
+{
+  // to destroy all the already loaded weapons
+  // else some parameters may be not overwritten by the new game mode
+  // cf bug #14231
+  delete singleton;
+  singleton = NULL;
+
+  std::list<Weapon*> l_weapons_list = GetInstance()->GetList();
+
+  std::list<Weapon*>::iterator
+    itw = l_weapons_list.begin(),
+    end = l_weapons_list.end();
+
+  for (; itw != end ; ++itw) {
+    (*itw)->LoadXml(weapons_xml);
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 void WeaponsList::UpdateTranslation()
 {
   if (singleton == NULL) return;
