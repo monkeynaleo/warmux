@@ -601,6 +601,13 @@
 	<country>Finland</country>
       </author>
       <author>
+	<nickname>iFlo</nickname>
+	<name>Florian Köberle</name>
+	<description>network bugfixes</description>
+	<email>florian_AT_fkoeberle_DOT_de</email>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>Isaac</nickname>
 	<name>Isaac CLERENCIA</name>
 	<description>Add autotools (autogen.sh, ./configure, ...) to Wormux</description>
