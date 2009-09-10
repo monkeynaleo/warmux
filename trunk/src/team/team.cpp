@@ -216,7 +216,7 @@ void Team::NextCharacter(bool newturn)
   }
   ActiveCharacter().StartPlaying();
 
-  Camera::GetInstance()->FollowObject(&ActiveCharacter());
+  Camera::GetInstance()->CenterOnActiveCharacter();
 
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
@@ -265,7 +265,7 @@ void Team::PrepareTurn()
     NextCharacter();
   }
 
-  Camera::GetInstance()->FollowObject(&ActiveCharacter());
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Updating weapon ammos (some weapons are not available from the beginning)

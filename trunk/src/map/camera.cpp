@@ -176,8 +176,6 @@ void Camera::AutoCrop()
     acceleration.y *= (1 + SPEED_REACTIVITY * (abs(m_speed.y) - SPEED_REACTIVITY_CEIL));
   }
 
-  //std::cout<<"acceleration after  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
-
   if (stop) {
     m_speed = m_speed/2;
 
@@ -185,7 +183,6 @@ void Camera::AutoCrop()
 
     //Apply acceleration
     m_speed = m_speed + acceleration;
-    //  std::cout<<"obj_position  : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
 
     //Realtime follow is enable if object is too fast to be correctly followed
 
@@ -214,7 +211,7 @@ void Camera::AutoCrop()
       next_position.x == 0 && next_position.y == 0 &&
       followed_object->GetSpeed().x == 0 &&
       followed_object->GetSpeed().y == 0) {
-    m_stop = true;
+      m_stop = true;
   }
 }
 
@@ -385,7 +382,7 @@ bool Camera::IsVisible(const PhysicalObj &obj) const
 void Camera::CenterOnActiveCharacter()
 {
   CharacterCursor::GetInstance()->FollowActiveCharacter();
-  FollowObject(&ActiveCharacter());
+  FollowObject(&ActiveCharacter(),true);
 }
 
 Point2i Camera::ComputeShake() const

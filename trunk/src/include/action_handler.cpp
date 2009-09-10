@@ -307,7 +307,7 @@ static void Action_Player_ChangeCharacter (Action *a)
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
   Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
   Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter());
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
 static void Action_Game_NextTeam (Action *a)
