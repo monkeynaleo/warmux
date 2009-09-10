@@ -22,10 +22,10 @@
  *             Initial version
  *****************************************************************************/
 
-#include "graphic/spriteanimation.h"
 #include "game/time.h"
+#include "graphic/spriteanimation.h"
 #include "graphic/sprite.h"
-#include <WORMUX_random.h>
+#include "network/randomsync.h"
 
 SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
   sprite(p_sprite)
@@ -171,7 +171,7 @@ void SpriteAnimation::CalculateWait()
 
   if(loop_wait !=0)
   {
-  last_update += loop_wait - loop_wait_random/2 + RandomLocal().GetInt(0, loop_wait_random);
+  last_update += loop_wait - loop_wait_random/2 + RandomSync().GetInt(0, loop_wait_random);
   }
   MSG_DEBUG("eye", "CalculateWait 2 : %d", last_update);
 }
