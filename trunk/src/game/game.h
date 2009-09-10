@@ -98,6 +98,8 @@ private:
   // Refresh all objects (position, state ...)
   void RefreshObject() const;
 
+  void RefreshActions() const;
+
   PhysicalObj* GetMovingObject() const;
 
   void MessageEndOfGame() const;
