@@ -126,8 +126,8 @@ void Camera::AutoCrop()
      */
     obj_pos = followed_object->GetCenter();
 
-    if (obj_pos > GetPosition() + GetSize() / 8 &&
-	obj_pos < GetPosition() + 7 * GetSize() / 8) {
+    if (obj_pos > GetPosition() + GetSize() / 7 &&
+	obj_pos < GetPosition() + 6 * GetSize() / 7) {
       if (m_stop)
         stop = true;
 
@@ -358,8 +358,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
 
   Mouse::GetInstance()->Hide();
 
-  if (!IsVisible(*obj))
-    auto_crop = true;
+  auto_crop = true;
 
   m_stop = !follow_closely;
   followed_object = obj;
