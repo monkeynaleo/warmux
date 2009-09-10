@@ -1127,6 +1127,11 @@ void ActionHandler::ExecActions()
     // Do not execute actions from Network if we are not connected anymore
     if (!a->GetCreator()
 	|| Network::IsConnected()) {
+
+      MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
+		GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
+		Time::GetInstance()->Read());
+
       Exec (a);
 
       // To refresh the menu even if it is waiting in SDL_WaitEvent

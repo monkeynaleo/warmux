@@ -496,10 +496,12 @@ void Character::PrepareShoot()
 
 void Character::DoShoot()
 {
-  if (Game::GetInstance()->ReadState() != Game::PLAYING)
+  if (Game::GetInstance()->ReadState() != Game::PLAYING) {
+    MSG_DEBUG("weapon.shoot", "DoShoot cancelled! time: %u", Time::GetInstance()->Read());
     return; // hack related to bugs 8656 and 9462
+  }
 
-  MSG_DEBUG("weapon.shoot", "-> begin");
+  MSG_DEBUG("weapon.shoot", "-> begin at time %u", Time::GetInstance()->Read());
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
   body->UpdateWeaponPosition(GetPosition());
