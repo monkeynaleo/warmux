@@ -10,7 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-07-25 08:27+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-04-10 11:30+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +111,7 @@ msgstr "%s ha decidido herir a %s"
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
-msgstr ""
+msgstr "%s ha hecho algo para el ambiente"
 
 #: src/object/medkit.cpp:69
 #, c-format
@@ -298,16 +299,18 @@ msgstr[0] "¡El equipo %s ha conseguido %u jetpack!"
 msgstr[1] "¡El equipo %s ha conseguido %u jetpacks!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
-msgstr[0] "¡El equipo %s ha conseguido %u bajagravedad! ¡Soy Neil Armstrong!"
-msgstr[1] "¡El equipo %s ha conseguido %u bajagravedades! ¡Soy Neil Armstrong!"
+msgstr[0] ""
+"¡El equipo %s ha conseguido %u bajagravedad! ¡Un pequeño paso para el "
+"hombre, un paso gigante para el software libre!"
+msgstr[1] ""
+"¡El equipo %s ha conseguido %u bajagravedad! ¡Un pequeño paso para el "
+"hombre, un paso gigante para el software libre!"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -1059,7 +1062,7 @@ msgstr "Mover el personaje"
 
 #: src/menu/options_menu.cpp:78
 msgid "Multi-layer sky?"
-msgstr ""
+msgstr "¿Multi-capa del cielo?"
 
 #: src/menu/options_menu.cpp:222
 msgid "Music volume"
