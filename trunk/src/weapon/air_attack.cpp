@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include <sstream>
-#include <WORMUX_random.h>
 
 #include "character/character.h"
 #include "game/time.h"
