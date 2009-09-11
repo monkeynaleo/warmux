@@ -207,13 +207,13 @@
   <color name="energy_text_color" r="255" g="255" b="255" a="255" />
   <color name="turn_timer_text_color" r="0" g="0" b="0" a="255" />
   <color name="global_clock_text_color" r="128" g="128" b="128" a="255" />
-  <surface name="background_interface" file="interface/background_interface.png" />
-  <surface name="small_background_interface" file="interface/small_background_interface.png" />
+  <surface name="background_interface" file="interface/please_delete_us_we_are_old_files_read_task6160/background_interface.png" />
+  <surface name="small_background_interface" file="interface/please_delete_us_we_are_old_files_read_task6160/small_background_interface.png" />
   <color name="background_color" r="255" g="255" b="255" a="128" />
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapons_interface_size" x="290" y="235" />
   <point name="tools_interface_size" x="290" y="100" />
-  <surface name="clock_background" file="interface/clock_background.png"/>
+  <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
   <surface name="wind" file="interface/whitetheme/wind.png"/>
   <surface name="wind_indicator" file="interface/whitetheme/wind_indicator.png"/>
