@@ -367,10 +367,11 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
 void Camera::StopFollowingObj(const PhysicalObj* obj)
 {
   if (followed_object == obj)
+  {
     followed_object = NULL;
-
-  m_stop = true;
-  m_speed = Point2d(0,0);
+    m_stop = true;
+    m_speed = Point2d(0,0);
+  }
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj) const

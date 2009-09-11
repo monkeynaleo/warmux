@@ -354,6 +354,7 @@ void Character::Die()
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
+  Camera::GetInstance()->StopFollowingObj(this);
 }
 
 void Character::Draw()
