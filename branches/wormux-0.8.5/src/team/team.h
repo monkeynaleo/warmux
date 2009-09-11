@@ -56,7 +56,6 @@ class Team
 
     // Autres
     CrossHair        crosshair;
-    Point2i          sauve_camera;
     TeamEnergy       energy;
 
 
@@ -65,7 +64,6 @@ class Team
     Surface flag;
     Surface death_flag;
     Surface big_flag;
-    bool is_camera_saved;
     std::string m_teams_dir; // parent directory hosting the data
     std::string m_id;
     std::string m_name;
