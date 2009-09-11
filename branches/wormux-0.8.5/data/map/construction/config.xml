@@ -19,14 +19,14 @@
   <surface name="preview" file="preview.jpg" />
 
   <name>Construction</name>
-  <water>1</water>
+  <water>water</water>
   <nb_mine>4</nb_mine>
   <nb_barrel>2</nb_barrel>
   <is_open>1</is_open>
   <music_playlist>construction</music_playlist>
 
   <sprite name="wind_particle">
-     <image file="goute.png">
+     <image file="raindrop.png">
        <grid pos="0,0" size="3,101" array="1,1"/>
      </image>
   </sprite>
