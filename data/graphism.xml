@@ -289,17 +289,17 @@
 </section>
 
 <section name="gfx">
-  <surface name="pointeur1" file="gfx/pointer.png" />
+  <surface name="pointeur1" file="interface/pointer.png" />
 
   <sprite name="arrow-jump">
-    <image file="gfx/arrow_jump.png">
+    <image file="interface/arrow_jump.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
 
   <sprite name="arrow-change">
-    <image file="gfx/arrow_turn.png">
+    <image file="interface/arrow_turn.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
