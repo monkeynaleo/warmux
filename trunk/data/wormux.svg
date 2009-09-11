@@ -2,7 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,15 +13,23 @@
    height="32"
    id="svg6169"
    sodipodi:version="0.32"
-   inkscape:version="0.44"
+   inkscape:version="0.46"
    version="1.0"
    sodipodi:docbase="/home/yekcim/Mes dessins/Wormux/icone"
-   sodipodi:docname="icone.svg"
+   sodipodi:docname="wormux.svg"
    inkscape:export-filename="/home/yekcim/Desktop/wormux.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs6171">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 16 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="32 : 16 : 1"
+       inkscape:persp3d-origin="16 : 10.666667 : 1"
+       id="perspective152" />
     <linearGradient
        id="linearGradient3436">
       <stop
@@ -683,6 +691,17 @@
          offset="1"
          id="stop2241" />
     </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2527">
+      <rect
+         style="opacity:0.5;fill:#898a8a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="rect2529"
+         width="32"
+         height="32"
+         x="163.53011"
+         y="156.3878" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -691,9 +710,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.5260053"
-     inkscape:cx="23.387199"
-     inkscape:cy="16.508448"
+     inkscape:zoom="9.0520106"
+     inkscape:cx="23.629684"
+     inkscape:cy="10.039067"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showguides="false"
@@ -701,12 +720,13 @@
      inkscape:window-width="1270"
      inkscape:window-height="945"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="0"
      inkscape:showpageshadow="false"
      borderlayer="top"
      showborder="true"
      width="32px"
-     height="32px">
+     height="32px"
+     showgrid="false">
     <sodipodi:guide
        orientation="vertical"
        position="-2.0203051"
@@ -742,7 +762,8 @@
     <g
        transform="translate(-163.5301,-156.3878)"
        style="display:inline"
-       id="g9595">
+       id="g9595"
+       clip-path="url(#clipPath2527)">
       <path
          sodipodi:nodetypes="cccz"
          id="path14857"
