@@ -217,43 +217,43 @@
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
   <surface name="wind_indicator" file="interface/wind_indicator.png"/>
-  <surface name="quit_screen" file="interface/quit.png"/>
+  <surface name="quit_screen" file="menu/quit.png"/>
   <!-- Game mode options -->
-  <surface name="rounding_bottom" file="interface/rounding_bottom.png" />
-  <surface name="rounding_bottom_left" file="interface/rounding_bottomleft.png" />
-  <surface name="rounding_bottom_right" file="interface/rounding_bottomright.png" />
-  <surface name="rounding_top" file="interface/rounding_top.png" />
-  <surface name="rounding_top_left" file="interface/rounding_topleft.png" />
-  <surface name="rounding_top_right" file="interface/rounding_topright.png" />
-  <surface name="rounding_center" file="interface/rounding_center.png" />
-  <surface name="rounding_left" file="interface/rounding_left.png" />
-  <surface name="rounding_right" file="interface/rounding_right.png" />
-  <surface name="rounding_mask_bottom_left" file="interface/hide_bottomleft.png" />
-  <surface name="rounding_mask_bottom_right" file="interface/hide_bottomright.png" />
-  <surface name="rounding_mask_top_left" file="interface/hide_topleft.png" />
-  <surface name="rounding_mask_top_right" file="interface/hide_topright.png" />
-  <surface name="rounding_mask_bottom" file="interface/hide_bottom.png" />
-  <surface name="rounding_mask_right" file="interface/hide_right.png" />
-  <surface name="rounding_mask_left" file="interface/hide_left.png" />
-  <surface name="rounding_mask_top" file="interface/hide_top.png" />
+  <surface name="rounding_bottom" file="interface/whitetheme/bigbox/rounding_bottom.png" />
+  <surface name="rounding_bottom_left" file="interface/whitetheme/bigbox/rounding_bottomleft.png" />
+  <surface name="rounding_bottom_right" file="interface/whitetheme/bigbox/rounding_bottomright.png" />
+  <surface name="rounding_top" file="interface/whitetheme/bigbox/rounding_top.png" />
+  <surface name="rounding_top_left" file="interface/whitetheme/bigbox/rounding_topleft.png" />
+  <surface name="rounding_top_right" file="interface/whitetheme/bigbox/rounding_topright.png" />
+  <surface name="rounding_center" file="interface/whitetheme/bigbox/rounding_center.png" />
+  <surface name="rounding_left" file="interface/whitetheme/bigbox/rounding_left.png" />
+  <surface name="rounding_right" file="interface/whitetheme/bigbox/rounding_right.png" />
+  <surface name="rounding_mask_bottom_left" file="interface/whitetheme/bigbox/hide_bottomleft.png" />
+  <surface name="rounding_mask_bottom_right" file="interface/whitetheme/bigbox/hide_bottomright.png" />
+  <surface name="rounding_mask_top_left" file="interface/whitetheme/bigbox/hide_topleft.png" />
+  <surface name="rounding_mask_top_right" file="interface/whitetheme/bigbox/hide_topright.png" />
+  <surface name="rounding_mask_bottom" file="interface/whitetheme/bigbox/hide_bottom.png" />
+  <surface name="rounding_mask_right" file="interface/whitetheme/bigbox/hide_right.png" />
+  <surface name="rounding_mask_left" file="interface/whitetheme/bigbox/hide_left.png" />
+  <surface name="rounding_mask_top" file="interface/whitetheme/bigbox/hide_top.png" />
 
-  <surface name="square_bottom" file="interface/square_bottom.png" />
-  <surface name="square_bottom_left" file="interface/square_bottomleft.png" />
-  <surface name="square_bottom_right" file="interface/square_bottomright.png" />
-  <surface name="square_top" file="interface/square_top.png" />
-  <surface name="square_top_left" file="interface/square_topleft.png" />
-  <surface name="square_top_right" file="interface/square_topright.png" />
-  <surface name="square_center" file="interface/square_center.png" />
-  <surface name="square_left" file="interface/square_left.png" />
-  <surface name="square_right" file="interface/square_right.png" />
-  <surface name="square_mask_bottom_left" file="interface/hide_bottomleft.png" />
-  <surface name="square_mask_bottom_right" file="interface/hide_bottomright.png" />
-  <surface name="square_mask_top_left" file="interface/hide_topleft.png" />
-  <surface name="square_mask_top_right" file="interface/hide_topright.png" />
-  <surface name="square_mask_bottom" file="interface/hide_bottom.png" />
-  <surface name="square_mask_right" file="interface/hide_right.png" />
-  <surface name="square_mask_left" file="interface/hide_left.png" />
-  <surface name="square_mask_top" file="interface/hide_top.png" />
+  <surface name="square_bottom" file="/interface/whitetheme/powerbox/square_bottom.png" />
+  <surface name="square_bottom_left" file="/interface/whitetheme/powerbox/square_bottomleft.png" />
+  <surface name="square_bottom_right" file="/interface/whitetheme/powerbox/square_bottomright.png" />
+  <surface name="square_top" file="/interface/whitetheme/powerbox/square_top.png" />
+  <surface name="square_top_left" file="/interface/whitetheme/powerbox/square_topleft.png" />
+  <surface name="square_top_right" file="/interface/whitetheme/powerbox/square_topright.png" />
+  <surface name="square_center" file="/interface/whitetheme/powerbox/square_center.png" />
+  <surface name="square_left" file="/interface/whitetheme/powerbox/square_left.png" />
+  <surface name="square_right" file="/interface/whitetheme/powerbox/square_right.png" />
+  <surface name="square_mask_bottom_left" file="interface/whitetheme/powerbox/hide_bottomleft.png" />
+  <surface name="square_mask_bottom_right" file="interface/whitetheme/powerbox/hide_bottomright.png" />
+  <surface name="square_mask_top_left" file="interface/whitetheme/powerbox/hide_topleft.png" />
+  <surface name="square_mask_top_right" file="interface/whitetheme/powerbox/hide_topright.png" />
+  <surface name="square_mask_bottom" file="interface/whitetheme/powerbox/hide_bottom.png" />
+  <surface name="square_mask_right" file="interface/whitetheme/powerbox/hide_right.png" />
+  <surface name="square_mask_left" file="interface/whitetheme/powerbox/hide_left.png" />
+  <surface name="square_mask_top" file="interface/whitetheme/powerbox/hide_top.png" />
 
   <sprite name="hourglass">
     <image file="interface/hourglass.png">
@@ -289,17 +289,17 @@
 </section>
 
 <section name="gfx">
-  <surface name="pointeur1" file="interface/pointer.png" />
+  <surface name="pointeur1" file="interface/whitetheme/pointer.png" />
 
   <sprite name="arrow-jump">
-    <image file="interface/arrow_jump.png">
+    <image file="interface/whitetheme/arrow_jump.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
 
   <sprite name="arrow-change">
-    <image file="interface/arrow_turn.png">
+    <image file="interface/whitetheme/arrow_turn.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
