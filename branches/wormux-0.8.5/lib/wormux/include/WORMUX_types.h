@@ -19,10 +19,10 @@
 
 #ifndef WORMUX_TYPES_H
 #define WORMUX_TYPES_H
-#include <stdint.h>
 //-----------------------------------------------------------------------------
 
 #ifndef _MSC_VER
+#include <stdint.h>
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
