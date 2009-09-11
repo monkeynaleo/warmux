@@ -474,6 +474,7 @@ Point2d Polygon::GetRandomUpperPoint()
   std::vector<Point2d>::iterator point = transformed_shape.begin();
   Point2d tmp, previous;
   tmp = *point;
+  MSG_DEBUG("random.get", "Polygon::GetRandomUpperPoint()");
   int start = RandomSync().GetInt(0, GetNbOfPoint());
   int i;
   for(i = 0; i < start; i++)
@@ -526,8 +527,11 @@ void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
   if(add_first_point)
     AddPoint(start);
   for (int i = 1; i < num_steps - 1; i++) {
-    AddPoint(start + (step * i) + Point2d(RandomSync().GetDouble(-x_random_offset, x_random_offset),
-                                          RandomSync().GetDouble(-y_random_offset, y_random_offset)));
+    MSG_DEBUG("random.get", "Polygon::AddRandomCurve(...)");
+    double x = RandomSync().GetDouble(-x_random_offset, x_random_offset);
+    MSG_DEBUG("random.get", "Polygon::AddRandomCurve(...)");
+    double y = RandomSync().GetDouble(-y_random_offset, y_random_offset);
+    AddPoint(start + (step * i) + Point2d(x,y));
   }
   if(add_last_point)
     AddPoint(end);
@@ -562,8 +566,10 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, do
 
     // Randomization
     if(rand != 0.0) {
+      MSG_DEBUG("random.get", "Polygon::GetBezierInterpolation(...)");
       trans.SetRotation(RandomSync().GetDouble(-rand, rand));
       v1 = trans * v1;
+      MSG_DEBUG("random.get", "Polygon::GetBezierInterpolation(...)");
       trans.SetRotation(RandomSync().GetDouble(-rand, rand));
       v2 = trans * v2;
     }

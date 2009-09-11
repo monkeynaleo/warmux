@@ -210,6 +210,7 @@ bool AIShootModule::SelectFiringWeapon(double /*shoot_angle*/) const
 
   // randomly choose a good one
   // TODO: in the future add logic to discriminate between weapons
+  MSG_DEBUG("random.get", "AIShootModule::SelectFiringWeapon(...)");
   uint selected = RandomSync().GetUint(0, count-1);
   ActiveTeam().SetWeapon(usable_weapons.at(selected));
 
@@ -502,6 +503,7 @@ void AIShootModule::BeginTurn()
   SetStrategy(NO_STRATEGY);
 
   // Choose random direction for the moment
+  MSG_DEBUG("random.get", "AIShootModule::BeginTurn(...)");
   ActiveCharacter().SetDirection( RandomSync().GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
 }
 
