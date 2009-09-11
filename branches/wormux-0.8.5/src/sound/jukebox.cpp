@@ -280,8 +280,13 @@ bool JukeBox::PlayMusic(const std::string& type)
   if(it == playlist.end())
   {
     std::cerr << "[Music] Unable to find " << type << " profile" << std::endl;
-    return false;
+    if (type == "ingame"){
+      return false;
+    } else {
+      return PlayMusic("ingame");
+    }
   }
+
 
   MSG_DEBUG("jukebox", "Loading playlist %s", type.c_str());
 
