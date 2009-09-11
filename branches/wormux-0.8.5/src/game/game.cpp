@@ -296,6 +296,14 @@ void Game::RefreshInput()
   Joystick::GetInstance()->Refresh();
   AIengine::GetInstance()->Refresh();
 
+  GameMessages::GetInstance()->Refresh();
+
+  if (!IsGameFinished())
+    Camera::GetInstance()->Refresh();
+}
+
+void Game::RefreshActions() const
+{
   // Execute action
   do {
     ActionHandler::GetInstance()->ExecActions();
@@ -304,11 +312,6 @@ void Game::RefreshInput()
 	   !HasBeenNetworkDisconnected());
 
   Network::GetInstance()->sync_lock = false;
-
-  GameMessages::GetInstance()->Refresh();
-
-  if (!IsGameFinished())
-    Camera::GetInstance()->Refresh();
 }
 
 // ####################################################################
@@ -528,9 +531,15 @@ void Game::MainLoop()
   StatStart("Game:RefreshInput()");
   RefreshInput();
   StatStop("Game:RefreshInput()");
+
   StatStart("Game:RefreshObject()");
   RefreshObject();
   StatStop("Game:RefreshObject()");
+
+  StatStart("Game:RefreshActions()");
+  // Action from time t must be executed after physical engine frame at time t
+  RefreshActions();
+  StatStop("Game:RefreshActions()");
 
   // Refresh the map
   GetWorld().Refresh();
