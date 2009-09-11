@@ -22,7 +22,7 @@
 #include "particles/body_member.h"
 #include "particles/particle.h"
 #include "graphic/sprite.h"
-#include <WORMUX_random.h>
+#include "network/randomsync.h"
 
 BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
   Particle("body_member_particle")
@@ -36,8 +36,11 @@ BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& positio
 
   SetSize(image->GetSize());
   SetOnTop(true);
-  SetSpeed( (double)RandomLocal().GetLong(10, 15),
-	    - (double)RandomLocal().GetLong(0, 3000)/1000.0);
+  MSG_DEBUG("random.get", "BodyMemberParticle::BodyMemberParticle(...) speed vector length");
+  double speed_vector_length = (double)RandomSync().GetLong(10, 15);
+  MSG_DEBUG("random.get", "BodyMemberParticle::BodyMemberParticle(...) speed vector angle");
+  double speed_vector_angle = - (double)RandomSync().GetLong(0, 3000)/1000.0;
+  SetSpeed(speed_vector_length, speed_vector_angle);
 }
 
 void BodyMemberParticle::Refresh()

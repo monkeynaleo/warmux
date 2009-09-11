@@ -26,10 +26,10 @@
 #include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_random.h>
 #include <WORMUX_point.h>
 #include "weapon/explosion.h"
 #include "map/map.h"
+#include "network/randomsync.h"
 
 #include "particles/body_member.h"
 #include "particles/teleport_member.h"
@@ -128,7 +128,8 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
   uint time = Time::GetInstance()->Read() - m_last_refresh;
   uint tmp = Time::GetInstance()->Read();
 
-  uint delta = uint(m_time_between_add * double(RandomLocal().GetLong(3, 40)) / 10);
+  MSG_DEBUG("random.get", "ParticleEngine::AddPeriodic(...)");
+  uint delta = uint(m_time_between_add * double(RandomSync().GetLong(3, 40)) / 10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
@@ -242,15 +243,19 @@ void ParticleEngine::AddNow(const Point2i &position,
 
     if (particle != NULL) {
 
-      if( norme == -1 )
-        tmp_norme = double(RandomLocal().GetLong(0, 5000))/100;
-      else
+      if( norme == -1 ) {
+        MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector length");
+        tmp_norme = double(RandomSync().GetLong(0, 5000))/100;
+      } else {
         tmp_norme = norme;
+      }
 
-      if( angle == -1 )
-        tmp_angle = - double(RandomLocal().GetLong(0, 3000))/1000;
-      else
+      if( angle == -1 ) {
+        MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
+        tmp_angle = - double(RandomSync().GetLong(0, 3000))/1000;
+      } else {
         tmp_angle = angle;
+      }
 
       particle->SetXY(position);
       particle->SetOnTop(upper);

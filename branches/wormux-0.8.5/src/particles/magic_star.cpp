@@ -22,7 +22,7 @@
 
 #include "particles/magic_star.h"
 #include "particles/particle.h"
-#include <WORMUX_random.h>
+#include "network/randomsync.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 
@@ -33,7 +33,8 @@ MagicStarParticle::MagicStarParticle() :
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
 
-  uint color=RandomLocal().GetLong(0,2);
+  MSG_DEBUG("random.get", "MagicStarParticle::MagicStarParticle()");
+  uint color=RandomSync().GetLong(0,2);
   switch(color)
   {
     case 0 : image = ParticleEngine::GetSprite(MAGIC_STAR_R_spr); break;
