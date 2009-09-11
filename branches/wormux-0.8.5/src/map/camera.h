@@ -114,7 +114,6 @@ public:
   void ResetShake();
 
   void SetAutoCrop(bool crop) { auto_crop = crop; };
-  bool IsAutoCrop() const { return auto_crop; };
 };
 
 #endif
