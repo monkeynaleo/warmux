@@ -115,7 +115,9 @@ void ApplyExplosion_common (const Point2i &pos,
 
       if ( force > highest_force )
       {
-        fastest_character = &(*character);
+        if(!(*character).IsDead()){
+          fastest_character = &(*character);
+        }
         highest_force = force;
       }
 
