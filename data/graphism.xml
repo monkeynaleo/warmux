@@ -202,7 +202,7 @@
   <color name="weapon_strength_bar_value" r="255" g="255" b="255" a="128" />
   <color name="weapon_strength_bar_border" r="0" g="0" b="0" a="255" />
   <color name="weapon_strength_bar_background" r="153" g="153" b="153" a="96" />
-  <surface name="weapon_strength_bar_last_fire" file="interface/lastfire.png" />
+  <surface name="weapon_strength_bar_last_fire" file="interface/whitetheme/powerbox/lastfire.png" />
   <color name="text_color" r="0" g="0" b="0" a="255" />
   <color name="energy_text_color" r="255" g="255" b="255" a="255" />
   <color name="turn_timer_text_color" r="0" g="0" b="0" a="255" />
@@ -214,9 +214,9 @@
   <point name="weapons_interface_size" x="290" y="235" />
   <point name="tools_interface_size" x="290" y="100" />
   <surface name="clock_background" file="interface/clock_background.png"/>
-  <surface name="clock" file="interface/clock.png"/>
-  <surface name="wind" file="interface/wind.png"/>
-  <surface name="wind_indicator" file="interface/wind_indicator.png"/>
+  <surface name="clock" file="interface/whitetheme/clock.png"/>
+  <surface name="wind" file="interface/whitetheme/wind.png"/>
+  <surface name="wind_indicator" file="interface/whitetheme/wind_indicator.png"/>
   <surface name="quit_screen" file="menu/quit.png"/>
   <!-- Game mode options -->
   <surface name="rounding_bottom" file="interface/whitetheme/bigbox/rounding_bottom.png" />
@@ -256,7 +256,7 @@
   <surface name="square_mask_top" file="interface/whitetheme/powerbox/hide_top.png" />
 
   <sprite name="hourglass">
-    <image file="interface/hourglass.png">
+    <image file="interface/whitetheme/hourglass.png">
       <grid pos="0,0" size="25,25" array="29,1" />
     </image>
     <animation loop_mode="true" speed="100" />
