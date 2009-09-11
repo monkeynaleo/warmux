@@ -139,6 +139,9 @@ void SuperTux::Refresh()
     particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
   // else
   // particle_engine.AddPeriodic(GetPosition(), particle_WATERBUBBLE, false, angle_rad, 0);
+
+  Camera::GetInstance()->FollowObject(this, camera_follow_closely);
+
 }
 
 void SuperTux::turn_left()

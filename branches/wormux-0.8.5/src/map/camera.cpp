@@ -119,7 +119,7 @@ void Camera::AutoCrop()
   Point2i target(0,0);
   bool stop = false;
 
-  if (followed_object && !followed_object->IsDead()) {
+  if (followed_object && !(followed_object->IsGhost())) {
 
     /* compute the ideal position!
      * it takes the physical object direction into account
