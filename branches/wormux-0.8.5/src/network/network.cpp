@@ -72,8 +72,9 @@ bool NetworkThread::stop_thread = false;
 
 int NetworkThread::ThreadRun(void* /*no_param*/)
 {
-  MSG_DEBUG("network", "Thread created: %u", SDL_ThreadID());
+  MSG_DEBUG("network.thread", "Thread created: %u", SDL_ThreadID());
   ReceiveActions();
+  MSG_DEBUG("network.thread", "Thread finished: %u", SDL_ThreadID());
   return 0;
 }
 
@@ -113,8 +114,6 @@ void NetworkThread::ReceiveActions()
 
   while (Continue()) // While the connection is up
   {
-    IndexServer::GetInstance()->Refresh();
-
     if (net->GetState() == WNet::NETWORK_PLAYING && cpu.empty())
     {
       // If while playing everybody disconnected, just quit
@@ -124,6 +123,8 @@ void NetworkThread::ReceiveActions()
     //Loop while nothing is received
     while (Continue())
     {
+      IndexServer::GetInstance()->Refresh();
+
       // Check forced disconnections
       dst_cpu = cpu.begin();
       while (Continue() && dst_cpu != cpu.end()) {
