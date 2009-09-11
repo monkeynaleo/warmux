@@ -14,7 +14,7 @@
 
 <section name="menu">
 
-  <surface name="ico_warning" file="interface/warning.png" />
+  <surface name="ico_warning" file="menu/warning.png" />
 
   <!-- backgrounds -->
   <surface name="bg_option" file="menu/background.png" />
