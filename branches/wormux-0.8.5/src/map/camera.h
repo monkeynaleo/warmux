@@ -31,7 +31,7 @@ class PhysicalObj;
 
 class Camera : public Rectanglei, public Singleton<Camera>
 {
-
+private:
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
@@ -112,7 +112,7 @@ public:
       return position.y + ComputeShake().y;
   }
 
-  void Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint );
+  void Shake(uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint);
   void ResetShake();
 
   void SetAutoCrop(bool crop) { auto_crop = crop; };
