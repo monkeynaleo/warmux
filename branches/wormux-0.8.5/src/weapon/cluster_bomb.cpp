@@ -86,7 +86,7 @@ void Cluster::Shoot(const Point2i & pos, double strength, double angle)
   // will explode on spawn (because of colliding with each other)
 
   begin_time = Time::GetInstance()->Read();
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
   ResetConstants();
   SetXY( pos );
   SetSpeed(strength, angle);

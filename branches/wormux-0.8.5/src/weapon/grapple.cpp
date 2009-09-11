@@ -528,7 +528,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   ActiveCharacter().SetFiringAngle(-M_PI / 3);
 
   // Camera should focus on it!
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
 }
 
 void Grapple::DetachRope()

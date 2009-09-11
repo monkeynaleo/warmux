@@ -126,7 +126,7 @@ void Parachute::Refresh()
         img->Start();
         ActiveCharacter().SetSpeedXY(Point2d(0,0));
         ActiveCharacter().SetMovement("parachute");
-        Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+        Camera::GetInstance()->FollowObject(&ActiveCharacter());
       }
     }
   } else { // We are on the ground

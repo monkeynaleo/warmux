@@ -86,8 +86,7 @@ public:
   void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
-  // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const PhysicalObj *obj, bool follow);
+  void FollowObject(const PhysicalObj *obj);
   void StopFollowingObj(const PhysicalObj* obj);
 
   void CenterOnActiveCharacter();

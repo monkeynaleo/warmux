@@ -307,7 +307,7 @@ static void Action_Player_ChangeCharacter (Action *a)
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
   Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
   Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
 }
 
 static void Action_Game_NextTeam (Action *a)
@@ -319,7 +319,7 @@ static void Action_Game_NextTeam (Action *a)
 
   ASSERT (!ActiveCharacter().IsDead());
 
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
 
   // Are we turn master for next turn ?
   if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())

@@ -87,7 +87,7 @@ void ObjMine::StartTimeout()
     // number generator is synchronized over the network)
     fake = !(RandomSync().GetLong(0, 9));
 
-    Camera::GetInstance()->FollowObject(this, true);
+    Camera::GetInstance()->FollowObject(this);
 
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;

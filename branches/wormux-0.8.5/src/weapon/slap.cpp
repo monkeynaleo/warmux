@@ -117,7 +117,7 @@ bool Slap::p_Shoot (){
         character->SetEnergyDelta(-(int)cfg().damage);
         character->SetSpeed(cfg().strength / character->GetMass(), angle);
         character->SetMovement("fly");
-        Camera::GetInstance()->FollowObject(&(*character), true);
+        Camera::GetInstance()->FollowObject(&(*character));
 
         end = true;
       }
