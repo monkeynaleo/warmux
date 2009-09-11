@@ -35,7 +35,7 @@ BaseSingleton::BaseSingleton()
   singletons.push_back(this);
   SDL_UnlockMutex(mutex);
 
-  MSG_DEBUG("singleton", "Added singleton %p\n", this);
+  MSG_DEBUG("singleton", "Added singleton %p", this);
 }
 
 BaseSingleton::~BaseSingleton()
@@ -44,18 +44,17 @@ BaseSingleton::~BaseSingleton()
   singletons.remove(this);
   SDL_UnlockMutex(mutex);
 
-  MSG_DEBUG("singleton", "Removed singleton %p\n", this);
+  MSG_DEBUG("singleton", "Removed singleton %p", this);
 }
 
 void BaseSingleton::ReleaseSingletons()
 {
-  SingletonList copy(singletons);
-  for (SingletonList::iterator it = copy.begin();
-       it != copy.end();
-       ++it)
-  {
-    MSG_DEBUG("singleton", "Releasing singleton %p\n", *it);
+  SingletonList::iterator it = singletons.begin();
+
+  while (it != singletons.end()) {
+    MSG_DEBUG("singleton", "Releasing singleton %p of type %s", *it, typeid(*it).name());
     delete (*it);
+    it = singletons.begin();
   }
 
   if (mutex)

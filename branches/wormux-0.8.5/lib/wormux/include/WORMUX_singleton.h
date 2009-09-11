@@ -49,7 +49,12 @@ class Singleton : public BaseSingleton
 {
 protected:
   static T* singleton;
-  ~Singleton() { if (singleton == this) singleton = NULL; }
+  ~Singleton()
+  {
+    MSG_DEBUG("singleton", "Deleting singleton %p of type %s",
+	      singleton, typeid(T).name());
+    if (singleton == this) singleton = NULL;
+  }
 
 public:
   static T* GetInstance()
@@ -57,7 +62,7 @@ public:
     if (!singleton)
     {
       singleton = new T();
-      MSG_DEBUG("singleton", "Created singleton %p of type %s\n",
+      MSG_DEBUG("singleton", "Created singleton %p of type %s",
                 singleton, typeid(singleton).name());
     }
     return singleton;
