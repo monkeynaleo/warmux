@@ -41,6 +41,9 @@ public:
   virtual ~RandomGenerator();
   virtual void InitRandom();
 
+  uint GetSeed();
+  void SetSeed(uint seed);
+
   bool GetBool();
   double GetDouble();
   double GetDouble(double max);
