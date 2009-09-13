@@ -61,11 +61,12 @@ Particle::Particle(const std::string &name) :
   image(NULL)
 {
 
+/*
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
-  GetPhysic()->Activate();
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);*/
+  GetPhysic()->SetEnable(true);
 }
 
 Particle::~Particle()

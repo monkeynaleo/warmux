@@ -39,9 +39,8 @@ public :
   virtual ~BulletShape();
   btCollisionShape *GetNativeShape() { return m_native_shape; }
   double GetScale() const;
-  void AddContact(BulletContact *contact);
+  bool AddContact(BulletContact *contact);
   void RemoveContact(BulletContact *contact);
-  void ResetContacts();
   Point2d GetBulletPosition();
   PhysicalShape *GetPublicShape();
   void SetBulletParent(BulletObj *parent);
