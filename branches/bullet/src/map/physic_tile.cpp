@@ -46,6 +46,10 @@ PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileIt
   m_tile_offset(tile_offset),
   m_level(level)
 {
+  m_physic_tiles[0] == NULL;
+  m_physic_tiles[1] == NULL;
+  m_physic_tiles[2] == NULL;
+  m_physic_tiles[3] == NULL;
   Generate();
 }
 

@@ -42,6 +42,8 @@ BulletObj::BulletObj() : PhysicalObj(),
 m_contact_listener(NULL),
 m_enable(false)
 {
+    m_collision_category = 0;
+    m_collision_mask = 0;
     /// Create Dynamic Object
     btTransform startTransform;
     startTransform.setIdentity();
@@ -93,7 +95,7 @@ BulletObj::~BulletObj()
   void BulletObj::Desactivate() {}
 
   void BulletObj::SetEnable(bool enable){
-    m_enable = true;
+    m_enable = enable;
   }
 
   bool BulletObj::GetEnable(){
@@ -465,19 +467,6 @@ Point2d BulletObj::GetSpeed() const
   PhysicalObj* BulletObj::CollidedObjectXY(const Point2i & /*position*/) const { return NULL;}
   // Relative to current position
   PhysicalObj* BulletObj::CollidedObject(const Point2i & /*offset*/) const { return NULL;}
-
-  void BulletObj::ResetContacts()
-  {
-    std::map<std::string,PhysicalShape *>::iterator it;
-
-       for(it = m_shape_list.begin() ; it != m_shape_list.end(); it++)
-       {
-         BulletShape * native_shape = dynamic_cast<BulletShape *>(it->second);
-         ASSERT(native_shape);
-         native_shape->ResetContacts();
-       }
-
-  }
 
 
   void BulletObj::SetContactListener(GameObj *listener) {

@@ -78,15 +78,22 @@ bool BulletShape::IsColliding(const PhysicalObj *obj) const
 
 
 void BulletShape::SignalCollision(BulletContact * contact){
+   GetBulletParent()->SignalCollision(contact);
+}
 
+PhysicalShape *BulletShape::GetPublicShape(){
+  return m_public_shape;
+}
+
+bool BulletShape::AddContact(BulletContact *contact)
+{
+  bool exist = false;
   BulletShape *collider = NULL;
   if(contact->GetBulletShapeA() == this){
     collider = contact->GetBulletShapeB();
   }else{
     collider = contact->GetBulletShapeA();
   }
-
-  bool exist = false;
 
   std::vector<BulletContact *>::iterator it;
   for(it = m_contact_list.begin(); it != m_contact_list.end(); it++ ){
@@ -96,22 +103,17 @@ void BulletShape::SignalCollision(BulletContact * contact){
        exist = true;
        break;
      }
+   }else{
+     exist = true;
+     break;
    }
   }
 
   if(!exist){
-    GetBulletParent()->SignalCollision(contact);
+    m_contact_list.push_back(contact);
+    m_contact_count++;
   }
-}
-
-PhysicalShape *BulletShape::GetPublicShape(){
-  return m_public_shape;
-}
-
-void BulletShape::AddContact(BulletContact *contact)
-{
-  m_contact_list.push_back(contact);
-  m_contact_count++;
+  return !exist;
 }
 
 void BulletShape::RemoveContact(BulletContact *contact)
@@ -126,13 +128,6 @@ void BulletShape::RemoveContact(BulletContact *contact)
    }
    m_contact_count--;
 
-}
-
-void BulletShape::ResetContacts()
-{
-
-  //m_last_contact_count = m_contact_count;
-  //m_contact_count = 0;
 }
 
 Point2d BulletShape::GetBulletPosition()

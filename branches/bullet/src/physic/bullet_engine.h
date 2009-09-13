@@ -27,6 +27,7 @@
 
 class BulletObj;
 class BulletGround;
+class BulletContact;
 
 class BulletEngine : public PhysicalEngine
 {
@@ -78,7 +79,7 @@ protected:
   static bool ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int partId0, int index0, const btCollisionObject* colObj1, int partId1, int index1);
   static bool ContactProcessedCallback(btManifoldPoint& cp,void* colObj0, void* colObj1);
   static bool ContactDestroyedCallback(void* userPersistentData);
-  void ResetContacts();
+  void ApplyContacts();
 
   void CleanGarbage();
   void PerformAddList();
@@ -89,6 +90,8 @@ protected:
   std::vector<BulletObj *> m_object_list;
   std::vector<BulletGround *> m_garbage_list;
   std::vector<BulletGround *> m_add_list;
+  std::vector<BulletContact *> m_contact_add_list;
+  std::vector<BulletContact *> m_contact_remove_list;
   bool m_is_in_step;
 };
 

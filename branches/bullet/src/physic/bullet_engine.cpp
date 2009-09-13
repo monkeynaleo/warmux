@@ -22,10 +22,12 @@
 #include "physic/bullet_obj.h"
 #include "physic/bullet_shape.h"
 #include "physic/force.h"
+#include "physic/game_obj.h"
 #include "physic/bullet_contact.h"
 #include "game/time.h"
 #include "physical_engine.h"
 #include "bullet_engine.h"
+
 
 #include <iostream>
 
@@ -65,6 +67,7 @@ struct BulletEngineFilterCallback : public btOverlapFilterCallback
                       return false;
                     }
                   }
+
 
                   if(!bulObj0 || !bulObj1){
                     return collides;
@@ -150,7 +153,6 @@ PhysicalRectangle *BulletEngine::CreateRectangleShape(double width, double heigh
     return new BulletRectangle( width,  height);
 }
 
-
 void BulletEngine::AddObject(PhysicalObj *new_obj)
 {
     BulletObj *obj = reinterpret_cast<BulletObj *>(new_obj);
@@ -186,6 +188,9 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
      break;
    }
   }
+
+
+
   bobj->SetInWorld(false);
   m_world->removeRigidBody(bobj->GetBody());
 }
@@ -193,7 +198,17 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
 void BulletEngine::RemoveGround(PhysicalGround *obj)
 {
   BulletGround *bobj = reinterpret_cast<BulletGround *>(obj);
+
+  std::vector<BulletGround *>::iterator it;
+  for(it = m_add_list.begin(); it != m_add_list.end();it++){
+    if(*it == bobj){
+      m_add_list.erase(it);
+      return;
+    }
+  }
+
   m_garbage_list.push_back(bobj);
+
 }
 
 void BulletEngine::Step()
@@ -214,6 +229,7 @@ void BulletEngine::Step()
  MSG_DEBUG("physical.step", "Engine step");
   m_is_in_step = true;
   m_world->stepSimulation(timeStep,60,btScalar(1.)/btScalar(180.));
+  ApplyContacts();
   m_is_in_step = false;
   m_last_step_time = m_last_step_time +lround(timeStep);
 
@@ -242,10 +258,14 @@ void BulletEngine::Step()
 
 void BulletEngine::VirtualStep()
 {
+  if(m_is_in_step){
+    return;
+  }
 
  MSG_DEBUG("physical.step", "Engine  virtual step");
   m_is_in_step = true;
   m_world->performDiscreteCollisionDetection();
+  ApplyContacts();
   m_is_in_step = false;
 
   CleanGarbage();
@@ -296,12 +316,50 @@ void BulletEngine::RemoveForce(Force *force)
     }
 }
 
-void BulletEngine::ResetContacts()
+void BulletEngine::ApplyContacts()
 {
-  std::vector<BulletObj *>::iterator it;
-  for(it = m_object_list.begin(); it != m_object_list.end();it++){
-    (*it)->ResetContacts();
+  std::vector<BulletContact *>::iterator it;
+  BulletContact *contact;
+
+  for(it = m_contact_add_list.begin(); it != m_contact_add_list.end();it++)
+  {
+    contact = *it;
+    MSG_DEBUG("physic.contact", "Contact created between \"%s.%s\" and \"%s.%s\" ",
+         (contact->GetBulletShapeA() ? contact->GetBulletShapeA()->GetBulletParent()->GetContactListener()->GetName().c_str() : "ground"),
+         (contact->GetBulletShapeA() ? contact->GetShapeA()->GetName().c_str() : "ground"),
+         (contact->GetBulletShapeB() ? contact->GetBulletShapeB()->GetBulletParent()->GetContactListener()->GetName().c_str() : "ground"),
+         (contact->GetBulletShapeB() ? contact->GetShapeB()->GetName().c_str() : "ground"));
+
+    if(!contact->IsSignaled())
+    {
+      contact->Signal();
+      MSG_DEBUG("physic.contact", "Contact signaled");
+    }
+
+
   }
+
+  m_contact_add_list.clear();
+
+  for(it = m_contact_remove_list.begin(); it != m_contact_remove_list.end();it++)
+  {
+    contact = *it;
+
+    if(contact->GetBulletShapeA())
+    {
+     contact->GetBulletShapeA()->RemoveContact(contact);
+    }
+
+    if(contact->GetBulletShapeB())
+    {
+     contact->GetBulletShapeB()->RemoveContact(contact);
+    }
+
+    delete contact;
+  }
+
+  m_contact_remove_list.clear();
+
 }
 //Contact Callback
 
@@ -331,6 +389,8 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
     else
     {
       contact->SetShapeA(NULL);
+      contact->SetPositionA(Point2d(0,0));
+      contact->SetSpeedXYA(Point2d(0,0));
     }
 
     if(colObj1->getCollisionShape()->getUserPointer())
@@ -348,49 +408,46 @@ bool BulletEngine::ContactAddedCallback(btManifoldPoint& cp,const btCollisionObj
     else
     {
          contact->SetShapeB(NULL);
+         contact->SetPositionB(Point2d(0,0));
+         contact->SetSpeedXYB(Point2d(0,0));
     }
+    bool exist = false;
 
     if(contact->GetBulletShapeA())
     {
-      contact->GetBulletShapeA()->AddContact(contact);
+      exist = exist || !contact->GetBulletShapeA()->AddContact(contact);
     }
     if(contact->GetBulletShapeB())
     {
-      contact->GetBulletShapeB()->AddContact(contact);
+      exist = exist || !contact->GetBulletShapeB()->AddContact(contact);
     }
 
-  }
-  else
-  {
-    BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
-    if (contact->GetBulletShapeA())
+    if(exist)
     {
-      friction0 = contact->GetBulletShapeA()->GetPublicShape()->GetFriction();
-      restitution0 = contact->GetBulletShapeA()->GetPublicShape()->GetRestitution();
+      cp.m_userPersistentData = NULL;
+      delete contact;
     }
-    if (contact->GetBulletShapeB())
+    else
     {
-      friction1 = contact->GetBulletShapeB()->GetPublicShape()->GetFriction();
-      restitution1 = contact->GetBulletShapeB()->GetPublicShape()->GetRestitution();
+      reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->m_contact_add_list.push_back(contact);
     }
+
+
   }
+
 
   //Compute friction and restitution
   cp.m_combinedFriction = friction0 * friction1;
   cp.m_combinedRestitution = restitution0 * restitution1;
 
+
+
+
   return true;
 }
 
-bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*/, void* /*colObj1*/)
+bool BulletEngine::ContactProcessedCallback(btManifoldPoint& /*cp*/,void* /*colObj0*/, void* /*colObj1*/)
 {
-  if(cp.m_userPersistentData){
-
-    BulletContact *contact = reinterpret_cast<BulletContact  *>(cp.m_userPersistentData);
-  if(!contact->IsSignaled()){
-      contact->Signal();
-    }
-  }
   return false;
 }
 
@@ -398,19 +455,8 @@ bool BulletEngine::ContactProcessedCallback(btManifoldPoint& cp,void* /*colObj0*
 bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
 {
 
-
   BulletContact *contact = reinterpret_cast<BulletContact  *>(userPersistentData);
-  if(contact->GetBulletShapeA())
-  {
-    contact->GetBulletShapeA()->RemoveContact(contact);
-  }
+  reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance())->m_contact_remove_list.push_back(contact);
 
-  if(contact->GetBulletShapeB())
-  {
-    contact->GetBulletShapeB()->RemoveContact(contact);
-  }
-
-  delete contact;
-  //  shape->RemoveContact();
   return false;
 }
