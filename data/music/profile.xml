@@ -6,4 +6,5 @@
   <music type="sea" playlist="ingame/sea.m3u" />
   <music type="funfair" playlist="ingame/funfair.m3u" />
   <music type="monkey" playlist="ingame/monkey.m3u" />
+  <music type="construction" playlist="ingame/construction.m3u" />
 </profile>
