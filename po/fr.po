@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2009-09-10 14:15+0100\n"
+"PO-Revision-Date: 2009-09-14 14:47+0100\n"
 "Last-Translator: Frédéric Bertolus <fredb219@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -303,16 +303,18 @@ msgstr[0] "Ça plane pour l'équipe %s ! Elle a gagné %u Jetpack ! "
 msgstr[1] "Ça plane pour l''équipe %s ! Elle a gagné %u Jetpacks !"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
-msgstr[0] "L'équipe %s a gagné %u Anti-gravité ! Je suis Neil Armstrong !"
-msgstr[1] "L'équipe %s a gagné %u Anti-gravité ! Je suis Neil Armstrong !"
+msgstr[0] ""
+"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond de "
+"géant pour le logiciel libre !"
+msgstr[1] ""
+"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond de "
+"géant pour le logiciel libre !"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -670,7 +672,7 @@ msgstr "Glissez-déplacez : Déplacer la caméra"
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:77
 msgid "Duration before death mode"
-msgstr "Dommages infligés par tour dans le death mode"
+msgstr "Nombre de tours avant le death mode"
 
 #: src/menu/game_mode_editor.cpp:46
 msgid "Duration of a turn"
