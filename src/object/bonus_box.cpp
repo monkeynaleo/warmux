@@ -60,7 +60,8 @@ void BonusBox::PickRandomWeapon()
   weapon_num = 0;
   int nb_try = 0;
   do {
-    double num = RandomLocal().GetDouble(0, total_probability);
+    MSG_DEBUG("random.get", "BonusBox::PickRandomWeapon()");
+    double num = RandomSync().GetDouble(0, total_probability);
     double total_bf_weapon = 0, total_after_weapon = 0;
 
     for (uint i=0; i < weapon_list.size(); i++) {
