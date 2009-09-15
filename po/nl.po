@@ -58,7 +58,7 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s verandert het doelwit naar %s"
@@ -98,7 +98,7 @@ msgstr "%s van team %s heeft de grond te hard geraakt!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s heeft besloten om %s te verwonden"
@@ -301,14 +301,9 @@ msgstr[0] "Team %s heeft %u jetpack gekregen"
 msgstr[1] "Team %s heeft %u jetpacks gekregen"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Team %s heeft %u lagezwaartekracht gekregen! Ik ben Neil Armstrong!"
 msgstr[1] ""
 "Team %s heeft %u lagezwaartekrachten gekregen! Ik ben Neil Armstrong!"
@@ -370,7 +365,7 @@ msgstr[1] ""
 "Team %s heeft %u sluipschuttersgeweren gekregen! Schiet ermee tussen zijn "
 "ogen!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -410,7 +405,7 @@ msgstr[1] ""
 "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek "
 "op bent."
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -430,7 +425,7 @@ msgstr "Team %s is afgeslacht."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s gaat op %s schieten"
@@ -536,28 +531,28 @@ msgstr "Snijbrander"
 msgid "Bounce Ball"
 msgstr "Stuiterbal"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Dag dag tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
@@ -607,7 +602,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klik: Camera op het karakter centreren"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Client modus"
 
@@ -708,7 +703,7 @@ msgstr ""
 "Fout bij het initialiseren van het netwerk: Client %s is het niet met je "
 "eens!! - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
@@ -778,7 +773,7 @@ msgstr ""
 "Contoleer uw router configuratie wanneer u niet direct met het internet "
 "verbonden bent: TCP Poort %s moet doorgestuurd worden naar deze computer."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
@@ -988,7 +983,7 @@ msgstr "Een lijst met verbonden spelers weergeven"
 msgid "Load maps:"
 msgstr "Kaarten worden geladen:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Teams worden geladen:"
 
@@ -1242,7 +1237,7 @@ msgid "Server available on Internet"
 msgstr "Server beschikbaar op internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Server modus"
 
@@ -1330,7 +1325,7 @@ msgstr "Voorraad:"
 msgid "Submachine Gun"
 msgstr "Automatisch Geweer"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1590,7 +1585,7 @@ msgstr "Jij bent de nieuwe Beurtmeester!"
 msgid "You need at least one valid map!"
 msgstr "U heeft minimaal één geldige kaart nodig!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "U heeft minimaal twee geldige teams nodig!"
 
@@ -1598,7 +1593,7 @@ msgstr "U heeft minimaal twee geldige teams nodig!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "U kunt pas spelen als u een team heeft geselecteerd!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 

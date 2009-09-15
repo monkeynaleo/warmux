@@ -60,7 +60,7 @@ msgstr "Equipo %s"
 msgid "%s Team - Remote"
 msgstr "Equipo %s - remoto"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s apunta agora a %s"
@@ -100,7 +100,7 @@ msgstr "%s, do equipo %s, esnafrouse contra o chan!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s, do equipo %s, morreu por parvo!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s decidiu ferir a %s"
@@ -298,11 +298,8 @@ msgstr[1] "O equipo %s gañou %u jetpacks! E a voar!"
 
 #: src/weapon/lowgrav.cpp:84
 #, c-format
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] ""
 "O equipo %s gañou %u casco antigravidade! Un pequeno paso para o home, un "
 "gran paso para o software libre!"
@@ -366,7 +363,7 @@ msgstr[0] ""
 msgstr[1] ""
 "O equipo %s gañou %u rifles francotirador! Procura atinarlles entre os ollos!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -402,7 +399,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "O equipo %s gañou %u paso de turno! Gustarache, xa verás."
 msgstr[1] "O equipo %s gañou %u paso de turno! Gustaranche, xa verás."
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -419,7 +416,7 @@ msgstr "O equipo %s foi derrotado."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s levouse consigo a un membro do equipo %s á outra vida!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s vai darlle a %s"
@@ -526,28 +523,28 @@ msgstr "Soplete"
 msgid "Bounce Ball"
 msgstr "Saltariña"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Deica outra, Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Non se pode atopar o equipo %s!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos persoais (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos personalizados (%s)!"
@@ -597,7 +594,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Clic: centrar a cámara na personaxe"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Modo cliente"
 
@@ -697,7 +694,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Erro ao inicializar a rede: O cliente %s non está dacordo contigo!! - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Erro ao cargar o equipo:"
 
@@ -771,7 +768,7 @@ msgstr ""
 "á configuración do teu router: o porto TCP %s ten que estarlle permitido á "
 "túa computadora."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: non se pode atopar o individuo \"%s\" para o equipo \"%s\"."
@@ -982,7 +979,7 @@ msgstr "Listar os xogadores conectados"
 msgid "Load maps:"
 msgstr "Cargar os mapas:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Cargar os equipos:"
 
@@ -1236,7 +1233,7 @@ msgid "Server available on Internet"
 msgstr "Servidor dispoñible na internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Modo servidor"
 
@@ -1325,7 +1322,7 @@ msgstr "Munición:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1588,7 +1585,7 @@ msgstr "Ti es o mestre da nova rolda!"
 msgid "You need at least one valid map!"
 msgstr "Necesitas un mapa válido polo menos!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "Necesita dous equipos válidos polo menos!"
 
@@ -1596,7 +1593,7 @@ msgstr "Necesita dous equipos válidos polo menos!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Non poderás xogar sen antes escoller un equipo!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "O teu disparo foi tomar polo cú!"
 
@@ -1752,3 +1749,16 @@ msgstr "o Son aberto a %d Hz e %d bits"
 
 #~ msgid "XML error during loading map '%s': "
 #~ msgstr "Erro de XML durante a carga do mapa '%s':"
+
+#~ msgid ""
+#~ "%s team has won %u lowgrav! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgid_plural ""
+#~ "%s team has won %u lowgravs! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgstr[0] ""
+#~ "O equipo %s gañou %u casco antigravidade! Un pequeno paso para o home, un "
+#~ "gran paso para o software libre!"
+#~ msgstr[1] ""
+#~ "O equipo %s gañou %u cascos antigravidade! Un pequeno paso para o home, "
+#~ "un gran paso para o software libre."

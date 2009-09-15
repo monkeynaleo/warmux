@@ -60,7 +60,7 @@ msgstr "%s Tým"
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -100,7 +100,7 @@ msgstr "%s z týmu %s narazil tvrdě na zem!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s z týmu %s je mrtvý, protože je trdlo!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
@@ -322,14 +322,9 @@ msgstr[1] "Tým %s získal %u tryskové batohy! Hop, hop a letím!"
 msgstr[2] "Tým %s získal %u tryskových batohů! Hop, hop a letím!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Tým %s získal %u nízkou gravitaci! Jsem Neil Armstrong!"
 msgstr[1] "Tým %s získal %u nízké gravitace! Jsem Neil Armstrong!"
 msgstr[2] "Tým %s získal %u nízkých gravitací! Jsem Neil Armstrong!"
@@ -394,7 +389,7 @@ msgstr[0] "Tým %s získal %u ostřelovací pušku. Střelte je mezi oči!"
 msgstr[1] "Tým %s získal %u ostřelovací pušky. Střelte je mezi oči!"
 msgstr[2] "Tým %s získal %u ostřelovacích pušek. Střelte je mezi oči!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -434,7 +429,7 @@ msgstr[0] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete.
 msgstr[1] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 msgstr[2] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -455,7 +450,7 @@ msgstr "Tým %s byl rozcupován."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vzal sebou do hrobu člena týmu %s!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
@@ -564,30 +559,30 @@ msgstr "Plamenomet"
 msgid "Bounce Ball"
 msgstr "Skákací kulička"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 #| msgid "Bye bye tux..."
 msgid "Bye bye Tux..."
 msgstr "Pá pá tuxi..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nelze najít tým %s!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář týmů (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
@@ -649,7 +644,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Kliknutí: Vystředí kameru na hráče"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Klientský režim"
 
@@ -749,7 +744,7 @@ msgstr "Zdraví"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Chyba při přípravě sítě: Klient %s nesouhlasí!!- %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
@@ -826,7 +821,7 @@ msgstr ""
 "Internetu, zkontrolujte nastavení routeru: TCP port %s musí být přesměrován "
 "na váš počítač."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
@@ -1069,7 +1064,7 @@ msgstr "Vypsat připojené hráče"
 msgid "Load maps:"
 msgstr "Nahrát mapy:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Nahrát týmy:"
 
@@ -1337,7 +1332,7 @@ msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Serverový režim"
 
@@ -1434,7 +1429,7 @@ msgstr "Zásoby:"
 msgid "Submachine Gun"
 msgstr "Samopal"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1735,7 +1730,7 @@ msgstr "Jste nový šéf tahů!"
 msgid "You need at least one valid map!"
 msgstr "Potřebujete nejméně jednu použitelnou mapu!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 #, fuzzy
 #| msgid "You need at least two valid teams !"
 msgid "You need at least two valid teams!"
@@ -1747,7 +1742,7 @@ msgstr "Potřebujete nejméně dva použitelné týmy!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 

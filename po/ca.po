@@ -62,7 +62,7 @@ msgstr "Equip %s"
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -102,7 +102,7 @@ msgstr "%s de l'equip %s ha picat massa fort a terra!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'equip %s s'ha mort per pocatraça!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
@@ -291,14 +291,9 @@ msgstr[0] "L'equip %s aconsegueix %u jetpack!"
 msgstr[1] "L'equip %s aconsegueix %u jetpacks!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "L'equip %s aconsegueix %u baixa gravetat!"
 msgstr[1] "L'equip %s aconsegueix %u baixes gravetats!"
 
@@ -352,7 +347,7 @@ msgid_plural ""
 msgstr[0] "L'equip %s aconsegueix %u rifle!"
 msgstr[1] "L'equip %s aconsegueix %u rifles!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -387,7 +382,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'equip %s aconsegueix %u perd torn!"
 msgstr[1] "L'equip %s aconsegueix %u perd torns!"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -404,7 +399,7 @@ msgstr "L'equip %s ha guanyat."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s s'ha emportat un membre de %s a la tomba amb ell!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
@@ -510,29 +505,29 @@ msgstr "Bufador"
 msgid "Bounce Ball"
 msgstr "Bounce Ball"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Fins ara tux... "
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equip %s no disponible!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips personalitzats (%s)!"
@@ -589,7 +584,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Clic: Centra la càmera al personatge"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Client"
 
@@ -690,7 +685,7 @@ msgstr "Enemic"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
@@ -763,7 +758,7 @@ msgstr ""
 "està directament connectat a Internet, comprova la configuració de la teva "
 "router: Port TCP %s ha de ser dirigit al teu ordinador."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -982,7 +977,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Carrega els mapas:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Carrega els equips:"
 
@@ -1243,7 +1238,7 @@ msgid "Server available on Internet"
 msgstr "Servidor disponible a internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Servidor"
 
@@ -1336,7 +1331,7 @@ msgstr "Munició:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1617,7 +1612,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Tu necesites almenys dos equips vàlids!"
@@ -1627,7 +1622,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 

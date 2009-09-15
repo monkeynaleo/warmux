@@ -56,7 +56,7 @@ msgstr "Hold %s"
 msgid "%s Team - Remote"
 msgstr "Hold %s – Fjernt"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s ændrer mål til %s"
@@ -96,7 +96,7 @@ msgstr "%s (%s) ramte jorden for hårdt!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s) døde fordi han var klodset!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s besluttede sig for at skade %s"
@@ -294,14 +294,9 @@ msgstr[0] "Holdet %s har fået %u jetpack! Svedigt!"
 msgstr[1] "Holdet %s har fået %u jetpacks! Svedigt!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] ""
 "Holdet %s har fået %u svag tyngdekraft! Se mig, jeg er Neil Armstrong!"
 msgstr[1] ""
@@ -357,7 +352,7 @@ msgid_plural ""
 msgstr[0] "Holdet %s har fået %u sniper-riffel! Sigt og skyd mellem øjnene!"
 msgstr[1] "Holdet %s har fået %u sniper-rifler! Skyd dem mellem øjnene!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -392,7 +387,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Holdet %s har fået %u \"spring turen over\"! Jeg ved du elsker dem."
 msgstr[1] "Holdet %s har fået %u \"spring turen over\"! Jeg ved du elsker dem."
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -411,7 +406,7 @@ msgstr "Holdet %s blev udryddet."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog et medlem af holdet %s med i graven!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s vil skyde %s"
@@ -517,29 +512,29 @@ msgstr "Blæselampe"
 msgid "Bounce Ball"
 msgstr "Hoppebold"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Faaarvel Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan ikke åbne det brugerdefinerede holdkatalog (%s)!"
@@ -595,7 +590,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klik: Centrér kamera på kriger"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -696,7 +691,7 @@ msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Fejl under initialisering af netværk: Klienten %s er ikke enig med dig! - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Fejl under indlæsning af hold:"
 
@@ -766,7 +761,7 @@ msgstr ""
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
 "stedet. I så fald skal du forwarde TCP-port %s til din computer."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
@@ -983,7 +978,7 @@ msgstr "Liste over forbunde spillere"
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
@@ -1242,7 +1237,7 @@ msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Servermodus"
 
@@ -1333,7 +1328,7 @@ msgstr "Lager:"
 msgid "Submachine Gun"
 msgstr "Maskinpistol"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1607,7 +1602,7 @@ msgstr "Du er den nye tur-bestyrer!"
 msgid "You need at least one valid map!"
 msgstr "Du skal vælge mindst én gyldig bane!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Du skal vælge mindst to gyldige hold!"
@@ -1617,7 +1612,7 @@ msgstr "Du skal vælge mindst to gyldige hold!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Du ramte ved siden af!"
 

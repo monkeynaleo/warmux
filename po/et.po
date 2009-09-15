@@ -56,7 +56,7 @@ msgstr "Meeskond %s"
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -96,7 +96,7 @@ msgstr "%s meeskonnast %s prantsatas liiga kõvasti vastu maad!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s meeskonnast %s sai surma omaenda lollusest!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
@@ -293,14 +293,9 @@ msgstr[0] "Meeskond %s võitis %u reaktiivranitsa! Jõud olgu sinuga!"
 msgstr[1] "Meeskond %s võitis %u reaktiivranitsat! Jõud olgu sinuga!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "Meeskond %s võitis %u antigravikiivri! Ema on sul Neil Armstrong!"
 msgstr[1] "Meeskond %s võitis %u antigravikiivri! Ema on sul Neil Armstrong!"
 
@@ -354,7 +349,7 @@ msgid_plural ""
 msgstr[0] "Meeskond %s võitis %u täpsuspüssi! Sihi täpselt silmade vahele!"
 msgstr[1] "Meeskond %s võitis %u täpsuspüssi! Sihi täpselt silmade vahele!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -389,7 +384,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Meeskond %s võitis %u vahelejäämise! Ma tean, et see on su lemmik!"
 msgstr[1] "Meeskond %s võitis %u vahelejäämist! Ma tean, et see on su lemmik!"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -408,7 +403,7 @@ msgstr "Meeskond %s lasti ribadeks."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s võttis %s meeskonna liikme hauda kaasa!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
@@ -514,29 +509,29 @@ msgstr "Leeklamp"
 msgid "Bounce Ball"
 msgstr "Põrkepall"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Hüvasti, Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei leia meeskonda %s!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ei suuda avada isiklike meeskondade kausta (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei suuda avada meeskondade kausta (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei suuda avada kohandet meeskondade kausta (%s)!"
@@ -593,7 +588,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klõpsa: Fokuseeri kaamera tegelaskujul"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Kliendire¸iim"
 
@@ -693,7 +688,7 @@ msgstr "Elupunktid"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Viga võrguühenduse loomisel: Mängija %s ei nõustu sinuga!! -- %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Viga meeskonna laadimisel:"
 
@@ -759,7 +754,7 @@ msgstr ""
 "väljastpoolt. Kui sa pole ühendatud interneti otse, siis vaata üle ka oma "
 "ruuteri seadistused: TCP port %s peab olema tunneldatud sinu arvutisse."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Viga: Ei suuda leida keha \"%s\" meeskonna \"%s\" jaoks."
@@ -976,7 +971,7 @@ msgstr "Ühendet mängijate nimekiri"
 msgid "Load maps:"
 msgstr "Laadi mänguvälju:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Laadi meeskondi:"
 
@@ -1235,7 +1230,7 @@ msgid "Server available on Internet"
 msgstr "Server on saadaval internetis"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Serverire¸iim"
 
@@ -1325,7 +1320,7 @@ msgstr "Tagavara:"
 msgid "Submachine Gun"
 msgstr "Automaat"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1598,7 +1593,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Sul on vaja vähemalt ühte mänguväljat!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Sul on vaja vähemalt kahte meeskonda!"
@@ -1608,7 +1603,7 @@ msgstr "Sul on vaja vähemalt kahte meeskonda!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Sa ei saa mängida enne, kui oled meeskonna valinud!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Mööda lasid!"
 

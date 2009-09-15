@@ -56,7 +56,7 @@ msgstr " %s チーム"
 msgid "%s Team - Remote"
 msgstr " %s チーム - 操作"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -97,7 +97,7 @@ msgstr "%s (%s) は地面に叩き付けられた。"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s) の死因：ヘタクソ！"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
@@ -290,14 +290,9 @@ msgstr[0] "%s チームは %u つのジェットパックを獲得！ブッ飛�
 msgstr[1] "%s チームは %u つのジェットパックを獲得！ブッ飛べ！"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "%s チームは %u つの低重力装置を獲得！私がアームストロング船長だ！"
 msgstr[1] "%s チームは %u つの低重力装置を獲得！私がアームストロング船長だ！"
 
@@ -353,7 +348,7 @@ msgstr[0] ""
 msgstr[1] ""
 "%s チームは %u つのスナイパーライフルを獲得！鉛玉を眉間にブチ込んでやれ！"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -388,7 +383,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s チームは %u つのターンスキップを獲得！君は好きだろう？"
 msgstr[1] "%s チームは %u つのターンスキップを獲得！君は好きだろう？"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -407,7 +402,7 @@ msgstr "%s チームは降参しました。"
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s は、%s チームのメンバーを道連れにした！"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
@@ -513,29 +508,29 @@ msgstr "バーナー"
 msgid "Bounce Ball"
 msgstr "バウンスボール"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "バイバイ Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s! チームが見つかりません。"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "個人チームのディレクトリが開けません (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "チームのディレクトリが開けません (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "カスタムチームのディレクトリが開けません (%s)!"
@@ -591,7 +586,7 @@ msgid "Click: Center the camera on the character"
 msgstr "クリック:カメラをキャラクターの中心にする"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "クライアントモード"
 
@@ -692,7 +687,7 @@ msgstr "ライフ"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "ネットワーク初期化エラー : クライアント %s はあなたに同意しません - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "チーム読み込みエラー :"
 
@@ -761,7 +756,7 @@ msgstr ""
 "あなたは直接インターネットに接続していないなら、ルーターを確認してください。"
 "TCP Port %s は、あなたのコンピュータにフォワーディングする必要があります。"
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "エラー: 見つかりません。 ボディ\"%s\" チーム \"%s\"."
@@ -978,7 +973,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "マップ読込:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "チーム読込:"
 
@@ -1239,7 +1234,7 @@ msgid "Server available on Internet"
 msgstr "インターネットでサーバーが使用できます"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "サーバーモード"
 
@@ -1330,7 +1325,7 @@ msgstr "残り:"
 msgid "Submachine Gun"
 msgstr "サブマシンガン"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "スーパーTux"
 
@@ -1604,7 +1599,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "最低1つの有効なマップが必要です！"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "最低2つの有効なチームが必要です！"
@@ -1614,7 +1609,7 @@ msgstr "最低2つの有効なチームが必要です！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "ゲーム開始前にチームを選択してください！"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "ミス！"
 
