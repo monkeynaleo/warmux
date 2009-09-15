@@ -101,7 +101,10 @@ strip SPackage/bin/wormux
 # creating the shell script
 cat > SPackage/wormux.sh << EOF
 #!/bin/sh
-
+pulse=`ps x|grep pulseaudio|wc -l`
+if [ "$pulse" -gt 1 ]; then
+    export SDL_AUDIODRIVER=pulse
+fi
 LD_LIBRARY_PATH=./lib WORMUX_DATADIR=./data/ WORMUX_LOCALEDIR=./data/locale WORMUX_FONT_PATH=./data/font/DejaVuSans.ttf ./lib/ld-linux.so.2 ./bin/wormux
 EOF
 
