@@ -343,6 +343,13 @@ static void Action_NewBonusBox (Action *a)
   Game::GetInstance()->AddNewBox(box);
 }
 
+static void Action_Game_CalculateFrame (Action */*a*/)
+{
+  // Nothing to do here:
+  // It is just an indication for the action handler
+  // that the frame is complete.
+}
+
 static void Action_DropBonusBox (Action *a)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
@@ -590,8 +597,6 @@ void SyncCharacters()
 {
   ASSERT(Network::GetInstance()->IsTurnMaster());
 
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendActionToAll(a_begin_sync);
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),
     end=GetTeamsList().playing_list.end();
@@ -609,8 +614,6 @@ void SyncCharacters()
       SendCharacterInfo(team_no, char_no);
     }
   }
-  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendActionToAll(a_sync_end);
 }
 
 static void Action_Character_Jump (Action */*a*/)
@@ -643,12 +646,8 @@ static void Action_Character_SetPhysics (Action *a)
 void SendActiveCharacterAction(const Action& a)
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendActionToAll(a_begin_sync);
   SendActiveCharacterInfo();
   Network::GetInstance()->SendActionToAll(a);
-  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 
 // Send character information over the network (it's totally stupid to send it locally ;-)
@@ -813,18 +812,6 @@ static void Action_Network_RandomInit (Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
   RandomSync().SetSeed(a->PopInt());
-}
-
-static void Action_Network_SyncBegin (Action */*a*/)
-{
-  ASSERT(!Network::GetInstance()->sync_lock);
-  Network::GetInstance()->sync_lock = true;
-}
-
-static void Action_Network_SyncEnd (Action */*a*/)
-{
-  ASSERT(Network::GetInstance()->sync_lock);
-  Network::GetInstance()->sync_lock = false;
 }
 
 // Nothing to do here. Just for time synchronisation
@@ -1034,6 +1021,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
 
   // ########################################################
   // To be sure that rules will be the same on each computer
@@ -1082,8 +1070,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
   // ########################################################
-  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
-  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
 
   ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
@@ -1109,28 +1095,51 @@ ActionHandler::~ActionHandler()
 {
 }
 
-void ActionHandler::ExecActions()
+bool ActionHandler::ExecActionsForOneFrame()
+{
+  ASSERT(Game::GetInstance()->IsRunning());
+  Action * a;
+  std::list<Action*>::iterator it;
+  bool frame_complete = false;
+  Lock();
+  it = queue.begin();
+  while (it != queue.end() && !frame_complete)
+  {
+    a = (*it);
+    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
+      frame_complete = true;
+
+    MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
+              GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
+              Time::GetInstance()->Read());
+
+    Exec (a);
+
+    delete *it;
+    it = queue.erase(it);
+  }
+  UnLock();
+  return frame_complete;
+}
+
+void ActionHandler::ExecFrameLessActions()
 {
   Action * a;
   std::list<Action*>::iterator it;
   Lock();
+
   for (it = queue.begin(); it != queue.end() ;)
   {
     a = (*it);
-    //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
-    // If action is in the future, wait for next refresh
-    if (a->GetTimestamp() > Time::GetInstance()->Read()) {
+
+    // only handle frame less actions.
+    if (!a->IsFrameLess()) {
       it++;
       continue;
     }
 
     // Do not execute actions from Network if we are not connected anymore
-    if (!a->GetCreator()
-	|| Network::IsConnected()) {
-
-      MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
-		GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
-		Time::GetInstance()->Read());
+    if (!a->GetCreator()|| Network::IsConnected()) {
 
       Exec (a);
 
@@ -1159,11 +1168,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 void ActionHandler::NewActionActiveCharacter(Action* a)
 {
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendActionToAll(a_begin_sync);
   SendActiveCharacterInfo();
   NewAction(a);
-  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 

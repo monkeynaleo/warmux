@@ -324,4 +324,8 @@ Action::Action_t Action::GetType() const
   return m_type;
 }
 
+bool Action::IsFrameLess() const
+{
+  return m_type <= LAST_FRAME_LESS_ACTION;
+}
 

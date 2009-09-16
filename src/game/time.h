@@ -25,19 +25,20 @@
 #include <string>
 #include "include/base.h"
 #include <WORMUX_singleton.h>
+#include "game/stopwatch.h"
 
 // XXX uint wrap-around (or at least system timer) not handled
 class Time : public Singleton<Time>
 {
 private:
+  Stopwatch   stopwatch;
+  bool        waiting_for_network;
+  bool        waiting_for_user;
   uint        current_time;
-  //uint        max_time;
   uint        delta_t;
-  bool        is_game_paused;
-
-  uint        real_time_game_start;
-  uint        real_time_pause_dt;
-  uint        real_time_pause_begin;
+#ifdef DEBUG
+  Stopwatch   network_wait_time_stopwatch;
+#endif
 
 protected:
   friend class Singleton<Time>;
@@ -46,29 +47,28 @@ protected:
 public:
 
   void Reset();
-  bool IsGamePaused() const;
-
-  // Read the time of the game, excluding paused time
-  uint ReadRealTime() const;
   uint Read() const { return current_time; };
-  uint ReadDuration() const
-  {
-    return current_time-real_time_game_start-real_time_pause_dt;
-  };
   uint ReadSec() const { return Read() / 1000; };
   uint ReadMin() const { return ReadSec() / 60; };
-  void Refresh();
+
+  void Increase();
+  bool CanBeIncreased();
+  void LetRealTimePassUntilFrameEnd();
+
+  bool IsWaiting();
+
+  bool IsWaitingForUser();
+  void SetWaitingForUser(bool value);
+
+  bool IsWaitingForNetwork();
+  void SetWaitingForNetwork(bool value);
+
   uint GetDelta() const { return delta_t; };
-  //void RefreshMaxTime(uint updated_max_time);
 
   // Read the clock time
   uint ClockSec() const { return ReadSec() % 60; };
   uint ClockMin() const { return ReadMin() % 60; };
   std::string GetString() const;
-
-  void Pause();
-  void Continue();
-  void TogglePause();
 };
 
 #endif
