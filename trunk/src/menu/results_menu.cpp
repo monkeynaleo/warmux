@@ -331,7 +331,7 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   double energy_scale = graph_h / (1.05*max_value);
   double duration_scale = graph_w / (1.05*max_duration);
   MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
-            duration_scale, Time::GetInstance()->ReadDuration(), energy_scale);
+            duration_scale, Time::GetInstance()->Read(), energy_scale);
 
   uint               index   = 0;
   static const Color clist[] =
@@ -507,7 +507,7 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
 
   if (Network::IsConnected()) {
     ActionHandler * action_handler = ActionHandler::GetInstance();
-    action_handler->ExecActions();
+    action_handler->ExecFrameLessActions();
   }
 }
 

@@ -144,9 +144,9 @@ void Game::Start()
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
     question.Set (txt, true, 0);
-    Time::GetInstance()->Pause();
+    Time::GetInstance()->SetWaitingForUser(true);
     question.Ask();
-    Time::GetInstance()->Continue();
+    Time::GetInstance()->SetWaitingForUser(false);
   }
 
 }
@@ -242,7 +242,7 @@ void Game::Init()
   IgnorePendingInputEvents();
   Camera::GetInstance()->Reset();
 
-  ActionHandler::GetInstance()->ExecActions();
+  ActionHandler::GetInstance()->ExecFrameLessActions();
 
   m_current_turn = 0;
 
@@ -300,18 +300,6 @@ void Game::RefreshInput()
 
   if (!IsGameFinished())
     Camera::GetInstance()->Refresh();
-}
-
-void Game::RefreshActions() const
-{
-  // Execute action
-  do {
-    ActionHandler::GetInstance()->ExecActions();
-    if (Network::GetInstance()->sync_lock) SDL_Delay(SDL_TIMESLICE);
-  } while (Network::GetInstance()->sync_lock &&
-	   !HasBeenNetworkDisconnected());
-
-  Network::GetInstance()->sync_lock = false;
 }
 
 // ####################################################################
@@ -522,49 +510,71 @@ void Game::MessageEndOfGame() const
 
 void Game::MainLoop()
 {
-  // Refresh clock value
-  RefreshClock();
-  time_of_next_phy_frame = Time::GetInstance()->Read() + Time::GetInstance()->GetDelta();
+  if (!Time::GetInstance()->IsWaitingForUser()) {
+    // If we are waiting for the network then we have already done those steps.
+    if (!Time::GetInstance()->IsWaitingForNetwork()) {
+      Time::GetInstance()->Increase();
 
-  if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
-    PingClient();
-  StatStart("Game:RefreshInput()");
-  RefreshInput();
-  StatStop("Game:RefreshInput()");
+      // Refresh clock value
+      RefreshClock();
 
-  StatStart("Game:RefreshObject()");
-  RefreshObject();
-  StatStop("Game:RefreshObject()");
+      if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
+        PingClient();
+    }
+    StatStart("Game:RefreshInput()");
+    RefreshInput();
+    StatStop("Game:RefreshInput()");
+    ActionHandler::GetInstance()->ExecFrameLessActions();
 
-  StatStart("Game:RefreshActions()");
-  // Action from time t must be executed after physical engine frame at time t
-  RefreshActions();
-  StatStop("Game:RefreshActions()");
+    bool is_turn_master = Network::GetInstance()->IsTurnMaster();
+    if (is_turn_master) {
+      Time::GetInstance()->SetWaitingForNetwork(false);
+      Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
+      ActionHandler::GetInstance()->NewAction(a);
+    }
+    bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
+    ASSERT(actions_executed || !is_turn_master);
+    Time::GetInstance()->SetWaitingForNetwork(!actions_executed);
 
-  // Refresh the map
-  GetWorld().Refresh();
+    if (actions_executed) {
+      StatStart("Game:RefreshObject()");
+      RefreshObject();
+      StatStop("Game:RefreshObject()");
+
+      // Refresh the map
+      GetWorld().Refresh();
+
+    } else {
+      SDL_Delay(1);
+    }
+
+  }
 
   // try to adjust to max Frame by seconds
-#ifndef USE_VALGRIND
-  if (time_of_next_frame < Time::GetInstance()->ReadRealTime()) {
-    // Only display if the physic engine isn't late
-    if (time_of_next_phy_frame > Time::GetInstance()->ReadRealTime())
-    {
-#endif
-      StatStart("Game:Draw()");
-      CallDraw();
-      // How many frame by seconds ?
-      fps->Refresh();
-      StatStop("Game:Draw()");
-      time_of_next_frame += AppWormux::GetInstance()->video->GetMaxDelay();
-#ifndef USE_VALGRIND
-    }
-  }
+  bool draw = time_of_next_frame < SDL_GetTicks();
+  // Only display if the physic engine isn't late
+  draw = draw && !(Time::GetInstance()->CanBeIncreased() && !Time::GetInstance()->IsWaiting());
+#ifdef USE_VALGRIND
+  draw = true;
 #endif
 
-  delay = time_of_next_phy_frame - Time::GetInstance()->ReadRealTime();
-  if (delay >= 0)
-    SDL_Delay(delay);
+  if (draw) {
+    StatStart("Game:Draw()");
+    CallDraw();
+    // How many frame by seconds ?
+    fps->Refresh();
+    StatStop("Game:Draw()");
+    uint frame_length =  AppWormux::GetInstance()->video->GetMaxDelay();
+    time_of_next_frame = time_of_next_frame + frame_length;
+
+    // The rate at which frames are calculated may differ over time.
+    // This if statement assures that time_of_next_frame does not get to far behind
+    // as else it would increase the game speed later.
+    if (time_of_next_frame < SDL_GetTicks())
+      time_of_next_frame = SDL_GetTicks();
+  }
+  if (!Time::GetInstance()->IsWaiting())
+    Time::GetInstance()->LetRealTimePassUntilFrameEnd();
 }
 
 bool Game::NewBox()
@@ -841,15 +851,13 @@ bool Game::MenuQuitPause() const
 {
   JukeBox::GetInstance()->Pause();
 
-  if (!Network::IsConnected()) // partial bugfix of #10679
-    Time::GetInstance()->Pause();
+  Time::GetInstance()->SetWaitingForUser(true);
 
   bool exit = false;
   PauseMenu menu(exit);
   menu.Run();
 
-  if (!Network::IsConnected()) // partial bugfix of #10679
-    Time::GetInstance()->Continue();
+  Time::GetInstance()->SetWaitingForUser(false);
 
   JukeBox::GetInstance()->Resume();
 

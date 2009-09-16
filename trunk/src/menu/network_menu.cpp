@@ -351,7 +351,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
     close_menu = true;
   }
   ActionHandler * action_handler = ActionHandler::GetInstance();
-  action_handler->ExecActions();
+  action_handler->ExecFrameLessActions();
 }
 
 void NetworkMenu::DelTeamCallback(const std::string& team_id)

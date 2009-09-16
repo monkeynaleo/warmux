@@ -45,12 +45,6 @@ public:
     ACTION_NETWORK_SET_GAME_MASTER,
 
     // ########################################################
-    ACTION_PLAYER_CHANGE_WEAPON,
-    ACTION_PLAYER_CHANGE_CHARACTER,
-    ACTION_GAMELOOP_NEXT_TEAM,
-    ACTION_GAMELOOP_SET_STATE,
-
-    // ########################################################
     // To be sure that rules will be the same on each computer
     ACTION_RULES_SET_GAME_MODE,
 
@@ -68,6 +62,21 @@ public:
     ACTION_GAME_ADD_TEAM,
     ACTION_GAME_DEL_TEAM,
     ACTION_GAME_UPDATE_TEAM,
+
+    ACTION_INFO_CLIENT_CONNECT,
+    ACTION_INFO_CLIENT_DISCONNECT,
+
+    ACTION_NETWORK_RANDOM_INIT,
+    LAST_FRAME_LESS_ACTION = ACTION_NETWORK_RANDOM_INIT,
+
+    // All action below must be executed within their physics frame.
+    // ########################################################
+    // ########################################################
+    ACTION_PLAYER_CHANGE_WEAPON,
+    ACTION_PLAYER_CHANGE_CHARACTER,
+    ACTION_GAMELOOP_SET_STATE,
+    ACTION_GAMELOOP_NEXT_TEAM,
+    ACTION_GAME_CALCULATE_FRAME,
 
     // ########################################################
     // Character's move
@@ -98,15 +107,9 @@ public:
     ACTION_DROP_BONUS_BOX,
 
     // ########################################################
-    ACTION_NETWORK_SYNC_BEGIN,
-    ACTION_NETWORK_SYNC_END,
     ACTION_EXPLOSION,
     ACTION_WIND,
     ACTION_NETWORK_PING,
-    ACTION_NETWORK_RANDOM_INIT,
-    ACTION_INFO_CLIENT_CONNECT,
-    ACTION_INFO_CLIENT_DISCONNECT,
-
     // ########################################################
   } Action_t;
 
@@ -166,6 +169,7 @@ public:
   int  GetSize() const;
   uint GetTimestamp() const;
   Action_t GetType() const;
+  bool IsFrameLess() const;
 };
 
 // to be defined outside of the library

@@ -219,9 +219,6 @@ void ApplyExplosion_master (const Point2i &pos,
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendActionToAll(a_begin_sync);
-
   TeamsList::iterator
     it=GetTeamsList().playing_list.begin(),
     end=GetTeamsList().playing_list.end();
@@ -266,8 +263,6 @@ void ApplyExplosion_master (const Point2i &pos,
   a->Push(network_id);
 
   action_handler->NewAction(a);
-  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendActionToAll(a_sync_end);
 }
 
 

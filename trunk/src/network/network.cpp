@@ -228,8 +228,7 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   fout(0),
   fin(0),
 #endif
-  network_menu(NULL),
-  sync_lock(false)
+  network_menu(NULL)
 {
   cpus_lock = SDL_CreateMutex();
   player.SetNickname(Player::GetDefaultNickname());
