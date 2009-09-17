@@ -152,7 +152,6 @@ public:
 
   // Bonus box handling
   bool NewBox();
-  void AddNewBox(ObjBox *);
   void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
   ObjBox * GetCurrentBox() { return current_ObjBox; };
 };
