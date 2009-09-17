@@ -328,21 +328,6 @@ static void Action_Game_NextTeam (Action *a)
     Network::GetInstance()->SetTurnMaster(false);
 }
 
-static void Action_NewBonusBox (Action *a)
-{
-  ObjBox * box;
-  switch(a->PopInt()) {
-    case 2 :
-      box = new BonusBox();
-      break;
-    default: /* case 1 */
-      box = new Medkit();
-      break;
-  }
-  box->GetValueFromAction(a);
-  Game::GetInstance()->AddNewBox(box);
-}
-
 static void Action_Game_CalculateFrame (Action */*a*/)
 {
   // Nothing to do here:
@@ -1067,7 +1052,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
 
   // Bonus box
-  ActionHandler::GetInstance()->Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);

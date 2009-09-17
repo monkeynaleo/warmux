@@ -580,16 +580,17 @@ void Game::MainLoop()
 bool Game::NewBox()
 {
   uint nbr_teams = GetTeamsList().playing_list.size();
-  if(nbr_teams <= 1) {
+  if (nbr_teams <= 1) {
     MSG_DEBUG("box", "There is less than 2 teams in the game");
     return false;
   }
 
   // if started with "-d box", get one box per turn
-  if (!IsLOGGING("box")) {
-    // .7 is a magic number to get the probability of boxes falling once every round close to .333
-    double randValue = RandomLocal().GetDouble();
-    if(randValue > (1 - pow(.5, 1.0 / nbr_teams))) {
+  if (!IsLOGGING("box") || Network::IsConnected()) {
+    double boxDropProbability = (1 - pow(.5, 1.0 / nbr_teams));
+    MSG_DEBUG("random.get", "Game::NewBox(...) drop box?");
+    double randValue = RandomSync().GetDouble();
+    if (randValue > boxDropProbability) {
       return false;
     }
   }
@@ -597,7 +598,8 @@ bool Game::NewBox()
   // Type of box : 1 = MedKit, 2 = Bonus Box.
   ObjBox * box;
   int type;
-  if(RandomLocal().GetBool()) {
+  MSG_DEBUG("random.get", "Game::NewBox(...) box type?");
+  if(RandomSync().GetBool()) {
     box = new Medkit();
     type = 1;
   } else {
@@ -606,29 +608,19 @@ bool Game::NewBox()
   }
   // Randomize container
   box->Randomize();
-  // Storing value of bonus box and send it over network.
-  Action * a = new Action(Action::ACTION_NEW_BONUS_BOX);
-  a->Push(type);
-  if(!box->PutRandomly(true, 0, false)) {
+
+  if (!box->PutRandomly(true, 0, true)) {
     MSG_DEBUG("box", "Missed to put a box");
     delete box;
-  } else {
-    /* We only randomize value. The real box will be inserted into world later
-       using action handling (see include/action_handler.cpp */
-    box->StoreValue(a);
-    ActionHandler::GetInstance()->NewAction(a);
-    delete box;
-    return true;
+    return false;
   }
-  return false;
-}
 
-void Game::AddNewBox(ObjBox * box)
-{
   ObjectsList::GetRef().AddObject(box);
   Camera::GetInstance()->FollowObject(box);
   GameMessages::GetInstance()->Add(_("It's a present!"));
   SetCurrentBox(box);
+
+  return true;
 }
 
 

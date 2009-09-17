@@ -103,7 +103,6 @@ public:
     ACTION_WEAPON_SUPERTUX,
 
     // Bonus Box
-    ACTION_NEW_BONUS_BOX,
     ACTION_DROP_BONUS_BOX,
 
     // ########################################################
