@@ -424,11 +424,16 @@ else
    echo "* Game data will be installed into $DATADIR"
    echo "* Game locale will be installed into $LOCALEDIR"
    echo "* Font file will be $FONTFILE"
-   echo ""
-   echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
-   echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
-   echo "* [[Optional]] Index and game servers             : ${enable_servers:-no}"
 fi
+echo ""
+echo "* [[Optional]] DEBUG                              : ${debug:-no}"
+if test "$debug" != "yes"; then
+   echo "* [[Optional]] LOGGING feature                    : ${logging:-no}"
+fi
+echo ""
+echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
+echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
+echo "* [[Optional]] Index and game servers             : ${enable_servers:-no}"
 echo "***********************************************************"
 echo ""
 echo "Execute make to compile then execute make install to install..."
