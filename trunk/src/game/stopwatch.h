@@ -22,6 +22,8 @@
 #ifndef STOPWATCH_H
 #define STOPWATCH_H
 
+#include <WORMUX_types.h>
+
 class Stopwatch
 {
 private:
