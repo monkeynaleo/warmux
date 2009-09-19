@@ -1,6 +1,9 @@
 SUBDIRS = data lib src po doc tools
 
-EXTRA_DIST = data/wormux.desktop                   \
+EXTRA_DIST = build/visual/gettext.rules            \
+             build/visual/wormux.sln               \
+             build/visual/wormux.vcproj            \
+             data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
              doc/license/COPYING.el.txt            \
              doc/license/COPYING.en.txt            \
@@ -15,19 +18,20 @@ EXTRA_DIST = data/wormux.desktop                   \
              doc/howto_play/de.pdf                 \
              doc/howto_play/en.pdf                 \
              doc/howto_play/fr.pdf                 \
-	     doc/howto_play/gl.pdf		   \
-	     doc/howto_play/nl.pdf		   \
+             doc/howto_play/gl.pdf                 \
+             doc/howto_play/nl.pdf                 \
              doc/howto_play/pl.pdf                 \
              doc/howto_play/sk.pdf                 \
              doc/howto_play/sv.pdf                 \
-	     doc/howto_play_online/de.pdf          \
-	     doc/howto_play_online/en.pdf          \
-	     doc/howto_play_online/nl.pdf          \
-	     mac/Info.plist.in			   \
-	     mac/PkgInfo.in			   \
-	     mac/README-mac.txt			   \
-	     mac/README-mac.txt			   \
-	     mac/cmake_build.sh                    \
+             doc/howto_play_online/de.pdf          \
+             doc/howto_play_online/en.pdf          \
+             doc/howto_play_online/nl.pdf          \
+             mac/Info.plist.in                     \
+             mac/PkgInfo.in                        \
+             mac/README-mac.txt                    \
+             mac/README-mac.txt                    \
+             mac/cmake_build.sh                    \
+             src/msvc/getopt.c                     \
              tools/win32_setup/create_setup.sh     \
              tools/win32_setup/English.nsh         \
              tools/win32_setup/French.nsh          \
@@ -40,10 +44,10 @@ EXTRA_DIST = data/wormux.desktop                   \
 if WIN32
 install: all
 	@echo "Building Win32 .exe installer in tools/win32_setup"
-	@(cd tools/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
+	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
-          echo "Check tools/win32_setup/installer.log for details"; \
+          echo "Check build/win32_setup/installer.log for details"; \
           exit 1)
 endif
 
