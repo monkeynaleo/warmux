@@ -1,25 +1,42 @@
 /* src/msvc/config.h copied from a MINGW-generated src/config.h  */
+#include <iconv.h>
 
-/* Translation of program messages to the user's native language is requested. */
+/* Define to 1 if translation of program messages to the user's native
+   language is requested. */
 #define ENABLE_NLS 1
 
-/* GNU dcgettext() function is already present or preinstalled. */
+/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+   CoreFoundation framework. */
+/* #undef HAVE_CFLOCALECOPYCURRENT */
+
+/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+   the CoreFoundation framework. */
+/* #undef HAVE_CFPREFERENCESCOPYAPPVALUE */
+
+/* Define if the GNU dcgettext() function is already present or preinstalled.
+   */
 #define HAVE_DCGETTEXT 1
 
-/* GNU gettext() function is already present or preinstalled. */
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+   */
+/* #undefine HAVE_DIRENT_H */
+
+/* Define if the GNU gettext() function is already present or preinstalled. */
 #define HAVE_GETTEXT 1
 
-/* iconv() function. */
-#include <iconv.h>
+/* Define if you have the iconv() function and it works. */
 #define HAVE_ICONV 1
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+/* #undefine HAVE_INTTYPES_H */
 
 /* Define to 1 if you have a functional curl library. */
 #define HAVE_LIBCURL 1
 
-/* `SDL_gfx' library (-lSDL_gfx). */
+/* Define to 1 if you have the `SDL_gfx' library (-lSDL_gfx). */
 #define HAVE_LIBSDL_GFX 1
 
-/* `SDL_image' library (-lSDL_image). */
+/* Define to 1 if you have the `SDL_image' library (-lSDL_image). */
 #define HAVE_LIBSDL_IMAGE 1
 
 /* `SDL_mixer' library (-lSDL_mixer). */
@@ -99,3 +116,6 @@
 
 /* Version number of package */
 #define VERSION "svn"
+
+/* Define curl_free() as free() if our version of curl lacks curl_free. */
+/* #undef curl_free */
