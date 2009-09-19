@@ -32,18 +32,18 @@ EXTRA_DIST = build/visual/gettext.rules            \
              mac/README-mac.txt                    \
              mac/cmake_build.sh                    \
              src/msvc/getopt.c                     \
-             tools/win32_setup/create_setup.sh     \
-             tools/win32_setup/English.nsh         \
-             tools/win32_setup/French.nsh          \
-             tools/win32_setup/Greek.nsh           \
-             tools/win32_setup/Polish.nsh          \
-             tools/win32_setup/langmacros.nsh      \
-             tools/win32_setup/install.ico         \
-             tools/win32_setup/uninstall.ico
+             build/win32_setup/create_setup.sh     \
+             build/win32_setup/English.nsh         \
+             build/win32_setup/French.nsh          \
+             build/win32_setup/Greek.nsh           \
+             build/win32_setup/Polish.nsh          \
+             build/win32_setup/langmacros.nsh      \
+             build/win32_setup/install.ico         \
+             build/win32_setup/uninstall.ico
 
 if WIN32
 install: all
-	@echo "Building Win32 .exe installer in tools/win32_setup"
+	@echo "Building Win32 .exe installer in build/win32_setup"
 	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
