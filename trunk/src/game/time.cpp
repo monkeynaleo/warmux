@@ -60,7 +60,7 @@ void Time::LetRealTimePassUntilFrameEnd()
   ASSERT(!IsWaiting());
   long delay;
   do {
-    delay = current_time - stopwatch.GetValue();
+    delay = static_cast<long>(current_time) - stopwatch.GetValue();
     if (delay > 0) {
       SDL_Delay((uint)delay);
       MSG_DEBUG("time.skip","Do nothing for: %d", delay);
