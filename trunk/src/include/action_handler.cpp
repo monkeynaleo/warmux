@@ -810,7 +810,7 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
 {
   // For translators: extended in "<nickname> (<host>) just connected
   std::string msg = Format("%s (%s) just connected", nicknames.c_str(), hostname.c_str());
-  fprintf(stderr, "%s\n", msg.c_str());
+  std::cerr << msg.c_str() << std::endl;
 
   ChatLogger::LogMessageIfOpen(msg);
 
