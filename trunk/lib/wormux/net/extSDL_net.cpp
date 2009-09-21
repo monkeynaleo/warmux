@@ -118,7 +118,12 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
 # include <sys/ioctl.h>
 #endif
 
-// SDLNet_SocketReady MUST have been called before
+/* SDLNet_SocketReady MUST have been called before
+ *
+ * WARNING: under WIN32, it returns the size of data that can be read with ONE
+ * read(). It does not equal to the size of available data if there is lot
+ * of data. (The maximum seems to be 8192)
+ */
 int SDLNet_TCP_NbBytesAvailable(TCPsocket sock)
 {
 	int r;
