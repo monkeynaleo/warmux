@@ -61,11 +61,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "extSDL_net.h"
 
+static const int MAX_PACKET_SIZE = 4096;
+
 /******************************************************************************/
 
 /******************************************************************************
  * The following code comes from XMoto
- * It has been fixed for Wormux (handles of errno == EAGAIN)
+ * It has been fixed for Wormux:
+ *    - handles of errno == EAGAIN
+ *    - packets are splitted if bigger than MAX_PACKET_SIZE (may be needed for WIN32)
  ******************************************************************************/
 
 struct _TCPsocket {
@@ -98,7 +102,26 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
 	sent = 0;
 	errno = 0;
 	do {
-		len = send(sock->channel, (const char *) data, left, MSG_DONTWAIT);
+		/* From MSDN documentation about send():
+		 *
+		 * For message-oriented sockets (address family of AF_INET or
+		 * AF_INET6, type of SOCK_DGRAM, and protocol of IPPROTO_UDP,
+		 * for example), care must be taken not to exceed the maximum
+		 * packet size of the underlying provider. The maximum message
+		 * packet size for a provider can be obtained by calling
+		 * getsockopt with the optname parameter set to SO_MAX_MSG_SIZE
+		 * to retrieve the value of socket option. If the data is too
+		 * long to pass atomically through the underlying protocol, the
+		 * error  WSAEMSGSIZE is returned, and no data is transmitted.
+		 *
+		 * Let's say that MAX_PACKET_SIZE is small enough to be
+		 * transmitted
+		 */
+		int tosend = left;
+		if (tosend > MAX_PACKET_SIZE)
+			tosend = MAX_PACKET_SIZE;
+
+		len = send(sock->channel, (const char *) data, tosend, MSG_DONTWAIT);
 		if ( len > 0 ) {
 			sent += len;
 			left -= len;
