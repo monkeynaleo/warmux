@@ -30,7 +30,11 @@
 #include "extSDL_net.h"
 //-----------------------------------------------------------------------------
 
-static const int MAX_PACKET_SIZE = 250*1024;
+// bigger packets are sent by a fake client
+static const int MAX_VALID_PACKET_SIZE = 250*1024;
+
+// bigger packets may be received in several times
+static const size_t MAX_PACKET_SIZE = 4096;
 
 static void print_net_error(const std::string& text)
 {
@@ -132,7 +136,9 @@ WSocket::WSocket(TCPsocket _socket, WSocketSet* _socket_set) :
   socket_set(_socket_set),
   lock(SDL_CreateMutex()),
   using_tmp_socket_set(false),
-  packet_size(0)
+  m_packet(NULL),
+  m_packet_size(0),
+  m_received(0)
 {
   int r;
   r = socket_set->AddSocket(this);
@@ -147,7 +153,9 @@ WSocket::WSocket(TCPsocket _socket):
   socket_set(NULL),
   lock(SDL_CreateMutex()),
   using_tmp_socket_set(false),
-  packet_size(0)
+  m_packet(NULL),
+  m_packet_size(0),
+  m_received(0)
 {
 }
 
@@ -156,7 +164,9 @@ WSocket::WSocket():
   socket_set(NULL),
   lock(SDL_CreateMutex()),
   using_tmp_socket_set(false),
-  packet_size(0)
+  m_packet(NULL),
+  m_packet_size(0),
+  m_received(0)
 {
 }
 
@@ -262,6 +272,11 @@ void WSocket::Disconnect()
     SDLNet_TCP_Close(socket);
     socket = NULL;
   }
+
+  if (m_packet)
+    free(m_packet);
+  m_packet_size = 0;
+  m_received = 0;
 
   UnLock();
 }
@@ -373,13 +388,13 @@ bool WSocket::SendInt_NoLock(const int& nbr)
   if (!IsConnected())
     return false;
 
-  char packet[4];
+  char tmppacket[4];
   // this is not cute, but we don't want an int -> uint conversion here
   Uint32 u_nbr = *((const Uint32*)&nbr);
 
-  SDLNet_Write32(u_nbr, packet);
-  int len = SDLNet_TCP_Send_noBlocking(socket, packet, sizeof(packet));
-  if (len < int(sizeof(packet))) {
+  SDLNet_Write32(u_nbr, tmppacket);
+  int len = SDLNet_TCP_Send_noBlocking(socket, tmppacket, sizeof(tmppacket));
+  if (len < int(sizeof(tmppacket))) {
     print_net_error("SDLNet_TCP_Send");
     return false;
   }
@@ -512,14 +527,14 @@ bool WSocket::ReceiveInt_NoLock(int& nbr)
   if (!IsConnected())
     return false;
 
-  char packet[4];
+  char tmppacket[4];
   Uint32 u_nbr;
 
-  if (!ReceiveBuffer_NoLock(packet, sizeof(packet))) {
+  if (!ReceiveBuffer_NoLock(tmppacket, sizeof(tmppacket))) {
     return false;
   }
 
-  u_nbr = SDLNet_Read32(packet);
+  u_nbr = SDLNet_Read32(tmppacket);
   nbr = *((int*)&u_nbr);
 
   return true;
@@ -640,22 +655,21 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
   Lock();
 
   int crc;
-  char* packet;
-  size_t nbbytes;
+  size_t nbbytes, to_recv_now;
   bool tested = false;
 
-  if (packet_size == 0) {
+  if (m_packet_size == 0) {
 
     // First check there is enough data to read the size of the packet
     r = NbBytesAvailable(nbbytes);
     if (!r) {
-      goto err_no_free;
+      goto error;
     }
 
     // There is nodata to read but the caller has (at least must have)
     // checked for activity. It means that the socket is disconnected.
     if (nbbytes == 0) {
-      goto err_no_free;
+      goto error;
     }
 
     tested = true;
@@ -667,46 +681,68 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
     }
 
     // Firstly, we read the size of the incoming packet
-    r = ReceiveInt_NoLock(packet_size);
+    r = ReceiveInt_NoLock(m_packet_size);
     if (!r) {
-      goto err_no_free;
+      goto error;
     }
 
-    if (packet_size > MAX_PACKET_SIZE) {
+    if (m_packet_size > MAX_VALID_PACKET_SIZE) {
       fprintf(stderr, "ERROR: network packet is too big\n");
-      goto err_no_free;
+      goto error;
     }
   }
 
-  // Before allocating buffer, check the data (+crc) are already there
+  // Check if the data (+crc) are already there
   r = NbBytesAvailable(nbbytes);
   if (!r) {
-    goto err_no_free;
+    goto error;
   }
 
   // There is nodata to read but the caller has (at least must have)
   // checked for activity. It means that the socket is disconnected.
   if (!tested && nbbytes == 0) {
-    goto err_no_free;
+    goto error;
   }
 
   // there is not enough data to read the packet size but the
   // client is still valid
-  if (nbbytes < packet_size + sizeof(uint32_t)) {
+  if (nbbytes + m_received < m_packet_size + sizeof(uint32_t)
+      && nbbytes < MAX_PACKET_SIZE) {
     goto err_not_enough_data;
   }
 
-  // Alloc buffer to receive the data
-  packet = (char*)malloc(packet_size);
-  if (!packet) {
-    fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", packet_size);
-    goto err_no_free;
+  // Alloc buffer to receive the data if not yet allocated
+  if (!m_packet) {
+    ASSERT(m_received == 0);
+
+    m_packet = (char*)malloc(m_packet_size);
+    if (!m_packet) {
+      fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", m_packet_size);
+      goto error;
+    }
   }
 
-  r = ReceiveBuffer_NoLock(packet, packet_size);
+  // Compute how many data we have to receive now
+  to_recv_now = m_packet_size - m_received;
+  if (to_recv_now > nbbytes) {
+    to_recv_now = nbbytes;
+  }
+
+  r = ReceiveBuffer_NoLock(m_packet + m_received, to_recv_now);
   if (!r) {
     fprintf(stderr, "ERROR: fail to receive data\n");
     goto error;
+  }
+
+  m_received += to_recv_now;
+  nbbytes -= to_recv_now;
+
+  // the packet (data + crc) can not have been read in one time
+  // but client is still valid
+  if (m_received != m_packet_size // packet is not yet fully received
+      || nbbytes < sizeof(uint32_t) // not enough data to read CRC
+      ) {
+    goto err_not_enough_data;
   }
 
   // Check the CRC
@@ -716,28 +752,30 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
     goto error;
   }
 
-  *data = packet;
-  len = packet_size;
 
-  packet_size = 0;
-
-  if (uint32_t(crc) != ComputeCRC(packet, len)) {
+  if (uint32_t(crc) != ComputeCRC(m_packet, m_packet_size)) {
     fprintf(stderr, "ERROR: wrong CRC check\n");
     goto error;
   }
+
+  *data = m_packet;
+  len = m_packet_size;
+
+ out_reset:
+  m_packet = NULL;
+  m_packet_size = 0;
+  m_received = 0;
 
  out_unlock:
   UnLock();
   return r;
 
  error:
-  free(packet);
-  packet = NULL;
-  packet_size = 0;
-
- err_no_free:
   r = false;
-  goto out_unlock;
+  if (m_packet)
+    free(m_packet);
+
+  goto out_reset;
 
  err_not_enough_data:
   *data = NULL;
