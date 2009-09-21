@@ -33,9 +33,6 @@
 // bigger packets are sent by a fake client
 static const int MAX_VALID_PACKET_SIZE = 250*1024;
 
-// bigger packets may be received in several times
-static const size_t MAX_PACKET_SIZE = 4096;
-
 static void print_net_error(const std::string& text)
 {
   int err = errno;
@@ -690,6 +687,12 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
       fprintf(stderr, "ERROR: network packet is too big\n");
       goto error;
     }
+
+    m_packet = (char*)malloc(m_packet_size);
+    if (!m_packet) {
+      fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", m_packet_size);
+      goto error;
+    }
   }
 
   // Check if the data (+crc) are already there
@@ -702,24 +705,6 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
   // checked for activity. It means that the socket is disconnected.
   if (!tested && nbbytes == 0) {
     goto error;
-  }
-
-  // there is not enough data to read the packet size but the
-  // client is still valid
-  if (nbbytes + m_received < m_packet_size + sizeof(uint32_t)
-      && nbbytes < MAX_PACKET_SIZE) {
-    goto err_not_enough_data;
-  }
-
-  // Alloc buffer to receive the data if not yet allocated
-  if (!m_packet) {
-    ASSERT(m_received == 0);
-
-    m_packet = (char*)malloc(m_packet_size);
-    if (!m_packet) {
-      fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", m_packet_size);
-      goto error;
-    }
   }
 
   // Compute how many data we have to receive now
@@ -752,7 +737,6 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
     goto error;
   }
 
-
   if (uint32_t(crc) != ComputeCRC(m_packet, m_packet_size)) {
     fprintf(stderr, "ERROR: wrong CRC check\n");
     goto error;
@@ -761,12 +745,11 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
   *data = m_packet;
   *len = m_packet_size;
 
- out_reset:
+ out_finished:
   m_packet = NULL;
   m_packet_size = 0;
   m_received = 0;
 
- out_unlock:
   UnLock();
   return r;
 
@@ -775,13 +758,15 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
   if (m_packet)
     free(m_packet);
 
-  goto out_reset;
+  goto out_finished;
 
  err_not_enough_data:
   *data = NULL;
   *len = 0;
   r = true;
-  goto out_unlock;
+  UnLock();
+
+  return true;
 }
 
 bool WSocket::IsReady(int timeout, bool force_check_activity) const
