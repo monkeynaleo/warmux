@@ -648,7 +648,7 @@ bool WSocket::SendPacket(const char* data, size_t len)
 
 // ReceivePacket may return true with *data = NULL and len = 0
 // That means that client is still valid BUT there are not enough data CURRENTLY
-bool WSocket::ReceivePacket(char** data, size_t& len)
+bool WSocket::ReceivePacket(char** data, size_t* len)
 {
   bool r;
 
@@ -759,7 +759,7 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
   }
 
   *data = m_packet;
-  len = m_packet_size;
+  *len = m_packet_size;
 
  out_reset:
   m_packet = NULL;
@@ -779,7 +779,7 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
 
  err_not_enough_data:
   *data = NULL;
-  len = 0;
+  *len = 0;
   r = true;
   goto out_unlock;
 }

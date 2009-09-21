@@ -62,9 +62,9 @@ public:
 
   bool SocketReady() const;
 
-  // ReceiveData may return true with *data = NULL and len = 0
+  // ReceiveData may return true with *data = NULL and *len = 0
   // That means that client is still valid BUT there are not enough data CURRENTLY
-  bool ReceiveData(char** data, size_t& len);
+  bool ReceiveData(char** data, size_t* len);
   bool SendData(const char* data, size_t len);
 
   std::string GetAddress() const;
