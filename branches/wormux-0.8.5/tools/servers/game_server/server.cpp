@@ -447,7 +447,7 @@ void GameServer::RunLoop()
 
 	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
-	  if (!(*dst_cpu)->ReceiveData(&buffer, packet_size)) {
+	  if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
 	    // An error occured during the reception
 
 	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());

@@ -130,7 +130,7 @@ public:
 
   // ReceivePacket may return true with *data = NULL and len = 0
   // That means that client is still valid BUT there are not enough data CURRENTLY
-  bool ReceivePacket(char** data, size_t& len);
+  bool ReceivePacket(char** data, size_t* len);
 };
 
 //-----------------------------------------------------------------------------
