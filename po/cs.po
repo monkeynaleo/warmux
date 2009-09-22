@@ -183,7 +183,7 @@ msgstr[0] "Tým %s získal %u kovadlinu! Rozplácněte je všechny!"
 msgstr[1] "Tým %s získal %u kovadliny! Rozplácněte je všechny!"
 msgstr[2] "Tým %s získal %u kovadlin! Rozplácněte je všechny!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -418,7 +418,7 @@ msgstr[0] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete.
 msgstr[1] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 msgstr[2] "Tým %s získal %u vynechání tahu! Já vím, že si jej zamilujete."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -510,7 +510,7 @@ msgstr "Kovadlina"
 msgid "Authors:"
 msgstr "Autoři:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Automatická bazuka"
 
@@ -547,7 +547,7 @@ msgstr "Plamenomet"
 msgid "Bounce Ball"
 msgstr "Skákací kulička"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Pá pá tuxi..."
 
@@ -851,7 +851,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granát"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inicializace teréhu..."
 
@@ -886,7 +886,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Hostovat hru"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1351,7 +1351,7 @@ msgstr "Zásoby:"
 msgid "Submachine Gun"
 msgstr "Samopal"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1400,7 +1400,7 @@ msgstr "Gnu opustil bitevní pole předtím, než explodoval"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tchoř opustil bitevní pole předtím, než explodoval"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Naváděná raketa opustila bitevní pole..."
 
@@ -1610,7 +1610,7 @@ msgstr "Potřebujete nejméně dva použitelné týmy!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Vaše střela minula!"
 
@@ -1637,7 +1637,7 @@ msgstr "nepodařilo se načíst konfigurační soubor"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "hotovo"
 

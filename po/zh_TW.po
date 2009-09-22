@@ -169,7 +169,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s組得到了 %u 鐵砧! 貼扁他們!"
 msgstr[1] "%s組得到了 %u 鐵砧! 貼扁他們!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -370,7 +370,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 隊得到 %u 暫停! 我知道你喜歡."
 msgstr[1] "%s 隊得到 %u 暫停! 我知道你喜歡."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -457,7 +457,7 @@ msgstr "鐵砧"
 msgid "Authors:"
 msgstr "作者:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "制導火箭炮"
 
@@ -494,7 +494,7 @@ msgstr "吹管"
 msgid "Bounce Ball"
 msgstr "彈力球"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Bye bye 企鵝..."
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "手雷"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "地面搆建中..."
 
@@ -830,7 +830,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "建立游戲"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1299,7 +1299,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "沖鋒槍"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux-超級企鵝"
 
@@ -1350,7 +1350,7 @@ msgstr "Gnu-野牛離開戰場..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "臭鼬離開了戰場..."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "制導火箭離開戰場..."
 
@@ -1559,7 +1559,7 @@ msgstr "至少有2組才能開始 !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "沒有隊伍，就不會有戰斗!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "你打偏了!"
 
@@ -1587,7 +1587,7 @@ msgstr "無法讀取設定"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "成"
 

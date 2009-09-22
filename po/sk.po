@@ -175,7 +175,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom!"
 msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -397,7 +397,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, fuzzy, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -481,7 +481,7 @@ msgstr "Kovadlina"
 msgid "Authors:"
 msgstr "Autory:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Navádzaná  strela"
 
@@ -518,7 +518,7 @@ msgstr "Plameňomet"
 msgid "Bounce Ball"
 msgstr "Odrazená lopta"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Maj sa tux..."
 
@@ -830,7 +830,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granát"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inicializuje sa okolie..."
 
@@ -866,7 +866,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Hosťuj hru"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1329,7 +1329,7 @@ msgstr "Munícia:"
 msgid "Submachine Gun"
 msgstr "SMG zbraň"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1380,7 +1380,7 @@ msgstr "GNU opustil bojisko pred výbuchom"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Tchor opustil bojisko pred výbuchom"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatická raketa opustila bojisko ..."
 
@@ -1587,7 +1587,7 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "You won't be able to play before selecting a team !"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
@@ -1612,7 +1612,7 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "koniec"
 

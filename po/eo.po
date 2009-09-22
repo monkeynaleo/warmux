@@ -171,7 +171,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s teamo gajnis %u amboson! Platigu ĉiujn!"
 msgstr[1] "%s teamo gajnis %u ambosojn! Platigu ĉiujn!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -378,7 +378,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s teamo gajnis %u vicpasigon! Mi scias, ke vi amos ĝin."
 msgstr[1] "%s teamo gajnis %u vicpasigojn! Mi scias, ke vi amos ilin."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -467,7 +467,7 @@ msgstr "Amboso"
 msgid "Authors:"
 msgstr "Aŭtoroj:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Aŭtomatika bazuko"
 
@@ -503,7 +503,7 @@ msgstr "Torĉo"
 msgid "Bounce Ball"
 msgstr "Resaltanta pilko"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Adiaŭ, tukso..."
 
@@ -806,7 +806,7 @@ msgstr "Gravito"
 msgid "Grenade"
 msgstr "Grenado"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Preparante la grundon..."
 
@@ -841,7 +841,7 @@ msgstr "Supersalti"
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1302,7 +1302,7 @@ msgstr "Municioj:"
 msgid "Submachine Gun"
 msgstr "Mitraleto"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTukso"
 
@@ -1350,7 +1350,7 @@ msgstr "La Gnuo foriris de la batalejo antaŭ ol explodi."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "La putoro foriris de la batalejo antaŭ ol explodi."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La aŭtomatika raketo foriris de la batalejo..."
 
@@ -1558,7 +1558,7 @@ msgstr "Vi bezonas almenaŭ du teamojn!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Vi mispafis!"
 
@@ -1585,7 +1585,7 @@ msgstr "ne eblis ŝargi agordon"
 msgid "custom player"
 msgstr "propra lundanto"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "farita"
 

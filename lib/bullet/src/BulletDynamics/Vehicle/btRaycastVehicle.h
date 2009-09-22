@@ -76,7 +76,7 @@ public:
 
 
 	///btActionInterface interface
-	virtual void updateAction( btCollisionWorld* /*collisionWorld*/, btScalar step)
+	virtual void updateAction( btCollisionWorld* collisionWorld, btScalar step)
 	{
 		updateVehicle(step);
 	}

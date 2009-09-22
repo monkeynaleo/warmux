@@ -195,7 +195,7 @@ msgstr[0] "Echipa %s a câștigat %u nicovală! Storcește tot cu ea!"
 msgstr[1] "Echipa %s a câștigat %u nicovale! Storcește tot cu ele!"
 msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcește tot cu ele!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -561,7 +561,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -655,7 +655,7 @@ msgstr "Nicovală"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
@@ -692,7 +692,7 @@ msgstr "Lampă de sudură"
 msgid "Bounce Ball"
 msgstr "Minge săltăreață"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Pa pa tux..."
 
@@ -1002,7 +1002,7 @@ msgstr "Gravitație"
 msgid "Grenade"
 msgstr "Grenadă"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inițializare teren..."
 
@@ -1038,7 +1038,7 @@ msgstr "Salt înalt"
 msgid "Host a game"
 msgstr "Găzduiește un joc"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1506,7 +1506,7 @@ msgstr "Stoc:"
 msgid "Submachine Gun"
 msgstr "Mitralieră semiautomată"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1554,7 +1554,7 @@ msgstr "Antilopa gnu a părăsit câmpul de luptă înainte de a exploda"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Sconcsul a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă ..."
 
@@ -1768,7 +1768,7 @@ msgstr "Aveți nevoie de cel puțin două echipe valide !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
@@ -1796,7 +1796,7 @@ msgstr "configurația nu a putut fi încărcată"
 msgid "custom player"
 msgstr "jucător personalizat"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "finalizat"
 

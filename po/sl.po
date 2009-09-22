@@ -187,7 +187,7 @@ msgstr[1] "Ekipa %s je osvojila %u nakovali! Speštajte jih!"
 msgstr[2] "Ekipa %s je osvojila %u nakovala! Speštajte jih!"
 msgstr[3] "Ekipa %s je osvojila %u nakoval! Speštajte jih!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -448,7 +448,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -541,7 +541,7 @@ msgstr "Nakovalo"
 msgid "Authors:"
 msgstr "Avtorji:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Avtomatska Bazuka"
 
@@ -577,7 +577,7 @@ msgstr "Varilnik"
 msgid "Bounce Ball"
 msgstr "Skokica"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Adijo tux..."
 
@@ -883,7 +883,7 @@ msgstr "Gravitacija"
 msgid "Grenade"
 msgstr "Granata"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inicializacija tal..."
 
@@ -918,7 +918,7 @@ msgstr "Visoki skok"
 msgid "Host a game"
 msgstr "Gostite igro"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1382,7 +1382,7 @@ msgstr "Zaloga:"
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1430,7 +1430,7 @@ msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
@@ -1643,7 +1643,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
@@ -1670,7 +1670,7 @@ msgstr "nalaganje nastavitev ni bilo mogoče"
 msgid "custom player"
 msgstr "igralec po meri"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "opravljeno"
 

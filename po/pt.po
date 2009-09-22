@@ -175,7 +175,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "A equipa %s ganhou %u bigorna! Amassa-os todos!"
 msgstr[1] "A equipa %s ganhou %u bigornas! Amassa-os todos!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -390,7 +390,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "A equipa %s ganhou %u mudança de turno! Eu sei que o vais adorar."
 msgstr[1] "A equipa %s ganhou %u mudanças de turno! Eu sei que o vais adorar."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -479,7 +479,7 @@ msgstr "Bigorna"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Bazooka Automática"
 
@@ -515,7 +515,7 @@ msgstr "Maçarico"
 msgid "Bounce Ball"
 msgstr "Bola Saltitona"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Adeus adeus tux..."
 
@@ -824,7 +824,7 @@ msgstr "Gravidade"
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Iniciando o jogo..."
 
@@ -859,7 +859,7 @@ msgstr "Salto alto"
 msgid "Host a game"
 msgstr "Criar um Jogo"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1325,7 +1325,7 @@ msgstr "Munição:"
 msgid "Submachine Gun"
 msgstr "Submetralhadora"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1373,7 +1373,7 @@ msgstr "O Gnu saiu do campo de batalha antes de explodir"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "A Doninha saiu do campo de batalha antes de explodir"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O míssil teleguiado saiu do campo de batalha..."
 
@@ -1583,7 +1583,7 @@ msgstr "Você precisa de pelo menos duA equipa válidas!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Não será capaz de jogar antes de escolher uma equipa !"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 
@@ -1610,7 +1610,7 @@ msgstr "não foi possível carregar a configuração"
 msgid "custom player"
 msgstr "jogador personalizado"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "feito"
 

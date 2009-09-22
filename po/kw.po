@@ -190,7 +190,7 @@ msgstr[1] "Para %s re waynyas %u anwan! Platthewgh oll an re erel!"
 msgstr[2] "Para %s re waynyas %u anwan! Platthewgh oll an re erel!"
 msgstr[3] "Para %s re waynyas %u anwan! Platthewgh oll an re erel!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -466,7 +466,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Para %s re waynyas %u koll-tro! Pur lowen vedhowgh gansans, yn surredi!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -559,7 +559,7 @@ msgstr "Anwan"
 msgid "Authors:"
 msgstr "Awtours:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Bazooka Awtomatek"
 
@@ -595,7 +595,7 @@ msgstr "Torchen leski"
 msgid "Bounce Ball"
 msgstr "Pel derlemmel"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Duw genes tux..."
 
@@ -897,7 +897,7 @@ msgstr "Gravedh"
 msgid "Grenade"
 msgstr "Pinaval tardhus"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Ow tarbari an grond..."
 
@@ -932,7 +932,7 @@ msgstr "Lamma yn uhel"
 msgid "Host a game"
 msgstr "Ostya gwari"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1396,7 +1396,7 @@ msgstr "Daffar:"
 msgid "Submachine Gun"
 msgstr "Gojynn-gonn"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1444,7 +1444,7 @@ msgstr "An Gnu re asas an gaslan kyns omdardha."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "An Yewgen re asas an gaslan kyns omdardha"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "An fusen awtomatek re asas an gaslan..."
 
@@ -1658,7 +1658,7 @@ msgstr "Res yw bos dhe'n leha dew bara da!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Ny yllydh gwari kyns dewis para!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
@@ -1685,7 +1685,7 @@ msgstr "Ny allas karga an dewisyansow"
 msgid "custom player"
 msgstr "gwarier personelhes"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "kowlwrys"
 

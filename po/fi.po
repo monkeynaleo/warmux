@@ -176,7 +176,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Joukkue %s voitti %u alasimen! Liiskaa ne kaikki!"
 msgstr[1] "Joukkue %s voitti %u alasinta! Liiskaa ne kaikki!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -383,7 +383,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Joukkue %s voitti %u vuoron skippauksen! Mahtavaa."
 msgstr[1] "Joukkue %s voitti %u vuoron skippausta! Mahtavaa."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -472,7 +472,7 @@ msgstr "Alasin"
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Automaattisinko"
 
@@ -508,7 +508,7 @@ msgstr "Puhalluslamppu"
 msgid "Bounce Ball"
 msgstr "Pomppupallo"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Hei hei tux..."
 
@@ -812,7 +812,7 @@ msgstr "Painovoima"
 msgid "Grenade"
 msgstr "Kranaatti"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Maaston alustus..."
 
@@ -847,7 +847,7 @@ msgstr "Korkea hyppy"
 msgid "Host a game"
 msgstr "Isännöi peli"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 #, fuzzy
 msgid ""
 "How to use it : left click on target\n"
@@ -1310,7 +1310,7 @@ msgstr "Varasto:"
 msgid "Submachine Gun"
 msgstr "Puoliautomaattiase"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1358,7 +1358,7 @@ msgstr "Gnu on poistunut taistelukentältä..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Haisunäätä on poistunut taistelukentältä..."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
@@ -1567,7 +1567,7 @@ msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Et voi aloittaa peliä ennenkuin olet olet valinnut joukkueen!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
@@ -1593,7 +1593,7 @@ msgstr "ei voitu lukea asetuksia"
 msgid "custom player"
 msgstr "henkilökohtainen pelaaja"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "valmis"
 

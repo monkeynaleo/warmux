@@ -175,7 +175,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Η ομάδα %s κέρδισε %u αμόνι! Σπάσ' τα όλα!"
 msgstr[1] "Η ομάδα %s κέρδισε %u αμόνια! Σπάσ' τα όλα!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -396,7 +396,7 @@ msgstr[1] ""
 "Η ομάδα %s κέρδισε %u παραλείψεις γύρου!  Ωωω, τι όπλο μεγάλης ισχύος!"
 
 # Depuis quand les pingouins savent voler ??
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -489,7 +489,7 @@ msgstr "Αμόνι"
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Αυτόματο Μπαζούκα"
 
@@ -525,7 +525,7 @@ msgstr "Λυχνία Συγκόλλησης"
 msgid "Bounce Ball"
 msgstr "Μπάλα Αναπήδησης"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Άντε γεια tux..."
 
@@ -844,7 +844,7 @@ msgstr "Βαρύτητα"
 msgid "Grenade"
 msgstr "Χειροβομβίδα"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Αρχικοποίηση εδάφους..."
 
@@ -879,7 +879,7 @@ msgstr "Ψηλό άλμα"
 msgid "Host a game"
 msgstr "Δημιουργήστε ένα παιχνίδι"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1351,7 +1351,7 @@ msgstr "Απόθεμα:"
 msgid "Submachine Gun"
 msgstr "Οπλοπολυβόλο"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "Υπέρ-Tux"
 
@@ -1403,7 +1403,7 @@ msgid "The Polecat left the battlefield before exploding"
 msgstr "Ο Ασβός εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
 # La roquette automatique est partie dans un autre monde...
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσμους..."
 
@@ -1626,7 +1626,7 @@ msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομ
 msgid "You won't be able to play before selecting a team !"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Αστόχησες..."
 
@@ -1653,7 +1653,7 @@ msgstr "δεν φορτώθηκε το αρχείο διαμόρφωσης"
 msgid "custom player"
 msgstr "Προσωπικός παίκτης"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "τελείωσε"
 
