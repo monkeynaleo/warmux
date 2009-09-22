@@ -174,7 +174,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "L'equip %s aconsegueix %u enclusa!"
 msgstr[1] "L'equip %s aconsegueix %u encluses!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -375,7 +375,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'equip %s aconsegueix %u perd torn!"
 msgstr[1] "L'equip %s aconsegueix %u perd torns!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -462,7 +462,7 @@ msgstr "Enclusa"
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatic"
 
@@ -498,7 +498,7 @@ msgstr "Bufador"
 msgid "Bounce Ball"
 msgstr "Bounce Ball"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Fins ara tux... "
 
@@ -807,7 +807,7 @@ msgstr "Gravetat"
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inicialització..."
 
@@ -842,7 +842,7 @@ msgstr "Salt gran"
 msgid "Host a game"
 msgstr "Allotjar una partida"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1310,7 +1310,7 @@ msgstr "Munició:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1364,7 +1364,7 @@ msgstr ""
 "La mofeta va abandonar el camp de batalla abans d'explotar. Que el seu pudor "
 "descansi en pau. "
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El coet automàtic ha anat a altre món... "
 
@@ -1575,7 +1575,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
@@ -1602,7 +1602,7 @@ msgstr "No es pot carregar el fitxer de configuració"
 msgid "custom player"
 msgstr "jugador personalitzat"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "Acabat"
 

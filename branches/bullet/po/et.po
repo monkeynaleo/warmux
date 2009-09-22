@@ -172,7 +172,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Meeskond %s võitis %u alasi! Lajata neile!"
 msgstr[1] "Meeskond %s võitis %u alasit! Lajata neile kõigile!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -377,7 +377,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "Meeskond %s võitis %u vahelejäämise! Ma tean, et see on su lemmik!"
 msgstr[1] "Meeskond %s võitis %u vahelejäämist! Ma tean, et see on su lemmik!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -466,7 +466,7 @@ msgstr "Alasi"
 msgid "Authors:"
 msgstr "Autorid:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Intelligentne mürsk"
 
@@ -502,7 +502,7 @@ msgstr "Leeklamp"
 msgid "Bounce Ball"
 msgstr "Põrkepall"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Hüvasti, Tux..."
 
@@ -803,7 +803,7 @@ msgstr "Gravitatsioon"
 msgid "Grenade"
 msgstr "Granaat"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Sätin mänguvälja..."
 
@@ -838,7 +838,7 @@ msgstr "Kõrgushüpe"
 msgid "Host a game"
 msgstr "Sea mäng üles"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1299,7 +1299,7 @@ msgstr "Tagavara:"
 msgid "Submachine Gun"
 msgstr "Automaat"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1347,7 +1347,7 @@ msgstr "Gnu lahkus mänguväljalt enne, kui see jõudis plahvatada."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Haisutuhkur lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaatmürsk lahkus mänguväljalt..."
 
@@ -1556,7 +1556,7 @@ msgstr "Sul on vaja vähemalt kahte meeskonda!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Sa ei saa mängida enne, kui oled meeskonna valinud!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Mööda lasid!"
 
@@ -1583,7 +1583,7 @@ msgstr "ei suutnud laadida seadistusi"
 msgid "custom player"
 msgstr "kohandet mängija"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "valmis"
 

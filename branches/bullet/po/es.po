@@ -177,7 +177,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "¡El equipo %s ha conseguido %u yunque!"
 msgstr[1] "¡El equipo %s ha conseguido %u yunques!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -386,7 +386,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "¡El equipo %s ha conseguido %u salta turno!"
 msgstr[1] "¡El equipo %s ha conseguido %u salta turnos!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -473,7 +473,7 @@ msgstr "Yunque"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
 
@@ -509,7 +509,7 @@ msgstr "Soplete"
 msgid "Bounce Ball"
 msgstr "Bounce Ball"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Hasta luego tux..."
 
@@ -816,7 +816,7 @@ msgstr "Gravedad"
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "Inicialización..."
 
@@ -851,7 +851,7 @@ msgstr "Salto grande"
 msgid "Host a game"
 msgstr "Servidor"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1316,7 +1316,7 @@ msgstr "Munición:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1372,7 +1372,7 @@ msgstr ""
 "La mofeta abandonó el campo de batalla antes de explotar. Que su hedor "
 "descanse en paz."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohete automático ha ido a otro mundo..."
 
@@ -1584,7 +1584,7 @@ msgstr "¡Necesitas al menos dos equipos válidos!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "¡No podrás jugar antes de seleccionar un equipo!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "¡Has fallado el tiro!"
 
@@ -1611,7 +1611,7 @@ msgstr "No se puede cargar el fichero de configuración"
 msgid "custom player"
 msgstr "jugador personalizado"
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "Terminado"
 

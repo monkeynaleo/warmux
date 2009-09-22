@@ -455,7 +455,7 @@ public:
 	{
 	}
 	
-	virtual void	sortOverlappingPairs(btDispatcher* /*dispatcher*/)
+	virtual void	sortOverlappingPairs(btDispatcher* dispatcher)
 	{
 	}
 

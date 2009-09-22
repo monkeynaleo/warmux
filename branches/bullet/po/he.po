@@ -168,7 +168,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "צוות %s זכה בסדן! שטח אותם!"
 msgstr[1] "צוות %s זכה ב-%u סדנים! שטח אותם!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -369,7 +369,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "צוות %s זכה בדילוג תור! ידעתי שתאהב את זה."
 msgstr[1] "צוות %s זכה ב-%u דילוגי תור! בטוח שתאהב את זה."
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -455,7 +455,7 @@ msgstr "סדן"
 msgid "Authors:"
 msgstr "מחברים:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "בזוקה אוטומטית"
 
@@ -492,7 +492,7 @@ msgstr "מבער"
 msgid "Bounce Ball"
 msgstr "כדור מקפץ"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "היה שלום, טאקס..."
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "רימון"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "אתחול פני השטח..."
 
@@ -829,7 +829,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "ארח משחק"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1300,7 +1300,7 @@ msgstr "מלאי:"
 msgid "Submachine Gun"
 msgstr "תת מקלע"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "סופרטאקס"
 
@@ -1352,7 +1352,7 @@ msgstr "הגנו יצא משדה הקרב לפני שהתפוצץ."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "החמוס יצא משדה הקרב לפני שהתפוצץ."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "הרקטה האוטומטית יצאה משדה הקרב..."
 
@@ -1561,7 +1561,7 @@ msgstr "אתה זקוק לשני צוותים תקינים לפחות!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "לא תוכל לשחק לפני שתבחר צוות!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "הירייה שלך החטיאה!"
 
@@ -1588,7 +1588,7 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "בוצע"
 

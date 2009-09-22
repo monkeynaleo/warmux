@@ -161,7 +161,7 @@ msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "تیم %s برنده‌ی %u سندان شد! یه جور بزنش که پخش شه رو زمین!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -341,7 +341,7 @@ msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "تیم %s برنده‌ی %u خروج از نوبت شد! می‌دونم خیلی دوسش داری!"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -427,7 +427,7 @@ msgstr "سندان"
 msgid "Authors:"
 msgstr "نویسندگان:"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "بازوکای اتوماتیک"
 
@@ -464,7 +464,7 @@ msgstr "مشعل"
 msgid "Bounce Ball"
 msgstr "شیطونک"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "بای بای تاکس..."
 
@@ -766,7 +766,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "نارنجک"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "در حال شروع زمین..."
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "میزبانی یک بازی"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1271,7 +1271,7 @@ msgstr "استوک: "
 msgid "Submachine Gun"
 msgstr "مسلسل"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "سوپر تاکس"
 
@@ -1322,7 +1322,7 @@ msgstr "گنو قبل از اینکه عمل کند از زمین جنگ خار�
 msgid "The Polecat left the battlefield before exploding"
 msgstr "راسوی بوگندو قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 
@@ -1521,7 +1521,7 @@ msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 msgid "You won't be able to play before selecting a team !"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 
@@ -1545,7 +1545,7 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "تمام"
 

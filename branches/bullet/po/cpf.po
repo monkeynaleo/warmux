@@ -175,7 +175,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Le joueur %s a gagné %u attaque aérienne !!"
 msgstr[1] "Le joueur %s a gagné %u attaques aériennes !"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:333
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -380,7 +380,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'équipe %s a gagné %u !"
 msgstr[1] "L'équipe %s a gagné %u !"
 
-#: src/weapon/supertux.cpp:325
+#: src/weapon/supertux.cpp:326
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -465,7 +465,7 @@ msgstr "Enclume"
 msgid "Authors:"
 msgstr "Zoteurs :"
 
-#: src/weapon/auto_bazooka.cpp:223
+#: src/weapon/auto_bazooka.cpp:224
 msgid "Automatic Bazooka"
 msgstr "Bazooka totoshematique"
 
@@ -502,7 +502,7 @@ msgstr "Chalumeau"
 msgid "Bounce Ball"
 msgstr "Balle y rebondi"
 
-#: src/weapon/supertux.cpp:186
+#: src/weapon/supertux.cpp:187
 msgid "Bye bye tux..."
 msgstr "Nartrouvé tux!!"
 
@@ -813,7 +813,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Grenade"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:66
 msgid "Ground initialization..."
 msgstr "En train'e prépare lo terrain"
 
@@ -848,7 +848,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Créer une partie"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:225
 msgid ""
 "How to use it : left click on target\n"
 "Initial fire angle : Up/Down\n"
@@ -1320,7 +1320,7 @@ msgstr "Munitions :"
 msgid "Submachine Gun"
 msgstr "Mitraillette"
 
-#: src/weapon/supertux.cpp:238
+#: src/weapon/supertux.cpp:239
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1374,7 +1374,7 @@ msgstr "Le Gnu la barré du champs de bataille avant lu pête."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Le putois la barré avant lu pête."
 
-#: src/weapon/auto_bazooka.cpp:178
+#: src/weapon/auto_bazooka.cpp:179
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette que lé automatique la barré ailleurs ..."
 
@@ -1583,7 +1583,7 @@ msgstr "Il faut au minimum deux équipes correctes !"
 msgid "You won't be able to play before selecting a team !"
 msgstr "Gaingne pas joué avant de prendre une équipe !"
 
-#: src/weapon/weapon_launcher.cpp:495
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 
@@ -1608,7 +1608,7 @@ msgstr "Téééé, gaingne pas charge la configuration là..."
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:82
+#: src/map/ground.cpp:84
 msgid "done"
 msgstr "Lé bon"
 
