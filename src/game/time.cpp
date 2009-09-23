@@ -39,7 +39,10 @@ void Time::Reset()
   current_time = 0;
   waiting_for_user = false;
   waiting_for_network = false;
-  stopwatch.Reset();
+  if (IsLOGGING("slow"))
+    stopwatch.Reset(0.25);
+  else
+    stopwatch.Reset();
 }
 
 void Time::Increase()
