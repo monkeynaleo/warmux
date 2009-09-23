@@ -113,6 +113,8 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
 
 
     m_world->setGravity(btVector3(0, 10, 0));
+    m_world->setSynchronizeAllMotionStates(false);
+    m_world->setForceUpdateAllAabbs(false);
 
 
     gContactAddedCallback = BulletEngine::ContactAddedCallback;
