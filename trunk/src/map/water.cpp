@@ -37,6 +37,7 @@ const uint GO_UP_TIME = 1; // min
 const uint GO_UP_STEP = 15; // pixels
 const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
+const double DEGREE = static_cast<double>(2*M_PI/360.0);
 const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
@@ -199,7 +200,6 @@ void Water::Draw()
    * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
-  double degree = static_cast<double>(2*M_PI/360.0);
   double angle1 = -shift1;
   double angle2 = shift1;
   double a = 5, b = 8;
@@ -211,8 +211,8 @@ void Water::Draw()
   {
     assert (wave_count == 3);
     wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
-    wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*degree)*b);
-    wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*degree)*b);
+    wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*DEGREE)*b);
+    wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*DEGREE)*b);
 
     int top = std::max(wave_height[0], wave_height[1]);
     height[x] = std::max(top, wave_height[2]);
@@ -243,11 +243,11 @@ void Water::Draw()
       }
     }
 
-    angle1 += 2*degree;
-    angle2 += 4*degree;
+    angle1 += 2*DEGREE;
+    angle2 += 4*DEGREE;
   }
 
-  shift1 += 4*degree;
+  shift1 += 4*DEGREE;
 
   SDL_UnlockSurface(bottom.GetSurface());
   SDL_UnlockSurface(pattern.GetSurface());
