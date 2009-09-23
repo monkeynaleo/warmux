@@ -30,7 +30,7 @@ class LowGrav : public Weapon
     LowGrav();
     void Draw() { };
     void ActionStopUse() { UseAmmoUnit(); };
-    void HandleKeyPressed_Shoot(bool shift);
+    void HandleKeyPressed_Shoot();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

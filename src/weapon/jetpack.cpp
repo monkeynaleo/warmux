@@ -186,78 +186,78 @@ void JetPack::GoRight()
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
-void JetPack::HandleKeyPressed_Up(bool shift)
+void JetPack::HandleKeyPressed_Up(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyPressed_Up(shift);
+    ActiveCharacter().HandleKeyPressed_Up(slowly);
     return;
   }
 
   GoUp();
 }
 
-void JetPack::HandleKeyReleased_Up(bool shift)
+void JetPack::HandleKeyReleased_Up(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyReleased_Up(shift);
+    ActiveCharacter().HandleKeyReleased_Up(slowly);
     return;
   }
 
   StopFlying();
 }
 
-void JetPack::HandleKeyPressed_MoveLeft(bool shift)
+void JetPack::HandleKeyPressed_MoveLeft(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+    ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
     return;
   }
 
   if (!ActiveCharacter().FootsInVacuum()) {
     StopFlying();
-    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+    ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
   } else if (IsInUse()) {
     GoLeft();
   }
 }
 
-void JetPack::HandleKeyReleased_MoveLeft(bool shift)
+void JetPack::HandleKeyReleased_MoveLeft(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+    ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
     return;
   }
 
   StopFlying();
 }
 
-void JetPack::HandleKeyPressed_MoveRight(bool shift)
+void JetPack::HandleKeyPressed_MoveRight(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+    ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
     return;
   }
 
   if (!ActiveCharacter().FootsInVacuum()) {
     // the character is landing!
     StopFlying();
-    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+    ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
   } else if (IsInUse()) {
     GoRight();
   }
 }
 
-void JetPack::HandleKeyReleased_MoveRight(bool shift)
+void JetPack::HandleKeyReleased_MoveRight(bool slowly)
 {
   if (!IsInUse()) {
-    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+    ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
     return;
   }
 
   StopFlying();
 }
 
-void JetPack::HandleKeyPressed_Shoot(bool)
+void JetPack::HandleKeyPressed_Shoot()
 {
   if (!IsInUse())
     NewActionWeaponShoot();

@@ -110,25 +110,25 @@ class Grapple : public Weapon
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 
     // Keys management
-    void HandleKeyPressed_Up(bool shift);
-    void HandleKeyRefreshed_Up(bool shift);
-    void HandleKeyReleased_Up(bool shift);
+    void HandleKeyPressed_Up(bool slowly);
+    void HandleKeyRefreshed_Up(bool slowly);
+    void HandleKeyReleased_Up(bool slowly);
 
-    void HandleKeyPressed_Down(bool shift);
-    void HandleKeyRefreshed_Down(bool shift);
-    void HandleKeyReleased_Down(bool shift);
+    void HandleKeyPressed_Down(bool slowly);
+    void HandleKeyRefreshed_Down(bool slowly);
+    void HandleKeyReleased_Down(bool slowly);
 
-    void HandleKeyPressed_MoveRight(bool shift);
-    void HandleKeyRefreshed_MoveRight(bool shift);
-    void HandleKeyReleased_MoveRight(bool shift);
+    void HandleKeyPressed_MoveRight(bool slowly);
+    void HandleKeyRefreshed_MoveRight(bool slowly);
+    void HandleKeyReleased_MoveRight(bool slowly);
 
-    void HandleKeyPressed_MoveLeft(bool shift);
-    void HandleKeyRefreshed_MoveLeft(bool shift);
-    void HandleKeyReleased_MoveLeft(bool shift);
+    void HandleKeyPressed_MoveLeft(bool slowly);
+    void HandleKeyRefreshed_MoveLeft(bool slowly);
+    void HandleKeyReleased_MoveLeft(bool slowly);
 
-    void HandleKeyPressed_Shoot(bool shift);
-    void HandleKeyRefreshed_Shoot(bool) { };
-    void HandleKeyReleased_Shoot(bool) { };
+    void HandleKeyPressed_Shoot();
+    void HandleKeyRefreshed_Shoot() { };
+    void HandleKeyReleased_Shoot() { };
 
     void PrintDebugRope();
 };

@@ -67,7 +67,7 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-void LowGrav::HandleKeyPressed_Shoot(bool)
+void LowGrav::HandleKeyPressed_Shoot()
 {
   if (!IsInUse()){
     NewActionWeaponShoot();

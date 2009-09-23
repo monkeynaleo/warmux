@@ -699,7 +699,7 @@ void Weapon::ActionStopUse()
 // Handle keyboard events
 
 // #################### SHOOT
-void Weapon::HandleKeyPressed_Shoot(bool)
+void Weapon::HandleKeyPressed_Shoot()
 {
   if (ActiveCharacter().IsPreparingShoot())
     return;
@@ -708,7 +708,7 @@ void Weapon::HandleKeyPressed_Shoot(bool)
     InitLoading();
 }
 
-void Weapon::HandleKeyRefreshed_Shoot(bool)
+void Weapon::HandleKeyRefreshed_Shoot()
 {
   if (ActiveCharacter().IsPreparingShoot())
     return;
@@ -724,7 +724,7 @@ void Weapon::HandleKeyRefreshed_Shoot(bool)
   }
 }
 
-void Weapon::HandleKeyReleased_Shoot(bool)
+void Weapon::HandleKeyReleased_Shoot()
 {
   if (!ActiveCharacter().IsPreparingShoot()) {
     NewActionWeaponShoot();
@@ -738,107 +738,107 @@ void Weapon::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-void Weapon::HandleKeyPressed_MoveRight(bool shift)
+void Weapon::HandleKeyPressed_MoveRight(bool slowly)
 {
-  ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+  ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_MoveRight(bool shift)
+void Weapon::HandleKeyRefreshed_MoveRight(bool slowly)
 {
-  ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
+  ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
 }
 
-void Weapon::HandleKeyReleased_MoveRight(bool shift)
+void Weapon::HandleKeyReleased_MoveRight(bool slowly)
 {
-  ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+  ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
 
-void Weapon::HandleKeyPressed_MoveLeft(bool shift)
+void Weapon::HandleKeyPressed_MoveLeft(bool slowly)
 {
-  ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+  ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_MoveLeft(bool shift)
+void Weapon::HandleKeyRefreshed_MoveLeft(bool slowly)
 {
-  ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
+  ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
 }
 
-void Weapon::HandleKeyReleased_MoveLeft(bool shift)
+void Weapon::HandleKeyReleased_MoveLeft(bool slowly)
 {
-  ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+  ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
 }
 
-void Weapon::HandleKeyPressed_Up(bool shift)
+void Weapon::HandleKeyPressed_Up(bool slowly)
 {
-  ActiveCharacter().HandleKeyPressed_Up(shift);
+  ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_Up(bool shift)
+void Weapon::HandleKeyRefreshed_Up(bool slowly)
 {
-  ActiveCharacter().HandleKeyRefreshed_Up(shift);
+  ActiveCharacter().HandleKeyRefreshed_Up(slowly);
 }
 
-void Weapon::HandleKeyReleased_Up(bool shift)
+void Weapon::HandleKeyReleased_Up(bool slowly)
 {
-  ActiveCharacter().HandleKeyReleased_Up(shift);
+  ActiveCharacter().HandleKeyReleased_Up(slowly);
 }
 
-void Weapon::HandleKeyPressed_Down(bool shift)
+void Weapon::HandleKeyPressed_Down(bool slowly)
 {
-  ActiveCharacter().HandleKeyPressed_Down(shift);
+  ActiveCharacter().HandleKeyPressed_Down(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_Down(bool shift)
+void Weapon::HandleKeyRefreshed_Down(bool slowly)
 {
-  ActiveCharacter().HandleKeyRefreshed_Down(shift);
+  ActiveCharacter().HandleKeyRefreshed_Down(slowly);
 }
 
-void Weapon::HandleKeyReleased_Down(bool shift)
+void Weapon::HandleKeyReleased_Down(bool slowly)
 {
-  ActiveCharacter().HandleKeyReleased_Down(shift);
+  ActiveCharacter().HandleKeyReleased_Down(slowly);
 }
 
-void Weapon::HandleKeyPressed_Jump(bool shift)
+void Weapon::HandleKeyPressed_Jump()
 {
-  ActiveCharacter().HandleKeyPressed_Jump(shift);
+  ActiveCharacter().HandleKeyPressed_Jump();
 }
 
-void Weapon::HandleKeyRefreshed_Jump(bool shift)
+void Weapon::HandleKeyRefreshed_Jump()
 {
-  ActiveCharacter().HandleKeyRefreshed_Jump(shift);
+  ActiveCharacter().HandleKeyRefreshed_Jump();
 }
 
-void Weapon::HandleKeyReleased_Jump(bool shift)
+void Weapon::HandleKeyReleased_Jump()
 {
-  ActiveCharacter().HandleKeyReleased_Jump(shift);
+  ActiveCharacter().HandleKeyReleased_Jump();
 }
 
-void Weapon::HandleKeyPressed_HighJump(bool shift)
+void Weapon::HandleKeyPressed_HighJump()
 {
-  ActiveCharacter().HandleKeyPressed_HighJump(shift);
+  ActiveCharacter().HandleKeyPressed_HighJump();
 }
 
-void Weapon::HandleKeyRefreshed_HighJump(bool shift)
+void Weapon::HandleKeyRefreshed_HighJump()
 {
-  ActiveCharacter().HandleKeyRefreshed_HighJump(shift);
+  ActiveCharacter().HandleKeyRefreshed_HighJump();
 }
 
-void Weapon::HandleKeyReleased_HighJump(bool shift)
+void Weapon::HandleKeyReleased_HighJump()
 {
-  ActiveCharacter().HandleKeyReleased_HighJump(shift);
+  ActiveCharacter().HandleKeyReleased_HighJump();
 }
 
-void Weapon::HandleKeyPressed_BackJump(bool shift)
+void Weapon::HandleKeyPressed_BackJump()
 {
-  ActiveCharacter().HandleKeyPressed_BackJump(shift);
+  ActiveCharacter().HandleKeyPressed_BackJump();
 }
 
-void Weapon::HandleKeyRefreshed_BackJump(bool shift)
+void Weapon::HandleKeyRefreshed_BackJump()
 {
-  ActiveCharacter().HandleKeyRefreshed_BackJump(shift);
+  ActiveCharacter().HandleKeyRefreshed_BackJump();
 }
 
-void Weapon::HandleKeyReleased_BackJump(bool shift)
+void Weapon::HandleKeyReleased_BackJump()
 {
-  ActiveCharacter().HandleKeyReleased_BackJump(shift);
+  ActiveCharacter().HandleKeyReleased_BackJump();
 }

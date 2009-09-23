@@ -35,8 +35,8 @@ class FlameThrower : public WeaponLauncher
     bool p_Shoot();
   public:
     FlameThrower();
-    virtual void HandleKeyPressed_Shoot(bool shift) { HandleKeyRefreshed_Shoot(shift); };
-    virtual void HandleKeyRefreshed_Shoot(bool shift);
+    virtual void HandleKeyPressed_Shoot() { HandleKeyRefreshed_Shoot(); };
+    virtual void HandleKeyRefreshed_Shoot();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

@@ -97,16 +97,16 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::HandleKeyPressed_Shoot(bool shift)
+void Blowtorch::HandleKeyPressed_Shoot()
 {
   ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
   ActiveCharacter().SetRebounding(false);
   ActiveCharacter().body->StartWalk();
 
-  HandleKeyRefreshed_Shoot(shift);
+  HandleKeyRefreshed_Shoot();
 }
 
-void Blowtorch::HandleKeyRefreshed_Shoot(bool)
+void Blowtorch::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();

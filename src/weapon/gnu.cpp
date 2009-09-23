@@ -210,23 +210,23 @@ void GnuLauncher::SignalEndOfProjectile()
   gnu_death_time = Time::GetInstance()->Read();
 }
 
-void GnuLauncher::HandleKeyPressed_Shoot(bool shift)
+void GnuLauncher::HandleKeyPressed_Shoot()
 {
   if (current_gnu || gnu_death_time)
     return;
 
-  Weapon::HandleKeyPressed_Shoot(shift);
+  Weapon::HandleKeyPressed_Shoot();
 }
 
-void GnuLauncher::HandleKeyRefreshed_Shoot(bool shift)
+void GnuLauncher::HandleKeyRefreshed_Shoot()
 {
   if (current_gnu || gnu_death_time)
     return;
 
-  Weapon::HandleKeyRefreshed_Shoot(shift);
+  Weapon::HandleKeyRefreshed_Shoot();
 }
 
-void GnuLauncher::HandleKeyReleased_Shoot(bool shift)
+void GnuLauncher::HandleKeyReleased_Shoot()
 {
   if (current_gnu) {
     Action* a = new Action(Action::ACTION_WEAPON_GNU);
@@ -234,7 +234,7 @@ void GnuLauncher::HandleKeyReleased_Shoot(bool shift)
     ActionHandler::GetInstance()->NewAction(a);
     return;
   } else if (!gnu_death_time)
-    Weapon::HandleKeyReleased_Shoot(shift);
+    Weapon::HandleKeyReleased_Shoot();
 }
 
 void GnuLauncher::ExplosionFromNetwork(Point2d gnu_pos)

@@ -168,17 +168,17 @@ class WeaponLauncher : public Weapon
     virtual void HandleMouseWheelDown(bool shift);
 
     // Handle special keys
-    virtual void HandleKeyReleased_Num1(bool shift);
-    virtual void HandleKeyReleased_Num2(bool shift);
-    virtual void HandleKeyReleased_Num3(bool shift);
-    virtual void HandleKeyReleased_Num4(bool shift);
-    virtual void HandleKeyReleased_Num5(bool shift);
-    virtual void HandleKeyReleased_Num6(bool shift);
-    virtual void HandleKeyReleased_Num7(bool shift);
-    virtual void HandleKeyReleased_Num8(bool shift);
-    virtual void HandleKeyReleased_Num9(bool shift);
-    virtual void HandleKeyReleased_Less(bool shift);
-    virtual void HandleKeyReleased_More(bool shift);
+    virtual void HandleKeyReleased_Num1();
+    virtual void HandleKeyReleased_Num2();
+    virtual void HandleKeyReleased_Num3();
+    virtual void HandleKeyReleased_Num4();
+    virtual void HandleKeyReleased_Num5();
+    virtual void HandleKeyReleased_Num6();
+    virtual void HandleKeyReleased_Num7();
+    virtual void HandleKeyReleased_Num8();
+    virtual void HandleKeyReleased_Num9();
+    virtual void HandleKeyReleased_Less();
+    virtual void HandleKeyReleased_More();
 
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();

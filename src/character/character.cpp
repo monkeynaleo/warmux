@@ -1093,24 +1093,24 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 
 // #################### MOVE_RIGHT
-void Character::HandleKeyPressed_MoveRight(bool shift)
+void Character::HandleKeyPressed_MoveRight(bool slowly)
 {
-  StartWalk(shift);
+  StartWalk(slowly);
 
-  HandleKeyRefreshed_MoveRight(shift);
+  HandleKeyRefreshed_MoveRight(slowly);
 }
 
-void Character::HandleKeyRefreshed_MoveRight(bool shift)
+void Character::HandleKeyRefreshed_MoveRight(bool slowly)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile())
-    Move(DIRECTION_RIGHT, shift);
+    Move(DIRECTION_RIGHT, slowly);
 }
 
-void Character::HandleKeyReleased_MoveRight(bool)
+void Character::HandleKeyReleased_MoveRight(bool /*slowly*/)
 {
   StopWalk();
 
@@ -1120,24 +1120,24 @@ void Character::HandleKeyReleased_MoveRight(bool)
 }
 
 // #################### MOVE_LEFT
-void Character::HandleKeyPressed_MoveLeft(bool shift)
+void Character::HandleKeyPressed_MoveLeft(bool slowly)
 {
-  StartWalk(shift);
+  StartWalk(slowly);
 
-  HandleKeyRefreshed_MoveLeft(shift);
+  HandleKeyRefreshed_MoveLeft(slowly);
 }
 
-void Character::HandleKeyRefreshed_MoveLeft(bool shift)
+void Character::HandleKeyRefreshed_MoveLeft(bool slowly)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile())
-    Move(DIRECTION_LEFT, shift);
+    Move(DIRECTION_LEFT, slowly);
 }
 
-void Character::HandleKeyReleased_MoveLeft(bool)
+void Character::HandleKeyReleased_MoveLeft(bool /*slowly*/)
 {
   body->StopWalk();
 
@@ -1147,7 +1147,7 @@ void Character::HandleKeyReleased_MoveLeft(bool)
 }
 
 // #################### UP
-void Character::HandleKeyRefreshed_Up(bool shift)
+void Character::HandleKeyRefreshed_Up(bool slowly)
 {
   HideGameInterface();
 
@@ -1157,13 +1157,13 @@ void Character::HandleKeyRefreshed_Up(bool shift)
     {
       UpdateLastMovingTime();
       CharacterCursor::GetInstance()->Hide();
-      if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
+      if (slowly) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
       else       AddFiringAngle(-DELTA_CROSSHAIR);
     }
 }
 
 // #################### DOWN
-void Character::HandleKeyRefreshed_Down(bool shift)
+void Character::HandleKeyRefreshed_Down(bool slowly)
 {
   HideGameInterface();
 
@@ -1173,7 +1173,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
     {
       UpdateLastMovingTime();
       CharacterCursor::GetInstance()->Hide();
-      if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
+      if (slowly) AddFiringAngle(DELTA_CROSSHAIR/10.0);
       else       AddFiringAngle(DELTA_CROSSHAIR);
       SendActiveCharacterInfo();
     }
@@ -1181,7 +1181,7 @@ void Character::HandleKeyRefreshed_Down(bool shift)
 
 // #################### JUMP
 
-void Character::HandleKeyPressed_Jump(bool)
+void Character::HandleKeyPressed_Jump()
 {
   HideGameInterface();
 
@@ -1195,7 +1195,7 @@ void Character::HandleKeyPressed_Jump(bool)
 }
 
 // #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump(bool)
+void Character::HandleKeyPressed_HighJump()
 {
   HideGameInterface();
 
@@ -1209,7 +1209,7 @@ void Character::HandleKeyPressed_HighJump(bool)
 }
 
 // #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump(bool)
+void Character::HandleKeyPressed_BackJump()
 {
   HideGameInterface();
 

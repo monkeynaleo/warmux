@@ -228,33 +228,33 @@ public:
   void SetMovementOnce(const std::string& name, bool force=false);
 
   // Keyboard handling
-  void HandleKeyPressed_MoveRight(bool shift);
-  void HandleKeyRefreshed_MoveRight(bool shift);
-  void HandleKeyReleased_MoveRight(bool shift);
+  void HandleKeyPressed_MoveRight(bool slowly);
+  void HandleKeyRefreshed_MoveRight(bool slowly);
+  void HandleKeyReleased_MoveRight(bool slowly);
 
-  void HandleKeyPressed_MoveLeft(bool shift);
-  void HandleKeyRefreshed_MoveLeft(bool shift);
-  void HandleKeyReleased_MoveLeft(bool shift);
+  void HandleKeyPressed_MoveLeft(bool slowly);
+  void HandleKeyRefreshed_MoveLeft(bool slowly);
+  void HandleKeyReleased_MoveLeft(bool slowly);
 
-  void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };
-  void HandleKeyRefreshed_Up(bool shift);
-  void HandleKeyReleased_Up(bool) const {};
+  void HandleKeyPressed_Up(bool slowly) { HandleKeyRefreshed_Up(slowly); };
+  void HandleKeyRefreshed_Up(bool slowly);
+  void HandleKeyReleased_Up(bool /*slowly*/) const {};
 
-  void HandleKeyPressed_Down(bool shift) { HandleKeyRefreshed_Down(shift); };
-  void HandleKeyRefreshed_Down(bool shift);
-  void HandleKeyReleased_Down(bool) const {};
+  void HandleKeyPressed_Down(bool slowly) { HandleKeyRefreshed_Down(slowly); };
+  void HandleKeyRefreshed_Down(bool slowly);
+  void HandleKeyReleased_Down(bool /*slowly*/) const {};
 
-  void HandleKeyPressed_Jump(bool shift);
-  void HandleKeyRefreshed_Jump(bool) const {};
-  void HandleKeyReleased_Jump(bool) const {};
+  void HandleKeyPressed_Jump();
+  void HandleKeyRefreshed_Jump() const {};
+  void HandleKeyReleased_Jump() const {};
 
-  void HandleKeyPressed_HighJump(bool shift);
-  void HandleKeyRefreshed_HighJump(bool) const { };
-  void HandleKeyReleased_HighJump(bool) const { };
+  void HandleKeyPressed_HighJump();
+  void HandleKeyRefreshed_HighJump() const { };
+  void HandleKeyReleased_HighJump() const { };
 
-  void HandleKeyPressed_BackJump(bool shift);
-  void HandleKeyRefreshed_BackJump(bool) const {};
-  void HandleKeyReleased_BackJump(bool) const {};
+  void HandleKeyPressed_BackJump();
+  void HandleKeyRefreshed_BackJump() const {};
+  void HandleKeyReleased_BackJump() const {};
 
 };
 

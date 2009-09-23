@@ -164,7 +164,7 @@ bool FlameThrower::p_Shoot()
   return true;
 }
 
-void FlameThrower::HandleKeyRefreshed_Shoot(bool /*shift*/)
+void FlameThrower::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();

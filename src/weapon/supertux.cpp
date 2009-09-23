@@ -277,23 +277,23 @@ void TuxLauncher::SignalEndOfProjectile()
   tux_death_time = Time::GetInstance()->Read();
 }
 
-void TuxLauncher::HandleKeyPressed_Shoot(bool shift)
+void TuxLauncher::HandleKeyPressed_Shoot()
 {
   if (current_tux || tux_death_time)
     return;
 
-  Weapon::HandleKeyPressed_Shoot(shift);
+  Weapon::HandleKeyPressed_Shoot();
 }
 
-void TuxLauncher::HandleKeyRefreshed_Shoot(bool shift)
+void TuxLauncher::HandleKeyRefreshed_Shoot()
 {
   if (current_tux || tux_death_time)
     return;
 
-  Weapon::HandleKeyRefreshed_Shoot(shift);
+  Weapon::HandleKeyRefreshed_Shoot();
 }
 
-void TuxLauncher::HandleKeyReleased_Shoot(bool shift)
+void TuxLauncher::HandleKeyReleased_Shoot()
 {
   if (current_tux) {
     Action* a = new Action(Action::ACTION_WEAPON_SUPERTUX);
@@ -302,143 +302,143 @@ void TuxLauncher::HandleKeyReleased_Shoot(bool shift)
     ActionHandler::GetInstance()->NewAction(a);
     return;
   } else if (!tux_death_time)
-    Weapon::HandleKeyReleased_Shoot(shift);
+    Weapon::HandleKeyReleased_Shoot();
 }
 
 // Move right
-void TuxLauncher::HandleKeyPressed_MoveRight(bool shift)
+void TuxLauncher::HandleKeyPressed_MoveRight(bool slowly)
 {
   if (current_tux)
     current_tux->turn_right();
   else if (!tux_death_time)
-    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+    ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveRight(bool shift)
+void TuxLauncher::HandleKeyRefreshed_MoveRight(bool slowly)
 {
   if (current_tux)
     current_tux->turn_right();
   else if (!tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
+    ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveRight(bool shift)
+void TuxLauncher::HandleKeyReleased_MoveRight(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+    ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
 
 // Move left
-void TuxLauncher::HandleKeyPressed_MoveLeft(bool shift)
+void TuxLauncher::HandleKeyPressed_MoveLeft(bool slowly)
 {
   if (current_tux)
     current_tux->turn_left();
   else if (!tux_death_time)
-    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+    ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool shift)
+void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool slowly)
 {
   if (current_tux)
     current_tux->turn_left();
   else if (!tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
+    ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveLeft(bool shift)
+void TuxLauncher::HandleKeyReleased_MoveLeft(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+    ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
 }
 
-void TuxLauncher::HandleKeyPressed_Up(bool shift)
+void TuxLauncher::HandleKeyPressed_Up(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Up(shift);
+    ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_Up(bool shift)
+void TuxLauncher::HandleKeyRefreshed_Up(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Up(shift);
+    ActiveCharacter().HandleKeyRefreshed_Up(slowly);
 }
 
-void TuxLauncher::HandleKeyReleased_Up(bool shift)
+void TuxLauncher::HandleKeyReleased_Up(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Up(shift);
+    ActiveCharacter().HandleKeyReleased_Up(slowly);
 }
 
-void TuxLauncher::HandleKeyPressed_Down(bool shift)
+void TuxLauncher::HandleKeyPressed_Down(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Down(shift);
+    ActiveCharacter().HandleKeyPressed_Down(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_Down(bool shift)
+void TuxLauncher::HandleKeyRefreshed_Down(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Down(shift);
+    ActiveCharacter().HandleKeyRefreshed_Down(slowly);
 }
 
-void TuxLauncher::HandleKeyReleased_Down(bool shift)
+void TuxLauncher::HandleKeyReleased_Down(bool slowly)
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Down(shift);
+    ActiveCharacter().HandleKeyReleased_Down(slowly);
 }
 
-void TuxLauncher::HandleKeyPressed_Jump(bool shift)
+void TuxLauncher::HandleKeyPressed_Jump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Jump(shift);
+    ActiveCharacter().HandleKeyPressed_Jump();
 }
 
-void TuxLauncher::HandleKeyRefreshed_Jump(bool shift)
+void TuxLauncher::HandleKeyRefreshed_Jump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Jump(shift);
+    ActiveCharacter().HandleKeyRefreshed_Jump();
 }
 
-void TuxLauncher::HandleKeyReleased_Jump(bool shift)
+void TuxLauncher::HandleKeyReleased_Jump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Jump(shift);
+    ActiveCharacter().HandleKeyReleased_Jump();
 }
 
-void TuxLauncher::HandleKeyPressed_HighJump(bool shift)
+void TuxLauncher::HandleKeyPressed_HighJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_HighJump(shift);
+    ActiveCharacter().HandleKeyPressed_HighJump();
 }
 
-void TuxLauncher::HandleKeyRefreshed_HighJump(bool shift)
+void TuxLauncher::HandleKeyRefreshed_HighJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_HighJump(shift);
+    ActiveCharacter().HandleKeyRefreshed_HighJump();
 }
 
-void TuxLauncher::HandleKeyReleased_HighJump(bool shift)
+void TuxLauncher::HandleKeyReleased_HighJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_HighJump(shift);
+    ActiveCharacter().HandleKeyReleased_HighJump();
 }
 
-void TuxLauncher::HandleKeyPressed_BackJump(bool shift)
+void TuxLauncher::HandleKeyPressed_BackJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_BackJump(shift);
+    ActiveCharacter().HandleKeyPressed_BackJump();
 }
 
-void TuxLauncher::HandleKeyRefreshed_BackJump(bool shift)
+void TuxLauncher::HandleKeyRefreshed_BackJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_BackJump(shift);
+    ActiveCharacter().HandleKeyRefreshed_BackJump();
 }
 
-void TuxLauncher::HandleKeyReleased_BackJump(bool shift)
+void TuxLauncher::HandleKeyReleased_BackJump()
 {
   if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_BackJump(shift);
+    ActiveCharacter().HandleKeyReleased_BackJump();
 }
 
 std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
