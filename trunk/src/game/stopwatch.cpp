@@ -28,8 +28,9 @@ Stopwatch::Stopwatch()
   Reset();
 }
 
-void Stopwatch::Reset()
+void Stopwatch::Reset(double speed_value)
 {
+  speed = speed_value;
   paused = false;
   start_time = SDL_GetTicks();
   paused_time = 0;
@@ -63,9 +64,9 @@ void Stopwatch::SetPause(bool value)
 uint Stopwatch::GetValue()
 {
   if (paused)
-    return pause_begin - start_time - paused_time;
+    return static_cast<uint>(speed * (pause_begin - start_time - paused_time));
   else
-    return SDL_GetTicks() - start_time - paused_time;
+    return static_cast<uint>(speed * (SDL_GetTicks() - start_time - paused_time));
 }
 
 bool Stopwatch::IsPaused()
