@@ -24,10 +24,16 @@
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
 #include <WORMUX_singleton.h>
+#include <set>
+#include "SDL_keyboard.h"
 //-----------------------------------------------------------------------------
 
 class Keyboard : public ManMachineInterface, public Singleton<Keyboard>
 {
+private:
+  int modifier_bits;
+  std::set<SDLKey> pressed_keys;
+  void HandleKeyComboEvent(int key_code, Key_Event_t event_type);
 protected:
   friend class Singleton<Keyboard>;
   Keyboard();

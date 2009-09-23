@@ -75,16 +75,16 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
   bool r = true;
 
   switch(key) {
-  case KEY_MOVE_RIGHT:
+  case KEY_MOVE_CAMERA_RIGHT:
     Camera::GetInstance()->SetXY(Point2i(SCROLL_KEYBOARD, 0));
     break;
-  case KEY_MOVE_LEFT:
+  case KEY_MOVE_CAMERA_LEFT:
     Camera::GetInstance()->SetXY(Point2i(-SCROLL_KEYBOARD, 0));
     break;
-  case KEY_UP:
+  case KEY_MOVE_CAMERA_UP:
     Camera::GetInstance()->SetXY(Point2i(0, -SCROLL_KEYBOARD));
     break;
-  case KEY_DOWN:
+  case KEY_MOVE_CAMERA_DOWN:
     Camera::GetInstance()->SetXY(Point2i(0, SCROLL_KEYBOARD));
     break;
   default:
@@ -101,12 +101,9 @@ bool ManMachineInterface::MoveCamera(const Key_t &key) const
 // Handle a pressed key
 void ManMachineInterface::HandleKeyPressed(const Key_t &key)
 {
-  SDLMod mod = SDL_GetModState();
-  if (mod & KMOD_CTRL) {
-    if (MoveCamera(key)) {
-      PressedKeys[key] = true;
-      return;
-    }
+  if (MoveCamera(key)) {
+    PressedKeys[key] = true;
+    return;
   }
 
   // Key repeat is useful in the menu, but we are handling it manually
@@ -122,30 +119,41 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
   if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
   if (ActiveCharacter().IsDead()) return;
 
-  bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
   if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
     switch (key) {
 
     case KEY_MOVE_RIGHT:
-      ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+      ActiveCharacter().HandleKeyPressed_MoveRight(false);
+      break;
+    case KEY_MOVE_RIGHT_SLOWLY:
+      ActiveCharacter().HandleKeyPressed_MoveRight(true);
       break;
     case KEY_MOVE_LEFT:
-      ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+      ActiveCharacter().HandleKeyPressed_MoveLeft(false);
+      break;
+    case KEY_MOVE_LEFT_SLOWLY:
+      ActiveCharacter().HandleKeyPressed_MoveLeft(true);
       break;
     case KEY_UP:
-      ActiveCharacter().HandleKeyPressed_Up(shift);
+      ActiveCharacter().HandleKeyPressed_Up(false);
+      break;
+    case KEY_UP_SLOWLY:
+      ActiveCharacter().HandleKeyPressed_Up(true);
       break;
     case KEY_DOWN:
-      ActiveCharacter().HandleKeyPressed_Down(shift);
+      ActiveCharacter().HandleKeyPressed_Down(false);
+      break;
+    case KEY_DOWN_SLOWLY:
+      ActiveCharacter().HandleKeyPressed_Down(true);
       break;
     case KEY_JUMP:
-      ActiveCharacter().HandleKeyPressed_Jump(shift);
+      ActiveCharacter().HandleKeyPressed_Jump(false);
       break;
     case KEY_HIGH_JUMP:
-      ActiveCharacter().HandleKeyPressed_HighJump(shift);
+      ActiveCharacter().HandleKeyPressed_HighJump(false);
       break;
     case KEY_BACK_JUMP:
-      ActiveCharacter().HandleKeyPressed_BackJump(shift);
+      ActiveCharacter().HandleKeyPressed_BackJump(false);
       break;
     case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
@@ -160,29 +168,41 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
     switch (key) {
 
     case KEY_MOVE_RIGHT:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight(false);
+      break;
+    case KEY_MOVE_RIGHT_SLOWLY:
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight(true);
       break;
     case KEY_MOVE_LEFT:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft(false);
+      break;
+    case KEY_MOVE_LEFT_SLOWLY:
+      ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft(true);
       break;
     case KEY_UP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Up(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Up(false);
+      break;
+    case KEY_UP_SLOWLY:
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Up(true);
       break;
     case KEY_DOWN:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Down(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Down(false);
+      break;
+    case KEY_DOWN_SLOWLY:
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Down(true);
       break;
     case KEY_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Jump(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Jump(false);
       break;
     case KEY_HIGH_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_HighJump(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_HighJump(false);
       break;
     case KEY_BACK_JUMP:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump(shift);
+      ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump(false);
       break;
     case KEY_SHOOT:
       if (Game::GetInstance()->ReadState() == Game::PLAYING) {
-        ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot(shift);
+        ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot(false);
         break;
       }
     default:
@@ -271,25 +291,37 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
       switch (key) {
       case KEY_MOVE_RIGHT:
-        ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+        ActiveCharacter().HandleKeyReleased_MoveRight(false);
+        return;
+      case KEY_MOVE_RIGHT_SLOWLY:
+        ActiveCharacter().HandleKeyReleased_MoveRight(true);
         return;
       case KEY_MOVE_LEFT:
-        ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+        ActiveCharacter().HandleKeyReleased_MoveLeft(false);
+        return;
+      case KEY_MOVE_LEFT_SLOWLY:
+        ActiveCharacter().HandleKeyReleased_MoveLeft(true);
         return;
       case KEY_UP:
-        ActiveCharacter().HandleKeyReleased_Up(shift);
+        ActiveCharacter().HandleKeyReleased_Up(false);
+        return;
+      case KEY_UP_SLOWLY:
+        ActiveCharacter().HandleKeyReleased_Up(true);
         return;
       case KEY_DOWN:
-        ActiveCharacter().HandleKeyReleased_Down(shift);
+        ActiveCharacter().HandleKeyReleased_Down(false);
+        return;
+      case KEY_DOWN_SLOWLY:
+        ActiveCharacter().HandleKeyReleased_Down(true);
         return;
       case KEY_JUMP:
-        ActiveCharacter().HandleKeyReleased_Jump(shift);
+        ActiveCharacter().HandleKeyReleased_Jump(false);
         return;
       case KEY_HIGH_JUMP:
-        ActiveCharacter().HandleKeyReleased_HighJump(shift);
+        ActiveCharacter().HandleKeyReleased_HighJump(false);
         return;
       case KEY_BACK_JUMP:
-        ActiveCharacter().HandleKeyReleased_BackJump(shift);
+        ActiveCharacter().HandleKeyReleased_BackJump(false);
         return;
       case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
@@ -304,65 +336,77 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       switch (key) {
 
       case KEY_MOVE_RIGHT:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveRight(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveRight(false);
+        return;
+      case KEY_MOVE_RIGHT_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveRight(true);
         return;
       case KEY_MOVE_LEFT:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveLeft(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveLeft(false);
+        return;
+      case KEY_MOVE_LEFT_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyReleased_MoveLeft(true);
         return;
       case KEY_UP:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Up(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Up(false);
+        return;
+      case KEY_UP_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Up(true);
         return;
       case KEY_DOWN:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Down(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Down(false);
+        return;
+      case KEY_DOWN_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Down(true);
         return;
       case KEY_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Jump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Jump(false);
         return;
       case KEY_HIGH_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_HighJump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_HighJump(false);
         return;
       case KEY_BACK_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_BackJump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_BackJump(false);
         return;
 
         // Shoot key
       case KEY_SHOOT:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot(false);
         return;
 
         // Other keys usefull for weapons
       case KEY_WEAPON_1:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num1(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num1(false);
         return;
       case KEY_WEAPON_2:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num2(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num2(false);
         return;
       case KEY_WEAPON_3:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num3(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num3(false);
         return;
       case KEY_WEAPON_4:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num4(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num4(false);
         return;
       case KEY_WEAPON_5:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num5(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num5(false);
         return;
       case KEY_WEAPON_6:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num6(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num6(false);
         return;
       case KEY_WEAPON_7:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num7(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num7(false);
         return;
       case KEY_WEAPON_8:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num8(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num8(false);
         return;
       case KEY_WEAPON_9:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Num9(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Num9(false);
         return;
       case KEY_WEAPON_LESS:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_Less(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Less(false);
         return;
       case KEY_WEAPON_MORE:
-        ActiveTeam().AccessWeapon().HandleKeyReleased_More(shift);
+        ActiveTeam().AccessWeapon().HandleKeyReleased_More(false);
         return;
       default:
         break;
@@ -443,7 +487,7 @@ void ManMachineInterface::Refresh() const
     if (PressedKeys[i]) {
       Key_t key = static_cast<Key_t>(i);
 
-      if (SDL_GetModState()&KMOD_CTRL && MoveCamera(key))
+      if (MoveCamera(key))
         continue;
 
       // Managing keys related to character moves
@@ -453,33 +497,44 @@ void ManMachineInterface::Refresh() const
       if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
 
       // Movements are managed by weapons because sometimes it overrides the keys
-      bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
       switch (key) {
 
       case KEY_MOVE_RIGHT:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight(false);
+        break;
+      case KEY_MOVE_RIGHT_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight(true);
         break;
       case KEY_MOVE_LEFT:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft(false);
+        break;
+      case KEY_MOVE_LEFT_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft(true);
         break;
       case KEY_UP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up(false);
+        break;
+      case KEY_UP_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up(true);
         break;
       case KEY_DOWN:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down(false);
+        break;
+      case KEY_DOWN_SLOWLY:
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down(true);
         break;
       case KEY_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump(false);
         break;
       case KEY_HIGH_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump(false);
         break;
       case KEY_BACK_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump(shift);
+        ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump(false);
         break;
       case KEY_SHOOT:
         if (Game::GetInstance()->ReadState() == Game::PLAYING) {
-          ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot(shift);
+          ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot(false);
         }
         break;
       default:
