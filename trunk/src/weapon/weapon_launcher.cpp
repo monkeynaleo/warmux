@@ -505,67 +505,67 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyReleased_Num1(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num1()
 {
   projectile->SetTimeOut(1);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num2(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num2()
 {
   projectile->SetTimeOut(2);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num3(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num3()
 {
   projectile->SetTimeOut(3);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num4(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num4()
 {
   projectile->SetTimeOut(4);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num5(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num5()
 {
   projectile->SetTimeOut(5);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num6(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num6()
 {
   projectile->SetTimeOut(6);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num7(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num7()
 {
   projectile->SetTimeOut(7);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num8(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num8()
 {
   projectile->SetTimeOut(8);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Num9(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Num9()
 {
   projectile->SetTimeOut(9);
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_Less(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_Less()
 {
   projectile->DecrementTimeOut();
   NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_More(bool /*shift*/)
+void WeaponLauncher::HandleKeyReleased_More()
 {
   projectile->IncrementTimeOut();
   NetworkSetTimeoutProjectile();

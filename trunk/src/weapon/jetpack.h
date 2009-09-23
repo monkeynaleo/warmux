@@ -42,13 +42,13 @@ class JetPack : public Weapon
     void Reset();
     virtual void ActionStopUse();
 
-    virtual void HandleKeyPressed_Up(bool shift);
-    virtual void HandleKeyReleased_Up(bool shift);
-    virtual void HandleKeyPressed_MoveLeft(bool shift);
-    virtual void HandleKeyReleased_MoveLeft(bool shift);
-    virtual void HandleKeyPressed_MoveRight(bool shift);
-    virtual void HandleKeyReleased_MoveRight(bool shift);
-    virtual void HandleKeyPressed_Shoot(bool shift);
+    virtual void HandleKeyPressed_Up(bool slowly);
+    virtual void HandleKeyReleased_Up(bool slowly);
+    virtual void HandleKeyPressed_MoveLeft(bool slowly);
+    virtual void HandleKeyReleased_MoveLeft(bool slowly);
+    virtual void HandleKeyPressed_MoveRight(bool slowly);
+    virtual void HandleKeyReleased_MoveRight(bool slowly);
+    virtual void HandleKeyPressed_Shoot();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

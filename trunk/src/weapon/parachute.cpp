@@ -166,7 +166,7 @@ std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count
             items_count), TeamName, items_count);
 }
 
-void Parachute::HandleKeyPressed_Shoot(bool shift)
+void Parachute::HandleKeyPressed_Shoot()
 {
   if (open) {
     img->Finish();
@@ -174,11 +174,11 @@ void Parachute::HandleKeyPressed_Shoot(bool shift)
     closing = false;
     UseAmmoUnit();
   } else {
-    Weapon::HandleKeyPressed_Shoot(shift);
+    Weapon::HandleKeyPressed_Shoot();
   }
 }
 
-void Parachute::HandleKeyPressed_MoveRight(bool shift)
+void Parachute::HandleKeyPressed_MoveRight(bool slowly)
 {
   if (closing) {
     ActiveCharacter().BeginMovementRL(0);
@@ -189,21 +189,21 @@ void Parachute::HandleKeyPressed_MoveRight(bool shift)
     m_x_strength.x_extern = cfg().force_side_displacement;
     m_x_strength.changing = true;
   } else {
-    Weapon::HandleKeyPressed_MoveRight(shift);
+    Weapon::HandleKeyPressed_MoveRight(slowly);
   }
 }
 
-void Parachute::HandleKeyReleased_MoveRight(bool shift)
+void Parachute::HandleKeyReleased_MoveRight(bool slowly)
 {
   if (open) {
     m_x_strength.x_extern = 0.0;
     m_x_strength.changing = true;
   } else {
-    Weapon::HandleKeyReleased_MoveRight(shift);
+    Weapon::HandleKeyReleased_MoveRight(slowly);
   }
 }
 
-void Parachute::HandleKeyPressed_MoveLeft(bool shift)
+void Parachute::HandleKeyPressed_MoveLeft(bool slowly)
 {
   if (closing) {
     ActiveCharacter().BeginMovementRL(0);
@@ -214,17 +214,17 @@ void Parachute::HandleKeyPressed_MoveLeft(bool shift)
     m_x_strength.x_extern = -cfg().force_side_displacement;
     m_x_strength.changing = true;
   } else {
-    Weapon::HandleKeyPressed_MoveLeft(shift);
+    Weapon::HandleKeyPressed_MoveLeft(slowly);
   }
 }
 
-void Parachute::HandleKeyReleased_MoveLeft(bool shift)
+void Parachute::HandleKeyReleased_MoveLeft(bool slowly)
 {
   if (open) {
     m_x_strength.x_extern = 0.0;
     m_x_strength.changing = true;
   } else {
-    Weapon::HandleKeyReleased_MoveLeft(shift);
+    Weapon::HandleKeyReleased_MoveLeft(slowly);
   }
 }
 

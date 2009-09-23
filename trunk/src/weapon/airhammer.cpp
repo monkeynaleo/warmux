@@ -148,7 +148,7 @@ void Airhammer::p_Deselect()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyRefreshed_Shoot(bool)
+void Airhammer::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();

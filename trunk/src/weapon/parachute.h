@@ -51,11 +51,11 @@ class Parachute : public Weapon
     void Draw();
     bool IsInUse() const;
 
-    void HandleKeyPressed_Shoot(bool shift);
-    void HandleKeyPressed_MoveRight(bool shift);
-    void HandleKeyReleased_MoveRight(bool shift);
-    void HandleKeyPressed_MoveLeft(bool shift);
-    void HandleKeyReleased_MoveLeft(bool shift);
+    void HandleKeyPressed_Shoot();
+    void HandleKeyPressed_MoveRight(bool slowly);
+    void HandleKeyReleased_MoveRight(bool slowly);
+    void HandleKeyPressed_MoveLeft(bool slowly);
+    void HandleKeyReleased_MoveLeft(bool slowly);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

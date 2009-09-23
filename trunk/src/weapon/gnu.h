@@ -42,9 +42,9 @@ public:
   virtual bool IsInUse() const;
 
   // Key Shoot management
-  virtual void HandleKeyPressed_Shoot(bool shift);
-  virtual void HandleKeyRefreshed_Shoot(bool shift);
-  virtual void HandleKeyReleased_Shoot(bool shift);
+  virtual void HandleKeyPressed_Shoot();
+  virtual void HandleKeyRefreshed_Shoot();
+  virtual void HandleKeyReleased_Shoot();
 
   void ExplosionFromNetwork(Point2d gnu_pos);
 
