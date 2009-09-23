@@ -48,6 +48,7 @@ private:
   Surface wpattern;
   std::string water_type;
   uint       m_last_preview_redraw;
+  uint next_wave_shift;
 
   void Init();
 
