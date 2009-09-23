@@ -56,7 +56,7 @@ msgstr " %s 队伍"
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s 把目标改为 %s"
@@ -97,7 +97,7 @@ msgstr "%s (%s) 亲吻大地，可是对方太硬了！"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s)的死因是: 太笨 ！"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s 决定攻击 %s"
@@ -286,14 +286,9 @@ msgstr[0] "%s 队得到 %u 喷射包了！帅啊！"
 msgstr[1] "%s 队得到 %u 喷射包了！ 帅啊！"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
-#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+#, c-format
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] "%s 队得到 %u 低重力了！"
 msgstr[1] "%s 队得到 %u 低重力了！"
 
@@ -347,7 +342,7 @@ msgid_plural ""
 msgstr[0] "%s 队得到了%u狙击步枪！ 看准,两只眼中间！ "
 msgstr[1] "%s 队得到了%u狙击步枪！ 看准,两只眼中间！"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -382,7 +377,7 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "%s 队得到 %u 暂停！ 我知道你喜欢。"
 msgstr[1] "%s 队得到 %u 暂停！ 我知道你喜欢。"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -399,7 +394,7 @@ msgstr "%s 被打垮了。"
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s 带走了 %s 的一员！"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s 将要攻击 %s"
@@ -504,28 +499,28 @@ msgstr "吹管"
 msgid "Bounce Ball"
 msgstr "弹力球"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Bye bye 企鹅。。。"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "没找到队伍 %s！"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "打不开个人团队目录(%s)！"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "打不开团队目录 (%s)！"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不开定制的团队目录 (%s)！"
@@ -575,7 +570,7 @@ msgid "Click: Center the camera on the character"
 msgstr "点击：镜头对准角色"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "客户端模式 "
 
@@ -674,7 +669,7 @@ msgstr "能量"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "网络初始错误：客户端 %s 不同意你！ - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "读取队伍出错 :"
 
@@ -737,7 +732,7 @@ msgstr ""
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"。"
@@ -947,7 +942,7 @@ msgstr "列出已经连接的玩家"
 msgid "Load maps:"
 msgstr "读取地图:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "读取队伍:"
 
@@ -1201,7 +1196,7 @@ msgid "Server available on Internet"
 msgstr "Internet可用服务器"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "服务器设置"
 
@@ -1288,7 +1283,7 @@ msgstr "箱子:"
 msgid "Submachine Gun"
 msgstr "冲锋枪"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux-超级企鹅"
 
@@ -1545,7 +1540,7 @@ msgstr "你是这回合的控制者！"
 msgid "You need at least one valid map!"
 msgstr "你需要可用的地图！"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "至少有2组才能开始 ！"
 
@@ -1553,7 +1548,7 @@ msgstr "至少有2组才能开始 ！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "没有队伍，就不会有战斗！"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 

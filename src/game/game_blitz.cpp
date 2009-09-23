@@ -88,6 +88,8 @@ bool GameBlitz::Run()
 void GameBlitz::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
+  if (global_time->IsGamePaused()) return;
+  global_time->Refresh();
 
   if (1000 < global_time->Read() - pause_seconde) {
     pause_seconde = global_time->Read();
@@ -134,7 +136,7 @@ void GameBlitz::RefreshClock()
         if (IsGameFinished())
           break;
 
-        if (give_objbox && GetWorld().IsOpen()) {
+        if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
           NewBox();
           give_objbox = false;
           break;

@@ -1,9 +1,6 @@
 SUBDIRS = data lib src po doc tools
 
-EXTRA_DIST = build/visual/gettext.rules            \
-             build/visual/wormux.sln               \
-             build/visual/wormux.vcproj            \
-             data/wormux.desktop                   \
+EXTRA_DIST = data/wormux.desktop                   \
              doc/license/COPYING.de.txt            \
              doc/license/COPYING.el.txt            \
              doc/license/COPYING.en.txt            \
@@ -18,36 +15,35 @@ EXTRA_DIST = build/visual/gettext.rules            \
              doc/howto_play/de.pdf                 \
              doc/howto_play/en.pdf                 \
              doc/howto_play/fr.pdf                 \
-             doc/howto_play/gl.pdf                 \
-             doc/howto_play/nl.pdf                 \
+	     doc/howto_play/gl.pdf		   \
+	     doc/howto_play/nl.pdf		   \
              doc/howto_play/pl.pdf                 \
              doc/howto_play/sk.pdf                 \
              doc/howto_play/sv.pdf                 \
-             doc/howto_play_online/de.pdf          \
-             doc/howto_play_online/en.pdf          \
-             doc/howto_play_online/nl.pdf          \
-             mac/Info.plist.in                     \
-             mac/PkgInfo.in                        \
-             mac/README-mac.txt                    \
-             mac/README-mac.txt                    \
-             mac/cmake_build.sh                    \
-             src/msvc/getopt.c                     \
-             build/win32_setup/create_setup.sh     \
-             build/win32_setup/English.nsh         \
-             build/win32_setup/French.nsh          \
-             build/win32_setup/Greek.nsh           \
-             build/win32_setup/Polish.nsh          \
-             build/win32_setup/langmacros.nsh      \
-             build/win32_setup/install.ico         \
-             build/win32_setup/uninstall.ico
+	     doc/howto_play_online/de.pdf          \
+	     doc/howto_play_online/en.pdf          \
+	     doc/howto_play_online/nl.pdf          \
+	     mac/Info.plist.in			   \
+	     mac/PkgInfo.in			   \
+	     mac/README-mac.txt			   \
+	     mac/README-mac.txt			   \
+	     mac/cmake_build.sh                    \
+             tools/win32_setup/create_setup.sh     \
+             tools/win32_setup/English.nsh         \
+             tools/win32_setup/French.nsh          \
+             tools/win32_setup/Greek.nsh           \
+             tools/win32_setup/Polish.nsh          \
+             tools/win32_setup/langmacros.nsh      \
+             tools/win32_setup/install.ico         \
+             tools/win32_setup/uninstall.ico
 
 if WIN32
 install: all
-	@echo "Building Win32 .exe installer in build/win32_setup"
-	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
+	@echo "Building Win32 .exe installer in tools/win32_setup"
+	@(cd tools/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
-          echo "Check build/win32_setup/installer.log for details"; \
+          echo "Check tools/win32_setup/installer.log for details"; \
           exit 1)
 endif
 

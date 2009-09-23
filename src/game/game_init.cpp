@@ -69,7 +69,7 @@ void GameInit::EndInitGameData_NetGameMaster()
          && Network::GetInstance()->GetNbHostsReady() != Network::GetInstance()->GetNbHostsConnected()
 	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
 
-    ActionHandler::GetInstance()->ExecFrameLessActions();
+    ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
 
@@ -82,7 +82,7 @@ void GameInit::EndInitGameData_NetGameMaster()
          && Network::GetInstance()->GetNbHostsChecked() != Network::GetInstance()->GetNbHostsConnected()
 	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
 
-    ActionHandler::GetInstance()->ExecFrameLessActions();
+    ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(200);
   }
 
@@ -104,7 +104,7 @@ void GameInit::EndInitGameData_NetClient()
 	 && !Network::GetInstance()->IsGameMaster()
 	 && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
   {
-    ActionHandler::GetInstance()->ExecFrameLessActions();
+    ActionHandler::GetInstance()->ExecActions();
     SDL_Delay(100);
   }
 }

@@ -328,8 +328,8 @@ std::string GameMode::GetObjectsFilename() const
     fullname = config->GetDataDir() + filename;
 
   if(!DoesFileExist(fullname)) {
-    std::cerr << "Game mode: File " << fullname
-      << " does not exist, use the default one instead." << std::endl;
+    fprintf(stderr, "Game mode: File %s does not exist, use the default one instead.\n",
+	    fullname.c_str());
   }
 
   fullname = config->GetDataDir() + GetDefaultObjectsFilename();

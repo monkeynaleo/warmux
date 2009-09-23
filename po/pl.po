@@ -1,6 +1,6 @@
 # translation of pl.po to
 # Bartosz Feński aka fEnIo <fenio@debian.org>, 2004-2005.
-# Paweł Dyda <pawel.dyda@gazeta.pl>, 2007, 2008.
+# Paweł Dyda <pawel.dyda@gazeta.pl>, 2007, 2008, 2009.
 # Michał D. <emdek@epf.pl>, 2007.
 # translation of wormux.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 18:09+0100\n"
+"PO-Revision-Date: 2009-09-05 18:28+0100\n"
 "Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr "Drużyna %s"
 msgid "%s Team - Remote"
 msgstr "Drużyna %s - zdalna"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s zmienił cel na %s"
@@ -104,7 +104,7 @@ msgstr "%s z drużyny %s uderzył w ziemię zbyt mocno!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s z drużyny %s zginął przez swoją niezdarność!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s zdecydował się zranić %s"
@@ -335,20 +335,16 @@ msgstr[2] "Drużyna %s zyskała %u plecaków odrzutowych! Super!"
 
 #: src/weapon/lowgrav.cpp:84
 #, c-format
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] ""
-"Drużyna %s zyskała %u hełm obniżający grawitację! Mały krok dla człowieka, "
-"olbrzymi dla wolnego oprogramowania!"
+"Drużyna %s zyskała %u hełm obniżający grawitację! Jestem jako Neil Armstrong!"
 msgstr[1] ""
-"Drużyna %s zyskała %u hełmy obniżające grawitację! Mały krok dla człowieka, "
-"olbrzymi dla wolnego oprogramowania!"
+"Drużyna %s zyskała %u hełmy obniżające grawitację! Jestem jako Neil "
+"Armstrong!"
 msgstr[2] ""
-"Drużyna %s zyskała %u hełmów obniżających grawitację! Mały krok dla "
-"człowieka, olbrzymi dla wolnego oprogramowania!"
+"Drużyna %s zyskała %u hełmów obniżających grawitację! Jestem jako Neil "
+"Armstrong!"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -407,7 +403,7 @@ msgstr[0] "Drużyna %s zyskała %u snajperkę! Wykrzyknijcie im to między oczy!
 msgstr[1] "Drużyna %s zyskała %u snajperki! Wykrzyknijcie im to między oczy!"
 msgstr[2] "Drużyna %s zyskała %u snajperek! Wykrzyknijcie im to między oczy!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -451,7 +447,7 @@ msgstr[0] "Drużyna %s zyskała %u pominięcie tury! Ulubiona broń, nie?"
 msgstr[1] "Drużyna %s zyskała %u pominięcia tury! Ulubiona broń, nie?"
 msgstr[2] "Drużyna %s zyskała %u pominięć tury! Ulubiona broń, nie?"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -475,7 +471,7 @@ msgstr "Drużyna %s została unicestwiona."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s zabrał ze sobą członka drużyny %s w wieczną podróż!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s strzeli do %s"
@@ -581,28 +577,28 @@ msgstr "Palnik"
 msgid "Bounce Ball"
 msgstr "Odbijająca się kula"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Pa, pa Tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Odnalezienie drużyny %s nie powiodło się!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nie można otworzyć dodatkowego katalogu drużyn (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nie można otworzyć katalogu drużyn (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nie można otworzyć katalogu własnych drużyn (%s)!"
@@ -652,7 +648,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Kliknij, aby ześrodkować kamerę na postaci"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Tryb klienta"
 
@@ -751,7 +747,7 @@ msgstr "Energia"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Błąd inicjalizacji sieci: Klient %s nie jest zgodny z Twoim - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Błąd podczas wczytywania drużyny:"
 
@@ -822,7 +818,7 @@ msgstr ""
 "bezpośrednio do Internetu, sprawdź konfigurację routera: połączenia TCP "
 "przychodzące na port %s muszą być przekierowywane do Twojego komputera. "
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Błąd: nie mogę odnaleźć skórki \"%s\" dla drużyny \"%s\"."
@@ -1033,7 +1029,7 @@ msgstr "Wypisuje połączonych graczy"
 msgid "Load maps:"
 msgstr "Wczytywanie map:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Wczytywanie drużyn:"
 
@@ -1287,7 +1283,7 @@ msgid "Server available on Internet"
 msgstr "Serwer dostępny w Internecie"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Tryb serwera"
 
@@ -1375,7 +1371,7 @@ msgstr "Stan:"
 msgid "Submachine Gun"
 msgstr "Erkaem"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1638,7 +1634,7 @@ msgstr "Jesteś nowym mistrzem ceremonii!"
 msgid "You need at least one valid map!"
 msgstr "Musisz mieć przynajmniej jedną prawidłową mapę!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "Musisz ustawić przynajmniej dwie drużyny!"
 
@@ -1646,7 +1642,7 @@ msgstr "Musisz ustawić przynajmniej dwie drużyny!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nie można rozpocząć gry przed wybraniem drużyny!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Pudło!"
 
@@ -1714,55 +1710,3 @@ msgstr "o Otworzono plik audio - %d Hz %d bit"
 #~ "podłączony bezpośrednio do Internetu, sprawdź konfigurację routera: "
 #~ "połączenia TCP przychodzące na port %u muszą być przekierowywane do "
 #~ "Twojego komputera. "
-
-#, fuzzy
-#~ msgid ""
-#~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
-#~ "php"
-#~ msgstr ""
-#~ "Przykro nam, ale wsparcie dla tej wersji zostało zakończone. Wspierane "
-#~ "wersje to %s. Możesz pobrać zaktualizowaną wersję ze strony http://www."
-#~ "wormux.org/wiki/download.php"
-
-#~ msgid "Add custom team"
-#~ msgstr "Dodaj własną drużynę"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Nie można pobrać ostatniej wersji z %s"
-
-#~ msgid "Delete custom team"
-#~ msgstr "Usuń własną drużynę"
-
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Błąd w %s:%lu (Wormux w wersji %s): %s"
-
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr ""
-#~ "Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Głównodowodzący: "
-
-#~ msgid "Network initialization"
-#~ msgstr "Inicjalizacja sieci"
-
-#~ msgid ""
-#~ "No public servers available and incorrect manual connection settings. Try "
-#~ "connecting manually."
-#~ msgstr ""
-#~ "Żaden publiczny serwer nie jest dostępny i wprowadzono nieprawidłowe "
-#~ "ustawienia połączenia. Spróbuj innych ustawień połączenia."
-
-#~ msgid "Pause"
-#~ msgstr "Pauza"
-
-#~ msgid "Player name"
-#~ msgstr "Nazwa gracza"
-
-#~ msgid "Tools"
-#~ msgstr "Narzędzia"
-
-#~ msgid "Unnamed"
-#~ msgstr "Nienazwane"

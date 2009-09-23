@@ -56,7 +56,7 @@ msgstr "Équipe %s"
 msgid "%s Team - Remote"
 msgstr "Équipe %s - Distante"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s change de cible pour %s"
@@ -96,7 +96,7 @@ msgstr "%s de l'équipe %s a touché le sol trop fort !"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'équipe %s est mort à cause de sa maladresse !"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s a décidé de s'attaquer à %s"
@@ -304,17 +304,14 @@ msgstr[1] "Ça plane pour l''équipe %s ! Elle a gagné %u Jetpacks !"
 
 #: src/weapon/lowgrav.cpp:84
 #, c-format
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
 msgstr[0] ""
-"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond de "
-"géant pour le logiciel libre !"
+"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond "
+"de géant pour le logiciel libre !"
 msgstr[1] ""
-"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond de "
-"géant pour le logiciel libre !"
+"L'équipe %s a gagné %u Anti-gravité ! Un petit pas pour l'homme, un bond "
+"de géant pour le logiciel libre !"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -366,7 +363,7 @@ msgid_plural ""
 msgstr[0] "L'équipe %s a gagné %u Fusil à lunette ! Vise entre les yeux !"
 msgstr[1] "L'équipe %s a gagné %u Fusils à lunette ! Vise entre les yeux !"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -403,7 +400,7 @@ msgstr[0] ""
 msgstr[1] ""
 "L'équipe %s a gagné %u passages de tour ! Wouw, quel arme sur-puissante !"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -422,7 +419,7 @@ msgstr "L'équipe %s a été décimée."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a emmené un membre de l'équipe %s dans la tombe avec lui !"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s va tirer sur %s"
@@ -529,28 +526,28 @@ msgstr "Chalumeau"
 msgid "Bounce Ball"
 msgstr "Balle Rebondissante"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Adieu Tux…"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire personnel des équipes(%s) !"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes personnalisées (%s) !"
@@ -600,7 +597,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Cliquer : Centrer la caméra sur le personnage"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Mode client"
 
@@ -701,7 +698,7 @@ msgstr ""
 "Erreur durant l'initialisation du réseau : le Client %s n'est pas d'accord "
 "avec vous !! - %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Erreur au chargement de l'équipe :"
 
@@ -776,7 +773,7 @@ msgstr ""
 "configuration de votre routeur : le port TCP %s doit être redirigé vers "
 "votre ordinateur."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : impossible de trouver le skin \"%s\" pour l'équipe \"%s\"."
@@ -987,7 +984,7 @@ msgstr "Liste des joueurs connectés"
 msgid "Load maps:"
 msgstr "Chargement des terrains :"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Chargement des équipes :"
 
@@ -1242,7 +1239,7 @@ msgid "Server available on Internet"
 msgstr "Serveur disponible sur Internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Mode serveur"
 
@@ -1330,7 +1327,7 @@ msgstr "Munitions :"
 msgid "Submachine Gun"
 msgstr "Mitraillette"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1589,7 +1586,7 @@ msgstr "Vous êtes le nouveau maître du jeu!"
 msgid "You need at least one valid map!"
 msgstr "Il faut au minimum un terrain valide !"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "Il faut au minimum deux équipes valides !"
 
@@ -1597,7 +1594,7 @@ msgstr "Il faut au minimum deux équipes valides !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Vous ne pourrez jouer sans sélectionner d'équipe !"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 

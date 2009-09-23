@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 22:50+0200\n"
+"PO-Revision-Date: 2009-09-05 22:59+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "%s-laget"
 msgid "%s Team - Remote"
 msgstr "%s-laget – frå nettet"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:463
 #, c-format
 msgid "%s changes target to %s"
 msgstr "%s endrar målet til %s"
@@ -95,7 +95,7 @@ msgstr "%s frå %s-laget traff bakken for hardt!"
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s frå %s-laget døydde fordi han var klønete!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:400
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr "%s har bestemt seg for å skada %s"
@@ -294,17 +294,10 @@ msgstr[1] "%s-laget vann %u rakettryggsekker! Kult!"
 
 #: src/weapon/lowgrav.cpp:84
 #, c-format
-msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
-msgid_plural ""
-"%s team has won %u lowgravs! Small step for man, giant leap for free "
-"software!"
-msgstr[0] ""
-"%s-laget vann %u astronauthjelm! Eit lite steg for mennesket, men eit stort "
-"steg for fri programvare!"
-msgstr[1] ""
-"%s-laget vann %u astronauthjelmar! Eit lite steg for mennesket, men eit "
-"stort steg for fri programvare!"
+msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgstr[0] "%s-laget vann %u astronauthjelm! Eg er Neil Armstrong!"
+msgstr[1] "%s-laget vann %u astronauthjelmar! Eg er Neil Armstrong!"
 
 #: src/weapon/mine.cpp:251
 #, c-format
@@ -356,7 +349,7 @@ msgid_plural ""
 msgstr[0] "%s-laget vann %u laserrifle! Skyt han mellom auga!"
 msgstr[1] "%s-laget vann %u laserrifle! Skyt dei mellom auga!"
 
-#: src/weapon/submachine_gun.cpp:155
+#: src/weapon/submachine_gun.cpp:157
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -396,7 +389,7 @@ msgstr[1] ""
 "%s-laget vann %u moglegheiter til å hoppa over ein runde! Eg veit du vil "
 "elska dei!"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:439
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -415,7 +408,7 @@ msgstr "%s-laget vart meia ned."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tok eit medlem av %s-laget med seg i grava!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:377
 #, c-format
 msgid "%s will shoot %s"
 msgstr "%s vil skyta %s"
@@ -521,28 +514,28 @@ msgstr "Blåselampe"
 msgid "Bounce Ball"
 msgstr "Sprettball"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:177
 msgid "Bye bye Tux..."
 msgstr "Ha det, Tux …"
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:505
+#: src/team/teams_list.cpp:538 src/team/teams_list.cpp:547
+#: src/team/teams_list.cpp:553 src/team/teams_list.cpp:617
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Finn ikkje %s-laget!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:167
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Klarte ikkje opna den personlege lagmappa (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:155
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Klarte ikkje opna lagmappa (%s)!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:90
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Klarte ikkje opna den tilpassa lagmappa (%s)!"
@@ -592,7 +585,7 @@ msgid "Click: Center the camera on the character"
 msgstr "Klikk: Rett kameraet mot spelaren"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:151 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:442
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -691,7 +684,7 @@ msgstr "Energi"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Nettverksfeil: Klienten %s er ikkje einig med deg! – %s"
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:131
 msgid "Error loading team :"
 msgstr "Klarte ikkje lasta laget:"
 
@@ -757,7 +750,7 @@ msgstr ""
 "Viss du ikkje er kopla direkte til Internett, må du sjå til at rutaren er "
 "sett opp slik at TCP-porten %s vert vidaresend til maskina."
 
-#: src/team/team.cpp:117
+#: src/team/team.cpp:118
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Feil: Finn ikkje innhaldet «%s» til laget «%s»."
@@ -967,7 +960,7 @@ msgstr "Vis tilkopla spelarar"
 msgid "Load maps:"
 msgstr "Last kart:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Last lag:"
 
@@ -1221,7 +1214,7 @@ msgid "Server available on Internet"
 msgstr "Tenar tilgjengeleg på nettet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:157 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:472
 msgid "Server mode"
 msgstr "Tenarmodus"
 
@@ -1309,7 +1302,7 @@ msgstr "Lager:"
 msgid "Submachine Gun"
 msgstr "Maskingevær"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1569,7 +1562,7 @@ msgstr "Du er den nye turleiaren!"
 msgid "You need at least one valid map!"
 msgstr "Du må har minst eitt gyldig kart!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:175
 msgid "You need at least two valid teams!"
 msgstr "Du må har minst to gyldige lag!"
 
@@ -1577,7 +1570,7 @@ msgstr "Du må har minst to gyldige lag!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du må velja eit lag før du kan spela!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:502
 msgid "Your shot has missed!"
 msgstr "Du bomma!"
 
@@ -1701,3 +1694,16 @@ msgstr "o Opna lydfil: %d Hz og %d bits"
 
 #~ msgid "Unnamed"
 #~ msgstr "Uten navn"
+
+#~ msgid ""
+#~ "%s team has won %u lowgrav! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgid_plural ""
+#~ "%s team has won %u lowgravs! Small step for man, giant leap for free "
+#~ "software!"
+#~ msgstr[0] ""
+#~ "%s-laget vann %u astronauthjelm! Eit lite steg for mennesket, men eit "
+#~ "stort steg for fri programvare!"
+#~ msgstr[1] ""
+#~ "%s-laget vann %u astronauthjelmar! Eit lite steg for mennesket, men eit "
+#~ "stort steg for fri programvare!"

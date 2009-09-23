@@ -32,7 +32,6 @@
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "network/network.h"
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
@@ -103,8 +102,7 @@ void Construct::Draw()
     if (EnoughAmmo()
 	&& EnoughAmmoUnit()
 	&& !Interface::GetInstance()->weapons_menu.IsDisplayed()
-	&& Interface::GetInstance()->IsDisplayed()
-	&& Network::GetInstance()->IsTurnMaster()) {
+	&& Interface::GetInstance()->IsDisplayed()) {
       dst = Mouse::GetInstance()->GetWorldPosition();
       construct_spr->SetRotation_rad(angle);
       construct_spr->Draw(dst - construct_spr->GetSize() / 2);

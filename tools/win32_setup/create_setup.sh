@@ -13,9 +13,7 @@ BINDIR=/mingw
 HKLM_PATH="SOFTWARE\Games\Wormux"
 
 # Version number in installer
-if [ ! -f "../../configure.ac" ]; then WORMUX_VERSION="0.8.6";
-# configure.ac exists, assume svn version rather than release
-else WORMUX_VERSION="svn"; fi
+WORMUX_VERSION=0.8.5-2
 
 # Set compression and in/out
 COMPRESSION="/solid lzma"

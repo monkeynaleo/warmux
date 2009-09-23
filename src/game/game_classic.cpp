@@ -62,6 +62,8 @@ void GameClassic::EndOfGame()
 void GameClassic::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
+  if (global_time->IsGamePaused()) return;
+  global_time->Refresh();
 
   if (1000 < global_time->Read() - pause_seconde)
     {
@@ -115,7 +117,7 @@ void GameClassic::RefreshClock()
             break;
           }
 
-          if (give_objbox && GetWorld().IsOpen()) {
+          if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
             NewBox();
             give_objbox = false;
             break;

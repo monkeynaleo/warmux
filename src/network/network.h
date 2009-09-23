@@ -106,6 +106,7 @@ protected:
   void SetGameName(const std::string& game_name);
 public:
   NetworkMenu* network_menu;
+  bool sync_lock;
 
   virtual ~Network();
 

@@ -153,9 +153,7 @@ void NetworkThread::ReceiveActions()
       // Means an error
       else if (num_ready == -1)
       {
-        //Spams a lot under windows without the errno check...
-        if (errno<0)
-          std::cerr << "SDLNet_CheckSockets: " << SDLNet_GetError() << std::endl;
+        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
         continue; //Or break?
       }
     }
@@ -230,7 +228,8 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   fout(0),
   fin(0),
 #endif
-  network_menu(NULL)
+  network_menu(NULL),
+  sync_lock(false)
 {
   cpus_lock = SDL_CreateMutex();
   player.SetNickname(Player::GetDefaultNickname());
@@ -352,9 +351,9 @@ void Network::SendActionToAll(const Action& a) const
 
 void Network::SendActionToOne(const Action& a, DistantComputer* client) const
 {
-  MSG_DEBUG("network.traffic","Send action %s to %s",
+  MSG_DEBUG("network.traffic","Send action %s to %s (%s)",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
-            client->ToString().c_str());
+	    client->ToString().c_str());
 
   SendAction(a, client, true);
 }
