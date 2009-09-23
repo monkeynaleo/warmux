@@ -162,12 +162,11 @@ void Water::Refresh()
   }
 
   // Height Calculation:
-  Time * global_time = Time::GetInstance();
-  if (time_raise < global_time->Read())
+  if (time_raise < now)
   {
-    m_last_preview_redraw = global_time->Read();
-    if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()) {
-      uint dt = global_time->Read() - time_raise;
+    m_last_preview_redraw = now;
+    if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
+      uint dt = now - time_raise;
       height_mvt = GO_UP_STEP +
         (uint)(((float)GO_UP_STEP *
                sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))
