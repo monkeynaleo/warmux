@@ -244,10 +244,12 @@ void BulletEngine::Step()
   for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
     m_air_friction_shape_list[i]->ComputeAirFriction();
   }
-  for (uint i = 0; i< m_auto_align_object_list.size(); i++){
-    m_auto_align_object_list[i]->ComputeAutoAlign();
-  }
 
+  */
+  for (uint i = 0; i< m_special_object_list.size(); i++){
+    m_special_object_list[i]->ComputeAutoAlign();
+  }
+/*
   ComputeWind();
   ComputeModifiedGravity();
 
@@ -462,3 +464,24 @@ bool BulletEngine::ContactDestroyedCallback(void* userPersistentData)
 
   return false;
 }
+
+void BulletEngine::AddSpecialObject(BulletObj* i_object)
+{
+  RemoveSpecialObject(i_object);
+  m_special_object_list.push_back(i_object);
+}
+
+void BulletEngine::RemoveSpecialObject(BulletObj* i_object)
+{
+  std::vector<BulletObj *>::iterator it;
+  for (it = m_special_object_list.begin(); it != m_special_object_list.end(); it++)
+  {
+    if (*it == i_object)
+      {
+        m_special_object_list.erase(it);
+        break;
+      }
+  }
+}
+
+

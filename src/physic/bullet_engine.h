@@ -55,17 +55,8 @@ class BulletEngine : public PhysicalEngine
   void AddForce(Force * force);
   void RemoveForce(Force *force);
 
-  void AddAirFrictionShape(PhysicalShape* shape);
-  void RemoveAirFrictionShape(PhysicalShape* shape);
-
-  void AddWindObject(PhysicalObj* i_object);
-  void RemoveWindObject(PhysicalObj* i_object);
-
-  void AddAutoAlignObject(PhysicalObj* object);
-  void RemoveAutoAlignObject(PhysicalObj* object);
-
-  void AddModifiedGravityObject(PhysicalObj* i_object);
-  void RemoveModifiedGravityObject(PhysicalObj* i_object);
+  void AddSpecialObject(BulletObj* i_object);
+  void RemoveSpecialObject(BulletObj* i_object);
 
   void SetWindVector(const Point2d &i_wind_vector);
 
@@ -88,6 +79,8 @@ protected:
   double m_scale;
   std::vector<Force *> m_force_list;
   std::vector<BulletObj *> m_object_list;
+  std::vector<BulletObj *> m_special_object_list;
+
   std::vector<BulletGround *> m_garbage_list;
   std::vector<BulletGround *> m_add_list;
   std::vector<BulletContact *> m_contact_add_list;
