@@ -40,7 +40,8 @@
 
 BulletObj::BulletObj() : PhysicalObj(),
 m_contact_listener(NULL),
-m_enable(false)
+m_enable(false),
+m_auto_align_force(0)
 {
     m_collision_category = 0;
     m_collision_mask = 0;
@@ -392,6 +393,11 @@ Point2d BulletObj::GetSpeed() const
     m_body->setActivationState(ACTIVE_TAG);
   }
 
+  void BulletObj::ComputeTorque(Torque * torque)
+  {
+    m_body->applyTorque(btVector3(0,0,torque->m_torque));
+    m_body->setActivationState(ACTIVE_TAG);
+  }
 
   // Collision
   int BulletObj::GetCollisionCategory(){
@@ -629,9 +635,16 @@ Point2d BulletObj::GetSpeed() const
     void BulletObj::ResetWindFactor(){}
   double BulletObj::GetWindFactor(){ return 0;}
 
-  void BulletObj::SetAutoAlignFactor( double /*value*/){}
-  void BulletObj::ResetAutoAlignFactor(){}
-  double BulletObj::GetAutoAlignFactor(){ return 0;}
+  void BulletObj::SetAutoAlignFactor( double value)
+  {
+    m_auto_align_force = value;
+  }
+  void BulletObj::ResetAutoAlignFactor(){
+    m_auto_align_force = 0;
+  }
+  double BulletObj::GetAutoAlignFactor(){
+    return m_auto_align_force;
+   }
 
   void BulletObj::SetGravityFactor( double /*value*/){}
   void BulletObj::ResetGravityFactor(){}
@@ -718,7 +731,60 @@ void BulletObj::SignalCollision(BulletContact *contact)
   }
  #endif
 
+  void BulletObj::ComputeAutoAlign()
+{
+  if (m_body)
+  {
+    double delta = GetAngle() + GetSpeed().ComputeAngle();
+    while (delta >= 2 * M_PI)
+      delta -= 2 * M_PI;
+    while (delta < 0.0)
+      delta += 2 * M_PI;
 
+    double response = 0.0;
+    if (delta < M_PI / 2)
+    {
+      response = 1 - sin(delta + M_PI / 2);
+    }
+    else
+    {
+      if (delta < M_PI)
+      {
+        response = 1 - sin(delta - M_PI / 2);
+      }
+      else
+      if (delta < 3 * M_PI / 2)
+      {
+        response = -1 + sin(delta - M_PI / 2);
+      }
+      else
+      {
+        response = -1 + sin(delta + M_PI / 2);
+      }
+    }
+
+    //double delta = sin (GetAngle() +GetSpeedAngle());
+
+    if (abs(delta) < 0.1)
+    {
+      //Fast stabilization
+      SetAngularSpeed(GetAngularSpeed() / 1.1);
+    }
+    else
+    {
+      Point2d velocity = GetSpeed();
+
+
+      m_body->applyTorque(btVector3(0,0,response * m_auto_align_force * (velocity.x
+          * velocity.x + velocity.y * velocity.y)));
+    }
+
+  }
+}
+
+
+
+//////////////////////////////////////
 
    BulletGround::BulletGround(){
       // ground
@@ -783,4 +849,7 @@ void BulletObj::SignalCollision(BulletContact *contact)
       {
           return m_body;
       }
+
+
+
 

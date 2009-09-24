@@ -41,11 +41,23 @@ public:
   Point2d m_force;
 
   bool m_target_center;
-  void ComputeForce();
 
 protected:
 
 
+
+};
+
+class Torque
+{
+
+public:
+  Torque(double torque);
+  ~Torque();
+  double m_torque;
+
+
+protected:
 
 };
 

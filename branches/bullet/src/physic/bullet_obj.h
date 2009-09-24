@@ -34,6 +34,7 @@
 class BulletShape;
 class GameObj;
 class BulletContact;
+class Torque;
 
 class BulletObj : public PhysicalObj
 {
@@ -94,17 +95,21 @@ public:
   // Force
   Force *AddExternForceXY (const Point2d& vector) ;
   Force *AddExternForce (double nonrm, double angle) ;
+  Torque *AddExternTorque (const double torque) ;
   void RemoveExternForce(Force *force) ;
   void RemoveAllExternForce() ;
+  void RemoveExternTorque(Torque *torque) ;
+  void RemoveAllExternTorque() ;
   void ImpulseXY(const Point2d& vector) ;
   void Impulse(double norm, double angle) ;
   void ComputeForce(Force * force);
+  void ComputeTorque(Torque * force);
   // Collision
 
   int GetCollisionCategory();
   int GetcollisionMask();
 
- void SetCollisionMembership(CollisionCategory category, bool state);
+void SetCollisionMembership(CollisionCategory category, bool state);
   void SetCollisionCategory(CollisionCategory category,bool state);
   bool IsColliding() const ;
   bool IsColliding(const PhysicalObj* obj) const;
@@ -147,6 +152,8 @@ public:
   void SetAutoAlignFactor( double value) ;
   void ResetAutoAlignFactor() ;
   double GetAutoAlignFactor() ;
+  void ComputeAutoAlign();
+
 
   void SetGravityFactor( double value) ;
   void ResetGravityFactor() ;
@@ -173,10 +180,12 @@ protected:
   int m_collision_category;
   int m_collision_mask;
   std::vector<Force *> m_force_list;
+  std::vector<Torque *> m_torque_list;
   GameObj *m_contact_listener;
   std::vector<PhysicalObj *> m_overlapping_obj_list;
   std::vector<int> m_overlapping_time_list;
   bool m_enable;
+  double m_auto_align_force;
 
   bool m_in_world;
 
