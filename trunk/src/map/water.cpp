@@ -52,7 +52,8 @@ Water::Water() :
   water_height(0),
   time_raise(0),
   water_type("no"),
-  m_last_preview_redraw(0)
+  m_last_preview_redraw(0),
+  next_wave_shift(0)
 {
   for (uint i = 0; i < pattern_width; i++) {
     height[i] = 0;
