@@ -59,8 +59,8 @@ public:
   double GetAngle() const ;
   
   //State
-  void SetEnable(bool enable);
-  bool GetEnable();
+  void SetEnabled(bool enable);
+  bool IsEnabled();
   void SetFixed(bool i_fixed) ;
   bool IsFixed() ;
   void SetRotationFixed(bool rotating) ;
@@ -170,6 +170,8 @@ void SetCollisionMembership(CollisionCategory category, bool state);
   bool IsInWorld();
   void SignalCollision(BulletContact * contact);
 
+  bool IsSpecialObj();
+
 protected:
   void Reload();
   
@@ -186,6 +188,7 @@ protected:
   std::vector<int> m_overlapping_time_list;
   bool m_enable;
   double m_auto_align_force;
+  int m_speciality_count;
 
   bool m_in_world;
 

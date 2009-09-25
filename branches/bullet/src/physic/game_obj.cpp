@@ -74,7 +74,6 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   m_cfg = Config::GetInstance()->GetObjectConfig(m_name, xml_config);
   SetPhysic(PhysicalEngine::GetInstance()->CreateObject(m_cfg.m_type));
   GetPhysic()->SetContactListener(this);
-  PhysicalEngine::GetInstance()->AddObject(GetPhysic());
   //ResetConstants();       // Set physics constants from the xml file
 
   /*m_body_def = new b2BodyDef();
@@ -91,6 +90,8 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   circle->Generate();
   m_physic->AddShape(circle);*/
   InitShape(xml_config);
+
+  GetPhysic()->SetAutoAlignFactor(m_cfg.m_auto_align_force);
  /* if(m_auto_align_force >0)
   {
       PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
@@ -667,7 +668,8 @@ bool GameObj::IsImmobile() const
   bool r = IsSleeping()
     || m_ignore_movements
     || (!IsMoving() && GetPhysic()->IsColliding())
-    || IsGhost();
+    || IsGhost()
+    || !GetPhysic()->IsEnabled();
 
   return r;
 }

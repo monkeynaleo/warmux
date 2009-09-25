@@ -56,14 +56,14 @@ struct BulletEngineFilterCallback : public btOverlapFilterCallback
 
                   if(colObj0->getUserPointer()){
                     bulObj0 = reinterpret_cast<BulletObj *>(colObj0->getUserPointer());
-                    if(!bulObj0->GetEnable()){
+                    if(!bulObj0->IsEnabled()){
                       return false;
                     }
                   }
 
                   if(colObj1->getUserPointer()){
                     bulObj1 = reinterpret_cast<BulletObj *>(colObj1->getUserPointer());
-                    if(!bulObj1->GetEnable()){
+                    if(!bulObj1->IsEnabled()){
                       return false;
                     }
                   }
@@ -75,7 +75,7 @@ struct BulletEngineFilterCallback : public btOverlapFilterCallback
 
 
 
-                  if(!bulObj0->GetEnable() || !bulObj1->GetEnable()){
+                  if(!bulObj0->IsEnabled() || !bulObj1->IsEnabled()){
                     return false;
                   }
 
@@ -163,6 +163,12 @@ void BulletEngine::AddObject(PhysicalObj *new_obj)
     m_world->addRigidBody(obj->GetBody(), obj->GetCollisionCategory(),obj->GetcollisionMask());
     m_object_list.push_back(obj);
     obj->SetInWorld(true);
+
+    if (obj->IsSpecialObj() )
+    {
+      AddSpecialObject(obj);
+    }
+
 }
 
 void BulletEngine::AddGround(PhysicalGround *new_obj)
@@ -195,6 +201,7 @@ void BulletEngine::RemoveObject(PhysicalObj *obj)
 
   bobj->SetInWorld(false);
   m_world->removeRigidBody(bobj->GetBody());
+  RemoveSpecialObject(bobj);
 }
 
 void BulletEngine::RemoveGround(PhysicalGround *obj)
@@ -223,6 +230,15 @@ void BulletEngine::Step()
     return;
   }
 
+
+  for (uint i = 0; i< m_special_object_list.size(); i++){
+    m_special_object_list[i]->ComputeAutoAlign();
+  }
+
+
+
+
+
   for (uint i = 0; i< m_force_list.size();i++)
   {
         m_force_list[i]->m_target->ComputeForce(m_force_list[i]);
@@ -246,9 +262,7 @@ void BulletEngine::Step()
   }
 
   */
-  for (uint i = 0; i< m_special_object_list.size(); i++){
-    m_special_object_list[i]->ComputeAutoAlign();
-  }
+
 /*
   ComputeWind();
   ComputeModifiedGravity();

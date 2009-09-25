@@ -66,7 +66,7 @@ Particle::Particle(const std::string &name) :
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);*/
-  GetPhysic()->SetEnable(true);
+  GetPhysic()->SetEnabled(true);
 }
 
 Particle::~Particle()

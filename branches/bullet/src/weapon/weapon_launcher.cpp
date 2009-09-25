@@ -157,6 +157,7 @@ void WeaponProjectile::Shoot(double strength)
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
 
   Init();
+  GetPhysic()->SetEnabled(true);
 
   if (launcher != NULL)
     launcher->IncActiveProjectile();
@@ -206,7 +207,7 @@ void WeaponProjectile::Shoot(double strength)
     //SetSpeed(strength, angle);
     PutOutOfGround(angle);
  // }
-    GetPhysic()->SetEnable(true);
+
 }
 
 void WeaponProjectile::ShootSound()
