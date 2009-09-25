@@ -216,7 +216,7 @@ void Tile::InitPreview()
   m_shift = 0;
 
   // Task 6730: biggest dimension won't be bigger than one third, often less in fact
-  while (world_size.x>m_last_video_size.x/3 || world_size.y>m_last_video_size.y/3) {
+  while (5*world_size.x>2*m_last_video_size.x || 5*world_size.y>2*m_last_video_size.y) {
     world_size >>= 1;
     m_shift++;
   }
