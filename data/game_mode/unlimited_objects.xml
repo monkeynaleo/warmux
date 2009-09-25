@@ -329,7 +329,7 @@
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
-    <auto_align_force>0.001</auto_align_force>
+    <auto_align_force>0.1</auto_align_force>
 	<center_position x="22" y="6" />
     <shape name="rocket-main" type="polygon">
       <mass>20.0</mass>

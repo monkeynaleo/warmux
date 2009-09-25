@@ -212,7 +212,10 @@ BulletObj::~BulletObj()
 
   }
 
-  void BulletObj::SetAngularSpeed(double /*speed*/){}
+  void BulletObj::SetAngularSpeed(double speed)
+  {
+    m_body->setAngularVelocity(btVector3(0,0,speed));
+  }
 
 
   void BulletObj::GetSpeed(double &norm, double &angle_rad) const
@@ -767,7 +770,7 @@ void BulletObj::SignalCollision(BulletContact *contact)
 {
   if (m_body)
   {
-    double delta = GetAngle() + GetSpeed().ComputeAngle();
+    double delta = - GetAngle() + GetSpeed().ComputeAngle();
     while (delta >= 2 * M_PI)
       delta -= 2 * M_PI;
     while (delta < 0.0)
