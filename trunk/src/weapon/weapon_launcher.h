@@ -43,8 +43,6 @@ class WeaponProjectile : public PhysicalObj
     ExplosiveWeaponConfig& cfg;
 
   public:
-    Character* dernier_ver_touche;
-    PhysicalObj* dernier_obj_touche;
     WeaponLauncher * launcher;
     int m_timeout_modifier;
 
