@@ -41,7 +41,8 @@
 BulletObj::BulletObj() : PhysicalObj(),
 m_contact_listener(NULL),
 m_enable(false),
-m_auto_align_force(0)
+m_auto_align_force(0),
+m_speciality_count(0)
 {
     m_collision_category = 0;
     m_collision_mask = 0;
@@ -67,7 +68,7 @@ m_auto_align_force(0)
     m_body->setActivationState(ISLAND_SLEEPING);
     m_body->setLinearFactor(btVector3(1,1,0));
     m_body->setAngularFactor(btVector3(0,0,1));
-    m_body->setDamping(0.1,0.01);
+    m_body->setDamping(0.1,0.05);
     m_body->setRestitution(0.1);
     m_body->setFriction(0.8);
 
@@ -85,7 +86,10 @@ m_auto_align_force(0)
 
 BulletObj::~BulletObj()
 {
-  PhysicalEngine::GetInstance()->RemoveObject(this);
+  if(IsInWorld())
+  {
+    PhysicalEngine::GetInstance()->RemoveObject(this);
+  }
   ClearShapes();
 }
 
@@ -95,11 +99,19 @@ BulletObj::~BulletObj()
   void BulletObj::Generate() {}
   void BulletObj::Desactivate() {}
 
-  void BulletObj::SetEnable(bool enable){
+  void BulletObj::SetEnabled(bool enable){
+    if(m_enable && !enable){
+      PhysicalEngine::GetInstance()->RemoveObject(this);
+    }
+
+    if(!m_enable && enable){
+      PhysicalEngine::GetInstance()->AddObject(this);
+    }
+
     m_enable = enable;
   }
 
-  bool BulletObj::GetEnable(){
+  bool BulletObj::IsEnabled(){
     return m_enable;
   }
   //-------- Position, speed and size -------
@@ -637,14 +649,34 @@ Point2d BulletObj::GetSpeed() const
 
   void BulletObj::SetAutoAlignFactor( double value)
   {
+    if(m_auto_align_force != 0)
+    {
+      m_speciality_count --;
+    }
+
     m_auto_align_force = value;
+    if(m_auto_align_force != 0)
+    {
+      if(IsEnabled())
+      {
+        (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->AddSpecialObject(this);
+      }
+      m_speciality_count ++;
+    }else{
+      if(m_speciality_count == 0)
+      {
+        (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->RemoveSpecialObject(this);
+      }
+    }
   }
-  void BulletObj::ResetAutoAlignFactor(){
-    m_auto_align_force = 0;
+  void BulletObj::ResetAutoAlignFactor()
+  {
+    SetAutoAlignFactor(0);
   }
-  double BulletObj::GetAutoAlignFactor(){
+  double BulletObj::GetAutoAlignFactor()
+  {
     return m_auto_align_force;
-   }
+  }
 
   void BulletObj::SetGravityFactor( double /*value*/){}
   void BulletObj::ResetGravityFactor(){}
@@ -775,13 +807,17 @@ void BulletObj::SignalCollision(BulletContact *contact)
       Point2d velocity = GetSpeed();
 
 
-      m_body->applyTorque(btVector3(0,0,response * m_auto_align_force * (velocity.x
+      m_body->applyTorque(btVector3(0,0, response * m_auto_align_force * (velocity.x
           * velocity.x + velocity.y * velocity.y)));
     }
 
   }
 }
 
+bool BulletObj::IsSpecialObj()
+{
+  return m_speciality_count >0;
+}
 
 
 //////////////////////////////////////

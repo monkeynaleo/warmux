@@ -72,6 +72,7 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   XmlReader::ReadDouble(elem, "gravity_factor", m_gravity_factor);
   XmlReader::ReadDouble(elem, "rebound_factor", m_rebound_factor);
   XmlReader::ReadBool(elem, "rotating", m_rotating);
+  double auto_align_force;
   XmlReader::ReadDouble(elem, "auto_align_force", m_auto_align_force);
 
 
