@@ -209,12 +209,14 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
 // Initialize preview depending on current video and map sizes
 void Tile::InitPreview()
 {
-  Point2i offset     =  m_upper_left_offset + m_lower_right_offset;
+  Point2i offset     = m_upper_left_offset + m_lower_right_offset;
   Point2i world_size = size - offset;
-  m_last_video_size = GetMainWindow().GetSize();
+
+  m_last_video_size  = GetMainWindow().GetSize();
   m_shift = 0;
 
-  while (world_size > m_last_video_size/4) {
+  // Task 6730: biggest dimension won't be bigger than one third, often less in fact
+  while (world_size.x>m_last_video_size.x/3 || world_size.y>m_last_video_size.y/3) {
     world_size >>= 1;
     m_shift++;
   }
