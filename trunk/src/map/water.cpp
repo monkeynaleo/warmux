@@ -38,6 +38,7 @@ const uint GO_UP_STEP = 15; // pixels
 const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
 const uint MS_BETWEEN_SHIFTS = 40;
+const uint PATTERN_WIDTH = 180;
 const double DEGREE = static_cast<double>(2*M_PI/360.0);
 const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
@@ -51,7 +52,7 @@ Water::Water() :
   shift1(0),
   water_height(0),
   time_raise(0),
-  height(pattern_width, 0),
+  height(PATTERN_WIDTH, 0),
   water_type("no"),
   m_last_preview_redraw(0),
   next_wave_shift(0)
@@ -96,7 +97,7 @@ void Water::Init()
 
   pattern_height = bottom.GetHeight();
 
-  pattern.NewSurface(Point2i(pattern_width, pattern_height),
+  pattern.NewSurface(Point2i(PATTERN_WIDTH, pattern_height),
 		     SDL_SWSURFACE|SDL_SRCALPHA, true);
   /* Convert the pattern into the same format than surface. This allow not to
    * need conversions on fly and thus saves CPU */
@@ -212,7 +213,7 @@ void Water::Draw()
   const int wave_inc = 5;
   const int wave_count = 3;
 
-  for (uint x = 0; x < pattern_width; x++)
+  for (uint x = 0; x < PATTERN_WIDTH; x++)
   {
     assert (wave_count == 3);
     wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
@@ -229,7 +230,7 @@ void Water::Draw()
     const Uint8 *src = (Uint8*)bottom.GetSurface()->pixels + l*pitch;
     for (; l < pattern_height; l++)
     {
-      memcpy(dst, src, bpp * pattern_width);
+      memcpy(dst, src, bpp * PATTERN_WIDTH);
       dst += pitch;
       src += pitch;
     }
@@ -257,7 +258,7 @@ void Water::Draw()
   SDL_UnlockSurface(surface.GetSurface());
 
   pattern.SetAlpha(SDL_SRCALPHA, 0);
-  int x0 = Camera::GetInstance()->GetPosition().x % pattern_width;
+  int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
 
   int r = 0;
   for(int y = water_top;
@@ -267,7 +268,7 @@ void Water::Draw()
     Surface *bitmap = r ? &bottom : &pattern;
     for(int x = Camera::GetInstance()->GetPosition().x - x0;
         x < Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
-        x += pattern_width)
+        x += PATTERN_WIDTH)
     {
       AbsoluteDraw(*bitmap, Point2i(x, y));
     }
@@ -283,7 +284,7 @@ bool Water::IsActive() const
 int Water::GetHeight(int x) const
 {
   if (IsActive())
-    return height[x % pattern_width]
+    return height[x % PATTERN_WIDTH]
            + GetWorld().GetHeight()
            - (water_height + height_mvt);
   else
