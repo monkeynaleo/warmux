@@ -37,7 +37,7 @@ const uint GO_UP_TIME = 1; // min
 const uint GO_UP_STEP = 15; // pixels
 const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
-const uint MS_BETWEEN_SHIFTS = 40;
+const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
 const double DEGREE = static_cast<double>(2*M_PI/360.0);
 const float t = (GO_UP_OSCILLATION_TIME*1000.0);
@@ -160,7 +160,7 @@ void Water::Refresh()
 
   uint now = Time::GetInstance()->Read();
   if (next_wave_shift <= now) {
-    shift1 += 4*DEGREE;
+    shift1 += 2*DEGREE;
     next_wave_shift += MS_BETWEEN_SHIFTS;
   }
 
