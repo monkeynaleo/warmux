@@ -41,6 +41,7 @@ private:
   uint water_height;
   uint time_raise;
   std::vector<int> height;
+  std::vector< std::vector<int> > wave_height;
   Surface surface;
   Surface pattern;
   Surface bottom;
@@ -50,7 +51,8 @@ private:
   uint next_wave_shift;
 
   void Init();
-  void CalculateWaves();
+  void CalculateWaveHeights();
+  void CalculateWavePattern();
 
 public:
   Water();
