@@ -118,6 +118,7 @@ void Water::Init()
 
 
   shift1 = 0;
+  next_wave_shift = 0;
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
