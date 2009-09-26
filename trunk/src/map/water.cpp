@@ -51,13 +51,11 @@ Water::Water() :
   shift1(0),
   water_height(0),
   time_raise(0),
+  height(pattern_width, 0),
   water_type("no"),
   m_last_preview_redraw(0),
   next_wave_shift(0)
 {
-  for (uint i = 0; i < pattern_width; i++) {
-    height[i] = 0;
-  }
 }
 
 Water::~Water()
