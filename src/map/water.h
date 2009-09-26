@@ -41,7 +41,7 @@ private:
   double shift1;
   uint water_height;
   uint time_raise;
-  int height[pattern_width];
+  std::vector<int> height;
   Surface surface;
   Surface pattern;
   Surface bottom;
