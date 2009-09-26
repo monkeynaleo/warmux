@@ -43,6 +43,7 @@ const double DEGREE = static_cast<double>(2*M_PI/360.0);
 const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
+const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
 int Water::pattern_height = 0;
 
@@ -53,6 +54,7 @@ Water::Water() :
   water_height(0),
   time_raise(0),
   height(PATTERN_WIDTH, 0),
+  wave_height(3, EMPTY_WAVE_HEIGHT_VECTOR),
   water_type("no"),
   m_last_preview_redraw(0),
   next_wave_shift(0)
@@ -178,10 +180,30 @@ void Water::Refresh()
       water_height += GO_UP_STEP;
     }
   }
-  CalculateWaves();
+  CalculateWaveHeights();
 }
 
-void Water::CalculateWaves()
+void Water::CalculateWaveHeights()
+{
+  double angle1 = -shift1;
+  double angle2 = shift1;
+  double a = 5, b = 8;
+  for (uint x = 0; x < PATTERN_WIDTH; x++)
+  {
+    wave_height[0][x] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
+    wave_height[1][x] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*DEGREE)*b);
+    wave_height[2][x] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*DEGREE)*b);
+
+    int top = std::max(wave_height[0][x], wave_height[1][x]);
+    height[x] = std::max(top, wave_height[2][x]);
+
+    angle1 += 2*DEGREE;
+    angle2 += 4*DEGREE;
+  }
+}
+
+
+void Water::CalculateWavePattern()
 {
   pattern.SetAlpha(0, 0);
   pattern.Fill(0x00000000);
@@ -196,23 +218,11 @@ void Water::CalculateWaves()
    * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
-  double angle1 = -shift1;
-  double angle2 = shift1;
-  double a = 5, b = 8;
-  int wave_height[3];
   const int wave_inc = 5;
   const int wave_count = 3;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++)
   {
-    assert (wave_count == 3);
-    wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
-    wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*DEGREE)*b);
-    wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*DEGREE)*b);
-
-    int top = std::max(wave_height[0], wave_height[1]);
-    height[x] = std::max(top, wave_height[2]);
-
     int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
     assert(l < pattern_height);
     Uint32 pitch = pattern.GetSurface()->pitch;
@@ -229,7 +239,7 @@ void Water::CalculateWaves()
     for (wave = 0; wave < wave_count; wave++)
     {
       dst = (Uint8*)pattern.GetSurface()->pixels + x * bpp
-          + (wave_height[wave]+15+wave_inc*wave) * pitch;
+          + (wave_height[wave][x]+15+wave_inc*wave) * pitch;
       src = (Uint8*)surface.GetSurface()->pixels;
       for (uint y=0; y<(uint)surface.GetHeight(); y++)
       {
@@ -238,9 +248,6 @@ void Water::CalculateWaves()
         src += bpp;
       }
     }
-
-    angle1 += 2*DEGREE;
-    angle2 += 4*DEGREE;
   }
 
   SDL_UnlockSurface(bottom.GetSurface());
@@ -261,6 +268,7 @@ void Water::Draw()
   if ( screen_bottom < water_top )
     return; // save precious CPU time
 
+  CalculateWavePattern();
   int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
 
   int r = 0;
