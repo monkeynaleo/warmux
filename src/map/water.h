@@ -27,7 +27,6 @@
 #include "graphic/surface.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;
-#define pattern_width 180
 
 // Forward declaration
 class Color;
