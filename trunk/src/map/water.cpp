@@ -178,7 +178,7 @@ void Water::Refresh()
       water_height += GO_UP_STEP;
     }
   }
-
+  CalculateWaves();
 }
 
 void Water::CalculateWaves()
@@ -261,7 +261,6 @@ void Water::Draw()
   if ( screen_bottom < water_top )
     return; // save precious CPU time
 
-  CalculateWaves();
   int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
 
   int r = 0;
