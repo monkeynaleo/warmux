@@ -50,6 +50,7 @@ private:
   uint next_wave_shift;
 
   void Init();
+  void CalculateWaves();
 
 public:
   Water();
