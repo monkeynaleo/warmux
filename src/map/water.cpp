@@ -181,18 +181,8 @@ void Water::Refresh()
 
 }
 
-void Water::Draw()
+void Water::CalculateWaves()
 {
-  if (!IsActive())
-    return;
-
-  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
-  int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
-
-  if ( screen_bottom < water_top )
-    return; // save precious CPU time
-
-  /* Now the wave has changed, we need to build the new image pattern */
   pattern.SetAlpha(0, 0);
   pattern.Fill(0x00000000);
 
@@ -258,6 +248,20 @@ void Water::Draw()
   SDL_UnlockSurface(surface.GetSurface());
 
   pattern.SetAlpha(SDL_SRCALPHA, 0);
+}
+
+void Water::Draw()
+{
+  if (!IsActive())
+    return;
+
+  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
+  int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
+
+  if ( screen_bottom < water_top )
+    return; // save precious CPU time
+
+  CalculateWaves();
   int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
 
   int r = 0;
