@@ -368,7 +368,7 @@ Point2d BulletObj::GetSpeed() const
 
   Force *BulletObj::AddExternForce (double norm, double angle_rad) {
 	  Point2d force = Point2d::FromPolarCoordinates(norm, angle_rad);
-	  return AddExternForce(force.x,force.y);
+	  return AddExternForceXY(force);
   }
 
   void BulletObj::RemoveExternForce(Force *force)
