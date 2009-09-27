@@ -65,6 +65,8 @@ class BulletEngine : public PhysicalEngine
 
 
   double GetScale() const;
+
+  double GetGravity() const;
 protected:
 
   static bool ContactAddedCallback(btManifoldPoint& cp,const btCollisionObject* colObj0, int partId0, int index0, const btCollisionObject* colObj1, int partId1, int index1);
@@ -86,6 +88,7 @@ protected:
   std::vector<BulletContact *> m_contact_add_list;
   std::vector<BulletContact *> m_contact_remove_list;
   bool m_is_in_step;
+  double m_gravity;
 };
 
 
