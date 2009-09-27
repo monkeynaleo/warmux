@@ -149,6 +149,7 @@ void SetCollisionMembership(CollisionCategory category, bool state);
   void SetWindFactor( double value) ;
   void ResetWindFactor() ;
   double GetWindFactor() ;
+  void ComputeWind(Point2d wind);
 
   void SetAutoAlignFactor( double value) ;
   void ResetAutoAlignFactor() ;
@@ -193,6 +194,7 @@ protected:
   int m_speciality_count;
   double m_gravity_factor;
   double m_air_friction;
+  double m_wind_factor;
 
   bool m_in_world;
 

@@ -44,7 +44,8 @@ m_enable(false),
 m_auto_align_force(0),
 m_speciality_count(0),
 m_gravity_factor(1),
-m_air_friction(0)
+m_air_friction(0),
+m_wind_factor(0)
 {
     m_collision_category = 0;
     m_collision_mask = 0;
@@ -661,7 +662,7 @@ Point2d BulletObj::GetSpeed() const
 
   void BulletObj::ResetAirFrictionFactor()
   {
-    m_air_friction = 0;
+    SetAirFrictionFactor(0);
   }
 
   double BulletObj::GetAirFrictionFactor()
@@ -669,9 +670,37 @@ Point2d BulletObj::GetSpeed() const
     return m_air_friction;
   }
 
+  void BulletObj::SetWindFactor( double value)
+  {
+    if(m_wind_factor != 0)
+    {
+      m_speciality_count --;
+    }
 
-    void BulletObj::ResetWindFactor(){}
-  double BulletObj::GetWindFactor(){ return 0;}
+    m_wind_factor = value;
+    if(m_wind_factor != 0)
+    {
+      if(IsEnabled())
+      {
+        (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->AddSpecialObject(this);
+      }
+      m_speciality_count ++;
+    }else{
+      if(m_speciality_count == 0)
+      {
+        (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->RemoveSpecialObject(this);
+      }
+    }
+  }
+
+ void BulletObj::ResetWindFactor()
+ {
+   SetWindFactor(0);
+ }
+ double BulletObj::GetWindFactor()
+ {
+   return m_wind_factor;
+ }
 
   void BulletObj::SetAutoAlignFactor( double value)
   {
@@ -729,7 +758,7 @@ void BulletObj::SetGravityFactor( double value)
 
 void BulletObj::ResetGravityFactor()
 {
-  m_gravity_factor = 1;
+  SetGravityFactor(1);
 }
 double BulletObj::GetGravityFactor()
 {
@@ -737,7 +766,7 @@ double BulletObj::GetGravityFactor()
 }
 
 
-  void BulletObj::SetWindFactor( double /*value*/){}
+
 void BulletObj::SignalCollision(BulletContact *contact)
 {
   if (m_contact_listener)
@@ -884,6 +913,18 @@ void BulletObj::ComputeAutoAlign()
 
   }
 }
+
+void BulletObj::ComputeWind(Point2d wind)
+{
+  if (m_body && m_wind_factor !=0)
+  {
+    btVector3 force(wind.x * m_wind_factor,
+                 wind.y * m_wind_factor,0);
+    m_body->applyCentralForce(force);
+
+  }
+}
+
 
 bool BulletObj::IsSpecialObj()
 {
