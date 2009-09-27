@@ -65,7 +65,7 @@
     <rebound_factor>0.01</rebound_factor>
     <rotating>false</rotating>
     <shape name="barrel-main" type="polygon">
-      <mass>100);000.0</mass>
+      <mass>1000.0</mass>
       <position x="0" y="0" />
       <point x="2" y="2" />
       <point x="28" y="2" />
@@ -85,7 +85,7 @@
       <mass>150.0</mass>
       <friction>100.0</friction>
       <position x="0" y="0" />
-      <point x="2" y="3" /> 
+      <point x="2" y="3" />
       <point x="90" y="3" />
       <point x="72" y="24" />
      <point x="20" y="24" />
@@ -96,8 +96,8 @@
       <position x="0" y="0" />
       <point x="20" y="24" />
       <point x="72" y="24" />
-       <point x="77" y="43" />
-       <point x="15" y="43" />  
+      <point x="77" y="43" />
+      <point x="15" y="43" />
     </shape>
       <shape name="anvil-bottom" type="polygon">
       <mass>150.0</mass>
@@ -114,8 +114,8 @@
        map config file  -->
   <wind_particle>
     <mass>50.0</mass>
-    <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <wind_factor>2.0</wind_factor>
+    <air_resist_factor>100.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>false</rotating>
@@ -400,7 +400,7 @@
       <mass>30.0</mass>
       <position x="8" y="8" />
       <radius>4</radius>
-	  <friction>0.8</friction>
+      <friction>0.8</friction>
     </shape>
   </grenade>
 
