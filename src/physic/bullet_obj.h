@@ -144,6 +144,7 @@ void SetCollisionMembership(CollisionCategory category, bool state);
   void SetAirFrictionFactor( double value) ;
   void ResetAirFrictionFactor() ;
   double GetAirFrictionFactor() ;
+  void ComputeAirFriction();
 
   void SetWindFactor( double value) ;
   void ResetWindFactor() ;
@@ -158,6 +159,7 @@ void SetCollisionMembership(CollisionCategory category, bool state);
   void SetGravityFactor( double value) ;
   void ResetGravityFactor() ;
   double GetGravityFactor() ;
+  void ComputeModifiedGravity();
 
   //Bullet Method
   btRigidBody* GetBody();
@@ -189,6 +191,8 @@ protected:
   bool m_enable;
   double m_auto_align_force;
   int m_speciality_count;
+  double m_gravity_factor;
+  double m_air_friction;
 
   bool m_in_world;
 

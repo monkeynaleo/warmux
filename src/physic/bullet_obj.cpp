@@ -42,7 +42,9 @@ BulletObj::BulletObj() : PhysicalObj(),
 m_contact_listener(NULL),
 m_enable(false),
 m_auto_align_force(0),
-m_speciality_count(0)
+m_speciality_count(0),
+m_gravity_factor(1),
+m_air_friction(0)
 {
     m_collision_category = 0;
     m_collision_mask = 0;
@@ -636,14 +638,35 @@ Point2d BulletObj::GetSpeed() const
 
   void BulletObj::SetAirFrictionFactor( double value)
   {
-    m_body->setDamping(value,0.01);
+    if(m_air_friction != 0)
+      {
+        m_speciality_count --;
+      }
+
+    m_air_friction = value;
+      if(m_air_friction != 0)
+      {
+        if(IsEnabled())
+        {
+          (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->AddSpecialObject(this);
+        }
+        m_speciality_count ++;
+      }else{
+        if(m_speciality_count == 0)
+        {
+          (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->RemoveSpecialObject(this);
+        }
+      }
   }
 
-  void BulletObj::ResetAirFrictionFactor(){}
+  void BulletObj::ResetAirFrictionFactor()
+  {
+    m_air_friction = 0;
+  }
 
   double BulletObj::GetAirFrictionFactor()
   {
-    return m_body->getLinearDamping();
+    return m_air_friction;
   }
 
 
@@ -681,9 +704,37 @@ Point2d BulletObj::GetSpeed() const
     return m_auto_align_force;
   }
 
-  void BulletObj::SetGravityFactor( double /*value*/){}
-  void BulletObj::ResetGravityFactor(){}
-  double BulletObj::GetGravityFactor(){ return 0;}
+void BulletObj::SetGravityFactor( double value)
+{
+  if(m_gravity_factor != 1)
+  {
+   m_speciality_count --;
+  }
+
+  m_gravity_factor = value;
+  if(m_gravity_factor != 1)
+  {
+   if(IsEnabled())
+   {
+     (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->AddSpecialObject(this);
+   }
+   m_speciality_count ++;
+  }else{
+   if(m_speciality_count == 0)
+   {
+     (reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->RemoveSpecialObject(this);
+   }
+  }
+}
+
+void BulletObj::ResetGravityFactor()
+{
+  m_gravity_factor = 1;
+}
+double BulletObj::GetGravityFactor()
+{
+  return m_gravity_factor;
+}
 
 
   void BulletObj::SetWindFactor( double /*value*/){}
@@ -766,9 +817,26 @@ void BulletObj::SignalCollision(BulletContact *contact)
   }
  #endif
 
-  void BulletObj::ComputeAutoAlign()
+void BulletObj::ComputeModifiedGravity()
 {
-  if (m_body)
+  if (m_body && m_gravity_factor !=1)
+  {
+    m_body->applyCentralForce(btVector3(0,(reinterpret_cast<BulletEngine *>(PhysicalEngine::GetInstance()))->GetGravity() * GetMass()*(m_gravity_factor-1),0));
+  }
+}
+
+void BulletObj::ComputeAirFriction()
+{
+  if (m_body && m_air_friction !=1)
+  {
+    btVector3 force(GetSpeed().x * m_air_friction *-1,GetSpeed().y * m_air_friction *-1,0);
+    m_body->applyCentralForce(force);
+  }
+}
+
+void BulletObj::ComputeAutoAlign()
+{
+  if (m_body && m_auto_align_force !=0)
   {
     double delta = - GetAngle() + GetSpeed().ComputeAngle();
     while (delta >= 2 * M_PI)

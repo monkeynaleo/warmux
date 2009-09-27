@@ -93,6 +93,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_scale = 100.0;
     m_frame_rate = 60;
     m_is_in_step = false;
+    m_gravity = 10;
     ///collision configuration contains default setup for memory, collision setup
     btDefaultCollisionConfiguration *collision_configuration = new btDefaultCollisionConfiguration();
     //m_collisionConfiguration->setConvexConvexMultipointIterations();
@@ -112,7 +113,7 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
     m_world->getPairCache()->setOverlapFilterCallback(filterCallback);
 
 
-    m_world->setGravity(btVector3(0, 10, 0));
+    m_world->setGravity(btVector3(0, m_gravity, 0));
     m_world->setSynchronizeAllMotionStates(false);
     m_world->setForceUpdateAllAabbs(false);
 
@@ -128,6 +129,11 @@ BulletEngine::BulletEngine() : PhysicalEngine() {
 BulletEngine::~BulletEngine()
 {
 
+}
+
+double BulletEngine::GetGravity() const
+{
+  return m_gravity;
 }
 
 PhysicalGround *BulletEngine::CreateGround()
@@ -233,6 +239,8 @@ void BulletEngine::Step()
 
   for (uint i = 0; i< m_special_object_list.size(); i++){
     m_special_object_list[i]->ComputeAutoAlign();
+    m_special_object_list[i]->ComputeAirFriction();
+    m_special_object_list[i]->ComputeModifiedGravity();
   }
 
 
