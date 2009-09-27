@@ -59,7 +59,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_x_strength.x_extern = 0.0;
   m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
-  m_force_index = 0;
+  m_force_index = NULL;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -139,6 +139,11 @@ void Parachute::Refresh()
         img->animation.SetShowOnFinish(SpriteAnimation::show_blank);
         img->Start();
         closing = true;
+        ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+        ActiveCharacter().GetPhysic()->ResetWindFactor();
+        ActiveCharacter().GetPhysic()->ResetAirFrictionFactor();
+        m_force_index = NULL;
+        std::cout<<"Closing"<<std::endl;
         return;
       } else { // The parachute is closing
         if(img->IsFinished()) {
@@ -146,19 +151,22 @@ void Parachute::Refresh()
           open = false;
           closing = false;
           UseAmmoUnit();
+          std::cout<<"Closed"<<std::endl;
         }
       }
     }
   }
   // If parachute is open => character can move a little to the left or to the right
-  if (open && Network::GetInstance()->IsTurnMaster()) {
+  if (open && Network::GetInstance()->IsTurnMaster() && !closing) {
      ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+     std::cout<<".";
     m_force_index = ActiveCharacter().GetPhysic()->AddExternForce(m_x_strength.x_extern, 0.0);
     if (m_x_strength.changing) {
       m_x_strength.changing = false;
       SendActiveCharacterInfo(false);
     }
   }
+
 }
 
 std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count ) const
@@ -238,7 +246,7 @@ ParachuteConfig& Parachute::cfg() {
 ParachuteConfig::ParachuteConfig(){
   wind_factor = 10.0;
   air_resist_factor = 140.0;
-  force_side_displacement = 2000.0;
+  force_side_displacement = 2.0;
 }
 
 void ParachuteConfig::LoadXml(const xmlNode* elem){
