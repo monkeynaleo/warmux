@@ -101,45 +101,6 @@ void MoveCharacter(Character &character, bool slowly)
     character.Ghost();
     return;
   }
-
-
-  if(character.GetDirection() == DIRECTION_LEFT){
-    /*
-      if(character.GetSpeed().x>-2){
-
-
-      character.AddSpeedXY(Point2d(0,-1));
-
-      }
-      character.SetSpeedXY(Point2d(-5,character.GetSpeed().y ));*/
-
-    character.GetPhysic()->Impulse(10,0);
-  }else{
-    character.GetPhysic()->Impulse(100,90);
-    /*if(character.GetSpeed().x<2){
-      character.AddSpeedXY(Point2d(0,-1));
-
-      }
-      character.SetSpeedXY(Point2d(5,character.GetSpeed().y));
-    */
-  }
-
-  // Compute fall height
-  /*if (!ComputeHeightMovement (character, height, true)) return;
-
-  // Check we can move (to go not too fast)
-  while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
-  {
-    // Move !
-    Game::GetInstance()->character_already_chosen = true;
-
-    // Eventually moves the character
-    character.SetXY( Point2i(character.GetX() +character.GetDirection(),
-                             character.GetY() +height) );
-
-    // If no collision, let gravity do its job
-    character.UpdatePosition();
-  }*/
 }
 
 // Move the active character to the left
