@@ -573,33 +573,15 @@ void Character::Move( bool slowly)
     speed = 5;
   }
 
-  if(!m_force_walk_index){
-
-    m_feet_shape->SetFriction(0);
-
-
-    if(GetDirection() == DIRECTION_LEFT){
-
-      m_force_walk_index = GetPhysic()->AddExternForceXY(Point2d(-40000,0000));
-
-    }else{
-      m_force_walk_index = GetPhysic()->AddExternForceXY(Point2d(40000,0000));
-
-
-    }
+  m_feet_shape->SetFriction(0);
+  if(GetDirection() == DIRECTION_LEFT)
+  {
+    GetPhysic()->SetSpeedXY(Point2d(-speed,GetPhysic()->GetSpeed().y));
   }
-
-  if(GetDirection() == DIRECTION_LEFT){
-
-       if(GetPhysic()->GetSpeed().x<-speed){
-                GetPhysic()->SetSpeedXY(Point2d(-speed,GetPhysic()->GetSpeed().y));
-         }
-      }else{
-
-        if(GetPhysic()->GetSpeed().x>speed){
-          GetPhysic()->SetSpeedXY(Point2d(speed,GetPhysic()->GetSpeed().y));
-        }
-      }
+  else
+  {
+    GetPhysic()->SetSpeedXY(Point2d(speed,GetPhysic()->GetSpeed().y));
+  }
 
 }
 
