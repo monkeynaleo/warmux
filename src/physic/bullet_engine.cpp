@@ -236,16 +236,12 @@ void BulletEngine::Step()
     return;
   }
 
-
   for (uint i = 0; i< m_special_object_list.size(); i++){
     m_special_object_list[i]->ComputeAutoAlign();
     m_special_object_list[i]->ComputeAirFriction();
     m_special_object_list[i]->ComputeModifiedGravity();
+    m_special_object_list[i]->ComputeWind(m_wind_vector);
   }
-
-
-
-
 
   for (uint i = 0; i< m_force_list.size();i++)
   {
@@ -262,24 +258,6 @@ void BulletEngine::Step()
   CleanGarbage();
   PerformAddList();
 
-
-
-  /*
-  for (uint i = 0; i< m_air_friction_shape_list.size(); i++){
-    m_air_friction_shape_list[i]->ComputeAirFriction();
-  }
-
-  */
-
-/*
-  ComputeWind();
-  ComputeModifiedGravity();
-
-  physic_world->Step(timeStep, iterations);
-
-  ComputeContacts();
-
-  */
 }
 
 void BulletEngine::VirtualStep()

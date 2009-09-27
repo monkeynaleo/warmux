@@ -92,6 +92,7 @@ GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   InitShape(xml_config);
 
   GetPhysic()->SetAutoAlignFactor(m_cfg.m_auto_align_force);
+  GetPhysic()->SetWindFactor(m_cfg.m_wind_factor);
  /* if(m_auto_align_force >0)
   {
       PhysicalEngine::GetInstance()->AddAutoAlignObject(this);
