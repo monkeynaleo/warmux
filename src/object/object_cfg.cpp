@@ -32,33 +32,32 @@
 
 static const double DEFAULT_WATER_RESIST_FACTOR = 40;
 
-ObjectConfig::ObjectConfig()
+ObjectConfig::ObjectConfig(void):
+  m_mass(1.0),
+  m_wind_factor(1.0),
+  m_air_resist_factor(1.0),
+  m_water_resist_factor(DEFAULT_WATER_RESIST_FACTOR),
+  m_gravity_factor(1.0),
+  m_rebounding(false),
+  m_rebound_factor(0.01),
+  m_align_particle_state(false)
 {
-  m_rebounding = false;
-  m_rebound_factor = 0.01;
-  m_air_resist_factor = 1.0;
-  m_water_resist_factor = DEFAULT_WATER_RESIST_FACTOR;
-  m_wind_factor = 1.0;
-  m_gravity_factor = 1.0;
-  m_mass = 1.0;
 }
 
-void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
+void ObjectConfig::LoadXml(const std::string & obj_name, 
+                           const std::string & config_file)
 {
   const xmlNode* elem = NULL;
-  XmlReader doc;
+  XmlReader      doc;
 
-  if (config_file == "") {
-
+  if ("" == config_file) {
     MSG_DEBUG("game_mode", "Load %s configuration from %s\n",
               obj_name.c_str(),
               GameMode::GetInstance()->GetName().c_str());
 
     const XmlReader* ddoc = GameMode::GetInstance()->GetXmlObjects();
     elem = XmlReader::GetMarker(ddoc->GetRoot(), obj_name);
-
   } else {
-
     MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n",
               obj_name.c_str(), config_file.c_str());
 
@@ -68,11 +67,12 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   }
 
   ASSERT(elem != NULL);
-  XmlReader::ReadDouble(elem, "mass", m_mass);
-  XmlReader::ReadDouble(elem, "wind_factor", m_wind_factor);
-  XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);
+  XmlReader::ReadDouble(elem, "mass",                m_mass);
+  XmlReader::ReadDouble(elem, "wind_factor",         m_wind_factor);
+  XmlReader::ReadDouble(elem, "air_resist_factor",   m_air_resist_factor);
   XmlReader::ReadDouble(elem, "water_resist_factor", m_water_resist_factor);
-  XmlReader::ReadDouble(elem, "gravity_factor", m_gravity_factor);
-  XmlReader::ReadDouble(elem, "rebound_factor", m_rebound_factor);
-  XmlReader::ReadBool(elem, "rebounding", m_rebounding);
+  XmlReader::ReadDouble(elem, "gravity_factor",      m_gravity_factor);
+  XmlReader::ReadDouble(elem, "rebound_factor",      m_rebound_factor);
+  XmlReader::ReadBool(elem,   "rebounding",          m_rebounding);
+  XmlReader::ReadBool(elem,   "auto_align_particle", m_align_particle_state);
 }

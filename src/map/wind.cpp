@@ -85,7 +85,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
     flipped = NULL;
   }
 
-  if(ActiveMap()->GetWind().rotation_speed != 0.0) {
+  if(!GetAlignParticleState() && ActiveMap()->GetWind().rotation_speed != 0.0) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     if(flipped) {
@@ -108,8 +108,10 @@ void WindParticle::Refresh()
   else
     sprite->Update();
 
-  // Rotate the sprite if needed
-  if(ActiveMap()->GetWind().rotation_speed != 0.0)
+  if (GetAlignParticleState()) {
+    sprite->SetRotation_rad(GetSpeedAngle() - (M_PI / 2));
+  } 
+  else if (ActiveMap()->GetWind().rotation_speed != 0.0) // Rotate the sprite if needed
   {
     if(flipped && GetSpeed().x < 0)
     {
@@ -122,6 +124,7 @@ void WindParticle::Refresh()
       sprite->SetRotation_rad(new_angle);
     }
   }
+
   // Put particles inside of the camera view
   // (there is no point in computing particle out of the camera!)
   int x = GetX();
@@ -242,8 +245,10 @@ void Wind::Refresh()
   }
 
   iterator it=particles.begin(), end=particles.end();
-  for (; it != end; ++it)
+  for (; it != end; ++it) 
+  {
     (*it)->Refresh();
+  }
 }
 
 void Wind::RandomizeParticlesPos()
