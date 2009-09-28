@@ -177,7 +177,9 @@ void Polecat::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 PolecatLauncher::PolecatLauncher() :
-  WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+  WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  current_polecat(NULL),
+  polecat_death_time(0)
 {
   UpdateTranslationStrings();
 
