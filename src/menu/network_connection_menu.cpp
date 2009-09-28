@@ -314,6 +314,9 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_refresh_net_games || w == refresh_net_games_label)
     ThreadRefreshList();
+
+  if (w == cl_server_address || w == cl_port_number || w == cl_server_pwd)
+    cl_net_games_lst->Deselect();
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
