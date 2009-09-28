@@ -84,6 +84,11 @@ class IndexServer : public Singleton<IndexServer>
   connection_state_t HandShake(const std::string& wormux_version);
 
   bool IsConnected();
+  void __Disconnect();
+
+  void Lock();
+  void Unlock();
+  bool TryLock();
 
 public:
   IndexServer();
