@@ -19,11 +19,6 @@
  * Network connection menu: this menu allows the user to choose between
  * hosting a game or connecting to a server.
  *****************************************************************************/
-
-
-#include "menu/network_connection_menu.h"
-#include "menu/network_menu.h"
-
 #include "game/config.h"
 #include "graphic/video.h"
 #include "gui/button.h"
@@ -38,6 +33,8 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/net_error_msg.h"
+#include "menu/network_connection_menu.h"
+#include "menu/network_menu.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
