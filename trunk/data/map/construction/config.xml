@@ -32,14 +32,15 @@
   </sprite>
  
   <wind>
-     <nbr_sprite>15</nbr_sprite>
+     <nbr_sprite>20</nbr_sprite>
      <need_flip>0</need_flip>
      <mass>1.0</mass>
-     <wind_factor>0.1</wind_factor>
+     <wind_factor>0.7</wind_factor>
      <air_resist_factor>0.01</air_resist_factor>
      <gravity_factor>0.3</gravity_factor>
      <rebounding>false</rebounding>
      <rebound_factor>0.0</rebound_factor>
+     <auto_align_particle>true</auto_align_particle>
   </wind>
 
 </resources>
