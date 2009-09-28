@@ -103,6 +103,9 @@ public:
   void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
   bool GetRebounding () const { return m_rebounding; }
 
+  void SetAlignParticleState(bool state) { m_align_particle_state = state; }
+  bool GetAlignParticleState(void) const { return m_align_particle_state; }
+
   // Used to sync value across network
   virtual void GetValueFromAction(Action *);
   virtual void StoreValue(Action *);
