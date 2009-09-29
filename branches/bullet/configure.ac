@@ -51,15 +51,15 @@ dnl =========================================================================
 
 AX_CFLAGS_WARN_ALL([CXXFLAGS])
 
-AC_ARG_ENABLE([index-server],
-              [AS_HELP_STRING([--enable-index-server],
-                              [Enable building the index server @<:@default=no@:>@])],
+AC_ARG_ENABLE([servers],
+              [AS_HELP_STRING([--enable-servers],
+                              [Enable building the index and game servers @<:@default=no@:>@])],
               [],
-              [enable_index_server=no])
-AM_CONDITIONAL([BUILD_INDEX_SERVER], [test "$enable_index_server" = "yes"])
+              [enable_servers=no])
+AM_CONDITIONAL([BUILD_SERVERS], [test "$enable_servers" = "yes"])
 
-if ! test "$enable_index_server" = "yes"; then
-  AC_MSG_WARN([Building of index-server is disabled. If you want build the index-server, please use configure with this option : --enable-index-server])
+if ! test "$enable_servers" = "yes"; then
+  AC_MSG_WARN([Building of servers is disabled. If you want build the index and servers, please use configure with this option : --enable-servers])
 fi
 
 AC_ARG_ENABLE([debug],
@@ -409,11 +409,14 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
+		 lib/Makefile
                  lib/bullet/src/Makefile
 		 lib/wormux/Makefile
 		 lib/wormux-server/Makefile
                  doc/Makefile
                  po/Makefile
+		 tools/Makefile
+		 tools/servers/Makefile
 		 tools/servers/game_server/Makefile
 		 tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
@@ -433,7 +436,7 @@ else
    echo ""
    echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
    echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
-   echo "* [[Optional]] Index server                       : ${enable_index_server:-no}"
+   echo "* [[Optional]] Index and game servers             : ${enable_servers:-no}"
 fi
 echo ""
 echo "Execute make to compile then execute make install to install..."
