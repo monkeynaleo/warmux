@@ -21,7 +21,6 @@
 
 #include <climits>
 #include "include/app.h"
-#include "game/config.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "map/sky.h"
@@ -34,7 +33,7 @@ void Sky::Init()
 {
   std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
 
-  if (Config::GetInstance()->GetDisplayMultiLayerSky() && sky_layer.size() > 0) {
+  if (sky_layer.size() > 0) {
     for (uint i = 0; i < sky_layer.size(); i++)
       images.push_back(sky_layer[i]);
   } else {

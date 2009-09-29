@@ -189,15 +189,20 @@ void InfoMap::LoadData()
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_sky = GetResourceManager().LoadImage(res_profile, "sky");
-  uint layer = 0;
-  XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
-  for (uint i = 0; i < layer; i++) {
-    std::ostringstream ss;
-    ss << "sky_layer_" << i;
-    sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()));
+
+  if (Config::GetInstance()->GetDisplayMultiLayerSky()) {
+
+    uint layer = 0;
+    XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
+
+    for (uint i = 0; i < layer; i++) {
+      std::ostringstream ss;
+      ss << "sky_layer_" << i;
+      sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()));
+    }
   }
 
-  if(!random_generated) {
+  if (!random_generated) {
     img_ground = GetResourceManager().LoadImage(res_profile, "map");
   } else {
     img_ground = GetResourceManager().GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
@@ -207,6 +212,13 @@ void InfoMap::LoadData()
 void InfoMap::FreeData()
 {
   img_sky.Free();
+
+  std::vector<Surface>::iterator it = sky_layer.begin();
+  while (it != sky_layer.end()) {
+    it->Free();
+    sky_layer.erase(it);
+  }
+
   img_ground.Free();
   is_data_loaded = false;
 }
