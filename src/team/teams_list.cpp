@@ -25,7 +25,6 @@
 #include "character/body_list.h"
 #include "include/action.h"
 #include "game/config.h"
-#include "game/game_mode.h"
 #include "network/network.h"
 #include "network/randomsync.h"
 #include <WORMUX_file_tools.h>
@@ -76,9 +75,7 @@ void TeamsList::NextTeam ()
   Team* next = GetNextTeam();
   SetActive (next->GetId());
 
-  if (GameMode::GetInstance()->auto_change_character) {
-    ActiveTeam().NextCharacter();
-  }
+  ActiveTeam().NextCharacter();
 
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
   Character::StoreActiveCharacter(&a);

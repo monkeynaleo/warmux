@@ -180,8 +180,6 @@ void GameBlitz::__SetState_PLAYING()
 
     GetTeamsList().NextTeam();
 
-    Camera::GetInstance()->FollowObject (&ActiveCharacter(), true);
-
     // Are we turn master for next turn ?
     if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
       Network::GetInstance()->SetTurnMaster(true);
