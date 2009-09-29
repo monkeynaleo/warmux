@@ -81,8 +81,12 @@ public:
   const std::string& GetPort() { return ((GameInfoBox*)m_items[selected_item])->port; }
 };
 
+
+SDL_Thread* NetworkConnectionMenu::thread_refresh = NULL;
+
 NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
-  Menu("menu/bg_network", vOkCancel)
+  Menu("menu/bg_network", vOkCancel),
+  lock_refresh_list(SDL_CreateSemaphore(1))
 {
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
   Point2i def_size(300, 20);
@@ -248,12 +252,14 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
     tabs->SelectTab(0);
     break;
   default:
+    ThreadRefreshList();
     break;
   }
 }
 
 NetworkConnectionMenu::~NetworkConnectionMenu()
 {
+  SDL_DestroySemaphore(lock_refresh_list);
 }
 
 void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
@@ -261,7 +267,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
   Widget* w = widgets.ClickUp(mousePosition, button);
 
   if (w == cl_refresh_net_games || w == refresh_net_games_label)
-    RefreshList();
+    __RefreshList(false);
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
@@ -269,14 +275,14 @@ void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
   widgets.Click(mousePosition, button);
 }
 
-std::list<GameServerInfo> NetworkConnectionMenu::GetList()
+std::list<GameServerInfo> NetworkConnectionMenu::GetList(bool background)
 {
   std::list<GameServerInfo> lst;
 
   // Connect to the index server
   connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
   if (conn != CONNECTED) {
-    DisplayNetError(conn);
+    DisplayNetError(conn, background);
     msg_box->NewMessage(_("Error: Unable to contact the index server to search for an internet game"), c_red);
     return lst;
   }
@@ -284,14 +290,16 @@ std::list<GameServerInfo> NetworkConnectionMenu::GetList()
   lst = IndexServer::GetInstance()->GetHostList();
   IndexServer::GetInstance()->Disconnect();
 
-  if (lst.empty()) {
+  if (lst.empty() && !background) {
     Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
   }
   return lst;
 }
 
-void NetworkConnectionMenu::RefreshList()
+void NetworkConnectionMenu::__RefreshList(bool background)
 {
+  SDL_SemWait(lock_refresh_list);
+
   // Save the currently selected address
   int current = cl_net_games_lst->GetSelectedItem();
   if (current == -1) current = 0;
@@ -302,9 +310,9 @@ void NetworkConnectionMenu::RefreshList()
     cl_net_games_lst->RemoveSelected();
   }
 
-  std::list<GameServerInfo> lst = GetList();
+  std::list<GameServerInfo> lst = GetList(background);
   if (lst.empty()) {
-    return;
+    goto out;
   }
 
   for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
@@ -314,21 +322,47 @@ void NetworkConnectionMenu::RefreshList()
   if (cl_net_games_lst->Size() != 0)
     cl_net_games_lst->Select( current );
   cl_net_games_lst->NeedRedrawing();
+
+  // make sure the list will be updated right now
+  if (background)
+    Menu::WakeUpOnCallback();
+
+ out:
+  SDL_SemPost(lock_refresh_list);
+}
+
+static int thread_refresh_list_games(void *_network_connection_menu)
+{
+  NetworkConnectionMenu* menu = (NetworkConnectionMenu*)(_network_connection_menu);
+  menu->__RefreshList(true);
+  return 0;
+}
+
+void NetworkConnectionMenu::ThreadRefreshList()
+{
+  thread_refresh = SDL_CreateThread(thread_refresh_list_games, this);
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/){}
 
-void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
+void NetworkConnectionMenu::DisplayNetError(connection_state_t conn, bool background)
 {
+  std::string error_msg;
+
   if (conn == CONN_WRONG_VERSION) {
-    AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
-				     "Supported versions are %s. "
-				     "You can download an updated version "
-				     "from http://www.wormux.org/wiki/download.php"),
-				   IndexServer::GetInstance()->GetSupportedVersions().c_str()));
+    error_msg = Format(_("Sorry, your version is not supported anymore. "
+			 "Supported versions are %s. "
+			 "You can download an updated version "
+			 "from http://www.wormux.org/wiki/download.php"),
+		       IndexServer::GetInstance()->GetSupportedVersions().c_str());
   } else {
-    Menu::DisplayError(NetworkErrorToString(conn));
+    error_msg = NetworkErrorToString(conn);
   }
+
+  if (!background)
+    Menu::DisplayError(error_msg);
+  else
+    msg_box->NewMessage(error_msg, c_red);
 }
 
 bool NetworkConnectionMenu::HostingServer(const std::string& port,
