@@ -80,6 +80,12 @@ protected:
   Mouse();
 
 public:
+
+  // to compare with SDL_Event.button.button
+  // and manage left-handed mouse option "transparently"
+  static Uint8 BUTTON_RIGHT();
+  static Uint8 BUTTON_LEFT();
+
   bool HandleClic (const SDL_Event& event) const;
   void Refresh();
 

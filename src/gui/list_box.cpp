@@ -91,7 +91,7 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
 
   // buttons for listbox with more items than visible (first or last item not visible)
   if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition))) {
+      (button == Mouse::BUTTON_LEFT() && m_down->Contains(mousePosition))) {
 
     // bottom button
     if (last_visible_item < m_items.size() - 1)
@@ -100,7 +100,7 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
     return this;
   }
   else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	   (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition))) {
+	   (button == Mouse::BUTTON_LEFT() && m_up->Contains(mousePosition))) {
 
     // top button
     if (first_visible_item > 0)
@@ -109,7 +109,7 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
     return this;
   }
 
-  if (button == SDL_BUTTON_LEFT) {
+  if (button == Mouse::BUTTON_LEFT()) {
     int item = MouseIsOnWhichItem(mousePosition);
 
     if (item == -1)
@@ -129,7 +129,7 @@ Widget* BaseListBox::Click(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
-  if (ScrollBarPos().Contains(mousePosition) && button == SDL_BUTTON_LEFT) {
+  if (ScrollBarPos().Contains(mousePosition) && button == Mouse::BUTTON_LEFT()) {
     scrolling = true;
   }
   return this;

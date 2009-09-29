@@ -161,6 +161,22 @@ void Mouse::ActionWheelDown(bool shift) const
   ActiveTeam().AccessWeapon().HandleMouseWheelDown(shift);
 }
 
+Uint8 Mouse::BUTTON_RIGHT() // static method
+{
+  if (Config::GetRef().GetLeftHandedMouse())
+    return SDL_BUTTON_LEFT;
+
+  return SDL_BUTTON_RIGHT;
+}
+
+Uint8 Mouse::BUTTON_LEFT() // static method
+{
+  if (Config::GetRef().GetLeftHandedMouse())
+    return SDL_BUTTON_RIGHT;
+
+  return SDL_BUTTON_LEFT;
+}
+
 bool Mouse::HandleClic (const SDL_Event& event) const
 {
   if (!HasFocus()) {
@@ -180,22 +196,15 @@ bool Mouse::HandleClic (const SDL_Event& event) const
 
   if( event.type == SDL_MOUSEBUTTONDOWN ){
     bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-    switch (event.button.button) {
-    case SDL_BUTTON_RIGHT:
+
+    if (event.button.button == Mouse::BUTTON_RIGHT())
       ActionRightClic(shift);
-      break;
-    case SDL_BUTTON_LEFT:
+    else if (event.button.button == Mouse::BUTTON_LEFT())
       ActionLeftClic(shift);
-      break;
-    case SDL_BUTTON_WHEELDOWN:
+    else if (event.button.button == SDL_BUTTON_WHEELDOWN)
       ActionWheelDown(shift);
-      break;
-    case SDL_BUTTON_WHEELUP:
+    else if (event.button.button == SDL_BUTTON_WHEELUP)
       ActionWheelUp(shift);
-      break;
-    default:
-      break;
-    }
   }
   return true;
 }

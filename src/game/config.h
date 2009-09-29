@@ -76,9 +76,6 @@ public:
   bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
   void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
 
-  bool IsMouseDisable() const { return disable_mouse; };
-  bool IsJoystickDisable() const { return disable_joystick; };
-
   bool GetScrollOnBorder() const { return scroll_on_border; };
   void SetScrollOnBorder(const bool sob) { scroll_on_border = sob; };
 
@@ -119,6 +116,9 @@ public:
 
   bool GetCheckUpdates() const { return check_updates; }
   void SetCheckUpdates(const bool check) { check_updates = check; }
+
+  bool GetLeftHandedMouse() const { return lefthanded_mouse; }
+  void SetLeftHandedMouse(const bool left) { lefthanded_mouse = left; }
 
   std::list<ConfigTeam> & AccessTeamList() { return teams; };
   const std::string & GetMapName() const { return map_name; };
@@ -181,8 +181,6 @@ protected:
   bool display_name_character;
   bool display_wind_particles;
   bool default_mouse_cursor;
-  bool disable_joystick;
-  bool disable_mouse;
 
   // Video settings
   uint video_width;
@@ -202,8 +200,9 @@ protected:
   uint volume_effects;
   bool warn_on_new_player;
 
-  // network
+  // various settings
   bool check_updates;
+  bool lefthanded_mouse;
 
   // network previous connection as client
   std::string m_network_client_host;
