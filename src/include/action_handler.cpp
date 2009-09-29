@@ -1078,18 +1078,16 @@ void ActionHandler::ExecActions()
 {
   Action * a;
   std::list<Action*>::iterator it;
+  Lock();
   for (it = queue.begin(); it != queue.end() ;)
   {
-    Lock();
     a = (*it);
     //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
     if (a->GetTimestamp() > Time::GetInstance()->Read()) {
-      UnLock();
       it++;
       continue;
     }
-    UnLock();
 
     // Do not execute actions from Network if we are not connected anymore
     if (!a->GetCreator()
@@ -1103,6 +1101,7 @@ void ActionHandler::ExecActions()
     delete *it;
     it = queue.erase(it);
   }
+  UnLock();
 }
 
 void ActionHandler::NewAction(Action* a, bool repeat_to_network)
