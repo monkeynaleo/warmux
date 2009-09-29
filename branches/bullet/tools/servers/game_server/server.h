@@ -42,6 +42,8 @@ private:
   std::list<DistantComputer*> cpulist;
 
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
+  void StartGame();
+  void StopGame();
 
 public:
   NetworkGame(const std::string& game_name, const std::string& password);
