@@ -31,10 +31,13 @@ class Video{
   uint m_max_delay;
   bool SDLReady;
   bool fullscreen;
+  bool hardware;
   SDL_Surface *icon;
 
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
+
+  bool __SetConfig(const int w, const int h, const bool _fullscreen, const bool _hardware);
 
   void SetWindowIcon(const std::string& icon);
   void InitSDL(void);
@@ -54,6 +57,9 @@ public:
   bool IsFullScreen() const { return fullscreen; };
 
   const std::list<Point2i>& GetAvailableConfigs() const { return available_configs; };
+
+  // in case of failure, it continues to use the old configuration
+  // return true only if the change is successful (with hw acceleration)
   bool SetConfig(int width, int height, bool fullscreen);
   void ToggleFullscreen();
 
