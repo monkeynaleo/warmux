@@ -38,18 +38,18 @@ static const double GROUND_FRICTION = 5.0;
 PhysicTile::PhysicTile(Point2i size, Point2i offset, Point2i tile_offset, TileItem *tile, PhysicTile *parent_physic_tile, int level):
   m_is_subdivided(false),
   m_is_containing_polygon(false),
-  m_physical_ground(NULL),
   m_parent_physic_tile(parent_physic_tile),
   m_parent_tile(tile),
   m_size(size),
   m_offset(offset),
   m_tile_offset(tile_offset),
+  m_physical_ground(NULL),
   m_level(level)
 {
-  m_physic_tiles[0] == NULL;
-  m_physic_tiles[1] == NULL;
-  m_physic_tiles[2] == NULL;
-  m_physic_tiles[3] == NULL;
+  m_physic_tiles[0] = NULL;
+  m_physic_tiles[1] = NULL;
+  m_physic_tiles[2] = NULL;
+  m_physic_tiles[3] = NULL;
   Generate();
 }
 
@@ -328,7 +328,7 @@ bool PhysicTile::GeneratePolygone()
 
   Point2d min_pixel(0,0);
   Point2d max_pixel(0,0);
- 
+
   if (vertexCount > 2) {
 
     //Verify
@@ -386,7 +386,7 @@ bool PhysicTile::GeneratePolygone()
 	if ((max_pixel.x - min_pixel.x > 0.00001) || (max_pixel.y - min_pixel.y > 0.00001)) {
 	Point2d min_pixel(0,0);
       shape->SetFriction(GROUND_FRICTION);
-  
+
 
      shape->Generate();
 
