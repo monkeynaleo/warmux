@@ -32,6 +32,7 @@
 #include <WORMUX_random.h>
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
+#include <sstream>
 
 extern const uint MAX_WIND_OBJECTS;
 
@@ -78,7 +79,6 @@ void InfoMap::LoadBasicInfo()
   preview = GetResourceManager().LoadImage(res_profile, "preview");
   is_basic_info_loaded = true;
   // Load other informations
-  XmlReader doc;
   if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
     throw _("error parsing the config file");
 
@@ -178,7 +178,15 @@ void InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_sky = GetResourceManager().LoadImage(res_profile,"sky");
+  img_sky = GetResourceManager().LoadImage(res_profile, "sky");
+  uint layer = 0;
+  XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
+  for (uint i = 0; i < layer; i++) {
+    std::ostringstream ss;
+    ss << "sky_layer_" << (i + 1);
+    sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()));
+  }
+
   if(!random_generated) {
     img_ground = GetResourceManager().LoadImage(res_profile, "map");
   } else {
@@ -205,6 +213,13 @@ Surface& InfoMap::ReadImgSky()
   LoadBasicInfo();
   LoadData();
   return img_sky;
+}
+
+std::vector<Surface>& InfoMap::ReadSkyLayer()
+{
+  LoadBasicInfo();
+  LoadData();
+  return sky_layer;
 }
 
 std::string InfoMap::GetConfigFilepath() const
