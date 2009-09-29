@@ -51,6 +51,17 @@ dnl =========================================================================
 
 AX_CFLAGS_WARN_ALL([CXXFLAGS])
 
+AC_ARG_ENABLE([index-server],
+              [AS_HELP_STRING([--enable-index-server],
+                              [Enable building the index server @<:@default=no@:>@])],
+              [],
+              [enable_index_server=no])
+AM_CONDITIONAL([BUILD_INDEX_SERVER], [test "$enable_index_server" = "yes"])
+
+if ! test "$enable_index_server" = "yes"; then
+  AC_MSG_WARN([Building of index-server is disabled. If you want build the index-server, please use configure with this option : --enable-index-server])
+fi
+
 AC_ARG_ENABLE([debug],
               [  --enable-debug          Enable debug in Wormux],
               debug=$enableval,
@@ -422,6 +433,7 @@ else
    echo ""
    echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
    echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
+   echo "* [[Optional]] Index server                       : ${enable_index_server:-no}"
 fi
 echo ""
 echo "Execute make to compile then execute make install to install..."
