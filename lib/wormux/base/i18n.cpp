@@ -54,20 +54,25 @@ std::string Format(const char *format, ...)
   std::string result;
 
   va_start(argp, format);
-
   int size = vsnprintf(buffer, bufferSize, format, argp);
+  va_end(argp);
 
-  if(size < 0)
+  if (size < 0)
     Error("Error formating string...");
 
-  if(size < bufferSize) {
+  if (size < bufferSize) {
     result = std::string(buffer);
   } else {
     char *bigBuffer = (char *)malloc((size + 1) * sizeof(char));
-    if(bigBuffer == NULL)
+    if (bigBuffer == NULL)
       Error( "Out of memory !");
 
+    // We need to redo va_start/va_end before calling vsnprintf
+    // with same arguments else the va_list may be already modified
+    va_start(argp, format);
     size = vsnprintf(bigBuffer, size + 1, format, argp);
+    va_end(argp);
+
     if(size < 0)
       Error( "Error formating string...");
 
@@ -75,7 +80,6 @@ std::string Format(const char *format, ...)
     free(bigBuffer);
   }
 
-  va_end(argp);
   return result;
 }
 
