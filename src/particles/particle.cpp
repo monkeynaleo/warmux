@@ -170,7 +170,7 @@ void ParticleEngine::Load()
   particle_sprite[BULLET_spr] = GetResourceManager().LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
   particle_sprite[POLECAT_FART_spr] = GetResourceManager().LoadSprite(res,"polecat_fart");
-  particle_sprite[WATER_spr] = GetResourceManager().LoadSprite(res,"water_drop");
+  particle_sprite[CLEARWATER_spr] = GetResourceManager().LoadSprite(res,"water_drop");
   particle_sprite[LAVA_spr] = GetResourceManager().LoadSprite(res,"lava_drop");
   particle_sprite[RADIOACTIVE_spr] = GetResourceManager().LoadSprite(res,"radioactive_drop");
   particle_sprite[DIRTYWATER_spr] = GetResourceManager().LoadSprite(res,"dirtywater_drop");
@@ -233,6 +233,8 @@ void ParticleEngine::AddNow(const Point2i &position,
     case particle_MAGIC_STAR : particle = new MagicStarParticle();
       break;
     case particle_WATER : particle = new WaterParticle();
+      break;
+    case particle_CLEARWATER : particle = new ClearWaterParticle();
       break;
     case particle_LAVA: particle = new LavaParticle();
       break;
