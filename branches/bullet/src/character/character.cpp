@@ -1076,9 +1076,24 @@ void Character::GetValueFromAction(Action *a)
   if (a->PopInt()) { // If active characters, retrieve stored animation
     if (GetTeam().IsActiveTeam())
       ActiveTeam().SelectCharacter(this);
-    SetClothe(a->PopString());
-    SetMovement(a->PopString());
-    GetBody()->SetFrame((uint)(a->PopInt()));
+
+    std::string clothe = a->PopString();
+    std::string movement = a->PopString();
+    uint frame = a->PopInt();
+
+    fprintf(stderr,
+	    "Character::GetValueFromAction: Animation for %s\n"
+	    "        - Clothe %s (current: %s)\n"
+	    "        - Movement %s (current: %s)\n"
+	    "        - Frame %d (current: %d)\n",
+	    GetName().c_str(),
+	    clothe.c_str(), GetBody()->GetClothe().c_str(),
+	    movement.c_str(), GetBody()->GetMovement().c_str(),
+	    frame, GetBody()->GetFrame());
+
+    SetClothe(clothe);
+    SetMovement(movement);
+    GetBody()->SetFrame(frame);
 
     GetBody()->UpdateWeaponPosition(GetPhysic()->GetPosition());
   }
