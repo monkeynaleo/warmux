@@ -31,33 +31,55 @@ class SuperTuxWeaponConfig;
 
 class TuxLauncher : public WeaponLauncher
 {
-  private:
-    SuperTux * current_tux;
+private:
+  SuperTux * current_tux;
+  uint tux_death_time;
 
-    friend class SuperTux;
-    void EndOfTurn() const; // should be called only by SuperTux
-  public:
-    TuxLauncher();
-    bool IsInUse() const;
+public:
+  TuxLauncher();
+  virtual bool IsInUse() const;
 
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+  virtual void UpdateTranslationStrings();
+  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
-    void SignalEndOfProjectile();
-    void HandleKeyPressed_MoveRight(bool shift);
-    void HandleKeyRefreshed_MoveRight(bool shift);
-    void HandleKeyReleased_MoveRight(bool shift);
-    void HandleKeyPressed_MoveLeft(bool shift);
-    void HandleKeyRefreshed_MoveLeft(bool shift);
-    void HandleKeyReleased_MoveLeft(bool shift);
+  virtual void SignalEndOfProjectile();
 
-    void RefreshFromNetwork(double angle, Point2d pos);
+  virtual void HandleKeyPressed_MoveRight(bool shift);
+  virtual void HandleKeyRefreshed_MoveRight(bool shift);
+  virtual void HandleKeyReleased_MoveRight(bool shift);
 
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-    bool p_Shoot();
-  private:
-    SuperTuxWeaponConfig& cfg();
+  virtual void HandleKeyPressed_MoveLeft(bool shift);
+  virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+  virtual void HandleKeyReleased_MoveLeft(bool shift);
+
+  virtual void HandleKeyPressed_Up(bool shift);
+  virtual void HandleKeyRefreshed_Up(bool shift);
+  virtual void HandleKeyReleased_Up(bool shift);
+
+  virtual void HandleKeyPressed_Down(bool shift);
+  virtual void HandleKeyRefreshed_Down(bool shift);
+  virtual void HandleKeyReleased_Down(bool shift);
+
+  virtual void HandleKeyPressed_Jump(bool shift);
+  virtual void HandleKeyRefreshed_Jump(bool shift);
+  virtual void HandleKeyReleased_Jump(bool shift);
+
+  virtual void HandleKeyPressed_HighJump(bool shift);
+  virtual void HandleKeyRefreshed_HighJump(bool shift);
+  virtual void HandleKeyReleased_HighJump(bool shift);
+
+  virtual void HandleKeyPressed_BackJump(bool shift);
+  virtual void HandleKeyRefreshed_BackJump(bool shift);
+  virtual void HandleKeyReleased_BackJump(bool shift);
+
+  void RefreshFromNetwork(double angle, Point2d pos);
+
+protected:
+  WeaponProjectile * GetProjectileInstance();
+  virtual bool p_Shoot();
+  virtual void Refresh();
+private:
+  SuperTuxWeaponConfig& cfg();
 };
 
 #endif
