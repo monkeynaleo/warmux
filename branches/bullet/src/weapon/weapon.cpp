@@ -704,20 +704,18 @@ void Weapon::ActionStopUse()
 // #################### SHOOT
 void Weapon::HandleKeyPressed_Shoot(bool)
 {
-  if(ActiveCharacter().IsPreparingShoot())
+  if (ActiveCharacter().IsPreparingShoot())
     return;
 
-  if (max_strength == 0)
-    NewActionWeaponShoot();
-  else if ( IsReady() )
+  if (max_strength != 0 && IsReady())
     InitLoading();
 }
 
 void Weapon::HandleKeyRefreshed_Shoot(bool)
 {
-  if(ActiveCharacter().IsPreparingShoot())
+  if (ActiveCharacter().IsPreparingShoot())
     return;
-  if ( !IsLoading() )
+  if (!IsLoading())
     return;
 
   // Strength == max strength -> Fire !!!
@@ -731,12 +729,9 @@ void Weapon::HandleKeyRefreshed_Shoot(bool)
 
 void Weapon::HandleKeyReleased_Shoot(bool)
 {
-  if(ActiveCharacter().IsPreparingShoot())
-    return;
-  if ( !IsLoading())
-    return;
-
-  NewActionWeaponShoot();
+  if (!ActiveCharacter().IsPreparingShoot()) {
+    NewActionWeaponShoot();
+  }
 }
 
 void Weapon::p_Deselect()
