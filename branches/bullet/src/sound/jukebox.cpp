@@ -204,6 +204,13 @@ void JukeBox::LoadMusicXML()
     }
 
     std::ifstream fp(filename.c_str());
+
+    if (fp.bad()) {
+      std::cerr << "Music error: File " << filename.c_str()
+                << " couldn't be read !" << std::endl;
+      continue;
+    }
+
     std::string line;
 
     while(std::getline(fp, line))
@@ -402,11 +409,11 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
 {
   if (!UseEffects() || !m_init) return -1;
 
-  uint nb_sons= m_soundsamples.count(category+ PATH_SEPARATOR +sample);
+  uint nb_sons= m_soundsamples.count(category+ "/" +sample);
   if (nb_sons)
   {
     std::pair<sample_iterator, sample_iterator> p =
-      m_soundsamples.equal_range(category+ PATH_SEPARATOR +sample);
+      m_soundsamples.equal_range(category+ "/" +sample);
     sample_iterator it = p.first;
 
     // Choose a random sound sample
