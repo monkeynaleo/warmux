@@ -55,8 +55,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 // that do not define MSG_DONTWAIT
 int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len);
 
-// SDLNet_SocketReady MUST have been called before
-// return false if an error happens and host should be disconnected
+/* SDLNet_SocketReady MUST have been called before
+ * return false if an error happens and host should be disconnected
+ *
+ * WARNING: under WIN32, it returns the size of data that can be read with ONE
+ * read(). It does not equal to the size of available data if there is lot
+ * of data. (The maximum seems to be 8192)
+ */
 int SDLNet_TCP_NbBytesAvailable(TCPsocket sock);
 
 #endif
