@@ -221,7 +221,7 @@ AM_CXXFLAGS += -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
   @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/bullet/src/ \
-  -I$(top_srcdir)/lib/wormux/include 
+  -I$(top_srcdir)/lib/wormux/include
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -229,9 +229,7 @@ wormux_SOURCES += wormux.rc wormux.ico
 	@WINDRES@ -o $@ -i $<
 endif
 
-if !INCLUDEDINTL
 LIBS+=@LIBINTL@
-endif
 
 if STATIC
 LIBS += -lssl -lcrypto -lz -lpthread
@@ -239,33 +237,8 @@ else
 LIBS += @LIBCURL@
 endif
 
-#wormux_LDADD=$(top_srcdir)/lib/bullet/src/.libs/libbulletcollision.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletdynamics.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletmath.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletsoftbody.a \
-#$(top_srcdir)/lib/wormux/libwormux.a
-#wormux_DEPENDENCIES=$(top_srcdir)/lib/bullet/src/.libs/libbulletcollision.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletdynamics.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletmath.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletsoftbody.a \
-#$(top_srcdir)/lib/wormux/libwormux.a
-
 wormux_DEPENDENCIES=$(top_srcdir)/lib/bullet/src/libbullet.a \
 $(top_srcdir)/lib/wormux/libwormux.a
 
 wormux_LDADD=$(top_srcdir)/lib/bullet/src/libbullet.a \
 $(top_srcdir)/lib/wormux/libwormux.a
-
-
-
-#wormux_DEPENDENCIES=$(top_srcdir)/lib/bullet/src/.libs/libbulletcollision.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletdynamics.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletmath.a \
-#$(top_srcdir)/lib/bullet/src/.libs/libbulletsoftbody.a \
-#$(top_srcdir)/lib/wormux/libwormux.a
-#wormux_LDADD= -L$(top_srcdir)/lib/bullet/src/.libs/ \
-#-lbulletcollision \
-#-lbulletdynamics \
-#-lbulletmath \
-#-lbulletsoftbody \
-#$(top_srcdir)/lib/wormux/libwormux.a
