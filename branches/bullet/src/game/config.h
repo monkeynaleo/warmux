@@ -74,7 +74,7 @@ public:
   void SetDisplayWindParticles(bool dwp) { display_wind_particles = dwp; };
 
   bool GetDisplayMultiLayerSky() const { return display_multi_layer_sky; };
-  void GetDisplayMultiLayerSky(bool dmsl) { display_multi_layer_sky = dmsl; };
+  void SetDisplayMultiLayerSky(bool dmsl) { display_multi_layer_sky = dmsl; };
 
   bool GetDefaultMouseCursor() const { return default_mouse_cursor; };
   void SetDefaultMouseCursor(const bool dmc) { default_mouse_cursor = dmc; };
