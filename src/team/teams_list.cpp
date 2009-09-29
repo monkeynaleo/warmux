@@ -175,7 +175,7 @@ void TeamsList::LoadList()
 
   // We need at least 2 teams
   if (full_list.size() < 2)
-    Error(_("You need at least two valid teams !"));
+    Error(_("You need at least two valid teams!"));
 
   // Default selection
   std::list<uint> nv_selection;

@@ -322,9 +322,9 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 {
   if (conn == CONN_WRONG_VERSION) {
     AppWormux::DisplayError(Format(_("Sorry, your version is not supported anymore. "
-				     "Supported version are %s. "
-				     "You can download a updated version "
-				     "on http://www.wormux.org/wiki/download.php"),
+				     "Supported versions are %s. "
+				     "You can download an updated version "
+				     "from http://www.wormux.org/wiki/download.php"),
 				   IndexServer::GetInstance()->GetSupportedVersions().c_str()));
   } else {
     Menu::DisplayError(NetworkErrorToString(conn));
@@ -364,13 +364,13 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", net_port);
   if (false == r) {
     DisplayNetError(CONN_BAD_PORT);
-    msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connection from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
+    msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
                         c_red);
     goto out;
   }
 
   if (!Network::GetInstance()->IsConnected()) {
-    msg_box->NewMessage(_("Error: Unable to start server"), c_red);
+    msg_box->NewMessage(_("Error: Unable to start the server"), c_red);
     goto out;
   }
   r = true;
