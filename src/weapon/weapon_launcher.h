@@ -121,7 +121,7 @@ class WeaponLauncher : public Weapon
     virtual void p_Select();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
-    void Refresh() { };
+    virtual void Refresh() { };
   private:
     void DirectExplosion();
     void NetworkSetTimeoutProjectile() const;
