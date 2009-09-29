@@ -88,11 +88,6 @@ WeaponsList::WeaponsList()
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::Refresh () const
-{
-  ActiveTeam().AccessWeapon().Manage();
-}
-
 void WeaponsList::UpdateTranslation()
 {
   if (singleton == NULL) return;
