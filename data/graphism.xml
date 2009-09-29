@@ -57,6 +57,7 @@
   <!-- Display options -->
 
   <surface name="display_energy" file="menu/display_energy.png" />
+  <surface name="multisky" file="menu/multisky.png" />
   <surface name="display_name" file="menu/display_name.png" />
   <surface name="display_wind_particles" file="menu/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/fullscreen.png" />

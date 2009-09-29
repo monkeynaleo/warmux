@@ -75,6 +75,9 @@ OptionMenu::OptionMenu() :
   opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
   graphic_options->AddWidget(opt_display_wind_particles);
 
+  opt_display_multisky = new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size);
+  graphic_options->AddWidget(opt_display_multisky);
+
   opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
   graphic_options->AddWidget(opt_display_energy);
 
@@ -259,6 +262,7 @@ OptionMenu::OptionMenu() :
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());
   opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
+  opt_display_multisky->SetValue(config->GetDisplayMultiLayerSky());
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
 #ifndef __APPLE__
@@ -369,6 +373,7 @@ void OptionMenu::SaveOptions()
   if (!Game::GetInstance()->IsGameFinished())
     Wind::GetRef().Reset();
 
+  config->SetDisplayMultiLayerSky(opt_display_multisky->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
