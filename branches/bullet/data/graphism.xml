@@ -290,6 +290,20 @@
     <image file="gfx/arrow.png" />
   </sprite>
 
+  <sprite name="curseur-jump">
+    <image file="gfx/arrow_jump.png">
+      <grid pos="0,0" size="70,70" array="8,1" />
+    </image>
+    <animation loop_mode="true"/>
+  </sprite>
+
+  <sprite name="curseur-turn">
+    <image file="gfx/arrow_turn.png">
+      <grid pos="0,0" size="70,70" array="6,1" />
+    </image>
+    <animation loop_mode="true"/>
+  </sprite>
+
   <surface name="water" file="gfx/water/water/water.png" />
   <surface name="water_bottom" file="gfx/water/water/water_bottom.png" />
 
