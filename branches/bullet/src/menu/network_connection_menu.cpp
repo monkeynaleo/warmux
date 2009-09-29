@@ -494,6 +494,8 @@ bool NetworkConnectionMenu::signal_ok()
 
     // Don't go back to main menu after playing
     Menu::RedrawMenu();
+    ThreadRefreshList();
+
     return false;
   }
 
