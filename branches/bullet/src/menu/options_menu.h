@@ -74,6 +74,7 @@ class OptionMenu : public Menu
 
    /* Misc options controllers */
    CheckBox *opt_updates;
+   CheckBox *opt_lefthanded_mouse;
 
    void SaveOptions();
    void OnClick(const Point2i &mousePosition, int button);
