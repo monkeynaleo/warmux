@@ -402,11 +402,11 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
 {
   if (!UseEffects() || !m_init) return -1;
 
-  uint nb_sons= m_soundsamples.count(category+"/"+sample);
+  uint nb_sons= m_soundsamples.count(category+ PATH_SEPARATOR +sample);
   if (nb_sons)
   {
     std::pair<sample_iterator, sample_iterator> p =
-      m_soundsamples.equal_range(category+"/"+sample);
+      m_soundsamples.equal_range(category+ PATH_SEPARATOR +sample);
     sample_iterator it = p.first;
 
     // Choose a random sound sample
