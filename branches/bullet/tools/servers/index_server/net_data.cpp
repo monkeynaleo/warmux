@@ -42,15 +42,16 @@ typedef int SOCKET;
 # define closesocket(fd) close(fd)
 #endif
 
-NetData::NetData()
-  : str(NULL)
-  , str_size(0)
-  , msg_size(0)
-  , fd(INVALID_SOCKET)
-  , ping_sent(false)
-  , bytes_received(0)
-  , msg_id(TS_NO_MSG)
-  , connected(false)
+NetData::NetData() :
+  str(NULL),
+  str_size(0),
+  msg_size(0),
+  fd(INVALID_SOCKET),
+  ip_address(0),
+  ping_sent(false),
+  bytes_received(0),
+  msg_id(TS_NO_MSG),
+  connected(false)
 {
   UpdatePing();
 }
