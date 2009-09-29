@@ -261,4 +261,4 @@ libbullet_a_SOURCES =\
 		BulletSoftBody/btSoftRigidDynamicsWorld.h \
 		BulletSoftBody/btSoftBodyHelpers.h
 
-AM_CXXFLAGS += -I$(top_srcdir)/lib/bullet/src/BulletMultiThreaded/vectormath/scalar/cpp
+libbullet_a_CXXFLAGS= -I$(top_srcdir)/lib/bullet/src/BulletMultiThreaded/vectormath/scalar/cpp

@@ -22,7 +22,7 @@ AC_CANONICAL_TARGET
 #AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([foreign 1.5])
 
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT([external], [need-ngettext])
 
 if test "x$USE_NLS" != "xyes"; then
   AC_MSG_WARN([gettext is disabled. If you want internationalisation, please install gettext package.])
@@ -38,7 +38,6 @@ AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_RANLIB
-
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -83,7 +82,7 @@ AC_ARG_ENABLE([static],
               [static=$enableval],
               [static=no])
 
-#Bullet config
+# Bullet config
 AM_CONDITIONAL([CONDITIONAL_BUILD_DEMOS], [false])
 AM_CONDITIONAL([CONDITIONAL_BUILD_MULTITHREADED], [false])
 
@@ -113,6 +112,9 @@ case "${host}" in
        AC_MSG_ERROR([windres could not be found within your path.])
      fi
      AC_SUBST(WINDRES)
+     ;;
+  *freebsd*)
+     LIBS="$LIBS -lintl" # a temporary hackish workaround
      ;;
   *cygwin*) WIN32="yes" ;;
   *-apple-darwin*)
@@ -159,7 +161,6 @@ AM_CONDITIONAL([AUTOPACKAGE], [test "$enable_autopackage" = "yes"])
 
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
-AM_CONDITIONAL([INCLUDEDINTL], [test x$nls_cv_use_gnu_gettext = xyes])
 
 
 dnl ========================================================================
@@ -191,7 +192,9 @@ if test "x$GCC" = "xyes"; then
   fi
 
   if test "x${debug}" = "xyes"; then
-    GCC_FLAGS="$GCC_FLAGS -g -DDEBUG -DWMX_LOG"
+    GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -DWMX_LOG"
+  else
+    GCC_FLAGS="$GCC_FLAGS -O2"
   fi
 
   if test "x${logging}" = "xyes"; then
@@ -203,14 +206,6 @@ if test "x$GCC" = "xyes"; then
   CFLAGS="$GCC_FLAGS"
   dnl CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
   CXXFLAGS="$GCC_FLAGS"
-
-  dnl Set default optimization flag: change it for a specific target if needed with target_CXXFLAGS
-  AC_SUBST([AM_CXXFLAGS])
-  if test "x${debug}" = "xyes"; then
-     AM_CXXFLAGS=-O0
-  else
-     AM_CXXFLAGS=-O2
-  fi
 
 else
   if test "x${debug}" = "xyes"; then
@@ -382,9 +377,10 @@ CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
 LIBS="$LIBS $LIBXML_LIBS $LIBPNG_LIBS"
 
 dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
+dnl change it for a specific target if needed with target_CXXFLAGS
+AC_SUBST([AM_CXXFLAGS])
 if test "x${debug}" = "xyes"; then
-   CFLAGS="$CFLAGS "
-   CXXFLAGS="$CXXFLAGS "
+    AM_CXXFLAGS="-Werror -Wno-error=unused-parameter"
 fi
 
 dnl ========================================================================
@@ -451,5 +447,3 @@ echo "Execute make to compile then execute make install to install..."
 if test "${WIN32}" = "yes"; then
    echo "Alternatively, type make setup to build an installer"
 fi
-
-
