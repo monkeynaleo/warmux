@@ -1,3 +1,62 @@
+> 2009/09/15 - 0.8.5 release
+  - Fix handling of key event during the game
+  - Fix new sound player warning
+  - Fix several network bugs related to random generator
+  - Fix keep-alive connexion to index server when hosting a server from the game
+  - Fix crash when invalid display resolution requested
+  - Fix "play in loop" options for network games
+  - Refresh the public network games list
+  - Multi-layer sky
+  - Camera enhancement
+  - Weapon behavior: gnu, supertux and polecat now explode when pressing space, M16 repeats shoot
+  - Lefthand-operated mouse option
+  - Small skin animation enhancements
+  - Automatically create personal directories for maps, teams and game_mode
+  - New maps
+  - Do not overlink index server and game server binaries
+  - Translation updates
+
+> 2009/07/03 - 0.8.4 release
+  - Dedicated game server
+  - Camera improvments
+  - New sounds thanks to Bebelious
+  - Various bug fixes
+  - Translations updates
+
+> 2009/03/05 - 0.8.3 release
+  - New skins with new animations
+  - New sounds thanks to Bebelious
+  - Better team menu editor
+  - New game interface
+  - Small AI enhancements
+  - Fix crash when leaving options menu during a game
+  - Fix crash when checking for new version without internet connection
+  - Fix some small graphical bugs
+
+> 2008/10/19 - 0.8.2 release
+  - Fix Blowtorch weapon
+  - Fix behavior of floor on closed maps
+  - Compile with -Werror flag only in debug mode
+  - Fix code to make it possible to do a static version on Linux (remove gethostbyname usage)
+  - Fix compilation on OpenBSD
+  - Adding translation: Greek
+  - Other minor bug fixes
+
+> 2008/09/16 - 0.8.1 release
+  - Game mode editor for local game (allows you to choose some game options)
+  - Team editor for local game (allows you to personalize characters names)
+  - Better menus: tabs, basic keyboard control, more options,...
+  - All characters redrawn: better graphisms, new positions, new clothes,...
+  - 2 new skins: Pidgin and Suse
+  - New maps: Lonely island and oktopus
+  - New waters: add lava, dirty water,...
+  - Better minimap
+  - New weapon: slap
+  - Some sounds added (thanks a lot to wesnoth project)
+  - A lot of bug fixes
+  - A lot of improvements (code and graphism)
+  - Translations updates
+
 > 2008/05/16 - 0.8 release
   - Network game fixes
   - Lot of bugfixes /cleaning code
