@@ -153,6 +153,10 @@ static void Action_Network_MasterChangeState (Action *a)
   case WNet::NETWORK_NEXT_GAME:
     break;
 
+  case WNet::NETWORK_PLAYING:
+    if (Game::GetInstance()->IsGameFinished())
+      break;
+
   default:
     NET_ASSERT(false)
       {
