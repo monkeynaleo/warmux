@@ -57,7 +57,8 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
 			left -= len;
 			data += len;
 		}
-	} while ( (left > 0) && ((len > 0) || (errno == EINTR)) );
+
+	} while ( (left > 0) && ((len > 0) || (errno == EINTR) || (errno == EAGAIN)) );
 
 	return(sent);
 }
