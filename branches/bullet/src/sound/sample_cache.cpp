@@ -19,8 +19,12 @@
  * Simple class that caches the sounds played - part of jukebox
  *****************************************************************************/
 
+#include <iostream>
+#include <fstream>
+
 #include <assert.h>
 #include <WORMUX_debug.h>
+
 #include "sample_cache.h"
 
 SampleCache::SampleCache( size_t memory_limit )
@@ -64,6 +68,11 @@ Mix_Chunk * SampleCache::LoadSound( const std::string & file_name )
     {
         // not found, so try to cache it cache it
         Mix_Chunk *sample = Mix_LoadWAV( file_name.c_str() );
+        if (!sample) {
+          std::cerr << "Sound error: couldn't load file \"" << file_name
+            << "\": " << Mix_GetError() << std::endl;
+          //What to do? Return NULL will crash later...
+        }
         slot = FindSlot( sample, file_name );
         if ( -1 == slot )
             return sample;
