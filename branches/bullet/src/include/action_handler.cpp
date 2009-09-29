@@ -315,6 +315,8 @@ static void Action_Game_NextTeam (Action *a)
 
   ASSERT (!ActiveCharacter().IsDead());
 
+  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+
   // Are we turn master for next turn ?
   if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     Network::GetInstance()->SetTurnMaster(true);
