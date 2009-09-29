@@ -38,6 +38,7 @@ Understanding how to play Wormux is very simple.
 * Mouse right click: Show/hide weapons menu
 * Mouse left click: Select target for teleportation or automatic bazooka
 * Mouse left click on a character: Make it active (if it's allowed)
+* Mouse middle click: Move the map
 * Key F1, F2, .. F5: Change weapon in category 1, 2, ... 5
 * Key escape : Leave the game (confirmation necessary)
 * Key 'b' : ("Backwards") jump
@@ -50,17 +51,17 @@ Understanding how to play Wormux is very simple.
 ====================
 
 On the website, you will find some useful help:
-* List of weapons: http://wormux.org/wiki/en/weapons.php
-* List of maps: http://wormux.org/wiki/en/maps.php
-  * How to write your own map: http://wormux.org/wiki/Create_your_own_map.php
-* List of skins: http://wormux.org/wiki/en/skins.php
-* Forum: http://www.wormux.org/forum/
+* List of weapons: http://www.wormux.org/phpboost/wiki/wiki.php
+* List of maps: http://www.wormux.org/phpboost/wiki/wiki.php
+  * How to write your own map: http://www.wormux.org/phpboost/wiki/wiki.php
+* List of skins: http://www.wormux.org/phpboost/wiki/wiki.php
+* Forum: http://www.wormux.org/phpboost/forum/
 
 3/ On which system can I play out-of-the-box ?
 ==============================================
 
 Wormux is available out-of-the-box on a wide variety of systems  (have 
-a look at http://wormux.org/wiki/packages.php for an up-to-date list):
+a look at http://www.wormux.org/phpboost/download for an up-to-date list):
 
 * Linux based systems:
   * Debian (Sarge/Etch/Sid)
@@ -84,5 +85,6 @@ a look at http://wormux.org/wiki/packages.php for an up-to-date list):
 4/ Misc links
 =============
 
-* Official web site: http://wormux.org/
+* Official web site: http://www.wormux.org/
 * Project management page: https://gna.org/projects/wormux/
+
