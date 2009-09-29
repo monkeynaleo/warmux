@@ -448,6 +448,11 @@
 	<email>gba2211_AT_gmail_DOT_com</email>
 	<country>Greece</country>
       </author>
+      <author>
+        <nickname>akicks</nickname>
+        <description>Japanese translation of Wormux</description>
+        <country>Japan</country>
+      </author>
     </section>
 
     <section title="Package maintainers">
@@ -594,6 +599,13 @@
 	<description>Fix old bug in option menu (crash because of video mode)</description>
 	<email>hamaolli_AT_cc.jyu_DOT_fi</email>
 	<country>Finland</country>
+      </author>
+      <author>
+	<nickname>IFlo</nickname>
+	<name>Florian Köberle</name>
+	<description>network bugfixes</description>
+	<email>florian_AT_fkoeberle_DOT_de</email>
+	<country>Germany</country>
       </author>
       <author>
 	<nickname>Isaac</nickname>
@@ -820,6 +832,13 @@
 	<country>Poland</country>
       </author>
       <author>
+	<nickname>Akela NDE</nickname>
+	<name>Jeoire DE CHASSEEY</name>
+	<description>Drew two maps</description>
+	<website>http://akelblog.free.fr</website>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>Alexandre</nickname>
 	<name>Alexandre NORMAN</name>
 	<description>Send us two maps (arbre and prehistorik)</description>
@@ -956,6 +975,13 @@
 	<description>CSS stylesheet for our old website</description>
 	<email>ddevedjian_AT_tema.rms_DOT_fr</email>
 	<country>France</country>
+      </author>
+      <author>
+	<nickname>Jika</nickname>
+	<name>Julien CLAEYS</name>
+	<description>Bug reports, tests, website help,...</description>
+	<email>julien.claeys_AT_gmail_DOT_com</email>
+	<country>Belgique</country>
       </author>
       <author>
 	<nickname>Mastzi team</nickname>
