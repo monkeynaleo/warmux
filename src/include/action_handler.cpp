@@ -109,10 +109,6 @@ static void Action_Network_ClientChangeState (Action *a)
     break;
 
   case WNet::NETWORK_PLAYING:
-    a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
-    ASSERT(client_state == WNet::NETWORK_NEXT_GAME);
-    break;
-
   case WNet::NETWORK_NEXT_GAME:
     if (client_state == WNet::NETWORK_MENU_OK) {
       a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
@@ -141,8 +137,10 @@ static void Action_Network_MasterChangeState (Action *a)
 
   switch (Network::GetInstance()->GetState()) {
   case WNet::NETWORK_MENU_OK:
-    Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
-    ASSERT(server_state == WNet::NETWORK_LOADING_DATA);
+    if (server_state == WNet::NETWORK_LOADING_DATA)
+      Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
+    ASSERT(server_state == WNet::NETWORK_LOADING_DATA
+	   || server_state == WNet::NETWORK_NEXT_GAME);
     break;
 
   case WNet::NETWORK_READY_TO_PLAY:
