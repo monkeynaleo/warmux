@@ -300,9 +300,9 @@
 
   <sprite name="arrow-change">
     <image file="interface/whitetheme/arrow_turn.png">
-      <grid pos="0,0" size="70,70" array="8,1" />
+      <grid pos="0,0" size="50,50" array="8,1" />
     </image>
-    <animation loop_mode="true"/>
+    <animation loop_mode="true" speed="75" />
   </sprite>
 
   <surface name="water" file="water/water/water.png" />
