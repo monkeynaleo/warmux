@@ -24,7 +24,7 @@
 
 #include <WORMUX_singleton.h>
 #include "include/base.h"
-#include "weapon_cfg.h"
+#include "weapon/weapon_cfg.h"
 #include "weapon/weapon_launcher.h"
 
 
@@ -63,7 +63,7 @@ private:
     void Refresh();
 };
 
-class MineConfig : public ExplosiveWeaponConfig, public Singleton<MineConfig>
+class MineConfig : public Singleton<MineConfig>, public ExplosiveWeaponConfig
 {
 protected:
   friend class Singleton<MineConfig>;
@@ -71,7 +71,6 @@ public:
   uint escape_time;
   double detection_range;
   double speed_detection;
-
 private:
   MineConfig();
 public:
