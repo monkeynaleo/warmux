@@ -19,15 +19,15 @@
  * Refresh water that may be placed in bottom of the ground.
  *****************************************************************************/
 
-#include "map/water.h"
 #include <assert.h>
 #include <SDL.h>
-#include "map/camera.h"
-#include "map/map.h"
-#include "map/maps_list.h"
 #include "game/game_mode.h"
 #include "game/time.h"
 #include "interface/interface.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "map/maps_list.h"
+#include "map/water.h"
 #include "particles/particle.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
@@ -49,7 +49,7 @@ Water::Water() :
   shift1(0),
   water_height(0),
   time_raise(0),
-  water_type(NO_WATER),
+  water_type("no"),
   m_last_preview_redraw(0)
 {
   for (uint i = 0; i < pattern_width; i++) {
@@ -77,12 +77,10 @@ Water::~Water()
  */
 void Water::Init()
 {
-  if (water_type == NO_WATER)
-    return;
+  ASSERT(water_type != "no");
 
   std::string image = "gfx/";
-  std::string water_name = GetWaterName(water_type);
-  image += water_name;
+  image += water_type;
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
@@ -91,10 +89,7 @@ void Water::Init()
 
   image += "_bottom";
 
-  if (water_type != NO_WATER)
-    type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_name));
-  else
-    type_color = NULL;
+  type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_type));
   bottom = GetResourceManager().LoadImage(res, image);
   bottom.SetAlpha(0, 0);
 
@@ -125,6 +120,7 @@ void Water::Init()
 void Water::Reset()
 {
   water_type = ActiveMap()->GetWaterType();
+
   if (type_color)
     delete type_color;
   type_color = NULL;
@@ -278,7 +274,7 @@ void Water::Draw()
 
 bool Water::IsActive() const
 {
-  return water_type != NO_WATER;
+  return water_type != "no";
 }
 
 int Water::GetHeight(int x) const
@@ -303,83 +299,13 @@ const Color* Water::GetColor() const
 
 void Water::Splash(const Point2i& pos) const
 {
-  switch (water_type) {
-  case NO_WATER:
-    break;
-  case WATER:
-    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_WATER, true, -1, 20);
-    break;
-  case LAVA:
-    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_LAVA, true, -1, 20);
-    break;
-  case RADIOACTIVE:
-    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_RADIOACTIVE, true, -1, 20);
-    break;
-  case DIRTY:
-    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_DIRTYWATER, true, -1, 20);
-    break;
-  case CHOCOLATE:
-    ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_CHOCOLATEWATER, true, -1, 20);
-    break;
-  case MAX_WATER_TYPE:
-    ASSERT(false);
-    break;
-  }
+  if (water_type == "no")
+    return;
+
+  ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 5, particle_WATER, true, -1, 20);
 }
 
 void Water::Smoke(const Point2i& pos) const
 {
   ParticleEngine::AddNow(Point2i(pos.x, pos.y-5), 2, particle_SMOKE, true, 0, 1);
-}
-
-// =================== static methods
-
-Water::Water_type Water::GetWaterType(const std::string & water)
-{
-  if (water == "no") {
-    return NO_WATER;
-  } else if (water == "water") {
-    return WATER;
-  } else if (water == "lava") {
-    return LAVA;
-  } else if (water == "radioactive") {
-    return RADIOACTIVE;
-  } else if (water == "dirtywater") {
-    return DIRTY;
-  } else if (water == "chocolate") {
-    return CHOCOLATE;
-  } else { // Unsupported water type
-    fprintf(stderr, "WARNING: map using invalid water type %s: valid water types are no, water, lava, radioactive\n",
-	    water.c_str());
-  }
-  return NO_WATER;
-}
-
-const std::string Water::GetWaterName(const Water::Water_type water_type)
-{
-  switch (water_type) {
-  case NO_WATER:
-    return "no";
-    break;
-  case WATER:
-    return "water";
-    break;
-  case LAVA:
-    return "lava";
-    break;
-  case RADIOACTIVE:
-    return "radioactive";
-    break;
-  case DIRTY:
-    return "dirtywater";
-    break;
-  case CHOCOLATE:
-    return "chocolate";
-    break;
-  case MAX_WATER_TYPE:
-    ASSERT(false);
-    break;
-  }
-  ASSERT(false);
-  return "";
 }

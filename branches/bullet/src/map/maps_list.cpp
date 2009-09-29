@@ -53,7 +53,7 @@ InfoMap::InfoMap(const std::string &map_name,
   is_data_loaded(false),
   random_generated(false),
   island_type(RANDOM_GENERATED),
-  water_type(Water::NO_WATER),
+  water_type("no"),
   res_profile(NULL)
 {
   wind.nb_sprite = 0;
@@ -87,7 +87,7 @@ void InfoMap::LoadBasicInfo()
 
 bool InfoMap::ProcessXmlData(const xmlNode *xml)
 {
-    uint tmpisle = (uint) island_type;
+  uint tmpisle = (uint) island_type;
 
   XmlReader::ReadBool(xml, "random", random_generated);
 
@@ -131,9 +131,16 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadBool(xml, "is_open", is_opened);
 
   // reading water type
-  std::string water_name;
-  XmlReader::ReadString(xml, "water", water_name);
-  water_type = (Water::Water_type)Water::GetWaterType(water_name);
+  water_type = "no";
+  XmlReader::ReadString(xml, "water", water_type);
+
+  // check this water type is valid
+  std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
+    "gfx" + PATH_SEPARATOR + "water" + PATH_SEPARATOR + water_type;
+  if (!DoesFileExist(path)) {
+    fprintf(stderr, "Water type %s is not valid\n", water_type.c_str());
+    water_type = "no";
+  }
 
   // Load padding value
   bool add_pad = false;
