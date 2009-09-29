@@ -135,12 +135,12 @@ Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   NeedRedrawing();
 
-  if (button == SDL_BUTTON_LEFT && Contains(mousePosition)) {
+  if (button == Mouse::BUTTON_LEFT() && Contains(mousePosition)) {
 
     SetChoice(m_index + 1);
     return this;
 
-  } else if (button == SDL_BUTTON_RIGHT && Contains(mousePosition)) {
+  } else if (button == Mouse::BUTTON_RIGHT() && Contains(mousePosition)) {
 
     SetChoice(m_index - 1);
     return this;

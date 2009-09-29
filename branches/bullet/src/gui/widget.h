@@ -26,6 +26,7 @@
 #include "graphic/color.h"
 #include "graphic/font.h"
 #include "gui/container.h"
+#include "interface/mouse.h"
 #include <WORMUX_rectangle.h>
 #include <WORMUX_point.h>
 

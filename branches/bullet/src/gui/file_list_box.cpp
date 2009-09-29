@@ -146,7 +146,7 @@ Widget* FileListBox::Click(const Point2i &mousePosition, uint button)
   if (!Contains(mousePosition))
     return NULL;
 
-  if ( button == SDL_BUTTON_LEFT)
+  if ( button == Mouse::BUTTON_LEFT())
   {
     if (ScrollBarPos().Contains(mousePosition))
       scrolling = true;
