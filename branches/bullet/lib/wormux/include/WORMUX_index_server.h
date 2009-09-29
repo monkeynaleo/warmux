@@ -94,7 +94,7 @@ public:
   void Disconnect();
 
   // Answers to pings from the server / close connection if distantly closed
-  void Refresh();
+  void Refresh(bool nowait = false);
 
   // Set the address
   void SetAddress(const char* hostname, int port = 9997) { server_lst[hostname] = port; }

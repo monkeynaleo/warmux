@@ -100,6 +100,7 @@ public:
 
   std::string GetAddress() const;
   bool IsReady(int timeout = 0) const;
+  bool IsReady(int timeout, bool force_check_activity) const;
 
   bool SendInt_NoLock(const int& nbr);
   bool SendInt(const int& nbr);
