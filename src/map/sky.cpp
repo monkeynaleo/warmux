@@ -20,25 +20,28 @@
  *****************************************************************************/
 
 #include <climits>
+#include "include/app.h"
+#include "game/config.h"
+#include "graphic/surface.h"
+#include "graphic/video.h"
 #include "map/sky.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
-#include "graphic/surface.h"
-#include "graphic/video.h"
-#include "include/app.h"
+
 
 void Sky::Init()
 {
-  // That is temporary -> image will be loaded directly without alpha chanel
-  Surface tmp_image = ActiveMap()->ReadImgSky();
   std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
 
-  tmp_image.SetAlpha(0, 0);
-  images.push_back(tmp_image.DisplayFormat());
-  ActiveMap()->ReadImgSky();
-  for (uint i = 0; i < sky_layer.size(); i++)
-    images.push_back(sky_layer[i]);
+  if (Config::GetInstance()->GetDisplayMultiLayerSky() && sky_layer.size() > 0) {
+    for (uint i = 0; i < sky_layer.size(); i++)
+      images.push_back(sky_layer[i]);
+  } else {
+    Surface tmp_image = ActiveMap()->ReadImgSky();
+    tmp_image.SetAlpha(0, 0);
+    images.push_back(tmp_image.DisplayFormat());
+  }
 }
 
 void Sky::Reset()
