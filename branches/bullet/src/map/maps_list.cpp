@@ -135,11 +135,13 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadString(xml, "water", water_type);
 
   // check this water type is valid
-  std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
-    "gfx" + PATH_SEPARATOR + "water" + PATH_SEPARATOR + water_type;
-  if (!DoesFileExist(path)) {
-    fprintf(stderr, "Water type %s is not valid\n", water_type.c_str());
-    water_type = "no";
+  if (water_type != "no") {
+    std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
+      "gfx" + PATH_SEPARATOR + "water" + PATH_SEPARATOR + water_type;
+    if (!DoesFileExist(path)) {
+      fprintf(stderr, "Water type %s is not valid\n", water_type.c_str());
+      water_type = "no";
+    }
   }
 
   // Load padding value
