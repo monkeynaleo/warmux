@@ -292,7 +292,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
   if (map_name[0] == '.') return;
 
   std::string fullname = dir + map_name;
-  if (!IsFolderExist(fullname))
+  if (!DoesFolderExist(fullname))
     return;
 
   InfoMap *nv_terrain = new InfoMap(map_name, fullname + PATH_SEPARATOR);

@@ -51,7 +51,7 @@ bool DoesFileExist(const std::string &name)
 }
 
 // Check if the folder exists
-bool IsFolderExist(const std::string &name)
+bool DoesFolderExist(const std::string &name)
 {
   // Is it a directory ?
   struct stat stat_file;
@@ -69,7 +69,7 @@ bool IsFolderExist(const std::string &name)
 
 bool CreateFolder(const std::string &name)
 {
-  if (IsFolderExist(name))
+  if (DoesFolderExist(name))
     return true; // folder is already existing, nothing to do :-)
 
   std::string dir = name;
@@ -101,7 +101,7 @@ bool CreateFolder(const std::string &name)
 // Delete the folder if it exists
 bool DeleteFolder(const std::string &name)
 {
-  if (IsFolderExist(name)){
+  if (DoesFolderExist(name)){
     return (rmdir(name.c_str())==0);
   }
   return false;
