@@ -653,9 +653,10 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 
   MSG_DEBUG("game", "Ask for state %d", new_state);
 
+  MSG_DEBUG("random.get", "Game::SetState(...): %d");
   Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
-  int seed = RandomSync().GetRand();
-  a->Push(seed);
+  uint seed = RandomSync().GetSeed();
+  a->Push((int)seed);
   a->Push(new_state);
   ActionHandler::GetInstance()->NewAction(a);
 }
