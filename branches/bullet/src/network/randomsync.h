@@ -27,14 +27,15 @@
 
 class RandomSyncGen : public RandomGenerator, public Singleton<RandomSyncGen>
 {
+private:
 #ifdef DEBUG
   uint nb_get;
 #endif
-
+protected:
+  virtual uint GetRand();
+  virtual void SetRand(uint seed);
 public:
-  void InitRandom();
-  uint GetRand();
-  void SetRand(uint seed);
+  virtual void InitRandom();
 };
 
 RandomSyncGen& RandomSync();
