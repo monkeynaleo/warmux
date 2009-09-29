@@ -56,7 +56,7 @@
 #include "particles/particle.h"
 #include "physic/bullet_engine.h"
 #include "sound/jukebox.h"
-#ifdef DEBUG
+#ifdef WMX_LOG
 #include "include/debugmasks.h"
 #endif
 
@@ -337,11 +337,11 @@ void PrintUsage(const char* cmd_name)
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
 	 " [-s|--server] [-c|--client [ip]]\n"
 	 " [-l [ip/hostname of index server]]\n"
-#ifdef DEBUG
+#ifdef WMX_LOG
 	 " [-d|--debug <debug_masks>|all]\n"
 #endif
 	 , cmd_name);
-#ifdef DEBUG
+#ifdef WMX_LOG
   printf("\nWith :\n");
   printf(" <debug_masks> ::= { %s }\n", used_debug_masks.c_str());
 #endif
@@ -393,11 +393,11 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'd':
-#ifdef DEBUG
+#ifdef WMX_LOG
           printf("Debug: %s\n", optarg);
           AddDebugMode(optarg);
 #else
-	  fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug option.\n");
+	  fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
 #endif
           break;
         case 's':
