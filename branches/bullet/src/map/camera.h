@@ -78,7 +78,7 @@ public:
 
   // Auto crop on an object
   // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const GameObj *obj, bool follow, bool in_advance = false);
+  void FollowObject(const GameObj *obj, bool follow, bool in_advance = true);
   void StopFollowingObj(const GameObj* obj);
 
   void CenterOnActiveCharacter();
