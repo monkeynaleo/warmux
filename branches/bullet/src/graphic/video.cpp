@@ -33,6 +33,7 @@ Video::Video()
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
+  hardware = false;
   icon = NULL;
 
   InitSDL();
@@ -135,41 +136,89 @@ void Video::ComputeAvailableConfigs()
   }
 }
 
-bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
+bool Video::__SetConfig(const int width, const int height, const bool _fullscreen, const bool _hardware)
 {
+  bool __fullscreen = _fullscreen;
 #ifdef __APPLE__
-  int flag = 0; // Never set fullscreen with OSX, as it's buggy
-#else
-  int flag = (_fullscreen) ? SDL_FULLSCREEN : 0;
+  __fullscreen = false; // Never set fullscreen with OSX, as it's buggy
 #endif
-  bool window_was_null = window.IsNull();
 
-  // update the main window if needed
-  if( window.IsNull() ||
-     (width != window.GetWidth() ||
-      height != window.GetHeight() ) ||
-      fullscreen != _fullscreen){
+  int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
-    window.SetSurface( SDL_SetVideoMode(width, height, 32,
-                       SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF | flag), false );
-
-    if( window.IsNull() ) {
-      window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE | flag) );
-      std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
-    }
-
-    if( window.IsNull() )
-      return false;
-
-    fullscreen = _fullscreen;
-    Camera::GetInstance()->SetSize(width, height);
-
-    // refresh all the map when switching to higher resolution
-    if (!window_was_null)
-      AppWormux::GetInstance()->RefreshDisplay();
+  if (_hardware) {
+    flags |= SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF;
+  } else {
+    flags |= SDL_SWSURFACE;
   }
 
+  window.SetSurface( SDL_SetVideoMode(width, height, 32, flags) );
+
+  if (window.IsNull())
+    return false;
+
+  if (!_hardware)
+      std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
+
+  fullscreen = __fullscreen;
+  hardware = _hardware;
+
   return true;
+}
+
+bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
+{
+  bool r;
+  bool window_was_null = window.IsNull();
+
+  if (!window_was_null
+      && width == window.GetWidth()
+      && height == window.GetHeight()
+      && fullscreen == _fullscreen)
+    return true; // nothing to change :-)
+
+  int old_width, old_height;
+  bool old_fullscreen, old_hw;
+  if (window_was_null) {
+    old_width = 640;
+    old_height = 480;
+    old_hw = true;
+  } else {
+    old_width = window.GetWidth();
+    old_height = window.GetHeight();
+    old_hw = hardware;
+  }
+  old_fullscreen = fullscreen;
+
+  // Trying with hardware acceleration
+  r = __SetConfig(width, height, _fullscreen, true);
+  if (!r) {
+	fprintf(stderr, 
+		"WARNING: Fail to initialize main window with the following configuration: %dx%d, "
+		"fullscreen: %d, WITH hardware acceleration\n",
+		old_width, old_height, _fullscreen);
+
+    // Trying previous configuration
+    if (! __SetConfig(old_width, old_height, old_fullscreen, old_hw)) {
+
+      // previous configuration fails !?!
+      
+      // let's have another try without hw acceleration and without fullscreen
+      if (! __SetConfig(old_width, old_height, false, false)) {
+	Error(Format("ERROR: Fail to initialize main window with the following configuration: %dx%d, "
+		     "no fullscreen, no hardware acceleration\n",
+		     old_width, old_height));
+	exit(EXIT_FAILURE);
+      }
+    }
+  }
+
+  Camera::GetInstance()->SetSize(width, height);
+
+  // refresh all the map when switching to higher resolution
+  if (!window_was_null)
+    AppWormux::GetInstance()->RefreshDisplay();
+
+  return r;
 }
 
 void Video::ToggleFullscreen()
