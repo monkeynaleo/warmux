@@ -348,7 +348,7 @@ void Config::LoadDefaultValue()
   m_default_config = GetDataDir() + "wormux_default_config.xml";
   Profile *res = GetResourceManager().LoadXMLProfile(m_default_config, true);
 
-  std::cout << "o " << _("Reading default config file") << std::endl;
+  std::cout << "o " << _("Reading the default config file") << std::endl;
   std::ostringstream section;
   Point2i tmp;
 
@@ -397,7 +397,7 @@ void Config::LoadXml(const xmlNode *xml)
 {
   const xmlNode *elem;
 
-  std::cout << "o " << _("Reading personal config file") << std::endl;
+  std::cout << "o " << _("Reading the personal config file") << std::endl;
 
   //=== Map ===
   XmlReader::ReadString(xml, "map", map_name);

@@ -218,7 +218,7 @@ AirAttack::AirAttack() :
 void AirAttack::UpdateTranslationStrings()
 {
   m_name = _("Air Attack");
-  m_help = _("attack direction : Left/Right\nBombing : left clic on target\na bombing per turn");
+  m_help = _("attack direction : Left/Right\nBombing : left click on the target\none bombing per turn");
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)

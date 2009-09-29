@@ -288,7 +288,7 @@ void AppWormux::End() const
   SaveStatToXML("stats.xml");
 #endif
   std::cout << "o " << _("If you found a bug or have a feature request "
-                    "send us a email (in english, please):")
+                    "send us an email (in english, please):")
     << " " << Constants::EMAIL << std::endl;
 }
 
