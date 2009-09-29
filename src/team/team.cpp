@@ -204,20 +204,24 @@ void Team::SelectCharacter(const Character * c)
   ActiveCharacter().StartPlaying();
 }
 
-void Team::NextCharacter()
+void Team::NextCharacter(bool newturn)
 {
   ASSERT (0 < NbAliveCharacter());
 
-  if (GameMode::GetInstance()->auto_change_character) {
+  ActiveCharacter().StopPlaying();
 
-    ActiveCharacter().StopPlaying();
+  // we change character:
+  // - if user asked so
+  // - if it's a new turn and game mode requests a change of character
+  if (!newturn || GameMode::GetInstance()->auto_change_character) {
+
     do {
       ++active_character;
       if (active_character == characters.end())
 	active_character = characters.begin();
     } while (ActiveCharacter().IsDead());
-    ActiveCharacter().StartPlaying();
   }
+  ActiveCharacter().StartPlaying();
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
   Camera::GetInstance()->FollowObject (&ActiveCharacter(), !is_camera_saved);
@@ -238,6 +242,7 @@ void Team::PreviousCharacter()
       active_character = characters.end();
     --active_character;
   } while (ActiveCharacter().IsDead());
+
   ActiveCharacter().StartPlaying();
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
