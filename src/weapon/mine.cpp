@@ -258,16 +258,6 @@ std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count ) co
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-MineConfig * MineConfig::singleton = NULL;
-
-MineConfig * MineConfig::GetInstance()
-{
-  if (singleton == NULL) {
-    singleton = new MineConfig();
-  }
-  return singleton;
-}
-
 MineConfig& Mine::cfg()
 {
   return static_cast<MineConfig&>(*extra_params);
