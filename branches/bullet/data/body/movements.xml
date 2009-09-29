@@ -72,7 +72,6 @@
 <movement name="walk" duration_per_frame="30">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm2-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -83,7 +82,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-10"/>
 		<member type="arm2-left" angle="-10"/>
 		<member type="arm-right" angle="10"/>
@@ -94,7 +92,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-20"/>
 		<member type="arm-right" angle="20"/>
@@ -105,7 +102,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-30"/>
 		<member type="arm-right" angle="30"/>
@@ -116,7 +112,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-40"/>
 		<member type="arm-right" angle="40"/>
@@ -127,7 +122,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-50"/>
 		<member type="arm-right" angle="50"/>
@@ -138,7 +132,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-40"/>
 		<member type="arm-right" angle="40"/>
@@ -149,7 +142,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-30"/>
 		<member type="arm-right" angle="30"/>
@@ -160,7 +152,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm2-left" angle="-20"/>
 		<member type="arm-right" angle="20"/>
@@ -171,7 +162,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-10"/>
 		<member type="arm2-left" angle="-10"/>
 		<member type="arm-right" angle="10"/>
@@ -182,7 +172,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm2-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
@@ -193,7 +182,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-10"/>
 		<member type="arm2-right" angle="-10"/>
 		<member type="arm-left" angle="10"/>
@@ -204,7 +192,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-20"/>
 		<member type="arm-left" angle="20"/>
@@ -215,7 +202,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-30"/>
 		<member type="arm-left" angle="30"/>
@@ -226,7 +212,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-40"/>
 		<member type="arm-left" angle="40"/>
@@ -237,7 +222,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-50"/>
 		<member type="arm-left" angle="50"/>
@@ -248,7 +232,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-40"/>
 		<member type="arm-left" angle="40"/>
@@ -259,7 +242,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-30"/>
 		<member type="arm-left" angle="30"/>
@@ -270,7 +252,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="arm2-right" angle="-20"/>
 		<member type="arm-left" angle="20"/>
@@ -281,7 +262,6 @@
 		&pupils-follow_cursor;
 	</frame>
 	<frame>
-		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-right" angle="-10"/>
 		<member type="arm2-right" angle="-10"/>
 		<member type="arm-left" angle="10"/>
