@@ -715,6 +715,14 @@ uint Body::GetFrameCount() const
 
 void Body::SetFrame(uint no)
 {
+#ifdef DEBUG
+  if (no >= current_mvt->GetFrames().size()) {
+    fprintf(stderr, "%s:%d Clothe: %s\n", __PRETTY_FUNCTION__, __LINE__, current_clothe->GetName().c_str());
+    fprintf(stderr, "%s:%d Movement: %s\n", __PRETTY_FUNCTION__, __LINE__, current_mvt->GetType().c_str());
+    fprintf(stderr, "%s:%d Frame requested: %d - Max nb frames: %d\n", __PRETTY_FUNCTION__, __LINE__,
+	    no, current_mvt->GetFrames().size());
+  }
+#endif
   ASSERT(no < current_mvt->GetFrames().size());
   current_frame = no;
   current_loop = 0;
