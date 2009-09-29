@@ -715,7 +715,16 @@ void Game::SignalCharacterDeath (const Character *character) const
   std::string txt;
 
   ASSERT(IsGameLaunched());
-  if (character->IsGhost()) {
+
+  if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_BASEBALL
+      && &ActiveCharacter() != character) {
+    txt = Format(_("What a beautiful homerun! %s from %s team is in another world..."),
+                 character->GetName().c_str(),
+                 character->GetTeam().GetName().c_str());
+
+    JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "weapon/baseball_homerun");
+
+  } else if (character->IsGhost()) {
     txt = Format(_("%s from %s team has fallen off the map!"),
                  character->GetName().c_str(),
                  character->GetTeam().GetName().c_str());
