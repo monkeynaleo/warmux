@@ -1098,9 +1098,8 @@ void Character::HandleKeyPressed_Jump()
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action a(Action::ACTION_CHARACTER_JUMP);
-    Network::GetInstance()->SendActionToAll(a);
-    Jump();
+    Action *a = new Action(Action::ACTION_CHARACTER_JUMP);
+    ActionHandler::GetInstance()->NewAction(a);
   }
 }
 
@@ -1112,9 +1111,8 @@ void Character::HandleKeyPressed_HighJump()
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
-    Network::GetInstance()->SendActionToAll(a);
-    HighJump();
+    Action *a = new Action(Action::ACTION_CHARACTER_HIGH_JUMP);
+    ActionHandler::GetInstance()->NewAction(a);
   }
 }
 
@@ -1126,9 +1124,8 @@ void Character::HandleKeyPressed_BackJump()
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action a(Action::ACTION_CHARACTER_BACK_JUMP);
-    Network::GetInstance()->SendActionToAll(a);
-    BackJump();
+    Action *a = new Action(Action::ACTION_CHARACTER_BACK_JUMP);
+    ActionHandler::GetInstance()->NewAction(a);
   }
 }
 
