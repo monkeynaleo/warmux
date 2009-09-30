@@ -153,7 +153,9 @@ void NetworkThread::ReceiveActions()
       // Means an error
       else if (num_ready == -1)
       {
-        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+        //Spams a lot under windows without the errno check...
+        if (errno<0)
+          std::cerr << "SDLNet_CheckSockets: " << SDLNet_GetError() << std::endl;
         continue; //Or break?
       }
     }
