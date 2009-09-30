@@ -632,11 +632,17 @@ bool Game::NewBox()
   return true;
 }
 
-
-void Game::Really_SetState(game_loop_state_t new_state)
+void Game::SetState(game_loop_state_t new_state, bool begin_game)
 {
+  if (begin_game &&
+      (Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal()))
+    Network::GetInstance()->SetTurnMaster(true);
+
   // already in good state, nothing to do
-  if (state == new_state) return;
+  if ((state == new_state) && !begin_game) return;
+
+  MSG_DEBUG("game", "Ask for state %d", new_state);
+
   state = new_state;
 
   Interface::GetInstance()->weapons_menu.Hide();
@@ -659,31 +665,6 @@ void Game::Really_SetState(game_loop_state_t new_state)
     m_current_turn++;
     break;
   }
-}
-
-void Game::SetState(game_loop_state_t new_state, bool begin_game) const
-{
-  if (begin_game &&
-      (Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal()))
-    Network::GetInstance()->SetTurnMaster(true);
-
-  if (!Network::GetInstance()->IsTurnMaster())
-    return;
-
-  // already in good state, nothing to do
-  if ((state == new_state) && !begin_game) return;
-
-  // Send information about energy and position of every characters
-  // ONLY at the beginning of a new turn!
-  // (else you can send unstable information of a character which is moving)
-  // See bug #10668
-  if (Network::GetInstance()->IsTurnMaster() && new_state == PLAYING)
-    SyncCharacters();
-
-  MSG_DEBUG("game", "Ask for state %d", new_state);
-  Action *a = new Action(Action::ACTION_GAMELOOP_SET_STATE);
-  a->Push(new_state);
-  ActionHandler::GetInstance()->NewAction(a);
 }
 
 PhysicalObj* Game::GetMovingObject() const
@@ -736,7 +717,7 @@ bool Game::IsAnythingMoving() const
 }
 
 // Signal death of a character
-void Game::SignalCharacterDeath (const Character *character) const
+void Game::SignalCharacterDeath (const Character *character)
 {
   std::string txt;
 
@@ -813,7 +794,7 @@ void Game::SignalCharacterDeath (const Character *character) const
 }
 
 // Signal falling or any kind of damage of a character
-void Game::SignalCharacterDamage(const Character *character) const
+void Game::SignalCharacterDamage(const Character *character)
 {
   MSG_DEBUG("game.endofturn", "%s has been hurt", character->GetName().c_str());
 
