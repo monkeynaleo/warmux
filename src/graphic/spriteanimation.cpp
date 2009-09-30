@@ -169,9 +169,12 @@ void SpriteAnimation::CalculateWait()
   MSG_DEBUG("eye", "CalculateWait stat   :  wait = %d , random = %d", loop_wait, loop_wait_random);
   MSG_DEBUG("eye", "CalculateWait 1 : %d", last_update);
 
-  if(loop_wait !=0)
-  {
-  last_update += loop_wait - loop_wait_random/2 + RandomSync().GetInt(0, loop_wait_random);
+  if (loop_wait != 0) {
+    last_update += loop_wait;
+    if (loop_wait_random != 0) {
+      MSG_DEBUG("random.get","SpriteAnimation::CalculateWait()");
+      last_update +=  RandomSync().GetInt(0, loop_wait_random) - loop_wait_random/2;
+    }
   }
   MSG_DEBUG("eye", "CalculateWait 2 : %d", last_update);
 }
