@@ -714,6 +714,14 @@ static void Action_Network_VerifyRandomSync(Action *a)
     RandomSync().SetSeed(remote_seed);
 }
 
+static void Action_Time_VerifySync(Action *a)
+{
+  uint local_time = Time::GetInstance()->Read();
+  uint remote_time = (uint)(a->PopInt());
+  MSG_DEBUG("time.verify","Verify time: %d (local) == %d (remote)", local_time, remote_time);
+  ASSERT(local_time == remote_time);
+}
+
 // Nothing to do here. Just for time synchronisation
 static void Action_Network_Ping(Action */*a*/)
 {
@@ -961,6 +969,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC, "NETWORK_verify_random_sync", &Action_Network_VerifyRandomSync);
+  ActionHandler::GetInstance()->Register (Action::ACTION_TIME_VERIFY_SYNC, "TIME_verify_sync", &Action_Time_VerifySync);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_client_connect", &Action_Info_ClientConnect);
 

@@ -524,14 +524,22 @@ void Game::MainLoop()
       FOR_ALL_CHARACTERS(team,character)
         character->GetBody()->Build();
 
-      // The action which verifys the random seed must be the first action sheduled!
-      // Otherwise the following could happen:
-      // 1. Action C gets sheduled which draws values from the random source.
-      // 2. Action V gets sheduled which verifies that random seed is X.
-      // 3. Action C gets executed: As a result the random seed has changed to another value Y.
-      // 4. Action V gets executed: It fails as the random seed is no longer X but Y.
-      if (Network::GetInstance()->IsTurnMaster())
+
+      if (Network::GetInstance()->IsTurnMaster()) {
+        // The action which verifys the random seed must be the first action sheduled!
+        // Otherwise the following could happen:
+        // 1. Action C gets sheduled which draws values from the random source.
+        // 2. Action V gets sheduled which verifies that random seed is X.
+        // 3. Action C gets executed: As a result the random seed has changed to another value Y.
+        // 4. Action V gets executed: It fails as the random seed is no longer X but Y.
         RandomSync().Verify();
+
+#ifdef DEBUG
+        Action* action = new Action(Action::ACTION_TIME_VERIFY_SYNC);
+        action->Push((int)Time::GetInstance()->Read());
+        ActionHandler::GetInstance()->NewAction(action);
+#endif
+      }
 
       if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
         PingClient();
