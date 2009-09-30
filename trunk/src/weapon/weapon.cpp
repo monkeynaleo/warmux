@@ -237,32 +237,6 @@ bool Weapon::CanChangeWeapon() const
   return true;
 }
 
-void Weapon::NewActionWeaponShoot() const
-{
-  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-
-  if (ActiveCharacter().IsPreparingShoot()) { // a shot is already in progress
-#ifdef DEBUG
-    fprintf(stderr, "\nWARNING: Weapon::NewActionWeaponShoot: a shot is already in progress!\n");
-    fprintf(stderr, "         Maybe, shot anim for this weapon is longer than m_time_between_each_shot\n\n");
-#endif
-    return;
-  }
-
-  Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
-                               m_strength,
-                               ActiveCharacter().GetAbsFiringAngle());
-  ActionHandler::GetInstance()->NewAction(a_shoot);
-}
-
-void Weapon::NewActionWeaponStopUse() const
-{
-  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-
-  Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
 void Weapon::PrepareShoot(double strength, double angle)
 {
   MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
@@ -334,12 +308,41 @@ bool Weapon::Shoot()
   return true;
 }
 
+void Weapon::Refresh()
+{
+  if (IsLoading() && !ActiveCharacter().IsPreparingShoot()) {
+    // Strength == max strength -> Fire !!!
+    if (ReadStrength() >= max_strength) {
+        PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+    } else {
+        // still pressing the Space key
+        UpdateStrength();
+    }
+  }
+}
+
+void Weapon::StartShooting()
+{
+  if (ActiveCharacter().IsPreparingShoot())
+    return;
+
+  if (max_strength != 0 && IsReady())
+    InitLoading();
+}
+
+void Weapon::StopShooting()
+{
+  if (!ActiveCharacter().IsPreparingShoot()) {
+    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+  }
+}
+
 void Weapon::RepeatShoot()
 {
   uint current_time = Time::GetInstance()->Read();
 
   if (current_time - m_last_fire_time >= m_time_between_each_shot) {
-    NewActionWeaponShoot();
+    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
     // this is done in Weapon::Shoot() but let's set meanwhile,
     // to prevent problems with rapid fire weapons such as submachine
     m_last_fire_time = current_time;
@@ -518,13 +521,7 @@ void Weapon::Draw(){
   if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
 #endif
     DrawWeaponFire();
-  weapon_strength_bar.visible = false;
-
-  // Do we need to draw strength_bar ? (real draw is done by class Interface)
-  // We do not draw on the network
-  if (max_strength != 0 && IsReady() && !IsInUse() &&
-      (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    weapon_strength_bar.visible = true;
+  weapon_strength_bar.visible = IsLoading();
 
   DrawAmmoUnits();
 
@@ -750,34 +747,14 @@ void Weapon::ActionStopUse()
 // #################### SHOOT
 void Weapon::HandleKeyPressed_Shoot()
 {
-  if (ActiveCharacter().IsPreparingShoot())
-    return;
-
-  if (max_strength != 0 && IsReady())
-    InitLoading();
-}
-
-void Weapon::HandleKeyRefreshed_Shoot()
-{
-  if (ActiveCharacter().IsPreparingShoot())
-    return;
-  if (!IsLoading())
-    return;
-
-  // Strength == max strength -> Fire !!!
-  if (ReadStrength() >= max_strength) {
-    NewActionWeaponShoot();
-  } else {
-    // still pressing the Space key
-    UpdateStrength();
-  }
+  Action *a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Weapon::HandleKeyReleased_Shoot()
 {
-  if (!ActiveCharacter().IsPreparingShoot()) {
-    NewActionWeaponShoot();
-  }
+  Action *a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Weapon::p_Deselect()

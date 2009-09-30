@@ -146,9 +146,22 @@ void Airhammer::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
+void Airhammer::StartShooting()
+{
+  if (EnoughAmmoUnit()) {
+    Weapon::RepeatShoot();
+  }
+}
+void Airhammer::StopShooting()
+{
+  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
+  Game::GetInstance()->SetState(Game::HAS_PLAYED);
+  p_Deselect();
+}
+
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyRefreshed_Shoot()
+void Airhammer::Refresh()
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();
@@ -157,7 +170,7 @@ void Airhammer::HandleKeyRefreshed_Shoot()
 
 bool Airhammer::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read() || m_is_active;
 }
 
 void Airhammer::p_Select()

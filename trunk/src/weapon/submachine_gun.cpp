@@ -138,8 +138,7 @@ bool SubMachineGun::p_Shoot()
 
 void SubMachineGun::Refresh()
 {
-  if (shoot_started
-      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())) {
+  if (shoot_started) {
     Weapon::RepeatShoot();
   }
 }

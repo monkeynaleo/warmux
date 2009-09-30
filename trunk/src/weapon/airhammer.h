@@ -43,16 +43,15 @@ class Airhammer : public Weapon
     void p_Select();
     void p_Deselect();
     bool p_Shoot();
-    void Refresh() { };
+    void Refresh();
 
   public:
     Airhammer();
     AirhammerConfig &cfg();
     bool IsInUse() const;
     void ActionStopUse();
-    void HandleKeyPressed_Shoot() { HandleKeyRefreshed_Shoot(); };
-    void HandleKeyRefreshed_Shoot();
-    void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
+    void StartShooting();
+    void StopShooting();
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };

@@ -151,7 +151,7 @@ public:
 protected:
   virtual void p_Select() { m_last_fire_time = 0; };
   virtual void p_Deselect();
-  virtual void Refresh() = 0;
+  virtual void Refresh();
   virtual bool p_Shoot() = 0;
 
   virtual void DrawWeaponFire();
@@ -206,10 +206,6 @@ public:
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
 
-  // Create a new action "shoot/stop_use" in action handler
-  void NewActionWeaponShoot() const;
-  void NewActionWeaponStopUse() const;
-
   // Prepare the shoot : set the angle and strenght of the weapon
   // Begin the shooting animation of the character
   void PrepareShoot(double strength, double angle);
@@ -252,9 +248,9 @@ public:
   // Handle a keyboard event.
 
   // Key Shoot management
-  virtual void HandleKeyPressed_Shoot();
-  virtual void HandleKeyRefreshed_Shoot();
-  virtual void HandleKeyReleased_Shoot();
+  void HandleKeyPressed_Shoot();
+  void HandleKeyRefreshed_Shoot() {};
+  void HandleKeyReleased_Shoot();
 
   // To override standard moves of character
   virtual void HandleKeyPressed_MoveRight(bool slowly);
@@ -350,6 +346,9 @@ public:
 
   virtual void StartMovingDown() {};
   virtual void StopMovingDown() {};
+
+  virtual void StartShooting();
+  virtual void StopShooting();
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;

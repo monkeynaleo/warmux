@@ -31,19 +31,15 @@ class Blowtorch : public Weapon
   protected:
     bool p_Shoot();
     void p_Deselect();
-    void Refresh() { };
+    void Refresh();
 
     void RepeatShoot() const ;
   public:
     Blowtorch();
     BlowtorchConfig& cfg();
 
-    virtual void ActionStopUse();
-
-    virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot() { NewActionWeaponStopUse(); };
-    bool IsInUse() const;
+    void StartShooting();
+    void StopShooting();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

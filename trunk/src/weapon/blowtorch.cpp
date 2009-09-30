@@ -26,7 +26,6 @@
 #include "character/character.h"
 #include "character/move.h"
 #include "character/body.h"
-#include "include/action_handler.h"
 #include "map/map.h"
 #include "game/game_mode.h"
 #include "game/time.h"
@@ -70,16 +69,6 @@ void Blowtorch::p_Deselect()
   ActiveTeam().AccessNbUnits() = 0;
 }
 
-bool Blowtorch::IsInUse() const
-{
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
-}
-
-void Blowtorch::ActionStopUse()
-{
-  SignalTurnEnd();
-}
-
 bool Blowtorch::p_Shoot()
 {
   Point2i hole = ActiveCharacter().GetCenter();
@@ -97,16 +86,23 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::HandleKeyPressed_Shoot()
+void Blowtorch::StartShooting()
 {
   ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
   ActiveCharacter().SetRebounding(false);
   ActiveCharacter().body->StartWalk();
 
-  HandleKeyRefreshed_Shoot();
+  m_is_active = true;
 }
 
-void Blowtorch::HandleKeyRefreshed_Shoot()
+
+void Blowtorch::StopShooting()
+{
+  m_is_active = false;
+  SignalTurnEnd();
+}
+
+void Blowtorch::Refresh()
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();

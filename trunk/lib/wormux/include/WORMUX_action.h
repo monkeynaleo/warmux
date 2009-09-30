@@ -92,10 +92,11 @@ public:
 
     // ########################################################
     // Using Weapon
-    ACTION_WEAPON_SHOOT,
     ACTION_WEAPON_STOP_USE,
 
     // Quite standard weapon options
+    ACTION_WEAPON_START_SHOOTING,
+    ACTION_WEAPON_STOP_SHOOTING,
     ACTION_WEAPON_SET_TIMEOUT,
     ACTION_WEAPON_SET_TARGET,
     ACTION_WEAPON_START_MOVING_LEFT,
@@ -110,9 +111,6 @@ public:
 
     // Special weapon options
     ACTION_WEAPON_CONSTRUCTION,
-    ACTION_WEAPON_GNU,
-    ACTION_WEAPON_POLECAT,
-    ACTION_WEAPON_SUPERTUX,
 
     // Bonus Box
     ACTION_DROP_BONUS_BOX,

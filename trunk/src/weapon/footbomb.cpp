@@ -143,7 +143,7 @@ void FootBomb::SetEnergyDelta(int /* delta */, bool /* do_report */){};
 //-----------------------------------------------------------------------------
 
 FootBombLauncher::FootBombLauncher() :
-  WeaponLauncher(WEAPON_FOOTBOMB, "footbomb", new FootBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+  WeaponLauncher(WEAPON_FOOTBOMB, "footbomb", new FootBombConfig())
 {
   UpdateTranslationStrings();
 

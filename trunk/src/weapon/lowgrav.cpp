@@ -67,14 +67,13 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-void LowGrav::HandleKeyPressed_Shoot()
+void LowGrav::StartShooting()
 {
-  if (!IsInUse()){
-    NewActionWeaponShoot();
-
-  }else{
-    NewActionWeaponStopUse();
+  if (IsInUse()) {
+    ActionStopUse();
     use.Stop();
+  } else {
+    Weapon::StartShooting();
   }
 }
 

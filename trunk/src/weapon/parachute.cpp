@@ -169,7 +169,7 @@ std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count
             items_count), TeamName, items_count);
 }
 
-void Parachute::HandleKeyPressed_Shoot()
+void Parachute::StartShooting()
 {
   if (open) {
     img->Finish();
@@ -177,7 +177,7 @@ void Parachute::HandleKeyPressed_Shoot()
     closing = false;
     UseAmmoUnit();
   } else {
-    Weapon::HandleKeyPressed_Shoot();
+    Weapon::StartShooting();
   }
 }
 

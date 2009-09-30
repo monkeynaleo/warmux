@@ -808,12 +808,18 @@ void Grapple::HandleKeyReleased_MoveRight(bool slowly)
     ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
 
-void Grapple::HandleKeyPressed_Shoot()
+void Grapple::StartShooting()
 {
-  if (IsInUse()) {
-    NewActionWeaponStopUse();
-  } else
-    NewActionWeaponShoot();
+  if (!IsInUse())
+    Weapon::StartShooting();
+}
+
+void Grapple::StopShooting()
+{
+  if (IsInUse())
+    ActionStopUse();
+  else
+    Weapon::StopShooting();
 }
 
 void Grapple::PrintDebugRope()

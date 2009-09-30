@@ -125,6 +125,9 @@ class Grapple : public Weapon
     void StartMovingDown();
     void StopMovingDown();
 
+    void StartShooting();
+    void StopShooting();
+
     // Keys management
     void HandleKeyPressed_Up(bool slowly);
     void HandleKeyRefreshed_Up(bool slowly);
@@ -141,10 +144,6 @@ class Grapple : public Weapon
     void HandleKeyPressed_MoveLeft(bool slowly);
     void HandleKeyRefreshed_MoveLeft(bool slowly);
     void HandleKeyReleased_MoveLeft(bool slowly);
-
-    void HandleKeyPressed_Shoot();
-    void HandleKeyRefreshed_Shoot() { };
-    void HandleKeyReleased_Shoot() { };
 
     void PrintDebugRope();
 };

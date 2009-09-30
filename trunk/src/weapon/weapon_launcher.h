@@ -124,7 +124,6 @@ class WeaponLauncher : public Weapon
     virtual void p_Select();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
-    virtual void Refresh() { };
   private:
     void DirectExplosion();
     void NetworkSetTimeoutProjectile() const;
@@ -161,6 +160,7 @@ class WeaponLauncher : public Weapon
 
     virtual void IncMissedShots();
     virtual bool IsInUse() const;
+    virtual bool IsOnCooldownFromShot() const;
     // Handle mouse events
     virtual void HandleMouseWheelUp(bool shift);
     virtual void HandleMouseWheelDown(bool shift);

@@ -47,7 +47,7 @@ class Parachute : public Weapon
     void Draw();
     bool IsInUse() const;
 
-    void HandleKeyPressed_Shoot();
+    void StartShooting();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

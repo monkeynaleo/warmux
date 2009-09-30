@@ -124,6 +124,7 @@ FlameThrower::FlameThrower() : WeaponLauncher(WEAPON_FLAMETHROWER, "flamethrower
 
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
+  shooting = false;
 
   ReloadLauncher();
 }
@@ -164,10 +165,27 @@ bool FlameThrower::p_Shoot()
   return true;
 }
 
-void FlameThrower::HandleKeyRefreshed_Shoot()
+void FlameThrower::p_Deselect()
 {
-  if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+  WeaponLauncher::p_Deselect();
+  shooting = false;
+}
+
+void FlameThrower::StartShooting()
+{
+  shooting = true;
+  m_is_active = true;
+}
+
+void FlameThrower::StopShooting()
+{
+  shooting = false;
+}
+
+void FlameThrower::Refresh()
+{
+  if (shooting && EnoughAmmoUnit()) {
+    WeaponLauncher::RepeatShoot();
   }
 }
 
