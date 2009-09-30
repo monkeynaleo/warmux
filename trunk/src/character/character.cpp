@@ -130,6 +130,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step(-1),
   particle_engine(new ParticleEngine(500)),
   is_playing(false),
+  move_left_pressed(false),
+  move_left_slowly_pressed(false),
+  move_right_pressed(false),
+  move_right_slowly_pressed(false),
   previous_strength(0),
   body(NULL)
 {
@@ -186,6 +190,10 @@ Character::Character (const Character& acharacter) :
   channel_step(acharacter.channel_step),
   particle_engine(new ParticleEngine(250)),
   is_playing(acharacter.is_playing),
+  move_left_pressed(false),
+  move_left_slowly_pressed(false),
+  move_right_pressed(false),
+  move_right_slowly_pressed(false),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
@@ -344,6 +352,11 @@ void Character::Die()
     SetClothe("dead");
     SetMovement("breathe");
     SetCollisionModel(true, false, false);
+
+    move_left_pressed = false;
+    move_left_slowly_pressed = false;
+    move_right_pressed = false;
+    move_right_slowly_pressed = false;
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
@@ -518,6 +531,16 @@ void Character::UpdateLastMovingTime()
 
 void Character::Refresh()
 {
+  if (IsImmobile()) {
+    bool left =(move_left_pressed || move_left_slowly_pressed);
+    bool right = (move_right_pressed || move_right_slowly_pressed);
+    if (left && !right) {
+      Move(DIRECTION_LEFT, move_left_slowly_pressed);
+    } else if (right && !left) {
+      Move(DIRECTION_RIGHT, move_right_slowly_pressed);
+    }
+  }
+
   if (IsGhost()) return;
 
   UpdatePosition();
@@ -814,6 +837,10 @@ void Character::StopPlaying()
   SetMovement("breathe");
   body->ResetWalk();
   SetRebounding(true);
+  move_left_pressed = false;
+  move_left_slowly_pressed = false;
+  move_right_pressed = false;
+  move_right_slowly_pressed = false;
 }
 
 // Begining of turn or changed to this character
@@ -939,54 +966,95 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 // ###################################################################
 
+void Character::StopWalkingIfNecessary()
+{
+  bool right = move_right_pressed || move_right_slowly_pressed;
+  bool left = move_left_pressed || move_left_slowly_pressed;
+  if ((right == left) || (!left && !right))
+    body->StopWalk();
+}
+
 // #################### MOVE_RIGHT
+void Character::StartMovingRight(bool slowly)
+{
+  if (slowly)
+    move_right_slowly_pressed = true;
+  else
+    move_right_pressed = true;
+  StopWalkingIfNecessary();
+
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Hide();
+  }
+}
+
+void Character::StopMovingRight(bool slowly)
+{
+  if (slowly)
+    move_right_slowly_pressed = false;
+  else
+    move_right_pressed = false;
+  StopWalkingIfNecessary();
+
+  if (Network::GetInstance()->IsTurnMaster())
+    ActiveTeam().crosshair.Show();
+}
+
 void Character::HandleKeyPressed_MoveRight(bool slowly)
 {
-  StartWalk(slowly);
-
-  HandleKeyRefreshed_MoveRight(slowly);
+  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_RIGHT);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Character::HandleKeyRefreshed_MoveRight(bool slowly)
+void Character::HandleKeyReleased_MoveRight(bool slowly)
 {
-  HideGameInterface();
-
-  ActiveTeam().crosshair.Hide();
-
-  if (IsImmobile())
-    Move(DIRECTION_RIGHT, slowly);
-}
-
-void Character::HandleKeyReleased_MoveRight(bool /*slowly*/)
-{
-  StopWalk();
-
-  ActiveTeam().crosshair.Show();
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_RIGHT);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // #################### MOVE_LEFT
+
+void Character::StartMovingLeft(bool slowly)
+{
+  if (slowly)
+    move_left_slowly_pressed = true;
+  else
+    move_left_pressed = true;
+  StopWalkingIfNecessary();
+
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Hide();
+  }
+}
+
+void Character::StopMovingLeft(bool slowly)
+{
+  if (slowly)
+    move_left_slowly_pressed = false;
+  else
+    move_left_pressed = false;
+  StopWalkingIfNecessary();
+
+  if (Network::GetInstance()->IsTurnMaster())
+    ActiveTeam().crosshair.Show();
+}
+
 void Character::HandleKeyPressed_MoveLeft(bool slowly)
 {
-  StartWalk(slowly);
-
-  HandleKeyRefreshed_MoveLeft(slowly);
+  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_LEFT);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Character::HandleKeyRefreshed_MoveLeft(bool slowly)
+void Character::HandleKeyReleased_MoveLeft(bool slowly)
 {
-  HideGameInterface();
-
-  ActiveTeam().crosshair.Hide();
-
-  if (IsImmobile())
-    Move(DIRECTION_LEFT, slowly);
-}
-
-void Character::HandleKeyReleased_MoveLeft(bool /*slowly*/)
-{
-  body->StopWalk();
-
-  ActiveTeam().crosshair.Show();
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_LEFT);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // #################### UP
@@ -1063,6 +1131,4 @@ void Character::HandleKeyPressed_BackJump()
     BackJump();
   }
 }
-
-
 
