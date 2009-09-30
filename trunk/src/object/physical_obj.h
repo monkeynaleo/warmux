@@ -65,6 +65,8 @@ private:
   // Object size and position.
   int m_width, m_height;
 
+  bool can_be_ghost;
+
 protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -93,6 +95,8 @@ public:
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
+
+  void CanBeGhost(bool state);
 
   // Set/Get position
   void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };

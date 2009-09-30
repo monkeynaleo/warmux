@@ -38,14 +38,15 @@ class WindParticle : public PhysicalObj
 {
 private:
   /* You should not need this */
-  WindParticle(const WindParticle&);
-  const WindParticle& operator=(const WindParticle&);
+  WindParticle(const WindParticle & obj);
+  const WindParticle & operator = (const WindParticle & obj);
 
-  Sprite *sprite;
-  Sprite *flipped;
+  Sprite * sprite;
+  Sprite * flipped;
 
 public:
-  WindParticle(const std::string& xml_file, float scale);
+  WindParticle(const std::string & xml_file, 
+               float scale);
   ~WindParticle();
   void Draw();
   void Refresh();

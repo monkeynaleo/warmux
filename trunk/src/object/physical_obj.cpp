@@ -65,6 +65,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_bottom(0),
   m_width(0),
   m_height(0),
+  can_be_ghost(true),
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object(NULL),
   m_minimum_overlapse_time(0),
@@ -101,7 +102,7 @@ void PhysicalObj::SetXY(const Point2d &position)
 {
   CheckOverlapping();
 
-  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) )
+  if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) && can_be_ghost )
     {
       SetPhysXY( position / PIXEL_PER_METER );
       Ghost();
@@ -395,12 +396,16 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
 void PhysicalObj::UpdatePosition ()
 {
   // No ghost allowed here !
-  if (IsGhost()) return;
+  if (IsGhost()) { 
+    return;
+  }
 
   if (m_collides_with_ground)
     {
       // object is not moving and has no reason to move
-      if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
+      if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) {
+      return;
+      }
 
       // object is not moving BUT it should fall !
       if ( !IsMoving() && FootsInVacuum() ) StartMoving();
@@ -409,7 +414,9 @@ void PhysicalObj::UpdatePosition ()
   // Compute new position.
   RunPhysicalEngine();
 
-  if (IsGhost()) return;
+  if (IsGhost()) {
+    return;
+  }
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if (m_collides_with_ground)
@@ -558,6 +565,11 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
       ASSERT(!m_collides_with_objects);
     }
   }
+}
+
+void PhysicalObj::CanBeGhost(bool state) 
+{
+  can_be_ghost = state;
 }
 
 void PhysicalObj::CheckRebound()

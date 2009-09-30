@@ -421,11 +421,13 @@ Point2d Physics::ComputeNextXY(double delta_t){
 
   MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t);
 
-  if (m_motion_type == FreeFall)
+  if (FreeFall == m_motion_type) {
     ComputeFallNextXY(delta_t);
+  } 
 
-  if (m_motion_type == Pendulum)
+  if (Pendulum == m_motion_type) {
     ComputePendulumNextXY(delta_t);
+  }
 
   return Point2d(m_pos_x.x0, m_pos_y.x0);
 }
