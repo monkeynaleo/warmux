@@ -119,6 +119,7 @@ public:
     // ########################################################
     ACTION_NETWORK_PING,
     ACTION_NETWORK_VERIFY_RANDOM_SYNC,
+    ACTION_TIME_VERIFY_SYNC,
     // ########################################################
   } Action_t;
 
