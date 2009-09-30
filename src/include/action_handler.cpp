@@ -794,8 +794,7 @@ static void Action_Network_VerifyRandomSync(Action *a)
   uint remote_seed = (uint)(a->PopInt());
   MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
 
-  if (IsLOGGING("random"))
-    ASSERT(remote_seed == local_seed);
+  ASSERT(remote_seed == local_seed);
 
   if (local_seed != remote_seed)
     RandomSync().SetSeed(remote_seed);
