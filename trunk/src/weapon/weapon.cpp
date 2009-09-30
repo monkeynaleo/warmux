@@ -34,6 +34,7 @@
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "map/camera.h"
+#include "network/network.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
@@ -343,6 +344,54 @@ void Weapon::RepeatShoot()
     // to prevent problems with rapid fire weapons such as submachine
     m_last_fire_time = current_time;
   }
+}
+
+void Weapon::StartMovingLeftForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_LEFT);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StopMovingLeftForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_LEFT);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StartMovingRightForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_RIGHT);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StopMovingRightForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_RIGHT);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StartMovingUpForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_UP);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StopMovingUpForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_UP);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StartMovingDownForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_DOWN);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Weapon::StopMovingDownForAllPlayers()
+{
+  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_DOWN);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // Compute position of weapon's image

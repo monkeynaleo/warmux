@@ -639,6 +639,46 @@ static void Action_Weapon_SetTimeout (Action *a)
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
+static void Action_Weapon_StartMovingLeft(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StartMovingLeft();
+}
+
+static void Action_Weapon_StopMovingLeft(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StopMovingLeft();
+}
+
+static void Action_Weapon_StartMovingRight(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StartMovingRight();
+}
+
+static void Action_Weapon_StopMovingRight(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StopMovingRight();
+}
+
+static void Action_Weapon_StartMovingUp(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StartMovingUp();
+}
+
+static void Action_Weapon_StopMovingUp(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StopMovingUp();
+}
+
+static void Action_Weapon_StartMovingDown(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StartMovingDown();
+}
+
+static void Action_Weapon_StopMovingDown(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StopMovingDown();
+}
+
 static void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
@@ -981,6 +1021,14 @@ void Action_Handler_Init()
   // Quite standard weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_LEFT, "WEAPON_start_moving_left", &Action_Weapon_StartMovingLeft);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_LEFT, "WEAPON_stop_moving_left", &Action_Weapon_StopMovingLeft);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_RIGHT, "WEAPON_start_moving_right", &Action_Weapon_StartMovingRight);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_RIGHT, "WEAPON_stop_moving_right", &Action_Weapon_StopMovingRight);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_UP, "WEAPON_start_moving_up", &Action_Weapon_StartMovingUp);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_UP, "WEAPON_stop_moving_up", &Action_Weapon_StopMovingUp);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_DOWN, "WEAPON_start_moving_down", &Action_Weapon_StartMovingDown);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_DOWN, "WEAPON_stop_moving_down", &Action_Weapon_StopMovingDown);
 
   // Special weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);

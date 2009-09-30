@@ -158,6 +158,18 @@ protected:
   void DrawAmmoUnits() const;
 
   void RepeatShoot();
+
+  void StartMovingLeftForAllPlayers();
+  void StopMovingLeftForAllPlayers();
+
+  void StartMovingRightForAllPlayers();
+  void StopMovingRightForAllPlayers();
+
+  void StartMovingUpForAllPlayers();
+  void StopMovingUpForAllPlayers();
+
+  void StartMovingDownForAllPlayers();
+  void StopMovingDownForAllPlayers();
 public:
   Weapon(Weapon_type type,
          const std::string &id,
@@ -326,6 +338,18 @@ public:
   inline const double &GetMinAngle() const {return min_angle;}
   inline void SetMaxAngle(double max) {max_angle = max;}
   inline const double &GetMaxAngle() const {return max_angle;}
+
+  virtual void StartMovingLeft() {};
+  virtual void StopMovingLeft() {};
+
+  virtual void StartMovingRight() {};
+  virtual void StopMovingRight() {};
+
+  virtual void StartMovingUp() {};
+  virtual void StopMovingUp() {};
+
+  virtual void StartMovingDown() {};
+  virtual void StopMovingDown() {};
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;
