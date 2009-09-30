@@ -458,7 +458,7 @@ void Character::Jump(double strength, double angle /*in radian */)
   UpdateLastMovingTime();
   walking_time = Time::GetInstance()->Read();
 
-  if (!CanJump() && ActiveTeam().IsLocal()) return;
+  if (!CanJump()) return;
 
   SetMovement("jump");
 
