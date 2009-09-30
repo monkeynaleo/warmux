@@ -143,6 +143,9 @@ void Construct::ChooseTarget(Point2i mouse_pos)
       return;
   }
 
+  construct_spr->SetRotation_rad(angle);
+  construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+
   target_chosen = true;
   Shoot();
 }
