@@ -171,17 +171,13 @@ void GameBlitz::__SetState_PLAYING()
 
   // Select the next team
   ASSERT (!IsGameFinished());
+  GetTeamsList().NextTeam();
 
-  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal()) {
-
-    GetTeamsList().NextTeam();
-
-    // Are we turn master for next turn ?
-    if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-      Network::GetInstance()->SetTurnMaster(true);
-    else
-      Network::GetInstance()->SetTurnMaster(false);
-  }
+  // Are we turn master for next turn ?
+  if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    Network::GetInstance()->SetTurnMaster(true);
+  else
+    Network::GetInstance()->SetTurnMaster(false);
 
   // initialize counter
   Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second);
