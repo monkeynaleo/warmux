@@ -597,6 +597,30 @@ static void Action_Character_StopMovingRight(Action *a)
   ActiveCharacter().StopMovingRight(slowly);
 }
 
+static void Action_Character_StartIncreasingFireAngle(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StartIncreasingFireAngle(slowly);
+}
+
+static void Action_Character_StopIncreasingFireAngle(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StopIncreasingFireAngle(slowly);
+}
+
+static void Action_Character_StartDecreasingFireAngle(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StartDecreasingFireAngle(slowly);
+}
+
+static void Action_Character_StopDecreasingFireAngle(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StopDecreasingFireAngle(slowly);
+}
+
 static void Action_Weapon_Shoot (Action *a)
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
@@ -959,6 +983,10 @@ void Action_Handler_Init()
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE, "CHARACTER_start_increasing_fire_angle", &Action_Character_StartIncreasingFireAngle);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE, "CHARACTER_stop_increasing_fire_angle", &Action_Character_StopIncreasingFireAngle);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE, "CHARACTER_start_decreasing_fire_angle", &Action_Character_StartDecreasingFireAngle);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE, "CHARACTER_stop_decreasing_fire_angle", &Action_Character_StopDecreasingFireAngle);
 
   // ########################################################
   // Using Weapon
