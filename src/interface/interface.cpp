@@ -570,6 +570,13 @@ void Interface::UpdateTimer(uint utimer, const Color& color)
   remaining_turn_time = utimer;
 }
 
+void Interface::UpdateWindIndicator(int wind_value) 
+{
+  wind_bar.UpdateValue(wind_value);
+  int val = 255 * abs(wind_value) / 100;
+  wind_bar.SetValueColor(Color(val, 255 - val, 0, 255)); // Green to Red
+};
+
 void AbsoluteDraw(const Surface &s, const Point2i& pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
