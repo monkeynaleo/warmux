@@ -55,8 +55,6 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 
   m_category = MOVE;
   m_initial_nb_ammo = 2;
-  m_x_strength.x_extern = 0.0;
-  m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
@@ -78,7 +76,6 @@ void Parachute::p_Select()
 {
   open = false;
   closing = false;
-  m_x_strength.changing = false;
   img->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
@@ -150,9 +147,16 @@ void Parachute::Refresh()
   }
   // If parachute is open => character can move a little to the left or to the right
   if (open) {
-    ActiveCharacter().SetExternForce(m_x_strength.x_extern, 0.0);
-    if (m_x_strength.changing) {
-      m_x_strength.changing = false;
+    if (ActiveCharacter().IsMovingLeft(false) && !ActiveCharacter().IsMovingRight(false)) {
+      if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+        ActiveCharacter().SetDirection(DIRECTION_LEFT);
+      ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
+    }
+
+    if (ActiveCharacter().IsMovingRight(false) && !ActiveCharacter().IsMovingLeft(false)) {
+      if (ActiveCharacter().GetDirection() == DIRECTION_LEFT)
+        ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+      ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
     }
   }
 }
@@ -174,56 +178,6 @@ void Parachute::HandleKeyPressed_Shoot()
     UseAmmoUnit();
   } else {
     Weapon::HandleKeyPressed_Shoot();
-  }
-}
-
-void Parachute::HandleKeyPressed_MoveRight(bool slowly)
-{
-  if (closing) {
-    ActiveCharacter().BeginMovementRL(0);
-  }
-
-  if (open) {
-    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-    m_x_strength.x_extern = cfg().force_side_displacement;
-    m_x_strength.changing = true;
-  } else {
-    Weapon::HandleKeyPressed_MoveRight(slowly);
-  }
-}
-
-void Parachute::HandleKeyReleased_MoveRight(bool slowly)
-{
-  if (open) {
-    m_x_strength.x_extern = 0.0;
-    m_x_strength.changing = true;
-  } else {
-    Weapon::HandleKeyReleased_MoveRight(slowly);
-  }
-}
-
-void Parachute::HandleKeyPressed_MoveLeft(bool slowly)
-{
-  if (closing) {
-    ActiveCharacter().BeginMovementRL(0);
-  }
-
-  if (open) {
-    ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    m_x_strength.x_extern = -cfg().force_side_displacement;
-    m_x_strength.changing = true;
-  } else {
-    Weapon::HandleKeyPressed_MoveLeft(slowly);
-  }
-}
-
-void Parachute::HandleKeyReleased_MoveLeft(bool slowly)
-{
-  if (open) {
-    m_x_strength.x_extern = 0.0;
-    m_x_strength.changing = true;
-  } else {
-    Weapon::HandleKeyReleased_MoveLeft(slowly);
   }
 }
 
