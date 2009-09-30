@@ -36,6 +36,7 @@ protected:
   virtual void SetRand(uint seed);
 public:
   virtual void InitRandom();
+  void Verify();
 };
 
 RandomSyncGen& RandomSync();
