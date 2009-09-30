@@ -518,6 +518,15 @@ void Game::MainLoop()
       // Refresh clock value
       RefreshClock();
 
+      // The action which verifys the random seed must be the first action sheduled!
+      // Otherwise the following could happen:
+      // 1. Action C gets sheduled which draws values from the random source.
+      // 2. Action V gets sheduled which verifies that random seed is X.
+      // 3. Action C gets executed: As a result the random seed has changed to another value Y.
+      // 4. Action V gets executed: It fails as the random seed is no longer X but Y.
+      if (Network::GetInstance()->IsTurnMaster())
+        RandomSync().Verify();
+
       if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
         PingClient();
     }
@@ -663,15 +672,6 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game) const
 
   // already in good state, nothing to do
   if ((state == new_state) && !begin_game) return;
-
-
-  // The action which verifys the random seed must be the first action sheduled!
-  // Otherwise the following could happen:
-  // 1. Action C gets sheduled which draws values from the random source.
-  // 2. Action V gets sheduled which verifies that random seed is X.
-  // 3. Action C gets executed: As a result the random seed has changed to another value Y.
-  // 4. Action V gets executed: It fails as the random seed is no longer X but Y.
-  RandomSync().Verify();
 
   // Send information about energy and position of every characters
   // ONLY at the beginning of a new turn!
