@@ -18,7 +18,6 @@ along with XMOTO; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 =============================================================================*/
 
-#include "extSDL_net.h"
 #include <errno.h>
 
 /******************************************************************************
@@ -26,38 +25,41 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ******************************************************************************/
 /* Include system network headers */
 #if defined(__WIN32__) || defined(WIN32)
-#define __USE_W32_SOCKETS
-#include <windows.h>
+#  define __USE_W32_SOCKETS
+#  include <windows.h>
+#  define __PRETTY_FUNCTION__ __FUNCTION__
 #else /* UNIX */
-#ifdef __OS2__
-#include <types.h>
-#include <sys/ioctl.h>
-#endif
-#include <sys/time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <netinet/in.h>
-#ifndef __BEOS__
-#include <arpa/inet.h>
-#endif
-#ifdef linux /* FIXME: what other platforms have this? */
-#include <netinet/tcp.h>
-#endif
+#  ifdef __OS2__
+#    include <types.h>
+#    include <sys/ioctl.h>
+#  endif
+#  include <sys/time.h>
+#  include <unistd.h>
+#  include <fcntl.h>
+#  include <netinet/in.h>
+#  ifndef __BEOS__
+#    include <arpa/inet.h>
+#  endif
+#  ifdef linux /* FIXME: what other platforms have this? */
+#    include <netinet/tcp.h>
+#  endif
 #include <netdb.h>
 #include <sys/socket.h>
 #endif /* WIN32 */
 
 /* System-dependent definitions */
 #ifndef __USE_W32_SOCKETS
-#ifdef __OS2__
-#define closesocket     soclose
-#else  /* !__OS2__ */
-#define closesocket	close
-#endif /* __OS2__ */
-#define SOCKET	int
-#define INVALID_SOCKET	-1
-#define SOCKET_ERROR	-1
+#  ifdef __OS2__
+#    define closesocket     soclose
+#  else  /* !__OS2__ */
+#    define closesocket	close
+#  endif /* __OS2__ */
+#  define SOCKET	int
+#  define INVALID_SOCKET	-1
+#  define SOCKET_ERROR	-1
 #endif /* __USE_W32_SOCKETS */
+
+#include "extSDL_net.h"
 
 /******************************************************************************/
 
@@ -113,9 +115,7 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
  ******************************************************************************/
 
 #ifndef WIN32
-#include <sys/ioctl.h>
-#else
-#include <Winsock2.h>
+# include <sys/ioctl.h>
 #endif
 
 /* SDLNet_SocketReady MUST have been called before
@@ -140,7 +140,7 @@ int SDLNet_TCP_NbBytesAvailable(TCPsocket sock)
 #else
 	r = ioctlsocket(sock->channel, FIONREAD, &nbbytes);
 	if (r) {
-		fprintf(stderr, "ERROR at %s:%d - ioctlsocket: %ld\n", WSAGetLastError());
+		fprintf(stderr, "ERROR at %s:%d - ioctlsocket: %d\n", __PRETTY_FUNCTION__, __LINE__, WSAGetLastError());
 		return r;
 	}
 #endif
