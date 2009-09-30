@@ -357,8 +357,7 @@ void Interface::DrawMapPreview()
 
       Rectanglei water(0, rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
 
-
-      Surface water_surf(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
+      Surface water_surf(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
 
       // Draw box with color according to water type
       water_surf.BoxColor(water, water_color);
@@ -573,8 +572,9 @@ void Interface::UpdateTimer(uint utimer, const Color& color)
 void Interface::UpdateWindIndicator(int wind_value) 
 {
   wind_bar.UpdateValue(wind_value);
-  int val = 255 * abs(wind_value) / 100;
-  wind_bar.SetValueColor(Color(val, 255 - val, 0, 255)); // Green to Red
+  int redValue   = 155 * abs(wind_value) / 100;
+  int greenValue = 200 * abs(wind_value) / 100;
+  wind_bar.SetValueColor(Color(redValue, 200 - greenValue, 10, 255)); // Green to Red
 };
 
 void AbsoluteDraw(const Surface &s, const Point2i& pos)
