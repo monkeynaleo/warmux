@@ -106,10 +106,6 @@ public:
   void SetAlignParticleState(bool state) { m_align_particle_state = state; }
   bool GetAlignParticleState(void) const { return m_align_particle_state; }
 
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
-
   // Reset the physics constants (mass, air_resistance...) to the default values in the cfg
   void ResetConstants() { *((ObjectConfig*)this) = m_cfg; };
 

@@ -132,55 +132,6 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
-void PhysicalObj::StoreValue(Action *a)
-{
-  Physics::StoreValue(a);
-  a->Push(m_collides_with_ground);
-  a->Push(m_collides_with_characters);
-  a->Push(m_collides_with_objects);
-  a->Push(m_rebound_position);
-  a->Push((int)m_minimum_overlapse_time);
-  a->Push(m_ignore_movements);
-  a->Push(m_is_character);
-  a->Push(m_test_left);
-  a->Push(m_test_right);
-  a->Push(m_test_top);
-  a->Push(m_test_bottom);
-  a->Push(m_width);
-  a->Push(m_height);
-  a->Push(m_alive);
-  a->Push(m_energy);
-  a->Push(m_allow_negative_y);
-}
-
-void PhysicalObj::GetValueFromAction(Action *a)
-{
-  Physics::GetValueFromAction(a);
-  m_collides_with_ground     = !!a->PopInt();
-  m_collides_with_characters = !!a->PopInt();
-  m_collides_with_objects    = !!a->PopInt();
-  m_rebound_position         = a->PopPoint2i();
-  m_minimum_overlapse_time   = (uint)a->PopInt();
-  m_ignore_movements         = !!a->PopInt();
-  m_is_character             = !!a->PopInt();
-  m_test_left                = a->PopInt();
-  m_test_right               = a->PopInt();
-  m_test_top                 = a->PopInt();
-  m_test_bottom              = a->PopInt();
-  m_width                    = a->PopInt();
-  m_height                   = a->PopInt();
-  m_alive                    = (alive_t)a->PopInt();
-  m_energy                   = a->PopInt();
-  m_allow_negative_y         = !!a->PopInt();
-
-  ASSERT(m_test_left >= 0);
-  ASSERT(m_test_right >= 0);
-  ASSERT(m_test_top >= 0);
-  ASSERT(m_test_bottom >= 0);
-  ASSERT(m_width >= 0);
-  ASSERT(m_height >= 0);
-}
-
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 {
   m_minimum_overlapse_time = 0;

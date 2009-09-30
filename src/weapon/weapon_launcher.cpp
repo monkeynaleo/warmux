@@ -107,7 +107,7 @@ void WeaponBullet::Refresh()
 void WeaponBullet::DoExplosion()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion(pos, cfg, "", false, ParticleEngine::LittleESmoke, GetUniqueId());
+  ApplyExplosion(pos, cfg, "", false, ParticleEngine::LittleESmoke);
 }
 //-----------------------------------------------------------------------------
 
@@ -351,7 +351,7 @@ void WeaponProjectile::SignalExplosion()
 void WeaponProjectile::DoExplosion()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion(pos, cfg, "weapon/explosion", true, ParticleEngine::BigESmoke, GetUniqueId());
+  ApplyExplosion(pos, cfg, "weapon/explosion", true, ParticleEngine::BigESmoke);
 }
 
 void WeaponProjectile::IncrementTimeOut()

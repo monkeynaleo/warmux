@@ -149,11 +149,10 @@ void Parachute::Refresh()
     }
   }
   // If parachute is open => character can move a little to the left or to the right
-  if (open && Network::GetInstance()->IsTurnMaster()) {
+  if (open) {
     ActiveCharacter().SetExternForce(m_x_strength.x_extern, 0.0);
     if (m_x_strength.changing) {
       m_x_strength.changing = false;
-      SendActiveCharacterInfo(false);
     }
   }
 }

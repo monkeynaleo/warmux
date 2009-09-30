@@ -159,22 +159,6 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
   Explode();
 }
 
-void ObjBox::GetValueFromAction(Action * a)
-{
-  PhysicalObj::GetValueFromAction(a);
-  start_life_points = a->PopInt();
-  SetXY(a->PopPoint2d());
-  SetSpeedXY(a->PopPoint2d());
-}
-
-void ObjBox::StoreValue(Action *a)
-{
-  PhysicalObj::StoreValue(a);
-  a->Push(start_life_points);
-  a->Push(GetPosition());
-  a->Push(GetSpeed());
-}
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // Static methods

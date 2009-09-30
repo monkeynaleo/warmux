@@ -55,7 +55,6 @@ void Suicide::Refresh()
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
     ActiveCharacter().SetEnergy(0); // Die!
-    SendActiveCharacterInfo();
     ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
   }
 }

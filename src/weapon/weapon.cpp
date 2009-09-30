@@ -251,7 +251,7 @@ void Weapon::NewActionWeaponShoot() const
   Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
                                m_strength,
                                ActiveCharacter().GetAbsFiringAngle());
-  ActionHandler::GetInstance()->NewActionActiveCharacter(a_shoot);
+  ActionHandler::GetInstance()->NewAction(a_shoot);
 }
 
 void Weapon::NewActionWeaponStopUse() const
@@ -259,7 +259,7 @@ void Weapon::NewActionWeaponStopUse() const
   ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
   Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
-  ActionHandler::GetInstance()->NewActionActiveCharacter(a);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Weapon::PrepareShoot(double strength, double angle)

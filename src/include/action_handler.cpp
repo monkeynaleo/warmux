@@ -304,8 +304,9 @@ static void Action_Player_ChangeWeapon (Action *a)
 static void Action_Player_ChangeCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
-  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
-  Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
+  int char_no = a->PopInt();
+  Character * c = ActiveTeam().FindByIndex(char_no);
+  ActiveTeam().SelectCharacter(c);
   Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
@@ -313,11 +314,7 @@ static void Action_Game_NextTeam (Action *a)
 {
   std::string team = a->PopString();
   GetTeamsList().SetActive(team);
-
-  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
-
-  ASSERT (!ActiveCharacter().IsDead());
-
+  ActiveTeam().NextCharacter(true);
   Camera::GetInstance()->FollowObject(&ActiveCharacter());
 
   // Are we turn master for next turn ?
@@ -334,11 +331,10 @@ static void Action_Game_CalculateFrame (Action */*a*/)
   // that the frame is complete.
 }
 
-static void Action_DropBonusBox (Action *a)
+static void Action_DropBonusBox (Action */*a*/)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box != NULL) {
-    current_box->GetValueFromAction(a);
     current_box->DropBox();
   }
 }
@@ -559,30 +555,6 @@ void WORMUX_DisconnectPlayer(Player& player)
 
 // ########################################################
 
-// Send information about energy and the position of every character
-void SyncCharacters()
-{
-  ASSERT(Network::GetInstance()->IsTurnMaster());
-
-  TeamsList::iterator
-    it=GetTeamsList().playing_list.begin(),
-    end=GetTeamsList().playing_list.end();
-
-  for (int team_no = 0; it != end; ++it, ++team_no)
-  {
-    Team& team = **it;
-    Team::iterator
-        tit = team.begin(),
-        tend = team.end();
-
-    for (int char_no = 0; tit != tend; ++tit, ++char_no)
-    {
-      // Sync the character's position, energy, ...
-      SendCharacterInfo(team_no, char_no);
-    }
-  }
-}
-
 static void Action_Character_Jump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
@@ -603,42 +575,6 @@ static void Action_Character_BackJump (Action */*a*/)
   ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().BackJump();
 }
-
-static void Action_Character_SetPhysics (Action *a)
-{
-  while(!a->IsEmpty())
-    Character::RetrieveCharacterFromAction(a);
-}
-
-void SendActiveCharacterAction(const Action& a)
-{
-  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  SendActiveCharacterInfo();
-  Network::GetInstance()->SendActionToAll(a);
-}
-
-// Send character information over the network (it's totally stupid to send it locally ;-)
-void SendCharacterInfo(int team_no, int char_no)
-{
-  Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
-  Character::StoreCharacter(&a, team_no, char_no);
-  Network::GetInstance()->SendActionToAll(a);
-}
-
-uint last_time = 0;
-
-// Send active character information over the network (it's totally stupid to send it locally ;-)
-void SendActiveCharacterInfo(bool can_be_dropped)
-{
-  uint current_time = Time::GetInstance()->Read();
-
-  if (!can_be_dropped || last_time + 100 < Time::GetInstance()->Read()) {
-    last_time = current_time;
-    SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-  }
-}
-
-// ########################################################
 
 static void Action_Weapon_Shoot (Action *a)
 {
@@ -952,28 +888,6 @@ void WORMUX_DisconnectHost(DistantComputer& host)
     Network::GetInstance()->SendActionToAll(a); // host is already removed from the list
   }
 }
-
-static void Action_Explosion (Action *a)
-{
-  ExplosiveWeaponConfig config;
-  MSG_DEBUG("action_handler","-> Begin");
-
-  Point2i pos = a->PopPoint2i();
-  config.explosion_range = a->PopInt();
-  config.particle_range = a->PopInt();
-  config.damage = a->PopInt();
-  config.blast_range = a->PopInt();
-  config.blast_force = a->PopInt();
-  std::string son = a->PopString();
-  bool fire_particle = !!a->PopInt();
-  ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
-  std::string unique_id = a->PopString();
-
-  ApplyExplosion_common(pos, config, son, fire_particle, smoke, unique_id);
-
-  MSG_DEBUG("action_handler","<- End");
-}
-
 // ########################################################
 // ########################################################
 // ########################################################
@@ -1020,9 +934,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
-
-  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
-
   // ########################################################
   // Using Weapon
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
@@ -1043,8 +954,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
-
-  ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC, "NETWORK_verify_random_sync", &Action_Network_VerifyRandomSync);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);
@@ -1135,12 +1044,5 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   // To make action executed even if the menu is waiting in SDL_WaitEvent
   // One new event will be needed (see ExecActions).
   Menu::WakeUpOnCallback();
-}
-
-void ActionHandler::NewActionActiveCharacter(Action* a)
-{
-  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  SendActiveCharacterInfo();
-  NewAction(a);
 }
 

@@ -704,11 +704,6 @@ void Character::Move(enum BodyDirection direction, bool slowly)
   }
 
   ASSERT(&ActiveCharacter() == this);
-
-  //Refresh skin position across network
-  if (!Network::GetInstance()->IsLocal()
-      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendActiveCharacterInfo();
 }
 
 // Signal the end of a fall
@@ -926,154 +921,6 @@ uint Character::GetCharacterIndex() const
   return 0;
 }
 
-// ###################################################################
-// ###################################################################
-// ###################################################################
-
-void Character::StoreValue(Action *a)
-{
-  PhysicalObj::StoreValue(a);
-  a->Push((int)GetDirection());
-  a->Push(GetAbsFiringAngle());
-  a->Push((int)disease_damage_per_turn);
-  a->Push((int)disease_duration);
-  if (IsActiveCharacter()) { // If active character, store step animation
-    a->Push((int)true);
-    a->Push(GetBody()->GetClothe());
-    a->Push(GetBody()->GetMovement());
-    a->Push((int)GetBody()->GetFrame());
-  } else {
-    a->Push((int)false);
-  }
-}
-
-void Character::GetValueFromAction(Action *a)
-{
-  // those 2 parameters will be retrieved by PhysicalObj::GetValueFromAction
-  alive_t prev_live_state = m_alive;
-  int prev_energy = m_energy;
-  Point2d prev_position = Physics::GetPos();
-
-  PhysicalObj::GetValueFromAction(a);
-  SetDirection((BodyDirection_t)(a->PopInt()));
-  SetFiringAngle(a->PopDouble());
-
-  if (m_alive != prev_live_state) {
-    switch (m_alive) {
-    case ALIVE:
-      fprintf(stderr, "Character::GetValueFromAction: %s has been resurrected\n",
-	      GetName().c_str());
-      SetClothe("normal");
-      SetMovement("breathe");
-      if (prev_live_state == DROWNED) {
-	SignalGoingOutOfWater();
-      }
-      break;
-    case DEAD:
-      fprintf(stderr,
-	      "Character::GetValueFromAction: %s has died on the other side of the network\n"
-	      "        Previous energy: %d\n",
-	      GetName().c_str(), prev_energy);
-      death_explosion = false;
-
-      // to avoid violating an ASSERT in Die()
-      m_alive = prev_live_state;
-      if (m_alive != ALIVE && m_alive != DROWNED)
-	m_alive = ALIVE;
-
-      Die();
-      break;
-    case GHOST: {
-      fprintf(stderr, "Character::GetValueFromAction: %s is now a ghost!\n", GetName().c_str());
-      m_alive = prev_live_state;
-      bool was_dead = IsDead();
-      m_alive = GHOST;
-      SignalGhostState(was_dead);
-      break;
-    }
-    case DROWNED:
-      fprintf(stderr, "Character::GetValueFromAction: %s is drowning!\n", GetName().c_str());
-      SignalDrowning();
-      break;
-    }
-  }
-
-  if (prev_energy != m_energy) {
-    fprintf(stderr,
-	    "Character::GetValueFromAction: energy points were differents for %s:\n"
-	    "        - remote : %d\n"
-	    "        - local  : %d\n",
-	    GetName().c_str(), m_energy, prev_energy);
-    if (m_energy > 0) {
-      energy_bar.Actu(m_energy);
-    }
-  }
-
-  uint disease_damage_per_turn = (a->PopInt());
-  uint disease_duration = (a->PopInt());
-  SetDiseaseDamage(disease_damage_per_turn, disease_duration);
-  if (a->PopInt()) { // If active characters, retrieve stored animation
-    if (GetTeam().IsActiveTeam())
-      ActiveTeam().SelectCharacter(this);
-
-    std::string clothe = a->PopString();
-    std::string movement = a->PopString();
-    uint frame = a->PopInt();
-
-    fprintf(stderr,
-	    "Character::GetValueFromAction: Animation for %s\n"
-	    "        - Clothe %s (current: %s)\n"
-	    "        - Movement %s (current: %s)\n"
-	    "        - Frame %d (current: %d)\n",
-	    GetName().c_str(),
-	    clothe.c_str(), GetBody()->GetClothe().c_str(),
-	    movement.c_str(), GetBody()->GetMovement().c_str(),
-	    frame, GetBody()->GetFrame());
-
-    SetClothe(clothe, true);
-    SetMovement(movement, true);
-    GetBody()->SetFrame(frame);
-
-    GetBody()->UpdateWeaponPosition(GetPosition());
-  }
-
-  // If the player has moved, the camera should follow it!
-  Point2d current_position = Physics::GetPos();
-  if (IsActiveCharacter() && prev_position != current_position) {
-    Camera::GetInstance()->FollowObject(this);
-    HideGameInterface();
-  }
-}
-
-// Static method
-void Character::RetrieveCharacterFromAction(Action *a)
-{
-  int team_no = a->PopInt();
-  int char_no = a->PopInt();
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->GetValueFromAction(a);
-}
-
-// Static method
-void Character::StoreActiveCharacter(Action *a)
-{
-  Character::StoreCharacter(a, ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-}
-
-// Static method
-void Character::StoreCharacter(Action *a, uint team_no, uint char_no)
-{
-  a->Push((int)team_no);
-  a->Push((int)char_no);
-  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->StoreValue(a);
-}
-
-// ###################################################################
-// ###################################################################
-// ###################################################################
-
-
 const std::string& Character::GetName() const
 {
     return character_name;
@@ -1115,8 +962,6 @@ void Character::HandleKeyReleased_MoveRight(bool /*slowly*/)
   StopWalk();
 
   ActiveTeam().crosshair.Show();
-
-  SendActiveCharacterInfo();
 }
 
 // #################### MOVE_LEFT
@@ -1142,8 +987,6 @@ void Character::HandleKeyReleased_MoveLeft(bool /*slowly*/)
   body->StopWalk();
 
   ActiveTeam().crosshair.Show();
-
-  SendActiveCharacterInfo();
 }
 
 // #################### UP
@@ -1175,7 +1018,6 @@ void Character::HandleKeyRefreshed_Down(bool slowly)
       CharacterCursor::GetInstance()->Hide();
       if (slowly) AddFiringAngle(DELTA_CROSSHAIR/10.0);
       else       AddFiringAngle(DELTA_CROSSHAIR);
-      SendActiveCharacterInfo();
     }
 }
 
@@ -1189,7 +1031,7 @@ void Character::HandleKeyPressed_Jump()
 
   if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_JUMP);
-    SendActiveCharacterAction(a);
+    Network::GetInstance()->SendActionToAll(a);
     Jump();
   }
 }
@@ -1203,7 +1045,7 @@ void Character::HandleKeyPressed_HighJump()
 
   if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
-    SendActiveCharacterAction(a);
+    Network::GetInstance()->SendActionToAll(a);
     HighJump();
   }
 }
@@ -1217,7 +1059,7 @@ void Character::HandleKeyPressed_BackJump()
 
   if (IsImmobile()) {
     Action a(Action::ACTION_CHARACTER_BACK_JUMP);
-    SendActiveCharacterAction(a);
+    Network::GetInstance()->SendActionToAll(a);
     BackJump();
   }
 }
