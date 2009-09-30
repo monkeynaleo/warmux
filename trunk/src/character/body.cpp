@@ -49,7 +49,6 @@ Body::Body(const xmlNode* xml, const std::string& main_folder):
   previous_clothe(NULL),
   previous_mvt(NULL),
   weapon_member(new WeaponMember()),
-  weapon_pos(0,0),
   last_refresh(0),
   walk_events(0),
   main_rotation_rad(0),
@@ -164,7 +163,6 @@ Body::Body(const Body& _body):
   previous_clothe(NULL),
   previous_mvt(NULL),
   weapon_member(new WeaponMember()),
-  weapon_pos(0,0),
   last_refresh(0),
   walk_events(0),
   main_rotation_rad(0),
@@ -462,20 +460,18 @@ std::string Body::GetFrameLoop() const
   return std::string(str);
 }
 
-void Body::UpdateWeaponPosition(const Point2i& _pos)
+void Body::GetRelativeHandPosition(Point2i& result) const
 {
-  // update the weapon position
-  if (direction == DIRECTION_RIGHT)
-    weapon_pos = weapon_member->GetPos();
-  else
-    weapon_pos = Point2i(GetSize().x - weapon_member->GetPos().x,weapon_member->GetPos().y);
-  weapon_pos += _pos;
+  if (direction == DIRECTION_RIGHT) {
+    result = weapon_member->GetPos();
+  } else {
+    result.x = GetSize().x - weapon_member->GetPos().x;
+    result.y = weapon_member->GetPos().y;
+  }
 }
 
 void Body::DrawWeaponMember(const Point2i& _pos)
 {
-  UpdateWeaponPosition(_pos);
-
   weapon_member->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
 }
 

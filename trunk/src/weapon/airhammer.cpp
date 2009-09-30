@@ -111,8 +111,10 @@ bool Airhammer::p_Shoot()
     }
 
     // Compute point coordinates
-    y = ActiveCharacter().GetHandPosition().y + range;
-    x = ActiveCharacter().GetHandPosition().x;
+    Point2i hand_position;
+    ActiveCharacter().GetHandPosition(hand_position);
+    y = hand_position.y + range;
+    x = hand_position.x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())

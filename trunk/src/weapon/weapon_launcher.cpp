@@ -166,13 +166,17 @@ void WeaponProjectile::Shoot(double strength)
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
 
+  Point2i hand_position;
+  ActiveCharacter().GetHandPosition(hand_position);
+  ActiveCharacter().GetHandPosition(hand_position);
   MSG_DEBUG("weapon.projectile", "shoot from position %d,%d (size %d, %d) - hand position:%d,%d",
-	    ActiveCharacter().GetX(),
-	    ActiveCharacter().GetY(),
-	    ActiveCharacter().GetWidth(),
-	    ActiveCharacter().GetHeight(),
-            ActiveCharacter().GetHandPosition().GetX(),
-            ActiveCharacter().GetHandPosition().GetY());
+            ActiveCharacter().GetX(),
+            ActiveCharacter().GetY(),
+            ActiveCharacter().GetWidth(),
+            ActiveCharacter().GetHeight(),
+            hand_position.GetX(),
+            hand_position.GetY());
+
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
             strength, angle, GetX(), GetY());
 
@@ -182,7 +186,7 @@ void WeaponProjectile::Shoot(double strength)
 
   // bug #10236 : problem with flamethrower collision detection
   // Check if the object is colliding something between hand position and gun hole
-  Point2i hand_position = ActiveCharacter().GetHandPosition() - GetSize() / 2;
+  hand_position -= GetSize() / 2;
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);

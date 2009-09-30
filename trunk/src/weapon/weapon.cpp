@@ -278,12 +278,16 @@ bool Weapon::Shoot()
 
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
+  #ifdef DEBUG
+  Point2i hand;
+  ActiveCharacter().GetHandPosition(hand);
   MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
             ActiveCharacter().GetY(),
-            ActiveCharacter().GetHandPosition().GetX(),
-            ActiveCharacter().GetHandPosition().GetY());
+            hand.GetX(),
+            hand.GetY());
+  #endif
   ActiveCharacter().body->DebugState();
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
@@ -402,7 +406,8 @@ void Weapon::PosXY (int &x, int &y) const
 {
   if (origin == weapon_origin_HAND)
   {
-    Point2i handPos = ActiveCharacter().GetHandPosition();
+    Point2i handPos;
+    ActiveCharacter().GetHandPosition(handPos);
     y = handPos.y - position.y;
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       x = handPos.x - position.x;
@@ -421,7 +426,8 @@ void Weapon::PosXY (int &x, int &y) const
 
 const Point2i Weapon::GetGunHolePosition() const
 {
-  const Point2i &pos = ActiveCharacter().GetHandPosition();
+  Point2i pos;
+  ActiveCharacter().GetHandPosition(pos);
   Point2i hole(pos + hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
@@ -600,8 +606,10 @@ void Weapon::Draw(){
 
 #ifdef DEBUG
   if (IsLOGGING("weapon")) {
-    Rectanglei rect(ActiveCharacter().GetHandPosition().GetX()-1 - Camera::GetInstance()->GetPositionX(),
-		    ActiveCharacter().GetHandPosition().GetY()-1 - Camera::GetInstance()->GetPositionY(),
+    Point2i hand;
+    ActiveCharacter().GetHandPosition(hand);
+    Rectanglei rect(hand.GetX()-1 - Camera::GetInstance()->GetPositionX(),
+		    hand.GetY()-1 - Camera::GetInstance()->GetPositionY(),
 		    3,
 		    3);
 
@@ -612,8 +620,8 @@ void Weapon::Draw(){
     MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d",
 	      ActiveCharacter().GetX(),
 	      ActiveCharacter().GetY(),
-	      ActiveCharacter().GetHandPosition().GetX(),
-	      ActiveCharacter().GetHandPosition().GetY());
+	      hand.GetX(),
+	      hand.GetY());
   }
 #endif
 #ifdef DEBUG_HOLE
@@ -632,22 +640,23 @@ void Weapon::Draw(){
 void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
-  Point2i pos = ActiveCharacter().GetHandPosition();
-  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
+  Point2i hand;
+  ActiveCharacter().GetHandPosition(hand);
+  Point2i hole(hand +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
 
   if( ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
     hole = hole -  Point2i(0, m_weapon_fire->GetHeight()/2);
   else
     hole = hole +  Point2i(0, m_weapon_fire->GetHeight()/2);
-  double dst = pos.Distance(hole);
-  double angle = pos.ComputeAngle(hole);
+  double dst = hand.Distance(hole);
+  double angle = hand.ComputeAngle(hole);
 
   angle += ActiveCharacter().GetFiringAngle();
 
   if( ActiveCharacter().GetDirection() == DIRECTION_LEFT)
     angle -= M_PI;
 
-  Point2i spr_pos =  pos + Point2i(static_cast<int>(dst * cos(angle)),
+  Point2i spr_pos =  hand + Point2i(static_cast<int>(dst * cos(angle)),
                                    static_cast<int>(dst * sin(angle)));
 
   m_weapon_fire->SetRotation_HotSpot (Point2i(0,0));

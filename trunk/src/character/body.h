@@ -80,7 +80,6 @@ class Body
 
   // For weapon position handling
   Member* weapon_member;
-  Point2i weapon_pos;
 
   uint last_refresh; // Time elapsed since last refresh
   int walk_events;
@@ -132,7 +131,7 @@ public:
   std::string GetFrameLoop() const;
   void GetTestRect(uint &l, uint &r, uint &t, uint &b) const;
   const BodyDirection_t &GetDirection() const { return direction; };
-  const Point2i &GetHandPosition() const { return weapon_pos; };
+  void GetRelativeHandPosition(Point2i& result) const;
   uint GetMovementDuration() const;
   uint GetFrame() const { return current_frame; };
   uint GetFrameCount() const;
