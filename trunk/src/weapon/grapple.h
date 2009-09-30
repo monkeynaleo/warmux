@@ -52,6 +52,10 @@ class Grapple : public Weapon
     Sprite* m_node_sprite;
 
     SoundSample cable_sound;
+    bool move_left_pressed;
+    bool move_right_pressed;
+    bool move_up_pressed;
+    bool move_down_pressed;
 
   protected:
     void Refresh();
@@ -108,6 +112,18 @@ class Grapple : public Weapon
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
+
+    void StartMovingLeft();
+    void StopMovingLeft();
+
+    void StartMovingRight();
+    void StopMovingRight();
+
+    void StartMovingUp();
+    void StopMovingUp();
+
+    void StartMovingDown();
+    void StopMovingDown();
 
     // Keys management
     void HandleKeyPressed_Up(bool slowly);

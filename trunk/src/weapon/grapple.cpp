@@ -158,6 +158,10 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   go_left = false ;
   go_right = false ;
   delta_len = 0 ;
+  move_left_pressed = false;
+  move_right_pressed = false;
+  move_up_pressed = false;
+  move_down_pressed = false;
 }
 
 void Grapple::UpdateTranslationStrings()
@@ -410,6 +414,19 @@ void Grapple::Refresh()
   if (!IsInUse())
     return ;
 
+  if (move_left_pressed && !move_right_pressed) {
+    GoLeft();
+  } else if (move_right_pressed && !move_left_pressed) {
+    GoRight();
+  }
+
+  if (move_up_pressed && !move_down_pressed) {
+    GoUp();
+  } else if (move_down_pressed && !move_up_pressed) {
+    GoDown();
+  }
+
+
   if (m_attaching)
     TryAttachRope();
 
@@ -498,6 +515,10 @@ void Grapple::AttachRope(const Point2i& contact_point)
 
   m_attaching = false;
   m_is_active = true;
+  move_left_pressed = false;
+  move_right_pressed = false;
+  move_up_pressed = false;
+  move_down_pressed = false;
 
   rope_nodes.clear();
 
@@ -679,55 +700,94 @@ void Grapple::StopLeft()
   ActiveCharacter().SetExternForce(0,0);
 }
 
+void Grapple::StartMovingLeft()
+{
+  move_left_pressed = true;
+}
+
+void Grapple::StopMovingLeft()
+{
+  move_left_pressed = false;
+  StopLeft();
+}
+
+void Grapple::StartMovingRight()
+{
+  move_right_pressed = true;
+}
+
+void Grapple::StopMovingRight()
+{
+  move_right_pressed = false;
+  StopRight();
+}
+
+void Grapple::StartMovingUp()
+{
+  move_up_pressed = true;
+}
+
+void Grapple::StopMovingUp()
+{
+  move_up_pressed = false;
+  StopUp();
+}
+
+void Grapple::StartMovingDown()
+{
+  move_down_pressed = true;
+  cable_sound.Play("default", "weapon/grapple_cable", -1);
+}
+
+void Grapple::StopMovingDown()
+{
+  move_down_pressed = false;
+  StopDown();
+}
+
+
 // =========================== Keys management
 
 void Grapple::HandleKeyPressed_Up(bool slowly)
 {
-  if (IsInUse())  {
-    cable_sound.Play("default", "weapon/grapple_cable", -1);
-    GoUp();
-  }
+  if (IsInUse())
+    StartMovingUpForAllPlayers();
   else
     ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
 void Grapple::HandleKeyRefreshed_Up(bool slowly)
 {
-  if (IsInUse())
-    GoUp();
-  else
+  if (!IsInUse())
     ActiveCharacter().HandleKeyRefreshed_Up(slowly);
 }
 
 void Grapple::HandleKeyReleased_Up(bool slowly)
 {
   if (IsInUse())
-    StopUp();
+    StopMovingUpForAllPlayers();
   else
     ActiveCharacter().HandleKeyReleased_Up(slowly);
 }
 
 void Grapple::HandleKeyPressed_Down(bool slowly)
 {
-  if (IsInUse()) {
-    cable_sound.Play("default", "weapon/grapple_cable", -1);
-    GoDown();
-  } else
+  if (IsInUse())
+    StartMovingDownForAllPlayers();
+  else
     ActiveCharacter().HandleKeyPressed_Down(slowly);
 }
 
 void Grapple::HandleKeyRefreshed_Down(bool slowly)
 {
-  if (IsInUse())
-    GoDown();
-  else
+  if (!IsInUse())
     ActiveCharacter().HandleKeyRefreshed_Down(slowly);
 }
 
 void Grapple::HandleKeyReleased_Down(bool slowly)
 {
   if (IsInUse())
-    StopDown();
+    StopMovingDownForAllPlayers();
   else
     ActiveCharacter().HandleKeyReleased_Down(slowly);
 }
@@ -735,7 +795,7 @@ void Grapple::HandleKeyReleased_Down(bool slowly)
 void Grapple::HandleKeyPressed_MoveLeft(bool slowly)
 {
   if (IsInUse())
-    GoLeft();
+    StartMovingLeftForAllPlayers();
   else
     ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
@@ -749,7 +809,7 @@ void Grapple::HandleKeyRefreshed_MoveLeft(bool slowly)
 void Grapple::HandleKeyReleased_MoveLeft(bool slowly)
 {
   if (IsInUse())
-    StopLeft();
+    StopMovingLeftForAllPlayers();
   else
     ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
 }
@@ -757,7 +817,7 @@ void Grapple::HandleKeyReleased_MoveLeft(bool slowly)
 void Grapple::HandleKeyPressed_MoveRight(bool slowly)
 {
   if (IsInUse())
-    GoRight();
+    StartMovingRightForAllPlayers();
   else
     ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
@@ -771,7 +831,7 @@ void Grapple::HandleKeyRefreshed_MoveRight(bool slowly)
 void Grapple::HandleKeyReleased_MoveRight(bool slowly)
 {
   if (IsInUse())
-    StopRight();
+    StopMovingRightForAllPlayers();
   else
     ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
