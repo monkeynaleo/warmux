@@ -172,6 +172,11 @@ void NetworkThread::ReceiveActions()
           continue;
         }
 
+	if (!buffer && !packet_size) {
+	  // Client is valid but there is not yet enough data to read an action
+	  continue;
+	}
+
 #ifdef LOG_NETWORK
         if (fin != 0) {
           int tmp = 0xFFFFFFFF;

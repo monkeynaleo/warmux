@@ -27,7 +27,6 @@
 #include <iostream>
 #include <sys/types.h>
 #include <errno.h>
-
 #include "extSDL_net.h"
 //-----------------------------------------------------------------------------
 
@@ -132,7 +131,8 @@ WSocket::WSocket(TCPsocket _socket, WSocketSet* _socket_set) :
   socket(_socket),
   socket_set(_socket_set),
   lock(SDL_CreateMutex()),
-  using_tmp_socket_set(false)
+  using_tmp_socket_set(false),
+  packet_size(0)
 {
   int r;
   r = socket_set->AddSocket(this);
@@ -146,7 +146,8 @@ WSocket::WSocket(TCPsocket _socket):
   socket(_socket),
   socket_set(NULL),
   lock(SDL_CreateMutex()),
-  using_tmp_socket_set(false)
+  using_tmp_socket_set(false),
+  packet_size(0)
 {
 }
 
@@ -154,7 +155,8 @@ WSocket::WSocket():
   socket(NULL),
   socket_set(NULL),
   lock(SDL_CreateMutex()),
-  using_tmp_socket_set(false)
+  using_tmp_socket_set(false),
+  packet_size(0)
 {
 }
 
@@ -363,7 +365,6 @@ void WSocket::UnLock()
   SDL_UnlockMutex(lock);
 }
 
-
 // Static methods usefull to communicate without action
 // (index server, handshake, ...)
 
@@ -447,6 +448,18 @@ bool WSocket::SendBuffer(const void* data, size_t len)
   UnLock();
 
   return r;
+}
+
+bool WSocket::NbBytesAvailable(size_t& _nb_bytes)
+{
+  int nb_bytes;
+
+  nb_bytes = SDLNet_TCP_NbBytesAvailable(socket);
+  if (nb_bytes < 0)
+    return false;
+
+  _nb_bytes = nb_bytes;
+  return true;
 }
 
 bool WSocket::ReceiveBuffer_NoLock(void* data, size_t len)
@@ -618,27 +631,72 @@ bool WSocket::SendPacket(const char* data, size_t len)
   return r;
 }
 
+// ReceivePacket may return true with *data = NULL and len = 0
+// That means that client is still valid BUT there are not enough data CURRENTLY
 bool WSocket::ReceivePacket(char** data, size_t& len)
 {
   bool r;
 
   Lock();
 
-  int packet_size;
   int crc;
   char* packet;
+  size_t nbbytes;
+  bool tested = false;
 
-  // Firstly, we read the size of the incoming packet
-  r = ReceiveInt_NoLock(packet_size);
+  if (packet_size == 0) {
+
+    // First check there is enough data to read the size of the packet
+    r = NbBytesAvailable(nbbytes);
+    if (!r) {
+      goto err_no_free;
+    }
+
+    // There is nodata to read but the caller has (at least must have)
+    // checked for activity. It means that the socket is disconnected.
+    if (nbbytes == 0) {
+      goto err_no_free;
+    }
+
+    tested = true;
+
+    // there is not enough data to read the packet size but the
+    // client is still valid
+    if (nbbytes < sizeof(uint32_t)) {
+      goto err_not_enough_data;
+    }
+
+    // Firstly, we read the size of the incoming packet
+    r = ReceiveInt_NoLock(packet_size);
+    if (!r) {
+      goto err_no_free;
+    }
+
+    if (packet_size > MAX_PACKET_SIZE) {
+      fprintf(stderr, "ERROR: network packet is too big\n");
+      goto err_no_free;
+    }
+  }
+
+  // Before allocating buffer, check the data (+crc) are already there
+  r = NbBytesAvailable(nbbytes);
   if (!r) {
     goto err_no_free;
   }
 
-  if (packet_size > MAX_PACKET_SIZE) {
-    fprintf(stderr, "ERROR: network packet is too big\n");
+  // There is nodata to read but the caller has (at least must have)
+  // checked for activity. It means that the socket is disconnected.
+  if (!tested && nbbytes == 0) {
     goto err_no_free;
   }
 
+  // there is not enough data to read the packet size but the
+  // client is still valid
+  if (nbbytes < packet_size + sizeof(uint32_t)) {
+    goto err_not_enough_data;
+  }
+
+  // Alloc buffer to receive the data
   packet = (char*)malloc(packet_size);
   if (!packet) {
     fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", packet_size);
@@ -661,6 +719,8 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
   *data = packet;
   len = packet_size;
 
+  packet_size = 0;
+
   if (uint32_t(crc) != ComputeCRC(packet, len)) {
     fprintf(stderr, "ERROR: wrong CRC check\n");
     goto error;
@@ -673,9 +733,16 @@ bool WSocket::ReceivePacket(char** data, size_t& len)
  error:
   free(packet);
   packet = NULL;
+  packet_size = 0;
 
  err_no_free:
   r = false;
+  goto out_unlock;
+
+ err_not_enough_data:
+  *data = NULL;
+  len = 0;
+  r = true;
   goto out_unlock;
 }
 
