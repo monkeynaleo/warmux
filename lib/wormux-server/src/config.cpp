@@ -69,7 +69,7 @@ void BasicConfig::Load()
   if(!fin)
     {
       DPRINT(INFO, "Unable to open config file %s", config_file.c_str());
-      return;
+      exit(EXIT_FAILURE);
     }
 
   ssize_t read;
