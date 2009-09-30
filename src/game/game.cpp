@@ -521,8 +521,10 @@ void Game::MainLoop()
       // For example the switch of characters can make it necessary to rebuild the body.
       // If no cacluate frame action is sheduled the frame calculation will be skipped and the bodies don't get build.
       // As the draw method needs builded characters we need to build here
-      FOR_ALL_CHARACTERS(team,character)
+      FOR_ALL_CHARACTERS(team,character) {
         character->GetBody()->Build();
+        character->GetBody()->RefreshSprites();
+      }
 
 
       if (Network::GetInstance()->IsTurnMaster()) {
@@ -569,8 +571,10 @@ void Game::MainLoop()
 
       // Build the characters if necessary so that it does not need to happen while drawing.
       // The build can become necessary again when for example weapons change the movement.
-      FOR_ALL_CHARACTERS(team,character)
-	      character->GetBody()->Build();
+      FOR_ALL_CHARACTERS(team,character) {
+        character->GetBody()->Build();
+        character->GetBody()->RefreshSprites();
+      }
     } else {
       SDL_Delay(1);
     }

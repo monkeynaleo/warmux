@@ -451,6 +451,15 @@ void Body::Build()
   need_rebuild = false;
 }
 
+void Body::RefreshSprites()
+{
+  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+    Member* member = current_clothe->GetLayers()[layer];
+    if (member->GetName() != "weapon")
+      member->RefreshSprite(direction);
+  }
+}
+
 std::string Body::GetFrameLoop() const
 {
   char str[32];
@@ -472,7 +481,7 @@ void Body::GetRelativeHandPosition(Point2i& result) const
 
 void Body::DrawWeaponMember(const Point2i& _pos)
 {
-  weapon_member->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+  weapon_member->Draw(_pos, _pos.x + GetSize().x/2, direction);
 }
 
 void Body::Draw(const Point2i& _pos)
@@ -492,7 +501,7 @@ void Body::Draw(const Point2i& _pos)
 	draw_weapon_member++;
       }
     } else {
-      current_clothe->GetLayers()[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
+      current_clothe->GetLayers()[layer]->Draw(_pos, _pos.x + GetSize().x/2, direction);
     }
   }
 

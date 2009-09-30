@@ -23,6 +23,7 @@
 #include <map>
 #include <vector>
 #include <WORMUX_point.h>
+#include "character/body.h"
 
 typedef std::vector<Point2f> v_attached;
 
@@ -63,13 +64,15 @@ public:
   Member(const xmlNode* xml, const std::string& main_folder);
   Member(const Member& m);
 
-  virtual void Draw(const Point2i & _pos, int flip_x, int direction);
+  virtual void Draw(const Point2i & _pos, int flip_x, BodyDirection direction);
 
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& skel_lst);
   void SetAngle(const double &angle);
+  void RefreshSprite(BodyDirection direction);
+
   void SetPos(const Point2f &pos);
 
   const Sprite& GetSprite() const;
@@ -92,7 +95,7 @@ class WeaponMember : public Member
 public:
   WeaponMember();
   ~WeaponMember();
-  void Draw(const Point2i & _pos, int flip_x, int direction);
+  void Draw(const Point2i & _pos, int flip_x, BodyDirection direction);
 };
 
 #endif //MEMBER_H
