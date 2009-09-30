@@ -632,6 +632,22 @@ bool Game::NewBox()
   return true;
 }
 
+void Game::RequestBonusBoxDrop()
+{
+  ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
+  if (current_box != NULL) {
+    if (Network::GetInstance()->IsTurnMaster()) {
+      Action a(Action::ACTION_DROP_BONUS_BOX);
+      Network::GetInstance()->SendActionToAll(a);
+
+      current_box->DropBox();
+    } else {
+      Action a(Action::ACTION_REQUEST_BONUS_BOX_DROP);
+      Network::GetInstance()->SendActionToAll(a);
+    }
+  }
+}
+
 void Game::SetState(game_loop_state_t new_state, bool begin_game)
 {
   if (begin_game &&

@@ -325,6 +325,12 @@ static void Action_DropBonusBox (Action */*a*/)
   }
 }
 
+static void Action_RequestBonusBoxDrop (Action */*a*/)
+{
+  if (Network::GetInstance()->IsTurnMaster())
+    Game::GetInstance()->RequestBonusBoxDrop();
+}
+
 // ########################################################
 
 static void Action_Rules_SetGameMode (Action *a)
@@ -999,6 +1005,7 @@ void Action_Handler_Init()
 
   // Bonus box
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
+  ActionHandler::GetInstance()->Register (Action::ACTION_REQUEST_BONUS_BOX_DROP, "BONUSBOX_request_box_drop", &Action_RequestBonusBoxDrop);
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);

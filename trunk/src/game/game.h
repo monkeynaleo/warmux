@@ -153,5 +153,6 @@ public:
   bool NewBox();
   void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
   ObjBox * GetCurrentBox() { return current_ObjBox; };
+  void RequestBonusBoxDrop();
 };
 #endif // GAME_H
