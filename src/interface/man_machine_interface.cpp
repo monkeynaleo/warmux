@@ -482,57 +482,6 @@ void ManMachineInterface::Refresh() const
 
       if (MoveCamera(key))
         continue;
-
-      // Managing keys related to character moves
-      // Available only when local
-      if (!ActiveTeam().IsLocal()) return;
-      if (ActiveCharacter().IsDead()) return;
-      if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
-
-      // Movements are managed by weapons because sometimes it overrides the keys
-      switch (key) {
-
-      case KEY_MOVE_RIGHT:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight(false);
-        break;
-      case KEY_MOVE_RIGHT_SLOWLY:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight(true);
-        break;
-      case KEY_MOVE_LEFT:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft(false);
-        break;
-      case KEY_MOVE_LEFT_SLOWLY:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft(true);
-        break;
-      case KEY_UP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up(false);
-        break;
-      case KEY_UP_SLOWLY:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up(true);
-        break;
-      case KEY_DOWN:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down(false);
-        break;
-      case KEY_DOWN_SLOWLY:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down(true);
-        break;
-      case KEY_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump();
-        break;
-      case KEY_HIGH_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump();
-        break;
-      case KEY_BACK_JUMP:
-        ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump();
-        break;
-      case KEY_SHOOT:
-        if (Game::GetInstance()->ReadState() == Game::PLAYING) {
-          ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot();
-        }
-        break;
-      default:
-        break;
-      }
     }
   }
 }
