@@ -346,17 +346,6 @@ static void Action_DropBonusBox (Action *a)
 
 static void Action_Game_SetState (Action *a)
 {
-  // to re-synchronize random number generator
-  uint seed = (uint)(a->PopInt());
-#ifdef DEBUG
-  if (IsLOGGING("random")) {
-    uint nb = RandomSync().GetSeed();
-    MSG_DEBUG("random.get", "Action_Game_SetState(...): %d", nb);
-    ASSERT(nb == seed);
-  }
-#endif
-  RandomSync().SetSeed(seed);
-
   Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
   Game::GetInstance()->Really_SetState(state);
 }
@@ -799,6 +788,19 @@ static void Action_Network_RandomInit (Action *a)
   RandomSync().SetSeed(a->PopInt());
 }
 
+static void Action_Network_VerifyRandomSync(Action *a)
+{
+  uint local_seed = RandomSync().GetSeed();
+  uint remote_seed = (uint)(a->PopInt());
+  MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
+
+  if (IsLOGGING("random"))
+    ASSERT(remote_seed == local_seed);
+
+  if (local_seed != remote_seed)
+    RandomSync().SetSeed(remote_seed);
+}
+
 // Nothing to do here. Just for time synchronisation
 static void Action_Network_Ping(Action */*a*/)
 {
@@ -1059,6 +1061,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   ActionHandler::GetInstance()->Register (Action::ACTION_WIND, "wind", &Action_Wind);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC, "NETWORK_verify_random_sync", &Action_Network_VerifyRandomSync);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_client_connect", &Action_Info_ClientConnect);
 

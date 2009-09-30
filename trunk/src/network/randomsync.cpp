@@ -66,6 +66,19 @@ void RandomSyncGen::SetRand(uint seed)
   RandomGenerator::SetRand(seed);
 }
 
+void RandomSyncGen::Verify()
+{
+  MSG_DEBUG("random.verify","Verify seed (%d)", GetSeed());
+  bool turn_master = Network::GetInstance()->IsTurnMaster();
+  ASSERT(turn_master);
+  if (!turn_master)
+    return;
+  uint seed = GetSeed();
+  Action* action = new Action(Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC);
+  action->Push((int)seed);
+  ActionHandler::GetInstance()->NewAction(action);
+}
+
 RandomSyncGen& RandomSync()
 {
   return (*RandomSyncGen::GetInstance());

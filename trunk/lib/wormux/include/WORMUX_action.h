@@ -109,6 +109,7 @@ public:
     ACTION_EXPLOSION,
     ACTION_WIND,
     ACTION_NETWORK_PING,
+    ACTION_NETWORK_VERIFY_RANDOM_SYNC,
     // ########################################################
   } Action_t;
 
