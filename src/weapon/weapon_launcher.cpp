@@ -434,9 +434,14 @@ bool WeaponLauncher::p_Shoot()
   return true;
 }
 
+bool WeaponLauncher::IsOnCooldownFromShot() const
+{
+  return (m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read());
+}
+
 bool WeaponLauncher::IsInUse() const
 {
-  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return IsOnCooldownFromShot() || IsLoading();
 }
 
 bool WeaponLauncher::ReloadLauncher()
@@ -459,7 +464,7 @@ void WeaponLauncher::Draw()
   //Display timeout for projectil if can be changed.
   if (projectile->change_timeout_allowed())
   {
-    if( IsInUse() ) //Do not display after launching.
+    if (IsOnCooldownFromShot()) //Do not display after launching.
       return;
 
     int tmp = projectile->GetTotalTimeout();

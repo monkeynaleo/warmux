@@ -126,15 +126,6 @@ void SuperTux::Refresh()
     last_move = Time::GetInstance()->Read();
   }
 
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-  {
-    Action a(Action::ACTION_WEAPON_SUPERTUX);
-    a.Push(0); // to ask for a position refresh
-    a.Push(angle_rad);
-    a.Push(GetPos());
-    Network::GetInstance()->SendActionToAll(a);
-  }
-
   if (!swimming)
     particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
   // else
@@ -277,32 +268,22 @@ void TuxLauncher::SignalEndOfProjectile()
   tux_death_time = Time::GetInstance()->Read();
 }
 
-void TuxLauncher::HandleKeyPressed_Shoot()
+void TuxLauncher::StartShooting()
 {
   if (current_tux || tux_death_time)
     return;
 
-  Weapon::HandleKeyPressed_Shoot();
+  Weapon::StartShooting();
 }
 
-void TuxLauncher::HandleKeyRefreshed_Shoot()
-{
-  if (current_tux || tux_death_time)
-    return;
 
-  Weapon::HandleKeyRefreshed_Shoot();
-}
-
-void TuxLauncher::HandleKeyReleased_Shoot()
+void TuxLauncher::StopShooting()
 {
   if (current_tux) {
-    Action* a = new Action(Action::ACTION_WEAPON_SUPERTUX);
-    a->Push(1); // to ask for an explosion
-    a->Push(current_tux->GetPos());
-    ActionHandler::GetInstance()->NewAction(a);
+    current_tux->Explosion();
     return;
   } else if (!tux_death_time)
-    Weapon::HandleKeyReleased_Shoot();
+    Weapon::StopShooting();
 }
 
 // Move right
@@ -447,25 +428,6 @@ std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_cou
             "%s team has won %u tux launcher! Never seen a flying penguin?",
             "%s team has won %u tux launchers! Never seen a flying penguin?",
             items_count), TeamName, items_count);
-}
-
-void TuxLauncher::RefreshFromNetwork(double angle, Point2d pos)
-{
-  // Fix bug #9815 : Crash when changing tux angle in network mode.
-  if (!current_tux)
-    return;
-  current_tux->SetAngle(angle);
-  current_tux->SetPhysXY(pos);
-  current_tux->SetSpeedXY(Point2d(0,0));
-}
-
-void TuxLauncher::ExplosionFromNetwork(Point2d tux_pos)
-{
-  if (!current_tux)
-    return;
-
-  current_tux->SetPhysXY(tux_pos);
-  current_tux->Explosion();
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()

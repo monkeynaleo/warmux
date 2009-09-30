@@ -56,8 +56,6 @@
 #include "weapon/explosion.h"
 #include "weapon/gnu.h"
 #include "weapon/grapple.h"
-#include "weapon/polecat.h"
-#include "weapon/supertux.h"
 #include "weapon/weapon.h"
 #include "weapon/weapon_launcher.h"
 #include "weapon/weapons_list.h"
@@ -613,19 +611,19 @@ static void Action_Character_StopDecreasingFireAngle(Action *a)
   ActiveCharacter().StopDecreasingFireAngle(slowly);
 }
 
-static void Action_Weapon_Shoot (Action *a)
-{
-  if (Game::GetInstance()->ReadState() != Game::PLAYING)
-    return; // hack related to bug 8656
-
-  double strength = a->PopDouble();
-  double angle = a->PopDouble();
-  ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
-}
-
 static void Action_Weapon_StopUse(Action */*a*/)
 {
   ActiveTeam().AccessWeapon().ActionStopUse();
+}
+
+static void Action_Weapon_StartShooting(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StartShooting();
+}
+
+static void Action_Weapon_StopShooting(Action */*a*/)
+{
+  ActiveTeam().AccessWeapon().StopShooting();
 }
 
 static void Action_Weapon_SetTarget (Action *a)
@@ -694,52 +692,6 @@ static void Action_Weapon_Construction (Action *a)
   }
 
   construct_weapon->SetAngle(a->PopDouble());
-}
-
-static void Action_Weapon_Gnu (Action *a)
-{
-  GnuLauncher* launcher = dynamic_cast<GnuLauncher*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(launcher != NULL)
-  {
-    return;
-  }
-
-  Point2d pos(a->PopPoint2d());
-  launcher->ExplosionFromNetwork(pos);
-}
-
-static void Action_Weapon_Polecat (Action *a)
-{
-  PolecatLauncher* launcher = dynamic_cast<PolecatLauncher*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(launcher != NULL)
-  {
-    return;
-  }
-
-  Point2d pos(a->PopPoint2d());
-  launcher->ExplosionFromNetwork(pos);
-}
-
-static void Action_Weapon_Supertux (Action *a)
-{
-  TuxLauncher* launcher = dynamic_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(launcher != NULL)
-  {
-    return;
-  }
-
-  int subaction = a->PopInt();
-
-  if (subaction == 0) {
-    double angle = a->PopDouble();
-    Point2d pos(a->PopPoint2d());
-    launcher->RefreshFromNetwork(angle, pos);
-  } else if (subaction == 1) {
-    Point2d pos(a->PopPoint2d());
-    launcher->ExplosionFromNetwork(pos);
-  } else {
-    ASSERT(false);
-  }
 }
 
 // ########################################################
@@ -982,10 +934,12 @@ void Action_Handler_Init()
 
   // ########################################################
   // Using Weapon
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
 
   // Quite standard weapon options
+
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_SHOOTING, "WEAPON_start_shooting", &Action_Weapon_StartShooting);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_SHOOTING, "WEAPON_stop_shooting", &Action_Weapon_StopShooting);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_LEFT, "WEAPON_start_moving_left", &Action_Weapon_StartMovingLeft);
@@ -999,9 +953,6 @@ void Action_Handler_Init()
 
   // Special weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GNU, "WEAPON_gnu", &Action_Weapon_Gnu);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_POLECAT, "WEAPON_polecat", &Action_Weapon_Polecat);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
 
   // Bonus box
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);

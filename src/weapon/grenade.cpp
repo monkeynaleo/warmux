@@ -61,7 +61,7 @@ void Grenade::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 GrenadeLauncher::GrenadeLauncher() :
-  WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+  WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig())
 {
   UpdateTranslationStrings();
 

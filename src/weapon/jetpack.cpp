@@ -200,12 +200,12 @@ void JetPack::HandleKeyReleased_Up(bool slowly)
     StopMovingUpForAllPlayers();
 }
 
-void JetPack::HandleKeyPressed_Shoot()
+void JetPack::StartShooting()
 {
-  if (!IsInUse())
-    NewActionWeaponShoot();
+  if (IsInUse())
+    ActionStopUse();
   else
-    NewActionWeaponStopUse();
+    Weapon::StartShooting();
 }
 
 bool JetPack::p_Shoot()

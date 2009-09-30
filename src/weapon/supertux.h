@@ -44,10 +44,8 @@ public:
 
   virtual void SignalEndOfProjectile();
 
-  // Key Shoot management
-  virtual void HandleKeyPressed_Shoot();
-  virtual void HandleKeyRefreshed_Shoot();
-  virtual void HandleKeyReleased_Shoot();
+  void StartShooting();
+  void StopShooting();
 
   virtual void HandleKeyPressed_MoveRight(bool slowly);
   virtual void HandleKeyRefreshed_MoveRight(bool slowly);

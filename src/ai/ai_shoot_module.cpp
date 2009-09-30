@@ -341,7 +341,8 @@ void AIShootModule::Shoot()
 {
   if (m_current_time > m_last_shoot_time + 2 ||
       m_last_shoot_time == 0) {
-    ActiveTeam().GetWeapon().NewActionWeaponShoot();
+    //TODO find better replacement for:
+    ActiveTeam().AccessWeapon().PrepareShoot(0, ActiveCharacter().GetAbsFiringAngle());
     m_last_shoot_time = m_current_time;
   }
 
