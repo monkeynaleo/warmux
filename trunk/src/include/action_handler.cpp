@@ -558,21 +558,18 @@ void WORMUX_DisconnectPlayer(Player& player)
 static void Action_Character_Jump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
-  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().Jump();
 }
 
 static void Action_Character_HighJump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
-  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().HighJump();
 }
 
 static void Action_Character_BackJump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
-  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().BackJump();
 }
 
