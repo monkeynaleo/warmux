@@ -156,7 +156,8 @@ bool FlameThrower::p_Shoot()
   projectile = NULL;
   ReloadLauncher();
 
-  Point2i pos = ActiveCharacter().GetHandPosition();
+  Point2i pos;
+  ActiveCharacter().GetHandPosition(pos);
   double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
                * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,

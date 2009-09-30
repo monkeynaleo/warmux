@@ -530,7 +530,6 @@ void Character::DoShoot()
   MSG_DEBUG("weapon.shoot", "-> begin at time %u", Time::GetInstance()->Read());
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
-  body->UpdateWeaponPosition(GetPosition());
   damage_stats->OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
   MSG_DEBUG("weapon.shoot", "<- end");
@@ -897,8 +896,15 @@ bool Character::IsActiveCharacter() const
 }
 
 // Hand position
-const Point2i & Character::GetHandPosition() const {
-  return body->GetHandPosition();
+void Character::GetHandPosition(Point2i & result) const
+{
+  GetRelativeHandPosition(result);
+  result += GetPosition();
+}
+
+void Character::GetRelativeHandPosition(Point2i & result) const
+{
+  body->GetRelativeHandPosition(result);
 }
 
 double Character::GetFiringAngle() const {

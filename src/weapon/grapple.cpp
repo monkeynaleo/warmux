@@ -202,8 +202,7 @@ bool Grapple::TryAttachRope()
   // The rope is being launching. Increase the rope length and check
   // collisions.
 
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-  pos = handPos;
+  ActiveCharacter().GetHandPosition(pos);
 
   length = cfg().automatic_growing_speed * delta_time / 10;
   if (length > cfg().max_rope_length)
@@ -245,8 +244,9 @@ bool Grapple::TryAddNode(int CurrentSense)
   Point2d V;
   Point2i contact_point;
   double angle, rope_angle;
+  Point2i handPos;
 
-  Point2i handPos = ActiveCharacter().GetHandPosition();
+  ActiveCharacter().GetHandPosition(handPos);
 
   // Compute distance between hands and rope fixation point.
 
@@ -292,7 +292,8 @@ bool Grapple::TryRemoveNodes(int currentSense)
   // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
   // find an example where it is required
   double currentAngle = ActiveCharacter().GetRopeAngle();
-  Point2i mapRopeStart = ActiveCharacter().GetHandPosition();
+  Point2i mapRopeStart;
+  ActiveCharacter().GetHandPosition(mapRopeStart);
 
   const int max_nodes_per_turn = 100; // safe value, was used to avoid network congestion
   int nodes_to_remove = 0;
@@ -416,6 +417,7 @@ void Grapple::Draw()
 {
   int x, y;
   double angle, prev_angle;
+  Point2i handPos;
 
   struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;} quad;
 
@@ -436,7 +438,7 @@ void Grapple::Draw()
   prev_angle = angle;
 
   // Draw the rope.
-  Point2i handPos = ActiveCharacter().GetHandPosition();
+  ActiveCharacter().GetHandPosition(handPos);
   x = handPos.x;
   y = handPos.y;
 
@@ -495,9 +497,8 @@ void Grapple::AttachRope(const Point2i& contact_point)
   rope_nodes.clear();
 
   // The rope reaches the fixation point. Let's fix it !
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-  Point2i pos(handPos.x - ActiveCharacter().GetX(),
-              handPos.y - ActiveCharacter().GetY());
+  Point2i pos;
+  ActiveCharacter().GetRelativeHandPosition(pos);
 
   ActiveCharacter().SetPhysFixationPointXY(
                                            contact_point.x / PIXEL_PER_METER,
@@ -536,12 +537,10 @@ void Grapple::AttachNode(const Point2i& contact_point,
                          double angle,
                          int sense)
 {
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-
   // The rope has collided something...
   // Add a node on the rope and change the fixation point.
-  Point2i pos(handPos.x - ActiveCharacter().GetX(),
-              handPos.y - ActiveCharacter().GetY());
+  Point2i pos;
+  ActiveCharacter().GetRelativeHandPosition(pos);
 
   ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
@@ -575,14 +574,13 @@ void Grapple::DetachNode()
 
   m_fixation_point = rope_nodes.back().pos ;
 
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-  int dx = handPos.x - ActiveCharacter().GetX();
-  int dy = handPos.y - ActiveCharacter().GetY();
+  Point2i pos;
+  ActiveCharacter().GetRelativeHandPosition(pos);
 
   ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
                                            m_fixation_point.y / PIXEL_PER_METER,
-                                           (double)dx / PIXEL_PER_METER,
-                                           (double)dy / PIXEL_PER_METER);
+                                           (double)pos.x / PIXEL_PER_METER,
+                                           (double)pos.y / PIXEL_PER_METER);
 }
 
 // =========================== Moves management

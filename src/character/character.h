@@ -221,7 +221,8 @@ public:
   bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
   void SetCustomName(const std::string name);
    // Hand position
-  const Point2i & GetHandPosition() const;
+  void GetHandPosition(Point2i & result) const;
+  void GetRelativeHandPosition(Point2i & result) const;
 
   // Damage report
   const DamageStatistics* GetDamageStats() const { return damage_stats; };

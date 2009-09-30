@@ -101,7 +101,11 @@ void Parachute::Draw()
 {
   if(open) {
     img->Update();
-    img->Draw(ActiveCharacter().GetHandPosition() - Point2i(img->GetWidth()/2,img->GetHeight()));
+    Point2i position;
+    ActiveCharacter().GetHandPosition(position);
+    position.x -= img->GetWidth()/2;
+    position.y -= img->GetHeight();
+    img->Draw(position);
   }
 }
 
