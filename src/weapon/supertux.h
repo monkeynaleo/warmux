@@ -34,6 +34,8 @@ class TuxLauncher : public WeaponLauncher
 private:
   SuperTux * current_tux;
   uint tux_death_time;
+  bool move_left_pressed;
+  bool move_right_pressed;
 
 public:
   TuxLauncher();
@@ -43,6 +45,12 @@ public:
   virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
   virtual void SignalEndOfProjectile();
+
+  virtual void StartMovingLeft() {move_left_pressed = true;};
+  virtual void StopMovingLeft() {move_left_pressed = false;};
+
+  virtual void StartMovingRight() {move_right_pressed = true;};
+  virtual void StopMovingRight() {move_right_pressed = false;};
 
   void StartShooting();
   void StopShooting();
