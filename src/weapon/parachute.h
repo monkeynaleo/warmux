@@ -35,10 +35,6 @@ class Parachute : public Weapon
     bool open;
     bool closing;
 
-    struct {
-      double x_extern;
-      bool changing;
-    } m_x_strength;
     Sprite* img;
   protected:
     void p_Select();
@@ -52,10 +48,6 @@ class Parachute : public Weapon
     bool IsInUse() const;
 
     void HandleKeyPressed_Shoot();
-    void HandleKeyPressed_MoveRight(bool slowly);
-    void HandleKeyReleased_MoveRight(bool slowly);
-    void HandleKeyPressed_MoveLeft(bool slowly);
-    void HandleKeyReleased_MoveLeft(bool slowly);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
