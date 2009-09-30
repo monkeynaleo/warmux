@@ -40,8 +40,7 @@ IndexServer::IndexServer():
 IndexServer::~IndexServer()
 {
   server_lst.clear();
-  if (IsConnected())
-    Disconnect();
+  Disconnect();
 
   SDL_DestroySemaphore(action_sem);
 }
@@ -51,17 +50,45 @@ bool IndexServer::IsConnected()
   return socket.IsConnected();
 }
 
+void IndexServer::Lock()
+{
+  MSG_DEBUG("index_server.lock", "> Locking...");
+  SDL_SemWait(action_sem);
+  MSG_DEBUG("index_server.lock", "> Locked");
+}
+
+void IndexServer::Unlock()
+{
+  MSG_DEBUG("index_server.lock", "< Unlocking...");
+  SDL_SemPost(action_sem);
+  MSG_DEBUG("index_server.lock", "< Unlocked");
+}
+
+bool IndexServer::TryLock()
+{
+  MSG_DEBUG("index_server.lock", "> Try locking...");
+  bool r = (SDL_SemTryWait(action_sem) == 0);
+  MSG_DEBUG("index_server.lock", "> Successful ? : %d", r);
+  return r;
+}
 
 /*************  Connection  /  Disconnection  ******************/
 connection_state_t IndexServer::Connect(const std::string& wormux_version)
 {
   connection_state_t r = CONN_REJECTED;
+  std::string addr;
+  int port;
+  uint nb_servers_tried = 0; // how many servers have we tried to connect ?
+
+  Lock();
 
   MSG_DEBUG("index_server", "Connecting..");
   ASSERT(!IsConnected());
 
-  if (hidden_server)
-    return CONNECTED;
+  if (hidden_server) {
+    r = CONNECTED;
+    goto out;
+  }
 
   // Download the server if it's empty
   if (server_lst.size() == 0) {
@@ -71,12 +98,10 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
   }
 
   // If it's still empty, then something went wrong when downloading it
-  if (server_lst.size() == 0)
-    return CONN_BAD_HOST;
-
-  std::string addr;
-  int port;
-  uint nb_servers_tried = 0; // how many servers have we tried to connect ?
+  if (server_lst.size() == 0) {
+    r = CONN_BAD_HOST;
+    goto out;
+  }
 
   // Cycle through the list of server
   // Until we find one running
@@ -84,15 +109,19 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
   {
     r = ConnectTo(addr, port, wormux_version);
     if (r == CONNECTED)
-      return r;
+      goto out;
   }
 
   // Undo what was done
-  Disconnect();
+  __Disconnect();
+
+ out:
+  Unlock();
 
   return r;
 }
 
+// must be called protected by the semaphore
 connection_state_t IndexServer::ConnectTo(const std::string& address, const int& port,
 					  const std::string& wormux_version)
 {
@@ -124,7 +153,8 @@ connection_state_t IndexServer::ConnectTo(const std::string& address, const int&
   return r;
 }
 
-void IndexServer::Disconnect()
+// Must be called protected by the semaphore
+void IndexServer::__Disconnect()
 {
   if (hidden_server)
   {
@@ -144,6 +174,14 @@ void IndexServer::Disconnect()
   socket.Disconnect();
 }
 
+void IndexServer::Disconnect()
+{
+  Lock();
+  __Disconnect();
+  Unlock();
+}
+
+// Must be called protected by the semaphore
 bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb_servers_tried)
 {
   // have we already tried all servers ?
@@ -184,6 +222,7 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
 }
 
 /*************  Basic transmissions  ******************/
+// Must be called protected by the semaphore
 void IndexServer::NewMsg(IndexServerMsg msg_id, char* buffer, uint& used)
 {
   assert(used == 0);
@@ -192,6 +231,7 @@ void IndexServer::NewMsg(IndexServerMsg msg_id, char* buffer, uint& used)
   used += 4;
 }
 
+// Must be called protected by the semaphore
 bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
 {
   WNet::FinalizeBatch(buffer, used);
@@ -202,14 +242,13 @@ bool IndexServer::SendMsg(WSocket& socket, char* buffer, uint& used)
   return r;
 }
 
+// Must be called protected by the semaphore
 connection_state_t IndexServer::HandShake(const std::string& wormux_version)
 {
   connection_state_t status = CONN_REJECTED;
   bool r;
   int msg;
   std::string sign;
-
-  SDL_SemWait(action_sem);
 
   MSG_DEBUG("index_server", "Beginning handshake...");
 
@@ -254,13 +293,10 @@ connection_state_t IndexServer::HandShake(const std::string& wormux_version)
   MSG_DEBUG("index_server", "Handshake : OK");
 
   status = CONNECTED;
-  SDL_SemPost(action_sem);
-
   return status;
 
  error:
   MSG_DEBUG("index_server", "Handshake : ERROR!");
-  SDL_SemPost(action_sem);
   return status;
 }
 
@@ -269,7 +305,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (hidden_server)
     return true;
 
-  SDL_SemWait(action_sem);
+  Lock();
 
   std::string ack;
   uint used = 0;
@@ -296,12 +332,12 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   MSG_DEBUG("index_server", "ACK received \\o/\n",
 	    game_name.c_str(), pwd, port);
 
-  SDL_SemPost(action_sem);
+  Unlock();
   return true;
 
  disconnect:
-  Disconnect();
-  SDL_SemPost(action_sem);
+  __Disconnect();
+  Unlock();
 
   return false;
 }
@@ -311,7 +347,7 @@ std::list<GameServerInfo> IndexServer::GetHostList()
   std::list<GameServerInfo> lst;
   bool r;
 
-  SDL_SemWait(action_sem);
+  Lock();
 
   uint used = 0;
   NewMsg(TS_MSG_GET_LIST, buffer, used);
@@ -377,7 +413,7 @@ std::list<GameServerInfo> IndexServer::GetHostList()
   }
 
  out:
-  SDL_SemPost(action_sem);
+  Unlock();
   return lst;
 }
 
@@ -388,7 +424,7 @@ const std::string& IndexServer::GetSupportedVersions() const
 
 void IndexServer::Refresh(bool nowait)
 {
-  if (SDL_SemTryWait(action_sem) != 0)
+  if (!TryLock())
     return;
 
   int msg_id;
@@ -416,10 +452,10 @@ void IndexServer::Refresh(bool nowait)
     goto disconnect;
 
  out:
-  SDL_SemPost(action_sem);
+  Unlock();
   return;
 
  disconnect:
-  Disconnect();
+  __Disconnect();
   goto out;
 }
