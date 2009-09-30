@@ -179,6 +179,7 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
 
+  ASSERT(parent != NULL || type == "body");
   if(parent == NULL && type != "body")
   {
     std::cerr << "Error : Member " << name << " have no parent member!" << std::endl;
@@ -193,6 +194,7 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
 void Member::ApplySqueleton(Member* parent_member)
 {
   // Place the member to shape the skeleton
+  ASSERT(parent_member != NULL);
   if(parent_member == NULL)
   {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;

@@ -477,8 +477,7 @@ void Body::DrawWeaponMember(const Point2i& _pos)
 
 void Body::Draw(const Point2i& _pos)
 {
-  Build();
-
+  ASSERT(!need_rebuild);
   int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
@@ -502,6 +501,9 @@ void Body::Draw(const Point2i& _pos)
   if (owner->IsActiveCharacter() && draw_weapon_member == 0) {
     DrawWeaponMember(_pos);
   }
+
+  // if this assertion fails then the body has been modified in this _draw_ method!!!
+  ASSERT(!need_rebuild);
 }
 
 void Body::AddChildMembers(Member* parent)

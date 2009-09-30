@@ -518,6 +518,12 @@ void Game::MainLoop()
       // Refresh clock value
       RefreshClock();
 
+      // For example the switch of characters can make it necessary to rebuild the body.
+      // If no cacluate frame action is sheduled the frame calculation will be skipped and the bodies don't get build.
+      // As the draw method needs builded characters we need to build here
+      FOR_ALL_CHARACTERS(team,character)
+        character->GetBody()->Build();
+
       // The action which verifys the random seed must be the first action sheduled!
       // Otherwise the following could happen:
       // 1. Action C gets sheduled which draws values from the random source.
@@ -553,6 +559,10 @@ void Game::MainLoop()
       // Refresh the map
       GetWorld().Refresh();
 
+      // Build the characters if necessary so that it does not need to happen while drawing.
+      // The build can become necessary again when for example weapons change the movement.
+      FOR_ALL_CHARACTERS(team,character)
+	      character->GetBody()->Build();
     } else {
       SDL_Delay(1);
     }
