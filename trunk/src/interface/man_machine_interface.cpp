@@ -269,7 +269,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {
         Action * a = new Action(Action::ACTION_DROP_BONUS_BOX);
-        current_box->StoreValue(a);
         ActionHandler::GetInstance()->NewAction(a);
       }
     } else if (Game::GetInstance()->ReadState() == Game::PLAYING &&
@@ -426,15 +425,15 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       {
         if (GameMode::GetInstance()->AllowCharacterSelection()) {
           SDLMod mod = SDL_GetModState();
-	  Action * change_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-	  Character::StoreActiveCharacter(change_character);
           if (mod & KMOD_CTRL) {
             ActiveTeam().PreviousCharacter();
           } else {
             ActiveTeam().NextCharacter();
           }
-	  Character::StoreActiveCharacter(change_character);
-	  ActionHandler::GetInstance()->NewAction(change_character);
+          Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
+          uint next_character_index = ActiveCharacter().GetCharacterIndex();
+          next_character->Push((int)next_character_index);
+          ActionHandler::GetInstance()->NewAction(next_character);
         }
       }
       return;

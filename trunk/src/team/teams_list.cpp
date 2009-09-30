@@ -65,7 +65,6 @@ void TeamsList::NextTeam ()
   ActiveTeam().NextCharacter(true);
 
   Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
-  Character::StoreActiveCharacter(&a);
   Network::GetInstance()->SendActionToAll(a);
 
   printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());

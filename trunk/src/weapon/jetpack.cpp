@@ -75,7 +75,6 @@ void JetPack::Refresh()
     F.y = m_y_force ;
 
     ActiveCharacter().SetExternForceXY(F);
-    SendActiveCharacterInfo(true);
 
     if (!F.IsNull())
     {

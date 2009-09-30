@@ -105,10 +105,6 @@ public:
   double GetYdouble() const;
   const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
 
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
-
   // Set/Get size
   void SetSize(const Point2i &newSize);
   int GetWidth() const { return m_width; };

@@ -53,8 +53,6 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
     void Draw();
     virtual void Refresh();
     virtual void Randomize() {};
-    virtual void GetValueFromAction(Action *);
-    virtual void StoreValue(Action *);
     virtual void ApplyBonus(Character *) {};
 
   protected:

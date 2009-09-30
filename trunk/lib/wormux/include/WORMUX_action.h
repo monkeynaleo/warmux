@@ -83,8 +83,6 @@ public:
     ACTION_CHARACTER_HIGH_JUMP,
     ACTION_CHARACTER_BACK_JUMP,
 
-    ACTION_CHARACTER_SET_PHYSICS,
-
     // ########################################################
     // Using Weapon
     ACTION_WEAPON_SHOOT,
@@ -105,7 +103,6 @@ public:
     ACTION_DROP_BONUS_BOX,
 
     // ########################################################
-    ACTION_EXPLOSION,
     ACTION_NETWORK_PING,
     ACTION_NETWORK_VERIFY_RANDOM_SYNC,
     // ########################################################

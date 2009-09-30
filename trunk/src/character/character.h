@@ -149,16 +149,6 @@ public:
     else disease_damage_per_turn = 0;
   }
 
-  // ================================================
-  // Used to sync value across network
-  virtual void GetValueFromAction(Action *);
-  virtual void StoreValue(Action *);
-
-  static void RetrieveCharacterFromAction(Action *);
-  static void StoreActiveCharacter(Action *);
-  static void StoreCharacter(Action *, uint team_no, uint char_no);
-  // ================================================
-
   void Draw();
   void Refresh();
 
