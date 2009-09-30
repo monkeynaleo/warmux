@@ -702,45 +702,6 @@ static void Action_Weapon_Gnu (Action *a)
   launcher->ExplosionFromNetwork(pos);
 }
 
-static void Action_Weapon_Grapple (Action *a)
-{
-  Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(grapple != NULL)
-  {
-    return;
-  }
-
-  int subaction = a->PopInt();
-  switch (subaction) {
-  case Grapple::ATTACH_ROPE:
-    {// attach rope
-      Point2i contact_point = a->PopPoint2i();
-      grapple->AttachRope(contact_point);
-    }
-    break;
-
-  case Grapple::ATTACH_NODE: // attach node
-    {
-      Point2i contact_point = a->PopPoint2i();
-      double angle = a->PopDouble();
-      int sense = a->PopInt();
-      grapple->AttachNode(contact_point, angle, sense);
-    }
-    break;
-
-  case Grapple::DETACH_NODE: // detach last node
-    grapple->DetachNode();
-    break;
-
-  case Grapple::SET_ROPE_SIZE: // update rope size
-    grapple->SetRopeSize(a->PopDouble());
-    break;
-
-  default:
-    ASSERT(false);
-  }
-}
-
 static void Action_Weapon_Polecat (Action *a)
 {
   PolecatLauncher* launcher = dynamic_cast<PolecatLauncher*>(&(ActiveTeam().AccessWeapon()));
@@ -1033,7 +994,6 @@ void Action_Handler_Init()
   // Special weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GNU, "WEAPON_gnu", &Action_Weapon_Gnu);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_POLECAT, "WEAPON_polecat", &Action_Weapon_Polecat);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
 
