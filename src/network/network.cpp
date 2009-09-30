@@ -350,9 +350,9 @@ void Network::SendActionToAll(const Action& a) const
 
 void Network::SendActionToOne(const Action& a, DistantComputer* client) const
 {
-  MSG_DEBUG("network.traffic","Send action %s to %s (%s)",
+  MSG_DEBUG("network.traffic","Send action %s to %s",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
-	    client->ToString().c_str());
+            client->ToString().c_str());
 
   SendAction(a, client, true);
 }
