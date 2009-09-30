@@ -64,9 +64,6 @@ void TeamsList::NextTeam ()
 
   ActiveTeam().NextCharacter(true);
 
-  Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
-  Network::GetInstance()->SendActionToAll(a);
-
   printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
   printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
   printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());

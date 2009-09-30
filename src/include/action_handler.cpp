@@ -310,20 +310,6 @@ static void Action_Player_ChangeCharacter (Action *a)
   Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
-static void Action_Game_NextTeam (Action *a)
-{
-  std::string team = a->PopString();
-  GetTeamsList().SetActive(team);
-  ActiveTeam().NextCharacter(true);
-  Camera::GetInstance()->FollowObject(&ActiveCharacter());
-
-  // Are we turn master for next turn ?
-  if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    Network::GetInstance()->SetTurnMaster(true);
-  else
-    Network::GetInstance()->SetTurnMaster(false);
-}
-
 static void Action_Game_CalculateFrame (Action */*a*/)
 {
   // Nothing to do here:
@@ -952,7 +938,6 @@ void Action_Handler_Init()
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
-  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
 
   // ########################################################
