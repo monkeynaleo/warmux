@@ -191,8 +191,10 @@ public:
 
   void StartMovingLeft(bool slowly);
   void StopMovingLeft(bool slowly);
+  bool IsMovingLeft(bool slowly);
   void StartMovingRight(bool slowly);
   void StopMovingRight(bool slowly);
+  bool IsMovingRight(bool slowly);
 
   // Jumps
   void Jump(double strength, double angle);

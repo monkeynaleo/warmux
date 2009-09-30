@@ -27,7 +27,6 @@
 class JetPack : public Weapon
 {
   private:
-    double m_x_force;
     double m_y_force;
 
     bool m_flying;
@@ -42,12 +41,11 @@ class JetPack : public Weapon
     void Reset();
     virtual void ActionStopUse();
 
+    void StartMovingUp();
+    void StopMovingUp();
+
     virtual void HandleKeyPressed_Up(bool slowly);
     virtual void HandleKeyReleased_Up(bool slowly);
-    virtual void HandleKeyPressed_MoveLeft(bool slowly);
-    virtual void HandleKeyReleased_MoveLeft(bool slowly);
-    virtual void HandleKeyPressed_MoveRight(bool slowly);
-    virtual void HandleKeyReleased_MoveRight(bool slowly);
     virtual void HandleKeyPressed_Shoot();
 
     void UpdateTranslationStrings();
@@ -61,8 +59,6 @@ class JetPack : public Weapon
 
   private:
     void GoUp();
-    void GoLeft();
-    void GoRight();
     void StartFlying();
     void StopFlying();
 };
