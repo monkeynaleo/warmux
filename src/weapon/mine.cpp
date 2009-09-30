@@ -56,6 +56,12 @@ ObjMine::ObjMine(MineConfig& cfg,
   escape_time = 0;
 
   fake = false;
+
+  // Initialize begin_time so that it has the same value for all players in a network game:
+  // This makes it easier to compare logs and prevents desynchronization
+  // when new code starts to make use of begin_time when it should not.
+  begin_time = 0;
+  explode_with_timeout = false;
 }
 
 void ObjMine::FakeExplosion()
