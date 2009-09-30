@@ -217,6 +217,10 @@ void WeaponProjectile::Refresh()
     Explosion();
     return;
   }
+  // The RefreshSurface() call is necessary as the image determines the size of the projectile
+  // and we don't want to rely on Draw to call RefreshSurface() as the draw rate differs
+  // for the players in a multiplayer game.
+  image->RefreshSurface();
   SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
