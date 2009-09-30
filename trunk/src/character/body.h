@@ -135,6 +135,7 @@ public:
   uint GetMovementDuration() const;
   uint GetFrame() const { return current_frame; };
   uint GetFrameCount() const;
+  void RefreshSprites();
 
   void StartWalk();
   void StopWalk();

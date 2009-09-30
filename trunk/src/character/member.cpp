@@ -160,25 +160,27 @@ void Member::RotateSprite()
   spr->RefreshSurface();
 }
 
-void Member::Draw(const Point2i & _pos, int flip_center, int direction)
+void Member::RefreshSprite(BodyDirection direction)
 {
-  ASSERT(name != "weapon" && type!="weapon");
+  // The sprite pointer may be invalid at the weapon sprite.
+  ASSERT(name != "weapon" && type != "weapon");
+  ASSERT(parent != NULL || type == "body");
 
-  Point2i posi((int)pos.x, (int)pos.y);
-  posi += _pos;
-
-  if(direction == 1)
-  {
+  if (direction == DIRECTION_RIGHT) {
     spr->SetRotation_rad(angle_rad);
-    spr->Scale(scale.x,scale.y);
-  }
-  else
-  {
-    spr->Scale(-scale.x,scale.y);
+    spr->Scale(scale.x, scale.y);
+  } else {
+    spr->Scale(-scale.x, scale.y);
     spr->SetRotation_rad(-angle_rad);
-    posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
 
+  spr->SetAlpha(alpha);
+  spr->Update();
+}
+
+void Member::Draw(const Point2i & _pos, int flip_center, BodyDirection direction)
+{
+  ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
   if(parent == NULL && type != "body")
   {
@@ -186,8 +188,10 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
     return;
   }
 
-  spr->SetAlpha(alpha);
-  spr->Update();
+  Point2i posi((int)pos.x, (int)pos.y);
+  posi += _pos;
+  if (direction == DIRECTION_LEFT)
+    posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   spr->Draw(posi);
 }
 
@@ -349,7 +353,7 @@ WeaponMember::~WeaponMember()
 {
 }
 
-void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, int /*direction*/)
+void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, BodyDirection /*direction*/)
 {
   if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
     {
