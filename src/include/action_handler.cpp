@@ -41,7 +41,6 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
-#include "map/wind.h"
 #include "menu/network_menu.h"
 #include "network/randomsync.h"
 #include "network/network.h"
@@ -771,11 +770,6 @@ static void Action_Weapon_Supertux (Action *a)
 
 // ########################################################
 
-static void Action_Wind (Action *a)
-{
-  Wind::GetRef().SetVal (a->PopInt());
-}
-
 static void Action_Network_RandomInit (Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
@@ -1051,7 +1045,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
 
   ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WIND, "wind", &Action_Wind);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC, "NETWORK_verify_random_sync", &Action_Network_VerifyRandomSync);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);

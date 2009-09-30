@@ -161,8 +161,7 @@ void GameBlitz::__SetState_PLAYING()
 {
   MSG_DEBUG("game.statechange", "Playing" );
 
-  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
-    Wind::GetRef().ChooseRandomVal();
+  Wind::GetRef().ChooseRandomVal();
 
   SetCharacterChosen(false);
 

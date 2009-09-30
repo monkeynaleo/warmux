@@ -69,7 +69,7 @@ private:
 
 public:
   double GetStrength() const;
-  void ChooseRandomVal() const;
+  void ChooseRandomVal();
 
   void SetVal(long val);
   void Refresh();
