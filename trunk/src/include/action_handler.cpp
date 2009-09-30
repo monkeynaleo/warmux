@@ -344,12 +344,6 @@ static void Action_DropBonusBox (Action *a)
   }
 }
 
-static void Action_Game_SetState (Action *a)
-{
-  Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
-  Game::GetInstance()->Really_SetState(state);
-}
-
 // ########################################################
 
 static void Action_Rules_SetGameMode (Action *a)
@@ -1006,7 +1000,6 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
-  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
 
   // ########################################################

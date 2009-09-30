@@ -74,7 +74,6 @@ public:
     // ########################################################
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_CHANGE_CHARACTER,
-    ACTION_GAMELOOP_SET_STATE,
     ACTION_GAMELOOP_NEXT_TEAM,
     ACTION_GAME_CALCULATE_FRAME,
 
