@@ -61,8 +61,8 @@ public:
   ~DistantComputer();
 
   bool SocketReady() const;
-  bool ReceiveData(void* & data, size_t& len);
-  bool SendData(const void* data, size_t len);
+  bool ReceiveData(char** data, size_t& len);
+  bool SendData(const char* data, size_t len);
 
   std::string GetAddress() const;
   std::string GetNicknames() const;
