@@ -49,7 +49,6 @@ GameClassic::GameClassic()
 
 void GameClassic::EndOfGame()
 {
-  Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
   GameMessages::GetInstance()->Add (_("And the winner is..."));

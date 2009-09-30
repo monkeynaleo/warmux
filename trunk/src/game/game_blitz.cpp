@@ -44,7 +44,6 @@ GameBlitz::GameBlitz()
 
 void GameBlitz::EndOfGame()
 {
-  Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   GameMessages::GetInstance()->Add (_("And the winner is..."));
 
