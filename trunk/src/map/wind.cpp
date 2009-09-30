@@ -38,7 +38,7 @@
 #include "gui/progress_bar.h"
 
 const uint MAX_WIND_OBJECTS = 200;
-const uint bar_speed = 5;
+const uint bar_speed = 1;
 
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   PhysicalObj("wind", xml_file)
