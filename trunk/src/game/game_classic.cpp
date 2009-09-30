@@ -148,8 +148,7 @@ void GameClassic::__SetState_PLAYING()
   Interface::GetInstance()->EnableDisplayTimer(true);
   pause_seconde = Time::GetInstance()->Read();
 
-  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
-    Wind::GetRef().ChooseRandomVal();
+  Wind::GetRef().ChooseRandomVal();
 
   SetCharacterChosen(false);
 

@@ -24,9 +24,9 @@
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
-#include "include/action_handler.h"
 #include "map/map.h"
 #include "map/maps_list.h"
+#include "network/randomsync.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_random.h>
 #include "tool/resource_manager.h"
@@ -219,10 +219,10 @@ void Wind::Reset()
   RandomizeParticlesPos();
 }
 
-void Wind::ChooseRandomVal() const
+void Wind::ChooseRandomVal()
 {
-  int val = RandomLocal().GetLong(-100, 100);
-  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_WIND, val));
+  MSG_DEBUG("random.get", "Wind::ChooseRandomVal()");
+  SetVal(RandomSync().GetLong(-100, 100));
 }
 
 void Wind::DrawParticles()
