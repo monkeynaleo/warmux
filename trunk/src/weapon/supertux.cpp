@@ -305,12 +305,6 @@ void TuxLauncher::HandleKeyPressed_MoveRight(bool slowly)
     ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveRight(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
-}
-
 void TuxLauncher::HandleKeyReleased_MoveRight(bool slowly)
 {
   StopMovingRightForAllPlayers();
@@ -326,12 +320,6 @@ void TuxLauncher::HandleKeyPressed_MoveLeft(bool slowly)
     ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
-}
-
 void TuxLauncher::HandleKeyReleased_MoveLeft(bool slowly)
 {
   StopMovingLeftForAllPlayers();
@@ -343,12 +331,6 @@ void TuxLauncher::HandleKeyPressed_Up(bool slowly)
 {
   if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_Up(slowly);
-}
-
-void TuxLauncher::HandleKeyRefreshed_Up(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Up(slowly);
 }
 
 void TuxLauncher::HandleKeyReleased_Up(bool slowly)
@@ -363,12 +345,6 @@ void TuxLauncher::HandleKeyPressed_Down(bool slowly)
     ActiveCharacter().HandleKeyPressed_Down(slowly);
 }
 
-void TuxLauncher::HandleKeyRefreshed_Down(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Down(slowly);
-}
-
 void TuxLauncher::HandleKeyReleased_Down(bool slowly)
 {
   if (!current_tux && !tux_death_time)
@@ -379,12 +355,6 @@ void TuxLauncher::HandleKeyPressed_Jump()
 {
   if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_Jump();
-}
-
-void TuxLauncher::HandleKeyRefreshed_Jump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_Jump();
 }
 
 void TuxLauncher::HandleKeyReleased_Jump()
@@ -399,12 +369,6 @@ void TuxLauncher::HandleKeyPressed_HighJump()
     ActiveCharacter().HandleKeyPressed_HighJump();
 }
 
-void TuxLauncher::HandleKeyRefreshed_HighJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_HighJump();
-}
-
 void TuxLauncher::HandleKeyReleased_HighJump()
 {
   if (!current_tux && !tux_death_time)
@@ -415,12 +379,6 @@ void TuxLauncher::HandleKeyPressed_BackJump()
 {
   if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_BackJump();
-}
-
-void TuxLauncher::HandleKeyRefreshed_BackJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyRefreshed_BackJump();
 }
 
 void TuxLauncher::HandleKeyReleased_BackJump()

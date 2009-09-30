@@ -726,12 +726,6 @@ void Grapple::HandleKeyPressed_Up(bool slowly)
     ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
-void Grapple::HandleKeyRefreshed_Up(bool slowly)
-{
-  if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_Up(slowly);
-}
-
 void Grapple::HandleKeyReleased_Up(bool slowly)
 {
   if (IsInUse())
@@ -746,12 +740,6 @@ void Grapple::HandleKeyPressed_Down(bool slowly)
     StartMovingDownForAllPlayers();
   else
     ActiveCharacter().HandleKeyPressed_Down(slowly);
-}
-
-void Grapple::HandleKeyRefreshed_Down(bool slowly)
-{
-  if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_Down(slowly);
 }
 
 void Grapple::HandleKeyReleased_Down(bool slowly)
@@ -770,12 +758,6 @@ void Grapple::HandleKeyPressed_MoveLeft(bool slowly)
     ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void Grapple::HandleKeyRefreshed_MoveLeft(bool slowly)
-{
-  if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
-}
-
 void Grapple::HandleKeyReleased_MoveLeft(bool slowly)
 {
   if (IsInUse())
@@ -792,11 +774,6 @@ void Grapple::HandleKeyPressed_MoveRight(bool slowly)
     ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-void Grapple::HandleKeyRefreshed_MoveRight(bool slowly)
-{
-  if (!IsInUse())
-    ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
-}
 
 void Grapple::HandleKeyReleased_MoveRight(bool slowly)
 {

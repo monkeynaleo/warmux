@@ -240,31 +240,24 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool slowly);
-  void HandleKeyRefreshed_MoveRight(bool /*slowly*/) {};
   void HandleKeyReleased_MoveRight(bool slowly);
 
   void HandleKeyPressed_MoveLeft(bool slowly);
-  void HandleKeyRefreshed_MoveLeft(bool /*slowly*/) {};
   void HandleKeyReleased_MoveLeft(bool slowly);
 
   void HandleKeyPressed_Up(bool slowly);
-  void HandleKeyRefreshed_Up(bool /*slowly*/) {};
   void HandleKeyReleased_Up(bool slowly);
 
   void HandleKeyPressed_Down(bool slowly);
-  void HandleKeyRefreshed_Down(bool /*slowly*/) {};
   void HandleKeyReleased_Down(bool slowly);
 
   void HandleKeyPressed_Jump();
-  void HandleKeyRefreshed_Jump() const {};
   void HandleKeyReleased_Jump() const {};
 
   void HandleKeyPressed_HighJump();
-  void HandleKeyRefreshed_HighJump() const { };
   void HandleKeyReleased_HighJump() const { };
 
   void HandleKeyPressed_BackJump();
-  void HandleKeyRefreshed_BackJump() const {};
   void HandleKeyReleased_BackJump() const {};
 
 };

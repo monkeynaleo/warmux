@@ -778,11 +778,6 @@ void Weapon::HandleKeyPressed_MoveRight(bool slowly)
   ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_MoveRight(bool slowly)
-{
-  ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
-}
-
 void Weapon::HandleKeyReleased_MoveRight(bool slowly)
 {
   ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
@@ -791,11 +786,6 @@ void Weapon::HandleKeyReleased_MoveRight(bool slowly)
 void Weapon::HandleKeyPressed_MoveLeft(bool slowly)
 {
   ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
-}
-
-void Weapon::HandleKeyRefreshed_MoveLeft(bool slowly)
-{
-  ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
 }
 
 void Weapon::HandleKeyReleased_MoveLeft(bool slowly)
@@ -808,11 +798,6 @@ void Weapon::HandleKeyPressed_Up(bool slowly)
   ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
-void Weapon::HandleKeyRefreshed_Up(bool slowly)
-{
-  ActiveCharacter().HandleKeyRefreshed_Up(slowly);
-}
-
 void Weapon::HandleKeyReleased_Up(bool slowly)
 {
   ActiveCharacter().HandleKeyReleased_Up(slowly);
@@ -821,11 +806,6 @@ void Weapon::HandleKeyReleased_Up(bool slowly)
 void Weapon::HandleKeyPressed_Down(bool slowly)
 {
   ActiveCharacter().HandleKeyPressed_Down(slowly);
-}
-
-void Weapon::HandleKeyRefreshed_Down(bool slowly)
-{
-  ActiveCharacter().HandleKeyRefreshed_Down(slowly);
 }
 
 void Weapon::HandleKeyReleased_Down(bool slowly)
@@ -838,11 +818,6 @@ void Weapon::HandleKeyPressed_Jump()
   ActiveCharacter().HandleKeyPressed_Jump();
 }
 
-void Weapon::HandleKeyRefreshed_Jump()
-{
-  ActiveCharacter().HandleKeyRefreshed_Jump();
-}
-
 void Weapon::HandleKeyReleased_Jump()
 {
   ActiveCharacter().HandleKeyReleased_Jump();
@@ -853,11 +828,6 @@ void Weapon::HandleKeyPressed_HighJump()
   ActiveCharacter().HandleKeyPressed_HighJump();
 }
 
-void Weapon::HandleKeyRefreshed_HighJump()
-{
-  ActiveCharacter().HandleKeyRefreshed_HighJump();
-}
-
 void Weapon::HandleKeyReleased_HighJump()
 {
   ActiveCharacter().HandleKeyReleased_HighJump();
@@ -866,11 +836,6 @@ void Weapon::HandleKeyReleased_HighJump()
 void Weapon::HandleKeyPressed_BackJump()
 {
   ActiveCharacter().HandleKeyPressed_BackJump();
-}
-
-void Weapon::HandleKeyRefreshed_BackJump()
-{
-  ActiveCharacter().HandleKeyRefreshed_BackJump();
 }
 
 void Weapon::HandleKeyReleased_BackJump()
