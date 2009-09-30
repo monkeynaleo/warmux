@@ -32,7 +32,6 @@
 #include "include/action_handler.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "network/network.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
@@ -226,16 +225,7 @@ bool Grapple::TryAttachRope()
   Point2i contact_point;
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
     {
-      if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
-        return false;
-
-      // The rope reaches the fixation point. Let's fix it !
-      Action* a = new Action(Action::ACTION_WEAPON_GRAPPLE);
-      a->Push(ATTACH_ROPE);
-      a->Push(contact_point);
-      ActionHandler::GetInstance()->NewAction(a);
-
-      MSG_DEBUG("grapple.hook", "Creating ATTACH_GRAPPLE Action");
+      AttachRope(contact_point);
       return true;
     }
 
@@ -288,14 +278,6 @@ bool Grapple::TryAddNode(int CurrentSense)
       // Add a node on the rope and change the fixation point
       AttachNode(contact_point, rope_angle, CurrentSense);
 
-      // Send node addition over the network
-      Action a(Action::ACTION_WEAPON_GRAPPLE);
-      a.Push(ATTACH_NODE);
-      a.Push(contact_point);
-      a.Push(rope_angle);
-      a.Push(CurrentSense);
-      Network::GetInstance()->SendActionToAll(a);
-
       return true;
     }
 
@@ -312,7 +294,7 @@ bool Grapple::TryRemoveNodes(int currentSense)
   double currentAngle = ActiveCharacter().GetRopeAngle();
   Point2i mapRopeStart = ActiveCharacter().GetHandPosition();
 
-  const int max_nodes_per_turn = 100; // safe value to avoid network congestion
+  const int max_nodes_per_turn = 100; // safe value, was used to avoid network congestion
   int nodes_to_remove = 0;
 
   TraceResult tr;
@@ -361,10 +343,6 @@ bool Grapple::TryRemoveNodes(int currentSense)
 
      // remove last node
      DetachNode();
-     // Send node suppression over the network
-     Action a(Action::ACTION_WEAPON_GRAPPLE);
-     a.Push(DETACH_NODE);
-     Network::GetInstance()->SendActionToAll(a);
   }
 
   return nodes_to_remove > 0;
@@ -376,9 +354,6 @@ void Grapple::NotifyMove(bool collision)
   int currentSense;
 
   if (!IsInUse() || m_attaching)
-    return;
-
-  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
 
   // Check if the character collide something.
@@ -429,9 +404,6 @@ void Grapple::Refresh()
 
   if (m_attaching)
     TryAttachRope();
-
-  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
-    return;
 
   if (IsInUse() && !m_attaching)
   {
