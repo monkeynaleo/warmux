@@ -22,6 +22,10 @@
 
 #include <string>
 
+#ifdef _MSC_VER
+#  define __PRETTY_FUNCTION__  __FUNCTION__
+#endif
+
 /** Usage example :
  *
  * MSG_DEBUG( "game.pause", "Salut %s", "Truc" )
