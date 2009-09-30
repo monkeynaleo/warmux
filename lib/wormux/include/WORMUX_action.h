@@ -116,6 +116,7 @@ public:
 
     // Bonus Box
     ACTION_DROP_BONUS_BOX,
+    ACTION_REQUEST_BONUS_BOX_DROP,
 
     // ########################################################
     ACTION_NETWORK_PING,

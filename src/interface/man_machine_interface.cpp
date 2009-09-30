@@ -266,11 +266,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   if (key == KEY_SHOOT) {
 
     if (Game::GetInstance()->ReadState() == Game::END_TURN) {
-      ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
-      if (current_box != NULL) {
-        Action * a = new Action(Action::ACTION_DROP_BONUS_BOX);
-        ActionHandler::GetInstance()->NewAction(a);
-      }
+      Game::GetInstance()->RequestBonusBoxDrop();
     } else if (Game::GetInstance()->ReadState() == Game::PLAYING &&
                ActiveTeam().IsLocal() &&
                !ActiveCharacter().IsDead()) {
