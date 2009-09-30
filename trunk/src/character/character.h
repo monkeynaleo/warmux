@@ -87,6 +87,10 @@ private:
   bool move_left_slowly_pressed;
   bool move_right_pressed;
   bool move_right_slowly_pressed;
+  bool increase_fire_angle_pressed;
+  bool increase_fire_angle_slowly_pressed;
+  bool decrease_fire_angle_pressed;
+  bool decrease_fire_angle_slowly_pressed;
 public:
 
   // Previous strength
@@ -167,6 +171,11 @@ public:
   double GetAbsFiringAngle() const { return firing_angle; };
   void SetFiringAngle(double angle);
 
+  void StartIncreasingFireAngle(bool slowly);
+  void StopIncreasingFireAngle(bool slowly);
+  void StartDecreasingFireAngle(bool slowly);
+  void StopDecreasingFireAngle(bool slowly);
+
   // Show hide the Character
   void Hide() { hidden = true; };
   void Show() { hidden = false; };
@@ -235,13 +244,13 @@ public:
   void HandleKeyRefreshed_MoveLeft(bool /*slowly*/) {};
   void HandleKeyReleased_MoveLeft(bool slowly);
 
-  void HandleKeyPressed_Up(bool slowly) { HandleKeyRefreshed_Up(slowly); };
-  void HandleKeyRefreshed_Up(bool slowly);
-  void HandleKeyReleased_Up(bool /*slowly*/) const {};
+  void HandleKeyPressed_Up(bool slowly);
+  void HandleKeyRefreshed_Up(bool /*slowly*/) {};
+  void HandleKeyReleased_Up(bool slowly);
 
-  void HandleKeyPressed_Down(bool slowly) { HandleKeyRefreshed_Down(slowly); };
-  void HandleKeyRefreshed_Down(bool slowly);
-  void HandleKeyReleased_Down(bool /*slowly*/) const {};
+  void HandleKeyPressed_Down(bool slowly);
+  void HandleKeyRefreshed_Down(bool /*slowly*/) {};
+  void HandleKeyReleased_Down(bool slowly);
 
   void HandleKeyPressed_Jump();
   void HandleKeyRefreshed_Jump() const {};

@@ -134,6 +134,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   move_left_slowly_pressed(false),
   move_right_pressed(false),
   move_right_slowly_pressed(false),
+  increase_fire_angle_pressed(false),
+  increase_fire_angle_slowly_pressed(false),
+  decrease_fire_angle_pressed(false),
+  decrease_fire_angle_slowly_pressed(false),
   previous_strength(0),
   body(NULL)
 {
@@ -194,6 +198,10 @@ Character::Character (const Character& acharacter) :
   move_left_slowly_pressed(false),
   move_right_pressed(false),
   move_right_slowly_pressed(false),
+  increase_fire_angle_pressed(false),
+  increase_fire_angle_slowly_pressed(false),
+  decrease_fire_angle_pressed(false),
+  decrease_fire_angle_slowly_pressed(false),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
@@ -357,6 +365,10 @@ void Character::Die()
     move_left_slowly_pressed = false;
     move_right_pressed = false;
     move_right_slowly_pressed = false;
+    increase_fire_angle_pressed = false;
+    increase_fire_angle_slowly_pressed = false;
+    decrease_fire_angle_pressed = false;
+    decrease_fire_angle_slowly_pressed = false;
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
@@ -538,6 +550,23 @@ void Character::Refresh()
       Move(DIRECTION_LEFT, move_left_slowly_pressed);
     } else if (right && !left) {
       Move(DIRECTION_RIGHT, move_right_slowly_pressed);
+    }
+    bool increase_angle = increase_fire_angle_pressed || increase_fire_angle_slowly_pressed;
+    bool decrease_angle = decrease_fire_angle_pressed || decrease_fire_angle_slowly_pressed;
+    if (increase_angle && !decrease_angle) {
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (increase_fire_angle_slowly_pressed)
+        AddFiringAngle(DELTA_CROSSHAIR/10.0);
+      else
+        AddFiringAngle(DELTA_CROSSHAIR);
+    } else if (decrease_angle && ! increase_angle) {
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (decrease_fire_angle_slowly_pressed)
+        AddFiringAngle(-DELTA_CROSSHAIR/10.0);
+      else
+        AddFiringAngle(-DELTA_CROSSHAIR);
     }
   }
 
@@ -841,6 +870,10 @@ void Character::StopPlaying()
   move_left_slowly_pressed = false;
   move_right_pressed = false;
   move_right_slowly_pressed = false;
+  increase_fire_angle_pressed = false;
+  increase_fire_angle_slowly_pressed = false;
+  decrease_fire_angle_pressed = false;
+  decrease_fire_angle_slowly_pressed = false;
 }
 
 // Begining of turn or changed to this character
@@ -1058,35 +1091,78 @@ void Character::HandleKeyReleased_MoveLeft(bool slowly)
 }
 
 // #################### UP
-void Character::HandleKeyRefreshed_Up(bool slowly)
+void Character::StartDecreasingFireAngle(bool slowly)
 {
-  HideGameInterface();
+  if (slowly)
+    decrease_fire_angle_slowly_pressed = true;
+  else
+    decrease_fire_angle_pressed = true;
 
-  ActiveTeam().crosshair.Show();
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Show();
+  }
+}
 
-  if (IsImmobile())
-    {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (slowly) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
-      else       AddFiringAngle(-DELTA_CROSSHAIR);
-    }
+void Character::StopDecreasingFireAngle(bool slowly)
+{
+  if (slowly)
+    decrease_fire_angle_slowly_pressed = false;
+  else
+    decrease_fire_angle_pressed = false;
+}
+
+
+void Character::HandleKeyPressed_Up(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Character::HandleKeyReleased_Up(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // #################### DOWN
-void Character::HandleKeyRefreshed_Down(bool slowly)
+
+
+void Character::StartIncreasingFireAngle(bool slowly)
 {
-  HideGameInterface();
+  if (slowly)
+    increase_fire_angle_slowly_pressed = true;
+  else
+    increase_fire_angle_pressed = true;
 
-  ActiveTeam().crosshair.Show();
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Show();
+  }
+}
 
-  if (IsImmobile())
-    {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (slowly) AddFiringAngle(DELTA_CROSSHAIR/10.0);
-      else       AddFiringAngle(DELTA_CROSSHAIR);
-    }
+void Character::StopIncreasingFireAngle(bool slowly)
+{
+  if (slowly)
+    increase_fire_angle_slowly_pressed = false;
+  else
+    increase_fire_angle_pressed = false;
+}
+
+void Character::HandleKeyPressed_Down(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Character::HandleKeyReleased_Down(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // #################### JUMP
