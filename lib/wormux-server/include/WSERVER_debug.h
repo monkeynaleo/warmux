@@ -46,7 +46,15 @@
       }                                                                 \
   }
 #else
-#define DPRINT(LEVEL, ARGS...) do {} while (0)
+#define DPRINT(LEVEL, ARGS...)                                          \
+  {                                                                     \
+    if((LEVEL) >= LOG_LEVEL )                                           \
+      {                                                                 \
+        printf("%s %s : ", BasicClock::DateStr(), BasicClock::TimeStr()); \
+        printf(ARGS);                                                   \
+        printf("\n");                                                   \
+      }                                                                 \
+  }
 #endif
 
 #define TELL_ERROR         \
