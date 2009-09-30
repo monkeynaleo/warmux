@@ -1,5 +1,7 @@
 SUBDIRS = .
 
+EXTRA_DIST = wormux_index_server.conf
+
 bin_PROGRAMS = wormux-index-server
 
 wormux_index_server_SOURCES =    	\
@@ -13,7 +15,9 @@ wormux_index_server_SOURCES =    	\
 	stat.h stat.cpp			\
 	sync_slave.h sync_slave.cpp
 
-AM_CXXFLAGS += -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
+wormux_index_server_LDFLAGS = -Wl,--as-needed
+
+AM_CXXFLAGS = -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
 	  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux-server/include
 
 LIBS += @LIBCURL@

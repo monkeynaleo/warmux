@@ -47,7 +47,7 @@ BasicClock wx_clock;
 
 int main(int /*argc*/, char* /*argv*/[])
 {
-  DPRINT(INFO, "Wormux headless server version %i", VERSION);
+  DPRINT(INFO, "Wormux game server version %i", VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());
   Env::SetConfigClass(config);
   Env::SetWorkingDir();

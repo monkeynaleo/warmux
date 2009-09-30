@@ -135,7 +135,7 @@ void NetworkGame::SendActionToAllExceptOne(const Action& a, DistantComputer* cli
 // if (!clt_as_rcver) sending to all EXCEPT client 'client'
 void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const
 {
-  char* packet;
+  char *packet;
   int size;
 
   a.WriteToPacket(packet, size);
@@ -177,7 +177,7 @@ void NetworkGame::StopGame()
   game_started = false;
 }
 
-void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* sender)
+void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
 
@@ -189,7 +189,7 @@ void NetworkGame::ForwardPacket(void * buffer, size_t len, DistantComputer* send
   }
 
   if (sender == cpulist.front()) {
-    Action a(reinterpret_cast<const char*>(buffer), sender);
+    Action a(buffer, sender);
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
       if (net_state == WNet::NETWORK_LOADING_DATA) {
@@ -281,20 +281,22 @@ bool GameServer::RegisterToIndexServer(bool is_public)
   connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
   if (conn != CONNECTED) {
     if (conn == CONN_WRONG_VERSION) {
-      fprintf(stderr, Format(_("Sorry, your version is not supported anymore. "
-			       "Supported version are %s. "
+      fprintf(stderr,"%s", Format(_("Sorry, your version is not supported anymore. "
+			       "Supported versions are %s. "
 			       "You can download an updated version "
-			       "on http://www.wormux.org/wiki/download.php"),
+			       "from http://www.wormux.org/wiki/download.php"),
 			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
-      fprintf(stderr, "ERROR: Failed to connect to the index server");
+      fprintf(stderr, "ERROR: Fail to connect to the index server");
     }
     return false;
   }
 
   bool r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", port);
   if (!r) {
-    fprintf(stderr, Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %u must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %u must be forwarded on your computer."), port, port).c_str());
+	char port_str[8];
+	snprintf(port_str, 8, "%d", port);
+    fprintf(stderr, "%s", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port_str, port_str).c_str());
     IndexServer::GetInstance()->Disconnect();
     return false;
   }
@@ -431,7 +433,7 @@ void GameServer::RunLoop()
       continue;
     }
 
-    void * buffer;
+    char *buffer;
     size_t packet_size;
 
     std::map<uint, NetworkGame>::iterator gamelst_it;
@@ -445,7 +447,7 @@ void GameServer::RunLoop()
 
 	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
-	  if (!(*dst_cpu)->ReceiveData(reinterpret_cast<void* &>(buffer), packet_size)) {
+	  if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
 	    // An error occured during the reception
 
 	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
@@ -468,8 +470,9 @@ void GameServer::RunLoop()
 	      goto loop;
 	    }
 
-	  } else {
-
+	  } else if (buffer && packet_size) {
+	    // buffer may be NULL and packet_size equal to zero if there is not yet
+	    // enough data to read a packet.
 	    GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
 	    free(buffer);
 	  }
