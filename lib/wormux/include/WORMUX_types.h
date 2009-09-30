@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 #ifndef _MSC_VER
+#include <stdint.h>
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
