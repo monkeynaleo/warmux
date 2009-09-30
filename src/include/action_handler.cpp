@@ -576,6 +576,30 @@ static void Action_Character_BackJump (Action */*a*/)
   ActiveCharacter().BackJump();
 }
 
+static void Action_Character_StartMovingLeft(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StartMovingLeft(slowly);
+}
+
+static void Action_Character_StopMovingLeft(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StopMovingLeft(slowly);
+}
+
+static void Action_Character_StartMovingRight(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StartMovingRight(slowly);
+}
+
+static void Action_Character_StopMovingRight(Action *a)
+{
+  bool slowly = a->PopInt();
+  ActiveCharacter().StopMovingRight(slowly);
+}
+
 static void Action_Weapon_Shoot (Action *a)
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
@@ -934,6 +958,11 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_LEFT, "CHARACTER_start_moving_left", &Action_Character_StartMovingLeft);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
+
   // ########################################################
   // Using Weapon
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);

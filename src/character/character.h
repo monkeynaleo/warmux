@@ -83,6 +83,10 @@ private:
   // this is needed because of network needing to know
   // if we have changed of active character
   bool is_playing;
+  bool move_left_pressed;
+  bool move_left_slowly_pressed;
+  bool move_right_pressed;
+  bool move_right_slowly_pressed;
 public:
 
   // Previous strength
@@ -108,7 +112,7 @@ private:
   void StartWalk(bool slowly);
   void StopWalk();
   bool IsWalking() const;
-
+  void StopWalkingIfNecessary();
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -176,6 +180,11 @@ public:
   bool CanJump() const { return CanMoveRL(); };
   void Move(enum BodyDirection direction, bool slowly);
 
+  void StartMovingLeft(bool slowly);
+  void StopMovingLeft(bool slowly);
+  void StartMovingRight(bool slowly);
+  void StopMovingRight(bool slowly);
+
   // Jumps
   void Jump(double strength, double angle);
   void Jump();
@@ -219,11 +228,11 @@ public:
 
   // Keyboard handling
   void HandleKeyPressed_MoveRight(bool slowly);
-  void HandleKeyRefreshed_MoveRight(bool slowly);
+  void HandleKeyRefreshed_MoveRight(bool /*slowly*/) {};
   void HandleKeyReleased_MoveRight(bool slowly);
 
   void HandleKeyPressed_MoveLeft(bool slowly);
-  void HandleKeyRefreshed_MoveLeft(bool slowly);
+  void HandleKeyRefreshed_MoveLeft(bool /*slowly*/) {};
   void HandleKeyReleased_MoveLeft(bool slowly);
 
   void HandleKeyPressed_Up(bool slowly) { HandleKeyRefreshed_Up(slowly); };
