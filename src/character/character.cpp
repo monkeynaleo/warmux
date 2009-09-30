@@ -1034,6 +1034,14 @@ void Character::StopMovingRight(bool slowly)
     ActiveTeam().crosshair.Show();
 }
 
+bool Character::IsMovingRight(bool slowly)
+{
+  if (slowly)
+   return move_right_slowly_pressed;
+  else
+   return move_right_pressed;
+}
+
 void Character::HandleKeyPressed_MoveRight(bool slowly)
 {
   Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_RIGHT);
@@ -1074,6 +1082,14 @@ void Character::StopMovingLeft(bool slowly)
 
   if (Network::GetInstance()->IsTurnMaster())
     ActiveTeam().crosshair.Show();
+}
+
+bool Character::IsMovingLeft(bool slowly)
+{
+  if (slowly)
+   return move_left_slowly_pressed;
+  else
+   return move_left_pressed;
 }
 
 void Character::HandleKeyPressed_MoveLeft(bool slowly)
