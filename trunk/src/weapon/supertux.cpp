@@ -238,6 +238,12 @@ bool TuxLauncher::p_Shoot ()
 
   current_tux = static_cast<SuperTux *>(projectile);
   tux_death_time = 0;
+  move_left_pressed = false;
+  move_right_pressed = false;
+  ActiveCharacter().StopMovingLeft(true);
+  ActiveCharacter().StopMovingLeft(false);
+  ActiveCharacter().StopMovingRight(true);
+  ActiveCharacter().StopMovingRight(false);
   bool r = WeaponLauncher::p_Shoot();
 
   return r;
@@ -245,12 +251,17 @@ bool TuxLauncher::p_Shoot ()
 
 void TuxLauncher::Refresh()
 {
-  if (current_tux)
-    return;
-
-  if (tux_death_time && tux_death_time + 2000 < Time::GetInstance()->Read()) {
-    UseAmmoUnit();
-    tux_death_time = 0;
+  if (current_tux) {
+    if (move_left_pressed && !move_right_pressed) {
+      current_tux->turn_left();
+    } else if (move_right_pressed && !move_left_pressed) {
+      current_tux->turn_right();
+    }
+  } else {
+    if (tux_death_time && tux_death_time + 2000 < Time::GetInstance()->Read()) {
+      UseAmmoUnit();
+      tux_death_time = 0;
+    }
   }
 }
 
@@ -289,22 +300,20 @@ void TuxLauncher::StopShooting()
 // Move right
 void TuxLauncher::HandleKeyPressed_MoveRight(bool slowly)
 {
-  if (current_tux)
-    current_tux->turn_right();
-  else if (!tux_death_time)
+  StartMovingRightForAllPlayers();
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
 void TuxLauncher::HandleKeyRefreshed_MoveRight(bool slowly)
 {
-  if (current_tux)
-    current_tux->turn_right();
-  else if (!tux_death_time)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_MoveRight(slowly);
 }
 
 void TuxLauncher::HandleKeyReleased_MoveRight(bool slowly)
 {
+  StopMovingRightForAllPlayers();
   if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
@@ -312,22 +321,20 @@ void TuxLauncher::HandleKeyReleased_MoveRight(bool slowly)
 // Move left
 void TuxLauncher::HandleKeyPressed_MoveLeft(bool slowly)
 {
-  if (current_tux)
-    current_tux->turn_left();
-  else if (!tux_death_time)
+  StartMovingLeftForAllPlayers();
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
 void TuxLauncher::HandleKeyRefreshed_MoveLeft(bool slowly)
 {
-  if (current_tux)
-    current_tux->turn_left();
-  else if (!tux_death_time)
+  if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyRefreshed_MoveLeft(slowly);
 }
 
 void TuxLauncher::HandleKeyReleased_MoveLeft(bool slowly)
 {
+  StopMovingLeftForAllPlayers();
   if (!current_tux && !tux_death_time)
     ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
 }
