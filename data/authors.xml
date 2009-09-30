@@ -21,6 +21,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>IFlo</nickname>
+	<name>Florian Köberle</name>
+	<description>Programmer</description>
+	<email>florian_AT_fkoeberle_DOT_de</email>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>lynxlynxlynx</nickname>
 	<name>Jaka KRANJC</name>
 	<description>i18n manager, misc</description>
@@ -599,13 +606,6 @@
 	<description>Fix old bug in option menu (crash because of video mode)</description>
 	<email>hamaolli_AT_cc.jyu_DOT_fi</email>
 	<country>Finland</country>
-      </author>
-      <author>
-	<nickname>IFlo</nickname>
-	<name>Florian Köberle</name>
-	<description>network bugfixes</description>
-	<email>florian_AT_fkoeberle_DOT_de</email>
-	<country>Germany</country>
       </author>
       <author>
 	<nickname>Isaac</nickname>
