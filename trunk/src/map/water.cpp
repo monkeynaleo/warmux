@@ -221,6 +221,7 @@ void Water::CalculateWavePattern()
 
   const int wave_inc = 5;
   const int wave_count = 3;
+  double a = 5, b = 8;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++)
   {
