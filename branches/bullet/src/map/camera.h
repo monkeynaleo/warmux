@@ -31,9 +31,16 @@ class GameObj;
 
 class Camera : public Rectanglei, public Singleton<Camera>
 {
+private:
   Camera(const Camera&);
   const Camera& operator=(const Camera&);
 
+public :
+  enum CameraControlMode {
+    NO_CAMERA_CONTROL,
+    MOUSE_CAMERA_CONTROL,
+    KEYBOARD_CAMERA_CONTROL
+  };
 private:
   Mouse::pointer_t pointer_used_before_scroll;
   uint m_started_shaking;
@@ -44,6 +51,9 @@ private:
   mutable uint m_last_time_shake_calculated;
 
   Point2d m_speed;
+  bool m_stop;
+  CameraControlMode m_control_mode;
+  int m_begin_controlled_move_time;
 
   void SaveMouseCursor();
   void RestoreMouseCursor();
@@ -52,7 +62,6 @@ private:
   void ScrollCamera();
 
   bool auto_crop;
-  bool in_advance;
   const GameObj* followed_object;
   void AutoCrop();
 
@@ -77,8 +86,7 @@ public:
   void SetXYabs(const Point2i &pos) { SetXYabs(pos.x, pos.y); };
 
   // Auto crop on an object
-  // in_advance is used to center the camera on the direction where the object is going
-  void FollowObject(const GameObj *obj, bool follow, bool in_advance = true);
+  void FollowObject(const GameObj *obj, bool follow_closely = false);
   void StopFollowingObj(const GameObj* obj);
 
   void CenterOnActiveCharacter();
@@ -102,11 +110,10 @@ public:
       return position.y + ComputeShake().y;
   }
 
-  void Shake( uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint );
+  void Shake(uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint);
   void ResetShake();
 
   void SetAutoCrop(bool crop) { auto_crop = crop; };
-  bool IsAutoCrop() const { return auto_crop; };
 };
 
 #endif
