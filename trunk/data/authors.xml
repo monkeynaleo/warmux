@@ -42,6 +42,14 @@
 	<email>yeknan_AT_yahoo_DOT_fr</email>
 	<country>France</country>
       </author>
+      <author>
+	<nickname>lami</nickname>
+	<name>Lawrence AZZOUG</name>
+	<description>Initial programmer and graphic artist of the game</description>
+	<website>http://sites.google.com/site/lamilawrence/</website>
+	<email>lami_AT_wormux_DOT_org</email>
+	<country>France</country>
+      </author>
     </section>
 
     <section title="Inactive Team">
@@ -81,14 +89,6 @@
 	<name>Christophe GISQUET</name>
 	<description>Win32 port, programmer</description>
 	<email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>lami</nickname>
-	<name>Lawrence AZZOUG</name>
-	<description>Initial programmer and graphic artist of the game</description>
-	<website>http://perso.wanadoo.fr/lami/</website>
-	<email>lami_AT_wormux_DOT_org</email>
 	<country>France</country>
       </author>
       <author>
