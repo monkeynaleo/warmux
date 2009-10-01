@@ -40,9 +40,6 @@ const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
 const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
 const double DEGREE = static_cast<double>(2*M_PI/360.0);
-const float t = (GO_UP_OSCILLATION_TIME*1000.0);
-const float a = GO_UP_STEP/t;
-const float b = 1.0;
 const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
 int Water::pattern_height = 0;
@@ -165,6 +162,9 @@ void Water::Refresh()
   }
 
   // Height Calculation:
+  const float t = (GO_UP_OSCILLATION_TIME*1000.0);
+  const float a = GO_UP_STEP/t;
+  const float b = 1.0;
   if (time_raise < now)
   {
     m_last_preview_redraw = now;
