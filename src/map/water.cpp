@@ -39,6 +39,8 @@ const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
 const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
+const double WAVE_HEIGHT_A = 5;
+const double WAVE_HEIGHT_B = 8;
 const double DEGREE = static_cast<double>(2*M_PI/360.0);
 const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
@@ -188,12 +190,11 @@ void Water::CalculateWaveHeights()
 {
   double angle1 = -shift1;
   double angle2 = shift1;
-  double a = 5, b = 8;
   for (uint x = 0; x < PATTERN_WIDTH; x++)
   {
-    wave_height[0][x] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
-    wave_height[1][x] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*DEGREE)*b);
-    wave_height[2][x] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*DEGREE)*b);
+    wave_height[0][x] = static_cast<int>(sin(angle1)*WAVE_HEIGHT_A + sin(angle2)*WAVE_HEIGHT_B);
+    wave_height[1][x] = static_cast<int>(sin(angle1+M_PI)*WAVE_HEIGHT_A + sin(angle2+10*DEGREE)*WAVE_HEIGHT_B);
+    wave_height[2][x] = static_cast<int>(sin(angle1+M_PI/2)*WAVE_HEIGHT_A + sin(angle2+20*DEGREE)*WAVE_HEIGHT_B);
 
     int top = std::max(wave_height[0][x], wave_height[1][x]);
     height[x] = std::max(top, wave_height[2][x]);
@@ -221,11 +222,10 @@ void Water::CalculateWavePattern()
 
   const int wave_inc = 5;
   const int wave_count = 3;
-  double a = 5, b = 8;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++)
   {
-    int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
+    int l = (int)(WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
     assert(l < pattern_height);
     Uint32 pitch = pattern.GetSurface()->pitch;
     Uint8 *dst = (Uint8*)pattern.GetSurface()->pixels + l*pitch;
