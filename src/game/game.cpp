@@ -598,7 +598,7 @@ bool Game::NewBox()
 void Game::AddNewBox(ObjBox * box)
 {
   ObjectsList::GetRef().AddObject(box);
-  Camera::GetInstance()->FollowObject(box, true, true);
+  Camera::GetInstance()->FollowObject(box);
   GameMessages::GetInstance()->Add(_("It's a present!"));
   SetCurrentBox(box);
 }
