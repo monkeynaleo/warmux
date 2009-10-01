@@ -74,7 +74,7 @@ bool Teleportation::p_Shoot ()
 
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
-
+	Camera::GetInstance()->SetAutoCrop(false);
   target_chosen = false; // ensure next teleportation cannot be done pressing key space
   return true;
 }
@@ -86,7 +86,8 @@ void Teleportation::Refresh()
     ActiveCharacter().SetSpeed(0.0, 0.0);
     ActiveCharacter().Show();
     JukeBox::GetInstance()->Play("default", "weapon/teleport_end");
-    return;
+	Camera::GetInstance()->SetAutoCrop(true);
+	return;
   }
 }
 
