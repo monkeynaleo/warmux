@@ -1003,6 +1003,20 @@ bool ActionHandler::ExecActionsForOneFrame()
     a = (*it);
     if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
       frame_complete = true;
+    it++;
+  }
+  if (!frame_complete) {
+    UnLock();
+    return false;
+  }
+
+  frame_complete = false;
+  it = queue.begin();
+  while (it != queue.end() && !frame_complete)
+  {
+    a = (*it);
+    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
+      frame_complete = true;
 
     if (!a->IsFrameLess()) {
       MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
