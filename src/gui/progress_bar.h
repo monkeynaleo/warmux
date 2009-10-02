@@ -55,7 +55,6 @@ protected:
   uint val_barre; // current value in the progress bar
   enum orientation orientation;
 
-
   Color colorMin; // Color used for start value
   Color colorMax; // Color used for end value
 
