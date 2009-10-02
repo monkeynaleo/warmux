@@ -26,16 +26,28 @@
 #include "map/map.h"
 #include "tool/math_tools.h"
 
-ProgressBar::ProgressBar(){
-   border_color.SetColor(0, 0, 0, 255);
-   value_color.SetColor(255, 255, 255, 255);
-   background_color.SetColor(100, 100 ,100, 255);
-   x = y = larg = haut = 0;
-   val = min = max = 0;
-   m_use_ref_val = false;
+ProgressBar::ProgressBar()
+{
+  border_color.SetColor(0, 0, 0, 255);
+  value_color.SetColor(255, 255, 255, 255);
+  background_color.SetColor(100, 100 ,100, 255);
+  x = y = larg = haut = 0;
+  val = min = max = 0;
+  m_use_ref_val = false;
+  gradientMode = false;
 }
 
-void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
+ #include <iostream>
+void ProgressBar::SetMinMaxValueColor(const Color & min, 
+                                      const Color & max) 
+{
+  this->gradientMode = true;
+  this->colorMin     = min;
+  this->colorMax     = max;
+}
+
+void ProgressBar::InitPos(uint px, uint py, uint plarg, uint phaut)
+{
   ASSERT (3 <= plarg);
   ASSERT (3 <= phaut);
   x = px;
@@ -52,18 +64,44 @@ void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
  *                         ProgressBar::PROG_BAR_HORIZONTAL
  * default orientation is ProgressBar::PROG_BAR_HORIZONTAL
  */
-void ProgressBar::InitVal (long pval, long pmin, long pmax, enum orientation porientation){
+
+
+void ProgressBar::InitVal (long pval, 
+                           long pmin, 
+			   long pmax, 
+			   enum orientation porientation)
+{
   ASSERT (pmin < pmax);
   val = pval;
   min = pmin;
   max = pmax;
   orientation = porientation;
   val_barre = ComputeBarValue(val);
+
+
+  divisor = orientation == PROG_BAR_HORIZONTAL ? larg : haut;
+
+  if (gradientMode) {
+    coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   / static_cast<float>(max);
+    coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) / static_cast<float>(max);
+    coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  / static_cast<float>(max);
+    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) / static_cast<float>(max);
+  }
 }
 
-void ProgressBar::UpdateValue (long pval){
+void ProgressBar::UpdateValue(long pval)
+{
   val = ComputeValue(pval);
   val_barre = ComputeBarValue(val);
+
+  if (gradientMode) {
+    long absVal = abs(val);
+    value_color.SetColor(colorMin.GetRed()   + (coefRed   * absVal),
+                         colorMin.GetGreen() + (coefGreen * absVal),
+                         colorMin.GetBlue()  + (coefBlue  * absVal),
+                         colorMin.GetAlpha() + (coefAlpha * absVal));
+  }
+		       
 }
 
 long ProgressBar::ComputeValue (long pval) const{
@@ -71,7 +109,7 @@ long ProgressBar::ComputeValue (long pval) const{
 }
 
 uint ProgressBar::ComputeBarValue (long val) const{
-  if(orientation == PROG_BAR_HORIZONTAL)
+  if (orientation == PROG_BAR_HORIZONTAL)
     return ( ComputeValue(val) -min)*(larg-2)/(max-min);
   else
     return ( ComputeValue(val) -min)*(haut-2)/(max-min);

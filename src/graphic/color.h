@@ -27,7 +27,6 @@
 class Color
 {
   private:
-
     Uint8 red;
     Uint8 green;
     Uint8 blue;
@@ -45,15 +44,20 @@ class Color
 
     void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
     {
-      red = r;
+      red   = r;
       green = g;
-      blue = b;
+      blue  = b;
       alpha = a;
     }
 
-    Uint8 GetRed() const { return red; }
+    void SetRed(Uint8 r)   { this->red   = r; }
+    void SetGreen(Uint8 g) { this->green = g; }
+    void SetBlue(Uint8 b)  { this->blue  = b; }
+    void SetAlpha(Uint8 a) { this->alpha = a; }
+
+    Uint8 GetRed() const   { return red;   }
     Uint8 GetGreen() const { return green; }
-    Uint8 GetBlue() const { return blue; }
+    Uint8 GetBlue() const  { return blue;  }
     Uint8 GetAlpha() const { return alpha; }
     Uint32 GetColor() const;
 
