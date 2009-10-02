@@ -886,6 +886,7 @@ bool Game::MenuQuitPause() const
 
 uint Game::GetCurrentTurn()
 {
-  return (m_current_turn+1)/2 ;
+  uint nbr_teams = GetTeamsList().playing_list.size();
+  return (m_current_turn+nbr_teams-1)/nbr_teams ;
 }
 
