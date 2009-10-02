@@ -138,7 +138,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
   recurse_times = 0; // to keep compiler happy
 #endif
 
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
  
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
     GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);

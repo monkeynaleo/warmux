@@ -224,7 +224,7 @@ void Team::NextCharacter(bool newturn)
   ActiveCharacter().StartPlaying();
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(), !is_camera_saved);
+  Camera::GetInstance()->FollowObject (&ActiveCharacter());
 
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
@@ -246,8 +246,8 @@ void Team::PreviousCharacter()
   ActiveCharacter().StartPlaying();
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  Camera::GetInstance()->FollowObject (&ActiveCharacter());
+ 
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
@@ -278,8 +278,8 @@ void Team::PrepareTurn()
   }
 
   if (is_camera_saved) Camera::GetInstance()->SetXYabs (sauve_camera.x, sauve_camera.y);
-  Camera::GetInstance()->FollowObject (&ActiveCharacter(),
-                          !is_camera_saved);
+  Camera::GetInstance()->FollowObject (&ActiveCharacter());
+
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Updating weapon ammos (some weapons are not available from the beginning)

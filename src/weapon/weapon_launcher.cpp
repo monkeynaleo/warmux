@@ -70,7 +70,7 @@ void WeaponBullet::SignalOutOfMap()
 {
   WeaponProjectile::SignalOutOfMap();
   launcher->IncMissedShots();
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
 }
 
 void WeaponBullet::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
@@ -198,7 +198,7 @@ void WeaponProjectile::Shoot(double strength)
   SetSpeed(strength, angle);
 
   ObjectsList::GetRef().AddObject(this);
-  Camera::GetInstance()->FollowObject(this, true, camera_in_advance);
+  Camera::GetInstance()->FollowObject(this);
 
   //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
   //if (collision == NO_COLLISION) {

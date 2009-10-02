@@ -90,7 +90,7 @@ void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int rec
   // will explode on spawn (because of colliding with each other)
 
   begin_time = Time::GetInstance()->Read(); // this resets timeout
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
   //ResetConstants();
   SetPosition( pos );
   GetPhysic()->SetSpeed(strength, angle);

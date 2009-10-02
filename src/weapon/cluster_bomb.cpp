@@ -93,7 +93,7 @@ GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
 
 
   begin_time = Time::GetInstance()->Read();
-  Camera::GetInstance()->FollowObject(this, true);
+  Camera::GetInstance()->FollowObject(this);
 //  ResetConstants();
   SetPosition( pos );
   GetPhysic()->SetSpeed(strength, angle);
