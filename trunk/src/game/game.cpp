@@ -577,6 +577,13 @@ void Game::MainLoop()
       }
     } else {
       SDL_Delay(1);
+      // Do we wait for a player who has left?
+      if (ActiveTeam().IsAbandoned()) {
+        GetTeamsList().DelTeam(ActiveTeam().GetId());
+        // Did we become turn master trough the leave?
+        bool turn_master = ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI();
+        Network::GetInstance()->SetTurnMaster(turn_master);
+      }
     }
 
   }

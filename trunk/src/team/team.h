@@ -74,6 +74,7 @@ class Team
     Weapon *active_weapon;
     uint nb_characters;
     uint current_turn;
+    bool abandoned;
 
     CustomTeam *attached_custom_team;
 
@@ -180,6 +181,8 @@ class Team
 
   // Custom team
     void AttachCustomTeam(CustomTeam*);
+    void Abandon() { abandoned = true; }
+    bool IsAbandoned() { return abandoned; }
 };
 
 #endif /* TEAM_H */
