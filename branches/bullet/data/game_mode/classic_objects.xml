@@ -31,6 +31,7 @@
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebound_factor>0.01</rebound_factor>
+	<center_position x="32" y="90" />
     <rotating>true</rotating>
     <shape name="bonus_box-main" type="polygon">
       <mass>100.0</mass>
@@ -47,6 +48,7 @@
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebound_factor>0.01</rebound_factor>
+	<center_position x="32" y="90" />
     <rotating>true</rotating>
     <shape name="bonus_box-main" type="polygon">
       <mass>100.0</mass>

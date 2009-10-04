@@ -57,10 +57,14 @@ ObjBox::ObjBox(const std::string &name) : GameObj(name)
 
   GetPhysic()->SetSpeed (SPEED, M_PI_2);
 
-  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
-    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+  
+    GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_ITEM,true);
+     GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+     GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+     GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+     GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+    
+    GetPhysic()->SetEnabled(true);
   std::cout<<"super called"<<std::endl;
   JukeBox::GetInstance()->Play("default","box/falling");
 }
@@ -116,8 +120,13 @@ void ObjBox::DropBox()
 void ObjBox::Draw()
 {
   anim->SetRotation_HotSpot(Point2i(0,0));
-  anim->SetRotation_rad(- GetPhysic()->GetAngle());
-  anim->Draw(GetPhysic()->GetPosition());
+  double angle = GetAngle();
+  Point2d offset = GetCenterOffset();
+  Point2d relative_position;
+  relative_position.x = cos(angle) * offset.x + sin(angle) *offset.y;
+  relative_position.y = (cos(angle) * offset.y - sin(angle) *offset.x);
+  anim->SetRotation_rad( - angle);
+  anim->Draw(GetPosition() - relative_position);
 }
 
 void ObjBox::Refresh()
