@@ -31,6 +31,7 @@
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebound_factor>0.01</rebound_factor>
+	<center_position x="32" y="90" />
     <rotating>true</rotating>
     <shape name="bonus_box-main" type="polygon">
       <mass>100.0</mass>
@@ -47,6 +48,7 @@
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebound_factor>0.01</rebound_factor>
+	<center_position x="32" y="90" />
     <rotating>true</rotating>
     <shape name="bonus_box-main" type="polygon">
       <mass>100.0</mass>
@@ -75,7 +77,7 @@
     </shape>
   </barrel>
 
-   <anvil>
+  <anvil>
     <wind_factor>0.3</wind_factor>
     <air_resist_factor>1.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
@@ -96,8 +98,8 @@
       <position x="0" y="0" />
       <point x="20" y="24" />
       <point x="72" y="24" />
-       <point x="77" y="43" />
-       <point x="15" y="43" />
+      <point x="77" y="43" />
+      <point x="15" y="43" />
     </shape>
       <shape name="anvil-bottom" type="polygon">
       <mass>150.0</mass>
@@ -114,8 +116,8 @@
        map config file  -->
   <wind_particle>
     <mass>50.0</mass>
-    <wind_factor>1.0</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <wind_factor>2.0</wind_factor>
+    <air_resist_factor>100.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>false</rotating>
@@ -148,7 +150,7 @@
     <rebound_factor>0.3</rebound_factor>
 	<rotating>true</rotating>
   </fire_particle>
-  
+
   <explosion_smoke_particle> <!-- Particle used during explosions -->
     <mass>0.5</mass>
     <wind_factor>10.0</wind_factor>
@@ -161,7 +163,7 @@
   <dark_smoke>  <!-- Particle bazooka and auto-bazooka... -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
-    <air_resist_factor>0.0</air_resist_factor>
+    <air_resist_factor>0.2</air_resist_factor>
     <gravity_factor>0.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>false</rotating>
@@ -325,18 +327,19 @@
   <!-- Bazooka and automatic bazookas rockets -->
   <rocket>
     <wind_factor>75.0</wind_factor>
-    <air_resist_factor>0.2</air_resist_factor>
+    <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
     <auto_align_force>0.1</auto_align_force>
+	<center_position x="22" y="6" />
     <shape name="rocket-main" type="polygon">
       <mass>20.0</mass>
       <position x="0" y="0" />
       <point x="1" y="4" />
       <point x="22" y="1" />
-      <point x="34" y="5" />
-      <point x="22" y="10" />
+      <point x="34" y="6" />
+      <point x="22" y="11" />
       <point x="1" y="8" />
     </shape>
   </rocket>
@@ -393,11 +396,13 @@
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.7</rebound_factor>
+	<center_position x="8" y="8" />
     <rotating>true</rotating>
     <shape name="grenade-main" type="circle">
       <mass>30.0</mass>
       <position x="8" y="8" />
-      <radius>6</radius>
+      <radius>4</radius>
+      <friction>0.8</friction>
     </shape>
   </grenade>
 
@@ -518,6 +523,7 @@
     <gravity_factor>0.3</gravity_factor>
     <rebound_factor>0.0</rebound_factor>
     <rotating>true</rotating>
+    <auto_align_force>0.0</auto_align_force>
     <shape name="supertux-main" type="polygon">
       <mass>2.0</mass>
       <position x="0" y="0" />
