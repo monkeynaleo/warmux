@@ -10,6 +10,7 @@
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebound_factor>0.25</rebound_factor>
+	<center_position x="15" y="20" />
     <rotating>false</rotating>
     <shape name="body" type="polygon">
       <mass>80.0</mass>
