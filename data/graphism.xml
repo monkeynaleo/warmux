@@ -215,6 +215,10 @@
   <point name="tools_interface_size" x="290" y="100" />
   <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
+
+<color name="camera_preview_color" r="200" g="255" b="200" a="128" />
+<color name="playing_character_preview_color" r="255" g="255" b="255" a="128" />
+
   
   <!-- Wind parameters -->
   <surface name="wind" file="interface/whitetheme/wind.png"/>
