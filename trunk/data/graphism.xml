@@ -216,10 +216,11 @@
   <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
 
-<color name="camera_preview_color" r="200" g="255" b="200" a="128" />
-<color name="playing_character_preview_color" r="255" g="255" b="255" a="128" />
-
   
+  <!-- Minimap -->
+  <color name="camera_preview_color" r="120" g="120" b="120" a="100" />
+  <color name="playing_character_preview_color" r="120" g="120" b="120" a="100" />
+
   <!-- Wind parameters -->
   <surface name="wind" file="interface/whitetheme/wind.png"/>
   <surface name="wind_indicator" file="interface/whitetheme/wind_indicator.png"/>
@@ -315,6 +316,7 @@
     <animation loop_mode="true" speed="75" />
   </sprite>
 
+<!-- Water -->
   <surface name="water" file="water/water/water.png" />
   <surface name="water_bottom" file="water/water/water_bottom.png" />
 
