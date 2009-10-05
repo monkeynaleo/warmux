@@ -36,9 +36,10 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
-#include "tool/xml_document.h"
+//#include "tool/xml_document.h"
 
-Body::Body(const xmlNode* xml, const std::string& main_folder):
+Body::Body(const xmlNode *     xml, 
+           const std::string & main_folder):
   members_lst(),
   clothes_lst(),
   mvt_lst(),
@@ -64,23 +65,7 @@ Body::Body(const xmlNode* xml, const std::string& main_folder):
   xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
   xmlNodeArray::const_iterator it;
 
-  // Load members
-  MSG_DEBUG("body", "Found %i sprites", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
-
-    MSG_DEBUG("body", "Loading member %s", name.c_str());
-    Member* member = new Member(*it, main_folder);
-    if (members_lst.find(name) != members_lst.end()) {
-      std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
-      ASSERT(false);
-    } else
-      members_lst[name] = member;
-  }
-
-  members_lst["weapon"] = weapon_member;
+  LoadMembers(nodes, main_folder);
 
   // Load clothes
   const xmlNode *clothes = XmlReader::GetMarker(xml, "clothes");
@@ -153,7 +138,7 @@ Body::Body(const xmlNode* xml, const std::string& main_folder):
   }
 }
 
-Body::Body(const Body& _body):
+Body::Body(const Body & _body):
   clothes_lst(),
   mvt_lst(),
   current_clothe(NULL),
@@ -215,33 +200,64 @@ Body::Body(const Body& _body):
   }
 }
 
+void Body::LoadMembers(xmlNodeArray &      nodes,
+                       const std::string & main_folder) 
+{
+  MSG_DEBUG("body", "Found %i sprites", nodes.size());
+  std::string                  name;  
+  xmlNodeArray::const_iterator it = nodes.begin();
+
+  for ( ; it != nodes.end(); ++it) {
+    //std::string name;
+    XmlReader::ReadStringAttr(*it, "name", name);
+
+    MSG_DEBUG("body", "Loading member %s", name.c_str());
+    //Member * member = new Member(*it, main_folder);
+
+    if (members_lst.find(name) != members_lst.end()) {
+      std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
+      ASSERT(false);
+    } else {
+      Member * member = new Member(*it, main_folder);
+      members_lst[name] = member;
+    }
+  }
+  members_lst["weapon"] = weapon_member;
+}
+
 Body::~Body()
 {
   // Pointers inside those lists are freed from the body_list
   // Clean the members list
-  std::map<std::string, Member*>::iterator it = members_lst.begin();
-  while(it != members_lst.end())
-  {
-    delete it->second;
-    it++;
+  std::map<std::string, Member*>::iterator itMember = members_lst.begin();
+  while(itMember != members_lst.end()) {
+    delete itMember->second;
+    ++itMember;
   }
 
   // Clean the clothes list
-  std::map<std::string, Clothe*>::iterator it2 = clothes_lst.begin();
-  while(it2 != clothes_lst.end())
-  {
-    delete it2->second;
-    it2++;
+  std::map<std::string, Clothe*>::iterator itClothe = clothes_lst.begin();
+  while(itClothe != clothes_lst.end()) {
+    delete itClothe->second;
+    ++itClothe;
   }
 
   // Unshare the movements
-  std::map<std::string, Movement*>::iterator it3 = mvt_lst.begin();
-  while (it3 != mvt_lst.end())
-  {
-    Movement::UnshareMovement(it3->second);
-    it3++;
+  std::map<std::string, Movement*>::iterator itMovement = mvt_lst.begin();
+  while (itMovement != mvt_lst.end()) {
+    Movement::UnshareMovement(itMovement->second);
+    ++itMovement;
   }
 
+  FreeSkeletonVector();
+
+  members_lst.clear();
+  clothes_lst.clear();
+  mvt_lst.clear();
+}
+
+void Body::FreeSkeletonVector() 
+{
   std::vector<junction *> ::iterator itSkel = skel_lst.begin();
   while (itSkel != skel_lst.end()) {
     delete (*itSkel);
@@ -249,10 +265,6 @@ Body::~Body()
   }
   skel_lst.clear();
   //std::cout << "Delete junctions skeleton complete." << std::endl;
-
-  members_lst.clear();
-  clothes_lst.clear();
-  mvt_lst.clear();
 }
 
 void Body::ResetMovement() const
@@ -554,10 +566,7 @@ void Body::BuildSqueleton()
   // Find each member used by the current clothe
   // and set the parent member of each member
 
-  //TODO lami : delete internal skel_lst pointers !
-  // ! here !
-
-  skel_lst.clear();
+  FreeSkeletonVector();
 
   // Find the "body" member as it is the top of the skeleton
   for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
