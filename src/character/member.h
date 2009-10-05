@@ -70,8 +70,8 @@ public:
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
-  void ApplyMovement(const member_mvt &             mvt, 
-                     std::vector<class c_junction>& skel_lst);
+  void ApplyMovement(const member_mvt &                mvt, 
+                     std::vector<class c_junction *> & skel_lst);
   void SetAngle(const double & angle);
   void RefreshSprite(BodyDirection direction);
 

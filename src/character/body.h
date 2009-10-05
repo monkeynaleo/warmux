@@ -86,7 +86,7 @@ class Body
 
   double main_rotation_rad;
 
-  std::vector<junction> skel_lst; // Body skeleton:
+  std::vector<junction *> skel_lst; // Body skeleton:
                                   // Order to use to build the body
                                   // First element: member to build
                                   // Secnd element: parent member

@@ -236,11 +236,19 @@ Body::~Body()
 
   // Unshare the movements
   std::map<std::string, Movement*>::iterator it3 = mvt_lst.begin();
-  while(it3 != mvt_lst.end())
+  while (it3 != mvt_lst.end())
   {
     Movement::UnshareMovement(it3->second);
     it3++;
   }
+
+  std::vector<junction *> ::iterator itSkel = skel_lst.begin();
+  while (itSkel != skel_lst.end()) {
+    delete (*itSkel);
+    ++itSkel;
+  }
+  skel_lst.clear();
+  //std::cout << "Delete junctions skeleton complete." << std::endl;
 
   members_lst.clear();
   clothes_lst.clear();
@@ -253,7 +261,8 @@ void Body::ResetMovement() const
     current_clothe->GetLayers()[layer]->ResetMovement();
 }
 
-void Body::ApplyMovement(Movement* mvt, uint frame)
+void Body::ApplyMovement(Movement * mvt, 
+                         uint       frame)
 {
 #ifdef DEBUG
   if (mvt->GetType() != "breathe")
@@ -267,15 +276,16 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
   // Move each member following the movement description
   // We do it using the order of the skeleton, as the movement of each
   // member affects the child members as well
-  std::vector<junction>::iterator member = skel_lst.begin();
+  std::vector<junction *>::iterator member = skel_lst.begin();
+
   for (;member != skel_lst.end();
-       member++)
+       ++member)
   {
     ASSERT( frame < mvt->GetFrames().size() );
-    if (mvt->GetFrames()[frame].find(member->member->GetType()) != mvt->GetFrames()[frame].end())
+    if (mvt->GetFrames()[frame].find((*member)->member->GetType()) != mvt->GetFrames()[frame].end())
     {
       // This member needs to be moved :
-      member_mvt mb_mvt = mvt->GetFrames()[frame].find(member->member->GetType())->second;
+      member_mvt mb_mvt = mvt->GetFrames()[frame].find((*member)->member->GetType())->second;
       if(mb_mvt.follow_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
@@ -299,8 +309,6 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           angle_rad = M_PI_2 - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
         else
           angle_rad = -M_PI_2 - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
-
-
 
         if(angle_rad < 0)
           angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
@@ -327,7 +335,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
           mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
       }
 
-      member->member->ApplyMovement(mb_mvt, skel_lst);
+      (*member)->member->ApplyMovement(mb_mvt, skel_lst);
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
@@ -335,8 +343,8 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       {
 	member_mvt angle_mvt;
 
-	Point2i v = owner->GetPosition() + member->member->GetPos();
-	v += member->member->GetAnchorPos();
+	Point2i v = owner->GetPosition() + (*member)->member->GetPos();
+	v += (*member)->member->GetAnchorPos();
 
 	if( owner->GetDirection() == DIRECTION_LEFT)
 	{
@@ -352,7 +360,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
 
           angle_mvt.SetAngle(angle);
-          member->member->ApplyMovement(angle_mvt, skel_lst);
+          (*member)->member->ApplyMovement(angle_mvt, skel_lst);
 	}
       }
     }
@@ -362,17 +370,17 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
 void Body::ApplySqueleton()
 {
   // Move each member following the skeleton
-  std::vector<junction>::iterator member = skel_lst.begin();
+  std::vector<junction *>::iterator member = skel_lst.begin();
   // The first member is the body, we set it to pos:
-  member->member->SetPos(Point2f(0.0, 0.0));
-  member->member->SetAngle(0.0);
+  (*member)->member->SetPos(Point2f(0.0, 0.0));
+  (*member)->member->SetAngle(0.0);
   member++;
 
   for (;member != skel_lst.end();
-       member++)
+       ++member)
   {
     // Place the other members depending on the parent member:
-    member->member->ApplySqueleton(member->parent);
+    (*member)->member->ApplySqueleton((*member)->parent);
   }
 }
 
@@ -444,9 +452,9 @@ void Body::Build()
       }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front().member->GetSprite().GetWidth() / 2.0;
+  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
-  skel_lst.front().member->ApplyMovement(body_mvt, skel_lst);
+  skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
 
   need_rebuild = false;
 }
@@ -529,9 +537,9 @@ void Body::AddChildMembers(Member* parent)
       if (current_clothe->GetLayers()[lay]->GetType() == child->first)
       {
         // This child member is attached to his parent
-        junction body;
-        body.member = current_clothe->GetLayers()[lay];
-        body.parent = parent;
+        junction * body = new junction();
+        body->member = current_clothe->GetLayers()[lay];
+        body->parent = parent;
         skel_lst.push_back(body);
 
         // continue recursively
@@ -545,15 +553,20 @@ void Body::BuildSqueleton()
 {
   // Find each member used by the current clothe
   // and set the parent member of each member
+
+  //TODO lami : delete internal skel_lst pointers !
+  // ! here !
+
   skel_lst.clear();
 
   // Find the "body" member as it is the top of the skeleton
   for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
     if (current_clothe->GetLayers()[lay]->GetType() == "body")
     {
-      junction body;
-      body.member = current_clothe->GetLayers()[lay];
-      body.parent = NULL;
+      // TODO lami : overwrite junction constructor
+      junction * body = new junction();
+      body->member = current_clothe->GetLayers()[lay];
+      body->parent = NULL;
       skel_lst.push_back(body);
       break;
     }
@@ -564,7 +577,7 @@ void Body::BuildSqueleton()
     ASSERT(false);
   }
 
-  AddChildMembers(skel_lst.front().member);
+  AddChildMembers(skel_lst.front()->member);
 }
 
 void Body::SetClothe(const std::string& name)

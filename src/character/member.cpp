@@ -63,7 +63,8 @@ Member::Member(const xmlNode *     xml,
   XmlReader::ReadStringAttr(xml, "type", type);
   ASSERT(type!="");
 
-  const xmlNode* el = XmlReader::GetMarker(xml, "anchor");
+  const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
+  
   if (NULL != el) {
     int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);
@@ -71,47 +72,51 @@ Member::Member(const xmlNode *     xml,
     MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
     anchor = Point2f((float)dx,(float)dy);
     spr->SetRotation_HotSpot(Point2i(dx,dy));
-  }
-  else
+  } else {
     MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
+  }
 
   XmlReader::ReadBoolAttr(xml, "go_through_ground", go_through_ground);
 
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "attached");
+  xmlNodeArray                 nodes = XmlReader::GetNamedChildren(xml, "attached");
   xmlNodeArray::const_iterator it    = nodes.begin();
   xmlNodeArray::const_iterator itEnd = nodes.end();
 
+  std::string att_type;
+  int         dx = 0;
+  int         dy = 0;
+  Point2f     d;     // TODO: Rename !!
+  std::string frame_str;
+
   for (; it != itEnd; ++it) {
-    std::string att_type; // TODO lami : can be move ?!
+    //std::string att_type; // TODO lami : can be move ?!
 
     if (!XmlReader::ReadStringAttr(*it, "member_type", att_type)) {
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
     }
 
-    int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(*it, "dx", dx);
     XmlReader::ReadIntAttr(*it, "dy", dy);
     MSG_DEBUG("body", "   Attached member %s has anchor (%i,%i)\n", att_type.c_str(), dx, dy);
-    Point2f d((float)dx, (float)dy);
-
-    std::string frame_str; // TODO lami : can be move ?!
+    d.SetValues((float)dx, (float)dy);
     XmlReader::ReadStringAttr(*it, "frame", frame_str);
+
     if ("*" == frame_str) {
       v_attached rot_spot;
-      rot_spot.assign (spr->GetFrameCount(), d);
+      rot_spot.assign(spr->GetFrameCount(), d);
       attached_members[att_type] = rot_spot;
     } else {
       int frame;
 
-      if (!str2int (frame_str, frame) || frame < 0 || frame >= (int)spr->GetFrameCount()) {
+      if (!str2int(frame_str, frame) || frame < 0 || frame >= (int)spr->GetFrameCount()) {
         std::cerr << "Malformed attached member definition (wrong frame number)" << std::endl;
         continue;
       }
 
       if(attached_members.find(att_type) == attached_members.end()) {
         v_attached rot_spot;
-        rot_spot.resize(spr->GetFrameCount(), Point2f(0.0,0.0));
+        rot_spot.resize(spr->GetFrameCount(), Point2f(0.0, 0.0));
         attached_members[att_type] = rot_spot;
       }
       (attached_members.find(att_type)->second)[frame] = d;
@@ -224,18 +229,16 @@ void Member::ApplySqueleton(Member * parent_member)
 
 // TODO lami : THE function to optimize !!! 30 % CPU !!!
 
-void Member::ApplyMovement(const member_mvt &     mvt, 
-                           std::vector<junction>& skel_lst)
+void Member::ApplyMovement(const member_mvt &        mvt, 
+                           std::vector<junction *> & skel_lst)
 {
   // Apply the movment to the member,
   // And apply the movement accordingly to the child members
 
-  uint frame;
+  uint frame = 0;
 
   if (NULL != spr) { // spr == NULL when Member is the weapon
     frame = spr->GetCurrentFrame();
-  } else {
-    frame = 0; // TODO lami : Delete ! Move to declaration
   }
 
   //TODO lami : Create childItEnd
@@ -246,11 +249,11 @@ void Member::ApplyMovement(const member_mvt &     mvt,
       ++child) {
 
     // Find this member in the skeleton:
-    for(std::vector<junction>::iterator member = skel_lst.begin();
+    for(std::vector<junction *>::iterator member = skel_lst.begin();
         member != skel_lst.end();
         ++member) {
 
-      if(member->member->type == child->first) {
+      if ((*member)->member->type == child->first) {
         // Calculate the movement to apply to the child
         member_mvt child_mvt;
         child_mvt.SetAngle(mvt.GetAngle());
@@ -280,7 +283,7 @@ void Member::ApplyMovement(const member_mvt &     mvt,
           child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
         }
         // Apply recursively to children:
-        member->member->ApplyMovement(child_mvt, skel_lst);
+        (*member)->member->ApplyMovement(child_mvt, skel_lst);
       }
     }
   }
@@ -356,9 +359,9 @@ const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
 WeaponMember::WeaponMember() : 
   Member(NULL, "")
 {
-  name = "weapon";
-  type = "weapon";
-  spr = NULL;
+  name   = "weapon";
+  type   = "weapon";
+  spr    = NULL;
   anchor = Point2f(0.0,0.0);
 }
 
