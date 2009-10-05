@@ -112,6 +112,9 @@ public:
   Body(const Body&);
   void LoadMembers(xmlNodeArray &      nodes,
                    const std::string & main_folder);
+  void LoadClothes(xmlNodeArray &      nodes,
+                   const xmlNode *     xml,
+                   const std::string & main_folder);
 
   ~Body();
   void FreeSkeletonVector();
