@@ -65,61 +65,10 @@ Body::Body(const xmlNode *     xml,
   xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
   xmlNodeArray::const_iterator it;
 
+  // TODO lami : create Init function for it.
   LoadMembers(nodes, main_folder);
-
-  LoadClothes(nodes, xml, main_folder);
-
-  // Load movements alias
-  const xmlNode *aliases = XmlReader::GetMarker(xml, "aliases");
-  ASSERT(aliases);
-
-  std::map<std::string, std::string> mvt_alias;
-  nodes = XmlReader::GetNamedChildren(aliases, "alias");
-  MSG_DEBUG("body", "Found %i aliases", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string mvt, corresp;
-    XmlReader::ReadStringAttr(*it, "movement", mvt);
-    XmlReader::ReadStringAttr(*it, "correspond_to", corresp);
-    mvt_alias.insert(std::make_pair(mvt, corresp));
-    MSG_DEBUG("body", "  %s -> %s", mvt.c_str(), corresp.c_str());
-  }
-
-  // Load movements
-  const xmlNode *movements = XmlReader::GetMarker(xml, "movements");
-  ASSERT(movements);
-
-  nodes = XmlReader::GetNamedChildren(movements, "movement");
-  MSG_DEBUG("body", "Found %i movements", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
-    if (strncmp(name.c_str(),"animation", 9)==0)
-      animation_number++;
-
-    Movement* mvt = new Movement(*it);
-    if(mvt_lst.find(name) != mvt_lst.end())
-      std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
-    else
-      mvt_lst[name] = mvt;
-
-    for(std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
-        iter != mvt_alias.end();  ++iter)
-      if (iter->second == name)
-      {
-        Movement* mvt = new Movement(*it);
-        mvt->SetType(iter->first);
-        mvt_lst[iter->first] = mvt;
-      }
-  }
-
-  if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
-      || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end()))
-  {
-    std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
-    exit(EXIT_FAILURE);
-  }
+  LoadClothes(nodes, xml);
+  LoadMovements(nodes, xml);
 }
 
 Body::Body(const Body & _body):
@@ -146,24 +95,22 @@ Body::Body(const Body & _body):
 
   // Make a copy of members
   std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
-  while (it1 != _body.members_lst.end())
-    {
-      if (it1->second->GetName() != "weapon")
-	{
-	  std::pair<std::string,Member*> p;
-	  p.first = it1->first;
-	  p.second = new Member(*it1->second);
-	  members_lst.insert(p);
-	  it1++;
-	}
-      else
-	it1++;
+
+  while (it1 != _body.members_lst.end()) {
+    if (it1->second->GetName() != "weapon") {
+      std::pair<std::string,Member*> p;
+      p.first = it1->first;
+      p.second = new Member(*it1->second);
+      members_lst.insert(p);
+      it1++;
+    } else {
+      it1++;
     }
+  }
 
   // Make a copy of clothes
   std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
-  while (it2 != _body.clothes_lst.end())
-  {
+  while (it2 != _body.clothes_lst.end()) {
     std::pair<std::string,Clothe*> p;
     p.first = it2->first;
     p.second = new Clothe(it2->second, members_lst);
@@ -173,8 +120,7 @@ Body::Body(const Body & _body):
 
   // Movements are shared
   std::map<std::string, Movement*>::const_iterator it3 = _body.mvt_lst.begin();
-  while (it3 != _body.mvt_lst.end())
-  {
+  while (it3 != _body.mvt_lst.end()) {
     std::pair<std::string,Movement*> p;
     p.first = it3->first;
     p.second = it3->second;
@@ -207,8 +153,7 @@ void Body::LoadMembers(xmlNodeArray &      nodes,
 }
 
 void Body::LoadClothes(xmlNodeArray &      nodes,
-                       const xmlNode *     xml,
-                       const std::string & main_folder)
+                       const xmlNode *     xml)
 {
   const xmlNode * clothes = XmlReader::GetMarker(xml, "clothes");
   ASSERT(clothes);
@@ -230,6 +175,69 @@ void Body::LoadClothes(xmlNodeArray &      nodes,
     }
   }
 }
+
+void Body::LoadMovements(xmlNodeArray &  nodes,
+                         const xmlNode * xml)
+{
+  //// Load movements alias
+  const xmlNode * aliases = XmlReader::GetMarker(xml, "aliases");
+  ASSERT(aliases);
+
+  nodes = XmlReader::GetNamedChildren(aliases, "alias");
+  MSG_DEBUG("body", "Found %i aliases", nodes.size());
+
+  std::map<std::string, std::string> mvt_alias;
+  xmlNodeArray::const_iterator       it = nodes.begin();
+  std::string                        mvt;
+  std::string                        corresp;  
+
+  for (; it != nodes.end(); ++it) {
+    XmlReader::ReadStringAttr(*it, "movement", mvt);
+    XmlReader::ReadStringAttr(*it, "correspond_to", corresp);
+    mvt_alias.insert(std::make_pair(mvt, corresp));
+    MSG_DEBUG("body", "  %s -> %s", mvt.c_str(), corresp.c_str());
+  }
+
+  //// Load movements
+  const xmlNode * movements = XmlReader::GetMarker(xml, "movements");
+  ASSERT(movements);
+
+  nodes = XmlReader::GetNamedChildren(movements, "movement");
+  MSG_DEBUG("body", "Found %i movements", nodes.size());
+  std::string name;
+
+  for (it = nodes.begin(); it != nodes.end(); ++it) {
+    XmlReader::ReadStringAttr(*it, "name", name);
+    if (0 == strncmp(name.c_str(),"animation", 9)) {
+      animation_number++;
+    }
+
+    if(mvt_lst.find(name) != mvt_lst.end()) {
+      std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
+    } else {
+      Movement* mvt = new Movement(*it);
+      mvt_lst[name] = mvt;
+    }
+
+    for(std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
+        iter != mvt_alias.end();  
+        ++iter) {
+      if (iter->second == name) {
+        Movement* mvt = new Movement(*it);
+        mvt->SetType(iter->first);
+        mvt_lst[iter->first] = mvt;
+      }
+    } 
+  }
+
+  if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
+     || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end())) {
+    std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
+    exit(EXIT_FAILURE);
+  }
+}
+
+
 
 Body::~Body()
 {
