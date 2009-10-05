@@ -253,38 +253,41 @@ void Member::ApplyMovement(const member_mvt &        mvt,
         member != skel_lst.end();
         ++member) {
 
-      if ((*member)->member->type == child->first) {
-        // Calculate the movement to apply to the child
-        member_mvt child_mvt;
-        child_mvt.SetAngle(mvt.GetAngle());
-        child_mvt.pos = mvt.pos;
-        float radius  = anchor.Distance(child->second[frame]);
-
-        if (0.0 != radius) {
-          float angle_init;
-
-          if(child->second[frame].x > anchor.x) {
-
-            if(child->second[frame].y > anchor.y) {
-              angle_init = acos( (child->second[frame].x - anchor.x) / radius );
-            } else {
-              angle_init = -acos( (child->second[frame].x - anchor.x) / radius );
-            }
-          } else {
-
-            if(child->second[frame].y > anchor.y) {
-              angle_init = acos( (child->second[frame].x - anchor.x) / radius );
-            } else {
-              angle_init = M_PI + acos( -(child->second[frame].x - anchor.x) / radius );
-            }
-          }
-
-          child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
-          child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
-        }
-        // Apply recursively to children:
-        (*member)->member->ApplyMovement(child_mvt, skel_lst);
+      // TODO lami : std::string comparison ?! ... not optimized !!
+      if ((*member)->member->type != child->first) {
+        continue;
       }
+
+      // Calculate the movement to apply to the child
+      member_mvt child_mvt;
+      child_mvt.SetAngle(mvt.GetAngle());
+      child_mvt.pos = mvt.pos;
+      float radius  = anchor.Distance(child->second[frame]);
+
+      if (0.0 != radius) {
+        float angle_init;
+
+        if(child->second[frame].x > anchor.x) {
+          if(child->second[frame].y > anchor.y) {
+            angle_init = acos( (child->second[frame].x - anchor.x) / radius );
+          } else {
+            angle_init = -acos( (child->second[frame].x - anchor.x) / radius );
+          }
+        } else {
+          if(child->second[frame].y > anchor.y) {
+            angle_init = acos( (child->second[frame].x - anchor.x) / radius );
+          } else {
+            angle_init = M_PI + acos( -(child->second[frame].x - anchor.x) / radius );
+          }
+        }
+
+        child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
+        child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
+      }
+
+      // Apply recursively to children:
+      (*member)->member->ApplyMovement(child_mvt, skel_lst);
+    //}
     }
   }
 

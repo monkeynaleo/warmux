@@ -26,6 +26,7 @@
 #include <vector>
 #include "include/base.h"
 #include <WORMUX_point.h>
+#include "tool/xml_document.h"
 
 // Forward declarations
 class Character;
@@ -109,7 +110,11 @@ public:
 
   Body(const xmlNode* xml, const std::string& main_folder);
   Body(const Body&);
+  void LoadMembers(xmlNodeArray &      nodes,
+                   const std::string & main_folder);
+
   ~Body();
+  void FreeSkeletonVector();
 
   static Point2i GetSize() {return Point2i(30,45);};
 
