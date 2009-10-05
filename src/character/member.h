@@ -39,51 +39,53 @@ class Member
 {
 private:
   /* If you need this, implement it (correctly) */
-  Member operator=(const Member&);
+  Member operator = (const Member &);
   /**********************************************/
 
   Member* parent;
-  double angle_rad;
-  float alpha;
-  bool go_through_ground;
+  double  angle_rad;
+  float   alpha;
+  bool    go_through_ground;
   std::map<std::string, v_attached> attached_members;
   Point2f pos;
   Point2f scale;
 
 protected:
-  Sprite* spr;
-
+  Sprite*     spr;
   std::string name;
   std::string type;
-
-  Point2f anchor;
+  Point2f     anchor;
 
 public:
 
   virtual ~Member();
-  Member(const xmlNode* xml, const std::string& main_folder);
-  Member(const Member& m);
+  Member(const xmlNode *     xml, 
+         const std::string & main_folder);
+  Member(const Member & m);
 
-  virtual void Draw(const Point2i & _pos, int flip_x, BodyDirection direction);
+  virtual void Draw(const Point2i & _pos, 
+                    int             flip_x, 
+                    BodyDirection   direction);
 
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
-  void ApplyMovement(const member_mvt& mvt, std::vector<class c_junction>& skel_lst);
-  void SetAngle(const double &angle);
+  void ApplyMovement(const member_mvt &             mvt, 
+                     std::vector<class c_junction>& skel_lst);
+  void SetAngle(const double & angle);
   void RefreshSprite(BodyDirection direction);
 
-  void SetPos(const Point2f &pos);
+  void SetPos(const Point2f & pos);
 
-  const Sprite& GetSprite() const;
+  const Sprite & GetSprite() const;
 
   const Point2i GetPos() const;
-  const Point2f& GetPosFloat() const;
+  const Point2f & GetPosFloat() const;
 
   const Point2i GetAnchorPos() const;
 
-  const std::string& GetName() const;
-  const std::string& GetType() const;
+  const std::string & GetName() const;
+  const std::string & GetType() const;
 
   bool IsGoingThroughGround() const;
 
@@ -95,7 +97,9 @@ class WeaponMember : public Member
 public:
   WeaponMember();
   ~WeaponMember();
-  void Draw(const Point2i & _pos, int flip_x, BodyDirection direction);
+  void Draw(const Point2i & _pos, 
+            int             flip_x, 
+            BodyDirection   direction);
 };
 
 #endif //MEMBER_H

@@ -32,7 +32,8 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-Member::Member(const xmlNode* xml, const std::string& main_folder):
+Member::Member(const xmlNode *     xml, 
+               const std::string & main_folder):
   parent(NULL),
   angle_rad(0),
   alpha(0),
@@ -45,8 +46,10 @@ Member::Member(const xmlNode* xml, const std::string& main_folder):
   type(""),
   anchor(0,0)
 {
-  if (xml == NULL)
+  if (NULL == xml) {
     return;
+  }
+
   XmlReader::ReadStringAttr(xml, "name", name);
   ASSERT(name!="");
 
@@ -61,8 +64,7 @@ Member::Member(const xmlNode* xml, const std::string& main_folder):
   ASSERT(type!="");
 
   const xmlNode* el = XmlReader::GetMarker(xml, "anchor");
-  if (el != NULL)
-  {
+  if (NULL != el) {
     int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
@@ -76,13 +78,13 @@ Member::Member(const xmlNode* xml, const std::string& main_folder):
   XmlReader::ReadBoolAttr(xml, "go_through_ground", go_through_ground);
 
   xmlNodeArray nodes = XmlReader::GetNamedChildren(xml, "attached");
-  xmlNodeArray::const_iterator it;
+  xmlNodeArray::const_iterator it    = nodes.begin();
+  xmlNodeArray::const_iterator itEnd = nodes.end();
 
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string att_type;
-    if (!XmlReader::ReadStringAttr(*it, "member_type", att_type))
-    {
+  for (; it != itEnd; ++it) {
+    std::string att_type; // TODO lami : can be move ?!
+
+    if (!XmlReader::ReadStringAttr(*it, "member_type", att_type)) {
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
     }
@@ -93,24 +95,21 @@ Member::Member(const xmlNode* xml, const std::string& main_folder):
     MSG_DEBUG("body", "   Attached member %s has anchor (%i,%i)\n", att_type.c_str(), dx, dy);
     Point2f d((float)dx, (float)dy);
 
-    std::string frame_str;
+    std::string frame_str; // TODO lami : can be move ?!
     XmlReader::ReadStringAttr(*it, "frame", frame_str);
-    if (frame_str == "*")
-    {
+    if ("*" == frame_str) {
       v_attached rot_spot;
       rot_spot.assign (spr->GetFrameCount(), d);
       attached_members[att_type] = rot_spot;
-    }
-    else
-    {
+    } else {
       int frame;
-      if (!str2int (frame_str, frame) || frame < 0 || frame >= (int)spr->GetFrameCount())
-      {
+
+      if (!str2int (frame_str, frame) || frame < 0 || frame >= (int)spr->GetFrameCount()) {
         std::cerr << "Malformed attached member definition (wrong frame number)" << std::endl;
         continue;
       }
-      if(attached_members.find(att_type) == attached_members.end())
-      {
+
+      if(attached_members.find(att_type) == attached_members.end()) {
         v_attached rot_spot;
         rot_spot.resize(spr->GetFrameCount(), Point2f(0.0,0.0));
         attached_members[att_type] = rot_spot;
@@ -122,7 +121,7 @@ Member::Member(const xmlNode* xml, const std::string& main_folder):
   ResetMovement();
 }
 
-Member::Member(const Member& m):
+Member::Member(const Member & m):
   parent(NULL),
   angle_rad(m.angle_rad),
   alpha(m.alpha),
@@ -135,13 +134,13 @@ Member::Member(const Member& m):
   type(m.type),
   anchor(m.anchor)
 {
-  Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
+  Point2i rot((int)anchor.x, (int)anchor.y);
   spr->SetRotation_HotSpot(rot);
 
+  // TODO: Move ! ... No process in any constructor !
   for (std::map<std::string, v_attached>::const_iterator it = m.attached_members.begin();
       it != m.attached_members.end();
-      ++it)
-  {
+      ++it) {
     attached_members[it->first] = it->second;
   }
   ResetMovement();
@@ -166,7 +165,7 @@ void Member::RefreshSprite(BodyDirection direction)
   ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
 
-  if (direction == DIRECTION_RIGHT) {
+  if (DIRECTION_RIGHT == direction) {
     spr->SetRotation_rad(angle_rad);
     spr->Scale(scale.x, scale.y);
   } else {
@@ -178,29 +177,34 @@ void Member::RefreshSprite(BodyDirection direction)
   spr->Update();
 }
 
-void Member::Draw(const Point2i & _pos, int flip_center, BodyDirection direction)
+void Member::Draw(const Point2i & _pos, 
+                  int             flip_center, 
+                  BodyDirection   direction)
 {
   ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
-  if(parent == NULL && type != "body")
-  {
+
+  if(NULL == parent && "body" != type) {
     std::cerr << "Error : Member " << name << " have no parent member!" << std::endl;
     return;
   }
 
   Point2i posi((int)pos.x, (int)pos.y);
   posi += _pos;
-  if (direction == DIRECTION_LEFT)
+
+  if (DIRECTION_LEFT == direction) {
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
+  }
+
   spr->Draw(posi);
 }
 
-void Member::ApplySqueleton(Member* parent_member)
+void Member::ApplySqueleton(Member * parent_member)
 {
   // Place the member to shape the skeleton
   ASSERT(parent_member != NULL);
-  if(parent_member == NULL)
-  {
+
+  if(NULL == parent_member) {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;
     return;
   }
@@ -212,56 +216,64 @@ void Member::ApplySqueleton(Member* parent_member)
   pos = parent->pos;
   pos = pos - anchor;
 
-  if(parent->attached_members.find(type) != parent->attached_members.end())
+  if(parent->attached_members.find(type) != parent->attached_members.end()) {
     pos = pos + parent->attached_members.find(type)->second[parent->spr->GetCurrentFrame()];
+  }
 }
 
-void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& skel_lst)
+
+// TODO lami : THE function to optimize !!! 30 % CPU !!!
+
+void Member::ApplyMovement(const member_mvt &     mvt, 
+                           std::vector<junction>& skel_lst)
 {
   // Apply the movment to the member,
   // And apply the movement accordingly to the child members
 
   uint frame;
-  if(spr!=NULL) // spr == NULL when Member is the weapon
+
+  if (NULL != spr) { // spr == NULL when Member is the weapon
     frame = spr->GetCurrentFrame();
-  else
-    frame = 0;
+  } else {
+    frame = 0; // TODO lami : Delete ! Move to declaration
+  }
+
+  //TODO lami : Create childItEnd
 
   // We first apply to the child (makes calcules simpler in this order):
   for(std::map<std::string, v_attached>::iterator child = attached_members.begin();
       child != attached_members.end();
-      child++ )
-  {
+      ++child) {
+
     // Find this member in the skeleton:
     for(std::vector<junction>::iterator member = skel_lst.begin();
         member != skel_lst.end();
-        member++)
-    {
-      if(member->member->type == child->first)
-      {
+        ++member) {
+
+      if(member->member->type == child->first) {
         // Calculate the movement to apply to the child
         member_mvt child_mvt;
         child_mvt.SetAngle(mvt.GetAngle());
         child_mvt.pos = mvt.pos;
-        float radius = anchor.Distance(child->second[frame]);
+        float radius  = anchor.Distance(child->second[frame]);
 
-        if(radius != 0.0)
-        {
+        if (0.0 != radius) {
           float angle_init;
 
-          if(child->second[frame].x > anchor.x)
-          {
-            if(child->second[frame].y > anchor.y)
+          if(child->second[frame].x > anchor.x) {
+
+            if(child->second[frame].y > anchor.y) {
               angle_init = acos( (child->second[frame].x - anchor.x) / radius );
-            else
+            } else {
               angle_init = -acos( (child->second[frame].x - anchor.x) / radius );
-          }
-          else
-          {
-            if(child->second[frame].y > anchor.y)
+            }
+          } else {
+
+            if(child->second[frame].y > anchor.y) {
               angle_init = acos( (child->second[frame].x - anchor.x) / radius );
-            else
+            } else {
               angle_init = M_PI + acos( -(child->second[frame].x - anchor.x) / radius );
+            }
           }
 
           child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
@@ -275,22 +287,22 @@ void Member::ApplyMovement(const member_mvt &mvt, std::vector<junction>& skel_ls
 
   // Apply the movement to the current member
   SetAngle(angle_rad + mvt.GetAngle());
-  pos += mvt.pos;
+  pos   += mvt.pos;
   alpha *= mvt.alpha;
   scale = scale * mvt.scale;
 }
 
 void Member::ResetMovement()
 {
-  pos.x = 0;
-  pos.y = 0;
+  pos.x     = 0;
+  pos.y     = 0;
   angle_rad = 0;
-  alpha = 1.0;
-  scale.x = 1.0;
-  scale.y = 1.0;
+  alpha     = 1.0;
+  scale.x   = 1.0;
+  scale.y   = 1.0;
 }
 
-void Member::SetAngle(const double &angle)
+void Member::SetAngle(const double & angle)
 {
   angle_rad = angle;
 }
@@ -300,12 +312,12 @@ const Sprite& Member::GetSprite() const
   return *spr;
 }
 
-void Member::SetPos(const Point2f &_pos)
+void Member::SetPos(const Point2f & _pos)
 {
   pos = _pos;
 }
 
-const Point2f& Member::GetPosFloat() const
+const Point2f & Member::GetPosFloat() const
 {
   return pos;
 }
@@ -320,12 +332,12 @@ const Point2i Member::GetAnchorPos() const
   return Point2i((int)anchor.x, (int)anchor.y);
 }
 
-const std::string& Member::GetName() const
+const std::string & Member::GetName() const
 {
   return name;
 }
 
-const std::string& Member::GetType() const
+const std::string & Member::GetType() const
 {
   return type;
 }
@@ -340,8 +352,9 @@ const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
   return attached_members;
 }
 
-
-WeaponMember::WeaponMember() : Member(NULL, "")
+//TODO lami : Move all in initializer
+WeaponMember::WeaponMember() : 
+  Member(NULL, "")
 {
   name = "weapon";
   type = "weapon";
@@ -353,11 +366,12 @@ WeaponMember::~WeaponMember()
 {
 }
 
-void WeaponMember::Draw(const Point2i & /*_pos*/, int /*flip_center*/, BodyDirection /*direction*/)
+void WeaponMember::Draw(const Point2i & /*_pos*/, 
+                        int /*flip_center*/, 
+                        BodyDirection /*direction*/)
 {
-  if (!ActiveCharacter().IsDead() && Game::GetInstance()->ReadState() != Game::END_TURN)
-    {
+  if (!ActiveCharacter().IsDead() && (Game::END_TURN != Game::GetInstance()->ReadState()) ) {
       ActiveTeam().crosshair.Draw();
       ActiveTeam().AccessWeapon().Draw();
-    }
+  }
 }
