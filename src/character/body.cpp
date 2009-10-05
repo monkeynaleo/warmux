@@ -59,7 +59,7 @@ Body::Body(const xmlNode *     xml,
   need_rebuild(false),
   owner(NULL)
 {
-  const xmlNode *skeletons = XmlReader::GetMarker(xml, "skeletons");
+  const xmlNode * skeletons = XmlReader::GetMarker(xml, "skeletons");
   ASSERT(skeletons);
 
   xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
@@ -67,23 +67,7 @@ Body::Body(const xmlNode *     xml,
 
   LoadMembers(nodes, main_folder);
 
-  // Load clothes
-  const xmlNode *clothes = XmlReader::GetMarker(xml, "clothes");
-  ASSERT(clothes);
-
-  nodes = XmlReader::GetNamedChildren(clothes, "clothe");
-  MSG_DEBUG("body", "Found %i clothes", nodes.size());
-  for (it = nodes.begin(); it != nodes.end(); ++it)
-  {
-    std::string name;
-    XmlReader::ReadStringAttr(*it, "name", name);
-
-    Clothe* clothe = new Clothe(*it, members_lst);
-    if (clothes_lst.find(name) != clothes_lst.end())
-      std::cerr << "Warning !! The clothe \""<< name << "\" is defined twice in the xml file" << std::endl;
-    else
-      clothes_lst[name] = clothe;
-  }
+  LoadClothes(nodes, xml, main_folder);
 
   // Load movements alias
   const xmlNode *aliases = XmlReader::GetMarker(xml, "aliases");
@@ -208,11 +192,8 @@ void Body::LoadMembers(xmlNodeArray &      nodes,
   xmlNodeArray::const_iterator it = nodes.begin();
 
   for ( ; it != nodes.end(); ++it) {
-    //std::string name;
     XmlReader::ReadStringAttr(*it, "name", name);
-
     MSG_DEBUG("body", "Loading member %s", name.c_str());
-    //Member * member = new Member(*it, main_folder);
 
     if (members_lst.find(name) != members_lst.end()) {
       std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
@@ -223,6 +204,31 @@ void Body::LoadMembers(xmlNodeArray &      nodes,
     }
   }
   members_lst["weapon"] = weapon_member;
+}
+
+void Body::LoadClothes(xmlNodeArray &      nodes,
+                       const xmlNode *     xml,
+                       const std::string & main_folder)
+{
+  const xmlNode * clothes = XmlReader::GetMarker(xml, "clothes");
+  ASSERT(clothes);
+
+  nodes = XmlReader::GetNamedChildren(clothes, "clothe");
+  MSG_DEBUG("body", "Found %i clothes", nodes.size());
+  std::string name;
+  xmlNodeArray::const_iterator it = nodes.begin();
+
+  for ( ; it != nodes.end(); ++it) {
+    XmlReader::ReadStringAttr(*it, "name", name);
+    //Clothe* clothe = new Clothe(*it, members_lst);
+
+    if (clothes_lst.find(name) != clothes_lst.end()) {
+      std::cerr << "Warning !! The clothe \""<< name << "\" is defined twice in the xml file" << std::endl;
+    } else {
+      Clothe* clothe = new Clothe(*it, members_lst);
+      clothes_lst[name] = clothe;
+    }
+  }
 }
 
 Body::~Body()
