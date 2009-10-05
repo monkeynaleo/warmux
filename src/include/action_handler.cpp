@@ -538,10 +538,14 @@ void WORMUX_DisconnectPlayer(Player& player)
   std::map<const std::string, ConfigTeam>::iterator it = player.owned_teams.begin();
   while (it != player.owned_teams.end()) {
     std::string team_id = it->first;
-    player.RemoveTeam(team_id);
-    int unused_buffer;
-    Team* the_team = GetTeamsList().FindById(team_id, unused_buffer);
-    the_team->Abandon();
+    if (Game::GetInstance()->IsRunning()) {
+      player.RemoveTeam(team_id);
+      int unused_buffer;
+      Team* the_team = GetTeamsList().FindById(team_id, unused_buffer);
+      the_team->Abandon();
+    } else {
+      _Action_DelTeam(&player, team_id);
+    }
     it = player.owned_teams.begin();
   }
 }
