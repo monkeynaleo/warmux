@@ -510,12 +510,6 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
-  if (Game::IsRunning() && Network::GetInstance()->IsGameMaster()) {
-    int i;
-    Team* the_team = GetTeamsList().FindById(team_id, i);
-    if (the_team == &ActiveTeam()) // we have loose the turn master!!
-      Network::GetInstance()->SetTurnMaster(true);
-  }
 
   GetTeamsList().DelTeam(team_id);
 

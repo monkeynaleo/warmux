@@ -222,7 +222,6 @@ Network::Network(const std::string& _game_name, const std::string& passwd) :
   cpu(),
   game_name(_game_name),
   password(passwd),
-  turn_master_player(false),
   game_master_player(false),
   state(WNet::NO_NETWORK),// useless value at beginning
   socket_set(NULL),
@@ -505,15 +504,9 @@ void Network::SendNetworkState()
   }
 }
 
-void Network::SetTurnMaster(bool master)
-{
-  MSG_DEBUG("network.turn_master", "turn_master: %d", master);
-  turn_master_player = master;
-}
-
 bool Network::IsTurnMaster() const
 {
-  return turn_master_player;
+  return ActiveTeam().IsLocal();
 }
 
 void Network::SetGameMaster()

@@ -580,8 +580,6 @@ void Game::MainLoop()
       // Do we wait for a player who has left?
       if (ActiveTeam().IsAbandoned()) {
         GetTeamsList().DelTeam(ActiveTeam().GetId());
-        // Did we become turn master trough the leave?
-        Network::GetInstance()->SetTurnMaster(ActiveTeam().IsLocal());
       }
     }
 
@@ -678,14 +676,6 @@ void Game::RequestBonusBoxDrop()
 
 void Game::SetState(game_loop_state_t new_state, bool begin_game)
 {
-  if (begin_game) {
-    // Make the correct player the turn master, as else no player would be turn master for the first game.
-    // It's important that the other players get explicitly set to non turn master,
-    // because the wrong player might have the state turn master from the previous game.
-    bool turn_master = Network::GetInstance()->IsGameMaster() || Network::GetInstance()->IsLocal();
-    Network::GetInstance()->SetTurnMaster(turn_master);
-  }
-
   // already in good state, nothing to do
   if ((state == new_state) && !begin_game) return;
 
