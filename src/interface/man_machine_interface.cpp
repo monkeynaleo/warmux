@@ -115,7 +115,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
 
   // Managing keys related to character moves
   // Available only when local
-  if (!ActiveTeam().IsLocal()) return;
+  if (!ActiveTeam().IsLocalHuman()) return;
   if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
   if (ActiveCharacter().IsDead()) return;
 
@@ -268,7 +268,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     if (Game::GetInstance()->ReadState() == Game::END_TURN) {
       Game::GetInstance()->RequestBonusBoxDrop();
     } else if (Game::GetInstance()->ReadState() == Game::PLAYING &&
-               ActiveTeam().IsLocal() &&
+               ActiveTeam().IsLocalHuman() &&
                !ActiveCharacter().IsDead()) {
       ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot();
     }
@@ -277,7 +277,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
 
   { // Managing keys related to character moves
     // Available only when local
-    if (!ActiveTeam().IsLocal()) return;
+    if (!ActiveTeam().IsLocalHuman()) return;
     if (ActiveCharacter().IsDead()) return;
     if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
 

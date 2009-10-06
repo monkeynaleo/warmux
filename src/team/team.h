@@ -163,7 +163,7 @@ class Team
   // Only for network:
   // true if the team belong to a local player
   // false if the team belong to a player on the network or on the AI
-    bool IsLocal() const { return (type_of_player == TEAM_human_local); };
+    bool IsLocalHuman() const { return (type_of_player == TEAM_human_local); };
 
   // true if the team belong to a local AI
     bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };

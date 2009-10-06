@@ -173,7 +173,7 @@ void GameBlitz::__SetState_PLAYING()
   GetTeamsList().NextTeam();
 
   // Are we turn master for next turn ?
-  if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+  if (ActiveTeam().IsLocalHuman() || ActiveTeam().IsLocalAI())
     Network::GetInstance()->SetTurnMaster(true);
   else
     Network::GetInstance()->SetTurnMaster(false);

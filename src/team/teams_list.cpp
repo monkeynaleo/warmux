@@ -180,7 +180,7 @@ void TeamsList::LoadGamingData()
   for (; it != end; ++it) {
 
     // Local or AI ?
-    if ( (*it)->IsLocal() && (*it)->GetPlayerName() == "AI-stupid")
+    if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")
       (*it)->SetLocalAI();
 
     (**it).LoadGamingData();
@@ -538,7 +538,7 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
       return;
     }
 
-    bool is_local = (the_old_team->IsLocal() || the_old_team->IsLocalAI());
+    bool is_local = (the_old_team->IsLocalHuman() || the_old_team->IsLocalAI());
     DelTeam(the_old_team);
     AddTeam(the_team, pos, the_team_cfg, is_local);
   }
