@@ -145,7 +145,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
     Widget* w = WidgetList::ClickUp(mousePosition, button);
 
-    if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
+    if ( !associated_team->IsLocalHuman() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
 
     if (w == nb_characters) {
@@ -227,7 +227,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   associated_team->SetPlayerName(player_name->GetText());
 
   // change only for local teams...
-  if (associated_team->IsLocal() || associated_team->IsLocalAI()) {
+  if (associated_team->IsLocalHuman() || associated_team->IsLocalAI()) {
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
@@ -249,7 +249,7 @@ void TeamBox::ValidOptions() const
 
 bool TeamBox::IsLocal() const
 {
-  if (associated_team != NULL && associated_team->IsLocal()) {
+  if (associated_team != NULL && associated_team->IsLocalHuman()) {
     return true;
   }
 

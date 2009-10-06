@@ -190,7 +190,7 @@ bool Mouse::HandleClic (const SDL_Event& event) const
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return true;
 
-  if(!ActiveTeam().IsLocal())
+  if(!ActiveTeam().IsLocalHuman())
     return true;
 
   if( event.type == SDL_MOUSEBUTTONDOWN ){

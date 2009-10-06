@@ -227,7 +227,7 @@ void Weapon::Manage()
 
 bool Weapon::CanChangeWeapon() const
 {
-  if ( !ActiveTeam().IsLocal() )
+  if ( !ActiveTeam().IsLocalHuman() )
     return false;
 
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&

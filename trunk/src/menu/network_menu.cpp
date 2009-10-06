@@ -219,7 +219,7 @@ bool NetworkMenu::signal_ok()
                     team != GetTeamsList().playing_list.end();
                     team++)
     {
-      if((*team)->IsLocal())
+      if((*team)->IsLocalHuman())
       {
         found = true;
         break;

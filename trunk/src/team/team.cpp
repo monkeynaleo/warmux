@@ -123,7 +123,7 @@ bool Team::LoadCharacters()
 
     // Create a new character and add him to the team
     Character new_character(*this, character_name, body);
-    if((attached_custom_team != NULL) && (IsLocal()) && !Network::IsConnected())
+    if((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected())
     {
       new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
     }
@@ -289,7 +289,7 @@ void Team::PrepareTurn()
   }
 
   // Sound the bell, so the local players know when it is their turn
-  if (IsLocal())
+  if (IsLocalHuman())
     JukeBox::GetInstance()->Play("default", "start_turn");
 }
 

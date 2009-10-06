@@ -694,7 +694,7 @@ void Config::SetNetworkLocalTeams()
 
   for (int i=0; it != end; ++it, i++)
     {
-      if ((**it).IsLocal())
+      if ((**it).IsLocalHuman())
 	{
 	  ConfigTeam config;
 	  config.id = (**it).GetId();
