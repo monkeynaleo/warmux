@@ -86,7 +86,7 @@ const uint PAUSE_CHG_DIRECTION = 80; // ms
 
 /* FIXME This methode is really strange, all this should probably be done in
  * constructor of Body...*/
-void Character::SetBody(Body* char_body)
+void Character::SetBody(Body * char_body)
 {
   body = char_body;
   body->SetOwner(this);
@@ -141,7 +141,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   previous_strength(0),
   body(NULL)
 {
-
   m_is_character = true;
   SetCollisionModel(true, true, true);
   /* body stuff */
@@ -205,23 +204,33 @@ Character::Character (const Character& acharacter) :
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
-  if (acharacter.body)
-    SetBody(new Body(*acharacter.body));
-  if(acharacter.name_text)
+  if (acharacter.body) {
+    Body * newBody = new Body(*acharacter.body);
+    SetBody(newBody);
+  }
+
+  if (acharacter.name_text) {
     name_text = new Text(*acharacter.name_text);
+  }
 }
 
 Character::~Character()
 {
   MSG_DEBUG("character", "Unload character %s", character_name.c_str());
-  if(body)
+  if (body) {
     delete body;
-  if(name_text)
+  }
+
+  if (name_text) {
     delete name_text;
-  if(particle_engine)
+  }
+
+  if(particle_engine) {
     delete particle_engine;
-  body          = NULL;
-  name_text     = NULL;
+  }
+
+  body            = NULL;
+  name_text       = NULL;
   particle_engine = NULL;
 }
 
@@ -267,15 +276,14 @@ void Character::DrawEnergyBar(int dy) const
                      - Camera::GetInstance()->GetPosition() );
 }
 
-void Character::DrawName (int dy) const
+void Character::DrawName(int dy) const
 {
-  if(IsDead()) return;
+  if (IsDead()) return;
 
-  const int x =  GetCenterX();
-  const int y = GetY()+dy;
+  const int x = GetCenterX();
+  const int y = GetY() + dy;
 
-  if (Config::GetInstance()->GetDisplayNameCharacter())
-  {
+  if (Config::GetInstance()->GetDisplayNameCharacter()) {
     name_text->DrawCenterTopOnMap(Point2i(x,y));
   }
 

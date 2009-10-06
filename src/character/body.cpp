@@ -57,18 +57,10 @@ Body::Body(const xmlNode *     xml,
   direction(DIRECTION_RIGHT),
   animation_number(0),
   need_rebuild(false),
-  owner(NULL)
+  owner(NULL),
+  mainXmlNode(xml),
+  mainFolder(main_folder)
 {
-  const xmlNode * skeletons = XmlReader::GetMarker(xml, "skeletons");
-  ASSERT(skeletons);
-
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
-  xmlNodeArray::const_iterator it;
-
-  // TODO lami : create Init function for it.
-  LoadMembers(nodes, main_folder);
-  LoadClothes(nodes, xml);
-  LoadMovements(nodes, xml);
 }
 
 Body::Body(const Body & _body):
@@ -98,24 +90,22 @@ Body::Body(const Body & _body):
 
   while (it1 != _body.members_lst.end()) {
     if (it1->second->GetName() != "weapon") {
-      std::pair<std::string,Member*> p;
+      std::pair<std::string, Member*> p;
       p.first = it1->first;
       p.second = new Member(*it1->second);
       members_lst.insert(p);
-      it1++;
-    } else {
-      it1++;
     }
+    ++it1;
   }
 
   // Make a copy of clothes
   std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
   while (it2 != _body.clothes_lst.end()) {
-    std::pair<std::string,Clothe*> p;
+    std::pair<std::string, Clothe*> p;
     p.first = it2->first;
     p.second = new Clothe(it2->second, members_lst);
     clothes_lst.insert(p);
-    it2++;
+    ++it2;
   }
 
   // Movements are shared
@@ -126,8 +116,20 @@ Body::Body(const Body & _body):
     p.second = it3->second;
     Movement::ShareMovement(p.second);
     mvt_lst.insert(p);
-    it3++;
+    ++it3;
   }
+}
+
+void Body::Init(void) {
+  const xmlNode * skeletons = XmlReader::GetMarker(mainXmlNode, "skeletons");
+  ASSERT(skeletons);
+
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(skeletons, "sprite");
+  xmlNodeArray::const_iterator it;
+
+  LoadMembers(nodes, mainFolder);
+  LoadClothes(nodes, mainXmlNode);
+  LoadMovements(nodes, mainXmlNode);
 }
 
 void Body::LoadMembers(xmlNodeArray &      nodes,
@@ -219,9 +221,8 @@ void Body::LoadMovements(xmlNodeArray &  nodes,
       mvt_lst[name] = mvt;
     }
 
-    for(std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
-        iter != mvt_alias.end();  
-        ++iter) {
+    std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
+    for( ; iter != mvt_alias.end(); ++iter) {
       if (iter->second == name) {
         Movement* mvt = new Movement(*it);
         mvt->SetType(iter->first);
@@ -283,8 +284,9 @@ void Body::FreeSkeletonVector()
 
 void Body::ResetMovement() const
 {
-  for (size_t layer=0; layer < current_clothe->GetLayers().size(); layer++)
+  for (size_t layer=0; layer < current_clothe->GetLayers().size(); layer++) {
     current_clothe->GetLayers()[layer]->ResetMovement();
+  }
 }
 
 void Body::ApplyMovement(Movement * mvt, 
@@ -304,16 +306,16 @@ void Body::ApplyMovement(Movement * mvt,
   // member affects the child members as well
   std::vector<junction *>::iterator member = skel_lst.begin();
 
-  for (;member != skel_lst.end();
-       ++member)
-  {
-    ASSERT( frame < mvt->GetFrames().size() );
-    if (mvt->GetFrames()[frame].find((*member)->member->GetType()) != mvt->GetFrames()[frame].end())
-    {
+  for (; member != skel_lst.end(); ++member) {
+    ASSERT(frame < mvt->GetFrames().size());
+
+    if (mvt->GetFrames()[frame].find((*member)->member->GetType()) != mvt->GetFrames()[frame].end()) {
+
       // This member needs to be moved :
       member_mvt mb_mvt = mvt->GetFrames()[frame].find((*member)->member->GetType())->second;
-      if(mb_mvt.follow_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
-      {
+
+      if (mb_mvt.follow_crosshair && 
+          ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair()) {
         // Use the movement of the crosshair
         double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
         if(angle < 0)
@@ -324,7 +326,8 @@ void Body::ApplyMovement(Movement * mvt,
         mb_mvt.SetAngle(mb_mvt.GetAngle() + angle);
       }
 
-      if(mb_mvt.follow_half_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
+      if (mb_mvt.follow_half_crosshair && 
+          ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
         double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
@@ -365,22 +368,19 @@ void Body::ApplyMovement(Movement * mvt,
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
-      if(mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE)
-      {
+      if(mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
 	member_mvt angle_mvt;
 
 	Point2i v = owner->GetPosition() + (*member)->member->GetPos();
 	v += (*member)->member->GetAnchorPos();
 
-	if( owner->GetDirection() == DIRECTION_LEFT)
-	{
-		v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
-		//v.x -= member->member->GetSprite().GetWidth();
+	if( owner->GetDirection() == DIRECTION_LEFT) {
+          v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
+          //v.x -= member->member->GetSprite().GetWidth();
 	}
 	v = Mouse::GetInstance()->GetWorldPosition() - v;
 
-	if( v.Norm() < mb_mvt.follow_cursor_limit)
-	{
+	if( v.Norm() < mb_mvt.follow_cursor_limit) {
           double angle = v.ComputeAngle(Point2i(0, 0));
 	  angle *= owner->GetDirection();
 	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
@@ -403,8 +403,7 @@ void Body::ApplySqueleton()
   member++;
 
   for (;member != skel_lst.end();
-       ++member)
-  {
+       ++member) {
     // Place the other members depending on the parent member:
     (*member)->member->ApplySqueleton((*member)->parent);
   }
@@ -414,7 +413,7 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
-  unsigned int last_loop = current_loop;
+  unsigned int last_loop  = current_loop;
 
   if (walk_events > 0 || current_mvt->GetType() != "walk") {
 
@@ -460,8 +459,9 @@ void Body::Build()
   // Rotate each sprite, because the next part need to know the height
   // of the sprite once it is rotated
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    if (current_clothe->GetLayers()[layer]->GetName() != "weapon")
+    if (current_clothe->GetLayers()[layer]->GetName() != "weapon") {
       current_clothe->GetLayers()[layer]->RotateSprite();
+    }
   }
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
@@ -469,13 +469,13 @@ void Body::Build()
   float y_max = 0;
 
   for (int lay=0;lay < (int)current_clothe->GetLayers().size() ;lay++) {
-    if (current_clothe->GetLayers()[lay]->GetName() != "weapon")
-      {
-	Member* member = current_clothe->GetLayers()[lay];
-	if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
-	   && !member->IsGoingThroughGround())
-	  y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
+    if (current_clothe->GetLayers()[lay]->GetName() != "weapon") {
+      Member* member = current_clothe->GetLayers()[lay];
+      if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
+	   && !member->IsGoingThroughGround()) {
+        y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
       }
+    }
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
@@ -487,10 +487,12 @@ void Body::Build()
 
 void Body::RefreshSprites()
 {
-  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+  for (int layer=0; layer < (int)current_clothe->GetLayers().size() ;layer++) {
     Member* member = current_clothe->GetLayers()[layer];
-    if (member->GetName() != "weapon")
+
+    if ("weapon" != member->GetName()) {
       member->RefreshSprite(direction);
+    }
   }
 }
 
@@ -513,18 +515,18 @@ void Body::GetRelativeHandPosition(Point2i& result) const
   }
 }
 
-void Body::DrawWeaponMember(const Point2i& _pos)
+void Body::DrawWeaponMember(const Point2i & _pos)
 {
   weapon_member->Draw(_pos, _pos.x + GetSize().x/2, direction);
 }
 
-void Body::Draw(const Point2i& _pos)
+void Body::Draw(const Point2i & _pos)
 {
   ASSERT(!need_rebuild);
   int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
-  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+  for (int layer=0; layer < (int)current_clothe->GetLayers().size() ;layer++) {
 
     if (current_clothe->GetLayers()[layer]->GetName() == "weapon") {
       // We draw the weapon member only if currently drawing the active character
@@ -551,17 +553,16 @@ void Body::Draw(const Point2i& _pos)
 
 void Body::AddChildMembers(Member* parent)
 {
+  std::map<std::string, v_attached>::const_iterator child = parent->GetAttachedMembers().begin();
+
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
-  for (std::map<std::string, v_attached>::const_iterator child = parent->GetAttachedMembers().begin();
-       child != parent->GetAttachedMembers().end();
-       child++)
-  {
+  for ( ; child != parent->GetAttachedMembers().end(); ++child) {
+
     // Find if the current clothe uses this member:
-    for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
-    {
-      if (current_clothe->GetLayers()[lay]->GetType() == child->first)
-      {
+    for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++) {
+
+      if (current_clothe->GetLayers()[lay]->GetType() == child->first) {
         // This child member is attached to his parent
         junction * body = new junction();
         body->member = current_clothe->GetLayers()[lay];
@@ -583,9 +584,9 @@ void Body::BuildSqueleton()
   FreeSkeletonVector();
 
   // Find the "body" member as it is the top of the skeleton
-  for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++)
-    if (current_clothe->GetLayers()[lay]->GetType() == "body")
-    {
+  for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++) {
+    if (current_clothe->GetLayers()[lay]->GetType() == "body") {
+
       // TODO lami : overwrite junction constructor
       junction * body = new junction();
       body->member = current_clothe->GetLayers()[lay];
@@ -593,9 +594,9 @@ void Body::BuildSqueleton()
       skel_lst.push_back(body);
       break;
     }
+  }
 
-  if (skel_lst.size() == 0)
-  {
+  if (0 == skel_lst.size()) {
     std::cerr << "Unable to find the \"body\" member in the current clothe" << std::endl;
     ASSERT(false);
   }
@@ -603,46 +604,48 @@ void Body::BuildSqueleton()
   AddChildMembers(skel_lst.front()->member);
 }
 
-void Body::SetClothe(const std::string& name)
+void Body::SetClothe(const std::string & name)
 {
   MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
-  if (current_clothe && current_clothe->GetName() == name)
+  if (current_clothe && current_clothe->GetName() == name) {
     return;
+  }
 
-  if (clothes_lst.find(name) != clothes_lst.end())
-  {
+  if (clothes_lst.find(name) != clothes_lst.end()) {
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
     main_rotation_rad = 0;
-    need_rebuild = true;
-    previous_clothe = NULL;
-  }
-  else
+    need_rebuild      = true;
+    previous_clothe   = NULL;
+  } else
     MSG_DEBUG("body", "Clothe not found");
 
   ASSERT(current_clothe != NULL);
 }
 
-void Body::SetMovement(const std::string& name)
+void Body::SetMovement(const std::string & name)
 {
   MSG_DEBUG("body", " %s use movement %s", owner->GetName().c_str(), name.c_str());
-  if (current_mvt && current_mvt->GetType() == name) return;
+  if (current_mvt && current_mvt->GetType() == name) {
+    return;
+  }
 
   // Dirty trick to get the "black" movement to be played fully
-  if (current_clothe && current_clothe->GetName() == "black") return;
-
-  if (mvt_lst.find(name) != mvt_lst.end())
-  {
-    current_mvt = mvt_lst.find(name)->second;
-    current_frame = 0;
-    current_loop = 0;
-    last_refresh = Time::GetInstance()->Read();
-    main_rotation_rad = 0;
-    need_rebuild = true;
-    previous_mvt = NULL;
+  if (current_clothe && current_clothe->GetName() == "black") {
+    return;
   }
-  else
+
+  if (mvt_lst.find(name) != mvt_lst.end()) {
+    current_mvt       = mvt_lst.find(name)->second;
+    current_frame     = 0;
+    current_loop      = 0;
+    last_refresh      = Time::GetInstance()->Read();
+    main_rotation_rad = 0;
+    need_rebuild      = true;
+    previous_mvt      = NULL;
+  } else {
     MSG_DEBUG("body", "Movement not found");
+  }
 
   ASSERT(current_mvt != NULL);
 }
@@ -659,60 +662,63 @@ void Body::PlayAnimation()
 void Body::SetClotheOnce(const std::string& name)
 {
   MSG_DEBUG("body", " %s use clothe %s once", owner->GetName().c_str(), name.c_str());
-  if (current_clothe && current_clothe->GetName() == name) return;
+  if (current_clothe && current_clothe->GetName() == name) {
+    return;
+  }
 
-  if (clothes_lst.find(name) != clothes_lst.end())
-  {
-    if (!previous_clothe)
+  if (clothes_lst.find(name) != clothes_lst.end()) {
+    if (!previous_clothe) {
       previous_clothe = current_clothe;
+    }
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
     main_rotation_rad = 0;
     need_rebuild = true;
-  }
-  else
+  } else {
     MSG_DEBUG("body", "Clothe not found");
+  }
 
   ASSERT(current_clothe != NULL);
 }
 
-void Body::SetMovementOnce(const std::string& name)
+void Body::SetMovementOnce(const std::string & name)
 {
   MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
-  if (current_mvt && current_mvt->GetType() == name) return;
+  if (current_mvt && current_mvt->GetType() == name) {
+    return;
+  }
 
   // Dirty trick to get the "black" movement to be played fully
-  if(current_clothe && current_clothe->GetName() == "black"  && name != "black") return;
+  if(current_clothe && current_clothe->GetName() == "black"  && name != "black") {
+    return;
+  }
 
-  if (mvt_lst.find(name) != mvt_lst.end())
-  {
-    if (!previous_mvt)
-    {
+  if (mvt_lst.find(name) != mvt_lst.end()) {
+    if (!previous_mvt) {
       previous_mvt = current_mvt;
     }
-
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     current_loop = 0;
     last_refresh = Time::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
-  }
-  else
+  } else {
     MSG_DEBUG("body", "Movement not found");
+  }
 
   ASSERT(current_mvt != NULL);
 }
 
-void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b) const
+void Body::GetTestRect(uint & l, 
+                       uint & r, 
+                       uint & t, 
+                       uint & b) const
 {
-  if(direction == DIRECTION_RIGHT)
-  {
+  if(DIRECTION_RIGHT == direction) {
     l = current_mvt->GetTestLeft();
     r = current_mvt->GetTestRight();
-  }
-  else
-  {
+  } else {
     r = current_mvt->GetTestLeft();
     l = current_mvt->GetTestRight();
   }
@@ -733,10 +739,11 @@ void Body::StartWalk()
 
 void Body::StopWalk()
 {
-  if(walk_events > 0)
+  if(walk_events > 0) {
     walk_events--;
-  if(current_mvt->GetType() == "walk")
-  {
+  }
+
+  if(current_mvt->GetType() == "walk") {
     SetMovement("breathe");
     SetFrame(0);
   }
@@ -769,11 +776,11 @@ void Body::SetFrame(uint no)
 #endif
   ASSERT(no < current_mvt->GetFrames().size());
   current_frame = no;
-  current_loop = 0;
-  need_rebuild = true;
+  current_loop  = 0;
+  need_rebuild  = true;
 }
 
-void Body::MakeParticles(const Point2i& pos)
+void Body::MakeParticles(const Point2i & pos)
 {
   Build();
 
