@@ -396,6 +396,7 @@ void Team::LoadGamingData()
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
+  abandoned = false;
   LoadCharacters();
 }
 
