@@ -538,7 +538,7 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
       return;
     }
 
-    bool is_local = (the_old_team->IsLocalHuman() || the_old_team->IsLocalAI());
+    bool is_local = the_old_team->IsLocal();
     DelTeam(the_old_team);
     AddTeam(the_team, pos, the_team_cfg, is_local);
   }

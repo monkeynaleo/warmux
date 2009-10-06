@@ -160,10 +160,8 @@ void GameClassic::__SetState_PLAYING()
   GetTeamsList().NextTeam();
 
   // Are we turn master for next turn ?
-  if (ActiveTeam().IsLocalHuman() || ActiveTeam().IsLocalAI())
-    Network::GetInstance()->SetTurnMaster(true);
-  else
-    Network::GetInstance()->SetTurnMaster(false);
+  Network::GetInstance()->SetTurnMaster(ActiveTeam().IsLocal());
+
 
   give_objbox = true; //hack: make it so that there is no more than one objbox per turn
 }
