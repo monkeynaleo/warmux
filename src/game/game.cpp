@@ -581,8 +581,7 @@ void Game::MainLoop()
       if (ActiveTeam().IsAbandoned()) {
         GetTeamsList().DelTeam(ActiveTeam().GetId());
         // Did we become turn master trough the leave?
-        bool turn_master = ActiveTeam().IsLocalHuman() || ActiveTeam().IsLocalAI();
-        Network::GetInstance()->SetTurnMaster(turn_master);
+        Network::GetInstance()->SetTurnMaster(ActiveTeam().IsLocal());
       }
     }
 

@@ -168,6 +168,9 @@ class Team
   // true if the team belong to a local AI
     bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
 
+  // true if the tream belongs to a local human or AI player.
+    bool IsLocal() const { return IsLocalHuman() || IsLocalAI(); }
+
     bool IsRemote() const { return (type_of_player == TEAM_remote); };
 
     bool IsActiveTeam() const;
