@@ -172,9 +172,6 @@ void GameBlitz::__SetState_PLAYING()
   ASSERT (!IsGameFinished());
   GetTeamsList().NextTeam();
 
-  // Are we turn master for next turn ?
-  Network::GetInstance()->SetTurnMaster(ActiveTeam().IsLocal());
-
   // initialize counter
   Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second);
   Interface::GetInstance()->EnableDisplayTimer(true);

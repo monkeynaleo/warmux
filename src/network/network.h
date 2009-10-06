@@ -158,7 +158,6 @@ public:
   WNet::net_game_state_t GetState() const;
   void SendNetworkState();
 
-  void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
 
   uint GetNbPlayersConnected() const;
