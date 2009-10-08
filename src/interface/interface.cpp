@@ -402,13 +402,60 @@ void Interface::DrawMapPreview()
   Point2i cameraTopLeftCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()) + offset;
 Point2i cameraBottomRightCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()+Camera::GetInstance()->GetSize()) + offset;
 
+
+  bool line_on_top = true;
+  bool line_on_bottom = true;
+  bool line_on_right = true;
+  bool line_on_left = true;
+
+
+  if (cameraTopLeftCorner.y < offset.y)
+  {
+    cameraTopLeftCorner.y = offset.y;
+    line_on_top = false;
+  }
+  
+  if (cameraTopLeftCorner.x < offset.x)
+  {
+    cameraTopLeftCorner.x = offset.x;
+    line_on_left = false;
+  }
+  
+  if (cameraBottomRightCorner.y >  offset.y + GetWorld().ground.GetPreviewSize().y)
+  {
+    cameraBottomRightCorner.y = offset.y + GetWorld().ground.GetPreviewSize().y;
+    line_on_bottom = false;
+  }
+  
+  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x )
+  {
+    cameraBottomRightCorner.x = offset.x + GetWorld().ground.GetPreviewSize().x;
+    line_on_right = false;
+  }
+  
+  //Top
+  if (line_on_top)
+  {
+    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraTopLeftCorner.y, m_camera_preview_color);
+  } 
+  //Right
+  if (line_on_right)
+  {  
+    GetMainWindow().LineColor(cameraBottomRightCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  }
+  //Bottom
+  if (line_on_bottom)
+  {  
+    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraBottomRightCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  }
+  //Left
+  if (line_on_left)
+  {  
+    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraTopLeftCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  }
+
+
   GetWorld().ToRedrawOnScreen(rect_preview);
-  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraTopLeftCorner.y, m_camera_preview_color);
-  GetMainWindow().LineColor(cameraBottomRightCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
-  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraBottomRightCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
-  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraTopLeftCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
-
-
 }
 
 void Interface::GenerateStyledBox(Surface & source)
