@@ -214,7 +214,7 @@ void Body::LoadMovements(xmlNodeArray &  nodes,
       animation_number++;
     }
 
-    if(mvt_lst.find(name) != mvt_lst.end()) {
+    if (mvt_lst.find(name) != mvt_lst.end()) {
       std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
     } else {
       Movement* mvt = new Movement(*it);
@@ -222,13 +222,14 @@ void Body::LoadMovements(xmlNodeArray &  nodes,
     }
 
     std::map<std::string, std::string>::iterator iter = mvt_alias.begin();
-    for( ; iter != mvt_alias.end(); ++iter) {
+    for ( ; iter != mvt_alias.end(); ++iter) {
       if (iter->second == name) {
         Movement* mvt = new Movement(*it);
         mvt->SetType(iter->first);
         mvt_lst[iter->first] = mvt;
       }
-    } 
+    }
+    
   }
 
   if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
@@ -341,27 +342,11 @@ void Body::ApplyMovement(Movement * mvt,
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
-      if (mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
-	member_mvt angle_mvt;
-
-	Point2i v = owner->GetPosition() + (*member)->member->GetPos();
-	v += (*member)->member->GetAnchorPos();
-
-	if( owner->GetDirection() == DIRECTION_LEFT) {
-          v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
-          //v.x -= member->member->GetSprite().GetWidth();
-	}
-	v = Mouse::GetInstance()->GetWorldPosition() - v;
-
-	if( v.Norm() < mb_mvt.follow_cursor_limit) {
-          double angle = v.ComputeAngle(Point2i(0, 0));
-	  angle *= owner->GetDirection();
-	  angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
-
-          angle_mvt.SetAngle(angle);
-          (*member)->member->ApplyMovement(angle_mvt, skel_lst);
-	}
+      if (mb_mvt.follow_cursor && 
+          Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
+        ProcessFollowCursor(mb_mvt, (*member)->member);
       }
+
     }
   }
 }
@@ -415,8 +400,32 @@ void Body::ProcessFollowSpeed(member_mvt & mb_mvt)
 void Body::ProcessFollowDirection(member_mvt & mb_mvt)
 {
   // Use the direction of the character
-  if (owner->GetDirection() == DIRECTION_LEFT) {
+  if (DIRECTION_LEFT == owner->GetDirection()) {
     mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
+  }
+}
+
+void Body::ProcessFollowCursor(member_mvt & mb_mvt,
+                               Member *     member)
+{
+  member_mvt angle_mvt;
+
+  Point2i v = owner->GetPosition() + member->GetPos();
+  v += member->GetAnchorPos();
+
+  if (DIRECTION_LEFT == owner->GetDirection()) {
+    v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
+    //v.x -= member->GetSprite().GetWidth();
+  }
+  v = Mouse::GetInstance()->GetWorldPosition() - v;
+
+  if (v.Norm() < mb_mvt.follow_cursor_limit) {
+    double angle = v.ComputeAngle(Point2i(0, 0));
+    angle *= owner->GetDirection();
+    angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
+
+    angle_mvt.SetAngle(angle);
+    member->ApplyMovement(angle_mvt, skel_lst);
   }
 }
 
@@ -424,12 +433,13 @@ void Body::ApplySqueleton()
 {
   // Move each member following the skeleton
   std::vector<junction *>::iterator member = skel_lst.begin();
+
   // The first member is the body, we set it to pos:
   (*member)->member->SetPos(Point2f(0.0, 0.0));
   (*member)->member->SetAngle(0.0);
   member++;
 
-  for (;member != skel_lst.end();
+  for ( ; member != skel_lst.end();
        ++member) {
     // Place the other members depending on the parent member:
     (*member)->member->ApplySqueleton((*member)->parent);
