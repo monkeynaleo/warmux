@@ -189,7 +189,7 @@ void Member::Draw(const Point2i & _pos,
   ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
 
-  if(NULL == parent && "body" != type) {
+  if (NULL == parent && "body" != type) {
     std::cerr << "Error : Member " << name << " have no parent member!" << std::endl;
     return;
   }
@@ -218,11 +218,12 @@ void Member::ApplySqueleton(Member * parent_member)
   ASSERT(parent->name != "weapon" && parent->type != "weapon");
 
   // Set the position
-  pos = parent->pos;
-  pos = pos - anchor;
+  pos = parent->pos - anchor;
 
-  if(parent->attached_members.find(type) != parent->attached_members.end()) {
-    pos = pos + parent->attached_members.find(type)->second[parent->spr->GetCurrentFrame()];
+  std::map<std::string, v_attached>::iterator itAttachedMember = parent->attached_members.find(type);
+ 
+  if (itAttachedMember != parent->attached_members.end()) {
+    pos += itAttachedMember->second[parent->spr->GetCurrentFrame()];
   }
 }
 
@@ -262,22 +263,26 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       member_mvt child_mvt;
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
-      float radius  = anchor.Distance(child->second[frame]);
+
+      //Point2f childPoint = child->second[frame];
+      float   radius  = anchor.Distance(child->second[frame]);
+      //float   radius  = anchor.Distance(childPoint);
 
       if (0.0 != radius) {
+        Point2f childPoint = child->second[frame];
         float angle_init;
 
-        if(child->second[frame].x > anchor.x) {
-          if(child->second[frame].y > anchor.y) {
-            angle_init = acos( (child->second[frame].x - anchor.x) / radius );
+        if (childPoint.x /*child->second[frame].x*/ > anchor.x) {
+          if (childPoint.y /*child->second[frame].y*/ > anchor.y) {
+            angle_init = acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
           } else {
-            angle_init = -acos( (child->second[frame].x - anchor.x) / radius );
+            angle_init = -acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
           }
         } else {
-          if(child->second[frame].y > anchor.y) {
-            angle_init = acos( (child->second[frame].x - anchor.x) / radius );
+          if (childPoint.y /*child->second[frame].y*/ > anchor.y) {
+            angle_init = acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
           } else {
-            angle_init = M_PI + acos( -(child->second[frame].x - anchor.x) / radius );
+            angle_init = M_PI + acos( -(childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
           }
         }
 

@@ -111,6 +111,8 @@ class Body
     void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
     void ProcessFollowSpeed(member_mvt & mb_mvt); 
     void ProcessFollowDirection(member_mvt & mb_mvt);
+    void ProcessFollowCursor(member_mvt & mb_mvt,
+                             Member *     member);
 
     void BuildSqueleton();
     void AddChildMembers(Member * parent);
