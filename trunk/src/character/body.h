@@ -27,6 +27,7 @@
 #include "include/base.h"
 #include <WORMUX_point.h>
 #include "tool/xml_document.h"
+#include "character/movement.h"
 
 // Forward declarations
 class Character;
@@ -100,18 +101,24 @@ class Body
     const Character *                 owner;
     const xmlNode *                   mainXmlNode;
     const std::string                 mainFolder;
-
+    
     void ResetMovement() const;
     void ApplyMovement(Movement * mvt, 
                        uint       frame);
     void ApplySqueleton();
+
+    void ProcessFollowCrosshair(member_mvt & mb_mvt);
+    void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
+    void ProcessFollowSpeed(member_mvt & mb_mvt); 
+    void ProcessFollowDirection(member_mvt & mb_mvt);
+
     void BuildSqueleton();
     void AddChildMembers(Member * parent);
     void DrawWeaponMember(const Point2i & _pos);
     void LoadMembers(xmlNodeArray &      nodes,
                      const std::string & main_folder);
-    void LoadClothes(xmlNodeArray &      nodes,
-                     const xmlNode *     xml);
+    void LoadClothes(xmlNodeArray &  nodes,
+                     const xmlNode * xml);
     void LoadMovements(xmlNodeArray &  nodes,
                        const xmlNode * xml);
     void FreeSkeletonVector();
