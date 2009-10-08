@@ -26,7 +26,7 @@
 #include "character/character.h"
 #include "character/clothe.h"
 #include "character/member.h"
-#include "character/movement.h"
+//#include "character/movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/mouse.h"
@@ -154,8 +154,8 @@ void Body::LoadMembers(xmlNodeArray &      nodes,
   members_lst["weapon"] = weapon_member;
 }
 
-void Body::LoadClothes(xmlNodeArray &      nodes,
-                       const xmlNode *     xml)
+void Body::LoadClothes(xmlNodeArray &  nodes,
+                       const xmlNode * xml)
 {
   const xmlNode * clothes = XmlReader::GetMarker(xml, "clothes");
   ASSERT(clothes);
@@ -301,74 +301,47 @@ void Body::ApplyMovement(Movement * mvt,
 	      frame);
 #endif
 
+  std::vector<junction *>::iterator member = skel_lst.begin();  
+  bool                              useCrossHair;
+  member_mvt                        mb_mvt;
+  Movement::member_def              movMember = mvt->GetFrames()[frame];
+  Movement::member_def::iterator    itMember;
+
   // Move each member following the movement description
   // We do it using the order of the skeleton, as the movement of each
   // member affects the child members as well
-  std::vector<junction *>::iterator member = skel_lst.begin();
 
   for (; member != skel_lst.end(); ++member) {
     ASSERT(frame < mvt->GetFrames().size());
 
-    if (mvt->GetFrames()[frame].find((*member)->member->GetType()) != mvt->GetFrames()[frame].end()) {
+    itMember = movMember.find((*member)->member->GetType());
+
+    if (itMember != movMember.end()) {
 
       // This member needs to be moved :
-      member_mvt mb_mvt = mvt->GetFrames()[frame].find((*member)->member->GetType())->second;
+      mb_mvt       = itMember->second;
+
+      useCrossHair = ActiveTeam().AccessWeapon().UseCrossHair();
 
       if (mb_mvt.follow_crosshair && 
-          ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair()) {
-        // Use the movement of the crosshair
-        double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
-        if(angle < 0)
-          angle += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
-        if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-          angle = M_PI - angle;
-
-        mb_mvt.SetAngle(mb_mvt.GetAngle() + angle);
-      }
-
-      if (mb_mvt.follow_half_crosshair && 
-          ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
-      {
-        // Use the movement of the crosshair
-        double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
-        if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-          angle_rad /= 2; // -90 < angle < 90
-        else
-        if(angle_rad > M_PI_2)
-          angle_rad = M_PI_2 - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
-        else
-          angle_rad = -M_PI_2 - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
-
-        if(angle_rad < 0)
-          angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
-
-        mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
-      }
-
-      if(mb_mvt.follow_speed)
-      {
-        // Use the movement of the character
-        double angle_rad = (owner->GetSpeedAngle());
-        if(angle_rad < 0)
-          angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
-        if(owner->GetDirection() == DIRECTION_LEFT)
-          angle_rad = M_PI - angle_rad;
-
-        mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
-      }
-
-      if(mb_mvt.follow_direction)
-      {
-        // Use the direction of the character
-        if(owner->GetDirection() == DIRECTION_LEFT)
-          mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
+          ActiveCharacter().body == this && 
+          useCrossHair) {
+        ProcessFollowCrosshair(mb_mvt);
+      } else if (mb_mvt.follow_half_crosshair && 
+          ActiveCharacter().body == this && 
+          useCrossHair) {
+        ProcessFollowHalfCrosshair(mb_mvt);
+      } else if (mb_mvt.follow_speed) {
+        ProcessFollowSpeed(mb_mvt);
+      } else if (mb_mvt.follow_direction) {
+        ProcessFollowDirection(mb_mvt);
       }
 
       (*member)->member->ApplyMovement(mb_mvt, skel_lst);
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
-      if(mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
+      if (mb_mvt.follow_cursor && Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
 	member_mvt angle_mvt;
 
 	Point2i v = owner->GetPosition() + (*member)->member->GetPos();
@@ -390,6 +363,60 @@ void Body::ApplyMovement(Movement * mvt,
 	}
       }
     }
+  }
+}
+
+void Body::ProcessFollowCrosshair(member_mvt & mb_mvt) 
+{
+  // Use the movement of the crosshair
+  double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
+  if (0 > angle) {
+    angle += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+  }
+
+  if (DIRECTION_LEFT == ActiveCharacter().GetDirection()) {
+    angle = M_PI - angle;
+  }
+
+  mb_mvt.SetAngle(mb_mvt.GetAngle() + angle);
+}
+
+void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
+{
+  // Use the movement of the crosshair
+  double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
+  if (DIRECTION_RIGHT == ActiveCharacter().GetDirection())
+    angle_rad /= 2; // -90 < angle < 90
+  else
+  if (angle_rad > M_PI_2)
+    angle_rad = M_PI_2 - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
+  else
+    angle_rad = -M_PI_2 - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
+
+  if (angle_rad < 0) {
+    angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+  }
+
+  mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
+}
+
+void Body::ProcessFollowSpeed(member_mvt & mb_mvt) 
+{
+  // Use the movement of the character
+  double angle_rad = (owner->GetSpeedAngle());
+  if (angle_rad < 0)
+    angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+  if (owner->GetDirection() == DIRECTION_LEFT)
+    angle_rad = M_PI - angle_rad;
+
+  mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
+}
+
+void Body::ProcessFollowDirection(member_mvt & mb_mvt)
+{
+  // Use the direction of the character
+  if (owner->GetDirection() == DIRECTION_LEFT) {
+    mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
   }
 }
 
