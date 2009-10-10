@@ -95,8 +95,7 @@ public:
 class WeaponMember : public Member
 {
 public:
-  WeaponMember();
-  ~WeaponMember();
+  WeaponMember(void);
   void Draw(const Point2i & _pos, 
             int             flip_x, 
             BodyDirection   direction);

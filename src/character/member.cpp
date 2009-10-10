@@ -363,18 +363,13 @@ const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
   return attached_members;
 }
 
-//TODO lami : Move all in initializer
-WeaponMember::WeaponMember() : 
+WeaponMember::WeaponMember(void) : 
   Member(NULL, "")
 {
   name   = "weapon";
   type   = "weapon";
   spr    = NULL;
   anchor = Point2f(0.0,0.0);
-}
-
-WeaponMember::~WeaponMember()
-{
 }
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, 

@@ -232,14 +232,15 @@ void Body::LoadMovements(xmlNodeArray &  nodes,
     
   }
 
-  if ((mvt_lst.find("black") == mvt_lst.end() && clothes_lst.find("black") != clothes_lst.end())
-     || (mvt_lst.find("black") != mvt_lst.end() && clothes_lst.find("black") == clothes_lst.end())) {
+  std::map<std::string, Movement *>::iterator mvtBlack     = mvt_lst.find("black");
+  std::map<std::string, Clothe *>::iterator   clothesBlack = clothes_lst.find("black"); 
+
+  if ((mvtBlack == mvt_lst.end() && clothesBlack != clothes_lst.end())
+     || (mvtBlack != mvt_lst.end() && clothesBlack == clothes_lst.end())) {
     std::cerr << "Error: The movement \"black\" or the clothe \"black\" is not defined!" << std::endl;
     exit(EXIT_FAILURE);
   }
 }
-
-
 
 Body::~Body()
 {
@@ -388,11 +389,15 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
 void Body::ProcessFollowSpeed(member_mvt & mb_mvt) 
 {
   // Use the movement of the character
-  double angle_rad = (owner->GetSpeedAngle());
-  if (angle_rad < 0)
+  double angle_rad = owner->GetSpeedAngle();
+
+  if (angle_rad < 0) {
     angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
-  if (owner->GetDirection() == DIRECTION_LEFT)
+  }
+
+  if (owner->GetDirection() == DIRECTION_LEFT) {
     angle_rad = M_PI - angle_rad;
+  }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
 }
@@ -648,14 +653,17 @@ void Body::SetClothe(const std::string & name)
     return;
   }
 
-  if (clothes_lst.find(name) != clothes_lst.end()) {
-    current_clothe = clothes_lst.find(name)->second;
+  std::map<std::string, Clothe *>::iterator itClothes = clothes_lst.find(name);
+  
+  if (itClothes != clothes_lst.end()) {
+    current_clothe = itClothes->second;
     BuildSqueleton();
     main_rotation_rad = 0;
     need_rebuild      = true;
     previous_clothe   = NULL;
-  } else
+  } else {
     MSG_DEBUG("body", "Clothe not found");
+  }
 
   ASSERT(current_clothe != NULL);
 }
@@ -730,11 +738,13 @@ void Body::SetMovementOnce(const std::string & name)
     return;
   }
 
-  if (mvt_lst.find(name) != mvt_lst.end()) {
+  std::map<std::string, Movement *>::iterator itMvt = mvt_lst.find(name);
+
+  if (itMvt != mvt_lst.end()) {
     if (!previous_mvt) {
       previous_mvt = current_mvt;
     }
-    current_mvt = mvt_lst.find(name)->second;
+    current_mvt = itMvt->second;
     current_frame = 0;
     current_loop = 0;
     last_refresh = Time::GetInstance()->Read();
