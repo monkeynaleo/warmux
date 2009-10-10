@@ -444,9 +444,8 @@ void Character::Draw()
     std::ostringstream ss;
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
-    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
-        GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy),
-        ss.str(), white_color);
+	Text text(ss.str());
+	text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
   }
 
 #ifdef DEBUG
