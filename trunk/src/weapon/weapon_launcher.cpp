@@ -249,8 +249,8 @@ void WeaponProjectile::Draw()
       ss << tmp ;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
-      (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition(),
-      ss.str(), white_color);
+	  Text text(ss.str());
+      text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
     }
   }
 
@@ -480,9 +480,9 @@ void WeaponLauncher::Draw()
     ss << tmp;
     ss << "s";
     int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
-    int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
-    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition(),
-    ss.str(), white_color);
+    int txt_y = ActiveCharacter().GetY() - 4*ActiveCharacter().GetHeight()/5;
+	Text text(ss.str());
+      text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
   }
 
   Weapon::Draw();
