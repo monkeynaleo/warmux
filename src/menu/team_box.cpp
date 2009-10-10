@@ -61,17 +61,17 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   custom_team_current_id = 0;
 
   player_name = new TextBox(_player_name, 100,
-                            Font::FONT_SMALL, Font::FONT_NORMAL);
+                            Font::FONT_SMALL, Font::FONT_BOLD);
 
   if (custom_team_list.empty()) {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
-                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+                                      Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
 
     tmp_player_box->AddWidget(player_name);
 
   } else {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
-					Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+					Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
 
     next_custom_team = new Button(res, "menu/plus");
 

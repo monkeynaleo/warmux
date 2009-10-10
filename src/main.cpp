@@ -216,15 +216,15 @@ void AppWormux::DisplayLoadingPicture()
   Time::GetInstance()->Reset();
 
   Text text1(_("Wormux launching..."), white_color,
-             Font::FONT_HUGE, Font::FONT_NORMAL, true);
-  Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
+             Font::FONT_HUGE, Font::FONT_BOLD, true);
+  Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_BOLD,
              true);
 
   Point2i windowCenter = video->window.GetSize() / 2;
 
   text1.DrawCenter(windowCenter);
   text2.DrawCenter(windowCenter
-                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
+                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_BOLD)).GetHeight() + 20));
 
   video->window.Flip();
 }
