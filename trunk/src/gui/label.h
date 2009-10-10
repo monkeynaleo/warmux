@@ -45,7 +45,7 @@ class Label : public Widget{
   Label(const std::string &label,
         uint max_width,
         Font::font_size_t font_size = Font::FONT_SMALL,
-        Font::font_style_t font_style = Font::FONT_NORMAL,
+        Font::font_style_t font_style = Font::FONT_BOLD,
         const Color& color = white_color,
         bool center = false,
         bool shadowed = true);

@@ -73,13 +73,13 @@ public:
   } font_style_t;
 
   // type: defined as static consts above
-  static Font* GetInstance(font_size_t size, font_style_t style = FONT_NORMAL);
+  static Font* GetInstance(font_size_t size, font_style_t style = FONT_BOLD);
   static void ReleaseInstances(void);
 
   ~Font();
 
   static Surface GenerateSurface(const std::string &txt, const Color &color,
-                                 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_NORMAL);
+                                 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_BOLD);
 
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);

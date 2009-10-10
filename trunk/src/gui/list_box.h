@@ -97,7 +97,7 @@ public:
   void AddItem(bool selected, const std::string &label,
                const std::string &value,
                Font::font_size_t fsize = Font::FONT_SMALL,
-               Font::font_style_t fstyle = Font::FONT_NORMAL,
+               Font::font_style_t fstyle = Font::FONT_BOLD,
                const Color& color = white_color);
   void Select(const std::string& val);
   void Select(uint index) { BaseListBox::Select(index); }

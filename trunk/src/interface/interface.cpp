@@ -116,8 +116,8 @@ m_playing_character_preview_color = GetResourceManager().LoadColor(res, "interfa
   // Color turn_timer_text_color = GetResourceManager().LoadColor(res, "interface/turn_timer_text_color");
   // Color global_clock_text_color = GetResourceManager().LoadColor(res, "interface/global_clock_text_color");
 
-  global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_NORMAL, false);
-  timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
+  global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_BOLD, false);
+  timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_team_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);

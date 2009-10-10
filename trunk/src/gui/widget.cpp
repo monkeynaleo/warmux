@@ -41,7 +41,7 @@ Widget::Widget():
   font_color(dark_gray_color),
   font_shadowed(false),
   font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_NORMAL),
+  font_style(Font::FONT_BOLD),
   ct(NULL),
   need_redrawing(true)
 {
@@ -59,7 +59,7 @@ Widget::Widget(const Point2i &size):
   font_color(dark_gray_color),
   font_shadowed(false),
   font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_NORMAL),
+  font_style(Font::FONT_BOLD),
   ct(NULL),
   need_redrawing(true)
 {
