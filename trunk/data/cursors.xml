@@ -16,6 +16,8 @@
   <mouse_cursor name="pointer_arrow_up_left" file="interface/whitetheme/cursors/arrow-top.left.png" x="2" y="1" />
   <mouse_cursor name="pointer_arrow_down_right" file="interface/whitetheme/cursors/arrow-down.right.png" x="24" y="22" />
   <mouse_cursor name="pointer_arrow_down_left" file="interface/whitetheme/cursors/arrow-down.left.png" x="2" y="24" />
+  <mouse_cursor name="pointer_attack_from_left" file="interface/whitetheme/cursors/here-from-left.png" x="30" y="14" />
+  <mouse_cursor name="pointer_attack_from_right" file="interface/whitetheme/cursors/here-from-right.png" x="29" y="14" />
 </section>
 
 </resources>
