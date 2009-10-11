@@ -55,5 +55,5 @@ void IllBubble::Draw()
   image->Scale(scale_x, scale_y);
 
   if (m_left_time_to_live > 0)
-    image->Draw(GetPosition()+Point2i(dx,0) - image->GetSize() / 2);
+    image->Draw(GetPosition() - image->GetSize() / 2);
 }
