@@ -286,6 +286,9 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   GetResourceManager().UnLoadXMLProfile(res);
 
+  //Double click
+  m_last_click_on_games_lst = 0;
+  m_double_click_interval = 400;
   // ************************************************************************
   InitNetInfo();
 
@@ -317,6 +320,22 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_server_address || w == cl_port_number || w == cl_server_pwd)
     cl_net_games_lst->Deselect();
+	
+  //Hack to handle double click
+  if (w == cl_net_games_lst)
+  {
+    if (m_last_click_on_games_lst + m_double_click_interval > SDL_GetTicks())
+    {
+      if (cl_net_games_lst->GetSelectedItem() == -1) {
+        cl_net_games_lst->Select(cl_net_games_lst->MouseIsOnWhichItem(mousePosition));
+      } 
+      signal_ok();
+    }
+    else
+    {
+      m_last_click_on_games_lst = SDL_GetTicks();
+    }
+  }
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
