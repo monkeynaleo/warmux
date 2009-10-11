@@ -26,7 +26,7 @@
 class ExplosionSmoke : public Particle
 {
  protected:
-  uint m_initial_size, dx;
+  uint m_initial_size;
  public:
   ExplosionSmoke(const uint size_init);
   void Refresh();
