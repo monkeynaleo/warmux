@@ -56,16 +56,6 @@ class AirAttackConfig : public ExplosiveWeaponConfig
     virtual void LoadXml(const xmlNode* elem);
 };
 
-class Obus : public WeaponProjectile
-{
-  private:
-    SoundSample falling_sound;
-  public:
-    Obus(AirAttackConfig& cfg);
-    virtual ~Obus();
-};
-
-
 Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
@@ -76,9 +66,14 @@ Obus::Obus(AirAttackConfig& cfg) :
 Obus::~Obus()
 {
   falling_sound.Stop();
+
+  if (Plane::last_dropped_bomb == this)
+    Plane::last_dropped_bomb = NULL;
 }
 
 //-----------------------------------------------------------------------------
+
+Obus* Plane::last_dropped_bomb = NULL;
 
 Plane::Plane(AirAttackConfig &p_cfg) :
   PhysicalObj("air_attack_plane"),
@@ -171,8 +166,8 @@ void Plane::Refresh()
     next_height = RandomSync().GetInt(20,100);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height )
-    {
+    if (!last_dropped_bomb
+	|| last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height) {
       MSG_DEBUG("random.get", "Plane::Refresh() another bomb");
       next_height = RandomSync().GetInt(20,100);
       DropBomb();
