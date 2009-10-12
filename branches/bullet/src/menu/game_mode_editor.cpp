@@ -43,8 +43,14 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   game_modes.push_back(std::pair<std::string, std::string>("unlimited", _("Unlimited")));
   game_modes.push_back(std::pair<std::string, std::string>("blitz", _("Blitz")));
 
+  std::string selected_gamemode = Config::GetInstance()->GetGameMode();
+  if (selected_gamemode != "classic"
+      && selected_gamemode != "unlimited"
+      && selected_gamemode != "blitz")
+    game_modes.push_back(std::pair<std::string, std::string>(selected_gamemode, selected_gamemode));
+
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-			       game_modes, Config::GetInstance()->GetGameMode());
+			       game_modes, selected_gamemode);
   AddWidget(opt_game_mode);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
@@ -120,12 +126,12 @@ void GameModeEditor::LoadGameMode()
     ASSERT(false);
   }
 
-  opt_duration_turn->SetValue(game_mode->duration_turn);
-  opt_energy_ini->SetValue(game_mode->character.init_energy);
-  opt_energy_max->SetValue(game_mode->character.max_energy);
-  opt_time_before_death_mode->SetValue(game_mode->duration_before_death_mode);
-  opt_damage_during_death_mode->SetValue(game_mode->damage_per_turn_during_death_mode);
-  opt_gravity->SetValue((int)(game_mode->gravity));
+  opt_duration_turn->SetValue(game_mode->duration_turn, true);
+  opt_energy_ini->SetValue(game_mode->character.init_energy, true);
+  opt_energy_max->SetValue(game_mode->character.max_energy, true);
+  opt_time_before_death_mode->SetValue(game_mode->duration_before_death_mode, true);
+  opt_damage_during_death_mode->SetValue(game_mode->damage_per_turn_during_death_mode, true);
+  opt_gravity->SetValue((int)(game_mode->gravity), true);
 
   NeedRedrawing();
 }
