@@ -37,6 +37,7 @@ class Parachute : public Weapon
 
     Sprite* img;
   protected:
+    bool m_used_this_turn;
     void p_Select();
     void p_Deselect();
     void Refresh();

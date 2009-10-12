@@ -56,6 +56,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_category = MOVE;
   m_initial_nb_ammo = 2;
   use_unit_on_first_shoot = false;
+  m_used_this_turn = false;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -93,6 +94,7 @@ bool Parachute::IsInUse() const
 
 bool Parachute::p_Shoot()
 {
+  m_used_this_turn = false;
   GameMessages::GetInstance()->Add(_("The parachute is activated automatically."));
   return false;
 }
@@ -119,7 +121,12 @@ void Parachute::Refresh()
   if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
       if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
-        UseAmmo();
+        if(!used)
+        {
+          UseAmmo();
+          m_used_this_turn = true;
+        }
+        
         ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
         ActiveCharacter().SetWindFactor(cfg().wind_factor);
         open = true;
