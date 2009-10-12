@@ -258,8 +258,8 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string& r
     if(XmlReader::ReadStringAttr(elem, "pos", position))
     {
       if(position.find(",") != position.npos) {
-      source_rect.SetPositionX(atoi((position.substr(0, position.find(","))).c_str()));
-      source_rect.SetPositionY(atoi((position.substr(position.find(",") + 1, position.length())).c_str()));
+      source_rect.SetPositionX(atoi((position.substr(0,position.find(","))).c_str()));
+      source_rect.SetPositionY(image.GetHeight() - atoi((position.substr(position.find(",") + 1, position.length())).c_str()));
       } else
         Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
     }
