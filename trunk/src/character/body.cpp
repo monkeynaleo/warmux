@@ -679,9 +679,10 @@ void Body::SetMovement(const std::string & name)
   if (current_clothe && current_clothe->GetName() == "black") {
     return;
   }
+  std::map<std::string, Movement *>::iterator itMvt = mvt_lst.find(name);
 
-  if (mvt_lst.find(name) != mvt_lst.end()) {
-    current_mvt       = mvt_lst.find(name)->second;
+  if (itMvt != mvt_lst.end()) {
+    current_mvt       = itMvt->second;
     current_frame     = 0;
     current_loop      = 0;
     last_refresh      = Time::GetInstance()->Read();
@@ -704,18 +705,20 @@ void Body::PlayAnimation()
   SetMovementOnce(name.str());
 }
 
-void Body::SetClotheOnce(const std::string& name)
+void Body::SetClotheOnce(const std::string & name)
 {
   MSG_DEBUG("body", " %s use clothe %s once", owner->GetName().c_str(), name.c_str());
   if (current_clothe && current_clothe->GetName() == name) {
     return;
   }
 
-  if (clothes_lst.find(name) != clothes_lst.end()) {
+  std::map<std::string, Clothe *>::iterator itClothes = clothes_lst.find(name);
+
+  if (itClothes != clothes_lst.end()) {
     if (!previous_clothe) {
       previous_clothe = current_clothe;
     }
-    current_clothe = clothes_lst.find(name)->second;
+    current_clothe = itClothes->second;
     BuildSqueleton();
     main_rotation_rad = 0;
     need_rebuild = true;
