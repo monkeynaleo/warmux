@@ -239,12 +239,44 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string& r
   if (!profile->doc->ReadStringAttr(elem, "file", filename))
     Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
 
+  
+  bool alpha = true;
+  Surface image = LoadImage(profile->relative_path+filename, alpha);
+  std::string size;
+
+  if(XmlReader::ReadStringAttr(elem, "size", size))
+  {
+    Rectanglei source_rect(0,0,image.GetSize().x,image.GetSize().y);
+    
+    if(size.find(",") != size.npos) {
+      source_rect.SetSizeX(atoi((size.substr(0, size.find(","))).c_str()));
+      source_rect.SetSizeY(atoi((size.substr(size.find(",") + 1, size.length())).c_str()));
+    } else
+      Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
+
+    std::string position;
+    if(XmlReader::ReadStringAttr(elem, "pos", position))
+    {
+      if(position.find(",") != position.npos) {
+      source_rect.SetPositionX(atoi((position.substr(0, position.find(","))).c_str()));
+      source_rect.SetPositionY(atoi((position.substr(position.find(",") + 1, position.length())).c_str()));
+      } else
+        Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
+    }
+    
+    Surface sub_image(source_rect.GetSize(), SDL_SWSURFACE, true);
+    sub_image.MergeSurface(image, -source_rect.GetPosition());
+    return sub_image;
+    
+  }
+  else
+  {
+    return image;
+  }
+
   // TODO load more properties in xml : alpha, colorkey....
   //      By now force alpha and no colorkey
-
-  bool alpha = true;
-
-  return LoadImage(profile->relative_path+filename, alpha);
+ 
 }
 
 Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& resource_name) const
