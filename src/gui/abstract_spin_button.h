@@ -37,7 +37,7 @@ protected:
 
 public:
   AbstractSpinButton(int value, int step, int min_value, int max_value) :
-    m_value(value), m_step(step), m_min_value(min_value), m_max_value(max_value) 
+    m_value(value), m_step(step), m_min_value(min_value), m_max_value(max_value)
     {
       ASSERT(m_value >= m_min_value);
       ASSERT(m_max_value >= m_value);
@@ -46,23 +46,32 @@ public:
 
   int GetValue() const { return m_value; }
 
-  int IncValue() 
+  int IncValue()
   {
     SetValue(m_value + m_step);
     return m_value;
   }
-  
-  int DecValue() 
+
+  int DecValue()
   {
     SetValue(m_value - m_step);
     return m_value;
   }
 
-  void SetValue(int value) 
+  void SetValue(int value, bool force = false)
   {
     int old_value = m_value;
-    m_value = InRange_Long(value, m_min_value, m_max_value);
-    
+
+    if (!force) {
+      m_value = InRange_Long(value, m_min_value, m_max_value);
+    } else {
+      m_value = value;
+      if (value > m_max_value)
+	m_max_value = value;
+      else if (value < m_min_value)
+	m_min_value = value;
+    }
+
     if (old_value != m_value) {
       ValueHasChanged();
       NeedRedrawing();
@@ -71,7 +80,7 @@ public:
 
   virtual void ValueHasChanged() = 0;
 
-  void SetMaxValue(int max_value) 
+  void SetMaxValue(int max_value)
   {
     if (m_max_value != max_value) {
       m_max_value = max_value;
@@ -82,7 +91,7 @@ public:
     ASSERT(m_step <= (m_max_value - m_min_value));
   }
 
-  void SetMinValue(int min_value) 
+  void SetMinValue(int min_value)
   {
     if (m_min_value != min_value) {
       m_min_value = min_value;
@@ -93,7 +102,7 @@ public:
     ASSERT(m_step <= (m_max_value - m_min_value));
   }
 
-  void SetStep(int step) 
+  void SetStep(int step)
   {
     m_step = step;
   }
