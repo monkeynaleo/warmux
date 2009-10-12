@@ -181,7 +181,7 @@ bool AnvilLauncher::p_Shoot ()
 void AnvilLauncher::p_Select()
 {
   if (Network::GetInstance()->IsTurnMaster())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 }
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()

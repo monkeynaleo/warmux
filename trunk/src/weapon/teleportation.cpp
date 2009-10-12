@@ -94,7 +94,7 @@ void Teleportation::Refresh()
 void Teleportation::p_Select()
 {
   if (Network::GetInstance()->IsTurnMaster())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 
   Weapon::p_Select();
   target_chosen = false;

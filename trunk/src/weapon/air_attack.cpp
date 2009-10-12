@@ -244,7 +244,7 @@ bool AirAttack::p_Shoot ()
 void AirAttack::p_Select()
 {
   if (Network::GetInstance()->IsTurnMaster())
-      Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ATTACK);
 }
 
 bool AirAttack::IsInUse() const
