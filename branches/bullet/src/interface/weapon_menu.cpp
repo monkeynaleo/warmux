@@ -124,10 +124,10 @@ void WeaponMenuItem::Draw(Surface * dest)
   } else if(nb_bullets == 0) {
       if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
         tmp.y -= 4;
-        m_parent->m_not_wet_available->Blit(*dest, tmp);
+        m_parent->m_not_yet_available->Blit(*dest, tmp);
 
 
-        tmp.x += m_parent->m_not_wet_available->GetWidth();
+        tmp.x += m_parent->m_not_yet_available->GetWidth();
         tmp.y += 10;
         std::ostringstream txt;
         txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
@@ -152,7 +152,7 @@ void WeaponMenuItem::SetParent(WeaponsMenu *parent)
 
 WeaponsMenu::WeaponsMenu():
   cross(NULL),
-  m_not_wet_available(NULL),
+  m_not_yet_available(NULL),
   weapons_menu(NULL),
   tools_menu(NULL),
   current_overfly_item(NULL),
@@ -173,7 +173,7 @@ WeaponsMenu::WeaponsMenu():
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   cross = new Sprite(GetResourceManager().LoadImage(res, "interface/cross"));
-  m_not_wet_available = GetResourceManager().LoadSprite( res, "interface/hourglass");
+  m_not_yet_available = GetResourceManager().LoadSprite( res, "interface/hourglass");
 
 
   // Polygon Size
@@ -204,8 +204,8 @@ WeaponsMenu::~WeaponsMenu()
     delete help;
   if (cross)
     delete cross;
-  if (m_not_wet_available)
-    delete m_not_wet_available;
+  if (m_not_yet_available)
+    delete m_not_yet_available;
   if (nb_weapon_type)
     delete[] nb_weapon_type;
 }
@@ -373,7 +373,7 @@ void WeaponsMenu::Draw()
     return;
 
   // Update animation
-  m_not_wet_available->Update();
+  m_not_yet_available->Update();
   // Draw weapons menu
   weapons_menu->ApplyTransformation(ComputeWeaponTransformation());
   weapons_menu->DrawOnScreen();
