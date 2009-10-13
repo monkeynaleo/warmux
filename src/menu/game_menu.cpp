@@ -128,7 +128,7 @@ bool GameMenu::signal_ok()
 {
   SaveOptions();
   play_ok_sound();
-  Game::UpdateGameMode()->Start();
+  Game::UpdateGameRules()->Start();
   return true;
 }
 

@@ -67,42 +67,36 @@
 //#define USE_VALGRIND
 #endif
 
-std::string Game::current_mode_name = "none";
+std::string Game::current_rules = "none";
 
 Game * Game::GetInstance()
 {
-  if (singleton == NULL)
-  {
-    if (current_mode_name == "none")
-      current_mode_name = Config::GetInstance()->GetGameMode();
+  if (singleton == NULL) {
 
-    if (current_mode_name == "classic" || current_mode_name == "unlimited")
-      singleton = new GameClassic();
-    else if (current_mode_name == "blitz")
-    {
-      //printf(">>>> Starting in blitz!\n");
+    current_rules = GameMode::GetRef().rules;
+
+    if (GameMode::GetRef().rules == "blitz")
       singleton = new GameBlitz();
-    }
-    else
-    {
-      fprintf(stderr, "%s game mode not implemented\n", current_mode_name.c_str());
+    else if (GameMode::GetRef().rules == "classic")
+      singleton = new GameClassic();
+    else {
+      fprintf(stderr, "%s game rules not implemented\n", GameMode::GetRef().rules.c_str());
       exit(1);
     }
   }
   return singleton;
 }
 
-Game * Game::UpdateGameMode()
+Game * Game::UpdateGameRules()
 {
-  const std::string& config_mode_name = Config::GetInstance()->GetGameMode();
-  printf("Current mode: %s\n", config_mode_name.c_str());
-  if (singleton != NULL && current_mode_name != config_mode_name)
+  const std::string& config_rules = GameMode::GetRef().rules;
+  printf("Current rules: %s\n", config_rules.c_str());
+  if (singleton != NULL && current_rules != config_rules)
   {
-    printf("Mode change! -> %s %s\n", config_mode_name.c_str(), current_mode_name.c_str());
+    printf("Rules change! %s -> %s\n", current_rules.c_str(), config_rules.c_str());
     delete singleton;
   }
 
-  current_mode_name = config_mode_name;
   return GetInstance();
 }
 

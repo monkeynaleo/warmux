@@ -62,7 +62,7 @@ protected:
   virtual ~Game();
 
 private:
-  static std::string  current_mode_name;
+  static std::string  current_rules;
 
   bool                isGameLaunched;
   ObjBox              *current_ObjBox;
@@ -116,7 +116,7 @@ public:
   Chat                chatsession;
 
   // Set mode
-  static Game * UpdateGameMode();
+  static Game * UpdateGameRules();
 
   void Start();
   void Init();
