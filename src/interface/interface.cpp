@@ -87,10 +87,13 @@ m_last_minimap_redraw(0)
 
   // wind bar
   wind_bar.InitPos(0, 0, wind_indicator.GetWidth() - 4, wind_indicator.GetHeight() - 4);
+  wind_bar.SetMinMaxValueColor(GetResourceManager().LoadColor(res, "interface/wind_color_min"),
+                               GetResourceManager().LoadColor(res, "interface/wind_color_max"));
   wind_bar.InitVal(0, -100, 100);
   wind_bar.border_color.SetColor(0, 0, 0, 0);
   wind_bar.background_color.SetColor(0, 0, 0, 0);
-  wind_bar.value_color = c_red;
+  //wind_bar.value_color = c_red;
+
   wind_bar.SetReferenceValue (true, 0);
 
   // strength bar initialisation
@@ -574,9 +577,11 @@ void Interface::UpdateTimer(uint utimer, const Color& color)
 void Interface::UpdateWindIndicator(int wind_value) 
 {
   wind_bar.UpdateValue(wind_value);
+  /*
   int redValue   = 155 * abs(wind_value) / 100;
   int greenValue = 200 * abs(wind_value) / 100;
   wind_bar.SetValueColor(Color(redValue, 200 - greenValue, 10, 255)); // Green to Red
+  */
 };
 
 void AbsoluteDraw(const Surface &s, const Point2i& pos)
