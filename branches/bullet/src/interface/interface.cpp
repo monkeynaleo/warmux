@@ -397,13 +397,12 @@ void Interface::DrawMapPreview()
 
 void Interface::GenerateStyledBox(Surface & source)
 {
-
-  Surface save_surf(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
+  Surface save_surf(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
   save_surf.MergeSurface(source, Point2i(0,0));
+
+  source = Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+
   Rectanglei temp_rect;
-
-  source = Surface(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
-
   temp_rect.SetPosition(Point2i(0,0));
   temp_rect.SetSize(source.GetSize());
 
@@ -425,28 +424,31 @@ void Interface::GenerateStyledBox(Surface & source)
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
   source.MergeSurface(rounding_style[2][2],temp_position);
 
-
-  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for(int i = rounding_style[0][0].GetSize().x; 
+      i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
+      ++i) {
     temp_position = temp_rect.GetPosition();
     temp_position.x += i;
     source.MergeSurface(rounding_style[1][0],temp_position);
 
     temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
     source.MergeSurface(rounding_style[1][2],temp_position);
-
   }
 
-  for(int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
+  for(int i = rounding_style[0][0].GetSize().y; 
+      i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
+      ++i) {
     temp_position = temp_rect.GetPosition();
     temp_position.y += i;
     source.MergeSurface(rounding_style[0][1],temp_position);
 
     temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
     source.MergeSurface(rounding_style[2][1],temp_position);
-
   }
 
-  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for(int i = rounding_style[0][0].GetSize().x; 
+      i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
+      ++i) {
 
     for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
