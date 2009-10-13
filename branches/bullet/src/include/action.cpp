@@ -28,7 +28,7 @@
 
 uint Action_TimeStamp()
 {
-  if (Game::GetInstance()->IsGameLaunched())
+  if (Game::IsRunning())
     return Time::GetInstance()->Read();
 
   return 0;
