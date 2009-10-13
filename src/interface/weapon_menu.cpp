@@ -127,7 +127,7 @@ void WeaponMenuItem::Draw(Surface * dest)
         m_parent->m_not_yet_available->Blit(*dest, tmp);
 
 
-        tmp.x += m_parent->m_not_yet_available->GetWidth();
+        tmp.x += m_parent->m_not_yet_available->GetWidth()-5;
         tmp.y += 10;
         std::ostringstream txt;
         txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
