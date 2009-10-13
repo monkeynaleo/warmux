@@ -102,6 +102,11 @@ Color ResourceManager::LoadColor(const Profile *profile, const std::string& reso
   return Color(chanel_color[0], chanel_color[1], chanel_color[2], chanel_color[3]);
 }
 
+
+//TODO
+//Gradient ResourceManager::LoadGradientColor(const Profile *profile, const std::string& resource_name) const
+
+
 Point2i ResourceManager::LoadPoint2i(const Profile *profile, const std::string& resource_name) const
 {
   const xmlNode* elem = GetElement(profile, "point", resource_name);
