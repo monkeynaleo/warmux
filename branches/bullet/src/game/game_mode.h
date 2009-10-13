@@ -83,6 +83,7 @@ private:
 
   std::string GetFilename() const;
   std::string GetObjectsFilename() const;
+  std::string GetDefaultObjectsFilename() const;
 
 public:
   const std::string& GetName() const;

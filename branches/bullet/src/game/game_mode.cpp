@@ -200,6 +200,12 @@ bool GameMode::Load(void)
     fullname = config->GetDataDir() + GetObjectsFilename();
 
   if(!DoesFileExist(fullname)) {
+    fprintf(stderr, "Game mode: File %s does not exist, use the default one instead.\n",
+	    fullname.c_str());
+  }
+
+  fullname = config->GetDataDir() + GetDefaultObjectsFilename();
+  if (!DoesFileExist(fullname)) {
     Error(Format("Can not find file %s", fullname.c_str()));
     return false;
   }
@@ -321,6 +327,14 @@ std::string GameMode::GetObjectsFilename() const
     std::string("game_mode" PATH_SEPARATOR)
     + m_current
     + std::string("_objects.xml");
+
+  return filename;
+}
+
+std::string GameMode::GetDefaultObjectsFilename() const
+{
+  std::string filename =
+    std::string("game_mode" PATH_SEPARATOR "default_objects.xml");
 
   return filename;
 }
