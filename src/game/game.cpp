@@ -226,7 +226,8 @@ Game::Game():
   delay(0),
   time_of_next_frame(0),
   time_of_next_phy_frame(0),
-  character_already_chosen(false)
+  character_already_chosen(false),
+  m_current_turn(0)
 { }
 
 Game::~Game()
@@ -245,6 +246,8 @@ void Game::Init()
   Camera::GetInstance()->Reset();
 
   ActionHandler::GetInstance()->ExecActions();
+
+  m_current_turn = 0;
 
   FOR_ALL_CHARACTERS(team, character)
     (*character)->ResetDamageStats();
@@ -647,6 +650,7 @@ void Game::Really_SetState(game_loop_state_t new_state)
   case END_TURN:
     ActiveCharacter().StopMove();
     __SetState_END_TURN();
+    m_current_turn++;
     break;
   }
 }
@@ -857,4 +861,8 @@ bool Game::MenuQuitPause() const
   return exit;
 }
 
+uint Game::GetCurrentTurn()
+{
+  return (m_current_turn+1)/2 ;
+}
 
