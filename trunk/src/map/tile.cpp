@@ -227,7 +227,7 @@ void Tile::InitPreview()
                        SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
-  m_preview_size = m_preview->GetSize() - (offset / (1<<m_shift));
+  m_preview_size = world_size;
   m_preview_rect = Rectanglei(m_upper_left_offset / (1<<m_shift), m_preview_size);
 
   m_last_preview_redraw = Time::GetInstance()->Read();
