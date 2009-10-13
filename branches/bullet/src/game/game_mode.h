@@ -84,8 +84,9 @@ private:
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;
-  std::string GetObjectsFilename() const;
+
   std::string GetDefaultObjectsFilename() const;
+  std::string GetObjectsFilename() const;
 
 public:
   const std::string& GetName() const;
