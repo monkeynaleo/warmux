@@ -286,18 +286,14 @@
 <section name="gfx">
   <surface name="pointeur1" file="gfx/pointer.png" />
 
-  <sprite name="curseur">
-    <image file="gfx/arrow.png" />
-  </sprite>
-
-  <sprite name="curseur-jump">
+  <sprite name="arrow-jump">
     <image file="gfx/arrow_jump.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
 
-  <sprite name="curseur-turn">
+  <sprite name="arrow-change">
     <image file="gfx/arrow_turn.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
