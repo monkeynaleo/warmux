@@ -277,7 +277,7 @@ bool GameMode::AllowCharacterSelection() const
     break;
 
   case GameMode::BEFORE_FIRST_ACTION:
-    return (Game::GetInstance()->ReadState() == Game::PLAYING) && !Game::GetInstance()->character_already_chosen;
+    return (Game::GetInstance()->ReadState() == Game::PLAYING) && !Game::GetInstance()->IsCharacterAlreadyChosen();
 
   case GameMode::NEVER:
     return false;
