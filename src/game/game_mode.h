@@ -24,8 +24,9 @@
 #define GAME_MODE_H
 
 #include <string>
-#include "include/base.h"
+#include <vector>
 #include <WORMUX_singleton.h>
+#include "include/base.h"
 #include "weapon/weapon_cfg.h"
 
 typedef struct _xmlNode xmlNode;
@@ -105,6 +106,8 @@ public:
   const XmlReader* GetXmlObjects() const; // for object_cfg
 
   bool AllowCharacterSelection() const;
+
+  static std::vector<std::pair<std::string, std::string> > ListGameModes();
 
 protected:
   friend class Singleton<GameMode>;
