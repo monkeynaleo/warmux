@@ -124,7 +124,7 @@ OptionMenu::OptionMenu() :
   /* Team editor */
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
-  if (Game::GetInstance()->IsGameFinished()) {
+  if (!Game::IsRunning()) {
     Box * teams_editor = new HBox(option_size.x, false, true);
     Box * teams_editor_inf = new VBox(max_width - option_size.x - 10, true, false);
 
@@ -370,7 +370,7 @@ void OptionMenu::SaveOptions()
   // Graphic options
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     Wind::GetRef().Reset();
 
   config->SetDisplayMultiLayerSky(opt_display_multisky->GetValue());
@@ -423,7 +423,7 @@ void OptionMenu::SaveOptions()
   config->Save();
 
   //Team editor
-  if (Game::GetInstance()->IsGameFinished()) {
+  if (!Game::IsRunning()) {
     if (!lbox_teams->IsSelectedItem()) {
       AddTeam();
     }
@@ -501,7 +501,7 @@ bool OptionMenu::TeamInfoValid()
 
 void OptionMenu::AddTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return;
 
   if (!TeamInfoValid())
@@ -519,7 +519,7 @@ void OptionMenu::AddTeam()
 
 void OptionMenu::DeleteTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return;
 
   if (selected_team) {
@@ -536,7 +536,7 @@ void OptionMenu::DeleteTeam()
 
 void OptionMenu::LoadTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return;
 
   if (selected_team) {
@@ -558,7 +558,7 @@ void OptionMenu::LoadTeam()
 
 void OptionMenu::ReloadTeamList()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return;
 
   lbox_teams->ClearItems();
@@ -585,7 +585,7 @@ void OptionMenu::ReloadTeamList()
 
 bool OptionMenu::SaveTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return false;
 
   if (!TeamInfoValid())
@@ -606,7 +606,7 @@ bool OptionMenu::SaveTeam()
 
 void OptionMenu::SelectTeam()
 {
-  if (!Game::GetInstance()->IsGameFinished())
+  if (Game::IsRunning())
     return;
 
   if (lbox_teams->IsSelectedItem()) {
