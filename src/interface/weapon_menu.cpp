@@ -155,7 +155,6 @@ void WeaponMenuItem::SetParent(WeaponsMenu *parent)
 
 
 WeaponsMenu::WeaponsMenu():
-  cross(NULL),
   m_not_yet_available(NULL),
   weapons_menu(NULL),
   tools_menu(NULL),
@@ -176,7 +175,6 @@ WeaponsMenu::WeaponsMenu():
 {
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  cross = new Sprite(GetResourceManager().LoadImage(res, "interface/cross"));
   m_not_yet_available = GetResourceManager().LoadSprite( res, "interface/hourglass");
 
 
@@ -206,8 +204,6 @@ WeaponsMenu::~WeaponsMenu()
     delete tools_menu;
   if(help)
     delete help;
-  if (cross)
-    delete cross;
   if (m_not_yet_available)
     delete m_not_yet_available;
   if (nb_weapon_type)

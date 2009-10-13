@@ -61,7 +61,6 @@ class WeaponsMenu
 {
  public:
   static const int MAX_NUMBER_OF_WEAPON;
-  Sprite * cross;
   Sprite * m_not_yet_available;
 
  private:
@@ -101,7 +100,6 @@ class WeaponsMenu
   bool IsDisplayed() const { return show; };
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
-  Sprite * GetCrossSymbol() const { return cross; };
   Weapon * UpdateCurrentOverflyItem(const Polygon * poly);
   uint GetJellyTime() const { return jelly_time; };
   uint GetIconsDrawTime() const { return icons_draw_time; };
