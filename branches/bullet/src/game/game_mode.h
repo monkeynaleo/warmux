@@ -34,6 +34,8 @@ class XmlReader;
 class GameMode : public Singleton<GameMode>
 {
 public:
+  std::string rules;
+
   uint nb_characters;
   uint max_teams;
   uint duration_turn;
