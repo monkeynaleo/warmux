@@ -79,6 +79,10 @@ void CharacterCursor::Hide()
   if (!arrow) return;
 
   arrow->animation.SetLoopMode(false);
+
+  // To force direct stop when using "arrow change"
+  if (arrow == arrow_change)
+    arrow->animation.Finish();
 }
 
 void CharacterCursor::Reset()

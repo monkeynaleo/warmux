@@ -78,6 +78,8 @@ private:
   // Time to compute the next physic engine frame
   uint                time_of_next_phy_frame;
 
+  bool                character_already_chosen;
+
   static uint         last_unique_id;
 
   void Draw();        // Draw to screen
@@ -115,7 +117,6 @@ public:
   static void ResetUniqueIds();
   static bool IsRunning();
 
-  bool                character_already_chosen;
   Chat                chatsession;
 
   // Set mode
@@ -123,6 +124,9 @@ public:
 
   void Start();
   void Init();
+
+  bool IsCharacterAlreadyChosen() const;
+  void SetCharacterChosen(bool chosen);
 
   // Get remaining time to play
   virtual uint GetRemainingTime() const = 0;
