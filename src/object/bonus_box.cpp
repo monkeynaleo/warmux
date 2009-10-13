@@ -135,7 +135,12 @@ void BonusBox::LoadXml(const xmlNode* object)
   total_probability = 0;
   struct WeaponProba w;
 
-  XmlReader::ReadInt(object, "life_points", start_life_points);
+  weapon_list.clear();
+
+  bool r = XmlReader::ReadInt(object, "life_points", start_life_points);
+  if (!r)
+    start_life_points = 41;
+
   const xmlNode* node = XmlReader::GetMarker(object, "probability");
   std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator
