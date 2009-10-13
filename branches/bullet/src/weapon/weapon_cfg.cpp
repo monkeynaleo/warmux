@@ -34,7 +34,11 @@ WeaponConfig::WeaponConfig()
 
 void WeaponConfig::LoadXml(const xmlNode* elem)
 {
-  XmlReader::ReadUint(elem, "damage", damage);
+  bool r;
+
+  r = XmlReader::ReadUint(elem, "damage", damage);
+  if (!r)
+    damage = 10;
 }
 
 //-----------------------------------------------------------------------------
@@ -52,14 +56,36 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 
 void ExplosiveWeaponConfig::LoadXml(const xmlNode* elem)
 {
+  bool r;
+
   WeaponConfig::LoadXml (elem);
-  XmlReader::ReadUint(elem, "timeout", timeout);
-  XmlReader::ReadBool(elem, "allow_change_timeout", allow_change_timeout);
-  XmlReader::ReadUint(elem, "explosion_range", explosion_range);
-  XmlReader::ReadUint(elem, "particle_range", particle_range);
-  XmlReader::ReadUint(elem, "blast_range", blast_range);
-  XmlReader::ReadUint(elem, "blast_force", blast_force);
-  XmlReader::ReadUint(elem, "speed_on_hit", speed_on_hit);
+  r = XmlReader::ReadUint(elem, "timeout", timeout);
+  if (!r)
+    timeout = 0;
+
+  r = XmlReader::ReadBool(elem, "allow_change_timeout", allow_change_timeout);
+  if (!r)
+    allow_change_timeout = false;
+
+  r = XmlReader::ReadUint(elem, "explosion_range", explosion_range);
+  if (!r)
+    explosion_range = 0;
+
+  r = XmlReader::ReadUint(elem, "particle_range", particle_range);
+  if (!r)
+    particle_range = 0;
+
+  r = XmlReader::ReadUint(elem, "blast_range", blast_range);
+  if (!r)
+    blast_range = 0;
+
+  r = XmlReader::ReadUint(elem, "blast_force", blast_force);
+  if (!r)
+    blast_force = 0;
+
+  r = XmlReader::ReadUint(elem, "speed_on_hit", speed_on_hit);
+  if (!r)
+    speed_on_hit = 0;
 }
 
 //-----------------------------------------------------------------------------

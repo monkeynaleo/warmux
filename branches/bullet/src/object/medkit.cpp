@@ -78,8 +78,14 @@ int Medkit::nbr_health = 24;
 
 void Medkit::LoadXml(const xmlNode*  object)
 {
-  XmlReader::ReadInt(object,"life_points",start_life_points);
-  XmlReader::ReadInt(object,"energy_boost",nbr_health);
+  bool r;
+  r = XmlReader::ReadInt(object,"life_points",start_life_points);
+  if (!r)
+    start_life_points = 41;
+
+  r = XmlReader::ReadInt(object,"energy_boost",nbr_health);
+  if (!r)
+    nbr_health = 24;
 }
 
 void Medkit::GetValueFromAction(Action * a)
