@@ -202,7 +202,7 @@
   <color name="weapon_strength_bar_value" r="255" g="255" b="255" a="128" />
   <color name="weapon_strength_bar_border" r="0" g="0" b="0" a="255" />
   <color name="weapon_strength_bar_background" r="153" g="153" b="153" a="96" />
-  <surface name="weapon_strength_bar_last_fire" file="interface/whitetheme/powerbox/lastfire.png" />
+  <surface name="weapon_strength_bar_last_fire" file="interface/whitetheme/lastfire.png" />
   <color name="text_color" r="0" g="0" b="0" a="255" />
   <color name="energy_text_color" r="255" g="255" b="255" a="255" />
   <color name="turn_timer_text_color" r="0" g="0" b="0" a="255" />
@@ -230,42 +230,41 @@
   <surface name="quit_screen" file="menu/quit.png"/>
   
   <!-- Game mode options -->
-  <surface name="rounding_bottom" file="interface/whitetheme/bigbox.png" pos="20,0" size="1,18" />
-  <surface name="rounding_bottom_left" file="interface/whitetheme/bigbox.png" pos="0,0" size="20,18" />
-  <surface name="rounding_bottom_right" file="interface/whitetheme/bigbox.png" pos="21,0" size="20,18" />
-  <surface name="rounding_top" file="interface/whitetheme/bigbox.png" pos="20,19" size="1,24" />
-  <surface name="rounding_top_left" file="interface/whitetheme/bigbox.png" pos="0,19" size="20,24" />
-  <surface name="rounding_top_right" file="interface/whitetheme/bigbox.png" pos="21,19" size="20,24" />
-  <surface name="rounding_center" file="interface/whitetheme/bigbox.png" pos="20,18" size="1,1" />
-  <surface name="rounding_left" file="interface/whitetheme/bigbox.png" pos="0,18" size="20,1" />
-  <surface name="rounding_right" file="interface/whitetheme/bigbox.png" pos="21,18" size="20,18" />
-  <surface name="rounding_mask_bottom_left" file="interface/whitetheme/bigbox.png" pos="0,0" size="20,24" />
-  <surface name="rounding_mask_bottom_right" file="interface/whitetheme/bigbox.png" pos="21,0" size="20,24" />
-  <surface name="rounding_mask_top_left" file="interface/whitetheme/bigbox.png" pos="0,25" size="20,24" />
-  <surface name="rounding_mask_top_right" file="interface/whitetheme/bigbox.png" pos="21,25" size="20,24" />
-  <surface name="rounding_mask_bottom" file="interface/whitetheme/bigbox.png" pos="20,0" size="1,24" />
-  <surface name="rounding_mask_right" file="interface/whitetheme/bigbox.png" pos="21,24" size="20,1" />
-  <surface name="rounding_mask_left" file="interface/whitetheme/bigbox.png" pos="0,24" size="20,1" />
-  <surface name="rounding_mask_top" file="interface/whitetheme/bigbox.png" pos="20,25" size="1,24" />
+  <surface name="rounding_bottom" file="interface/whitetheme/box_big.png" pos="20,25" size="1,18" />
+  <surface name="rounding_bottom_left" file="interface/whitetheme/box_big.png" pos="0,25" size="20,18" />
+  <surface name="rounding_bottom_right" file="interface/whitetheme/box_big.png" pos="21,25" size="20,18" />
+  <surface name="rounding_top" file="interface/whitetheme/box_big.png" pos="20,0" size="1,24" />
+  <surface name="rounding_top_left" file="interface/whitetheme/box_big.png" pos="0,0" size="20,24" />
+  <surface name="rounding_top_right" file="interface/whitetheme/box_big.png" pos="21,0" size="20,24" />
+  <surface name="rounding_center" file="interface/whitetheme/box_big.png" pos="20,24" size="1,1" />
+  <surface name="rounding_left" file="interface/whitetheme/box_big.png" pos="0,24" size="20,1" />
+  <surface name="rounding_right" file="interface/whitetheme/box_big.png" pos="21,24" size="20,1" />
+  <surface name="rounding_mask_bottom_left" file="interface/whitetheme/box_big_hide.png" pos="0,25" size="20,24" />
+  <surface name="rounding_mask_bottom_right" file="interface/whitetheme/box_big_hide.png" pos="21,25" size="20,24" />
+  <surface name="rounding_mask_top_left" file="interface/whitetheme/box_big_hide.png" pos="0,0" size="20,24" />
+  <surface name="rounding_mask_top_right" file="interface/whitetheme/box_big_hide.png" pos="21,0" size="20,24" />
+  <surface name="rounding_mask_bottom" file="interface/whitetheme/box_big_hide.png" pos="20,25" size="1,24" />
+  <surface name="rounding_mask_right" file="interface/whitetheme/box_big_hide.png" pos="21,24" size="20,1" />
+  <surface name="rounding_mask_left" file="interface/whitetheme/box_big_hide.png" pos="0,24" size="20,1" />
+  <surface name="rounding_mask_top" file="interface/whitetheme/box_big_hide.png" pos="20,0" size="1,24" />
 
-  <surface name="square_bottom" file="/interface/whitetheme/littlebox.png" pos="4,0" size="1,3" />
-  <surface name="square_bottom_left" file="/interface/whitetheme/littlebox.png" pos="0,0" size="4,3" />
-  <surface name="square_bottom_right" file="/interface/whitetheme/littlebox.png" pos="5,0" size="4,3" />
-  <surface name="square_top" file="/interface/whitetheme/littlebox.png" pos="4,4" size="1,3" />
-  <surface name="square_top_left" file="/interface/whitetheme/littlebox.png" pos="0,4" size="4,3" />
-  <surface name="square_top_right" file="/interface/whitetheme/littlebox.png" pos="5,4" size="4,3" />
-  <surface name="square_center" file="/interface/whitetheme/littlebox.png" pos="4,3" size="1,1" />
-  <surface name="square_left" file="/interface/whitetheme/littlebox.png" pos="0,3" size="4,1" />
-  <surface name="square_right" file="/interface/whitetheme/littlebox.png" pos="5,3" size="4,1" />
-
-  <surface name="square_mask_bottom_left" file="interface/whitetheme/powerbox/hide_bottomleft.png" />
-  <surface name="square_mask_bottom_right" file="interface/whitetheme/powerbox/hide_bottomright.png" />
-  <surface name="square_mask_top_left" file="interface/whitetheme/powerbox/hide_topleft.png" />
-  <surface name="square_mask_top_right" file="interface/whitetheme/powerbox/hide_topright.png" />
-  <surface name="square_mask_bottom" file="interface/whitetheme/powerbox/hide_bottom.png" />
-  <surface name="square_mask_right" file="interface/whitetheme/powerbox/hide_right.png" />
-  <surface name="square_mask_left" file="interface/whitetheme/powerbox/hide_left.png" />
-  <surface name="square_mask_top" file="interface/whitetheme/powerbox/hide_top.png" />
+  <surface name="square_bottom" file="/interface/whitetheme/box_little.png" pos="4,0" size="1,3" />
+  <surface name="square_bottom_left" file="/interface/whitetheme/box_little.png" pos="0,0" size="4,3" />
+  <surface name="square_bottom_right" file="/interface/whitetheme/box_little.png" pos="5,0" size="4,3" />
+  <surface name="square_top" file="/interface/whitetheme/box_little.png" pos="4,4" size="1,3" />
+  <surface name="square_top_left" file="/interface/whitetheme/box_little.png" pos="0,4" size="4,3" />
+  <surface name="square_top_right" file="/interface/whitetheme/box_little.png" pos="5,4" size="4,3" />
+  <surface name="square_center" file="/interface/whitetheme/box_little.png" pos="4,3" size="1,1" />
+  <surface name="square_left" file="/interface/whitetheme/box_little.png" pos="0,3" size="4,1" />
+  <surface name="square_right" file="/interface/whitetheme/box_little.png" pos="5,3" size="4,1" />
+  <surface name="square_mask_bottom_left" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_bottom_right" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_top_left" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_top_right" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_bottom" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_right" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_left" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_mask_top" file="interface/whitetheme/box_little_hide.png" />
 
   <sprite name="hourglass">
     <image file="interface/whitetheme/hourglass.png">
