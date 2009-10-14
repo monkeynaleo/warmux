@@ -140,9 +140,9 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
     lbox_authors->AddItem (false, " ", "",
-                           Font::FONT_BIG, Font::FONT_NORMAL);
+                           Font::FONT_BIG, Font::FONT_BOLD);
     lbox_authors->AddItem (false, team_title, teams[i],
-                           Font::FONT_BIG, Font::FONT_NORMAL, c_red);
+                           Font::FONT_BIG, Font::FONT_BOLD, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlNodeArray sections = XmlReader::GetNamedChildren(team.front(), "section");
@@ -161,7 +161,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 
       lbox_authors->AddItem (false, " ", "");
       lbox_authors->AddItem (false, "   "+title, title,
-                             Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
+                             Font::FONT_MEDIUM, Font::FONT_BOLD, c_yellow);
 
       for (; node != end; ++node)
       {

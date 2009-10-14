@@ -276,7 +276,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Point2i msg_box_size(max_width,
                        GetMainWindow().GetHeight() - 50 - msg_box_pos.y);
 
-  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_NORMAL);
+  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_BOLD);
   msg_box->SetPosition(msg_box_pos);
 
   widgets.AddWidget(msg_box);

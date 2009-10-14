@@ -68,13 +68,13 @@ class ResultBox : public HBox
     Font::font_size_t font = (size > 400) ? Font::FONT_BIG : Font::FONT_MEDIUM;
     //printf("Size=%u\n", size);
 
-    AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_NORMAL));
+    AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_BOLD));
 
     AddWidget(new Label((player) ? player->GetName() : _("Nobody!"),
-                        (size*NameW)/TotalW, font, Font::FONT_NORMAL));
+                        (size*NameW)/TotalW, font, Font::FONT_BOLD));
 
     std::string score_str(buffer);
-    AddWidget(new Label(score_str, (size*ScoreW)/TotalW, font, Font::FONT_NORMAL));
+    AddWidget(new Label(score_str, (size*ScoreW)/TotalW, font, Font::FONT_BOLD));
 
     if (player)
     {
@@ -380,11 +380,11 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
-    winner_box->AddWidget(new Label(first_team->GetName(), 240, Font::FONT_BIG, Font::FONT_NORMAL,
+    winner_box->AddWidget(new Label(first_team->GetName(), 240, Font::FONT_BIG, Font::FONT_BOLD,
                                     white_color, true));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
-    winner_box->AddWidget(new Label(tmp, 240, Font::FONT_MEDIUM, Font::FONT_NORMAL,
+    winner_box->AddWidget(new Label(tmp, 240, Font::FONT_MEDIUM, Font::FONT_BOLD,
                                     white_color, true));
 
     winner_box->SetPosition(x, y);
@@ -406,7 +406,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // Are we in network ? yes, so display a talkbox
   if (Network::IsConnected()) {
-    msg_box = new TalkBox(Point2i(tab_size.x, 120), Font::FONT_SMALL, Font::FONT_NORMAL);
+    msg_box = new TalkBox(Point2i(tab_size.x, 120), Font::FONT_SMALL, Font::FONT_BOLD);
     tab_size.y -= 125;
   }
 
