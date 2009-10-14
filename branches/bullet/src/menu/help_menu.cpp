@@ -68,7 +68,7 @@ void HelpMenu::DrawBackground()
   const uint MIDDLE_X = 64;
   const uint MIDDLE_Y = 13;
 
-  Text tmp(_("Quit game"), dark_gray_color, Font::FONT_TINY, Font::FONT_NORMAL, false); tmp.SetMaxWidth(130);
+  Text tmp(_("Quit game"), dark_gray_color, Font::FONT_TINY, Font::FONT_BOLD, false); tmp.SetMaxWidth(130);
   tmp.DrawCenter(Point2i(15 + border_x + MIDDLE_X, 1 + border_y + MIDDLE_Y));
   tmp.Set(_("High jump")); tmp.DrawCenter(Point2i(373 + border_x + MIDDLE_X, 313 + border_y + MIDDLE_Y));
   tmp.Set(_("Jump")); tmp.DrawCenter(Point2i(373 + border_x + MIDDLE_X, 284 + border_y + MIDDLE_Y));

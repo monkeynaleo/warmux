@@ -36,7 +36,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value = new Text("", dark_gray_color, Font::FONT_HUGE, Font::FONT_NORMAL, false);
+  txt_value = new Text("", dark_gray_color, Font::FONT_HUGE, Font::FONT_BOLD, false);
 
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
