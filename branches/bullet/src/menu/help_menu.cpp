@@ -86,7 +86,7 @@ void HelpMenu::DrawBackground()
   tmp.Set(_("On map: Select a target")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 213 + border_y + MIDDLE_Y));
   tmp.Set(_("On a character: Select it")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 244 + border_y + MIDDLE_Y));
   tmp.Set(_("Show the weapons menu")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 121 + border_y + MIDDLE_Y));
-  tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawCenter(Point2i(26 + border_x + MIDDLE_X, 285 + border_y + MIDDLE_Y));
+  tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawCenter(Point2i(26 + border_x + MIDDLE_X, 314 + border_y + MIDDLE_Y));
   tmp.Set(_("Move the camera with mouse or arrows")); tmp.DrawCenter(Point2i(320 + border_x + MIDDLE_X, 380 + border_y + MIDDLE_Y));
   tmp.Set(_("Weapon: Fire / Bonus box: fall fast")); tmp.DrawCenter(Point2i(194 + border_x + MIDDLE_X, 313 + border_y + MIDDLE_Y));
   tmp.Set(_("Show/hide the minimap")); tmp.DrawCenter(Point2i(205 + border_x + MIDDLE_X, 60 + border_y + MIDDLE_Y));
