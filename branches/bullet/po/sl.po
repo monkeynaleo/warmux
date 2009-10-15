@@ -19,12 +19,12 @@ msgstr ""
 "n%100==4 ? 2 : 3);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:325
+#: src/map/maps_list.cpp:362
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karta %s ni bila najdena :-("
 
-#: src/menu/network_menu.cpp:110 src/menu/network_menu.cpp:323
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:330
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -33,7 +33,7 @@ msgstr[1] "povezana %i igralca"
 msgstr[2] "povezani %i igralci"
 msgstr[3] "povezanih %i igralcev"
 
-#: src/menu/network_menu.cpp:114 src/menu/network_menu.cpp:329
+#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:336
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -73,32 +73,32 @@ msgstr "%s si je premislil in za tarčo vzel %s"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:738
+#: src/game/game.cpp:767
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s iz ekipe %s je naredil/a samomor!"
 
-#: src/game/game.cpp:771
+#: src/game/game.cpp:800
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s iz ekipe %s je umrl/a."
 
-#: src/game/game.cpp:729
+#: src/game/game.cpp:758
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s iz ekipe %s je padel/a v vodo."
 
-#: src/game/game.cpp:723
+#: src/game/game.cpp:752
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s iz ekipe %s je padel/a s karte!"
 
-#: src/game/game.cpp:744
+#: src/game/game.cpp:773
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s iz ekipe %s je premočno zadel tla!"
 
-#: src/game/game.cpp:751
+#: src/game/game.cpp:780
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s iz ekipe %s je mrtev, ker je bil neroden!"
@@ -117,7 +117,7 @@ msgstr[1] "%s je dobil %u točki energije!"
 msgstr[2] "%s je dobil %u točke energije!"
 msgstr[3] "%s je dobil %u točk energije!"
 
-#: src/game/game.cpp:763
+#: src/game/game.cpp:792
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopat, saj je ubil člana ekipe %s!"
@@ -244,7 +244,7 @@ msgstr[1] "Ekipa %s je osvojila %u kasetni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u kasetne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u kasetnih bomb!"
 
-#: src/weapon/construct.cpp:82
+#: src/weapon/construct.cpp:83
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -327,9 +327,14 @@ msgstr[2] "Ekipa %s je osvojila %u raketne nahrbtnike! Juuuhu!"
 msgstr[3] "Ekipa %s je osvojila %u raketnih nahrbtnikov! Juuuhu!"
 
 #: src/weapon/lowgrav.cpp:85
-#, c-format
-msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
-msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+#, fuzzy, c-format
+#| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
+#| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
+msgid ""
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural ""
+"%s team has won %u lowgravs! Small step for man, giant leap for free "
+"software!"
 msgstr[0] "Ekipa %s je osvojila %u zmanjševalnik gravitacije!"
 msgstr[1] "Ekipa %s je osvojila %u zmanjševalnika gravitacije!"
 msgstr[2] "Ekipa %s je osvojila %u zmanjševalnike gravitacije!"
@@ -344,7 +349,7 @@ msgstr[1] "Ekipa %s je osvojila %u mini!"
 msgstr[2] "Ekipa %s je osvojila %u mine!"
 msgstr[3] "Ekipa %s je osvojila %u min!"
 
-#: src/weapon/parachute.cpp:167
+#: src/weapon/parachute.cpp:175
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -354,9 +359,12 @@ msgstr[2] "Ekipa %s je osvojila %u padala!"
 msgstr[3] "Ekipa %s je osvojila %u padal!"
 
 #: src/weapon/polecat.cpp:182
-#, c-format
-msgid "%s team has won %u polecat! You have you're gas mask, right ?"
-msgid_plural "%s team has won %u polecats! You have you're gas mask, right ?"
+#, fuzzy, c-format
+#| msgid "%s team has won %u polecat! You have you're gas mask, right ?"
+#| msgid_plural ""
+#| "%s team has won %u polecats! You have you're gas mask, right ?"
+msgid "%s team has won %u polecat! You have your gas mask, right?"
+msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] ""
 "Ekipa %s je osvojila %u dihurjemet! Bolje da imajo s sabo gas maske!"
 msgstr[1] ""
@@ -448,7 +456,7 @@ msgstr[1] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[2] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 msgstr[3] "Ekipa %s je osvojila %u Preskoči potezo! Izjemno uporabno!"
 
-#: src/weapon/supertux.cpp:326
+#: src/weapon/supertux.cpp:422
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -466,7 +474,7 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Ekipa %s je bila uničena."
 
-#: src/game/game.cpp:759
+#: src/game/game.cpp:788
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s je s sabo v grob vzel še člana skupine %s!"
@@ -476,12 +484,12 @@ msgstr "%s je s sabo v grob vzel še člana skupine %s!"
 msgid "%s will shoot %s"
 msgstr "%s bo ustrelil %s"
 
-#: src/interface/interface.cpp:189
+#: src/interface/interface.cpp:192
 msgid "(dead)"
 msgstr "(mrtev)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:268
+#: src/menu/options_menu.cpp:276
 msgid "(system language)"
 msgstr "(sistemski jezik)"
 
@@ -490,14 +498,17 @@ msgid "(unknown time)"
 msgstr "(čas ni znan)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:220
+#: src/interface/interface.cpp:223
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:449
-#, c-format
+#: src/menu/options_menu.cpp:463
+#, fuzzy, c-format
+#| msgid ""
+#| "A new version %s is available, while your version is %s.You may want to "
+#| "check whether an update is available for your OS!"
 msgid ""
-"A new version %s is available, while your version is %s.You may want to "
+"A new version %s is available, while your version is %s. You may want to "
 "check whether an update is available for your OS!"
 msgstr ""
 "Na voljo je nova različica %s, vaša je pa %s. Preverite, če je za vaš "
@@ -515,7 +526,7 @@ msgstr "Pnevmatsko kladivo"
 msgid "All teams"
 msgstr "Vse ekipe"
 
-#: src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:53
 msgid "Always"
 msgstr "Vedno"
 
@@ -561,11 +572,11 @@ msgstr "Kij"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:54
 msgid "Before action"
 msgstr "Pred premikom"
 
-#: src/menu/game_mode_editor.cpp:44
+#: src/game/game_mode.cpp:352
 msgid "Blitz"
 msgstr "Blitz"
 
@@ -578,60 +589,72 @@ msgid "Bounce Ball"
 msgstr "Skokica"
 
 #: src/weapon/supertux.cpp:187
-msgid "Bye bye tux..."
+#, fuzzy
+#| msgid "Bye bye tux..."
+msgid "Bye bye Tux..."
 msgstr "Adijo tux..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:508
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:550
-#: src/team/teams_list.cpp:556 src/team/teams_list.cpp:620
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:494
+#: src/team/teams_list.cpp:527 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:542 src/team/teams_list.cpp:606
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ni mogoče najti ekipe %s!"
 
-#: src/team/teams_list.cpp:170
+#: src/team/teams_list.cpp:156
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebno-ekipnega imenika (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:158
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:144
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 
-#: src/team/custom_teams_list.cpp:90
+#: src/team/custom_teams_list.cpp:84
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
-#: src/menu/help_menu.cpp:90
-msgid "Center camera to character"
+#: src/menu/help_menu.cpp:94
+#, fuzzy
+#| msgid "Center camera to character"
+msgid "Center the camera on the character"
 msgstr "Osredotoči kamero na člana"
 
-#: src/menu/help_menu.cpp:89
-msgid "Change active character"
+#: src/menu/help_menu.cpp:93
+#, fuzzy
+#| msgid "Change active character"
+msgid "Change the active character"
 msgstr "Zamenjaj aktivnega člana"
 
-#: src/menu/help_menu.cpp:79
-msgid "Change aim angle"
+#: src/menu/help_menu.cpp:84
+#, fuzzy
+#| msgid "Change aim angle"
+msgid "Change the aim angle"
 msgstr "Spremeni kot merjenja"
 
-#: src/menu/help_menu.cpp:73
-msgid "Change weapon category"
+#: src/menu/help_menu.cpp:82
+#, fuzzy
+#| msgid "Change weapon category"
+msgid "Change the weapon category"
 msgstr "Spremeni skupino orožja"
 
-#: src/menu/help_menu.cpp:78
-msgid "Change weapon countdown"
+#: src/menu/help_menu.cpp:83
+#, fuzzy
+#| msgid "Change weapon countdown"
+msgid "Change the weapon countdown"
 msgstr "Spremeni čas orožja"
 
-#: src/menu/options_menu.cpp:149
+#: src/menu/options_menu.cpp:144
 msgid "Character names:"
 msgstr "Imena članov:"
 
-#: src/menu/game_mode_editor.cpp:61
+#: src/menu/game_mode_editor.cpp:57
 msgid "Character switching"
 msgstr "Menjava članov"
 
-#: src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:194
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
@@ -639,16 +662,18 @@ msgstr "Preveri možno posodobitev?"
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
-#: src/menu/game_mode_editor.cpp:42
+#: src/game/game_mode.cpp:350
 msgid "Classic"
 msgstr "Klasični"
 
 #: src/menu/help_menu.cpp:77
-msgid "Click: Center camera on character"
+#, fuzzy
+#| msgid "Click: Center camera on character"
+msgid "Click: Center the camera on the character"
 msgstr "Klik: osredotoči kamero na člana"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:151 src/network/network.cpp:445
 msgid "Client mode"
 msgstr "Odjemalski način"
 
@@ -668,11 +693,11 @@ msgstr "Kasetna bazuka"
 msgid "Commit Suicide"
 msgstr "Samomor"
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:80
 msgid "Configuration menu"
 msgstr "Nastavitveni meni!"
 
-#: src/menu/network_connection_menu.cpp:165
+#: src/menu/network_connection_menu.cpp:211
 msgid "Connect to game"
 msgstr "Povezava do igre"
 
@@ -684,7 +709,7 @@ msgstr "Povezan!"
 msgid "Connected players: "
 msgstr "Povezani igralci: "
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:69
 msgid "Construct"
 msgstr "Tram"
 
@@ -701,7 +726,7 @@ msgstr "Ni bilo mogoče odpreti datoteke %s"
 msgid "Credits"
 msgstr "Zasluge"
 
-#: src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:83
 msgid "Damage per turn during death mode"
 msgstr "Škoda na potezo v fatalnem načinu"
 
@@ -714,15 +739,17 @@ msgid "Displays this message"
 msgstr "Prikaže to sporočilo"
 
 #: src/menu/help_menu.cpp:76
-msgid "Drag&drop: Move camera"
+#, fuzzy
+#| msgid "Drag&drop: Move camera"
+msgid "Drag&drop: Move the camera"
 msgstr "Povleci&spusti: premakne kamero"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:77
 msgid "Duration before death mode"
 msgstr "Čas do fatalnega načina"
 
-#: src/menu/game_mode_editor.cpp:50
+#: src/menu/game_mode_editor.cpp:46
 msgid "Duration of a turn"
 msgstr "Trajanje poteze"
 
@@ -730,11 +757,11 @@ msgstr "Trajanje poteze"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:277
+#: src/game/game.cpp:282
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
-#: src/menu/options_menu.cpp:223
+#: src/menu/options_menu.cpp:232
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
 
@@ -742,17 +769,17 @@ msgstr "Glasnost učinkov"
 msgid "Energy"
 msgstr "Energija"
 
-#: src/include/action_handler.cpp:247
+#: src/include/action_handler.cpp:249
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
-#: src/team/custom_teams_list.cpp:112 src/team/teams_list.cpp:134
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:120
 msgid "Error loading team :"
 msgstr "Napaka pri nalaganju ekipe:"
 
-#: src/game/config.cpp:513 src/team/custom_team.cpp:156
+#: src/game/config.cpp:521 src/team/custom_team.cpp:156
 #: src/team/custom_team.cpp:167 src/team/custom_team.cpp:178
 #, c-format
 msgid ""
@@ -772,7 +799,7 @@ msgstr "Napaka pri brisanju imenika \"%s\". Ni bilo mogoče izbrisati ekipe."
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Napaka pri brisanju datoteke \"%s\". Ni bilo mogoče izbrisati ekipe."
 
-#: src/game/game.cpp:144
+#: src/game/game.cpp:146
 #, c-format
 msgid ""
 "Error:\n"
@@ -782,33 +809,41 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:490
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:348
+#: src/menu/network_connection_menu.cpp:445
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: src/menu/network_connection_menu.cpp:280
+#: src/menu/network_connection_menu.cpp:369
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetne igre"
 
-#: src/menu/network_connection_menu.cpp:373
-msgid "Error: Unable to start server"
+#: src/menu/network_connection_menu.cpp:470
+#, fuzzy
+#| msgid "Error: Unable to start server"
+msgid "Error: Unable to start the server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/menu/network_connection_menu.cpp:367
-#, c-format
+#: src/menu/network_connection_menu.cpp:464
+#: tools/servers/game_server/server.cpp:299
+#, fuzzy, c-format
+#| msgid ""
+#| "Error: Your server is not reachable from the internet. Check your "
+#| "firewall configuration: TCP Port %s must accept connection from the "
+#| "outside. If you are not directly connected to the internet, check your "
+#| "router configuration: TCP Port %s must be forwarded on your computer."
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %s must accept connection from the outside. If you "
+"configuration: TCP Port %s must accept connections from the outside. If you "
 "are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
@@ -816,19 +851,6 @@ msgstr ""
 "vašega požarnega zidu: vrata TCP %s morajo biti odprta za zunanje povezave. "
 "Če na internet niste povezani neposredno, preverite nastavitve "
 "usmerjevalnika:  vrata TCP %s morajo biti posredovana."
-
-#: tools/servers/game_server/server.cpp:270
-#, c-format
-msgid ""
-"Error: Your server is not reachable from the internet. Check your firewall "
-"configuration: TCP Port %u must accept connection from the outside. If you "
-"are not directly connected to the internet, check your router configuration: "
-"TCP Port %u must be forwarded on your computer."
-msgstr ""
-"Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
-"vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje povezave. "
-"Če na internet niste povezani neposredno, preverite nastavitve "
-"usmerjevalnika:  vrata TCP %u morajo biti posredovana."
 
 #: src/team/team.cpp:124
 #, c-format
@@ -843,11 +865,11 @@ msgstr "Metalec plamenov"
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:79
 msgid "Fullscreen / window"
 msgstr "Cel zaslon / okno"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:88
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
 
@@ -855,11 +877,11 @@ msgstr "Celozaslonski način?"
 msgid "Game"
 msgstr "Igra"
 
-#: src/menu/game_mode_editor.cpp:46
+#: src/menu/game_mode_editor.cpp:42
 msgid "Game mode"
 msgstr "Vrsta igre"
 
-#: src/menu/network_connection_menu.cpp:188
+#: src/menu/network_connection_menu.cpp:234
 msgid "Game name:"
 msgstr "Ime igre:"
 
@@ -867,15 +889,17 @@ msgstr "Ime igre:"
 msgid "Gnu Launcher"
 msgstr "Metalec gnuja"
 
-#: src/menu/options_menu.cpp:123
-msgid "Graphic"
+#: src/menu/options_menu.cpp:118
+#, fuzzy
+#| msgid "Graphic"
+msgid "Graphics"
 msgstr "Grafika"
 
 #: src/weapon/grapple.cpp:96
 msgid "Grapple"
 msgstr "Kavelj"
 
-#: src/menu/game_mode_editor.cpp:93
+#: src/menu/game_mode_editor.cpp:89
 msgid "Gravity"
 msgstr "Gravitacija"
 
@@ -892,17 +916,17 @@ msgid "Gun"
 msgstr "Pištola"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:238
+#: src/menu/network_connection_menu.cpp:284
 msgid "Have a good game!"
 msgstr "Uživajte v igri!"
 
-#: src/menu/options_menu.cpp:141 src/menu/team_box.cpp:67
+#: src/menu/options_menu.cpp:136 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:73
 msgid "Head commander"
 msgstr "Poveljnik"
 
 #. Display player's name
-#: src/interface/interface.cpp:180
+#: src/interface/interface.cpp:183
 msgid "Head commander: "
 msgstr "Poveljnik: "
 
@@ -910,29 +934,22 @@ msgstr "Poveljnik: "
 msgid "Help"
 msgstr "Pomoč"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:73
 msgid "High jump"
 msgstr "Visoki skok"
 
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:258
 msgid "Host a game"
 msgstr "Gostite igro"
 
-#: src/weapon/auto_bazooka.cpp:225
-msgid ""
-"How to use it : left click on target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Uporaba: kliknite na tarčo\n"
-"Izstrelitveni kot: Gor/Dol\n"
-"Strel: držite preslednico dokler raketa ne doseže željene moči\n"
-"ena uporaba na potezo"
-
 #: src/weapon/blowtorch.cpp:64
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "Angle : Up/Down\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
@@ -941,66 +958,101 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/airhammer.cpp:75
+#, fuzzy
+#| msgid ""
+#| "Howto use it : keep space key pressed\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : keep space key pressed\n"
+"How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
 "Uporaba: držite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/weapon/anvil.cpp:140
+#: src/weapon/auto_bazooka.cpp:225
+#, fuzzy
+#| msgid ""
+#| "How to use it : left click on target\n"
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Howto use it : left click on target\n"
+"How to use it : left click on the target\n"
+"Initial fire angle : Up/Down\n"
+"Fire : keep the space key pressed until the desired strength\n"
+"an ammo per turn"
+msgstr ""
+"Uporaba: kliknite na tarčo\n"
+"Izstrelitveni kot: Gor/Dol\n"
+"Strel: držite preslednico dokler raketa ne doseže željene moči\n"
+"ena uporaba na potezo"
+
+#: src/weapon/anvil.cpp:140
+#, fuzzy
+#| msgid ""
+#| "Howto use it : left click on target\n"
+#| "an ammo per turn"
+msgid ""
+"How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
 "Uporaba: kliknite na tarčo\n"
 "ena uporaba na potezo"
 
-#: src/game/game_classic.cpp:215
+#: src/game/game_classic.cpp:213
 msgid "Hurry up, you are too slow !!"
 msgstr "Pohitite, prepočasni ste!!"
 
 #: src/main.cpp:290
+#, fuzzy
+#| msgid ""
+#| "If you found a bug or have a feature request send us a email (in english, "
+#| "please):"
 msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
+"If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr ""
 "Če ste našli hrošča ali imate željo po novi funkciji, nam pošljite\n"
 "elektronsko sporočilo (v angleščini) na:"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:62
 msgid "Initial energy"
 msgstr "Začetna energija"
 
 #: src/weapon/bazooka.cpp:124 src/weapon/cluzooka.cpp:391
 #: src/weapon/riot_bomb.cpp:121
+#, fuzzy
+#| msgid ""
+#| "Initial fire angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
 "Initial fire angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Izstrelitveni kot: Gor/Dol\n"
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/game/game_init.cpp:161
+#: src/game/game_init.cpp:160
 msgid "Initialisation"
 msgstr "Inicializacija"
 
-#: src/game/game_init.cpp:115
+#: src/game/game_init.cpp:114
 msgid "Initialise map"
 msgstr "Inicializacija karte"
 
-#: src/game/game_init.cpp:149
+#: src/game/game_init.cpp:148
 msgid "Initialise sounds"
 msgstr "Inicializacija zvokov"
 
-#: src/game/game_init.cpp:125
+#: src/game/game_init.cpp:124
 msgid "Initialise teams"
 msgstr "Inicializacija ekip"
 
-#: src/game/game.cpp:606
+#: src/game/game.cpp:624
 msgid "It's a present!"
 msgstr "To je darilo!"
 
@@ -1008,17 +1060,17 @@ msgstr "To je darilo!"
 msgid "Jetpack"
 msgstr "Raketni nahrbtnik"
 
-#: src/menu/network_connection_menu.cpp:236 src/menu/network_menu.cpp:147
+#: src/menu/network_connection_menu.cpp:282 src/menu/network_menu.cpp:132
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 "nasprotnikov."
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:74
 msgid "Jump"
 msgstr "Skok"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:75
 msgid "Jump backwards"
 msgstr "Skok nazaj"
 
@@ -1026,19 +1078,23 @@ msgstr "Skok nazaj"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Brcne igralca z imenom <nickname> iz igre"
 
-#: src/menu/options_menu.cpp:127
+#: src/menu/options_menu.cpp:122
 msgid "Language"
 msgstr "Jezik"
+
+#: src/menu/options_menu.cpp:198
+msgid "Left-handed mouse?"
+msgstr ""
 
 #: src/network/admin_commands.cpp:34
 msgid "List the connected players"
 msgstr "Izpiši seznam povezanih igralcev"
 
-#: src/map/maps_list.cpp:227
+#: src/map/maps_list.cpp:264
 msgid "Load maps:"
 msgstr "Nalaganje kart:"
 
-#: src/team/teams_list.cpp:146
+#: src/team/teams_list.cpp:132
 msgid "Load teams:"
 msgstr "Nalaganje ekip:"
 
@@ -1052,7 +1108,7 @@ msgstr "Zmanjševalnik gravitacije"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:130
+#: src/menu/network_connection_menu.cpp:176
 msgid "Manual connection"
 msgstr "Ročna povezava"
 
@@ -1065,25 +1121,23 @@ msgstr "Karta"
 msgid "Map %s, a creation of: "
 msgstr "Karta %s je stvaritev: "
 
-#: src/game/game_init.cpp:118
+#: src/game/game_init.cpp:117
 msgid "Maps"
 msgstr "Karte"
 
-#. The first player to connect to a headless server asumes the game master role
-#. We are becoming game master, updating the menu...
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:395 src/menu/network_menu.cpp:396
 msgid "Master mode"
 msgstr "Način vodje igre"
 
-#: src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:68
 msgid "Max energy"
 msgstr "Max energije"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:106
 msgid "Max number of players:"
 msgstr "Največje število igralcev:"
 
-#: src/menu/options_menu.cpp:97
+#: src/menu/options_menu.cpp:92
 msgid "Maximum FPS"
 msgstr "Največji FPS"
 
@@ -1091,7 +1145,7 @@ msgstr "Največji FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:203
+#: src/menu/options_menu.cpp:212
 msgid "Misc"
 msgstr "Razno"
 
@@ -1115,19 +1169,27 @@ msgstr "Najbolj neuporaben"
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
-#: src/menu/help_menu.cpp:86
-msgid "Move camera with mouse or arrows"
+#: src/menu/help_menu.cpp:90
+#, fuzzy
+#| msgid "Move camera with mouse or arrows"
+msgid "Move the camera with mouse or arrows"
 msgstr "Premakni kamero z miško ali puščicami"
 
-#: src/menu/help_menu.cpp:80
-msgid "Move character"
+#: src/menu/help_menu.cpp:85
+#, fuzzy
+#| msgid "Move character"
+msgid "Move the character"
 msgstr "Premakni člana"
 
-#: src/menu/options_menu.cpp:213
+#: src/menu/options_menu.cpp:78
+msgid "Multi-layer sky?"
+msgstr ""
+
+#: src/menu/options_menu.cpp:222
 msgid "Music volume"
 msgstr "Glasnost glasbe"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:218
 msgid "Music?"
 msgstr "Glasba?"
 
@@ -1135,7 +1197,7 @@ msgstr "Glasba?"
 msgid "Network Game"
 msgstr "Omrežna igra"
 
-#: src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:55
 msgid "Never"
 msgstr "Nikoli"
 
@@ -1144,7 +1206,7 @@ msgstr "Nikoli"
 msgid "New network game at "
 msgstr "Nova omrežna igra ob "
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:257
 msgid "New player warning?"
 msgstr "Opozori na nove igralce?"
 
@@ -1169,11 +1231,13 @@ msgstr "Število članov"
 msgid "Number of teams:"
 msgstr "Število ekip:"
 
-#: src/menu/help_menu.cpp:82
-msgid "On a character: Changes active one"
+#: src/menu/help_menu.cpp:87
+#, fuzzy
+#| msgid "On a character: Changes active one"
+msgid "On a character: Select it"
 msgstr "Na člana: spremeni aktivnega"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:86
 msgid "On map: Select a target"
 msgstr "Na karto: izbere tarčo"
 
@@ -1189,13 +1253,9 @@ msgstr "Nastavitve"
 msgid "Parachute"
 msgstr "Padalo"
 
-#: src/weapon/parachute.cpp:101
-msgid "Parachute is activated automatically."
-msgstr "Padalo se samodejno odpre."
-
-#: src/menu/network_connection_menu.cpp:122
-#: src/menu/network_connection_menu.cpp:160
-#: src/menu/network_connection_menu.cpp:200
+#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:246
 msgid "Password:"
 msgstr "Geslo:"
 
@@ -1203,7 +1263,7 @@ msgstr "Geslo:"
 msgid "Play"
 msgstr "Igra"
 
-#: src/menu/network_menu.cpp:134
+#: src/menu/network_menu.cpp:119
 msgid "Play several times"
 msgstr "Več iger zapored"
 
@@ -1211,11 +1271,11 @@ msgstr "Več iger zapored"
 msgid "Player"
 msgstr "Igralec"
 
-#: src/menu/options_menu.cpp:78
+#: src/menu/options_menu.cpp:81
 msgid "Player energy?"
 msgstr "Energija igralca?"
 
-#: src/menu/options_menu.cpp:81
+#: src/menu/options_menu.cpp:84
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
@@ -1223,14 +1283,18 @@ msgstr "Ime igralca?"
 msgid "Polecat Launcher"
 msgstr "Dihurjemet"
 
-#: src/menu/network_connection_menu.cpp:149
-#: src/menu/network_connection_menu.cpp:177
+#: src/menu/network_connection_menu.cpp:195
+#: src/menu/network_connection_menu.cpp:223
 msgid "Port:"
 msgstr "Vrata:"
 
-#: src/menu/network_connection_menu.cpp:109
+#: src/menu/network_connection_menu.cpp:155
 msgid "Public battles"
 msgstr "Javne bitke"
+
+#: src/menu/help_menu.cpp:95
+msgid "Quickly quit game with Ctrl"
+msgstr ""
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1244,7 +1308,7 @@ msgstr "Končaj Wormux"
 msgid "Quit battle"
 msgstr "Končaj bitko"
 
-#: src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:71
 msgid "Quit game"
 msgstr "Končaj igro"
 
@@ -1252,15 +1316,19 @@ msgstr "Končaj igro"
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: src/game/config.cpp:351
-msgid "Reading default config file"
+#: src/game/config.cpp:359
+#, fuzzy
+#| msgid "Reading default config file"
+msgid "Reading the default config file"
 msgstr "Branje privzete nastavitvene datoteke"
 
-#: src/game/config.cpp:400
-msgid "Reading personal config file"
+#: src/game/config.cpp:408
+#, fuzzy
+#| msgid "Reading personal config file"
+msgid "Reading the personal config file"
 msgstr "Branje osebne nastavitvene datoteke"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:114
 msgid "Resolution"
 msgstr "Ločljivost"
 
@@ -1276,25 +1344,25 @@ msgstr "Poženi igro"
 msgid "Say: "
 msgstr "Reci: "
 
-#: src/menu/options_menu.cpp:87
+#: src/menu/options_menu.cpp:205
 msgid "Scroll border size"
 msgstr "Meja drsenja na robu"
 
-#: src/menu/options_menu.cpp:84
+#: src/menu/options_menu.cpp:202
 msgid "Scroll on border"
 msgstr "Drsenje na robu"
 
-#: src/menu/network_connection_menu.cpp:138
+#: src/menu/network_connection_menu.cpp:184
 msgid "Server address:"
 msgstr "Naslov strežnika:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:208
+#: src/menu/network_connection_menu.cpp:254
 msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:157 src/network/network.cpp:475
 msgid "Server mode"
 msgstr "Strežniški način"
 
@@ -1302,16 +1370,22 @@ msgstr "Strežniški način"
 msgid "Shotgun"
 msgstr "Šibrovka"
 
-#: src/menu/help_menu.cpp:83
-msgid "Show weapons menu"
+#: src/menu/help_menu.cpp:88
+#, fuzzy
+#| msgid "Show weapons menu"
+msgid "Show the weapons menu"
 msgstr "Pokaži orožni meni"
 
-#: src/menu/help_menu.cpp:69
-msgid "Show/hide interface"
+#: src/menu/help_menu.cpp:78
+#, fuzzy
+#| msgid "Show/hide interface"
+msgid "Show/hide the interface"
 msgstr "Pokaži/skrij vmesnik"
 
-#: src/menu/help_menu.cpp:88
-msgid "Show/hide minimap"
+#: src/menu/help_menu.cpp:92
+#, fuzzy
+#| msgid "Show/hide minimap"
+msgid "Show/hide the minimap"
 msgstr "Pokaži/skrij minikarto"
 
 #: src/weapon/skip_turn.cpp:47
@@ -1326,7 +1400,7 @@ msgstr "Klofuta"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Klofni sovražnika, da bo kar poskočil."
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:89
 msgid "Smaller aim angle and walk step"
 msgstr "Natančnejši merilni kot in stopinja"
 
@@ -1338,43 +1412,47 @@ msgstr "Ostrostrelska puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nekdo je v zaboj podtaknil bombo!"
 
-#: src/menu/network_connection_menu.cpp:288
+#: src/menu/network_connection_menu.cpp:374
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: src/menu/network_connection_menu.cpp:324
-#: tools/servers/game_server/server.cpp:257
-#, c-format
+#: src/menu/network_connection_menu.cpp:419
+#: tools/servers/game_server/server.cpp:284
+#, fuzzy, c-format
+#| msgid ""
+#| "Sorry, your version is not supported anymore. Supported version are %s. "
+#| "You can download a updated version on http://www.wormux.org/wiki/download."
+#| "php"
 msgid ""
-"Sorry, your version is not supported anymore. Supported version are %s. You "
-"can download a updated version on http://www.wormux.org/wiki/download.php"
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 "Oprostite, vaša različica ni več podprta. Podprte različice so %s. "
 "Posodobljeno različico lahko dobite na http://www.wormux.org/wiki/download."
 "php"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:260
 msgid "Sound"
 msgstr "Zvok"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:228
 msgid "Sound effects?"
 msgstr "Zvočni učinki?"
 
-#: src/menu/options_menu.cpp:244
+#: src/menu/options_menu.cpp:253
 msgid "Sound frequency"
 msgstr "Frekvenca zvoka"
 
 #. Load teams' sound profiles
-#: src/game/game_init.cpp:152
+#: src/game/game_init.cpp:151
 msgid "Sounds"
 msgstr "Zvoki"
 
-#: src/game/game.cpp:115
+#: src/game/game.cpp:117
 msgid "Starting a new game"
 msgstr "Zagon nove igre"
 
-#: src/interface/interface.cpp:220
+#: src/interface/interface.cpp:223
 msgid "Stock:"
 msgstr "Zaloga:"
 
@@ -1382,7 +1460,7 @@ msgstr "Zaloga:"
 msgid "Submachine Gun"
 msgstr "Brzostrelka"
 
-#: src/weapon/supertux.cpp:239
+#: src/weapon/supertux.cpp:234
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1390,8 +1468,10 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Injekcija"
 
-#: src/menu/help_menu.cpp:72
-msgid "Talk in network battle"
+#: src/menu/help_menu.cpp:81
+#, fuzzy
+#| msgid "Talk in network battle"
+msgid "Talk in network battles"
 msgstr "Klepet v večigralski igri"
 
 #: src/menu/results_menu.cpp:426
@@ -1402,11 +1482,11 @@ msgstr "Ekipni grafi"
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
-#: src/game/game_init.cpp:127 src/menu/game_menu.cpp:65
+#: src/game/game_init.cpp:126 src/menu/game_menu.cpp:65
 msgid "Teams"
 msgstr "Ekipe"
 
-#: src/menu/options_menu.cpp:185
+#: src/menu/options_menu.cpp:180
 msgid "Teams editor"
 msgstr "Urejevalnik ekip"
 
@@ -1423,11 +1503,15 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Nogometna bomba je zapustila bojišče še preden jo je razneslo."
 
 #: src/weapon/gnu.cpp:144
-msgid "The Gnu left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Gnu left the battlefield before exploding"
+msgid "The Gnu left the battlefield before exploding!"
 msgstr "Gnu je zapustil bojišče preden ga je razneslo"
 
 #: src/weapon/polecat.cpp:151
-msgid "The Polecat left the battlefield before exploding"
+#, fuzzy
+#| msgid "The Polecat left the battlefield before exploding"
+msgid "The Polecat left the battlefield before exploding!"
 msgstr "Dihur je zapustil bojišče preden ga je razneslo"
 
 #: src/weapon/auto_bazooka.cpp:179
@@ -1435,7 +1519,9 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "Avtomatska raketa je zapustila bojišče..."
 
 #: src/weapon/bounce_ball.cpp:62
-msgid "The ball left the battlefield before exploding"
+#, fuzzy
+#| msgid "The ball left the battlefield before exploding"
+msgid "The ball left the battlefield before exploding!"
 msgstr "Žoga je zapustila bojišče preden je eksplodirala"
 
 #: src/network/network_client.cpp:96
@@ -1452,20 +1538,32 @@ msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "Povezava se je iztekla. Preverite da ni kriv požarni zid!"
 
 #: src/weapon/disco_grenade.cpp:127
-msgid "The disco grenade has left the dance floor before exploding"
+#, fuzzy
+#| msgid "The disco grenade has left the dance floor before exploding"
+msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Disko granata je zapustila plesišče preden je eksplodirala"
 
-#: src/game/game.cpp:491
+#: src/game/game.cpp:509
 msgid "The game was interrupted because you got disconnected."
 msgstr "Igra je bila prekinjena zaradi prekinitve povezave."
 
 #: src/weapon/grenade.cpp:50
-msgid "The grenade left the battlefield before exploding"
+#, fuzzy
+#| msgid "The grenade left the battlefield before exploding"
+msgid "The grenade left the battlefield before exploding!"
 msgstr "Granata je zapustila bojišče preden je eksplodirala"
 
-#: src/menu/network_menu.cpp:336
-msgid "The others are waiting for you! Wake up :-)"
+#: src/menu/network_menu.cpp:343
+#, fuzzy
+#| msgid "The others are waiting for you! Wake up :-)"
+msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Ostali te čakajo! Zbudi se! :-)"
+
+#: src/weapon/parachute.cpp:101
+#, fuzzy
+#| msgid "Parachute is activated automatically."
+msgid "The parachute is activated automatically."
+msgstr "Padalo se samodejno odpre."
 
 #: src/weapon/bazooka.cpp:83 src/weapon/cluzooka.cpp:342
 #: src/weapon/riot_bomb.cpp:86
@@ -1480,7 +1578,7 @@ msgstr "Strežnik je zavrnil povezavo."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 
-#: src/menu/network_menu.cpp:242
+#: src/menu/network_menu.cpp:246
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1495,10 +1593,16 @@ msgid "Time"
 msgstr "Čas"
 
 #: src/weapon/cluster_bomb.cpp:194 src/weapon/footbomb.cpp:155
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : keep space key pressed until the desired strength\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
-"Fire : keep space key pressed until the desired strength\n"
+"Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
 "Čas: miškin kolešček ali Page Up/Down\n"
@@ -1507,8 +1611,14 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/weapon/bounce_ball.cpp:80
+#, fuzzy
+#| msgid ""
+#| "Timeout : Wheel mouse or Page Up/Down\n"
+#| "Angle : Up/Down\n"
+#| "Fire : space key\n"
+#| "an ammo per turn"
 msgid ""
-"Timeout : Wheel mouse or Page Up/Down\n"
+"Timeout : Mouse wheel or Page Up/Down\n"
 "Angle : Up/Down\n"
 "Fire : space key\n"
 "an ammo per turn"
@@ -1519,17 +1629,21 @@ msgstr ""
 "ena uporaba na potezo"
 
 #: src/network/net_error_msg.cpp:35
-msgid "Unable to contact host."
+#, fuzzy
+#| msgid "Unable to contact host."
+msgid "Unable to contact the host."
 msgstr "Ni bilo mogoče kontaktirati gostitelja."
 
-#: src/map/maps_list.cpp:237
-#, c-format
-msgid "Unable to open maps directory (%s)!"
+#: src/map/maps_list.cpp:274
+#, fuzzy, c-format
+#| msgid "Unable to open maps directory (%s)!"
+msgid "Unable to open the maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
 
-#: src/map/maps_list.cpp:249
-#, c-format
-msgid "Unable to open personal maps directory (%s)!"
+#: src/map/maps_list.cpp:286
+#, fuzzy, c-format
+#| msgid "Unable to open personal maps directory (%s)!"
+msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Ni bilo mogoče odpreti zasebnega imenika s kartami (%s)!"
 
 #: src/network/net_error_msg.cpp:38
@@ -1540,7 +1654,7 @@ msgstr "Ni bilo mogoče uporabiti teh vrat!"
 msgid "Unknown command"
 msgstr "Neznan ukaz"
 
-#: src/menu/game_mode_editor.cpp:43
+#: src/game/game_mode.cpp:351
 msgid "Unlimited"
 msgstr "Neomejen"
 
@@ -1548,12 +1662,12 @@ msgstr "Neomejen"
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:457
+#: src/menu/options_menu.cpp:471
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Preverjanje različice je spodletelo zaradi: %s"
 
-#: src/menu/network_menu.cpp:257
+#: src/menu/network_menu.cpp:261
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1562,16 +1676,20 @@ msgstr[1] "Počakajte! %i igralca še nista pripravljena!"
 msgstr[2] "Počakajte! %i igralci še niso pripravljeni!"
 msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 
-#: src/menu/network_menu.cpp:450
-msgid "Waiting for server, all you can do is cancel or chat!"
+#: src/menu/network_menu.cpp:460
+#, fuzzy
+#| msgid "Waiting for server, all you can do is cancel or chat!"
+msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#: src/menu/help_menu.cpp:87
-msgid "Weapon: Fire / Bonus box: falls fast"
+#: src/menu/help_menu.cpp:91
+#, fuzzy
+#| msgid "Weapon: Fire / Bonus box: falls fast"
+msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Orožje: streljaj / Paket: hiter padec"
 
 #. Initialization of teams' energy
-#: src/game/game_init.cpp:138
+#: src/game/game_init.cpp:137
 msgid "Weapons"
 msgstr "Orožja"
 
@@ -1580,12 +1698,17 @@ msgid "Website: "
 msgstr "Spletna stran: "
 
 #. %s will be replaced with the name of the network game
-#: src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:135
 #, c-format
 msgid "Welcome to %s!"
 msgstr "Dobrodošli v %s!"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:745
+#, c-format
+msgid "What a beautiful homerun! %s from %s team is in another world..."
+msgstr ""
+
+#: src/game/game.cpp:797
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
@@ -1607,43 +1730,51 @@ msgstr "Wormux se zaganja..."
 msgid "Wormux version "
 msgstr "Wormux različica "
 
-#: src/include/action_handler.cpp:221
+#: src/include/action_handler.cpp:223
 msgid "Wrong map CRC!"
 msgstr "Napačna kartna vsota CRC"
 
-#: src/include/action_handler.cpp:218
+#: src/include/action_handler.cpp:220
 msgid "Wrong map name!"
 msgstr "Napačno ime karte!"
 
-#: src/include/action_handler.cpp:224
+#: src/include/action_handler.cpp:226
 msgid "Wrong team!"
 msgstr "Napačna ekipa!"
 
-#: src/menu/network_menu.cpp:339
-msgid "You are alone :-/"
+#: src/menu/network_menu.cpp:346
+#, fuzzy
+#| msgid "You are alone :-/"
+msgid "You are alone. :-/"
 msgstr "Sami ste :-/"
 
-#: src/menu/network_menu.cpp:251
+#: src/menu/network_menu.cpp:255
 msgid "You are alone..."
 msgstr "Sami ste..."
 
-#: src/menu/network_menu.cpp:393
+#: src/menu/network_menu.cpp:403
 msgid "You are the new turn master!"
 msgstr "Postali ste novi vodja igre!"
 
-#: src/map/maps_list.cpp:258
-msgid "You need at least one valid map !"
+#: src/map/maps_list.cpp:295
+#, fuzzy
+#| msgid "You need at least one valid map !"
+msgid "You need at least one valid map!"
 msgstr "Potrebujete vsaj eno veljavno karto!"
 
-#: src/game/game_init.cpp:131 src/team/teams_list.cpp:178
-msgid "You need at least two valid teams !"
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:164
+#, fuzzy
+#| msgid "You need at least two valid teams !"
+msgid "You need at least two valid teams!"
 msgstr "Potrebujete vsaj dve veljavni ekipi !"
 
-#: src/menu/network_menu.cpp:226
-msgid "You won't be able to play before selecting a team !"
+#: src/menu/network_menu.cpp:230
+#, fuzzy
+#| msgid "You won't be able to play before selecting a team !"
+msgid "You won't be able to play before selecting a team!"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:502
+#: src/weapon/weapon_launcher.cpp:503
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 
@@ -1652,16 +1783,21 @@ msgid "aka"
 msgstr "kot"
 
 #: src/weapon/air_attack.cpp:221
+#, fuzzy
+#| msgid ""
+#| "attack direction : Left/Right\n"
+#| "Bombing : left clic on target\n"
+#| "a bombing per turn"
 msgid ""
 "attack direction : Left/Right\n"
-"Bombing : left clic on target\n"
-"a bombing per turn"
+"Bombing : left click on the target\n"
+"one bombing per turn"
 msgstr ""
 "Smer napada: Levo/Desno\n"
 "Bombardiranje: levi klik na tarčo\n"
 "eno bombardiranje na potezo"
 
-#: src/map/maps_list.cpp:76
+#: src/map/maps_list.cpp:77
 msgid "couldn't load config"
 msgstr "nalaganje nastavitev ni bilo mogoče"
 
@@ -1682,7 +1818,7 @@ msgstr "napaka pri razčlenjevanju nastavitvene datoteke"
 msgid "from"
 msgstr "iz"
 
-#: src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:73
 msgid "no configuration file!"
 msgstr "ni nastavitvene datoteke!"
 
@@ -1690,7 +1826,7 @@ msgstr "ni nastavitvene datoteke!"
 msgid "o Loading music"
 msgstr "o Nalaganje glasbe"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:355
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Nalaganje zvočnega profila: %s"
@@ -1699,6 +1835,17 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Napaka: vaš strežnik ni dosegljiv preko interneta. Preverite nastavitve "
+#~ "vašega požarnega zidu: vrata TCP %u morajo biti odprta za zunanje "
+#~ "povezave. Če na internet niste povezani neposredno, preverite nastavitve "
+#~ "usmerjevalnika:  vrata TCP %u morajo biti posredovana."
 
 #~ msgid "Couldn't fetch last version from %s"
 #~ msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"

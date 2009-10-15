@@ -308,8 +308,6 @@ POTFILES = \
         src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
         src/tool/copynpaste.h \
-        src/tool/debug_physics.cpp \
-        src/tool/debug_physics.h \
         src/tool/isnan.h \
         src/tool/math_tools.h \
         src/tool/resource_manager.cpp \
@@ -426,7 +424,7 @@ POTFILES = \
         tools/servers/index_server/stat.cpp \
         tools/servers/index_server/stat.h \
         tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h 
+        tools/servers/index_server/sync_slave.h
 
 DOMAIN = $(PACKAGE)
 
