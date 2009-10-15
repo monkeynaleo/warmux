@@ -25,7 +25,6 @@
 #include "physic/physical_obj.h"
 #include "physic/physical_shape.h"
 #include "tool/math_tools.h"
-#include "tool/debug_physics.h"
 #include <iostream>
 
 PhysicalEngine *PhysicalEngine::g_instance = NULL;
