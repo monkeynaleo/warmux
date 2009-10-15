@@ -162,7 +162,6 @@ wormux_SOURCES = \
         team/teams_list.cpp team/teams_list.h \
         tool/affine_transform.cpp tool/affine_transform.h \
         tool/copynpaste.cpp tool/copynpaste.h \
-        tool/debug_physics.cpp tool/debug_physics.h \
         tool/isnan.h \
         tool/math_tools.h \
         tool/resource_manager.cpp tool/resource_manager.h \
