@@ -683,7 +683,143 @@
 	</frame>
 </movement>
 
+<!-- ###### Looking around (lef/right) ###### -->
+<movement name="animation3" duration_per_frame="200" nb_loops="2"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
+	<collision_rect left="0" right="0" top="0" bottom="2"/>
+	<frame>
+		<member type="pupil-left" dx="0"/>
+		<member type="pupil-right" dx="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="0"/>
+		<member type="pupil-right" dx="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-1"/>
+		<member type="pupil-right" dx="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-2"/>
+		<member type="pupil-right" dx="-2"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-3"/>
+		<member type="pupil-right" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-4"/>
+		<member type="pupil-right" dx="-4"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-4"/>
+		<member type="pupil-right" dx="-4"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-4"/>
+		<member type="pupil-right" dx="-4"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-4"/>
+		<member type="pupil-right" dx="-4"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-4"/>
+		<member type="pupil-right" dx="-4"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-3"/>
+		<member type="pupil-right" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-2"/>
+		<member type="pupil-right" dx="-2"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="-1"/>
+		<member type="pupil-right" dx="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="0"/>
+		<member type="pupil-right" dx="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="0"/>
+		<member type="pupil-right" dx="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dx="0"/>
+		<member type="pupil-right" dx="0"/>
+	</frame>
+</movement>
 
+<!-- ###### Looking around (up/down) ###### -->
+<movement name="animation4" duration_per_frame="200" nb_loops="2"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
+	<collision_rect left="0" right="0" top="0" bottom="2"/>
+	<frame>
+		<member type="pupil-left" dy="0"/>
+		<member type="pupil-right" dy="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="0"/>
+		<member type="pupil-right" dy="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-1"/>
+		<member type="pupil-right" dy="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-2" dx="-1"/>
+		<member type="pupil-right" dy="-2" dx="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-3" dx="-2"/>
+		<member type="pupil-right" dy="-3" dx="-2"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-4" dx="-3"/>
+		<member type="pupil-right" dy="-4" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-4" dx="-3"/>
+		<member type="pupil-right" dy="-4" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-4" dx="-3"/>
+		<member type="pupil-right" dy="-4" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-4" dx="-3"/>
+		<member type="pupil-right" dy="-4" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-4" dx="-3"/>
+		<member type="pupil-right" dy="-4" dx="-3"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-3" dx="-2"/>
+		<member type="pupil-right" dy="-3" dx="-2"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-2" dx="-1"/>
+		<member type="pupil-right" dy="-2" dx="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="-1"/>
+		<member type="pupil-right" dy="-1"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="0"/>
+		<member type="pupil-right" dy="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="0"/>
+		<member type="pupil-right" dy="0"/>
+	</frame>
+	<frame>
+		<member type="pupil-left" dy="0"/>
+		<member type="pupil-right" dy="0"/>
+	</frame>
+</movement>
 
 
 <!--   ###########################################
