@@ -106,6 +106,12 @@ m_last_minimap_redraw(0)
 
   Color text_color = GetResourceManager().LoadColor(res, "interface/text_color");
   Color energy_text_color = GetResourceManager().LoadColor(res, "interface/energy_text_color");
+
+m_camera_preview_color = GetResourceManager().LoadColor(res, "interface/camera_preview_color");
+
+m_playing_character_preview_color = GetResourceManager().LoadColor(res, "interface/playing_character_preview_color");
+
+
   // XXX Unused !?
   // Color turn_timer_text_color = GetResourceManager().LoadColor(res, "interface/turn_timer_text_color");
   // Color global_clock_text_color = GetResourceManager().LoadColor(res, "interface/global_clock_text_color");
@@ -385,7 +391,7 @@ void Interface::DrawMapPreview()
         if ((*character)->IsActiveCharacter()) {
           uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
           radius = (radius/2) + 1;
-          window.CircleColor(coord.x, coord.y, radius, c_white);
+          window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);
           GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
         }
 	else
@@ -393,7 +399,14 @@ void Interface::DrawMapPreview()
       }
     }
   }
+  Point2i cameraTopLeftCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()) + offset;
+Point2i cameraBottomRightCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()+Camera::GetInstance()->GetSize()) + offset;
+
   GetWorld().ToRedrawOnScreen(rect_preview);
+  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraTopLeftCorner.y, m_camera_preview_color);
+  GetMainWindow().LineColor(cameraBottomRightCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraBottomRightCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraTopLeftCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
 
 
 }

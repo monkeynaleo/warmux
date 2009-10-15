@@ -94,16 +94,8 @@ public:
    Surface rounding_style [3][3];
    Surface rounding_style_mask [3][3];
 
-   /*Surface rounding_bottom;
-   Surface rounding_bottom_left;
-   Surface rounding_bottom_right;
-   Surface rounding_top;
-   Surface rounding_top_left;
-   Surface rounding_top_right;
-   Surface rounding_center;
-   Surface rounding_left;
-   Surface rounding_right;
-*/
+   Color m_camera_preview_color;
+   Color m_playing_character_preview_color;
 protected:
   friend class Singleton<Interface>;
    Interface();
