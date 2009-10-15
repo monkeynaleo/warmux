@@ -15,13 +15,20 @@
     <animation speed="50"/>
   </sprite>
 
+    <sprite name="smoke_big_explosion">
+    <image file="object/smokea.png">
+      <grid pos="0,0" size="150,150" array="5,1"/>
+    </image>
+    <animation speed="100"/>
+  </sprite>
+
   <sprite name="ill_bubble">
     <image file="object/ill_bubble.png" />
   </sprite>
 
   <sprite name="fire_particle">
     <image file="object/fire.png" >
-      <grid pos="0,0" size="18,25" array="5,1" />
+      <grid pos="0,0" size="18,35" array="5,1" />
     </image>
   </sprite>
 
