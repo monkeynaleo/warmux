@@ -5,7 +5,7 @@
   <!-- VOICES -->
 
   <sound sample="jump"                           file="voices/jump.ogg" />
-  <sound sample="superjump"                      file="voices/superjump.ogg" />
+  <sound sample="superjump"                      file="voices/jump.ogg" />
   <sound sample="back_jump"                      file="voices/backjump.ogg" />
   
   <sound sample="death"                          file="voices/death1.ogg" />
