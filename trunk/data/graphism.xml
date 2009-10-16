@@ -3,7 +3,7 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg_main" file="menu/background-main.png" />
+  <surface name="bg_main" file="menu/background_main.jpg" />
 
   <sprite name="button">
     <image file="menu/button.png">
@@ -17,10 +17,10 @@
   <surface name="ico_warning" file="menu/warning.png" />
 
   <!-- backgrounds -->
-  <surface name="bg_option" file="menu/background.png" />
-  <surface name="bg_play" file="menu/background.png" />
-  <surface name="bg_network" file="menu/background_network.png" />
-  <surface name="bg_results" file="menu/background.png" />
+  <surface name="bg_option" file="menu/background.jpg" />
+  <surface name="bg_play" file="menu/background.jpg" />
+  <surface name="bg_network" file="menu/background_network.jpg" />
+  <surface name="bg_results" file="menu/background.jpg" />
 
   <!-- buttons to access menus -->
   <surface name="ico_back_to_battle" file="menu/i_backtobattle.png" />
@@ -170,11 +170,11 @@
  </section>
 
 <section name="credit">
-  <surface name="background" file="menu/background.png" />
+  <surface name="background" file="menu/background.jpg" />
 </section>
 
 <section name="help">
-  <surface name="background" file="menu/background.png" />
+  <surface name="background" file="menu/background.jpg" />
   <surface name="shortkeys" file="menu/help_shortkeys.png" />
 </section>
 

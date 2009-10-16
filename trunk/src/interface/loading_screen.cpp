@@ -36,7 +36,7 @@ LoadingScreen::LoadingScreen()
   loading_bg = new Sprite(Surface((
                                    config->GetDataDir()
                                    + "menu" + PATH_SEPARATOR
-                                   + "loading.png").c_str()),
+                                   + "background_loading.jpg").c_str()),
 			  true);
   loading_bg->cache.EnableLastFrameCache();
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());

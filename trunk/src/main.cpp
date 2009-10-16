@@ -204,7 +204,7 @@ void AppWormux::DisplayLoadingPicture()
 
   std::string txt_version =
     _("Version") + std::string(" ") + Constants::WORMUX_VERSION;
-  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
+  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "background_loading.jpg";
 
   Surface surfaceLoading(filename.c_str());
   Sprite loading_image(surfaceLoading, true);
