@@ -23,6 +23,7 @@
 #include "game/game.h"
 #include "network/chat.h"
 #include <SDL_events.h>
+#include <libxml/tree.h>
 
 #define MODIFIER_OFFSET (SDLK_LAST + 1)
 #define SHIFT_BIT 0x1
@@ -92,6 +93,51 @@ void Keyboard::SetConfig(const xmlNode *node)
     //Set association
     SetKeyAction(key, action);
 
+  }
+}
+
+void Keyboard::SaveConfig( xmlNode *node) const
+{
+  xmlNode *keyboard_node = xmlAddChild(node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"keyboard"));
+  std::map<int, std::vector<Key_t> >::const_iterator it;
+
+  for (it = layout.begin(); it != layout.end(); it++)
+  {
+    const std::vector<Key_t> actions = it->second;
+    for (uint i = 0; i < actions.size(); i++)
+    {
+      bool shift, control, alt;
+      shift = false;
+      control = false;
+      alt = false;
+      int key = it->first;
+
+      if (key > CONTROL_OFFSET)
+      {
+        key -= CONTROL_OFFSET;
+        control = true;
+      }
+
+      if (key > ALT_OFFSET)
+      {
+        key -= ALT_OFFSET;
+        alt = true;
+      }
+
+      if (key > SHIFT_OFFSET)
+      {
+        key -= SHIFT_OFFSET;
+        shift = true;
+      }
+
+      //Generate node
+      xmlNode *bind = xmlAddChild(keyboard_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"bind"));
+      xmlSetProp(bind, (const xmlChar*)"key", (const xmlChar*)GetKeyNameFromKey(key).c_str());
+      xmlSetProp(bind, (const xmlChar*)"action", (const xmlChar*)GetActionNameFromAction(actions.at(i)).c_str());
+      if (shift) xmlSetProp(bind, (const xmlChar*)"shift", (const xmlChar*)"true");
+      if (control) xmlSetProp(bind, (const xmlChar*)"control", (const xmlChar*)"true");
+      if (alt) xmlSetProp(bind, (const xmlChar*)"alt", (const xmlChar*)"true");
+    }
   }
 }
 

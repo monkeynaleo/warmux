@@ -497,7 +497,7 @@ void ManMachineInterface::ClearKeyAction()
   layout.clear();
 }
 
-int ManMachineInterface::GetKeyFromKeyName(const std::string &name)
+int ManMachineInterface::GetKeyFromKeyName(const std::string &name) const
 {
   if(name == "unknown") return SDLK_UNKNOWN;
 
@@ -752,7 +752,7 @@ int ManMachineInterface::GetKeyFromKeyName(const std::string &name)
   return SDLK_UNKNOWN;
 }
 
-std::string ManMachineInterface::GetKeyNameFromKey(int key)
+std::string ManMachineInterface::GetKeyNameFromKey(int key) const
 {
   if(key == SDLK_UNKNOWN) return "unknown";
 
@@ -1007,7 +1007,7 @@ std::string ManMachineInterface::GetKeyNameFromKey(int key)
   return "unknown";
 }
 
-ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const std::string &name)
+ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const std::string &name) const
 {
 
   if(name == "quit") return KEY_QUIT;
@@ -1061,7 +1061,7 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
 
 }
 
-std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Key_t key)
+std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Key_t key) const
 {
   if(key == KEY_QUIT) return "quit";
   if(key == KEY_WEAPONS1) return "weapons1";
