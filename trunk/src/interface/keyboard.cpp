@@ -103,33 +103,37 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
             ((key_code / MODIFIER_OFFSET) & ALT_BIT)?"[alt] + ": "",
             ((key_code / MODIFIER_OFFSET) & SHIFT_BIT)?"[shift] + ": "",
             key_code % MODIFIER_OFFSET);
-  std::map<int, Key_t>::iterator it = layout.find(key_code);
+  std::map<int, std::vector<Key_t> >::iterator it = layout.find(key_code);
 
   if(it == layout.end())
     return;
 
 
-  Key_t key = it->second;
+  std::vector<Key_t> keys = it->second;
+  std::vector<Key_t>::const_iterator itv;
+  
+  for(itv = keys.begin(); itv != keys.end() ; itv++)
+  {  
+    //While player writes, it cannot control the game but QUIT or PAUSE.
+    if (Game::GetInstance()->chatsession.CheckInput()) {
+      switch (*itv) {
+      case KEY_QUIT:
+      case KEY_PAUSE:
+        break;
+      default:
+        return;
+      }
+    }
 
-  //While player writes, it cannot control the game but QUIT or PAUSE.
-  if (Game::GetInstance()->chatsession.CheckInput()) {
-    switch (key) {
-    case KEY_QUIT:
-    case KEY_PAUSE:
-      break;
-    default:
+    if(event_type == KEY_PRESSED) {
+      HandleKeyPressed(*itv);
       return;
     }
-  }
 
-  if(event_type == KEY_PRESSED) {
-    HandleKeyPressed(key);
-    return;
-  }
-
-  if(event_type == KEY_RELEASED) {
-    HandleKeyReleased(key);
-    return;
+    if(event_type == KEY_RELEASED) {
+      HandleKeyReleased(*itv);
+      return;
+    }
   }
 }
 
