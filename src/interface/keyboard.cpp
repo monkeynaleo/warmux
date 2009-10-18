@@ -46,52 +46,7 @@ Keyboard::Keyboard() : ManMachineInterface()
 
 void Keyboard::SetDefaultConfig()
 {
-  SetKeyAction(SDLK_LEFT,                    ManMachineInterface::KEY_MOVE_LEFT);
-  SetKeyAction(SHIFT_OFFSET + SDLK_LEFT,     ManMachineInterface::KEY_MOVE_LEFT_SLOWLY);
-  SetKeyAction(SDLK_RIGHT,                   ManMachineInterface::KEY_MOVE_RIGHT);
-  SetKeyAction(SHIFT_OFFSET + SDLK_RIGHT,    ManMachineInterface::KEY_MOVE_RIGHT_SLOWLY);
-  SetKeyAction(SDLK_UP,                      ManMachineInterface::KEY_UP);
-  SetKeyAction(SHIFT_OFFSET + SDLK_UP,       ManMachineInterface::KEY_UP_SLOWLY);
-  SetKeyAction(SDLK_DOWN,                    ManMachineInterface::KEY_DOWN);
-  SetKeyAction(SHIFT_OFFSET + SDLK_DOWN,     ManMachineInterface::KEY_DOWN_SLOWLY);
-  SetKeyAction(CONTROL_OFFSET + SDLK_LEFT,   ManMachineInterface::KEY_MOVE_CAMERA_LEFT);
-  SetKeyAction(CONTROL_OFFSET + SDLK_RIGHT,  ManMachineInterface::KEY_MOVE_CAMERA_RIGHT);
-  SetKeyAction(CONTROL_OFFSET + SDLK_UP,     ManMachineInterface::KEY_MOVE_CAMERA_UP);
-  SetKeyAction(CONTROL_OFFSET + SDLK_DOWN,   ManMachineInterface::KEY_MOVE_CAMERA_DOWN);
-  SetKeyAction(SDLK_RETURN,                  ManMachineInterface::KEY_JUMP);
-  SetKeyAction(SDLK_BACKSPACE,               ManMachineInterface::KEY_HIGH_JUMP);
-  SetKeyAction(SDLK_b,                       ManMachineInterface::KEY_BACK_JUMP);
-  SetKeyAction(SDLK_SPACE,                   ManMachineInterface::KEY_SHOOT);
-  SetKeyAction(SDLK_TAB,                     ManMachineInterface::KEY_NEXT_CHARACTER);
   SetKeyAction(SDLK_ESCAPE,                  ManMachineInterface::KEY_QUIT);
-  SetKeyAction(SDLK_PAUSE,                   ManMachineInterface::KEY_PAUSE);
-  SetKeyAction(SDLK_F10,                     ManMachineInterface::KEY_FULLSCREEN);
-  SetKeyAction(SDLK_F9,                      ManMachineInterface::KEY_TOGGLE_INTERFACE);
-  SetKeyAction(SDLK_F1,                      ManMachineInterface::KEY_WEAPONS1);
-  SetKeyAction(SDLK_F2,                      ManMachineInterface::KEY_WEAPONS2);
-  SetKeyAction(SDLK_F3,                      ManMachineInterface::KEY_WEAPONS3);
-  SetKeyAction(SDLK_F4,                      ManMachineInterface::KEY_WEAPONS4);
-  SetKeyAction(SDLK_F5,                      ManMachineInterface::KEY_WEAPONS5);
-  SetKeyAction(SDLK_F6,                      ManMachineInterface::KEY_WEAPONS6);
-  SetKeyAction(SDLK_F7,                      ManMachineInterface::KEY_WEAPONS7);
-  SetKeyAction(SDLK_F8,                      ManMachineInterface::KEY_WEAPONS8);
-  SetKeyAction(SDLK_c,                       ManMachineInterface::KEY_CENTER);
-  SetKeyAction(SDLK_1,                       ManMachineInterface::KEY_WEAPON_1);
-  SetKeyAction(SDLK_2,                       ManMachineInterface::KEY_WEAPON_2);
-  SetKeyAction(SDLK_3,                       ManMachineInterface::KEY_WEAPON_3);
-  SetKeyAction(SDLK_4,                       ManMachineInterface::KEY_WEAPON_4);
-  SetKeyAction(SDLK_5,                       ManMachineInterface::KEY_WEAPON_5);
-  SetKeyAction(SDLK_6,                       ManMachineInterface::KEY_WEAPON_6);
-  SetKeyAction(SDLK_7,                       ManMachineInterface::KEY_WEAPON_7);
-  SetKeyAction(SDLK_8,                       ManMachineInterface::KEY_WEAPON_8);
-  SetKeyAction(SDLK_9,                       ManMachineInterface::KEY_WEAPON_9);
-  SetKeyAction(SDLK_PAGEUP,                  ManMachineInterface::KEY_WEAPON_MORE);
-  SetKeyAction(SDLK_PAGEDOWN,                ManMachineInterface::KEY_WEAPON_LESS);
-  SetKeyAction(SDLK_s,                       ManMachineInterface::KEY_CHAT);
-  SetKeyAction(SDLK_t,                       ManMachineInterface::KEY_CHAT);
-  SetKeyAction(ALT_OFFSET + SDLK_RETURN,     ManMachineInterface::KEY_CHAT);
-  SetKeyAction(SDLK_F11,                     ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
-  SetKeyAction(SDLK_m,                       ManMachineInterface::KEY_MINIMAP_FROM_GAME);
 }
 
 void Keyboard::SetConfig(const xmlNode *node)
@@ -105,13 +60,17 @@ void Keyboard::SetConfig(const xmlNode *node)
   for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it)
   {
     std::string key_name, action_name;
-    bool shift, control;
+    bool shift, control, alt;
+    shift = false;
+    control = false;
+    alt = false;
 
     //Extract XML config
-    XmlReader::ReadString(*it, "key", key_name);
-    XmlReader::ReadString(*it, "action", action_name);
-    XmlReader::ReadBool(*it, "shift", shift);
-    XmlReader::ReadBool(*it, "control", control);
+    XmlReader::ReadStringAttr(*it, "key", key_name);
+    XmlReader::ReadStringAttr(*it, "action", action_name);
+    XmlReader::ReadBoolAttr(*it, "shift", shift);
+    XmlReader::ReadBoolAttr(*it, "control", control);
+    XmlReader::ReadBoolAttr(*it, "alt", alt);
 
     //Generate key and action value
     int key;
@@ -123,6 +82,9 @@ void Keyboard::SetConfig(const xmlNode *node)
     }
     if (control) {
       key += CONTROL_OFFSET;
+    }
+    if (alt) {
+      key += ALT_OFFSET;
     }
 
     action = GetActionFromActionName(action_name);
