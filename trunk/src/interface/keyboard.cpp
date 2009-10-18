@@ -94,6 +94,44 @@ void Keyboard::SetDefaultConfig()
   SetKeyAction(SDLK_m,                       ManMachineInterface::KEY_MINIMAP_FROM_GAME);
 }
 
+void Keyboard::SetConfig(const xmlNode *node)
+{
+  ASSERT(node != NULL);
+
+  //Remove old key configuration
+  ClearKeyAction();
+
+  xmlNodeArray list = XmlReader::GetNamedChildren(node, "bind");
+  for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it)
+  {
+    std::string key_name, action_name;
+    bool shift, control;
+
+    //Extract XML config
+    XmlReader::ReadString(*it, "key", key_name);
+    XmlReader::ReadString(*it, "action", action_name);
+    XmlReader::ReadBool(*it, "shift", shift);
+    XmlReader::ReadBool(*it, "control", control);
+
+    //Generate key and action value
+    int key;
+    Key_t action;
+
+    key = GetKeyFromKeyName(key_name);
+    if (shift) {
+      key += SHIFT_OFFSET;
+    }
+    if (control) {
+      key += CONTROL_OFFSET;
+    }
+
+    action = GetActionFromActionName(action_name);
+
+    //Set association
+    SetKeyAction(key, action);
+
+  }
+}
 
 void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
 {

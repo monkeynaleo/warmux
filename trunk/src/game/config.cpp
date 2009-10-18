@@ -38,6 +38,7 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
+#include "interface/keyboard.h"
 #include "network/network.h"
 #include "object/object_cfg.h"
 #include "sound/jukebox.h"
@@ -395,6 +396,15 @@ void Config::LoadDefaultValue()
       resolution_available.push_back(tmp);
   }
 #endif
+
+  //== Default keyboard key
+  {
+    const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
+    if (node) {
+      Keyboard::GetInstance()->SetConfig(node);
+    }
+
+  }
 
   GetResourceManager().UnLoadXMLProfile(res);
 }

@@ -110,6 +110,13 @@ protected:
   void HandleKeyReleased(const Key_t &action_key);
 
   void SetKeyAction(int key, Key_t at) { layout[key].push_back(at); };
+  void ClearKeyAction();
+
+  int GetKeyFromKeyName(const std::string &name);
+  std::string GetKeyNameFromKey(int key);
+
+  Key_t GetActionFromActionName(const std::string &name);
+  std::string GetActionNameFromAction(Key_t);
 
   ManMachineInterface() { SetDefaultConfig(); };
   virtual ~ManMachineInterface() { };
