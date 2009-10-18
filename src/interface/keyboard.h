@@ -26,6 +26,7 @@
 #include <WORMUX_singleton.h>
 #include <set>
 #include "SDL_keyboard.h"
+#include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 class Keyboard : public ManMachineInterface, public Singleton<Keyboard>
@@ -41,6 +42,7 @@ protected:
 
 public:
   void HandleKeyEvent(const SDL_Event& event);
+  void SetConfig(const xmlNode *node);
 };
 
 //-----------------------------------------------------------------------------
