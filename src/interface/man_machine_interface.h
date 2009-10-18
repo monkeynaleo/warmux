@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
+#include <vector>
 #include "include/base.h"
 //-----------------------------------------------------------------------------
 
@@ -98,7 +99,7 @@ protected:
   } Key_Event_t;
 
   virtual void SetDefaultConfig() { };
-  std::map<int, Key_t> layout;
+  std::map<int, std::vector<Key_t> > layout;
   std::list<uint8> registred_event;
   bool PressedKeys[256]; // stupid default value
   bool MoveCamera(const Key_t &key) const;
@@ -108,7 +109,7 @@ protected:
   void HandleKeyPressed(const Key_t &action_key);
   void HandleKeyReleased(const Key_t &action_key);
 
-  void SetKeyAction(int key, Key_t at) { layout[key] = at; };
+  void SetKeyAction(int key, Key_t at) { layout[key].push_back(at); };
 
   ManMachineInterface() { SetDefaultConfig(); };
   virtual ~ManMachineInterface() { };

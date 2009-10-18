@@ -61,10 +61,16 @@ bool ManMachineInterface::IsRegistredEvent(uint8 event_type)
 // Get the key associated to an action.
 int ManMachineInterface::GetKeyAssociatedToAction(Key_t at) const
 {
-  std::map<int, Key_t>::const_iterator it;
-  for (it= layout.begin(); it != layout.end(); it++) {
-    if (it->second == at) {
-      return it->first;
+  std::map<int, std::vector<Key_t> >::const_iterator it;
+  std::vector<Key_t>::const_iterator itv;
+  for (it = layout.begin(); it != layout.end(); it++) {
+    std::vector<Key_t> key_list = it->second;
+    for (itv = key_list.begin(); itv != key_list.end(); itv++)
+    {
+      if ( *itv == at)
+      {
+        return it->first;
+      }
     }
   }
   return 0;
