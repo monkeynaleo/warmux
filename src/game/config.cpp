@@ -517,6 +517,16 @@ void Config::LoadXml(const xmlNode *xml)
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
+
+  //=== controls ===
+  if ((elem = XmlReader::GetMarker(xml, "controls")) != NULL)
+  {
+    const xmlNode *node = XmlReader::GetMarker(elem, "keyboard");
+    if (node)
+    {
+      Keyboard::GetInstance()->SetConfig(node);
+    }
+  }
 }
 
 bool Config::Save(bool save_current_teams)
