@@ -661,6 +661,11 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
+
+  //=== controls ===
+   xmlNode *controls_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"controls"));
+   Keyboard::GetInstance()->SaveConfig(controls_node);
+
   return doc.Save();
 }
 

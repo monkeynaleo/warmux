@@ -43,6 +43,7 @@ protected:
 public:
   void HandleKeyEvent(const SDL_Event& event);
   void SetConfig(const xmlNode *node);
+  void SaveConfig( xmlNode *node) const;
 };
 
 //-----------------------------------------------------------------------------

@@ -112,11 +112,11 @@ protected:
   void SetKeyAction(int key, Key_t at) { layout[key].push_back(at); };
   void ClearKeyAction();
 
-  int GetKeyFromKeyName(const std::string &name);
-  std::string GetKeyNameFromKey(int key);
+  int GetKeyFromKeyName(const std::string &name) const;
+  std::string GetKeyNameFromKey(int key) const;
 
-  Key_t GetActionFromActionName(const std::string &name);
-  std::string GetActionNameFromAction(Key_t);
+  Key_t GetActionFromActionName(const std::string &name) const;
+  std::string GetActionNameFromAction(Key_t) const;
 
   ManMachineInterface() { SetDefaultConfig(); };
   virtual ~ManMachineInterface() { };
