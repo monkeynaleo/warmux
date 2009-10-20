@@ -102,7 +102,7 @@ public:
 	virtual void	buildJacobian() = 0;
 
 	///internal method used by the constraint solver, don't use them directly
-	virtual	void	setupSolverConstraint(btConstraintArray& ca, int solverBodyA,int solverBodyB, btScalar timeStep)
+	virtual	void	setupSolverConstraint(btConstraintArray& /*ca*/, int /*solverBodyA*/,int /*solverBodyB*/, btScalar /*timeStep*/)
 	{
 	}
 	

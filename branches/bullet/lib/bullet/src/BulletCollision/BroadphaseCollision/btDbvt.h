@@ -939,7 +939,7 @@ inline void		btDbvt::collideTV(	const btDbvtNode* root,
 DBVT_PREFIX
 inline void		btDbvt::rayTestInternal(	const btDbvtNode* root,
 								const btVector3& rayFrom,
-								const btVector3& rayTo,
+								const btVector3& /*rayTo*/,
 								const btVector3& rayDirectionInverse,
 								unsigned int signs[3],
 								btScalar lambda_max,
