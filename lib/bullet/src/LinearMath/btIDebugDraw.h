@@ -50,16 +50,16 @@ class	btIDebugDraw
 
 	virtual ~btIDebugDraw() {};
 
-	virtual void    drawLine(const btVector3& from,const btVector3& to, const btVector3& fromColor, const btVector3& toColor)
+	virtual void    drawLine(const btVector3& from,const btVector3& to, const btVector3& fromColor, const btVector3& /*toColor*/)
 	{
 		drawLine (from, to, fromColor);
 	}
 
-	virtual void	drawBox (const btVector3& boxMin, const btVector3& boxMax, const btVector3& color, btScalar alpha)
+	virtual void	drawBox (const btVector3& /*boxMin*/, const btVector3& /*boxMax*/, const btVector3& /*color*/, btScalar /*alpha*/)
 	{
 	}
 
-	virtual void	drawSphere (const btVector3& p, btScalar radius, const btVector3& color)
+	virtual void	drawSphere (const btVector3& /*p*/, btScalar /*radius*/, const btVector3& /*color*/)
 	{
 	}
 
