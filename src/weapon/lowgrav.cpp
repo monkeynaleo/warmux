@@ -67,13 +67,12 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-void LowGrav::StartShooting()
+void LowGrav::StopShooting()
 {
   if (IsInUse()) {
-    UseAmmoUnit();
-    use.Stop();
+    Deselect();
   } else {
-    Weapon::StartShooting();
+    Weapon::StopShooting();
   }
 }
 

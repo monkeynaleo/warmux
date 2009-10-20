@@ -29,7 +29,7 @@ class LowGrav : public Weapon
   public:
     LowGrav();
     void Draw() { };
-    void StartShooting();
+    void StopShooting();
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   protected:
