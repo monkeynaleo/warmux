@@ -70,7 +70,7 @@ bool LowGrav::p_Shoot()
 void LowGrav::StartShooting()
 {
   if (IsInUse()) {
-    ActionStopUse();
+    UseAmmoUnit();
     use.Stop();
   } else {
     Weapon::StartShooting();

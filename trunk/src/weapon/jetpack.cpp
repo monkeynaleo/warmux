@@ -128,12 +128,6 @@ void JetPack::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-void JetPack::ActionStopUse()
-{
-  p_Deselect();
-  ActiveTeam().AccessNbUnits() = 0;
-}
-
 void JetPack::StartFlying()
 {
   if (m_flying)
@@ -202,10 +196,12 @@ void JetPack::HandleKeyReleased_Up(bool slowly)
 
 void JetPack::StartShooting()
 {
-  if (IsInUse())
-    ActionStopUse();
-  else
+  if (IsInUse()) {
+    p_Deselect();
+    ActiveTeam().AccessNbUnits() = 0;
+  } else {
     Weapon::StartShooting();
+  }
 }
 
 bool JetPack::p_Shoot()

@@ -746,11 +746,6 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   return true;
 }
 
-void Weapon::ActionStopUse()
-{
-  ASSERT(false);
-}
-
 // Handle keyboard events
 
 // #################### SHOOT

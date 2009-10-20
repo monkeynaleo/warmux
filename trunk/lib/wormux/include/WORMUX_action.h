@@ -91,9 +91,6 @@ public:
     ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE,
 
     // ########################################################
-    // Using Weapon
-    ACTION_WEAPON_STOP_USE,
-
     // Quite standard weapon options
     ACTION_WEAPON_START_SHOOTING,
     ACTION_WEAPON_STOP_SHOOTING,

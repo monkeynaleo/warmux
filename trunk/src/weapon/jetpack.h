@@ -39,7 +39,6 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    virtual void ActionStopUse();
 
     void StartMovingUp();
     void StopMovingUp();

@@ -612,11 +612,6 @@ static void Action_Character_StopDecreasingFireAngle(Action *a)
   ActiveCharacter().StopDecreasingFireAngle(slowly);
 }
 
-static void Action_Weapon_StopUse(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().ActionStopUse();
-}
-
 static void Action_Weapon_StartShooting(Action */*a*/)
 {
   ActiveTeam().AccessWeapon().StartShooting();
@@ -942,9 +937,6 @@ void Action_Handler_Init()
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE, "CHARACTER_stop_decreasing_fire_angle", &Action_Character_StopDecreasingFireAngle);
 
   // ########################################################
-  // Using Weapon
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
-
   // Quite standard weapon options
 
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_SHOOTING, "WEAPON_start_shooting", &Action_Weapon_StartShooting);

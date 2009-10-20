@@ -133,14 +133,6 @@ bool Airhammer::p_Shoot()
 }
 
 //-----------------------------------------------------------------------------
-
-void Airhammer::ActionStopUse()
-{
-  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
-  p_Deselect();
-}
-
 void Airhammer::p_Deselect()
 {
   drill_sound.Stop();

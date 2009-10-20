@@ -294,9 +294,6 @@ public:
   // Get informed that the turn is over.
   virtual void SignalTurnEnd() { StopLoading(); };
 
-  // Stop using this weapon (only used with lowgrav and jetpack and airhammer)
-  virtual void ActionStopUse();
-
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
   bool LoadXml(const xmlNode*  weapon);
