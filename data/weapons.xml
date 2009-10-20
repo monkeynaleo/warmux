@@ -22,6 +22,13 @@
     <animation speed="100"/>
   </sprite>
 
+  <sprite name="explosion_particle">
+    <image file="object/kaboomk.png">
+      <grid pos="0,0" size="100,100" array="4,1"/>
+    </image>
+    <animation speed="100"/>
+  </sprite>
+
   <sprite name="ill_bubble">
     <image file="object/ill_bubble.png" />
   </sprite>

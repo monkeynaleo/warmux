@@ -251,6 +251,8 @@ wormux_SOURCES = \
         particles/bullet.h \
         particles/dark_smoke.cpp \
         particles/dark_smoke.h \
+        particles/explosion_particle.cpp \
+        particles/explosion_particle.h \
         particles/explosion_smoke.cpp \
         particles/explosion_smoke.h \
         particles/fading_text.cpp \
