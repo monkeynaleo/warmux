@@ -190,6 +190,12 @@ void ApplyExplosion (const Point2i &pos,
   if (fire_particle)
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
 
+  // Add explosion sprite
+  if ( config.explosion_range > 25 && config.damage > 0 )
+  {
+    ParticleEngine::AddNow(pos,1,particle_EXPLOSION,true);
+  }
+
   // Shake the camera (FIXME: use actual vectors?)
   if ( config.explosion_range > 25 && config.damage > 0 )
   {

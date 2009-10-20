@@ -45,6 +45,7 @@
 #include "particles/smoke.h"
 #include "particles/star.h"
 #include "particles/water_drop.h"
+#include "particles/explosion_particle.h"
 
 Particle::Particle(const std::string &name) :
   PhysicalObj(name),
@@ -167,6 +168,7 @@ void ParticleEngine::Load()
   particle_sprite[RADIOACTIVE_spr] = GetResourceManager().LoadSprite(res,"radioactive_drop");
   particle_sprite[DIRTYWATER_spr] = GetResourceManager().LoadSprite(res,"dirtywater_drop");
   particle_sprite[CHOCOLATEWATER_spr] = GetResourceManager().LoadSprite(res,"chocolate_drop");
+  particle_sprite[EXPLOSION_spr] = GetResourceManager().LoadSprite(res,"explosion_particle");
   GetResourceManager().UnLoadXMLProfile(res);
 
   sprites_loaded = true;
@@ -236,6 +238,7 @@ void ParticleEngine::AddNow(const Point2i &position,
       break;
     case particle_CHOCOLATEWATER: particle = new ChocolateWaterParticle();
       break;
+    case particle_EXPLOSION: particle = new ExplosionParticle();
     case particle_BODY_MEMBER:
     case particle_TELEPORT_MEMBER:
       break;
