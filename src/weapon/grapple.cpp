@@ -792,7 +792,7 @@ void Grapple::StartShooting()
 void Grapple::StopShooting()
 {
   if (IsInUse())
-    ActionStopUse();
+    DetachRope();
   else
     Weapon::StopShooting();
 }

@@ -95,8 +95,6 @@ class Grapple : public Weapon
     void Draw();
     virtual void NotifyMove(bool collision);
 
-    virtual void ActionStopUse() { DetachRope(); };
-
     GrappleConfig& cfg();
 
     // Attaching and dettaching nodes rope
