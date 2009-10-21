@@ -36,8 +36,7 @@ static const uint TRANSPARENT = 0x00FFFFFF;
 
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
-  for (int j=0; j<CELL_SIZE.y>>shift; j++)
-  {
+  for (int j=0; j<CELL_SIZE.y>>shift; j++) {
     for (int i=0; i<(CELL_SIZE.x>>shift)>>2; i++)
       memcpy(odata+(i<<2), &TRANSPARENT, 4);
     odata += opitch;
@@ -171,19 +170,23 @@ void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
 
 void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
-  const Uint8*   idata  = m_surface.GetPixels();
-  uint           ipitch = m_surface.GetPitch();
-
-  for (int j=0; j<m_size.y>>shift; j++)
-  {
-    for (int i=0; i<m_size.x>>shift; i++)
-    {
-      uint p0 = 0, p1 = 0, p2 = 0, p3 = 0;
+  const Uint8 * idata  = m_surface.GetPixels();
+  uint          ipitch = m_surface.GetPitch();
+  uint p0;
+  uint p1;
+  uint p2;
+  uint p3;
+  
+  for (int j=0; j<m_size.y>>shift; j++) {
+    for (int i=0; i<m_size.x>>shift; i++) {
+      p0 = 0;
+      p1 = 0; 
+      p2 = 0; 
+      p3 = 0;
       const Uint8* ptr = idata + (i<<(2+shift));
-      for (uint u=0; u<(1U<<shift); u++)
-      {
-        for (uint v=0; v<(1U<<shift); v++)
-        {
+
+      for (uint u=0; u<(1U<<shift); u++) {
+        for (uint v=0; v<(1U<<shift); v++) {
           p0 += ptr[4*v+0];
           p1 += ptr[4*v+1];
           p2 += ptr[4*v+2];
@@ -194,12 +197,9 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
       p3 = (p3 + (1<<(2*shift-1)))>>(2*shift);
-      if (p3 < 160)
-      {
+      if (p3 < 160) {
         memcpy(odata+4*i, &TRANSPARENT, 4);
-      }
-      else
-      {
+      } else {
         odata[4*i+0] = (p0 + (1<<(2*shift-1)))>>(2*shift);
         odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
         odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
@@ -207,12 +207,9 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
       }
 #else
       p0 = (p0 + (1<<(2*shift-1)))>>(2*shift);
-      if (p0 < 160)
-      {
+      if (p0 < 160) {
         memcpy(odata+4*i, &TRANSPARENT, 4);
-      }
-      else
-      {
+      } else {
         odata[4*i+0] = 255;
         odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
         odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
@@ -309,17 +306,13 @@ void TileItem_AlphaSoftware::CheckEmpty()
   alpha = last_filled_pixel[0];
 #endif
 
-  if(alpha == SDL_ALPHA_TRANSPARENT)
-  {
+  if (alpha == SDL_ALPHA_TRANSPARENT) {
     last_filled_pixel += 4;
-    if( last_filled_pixel >= m_surface.GetPixels() + (m_surface.GetPitch() * CELL_SIZE.y))
-    {
+    if (last_filled_pixel >= m_surface.GetPixels() + (m_surface.GetPitch() * CELL_SIZE.y)) {
       need_delete = true;
       need_check_empty = false;
     }
-  }
-  else
-  {
+  } else {
     need_check_empty = false;
   }
 }

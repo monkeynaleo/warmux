@@ -333,35 +333,34 @@ void Interface::DrawTeamEnergy() const
 // Draw map preview
 void Interface::DrawMapPreview()
 {
-  Surface&       window  = GetMainWindow();
-  Point2i        offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
-  Rectanglei     rect_preview(offset, GetWorld().ground.GetPreviewSize());
+  Surface &  window  = GetMainWindow();
+  Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
   if (minimap == NULL ||
-      GetWorld().ground.GetLastPreviewRedrawTime()>m_last_minimap_redraw ||
-      GetWorld().water.GetLastPreviewRedrawTime()>m_last_minimap_redraw){
+      GetWorld().ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
+      GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
 
     m_last_minimap_redraw = Time::GetInstance()->Read();
 
     if (minimap) delete minimap;
 
     Surface preview(*GetWorld().ground.GetPreview());
-    minimap = new Surface(Surface(GetWorld().ground.GetPreviewSize(),SDL_SWSURFACE, true));
+    minimap = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+
     Point2i mergePos = GetWorld().ground.GetPreviewRect().GetPosition();
     mergePos = -mergePos;
-    minimap->MergeSurface(preview,mergePos);
-
+    minimap->MergeSurface(preview, mergePos);
 
     // Draw water
     if (GetWorld().water.IsActive()) {
-      const Color *color = GetWorld().water.GetColor();
+      const Color * color = GetWorld().water.GetColor();
       ASSERT(color);
       Color water_color = *color;
       water_color.SetColor(water_color.GetRed(),water_color.GetGreen(),water_color.GetBlue(),200) ;
 
-
       // Scale water height according to preview size
-      uint       h = (GetWorld().water.GetSelfHeight() * rect_preview.GetSizeY() + (GetWorld().GetSize().GetY()/2))
+      uint h = (GetWorld().water.GetSelfHeight() * rect_preview.GetSizeY() + (GetWorld().GetSize().GetY()/2))
                   / GetWorld().GetSize().GetY();
 
       Rectanglei water(0, rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
@@ -378,80 +377,84 @@ void Interface::DrawMapPreview()
 
   window.Blit(*minimap, offset);
 
+  Point2i coord;
+  
   FOR_EACH_TEAM(team) {
-    const Surface& icon = (*team)->GetMiniFlag();
-    for (Team::iterator character = (*(team))->begin(),
-           end_character = (*(team))->end();
+    const Surface & icon = (*team)->GetMiniFlag();
+
+    for (Team::iterator character = (*(team))->begin(), end_character = (*(team))->end();
          character != end_character;
          ++character) {
-      if (!character->IsDead()) {
-        Point2i     coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
 
-        window.Blit(icon, coord - icon.GetSize()/2);
-        if (character->IsActiveCharacter()) {
-          uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
-          radius = (radius/2) + 1;
-          window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);
-          GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
-        }
-	else
-          GetWorld().ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
+      if (!character->IsDead()) {
+        continue;
       }
+
+      coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
+      window.Blit(icon, coord - icon.GetSize()/2);
+
+      if (character->IsActiveCharacter()) {
+        uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
+        radius = (radius/2) + 1;
+        window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);
+        GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
+      } else {
+        GetWorld().ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
+      }
+  
     }
   }
-  Point2i cameraTopLeftCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()) + offset;
-Point2i cameraBottomRightCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()+Camera::GetInstance()->GetSize()) + offset;
 
+  Point2i cameraTopLeftCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()) + offset;
+  Point2i cameraBottomRightCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()+Camera::GetInstance()->GetSize()) + offset;
 
   bool line_on_top = true;
   bool line_on_bottom = true;
   bool line_on_right = true;
   bool line_on_left = true;
 
-
-  if (cameraTopLeftCorner.y < offset.y)
-  {
+  if (cameraTopLeftCorner.y < offset.y) {
     cameraTopLeftCorner.y = offset.y;
     line_on_top = false;
   }
   
-  if (cameraTopLeftCorner.x < offset.x)
-  {
+  if (cameraTopLeftCorner.x < offset.x) {
     cameraTopLeftCorner.x = offset.x;
     line_on_left = false;
   }
   
-  if (cameraBottomRightCorner.y >  offset.y + GetWorld().ground.GetPreviewSize().y)
-  {
+  if (cameraBottomRightCorner.y >  offset.y + GetWorld().ground.GetPreviewSize().y) {
     cameraBottomRightCorner.y = offset.y + GetWorld().ground.GetPreviewSize().y;
     line_on_bottom = false;
   }
   
-  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x )
-  {
+  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x ) {
     cameraBottomRightCorner.x = offset.x + GetWorld().ground.GetPreviewSize().x;
     line_on_right = false;
   }
   
-  //Top
-  if (line_on_top)
-  {
-    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraTopLeftCorner.y, m_camera_preview_color);
-  } 
-  //Right
-  if (line_on_right)
-  {  
-    GetMainWindow().LineColor(cameraBottomRightCorner.x,cameraBottomRightCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+  if (line_on_top) {
+    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
+                              cameraTopLeftCorner.y, cameraTopLeftCorner.y, 
+                              m_camera_preview_color);
   }
-  //Bottom
-  if (line_on_bottom)
-  {  
-    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraBottomRightCorner.x,cameraBottomRightCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+
+  if (line_on_right) {  
+    GetMainWindow().LineColor(cameraBottomRightCorner.x, cameraBottomRightCorner.x,
+                              cameraTopLeftCorner.y, cameraBottomRightCorner.y, 
+                              m_camera_preview_color);
   }
-  //Left
-  if (line_on_left)
-  {  
-    GetMainWindow().LineColor(cameraTopLeftCorner.x,cameraTopLeftCorner.x,cameraTopLeftCorner.y,cameraBottomRightCorner.y, m_camera_preview_color);
+
+  if (line_on_bottom) {  
+    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
+                              cameraBottomRightCorner.y,cameraBottomRightCorner.y, 
+                              m_camera_preview_color);
+  }
+
+  if (line_on_left) {
+    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraTopLeftCorner.x,
+                              cameraTopLeftCorner.y, cameraBottomRightCorner.y, 
+                              m_camera_preview_color);
   }
 
 
