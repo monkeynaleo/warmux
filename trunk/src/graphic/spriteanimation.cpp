@@ -75,7 +75,8 @@ void SpriteAnimation::Finish() {
   finished = true;
 }
 
-void SpriteAnimation::Update(){
+void SpriteAnimation::Update()
+{
   if (finished) return;
 
   Time * global_time = Time::GetInstance();
@@ -89,40 +90,33 @@ void SpriteAnimation::Update(){
   int delta_to_next_f = (int)((float)((global_time->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
   last_update += (int)((float)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
 
-
   //Animation is finished, when last frame have been fully played
   bool finish;
-  if (frame_delta < 0)
-    finish = ((int)current_frame + frame_delta * delta_to_next_f) <= -1;
-  else
-    finish = frame_count <= (current_frame + frame_delta * delta_to_next_f);
 
-  if (finish && !loop && (!pingpong || frame_delta < 0))
+  if (frame_delta < 0) {
+    finish = ((int)current_frame + frame_delta * delta_to_next_f) <= -1;
+  } else {
+    finish = frame_count <= (current_frame + frame_delta * delta_to_next_f);
+  }
+
+  if (finish && !loop && (!pingpong || frame_delta < 0)) {
      Finish();
-  else
-  {
+  } else {
     unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frame_count;
 
-    if(pingpong)
-    {
-
-      if( frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f ) >= frame_count)
-      {
+    if (pingpong) {
+      if (frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f ) >= frame_count) {
         next_frame = frame_count - next_frame -2;
         frame_delta = - frame_delta;
-      }
-      else
-      if( frame_delta<0 && ( (int)current_frame + frame_delta * delta_to_next_f ) <= -1)
-      {
+      } else if( frame_delta<0 && ( (int)current_frame + frame_delta * delta_to_next_f ) <= -1) {
         next_frame = (-((int)current_frame + frame_delta * delta_to_next_f )) % frame_count;
         frame_delta = - frame_delta;
         CalculateWait();
       }
     }
 
-    if(next_frame != current_frame)
-    {
-      if(next_frame >= frame_count){
+    if (next_frame != current_frame) {
+      if (next_frame >= frame_count) {
         next_frame = 0;
         CalculateWait();
       }

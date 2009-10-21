@@ -281,7 +281,6 @@ void Body::FreeSkeletonVector()
     ++itSkel;
   }
   skel_lst.clear();
-  //std::cout << "Delete junctions skeleton complete." << std::endl;
 }
 
 void Body::ResetMovement() const
@@ -294,6 +293,7 @@ void Body::ResetMovement() const
 void Body::ApplyMovement(Movement * mvt, 
                          uint       frame)
 {
+
 #ifdef DEBUG
   if (mvt->GetType() != "breathe")
     MSG_DEBUG("body_anim", " %s uses %s-%s:%u",
@@ -312,7 +312,6 @@ void Body::ApplyMovement(Movement * mvt,
   // Move each member following the movement description
   // We do it using the order of the skeleton, as the movement of each
   // member affects the child members as well
-
   for (; member != skel_lst.end(); ++member) {
     ASSERT(frame < mvt->GetFrames().size());
 
@@ -487,12 +486,13 @@ void Body::Build()
       }
     }
   }
-  need_rebuild |= (last_frame != current_frame);
-  need_rebuild |= (last_loop != current_loop);
-  need_rebuild |= current_mvt->IsAlwaysMoving();
 
-  if (!need_rebuild)
+  if ((last_frame == current_frame) && 
+      (last_loop == current_loop) && 
+      !need_rebuild) {
+    need_rebuild = false;
     return;
+  }
 
   ResetMovement();
   ApplySqueleton();
@@ -519,6 +519,7 @@ void Body::Build()
       }
     }
   }
+
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
@@ -529,8 +530,11 @@ void Body::Build()
 
 void Body::RefreshSprites()
 {
-  for (int layer=0; layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    Member* member = current_clothe->GetLayers()[layer];
+  Member* member;
+  int layersCount = (int)current_clothe->GetLayers().size();
+
+  for (int layer=0; layer < layersCount; layer++) {
+    member = current_clothe->GetLayers()[layer];
 
     if ("weapon" != member->GetName()) {
       member->RefreshSprite(direction);
@@ -593,7 +597,7 @@ void Body::Draw(const Point2i & _pos)
   ASSERT(!need_rebuild);
 }
 
-void Body::AddChildMembers(Member* parent)
+void Body::AddChildMembers(Member * parent)
 {
   std::map<std::string, v_attached>::const_iterator child = parent->GetAttachedMembers().begin();
 
@@ -612,7 +616,9 @@ void Body::AddChildMembers(Member* parent)
         skel_lst.push_back(body);
 
         // continue recursively
-        AddChildMembers(current_clothe->GetLayers()[lay]);
+        if (0 != current_clothe->GetLayers()[lay]->GetAttachedMembers().size()) {
+          AddChildMembers(current_clothe->GetLayers()[lay]);
+        }
       }
     }
   }
@@ -783,17 +789,18 @@ void Body::StartWalk()
   // if the key was hit while the character was jumping or using an other
   // animation than the walk animation
   walk_events++;
-  if(walk_events == 1)
+  if (1 == walk_events) {
     last_refresh = Time::GetInstance()->Read();
+  }
 }
 
 void Body::StopWalk()
 {
-  if(walk_events > 0) {
+  if (walk_events > 0) {
     walk_events--;
   }
 
-  if(current_mvt->GetType() == "walk") {
+  if (current_mvt->GetType() == "walk") {
     SetMovement("breathe");
     SetFrame(0);
   }

@@ -316,9 +316,11 @@ bool Polygon::IsClockWise() const
 // Not 100% accurate but sufficient for now
 bool Polygon::IsOverlapping(const Polygon & poly) const
 {
-  for(int i = 0; i < GetNbOfPoint(); i++) {
-    if(poly.IsInsidePolygon(transformed_shape[i]))
+  int nbPoint = GetNbOfPoint();
+  for (int i = 0; i < nbPoint; i++) {
+    if (poly.IsInsidePolygon(transformed_shape[i])) {
       return true;
+    }
   }
   return false;
 }

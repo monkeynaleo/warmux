@@ -287,12 +287,15 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
     dst += (CELL_SIZE.y>>m_shift)*pitch;
   }
 
+  TileItem_AlphaSoftware * t;
+
   // Replace transparent tiles by TileItem_Empty tiles
   for (int i=0; i < nbCells.x * nbCells.y; i++) {
-    TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+    t = static_cast<TileItem_AlphaSoftware*>(item[i]);
 
-    while (t->need_check_empty)
+    while (t->need_check_empty) {
       t->CheckEmpty();
+    }
 
     if (t->NeedDelete()) {
 #ifdef DBG_TILE
@@ -312,10 +315,9 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   }
 }
 
-uchar Tile::GetAlpha(const Point2i &pos) const
+uchar Tile::GetAlpha(const Point2i & pos) const
 {
-  int cell = pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x;
-  return item[cell]->GetAlpha(pos % CELL_SIZE);
+  return item[pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x]->GetAlpha(pos % CELL_SIZE);
 }
 
 void Tile::DrawTile()
@@ -328,7 +330,7 @@ void Tile::DrawTile()
       item[i.y*nbCells.x + i.x]->Draw( i );
 }
 
-void Tile::DrawTile_Clipped(Rectanglei worldClip) const
+void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
 {
   // Revision 514:
   // worldClip.SetSize( worldClip.GetSize() + 1); // mmm, does anything gives areas
@@ -400,15 +402,21 @@ Surface Tile::GetPart(const Rectanglei& rec)
 
 void Tile::CheckEmptyTiles()
 {
-  for (int i = 0; i < nbCells.x * nbCells.y; i++) {
+  TileItem_AlphaSoftware * t;
+  int cellsCount = nbCells.x * nbCells.y;
 
-    if(item[i]->IsTotallyEmpty())
+  for (int i = 0; i < cellsCount; i++) {
+    if (item[i]->IsTotallyEmpty()) {
       continue;
+    }
 
-    TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
-    if(t->need_check_empty)
+    t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+
+    if (t->need_check_empty) {
       t->CheckEmpty();
-    if(t->need_delete) {
+    }
+
+    if (t->need_delete) {
       // no need to display this tile as it can be deleted!
 #ifdef DBG_TILE
       printf("Deleting tile %i\n",i);

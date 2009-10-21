@@ -159,9 +159,22 @@ Member::~Member()
 
 void Member::RotateSprite()
 {
-  spr->SetRotation_rad(angle_rad);
-  spr->Scale(scale.x, scale.y);
-  spr->RefreshSurface();
+
+  if (spr->GetRotation_rad() != angle_rad) {
+    spr->SetRotation_rad(angle_rad);
+    refreshSprite = true;
+  }
+
+  if (spr->GetScaleX() != scale.x &&
+      spr->GetScaleY() != scale.y) {
+    spr->Scale(scale.x, scale.y);
+    refreshSprite = true;
+  }
+
+  if (refreshSprite) {
+    spr->RefreshSurface();
+    refreshSprite = false;
+  }
 }
 
 void Member::RefreshSprite(BodyDirection direction)
@@ -242,19 +255,18 @@ void Member::ApplyMovement(const member_mvt &        mvt,
     frame = spr->GetCurrentFrame();
   }
 
-  //TODO lami : Create childItEnd
+  float radius;
 
   // We first apply to the child (makes calcules simpler in this order):
-  for(std::map<std::string, v_attached>::iterator child = attached_members.begin();
+  for (std::map<std::string, v_attached>::iterator child = attached_members.begin();
       child != attached_members.end();
       ++child) {
 
     // Find this member in the skeleton:
-    for(std::vector<junction *>::iterator member = skel_lst.begin();
+    for (std::vector<junction *>::iterator member = skel_lst.begin();
         member != skel_lst.end();
         ++member) {
 
-      // TODO lami : std::string comparison ?! ... not optimized !!
       if ((*member)->member->type != child->first) {
         continue;
       }
@@ -264,25 +276,23 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
 
-      //Point2f childPoint = child->second[frame];
-      float   radius  = anchor.Distance(child->second[frame]);
-      //float   radius  = anchor.Distance(childPoint);
+      radius = anchor.Distance(child->second[frame]);
 
       if (0.0 != radius) {
         Point2f childPoint = child->second[frame];
         float angle_init;
 
-        if (childPoint.x /*child->second[frame].x*/ > anchor.x) {
-          if (childPoint.y /*child->second[frame].y*/ > anchor.y) {
-            angle_init = acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
+        if (childPoint.x > anchor.x) {
+          if (childPoint.y > anchor.y) {
+            angle_init = acos( (childPoint.x - anchor.x) / radius );
           } else {
-            angle_init = -acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
+            angle_init = -acos( (childPoint.x - anchor.x) / radius );
           }
         } else {
-          if (childPoint.y /*child->second[frame].y*/ > anchor.y) {
-            angle_init = acos( (childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
+          if (childPoint.y > anchor.y) {
+            angle_init = acos( (childPoint.x - anchor.x) / radius );
           } else {
-            angle_init = M_PI + acos( -(childPoint.x /*child->second[frame].x*/ - anchor.x) / radius );
+            angle_init = M_PI + acos( -(childPoint.x - anchor.x) / radius );
           }
         }
 
@@ -292,10 +302,10 @@ void Member::ApplyMovement(const member_mvt &        mvt,
 
       // Apply recursively to children:
       (*member)->member->ApplyMovement(child_mvt, skel_lst);
-    //}
+
     }
   }
-
+  
   // Apply the movement to the current member
   SetAngle(angle_rad + mvt.GetAngle());
   pos   += mvt.pos;
