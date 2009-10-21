@@ -441,7 +441,7 @@ void Character::Draw()
     }
   }
 
-  Point2i pos = GetPhysic()->GetPosition();
+  Point2i pos = GetPosition() - GetCenterOffset();
   body->Draw(pos);
 
   // Draw energy bar
