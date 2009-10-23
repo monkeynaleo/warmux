@@ -150,6 +150,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 
   GetPhysic()->SetEnabled(true);
   m_feet_shape = GetPhysic()->GetShape("feet");
+  m_feet_shape->SetFriction(100.0);
 
   GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_CHARACTER,true);
   GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
@@ -591,7 +592,7 @@ void Character::StopMove(){
 
     m_force_walk_index = NULL;
     body->StopWalk();
-    m_feet_shape->SetFriction(10.0);
+    m_feet_shape->SetFriction(100.0);
     SendActiveCharacterInfo();
     GetPhysic()->SetSpeedXY(Point2d(GetPhysic()->GetSpeed().x/5,GetPhysic()->GetSpeed().y));
 }
