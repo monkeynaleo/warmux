@@ -386,7 +386,7 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
 
-      if (!character->IsDead()) {
+      if (character->IsDead()) {
         continue;
       }
 
