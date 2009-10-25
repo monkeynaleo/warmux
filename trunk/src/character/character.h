@@ -166,6 +166,7 @@ public:
 
   void PrepareShoot();
   bool IsPreparingShoot() const { return prepare_shoot; };
+  bool IsVisible(void) const;
   void DoShoot();
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const { return firing_angle; };
