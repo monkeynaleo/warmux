@@ -527,17 +527,6 @@ void Character::PrepareShoot()
   MSG_DEBUG("weapon.shoot", "<- end");
 }
 
-bool Character::IsVisible(void) const
-{
-  if (GetX() + GetWidth() < Camera::GetInstance()->GetPosition().x ||
-      GetX() > Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x ||
-      GetY() + GetHeight() < Camera::GetInstance()->GetPosition().y ||
-      GetY() > Camera::GetInstance()->GetPosition().y + Camera::GetInstance()->GetSize().y) {
-    return false;
-  }
-  return true;
-}
-
 void Character::DoShoot()
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING) {
@@ -560,10 +549,6 @@ void Character::UpdateLastMovingTime()
 
 void Character::Refresh()
 {
-  if (!IsVisible()) {
-    return;
-  }
-
   if (IsImmobile()) {
     bool left =(move_left_pressed || move_left_slowly_pressed);
     bool right = (move_right_pressed || move_right_slowly_pressed);
