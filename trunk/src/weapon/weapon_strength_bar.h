@@ -30,14 +30,15 @@ class WeaponStrengthBar : public ProgressBar
  public:
   WeaponStrengthBar();
   ~WeaponStrengthBar();
-  virtual void DrawXY(const Point2i &pos) const;
+  virtual void DrawXY(const Point2i &pos);
   virtual void InitPos (uint x, uint y, uint larg, uint haut);
   Color ComputeValueColor(long val) const;
-  bool visible ;
  private:
+  bool visible ;
   DecoratedBox * m_box;
   Sprite *last_fire;
   PolygonItem * m_item_last_fire;
+  void FetchData();
 } ;
 
 #endif // WEAPON_STRENGTH_BAR_H
