@@ -73,7 +73,7 @@ void WeaponStrengthBar::FetchData()
   const Weapon & weapon = ActiveTeam().GetWeapon();
   double max_strength = weapon.GetMaxStrength();
   bool playing = (Game::GetInstance()->ReadState() == Game::PLAYING);
-  visible = playing && (max_strength != 0) && weapon.IsLoading();
+  visible = playing && (max_strength != 0);
   if (!visible)
     return;
 
