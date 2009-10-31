@@ -22,7 +22,6 @@
 
 #include <libxml/tree.h>
 #include "weapon/weapon.h"
-#include "weapon/weapon_strength_bar.h"
 #include "weapon/weapon_cfg.h"
 #include <sstream>
 #include "character/character.h"
@@ -63,8 +62,6 @@ const uint UNIT_BOX_HEIGHT = 20;
 const uint UNIT_BOX_GAP = 6;
 
 const uint ANIM_DISPLAY_TIME = 400;
-
-extern WeaponStrengthBar weapon_strength_bar;
 
 Weapon::Weapon(Weapon_type type,
                const std::string &id,
@@ -179,17 +176,6 @@ void Weapon::Select()
 
   // be sure that angle is correct
   ActiveCharacter().SetFiringAngle(ActiveCharacter().GetAbsFiringAngle());
-
-  if (max_strength == 0) return ;
-
-  // prepare the strength bar
-  weapon_strength_bar.InitVal (0, 0, uint(max_strength*100));
-
-  // init stamp on the stength_bar
-  double val = ActiveCharacter().previous_strength;
-  weapon_strength_bar.ResetTag();
-  if (0 < val && val < max_strength)
-    weapon_strength_bar.AddTag (uint(val*100), primary_red_color);
 }
 
 void Weapon::Deselect()
@@ -494,8 +480,6 @@ void Weapon::UpdateStrength(){
   double val = (max_strength * time*time) / (MAX_TIME_LOADING*MAX_TIME_LOADING);
 
   m_strength = InRange_Double (val, 0.0, max_strength);
-
-  weapon_strength_bar.UpdateValue ((int)(m_strength*100));
 }
 
 void Weapon::InitLoading(){
@@ -527,7 +511,6 @@ void Weapon::Draw(){
   if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
 #endif
     DrawWeaponFire();
-  weapon_strength_bar.visible = IsLoading();
 
   DrawAmmoUnits();
 

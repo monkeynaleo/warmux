@@ -38,8 +38,6 @@
 #include "weapon/weapon.h"
 #include "weapon/weapon_strength_bar.h"
 
-WeaponStrengthBar weapon_strength_bar;
-
 const Point2i BORDER_POSITION(5, 5);
 
 const uint MARGIN = 4;
@@ -549,15 +547,13 @@ void Interface::Draw()
   if (display_minimap)
     DrawMapPreview();
 
-  if ( Game::GetInstance()->ReadState() == Game::PLAYING && weapon_strength_bar.visible)
-  {
-    // Position on the screen
-    Point2i barPos = (app->video->window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
-        - Point2i(0, game_menu.GetHeight() + MARGIN);
 
-    // Drawing on the screen
-     weapon_strength_bar.DrawXY(barPos);
-  }
+  // Position on the screen
+  Point2i barPos = (app->video->window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
+      - Point2i(0, game_menu.GetHeight() + MARGIN);
+
+  // Drawing on the screen
+  weapon_strength_bar.DrawXY(barPos);
 
   weapons_menu.Draw();
 

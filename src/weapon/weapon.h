@@ -236,6 +236,10 @@ public:
   // update strength (so the strength bar can be updated)
   virtual void UpdateStrength();
 
+  double GetStrength() const { return m_strength; };
+
+  double GetMaxStrength() const { return max_strength; };
+
   const Point2i GetGunHolePosition() const;
 
   // Choose a target.

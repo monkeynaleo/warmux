@@ -29,6 +29,7 @@
 #include "gui/energy_bar.h"
 #include "gui/energy_bar.h"
 #include "gui/progress_bar.h"
+#include "weapon/weapon_strength_bar.h"
 
 // Forward declarations
 class Character;
@@ -78,6 +79,7 @@ public:
    bool display_minimap;
    EnergyBar energy_bar;
    ProgressBar wind_bar;
+   WeaponStrengthBar weapon_strength_bar;
 
    Surface game_menu;
    Surface clock_background;
