@@ -109,10 +109,10 @@ void ProgressBar::UpdateValue(long pval)
 
   if (gradientMode) {
     long absVal = abs(val);
-    value_color.SetColor(colorMin.GetRed()   + (coefRed   * absVal),
-                         colorMin.GetGreen() + (coefGreen * absVal),
-                         colorMin.GetBlue()  + (coefBlue  * absVal),
-                         colorMin.GetAlpha() + (coefAlpha * absVal));
+    value_color.SetColor((Uint8) (colorMin.GetRed()   + (coefRed   * absVal)),
+                         (Uint8) (colorMin.GetGreen() + (coefGreen * absVal)),
+                         (Uint8) (colorMin.GetBlue()  + (coefBlue  * absVal)),
+                         (Uint8) (colorMin.GetAlpha() + (coefAlpha * absVal)));
   }
 		       
 }
