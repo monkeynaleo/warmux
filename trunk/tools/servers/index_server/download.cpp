@@ -89,7 +89,7 @@ void DownloadServerList()
       if(chroot)
         {
           if(chown(server_fn.c_str(), (uid_t)uid, (gid_t)gid) == -1)
-            TELL_ERROR;
+            PRINT_FATAL_ERROR;
         }
 
       if(do_fork)
@@ -97,7 +97,7 @@ void DownloadServerList()
           do_fork = false;
           child = fork();
           if( child == -1)
-            TELL_ERROR
+            PRINT_FATAL_ERROR
             else
               if(child == 0)
                 break;

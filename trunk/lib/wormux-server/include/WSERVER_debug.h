@@ -57,7 +57,7 @@
   }
 #endif
 
-#define TELL_ERROR         \
+#define PRINT_FATAL_ERROR  \
   {                        \
     PRINT_ERROR;           \
     exit(1);               \
