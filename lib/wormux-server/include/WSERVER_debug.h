@@ -34,8 +34,6 @@
 
 #define LOG_LEVEL    TRAFFIC
 
-
-#ifdef DEBUG
 #define DPRINT(LEVEL, ARGS...)                                          \
   {                                                                     \
     if((LEVEL) >= LOG_LEVEL )                                           \
@@ -45,17 +43,6 @@
         printf("\n");                                                   \
       }                                                                 \
   }
-#else
-#define DPRINT(LEVEL, ARGS...)                                          \
-  {                                                                     \
-    if((LEVEL) >= LOG_LEVEL )                                           \
-      {                                                                 \
-        printf("%s %s : ", BasicClock::DateStr(), BasicClock::TimeStr()); \
-        printf(ARGS);                                                   \
-        printf("\n");                                                   \
-      }                                                                 \
-  }
-#endif
 
 #define PRINT_FATAL_ERROR  \
   {                        \
