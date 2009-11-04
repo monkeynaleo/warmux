@@ -58,7 +58,7 @@ int main(int /*argc*/, char* /*argv*/[])
   bool local, r;
   r = config.Get("local", local);
   if (!r)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   if (!local)
     DownloadServerList();
@@ -98,7 +98,7 @@ int main(int /*argc*/, char* /*argv*/[])
         {
           // Timeout to check for other games on other servers
           if(timeout.tv_sec != 0 && timeout.tv_usec != 0)
-            TELL_ERROR;
+            PRINT_FATAL_ERROR;
         }
 
       // Find the socket where activity have been detected:
