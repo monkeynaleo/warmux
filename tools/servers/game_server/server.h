@@ -77,6 +77,7 @@ private:
   std::string game_name;
   std::string password;
   uint port;
+  bool is_public;
 
   WSocket server_socket;
   WSocketSet* clients_socket_set;
@@ -94,12 +95,13 @@ private:
   void WaitClients();
   void RejectIncoming();
 
-  bool RegisterToIndexServer(bool is_public);
+  bool ConnectToIndexServer();
+  bool RefreshConnexionToIndexServer();
 
 public:
   bool ServerStart(uint port, uint max_nb_games, uint max_nb_clients,
 		   const std::string& game_name, std::string& password,
-		   bool is_public);
+		   bool _is_public);
   void RunLoop();
 
   NetworkGame& GetGame(uint game_id);
