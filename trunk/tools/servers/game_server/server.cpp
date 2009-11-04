@@ -260,7 +260,7 @@ std::list<DistantComputer*>& GameServer::GetCpus(uint game_id)
   return GetGame(game_id).GetCpus();
 }
 
-bool GameServer::RegisterToIndexServer(bool is_public)
+bool GameServer::ConnectToIndexServer()
 {
   // Register the game to the index server
   if (!is_public) {
@@ -304,14 +304,32 @@ bool GameServer::RegisterToIndexServer(bool is_public)
   return true;
 }
 
+bool GameServer::RefreshConnexionToIndexServer()
+{
+  if (!is_public)
+    return true;
+
+  // Try to reconnect to index server...
+  if (!IndexServer::GetInstance()->IsConnected()) {
+    bool r = ConnectToIndexServer();
+    if (!r)
+      return r;
+  }
+
+  IndexServer::GetInstance()->Refresh(true);
+
+  return true;
+}
+
 bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
 			     const std::string& _game_name, std::string& _password,
-			     bool is_public)
+			     bool _is_public)
 {
   max_nb_games = _max_nb_games;
   game_name = _game_name;
   password = _password;
   port = _port;
+  is_public = _is_public;
 
   // Open the port to listen to
   if (!server_socket.AcceptIncoming(port)) {
@@ -328,7 +346,7 @@ bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients
 
   CreateGame(1);
 
-  if (!RegisterToIndexServer(is_public))
+  if (!ConnectToIndexServer())
     return false;
 
   return true;
@@ -419,7 +437,11 @@ void GameServer::RunLoop()
  loop:
   while (true) {
 
-    IndexServer::GetInstance()->Refresh(true);
+    bool r = RefreshConnexionToIndexServer();
+    if (!r && clients_socket_set->NbSockets() == 0) {
+      fprintf(stderr, "Game server is no more connected to index server");
+      return;
+    }
 
     WaitClients();
 
