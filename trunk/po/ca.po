@@ -62,7 +62,7 @@ msgstr "Equip %s"
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
 
-#: src/ai/ai_shoot_module.cpp:464
+#: src/ai/ai_shoot_module.cpp:465
 #, c-format
 msgid "%s changes target to %s"
 msgstr ""
@@ -72,42 +72,42 @@ msgstr ""
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game.cpp:752
+#: src/game/game.cpp:788
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s de l'equip %s és un suicida!"
 
-#: src/game/game.cpp:785
+#: src/game/game.cpp:821
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s de l'equip %s ha mort."
 
-#: src/game/game.cpp:743
+#: src/game/game.cpp:779
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s de l'equip %s ha caigut dins l'aigua!"
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:773
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s de l'equip %s ha caigut del mapa!"
 
-#: src/game/game.cpp:758
+#: src/game/game.cpp:794
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s de l'equip %s ha picat massa fort a terra!"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:801
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'equip %s s'ha mort per pocatraça!"
 
-#: src/ai/ai_shoot_module.cpp:401
+#: src/ai/ai_shoot_module.cpp:402
 #, c-format
 msgid "%s has decided to injure %s"
 msgstr ""
 
-#: src/weapon/polecat.cpp:115
+#: src/weapon/polecat.cpp:114
 #, c-format
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
@@ -121,17 +121,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "¡El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game.cpp:777
+#: src/game/game.cpp:813
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip: %s"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:126
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "¡%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:97
+#: src/object/bonus_box.cpp:98
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s es un psicòpata!!, ha mort a un membre des seu equip %s"
@@ -149,21 +149,21 @@ msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "L'equip %s aconsegueix %u bazooka!"
 msgstr[1] "L'equip %s aconsegueix %u bazookas!"
 
-#: src/weapon/gnu.cpp:258
+#: src/weapon/gnu.cpp:237
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "L'equip %s aconsegueix %u Gnu!"
 msgstr[1] "L'equip %s aconsegueix %u Gnus!"
 
-#: src/weapon/air_attack.cpp:267
+#: src/weapon/air_attack.cpp:263
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
 msgstr[0] "L'equip %s aconsegueix %u atac aeri!"
 msgstr[1] "L'equip %s aconsegueix %u atacs aeris!"
 
-#: src/weapon/airhammer.cpp:171
+#: src/weapon/airhammer.cpp:178
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -174,7 +174,7 @@ msgid_plural ""
 msgstr[0] "L'equip %s aconsegueix %u martell volador!"
 msgstr[1] "L'equip %s aconsegueix %u martells voladors!"
 
-#: src/weapon/anvil.cpp:193
+#: src/weapon/anvil.cpp:196
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -188,7 +188,7 @@ msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "L'equip %s aconsegueix %u bazooka automatic!"
 msgstr[1] "L'equip %s aconsegueix %u bazookas automatics!"
 
-#: src/weapon/baseball.cpp:115
+#: src/weapon/baseball.cpp:118
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
@@ -202,7 +202,7 @@ msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "L'equip %s aconsegueix %u bazooka"
 msgstr[1] "L'equip %s aconsegueix %u bazookas"
 
-#: src/weapon/blowtorch.cpp:137
+#: src/weapon/blowtorch.cpp:133
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -226,7 +226,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "L'equip %s aconsegueix %u bomba defragmentació!"
 msgstr[1] "L'equip %s aconsegueix %u bombes de fragmentació!"
 
-#: src/weapon/construct.cpp:81
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -248,7 +248,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "L'equip %s aconsegueix %u dinamita!"
 msgstr[1] "L'equip %s aconsegueix %u dinamitaes!"
 
-#: src/weapon/flamethrower.cpp:177
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -262,7 +262,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "L'equip %s aconsegueix %u  football bomb!"
 msgstr[1] "L'equip %s aconsegueix %u football bombs!"
 
-#: src/weapon/grapple.cpp:807
+#: src/weapon/grapple.cpp:819
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -283,14 +283,14 @@ msgid_plural "%s team has won %u guns!"
 msgstr[0] "L'equip %s aconsegueix %u gnu!"
 msgstr[1] "L'equip %s aconsegueix %u gnus!"
 
-#: src/weapon/jetpack.cpp:278
+#: src/weapon/jetpack.cpp:217
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "L'equip %s aconsegueix %u jetpack!"
 msgstr[1] "L'equip %s aconsegueix %u jetpacks!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:82
 #, fuzzy, c-format
 #| msgid "%s team has won %u lowgrav! I'm Neil Armstrong!"
 #| msgid_plural "%s team has won %u lowgravs! I'm Neil Armstrong!"
@@ -302,21 +302,21 @@ msgid_plural ""
 msgstr[0] "L'equip %s aconsegueix %u baixa gravetat!"
 msgstr[1] "L'equip %s aconsegueix %u baixes gravetats!"
 
-#: src/weapon/mine.cpp:251
+#: src/weapon/mine.cpp:257
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "L'equip %s aconsegueix %u mina!"
 msgstr[1] "L'equip %s aconsegueix %u minas!"
 
-#: src/weapon/parachute.cpp:164
+#: src/weapon/parachute.cpp:178
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "L'equip %s aconsegueix %u globus!"
 msgstr[1] "L'equip %s aconsegueix %u globus!"
 
-#: src/weapon/polecat.cpp:282
+#: src/weapon/polecat.cpp:262
 #, fuzzy, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -359,14 +359,14 @@ msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "L'equip %s aconsegueix %u metralleta!"
 msgstr[1] "L'equip %s aconsegueix %u metralletes!"
 
-#: src/weapon/suicide.cpp:76
+#: src/weapon/suicide.cpp:81
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "L'equip %s aconsegueix %u suicidi!"
 msgstr[1] "L'equip %s aconsegueix %u suicidis!"
 
-#: src/weapon/syringe.cpp:114
+#: src/weapon/syringe.cpp:117
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -387,29 +387,29 @@ msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "L'equip %s aconsegueix %u perd torn!"
 msgstr[1] "L'equip %s aconsegueix %u perd torns!"
 
-#: src/weapon/supertux.cpp:444
+#: src/weapon/supertux.cpp:393
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
 msgstr[0] "L'equip %s aconsegueix %u llançador de tux!"
 msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 
-#: src/game/game_blitz.cpp:69
+#: src/game/game_blitz.cpp:68
 #, c-format
 msgid "%s team was fragged down."
 msgstr "L'equip %s ha guanyat."
 
-#: src/game/game.cpp:773
+#: src/game/game.cpp:809
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s s'ha emportat un membre de %s a la tomba amb ell!"
 
-#: src/ai/ai_shoot_module.cpp:378
+#: src/ai/ai_shoot_module.cpp:379
 #, c-format
 msgid "%s will shoot %s"
 msgstr ""
 
-#: src/interface/interface.cpp:189
+#: src/interface/interface.cpp:196
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -423,7 +423,7 @@ msgid "(unknown time)"
 msgstr "(temps desconegut)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:220
+#: src/interface/interface.cpp:227
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -436,7 +436,7 @@ msgstr ""
 "La versió %s està disponible, però tens la versió %s. Potser vols veure si "
 "hi ha una actualització disponible per al teu sistema operatiu. "
 
-#: src/weapon/air_attack.cpp:219
+#: src/weapon/air_attack.cpp:215
 msgid "Air Attack"
 msgstr "Atac aeri"
 
@@ -452,7 +452,7 @@ msgstr "Tots els equips "
 msgid "Always"
 msgstr "Sempre "
 
-#: src/game/game_blitz.cpp:49 src/game/game_classic.cpp:55
+#: src/game/game_blitz.cpp:48 src/game/game_classic.cpp:54
 msgid "And the winner is..."
 msgstr "El guanyador és..."
 
@@ -498,11 +498,11 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Abans de començar"
 
-#: src/game/game_mode.cpp:344
+#: src/game/game_mode.cpp:349
 msgid "Blitz"
 msgstr "Blitz"
 
-#: src/weapon/blowtorch.cpp:62
+#: src/weapon/blowtorch.cpp:61
 msgid "Blowtorch"
 msgstr "Bufador"
 
@@ -510,24 +510,24 @@ msgstr "Bufador"
 msgid "Bounce Ball"
 msgstr "Bounce Ball"
 
-#: src/weapon/supertux.cpp:182
+#: src/weapon/supertux.cpp:176
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "Fins ara tux... "
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:493
-#: src/team/teams_list.cpp:526 src/team/teams_list.cpp:535
-#: src/team/teams_list.cpp:541 src/team/teams_list.cpp:605
+#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:489
+#: src/team/teams_list.cpp:522 src/team/teams_list.cpp:531
+#: src/team/teams_list.cpp:537 src/team/teams_list.cpp:601
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equip %s no disponible!"
 
-#: src/team/teams_list.cpp:154
+#: src/team/teams_list.cpp:150
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:142
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -537,27 +537,27 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips personalitzats (%s)!"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Center the camera on the character"
 msgstr "Centrar la càmera al personatge"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change the active character"
 msgstr "Canvia el personatge actiu"
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:84
 #, fuzzy
 msgid "Change the aim angle"
 msgstr "Canviar l'angle de tir"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:82
 #, fuzzy
 msgid "Change the weapon category"
 msgstr "Canviar la categoria d'arma "
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Change the weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
@@ -579,7 +579,7 @@ msgstr "Comprovar actualitzacions a Internet? "
 msgid "Choose randomly between the different maps"
 msgstr "Tria a l'atzar entre els diferents mapes"
 
-#: src/game/game_mode.cpp:342
+#: src/game/game_mode.cpp:347
 msgid "Classic"
 msgstr "Clàssica "
 
@@ -605,15 +605,15 @@ msgstr "Bomba de fragmentació"
 msgid "Cluzooka"
 msgstr "Bazooka"
 
-#: src/weapon/suicide.cpp:41
+#: src/weapon/suicide.cpp:44
 msgid "Commit Suicide"
 msgstr "Suïcidi"
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:80
 msgid "Configuration menu"
 msgstr "Menú de configuració"
 
-#: src/menu/network_connection_menu.cpp:169
+#: src/menu/network_connection_menu.cpp:211
 msgid "Connect to game"
 msgstr "Connectar a una partida"
 
@@ -626,7 +626,7 @@ msgstr "Connectat"
 msgid "Connected players: "
 msgstr "Connectat"
 
-#: src/weapon/construct.cpp:59 src/weapon/construct.cpp:67
+#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:68
 msgid "Construct"
 msgstr "Construir"
 
@@ -685,16 +685,16 @@ msgstr "Volum dels efectes"
 msgid "Energy"
 msgstr "Enemic"
 
-#: src/include/action_handler.cpp:251
+#: src/include/action_handler.cpp:248
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Error en iniciar la xarxa: Client %s no està d'acord amb vostè - %s "
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:114
 msgid "Error loading team :"
 msgstr "Error carregant l'equip:"
 
-#: src/game/config.cpp:520 src/team/custom_team.cpp:155
+#: src/game/config.cpp:540 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -728,29 +728,29 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:427
+#: src/menu/network_connection_menu.cpp:490
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Error: No es pot connectar a %s:%s"
 
-#: src/menu/network_connection_menu.cpp:382
+#: src/menu/network_connection_menu.cpp:445
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Error: No es pot contactar amb el servidor on s'allotja la partida"
 
-#: src/menu/network_connection_menu.cpp:286
+#: src/menu/network_connection_menu.cpp:369
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Error: No es pot contactar amb el servidor per a trobar una partida a "
 "internet"
 
-#: src/menu/network_connection_menu.cpp:407
+#: src/menu/network_connection_menu.cpp:470
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Error: Imposible iniciar servidor"
 
-#: src/menu/network_connection_menu.cpp:401
-#: tools/servers/game_server/server.cpp:297
+#: src/menu/network_connection_menu.cpp:464
+#: tools/servers/game_server/server.cpp:299
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
-#: src/weapon/flamethrower.cpp:133
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Llançaflames"
 
@@ -776,7 +776,7 @@ msgstr "Llançaflames"
 msgid "Football Bomb"
 msgstr "Pantalla completa?"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:79
 msgid "Fullscreen / window"
 msgstr "Pantalla completa / finestra"
 
@@ -792,11 +792,11 @@ msgstr "Joc"
 msgid "Game mode"
 msgstr "Estil de joc"
 
-#: src/menu/network_connection_menu.cpp:192
+#: src/menu/network_connection_menu.cpp:234
 msgid "Game name:"
 msgstr "Nom de joc:"
 
-#: src/weapon/gnu.cpp:170
+#: src/weapon/gnu.cpp:172
 msgid "Gnu Launcher"
 msgstr "Llançador de Gnu"
 
@@ -805,7 +805,7 @@ msgstr "Llançador de Gnu"
 msgid "Graphics"
 msgstr "Opcions gràfiques"
 
-#: src/weapon/grapple.cpp:165
+#: src/weapon/grapple.cpp:168
 msgid "Grapple"
 msgstr "Atac"
 
@@ -826,7 +826,7 @@ msgid "Gun"
 msgstr "Pistola"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:242
+#: src/menu/network_connection_menu.cpp:284
 msgid "Have a good game!"
 msgstr "Que tinguis una bona partida!"
 
@@ -836,7 +836,7 @@ msgid "Head commander"
 msgstr "Comandant cap"
 
 #. Display player's name
-#: src/interface/interface.cpp:180
+#: src/interface/interface.cpp:187
 msgid "Head commander: "
 msgstr "Comandant cap:"
 
@@ -844,15 +844,15 @@ msgstr "Comandant cap:"
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:73
 msgid "High jump"
 msgstr "Salt gran"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:258
 msgid "Host a game"
 msgstr "Allotjar una partida"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:62
 #, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
@@ -895,7 +895,7 @@ msgstr ""
 "Com usar-lo: botó dret sobre l'objectiu\n"
 " un arma per torn "
 
-#: src/game/game_classic.cpp:212
+#: src/game/game_classic.cpp:198
 msgid "Hurry up, you are too slow !!"
 msgstr "Apressa't, ets massa lent"
 
@@ -942,23 +942,23 @@ msgstr "Inicialització de sons"
 msgid "Initialise teams"
 msgstr "Inicialització d'equips"
 
-#: src/game/game.cpp:611
+#: src/game/game.cpp:655
 msgid "It's a present!"
 msgstr "Això és un regal! "
 
-#: src/weapon/jetpack.cpp:60
+#: src/weapon/jetpack.cpp:59
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/network_connection_menu.cpp:240 src/menu/network_menu.cpp:132
+#: src/menu/network_connection_menu.cpp:282 src/menu/network_menu.cpp:132
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Entra #en wormux en irc.freenode.net per a trobar algun contrincant."
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:74
 msgid "Jump"
 msgstr "Salt"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:75
 msgid "Jump backwards"
 msgstr "Salt d'esquena"
 
@@ -982,7 +982,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Carrega els mapas:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:126
 msgid "Load teams:"
 msgstr "Carrega els equips:"
 
@@ -996,7 +996,7 @@ msgstr "Baixa gravetat"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:134
+#: src/menu/network_connection_menu.cpp:176
 msgid "Manual connection"
 msgstr "Connexió manual"
 
@@ -1030,7 +1030,7 @@ msgstr "Nombre de jugadors màxim per equip:"
 msgid "Maximum FPS"
 msgstr "Numero màxim de FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:218
 msgid "Mine"
 msgstr "Mina"
 
@@ -1058,12 +1058,12 @@ msgstr "El més inutil"
 msgid "Most violent"
 msgstr "El més violent"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Move the camera with mouse or arrows"
 msgstr "Mou la càmera amb el ratolí o amb les fletxes "
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:85
 #, fuzzy
 msgid "Move the character"
 msgstr "Moure el personatge"
@@ -1097,7 +1097,7 @@ msgstr "Nou joc de la xarxa en"
 msgid "New player warning?"
 msgstr "Avís de nou jugador?"
 
-#: src/weapon/weapon.cpp:655
+#: src/weapon/weapon.cpp:693
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml!"
@@ -1119,12 +1119,12 @@ msgstr "Nombre de jugadors"
 msgid "Number of teams:"
 msgstr "Nombre de equips:"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "On a character: Select it"
 msgstr "En el personatge: Canvia el jugador actiu "
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:86
 msgid "On map: Select a target"
 msgstr "En el mapa: Selecciona un personatge "
 
@@ -1136,13 +1136,13 @@ msgstr "Opcions"
 msgid "Options menu"
 msgstr "Menú de opcions"
 
-#: src/weapon/parachute.cpp:66
+#: src/weapon/parachute.cpp:65
 msgid "Parachute"
 msgstr "Paracaigudes"
 
-#: src/menu/network_connection_menu.cpp:126
-#: src/menu/network_connection_menu.cpp:164
-#: src/menu/network_connection_menu.cpp:204
+#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:206
+#: src/menu/network_connection_menu.cpp:246
 msgid "Password:"
 msgstr "Clau:"
 
@@ -1166,18 +1166,22 @@ msgstr "Energia del jugador?"
 msgid "Player's name?"
 msgstr "¿Nom del jugador?"
 
-#: src/weapon/polecat.cpp:194
+#: src/weapon/polecat.cpp:195
 msgid "Polecat Launcher"
 msgstr "Llançador de mofetas "
 
-#: src/menu/network_connection_menu.cpp:153
-#: src/menu/network_connection_menu.cpp:181
+#: src/menu/network_connection_menu.cpp:195
+#: src/menu/network_connection_menu.cpp:223
 msgid "Port:"
 msgstr "Port:"
 
-#: src/menu/network_connection_menu.cpp:113
+#: src/menu/network_connection_menu.cpp:155
 msgid "Public battles"
 msgstr "Batalla publica "
+
+#: src/menu/help_menu.cpp:95
+msgid "Quickly quit game with Ctrl"
+msgstr ""
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1191,7 +1195,7 @@ msgstr "Sortir de Wormux"
 msgid "Quit battle"
 msgstr "Sortir de la batalla"
 
-#: src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:71
 msgid "Quit game"
 msgstr "Sortir del joc "
 
@@ -1199,12 +1203,12 @@ msgstr "Sortir del joc "
 msgid "Random map"
 msgstr "Mapa aleatori"
 
-#: src/game/config.cpp:358
+#: src/game/config.cpp:359
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/game/config.cpp:407
+#: src/game/config.cpp:417
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Llegint fitxer de configuració personal"
@@ -1233,12 +1237,12 @@ msgstr "Desplaçament en les vores"
 msgid "Scroll on border"
 msgstr "Desplaçament en les vores"
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:184
 msgid "Server address:"
 msgstr "Adreça del servidor:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:212
+#: src/menu/network_connection_menu.cpp:254
 msgid "Server available on Internet"
 msgstr "Servidor disponible a internet"
 
@@ -1251,17 +1255,17 @@ msgstr "Servidor"
 msgid "Shotgun"
 msgstr "Escopeta"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Show the weapons menu"
 msgstr "Veure el menú d'armes "
 
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:78
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Veure/ocultar la informació"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Show/hide the minimap"
 msgstr "Veure/ocultar minimapa "
@@ -1278,7 +1282,7 @@ msgstr "Manotada"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Manotada a l'enemic per fer-li donar un petit salt. "
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:89
 msgid "Smaller aim angle and walk step"
 msgstr ""
 "Angle lent\n"
@@ -1288,15 +1292,15 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Fusell de franctirador"
 
-#: src/object/bonus_box.cpp:86
+#: src/object/bonus_box.cpp:87
 msgid "Someone put a booby trap into the crate!"
 msgstr "Algú va posar un parany explosiu camuflat a caixa! "
 
-#: src/menu/network_connection_menu.cpp:294
+#: src/menu/network_connection_menu.cpp:374
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
-#: src/menu/network_connection_menu.cpp:353
+#: src/menu/network_connection_menu.cpp:419
 #: tools/servers/game_server/server.cpp:284
 #, fuzzy, c-format
 msgid ""
@@ -1328,7 +1332,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
-#: src/interface/interface.cpp:220
+#: src/interface/interface.cpp:227
 msgid "Stock:"
 msgstr "Munició:"
 
@@ -1336,7 +1340,7 @@ msgstr "Munició:"
 msgid "Submachine Gun"
 msgstr "Metralleta"
 
-#: src/weapon/supertux.cpp:229
+#: src/weapon/supertux.cpp:223
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -1344,7 +1348,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Xeringa"
 
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:81
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Parla en la batalla en xarxa"
@@ -1381,12 +1385,12 @@ msgstr ""
 "La bomba de fragmentació ha abandonat es camp de batalla abans de poder "
 "explota."
 
-#: src/weapon/gnu.cpp:148
+#: src/weapon/gnu.cpp:147
 #, fuzzy
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "El Gnu va abandonar el camp de batalla abans d'explotar. T'enyorarem"
 
-#: src/weapon/polecat.cpp:173
+#: src/weapon/polecat.cpp:172
 #, fuzzy
 msgid "The Polecat left the battlefield before exploding!"
 msgstr ""
@@ -1420,7 +1424,7 @@ msgstr "Ha passat el temps de connexió. Mira si no hi ha algun firewall."
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "El disc bomba ha abandonat la pista de ball abans d'explotar. "
 
-#: src/game/game.cpp:506
+#: src/game/game.cpp:497
 msgid "The game was interrupted because you got disconnected."
 msgstr "El joc es va interrompre per que t'has desconnectat. "
 
@@ -1434,7 +1438,7 @@ msgstr "La granada ha abandonat el camp de batalla abans d'explotar. "
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Tots estan esperant! Venja que tots estan per tu :-) "
 
-#: src/weapon/parachute.cpp:99
+#: src/weapon/parachute.cpp:98
 #, fuzzy
 msgid "The parachute is activated automatically."
 msgstr "El paracaigudes s'activa automàticament."
@@ -1513,7 +1517,7 @@ msgstr "Impossible usar aquest port!"
 msgid "Unknown command"
 msgstr "Comando desconegut"
 
-#: src/game/game_mode.cpp:343
+#: src/game/game_mode.cpp:348
 msgid "Unlimited"
 msgstr "Il·limitat"
 
@@ -1538,7 +1542,7 @@ msgstr[1] "Espera! %i jugadors no estan preparats encara! "
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Esperant al servidor, tot el que pots fer és cancel·lar o xerrar!"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr ""
@@ -1560,12 +1564,12 @@ msgstr "Pagina web: "
 msgid "Welcome to %s!"
 msgstr ""
 
-#: src/game/game.cpp:730
+#: src/game/game.cpp:766
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:782
+#: src/game/game.cpp:818
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s: ha estat mort per una simple pistola!"
@@ -1587,15 +1591,15 @@ msgstr "Arrencant Wormux..."
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
-#: src/include/action_handler.cpp:225
+#: src/include/action_handler.cpp:222
 msgid "Wrong map CRC!"
 msgstr "Mapa incorrecte CRC!"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:219
 msgid "Wrong map name!"
 msgstr "Nom de mapa incorrecte!"
 
-#: src/include/action_handler.cpp:228
+#: src/include/action_handler.cpp:225
 msgid "Wrong team!"
 msgstr "Equip incorrecte!"
 
@@ -1617,7 +1621,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_init.cpp:130 src/team/teams_list.cpp:162
+#: src/game/game_init.cpp:130 src/team/teams_list.cpp:158
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Tu necesites almenys dos equips vàlids!"
@@ -1627,7 +1631,7 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "No podràs jugar abans de seleccionar un equip!"
 
-#: src/weapon/weapon_launcher.cpp:505
+#: src/weapon/weapon_launcher.cpp:518
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
@@ -1635,7 +1639,7 @@ msgstr "Has fallat el tir!"
 msgid "aka"
 msgstr "aqui "
 
-#: src/weapon/air_attack.cpp:220
+#: src/weapon/air_attack.cpp:216
 #, fuzzy
 msgid ""
 "attack direction : Left/Right\n"
@@ -1675,7 +1679,7 @@ msgstr "no hi ha un fitxer de configuració"
 msgid "o Loading music"
 msgstr "o Carregant musica"
 
-#: src/sound/jukebox.cpp:343
+#: src/sound/jukebox.cpp:355
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Carregant perfil de so: %s "
