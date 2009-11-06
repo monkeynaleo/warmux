@@ -171,5 +171,5 @@ WeaponConfig& Construct::cfg()
 
 bool Construct::IsInUse() const
 {
-  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return IsOnCooldownFromShot();
 }

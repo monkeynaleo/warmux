@@ -104,7 +104,7 @@ bool Baseball::p_Shoot()
 
 bool Baseball::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return IsOnCooldownFromShot();
 }
 
 BaseballConfig& Baseball::cfg()

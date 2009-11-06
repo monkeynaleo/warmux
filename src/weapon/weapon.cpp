@@ -482,6 +482,11 @@ void Weapon::UpdateStrength(){
   m_strength = InRange_Double (val, 0.0, max_strength);
 }
 
+bool Weapon::IsOnCooldownFromShot() const
+{
+  return (m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read());
+}
+
 void Weapon::InitLoading(){
   // no loading for weapon with max_strength = 0
   if (max_strength == 0)

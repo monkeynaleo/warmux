@@ -249,7 +249,7 @@ void AirAttack::p_Select()
 
 bool AirAttack::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return IsOnCooldownFromShot();
 }
 
 AirAttackConfig& AirAttack::cfg()

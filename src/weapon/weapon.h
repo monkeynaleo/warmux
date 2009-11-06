@@ -224,6 +224,8 @@ public:
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const { return EnoughAmmo(); };
 
+  virtual bool IsOnCooldownFromShot() const;
+
   // Begin to load, to choose the strength
   virtual void InitLoading() ;
 

@@ -164,7 +164,7 @@ void Airhammer::Refresh()
 
 bool Airhammer::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read() || m_is_active;
+  return IsOnCooldownFromShot() || m_is_active;
 }
 
 void Airhammer::p_Select()
