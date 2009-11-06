@@ -160,7 +160,7 @@ class WeaponLauncher : public Weapon
 
     virtual void IncMissedShots();
     virtual bool IsInUse() const;
-    virtual bool IsOnCooldownFromShot() const;
+
     // Handle mouse events
     virtual void HandleMouseWheelUp(bool shift);
     virtual void HandleMouseWheelDown(bool shift);

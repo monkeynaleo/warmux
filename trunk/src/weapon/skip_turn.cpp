@@ -71,5 +71,5 @@ std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count 
 
 bool SkipTurn::IsInUse() const
 {
-  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
+  return IsOnCooldownFromShot();
 }
