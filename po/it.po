@@ -1167,7 +1167,7 @@ msgstr "Battaglie pubbliche"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Esci rapidamente dal gioco premendo Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
