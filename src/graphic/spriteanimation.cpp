@@ -27,32 +27,32 @@
 #include "graphic/sprite.h"
 #include "network/randomsync.h"
 
-SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
-  sprite(p_sprite)
+SpriteAnimation::SpriteAnimation(Sprite & p_sprite) :
+  sprite(p_sprite),
+  last_update(Time::GetInstance()->Read()),
+  speed_factor(1.0f),
+  frame_delta(1),
+  loop_wait(0),
+  loop_wait_random(0),
+  finished(false),
+  show_on_finish(show_last_frame), //(enum)
+  loop(true),
+  pingpong(false)
 {
-   last_update = Time::GetInstance()->Read();
-   speed_factor = 1.0f;
-   frame_delta = 1;
-   finished = false;
-   show_on_finish = show_last_frame;
-   loop = true;
-   pingpong = false;
-   loop_wait = 0;
-   loop_wait_random = 0;
 }
 
-SpriteAnimation::SpriteAnimation(const SpriteAnimation &other, Sprite &p_sprite) :
-  sprite(p_sprite)
+SpriteAnimation::SpriteAnimation(const SpriteAnimation & other, Sprite & p_sprite) :
+  sprite(p_sprite),
+  last_update(other.last_update),
+  speed_factor(other.speed_factor),
+  frame_delta(other.frame_delta),
+  loop_wait(other.loop_wait),
+  loop_wait_random(other.loop_wait_random),
+  finished(other.finished),
+  show_on_finish(other.show_on_finish), //(enum)
+  loop(other.loop),
+  pingpong(other.pingpong)
 {
-   last_update = other.last_update;
-   speed_factor = other.speed_factor;
-   frame_delta = other.frame_delta;
-   finished = other.finished;
-   show_on_finish = other.show_on_finish;
-   loop = other.loop;
-   pingpong = other.pingpong;
-   loop_wait = other.loop_wait;
-   loop_wait_random = other.loop_wait_random;
 }
 
 void SpriteAnimation::SetSpeedFactor( float nv_speed){
