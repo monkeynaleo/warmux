@@ -55,39 +55,43 @@ SpriteAnimation::SpriteAnimation(const SpriteAnimation & other, Sprite & p_sprit
 {
 }
 
-void SpriteAnimation::SetSpeedFactor( float nv_speed){
+void SpriteAnimation::SetSpeedFactor( float nv_speed)
+{
   speed_factor = nv_speed;
 }
 
-void SpriteAnimation::Start(){
+void SpriteAnimation::Start()
+{
    finished = false;
    last_update = Time::GetInstance()->Read();
 }
 
-void SpriteAnimation::SetPlayBackward(bool enable){
-  if (enable)
-    frame_delta = -1;
-  else
-    frame_delta = 1;
+void SpriteAnimation::SetPlayBackward(bool enable) 
+{
+  frame_delta = enable ? -1 : 1;
 }
 
-void SpriteAnimation::Finish() {
+void SpriteAnimation::Finish() 
+{
   finished = true;
 }
 
 void SpriteAnimation::Update()
 {
-  if (finished) return;
+  if (finished) { 
+    return;
+  }
 
-  Time * global_time = Time::GetInstance();
-  if (global_time->Read() < (last_update + sprite.GetCurrentFrameObject().delay))
-     return;
+  if (Time::GetInstance()->Read() < (last_update + sprite.GetCurrentFrameObject().delay)) {
+    return;
+  }
+
   const unsigned int current_frame = sprite.GetCurrentFrame();
   const unsigned int frame_count = sprite.GetFrameCount();
 
   //Delta to next frame used to enable frameskip
   //if delay between 2 frame is < fps
-  int delta_to_next_f = (int)((float)((global_time->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
+  int delta_to_next_f = (int)((float)((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
   last_update += (int)((float)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
 
   //Animation is finished, when last frame have been fully played
