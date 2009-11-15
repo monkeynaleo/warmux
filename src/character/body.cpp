@@ -478,19 +478,19 @@ void Body::Build()
 	  current_loop = current_mvt->GetNbLoops() -1;
 	  current_frame = current_mvt->GetFrames().size() -1;
 
-	  if (previous_clothe)
+	  if (previous_clothe) {
 	    SetClothe(previous_clothe->GetName());
-	  if (previous_mvt)
+          }
+	  if (previous_mvt) {
 	    SetMovement(previous_mvt->GetType());
+          }
 	}
       }
-    }
+    } 
   }
 
   if ((last_frame == current_frame) && 
-      (last_loop == current_loop) && 
       !need_rebuild) {
-    need_rebuild = false;
     return;
   }
 
@@ -498,9 +498,11 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
+  int layersCount = (int)current_clothe->GetLayers().size();
+
   // Rotate each sprite, because the next part need to know the height
   // of the sprite once it is rotated
-  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
+  for (int layer = 0; layer < layersCount; layer++) {
     if (current_clothe->GetLayers()[layer]->GetName() != "weapon") {
       current_clothe->GetLayers()[layer]->RotateSprite();
     }
@@ -509,14 +511,16 @@ void Body::Build()
   // Move the members to get the lowest member at the bottom of the skin rectangle
   member_mvt body_mvt;
   float y_max = 0;
+  Member * member;
 
-  for (int lay=0;lay < (int)current_clothe->GetLayers().size() ;lay++) {
-    if (current_clothe->GetLayers()[lay]->GetName() != "weapon") {
-      Member* member = current_clothe->GetLayers()[lay];
-      if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max
-	   && !member->IsGoingThroughGround()) {
+  for (int lay=0; lay < layersCount; lay++) {
+    if (current_clothe->GetLayers()[lay]->GetName() == "weapon") {
+      continue;
+    }
+    member = current_clothe->GetLayers()[lay];
+    if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max && 
+        !member->IsGoingThroughGround()) {
         y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
-      }
     }
   }
 
