@@ -101,7 +101,7 @@ class Body
     const Character *                 owner;
     const xmlNode *                   mainXmlNode;
     const std::string                 mainFolder;
-    
+
     void ResetMovement() const;
     void ApplyMovement(Movement * mvt, 
                        uint       frame);
@@ -146,6 +146,7 @@ class Body
     void                    MakeTeleportParticles(const Point2i & pos,
                                                   const Point2i & dst);
     void                    DebugState() const;
+    void                    Rebuild(void) { need_rebuild = true; }
 
     //// SETTERS
     void                    SetClothe(const std::string & name);
