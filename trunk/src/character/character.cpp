@@ -920,6 +920,7 @@ double Character::GetFiringAngle() const {
   return firing_angle;
 }
 
+#include <iostream>
 void Character::SetFiringAngle(double angle) {
   /*while(angle > 2 * M_PI)
     angle -= 2 * M_PI;
@@ -929,6 +930,7 @@ void Character::SetFiringAngle(double angle) {
                              -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;
   m_team.crosshair.Refresh(GetFiringAngle());
+  body->Rebuild();
 }
 
 void Character::SetWeaponClothe()
