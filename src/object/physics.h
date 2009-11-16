@@ -58,6 +58,7 @@ private:
 
 protected:
   uint m_last_move;             // Time since last move
+  uint m_last_physical_engine_run;             // Time since last physical engine execution
   double m_phys_width, m_phys_height;
 
   Point2d m_fix_point_gnd;   // Rope fixation point to the ground.
