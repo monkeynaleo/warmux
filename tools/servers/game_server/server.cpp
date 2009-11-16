@@ -296,7 +296,7 @@ bool GameServer::RegisterToIndexServer(bool is_public)
   if (!r) {
     char port_str[8];
     snprintf(port_str, 8, "%d", port);
-    fprintf(stderr, "%s", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port_str, port_str).c_str());
+    fprintf(stderr, "%s\n", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port_str, port_str).c_str());
     IndexServer::GetInstance()->Disconnect();
     return false;
   }
