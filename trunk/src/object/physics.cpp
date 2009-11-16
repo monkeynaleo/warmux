@@ -48,6 +48,7 @@ Physics::Physics ():
   m_pos_y(),
   m_extern_force(),
   m_last_move(Time::GetInstance()->Read()),
+  m_last_physical_engine_run(Time::GetInstance()->Read()),
   m_phys_width(),
   m_phys_height(),
   m_fix_point_gnd(),
@@ -423,7 +424,7 @@ Point2d Physics::ComputeNextXY(double delta_t){
 
   if (FreeFall == m_motion_type) {
     ComputeFallNextXY(delta_t);
-  } 
+  }
 
   if (Pendulum == m_motion_type) {
     ComputePendulumNextXY(delta_t);
@@ -434,38 +435,32 @@ Point2d Physics::ComputeNextXY(double delta_t){
 
 void Physics::RunPhysicalEngine()
 {
-  double step_t, delta_t = (Time::GetInstance()->Read() - m_last_move) / 1000.0;
+  if (m_last_physical_engine_run < m_last_move)
+    m_last_physical_engine_run = m_last_move;
+
+  double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / 1000.0;
   Point2d oldPos;
   Point2d newPos;
 
-  step_t = PHYS_DELTA_T;
-
-  //  printf ("Delta_t = %f (last %f - current %f)\n", delta_t, m_last_move/1000.0,
-  //          global_time.Read()/1000.0);
+  m_last_physical_engine_run += floor(delta_t/PHYS_DELTA_T) * PHYS_DELTA_T * 1000;
 
   // Compute object move for each physical engine time step.
-
-  while (delta_t > 0.0){
-    if (delta_t < PHYS_DELTA_T)
-      step_t = delta_t ;
-
+  while (delta_t >= PHYS_DELTA_T)
+  {
     oldPos = GetPos();
+    newPos = ComputeNextXY(PHYS_DELTA_T);
 
-    newPos = ComputeNextXY(step_t);
-
-    if( newPos != oldPos)  {
+    if (newPos != oldPos) {
       // The object has moved. Notify the son class.
-      MSG_DEBUG( "physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f",
-                 typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
-                 m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-                 m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-                 step_t);
+      MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f",
+                typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
+                m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+                m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+                PHYS_DELTA_T);
       NotifyMove(oldPos, newPos);
     }
-
-    delta_t -= PHYS_DELTA_T ;
+    delta_t -= PHYS_DELTA_T;
   }
-
   return;
 }
 
