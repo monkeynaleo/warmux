@@ -39,14 +39,6 @@ public:
     PROG_BAR_HORIZONTAL
   };
 
-private:
-  float coefRed;
-  float coefGreen;
-  float coefBlue;
-  float coefAlpha;
-  int divisor;
-  bool gradientMode;
-
 protected:
   uint x, y, larg, haut; // Position
   long val, min, max; // current, min and max values
@@ -55,8 +47,6 @@ protected:
   uint val_barre; // current value in the progress bar
   enum orientation orientation;
 
-  Color colorMin; // Color used for start value
-  Color colorMax; // Color used for end value
 
   long ComputeValue (long val) const;
   uint ComputeBarValue (long val) const;
@@ -70,8 +60,6 @@ protected:
   void SetBorderColor(const Color& color) { border_color = color; };
   void SetBackgroundColor(const Color& color) { background_color = color; };
   void SetValueColor(const Color& color) { value_color = color; };
-  void SetMinMaxValueColor(const Color & min, const Color & max);
-
  protected:
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;

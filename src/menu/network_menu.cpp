@@ -109,11 +109,11 @@ NetworkMenu::NetworkMenu() :
   options_box->AddWidget(player_number);
 
   connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-				0, Font::FONT_SMALL, Font::FONT_BOLD);
+				0, Font::FONT_SMALL, Font::FONT_NORMAL);
   options_box->AddWidget(connected_players);
 
   initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-				  0, Font::FONT_SMALL, Font::FONT_BOLD);
+				  0, Font::FONT_SMALL, Font::FONT_NORMAL);
   options_box->AddWidget(initialized_players);
 
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
@@ -127,7 +127,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
-                        Font::FONT_SMALL, Font::FONT_BOLD);
+                        Font::FONT_SMALL, Font::FONT_NORMAL);
   if (Network::GetInstance()->IsGameMaster()) {
     msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."), c_red);
   } else {
@@ -219,7 +219,7 @@ bool NetworkMenu::signal_ok()
                     team != GetTeamsList().playing_list.end();
                     team++)
     {
-      if((*team)->IsLocalHuman())
+      if((*team)->IsLocal())
       {
         found = true;
         break;
@@ -351,7 +351,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
     close_menu = true;
   }
   ActionHandler * action_handler = ActionHandler::GetInstance();
-  action_handler->ExecFrameLessActions();
+  action_handler->ExecActions();
 }
 
 void NetworkMenu::DelTeamCallback(const std::string& team_id)

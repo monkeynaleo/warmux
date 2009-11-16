@@ -141,7 +141,7 @@ void DiscoGrenade::SignalDrowning()
 //-----------------------------------------------------------------------------
 
 DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
-  WeaponLauncher(WEAPON_DISCO_GRENADE, "disco_grenade", new ExplosiveWeaponConfig())
+  WeaponLauncher(WEAPON_DISCO_GRENADE, "disco_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   UpdateTranslationStrings();
 

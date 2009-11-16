@@ -41,6 +41,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
+#include "map/wind.h"
 #include "menu/network_menu.h"
 #include "network/randomsync.h"
 #include "network/network.h"
@@ -56,6 +57,8 @@
 #include "weapon/explosion.h"
 #include "weapon/gnu.h"
 #include "weapon/grapple.h"
+#include "weapon/polecat.h"
+#include "weapon/supertux.h"
 #include "weapon/weapon.h"
 #include "weapon/weapon_launcher.h"
 #include "weapon/weapons_list.h"
@@ -302,31 +305,68 @@ static void Action_Player_ChangeWeapon (Action *a)
 static void Action_Player_ChangeCharacter (Action *a)
 {
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
-  int char_no = a->PopInt();
-  Character * c = ActiveTeam().FindByIndex(char_no);
-  ActiveTeam().SelectCharacter(c);
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
+  Character::RetrieveCharacterFromAction(a);       // Retrieve next character information
   Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
-static void Action_Game_CalculateFrame (Action */*a*/)
+static void Action_Game_NextTeam (Action *a)
 {
-  // Nothing to do here:
-  // It is just an indication for the action handler
-  // that the frame is complete.
+  std::string team = a->PopString();
+  GetTeamsList().SetActive(team);
+
+  Character::RetrieveCharacterFromAction(a);       // Retrieve current character's information
+
+  ASSERT (!ActiveCharacter().IsDead());
+
+  Camera::GetInstance()->FollowObject(&ActiveCharacter());
+
+  // Are we turn master for next turn ?
+  if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    Network::GetInstance()->SetTurnMaster(true);
+  else
+    Network::GetInstance()->SetTurnMaster(false);
 }
 
-static void Action_DropBonusBox (Action */*a*/)
+static void Action_NewBonusBox (Action *a)
+{
+  ObjBox * box;
+  switch(a->PopInt()) {
+    case 2 :
+      box = new BonusBox();
+      break;
+    default: /* case 1 */
+      box = new Medkit();
+      break;
+  }
+  box->GetValueFromAction(a);
+  Game::GetInstance()->AddNewBox(box);
+}
+
+static void Action_DropBonusBox (Action *a)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box != NULL) {
+    current_box->GetValueFromAction(a);
     current_box->DropBox();
   }
 }
 
-static void Action_RequestBonusBoxDrop (Action */*a*/)
+static void Action_Game_SetState (Action *a)
 {
-  if (Network::GetInstance()->IsTurnMaster())
-    Game::GetInstance()->RequestBonusBoxDrop();
+  // to re-synchronize random number generator
+  uint seed = (uint)(a->PopInt());
+#ifdef DEBUG
+  if (IsLOGGING("random")) {
+    uint nb = RandomSync().GetSeed();
+    MSG_DEBUG("random.get", "Action_Game_SetState(...): %d", nb);
+    ASSERT(nb == seed);
+  }
+#endif
+  RandomSync().SetSeed(seed);
+
+  Game::game_loop_state_t state = Game::game_loop_state_t(a->PopInt());
+  Game::GetInstance()->Really_SetState(state);
 }
 
 // ########################################################
@@ -510,6 +550,12 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
   }
 
   MSG_DEBUG("action_handler.menu", "- %s", team_id.c_str());
+  if (Game::IsRunning() && Network::GetInstance()->IsGameMaster()) {
+    int i;
+    Team* the_team = GetTeamsList().FindById(team_id, i);
+    if (the_team == &ActiveTeam()) // we have loose the turn master!!
+      Network::GetInstance()->SetTurnMaster(true);
+  }
 
   GetTeamsList().DelTeam(team_id);
 
@@ -532,94 +578,115 @@ void WORMUX_DisconnectPlayer(Player& player)
   std::map<const std::string, ConfigTeam>::iterator it = player.owned_teams.begin();
   while (it != player.owned_teams.end()) {
     std::string team_id = it->first;
-    if (Game::GetInstance()->IsRunning()) {
-      player.RemoveTeam(team_id);
-      int unused_buffer;
-      Team* the_team = GetTeamsList().FindById(team_id, unused_buffer);
-      the_team->Abandon();
-    } else {
-      _Action_DelTeam(&player, team_id);
-    }
+    _Action_DelTeam(&player, team_id);
     it = player.owned_teams.begin();
   }
 }
 
 // ########################################################
 
+// Send information about energy and the position of every character
+void SyncCharacters()
+{
+  ASSERT(Network::GetInstance()->IsTurnMaster());
+
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
+  TeamsList::iterator
+    it=GetTeamsList().playing_list.begin(),
+    end=GetTeamsList().playing_list.end();
+
+  for (int team_no = 0; it != end; ++it, ++team_no)
+  {
+    Team& team = **it;
+    Team::iterator
+        tit = team.begin(),
+        tend = team.end();
+
+    for (int char_no = 0; tit != tend; ++tit, ++char_no)
+    {
+      // Sync the character's position, energy, ...
+      SendCharacterInfo(team_no, char_no);
+    }
+  }
+  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
+  Network::GetInstance()->SendActionToAll(a_sync_end);
+}
+
 static void Action_Character_Jump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().Jump();
 }
 
 static void Action_Character_HighJump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().HighJump();
 }
 
 static void Action_Character_BackJump (Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
+  ASSERT(!ActiveTeam().IsLocal());
   ActiveCharacter().BackJump();
 }
 
-static void Action_Character_StartMovingLeft(Action *a)
+static void Action_Character_SetPhysics (Action *a)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StartMovingLeft(slowly);
+  while(!a->IsEmpty())
+    Character::RetrieveCharacterFromAction(a);
 }
 
-static void Action_Character_StopMovingLeft(Action *a)
+void SendActiveCharacterAction(const Action& a)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StopMovingLeft(slowly);
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
+  SendActiveCharacterInfo();
+  Network::GetInstance()->SendActionToAll(a);
+  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
+  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 
-static void Action_Character_StartMovingRight(Action *a)
+// Send character information over the network (it's totally stupid to send it locally ;-)
+void SendCharacterInfo(int team_no, int char_no)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StartMovingRight(slowly);
+  Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
+  Character::StoreCharacter(&a, team_no, char_no);
+  Network::GetInstance()->SendActionToAll(a);
 }
 
-static void Action_Character_StopMovingRight(Action *a)
+uint last_time = 0;
+
+// Send active character information over the network (it's totally stupid to send it locally ;-)
+void SendActiveCharacterInfo(bool can_be_dropped)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StopMovingRight(slowly);
+  uint current_time = Time::GetInstance()->Read();
+
+  if (!can_be_dropped || last_time + 100 < Time::GetInstance()->Read()) {
+    last_time = current_time;
+    SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  }
 }
 
-static void Action_Character_StartIncreasingFireAngle(Action *a)
+// ########################################################
+
+static void Action_Weapon_Shoot (Action *a)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StartIncreasingFireAngle(slowly);
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
+    return; // hack related to bug 8656
+
+  double strength = a->PopDouble();
+  double angle = a->PopDouble();
+  ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
-static void Action_Character_StopIncreasingFireAngle(Action *a)
+static void Action_Weapon_StopUse(Action */*a*/)
 {
-  bool slowly = a->PopInt();
-  ActiveCharacter().StopIncreasingFireAngle(slowly);
-}
-
-static void Action_Character_StartDecreasingFireAngle(Action *a)
-{
-  bool slowly = a->PopInt();
-  ActiveCharacter().StartDecreasingFireAngle(slowly);
-}
-
-static void Action_Character_StopDecreasingFireAngle(Action *a)
-{
-  bool slowly = a->PopInt();
-  ActiveCharacter().StopDecreasingFireAngle(slowly);
-}
-
-static void Action_Weapon_StartShooting(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StartShooting();
-}
-
-static void Action_Weapon_StopShooting(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StopShooting();
+  ActiveTeam().AccessWeapon().ActionStopUse();
 }
 
 static void Action_Weapon_SetTarget (Action *a)
@@ -639,46 +706,6 @@ static void Action_Weapon_SetTimeout (Action *a)
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
-static void Action_Weapon_StartMovingLeft(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StartMovingLeft();
-}
-
-static void Action_Weapon_StopMovingLeft(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StopMovingLeft();
-}
-
-static void Action_Weapon_StartMovingRight(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StartMovingRight();
-}
-
-static void Action_Weapon_StopMovingRight(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StopMovingRight();
-}
-
-static void Action_Weapon_StartMovingUp(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StartMovingUp();
-}
-
-static void Action_Weapon_StopMovingUp(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StopMovingUp();
-}
-
-static void Action_Weapon_StartMovingDown(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StartMovingDown();
-}
-
-static void Action_Weapon_StopMovingDown(Action */*a*/)
-{
-  ActiveTeam().AccessWeapon().StopMovingDown();
-}
-
 static void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
@@ -690,7 +717,97 @@ static void Action_Weapon_Construction (Action *a)
   construct_weapon->SetAngle(a->PopDouble());
 }
 
+static void Action_Weapon_Gnu (Action *a)
+{
+  GnuLauncher* launcher = dynamic_cast<GnuLauncher*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(launcher != NULL)
+  {
+    return;
+  }
+
+  Point2d pos(a->PopPoint2d());
+  launcher->ExplosionFromNetwork(pos);
+}
+
+static void Action_Weapon_Grapple (Action *a)
+{
+  Grapple* grapple = dynamic_cast<Grapple*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(grapple != NULL)
+  {
+    return;
+  }
+
+  int subaction = a->PopInt();
+  switch (subaction) {
+  case Grapple::ATTACH_ROPE:
+    {// attach rope
+      Point2i contact_point = a->PopPoint2i();
+      grapple->AttachRope(contact_point);
+    }
+    break;
+
+  case Grapple::ATTACH_NODE: // attach node
+    {
+      Point2i contact_point = a->PopPoint2i();
+      double angle = a->PopDouble();
+      int sense = a->PopInt();
+      grapple->AttachNode(contact_point, angle, sense);
+    }
+    break;
+
+  case Grapple::DETACH_NODE: // detach last node
+    grapple->DetachNode();
+    break;
+
+  case Grapple::SET_ROPE_SIZE: // update rope size
+    grapple->SetRopeSize(a->PopDouble());
+    break;
+
+  default:
+    ASSERT(false);
+  }
+}
+
+static void Action_Weapon_Polecat (Action *a)
+{
+  PolecatLauncher* launcher = dynamic_cast<PolecatLauncher*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(launcher != NULL)
+  {
+    return;
+  }
+
+  Point2d pos(a->PopPoint2d());
+  launcher->ExplosionFromNetwork(pos);
+}
+
+static void Action_Weapon_Supertux (Action *a)
+{
+  TuxLauncher* launcher = dynamic_cast<TuxLauncher*>(&(ActiveTeam().AccessWeapon()));
+  NET_ASSERT(launcher != NULL)
+  {
+    return;
+  }
+
+  int subaction = a->PopInt();
+
+  if (subaction == 0) {
+    double angle = a->PopDouble();
+    Point2d pos(a->PopPoint2d());
+    launcher->RefreshFromNetwork(angle, pos);
+  } else if (subaction == 1) {
+    Point2d pos(a->PopPoint2d());
+    launcher->ExplosionFromNetwork(pos);
+  } else {
+    ASSERT(false);
+  }
+}
+
 // ########################################################
+
+static void Action_Wind (Action *a)
+{
+  Wind::GetRef().SetVal (a->PopInt());
+}
 
 static void Action_Network_RandomInit (Action *a)
 {
@@ -698,24 +815,16 @@ static void Action_Network_RandomInit (Action *a)
   RandomSync().SetSeed(a->PopInt());
 }
 
-static void Action_Network_VerifyRandomSync(Action *a)
+static void Action_Network_SyncBegin (Action */*a*/)
 {
-  uint local_seed = RandomSync().GetSeed();
-  uint remote_seed = (uint)(a->PopInt());
-  MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
-
-  ASSERT(remote_seed == local_seed);
-
-  if (local_seed != remote_seed)
-    RandomSync().SetSeed(remote_seed);
+  ASSERT(!Network::GetInstance()->sync_lock);
+  Network::GetInstance()->sync_lock = true;
 }
 
-static void Action_Time_VerifySync(Action *a)
+static void Action_Network_SyncEnd (Action */*a*/)
 {
-  uint local_time = Time::GetInstance()->Read();
-  uint remote_time = (uint)(a->PopInt());
-  MSG_DEBUG("time.verify","Verify time: %d (local) == %d (remote)", local_time, remote_time);
-  ASSERT(local_time == remote_time);
+  ASSERT(Network::GetInstance()->sync_lock);
+  Network::GetInstance()->sync_lock = false;
 }
 
 // Nothing to do here. Just for time synchronisation
@@ -882,6 +991,28 @@ void WORMUX_DisconnectHost(DistantComputer& host)
     Network::GetInstance()->SendActionToAll(a); // host is already removed from the list
   }
 }
+
+static void Action_Explosion (Action *a)
+{
+  ExplosiveWeaponConfig config;
+  MSG_DEBUG("action_handler","-> Begin");
+
+  Point2i pos = a->PopPoint2i();
+  config.explosion_range = a->PopInt();
+  config.particle_range = a->PopInt();
+  config.damage = a->PopInt();
+  config.blast_range = a->PopInt();
+  config.blast_force = a->PopInt();
+  std::string son = a->PopString();
+  bool fire_particle = !!a->PopInt();
+  ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
+  std::string unique_id = a->PopString();
+
+  ApplyExplosion_common(pos, config, son, fire_particle, smoke, unique_id);
+
+  MSG_DEBUG("action_handler","<- End");
+}
+
 // ########################################################
 // ########################################################
 // ########################################################
@@ -901,7 +1032,8 @@ void Action_Handler_Init()
   // ########################################################
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   ActionHandler::GetInstance()->Register (Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
-  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_Game_NextTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAMELOOP_SET_STATE, "GAMELOOP_set_state", &Action_Game_SetState);
 
   // ########################################################
   // To be sure that rules will be the same on each computer
@@ -927,42 +1059,36 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_LEFT, "CHARACTER_start_moving_left", &Action_Character_StartMovingLeft);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE, "CHARACTER_start_increasing_fire_angle", &Action_Character_StartIncreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE, "CHARACTER_stop_increasing_fire_angle", &Action_Character_StopIncreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE, "CHARACTER_start_decreasing_fire_angle", &Action_Character_StartDecreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE, "CHARACTER_stop_decreasing_fire_angle", &Action_Character_StopDecreasingFireAngle);
+
+  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
 
   // ########################################################
-  // Quite standard weapon options
+  // Using Weapon
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
 
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_SHOOTING, "WEAPON_start_shooting", &Action_Weapon_StartShooting);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_SHOOTING, "WEAPON_stop_shooting", &Action_Weapon_StopShooting);
+  // Quite standard weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_LEFT, "WEAPON_start_moving_left", &Action_Weapon_StartMovingLeft);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_LEFT, "WEAPON_stop_moving_left", &Action_Weapon_StopMovingLeft);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_RIGHT, "WEAPON_start_moving_right", &Action_Weapon_StartMovingRight);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_RIGHT, "WEAPON_stop_moving_right", &Action_Weapon_StopMovingRight);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_UP, "WEAPON_start_moving_up", &Action_Weapon_StartMovingUp);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_UP, "WEAPON_stop_moving_up", &Action_Weapon_StopMovingUp);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_START_MOVING_DOWN, "WEAPON_start_moving_down", &Action_Weapon_StartMovingDown);
-  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_STOP_MOVING_DOWN, "WEAPON_stop_moving_down", &Action_Weapon_StopMovingDown);
 
   // Special weapon options
   ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GNU, "WEAPON_gnu", &Action_Weapon_Gnu);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_GRAPPLE, "WEAPON_grapple", &Action_Weapon_Grapple);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_POLECAT, "WEAPON_polecat", &Action_Weapon_Polecat);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
 
   // Bonus box
+  ActionHandler::GetInstance()->Register (Action::ACTION_NEW_BONUS_BOX, "BONUSBOX_new_box", &Action_NewBonusBox);
   ActionHandler::GetInstance()->Register (Action::ACTION_DROP_BONUS_BOX, "BONUSBOX_drop_box", &Action_DropBonusBox);
-  ActionHandler::GetInstance()->Register (Action::ACTION_REQUEST_BONUS_BOX_DROP, "BONUSBOX_request_box_drop", &Action_RequestBonusBoxDrop);
   // ########################################################
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
+  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
+
+  ActionHandler::GetInstance()->Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
+  ActionHandler::GetInstance()->Register (Action::ACTION_WIND, "wind", &Action_Wind);
   ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_RANDOM_INIT, "NETWORK_random_init", &Action_Network_RandomInit);
-  ActionHandler::GetInstance()->Register (Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC, "NETWORK_verify_random_sync", &Action_Network_VerifyRandomSync);
-  ActionHandler::GetInstance()->Register (Action::ACTION_TIME_VERIFY_SYNC, "TIME_verify_sync", &Action_Time_VerifySync);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_DISCONNECT, "INFO_client_disconnect", &Action_Info_ClientDisconnect);
   ActionHandler::GetInstance()->Register (Action::ACTION_INFO_CLIENT_CONNECT, "INFO_client_connect", &Action_Info_ClientConnect);
 
@@ -983,67 +1109,28 @@ ActionHandler::~ActionHandler()
 {
 }
 
-bool ActionHandler::ExecActionsForOneFrame()
-{
-  ASSERT(Game::GetInstance()->IsRunning());
-  Action * a;
-  std::list<Action*>::iterator it;
-  bool frame_complete = false;
-  Lock();
-  it = queue.begin();
-  while (it != queue.end() && !frame_complete)
-  {
-    a = (*it);
-    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
-      frame_complete = true;
-    it++;
-  }
-  if (!frame_complete) {
-    UnLock();
-    return false;
-  }
-
-  frame_complete = false;
-  it = queue.begin();
-  while (it != queue.end() && !frame_complete)
-  {
-    a = (*it);
-    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
-      frame_complete = true;
-
-    if (!a->IsFrameLess()) {
-      MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
-                GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
-                Time::GetInstance()->Read());
-    }
-
-    Exec (a);
-
-    delete *it;
-    it = queue.erase(it);
-  }
-  UnLock();
-  return frame_complete;
-}
-
-void ActionHandler::ExecFrameLessActions()
+void ActionHandler::ExecActions()
 {
   Action * a;
   std::list<Action*>::iterator it;
   Lock();
-
   for (it = queue.begin(); it != queue.end() ;)
   {
     a = (*it);
-
-    // only handle frame less actions.
-    if (!a->IsFrameLess()) {
+    //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
+    // If action is in the future, wait for next refresh
+    if (a->GetTimestamp() > Time::GetInstance()->Read()) {
       it++;
       continue;
     }
 
     // Do not execute actions from Network if we are not connected anymore
-    if (!a->GetCreator()|| Network::IsConnected()) {
+    if (!a->GetCreator()
+	|| Network::IsConnected()) {
+
+      MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
+		GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
+		Time::GetInstance()->Read());
 
       Exec (a);
 
@@ -1067,5 +1154,16 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   // To make action executed even if the menu is waiting in SDL_WaitEvent
   // One new event will be needed (see ExecActions).
   Menu::WakeUpOnCallback();
+}
+
+void ActionHandler::NewActionActiveCharacter(Action* a)
+{
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
+  Network::GetInstance()->SendActionToAll(a_begin_sync);
+  SendActiveCharacterInfo();
+  NewAction(a);
+  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
+  Network::GetInstance()->SendActionToAll(a_end_sync);
 }
 

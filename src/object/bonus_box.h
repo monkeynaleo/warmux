@@ -57,6 +57,8 @@ class BonusBox : public ObjBox
 
     void ApplyBonus(Character *);
     void Randomize();
+    void GetValueFromAction(Action *);
+    void StoreValue(Action *);
 };
 
 //-----------------------------------------------------------------------------

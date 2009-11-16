@@ -30,6 +30,7 @@
 #include <WORMUX_types.h>
 #include <WORMUX_vector2.h>
 
+
 /**
  * This template handle rectangles.
  *
@@ -187,38 +188,38 @@ template<class T> class rectangle
      * @param cr The rectangle used for clipping
      */
     void Clip( const rectangle &cr){
-      if (!Intersect(cr)) {
+      if( !Intersect(cr) ){
         size.x = 0;
         size.y = 0;
+
         return;
       }
 
       Vector2<T> newPositionBR = GetBottomRightPoint();
-      Vector2<T> crBottomRightPoint = cr.GetBottomRightPoint();
 
-      if (position.x < cr.position.x) {
+      if( position.x < cr.position.x )
         position.x = cr.position.x;
-      } else if (position.x > crBottomRightPoint.x) {
-        position.x = crBottomRightPoint.x;
-      }
 
-      if (position.y < cr.position.y) {
+      if( position.x > cr.GetBottomRightPoint().x )
+        position.x = cr.GetBottomRightPoint().x;
+
+      if( position.y < cr.position.y )
         position.y = cr.position.y;
-      } else if (position.y > crBottomRightPoint.y) {
-        position.y = crBottomRightPoint.y;
-      }
 
-      if (newPositionBR.x < cr.position.x) {
+      if( position.y > cr.GetBottomRightPoint().y )
+        position.y = cr.GetBottomRightPoint().y;
+
+      if( newPositionBR.x < cr.position.x )
         newPositionBR.x = cr.position.x;
-      } else if (newPositionBR.x > crBottomRightPoint.x) {
-        newPositionBR.x = crBottomRightPoint.x;
-      }
 
-      if (newPositionBR.y < cr.position.y) {
+      if( newPositionBR.x > cr.GetBottomRightPoint().x )
+        newPositionBR.x = cr.GetBottomRightPoint().x;
+
+      if( newPositionBR.y < cr.position.y )
         newPositionBR.y = cr.position.y;
-      } else if (newPositionBR.y > crBottomRightPoint.y) {
-        newPositionBR.y = crBottomRightPoint.y;
-      }
+
+      if( newPositionBR.y > cr.GetBottomRightPoint().y )
+        newPositionBR.y = cr.GetBottomRightPoint().y;
 
       size = newPositionBR - position + 1 ;
       ASSERT( cr.Contains( *this ) );

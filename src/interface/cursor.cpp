@@ -55,8 +55,8 @@ void CharacterCursor::Draw()
 
   // Draw cursor arround character
   Point2i center = ActiveCharacter().GetCenter();
-  uint x = center.x - arrow->GetWidth()/2;
-  uint y = ActiveCharacter().GetY() - arrow->GetHeight() - y_min;
+  uint x = center.x - arrow_jump->GetWidth()/2;
+  uint y = ActiveCharacter().GetY() - arrow_jump->GetHeight() - y_min;
 
   arrow->Draw( Point2i(x, y) );
 }

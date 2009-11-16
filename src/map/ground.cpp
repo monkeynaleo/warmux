@@ -66,9 +66,10 @@ void Ground::Reset(){
 }
 
 // Read the alpha channel of the pixel
-bool Ground::IsEmpty(const Point2i & pos) const {
-  ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
-  return GetAlpha(pos) != 255; // IsTransparent
+bool Ground::IsEmpty(const Point2i &pos) const{
+        ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
+
+        return GetAlpha( pos ) != 255; // IsTransparent
 }
 
 /*
@@ -132,59 +133,64 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
   //return true (and set p_x and p_y) if this point have been found
-  if (GetWorld().IsOutsideWorld(Point2i(x-1,y))
-      || GetWorld().IsOutsideWorld(Point2i(x+1,y))
-      || GetWorld().IsOutsideWorld(Point2i(x,y-1))
-      || GetWorld().IsOutsideWorld(Point2i(x,y+1))) {
+  if(GetWorld().IsOutsideWorld(Point2i(x-1,y))
+  || GetWorld().IsOutsideWorld(Point2i(x+1,y))
+  || GetWorld().IsOutsideWorld(Point2i(x,y-1))
+  || GetWorld().IsOutsideWorld(Point2i(x,y+1)) )
     return false;
-  }
 
   // check adjacents pixels one by one:
   //upper right pixel
-  if (x-1 != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x-1,y-1)) && 
-      (IsEmpty(Point2i(x-1,y)) || 
-      IsEmpty(Point2i(x,y-1)))) {
+  if(x-1 != bad_x
+  || y-1 != bad_y)
+  if( !IsEmpty(Point2i(x-1,y-1) )
+  &&( IsEmpty(Point2i(x-1,y))
+  || IsEmpty(Point2i(x,y-1))))
+  {
     p_x=x-1;
     p_y=y-1;
     return true;
   }
-
   //upper pixel
-  if (x != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x,y-1)) &&
-      (IsEmpty(Point2i(x-1,y-1)) || 
-      IsEmpty(Point2i(x+1,y-1)))) {
+  if(x != bad_x
+  || y-1 != bad_y)
+  if(!IsEmpty(Point2i(x,y-1))
+  &&(IsEmpty(Point2i(x-1,y-1))
+  || IsEmpty(Point2i(x+1,y-1))))
+  {
     p_x=x;
     p_y=y-1;
     return true;
   }
-
   //upper right pixel
-  if (x+1 != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x+1,y-1)) && 
-      (IsEmpty(Point2i(x,y-1)) || 
-      IsEmpty(Point2i(x+1,y)))) {
+  if(x+1 != bad_x
+  || y-1 != bad_y)
+  if(!IsEmpty(Point2i(x+1,y-1))
+  &&(IsEmpty(Point2i(x,y-1))
+  || IsEmpty(Point2i(x+1,y))))
+  {
     p_x=x+1;
     p_y=y-1;
     return true;
   }
-
   //pixel at the right
-  if (x+1 != bad_x || y != bad_y)
-  if (!IsEmpty(Point2i(x+1,y)) && 
-      (IsEmpty(Point2i(x+1,y-1)) || 
-      IsEmpty(Point2i(x,y+1)))) {
+  if(x+1 != bad_x
+  || y != bad_y)
+  if(!IsEmpty(Point2i(x+1,y))
+  &&(IsEmpty(Point2i(x+1,y-1))
+  || IsEmpty(Point2i(x,y+1))))
+  {
     p_x=x+1;
     p_y=y;
     return true;
   }
-
   //bottom right pixel
-  if (x+1 != bad_x || y+1 != bad_y)
-  if (!IsEmpty(Point2i(x+1,y+1)) &&
-      (IsEmpty(Point2i(x+1,y)) || 
-      IsEmpty(Point2i(x,y+1)))) {
+  if(x+1 != bad_x
+  || y+1 != bad_y)
+  if(!IsEmpty(Point2i(x+1,y+1))
+  &&(IsEmpty(Point2i(x+1,y))
+  || IsEmpty(Point2i(x,y+1))))
+  {
     p_x=x+1;
     p_y=y+1;
     return true;

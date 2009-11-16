@@ -27,10 +27,7 @@
 #include "character/character.h"
 #include "character/body.h"
 #include "team/teams_list.h"
-#include "game/time.h"
 #include "include/action_handler.h"
-
-const uint SUICIDE_SOUND_DURATION_IN_MS = 3600;
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
@@ -54,13 +51,11 @@ bool Suicide::p_Shoot()
 
 void Suicide::Refresh()
 {
-  // The suicide sound may play at different speed for different players,
-  // that's why the explosion should not depend on the fact if the sound has finished playing or not.
-  uint time_since_last_fire = Time::GetInstance()->Read() - m_last_fire_time;
-  if (m_last_fire_time > 0 && time_since_last_fire > SUICIDE_SOUND_DURATION_IN_MS && !ActiveCharacter().IsDead()) {
+  if(m_last_fire_time > 0 && !suicide_sound.IsPlaying() && !ActiveCharacter().IsDead()) {
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
     ActiveCharacter().SetEnergy(0); // Die!
+    SendActiveCharacterInfo();
     ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
   }
 }

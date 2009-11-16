@@ -19,6 +19,11 @@
  * Network connection menu: this menu allows the user to choose between
  * hosting a game or connecting to a server.
  *****************************************************************************/
+
+
+#include "menu/network_connection_menu.h"
+#include "menu/network_menu.h"
+
 #include "game/config.h"
 #include "graphic/video.h"
 #include "gui/button.h"
@@ -33,8 +38,6 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/net_error_msg.h"
-#include "menu/network_connection_menu.h"
-#include "menu/network_menu.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
@@ -273,7 +276,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Point2i msg_box_size(max_width,
                        GetMainWindow().GetHeight() - 50 - msg_box_pos.y);
 
-  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_BOLD);
+  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->SetPosition(msg_box_pos);
 
   widgets.AddWidget(msg_box);
@@ -286,9 +289,6 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   GetResourceManager().UnLoadXMLProfile(res);
 
-  //Double click
-  m_last_click_on_games_lst = 0;
-  m_double_click_interval = 400;
   // ************************************************************************
   InitNetInfo();
 
@@ -317,25 +317,6 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_refresh_net_games || w == refresh_net_games_label)
     ThreadRefreshList();
-
-  if (w == cl_server_address || w == cl_port_number || w == cl_server_pwd)
-    cl_net_games_lst->Deselect();
-	
-  //Hack to handle double click
-  if (w == cl_net_games_lst)
-  {
-    if (m_last_click_on_games_lst + m_double_click_interval > SDL_GetTicks())
-    {
-      if (cl_net_games_lst->GetSelectedItem() == -1) {
-        cl_net_games_lst->Select(cl_net_games_lst->MouseIsOnWhichItem(mousePosition));
-      } 
-      signal_ok();
-    }
-    else
-    {
-      m_last_click_on_games_lst = SDL_GetTicks();
-    }
-  }
 }
 
 void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)

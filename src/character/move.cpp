@@ -37,43 +37,38 @@ const int MAX_FALLING_HEIGHT=20;
 
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
-bool ComputeHeightMovement(Character & character, 
-                           int &       height,
-                           bool        falling)
+bool ComputeHeightMovement(Character &character, int &height,
+                           bool falling)
 {
-  BodyDirection_t charDirection = character.GetDirection(); 
-
-  if (character.IsInVacuum(Point2i(charDirection, 0))
-      && !character.IsInVacuum(Point2i(charDirection, +1)) ){
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
+  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ){
     //Land is flat, we can move!
     height = 0;
     return true;
   }
 
   //Compute height of the step:
-  if (character.IsInVacuum(Point2i(charDirection, 0))) {
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) ){
     //Try to go down:
-    for (height = 2; height <= MAX_FALLING_HEIGHT ; height++) {
-      if (!character.IsInVacuum(Point2i(charDirection, height))) {
+    for(height = 2; height <= MAX_FALLING_HEIGHT ; height++){
+      if( !character.IsInVacuum(Point2i(character.GetDirection(), height))) {
         height--;
         return true;
       }
     }
-
     //We can go down, but the step is too big -> the character will fall
     if (falling) {
-      character.SetX (character.GetXdouble() + charDirection);
+      character.SetX (character.GetXdouble() +character.GetDirection());
       character.UpdatePosition();
       character.SetMovement("fall");
     }
     return false;
-  } else {
+  }
+  else{
     //Try to go up:
-    for (height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--) {
-      if (character.IsInVacuum(Point2i(charDirection, height))) {
+    for(height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--)
+      if( character.IsInVacuum( Point2i(character.GetDirection(), height) ) )
         return true;
-      }
-    }
   }
   //We can't move!
   return false;
@@ -96,21 +91,18 @@ void MoveCharacter(Character &character, bool slowly)
     ghost = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
     ghost = character.IsOutsideWorld ( Point2i(1, 0) );
-
-  if (ghost) {
+  if (ghost){
     MSG_DEBUG("ghost", "%s will be a ghost.", character.GetName().c_str());
     character.Ghost();
     return;
   }
 
   // Compute fall height
-  if (!ComputeHeightMovement(character, height, true)) {
-    return;
-  }
+  if (!ComputeHeightMovement (character, height, true)) return;
 
   // Check we can move (to go not too fast)
-  while (character.CanStillMoveRL(walking_pause) && 
-         ComputeHeightMovement(character, height, true)) {
+  while (character.CanStillMoveRL(walking_pause) && ComputeHeightMovement (character, height, true))
+  {
     // Move !
     Game::GetInstance()->SetCharacterChosen(true);
 

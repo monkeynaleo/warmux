@@ -52,10 +52,6 @@ class Grapple : public Weapon
     Sprite* m_node_sprite;
 
     SoundSample cable_sound;
-    bool move_left_pressed;
-    bool move_right_pressed;
-    bool move_up_pressed;
-    bool move_down_pressed;
 
   protected:
     void Refresh();
@@ -95,6 +91,8 @@ class Grapple : public Weapon
     void Draw();
     virtual void NotifyMove(bool collision);
 
+    virtual void ActionStopUse() { DetachRope(); };
+
     GrappleConfig& cfg();
 
     // Attaching and dettaching nodes rope
@@ -111,33 +109,26 @@ class Grapple : public Weapon
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 
-    void StartMovingLeft();
-    void StopMovingLeft();
-
-    void StartMovingRight();
-    void StopMovingRight();
-
-    void StartMovingUp();
-    void StopMovingUp();
-
-    void StartMovingDown();
-    void StopMovingDown();
-
-    void StartShooting();
-    void StopShooting();
-
     // Keys management
-    void HandleKeyPressed_Up(bool slowly);
-    void HandleKeyReleased_Up(bool slowly);
+    void HandleKeyPressed_Up(bool shift);
+    void HandleKeyRefreshed_Up(bool shift);
+    void HandleKeyReleased_Up(bool shift);
 
-    void HandleKeyPressed_Down(bool slowly);
-    void HandleKeyReleased_Down(bool slowly);
+    void HandleKeyPressed_Down(bool shift);
+    void HandleKeyRefreshed_Down(bool shift);
+    void HandleKeyReleased_Down(bool shift);
 
-    void HandleKeyPressed_MoveRight(bool slowly);
-    void HandleKeyReleased_MoveRight(bool slowly);
+    void HandleKeyPressed_MoveRight(bool shift);
+    void HandleKeyRefreshed_MoveRight(bool shift);
+    void HandleKeyReleased_MoveRight(bool shift);
 
-    void HandleKeyPressed_MoveLeft(bool slowly);
-    void HandleKeyReleased_MoveLeft(bool slowly);
+    void HandleKeyPressed_MoveLeft(bool shift);
+    void HandleKeyRefreshed_MoveLeft(bool shift);
+    void HandleKeyReleased_MoveLeft(bool shift);
+
+    void HandleKeyPressed_Shoot(bool shift);
+    void HandleKeyRefreshed_Shoot(bool) { };
+    void HandleKeyReleased_Shoot(bool) { };
 
     void PrintDebugRope();
 };

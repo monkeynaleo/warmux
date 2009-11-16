@@ -42,8 +42,6 @@ wormux_SOURCES = \
         game/game_mode.h \
         game/time.cpp \
         game/time.h \
-        game/stopwatch.cpp \
-        game/stopwatch.h \
 	graphic/color.cpp \
         graphic/color.h \
         graphic/colors.h \
@@ -251,8 +249,6 @@ wormux_SOURCES = \
         particles/bullet.h \
         particles/dark_smoke.cpp \
         particles/dark_smoke.h \
-        particles/explosion_particle.cpp \
-        particles/explosion_particle.h \
         particles/explosion_smoke.cpp \
         particles/explosion_smoke.h \
         particles/fading_text.cpp \

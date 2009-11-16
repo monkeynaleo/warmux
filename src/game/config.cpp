@@ -38,7 +38,6 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/constant.h"
-#include "interface/keyboard.h"
 #include "network/network.h"
 #include "object/object_cfg.h"
 #include "sound/jukebox.h"
@@ -397,15 +396,6 @@ void Config::LoadDefaultValue()
   }
 #endif
 
-  //== Default keyboard key
-  {
-    const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
-    if (node) {
-      Keyboard::GetInstance()->SetConfig(node);
-    }
-
-  }
-
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
@@ -517,16 +507,6 @@ void Config::LoadXml(const xmlNode *xml)
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
-
-  //=== controls ===
-  if ((elem = XmlReader::GetMarker(xml, "controls")) != NULL)
-  {
-    const xmlNode *node = XmlReader::GetMarker(elem, "keyboard");
-    if (node)
-    {
-      Keyboard::GetInstance()->SetConfig(node);
-    }
-  }
 }
 
 bool Config::Save(bool save_current_teams)
@@ -671,11 +651,6 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
-
-  //=== controls ===
-   xmlNode *controls_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"controls"));
-   Keyboard::GetInstance()->SaveConfig(controls_node);
-
   return doc.Save();
 }
 
@@ -719,7 +694,7 @@ void Config::SetNetworkLocalTeams()
 
   for (int i=0; it != end; ++it, i++)
     {
-      if ((**it).IsLocalHuman())
+      if ((**it).IsLocal())
 	{
 	  ConfigTeam config;
 	  config.id = (**it).GetId();

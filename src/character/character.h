@@ -83,14 +83,6 @@ private:
   // this is needed because of network needing to know
   // if we have changed of active character
   bool is_playing;
-  bool move_left_pressed;
-  bool move_left_slowly_pressed;
-  bool move_right_pressed;
-  bool move_right_slowly_pressed;
-  bool increase_fire_angle_pressed;
-  bool increase_fire_angle_slowly_pressed;
-  bool decrease_fire_angle_pressed;
-  bool decrease_fire_angle_slowly_pressed;
 public:
 
   // Previous strength
@@ -116,7 +108,7 @@ private:
   void StartWalk(bool slowly);
   void StopWalk();
   bool IsWalking() const;
-  void StopWalkingIfNecessary();
+
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -157,6 +149,16 @@ public:
     else disease_damage_per_turn = 0;
   }
 
+  // ================================================
+  // Used to sync value across network
+  virtual void GetValueFromAction(Action *);
+  virtual void StoreValue(Action *);
+
+  static void RetrieveCharacterFromAction(Action *);
+  static void StoreActiveCharacter(Action *);
+  static void StoreCharacter(Action *, uint team_no, uint char_no);
+  // ================================================
+
   void Draw();
   void Refresh();
 
@@ -171,11 +173,6 @@ public:
   double GetAbsFiringAngle() const { return firing_angle; };
   void SetFiringAngle(double angle);
 
-  void StartIncreasingFireAngle(bool slowly);
-  void StopIncreasingFireAngle(bool slowly);
-  void StartDecreasingFireAngle(bool slowly);
-  void StopDecreasingFireAngle(bool slowly);
-
   // Show hide the Character
   void Hide() { hidden = true; };
   void Show() { hidden = false; };
@@ -188,13 +185,6 @@ public:
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
   void Move(enum BodyDirection direction, bool slowly);
-
-  void StartMovingLeft(bool slowly);
-  void StopMovingLeft(bool slowly);
-  bool IsMovingLeft(bool slowly);
-  void StartMovingRight(bool slowly);
-  void StopMovingRight(bool slowly);
-  bool IsMovingRight(bool slowly);
 
   // Jumps
   void Jump(double strength, double angle);
@@ -221,8 +211,7 @@ public:
   bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
   void SetCustomName(const std::string name);
    // Hand position
-  void GetHandPosition(Point2i & result) const;
-  void GetRelativeHandPosition(Point2i & result) const;
+  const Point2i & GetHandPosition() const;
 
   // Damage report
   const DamageStatistics* GetDamageStats() const { return damage_stats; };
@@ -239,26 +228,33 @@ public:
   void SetMovementOnce(const std::string& name, bool force=false);
 
   // Keyboard handling
-  void HandleKeyPressed_MoveRight(bool slowly);
-  void HandleKeyReleased_MoveRight(bool slowly);
+  void HandleKeyPressed_MoveRight(bool shift);
+  void HandleKeyRefreshed_MoveRight(bool shift);
+  void HandleKeyReleased_MoveRight(bool shift);
 
-  void HandleKeyPressed_MoveLeft(bool slowly);
-  void HandleKeyReleased_MoveLeft(bool slowly);
+  void HandleKeyPressed_MoveLeft(bool shift);
+  void HandleKeyRefreshed_MoveLeft(bool shift);
+  void HandleKeyReleased_MoveLeft(bool shift);
 
-  void HandleKeyPressed_Up(bool slowly);
-  void HandleKeyReleased_Up(bool slowly);
+  void HandleKeyPressed_Up(bool shift) { HandleKeyRefreshed_Up(shift); };
+  void HandleKeyRefreshed_Up(bool shift);
+  void HandleKeyReleased_Up(bool) const {};
 
-  void HandleKeyPressed_Down(bool slowly);
-  void HandleKeyReleased_Down(bool slowly);
+  void HandleKeyPressed_Down(bool shift) { HandleKeyRefreshed_Down(shift); };
+  void HandleKeyRefreshed_Down(bool shift);
+  void HandleKeyReleased_Down(bool) const {};
 
-  void HandleKeyPressed_Jump();
-  void HandleKeyReleased_Jump() const {};
+  void HandleKeyPressed_Jump(bool shift);
+  void HandleKeyRefreshed_Jump(bool) const {};
+  void HandleKeyReleased_Jump(bool) const {};
 
-  void HandleKeyPressed_HighJump();
-  void HandleKeyReleased_HighJump() const { };
+  void HandleKeyPressed_HighJump(bool shift);
+  void HandleKeyRefreshed_HighJump(bool) const { };
+  void HandleKeyReleased_HighJump(bool) const { };
 
-  void HandleKeyPressed_BackJump();
-  void HandleKeyReleased_BackJump() const {};
+  void HandleKeyPressed_BackJump(bool shift);
+  void HandleKeyRefreshed_BackJump(bool) const {};
+  void HandleKeyReleased_BackJump(bool) const {};
 
 };
 

@@ -86,7 +86,7 @@ const uint PAUSE_CHG_DIRECTION = 80; // ms
 
 /* FIXME This methode is really strange, all this should probably be done in
  * constructor of Body...*/
-void Character::SetBody(Body * char_body)
+void Character::SetBody(Body* char_body)
 {
   body = char_body;
   body->SetOwner(this);
@@ -130,17 +130,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step(-1),
   particle_engine(new ParticleEngine(500)),
   is_playing(false),
-  move_left_pressed(false),
-  move_left_slowly_pressed(false),
-  move_right_pressed(false),
-  move_right_slowly_pressed(false),
-  increase_fire_angle_pressed(false),
-  increase_fire_angle_slowly_pressed(false),
-  decrease_fire_angle_pressed(false),
-  decrease_fire_angle_slowly_pressed(false),
   previous_strength(0),
   body(NULL)
 {
+
   m_is_character = true;
   SetCollisionModel(true, true, true);
   /* body stuff */
@@ -193,44 +186,26 @@ Character::Character (const Character& acharacter) :
   channel_step(acharacter.channel_step),
   particle_engine(new ParticleEngine(250)),
   is_playing(acharacter.is_playing),
-  move_left_pressed(false),
-  move_left_slowly_pressed(false),
-  move_right_pressed(false),
-  move_right_slowly_pressed(false),
-  increase_fire_angle_pressed(false),
-  increase_fire_angle_slowly_pressed(false),
-  decrease_fire_angle_pressed(false),
-  decrease_fire_angle_slowly_pressed(false),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
-  if (acharacter.body) {
-    Body * newBody = new Body(*acharacter.body);
-    SetBody(newBody);
-  }
-
-  if (acharacter.name_text) {
+  if (acharacter.body)
+    SetBody(new Body(*acharacter.body));
+  if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
-  }
 }
 
 Character::~Character()
 {
   MSG_DEBUG("character", "Unload character %s", character_name.c_str());
-  if (body) {
+  if(body)
     delete body;
-  }
-
-  if (name_text) {
+  if(name_text)
     delete name_text;
-  }
-
-  if(particle_engine) {
+  if(particle_engine)
     delete particle_engine;
-  }
-
-  body            = NULL;
-  name_text       = NULL;
+  body          = NULL;
+  name_text     = NULL;
   particle_engine = NULL;
 }
 
@@ -276,14 +251,15 @@ void Character::DrawEnergyBar(int dy) const
                      - Camera::GetInstance()->GetPosition() );
 }
 
-void Character::DrawName(int dy) const
+void Character::DrawName (int dy) const
 {
-  if (IsDead()) return;
+  if(IsDead()) return;
 
-  const int x = GetCenterX();
-  const int y = GetY() + dy;
+  const int x =  GetCenterX();
+  const int y = GetY()+dy;
 
-  if (Config::GetInstance()->GetDisplayNameCharacter()) {
+  if (Config::GetInstance()->GetDisplayNameCharacter())
+  {
     name_text->DrawCenterTopOnMap(Point2i(x,y));
   }
 
@@ -369,15 +345,6 @@ void Character::Die()
     SetMovement("breathe");
     SetCollisionModel(true, false, false);
 
-    move_left_pressed = false;
-    move_left_slowly_pressed = false;
-    move_right_pressed = false;
-    move_right_slowly_pressed = false;
-    increase_fire_angle_pressed = false;
-    increase_fire_angle_slowly_pressed = false;
-    decrease_fire_angle_pressed = false;
-    decrease_fire_angle_slowly_pressed = false;
-
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
     ASSERT(IsDead());
@@ -444,8 +411,9 @@ void Character::Draw()
     std::ostringstream ss;
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
-	Text text(ss.str());
-	text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
+    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
+        GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy),
+        ss.str(), white_color);
   }
 
 #ifdef DEBUG
@@ -477,7 +445,7 @@ void Character::Jump(double strength, double angle /*in radian */)
   UpdateLastMovingTime();
   walking_time = Time::GetInstance()->Read();
 
-  if (!CanJump()) return;
+  if (!CanJump() && ActiveTeam().IsLocal()) return;
 
   SetMovement("jump");
 
@@ -537,6 +505,7 @@ void Character::DoShoot()
   MSG_DEBUG("weapon.shoot", "-> begin at time %u", Time::GetInstance()->Read());
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
+  body->UpdateWeaponPosition(GetPosition());
   damage_stats->OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
   MSG_DEBUG("weapon.shoot", "<- end");
@@ -549,33 +518,6 @@ void Character::UpdateLastMovingTime()
 
 void Character::Refresh()
 {
-  if (IsImmobile()) {
-    bool left =(move_left_pressed || move_left_slowly_pressed);
-    bool right = (move_right_pressed || move_right_slowly_pressed);
-    if (left && !right) {
-      Move(DIRECTION_LEFT, move_left_slowly_pressed);
-    } else if (right && !left) {
-      Move(DIRECTION_RIGHT, move_right_slowly_pressed);
-    }
-    bool increase_angle = increase_fire_angle_pressed || increase_fire_angle_slowly_pressed;
-    bool decrease_angle = decrease_fire_angle_pressed || decrease_fire_angle_slowly_pressed;
-    if (increase_angle && !decrease_angle) {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (increase_fire_angle_slowly_pressed)
-        AddFiringAngle(DELTA_CROSSHAIR/10.0);
-      else
-        AddFiringAngle(DELTA_CROSSHAIR);
-    } else if (decrease_angle && ! increase_angle) {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (decrease_fire_angle_slowly_pressed)
-        AddFiringAngle(-DELTA_CROSSHAIR/10.0);
-      else
-        AddFiringAngle(-DELTA_CROSSHAIR);
-    }
-  }
-
   if (IsGhost()) return;
 
   UpdatePosition();
@@ -762,6 +704,11 @@ void Character::Move(enum BodyDirection direction, bool slowly)
   }
 
   ASSERT(&ActiveCharacter() == this);
+
+  //Refresh skin position across network
+  if (!Network::GetInstance()->IsLocal()
+      && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    SendActiveCharacterInfo();
 }
 
 // Signal the end of a fall
@@ -872,14 +819,6 @@ void Character::StopPlaying()
   SetMovement("breathe");
   body->ResetWalk();
   SetRebounding(true);
-  move_left_pressed = false;
-  move_left_slowly_pressed = false;
-  move_right_pressed = false;
-  move_right_slowly_pressed = false;
-  increase_fire_angle_pressed = false;
-  increase_fire_angle_slowly_pressed = false;
-  decrease_fire_angle_pressed = false;
-  decrease_fire_angle_slowly_pressed = false;
 }
 
 // Begining of turn or changed to this character
@@ -903,15 +842,8 @@ bool Character::IsActiveCharacter() const
 }
 
 // Hand position
-void Character::GetHandPosition(Point2i & result) const
-{
-  GetRelativeHandPosition(result);
-  result += GetPosition();
-}
-
-void Character::GetRelativeHandPosition(Point2i & result) const
-{
-  body->GetRelativeHandPosition(result);
+const Point2i & Character::GetHandPosition() const {
+  return body->GetHandPosition();
 }
 
 double Character::GetFiringAngle() const {
@@ -920,7 +852,6 @@ double Character::GetFiringAngle() const {
   return firing_angle;
 }
 
-#include <iostream>
 void Character::SetFiringAngle(double angle) {
   /*while(angle > 2 * M_PI)
     angle -= 2 * M_PI;
@@ -930,7 +861,6 @@ void Character::SetFiringAngle(double angle) {
                              -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;
   m_team.crosshair.Refresh(GetFiringAngle());
-  body->Rebuild();
 }
 
 void Character::SetWeaponClothe()
@@ -996,6 +926,154 @@ uint Character::GetCharacterIndex() const
   return 0;
 }
 
+// ###################################################################
+// ###################################################################
+// ###################################################################
+
+void Character::StoreValue(Action *a)
+{
+  PhysicalObj::StoreValue(a);
+  a->Push((int)GetDirection());
+  a->Push(GetAbsFiringAngle());
+  a->Push((int)disease_damage_per_turn);
+  a->Push((int)disease_duration);
+  if (IsActiveCharacter()) { // If active character, store step animation
+    a->Push((int)true);
+    a->Push(GetBody()->GetClothe());
+    a->Push(GetBody()->GetMovement());
+    a->Push((int)GetBody()->GetFrame());
+  } else {
+    a->Push((int)false);
+  }
+}
+
+void Character::GetValueFromAction(Action *a)
+{
+  // those 2 parameters will be retrieved by PhysicalObj::GetValueFromAction
+  alive_t prev_live_state = m_alive;
+  int prev_energy = m_energy;
+  Point2d prev_position = Physics::GetPos();
+
+  PhysicalObj::GetValueFromAction(a);
+  SetDirection((BodyDirection_t)(a->PopInt()));
+  SetFiringAngle(a->PopDouble());
+
+  if (m_alive != prev_live_state) {
+    switch (m_alive) {
+    case ALIVE:
+      fprintf(stderr, "Character::GetValueFromAction: %s has been resurrected\n",
+	      GetName().c_str());
+      SetClothe("normal");
+      SetMovement("breathe");
+      if (prev_live_state == DROWNED) {
+	SignalGoingOutOfWater();
+      }
+      break;
+    case DEAD:
+      fprintf(stderr,
+	      "Character::GetValueFromAction: %s has died on the other side of the network\n"
+	      "        Previous energy: %d\n",
+	      GetName().c_str(), prev_energy);
+      death_explosion = false;
+
+      // to avoid violating an ASSERT in Die()
+      m_alive = prev_live_state;
+      if (m_alive != ALIVE && m_alive != DROWNED)
+	m_alive = ALIVE;
+
+      Die();
+      break;
+    case GHOST: {
+      fprintf(stderr, "Character::GetValueFromAction: %s is now a ghost!\n", GetName().c_str());
+      m_alive = prev_live_state;
+      bool was_dead = IsDead();
+      m_alive = GHOST;
+      SignalGhostState(was_dead);
+      break;
+    }
+    case DROWNED:
+      fprintf(stderr, "Character::GetValueFromAction: %s is drowning!\n", GetName().c_str());
+      SignalDrowning();
+      break;
+    }
+  }
+
+  if (prev_energy != m_energy) {
+    fprintf(stderr,
+	    "Character::GetValueFromAction: energy points were differents for %s:\n"
+	    "        - remote : %d\n"
+	    "        - local  : %d\n",
+	    GetName().c_str(), m_energy, prev_energy);
+    if (m_energy > 0) {
+      energy_bar.Actu(m_energy);
+    }
+  }
+
+  uint disease_damage_per_turn = (a->PopInt());
+  uint disease_duration = (a->PopInt());
+  SetDiseaseDamage(disease_damage_per_turn, disease_duration);
+  if (a->PopInt()) { // If active characters, retrieve stored animation
+    if (GetTeam().IsActiveTeam())
+      ActiveTeam().SelectCharacter(this);
+
+    std::string clothe = a->PopString();
+    std::string movement = a->PopString();
+    uint frame = a->PopInt();
+
+    fprintf(stderr,
+	    "Character::GetValueFromAction: Animation for %s\n"
+	    "        - Clothe %s (current: %s)\n"
+	    "        - Movement %s (current: %s)\n"
+	    "        - Frame %d (current: %d)\n",
+	    GetName().c_str(),
+	    clothe.c_str(), GetBody()->GetClothe().c_str(),
+	    movement.c_str(), GetBody()->GetMovement().c_str(),
+	    frame, GetBody()->GetFrame());
+
+    SetClothe(clothe, true);
+    SetMovement(movement, true);
+    GetBody()->SetFrame(frame);
+
+    GetBody()->UpdateWeaponPosition(GetPosition());
+  }
+
+  // If the player has moved, the camera should follow it!
+  Point2d current_position = Physics::GetPos();
+  if (IsActiveCharacter() && prev_position != current_position) {
+    Camera::GetInstance()->FollowObject(this);
+    HideGameInterface();
+  }
+}
+
+// Static method
+void Character::RetrieveCharacterFromAction(Action *a)
+{
+  int team_no = a->PopInt();
+  int char_no = a->PopInt();
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->GetValueFromAction(a);
+}
+
+// Static method
+void Character::StoreActiveCharacter(Action *a)
+{
+  Character::StoreCharacter(a, ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+// Static method
+void Character::StoreCharacter(Action *a, uint team_no, uint char_no)
+{
+  a->Push((int)team_no);
+  a->Push((int)char_no);
+  Character * c = GetTeamsList().FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->StoreValue(a);
+}
+
+// ###################################################################
+// ###################################################################
+// ###################################################################
+
+
 const std::string& Character::GetName() const
 {
     return character_name;
@@ -1014,225 +1092,135 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 // ###################################################################
 
-void Character::StopWalkingIfNecessary()
-{
-  bool right = move_right_pressed || move_right_slowly_pressed;
-  bool left = move_left_pressed || move_left_slowly_pressed;
-  if ((right == left) || (!left && !right))
-    body->StopWalk();
-}
-
 // #################### MOVE_RIGHT
-void Character::StartMovingRight(bool slowly)
+void Character::HandleKeyPressed_MoveRight(bool shift)
 {
-  if (slowly)
-    move_right_slowly_pressed = true;
-  else
-    move_right_pressed = true;
-  StopWalkingIfNecessary();
+  StartWalk(shift);
 
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Hide();
-  }
+  HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Character::StopMovingRight(bool slowly)
+void Character::HandleKeyRefreshed_MoveRight(bool shift)
 {
-  if (slowly)
-    move_right_slowly_pressed = false;
-  else
-    move_right_pressed = false;
-  StopWalkingIfNecessary();
+  HideGameInterface();
 
-  if (Network::GetInstance()->IsTurnMaster())
-    ActiveTeam().crosshair.Show();
+  ActiveTeam().crosshair.Hide();
+
+  if (IsImmobile())
+    Move(DIRECTION_RIGHT, shift);
 }
 
-bool Character::IsMovingRight(bool slowly)
+void Character::HandleKeyReleased_MoveRight(bool)
 {
-  if (slowly)
-   return move_right_slowly_pressed;
-  else
-   return move_right_pressed;
-}
+  StopWalk();
 
-void Character::HandleKeyPressed_MoveRight(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_RIGHT);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
+  ActiveTeam().crosshair.Show();
 
-void Character::HandleKeyReleased_MoveRight(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_RIGHT);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
+  SendActiveCharacterInfo();
 }
 
 // #################### MOVE_LEFT
-
-void Character::StartMovingLeft(bool slowly)
+void Character::HandleKeyPressed_MoveLeft(bool shift)
 {
-  if (slowly)
-    move_left_slowly_pressed = true;
-  else
-    move_left_pressed = true;
-  StopWalkingIfNecessary();
+  StartWalk(shift);
 
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Hide();
-  }
+  HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Character::StopMovingLeft(bool slowly)
+void Character::HandleKeyRefreshed_MoveLeft(bool shift)
 {
-  if (slowly)
-    move_left_slowly_pressed = false;
-  else
-    move_left_pressed = false;
-  StopWalkingIfNecessary();
+  HideGameInterface();
 
-  if (Network::GetInstance()->IsTurnMaster())
-    ActiveTeam().crosshair.Show();
+  ActiveTeam().crosshair.Hide();
+
+  if (IsImmobile())
+    Move(DIRECTION_LEFT, shift);
 }
 
-bool Character::IsMovingLeft(bool slowly)
+void Character::HandleKeyReleased_MoveLeft(bool)
 {
-  if (slowly)
-   return move_left_slowly_pressed;
-  else
-   return move_left_pressed;
-}
+  body->StopWalk();
 
-void Character::HandleKeyPressed_MoveLeft(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_LEFT);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
+  ActiveTeam().crosshair.Show();
 
-void Character::HandleKeyReleased_MoveLeft(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_LEFT);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
+  SendActiveCharacterInfo();
 }
 
 // #################### UP
-void Character::StartDecreasingFireAngle(bool slowly)
+void Character::HandleKeyRefreshed_Up(bool shift)
 {
-  if (slowly)
-    decrease_fire_angle_slowly_pressed = true;
-  else
-    decrease_fire_angle_pressed = true;
+  HideGameInterface();
 
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Show();
-  }
-}
+  ActiveTeam().crosshair.Show();
 
-void Character::StopDecreasingFireAngle(bool slowly)
-{
-  if (slowly)
-    decrease_fire_angle_slowly_pressed = false;
-  else
-    decrease_fire_angle_pressed = false;
-}
-
-
-void Character::HandleKeyPressed_Up(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Character::HandleKeyReleased_Up(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
+  if (IsImmobile())
+    {
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (shift) AddFiringAngle(-DELTA_CROSSHAIR/10.0);
+      else       AddFiringAngle(-DELTA_CROSSHAIR);
+    }
 }
 
 // #################### DOWN
-
-
-void Character::StartIncreasingFireAngle(bool slowly)
+void Character::HandleKeyRefreshed_Down(bool shift)
 {
-  if (slowly)
-    increase_fire_angle_slowly_pressed = true;
-  else
-    increase_fire_angle_pressed = true;
+  HideGameInterface();
 
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Show();
-  }
-}
+  ActiveTeam().crosshair.Show();
 
-void Character::StopIncreasingFireAngle(bool slowly)
-{
-  if (slowly)
-    increase_fire_angle_slowly_pressed = false;
-  else
-    increase_fire_angle_pressed = false;
-}
-
-void Character::HandleKeyPressed_Down(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Character::HandleKeyReleased_Down(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
+  if (IsImmobile())
+    {
+      UpdateLastMovingTime();
+      CharacterCursor::GetInstance()->Hide();
+      if (shift) AddFiringAngle(DELTA_CROSSHAIR/10.0);
+      else       AddFiringAngle(DELTA_CROSSHAIR);
+      SendActiveCharacterInfo();
+    }
 }
 
 // #################### JUMP
 
-void Character::HandleKeyPressed_Jump()
+void Character::HandleKeyPressed_Jump(bool)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action *a = new Action(Action::ACTION_CHARACTER_JUMP);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_CHARACTER_JUMP);
+    SendActiveCharacterAction(a);
+    Jump();
   }
 }
 
 // #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump()
+void Character::HandleKeyPressed_HighJump(bool)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action *a = new Action(Action::ACTION_CHARACTER_HIGH_JUMP);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_CHARACTER_HIGH_JUMP);
+    SendActiveCharacterAction(a);
+    HighJump();
   }
 }
 
 // #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump()
+void Character::HandleKeyPressed_BackJump(bool)
 {
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
 
   if (IsImmobile()) {
-    Action *a = new Action(Action::ACTION_CHARACTER_BACK_JUMP);
-    ActionHandler::GetInstance()->NewAction(a);
+    Action a(Action::ACTION_CHARACTER_BACK_JUMP);
+    SendActiveCharacterAction(a);
+    BackJump();
   }
 }
+
+
 

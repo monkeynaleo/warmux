@@ -23,16 +23,6 @@
 #include "game/game.h"
 #include "network/chat.h"
 #include <SDL_events.h>
-#include <libxml/tree.h>
-
-#define MODIFIER_OFFSET (SDLK_LAST + 1)
-#define SHIFT_BIT 0x1
-#define ALT_BIT 0x2
-#define CONTROL_BIT 0x4
-#define SHIFT_OFFSET (MODIFIER_OFFSET * SHIFT_BIT)
-#define CONTROL_OFFSET (MODIFIER_OFFSET * CONTROL_BIT)
-#define ALT_OFFSET (MODIFIER_OFFSET * ALT_BIT)
-
 
 Keyboard::Keyboard() : ManMachineInterface()
 {
@@ -47,155 +37,43 @@ Keyboard::Keyboard() : ManMachineInterface()
 
 void Keyboard::SetDefaultConfig()
 {
-  SetKeyAction(SDLK_ESCAPE,                  ManMachineInterface::KEY_QUIT);
-}
-
-void Keyboard::SetConfig(const xmlNode *node)
-{
-  ASSERT(node != NULL);
-
-  //Remove old key configuration
-  ClearKeyAction();
-
-  xmlNodeArray list = XmlReader::GetNamedChildren(node, "bind");
-  for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it)
-  {
-    std::string key_name, action_name;
-    bool shift, control, alt;
-    shift = false;
-    control = false;
-    alt = false;
-
-    //Extract XML config
-    XmlReader::ReadStringAttr(*it, "key", key_name);
-    XmlReader::ReadStringAttr(*it, "action", action_name);
-    XmlReader::ReadBoolAttr(*it, "shift", shift);
-    XmlReader::ReadBoolAttr(*it, "control", control);
-    XmlReader::ReadBoolAttr(*it, "alt", alt);
-
-    //Generate key and action value
-    int key;
-    Key_t action;
-
-    key = GetKeyFromKeyName(key_name);
-    if (shift) {
-      key += SHIFT_OFFSET;
-    }
-    if (control) {
-      key += CONTROL_OFFSET;
-    }
-    if (alt) {
-      key += ALT_OFFSET;
-    }
-
-    action = GetActionFromActionName(action_name);
-
-    //Set association
-    SetKeyAction(key, action);
-
-  }
-}
-
-void Keyboard::SaveConfig( xmlNode *node) const
-{
-  xmlNode *keyboard_node = xmlAddChild(node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"keyboard"));
-  std::map<int, std::vector<Key_t> >::const_iterator it;
-
-  for (it = layout.begin(); it != layout.end(); it++)
-  {
-    const std::vector<Key_t> actions = it->second;
-    for (uint i = 0; i < actions.size(); i++)
-    {
-      bool shift, control, alt;
-      shift = false;
-      control = false;
-      alt = false;
-      int key = it->first;
-
-      if (key > CONTROL_OFFSET)
-      {
-        key -= CONTROL_OFFSET;
-        control = true;
-      }
-
-      if (key > ALT_OFFSET)
-      {
-        key -= ALT_OFFSET;
-        alt = true;
-      }
-
-      if (key > SHIFT_OFFSET)
-      {
-        key -= SHIFT_OFFSET;
-        shift = true;
-      }
-
-      //Generate node
-      xmlNode *bind = xmlAddChild(keyboard_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"bind"));
-      xmlSetProp(bind, (const xmlChar*)"key", (const xmlChar*)GetKeyNameFromKey(key).c_str());
-      xmlSetProp(bind, (const xmlChar*)"action", (const xmlChar*)GetActionNameFromAction(actions.at(i)).c_str());
-      if (shift) xmlSetProp(bind, (const xmlChar*)"shift", (const xmlChar*)"true");
-      if (control) xmlSetProp(bind, (const xmlChar*)"control", (const xmlChar*)"true");
-      if (alt) xmlSetProp(bind, (const xmlChar*)"alt", (const xmlChar*)"true");
-    }
-  }
-}
-
-void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
-{
-  MSG_DEBUG("keyboard", "%s %s%s%s%d",
-            event_type == KEY_PRESSED ?"pressed":"released",
-            ((key_code / MODIFIER_OFFSET) & CONTROL_BIT)?"[control] + ": "",
-            ((key_code / MODIFIER_OFFSET) & ALT_BIT)?"[alt] + ": "",
-            ((key_code / MODIFIER_OFFSET) & SHIFT_BIT)?"[shift] + ": "",
-            key_code % MODIFIER_OFFSET);
-  std::map<int, std::vector<Key_t> >::iterator it = layout.find(key_code);
-
-  if(it == layout.end())
-    return;
-
-
-  std::vector<Key_t> keys = it->second;
-  std::vector<Key_t>::const_iterator itv;
-  
-  for(itv = keys.begin(); itv != keys.end() ; itv++)
-  {  
-    //While player writes, it cannot control the game but QUIT or PAUSE.
-    if (Game::GetInstance()->chatsession.CheckInput()) {
-      switch (*itv) {
-      case KEY_QUIT:
-      case KEY_PAUSE:
-        break;
-      default:
-        return;
-      }
-    }
-
-    if(event_type == KEY_PRESSED) {
-      HandleKeyPressed(*itv);
-      return;
-    }
-
-    if(event_type == KEY_RELEASED) {
-      HandleKeyReleased(*itv);
-      return;
-    }
-  }
-}
-
-static int GetModifierBitsFromSDL() {
-  SDLMod sdl_modifier_bits = SDL_GetModState();
-  int result = 0;
-  if (sdl_modifier_bits & KMOD_SHIFT)
-    result |= SHIFT_BIT;
-
-  if (sdl_modifier_bits & KMOD_ALT)
-    result |= ALT_BIT;
-
-  if (sdl_modifier_bits & KMOD_CTRL)
-    result |= CONTROL_BIT;
-
-  return result;
+  SetKeyAction(SDLK_LEFT,      ManMachineInterface::KEY_MOVE_LEFT);
+  SetKeyAction(SDLK_RIGHT,     ManMachineInterface::KEY_MOVE_RIGHT);
+  SetKeyAction(SDLK_UP,        ManMachineInterface::KEY_UP);
+  SetKeyAction(SDLK_DOWN,      ManMachineInterface::KEY_DOWN);
+  SetKeyAction(SDLK_RETURN,    ManMachineInterface::KEY_JUMP);
+  SetKeyAction(SDLK_BACKSPACE, ManMachineInterface::KEY_HIGH_JUMP);
+  SetKeyAction(SDLK_b,         ManMachineInterface::KEY_BACK_JUMP);
+  SetKeyAction(SDLK_SPACE,     ManMachineInterface::KEY_SHOOT);
+  SetKeyAction(SDLK_TAB,       ManMachineInterface::KEY_NEXT_CHARACTER);
+  SetKeyAction(SDLK_ESCAPE,    ManMachineInterface::KEY_QUIT);
+  SetKeyAction(SDLK_PAUSE,     ManMachineInterface::KEY_PAUSE);
+  SetKeyAction(SDLK_F10,       ManMachineInterface::KEY_FULLSCREEN);
+  SetKeyAction(SDLK_F9,        ManMachineInterface::KEY_TOGGLE_INTERFACE);
+  SetKeyAction(SDLK_F1,        ManMachineInterface::KEY_WEAPONS1);
+  SetKeyAction(SDLK_F2,        ManMachineInterface::KEY_WEAPONS2);
+  SetKeyAction(SDLK_F3,        ManMachineInterface::KEY_WEAPONS3);
+  SetKeyAction(SDLK_F4,        ManMachineInterface::KEY_WEAPONS4);
+  SetKeyAction(SDLK_F5,        ManMachineInterface::KEY_WEAPONS5);
+  SetKeyAction(SDLK_F6,        ManMachineInterface::KEY_WEAPONS6);
+  SetKeyAction(SDLK_F7,        ManMachineInterface::KEY_WEAPONS7);
+  SetKeyAction(SDLK_F8,        ManMachineInterface::KEY_WEAPONS8);
+  SetKeyAction(SDLK_c,         ManMachineInterface::KEY_CENTER);
+  SetKeyAction(SDLK_1,         ManMachineInterface::KEY_WEAPON_1);
+  SetKeyAction(SDLK_2,         ManMachineInterface::KEY_WEAPON_2);
+  SetKeyAction(SDLK_3,         ManMachineInterface::KEY_WEAPON_3);
+  SetKeyAction(SDLK_4,         ManMachineInterface::KEY_WEAPON_4);
+  SetKeyAction(SDLK_5,         ManMachineInterface::KEY_WEAPON_5);
+  SetKeyAction(SDLK_6,         ManMachineInterface::KEY_WEAPON_6);
+  SetKeyAction(SDLK_7,         ManMachineInterface::KEY_WEAPON_7);
+  SetKeyAction(SDLK_8,         ManMachineInterface::KEY_WEAPON_8);
+  SetKeyAction(SDLK_9,         ManMachineInterface::KEY_WEAPON_9);
+  SetKeyAction(SDLK_PAGEUP,    ManMachineInterface::KEY_WEAPON_MORE);
+  SetKeyAction(SDLK_PAGEDOWN,  ManMachineInterface::KEY_WEAPON_LESS);
+  SetKeyAction(SDLK_s,         ManMachineInterface::KEY_CHAT);
+  SetKeyAction(SDLK_t,         ManMachineInterface::KEY_CHAT);
+  SetKeyAction(SDLK_F11,       ManMachineInterface::KEY_MENU_OPTIONS_FROM_GAME);
+  SetKeyAction(SDLK_m,         ManMachineInterface::KEY_MINIMAP_FROM_GAME);
 }
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)
@@ -223,32 +101,31 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     return;
   }
 
-  int previous_modifier_bits = modifier_bits;
-  modifier_bits = GetModifierBitsFromSDL();
-  SDLKey basic_key_code = event.key.keysym.sym;
-  if (basic_key_code >= MODIFIER_OFFSET)
+  std::map<int, Key_t>::iterator it = layout.find(event.key.keysym.sym);
+
+  if(it == layout.end())
     return;
-  int key_code;
-  if (modifier_bits != previous_modifier_bits) {
-    std::set<SDLKey>::iterator it;
-    for (it = pressed_keys.begin();  it !=  pressed_keys.end(); it++) {
-      int basic_key_code_it = *it;
-      if (basic_key_code != basic_key_code_it) {
-        key_code = basic_key_code_it + MODIFIER_OFFSET * previous_modifier_bits;
-        HandleKeyComboEvent(key_code, KEY_RELEASED);
-        key_code = basic_key_code_it + MODIFIER_OFFSET * modifier_bits;
-        HandleKeyComboEvent(key_code, KEY_PRESSED);
-      }
+
+  Key_t key = it->second;
+
+  //While player writes, it cannot control the game but QUIT or PAUSE.
+  if (Game::GetInstance()->chatsession.CheckInput()) {
+    switch (key) {
+    case KEY_QUIT:
+    case KEY_PAUSE:
+      break;
+    default:
+      return;
     }
   }
-  if (event_type == KEY_PRESSED) {
-    key_code = basic_key_code + (MODIFIER_OFFSET * modifier_bits);
-    HandleKeyComboEvent(key_code, KEY_PRESSED);
-    pressed_keys.insert(basic_key_code);
-  } else {
-    ASSERT(event_type == KEY_RELEASED);
-    key_code = basic_key_code + (MODIFIER_OFFSET * previous_modifier_bits);
-    HandleKeyComboEvent(key_code, KEY_RELEASED);
-    pressed_keys.erase(basic_key_code);
+
+  if(event_type == KEY_PRESSED) {
+    HandleKeyPressed(key);
+    return;
+  }
+
+  if(event_type == KEY_RELEASED) {
+    HandleKeyReleased(key);
+    return;
   }
 }

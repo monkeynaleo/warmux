@@ -260,7 +260,7 @@ std::list<DistantComputer*>& GameServer::GetCpus(uint game_id)
   return GetGame(game_id).GetCpus();
 }
 
-bool GameServer::ConnectToIndexServer()
+bool GameServer::RegisterToIndexServer(bool is_public)
 {
   // Register the game to the index server
   if (!is_public) {
@@ -296,7 +296,7 @@ bool GameServer::ConnectToIndexServer()
   if (!r) {
     char port_str[8];
     snprintf(port_str, 8, "%d", port);
-    fprintf(stderr, "%s\n", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port_str, port_str).c_str());
+    fprintf(stderr, "%s", Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port_str, port_str).c_str());
     IndexServer::GetInstance()->Disconnect();
     return false;
   }
@@ -304,32 +304,14 @@ bool GameServer::ConnectToIndexServer()
   return true;
 }
 
-bool GameServer::RefreshConnexionToIndexServer()
-{
-  if (!is_public)
-    return true;
-
-  // Try to reconnect to index server...
-  if (!IndexServer::GetInstance()->IsConnected()) {
-    bool r = ConnectToIndexServer();
-    if (!r)
-      return r;
-  }
-
-  IndexServer::GetInstance()->Refresh(true);
-
-  return true;
-}
-
 bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
 			     const std::string& _game_name, std::string& _password,
-			     bool _is_public)
+			     bool is_public)
 {
   max_nb_games = _max_nb_games;
   game_name = _game_name;
   password = _password;
   port = _port;
-  is_public = _is_public;
 
   // Open the port to listen to
   if (!server_socket.AcceptIncoming(port)) {
@@ -346,7 +328,7 @@ bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients
 
   CreateGame(1);
 
-  if (!ConnectToIndexServer())
+  if (!RegisterToIndexServer(is_public))
     return false;
 
   return true;
@@ -437,11 +419,7 @@ void GameServer::RunLoop()
  loop:
   while (true) {
 
-    bool r = RefreshConnexionToIndexServer();
-    if (!r && clients_socket_set->NbSockets() == 0) {
-      fprintf(stderr, "Game server is no more connected to index server");
-      return;
-    }
+    IndexServer::GetInstance()->Refresh(true);
 
     WaitClients();
 

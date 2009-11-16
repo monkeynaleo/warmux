@@ -151,25 +151,13 @@ public:
 protected:
   virtual void p_Select() { m_last_fire_time = 0; };
   virtual void p_Deselect();
-  virtual void Refresh();
+  virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
   virtual void DrawWeaponFire();
   void DrawAmmoUnits() const;
 
   void RepeatShoot();
-
-  void StartMovingLeftForAllPlayers();
-  void StopMovingLeftForAllPlayers();
-
-  void StartMovingRightForAllPlayers();
-  void StopMovingRightForAllPlayers();
-
-  void StartMovingUpForAllPlayers();
-  void StopMovingUpForAllPlayers();
-
-  void StartMovingDownForAllPlayers();
-  void StopMovingDownForAllPlayers();
 public:
   Weapon(Weapon_type type,
          const std::string &id,
@@ -206,6 +194,10 @@ public:
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
 
+  // Create a new action "shoot/stop_use" in action handler
+  void NewActionWeaponShoot() const;
+  void NewActionWeaponStopUse() const;
+
   // Prepare the shoot : set the angle and strenght of the weapon
   // Begin the shooting animation of the character
   void PrepareShoot(double strength, double angle);
@@ -224,8 +216,6 @@ public:
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const { return EnoughAmmo(); };
 
-  virtual bool IsOnCooldownFromShot() const;
-
   // Begin to load, to choose the strength
   virtual void InitLoading() ;
 
@@ -237,10 +227,6 @@ public:
 
   // update strength (so the strength bar can be updated)
   virtual void UpdateStrength();
-
-  double GetStrength() const { return m_strength; };
-
-  double GetMaxStrength() const { return max_strength; };
 
   const Point2i GetGunHolePosition() const;
 
@@ -254,43 +240,51 @@ public:
   // Handle a keyboard event.
 
   // Key Shoot management
-  void HandleKeyPressed_Shoot();
-  void HandleKeyReleased_Shoot();
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
 
   // To override standard moves of character
-  virtual void HandleKeyPressed_MoveRight(bool slowly);
-  virtual void HandleKeyReleased_MoveRight(bool slowly);
+  virtual void HandleKeyPressed_MoveRight(bool shift);
+  virtual void HandleKeyRefreshed_MoveRight(bool shift);
+  virtual void HandleKeyReleased_MoveRight(bool shift);
 
-  virtual void HandleKeyPressed_MoveLeft(bool slowly);
-  virtual void HandleKeyReleased_MoveLeft(bool slowly);
+  virtual void HandleKeyPressed_MoveLeft(bool shift);
+  virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+  virtual void HandleKeyReleased_MoveLeft(bool shift);
 
-  virtual void HandleKeyPressed_Up(bool slowly);
-  virtual void HandleKeyReleased_Up(bool slowly);
+  virtual void HandleKeyPressed_Up(bool shift);
+  virtual void HandleKeyRefreshed_Up(bool shift);
+  virtual void HandleKeyReleased_Up(bool shift);
 
-  virtual void HandleKeyPressed_Down(bool slowly);
-  virtual void HandleKeyReleased_Down(bool slowly);
+  virtual void HandleKeyPressed_Down(bool shift);
+  virtual void HandleKeyRefreshed_Down(bool shift);
+  virtual void HandleKeyReleased_Down(bool shift);
 
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyReleased_Jump();
+  virtual void HandleKeyPressed_Jump(bool shift);
+  virtual void HandleKeyRefreshed_Jump(bool shift);
+  virtual void HandleKeyReleased_Jump(bool shift);
 
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
+  virtual void HandleKeyPressed_HighJump(bool shift);
+  virtual void HandleKeyRefreshed_HighJump(bool shift);
+  virtual void HandleKeyReleased_HighJump(bool shift);
 
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
+  virtual void HandleKeyPressed_BackJump(bool shift);
+  virtual void HandleKeyRefreshed_BackJump(bool shift);
+  virtual void HandleKeyReleased_BackJump(bool shift);
 
   // Other keys
-  virtual void HandleKeyReleased_Num1(){};
-  virtual void HandleKeyReleased_Num2(){};
-  virtual void HandleKeyReleased_Num3(){};
-  virtual void HandleKeyReleased_Num4(){};
-  virtual void HandleKeyReleased_Num5(){};
-  virtual void HandleKeyReleased_Num6(){};
-  virtual void HandleKeyReleased_Num7(){};
-  virtual void HandleKeyReleased_Num8(){};
-  virtual void HandleKeyReleased_Num9(){};
-  virtual void HandleKeyReleased_Less(){};
-  virtual void HandleKeyReleased_More(){};
+  virtual void HandleKeyReleased_Num1(bool){};
+  virtual void HandleKeyReleased_Num2(bool){};
+  virtual void HandleKeyReleased_Num3(bool){};
+  virtual void HandleKeyReleased_Num4(bool){};
+  virtual void HandleKeyReleased_Num5(bool){};
+  virtual void HandleKeyReleased_Num6(bool){};
+  virtual void HandleKeyReleased_Num7(bool){};
+  virtual void HandleKeyReleased_Num8(bool){};
+  virtual void HandleKeyReleased_Num9(bool){};
+  virtual void HandleKeyReleased_Less(bool){};
+  virtual void HandleKeyReleased_More(bool){};
 
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(bool){};
@@ -299,6 +293,9 @@ public:
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd() { StopLoading(); };
+
+  // Stop using this weapon (only used with lowgrav and jetpack and airhammer)
+  virtual void ActionStopUse();
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
@@ -329,21 +326,6 @@ public:
   inline const double &GetMinAngle() const {return min_angle;}
   inline void SetMaxAngle(double max) {max_angle = max;}
   inline const double &GetMaxAngle() const {return max_angle;}
-
-  virtual void StartMovingLeft() {};
-  virtual void StopMovingLeft() {};
-
-  virtual void StartMovingRight() {};
-  virtual void StopMovingRight() {};
-
-  virtual void StartMovingUp() {};
-  virtual void StopMovingUp() {};
-
-  virtual void StartMovingDown() {};
-  virtual void StopMovingDown() {};
-
-  virtual void StartShooting();
-  virtual void StopShooting();
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;

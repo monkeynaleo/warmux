@@ -74,7 +74,7 @@ bool Teleportation::p_Shoot ()
 
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
-	Camera::GetInstance()->SetAutoCrop(false);
+
   target_chosen = false; // ensure next teleportation cannot be done pressing key space
   return true;
 }
@@ -82,19 +82,19 @@ bool Teleportation::p_Shoot ()
 void Teleportation::Refresh()
 {
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
+    Camera::GetInstance()->SetXYabs(dst - Camera::GetInstance()->GetSize() / 2);
     ActiveCharacter().SetXY(dst);
     ActiveCharacter().SetSpeed(0.0, 0.0);
     ActiveCharacter().Show();
     JukeBox::GetInstance()->Play("default", "weapon/teleport_end");
-	Camera::GetInstance()->SetAutoCrop(true);
-	return;
+    return;
   }
 }
 
 void Teleportation::p_Select()
 {
   if (Network::GetInstance()->IsTurnMaster())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 
   Weapon::p_Select();
   target_chosen = false;
@@ -125,5 +125,5 @@ WeaponConfig& Teleportation::cfg()
 
 bool Teleportation::IsInUse() const
 {
-  return IsOnCooldownFromShot();
+  return m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }

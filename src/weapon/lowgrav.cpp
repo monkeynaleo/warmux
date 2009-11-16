@@ -67,20 +67,22 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-void LowGrav::StopShooting()
+void LowGrav::HandleKeyPressed_Shoot(bool)
 {
-  if (IsInUse()) {
-    Deselect();
-  } else {
-    Weapon::StopShooting();
+  if (!IsInUse()){
+    NewActionWeaponShoot();
+
+  }else{
+    NewActionWeaponStopUse();
+    use.Stop();
   }
 }
 
 std::string LowGrav::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
-            "%s team has won %u lowgrav! Small step for man, giant leap for free software!",
-            "%s team has won %u lowgravs! Small step for man, giant leap for free software!",
+            "%s team has won %u lowgrav! I'm Neil Armstrong!",
+            "%s team has won %u lowgravs! I'm Neil Armstrong!",
             items_count), TeamName, items_count);
 }
 

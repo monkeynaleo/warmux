@@ -49,14 +49,10 @@ public:
   // Object rebound factor when the object collide with the ground.
   double m_rebound_factor;
 
-  // Active alignment for wind particles
-  bool m_align_particle_state;
-
-  ObjectConfig(void);
+  ObjectConfig();
   virtual ~ObjectConfig() { };
 
-  void LoadXml(const std::string & obj_name, 
-               const std::string & config_file);
+  void LoadXml(const std::string& obj_name, const std::string &config_file);
 };
 
 #endif // OBJECT_CFG_H

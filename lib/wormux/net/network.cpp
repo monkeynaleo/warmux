@@ -19,9 +19,6 @@
  * Network layer for Wormux.
  *****************************************************************************/
 
-#include <sys/types.h>
-#include <iostream>
-
 // Standard header, only needed for the following method
 #ifdef WIN32
 #  include <winsock2.h>
@@ -44,6 +41,8 @@
 #include <WORMUX_network.h>
 #include <WORMUX_socket.h>
 
+#include <iostream>
+#include <sys/types.h>
 #ifdef LOG_NETWORK
 #  include <sys/stat.h>
 #  include <fcntl.h>

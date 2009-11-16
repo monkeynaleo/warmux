@@ -44,6 +44,7 @@ GameBlitz::GameBlitz()
 
 void GameBlitz::EndOfGame()
 {
+  Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   GameMessages::GetInstance()->Add (_("And the winner is..."));
 
@@ -87,6 +88,8 @@ bool GameBlitz::Run()
 void GameBlitz::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
+  if (global_time->IsGamePaused()) return;
+  global_time->Refresh();
 
   if (1000 < global_time->Read() - pause_seconde) {
     pause_seconde = global_time->Read();
@@ -133,7 +136,7 @@ void GameBlitz::RefreshClock()
         if (IsGameFinished())
           break;
 
-        if (give_objbox && GetWorld().IsOpen()) {
+        if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
           NewBox();
           give_objbox = false;
           break;
@@ -160,7 +163,8 @@ void GameBlitz::__SetState_PLAYING()
 {
   MSG_DEBUG("game.statechange", "Playing" );
 
-  Wind::GetRef().ChooseRandomVal();
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
+    Wind::GetRef().ChooseRandomVal();
 
   SetCharacterChosen(false);
 
@@ -170,7 +174,17 @@ void GameBlitz::__SetState_PLAYING()
 
   // Select the next team
   ASSERT (!IsGameFinished());
-  GetTeamsList().NextTeam();
+
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal()) {
+
+    GetTeamsList().NextTeam();
+
+    // Are we turn master for next turn ?
+    if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+      Network::GetInstance()->SetTurnMaster(true);
+    else
+      Network::GetInstance()->SetTurnMaster(false);
+  }
 
   // initialize counter
   Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second);

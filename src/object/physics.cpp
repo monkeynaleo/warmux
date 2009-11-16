@@ -144,6 +144,59 @@ void Physics::GetSpeed(double &norm, double &angle) const
   }
 }
 
+
+void Physics::StoreValue(Action *a)
+{
+  a->Push((int)m_motion_type);
+  a->Push(m_pos_x);
+  a->Push(m_pos_y);
+  a->Push(m_extern_force);
+  a->Push((int)m_last_move);
+  a->Push(m_phys_width);
+  a->Push(m_phys_height);
+  a->Push(m_fix_point_gnd);
+  a->Push(m_fix_point_dxy);
+  a->Push(m_rope_angle);
+  a->Push(m_rope_length);
+  a->Push(m_rope_elasticity);
+  a->Push(m_elasticity_damping);
+  a->Push(m_balancing_damping);
+  a->Push(m_elasticity_off);
+
+  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
+	     typeid(*this).name(),
+             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+             m_extern_force.x, m_extern_force.y);
+}
+
+void Physics::GetValueFromAction(Action *a)
+{
+  m_motion_type        = (MotionType_t)a->PopInt();
+  m_pos_x              = a->PopEulerVector();
+  m_pos_y              = a->PopEulerVector();
+  m_extern_force       = a->PopPoint2d();
+  m_last_move          = (uint)a->PopInt();
+  m_phys_width         = a->PopDouble();
+  m_phys_height        = a->PopDouble();
+  m_fix_point_gnd      = a->PopPoint2d();
+  m_fix_point_dxy      = a->PopPoint2d();
+  m_rope_angle         = a->PopEulerVector();
+  m_rope_length        = a->PopEulerVector();
+  m_rope_elasticity    = a->PopDouble();
+  m_elasticity_damping = a->PopDouble();
+  m_balancing_damping  = a->PopDouble();
+  m_elasticity_off     = !!a->PopInt();
+
+  ASSERT(Time::GetInstance()->Read() >= m_last_move);
+
+  MSG_DEBUG( "physic.sync", "%s now - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - extern_force: %f, %f",
+	     typeid(*this).name(),
+             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
+             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
+             m_extern_force.x, m_extern_force.y);
+}
+
 void Physics::SetExternForceXY (const Point2d& vector)
 {
   bool was_moving = IsMoving();
@@ -421,13 +474,11 @@ Point2d Physics::ComputeNextXY(double delta_t){
 
   MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t);
 
-  if (FreeFall == m_motion_type) {
+  if (m_motion_type == FreeFall)
     ComputeFallNextXY(delta_t);
-  } 
 
-  if (Pendulum == m_motion_type) {
+  if (m_motion_type == Pendulum)
     ComputePendulumNextXY(delta_t);
-  }
 
   return Point2d(m_pos_x.x0, m_pos_y.x0);
 }

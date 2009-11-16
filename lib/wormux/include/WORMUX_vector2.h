@@ -328,7 +328,8 @@ template<class T> class Vector2
      * @param p2
      */
     inline T Distance(const Vector2<T> & p2) const{
-      return sqrt((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y));
+      T distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+      return sqrt( distPow2 );
     }
 
     /**
@@ -472,13 +473,14 @@ template<class T> class Vector2
 
 template < >
 inline int Vector2<int>::Distance(const Vector2<int> & p2) const{
-  return (int)sqrt((float)((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y)));
+ int distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+ return (int)sqrt( (float)distPow2 );
 }
 
 // some other auxilliaries
 template< typename T >
 inline Vector2<T> operator*(const T val, const Vector2<T> &v) {
-  return Vector2<T>( v.x * val, v.y * val );
+    return Vector2<T>( v.x * val, v.y * val );
 }
 
 #endif //_VECTOR2_H

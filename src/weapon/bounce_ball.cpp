@@ -75,7 +75,7 @@ void BounceBall::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 BounceBallLauncher::BounceBallLauncher() :
-  WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig())
+  WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   UpdateTranslationStrings();
 

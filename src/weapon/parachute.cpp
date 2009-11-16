@@ -55,8 +55,9 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 
   m_category = MOVE;
   m_initial_nb_ammo = 2;
+  m_x_strength.x_extern = 0.0;
+  m_x_strength.changing = false;
   use_unit_on_first_shoot = false;
-  m_used_this_turn = false;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -77,6 +78,7 @@ void Parachute::p_Select()
 {
   open = false;
   closing = false;
+  m_x_strength.changing = false;
   img->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
@@ -94,7 +96,6 @@ bool Parachute::IsInUse() const
 
 bool Parachute::p_Shoot()
 {
-  m_used_this_turn = false;
   GameMessages::GetInstance()->Add(_("The parachute is activated automatically."));
   return false;
 }
@@ -103,11 +104,7 @@ void Parachute::Draw()
 {
   if(open) {
     img->Update();
-    Point2i position;
-    ActiveCharacter().GetHandPosition(position);
-    position.x -= img->GetWidth()/2;
-    position.y -= img->GetHeight();
-    img->Draw(position);
+    img->Draw(ActiveCharacter().GetHandPosition() - Point2i(img->GetWidth()/2,img->GetHeight()));
   }
 }
 
@@ -121,12 +118,7 @@ void Parachute::Refresh()
   if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
       if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
-        if(!m_used_this_turn)
-        {
-          UseAmmo();
-          m_used_this_turn = true;
-        }
-        
+        UseAmmo();
         ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
         ActiveCharacter().SetWindFactor(cfg().wind_factor);
         open = true;
@@ -157,17 +149,11 @@ void Parachute::Refresh()
     }
   }
   // If parachute is open => character can move a little to the left or to the right
-  if (open) {
-    if (ActiveCharacter().IsMovingLeft(false) && !ActiveCharacter().IsMovingRight(false)) {
-      if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-        ActiveCharacter().SetDirection(DIRECTION_LEFT);
-      ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
-    }
-
-    if (ActiveCharacter().IsMovingRight(false) && !ActiveCharacter().IsMovingLeft(false)) {
-      if (ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-        ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-      ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
+  if (open && Network::GetInstance()->IsTurnMaster()) {
+    ActiveCharacter().SetExternForce(m_x_strength.x_extern, 0.0);
+    if (m_x_strength.changing) {
+      m_x_strength.changing = false;
+      SendActiveCharacterInfo(false);
     }
   }
 }
@@ -180,7 +166,7 @@ std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count
             items_count), TeamName, items_count);
 }
 
-void Parachute::StartShooting()
+void Parachute::HandleKeyPressed_Shoot(bool shift)
 {
   if (open) {
     img->Finish();
@@ -188,7 +174,57 @@ void Parachute::StartShooting()
     closing = false;
     UseAmmoUnit();
   } else {
-    Weapon::StartShooting();
+    Weapon::HandleKeyPressed_Shoot(shift);
+  }
+}
+
+void Parachute::HandleKeyPressed_MoveRight(bool shift)
+{
+  if (closing) {
+    ActiveCharacter().BeginMovementRL(0);
+  }
+
+  if (open) {
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+    m_x_strength.x_extern = cfg().force_side_displacement;
+    m_x_strength.changing = true;
+  } else {
+    Weapon::HandleKeyPressed_MoveRight(shift);
+  }
+}
+
+void Parachute::HandleKeyReleased_MoveRight(bool shift)
+{
+  if (open) {
+    m_x_strength.x_extern = 0.0;
+    m_x_strength.changing = true;
+  } else {
+    Weapon::HandleKeyReleased_MoveRight(shift);
+  }
+}
+
+void Parachute::HandleKeyPressed_MoveLeft(bool shift)
+{
+  if (closing) {
+    ActiveCharacter().BeginMovementRL(0);
+  }
+
+  if (open) {
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
+    m_x_strength.x_extern = -cfg().force_side_displacement;
+    m_x_strength.changing = true;
+  } else {
+    Weapon::HandleKeyPressed_MoveLeft(shift);
+  }
+}
+
+void Parachute::HandleKeyReleased_MoveLeft(bool shift)
+{
+  if (open) {
+    m_x_strength.x_extern = 0.0;
+    m_x_strength.changing = true;
+  } else {
+    Weapon::HandleKeyReleased_MoveLeft(shift);
   }
 }
 

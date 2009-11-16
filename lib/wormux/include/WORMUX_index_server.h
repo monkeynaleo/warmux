@@ -83,11 +83,7 @@ class IndexServer : public Singleton<IndexServer>
   // Perform a handshake with the server
   connection_state_t HandShake(const std::string& wormux_version);
 
-  void __Disconnect();
-
-  void Lock();
-  void Unlock();
-  bool TryLock();
+  bool IsConnected();
 
 public:
   IndexServer();
@@ -96,8 +92,6 @@ public:
   // Connect/disconnect to a server
   connection_state_t Connect(const std::string& wormux_version);
   void Disconnect();
-
-  bool IsConnected();
 
   // Answers to pings from the server / close connection if distantly closed
   void Refresh(bool nowait = false);

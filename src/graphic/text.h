@@ -45,7 +45,7 @@ public:
   Text(const std::string &new_txt,
        const Color& new_color = white_color,
        Font::font_size_t fsize = Font::FONT_SMALL,
-       Font::font_style_t fstyle = Font::FONT_BOLD,
+       Font::font_style_t fstyle = Font::FONT_NORMAL,
        bool shadowed = true,
        bool dummy = false);
   virtual ~Text();

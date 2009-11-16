@@ -86,10 +86,10 @@ MainMenu::MainMenu() :
   widgets.Pack();
 
   std::string s("Version "+Constants::WORMUX_VERSION);
-  version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   std::string s2(Constants::WEB_SITE);
-  website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   if (!JukeBox::GetInstance()->IsPlayingMusic())
     JukeBox::GetInstance()->PlayMusic("menu");

@@ -45,13 +45,20 @@ public:
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
 
-  void ExecFrameLessActions();
-  bool ExecActionsForOneFrame();
+  void ExecActions();
 };
 
 void Action_Handler_Init();
 
 // TODO: Move it in an object !
+
+// Send character information over the network (it's totally stupid to send it locally ;-)
+void SendCharacterInfo(int team_no, int char_no);
+void SendActiveCharacterInfo(bool can_be_dropped = false);
+
+// Send character information + an action over the network
+// WARNING: it does not post the action in local queue!!
+void SendActiveCharacterAction(const Action& a);
 
 void SendGameMode();
 void SyncCharacters();

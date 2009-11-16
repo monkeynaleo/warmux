@@ -84,9 +84,7 @@ public:
   Point2i GetSize() const;
   Point2i GetSizeMax() const;
 
-  void GetScaleFactors(float &_scale_x, float &_scale_y) const;
-  float GetScaleX(void) const { return scale_x; }
-  float GetScaleY(void) const { return scale_y; }
+  void GetScaleFactors( float &_scale_x, float &_scale_y) const;
   void SetSize(unsigned int w, unsigned int h);
   void SetSize(const Point2i &size);
   void Scale( float scale_x, float scale_y);

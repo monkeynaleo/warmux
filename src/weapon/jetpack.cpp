@@ -50,6 +50,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   use_unit_on_first_shoot = false;
 
+  m_x_force = 0.0;
   m_y_force = 0.0;
   m_flying = false;
 }
@@ -65,28 +66,16 @@ void JetPack::Refresh()
 {
   if (IsInUse())
   {
-    Point2d F;
-    F.x = 0;
-    F.y = m_y_force;
-    if (!ActiveCharacter().IsImmobile()) {
-      if (ActiveCharacter().IsMovingLeft(false) && !ActiveCharacter().IsMovingRight(false)) {
-         F.x = - JETPACK_FORCE;
-         if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-           ActiveCharacter().SetDirection(DIRECTION_LEFT);
-      }
-      if (ActiveCharacter().IsMovingRight(false) && !ActiveCharacter().IsMovingLeft(false)) {
-         F.x = JETPACK_FORCE;
-         if (ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-           ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-      }
+    if (!ActiveTeam().IsLocal()) {
+      return;
     }
 
-    if (F.IsNull() && m_flying)
-      StopFlying();
-    else if (!F.IsNull() && m_flying)
-      StartFlying();
+    Point2d F;
+    F.x = m_x_force ;
+    F.y = m_y_force ;
 
     ActiveCharacter().SetExternForceXY(F);
+    SendActiveCharacterInfo(true);
 
     if (!F.IsNull())
     {
@@ -116,16 +105,27 @@ void JetPack::p_Select()
 {
   ActiveCharacter().SetClothe("jetpack");
 
-  m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
+  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI()) {
+    m_unit_visibility = NEVER_VISIBLE; // do not show ammo units accross the network
+  } else {
+    m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
+  }
 }
 
 void JetPack::p_Deselect()
 {
+  m_x_force = 0;
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
   StopFlying();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");
+}
+
+void JetPack::ActionStopUse()
+{
+  p_Deselect();
+  ActiveTeam().AccessNbUnits() = 0;
 }
 
 void JetPack::StartFlying()
@@ -134,7 +134,7 @@ void JetPack::StartFlying()
     return;
 
   ActiveCharacter().SetMovement("jetpack-fire");
-  if ((m_y_force == 0))
+  if ( (m_x_force == 0) && (m_y_force == 0))
     {
       m_last_fuel_down = Time::GetInstance()->Read();
       flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
@@ -158,6 +158,8 @@ void JetPack::StopFlying()
     return;
 
   ActiveCharacter().SetMovement("jetpack-nofire");
+  m_x_force = 0.0;
+  m_y_force = 0.0;
   flying_sound.Stop();
   m_flying = false;
 }
@@ -168,40 +170,99 @@ void JetPack::GoUp()
   m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
 }
 
-void JetPack::StartMovingUp()
+void JetPack::GoLeft()
 {
+  StartFlying();
+  m_x_force = - JETPACK_FORCE ;
+  if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
+}
+
+void JetPack::GoRight()
+{
+  StartFlying();
+  m_x_force = JETPACK_FORCE ;
+  if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+}
+
+void JetPack::HandleKeyPressed_Up(bool shift)
+{
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyPressed_Up(shift);
+    return;
+  }
+
   GoUp();
 }
 
-void JetPack::StopMovingUp()
+void JetPack::HandleKeyReleased_Up(bool shift)
 {
-  m_y_force = 0.0;
-}
-
-void JetPack::HandleKeyPressed_Up(bool slowly)
-{
-  ActiveCharacter().HandleKeyPressed_Up(slowly);
-
-  if (IsInUse())
-    StartMovingUpForAllPlayers();
-}
-
-void JetPack::HandleKeyReleased_Up(bool slowly)
-{
-  ActiveCharacter().HandleKeyReleased_Up(slowly);
-
-  if (IsInUse())
-    StopMovingUpForAllPlayers();
-}
-
-void JetPack::StartShooting()
-{
-  if (IsInUse()) {
-    p_Deselect();
-    ActiveTeam().AccessNbUnits() = 0;
-  } else {
-    Weapon::StartShooting();
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyReleased_Up(shift);
+    return;
   }
+
+  StopFlying();
+}
+
+void JetPack::HandleKeyPressed_MoveLeft(bool shift)
+{
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+    return;
+  }
+
+  if (!ActiveCharacter().FootsInVacuum()) {
+    StopFlying();
+    ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
+  } else if (IsInUse()) {
+    GoLeft();
+  }
+}
+
+void JetPack::HandleKeyReleased_MoveLeft(bool shift)
+{
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
+    return;
+  }
+
+  StopFlying();
+}
+
+void JetPack::HandleKeyPressed_MoveRight(bool shift)
+{
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+    return;
+  }
+
+  if (!ActiveCharacter().FootsInVacuum()) {
+    // the character is landing!
+    StopFlying();
+    ActiveCharacter().HandleKeyPressed_MoveRight(shift);
+  } else if (IsInUse()) {
+    GoRight();
+  }
+}
+
+void JetPack::HandleKeyReleased_MoveRight(bool shift)
+{
+  if (!IsInUse()) {
+    ActiveCharacter().HandleKeyReleased_MoveRight(shift);
+    return;
+  }
+
+  StopFlying();
+}
+
+void JetPack::HandleKeyPressed_Shoot(bool)
+{
+  if (!IsInUse())
+    NewActionWeaponShoot();
+  else
+    NewActionWeaponStopUse();
 }
 
 bool JetPack::p_Shoot()

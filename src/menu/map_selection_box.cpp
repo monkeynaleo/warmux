@@ -103,7 +103,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
   AddWidget(map_name_label);
 
   map_author_label = new Label("Author", W_UNDEF, Font::FONT_SMALL,
-			       Font::FONT_BOLD, dark_gray_color, true, false);
+			       Font::FONT_NORMAL, dark_gray_color, true, false);
   AddWidget(map_author_label);
 
   // Load Maps' list

@@ -43,6 +43,8 @@ class WeaponProjectile : public PhysicalObj
     ExplosiveWeaponConfig& cfg;
 
   public:
+    Character* dernier_ver_touche;
+    PhysicalObj* dernier_obj_touche;
     WeaponLauncher * launcher;
     int m_timeout_modifier;
 
@@ -124,6 +126,7 @@ class WeaponLauncher : public Weapon
     virtual void p_Select();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
+    virtual void Refresh() { };
   private:
     void DirectExplosion();
     void NetworkSetTimeoutProjectile() const;
@@ -160,23 +163,22 @@ class WeaponLauncher : public Weapon
 
     virtual void IncMissedShots();
     virtual bool IsInUse() const;
-
     // Handle mouse events
     virtual void HandleMouseWheelUp(bool shift);
     virtual void HandleMouseWheelDown(bool shift);
 
     // Handle special keys
-    virtual void HandleKeyReleased_Num1();
-    virtual void HandleKeyReleased_Num2();
-    virtual void HandleKeyReleased_Num3();
-    virtual void HandleKeyReleased_Num4();
-    virtual void HandleKeyReleased_Num5();
-    virtual void HandleKeyReleased_Num6();
-    virtual void HandleKeyReleased_Num7();
-    virtual void HandleKeyReleased_Num8();
-    virtual void HandleKeyReleased_Num9();
-    virtual void HandleKeyReleased_Less();
-    virtual void HandleKeyReleased_More();
+    virtual void HandleKeyReleased_Num1(bool shift);
+    virtual void HandleKeyReleased_Num2(bool shift);
+    virtual void HandleKeyReleased_Num3(bool shift);
+    virtual void HandleKeyReleased_Num4(bool shift);
+    virtual void HandleKeyReleased_Num5(bool shift);
+    virtual void HandleKeyReleased_Num6(bool shift);
+    virtual void HandleKeyReleased_Num7(bool shift);
+    virtual void HandleKeyReleased_Num8(bool shift);
+    virtual void HandleKeyReleased_Num9(bool shift);
+    virtual void HandleKeyReleased_Less(bool shift);
+    virtual void HandleKeyReleased_More(bool shift);
 
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();

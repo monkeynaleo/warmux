@@ -111,10 +111,8 @@ bool Airhammer::p_Shoot()
     }
 
     // Compute point coordinates
-    Point2i hand_position;
-    ActiveCharacter().GetHandPosition(hand_position);
-    y = hand_position.y + range;
-    x = hand_position.x;
+    y = ActiveCharacter().GetHandPosition().y + range;
+    x = ActiveCharacter().GetHandPosition().x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())
@@ -133,6 +131,14 @@ bool Airhammer::p_Shoot()
 }
 
 //-----------------------------------------------------------------------------
+
+void Airhammer::ActionStopUse()
+{
+  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
+  Game::GetInstance()->SetState(Game::HAS_PLAYED);
+  p_Deselect();
+}
+
 void Airhammer::p_Deselect()
 {
   drill_sound.Stop();
@@ -140,22 +146,9 @@ void Airhammer::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-void Airhammer::StartShooting()
-{
-  if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
-  }
-}
-void Airhammer::StopShooting()
-{
-  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
-  p_Deselect();
-}
-
 //-----------------------------------------------------------------------------
 
-void Airhammer::Refresh()
+void Airhammer::HandleKeyRefreshed_Shoot(bool)
 {
   if (EnoughAmmoUnit()) {
     Weapon::RepeatShoot();
@@ -164,7 +157,7 @@ void Airhammer::Refresh()
 
 bool Airhammer::IsInUse() const
 {
-  return IsOnCooldownFromShot() || m_is_active;
+  return m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read();
 }
 
 void Airhammer::p_Select()

@@ -27,6 +27,7 @@
 class JetPack : public Weapon
 {
   private:
+    double m_x_force;
     double m_y_force;
 
     bool m_flying;
@@ -39,13 +40,15 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
+    virtual void ActionStopUse();
 
-    void StartMovingUp();
-    void StopMovingUp();
-    void StartShooting();
-
-    virtual void HandleKeyPressed_Up(bool slowly);
-    virtual void HandleKeyReleased_Up(bool slowly);
+    virtual void HandleKeyPressed_Up(bool shift);
+    virtual void HandleKeyReleased_Up(bool shift);
+    virtual void HandleKeyPressed_MoveLeft(bool shift);
+    virtual void HandleKeyReleased_MoveLeft(bool shift);
+    virtual void HandleKeyPressed_MoveRight(bool shift);
+    virtual void HandleKeyReleased_MoveRight(bool shift);
+    virtual void HandleKeyPressed_Shoot(bool shift);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
@@ -58,6 +61,8 @@ class JetPack : public Weapon
 
   private:
     void GoUp();
+    void GoLeft();
+    void GoRight();
     void StartFlying();
     void StopFlying();
 };

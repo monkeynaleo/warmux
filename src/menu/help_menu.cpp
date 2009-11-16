@@ -28,6 +28,9 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
+static const uint BORDER        = 20;
+static const uint CHECKBOX_SIZE = 50;
+
 HelpMenu::HelpMenu()  :
   Menu("help/background", vOk)
 {
@@ -54,45 +57,37 @@ bool HelpMenu::signal_cancel()
 void HelpMenu::DrawBackground()
 {
   Menu::DrawBackground();
-
-  int border_x = int(GetMainWindow().GetWidth() - img_keyboard->GetWidth()) / 2;
-  if (border_x < 0)
-    border_x = 0;
-
-  int border_y = int(GetMainWindow().GetHeight() - img_keyboard->GetHeight()) / 2;
-  if (border_y < 0)
-    border_y = 0;
-
-  img_keyboard->Blit(GetMainWindow(), border_x, border_y);
+  img_keyboard->Blit(GetMainWindow(), BORDER, BORDER);
 
   const uint MIDDLE_X = 64;
   const uint MIDDLE_Y = 13;
 
-  Text tmp(_("Quit game"), dark_gray_color, Font::FONT_TINY, Font::FONT_BOLD, false); tmp.SetMaxWidth(130);
-  tmp.DrawCenter(Point2i(15 + border_x + MIDDLE_X, 1 + border_y + MIDDLE_Y));
-  tmp.Set(_("High jump")); tmp.DrawCenter(Point2i(373 + border_x + MIDDLE_X, 313 + border_y + MIDDLE_Y));
-  tmp.Set(_("Jump")); tmp.DrawCenter(Point2i(373 + border_x + MIDDLE_X, 284 + border_y + MIDDLE_Y));
-  tmp.Set(_("Jump backwards")); tmp.DrawCenter(Point2i(373 + border_x + MIDDLE_X, 342 + border_y + MIDDLE_Y));
-  tmp.Set(_("Drag&drop: Move the camera")); tmp.DrawCenter(Point2i(454 + border_x + MIDDLE_X, 380 + border_y + MIDDLE_Y));
-  tmp.Set(_("Click: Center the camera on the character")); tmp.DrawCenter(Point2i(454 + border_x + MIDDLE_X, 410 + border_y + MIDDLE_Y));
-  tmp.Set(_("Show/hide the interface")); tmp.DrawCenter(Point2i(205 + border_x + MIDDLE_X, 31 + border_y + MIDDLE_Y));
-  tmp.Set(_("Fullscreen / window")); tmp.DrawCenter(Point2i(425 + border_x + MIDDLE_X, 30 + border_y + MIDDLE_Y));
-  tmp.Set(_("Configuration menu")); tmp.DrawCenter(Point2i(425 + border_x + MIDDLE_X, 59 + border_y + MIDDLE_Y));
-  tmp.Set(_("Talk in network battles")); tmp.DrawCenter(Point2i(26 + border_x + MIDDLE_X, 284 + border_y + MIDDLE_Y));
-  tmp.Set(_("Change the weapon category")); tmp.DrawCenter(Point2i(15 + border_x + MIDDLE_X, 60 + border_y + MIDDLE_Y));
-  tmp.Set(_("Change the weapon countdown")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 153 + border_y + MIDDLE_Y));
-  tmp.Set(_("Change the aim angle")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 182 + border_y + MIDDLE_Y));
-  tmp.Set(_("Move the character")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 274 + border_y + MIDDLE_Y));
-  tmp.Set(_("On map: Select a target")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 213 + border_y + MIDDLE_Y));
-  tmp.Set(_("On a character: Select it")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 244 + border_y + MIDDLE_Y));
-  tmp.Set(_("Show the weapons menu")); tmp.DrawCenter(Point2i(552 + border_x + MIDDLE_X, 121 + border_y + MIDDLE_Y));
-  tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawCenter(Point2i(26 + border_x + MIDDLE_X, 314 + border_y + MIDDLE_Y));
-  tmp.Set(_("Move the camera with mouse or arrows")); tmp.DrawCenter(Point2i(320 + border_x + MIDDLE_X, 380 + border_y + MIDDLE_Y));
-  tmp.Set(_("Weapon: Fire / Bonus box: fall fast")); tmp.DrawCenter(Point2i(194 + border_x + MIDDLE_X, 313 + border_y + MIDDLE_Y));
-  tmp.Set(_("Show/hide the minimap")); tmp.DrawCenter(Point2i(205 + border_x + MIDDLE_X, 60 + border_y + MIDDLE_Y));
-  tmp.Set(_("Change the active character")); tmp.DrawCenter(Point2i(26 + border_x + MIDDLE_X, 343 + border_y + MIDDLE_Y));
-  tmp.Set(_("Center the camera on the character")); tmp.DrawCenter(Point2i(320 + border_x + MIDDLE_X, 410 + border_y + MIDDLE_Y));
-  tmp.Set(_("Quickly quit game with Ctrl")); tmp.DrawCenter(Point2i(15 + border_x + MIDDLE_X, 30 + border_y + MIDDLE_Y));
+  Text tmp(_("Quit game"), dark_gray_color, Font::FONT_TINY, Font::FONT_NORMAL, false);
+  tmp.SetMaxWidth(130);
+
+  tmp.DrawCenter(Point2i(13+BORDER+MIDDLE_X, 5+BORDER+MIDDLE_Y));
+  tmp.Set(_("Show/hide the interface")); tmp.DrawCenter(Point2i(148+BORDER+MIDDLE_X, 5+BORDER+MIDDLE_Y));
+  tmp.Set(_("Fullscreen / window")); tmp.DrawCenter(Point2i(311+BORDER+MIDDLE_X, 5+BORDER+MIDDLE_Y));
+  tmp.Set(_("High jump")); tmp.DrawCenter(Point2i(460+BORDER+MIDDLE_X, 5+BORDER+MIDDLE_Y));
+  tmp.Set(_("Talk in network battles")); tmp.DrawCenter(Point2i(13+BORDER+MIDDLE_X, 32+BORDER+MIDDLE_Y));
+  tmp.Set(_("Change the weapon category")); tmp.DrawCenter(Point2i(148+BORDER+MIDDLE_X, 32+BORDER+MIDDLE_Y));
+  tmp.Set(_("Configuration menu")); tmp.DrawCenter(Point2i(311+BORDER+MIDDLE_X, 32+BORDER+MIDDLE_Y));
+  tmp.Set(_("Jump")); tmp.DrawCenter(Point2i(460+BORDER+MIDDLE_X, 32+BORDER+MIDDLE_Y));
+  tmp.Set(_("Drag&drop: Move the camera")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 82+BORDER+MIDDLE_Y));
+  tmp.Set(_("Click: Center the camera on the character")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 111+BORDER+MIDDLE_Y));
+  tmp.Set(_("Change the weapon countdown")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 140+BORDER+MIDDLE_Y));
+  tmp.Set(_("Change the aim angle")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 169+BORDER+MIDDLE_Y));
+  tmp.Set(_("Move the character")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 198+BORDER+MIDDLE_Y));
+  tmp.Set(_("On map: Select a target")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 227+BORDER+MIDDLE_Y));
+  tmp.Set(_("On a character: Select it")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 255+BORDER+MIDDLE_Y));
+  tmp.Set(_("Show the weapons menu")); tmp.DrawCenter(Point2i(539+BORDER+MIDDLE_X, 284+BORDER+MIDDLE_Y));
+  tmp.Set(_("Smaller aim angle and walk step")); tmp.DrawCenter(Point2i(25+BORDER+MIDDLE_X, 253+BORDER+MIDDLE_Y));
+  tmp.Set(_("Jump backwards")); tmp.DrawCenter(Point2i(188+BORDER+MIDDLE_X, 253+BORDER+MIDDLE_Y));
+  tmp.Set(_("Move the camera with mouse or arrows")); tmp.DrawCenter(Point2i(25+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));
+  tmp.Set(_("Weapon: Fire / Bonus box: fall fast")); tmp.DrawCenter(Point2i(188+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));
+  tmp.Set(_("Show/hide the minimap")); tmp.DrawCenter(Point2i(337+BORDER+MIDDLE_X, 281+BORDER+MIDDLE_Y));
+  tmp.Set(_("Change the active character")); tmp.DrawCenter(Point2i(25+BORDER+MIDDLE_X, 310+BORDER+MIDDLE_Y));
+  tmp.Set(_("Center the camera on the character")); tmp.DrawCenter(Point2i(188+BORDER+MIDDLE_X, 310+BORDER+MIDDLE_Y));
 }
 
 void HelpMenu::Draw(const Point2i& /*mousePosition*/)

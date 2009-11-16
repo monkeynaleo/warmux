@@ -28,11 +28,6 @@
 
 #include "map/map.h"
 #include "tool/resource_manager.h"
-#include "team/team.h"
-#include "team/teams_list.h"
-#include "character/character.h"
-#include "graphic/colors.h"
-#include "game/game.h"
 
 
 WeaponStrengthBar::WeaponStrengthBar() :ProgressBar(),
@@ -63,44 +58,11 @@ void WeaponStrengthBar::InitPos (uint px, uint py, uint plarg, uint phaut){
 
 }
 
-static uint ScaleStrengthtoUInt(double strength)
-{
-  return uint(100 * strength);
-}
-
-void WeaponStrengthBar::FetchData()
-{
-  const Weapon & weapon = ActiveTeam().GetWeapon();
-  double max_strength = weapon.GetMaxStrength();
-  bool playing = (Game::GetInstance()->ReadState() == Game::PLAYING);
-  visible = playing && (max_strength != 0);
-  if (!visible)
-    return;
-
-  double strength = weapon.GetStrength();
-  uint value = ScaleStrengthtoUInt(strength);
-  uint min_value = 0;
-  uint max_value = ScaleStrengthtoUInt(max_strength);
-
-  // prepare the strength bar
-  InitVal(value, min_value, max_value);
-
-  // init stamp on the stength_bar
-  double previous_strength = ActiveCharacter().previous_strength;
-  ResetTag();
-  if (0 < previous_strength && previous_strength < max_strength) {
-    uint previous_value = ScaleStrengthtoUInt(previous_strength);
-    AddTag(previous_value, primary_red_color);
-  }
-}
 
 // TODO pass a Surface as parameter
-void WeaponStrengthBar::DrawXY(const Point2i &pos) {
+void WeaponStrengthBar::DrawXY(const Point2i &pos) const{
   int begin, end;
 
-  FetchData();
-  if (!visible)
-    return;
 
   // Clear image
   Color clear(0,0,0,0);

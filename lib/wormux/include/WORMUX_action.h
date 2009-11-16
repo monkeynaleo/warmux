@@ -45,6 +45,12 @@ public:
     ACTION_NETWORK_SET_GAME_MASTER,
 
     // ########################################################
+    ACTION_PLAYER_CHANGE_WEAPON,
+    ACTION_PLAYER_CHANGE_CHARACTER,
+    ACTION_GAMELOOP_NEXT_TEAM,
+    ACTION_GAMELOOP_SET_STATE,
+
+    // ########################################################
     // To be sure that rules will be the same on each computer
     ACTION_RULES_SET_GAME_MODE,
 
@@ -63,60 +69,44 @@ public:
     ACTION_GAME_DEL_TEAM,
     ACTION_GAME_UPDATE_TEAM,
 
-    ACTION_INFO_CLIENT_CONNECT,
-    ACTION_INFO_CLIENT_DISCONNECT,
-
-    ACTION_NETWORK_RANDOM_INIT,
-    LAST_FRAME_LESS_ACTION = ACTION_NETWORK_RANDOM_INIT,
-
-    // All action below must be executed within their physics frame.
-    // ########################################################
-    // ########################################################
-    ACTION_PLAYER_CHANGE_WEAPON,
-    ACTION_PLAYER_CHANGE_CHARACTER,
-    ACTION_GAME_CALCULATE_FRAME,
-
     // ########################################################
     // Character's move
     ACTION_CHARACTER_JUMP,
     ACTION_CHARACTER_HIGH_JUMP,
     ACTION_CHARACTER_BACK_JUMP,
-    ACTION_CHARACTER_START_MOVING_LEFT,
-    ACTION_CHARACTER_STOP_MOVING_LEFT,
-    ACTION_CHARACTER_START_MOVING_RIGHT,
-    ACTION_CHARACTER_STOP_MOVING_RIGHT,
-    ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE,
-    ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE,
-    ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE,
-    ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE,
+
+    ACTION_CHARACTER_SET_PHYSICS,
 
     // ########################################################
+    // Using Weapon
+    ACTION_WEAPON_SHOOT,
+    ACTION_WEAPON_STOP_USE,
+
     // Quite standard weapon options
-    ACTION_WEAPON_START_SHOOTING,
-    ACTION_WEAPON_STOP_SHOOTING,
     ACTION_WEAPON_SET_TIMEOUT,
     ACTION_WEAPON_SET_TARGET,
-    ACTION_WEAPON_START_MOVING_LEFT,
-    ACTION_WEAPON_STOP_MOVING_LEFT,
-    ACTION_WEAPON_START_MOVING_RIGHT,
-    ACTION_WEAPON_STOP_MOVING_RIGHT,
-    ACTION_WEAPON_START_MOVING_UP,
-    ACTION_WEAPON_STOP_MOVING_UP,
-    ACTION_WEAPON_START_MOVING_DOWN,
-    ACTION_WEAPON_STOP_MOVING_DOWN,
-
 
     // Special weapon options
     ACTION_WEAPON_CONSTRUCTION,
+    ACTION_WEAPON_GNU,
+    ACTION_WEAPON_GRAPPLE,
+    ACTION_WEAPON_POLECAT,
+    ACTION_WEAPON_SUPERTUX,
 
     // Bonus Box
+    ACTION_NEW_BONUS_BOX,
     ACTION_DROP_BONUS_BOX,
-    ACTION_REQUEST_BONUS_BOX_DROP,
 
     // ########################################################
+    ACTION_NETWORK_SYNC_BEGIN,
+    ACTION_NETWORK_SYNC_END,
+    ACTION_EXPLOSION,
+    ACTION_WIND,
     ACTION_NETWORK_PING,
-    ACTION_NETWORK_VERIFY_RANDOM_SYNC,
-    ACTION_TIME_VERIFY_SYNC,
+    ACTION_NETWORK_RANDOM_INIT,
+    ACTION_INFO_CLIENT_CONNECT,
+    ACTION_INFO_CLIENT_DISCONNECT,
+
     // ########################################################
   } Action_t;
 
@@ -176,7 +166,6 @@ public:
   int  GetSize() const;
   uint GetTimestamp() const;
   Action_t GetType() const;
-  bool IsFrameLess() const;
 };
 
 // to be defined outside of the library

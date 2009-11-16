@@ -44,6 +44,8 @@ class Medkit : public ObjBox//public PhysicalObj
 
     static void LoadXml(const xmlNode * object);
     void ApplyBonus(Character *);
+    void GetValueFromAction(Action *);
+    void StoreValue(Action *);
 };
 
 //-----------------------------------------------------------------------------

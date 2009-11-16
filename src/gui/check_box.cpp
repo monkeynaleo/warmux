@@ -28,7 +28,7 @@
 #include "tool/resource_manager.h"
 
 CheckBox::CheckBox(const std::string& label, uint width, bool value):
-  txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_BOLD)),
+  txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),
   m_value(value),
   m_checked_image(NULL)
 {

@@ -204,7 +204,7 @@ void AppWormux::DisplayLoadingPicture()
 
   std::string txt_version =
     _("Version") + std::string(" ") + Constants::WORMUX_VERSION;
-  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "background_loading.jpg";
+  std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "loading.png";
 
   Surface surfaceLoading(filename.c_str());
   Sprite loading_image(surfaceLoading, true);
@@ -216,15 +216,15 @@ void AppWormux::DisplayLoadingPicture()
   Time::GetInstance()->Reset();
 
   Text text1(_("Wormux launching..."), white_color,
-             Font::FONT_HUGE, Font::FONT_BOLD, true);
-  Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_BOLD,
+             Font::FONT_HUGE, Font::FONT_NORMAL, true);
+  Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
              true);
 
   Point2i windowCenter = video->window.GetSize() / 2;
 
   text1.DrawCenter(windowCenter);
   text2.DrawCenter(windowCenter
-                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_BOLD)).GetHeight() + 20));
+                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
 
   video->window.Flip();
 }

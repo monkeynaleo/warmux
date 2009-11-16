@@ -139,20 +139,21 @@ public:
 
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
-  void SetState(game_loop_state_t new_state, bool begin_game=false);
+  void SetState(game_loop_state_t new_state, bool begin_game=false) const;
 
   void UserAsksForMenu() { ask_for_menu = true; };
+  void Really_SetState(game_loop_state_t new_state); // called by the action_handler
 
   // Signal death of a player
-  void SignalCharacterDeath (const Character *character);
+  void SignalCharacterDeath (const Character *character) const;
 
   // Signal character damage
-  void SignalCharacterDamage(const Character *character);
+  void SignalCharacterDamage(const Character *character) const;
 
   // Bonus box handling
   bool NewBox();
+  void AddNewBox(ObjBox *);
   void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
   ObjBox * GetCurrentBox() { return current_ObjBox; };
-  void RequestBonusBoxDrop();
 };
 #endif // GAME_H

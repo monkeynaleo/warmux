@@ -106,6 +106,7 @@ protected:
   void SetGameName(const std::string& game_name);
 public:
   NetworkMenu* network_menu;
+  bool sync_lock;
 
   virtual ~Network();
 
@@ -158,6 +159,7 @@ public:
   WNet::net_game_state_t GetState() const;
   void SendNetworkState();
 
+  void SetTurnMaster(bool master);
   bool IsTurnMaster() const;
 
   uint GetNbPlayersConnected() const;

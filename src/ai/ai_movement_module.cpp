@@ -133,7 +133,7 @@ void AIMovementModule::Jump()
 
   //  GameMessages::GetInstance()->Add("try to jump!");
   SetMovement(JUMPING);
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
+  ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
 void AIMovementModule::EndOfJump()

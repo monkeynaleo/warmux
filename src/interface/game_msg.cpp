@@ -78,7 +78,7 @@ void GameMessages::Add(const std::string &message){
   // Debug message
   std::cout << "o MSG: " << message << std::endl;
   // Add message at the end of the list
-  Message * newMessage = new Message(message, white_color, Font::FONT_SMALL, Font::FONT_BOLD, Time::GetInstance()->Read());
+  Message * newMessage = new Message(message, white_color, Font::FONT_SMALL, Font::FONT_NORMAL, Time::GetInstance()->Read());
   liste.push_back (newMessage);
 
   /* if there are too many messages, remove some of them */

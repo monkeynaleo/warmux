@@ -22,6 +22,7 @@
 
 #include <libxml/tree.h>
 #include "weapon/weapon.h"
+#include "weapon/weapon_strength_bar.h"
 #include "weapon/weapon_cfg.h"
 #include <sstream>
 #include "character/character.h"
@@ -33,7 +34,6 @@
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "map/camera.h"
-#include "network/network.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/math_tools.h"
@@ -62,6 +62,8 @@ const uint UNIT_BOX_HEIGHT = 20;
 const uint UNIT_BOX_GAP = 6;
 
 const uint ANIM_DISPLAY_TIME = 400;
+
+extern WeaponStrengthBar weapon_strength_bar;
 
 Weapon::Weapon(Weapon_type type,
                const std::string &id,
@@ -176,6 +178,17 @@ void Weapon::Select()
 
   // be sure that angle is correct
   ActiveCharacter().SetFiringAngle(ActiveCharacter().GetAbsFiringAngle());
+
+  if (max_strength == 0) return ;
+
+  // prepare the strength bar
+  weapon_strength_bar.InitVal (0, 0, uint(max_strength*100));
+
+  // init stamp on the stength_bar
+  double val = ActiveCharacter().previous_strength;
+  weapon_strength_bar.ResetTag();
+  if (0 < val && val < max_strength)
+    weapon_strength_bar.AddTag (uint(val*100), primary_red_color);
 }
 
 void Weapon::Deselect()
@@ -213,7 +226,7 @@ void Weapon::Manage()
 
 bool Weapon::CanChangeWeapon() const
 {
-  if ( !ActiveTeam().IsLocalHuman() )
+  if ( !ActiveTeam().IsLocal() )
     return false;
 
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&
@@ -221,6 +234,32 @@ bool Weapon::CanChangeWeapon() const
     return false;
 
   return true;
+}
+
+void Weapon::NewActionWeaponShoot() const
+{
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+
+  if (ActiveCharacter().IsPreparingShoot()) { // a shot is already in progress
+#ifdef DEBUG
+    fprintf(stderr, "\nWARNING: Weapon::NewActionWeaponShoot: a shot is already in progress!\n");
+    fprintf(stderr, "         Maybe, shot anim for this weapon is longer than m_time_between_each_shot\n\n");
+#endif
+    return;
+  }
+
+  Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
+                               m_strength,
+                               ActiveCharacter().GetAbsFiringAngle());
+  ActionHandler::GetInstance()->NewActionActiveCharacter(a_shoot);
+}
+
+void Weapon::NewActionWeaponStopUse() const
+{
+  ASSERT(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+
+  Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
+  ActionHandler::GetInstance()->NewActionActiveCharacter(a);
 }
 
 void Weapon::PrepareShoot(double strength, double angle)
@@ -264,16 +303,12 @@ bool Weapon::Shoot()
 
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
-  #ifdef DEBUG
-  Point2i hand;
-  ActiveCharacter().GetHandPosition(hand);
   MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)",
             ActiveCharacter().GetName().c_str(),
             ActiveCharacter().GetX(),
             ActiveCharacter().GetY(),
-            hand.GetX(),
-            hand.GetY());
-  #endif
+            ActiveCharacter().GetHandPosition().GetX(),
+            ActiveCharacter().GetHandPosition().GetY());
   ActiveCharacter().body->DebugState();
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
@@ -298,93 +333,16 @@ bool Weapon::Shoot()
   return true;
 }
 
-void Weapon::Refresh()
-{
-  if (IsLoading() && !ActiveCharacter().IsPreparingShoot()) {
-    // Strength == max strength -> Fire !!!
-    if (ReadStrength() >= max_strength) {
-        PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
-    } else {
-        // still pressing the Space key
-        UpdateStrength();
-    }
-  }
-}
-
-void Weapon::StartShooting()
-{
-  if (ActiveCharacter().IsPreparingShoot())
-    return;
-
-  if (max_strength != 0 && IsReady())
-    InitLoading();
-}
-
-void Weapon::StopShooting()
-{
-  if (!ActiveCharacter().IsPreparingShoot()) {
-    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
-  }
-}
-
 void Weapon::RepeatShoot()
 {
   uint current_time = Time::GetInstance()->Read();
 
   if (current_time - m_last_fire_time >= m_time_between_each_shot) {
-    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+    NewActionWeaponShoot();
     // this is done in Weapon::Shoot() but let's set meanwhile,
     // to prevent problems with rapid fire weapons such as submachine
     m_last_fire_time = current_time;
   }
-}
-
-void Weapon::StartMovingLeftForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_LEFT);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StopMovingLeftForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_LEFT);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StartMovingRightForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_RIGHT);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StopMovingRightForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_RIGHT);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StartMovingUpForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_UP);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StopMovingUpForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_UP);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StartMovingDownForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_START_MOVING_DOWN);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Weapon::StopMovingDownForAllPlayers()
-{
-  Action *a = new Action(Action::ACTION_WEAPON_STOP_MOVING_DOWN);
-  ActionHandler::GetInstance()->NewAction(a);
 }
 
 // Compute position of weapon's image
@@ -392,8 +350,7 @@ void Weapon::PosXY (int &x, int &y) const
 {
   if (origin == weapon_origin_HAND)
   {
-    Point2i handPos;
-    ActiveCharacter().GetHandPosition(handPos);
+    Point2i handPos = ActiveCharacter().GetHandPosition();
     y = handPos.y - position.y;
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       x = handPos.x - position.x;
@@ -412,8 +369,7 @@ void Weapon::PosXY (int &x, int &y) const
 
 const Point2i Weapon::GetGunHolePosition() const
 {
-  Point2i pos;
-  ActiveCharacter().GetHandPosition(pos);
+  const Point2i &pos = ActiveCharacter().GetHandPosition();
   Point2i hole(pos + hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
@@ -480,11 +436,8 @@ void Weapon::UpdateStrength(){
   double val = (max_strength * time*time) / (MAX_TIME_LOADING*MAX_TIME_LOADING);
 
   m_strength = InRange_Double (val, 0.0, max_strength);
-}
 
-bool Weapon::IsOnCooldownFromShot() const
-{
-  return (m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read());
+  weapon_strength_bar.UpdateValue ((int)(m_strength*100));
 }
 
 void Weapon::InitLoading(){
@@ -516,6 +469,13 @@ void Weapon::Draw(){
   if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
 #endif
     DrawWeaponFire();
+  weapon_strength_bar.visible = false;
+
+  // Do we need to draw strength_bar ? (real draw is done by class Interface)
+  // We do not draw on the network
+  if (max_strength != 0 && IsReady() && !IsInUse() &&
+      (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    weapon_strength_bar.visible = true;
 
   DrawAmmoUnits();
 
@@ -594,10 +554,8 @@ void Weapon::Draw(){
 
 #ifdef DEBUG
   if (IsLOGGING("weapon")) {
-    Point2i hand;
-    ActiveCharacter().GetHandPosition(hand);
-    Rectanglei rect(hand.GetX()-1 - Camera::GetInstance()->GetPositionX(),
-		    hand.GetY()-1 - Camera::GetInstance()->GetPositionY(),
+    Rectanglei rect(ActiveCharacter().GetHandPosition().GetX()-1 - Camera::GetInstance()->GetPositionX(),
+		    ActiveCharacter().GetHandPosition().GetY()-1 - Camera::GetInstance()->GetPositionY(),
 		    3,
 		    3);
 
@@ -608,8 +566,8 @@ void Weapon::Draw(){
     MSG_DEBUG("weapon.handposition", "Position: %d, %d - hand: %d, %d",
 	      ActiveCharacter().GetX(),
 	      ActiveCharacter().GetY(),
-	      hand.GetX(),
-	      hand.GetY());
+	      ActiveCharacter().GetHandPosition().GetX(),
+	      ActiveCharacter().GetHandPosition().GetY());
   }
 #endif
 #ifdef DEBUG_HOLE
@@ -628,23 +586,22 @@ void Weapon::Draw(){
 void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
-  Point2i hand;
-  ActiveCharacter().GetHandPosition(hand);
-  Point2i hole(hand +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
+  Point2i pos = ActiveCharacter().GetHandPosition();
+  Point2i hole(pos +  hole_delta * Point2i(ActiveCharacter().GetDirection(),1));
 
   if( ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
     hole = hole -  Point2i(0, m_weapon_fire->GetHeight()/2);
   else
     hole = hole +  Point2i(0, m_weapon_fire->GetHeight()/2);
-  double dst = hand.Distance(hole);
-  double angle = hand.ComputeAngle(hole);
+  double dst = pos.Distance(hole);
+  double angle = pos.ComputeAngle(hole);
 
   angle += ActiveCharacter().GetFiringAngle();
 
   if( ActiveCharacter().GetDirection() == DIRECTION_LEFT)
     angle -= M_PI;
 
-  Point2i spr_pos =  hand + Point2i(static_cast<int>(dst * cos(angle)),
+  Point2i spr_pos =  pos + Point2i(static_cast<int>(dst * cos(angle)),
                                    static_cast<int>(dst * sin(angle)));
 
   m_weapon_fire->SetRotation_HotSpot (Point2i(0,0));
@@ -734,19 +691,44 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   return true;
 }
 
+void Weapon::ActionStopUse()
+{
+  ASSERT(false);
+}
+
 // Handle keyboard events
 
 // #################### SHOOT
-void Weapon::HandleKeyPressed_Shoot()
+void Weapon::HandleKeyPressed_Shoot(bool)
 {
-  Action *a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
-  ActionHandler::GetInstance()->NewAction(a);
+  if (ActiveCharacter().IsPreparingShoot())
+    return;
+
+  if (max_strength != 0 && IsReady())
+    InitLoading();
 }
 
-void Weapon::HandleKeyReleased_Shoot()
+void Weapon::HandleKeyRefreshed_Shoot(bool)
 {
-  Action *a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
-  ActionHandler::GetInstance()->NewAction(a);
+  if (ActiveCharacter().IsPreparingShoot())
+    return;
+  if (!IsLoading())
+    return;
+
+  // Strength == max strength -> Fire !!!
+  if (ReadStrength() >= max_strength) {
+    NewActionWeaponShoot();
+  } else {
+    // still pressing the Space key
+    UpdateStrength();
+  }
+}
+
+void Weapon::HandleKeyReleased_Shoot(bool)
+{
+  if (!ActiveCharacter().IsPreparingShoot()) {
+    NewActionWeaponShoot();
+  }
 }
 
 void Weapon::p_Deselect()
@@ -756,72 +738,107 @@ void Weapon::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-void Weapon::HandleKeyPressed_MoveRight(bool slowly)
+void Weapon::HandleKeyPressed_MoveRight(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
+  ActiveCharacter().HandleKeyPressed_MoveRight(shift);
 }
 
-void Weapon::HandleKeyReleased_MoveRight(bool slowly)
+void Weapon::HandleKeyRefreshed_MoveRight(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
+  ActiveCharacter().HandleKeyRefreshed_MoveRight(shift);
 }
 
-void Weapon::HandleKeyPressed_MoveLeft(bool slowly)
+void Weapon::HandleKeyReleased_MoveRight(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
+  ActiveCharacter().HandleKeyReleased_MoveRight(shift);
 }
 
-void Weapon::HandleKeyReleased_MoveLeft(bool slowly)
+void Weapon::HandleKeyPressed_MoveLeft(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
+  ActiveCharacter().HandleKeyPressed_MoveLeft(shift);
 }
 
-void Weapon::HandleKeyPressed_Up(bool slowly)
+void Weapon::HandleKeyRefreshed_MoveLeft(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_Up(slowly);
+  ActiveCharacter().HandleKeyRefreshed_MoveLeft(shift);
 }
 
-void Weapon::HandleKeyReleased_Up(bool slowly)
+void Weapon::HandleKeyReleased_MoveLeft(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_Up(slowly);
+  ActiveCharacter().HandleKeyReleased_MoveLeft(shift);
 }
 
-void Weapon::HandleKeyPressed_Down(bool slowly)
+void Weapon::HandleKeyPressed_Up(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_Down(slowly);
+  ActiveCharacter().HandleKeyPressed_Up(shift);
 }
 
-void Weapon::HandleKeyReleased_Down(bool slowly)
+void Weapon::HandleKeyRefreshed_Up(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_Down(slowly);
+  ActiveCharacter().HandleKeyRefreshed_Up(shift);
 }
 
-void Weapon::HandleKeyPressed_Jump()
+void Weapon::HandleKeyReleased_Up(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_Jump();
+  ActiveCharacter().HandleKeyReleased_Up(shift);
 }
 
-void Weapon::HandleKeyReleased_Jump()
+void Weapon::HandleKeyPressed_Down(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_Jump();
+  ActiveCharacter().HandleKeyPressed_Down(shift);
 }
 
-void Weapon::HandleKeyPressed_HighJump()
+void Weapon::HandleKeyRefreshed_Down(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_HighJump();
+  ActiveCharacter().HandleKeyRefreshed_Down(shift);
 }
 
-void Weapon::HandleKeyReleased_HighJump()
+void Weapon::HandleKeyReleased_Down(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_HighJump();
+  ActiveCharacter().HandleKeyReleased_Down(shift);
 }
 
-void Weapon::HandleKeyPressed_BackJump()
+void Weapon::HandleKeyPressed_Jump(bool shift)
 {
-  ActiveCharacter().HandleKeyPressed_BackJump();
+  ActiveCharacter().HandleKeyPressed_Jump(shift);
 }
 
-void Weapon::HandleKeyReleased_BackJump()
+void Weapon::HandleKeyRefreshed_Jump(bool shift)
 {
-  ActiveCharacter().HandleKeyReleased_BackJump();
+  ActiveCharacter().HandleKeyRefreshed_Jump(shift);
+}
+
+void Weapon::HandleKeyReleased_Jump(bool shift)
+{
+  ActiveCharacter().HandleKeyReleased_Jump(shift);
+}
+
+void Weapon::HandleKeyPressed_HighJump(bool shift)
+{
+  ActiveCharacter().HandleKeyPressed_HighJump(shift);
+}
+
+void Weapon::HandleKeyRefreshed_HighJump(bool shift)
+{
+  ActiveCharacter().HandleKeyRefreshed_HighJump(shift);
+}
+
+void Weapon::HandleKeyReleased_HighJump(bool shift)
+{
+  ActiveCharacter().HandleKeyReleased_HighJump(shift);
+}
+
+void Weapon::HandleKeyPressed_BackJump(bool shift)
+{
+  ActiveCharacter().HandleKeyPressed_BackJump(shift);
+}
+
+void Weapon::HandleKeyRefreshed_BackJump(bool shift)
+{
+  ActiveCharacter().HandleKeyRefreshed_BackJump(shift);
+}
+
+void Weapon::HandleKeyReleased_BackJump(bool shift)
+{
+  ActiveCharacter().HandleKeyReleased_BackJump(shift);
 }

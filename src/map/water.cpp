@@ -37,14 +37,9 @@ const uint GO_UP_TIME = 1; // min
 const uint GO_UP_STEP = 15; // pixels
 const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
-const uint MS_BETWEEN_SHIFTS = 20;
-const uint PATTERN_WIDTH = 180;
-const double WAVE_HEIGHT_A = 5;
-const double WAVE_HEIGHT_B = 8;
-const double DEGREE = static_cast<double>(2*M_PI/360.0);
-const int WAVE_INC = 5;
-const int WAVE_COUNT = 3;
-const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
+const float t = (GO_UP_OSCILLATION_TIME*1000.0);
+const float a = GO_UP_STEP/t;
+const float b = 1.0;
 
 int Water::pattern_height = 0;
 
@@ -54,12 +49,12 @@ Water::Water() :
   shift1(0),
   water_height(0),
   time_raise(0),
-  height(PATTERN_WIDTH, 0),
-  wave_height(3, EMPTY_WAVE_HEIGHT_VECTOR),
   water_type("no"),
-  m_last_preview_redraw(0),
-  next_wave_shift(0)
+  m_last_preview_redraw(0)
 {
+  for (uint i = 0; i < pattern_width; i++) {
+    height[i] = 0;
+  }
 }
 
 Water::~Water()
@@ -100,7 +95,7 @@ void Water::Init()
 
   pattern_height = bottom.GetHeight();
 
-  pattern.NewSurface(Point2i(PATTERN_WIDTH, pattern_height),
+  pattern.NewSurface(Point2i(pattern_width, pattern_height),
 		     SDL_SWSURFACE|SDL_SRCALPHA, true);
   /* Convert the pattern into the same format than surface. This allow not to
    * need conversions on fly and thus saves CPU */
@@ -117,8 +112,8 @@ void Water::Init()
 				       SDL_SWSURFACE|SDL_SRCALPHA),
 		    true);
 
+
   shift1 = 0;
-  next_wave_shift = 0;
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
@@ -142,9 +137,8 @@ void Water::Reset()
 
 void Water::Free()
 {
-  if (!IsActive()) {
+  if (!IsActive())
     return;
-  }
 
   bottom.Free();
   surface.Free();
@@ -154,57 +148,44 @@ void Water::Free()
 
 void Water::Refresh()
 {
-  if (!IsActive()) {
+  if (!IsActive())
     return;
-  }
 
   height_mvt = 0;
-  uint now = Time::GetInstance()->Read();
-
-  if (next_wave_shift <= now) {
-    shift1 += 2*DEGREE;
-    next_wave_shift += MS_BETWEEN_SHIFTS;
-  }
 
   // Height Calculation:
-  const float t = (GO_UP_OSCILLATION_TIME*1000.0);
-  const float a = GO_UP_STEP/t;
-  const float b = 1.0;
-
-  if (time_raise < now) {
-    m_last_preview_redraw = now;
-    if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
-      uint dt = now - time_raise;
-      height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP *
+  Time * global_time = Time::GetInstance();
+  if (time_raise < global_time->Read())
+  {
+    m_last_preview_redraw = global_time->Read();
+    if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()) {
+      uint dt = global_time->Read() - time_raise;
+      height_mvt = GO_UP_STEP +
+        (uint)(((float)GO_UP_STEP *
                sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))
                    / GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI)
                )/(a*dt+b));
-    } else {
+    }
+    else{
       time_raise += GO_UP_TIME * 60 * 1000;
       water_height += GO_UP_STEP;
     }
   }
-  CalculateWaveHeights();
+
 }
 
-void Water::CalculateWaveHeights()
+void Water::Draw()
 {
-  double angle1 = -shift1;
-  double angle2 = shift1;
+  if (!IsActive())
+    return;
 
-  for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    // TODO: delete the first dimension of wave_height (now unused)
-    wave_height[0][x] = static_cast<int>(sin(angle1)*WAVE_HEIGHT_A + sin(angle2)*WAVE_HEIGHT_B);
-    height[x] = wave_height[0][x];
+  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
+  int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
 
-    angle1 += 2*DEGREE;
-    angle2 += 4*DEGREE;
-  }
-}
+  if ( screen_bottom < water_top )
+    return; // save precious CPU time
 
-
-void Water::CalculateWavePattern()
-{
+  /* Now the wave has changed, we need to build the new image pattern */
   pattern.SetAlpha(0, 0);
   pattern.Fill(0x00000000);
 
@@ -218,63 +199,76 @@ void Water::CalculateWavePattern()
    * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
-  Uint32  pitch = pattern.GetSurface()->pitch;
-  Uint8 * dst;
-  Uint8 * src;
+  double degree = static_cast<double>(2*M_PI/360.0);
+  double angle1 = -shift1;
+  double angle2 = shift1;
+  double a = 5, b = 8;
+  int wave_height[3];
+  const int wave_inc = 5;
+  const int wave_count = 3;
 
-  for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    dst = (Uint8*)pattern.GetSurface()->pixels + x * bpp + (wave_height[0][x] + 15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
-    src = (Uint8*)surface.GetSurface()->pixels;
-    for (uint y=0; y < (uint)surface.GetHeight(); y++) {
-      memcpy(dst, src, bpp);
+  for (uint x = 0; x < pattern_width; x++)
+  {
+    assert (wave_count == 3);
+    wave_height[0] = static_cast<int>(sin(angle1)*a + sin(angle2)*b);
+    wave_height[1] = static_cast<int>(sin(angle1+M_PI)*a + sin(angle2+10*degree)*b);
+    wave_height[2] = static_cast<int>(sin(angle1+M_PI/2)*a + sin(angle2+20*degree)*b);
+
+    int top = std::max(wave_height[0], wave_height[1]);
+    height[x] = std::max(top, wave_height[2]);
+
+    int l = (int)(a + b) * 2 + wave_inc * wave_count + 32; // 32 = pattern slide length (in texture)
+    assert(l < pattern_height);
+    Uint32 pitch = pattern.GetSurface()->pitch;
+    Uint8 *dst = (Uint8*)pattern.GetSurface()->pixels + l*pitch;
+    const Uint8 *src = (Uint8*)bottom.GetSurface()->pixels + l*pitch;
+    for (; l < pattern_height; l++)
+    {
+      memcpy(dst, src, bpp * pattern_width);
       dst += pitch;
-      src += bpp;
+      src += pitch;
     }
+
+    int wave;
+    for (wave = 0; wave < wave_count; wave++)
+    {
+      dst = (Uint8*)pattern.GetSurface()->pixels + x * bpp
+          + (wave_height[wave]+15+wave_inc*wave) * pitch;
+      src = (Uint8*)surface.GetSurface()->pixels;
+      for (uint y=0; y<(uint)surface.GetHeight(); y++)
+      {
+        memcpy(dst, src, bpp);
+        dst += pitch;
+        src += bpp;
+      }
+    }
+
+    angle1 += 2*degree;
+    angle2 += 4*degree;
   }
+
+  shift1 += 4*degree;
 
   SDL_UnlockSurface(bottom.GetSurface());
   SDL_UnlockSurface(pattern.GetSurface());
   SDL_UnlockSurface(surface.GetSurface());
 
   pattern.SetAlpha(SDL_SRCALPHA, 0);
-}
+  int x0 = Camera::GetInstance()->GetPosition().x % pattern_width;
 
-void Water::Draw()
-{
-  if (!IsActive()) {
-    return;
-  }
-
-  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
-  int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
-
-  if ( screen_bottom < water_top ) {
-    return; // save precious CPU time
-  }
-
-  CalculateWavePattern();
-
-  int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
-  int cameraRightPosition = Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
- 
-  int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
-  for (; y < screen_bottom;
-       y += pattern_height) {
-    for (int x = Camera::GetInstance()->GetPosition().x - x0;
-         x < cameraRightPosition;
-         x += PATTERN_WIDTH) {
-      AbsoluteDraw(bottom, Point2i(x, y));
+  int r = 0;
+  for(int y = water_top;
+      y < screen_bottom;
+      y += pattern_height)
+  {
+    Surface *bitmap = r ? &bottom : &pattern;
+    for(int x = Camera::GetInstance()->GetPosition().x - x0;
+        x < Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
+        x += pattern_width)
+    {
+      AbsoluteDraw(*bitmap, Point2i(x, y));
     }
-  }
- 
-  y = water_top;
-  for (int wave = 0; wave < WAVE_COUNT; wave++) {
-    for (int x = Camera::GetInstance()->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
-         x < cameraRightPosition;
-         x += PATTERN_WIDTH) {
-      AbsoluteDraw(pattern, Point2i(x, y));
-    }
-    y += wave * WAVE_INC;
+    r++;
   }
 }
 
@@ -285,13 +279,12 @@ bool Water::IsActive() const
 
 int Water::GetHeight(int x) const
 {
-  if (IsActive()) {
-    return height[x % PATTERN_WIDTH]
+  if (IsActive())
+    return height[x % pattern_width]
            + GetWorld().GetHeight()
            - (water_height + height_mvt);
-  } else {
+  else
     return GetWorld().GetHeight();
-  }
 }
 
 uint Water::GetSelfHeight() const

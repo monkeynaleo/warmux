@@ -74,7 +74,6 @@ class Team
     Weapon *active_weapon;
     uint nb_characters;
     uint current_turn;
-    bool abandoned;
 
     CustomTeam *attached_custom_team;
 
@@ -163,13 +162,10 @@ class Team
   // Only for network:
   // true if the team belong to a local player
   // false if the team belong to a player on the network or on the AI
-    bool IsLocalHuman() const { return (type_of_player == TEAM_human_local); };
+    bool IsLocal() const { return (type_of_player == TEAM_human_local); };
 
   // true if the team belong to a local AI
     bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
-
-  // true if the tream belongs to a local human or AI player.
-    bool IsLocal() const { return IsLocalHuman() || IsLocalAI(); }
 
     bool IsRemote() const { return (type_of_player == TEAM_remote); };
 
@@ -184,8 +180,6 @@ class Team
 
   // Custom team
     void AttachCustomTeam(CustomTeam*);
-    void Abandon() { abandoned = true; }
-    bool IsAbandoned() { return abandoned; }
 };
 
 #endif /* TEAM_H */

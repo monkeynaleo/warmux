@@ -23,6 +23,7 @@
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/randomsync.h"
@@ -176,9 +177,7 @@ void Polecat::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 PolecatLauncher::PolecatLauncher() :
-  WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig()),
-  current_polecat(NULL),
-  polecat_death_time(0)
+  WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   UpdateTranslationStrings();
 
@@ -211,7 +210,6 @@ bool PolecatLauncher::p_Shoot()
 
 void PolecatLauncher::Refresh()
 {
-  WeaponLauncher::Refresh();
   if (current_polecat)
     return;
 
@@ -222,23 +220,9 @@ void PolecatLauncher::Refresh()
   }
 }
 
-bool PolecatLauncher::IsOnCooldownFromShot() const
+bool PolecatLauncher::IsInUse() const
 {
   return (current_polecat || polecat_death_time);
-}
-
-bool PolecatLauncher::IsReady() const
-{
-  return !IsOnCooldownFromShot() && WeaponLauncher::IsReady();
-}
-
-void PolecatLauncher::StopShooting()
-{
-  if (current_polecat) {
-    current_polecat->Explosion();
-    return;
-  }
-  WeaponLauncher::StopShooting();
 }
 
 void PolecatLauncher::SignalEndOfProjectile()
@@ -248,6 +232,42 @@ void PolecatLauncher::SignalEndOfProjectile()
 
   current_polecat = NULL;
   polecat_death_time = Time::GetInstance()->Read();
+}
+
+void PolecatLauncher::HandleKeyPressed_Shoot(bool shift)
+{
+  if (current_polecat || polecat_death_time)
+    return;
+
+  Weapon::HandleKeyPressed_Shoot(shift);
+}
+
+void PolecatLauncher::HandleKeyRefreshed_Shoot(bool shift)
+{
+  if (current_polecat || polecat_death_time)
+    return;
+
+  Weapon::HandleKeyRefreshed_Shoot(shift);
+}
+
+void PolecatLauncher::HandleKeyReleased_Shoot(bool shift)
+{
+  if (current_polecat) {
+    Action* a = new Action(Action::ACTION_WEAPON_POLECAT);
+    a->Push(current_polecat->GetPos());
+    ActionHandler::GetInstance()->NewAction(a);
+    return;
+  } else if (!polecat_death_time)
+    Weapon::HandleKeyReleased_Shoot(shift);
+}
+
+void PolecatLauncher::ExplosionFromNetwork(Point2d polecat_pos)
+{
+  if (!current_polecat)
+    return;
+
+  current_polecat->SetPhysXY(polecat_pos);
+  current_polecat->Explosion();
 }
 
 WeaponProjectile * PolecatLauncher::GetProjectileInstance()

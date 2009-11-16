@@ -34,8 +34,6 @@ class TuxLauncher : public WeaponLauncher
 private:
   SuperTux * current_tux;
   uint tux_death_time;
-  bool move_left_pressed;
-  bool move_right_pressed;
 
 public:
   TuxLauncher();
@@ -46,35 +44,38 @@ public:
 
   virtual void SignalEndOfProjectile();
 
-  virtual void StartMovingLeft() {move_left_pressed = true;};
-  virtual void StopMovingLeft() {move_left_pressed = false;};
+  // Key Shoot management
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
 
-  virtual void StartMovingRight() {move_right_pressed = true;};
-  virtual void StopMovingRight() {move_right_pressed = false;};
+  virtual void HandleKeyPressed_MoveRight(bool shift);
+  virtual void HandleKeyRefreshed_MoveRight(bool shift);
+  virtual void HandleKeyReleased_MoveRight(bool shift);
 
-  void StartShooting();
-  void StopShooting();
+  virtual void HandleKeyPressed_MoveLeft(bool shift);
+  virtual void HandleKeyRefreshed_MoveLeft(bool shift);
+  virtual void HandleKeyReleased_MoveLeft(bool shift);
 
-  virtual void HandleKeyPressed_MoveRight(bool slowly);
-  virtual void HandleKeyReleased_MoveRight(bool slowly);
+  virtual void HandleKeyPressed_Up(bool shift);
+  virtual void HandleKeyRefreshed_Up(bool shift);
+  virtual void HandleKeyReleased_Up(bool shift);
 
-  virtual void HandleKeyPressed_MoveLeft(bool slowly);
-  virtual void HandleKeyReleased_MoveLeft(bool slowly);
+  virtual void HandleKeyPressed_Down(bool shift);
+  virtual void HandleKeyRefreshed_Down(bool shift);
+  virtual void HandleKeyReleased_Down(bool shift);
 
-  virtual void HandleKeyPressed_Up(bool slowly);
-  virtual void HandleKeyReleased_Up(bool slowly);
+  virtual void HandleKeyPressed_Jump(bool shift);
+  virtual void HandleKeyRefreshed_Jump(bool shift);
+  virtual void HandleKeyReleased_Jump(bool shift);
 
-  virtual void HandleKeyPressed_Down(bool slowly);
-  virtual void HandleKeyReleased_Down(bool slowly);
+  virtual void HandleKeyPressed_HighJump(bool shift);
+  virtual void HandleKeyRefreshed_HighJump(bool shift);
+  virtual void HandleKeyReleased_HighJump(bool shift);
 
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyReleased_Jump();
-
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
-
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
+  virtual void HandleKeyPressed_BackJump(bool shift);
+  virtual void HandleKeyRefreshed_BackJump(bool shift);
+  virtual void HandleKeyReleased_BackJump(bool shift);
 
   void RefreshFromNetwork(double angle, Point2d pos);
   void ExplosionFromNetwork(Point2d tux_pos);

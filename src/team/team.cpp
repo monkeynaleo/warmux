@@ -46,7 +46,7 @@
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)
-  : energy(this), m_teams_dir(teams_dir), m_id(id), abandoned(false)
+  : energy(this), m_teams_dir(teams_dir), m_id(id)
 {
   std::string nomfich;
   XmlReader   doc;
@@ -123,7 +123,7 @@ bool Team::LoadCharacters()
 
     // Create a new character and add him to the team
     Character new_character(*this, character_name, body);
-    if((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected())
+    if((attached_custom_team != NULL) && (IsLocal()) && !Network::IsConnected())
     {
       new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
     }
@@ -289,7 +289,7 @@ void Team::PrepareTurn()
   }
 
   // Sound the bell, so the local players know when it is their turn
-  if (IsLocalHuman())
+  if (IsLocal())
     JukeBox::GetInstance()->Play("default", "start_turn");
 }
 
@@ -396,7 +396,6 @@ void Team::LoadGamingData()
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
-  abandoned = false;
   LoadCharacters();
 }
 

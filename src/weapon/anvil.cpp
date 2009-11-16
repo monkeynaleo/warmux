@@ -145,10 +145,7 @@ void AnvilLauncher::UpdateTranslationStrings()
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
   target.x = mouse_pos.x - (projectile->GetWidth() / 2);
-
-  // using 1 allows to detect when the ground goes at the very top of the sky
-  // in that case, the current target is rejected (fix bug #12369)
-  target.y = 1 - projectile->GetHeight();
+  target.y = 0 - projectile->GetHeight();
 
   if (!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(target, projectile->GetSize())) ||
      !projectile->IsInVacuumXY(target))
@@ -181,7 +178,7 @@ bool AnvilLauncher::p_Shoot ()
 void AnvilLauncher::p_Select()
 {
   if (Network::GetInstance()->IsTurnMaster())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
+    Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 }
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()

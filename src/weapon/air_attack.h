@@ -26,25 +26,15 @@
 
 class AirAttackConfig;
 class Sprite;
-
-class Obus : public WeaponProjectile
-{
-  private:
-    SoundSample falling_sound;
-  public:
-    Obus(AirAttackConfig& cfg);
-    virtual ~Obus();
-};
+class Obus;
 
 class Plane : public PhysicalObj
 {
   private:
-    static Obus * last_dropped_bomb;
-    friend Obus::~Obus();
+    SoundSample flying_sound;
 
     uint nb_dropped_bombs;
-
-    SoundSample flying_sound;
+    Obus * last_dropped_bomb;
 
     int obus_dx, obus_dy;
     Sprite *image;

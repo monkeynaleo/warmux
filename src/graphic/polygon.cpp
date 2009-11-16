@@ -316,11 +316,9 @@ bool Polygon::IsClockWise() const
 // Not 100% accurate but sufficient for now
 bool Polygon::IsOverlapping(const Polygon & poly) const
 {
-  int nbPoint = GetNbOfPoint();
-  for (int i = 0; i < nbPoint; i++) {
-    if (poly.IsInsidePolygon(transformed_shape[i])) {
+  for(int i = 0; i < GetNbOfPoint(); i++) {
+    if(poly.IsInsidePolygon(transformed_shape[i]))
       return true;
-    }
   }
   return false;
 }
@@ -733,7 +731,7 @@ DecoratedBox::~DecoratedBox()
 void DecoratedBox::Draw(Surface * dest)
 {
   if(!m_border){
-    m_border = new Surface(Point2i((int)GetSize().x,(int)GetSize().y),SDL_SWSURFACE, true);
+    m_border = new Surface(Point2i(GetSize().x,GetSize().y),SDL_SWSURFACE, true);
     GenerateBorder(*m_border);
   }
   dest->Blit(*m_border, min);

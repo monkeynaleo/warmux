@@ -168,12 +168,12 @@ void Camera::AutoCrop()
   if (acceleration.y < -MAX_CAMERA_ACCELERATION.y) acceleration.y = -MAX_CAMERA_ACCELERATION.y;
 
  // std::cout<<"acceleration before : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
-  if (abs((int)m_speed.x) > SPEED_REACTIVITY_CEIL) {
-    acceleration.x *= (1 + SPEED_REACTIVITY * (abs((int)m_speed.x) - SPEED_REACTIVITY_CEIL));
+  if (abs(m_speed.x) > SPEED_REACTIVITY_CEIL) {
+    acceleration.x *= (1 + SPEED_REACTIVITY * (abs(m_speed.x) - SPEED_REACTIVITY_CEIL));
   }
 
-  if (abs((int)m_speed.y) > SPEED_REACTIVITY_CEIL) {
-    acceleration.y *= (1 + SPEED_REACTIVITY * (abs((int)m_speed.y) - SPEED_REACTIVITY_CEIL));
+  if (abs(m_speed.y) > SPEED_REACTIVITY_CEIL) {
+    acceleration.y *= (1 + SPEED_REACTIVITY * (abs(m_speed.y) - SPEED_REACTIVITY_CEIL));
   }
 
   if (stop) {
@@ -186,11 +186,11 @@ void Camera::AutoCrop()
 
     //Realtime follow is enable if object is too fast to be correctly followed
 
-    if (abs((int)followed_object->GetSpeed().x) > REALTIME_FOLLOW_LIMIT) {
+    if (abs(followed_object->GetSpeed().x) > REALTIME_FOLLOW_LIMIT) {
       m_speed.x = (target.x - position.x) * REALTIME_FOLLOW_FACTOR;
     }
 
-    if (abs((int)followed_object->GetSpeed().y) > REALTIME_FOLLOW_LIMIT) {
+    if (abs(followed_object->GetSpeed().y) > REALTIME_FOLLOW_LIMIT) {
       m_speed.y = (target.y - position.y) * REALTIME_FOLLOW_FACTOR;
     }
 
@@ -203,8 +203,8 @@ void Camera::AutoCrop()
 
   //Update position
   Point2i next_position(0,0);
-  next_position.x = (int)m_speed.x;
-  next_position.y = (int)m_speed.y;
+  next_position.x = m_speed.x;
+  next_position.y = m_speed.y;
   SetXY(next_position);
 
   if (!m_stop &&
@@ -320,8 +320,8 @@ void Camera::TestCamera()
   } else if (m_control_mode == MOUSE_CAMERA_CONTROL) {
 
     // if the mouse has not moved at all since the user pressed the middle button, we center the camera!
-    if (abs((int)first_mouse_pos.x - curr_pos.x) < 5 &&
-        abs((int)first_mouse_pos.y - curr_pos.y) < 5 &&
+    if (abs(first_mouse_pos.x - curr_pos.x) < 5 &&
+        abs(first_mouse_pos.y - curr_pos.y) < 5 &&
         Time::GetInstance()->Read() - m_begin_controlled_move_time < 500) {
       CenterOnActiveCharacter();
     }

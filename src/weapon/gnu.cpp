@@ -23,6 +23,7 @@
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/randomsync.h"
@@ -151,14 +152,11 @@ void Gnu::SignalOutOfMap()
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() :
-  WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig()),
+  WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   current_gnu(NULL),
   gnu_death_time(0)
 {
   UpdateTranslationStrings();
-
-  current_gnu = NULL;
-  gnu_death_time = 0;
 
   m_category = SPECIAL;
   ReloadLauncher();
@@ -188,7 +186,6 @@ bool GnuLauncher::p_Shoot()
 
 void GnuLauncher::Refresh()
 {
-  WeaponLauncher::Refresh();
   if (current_gnu)
     return;
 
@@ -199,21 +196,9 @@ void GnuLauncher::Refresh()
   }
 }
 
-bool GnuLauncher::IsOnCooldownFromShot() const
+bool GnuLauncher::IsInUse() const
 {
   return (current_gnu || gnu_death_time);
-}
-
-bool GnuLauncher::IsReady() const
-{
-  return !IsOnCooldownFromShot() && WeaponLauncher::IsReady();
-}
-
-void GnuLauncher::StopShooting()
-{
-  if (current_gnu)
-    current_gnu->Explosion();
-  WeaponLauncher::StopShooting();
 }
 
 void GnuLauncher::SignalEndOfProjectile()
@@ -223,6 +208,42 @@ void GnuLauncher::SignalEndOfProjectile()
 
   current_gnu = NULL;
   gnu_death_time = Time::GetInstance()->Read();
+}
+
+void GnuLauncher::HandleKeyPressed_Shoot(bool shift)
+{
+  if (current_gnu || gnu_death_time)
+    return;
+
+  Weapon::HandleKeyPressed_Shoot(shift);
+}
+
+void GnuLauncher::HandleKeyRefreshed_Shoot(bool shift)
+{
+  if (current_gnu || gnu_death_time)
+    return;
+
+  Weapon::HandleKeyRefreshed_Shoot(shift);
+}
+
+void GnuLauncher::HandleKeyReleased_Shoot(bool shift)
+{
+  if (current_gnu) {
+    Action* a = new Action(Action::ACTION_WEAPON_GNU);
+    a->Push(current_gnu->GetPos());
+    ActionHandler::GetInstance()->NewAction(a);
+    return;
+  } else if (!gnu_death_time)
+    Weapon::HandleKeyReleased_Shoot(shift);
+}
+
+void GnuLauncher::ExplosionFromNetwork(Point2d gnu_pos)
+{
+  if (!current_gnu)
+    return;
+
+  current_gnu->SetPhysXY(gnu_pos);
+  current_gnu->Explosion();
 }
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()

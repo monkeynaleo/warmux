@@ -124,7 +124,6 @@ FlameThrower::FlameThrower() : WeaponLauncher(WEAPON_FLAMETHROWER, "flamethrower
 
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
-  shooting = false;
 
   ReloadLauncher();
 }
@@ -156,8 +155,7 @@ bool FlameThrower::p_Shoot()
   projectile = NULL;
   ReloadLauncher();
 
-  Point2i pos;
-  ActiveCharacter().GetHandPosition(pos);
+  Point2i pos = ActiveCharacter().GetHandPosition();
   double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
                * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,
@@ -166,27 +164,10 @@ bool FlameThrower::p_Shoot()
   return true;
 }
 
-void FlameThrower::p_Deselect()
+void FlameThrower::HandleKeyRefreshed_Shoot(bool /*shift*/)
 {
-  WeaponLauncher::p_Deselect();
-  shooting = false;
-}
-
-void FlameThrower::StartShooting()
-{
-  shooting = true;
-  m_is_active = true;
-}
-
-void FlameThrower::StopShooting()
-{
-  shooting = false;
-}
-
-void FlameThrower::Refresh()
-{
-  if (shooting && EnoughAmmoUnit()) {
-    WeaponLauncher::RepeatShoot();
+  if (EnoughAmmoUnit()) {
+    Weapon::RepeatShoot();
   }
 }
 

@@ -27,6 +27,7 @@
 #include "graphic/surface.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;
+#define pattern_width 180
 
 // Forward declaration
 class Color;
@@ -40,19 +41,15 @@ private:
   double shift1;
   uint water_height;
   uint time_raise;
-  std::vector<int> height;
-  std::vector< std::vector<int> > wave_height;
+  int height[pattern_width];
   Surface surface;
   Surface pattern;
   Surface bottom;
   Surface wpattern;
   std::string water_type;
   uint       m_last_preview_redraw;
-  uint next_wave_shift;
 
   void Init();
-  void CalculateWaveHeights();
-  void CalculateWavePattern();
 
 public:
   Water();

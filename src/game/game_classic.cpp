@@ -49,6 +49,7 @@ GameClassic::GameClassic()
 
 void GameClassic::EndOfGame()
 {
+  Network::GetInstance()->SetTurnMaster(true);
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
   GameMessages::GetInstance()->Add (_("And the winner is..."));
@@ -61,6 +62,8 @@ void GameClassic::EndOfGame()
 void GameClassic::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
+  if (global_time->IsGamePaused()) return;
+  global_time->Refresh();
 
   if (1000 < global_time->Read() - pause_seconde)
     {
@@ -114,7 +117,7 @@ void GameClassic::RefreshClock()
             break;
           }
 
-          if (give_objbox && GetWorld().IsOpen()) {
+          if (Network::GetInstance()->IsTurnMaster() && give_objbox && GetWorld().IsOpen()) {
             NewBox();
             give_objbox = false;
             break;
@@ -147,7 +150,8 @@ void GameClassic::__SetState_PLAYING()
   Interface::GetInstance()->EnableDisplayTimer(true);
   pause_seconde = Time::GetInstance()->Read();
 
-  Wind::GetRef().ChooseRandomVal();
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal())
+    Wind::GetRef().ChooseRandomVal();
 
   SetCharacterChosen(false);
 
@@ -157,7 +161,17 @@ void GameClassic::__SetState_PLAYING()
 
   // Select the next team
   ASSERT (!IsGameFinished());
-  GetTeamsList().NextTeam();
+
+  if (Network::GetInstance()->IsTurnMaster() || Network::GetInstance()->IsLocal()) {
+
+    GetTeamsList().NextTeam();
+
+    // Are we turn master for next turn ?
+    if (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+      Network::GetInstance()->SetTurnMaster(true);
+    else
+      Network::GetInstance()->SetTurnMaster(false);
+  }
 
   give_objbox = true; //hack: make it so that there is no more than one objbox per turn
 }

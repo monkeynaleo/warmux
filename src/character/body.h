@@ -26,8 +26,6 @@
 #include <vector>
 #include "include/base.h"
 #include <WORMUX_point.h>
-#include "tool/xml_document.h"
-#include "character/movement.h"
 
 // Forward declarations
 class Character;
@@ -51,129 +49,102 @@ typedef enum BodyDirection BodyDirection_t;
  * copy constructor, this is really suspect.... */
 class c_junction
 {
-  public:
-    Member * member;
-    Member * parent;
-
-    c_junction(): 
-      member(NULL), 
-      parent(NULL) {};
+public:
+  Member* member;
+  Member* parent;
+  c_junction(): member(NULL), parent(NULL) {};
 };
 
 typedef class c_junction junction;
 
 class Body
 {
-  private:
-    /* If you need this, implement it (correctly) */
-    const Body & operator = (const Body & obj);
-    /**********************************************/
-    friend class BodyList;
-    friend class SkinMenu;
+  /* If you need this, implement it (correctly) */
+  const Body& operator=(const Body&);
+  /**********************************************/
 
-    std::map<std::string, Member *>   members_lst;
-    std::map<std::string, Clothe *>   clothes_lst;
-    std::map<std::string, Movement *> mvt_lst;
-    const Clothe *                    current_clothe;
-    Movement *                        current_mvt;
-    uint                              current_loop;
-    uint                              current_frame;
+  friend class BodyList;
+  friend class SkinMenu;
+  std::map<std::string, Member*> members_lst;
+  std::map<std::string, Clothe*> clothes_lst;
+  std::map<std::string, Movement*> mvt_lst;
 
-    // When a movement/clothe is played once, those variables save the previous state
-    const Clothe *                    previous_clothe;
-    Movement *                        previous_mvt;
+  const Clothe* current_clothe;
+  Movement* current_mvt;
+  uint current_loop;
+  uint current_frame;
 
-    // For weapon position handling
-    Member *                          weapon_member;
+  // When a movement/clothe is played once, those variables save the previous state
+  const Clothe* previous_clothe;
+  Movement* previous_mvt;
 
-    // Time elapsed since last refresh
-    uint                              last_refresh;
+  // For weapon position handling
+  Member* weapon_member;
+  Point2i weapon_pos;
 
-    int                               walk_events;
-    double                            main_rotation_rad;
-    std::vector<junction *>           skel_lst; // Body skeleton:
-                                                // Order to use to build the body
-                                                // First element: member to build
-                                                // Secnd element: parent member
-    BodyDirection_t                   direction;
-    int                               animation_number;
-    bool                              need_rebuild;
-    const Character *                 owner;
-    const xmlNode *                   mainXmlNode;
-    const std::string                 mainFolder;
+  uint last_refresh; // Time elapsed since last refresh
+  int walk_events;
 
-    void ResetMovement() const;
-    void ApplyMovement(Movement * mvt, 
-                       uint       frame);
-    void ApplySqueleton();
+  double main_rotation_rad;
 
-    void ProcessFollowCrosshair(member_mvt & mb_mvt);
-    void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
-    void ProcessFollowSpeed(member_mvt & mb_mvt); 
-    void ProcessFollowDirection(member_mvt & mb_mvt);
-    void ProcessFollowCursor(member_mvt & mb_mvt,
-                             Member *     member);
+  std::vector<junction> skel_lst; // Body skeleton:
+                                  // Order to use to build the body
+                                  // First element: member to build
+                                  // Secnd element: parent member
+  BodyDirection_t direction;
 
-    void BuildSqueleton();
-    void AddChildMembers(Member * parent);
-    void DrawWeaponMember(const Point2i & _pos);
-    void LoadMembers(xmlNodeArray &      nodes,
-                     const std::string & main_folder);
-    void LoadClothes(xmlNodeArray &  nodes,
-                     const xmlNode * xml);
-    void LoadMovements(xmlNodeArray &  nodes,
-                       const xmlNode * xml);
-    void FreeSkeletonVector();
+  int animation_number;
+  bool need_rebuild;
 
-  public:
-    Body(const xmlNode *     xml, 
-         const std::string & main_folder);
-    Body(const Body & cpy);
-    void Init(void);
-    ~Body();
+  void ResetMovement() const;
+  void ApplyMovement(Movement* mvt, uint frame);
+  void ApplySqueleton();
 
-    //// MISC
-    void                    Draw(const Point2i & pos);
-    void                    PlayAnimation();
-    void                    Build();
-    void                    UpdateWeaponPosition(const Point2i & pos);
-    void                    RefreshSprites();
-    void                    StartWalk();
-    void                    StopWalk();
-    void                    ResetWalk() { walk_events = 0; };
-    bool                    IsWalking() const ;
-    void                    MakeParticles(const Point2i & pos);
-    void                    MakeTeleportParticles(const Point2i & pos,
-                                                  const Point2i & dst);
-    void                    DebugState() const;
-    void                    Rebuild(void) { need_rebuild = true; }
+  void BuildSqueleton();
+  void AddChildMembers(Member* parent);
+  const Character* owner;
 
-    //// SETTERS
-    void                    SetClothe(const std::string & name);
-    void                    SetMovement(const std::string & name);
-    // use this only during one movement ...
-    void                    SetClotheOnce(const std::string & name);
-    // play the movement only once ...
-    void                    SetMovementOnce(const std::string & name);
-    void                    SetRotation(double angle);
-    void                    SetFrame(uint no);
-    void                    SetDirection(BodyDirection_t dir)    { direction = dir;      };
-    inline void             SetOwner(const Character * belonger) { owner     = belonger; };
+  void DrawWeaponMember(const Point2i& _pos);
 
-    //// GETTERS
-    static Point2i          GetSize() { return Point2i(30,45); };
-    const std::string &     GetMovement() const;
-    const std::string &     GetClothe() const;
-    std::string             GetFrameLoop() const;
-    void                    GetTestRect(uint & l, 
-                                        uint & r, 
-                                        uint & t, 
-                                        uint & b) const;
-    const BodyDirection_t & GetDirection() const { return direction; };
-    void                    GetRelativeHandPosition(Point2i & result) const;
-    uint                    GetMovementDuration() const;
-    uint                    GetFrame() const { return current_frame; };
-    uint                    GetFrameCount() const;
+public:
+
+  Body(const xmlNode* xml, const std::string& main_folder);
+  Body(const Body&);
+  ~Body();
+
+  static Point2i GetSize() {return Point2i(30,45);};
+
+  void Draw(const Point2i& pos);
+  void SetClothe(const std::string& name);
+  void SetMovement(const std::string& name);
+  void SetClotheOnce(const std::string& name); //use this only during one movement
+  void SetMovementOnce(const std::string& name); //play the movement only once
+  void SetRotation(double angle);
+  void SetFrame(uint no);
+  void SetDirection(BodyDirection_t dir) { direction=dir; };
+  inline void SetOwner(const Character* belonger) { owner = belonger; };
+  void PlayAnimation();
+  void Build();
+  void UpdateWeaponPosition(const Point2i& pos);
+
+  const std::string& GetMovement() const;
+  const std::string& GetClothe() const;
+  std::string GetFrameLoop() const;
+  void GetTestRect(uint &l, uint &r, uint &t, uint &b) const;
+  const BodyDirection_t &GetDirection() const { return direction; };
+  const Point2i &GetHandPosition() const { return weapon_pos; };
+  uint GetMovementDuration() const;
+  uint GetFrame() const { return current_frame; };
+  uint GetFrameCount() const;
+
+  void StartWalk();
+  void StopWalk();
+  void ResetWalk() { walk_events = 0; };
+  bool IsWalking() const ;
+
+  void MakeParticles(const Point2i& pos);
+  void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);
+  void DebugState() const;
 };
 
 #endif //BODY_H

@@ -97,15 +97,6 @@
     <rebound_factor>0.01</rebound_factor>
   </explosion_smoke_particle>
 
-  <explosion_particle> <!-- Particle used during explosions -->
-    <mass>0.0</mass>
-    <wind_factor>0.0</wind_factor>
-    <air_resist_factor>0.2</air_resist_factor>
-    <gravity_factor>0.0</gravity_factor>
-    <rebounding>false</rebounding>
-    <rebound_factor>0.01</rebound_factor>
-  </explosion_particle>
-
   <dark_smoke>  <!-- Particle bazooka and auto-bazooka... -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
@@ -184,7 +175,6 @@
     <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.10</water_resist_factor>
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -194,7 +184,6 @@
     <mass>1.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.0</water_resist_factor>
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -204,7 +193,6 @@
     <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.0</water_resist_factor>
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -214,7 +202,6 @@
     <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.01</water_resist_factor>
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -235,7 +222,6 @@
     <mass>20.0</mass>
     <wind_factor>75.0</wind_factor>
     <air_resist_factor>0</air_resist_factor>
-    <water_resist_factor>2.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -245,7 +231,6 @@
     <mass>15.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0</air_resist_factor>
-    <water_resist_factor>2.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.9</rebound_factor>
@@ -255,7 +240,6 @@
     <mass>5.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0</air_resist_factor>
-    <water_resist_factor>1.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.9</rebound_factor>
@@ -265,7 +249,6 @@
     <mass>50.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.8</air_resist_factor>
-    <water_resist_factor>5.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -275,7 +258,6 @@
     <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>8.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
@@ -285,7 +267,6 @@
     <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.5</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.4</rebound_factor>
@@ -295,7 +276,6 @@
     <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.3</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.7</rebound_factor>
@@ -305,7 +285,6 @@
     <mass>30.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -315,7 +294,6 @@
     <mass>50.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.3</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.9</rebound_factor>
@@ -325,7 +303,6 @@
     <mass>100.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>1.0</air_resist_factor>
-    <water_resist_factor>15.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -335,7 +312,6 @@
     <mass>1.0</mass>
     <wind_factor>0.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>0.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -345,7 +321,6 @@
     <mass>200.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.5</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
@@ -365,17 +340,15 @@
     <mass>40.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>10.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
   </gnu>
 
   <polecat>
-    <mass>40.0</mass>
+    <mass>5.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>4.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>false</rebounding>   <!-- bouncing handled in the code  -->
     <rebound_factor>0.01</rebound_factor>
@@ -385,7 +358,6 @@
     <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
-    <water_resist_factor>0.5</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>1.1</rebound_factor>
@@ -395,7 +367,6 @@
     <mass>500.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>1.0</air_resist_factor>
-    <water_resist_factor>10.0</water_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.01</rebound_factor>

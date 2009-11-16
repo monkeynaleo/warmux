@@ -89,7 +89,6 @@ public:
 
   bool IsAlwaysMoving() const;
 
-  // TODO lami: use a pointer ... std::vector<Movement::member_def *>
   const std::vector<Movement::member_def> & GetFrames() const;
 
   uint GetTestLeft() const;

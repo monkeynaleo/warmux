@@ -29,7 +29,6 @@
 #include "gui/energy_bar.h"
 #include "gui/energy_bar.h"
 #include "gui/progress_bar.h"
-#include "weapon/weapon_strength_bar.h"
 
 // Forward declarations
 class Character;
@@ -79,7 +78,6 @@ public:
    bool display_minimap;
    EnergyBar energy_bar;
    ProgressBar wind_bar;
-   WeaponStrengthBar weapon_strength_bar;
 
    Surface game_menu;
    Surface clock_background;
@@ -96,8 +94,16 @@ public:
    Surface rounding_style [3][3];
    Surface rounding_style_mask [3][3];
 
-   Color m_camera_preview_color;
-   Color m_playing_character_preview_color;
+   /*Surface rounding_bottom;
+   Surface rounding_bottom_left;
+   Surface rounding_bottom_right;
+   Surface rounding_top;
+   Surface rounding_top_left;
+   Surface rounding_top_right;
+   Surface rounding_center;
+   Surface rounding_left;
+   Surface rounding_right;
+*/
 protected:
   friend class Singleton<Interface>;
    Interface();
@@ -133,7 +139,7 @@ protected:
 
    void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
    void UpdateTimer(uint utimer, const Color& color = black_color);
-   void UpdateWindIndicator(int wind_value);
+   void UpdateWindIndicator(int wind_value) { wind_bar.UpdateValue(wind_value); };
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
    void ToggleMinimap() { display_minimap = !display_minimap; };
 };

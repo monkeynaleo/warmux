@@ -49,8 +49,8 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
-  virtual void HandleKeyPressed_Down(bool /*slowly*/) { Down(); };
-  virtual void HandleKeyPressed_Up(bool /*slowly*/) { Up(); };
+  virtual void HandleKeyPressed_Down(bool) { Down(); };
+  virtual void HandleKeyPressed_Up(bool) { Up(); };
   virtual void HandleMouseWheelUp(bool) { Up(); };
   virtual void HandleMouseWheelDown(bool) { Down(); };
 

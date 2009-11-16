@@ -64,6 +64,10 @@ void TeamsList::NextTeam ()
 
   ActiveTeam().NextCharacter(true);
 
+  Action a(Action::ACTION_GAMELOOP_NEXT_TEAM, next->GetId());
+  Character::StoreActiveCharacter(&a);
+  Network::GetInstance()->SendActionToAll(a);
+
   printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
   printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
   printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
@@ -180,7 +184,7 @@ void TeamsList::LoadGamingData()
   for (; it != end; ++it) {
 
     // Local or AI ?
-    if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")
+    if ( (*it)->IsLocal() && (*it)->GetPlayerName() == "AI-stupid")
       (*it)->SetLocalAI();
 
     (**it).LoadGamingData();
@@ -538,7 +542,7 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
       return;
     }
 
-    bool is_local = the_old_team->IsLocal();
+    bool is_local = (the_old_team->IsLocal() || the_old_team->IsLocalAI());
     DelTeam(the_old_team);
     AddTeam(the_team, pos, the_team_cfg, is_local);
   }

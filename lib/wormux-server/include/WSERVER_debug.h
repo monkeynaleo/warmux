@@ -34,29 +34,38 @@
 
 #define LOG_LEVEL    TRAFFIC
 
-#define DPRINTMSG(STREAM, ARGS...)					\
-  {									\
-  fprintf(STREAM, "%s %s| %18s,%4i : ", BasicClock::DateStr(),		\
-          BasicClock::TimeStr(),__FILE__,__LINE__);			\
-  fprintf(STREAM, ARGS);						\
-  fprintf(STREAM,"\n");							\
-  }									\
 
+#ifdef DEBUG
 #define DPRINT(LEVEL, ARGS...)                                          \
   {                                                                     \
     if((LEVEL) >= LOG_LEVEL )                                           \
-      DPRINTMSG(stdout, ARGS);						\
+      {                                                                 \
+        printf("%s %s| %18s,%4i : ", BasicClock::DateStr(), BasicClock::TimeStr(),__FILE__,__LINE__); \
+        printf(ARGS);                                                   \
+        printf("\n");                                                   \
+      }                                                                 \
+  }
+#else
+#define DPRINT(LEVEL, ARGS...)                                          \
+  {                                                                     \
+    if((LEVEL) >= LOG_LEVEL )                                           \
+      {                                                                 \
+        printf("%s %s : ", BasicClock::DateStr(), BasicClock::TimeStr()); \
+        printf(ARGS);                                                   \
+        printf("\n");                                                   \
+      }                                                                 \
+  }
+#endif
+
+#define TELL_ERROR         \
+  {                        \
+    PRINT_ERROR;           \
+    exit(1);               \
   }
 
-#define PRINT_FATAL_ERROR						\
-  {									\
-    PRINT_ERROR;							\
-    exit(1);								\
-  }
-
-#define PRINT_ERROR							\
-  {									\
-    DPRINTMSG(stderr, "ERROR: %s", strerror(errno));			\
+#define PRINT_ERROR                    \
+  {                                    \
+    DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
   }
 
 

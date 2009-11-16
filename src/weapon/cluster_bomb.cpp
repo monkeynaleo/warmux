@@ -173,7 +173,7 @@ void ClusterBomb::SetEnergyDelta(int /* delta */, bool /* do_report */){};
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() :
-  WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig())
+  WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   UpdateTranslationStrings();
 

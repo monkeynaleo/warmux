@@ -38,14 +38,14 @@ static const uint BORDER        = 20;
 static const uint CHECKBOX_SIZE = 50;
 static const uint SKIN_SIZE     = 100;
 
-SkinMenu::SkinMenu(const char* name): 
-  Menu("menu/bg_option"), 
-  frame(NULL), 
-  body(NULL)
+SkinMenu::SkinMenu(const char* name)
+ : Menu("menu/bg_option")
+ , frame(NULL)
+ , body(NULL)
 {
   uint size = GetMainWindow().GetHeight()
             - (2*BORDER+CHECKBOX_SIZE+SKIN_SIZE);
-  Box * box = new HBox(size);
+  Box  *box = new HBox(size);
 
   position = 2*BORDER + size;
 

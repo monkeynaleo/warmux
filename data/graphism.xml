@@ -3,7 +3,7 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg_main" file="menu/background_main.jpg" />
+  <surface name="bg_main" file="menu/background-main.png" />
 
   <sprite name="button">
     <image file="menu/button.png">
@@ -14,13 +14,13 @@
 
 <section name="menu">
 
-  <surface name="ico_warning" file="menu/warning.png" />
+  <surface name="ico_warning" file="interface/warning.png" />
 
   <!-- backgrounds -->
-  <surface name="bg_option" file="menu/background.jpg" />
-  <surface name="bg_play" file="menu/background.jpg" />
-  <surface name="bg_network" file="menu/background_network.jpg" />
-  <surface name="bg_results" file="menu/background.jpg" />
+  <surface name="bg_option" file="menu/background.png" />
+  <surface name="bg_play" file="menu/background.png" />
+  <surface name="bg_network" file="menu/background_network.png" />
+  <surface name="bg_results" file="menu/background.png" />
 
   <!-- buttons to access menus -->
   <surface name="ico_back_to_battle" file="menu/i_backtobattle.png" />
@@ -170,11 +170,11 @@
  </section>
 
 <section name="credit">
-  <surface name="background" file="menu/background.jpg" />
+  <surface name="background" file="menu/background.png" />
 </section>
 
 <section name="help">
-  <surface name="background" file="menu/background.jpg" />
+  <surface name="background" file="menu/background.png" />
   <surface name="shortkeys" file="menu/help_shortkeys.png" />
 </section>
 
@@ -202,72 +202,61 @@
   <color name="weapon_strength_bar_value" r="255" g="255" b="255" a="128" />
   <color name="weapon_strength_bar_border" r="0" g="0" b="0" a="255" />
   <color name="weapon_strength_bar_background" r="153" g="153" b="153" a="96" />
-  <surface name="weapon_strength_bar_last_fire" file="interface/whitetheme/lastfire.png" />
+  <surface name="weapon_strength_bar_last_fire" file="interface/lastfire.png" />
   <color name="text_color" r="0" g="0" b="0" a="255" />
   <color name="energy_text_color" r="255" g="255" b="255" a="255" />
   <color name="turn_timer_text_color" r="0" g="0" b="0" a="255" />
   <color name="global_clock_text_color" r="128" g="128" b="128" a="255" />
-  <surface name="background_interface" file="interface/please_delete_us_we_are_old_files_read_task6160/background_interface.png" />
-  <surface name="small_background_interface" file="interface/please_delete_us_we_are_old_files_read_task6160/small_background_interface.png" />
+  <surface name="background_interface" file="interface/background_interface.png" />
+  <surface name="small_background_interface" file="interface/small_background_interface.png" />
   <color name="background_color" r="255" g="255" b="255" a="128" />
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapons_interface_size" x="290" y="235" />
   <point name="tools_interface_size" x="290" y="100" />
-  <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
-  <surface name="clock" file="interface/whitetheme/clock.png"/>
-
-  
-  <!-- Minimap -->
-  <color name="camera_preview_color" r="120" g="120" b="120" a="100" />
-  <color name="playing_character_preview_color" r="120" g="120" b="120" a="100" />
-
-  <!-- Wind parameters -->
-  <surface name="wind" file="interface/whitetheme/wind.png"/>
-  <surface name="wind_indicator" file="interface/whitetheme/wind_indicator.png"/>
-  <color name="wind_color_min" r="114" g="206" b="13" a="255" />
-  <color name="wind_color_max" r="156" g="9" b="9" a="255" />
-
-  <surface name="quit_screen" file="menu/quit.png"/>
-  
+  <surface name="clock_background" file="interface/clock_background.png"/>
+  <surface name="clock" file="interface/clock.png"/>
+  <surface name="wind" file="interface/wind.png"/>
+  <surface name="wind_indicator" file="interface/wind_indicator.png"/>
+  <surface name="quit_screen" file="interface/quit.png"/>
   <!-- Game mode options -->
-  <surface name="rounding_bottom" file="interface/whitetheme/box_big.png" pos="20,25" size="1,18" />
-  <surface name="rounding_bottom_left" file="interface/whitetheme/box_big.png" pos="0,25" size="20,18" />
-  <surface name="rounding_bottom_right" file="interface/whitetheme/box_big.png" pos="21,25" size="20,18" />
-  <surface name="rounding_top" file="interface/whitetheme/box_big.png" pos="20,0" size="1,24" />
-  <surface name="rounding_top_left" file="interface/whitetheme/box_big.png" pos="0,0" size="20,24" />
-  <surface name="rounding_top_right" file="interface/whitetheme/box_big.png" pos="21,0" size="20,24" />
-  <surface name="rounding_center" file="interface/whitetheme/box_big.png" pos="20,24" size="1,1" />
-  <surface name="rounding_left" file="interface/whitetheme/box_big.png" pos="0,24" size="20,1" />
-  <surface name="rounding_right" file="interface/whitetheme/box_big.png" pos="21,24" size="20,1" />
-  <surface name="rounding_mask_bottom_left" file="interface/whitetheme/box_big_hide.png" pos="0,25" size="20,24" />
-  <surface name="rounding_mask_bottom_right" file="interface/whitetheme/box_big_hide.png" pos="21,25" size="20,24" />
-  <surface name="rounding_mask_top_left" file="interface/whitetheme/box_big_hide.png" pos="0,0" size="20,24" />
-  <surface name="rounding_mask_top_right" file="interface/whitetheme/box_big_hide.png" pos="21,0" size="20,24" />
-  <surface name="rounding_mask_bottom" file="interface/whitetheme/box_big_hide.png" pos="20,25" size="1,24" />
-  <surface name="rounding_mask_right" file="interface/whitetheme/box_big_hide.png" pos="21,24" size="20,1" />
-  <surface name="rounding_mask_left" file="interface/whitetheme/box_big_hide.png" pos="0,24" size="20,1" />
-  <surface name="rounding_mask_top" file="interface/whitetheme/box_big_hide.png" pos="20,0" size="1,24" />
+  <surface name="rounding_bottom" file="interface/rounding_bottom.png" />
+  <surface name="rounding_bottom_left" file="interface/rounding_bottomleft.png" />
+  <surface name="rounding_bottom_right" file="interface/rounding_bottomright.png" />
+  <surface name="rounding_top" file="interface/rounding_top.png" />
+  <surface name="rounding_top_left" file="interface/rounding_topleft.png" />
+  <surface name="rounding_top_right" file="interface/rounding_topright.png" />
+  <surface name="rounding_center" file="interface/rounding_center.png" />
+  <surface name="rounding_left" file="interface/rounding_left.png" />
+  <surface name="rounding_right" file="interface/rounding_right.png" />
+  <surface name="rounding_mask_bottom_left" file="interface/hide_bottomleft.png" />
+  <surface name="rounding_mask_bottom_right" file="interface/hide_bottomright.png" />
+  <surface name="rounding_mask_top_left" file="interface/hide_topleft.png" />
+  <surface name="rounding_mask_top_right" file="interface/hide_topright.png" />
+  <surface name="rounding_mask_bottom" file="interface/hide_bottom.png" />
+  <surface name="rounding_mask_right" file="interface/hide_right.png" />
+  <surface name="rounding_mask_left" file="interface/hide_left.png" />
+  <surface name="rounding_mask_top" file="interface/hide_top.png" />
 
-  <surface name="square_bottom" file="/interface/whitetheme/box_little.png" pos="4,4" size="1,3" />
-  <surface name="square_bottom_left" file="/interface/whitetheme/box_little.png" pos="0,4" size="4,3" />
-  <surface name="square_bottom_right" file="/interface/whitetheme/box_little.png" pos="5,4" size="4,3" />
-  <surface name="square_top" file="/interface/whitetheme/box_little.png" pos="4,0" size="1,3" />
-  <surface name="square_top_left" file="/interface/whitetheme/box_little.png" pos="0,0" size="4,3" />
-  <surface name="square_top_right" file="/interface/whitetheme/box_little.png" pos="5,0" size="4,3" />
-  <surface name="square_center" file="/interface/whitetheme/box_little.png" pos="4,3" size="1,1" />
-  <surface name="square_left" file="/interface/whitetheme/box_little.png" pos="0,3" size="4,1" />
-  <surface name="square_right" file="/interface/whitetheme/box_little.png" pos="5,3" size="4,1" />
-  <surface name="square_mask_bottom_left" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_bottom_right" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_top_left" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_top_right" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_bottom" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_right" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_left" file="interface/whitetheme/box_little_hide.png" />
-  <surface name="square_mask_top" file="interface/whitetheme/box_little_hide.png" />
+  <surface name="square_bottom" file="interface/square_bottom.png" />
+  <surface name="square_bottom_left" file="interface/square_bottomleft.png" />
+  <surface name="square_bottom_right" file="interface/square_bottomright.png" />
+  <surface name="square_top" file="interface/square_top.png" />
+  <surface name="square_top_left" file="interface/square_topleft.png" />
+  <surface name="square_top_right" file="interface/square_topright.png" />
+  <surface name="square_center" file="interface/square_center.png" />
+  <surface name="square_left" file="interface/square_left.png" />
+  <surface name="square_right" file="interface/square_right.png" />
+  <surface name="square_mask_bottom_left" file="interface/hide_bottomleft.png" />
+  <surface name="square_mask_bottom_right" file="interface/hide_bottomright.png" />
+  <surface name="square_mask_top_left" file="interface/hide_topleft.png" />
+  <surface name="square_mask_top_right" file="interface/hide_topright.png" />
+  <surface name="square_mask_bottom" file="interface/hide_bottom.png" />
+  <surface name="square_mask_right" file="interface/hide_right.png" />
+  <surface name="square_mask_left" file="interface/hide_left.png" />
+  <surface name="square_mask_top" file="interface/hide_top.png" />
 
   <sprite name="hourglass">
-    <image file="interface/whitetheme/hourglass.png">
+    <image file="interface/hourglass.png">
       <grid pos="0,0" size="25,25" array="29,1" />
     </image>
     <animation loop_mode="true" speed="100" />
@@ -300,23 +289,22 @@
 </section>
 
 <section name="gfx">
-  <surface name="pointeur1" file="interface/whitetheme/pointer.png" />
+  <surface name="pointeur1" file="gfx/pointer.png" />
 
   <sprite name="arrow-jump">
-    <image file="interface/whitetheme/arrow_jump.png">
+    <image file="gfx/arrow_jump.png">
       <grid pos="0,0" size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
 
   <sprite name="arrow-change">
-    <image file="interface/whitetheme/arrow_turn.png">
-      <grid pos="0,0" size="50,50" array="8,1" />
+    <image file="gfx/arrow_turn.png">
+      <grid pos="0,0" size="70,70" array="8,1" />
     </image>
-    <animation loop_mode="true" speed="75" />
+    <animation loop_mode="true"/>
   </sprite>
 
-<!-- Water -->
   <surface name="water" file="water/water/water.png" />
   <surface name="water_bottom" file="water/water/water_bottom.png" />
 

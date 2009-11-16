@@ -61,17 +61,17 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   custom_team_current_id = 0;
 
   player_name = new TextBox(_player_name, 100,
-                            Font::FONT_SMALL, Font::FONT_BOLD);
+                            Font::FONT_SMALL, Font::FONT_NORMAL);
 
   if (custom_team_list.empty()) {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
-                                      Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
+                                      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
     tmp_player_box->AddWidget(player_name);
 
   } else {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
-					Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
+					Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
 
     next_custom_team = new Button(res, "menu/plus");
 
@@ -145,7 +145,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
     Widget* w = WidgetList::ClickUp(mousePosition, button);
 
-    if (!associated_team->IsLocal())
+    if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
 
     if (w == nb_characters) {
@@ -227,7 +227,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   associated_team->SetPlayerName(player_name->GetText());
 
   // change only for local teams...
-  if (associated_team->IsLocal()) {
+  if (associated_team->IsLocal() || associated_team->IsLocalAI()) {
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
@@ -249,7 +249,7 @@ void TeamBox::ValidOptions() const
 
 bool TeamBox::IsLocal() const
 {
-  if (associated_team != NULL && associated_team->IsLocalHuman()) {
+  if (associated_team != NULL && associated_team->IsLocal()) {
     return true;
   }
 

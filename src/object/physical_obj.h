@@ -65,8 +65,6 @@ private:
   // Object size and position.
   int m_width, m_height;
 
-  bool can_be_ghost;
-
 protected:
   PhysicalObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
@@ -96,8 +94,6 @@ public:
 
   //-------- Set position and size -------
 
-  void CanBeGhost(bool state);
-
   // Set/Get position
   void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
   void SetY(double y) { SetXY( Point2d(GetXdouble(), y) ); };
@@ -108,6 +104,10 @@ public:
   double GetXdouble() const;
   double GetYdouble() const;
   const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
+
+  // Used to sync value across network
+  virtual void GetValueFromAction(Action *);
+  virtual void StoreValue(Action *);
 
   // Set/Get size
   void SetSize(const Point2i &newSize);

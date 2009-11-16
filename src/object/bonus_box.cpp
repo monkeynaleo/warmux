@@ -177,7 +177,19 @@ void BonusBox::LoadXml(const xmlNode* object)
   ASSERT(total_probability != 0.0);
 }
 
+void BonusBox::GetValueFromAction(Action * a)
+{
+  ObjBox::GetValueFromAction(a);
+  weapon_num = (uint)(a->PopInt());
+}
+
 void BonusBox::Randomize()
 {
   PickRandomWeapon();
+}
+
+void BonusBox::StoreValue(Action * a)
+{
+  ObjBox::StoreValue(a);
+  a->Push(int(weapon_num));
 }

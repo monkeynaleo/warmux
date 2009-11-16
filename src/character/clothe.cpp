@@ -25,8 +25,7 @@
 #include <map>
 #include <iostream>
 
-Clothe::Clothe(const xmlNode *                  xml, 
-               std::map<std::string, Member*> & members_lst):
+Clothe::Clothe(const xmlNode* xml, std::map<std::string, Member*>& members_lst):
   name(),
   layers()
 {
@@ -38,33 +37,44 @@ Clothe::Clothe(const xmlNode *                  xml,
 
   ASSERT(nodes.size());
 
-  std::string att;
-
-  for (it = nodes.begin(); it != nodes.end(); ++it) {
-
-    if (!XmlReader::ReadStringAttr(*it, "name", att)) {
+  for (it = nodes.begin(); it != nodes.end(); ++it)
+  {
+    std::string att;
+    if (!XmlReader::ReadStringAttr(*it, "name", att))
+    {
       std::cerr << "Malformed attached clothe member definition" << std::endl;
       continue;
     }
 
-    std::map<std::string, Member *>::iterator itMember = members_lst.find(att);
-    
-    if (itMember != members_lst.end()) {
-      layers.push_back(itMember->second);
-    } else {
+    Member* member = NULL;
+    if(members_lst.find(att) != members_lst.end())
+    {
+      member = members_lst.find(att)->second;
+    }
+    else
+    {
       std::cerr << "Undefined clothe member \"" << att << "\"" << std::endl;
     }
+
+    layers.push_back( member );
   }
+
+  std::vector<Member*>::iterator i = layers.begin();
+  while( i != layers.end())
+  if(*i!=NULL)
+    i++;
+  else
+    i=layers.erase(i);
 }
 
-Clothe::Clothe(Clothe *                         c, 
-               std::map<std::string, Member*> & members_lst):
+Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst):
   name(c->name),
   layers()
 {
   for (std::vector<Member*>::iterator it = c->layers.begin();
       it != c->layers.end();
-      ++it) {
+      ++it)
+  {
     layers.push_back(members_lst.find((*it)->GetName())->second);
   }
 }
@@ -79,7 +89,7 @@ const std::string & Clothe::GetName() const
   return name;
 }
 
-const std::vector<Member*> & Clothe::GetLayers() const
+const std::vector<Member*>& Clothe::GetLayers() const
 {
   return layers;
 }

@@ -39,10 +39,14 @@ public:
   virtual void SignalProjectileCollision() { };
   virtual void SignalProjectileDrowning() { };
 
-  bool IsOnCooldownFromShot() const;
-  bool IsReady() const;
+  virtual bool IsInUse() const;
 
-  void StopShooting();
+  // Key Shoot management
+  virtual void HandleKeyPressed_Shoot(bool shift);
+  virtual void HandleKeyRefreshed_Shoot(bool shift);
+  virtual void HandleKeyReleased_Shoot(bool shift);
+
+  void ExplosionFromNetwork(Point2d gnu_pos);
 
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;

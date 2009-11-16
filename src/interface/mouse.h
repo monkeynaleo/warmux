@@ -49,9 +49,9 @@ public:
     POINTER_ARROW_RIGHT,
     POINTER_ARROW_LEFT,
     POINTER_AIM,
-    POINTER_ATTACK_FROM_LEFT,
-    POINTER_ATTACK_FROM_RIGHT,
-    POINTER_ATTACK // Must always be the last one
+    POINTER_FIRE_LEFT,
+    POINTER_FIRE_RIGHT,
+    POINTER_FIRE // Must always be the last one
   } pointer_t;
 
   typedef enum {

@@ -21,13 +21,6 @@
 	<country>France</country>
       </author>
       <author>
-	<nickname>IFlo</nickname>
-	<name>Florian Köberle</name>
-	<description>Programmer</description>
-	<email>florian_AT_fkoeberle_DOT_de</email>
-	<country>Germany</country>
-      </author>
-      <author>
 	<nickname>lynxlynxlynx</nickname>
 	<name>Jaka KRANJC</name>
 	<description>i18n manager, misc</description>
@@ -40,14 +33,6 @@
 	<description>Graphic artist</description>
 	<website>http://yeknan.free.fr/</website>
 	<email>yeknan_AT_yahoo_DOT_fr</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>lami</nickname>
-	<name>Lawrence AZZOUG</name>
-	<description>Initial programmer and graphic artist of the game</description>
-	<website>http://sites.google.com/site/lamilawrence/</website>
-	<email>lami_AT_wormux_DOT_org</email>
 	<country>France</country>
       </author>
     </section>
@@ -89,6 +74,14 @@
 	<name>Christophe GISQUET</name>
 	<description>Win32 port, programmer</description>
 	<email>christophe_DOT_gisquet_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
+	<nickname>lami</nickname>
+	<name>Lawrence AZZOUG</name>
+	<description>Initial programmer and graphic artist of the game</description>
+	<website>http://perso.wanadoo.fr/lami/</website>
+	<email>lami_AT_wormux_DOT_org</email>
 	<country>France</country>
       </author>
       <author>
@@ -608,6 +601,13 @@
 	<country>Finland</country>
       </author>
       <author>
+	<nickname>IFlo</nickname>
+	<name>Florian Köberle</name>
+	<description>network bugfixes</description>
+	<email>florian_AT_fkoeberle_DOT_de</email>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>Isaac</nickname>
 	<name>Isaac CLERENCIA</name>
 	<description>Add autotools (autogen.sh, ./configure, ...) to Wormux</description>
@@ -978,10 +978,10 @@
       </author>
       <author>
 	<nickname>Jika</nickname>
-	<name>Julien CLAEYS BOÚÚAERT</name>
+	<name>Julien CLAEYS</name>
 	<description>Bug reports, tests, website help,...</description>
 	<email>julien.claeys_AT_gmail_DOT_com</email>
-	<country>Belgium</country>
+	<country>Belgique</country>
       </author>
       <author>
 	<nickname>Mastzi team</nickname>

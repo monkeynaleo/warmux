@@ -66,7 +66,7 @@ void ConnectionStats::OpenFile()
   fd = fopen(full_name.c_str(), "a+");
 
   if (fd == NULL)
-    PRINT_FATAL_ERROR;
+    TELL_ERROR;
 
   fprintf(fd, "# YYYY-MM-DD hh-mm-ss "
 	  "fake_servers, servers, clients, clients_w_empty_list "

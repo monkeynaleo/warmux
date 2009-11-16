@@ -19,95 +19,78 @@
  *  Handle the game time. The game can be paused.
  *****************************************************************************/
 
-#include "game/game.h"
 #include "game/time.h"
-#include "network/network.h"
-#include "team/team.h"
-#include "team/teams_list.h"
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
 
+bool Time::IsGamePaused() const
+{
+  return is_game_paused;
+}
+
 Time::Time()
 {
+  is_game_paused = false;
   delta_t = 20;
-  Reset();
+  current_time = 0;
+  //max_time = 0;
+  real_time_game_start = 0;
+  real_time_pause_dt = 0;
 }
 
 void Time::Reset()
 {
   current_time = 0;
-  waiting_for_user = false;
-  waiting_for_network = false;
-  if (IsLOGGING("slow"))
-    stopwatch.Reset(0.25);
-  else
-    stopwatch.Reset();
+  is_game_paused = false;
+  real_time_game_start = SDL_GetTicks();
+  real_time_pause_dt = 0;
+  real_time_pause_begin = 0;
 }
 
-void Time::Increase()
+uint Time::ReadRealTime() const
 {
-  ASSERT(!IsWaiting());
-  ASSERT(CanBeIncreased());
+  return SDL_GetTicks() - real_time_game_start - real_time_pause_dt;
+}
+
+void Time::Refresh()
+{
+  /*
+  TODO : Activate this condition later.
+  Refresh time condition :
+  - active team is Local
+  - current node is server and game loop is not in Playing state
+  - game don't use network
+  if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
+     (Network::GetInstance()->IsServer() && Game::GetInstance()->ReadState() != Game::PLAYING) ||
+     (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsClient()) ||
+     current_time < max_time)
+  */
   current_time += delta_t;
-  MSG_DEBUG("time.increase","Real time without pause: %d; Game time: %d", stopwatch.GetValue(), current_time);
+  //RefreshMaxTime(current_time);
 }
 
-bool Time::CanBeIncreased()
+void Time::TogglePause()
 {
-  return stopwatch.GetValue() >= current_time;
+  if (IsGamePaused())
+    Continue();
+  else
+    Pause();
 }
 
-void Time::LetRealTimePassUntilFrameEnd()
+void Time::Pause()
 {
-  ASSERT(!IsWaiting());
-  long delay;
-  do {
-    delay = static_cast<long>(current_time) - stopwatch.GetValue();
-    if (delay > 0) {
-      SDL_Delay((uint)delay);
-      MSG_DEBUG("time.skip","Do nothing for: %d", delay);
-    }
-  } while(delay > 0);
-}
-
-bool Time::IsWaiting()
-{
-  return waiting_for_user || waiting_for_network;
-}
-
-bool Time::IsWaitingForUser()
-{
-  return waiting_for_user;
-}
-
-void Time::SetWaitingForUser(bool value)
-{
-  if (waiting_for_user == value)
+  if (is_game_paused)
     return;
-  waiting_for_user = value;
-  stopwatch.SetPause(IsWaiting());
+  is_game_paused = true;
+  real_time_pause_begin = SDL_GetTicks();
 }
 
-bool Time::IsWaitingForNetwork()
+void Time::Continue()
 {
-  return waiting_for_network;
-}
-
-void Time::SetWaitingForNetwork(bool value)
-{
-  if (waiting_for_network == value)
-    return;
-  waiting_for_network = value;
-  #ifdef DEBUG
-    if (waiting_for_network) {
-      network_wait_time_stopwatch.Reset();
-      MSG_DEBUG("time.waiting","Start waiting for network.");
-    } else {
-      MSG_DEBUG("time.waiting","Waited %d ms for network.", network_wait_time_stopwatch.GetValue());
-    }
-  #endif
-  stopwatch.SetPause(IsWaiting());
+  ASSERT (is_game_paused);
+  is_game_paused = false;
+  real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
 }
 
 std::string Time::GetString() const

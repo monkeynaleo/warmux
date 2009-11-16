@@ -91,10 +91,7 @@ bool Syringe::p_Shoot (){
     // Compute point coordinates
     Point2i relative_pos(static_cast<int>(radius * cos(angle)),
                          static_cast<int>(radius * sin(angle)) );
-    Point2i hand_position;
-    ActiveCharacter().GetHandPosition(hand_position);
-    Point2i pos_to_check = hand_position + relative_pos;
-
+    Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())
     {

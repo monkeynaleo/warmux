@@ -37,7 +37,7 @@ public:
   TextBox(const std::string &label,
           uint max_width,
           Font::font_size_t fsize = Font::FONT_SMALL,
-          Font::font_style_t fstyle = Font::FONT_BOLD);
+          Font::font_style_t fstyle = Font::FONT_NORMAL);
   ~TextBox() { };
 
 
@@ -58,7 +58,7 @@ public:
   PasswordBox(const std::string &label,
               uint max_width,
               Font::font_size_t fsize = Font::FONT_SMALL,
-              Font::font_style_t fstyle = Font::FONT_BOLD);
+              Font::font_style_t fstyle = Font::FONT_NORMAL);
   bool SendKey(const SDL_keysym& key);
   const std::string& GetPassword() const { return clear_text; };
 };
