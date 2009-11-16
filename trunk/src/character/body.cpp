@@ -454,7 +454,6 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
-  unsigned int last_loop  = current_loop;
 
   if (walk_events > 0 || current_mvt->GetType() != "walk") {
 
