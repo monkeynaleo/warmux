@@ -38,30 +38,30 @@ void Env::SetChroot()
   bool chroot_opt;
   r = config->Get("chroot", chroot_opt);
   if (!r)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   // Attempt chroot only when root
   if (chroot_opt && !getgid()) {
 
     // If root, do chroot
     if (chroot("./") == -1)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
     if (chdir("/") == -1)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
 
     int uid, gid;
     r = config->Get("chroot_uid", uid);
     if (!r)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
 
     r = config->Get("chroot_gid", gid);
     if (!r)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
 
     if (setgid(gid) == -1)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
     if (setuid(uid) == -1)
-      TELL_ERROR;
+      PRINT_FATAL_ERROR;
   }
 
 
@@ -78,11 +78,11 @@ void Env::SetWorkingDir()
   std::string working_dir;
   r = config->Get("working_dir", working_dir);
   if (!r)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   DPRINT(INFO, "Entering folder %s", working_dir.c_str());
   if (chdir(working_dir.c_str()) == -1)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 }
 
 void Env::SetMaxConnection()
@@ -93,12 +93,12 @@ void Env::SetMaxConnection()
   int max_conn;
   r = config->Get("connexion_max", max_conn);
   if (!r)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   struct rlimit limit;
 
   if (getrlimit(RLIMIT_NOFILE, &limit) == -1)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   if (max_conn == -2) {
     // Keep the system default
@@ -116,7 +116,7 @@ void Env::SetMaxConnection()
   }
 
   if (setrlimit(RLIMIT_NOFILE, &limit) == -1)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 
   DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
 }
@@ -134,5 +134,5 @@ void Env::MaskSigPipe()
   sigemptyset(&sa.sa_mask);
   sa.sa_sigaction = signal_handler;
   if (sigaction(SIGPIPE, &sa, NULL) == -1)
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
 }

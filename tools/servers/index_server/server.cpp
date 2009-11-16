@@ -38,18 +38,18 @@ Server::Server(int port)
 
   int on = 1;
   if ( setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on)) < 0 ) {
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
   }
 
   if ( bind(fd, (struct sockaddr*) &address, sizeof(address)) == -1 ) {
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
   }
 
   // 128 is the size of the connection queue
   // -> TODO : use a sysctl to get the max size accepted by the kernel
   // ( see 'man listen' )
   if (listen(fd, 128) == -1) {
-    TELL_ERROR;
+    PRINT_FATAL_ERROR;
   }
 
   // Init the socket set:
