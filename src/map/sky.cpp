@@ -32,9 +32,10 @@ void Sky::Init()
 {
   std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
 
-  if (sky_layer.size() > 0) {
-    for (uint i = 0; i < sky_layer.size(); i++)
+  if (0 < sky_layer.size()) {
+    for (uint i = 0; i < sky_layer.size(); i++) {
       images.push_back(sky_layer[i]);
+    }
   } else {
     Surface tmp_image = ActiveMap()->ReadImgSky();
     tmp_image.SetAlpha(0, 0);
@@ -51,15 +52,17 @@ void Sky::Reset()
 
 void Sky::Free()
 {
-  for (std::vector<Surface>::iterator it = images.begin(); it != images.end(); it++)
-    (*it).Free();
+  std::vector<Surface>::iterator it = images.begin();
 
+  for ( ; it != images.end(); ++it) {
+    (*it).Free();
+  }
   images.clear();
 }
 
 void Sky::Draw(bool redraw_all)
 {
-  if(last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
+  if (last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
     last_pos = Camera::GetInstance()->GetPosition();
     RedrawParticle(Rectanglei(Camera::GetInstance()->GetPosition(), GetMainWindow().GetSize()));
     return;
@@ -69,18 +72,18 @@ void Sky::Draw(bool redraw_all)
   RedrawParticleList(*GetWorld().to_redraw_particles_now);
 }
 
-void Sky::RedrawParticleList(std::list<Rectanglei> &list) const
+void Sky::RedrawParticleList(std::list<Rectanglei> & list) const
 {
-  std::list<Rectanglei>::iterator it;
+  std::list<Rectanglei>::iterator it = list.begin();
 
-  for (it = list.begin(); it != list.end(); ++it) {
+  for ( ; it != list.end(); ++it) {
     RedrawParticle(*it);
   }
 }
 
-void Sky::RedrawParticle(const Rectanglei &particle) const
+void Sky::RedrawParticle(const Rectanglei & particle) const
 {
-  for (uint layer = 0; layer < images.size(); layer++) {
+  for (uint layer = 0; layer < images.size(); ++layer) {
     Rectanglei ds(GetSkyPos(layer) + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
                   particle.GetSize());
     GetMainWindow().Blit(images[layer], ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
