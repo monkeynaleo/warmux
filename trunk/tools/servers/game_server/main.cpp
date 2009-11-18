@@ -16,9 +16,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
+#ifndef _GNU_SOURCE
+	#define _GNU_SOURCE // for canonicalize_file_name
+#endif
+#include <stdlib.h>
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/socket.h>
@@ -44,11 +47,32 @@
 #include "server.h"
 
 BasicClock wx_clock;
+std::string config_file;
 
-int main(int /*argc*/, char* /*argv*/[])
+void parseArgs(int argc, char *argv[])
 {
-  DPRINT(INFO, "Wormux game server version %i", VERSION);
+  int opt;
+
+  while ((opt = getopt(argc, argv, "f:")) != -1) {
+    switch (opt) {
+    case 'f':
+      config_file = optarg;
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+int main(int argc, char* argv[])
+{
+  DPRINT(INFO, "Wormux game server version %s", PACKAGE_VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());
+
+  parseArgs(argc, argv);
+
+  config.Load(config_file);
+
   Env::SetConfigClass(config);
   Env::SetWorkingDir();
   Env::SetChroot();

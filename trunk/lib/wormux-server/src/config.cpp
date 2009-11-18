@@ -22,11 +22,6 @@
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 
-BasicConfig::BasicConfig(const std::string & _config_file) :
-  config_file(_config_file)
-{
-}
-
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
   line.clear();
@@ -57,9 +52,9 @@ void BasicConfig::SplitVersionsString(const std::string& val, std::list<std::str
   } while (comma_pos != std::string::npos);
 }
 
-void BasicConfig::Load()
+void BasicConfig::Load(const std::string & config_file)
 {
-  DPRINT(INFO, "Loading config file");
+  DPRINT(INFO, "Loading config file %s", config_file.c_str());
 
   int line_nbr = 0;
 
@@ -68,7 +63,7 @@ void BasicConfig::Load()
   fin.open(config_file.c_str(), std::ios::in);
   if(!fin)
     {
-      DPRINT(INFO, "Unable to open config file %s", config_file.c_str());
+      DPRINT(INFO, "Unable to open config file %s: %s", config_file.c_str(), strerror(errno));
       exit(EXIT_FAILURE);
     }
 

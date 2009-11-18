@@ -24,9 +24,9 @@
 
 Config config;
 
-Config::Config() : BasicConfig("wormux_server.conf")
+void Config::Load(const std::string & config_file)
 {
-  Load();
+  BasicConfig::Load(config_file);
   SetDefault("port", 3826);
   SetDefault("working_dir", "wormux_log/");
   SetDefault("chroot", true);

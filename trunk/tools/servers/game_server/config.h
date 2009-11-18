@@ -22,12 +22,10 @@
 
 #include <WSERVER_config.h>
 
-const int VERSION = 1;
-
 class Config : public BasicConfig
 {
 public:
-  Config();
+  virtual void Load(const std::string & config_file);
 };
 
 extern Config config;
