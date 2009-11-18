@@ -25,8 +25,6 @@
 
 class BasicConfig
 {
-  std::string config_file;
-
   std::map<std::string, std::string> str_value;
   std::map<std::string, int> int_value;
   std::map<std::string, bool> bool_value;
@@ -41,10 +39,9 @@ protected:
   void SetDefault(const std::string & name, const int & value);
   void SetDefault(const std::string & name, const bool & value);
 
-  void Load();
+  virtual void Load(const std::string & config_file);
   void Display() const;
 public:
-  BasicConfig(const std::string & config_file);
 
   bool Get(const std::string & name, std::string & value) const;
   bool Get(const std::string & name, int & value) const;
