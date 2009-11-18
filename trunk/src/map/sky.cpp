@@ -28,7 +28,6 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 
-
 void Sky::Init()
 {
   std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
@@ -74,8 +73,9 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list) const
 {
   std::list<Rectanglei>::iterator it;
 
-  for( it = list.begin(); it != list.end(); ++it )
-          RedrawParticle(*it);
+  for (it = list.begin(); it != list.end(); ++it) {
+    RedrawParticle(*it);
+  }
 }
 
 void Sky::RedrawParticle(const Rectanglei &particle) const
@@ -91,14 +91,9 @@ Point2i Sky::GetSkyPos(uint layer) const
 {
   ASSERT(layer < images.size());
 
-  Point2i min(0, 0);
-  Point2i max = images[layer].GetSize() - GetMainWindow().GetSize();
   Point2i tmp = Camera::GetInstance()->GetPosition();
-  int w_w = GetWorld().GetWidth();
-  int w_h = GetWorld().GetHeight();
-  int v_w = GetMainWindow().GetWidth();
-  int v_h = GetMainWindow().GetHeight();
-  double x_sky = (double)(tmp.x) / (double)(w_w - v_w);
-  double y_sky = (double)(tmp.y) / (double)(w_h - v_h);
-  return max * Point2d(x_sky, y_sky);
+  double x_sky = (double)(tmp.x) / (double)(GetWorld().GetWidth() - GetMainWindow().GetWidth());
+  double y_sky = (double)(tmp.y) / (double)(GetWorld().GetHeight() - GetMainWindow().GetHeight());
+
+  return (images[layer].GetSize() - GetMainWindow().GetSize()) * Point2d(x_sky, y_sky);
 }
