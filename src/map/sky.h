@@ -29,20 +29,20 @@
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
 
-class Sky{
-private:
-  std::vector<Surface> images;
-  Point2i last_pos;
-  void RedrawParticleList(std::list<Rectanglei> &list) const;
-  void RedrawParticle(const Rectanglei &particle) const;
-  Point2i GetSkyPos(uint layer) const;
+class Sky {
+  private:
+    std::vector<Surface> images;
+    Point2i last_pos;
 
-public:
-  Sky() {};
-  void Init();
-  void Reset();
-  void Draw(bool redraw_all);
-  void Free();
+    void RedrawParticleList(std::list<Rectanglei> &list) const;
+    void RedrawParticle(const Rectanglei &particle) const;
+    Point2i GetSkyPos(uint layer) const;
+
+  public:
+    void Init();
+    void Reset();
+    void Draw(bool redraw_all);
+    void Free();
 };
 
 #endif
