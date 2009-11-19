@@ -83,10 +83,13 @@ void Sky::RedrawParticleList(std::list<Rectanglei> & list) const
 
 void Sky::RedrawParticle(const Rectanglei & particle) const
 {
+  Point2i tmpPos =  particle.GetPosition() - Camera::GetInstance()->GetPosition();
+  Rectanglei ds;
+  ds.SetSize(particle.GetSize());
+
   for (uint layer = 0; layer < images.size(); ++layer) {
-    Rectanglei ds(GetSkyPos(layer) + particle.GetPosition() - Camera::GetInstance()->GetPosition(),
-                  particle.GetSize());
-    GetMainWindow().Blit(images[layer], ds, particle.GetPosition() - Camera::GetInstance()->GetPosition());
+    ds.SetPosition(GetSkyPos(layer) + tmpPos);
+    GetMainWindow().Blit(images[layer], ds, tmpPos);
   }
 }
 
