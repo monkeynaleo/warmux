@@ -16,8 +16,8 @@
   </sprite>
 
     <sprite name="smoke_big_explosion">
-    <image file="object/smokea.png">
-      <grid pos="0,0" size="150,150" array="5,1"/>
+    <image file="object/kaboom.png">
+      <grid pos="0,0" size="100,100" array="9,1"/>
     </image>
     <animation speed="100"/>
   </sprite>
