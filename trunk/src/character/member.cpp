@@ -280,22 +280,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
 
       if (0.0 != radius) {
         Point2f childPoint = child->second[frame];
-        float angle_init;
-
-        if (childPoint.x > anchor.x) {
-          if (childPoint.y > anchor.y) {
-            angle_init = acos( (childPoint.x - anchor.x) / radius );
-          } else {
-            angle_init = -acos( (childPoint.x - anchor.x) / radius );
-          }
-        } else {
-          if (childPoint.y > anchor.y) {
-            angle_init = acos( (childPoint.x - anchor.x) / radius );
-          } else {
-            angle_init = M_PI + acos( -(childPoint.x - anchor.x) / radius );
-          }
-        }
-
+        float angle_init = anchor.ComputeAngle(childPoint);
         child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
         child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
       }
