@@ -276,11 +276,10 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
 
-      radius = anchor.Distance(child->second[frame]);
-
+      Point2f child_delta = child->second[frame] - anchor;
+      radius = child_delta.Norm();
       if (0.0 != radius) {
-        Point2f childPoint = child->second[frame];
-        float angle_init = anchor.ComputeAngle(childPoint);
+        float angle_init = child_delta.ComputeAngle();
         child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
         child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
       }
