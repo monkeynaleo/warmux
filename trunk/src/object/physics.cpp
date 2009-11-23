@@ -438,6 +438,7 @@ void Physics::RunPhysicalEngine()
   if (m_last_physical_engine_run < m_last_move)
     m_last_physical_engine_run = m_last_move;
 
+  ASSERT(Time::GetInstance()->Read() >= m_last_physical_engine_run);
   double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / 1000.0;
   Point2d oldPos;
   Point2d newPos;
