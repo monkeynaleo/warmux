@@ -428,6 +428,11 @@ WeaponLauncher::~WeaponLauncher()
     delete projectile;
 }
 
+int WeaponLauncher::GetDamage()
+{
+  return cfg().damage;
+}
+
 bool WeaponLauncher::p_Shoot()
 {
 //   if (m_strength == max_strength)

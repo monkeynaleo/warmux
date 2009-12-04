@@ -38,7 +38,6 @@ const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
 const double SHOTGUN_RANDOM_ANGLE    = 0.04;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
-const int    SHOTGUN_BULLETS         = 4;
 
 class ShotgunBuckshot : public WeaponBullet
 {
