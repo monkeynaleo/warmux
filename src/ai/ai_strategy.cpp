@@ -22,6 +22,7 @@
 #include "ai/ai_strategy.h"
 
 const uint RATING_EPSILON = 0.00001;
+const uint WATCH_MISSILE_TIME_IN_MS = 2000;
 
 AIStrategy::AIStrategy(float rating):
 rating(rating)
@@ -66,6 +67,20 @@ AICommand * SkipTurnStrategy::CreateCommand()
   return commands;
 }
 
+static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle)
+{
+  CommandList * commands = new CommandList();
+  commands->Add(new DoNothingCommand(1000));
+  commands->Add(new SelectCharacterCommand(&character));
+  commands->Add(new DoNothingCommand(1000));
+  commands->Add(new SelectWeaponCommand(weapon));
+  commands->Add(new DoNothingCommand(200));
+  commands->Add(new SetDirectionCommand(direction));
+  commands->Add(new SetWeaponAngleCommand(angle));
+  commands->Add(new DoNothingCommand(200));
+  return commands;
+}
+
 ShootWithGunStrategy::ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, int bullets):
 AIStrategy(rating),
 shooter(shooter),
@@ -79,23 +94,34 @@ bullets(bullets)
 
 AICommand * ShootWithGunStrategy::CreateCommand()
 {
-  CommandList * commands = new CommandList();
-  commands->Add(new DoNothingCommand(1000));
-  commands->Add(new SelectCharacterCommand(&shooter));
-  commands->Add(new DoNothingCommand(1000));
-  commands->Add(new SelectWeaponCommand(weapon));
-  commands->Add(new DoNothingCommand(200));
-  commands->Add(new SetDirectionCommand(direction));
-  commands->Add(new SetWeaponAngleCommand(angle));
-  commands->Add(new DoNothingCommand(200));
+  CommandList * commands = CreateSelectCommandList(shooter, weapon, direction, angle);
   for (int i = 0; i < bullets; i++) {
     if (i != 0)
       commands->Add(new DoNothingCommand(1000));
     commands->Add(new StartShootingCommand());
     commands->Add(new StopShootingCommand());
   }
-  // Wait a while to let the missile take effect,
-  // else the AI thinks it can shoot again on the same target as it's not dead yet.
-  commands->Add(new DoNothingCommand(2000));
+  commands->Add(new DoNothingCommand(WATCH_MISSILE_TIME_IN_MS));
+  return commands;
+}
+
+LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, double strength):
+AIStrategy(rating),
+shooter(shooter),
+weapon(weapon),
+direction(direction),
+angle(angle),
+strength(strength)
+{
+  // do nothing
+}
+
+AICommand * LoadAndFireStrategy::CreateCommand()
+{
+  CommandList * commands = CreateSelectCommandList(shooter, weapon, direction, angle);
+  commands->Add(new StartShootingCommand());
+  commands->Add(new WaitForStrengthCommand(strength));
+  commands->Add(new StopShootingCommand());
+  commands->Add(new DoNothingForeverCommand());
   return commands;
 }

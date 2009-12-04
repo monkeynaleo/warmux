@@ -822,3 +822,9 @@ void Weapon::HandleKeyReleased_BackJump()
 {
   ActiveCharacter().HandleKeyReleased_BackJump();
 }
+
+bool Weapon::IsAngleValid(double angle)
+{
+  angle = -angle; // work around incorrect sign
+  return min_angle <= angle && angle <= max_angle;
+}

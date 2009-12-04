@@ -134,7 +134,10 @@ class WeaponLauncher : public Weapon
                    weapon_visibility_t visibility = ALWAYS_VISIBLE);
     virtual ~WeaponLauncher();
 
+    // Methods to access data of the projectile
     int GetDamage();
+    double GetWindFactor();
+    double GetMass();
 
     virtual void Draw();
 

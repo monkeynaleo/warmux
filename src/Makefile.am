@@ -12,6 +12,8 @@ wormux_SOURCES = \
         ai/ai_strategy.h \
         ai/ai_stupid_player.cpp \
         ai/ai_stupid_player.h \
+        ai/trajectory.cpp \
+        ai/trajectory.h \
         character/body.cpp \
         character/body.h \
         character/body_list.cpp \

@@ -20,10 +20,12 @@
  *****************************************************************************/
 
 #include "ai/ai_idea.h"
+#include "ai/trajectory.h"
 #include "character/character.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "map/map.h"
+#include "map/wind.h"
 #include "object/objects_list.h"
 #include "team/team.h"
 #include "team/macro.h"
@@ -40,8 +42,47 @@ const double MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
 bool AIIdea::CanUseWeapon(Weapon * weapon)
 {
   bool correct_weapon = weapon == &(ActiveTeam().GetWeapon());
-  bool can_change_weapon = ActiveTeam().GetWeapon().CanChangeWeapon();
+  bool can_change_weapon = ActiveTeam().GetWeapon().CanChangeWeapon()
+    && (Game::GetInstance()->ReadState() == Game::PLAYING);
   return correct_weapon || (can_change_weapon && weapon->EnoughAmmo());
+}
+
+bool AIIdea::CanUseCharacter(Character & character)
+{
+  if (character.IsDead())
+    return false;
+
+  bool can_change_character = GameMode::GetInstance()->AllowCharacterSelection()
+    && (Game::GetInstance()->ReadState() == Game::PLAYING)
+    && !Game::GetInstance()->IsCharacterAlreadyChosen();
+  return (character.IsActiveCharacter() || can_change_character);
+}
+
+BodyDirection_t AIIdea::XDeltaToDirection(double delta)
+{
+  if (delta < 0)
+    return DIRECTION_LEFT;
+  else
+    return DIRECTION_RIGHT;
+}
+
+double AIIdea::GetDirectionRelativeAngle(BodyDirection_t direction, double angle)
+{
+  if (direction == DIRECTION_LEFT)
+    return InverseAngleRad(angle);
+  else
+    return angle;
+}
+
+double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
+{
+  double rating = std::min(damage, enemy.GetEnergy());
+  if (damage >= enemy.GetEnergy()) {
+    rating += BONUS_FOR_KILLING_CHARACTER;
+    double unused_damage = damage - enemy.GetEnergy();
+    rating -= MALUS_PER_UNUSED_DAMGE_POINT * unused_damage;
+  }
+  return rating;
 }
 
 AIStrategy * SkipTurnIdea::CreateStrategy()
@@ -69,6 +110,23 @@ ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(Character & shooter, Characte
   max_distance(max_distance)
 {
   // do nothing
+}
+
+static PhysicalObj* GetObjectAt(const Point2i & pos)
+{
+  ObjectsList * objects = ObjectsList::GetInstance();
+  ObjectsList::iterator it = objects->begin();
+  while(it != objects->end()) {
+    PhysicalObj* object = *it;
+    if (object->GetTestRect().Contains(pos) && !object->IsDead())
+      return object;
+    it++;
+  }
+  FOR_ALL_CHARACTERS(team, character) {
+    if (character->GetTestRect().Contains(pos) && !character->IsDead())
+      return &(*character);
+  }
+  return NULL;
 }
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
@@ -123,39 +181,18 @@ static PhysicalObj* GetCollisionObject(Character * character_to_ignore, const Po
     if (!GetWorld().IsInVacuum(pos))
       return NULL;
 
-
-    ObjectsList * objects = ObjectsList::GetInstance();
-    ObjectsList::iterator it = objects->begin();
-    while(it != objects->end()) {
-      PhysicalObj* object = *it;
-      bool collision =object->GetTestRect().Contains(pos) && !object->IsDead();
-      if (collision && (object != character_to_ignore)) {
-        return object;
-      }
-      it++;
-    }
-
-    FOR_ALL_CHARACTERS(team, character) {
-      if ((&(*character) != character_to_ignore) && (character->GetTestRect().Contains(pos))) {
-        return &(*character);
-      }
-    }
+    PhysicalObj* object = GetObjectAt(pos);
+    if (object != NULL && object != character_to_ignore)
+      return object;
   }
   return NULL;
 }
 
 AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
-  if (enemy.IsDead() || shooter.IsDead())
+  if (enemy.IsDead())
     return NULL;
 
-  // AllowCharacterSelection does not honor game state nor does CanChangeWeapon
-  // Thus it needs to be checked seperate.
-  if (Game::GetInstance()->ReadState() != Game::PLAYING)
-    return NULL;
-
-  bool can_change_character = GameMode::GetInstance()->AllowCharacterSelection()
-    && !Game::GetInstance()->IsCharacterAlreadyChosen();
-  if (!(shooter.IsActiveCharacter() || can_change_character))
+  if (!CanUseCharacter(shooter))
     return NULL;
 
   WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(WeaponsList::GetInstance()->GetWeapon(weapon_type));
@@ -175,23 +212,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
 
   double original_angle = departure.ComputeAngle(arrival);
 
-  // set the angle
-  double shoot_angle;
-  BodyDirection_t direction;
-  if (departure.x > arrival.x) {
-    shoot_angle = InverseAngleRad(original_angle);
-    direction = DIRECTION_LEFT;
-  } else {
-    shoot_angle = original_angle;
-    direction = DIRECTION_RIGHT;
-  }
-  // As Character::SetFiringAngle(double angle) shows the methods return not what they should.
-  double max_angle = -weapon->GetMinAngle();
-  double min_angle = -weapon->GetMaxAngle();
+  BodyDirection_t direction = XDeltaToDirection(arrival.x - departure.x);
+  double shoot_angle = GetDirectionRelativeAngle(direction, original_angle);
 
-  if (shoot_angle < min_angle)
-    return NULL;
-  if (shoot_angle > max_angle)
+  if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
 
   PhysicalObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
@@ -208,11 +232,90 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   int used_ammo_units = std::min(required_ammo_units, available_ammo_units);
   int damage = used_ammo_units * damage_per_ammo_unit;
 
-  double rating = std::min(damage, enemy.GetEnergy());
-  if (damage >= enemy.GetEnergy()) {
-    rating += BONUS_FOR_KILLING_CHARACTER;
-    double unused_damage = damage - enemy.GetEnergy();
-    rating -= MALUS_PER_UNUSED_DAMGE_POINT * unused_damage;
-  }
+  double rating = RateDamageDoneToEnemy(damage, enemy);
   return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
+}
+
+FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(Character & shooter, Character & enemy, double duration):
+  shooter(shooter),
+  enemy(enemy),
+  duration(duration)
+{
+  // do nothing
+}
+
+static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory & trajectory, double max_time)
+{
+  double time = 0;
+  while (time <= max_time) {
+    Point2i pos =  trajectory.GetPositionAt(time);
+    if (GetWorld().IsOutsideWorld(pos))
+      return pos;
+
+    if (!GetWorld().IsInVacuum(pos))
+      return pos;
+
+    PhysicalObj* object = GetObjectAt(pos);
+    if (object != NULL && object != &character_to_ignore)
+      return pos;
+    double pixel_per_second = trajectory.GetSpeedAt(time);
+    double seconds_per_pixel = 1 / pixel_per_second;
+    time += seconds_per_pixel;
+  }
+}
+
+AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
+{
+  if (enemy.IsDead())
+    return NULL;
+
+  if (!CanUseCharacter(shooter))
+    return NULL;
+
+  const Weapon::Weapon_type weapon_type = Weapon::WEAPON_BAZOOKA;
+  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(WeaponsList::GetInstance()->GetWeapon(weapon_type));
+
+  if (!CanUseWeapon(weapon))
+    return NULL;
+  double g = GameMode::GetInstance()->gravity;
+  double wind_factor = weapon->GetWindFactor();
+  double mass = weapon->GetMass();
+  Point2d a(Wind::GetRef().GetStrength() * wind_factor, g * mass);
+  a *= 2; // Work around bug in physics engine.
+  const Point2d pos_0 = shooter.GetCenter();
+  const Point2d pos_t = enemy.GetCenter();
+  double t = duration;
+  // Calculate v_0 using "pos_t = 1/2 * a_x * t*t + v_0*t + pos_0":
+  Point2d v_0 = (pos_t - pos_0)/t - 0.5*a * t;
+
+  double strength = v_0.Norm() / PIXEL_PER_METER;
+  double angle = v_0.ComputeAngle();
+  BodyDirection_t direction = XDeltaToDirection(v_0.x);
+  double shoot_angle = GetDirectionRelativeAngle(direction, angle);
+  if (!weapon->IsAngleValid(shoot_angle))
+    return NULL;
+
+  if (strength > weapon->GetMaxStrength())
+    return NULL;
+
+  Trajectory trajectory(pos_0, v_0, a);
+  Point2i explosion_pos = GetFirstContact(shooter, trajectory,  t);
+  PhysicalObj * aim = GetObjectAt(explosion_pos);
+  double rating;
+  if (aim == NULL) {
+    // Shooting at ground is better then doing nothing, so give it a low positive rating.
+    rating = 0.1;
+    // Shooter should not be to close to explosion:
+    if (explosion_pos.Distance(shooter.GetCenter()) < (double)weapon->cfg().blast_range)
+      return NULL;
+  } else if (aim == &enemy) {
+    // Trough collision damage the actual damage is higher then 50.
+    // Usually one hit is enough to kill the other character.
+    // However it's quite boring to have such an AI...
+    // By using a fixed rating of 50 the weapon will not be used if the character can be killed by other weapons.
+    rating = 50;
+  } else {
+    return NULL;
+  }
+  return new LoadAndFireStrategy(rating, shooter, Weapon::WEAPON_BAZOOKA, direction, shoot_angle, strength);
 }
