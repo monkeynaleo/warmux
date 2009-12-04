@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <iostream>
 #include <WORMUX_team_config.h>
+#include "ai/ai_stupid_player.h"
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
@@ -178,12 +179,11 @@ void TeamsList::LoadGamingData()
 
   // Load the data of all teams
   for (; it != end; ++it) {
-
-    // Local or AI ?
-    if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")
-      (*it)->SetLocalAI();
-
     (**it).LoadGamingData();
+  }
+  for (it=playing_list.begin(); it != end; ++it) {
+    if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")
+      (*it)->SetAI(new AIStupidPlayer(*it));
   }
 }
 
@@ -461,11 +461,7 @@ void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
 {
   ASSERT(the_team != NULL);
 
-  if (is_local) {
-    the_team->SetLocal();
-  } else {
-    the_team->SetRemote();
-  }
+  the_team->SetRemote(!is_local);
   UpdateTeam(the_team, the_team_cfg);
 
   selection.push_back (pos);

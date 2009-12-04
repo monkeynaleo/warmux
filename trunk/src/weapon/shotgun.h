@@ -27,6 +27,8 @@
 #include "include/base.h"
 #include <WORMUX_point.h>
 
+const int SHOTGUN_BULLETS = 4;
+
 class Shotgun : public WeaponLauncher
 {
   protected:

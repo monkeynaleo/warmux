@@ -23,7 +23,6 @@
 #include "interface/man_machine_interface.h"
 #include "interface/interface.h"
 #include "character/character.h"
-#include "ai/ai_engine_stupid.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/time.h"
@@ -226,12 +225,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   PressedKeys[key] = false;
   // Here we manage only actions which are activated on KEY_RELEASED event.
 
-  // hack to interrupt AI
-  if (ActiveTeam().IsLocalAI() && key == KEY_SHOOT)
-  {
-    AIStupidEngine::GetInstance()->ForceEndOfTurn();
-  }
-
   { // Managing keys related to interface (no game interaction)
     // Always available
     switch(key){
@@ -416,7 +409,8 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   { // Managing keys related to change of character or weapon
 
     if (Game::GetInstance()->ReadState() != Game::PLAYING ||
-        !ActiveTeam().GetWeapon().CanChangeWeapon())
+        !ActiveTeam().GetWeapon().CanChangeWeapon() ||
+        !ActiveTeam().IsLocalHuman())
       return;
 
     Weapon::category_t weapon_sort = Weapon::INVALID;

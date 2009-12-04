@@ -19,7 +19,6 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
-#include "ai/ai_engine.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
@@ -294,8 +293,7 @@ void Game::RefreshInput()
   Mouse::GetInstance()->Refresh();
   Keyboard::GetInstance()->Refresh();
   Joystick::GetInstance()->Refresh();
-  AIengine::GetInstance()->Refresh();
-
+  ActiveTeam().RefreshAI();
   GameMessages::GetInstance()->Refresh();
 
   if (!IsGameFinished())

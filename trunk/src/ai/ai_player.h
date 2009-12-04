@@ -16,43 +16,17 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Artificial intelligence stupid engine
+ * An AI player for a team.
  *****************************************************************************/
-#ifndef AI_STUPID_ENGINE
-#define AI_STUPID_ENGINE
 
-#include <WORMUX_singleton.h>
-#include "ai/ai_movement_module.h"
-#include "ai/ai_shoot_module.h"
+#ifndef AI_PLAYER_H
+#define AI_PLAYER_H
 
-class AIStupidEngine : public Singleton<AIStupidEngine>
-{
- private:
-  AIStupidEngine(const AIStupidEngine&);
-  const AIStupidEngine& operator=(const AIStupidEngine&);
-
-  AIMovementModule m_movement;
-  AIShootModule m_shoot;
-
-  Character* m_last_char;
-  Character* m_enemy;
-
-  uint m_begin_turn_time;
-  uint m_step;
-
-  uint m_current_time;
-
-  void BeginTurn();
-
-  void ChooseDirection();
-
-protected:
-  friend class Singleton<AIStupidEngine>;
-  AIStupidEngine();
-
- public:
-  void Refresh();
-  void ForceEndOfTurn();
+class AIPlayer {
+  public:
+    virtual void Refresh() = 0;
+    virtual void PrepareTurn() = 0;
+    virtual ~AIPlayer() {};
 };
 
 #endif

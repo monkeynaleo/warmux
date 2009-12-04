@@ -16,30 +16,47 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Artificial intelligence engine
+ * A factory for AI strategies. It contains no turn specfic data.
  *****************************************************************************/
 
-#include "ai/ai_engine.h"
-#include <string>
-#include <iostream>
-#include "ai/ai_engine_stupid.h"
-#include "character/character.h"
-#include "game/game.h"
-#include "team/team.h"
-#include "team/teams_list.h"
+#ifndef AI_IDEA_H
+#define AI_IDEA_H
 
-AIengine::AIengine()
+#include "ai/ai_strategy.h"
+#include "weapon/weapon.h"
+
+
+class AIIdea
 {
-  std::cout << "o Artificial Intelligence engine initialization" << std::endl;
-}
+  protected:
+    bool CanUseWeapon(Weapon * weapon);
+  public:
+    virtual AIStrategy * CreateStrategy() = 0;
+    virtual ~AIIdea() {}
+};
 
-void AIengine::Refresh() const
+class SkipTurnIdea : public AIIdea
 {
-  // AI is not allowed to play
-  if (Game::GetInstance()->ReadState() == Game::END_TURN)
-    return;
+  public:
+    virtual AIStrategy * CreateStrategy();
+};
 
-  if (ActiveCharacter().GetTeam().IsLocalAI()) {
-    AIStupidEngine::GetInstance()->Refresh();
-  }
-}
+class WasteAmmoUnitsIdea : public AIIdea
+{
+  public:
+    virtual AIStrategy * CreateStrategy();
+};
+
+class ShootDirectlyAtEnemyIdea : public AIIdea
+{
+  private:
+    Character & shooter;
+    Character & enemy;
+    Weapon::Weapon_type weapon_type;
+    double max_distance;
+  public:
+    ShootDirectlyAtEnemyIdea(Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance);
+    virtual AIStrategy * CreateStrategy();
+};
+
+#endif

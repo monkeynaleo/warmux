@@ -46,7 +46,7 @@
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)
-  : energy(this), m_teams_dir(teams_dir), m_id(id), abandoned(false)
+  : energy(this), m_teams_dir(teams_dir), m_id(id), ai(NULL), remote(false), abandoned(false)
 {
   std::string nomfich;
   XmlReader   doc;
@@ -80,8 +80,6 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   m_player_name = "";
 
   nb_characters = GameMode::GetInstance()->nb_characters;
-
-  type_of_player = TEAM_human_local;
 }
 
 bool Team::LoadCharacters()
@@ -291,6 +289,8 @@ void Team::PrepareTurn()
   // Sound the bell, so the local players know when it is their turn
   if (IsLocalHuman())
     JukeBox::GetInstance()->Play("default", "start_turn");
+  if (ai != NULL)
+    ai->PrepareTurn();
 }
 
 Character& Team::ActiveCharacter() const
@@ -404,6 +404,10 @@ void Team::UnloadGamingData()
 {
   // Clear list of characters
   characters.clear();
+  if (ai) {
+    delete ai;
+    ai = NULL;
+  }
 }
 
 void Team::SetNbCharacters(uint howmany)
@@ -422,6 +426,12 @@ void Team::Refresh()
   energy.Refresh();
 }
 
+void Team::RefreshAI()
+{
+  if (ai != NULL)
+    ai->Refresh();
+}
+
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
 const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
@@ -438,7 +448,7 @@ bool Team::IsActiveTeam() const
 
 void Team::SetDefaultPlayingConfig()
 {
-  SetLocal();
+  SetRemote(false);
   SetPlayerName("");
   SetNbCharacters(GameMode::GetInstance()->nb_characters);
 }

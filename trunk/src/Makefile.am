@@ -3,14 +3,15 @@ SUBDIRS = .
 bin_PROGRAMS = wormux
 
 wormux_SOURCES = \
-	ai/ai_engine.cpp \
-        ai/ai_engine.h \
-        ai/ai_engine_stupid.cpp \
-        ai/ai_engine_stupid.h \
-        ai/ai_movement_module.cpp \
-        ai/ai_movement_module.h \
-        ai/ai_shoot_module.cpp \
-        ai/ai_shoot_module.h \
+  ai/ai_command.cpp \
+        ai/ai_command.h \
+        ai/ai_idea.cpp \
+        ai/ai_idea.h \
+        ai/ai_player.h \
+        ai/ai_strategy.cpp \
+        ai/ai_strategy.h \
+        ai/ai_stupid_player.cpp \
+        ai/ai_stupid_player.h \
         character/body.cpp \
         character/body.h \
         character/body_list.cpp \

@@ -9,14 +9,6 @@
 MAINTAINERCLEANFILES =
 
 POTFILES = \
-        src/ai/ai_engine.cpp \
-        src/ai/ai_engine.h \
-        src/ai/ai_engine_stupid.cpp \
-        src/ai/ai_engine_stupid.h \
-        src/ai/ai_movement_module.cpp \
-        src/ai/ai_movement_module.h \
-        src/ai/ai_shoot_module.cpp \
-        src/ai/ai_shoot_module.h \
         src/character/body.cpp \
         src/character/body.h \
         src/character/body_list.cpp \

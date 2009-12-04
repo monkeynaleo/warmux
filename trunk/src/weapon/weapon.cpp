@@ -213,9 +213,6 @@ void Weapon::Manage()
 
 bool Weapon::CanChangeWeapon() const
 {
-  if ( !ActiveTeam().IsLocalHuman() )
-    return false;
-
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&
        (m_can_change_weapon == false))
     return false;
@@ -429,7 +426,7 @@ const Point2i Weapon::GetGunHolePosition() const
 
 bool Weapon::EnoughAmmo() const
 {
-  int ammo = ActiveTeam().ReadNbAmmos();
+  int ammo = ActiveTeam().ReadNbAmmos(m_type);
   return ((ammo == INFINITE_AMMO) || (0 < ammo));
 }
 
@@ -444,7 +441,7 @@ void Weapon::UseAmmo() const
 
 bool Weapon::EnoughAmmoUnit() const
 {
-  int unit = ActiveTeam().ReadNbUnits();
+  int unit = ActiveTeam().ReadNbUnits(m_type);
   return (unit > 0);
 }
 

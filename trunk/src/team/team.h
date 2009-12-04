@@ -25,6 +25,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include "ai/ai_player.h"
 #include "team/team_energy.h"
 #include "graphic/surface.h"
 #include "weapon/crosshair.h"
@@ -32,12 +33,6 @@
 
 class Character;
 class CustomTeam;
-
-typedef enum {
-  TEAM_human_local,
-  TEAM_ai_local,
-  TEAM_remote
-} team_player_type_t;
 
 class Team
 {
@@ -74,11 +69,10 @@ class Team
     Weapon *active_weapon;
     uint nb_characters;
     uint current_turn;
+    AIPlayer * ai;
+    bool remote;
     bool abandoned;
-
     CustomTeam *attached_custom_team;
-
-    team_player_type_t type_of_player;
 
     Team (const std::string& _teams_dir,
           const std::string& _id,
@@ -112,6 +106,7 @@ class Team
 
     void DrawEnergy(const Point2i& pos);
     void Refresh();
+    void RefreshAI();
 
   // Change the weapon.
     void SetWeapon (Weapon::Weapon_type nv_arme);
@@ -160,24 +155,17 @@ class Team
     int& AccessNbUnits();
     void ResetNbUnits();
 
-  // Only for network:
-  // true if the team belong to a local player
-  // false if the team belong to a player on the network or on the AI
-    bool IsLocalHuman() const { return (type_of_player == TEAM_human_local); };
-
-  // true if the team belong to a local AI
-    bool IsLocalAI() const { return (type_of_player == TEAM_ai_local); };
-
-  // true if the tream belongs to a local human or AI player.
-    bool IsLocal() const { return IsLocalHuman() || IsLocalAI(); }
-
-    bool IsRemote() const { return (type_of_player == TEAM_remote); };
+    bool IsAI() const { return ai != NULL; }
+    bool IsHuman() const { return ai == NULL; }
+    bool IsLocal() const { return !remote; }
+    bool IsRemote() const { return remote; }
+    bool IsLocalAI() const { return IsLocal() && IsAI(); }
+    bool IsLocalHuman() const { return IsLocal() && IsHuman(); }
 
     bool IsActiveTeam() const;
 
-    void SetLocal() { type_of_player = TEAM_human_local; };
-    void SetLocalAI() { type_of_player = TEAM_ai_local; };
-    void SetRemote() { type_of_player = TEAM_remote; };
+    void SetRemote(bool value) { remote = value; }
+    void SetAI(AIPlayer * value) { ai = value; }
 
   // reset characters number, type_of_player and player name
     void SetDefaultPlayingConfig();

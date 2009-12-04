@@ -134,6 +134,8 @@ class WeaponLauncher : public Weapon
                    weapon_visibility_t visibility = ALWAYS_VISIBLE);
     virtual ~WeaponLauncher();
 
+    int GetDamage();
+
     virtual void Draw();
 
     std::string GetWeaponWinString(const char *TeamName, uint items_count)const = 0;

@@ -255,7 +255,7 @@ void NetworkTeamsSelectionBox::RemoveLocalTeam(uint i)
 
 void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team)
 {
-  team.SetLocal();
+  team.SetRemote(false);
 
   if (teams_selections.at(i)->GetTeam() != NULL) {
 
