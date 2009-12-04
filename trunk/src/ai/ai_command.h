@@ -182,4 +182,13 @@ class SelectCharacterCommand : public AICommand
     virtual bool Execute();
 };
 
+class WaitForStrengthCommand : public AICommand
+{
+  private:
+    double target_strength;
+  public:
+    WaitForStrengthCommand(double target_strength);
+    virtual bool Execute();
+};
+
 #endif

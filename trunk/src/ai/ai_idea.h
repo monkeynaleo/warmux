@@ -29,7 +29,11 @@
 class AIIdea
 {
   protected:
-    bool CanUseWeapon(Weapon * weapon);
+    static bool CanUseWeapon(Weapon * weapon);
+    static bool CanUseCharacter(Character & character);
+    static BodyDirection_t XDeltaToDirection(double delta);
+    static double GetDirectionRelativeAngle(BodyDirection_t direction, double angle);
+    static double RateDamageDoneToEnemy(int damage, Character & enemy);
   public:
     virtual AIStrategy * CreateStrategy() = 0;
     virtual ~AIIdea() {}
@@ -56,6 +60,27 @@ class ShootDirectlyAtEnemyIdea : public AIIdea
     double max_distance;
   public:
     ShootDirectlyAtEnemyIdea(Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance);
+    virtual AIStrategy * CreateStrategy();
+};
+
+class BazookaAgainstForceIdea : public AIIdea
+{
+  private:
+    Character & shooter;
+    Character & enemy;
+  public:
+    BazookaAgainstForceIdea(Character & shooter, Character & enemy);
+    virtual AIStrategy * CreateStrategy();
+};
+
+class FireMissileWithFixedDurationIdea : public AIIdea
+{
+  private:
+    Character & shooter;
+    Character & enemy;
+    double duration;
+  public:
+    FireMissileWithFixedDurationIdea(Character & shooter, Character & enemy, double duration);
     virtual AIStrategy * CreateStrategy();
 };
 

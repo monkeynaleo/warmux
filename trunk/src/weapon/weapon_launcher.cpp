@@ -433,6 +433,16 @@ int WeaponLauncher::GetDamage()
   return cfg().damage;
 }
 
+double WeaponLauncher::GetWindFactor()
+{
+  return projectile->GetWindFactor();
+}
+
+double WeaponLauncher::GetMass()
+{
+  return projectile->GetMass();
+}
+
 bool WeaponLauncher::p_Shoot()
 {
 //   if (m_strength == max_strength)

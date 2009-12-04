@@ -269,3 +269,15 @@ bool SelectCharacterCommand::Execute()
   ActionHandler::GetInstance()->NewAction(action);
   return true;
 }
+
+WaitForStrengthCommand::WaitForStrengthCommand(double target_strength):
+target_strength(target_strength)
+{
+  // do nothing
+}
+
+bool WaitForStrengthCommand::Execute()
+{
+  double current_strength = ActiveTeam().GetWeapon().GetStrength();
+  return (current_strength >= target_strength);
+}

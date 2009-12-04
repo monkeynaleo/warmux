@@ -28,7 +28,7 @@
 #include "team/macro.h"
 
 const uint MAX_GAME_TIME_USED_THINKING_IN_MS = 10000;
-const uint REAL_THINK_TIME_PER_REFRESH_IN_MS = 10;
+const uint REAL_THINK_TIME_PER_REFRESH_IN_MS = 1;
 const double MAX_GUN_DISTANCE = 600;
 const double MAX_SHOTGUN_DISTANCE = 250;
 const double MAX_SNIPER_RIFILE_DISTANCE = 10E10;
@@ -50,6 +50,8 @@ AIStupidPlayer::AIStupidPlayer(Team * team):
           ideas.push_back(new ShootDirectlyAtEnemyIdea(*character, *other_character, Weapon::WEAPON_GUN, MAX_GUN_DISTANCE));
           ideas.push_back(new ShootDirectlyAtEnemyIdea(*character, *other_character, Weapon::WEAPON_SHOTGUN, MAX_SHOTGUN_DISTANCE));
           ideas.push_back(new ShootDirectlyAtEnemyIdea(*character, *other_character, Weapon::WEAPON_SNIPE_RIFLE, MAX_SNIPER_RIFILE_DISTANCE));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(*character, *other_character, 1.0));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(*character, *other_character, 3.0));
         }
       }
     }

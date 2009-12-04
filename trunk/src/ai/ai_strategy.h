@@ -68,4 +68,18 @@ class ShootWithGunStrategy : public AIStrategy
     ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, int bullets);
 };
 
+class LoadAndFireStrategy : public AIStrategy
+{
+  private:
+    Character & shooter;
+    Weapon::Weapon_type weapon;
+    BodyDirection_t  direction;
+    double angle;
+    double strength;
+  public:
+    virtual AICommand * CreateCommand();
+    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, double strength);
+};
+
+
 #endif
