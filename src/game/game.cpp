@@ -867,6 +867,9 @@ bool Game::MenuQuitPause() const
 
   Time::GetInstance()->SetWaitingForUser(true);
 
+  Action a(Action::ACTION_ANNOUNCE_PAUSE);
+  Network::GetInstance()->SendActionToAll(a);
+
   bool exit = false;
   PauseMenu menu(exit);
   menu.Run();

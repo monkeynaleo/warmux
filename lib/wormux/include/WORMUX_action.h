@@ -51,6 +51,7 @@ public:
     // ########################################################
     // Chat message
     ACTION_CHAT_MESSAGE,
+    ACTION_ANNOUNCE_PAUSE,
 
     // Initial information about the game: map, teams already selected, ...
     ACTION_GAME_INFO,

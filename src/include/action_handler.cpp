@@ -381,6 +381,14 @@ static void Action_ChatMessage (Action *a)
   AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
 }
 
+static void Action_AnnouncePause(Action *a)
+{
+  DistantComputer * computer = a->GetCreator();
+  std::string computer_name = computer->ToString();
+  std::string message = Format(_("%s needs a pause."), computer_name.c_str());
+  AppWormux::GetInstance()->ReceiveMsgCallback(message);
+}
+
 static void _Action_SelectMap(Action *a)
 {
   std::string map_name = a->PopString();
@@ -910,6 +918,7 @@ void Action_Handler_Init()
   // ########################################################
   // Chat message
   ActionHandler::GetInstance()->Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+  ActionHandler::GetInstance()->Register (Action::ACTION_ANNOUNCE_PAUSE, "chat_announce_pause", Action_AnnouncePause);
 
   // Initial information about the game: map, teams already selected, ...
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_INFO, "GAME_info", &Action_Game_Info);
