@@ -244,24 +244,31 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(Character & s
   // do nothing
 }
 
-static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory & trajectory, double max_time)
+static bool IsPositionEmpty(Character & character_to_ignore, Point2i pos)
+{
+  if (GetWorld().IsOutsideWorld(pos))
+    return false;
+
+  if (!GetWorld().IsInVacuum(pos))
+    return false;
+
+  PhysicalObj* object = GetObjectAt(pos);
+  if (object != NULL && object != &character_to_ignore)
+    return false;
+  return true;
+}
+
+static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory & trajectory)
 {
   double time = 0;
-  while (time <= max_time) {
-    Point2i pos =  trajectory.GetPositionAt(time);
-    if (GetWorld().IsOutsideWorld(pos))
-      return pos;
-
-    if (!GetWorld().IsInVacuum(pos))
-      return pos;
-
-    PhysicalObj* object = GetObjectAt(pos);
-    if (object != NULL && object != &character_to_ignore)
-      return pos;
+  Point2i pos;
+  do {
+    pos = trajectory.GetPositionAt(time);
     double pixel_per_second = trajectory.GetSpeedAt(time);
     double seconds_per_pixel = 1 / pixel_per_second;
     time += seconds_per_pixel;
-  }
+  } while(IsPositionEmpty(character_to_ignore, pos));
+  return pos;
 }
 
 AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
@@ -299,7 +306,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
     return NULL;
 
   Trajectory trajectory(pos_0, v_0, a);
-  Point2i explosion_pos = GetFirstContact(shooter, trajectory,  t);
+  Point2i explosion_pos = GetFirstContact(shooter, trajectory);
   PhysicalObj * aim = GetObjectAt(explosion_pos);
   double rating;
   if (aim == NULL) {
