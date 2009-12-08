@@ -88,8 +88,8 @@ void GameBlitz::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
 
-  if (1000 < global_time->Read() - pause_seconde) {
-    pause_seconde = global_time->Read();
+  if (1000 < global_time->Read() - last_clock_update) {
+    last_clock_update = global_time->Read();
 
     if (counter) {
       counter--;
@@ -175,7 +175,7 @@ void GameBlitz::__SetState_PLAYING()
   // initialize counter
   Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second);
   Interface::GetInstance()->EnableDisplayTimer(true);
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
 
   give_objbox = true; //hack: make it so that no more than one objbox per turn
 }
@@ -183,7 +183,7 @@ void GameBlitz::__SetState_PLAYING()
 void GameBlitz::__SetState_HAS_PLAYED()
 {
   MSG_DEBUG("game.statechange", "Has played, now can move");
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
   CharacterCursor::GetInstance()->Hide();
 }
 
@@ -193,7 +193,7 @@ void GameBlitz::__SetState_END_TURN()
   ActiveTeam().AccessWeapon().SignalTurnEnd();
   ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();

@@ -62,9 +62,9 @@ void GameClassic::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
 
-  if (1000 < global_time->Read() - pause_seconde)
+  if (1000 < global_time->Read() - last_clock_update)
     {
-      pause_seconde = global_time->Read();
+      last_clock_update = global_time->Read();
 
       switch (state) {
 
@@ -145,7 +145,7 @@ void GameClassic::__SetState_PLAYING()
   duration = GameMode::GetInstance()->duration_turn;
   Interface::GetInstance()->UpdateTimer(duration);
   Interface::GetInstance()->EnableDisplayTimer(true);
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
 
   Wind::GetRef().ChooseRandomVal();
 
@@ -166,7 +166,7 @@ void GameClassic::__SetState_HAS_PLAYED()
 {
   MSG_DEBUG("game.statechange", "Has played, now can move");
   duration = GameMode::GetInstance()->duration_move_player;
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
   Interface::GetInstance()->UpdateTimer(duration);
   CharacterCursor::GetInstance()->Hide();
 }
@@ -181,7 +181,7 @@ void GameClassic::__SetState_END_TURN()
   duration = GameMode::GetInstance()->duration_exchange_player;
   Interface::GetInstance()->UpdateTimer(duration);
   Interface::GetInstance()->EnableDisplayTimer(false);
-  pause_seconde = Time::GetInstance()->Read();
+  last_clock_update = Time::GetInstance()->Read();
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();
