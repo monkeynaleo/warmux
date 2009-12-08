@@ -27,6 +27,7 @@
 #include <WORMUX_singleton.h>
 #include "network/chat.h"
 #include "sound/sound_sample.h"
+#include "graphic/text.h"
 
 // Forward declarations
 class Character;
@@ -82,6 +83,7 @@ private:
 
   static uint         last_unique_id;
   uint                m_current_turn;
+  Text                waiting_for_network_text;
 
   void Draw();        // Draw to screen
   void MessageLoading() const;

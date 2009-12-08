@@ -64,6 +64,8 @@
 //#define USE_VALGRIND
 #endif
 
+const uint MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS = 500;
+
 std::string Game::current_rules = "none";
 
 Game * Game::GetInstance()
@@ -223,7 +225,8 @@ Game::Game():
   time_of_next_frame(0),
   time_of_next_phy_frame(0),
   character_already_chosen(false),
-  m_current_turn(0)
+  m_current_turn(0),
+  waiting_for_network_text("Waiting for turn master")
 { }
 
 Game::~Game()
@@ -401,6 +404,15 @@ void Game::Draw ()
     StatStart("GameDraw:chatsession");
     chatsession.Show();
     StatStop("GameDraw:chatsession");
+  }
+
+  if (Time::GetInstance()->GetMSWaitingForNetwork() > MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS) {
+    Point2i pos;
+    pos.x = GetMainWindow().GetWidth()/2;
+    pos.y = GetMainWindow().GetHeight()/2;
+    std::string text = Format(_("Waiting for %s"), ActiveTeam().GetPlayerName().c_str());
+    waiting_for_network_text.Set(text);
+    waiting_for_network_text.DrawCenter(pos);
   }
 
   // Add one frame to the fps counter ;-)
