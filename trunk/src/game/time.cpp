@@ -99,16 +99,23 @@ void Time::SetWaitingForNetwork(bool value)
   if (waiting_for_network == value)
     return;
   waiting_for_network = value;
-  #ifdef DEBUG
-    if (waiting_for_network) {
-      network_wait_time_stopwatch.Reset();
-      MSG_DEBUG("time.waiting","Start waiting for network.");
-    } else {
-      MSG_DEBUG("time.waiting","Waited %d ms for network.", network_wait_time_stopwatch.GetValue());
-    }
-  #endif
+  if (waiting_for_network) {
+    network_wait_time_stopwatch.Reset();
+    MSG_DEBUG("time.waiting","Start waiting for network.");
+  } else {
+    MSG_DEBUG("time.waiting","Waited %d ms for network.", network_wait_time_stopwatch.GetValue());
+  }
   stopwatch.SetPause(IsWaiting());
 }
+
+uint Time::GetMSWaitingForNetwork()
+{
+  if (waiting_for_network)
+    return network_wait_time_stopwatch.GetValue();
+  else
+    return 0;
+}
+
 
 std::string Time::GetString() const
 {

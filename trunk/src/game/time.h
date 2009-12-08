@@ -36,9 +36,7 @@ private:
   bool        waiting_for_user;
   uint        current_time;
   uint        delta_t;
-#ifdef DEBUG
   Stopwatch   network_wait_time_stopwatch;
-#endif
 
 protected:
   friend class Singleton<Time>;
@@ -62,6 +60,7 @@ public:
 
   bool IsWaitingForNetwork();
   void SetWaitingForNetwork(bool value);
+  uint GetMSWaitingForNetwork();
 
   uint GetDelta() const { return delta_t; };
 
