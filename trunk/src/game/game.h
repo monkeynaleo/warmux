@@ -55,7 +55,7 @@ protected:
   SoundSample         countdown_sample;
   game_loop_state_t   state;
   bool                give_objbox;
-  uint                pause_seconde;
+  uint                last_clock_update;
 
   friend class Singleton<Game>;
   Game();

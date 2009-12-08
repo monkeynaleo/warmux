@@ -214,7 +214,7 @@ std::string Game::GetUniqueId()
 Game::Game():
   state(PLAYING),
   give_objbox(true),
-  pause_seconde(0),
+  last_clock_update(0),
   isGameLaunched(false),
   current_ObjBox(NULL),
   ask_for_menu(false),
