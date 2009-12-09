@@ -515,6 +515,14 @@
 	<country>Poland</country>
       </author>
       <author>
+	<nickname>Hugen</nickname>
+	<name>Hugen</name>
+	<description>Haiku package</description>
+	<website>http://www.haiku-os.pl</website>
+	<email>HubertHH_AT_gmail_DOT_com</email>
+	<country>Poland</country>
+      </author>
+      <author>
 	<nickname>Julien</nickname>
 	<name>Julien CATALANO</name>
 	<description>Prepare RPM packages for Mandrake</description>
@@ -921,6 +929,13 @@
 	<description>Draw the map Dinos and the skin Dude</description>
 	<email>rashid_AT_vp_DOT_pl</email>
 	<country>Poland</country>
+      </author>
+      <author>
+	<nickname>Sébastien</nickname>
+	<name>Sébastien MATHIER</name>
+	<description>Draw the map Apocalypse</description>
+	<email>mathier_AT_hotmail_DOT_com</email>
+	<country>Suisse</country>
       </author>
       <author>
 	<nickname>tgm</nickname>
