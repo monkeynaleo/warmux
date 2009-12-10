@@ -58,7 +58,7 @@ bool AIIdea::CanUseCharacter(Character & character)
   return (character.IsActiveCharacter() || can_change_character);
 }
 
-BodyDirection_t AIIdea::XDeltaToDirection(double delta)
+LRDirection AIIdea::XDeltaToDirection(double delta)
 {
   if (delta < 0)
     return DIRECTION_LEFT;
@@ -66,7 +66,7 @@ BodyDirection_t AIIdea::XDeltaToDirection(double delta)
     return DIRECTION_RIGHT;
 }
 
-double AIIdea::GetDirectionRelativeAngle(BodyDirection_t direction, double angle)
+double AIIdea::GetDirectionRelativeAngle(LRDirection direction, double angle)
 {
   if (direction == DIRECTION_LEFT)
     return InverseAngleRad(angle);
@@ -212,7 +212,7 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
 
   double original_angle = departure.ComputeAngle(arrival);
 
-  BodyDirection_t direction = XDeltaToDirection(arrival.x - departure.x);
+  LRDirection direction = XDeltaToDirection(arrival.x - departure.x);
   double shoot_angle = GetDirectionRelativeAngle(direction, original_angle);
 
   if (!weapon->IsAngleValid(shoot_angle))
@@ -297,7 +297,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
 
   double strength = v_0.Norm() / PIXEL_PER_METER;
   double angle = v_0.ComputeAngle();
-  BodyDirection_t direction = XDeltaToDirection(v_0.x);
+  LRDirection direction = XDeltaToDirection(v_0.x);
   double shoot_angle = GetDirectionRelativeAngle(direction, angle);
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;

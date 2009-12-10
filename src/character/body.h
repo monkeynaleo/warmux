@@ -38,13 +38,6 @@ class Clothe;
 class Profile;
 typedef struct _xmlNode xmlNode;
 
-enum BodyDirection
-{
-  DIRECTION_LEFT = -1,
-  DIRECTION_RIGHT = 1
-};
-typedef enum BodyDirection BodyDirection_t;
-
 /*
  * FIXME: this class is either very useless either very badly used.
  * It would be nice to keep members in private section. There is no
@@ -95,7 +88,7 @@ class Body
                                                 // Order to use to build the body
                                                 // First element: member to build
                                                 // Secnd element: parent member
-    BodyDirection_t                   direction;
+    LRDirection                   direction;
     int                               animation_number;
     bool                              need_rebuild;
     const Character *                 owner;
@@ -157,7 +150,7 @@ class Body
     void                    SetMovementOnce(const std::string & name);
     void                    SetRotation(double angle);
     void                    SetFrame(uint no);
-    void                    SetDirection(BodyDirection_t dir)    { direction = dir;      };
+    void                    SetDirection(LRDirection dir)    { direction = dir;      };
     inline void             SetOwner(const Character * belonger) { owner     = belonger; };
 
     //// GETTERS
@@ -169,7 +162,7 @@ class Body
                                         uint & r, 
                                         uint & t, 
                                         uint & b) const;
-    const BodyDirection_t & GetDirection() const { return direction; };
+    const LRDirection & GetDirection() const { return direction; };
     void                    GetRelativeHandPosition(Point2i & result) const;
     uint                    GetMovementDuration() const;
     uint                    GetFrame() const { return current_frame; };

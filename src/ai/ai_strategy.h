@@ -24,8 +24,6 @@
 #define AI_STRATEGY_H
 
 #include "ai/ai_command.h"
-#include "character/body.h"
-
 
 class AIStrategy
 {
@@ -60,12 +58,12 @@ class ShootWithGunStrategy : public AIStrategy
   private:
     Character & shooter;
     Weapon::Weapon_type weapon;
-    BodyDirection_t  direction;
+    LRDirection  direction;
     double angle;
     int bullets;
   public:
     virtual AICommand * CreateCommand();
-    ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, int bullets);
+    ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int bullets);
 };
 
 class LoadAndFireStrategy : public AIStrategy
@@ -73,12 +71,12 @@ class LoadAndFireStrategy : public AIStrategy
   private:
     Character & shooter;
     Weapon::Weapon_type weapon;
-    BodyDirection_t  direction;
+    LRDirection  direction;
     double angle;
     double strength;
   public:
     virtual AICommand * CreateCommand();
-    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, double strength);
+    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength);
 };
 
 

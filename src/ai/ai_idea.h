@@ -31,8 +31,8 @@ class AIIdea
   protected:
     static bool CanUseWeapon(Weapon * weapon);
     static bool CanUseCharacter(Character & character);
-    static BodyDirection_t XDeltaToDirection(double delta);
-    static double GetDirectionRelativeAngle(BodyDirection_t direction, double angle);
+    static LRDirection XDeltaToDirection(double delta);
+    static double GetDirectionRelativeAngle(LRDirection direction, double angle);
     static double RateDamageDoneToEnemy(int damage, Character & enemy);
   public:
     virtual AIStrategy * CreateStrategy() = 0;

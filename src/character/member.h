@@ -66,7 +66,7 @@ public:
 
   virtual void Draw(const Point2i & _pos, 
                     int             flip_x, 
-                    BodyDirection   direction);
+                    LRDirection   direction);
 
   void RotateSprite();
   void ResetMovement();
@@ -74,7 +74,7 @@ public:
   void ApplyMovement(const member_mvt &                mvt, 
                      std::vector<class c_junction *> & skel_lst);
   void SetAngle(const double & angle);
-  void RefreshSprite(BodyDirection direction);
+  void RefreshSprite(LRDirection direction);
 
   void SetPos(const Point2f & pos);
 
@@ -99,7 +99,7 @@ public:
   WeaponMember(void);
   void Draw(const Point2i & _pos, 
             int             flip_x, 
-            BodyDirection   direction);
+            LRDirection   direction);
 };
 
 #endif //MEMBER_H

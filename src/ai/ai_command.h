@@ -25,7 +25,6 @@
 #include <WORMUX_types.h>
 #include <queue>
 #include "weapon/weapon.h"
-#include "character/body.h" // for BodyDirection_t; TODO Move BodyDirection to WORMUX_types.h
 
 class AICommand
 {
@@ -114,31 +113,31 @@ class StopShootingCommand : public AICommand
 class StartMovingCommand : public AICommand
 {
   private:
-    BodyDirection_t direction;
+    LRDirection direction;
     bool slowly;
   public:
-    StartMovingCommand(BodyDirection_t direction, bool slowly);
+    StartMovingCommand(LRDirection direction, bool slowly);
     virtual bool Execute();
 };
 
 class StopMovingCommand : public AICommand
 {
   private:
-    BodyDirection_t direction;
+    LRDirection direction;
     bool slowly;
   public:
-    StopMovingCommand(BodyDirection_t direction, bool slowly);
+    StopMovingCommand(LRDirection direction, bool slowly);
     virtual bool Execute();
 };
 
 class SetDirectionCommand : public AICommand
 {
   private:
-    BodyDirection_t direction;
+    LRDirection direction;
     bool turning;
     CommandList * commands;
   public:
-    SetDirectionCommand(BodyDirection_t direction);
+    SetDirectionCommand(LRDirection direction);
     virtual ~SetDirectionCommand();
     virtual bool Execute();
 };
