@@ -297,94 +297,41 @@ void TuxLauncher::StopShooting()
     Weapon::StopShooting();
 }
 
-// Move right
-void TuxLauncher::HandleKeyPressed_MoveRight(bool slowly)
+bool TuxLauncher::IsPreventingLRMovement()
 {
-  StartMovingRightForAllPlayers();
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
+  return (current_tux || tux_death_time);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveRight(bool slowly)
+bool TuxLauncher::IsPreventingJumps()
+{
+  return (current_tux || tux_death_time);
+}
+
+bool TuxLauncher::IsPreventingWeaponAngleChanges()
+{
+  return (current_tux || tux_death_time);
+}
+
+// Move right
+void TuxLauncher::HandleKeyPressed_MoveRight(bool /*slowly*/)
+{
+  StartMovingRightForAllPlayers();
+}
+
+void TuxLauncher::HandleKeyReleased_MoveRight(bool /*slowly*/)
 {
   StopMovingRightForAllPlayers();
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
 
 // Move left
-void TuxLauncher::HandleKeyPressed_MoveLeft(bool slowly)
+void TuxLauncher::HandleKeyPressed_MoveLeft(bool /*slowly*/)
 {
   StartMovingLeftForAllPlayers();
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void TuxLauncher::HandleKeyReleased_MoveLeft(bool slowly)
+void TuxLauncher::HandleKeyReleased_MoveLeft(bool /*slowly*/)
 {
   StopMovingLeftForAllPlayers();
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
-}
-
-void TuxLauncher::HandleKeyPressed_Up(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Up(slowly);
-}
-
-void TuxLauncher::HandleKeyReleased_Up(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Up(slowly);
-}
-
-void TuxLauncher::HandleKeyPressed_Down(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Down(slowly);
-}
-
-void TuxLauncher::HandleKeyReleased_Down(bool slowly)
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Down(slowly);
-}
-
-void TuxLauncher::HandleKeyPressed_Jump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_Jump();
-}
-
-void TuxLauncher::HandleKeyReleased_Jump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_Jump();
-}
-
-void TuxLauncher::HandleKeyPressed_HighJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_HighJump();
-}
-
-void TuxLauncher::HandleKeyReleased_HighJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_HighJump();
-}
-
-void TuxLauncher::HandleKeyPressed_BackJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyPressed_BackJump();
-}
-
-void TuxLauncher::HandleKeyReleased_BackJump()
-{
-  if (!current_tux && !tux_death_time)
-    ActiveCharacter().HandleKeyReleased_BackJump();
 }
 
 std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

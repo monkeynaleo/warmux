@@ -250,6 +250,14 @@ public:
   // interactions with the physical engine such as grapple
   virtual void NotifyMove(bool /*collision*/){};
 
+
+  // While the method returns true the character can not start moving left nor right.
+  virtual bool IsPreventingLRMovement() { return false; };
+  // While the method returns true the character will not jump when the user press the jump key.
+  virtual bool IsPreventingJumps() { return false; };
+  // While the method returns true the character will not change the weapon angle when the user tries to do so.
+  virtual bool IsPreventingWeaponAngleChanges() { return false; };
+
   // Handle a keyboard event.
 
   // Key Shoot management
@@ -257,26 +265,26 @@ public:
   void HandleKeyReleased_Shoot();
 
   // To override standard moves of character
-  virtual void HandleKeyPressed_MoveRight(bool slowly);
-  virtual void HandleKeyReleased_MoveRight(bool slowly);
+  virtual void HandleKeyPressed_MoveRight(bool /*slowly*/) {};
+  virtual void HandleKeyReleased_MoveRight(bool /*slowly*/) {};
 
-  virtual void HandleKeyPressed_MoveLeft(bool slowly);
-  virtual void HandleKeyReleased_MoveLeft(bool slowly);
+  virtual void HandleKeyPressed_MoveLeft(bool /*slowly*/) {};
+  virtual void HandleKeyReleased_MoveLeft(bool /*slowly*/) {};
 
-  virtual void HandleKeyPressed_Up(bool slowly);
-  virtual void HandleKeyReleased_Up(bool slowly);
+  virtual void HandleKeyPressed_Up(bool /*slowly*/) {};
+  virtual void HandleKeyReleased_Up(bool /*slowly*/) {};
 
-  virtual void HandleKeyPressed_Down(bool slowly);
-  virtual void HandleKeyReleased_Down(bool slowly);
+  virtual void HandleKeyPressed_Down(bool /*slowly*/) {};
+  virtual void HandleKeyReleased_Down(bool /*slowly*/) {};
 
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyReleased_Jump();
+  virtual void HandleKeyPressed_Jump() {};
+  virtual void HandleKeyReleased_Jump() {};
 
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
+  virtual void HandleKeyPressed_HighJump() {};
+  virtual void HandleKeyReleased_HighJump() {};
 
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
+  virtual void HandleKeyPressed_BackJump() {};
+  virtual void HandleKeyReleased_BackJump() {};
 
   // Other keys
   virtual void HandleKeyReleased_Num1(){};
