@@ -187,7 +187,7 @@ public:
   // Can we move (check a timeout)
   bool CanMoveRL() const;
   bool CanJump() const { return CanMoveRL(); };
-  void Move(enum BodyDirection direction, bool slowly);
+  void Move(enum LRDirection direction, bool slowly);
 
   void StartMovingLeft(bool slowly);
   void StopMovingLeft(bool slowly);
@@ -207,8 +207,8 @@ public:
   bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
-  void SetDirection(BodyDirection_t direction);
-  BodyDirection_t GetDirection() const;
+  void SetDirection(LRDirection direction);
+  LRDirection GetDirection() const;
 
   // Team owner
   const Team& GetTeam() const { return m_team; };

@@ -156,7 +156,7 @@ bool StopShootingCommand::Execute()
   return true;
 }
 
-StartMovingCommand::StartMovingCommand(BodyDirection_t direction, bool slowly):
+StartMovingCommand::StartMovingCommand(LRDirection direction, bool slowly):
   direction(direction),
   slowly(slowly)
 {
@@ -175,7 +175,7 @@ bool StartMovingCommand::Execute()
   return true;
 }
 
-StopMovingCommand::StopMovingCommand(BodyDirection_t direction, bool slowly):
+StopMovingCommand::StopMovingCommand(LRDirection direction, bool slowly):
   direction(direction),
   slowly(slowly)
 {
@@ -194,7 +194,7 @@ bool StopMovingCommand::Execute()
   return true;
 }
 
-SetDirectionCommand::SetDirectionCommand(BodyDirection_t direction):
+SetDirectionCommand::SetDirectionCommand(LRDirection direction):
   direction(direction),
   commands(NULL)
 {

@@ -45,4 +45,10 @@ typedef signed   __int16  int16_t;
 typedef unsigned __int32  uint32_t;
 #endif
 
+enum LRDirection
+{
+  DIRECTION_LEFT = -1,
+  DIRECTION_RIGHT = 1
+};
+
 #endif

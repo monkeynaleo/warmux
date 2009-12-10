@@ -41,7 +41,7 @@ bool ComputeHeightMovement(Character & character,
                            int &       height,
                            bool        falling)
 {
-  BodyDirection_t charDirection = character.GetDirection(); 
+  LRDirection charDirection = character.GetDirection();
 
   if (character.IsInVacuum(Point2i(charDirection, 0))
       && !character.IsInVacuum(Point2i(charDirection, +1)) ){

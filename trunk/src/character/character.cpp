@@ -258,7 +258,7 @@ void Character::SignalGhostState (bool was_dead)
   if (!was_dead) Game::GetInstance()->SignalCharacterDeath (this);
 }
 
-void Character::SetDirection (BodyDirection_t nv_direction)
+void Character::SetDirection (LRDirection nv_direction)
 {
   body->SetDirection(nv_direction);
   uint l,r,t,b;
@@ -747,7 +747,7 @@ bool Character::IsWalking() const
   return body->IsWalking();
 }
 
-void Character::Move(enum BodyDirection direction, bool slowly)
+void Character::Move(enum LRDirection direction, bool slowly)
 {
   // character is ready to move ?
   if (!CanMoveRL()) return;
@@ -857,7 +857,7 @@ void Character::SignalExplosion()
   Game::GetInstance()->SignalCharacterDamage(this);
 }
 
-BodyDirection_t Character::GetDirection() const
+LRDirection Character::GetDirection() const
 {
   return body->GetDirection();
 }

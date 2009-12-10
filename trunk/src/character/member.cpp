@@ -20,7 +20,6 @@
 
 #include <map>
 #include <iostream>
-#include "character/body.h"
 #include "character/character.h"
 #include "character/member.h"
 #include "character/movement.h"
@@ -177,7 +176,7 @@ void Member::RotateSprite()
   }
 }
 
-void Member::RefreshSprite(BodyDirection direction)
+void Member::RefreshSprite(LRDirection direction)
 {
   // The sprite pointer may be invalid at the weapon sprite.
   ASSERT(name != "weapon" && type != "weapon");
@@ -197,7 +196,7 @@ void Member::RefreshSprite(BodyDirection direction)
 
 void Member::Draw(const Point2i & _pos, 
                   int             flip_center, 
-                  BodyDirection   direction)
+                  LRDirection   direction)
 {
   ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
@@ -368,7 +367,7 @@ WeaponMember::WeaponMember(void) :
 
 void WeaponMember::Draw(const Point2i & /*_pos*/, 
                         int /*flip_center*/, 
-                        BodyDirection /*direction*/)
+                        LRDirection /*direction*/)
 {
   if (!ActiveCharacter().IsDead() && (Game::END_TURN != Game::GetInstance()->ReadState()) ) {
       ActiveTeam().crosshair.Draw();

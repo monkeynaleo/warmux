@@ -67,7 +67,7 @@ AICommand * SkipTurnStrategy::CreateCommand()
   return commands;
 }
 
-static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle)
+static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, LRDirection  direction, double angle)
 {
   CommandList * commands = new CommandList();
   commands->Add(new DoNothingCommand(1000));
@@ -81,7 +81,7 @@ static CommandList * CreateSelectCommandList(Character & character, Weapon::Weap
   return commands;
 }
 
-ShootWithGunStrategy::ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, int bullets):
+ShootWithGunStrategy::ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int bullets):
 AIStrategy(rating),
 shooter(shooter),
 weapon(weapon),
@@ -105,7 +105,7 @@ AICommand * ShootWithGunStrategy::CreateCommand()
   return commands;
 }
 
-LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, BodyDirection_t  direction, double angle, double strength):
+LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength):
 AIStrategy(rating),
 shooter(shooter),
 weapon(weapon),
