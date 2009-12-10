@@ -220,12 +220,10 @@ bool Weapon::CanChangeWeapon() const
   return true;
 }
 
-void Weapon::PrepareShoot(double strength, double angle)
+void Weapon::PrepareShoot()
 {
   MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
-            strength, angle);
-  ActiveCharacter().SetFiringAngle(angle);
-  m_strength = strength;
+            m_strength, ActiveCharacter().GetFiringAngle());
   StopLoading();
 
   ActiveCharacter().PrepareShoot();
@@ -300,7 +298,7 @@ void Weapon::Refresh()
   if (IsLoading() && !ActiveCharacter().IsPreparingShoot()) {
     // Strength == max strength -> Fire !!!
     if (ReadStrength() >= max_strength) {
-        PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+        PrepareShoot();
     } else {
         // still pressing the Space key
         UpdateStrength();
@@ -320,7 +318,7 @@ void Weapon::StartShooting()
 void Weapon::StopShooting()
 {
   if (!ActiveCharacter().IsPreparingShoot()) {
-    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+    PrepareShoot();
   }
 }
 
@@ -329,7 +327,7 @@ void Weapon::RepeatShoot()
   uint current_time = Time::GetInstance()->Read();
 
   if (current_time - m_last_fire_time >= m_time_between_each_shot) {
-    PrepareShoot(m_strength, ActiveCharacter().GetAbsFiringAngle());
+    PrepareShoot();
     // this is done in Weapon::Shoot() but let's set meanwhile,
     // to prevent problems with rapid fire weapons such as submachine
     m_last_fire_time = current_time;

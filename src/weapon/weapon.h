@@ -157,6 +157,9 @@ protected:
   virtual void DrawWeaponFire();
   void DrawAmmoUnits() const;
 
+  // Begin the shooting animation of the character
+  void PrepareShoot();
+
   void RepeatShoot();
 
   void StartMovingLeftForAllPlayers();
@@ -205,10 +208,6 @@ public:
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
-
-  // Prepare the shoot : set the angle and strenght of the weapon
-  // Begin the shooting animation of the character
-  void PrepareShoot(double strength, double angle);
 
   // Shot with the weapon
   // Return true if we have been able to trigger the weapon
