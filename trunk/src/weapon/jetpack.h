@@ -27,8 +27,6 @@
 class JetPack : public Weapon
 {
   private:
-    double m_y_force;
-
     bool m_flying;
 
     SoundSample flying_sound;
@@ -36,19 +34,38 @@ class JetPack : public Weapon
     // Jetpack fuel.
     uint m_last_fuel_down;
 
+    bool move_right;
+    bool move_left;
+    bool move_up;
+
+    bool IsInAir();
+
   public:
     JetPack();
     void Reset();
 
-    void StartMovingUp();
-    void StopMovingUp();
-    void StartShooting();
+    virtual void StartMovingRight();
+    virtual void StopMovingRight();
+    virtual void StartMovingLeft();
+    virtual void StopMovingLeft();
+    virtual void StartMovingUp();
+    virtual void StopMovingUp();
+    virtual void StartShooting();
 
+    virtual bool IsPreventingLRMovement();
+    virtual bool IsPreventingJumps();
+    virtual bool IsPreventingWeaponAngleChanges();
+
+    virtual void HandleKeyPressed_MoveRight(bool /*slowly*/);
+    virtual void HandleKeyReleased_MoveRight(bool /*slowly*/);
+    virtual void HandleKeyPressed_MoveLeft(bool /*slowly*/);
+    virtual void HandleKeyReleased_MoveLeft(bool /*slowly*/);
     virtual void HandleKeyPressed_Up(bool /*slowly*/);
     virtual void HandleKeyReleased_Up(bool /*slowly*/);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+
 
   protected:
     void Refresh();
