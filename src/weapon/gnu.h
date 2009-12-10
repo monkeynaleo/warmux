@@ -44,6 +44,10 @@ public:
 
   void StopShooting();
 
+  virtual bool IsPreventingLRMovement();
+  virtual bool IsPreventingJumps();
+  virtual bool IsPreventingWeaponAngleChanges();
+
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 

@@ -195,6 +195,8 @@ public:
   void StartMovingRight(bool slowly);
   void StopMovingRight(bool slowly);
   bool IsMovingRight(bool slowly);
+  void StopMovingLR();
+  void StopChangingWeaponAngle();
 
   // Jumps
   void Jump(double strength, double angle);

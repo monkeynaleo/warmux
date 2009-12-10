@@ -181,8 +181,9 @@ bool GnuLauncher::p_Shoot()
 
   current_gnu = static_cast<Gnu *>(projectile);
   gnu_death_time = 0;
+  ActiveCharacter().StopMovingLR();
+  ActiveCharacter().StopChangingWeaponAngle();
   bool r = WeaponLauncher::p_Shoot();
-
   return r;
 }
 
@@ -214,6 +215,21 @@ void GnuLauncher::StopShooting()
   if (current_gnu)
     current_gnu->Explosion();
   WeaponLauncher::StopShooting();
+}
+
+bool GnuLauncher::IsPreventingLRMovement()
+{
+  return (current_gnu || gnu_death_time);
+}
+
+bool GnuLauncher::IsPreventingJumps()
+{
+  return (current_gnu || gnu_death_time);
+}
+
+bool GnuLauncher::IsPreventingWeaponAngleChanges()
+{
+  return (current_gnu || gnu_death_time);
 }
 
 void GnuLauncher::SignalEndOfProjectile()
