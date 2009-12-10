@@ -204,8 +204,9 @@ bool PolecatLauncher::p_Shoot()
 
   current_polecat = static_cast<Polecat *>(projectile);
   polecat_death_time = 0;
+  ActiveCharacter().StopMovingLR();
+  ActiveCharacter().StopChangingWeaponAngle();
   bool r = WeaponLauncher::p_Shoot();
-
   return r;
 }
 
@@ -239,6 +240,21 @@ void PolecatLauncher::StopShooting()
     return;
   }
   WeaponLauncher::StopShooting();
+}
+
+bool PolecatLauncher::IsPreventingLRMovement()
+{
+  return (current_polecat || polecat_death_time);
+}
+
+bool PolecatLauncher::IsPreventingJumps()
+{
+  return (current_polecat || polecat_death_time);
+}
+
+bool PolecatLauncher::IsPreventingWeaponAngleChanges()
+{
+  return (current_polecat || polecat_death_time);
 }
 
 void PolecatLauncher::SignalEndOfProjectile()
