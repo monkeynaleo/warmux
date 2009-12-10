@@ -124,9 +124,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
   if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
   if (ActiveCharacter().IsDead()) return;
 
-  if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
-    switch (key) {
-
+  switch (key) {
     case KEY_MOVE_RIGHT:
       ActiveCharacter().HandleKeyPressed_MoveRight(false);
       break;
@@ -162,16 +160,15 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
       break;
     case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
-      return;
+      if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED)
+        return;
+      break;
     default:
       // key not supported
       return;
-    }
-  } else if (Game::GetInstance()->ReadState() == Game::PLAYING) {
-
-    // Movements are managed by weapons because sometimes it overrides the keys
+  }
+  if (Game::GetInstance()->ReadState() == Game::PLAYING) {
     switch (key) {
-
     case KEY_MOVE_RIGHT:
       ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight(false);
       break;
@@ -280,51 +277,51 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     if (ActiveCharacter().IsDead()) return;
     if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
 
-    if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED) {
-      switch (key) {
+
+    switch (key) {
       case KEY_MOVE_RIGHT:
         ActiveCharacter().HandleKeyReleased_MoveRight(false);
-        return;
+        break;
       case KEY_MOVE_RIGHT_SLOWLY:
         ActiveCharacter().HandleKeyReleased_MoveRight(true);
-        return;
+        break;
       case KEY_MOVE_LEFT:
         ActiveCharacter().HandleKeyReleased_MoveLeft(false);
-        return;
+        break;
       case KEY_MOVE_LEFT_SLOWLY:
         ActiveCharacter().HandleKeyReleased_MoveLeft(true);
-        return;
+        break;
       case KEY_UP:
         ActiveCharacter().HandleKeyReleased_Up(false);
-        return;
+        break;
       case KEY_UP_SLOWLY:
         ActiveCharacter().HandleKeyReleased_Up(true);
-        return;
+        break;
       case KEY_DOWN:
         ActiveCharacter().HandleKeyReleased_Down(false);
-        return;
+        break;
       case KEY_DOWN_SLOWLY:
         ActiveCharacter().HandleKeyReleased_Down(true);
-        return;
+        break;
       case KEY_JUMP:
         ActiveCharacter().HandleKeyReleased_Jump();
-        return;
+        break;
       case KEY_HIGH_JUMP:
         ActiveCharacter().HandleKeyReleased_HighJump();
-        return;
+        break;
       case KEY_BACK_JUMP:
         ActiveCharacter().HandleKeyReleased_BackJump();
-        return;
+        break;
       case KEY_SHOOT:
-      // Shoot key is not accepted in HAS_PLAYED state
-        return;
+        // Shoot key is not accepted in HAS_PLAYED state
+        if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED)
+          return;
+        break;
       default:
         // Key not supported
         return;
-      }
-    } else if  (Game::GetInstance()->ReadState() == Game::PLAYING) {
-
-      // Movements are managed by weapons because sometimes it overrides the keys
+    }
+    if (Game::GetInstance()->ReadState() == Game::PLAYING) {
       switch (key) {
 
       case KEY_MOVE_RIGHT:

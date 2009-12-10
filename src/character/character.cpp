@@ -1025,6 +1025,8 @@ void Character::StopWalkingIfNecessary()
 // #################### MOVE_RIGHT
 void Character::StartMovingRight(bool slowly)
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingLRMovement())
+    return;
   if (slowly)
     move_right_slowly_pressed = true;
   else
@@ -1075,6 +1077,8 @@ void Character::HandleKeyReleased_MoveRight(bool slowly)
 
 void Character::StartMovingLeft(bool slowly)
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingLRMovement())
+    return;
   if (slowly)
     move_left_slowly_pressed = true;
   else
@@ -1124,6 +1128,8 @@ void Character::HandleKeyReleased_MoveLeft(bool slowly)
 // #################### UP
 void Character::StartDecreasingFireAngle(bool slowly)
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingWeaponAngleChanges())
+    return;
   if (slowly)
     decrease_fire_angle_slowly_pressed = true;
   else
@@ -1163,6 +1169,8 @@ void Character::HandleKeyReleased_Up(bool slowly)
 
 void Character::StartIncreasingFireAngle(bool slowly)
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingWeaponAngleChanges())
+    return;
   if (slowly)
     increase_fire_angle_slowly_pressed = true;
   else
@@ -1200,6 +1208,8 @@ void Character::HandleKeyReleased_Down(bool slowly)
 
 void Character::HandleKeyPressed_Jump()
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingJumps())
+    return;
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
@@ -1213,6 +1223,8 @@ void Character::HandleKeyPressed_Jump()
 // #################### HIGH JUMP
 void Character::HandleKeyPressed_HighJump()
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingJumps())
+    return;
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();
@@ -1226,6 +1238,8 @@ void Character::HandleKeyPressed_HighJump()
 // #################### BACK JUMP
 void Character::HandleKeyPressed_BackJump()
 {
+  if (ActiveTeam().AccessWeapon().IsPreventingJumps())
+    return;
   HideGameInterface();
 
   ActiveTeam().crosshair.Hide();

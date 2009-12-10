@@ -44,8 +44,8 @@ class JetPack : public Weapon
     void StopMovingUp();
     void StartShooting();
 
-    virtual void HandleKeyPressed_Up(bool slowly);
-    virtual void HandleKeyReleased_Up(bool slowly);
+    virtual void HandleKeyPressed_Up(bool /*slowly*/);
+    virtual void HandleKeyReleased_Up(bool /*slowly*/);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

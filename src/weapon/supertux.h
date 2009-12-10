@@ -55,26 +55,15 @@ public:
   void StartShooting();
   void StopShooting();
 
+  virtual bool IsPreventingLRMovement();
+  virtual bool IsPreventingJumps();
+  virtual bool IsPreventingWeaponAngleChanges();
+
   virtual void HandleKeyPressed_MoveRight(bool slowly);
   virtual void HandleKeyReleased_MoveRight(bool slowly);
 
   virtual void HandleKeyPressed_MoveLeft(bool slowly);
   virtual void HandleKeyReleased_MoveLeft(bool slowly);
-
-  virtual void HandleKeyPressed_Up(bool slowly);
-  virtual void HandleKeyReleased_Up(bool slowly);
-
-  virtual void HandleKeyPressed_Down(bool slowly);
-  virtual void HandleKeyReleased_Down(bool slowly);
-
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyReleased_Jump();
-
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
-
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
 
   void RefreshFromNetwork(double angle, Point2d pos);
   void ExplosionFromNetwork(Point2d tux_pos);

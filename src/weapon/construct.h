@@ -49,6 +49,7 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
+  virtual bool IsPreventingWeaponAngleChanges() { return true; };
   virtual void HandleKeyPressed_Down(bool /*slowly*/) { Down(); };
   virtual void HandleKeyPressed_Up(bool /*slowly*/) { Up(); };
   virtual void HandleMouseWheelUp(bool) { Up(); };

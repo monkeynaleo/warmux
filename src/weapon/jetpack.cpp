@@ -178,18 +178,14 @@ void JetPack::StopMovingUp()
   m_y_force = 0.0;
 }
 
-void JetPack::HandleKeyPressed_Up(bool slowly)
+void JetPack::HandleKeyPressed_Up(bool /*slowly*/)
 {
-  ActiveCharacter().HandleKeyPressed_Up(slowly);
-
   if (IsInUse())
     StartMovingUpForAllPlayers();
 }
 
-void JetPack::HandleKeyReleased_Up(bool slowly)
+void JetPack::HandleKeyReleased_Up(bool /*slowly*/)
 {
-  ActiveCharacter().HandleKeyReleased_Up(slowly);
-
   if (IsInUse())
     StopMovingUpForAllPlayers();
 }

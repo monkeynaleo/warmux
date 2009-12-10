@@ -126,18 +126,20 @@ class Grapple : public Weapon
     void StartShooting();
     void StopShooting();
 
+    virtual bool IsPreventingLRMovement();
+    virtual bool IsPreventingWeaponAngleChanges();
     // Keys management
-    void HandleKeyPressed_Up(bool slowly);
-    void HandleKeyReleased_Up(bool slowly);
+    void HandleKeyPressed_Up(bool /*slowly*/);
+    void HandleKeyReleased_Up(bool /*slowly*/);
 
-    void HandleKeyPressed_Down(bool slowly);
-    void HandleKeyReleased_Down(bool slowly);
+    void HandleKeyPressed_Down(bool /*slowly*/);
+    void HandleKeyReleased_Down(bool /*slowly*/);
 
-    void HandleKeyPressed_MoveRight(bool slowly);
-    void HandleKeyReleased_MoveRight(bool slowly);
+    void HandleKeyPressed_MoveRight(bool /*slowly*/);
+    void HandleKeyReleased_MoveRight(bool /*slowly*/);
 
-    void HandleKeyPressed_MoveLeft(bool slowly);
-    void HandleKeyReleased_MoveLeft(bool slowly);
+    void HandleKeyPressed_MoveLeft(bool /*slowly*/);
+    void HandleKeyReleased_MoveLeft(bool /*slowly*/);
 
     void PrintDebugRope();
 };

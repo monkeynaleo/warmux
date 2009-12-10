@@ -715,72 +715,64 @@ void Grapple::StopMovingDown()
   StopDown();
 }
 
+bool Grapple::IsPreventingLRMovement()
+{
+  return IsInUse();
+}
+
+bool Grapple::IsPreventingWeaponAngleChanges()
+{
+  return IsInUse();
+}
 
 // =========================== Keys management
 
-void Grapple::HandleKeyPressed_Up(bool slowly)
+void Grapple::HandleKeyPressed_Up(bool /*slowly*/)
 {
   if (IsInUse())
     StartMovingUpForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyPressed_Up(slowly);
 }
 
-void Grapple::HandleKeyReleased_Up(bool slowly)
+void Grapple::HandleKeyReleased_Up(bool /*slowly*/)
 {
   if (IsInUse())
     StopMovingUpForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyReleased_Up(slowly);
 }
 
-void Grapple::HandleKeyPressed_Down(bool slowly)
+void Grapple::HandleKeyPressed_Down(bool /*slowly*/)
 {
   if (IsInUse())
     StartMovingDownForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyPressed_Down(slowly);
 }
 
-void Grapple::HandleKeyReleased_Down(bool slowly)
+void Grapple::HandleKeyReleased_Down(bool /*slowly*/)
 {
   if (IsInUse())
     StopMovingDownForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyReleased_Down(slowly);
 }
 
-void Grapple::HandleKeyPressed_MoveLeft(bool slowly)
+void Grapple::HandleKeyPressed_MoveLeft(bool /*slowly*/)
 {
   if (IsInUse())
     StartMovingLeftForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveLeft(slowly);
 }
 
-void Grapple::HandleKeyReleased_MoveLeft(bool slowly)
+void Grapple::HandleKeyReleased_MoveLeft(bool /*slowly*/)
 {
   if (IsInUse())
     StopMovingLeftForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyReleased_MoveLeft(slowly);
 }
 
-void Grapple::HandleKeyPressed_MoveRight(bool slowly)
+void Grapple::HandleKeyPressed_MoveRight(bool /*slowly*/)
 {
   if (IsInUse())
     StartMovingRightForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveRight(slowly);
 }
 
-
-void Grapple::HandleKeyReleased_MoveRight(bool slowly)
+void Grapple::HandleKeyReleased_MoveRight(bool /*slowly*/)
 {
   if (IsInUse())
     StopMovingRightForAllPlayers();
-  else
-    ActiveCharacter().HandleKeyReleased_MoveRight(slowly);
 }
 
 void Grapple::StartShooting()
