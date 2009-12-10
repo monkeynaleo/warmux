@@ -1022,6 +1022,22 @@ void Character::StopWalkingIfNecessary()
     body->StopWalk();
 }
 
+void Character::StopMovingLR()
+{
+  move_right_slowly_pressed = false;
+  move_right_pressed = false;
+  move_left_slowly_pressed = false;
+  move_left_pressed = false;
+}
+
+void Character::StopChangingWeaponAngle()
+{
+  increase_fire_angle_slowly_pressed = true;
+  increase_fire_angle_pressed = true;
+  decrease_fire_angle_slowly_pressed = true;
+  decrease_fire_angle_pressed = true;
+}
+
 // #################### MOVE_RIGHT
 void Character::StartMovingRight(bool slowly)
 {
