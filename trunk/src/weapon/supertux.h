@@ -65,9 +65,6 @@ public:
   virtual void HandleKeyPressed_MoveLeft(bool slowly);
   virtual void HandleKeyReleased_MoveLeft(bool slowly);
 
-  void RefreshFromNetwork(double angle, Point2d pos);
-  void ExplosionFromNetwork(Point2d tux_pos);
-
 protected:
   WeaponProjectile * GetProjectileInstance();
   virtual bool p_Shoot();
