@@ -28,7 +28,6 @@
 #include "include/action_handler.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include "network/network.h"
 #include "object/objects_list.h"
 #include "object/physical_obj.h"
 #include "particles/particle.h"
