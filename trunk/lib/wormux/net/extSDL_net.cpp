@@ -43,6 +43,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #  ifdef linux /* FIXME: what other platforms have this? */
 #    include <netinet/tcp.h>
 #  endif
+#  ifdef __sun /* Solaris */
+#    include <sys/filio.h>
+#  endif
 #include <netdb.h>
 #include <sys/socket.h>
 #endif /* WIN32 */
