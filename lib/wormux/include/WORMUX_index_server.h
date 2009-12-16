@@ -66,6 +66,9 @@ class IndexServer : public Singleton<IndexServer>
 
   std::string supported_versions;
 
+  // Time of the last "Pong" message sent
+  time_t time_pong;
+
   // Used to avoid race condition between ping (handled by the network thread)
   // and other receive (handled by the main thread)
   SDL_sem* action_sem;
@@ -73,6 +76,8 @@ class IndexServer : public Singleton<IndexServer>
   // Transfer functions
   static void NewMsg(IndexServerMsg msg_id, char* buffer, uint& used);
   static bool SendMsg(WSocket& socket, char* buffer, uint& used);
+
+  bool SendPong();
 
   // Gives the address of a server in the list
   bool GetServerAddress(std::string& address, int& port, uint& nb_tries);
