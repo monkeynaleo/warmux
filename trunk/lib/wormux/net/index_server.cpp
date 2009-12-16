@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include <assert.h>
+#include <time.h>
 #include <SDL_net.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
@@ -142,6 +143,8 @@ connection_state_t IndexServer::ConnectTo(const std::string& address, const int&
   r = HandShake(wormux_version);
   if (r != CONNECTED)
     goto err_handshake;
+
+  time_pong = time(NULL);
 
   return r;
 
@@ -422,6 +425,21 @@ const std::string& IndexServer::GetSupportedVersions() const
   return supported_versions;
 }
 
+bool IndexServer::SendPong()
+{
+  char buffer[16];
+  uint used = 0;
+  bool r;
+
+  NewMsg(TS_MSG_PONG, buffer, used);
+  WNet::FinalizeBatch(buffer, used);
+  r = socket.SendBuffer(buffer, used);
+
+  time_pong = time(NULL);
+
+  return r;
+}
+
 void IndexServer::Refresh(bool nowait)
 {
   if (!TryLock())
@@ -429,8 +447,12 @@ void IndexServer::Refresh(bool nowait)
 
   int msg_id;
   bool r;
-  uint used = 0;
-  char buffer[16];
+
+  // Send regularly a Pong message even if we have not received a ping message.
+  // This is needed to detect that the connexion have been closed by index
+  // server.
+  if (difftime(time(NULL), time_pong) > 30.0)
+    SendPong();
 
   if (nowait) {
 
@@ -445,9 +467,7 @@ void IndexServer::Refresh(bool nowait)
   if (!r || msg_id != TS_MSG_PING)
     goto disconnect;
 
-  NewMsg(TS_MSG_PONG, buffer, used);
-  WNet::FinalizeBatch(buffer, used);
-  r = socket.SendBuffer(buffer, used);
+  r = SendPong();
   if (!r)
     goto disconnect;
 
