@@ -65,7 +65,7 @@ void JetPack::UpdateTranslationStrings()
 
 bool JetPack::IsInAir()
 {
-  return !ActiveCharacter().IsImmobile() || ActiveCharacter().IsFalling() && move_up;
+  return !ActiveCharacter().IsImmobile() || (ActiveCharacter().IsFalling() && move_up);
 }
 
 void JetPack::Refresh()
