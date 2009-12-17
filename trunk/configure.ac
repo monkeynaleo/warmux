@@ -406,6 +406,7 @@ AC_CONFIG_FILES([Makefile
                  doc/Makefile
                  po/Makefile
 		 tools/Makefile
+		 tools/list_games/Makefile
 		 tools/servers/Makefile
 		 tools/servers/game_server/Makefile
 		 tools/servers/index_server/Makefile
