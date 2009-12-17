@@ -44,7 +44,7 @@
 #include "server.h"
 
 BasicClock wx_clock;
-std::string config_file;
+std::string config_file = "wormux_server.conf";
 
 void parseArgs(int argc, char *argv[])
 {
