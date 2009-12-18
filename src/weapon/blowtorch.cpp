@@ -24,7 +24,6 @@
 #include "weapon/weapon_cfg.h"
 
 #include "character/character.h"
-#include "character/move.h"
 #include "character/body.h"
 #include "map/map.h"
 #include "game/game_mode.h"

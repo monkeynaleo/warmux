@@ -49,8 +49,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   use_unit_on_first_shoot = false;
 
-  move_right = false;
-  move_left = false;
   move_up = false;
   m_flying = false;
 }
@@ -65,7 +63,7 @@ void JetPack::UpdateTranslationStrings()
 
 bool JetPack::IsInAir()
 {
-  return !ActiveCharacter().IsImmobile() || (ActiveCharacter().IsFalling() && move_up);
+  return !ActiveCharacter().HasGroundUnderFeets() || move_up;
 }
 
 void JetPack::Refresh()
@@ -76,33 +74,14 @@ void JetPack::Refresh()
     if (move_up) {
       F.y = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
     }
-    if (IsInAir()) {
-      if (ActiveCharacter().IsMovingLeft(false)) {
-        ActiveCharacter().StopMovingLeft(false);
-        move_left = true;
-      }
-      if (ActiveCharacter().IsMovingRight(false)) {
-        ActiveCharacter().StopMovingRight(false);
-        move_right = true;
-      }
-    } else {
-      if (move_left) {
-        move_left = false;
-        ActiveCharacter().StartMovingLeft(false);
-      }
-      if (move_right) {
-        move_right = false;
-        ActiveCharacter().StartMovingRight(false);
-      }
-    }
-    if (move_left && !move_right) {
-       F.x = - JETPACK_FORCE;
-       if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-         ActiveCharacter().SetDirection(DIRECTION_LEFT);
-    } else if (move_right && !move_left) {
-       F.x = JETPACK_FORCE;
-       if (ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-         ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+    const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
+    if (walk_intention.IsToWalk() && IsInAir()) {
+      LRDirection direction = walk_intention.GetDirection();
+      if (direction == DIRECTION_LEFT)
+        F.x = -JETPACK_FORCE;
+      else
+        F.x = JETPACK_FORCE;
+      ActiveCharacter().SetDirection(direction);
     }
 
     if (F.IsNull() && m_flying)
@@ -145,8 +124,6 @@ void JetPack::p_Select()
 
 void JetPack::p_Deselect()
 {
-  move_right = false;
-  move_left = false;
   move_up = false;
   ActiveCharacter().SetExternForce(0,0);
   StopFlying();
@@ -187,30 +164,6 @@ void JetPack::StopFlying()
   m_flying = false;
 }
 
-void JetPack::StartMovingRight()
-{
-  if (IsInAir())
-    move_right = true;
-}
-
-void JetPack::StopMovingRight()
-{
-  if (IsInAir())
-    move_right = false;
-}
-
-void JetPack::StartMovingLeft()
-{
-  if (IsInAir())
-    move_left = true;
-}
-
-void JetPack::StopMovingLeft()
-{
-  if (IsInAir())
-    move_left = false;
-}
-
 void JetPack::StartMovingUp()
 {
   move_up = true;
@@ -234,26 +187,6 @@ bool JetPack::IsPreventingJumps()
 bool JetPack::IsPreventingWeaponAngleChanges()
 {
   return true;
-}
-
-void JetPack::HandleKeyPressed_MoveRight(bool /*slowly*/)
-{
-  StartMovingRightForAllPlayers();
-}
-
-void JetPack::HandleKeyReleased_MoveRight(bool /*slowly*/)
-{
-  StopMovingRightForAllPlayers();
-}
-
-void JetPack::HandleKeyPressed_MoveLeft(bool /*slowly*/)
-{
-  StartMovingLeftForAllPlayers();
-}
-
-void JetPack::HandleKeyReleased_MoveLeft(bool /*slowly*/)
-{
-  StopMovingLeftForAllPlayers();
 }
 
 void JetPack::HandleKeyPressed_Up(bool /*slowly*/)

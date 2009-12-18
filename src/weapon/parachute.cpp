@@ -157,16 +157,14 @@ void Parachute::Refresh()
   }
   // If parachute is open => character can move a little to the left or to the right
   if (open) {
-    if (ActiveCharacter().IsMovingLeft(false) && !ActiveCharacter().IsMovingRight(false)) {
-      if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
-        ActiveCharacter().SetDirection(DIRECTION_LEFT);
-      ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
-    }
-
-    if (ActiveCharacter().IsMovingRight(false) && !ActiveCharacter().IsMovingLeft(false)) {
-      if (ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-        ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-      ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
+    const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
+    if (walk_intention.IsToWalk()) {
+      LRDirection direction = walk_intention.GetDirection();
+      ActiveCharacter().SetDirection(direction);
+      if (direction == DIRECTION_LEFT)
+        ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
+      else
+        ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
     }
   }
 }

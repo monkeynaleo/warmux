@@ -34,8 +34,6 @@ class JetPack : public Weapon
     // Jetpack fuel.
     uint m_last_fuel_down;
 
-    bool move_right;
-    bool move_left;
     bool move_up;
 
     bool IsInAir();
@@ -44,10 +42,6 @@ class JetPack : public Weapon
     JetPack();
     void Reset();
 
-    virtual void StartMovingRight();
-    virtual void StopMovingRight();
-    virtual void StartMovingLeft();
-    virtual void StopMovingLeft();
     virtual void StartMovingUp();
     virtual void StopMovingUp();
     virtual void StartShooting();
@@ -56,10 +50,6 @@ class JetPack : public Weapon
     virtual bool IsPreventingJumps();
     virtual bool IsPreventingWeaponAngleChanges();
 
-    virtual void HandleKeyPressed_MoveRight(bool /*slowly*/);
-    virtual void HandleKeyReleased_MoveRight(bool /*slowly*/);
-    virtual void HandleKeyPressed_MoveLeft(bool /*slowly*/);
-    virtual void HandleKeyReleased_MoveLeft(bool /*slowly*/);
     virtual void HandleKeyPressed_Up(bool /*slowly*/);
     virtual void HandleKeyReleased_Up(bool /*slowly*/);
 

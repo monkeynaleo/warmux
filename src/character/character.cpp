@@ -23,7 +23,6 @@
 #include <iostream>
 #include <WORMUX_random.h>
 #include "character/character.h"
-#include "character/move.h"
 #include "character/damage_stats.h"
 #include "game/config.h"
 #include "game/game_mode.h"
@@ -84,6 +83,12 @@ const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
 // Pause between changing direction
 const uint PAUSE_CHG_DIRECTION = 80; // ms
 
+// Max climbing height walking
+const int MAX_CLIMBING_HEIGHT=30;
+
+// Max height for which we do not need to call the Physical Engine with gravity features
+const int MAX_FALLING_HEIGHT=20;
+
 /* FIXME This methode is really strange, all this should probably be done in
  * constructor of Body...*/
 void Character::SetBody(Body * char_body)
@@ -130,14 +135,11 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step(-1),
   particle_engine(new ParticleEngine(500)),
   is_playing(false),
-  move_left_pressed(false),
-  move_left_slowly_pressed(false),
-  move_right_pressed(false),
-  move_right_slowly_pressed(false),
   increase_fire_angle_pressed(false),
   increase_fire_angle_slowly_pressed(false),
   decrease_fire_angle_pressed(false),
   decrease_fire_angle_slowly_pressed(false),
+  last_direction_change(0),
   previous_strength(0),
   body(NULL)
 {
@@ -193,14 +195,11 @@ Character::Character (const Character& acharacter) :
   channel_step(acharacter.channel_step),
   particle_engine(new ParticleEngine(250)),
   is_playing(acharacter.is_playing),
-  move_left_pressed(false),
-  move_left_slowly_pressed(false),
-  move_right_pressed(false),
-  move_right_slowly_pressed(false),
   increase_fire_angle_pressed(false),
   increase_fire_angle_slowly_pressed(false),
   decrease_fire_angle_pressed(false),
   decrease_fire_angle_slowly_pressed(false),
+  last_direction_change(0),
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
@@ -369,10 +368,6 @@ void Character::Die()
     SetMovement("breathe");
     SetCollisionModel(true, false, false);
 
-    move_left_pressed = false;
-    move_left_slowly_pressed = false;
-    move_right_pressed = false;
-    move_right_slowly_pressed = false;
     increase_fire_angle_pressed = false;
     increase_fire_angle_slowly_pressed = false;
     decrease_fire_angle_pressed = false;
@@ -547,16 +542,18 @@ void Character::UpdateLastMovingTime()
   do_nothing_time = Time::GetInstance()->Read();
 }
 
+bool Character::HasGroundUnderFeets() const
+{
+  return IsImmobile() && !IsFalling();
+}
+
 void Character::Refresh()
 {
+  StartOrStopWalkingIfNecessary();
+  if (IsWalking())
+    MakeSteps();
+
   if (IsImmobile()) {
-    bool left =(move_left_pressed || move_left_slowly_pressed);
-    bool right = (move_right_pressed || move_right_slowly_pressed);
-    if (left && !right) {
-      Move(DIRECTION_LEFT, move_left_slowly_pressed);
-    } else if (right && !left) {
-      Move(DIRECTION_RIGHT, move_right_slowly_pressed);
-    }
     bool increase_angle = increase_fire_angle_pressed || increase_fire_angle_slowly_pressed;
     bool decrease_angle = decrease_fire_angle_pressed || decrease_fire_angle_slowly_pressed;
     if (increase_angle && !decrease_angle) {
@@ -700,70 +697,6 @@ void Character::PrepareTurn()
   rl_motion_pause = Time::GetInstance()->Read();
 }
 
-bool Character::CanMoveRL() const
-{
-  if (!IsImmobile() || IsFalling()) return false;
-  return rl_motion_pause < Time::GetInstance()->Read();
-}
-
-void Character::BeginMovementRL(uint pause, bool slowly)
-{
-  Camera::GetInstance()->FollowObject(this);
-
-  walking_time = Time::GetInstance()->Read();
-  UpdateLastMovingTime();
-  if (!slowly)
-    SetMovement("walk");
-
-  CharacterCursor::GetInstance()->Hide();
-  step_sound_played = true;
-  rl_motion_pause = Time::GetInstance()->Read()+pause;
-}
-
-bool Character::CanStillMoveRL(uint pause)
-{
-  if (rl_motion_pause + pause < Time::GetInstance()->Read())
-  {
-    walking_time = Time::GetInstance()->Read();
-    rl_motion_pause = rl_motion_pause + pause;
-    return true;
-  }
-  return false;
-}
-
-void Character::StartWalking(bool slowly)
-{
-  BeginMovementRL(GameMode::GetInstance()->character.walking_pause, slowly);
-  body->StartWalking();
-}
-
-void Character::StopWalking()
-{
-  body->StopWalking();
-}
-
-bool Character::IsWalking() const
-{
-  return body->IsWalking();
-}
-
-void Character::Move(enum LRDirection direction, bool slowly)
-{
-  // character is ready to move ?
-  if (!CanMoveRL()) return;
-
-  if (!IsWalking()) StartWalking(slowly);
-
-  if (GetDirection() == direction) {
-    MoveCharacter(*this, slowly);
-  } else {
-    SetDirection(direction);
-    BeginMovementRL(PAUSE_CHG_DIRECTION, slowly);
-  }
-
-  ASSERT(&ActiveCharacter() == this);
-}
-
 // Signal the end of a fall
 void Character::Collision(const Point2d& speed_vector)
 {
@@ -873,10 +806,7 @@ void Character::StopPlaying()
   if (IsWalking())
     StopWalking();
   SetRebounding(true);
-  move_left_pressed = false;
-  move_left_slowly_pressed = false;
-  move_right_pressed = false;
-  move_right_slowly_pressed = false;
+  walk_intention.SetAllFalse();
   increase_fire_angle_pressed = false;
   increase_fire_angle_slowly_pressed = false;
   decrease_fire_angle_pressed = false;
@@ -1015,22 +945,6 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 // ###################################################################
 
-void Character::StopWalkingIfNecessary()
-{
-  bool right = move_right_pressed || move_right_slowly_pressed;
-  bool left = move_left_pressed || move_left_slowly_pressed;
-  if (body->IsWalking() && ((right == left) || (!left && !right)))
-    body->StopWalking();
-}
-
-void Character::StopMovingLR()
-{
-  move_right_slowly_pressed = false;
-  move_right_pressed = false;
-  move_left_slowly_pressed = false;
-  move_left_pressed = false;
-}
-
 void Character::StopChangingWeaponAngle()
 {
   increase_fire_angle_slowly_pressed = true;
@@ -1039,41 +953,142 @@ void Character::StopChangingWeaponAngle()
   decrease_fire_angle_pressed = true;
 }
 
-// #################### MOVE_RIGHT
-void Character::StartMovingRight(bool slowly)
+void Character::StartOrStopWalkingIfNecessary()
 {
-  if (ActiveTeam().AccessWeapon().IsPreventingLRMovement())
-    return;
-  if (slowly)
-    move_right_slowly_pressed = true;
-  else
-    move_right_pressed = true;
-  StopWalkingIfNecessary();
+  bool should_walk = walk_intention.IsToWalk()
+    && !GetTeam().AccessWeapon().IsPreventingLRMovement()
+    && HasGroundUnderFeets()
+    && !IsDead();
+  if (should_walk) {
+    if (walk_intention.GetDirection() != GetDirection() && !IsChangingDirection()) {
+      SetDirection(walk_intention.GetDirection());
+      last_direction_change = Time::GetInstance()->Read();
+    }
+  }
+  if (should_walk && !IsChangingDirection()) {
+    bool should_be_slowly = walk_intention.IsToDoItSlowly();
+    if (IsWalking() && (should_be_slowly != walking_slowly))
+      StopWalking();
+    if (!IsWalking())
+      StartWalking(should_be_slowly);
+  } else {
+    if (IsWalking())
+      StopWalking();
+  }
+}
 
+void Character::StartWalking(bool slowly)
+{
+  walking_time = Time::GetInstance()->Read();
+  rl_motion_pause = max(rl_motion_pause , Time::GetInstance()->Read());
+  step_sound_played = true;
+  walking_slowly = slowly;
+
+  Camera::GetInstance()->FollowObject(this);
   if (Network::GetInstance()->IsTurnMaster()) {
     HideGameInterface();
     ActiveTeam().crosshair.Hide();
   }
+  CharacterCursor::GetInstance()->Hide();
+  UpdateLastMovingTime();
+  Game::GetInstance()->SetCharacterChosen(true);
+
+  if (!slowly)
+    SetMovement("walk");
+  body->StartWalking();
 }
 
-void Character::StopMovingRight(bool slowly)
+void Character::StopWalking()
 {
-  if (slowly)
-    move_right_slowly_pressed = false;
-  else
-    move_right_pressed = false;
-  StopWalkingIfNecessary();
-
   if (Network::GetInstance()->IsTurnMaster())
     ActiveTeam().crosshair.Show();
+  body->StopWalking();
 }
 
-bool Character::IsMovingRight(bool slowly)
+bool Character::IsWalking() const
 {
-  if (slowly)
-   return move_right_slowly_pressed;
+  return body->IsWalking();
+}
+
+void Character::MakeSteps()
+{
+  int height;
+  bool ghost;
+  uint walking_pause = GameMode::GetInstance()->character.walking_pause;
+
+  if (walk_intention.IsToDoItSlowly())
+    walking_pause *= 10;
   else
-   return move_right_pressed;
+    SetMovement("walk");// otherwise character would slide after dropping a dynamite
+
+  // If character moves out of the world, no need to go further: it is dead
+  if (GetDirection() == DIRECTION_LEFT)
+    ghost = IsOutsideWorld ( Point2i(-1, 0) );
+  else
+    ghost = IsOutsideWorld ( Point2i(1, 0) );
+
+  if (ghost) {
+    MSG_DEBUG("ghost", "%s will be a ghost.", GetName().c_str());
+    Ghost();
+    return;
+  }
+
+  // Check we can move (to go not too fast)
+  while ((rl_motion_pause + walking_pause < Time::GetInstance()->Read()) &&
+         ComputeHeightMovement(height)) {
+    walking_time = Time::GetInstance()->Read();
+    rl_motion_pause = rl_motion_pause + walking_pause;
+
+    // Eventually moves the character
+    SetXY( Point2i(GetX() + GetDirection(), GetY() + height));
+
+    // If no collision, let gravity do its job
+    UpdatePosition();
+  }
+}
+
+bool Character::IsChangingDirection()
+{
+  return last_direction_change + PAUSE_CHG_DIRECTION >= Time::GetInstance()->Read();
+}
+
+bool Character::ComputeHeightMovement(int & height)
+{
+  if (IsInVacuum(Point2i(GetDirection(), 0))
+      && !IsInVacuum(Point2i(GetDirection(), +1)) ){
+    //Land is flat, we can move!
+    height = 0;
+    return true;
+  }
+
+  //Compute height of the step:
+  if (IsInVacuum(Point2i(GetDirection(), 0))) {
+    //Try to go down:
+    for (height = 2; height <= MAX_FALLING_HEIGHT ; height++) {
+      if (!IsInVacuum(Point2i(GetDirection(), height))) {
+        height--;
+        return true;
+      }
+    }
+
+    //We can go down, but the step is too big -> the character will fall
+    bool falling = true;
+    if (falling) {
+      SetX (GetXdouble() + GetDirection());
+      UpdatePosition();
+      SetMovement("fall");
+    }
+    return false;
+  } else {
+    //Try to go up:
+    for (height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--) {
+      if (IsInVacuum(Point2i(GetDirection(), height))) {
+        return true;
+      }
+    }
+  }
+  //We can't move!
+  return false;
 }
 
 void Character::HandleKeyPressed_MoveRight(bool slowly)
@@ -1088,44 +1103,6 @@ void Character::HandleKeyReleased_MoveRight(bool slowly)
   Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_RIGHT);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
-}
-
-// #################### MOVE_LEFT
-
-void Character::StartMovingLeft(bool slowly)
-{
-  if (ActiveTeam().AccessWeapon().IsPreventingLRMovement())
-    return;
-  if (slowly)
-    move_left_slowly_pressed = true;
-  else
-    move_left_pressed = true;
-  StopWalkingIfNecessary();
-
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Hide();
-  }
-}
-
-void Character::StopMovingLeft(bool slowly)
-{
-  if (slowly)
-    move_left_slowly_pressed = false;
-  else
-    move_left_pressed = false;
-  StopWalkingIfNecessary();
-
-  if (Network::GetInstance()->IsTurnMaster())
-    ActiveTeam().crosshair.Show();
-}
-
-bool Character::IsMovingLeft(bool slowly)
-{
-  if (slowly)
-   return move_left_slowly_pressed;
-  else
-   return move_left_pressed;
 }
 
 void Character::HandleKeyPressed_MoveLeft(bool slowly)

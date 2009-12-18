@@ -21,8 +21,6 @@ POTFILES = \
         src/character/damage_stats.h \
         src/character/member.cpp \
         src/character/member.h \
-        src/character/move.cpp \
-        src/character/move.h \
         src/character/movement.cpp \
         src/character/movement.h \
         src/config.h \

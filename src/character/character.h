@@ -29,6 +29,7 @@
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "character/body.h"
+#include "character/walk_intention.h"
 
 class Text;
 class Team;
@@ -73,6 +74,7 @@ private:
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
+  bool walking_slowly;
 
   // Channel used for sound
   int channel_step;
@@ -83,14 +85,13 @@ private:
   // this is needed because of network needing to know
   // if we have changed of active character
   bool is_playing;
-  bool move_left_pressed;
-  bool move_left_slowly_pressed;
-  bool move_right_pressed;
-  bool move_right_slowly_pressed;
+  WalkIntention walk_intention;
   bool increase_fire_angle_pressed;
   bool increase_fire_angle_slowly_pressed;
   bool decrease_fire_angle_pressed;
   bool decrease_fire_angle_slowly_pressed;
+  uint last_direction_change;
+
 public:
 
   // Previous strength
@@ -116,7 +117,9 @@ private:
   void StartWalking(bool slowly);
   void StopWalking();
   bool IsWalking() const;
-  void StopWalkingIfNecessary();
+  void MakeSteps();
+  bool IsChangingDirection();
+  bool ComputeHeightMovement(int & height);
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -124,6 +127,9 @@ public:
   ~Character();
 
   virtual void SignalExplosion();
+
+  void StartOrStopWalkingIfNecessary();
+  WalkIntention & GetWalkIntention() { return walk_intention; };
 
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
@@ -184,18 +190,9 @@ public:
 
   void UpdateLastMovingTime();
 
-  // Can we move (check a timeout)
-  bool CanMoveRL() const;
-  bool CanJump() const { return CanMoveRL(); };
-  void Move(enum LRDirection direction, bool slowly);
+  bool HasGroundUnderFeets() const;
+  bool CanJump() const { return HasGroundUnderFeets(); };
 
-  void StartMovingLeft(bool slowly);
-  void StopMovingLeft(bool slowly);
-  bool IsMovingLeft(bool slowly);
-  void StartMovingRight(bool slowly);
-  void StopMovingRight(bool slowly);
-  bool IsMovingRight(bool slowly);
-  void StopMovingLR();
   void StopChangingWeaponAngle();
 
   // Jumps
@@ -203,10 +200,6 @@ public:
   void Jump();
   void HighJump();
   void BackJump();
-
-  // Initialise left or right movement
-  void BeginMovementRL (uint pause, bool slowly = false);
-  bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
   void SetDirection(LRDirection direction);

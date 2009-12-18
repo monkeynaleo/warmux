@@ -26,10 +26,10 @@ wormux_SOURCES = \
         character/damage_stats.h \
         character/member.cpp \
         character/member.h \
-        character/move.cpp \
-        character/move.h \
         character/movement.cpp \
         character/movement.h \
+        character/walk_intention.cpp \
+        character/walk_intention.h \
         config.h \
 	game/config.cpp \
         game/config.h \

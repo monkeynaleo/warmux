@@ -16,21 +16,36 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Mouvement droite/gauche pour un ver.
+ * Describes which left or right movement the user wants to do with a character.
  *****************************************************************************/
 
-#ifndef MOVE_H
-#define MOVE_H
+#ifndef _WALK_INTENTION_H
+#define _WALK_INTENTION_H
 
-#include "include/base.h"
+#include <WORMUX_types.h>
 
-class Character;
+class WalkIntention
+{
+  private:
+    bool left_slowly;
+    bool left_normal;
+    bool right_slowly;
+    bool right_normal;
 
-// Compute the height to fall or to walk on when moving horizontally
-// Return a boolean which says if movement is possible
-bool ComputeHeightMovement (Character &character, int &height,
-                            bool falling);
+    // cached values for simpler getters:
+    LRDirection direction;
+    bool exists;
+    bool slowly;
 
-void MoveCharacter (Character &character, bool slowly = false);
+    void UpdateChachedValues();
+  public:
+    WalkIntention();
+    bool IsToWalk() const;
+    LRDirection GetDirection() const;
+    bool IsToDoItSlowly() const;
+    void Set(LRDirection direction, bool slowly, bool enabled);
+    void SetAllFalse();
+    bool Get(LRDirection direction, bool slowly) const;
+};
 
 #endif

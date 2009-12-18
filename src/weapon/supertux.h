@@ -34,8 +34,6 @@ class TuxLauncher : public WeaponLauncher
 private:
   SuperTux * current_tux;
   uint tux_death_time;
-  bool move_left_pressed;
-  bool move_right_pressed;
 
 public:
   TuxLauncher();
@@ -46,24 +44,12 @@ public:
 
   virtual void SignalEndOfProjectile();
 
-  virtual void StartMovingLeft() {move_left_pressed = true;};
-  virtual void StopMovingLeft() {move_left_pressed = false;};
-
-  virtual void StartMovingRight() {move_right_pressed = true;};
-  virtual void StopMovingRight() {move_right_pressed = false;};
-
   void StartShooting();
   void StopShooting();
 
   virtual bool IsPreventingLRMovement();
   virtual bool IsPreventingJumps();
   virtual bool IsPreventingWeaponAngleChanges();
-
-  virtual void HandleKeyPressed_MoveRight(bool slowly);
-  virtual void HandleKeyReleased_MoveRight(bool slowly);
-
-  virtual void HandleKeyPressed_MoveLeft(bool slowly);
-  virtual void HandleKeyReleased_MoveLeft(bool slowly);
 
 protected:
   WeaponProjectile * GetProjectileInstance();
