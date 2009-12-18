@@ -196,7 +196,7 @@
       <min_angle>-45</min_angle>
       <max_angle>45</max_angle>
       <unit_per_ammo>20</unit_per_ammo>
-      <range>10</range>
+      <range>20</range>
     </blowtorch>
 
     <bounce_ball>
