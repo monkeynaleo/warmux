@@ -82,7 +82,7 @@ class Body
     // Time elapsed since last refresh
     uint                              last_refresh;
 
-    int                               walk_events;
+    bool                              walking;
     double                            main_rotation_rad;
     std::vector<junction *>           skel_lst; // Body skeleton:
                                                 // Order to use to build the body
@@ -131,10 +131,9 @@ class Body
     void                    Build();
     void                    UpdateWeaponPosition(const Point2i & pos);
     void                    RefreshSprites();
-    void                    StartWalk();
-    void                    StopWalk();
-    void                    ResetWalk() { walk_events = 0; };
-    bool                    IsWalking() const ;
+    void                    StartWalking();
+    void                    StopWalking();
+    bool                    IsWalking() const { return walking; };
     void                    MakeParticles(const Point2i & pos);
     void                    MakeTeleportParticles(const Point2i & pos,
                                                   const Point2i & dst);

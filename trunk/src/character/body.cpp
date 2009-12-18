@@ -51,7 +51,7 @@ Body::Body(const xmlNode *     xml,
   previous_mvt(NULL),
   weapon_member(new WeaponMember()),
   last_refresh(0),
-  walk_events(0),
+  walking(false),
   main_rotation_rad(0),
   skel_lst(),
   direction(DIRECTION_RIGHT),
@@ -74,7 +74,7 @@ Body::Body(const Body & _body):
   previous_mvt(NULL),
   weapon_member(new WeaponMember()),
   last_refresh(0),
-  walk_events(0),
+  walking(false),
   main_rotation_rad(0),
   skel_lst(),
   direction(DIRECTION_RIGHT),
@@ -455,7 +455,7 @@ void Body::Build()
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
 
-  if (walk_events > 0 || current_mvt->GetType() != "walk") {
+  if (walking || current_mvt->GetType() != "walk") {
 
     if (Time::GetInstance()->Read() > last_refresh + current_mvt->GetFrameDuration()) {
 
@@ -785,33 +785,22 @@ void Body::GetTestRect(uint & l,
   b = current_mvt->GetTestBottom();
 }
 
-void Body::StartWalk()
+void Body::StartWalking()
 {
-  // walk events happens when the player hits the left/right key
-  // counting how much they are pressed allow to get skin walking
-  // if the key was hit while the character was jumping or using an other
-  // animation than the walk animation
-  walk_events++;
-  if (1 == walk_events) {
-    last_refresh = Time::GetInstance()->Read();
-  }
+  ASSERT(!walking);
+  walking = true;
+  last_refresh = Time::GetInstance()->Read();
 }
 
-void Body::StopWalk()
+void Body::StopWalking()
 {
-  if (walk_events > 0) {
-    walk_events--;
-  }
+  ASSERT(walking);
+  walking = false;
 
   if (current_mvt->GetType() == "walk") {
     SetMovement("breathe");
     SetFrame(0);
   }
-}
-
-bool Body::IsWalking() const
-{
-  return walk_events > 0 /* && current_mvt->type == "walk" */;
 }
 
 uint Body::GetMovementDuration() const

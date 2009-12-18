@@ -649,7 +649,7 @@ void Character::Refresh()
   }
 
   if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
-    body->ResetWalk();
+    body->StopWalking();
 
   if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
       && body->GetMovement().substr(0,9) != "animation"
@@ -731,15 +731,15 @@ bool Character::CanStillMoveRL(uint pause)
   return false;
 }
 
-void Character::StartWalk(bool slowly)
+void Character::StartWalking(bool slowly)
 {
   BeginMovementRL(GameMode::GetInstance()->character.walking_pause, slowly);
-  body->StartWalk();
+  body->StartWalking();
 }
 
-void Character::StopWalk()
+void Character::StopWalking()
 {
-  body->StopWalk();
+  body->StopWalking();
 }
 
 bool Character::IsWalking() const
@@ -752,7 +752,7 @@ void Character::Move(enum LRDirection direction, bool slowly)
   // character is ready to move ?
   if (!CanMoveRL()) return;
 
-  if (!IsWalking()) StartWalk(slowly);
+  if (!IsWalking()) StartWalking(slowly);
 
   if (GetDirection() == direction) {
     MoveCharacter(*this, slowly);
@@ -870,7 +870,8 @@ void Character::StopPlaying()
   if (IsDead()) return;
   SetClothe("normal");
   SetMovement("breathe");
-  body->ResetWalk();
+  if (IsWalking())
+    StopWalking();
   SetRebounding(true);
   move_left_pressed = false;
   move_left_slowly_pressed = false;
@@ -1018,8 +1019,8 @@ void Character::StopWalkingIfNecessary()
 {
   bool right = move_right_pressed || move_right_slowly_pressed;
   bool left = move_left_pressed || move_left_slowly_pressed;
-  if ((right == left) || (!left && !right))
-    body->StopWalk();
+  if (body->IsWalking() && ((right == left) || (!left && !right)))
+    body->StopWalking();
 }
 
 void Character::StopMovingLR()

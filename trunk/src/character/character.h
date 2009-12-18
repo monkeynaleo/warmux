@@ -113,8 +113,8 @@ private:
 
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
 
-  void StartWalk(bool slowly);
-  void StopWalk();
+  void StartWalking(bool slowly);
+  void StopWalking();
   bool IsWalking() const;
   void StopWalkingIfNecessary();
 public:
