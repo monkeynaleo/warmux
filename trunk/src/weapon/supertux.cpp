@@ -237,12 +237,6 @@ bool TuxLauncher::p_Shoot ()
 
   current_tux = static_cast<SuperTux *>(projectile);
   tux_death_time = 0;
-  move_left_pressed = false;
-  move_right_pressed = false;
-  ActiveCharacter().StopMovingLeft(true);
-  ActiveCharacter().StopMovingLeft(false);
-  ActiveCharacter().StopMovingRight(true);
-  ActiveCharacter().StopMovingRight(false);
   bool r = WeaponLauncher::p_Shoot();
 
   return r;
@@ -251,10 +245,12 @@ bool TuxLauncher::p_Shoot ()
 void TuxLauncher::Refresh()
 {
   if (current_tux) {
-    if (move_left_pressed && !move_right_pressed) {
-      current_tux->turn_left();
-    } else if (move_right_pressed && !move_left_pressed) {
-      current_tux->turn_right();
+    const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
+    if (walk_intention.IsToWalk()) {
+      if (walk_intention.GetDirection() == DIRECTION_LEFT)
+        current_tux->turn_left();
+      else
+        current_tux->turn_right();
     }
   } else {
     if (tux_death_time && tux_death_time + 2000 < Time::GetInstance()->Read()) {
@@ -309,28 +305,6 @@ bool TuxLauncher::IsPreventingJumps()
 bool TuxLauncher::IsPreventingWeaponAngleChanges()
 {
   return (current_tux || tux_death_time);
-}
-
-// Move right
-void TuxLauncher::HandleKeyPressed_MoveRight(bool /*slowly*/)
-{
-  StartMovingRightForAllPlayers();
-}
-
-void TuxLauncher::HandleKeyReleased_MoveRight(bool /*slowly*/)
-{
-  StopMovingRightForAllPlayers();
-}
-
-// Move left
-void TuxLauncher::HandleKeyPressed_MoveLeft(bool /*slowly*/)
-{
-  StartMovingLeftForAllPlayers();
-}
-
-void TuxLauncher::HandleKeyReleased_MoveLeft(bool /*slowly*/)
-{
-  StopMovingLeftForAllPlayers();
 }
 
 std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

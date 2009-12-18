@@ -28,7 +28,6 @@
 #include "action_handler.h"
 #include "character/character.h"
 #include "character/body.h"
-#include "character/move.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game.h"
@@ -575,25 +574,25 @@ static void Action_Character_BackJump (Action */*a*/)
 static void Action_Character_StartMovingLeft(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StartMovingLeft(slowly);
+  ActiveCharacter().GetWalkIntention().Set(DIRECTION_LEFT, slowly, true);
 }
 
 static void Action_Character_StopMovingLeft(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StopMovingLeft(slowly);
+  ActiveCharacter().GetWalkIntention().Set(DIRECTION_LEFT, slowly, false);
 }
 
 static void Action_Character_StartMovingRight(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StartMovingRight(slowly);
+  ActiveCharacter().GetWalkIntention().Set(DIRECTION_RIGHT, slowly, true);
 }
 
 static void Action_Character_StopMovingRight(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StopMovingRight(slowly);
+  ActiveCharacter().GetWalkIntention().Set(DIRECTION_RIGHT, slowly, false);
 }
 
 static void Action_Character_StartIncreasingFireAngle(Action *a)
