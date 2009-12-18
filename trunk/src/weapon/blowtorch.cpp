@@ -79,7 +79,10 @@ bool Blowtorch::p_Shoot()
   double dy = sin(angle) * h;
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-  GetWorld().Dig(pos, ActiveCharacter().GetHeight()/2 + 2);
+  double char_height = ActiveCharacter().GetHeight();
+  double char_width = ActiveCharacter().GetWidth();
+  double size = sqrt(char_height * char_height + char_width * char_width)/2;
+  GetWorld().Dig(pos, size);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
   MoveCharacter(ActiveCharacter());
 
