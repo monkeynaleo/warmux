@@ -64,8 +64,6 @@ void Blowtorch::UpdateTranslationStrings()
 
 void Blowtorch::p_Deselect()
 {
-  ActiveCharacter().body->ResetWalk();
-  ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
 }
 
@@ -84,17 +82,12 @@ bool Blowtorch::p_Shoot()
   double size = sqrt(char_height * char_height + char_width * char_width)/2;
   GetWorld().Dig(pos, size);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
-  MoveCharacter(ActiveCharacter());
 
   return true;
 }
 
 void Blowtorch::StartShooting()
 {
-  ActiveCharacter().BeginMovementRL(GameMode::GetInstance()->character.walking_pause);
-  ActiveCharacter().SetRebounding(false);
-  ActiveCharacter().body->StartWalk();
-
   m_is_active = true;
 }
 
