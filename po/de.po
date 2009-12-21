@@ -119,7 +119,7 @@ msgstr "%s ist neben einer Mine!"
 #: src/include/action_handler.cpp:387
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s braucht eine Pause."
 
 #: src/object/bonus_box.cpp:98
 #, c-format
@@ -1552,7 +1552,7 @@ msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 #: src/game/game.cpp:413
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Warte auf %s"
 
 #: src/menu/network_menu.cpp:460
 #, fuzzy
@@ -1582,7 +1582,7 @@ msgstr "Willkommen bei %s!"
 #: src/game/game.cpp:776
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr ""
+msgstr "Was für ein Treffer! %s vom Team %s ist von einer anderen Welt..."
 
 #: src/game/game.cpp:828
 #, c-format
