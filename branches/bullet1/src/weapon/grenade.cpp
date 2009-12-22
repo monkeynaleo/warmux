@@ -44,14 +44,6 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg,
 
 //-----------------------------------------------------------------------------
 
-void Grenade::Refresh()
-{
-  WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
-}
-
-//-----------------------------------------------------------------------------
-
 void Grenade::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The grenade left the battlefield before exploding!"));

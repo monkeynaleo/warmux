@@ -82,6 +82,11 @@ AC_ARG_ENABLE([static],
               [static=$enableval],
               [static=no])
 
+# Bullet config
+AM_CONDITIONAL([CONDITIONAL_BUILD_DEMOS], [false])
+AM_CONDITIONAL([CONDITIONAL_BUILD_MULTITHREADED], [false])
+
+
 # Check whether user supplied the option to statically link binaries.
 if test "$static" = yes; then
 # if we're using gcc, add `-static' to LDFLAGS
@@ -401,6 +406,7 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
 		 lib/Makefile
+		 lib/bullet/src/Makefile
 		 lib/wormux/Makefile
 		 lib/wormux-server/Makefile
                  doc/Makefile
@@ -413,6 +419,7 @@ AC_CONFIG_FILES([Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
+AC_CONFIG_HEADERS([lib/bullet/config.h])
 
 AC_OUTPUT
 

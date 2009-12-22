@@ -168,12 +168,12 @@ wormux_SOURCES = \
         map/map.h \
         map/maps_list.cpp \
         map/maps_list.h \
+        map/physic_tile.cpp \
+        map/physic_tile.h \
         map/random_map.cpp \
         map/random_map.h \
         map/sky.cpp \
         map/sky.h \
-        map/tile.cpp \
-        map/tile.h \
         map/tileitem.cpp \
         map/tileitem.h \
         map/water.cpp \
@@ -240,14 +240,8 @@ wormux_SOURCES = \
         object/medkit.h \
         object/objbox.cpp \
         object/objbox.h \
-        object/object_cfg.cpp \
-        object/object_cfg.h \
         object/objects_list.cpp \
         object/objects_list.h \
-        object/physical_obj.cpp \
-        object/physical_obj.h \
-        object/physics.cpp \
-        object/physics.h \
         particles/body_member.cpp \
         particles/body_member.h \
         particles/bullet.cpp \
@@ -280,6 +274,28 @@ wormux_SOURCES = \
         particles/teleport_member.h \
         particles/water_drop.cpp \
         particles/water_drop.h \
+        physic/bullet_contact.cpp \
+        physic/bullet_contact.h \
+        physic/bullet_engine.cpp \
+        physic/bullet_engine.h \
+        physic/bullet_obj.cpp \
+        physic/bullet_obj.h \
+        physic/bullet_shape.cpp \
+        physic/bullet_shape.h \
+        physic/force.cpp \
+        physic/force.h \
+        physic/game_obj.cpp \
+        physic/game_obj.h \
+        physic/object_cfg.cpp \
+        physic/object_cfg.h \
+        physic/physical_contact.cpp \
+        physic/physical_contact.h \
+        physic/physical_engine.cpp \
+        physic/physical_engine.h \
+        physic/physical_obj.cpp \
+        physic/physical_obj.h \
+        physic/physical_shape.cpp \
+        physic/physical_shape.h \
         sound/jukebox.cpp \
         sound/jukebox.h \
         sound/sample_cache.cpp \
@@ -303,6 +319,8 @@ wormux_SOURCES = \
         tool/affine_transform.h \
         tool/copynpaste.cpp \
         tool/copynpaste.h \
+        tool/debug_physics.cpp \
+        tool/debug_physics.h \
         tool/isnan.h \
         tool/math_tools.h \
         tool/resource_manager.cpp \
@@ -408,7 +426,7 @@ endif
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux/include
+  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/bullet/src/ -I$(top_srcdir)/lib/wormux/include
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -424,5 +442,7 @@ else
 LIBS += @LIBCURL@
 endif
 
-wormux_LDADD=$(top_srcdir)/lib/wormux/libwormux.a
-wormux_DEPENDENCIES=$(top_srcdir)/lib/wormux/libwormux.a
+wormux_LDADD=$(top_srcdir)/lib/bullet/src/libbullet.a \
+$(top_srcdir)/lib/wormux/libwormux.a
+wormux_DEPENDENCIES=$(top_srcdir)/lib/bullet/src/libbullet.a \
+$(top_srcdir)/lib/wormux/libwormux.a

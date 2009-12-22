@@ -23,7 +23,7 @@
 #define PARTICLE_H
 
 #include <list>
-#include "object/physical_obj.h"
+#include "physic/game_obj.h"
 #include "include/base.h"
 
 // Forward declarations
@@ -95,7 +95,7 @@ class Particle : public GameObj
 
  public:
   Particle(const std::string &name);
-  ~Particle();
+  virtual ~Particle();
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
