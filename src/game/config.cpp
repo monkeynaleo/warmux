@@ -40,7 +40,7 @@
 #include "include/constant.h"
 #include "interface/keyboard.h"
 #include "network/network.h"
-#include "object/object_cfg.h"
+#include "physic/object_cfg.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"

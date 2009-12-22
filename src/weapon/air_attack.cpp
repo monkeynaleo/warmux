@@ -79,10 +79,12 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   GameObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  SetCollisionModel(false, false, false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
-  SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
 
@@ -122,7 +124,7 @@ void Plane::Shoot(double speed, const Point2i& target)
     if(distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx)) distance_to_release=0;
   }
 
-  SetSpeedXY (speed_vector);
+  GetPhysic()->SetSpeedXY (speed_vector);
 
   Camera::GetInstance()->FollowObject(this);
 
@@ -132,16 +134,17 @@ void Plane::Shoot(double speed, const Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY(Point2i(GetX(), obus_dy) );
+  instance->SetPosition(Point2i(GetX(), obus_dy) );
 
-  Point2d speed_vector = GetSpeedXY();
+  Point2d speed_vector = GetPhysic()->GetSpeed();
 
   int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
   int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
+  // TODO phyisc is there any reason for y to be 0? 
   speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
-  instance->SetSpeedXY(speed_vector);
+  instance->GetPhysic()->SetSpeedXY(speed_vector);
 
   ObjectsList::GetRef().AddObject(instance);
 
@@ -185,7 +188,7 @@ int Plane::GetDirection() const
 void Plane::Draw()
 {
   if (IsGhost()) return;
-  image->Draw(GetPosition());
+  image->Draw(GetPhysic()->GetPosition());
 }
 
 bool Plane::OnTopOfTarget() const

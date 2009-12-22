@@ -27,7 +27,7 @@
 #include "character/body.h"
 #include "gui/energy_bar.h"
 #include "include/base.h"
-#include "object/physical_obj.h"
+#include "physic/game_obj.h"
 #include "character/body.h"
 #include "character/walk_intention.h"
 
@@ -35,6 +35,7 @@ class Text;
 class Team;
 class ParticleEngine;
 class DamageStatistics;
+class Force;
 
 #ifdef DEBUG
 //#define DEBUG_SKIN
@@ -55,11 +56,13 @@ private:
   bool back_jumping;
   bool death_explosion;
   double firing_angle;
+  PhysicalShape *m_feet_shape;
 
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
   EnergyBar energy_bar;
+  Force *m_force_walk_index;
 
   // survived games
   int survivals;
@@ -134,7 +137,6 @@ public:
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
   void SetEnergy(int new_energy);
-  inline const int & GetEnergy() const { return m_energy; };
 
   bool GotInjured() const { return lost_energy < 0; };
   void Die();
@@ -165,6 +167,8 @@ public:
 
   void Draw();
   void Refresh();
+
+  bool FootsInVacuum() const;
 
   void PrepareTurn();
   void StartPlaying();

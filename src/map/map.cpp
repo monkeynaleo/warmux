@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include "map/map.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
@@ -31,6 +31,7 @@
 #include "game/time.h"
 #include "object/objbox.h"
 #include "tool/math_tools.h"
+#include "map/ground.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
@@ -136,12 +137,6 @@ void Map::Dig(const Point2i& center, const uint radius)
    ground.Dig(center, radius);
    to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE),
                                    Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
-}
-
-void Map::PutSprite(const Point2i& pos, const Sprite* spr)
-{
-   ground.PutSprite(pos, spr);
-   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
@@ -262,30 +257,30 @@ bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 
 bool Map::IsInVacuum_top(const GameObj &obj, int dx, int dy) const
 {
-  return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                    obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
-                                    obj.GetTestRect().GetSizeX());
+  return HorizontalLine_IsInVacuum (obj.GetRect().GetPositionX() + dx,
+                                    obj.GetRect().GetPositionY() + obj.GetRect().GetSizeY() + dy,
+                                    obj.GetRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_bottom(const GameObj &obj, int dx, int dy) const
 {
-  return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                    obj.GetTestRect().GetPositionY() + dy,
-                                    obj.GetTestRect().GetSizeX());
+  return HorizontalLine_IsInVacuum (obj.GetRect().GetPositionX() + dx,
+                                    obj.GetRect().GetPositionY() + dy,
+                                    obj.GetRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_left(const GameObj &obj, int dx, int dy) const
 {
-  return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
-                                  obj.GetTestRect().GetPositionY() + dy,
-                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+  return VerticalLine_IsInVacuum (obj.GetRect().GetPositionX() + dx,
+                                  obj.GetRect().GetPositionY() + dy,
+                                  obj.GetRect().GetPositionY() + obj.GetRect().GetSizeY() + dy);
 }
 
 bool Map::IsInVacuum_right(const GameObj &obj, int dx, int dy) const
 {
-  return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
-                                  obj.GetTestRect().GetPositionY() + dy,
-                                  obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
+  return VerticalLine_IsInVacuum (obj.GetRect().GetPositionX() + obj.GetRect().GetSizeX() + dx,
+                                  obj.GetRect().GetPositionY() + dy,
+                                  obj.GetRect().GetPositionY() + obj.GetRect().GetSizeY() + dy);
 }
 
 void Map::DrawAuthorName()

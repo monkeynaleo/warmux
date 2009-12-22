@@ -100,16 +100,16 @@ void DiscoGrenade::Refresh()
   if(IsMoving())
   {
     double norme,angle;
-    GetSpeed(norme,angle);
+    GetPhysic()->GetSpeed(norme,angle);
     for(int i = -3; i<4 ; i++)
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*M_PI_4/3.0)+M_PI_2,2.0);
+      smoke_engine.AddNow(GetPhysic()->GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*M_PI_4/3.0)+M_PI_2,2.0);
   }
   else
   {
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((float)(Time::GetInstance()->Read()%500)-250.0) * M_PI / 250.0,3.0);
+      smoke_engine.AddNow(GetPhysic()->GetPosition(), 1,particle_MAGIC_STAR, false,((float)(Time::GetInstance()->Read()%500)-250.0) * M_PI / 250.0,3.0);
   }
 #else //  :-P
-  smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);
+  smoke_engine.AddPeriodic(GetPhysic()->GetPosition(), particle_MAGIC_STAR, false);
 #endif //HAVE_A_REALLY_BIG_CPU
 
   double tmp = Time::GetInstance()->Read() - begin_time;
@@ -118,7 +118,7 @@ void DiscoGrenade::Refresh()
     //JukeBox::GetInstance()->Play("default","weapon/alleluia") ;
     have_played_music = true;
   }
-  image->SetRotation_rad(GetSpeedAngle());
+  image->SetRotation_rad(GetPhysic()->GetAngularSpeed());
 }
 
 void DiscoGrenade::SignalOutOfMap()

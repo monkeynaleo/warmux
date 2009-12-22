@@ -29,7 +29,10 @@
 TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i& position, const Point2i& dest, int direction) :
   Particle("teleport_member_particle")
 {
-  SetCollisionModel(false, false, false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   image = new Sprite(spr.GetSurface());
 
   float scale_x, scale_y;
@@ -37,10 +40,11 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i&
   image->Scale(scale_x * (float)direction, scale_y);
 
   ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
-  SetXY(position);
+  SetPosition(position);
   m_left_time_to_live = 1;
 
-  SetSize(image->GetSize());
+  // TODO physic
+  //SetBasicShape(image->GetSize(), GetInitialMass());
   SetOnTop(true);
   destination = dest;
   start = position;
@@ -70,6 +74,6 @@ void TeleportMemberParticle::Refresh()
   dpos.x = (int)((destination.x - start.x) * sin((float)dt * sin_x_max / (float)teleportation_anim_duration) / sin(sin_x_max))/* * dt / teleportation_anim_duration*/;
   dpos.y = (int)((destination.y - start.y) * sin((float)dt * sin_y_max / (float)teleportation_anim_duration) / sin(sin_y_max))/* * dt / teleportation_anim_duration*/;
 
-  SetXY( start + dpos );
+  SetPosition( start + dpos );
   image->Update();
 }

@@ -29,7 +29,7 @@
 #include "interface/cursor.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
@@ -48,6 +48,8 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   use_unit_on_first_shoot = false;
+
+  m_force_index = NULL;
 
   move_up = false;
   m_flying = false;
@@ -72,7 +74,7 @@ void JetPack::Refresh()
   {
     Point2d F(0.0, 0.0);
     if (move_up) {
-      F.y = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
+      F.y = -(ActiveCharacter().GetPhysic()->GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
     }
     const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
     if (walk_intention.IsToWalk() && IsInAir()) {
@@ -89,7 +91,8 @@ void JetPack::Refresh()
     else if (!F.IsNull() && !m_flying)
       StartFlying();
 
-    ActiveCharacter().SetExternForceXY(F);
+    ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+    m_force_index = ActiveCharacter().GetPhysic()->AddExternForceXY(F);
 
     if (!F.IsNull())
     {
@@ -125,7 +128,7 @@ void JetPack::p_Select()
 void JetPack::p_Deselect()
 {
   move_up = false;
-  ActiveCharacter().SetExternForce(0,0);
+  ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
   StopFlying();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");

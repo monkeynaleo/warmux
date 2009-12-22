@@ -23,7 +23,7 @@
 #define WEAPON_LAUNCHER_H
 
 #include "weapon.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 
 class Sprite;
 class WeaponLauncher;
@@ -69,9 +69,7 @@ class WeaponProjectile : public GameObj
     void Collision();
 
     virtual void SignalGroundCollision(const Point2d& speed_before);
-    virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       GameObj * obj,
-				       const Point2d& obj_speed);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
@@ -96,9 +94,7 @@ class WeaponBullet : public WeaponProjectile
     virtual void Refresh();
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
-    virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       GameObj * obj,
-				       const Point2d& obj_speed);
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
     virtual void SignalOutOfMap();
     void DoExplosion();
 };

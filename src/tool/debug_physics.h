@@ -16,47 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classe for object physics
+ * Box2D debugging class for Wormux
  *****************************************************************************/
 
-#ifndef OBJECT_CFG_H
-#define OBJECT_CFG_H
-//-----------------------------------------------------------------------------
-#include <string>
-//-----------------------------------------------------------------------------
+#ifndef DEBUG_PHYSICS_H
+#define DEBUG_PHYSICS_H
 
-class ObjectConfig
+
+// This class implements debug drawing callbacks that are invoked
+// inside b2World::Step.
+/*class DebugDraw : public b2DebugDraw
 {
 public:
-  // Masse of the objct
-  double m_mass;
+  void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 
-  // Wind effect factor on the object. 0 means not affected.
-  double m_wind_factor;
+  void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
 
-  // Air resistance factor. 1 = normal air resistance.
-  double m_air_resist_factor;
+  void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
 
-  // Water resistance factor. Related to air_resist_factor.
-  double m_water_resist_factor;
+  void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color);
 
-  // Define how the object is affected by gravity.
-  double m_gravity_factor;
+  void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color);
 
-  // Tell if it's a rebounding object...
-  bool  m_rebounding;
+  void DrawXForm(const b2XForm& xf);
+};*/
 
-  // Object rebound factor when the object collide with the ground.
-  double m_rebound_factor;
+#endif
 
-  // Active alignment for wind particles
-  bool m_align_particle_state;
-
-  ObjectConfig(void);
-  virtual ~ObjectConfig() { };
-
-  void LoadXml(const std::string & obj_name, 
-               const std::string & config_file);
-};
-
-#endif // OBJECT_CFG_H

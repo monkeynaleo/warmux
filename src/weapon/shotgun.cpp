@@ -34,44 +34,76 @@
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
 
-const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
-const uint   SHOTGUN_EXPLOSION_RANGE = 1;
-const double SHOTGUN_RANDOM_ANGLE    = 0.04;
-const double SHOTGUN_RANDOM_STRENGTH = 2.0;
+class ShotgunConfig : public ExplosiveWeaponConfig
+{
+  public:
+     double m_random_angle;
+     double m_random_strength;
+     int m_nbr_bullets;
+     uint m_buckshot_speed;
+     uint m_explosion_range;
+     ShotgunConfig();
+     void LoadXml(const xmlNode* elem);
+};
+
+
+ShotgunConfig::ShotgunConfig():
+m_random_angle(0.04),
+m_random_strength(2.0),
+m_nbr_bullets(5),
+m_buckshot_speed(60)
+{
+  explosion_range = 10;
+}
+
+void ShotgunConfig::LoadXml(const xmlNode* elem){
+  WeaponConfig::LoadXml(elem);
+  XmlReader::ReadUint(elem, "explosion_range", explosion_range);
+  XmlReader::ReadInt(elem, "nbr_bullets", m_nbr_bullets);
+  XmlReader::ReadDouble(elem, "random_angle", m_random_angle);
+  XmlReader::ReadDouble(elem, "random_strength", m_random_strength);
+  XmlReader::ReadUint(elem, "buckshot_speed", m_buckshot_speed);
+}
+ 
 
 class ShotgunBuckshot : public WeaponBullet
 {
   public:
-    ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
+    ShotgunBuckshot(ShotgunConfig& cfg,
                     WeaponLauncher * p_launcher);
     bool IsOverlapping(const GameObj* obj) const;
+    ShotgunConfig& cfg();
   protected:
     void RandomizeShoot(double &angle,double &strength);
 };
 
 
-ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
+ShotgunBuckshot::ShotgunBuckshot(ShotgunConfig& cfg,
                                  WeaponLauncher * p_launcher) :
   WeaponBullet("buckshot", cfg, p_launcher)
 {
-  cfg.explosion_range = SHOTGUN_EXPLOSION_RANGE;
+}
+
+ShotgunConfig& ShotgunBuckshot::cfg()
+{
+  return static_cast<ShotgunConfig&>(WeaponBullet::cfg);
 }
 
 void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 {
-  angle += M_PI * RandomSync().GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
-  strength += RandomSync().GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
+  angle += M_PI * RandomSync().GetDouble(-cfg().m_random_angle, cfg().m_random_angle);
+  strength += RandomSync().GetDouble(-cfg().m_random_strength, cfg().m_random_strength);
 }
 
 bool ShotgunBuckshot::IsOverlapping(const GameObj* obj) const
 {
   if(GetName() == obj->GetName()) return true;
-  return m_overlapping_object == obj;
+  return (GetPhysic()->IsOverlappingObject(obj->GetPhysic()));
 }
 
 //-----------------------------------------------------------------------------
 
-Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeaponConfig())
+Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ShotgunConfig())
 {
   UpdateTranslationStrings();
 
@@ -83,6 +115,12 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
 
   ReloadLauncher();
 }
+
+ShotgunConfig& Shotgun::cfg()
+{
+  return static_cast<ShotgunConfig&>(*extra_params);
+}
+
 
 void Shotgun::UpdateTranslationStrings()
 {
@@ -105,7 +143,7 @@ void Shotgun::ShootSound() const
 
 void Shotgun::IncMissedShots()
 {
-  if(missed_shots + 1 == SHOTGUN_BULLETS)
+  if(missed_shots + 1 == cfg().m_nbr_bullets)
     announce_missed_shots = true;
   WeaponLauncher::IncMissedShots();
 }
@@ -117,8 +155,8 @@ bool Shotgun::p_Shoot ()
   if (IsInUse())
     return false;
 
-  for(int i = 0; i < SHOTGUN_BULLETS; i++) {
-    projectile->Shoot(SHOTGUN_BUCKSHOT_SPEED);
+  for(int i = 0; i < cfg().m_nbr_bullets; i++) {
+    projectile->Shoot(cfg().m_buckshot_speed);
     projectile = NULL;
     ReloadLauncher();
   }

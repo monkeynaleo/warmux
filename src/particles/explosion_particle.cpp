@@ -32,8 +32,10 @@
 ExplosionParticle::ExplosionParticle() :
   Particle("explosion_particle")
 {
-  SetCollisionModel(false,false,false);
-
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   image = ParticleEngine::GetSprite(EXPLOSION_spr);
   m_initial_time_to_live = image->GetFrameCount();
   m_left_time_to_live = m_initial_time_to_live;
@@ -42,7 +44,8 @@ ExplosionParticle::ExplosionParticle() :
   image->SetCurrentFrame(0);
   image->Start();
 
-  SetSize( Point2i(1,1) );
+  // TODO physic:
+  // SetBasicShape(image->GetSize(), GetInitialMass());
 }
 
 void ExplosionParticle::Refresh()
@@ -62,6 +65,6 @@ void ExplosionParticle::Refresh()
 void ExplosionParticle::Draw()
 {
   if (m_left_time_to_live > 0) {
-    image->Draw(GetPosition() - image->GetSize() /2);
+    image->Draw(GetPhysic()->GetPosition() - image->GetSize() /2);
   }
 }
