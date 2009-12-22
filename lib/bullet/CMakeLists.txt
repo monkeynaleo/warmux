@@ -1,0 +1,9 @@
+FILE(GLOB_RECURSE LIBBULLET_SRCS *.cpp)
+
+INCLUDE_DIRECTORIES(
+	${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+ADD_LIBRARY(libbullet STATIC ${LIBBULLET_SRCS})
+#change the prefix, so we don't end up with liblibwormux
+SET_TARGET_PROPERTIES(libbullet PROPERTIES PREFIX "")
