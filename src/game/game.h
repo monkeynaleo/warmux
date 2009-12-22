@@ -33,7 +33,7 @@
 class Character;
 class ObjBox;
 class FramePerSecond;
-class PhysicalObj;
+class GameObj;
 
 class Game : public Singleton<Game>
 {
@@ -102,7 +102,7 @@ private:
 
   void RefreshActions() const;
 
-  PhysicalObj* GetMovingObject() const;
+  GameObj* GetMovingObject() const;
 
   void MessageEndOfGame() const;
 

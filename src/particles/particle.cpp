@@ -48,7 +48,7 @@
 #include "particles/explosion_particle.h"
 
 Particle::Particle(const std::string &name) :
-  PhysicalObj(name),
+  GameObj(name),
   on_top(true), // if true displayed on top of characters and weapons
   m_initial_time_to_live(20),
   m_left_time_to_live(0),
@@ -399,7 +399,7 @@ void ParticleEngine::Stop()
   }
 }
 
-PhysicalObj * ParticleEngine::IsSomethingMoving()
+GameObj * ParticleEngine::IsSomethingMoving()
 {
   std::list<Particle *>::iterator Particle_it;
   // check if particle need to be check in end of turn

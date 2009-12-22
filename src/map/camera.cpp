@@ -352,7 +352,7 @@ void Camera::Refresh(){
     AutoCrop();
 }
 
-void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
+void Camera::FollowObject(const GameObj *obj, bool follow_closely)
 {
   MSG_DEBUG( "camera.tracking", "Following object %s (%d)", obj->GetName().c_str(), follow_closely);
 
@@ -364,7 +364,7 @@ void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
   followed_object = obj;
 }
 
-void Camera::StopFollowingObj(const PhysicalObj* obj)
+void Camera::StopFollowingObj(const GameObj* obj)
 {
   if (followed_object == obj)
   {
@@ -374,7 +374,7 @@ void Camera::StopFollowingObj(const PhysicalObj* obj)
   }
 }
 
-bool Camera::IsVisible(const PhysicalObj &obj) const
+bool Camera::IsVisible(const GameObj &obj) const
 {
    return Intersect( obj.GetRect() );
 }

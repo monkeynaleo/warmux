@@ -36,7 +36,7 @@ class Obus : public WeaponProjectile
     virtual ~Obus();
 };
 
-class Plane : public PhysicalObj
+class Plane : public GameObj
 {
   private:
     static Obus * last_dropped_bomb;
