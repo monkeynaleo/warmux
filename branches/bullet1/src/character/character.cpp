@@ -112,7 +112,7 @@ static uint GetRandomAnimationTimeValue()
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
-  PhysicalObj("character"),
+  GameObj("character"),
   character_name(name),
   m_team(my_team),
   step_sound_played(true),
@@ -172,7 +172,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 }
 
 Character::Character (const Character& acharacter) :
-  PhysicalObj(acharacter),
+  GameObj(acharacter),
   character_name(acharacter.character_name),
   m_team(acharacter.m_team),
   step_sound_played(acharacter.step_sound_played),
@@ -753,7 +753,7 @@ void Character::SignalGroundCollision(const Point2d& speed_before)
 }
 
 void Character::SignalObjectCollision(const Point2d& my_speed_before,
-				      PhysicalObj * /* obj */,
+				      GameObj * /* obj */,
 				      const Point2d& /* obj_speed */)
 {
   MSG_DEBUG("character.collision", "%s collides on object with speed %f, %f (norm = %f)",

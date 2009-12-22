@@ -51,7 +51,7 @@ class FlameThrowerBullet : public WeaponBullet
   public:
     FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
                        WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
+    bool IsOverlapping(const GameObj* obj) const;
   protected:
     ParticleEngine particle;
     void ShootSound();
@@ -71,7 +71,7 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   can_drown = false;
 }
 
-bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
+bool FlameThrowerBullet::IsOverlapping(const GameObj* obj) const
 {
   if(GetName() == obj->GetName()) return true;
   return m_overlapping_object == obj;

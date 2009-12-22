@@ -54,7 +54,7 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
   return p1.Distance(p2) / PIXEL_PER_METER;
 }
 
-PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
+GameObj::GameObj (const std::string &name, const std::string &xml_config) :
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
@@ -84,7 +84,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
-PhysicalObj::~PhysicalObj ()
+GameObj::~GameObj ()
 {
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
 }
@@ -93,12 +93,12 @@ PhysicalObj::~PhysicalObj ()
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
-void PhysicalObj::SetXY(const Point2i &position)
+void GameObj::SetXY(const Point2i &position)
 {
   SetXY(Point2d(double(position.x), double(position.y)));
 }
 
-void PhysicalObj::SetXY(const Point2d &position)
+void GameObj::SetXY(const Point2d &position)
 {
   CheckOverlapping();
 
@@ -115,13 +115,13 @@ void PhysicalObj::SetXY(const Point2d &position)
     }
 }
 
-double PhysicalObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-double PhysicalObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
+double GameObj::GetXdouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
+double GameObj::GetYdouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
 
-int PhysicalObj::GetX() const { return (int)GetXdouble(); };
-int PhysicalObj::GetY() const { return (int)GetYdouble(); };
+int GameObj::GetX() const { return (int)GetXdouble(); };
+int GameObj::GetY() const { return (int)GetYdouble(); };
 
-void PhysicalObj::SetSize(const Point2i &newSize)
+void GameObj::SetSize(const Point2i &newSize)
 {
   if( newSize == Point2i(0, 0) )
           Error( "New size of (0, 0) !");
@@ -133,7 +133,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
-void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
+void GameObj::SetOverlappingObject(GameObj* obj, int timeout)
 {
   m_minimum_overlapse_time = 0;
   if(obj != NULL) {
@@ -155,7 +155,7 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
   CheckOverlapping();
 }
 
-void PhysicalObj::CheckOverlapping()
+void GameObj::CheckOverlapping()
 {
   if (m_overlapping_object == NULL)
     return;
@@ -176,7 +176,7 @@ void PhysicalObj::CheckOverlapping()
   }
 }
 
-void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
+void GameObj::SetTestRect (uint left, uint right, uint top, uint bottom)
 {
   m_test_left =  left;
   m_test_right = right;
@@ -189,7 +189,7 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   ASSERT(m_test_bottom >= 0);
 }
 
-void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
+void GameObj::SetEnergyDelta(int delta, bool /*do_report*/)
 {
   if (m_energy == -1)
     return;
@@ -202,13 +202,13 @@ void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
 }
 
 // Move to a point with collision test
-collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
+collision_t GameObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
   if (IsGhost())
     return NO_COLLISION;
 
   Point2d pos, offset;
-  PhysicalObj* collided_obj = NULL;
+  GameObj* collided_obj = NULL;
 
   collision_t collision = NO_COLLISION;
 
@@ -319,7 +319,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   return collision;
 }
 
-void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position)
+void GameObj::Collide(collision_t collision, GameObj* collided_obj, const Point2d& position)
 {
   Point2d contactPos;
   double contactAngle;
@@ -367,7 +367,7 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
   CheckRebound();
 }
 
-void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
+void GameObj::ContactPointAngleOnGround(const Point2d& oldPos,
 					    Point2d& contactPos,
 					    double& contactAngle) const
 {
@@ -393,7 +393,7 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
     }
 }
 
-void PhysicalObj::UpdatePosition ()
+void GameObj::UpdatePosition ()
 {
   // No ghost allowed here !
   if (IsGhost()) { 
@@ -427,7 +427,7 @@ void PhysicalObj::UpdatePosition ()
 
 }
 
-bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
+bool GameObj::PutOutOfGround(double direction, double max_distance)
 {
   if(IsOutsideWorld(Point2i(0, 0)))
     return false;
@@ -452,7 +452,7 @@ bool PhysicalObj::PutOutOfGround(double direction, double max_distance)
   return true;
 }
 
-bool PhysicalObj::PutOutOfGround()
+bool GameObj::PutOutOfGround()
 {
   if(IsOutsideWorld(Point2i(0, 0)))
     return false;
@@ -478,7 +478,7 @@ bool PhysicalObj::PutOutOfGround()
   return PutOutOfGround(dir);
 }
 
-void PhysicalObj::Init()
+void GameObj::Init()
 {
   if (m_alive != ALIVE)
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
@@ -487,7 +487,7 @@ void PhysicalObj::Init()
   StopMoving();
 }
 
-void PhysicalObj::Ghost ()
+void GameObj::Ghost ()
 {
   if (m_alive == GHOST)
     return;
@@ -502,7 +502,7 @@ void PhysicalObj::Ghost ()
   SignalGhostState(was_dead);
 }
 
-void PhysicalObj::Drown()
+void GameObj::Drown()
 {
   ASSERT (m_alive != DROWNED);
   MSG_DEBUG("physic.state", "%s - Drowned...", m_name.c_str());
@@ -527,7 +527,7 @@ void PhysicalObj::Drown()
   SignalDrowning();
 }
 
-void PhysicalObj::GoOutOfWater()
+void GameObj::GoOutOfWater()
 {
   ASSERT (m_alive == DROWNED);
   MSG_DEBUG("physic.state", "%s - Go out of water!...", m_name.c_str());
@@ -540,14 +540,14 @@ void PhysicalObj::GoOutOfWater()
   SignalGoingOutOfWater();
 }
 
-void PhysicalObj::SignalRebound()
+void GameObj::SignalRebound()
 {
   // TO CLEAN...
    if (!m_rebound_sound.empty())
      JukeBox::GetInstance()->Play("default", m_rebound_sound) ;
 }
 
-void PhysicalObj::SetCollisionModel(bool collides_with_ground,
+void GameObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
                                     bool collides_with_objects)
 {
@@ -567,12 +567,12 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
   }
 }
 
-void PhysicalObj::CanBeGhost(bool state) 
+void GameObj::CanBeGhost(bool state)
 {
   can_be_ghost = state;
 }
 
-void PhysicalObj::CheckRebound()
+void GameObj::CheckRebound()
 {
   // If we bounce twice in a row at the same place, stop bouncing
   // cause it's almost sure this object is stuck bouncing indefinitely
@@ -589,7 +589,7 @@ void PhysicalObj::CheckRebound()
   m_rebound_position = GetPosition();
 }
 
-bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
+bool GameObj::IsOutsideWorldXY(const Point2i& position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
@@ -604,7 +604,7 @@ bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
   return false;
 }
 
-bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
+bool GameObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if( IsOutsideWorldXY(position) )
     return GetWorld().IsOpen();
@@ -622,7 +622,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   return GetWorld().RectIsInVacuum (rect);
 }
 
-PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
+GameObj* GameObj::CollidedObjectXY(const Point2i & position) const
 {
   if( IsOutsideWorldXY(position) )
     return NULL;
@@ -637,7 +637,7 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
         // We check both objet if one overlapse the other
         if (&(*character) != this && !IsOverlapping(&(*character)) && !character->IsOverlapping(this)
         && character->GetTestRect().Intersect( rect ))
-          return (PhysicalObj*) &(*character);
+          return (GameObj*) &(*character);
       }
     }
 
@@ -645,7 +645,7 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
     {
       FOR_EACH_OBJECT(it)
       {
-        PhysicalObj * object=*it;
+        GameObj * object=*it;
         // We check both objet if one overlapse the other
         if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
             && object->m_collides_with_objects
@@ -659,7 +659,7 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
   return NULL;
 }
 
-bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
+bool GameObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
@@ -684,7 +684,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   return GetWorld().RectIsInVacuum (rect);
 }
 
-bool PhysicalObj::IsInWater () const
+bool GameObj::IsInWater () const
 {
   ASSERT (!IsGhost());
   if (!GetWorld().water.IsActive()) return false;
@@ -692,13 +692,13 @@ bool PhysicalObj::IsInWater () const
   return (int)GetWorld().water.GetHeight(x) < GetCenterY();
 }
 
-void PhysicalObj::DirectFall()
+void GameObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
     SetY(GetYdouble()+1.0);
 }
 
-bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
+bool GameObj::ContactPoint (int & contact_x, int & contact_y) const
 {
   int x1, x2, y1, y2;
 
@@ -771,7 +771,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   return false;
 }
 
-bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
+bool GameObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync)
 {
   uint bcl=0;
   uint NB_MAX_TRY = 60;
@@ -794,7 +794,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     if (on_top_of_world) {
       // Give a random position for x
       if(net_sync) {
-        MSG_DEBUG("random.get", "PhysicalObj::PutRandomly(...)");
+        MSG_DEBUG("random.get", "GameObj::PutRandomly(...)");
         position.x = RandomSync().GetLong(0, GetWorld().GetWidth() - GetWidth());
       } else {
         position.x = RandomLocal().GetLong(0, GetWorld().GetWidth() - GetWidth());
@@ -802,7 +802,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       position.y = -GetHeight()+1;
     } else {
       if(net_sync) {
-        MSG_DEBUG("random.get", "PhysicalObj::PutRandomly(...)");
+        MSG_DEBUG("random.get", "GameObj::PutRandomly(...)");
         position = RandomSync().GetPoint(GetWorld().GetSize() - GetSize() + 1);
       } else {
         position = RandomLocal().GetPoint(GetWorld().GetSize() - GetSize() + 1);

@@ -73,7 +73,7 @@ void WeaponBullet::SignalOutOfMap()
 }
 
 void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
-					 PhysicalObj * obj,
+					 GameObj * obj,
 					 const Point2d& /*obj_speed*/)
 {
 #if 1
@@ -115,7 +115,7 @@ void WeaponBullet::DoExplosion()
 WeaponProjectile::WeaponProjectile(const std::string &name,
                                     ExplosiveWeaponConfig& p_cfg,
                                     WeaponLauncher * p_launcher)
-  : PhysicalObj(name), cfg(p_cfg)
+  : GameObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
   SetCollisionModel(true, true, true);
@@ -271,12 +271,12 @@ bool WeaponProjectile::IsImmobile() const
 {
   if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
     return false;
-  return PhysicalObj::IsImmobile();
+  return GameObj::IsImmobile();
 }
 
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(const Point2d& /* my_speed_before */,
-					     PhysicalObj * obj,
+					     GameObj * obj,
 					     const Point2d& /* obj_speed_before */)
 {
   ASSERT(obj != NULL);
@@ -310,7 +310,7 @@ void WeaponProjectile::Collision()
 void WeaponProjectile::SignalDrowning()
 {
   MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  PhysicalObj::SignalDrowning();
+  GameObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
 
@@ -322,7 +322,7 @@ void WeaponProjectile::SignalDrowning()
 void WeaponProjectile::SignalGoingOutOfWater()
 {
   MSG_DEBUG("weapon.projectile", "SignalDrowning \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
-  PhysicalObj::SignalGoingOutOfWater();
+  GameObj::SignalGoingOutOfWater();
   if (launcher != NULL && !launcher->ignore_going_out_of_water_signal)
     launcher->SignalProjectileGoingOutOfWater();
 }

@@ -30,7 +30,7 @@ class Character;
 class Action;
 //-----------------------------------------------------------------------------
 
-class Medkit : public ObjBox//public PhysicalObj
+class Medkit : public ObjBox//public GameObj
 {
   private:
     //static bool enable;

@@ -270,7 +270,7 @@ void Physics::StopMoving()
   if(!IsMoving()) return;
 
   if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
-  // Always called by PhysicalObj::StopMoving
+  // Always called by GameObj::StopMoving
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;
   m_pos_y.x1 = 0 ;
