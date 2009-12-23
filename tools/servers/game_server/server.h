@@ -41,6 +41,7 @@ private:
   bool game_started;
   std::list<DistantComputer*> cpulist;
 
+  void SendAdminMessage(const std::string& message);
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
   void StartGame();
   void StopGame();

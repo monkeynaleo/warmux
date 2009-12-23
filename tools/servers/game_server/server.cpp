@@ -42,8 +42,13 @@ const std::string& NetworkGame::GetPassword() const
 void NetworkGame::AddCpu(DistantComputer* cpu)
 {
   cpulist.push_back(cpu);
-  DPRINT(INFO, "[Game %s] New client connected: %s - total: %zd", game_name.c_str(),
-	 cpu->ToString().c_str(), cpulist.size());
+
+  std::string msg = Format("[Game %s] New client connected: %s - total: %zd",
+			   game_name.c_str(), cpu->ToString().c_str(), cpulist.size());
+
+  DPRINT(INFO, "%s", msg.c_str());
+
+  SendAdminMessage(msg);
 }
 
 std::list<DistantComputer*>& NetworkGame::GetCpus()
@@ -112,6 +117,14 @@ void NetworkGame::ElectGameMaster()
 
   Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
   SendActionToOne(a, host);
+}
+
+void NetworkGame::SendAdminMessage(const std::string& message)
+{
+  Action a(Action::ACTION_CHAT_MESSAGE);
+  a.Push(std::string("***"));
+  a.Push(message);
+  SendActionToAll(a);
 }
 
 // Send Messages
