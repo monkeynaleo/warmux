@@ -320,7 +320,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   if (w == cl_server_address || w == cl_port_number || w == cl_server_pwd)
     cl_net_games_lst->Deselect();
-	
+
   //Hack to handle double click
   if (w == cl_net_games_lst)
   {
@@ -328,7 +328,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     {
       if (cl_net_games_lst->GetSelectedItem() == -1) {
         cl_net_games_lst->Select(cl_net_games_lst->MouseIsOnWhichItem(mousePosition));
-      } 
+      }
       signal_ok();
     }
     else
@@ -383,8 +383,12 @@ void NetworkConnectionMenu::__RefreshList()
   }
   SDL_SemPost(net_info.lock);
 
-  if (cl_net_games_lst->Size() != 0)
+  if (cl_net_games_lst->Size() != 0) {
+    if (current > cl_net_games_lst->Size()-1) {
+      current = 0;
+    }
     cl_net_games_lst->Select( current );
+  }
 
   cl_net_games_lst->NeedRedrawing();
 }
