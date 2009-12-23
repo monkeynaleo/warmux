@@ -53,43 +53,6 @@
       <blast_force>500</blast_force>
       <blast_range>50</blast_range>
     </explosion>
-    <probability>
-      <air_attack ammo="1">0.9</air_attack>
-      <anvil_launcher ammo="1">0.7</anvil_launcher>
-      <airhammer ammo="2">1</airhammer>
-      <automatic_bazooka ammo="2">0.8</automatic_bazooka>
-      <baseball ammo="2">1</baseball>
-      <blowtorch ammo="2">1</blowtorch>
-      <bounce_ball ammo="1">1</bounce_ball>
-      <construct ammo="3">1</construct>
-      <cluster_bomb ammo="1">1</cluster_bomb>
-      <cluzooka ammo="2">0.9</cluzooka>
-      <disco_grenade ammo="1">0.7</disco_grenade>
-      <dynamite ammo="2">0.9</dynamite>
-      <gnulauncher ammo="1">0.9</gnulauncher>
-      <flamethrower ammo="1">1</flamethrower>
-      <footbomb ammo="1">0.7</footbomb>
-      <grapple ammo="2">1</grapple>
-      <jetpack ammo="1">1</jetpack>
-      <lowgrav ammo="1">1</lowgrav>
-      <m16 ammo="1">0.9</m16>
-      <parachute ammo="2">1</parachute>
-      <polecatlauncher ammo="1">0.8</polecatlauncher>
-      <riot_bomb ammo="1">1</riot_bomb>
-      <shotgun ammo="1">1</shotgun>
-      <snipe_rifle ammo="1">1</snipe_rifle>
-      <teleportation ammo="2">1</teleportation>
-      <tux ammo="1">0.8</tux>
-
-      <bazooka ammo="1">0.0</bazooka>
-      <gun ammo="1">0.0</gun>
-      <grenade ammo="1">0.0</grenade>
-      <minelauncher ammo="1">0.0</minelauncher>
-      <slap ammo="1">0.0</slap>
-      <suicide ammo="1">0.0</suicide>
-      <skip_turn ammo="1">0.0</skip_turn>
-      <syringe ammo="1">0.0</syringe>
-    </probability>
     <life_points>20</life_points>
   </bonus_box>
 
@@ -109,6 +72,8 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>2500</blast_force>
+      <drop_probability>0.9</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </air_attack>
 
     <anvil_launcher>
@@ -117,6 +82,8 @@
       <damage>200</damage>
       <mass>1000</mass>
       <speed>0</speed>
+      <drop_probability>0.7</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </anvil_launcher>
 
     <airhammer>
@@ -126,6 +93,8 @@
       <unit_per_ammo>20</unit_per_ammo>
       <damage>2</damage>
       <range>30</range>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </airhammer>
 
     <automatic_bazooka>
@@ -144,6 +113,8 @@
       <fuel_time>10</fuel_time>
       <rocket_force>2500</rocket_force>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>0.8</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </automatic_bazooka>
 
     <baseball>
@@ -154,6 +125,8 @@
       <strength>2500</strength>
       <range>45</range>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </baseball>
 
     <bazooka>
@@ -166,6 +139,8 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>2500</blast_force>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </bazooka>
 
     <cluzooka>
@@ -182,6 +157,8 @@
       <allow_change_timeout>1</allow_change_timeout>
       <nb_fragments>5</nb_fragments>
       <nb_angle_dispersion>75</nb_angle_dispersion>
+      <drop_probability>0.9</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </cluzooka>
 
     <blowtorch>
@@ -190,6 +167,8 @@
       <max_angle>45</max_angle>
       <unit_per_ammo>20</unit_per_ammo>
       <range>20</range>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </blowtorch>
 
     <bounce_ball>
@@ -204,10 +183,14 @@
       <blast_force>8</blast_force>
       <timeout>10</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </bounce_ball>
 
     <construct>
       <nb_ammo>3</nb_ammo>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>3</ammo_per_drop>
     </construct>
 
     <cluster_bomb>
@@ -223,6 +206,8 @@
       <timeout>3</timeout>
       <nb_fragments>5</nb_fragments>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </cluster_bomb>
 
     <disco_grenade>
@@ -238,6 +223,8 @@
       <blast_force>1500</blast_force>
       <timeout>5</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>0.7</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </disco_grenade>
 
     <footbomb>
@@ -257,6 +244,8 @@
       <nb_min_speed>15</nb_min_speed>
       <nb_max_speed>35</nb_max_speed>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>0.7</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </footbomb>
 
     <dynamite>
@@ -268,6 +257,8 @@
       <blast_range>100</blast_range>
       <timeout>3</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>0.9</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </dynamite>
 
     <flamethrower>
@@ -278,6 +269,8 @@
       <damage>2</damage>
       <explosion_range>3</explosion_range>
       <particle_range>16</particle_range>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </flamethrower>
 
     <gnulauncher>
@@ -293,6 +286,8 @@
       <timeout>6</timeout>
       <allow_change_timeout>1</allow_change_timeout>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>0.9</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </gnulauncher>
 
     <grapple>
@@ -303,6 +298,8 @@
       <max_rope_length>500</max_rope_length>
       <automatic_growing_speed>12</automatic_growing_speed>
       <push_force>15</push_force>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </grapple>
 
     <grenade>
@@ -317,6 +314,8 @@
       <blast_force>1000</blast_force>
       <timeout>3</timeout>
       <allow_change_timeout>1</allow_change_timeout>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </grenade>
 
     <gun>
@@ -329,17 +328,23 @@
       <particle_range>5</particle_range>
       <blast_range>2</blast_range>
       <blast_force>5</blast_force>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </gun>
 
     <jetpack>
       <nb_ammo>3</nb_ammo>
       <unit_per_ammo>30</unit_per_ammo>
       <change_weapon>1</change_weapon>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </jetpack>
 
     <lowgrav>
       <nb_ammo>3</nb_ammo>
       <change_weapon>1</change_weapon>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </lowgrav>
 
     <m16> <!-- Aka submachine gun -->
@@ -350,6 +355,8 @@
       <damage>5</damage>
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
+      <drop_probability>0.9</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </m16>
 
     <minelauncher>
@@ -363,6 +370,8 @@
       <speed_detection>2</speed_detection>
       <timeout>1</timeout>
       <escape_time>2</escape_time>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </minelauncher>
 
     <parachute>
@@ -371,6 +380,8 @@
       <wind_factor>400.0</wind_factor>
       <air_resist_factor>40.0</air_resist_factor>
       <force_side_displacement>2000.0</force_side_displacement>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </parachute>
 
     <polecatlauncher>
@@ -386,6 +397,8 @@
       <timeout>6</timeout>
       <allow_change_timeout>1</allow_change_timeout>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>0.8</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </polecatlauncher>
 
     <riot_bomb>
@@ -398,6 +411,8 @@
       <particle_range>25</particle_range>
       <blast_range>0</blast_range>
       <blast_force>0</blast_force>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </riot_bomb>
 
     <shotgun> <!-- shotgun blues -->
@@ -406,10 +421,14 @@
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
       <damage>10</damage> <!-- per bullet! -->
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </shotgun>
 
     <skip_turn>
       <nb_ammo>-1</nb_ammo>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </skip_turn>
 
     <slap>
@@ -421,6 +440,8 @@
       <strength>300</strength>
       <display_crosshair>0</display_crosshair>
       <speed_on_hit>1000</speed_on_hit>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </slap>
 
     <snipe_rifle>
@@ -433,6 +454,8 @@
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </snipe_rifle>
 
     <suicide>
@@ -442,6 +465,8 @@
       <particle_range>110</particle_range>
       <blast_force>3000</blast_force>
       <blast_range>100</blast_range>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </suicide>
 
     <syringe>
@@ -452,10 +477,14 @@
       <turns>10</turns>
       <range>45</range>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>0.0</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </syringe>
 
     <teleportation>
       <nb_ammo>2</nb_ammo>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>2</ammo_per_drop>
     </teleportation>
 
     <tux>
@@ -471,6 +500,8 @@
       <speed>600</speed>
       <timeout>20</timeout>
       <display_crosshair>0</display_crosshair>
+      <drop_probability>0.8</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
     </tux>
 
   </weapons>

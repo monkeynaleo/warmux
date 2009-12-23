@@ -133,9 +133,10 @@ protected:
   int m_available_after_turn; // -1 means NEVER
   int m_initial_nb_ammo;
   int m_initial_nb_unit_per_ammo;
+  int ammo_per_drop;
+  double drop_probability;
   bool use_unit_on_first_shoot;
   bool can_be_used_on_closed_map;
-
   SoundSample loading_sound;
 
 public:
@@ -202,6 +203,8 @@ public:
   int ReadInitialNbAmmo() const { return m_initial_nb_ammo; };
   void WriteInitialNbAmmo(int nb) { m_initial_nb_ammo = nb; };
   int ReadInitialNbUnit() const { return m_initial_nb_unit_per_ammo; };
+  int GetAmmoPerDrop() const { return ammo_per_drop; }
+  double GetDropProbability() const { return drop_probability; }
 
   bool CanBeUsedOnClosedMap() const { return can_be_used_on_closed_map; };
   bool UseCrossHair() const { return min_angle != max_angle; };
