@@ -136,7 +136,7 @@ void ObjectsList::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
+void ObjectsList::RemoveOverlappedObjectReference(const GameObj * obj)
 {
   for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
 
@@ -154,7 +154,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
   }
 }
 
-void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
+void ObjectsList::AddOverlappedObject(GameObj * obj)
 {
   MSG_DEBUG("lst_objects", "adding overlapsed object \"%s\" %p",
 	    obj->GetName().c_str(), obj);
@@ -162,7 +162,7 @@ void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
   overlapped_objects.push_back(obj);
 }
 
-void ObjectsList::RemoveOverlappedObject(PhysicalObj * obj)
+void ObjectsList::RemoveOverlappedObject(GameObj * obj)
 {
   MSG_DEBUG("lst_objects", "removing overlapsed object \"%s\" %p",
 	    obj->GetName().c_str(), obj);
