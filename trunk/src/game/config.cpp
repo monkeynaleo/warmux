@@ -34,6 +34,7 @@
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#include "game/game.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/app.h"
@@ -295,7 +296,9 @@ void Config::SetLanguage(const std::string language)
   InitI18N(TranslateDirectory(locale_dir), language);
 
   Font::ReleaseInstances();
-  WeaponsList::UpdateTranslation();
+  if (Game::IsRunning()) {
+    Game::GetInstance()->UpdateTranslation();
+  }
 }
 
 /*

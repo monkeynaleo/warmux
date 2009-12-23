@@ -87,7 +87,8 @@ double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
 
 AIStrategy * SkipTurnIdea::CreateStrategy()
 {
-  Weapon * weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_SKIP_TURN);
+  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
+  Weapon * weapon = weapons_list->GetWeapon(Weapon::WEAPON_SKIP_TURN);
   if (!CanUseWeapon(weapon))
     return NULL;
   return new SkipTurnStrategy();
@@ -195,7 +196,8 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   if (!CanUseCharacter(shooter))
     return NULL;
 
-  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(WeaponsList::GetInstance()->GetWeapon(weapon_type));
+  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
+  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(weapons_list->GetWeapon(weapon_type));
 
   if (!CanUseWeapon(weapon))
     return NULL;
@@ -280,7 +282,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
     return NULL;
 
   const Weapon::Weapon_type weapon_type = Weapon::WEAPON_BAZOOKA;
-  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(WeaponsList::GetInstance()->GetWeapon(weapon_type));
+  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
+  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(weapons_list->GetWeapon(weapon_type));
 
   if (!CanUseWeapon(weapon))
     return NULL;

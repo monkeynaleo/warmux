@@ -267,7 +267,7 @@ void Team::PrepareTurn()
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Updating weapon ammos (some weapons are not available from the beginning)
-  std::list<Weapon *> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
+  std::list<Weapon *> l_weapons_list = weapons_list->GetList() ;
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
   for (; itw != end ; ++itw) {
@@ -282,7 +282,7 @@ void Team::PrepareTurn()
   if (AccessWeapon().EnoughAmmo())
     AccessWeapon().Select();
   else { // try to find another weapon !!
-    active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BAZOOKA);
+    active_weapon = weapons_list->GetWeapon(Weapon::WEAPON_BAZOOKA);
     AccessWeapon().Select();
   }
 
@@ -303,7 +303,7 @@ void Team::SetWeapon (Weapon::Weapon_type type)
 
   ASSERT (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
   AccessWeapon().Deselect();
-  active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
+  active_weapon = weapons_list->GetWeapon(type);
   AccessWeapon().Select();
 }
 
@@ -362,14 +362,15 @@ Character* Team::FindByIndex(uint index)
   return &(*it);
 }
 
-void Team::LoadGamingData()
+void Team::LoadGamingData(WeaponsList * weapons)
 {
+  weapons_list = weapons;
   current_turn = 0;
 
   // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
-  std::list<Weapon *> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
+  std::list<Weapon *> l_weapons_list = weapons_list->GetList() ;
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
 
@@ -394,7 +395,7 @@ void Team::LoadGamingData()
     //m_nb_ammos[ Weapon::WEAPON_GRAPPLE ] = 0;
   }
 
-  active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
+  active_weapon = weapons_list->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
   abandoned = false;
   LoadCharacters();
@@ -408,6 +409,7 @@ void Team::UnloadGamingData()
     delete ai;
     ai = NULL;
   }
+  weapons_list = NULL;
 }
 
 void Team::SetNbCharacters(uint howmany)

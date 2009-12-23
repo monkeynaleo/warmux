@@ -34,6 +34,7 @@ class Character;
 class ObjBox;
 class FramePerSecond;
 class PhysicalObj;
+class WeaponsList;
 
 class Game : public Singleton<Game>
 {
@@ -84,6 +85,7 @@ private:
   static uint         last_unique_id;
   uint                m_current_turn;
   Text                waiting_for_network_text;
+  WeaponsList *       weapons_list;
 
   void Draw();        // Draw to screen
 
@@ -134,6 +136,8 @@ public:
   static void ResetUniqueIds();
   static bool IsRunning();
   uint GetCurrentTurn();
+  WeaponsList * GetWeaponsList() { return weapons_list; }
+  void UpdateTranslation();
 
   Chat                chatsession;
 
