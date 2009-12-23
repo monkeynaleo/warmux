@@ -92,7 +92,6 @@ private:
   void InitGameData_NetGameMaster();
   void EndInitGameData_NetGameMaster();
   void EndInitGameData_NetClient();
-  void InitFields();
   void InitMap();
   void InitTeams();
   void InitSounds();

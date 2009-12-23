@@ -185,17 +185,6 @@ void Game::InitEverything()
     }
   }
 
-  InitFields();
-
-  // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
-  Time::GetInstance()->Reset();
-
-  std::cout << std::endl;
-  std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
-}
-
-void Game::InitFields()
-{
   ResetUniqueIds();
 
   chatsession.Clear();
@@ -211,8 +200,13 @@ void Game::InitFields()
     (*character).ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
-}
 
+  // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
+  Time::GetInstance()->Reset();
+
+  std::cout << std::endl;
+  std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
+}
 
 void Game::InitGameData_NetGameMaster()
 {
