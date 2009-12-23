@@ -32,8 +32,6 @@
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
 
-static const int MENU_DELAY = 100;  // 10 fps, much sufficient for menu
-
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
   selected_widget(NULL)
