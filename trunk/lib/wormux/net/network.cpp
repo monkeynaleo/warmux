@@ -303,6 +303,27 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
 #endif
 }
 
+std::string WNet::IPtoDNS(IPaddress *ip)
+{
+  std::string ip_address;
+
+  const char* dns_addr = SDLNet_ResolveIP(ip);
+  if (dns_addr) {
+    ip_address = std::string(dns_addr);
+  } else {
+    // We can't resolve the hostname, so just show the ip address
+    unsigned char* str_ip = (unsigned char*)ip.host;
+    char formated_ip[16];
+    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
+	     (int)str_ip[1],
+	     (int)str_ip[2],
+	     (int)str_ip[3]);
+    ip_address = std::string(formated_ip);
+  }
+
+  return ip_address;
+}
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
@@ -404,4 +425,3 @@ bool WNet::Server_HandShake(WSocket& client_socket,
   }
   return ret;
 }
-

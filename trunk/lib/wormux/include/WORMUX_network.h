@@ -65,6 +65,8 @@ public:
   static void Quit();
 
   static connection_state_t CheckHost(const std::string &host, int prt);
+  static std::string IPtoDNS(IPaddress *ip_address);
+
   static connection_state_t GetError();
 
   // A batch consists in a msg id, a size, and the batch itself.
