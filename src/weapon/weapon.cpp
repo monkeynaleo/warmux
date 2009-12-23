@@ -400,7 +400,7 @@ void Weapon::PosXY (int &x, int &y) const
   else
   if (origin == weapon_origin_OVER)
   {
-    x = ActiveCharacter().GetCenterX() - m_image->GetWidth() / 2 + position.x;
+    x = ActiveCharacter().GetX() - m_image->GetWidth() / 2 + position.x;
     y = ActiveCharacter().GetY()       - m_image->GetHeight()    + position.y;
   }
   else
@@ -680,7 +680,7 @@ void Weapon::DrawAmmoUnits() const
     ss << ActiveTeam().ReadNbUnits();
 
     DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-                   Point2i( ActiveCharacter().GetCenterX(),
+                   Point2i( ActiveCharacter().GetX(),
                             ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
                    - Camera::GetInstance()->GetPosition(),
                    ss.str());

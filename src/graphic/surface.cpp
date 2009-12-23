@@ -592,6 +592,12 @@ int Surface::TexturedPolygon(std::list<Point2i> polygon, const Surface * texture
   return result;
 }
 
+int Surface::PointColor(const Point2d &point,const Color &color)
+{
+  LineColor(point.x-1,point.x+1 ,point.y ,point.y ,color);
+  return LineColor(point.x,point.x ,point.y+1 ,point.y-1 ,color);
+}
+
 /**
  *
  * @param color

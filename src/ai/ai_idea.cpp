@@ -119,13 +119,13 @@ static GameObj* GetObjectAt(const Point2i & pos)
   ObjectsList::iterator it = objects->begin();
   while(it != objects->end()) {
     GameObj* object = *it;
-    if (object->GetTestRect().Contains(pos) && !object->IsDead())
+    if (object->GetRectI().Contains(pos) && !object->IsDead())
       return object;
     it++;
   }
   FOR_ALL_CHARACTERS(team, character) {
-    if (character->GetTestRect().Contains(pos) && !character->IsDead())
-      return &(*character);
+    if ((*character)->GetRectI().Contains(pos) && !(*character)->IsDead())
+      return (*character);
   }
   return NULL;
 }
@@ -206,8 +206,8 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
   // TODO: Please find an alternative to solve this tempory solution
-  Point2d departure = shooter.GetCenter();
-  Point2d arrival = enemy.GetCenter();
+  Point2d departure = shooter.GetPhysic()->GetPosition();
+  Point2d arrival = enemy.GetPhysic()->GetPosition();
 
   if (departure.Distance(arrival) > max_distance)
     return NULL;
@@ -292,8 +292,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   double mass = weapon->GetMass();
   Point2d a(Wind::GetRef().GetStrength() * wind_factor, g * mass);
   a *= 2; // Work around bug in physics engine.
-  const Point2d pos_0 = shooter.GetCenter();
-  const Point2d pos_t = enemy.GetCenter();
+  const Point2d pos_0 = shooter.GetPhysic()->GetPosition();
+  const Point2d pos_t = enemy.GetPhysic()->GetPosition();
   double t = duration;
   // Calculate v_0 using "pos_t = 1/2 * a_x * t*t + v_0*t + pos_0":
   Point2d v_0 = (pos_t - pos_0)/t - 0.5*a * t;
@@ -316,7 +316,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
     // Shooting at ground is better then doing nothing, so give it a low positive rating.
     rating = 0.1;
     // Shooter should not be to close to explosion:
-    if (explosion_pos.Distance(shooter.GetCenter()) < (double)weapon->cfg().blast_range)
+    if (explosion_pos.Distance(shooter.GetPhysic()->GetPosition()) < (double)weapon->cfg().blast_range)
       return NULL;
   } else if (aim == &enemy) {
     // Trough collision damage the actual damage is higher then 50.

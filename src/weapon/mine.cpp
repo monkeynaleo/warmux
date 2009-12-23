@@ -69,7 +69,7 @@ void ObjMine::FakeExplosion()
   MSG_DEBUG("mine", "Fake explosion");
 
   JukeBox::GetInstance()->Play("default", "weapon/mine_fake");
-  ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
+  ParticleEngine::AddNow(GetPhysic()->GetPosition(), 5, particle_SMOKE, true);
 
   if ( animation )
   {
@@ -80,7 +80,10 @@ void ObjMine::FakeExplosion()
   }
   if (launcher != NULL) launcher->SignalProjectileTimeout();
   // Mine fall into the ground after a fake explosion
-  SetCollisionModel(true, false, false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
 }
 
 void ObjMine::StartTimeout()
@@ -121,10 +124,10 @@ void ObjMine::Detection()
   double detection_range = static_cast<MineConfig&>(cfg).detection_range;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (MeterDistance(GetCenter(), character->GetCenter()) < detection_range &&
+    if (GetPhysic()->GetPosition().Distance((*character)->GetPhysic()->GetPosition()) < detection_range &&
         !animation) {
       std::string txt = Format(_("%s is next to a mine!"),
-                               character->GetName().c_str());
+                               (*character)->GetName().c_str());
       GameMessages::GetInstance()->Add(txt);
       StartTimeout();
       return;
@@ -135,9 +138,9 @@ void ObjMine::Detection()
   double norm, angle;
   FOR_EACH_OBJECT(obj) {
     if ((*obj) != this && !animation && GetName() != (*obj)->GetName() &&
-        MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
+        GetPhysic()->GetPosition().Distance((*obj)->GetPhysic()->GetPosition()) < detection_range) {
 
-      (*obj)->GetSpeed(norm, angle);
+      (*obj)->GetPhysic()->GetSpeed(norm, angle);
       if (norm < speed_detection && norm > 0.0) {
         MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection);
         StartTimeout();
@@ -237,8 +240,8 @@ bool Mine::p_Shoot()
 
 void Mine::Add(int x, int y)
 {
-  projectile->SetXY(Point2i(x, y));
-  projectile->SetOverlappingObject(&ActiveCharacter());
+  projectile->SetPosition(Point2i(x, y));
+  projectile->GetPhysic()->AddOverlappingObject(ActiveCharacter().GetPhysic());
 
   // add the character speed
   if(ActiveCharacter().GetDirection() == 1)

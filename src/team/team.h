@@ -43,8 +43,8 @@ class Team
   /**********************************************/
 
   public:
-    typedef std::list<Character>::iterator iterator;
-    typedef std::list<Character>::const_iterator const_iterator;
+    typedef std::list<Character*>::iterator iterator;
+    typedef std::list<Character*>::const_iterator const_iterator;
 
     std::vector<int> m_nb_ammos;
     std::vector<int> m_nb_units;
@@ -65,7 +65,7 @@ class Team
     std::string m_name;
     std::string m_player_name;
     std::string m_sound_profile;
-    std::list<Character> characters;
+    std::list<Character*> characters;
     iterator active_character;
     Weapon *active_weapon;
     uint nb_characters;
@@ -85,6 +85,7 @@ class Team
     WeaponsList * weapons_list;
   public:
     Team (const std::string &teams_dir, const std::string &id);
+    virtual ~Team();
 
     void LoadGamingData(WeaponsList * weapons);
     void UnloadGamingData();

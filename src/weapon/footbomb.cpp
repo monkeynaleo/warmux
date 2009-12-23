@@ -81,28 +81,27 @@ FootBomb::FootBomb(FootBombConfig& cfg,
 void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int recursions)
 {
   m_recursions = recursions;
-  SetCollisionModel(true, true, false ); // a bit hackish...
+
+  // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
 
   begin_time = Time::GetInstance()->Read(); // this resets timeout
   Camera::GetInstance()->FollowObject(this);
-  ResetConstants();
-  SetXY( pos );
-  SetSpeed(strength, angle);
+  // TODO physic
+  //ResetConstants();
+  SetPosition( pos );
+  GetPhysic()->SetSpeed(strength, angle);
 }
 
 void FootBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-//  image->SetRotation_rad(GetSpeedAngle());
-  if ( IsMoving() )
-  {
-    uint time = Time::GetInstance()->Read();
-    float flying_time = ( float )( time - begin_time );
-    const float rotations_per_second = 4;
-    image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
-  }
+  image->SetRotation_rad(-GetPhysic()->GetAngle());
 }
 
 void FootBomb::SignalOutOfMap()
@@ -122,7 +121,7 @@ void FootBomb::DoExplosion()
   FootBomb * cluster;
 
   double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * M_PI / 180;
-  Point2i pos = GetPosition();
+  Point2i pos = GetPhysic()->GetPosition();
   for (uint i = 0; i < fragments; ++i )
   {
     double angle = -M_PI / 2; // this angle is "upwards" here
