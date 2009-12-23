@@ -41,7 +41,7 @@ const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 1;
 
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
-  PhysicalObj("wind", xml_file)
+  GameObj("wind", xml_file)
 {
   SetCollisionModel(false, false, false);
 

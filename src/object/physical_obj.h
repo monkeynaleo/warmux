@@ -46,10 +46,10 @@ extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
-class PhysicalObj : public Physics
+class GameObj : public Physics
 {
   /* If you need this, implement it (correctly)*/
-  const PhysicalObj& operator=(const PhysicalObj&);
+  const GameObj& operator=(const GameObj&);
   /*********************************************/
 
 private:
@@ -68,7 +68,7 @@ private:
   bool can_be_ghost;
 
 protected:
-  PhysicalObj* m_overlapping_object;
+  GameObj* m_overlapping_object;
   uint m_minimum_overlapse_time;
   bool m_ignore_movements;
   bool m_is_character;
@@ -87,12 +87,12 @@ protected:
   bool m_allow_negative_y;
 
 public:
-  PhysicalObj (const std::string &name, const std::string &xml_config="");
+  GameObj (const std::string &name, const std::string &xml_config="");
   /* Note : The copy constructor is not implemented (and this is not a bug)
    * because we can copy directly the pointer m_overlapping_object whereas this
    * object does not own it.
    * FIXME what happen if the object is deleted meanwhile ???*/
-  virtual ~PhysicalObj ();
+  virtual ~GameObj ();
 
   //-------- Set position and size -------
 
@@ -156,16 +156,16 @@ public:
   void SetCollisionModel(bool collides_with_ground,
                          bool collides_with_characters,
                          bool collides_with_objects);
-  void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
-  const PhysicalObj* GetOverlappingObject() const { return m_overlapping_object; };
-  virtual bool IsOverlapping(const PhysicalObj* obj) const { return m_overlapping_object == obj; };
+  void SetOverlappingObject(GameObj* obj, int timeout = 0);
+  const GameObj* GetOverlappingObject() const { return m_overlapping_object; };
+  virtual bool IsOverlapping(const GameObj* obj) const { return m_overlapping_object == obj; };
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   // Relative to current position
   bool IsInVacuum(const Point2i &offset, bool check_objects = true) const { return IsInVacuumXY(GetPosition() + offset, check_objects); };
-  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
+  GameObj* CollidedObjectXY(const Point2i & position) const;
   // Relative to current position
-  PhysicalObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
+  GameObj* CollidedObject(const Point2i & offset = Point2i(0,0)) const { return CollidedObjectXY(GetPosition() + offset); };
   bool FootsInVacuumXY(const Point2i & position) const;
   bool FootsInVacuum() const { return FootsInVacuumXY(GetPosition()); };
 
@@ -199,7 +199,7 @@ public:
   bool IsFire() const { return m_is_fire; }
 
   // Are the two object in contact ? (uses test rectangles)
-  bool Overlapse(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
+  bool Overlapse(const GameObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
 
   // Do the point p touch the object ?
   bool Contain(const Point2i &p) const { return  GetTestRect().Contains( p ); };
@@ -212,7 +212,7 @@ protected:
   virtual void SignalRebound();
   virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-				     PhysicalObj * /* collided/ing object */,
+				     GameObj * /* collided/ing object */,
 				     const Point2d& /* object speed_before */) { };
   virtual void SignalOutOfMap() { };
 
@@ -227,7 +227,7 @@ private:
   // Directly after a rebound, if we are stuck in a wall, we stop moving
   void CheckRebound();
 
-  void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
+  void Collide(collision_t collision, GameObj* collided_obj, const Point2d& position);
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
 				 Point2d& contactPos,

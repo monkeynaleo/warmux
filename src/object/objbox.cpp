@@ -50,7 +50,7 @@
 const uint SPEED = 5; // meter / seconde
 
 ObjBox::ObjBox(const std::string &name)
-  : PhysicalObj(name) {
+  : GameObj(name) {
   m_allow_negative_y = true;
 
   parachute = true;
@@ -87,7 +87,7 @@ void ObjBox::SignalGroundCollision(const Point2d& /*my_speed_before*/)
 }
 
 void ObjBox::SignalObjectCollision(const Point2d& my_speed_before,
-				   PhysicalObj * obj,
+				   GameObj * obj,
 				   const Point2d& /*obj_speed_before*/)
 {
   // The box has (probably) landed on an object (a barrel for instance)
