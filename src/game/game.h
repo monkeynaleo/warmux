@@ -97,6 +97,7 @@ private:
   void InitSounds();
   void InitData();
   void InitInterface();
+  void WaitForOtherPlayers();
 
   void UnloadDatas(bool game_finished) const;
 
