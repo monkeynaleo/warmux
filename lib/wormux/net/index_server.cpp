@@ -386,24 +386,11 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     if (!r)
       goto out;
 
-    const char* dns_addr = SDLNet_ResolveIP(&ip);
+    game_server_info.dns_address = WNet::IPtoDNS(&ip);
+
     char port[10];
     sprintf(port, "%d", ip.port);
     game_server_info.port = std::string(port);
-
-    // We can't resolve the hostname, so just show the ip address
-    unsigned char* str_ip = (unsigned char*)&ip.host;
-    char formated_ip[16];
-    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-	     (int)str_ip[1],
-	     (int)str_ip[2],
-	     (int)str_ip[3]);
-    game_server_info.ip_address = std::string(formated_ip);
-
-    if (dns_addr != NULL)
-      game_server_info.dns_address = std::string(dns_addr);
-    else
-      game_server_info.dns_address = game_server_info.ip_address;
 
     MSG_DEBUG("index_server","ip: %s, port: %s, dns: %s, name: %s, pwd=%s\n",
 	      game_server_info.ip_address.c_str(),
