@@ -388,6 +388,14 @@ std::list<GameServerInfo> IndexServer::GetHostList()
 
     game_server_info.dns_address = WNet::IPtoDNS(&ip);
 
+    unsigned char* str_ip = (unsigned char*)&ip.host;
+    char formated_ip[16];
+    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
+	     (int)str_ip[1],
+	     (int)str_ip[2],
+	     (int)str_ip[3]);
+    game_server_info.ip_address = std::string(formated_ip);
+
     char port[10];
     sprintf(port, "%d", ip.port);
     game_server_info.port = std::string(port);

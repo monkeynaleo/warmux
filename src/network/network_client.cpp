@@ -194,3 +194,12 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
  err_no_socket:
   return r;
 }
+
+std::string NetworkClient::GetServerAddress() const
+{
+  std::list<WSocket*>& sockets = socket_set->GetSockets();
+  if (sockets.size() != 1)
+    return "??";
+
+  return (*sockets.begin())->GetAddress();
+}
