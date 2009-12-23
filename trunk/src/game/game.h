@@ -96,6 +96,7 @@ private:
   void InitTeams();
   void InitSounds();
   void InitData();
+  void InitInterface();
 
   void UnloadDatas(bool game_finished) const;
 
