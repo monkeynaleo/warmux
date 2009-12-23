@@ -155,16 +155,7 @@ void Game::InitEverything()
   loading_sreen.StartLoading(4, "sound_icon", _("Sounds"));
   InitSounds();
 
-  CharacterCursor::GetInstance()->Reset();
-  Keyboard::GetInstance()->Reset();
-
-  Interface::GetInstance()->Reset();
-  GameMessages::GetInstance()->Reset();
-
-  ParticleEngine::Load();
-
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-  Mouse::GetInstance()->CenterPointer();
+  InitInterface();
 
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();
@@ -300,6 +291,20 @@ void Game::InitSounds()
   FOR_EACH_TEAM(team)
     if ( (**team).GetSoundProfile() != "default" )
       JukeBox::GetInstance()->LoadXML((**team).GetSoundProfile()) ;
+}
+
+void Game::InitInterface()
+{
+  CharacterCursor::GetInstance()->Reset();
+  Keyboard::GetInstance()->Reset();
+
+  Interface::GetInstance()->Reset();
+  GameMessages::GetInstance()->Reset();
+
+  ParticleEngine::Load();
+
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  Mouse::GetInstance()->CenterPointer();
 }
 
 void Game::Start()
