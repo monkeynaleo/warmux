@@ -45,7 +45,7 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
   uint current_nb_teams = local_teams_nb->GetValue();
 
   if (local_teams_nb->ClickUp(mousePosition, button)){
-    SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
+    __SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
 
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
@@ -174,7 +174,7 @@ void NetworkTeamsSelectionBox::NextTeam(uint i)
     } while ( index != previous_index && to_continue);
 }
 
-void NetworkTeamsSelectionBox::SetNbLocalTeams(uint nb_teams, uint previous_nb)
+void NetworkTeamsSelectionBox::__SetNbLocalTeams(uint nb_teams, uint previous_nb)
 {
 
   int delta_team = nb_teams - previous_nb;
@@ -366,6 +366,15 @@ void NetworkTeamsSelectionBox::SetMaxNbLocalPlayers(uint nb)
   uint current_nb_teams = local_teams_nb->GetValue();
   local_teams_nb->SetMaxValue(nb);
   if (nb < current_nb_teams) {
-    SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
+    __SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
   }
+}
+
+void NetworkTeamsSelectionBox::SetNbLocalTeams(uint nb)
+{
+  uint current_nb_teams = local_teams_nb->GetValue();
+
+  __SetNbLocalTeams(nb, current_nb_teams);
+
+  local_teams_nb->SetValue(nb);
 }
