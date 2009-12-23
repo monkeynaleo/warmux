@@ -39,8 +39,6 @@ wormux_SOURCES = \
         game/game_blitz.h \
         game/game_classic.cpp \
         game/game_classic.h \
-        game/game_init.cpp \
-        game/game_init.h \
         game/game_mode.cpp \
         game/game_mode.h \
         game/time.cpp \

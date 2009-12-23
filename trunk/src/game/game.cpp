@@ -25,7 +25,6 @@
 #include "game/game_classic.h"
 #include "game/game_blitz.h"
 #include "game/time.h"
-#include "game/game_init.h"
 #include "game/game_mode.h"
 #include "graphic/fps.h"
 #include "graphic/video.h"
@@ -38,6 +37,7 @@
 #include "interface/joystick.h"
 #include "interface/mouse.h"
 #include "interface/game_msg.h"
+#include "interface/loading_screen.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "map/maps_list.h"
@@ -46,6 +46,7 @@
 #include "menu/results_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
+#include "network/network_server.h"
 #include "object/objbox.h"
 #include "object/bonus_box.h"
 #include "object/medkit.h"
@@ -109,12 +110,202 @@ Game * Game::UpdateGameRules()
 }
 
 
-void Game::MessageLoading() const
+void Game::InitEverything()
 {
-  GameInit loading_sreen; /* displays the loading screen stuff */
+  LoadingScreen loading_sreen;
+
+  Config::GetInstance()->RemoveAllObjectConfigs();
+
+  // Disable sound during the loading of data
+  bool enable_sound = JukeBox::GetInstance()->UseEffects();
+  JukeBox::GetInstance()->ActiveEffects(false);
+
+  Mouse::GetInstance()->Hide();
+
+  std::cout << "o " << _("Initialisation") << std::endl;
+  Time::GetInstance()->Reset();
+
+  // initialize gaming data
+  if (Network::GetInstance()->IsGameMaster())
+    InitGameData_NetGameMaster();
+  else if (Network::GetInstance()->IsLocal())
+    RandomSync().InitRandom();
+
+  // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
+  // done in action_handler for clients
+
+
+  // Camera must not shake as the started shaking time could be from a previous game:
+  Camera::GetInstance()->ResetShake();
+
+  // Load the map
+  std::cout << "o " << _("Initialise map") << std::endl;
+  loading_sreen.StartLoading(1, "map_icon", _("Maps"));
+  InitMap();
+
+  std::cout << "o " << _("Initialise teams") << std::endl;
+  loading_sreen.StartLoading(2, "team_icon", _("Teams"));
+  // Init teams
+  InitTeams();
+  // Initialization of teams' energy
+  loading_sreen.StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
+
+  std::cout << "o " << _("Initialise sounds") << std::endl;
+  // Load teams' sound profiles
+  loading_sreen.StartLoading(4, "sound_icon", _("Sounds"));
+  InitSounds();
+
+  CharacterCursor::GetInstance()->Reset();
+  Keyboard::GetInstance()->Reset();
+
+  Interface::GetInstance()->Reset();
+  GameMessages::GetInstance()->Reset();
+
+  ParticleEngine::Load();
+
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  Mouse::GetInstance()->CenterPointer();
+
+  // First "selection" of a weapon -> fix bug 6576
+  ActiveTeam().AccessWeapon().Select();
+
+  // Loading is finished, sound effects can be enabled again
+  JukeBox::GetInstance()->ActiveEffects(enable_sound);
+
+  // Waiting for others players
+  if (!Network::GetInstance()->IsLocal()) {
+    if  (Network::GetInstance()->IsGameMaster())
+      EndInitGameData_NetGameMaster();
+    else {
+      EndInitGameData_NetClient();
+
+      // We have been elected as game master (the previous one has been disconnected)
+      if (Network::GetInstance()->IsGameMaster())
+        EndInitGameData_NetGameMaster();
+    }
+  }
+
+  InitFields();
+
+  // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
+  Time::GetInstance()->Reset();
 
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
+}
+
+void Game::InitFields()
+{
+  ResetUniqueIds();
+
+  chatsession.Clear();
+  fps->Reset();
+  IgnorePendingInputEvents();
+  Camera::GetInstance()->Reset();
+
+  ActionHandler::GetInstance()->ExecFrameLessActions();
+
+  m_current_turn = 0;
+
+  FOR_ALL_CHARACTERS(team, character)
+    (*character).ResetDamageStats();
+
+  SetState(END_TURN, true); // begin with a small pause
+}
+
+
+void Game::InitGameData_NetGameMaster()
+{
+  if (Network::GetInstance()->IsServer()) {
+    Network::GetInstanceServer()->RejectIncoming();
+  }
+
+  RandomSync().InitRandom();
+
+  SendGameMode();
+
+  Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
+  Network::GetInstance()->SendNetworkState();
+}
+
+void Game::EndInitGameData_NetGameMaster()
+{
+  // Wait for all clients to be ready to play
+
+  // If we are connected to a dedicated server, we must check there are still some players connected
+  while (Network::IsConnected()
+         && Network::GetInstance()->GetNbHostsReady() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
+    ActionHandler::GetInstance()->ExecFrameLessActions();
+    SDL_Delay(200);
+  }
+
+  // Before playing we should check that init phase happens correctly on all clients
+  Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
+  Network::GetInstance()->SendActionToAll(a);
+
+  // If we are connected to a dedicated server, we must check there are still some players connected
+  while (Network::IsConnected()
+         && Network::GetInstance()->GetNbHostsChecked() != Network::GetInstance()->GetNbHostsConnected()
+	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+
+    ActionHandler::GetInstance()->ExecFrameLessActions();
+    SDL_Delay(200);
+  }
+
+  // Let's play !
+  Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
+  Network::GetInstance()->SendNetworkState();
+}
+
+void Game::EndInitGameData_NetClient()
+{
+  // Tells server that client is ready
+  Network::GetInstance()->SetState(WNet::NETWORK_READY_TO_PLAY);
+  Network::GetInstance()->SendNetworkState();
+
+  // Waiting for other clients
+  std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
+
+  while (Network::IsConnected()
+	 && !Network::GetInstance()->IsGameMaster()
+	 && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
+  {
+    ActionHandler::GetInstance()->ExecFrameLessActions();
+    SDL_Delay(100);
+  }
+}
+
+void Game::InitMap()
+{
+  GetWorld().Reset();
+  ObjectsList::GetRef().PlaceBarrels();
+}
+
+void Game::InitTeams()
+{
+  // Check the number of teams
+  if (GetTeamsList().playing_list.size() < 2)
+    Error(_("You need at least two valid teams!"));
+  ASSERT (GetTeamsList().playing_list.size() <= GameMode::GetInstance()->max_teams);
+
+  // Load the teams
+  GetTeamsList().LoadGamingData();
+
+  GetTeamsList().InitEnergy();
+
+  // Randomize first player
+  GetTeamsList().RandomizeFirstPlayer();
+
+  ObjectsList::GetRef().PlaceMines();
+}
+
+void Game::InitSounds()
+{
+  FOR_EACH_TEAM(team)
+    if ( (**team).GetSoundProfile() != "default" )
+      JukeBox::GetInstance()->LoadXML((**team).GetSoundProfile()) ;
 }
 
 void Game::Start()
@@ -122,7 +313,7 @@ void Game::Start()
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
-  MessageLoading();
+  InitEverything();
 
   try
   {
@@ -234,25 +425,6 @@ Game::~Game()
 {
   if(fps)
     delete fps;
-}
-
-void Game::Init()
-{
-  ResetUniqueIds();
-
-  chatsession.Clear();
-  fps->Reset();
-  IgnorePendingInputEvents();
-  Camera::GetInstance()->Reset();
-
-  ActionHandler::GetInstance()->ExecFrameLessActions();
-
-  m_current_turn = 0;
-
-  FOR_ALL_CHARACTERS(team, character)
-    (*character).ResetDamageStats();
-
-  SetState(END_TURN, true); // begin with a small pause
 }
 
 // ####################################################################
