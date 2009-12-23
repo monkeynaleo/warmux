@@ -22,7 +22,6 @@
 #ifndef BONUS_BOX_H
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
-#include <vector>
 #include "include/base.h"
 #include "weapon/weapon.h"
 #include "objbox.h"
@@ -32,31 +31,17 @@ class Character;
 class Action;
 //-----------------------------------------------------------------------------
 
-struct WeaponProba
-{
-  Weapon* weapon;
-  int nb_ammos;
-  double probability;
-};
-
 class BonusBox : public ObjBox
 {
   private:
-    uint weapon_num;
+    Weapon * weapon;
+
     bool ExplodesInsteadOfBonus(Character * c);
-
-    static double total_probability;
-    static std::vector<struct WeaponProba> weapon_list;
-
-  private:
     void ApplyBonus (Team &team, Character &character);
-    void PickRandomWeapon();
   public:
-    BonusBox();
-    static void LoadXml(const xmlNode* object);
+    BonusBox(Weapon * weapon);
 
     void ApplyBonus(Character *);
-    void Randomize();
 };
 
 //-----------------------------------------------------------------------------

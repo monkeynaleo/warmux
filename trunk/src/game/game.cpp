@@ -57,6 +57,7 @@
 #include "team/results.h"
 #include <WORMUX_random.h>
 #include "tool/stats.h"
+#include "weapon/weapons_list.h"
 
 #ifdef DEBUG
 // Uncomment this to get an image during the game under Valgrind
@@ -648,7 +649,7 @@ bool Game::NewBox()
     box = new Medkit();
     type = 1;
   } else {
-    box = new BonusBox();
+    box = new BonusBox(WeaponsList::GetInstance()->GetRandomWeaponToDrop());
     type = 2;
   }
   // Randomize container

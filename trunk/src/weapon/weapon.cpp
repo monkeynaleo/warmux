@@ -79,6 +79,8 @@ Weapon::Weapon(Weapon_type type,
   m_available_after_turn = 0;
   m_initial_nb_ammo = INFINITE_AMMO;
   m_initial_nb_unit_per_ammo = 1;
+  ammo_per_drop = 1;
+  drop_probability = 0;
   use_unit_on_first_shoot = true;
   can_be_used_on_closed_map = true;
 
@@ -699,6 +701,12 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   XmlReader::ReadInt(elem, "available_after_turn", m_available_after_turn);
   XmlReader::ReadInt(elem, "nb_ammo", m_initial_nb_ammo);
   XmlReader::ReadInt(elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
+  XmlReader::ReadInt(elem, "ammo_per_drop", ammo_per_drop);
+  XmlReader::ReadDouble(elem, "drop_probability", drop_probability);
+  if (m_initial_nb_ammo == INFINITE_AMMO && drop_probability != 0) {
+    std::cerr << Format(_("The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"), m_id.c_str());
+    std::cerr << std::endl;
+  }
 
   // max strength
   // if max_strength = 0, no strength_bar !

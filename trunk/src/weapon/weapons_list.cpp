@@ -31,6 +31,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/resource_manager.h"
+#include "network/randomsync.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -176,6 +177,34 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
 
   /* we definitly found nothing... */
   return false;
+}
+
+Weapon * WeaponsList::GetRandomWeaponToDrop()
+{
+  std::list<Weapon*>::iterator it;
+  double probability_sum = 0;
+  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
+    probability_sum += (*it)->GetDropProbability();
+    it++;
+  }
+  ASSERT(probability_sum > 0);
+
+  MSG_DEBUG("random.get", "WeaponList::GetRandomWeaponToDrop()");
+  double num = RandomSync().GetDouble(0, probability_sum);
+  double total_bf_weapon = 0;
+  double total_after_weapon = 0;
+
+  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
+    Weapon * weapon = *it;
+    total_after_weapon = total_bf_weapon + weapon->GetDropProbability();
+    if (total_bf_weapon < num && num <= total_after_weapon) {
+      MSG_DEBUG("bonus","Weapon choosed: %s", weapon->GetName().c_str());
+      return weapon;
+    }
+    total_bf_weapon = total_after_weapon;
+  }
+  ASSERT(false);
+  return NULL;
 }
 
 //-----------------------------------------------------------------------------
