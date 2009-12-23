@@ -39,6 +39,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "network/network.h"
+#include "network/network_client.h"
 #include "network/network_server.h"
 #include "team/teams_list.h"
 #include "team/team.h"
@@ -128,11 +129,13 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
                         Font::FONT_SMALL, Font::FONT_BOLD);
-  if (Network::GetInstance()->IsGameMaster()) {
-    msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."), c_red);
-  } else {
-    // %s will be replaced with the name of the network game
-    msg_box->NewMessage(Format(_("Welcome to %s!"), Network::GetInstance()->GetGameName().c_str()), c_red);
+  if (Network::GetInstance()->IsClient()) {
+    // First %s will be replaced with the name of the network game,
+    // second %s by the server hostname
+    msg_box->NewMessage(Format(_("Welcome to %s on %s!"),
+			       Network::GetInstance()->GetGameName().c_str(),
+			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
+			, c_red);
   }
 
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
