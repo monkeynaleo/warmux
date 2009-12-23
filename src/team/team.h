@@ -33,6 +33,7 @@
 
 class Character;
 class CustomTeam;
+class WeaponsList;
 
 class Team
 {
@@ -81,10 +82,11 @@ class Team
           const std::string& _sound_profile);
 
     bool LoadCharacters();
+    WeaponsList * weapons_list;
   public:
     Team (const std::string &teams_dir, const std::string &id);
 
-    void LoadGamingData();
+    void LoadGamingData(WeaponsList * weapons);
     void UnloadGamingData();
 
     bool IsSameAs(const Team& other) const;

@@ -28,11 +28,11 @@
 #include "game/game_mode.h"
 #include "object/medkit.h"
 #include "object/bonus_box.h"
-#include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
 GameMode::GameMode():
-  doc_objects(NULL)
+  doc_objects(NULL),
+  weapons_xml(NULL)
 {
   m_current = "classic";
 
@@ -172,10 +172,7 @@ bool GameMode::LoadXml(const xmlNode* xml)
   }
 
   //=== Weapons ===
-  const xmlNode* weapons_xml = XmlReader::GetMarker(xml, "weapons");
-  if (weapons_xml != NULL) {
-    WeaponsList::LoadXml(weapons_xml);
-  }
+  weapons_xml = XmlReader::GetMarker(xml, "weapons");
 
   // Bonus box explosion - must be loaded after the weapons.
   const xmlNode* bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
@@ -207,8 +204,6 @@ bool GameMode::Load(void)
   if(!doc_objects->Load(GetObjectsFilename()))
     return false;
 
-  // Game mode file
-  XmlReader doc;
 
   if(!doc.Load(GetFilename()))
     return false;

@@ -170,7 +170,7 @@ void TeamsList::LoadList()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::LoadGamingData()
+void TeamsList::LoadGamingData(WeaponsList * weapons_list)
 {
   std::sort(playing_list.begin(), playing_list.end(), compareTeams); // needed to fix bug #9820
   active_team = playing_list.begin();
@@ -179,7 +179,7 @@ void TeamsList::LoadGamingData()
 
   // Load the data of all teams
   for (; it != end; ++it) {
-    (**it).LoadGamingData();
+    (**it).LoadGamingData(weapons_list);
   }
   for (it=playing_list.begin(); it != end; ++it) {
     if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")

@@ -30,7 +30,7 @@
 //-----------------------------------------------------------------------------
 
 // Classe de gestion des armes
-class WeaponsList : public Singleton<WeaponsList>
+class WeaponsList
 {
 public:
   typedef std::list<Weapon*> weapons_list_type;
@@ -41,17 +41,16 @@ private:
   Weapon* GetNextWeapon(uint sort, uint index);
 
 protected:
-  friend class Singleton<WeaponsList>;
   /* if you need to use this, implement it */
   WeaponsList(const WeaponsList &a_list);
-  WeaponsList();
-  ~WeaponsList();
 
 public:
+  WeaponsList(const xmlNode* weapons_xml);
+  ~WeaponsList();
+
   void Init();
 
-  static void UpdateTranslation();
-  static void LoadXml(const xmlNode* weapons_xml);
+  void UpdateTranslation();
 
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };

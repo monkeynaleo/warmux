@@ -31,6 +31,7 @@
 class Team;
 class ConfigTeam;
 class Character;
+class WeaponsList;
 
 class TeamsList : public Singleton<TeamsList>
 {
@@ -63,7 +64,7 @@ public:
   void NextTeam();
   Team* GetNextTeam();
   Team& ActiveTeam();
-  void LoadGamingData();
+  void LoadGamingData(WeaponsList * weapons_list);
   void UnloadGamingData();
   void Clear();
   void RandomizeFirstPlayer();

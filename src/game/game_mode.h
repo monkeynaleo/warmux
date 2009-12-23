@@ -28,6 +28,7 @@
 #include <WORMUX_singleton.h>
 #include "include/base.h"
 #include "weapon/weapon_cfg.h"
+#include "tool/xml_document.h"
 
 typedef struct _xmlNode xmlNode;
 class XmlReader;
@@ -75,11 +76,13 @@ public:
   } manual_change_character_t;
 
   manual_change_character_t allow_character_selection;
+  XmlReader doc;
 
 private:
   std::string m_current;
 
   XmlReader* doc_objects;
+  const xmlNode* weapons_xml;
 
   void LoadDefaultValues();
 
@@ -93,6 +96,8 @@ private:
 
 public:
   const std::string& GetName() const;
+
+  const xmlNode* GetWeaponsXml() { return weapons_xml; }
 
   bool Load(void);
 

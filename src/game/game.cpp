@@ -143,12 +143,12 @@ void Game::InitEverything()
   loading_sreen.StartLoading(1, "map_icon", _("Maps"));
   InitMap();
 
+  loading_sreen.StartLoading(2, "weapon_icon", _("Weapons"));
+  weapons_list = new WeaponsList(GameMode::GetInstance()->GetWeaponsXml());
+
   std::cout << "o " << _("Initialise teams") << std::endl;
-  loading_sreen.StartLoading(2, "team_icon", _("Teams"));
-  // Init teams
+  loading_sreen.StartLoading(3, "team_icon", _("Teams"));
   InitTeams();
-  // Initialization of teams' energy
-  loading_sreen.StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
 
   std::cout << "o " << _("Initialise sounds") << std::endl;
   // Load teams' sound profiles
@@ -258,7 +258,8 @@ void Game::InitTeams()
   ASSERT (GetTeamsList().playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Load the teams
-  GetTeamsList().LoadGamingData();
+  ASSERT(weapons_list); // weapons must be initialized before the teams
+  GetTeamsList().LoadGamingData(weapons_list);
 
   GetTeamsList().InitEnergy();
 
@@ -424,13 +425,16 @@ Game::Game():
   time_of_next_phy_frame(0),
   character_already_chosen(false),
   m_current_turn(0),
-  waiting_for_network_text("Waiting for turn master")
+  waiting_for_network_text("Waiting for turn master"),
+  weapons_list(NULL)
 { }
 
 Game::~Game()
 {
   if(fps)
     delete fps;
+  if (weapons_list)
+    delete weapons_list;
 }
 
 // ####################################################################
@@ -827,7 +831,7 @@ bool Game::NewBox()
     box = new Medkit();
     type = 1;
   } else {
-    box = new BonusBox(WeaponsList::GetInstance()->GetRandomWeaponToDrop());
+    box = new BonusBox(weapons_list->GetRandomWeaponToDrop());
     type = 2;
   }
   // Randomize container
@@ -1078,3 +1082,7 @@ uint Game::GetCurrentTurn()
   return (m_current_turn+nbr_teams-1)/nbr_teams ;
 }
 
+void Game::UpdateTranslation()
+{
+  weapons_list->UpdateTranslation();
+}
