@@ -97,6 +97,8 @@ protected:
    virtual bool signal_ok() = 0;
    virtual bool signal_cancel() = 0;
 
+   virtual void signal_begin_run() {};
+
    virtual void DrawBackground();
    virtual void Draw(const Point2i &mousePosition) = 0;
 

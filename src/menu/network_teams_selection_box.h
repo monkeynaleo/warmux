@@ -35,7 +35,7 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
   /**********************************************/
 
-  void SetNbLocalTeams(uint nb_teams, uint previous_nb);
+  void __SetNbLocalTeams(uint nb_teams, uint previous_nb);
   void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team);
@@ -57,5 +57,6 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   void DelTeamCallback(const std::string& team_id);
 
   void SetMaxNbLocalPlayers(uint nb);
+  void SetNbLocalTeams(uint nb);
 };
 #endif

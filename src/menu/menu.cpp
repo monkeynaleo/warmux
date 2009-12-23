@@ -294,6 +294,8 @@ void Menu::HandleEvents()
 
 void Menu::Run (bool skip_menu)
 {
+  signal_begin_run();
+
   if (skip_menu) {
     signal_ok();
     return;

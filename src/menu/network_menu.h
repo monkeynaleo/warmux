@@ -56,15 +56,17 @@ class NetworkMenu : public Menu
 
   void PrepareForNewGame();
   void SaveOptions();
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
-  void Draw(const Point2i &mousePosition);
   void WaitingForGameMaster();
-  void HandleEvent(const SDL_Event& event);
 
-  void key_ok();
-  bool signal_ok();
-  bool signal_cancel();
+  virtual void OnClick(const Point2i &mousePosition, int button);
+  virtual void OnClickUp(const Point2i &mousePosition, int button);
+  virtual void Draw(const Point2i &mousePosition);
+  virtual void HandleEvent(const SDL_Event& event);
+
+  virtual void key_ok();
+  virtual bool signal_ok();
+  virtual bool signal_cancel();
+  virtual void signal_begin_run();
 
 public:
   NetworkMenu();

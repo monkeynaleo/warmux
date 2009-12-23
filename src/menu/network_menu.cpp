@@ -169,6 +169,13 @@ NetworkMenu::~NetworkMenu()
 {
 }
 
+void NetworkMenu::signal_begin_run()
+{
+  ActionHandler::GetInstance()->ExecFrameLessActions();
+
+  team_box->SetNbLocalTeams(1);
+}
+
 void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.ClickUp(mousePosition, button);
