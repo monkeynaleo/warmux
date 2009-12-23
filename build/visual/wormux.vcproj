@@ -53,7 +53,7 @@
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\LiberationSans-Regular.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -150,7 +150,7 @@
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
@@ -232,35 +232,47 @@
 				Name="ai"
 				>
 				<File
-					RelativePath="..\..\src\ai\ai_engine.cpp"
+					RelativePath="..\..\src\ai\ai_command.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_engine.h"
+					RelativePath="..\..\src\ai\ai_command.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_engine_stupid.cpp"
+					RelativePath="..\..\src\ai\ai_idea.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_engine_stupid.h"
+					RelativePath="..\..\src\ai\ai_idea.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_movement_module.cpp"
+					RelativePath="..\..\src\ai\ai_player.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_movement_module.h"
+					RelativePath="..\..\src\ai\ai_strategy.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_shoot_module.cpp"
+					RelativePath="..\..\src\ai\ai_strategy.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\ai_shoot_module.h"
+					RelativePath="..\..\src\ai\ai_stupid_player.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\ai\ai_stupid_player.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\ai\trajectory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\ai\trajectory.h"
 					>
 				</File>
 			</Filter>
@@ -316,19 +328,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\character\move.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\character\move.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\character\movement.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\src\character\movement.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\character\walk_intention.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\character\walk_intention.h"
 					>
 				</File>
 			</Filter>
@@ -381,6 +393,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\game\game_mode.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\game\stopwatch.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\game\stopwatch.h"
 					>
 				</File>
 				<File
@@ -1177,6 +1197,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\particles\dark_smoke.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\particles\explosion_particle.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\particles\explosion_particle.h"
 					>
 				</File>
 				<File
