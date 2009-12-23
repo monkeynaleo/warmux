@@ -224,7 +224,6 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
   if(!doc_objects->LoadFromString(game_mode_objects_contents))
     return false;
 
-  XmlReader doc;
   if(!doc.LoadFromString(game_mode_contents))
     return false;
   if(!LoadXml(doc.GetRoot()))
