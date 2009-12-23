@@ -157,9 +157,6 @@ void Game::InitEverything()
 
   InitInterface();
 
-  // First "selection" of a weapon -> fix bug 6576
-  ActiveTeam().AccessWeapon().Select();
-
   // Loading is finished, sound effects can be enabled again
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
@@ -167,17 +164,13 @@ void Game::InitEverything()
 
   ResetUniqueIds();
 
-  chatsession.Clear();
   fps->Reset();
   IgnorePendingInputEvents();
-  Camera::GetInstance()->Reset();
 
   ActionHandler::GetInstance()->ExecFrameLessActions();
 
   m_current_turn = 0;
 
-  FOR_ALL_CHARACTERS(team, character)
-    (*character).ResetDamageStats();
 
   SetState(END_TURN, true); // begin with a small pause
 
@@ -272,6 +265,12 @@ void Game::InitTeams()
   // Randomize first player
   GetTeamsList().RandomizeFirstPlayer();
 
+  // First "selection" of a weapon -> fix bug 6576
+  ActiveTeam().AccessWeapon().Select();
+
+  FOR_ALL_CHARACTERS(team, character)
+    (*character).ResetDamageStats();
+
   ObjectsList::GetRef().PlaceMines();
 }
 
@@ -294,6 +293,8 @@ void Game::InitInterface()
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   Mouse::GetInstance()->CenterPointer();
+  chatsession.Clear();
+  Camera::GetInstance()->Reset();
 }
 
 void Game::WaitForOtherPlayers()
@@ -310,6 +311,7 @@ void Game::WaitForOtherPlayers()
         EndInitGameData_NetGameMaster();
     }
   }
+  ActionHandler::GetInstance()->ExecFrameLessActions();
 }
 
 void Game::Start()
