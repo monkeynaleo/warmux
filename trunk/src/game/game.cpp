@@ -163,18 +163,7 @@ void Game::InitEverything()
   // Loading is finished, sound effects can be enabled again
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
-  // Waiting for others players
-  if (!Network::GetInstance()->IsLocal()) {
-    if  (Network::GetInstance()->IsGameMaster())
-      EndInitGameData_NetGameMaster();
-    else {
-      EndInitGameData_NetClient();
-
-      // We have been elected as game master (the previous one has been disconnected)
-      if (Network::GetInstance()->IsGameMaster())
-        EndInitGameData_NetGameMaster();
-    }
-  }
+  WaitForOtherPlayers();
 
   ResetUniqueIds();
 
@@ -305,6 +294,22 @@ void Game::InitInterface()
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   Mouse::GetInstance()->CenterPointer();
+}
+
+void Game::WaitForOtherPlayers()
+{
+  // Waiting for others players
+  if (!Network::GetInstance()->IsLocal()) {
+    if  (Network::GetInstance()->IsGameMaster())
+      EndInitGameData_NetGameMaster();
+    else {
+      EndInitGameData_NetClient();
+
+      // We have been elected as game master (the previous one has been disconnected)
+      if (Network::GetInstance()->IsGameMaster())
+        EndInitGameData_NetGameMaster();
+    }
+  }
 }
 
 void Game::Start()
