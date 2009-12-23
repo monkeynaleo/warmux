@@ -22,6 +22,7 @@
 #include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "object/barrel.h"
+#include "physic/physical_engine.h"
 #include "include/app.h"
 #include "map/map.h"
 #include "map/maps_list.h"
@@ -32,6 +33,10 @@
 #include "weapon/mine.h"
 #include <vector>
 #include <iostream>
+
+#ifdef DEBUG
+#include "graphic/colors.h"
+#endif
 
 ObjectsList::ObjectsList()
 {}
@@ -46,13 +51,14 @@ void ObjectsList::PlaceMines()
   MSG_DEBUG("lst_objects","Placing mines");
   for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
   {
-    ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
+   // TODO physic:
+   // ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
-    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
+  //  if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
       // detection range is in meter
-      push_back(obj);
-    else
-      delete obj;
+  //    push_back(obj);
+  //  else
+  //    delete obj;
   }
 }
 
@@ -64,12 +70,26 @@ void ObjectsList::PlaceBarrels()
     PetrolBarrel *obj = new PetrolBarrel();
 
     if (obj->PutRandomly(false, 20.0))
-      push_back(obj);
+      AddObject(obj);
     else
       delete obj;
   }
 }
 
+//-----------------------------------------------------------------------------
+void ObjectsList::AddObject(GameObj * obj)
+{
+  push_back(obj);
+  obj->GetPhysic()->Activate();
+}
+
+//-----------------------------------------------------------------------------
+void ObjectsList::RemoveObject(GameObj * obj)
+{
+  obj->GetPhysic()->Desactivate();
+  remove(obj);
+  RemoveOverlappedObjectReference(obj);
+};
 
 //-----------------------------------------------------------------------------
 void ObjectsList::Refresh()
@@ -101,8 +121,14 @@ void ObjectsList::Draw()
   {
     ASSERT((*it) != NULL);
 
-    if (!(*it)->IsGhost())
+    if (!(*it)->IsGhost()) {
       (*it)->Draw();
+#ifdef DEBUG
+      if (IsLOGGING("polygon.object")) {
+ (*it)->DrawShape(primary_red_color);
+      }
+#endif
+    }
   }
 }
 
@@ -136,14 +162,15 @@ void ObjectsList::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-void ObjectsList::RemoveOverlappedObjectReference(const GameObj * obj)
+void ObjectsList::RemoveOverlappedObjectReference(const GameObj * /*obj*/)
 {
+  /* TODO physic:
   for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
 
     if ((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" (%p) in \"%s\"",
                 obj->GetName().c_str(), obj, (*it)->GetName().c_str());
-      (*it)->SetOverlappingObject(NULL);
+      (*it)->ClearOverlappingObject();
       it = overlapped_objects.erase(it);
 
     } else if ((*it) == obj) {
@@ -151,7 +178,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const GameObj * obj)
                 obj->GetName().c_str(), obj);
       it = overlapped_objects.erase(it);
     }
-  }
+  } */
 }
 
 void ObjectsList::AddOverlappedObject(GameObj * obj)

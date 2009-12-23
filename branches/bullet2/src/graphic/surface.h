@@ -113,6 +113,7 @@ public:
   int FilledPolygon(std::list<Point2i> polygon, const Color & color);
   int TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy);
   int TexturedPolygon(std::list<Point2i> polygon, const Surface *texture);
+  int PointColor(const Point2d &point,const Color &color);
 
   int Fill(Uint32 color) const;
   int Fill(const Color &color) const;

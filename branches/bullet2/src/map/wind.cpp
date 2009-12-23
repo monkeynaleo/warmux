@@ -36,6 +36,7 @@
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "gui/progress_bar.h"
+#include "physic/physical_engine.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 1;
@@ -43,27 +44,31 @@ const uint bar_speed = 1;
 WindParticle::WindParticle(const std::string &xml_file, float scale) :
   GameObj("wind", xml_file)
 {
-  SetCollisionModel(false, false, false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
+  // TODO physic Is there a replacement for CanBeGhost(false)?
+  // CanBeGhost(false);
 
-  CanBeGhost(false);
   // Physic constants
   double mass, wind_factor ;
   //Mass = mass_mean + or - 25%
-  mass = GetMass();
+  mass = GetPhysic()->GetMass();
   mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
-  SetMass (mass);
-  SetSize( Point2i(20,20) );
-  wind_factor = GetWindFactor() ;
+//  SetBasicShape(Point2i(20,20), mass);
+  wind_factor = GetPhysic()->GetWindFactor() ;
+  wind_factor = GetPhysic()->GetWindFactor() ;
   wind_factor *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
-  SetWindFactor(wind_factor);
-  SetAirResistFactor(GetAirResistFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
+  GetPhysic()->SetWindFactor(wind_factor);
+  GetPhysic()->SetAirFrictionFactor( GetPhysic()->GetAirFrictionFactor() * (1.0 + RandomLocal().GetLong(-100, 100)/400.0));
 
   MSG_DEBUG("wind", "Create wind particle: %s, %f, %f", xml_file.c_str(), mass, wind_factor);
 
   // Fixe test rectangle
-  int dx = 0 ;
-  int dy = 0 ;
-  SetTestRect (dx, dx, dy, dy);
+  // int dx = 0 ;
+  // int dy = 0 ;
+  // SetTestRect (dx, dx, dy, dy);
 
   m_allow_negative_y = true;
 
@@ -75,7 +80,6 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
   sprite->RefreshSurface();
   sprite->SetAlpha(scale);
   sprite->SetCurrentFrame(RandomLocal().GetLong(0, sprite->GetFrameCount() - 1));
-  SetSize( Point2i(sprite->GetWidth(), sprite->GetHeight()) );
 
   if (ActiveMap()->GetWind().need_flip) {
     flipped = new Sprite(*sprite);
@@ -87,7 +91,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
     flipped = NULL;
   }
 
-  if (!GetAlignParticleState() && ActiveMap()->GetWind().rotation_speed != 0.0) {
+  if (ActiveMap()->GetWind().rotation_speed != 0.0) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
 
@@ -96,7 +100,7 @@ WindParticle::WindParticle(const std::string &xml_file, float scale) :
       flipped->SetRotation_rad(RandomLocal().GetLong(0,628)/100.0); // 0 < angle < 2PI
     }
   }
-
+  GetPhysic()->Activate();
 }
 
 WindParticle::~WindParticle()
@@ -107,15 +111,12 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-  if (flipped && GetSpeed().x < 0)
+  if (flipped && GetPhysic()->GetSpeed().x < 0)
     flipped->Update();
   else
     sprite->Update();
 
-  if (GetAlignParticleState()) {
-    sprite->SetRotation_rad(GetSpeedAngle() - (M_PI / 2));
-  } 
-  else if (ActiveMap()->GetWind().rotation_speed != 0.0) // Rotate the sprite if needed
+  if (ActiveMap()->GetWind().rotation_speed != 0.0) // Rotate the sprite if needed
   {
     if (flipped && GetSpeed().x < 0) {
       float new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
@@ -143,26 +144,37 @@ void WindParticle::Refresh()
   if(GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY() )
     y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
 
+
+  if (x != GetX() || y != GetY())
+  {
+    SetPosition(Point2i(x,y));
+  }
+  /* TODO physic: if below vs if above
   if (m_alive != ALIVE || x != GetX() || y != GetY()) {
     m_alive = ALIVE;
     StartMoving();
     SetXY( Point2i(x, y) );
     MSG_DEBUG("wind", "new position %d, %d - mass %f, wind_factor %f", x, y, GetMass(), GetWindFactor());
   } 
-
+  */
   UpdatePosition();
 }
 
 void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
-  if (flipped && GetSpeed().x < 0) {
-    flipped->Draw(GetPosition());
+  if (flipped && GetPhysic()->GetSpeed().x < 0) {
+    flipped->Draw(GetPhysic()->GetPosition());
   } else {
-    sprite->Draw(GetPosition());
+    sprite->Draw(GetPhysic()->GetPosition());
   }
 }
 
+void WindParticle::Ghost ()
+{
+  // WindParticle can't be ghost
+  return;
+}
 //---------------------------------------------------
 
 Wind::Wind(): 
@@ -175,7 +187,7 @@ Wind::Wind():
 
 Wind::~Wind()
 {
-  RemoveAllParticles();
+  FreeMem();
 }
 
 double Wind::GetStrength() const
@@ -188,7 +200,7 @@ void Wind::SetVal(long val)
   m_nv_val = val;
 }
 
-void Wind::RemoveAllParticles()
+void Wind::FreeMem()
 {
   iterator it = particles.begin(), end = particles.end();
   while (it != end) {
@@ -204,7 +216,7 @@ void Wind::Reset()
   m_val = m_nv_val = 0;
   Interface::GetInstance()->UpdateWindIndicator(m_val);
 
-  RemoveAllParticles();
+  FreeMem();
 
   if (!Config::GetInstance()->GetDisplayWindParticles()) {
     return;
@@ -219,8 +231,9 @@ void Wind::Reset()
   std::string config_file = ActiveMap()->GetConfigFilepath();
 
   for (uint i = 0; i < nb; ++i) {
-    WindParticle * tmp = new WindParticle(config_file, (float)i / nb);
-    particles.push_back(tmp);
+    // TODO physic:
+    // WindParticle * tmp = new WindParticle(config_file, (float)i / nb);
+    // particles.push_back(tmp);
   }
   RandomizeParticlesPos();
 }
@@ -267,7 +280,7 @@ void Wind::RandomizeParticlesPos()
 	    Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY());
 
   for (; it != end; ++it) {
-    (*it)->SetXY(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(),
+    (*it)->SetPosition(Point2i( RandomLocal().GetLong(Camera::GetInstance()->GetPositionX(),
 						Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
                           RandomLocal().GetLong(Camera::GetInstance()->GetPositionY(),
 						Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));

@@ -1,5 +1,5 @@
 if BUILD_SERVERS
-SUBDIRS=wormux wormux-server
+SUBDIRS=bullet/src wormux wormux-server
 else
-SUBDIRS=wormux
+SUBDIRS=bullet/src wormux
 endif

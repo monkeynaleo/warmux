@@ -32,5 +32,6 @@ DarkSmoke::DarkSmoke() :
 
   image = ParticleEngine::GetSprite(DARK_SMOKE_spr);
   image->Scale(0.0, 0.0);
-  SetSize( Point2i(1, 1) );
+  // TODO physics:
+  //SetBasicShape(Point2i(1, 1), GetPhysic()->GetMass());
 }

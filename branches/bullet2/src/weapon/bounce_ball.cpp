@@ -24,6 +24,7 @@
 #include "weapon/weapon_cfg.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
+#include "character/character.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
@@ -39,7 +40,6 @@ class BounceBall : public WeaponProjectile
   public:
     BounceBall(ExplosiveWeaponConfig& cfg,
                WeaponLauncher * p_launcher);
-    void Refresh();
   protected:
     void SignalOutOfMap();
 };
@@ -55,13 +55,6 @@ BounceBall::BounceBall(ExplosiveWeaponConfig& cfg,
 }
 
 //-----------------------------------------------------------------------------
-
-void BounceBall::Refresh()
-{
-  WeaponProjectile::Refresh();
-  // rotation of ball image...
-  image->SetRotation_rad(GetSpeedAngle());
-}
 
 
 //-----------------------------------------------------------------------------
@@ -97,6 +90,7 @@ WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
 
 bool BounceBallLauncher::p_Shoot ()
 {
+  projectile->GetPhysic()->AddOverlappingObject(ActiveCharacter().GetPhysic(),2000);
   if (max_strength == 0)
     projectile->Shoot (10);
   else

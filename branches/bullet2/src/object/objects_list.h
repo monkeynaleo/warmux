@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include "include/base.h"
 #include <WORMUX_singleton.h>
-#include "object/physical_obj.h"
+#include "physic/game_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
@@ -72,15 +72,10 @@ class ObjectsList : public std::list<GameObj*>, public Singleton<ObjectsList>
 
     void FreeMem();
 
-    inline void AddObject(GameObj * obj) { push_back(obj);};
+    void AddObject(GameObj * obj);
 
     // Overlapse handling
-    inline void RemoveObject(GameObj * obj)
-    {
-      remove(obj);
-      RemoveOverlappedObjectReference(obj);
-    };
-
+    void RemoveObject(GameObj * obj);
     void AddOverlappedObject(GameObj * obj);
     void RemoveOverlappedObject(GameObj * obj);
 };

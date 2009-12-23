@@ -34,7 +34,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   // delete the sprite of the ExplosionSmoke
   delete image;
   image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
-  SetAirResistFactor( GetAirResistFactor() * 3.0 );
+  GetPhysic()->SetAirFrictionFactor( GetPhysic()->GetAirFrictionFactor() * 3.0 );
 
   MSG_DEBUG("random.get", "IllBubble::IllBubble()");
   vib_phi = RandomSync().GetLong(0, vib_period);
@@ -55,5 +55,5 @@ void IllBubble::Draw()
   image->Scale(scale_x, scale_y);
 
   if (m_left_time_to_live > 0)
-    image->Draw(GetPosition() - image->GetSize() / 2);
+    image->Draw(GetPhysic()->GetPosition() - image->GetSize() / 2);
 }

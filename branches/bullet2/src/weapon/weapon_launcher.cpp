@@ -31,6 +31,8 @@
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
+#include "physic/physical_engine.h"
+#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -72,9 +74,7 @@ void WeaponBullet::SignalOutOfMap()
   Camera::GetInstance()->FollowObject(&ActiveCharacter());
 }
 
-void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
-					 GameObj * obj,
-					 const Point2d& /*obj_speed*/)
+void WeaponBullet::SignalObjectCollision(GameObj * obj,PhysicalShape * /*shape*/, const Point2d& my_speed_before)
 {
 #if 1
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
@@ -91,7 +91,7 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
 #endif
 
   obj->SetEnergyDelta(-(int)cfg.damage);
-  if (!obj->IsCharacter())
+  if (!obj->GetType() == GAME_CHARACTER)
     Explosion();
   Ghost();
 
@@ -101,12 +101,11 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
 void WeaponBullet::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void WeaponBullet::DoExplosion()
 {
-  Point2i pos = GetCenter();
+  Point2i pos = GetPosition();
   ApplyExplosion(pos, cfg, "", false, ParticleEngine::LittleESmoke);
 }
 //-----------------------------------------------------------------------------
@@ -118,8 +117,15 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   : GameObj(name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
-  SetCollisionModel(true, true, true);
+
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   launcher = p_launcher;
+
+  GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetFast(true);
 
   explode_colliding_character = false;
   explode_with_timeout = true;
@@ -129,12 +135,6 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
 
   image = GetResourceManager().LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
-  SetSize(image->GetSize());
-
-  // Set rectangle test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect(dx, dx, dy, dy);
 
   ResetTimeOut();
 
@@ -152,16 +152,13 @@ void WeaponProjectile::Shoot(double strength)
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
 
   Init();
+  GetPhysic()->SetEnabled(true);
 
   if (launcher != NULL)
     launcher->IncActiveProjectile();
 
-  // Set the physical factors
-  ResetConstants();
+  //ResetConstants();
 
-  // Set the initial position.
-  SetOverlappingObject(&ActiveCharacter(), 100);
-  ObjectsList::GetRef().AddObject(this);
 
   double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
@@ -190,20 +187,27 @@ void WeaponProjectile::Shoot(double strength)
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
   Point2d f_hand_position(hand_position.GetX() / PIXEL_PER_METER, hand_position.GetY() / PIXEL_PER_METER);
   Point2d f_hole_position(hole_position.GetX() / PIXEL_PER_METER, hole_position.GetY() / PIXEL_PER_METER);
-  SetXY(hand_position);
+
+  GetPhysic()->AddOverlappingObject(ActiveCharacter().GetPhysic(), 500);
+  SetPosition(hand_position);
+  if(IsRotationFixed())
+  {
+    SetAngle(angle);
+  }
   SetSpeed(strength, angle);
 
   // Camera::FollowObject must be called after setting initial speed else
   // camera_follow_closely will have no effect
   Camera::GetInstance()->FollowObject(this, camera_follow_closely);
 
-  collision_t collision = NotifyMove(f_hand_position, f_hole_position);
-  if (collision == NO_COLLISION) {
+  // TODO physic
+  //collision_t collision = NotifyMove(f_hand_position, f_hole_position);
+  //if (collision == NO_COLLISION) {
     // Set the initial position and speed.
-    SetXY(hole_position);
-    SetSpeed(strength, angle);
+    //SetXY(hole_position);
+    //SetSpeed(strength, angle);
     PutOutOfGround(angle);
-  }
+  //}
 }
 
 void WeaponProjectile::ShootSound()
@@ -213,7 +217,7 @@ void WeaponProjectile::ShootSound()
 
 void WeaponProjectile::Refresh()
 {
-  if (m_energy == 0) {
+  if (GetEnergy() == 0) {
     Explosion();
     return;
   }
@@ -221,7 +225,6 @@ void WeaponProjectile::Refresh()
   // and we don't want to rely on Draw to call RefreshSurface() as the draw rate differs
   // for the players in a multiplayer game.
   image->RefreshSurface();
-  SetSize(image->GetSizeMax());
   // Explose after timeout
   int tmp = Time::GetInstance()->Read() - begin_time;
 
@@ -231,12 +234,19 @@ void WeaponProjectile::Refresh()
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
 {
   // Don't call Explosion here, we're already in an explosion
-  m_energy = 0;
+  SetEnergy(0);
 }
 
 void WeaponProjectile::Draw()
 {
-  image->Draw(GetPosition());
+  // TODO physic not sure if this is physic related... or just something which has been removed again:
+  double angle = GetAngle();
+  Point2d offset = GetCenterOffset();
+  Point2d relative_position;
+  relative_position.x = cos(angle) * offset.x + sin(angle) *offset.y;
+  relative_position.y = (cos(angle) * offset.y - sin(angle) *offset.x);
+  image->SetRotation_rad( - angle);
+  image->Draw(GetPosition() - relative_position);
 
   int tmp = GetTotalTimeout();
 
@@ -253,18 +263,6 @@ void WeaponProjectile::Draw()
       text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
     }
   }
-
-#ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), image->GetSizeMax());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
-  }
-#endif
 }
 
 bool WeaponProjectile::IsImmobile() const
@@ -275,9 +273,9 @@ bool WeaponProjectile::IsImmobile() const
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalObjectCollision(const Point2d& /* my_speed_before */,
-					     GameObj * obj,
-					     const Point2d& /* obj_speed_before */)
+void WeaponProjectile::SignalObjectCollision(GameObj * obj,
+              PhysicalShape * /*shape*/,
+              const Point2d& /* my_speed_before */)
 {
   ASSERT(obj != NULL);
   MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
@@ -358,7 +356,7 @@ void WeaponProjectile::SignalExplosion()
 
 void WeaponProjectile::DoExplosion()
 {
-  Point2i pos = GetCenter();
+  Point2i pos = GetPosition();
   ApplyExplosion(pos, cfg, "weapon/explosion", true, ParticleEngine::BigESmoke);
 }
 
@@ -435,7 +433,7 @@ int WeaponLauncher::GetDamage()
 
 double WeaponLauncher::GetWindFactor()
 {
-  return projectile->GetWindFactor();
+  return projectile->GetPhysic()->GetWindFactor();
 }
 
 double WeaponLauncher::GetMass()
@@ -473,7 +471,7 @@ bool WeaponLauncher::ReloadLauncher()
 // Direct Explosion when pushing weapon to max power !
 void WeaponLauncher::DirectExplosion()
 {
-  Point2i pos = ActiveCharacter().GetCenter();
+  Point2i pos = ActiveCharacter().GetPosition();
   ApplyExplosion(pos, cfg());
 }
 

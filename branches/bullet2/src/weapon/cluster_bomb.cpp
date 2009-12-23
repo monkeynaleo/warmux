@@ -81,15 +81,21 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot(const Point2i & pos, double strength, double angle)
 {
-  SetCollisionModel(true, true, false ); // a bit hackish...
+  // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
 
   begin_time = Time::GetInstance()->Read();
   Camera::GetInstance()->FollowObject(this);
-  ResetConstants();
-  SetXY( pos );
-  SetSpeed(strength, angle);
+  // TODO physic
+  // ResetConstants();
+  SetPosition( pos );
+  SetPosition( pos );
+  GetPhysic()->SetSpeed(strength, angle);
 }
 
 void Cluster::Refresh()
@@ -105,7 +111,7 @@ void Cluster::Refresh()
 void Cluster::Draw()
 {
     // custom Draw() is needed to avoid drawing timeout on top of clusters
-    image->Draw(GetPosition());
+    image->Draw(GetPhysic()->GetPosition());
 };
 
 void Cluster::SignalOutOfMap()
@@ -115,7 +121,7 @@ void Cluster::SignalOutOfMap()
 
 void Cluster::DoExplosion()
 {
-  ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion (GetPhysic()->GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 
 void Cluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
@@ -137,7 +143,7 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg,
 void ClusterBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
+  image->SetRotation_rad(GetPhysic()->GetAngularSpeed());
 }
 
 void ClusterBomb::SignalOutOfMap()
@@ -153,16 +159,15 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const float angle_range = M_PI / 2;
-  Point2i pos = GetPosition();
+  const float base_angle = GetPhysic()->GetAngularSpeed();
+  Point2i pos = GetPhysic()->GetPosition();
   for (uint i = 0; i < fragments; ++i ) 
   {
-    double angle = -M_PI / 2; // this angle is "upwards" here
-    double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
+    double cluster_deviation = base_angle +  i * 2 * M_PI / ( float )fragments;
     double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
-    cluster->Shoot( pos, speed, angle + cluster_deviation );
+    cluster->Shoot( pos, speed, cluster_deviation );
 
     ObjectsList::GetRef().AddObject(cluster);
   }

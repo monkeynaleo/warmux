@@ -388,7 +388,7 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
 void Body::ProcessFollowSpeed(member_mvt & mb_mvt) 
 {
   // Use the movement of the character
-  double angle_rad = owner->GetSpeedAngle();
+  double angle_rad = owner->GetPhysic()->GetAngularSpeed();
 
   if (angle_rad < 0) {
     angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
@@ -414,11 +414,11 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
 {
   member_mvt angle_mvt;
 
-  Point2i v = owner->GetPosition() + member->GetPos();
+  Point2i v = owner->GetPhysic()->GetPosition() + member->GetPos();
   v += member->GetAnchorPos();
 
   if (DIRECTION_LEFT == owner->GetDirection()) {
-    v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
+    v.x = 2 * (int)owner->GetPhysic()->GetPosition().x + GetSize().x/2 - v.x;
     //v.x -= member->GetSprite().GetWidth();
   }
   v = Mouse::GetInstance()->GetWorldPosition() - v;

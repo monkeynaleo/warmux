@@ -47,6 +47,11 @@
 #include "particles/water_drop.h"
 #include "particles/explosion_particle.h"
 
+#ifdef DEBUG
+#include "graphic/colors.h"
+#endif
+
+
 Particle::Particle(const std::string &name) :
   GameObj(name),
   on_top(true), // if true displayed on top of characters and weapons
@@ -57,7 +62,13 @@ Particle::Particle(const std::string &name) :
   m_last_refresh(Time::GetInstance()->Read()),
   image(NULL)
 {
-  SetCollisionModel(false, false, false);
+  // TODO physic:
+/*
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);*/
+  GetPhysic()->SetEnabled(true);
 }
 
 Particle::~Particle()
@@ -68,7 +79,7 @@ Particle::~Particle()
 void Particle::Draw()
 {
   if (m_left_time_to_live > 0) {
-    image->Draw(GetPosition());
+    image->Draw(GetPhysic()->GetPosition());
   }
 }
 
@@ -95,7 +106,8 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
-      SetSize(image->GetSize());
+      // TODO physic
+      //      SetBasicShape(image->GetSize(), GetInitialMass());
       image->SetAlpha(1.0);
     }
     else
@@ -260,9 +272,9 @@ void ParticleEngine::AddNow(const Point2i &position,
         tmp_angle = angle;
       }
 
-      particle->SetXY(position);
+      particle->SetPosition(position);
       particle->SetOnTop(upper);
-      particle->SetSpeed(tmp_norme, tmp_angle);
+      particle->GetPhysic()->SetSpeed(tmp_norme, tmp_angle);
       lst_particles.push_back(particle);
     }
   }
@@ -305,7 +317,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * little_cos[i]),int(norme * little_sin[i])); //Put inside the circle of the explosion
 
-      particle->SetXY(pos);
+      particle->SetPosition(pos);
       lst_particles.push_back(particle);
   }
 }
@@ -322,7 +334,8 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
   const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
-  Particle *particle = NULL;
+  // TODO physic:
+  //Particle *particle = NULL;
   float norme;
   uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
@@ -335,27 +348,29 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
 
-      particle = new ExplosionSmoke(size);
-      particle->SetXY(pos);
-      particle->SetOnTop(true);
+      // TODO physic:
+      //particle = new ExplosionSmoke(size);
+      //particle->SetXY(pos);
+      //particle->SetOnTop(true);
 
-      lst_particles.push_back(particle);
+      //lst_particles.push_back(particle);
   }
 }
 
-void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, const ESmokeStyle &style)
+void ParticleEngine::AddExplosionSmoke(const Point2i &/*position*/, const uint &/*radius*/, const ESmokeStyle &style)
 {
   if (!sprites_loaded)
     return;
 
   if(style == NoESmoke) return;
 
-
+  // TODO physic:
+  /*
   if(style == BigESmoke){
     AddBigESmoke (position, radius);
   }else{
     AddLittleESmoke (position, radius);
-  }
+  }*/
 }
 
 void ParticleEngine::Draw(bool upper)
@@ -365,6 +380,11 @@ void ParticleEngine::Draw(bool upper)
   for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it){
     if ( (*Particle_it)->IsOnTop() == upper) {
       (*Particle_it)->Draw();
+#ifdef DEBUG
+      if (IsLOGGING("polygon.particle")) {
+ (*Particle_it)->DrawShape(primary_red_color);
+      }
+#endif
     }
   }
 
