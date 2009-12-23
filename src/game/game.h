@@ -86,7 +86,18 @@ private:
   Text                waiting_for_network_text;
 
   void Draw();        // Draw to screen
-  void MessageLoading() const;
+
+  // Initialization
+  void InitEverything();
+  void InitGameData_NetGameMaster();
+  void EndInitGameData_NetGameMaster();
+  void EndInitGameData_NetClient();
+  void InitFields();
+  void InitMap();
+  void InitTeams();
+  void InitSounds();
+  void InitData();
+
   void UnloadDatas(bool game_finished) const;
 
   // Input management (keyboard/mouse)
@@ -129,7 +140,6 @@ public:
   static Game * UpdateGameRules();
 
   void Start();
-  void Init();
 
   bool IsCharacterAlreadyChosen() const;
   void SetCharacterChosen(bool chosen);

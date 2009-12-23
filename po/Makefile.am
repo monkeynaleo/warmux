@@ -32,8 +32,6 @@ POTFILES = \
         src/game/game_classic.h \
         src/game/game.cpp \
         src/game/game.h \
-        src/game/game_init.cpp \
-        src/game/game_init.h \
         src/game/game_mode.cpp \
         src/game/game_mode.h \
         src/game/time.cpp \
