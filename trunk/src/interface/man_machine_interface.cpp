@@ -312,14 +312,10 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       case KEY_BACK_JUMP:
         ActiveCharacter().HandleKeyReleased_BackJump();
         break;
-      case KEY_SHOOT:
-        // Shoot key is not accepted in HAS_PLAYED state
+      default:
         if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED)
           return;
         break;
-      default:
-        // Key not supported
-        return;
     }
     if (Game::GetInstance()->ReadState() == Game::PLAYING) {
       switch (key) {
