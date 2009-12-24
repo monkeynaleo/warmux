@@ -322,8 +322,6 @@ Section \$(TITLE_Wormux) Sec_Wormux
   File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WORMUXDIR}\\data"
   ; Licenses
   File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
-  ; Howto-play PDFs
-  File /r /x .svn "${WIN_WORMUXDIR}\\doc\\howto_play"
 EOF
 
 # Glib (gobject, gthread, glib & gmodule)
