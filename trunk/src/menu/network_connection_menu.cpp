@@ -384,7 +384,7 @@ void NetworkConnectionMenu::__RefreshList()
   SDL_SemPost(net_info.lock);
 
   if (cl_net_games_lst->Size() != 0) {
-    if (current > cl_net_games_lst->Size()-1) {
+    if (current > ((int) cl_net_games_lst->Size())-1) {
       current = 0;
     }
     cl_net_games_lst->Select( current );
