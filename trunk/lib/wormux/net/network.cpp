@@ -312,7 +312,7 @@ std::string WNet::IPtoDNS(IPaddress *ip)
     ip_address = std::string(dns_addr);
   } else {
     // We can't resolve the hostname, so just show the ip address
-    unsigned char* str_ip = (unsigned char*)ip->host;
+    unsigned char* str_ip = (unsigned char*)(&(ip->host));
     char formated_ip[16];
     snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
 	     (int)str_ip[1],
