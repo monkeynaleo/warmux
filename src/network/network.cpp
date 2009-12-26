@@ -567,6 +567,22 @@ uint Network::GetNbPlayersConnected() const
   return r;
 }
 
+uint Network::GetNbPlayersInitialized() const
+{
+  uint r = 0;
+
+  SDL_LockMutex(cpus_lock);
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
+      r += (*client)->GetPlayers().size();
+  }
+  SDL_UnlockMutex(cpus_lock);
+
+  return r;
+}
+
 uint Network::GetNbHostsConnected() const
 {
   return cpu.size();
