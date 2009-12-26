@@ -104,6 +104,9 @@ NetworkMenu::NetworkMenu() :
   mode_label = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD, primary_red_color);
   options_box->AddWidget(mode_label);
 
+  play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
+  options_box->AddWidget(play_in_loop);
+
   player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
 				     GameMode::GetInstance()->max_teams, 1, 2,
 				     GameMode::GetInstance()->max_teams);
@@ -116,9 +119,6 @@ NetworkMenu::NetworkMenu() :
   initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
 				  0, Font::FONT_SMALL, Font::FONT_BOLD);
   options_box->AddWidget(initialized_players);
-
-  play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
-  options_box->AddWidget(play_in_loop);
 
   options_box->Pack();
   bottom_box->AddWidget(options_box);
