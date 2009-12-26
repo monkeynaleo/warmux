@@ -161,6 +161,7 @@ public:
   bool IsTurnMaster() const;
 
   uint GetNbPlayersConnected() const;
+  uint GetNbPlayersInitialized() const;
   uint GetNbHostsConnected() const;
   uint GetNbHostsInitialized() const;
   uint GetNbHostsReady() const;

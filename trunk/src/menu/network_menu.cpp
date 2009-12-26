@@ -153,12 +153,10 @@ NetworkMenu::NetworkMenu() :
     // Client Mode
     mode_label->SetText(_("Client mode"));
     player_number->SetVisible(false);
-    connected_players->SetVisible(false);
     initialized_players->SetVisible(false);
   } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
     mode_label->SetText(_("Server mode"));
-
   } else {
     // The first player to connect to a headless server asumes the game master role
     SetGameMasterCallback();
@@ -336,24 +334,29 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
   if (Network::GetInstance()->IsConnected())
   {
     //Refresh the number of connected players:
-    int nbr = Network::GetInstance()->GetNbHostsConnected();
+    int nbr = Network::GetInstance()->GetNbPlayersConnected() + 1;
     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
     if (connected_players->GetText() != pl)
       connected_players->SetText(pl);
 
-    //Refresh the number of players ready:
-    nbr = Network::GetInstance()->GetNbHostsInitialized();
-    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-    if (initialized_players->GetText() != pl) {
-      initialized_players->SetText(pl);
-      msg_box->NewMessage(pl, c_red);
-      if (Network::GetInstance()->GetNbHostsConnected() ==
-	  Network::GetInstance()->GetNbHostsInitialized()
-	  && Network::GetInstance()->GetNbHostsInitialized() != 0) {
-	msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
-      }
-      else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
-	msg_box->NewMessage(_("You are alone. :-/"), c_red);
+    if (Network::GetInstance()->IsGameMaster()) {
+      //Refresh the number of players ready (does not work on client):
+      nbr = Network::GetInstance()->GetNbPlayersInitialized();
+      if (Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK)
+	nbr++;
+
+      pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+      if (initialized_players->GetText() != pl) {
+	initialized_players->SetText(pl);
+	msg_box->NewMessage(pl, c_red);
+	if (Network::GetInstance()->GetNbHostsConnected() ==
+	    Network::GetInstance()->GetNbHostsInitialized()
+	    && Network::GetInstance()->GetNbHostsInitialized() != 0) {
+	  msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
+	}
+	else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
+	  msg_box->NewMessage(_("You are alone. :-/"), c_red);
+	}
       }
     }
   }
