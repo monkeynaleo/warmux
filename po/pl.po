@@ -9,8 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 18:09+0100\n"
-"Last-Translator: Paweł Dyda <pawel.dyda@gazeta.pl>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2009-12-24 23:27+0100\n"
+"Last-Translator: Marek Rogalski <mafikpl@gmail.com>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +129,7 @@ msgstr "%s jest blisko miny!"
 #: src/include/action_handler.cpp:387
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s musi zrobić sobie przerwę."
 
 #: src/object/bonus_box.cpp:98
 #, c-format
@@ -1216,7 +1217,7 @@ msgstr "Bitwy publiczne"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Szybko opuść grę naciskając Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1554,7 +1555,7 @@ msgstr[2] "Zaczekaj! %i graczy nie jest jeszcze gotowych!"
 #: src/game/game.cpp:413
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Oczekiwanie na %s"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
