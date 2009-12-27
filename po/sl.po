@@ -127,7 +127,7 @@ msgstr "%s je blizu mine!"
 #: src/include/action_handler.cpp:387
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s rabi pavzo."
 
 #: src/object/bonus_box.cpp:98
 #, c-format
@@ -1561,7 +1561,7 @@ msgstr[3] "Počakajte! %i igralcev še ni pripravljenih!"
 #: src/game/game.cpp:413
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Čakanje na %s"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
