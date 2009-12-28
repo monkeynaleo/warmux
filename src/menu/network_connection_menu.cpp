@@ -439,15 +439,20 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
 {
   bool r = false;
   int net_port;
+  connection_state_t conn;
 
   if (!internet)
     IndexServer::GetInstance()->SetHiddenServer();
 
-  connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
-  if (conn != CONNECTED) {
-    DisplayNetError(conn);
-    msg_box->NewMessage(_("Error: Unable to contact the index server to host a game"), c_red);
-    goto out;
+  if (internet) {
+    SDL_SemWait(net_info.lock);
+
+    conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
+    if (conn != CONNECTED) {
+      DisplayNetError(conn);
+      msg_box->NewMessage(_("Error: Unable to contact the index server to host a game"), c_red);
+      goto out;
+    }
   }
 
   conn = Network::ServerStart(port, game_name, password);
@@ -462,12 +467,14 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
     goto out;
   }
 
-  r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", net_port);
-  if (false == r) {
-    DisplayNetError(CONN_BAD_PORT);
-    msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
-                        c_red);
-    goto out;
+  if (internet) {
+    r = IndexServer::GetInstance()->SendServerStatus(game_name, password != "", net_port);
+    if (false == r) {
+      DisplayNetError(CONN_BAD_PORT);
+      msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
+			  c_red);
+      goto out;
+    }
   }
 
   if (!Network::GetInstance()->IsConnected()) {
@@ -477,6 +484,8 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   r = true;
 
  out:
+  if (internet)
+    SDL_SemPost(net_info.lock);
   return r;
 }
 
