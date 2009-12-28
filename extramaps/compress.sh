@@ -3,6 +3,11 @@
 # check there is no case-sensitive file
 check_case_files() {
     casefiles=`find ./ -name '*[A-Z]*' | grep -v '.svn' | grep -v 'README' | grep -v 'Makefile'`
+
+    if [ "$casefiles" = "" ]; then
+	return 0
+    fi
+
     nbcasefiles=`/bin/echo -e "$casefiles" | wc -l`
 
     if [ $nbcasefiles -ne 0 ]; then
@@ -20,6 +25,11 @@ check_case_files() {
 # check there is no space in filenames!
 check_space_files() {
     spacefiles=`find ./ -name '* *' | grep -v '.svn' | grep -v 'README' | grep -v 'Makefile'`
+
+    if [ "$spacefiles" = "" ]; then
+	return 0
+    fi
+
     nbspacefiles=`/bin/echo -e "$spacefiles" | wc -l`
 
     if [ $nbspacefiles -ne 0 ]; then
@@ -35,18 +45,46 @@ check_space_files() {
 }
 
 check_files_exist() {
-    /bin/echo -e "\n* checking map $1"
-    grep ' file=' $1/config.xml | sed 's/.*file=\"\(.*\)".*/\1/'
+    filenames=`grep ' file=' $1/config.xml | sed 's/.*file=\"\(.*\)".*/\1/'`
+    for f in $filenames; do
+	if [ ! -f $1/$f ]; then
+	    /bin/echo -e "*** ERROR: file $1/$f does not exist"
+	    return 1
+	fi
+    done
+}
+
+check_water_type() {
+    VALID_WATER_TYPE="no chocolate dirtywater lava radioactive water wine"
+    water=`grep '<water>' $1/config.xml | sed 's%.*<water>\(.*\)</water>.*%\1%'`
+    for w in $VALID_WATER_TYPE; do
+	if [ "$water" = "$w" ]; then
+	    return 0
+	fi
+    done
+
+    echo "*** ERROR: Invalid water type $water for map $1"
+    return 1
 }
 
 check_one_map_config() {
     check_files_exist $1
+
+    if [ $? -ne 0 ]; then
+	return 1
+    fi
+
+    check_water_type $1
 }
 
 check_maps_config() {
     for d in *; do
-	if [ -d '$d' ]; then
-	    check_one_map_config '$d';
+	if [ -d "$d" ]; then
+	    check_one_map_config "$d";
+	    if [ $? -ne 0 ]; then
+		/bin/echo -e "*** ERROR: invalid configuration file for map $d"
+		return 1
+	    fi
 	fi
     done
 }
@@ -55,7 +93,7 @@ check_space_files || exit 1
 
 check_case_files || exit 1
 
-# check_maps_config || exit 1
+check_maps_config || exit 1
 
 DATE=`date +%Y%m%d`
 tar -czf Wormux-BonusMaps-${DATE}.tar.gz * --exclude=.svn --exclude=src --exclude=compress.sh --exclude=*~
