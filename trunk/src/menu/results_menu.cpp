@@ -253,27 +253,27 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
   EnergyList::const_iterator it = team->energy.energy_list.begin(),
     end = team->energy.energy_list.end();
 
-  MSG_DEBUG("menu", "Drawing graph for team %s\n", team->GetName().c_str());
+  MSG_DEBUG("menu", "Drawing graph for team %s", team->GetName().c_str());
 
-  if (it == end)
+  if (it == end) {
+    MSG_DEBUG("menu", "   No point !?!");
     return;
+  }
 
   int sx = x+lround((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
     sy = y-lround((*it)->GetValue()*energy_scale);
   Surface &surface = GetMainWindow();
-  MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)\n",
+  MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)",
             (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
 
   ++it;
-  if (it == end)
-    return;
 
-  do
+  while (it != end)
   {
     int ex = x+lround((*it)->GetDuration()*duration_scale),
       ey = y-lround((*it)->GetValue()*energy_scale);
 
-    MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)\n",
+    MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
               (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
     surface.BoxColor(Rectanglei(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy)), color);
@@ -281,13 +281,15 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
     sx = ex;
     sy = ey;
     ++it;
-  } while (it != end);
+  }
 
   // Missing point
   --it;
   if ((*it)->GetDuration() < max_duration)
   {
-    surface.BoxColor(Rectanglei(sx, sy, x+lround(max_duration*duration_scale)-sx, LINE_THICKNESS), color);
+    int ex = x+lround(max_duration*duration_scale);
+    MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
+    surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
   }
 }
 
@@ -312,6 +314,9 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
         max_duration = team->energy.energy_list.GetDuration();
     }
   }
+  // needed to see correctly energy at the end if two teams have same
+  // energy just before the final blow
+  max_duration += max_duration/50;
 
   // Draw here the graph and stuff
   Surface &surface = GetMainWindow();
