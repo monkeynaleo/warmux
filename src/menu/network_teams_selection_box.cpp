@@ -377,4 +377,6 @@ void NetworkTeamsSelectionBox::SetNbLocalTeams(uint nb)
   __SetNbLocalTeams(nb, current_nb_teams);
 
   local_teams_nb->SetValue(nb);
+
+  local_teams_nb->SetMinValue(1);
 }
