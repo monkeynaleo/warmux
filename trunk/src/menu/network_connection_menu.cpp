@@ -379,7 +379,7 @@ void NetworkConnectionMenu::__RefreshList()
   for (std::list<GameServerInfo>::iterator it = net_info.lst_games.begin();
        it != net_info.lst_games.end(); ++it) {
     cl_net_games_lst->AddItem(false, it->passworded, it->ip_address,
-                              it->port, it->dns_address, it->game_name);
+                              it->port, WNet::IPStrToDNS(it->ip_address), it->game_name);
   }
   SDL_SemPost(net_info.lock);
 

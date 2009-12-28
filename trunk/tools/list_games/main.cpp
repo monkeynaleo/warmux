@@ -4,7 +4,9 @@
 #include <WORMUX_index_server.h>
 #include <WORMUX_random.h>
 
-void list_games(std::string version)
+bool numeric_name = false;
+
+void list_games(std::string version, bool show_dns)
 {
   connection_state_t conn = IndexServer::GetInstance()->Connect(version);
   if (conn != CONNECTED) {
@@ -27,21 +29,49 @@ void list_games(std::string version)
   }
 
   for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
+    std::string dns;
+
+    if (show_dns) {
+      dns = WNet::IPStrToDNS(it->ip_address);
+    } else {
+      dns = it->ip_address;
+    }
+
     printf("%s (%d) %s:%s - %s - %s\n",
 	   version.c_str(), it->passworded, it->ip_address.c_str(), it->port.c_str(),
-	   it->dns_address.c_str(), it->game_name.c_str());
+	   dns.c_str(), it->game_name.c_str());
+  }
+}
+
+void parseArgs(int argc, char *argv[])
+{
+  int opt;
+
+  while ((opt = getopt(argc, argv, "n")) != -1) {
+    switch (opt) {
+    case 'n':
+      numeric_name = true;
+      break;
+    default:
+      break;
+    }
   }
 }
 
 int main(int argc, char *argv[])
 {
-  if (argc < 2) {
-    fprintf(stderr, "usage: list_games <version> [<version> ...]\n");
+  parseArgs(argc, argv);
+
+  if (optind - argc >= 0) {
+    fprintf(stderr,
+	    "usage: wormux-list-games [OPTIONS] <version> [<version> ...]\n"
+	    "OPTIONS\n"
+	    "\t-n\t show numerical addresses instead of trying to determine symbolic host names\n");
     exit(EXIT_FAILURE);
   }
 
   RandomLocal().InitRandom();
 
-  for (int i = 1; i < argc; i++)
-    list_games(argv[i]);
+  for (int i = optind; i < argc; i++)
+    list_games(argv[i], !numeric_name);
 }

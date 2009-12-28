@@ -36,7 +36,6 @@ class GameServerInfo
  public:
   std::string ip_address;
   std::string port;
-  std::string dns_address;
   std::string game_name;
   bool        passworded;
 };
