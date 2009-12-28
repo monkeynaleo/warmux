@@ -8,15 +8,15 @@
     <country>France</country>
   </author>
 
-  <surface name="sky" file="Ombre.jpg" />
-  <surface name="map" file="Ombre.png" />
+  <surface name="sky" file="ombre.jpg" />
+  <surface name="map" file="ombre.png" />
   <surface name="preview" file="preview.jpg" />
 
   <name>Shadows</name>
   <water>water</water>
   <nb_mine>6</nb_mine>
   <is_open>1</is_open>
-  
+
   <sprite name="wind_particle">
    <image file="point.png">
      <grid pos="0,0" size="16,16" array="1,1"/>
