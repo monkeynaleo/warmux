@@ -6,7 +6,7 @@
     <country>Italy</country>
   </author>
 
-  <surface name="sky" file="mont14.png" />
+  <surface name="sky" file="mont14.jpg" />
   <surface name="map" file="cubism3.png" />
   <surface name="preview" file="preview.jpg" />
 
