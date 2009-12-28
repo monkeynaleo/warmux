@@ -315,15 +315,28 @@ void Game::WaitForOtherPlayers()
   ActionHandler::GetInstance()->ExecFrameLessActions();
 }
 
+void Game::DisplayError(const std::string &msg)
+{
+  JukeBox::GetInstance()->Play("default", "menu/error");
+
+  std::cerr << msg << std::endl;
+
+  Question question(Question::WARNING);
+  question.Set(msg, true, 0);
+  Time::GetInstance()->SetWaitingForUser(true);
+  question.Ask();
+  Time::GetInstance()->SetWaitingForUser(false);
+}
+
 void Game::Start()
 {
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
-  InitEverything();
-
   try
   {
+    InitEverything();
+
     JukeBox::GetInstance()->PlayMusic(ActiveMap()->ReadMusicPlaylist());
 
     bool game_finished = Run();
@@ -339,16 +352,14 @@ void Game::Start()
   }
   catch (const std::exception &e)
   {
-    Question question(Question::WARNING);
+    // thanks to exception mechanism, cancel some things by hand...
+    Mouse::GetInstance()->Show();
+
     std::string err_msg = e.what();
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
-    question.Set (txt, true, 0);
-    Time::GetInstance()->SetWaitingForUser(true);
-    question.Ask();
-    Time::GetInstance()->SetWaitingForUser(false);
+    DisplayError(txt);
   }
-
 }
 
 void Game::UnloadDatas(bool game_finished) const

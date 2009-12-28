@@ -141,6 +141,8 @@ public:
 
   Chat                chatsession;
 
+  void DisplayError(const std::string &msg);
+
   // Set mode
   static Game * UpdateGameRules();
 
