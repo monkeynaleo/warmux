@@ -7,7 +7,7 @@
     <country>Spain</country>
   </author>
 
-  <surface name="sky" file="BG.jpg" />
+  <surface name="sky" file="bg.jpg" />
   <surface name="map" file="puyolandia.png" />
   <surface name="preview" file="preview.jpg" />
 
