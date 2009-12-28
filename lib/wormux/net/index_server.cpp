@@ -386,8 +386,6 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     if (!r)
       goto out;
 
-    game_server_info.dns_address = WNet::IPtoDNS(&ip);
-
     unsigned char* str_ip = (unsigned char*)&ip.host;
     char formated_ip[16];
     snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
@@ -400,10 +398,9 @@ std::list<GameServerInfo> IndexServer::GetHostList()
     sprintf(port, "%d", ip.port);
     game_server_info.port = std::string(port);
 
-    MSG_DEBUG("index_server","ip: %s, port: %s, dns: %s, name: %s, pwd=%s\n",
+    MSG_DEBUG("index_server","ip: %s, port: %s, name: %s, pwd=%s\n",
 	      game_server_info.ip_address.c_str(),
 	      game_server_info.port.c_str(),
-	      game_server_info.dns_address.c_str(),
 	      game_server_info.game_name.c_str(),
               (game_server_info.passworded) ? "yes" : "no");
 
