@@ -105,9 +105,9 @@ m_last_minimap_redraw(0)
   Color text_color = GetResourceManager().LoadColor(res, "interface/text_color");
   Color energy_text_color = GetResourceManager().LoadColor(res, "interface/energy_text_color");
 
-m_camera_preview_color = GetResourceManager().LoadColor(res, "interface/camera_preview_color");
+  m_camera_preview_color = GetResourceManager().LoadColor(res, "interface/camera_preview_color");
 
-m_playing_character_preview_color = GetResourceManager().LoadColor(res, "interface/playing_character_preview_color");
+  m_playing_character_preview_color = GetResourceManager().LoadColor(res, "interface/playing_character_preview_color");
 
 
   // XXX Unused !?
@@ -376,7 +376,7 @@ void Interface::DrawMapPreview()
   window.Blit(*minimap, offset);
 
   Point2i coord;
-  
+
   FOR_EACH_TEAM(team) {
     const Surface & icon = (*team)->GetMiniFlag();
 
@@ -399,7 +399,7 @@ void Interface::DrawMapPreview()
       } else {
         GetWorld().ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
       }
-  
+
     }
   }
 
@@ -415,43 +415,43 @@ void Interface::DrawMapPreview()
     cameraTopLeftCorner.y = offset.y;
     line_on_top = false;
   }
-  
+
   if (cameraTopLeftCorner.x < offset.x) {
     cameraTopLeftCorner.x = offset.x;
     line_on_left = false;
   }
-  
+
   if (cameraBottomRightCorner.y >  offset.y + GetWorld().ground.GetPreviewSize().y) {
     cameraBottomRightCorner.y = offset.y + GetWorld().ground.GetPreviewSize().y;
     line_on_bottom = false;
   }
-  
+
   if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x ) {
     cameraBottomRightCorner.x = offset.x + GetWorld().ground.GetPreviewSize().x;
     line_on_right = false;
   }
-  
+
   if (line_on_top) {
     GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
-                              cameraTopLeftCorner.y, cameraTopLeftCorner.y, 
+                              cameraTopLeftCorner.y, cameraTopLeftCorner.y,
                               m_camera_preview_color);
   }
 
-  if (line_on_right) {  
+  if (line_on_right) {
     GetMainWindow().LineColor(cameraBottomRightCorner.x, cameraBottomRightCorner.x,
-                              cameraTopLeftCorner.y, cameraBottomRightCorner.y, 
+                              cameraTopLeftCorner.y, cameraBottomRightCorner.y,
                               m_camera_preview_color);
   }
 
-  if (line_on_bottom) {  
+  if (line_on_bottom) {
     GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
-                              cameraBottomRightCorner.y,cameraBottomRightCorner.y, 
+                              cameraBottomRightCorner.y,cameraBottomRightCorner.y,
                               m_camera_preview_color);
   }
 
   if (line_on_left) {
     GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraTopLeftCorner.x,
-                              cameraTopLeftCorner.y, cameraBottomRightCorner.y, 
+                              cameraTopLeftCorner.y, cameraBottomRightCorner.y,
                               m_camera_preview_color);
   }
 
@@ -488,7 +488,7 @@ void Interface::GenerateStyledBox(Surface & source)
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
   source.MergeSurface(rounding_style[2][2],temp_position);
 
-  for(int i = rounding_style[0][0].GetSize().x; 
+  for(int i = rounding_style[0][0].GetSize().x;
       i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
       ++i) {
     temp_position = temp_rect.GetPosition();
@@ -499,7 +499,7 @@ void Interface::GenerateStyledBox(Surface & source)
     source.MergeSurface(rounding_style[1][2],temp_position);
   }
 
-  for(int i = rounding_style[0][0].GetSize().y; 
+  for(int i = rounding_style[0][0].GetSize().y;
       i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
       ++i) {
     temp_position = temp_rect.GetPosition();
@@ -510,7 +510,7 @@ void Interface::GenerateStyledBox(Surface & source)
     source.MergeSurface(rounding_style[2][1],temp_position);
   }
 
-  for(int i = rounding_style[0][0].GetSize().x; 
+  for(int i = rounding_style[0][0].GetSize().x;
       i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
       ++i) {
 
@@ -633,7 +633,7 @@ void Interface::UpdateTimer(uint utimer, const Color& color)
   remaining_turn_time = utimer;
 }
 
-void Interface::UpdateWindIndicator(int wind_value) 
+void Interface::UpdateWindIndicator(int wind_value)
 {
   wind_bar.UpdateValue(wind_value);
   /*
