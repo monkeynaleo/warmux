@@ -53,9 +53,6 @@ void Teleportation::UpdateTranslationStrings()
 
 bool Teleportation::p_Shoot ()
 {
-  if(!target_chosen)
-    return false;
-
   // Check we are not going outside of the world !
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
     return false;
@@ -73,8 +70,7 @@ bool Teleportation::p_Shoot ()
 
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
-	Camera::GetInstance()->SetAutoCrop(false);
-  target_chosen = false; // ensure next teleportation cannot be done pressing key space
+  Camera::GetInstance()->SetAutoCrop(false);
   return true;
 }
 
