@@ -66,7 +66,8 @@ const uint ANIM_DISPLAY_TIME = 400;
 Weapon::Weapon(Weapon_type type,
                const std::string &id,
                EmptyWeaponConfig * params,
-               weapon_visibility_t visibility)
+               bool drawable):
+  drawable(drawable)
 {
   m_type = type;
   m_category = INVALID;
@@ -97,7 +98,6 @@ Weapon::Weapon(Weapon_type type,
 
   m_can_change_weapon = false;
 
-  m_visibility = visibility;
   m_unit_visibility = ALWAYS_VISIBLE;
 
   m_image = NULL;
@@ -108,7 +108,7 @@ Weapon::Weapon(Weapon_type type,
 
   extra_params = params;
 
-  if (m_visibility != NEVER_VISIBLE)
+  if (drawable)
   {
     m_image = new Sprite( GetResourceManager().LoadImage(weapons_res_profile, m_id));
     if(!EqualsZero(min_angle - max_angle))
@@ -516,29 +516,9 @@ void Weapon::Draw(){
 
   DrawAmmoUnits();
 
-  switch (m_visibility)
-    {
-      case ALWAYS_VISIBLE:
-        break;
-
-      case NEVER_VISIBLE:
-        return;
-        break;
-
-      case VISIBLE_ONLY_WHEN_ACTIVE:
-        if (!IsInUse())
-          return ;
-        break;
-
-      case VISIBLE_ONLY_WHEN_INACTIVE:
-        if (IsInUse())
-          return ;
-        break;
-
-      default:
-        printf ("Hum... there is a problem !!!\n");
-        break;
-    }
+  ASSERT(drawable || !ShouldBeDrawn());
+  if (!(drawable && ShouldBeDrawn()))
+    return;
 
   if(ActiveCharacter().IsGhost()
   || ActiveCharacter().IsDrowned()
@@ -731,7 +711,7 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   // Load extra parameters if existing
   if (extra_params != NULL) extra_params->LoadXml(elem);
 
-  if (m_visibility != NEVER_VISIBLE && origin == weapon_origin_HAND)
+  if (drawable && origin == weapon_origin_HAND)
     m_image->SetRotation_HotSpot(position);
 
   return true;

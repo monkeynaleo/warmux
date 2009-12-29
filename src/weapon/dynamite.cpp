@@ -102,7 +102,7 @@ void DynamiteStick::SignalDrowning()
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-    WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+    WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig())
 {
   UpdateTranslationStrings();
 
@@ -138,6 +138,11 @@ bool Dynamite::p_Shoot ()
   return true;
 }
 
+bool Dynamite::ShouldBeDrawn()
+{
+  return !IsOnCooldownFromShot();
+}
+
 std::string Dynamite::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
@@ -145,4 +150,3 @@ std::string Dynamite::GetWeaponWinString(const char *TeamName, uint items_count)
             "%s team has won %u dynamites!",
             items_count), TeamName, items_count);
 }
-

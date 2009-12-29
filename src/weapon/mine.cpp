@@ -205,7 +205,7 @@ void ObjMine::Draw()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
+Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance())
 {
   UpdateTranslationStrings();
 
@@ -233,6 +233,11 @@ bool Mine::p_Shoot()
   Add (x, y);
 
   return true;
+}
+
+bool Mine::ShouldBeDrawn()
+{
+  return !IsOnCooldownFromShot();
 }
 
 void Mine::Add(int x, int y)

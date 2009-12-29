@@ -40,7 +40,7 @@ const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumptio
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
-                            NEVER_VISIBLE)
+                            false)
 {
   UpdateTranslationStrings();
 

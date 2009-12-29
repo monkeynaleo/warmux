@@ -47,6 +47,7 @@ class Parachute : public Weapon
     ~Parachute();
     void Draw();
     bool IsInUse() const;
+    virtual bool ShouldBeDrawn() { return false; };
 
     void StartShooting();
 

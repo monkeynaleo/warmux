@@ -34,8 +34,7 @@
 #include "weapon/teleportation.h"
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
-                                        new WeaponConfig(),
-                                        VISIBLE_ONLY_WHEN_INACTIVE)
+                                        new WeaponConfig())
 {
   UpdateTranslationStrings();
 
@@ -89,6 +88,11 @@ void Teleportation::Refresh()
 	Camera::GetInstance()->SetAutoCrop(true);
 	return;
   }
+}
+
+bool Teleportation::ShouldBeVisible()
+{
+  return !IsOnCooldownFromShot();
 }
 
 void Teleportation::p_Select()

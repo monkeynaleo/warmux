@@ -131,7 +131,7 @@ class WeaponLauncher : public Weapon
     WeaponLauncher(Weapon_type type,
                    const std::string &id,
                    EmptyWeaponConfig * params,
-                   weapon_visibility_t visibility = ALWAYS_VISIBLE);
+                   bool drawable = true);
     virtual ~WeaponLauncher();
 
     // Methods to access data of the projectile

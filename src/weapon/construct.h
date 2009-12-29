@@ -42,6 +42,7 @@ private:
 protected:
   bool p_Shoot();
   void Refresh() { };
+  bool ShouldBeDrawn() { return false; };
 
 public:
   Construct();

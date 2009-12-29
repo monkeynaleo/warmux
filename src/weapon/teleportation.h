@@ -36,6 +36,7 @@ class Teleportation : public Weapon
     bool p_Shoot();
     void p_Select();
     void Refresh();
+    virtual bool ShouldBeVisible();
   public:
     Teleportation();
     void Draw() { if (!IsInUse()) Weapon::Draw(); };

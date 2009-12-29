@@ -33,6 +33,7 @@ class Dynamite : public WeaponLauncher
   protected:
     bool p_Shoot();
     WeaponProjectile * GetProjectileInstance();
+    virtual bool ShouldBeDrawn();
   public:
     Dynamite();
     void UpdateTranslationStrings();
