@@ -123,8 +123,3 @@ bool Slap::p_Shoot (){
 
   return true;
 }
-
-bool Slap::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}

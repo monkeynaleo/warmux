@@ -31,7 +31,6 @@ class Slap : public Weapon
 {
   protected:
     bool p_Shoot();
-    virtual bool IsInUse() const;
     virtual void Refresh() {};
   public:
     Slap();

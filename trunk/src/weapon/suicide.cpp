@@ -65,11 +65,6 @@ void Suicide::Refresh()
   }
 }
 
-bool Suicide::IsInUse() const
-{
-  return m_last_fire_time > 0 && !ActiveCharacter().IsDead();
-}
-
 ExplosiveWeaponConfig& Suicide::cfg()
 {
   return static_cast<ExplosiveWeaponConfig&>(*extra_params);

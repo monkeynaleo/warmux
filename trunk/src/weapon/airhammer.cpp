@@ -166,11 +166,6 @@ void Airhammer::Refresh()
   }
 }
 
-bool Airhammer::IsInUse() const
-{
-  return IsOnCooldownFromShot() || active;
-}
-
 void Airhammer::p_Select()
 {
   select_sound.Play("default","weapon/airhammer_select",-1);

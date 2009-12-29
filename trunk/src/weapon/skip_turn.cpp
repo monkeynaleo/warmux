@@ -68,8 +68,3 @@ std::string SkipTurn::GetWeaponWinString(const char *TeamName, uint items_count 
             "%s team has won %u turn skips! I know you'll love them.",
             items_count), TeamName, items_count);
 }
-
-bool SkipTurn::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}

@@ -165,8 +165,3 @@ void Construct::Down() const
 
 WeaponConfig& Construct::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
-
-bool Construct::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}

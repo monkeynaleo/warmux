@@ -45,7 +45,6 @@ class Blowtorch : public Weapon
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    virtual bool IsInUse() const { return active; }
 };
 
 #endif  // __BLOWTORCH_H__

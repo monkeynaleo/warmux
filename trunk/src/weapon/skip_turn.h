@@ -32,7 +32,6 @@ class SkipTurn : public Weapon
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    bool IsInUse() const;
   protected:
     bool p_Shoot();
     void Refresh() { };

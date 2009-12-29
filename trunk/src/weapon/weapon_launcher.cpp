@@ -457,11 +457,6 @@ bool WeaponLauncher::p_Shoot()
   return true;
 }
 
-bool WeaponLauncher::IsInUse() const
-{
-  return IsOnCooldownFromShot() || IsLoading();
-}
-
 bool WeaponLauncher::ReloadLauncher()
 {
   if (projectile)

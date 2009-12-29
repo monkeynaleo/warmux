@@ -85,12 +85,6 @@ void Parachute::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-bool Parachute::IsInUse() const
-{
-  return Game::GetInstance()->GetRemainingTime() > 0 &&
-         Game::GetInstance()->ReadState() == Game::PLAYING;
-}
-
 bool Parachute::p_Shoot()
 {
   m_used_this_turn = false;

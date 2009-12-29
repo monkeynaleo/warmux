@@ -212,13 +212,6 @@ public:
   // Return true if we have been able to trigger the weapon
   bool Shoot();
 
-  // The weapon is still in use (animation for instance) ?
-  virtual bool IsInUse() const {
-    // TODO : remove m_is_active by something like :
-    // return m_last_fire_time + 1000 > Time::GetInstance()->Read();
-   return m_is_active;
-  };
-
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const { return EnoughAmmo(); };
 

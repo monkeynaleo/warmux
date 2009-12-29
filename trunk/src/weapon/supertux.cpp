@@ -265,11 +265,6 @@ bool TuxLauncher::ShouldBeDrawn()
   return !(current_tux || tux_death_time);
 }
 
-bool TuxLauncher::IsInUse() const
-{
-  return (current_tux || tux_death_time);
-}
-
 void TuxLauncher::SignalEndOfProjectile()
 {
   if (!current_tux)
