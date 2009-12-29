@@ -38,6 +38,7 @@ class Airhammer : public Weapon
     void RepeatShoot();
     SoundSample drill_sound;
     SoundSample select_sound;
+    bool active;
 
   protected:
     void p_Select();
