@@ -32,7 +32,6 @@ class Syringe : public Weapon
 {
   protected:
     bool p_Shoot();
-    void Refresh() { if (IsInUse()) m_is_active = false; };
 
     void Draw() { Weapon::Draw(); };
 
