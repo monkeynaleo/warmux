@@ -36,7 +36,7 @@ const uint HEIGHT=15;
 const uint XPOS=25;
 const uint YPOS=130;
 const uint MAXLINES=10; //Fidel's advise
-const uint MAXSECONDS=10;
+const uint MAXSECONDS=40;
 
 Chat::~Chat()
 {
