@@ -947,7 +947,7 @@ PhysicalObj* Game::GetMovingObject() const
 bool Game::IsAnythingMoving() const
 {
   // Is the weapon still active or an object still moving ??
-  if (ActiveTeam().GetWeapon().IsInUse())
+  if (ActiveTeam().GetWeapon().IsOnCooldownFromShot())
   {
     MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
     return true;
