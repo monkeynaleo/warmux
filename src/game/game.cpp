@@ -112,7 +112,7 @@ Game * Game::UpdateGameRules()
 
 void Game::InitEverything()
 {
-  int icon_count = 5;
+  int icon_count = Network::GetInstance()->IsLocal() ? 4 : 5;
   LoadingScreen loading_sreen(icon_count);
 
   Config::GetInstance()->RemoveAllObjectConfigs();
@@ -161,11 +161,13 @@ void Game::InitEverything()
   // Loading is finished, sound effects can be enabled again
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
-  std::cout << "o " << _("Waiting for remote players") << std::endl;
-  // Load teams' sound profiles
-  loading_sreen.StartLoading(5, "network_icon", _("Network"));
-  WaitForOtherPlayers();
-
+  // Waiting for others players
+  if (!Network::GetInstance()->IsLocal()) {
+    std::cout << "o " << _("Waiting for remote players") << std::endl;
+    loading_sreen.StartLoading(5, "network_icon", _("Network"));
+    WaitForOtherPlayers();
+  }
+  ActionHandler::GetInstance()->ExecFrameLessActions();
   ResetUniqueIds();
 
   fps->Reset();
@@ -304,19 +306,15 @@ void Game::InitInterface()
 
 void Game::WaitForOtherPlayers()
 {
-  // Waiting for others players
-  if (!Network::GetInstance()->IsLocal()) {
-    if  (Network::GetInstance()->IsGameMaster())
-      EndInitGameData_NetGameMaster();
-    else {
-      EndInitGameData_NetClient();
+  if (Network::GetInstance()->IsGameMaster()) {
+    EndInitGameData_NetGameMaster();
+  } else {
+    EndInitGameData_NetClient();
 
-      // We have been elected as game master (the previous one has been disconnected)
-      if (Network::GetInstance()->IsGameMaster())
-        EndInitGameData_NetGameMaster();
-    }
+    // We have been elected as game master (the previous one has been disconnected)
+    if (Network::GetInstance()->IsGameMaster())
+      EndInitGameData_NetGameMaster();
   }
-  ActionHandler::GetInstance()->ExecFrameLessActions();
 }
 
 void Game::DisplayError(const std::string &msg)
