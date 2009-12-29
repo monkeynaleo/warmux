@@ -98,8 +98,6 @@ Weapon::Weapon(Weapon_type type,
 
   m_can_change_weapon = false;
 
-  m_unit_visibility = ALWAYS_VISIBLE;
-
   m_image = NULL;
   m_weapon_fire = NULL;
 
@@ -631,25 +629,8 @@ void Weapon::DrawWeaponFire()
 
 void Weapon::DrawAmmoUnits() const
 {
-  switch (m_unit_visibility) {
-
-  case VISIBLE_ONLY_WHEN_ACTIVE:
-    if (!IsInUse())
-      return;
-    break;
-
-  case VISIBLE_ONLY_WHEN_INACTIVE:
-    if (IsInUse())
-      return ;
-    break;
-
-  case NEVER_VISIBLE:
+  if (!ShouldAmmoUnitsBeDrawn())
     return;
-    break;
-
-  default:
-    ; // nothing to do
-  }
 
   if (m_initial_nb_unit_per_ammo > 1)
   {
