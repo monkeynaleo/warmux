@@ -139,7 +139,7 @@ bool SubMachineGun::p_Shoot()
 
 void SubMachineGun::Refresh()
 {
-  if (shoot_started) {
+  if (shoot_started && EnoughAmmoUnit()) {
     Weapon::RepeatShoot();
   }
 }
