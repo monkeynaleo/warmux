@@ -102,7 +102,7 @@ WeaponProjectile * SnipeRifle::GetProjectileInstance()
 
 bool SnipeRifle::p_Shoot()
 {
-  if(IsInUse())
+  if (IsOnCooldownFromShot())
     return false;
 
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
@@ -232,7 +232,7 @@ void SnipeRifle::DrawBeam()
 void SnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
-  if( Game::GetInstance()->ReadState() != Game::PLAYING || IsInUse() ) return;
+  if( Game::GetInstance()->ReadState() != Game::PLAYING || IsOnCooldownFromShot() ) return;
   ComputeCrossPoint();
   DrawBeam();
   // Draw the laser impact

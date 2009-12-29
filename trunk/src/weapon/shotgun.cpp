@@ -114,7 +114,7 @@ bool Shotgun::p_Shoot ()
 {
   missed_shots = 0;
   announce_missed_shots = false;
-  if (IsInUse())
+  if (IsOnCooldownFromShot())
     return false;
 
   for(int i = 0; i < SHOTGUN_BULLETS; i++) {
