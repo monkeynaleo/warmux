@@ -112,7 +112,8 @@ Game * Game::UpdateGameRules()
 
 void Game::InitEverything()
 {
-  LoadingScreen loading_sreen;
+  int icon_count = 5;
+  LoadingScreen loading_sreen(icon_count);
 
   Config::GetInstance()->RemoveAllObjectConfigs();
 
