@@ -160,6 +160,9 @@ void Game::InitEverything()
   // Loading is finished, sound effects can be enabled again
   JukeBox::GetInstance()->ActiveEffects(enable_sound);
 
+  std::cout << "o " << _("Waiting for remote players") << std::endl;
+  // Load teams' sound profiles
+  loading_sreen.StartLoading(5, "network_icon", _("Network"));
   WaitForOtherPlayers();
 
   ResetUniqueIds();
