@@ -50,6 +50,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
   move_up = false;
   m_flying = false;
+  active = false;
 }
 
 void JetPack::UpdateTranslationStrings()
@@ -67,8 +68,7 @@ bool JetPack::IsInAir()
 
 void JetPack::Refresh()
 {
-  if (IsInUse())
-  {
+  if (active) {
     Point2d F(0.0, 0.0);
     if (move_up) {
       F.y = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
@@ -122,6 +122,7 @@ void JetPack::p_Select()
 void JetPack::p_Deselect()
 {
   move_up = false;
+  active = false;
   ActiveCharacter().SetExternForce(0,0);
   StopFlying();
   ActiveCharacter().SetClothe("normal");
@@ -188,36 +189,40 @@ bool JetPack::IsPreventingWeaponAngleChanges()
 
 void JetPack::HandleKeyPressed_Up(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (active)
     StartMovingUpForAllPlayers();
 }
 
 void JetPack::HandleKeyReleased_Up(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (active)
     StopMovingUpForAllPlayers();
 }
 
 void JetPack::StartShooting()
 {
-  if (IsInUse()) {
-    p_Deselect();
-    ActiveTeam().AccessNbUnits() = 0;
+  if (active) {
+    Deselect();
+    if (EnoughAmmo())
+      Select();
   } else {
-    Weapon::StartShooting();
+    if (EnoughAmmo()) {
+      UseAmmo();
+      active = true;
+      ActiveCharacter().SetClothe("jetpack-fire");
+    }
   }
 }
 
 bool JetPack::p_Shoot()
 {
-  ActiveCharacter().SetClothe("jetpack-fire");
-
+  ASSERT(false);
   return true;
 }
 
 bool JetPack::ShouldAmmoUnitsBeDrawn() const
 {
-  return m_is_active;
+  return active;
 }
 
 std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count ) const
