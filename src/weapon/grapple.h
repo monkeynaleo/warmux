@@ -45,6 +45,7 @@ class Grapple : public Weapon
 
     // Rope launching data.
     bool m_attaching;
+    bool attached;
     double m_initial_angle;
     uint m_launch_time;
     uint m_hooked_time;
