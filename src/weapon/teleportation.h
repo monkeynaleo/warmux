@@ -43,7 +43,6 @@ class Teleportation : public Weapon
     void ChooseTarget(Point2i mouse_pos);
     virtual void StartShooting() {}
     virtual void StopShooting() {}
-    bool IsInUse() const;
     WeaponConfig& cfg();
 
     void UpdateTranslationStrings();

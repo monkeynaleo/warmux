@@ -59,7 +59,6 @@ public:
   void SetAngle(double _angle) { angle = _angle; }; // to be used by network
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
-  bool IsInUse() const;
   WeaponConfig& cfg();
 };
 

@@ -164,7 +164,6 @@ class WeaponLauncher : public Weapon
     void DecActiveProjectile() { --nb_active_projectile; };
 
     virtual void IncMissedShots();
-    virtual bool IsInUse() const;
 
     // Handle mouse events
     virtual void HandleMouseWheelUp(bool shift);

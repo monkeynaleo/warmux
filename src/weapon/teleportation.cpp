@@ -128,8 +128,3 @@ WeaponConfig& Teleportation::cfg()
 {
   return static_cast<WeaponConfig&>(*extra_params);
 }
-
-bool Teleportation::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}

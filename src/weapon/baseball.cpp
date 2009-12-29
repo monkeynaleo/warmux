@@ -102,11 +102,6 @@ bool Baseball::p_Shoot()
   return true;
 }
 
-bool Baseball::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}
-
 BaseballConfig& Baseball::cfg()
 {
   return static_cast<BaseballConfig&>(*extra_params);

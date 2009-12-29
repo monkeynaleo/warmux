@@ -40,7 +40,6 @@ class FlameThrower : public WeaponLauncher
     virtual void Refresh();
     virtual void StartShooting();
     virtual void StopShooting();
-    virtual bool IsInUse() const {return WeaponLauncher::IsInUse() || m_is_active;}
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

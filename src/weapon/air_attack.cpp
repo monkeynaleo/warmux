@@ -247,11 +247,6 @@ void AirAttack::p_Select()
       Mouse::GetInstance()->SetPointer(Mouse::POINTER_ATTACK);
 }
 
-bool AirAttack::IsInUse() const
-{
-  return IsOnCooldownFromShot();
-}
-
 AirAttackConfig& AirAttack::cfg()
 {
   return static_cast<AirAttackConfig&>(*extra_params);

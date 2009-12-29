@@ -144,11 +144,6 @@ void SubMachineGun::Refresh()
   }
 }
 
-bool SubMachineGun::IsInUse() const
-{
-  return shoot_started;
-}
-
 std::string SubMachineGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(

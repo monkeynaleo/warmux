@@ -40,8 +40,6 @@ protected:
 public:
   SubMachineGun();
 
-  virtual bool IsInUse() const;
-
   virtual void UpdateTranslationStrings();
   virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };

@@ -64,7 +64,6 @@ class JetPack : public Weapon
     void p_Select();
     void p_Deselect();
     bool p_Shoot();
-    virtual bool IsInUse() const { return active; };
     virtual bool ShouldBeDrawn() { return false; };
     virtual bool ShouldAmmoUnitsBeDrawn() const;
 

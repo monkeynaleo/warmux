@@ -49,7 +49,6 @@ class Airhammer : public Weapon
   public:
     Airhammer();
     AirhammerConfig &cfg();
-    bool IsInUse() const;
     void StartShooting();
     void StopShooting();
     void UpdateTranslationStrings();
