@@ -56,7 +56,9 @@ class AirhammerConfig : public WeaponConfig
 
 //-----------------------------------------------------------------------------
 
-Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
+Airhammer::Airhammer():
+  Weapon(WEAPON_AIR_HAMMER, "airhammer", new AirhammerConfig()),
+  active(false)
 {
   UpdateTranslationStrings();
 
@@ -78,6 +80,7 @@ void Airhammer::UpdateTranslationStrings()
 
 bool Airhammer::p_Shoot()
 {
+  active = true;
   //if the sound isn't already playing, play it again.
   select_sound.Stop();
   if (!drill_sound.IsPlaying()) {
@@ -138,6 +141,7 @@ void Airhammer::p_Deselect()
   drill_sound.Stop();
   select_sound.Stop();
   ActiveCharacter().SetMovement("breathe");
+  active = false;
 }
 
 void Airhammer::StartShooting()
@@ -157,14 +161,14 @@ void Airhammer::StopShooting()
 
 void Airhammer::Refresh()
 {
-  if (EnoughAmmoUnit()) {
+  if (EnoughAmmoUnit() && active) {
     Weapon::RepeatShoot();
   }
 }
 
 bool Airhammer::IsInUse() const
 {
-  return IsOnCooldownFromShot() || m_is_active;
+  return IsOnCooldownFromShot() || active;
 }
 
 void Airhammer::p_Select()
