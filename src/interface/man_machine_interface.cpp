@@ -203,10 +203,8 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
       ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump();
       break;
     case KEY_SHOOT:
-      if (Game::GetInstance()->ReadState() == Game::PLAYING) {
-        ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
-        break;
-      }
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
+      break;
     default:
       // key not supported
       return;
