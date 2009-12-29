@@ -97,27 +97,24 @@ bool Construct::p_Shoot ()
 
 void Construct::Draw()
 {
-  if (!IsInUse()) {
-    Weapon::Draw();
+  Weapon::Draw();
 
-    if (EnoughAmmo()
-	&& EnoughAmmoUnit()
-	&& !Interface::GetInstance()->weapons_menu.IsDisplayed()
-	&& Interface::GetInstance()->IsDisplayed()
-	&& Network::GetInstance()->IsTurnMaster()) {
-      dst = Mouse::GetInstance()->GetWorldPosition();
-      construct_spr->SetRotation_rad(angle);
-      construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+  if (EnoughAmmo()
+    && EnoughAmmoUnit()
+    && !Interface::GetInstance()->weapons_menu.IsDisplayed()
+    && Interface::GetInstance()->IsDisplayed()
+    && Network::GetInstance()->IsTurnMaster()) {
+    dst = Mouse::GetInstance()->GetWorldPosition();
+    construct_spr->SetRotation_rad(angle);
+    construct_spr->Draw(dst - construct_spr->GetSize() / 2);
 
 #ifdef DEBUG
-      if (IsLOGGING("test_rectangle"))
-	{
-	  Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
-	  test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-	  GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-	}
-#endif
+    if (IsLOGGING("test_rectangle")) {
+      Rectanglei test_rect(dst - construct_spr->GetSizeMax() / 2, construct_spr->GetSizeMax());
+      test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
+      GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
     }
+#endif
   }
 }
 
