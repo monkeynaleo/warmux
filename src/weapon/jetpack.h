@@ -33,6 +33,7 @@ class JetPack : public Weapon
 
     // Jetpack fuel.
     uint m_last_fuel_down;
+    bool active;
 
     bool move_up;
 
@@ -45,6 +46,7 @@ class JetPack : public Weapon
     virtual void StartMovingUp();
     virtual void StopMovingUp();
     virtual void StartShooting();
+    virtual void StopShooting() {};
 
     virtual bool IsPreventingLRMovement();
     virtual bool IsPreventingJumps();
@@ -62,6 +64,7 @@ class JetPack : public Weapon
     void p_Select();
     void p_Deselect();
     bool p_Shoot();
+    virtual bool IsInUse() const { return active; };
     virtual bool ShouldBeDrawn() { return false; };
     virtual bool ShouldAmmoUnitsBeDrawn() const;
 
