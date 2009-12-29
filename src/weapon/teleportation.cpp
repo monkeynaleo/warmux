@@ -33,8 +33,9 @@
 #include "team/teams_list.h"
 #include "weapon/teleportation.h"
 
-Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
-                                        new WeaponConfig())
+Teleportation::Teleportation() :
+  Weapon(WEAPON_TELEPORTATION, "teleportation", new WeaponConfig()),
+  done(false)
 {
   UpdateTranslationStrings();
 
@@ -76,13 +77,17 @@ bool Teleportation::p_Shoot ()
 
 void Teleportation::Refresh()
 {
+  if (!target_chosen)
+    return;
+  if (done)
+    return;
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
     ActiveCharacter().SetXY(dst);
     ActiveCharacter().SetSpeed(0.0, 0.0);
     ActiveCharacter().Show();
     JukeBox::GetInstance()->Play("default", "weapon/teleport_end");
-	Camera::GetInstance()->SetAutoCrop(true);
-	return;
+    Camera::GetInstance()->SetAutoCrop(true);
+    done = true;
   }
 }
 
@@ -98,6 +103,7 @@ void Teleportation::p_Select()
 
   Weapon::p_Select();
   target_chosen = false;
+  done = false;
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)

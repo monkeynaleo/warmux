@@ -32,6 +32,7 @@ class Teleportation : public Weapon
     bool target_chosen;
     uint animation_duration;
     Point2i src, dst;
+    bool done;
   protected:
     bool p_Shoot();
     void p_Select();

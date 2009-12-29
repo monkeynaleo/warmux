@@ -112,6 +112,11 @@ void Parachute::Draw()
 
 void Parachute::Refresh()
 {
+  if (Game::GetInstance()->GetRemainingTime() <= 0)
+    return;
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
+    return;
+
   double speed;
   double angle;
 

@@ -190,15 +190,15 @@ void Weapon::Deselect()
 
 void Weapon::Manage()
 {
-  if (!IsInUse())
-    return ;
-
   Refresh();
 
   Game * game_loop = Game::GetInstance();
 
   if (game_loop->ReadState() != Game::PLAYING)
     return;
+
+  if (IsOnCooldownFromShot())
+    return ;
 
   if ( (ActiveTeam().ReadNbUnits() == 0) )
     {
