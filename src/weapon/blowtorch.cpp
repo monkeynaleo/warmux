@@ -46,7 +46,9 @@ class BlowtorchConfig : public WeaponConfig
     uint range;
 };
 
-Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
+Blowtorch::Blowtorch() :
+  Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig()),
+  active(false)
 {
   UpdateTranslationStrings();
 
@@ -64,6 +66,7 @@ void Blowtorch::UpdateTranslationStrings()
 void Blowtorch::p_Deselect()
 {
   ActiveTeam().AccessNbUnits() = 0;
+  active = false;
 }
 
 bool Blowtorch::p_Shoot()
@@ -87,19 +90,19 @@ bool Blowtorch::p_Shoot()
 
 void Blowtorch::StartShooting()
 {
-  m_is_active = true;
+  active = true;
 }
 
 
 void Blowtorch::StopShooting()
 {
-  m_is_active = false;
+  active = false;
   SignalTurnEnd();
 }
 
 void Blowtorch::Refresh()
 {
-  if (EnoughAmmoUnit()) {
+  if (active && EnoughAmmoUnit()) {
     Weapon::RepeatShoot();
   }
 }
