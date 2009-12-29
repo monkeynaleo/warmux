@@ -215,8 +215,16 @@
   <point name="tools_interface_size" x="290" y="100" />
   <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
+  <sprite name="clock_normal">
+    <image file="interface/whitetheme/clock.png" />
+  </sprite>
+  <sprite name="clock_emergency">
+    <image file="interface/whitetheme/arrow_turn.png">
+      <grid pos="0,0" size="50,50" array="8,1" />
+    </image>
+    <animation loop_mode="true" speed="75" />
+  </sprite>
 
-  
   <!-- Minimap -->
   <color name="camera_preview_color" r="120" g="120" b="120" a="100" />
   <color name="playing_character_preview_color" r="120" g="120" b="120" a="100" />
@@ -228,7 +236,7 @@
   <color name="wind_color_max" r="156" g="9" b="9" a="255" />
 
   <surface name="quit_screen" file="menu/quit.png"/>
-  
+
   <!-- Game mode options -->
   <surface name="rounding_bottom" file="interface/whitetheme/box_big.png" pos="20,25" size="1,18" />
   <surface name="rounding_bottom_left" file="interface/whitetheme/box_big.png" pos="0,25" size="20,18" />

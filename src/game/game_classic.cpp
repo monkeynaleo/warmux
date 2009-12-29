@@ -83,9 +83,9 @@ void GameClassic::RefreshClock()
 	    countdown_sample.Play("default", "countdown-end_turn");
 	  }
 	  if (duration > 10) {
-	    Interface::GetInstance()->UpdateTimer(duration, black_color);
+	    Interface::GetInstance()->UpdateTimer(duration, false);
 	  } else {
-	    Interface::GetInstance()->UpdateTimer(duration, primary_red_color);
+	    Interface::GetInstance()->UpdateTimer(duration, true);
 	  }
         }
         break;

@@ -55,7 +55,9 @@ m_last_minimap_redraw(0)
   game_menu = GetResourceManager().LoadImage( res, "interface/background_interface");
   small_background_interface = GetResourceManager().LoadImage( res, "interface/small_background_interface");
   clock_background = GetResourceManager().LoadImage( res, "interface/clock_background");
-  clock = new Sprite(GetResourceManager().LoadImage( res, "interface/clock"));
+  clock = NULL;
+  clock_normal = GetResourceManager().LoadSprite(res, "interface/clock_normal");
+  clock_emergency = GetResourceManager().LoadSprite(res, "interface/clock_emergency");
   wind_icon = GetResourceManager().LoadImage( res, "interface/wind");
   wind_indicator = GetResourceManager().LoadImage( res, "interface/wind_indicator");
 
@@ -129,7 +131,8 @@ m_last_minimap_redraw(0)
 
 Interface::~Interface()
 {
-  if (clock) delete clock;
+  if (clock_normal) delete clock_normal;
+  if (clock_emergency) delete clock_emergency;
   if (global_timer) delete global_timer;
   if (timer) delete timer;
   if (t_character_name) delete t_character_name;
@@ -255,13 +258,8 @@ void Interface::DrawClock(const Point2i &time_pos) const
     timer->DrawCenter(time_pos - Point2i(0, clock_background.GetHeight()/3));
 
   // Draw clock
-  float scale;
-  if(remaining_turn_time < 10)  // Hurry up !
-    scale = 0.9 + cos((float)Time::GetInstance()->Read() / 250 * M_PI) * 0.1;
-  else
-    scale = 1.0;
-  clock->Scale(1.0, scale);
   Point2i tmp_point = time_pos - clock->GetSize() / 2;
+  clock->Update();
   clock->DrawXY(tmp_point);
 
   // Draw global timer
@@ -626,11 +624,25 @@ void Interface::Hide()
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
-void Interface::UpdateTimer(uint utimer, const Color& color)
+void Interface::UpdateTimer(uint utimer, bool emergency)
 {
-  timer->SetColor(color);
+  Sprite *prev_clock = clock;
+
+  if (emergency) {
+    clock = clock_emergency;
+    timer->SetColor(primary_red_color);
+  } else {
+    clock = clock_normal;
+    timer->SetColor(black_color);
+  }
+
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
+
+  if (prev_clock != clock) {
+    clock->animation.SetLoopMode(true);
+    clock->Start();
+  }
 }
 
 void Interface::UpdateWindIndicator(int wind_value)
