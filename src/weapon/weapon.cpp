@@ -74,8 +74,6 @@ Weapon::Weapon(Weapon_type type,
   m_id = id;
   m_help = "";
 
-  m_is_active = false;
-
   m_time_anim_begin = Time::GetInstance()->Read();
   m_available_after_turn = 0;
   m_initial_nb_ammo = INFINITE_AMMO;
@@ -161,7 +159,6 @@ void Weapon::Select()
   MSG_DEBUG("weapon.change", "Select %s", m_name.c_str());
 
   m_time_anim_begin = Time::GetInstance()->Read();
-  m_is_active = false;
   m_strength = 0;
   m_last_fire_time = 0;
   ActiveTeam().ResetNbUnits();
@@ -183,7 +180,6 @@ void Weapon::Deselect()
   ActiveTeam().crosshair.SetActive(false);
   ActiveCharacter().SetFiringAngle(0);
   ActiveCharacter().SetMovement("breathe");
-  m_is_active = false;
   MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();
 }
@@ -283,8 +279,6 @@ bool Weapon::Shoot()
   if (use_unit_on_first_shoot){
     UseAmmoUnit();
   }
-
-  m_is_active = true;
 
   if (max_strength != 0) ActiveCharacter().previous_strength = m_strength;
 
