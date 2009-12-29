@@ -83,7 +83,7 @@ WeaponProjectile * Gun::GetProjectileInstance()
 
 bool Gun::p_Shoot()
 {
-  if (IsInUse())
+  if (IsOnCooldownFromShot())
     return false;
 
   projectile->Shoot (GUN_BULLET_SPEED);
