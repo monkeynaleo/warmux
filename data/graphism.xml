@@ -288,7 +288,7 @@
   <surface name="team_icon" file="menu/ico_skins.png"/>
   <surface name="sound_icon" file="menu/ico_sounds.png"/>
   <surface name="weapon_icon" file="menu/ico_weapons.png"/>
-  <surface name="network_icon" file="menu/i_network.png"/>
+  <surface name="network_icon" file="menu/ico_network.png"/>
 </section>
 
 <section name="energy_bar">
