@@ -34,9 +34,10 @@ class LoadingScreen
  private:
   Profile * res;
   Sprite * loading_bg;
+  int icon_count;
 
  public:
-  LoadingScreen();
+  LoadingScreen(int icon_count);
   ~LoadingScreen();
 
   void DrawBackground();

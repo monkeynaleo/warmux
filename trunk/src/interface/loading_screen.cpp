@@ -27,9 +27,8 @@
 #include "graphic/video.h"
 #include "tool/resource_manager.h"
 
-int ICON_COUNT = 4;
-
-LoadingScreen::LoadingScreen()
+LoadingScreen::LoadingScreen(int icon_count):
+  icon_count(icon_count)
 {
   // Get the background image
   Config * config = Config::GetInstance();
@@ -64,10 +63,11 @@ void LoadingScreen::DrawBackground()
 void LoadingScreen::StartLoading(uint nb, const std::string& resource,
                                  const std::string& label) const
 {
+  int index = nb-1;
   const Surface& image = GetResourceManager().LoadImage(res, "loading_screen/"+resource);
 
   int slot_margin_x = (120/2 - image.GetWidth()/2);
-  int x = (GetMainWindow().GetWidth()/2)- (ICON_COUNT*120) + nb*120;
+  int x = ((GetMainWindow().GetWidth() - icon_count*120)/2)+ index*120;
   int y = (GetMainWindow().GetHeight()/2)+40;
 
   Rectanglei dest ( x+slot_margin_x,
