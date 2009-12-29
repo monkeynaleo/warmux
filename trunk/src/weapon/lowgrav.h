@@ -37,6 +37,7 @@ class LowGrav : public Weapon
     void p_Deselect();
     bool p_Shoot();
     SoundSample use;
+    virtual bool ShouldBeDrawn() { return false; };
 };
 
 #endif /* LOWGRAV_H */

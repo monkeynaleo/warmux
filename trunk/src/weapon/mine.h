@@ -84,6 +84,7 @@ class Mine : public WeaponLauncher
   protected:
     WeaponProjectile * GetProjectileInstance();
     bool p_Shoot();
+    virtual bool ShouldBeDrawn();
   public:
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;

@@ -125,7 +125,7 @@ void Anvil::PlayCollisionSound()
 //-----------------------------------------------------------------------------
 
 AnvilLauncher::AnvilLauncher() :
-    WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+    WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig())
 {
   UpdateTranslationStrings();
 
@@ -198,4 +198,7 @@ std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_c
             items_count), TeamName, items_count);
 }
 
-
+bool AnvilLauncher::ShouldBeDrawn()
+{
+  return !IsOnCooldownFromShot();
+}

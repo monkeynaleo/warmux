@@ -62,6 +62,7 @@ class JetPack : public Weapon
     void p_Select();
     void p_Deselect();
     bool p_Shoot();
+    virtual bool ShouldBeDrawn() { return false; };
 
   private:
     void GoUp();

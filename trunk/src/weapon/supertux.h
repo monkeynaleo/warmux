@@ -55,6 +55,7 @@ protected:
   WeaponProjectile * GetProjectileInstance();
   virtual bool p_Shoot();
   virtual void Refresh();
+  virtual bool ShouldBeDrawn();
 private:
   SuperTuxWeaponConfig& cfg();
 };

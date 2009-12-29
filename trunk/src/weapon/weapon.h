@@ -126,7 +126,7 @@ protected:
   } weapon_visibility_t;
 
   // Visibility
-  weapon_visibility_t m_visibility;
+  const bool drawable;
   weapon_visibility_t m_unit_visibility;
 
   // how many times can we use this weapon (since the beginning of the game) ?
@@ -155,6 +155,8 @@ protected:
   virtual void Refresh();
   virtual bool p_Shoot() = 0;
 
+  /* This method offer sub classes a way to hide the weapon. */
+  virtual bool ShouldBeDrawn() { return true; };
   virtual void DrawWeaponFire();
   void DrawAmmoUnits() const;
 
@@ -178,7 +180,7 @@ public:
   Weapon(Weapon_type type,
          const std::string &id,
          EmptyWeaponConfig * params,
-         weapon_visibility_t visibility = ALWAYS_VISIBLE);
+         bool drawable = true);
   virtual ~Weapon();
 
   // Select or deselect the weapon

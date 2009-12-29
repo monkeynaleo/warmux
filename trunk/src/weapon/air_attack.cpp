@@ -199,7 +199,7 @@ bool Plane::OnTopOfTarget() const
 //-----------------------------------------------------------------------------
 
 AirAttack::AirAttack() :
-  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
+  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig())//, plane(cfg())
 {
   UpdateTranslationStrings();
 

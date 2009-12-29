@@ -48,7 +48,7 @@ class ParachuteConfig : public WeaponConfig
 };
 
 
-Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
+Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), false)
 {
   UpdateTranslationStrings();
 

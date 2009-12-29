@@ -51,7 +51,7 @@ const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
                                 new WeaponConfig(),
-                                NEVER_VISIBLE)
+                                false)
 {
   UpdateTranslationStrings();
 

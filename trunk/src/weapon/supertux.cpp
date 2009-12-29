@@ -201,7 +201,7 @@ void SuperTuxWeaponConfig::LoadXml(const xmlNode* elem)
 //-----------------------------------------------------------------------------
 
 TuxLauncher::TuxLauncher() :
-  WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+  WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig())
 {
   UpdateTranslationStrings();
 
@@ -258,6 +258,11 @@ void TuxLauncher::Refresh()
       tux_death_time = 0;
     }
   }
+}
+
+bool TuxLauncher::ShouldBeDrawn()
+{
+  return !(current_tux || tux_death_time);
 }
 
 bool TuxLauncher::IsInUse() const
