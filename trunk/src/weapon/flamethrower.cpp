@@ -175,7 +175,6 @@ void FlameThrower::p_Deselect()
 void FlameThrower::StartShooting()
 {
   shooting = true;
-  m_is_active = true;
 }
 
 void FlameThrower::StopShooting()
