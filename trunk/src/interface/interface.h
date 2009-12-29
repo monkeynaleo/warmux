@@ -84,7 +84,7 @@ public:
    Surface game_menu;
    Surface clock_background;
    Surface small_background_interface;
-   Sprite * clock;
+   Sprite *clock, *clock_normal, *clock_emergency;
    Surface wind_icon;
    Surface wind_indicator;
    Point2i bottom_bar_pos;
@@ -132,7 +132,7 @@ protected:
    Point2i GetMenuPosition() const;
 
    void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
-   void UpdateTimer(uint utimer, const Color& color = black_color);
+   void UpdateTimer(uint utimer, bool emergency = false);
    void UpdateWindIndicator(int wind_value);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
    void ToggleMinimap() { display_minimap = !display_minimap; };
