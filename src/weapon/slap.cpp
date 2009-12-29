@@ -73,11 +73,6 @@ void Slap::UpdateTranslationStrings()
   m_help = _("Slap the enemy to make him jump a bit.");
 }
 
-void Slap::Refresh()
-{
-  if (IsInUse()) m_is_active = false;
-}
-
 std::string Slap::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
@@ -129,3 +124,7 @@ bool Slap::p_Shoot (){
   return true;
 }
 
+bool Slap::IsInUse() const
+{
+  return IsOnCooldownFromShot();
+}

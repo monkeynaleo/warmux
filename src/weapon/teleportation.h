@@ -39,7 +39,6 @@ class Teleportation : public Weapon
     virtual bool ShouldBeVisible();
   public:
     Teleportation();
-    void Draw() { if (!IsInUse()) Weapon::Draw(); };
     void ChooseTarget(Point2i mouse_pos);
     bool IsInUse() const;
     WeaponConfig& cfg();
