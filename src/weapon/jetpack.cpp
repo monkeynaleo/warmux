@@ -45,7 +45,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   UpdateTranslationStrings();
 
   m_category = MOVE;
-  m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   use_unit_on_first_shoot = false;
 
@@ -118,8 +117,6 @@ void JetPack::Refresh()
 void JetPack::p_Select()
 {
   ActiveCharacter().SetClothe("jetpack");
-
-  m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 }
 
 void JetPack::p_Deselect()
@@ -216,6 +213,11 @@ bool JetPack::p_Shoot()
   ActiveCharacter().SetClothe("jetpack-fire");
 
   return true;
+}
+
+bool JetPack::ShouldAmmoUnitsBeDrawn() const
+{
+  return m_is_active;
 }
 
 std::string JetPack::GetWeaponWinString(const char *TeamName, uint items_count ) const

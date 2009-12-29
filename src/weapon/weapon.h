@@ -118,16 +118,8 @@ protected:
   // Extra parameters
   EmptyWeaponConfig *extra_params;
 
-  typedef enum weapon_visibility {
-    ALWAYS_VISIBLE,
-    NEVER_VISIBLE,
-    VISIBLE_ONLY_WHEN_ACTIVE,
-    VISIBLE_ONLY_WHEN_INACTIVE
-  } weapon_visibility_t;
-
   // Visibility
   const bool drawable;
-  weapon_visibility_t m_unit_visibility;
 
   // how many times can we use this weapon (since the beginning of the game) ?
   int m_available_after_turn; // -1 means NEVER
@@ -157,6 +149,8 @@ protected:
 
   /* This method offer sub classes a way to hide the weapon. */
   virtual bool ShouldBeDrawn() { return true; };
+  /* This method offer sub classes a way to hide the ammo units. */
+  virtual bool ShouldAmmoUnitsBeDrawn() const { return true; };
   virtual void DrawWeaponFire();
   void DrawAmmoUnits() const;
 
