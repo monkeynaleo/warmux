@@ -33,8 +33,9 @@
 
 const double LOW_GRAVITY_FACTOR = 0.4;
 
-LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
-                            new WeaponConfig(), false)
+LowGrav::LowGrav() :
+  Weapon(WEAPON_LOWGRAV, "lowgrav", new WeaponConfig(), false),
+  active(false)
 {
   UpdateTranslationStrings();
 
@@ -56,6 +57,7 @@ void LowGrav::p_Deselect()
   ActiveCharacter().ResetConstants();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");
+  active = false;
 }
 
 bool LowGrav::p_Shoot()
@@ -63,13 +65,13 @@ bool LowGrav::p_Shoot()
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
   ActiveCharacter().SetClothe("helmet");
   use.Play("default","weapon/lowgrav",-1);
-
+  active = true;
   return true;
 }
 
 void LowGrav::StopShooting()
 {
-  if (IsInUse()) {
+  if (active) {
     Deselect();
   } else {
     Weapon::StopShooting();

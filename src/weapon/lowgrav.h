@@ -32,6 +32,7 @@ class LowGrav : public Weapon
     void StopShooting();
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+    bool active;
   protected:
     void Refresh() { };
     void p_Deselect();
