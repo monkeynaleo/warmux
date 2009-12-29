@@ -152,7 +152,7 @@ Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
   m_hook_sprite->EnableRotationCache(32);
   m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
 
-  m_is_active = false;
+  attached = false;
   m_attaching = false;
   go_left = false ;
   go_right = false ;
@@ -209,7 +209,7 @@ bool Grapple::TryAttachRope()
     {
       // Hum the rope is too short !
       m_attaching = false;
-      m_is_active = false;
+      attached = false;
 
       // Give back one ammo...
       int *ammo = &ActiveTeam().AccessNbAmmos();
@@ -354,7 +354,7 @@ void Grapple::NotifyMove(bool collision)
   bool addNode = false;
   int currentSense;
 
-  if (!IsInUse() || m_attaching)
+  if (!attached || m_attaching)
     return;
 
   // Check if the character collide something.
@@ -387,7 +387,7 @@ void Grapple::NotifyMove(bool collision)
 
 void Grapple::Refresh()
 {
-  if (!IsInUse())
+  if (!attached)
     return ;
 
   if (move_left_pressed && !move_right_pressed) {
@@ -406,7 +406,7 @@ void Grapple::Refresh()
   if (m_attaching)
     TryAttachRope();
 
-  if (IsInUse() && !m_attaching)
+  if (attached && !m_attaching)
   {
     ActiveCharacter().SetMovement("ninja-rope");
     ActiveCharacter().UpdatePosition();
@@ -423,7 +423,7 @@ void Grapple::Draw()
 
   Weapon::Draw();
 
-  if (!IsInUse())
+  if (!attached)
   {
     return ;
   }
@@ -488,7 +488,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   MSG_DEBUG("grapple.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
 
   m_attaching = false;
-  m_is_active = true;
+  attached = true;
   move_left_pressed = false;
   move_right_pressed = false;
   move_up_pressed = false;
@@ -528,7 +528,7 @@ void Grapple::DetachRope()
 {
   ActiveCharacter().UnsetPhysFixationPoint();
   rope_nodes.clear();
-  m_is_active = false;
+  attached = false;
 
   cable_sound.Stop();
 }
@@ -717,73 +717,73 @@ void Grapple::StopMovingDown()
 
 bool Grapple::IsPreventingLRMovement()
 {
-  return IsInUse();
+  return attached;
 }
 
 bool Grapple::IsPreventingWeaponAngleChanges()
 {
-  return IsInUse();
+  return attached;
 }
 
 // =========================== Keys management
 
 void Grapple::HandleKeyPressed_Up(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StartMovingUpForAllPlayers();
 }
 
 void Grapple::HandleKeyReleased_Up(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StopMovingUpForAllPlayers();
 }
 
 void Grapple::HandleKeyPressed_Down(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StartMovingDownForAllPlayers();
 }
 
 void Grapple::HandleKeyReleased_Down(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StopMovingDownForAllPlayers();
 }
 
 void Grapple::HandleKeyPressed_MoveLeft(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StartMovingLeftForAllPlayers();
 }
 
 void Grapple::HandleKeyReleased_MoveLeft(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StopMovingLeftForAllPlayers();
 }
 
 void Grapple::HandleKeyPressed_MoveRight(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StartMovingRightForAllPlayers();
 }
 
 void Grapple::HandleKeyReleased_MoveRight(bool /*slowly*/)
 {
-  if (IsInUse())
+  if (attached)
     StopMovingRightForAllPlayers();
 }
 
 void Grapple::StartShooting()
 {
-  if (!IsInUse())
+  if (!attached)
     Weapon::StartShooting();
 }
 
 void Grapple::StopShooting()
 {
-  if (IsInUse())
+  if (attached)
     DetachRope();
   else
     Weapon::StopShooting();
