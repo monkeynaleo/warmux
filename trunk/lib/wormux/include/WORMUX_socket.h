@@ -125,9 +125,6 @@ public:
   bool ReceiveStr_NoLock(std::string &_str, size_t maxlen);
   bool ReceiveStr(std::string &_str, size_t maxlen);
 
-  // Packet is composed of [ size (4 bytes),  data ]
-  bool SendPacket(const char* data, size_t len);
-
   // ReceivePacket may return true with *data = NULL and len = 0
   // That means that client is still valid BUT there are not enough data CURRENTLY
   bool ReceivePacket(char** data, size_t* len);

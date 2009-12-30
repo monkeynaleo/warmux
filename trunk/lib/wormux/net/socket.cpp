@@ -606,24 +606,6 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
   return r;
 }
 
-bool WSocket::SendPacket(const char* data, size_t len)
-{
-  bool r;
-  Lock();
-
-  r = SendInt_NoLock(len);
-  if (!r)
-    goto out_unlock;
-
-  r = SendBuffer_NoLock(data, len);
-  if (!r)
-    goto out_unlock;
-
- out_unlock:
-  UnLock();
-  return r;
-}
-
 // ReceivePacket may return true with *data = NULL and len = 0
 // That means that client is still valid BUT there are not enough data CURRENTLY
 bool WSocket::ReceivePacket(char** data, size_t* len)
@@ -667,6 +649,8 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
       fprintf(stderr, "ERROR: network packet is too big\n");
       goto error;
     }
+
+    m_packet_size -= sizeof(uint32_t);
 
     m_packet = (char*)malloc(m_packet_size);
     if (!m_packet) {
