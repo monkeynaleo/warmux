@@ -134,7 +134,7 @@ private:
   DistantComputer* creator;
 
   void Init (Action_t type);
-  void WriteTo(char *packet) const;
+  int  GetSize() const;
 
 public:
 
@@ -174,7 +174,6 @@ public:
   bool IsEmpty() const;
 
   DistantComputer* GetCreator() const;
-  int  GetSize() const;
   uint GetTimestamp() const;
   Action_t GetType() const;
   bool IsFrameLess() const;

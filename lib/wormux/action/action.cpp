@@ -92,29 +92,31 @@ void Action::Init(Action_t type)
   creator = NULL;
 }
 
-void Action::WriteTo(char *os) const
-{
-  SDLNet_Write32(m_type, os);
-  os += 4;
-  SDLNet_Write32(m_timestamp, os);
-  os += 4;
-  uint32_t param_size = (uint32_t)var.size();
-  SDLNet_Write32(param_size, os);
-  os += 4;
-
-  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++)
-  {
-    SDLNet_Write32(*val, os);
-    os += 4;
-  }
-}
-
 // Convert the action to a packet
 void Action::WriteToPacket(char* &packet, int & size) const
 {
-  size = GetSize();
-  packet = (char*)malloc(size);
-  WriteTo(packet);
+  char *buffer;
+
+  size = GetSize() + sizeof(uint32_t);
+  buffer = (char*)malloc(size);
+  packet = buffer;
+
+  uint32_t len = size;
+  SDLNet_Write32(len, buffer);
+  buffer += 4;
+  SDLNet_Write32(m_type, buffer);
+  buffer += 4;
+  SDLNet_Write32(m_timestamp, buffer);
+  buffer += 4;
+  uint32_t param_size = (uint32_t)var.size();
+  SDLNet_Write32(param_size, buffer);
+  buffer += 4;
+
+  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++)
+  {
+    SDLNet_Write32(*val, buffer);
+    buffer += 4;
+  }
 }
 
 //-------------  Add datas to the action  ----------------

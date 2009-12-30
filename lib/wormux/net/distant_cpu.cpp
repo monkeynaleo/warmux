@@ -109,7 +109,7 @@ bool DistantComputer::ReceiveData(char** data, size_t* len)
 
 bool DistantComputer::SendData(const char* data, size_t len)
 {
-  return sock->SendPacket(data, len);
+  return sock->SendBuffer(data, len);
 }
 
 std::string DistantComputer::GetAddress() const
