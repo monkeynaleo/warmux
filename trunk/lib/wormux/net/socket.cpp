@@ -608,16 +608,18 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
 
 bool WSocket::SendPacket(const char* data, size_t len)
 {
+  bool r;
   Lock();
-  uint32_t len_field = len;
-  int buffer_size = sizeof(len_field) + len;
-  char * buffer = new char[buffer_size];
-  memcpy(buffer, &len_field, sizeof(len_field));
-  memcpy(buffer + sizeof(len_field), data, len);
 
-  bool r = SendBuffer_NoLock(buffer, buffer_size);
+  r = SendInt_NoLock(len);
+  if (!r)
+    goto out_unlock;
 
-  delete[] buffer;
+  r = SendBuffer_NoLock(data, len);
+  if (!r)
+    goto out_unlock;
+
+ out_unlock:
   UnLock();
   return r;
 }
@@ -656,7 +658,7 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
     }
 
     // Firstly, we read the size of the incoming packet
-    r = ReceiveBuffer_NoLock(&m_packet_size, sizeof(m_packet_size));
+    r = ReceiveInt_NoLock(m_packet_size);
     if (!r) {
       goto error;
     }
