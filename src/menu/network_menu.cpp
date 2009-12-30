@@ -136,6 +136,7 @@ NetworkMenu::NetworkMenu() :
 			       Network::GetInstance()->GetGameName().c_str(),
 			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
 			, c_red);
+    msg_box->NewMessage(_("Don't forget to validate once you have selected your team(s)!"), c_red);
   }
 
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
