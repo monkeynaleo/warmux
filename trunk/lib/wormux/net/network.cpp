@@ -130,52 +130,7 @@ connection_state_t WNet::GetError()
 #endif
 }
 
-// static method
-#ifdef WIN32
-
-static connection_state_t WIN32_CheckHost(const std::string &host, int prt)
-{
-  struct hostent* hostinfo;
-  hostinfo = gethostbyname(host.c_str());
-  if( ! hostinfo )
-    return CONN_BAD_HOST;
-
-  SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == INVALID_SOCKET )
-    return CONN_BAD_SOCKET;
-
-  // Set the timeout
-  int timeout = 5000; //ms
-
-  if (setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-  {
-    fprintf(stderr, "Setting receive timeout on socket failed\n");
-    return CONN_BAD_SOCKET;
-  }
-
-  if (setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR)
-  {
-    fprintf(stderr, "Setting send timeout on socket failed\n");
-    return CONN_BAD_SOCKET;
-  }
-
-  struct sockaddr_in addr;
-  memset(&addr, 0, sizeof(addr));
-  addr.sin_family = AF_INET;
-  addr.sin_port = htons(prt);
-  addr.sin_addr.s_addr = inet_addr(inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list));
-
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == SOCKET_ERROR )
-  {
-    return WNet::GetError();
-  }
-  closesocket(fd);
-  return CONNECTED;
-}
-
-#else
-
-static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
+connection_state_t WNet::CheckHost(const std::string &host, int prt)
 {
   connection_state_t s;
   int r;
@@ -222,9 +177,13 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
       continue;
 
     // Try to set the timeout
+#ifdef WIN32
+    int timeout = 5000; // ms
+#else
     struct timeval timeout;
     memset(&timeout, 0, sizeof(timeout));
     timeout.tv_sec = 5; // 5seconds timeout
+#endif
     if (setsockopt(sfd, SOL_SOCKET, SO_RCVTIMEO, (SOCKET_PARAM*)&timeout, sizeof(timeout)) == SOCKET_ERROR) {
       fprintf(stderr, "Setting receive timeout on socket failed\n");
       closesocket(sfd);
@@ -258,16 +217,6 @@ static connection_state_t POSIX_CheckHost(const std::string &host, int prt)
 
  err_addrinfo:
   return s;
-}
-#endif
-
-connection_state_t WNet::CheckHost(const std::string &host, int prt)
-{
-#ifdef WIN32
-  return WIN32_CheckHost(host, prt);
-#else
-  return POSIX_CheckHost(host, prt);
-#endif
 }
 
 std::string WNet::IPtoDNS(IPaddress *ip)
