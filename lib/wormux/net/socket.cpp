@@ -606,22 +606,9 @@ bool WSocket::ReceiveStr(std::string &_str, size_t maxlen)
   return r;
 }
 
-uint32_t WSocket::ComputeCRC(const void* data, size_t len)
-{
-  uint32_t crc = 0;
-  const uint32_t* buf = reinterpret_cast<const uint32_t*>(data);
-
-  for (uint32_t i = 0; i < len/sizeof(uint32_t); i++) {
-    crc += buf[i];
-  }
-
-  return crc;
-}
-
 bool WSocket::SendPacket(const char* data, size_t len)
 {
   bool r;
-  uint32_t crc;
   Lock();
 
   r = SendInt_NoLock(len);
@@ -629,12 +616,6 @@ bool WSocket::SendPacket(const char* data, size_t len)
     goto out_unlock;
 
   r = SendBuffer_NoLock(data, len);
-  if (!r)
-    goto out_unlock;
-
-  // Send a CRC check
-  crc = ComputeCRC(data, len);
-  r = SendInt_NoLock(crc);
   if (!r)
     goto out_unlock;
 
@@ -651,7 +632,6 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
 
   Lock();
 
-  int crc;
   size_t nbbytes, to_recv_now;
   bool tested = false;
 
@@ -695,7 +675,7 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
     }
   }
 
-  // Check if the data (+crc) are already there
+  // Check if the data are already there
   r = NbBytesAvailable(nbbytes);
   if (!r) {
     goto error;
@@ -722,24 +702,10 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
   m_received += to_recv_now;
   nbbytes -= to_recv_now;
 
-  // the packet (data + crc) can not have been read in one time
+  // the packet can not have been read in one time
   // but client is still valid
-  if (m_received != m_packet_size // packet is not yet fully received
-      || nbbytes < sizeof(uint32_t) // not enough data to read CRC
-      ) {
+  if (m_received != m_packet_size) {
     goto err_not_enough_data;
-  }
-
-  // Check the CRC
-  r = ReceiveInt_NoLock(crc);
-  if (!r) {
-    fprintf(stderr, "ERROR: fail to receive CRC\n");
-    goto error;
-  }
-
-  if (uint32_t(crc) != ComputeCRC(m_packet, m_packet_size)) {
-    fprintf(stderr, "ERROR: wrong CRC check\n");
-    goto error;
   }
 
   *data = m_packet;
