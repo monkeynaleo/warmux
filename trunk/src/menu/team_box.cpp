@@ -69,6 +69,9 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
     tmp_player_box->AddWidget(player_name);
 
+    next_custom_team = NULL;
+    previous_custom_team = NULL;
+
   } else {
     tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
 					Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
@@ -158,6 +161,10 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
       return w;
     }
 
+    if (w == NULL) {
+      return w;
+    }
+
     if (!custom_team_list.empty()) {
 
       if (w == next_custom_team) {
@@ -201,9 +208,19 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
 
     // translators: this is the team listing and will expand in a context like "OOo team - Remote"
     team_name->SetText(Format(_("%s Team - Remote"), _team.GetName().c_str()));
+
+    if (previous_custom_team) {
+      previous_custom_team->SetVisible(false);
+      next_custom_team->SetVisible(false);
+    }
   } else {
     team_name->SetFont(primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true, false);
     team_name->SetText(Format(_("%s Team"), _team.GetName().c_str()));
+
+    if (previous_custom_team) {
+      previous_custom_team->SetVisible(true);
+      next_custom_team->SetVisible(true);
+    }
   }
   team_logo->SetSurface(_team.GetFlag());
 
