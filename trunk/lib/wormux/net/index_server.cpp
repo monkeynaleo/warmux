@@ -345,7 +345,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   return false;
 }
 
-std::list<GameServerInfo> IndexServer::GetHostList()
+std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
 {
   std::list<GameServerInfo> lst;
   bool r;
@@ -403,6 +403,12 @@ std::list<GameServerInfo> IndexServer::GetHostList()
 	      game_server_info.port.c_str(),
 	      game_server_info.game_name.c_str(),
               (game_server_info.passworded) ? "yes" : "no");
+
+    if (symbolic_name) {
+      game_server_info.dns_address = WNet::IPStrToDNS(game_server_info.ip_address);
+    } else {
+      game_server_info.dns_address = game_server_info.ip_address;
+    }
 
     lst.push_back(game_server_info);
   }

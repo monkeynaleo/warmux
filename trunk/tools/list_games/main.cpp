@@ -19,7 +19,7 @@ void list_games(std::string version, bool show_dns)
     return;
   }
 
-  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList();
+  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList(show_dns);
 
   IndexServer::GetInstance()->Disconnect();
 
@@ -29,17 +29,9 @@ void list_games(std::string version, bool show_dns)
   }
 
   for (std::list<GameServerInfo>::iterator it = lst.begin(); it != lst.end(); ++it) {
-    std::string dns;
-
-    if (show_dns) {
-      dns = WNet::IPStrToDNS(it->ip_address);
-    } else {
-      dns = it->ip_address;
-    }
-
     printf("%s (%d) %s:%s - %s - %s\n",
 	   version.c_str(), it->passworded, it->ip_address.c_str(), it->port.c_str(),
-	   dns.c_str(), it->game_name.c_str());
+	   it->dns_address.c_str(), it->game_name.c_str());
   }
 }
 
