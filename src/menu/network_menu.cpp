@@ -49,9 +49,6 @@ const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
 
-// XXX Not used ?
-// const uint TEAMS_W = 160;
-// const uint TEAM_LOGO_H = 48;
 const uint TEAMS_BOX_H = 180;
 const uint OPTIONS_BOX_H = 150;
 
@@ -107,11 +104,6 @@ NetworkMenu::NetworkMenu() :
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
   options_box->AddWidget(play_in_loop);
 
-  player_number = new SpinButton(_("Max number of players:"), W_UNDEF,
-				     GameMode::GetInstance()->max_teams, 1, 2,
-				     GameMode::GetInstance()->max_teams);
-  options_box->AddWidget(player_number);
-
   connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
 				0, Font::FONT_SMALL, Font::FONT_BOLD);
   options_box->AddWidget(connected_players);
@@ -153,7 +145,6 @@ NetworkMenu::NetworkMenu() :
   if (!Network::GetInstance()->IsGameMaster()) {
     // Client Mode
     mode_label->SetText(_("Client mode"));
-    player_number->SetVisible(false);
     initialized_players->SetVisible(false);
   } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
@@ -177,13 +168,7 @@ void NetworkMenu::signal_begin_run()
 
 void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  Widget* w = widgets.ClickUp(mousePosition, button);
-
-  if (player_number != NULL && w == player_number)
-  {
-    Network::GetInstanceServer()->SetMaxNumberOfPlayers(player_number->GetValue());
-    team_box->SetMaxNbLocalPlayers(player_number->GetValue()-1);
-  }
+  widgets.ClickUp(mousePosition, button);
 }
 
 void NetworkMenu::OnClick(const Point2i &mousePosition, int button)
@@ -408,7 +393,6 @@ void NetworkMenu::SetGameMasterCallback()
 						     Constants::WORMUX_VERSION + " - " +
 						     _("Master mode"));
   mode_label->SetText(_("Master mode"));
-  player_number->SetVisible(false);
   connected_players->SetVisible(true);
   initialized_players->SetVisible(true);
   map_box->AllowSelection();
