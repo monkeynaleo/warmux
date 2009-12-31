@@ -36,6 +36,7 @@ class GameServerInfo
  public:
   std::string ip_address;
   std::string port;
+  std::string dns_address;
   std::string game_name;
   bool        passworded;
 };
@@ -115,8 +116,9 @@ public:
   // Notify the top server we are hosting a game
   bool SendServerStatus(const std::string& game_name, bool passwd, int port);
 
-  // returns a list with string pairs: first element = hostname/ip, second element = port
-  std::list<GameServerInfo> GetHostList();
+  // returns a list of game servers
+  std::list<GameServerInfo> GetHostList(bool symbolic_name
+					/*make a reverse DNS resolution*/);
 
   const std::string& GetSupportedVersions() const;
 };
