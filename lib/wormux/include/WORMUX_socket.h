@@ -73,8 +73,8 @@ private:
   bool using_tmp_socket_set;
 
   char *m_packet;
-  int m_packet_size;
-  int m_received;
+  uint32_t m_packet_size;
+  uint32_t m_received;
 
   bool AddToSocketSet(WSocketSet* _socket_set);
   void RemoveFromSocketSet();

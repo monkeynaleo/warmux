@@ -640,23 +640,28 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
     }
 
     // Firstly, we read the size of the incoming packet
-    r = ReceiveInt_NoLock(m_packet_size);
+    int packet_len;
+    r = ReceiveInt_NoLock(packet_len);
     if (!r) {
       goto error;
     }
 
-    if (m_packet_size > MAX_VALID_PACKET_SIZE) {
-      fprintf(stderr, "ERROR: network packet is too big\n");
+    m_packet_size = packet_len;
+
+    if (m_packet_size > uint32_t(MAX_VALID_PACKET_SIZE)) {
+      fprintf(stderr, "ERROR: network packet is too big: %u bytes. (max: %u)\n",
+	      m_packet_size, MAX_VALID_PACKET_SIZE);
       goto error;
     }
-
-    m_packet_size -= sizeof(uint32_t);
 
     m_packet = (char*)malloc(m_packet_size);
     if (!m_packet) {
-      fprintf(stderr, "ERROR: memory allocation failed (%d bytes)\n", m_packet_size);
+      fprintf(stderr, "ERROR: memory allocation failed (%u bytes)\n", m_packet_size);
       goto error;
     }
+
+    SDLNet_Write32(m_packet_size, m_packet);
+    m_received = sizeof(uint32_t);
   }
 
   // Check if the data are already there
