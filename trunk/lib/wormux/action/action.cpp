@@ -69,6 +69,7 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   creator = _creator;
 
   var.clear();
+  buffer += 4; // skip the buffer len
   m_type = (Action_t)SDLNet_Read32(buffer);
   buffer += 4;
   m_timestamp = (uint)SDLNet_Read32(buffer);
@@ -97,7 +98,7 @@ void Action::WriteToPacket(char* &packet, int & size) const
 {
   char *buffer;
 
-  size = GetSize() + sizeof(uint32_t);
+  size = GetSize();
   buffer = (char*)malloc(size);
   packet = buffer;
 
@@ -310,9 +311,10 @@ DistantComputer* Action::GetCreator() const
 
 int Action::GetSize() const
 {
-  return 4  //Size of the type;
-    + 4 //Size of the timestamp
-    + 4 //Size of the number of variable
+  return sizeof(uint32_t)	 // Size of packet len
+    + sizeof(uint32_t)		 // Size of the type
+    + sizeof(uint32_t)		 // Size of the timestamp
+    + sizeof(uint32_t)		 // Size of the number of variable
     + int(var.size()) * 4;
 }
 
