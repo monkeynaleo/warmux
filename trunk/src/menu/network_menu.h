@@ -40,7 +40,6 @@ class NetworkMenu : public Menu
 
   /* Options controllers */
   Label* mode_label;
-  SpinButton* player_number;
   Label* connected_players;
   Label* initialized_players;
   CheckBox* play_in_loop;
