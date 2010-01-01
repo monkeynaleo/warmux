@@ -39,8 +39,6 @@
 #include "sound/jukebox.h"
 #include "weapon/weapons_list.h"
 
-#define SCROLL_KEYBOARD 20 // pixel
-
 void ManMachineInterface::Reset()
 {
   for (int i = 0; i != 256; i++)
@@ -75,47 +73,31 @@ int ManMachineInterface::GetKeyAssociatedToAction(Key_t at) const
   return 0;
 }
 
-bool ManMachineInterface::MoveCamera(const Key_t &key) const
-{
-  bool r = true;
-
-  switch(key) {
-  case KEY_MOVE_CAMERA_RIGHT:
-    Camera::GetInstance()->SetXY(Point2i(SCROLL_KEYBOARD, 0));
-    break;
-  case KEY_MOVE_CAMERA_LEFT:
-    Camera::GetInstance()->SetXY(Point2i(-SCROLL_KEYBOARD, 0));
-    break;
-  case KEY_MOVE_CAMERA_UP:
-    Camera::GetInstance()->SetXY(Point2i(0, -SCROLL_KEYBOARD));
-    break;
-  case KEY_MOVE_CAMERA_DOWN:
-    Camera::GetInstance()->SetXY(Point2i(0, SCROLL_KEYBOARD));
-    break;
-  default:
-    r = false;
-    break;
-  }
-
-  if (r)
-    Camera::GetInstance()->SetAutoCrop(false);
-
-  return r;
-}
-
 // Handle a pressed key
 void ManMachineInterface::HandleKeyPressed(const Key_t &key)
 {
-  if (MoveCamera(key)) {
-    PressedKeys[key] = true;
-    return;
-  }
-
   // Key repeat is useful in the menu, but we are handling it manually
   // during the game
   if (PressedKeys[key]) {
     SDL_EnableKeyRepeat(0,0);
     return;
+  }
+
+  switch (key) {
+    case KEY_MOVE_CAMERA_RIGHT:
+      Camera::GetInstance()->AddLRMoveIntention(INTENTION_MOVE_RIGHT);
+      break;
+    case KEY_MOVE_CAMERA_LEFT:
+      Camera::GetInstance()->AddLRMoveIntention(INTENTION_MOVE_LEFT);
+      break;
+    case KEY_MOVE_CAMERA_UP:
+      Camera::GetInstance()->AddUDMoveIntention(INTENTION_MOVE_UP);
+      break;
+    case KEY_MOVE_CAMERA_DOWN:
+      Camera::GetInstance()->AddUDMoveIntention(INTENTION_MOVE_DOWN);
+      break;
+    default:
+      break;
   }
 
   // Managing keys related to character moves
@@ -249,6 +231,18 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       options_menu.Run();
       return;
     }
+    case KEY_MOVE_CAMERA_RIGHT:
+      Camera::GetInstance()->RemoveLRMoveIntention(INTENTION_MOVE_RIGHT);
+      return;
+    case KEY_MOVE_CAMERA_LEFT:
+      Camera::GetInstance()->RemoveLRMoveIntention(INTENTION_MOVE_LEFT);
+      return;
+    case KEY_MOVE_CAMERA_UP:
+      Camera::GetInstance()->RemoveUDMoveIntention(INTENTION_MOVE_UP);
+      return;
+    case KEY_MOVE_CAMERA_DOWN:
+      Camera::GetInstance()->RemoveUDMoveIntention(INTENTION_MOVE_DOWN);
+      return;
     default:
       break;
     }
@@ -459,21 +453,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
           ASSERT (weapon >= Weapon::WEAPON_FIRST && weapon <= Weapon::WEAPON_LAST);
           ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
         }
-    }
-  }
-}
-
-// Refresh keys which are still pressed.
-void ManMachineInterface::Refresh() const
-{
-  //Treat KEY_REFRESH events:
-  for (int i = 0; i < 256; i++) {
-
-    if (PressedKeys[i]) {
-      Key_t key = static_cast<Key_t>(i);
-
-      if (MoveCamera(key))
-        continue;
     }
   }
 }

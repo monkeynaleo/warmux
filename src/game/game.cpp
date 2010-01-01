@@ -490,8 +490,6 @@ void Game::RefreshInput()
 
   // Keyboard, Joystick and mouse refresh
   Mouse::GetInstance()->Refresh();
-  Keyboard::GetInstance()->Refresh();
-  Joystick::GetInstance()->Refresh();
   ActiveTeam().RefreshAI();
   GameMessages::GetInstance()->Refresh();
 

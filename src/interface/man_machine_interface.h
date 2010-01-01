@@ -102,7 +102,6 @@ protected:
   std::map<int, std::vector<Key_t> > layout;
   std::list<uint8> registred_event;
   bool PressedKeys[256]; // stupid default value
-  bool MoveCamera(const Key_t &key) const;
 
   void RegisterEvent(uint8 event_type) { registred_event.push_back(event_type); };
   bool IsRegistredEvent(uint8 event_type);
@@ -124,9 +123,6 @@ protected:
 public:
   virtual void HandleKeyEvent(const SDL_Event& event) = 0;
   virtual void Reset();
-
-  // Refresh keys
-  void Refresh() const;
 
   // Get the key associated to an action.
   int GetKeyAssociatedToAction(Key_t at) const;
