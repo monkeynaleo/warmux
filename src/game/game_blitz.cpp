@@ -197,6 +197,8 @@ void GameBlitz::__SetState_END_TURN()
   ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
   last_clock_update = Time::GetInstance()->Read();
+  // Ensure the clock sprite isn't NULL:
+  Interface::GetInstance()->UpdateTimer(0);
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();
