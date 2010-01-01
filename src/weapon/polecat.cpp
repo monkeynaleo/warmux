@@ -204,7 +204,6 @@ bool PolecatLauncher::p_Shoot()
 
   current_polecat = static_cast<Polecat *>(projectile);
   polecat_death_time = 0;
-  ActiveCharacter().StopChangingWeaponAngle();
   bool r = WeaponLauncher::p_Shoot();
   return r;
 }

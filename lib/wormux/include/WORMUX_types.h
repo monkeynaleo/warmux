@@ -51,4 +51,9 @@ enum LRDirection
   DIRECTION_RIGHT = 1
 };
 
+enum UDDirection
+{
+  DIRECTION_UP,
+  DIRECTION_DOWN
+};
 #endif
