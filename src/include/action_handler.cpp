@@ -575,25 +575,25 @@ static void Action_Character_BackJump (Action */*a*/)
 static void Action_Character_StartMovingLeft(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().GetWalkIntention().Set(DIRECTION_LEFT, slowly, true);
+  ActiveCharacter().AddLRMoveIntention(slowly ? INTENTION_MOVE_LEFT_SLOWLY : INTENTION_MOVE_LEFT);
 }
 
 static void Action_Character_StopMovingLeft(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().GetWalkIntention().Set(DIRECTION_LEFT, slowly, false);
+  ActiveCharacter().RemoveLRMoveIntention(slowly ? INTENTION_MOVE_LEFT_SLOWLY : INTENTION_MOVE_LEFT);
 }
 
 static void Action_Character_StartMovingRight(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().GetWalkIntention().Set(DIRECTION_RIGHT, slowly, true);
+  ActiveCharacter().AddLRMoveIntention(slowly ? INTENTION_MOVE_RIGHT_SLOWLY : INTENTION_MOVE_RIGHT);
 }
 
 static void Action_Character_StopMovingRight(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().GetWalkIntention().Set(DIRECTION_RIGHT, slowly, false);
+  ActiveCharacter().RemoveLRMoveIntention(slowly ? INTENTION_MOVE_RIGHT_SLOWLY : INTENTION_MOVE_RIGHT);
 }
 
 static void Action_Character_StartIncreasingFireAngle(Action *a)

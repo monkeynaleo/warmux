@@ -806,7 +806,7 @@ void Character::StopPlaying()
   if (IsWalking())
     StopWalking();
   SetRebounding(true);
-  walk_intention.SetAllFalse();
+  lr_move_intentions.clear();
   increase_fire_angle_pressed = false;
   increase_fire_angle_slowly_pressed = false;
   decrease_fire_angle_pressed = false;
@@ -953,20 +953,44 @@ void Character::StopChangingWeaponAngle()
   decrease_fire_angle_pressed = true;
 }
 
+const LRMoveIntention * Character::GetLastLRMoveIntention()
+{
+  if (lr_move_intentions.size() == 0)
+    return NULL;
+  return lr_move_intentions.back();
+}
+
+void Character::AddLRMoveIntention(const LRMoveIntention * intention)
+{
+  lr_move_intentions.push_back(intention);
+}
+
+void Character::RemoveLRMoveIntention(const LRMoveIntention * intention)
+{
+  std::vector<const LRMoveIntention *>::iterator it = lr_move_intentions.begin();
+  while (it != lr_move_intentions.end()) {
+    if (*it == intention)
+      lr_move_intentions.erase(it);
+    else
+      it++;
+  }
+}
+
 void Character::StartOrStopWalkingIfNecessary()
 {
-  bool should_walk = walk_intention.IsToWalk()
+  const LRMoveIntention * lr_move_intention = GetLastLRMoveIntention();
+  bool should_walk = (lr_move_intention != NULL)
     && !GetTeam().AccessWeapon().IsPreventingLRMovement()
     && HasGroundUnderFeets()
     && !IsDead();
   if (should_walk) {
-    if (walk_intention.GetDirection() != GetDirection() && !IsChangingDirection()) {
-      SetDirection(walk_intention.GetDirection());
+    if (lr_move_intention->GetDirection() != GetDirection() && !IsChangingDirection()) {
+      SetDirection(lr_move_intention->GetDirection());
       last_direction_change = Time::GetInstance()->Read();
     }
   }
   if (should_walk && !IsChangingDirection()) {
-    bool should_be_slowly = walk_intention.IsToDoItSlowly();
+    bool should_be_slowly = lr_move_intention->IsToDoItSlowly();
     if (IsWalking() && (should_be_slowly != walking_slowly))
       StopWalking();
     if (!IsWalking())
@@ -1016,7 +1040,9 @@ void Character::MakeSteps()
   bool ghost;
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
 
-  if (walk_intention.IsToDoItSlowly())
+  const LRMoveIntention * lr_move_intention = GetLastLRMoveIntention();
+  ASSERT(lr_move_intention != NULL);
+  if (lr_move_intention->IsToDoItSlowly())
     walking_pause *= 10;
   else
     SetMovement("walk");// otherwise character would slide after dropping a dynamite

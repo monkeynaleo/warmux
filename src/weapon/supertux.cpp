@@ -245,9 +245,9 @@ bool TuxLauncher::p_Shoot ()
 void TuxLauncher::Refresh()
 {
   if (current_tux) {
-    const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
-    if (walk_intention.IsToWalk()) {
-      if (walk_intention.GetDirection() == DIRECTION_LEFT)
+    const LRMoveIntention * lr_move_intention = ActiveCharacter().GetLastLRMoveIntention();
+    if (lr_move_intention) {
+      if (lr_move_intention->GetDirection() == DIRECTION_LEFT)
         current_tux->turn_left();
       else
         current_tux->turn_right();

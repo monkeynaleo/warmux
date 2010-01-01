@@ -28,8 +28,6 @@ wormux_SOURCES = \
         character/member.h \
         character/movement.cpp \
         character/movement.h \
-        character/walk_intention.cpp \
-        character/walk_intention.h \
         config.h \
 	game/config.cpp \
         game/config.h \
@@ -155,6 +153,8 @@ wormux_SOURCES = \
         interface/mouse.h \
         interface/mouse_cursor.cpp \
         interface/mouse_cursor.h \
+        interface/move_intention.cpp \
+        interface/move_intention.h \
         interface/weapon_menu.cpp \
         interface/weapon_menu.h \
         main.cpp \
