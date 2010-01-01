@@ -35,25 +35,18 @@ class JetPack : public Weapon
     uint m_last_fuel_down;
     bool active;
 
-    bool move_up;
-
     bool IsInAir();
 
   public:
     JetPack();
     void Reset();
 
-    virtual void StartMovingUp();
-    virtual void StopMovingUp();
     virtual void StartShooting();
     virtual void StopShooting() {};
 
     virtual bool IsPreventingLRMovement();
     virtual bool IsPreventingJumps();
     virtual bool IsPreventingWeaponAngleChanges();
-
-    virtual void HandleKeyPressed_Up(bool /*slowly*/);
-    virtual void HandleKeyReleased_Up(bool /*slowly*/);
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
