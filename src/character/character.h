@@ -24,13 +24,12 @@
 
 #include <limits>
 #include <string>
-#include <vector>
 #include "character/body.h"
 #include "gui/energy_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "character/body.h"
-#include "interface/move_intention.h"
+#include "interface/movable_by_user.h"
 
 class Text;
 class Team;
@@ -41,7 +40,7 @@ class DamageStatistics;
 //#define DEBUG_SKIN
 #endif
 
-class Character : public PhysicalObj
+class Character : public PhysicalObj, public MovableByUser
 {
 private:
   /* If you need this, implement it (correctly) */
@@ -87,8 +86,6 @@ private:
   // if we have changed of active character
   bool is_playing;
 
-  std::vector<const LRMoveIntention *> lr_move_intentions;
-  std::vector<const UDMoveIntention *> ud_move_intentions;
   uint last_direction_change;
 
 public:
@@ -127,14 +124,6 @@ public:
   ~Character();
 
   virtual void SignalExplosion();
-
-  const LRMoveIntention * GetLastLRMoveIntention();
-  void AddLRMoveIntention(const LRMoveIntention * intention);
-  void RemoveLRMoveIntention(const LRMoveIntention * intention);
-
-  const UDMoveIntention * GetLastUDMoveIntention();
-  void AddUDMoveIntention(const UDMoveIntention * intention);
-  void RemoveUDMoveIntention(const UDMoveIntention * intention);
 
   void StartOrStopWalkingIfNecessary();
 

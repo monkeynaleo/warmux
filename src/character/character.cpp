@@ -113,6 +113,7 @@ static uint GetRandomAnimationTimeValue()
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   PhysicalObj("character"),
+  MovableByUser(),
   character_name(name),
   m_team(my_team),
   step_sound_played(true),
@@ -169,6 +170,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 
 Character::Character (const Character& acharacter) :
   PhysicalObj(acharacter),
+  MovableByUser(),
   character_name(acharacter.character_name),
   m_team(acharacter.m_team),
   step_sound_played(acharacter.step_sound_played),
@@ -929,60 +931,6 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 // ###################################################################
 // ###################################################################
-
-template<typename T>
-static void DeleteMatchingFromVector(const T * t, std::vector<const T *> & v)
-{
-  typename std::vector<const T*>::iterator it = v.begin();
-  while (it != v.end()) {
-    if (*it == t)
-      v.erase(it);
-    else
-      it++;
-  }
-}
-
-template<typename T>
-static const T * GetLastOrNULL(std::vector<const T *> & v)
-{
-  if (v.size() == 0)
-    return NULL;
-  return v.back();
-}
-
-const LRMoveIntention * Character::GetLastLRMoveIntention()
-{
-  return GetLastOrNULL(lr_move_intentions);
-}
-
-void Character::AddLRMoveIntention(const LRMoveIntention * intention)
-{
-  lr_move_intentions.push_back(intention);
-}
-
-void Character::RemoveLRMoveIntention(const LRMoveIntention * intention)
-{
-  DeleteMatchingFromVector(intention, lr_move_intentions);
-}
-
-const UDMoveIntention * Character::GetLastUDMoveIntention()
-{
-  return GetLastOrNULL(ud_move_intentions);
-}
-
-void Character::AddUDMoveIntention(const UDMoveIntention * intention)
-{
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Show();
-  }
-  ud_move_intentions.push_back(intention);
-}
-
-void Character::RemoveUDMoveIntention(const UDMoveIntention * intention)
-{
-  DeleteMatchingFromVector(intention, ud_move_intentions);
-}
 
 void Character::StartOrStopWalkingIfNecessary()
 {

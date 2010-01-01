@@ -34,6 +34,7 @@
 #include "game/time.h"
 #include "include/app.h"
 #include "include/constant.h"
+#include "interface/interface.h"
 #include "interface/game_msg.h"
 #include "network/chat.h"
 #include "network/network.h"
@@ -600,6 +601,10 @@ static void Action_Character_StartIncreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_UP_SLOWLY : INTENTION_MOVE_UP);
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Show();
+  }
 }
 
 static void Action_Character_StopIncreasingFireAngle(Action *a)
@@ -612,6 +617,10 @@ static void Action_Character_StartDecreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_DOWN_SLOWLY : INTENTION_MOVE_DOWN);
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Show();
+  }
 }
 
 static void Action_Character_StopDecreasingFireAngle(Action *a)
