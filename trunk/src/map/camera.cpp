@@ -44,9 +44,13 @@ const double REACTIVITY = 0.6;
 const double SPEED_REACTIVITY = 0.05;
 const double SPEED_REACTIVITY_CEIL = 4;
 
+const uint SCROLL_KEYBOARD = 20; // pixel
+
 const double ADVANCE_ANTICIPATION = 10;
 const double REALTIME_FOLLOW_LIMIT = 25;
 const double REALTIME_FOLLOW_FACTOR = 0.15;
+
+uint MAX_REFRESHES_PER_SECOND = 100;
 
 Camera::Camera():
   m_started_shaking( 0 ),
@@ -284,7 +288,7 @@ void Camera::ScrollCamera()
   /***************************************************************************/
 }
 
-void Camera::TestCamera()
+void Camera::HandleMouseMovement()
 {
   static Point2i first_mouse_pos(-1, -1);
   static Point2i last_mouse_pos(0, 0);
@@ -344,12 +348,38 @@ void Camera::TestCamera()
     ScrollCamera();
 }
 
-void Camera::Refresh(){
-  // Check if player wants the camera to move
-  TestCamera();
+void Camera::HandleMoveIntentions()
+{
+  const UDMoveIntention * ud_move_intention = GetLastUDMoveIntention();
+  if (ud_move_intention) {
+    if (ud_move_intention->GetDirection() == DIRECTION_UP)
+      SetXY(Point2i(0, -SCROLL_KEYBOARD));
+    else
+      SetXY(Point2i(0, SCROLL_KEYBOARD));
+  }
+  const LRMoveIntention * lr_move_intention = GetLastLRMoveIntention();
+  if (lr_move_intention) {
+    if (lr_move_intention->GetDirection() == DIRECTION_RIGHT)
+      SetXY(Point2i(SCROLL_KEYBOARD, 0));
+    else
+      SetXY(Point2i(-SCROLL_KEYBOARD, 0));
+  }
+  if (lr_move_intention || ud_move_intention)
+    SetAutoCrop(false);
+}
 
-  if (auto_crop && followed_object != NULL)
-    AutoCrop();
+void Camera::Refresh(){
+  // Refresh gets called very often when the game is paused.
+  // This "if" ensures that the camera doesn't move to fast.
+  if (refresh_stopwatch.GetValue() >= 1000 / MAX_REFRESHES_PER_SECOND) {
+    // Check if player wants the camera to move
+    HandleMouseMovement();
+    HandleMoveIntentions();
+
+    if (auto_crop && followed_object != NULL)
+      AutoCrop();
+    refresh_stopwatch.Reset(1.0);
+  }
 }
 
 void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
