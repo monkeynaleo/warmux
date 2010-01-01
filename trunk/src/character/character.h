@@ -88,10 +88,7 @@ private:
   bool is_playing;
 
   std::vector<const LRMoveIntention *> lr_move_intentions;
-  bool increase_fire_angle_pressed;
-  bool increase_fire_angle_slowly_pressed;
-  bool decrease_fire_angle_pressed;
-  bool decrease_fire_angle_slowly_pressed;
+  std::vector<const UDMoveIntention *> ud_move_intentions;
   uint last_direction_change;
 
 public:
@@ -114,6 +111,7 @@ private:
   void Collision(const Point2d& speed_vector);
   void SetBody(Body* char_body);
 
+  void UpdateFiringAngle();
   void AddFiringAngle(double angle) { SetFiringAngle(firing_angle + angle); };
 
   void StartWalking(bool slowly);
@@ -133,6 +131,10 @@ public:
   const LRMoveIntention * GetLastLRMoveIntention();
   void AddLRMoveIntention(const LRMoveIntention * intention);
   void RemoveLRMoveIntention(const LRMoveIntention * intention);
+
+  const UDMoveIntention * GetLastUDMoveIntention();
+  void AddUDMoveIntention(const UDMoveIntention * intention);
+  void RemoveUDMoveIntention(const UDMoveIntention * intention);
 
   void StartOrStopWalkingIfNecessary();
 
@@ -182,11 +184,6 @@ public:
   double GetAbsFiringAngle() const { return firing_angle; };
   void SetFiringAngle(double angle);
 
-  void StartIncreasingFireAngle(bool slowly);
-  void StopIncreasingFireAngle(bool slowly);
-  void StartDecreasingFireAngle(bool slowly);
-  void StopDecreasingFireAngle(bool slowly);
-
   // Show hide the Character
   void Hide() { hidden = true; };
   void Show() { hidden = false; };
@@ -197,8 +194,6 @@ public:
 
   bool HasGroundUnderFeets() const;
   bool CanJump() const { return HasGroundUnderFeets(); };
-
-  void StopChangingWeaponAngle();
 
   // Jumps
   void Jump(double strength, double angle);

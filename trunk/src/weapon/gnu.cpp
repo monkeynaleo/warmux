@@ -181,7 +181,6 @@ bool GnuLauncher::p_Shoot()
 
   current_gnu = static_cast<Gnu *>(projectile);
   gnu_death_time = 0;
-  ActiveCharacter().StopChangingWeaponAngle();
   bool r = WeaponLauncher::p_Shoot();
   return r;
 }

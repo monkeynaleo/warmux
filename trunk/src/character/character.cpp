@@ -135,10 +135,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step(-1),
   particle_engine(new ParticleEngine(500)),
   is_playing(false),
-  increase_fire_angle_pressed(false),
-  increase_fire_angle_slowly_pressed(false),
-  decrease_fire_angle_pressed(false),
-  decrease_fire_angle_slowly_pressed(false),
   last_direction_change(0),
   previous_strength(0),
   body(NULL)
@@ -195,10 +191,6 @@ Character::Character (const Character& acharacter) :
   channel_step(acharacter.channel_step),
   particle_engine(new ParticleEngine(250)),
   is_playing(acharacter.is_playing),
-  increase_fire_angle_pressed(false),
-  increase_fire_angle_slowly_pressed(false),
-  decrease_fire_angle_pressed(false),
-  decrease_fire_angle_slowly_pressed(false),
   last_direction_change(0),
   previous_strength(acharacter.previous_strength),
   body(NULL)
@@ -368,10 +360,8 @@ void Character::Die()
     SetMovement("breathe");
     SetCollisionModel(true, false, false);
 
-    increase_fire_angle_pressed = false;
-    increase_fire_angle_slowly_pressed = false;
-    decrease_fire_angle_pressed = false;
-    decrease_fire_angle_slowly_pressed = false;
+    ud_move_intentions.clear();
+    lr_move_intentions.clear();
 
     if(death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
@@ -553,25 +543,7 @@ void Character::Refresh()
   if (IsWalking())
     MakeSteps();
 
-  if (IsImmobile()) {
-    bool increase_angle = increase_fire_angle_pressed || increase_fire_angle_slowly_pressed;
-    bool decrease_angle = decrease_fire_angle_pressed || decrease_fire_angle_slowly_pressed;
-    if (increase_angle && !decrease_angle) {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (increase_fire_angle_slowly_pressed)
-        AddFiringAngle(DELTA_CROSSHAIR/10.0);
-      else
-        AddFiringAngle(DELTA_CROSSHAIR);
-    } else if (decrease_angle && ! increase_angle) {
-      UpdateLastMovingTime();
-      CharacterCursor::GetInstance()->Hide();
-      if (decrease_fire_angle_slowly_pressed)
-        AddFiringAngle(-DELTA_CROSSHAIR/10.0);
-      else
-        AddFiringAngle(-DELTA_CROSSHAIR);
-    }
-  }
+  UpdateFiringAngle();
 
   if (IsGhost()) return;
 
@@ -686,6 +658,22 @@ void Character::Refresh()
       DoShoot();
       prepare_shoot = false;
     }
+  }
+}
+
+void Character::UpdateFiringAngle()
+{
+  bool can_change = IsImmobile() && !GetTeam().AccessWeapon().IsPreventingLRMovement();
+  const UDMoveIntention * ud_move_intention = GetLastUDMoveIntention();
+  if (can_change && ud_move_intention) {
+    UpdateLastMovingTime();
+    CharacterCursor::GetInstance()->Hide();
+    double delta = DELTA_CROSSHAIR;
+    if (ud_move_intention->IsToDoItSlowly())
+      delta /= 10.0;
+    if (ud_move_intention->GetDirection() == DIRECTION_UP)
+      delta = -delta;
+    AddFiringAngle(delta);
   }
 }
 
@@ -807,10 +795,7 @@ void Character::StopPlaying()
     StopWalking();
   SetRebounding(true);
   lr_move_intentions.clear();
-  increase_fire_angle_pressed = false;
-  increase_fire_angle_slowly_pressed = false;
-  decrease_fire_angle_pressed = false;
-  decrease_fire_angle_slowly_pressed = false;
+  ud_move_intentions.clear();
 }
 
 // Begining of turn or changed to this character
@@ -945,19 +930,29 @@ void Character::SetCustomName(const std::string name)
 // ###################################################################
 // ###################################################################
 
-void Character::StopChangingWeaponAngle()
+template<typename T>
+static void DeleteMatchingFromVector(const T * t, std::vector<const T *> & v)
 {
-  increase_fire_angle_slowly_pressed = true;
-  increase_fire_angle_pressed = true;
-  decrease_fire_angle_slowly_pressed = true;
-  decrease_fire_angle_pressed = true;
+  typename std::vector<const T*>::iterator it = v.begin();
+  while (it != v.end()) {
+    if (*it == t)
+      v.erase(it);
+    else
+      it++;
+  }
+}
+
+template<typename T>
+static const T * GetLastOrNULL(std::vector<const T *> & v)
+{
+  if (v.size() == 0)
+    return NULL;
+  return v.back();
 }
 
 const LRMoveIntention * Character::GetLastLRMoveIntention()
 {
-  if (lr_move_intentions.size() == 0)
-    return NULL;
-  return lr_move_intentions.back();
+  return GetLastOrNULL(lr_move_intentions);
 }
 
 void Character::AddLRMoveIntention(const LRMoveIntention * intention)
@@ -967,13 +962,26 @@ void Character::AddLRMoveIntention(const LRMoveIntention * intention)
 
 void Character::RemoveLRMoveIntention(const LRMoveIntention * intention)
 {
-  std::vector<const LRMoveIntention *>::iterator it = lr_move_intentions.begin();
-  while (it != lr_move_intentions.end()) {
-    if (*it == intention)
-      lr_move_intentions.erase(it);
-    else
-      it++;
+  DeleteMatchingFromVector(intention, lr_move_intentions);
+}
+
+const UDMoveIntention * Character::GetLastUDMoveIntention()
+{
+  return GetLastOrNULL(ud_move_intentions);
+}
+
+void Character::AddUDMoveIntention(const UDMoveIntention * intention)
+{
+  if (Network::GetInstance()->IsTurnMaster()) {
+    HideGameInterface();
+    ActiveTeam().crosshair.Show();
   }
+  ud_move_intentions.push_back(intention);
+}
+
+void Character::RemoveUDMoveIntention(const UDMoveIntention * intention)
+{
+  DeleteMatchingFromVector(intention, ud_move_intentions);
 }
 
 void Character::StartOrStopWalkingIfNecessary()
@@ -1146,80 +1154,33 @@ void Character::HandleKeyReleased_MoveLeft(bool slowly)
 }
 
 // #################### UP
-void Character::StartDecreasingFireAngle(bool slowly)
-{
-  if (ActiveTeam().AccessWeapon().IsPreventingWeaponAngleChanges())
-    return;
-  if (slowly)
-    decrease_fire_angle_slowly_pressed = true;
-  else
-    decrease_fire_angle_pressed = true;
-
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Show();
-  }
-}
-
-void Character::StopDecreasingFireAngle(bool slowly)
-{
-  if (slowly)
-    decrease_fire_angle_slowly_pressed = false;
-  else
-    decrease_fire_angle_pressed = false;
-}
-
 
 void Character::HandleKeyPressed_Up(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Character::HandleKeyReleased_Up(bool slowly)
-{
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
-  a->Push(slowly ? 1 : 0);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-// #################### DOWN
-
-
-void Character::StartIncreasingFireAngle(bool slowly)
-{
-  if (ActiveTeam().AccessWeapon().IsPreventingWeaponAngleChanges())
-    return;
-  if (slowly)
-    increase_fire_angle_slowly_pressed = true;
-  else
-    increase_fire_angle_pressed = true;
-
-  if (Network::GetInstance()->IsTurnMaster()) {
-    HideGameInterface();
-    ActiveTeam().crosshair.Show();
-  }
-}
-
-void Character::StopIncreasingFireAngle(bool slowly)
-{
-  if (slowly)
-    increase_fire_angle_slowly_pressed = false;
-  else
-    increase_fire_angle_pressed = false;
-}
-
-void Character::HandleKeyPressed_Down(bool slowly)
 {
   Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Character::HandleKeyReleased_Down(bool slowly)
+void Character::HandleKeyReleased_Up(bool slowly)
 {
   Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+// #################### DOWN
+
+void Character::HandleKeyPressed_Down(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
+  a->Push(slowly ? 1 : 0);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Character::HandleKeyReleased_Down(bool slowly)
+{
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }

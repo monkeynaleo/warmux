@@ -599,25 +599,25 @@ static void Action_Character_StopMovingRight(Action *a)
 static void Action_Character_StartIncreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StartIncreasingFireAngle(slowly);
+  ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_UP_SLOWLY : INTENTION_MOVE_UP);
 }
 
 static void Action_Character_StopIncreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StopIncreasingFireAngle(slowly);
+  ActiveCharacter().RemoveUDMoveIntention(slowly ? INTENTION_MOVE_UP_SLOWLY : INTENTION_MOVE_UP);
 }
 
 static void Action_Character_StartDecreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StartDecreasingFireAngle(slowly);
+  ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_DOWN_SLOWLY : INTENTION_MOVE_DOWN);
 }
 
 static void Action_Character_StopDecreasingFireAngle(Action *a)
 {
   bool slowly = a->PopInt();
-  ActiveCharacter().StopDecreasingFireAngle(slowly);
+  ActiveCharacter().RemoveUDMoveIntention(slowly ? INTENTION_MOVE_DOWN_SLOWLY : INTENTION_MOVE_DOWN);
 }
 
 static void Action_Weapon_StartShooting(Action */*a*/)

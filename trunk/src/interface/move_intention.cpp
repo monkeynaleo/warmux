@@ -22,29 +22,23 @@
 #include "interface/move_intention.h"
 #include <WORMUX_error.h>
 
-LRMoveIntention::LRMoveIntention(LRDirection direction, bool slowly):
-  direction(direction),
-  slowly(slowly)
-{
-  /* see initializer list */
-}
-
-LRDirection LRMoveIntention::GetDirection() const
-{
-  return direction;
-}
-
-bool LRMoveIntention::IsToDoItSlowly() const
-{
-  return slowly;
-}
-
-
 LRMoveIntention LEFT_SLOWLY_OBJECT(DIRECTION_LEFT, true);
 LRMoveIntention LEFT_OBJECT(DIRECTION_LEFT, false);
 LRMoveIntention RIGHT_SLOWLY_OBJECT(DIRECTION_RIGHT, true);
 LRMoveIntention RIGHT_OBJECT(DIRECTION_RIGHT, false);
+
+UDMoveIntention UP_SLOWLY_OBJECT(DIRECTION_UP, true);
+UDMoveIntention UP_OBJECT(DIRECTION_UP, false);
+UDMoveIntention DOWN_SLOWLY_OBJECT(DIRECTION_DOWN, true);
+UDMoveIntention DOWN_OBJECT(DIRECTION_DOWN, false);
+
+
 const LRMoveIntention * const INTENTION_MOVE_LEFT_SLOWLY = &LEFT_SLOWLY_OBJECT;
 const LRMoveIntention * const INTENTION_MOVE_LEFT = &LEFT_OBJECT;
 const LRMoveIntention * const INTENTION_MOVE_RIGHT_SLOWLY = &RIGHT_SLOWLY_OBJECT;
 const LRMoveIntention * const INTENTION_MOVE_RIGHT = &RIGHT_OBJECT;
+
+const UDMoveIntention * const INTENTION_MOVE_UP_SLOWLY = &UP_SLOWLY_OBJECT;
+const UDMoveIntention * const INTENTION_MOVE_UP = &UP_OBJECT;
+const UDMoveIntention * const INTENTION_MOVE_DOWN_SLOWLY = &DOWN_SLOWLY_OBJECT;
+const UDMoveIntention * const INTENTION_MOVE_DOWN = &DOWN_OBJECT;

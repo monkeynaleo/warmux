@@ -24,20 +24,35 @@
 
 #include <WORMUX_types.h>
 
-class LRMoveIntention
+template<typename T>
+class MoveIntention
 {
   private:
-    LRDirection direction;
+    T direction;
     bool slowly;
   public:
-    LRMoveIntention(LRDirection direction, bool slowly);
-    LRDirection GetDirection() const;
-    bool IsToDoItSlowly() const;
+    MoveIntention(T direction, bool slowly):
+      direction(direction),
+      slowly(slowly)
+    {
+      /* see initializer list */
+    }
+    T GetDirection() const { return direction; }
+    bool IsToDoItSlowly() const { return slowly; }
 };
+
+
+typedef MoveIntention<LRDirection> LRMoveIntention;
+typedef MoveIntention<UDDirection> UDMoveIntention;
+
 extern const LRMoveIntention * const INTENTION_MOVE_LEFT_SLOWLY;
 extern const LRMoveIntention * const INTENTION_MOVE_LEFT;
 extern const LRMoveIntention * const INTENTION_MOVE_RIGHT;
 extern const LRMoveIntention * const INTENTION_MOVE_RIGHT_SLOWLY;
+extern const UDMoveIntention * const INTENTION_MOVE_UP_SLOWLY;
+extern const UDMoveIntention * const INTENTION_MOVE_UP;
+extern const UDMoveIntention * const INTENTION_MOVE_DOWN;
+extern const UDMoveIntention * const INTENTION_MOVE_DOWN_SLOWLY;
 
 
 #endif
