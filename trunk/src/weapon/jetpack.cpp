@@ -73,9 +73,9 @@ void JetPack::Refresh()
     if (move_up) {
       F.y = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
     }
-    const WalkIntention & walk_intention = ActiveCharacter().GetWalkIntention();
-    if (walk_intention.IsToWalk() && IsInAir()) {
-      LRDirection direction = walk_intention.GetDirection();
+    const LRMoveIntention * lr_move_intention = ActiveCharacter().GetLastLRMoveIntention();
+    if (lr_move_intention && IsInAir()) {
+      LRDirection direction = lr_move_intention->GetDirection();
       if (direction == DIRECTION_LEFT)
         F.x = -JETPACK_FORCE;
       else

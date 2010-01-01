@@ -19,33 +19,32 @@
  * Describes which left or right movement the user wants to do with a character.
  *****************************************************************************/
 
-#ifndef _WALK_INTENTION_H
-#define _WALK_INTENTION_H
+#include "interface/move_intention.h"
+#include <WORMUX_error.h>
 
-#include <WORMUX_types.h>
-
-class WalkIntention
+LRMoveIntention::LRMoveIntention(LRDirection direction, bool slowly):
+  direction(direction),
+  slowly(slowly)
 {
-  private:
-    bool left_slowly;
-    bool left_normal;
-    bool right_slowly;
-    bool right_normal;
+  /* see initializer list */
+}
 
-    // cached values for simpler getters:
-    LRDirection direction;
-    bool exists;
-    bool slowly;
+LRDirection LRMoveIntention::GetDirection() const
+{
+  return direction;
+}
 
-    void UpdateChachedValues();
-  public:
-    WalkIntention();
-    bool IsToWalk() const;
-    LRDirection GetDirection() const;
-    bool IsToDoItSlowly() const;
-    void Set(LRDirection direction, bool slowly, bool enabled);
-    void SetAllFalse();
-    bool Get(LRDirection direction, bool slowly) const;
-};
+bool LRMoveIntention::IsToDoItSlowly() const
+{
+  return slowly;
+}
 
-#endif
+
+LRMoveIntention LEFT_SLOWLY_OBJECT(DIRECTION_LEFT, true);
+LRMoveIntention LEFT_OBJECT(DIRECTION_LEFT, false);
+LRMoveIntention RIGHT_SLOWLY_OBJECT(DIRECTION_RIGHT, true);
+LRMoveIntention RIGHT_OBJECT(DIRECTION_RIGHT, false);
+const LRMoveIntention * const INTENTION_MOVE_LEFT_SLOWLY = &LEFT_SLOWLY_OBJECT;
+const LRMoveIntention * const INTENTION_MOVE_LEFT = &LEFT_OBJECT;
+const LRMoveIntention * const INTENTION_MOVE_RIGHT_SLOWLY = &RIGHT_SLOWLY_OBJECT;
+const LRMoveIntention * const INTENTION_MOVE_RIGHT = &RIGHT_OBJECT;

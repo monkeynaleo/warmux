@@ -24,12 +24,13 @@
 
 #include <limits>
 #include <string>
+#include <vector>
 #include "character/body.h"
 #include "gui/energy_bar.h"
 #include "include/base.h"
 #include "object/physical_obj.h"
 #include "character/body.h"
-#include "character/walk_intention.h"
+#include "interface/move_intention.h"
 
 class Text;
 class Team;
@@ -85,7 +86,8 @@ private:
   // this is needed because of network needing to know
   // if we have changed of active character
   bool is_playing;
-  WalkIntention walk_intention;
+
+  std::vector<const LRMoveIntention *> lr_move_intentions;
   bool increase_fire_angle_pressed;
   bool increase_fire_angle_slowly_pressed;
   bool decrease_fire_angle_pressed;
@@ -128,8 +130,11 @@ public:
 
   virtual void SignalExplosion();
 
+  const LRMoveIntention * GetLastLRMoveIntention();
+  void AddLRMoveIntention(const LRMoveIntention * intention);
+  void RemoveLRMoveIntention(const LRMoveIntention * intention);
+
   void StartOrStopWalkingIfNecessary();
-  WalkIntention & GetWalkIntention() { return walk_intention; };
 
   // Energy related
   void SetEnergyDelta(int delta, bool do_report = true);
