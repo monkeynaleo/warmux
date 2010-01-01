@@ -110,10 +110,7 @@ void GameBlitz::RefreshClock()
           Interface::GetInstance()->UpdateTimer(duration);
           if (duration <= 10) {
             JukeBox::GetInstance()->Play("default", "time/bip");
-            Interface::GetInstance()->UpdateTimer(duration, true);
-          } else {
-	          Interface::GetInstance()->UpdateTimer(duration, false);
-	        }
+          }
         }
         break;
 
