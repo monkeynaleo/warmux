@@ -1105,14 +1105,14 @@ void Character::HandleKeyReleased_MoveLeft(bool slowly)
 
 void Character::HandleKeyPressed_Up(bool slowly)
 {
-  Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
+  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_UP);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Character::HandleKeyReleased_Up(bool slowly)
 {
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_UP);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }
@@ -1121,14 +1121,14 @@ void Character::HandleKeyReleased_Up(bool slowly)
 
 void Character::HandleKeyPressed_Down(bool slowly)
 {
-  Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
+  Action *a = new Action(Action::ACTION_CHARACTER_START_MOVING_DOWN);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Character::HandleKeyReleased_Down(bool slowly)
 {
-  Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
+  Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_DOWN);
   a->Push(slowly ? 1 : 0);
   ActionHandler::GetInstance()->NewAction(a);
 }
