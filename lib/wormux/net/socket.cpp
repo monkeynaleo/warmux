@@ -731,7 +731,14 @@ bool WSocket::IsReady(int timeout, bool force_check_activity) const
 
   if (timeout != 0 || force_check_activity) {
     ASSERT(socket_set != NULL);
-    if (socket_set->CheckActivity(timeout) == 0)
+    int sockets_ready = socket_set->CheckActivity(timeout);
+
+    if (sockets_ready == -1) {
+      print_net_error("SDLNet_CheckSockets");
+      return false;
+    }
+
+    if (sockets_ready == 0)
       return false;
   }
 
