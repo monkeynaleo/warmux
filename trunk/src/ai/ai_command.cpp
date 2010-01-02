@@ -40,14 +40,14 @@ bool IncreaseAngleCommand::Execute()
   double current_angle = ActiveCharacter().GetAbsFiringAngle();
   if (current_angle >= target_angle) {
     if (is_increasing) {
-      Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
+      Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
       a->Push(slowly);
       ActionHandler::GetInstance()->NewAction(a);
     }
     return true;
   } else {
     if (!is_increasing) {
-      Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
+      Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
       a->Push(slowly);
       ActionHandler::GetInstance()->NewAction(a);
       is_increasing = true;
@@ -70,14 +70,14 @@ bool DecreaseAngleCommand::Execute()
   double current_angle = ActiveCharacter().GetAbsFiringAngle();
   if (current_angle <= target_angle) {
     if (is_decreasing) {
-      Action *a = new Action(Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE);
+      Action *a = new Action(Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE);
       a->Push(slowly);
       ActionHandler::GetInstance()->NewAction(a);
     }
     return true;
   } else {
     if (!is_decreasing) {
-      Action *a = new Action(Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE);
+      Action *a = new Action(Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE);
       a->Push(slowly);
       ActionHandler::GetInstance()->NewAction(a);
       is_decreasing = true;
