@@ -597,7 +597,7 @@ static void Action_Character_StopMovingRight(Action *a)
   ActiveCharacter().RemoveLRMoveIntention(slowly ? INTENTION_MOVE_RIGHT_SLOWLY : INTENTION_MOVE_RIGHT);
 }
 
-static void Action_Character_StartIncreasingFireAngle(Action *a)
+static void Action_Character_StartMovingUp(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_UP_SLOWLY : INTENTION_MOVE_UP);
@@ -607,13 +607,13 @@ static void Action_Character_StartIncreasingFireAngle(Action *a)
   }
 }
 
-static void Action_Character_StopIncreasingFireAngle(Action *a)
+static void Action_Character_StopMovingUp(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().RemoveUDMoveIntention(slowly ? INTENTION_MOVE_UP_SLOWLY : INTENTION_MOVE_UP);
 }
 
-static void Action_Character_StartDecreasingFireAngle(Action *a)
+static void Action_Character_StartMovingDown(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().AddUDMoveIntention(slowly ? INTENTION_MOVE_DOWN_SLOWLY : INTENTION_MOVE_DOWN);
@@ -623,7 +623,7 @@ static void Action_Character_StartDecreasingFireAngle(Action *a)
   }
 }
 
-static void Action_Character_StopDecreasingFireAngle(Action *a)
+static void Action_Character_StopMovingDown(Action *a)
 {
   bool slowly = a->PopInt();
   ActiveCharacter().RemoveUDMoveIntention(slowly ? INTENTION_MOVE_DOWN_SLOWLY : INTENTION_MOVE_DOWN);
@@ -949,10 +949,10 @@ void Action_Handler_Init()
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
  ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_INCREASING_FIRE_ANGLE, "CHARACTER_start_increasing_fire_angle", &Action_Character_StartIncreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_INCREASING_FIRE_ANGLE, "CHARACTER_stop_increasing_fire_angle", &Action_Character_StopIncreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_DECREASING_FIRE_ANGLE, "CHARACTER_start_decreasing_fire_angle", &Action_Character_StartDecreasingFireAngle);
- ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_DECREASING_FIRE_ANGLE, "CHARACTER_stop_decreasing_fire_angle", &Action_Character_StopDecreasingFireAngle);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_UP, "CHARACTER_start_moving_up", &Action_Character_StartMovingUp);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_UP, "CHARACTER_stop_moving_up", &Action_Character_StopMovingUp);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_START_MOVING_DOWN, "CHARACTER_start_moving_down", &Action_Character_StartMovingDown);
+ ActionHandler::GetInstance()->Register (Action::ACTION_CHARACTER_STOP_MOVING_DOWN, "CHARACTER_stop_moving_down", &Action_Character_StopMovingDown);
 
   // ########################################################
   // Quite standard weapon options
