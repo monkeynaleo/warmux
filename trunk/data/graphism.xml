@@ -216,7 +216,10 @@
   <surface name="clock_background" file="interface/please_delete_us_we_are_old_files_read_task6160/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
   <sprite name="clock_normal">
-    <image file="interface/whitetheme/clock.png" />
+    <image file="interface/whitetheme/clock.png">
+      <grid pos="0,0" size="40,40" array="10,1" />
+    </image>
+    <animation loop_mode="true" speed="6000" />
   </sprite>
   <sprite name="clock_emergency">
     <image file="interface/whitetheme/clock_emergency.png">
