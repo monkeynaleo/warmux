@@ -39,6 +39,9 @@ class Airhammer : public Weapon
     SoundSample drill_sound;
     SoundSample select_sound;
     bool active;
+    bool deactivation_requested;
+
+    void PlaySoundSelect();
 
   protected:
     void p_Select();
@@ -51,6 +54,7 @@ class Airhammer : public Weapon
     AirhammerConfig &cfg();
     void StartShooting();
     void StopShooting();
+    virtual bool ShouldAmmoUnitsBeDrawn() const;
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 };
