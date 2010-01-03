@@ -219,10 +219,10 @@
     <image file="interface/whitetheme/clock.png" />
   </sprite>
   <sprite name="clock_emergency">
-    <image file="interface/whitetheme/arrow_turn.png">
-      <grid pos="0,0" size="50,50" array="8,1" />
+    <image file="interface/whitetheme/clock_emergency.png">
+      <grid pos="0,0" size="34,43" array="6,1" />
     </image>
-    <animation loop_mode="true" speed="75" />
+    <animation loop_mode="true" speed="70" />
   </sprite>
 
   <!-- Minimap -->
