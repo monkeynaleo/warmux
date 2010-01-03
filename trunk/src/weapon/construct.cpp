@@ -59,6 +59,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
   m_name = _("Construct");
   m_category = TOOL;
+  m_can_change_weapon = true;
   angle = 0;
   target_chosen = false;
 }
@@ -120,6 +121,9 @@ void Construct::Draw()
 
 void Construct::ChooseTarget(Point2i mouse_pos)
 {
+  if (!EnoughAmmo())
+    return;
+
   dst = mouse_pos;
 
   Point2i test_target = dst - construct_spr->GetSizeMax() / 2;
