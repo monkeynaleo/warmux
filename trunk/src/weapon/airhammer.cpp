@@ -58,7 +58,8 @@ class AirhammerConfig : public WeaponConfig
 
 Airhammer::Airhammer():
   Weapon(WEAPON_AIR_HAMMER, "airhammer", new AirhammerConfig()),
-  active(false)
+  active(false),
+  deactivation_requested(false)
 {
   UpdateTranslationStrings();
 
@@ -66,6 +67,7 @@ Airhammer::Airhammer():
 
   impact = GetResourceManager().LoadImage( weapons_res_profile, "airhammer_impact");
   m_time_between_each_shot = MIN_TIME_BETWEEN_JOLT;
+  m_can_change_weapon = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -80,13 +82,6 @@ void Airhammer::UpdateTranslationStrings()
 
 bool Airhammer::p_Shoot()
 {
-  active = true;
-  //if the sound isn't already playing, play it again.
-  select_sound.Stop();
-  if (!drill_sound.IsPlaying()) {
-    drill_sound.Play("default","weapon/airhammer", -1);
-  }
-
   // initiate movement ;-)
   ActiveCharacter().SetRebounding(false);
 
@@ -146,29 +141,57 @@ void Airhammer::p_Deselect()
 
 void Airhammer::StartShooting()
 {
-  if (EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+  if (!EnoughAmmo())
+    return;
+  //if the sound isn't already playing, play it again.
+  select_sound.Stop();
+  if (!drill_sound.IsPlaying()) {
+    drill_sound.Play("default","weapon/airhammer", -1);
   }
-}
-void Airhammer::StopShooting()
-{
-  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  Game::GetInstance()->SetState(Game::HAS_PLAYED);
-  p_Deselect();
+
+  active = true;
+  deactivation_requested = false;
 }
 
+void Airhammer::StopShooting()
+{
+  // The airhammer does not get deactivated in this method,
+  // because there could be a shot in progress.
+  // Explantion:
+  // The weapon calls PrepareShot of the active character
+  // which will then call p_Shot when it's ready
+  deactivation_requested = true;
+}
+
+bool Airhammer::ShouldAmmoUnitsBeDrawn() const
+{
+  // Hide that the units are actually at maximum and not at 0
+  // when the ammo counter is at 0.
+  return active || EnoughAmmo();
+}
 //-----------------------------------------------------------------------------
 
 void Airhammer::Refresh()
 {
+  if (active && deactivation_requested && !ActiveCharacter().IsPreparingShoot()) {
+    active = false;
+    drill_sound.Stop();
+    PlaySoundSelect();
+    ActiveTeam().AccessNbUnits() = 0;
+  }
   if (EnoughAmmoUnit() && active) {
     Weapon::RepeatShoot();
   }
 }
 
-void Airhammer::p_Select()
+void Airhammer::PlaySoundSelect()
 {
   select_sound.Play("default","weapon/airhammer_select",-1);
+}
+
+void Airhammer::p_Select()
+{
+  PlaySoundSelect();
 }
 
 std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count ) const
