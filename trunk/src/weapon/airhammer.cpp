@@ -49,7 +49,6 @@ class AirhammerConfig : public WeaponConfig
 {
   public:
     uint range;
-    uint damage;
     AirhammerConfig();
     void LoadXml(const xmlNode* elem);
 };
@@ -94,38 +93,6 @@ bool Airhammer::p_Shoot()
   ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
   GetWorld().Dig( pos, impact );
-
-  uint range = 0;
-  int x,y; // Testing coordinates
-  bool end = false;
-  do
-  {
-    // Did we have finished the computation
-    range += 1;
-    if (range > cfg().range)
-    {
-      range = cfg().range;
-      end = true;
-    }
-
-    // Compute point coordinates
-    Point2i hand_position;
-    ActiveCharacter().GetHandPosition(hand_position);
-    y = hand_position.y + range;
-    x = hand_position.x;
-
-    FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
-    {
-      // Did we touch somebody ?
-      if( character->Contain(Point2i(x, y)) )
-      {
-        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetEnergyDelta(-(int)cfg().damage);
-        end = true;
-      }
-    }
-  } while (!end);
 
   return true;
 }
@@ -213,7 +180,6 @@ AirhammerConfig& Airhammer::cfg() {
 
 AirhammerConfig::AirhammerConfig(){
   range =  30;
-  damage = 3;
 }
 
 //-----------------------------------------------------------------------------
@@ -221,5 +187,4 @@ AirhammerConfig::AirhammerConfig(){
 void AirhammerConfig::LoadXml(const xmlNode* elem){
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "range", range);
-  XmlReader::ReadUint(elem, "damage", damage);
 }
