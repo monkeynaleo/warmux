@@ -122,16 +122,6 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
                         Font::FONT_SMALL, Font::FONT_BOLD);
-  if (Network::GetInstance()->IsClient()) {
-    // First %s will be replaced with the name of the network game,
-    // second %s by the server hostname
-    msg_box->NewMessage(Format(_("Welcome to %s on %s!"),
-			       Network::GetInstance()->GetGameName().c_str(),
-			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
-			, c_red);
-    msg_box->NewMessage(_("Don't forget to validate once you have selected your team(s)!"), c_red);
-  }
-
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
                        options_box->GetPositionY());
 
@@ -147,6 +137,15 @@ NetworkMenu::NetworkMenu() :
     // Client Mode
     mode_label->SetText(_("Client mode"));
     initialized_players->SetVisible(false);
+
+    // First %s will be replaced with the name of the network game,
+    // second %s by the server hostname
+    msg_box->NewMessage(Format(_("Welcome to %s on %s!"),
+			       Network::GetInstance()->GetGameName().c_str(),
+			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
+			, c_red);
+    msg_box->NewMessage(_("Don't forget to validate once you have selected your team(s)!"), c_red);
+
   } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
     mode_label->SetText(_("Server mode"));
@@ -401,6 +400,8 @@ void NetworkMenu::SetGameMasterCallback()
   b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
   waiting_for_server = false;
   msg_box->NewMessage(_("You are the new turn master!"), c_red);
+  msg_box->NewMessage(_("Wait until some opponent(s) connect!"), c_red);
+
 }
 
 void NetworkMenu::ReceiveMsgCallback(const std::string& msg)

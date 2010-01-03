@@ -279,8 +279,6 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   widgets.AddWidget(msg_box);
   widgets.Pack();
 
-  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
-  msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage(_("Have a good game!"));
   msg_box->NewMessage(""); // Skip a line
 
