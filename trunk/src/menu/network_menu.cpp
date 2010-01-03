@@ -41,6 +41,7 @@
 #include "network/network.h"
 #include "network/network_client.h"
 #include "network/network_server.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
 #include "tool/resource_manager.h"
@@ -339,6 +340,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 	    Network::GetInstance()->GetNbHostsInitialized()
 	    && Network::GetInstance()->GetNbHostsInitialized() != 0) {
 	  msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
+	  JukeBox::GetInstance()->Play("default", "menu/newcomer");
 	}
 	else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
 	  msg_box->NewMessage(_("You are alone. :-/"), c_red);
