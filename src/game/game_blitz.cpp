@@ -113,9 +113,9 @@ void GameBlitz::RefreshClock()
 	  }
 
 	  if (duration > 10) {
-	    Interface::GetInstance()->UpdateTimer(duration, false);
+	    Interface::GetInstance()->UpdateTimer(duration, false, false);
 	  } else {
-	    Interface::GetInstance()->UpdateTimer(duration, true);
+	    Interface::GetInstance()->UpdateTimer(duration, true, false);
 	  }
         }
         break;
@@ -125,7 +125,7 @@ void GameBlitz::RefreshClock()
           cur = KillTeam(cur);
         } else {
           duration--;
-          Interface::GetInstance()->UpdateTimer(duration, false);
+          Interface::GetInstance()->UpdateTimer(duration, false, false);
         }
         SetState(END_TURN);
         break;
@@ -179,7 +179,7 @@ void GameBlitz::__SetState_PLAYING()
   GetTeamsList().NextTeam();
 
   // initialize counter
-  Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second, false);
+  Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second, false, true);
   Interface::GetInstance()->EnableDisplayTimer(true);
   last_clock_update = Time::GetInstance()->Read();
 
@@ -201,7 +201,7 @@ void GameBlitz::__SetState_END_TURN()
   CharacterCursor::GetInstance()->Hide();
   last_clock_update = Time::GetInstance()->Read();
   // Ensure the clock sprite isn't NULL:
-  Interface::GetInstance()->UpdateTimer(0, false);
+  Interface::GetInstance()->UpdateTimer(0, false, true);
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();

@@ -624,7 +624,7 @@ void Interface::Hide()
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
-void Interface::UpdateTimer(uint utimer, bool emergency)
+void Interface::UpdateTimer(uint utimer, bool emergency, bool reset_anim)
 {
   Sprite *prev_clock = clock;
 
@@ -639,8 +639,9 @@ void Interface::UpdateTimer(uint utimer, bool emergency)
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
 
-  if (prev_clock != clock) {
+  if (prev_clock != clock || reset_anim) {
     clock->animation.SetLoopMode(true);
+    clock->SetCurrentFrame(0);
     clock->Start();
   }
 }

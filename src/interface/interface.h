@@ -132,7 +132,7 @@ protected:
    Point2i GetMenuPosition() const;
 
    void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
-   void UpdateTimer(uint utimer, bool emergency);
+  void UpdateTimer(uint utimer, bool emergency, bool reset_anim);
    void UpdateWindIndicator(int wind_value);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
    void ToggleMinimap() { display_minimap = !display_minimap; };
