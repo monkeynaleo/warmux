@@ -48,13 +48,15 @@ class BlowtorchConfig : public WeaponConfig
 
 Blowtorch::Blowtorch() :
   Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig()),
-  active(false)
+  active(false),
+  deactivation_requested(false)
 {
   UpdateTranslationStrings();
 
   m_category = TOOL;
   m_time_between_each_shot = MIN_TIME_BETWEEN_DIG;
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, "blowtorch_fire"));
+  m_can_change_weapon = true;
 }
 
 void Blowtorch::UpdateTranslationStrings()
@@ -65,7 +67,6 @@ void Blowtorch::UpdateTranslationStrings()
 
 void Blowtorch::p_Deselect()
 {
-  ActiveTeam().AccessNbUnits() = 0;
   active = false;
 }
 
@@ -90,18 +91,34 @@ bool Blowtorch::p_Shoot()
 
 void Blowtorch::StartShooting()
 {
+  if (!EnoughAmmo())
+    return;
+
   active = true;
+  deactivation_requested = false;
 }
 
 
 void Blowtorch::StopShooting()
 {
-  active = false;
+  deactivation_requested = true;
   SignalTurnEnd();
+}
+
+bool Blowtorch::ShouldAmmoUnitsBeDrawn() const
+{
+  // Hide that the units are actually at maximum and not at 0
+  // when the ammo counter is at 0.
+  return active || EnoughAmmo();
 }
 
 void Blowtorch::Refresh()
 {
+  if (active && deactivation_requested && !ActiveCharacter().IsPreparingShoot()) {
+    active = false;
+    ActiveTeam().AccessNbUnits() = 0;
+  }
+
   if (active && EnoughAmmoUnit()) {
     Weapon::RepeatShoot();
   }

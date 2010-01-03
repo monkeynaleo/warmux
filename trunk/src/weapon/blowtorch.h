@@ -30,6 +30,7 @@ class Blowtorch : public Weapon
 {
   private:
     bool active;
+    bool deactivation_requested;
   protected:
     bool p_Shoot();
     void p_Deselect();
@@ -42,6 +43,7 @@ class Blowtorch : public Weapon
 
     void StartShooting();
     void StopShooting();
+    virtual bool ShouldAmmoUnitsBeDrawn() const;
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
