@@ -91,7 +91,6 @@
       <max_angle>0</max_angle>
       <nb_ammo>3</nb_ammo>
       <unit_per_ammo>20</unit_per_ammo>
-      <damage>2</damage>
       <range>30</range>
       <drop_probability>1</drop_probability>
       <ammo_per_drop>2</ammo_per_drop>
