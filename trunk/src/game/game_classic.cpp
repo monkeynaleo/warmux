@@ -95,7 +95,7 @@ void GameClassic::RefreshClock()
           SetState(END_TURN);
         } else {
           duration--;
-          Interface::GetInstance()->UpdateTimer(duration);
+          Interface::GetInstance()->UpdateTimer(duration, false);
         }
         break;
 
@@ -143,7 +143,7 @@ void GameClassic::__SetState_PLAYING()
 
   // initialize counter
   duration = GameMode::GetInstance()->duration_turn;
-  Interface::GetInstance()->UpdateTimer(duration);
+  Interface::GetInstance()->UpdateTimer(duration, false);
   Interface::GetInstance()->EnableDisplayTimer(true);
   last_clock_update = Time::GetInstance()->Read();
 
@@ -167,7 +167,7 @@ void GameClassic::__SetState_HAS_PLAYED()
   MSG_DEBUG("game.statechange", "Has played, now can move");
   duration = GameMode::GetInstance()->duration_move_player;
   last_clock_update = Time::GetInstance()->Read();
-  Interface::GetInstance()->UpdateTimer(duration);
+  Interface::GetInstance()->UpdateTimer(duration, false);
   CharacterCursor::GetInstance()->Hide();
 }
 
@@ -179,7 +179,7 @@ void GameClassic::__SetState_END_TURN()
   ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
   duration = GameMode::GetInstance()->duration_exchange_player;
-  Interface::GetInstance()->UpdateTimer(duration);
+  Interface::GetInstance()->UpdateTimer(duration, false);
   Interface::GetInstance()->EnableDisplayTimer(false);
   last_clock_update = Time::GetInstance()->Read();
 
