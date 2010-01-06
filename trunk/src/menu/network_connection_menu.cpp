@@ -45,7 +45,7 @@ public:
   bool password;
   std::string port, ip_address;
   GameInfoBox(uint width, bool pwd, const std::string& ip, const std::string& p,
-              const std::string& dns, const std::string& name)
+              const std::string& name)
     : HBox(width, true, false)
     , password(pwd)
     , port(p)
@@ -58,7 +58,6 @@ public:
     }
     AddWidget(new Label(ip, 100));
     AddWidget(new Label(p, 40));
-    AddWidget(new Label(dns, 340));
     AddWidget(new Label(name, 200));
     Pack();
   }
@@ -70,9 +69,9 @@ public:
   GameListBox(const Point2i &size, bool b = true) : BaseListBox(size, b) { }
   void Select(uint index) { BaseListBox::Select(index); }
   void AddItem(bool selected, bool pwd, const std::string& ip_address,
-               const std::string& port, const std::string& dns, const std::string& name)
+               const std::string& port, const std::string& name)
   {
-    AddWidgetItem(selected, new GameInfoBox(600, pwd, ip_address, port, dns, name));
+    AddWidgetItem(selected, new GameInfoBox(600, pwd, ip_address, port, name));
   }
   const std::string& GetAddress() { return ((GameInfoBox*)m_items[selected_item])->ip_address; }
   const std::string& GetPort() { return ((GameInfoBox*)m_items[selected_item])->port; }
@@ -111,7 +110,7 @@ int RefreshNetInfo(void *)
     return -1;
   }
 
-  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList(true);
+  std::list<GameServerInfo> lst = IndexServer::GetInstance()->GetHostList(false);
   IndexServer::GetInstance()->Disconnect();
 
   SDL_SemWait(net_info.lock);
@@ -377,7 +376,7 @@ void NetworkConnectionMenu::__RefreshList()
   for (std::list<GameServerInfo>::iterator it = net_info.lst_games.begin();
        it != net_info.lst_games.end(); ++it) {
     cl_net_games_lst->AddItem(false, it->passworded, it->ip_address,
-                              it->port, it->dns_address, it->game_name);
+                              it->port, it->game_name);
   }
   SDL_SemPost(net_info.lock);
 
