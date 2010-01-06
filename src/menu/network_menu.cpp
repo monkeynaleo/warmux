@@ -133,10 +133,7 @@ NetworkMenu::NetworkMenu() :
 
   GetResourceManager().UnLoadXMLProfile(res);
 
-  if (!Network::GetInstance()->IsGameMaster()) {
-    // Client Mode
-    mode_label->SetText(_("Client mode"));
-    initialized_players->SetVisible(false);
+  if (!Network::GetInstance()->IsServer()) {
 
     // First %s will be replaced with the name of the network game,
     // second %s by the server hostname
@@ -144,6 +141,12 @@ NetworkMenu::NetworkMenu() :
 			       Network::GetInstance()->GetGameName().c_str(),
 			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
 			, c_red);
+  }
+
+  if (!Network::GetInstance()->IsGameMaster()) {
+    // Client Mode
+    mode_label->SetText(_("Client mode"));
+    initialized_players->SetVisible(false);
     msg_box->NewMessage(_("Don't forget to validate once you have selected your team(s)!"), c_red);
 
   } else if (Network::GetInstance()->IsServer()) {
