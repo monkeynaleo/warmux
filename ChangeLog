@@ -1,3 +1,14 @@
+> 2010/01/20 - 0.8.6 release
+  - Better network synchronization
+  - Pause in network game
+  - Few camera improvements
+  - New characters: postfix, hexley
+  - Few graphism improvements
+  - Some code optimizations
+  - New maps
+  - Various bug fixes
+  - Translation updates
+
 > 2009/09/15 - 0.8.5 release
   - Fix handling of key event during the game
   - Fix new sound player warning
