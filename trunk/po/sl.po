@@ -716,7 +716,7 @@ msgstr "Prikaže to sporočilo"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Po izbiri ekip(e) ne pozabite potrditi igre!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1128,10 +1128,8 @@ msgid "Music?"
 msgstr "Glasba?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Omrežna igra"
+msgstr "Omrežje"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1490,7 +1488,7 @@ msgstr "Strežnik je zavrnil povezavo: napačno geslo!"
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
-msgstr ""
+msgstr "Orožje %s ima neskončno municije, a v paketih še vedno lahko dobite dodatno!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1580,10 +1578,8 @@ msgid "Waiting for %s"
 msgstr "Čakanje na %s"
 
 #: src/game/game.cpp:166
-#, fuzzy
-#| msgid "Waiting for %s"
 msgid "Waiting for remote players"
-msgstr "Čakanje na %s"
+msgstr "Čakanje na oddaljene igralce"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1604,10 +1600,8 @@ msgstr "Spletna stran: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
 msgid "Welcome to %s on %s!"
-msgstr "Dobrodošli v %s!"
+msgstr "Dobrodošli v %s na %s!"
 
 #: src/game/game.cpp:970
 #, c-format
