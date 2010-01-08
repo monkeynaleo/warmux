@@ -4,12 +4,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
-# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009. (Proxecto Trasno <proxecto@trasno.net>).
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009, 2010. (Proxecto Trasno <proxecto@trasno.net>).
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 13:55+0200\n"
+"PO-Revision-Date: 2010-01-07 23:04+0100\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +122,7 @@ msgstr "%s anda preto dunha mina!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s quere un descanso."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -655,7 +655,7 @@ msgstr "Amosa esta mensaxe"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Non esquezas validar despois de seleccionar o teu equipo ou equipos!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1070,10 +1070,8 @@ msgid "Music?"
 msgstr "Música?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Xogo en rede"
+msgstr "Rede"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1174,7 +1172,7 @@ msgstr "Batallas públicas"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Saír do xogo de seguida con Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1437,6 +1435,8 @@ msgstr "O servido rexeitou a conexión: contrasinal incorrecto!"
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"A arma %s ten munición infinita, pero as caixas de bonificación poderían "
+"conter munición para ela!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1519,11 +1519,11 @@ msgstr[1] "Agarda! %i xogadores aínda non están preparados!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Agardando por %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Agardando por xogadores remotos"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1546,10 +1546,9 @@ msgstr "Sitio web: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "Benvido a %s!"
+msgstr "Benvido a %s en %s!"
 
 #: src/game/game.cpp:970
 #, c-format
