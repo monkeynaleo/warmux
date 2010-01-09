@@ -10,7 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-04-10 11:30+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2010-01-09 09:55+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +123,7 @@ msgstr "¡%s esta cerca de una mina!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "% s necesita una pausa."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -652,7 +653,7 @@ msgstr "Muestra este mensaje"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "¡No se olvide de validar una vez que haya seleccionado su equipo(s)!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1064,10 +1065,8 @@ msgid "Music?"
 msgstr "¿Música?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Juego en red"
+msgstr "Red"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1168,7 +1167,7 @@ msgstr "Batallas publicas"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Salir rápidamente del juego con Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1433,6 +1432,8 @@ msgstr "El servidor ha rechazado la conexión: password erroneo"
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"¡El arma %s tiene munición ilimitada, pero puede conseguir cajas de munición "
+"extra!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1515,11 +1516,11 @@ msgstr[1] "¡Espera! %i jugadores no están preparados todavía!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Lugar para %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Lugar para jugadar a distancia"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1543,10 +1544,9 @@ msgstr "Sitio web: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "¡Bien venido a %s!"
+msgstr "¡Bien venido a %s en %s!"
 
 #: src/game/game.cpp:970
 #, c-format
