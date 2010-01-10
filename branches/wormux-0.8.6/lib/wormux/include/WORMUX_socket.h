@@ -76,6 +76,9 @@ private:
   uint32_t m_packet_size;
   uint32_t m_received;
 
+  bool address_field_valid;
+  std::string address;
+
   bool AddToSocketSet(WSocketSet* _socket_set);
   void RemoveFromSocketSet();
   uint32_t ComputeCRC(const void* data, size_t len);
@@ -106,7 +109,7 @@ public:
   bool AddToTmpSocketSet();
   void RemoveFromTmpSocketSet();
 
-  std::string GetAddress() const;
+  const std::string GetAddress();
   bool IsReady(int timeout = 0) const;
   bool IsReady(int timeout, bool force_check_activity) const;
 
