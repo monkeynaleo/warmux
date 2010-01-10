@@ -13,7 +13,7 @@
 #
 
 MAC=`pwd`/
-ROOT=${MAC}../
+ROOT=${MAC}../../
 SRC=${ROOT}src/
 
 
@@ -22,12 +22,27 @@ SRC=${ROOT}src/
 # command line parameter when running this script
 # eg ./cmake_build.sh universal
 
-export MACOSX_DEPLOYMENT_TARGET=10.4
+# we are building x86 all the time for now. since we want backward compatibility even when building
+# on 10.6, use GCC 4.0.
+export CC=gcc-4.0
+export CXX=g++-4.0
+export LD=g++-4.0
+
+# used for non-universal builds (universal builds change this to 10.4)
+export MACOSX_DEPLOYMENT_TARGET=10.5
+
+# flags used when universal mode is off
+export COMPAT_FLAGS="-arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5"
+export COMPAT_LD_FLAGS="-arch i386 -mmacosx-version-min=10.5"
+
+# flags used for all kinds of builds
+export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I/Library/Frameworks/SDL.framework/Versions/A/Headers/"
+
+export UNIVERSAL_BUILD=0
+
+# flags only used when build as UB
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
 export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
-export COMPAT_FLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.3.9"
-
-export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I/Library/Frameworks/SDL.framework/Versions/A/Headers/"
 
 APP_VERSION=0.8.3
 BUNDLE_NAME=Wormux
@@ -50,20 +65,13 @@ if [ $# = 1 ]
 then
     if [ "$1" = "universal" ]
     then
-        echo "*******************************"
-        echo ""
-        echo "Universal build mode enabled !"
-        echo ""
-        echo "*******************************"
-        export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${COMPAT_FLAGS}"
-        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS} ${COMPAT_FLAGS}"
-        BUNDLE_NAME=Wormux
-        DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+        UNIVERSAL_BUILD=1
     else
         NBTHREADS=$1
         echo "Launch with ${NBTHREADS} !"
     fi
 fi
+
 
 if [ $# = 2 ]
 then
@@ -75,21 +83,30 @@ then
         TMP2=${1}
         TMP1=${2}
     fi
-        echo "*******************************"
-        echo ""
-        echo "Universal build mode enabled !"
-        echo ""
-        echo "*******************************"
-        export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${COMPAT_FLAGS}"
-        export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS} ${COMPAT_FLAGS}"
-        BUNDLE_NAME=Wormux
-        DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+        UNIVERSAL_BUILD=1
         NBTHREADS=$TMP2
         echo "Launch with ${NBTHREADS} !"
 fi
 
-export CFLAGS="${CFLAGS} ${INCLUDES}"
-export CXXFLAGS="${CFLAGS} ${COMPAT_FLAGS}"
+if [ ${UNIVERSAL_BUILD} = 1 ]
+then
+    echo "*******************************"
+    echo ""
+    echo "Universal build mode enabled !"
+    echo ""
+    echo "*******************************"
+    
+    BUNDLE_NAME=Wormux
+    export MACOSX_DEPLOYMENT_TARGET=10.4
+    DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
+    
+    export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${INCLUDES}"
+    export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
+else
+    export CFLAGS="${CFLAGS} ${INCLUDES} ${COMPAT_FLAGS}"
+    export CXXFLAGS="${CFLAGS} ${COMPAT_FLAGS}"
+    export LDFLAGS="${LDFLAGS} ${COMPAT_LD_FLAGS}"
+fi
 
 #
 # Set files for CMake and compilation
@@ -210,13 +227,15 @@ else
     exit 2 
 fi
 
+# tell the Finder the app was updated
+touch ${APP}
 
 #
 # Copy frameworks into package
 #
 
 #echo "Copy all frameworks"
-cd ${MAC};
+#cd ${MAC};
 
 # If frameworks are not available, they'll be download from this mirror
 #MIRROR=http://plorf.homeip.net/wormux/lib/
