@@ -135,7 +135,8 @@ WSocket::WSocket(TCPsocket _socket, WSocketSet* _socket_set) :
   using_tmp_socket_set(false),
   m_packet(NULL),
   m_packet_size(0),
-  m_received(0)
+  m_received(0),
+  address_field_valid(false)
 {
   int r;
   r = socket_set->AddSocket(this);
@@ -152,7 +153,8 @@ WSocket::WSocket(TCPsocket _socket):
   using_tmp_socket_set(false),
   m_packet(NULL),
   m_packet_size(0),
-  m_received(0)
+  m_received(0),
+  address_field_valid(false)
 {
 }
 
@@ -163,7 +165,8 @@ WSocket::WSocket():
   using_tmp_socket_set(false),
   m_packet(NULL),
   m_packet_size(0),
-  m_received(0)
+  m_received(0),
+  address_field_valid(false)
 {
 }
 
@@ -750,10 +753,15 @@ bool WSocket::IsReady(int timeout) const
   return IsReady(timeout, false);
 }
 
-std::string WSocket::GetAddress() const
+const std::string WSocket::GetAddress()
 {
   ASSERT(socket != NULL);
-
-  IPaddress* ip = SDLNet_TCP_GetPeerAddress(socket);
-  return SDLNet_TryToResolveIP(ip);
+  // Resolve the address only once,
+  // as this method get called by some debug logging code quite often.
+  if (!address_field_valid) {
+    IPaddress* ip = SDLNet_TCP_GetPeerAddress(socket);
+    address = SDLNet_TryToResolveIP(ip);
+    address_field_valid = true;
+  }
+  return address;
 }
