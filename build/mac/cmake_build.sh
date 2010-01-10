@@ -33,7 +33,7 @@ export MACOSX_DEPLOYMENT_TARGET=10.5
 
 # flags used when universal mode is off
 export COMPAT_FLAGS="-arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5"
-export COMPAT_LD_FLAGS="-arch i386 -mmacosx-version-min=10.5"
+export COMPAT_LD_FLAGS="-arch i386 -mmacosx-version-min=10.5 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.5.sdk"
 
 # flags used for all kinds of builds
 export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -I/Library/Frameworks/SDL_net.framework/Versions/A/Headers/ -I/usr/local/include/ -I/Library/Frameworks/SDL.framework/Versions/A/Headers/"
@@ -41,8 +41,8 @@ export INCLUDES="-I/Library/Frameworks/wmxlibpng.framework/Versions/A/Headers/ -
 export UNIVERSAL_BUILD=0
 
 # flags only used when build as UB
-export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include"
-export FAT_LDFLAGS="-Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
+export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include -mmacosx-version-min=10.4"
+export FAT_LDFLAGS="-mmacosx-version-min=10.4 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
 APP_VERSION=0.8.3
 BUNDLE_NAME=Wormux
@@ -91,16 +91,16 @@ fi
 if [ ${UNIVERSAL_BUILD} = 1 ]
 then
     echo "*******************************"
-    echo ""
     echo "Universal build mode enabled !"
-    echo ""
     echo "*******************************"
-    
+    echo ""
+        
     BUNDLE_NAME=Wormux
     export MACOSX_DEPLOYMENT_TARGET=10.4
     DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-Universal
     
     export CFLAGS="${FAT_CFLAGS} ${CFLAGS} ${INCLUDES}"
+    export CXXFLAGS="${CFLAGS}"
     export LDFLAGS="${FAT_LDFLAGS} ${LDFLAGS}"
 else
     export CFLAGS="${CFLAGS} ${INCLUDES} ${COMPAT_FLAGS}"
