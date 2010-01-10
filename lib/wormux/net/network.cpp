@@ -43,6 +43,7 @@
 #include <WORMUX_index_svr_msg.h>
 #include <WORMUX_network.h>
 #include <WORMUX_socket.h>
+#include "extSDL_net.h"
 
 #ifdef LOG_NETWORK
 #  include <sys/stat.h>
@@ -221,23 +222,7 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
 
 std::string WNet::IPtoDNS(IPaddress *ip)
 {
-  std::string ip_address;
-
-  const char* dns_addr = SDLNet_ResolveIP(ip);
-  if (dns_addr) {
-    ip_address = std::string(dns_addr);
-  } else {
-    // We can't resolve the hostname, so just show the ip address
-    unsigned char* str_ip = (unsigned char*)(&(ip->host));
-    char formated_ip[16];
-    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-	     (int)str_ip[1],
-	     (int)str_ip[2],
-	     (int)str_ip[3]);
-    ip_address = std::string(formated_ip);
-  }
-
-  return ip_address;
+  return SDLNet_TryToResolveIP(ip);
 }
 
 std::string WNet::IPStrToDNS(const std::string& host)

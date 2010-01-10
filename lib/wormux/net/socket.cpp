@@ -755,12 +755,5 @@ std::string WSocket::GetAddress() const
   ASSERT(socket != NULL);
 
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(socket);
-  std::string address;
-  const char* resolved_ip = SDLNet_ResolveIP(ip);
-  if (resolved_ip)
-    address = resolved_ip;
-  else
-    return "Unresolved address";
-
-  return address;
+  return SDLNet_TryToResolveIP(ip);
 }
