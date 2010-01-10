@@ -46,12 +46,32 @@
 // map < version, client >
 std::multimap<std::string, Client*> clients;
 
+std::string config_file = "wormux_index_server.conf";
 
+void parseArgs(int argc, char *argv[])
+{
+  int opt;
 
-int main(int /*argc*/, char* /*argv*/[])
+  while ((opt = getopt(argc, argv, "f:")) != -1) {
+    switch (opt) {
+    case 'f':
+      config_file = optarg;
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+int main(int argc, char* argv[])
 {
   DPRINT(INFO, "Wormux index server version %i", VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());
+
+  parseArgs(argc, argv);
+
+  config.Load(config_file);
+
   Env::SetConfigClass(config);
   Env::SetWorkingDir();
 
