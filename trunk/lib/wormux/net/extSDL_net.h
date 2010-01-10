@@ -64,4 +64,6 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len);
  */
 int SDLNet_TCP_NbBytesAvailable(TCPsocket sock);
 
+const char * SDLNet_TryToResolveIP(IPaddress *ip);
+
 #endif
