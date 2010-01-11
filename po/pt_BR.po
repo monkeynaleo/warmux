@@ -8,7 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-08 23:52-0300\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2010-01-11 12:49-0300\n"
 "Last-Translator: Renan Valente Rangel <rvr777@gmail.com>\n"
 "Language-Team: Portuguese/Brazil <razor85@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +119,7 @@ msgstr "%s está perto de uma mina!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s precisa de uma pausa."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -293,14 +294,18 @@ msgstr[0] "%s ganhou %u jetpack! Groovy!"
 msgstr[1] "%s ganhou %u jetpacks! Groovy!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
-msgstr[0] "A equipe '%s' ganhou %u baixa gravidade! Eu sou Neil Armstrong!"
-msgstr[1] "A equipe '%s' ganhou %u baixa gravidade! Eu sou Neil Armstrong!"
+msgstr[0] ""
+"A equipe '%s' ganhou %u baixa gravidade! Pequeno passo para um homem, grande "
+"salto para o software livre!"
+msgstr[1] ""
+"A equipe '%s' ganhou %u baixa gravidade! Pequeno passo para um homem, grande "
+"salto para o software livre!"
 
 #: src/weapon/mine.cpp:262
 #, c-format
@@ -650,7 +655,7 @@ msgstr "Mostrar essa mensagem"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Não esqueça de confirmar assim que vocẽ selecionar seu time(s)!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1064,8 +1069,6 @@ msgid "Music?"
 msgstr "Música?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
 msgstr "Jogo em Rede"
 
@@ -1168,7 +1171,7 @@ msgstr "Batalhas públicas"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Sair rapidamente do jogo com Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1426,6 +1429,8 @@ msgstr "O servidor rejeitou a conexão: senha incorreta!"
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"A arma %s tem munição infinita, mas caixas bônus podem contar munição para "
+"ela!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1509,11 +1514,11 @@ msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Aguardando %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Aguardando jogadores remotos"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1535,10 +1540,9 @@ msgstr "Site: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "Welcome ao %s!"
+msgstr "Bem-vindo à %s em %s!"
 
 #: src/game/game.cpp:970
 #, c-format
