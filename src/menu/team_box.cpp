@@ -19,6 +19,7 @@
  *  Teams selection box
  *****************************************************************************/
 
+#include "ai/ai_stupid_player.h"
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
@@ -35,15 +36,30 @@
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   HBox(W_UNDEF, false, false)
 {
-  associated_team=NULL;
+  associated_team = NULL;
+  is_local_ai = false;
 
   SetMargin(2);
   SetNoBorder();
 
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
 
-  team_logo = new PictureWidget(Point2i(48, 48));
-  AddWidget(team_logo);
+  Box * tmp_logo_box = new VBox(W_UNDEF, false, false);
+  tmp_logo_box->SetMargin(1);
+  tmp_logo_box->SetNoBorder();
+
+  team_logo = new PictureWidget(Point2i(38, 38));
+  tmp_logo_box->AddWidget(team_logo);
+
+  player_ai_surf = GetResourceManager().LoadImage(res, "menu/player_ai");
+  player_local_surf = GetResourceManager().LoadImage(res, "menu/player_local");
+  player_remote_surf = GetResourceManager().LoadImage(res, "menu/player_remote");
+
+  player_type =  new PictureWidget(Point2i(38, 30));
+  player_type->SetSurface(player_local_surf);
+  tmp_logo_box->AddWidget(player_type);
+
+  AddWidget(tmp_logo_box);
 
   Box * tmp_box = new VBox(W_UNDEF, false, false);
   tmp_box->SetMargin(2);
@@ -99,7 +115,8 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
 void TeamBox::ClearTeam()
 {
-  associated_team=NULL;
+  associated_team = NULL;
+  is_local_ai = false;
 
   NeedRedrawing();
 }
@@ -213,6 +230,7 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
       previous_custom_team->SetVisible(false);
       next_custom_team->SetVisible(false);
     }
+    player_type->SetSurface(player_remote_surf);
   } else {
     team_name->SetFont(primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true, false);
     team_name->SetText(Format(_("%s Team"), _team.GetName().c_str()));
@@ -220,6 +238,12 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
     if (previous_custom_team) {
       previous_custom_team->SetVisible(true);
       next_custom_team->SetVisible(true);
+    }
+
+    if (is_local_ai) {
+      player_type->SetSurface(player_ai_surf);
+    } else {
+      player_type->SetSurface(player_local_surf);
     }
   }
   team_logo->SetSurface(_team.GetFlag());
@@ -246,6 +270,12 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   // change only for local teams...
   if (associated_team->IsLocal()) {
 
+    if (is_local_ai) {
+      associated_team->SetAI(new AIStupidPlayer(associated_team));
+    } else {
+      associated_team->SetHuman();
+    }
+
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
       Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM);
@@ -266,9 +296,25 @@ void TeamBox::ValidOptions() const
 
 bool TeamBox::IsLocal() const
 {
-  if (associated_team != NULL && associated_team->IsLocalHuman()) {
+  if (associated_team != NULL && associated_team->IsLocal()) {
     return true;
   }
 
   return false;
+}
+
+void TeamBox::SwitchPlayerType()
+{
+  if (!associated_team)
+    return;
+
+  if (associated_team->IsLocal()) {
+    is_local_ai = !is_local_ai;
+
+    if (is_local_ai) {
+      player_type->SetSurface(player_ai_surf);
+    } else {
+      player_type->SetSurface(player_local_surf);
+    }
+  }
 }

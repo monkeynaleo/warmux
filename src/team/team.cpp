@@ -412,6 +412,14 @@ void Team::UnloadGamingData()
   weapons_list = NULL;
 }
 
+void Team::SetHuman()
+{
+  if (ai) {
+    delete ai;
+    ai = NULL;
+  }
+}
+
 void Team::SetNbCharacters(uint howmany)
 {
   ASSERT(howmany >= 1 && howmany <= 10);

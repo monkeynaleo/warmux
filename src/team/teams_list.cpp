@@ -181,10 +181,6 @@ void TeamsList::LoadGamingData(WeaponsList * weapons_list)
   for (; it != end; ++it) {
     (**it).LoadGamingData(weapons_list);
   }
-  for (it=playing_list.begin(); it != end; ++it) {
-    if ( (*it)->IsLocalHuman() && (*it)->GetPlayerName() == "AI-stupid")
-      (*it)->SetAI(new AIStupidPlayer(*it));
-  }
 }
 
 void TeamsList::RandomizeFirstPlayer()
