@@ -56,17 +56,25 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
         Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
         if ( w == NULL ) {
-          Rectanglei r(teams_selections.at(i)->GetPositionX(),
+	  Rectanglei r(teams_selections.at(i)->GetPositionX(),
                        teams_selections.at(i)->GetPositionY(),
-                       60,
-                       60);
+                       38,
+                       38);
           if ( r.Contains(mousePosition) ) {
             if ( button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN ) {
               NextTeam(i);
             } else if ( button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP ) {
               PrevTeam(i);
             }
-          }
+          } else {
+	    Rectanglei r2(teams_selections.at(i)->GetPositionX(),
+			  teams_selections.at(i)->GetPositionY() + 39,
+			  38,
+			  30);
+	    if (r2.Contains(mousePosition)) {
+	      teams_selections.at(i)->SwitchPlayerType();
+	    }
+	  }
         } else {
           return w;
         }

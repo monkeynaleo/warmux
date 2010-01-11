@@ -168,6 +168,7 @@ class Team
 
     void SetRemote(bool value) { remote = value; }
     void SetAI(AIPlayer * value) { ai = value; }
+    void SetHuman();
 
   // reset characters number, type_of_player and player name
     void SetDefaultPlayingConfig();

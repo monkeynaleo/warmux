@@ -43,11 +43,13 @@ class TeamBox : public HBox
   TeamBox operator=(const TeamBox&);
   /**********************************************/
 
-  bool is_local; // local/remote team
   std::string previous_player_name; // only for network
+  bool is_local_ai;
+
+  Surface player_ai_surf, player_local_surf, player_remote_surf;
 
   Team * associated_team;
-  PictureWidget *team_logo;
+  PictureWidget *team_logo, *player_type;
   Label * team_name;
   TextBox * player_name;
   Button * next_custom_team;
@@ -77,6 +79,8 @@ class TeamBox : public HBox
 
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
+
+  void SwitchPlayerType();
 };
 
 #endif
