@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the Wormux package.
 #
 # Stef <mindless@data.bg>, 2007.
-# Dragomir Todorov <thedeadly91@gmail.com>, 2008, 2009.
+# Dragomir Todorov <thedeadly91@gmail.com>, 2008-2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-06 19:01+0200\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2010-01-10 11:20+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@gmail.com>\n"
 "Language-Team: Bulgarian <thedeadly91@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +30,7 @@ msgstr "! Не мога да намеря картата %s :-("
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i играч се свърза"
-msgstr[1] "%i играчи се свързаха"
+msgstr[1] "%i играча се свързаха"
 
 #: src/menu/network_menu.cpp:112 src/menu/network_menu.cpp:335
 #, c-format
@@ -121,7 +122,7 @@ msgstr "%s е близко до мина!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s има нужда от пауза."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -292,14 +293,18 @@ msgstr[0] "Отборът %s спечели %u Реактивна раница! 
 msgstr[1] "Отборът %s спечели %u Реактивни раници! Модерно!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
-msgstr[0] "Отборът %s спечели %u Ниска гравитация! Аз съм Нийл Армстронг!"
-msgstr[1] "Отборът %s спечели %u Ниски гравитации! Аз съм Нийл Армстронг!"
+msgstr[0] ""
+"Отборът %s спечели %u Ниска гравитация! Една малка стъпка за човека, но един "
+"гигантски скок за свободния софтуер!"
+msgstr[1] ""
+"Отборът %s спечели %u Ниски гравитации! Една малка стъпка за човека, но един "
+"гигантски скок за свободния софтуер!"
 
 #: src/weapon/mine.cpp:262
 #, c-format
@@ -647,7 +652,7 @@ msgstr "Покажи това съобщение"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Не забравяй да потвърдиш след като си избрал отбора(ите) си !"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -820,12 +825,12 @@ msgstr "Приятна игра!"
 #: src/menu/options_menu.cpp:136 src/menu/team_box.cpp:67
 #: src/menu/team_box.cpp:76
 msgid "Head commander"
-msgstr "Главен Командир"
+msgstr "Командир"
 
 #. Display player's name
 #: src/interface/interface.cpp:190
 msgid "Head commander: "
-msgstr "Главен Командир:"
+msgstr "Командир:"
 
 #: src/menu/main_menu.cpp:68 src/menu/pause_menu.cpp:55
 msgid "Help"
@@ -1019,7 +1024,7 @@ msgstr "Най-Точен"
 
 #: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most sold-out"
-msgstr "Най-Продавано"
+msgstr "Най-Предаден"
 
 #: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most useful"
@@ -1054,10 +1059,8 @@ msgid "Music?"
 msgstr "Музика?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Мрежова игра"
+msgstr "Мрежова игрa"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1158,7 +1161,7 @@ msgstr "Публични Битки"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Излез бързо от играта с Ctrl"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1416,6 +1419,8 @@ msgstr "Сървърът отказа връзката: Грешна парол�
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"Оръжието %s има безкрайни муниции, но все пак бонус-кутиите могат да "
+"съдържат муниции за него!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1498,11 +1503,11 @@ msgstr[1] "Чакай! %i играчи не са готови!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Чакам за %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Чакам за отдалечени играчи"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1524,10 +1529,9 @@ msgstr "Страница: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "Добре Дошъл %s!"
+msgstr "Добре Дошъл %s във %s!"
 
 #: src/game/game.cpp:970
 #, c-format
@@ -1626,7 +1630,7 @@ msgstr "готово"
 
 #: src/map/maps_list.cpp:83
 msgid "error parsing the config file"
-msgstr "грешка при четенето на персоналния конфигурационен файл"
+msgstr "грешка при четенето на конфигурационен файл"
 
 #: src/menu/credits_menu.cpp:78
 msgid "from"
@@ -1926,3 +1930,6 @@ msgstr "o Отварям аудио на %d Hz %d бита"
 #, fuzzy
 #~ msgid "some opponents."
 #~ msgstr "um Gegner zu finden."
+
+#~ msgid "Wait until some opponent(s) connect!"
+#~ msgstr "Изчакай да се свърже(ат) опонент(и)!"
