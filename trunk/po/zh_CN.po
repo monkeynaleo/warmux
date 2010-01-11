@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the wormux package.
 #
 # <luojie-dune@operamail.com>,2007.
+# jiero <lililjlj@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-06 10:39+1000\n"
-"Last-Translator: luojie <lililjlj@gmail.com>\n"
-"Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
+"PO-Revision-Date: 2010-01-10 19:51+1100\n"
+"Last-Translator: jiero <lililjlj@gmail.com>\n"
+"Language-Team: Simplified Chinese <i10n>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: UTF-8\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -119,7 +120,7 @@ msgstr "%s 在地雷身边！"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s 需要叫暂停。"
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -282,7 +283,7 @@ msgstr[0] "%s 队得到 %u 喷射包了！帅啊！"
 msgstr[1] "%s 队得到 %u 喷射包了！ 帅啊！"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
@@ -631,7 +632,7 @@ msgstr "显示这条信息"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "别忘了选择队伍之后要确认！"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1033,10 +1034,8 @@ msgid "Music?"
 msgstr "音乐?"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "网络游戏"
+msgstr "网络"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1137,7 +1136,7 @@ msgstr "公开战斗"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "借用Ctrl快速退出游戏"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1392,14 +1391,14 @@ msgstr "服务器拒绝: 密码错了。"
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
-msgstr ""
+msgstr "%s 有无限弹药，但是盒子里可能是它的弹药..."
 
 #: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] "只有%i队"
-msgstr[1] "只有%i队"
+msgstr[0] "只有 %i 队"
+msgstr[1] "只有 %i 队"
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:326
@@ -1475,11 +1474,11 @@ msgstr[1] "请等待！ %i没准备好！"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "等待 %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "等待远方的玩家"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1500,20 +1499,19 @@ msgstr "网站Website: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "欢迎来到%s！"
+msgstr "欢迎来到 %s %s！"
 
 #: src/game/game.cpp:970
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
-msgstr "多么美妙的还乡之旅！%s 已经离开 %s ，到达了另一个世界。"
+msgstr "光彩的回老家了！%s 已经离开 %s ，到达了另一个世界。"
 
 #: src/game/game.cpp:1022
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
-msgstr " %s悲惨死去，不能瞑目！"
+msgstr " %s 悲惨死去，不能瞑目！"
 
 #. Various options
 #: src/menu/options_menu.cpp:75

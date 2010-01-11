@@ -1,12 +1,12 @@
 # translation of Wormux to Norwegian Nynorsk
 # This file is distributed under the same license as the Wormux package.
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2009.
+# Karl Ove Hufthammer <karl@huftis.org>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 22:50+0200\n"
+"PO-Revision-Date: 2010-01-10 12:34+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "%s frå %s-laget fall ut av kartet!"
 #: src/game/game.cpp:998
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
-msgstr "%s frå %s-laget traff bakken for hardt!"
+msgstr "%s frå %s-laget trefte bakken for hardt!"
 
 #: src/game/game.cpp:1005
 #, c-format
@@ -118,7 +118,7 @@ msgstr "%s står ved sidan av ei mine!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s treng ein pause."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -482,7 +482,7 @@ msgstr "Laserstyrd rakett"
 
 #: src/menu/pause_menu.cpp:47
 msgid "Back to battle"
-msgstr "Tilbake til kampen"
+msgstr "Tilbake"
 
 #: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
@@ -650,7 +650,7 @@ msgstr "Vis denne meldinga"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Gløym ikkje å stadfesta val av lag!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1055,10 +1055,8 @@ msgid "Music?"
 msgstr "Musikk"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Nettverksspel"
+msgstr "Nettverk"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1130,7 +1128,7 @@ msgstr "Spel"
 
 #: src/menu/network_menu.cpp:105
 msgid "Play several times"
-msgstr "Spel fleire gongar"
+msgstr "Spel fleire gonger"
 
 #: src/menu/teams_selection_box.cpp:64
 msgid "Player"
@@ -1159,7 +1157,7 @@ msgstr "Offentlege kamper"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Avslutt direkte med «Ctrl»"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1171,7 +1169,7 @@ msgstr "Avslutt Wormux"
 
 #: src/menu/pause_menu.cpp:59
 msgid "Quit battle"
-msgstr "Avslutt kampen"
+msgstr "Avslutt"
 
 #: src/menu/help_menu.cpp:71
 msgid "Quit game"
@@ -1420,6 +1418,8 @@ msgstr "Tenaren nekta tilkoplinga: feil passord."
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"%s-våpenet har uendeleg ammunisjon, men bonusboksar kan likevel ha "
+"ammunisjon for det!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1502,11 +1502,11 @@ msgstr[1] "Vent! %i spelarar er ikkje klare enno!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Ventar på %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Ventar på nettverksspelarar"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1527,10 +1527,9 @@ msgstr "Heimeside: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "Velkommen til %s!"
+msgstr "Velkommen til %s på %s!"
 
 #: src/game/game.cpp:970
 #, c-format
