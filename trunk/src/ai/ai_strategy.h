@@ -74,9 +74,10 @@ class LoadAndFireStrategy : public AIStrategy
     LRDirection  direction;
     double angle;
     double strength;
+    int timeout;
   public:
     virtual AICommand * CreateCommand();
-    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength);
+    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength, int timeout);
 };
 
 

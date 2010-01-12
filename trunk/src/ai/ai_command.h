@@ -190,4 +190,13 @@ class WaitForStrengthCommand : public AICommand
     virtual bool Execute();
 };
 
+class SetTimeoutCommand : public AICommand
+{
+  private:
+    int timeout;
+  public:
+    SetTimeoutCommand(int timeout);
+    virtual bool Execute();
+};
+
 #endif
