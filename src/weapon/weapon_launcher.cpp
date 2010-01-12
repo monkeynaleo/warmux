@@ -525,86 +525,83 @@ void WeaponLauncher::IncMissedShots()
 
 void WeaponLauncher::HandleKeyReleased_Num1()
 {
-  projectile->SetTimeOut(1);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(1);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num2()
 {
-  projectile->SetTimeOut(2);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(2);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num3()
 {
-  projectile->SetTimeOut(3);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(3);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num4()
 {
-  projectile->SetTimeOut(4);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(4);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num5()
 {
-  projectile->SetTimeOut(5);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(5);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num6()
 {
-  projectile->SetTimeOut(6);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(6);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num7()
 {
-  projectile->SetTimeOut(7);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(7);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num8()
 {
-  projectile->SetTimeOut(8);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(8);
 }
 
 void WeaponLauncher::HandleKeyReleased_Num9()
 {
-  projectile->SetTimeOut(9);
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(9);
 }
 
 void WeaponLauncher::HandleKeyReleased_Less()
 {
-  projectile->DecrementTimeOut();
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(GetTimeout() - 1);
 }
 
 void WeaponLauncher::HandleKeyReleased_More()
 {
-  projectile->IncrementTimeOut();
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(GetTimeout() + 1);
 }
 
-void WeaponLauncher::NetworkSetTimeoutProjectile() const
+void WeaponLauncher::SetTimeoutForAllPlayers(int timeout)
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT,
-                                                     projectile->m_timeout_modifier));
+  Action * a = new Action(Action::ACTION_WEAPON_SET_TIMEOUT, timeout);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void WeaponLauncher::SetTimeout(int timeout)
+{
+  GetProjectile()->SetTimeOut(timeout);
+}
+
+int WeaponLauncher::GetTimeout()
+{
+  return GetProjectile()->GetTotalTimeout();
 }
 
 void WeaponLauncher::HandleMouseWheelUp(bool /*shift*/)
 {
-  projectile->IncrementTimeOut();
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(GetTimeout() + 1);
 }
 
 void WeaponLauncher::HandleMouseWheelDown(bool /*shift*/)
 {
-  projectile->DecrementTimeOut();
-  NetworkSetTimeoutProjectile();
+  SetTimeoutForAllPlayers(GetTimeout() - 1);
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()

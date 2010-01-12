@@ -126,7 +126,7 @@ class WeaponLauncher : public Weapon
     virtual bool ReloadLauncher();
   private:
     void DirectExplosion();
-    void NetworkSetTimeoutProjectile() const;
+    void SetTimeoutForAllPlayers(int timeout);
   public:
     WeaponLauncher(Weapon_type type,
                    const std::string &id,
@@ -158,6 +158,9 @@ class WeaponLauncher : public Weapon
     virtual void SignalProjectileGhostState() { SignalEndOfProjectile(); };
     // Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
     virtual void SignalProjectileTimeout() { SignalEndOfProjectile(); };
+
+    void SetTimeout(int timeout);
+    int GetTimeout();
 
     // Keep the total amount of active projectile
     void IncActiveProjectile() { ++nb_active_projectile; };
