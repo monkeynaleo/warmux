@@ -16,39 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * An AI player for a team.
+ * It's boring if an AI useses always the same weapon.
+ * This class makes it possible to rate strategies based on what weapon gets used.
+ * The RandomizeFactors gets called every turn so that the AI preferes different weapons each turn.
  *****************************************************************************/
 
-#ifndef AI_STUPID_PLAYER_H
-#define AI_STUPID_PLAYER_H
 
-#include "ai/ai_player.h"
-#include "ai/ai_command.h"
-#include "ai/ai_strategy.h"
-#include "ai/ai_idea.h"
-#include "ai/ai_weapons_weighting.h"
-#include "team/team.h"
+#ifndef AI_WEAPONS_WEIGHTING_H
+#define AI_WEAPONS_WEIGHTING_H
 
-class AIStupidPlayer : public AIPlayer
+#include "weapon/weapon.h"
+
+class WeaponsWeighting
 {
   private:
-    Team * team;
-    std::vector<AIIdea*> ideas;
-    std::vector<AIIdea*>::iterator idea_iterator;
-    AICommand * command;
-    AIStrategy * best_strategy;
-    bool command_executed;
-    uint game_time_at_turn_start;
-    int best_strategy_counter;
-    WeaponsWeighting weapons_weighting;
+    double factor[Weapon::LAST+1];
+    double min_factor[Weapon::LAST+1];
+    double max_factor[Weapon::LAST+1];
 
-    void Reset();
-    void CheckNextIdea();
   public:
-    AIStupidPlayer(Team * team);
-    virtual ~AIStupidPlayer();
-    virtual void PrepareTurn();
-    virtual void Refresh();
+    WeaponsWeighting();
+    void RandomizeFactors();
+    double GetFactor(Weapon::Weapon_type type);
+    void SetMinFactor(Weapon::Weapon_type type, double min_factor);
+    void SetMaxFactor(Weapon::Weapon_type type, double max_factor);
 };
 
 #endif
