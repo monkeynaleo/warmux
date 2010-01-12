@@ -29,19 +29,23 @@ const int BULLET_PARTICLE_FADE_TIME = 2000;
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
-  SetCollisionModel(true, false, false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   m_rebound_sound = "weapon/m16_cartridge";
   m_left_time_to_live = 1;
   start_to_fade = 0;
 
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
-  SetSize(Point2i(1, 1));
+  // TODO physic:
+  // SetBasicShape(Point2i(1, 1), GetPhysic()->GetMass());
 }
 
 void BulletParticle::Refresh()
 {
-  if(IsOutsideWorldXY(GetPosition())) {
+  if(IsOutsideWorld()) {
     m_left_time_to_live = 0;
     return;
   }
@@ -60,8 +64,9 @@ void BulletParticle::Refresh()
 
 void BulletParticle::SignalRebound()
 {
-  GameObj::SignalRebound();
+  //TODO physic:
+  //GameObj::SignalRebound();
   //SetCollisionModel(false, false, false);
-  StopMoving();
+  GetPhysic()->StopMovement();
   start_to_fade = Time::GetInstance()->Read();
 }

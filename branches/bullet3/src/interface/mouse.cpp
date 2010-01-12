@@ -108,9 +108,9 @@ void Mouse::ActionLeftClic(bool) const
                          end = ActiveTeam().end();
 
     for( ; it != end; ++it) {
-      if( &(*it) != &ActiveCharacter()
-        && !it -> IsDead()
-        && it->GetRect().Contains( pos_monde ) ){
+      if( (*it) != &ActiveCharacter()
+        && !(*it)->IsDead()
+        && (*it)->GetRect().Contains( pos_monde ) ){
 
         character_found = true;
         break;
@@ -118,11 +118,11 @@ void Mouse::ActionLeftClic(bool) const
     }
 
     if (character_found) {
-      while ( &(*it) != &ActiveCharacter() )
+      while ( (*it) != &ActiveCharacter() )
         ActiveTeam().NextCharacter ();
 
       Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-      uint next_character_index = (*it).GetCharacterIndex();
+      uint next_character_index = (*it)->GetCharacterIndex();
       next_character->Push((int)next_character_index);
       ActionHandler::GetInstance()->NewAction(next_character);
 
@@ -218,9 +218,9 @@ void Mouse::GetDesignatedCharacter() const
   // Which character is pointed by the mouse ? (appart from the active one)
   Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(team, character){
-    if ((&(*character) != &ActiveCharacter())
-       && character->GetRect().Contains(pos_monde) ){
-      Interface::GetInstance()->character_under_cursor = &(*character);
+    if (((*character) != &ActiveCharacter())
+       && (*character)->GetRect().Contains(pos_monde) ){
+      Interface::GetInstance()->character_under_cursor = (*character);
     }
   }
 

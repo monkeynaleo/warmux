@@ -58,7 +58,7 @@ bool Teleportation::p_Shoot ()
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
     return false;
 
-  Rectanglei rect = ActiveCharacter().GetTestRect();
+  Rectanglei rect = ActiveCharacter().GetRectI();
   rect.SetPosition(dst);
 
   // Go back to default cursor
@@ -82,7 +82,7 @@ void Teleportation::Refresh()
   if (done)
     return;
   if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    ActiveCharacter().SetXY(dst);
+    ActiveCharacter().SetPosition(dst);
     ActiveCharacter().SetSpeed(0.0, 0.0);
     ActiveCharacter().Show();
     JukeBox::GetInstance()->Play("default", "weapon/teleport_end");

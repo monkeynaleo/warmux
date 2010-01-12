@@ -26,6 +26,7 @@
 
 class Sprite;
 class ParachuteConfig;
+class Force;
 
 //-----------------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ class Parachute : public Weapon
     bool closing;
 
     Sprite* img;
+    Force *m_force_index;
   protected:
     bool m_used_this_turn;
     void p_Select();

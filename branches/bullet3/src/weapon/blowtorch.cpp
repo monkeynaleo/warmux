@@ -72,7 +72,7 @@ void Blowtorch::p_Deselect()
 
 bool Blowtorch::p_Shoot()
 {
-  Point2i hole = ActiveCharacter().GetCenter();
+  Point2i hole = ActiveCharacter().GetPhysic()->GetPosition();
 
   double angle = ActiveCharacter().GetFiringAngle();
   uint h = cfg().range;
@@ -80,9 +80,7 @@ bool Blowtorch::p_Shoot()
   double dy = sin(angle) * h;
 
   Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-  double char_height = ActiveCharacter().GetHeight();
-  double char_width = ActiveCharacter().GetWidth();
-  double size = sqrt(char_height * char_height + char_width * char_width)/2;
+  double size = ActiveCharacter().GetSize().Norm()/2;
   GetWorld().Dig(pos, size);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
 

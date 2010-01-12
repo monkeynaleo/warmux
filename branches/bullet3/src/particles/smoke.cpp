@@ -32,5 +32,6 @@ Smoke::Smoke() :
 
   image = ParticleEngine::GetSprite(SMOKE_spr);
   image->Scale(0.0,0.0);
-  SetSize( Point2i(1, 1) );
+  // TODO physic
+  //  SetBasicShape(Point2i(1, 1), GetInitialMass());
 }

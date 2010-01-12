@@ -34,18 +34,13 @@
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/objects_list.h"
+#include "physic/physical_shape.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include <WORMUX_debug.h>
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
-
-#ifdef DEBUG
-#include "graphic/video.h"
-#include "include/app.h"
-#include "map/camera.h"
-#endif
 
 const uint SPEED = 5; // meter / seconde
 
@@ -54,22 +49,27 @@ ObjBox::ObjBox(const std::string &name)
   m_allow_negative_y = true;
 
   parachute = true;
+  SetEnergy(start_life_points);
 
-  m_energy = start_life_points;
+  GetPhysic()->SetSpeed (SPEED, M_PI_2);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetEnabled(true);
 
-  SetSpeed (SPEED, M_PI_2);
-  SetCollisionModel(true, false, true);
   JukeBox::GetInstance()->Play("default","box/falling");
 }
 
-ObjBox::~ObjBox(){
+ObjBox::~ObjBox()
+{
   delete anim;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
 
 void ObjBox::CloseParachute()
 {
-  SetAirResistFactor(1.0);
+  GetPhysic()->SetAirFrictionFactor(0.0);
   Game::GetInstance()->SetCurrentBox(NULL);
   MSG_DEBUG("box", "End of the fall: parachute=%d", parachute);
   hit.Play("default", "box/hitting_ground");
@@ -94,8 +94,9 @@ void ObjBox::SignalObjectCollision(const Point2d& my_speed_before,
   if (my_speed_before.Norm() != 0.0)
     CloseParachute();
 
-  if (obj->IsCharacter())
+  if (obj->GetType() ==  GAME_CHARACTER) {
     ApplyBonus((Character *)obj);
+  }
 }
 
 void ObjBox::SignalDrowning()
@@ -106,7 +107,7 @@ void ObjBox::SignalDrowning()
 void ObjBox::DropBox()
 {
   if (parachute) {
-    SetAirResistFactor(1.0);
+    GetPhysic()->SetAirFrictionFactor(0.0);
     parachute = false;
     anim->SetCurrentFrame(anim->GetFrameCount() - 1);
   } else {
@@ -116,19 +117,14 @@ void ObjBox::DropBox()
 
 void ObjBox::Draw()
 {
-  anim->Draw(GetPosition());
-
-#ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), anim->GetSize());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
-  }
-#endif
+  anim->SetRotation_HotSpot(Point2i(0,0));
+  double angle = GetAngle();
+  Point2d offset = GetCenterOffset();
+  Point2d relative_position;
+  relative_position.x = cos(angle) * offset.x + sin(angle) *offset.y;
+  relative_position.y = (cos(angle) * offset.y - sin(angle) *offset.x);
+  anim->SetRotation_rad( - angle);
+  anim->Draw(GetPosition() - relative_position);
 }
 
 void ObjBox::Refresh()
@@ -136,8 +132,8 @@ void ObjBox::Refresh()
   // If we touch a character, we remove the medkit
   FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if(Overlapse(*character)) {
-      ApplyBonus(&(*character));
+    if(GetPhysic()->IsColliding((*character)->GetPhysic())) {
+      ApplyBonus(*character);
       Ghost();
       return;
     }
@@ -149,13 +145,13 @@ void ObjBox::Refresh()
 //Boxes can explode...
 void ObjBox::Explode()
 {
-  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
+  ParticleEngine::AddNow(GetPhysic()->GetPosition() , 10, particle_FIRE, true);
+  ApplyExplosion(GetPhysic()->GetPosition(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
 };
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {
-  if (m_energy > 0) return;
+  if (GetEnergy() > 0) return;
   Explode();
 }
 

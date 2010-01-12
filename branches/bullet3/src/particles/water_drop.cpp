@@ -30,7 +30,11 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle() :
   Particle("water_particle")
 {
-  SetCollisionModel(false, false, false);
+  // TODO physic SetCollisionModel(true, false, false) does not match:
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
@@ -39,7 +43,8 @@ WaterParticle::WaterParticle() :
   GetResourceManager().UnLoadXMLProfile(res);
 
   image->SetRotation_HotSpot(bottom_center);
-  SetSize(image->GetSize());
+  // TODO physic
+//  SetBasicShape(image->GetSize(), GetInitialMass());
 }
 
 WaterParticle::~WaterParticle()
@@ -54,9 +59,10 @@ void WaterParticle::Refresh()
 
   if (image->GetSize().x != 0 && image->GetSize().y != 0)
   {
-    int dx = (GetWidth() - image->GetWidth()) / 2;
-    int dy = std::max(0, GetHeight() - 2);
-    SetTestRect(dx, dx, dy, 1);
+    // TODO physic:
+    //int dx = (GetWidth() - image->GetWidth()) / 2;
+    //int dy = std::max(0, GetHeight() - 2);
+    //SetTestRect(dx, dx, dy, 1);
   }
 
   double angle = GetSpeedAngle();
@@ -67,8 +73,8 @@ void WaterParticle::Refresh()
 
 void WaterParticle::Draw()
 {
-  Point2i draw_pos = GetPosition();
-  draw_pos.y += GetHeight()/2;
+  Point2i draw_pos = GetPhysic()->GetPosition();
+  draw_pos.y += GetSize().y/2;
   image->Draw( draw_pos );
 }
 

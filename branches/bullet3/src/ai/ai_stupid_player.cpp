@@ -47,14 +47,14 @@ AIStupidPlayer::AIStupidPlayer(Team * team):
       bool is_enemy = !team->IsSameAs(**other_team);
       if (is_enemy) {
         FOR_EACH_LIVING_AND_DEAD_CHARACTER(*other_team, other_character) {
-          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_GUN, MAX_GUN_DISTANCE));
-          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_SHOTGUN, MAX_SHOTGUN_DISTANCE));
-          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_SNIPE_RIFLE, MAX_SNIPER_RIFILE_DISTANCE));
-          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_BAZOOKA, 0.9));
-          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_BAZOOKA, 1.8));
-          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_GRENADE, 2.01, 2));
-          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_DISCO_GRENADE, 2.01, 2));
-          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character, Weapon::WEAPON_BAZOOKA, 3.0));
+          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_GUN, MAX_GUN_DISTANCE));
+          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_SHOTGUN, MAX_SHOTGUN_DISTANCE));
+          ideas.push_back(new ShootDirectlyAtEnemyIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_SNIPE_RIFLE, MAX_SNIPER_RIFILE_DISTANCE));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_BAZOOKA, 0.9));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_BAZOOKA, 1.8));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_GRENADE, 2.01, 2));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_DISCO_GRENADE, 2.01, 2));
+          ideas.push_back(new FireMissileWithFixedDurationIdea(weapons_weighting, **character, **other_character, Weapon::WEAPON_BAZOOKA, 3.0));
         }
       }
     }

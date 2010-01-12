@@ -382,14 +382,14 @@ void Interface::DrawMapPreview()
          character != end_character;
          ++character) {
 
-      if (character->IsDead()) {
+      if ((*character)->IsDead()) {
         continue;
       }
 
-      coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
+      coord = GetWorld().ground.PreviewCoordinates((*character)->GetPhysic()->GetPosition()) + offset;
       window.Blit(icon, coord - icon.GetSize()/2);
 
-      if (character->IsActiveCharacter()) {
+      if ((*character)->IsActiveCharacter()) {
         uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
         radius = (radius/2) + 1;
         window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);

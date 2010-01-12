@@ -85,15 +85,13 @@ bool Baseball::p_Shoot()
     Point2i pos_to_check = hand_position + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
-    {
+    if ((*character) != &ActiveCharacter()) {
       // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
-      {
+      if((*character)->GetPhysic()->Contain(pos_to_check)) {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetSpeed(cfg().strength / character->GetMass(), angle);
-        character->SetMovement("fly");
-        Camera::GetInstance()->FollowObject(&(*character));
+        (*character)->GetPhysic()->SetSpeed(cfg().strength / (*character)->GetMass(), angle);
+        (*character)->SetMovement("fly");
+        Camera::GetInstance()->FollowObject((*character));
         return true;
       }
     }

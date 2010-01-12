@@ -42,8 +42,8 @@
 #include "flamethrower.h"
 #include "weapon_cfg.h"
 
-const uint    FLAMETHROWER_BULLET_SPEED       = 5;
-const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 40;
+const uint    FLAMETHROWER_BULLET_SPEED       = 20;
+const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 140;
 const double  FLAMETHROWER_RANDOM_ANGLE       = 0.06;
 
 class FlameThrowerBullet : public WeaponBullet
@@ -59,6 +59,7 @@ class FlameThrowerBullet : public WeaponBullet
     void DoExplosion();
     void SignalGroundCollision(const Point2d& speed_before);
     void SignalDrowning();
+    virtual void SignalObjectCollision(GameObj * obj,PhysicalShape * shape, const Point2d& my_speed_before);
 };
 
 
@@ -67,14 +68,15 @@ FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
   WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
 {
   explode_colliding_character = true;
-  m_is_fire = true;
+  explode_with_collision = true;
+  SetType(GAME_FIRE);
   can_drown = false;
 }
 
 bool FlameThrowerBullet::IsOverlapping(const GameObj* obj) const
 {
   if(GetName() == obj->GetName()) return true;
-  return m_overlapping_object == obj;
+  return (GetPhysic()->IsOverlappingObject(obj->GetPhysic()));
 }
 
 void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
@@ -89,7 +91,7 @@ void FlameThrowerBullet::ShootSound()
 
 void FlameThrowerBullet::DoExplosion()
 {
-  Point2i pos=GetPosition();
+  Point2i pos = GetPhysic()->GetPosition();
   particle.AddNow(pos, 1, particle_FIRE, true, 0, 1);
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }
@@ -105,6 +107,15 @@ void FlameThrowerBullet::SignalDrowning()
   launcher->IncMissedShots();
   Ghost();
 }
+
+void FlameThrowerBullet::SignalObjectCollision(GameObj * /*obj*/,
+                                          PhysicalShape * /*shape*/,
+                        const Point2d& /*my_speed_before*/)
+{
+  Explosion();
+  Ghost();
+}
+
 
 //-----------------------------------------------------------------------------
 
@@ -158,10 +169,11 @@ bool FlameThrower::p_Shoot()
 
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
-  double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
-               * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
-  particle.AddNow(pos, 1, particle_SMOKE, true, angle,
-                  5.0 + (Time::GetInstance()->Read() % 6));
+  //TODO physic
+  //double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
+  //             * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  //particle.AddNow(pos, 1, particle_SMOKE, true, angle,
+  //                5.0 + (Time::GetInstance()->Read() % 6));
   announce_missed_shots = false;
   return true;
 }
