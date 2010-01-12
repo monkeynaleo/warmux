@@ -30,6 +30,7 @@
 #include "team/team.h"
 #include "team/macro.h"
 #include "tool/math_tools.h"
+#include "weapon/explosion.h"
 #include "weapon/weapon_launcher.h"
 #include "weapon/weapons_list.h"
 #include "weapon/shotgun.h"
@@ -74,6 +75,14 @@ double AIIdea::GetDirectionRelativeAngle(LRDirection direction, double angle)
     return angle;
 }
 
+double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy)
+{
+  double min_rating = RateDamageDoneToEnemy(min_damage, enemy);
+  double max_rating = RateDamageDoneToEnemy(max_damage, enemy);
+  return (min_rating + max_rating) / 2.0;
+}
+
+
 double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
 {
   double rating = std::min(damage, enemy.GetEnergy());
@@ -81,6 +90,35 @@ double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
     rating += BONUS_FOR_KILLING_CHARACTER;
     double unused_damage = damage - enemy.GetEnergy();
     rating -= MALUS_PER_UNUSED_DAMGE_POINT * unused_damage;
+  }
+  return rating;
+}
+
+double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config)
+{
+  // Explosions remove ground and make it possible to hit the characters behind the ground.
+  // That is why each explosion gets a small positive rating.
+  double rating = 0.1;
+
+  FOR_ALL_LIVING_CHARACTERS(team, character) {
+    double distance = position.Distance(character->GetCenter());
+    if(distance < 1.0)
+      distance = 1.0;
+    int min_damage = GetDamageFromExplosion(config, distance);
+    int max_damage = min_damage;
+    if (distance <= config.blast_range) {
+      double force = GetForceFromExplosion(config, distance);
+      // At the time this code has been written the
+      // bazooka did about 30-60 additional damage at 2500 force
+      min_damage += 30.0/2500.0 * force;
+      max_damage += 60.0/2500.0 * force;
+    }
+    bool is_friend = shooter.GetTeamIndex() == character->GetTeamIndex();
+    if (is_friend) {
+      rating -= RateDamageDoneToEnemy(min_damage, max_damage, *character);
+    } else {
+      rating += RateDamageDoneToEnemy(min_damage, max_damage, *character);
+    }
   }
   return rating;
 }
@@ -315,17 +353,9 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   Point2i explosion_pos = GetFirstContact(shooter, trajectory);
   PhysicalObj * aim = GetObjectAt(explosion_pos);
   double rating;
-  if (aim == NULL) {
-    // Shooting at ground is better then doing nothing, so give it a low positive rating.
-    rating = 0.1;
-    // Shooter should not be to close to explosion:
-    if (explosion_pos.Distance(shooter.GetCenter()) < (double)weapon->cfg().blast_range)
-      return NULL;
-  } else if (aim == &enemy) {
-    // Trough collision damage the actual damage is higher then 50.
-    // There is a good chance that the other character get killed.
-    // That's why I have choosen a rating of 120.
-    rating = 120;
+  bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
+  if (aim == &enemy || (aim == NULL && explodes_on_contact)) {
+    rating = RateExplosion(shooter,explosion_pos, weapon->cfg());
   } else {
     return NULL;
   }
