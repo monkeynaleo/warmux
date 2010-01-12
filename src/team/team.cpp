@@ -19,6 +19,7 @@
  * A team
  *****************************************************************************/
 
+#include "ai/ai_stupid_player.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "character/character.h"
@@ -46,7 +47,7 @@
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)
-  : energy(this), m_teams_dir(teams_dir), m_id(id), ai(NULL), remote(false), abandoned(false)
+  : energy(this), m_teams_dir(teams_dir), m_id(id), ai(NULL), use_ai(false), remote(false), abandoned(false)
 {
   std::string nomfich;
   XmlReader   doc;
@@ -412,12 +413,13 @@ void Team::UnloadGamingData()
   weapons_list = NULL;
 }
 
-void Team::SetHuman()
+void Team::LoadAI()
 {
+  ASSERT(IsLocalAI());
   if (ai) {
     delete ai;
-    ai = NULL;
   }
+  ai = new AIStupidPlayer(this);
 }
 
 void Team::SetNbCharacters(uint howmany)

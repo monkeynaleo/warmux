@@ -71,6 +71,7 @@ class Team
     uint nb_characters;
     uint current_turn;
     AIPlayer * ai;
+    bool use_ai;
     bool remote;
     bool abandoned;
     CustomTeam *attached_custom_team;
@@ -157,8 +158,8 @@ class Team
     int& AccessNbUnits();
     void ResetNbUnits();
 
-    bool IsAI() const { return ai != NULL; }
-    bool IsHuman() const { return ai == NULL; }
+    bool IsAI() const { return use_ai; }
+    bool IsHuman() const { return !use_ai; }
     bool IsLocal() const { return !remote; }
     bool IsRemote() const { return remote; }
     bool IsLocalAI() const { return IsLocal() && IsAI(); }
@@ -167,8 +168,8 @@ class Team
     bool IsActiveTeam() const;
 
     void SetRemote(bool value) { remote = value; }
-    void SetAI(AIPlayer * value) { ai = value; }
-    void SetHuman();
+    void SetUseAI(bool value) { use_ai = value; }
+    void LoadAI();
 
   // reset characters number, type_of_player and player name
     void SetDefaultPlayingConfig();
