@@ -154,8 +154,10 @@ void Parachute::Refresh()
       }
     }
   }
-  // If parachute is open => character can move a little to the left or to the right
   if (open) {
+    ActiveCharacter().UpdateLastMovingTime();
+
+    // If parachute is open => character can move a little to the left or to the right
     const LRMoveIntention * lr_move_intention = ActiveCharacter().GetLastLRMoveIntention();
     if (lr_move_intention) {
       LRDirection direction = lr_move_intention->GetDirection();
