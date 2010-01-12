@@ -94,7 +94,7 @@ double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
   return rating;
 }
 
-double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config)
+double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config, double expected_additional_distance)
 {
   // Explosions remove ground and make it possible to hit the characters behind the ground.
   // That is why each explosion gets a small positive rating.
@@ -102,6 +102,7 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     double distance = position.Distance(character->GetCenter());
+    distance += expected_additional_distance;
     if(distance < 1.0)
       distance = 1.0;
     int min_damage = GetDamageFromExplosion(config, distance);
@@ -356,7 +357,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   double rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
   if (aim == &enemy || (aim == NULL && explodes_on_contact)) {
-    rating = RateExplosion(shooter,explosion_pos, weapon->cfg());
+    double expected_additional_distance = explodes_on_contact ? 0.0 : 30;
+    rating = RateExplosion(shooter, explosion_pos, weapon->cfg(), expected_additional_distance);
   } else {
     return NULL;
   }
