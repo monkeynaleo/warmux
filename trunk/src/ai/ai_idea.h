@@ -36,7 +36,7 @@ class AIIdea
     static double GetDirectionRelativeAngle(LRDirection direction, double angle);
     static double RateDamageDoneToEnemy(int damage, Character & enemy);
     static double RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy);
-    static double RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig & cfg);
+    static double RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig & cfg, double expected_additional_distance);
   public:
     virtual AIStrategy * CreateStrategy() = 0;
     virtual ~AIIdea() {}
