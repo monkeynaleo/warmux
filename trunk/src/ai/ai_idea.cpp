@@ -104,7 +104,8 @@ AIStrategy * WasteAmmoUnitsIdea::CreateStrategy()
   return new ShootWithGunStrategy(-0.1, ActiveCharacter(), weapon_type, ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
 }
 
-ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance):
+ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance):
+  weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
   weapon_type(weapon_type),
@@ -235,10 +236,12 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   int damage = used_ammo_units * damage_per_ammo_unit;
 
   double rating = RateDamageDoneToEnemy(damage, enemy);
+  rating = rating * weapons_weighting.GetFactor(weapon_type);
   return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
 }
 
-FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(Character & shooter, Character & enemy, double duration):
+FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, double duration):
+  weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
   duration(duration)
@@ -320,12 +323,12 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
       return NULL;
   } else if (aim == &enemy) {
     // Trough collision damage the actual damage is higher then 50.
-    // Usually one hit is enough to kill the other character.
-    // However it's quite boring to have such an AI...
-    // By using a fixed rating of 50 the weapon will not be used if the character can be killed by other weapons.
-    rating = 50;
+    // There is a good chance that the other character get killed.
+    // That's why I have choosen a rating of 120.
+    rating = 120;
   } else {
     return NULL;
   }
-  return new LoadAndFireStrategy(rating, shooter, Weapon::WEAPON_BAZOOKA, direction, shoot_angle, strength);
+  rating = rating * weapons_weighting.GetFactor(weapon_type);
+  return new LoadAndFireStrategy(rating, shooter, weapon_type, direction, shoot_angle, strength);
 }

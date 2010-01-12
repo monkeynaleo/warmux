@@ -23,6 +23,7 @@
 #define AI_IDEA_H
 
 #include "ai/ai_strategy.h"
+#include "ai/ai_weapons_weighting.h"
 #include "weapon/weapon.h"
 
 
@@ -54,12 +55,13 @@ class WasteAmmoUnitsIdea : public AIIdea
 class ShootDirectlyAtEnemyIdea : public AIIdea
 {
   private:
+    WeaponsWeighting & weapons_weighting;
     Character & shooter;
     Character & enemy;
     Weapon::Weapon_type weapon_type;
     double max_distance;
   public:
-    ShootDirectlyAtEnemyIdea(Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance);
+    ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance);
     virtual AIStrategy * CreateStrategy();
 };
 
@@ -76,11 +78,12 @@ class BazookaAgainstForceIdea : public AIIdea
 class FireMissileWithFixedDurationIdea : public AIIdea
 {
   private:
+    WeaponsWeighting & weapons_weighting;
     Character & shooter;
     Character & enemy;
     double duration;
   public:
-    FireMissileWithFixedDurationIdea(Character & shooter, Character & enemy, double duration);
+    FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, double duration);
     virtual AIStrategy * CreateStrategy();
 };
 
