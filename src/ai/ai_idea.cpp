@@ -39,6 +39,9 @@
 // e.g. Killing one Character with 20 health is about the same worth like doing a sum of 120 damage (60 each) to two characters without killing them. Both cases would get a rating of 120 when this constant is 100.
 const double BONUS_FOR_KILLING_CHARACTER = 100;
 const double MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
+const double MIN_GROUND_BONUS = 0.1;
+const double MAX_GROUND_BONUS = 1.0;
+const double GROUND_BONUS_RANGE = 2000.0;
 
 bool AIIdea::CanUseWeapon(Weapon * weapon)
 {
@@ -98,7 +101,8 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
 {
   // Explosions remove ground and make it possible to hit the characters behind the ground.
   // That is why each explosion gets a small positive rating.
-  double rating = 0.1;
+  double ground_bonus = MIN_GROUND_BONUS;
+  double rating = 0.0;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     double distance = position.Distance(character->GetCenter());
@@ -119,8 +123,10 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
       rating -= RateDamageDoneToEnemy(min_damage, max_damage, *character);
     } else {
       rating += RateDamageDoneToEnemy(min_damage, max_damage, *character);
+      ground_bonus = max(ground_bonus, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
     }
   }
+  rating += ground_bonus;
   return rating;
 }
 
