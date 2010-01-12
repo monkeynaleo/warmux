@@ -30,7 +30,7 @@
 #include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "sound/jukebox.h"
 #include "team/teams_list.h"
 #include "team/team.h"
@@ -56,6 +56,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
   m_initial_nb_ammo = 2;
   use_unit_on_first_shoot = false;
   m_used_this_turn = false;
+  m_force_index = NULL;
   img = GetResourceManager().LoadSprite(weapons_res_profile, "parachute_sprite");
 }
 
@@ -81,7 +82,8 @@ void Parachute::p_Select()
 
 void Parachute::p_Deselect()
 {
-  ActiveCharacter().ResetConstants();
+  // TODO physic
+  // ActiveCharacter().ResetConstants();
   ActiveCharacter().SetMovement("breathe");
 }
 
@@ -114,7 +116,7 @@ void Parachute::Refresh()
   double speed;
   double angle;
 
-  ActiveCharacter().GetSpeed(speed, angle);
+  ActiveCharacter().GetPhysic()->GetSpeed(speed, angle);
 
   if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
@@ -125,12 +127,12 @@ void Parachute::Refresh()
           m_used_this_turn = true;
         }
         
-        ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
-        ActiveCharacter().SetWindFactor(cfg().wind_factor);
+        ActiveCharacter().GetPhysic()->SetAirFrictionFactor(cfg().air_resist_factor);
+        ActiveCharacter().GetPhysic()->SetWindFactor(cfg().wind_factor);
         open = true;
         img->animation.SetPlayBackward(false);
         img->Start();
-        ActiveCharacter().SetSpeedXY(Point2d(0,0));
+        ActiveCharacter().GetPhysic()->SetSpeedXY(Point2d(0,0));
         ActiveCharacter().SetMovement("parachute");
         Camera::GetInstance()->FollowObject(&ActiveCharacter());
       }
@@ -143,6 +145,12 @@ void Parachute::Refresh()
         img->animation.SetShowOnFinish(SpriteAnimation::show_blank);
         img->Start();
         closing = true;
+        ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+        ActiveCharacter().GetPhysic()->ResetWindFactor();
+        ActiveCharacter().GetPhysic()->ResetAirFrictionFactor();
+        m_force_index = NULL;
+        // TODO physic convert to debug output:
+        std::cout<<"Closing"<<std::endl;
         return;
       } else { // The parachute is closing
         if(img->IsFinished()) {
@@ -150,11 +158,13 @@ void Parachute::Refresh()
           open = false;
           closing = false;
           UseAmmoUnit();
+          // TODO physic convert to debug output:
+          std::cout<<"Closed"<<std::endl;
         }
       }
     }
   }
-  if (open) {
+  if (open && !closing) {
     ActiveCharacter().UpdateLastMovingTime();
 
     // If parachute is open => character can move a little to the left or to the right
@@ -162,10 +172,16 @@ void Parachute::Refresh()
     if (lr_move_intention) {
       LRDirection direction = lr_move_intention->GetDirection();
       ActiveCharacter().SetDirection(direction);
+      double x_force;
       if (direction == DIRECTION_LEFT)
-        ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
+        x_force = -cfg().force_side_displacement;
       else
-        ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
+        x_force = cfg().force_side_displacement;
+
+     ActiveCharacter().GetPhysic()->RemoveExternForce(m_force_index);
+     // TODO physic remove printing of debug output
+     std::cout<<".";
+     m_force_index = ActiveCharacter().GetPhysic()->AddExternForce(x_force, 0.0);
     }
   }
 }
@@ -197,7 +213,7 @@ ParachuteConfig& Parachute::cfg() {
 ParachuteConfig::ParachuteConfig(){
   wind_factor = 10.0;
   air_resist_factor = 140.0;
-  force_side_displacement = 2000.0;
+  force_side_displacement = 2.0;
 }
 
 void ParachuteConfig::LoadXml(const xmlNode* elem){

@@ -276,7 +276,7 @@ void Game::InitTeams()
   ActiveTeam().AccessWeapon().Select();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character).ResetDamageStats();
+    (*character)->ResetDamageStats();
 
   ObjectsList::GetRef().PlaceMines();
 }
@@ -519,7 +519,7 @@ void Game::SetCharacterChosen(bool chosen)
 void Game::RefreshObject() const
 {
   FOR_ALL_CHARACTERS(team,character)
-    character->Refresh();
+    (*character)->Refresh();
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
@@ -553,8 +553,8 @@ void Game::Draw ()
   // Draw the characters
   StatStart("GameDraw:characters");
   FOR_ALL_CHARACTERS(team,character)
-    if (!character->IsActiveCharacter())
-      character->Draw();
+    if (!(*character)->IsActiveCharacter())
+      (*character)->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -726,8 +726,8 @@ void Game::MainLoop()
       // If no cacluate frame action is sheduled the frame calculation will be skipped and the bodies don't get build.
       // As the draw method needs builded characters we need to build here
       FOR_ALL_CHARACTERS(team,character) {
-        character->GetBody()->Build();
-        character->GetBody()->RefreshSprites();
+        (*character)->GetBody()->Build();
+        (*character)->GetBody()->RefreshSprites();
       }
 
 
@@ -776,8 +776,8 @@ void Game::MainLoop()
       // Build the characters if necessary so that it does not need to happen while drawing.
       // The build can become necessary again when for example weapons change the movement.
       FOR_ALL_CHARACTERS(team,character) {
-        character->GetBody()->Build();
-        character->GetBody()->RefreshSprites();
+        (*character)->GetBody()->Build();
+        (*character)->GetBody()->RefreshSprites();
       }
     } else {
       SDL_Delay(1);
@@ -919,10 +919,10 @@ GameObj* Game::GetMovingObject() const
 
   FOR_ALL_CHARACTERS(team,character)
   {
-    if (!character->IsImmobile() && !character->IsGhost())
+    if (!(*character)->IsImmobile() && !(*character)->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
-      return &(*character);
+      MSG_DEBUG("game.endofturn", "Character (%s) is not ready", (*character)->GetName().c_str());
+      return (*character);
     }
   }
 
@@ -1048,9 +1048,9 @@ void Game::SignalCharacterDamage(const Character *character)
 void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (character->IsDiseased()) {
-      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
-      character->DecDiseaseDuration();
+    if ((*character)->IsDiseased()) {
+      (*character)->SetEnergyDelta(-(int)(*character)->GetDiseaseDamage());
+      (*character)->DecDiseaseDuration();
     }
   }
 }

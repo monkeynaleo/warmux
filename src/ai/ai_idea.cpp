@@ -105,7 +105,7 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
   double rating = 0.0;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    double distance = position.Distance(character->GetCenter());
+    double distance = position.Distance((*character)->GetPhysic()->GetPosition());
     distance += expected_additional_distance;
     if(distance < 1.0)
       distance = 1.0;
@@ -118,11 +118,11 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
       min_damage += 30.0/2500.0 * force;
       max_damage += 60.0/2500.0 * force;
     }
-    bool is_friend = shooter.GetTeamIndex() == character->GetTeamIndex();
+    bool is_friend = shooter.GetTeamIndex() == (*character)->GetTeamIndex();
     if (is_friend) {
-      rating -= RateDamageDoneToEnemy(min_damage, max_damage, *character);
+      rating -= RateDamageDoneToEnemy(min_damage, max_damage, **character);
     } else {
-      rating += RateDamageDoneToEnemy(min_damage, max_damage, *character);
+      rating += RateDamageDoneToEnemy(min_damage, max_damage, **character);
       ground_bonus = max(ground_bonus, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
     }
   }
@@ -165,13 +165,13 @@ static GameObj* GetObjectAt(const Point2i & pos)
   ObjectsList::iterator it = objects->begin();
   while(it != objects->end()) {
     GameObj* object = *it;
-    if (object->GetTestRect().Contains(pos) && !object->IsDead())
+    if (object->GetRectI().Contains(pos) && !object->IsDead())
       return object;
     it++;
   }
   FOR_ALL_CHARACTERS(team, character) {
-    if (character->GetTestRect().Contains(pos) && !character->IsDead())
-      return &(*character);
+    if ((*character)->GetRectI().Contains(pos) && !(*character)->IsDead())
+      return (*character);
   }
   return NULL;
 }
@@ -252,8 +252,8 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
   // TODO: Please find an alternative to solve this tempory solution
-  Point2d departure = shooter.GetCenter();
-  Point2d arrival = enemy.GetCenter();
+  Point2d departure = shooter.GetPhysic()->GetPosition();
+  Point2d arrival = enemy.GetPhysic()->GetPosition();
 
   if (departure.Distance(arrival) > max_distance)
     return NULL;
@@ -341,8 +341,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   double mass = weapon->GetMass();
   Point2d f(Wind::GetRef().GetStrength() * wind_factor, g * mass);
   Point2d a = f / mass * PIXEL_PER_METER;;
-  const Point2d pos_0 = shooter.GetCenter();
-  const Point2d pos_t = enemy.GetCenter();
+  const Point2d pos_0 = shooter.GetPhysic()->GetPosition();
+  const Point2d pos_t = enemy.GetPhysic()->GetPosition();
   double t = duration;
   // Calculate v_0 using "pos_t = 1/2 * a_x * t*t + v_0*t + pos_0":
   Point2d v_0 = (pos_t - pos_0)/t - 0.5*a * t;

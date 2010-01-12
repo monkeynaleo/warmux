@@ -32,12 +32,16 @@ PolecatFart::PolecatFart() :
   m_initial_time_to_live = 50;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
-  SetCollisionModel(false, false, false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,false);
   is_active = true;
 
   image = ParticleEngine::GetSprite(POLECAT_FART_spr);
   image->Scale(1.0,1.0);
-  SetSize( Point2i(10, 10) );
+  // TODO physic:
+  //  SetBasicShape(Point2i(10, 10), GetInitialMass());
 }
 
 void PolecatFart::Refresh()
@@ -45,9 +49,9 @@ void PolecatFart::Refresh()
   Particle::Refresh();
 
   FOR_ALL_LIVING_CHARACTERS(team, c) {
-    if ((c->GetTestRect()).Intersect(GetTestRect())) {
+    if (((*c)->GetRect()).Intersect(GetRect())) {
       //c->SetEnergyDelta(-10);
-      c->SetDiseaseDamage(5, std::numeric_limits<uint>::max());
+      (*c)->SetDiseaseDamage(5, std::numeric_limits<uint>::max());
       is_active = false;
     }
   }

@@ -35,6 +35,8 @@
 #include "map/camera.h"
 #include "network/network.h"
 #include "network/randomsync.h"
+#include "physic/physical_obj.h"
+#include "physic/physical_shape.h"
 #include "particles/particle.h"
 #include "particles/fading_text.h"
 #include "sound/jukebox.h"
@@ -44,6 +46,7 @@
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
 #include "weapon/explosion.h"
+#include "map/physic_tile.h"
 
 #ifdef DEBUG
 #include "include/app.h"
@@ -102,7 +105,6 @@ void Character::SetBody(Body * char_body)
   SetDirection(RandomSync().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
   body->SetFrame(RandomSync().GetLong(0, body->GetFrameCount() - 1));
-  SetSize(body->GetSize());
 }
 
 static uint GetRandomAnimationTimeValue()
@@ -140,13 +142,22 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   previous_strength(0),
   body(NULL)
 {
-  m_is_character = true;
-  SetCollisionModel(true, true, true);
+  SetType(GAME_CHARACTER);
+  GetPhysic()->SetEnabled(true);
+  m_feet_shape = GetPhysic()->GetShape("feet");
+  m_feet_shape->SetFriction(100.0);
+  GetPhysic()->SetCollisionMembership(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,true);
+  GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
+  GetPhysic()->SetRotationFixed(true);
+
+
   /* body stuff */
   ASSERT(char_body);
   SetBody(char_body);
 
-  ResetConstants();
   // Allow player to go outside of map by upper bound (bug #10420)
   m_allow_negative_y = true;
   // Name Text object
@@ -156,7 +167,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
     name_text = NULL;
 
   // Energy
-  m_energy = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
                       0,
                       GameMode::GetInstance()->character.init_energy);
@@ -254,9 +264,6 @@ void Character::SignalGhostState (bool was_dead)
 void Character::SetDirection (LRDirection nv_direction)
 {
   body->SetDirection(nv_direction);
-  uint l,r,t,b;
-  body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
   m_team.crosshair.Refresh(GetFiringAngle());
 }
 
@@ -265,7 +272,7 @@ void Character::DrawEnergyBar(int dy) const
   if( IsDead() )
         return;
 
-  energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)
+  energy_bar.DrawXY( Point2i( GetX() - energy_bar.GetWidth() / 2, GetY() + dy)
                      - Camera::GetInstance()->GetPosition() );
 }
 
@@ -273,7 +280,7 @@ void Character::DrawName(int dy) const
 {
   if (IsDead()) return;
 
-  const int x = GetCenterX();
+  const int x = GetX();
   const int y = GetY() + dy;
 
   if (Config::GetInstance()->GetDisplayNameCharacter()) {
@@ -326,19 +333,19 @@ void Character::SetEnergyDelta(int delta, bool do_report)
 
 void Character::SetEnergy(int new_energy)
 {
-  int diff = new_energy - m_energy;
+  int diff = new_energy - GetEnergy();
   if(diff < 0) {
     Particle *tmp = new FadingText(long2str(diff));
-    tmp->SetXY(GetPosition());
+    tmp->SetPosition(GetPhysic()->GetPosition());
     ParticleEngine::AddNow(tmp);
   }
 
   if (IsDead()) return;
 
   // Change energy
-  m_energy = InRange_Long((int)new_energy, 0,
-                     GameMode::GetInstance()->character.max_energy);
-  energy_bar.Actu(m_energy);
+  GameObj::SetEnergy(InRange_Long((int)new_energy, 0,
+                     GameMode::GetInstance()->character.max_energy));
+  energy_bar.Actu(GetEnergy());
 
   // Dead character ?
   if (GetEnergy() <= 0) Die();
@@ -346,13 +353,13 @@ void Character::SetEnergy(int new_energy)
 
 void Character::Die()
 {
-  ASSERT (m_alive == ALIVE || m_alive == DROWNED);
+  ASSERT (GetAlive() == ALIVE || GetAlive() == DROWNED);
 
   MSG_DEBUG("character", "Dying");
 
-  if (m_alive != DROWNED)
+  if (GetAlive() != DROWNED)
   {
-    m_alive = DEAD;
+    SetAlive(DEAD);
 
     SetEnergy(0);
 
@@ -360,13 +367,17 @@ void Character::Die()
     body->SetRotation(0.0);
     SetClothe("dead");
     SetMovement("breathe");
-    SetCollisionModel(true, false, false);
+
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_GROUND,true);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_CHARACTER,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_ITEM,false);
+    GetPhysic()->SetCollisionCategory(PhysicalObj::COLLISION_PROJECTILE,true);
 
     ud_move_intentions.clear();
     lr_move_intentions.clear();
 
     if(death_explosion)
-      ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
+      ApplyExplosion(GetPhysic()->GetPosition(), GameMode::GetInstance()->death_explosion_cfg);
     ASSERT(IsDead());
 
     // Signal the death
@@ -388,7 +399,7 @@ void Character::Draw()
   // WARNING, this optimization is disabled if it is the active character
   // because there could be some tricks in the drawing of the weapon (cf bug #10242)
   if (!IsActiveCharacter()) {
-    Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
+    Rectanglei rect(GetPhysic()->GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
     if (!rect.Intersect(*Camera::GetInstance())) return;
   }
 
@@ -399,7 +410,7 @@ void Character::Draw()
     draw_loosing_energy = false;
 
 
-  Point2i pos = GetPosition();
+  Point2i pos = GetPosition() - GetCenterOffset();
   body->Draw(pos);
 
   // Draw energy bar
@@ -432,7 +443,7 @@ void Character::Draw()
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
 	Text text(ss.str());
-	text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
+	text.DrawCenterTop(GetPhysic()->GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetSize().x/2, dy));
   }
 
 #ifdef DEBUG
@@ -443,16 +454,6 @@ void Character::Draw()
     std::string txt = body->GetClothe() + " " + body->GetMovement() + " " + body->GetFrameLoop();
     Text skin_text(txt);
     skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
-  }
-
-  if (IsLOGGING("test_rectangle"))
-  {
-    Rectanglei test_rect(GetTestRect());
-    test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
-    GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
-
-    Rectanglei rect(GetPosition() - Camera::GetInstance()->GetPosition(), GetSize());
-    GetMainWindow().RectangleColor(rect, primary_blue_color, 1);
   }
 #endif
 }
@@ -470,7 +471,8 @@ void Character::Jump(double strength, double angle /*in radian */)
 
   // Jump !
   if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
-  SetSpeed (strength, angle);
+  // SetSpeed (strength, angle);
+  GetPhysic()->Impulse(strength,angle);
 }
 
 void Character::Jump()
@@ -567,9 +569,9 @@ void Character::Refresh()
 
   if (IsDiseased())
   {
-    Point2i bubble_pos = GetPosition();
+    Point2i bubble_pos = GetPhysic()->GetPosition();
     if (GetDirection() == DIRECTION_LEFT)
-      bubble_pos.x += GetWidth();
+      bubble_pos.x += GetSize().x;
     particle_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
   }
@@ -614,7 +616,7 @@ void Character::Refresh()
     static double speed_init = GameMode::GetInstance()->character.back_jump_strength *
        sin(GameMode::GetInstance()->character.back_jump_angle);
 
-    Point2d speed = GetSpeedXY();
+    Point2d speed = GetPhysic()->GetSpeed();
     rotation = M_PI * speed.y / speed_init;
     body->SetRotation(rotation);
   }
@@ -644,7 +646,7 @@ void Character::Refresh()
 
   // Stop flying if we don't go fast enough
   double n, a;
-  GetSpeed(n, a);
+  GetPhysic()->GetSpeed(n, a);
   if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
     SetMovement("breathe");
 
@@ -677,6 +679,11 @@ void Character::UpdateFiringAngle()
       delta = -delta;
     AddFiringAngle(delta);
   }
+}
+
+bool Character::FootsInVacuum() const
+{
+  return !m_feet_shape->IsColliding();
 }
 
 // Prepare a new turn
@@ -760,8 +767,8 @@ void Character::SignalExplosion()
   if (IsDead()) return;
 
   double n, a;
-  GetSpeed(n, a);
-  SetRebounding(true);
+  GetPhysic()->GetSpeed(n, a);
+  GetPhysic()->ResetReboundFactor();
 
   SetClotheOnce("black");
 
@@ -795,9 +802,12 @@ void Character::StopPlaying()
   SetMovement("breathe");
   if (IsWalking())
     StopWalking();
-  SetRebounding(true);
   lr_move_intentions.clear();
   ud_move_intentions.clear();
+
+  // TODO: Check if the following 2 lines should be excuted here, in StopWalking or not at all:
+  // GetPhysic()->StopMovement();
+  // GetPhysic()->ResetReboundFactor();
 }
 
 // Begining of turn or changed to this character
@@ -864,9 +874,6 @@ void Character::SetMovement(const std::string& name, bool force)
   if (IsDead() && !force) return;
   MSG_DEBUG("body","Character %s -> SetMovement : %s",character_name.c_str(),name.c_str());
   body->SetMovement(name);
-  uint l,r,t,b;
-  body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
 }
 
 void Character::SetMovementOnce(const std::string& name, bool force)
@@ -874,9 +881,6 @@ void Character::SetMovementOnce(const std::string& name, bool force)
   if (IsDead() && !force) return;
   MSG_DEBUG("body","Character %s -> SetMovementOnce : %s",character_name.c_str(),name.c_str());
   body->SetMovementOnce(name);
-  uint l,r,t,b;
-  body->GetTestRect(l,r,t,b);
-  SetTestRect(l,r,t,b);
 }
 
 void Character::SetClothe(const std::string& name, bool force)
@@ -907,7 +911,7 @@ uint Character::GetCharacterIndex() const
   for (Team::iterator it = m_team.begin();
        it != m_team.end() ; ++it, ++index )
   {
-    if (&(*it) == this)
+    if ((*it) == this)
       return index;
   }
   ASSERT(false);
@@ -976,6 +980,7 @@ void Character::StartWalking(bool slowly)
   if (!slowly)
     SetMovement("walk");
   body->StartWalking();
+
 }
 
 void Character::StopWalking()
@@ -983,6 +988,11 @@ void Character::StopWalking()
   if (Network::GetInstance()->IsTurnMaster())
     ActiveTeam().crosshair.Show();
   body->StopWalking();
+
+  GetPhysic()->RemoveExternForce(m_force_walk_index);
+  m_force_walk_index = NULL;
+  m_feet_shape->SetFriction(100.0);
+  GetPhysic()->SetSpeedXY(Point2d(GetPhysic()->GetSpeed().x/5,GetPhysic()->GetSpeed().y));
 }
 
 bool Character::IsWalking() const
@@ -992,7 +1002,6 @@ bool Character::IsWalking() const
 
 void Character::MakeSteps()
 {
-  int height;
   bool ghost;
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
 
@@ -1015,17 +1024,19 @@ void Character::MakeSteps()
     return;
   }
 
-  // Check we can move (to go not too fast)
-  while ((rl_motion_pause + walking_pause < Time::GetInstance()->Read()) &&
-         ComputeHeightMovement(height)) {
-    walking_time = Time::GetInstance()->Read();
-    rl_motion_pause = rl_motion_pause + walking_pause;
+  double speed;
 
-    // Eventually moves the character
-    SetXY( Point2i(GetX() + GetDirection(), GetY() + height));
+  if (lr_move_intention->IsToDoItSlowly()) {
+    speed = 1;
+  }else{
+    speed = 5;
+  }
 
-    // If no collision, let gravity do its job
-    UpdatePosition();
+  m_feet_shape->SetFriction(0);
+  if (GetDirection() == DIRECTION_LEFT) {
+    GetPhysic()->SetSpeedXY(Point2d(-speed,GetPhysic()->GetSpeed().y));
+  } else {
+    GetPhysic()->SetSpeedXY(Point2d(speed,GetPhysic()->GetSpeed().y));
   }
 }
 
@@ -1056,7 +1067,7 @@ bool Character::ComputeHeightMovement(int & height)
     //We can go down, but the step is too big -> the character will fall
     bool falling = true;
     if (falling) {
-      SetX (GetXdouble() + GetDirection());
+      SetX (GetX() + GetDirection());
       UpdatePosition();
       SetMovement("fall");
     }

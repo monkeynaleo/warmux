@@ -40,6 +40,7 @@
 #include "weapon/auto_bazooka.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
+#include "physic/force.h"
 
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
@@ -64,6 +65,7 @@ protected:
   bool m_targeted;
   double m_force;
   uint m_lastrefresh;
+  Force * m_force_index;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
@@ -80,6 +82,7 @@ protected:
 RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
 {
+  m_force_index = 0;
   m_targeted = false;
   explode_colliding_character = true;
 }
@@ -114,22 +117,24 @@ void RPG::Refresh()
     if(flying_time > (1000 * GetTotalTimeout()) * (m_initial_strength/ActiveTeam().AccessWeapon().max_strength))
     {
       m_targeted = true;
-      SetSpeed(0,0);
-      angle_local = GetPosition().ComputeAngle( m_targetPoint );
+      GetPhysic()->SetSpeed(0,0);
+      angle_local = GetPhysic()->GetPosition().ComputeAngle(m_targetPoint);
       m_force = acfg.rocket_force;
-      SetExternForce(m_force, angle_local);
-      SetGravityFactor(0);
-      SetWindFactor(0);
+      GetPhysic()->RemoveExternForce(m_force_index);
+      m_force_index = GetPhysic()->AddExternForce(m_force, angle_local);
+      GetPhysic()->SetGravityFactor(0);
+      GetPhysic()->SetWindFactor(0);
     }
   }
   else
   {
-    SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
+    // remove the force applyed on the last Refresh()
+    GetPhysic()->RemoveExternForce(m_force_index);
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
-      smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                       GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-      double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
+      smoke_engine.AddPeriodic(Point2i(GetX(),GetY()),
+                               particle_DARK_SMOKE, false, -1, 2.0);
+      double wish_angle = GetPhysic()->GetPosition().ComputeAngle( m_targetPoint );
       double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
       double diff = fmod(wish_angle-angle_local, M_PI*2);
       if(diff < -M_PI) diff += M_PI*2;
@@ -143,10 +148,10 @@ void RPG::Refresh()
         angle_local = wish_angle;
       }
       m_force = acfg.rocket_force * ((acfg.fuel_time*1300. - flying_time + GetTotalTimeout())/acfg.fuel_time/1300.);
-      SetGravityFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase gravity
-      SetWindFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase wind
+      GetPhysic()->SetGravityFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase gravity
+      GetPhysic()->SetWindFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase wind
     } else {
-      SetGravityFactor(1);
+      GetPhysic()->SetGravityFactor(1);
       m_force = 0; //if there's no fuel left just let it crash into the ground somewhere
       if(!IsDrowned()) {
         angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
@@ -156,7 +161,7 @@ void RPG::Refresh()
       }
     }
 
-    SetExternForce(m_force, angle_local);
+    m_force_index = GetPhysic()->AddExternForce(m_force, angle_local);
 
   }
   image->SetRotation_rad(angle_local);

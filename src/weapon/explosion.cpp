@@ -29,7 +29,7 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include "object/objects_list.h"
-#include "object/physical_obj.h"
+#include "physic/physical_obj.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
@@ -108,16 +108,16 @@ void ApplyExplosion (const Point2i &pos,
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(team, character)
   {
-    double distance = pos.Distance(character -> GetCenter());
+    double distance = pos.Distance((*character) ->GetPhysic()->GetPosition());
     if(distance < 1.0)
       distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
     int dmg = GetDamageFromExplosion(config, distance);
     if (dmg != 0) {
-      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), distance);
-      MSG_DEBUG("explosion", "hit_point_loss energy= %d", character->GetName().c_str(), dmg);
-      character->SetEnergyDelta (-dmg);
+      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", (*character)->GetName().c_str(), distance);
+      MSG_DEBUG("explosion", "hit_point_loss energy= %d", (*character)->GetName().c_str(), dmg);
+      (*character)->SetEnergyDelta (-dmg);
     }
 
     // If the character is in the blast range, apply the blast on it !
@@ -127,8 +127,8 @@ void ApplyExplosion (const Point2i &pos,
 
       if ( force > highest_force )
       {
-        if(!(*character).IsDead()){
-          fastest_character = &(*character);
+        if(!(*character)->IsDead()){
+          fastest_character = (*character);
         }
         highest_force = force;
       }
@@ -136,7 +136,7 @@ void ApplyExplosion (const Point2i &pos,
       double angle;
       if (!EqualsZero(distance))
       {
-        angle  = pos.ComputeAngle(character -> GetCenter());
+        angle  = pos.ComputeAngle((*character)->GetPhysic()->GetPosition());
         if( angle > 0 )
           angle  = - angle;
       }
@@ -145,9 +145,9 @@ void ApplyExplosion (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %f", force);
-      ASSERT(character->GetMass() != 0);
-      character->AddSpeed (force / character->GetMass(), angle);
-      character->SignalExplosion();
+      ASSERT((*character)->GetPhysic()->GetMass() != 0);
+      (*character)->AddSpeed (force / (*character)->GetPhysic()->GetMass(), angle);
+      (*character)->SignalExplosion();
     }
   }
 
@@ -161,7 +161,7 @@ void ApplyExplosion (const Point2i &pos,
 
      if (obj->CollidesWithGround() && !obj->IsGhost())
      {
-       double distance = pos.Distance(obj->GetCenter());
+       double distance = pos.Distance(obj->GetPhysic()->GetPosition());
        if(distance < 1.0)
          distance = 1.0;
 
@@ -175,13 +175,13 @@ void ApplyExplosion (const Point2i &pos,
          double force = GetForceFromExplosion(config, distance);
          double angle;
          if (!EqualsZero(distance))
-           angle  = pos.ComputeAngle(obj->GetCenter());
+           angle  = pos.ComputeAngle(obj->GetPhysic()->GetPosition());
          else
            angle = -M_PI_2;
 
-         ASSERT( obj->GetMass() != 0.0);
+         ASSERT( obj->GetPhysic()->GetMass() != 0.0);
 
-         obj->AddSpeed (force / obj->GetMass(), angle);
+         obj->AddSpeed (force / obj->GetPhysic()->GetMass(), angle);
        }
      }
    }
@@ -189,8 +189,10 @@ void ApplyExplosion (const Point2i &pos,
   ParticleEngine::AddExplosionSmoke(pos, config.particle_range, smoke);
 
   // Do we need to generate some fire particles ?
-  if (fire_particle)
+  if (fire_particle) {
+     //TODO physic the following line is expected not to compile
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
+  }
 
   // Add explosion sprite
   if ( config.explosion_range > 25 && config.damage > 0 )

@@ -41,11 +41,11 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   image->Start();
 
   MSG_DEBUG("random.get", "ExplosionSmoke::ExplosionSmoke(...)");
-  SetGravityFactor(RandomSync().GetDouble(-1.0,-2.0));
+  GetPhysic()->SetGravityFactor(RandomSync().GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
-  SetSize( Point2i(1, 1) );
-  StartMoving();
+  // TODO physic:
+  //SetBasicShape(Point2i(1, 1), GetInitialMass());
 }
 
 void ExplosionSmoke::Refresh()
@@ -68,7 +68,7 @@ void ExplosionSmoke::Refresh()
 void ExplosionSmoke::Draw()
 {
   if (m_left_time_to_live > 0){
-    image->Draw(GetPosition()-Point2i(m_initial_size/2,0));
+    image->Draw(GetPhysic()->GetPosition()-Point2i(m_initial_size/2,0));
   }
 
 }

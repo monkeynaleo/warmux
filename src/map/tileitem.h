@@ -22,6 +22,8 @@
 
 #include <WORMUX_point.h>
 #include "graphic/surface.h"
+class PhysicalObj;
+class PhysicTile;
 
 const Point2i CELL_SIZE(64, 64);
 
@@ -32,8 +34,8 @@ const Point2i CELL_SIZE(64, 64);
 class TileItem
 {
 public:
-  TileItem () {};
-  virtual ~TileItem () {};
+  TileItem() {};
+  virtual ~TileItem() {};
 
   bool IsEmpty ();
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
@@ -44,16 +46,19 @@ public:
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
+
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
+protected :
+  PhysicalObj *m_physic_ground;
 };
 
 class TileItem_Empty : public TileItem
 {
 public:
-  TileItem_Empty () { empty = NULL; };
-  ~TileItem_Empty () { if (empty) delete empty; };
+  TileItem_Empty();
+  virtual ~TileItem_Empty();
 
   Surface *empty;
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
@@ -69,46 +74,51 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem
 {
-  unsigned char* last_filled_pixel;
+  /* If you need this, implement it (correctly)*/
   const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
+  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
+  /*********************************************/
+
+  Point2i m_size;
+  Surface m_surface;
+
+  PhysicTile *m_physic_tile;
+  Point2d m_shape_offset;
+  int m_shape_level;
+  unsigned char* last_filled_pixel;
+
+  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
+  unsigned char GetAlpha_Index0(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
+  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
+
+  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+
+#ifdef DBG_TILE
+  void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
+#endif
 
 public:
   bool need_check_empty;
   bool need_delete;
 
-  TileItem_AlphaSoftware(const Point2i &size);
-  ~TileItem_AlphaSoftware();
+  TileItem_AlphaSoftware(const Point2i &size, const Point2d &offset);
+  virtual ~TileItem_AlphaSoftware();
 
+  void InitShape();
   unsigned char GetAlpha(const Point2i &pos);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
   void MergeSprite(const Point2i &position, Surface& spr);
   void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
-
   bool NeedDelete() const {return need_delete; };
   void CheckEmpty();
   void ResetEmptyCheck();
 
   bool IsTotallyEmpty() const {return false;};
-
-private:
-  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
-  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
-  unsigned char GetAlpha_Index0(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
   Surface GetSurface() { return m_surface; };
-
-  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-
-  Point2i m_size;
-  Surface m_surface;
-
-#ifdef DBG_TILE
-  void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
-#endif
 };
 
 #endif

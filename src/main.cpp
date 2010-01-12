@@ -54,6 +54,7 @@
 #include "menu/options_menu.h"
 #include "menu/skin_menu.h"
 #include "particles/particle.h"
+#include "physic/bullet_engine.h"
 #include "sound/jukebox.h"
 #ifdef WMX_LOG
 #include "include/debugmasks.h"
@@ -82,6 +83,7 @@ AppWormux::AppWormux():
   JukeBox::GetInstance()->Init();
   RandomLocal().InitRandom();
   std::cout << "[ " << _("Run game") << " ]" << std::endl;
+  PhysicalEngine::SetInstance(new BulletEngine());
 }
 
 AppWormux::~AppWormux()
@@ -90,6 +92,7 @@ AppWormux::~AppWormux()
   ParticleEngine::FreeMem();
   Font::ReleaseInstances();
   BaseSingleton::ReleaseSingletons();
+  delete PhysicalEngine::GetInstance();
   singleton = NULL;
 }
 

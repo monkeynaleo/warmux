@@ -25,7 +25,7 @@
 #include <list>
 #include "include/base.h"
 #include <WORMUX_singleton.h>
-#include "object/physical_obj.h"
+#include "physic/game_obj.h"
 
 // Forward declarations
 class Sprite;
@@ -50,6 +50,7 @@ public:
   ~WindParticle();
   void Draw();
   void Refresh();
+  void Ghost();
 };
 
 class Wind : public Singleton<Wind>
@@ -61,7 +62,6 @@ private:
 
   std::list<WindParticle *> particles;
   typedef std::list<WindParticle *>::iterator iterator;
-  void RemoveAllParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
   Wind();
@@ -73,6 +73,8 @@ public:
   void ChooseRandomVal();
 
   void SetVal(long val);
+
+  void FreeMem();
   void Refresh();
   void Reset();
   void DrawParticles();

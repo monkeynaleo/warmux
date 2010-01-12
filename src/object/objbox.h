@@ -22,7 +22,7 @@
 #ifndef OBJBOX_H
 #define OBJBOX_H
 //-----------------------------------------------------------------------------
-#include "object/physical_obj.h"
+#include "physic/game_obj.h"
 #include "sound/sound_sample.h"
 
 class Team;
@@ -30,6 +30,8 @@ class Character;
 class Sprite;
 typedef struct _xmlNode xmlNode;
 class Action;
+class PhysicalShape;
+
 
 class ObjBox : public GameObj //it would be nice to name this "Box", but that was already taken...
 {
