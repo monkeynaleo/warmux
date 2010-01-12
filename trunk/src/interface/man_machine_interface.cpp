@@ -450,7 +450,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
       if (weapons_list->GetWeaponBySort(weapon_sort, weapon))
         {
-          ASSERT (weapon >= Weapon::WEAPON_FIRST && weapon <= Weapon::WEAPON_LAST);
+          ASSERT (weapon >= Weapon::FIRST && weapon <= Weapon::LAST);
           ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
         }
     }

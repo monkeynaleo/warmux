@@ -302,7 +302,7 @@ Character& Team::ActiveCharacter() const
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
 
-  ASSERT (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
+  ASSERT (type >= Weapon::FIRST && type <= Weapon::LAST);
   AccessWeapon().Deselect();
   active_weapon = weapons_list->GetWeapon(type);
   AccessWeapon().Select();
