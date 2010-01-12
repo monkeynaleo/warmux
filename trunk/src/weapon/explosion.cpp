@@ -42,6 +42,33 @@
 
 Profile *weapons_res_profile = NULL;
 
+int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, double distance)
+{
+  if (distance > config.explosion_range)
+    return 0;
+
+  double dmg;
+  if( config.explosion_range != 0)
+    dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
+  else
+    dmg = cos(M_PI_2 * distance);
+
+  dmg *= config.damage;
+  return (int) dmg;
+}
+
+double GetForceFromExplosion(const ExplosiveWeaponConfig &config, double distance)
+{
+  double force;
+  if(config.blast_range != 0)
+    force = cos(M_PI_2 * distance / (float)config.blast_range);
+  else
+    force = cos(M_PI_2 * distance);
+
+  force *= config.blast_force;
+  return force;
+}
+
 void ApplyExplosion (const Point2i &pos,
                      const ExplosiveWeaponConfig &config,
                      const std::string& son,
@@ -86,30 +113,17 @@ void ApplyExplosion (const Point2i &pos,
       distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
-    if (distance <= config.explosion_range)
-    {
+    int dmg = GetDamageFromExplosion(config, distance);
+    if (dmg != 0) {
       MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), distance);
-      double dmg;
-      if( config.explosion_range != 0)
-        dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
-      else
-        dmg = cos(M_PI_2 * distance);
-
-      dmg *= config.damage;
-      MSG_DEBUG("explosion", "hit_point_loss energy= %i", character->GetName().c_str(), dmg);
-      character -> SetEnergyDelta (-(int)dmg);
+      MSG_DEBUG("explosion", "hit_point_loss energy= %d", character->GetName().c_str(), dmg);
+      character->SetEnergyDelta (-dmg);
     }
 
     // If the character is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
-      double angle, force;
-      if(config.blast_range != 0)
-        force = cos(M_PI_2 * distance / (float)config.blast_range);
-      else
-        force = cos(M_PI_2 * distance);
-
-      force *= config.blast_force;
+      double force = GetForceFromExplosion(config, distance);
 
       if ( force > highest_force )
       {
@@ -119,6 +133,7 @@ void ApplyExplosion (const Point2i &pos,
         highest_force = force;
       }
 
+      double angle;
       if (!EqualsZero(distance))
       {
         angle  = pos.ComputeAngle(character -> GetCenter());
@@ -150,27 +165,15 @@ void ApplyExplosion (const Point2i &pos,
        if(distance < 1.0)
          distance = 1.0;
 
-       if (distance <= (float)config.explosion_range)
-       {
-         double dmg;
-         if ( config.explosion_range != 0)
-           dmg = cos(M_PI_2 * distance / config.explosion_range);
-         else
-           dmg = cos(M_PI_2 * distance);
-
-         dmg *= config.damage;
-         obj->SetEnergyDelta(-(int)dmg);
+       int dmg = GetDamageFromExplosion(config, distance);
+       if (dmg != 0) {
+         obj->SetEnergyDelta(-dmg);
        }
 
        if (distance <= (float)config.blast_range)
        {
-         double angle, force;
-         if( config.blast_range != 0)
-           force = cos(M_PI_2 * distance / (float)config.blast_range);
-         else
-           force = cos(M_PI_2 * distance);
-         force *= config.blast_force;
-
+         double force = GetForceFromExplosion(config, distance);
+         double angle;
          if (!EqualsZero(distance))
            angle  = pos.ComputeAngle(obj->GetCenter());
          else
