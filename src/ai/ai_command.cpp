@@ -281,3 +281,16 @@ bool WaitForStrengthCommand::Execute()
   double current_strength = ActiveTeam().GetWeapon().GetStrength();
   return (current_strength >= target_strength);
 }
+
+SetTimeoutCommand::SetTimeoutCommand(int timeout):
+  timeout(timeout)
+{
+  // do nothing
+}
+
+bool SetTimeoutCommand::Execute()
+{
+  Action * a = new Action(Action::ACTION_WEAPON_SET_TIMEOUT, timeout);
+  ActionHandler::GetInstance()->NewAction(a);
+  return true;
+}

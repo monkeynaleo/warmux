@@ -83,9 +83,11 @@ class FireMissileWithFixedDurationIdea : public AIIdea
     WeaponsWeighting & weapons_weighting;
     Character & shooter;
     Character & enemy;
+    Weapon::Weapon_type weapon_type;
     double duration;
+    int timeout; // if positive the character will set it to the specified value.
   public:
-    FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, double duration);
+    FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double duration, int timeout = -1);
     virtual AIStrategy * CreateStrategy();
 };
 

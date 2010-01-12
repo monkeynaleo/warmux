@@ -67,14 +67,17 @@ AICommand * SkipTurnStrategy::CreateCommand()
   return commands;
 }
 
-static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, LRDirection  direction, double angle)
+static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int timeout = -1)
 {
   CommandList * commands = new CommandList();
-  commands->Add(new DoNothingCommand(1000));
   commands->Add(new SelectCharacterCommand(&character));
   commands->Add(new DoNothingCommand(1000));
   commands->Add(new SelectWeaponCommand(weapon));
-  commands->Add(new DoNothingCommand(200));
+  commands->Add(new DoNothingCommand(100));
+  if (timeout > 0) {
+    commands->Add(new SetTimeoutCommand(timeout));
+  }
+  commands->Add(new DoNothingCommand(100));
   commands->Add(new SetDirectionCommand(direction));
   commands->Add(new SetWeaponAngleCommand(angle));
   commands->Add(new DoNothingCommand(200));
@@ -105,20 +108,21 @@ AICommand * ShootWithGunStrategy::CreateCommand()
   return commands;
 }
 
-LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength):
+LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength, int timeout):
 AIStrategy(rating),
 shooter(shooter),
 weapon(weapon),
 direction(direction),
 angle(angle),
-strength(strength)
+strength(strength),
+timeout(timeout)
 {
   // do nothing
 }
 
 AICommand * LoadAndFireStrategy::CreateCommand()
 {
-  CommandList * commands = CreateSelectCommandList(shooter, weapon, direction, angle);
+  CommandList * commands = CreateSelectCommandList(shooter, weapon, direction, angle, timeout);
   commands->Add(new StartShootingCommand());
   commands->Add(new WaitForStrengthCommand(strength));
   commands->Add(new StopShootingCommand());

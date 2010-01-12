@@ -278,11 +278,13 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
 }
 
-FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, double duration):
+FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double duration, int timeout):
   weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
-  duration(duration)
+  weapon_type(weapon_type),
+  duration(duration),
+  timeout(timeout)
 {
   // do nothing
 }
@@ -322,7 +324,6 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   if (!CanUseCharacter(shooter))
     return NULL;
 
-  const Weapon::Weapon_type weapon_type = Weapon::WEAPON_BAZOOKA;
   WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
   WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(weapons_list->GetWeapon(weapon_type));
 
@@ -360,5 +361,5 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
     return NULL;
   }
   rating = rating * weapons_weighting.GetFactor(weapon_type);
-  return new LoadAndFireStrategy(rating, shooter, weapon_type, direction, shoot_angle, strength);
+  return new LoadAndFireStrategy(rating, shooter, weapon_type, direction, shoot_angle, strength, timeout);
 }
