@@ -25,7 +25,7 @@
 #include "ai/ai_strategy.h"
 #include "ai/ai_weapons_weighting.h"
 #include "weapon/weapon.h"
-
+#include "weapon/weapon_launcher.h"
 
 class AIIdea
 {
@@ -35,6 +35,8 @@ class AIIdea
     static LRDirection XDeltaToDirection(double delta);
     static double GetDirectionRelativeAngle(LRDirection direction, double angle);
     static double RateDamageDoneToEnemy(int damage, Character & enemy);
+    static double RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy);
+    static double RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig & cfg);
   public:
     virtual AIStrategy * CreateStrategy() = 0;
     virtual ~AIIdea() {}
