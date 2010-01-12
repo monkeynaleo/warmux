@@ -29,12 +29,10 @@
   </sprite>
   <wind>
     <nbr_sprite>60</nbr_sprite>
-    <mass>3</mass>
-    <wind_factor>10</wind_factor>
-    <air_resist_factor>5</air_resist_factor>
-    <gravity_factor>-3</gravity_factor>
-    <rebounding>false</rebounding>
-    <rebound_factor>1.3</rebound_factor>
+    <mass>1</mass>
+    <wind_factor>5</wind_factor>
+    <air_resist_factor>0.5</air_resist_factor>
+    <gravity_factor>-1</gravity_factor>
   </wind>
 
   <music_playlist>sea</music_playlist>
