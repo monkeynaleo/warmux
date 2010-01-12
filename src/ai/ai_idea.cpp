@@ -159,12 +159,12 @@ ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_we
   // do nothing
 }
 
-static PhysicalObj* GetObjectAt(const Point2i & pos)
+static GameObj* GetObjectAt(const Point2i & pos)
 {
   ObjectsList * objects = ObjectsList::GetInstance();
   ObjectsList::iterator it = objects->begin();
   while(it != objects->end()) {
-    PhysicalObj* object = *it;
+    GameObj* object = *it;
     if (object->GetTestRect().Contains(pos) && !object->IsDead())
       return object;
     it++;
@@ -177,7 +177,7 @@ static PhysicalObj* GetObjectAt(const Point2i & pos)
 }
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
-static PhysicalObj* GetCollisionObject(Character * character_to_ignore, const Point2i from, const Point2i to) {
+static GameObj* GetCollisionObject(Character * character_to_ignore, const Point2i from, const Point2i to) {
   Point2i pos = from;
   Point2i delta = to - from;
   int steps_x = abs(delta.x);
@@ -228,7 +228,7 @@ static PhysicalObj* GetCollisionObject(Character * character_to_ignore, const Po
     if (!GetWorld().IsInVacuum(pos))
       return NULL;
 
-    PhysicalObj* object = GetObjectAt(pos);
+    GameObj* object = GetObjectAt(pos);
     if (object != NULL && object != character_to_ignore)
       return object;
   }
@@ -266,7 +266,7 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
 
-  PhysicalObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
+  GameObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
   if (collision_object != &enemy)
     return NULL;
 
@@ -304,7 +304,7 @@ static bool IsPositionEmpty(Character & character_to_ignore, Point2i pos)
   if (!GetWorld().IsInVacuum(pos))
     return false;
 
-  PhysicalObj* object = GetObjectAt(pos);
+  GameObj* object = GetObjectAt(pos);
   if (object != NULL && object != &character_to_ignore)
     return false;
   return true;
@@ -359,7 +359,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
 
   Trajectory trajectory(pos_0, v_0, a);
   Point2i explosion_pos = GetFirstContact(shooter, trajectory);
-  PhysicalObj * aim = GetObjectAt(explosion_pos);
+  GameObj * aim = GetObjectAt(explosion_pos);
   double rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
   if (aim == &enemy || (aim == NULL && explodes_on_contact)) {

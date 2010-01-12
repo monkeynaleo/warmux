@@ -29,7 +29,7 @@ class Sprite;
 class WeaponLauncher;
 class ExplosiveWeaponConfig;
 
-class WeaponProjectile : public PhysicalObj
+class WeaponProjectile : public GameObj
 {
   protected:
     Sprite *image;
@@ -70,7 +70,7 @@ class WeaponProjectile : public PhysicalObj
 
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj * obj,
+				       GameObj * obj,
 				       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
@@ -97,7 +97,7 @@ class WeaponBullet : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj * obj,
+				       GameObj * obj,
 				       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
     void DoExplosion();

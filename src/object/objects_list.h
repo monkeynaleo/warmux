@@ -44,18 +44,18 @@
 
 //-----------------------------------------------------------------------------
 
-class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList>
+class ObjectsList : public std::list<GameObj*>, public Singleton<ObjectsList>
 {
   private:
     ObjectsList();
     ~ObjectsList();
     friend class Singleton<ObjectsList>;
 
-    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
+    void RemoveOverlappedObjectReference(const GameObj * obj);
 
   public:
-    typedef std::list<PhysicalObj*>::iterator iterator;
-    std::list<PhysicalObj*> overlapped_objects;
+    typedef std::list<GameObj*>::iterator iterator;
+    std::list<GameObj*> overlapped_objects;
 
   public:
     // Call the Refresh method of all the objects
@@ -72,17 +72,17 @@ class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList
 
     void FreeMem();
 
-    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
+    inline void AddObject(GameObj * obj) { push_back(obj);};
 
     // Overlapse handling
-    inline void RemoveObject(PhysicalObj * obj)
+    inline void RemoveObject(GameObj * obj)
     {
       remove(obj);
       RemoveOverlappedObjectReference(obj);
     };
 
-    void AddOverlappedObject(PhysicalObj * obj);
-    void RemoveOverlappedObject(PhysicalObj * obj);
+    void AddOverlappedObject(GameObj * obj);
+    void RemoveOverlappedObject(GameObj * obj);
 };
 
 //-----------------------------------------------------------------------------

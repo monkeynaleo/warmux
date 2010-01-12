@@ -31,7 +31,7 @@ class Sprite;
 typedef struct _xmlNode xmlNode;
 class Action;
 
-class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
+class ObjBox : public GameObj //it would be nice to name this "Box", but that was already taken...
 {
     /* If you need this, implement it (correctly)*/
     ObjBox(const ObjBox&);
@@ -63,7 +63,7 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
 
     virtual void SignalGroundCollision(const Point2d& my_speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj *object,
+				       GameObj *object,
 				       const Point2d& object_speed);
     virtual void SignalDrowning();
     virtual void SignalGhostState(bool was_already_dead);

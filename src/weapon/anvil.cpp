@@ -57,7 +57,7 @@ class Anvil : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-				       PhysicalObj * obj,
+				       GameObj * obj,
 				       const Point2d& /* obj_speed_before */);
     virtual void SignalOutOfMap();
 };
@@ -78,7 +78,7 @@ Anvil::~Anvil()
 }
 
 void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
-				  PhysicalObj * obj,
+				  GameObj * obj,
 				  const Point2d& /* obj_speed_before */)
 {
   merge_time = Time::GetInstance()->Read() + 5000;

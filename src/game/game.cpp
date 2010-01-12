@@ -909,7 +909,7 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
   }
 }
 
-PhysicalObj* Game::GetMovingObject() const
+GameObj* Game::GetMovingObject() const
 {
   if (!ActiveCharacter().IsImmobile())
   {
@@ -935,7 +935,7 @@ PhysicalObj* Game::GetMovingObject() const
     }
   }
 
-  PhysicalObj *obj = ParticleEngine::IsSomethingMoving();
+  GameObj *obj = ParticleEngine::IsSomethingMoving();
   if (obj != NULL)
     {
       MSG_DEBUG("game.endofturn", "ParticleEngine (%s) is moving", obj->GetName().c_str());
