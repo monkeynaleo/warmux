@@ -653,7 +653,7 @@ static void Action_Weapon_SetTimeout (Action *a)
   {
     return;
   }
-  launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
+  launcher->GetProjectile()->SetTimeOut(a->PopInt());
 }
 
 static void Action_Weapon_StartMovingLeft(Action */*a*/)
