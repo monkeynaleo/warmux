@@ -185,6 +185,7 @@ void JetPack::StartShooting()
   } else {
     if (EnoughAmmo()) {
       UseAmmo();
+      Game::GetInstance()->SetCharacterChosen(true);
       active = true;
       ActiveCharacter().SetClothe("jetpack-fire");
     }
