@@ -21,7 +21,6 @@
 #include <algorithm>
 #include <iostream>
 #include <WORMUX_team_config.h>
-#include "ai/ai_stupid_player.h"
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
@@ -181,6 +180,11 @@ void TeamsList::LoadGamingData(WeaponsList * weapons_list)
   for (; it != end; ++it) {
     (**it).LoadGamingData(weapons_list);
   }
+  for (it=playing_list.begin(); it != end; ++it) {
+    if ((*it)->IsLocalAI())
+      (*it)->LoadAI();
+  }
+
 }
 
 void TeamsList::RandomizeFirstPlayer()

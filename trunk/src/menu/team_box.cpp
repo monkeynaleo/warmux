@@ -269,12 +269,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
 
   // change only for local teams...
   if (associated_team->IsLocal()) {
-
-    if (is_local_ai) {
-      associated_team->SetAI(new AIStupidPlayer(associated_team));
-    } else {
-      associated_team->SetHuman();
-    }
+    associated_team->SetUseAI(is_local_ai);
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
