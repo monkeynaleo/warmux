@@ -331,8 +331,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   double g = GameMode::GetInstance()->gravity;
   double wind_factor = weapon->GetWindFactor();
   double mass = weapon->GetMass();
-  Point2d a(Wind::GetRef().GetStrength() * wind_factor, g * mass);
-  a *= 2; // Work around bug in physics engine.
+  Point2d f(Wind::GetRef().GetStrength() * wind_factor, g * mass);
+  Point2d a = f / mass * PIXEL_PER_METER;;
   const Point2d pos_0 = shooter.GetCenter();
   const Point2d pos_t = enemy.GetCenter();
   double t = duration;
