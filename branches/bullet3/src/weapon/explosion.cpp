@@ -157,7 +157,7 @@ void ApplyExplosion (const Point2i &pos,
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
    {
-     PhysicalObj *obj = *it;
+     GameObj *obj = *it;
 
      if (obj->CollidesWithGround() && !obj->IsGhost())
      {

@@ -76,7 +76,7 @@ Obus::~Obus()
 Obus* Plane::last_dropped_bomb = NULL;
 
 Plane::Plane(AirAttackConfig &p_cfg) :
-  PhysicalObj("air_attack_plane"),
+  GameObj("air_attack_plane"),
   cfg(p_cfg)
 {
   SetCollisionModel(false, false, false);
