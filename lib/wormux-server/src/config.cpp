@@ -22,6 +22,8 @@
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 
+bool WSERVER_Verbose = true;
+
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
   line.clear();
@@ -54,18 +56,15 @@ void BasicConfig::SplitVersionsString(const std::string& val, std::list<std::str
 
 void BasicConfig::Load(const std::string & config_file)
 {
-  DPRINT(INFO, "Loading config file %s", config_file.c_str());
-
   int line_nbr = 0;
 
   // Parse the file
   std::ifstream fin;
   fin.open(config_file.c_str(), std::ios::in);
-  if(!fin)
-    {
-      DPRINT(INFO, "Unable to open config file %s: %s", config_file.c_str(), strerror(errno));
-      exit(EXIT_FAILURE);
-    }
+  if (!fin) {
+    DPRINTMSG(stderr, "Unable to open config file %s: %s", config_file.c_str(), strerror(errno));
+    exit(EXIT_FAILURE);
+  }
 
   ssize_t read;
   std::string line;
@@ -94,6 +93,10 @@ void BasicConfig::Load(const std::string & config_file)
 	continue;
       }
 
+      if (opt == "verbose")
+        if (val == "false")
+          WSERVER_Verbose = false;
+
       // val is considered to be an int if it doesn't contain
       // a '.' (ip address have to be handled as string...
       if(val.find('.',0) == std::string::npos
@@ -117,7 +120,7 @@ void BasicConfig::Load(const std::string & config_file)
 
   fin.close();
 
-  DPRINT(INFO, "Config loaded");
+  DPRINT(INFO, "Config loaded successfully from %s", config_file.c_str());
 
   if (supported_versions.empty()) {
     DPRINT(INFO, "No supported versions ?!? You must fill option 'versions'");

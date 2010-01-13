@@ -56,4 +56,6 @@ public:
   const std::string SupportedVersions2Str() const;
 };
 
+extern bool WSERVER_Verbose;
+
 #endif

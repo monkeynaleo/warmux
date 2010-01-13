@@ -32,6 +32,7 @@
 #include <string.h>
 #include <list>
 #include <map>
+#include <iostream>
 
 #include <WSERVER_debug.h>
 #include <WSERVER_env.h>
@@ -48,16 +49,53 @@ std::multimap<std::string, Client*> clients;
 
 std::string config_file = "wormux_index_server.conf";
 
+void ShowUsage(void)
+{
+  std::cout << "Wormux Index Server (" << PACKAGE_VERSION <<")" << std::endl
+	    << "===================" << std::endl
+	    << "Usage: wormux-inder_server [OPTIONS]" << std::endl
+	    << "       -d             : run as daemon" << std::endl
+	    << "       -f config_file : set an alternative configuration file" << std::endl;
+  exit(EXIT_FAILURE);
+
+  return;
+}
+
+void DoFork(void)
+{
+  pid_t fwis = fork();
+  switch (fwis) {
+    case EAGAIN:
+      DPRINT(INFO, "Cannot fork due to system restriction. Try to increase KERN_MAXPROC, KERN_MAXPROCPERUID or RLIMIT_NPROC.");
+      exit(EXIT_FAILURE);
+      break;
+    case ENOMEM:
+      DPRINT(INFO, "Cannot fork due to insufficient swap or memory space.");
+      exit(EXIT_FAILURE);
+      break;
+    case 0: // Forked successfully
+      break;
+    default:
+      exit(EXIT_SUCCESS);
+      break;
+  }
+}
+
 void parseArgs(int argc, char *argv[])
 {
   int opt;
 
-  while ((opt = getopt(argc, argv, "f:")) != -1) {
+  while ((opt = getopt(argc, argv, "f:d")) != -1) {
     switch (opt) {
     case 'f':
       config_file = optarg;
       break;
+    case 'd':
+      DoFork();
+      break;
+    case '?':
     default:
+      ShowUsage();
       break;
     }
   }
@@ -65,12 +103,12 @@ void parseArgs(int argc, char *argv[])
 
 int main(int argc, char* argv[])
 {
-  DPRINT(INFO, "Wormux index server version %i", VERSION);
-  DPRINT(INFO, "%s", wx_clock.DateStr());
-
   parseArgs(argc, argv);
 
   config.Load(config_file);
+
+  DPRINT(INFO, "Wormux index server version %i", VERSION);
+  DPRINT(INFO, "%s", wx_clock.DateStr());
 
   Env::SetConfigClass(config);
   Env::SetWorkingDir();

@@ -25,6 +25,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <WSERVER_clock.h>
+#include <WSERVER_config.h>
 
 #define ALL        0
 #define TRAFFIC    1
@@ -44,14 +45,15 @@
 
 #define DPRINT(LEVEL, ARGS...)                                          \
   {                                                                     \
-    if((LEVEL) >= LOG_LEVEL )                                           \
-      DPRINTMSG(stdout, ARGS);						\
+    if (WSERVER_Verbose)                                                \
+      if((LEVEL) >= LOG_LEVEL )                                         \
+        DPRINTMSG(stdout, ARGS);						\
   }
 
 #define PRINT_FATAL_ERROR						\
   {									\
     PRINT_ERROR;							\
-    exit(1);								\
+    exit(EXIT_FAILURE);								\
   }
 
 #define PRINT_ERROR							\
