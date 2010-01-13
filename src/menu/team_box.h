@@ -46,7 +46,10 @@ class TeamBox : public HBox
   std::string previous_player_name; // only for network
   std::string ai_name;
 
-  Surface player_ai_surf, player_local_surf, player_remote_surf;
+  Surface player_local_ai_surf;
+  Surface player_local_human_surf;
+  Surface player_remote_ai_surf;
+  Surface player_remote_human_surf;
 
   Team * associated_team;
   PictureWidget *team_logo, *player_type;
