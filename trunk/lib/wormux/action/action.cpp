@@ -230,7 +230,7 @@ double Action::PopDouble()
 
 std::string Action::PopString()
 {
-  NET_ASSERT(var.size() > 1)
+  NET_ASSERT(var.size() >= 1)
   {
     if(creator) creator->ForceDisconnection();
     return "";
