@@ -127,6 +127,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
   energy_bar(),
+  m_force_walk_index(NULL),
   survivals(0),
   name_text(NULL),
   rl_motion_pause(0),
@@ -192,6 +193,7 @@ Character::Character (const Character& acharacter) :
   disease_duration(acharacter.disease_duration),
   damage_stats(new DamageStatistics(*acharacter.damage_stats, *this)),
   energy_bar(acharacter.energy_bar),
+  m_force_walk_index(NULL),
   survivals(acharacter.survivals),
   name_text(NULL),
   rl_motion_pause(acharacter.rl_motion_pause),
@@ -981,6 +983,8 @@ void Character::StartWalking(bool slowly)
     SetMovement("walk");
   body->StartWalking();
 
+  // TODO physic: decide between setting a foce to move the character and setting a speed in Character::MakeSteps
+  // m_force_walk_index = GetPhysic()->AddExternForceXY(force_vector);
 }
 
 void Character::StopWalking()
@@ -989,7 +993,8 @@ void Character::StopWalking()
     ActiveTeam().crosshair.Show();
   body->StopWalking();
 
-  GetPhysic()->RemoveExternForce(m_force_walk_index);
+  if (m_force_walk_index != NULL)
+    GetPhysic()->RemoveExternForce(m_force_walk_index);
   m_force_walk_index = NULL;
   m_feet_shape->SetFriction(100.0);
   GetPhysic()->SetSpeedXY(Point2d(GetPhysic()->GetSpeed().x/5,GetPhysic()->GetSpeed().y));
