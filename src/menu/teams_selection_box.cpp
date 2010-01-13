@@ -104,6 +104,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network) :
     if (j < 2) {
       SetNbTeams(2);
       local_teams_nb->SetValue(2);
+      teams_selections.at(1)->SetAIName(DEFAULT_AI_NAME);
     } else {
       local_teams_nb->SetValue(j);
     }
