@@ -770,6 +770,8 @@ void Game::MainLoop()
       RefreshObject();
       StatStop("Game:RefreshObject()");
 
+      PhysicalEngine::GetInstance()->Step();
+
       // Refresh the map
       GetWorld().Refresh();
 
