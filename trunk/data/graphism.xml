@@ -168,9 +168,10 @@
     </image>
   </sprite>
 
-  <surface name="player_ai" file="menu/player_ai.png" />
-  <surface name="player_local" file="menu/player_local.png" />
-  <surface name="player_remote" file="menu/player_distant.png" />
+  <surface name="player_local_human" file="menu/player_local.png" />
+  <surface name="player_local_ai" file="menu/player_ai.png" />
+  <surface name="player_remote_human" file="menu/player_local.png" />
+  <surface name="player_remote_ai" file="menu/player_ai.png" />
  </section>
 
 <section name="credit">

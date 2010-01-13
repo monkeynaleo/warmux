@@ -51,12 +51,13 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   team_logo = new PictureWidget(Point2i(38, 38));
   tmp_logo_box->AddWidget(team_logo);
 
-  player_ai_surf = GetResourceManager().LoadImage(res, "menu/player_ai");
-  player_local_surf = GetResourceManager().LoadImage(res, "menu/player_local");
-  player_remote_surf = GetResourceManager().LoadImage(res, "menu/player_remote");
+  player_local_ai_surf = GetResourceManager().LoadImage(res, "menu/player_local_ai");
+  player_local_human_surf = GetResourceManager().LoadImage(res, "menu/player_local_human");
+  player_remote_ai_surf = GetResourceManager().LoadImage(res, "menu/player_remote_ai");
+  player_remote_human_surf = GetResourceManager().LoadImage(res, "menu/player_remote_human");
 
   player_type =  new PictureWidget(Point2i(38, 30));
-  player_type->SetSurface(player_local_surf);
+  player_type->SetSurface(player_local_ai_surf);
   tmp_logo_box->AddWidget(player_type);
 
   AddWidget(tmp_logo_box);
@@ -262,14 +263,19 @@ void TeamBox::SetAIName(const std::string name)
 
 void TeamBox::UpdatePlayerType()
 {
+  bool is_human = ai_name == NO_AI_NAME;
   if (associated_team->IsLocal()) {
-    if (ai_name != NO_AI_NAME) {
-      player_type->SetSurface(player_ai_surf);
+    if (is_human) {
+      player_type->SetSurface(player_local_human_surf);
     } else {
-      player_type->SetSurface(player_local_surf);
+      player_type->SetSurface(player_local_ai_surf);
     }
   } else {
-    player_type->SetSurface(player_remote_surf);
+    if (is_human) {
+      player_type->SetSurface(player_remote_human_surf);
+    } else {
+      player_type->SetSurface(player_remote_ai_surf);
+    }
   }
 }
 
@@ -293,6 +299,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
       a->Push(associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));
+      a->Push(associated_team->GetAIName());
       ActionHandler::GetInstance()->NewAction (a);
     }
   }
@@ -318,4 +325,7 @@ void TeamBox::SwitchPlayerType()
     return;
 
   SetAIName((ai_name == NO_AI_NAME) ? DEFAULT_AI_NAME : NO_AI_NAME);
+  if (Network::GetInstance()->IsConnected()) {
+    ValidOptions();
+  }
 }
