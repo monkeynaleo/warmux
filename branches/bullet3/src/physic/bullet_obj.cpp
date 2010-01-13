@@ -374,15 +374,16 @@ Point2d BulletObj::GetSpeed() const
 
   void BulletObj::RemoveExternForce(Force *force)
   {
-	  std::vector<Force *>::iterator it;
-	  for(it = m_force_list.begin(); it != m_force_list.end(); it++){
-		  if(*it == force){
-			  m_force_list.erase(it);
-			  break;
-		  }
-	  }
-	  PhysicalEngine::GetInstance()->RemoveForce(force);
-	  delete force;
+    std::vector<Force *>::iterator it = m_force_list.begin();
+    while ((it != m_force_list.end()) && (*it != force)) {
+      it++;
+    }
+    ASSERT(it != m_force_list.end());
+    if (it != m_force_list.end()) {
+      m_force_list.erase(it);
+      PhysicalEngine::GetInstance()->RemoveForce(force);
+      delete force;
+    }
   }
   void BulletObj::RemoveAllExternForce()
   {
