@@ -438,7 +438,10 @@ void Config::LoadXml(const xmlNode *xml)
       XmlReader::ReadString(team, "id", one_team.id);
       XmlReader::ReadString(team, "player_name", one_team.player_name);
       XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
-      XmlReader::ReadString(team, "ai", one_team.ai);
+      // The ai element needs a defaut as it has been added afterwards:
+      if (!XmlReader::ReadString(team, "ai", one_team.ai)) {
+        one_team.ai = (i == 1) ? DEFAULT_AI_NAME : NO_AI_NAME;
+      }
 
       teams.push_back(one_team);
 
