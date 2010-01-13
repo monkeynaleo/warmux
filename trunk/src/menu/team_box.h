@@ -44,7 +44,7 @@ class TeamBox : public HBox
   /**********************************************/
 
   std::string previous_player_name; // only for network
-  bool is_local_ai;
+  std::string ai_name;
 
   Surface player_ai_surf, player_local_surf, player_remote_surf;
 
@@ -66,6 +66,8 @@ class TeamBox : public HBox
   TeamBox(const std::string& player_name, const Point2i &size);
 
   void SetTeam(Team& _team, bool read_team_values=false);
+  void SetAIName(const std::string name);
+  void UpdatePlayerType();
   void ClearTeam();
   Team* GetTeam() const;
   CustomTeam *GetCustomTeam();

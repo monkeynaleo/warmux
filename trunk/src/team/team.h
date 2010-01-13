@@ -31,6 +31,9 @@
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
 
+const std::string NO_AI_NAME = "none";
+const std::string DEFAULT_AI_NAME = "default";
+
 class Character;
 class CustomTeam;
 class WeaponsList;
@@ -71,7 +74,7 @@ class Team
     uint nb_characters;
     uint current_turn;
     AIPlayer * ai;
-    bool use_ai;
+    std::string ai_name;
     bool remote;
     bool abandoned;
     CustomTeam *attached_custom_team;
@@ -158,8 +161,8 @@ class Team
     int& AccessNbUnits();
     void ResetNbUnits();
 
-    bool IsAI() const { return use_ai; }
-    bool IsHuman() const { return !use_ai; }
+    bool IsAI() const { return ai_name != NO_AI_NAME; }
+    bool IsHuman() const { return !IsAI(); }
     bool IsLocal() const { return !remote; }
     bool IsRemote() const { return remote; }
     bool IsLocalAI() const { return IsLocal() && IsAI(); }
@@ -168,7 +171,8 @@ class Team
     bool IsActiveTeam() const;
 
     void SetRemote(bool value) { remote = value; }
-    void SetUseAI(bool value) { use_ai = value; }
+    void SetAIName(const std::string value) { ai_name = value; }
+    const std::string GetAIName() { return ai_name; }
     void LoadAI();
 
   // reset characters number, type_of_player and player name

@@ -233,9 +233,10 @@ void NetworkTeamsSelectionBox::AddLocalTeam(uint i)
 
       // We have found a team which is not selected
       if (the_team != NULL) {
-	the_team->SetPlayerName(the_team_cfg.player_name);
-	the_team->SetNbCharacters(the_team_cfg.nb_characters);
-	selected = true;
+        the_team->SetPlayerName(the_team_cfg.player_name);
+        the_team->SetNbCharacters(the_team_cfg.nb_characters);
+        the_team->SetAIName(the_team_cfg.ai);
+        selected = true;
         SetLocalTeam(i, *the_team);
       }
 
@@ -274,6 +275,7 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team)
     a->Push(team.GetId());
     a->Push(team.GetPlayerName());
     a->Push(int(team.GetNbCharacters()));
+    a->Push(NO_AI_NAME);
     ActionHandler::GetInstance()->NewAction(a);
   }
 }

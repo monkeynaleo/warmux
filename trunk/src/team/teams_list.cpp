@@ -499,6 +499,7 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
   // set the player name and number of characters
   the_team->SetPlayerName(the_team_cfg.player_name);
   the_team->SetNbCharacters(the_team_cfg.nb_characters);
+  the_team->SetAIName(the_team_cfg.ai);
 }
 
 void TeamsList::UpdateTeam (const std::string& old_team_id,

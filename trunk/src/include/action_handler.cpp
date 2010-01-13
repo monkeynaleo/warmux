@@ -428,6 +428,7 @@ static void _Action_AddTeam(Action *a, uint player_id)
   the_team.id = a->PopString();
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
+  the_team.ai = a->PopString();
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
@@ -499,6 +500,7 @@ static void Action_Game_UpdateTeam (Action *a)
   the_team.id = a->PopString();
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
+  the_team.ai = a->PopString();
 
   GetTeamsList().UpdateTeam(old_team_id, the_team);
 
@@ -765,6 +767,7 @@ static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
   a.Push(team.id);
   a.Push(team.player_name);
   a.Push(int(team.nb_characters));
+  a.Push(team.ai);
 }
 
 static inline void add_player_info_to_action(Action& a, const Player& player)

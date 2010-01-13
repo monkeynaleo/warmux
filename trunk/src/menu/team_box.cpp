@@ -34,10 +34,10 @@
 #include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(W_UNDEF, false, false)
+  HBox(W_UNDEF, false, false),
+  ai_name(NO_AI_NAME)
 {
   associated_team = NULL;
-  is_local_ai = false;
 
   SetMargin(2);
   SetNoBorder();
@@ -116,7 +116,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 void TeamBox::ClearTeam()
 {
   associated_team = NULL;
-  is_local_ai = false;
+  ai_name = NO_AI_NAME;
 
   NeedRedrawing();
 }
@@ -230,7 +230,6 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
       previous_custom_team->SetVisible(false);
       next_custom_team->SetVisible(false);
     }
-    player_type->SetSurface(player_remote_surf);
   } else {
     team_name->SetFont(primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true, false);
     team_name->SetText(Format(_("%s Team"), _team.GetName().c_str()));
@@ -239,24 +238,39 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
       previous_custom_team->SetVisible(true);
       next_custom_team->SetVisible(true);
     }
-
-    if (is_local_ai) {
-      player_type->SetSurface(player_ai_surf);
-    } else {
-      player_type->SetSurface(player_local_surf);
-    }
   }
+  UpdatePlayerType();
   team_logo->SetSurface(_team.GetFlag());
 
   if (read_team_values) {
     player_name->SetText(_team.GetPlayerName());
     nb_characters->SetValue(_team.GetNbCharacters());
+    SetAIName(_team.GetAIName());
   } else if (old_team) {
     UpdateTeam(old_team->GetId());
   }
   previous_player_name = player_name->GetText();
 
   NeedRedrawing();
+}
+
+void TeamBox::SetAIName(const std::string name)
+{
+  ai_name = name;
+  UpdatePlayerType();
+}
+
+void TeamBox::UpdatePlayerType()
+{
+  if (associated_team->IsLocal()) {
+    if (ai_name != NO_AI_NAME) {
+      player_type->SetSurface(player_ai_surf);
+    } else {
+      player_type->SetSurface(player_local_surf);
+    }
+  } else {
+    player_type->SetSurface(player_remote_surf);
+  }
 }
 
 void TeamBox::UpdateTeam(const std::string& old_team_id) const
@@ -267,10 +281,10 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   // set the player name
   associated_team->SetPlayerName(player_name->GetText());
 
+  associated_team->SetAIName(ai_name);
+
   // change only for local teams...
   if (associated_team->IsLocal()) {
-    associated_team->SetUseAI(is_local_ai);
-
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
       Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM);
@@ -303,13 +317,5 @@ void TeamBox::SwitchPlayerType()
   if (!associated_team)
     return;
 
-  if (associated_team->IsLocal()) {
-    is_local_ai = !is_local_ai;
-
-    if (is_local_ai) {
-      player_type->SetSurface(player_ai_surf);
-    } else {
-      player_type->SetSurface(player_local_surf);
-    }
-  }
+  SetAIName((ai_name == NO_AI_NAME) ? DEFAULT_AI_NAME : NO_AI_NAME);
 }

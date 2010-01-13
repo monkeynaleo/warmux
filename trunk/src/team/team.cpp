@@ -47,7 +47,7 @@
 
 
 Team::Team (const std::string& teams_dir, const std::string& id)
-  : energy(this), m_teams_dir(teams_dir), m_id(id), ai(NULL), use_ai(false), remote(false), abandoned(false)
+  : energy(this), m_teams_dir(teams_dir), m_id(id), ai(NULL), ai_name(NO_AI_NAME), remote(false), abandoned(false)
 {
   std::string nomfich;
   XmlReader   doc;
@@ -463,6 +463,7 @@ void Team::SetDefaultPlayingConfig()
   SetRemote(false);
   SetPlayerName("");
   SetNbCharacters(GameMode::GetInstance()->nb_characters);
+  SetAIName(NO_AI_NAME);
 }
 
 void Team::AttachCustomTeam(CustomTeam *custom_team)
