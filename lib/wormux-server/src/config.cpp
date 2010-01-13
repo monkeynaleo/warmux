@@ -219,7 +219,7 @@ void BasicConfig::SetDefault(const std::string & name, const int & value)
 
 void BasicConfig::SetDefault(const std::string & name, const std::string & value)
 {
-  bool val;
+  std::string val;
   if( ! Get(name, val) )
     {
       DPRINT(INFO, "Setting to default value : %s", value.c_str());
