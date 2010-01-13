@@ -32,6 +32,7 @@ public:
   std::string id;
   std::string player_name;
   uint nb_characters;
+  std::string ai;
 };
 
 #endif

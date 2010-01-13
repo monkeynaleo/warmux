@@ -433,18 +433,18 @@ void Config::LoadXml(const xmlNode *xml)
 
     const xmlNode *team;
 
-    while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL)
-      {
-	ConfigTeam one_team;
-	XmlReader::ReadString(team, "id", one_team.id);
-	XmlReader::ReadString(team, "player_name", one_team.player_name);
-	XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+    while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL) {
+      ConfigTeam one_team;
+      XmlReader::ReadString(team, "id", one_team.id);
+      XmlReader::ReadString(team, "player_name", one_team.player_name);
+      XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+      XmlReader::ReadString(team, "ai", one_team.ai);
 
-	teams.push_back(one_team);
+      teams.push_back(one_team);
 
-	// get next team
-	i++;
-      }
+      // get next team
+      i++;
+    }
   }
 
   //=== Video ===
@@ -496,18 +496,18 @@ void Config::LoadXml(const xmlNode *xml)
       int i = 0;
       const xmlNode *team;
 
-      while ((team = XmlReader::GetMarker(sub_elem, "team_" + ulong2str(i))) != NULL)
-	{
-	  ConfigTeam one_team;
-	  XmlReader::ReadString(team, "id", one_team.id);
-	  XmlReader::ReadString(team, "player_name", one_team.player_name);
-	  XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+      while ((team = XmlReader::GetMarker(sub_elem, "team_" + ulong2str(i))) != NULL) {
+        ConfigTeam one_team;
+        XmlReader::ReadString(team, "id", one_team.id);
+        XmlReader::ReadString(team, "player_name", one_team.player_name);
+        XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+        one_team.ai = NO_AI_NAME;
 
-	  network_local_teams.push_back(one_team);
+        network_local_teams.push_back(one_team);
 
-	  // get next team
-	  i++;
-	}
+        // get next team
+        i++;
+      }
     }
   }
 
@@ -586,6 +586,7 @@ bool Config::SaveXml(bool save_current_teams)
         config.id = (**it).GetId();
         config.player_name = (**it).GetPlayerName();
         config.nb_characters = (**it).GetNbCharacters();
+        config.ai = (**it).GetAIName();
 
         teams.push_back(config);
       }
@@ -603,6 +604,7 @@ bool Config::SaveXml(bool save_current_teams)
        doc.WriteElement(a_team, "id", (*it).id);
        doc.WriteElement(a_team, "player_name", (*it).player_name);
        doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+       doc.WriteElement(a_team, "ai", (*it).ai);
     }
   }
 
