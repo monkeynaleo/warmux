@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
+#include <iostream>
 #include <string>
 #include <fstream>
 #include "config.h"
@@ -25,7 +26,7 @@ Config config;
 
 void Config::Load(const std::string & config_file)
 {
-  Load(config_file);
+  BasicConfig::Load(config_file);
   SetDefault("port", 9997);
   SetDefault("working_dir", "wormux_log/");
   SetDefault("chroot", true);
@@ -33,5 +34,6 @@ void Config::Load(const std::string & config_file)
   SetDefault("chroot_uid", 500);
   SetDefault("connexion_max", -2);
   SetDefault("local", false);
+  SetDefault("verbose", true);
   Display();
 }

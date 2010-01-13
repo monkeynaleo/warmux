@@ -81,8 +81,10 @@ void Env::SetWorkingDir()
     PRINT_FATAL_ERROR;
 
   DPRINT(INFO, "Entering folder %s", working_dir.c_str());
-  if (chdir(working_dir.c_str()) == -1)
-    PRINT_FATAL_ERROR;
+  if (chdir(working_dir.c_str()) == -1) {
+    DPRINTMSG(stderr, "ERROR: %s: %s", working_dir.c_str(), strerror(errno));
+    exit(EXIT_FAILURE);
+  }
 }
 
 void Env::SetMaxConnection()
