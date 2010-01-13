@@ -168,8 +168,8 @@
     </image>
   </sprite>
 
-  <surface name="player_local_human" file="player_local_human.png" />
-  <surface name="player_local_ai" file="player_local_ai.png" />
+  <surface name="player_local_human" file="menu/player_local_human.png" />
+  <surface name="player_local_ai" file="menu/player_local_ai.png" />
   <surface name="player_remote_human" file="menu/player_remote_human.png" />
   <surface name="player_remote_ai" file="menu/player_remote_ai.png" />
  </section>
