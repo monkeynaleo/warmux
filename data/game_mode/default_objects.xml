@@ -15,7 +15,8 @@
 
   <bonus_box>
     <mass>100.0</mass>
-    <wind_factor>13.0</wind_factor>
+    <!-- A wind factor of 0 reduce the chance that bug #15034 occurs. -->
+    <wind_factor>0.0</wind_factor>
     <air_resist_factor>16.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
@@ -24,7 +25,8 @@
 
   <medkit>
     <mass>100.0</mass>
-    <wind_factor>13.0</wind_factor>
+    <!-- A wind factor of 0 reduce the chance that bug #15034 occurs. -->
+    <wind_factor>0.0</wind_factor>
     <air_resist_factor>16.0</air_resist_factor>
     <gravity_factor>1.2</gravity_factor>
     <rebounding>false</rebounding>
