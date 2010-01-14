@@ -357,14 +357,13 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   PhysicalObj * aim = GetObjectAt(explosion_pos);
   double rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
-  if (aim == &enemy || (aim == NULL && explodes_on_contact)) {
+  if (aim == &enemy || explodes_on_contact) {
     double expected_additional_distance = explodes_on_contact ? 0.0 : 30;
     rating = RateExplosion(shooter, explosion_pos, weapon->cfg(), expected_additional_distance);
 
     // Explosions remove ground and make it possible to hit the characters behind the ground.
     // That is why ground hits get rewared with a small positive rating.
-    if (aim == NULL) {
-      ASSERT(explodes_on_contact);
+    if (explodes_on_contact) {
       double distance = explosion_pos.Distance(enemy.GetCenter());
       // Give more bonus if the explosion is near the target.
       // This will make the AI focus on one character
