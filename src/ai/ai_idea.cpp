@@ -99,9 +99,6 @@ double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
 
 double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config, double expected_additional_distance)
 {
-  // Explosions remove ground and make it possible to hit the characters behind the ground.
-  // That is why each explosion gets a small positive rating.
-  double ground_bonus = MIN_GROUND_BONUS;
   double rating = 0.0;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
@@ -123,10 +120,8 @@ double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
       rating -= RateDamageDoneToEnemy(min_damage, max_damage, *character);
     } else {
       rating += RateDamageDoneToEnemy(min_damage, max_damage, *character);
-      ground_bonus = max(ground_bonus, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
     }
   }
-  rating += ground_bonus;
   return rating;
 }
 
@@ -365,6 +360,17 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   if (aim == &enemy || (aim == NULL && explodes_on_contact)) {
     double expected_additional_distance = explodes_on_contact ? 0.0 : 30;
     rating = RateExplosion(shooter, explosion_pos, weapon->cfg(), expected_additional_distance);
+
+    // Explosions remove ground and make it possible to hit the characters behind the ground.
+    // That is why ground hits get rewared with a small positive rating.
+    if (aim == NULL) {
+      ASSERT(explodes_on_contact);
+      double distance = explosion_pos.Distance(enemy.GetCenter());
+      // Give more bonus if the explosion is near the target.
+      // This will make the AI focus on one character
+      double ground_bonus = max(MIN_GROUND_BONUS, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
+      rating += ground_bonus;
+    }
   } else {
     return NULL;
   }
