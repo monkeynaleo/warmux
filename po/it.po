@@ -649,7 +649,7 @@ msgstr "Mostra questo messaggio"
 
 #: src/menu/network_menu.cpp:132
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Non dimenticarti di convalidare una volta scelto il tuo team!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -1061,10 +1061,9 @@ msgid "Music?"
 msgstr "Musica?"
 
 #: src/game/game.cpp:167
-#, fuzzy
 #| msgid "Network Game"
 msgid "Network"
-msgstr "Gioco online"
+msgstr "Rete"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1425,7 +1424,8 @@ msgstr "Il server rifiuta la connessione: password errata!"
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
-msgstr ""
+msgstr "L'arma %s ha munizioni infinite, ma le scatole bonus possono "
+"contenere munizioni per essa!"
 
 #: src/menu/network_menu.cpp:241
 #, c-format
@@ -1511,10 +1511,9 @@ msgid "Waiting for %s"
 msgstr "In attesa di %s"
 
 #: src/game/game.cpp:166
-#, fuzzy
 #| msgid "Waiting for %s"
 msgid "Waiting for remote players"
-msgstr "In attesa di %s"
+msgstr "In attesa dei giocatori remoti"
 
 #: src/menu/network_menu.cpp:460
 msgid "Waiting for the server. All you can do is cancel or chat!"
@@ -1535,10 +1534,10 @@ msgstr "Sito web: "
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
 #: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
+#, c-format
 #| msgid "Welcome to %s!"
 msgid "Welcome to %s on %s!"
-msgstr "Benvenuto in %s"
+msgstr "Benvenuto in %s su %s!"
 
 #: src/game/game.cpp:970
 #, c-format
