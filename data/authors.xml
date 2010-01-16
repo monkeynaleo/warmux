@@ -735,6 +735,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>SafranCL</nickname>
+	<name>Leinier Cruz Salfran</name>
+	<description>Index server: ability to go to background and to show/hide debug messages</description>
+	<email>salfrancl_AT_yahoo_DOT_es</email>
+	<country>Cuba</country>
+      </author>
+      <author>
 	<nickname>Sami</nickname>
 	<name>Sami PIETILA</name>
 	<description>Wrote a patch for using two sinus waves to have nice water effect</description>
