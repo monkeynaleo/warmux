@@ -67,16 +67,25 @@ const std::string& Player::GetNickname() const
   return nickname;
 }
 
+std::list<ConfigTeam>::iterator Player::FindTeamWithId(const std::string team_id) {
+  std::list<ConfigTeam>::iterator it = owned_teams.begin();
+
+  while (it != owned_teams.end() && it->id != team_id) {
+    it++;
+  }
+  return it;
+}
+
 void Player::UpdateNickname()
 {
   std::string nick;
 
-  std::map<const std::string, ConfigTeam>::iterator it;
+  std::list<ConfigTeam>::iterator it;
   for (it = owned_teams.begin(); it != owned_teams.end(); it++) {
     if (nick != "")
       nick += "+";
 
-    nick += it->second.player_name;
+    nick += it->player_name;
   }
 
   if (nick == "")
@@ -87,54 +96,38 @@ void Player::UpdateNickname()
 
 bool Player::AddTeam(const ConfigTeam& team_conf)
 {
-  std::pair<std::map<const std::string, ConfigTeam>::iterator, bool> r;
-  r = owned_teams.insert(std::make_pair(team_conf.id, team_conf));
-  if (!r.second) {
+  if (FindTeamWithId(team_conf.id) != owned_teams.end()) {
     ASSERT(false);
     return false;
   }
+  owned_teams.push_back(team_conf);
 
-  UpdateNickname();
-
-  return r.second;
-}
-
-bool Player::RemoveTeam(const std::string& team_id)
-{
-  size_t previous_size;
-  previous_size = owned_teams.size();
-  owned_teams.erase(team_id);
-
-  if (previous_size == owned_teams.size()) {
-    ASSERT(false);
-    return false;
-  }
   UpdateNickname();
 
   return true;
 }
 
+bool Player::RemoveTeam(const std::string& team_id)
+{
+  std::list<ConfigTeam>::iterator it = FindTeamWithId(team_id);
+  if (it == owned_teams.end()) {
+    ASSERT(false);
+    return false;
+  }
+  owned_teams.erase(it);
+  return true;
+}
+
 bool Player::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf)
 {
-  if (old_team_id == team_conf.id) {
-
-    if (owned_teams.find(team_conf.id) == owned_teams.end()) {
-      ASSERT(false);
-      return false;
-    }
-
-    owned_teams[team_conf.id] = team_conf;
-    UpdateNickname();
-
-    return true;
+  std::list<ConfigTeam>::iterator it = FindTeamWithId(old_team_id);
+  if (it == owned_teams.end()) {
+    ASSERT(false);
+    return false;
   }
-
-  if (!RemoveTeam(old_team_id))
-    return false;
-
-  if (!AddTeam(team_conf))
-    return false;
-
+  ConfigTeam& stored_team_conf = *it;
+  stored_team_conf = team_conf;
+  UpdateNickname();
   return true;
 }
 
@@ -143,7 +136,7 @@ uint Player::GetNbTeams() const
   return owned_teams.size();
 }
 
-const std::map<const std::string, ConfigTeam>& Player::GetTeams() const
+const std::list<ConfigTeam>& Player::GetTeams() const
 {
   return owned_teams;
 }

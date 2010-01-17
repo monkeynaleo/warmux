@@ -539,9 +539,9 @@ static void Action_Game_DelTeam (Action *a)
 
 void WORMUX_DisconnectPlayer(Player& player)
 {
-  std::map<const std::string, ConfigTeam>::iterator it = player.owned_teams.begin();
+  std::list<ConfigTeam>::iterator it = player.owned_teams.begin();
   while (it != player.owned_teams.end()) {
-    std::string team_id = it->first;
+    std::string team_id = it->id;
 
     if (Game::IsRunning()) {
       player.RemoveTeam(team_id);
@@ -775,9 +775,9 @@ static inline void add_player_info_to_action(Action& a, const Player& player)
   a.Push(int(player.GetId()));
   a.Push(int(player.GetNbTeams()));
 
-  std::map<const std::string, ConfigTeam>::const_iterator team;
+  std::list<ConfigTeam>::const_iterator team;
   for (team = player.GetTeams().begin(); team != player.GetTeams().end(); team++) {
-    add_team_config_to_action(a, team->second);
+    add_team_config_to_action(a, *team);
   }
 }
 
