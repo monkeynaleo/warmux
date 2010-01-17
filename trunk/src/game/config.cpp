@@ -504,7 +504,10 @@ void Config::LoadXml(const xmlNode *xml)
         XmlReader::ReadString(team, "id", one_team.id);
         XmlReader::ReadString(team, "player_name", one_team.player_name);
         XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
-        one_team.ai = NO_AI_NAME;
+        // The ai element needs a defaut as it has been added afterwards:
+        if (!XmlReader::ReadString(team, "ai", one_team.ai)) {
+          one_team.ai = NO_AI_NAME;
+        }
 
         network_local_teams.push_back(one_team);
 
@@ -670,6 +673,7 @@ bool Config::SaveXml(bool save_current_teams)
        doc.WriteElement(a_team, "id", (*it).id);
        doc.WriteElement(a_team, "player_name", (*it).player_name);
        doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+       doc.WriteElement(a_team, "ai", (*it).ai);
     }
 
   //=== Misc ===
@@ -727,13 +731,13 @@ void Config::SetNetworkLocalTeams()
 
   for (int i=0; it != end; ++it, i++)
     {
-      if ((**it).IsLocalHuman())
+      if ((**it).IsLocal())
 	{
 	  ConfigTeam config;
 	  config.id = (**it).GetId();
 	  config.player_name = (**it).GetPlayerName();
 	  config.nb_characters = (**it).GetNbCharacters();
-
+	  config.ai = (**it).GetAIName();
 	  network_local_teams.push_back(config);
 	}
     }
