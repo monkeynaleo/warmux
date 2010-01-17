@@ -292,6 +292,24 @@ void Network::RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it)
   SDL_UnlockMutex(cpus_lock);
 }
 
+
+Player * Network::LockRemoteHostsAndGetPlayer(uint player_id)
+{
+  SDL_LockMutex(cpus_lock);
+  Player * player = NULL;
+
+  if (GetPlayer().GetId() == player_id)
+    player = &(GetPlayer());
+
+  std::list<DistantComputer*>::const_iterator it = cpu.begin();
+  while ((player == NULL) && (it != cpu.end())) {
+    player = (*it)->GetPlayer(player_id);
+    it++;
+  }
+  // Stay locked as the player must belong to a valid host while it gets processed.
+  return player;
+}
+
 //-----------------------------------------------------------------------------
 
 // Static method

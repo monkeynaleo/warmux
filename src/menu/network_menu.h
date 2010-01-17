@@ -67,6 +67,8 @@ class NetworkMenu : public Menu
   virtual bool signal_cancel();
   virtual void signal_begin_run();
 
+ void RequestSavedTeams();
+
 public:
   NetworkMenu();
   ~NetworkMenu();
@@ -76,6 +78,8 @@ public:
   void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
   void SetGameMasterCallback();
+  Team * FindUnusedTeam(const std::string default_team_id);
+  bool HasOpenTeamSlot();
 
   void ReceiveMsgCallback(const std::string& msg);
 };

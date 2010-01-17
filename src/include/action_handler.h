@@ -33,6 +33,7 @@
 // Forward declarations
 struct SDL_mutex;
 class Player;
+class TeamConfig;
 
 class ActionHandler : public WActionHandler, public Singleton<ActionHandler>
 {
@@ -44,6 +45,8 @@ private:
 public:
   void NewAction(Action* a, bool repeat_to_network=true);
   void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
+
+  void NewRequestTeamAction(const ConfigTeam & team);
 
   void ExecFrameLessActions();
   bool ExecActionsForOneFrame();
