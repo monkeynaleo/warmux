@@ -134,6 +134,7 @@ public:
   const std::string& GetPassword() const;
   Player& GetPlayer();
   const Player& GetPlayer() const;
+  Player * LockRemoteHostsAndGetPlayer(uint player_id);
 
   std::list<DistantComputer*>& GetRemoteHosts();
 

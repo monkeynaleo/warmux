@@ -421,7 +421,7 @@ static Player* _Action_GetPlayer(Action *a, uint player_id)
   return player;
 }
 
-static void _Action_AddTeam(Action *a, uint player_id)
+static void _Action_AddTeam(Action *a, Player* player)
 {
   ConfigTeam the_team;
 
@@ -432,17 +432,15 @@ static void _Action_AddTeam(Action *a, uint player_id)
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
-  bool local_team = (!Network::IsConnected() || !a->GetCreator());
+  bool local_team = (!Network::IsConnected() || player == &(Network::GetInstance()->GetPlayer()));
 
   GetTeamsList().AddTeam(the_team, local_team);
 
   if (Network::GetInstance()->network_menu != NULL)
     Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 
-  Player* player = _Action_GetPlayer(a, player_id);
-  if (player) {
-    player->AddTeam(the_team);
-  }
+  ASSERT (player);
+  player->AddTeam(the_team);
 }
 
 static void Action_Game_Info(Action *a)
@@ -466,8 +464,9 @@ static void Action_Game_Info(Action *a)
 
     uint nb_teams = a->PopInt();
 
+    Player* player = _Action_GetPlayer(a, player_id);
     for (uint j = 0; j < nb_teams; j++) {
-      _Action_AddTeam(a, player_id);
+      _Action_AddTeam(a, player);
     }
   }
 }
@@ -482,12 +481,11 @@ static void Action_Game_SetMap (Action *a)
 static void Action_Game_AddTeam (Action *a)
 {
   uint player_id = a->PopInt();
+  ASSERT(Network::GetInstance()->network_menu->HasOpenTeamSlot());
 
-  if (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL) {
-    a->GetCreator()->AddPlayer(player_id);
-  }
-
-  _Action_AddTeam(a, player_id);
+  Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
+  _Action_AddTeam(a, player);
+  Network::GetInstance()->UnlockRemoteHosts();
 }
 
 static void Action_Game_UpdateTeam (Action *a)
@@ -529,13 +527,86 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
 
 static void Action_Game_DelTeam (Action *a)
 {
-  Player *player = NULL;
   uint player_id = a->PopInt();
   std::string team_id = a->PopString();
 
-  player = _Action_GetPlayer(a, player_id);
+  Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
   _Action_DelTeam(player, team_id);
+  Network::GetInstance()->UnlockRemoteHosts();
 }
+
+static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
+{
+  a.Push(team.id);
+  a.Push(team.player_name);
+  a.Push(int(team.nb_characters));
+  a.Push(team.ai);
+}
+
+void ActionHandler::NewRequestTeamAction(const ConfigTeam & team)
+{
+  int player_id = int(Network::GetInstance()->GetPlayer().GetId());
+  Action * a = new Action(Action::ACTION_GAME_REQUEST_TEAM);
+  a->Push(player_id);
+  add_team_config_to_action(*a, team);
+  NewAction(a);
+}
+
+static void Action_Game_RequestTeam(Action *a)
+{
+  if (!Network::GetInstance()->IsGameMaster())
+    return;
+
+  if (!Network::GetInstance()->network_menu->HasOpenTeamSlot())
+    return;
+
+  int player_id = a->PopInt();
+  const std::string team_id = a->PopString();
+  const std::string player_name = a->PopString();
+  int nb_characters = a->PopInt();
+  const std::string ai = a->PopString();
+
+  Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
+  if (player != NULL) {
+    if (int(player->GetTeams().size()) < GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer()) {
+      Team * team = Network::GetInstance()->network_menu->FindUnusedTeam(team_id);
+      Action action_to_send(Action::ACTION_GAME_ADD_TEAM);
+      action_to_send.Push(player_id);
+      action_to_send.Push(team->GetId());
+      action_to_send.Push(player_name);
+      action_to_send.Push(nb_characters);
+      action_to_send.Push(ai);
+
+      Network::GetInstance()->SendActionToAll(action_to_send);
+      // Add the team before progressing further actions,
+      // as the next action could request another team which would be then the same team.
+      Action_Game_AddTeam(&action_to_send); // empties the actions stack...
+    }
+  }
+  Network::GetInstance()->UnlockRemoteHosts();
+}
+
+static void Action_Game_RequestTeamRemoval(Action *a)
+{
+  if (!Network::GetInstance()->IsGameMaster())
+    return;
+
+  int player_id = a->PopInt();
+  Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
+  if (player->GetNbTeams() > 0) {
+    const std::string& team_id = player->GetTeams().back().id;
+
+    Action action_to_send(Action::ACTION_GAME_DEL_TEAM);
+    action_to_send.Push(player_id);
+    action_to_send.Push(team_id);
+    Network::GetInstance()->SendActionToAll(action_to_send);
+    // Remove the team before progressing further actions,
+    // as the next action could request another team which could then fail as the team slots are full.
+    Action_Game_DelTeam(&action_to_send); // empties the actions stack...
+  }
+  Network::GetInstance()->UnlockRemoteHosts();
+}
+
 
 void WORMUX_DisconnectPlayer(Player& player)
 {
@@ -762,14 +833,6 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
     JukeBox::GetInstance()->Play("default", "menu/newcomer");
 }
 
-static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
-{
-  a.Push(team.id);
-  a.Push(team.player_name);
-  a.Push(int(team.nb_characters));
-  a.Push(team.ai);
-}
-
 static inline void add_player_info_to_action(Action& a, const Player& player)
 {
   a.Push(int(player.GetId()));
@@ -942,6 +1005,8 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_REQUEST_TEAM, "GAME_request_team", &Action_Game_RequestTeam);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_REQUSET_TEAM_REMOVAL, "GAME_request_team_removal", &Action_Game_RequestTeamRemoval);
 
   // ########################################################
   // Character's move

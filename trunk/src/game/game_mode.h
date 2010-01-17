@@ -98,6 +98,7 @@ public:
   const std::string& GetName() const;
 
   const xmlNode* GetWeaponsXml() { return weapons_xml; }
+  int GetMaxTeamsPerNetworkPlayer() { return max_teams -1; }
 
   bool Load(void);
 

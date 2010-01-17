@@ -23,6 +23,7 @@
 #define NETWORK_TEAMS_SELECTION_BOX_H
 
 #include <vector>
+#include <WORMUX_team_config.h>
 #include "menu/teams_selection_box.h"
 
 class Team;
@@ -35,15 +36,17 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
   /**********************************************/
 
-  void __SetNbLocalTeams(uint nb_teams, uint previous_nb);
-  void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team);
 
-  void SetDefaultPlayerName(Team& team);
+  const std::string GetLocalPlayerName();
 
   void PrevTeam(uint i);
   void NextTeam(uint i);
+
+  bool IsSelected(Team * team);
+
+  void RequestTeamRemoval();
 
  public:
   NetworkTeamsSelectionBox(const Point2i &size);
@@ -55,8 +58,9 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   void AddTeamCallback(const std::string& team_id);
   void UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id);
   void DelTeamCallback(const std::string& team_id);
+  Team * FindUnusedTeam(const std::string default_team_id);
+  bool HasOpenTeamSlot();
+  void RequestTeam();
 
-  void SetMaxNbLocalPlayers(uint nb);
-  void SetNbLocalTeams(uint nb);
 };
 #endif

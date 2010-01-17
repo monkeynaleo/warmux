@@ -19,11 +19,13 @@
  * Game menu
  *****************************************************************************/
 #include <WORMUX_index_server.h>
+#include <WORMUX_team_config.h>
 
 #include "menu/network_menu.h"
 
 #include "menu/network_teams_selection_box.h"
 #include "menu/map_selection_box.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "graphic/video.h"
@@ -75,8 +77,6 @@ NetworkMenu::NetworkMenu() :
   team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
   widgets.Pack();
-
-  team_box->SetMaxNbLocalPlayers(GameMode::GetInstance()->max_teams - 1);
 
   // ################################################
   // ##  MAP SELECTION
@@ -165,8 +165,21 @@ NetworkMenu::~NetworkMenu()
 void NetworkMenu::signal_begin_run()
 {
   ActionHandler::GetInstance()->ExecFrameLessActions();
+  RequestSavedTeams();
+}
 
-  team_box->SetNbLocalTeams(1);
+void NetworkMenu::RequestSavedTeams()
+{
+  const std::list<ConfigTeam> & team_list = Config::GetInstance()->AccessNetworkTeamsList();
+  std::list<ConfigTeam>::const_iterator it;
+
+  if (team_list.size() > 0) {
+    for (it = team_list.begin(); it != team_list.end(); it++) {
+      ActionHandler::GetInstance()->NewRequestTeamAction(*it);
+    }
+  } else {
+    team_box->RequestTeam();
+  }
 }
 
 void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
@@ -410,6 +423,16 @@ void NetworkMenu::SetGameMasterCallback()
 void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
 {
   msg_box->NewMessage(msg);
+}
+
+Team * NetworkMenu::FindUnusedTeam(const std::string default_team_id)
+{
+  return team_box->FindUnusedTeam(default_team_id);
+}
+
+bool NetworkMenu::HasOpenTeamSlot()
+{
+  return team_box->HasOpenTeamSlot();
 }
 
 // to be call from NetworkMenu::WaitingForGameMaster()
