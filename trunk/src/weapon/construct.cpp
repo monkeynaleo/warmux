@@ -126,6 +126,10 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
   dst = mouse_pos;
 
+  // Draw it so that GetSizeMax() returns the correct values.
+  construct_spr->SetRotation_rad(angle);
+  construct_spr->Draw(dst - construct_spr->GetSize() / 2);
+
   Point2i test_target = dst - construct_spr->GetSizeMax() / 2;
   Rectanglei rect(test_target, construct_spr->GetSizeMax());
 
@@ -143,9 +147,6 @@ void Construct::ChooseTarget(Point2i mouse_pos)
     if ((obj->GetTestRect()).Intersect(rect))
       return;
   }
-
-  construct_spr->SetRotation_rad(angle);
-  construct_spr->Draw(dst - construct_spr->GetSize() / 2);
 
   target_chosen = true;
   Shoot();
