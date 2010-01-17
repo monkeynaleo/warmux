@@ -23,7 +23,7 @@
 #define WORMUX_PLAYER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
-#include <map>
+#include <list>
 #include <string>
 #include <WORMUX_types.h>
 #include <WORMUX_team_config.h>
@@ -36,9 +36,9 @@ class Player
 private:
   uint player_id;
   std::string nickname;
-  std::map<const std::string, ConfigTeam> owned_teams;
+  std::list<ConfigTeam> owned_teams;
   void UpdateNickname();
-
+  std::list<ConfigTeam>::iterator FindTeamWithId(const std::string team_id);
 public:
   Player(uint player_id, const std::string& nickname);
   Player();
@@ -56,7 +56,7 @@ public:
   bool UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf);
 
   uint GetNbTeams() const;
-  const std::map<const std::string, ConfigTeam>& GetTeams() const;
+  const std::list<ConfigTeam> & GetTeams() const;
 
   static std::string GetDefaultNickname();
 };
