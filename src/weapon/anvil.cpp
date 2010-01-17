@@ -69,6 +69,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
+  explode_with_timeout = false;
   SetTestRect(0, 0, 0, 0);
 }
 
