@@ -158,6 +158,7 @@ Member::~Member()
 
 void Member::RotateSprite()
 {
+  bool refreshSprite = false;
 
   if (spr->GetRotation_rad() != angle_rad) {
     spr->SetRotation_rad(angle_rad);
@@ -172,7 +173,6 @@ void Member::RotateSprite()
 
   if (refreshSprite) {
     spr->RefreshSurface();
-    refreshSprite = false;
   }
 }
 
