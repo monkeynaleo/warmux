@@ -49,7 +49,6 @@ private:
   std::map<std::string, v_attached> attached_members;
   Point2f pos;
   Point2f scale;
-  bool refreshSprite;
 
 protected:
   Sprite*     spr;
