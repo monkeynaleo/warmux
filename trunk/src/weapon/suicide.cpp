@@ -35,7 +35,9 @@ const uint SUICIDE_SOUND_DURATION_IN_MS = 3600;
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
   UpdateTranslationStrings();
-
+  // The m_time_between_each_shot gets used here
+  // to prevent that the weapon gets deselected before the character explodes.
+  m_time_between_each_shot = SUICIDE_SOUND_DURATION_IN_MS;
   m_category = DUEL;
 }
 
