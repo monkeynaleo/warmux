@@ -67,7 +67,8 @@ const std::string& Player::GetNickname() const
   return nickname;
 }
 
-std::list<ConfigTeam>::iterator Player::FindTeamWithId(const std::string team_id) {
+std::list<ConfigTeam>::iterator Player::FindTeamWithId(const std::string team_id)
+{
   std::list<ConfigTeam>::iterator it = owned_teams.begin();
 
   while (it != owned_teams.end() && it->id != team_id) {
