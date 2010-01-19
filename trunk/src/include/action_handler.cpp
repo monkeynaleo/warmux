@@ -484,7 +484,9 @@ static void Action_Game_AddTeam (Action *a)
   ASSERT(Network::GetInstance()->network_menu->HasOpenTeamSlot());
 
   Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
-  _Action_AddTeam(a, player);
+  if (player) {
+    _Action_AddTeam(a, player);
+  }
   Network::GetInstance()->UnlockRemoteHosts();
 }
 
@@ -531,7 +533,9 @@ static void Action_Game_DelTeam (Action *a)
   std::string team_id = a->PopString();
 
   Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
-  _Action_DelTeam(player, team_id);
+  if (player) {
+    _Action_DelTeam(player, team_id);
+  }
   Network::GetInstance()->UnlockRemoteHosts();
 }
 
@@ -567,7 +571,7 @@ static void Action_Game_RequestTeam(Action *a)
   const std::string ai = a->PopString();
 
   Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
-  if (player != NULL) {
+  if (player) {
     if (int(player->GetTeams().size()) < GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer()) {
       Team * team = Network::GetInstance()->network_menu->FindUnusedTeam(team_id);
       Action action_to_send(Action::ACTION_GAME_ADD_TEAM);
