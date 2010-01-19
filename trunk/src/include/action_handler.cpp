@@ -889,8 +889,13 @@ void SendInitialGameInfo(DistantComputer* client)
 // Only used to notify clients that someone connected to the server
 static void Action_Info_ClientConnect(Action *a)
 {
+  int player_id = a->PopInt();
   std::string hostname = a->PopString();
   std::string nicknames = a->PopString();
+
+  ASSERT (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
+  a->GetCreator()->AddPlayer(player_id);
+
 
   _Info_ConnectHost(hostname, nicknames);
 
@@ -908,6 +913,9 @@ void WORMUX_ConnectHost(DistantComputer& host)
 
   if (Network::GetInstance()->IsServer()) {
     Action a(Action::ACTION_INFO_CLIENT_CONNECT);
+    ASSERT(host.GetPlayers().size() == 1);
+    int player_id = host.GetPlayers().back().GetId();
+    a.Push(player_id);
     a.Push(hostname);
     a.Push(nicknames);
 
