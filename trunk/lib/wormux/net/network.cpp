@@ -24,7 +24,7 @@
 
 // Standard header, only needed for the following method
 #ifdef WIN32
-#  include <winsock2.h>
+#  include <ws2tcpip.h>
 #else
 #  include <sys/socket.h>
 #  include <netdb.h>
@@ -96,12 +96,10 @@ typedef int SOCKET;
 # define SOCKET_ERROR    (-1)
 # define INVALID_SOCKET  (-1)
 # define closesocket(fd) close(fd)
-
-// For Mac OS X
-#ifndef AI_NUMERICSERV
-#define AI_NUMERICSERV 0
 #endif
 
+#ifndef AI_NUMERICSERV
+#define AI_NUMERICSERV 0
 #endif
 
 // static method

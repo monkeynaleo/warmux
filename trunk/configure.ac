@@ -314,7 +314,10 @@ AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
 AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL_net], [SDLNet_Init],,check_sdl_net="no")
-if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32 -luser32"; fi
+if test "${WIN32}" = "yes"; then
+  LIBS="$LIBS -lwsock32 -lws2_32 -luser32"
+  CXXFLAGS="$CXXFLAGS -D_WIN32_WINNT=0x501"
+fi
 
 AC_MSG_CHECKING(for libxml2)
 
