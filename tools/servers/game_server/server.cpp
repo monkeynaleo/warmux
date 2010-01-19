@@ -528,6 +528,9 @@ void WORMUX_ConnectHost(DistantComputer& host)
   std::string nicknames = host.GetNicknames();
 
   Action a(Action::ACTION_INFO_CLIENT_CONNECT);
+  ASSERT(host.GetPlayers().size() == 1);
+  int player_id = host.GetPlayers().back().GetId();
+  a.Push(player_id);
   a.Push(hostname);
   a.Push(nicknames);
 
