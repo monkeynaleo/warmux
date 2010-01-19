@@ -116,6 +116,7 @@ bool Player::RemoveTeam(const std::string& team_id)
     return false;
   }
   owned_teams.erase(it);
+  UpdateNickname();
   return true;
 }
 
