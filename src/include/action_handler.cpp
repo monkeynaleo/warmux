@@ -1006,7 +1006,7 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
   ActionHandler::GetInstance()->Register (Action::ACTION_GAME_REQUEST_TEAM, "GAME_request_team", &Action_Game_RequestTeam);
-  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_REQUSET_TEAM_REMOVAL, "GAME_request_team_removal", &Action_Game_RequestTeamRemoval);
+  ActionHandler::GetInstance()->Register (Action::ACTION_GAME_REQUEST_TEAM_REMOVAL, "GAME_request_team_removal", &Action_Game_RequestTeamRemoval);
 
   // ########################################################
   // Character's move

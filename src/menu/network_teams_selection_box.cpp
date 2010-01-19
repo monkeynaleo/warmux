@@ -204,7 +204,7 @@ void NetworkTeamsSelectionBox::RequestTeam()
 void NetworkTeamsSelectionBox::RequestTeamRemoval()
 {
   int player_id = int(Network::GetInstance()->GetPlayer().GetId());
-  Action* a = new Action(Action::ACTION_GAME_REQUSET_TEAM_REMOVAL);
+  Action* a = new Action(Action::ACTION_GAME_REQUEST_TEAM_REMOVAL);
   a->Push(player_id);
   ActionHandler::GetInstance()->NewAction(a);
 }
