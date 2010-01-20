@@ -56,8 +56,10 @@ private:
   std::list<Player> players;
 
 public:
+  DistantComputer(WSocket* new_sock);
   DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id);
   DistantComputer(WSocket* new_sock, const std::string& nickname, uint game_id, uint initial_player_id);
+
   ~DistantComputer();
 
   bool SocketReady() const;

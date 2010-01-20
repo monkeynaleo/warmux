@@ -28,6 +28,14 @@
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
+DistantComputer::DistantComputer(WSocket* new_sock) :
+  sock(new_sock),
+  state(DistantComputer::STATE_NOT_INITIALIZED),
+  game_id(0)
+{
+  WORMUX_ConnectHost(*this);
+}
+
 DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname, uint _game_id, uint initial_player_id) :
   sock(new_sock),
   state(DistantComputer::STATE_NOT_INITIALIZED),
