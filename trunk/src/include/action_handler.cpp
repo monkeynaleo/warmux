@@ -458,9 +458,10 @@ static void Action_Game_Info(Action *a)
   for (uint i = 0; i < nb_players; i++) {
     uint player_id = a->PopInt();
 
-    if (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL) {
-      a->GetCreator()->AddPlayer(player_id);
-    }
+
+    ASSERT (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
+    ASSERT (player_id != Network::GetInstance()->GetPlayer().GetId());
+    a->GetCreator()->AddPlayer(player_id);
 
     uint nb_teams = a->PopInt();
 
@@ -848,7 +849,7 @@ static inline void add_player_info_to_action(Action& a, const Player& player)
   }
 }
 
-void SendInitialGameInfo(DistantComputer* client)
+void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 {
   // we have to tell this new computer
   // what teams / maps have already been selected
@@ -868,7 +869,13 @@ void SendInitialGameInfo(DistantComputer* client)
   std::list<Player>::const_iterator player;
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
-    nb_players += (*it)->GetPlayers().size();
+    const std::list<Player>& players = (*it)->GetPlayers();
+
+    for (player = players.begin(); player != players.end(); player++) {
+      if (int(player->GetId()) != added_player_id) {
+        nb_players++;
+      }
+    }
   }
 
   a.Push(nb_players);
@@ -877,11 +884,12 @@ void SendInitialGameInfo(DistantComputer* client)
   add_player_info_to_action(a, Network::GetInstance()->GetPlayer());
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
-
     const std::list<Player>& players = (*it)->GetPlayers();
 
     for (player = players.begin(); player != players.end(); player++) {
-      add_player_info_to_action(a, (*player));
+      if (int(player->GetId()) != added_player_id) {
+        add_player_info_to_action(a, (*player));
+      }
     }
   }
 
@@ -904,7 +912,7 @@ static void Action_Info_ClientConnect(Action *a)
   _Info_ConnectHost(hostname, nicknames);
 
   if (Network::GetInstance()->IsGameMaster()) {
-    SendInitialGameInfo(a->GetCreator());
+    SendInitialGameInfo(a->GetCreator(), player_id);
   }
 }
 

@@ -59,7 +59,7 @@ void Action_Handler_Init();
 void SendGameMode();
 void SyncCharacters();
 
-void SendInitialGameInfo(DistantComputer* client);
+void SendInitialGameInfo(DistantComputer* client, int added_player_id);
 
 void WORMUX_ConnectHost(DistantComputer& host);
 void WORMUX_DisconnectHost(DistantComputer& host);

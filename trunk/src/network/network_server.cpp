@@ -102,7 +102,7 @@ void NetworkServer::WaitActionSleep()
       socket_set->AddSocket(incoming);
 
       DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
-      SendInitialGameInfo(client);
+      SendInitialGameInfo(client, player_id);
       AddRemoteHost(client);
 
       if (GetNbHostsConnected() >= max_nb_players)
