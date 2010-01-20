@@ -182,7 +182,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
     goto error;
   }
   socket_set->AddSocket(socket);
-  server = new DistantComputer(socket, "server", 0);
+  server = new DistantComputer(socket);
 
   AddRemoteHost(server);
 
