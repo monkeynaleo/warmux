@@ -207,7 +207,7 @@ void Game::EndInitGameData_NetGameMaster()
 
   // If we are connected to a dedicated server, we must check there are still some players connected
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbHostsReady() != Network::GetInstance()->GetNbHostsConnected()
+         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_READY) != Network::GetInstance()->GetNbPlayersConnected()
 	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
 
     ActionHandler::GetInstance()->ExecFrameLessActions();
@@ -218,10 +218,10 @@ void Game::EndInitGameData_NetGameMaster()
   Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
   Network::GetInstance()->SendActionToAll(a);
 
-  // If we are connected to a dedicated server, we must check there are still some players connected
+  // Note that the loop also ends when there is no connected player.
+  // That's important if we are connected to a dedicated server.
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbHostsChecked() != Network::GetInstance()->GetNbHostsConnected()
-	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_CHECKED) != Network::GetInstance()->GetNbPlayersConnected()) {
 
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(200);
@@ -688,7 +688,7 @@ bool Game::Run()
 bool Game::HasBeenNetworkDisconnected() const
 {
   const Network* net          = Network::GetInstance();
-  return !net->IsLocal() && (net->GetNbHostsConnected() == 0);
+  return !net->IsLocal() && (net->GetNbPlayersConnected() == 0);
 }
 
 void Game::MessageEndOfGame() const

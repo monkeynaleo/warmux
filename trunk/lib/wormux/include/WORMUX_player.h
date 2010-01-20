@@ -32,13 +32,22 @@
 class Player
 {
   friend void WORMUX_DisconnectPlayer(Player& player);
-
+public:
+  typedef enum {
+    STATE_ERROR,
+    STATE_NOT_INITIALIZED,
+    STATE_INITIALIZED,
+    STATE_READY,
+    STATE_CHECKED,
+    STATE_NEXT_GAME
+  } State;
 private:
   uint player_id;
   std::string nickname;
   std::list<ConfigTeam> owned_teams;
   void UpdateNickname();
   std::list<ConfigTeam>::iterator FindTeamWithId(const std::string team_id);
+  State state;
 public:
   Player(uint player_id, const std::string& nickname);
   Player();
@@ -57,6 +66,9 @@ public:
 
   uint GetNbTeams() const;
   const std::list<ConfigTeam> & GetTeams() const;
+
+  void SetState(State _state);
+  State GetState() const;
 
   static std::string GetDefaultNickname();
 };

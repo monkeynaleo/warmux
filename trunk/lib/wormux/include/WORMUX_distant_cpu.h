@@ -32,16 +32,6 @@ class WSocket;
 
 class DistantComputer
 {
-public:
-  typedef enum {
-    STATE_ERROR,
-    STATE_NOT_INITIALIZED,
-    STATE_INITIALIZED,
-    STATE_READY,
-    STATE_CHECKED,
-    STATE_NEXT_GAME
-  } state_t;
-
 private:
   /* If you need this, implement it (correctly)*/
   DistantComputer(const DistantComputer&);
@@ -49,12 +39,11 @@ private:
   /*********************************************/
 
   WSocket* sock;
-  DistantComputer::state_t state;
   uint game_id;
 
   // a remote computer may act as a relay for several players (this is true when it is a server)
   std::list<Player> players;
-
+  bool force_disconnection_called;
 public:
   DistantComputer(WSocket* new_sock);
   DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id);
@@ -78,10 +67,9 @@ public:
   Player* GetPlayer(uint player_id);
   const std::list<Player>& GetPlayers() const;
 
-  void SetState(DistantComputer::state_t _state);
-  DistantComputer::state_t GetState() const;
-
   uint GetGameId() const;
+
+  int GetNumberOfPlayersWithState(Player::State state);
 
   void ForceDisconnection();
   bool MustBeDisconnected();

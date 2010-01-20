@@ -259,15 +259,14 @@ bool NetworkMenu::signal_ok()
                                  GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbHostsConnected() == 0
-	|| Network::GetInstance()->GetNbPlayersConnected() == 0)
+    if (Network::GetInstance()->GetNbPlayersConnected() == 0)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbHostsConnected() != Network::GetInstance()->GetNbHostsInitialized())
+    if (Network::GetInstance()->GetNbPlayersConnected() != Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED))
     {
-      int nbr = Network::GetInstance()->GetNbHostsConnected() - Network::GetInstance()->GetNbHostsInitialized();
+      int nbr = Network::GetInstance()->GetNbPlayersConnected() - Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED);
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       goto error;
@@ -294,7 +293,7 @@ bool NetworkMenu::signal_ok()
     Game::GetInstance()->Start();
 
     if (Network::GetInstance()->IsConnected()
-	&& Network::GetInstance()->GetNbHostsConnected() != 0
+	&& Network::GetInstance()->GetNbPlayersConnected() != 0
 	&& play_in_loop->GetValue()) {
       PrepareForNewGame();
       return false;
@@ -343,7 +342,7 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
 
     if (Network::GetInstance()->IsGameMaster()) {
       //Refresh the number of players ready (does not work on client):
-      nbr = Network::GetInstance()->GetNbPlayersInitialized();
+      nbr = Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED);
       if (Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK)
 	nbr++;
 
@@ -351,13 +350,12 @@ void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
       if (initialized_players->GetText() != pl) {
 	initialized_players->SetText(pl);
 	msg_box->NewMessage(pl, c_red);
-	if (Network::GetInstance()->GetNbHostsConnected() ==
-	    Network::GetInstance()->GetNbHostsInitialized()
-	    && Network::GetInstance()->GetNbHostsInitialized() != 0) {
+	if (Network::GetInstance()->GetNbPlayersConnected() ==
+	    Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED)) {
 	  msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
 	  JukeBox::GetInstance()->Play("default", "menu/newcomer");
 	}
-	else if (Network::GetInstance()->GetNbHostsConnected() == 0) {
+	else if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
 	  msg_box->NewMessage(_("You are alone. :-/"), c_red);
 	}
       }

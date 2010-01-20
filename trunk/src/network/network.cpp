@@ -516,7 +516,9 @@ void Network::SendNetworkState()
     a.Push(state);
     SendActionToAll(a);
   } else {
+    int player_id = Network::GetInstance()->GetPlayer().GetId();
     Action a(Action::ACTION_NETWORK_CLIENT_CHANGE_STATE);
+    a.Push(player_id);
     a.Push(state);
     SendActionToAll(a);
   }
@@ -585,71 +587,17 @@ uint Network::GetNbPlayersConnected() const
   return r;
 }
 
-uint Network::GetNbPlayersInitialized() const
+uint Network::GetNbPlayersWithState(Player::State player_state) const
 {
-  uint r = 0;
+  uint counter = 0;
 
   SDL_LockMutex(cpus_lock);
   for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
        client != cpu.end();
        client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
-      r += (*client)->GetPlayers().size();
+    counter += (*client)->GetNumberOfPlayersWithState(player_state);
   }
   SDL_UnlockMutex(cpus_lock);
 
-  return r;
-}
-
-uint Network::GetNbHostsConnected() const
-{
-  return cpu.size();
-}
-
-uint Network::GetNbHostsInitialized() const
-{
-  uint r = 0;
-
-  SDL_LockMutex(cpus_lock);
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_INITIALIZED)
-      r++;
-  }
-  SDL_UnlockMutex(cpus_lock);
-
-  return r;
-}
-
-uint Network::GetNbHostsReady() const
-{
-  uint r = 0;
-
-  SDL_LockMutex(cpus_lock);
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_READY)
-      r++;
-  }
-  SDL_UnlockMutex(cpus_lock);
-
-  return r;
-}
-
-uint Network::GetNbHostsChecked() const
-{
-  uint r = 0;
-
-  SDL_LockMutex(cpus_lock);
-  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
-       client != cpu.end();
-       client++) {
-    if ((*client)->GetState() == DistantComputer::STATE_CHECKED)
-      r++;
-  }
-  SDL_UnlockMutex(cpus_lock);
-
-  return r;
+  return counter;
 }
