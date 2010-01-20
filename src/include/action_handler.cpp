@@ -92,27 +92,27 @@ static void Action_Network_ClientChangeState (Action *a)
 {
   if (!Network::GetInstance()->IsGameMaster())
     return;
-
+  int player_id = a->PopInt();
   WNet::net_game_state_t client_state = (WNet::net_game_state_t)a->PopInt();
 
   switch (Network::GetInstance()->GetState()) {
   case WNet::NO_NETWORK:
   case WNet::NETWORK_MENU_INIT:
-    a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
+    a->GetCreator()->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
     ASSERT(client_state == WNet::NETWORK_MENU_OK);
     break;
 
   case WNet::NETWORK_LOADING_DATA:
-    a->GetCreator()->SetState(DistantComputer::STATE_READY);
+    a->GetCreator()->GetPlayer(player_id)->SetState(Player::STATE_READY);
     ASSERT(client_state == WNet::NETWORK_READY_TO_PLAY);
     break;
 
   case WNet::NETWORK_PLAYING:
   case WNet::NETWORK_NEXT_GAME:
     if (client_state == WNet::NETWORK_MENU_OK) {
-      a->GetCreator()->SetState(DistantComputer::STATE_INITIALIZED);
+      a->GetCreator()->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
     } else if (client_state == WNet::NETWORK_NEXT_GAME) {
-      a->GetCreator()->SetState(DistantComputer::STATE_NEXT_GAME);
+      a->GetCreator()->GetPlayer(player_id)->SetState(Player::STATE_NEXT_GAME);
     } else {
       ASSERT(false);
     }
@@ -191,7 +191,9 @@ static void Action_Network_Check_Phase1 (Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
+  int player_id = Network::GetInstance()->GetPlayer().GetId();
   Action b(Action::ACTION_NETWORK_CHECK_PHASE2);
+  b.Push(player_id);
   b.Push(ActiveMap()->GetRawName());
   b.Push(int(ActiveMap()->ReadImgGround().ComputeCRC()));
 
@@ -259,6 +261,7 @@ static void Action_Network_Check_Phase2 (Action *a)
   if (!Network::GetInstance()->IsGameMaster())
     return;
 
+  int player_id = a->PopInt();
   // Check the map name
   std::string map = a->PopString();
   if (map != ActiveMap()->GetRawName()) {
@@ -288,7 +291,7 @@ static void Action_Network_Check_Phase2 (Action *a)
   }
 
   // this client has been checked, it's ok :-)
-  a->GetCreator()->SetState(DistantComputer::STATE_CHECKED);
+  a->GetCreator()->GetPlayer(player_id)->SetState(Player::STATE_CHECKED);
 }
 
 // ########################################################

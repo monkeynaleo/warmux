@@ -28,11 +28,17 @@
 #include <WORMUX_i18n.h>
 #include <WORMUX_player.h>
 
-Player::Player(uint _player_id, const std::string& _nickname) : player_id(_player_id), nickname(_nickname)
+Player::Player(uint _player_id, const std::string& _nickname) :
+  player_id(_player_id),
+  nickname(_nickname),
+  state(STATE_NOT_INITIALIZED)
 {
 }
 
-Player::Player() : player_id(0), nickname(_("Unnamed"))
+Player::Player() :
+  player_id(0),
+  nickname(_("Unnamed")),
+  state(STATE_NOT_INITIALIZED)
 {
 }
 
@@ -142,6 +148,17 @@ const std::list<ConfigTeam>& Player::GetTeams() const
 {
   return owned_teams;
 }
+
+void Player::SetState(Player::State _state)
+{
+  state = _state;
+}
+
+Player::State Player::GetState() const
+{
+  return state;
+}
+
 
 //-----------------------------------------------------------------------------
 // This is a Class method (static)

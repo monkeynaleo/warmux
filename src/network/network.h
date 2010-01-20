@@ -162,11 +162,7 @@ public:
   bool IsTurnMaster() const;
 
   uint GetNbPlayersConnected() const;
-  uint GetNbPlayersInitialized() const;
-  uint GetNbHostsConnected() const;
-  uint GetNbHostsInitialized() const;
-  uint GetNbHostsReady() const;
-  uint GetNbHostsChecked() const;
+  uint GetNbPlayersWithState(Player::State player_state) const;
 };
 
 //-----------------------------------------------------------------------------

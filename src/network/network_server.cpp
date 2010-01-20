@@ -105,7 +105,7 @@ void NetworkServer::WaitActionSleep()
       SendInitialGameInfo(client, player_id);
       AddRemoteHost(client);
 
-      if (GetNbHostsConnected() >= max_nb_players)
+      if (GetNbPlayersConnected() >= max_nb_players)
         RejectIncoming();
     }
   }
@@ -157,7 +157,7 @@ void NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed
 {
   RemoveRemoteHost(closed);
 
-  if (GetNbHostsConnected() == max_nb_players)
+  if (GetNbPlayersConnected() == max_nb_players)
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
