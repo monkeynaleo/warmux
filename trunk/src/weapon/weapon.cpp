@@ -253,6 +253,9 @@ bool Weapon::Shoot()
         return false;
   }
 
+  if (!IsReady())
+    return false;
+
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
   #ifdef DEBUG
