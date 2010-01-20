@@ -95,6 +95,11 @@ static void Action_Network_ClientChangeState (Action *a)
   int player_id = a->PopInt();
   WNet::net_game_state_t client_state = (WNet::net_game_state_t)a->PopInt();
 
+  MSG_DEBUG("network.game_state", "game master (%s) <-- player %d (%s)",
+    WNet::GetGameStateAsString(Network::GetInstance()->GetState()),
+    player_id,
+    WNet::GetGameStateAsString(client_state));
+
   switch (Network::GetInstance()->GetState()) {
   case WNet::NO_NETWORK:
   case WNet::NETWORK_MENU_INIT:
@@ -133,6 +138,11 @@ static void Action_Network_MasterChangeState (Action *a)
   FAIL_IF_GAMEMASTER(a);
 
   WNet::net_game_state_t server_state = (WNet::net_game_state_t)a->PopInt();
+
+  MSG_DEBUG("network.game_state", "game master (%s) --> player %d (%s)",
+    WNet::GetGameStateAsString(server_state),
+    Network::GetInstance()->GetPlayer().GetId(),
+    WNet::GetGameStateAsString(Network::GetInstance()->GetState()));
 
   switch (Network::GetInstance()->GetState()) {
   case WNet::NETWORK_MENU_OK:

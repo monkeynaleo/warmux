@@ -82,6 +82,8 @@ public:
 			       std::string& client_nickname,
 			       uint client_player_id,
 			       bool client_will_be_master);
+
+  static const char * GetGameStateAsString(net_game_state_t state);
 };
 
 //-----------------------------------------------------------------------------
