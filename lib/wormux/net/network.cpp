@@ -335,3 +335,25 @@ bool WNet::Server_HandShake(WSocket& client_socket,
   }
   return ret;
 }
+
+const char * WNet::GetGameStateAsString(net_game_state_t state)
+{
+  switch (state) {
+    case NO_NETWORK:
+      return "NO_NETWORK";
+    case NETWORK_MENU_INIT:
+      return "NETWORK_MENU_INIT";
+    case NETWORK_MENU_OK:
+      return "NETWORK_MENU_OK";
+    case NETWORK_LOADING_DATA:
+      return "NETWORK_LOADING_DATA";
+    case NETWORK_READY_TO_PLAY:
+      return "READY_TO_PLAY";
+    case NETWORK_PLAYING:
+      return "NETWORK_PLAYING";
+    case NETWORK_NEXT_GAME:
+      return "NETWORK_NEXT_GAME";
+    default:
+      return "?";
+  }
+}
