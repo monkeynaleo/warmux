@@ -25,7 +25,8 @@
 #include "network/randomsync.h"
 
 BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& position) :
-  Particle("body_member_particle")
+  Particle("body_member_particle"),
+  angle_rad(0)
 {
   SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
