@@ -228,10 +228,11 @@ void WeaponProjectile::Refresh()
   // for the players in a multiplayer game.
   image->RefreshSurface();
   SetSize(image->GetSizeMax());
-  // Explose after timeout
-  int tmp = GetMSSinceTimeoutStart();
 
-  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
+  if (cfg.timeout) {
+     if (((int)GetMSSinceTimeoutStart()) > 1000 * GetTotalTimeout())
+       SignalTimeout();
+  }
 }
 
 void WeaponProjectile::SetEnergyDelta(int /*delta*/, bool /*do_report*/)
