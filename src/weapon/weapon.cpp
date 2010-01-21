@@ -232,27 +232,6 @@ bool Weapon::Shoot()
   MSG_DEBUG("weapon.shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
   MSG_DEBUG("weapon.shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
 
-
-  {
-    // WARNING: The following commented code is wrong! Please see explanation following
-    //   if (!EnoughAmmo()
-    //       || (use_unit_on_first_shoot && !EnoughAmmoUnit()))
-    //     return false;
-
-
-    // Gentildemon : YES the following code seems strange!
-    // BUT when have only one ammo left, you shoot, then nb_ammo == 0
-    // then you need to be able to use the left ammo units
-
-    if (use_unit_on_first_shoot && !EnoughAmmoUnit())
-      return false;
-
-    if (!EnoughAmmo())
-      if ( ! (ActiveTeam().ReadNbAmmos() == 0
-              && use_unit_on_first_shoot && EnoughAmmoUnit()) )
-        return false;
-  }
-
   if (!IsReady())
     return false;
 
@@ -287,6 +266,28 @@ bool Weapon::Shoot()
 
   Game::GetInstance()->SetCharacterChosen(true);
 
+  return true;
+}
+
+bool Weapon::IsReady() const
+{
+  // WARNING: The following commented code is wrong! Please see explanation following
+  //   if (!EnoughAmmo()
+  //       || (use_unit_on_first_shoot && !EnoughAmmoUnit()))
+  //     return false;
+
+
+  // Gentildemon : YES the following code seems strange!
+  // BUT when have only one ammo left, you shoot, then nb_ammo == 0
+  // then you need to be able to use the left ammo units
+
+  if (use_unit_on_first_shoot && !EnoughAmmoUnit())
+    return false;
+
+  if (!EnoughAmmo())
+    if ( ! (ActiveTeam().ReadNbAmmos() == 0
+            && use_unit_on_first_shoot && EnoughAmmoUnit()) )
+      return false;
   return true;
 }
 
