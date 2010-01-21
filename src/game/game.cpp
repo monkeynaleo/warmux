@@ -44,6 +44,7 @@
 #include "map/wind.h"
 #include "menu/pause_menu.h"
 #include "menu/results_menu.h"
+#include "menu/network_menu.h"
 #include "network/network.h"
 #include "network/randomsync.h"
 #include "network/network_server.h"
@@ -783,7 +784,10 @@ void Game::MainLoop()
       SDL_Delay(1);
       // Do we wait for a player who has left?
       if (ActiveTeam().IsAbandoned()) {
-        GetTeamsList().DelTeam(ActiveTeam().GetId());
+        const std::string & team_id = ActiveTeam().GetId();
+        GetTeamsList().DelTeam(team_id);
+        if (Network::GetInstance()->network_menu != NULL)
+          Network::GetInstance()->network_menu->DelTeamCallback(team_id);
       }
     }
 
