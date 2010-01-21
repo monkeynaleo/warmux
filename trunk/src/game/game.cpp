@@ -468,7 +468,7 @@ void Game::RefreshInput()
   while(SDL_PollEvent(&event)) {
 
     // Emergency exit
-    if (event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
+    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
       AppWormux::EmergencyExit();
 
     if ( event.type == SDL_QUIT) {
