@@ -85,7 +85,7 @@ void Cluster::Shoot(const Point2i & pos, double strength, double angle)
   // we do need to collide with objects, but if we allow for this, the clusters
   // will explode on spawn (because of colliding with each other)
 
-  begin_time = Time::GetInstance()->Read();
+  StartTimeout();
   Camera::GetInstance()->FollowObject(this);
   ResetConstants();
   SetXY( pos );
@@ -96,8 +96,7 @@ void Cluster::Refresh()
 {
   WeaponProjectile::Refresh();
   // make it rotate
-  uint time = Time::GetInstance()->Read();
-  float flying_time = ( float )( time - begin_time );
+  float flying_time = (float) GetMSSinceTimeoutStart();
   const float rotations_per_second = 4;
   image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
 }

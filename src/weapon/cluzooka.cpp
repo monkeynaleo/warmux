@@ -145,7 +145,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
   SetSpeed(strength, angle);
 
   explode_with_timeout = true;
-  begin_time = Time::GetInstance()->Read();
+  StartTimeout();
   m_time_before_spawn = 750;
   // make time a bit random to unsychronize particles
 
@@ -252,8 +252,7 @@ void CluzookaRocket::Refresh()
   if(!IsDrowned())
   {
     //image->SetRotation_rad(GetSpeedAngle());
-    uint time = Time::GetInstance()->Read();
-    float flying_time = ( float )( time - begin_time );
+    float flying_time = ( float )(GetMSSinceTimeoutStart());
 
     float speed_angle = GetSpeedAngle();
     const float time_to_rotate = 500;

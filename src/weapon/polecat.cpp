@@ -109,7 +109,7 @@ void Polecat::Refresh()
     Explosion();
     return;
   }
-  int tmp = Time::GetInstance()->Read() - begin_time;
+  int tmp = GetMSSinceTimeoutStart();
   if (cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
     if (!last_fart_time) {
       std::string txt = Format(_("%s has done something for the environment, he has not ordered the polecat to fart."),

@@ -112,7 +112,7 @@ void SuperTux::Shoot(double strength)
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();
   last_move = global_time->Read();
-  begin_time = global_time->Read();
+  StartTimeout();
 }
 
 void SuperTux::Refresh()

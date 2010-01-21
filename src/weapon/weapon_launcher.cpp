@@ -47,6 +47,8 @@
 #include "include/app.h"
 #endif
 
+const uint INVALID_TIMEOUT_START = UINT_MAX;
+
 WeaponBullet::WeaponBullet(const std::string &name,
                            ExplosiveWeaponConfig& cfg,
                            WeaponLauncher * p_launcher) :
@@ -114,8 +116,10 @@ void WeaponBullet::DoExplosion()
 
 WeaponProjectile::WeaponProjectile(const std::string &name,
                                     ExplosiveWeaponConfig& p_cfg,
-                                    WeaponLauncher * p_launcher)
-  : PhysicalObj(name), cfg(p_cfg)
+                                    WeaponLauncher * p_launcher):
+  PhysicalObj(name),
+  timeout_start(INVALID_TIMEOUT_START),
+  cfg(p_cfg)
 {
   m_allow_negative_y = true;
   SetCollisionModel(true, true, true);
@@ -182,7 +186,7 @@ void WeaponProjectile::Shoot(double strength)
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
             strength, angle, GetX(), GetY());
 
-  begin_time = Time::GetInstance()->Read();
+  StartTimeout();
 
   ShootSound();
 
@@ -225,7 +229,7 @@ void WeaponProjectile::Refresh()
   image->RefreshSurface();
   SetSize(image->GetSizeMax());
   // Explose after timeout
-  int tmp = Time::GetInstance()->Read() - begin_time;
+  int tmp = GetMSSinceTimeoutStart();
 
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 }
@@ -244,7 +248,7 @@ void WeaponProjectile::Draw()
 
   if (cfg.timeout && tmp != 0)
   {
-    tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
+    tmp -= (int)((GetMSSinceTimeoutStart()) / 1000);
     if (tmp >= 0)
     {
       std::ostringstream ss;
@@ -271,7 +275,7 @@ void WeaponProjectile::Draw()
 
 bool WeaponProjectile::IsImmobile() const
 {
-  if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
+  if (explode_with_timeout && GetTotalTimeout() * 1000 > (int) GetMSSinceTimeoutStart())
     return false;
   return PhysicalObj::IsImmobile();
 }
@@ -307,6 +311,7 @@ void WeaponProjectile::Collision()
   if (launcher != NULL && !launcher->ignore_collision_signal)
     launcher->SignalProjectileCollision();
 }
+
 
 // Default behavior : signal to launcher projectile is drowning
 void WeaponProjectile::SignalDrowning()
@@ -386,6 +391,19 @@ void WeaponProjectile::SetTimeOut(int timeout)
 int WeaponProjectile::GetTotalTimeout() const
 {
   return (int)(cfg.timeout)+m_timeout_modifier;
+}
+
+void WeaponProjectile::StartTimeout()
+{
+  timeout_start = Time::GetInstance()->Read();
+}
+
+uint WeaponProjectile::GetMSSinceTimeoutStart() const
+{
+  uint now = Time::GetInstance()->Read();
+  ASSERT (timeout_start  != INVALID_TIMEOUT_START);
+  ASSERT(now >= timeout_start);
+  return now - timeout_start;
 }
 
 // Signal a projectile timeout and explode

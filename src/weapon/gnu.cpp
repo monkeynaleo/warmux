@@ -84,7 +84,7 @@ void Gnu::Refresh()
     Explosion();
     return;
   }
-  int tmp = Time::GetInstance()->Read() - begin_time;
+  int tmp = GetMSSinceTimeoutStart();
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 
   double norm, angle;
