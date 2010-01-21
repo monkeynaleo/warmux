@@ -38,7 +38,7 @@ void RandomGenerator::InitRandom()
 
 void RandomGenerator::SetRand(uint seed)
 {
-  MSG_DEBUG("random", "srand: %d", seed);
+  MSG_DEBUG("random.set", "srand: %d", seed);
   next = seed;
   initialized = true;
 }
