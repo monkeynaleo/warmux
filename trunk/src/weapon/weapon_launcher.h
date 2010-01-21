@@ -68,7 +68,6 @@ class WeaponProjectile : public PhysicalObj
     bool change_timeout_allowed() const;
   protected:
     void StartTimeout();
-    bool GetTimeoutStarted();
     uint GetMSSinceTimeoutStart() const;
     void Collision();
 
