@@ -101,7 +101,7 @@ void RPG::Refresh()
 {
   AutomaticBazookaConfig &acfg = dynamic_cast<AutomaticBazookaConfig &>(cfg);
   uint time = Time::GetInstance()->Read();
-  float flying_time = time - begin_time;
+  float flying_time = GetMSSinceTimeoutStart();
   uint timestep = time - m_lastrefresh;
   m_lastrefresh = time;
   if (!m_targeted)

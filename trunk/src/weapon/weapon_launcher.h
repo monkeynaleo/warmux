@@ -31,6 +31,8 @@ class ExplosiveWeaponConfig;
 
 class WeaponProjectile : public PhysicalObj
 {
+  private:
+    uint timeout_start;
   protected:
     Sprite *image;
     bool explode_colliding_character; // before timeout.
@@ -38,7 +40,6 @@ class WeaponProjectile : public PhysicalObj
     bool explode_with_collision;
     bool can_drown;
     bool camera_follow_closely;
-    uint begin_time;
 
     ExplosiveWeaponConfig& cfg;
 
@@ -66,6 +67,9 @@ class WeaponProjectile : public PhysicalObj
     void ResetTimeOut() { m_timeout_modifier = 0; };
     bool change_timeout_allowed() const;
   protected:
+    void StartTimeout();
+    bool GetTimeoutStarted();
+    uint GetMSSinceTimeoutStart() const;
     void Collision();
 
     virtual void SignalGroundCollision(const Point2d& speed_before);

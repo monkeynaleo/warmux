@@ -113,7 +113,7 @@ void DiscoGrenade::Refresh()
   smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);
 #endif //HAVE_A_REALLY_BIG_CPU
 
-  double tmp = Time::GetInstance()->Read() - begin_time;
+  double tmp = GetMSSinceTimeoutStart();
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
   if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
     //JukeBox::GetInstance()->Play("default","weapon/alleluia") ;
