@@ -79,6 +79,9 @@ MultiTabs::~MultiTabs()
       t++)
     delete t->box;
 
+  delete prev_tab_bt;
+  delete next_tab_bt;
+
   tabs.clear();
 }
 
