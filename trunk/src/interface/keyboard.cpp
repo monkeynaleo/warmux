@@ -34,7 +34,9 @@
 #define ALT_OFFSET (MODIFIER_OFFSET * ALT_BIT)
 
 
-Keyboard::Keyboard() : ManMachineInterface()
+Keyboard::Keyboard() :
+  ManMachineInterface(),
+  modifier_bits(0)
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
