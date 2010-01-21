@@ -122,7 +122,9 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   launcher = p_launcher;
 
   explode_colliding_character = false;
-  explode_with_timeout = true;
+  // explode_with_timeout defaults to false as
+  // the default value true has caused a few hard to find bugs.
+  explode_with_timeout = false;
   explode_with_collision = true;
   can_drown = true;
   camera_follow_closely = false;

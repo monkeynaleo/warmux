@@ -87,6 +87,8 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 {
   swimming = false;
   explode_colliding_character = true;
+  explode_with_timeout = true;
+
   camera_follow_closely = true;
 
   SetSize(image->GetSize());

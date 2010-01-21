@@ -40,6 +40,7 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg,
 {
   m_rebound_sound = "weapon/grenade_bounce";
   explode_with_collision = false;
+  explode_with_timeout = true;
 }
 
 //-----------------------------------------------------------------------------
