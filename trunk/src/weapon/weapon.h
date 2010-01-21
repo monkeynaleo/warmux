@@ -212,7 +212,7 @@ public:
   bool Shoot();
 
   // the weapon is ready to use ? (is there bullets left ?)
-  virtual bool IsReady() const { return EnoughAmmo(); };
+  virtual bool IsReady() const;
 
   virtual bool IsOnCooldownFromShot() const;
 
