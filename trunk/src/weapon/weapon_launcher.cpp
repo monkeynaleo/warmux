@@ -21,6 +21,7 @@
 
 #include <sstream>
 #include <WORMUX_debug.h>
+#include <limits.h>
 
 #include "character/character.h"
 #include "game/config.h"
