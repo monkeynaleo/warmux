@@ -66,7 +66,6 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
              WeaponLauncher * p_launcher) :
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
-  explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
   explode_with_timeout = false;

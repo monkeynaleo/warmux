@@ -63,6 +63,7 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("polecat", cfg, p_launcher)
 {
   explode_with_collision = false;
+  explode_with_timeout = true;
   last_fart_time = 0;
   last_rebound_time = 0;
 }

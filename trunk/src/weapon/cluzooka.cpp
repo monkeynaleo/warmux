@@ -144,6 +144,7 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double a
   SetXY(start_pos);
   SetSpeed(strength, angle);
 
+  explode_with_timeout = true;
   begin_time = Time::GetInstance()->Read();
   m_time_before_spawn = 750;
   // make time a bit random to unsychronize particles

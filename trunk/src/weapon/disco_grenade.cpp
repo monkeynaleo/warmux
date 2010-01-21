@@ -60,6 +60,7 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
   m_rebound_sound = "weapon/disco_grenade_bounce";
   have_played_music = false;
   explode_with_collision = false;
+  explode_with_timeout = true;
 }
 
 void DiscoGrenade::Shoot(double strength)

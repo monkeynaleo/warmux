@@ -54,6 +54,7 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("dynamite_bullet", cfg, p_launcher)
 {
   explode_with_collision = false;
+  explode_with_timeout = true;
 
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());

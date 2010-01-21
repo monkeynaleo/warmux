@@ -71,6 +71,7 @@ FootBomb::FootBomb(FootBombConfig& cfg,
 {
   m_rebound_sound = "weapon/footbomb_bounce";
   explode_with_collision = false;
+  explode_with_timeout = true;
   m_recursions = cfg.nb_recursions;
 
   // ensure that all football bomb have the same UniqueId

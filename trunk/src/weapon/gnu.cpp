@@ -59,6 +59,7 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("gnu", cfg, p_launcher)
 {
   explode_with_collision = false;
+  explode_with_timeout = true;
   last_rebound_time = 0;
 }
 
