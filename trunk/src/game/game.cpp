@@ -206,10 +206,10 @@ void Game::EndInitGameData_NetGameMaster()
 {
   // Wait for all clients to be ready to play
 
-  // If we are connected to a dedicated server, we must check there are still some players connected
+  // Note that the loop also ends when there is no connected player.
+  // That's important if we are connected to a dedicated server.
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_READY) != Network::GetInstance()->GetNbPlayersConnected()
-	 && (Network::GetInstance()->IsServer() || Network::GetInstance()->GetNbPlayersConnected() > 1)) {
+         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_READY) != Network::GetInstance()->GetNbPlayersConnected()) {
 
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(200);
