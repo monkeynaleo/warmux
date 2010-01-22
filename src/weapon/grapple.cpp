@@ -141,7 +141,9 @@ class GrappleConfig : public EmptyWeaponConfig
 
 //-----------------------------------------------------------------------------
 
-Grapple::Grapple() : Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
+Grapple::Grapple() :
+  Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
+  last_broken_node_sense(0)
 {
   UpdateTranslationStrings();
 
