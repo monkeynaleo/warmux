@@ -48,8 +48,7 @@ class BlowtorchConfig : public WeaponConfig
 
 Blowtorch::Blowtorch() :
   Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig()),
-  active(false),
-  deactivation_requested(false)
+  active(false)
 {
   UpdateTranslationStrings();
 
@@ -91,36 +90,38 @@ bool Blowtorch::p_Shoot()
 
 void Blowtorch::StartShooting()
 {
-  if (!EnoughAmmo())
-    return;
-
-  active = true;
-  deactivation_requested = false;
+  if (active) {
+     active = false;
+     ActiveTeam().AccessNbUnits() = 0;
+  } else {
+    if (EnoughAmmo())
+      active = true;
+  }
 }
-
 
 void Blowtorch::StopShooting()
 {
-  deactivation_requested = true;
-  SignalTurnEnd();
+  // ignore
 }
 
 bool Blowtorch::ShouldAmmoUnitsBeDrawn() const
 {
-  // Hide that the units are actually at maximum and not at 0
-  // when the ammo counter is at 0.
-  return active || EnoughAmmo();
+  return active;
 }
 
 void Blowtorch::Refresh()
 {
-  if (active && deactivation_requested && !ActiveCharacter().IsPreparingShoot()) {
-    active = false;
-    ActiveTeam().AccessNbUnits() = 0;
+  if (active) {
+    const LRMoveIntention * lr_move_intention = ActiveCharacter().GetLastLRMoveIntention();
+    if (lr_move_intention && EnoughAmmoUnit()) {
+      Weapon::RepeatShoot();
+    }
   }
-
-  if (active && EnoughAmmoUnit()) {
-    Weapon::RepeatShoot();
+  if (!EnoughAmmoUnit()) {
+    active = false;
+    if (EnoughAmmo()) {
+      ActiveTeam().ResetNbUnits();
+    }
   }
 }
 

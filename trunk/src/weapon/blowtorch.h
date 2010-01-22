@@ -30,7 +30,6 @@ class Blowtorch : public Weapon
 {
   private:
     bool active;
-    bool deactivation_requested;
   protected:
     bool p_Shoot();
     void p_Deselect();
