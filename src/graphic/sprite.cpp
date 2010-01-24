@@ -308,31 +308,27 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   rhs_pos_tmp.y = static_cast<uint>(rhs_pos.y * scale_y);
   surfaceWidth  = static_cast<uint>(surfaceWidth  * scale_x);
   surfaceHeight = static_cast<uint>(surfaceHeight * scale_y);
-  halfWidth = surfaceWidth / 2;
-  halfHeight = surfaceHeight / 2;
-
   //Calculate the position of the hotspot after a rotation around the center of the surface:
-  //float rhs_dst; //Distance between center of the sprite and the hotspot
 
-  double rhs_angle = 0.0; //Angle of the hotspot _before_ the rotation
-
-  float rhs_dst = sqrt(float((halfWidth /*surfaceWidth /2*/ - rhs_pos_tmp.x) * (halfWidth /*surfaceWidth /2*/ - rhs_pos_tmp.x)
-                     + (halfHeight /*surfaceHeight/2*/ - rhs_pos_tmp.y) * (halfHeight /*surfaceHeight/2*/ - rhs_pos_tmp.y)));
-
+  Point2i center(surfaceWidth / 2, surfaceHeight / 2);
+  // Don't let the compiler any choice with which types the resulting program will calculate with.
+  Point2i old_hotspot_delta_i = center - rhs_pos_tmp;
+  Point2d old_hotspot_delta = old_hotspot_delta_i;
+  double rhs_dst = old_hotspot_delta.Norm();
+  double rhs_angle = 0.0;
   if (rhs_dst != 0.0)
-    rhs_angle = - acos ( float(rhs_pos_tmp.x - halfWidth /*surfaceWidth/2*/) / rhs_dst );
-
-  if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0) rhs_angle = -rhs_angle;
+    rhs_angle = -acos(-old_hotspot_delta.x / rhs_dst);
+  if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0)
+    rhs_angle = -rhs_angle;
 
   rhs_angle += rotation_rad;
 
-  Point2i rhs_new_pos =  Point2i( halfWidth /*surfaceWidth /2*/ + static_cast<uint>(cos(rhs_angle) * rhs_dst),
-                                  halfHeight /*surfaceHeight/2*/ + static_cast<uint>(sin(rhs_angle) * rhs_dst));
+  Point2d new_hotspot_delta = Point2d::FromPolarCoordinates(rhs_dst, rhs_angle);
+  Point2i new_hotspot_delta_i = new_hotspot_delta;
+  Point2i new_hotspot = center + new_hotspot_delta_i;
 
-  rotation_point.x -= rhs_new_pos.x;
-  rotation_point.y -= rhs_new_pos.y;
-  rotation_point.x += rhs_pos_tmp.x;
-  rotation_point.y += rhs_pos_tmp.y;
+  rotation_point -= new_hotspot;
+  rotation_point += rhs_pos_tmp;
 }
 
 void Sprite::Start()
