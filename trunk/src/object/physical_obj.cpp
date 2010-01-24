@@ -832,6 +832,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     // Check distance with characters
     FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this)
     {
+      MSG_DEBUG("physic.position", "Checking distance to %s", (*character).m_name.c_str(), (*character).m_name.c_str());
       if (min_dst_with_characters == 0) {
 
         if(Overlapse(*character)) {
