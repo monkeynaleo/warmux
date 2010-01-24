@@ -85,7 +85,8 @@ Team::Team (const std::string& teams_dir, const std::string& id)
 
 bool Team::LoadCharacters()
 {
-  ASSERT (nb_characters <= 10);
+  ASSERT(characters.size() == 0);
+  ASSERT(nb_characters <= 10);
 
   std::string nomfich = m_teams_dir+m_id+ PATH_SEPARATOR "team.xml";
   // Load XML
@@ -100,7 +101,6 @@ bool Team::LoadCharacters()
   xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
   xmlNodeArray::const_iterator it = nodes.begin();
 
-  characters.clear();
   active_character = characters.end();
   do
   {
