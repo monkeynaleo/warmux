@@ -159,13 +159,12 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
 
   std::vector<Key_t> keys = it->second;
   std::vector<Key_t>::const_iterator itv;
-  
+
   for(itv = keys.begin(); itv != keys.end() ; itv++)
-  {  
-    //While player writes, it cannot control the game but QUIT or PAUSE.
+  {
+    //While player writes, it cannot control the game but PAUSE.
     if (Game::GetInstance()->chatsession.CheckInput()) {
       switch (*itv) {
-      case KEY_QUIT:
       case KEY_PAUSE:
         break;
       default:
@@ -220,8 +219,11 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     }
 
   //Handle input text for Chat session in Network game
-  if (event_type == KEY_PRESSED && Game::GetInstance()->chatsession.CheckInput()){
-    Game::GetInstance()->chatsession.HandleKey(event);
+  if (Game::GetInstance()->chatsession.CheckInput()) {
+    if (event_type == KEY_PRESSED)
+      Game::GetInstance()->chatsession.HandleKeyPressed(event);
+    else if (event_type == KEY_RELEASED)
+      Game::GetInstance()->chatsession.HandleKeyReleased(event);
     return;
   }
 

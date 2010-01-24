@@ -49,6 +49,8 @@ class Chat
   bool check_input;
   uint last_time;
 
+  void CloseInput();
+
  public:
   Chat();
   ~Chat();
@@ -57,7 +59,8 @@ class Chat
   bool CheckInput() const;
   void Clear();
   void NewMessage(const std::string& msg);
-  void HandleKey(const SDL_Event& event);
+  void HandleKeyPressed(const SDL_Event& event);
+  void HandleKeyReleased(const SDL_Event& event);
 
   static void SendMessage(const std::string& msg);
 };
