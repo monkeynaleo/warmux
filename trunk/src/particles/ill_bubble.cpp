@@ -28,6 +28,8 @@
 
 // Vibration period of the bubble
 const uint vib_period = 250;
+const float MAX_SCALE = 1.0f;
+const float MIN_SCALE = 0.25f;
 
 IllBubble::IllBubble() : ExplosionSmoke(20)
 {
@@ -49,6 +51,8 @@ void IllBubble::Refresh()
   image->GetScaleFactors(scale_x, scale_y);
   scale_x *= 1.0 + 0.2 * sin(2.0 * M_PI * time / (float)vib_period);
   scale_y *= 1.0 + 0.2 * cos(2.0 * M_PI * time / (float)vib_period);
+  scale_x = std::max(MIN_SCALE, std::min(scale_x, MAX_SCALE));
+  scale_y = std::max(MIN_SCALE, std::min(scale_y, MAX_SCALE));
   image->Scale(scale_x, scale_y);
 }
 
