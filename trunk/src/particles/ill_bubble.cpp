@@ -40,19 +40,24 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   vib_phi = RandomSync().GetLong(0, vib_period);
 }
 
+void IllBubble::Refresh()
+{
+  ExplosionSmoke::Refresh();
+  uint time = (Time::GetInstance()->Read() + vib_phi) % vib_period;
+
+  float scale_x, scale_y;
+  image->GetScaleFactors(scale_x, scale_y);
+  scale_x *= 1.0 + 0.2 * sin(2.0 * M_PI * time / (float)vib_period);
+  scale_y *= 1.0 + 0.2 * cos(2.0 * M_PI * time / (float)vib_period);
+  image->Scale(scale_x, scale_y);
+}
+
 void IllBubble::Draw()
 {
   if (m_left_time_to_live > m_initial_time_to_live - 3)
     image->SetAlpha( (float)(m_initial_time_to_live - m_left_time_to_live) / 3.0 );
   else
     image->SetAlpha(1.0);
-
-  uint time = (Time::GetInstance()->Read() + vib_phi) % vib_period;
-  float scale_x, scale_y;
-  image->GetScaleFactors(scale_x, scale_y);
-  scale_x *= 1.0 + 0.2 * sin(2.0 * M_PI * time / (float)vib_period);
-  scale_y *= 1.0 + 0.2 * cos(2.0 * M_PI * time / (float)vib_period);
-  image->Scale(scale_x, scale_y);
 
   if (m_left_time_to_live > 0)
     image->Draw(GetPosition() - image->GetSize() / 2);
