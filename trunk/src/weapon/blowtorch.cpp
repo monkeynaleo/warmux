@@ -109,6 +109,11 @@ bool Blowtorch::ShouldAmmoUnitsBeDrawn() const
   return active;
 }
 
+bool Blowtorch::IsPreventingJumps()
+{
+  return active;
+}
+
 void Blowtorch::Refresh()
 {
   if (active) {
