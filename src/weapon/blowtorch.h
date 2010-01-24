@@ -43,6 +43,7 @@ class Blowtorch : public Weapon
     void StartShooting();
     void StopShooting();
     virtual bool ShouldAmmoUnitsBeDrawn() const;
+    virtual bool IsPreventingJumps();
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
