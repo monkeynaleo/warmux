@@ -40,6 +40,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
 
   MSG_DEBUG("random.get", "IllBubble::IllBubble()");
   vib_phi = RandomSync().GetLong(0, vib_period);
+  image->Scale(MIN_SCALE, MIN_SCALE);
 }
 
 void IllBubble::Refresh()
