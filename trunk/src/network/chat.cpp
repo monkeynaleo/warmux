@@ -121,35 +121,48 @@ void Chat::SendMessage(const std::string &msg)
   ActionHandler::GetInstance()->NewAction(a);
 }
 
-void Chat::HandleKey(const SDL_Event& event)
+void Chat::CloseInput()
+{
+  check_input = false; //Hide input widget
+
+  input->Set("");
+  cursor_pos = 0;
+
+  // Disable key repeat during the game!
+  SDL_EnableKeyRepeat(0, 0);
+}
+
+void Chat::HandleKeyPressed(const SDL_Event& event)
 {
   SDL_KeyboardEvent kbd_event = event.key;
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 
-  if (TextHandle(txt, cursor_pos, key)) {
+  if (TextHandle(txt, cursor_pos, key))
     input->Set(txt);
-  } else {
+}
 
-    switch (key.sym){
+void Chat::HandleKeyReleased(const SDL_Event& event)
+{
+  SDL_KeyboardEvent kbd_event = event.key;
+  SDL_keysym key = kbd_event.keysym;
+  std::string txt = input->GetText();
 
-    case SDLK_RETURN:
-    case SDLK_KP_ENTER:
-      check_input = false; //Hide input widget
-      if ( txt[0] == '/' )
-	ProcessCommand(txt);
-      else if (txt != "" )
-	SendMessage(txt);
+  switch (key.sym) {
 
-      input->Set("");
-      cursor_pos = 0;
+  case SDLK_RETURN:
+  case SDLK_KP_ENTER:
+    if (txt[0] == '/')
+      ProcessCommand(txt);
+    else if (txt != "")
+      SendMessage(txt);
 
-      // Disable key repeat during the game!
-      SDL_EnableKeyRepeat(0, 0);
-      break;
-
-    default:
-      break;
-    }
+    CloseInput();
+    break;
+  case SDLK_ESCAPE:
+    CloseInput();
+    break;
+  default:
+    break;
   }
 }
