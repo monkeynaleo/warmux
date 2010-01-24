@@ -640,6 +640,12 @@ void Interface::UpdateTimer(uint utimer, bool emergency, bool reset_anim)
   remaining_turn_time = utimer;
 
   if (prev_clock != clock || reset_anim) {
+
+    if (clock == clock_normal) {
+      uint frame_delay = utimer * 1000 / clock->GetFrameCount();
+      clock->SetFrameSpeed(frame_delay);
+    }
+
     clock->animation.SetLoopMode(true);
     clock->SetCurrentFrame(0);
     clock->Start();
