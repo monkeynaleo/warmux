@@ -26,13 +26,13 @@ EXTRA_DIST = build/visual/gettext.rules            \
              doc/howto_play_online/de.pdf          \
              doc/howto_play_online/en.pdf          \
              doc/howto_play_online/nl.pdf          \
-             mac/Info.plist.in                     \
-             mac/PkgInfo.in                        \
-             mac/README-mac.txt                    \
-             mac/README-mac.txt                    \
-             mac/cmake_build.sh                    \
              src/msvc/getopt.c                     \
-             build/win32_setup/create_setup.sh     \
+	     build/mac/Info.plist.in               \
+             build/mac/PkgInfo.in                  \
+             build/mac/README-mac.txt              \
+             build/mac/README-mac.txt              \
+             build/mac/cmake_build.sh              \
+	     build/win32_setup/create_setup.sh     \
              build/win32_setup/English.nsh         \
              build/win32_setup/French.nsh          \
              build/win32_setup/Greek.nsh           \
