@@ -8,7 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2009-09-05 16:39+0200\n"
+"POT-Creation-Date: 2010-01-26 21:11+0100\n"
+"PO-Revision-Date: 2010-01-27 06:07+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,14 +26,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:108 src/menu/network_menu.cpp:325
+#: src/menu/network_menu.cpp:108 src/menu/network_menu.cpp:327
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:112 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:112 src/menu/network_menu.cpp:337
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -124,7 +125,7 @@ msgstr "%s on aivan miinan vieressä!"
 #: src/include/action_handler.cpp:388
 #, c-format
 msgid "%s needs a pause."
-msgstr ""
+msgstr "%s tarvitsee taukoa."
 
 #. Can happen if the configuration is wrong...
 #: src/object/bonus_box.cpp:69
@@ -297,14 +298,18 @@ msgstr[0] "Joukkue %s voitti %u lentorepun."
 msgstr[1] "Joukkue %s voitti %u lentoreppua! Siistiä!"
 
 #: src/weapon/lowgrav.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
-msgstr[0] "Joukkue %s voitti %u painottomuuden! Neil Armstrong täältä tullaan!"
-msgstr[1] "Joukkue %s voitti %u painottomuutta! Neil Armstrong täältä tullaan!"
+msgstr[0] ""
+"Joukkue %s voitti %u painottomuuden! Pieni askel ihmiselle, mutta suuri "
+"harppaus vapaalle ohjelmistolle!"
+msgstr[1] ""
+"Joukkue %s voitti %u painottomuutta! Pieni askel ihmiselle, mutta suuri "
+"harppaus vapaalle ohjelmistolle!"
 
 #: src/weapon/mine.cpp:262
 #, c-format
@@ -606,7 +611,7 @@ msgstr "Itsemurhaisku"
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
-#: src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:210
 msgid "Connect to game"
 msgstr "Yhdistä peliin"
 
@@ -647,9 +652,9 @@ msgstr "Diskokranaatti"
 msgid "Displays this message"
 msgstr "Näyttää tämän viestin"
 
-#: src/menu/network_menu.cpp:132
+#: src/menu/network_menu.cpp:150
 msgid "Don't forget to validate once you have selected your team(s)!"
-msgstr ""
+msgstr "Älä unohda tarkistaa oikeellisuutta valittuasi tiimisi!"
 
 #: src/menu/help_menu.cpp:76
 msgid "Drag&drop: Move the camera"
@@ -722,25 +727,25 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:500
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Virhe: Ei voitu yhdistää: %s:%s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:450
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelin isännöimiseksi"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:366
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelien etsimiseksi"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:478
 msgid "Error: Unable to start the server"
 msgstr "Virhe: Palvelimen käynnistäminen epäonnistui"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:471
 #: tools/servers/game_server/server.cpp:312
 #, c-format
 msgid ""
@@ -783,7 +788,7 @@ msgstr "Peli"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/menu/network_connection_menu.cpp:234
+#: src/menu/network_connection_menu.cpp:233
 msgid "Game name:"
 msgstr "Pelin nimi:"
 
@@ -815,8 +820,7 @@ msgstr "Maaston alustus..."
 msgid "Gun"
 msgstr "Pyssy"
 
-#. Skip a line
-#: src/menu/network_connection_menu.cpp:284
+#: src/menu/network_connection_menu.cpp:281
 msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
@@ -838,7 +842,7 @@ msgstr "Ohje"
 msgid "High jump"
 msgstr "Korkea hyppy"
 
-#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:257
 msgid "Host a game"
 msgstr "Isännöi peli"
 
@@ -933,11 +937,6 @@ msgstr "Taivaalta sataa lahjoja!"
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/network_connection_menu.cpp:282
-msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
-"Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
-
 #: src/menu/help_menu.cpp:74
 msgid "Jump"
 msgstr "Hyppää"
@@ -980,7 +979,7 @@ msgstr "Painottomuus"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:175
 msgid "Manual connection"
 msgstr "Manuaalinen yhteys"
 
@@ -997,7 +996,7 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Maps"
 msgstr "Kartat"
 
-#: src/menu/network_menu.cpp:396 src/menu/network_menu.cpp:397
+#: src/menu/network_menu.cpp:398 src/menu/network_menu.cpp:399
 msgid "Master mode"
 msgstr "Mestaritila"
 
@@ -1058,10 +1057,8 @@ msgid "Music?"
 msgstr "Musiikki"
 
 #: src/game/game.cpp:167
-#, fuzzy
-#| msgid "Network Game"
 msgid "Network"
-msgstr "Nettipeli"
+msgstr "Verkko"
 
 #: src/menu/main_menu.cpp:62
 msgid "Network Game"
@@ -1121,9 +1118,9 @@ msgstr "Asetukset"
 msgid "Parachute"
 msgstr "Laskuvarjo"
 
-#: src/menu/network_connection_menu.cpp:168
-#: src/menu/network_connection_menu.cpp:206
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:167
+#: src/menu/network_connection_menu.cpp:205
+#: src/menu/network_connection_menu.cpp:245
 msgid "Password:"
 msgstr "Salasana:"
 
@@ -1151,18 +1148,18 @@ msgstr "Näytä nimi"
 msgid "Polecat Launcher"
 msgstr "Haisunäätä"
 
-#: src/menu/network_connection_menu.cpp:195
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:194
+#: src/menu/network_connection_menu.cpp:222
 msgid "Port:"
 msgstr "Portti:"
 
-#: src/menu/network_connection_menu.cpp:155
+#: src/menu/network_connection_menu.cpp:154
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
 #: src/menu/help_menu.cpp:95
 msgid "Quickly quit game with Ctrl"
-msgstr ""
+msgstr "Lopeta peli nopeasti Ctrl-näppäimellä"
 
 #: src/menu/main_menu.cpp:74
 msgid "Quit"
@@ -1216,17 +1213,17 @@ msgstr "Reunuksen koko"
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
-#: src/menu/network_connection_menu.cpp:184
+#: src/menu/network_connection_menu.cpp:183
 msgid "Server address:"
 msgstr "Palvelimen osoite:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:254
+#: src/menu/network_connection_menu.cpp:253
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:152 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:154 src/network/network.cpp:473
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
@@ -1270,11 +1267,11 @@ msgstr "Tarkkuuskivääri"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Joku viritti ansan laatikkoon!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:371
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:420
 #: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
@@ -1394,7 +1391,7 @@ msgstr "Peli keskeytyi koska yhteytesi katkesi."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Kranaatti poistui taistelukentältä ennen räjähtämistä!"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:344
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Muut odottavat sinua! Herätys! :-)"
 
@@ -1420,8 +1417,10 @@ msgstr "Palvelin hylkäsi yhteyden: väärä salasana!"
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
+"Aseella %s on loppumattomat ammukset, mutta bonuslaatikot saattavat sisältää "
+"ammuksia sille!"
 
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:243
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1492,7 +1491,11 @@ msgstr "Versio"
 msgid "Version verification failed because: %s"
 msgstr "Version tarkistus epäonnistui koska: %s"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:406
+msgid "Wait until some opponent(s) connect!"
+msgstr "Odota vähintään yhden vastustajan liittymistä!"
+
+#: src/menu/network_menu.cpp:258
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1502,13 +1505,13 @@ msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 #: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
-msgstr ""
+msgstr "Odotetaan henkilöä %s"
 
 #: src/game/game.cpp:166
 msgid "Waiting for remote players"
-msgstr ""
+msgstr "Odotetaan etäpelaajia"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:464
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
@@ -1526,11 +1529,10 @@ msgstr "Verkkosivu:"
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:128
-#, fuzzy, c-format
-#| msgid "Welcome to %s!"
+#: src/menu/network_menu.cpp:140
+#, c-format
 msgid "Welcome to %s on %s!"
-msgstr "Tervetuloa kohteeseen %s!"
+msgstr "Tervetuloa kohteeseen %s paikassa %s!"
 
 #: src/game/game.cpp:970
 #, c-format
@@ -1571,15 +1573,15 @@ msgstr "Väärä kartan nimi!"
 msgid "Wrong team!"
 msgstr "Väärä joukkue!"
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:348
 msgid "You are alone. :-/"
 msgstr "Olet yksin :-/"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:252
 msgid "You are alone..."
 msgstr "Olet yksin..."
 
-#: src/menu/network_menu.cpp:403
+#: src/menu/network_menu.cpp:405
 msgid "You are the new turn master!"
 msgstr "Sinä olet uusi vuoromestari!"
 
@@ -1591,7 +1593,7 @@ msgstr "Tarvitset ainakin yhden kunnollisen kartan !"
 msgid "You need at least two valid teams!"
 msgstr "Tarvitset ainakin kaksi kelvollista joukkuetta!"
 
-#: src/menu/network_menu.cpp:225
+#: src/menu/network_menu.cpp:227
 msgid "You won't be able to play before selecting a team!"
 msgstr "Et voi aloittaa peliä ennen kuin olet olet valinnut joukkueen!"
 
@@ -1650,6 +1652,10 @@ msgstr "o Ladataan ääniprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
+
+#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
+#~ msgstr ""
+#~ "Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
 #~ msgid "Max number of players:"
 #~ msgstr "Pelaajien määrä joukkueessa:"
