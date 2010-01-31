@@ -403,16 +403,17 @@ AC_SUBST([BUILD_ENV])
 AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
-		 lib/Makefile
-		 lib/wormux/Makefile
-		 lib/wormux-server/Makefile
+                 lib/Makefile
+                 lib/wormux/Makefile
+                 lib/wormux-server/Makefile
+                 build/win32_setup/create_setup.sh
                  doc/Makefile
                  po/Makefile
-		 tools/Makefile
-		 tools/list_games/Makefile
-		 tools/servers/Makefile
-		 tools/servers/game_server/Makefile
-		 tools/servers/index_server/Makefile
+                 tools/Makefile
+                 tools/list_games/Makefile
+                 tools/servers/Makefile
+                 tools/servers/game_server/Makefile
+                 tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)

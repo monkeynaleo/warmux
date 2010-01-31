@@ -65,15 +65,15 @@ cat > $NSIS <<EOF
 
 Name "Wormux"
 ;Version resource
-VIProductVersion        "svn.0"
+VIProductVersion        "@PACKAGE_VERSION@.0"
 VIAddVersionKey         "FileDescription"       "Wormux Installer"
 VIAddVersionKey         "ProductName"           "Wormux"
-VIAddVersionKey         "FileVersion"           "svn"
-VIAddVersionKey         "ProductVersion"        "svn"
+VIAddVersionKey         "FileVersion"           "@PACKAGE_VERSION@"
+VIAddVersionKey         "ProductVersion"        "@PACKAGE_VERSION@"
 VIAddVersionKey         "LegalCopyright"        "(C) 2001-2008 The Wormux Project"
 
 ;General
-OutFile "${LOCAL_PATH}\Wormux-Setup-svn.exe"
+OutFile "${LOCAL_PATH}\Wormux-Setup-@PACKAGE_VERSION@.exe"
 SetCompressor ${COMPRESSION}
 ShowInstDetails show
 ShowUninstDetails show
@@ -142,27 +142,27 @@ RequestExecutionLevel highest
   !insertmacro MUI_LANGUAGE "German"
   LicenseLangString WormuxLicense "German" "${WIN_WORMUXDIR}\doc\license\COPYING.de.txt"
   LangString TITLE_Wormux "German" "Wormux"
-  LangString DESC_Wormux  "German" "Wormux svn"
+  LangString DESC_Wormux  "German" "Wormux @PACKAGE_VERSION@"
 
   !insertmacro MUI_LANGUAGE "Spanish"
   LicenseLangString WormuxLicense "Spanish" "${WIN_WORMUXDIR}\doc\license\COPYING.es.txt"
   LangString TITLE_Wormux "Spanish" "Wormux"
-  LangString DESC_Wormux  "Spanish" "Wormux svn"
+  LangString DESC_Wormux  "Spanish" "Wormux @PACKAGE_VERSION@"
 
   !insertmacro MUI_LANGUAGE "Dutch"
   LicenseLangString WormuxLicense "Dutch" "${WIN_WORMUXDIR}\doc\license\COPYING.nl.txt"
   LangString TITLE_Wormux "Dutch" "Wormux"
-  LangString DESC_Wormux  "Dutch" "Wormux svn"
+  LangString DESC_Wormux  "Dutch" "Wormux @PACKAGE_VERSION@"
 
   !insertmacro MUI_LANGUAGE "Russian"
   LicenseLangString WormuxLicense "Russian" "${WIN_WORMUXDIR}\doc\license\COPYING.ru.txt"
   LangString TITLE_Wormux "Russian" "Wormux"
-  LangString DESC_Wormux  "Russian" "Wormux svn"
+  LangString DESC_Wormux  "Russian" "Wormux @PACKAGE_VERSION@"
 
   !insertmacro MUI_LANGUAGE "Slovenian"
   LicenseLangString WormuxLicense "Slovenian" "${WIN_WORMUXDIR}\doc\license\COPYING.sk.txt"
   LangString TITLE_Wormux "Slovenian" "Wormux"
-  LangString DESC_Wormux  "Slovenian" "Wormux svn"
+  LangString DESC_Wormux  "Slovenian" "Wormux @PACKAGE_VERSION@"
 
   ;--------------------------------
   ;Installer translations
@@ -355,9 +355,9 @@ cat >> $NSIS <<EOF
   StrCmp \$R0 "HKCU" _hkcu
     WriteRegStr HKLM "\${HKLM_APP_PATHS_KEY}" "" "\$INSTDIR\wormux.exe"
     WriteRegStr HKLM "\${WORMUX_REG_KEY}" "" "\$INSTDIR"
-    WriteRegStr HKLM "\${WORMUX_REG_KEY}" "Version" "svn"
+    WriteRegStr HKLM "\${WORMUX_REG_KEY}" "Version" "@PACKAGE_VERSION@"
     WriteRegStr HKLM "\${WORMUX_UNINSTALL_KEY}" "DisplayName" "Wormux"
-    WriteRegStr HKLM "\${WORMUX_UNINSTALL_KEY}" "DisplayVersion" "svn"
+    WriteRegStr HKLM "\${WORMUX_UNINSTALL_KEY}" "DisplayVersion" "@PACKAGE_VERSION@"
     WriteRegStr HKLM "\${WORMUX_UNINSTALL_KEY}" "UninstallString" "\$INSTDIR\uninstall.exe"
     ;Write language to the registry (for the uninstaller)
     WriteRegStr HKLM "\${WORMUX_REG_KEY}" "Installer Language" \$LANGUAGE
@@ -367,9 +367,9 @@ cat >> $NSIS <<EOF
 
   _hkcu:
     WriteRegStr HKCU "\${WORMUX_REG_KEY}" "" "\$INSTDIR"
-    WriteRegStr HKCU "\${WORMUX_REG_KEY}" "Version" "svn"
+    WriteRegStr HKCU "\${WORMUX_REG_KEY}" "Version" "@PACKAGE_VERSION@"
     WriteRegStr HKCU "\${WORMUX_UNINSTALL_KEY}" "DisplayName" "Pidgin"
-    WriteRegStr HKCU "\${WORMUX_UNINSTALL_KEY}" "DisplayVersion" "svn"
+    WriteRegStr HKCU "\${WORMUX_UNINSTALL_KEY}" "DisplayVersion" "@PACKAGE_VERSION@"
     WriteRegStr HKCU "\${WORMUX_UNINSTALL_KEY}" "UninstallString" "\$INSTDIR\\uninstall.exe"
     ;Write language to the registry (for the uninstaller)
     WriteRegStr HKCU "\${WORMUX_REG_KEY}" "Installer Language" \$LANGUAGE
