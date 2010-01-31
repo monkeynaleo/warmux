@@ -14,7 +14,7 @@
  <surface name="preview" file="preview.jpg" />
  
  <name>Arcade Room</name>
-  <water>water</water>
+  <water>no</water>
  <nb_mine>6</nb_mine>
  <is_open>1</is_open>
  
