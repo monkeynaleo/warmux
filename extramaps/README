@@ -20,6 +20,15 @@ WARNING: .local is a hidden directory.
 ================================================================================
 
 ** All Wormux versions:
-Extract the archive in C:\Documents and Settings\<user>\Application Data\Wormux\Map\
+Extract the archive in C:\Documents and Settings\<user>\Application Data\Wormux\map\
+
+With <user> to replace with your login name.
+
+================================================================================
+ For Windows Seven
+================================================================================
+
+** All Wormux versions:
+Extract the archive in C:\Users\<user>\AppData\Roaming\Wormux\map\
 
 With <user> to replace with your login name.
