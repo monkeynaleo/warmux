@@ -313,7 +313,7 @@ fi
 
 AC_MSG_CHECKING(for libxml2)
 
-if $PACKAGE_CONFIG libxml-2.0 --libs > /dev/null 2>&1; then
+if $PACKAGE_CONFIG --exists libxml-2.0; then
   AC_MSG_RESULT(yes)
 else
   AC_MSG_RESULT(no)
