@@ -24,6 +24,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
+#include <curl/curl.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
 #include <WORMUX_error.h>
