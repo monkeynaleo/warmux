@@ -248,6 +248,7 @@ if test "${enable_fribidi}" = "yes"; then
    AC_CHECK_LIB(fribidi, fribidi_log2vis,
                 [ LIBS="$LIBS `$PACKAGE_CONFIG --libs fribidi`"
                   CFLAGS="$CFLAGS `$PACKAGE_CONFIG --cflags fribidi`"
+                  CXXFLAGS="$CXXFLAGS `$PACKAGE_CONFIG --cflags fribidi`"
                   AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
                 [ AC_MSG_WARN([unable to use FriBidi])
                   use_fribidi="false" ],
