@@ -40,7 +40,7 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 AC_CHECK_TOOL(STRIP, strip)
 AC_CHECK_TOOL(WINDRES, windres)
-AC_CHECK_TOOL(PACKAGE_CONFIG, $PACKAGE_CONFIG)
+AC_CHECK_TOOL(PACKAGE_CONFIG, pkg-config)
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
