@@ -40,6 +40,7 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 AC_CHECK_TOOL(STRIP, strip)
 AC_CHECK_TOOL(WINDRES, windres)
+AC_CHECK_TOOL(PACKAGE_CONFIG, $PACKAGE_CONFIG)
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -222,13 +223,6 @@ CFLAGS="$CFLAGS $SDL_CFLAGS"
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
-dnl === Check for pkg-config ===============================================
-
-AC_PATH_PROGS([PACKAGE_CONFIG], [$host_alias-pkg-config pkg-config], [none])
-if test "x$PACKAGE_CONFIG" = "xnone"; then
-  AC_MSG_ERROR([*** pkg-config, needed to check for libxml2 existence has not been found.])
-fi
-
 dnl === Check for X11 =====================================================
 dnl Deactivated on purpose under OSX (in case X11 SDK is installed)
 if test "x$OSX" != "xyes" ; then
@@ -252,12 +246,12 @@ AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional
 if test "${enable_fribidi}" = "yes"; then
    use_fribidi="true"
    AC_CHECK_LIB(fribidi, fribidi_log2vis,
-                [ LIBS="$LIBS `pkg-config --libs fribidi`"
-                  CFLAGS="$CFLAGS `pkg-config --cflags fribidi`"
+                [ LIBS="$LIBS `$PACKAGE_CONFIG --libs fribidi`"
+                  CFLAGS="$CFLAGS `$PACKAGE_CONFIG --cflags fribidi`"
                   AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
                 [ AC_MSG_WARN([unable to use FriBidi])
                   use_fribidi="false" ],
-                [ `pkg-config --libs fribidi` ])
+                [ `$PACKAGE_CONFIG --libs fribidi` ])
    if ! ${use_fribidi}; then
      AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.])
    fi
