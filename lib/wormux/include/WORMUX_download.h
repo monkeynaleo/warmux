@@ -30,7 +30,7 @@
 #else
 #  include "config.h"
 #endif
-#include <curl/curl.h>
+typedef void CURL;
 
 #include <WORMUX_singleton.h>
 
