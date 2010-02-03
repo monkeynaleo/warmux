@@ -38,6 +38,7 @@ AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_RANLIB
+AC_CHECK_TOOL(WINDRES, windres)
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -103,11 +104,6 @@ fi
 case "${host}" in
   i[[3456789]]86-*-mingw32*)
      WIN32="yes"
-     AC_PATH_PROGS([WINDRES], [windres $host_alias-windres $host_os-windres])
-     if test "x$WINDRES" = "x"; then
-       AC_MSG_ERROR([windres could not be found within your path.])
-     fi
-     AC_SUBST(WINDRES)
      ;;
   *freebsd*)
      LIBS="$LIBS -lintl" # a temporary hackish workaround
