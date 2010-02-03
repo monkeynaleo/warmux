@@ -315,6 +315,10 @@ void Weapon::StartShooting()
 
 void Weapon::StopShooting()
 {
+  if (max_strength != 0 && !IsLoading())
+    /* User has probably exceed the max_strength */
+    return;
+
   if (!ActiveCharacter().IsPreparingShoot()) {
     PrepareShoot();
   }
