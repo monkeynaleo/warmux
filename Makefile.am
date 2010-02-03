@@ -1,4 +1,4 @@
-SUBDIRS = data lib src po doc tools
+SUBDIRS = data lib src po doc
 
 EXTRA_DIST = build/visual/gettext.rules            \
              build/visual/wormux.sln               \
@@ -49,6 +49,8 @@ install: all
          (echo "Installer compilation failed!"; \
           echo "Check build/win32_setup/installer.log for details"; \
           exit 1)
+else
+SUBDIRS+=tools
 endif
 
 # make run: run the game without installing it. Saves you the hassle
