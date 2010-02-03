@@ -21,20 +21,15 @@ NSIS="$DEST/wormux.nsi"
 rm -rf $NSIS $DEST
 
 # Prepare stuff
+@STRIP@ ../../src/wormux.exe
 if [ "$OSTYPE" == "linux-gnu" ]; then
-  PKG_CONFIG=i586-mingw32msvc-pkg-config
-  SDL_CONFIG=i586-mingw32msvc-sdl-config
   WIN_WORMUXDIR="$PWD/../.."
   LOCAL_PATH="$PWD"
   SEP="/"
-  i586-mingw32msvc-strip ../../src/wormux.exe
 else
-  PKG_CONFIG=pkg-config
-  SDL_CONFIG=sdl-config
   WIN_WORMUXDIR=$(cd "$WORMUXDIR" && cmd /c cd)
   LOCAL_PATH=$(cmd /c cd)
   SEP="\\"
-  strip ../../src/wormux.exe
 fi
 
 mkdir -p $DEST
@@ -42,13 +37,13 @@ mkdir -p $DEST
 function pkg_path
 {
   if [ -z "$1" ]; then return ""; fi
-  var=$($PKG_CONFIG --variable=prefix $1 2>/dev/null || exit 1)
+  var=$(@PACKAGE_CONFIG@ --variable=prefix $1 2>/dev/null || exit 1)
   if [ -z "$var" ]; then echo "Couldn't find $1, aborting..." 1>&2; exit 1; fi
   echo "Found $1 in $var" 1>&2
   echo "$var"
 }
 
-if ! pkg-config --help 2>/dev/null 1>&2 ; then
+if ! @PACKAGE_CONFIG@ --help 2>/dev/null 1>&2 ; then
   echo "pkg-config not found, aborting..."
   exit 1
 fi
@@ -326,7 +321,7 @@ cp "$XML_PATH/bin/libxml2.dll" "$DEST"
 
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
 # Make sure freetype, libpng and jpeg dll are matching your libs.
-SDL_PATH=$($SDL_CONFIG --prefix)
+SDL_PATH=$(@SDL_CONFIG@ --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll       \
    "$XML_PATH/bin/"{intl,iconv,zlib1,jpeg62,freetype6}.dll \
    "$XML_PATH/bin/"lib{png12,tiff3}.dll                    \
