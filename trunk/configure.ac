@@ -411,6 +411,7 @@ AC_CONFIG_FILES([Makefile
 AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
+chmod +x build/win32_setup/create_setup.sh
 
 echo "***********************************************************"
 echo "Configuration complete"
