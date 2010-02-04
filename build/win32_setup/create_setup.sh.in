@@ -32,6 +32,9 @@ else
   SEP="\\"
 fi
 
+if test "@PACKAGE_VERSION@" = "svn"; then VIPV="0.0.0"
+else hen VIPV="@PACKAGE_VERSION@"; fi
+
 mkdir -p $DEST
 
 function pkg_path
@@ -60,7 +63,7 @@ cat > $NSIS <<EOF
 
 Name "Wormux"
 ;Version resource
-VIProductVersion        "@PACKAGE_VERSION@.0"
+VIProductVersion        "$VIPV.0"
 VIAddVersionKey         "FileDescription"       "Wormux Installer"
 VIAddVersionKey         "ProductName"           "Wormux"
 VIAddVersionKey         "FileVersion"           "@PACKAGE_VERSION@"
@@ -313,19 +316,13 @@ Section \$(TITLE_Wormux) Sec_Wormux
   File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
 EOF
 
-# Glib (gobject, gthread, glib & gmodule)
-XML_PATH=$(pkg_path libxml-2.0)
-
-# Other libs
-cp "$XML_PATH/bin/libxml2.dll" "$DEST"
-
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
 # Make sure freetype, libpng and jpeg dll are matching your libs.
 SDL_PATH=$(@SDL_CONFIG@ --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll       \
-   "$XML_PATH/bin/"{intl,iconv,zlib1,jpeg62,freetype6}.dll \
-   "$XML_PATH/bin/"lib{png12,tiff3}.dll                    \
-   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3,curl-4}.dll "$DEST"
+   "$SDL_PATH/bin/"{zlib1,jpeg62}.dll                      \
+   "$SDL_PATH/bin/"lib{png3,intl3,iconv2,freetype-6}.dll   \
+   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF
