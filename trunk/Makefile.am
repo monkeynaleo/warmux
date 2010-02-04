@@ -32,7 +32,7 @@ EXTRA_DIST = build/visual/gettext.rules            \
              build/mac/README-mac.txt              \
              build/mac/README-mac.txt              \
              build/mac/cmake_build.sh              \
-	     build/win32_setup/create_setup.sh     \
+	     build/win32_setup/create_setup.sh.in  \
              build/win32_setup/English.nsh         \
              build/win32_setup/French.nsh          \
              build/win32_setup/Greek.nsh           \
@@ -44,7 +44,7 @@ EXTRA_DIST = build/visual/gettext.rules            \
 if WIN32
 install: all
 	@echo "Building Win32 .exe installer in build/win32_setup"
-	@(cd build/win32_setup && sh create_setup.sh 2> installer.log 1>&2 && \
+	@(cd build/win32_setup && ./create_setup.sh 2> installer.log 1>&2 && \
           rm installer.log && echo "Success!") || \
          (echo "Installer compilation failed!"; \
           echo "Check build/win32_setup/installer.log for details"; \
