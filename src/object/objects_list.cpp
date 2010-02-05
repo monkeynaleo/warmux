@@ -79,7 +79,13 @@ void ObjectsList::Refresh()
   while(object != end())
   {
     (*object)->UpdatePosition();
-    (*object)->Refresh();
+
+    if (!(*object)->IsGhost()) {
+      // Update position may lead to a Ghost object, we
+      // must not to refresh in that case
+      (*object)->Refresh();
+    }
+
     if((*object)->IsGhost()) {
       // Stop following this object, remove from overlapse reference then delete it.
       Camera::GetInstance()->StopFollowingObj(*object);
