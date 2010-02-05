@@ -310,7 +310,6 @@
       <min_angle>-45</min_angle>
       <max_angle>89</max_angle>
       <max_rope_length>500</max_rope_length>
-      <automatic_growing_speed>12</automatic_growing_speed>
       <push_force>15</push_force>
       <drop_probability>1</drop_probability>
       <ammo_per_drop>2</ammo_per_drop>

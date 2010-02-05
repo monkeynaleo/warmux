@@ -44,11 +44,7 @@ class Grapple : public Weapon
     double last_broken_node_sense;
 
     // Rope launching data.
-    bool m_attaching;
     bool attached;
-    double m_initial_angle;
-    uint m_launch_time;
-    uint m_hooked_time;
     Sprite* m_hook_sprite;
     Sprite* m_node_sprite;
 
