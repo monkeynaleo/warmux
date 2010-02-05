@@ -248,7 +248,10 @@ bool Weapon::Shoot()
             hand.GetY());
   #endif
   ActiveCharacter().body->DebugState();
-  if (!p_Shoot()) return false;
+  if (!p_Shoot()) {
+    MSG_DEBUG("weapon.shoot", "shoot has failed!!");
+    return false;
+  }
   m_last_fire_time = Time::GetInstance()->Read();
 
   MSG_DEBUG("weapon.shoot", "shoot!");
