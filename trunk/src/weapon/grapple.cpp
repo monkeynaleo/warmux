@@ -46,22 +46,25 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
                                int skip, Point2i &contact_point)
 {
   Point2d posd;
-  double x_step, y_step ;
+  double x_step, y_step;
 
-  x_step = cos(angle) ;
-  y_step = sin(angle) ;
+  if ((int)length <= skip) /* to avoid integer overflow */
+    return false;
 
-  posd.x = (double)from.x ;
-  posd.y = (double)from.y ;
+  x_step = cos(angle);
+  y_step = sin(angle);
+
+  posd.x = (double)from.x;
+  posd.y = (double)from.y;
 
   posd.x += ((double)skip) * x_step;
   posd.y += ((double)skip) * y_step;
 
-  from.x = (int)round(posd.x) ;
-  from.y = (int)round(posd.y) ;
+  from.x = (int)round(posd.x);
+  from.y = (int)round(posd.y);
 
-  contact_point.x = from.x ;
-  contact_point.y = from.y ;
+  contact_point.x = from.x;
+  contact_point.y = from.y;
 
   length -= skip;
 
@@ -131,7 +134,6 @@ class GrappleConfig : public EmptyWeaponConfig
 {
  public:
   uint max_rope_length; // Max rope length in pixels
-  uint automatic_growing_speed; // Pixel per 1/100 second.
   int push_force;
 
  public:
@@ -155,10 +157,9 @@ Grapple::Grapple() :
   m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
 
   attached = false;
-  m_attaching = false;
-  go_left = false ;
-  go_right = false ;
-  delta_len = 0 ;
+  go_left = false;
+  go_right = false;
+  delta_len = 0;
   move_left_pressed = false;
   move_right_pressed = false;
   move_up_pressed = false;
@@ -182,10 +183,7 @@ bool Grapple::p_Shoot()
 {
   last_broken_node_angle = 100;
 
-  m_attaching = true;
-  m_launch_time = Time::GetInstance()->Read() ;
-  m_initial_angle = ActiveCharacter().GetFiringAngle();
-  last_mvt=Time::GetInstance()->Read();
+  last_mvt = Time::GetInstance()->Read();
 
   if (!TryAttachRope()) // We have failed to attach!
     return false;
@@ -198,47 +196,20 @@ bool Grapple::TryAttachRope()
 {
   Point2i pos;
   uint length;
-  uint delta_time = Time::GetInstance()->Read() - m_launch_time;
-  double angle ;
+  double angle;
 
-  // Remove the root node
-  rope_nodes.clear();
-
-  // The rope is being launching. Increase the rope length and check
-  // collisions.
+  ASSERT(rope_nodes.empty());
 
   ActiveCharacter().GetHandPosition(pos);
 
-  length = cfg().automatic_growing_speed * delta_time / 10;
-  if (length > cfg().max_rope_length)
-    {
-      // Hum the rope is too short !
-      m_attaching = false;
-      attached = false;
-
-      // Give back one ammo...
-      int *ammo = &ActiveTeam().AccessNbAmmos();
-      if (*ammo != INFINITE_AMMO) (*ammo)++;
-      ASSERT (*ammo > 0 || *ammo == INFINITE_AMMO);
-
-      return false;
-    }
-
-  angle = m_initial_angle;
+  length = cfg().max_rope_length;
+  angle = ActiveCharacter().GetFiringAngle();
 
   Point2i contact_point;
-  if (find_first_contact_point(pos, angle, length, 4, contact_point))
-    {
-      AttachRope(contact_point);
-      return true;
-    }
-
-  rope_node_t root_node;
-  root_node.pos.x = pos.x + int(length * cos(angle));
-  root_node.pos.y = pos.y + int(length * sin(angle));
-  root_node.angle = 0;
-  root_node.sense = 0;
-  rope_nodes.push_back(root_node);
+  if (find_first_contact_point(pos, angle, length, 4, contact_point)) {
+    AttachRope(contact_point);
+    return true;
+  }
 
   return false;
 }
@@ -359,7 +330,7 @@ void Grapple::NotifyMove(bool collision)
   bool addNode = false;
   int currentSense;
 
-  if (!attached || m_attaching)
+  if (!attached)
     return;
 
   // Check if the character collide something.
@@ -407,15 +378,8 @@ void Grapple::Refresh()
     GoDown();
   }
 
-
-  if (m_attaching)
-    TryAttachRope();
-
-  if (attached && !m_attaching)
-  {
-    ActiveCharacter().SetMovement("ninja-rope");
-    ActiveCharacter().UpdatePosition();
-  }
+  ActiveCharacter().SetMovement("ninja-rope");
+  ActiveCharacter().UpdatePosition();
 }
 
 void Grapple::Draw()
@@ -428,18 +392,11 @@ void Grapple::Draw()
 
   Weapon::Draw();
 
-  if (!attached)
-  {
-    return ;
+  if (!attached) {
+    return;
   }
 
-  if (m_attaching) {
-    angle = m_initial_angle + M_PI/2;
-  }
-  else {
-    angle = ActiveCharacter().GetRopeAngle();
-  }
-
+  angle = ActiveCharacter().GetRopeAngle();
   prev_angle = angle;
 
   // Draw the rope.
@@ -466,14 +423,9 @@ void Grapple::Draw()
       int size = (quad.x1-quad.x4) * (quad.x1-quad.x4)
                 +(quad.y1-quad.y4) * (quad.y1-quad.y4);
       size -= m_node_sprite->GetHeight();
-      while( (step*dx*step*dx)+(step*dy*step*dy) < size )
-      {
-        if(m_attaching)
-          m_node_sprite->Draw(Point2i(quad.x1 + (int)((float) step * dx),
-                                      quad.y1 - (int)((float) step * dy)));
-        else
-          m_node_sprite->Draw(Point2i(quad.x4 + (int)((float) step * dx),
-                                      quad.y4 + (int)((float) step * dy)));
+      while( (step*dx*step*dx)+(step*dy*step*dy) < size ) {
+	m_node_sprite->Draw(Point2i(quad.x4 + (int)((float) step * dx),
+				    quad.y4 + (int)((float) step * dy)));
         step++;
       }
       quad.x1 = quad.x4 ;
@@ -492,7 +444,6 @@ void Grapple::AttachRope(const Point2i& contact_point)
 {
   MSG_DEBUG("grapple.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
 
-  m_attaching = false;
   attached = true;
   move_left_pressed = false;
   move_right_pressed = false;
@@ -520,7 +471,6 @@ void Grapple::AttachRope(const Point2i& contact_point)
   rope_nodes.push_back(root_node);
 
   ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
-  m_hooked_time = Time::GetInstance()->Read();
   ActiveCharacter().SetMovement("ninja-rope");
 
   ActiveCharacter().SetFiringAngle(-M_PI / 3);
@@ -829,7 +779,6 @@ GrappleConfig& Grapple::cfg()
 GrappleConfig::GrappleConfig()
 {
   max_rope_length = 450;
-  automatic_growing_speed = 12;
   push_force = 10;
 }
 
@@ -837,6 +786,5 @@ void GrappleConfig::LoadXml(const xmlNode* elem)
 {
   EmptyWeaponConfig::LoadXml(elem);
   XmlReader::ReadUint(elem, "max_rope_length", max_rope_length);
-  XmlReader::ReadUint(elem, "automatic_growing_speed", automatic_growing_speed);
   XmlReader::ReadInt(elem, "push_force", push_force);
 }
