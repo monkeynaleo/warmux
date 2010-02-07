@@ -148,6 +148,7 @@ void Interface::Reset()
 {
   delete minimap;
   minimap = NULL;
+  m_last_minimap_redraw = 0;
   start_hide_display = 0;
   start_show_display = 0;
   character_under_cursor = NULL;
