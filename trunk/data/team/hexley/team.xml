@@ -8,12 +8,15 @@
   <team>
     <character name="Hexley" body="hexley" />
     <character name="DarwinOS" body="hexley" />
-    <character name="Mascot" body="hexley" />
-    <character name="Copyright" body="hexley" />
-    <character name="2000" body="hexley" />
-    <character name="by" body="hexley" />
-    <character name="Jon" body="hexley" />
-    <character name="Hooper" body="hexley" />
+    <character name="Ornithorhynchus anatinus" body="hexley" />
+    <character name="Thomas Henry" body="hexley" />
+    <character name="Charles" body="hexley" />
+    <character name="XNU" body="hexley" />
+    <character name="Jon Hooper" body="hexley" />
+    <character name="Rhapsody" body="hexley" />
+	<character name="iPhone OS" body="hexley" />
+    <character name="PureDarwin" body="hexley" />
+	<character name="Apple TV" body="hexley" />
   </team>
 </resources>
 
