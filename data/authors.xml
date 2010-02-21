@@ -998,6 +998,14 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>FUZxxl</nickname>
+	<name>Robert Clausecker</name>
+	<description>Good job on data-src</description>
+	<email>fuzxxl_AT_gmail_DOT_com</email>
+	<website>http://www.fuzxxl.de</website>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>Jika</nickname>
 	<name>Julien CLAEYS BOÚÚAERT</name>
 	<description>Bug reports, tests, website help,...</description>
