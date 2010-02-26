@@ -1,7 +1,7 @@
 # Japanese (Japan) translation for Wormux
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-#
+# 
 # <akicks@gmail.com>,2009.
 msgid ""
 msgstr ""
@@ -23,13 +23,13 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! マップ「%s」が見つかりません :-("
 
-#: src/menu/network_menu.cpp:108 src/menu/network_menu.cpp:339
+#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:354
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i人のプレイヤーが接続しています"
 
-#: src/menu/network_menu.cpp:112 src/menu/network_menu.cpp:349
+#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:364
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -535,7 +535,7 @@ msgid "Click: Center the camera on the character"
 msgstr "クリック:カメラの中心をキャラクターにする"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:148 src/network/network.cpp:461
+#: src/menu/network_menu.cpp:163 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "クライアントモード"
 
@@ -600,7 +600,7 @@ msgstr "ディスコグレネード"
 msgid "Displays this message"
 msgstr "メッセージを表示"
 
-#: src/menu/network_menu.cpp:150
+#: src/menu/network_menu.cpp:165
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "一度あなたのチームを選択し確認することを忘れずに"
 
@@ -727,7 +727,7 @@ msgstr "フルスクリーン / ウインドウ"
 msgid "Fullscreen?"
 msgstr "フルスクリーン？"
 
-#: src/menu/game_menu.cpp:85
+#: src/menu/game_menu.cpp:93
 msgid "Game"
 msgstr "ゲーム"
 
@@ -776,7 +776,7 @@ msgstr "楽しんで！"
 msgid "Head commander"
 msgstr "指揮官"
 
-#
+# 
 #. Display player's name
 #: src/interface/interface.cpp:191
 msgid "Head commander: "
@@ -929,7 +929,8 @@ msgstr "低重力装置"
 msgid "Manual connection"
 msgstr "マニュアル接続"
 
-#: src/menu/game_menu.cpp:77
+#: src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/menu/network_menu.cpp:94 src/menu/network_menu.cpp:98
 msgid "Map"
 msgstr "マップ"
 
@@ -942,7 +943,7 @@ msgstr "マップ %s, 作者 : "
 msgid "Maps"
 msgstr "マップ"
 
-#: src/menu/network_menu.cpp:409 src/menu/network_menu.cpp:410
+#: src/menu/network_menu.cpp:424 src/menu/network_menu.cpp:425
 msgid "Master mode"
 msgstr "ゲームモード"
 
@@ -1074,7 +1075,7 @@ msgstr "パスワード"
 msgid "Play"
 msgstr "プレイ"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:120
 msgid "Play several times"
 msgstr "何度かプレイ"
 
@@ -1169,7 +1170,7 @@ msgid "Server available on Internet"
 msgstr "インターネットでサーバーが使用できます"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:154 src/network/network.cpp:491
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:491
 msgid "Server mode"
 msgstr "サーバーモード"
 
@@ -1277,7 +1278,8 @@ msgstr "チームグラフ"
 msgid "Team stats"
 msgstr "チーム統計"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:65
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:75 src/menu/game_menu.cpp:79
+#: src/menu/network_menu.cpp:93 src/menu/network_menu.cpp:97
 msgid "Teams"
 msgstr "チーム"
 
@@ -1338,7 +1340,7 @@ msgstr "あなたが切断されたため、ゲームは中断されました。
 msgid "The grenade left the battlefield before exploding!"
 msgstr "グレネードは、爆発前に戦場から出てしまいました。"
 
-#: src/menu/network_menu.cpp:355
+#: src/menu/network_menu.cpp:370
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "他の人が待ってるよ！起きて！ :-)"
 
@@ -1367,7 +1369,7 @@ msgstr ""
 "武器 %s は無限の弾薬を持っています。しかし、ボーナスボックスはそれのために弾"
 "薬を含むかもしれません！"
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:271
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1437,11 +1439,11 @@ msgstr "バージョン"
 msgid "Version verification failed because: %s"
 msgstr "バージョン確認は失敗しました。 理由: %s"
 
-#: src/menu/network_menu.cpp:417
+#: src/menu/network_menu.cpp:432
 msgid "Wait until some opponent(s) connect!"
 msgstr "まだ相手の接続を待っています！"
 
-#: src/menu/network_menu.cpp:270
+#: src/menu/network_menu.cpp:285
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1456,7 +1458,7 @@ msgstr "%s を待っています"
 msgid "Waiting for remote players"
 msgstr "リモートプレイヤーを待っています"
 
-#: src/menu/network_menu.cpp:485
+#: src/menu/network_menu.cpp:500
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "サーバーを待っています。キャンセルとチャットができます！"
 
@@ -1474,7 +1476,7 @@ msgstr "Webサイト: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:140
+#: src/menu/network_menu.cpp:155
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "%s (%s)へようこそ！"
@@ -1494,7 +1496,7 @@ msgstr " %s はハンドガンごときにやられました...これは恥ず�
 msgid "Wind particles?"
 msgstr "風の表示？"
 
-#
+# 
 #: src/menu/results_menu.cpp:383
 msgid "Winner"
 msgstr "勝者"
@@ -1519,15 +1521,15 @@ msgstr "名前が間違っているマップです！"
 msgid "Wrong team!"
 msgstr "チームが間違っています！"
 
-#: src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:374
 msgid "You are alone. :-/"
 msgstr "あなたは孤独・・・ :-/"
 
-#: src/menu/network_menu.cpp:264
+#: src/menu/network_menu.cpp:279
 msgid "You are alone..."
 msgstr "あなたは孤独..."
 
-#: src/menu/network_menu.cpp:416
+#: src/menu/network_menu.cpp:431
 msgid "You are the new turn master!"
 msgstr "あなたは新しいターンマスターです！"
 
@@ -1539,7 +1541,7 @@ msgstr "最低1つの有効なマップが必要です！"
 msgid "You need at least two valid teams!"
 msgstr "最低2つの有効なチームが必要です！"
 
-#: src/menu/network_menu.cpp:240
+#: src/menu/network_menu.cpp:255
 msgid "You won't be able to play before selecting a team!"
 msgstr "ゲーム開始前にチームを選択してください！"
 
@@ -1547,7 +1549,7 @@ msgstr "ゲーム開始前にチームを選択してください！"
 msgid "Your shot has missed!"
 msgstr "ミス！"
 
-#
+# 
 #: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "aka"
@@ -1579,7 +1581,7 @@ msgstr "完了"
 msgid "error parsing the config file"
 msgstr "構成ファイルを解析しているエラー"
 
-#
+# 
 #: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "from"

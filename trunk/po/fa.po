@@ -20,13 +20,13 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "نقشه‌ی %s پیدا نشد."
 
-#: src/menu/network_menu.cpp:108 src/menu/network_menu.cpp:325
+#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:354
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "بازیکن %i وصل شد"
 
-#: src/menu/network_menu.cpp:112 src/menu/network_menu.cpp:335
+#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:364
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -42,13 +42,13 @@ msgstr "%s <%s> مشهور به %s از %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> از %s"
 
-#: src/menu/team_box.cpp:218
+#: src/menu/team_box.cpp:236
 #, c-format
 msgid "%s Team"
 msgstr "تیم %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:210
+#: src/menu/team_box.cpp:228
 #, c-format
 msgid "%s Team - Remote"
 msgstr "تیم %s- از راه دور"
@@ -58,37 +58,37 @@ msgstr "تیم %s- از راه دور"
 msgid "%s fps"
 msgstr "%s فریم بر ثانیه"
 
-#: src/game/game.cpp:992
+#: src/game/game.cpp:996
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s خودکشی کرد!"
 
-#: src/game/game.cpp:1025
+#: src/game/game.cpp:1029
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) مرد."
 
-#: src/game/game.cpp:983
+#: src/game/game.cpp:987
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s در آب افتاد."
 
-#: src/game/game.cpp:977
+#: src/game/game.cpp:981
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s از نقشه بیرون افتاد."
 
-#: src/game/game.cpp:998
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:1005
+#: src/game/game.cpp:1009
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s کشته شد، بخاطر اینکه او یک احمق بود!"
 
-#: src/weapon/polecat.cpp:114
+#: src/weapon/polecat.cpp:115
 #, c-format
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
@@ -101,17 +101,17 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s %u انرژی برنده شد!"
 
-#: src/game/game.cpp:1017
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s یک موجود روانی است، او یکی از اعضای تیم %s را به کشتن داد."
 
-#: src/weapon/mine.cpp:126
+#: src/weapon/mine.cpp:120
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s نزدیک یک مین است!"
 
-#: src/include/action_handler.cpp:388
+#: src/include/action_handler.cpp:401
 #, c-format
 msgid "%s needs a pause."
 msgstr ""
@@ -134,7 +134,7 @@ msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "تیم %s برنده‌ی %u بازوکا شد!"
 
-#: src/weapon/gnu.cpp:251
+#: src/weapon/gnu.cpp:252
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -182,7 +182,7 @@ msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
 msgstr[0] "تیم %s برنده‌ی %u بازوکا شد!"
 
-#: src/weapon/blowtorch.cpp:148
+#: src/weapon/blowtorch.cpp:154
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -191,7 +191,7 @@ msgid_plural ""
 "it."
 msgstr[0] "تیم %s برنده‌ی %u مشعل شد! اگر زیر ۱۸ سال هستید، برو با بزرگترت بیا!"
 
-#: src/weapon/bounce_ball.cpp:112
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -209,7 +209,7 @@ msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "تیم %s برنده‌ی %u سازه شد! کلاه ایمنی فراموش نشه."
 
-#: src/weapon/disco_grenade.cpp:169
+#: src/weapon/disco_grenade.cpp:170
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -217,7 +217,7 @@ msgid_plural ""
 msgstr[0] ""
 "تیم %s برنده‌ی %u نارنجک دیسکو شد! وقتی راه افتاد، بدنتو باهاش بلرزون!"
 
-#: src/weapon/dynamite.cpp:149
+#: src/weapon/dynamite.cpp:150
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -235,13 +235,13 @@ msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "تیم %s برنده‌ی %u بمب تخریبی شد!"
 
-#: src/weapon/grapple.cpp:811
+#: src/weapon/grapple.cpp:766
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "تیم %s برنده‌ی %u چنگک شد! ببینم تو بهتری یا مرد عنکبوتی؟!"
 
-#: src/weapon/grenade.cpp:89
+#: src/weapon/grenade.cpp:90
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -253,7 +253,7 @@ msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "تیم %s برنده‌ی %u اسلحه شد!"
 
-#: src/weapon/jetpack.cpp:208
+#: src/weapon/jetpack.cpp:209
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -270,19 +270,19 @@ msgstr[0] ""
 "تیم %s برنده‌ی %u ضد جاذبه شد! هه هه! یادش بخیر! یاد اون موقع‌ها افتادم که رو "
 "ماه راه می‌رفتیم!"
 
-#: src/weapon/mine.cpp:262
+#: src/weapon/mine.cpp:256
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "تیم %s برنده‌ی %u مین شد!"
 
-#: src/weapon/parachute.cpp:174
+#: src/weapon/parachute.cpp:176
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "تیم %s برنده‌ی %u بادکنک نجات شد!"
 
-#: src/weapon/polecat.cpp:276
+#: src/weapon/polecat.cpp:277
 #, fuzzy, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -321,7 +321,7 @@ msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "تیم %s برنده‌ی %u مسلسل شد!"
 
-#: src/weapon/suicide.cpp:76
+#: src/weapon/suicide.cpp:78
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -347,7 +347,7 @@ msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
 msgstr[0] "تیم %s برنده‌ی %u خروج از نوبت شد! می‌دونم خیلی دوسش داری!"
 
-#: src/weapon/supertux.cpp:313
+#: src/weapon/supertux.cpp:315
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -359,12 +359,12 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
 
-#: src/interface/interface.cpp:199
+#: src/interface/interface.cpp:200
 msgid "(dead)"
 msgstr "(مرده)"
 
@@ -378,7 +378,7 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:230
+#: src/interface/interface.cpp:231
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
@@ -457,32 +457,32 @@ msgstr "جابجایی"
 msgid "Blitz"
 msgstr ""
 
-#: src/weapon/blowtorch.cpp:64
+#: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
 msgstr "مشعل"
 
-#: src/weapon/bounce_ball.cpp:88
+#: src/weapon/bounce_ball.cpp:89
 msgid "Bounce Ball"
 msgstr "شیطونک"
 
-#: src/weapon/supertux.cpp:175
+#: src/weapon/supertux.cpp:177
 #, fuzzy
 msgid "Bye bye Tux..."
 msgstr "بای بای تاکس..."
 
-#: src/menu/network_teams_selection_box.cpp:235 src/team/teams_list.cpp:485
-#: src/team/teams_list.cpp:518 src/team/teams_list.cpp:527
-#: src/team/teams_list.cpp:533 src/team/teams_list.cpp:597
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
+#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:600
 #, c-format
 msgid "Can't find team %s!"
 msgstr "نمی‌توان تیم %s را پیدا کرد!"
 
-#: src/team/teams_list.cpp:151
+#: src/team/teams_list.cpp:150
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کرد (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:139
+#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
@@ -542,7 +542,7 @@ msgid "Click: Center the camera on the character"
 msgstr "تعداد کاراکترها"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:148 src/network/network.cpp:443
+#: src/menu/network_menu.cpp:163 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "حالت کارگیر (کلاینت)"
 
@@ -559,7 +559,7 @@ msgstr "بمب خوشه‌ای"
 msgid "Cluzooka"
 msgstr "باوکا"
 
-#: src/weapon/suicide.cpp:44
+#: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
 msgstr "خودکشی"
 
@@ -568,7 +568,7 @@ msgstr "خودکشی"
 msgid "Configuration menu"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 
-#: src/menu/network_connection_menu.cpp:211
+#: src/menu/network_connection_menu.cpp:210
 msgid "Connect to game"
 msgstr "اتصال به بازی"
 
@@ -602,7 +602,7 @@ msgstr "دست اندر کاران"
 msgid "Damage per turn during death mode"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:156
+#: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
 msgstr "نارنجک دیسکو"
 
@@ -610,7 +610,7 @@ msgstr "نارنجک دیسکو"
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/network_menu.cpp:132
+#: src/menu/network_menu.cpp:165
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -627,11 +627,11 @@ msgstr ""
 msgid "Duration of a turn"
 msgstr "زمان یک نوبت"
 
-#: src/weapon/dynamite.cpp:115
+#: src/weapon/dynamite.cpp:116
 msgid "Dynamite"
 msgstr "دینامیت"
 
-#: src/game/game.cpp:477
+#: src/game/game.cpp:478
 msgid "END OF GAME"
 msgstr "پایان بازی"
 
@@ -643,16 +643,16 @@ msgstr ""
 msgid "Energy"
 msgstr ""
 
-#: src/include/action_handler.cpp:248
+#: src/include/action_handler.cpp:260
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:115
+#: src/team/custom_teams_list.cpp:106 src/team/teams_list.cpp:114
 msgid "Error loading team :"
 msgstr "مشکل در بارگذاری تیم: "
 
-#: src/game/config.cpp:543 src/team/custom_team.cpp:155
+#: src/game/config.cpp:549 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -670,7 +670,7 @@ msgstr "مشکل در ساخت پوشه‌ی جدید \"%s\": ناتوان در 
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "مشکل در ساخت پوشه‌ی جدید \"%s\": ناتوان در ذخیره‌ی پرونده‌ی تنظیمات."
 
-#: src/game/game.cpp:361
+#: src/game/game.cpp:362
 #, c-format
 msgid ""
 "Error:\n"
@@ -680,28 +680,28 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:500
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "مشکل: ناتوان در اتصال به %s:%s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:450
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای میزبانی یک بازی"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:366
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای جستجوی یک بازی اینترنتی"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:478
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "مشکل: ناتوان در راه‌اندازی یک کارگزار"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:471
 #: tools/servers/game_server/server.cpp:312
 #, c-format
 msgid ""
@@ -711,7 +711,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:115
+#: src/team/team.cpp:116
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "مشکل: ناتوان در پیدا کردن \"%s\" از تیم \"%s\""
@@ -734,7 +734,7 @@ msgstr "تمام صفحه؟"
 msgid "Fullscreen?"
 msgstr "تمام صفحه؟"
 
-#: src/menu/game_menu.cpp:85
+#: src/menu/game_menu.cpp:93
 msgid "Game"
 msgstr ""
 
@@ -743,11 +743,11 @@ msgstr ""
 msgid "Game mode"
 msgstr "حالت کارگیر (کلاینت)"
 
-#: src/menu/network_connection_menu.cpp:234
+#: src/menu/network_connection_menu.cpp:233
 msgid "Game name:"
 msgstr ""
 
-#: src/weapon/gnu.cpp:172
+#: src/weapon/gnu.cpp:173
 msgid "Gnu Launcher"
 msgstr "گنو"
 
@@ -755,7 +755,7 @@ msgstr "گنو"
 msgid "Graphics"
 msgstr ""
 
-#: src/weapon/grapple.cpp:168
+#: src/weapon/grapple.cpp:171
 msgid "Grapple"
 msgstr "چنگک"
 
@@ -763,7 +763,7 @@ msgstr "چنگک"
 msgid "Gravity"
 msgstr ""
 
-#: src/weapon/grenade.cpp:75
+#: src/weapon/grenade.cpp:76
 msgid "Grenade"
 msgstr "نارنجک"
 
@@ -775,18 +775,17 @@ msgstr "در حال شروع زمین..."
 msgid "Gun"
 msgstr "اسلحه"
 
-#. Skip a line
-#: src/menu/network_connection_menu.cpp:284
+#: src/menu/network_connection_menu.cpp:281
 msgid "Have a good game!"
 msgstr "بازی خوبی داشته باشید!"
 
-#: src/menu/options_menu.cpp:136 src/menu/team_box.cpp:67
-#: src/menu/team_box.cpp:76
+#: src/menu/options_menu.cpp:136 src/menu/team_box.cpp:84
+#: src/menu/team_box.cpp:93
 msgid "Head commander"
 msgstr "رئیس ارتش"
 
 #. Display player's name
-#: src/interface/interface.cpp:190
+#: src/interface/interface.cpp:191
 msgid "Head commander: "
 msgstr "رئیس ارتش: "
 
@@ -798,11 +797,11 @@ msgstr ""
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:257
 msgid "Host a game"
 msgstr "میزبانی یک بازی"
 
-#: src/weapon/blowtorch.cpp:65
+#: src/weapon/blowtorch.cpp:64
 #, fuzzy
 msgid ""
 "How to use it : keep the space key pressed\n"
@@ -873,34 +872,30 @@ msgstr ""
 "دارید\n"
 "یک بار در هر نوبت"
 
-#: src/game/game.cpp:126
+#: src/game/game.cpp:127
 msgid "Initialisation"
 msgstr "در حال شروع"
 
 #. Load the map
-#: src/game/game.cpp:143
+#: src/game/game.cpp:144
 msgid "Initialise map"
 msgstr "نقشه‌ی آغازین"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:155
 msgid "Initialise sounds"
 msgstr "صداهای آغازین"
 
-#: src/game/game.cpp:150
+#: src/game/game.cpp:151
 msgid "Initialise teams"
 msgstr "تیم‌های آغازین"
 
-#: src/game/game.cpp:859
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "این یک هدیه است!"
 
 #: src/weapon/jetpack.cpp:57
 msgid "Jetpack"
 msgstr "پک پرواز"
-
-#: src/menu/network_connection_menu.cpp:282
-msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr "به #wormux در irc.freenode.net بپیوندید."
 
 #: src/menu/help_menu.cpp:74
 msgid "Jump"
@@ -930,7 +925,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "بارگذاری نقشه‌ها: "
 
-#: src/team/teams_list.cpp:127
+#: src/team/teams_list.cpp:126
 msgid "Load teams:"
 msgstr "بارگذاری تیم‌ها: "
 
@@ -944,11 +939,12 @@ msgstr "ضد جاذبه"
 
 #. #############################
 #. Manual connection
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:175
 msgid "Manual connection"
 msgstr ""
 
-#: src/menu/game_menu.cpp:77
+#: src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/menu/network_menu.cpp:94 src/menu/network_menu.cpp:98
 #, fuzzy
 msgid "Map"
 msgstr "نقشه‌ها"
@@ -958,11 +954,11 @@ msgstr "نقشه‌ها"
 msgid "Map %s, a creation of: "
 msgstr "نقشه‌ی %s، ساخته‌ای از: "
 
-#: src/game/game.cpp:144
+#: src/game/game.cpp:145
 msgid "Maps"
 msgstr "نقشه‌ها"
 
-#: src/menu/network_menu.cpp:396 src/menu/network_menu.cpp:397
+#: src/menu/network_menu.cpp:424 src/menu/network_menu.cpp:425
 #, fuzzy
 msgid "Master mode"
 msgstr "حالت کارگیر (کلاینت)"
@@ -976,7 +972,7 @@ msgstr "انرژی آغازی"
 msgid "Maximum FPS"
 msgstr "حداکثر فریم بر ثانیه"
 
-#: src/weapon/mine.cpp:218
+#: src/weapon/mine.cpp:212
 msgid "Mine"
 msgstr "مین"
 
@@ -1026,7 +1022,7 @@ msgstr ""
 msgid "Music?"
 msgstr "موسیقی؟"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 #, fuzzy
 #| msgid "Network Game"
 msgid "Network"
@@ -1050,7 +1046,7 @@ msgstr "بازی شبکه‌ای"
 msgid "New player warning?"
 msgstr ""
 
-#: src/weapon/weapon.cpp:650
+#: src/weapon/weapon.cpp:661
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "هیچ عنصر <%s> در پرونده‌ی تنظیم xml پیدا نشد!"
@@ -1064,7 +1060,7 @@ msgstr "بازیکن %i وصل شد"
 msgid "Nobody!"
 msgstr "هیچکس"
 
-#: src/menu/team_box.cpp:88
+#: src/menu/team_box.cpp:105
 msgid "Number of characters"
 msgstr "تعداد کاراکترها"
 
@@ -1093,9 +1089,9 @@ msgstr "گزینه‌ها"
 msgid "Parachute"
 msgstr "بادکنک نجات"
 
-#: src/menu/network_connection_menu.cpp:168
-#: src/menu/network_connection_menu.cpp:206
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:167
+#: src/menu/network_connection_menu.cpp:205
+#: src/menu/network_connection_menu.cpp:245
 msgid "Password:"
 msgstr ""
 
@@ -1103,7 +1099,7 @@ msgstr ""
 msgid "Play"
 msgstr "شروع"
 
-#: src/menu/network_menu.cpp:105
+#: src/menu/network_menu.cpp:120
 msgid "Play several times"
 msgstr ""
 
@@ -1119,16 +1115,16 @@ msgstr "انرژی بازیکن؟"
 msgid "Player's name?"
 msgstr "نام بازیکن؟"
 
-#: src/weapon/polecat.cpp:195
+#: src/weapon/polecat.cpp:196
 msgid "Polecat Launcher"
 msgstr "راسو بوگندو"
 
-#: src/menu/network_connection_menu.cpp:195
-#: src/menu/network_connection_menu.cpp:223
+#: src/menu/network_connection_menu.cpp:194
+#: src/menu/network_connection_menu.cpp:222
 msgid "Port:"
 msgstr "پورت: "
 
-#: src/menu/network_connection_menu.cpp:155
+#: src/menu/network_connection_menu.cpp:154
 msgid "Public battles"
 msgstr ""
 
@@ -1192,17 +1188,17 @@ msgstr "اسکرول روی خط"
 msgid "Scroll on border"
 msgstr "اسکرول روی خط"
 
-#: src/menu/network_connection_menu.cpp:184
+#: src/menu/network_connection_menu.cpp:183
 msgid "Server address:"
 msgstr "آدرس کارگزار:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:254
+#: src/menu/network_connection_menu.cpp:253
 msgid "Server available on Internet"
 msgstr "کارگزار حاضر در اینترنت"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:152 src/network/network.cpp:473
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:491
 msgid "Server mode"
 msgstr "حالت کارگزار"
 
@@ -1247,11 +1243,11 @@ msgstr "تفنگ دوربین‌دار"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:371
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:420
 #: tools/servers/game_server/server.cpp:297
 #, c-format
 msgid ""
@@ -1273,15 +1269,15 @@ msgid "Sound frequency"
 msgstr "فرکانس صدا"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:156
+#: src/game/game.cpp:157
 msgid "Sounds"
 msgstr "صداها"
 
-#: src/game/game.cpp:187
+#: src/game/game.cpp:188
 msgid "Starting a new game"
 msgstr "در حال شروع یک بازی جدید"
 
-#: src/interface/interface.cpp:230
+#: src/interface/interface.cpp:231
 msgid "Stock:"
 msgstr "استوک: "
 
@@ -1289,7 +1285,7 @@ msgstr "استوک: "
 msgid "Submachine Gun"
 msgstr "مسلسل"
 
-#: src/weapon/supertux.cpp:222
+#: src/weapon/supertux.cpp:224
 msgid "SuperTux"
 msgstr "سوپر تاکس"
 
@@ -1311,7 +1307,8 @@ msgstr "تیم‌ها"
 msgid "Team stats"
 msgstr "تیم‌ها"
 
-#: src/game/game.cpp:151 src/menu/game_menu.cpp:65
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:75 src/menu/game_menu.cpp:79
+#: src/menu/network_menu.cpp:93 src/menu/network_menu.cpp:97
 msgid "Teams"
 msgstr "تیم‌ها"
 
@@ -1332,12 +1329,12 @@ msgstr "بمب خوشه‌ای قبل از اینکه عمل کند از زمی�
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "بمب خوشه‌ای قبل از اینکه عمل کند از زمین جنگ خارج شد."
 
-#: src/weapon/gnu.cpp:147
+#: src/weapon/gnu.cpp:148
 #, fuzzy
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "گنو قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/weapon/polecat.cpp:172
+#: src/weapon/polecat.cpp:173
 #, fuzzy
 msgid "The Polecat left the battlefield before exploding!"
 msgstr "راسوی بوگندو قبل از اینکه عمل کند از زمین جنگ خارج شد"
@@ -1346,7 +1343,7 @@ msgstr "راسوی بوگندو قبل از اینکه عمل کند از زمی
 msgid "The automatic rocket has left the battlefield..."
 msgstr "بازوکای اتوماتیک از زمین جنگ خارج شد..."
 
-#: src/weapon/bounce_ball.cpp:71
+#: src/weapon/bounce_ball.cpp:72
 #, fuzzy
 msgid "The ball left the battlefield before exploding!"
 msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ خارج شد"
@@ -1362,21 +1359,21 @@ msgstr ""
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "اتصال وصل نشد. بررسی کنید که آیا دیوار آتشی در راه است!"
 
-#: src/weapon/disco_grenade.cpp:126
+#: src/weapon/disco_grenade.cpp:127
 #, fuzzy
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "نارنجک دیسکو قبل از اینکه عمل کند از زمین رقص خارج شد"
 
-#: src/game/game.cpp:701
+#: src/game/game.cpp:702
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
-#: src/weapon/grenade.cpp:57
+#: src/weapon/grenade.cpp:58
 #, fuzzy
 msgid "The grenade left the battlefield before exploding!"
 msgstr "نارنجک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/menu/network_menu.cpp:342
+#: src/menu/network_menu.cpp:370
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "بقیه منتظر شما هستند! بجنب دیگه!"
@@ -1400,13 +1397,13 @@ msgstr "کارگزار اتصال را رد کرد."
 msgid "The server rejected the connection: wrong password!"
 msgstr "کارگزار اتصال را رد کرد."
 
-#: src/weapon/weapon.cpp:662
+#: src/weapon/weapon.cpp:673
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:271
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1430,7 +1427,7 @@ msgstr ""
 "دارید\n"
 "یک بار در هر نوبت"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:90
 #, fuzzy
 msgid ""
 "Timeout : Mouse wheel or Page Up/Down\n"
@@ -1479,22 +1476,26 @@ msgstr "نسخه"
 msgid "Version verification failed because: %s"
 msgstr ""
 
-#: src/menu/network_menu.cpp:256
+#: src/menu/network_menu.cpp:432
+msgid "Wait until some opponent(s) connect!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:285
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "صبر کنید! بازیکن %i آماده نیست!"
 
-#: src/game/game.cpp:607
+#: src/game/game.cpp:608
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
 
-#: src/game/game.cpp:166
+#: src/game/game.cpp:167
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:500
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
@@ -1503,7 +1504,7 @@ msgstr "در انتظار کارگزار، شما فقط می‌توانید ر�
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr ""
 
-#: src/game/game.cpp:147
+#: src/game/game.cpp:148
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
@@ -1513,17 +1514,17 @@ msgstr "وب‌سایت: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:155
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:970
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1022
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته شد!"
@@ -1545,28 +1546,28 @@ msgstr "ورموکس در حال اجراست..."
 msgid "Wormux version "
 msgstr "نسخه‌ی ورموکس"
 
-#: src/include/action_handler.cpp:222
+#: src/include/action_handler.cpp:234
 msgid "Wrong map CRC!"
 msgstr ""
 
-#: src/include/action_handler.cpp:219
+#: src/include/action_handler.cpp:231
 msgid "Wrong map name!"
 msgstr ""
 
-#: src/include/action_handler.cpp:225
+#: src/include/action_handler.cpp:237
 msgid "Wrong team!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:346
+#: src/menu/network_menu.cpp:374
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "شما تنهایید!"
 
-#: src/menu/network_menu.cpp:250
+#: src/menu/network_menu.cpp:279
 msgid "You are alone..."
 msgstr "شما تنهایید..."
 
-#: src/menu/network_menu.cpp:403
+#: src/menu/network_menu.cpp:431
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1575,17 +1576,17 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "شما حداقل یک نقشه‌ که به درستی کار کند نیاز دارید!"
 
-#: src/game/game.cpp:263 src/team/teams_list.cpp:159
+#: src/game/game.cpp:264 src/team/teams_list.cpp:158
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 
-#: src/menu/network_menu.cpp:225
+#: src/menu/network_menu.cpp:255
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:523
+#: src/weapon/weapon_launcher.cpp:545
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 
@@ -1643,6 +1644,9 @@ msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"
+
+#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
+#~ msgstr "به #wormux در irc.freenode.net بپیوندید."
 
 #~ msgid "Max number of players:"
 #~ msgstr "حداکثر تعداد بازیکنان: "
