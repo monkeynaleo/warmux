@@ -59,7 +59,7 @@ class MapSelectionBox : public VBox
 
  public:
   void ChangeMapDelta(int delta_index);
-  MapSelectionBox(const Point2i &size, bool _display_only = false);
+  MapSelectionBox(const Point2i &size, bool show_border, bool _display_only = false);
 
   void ValidMapSelection();
   void ChangeMapCallback();

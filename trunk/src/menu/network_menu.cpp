@@ -73,7 +73,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  TEAM SELECTION
   // ################################################
-  team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H));
+  team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H), true);
   team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(team_box);
   widgets.Pack();
@@ -82,9 +82,9 @@ NetworkMenu::NetworkMenu() :
   // ##  MAP SELECTION
   // ################################################
   if (Network::GetInstance()->IsGameMaster()) {
-    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight));
+    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true, false);
   } else {
-    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true);
+    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true, true);
   }
   map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
   widgets.AddWidget(map_box);

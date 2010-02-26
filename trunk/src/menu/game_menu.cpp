@@ -33,12 +33,11 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-const uint MARGIN_TOP    = 5;
-const uint MARGIN_SIDE   = 5;
-const uint MARGIN_BOTTOM = 50;
+static const uint MARGIN_TOP    = 5;
+static const uint MARGIN_SIDE   = 5;
+static const uint MARGIN_BOTTOM = 50;
 
-const uint TEAMS_BOX_H = 205;
-const uint OPTIONS_BOX_H = 150;
+static const uint TEAMS_BOX_H = 230;
 
 // ################################################
 // ##  GAME MENU CLASS
@@ -53,28 +52,37 @@ GameMenu::GameMenu() :
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint multitabsHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
-    - TEAMS_BOX_H;
+  uint mainBoxHeight = window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE;
+  uint mapsHeight = mainBoxHeight - TEAMS_BOX_H - 80;
+  uint multitabsWidth = mainBoxWidth;
+  bool multitabs = false;
+  if (mapsHeight > 200) {
+    multitabs = true;
+    multitabsWidth = mainBoxWidth - 20;
+  }
+
+  MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
 
   // ################################################
-  // ##  TEAM SELECTION
+  // ##  TEAM AND MAP SELECTION
   // ################################################
-  MultiTabs * tabs_team = new MultiTabs(Point2i(mainBoxWidth, TEAMS_BOX_H));
 
-  team_box = new TeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H - 25));
-  tabs_team->AddNewTab("TAB_Team", _("Teams"), team_box);
+  team_box = new TeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), false, multitabs);
 
-  tabs_team->SetPosition(MARGIN_SIDE, MARGIN_TOP);
+  map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs);
 
-  widgets.AddWidget(tabs_team);
+  if (!multitabs) {
+    tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
+    tabs->AddNewTab("TAB_Map", _("Map"), map_box);
+  } else {
+    VBox *box = new VBox(mainBoxWidth, false, true);
+    std::string tabs_title = _("Teams") + std::string(" - ");
+    tabs_title += _("Map");
 
-  // ################################################
-  // ##  MAP SELECTION
-  // ################################################
-  MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, multitabsHeight));
-
-  map_box = new MapSelectionBox(Point2i(mainBoxWidth-10, multitabsHeight - 50));
-  tabs->AddNewTab("TAB_Map", _("Map"), map_box);
+    box->AddWidget(team_box);
+    box->AddWidget(map_box);
+    tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
+  }
 
   // ################################################
   // ##  GAME OPTIONS
@@ -84,7 +92,7 @@ GameMenu::GameMenu() :
   game_options = new GameModeEditor(mainBoxWidth, option_size, false);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
-  tabs->SetPosition(MARGIN_SIDE, tabs_team->GetPositionY()+tabs_team->GetSizeY()+ MARGIN_TOP);
+  tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
 
   widgets.AddWidget(tabs);
   widgets.Pack();

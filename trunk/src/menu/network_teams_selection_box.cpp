@@ -34,8 +34,8 @@
 #include "team/team.h"
 #include "tool/string_tools.h"
 
-NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size) :
-  TeamsSelectionBox(_size, true)
+NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size, bool w_border) :
+  TeamsSelectionBox(_size, true, w_border)
 {
   local_teams_nb->SetMaxValue(GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer());
 }
