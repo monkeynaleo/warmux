@@ -35,6 +35,7 @@
 #include "gui/msg_box.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
+#include "gui/tabs.h"
 #include "gui/talk_box.h"
 #include "gui/text_box.h"
 #include "include/action_handler.h"
@@ -48,12 +49,12 @@
 #include "team/team.h"
 #include "tool/resource_manager.h"
 
-const uint MARGIN_TOP    = 5;
-const uint MARGIN_SIDE   = 5;
-const uint MARGIN_BOTTOM = 70;
+static const uint MARGIN_TOP    = 5;
+static const uint MARGIN_SIDE   = 5;
+static const uint MARGIN_BOTTOM = 70;
 
-const uint TEAMS_BOX_H = 180;
-const uint OPTIONS_BOX_H = 150;
+static const uint TEAMS_BOX_H = 180;
+static const uint CHAT_BOX_H = 150;
 
 NetworkMenu::NetworkMenu() :
   Menu("menu/bg_network")
@@ -66,35 +67,55 @@ NetworkMenu::NetworkMenu() :
   Surface& window = GetMainWindow();
 
   // Calculate main box size
-  uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
-    - TEAMS_BOX_H - OPTIONS_BOX_H;
+  int mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
+  int mainBoxHeight = window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE - CHAT_BOX_H;
+  int mapsHeight = mainBoxHeight - TEAMS_BOX_H - 80;
+  int multitabsWidth = mainBoxWidth;
+  bool multitabs = false;
 
-  // ################################################
-  // ##  TEAM SELECTION
-  // ################################################
-  team_box = new NetworkTeamsSelectionBox(Point2i(mainBoxWidth, TEAMS_BOX_H), true);
-  team_box->SetPosition(MARGIN_SIDE, MARGIN_TOP);
-  widgets.AddWidget(team_box);
-  widgets.Pack();
-
-  // ################################################
-  // ##  MAP SELECTION
-  // ################################################
-  if (Network::GetInstance()->IsGameMaster()) {
-    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true, false);
+  if (mapsHeight > 200) {
+    multitabs = true;
+    multitabsWidth = mainBoxWidth - 20;
   } else {
-    map_box = new MapSelectionBox(Point2i(mainBoxWidth, mapBoxHeight), true, true);
+    mapsHeight = 200;
   }
-  map_box->SetPosition(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE);
-  widgets.AddWidget(map_box);
+
+  MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
+
+  // ################################################
+  // ##  TEAM AND MAP SELECTION
+  // ################################################
+  team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), multitabs);
+
+  if (Network::GetInstance()->IsGameMaster()) {
+    map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs, false);
+  } else {
+    map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs, true);
+  }
+
+  if (!multitabs) {
+    tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
+    tabs->AddNewTab("TAB_Map", _("Map"), map_box);
+  } else {
+    VBox *box = new VBox(mainBoxWidth, false, true);
+    std::string tabs_title = _("Teams") + std::string(" - ");
+    tabs_title += _("Map");
+
+    box->AddWidget(team_box);
+    box->AddWidget(map_box);
+    tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
+  }
+
+  tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
+
+  widgets.AddWidget(tabs);
   widgets.Pack();
 
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
 
-  Box* bottom_box = new HBox(OPTIONS_BOX_H, false, true);
+  Box* bottom_box = new HBox(CHAT_BOX_H, false, true);
   bottom_box->SetNoBorder();
 
   Box* options_box = new VBox(200, true);
@@ -120,13 +141,13 @@ NetworkMenu::NetworkMenu() :
   // ##  CHAT BOX
   // ################################################
 
-  msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, OPTIONS_BOX_H),
+  msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, CHAT_BOX_H),
                         Font::FONT_SMALL, Font::FONT_BOLD);
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
                        options_box->GetPositionY());
 
   bottom_box->AddWidget(msg_box);
-  bottom_box->SetPosition(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE);
+  bottom_box->SetPosition(MARGIN_SIDE, tabs->GetPositionY() + tabs->GetSizeY() + MARGIN_SIDE);
 
   widgets.AddWidget(bottom_box);
   widgets.Pack();
