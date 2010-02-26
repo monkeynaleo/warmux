@@ -32,10 +32,10 @@
 
 #include <iostream>
 
-TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network) :
-  HBox(_size.y, network)
+TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
+  HBox(_size.y, w_border)
 {
-  if (!network)
+  if (!w_border)
     SetNoBorder();
 
   // How many teams ?

@@ -31,8 +31,8 @@
 #include "network/network.h"
 #include "tool/resource_manager.h"
 
-MapSelectionBox::MapSelectionBox(const Point2i &_size, bool _display_only) :
-  VBox(_size.GetX(), Network::IsConnected()), selected_map_index(0)
+MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _display_only) :
+  VBox(_size.GetX(), show_border), selected_map_index(0)
 {
   display_only = _display_only;
 

@@ -49,7 +49,7 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   void RequestTeamRemoval();
 
  public:
-  NetworkTeamsSelectionBox(const Point2i &size);
+  NetworkTeamsSelectionBox(const Point2i &size, bool w_border);
 
   virtual void ValidTeamsSelection();
   virtual Widget* Click(const Point2i &mousePosition, uint button);

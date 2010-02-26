@@ -51,7 +51,7 @@ class TeamsSelectionBox : public HBox
   std::vector<TeamBox*> teams_selections;
 
  public:
-  TeamsSelectionBox(const Point2i &size, bool network = false);
+  TeamsSelectionBox(const Point2i &size, bool network, bool w_border);
 
   virtual void ValidTeamsSelection();
   virtual Widget* Click(const Point2i &mousePosition, uint button);
