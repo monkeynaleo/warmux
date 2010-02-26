@@ -93,36 +93,36 @@ bool GetDataFromPasteboard( PasteboardRef inPasteboard, char* flavorText /* out 
     OSStatus            err = noErr;
     PasteboardSyncFlags syncFlags;
     ItemCount           itemCount;
-    
+
     syncFlags = PasteboardSynchronize( inPasteboard );
-    
+
     //require_action( syncFlags & kPasteboardModified, PasteboardOutOfSync,
     //               err = badPasteboardSyncErr );
-    
+
     err = PasteboardGetItemCount( inPasteboard, &itemCount );
     require_noerr( err, CantGetPasteboardItemCount );
-    
+
     for (UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++)
     {
         PasteboardItemID    itemID;
         CFArrayRef          flavorTypeArray;
         CFIndex             flavorCount;
-        
+
         err = PasteboardGetItemIdentifier( inPasteboard, itemIndex, &itemID );
         require_noerr( err, CantGetPasteboardItemIdentifier );
-        
+
         err = PasteboardCopyItemFlavors( inPasteboard, itemID, &flavorTypeArray );
         require_noerr( err, CantCopyPasteboardItemFlavors );
-        
+
         flavorCount = CFArrayGetCount( flavorTypeArray );
-        
+
         for (CFIndex flavorIndex = 0; flavorIndex < flavorCount; flavorIndex++)
         {
             CFStringRef             flavorType;
             CFDataRef               flavorData;
             CFIndex                 flavorDataSize;
             flavorType = (CFStringRef)CFArrayGetValueAtIndex(flavorTypeArray, flavorIndex);
-            
+
             // we're only interested by text...
             if (UTTypeConformsTo(flavorType, CFSTR("public.utf8-plain-text")))
             {
@@ -131,39 +131,39 @@ bool GetDataFromPasteboard( PasteboardRef inPasteboard, char* flavorText /* out 
                 require_noerr( err, CantCopyFlavorData );
                 flavorDataSize = CFDataGetLength( flavorData );
                 flavorDataSize = (flavorDataSize<254) ? flavorDataSize : 254;
-                
+
                 if (flavorDataSize+2 > bufSize)
                 {
                     fprintf(stderr, "Cannot copy clipboard, contents is too big!\n");
                     return false;
                 }
-                                
+
                 for (short dataIndex = 0; dataIndex <= flavorDataSize; dataIndex++)
                 {
                     char byte = *(CFDataGetBytePtr( flavorData ) + dataIndex);
                     flavorText[dataIndex] = byte;
                 }
-                
+
                 flavorText[flavorDataSize] = '\0';
                 flavorText[flavorDataSize+1] = '\n';
-                
+
                 CFRelease (flavorData);
                 return true;
             }
-            
+
             continue;
             CantCopyFlavorData:   fprintf(stderr, "Cannot copy clipboard, CantCopyFlavorData!\n");
         }
-        
+
         CFRelease (flavorTypeArray);
         continue;
-        
+
     CantCopyPasteboardItemFlavors:   fprintf(stderr, "Cannot copy clipboard, CantCopyPasteboardItemFlavors!\n");   continue;
     CantGetPasteboardItemIdentifier: fprintf(stderr, "Cannot copy clipboard, CantGetPasteboardItemIdentifier!\n"); continue;
     }
     fprintf(stderr, "Cannot copy clipboard, found no acceptable flavour!\n");
     return false;
-    
+
     CantGetPasteboardItemCount:  fprintf(stderr, "Cannot copy clipboard, CantGetPasteboardItemCount!\n"); return false;
     //PasteboardOutOfSync:         fprintf(stderr, "Cannot copy clipboard, PasteboardOutOfSync!\n");        return false;
 }
@@ -171,21 +171,21 @@ bool GetDataFromPasteboard( PasteboardRef inPasteboard, char* flavorText /* out 
 bool getClipBoard(char* text /* out */, const int bufSize )
 {
     OSStatus err = noErr;
-    
+
     PasteboardRef theClipboard;
     err = PasteboardCreate( kPasteboardClipboard, &theClipboard );
     require_noerr( err, PasteboardCreateFailed );
-    
+
     if (!GetDataFromPasteboard(theClipboard, text, bufSize))
     {
         fprintf(stderr, "Cannot copy clipboard, GetDataFromPasteboardFailed!\n");
         return false;
     }
-    
+
     CFRelease(theClipboard);
-    
+
     return true;
-    
+
     // ---- error handling
     PasteboardCreateFailed:       fprintf(stderr, "Cannot copy clipboard, PasteboardCreateFailed!\n");
     CFRelease(theClipboard);
@@ -196,7 +196,7 @@ bool RetrieveBuffer(std::string& text, std::string::size_type& pos)
 {
     const int bufSize = 512;
     char buffer[bufSize];
-    
+
     if (getClipBoard(buffer, bufSize))
     {
         text = buffer;
