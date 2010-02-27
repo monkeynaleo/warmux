@@ -43,7 +43,7 @@ class HelpMenu : public Menu
   void OnClickUp(const Point2i &mousePosition, int button);
  public:
   HelpMenu();
-  ~HelpMenu();
+  virtual ~HelpMenu();
 };
 
 #endif /* HELP_MENU_H */

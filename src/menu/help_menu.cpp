@@ -29,7 +29,8 @@
 #include "tool/xml_document.h"
 
 HelpMenu::HelpMenu()  :
-  Menu("help/background", vOk)
+  Menu("help/background", vOk),
+  img_keyboard(NULL)
 {
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   img_keyboard = new Sprite(GetResourceManager().LoadImage(res, "help/shortkeys"), true);
@@ -39,6 +40,9 @@ HelpMenu::HelpMenu()  :
 
 HelpMenu::~HelpMenu()
 {
+  if (NULL != img_keyboard) {
+    delete img_keyboard;
+  }
 }
 
 bool HelpMenu::signal_ok()
