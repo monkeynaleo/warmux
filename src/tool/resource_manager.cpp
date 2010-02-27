@@ -26,6 +26,7 @@
  *****************************************************************************/
 
 #include "tool/resource_manager.h"
+#include <libxml/xmlreader.h>
 #include <string>
 #include <iostream>
 
@@ -58,6 +59,7 @@ ResourceManager::ResourceManager() : base_path("")
 
 ResourceManager::~ResourceManager()
 {
+  xmlCleanupParser();
 }
 
 void ResourceManager::SetDataPath(const std::string& base_path)
