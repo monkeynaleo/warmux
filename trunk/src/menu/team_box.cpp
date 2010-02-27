@@ -112,6 +112,8 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
 
   AddWidget(tmp_box);
+
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 void TeamBox::ClearTeam()
