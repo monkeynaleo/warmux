@@ -50,10 +50,8 @@ public:
     OPTIONS,
     HELP,
     CREDITS,
-    QUIT,
-    SKIN_VIEWER
+    QUIT
   } menu_item;
-
 
   menu_item choice;
 
@@ -65,6 +63,7 @@ protected:
    bool signal_ok();
    bool signal_cancel();
    void SelectAction(const Widget *w);
+
 private:
    virtual void DrawBackground();
    void OnClick(const Point2i &mousePosition, int button);
