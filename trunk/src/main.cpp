@@ -52,7 +52,6 @@
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
-#include "menu/skin_menu.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #ifdef WMX_LOG
@@ -159,13 +158,6 @@ int AppWormux::Main(void)
         case MainMenu::QUIT:
           quit = true;
           break;
-        case MainMenu::SKIN_VIEWER:
-        {
-          SkinMenu skin_menu(skin);
-          SetCurrentMenu(&skin_menu);
-          skin_menu.Run();
-          break;
-        }
         default:
           break;
       }
