@@ -208,8 +208,6 @@ wormux_SOURCES = \
         menu/pause_menu.h \
         menu/results_menu.cpp \
         menu/results_menu.h \
-        menu/skin_menu.cpp \
-        menu/skin_menu.h \
         menu/team_box.cpp \
         menu/team_box.h \
         menu/teams_selection_box.cpp \

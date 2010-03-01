@@ -62,7 +62,6 @@ class Body
     const Body & operator = (const Body & obj);
     /**********************************************/
     friend class BodyList;
-    friend class SkinMenu;
 
     std::map<std::string, Member *>   members_lst;
     std::map<std::string, Clothe *>   clothes_lst;
