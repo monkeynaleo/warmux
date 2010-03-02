@@ -195,8 +195,6 @@ POTFILES = \
         src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
         src/menu/results_menu.h \
-        src/menu/skin_menu.cpp \
-        src/menu/skin_menu.h \
         src/menu/team_box.cpp \
         src/menu/team_box.h \
         src/menu/teams_selection_box.cpp \
@@ -406,7 +404,7 @@ POTFILES = \
         tools/servers/index_server/stat.cpp \
         tools/servers/index_server/stat.h \
         tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h 
+        tools/servers/index_server/sync_slave.h
 
 DOMAIN = $(PACKAGE)
 
