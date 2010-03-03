@@ -57,6 +57,8 @@ public:
 
   MainMenu();
   ~MainMenu();
+
+  void Init(void);
   menu_item Run ();
 
 protected:

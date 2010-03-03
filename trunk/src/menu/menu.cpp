@@ -79,6 +79,58 @@ Menu::~Menu()
   delete background;
 }
 
+void Menu::LoadMenu(XmlReader * xmlFile,
+                    const xmlNode * rootMenuNode) 
+{
+  LoadWidget(xmlFile, rootMenuNode, &widgets);
+  widgets.Pack();
+}
+
+void Menu::LoadWidget(XmlReader * xmlFile,
+                      const xmlNode * rootMenuNode,
+                      WidgetList * container) 
+{
+  unsigned int widgetCount = xmlFile->GetNbChildren(rootMenuNode);
+  const xmlNode * currentNode = xmlFile->GetFirstChild(rootMenuNode);
+  std::string currentNodeName;
+
+  for ( ; widgetCount > 0; --widgetCount) {
+    currentNodeName = xmlFile->GetNodeName(currentNode);
+    Widget * newWidget = CreateWidgetType(currentNodeName);
+   
+    if (NULL != newWidget) {
+
+      if ("GridBox" == currentNodeName) {
+        LoadWidget(xmlFile, currentNode, (WidgetList*)newWidget);
+      }
+      container->AddWidget(newWidget);
+    }
+    currentNode = xmlFile->GetNextSibling(currentNode);
+  }
+
+  if (NULL != container) {
+    container->Pack();
+  }
+}
+
+Widget * Menu::CreateWidgetType(std::string & widgetName)
+{
+  if (widgetName == "Image") {
+    //TODO
+    return NULL;
+  } else if (widgetName == "GridBox") {
+    //TODO
+    return NULL;
+  } else if (widgetName == "ButtonPic") {
+    //TODO
+    return NULL;
+  } else if (widgetName == "Text") {
+    //TODO
+    return NULL;
+  } 
+  return NULL;
+}
+
 void Menu::play_ok_sound()
 {
   JukeBox::GetInstance()->Play("default", "menu/ok");
