@@ -91,10 +91,25 @@ MainMenu::MainMenu() :
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
-  if (!JukeBox::GetInstance()->IsPlayingMusic())
+  if (!JukeBox::GetInstance()->IsPlayingMusic()) {
     JukeBox::GetInstance()->PlayMusic("menu");
+  }
 
   StatStart("Main:Menu");
+}
+
+void MainMenu::Init(void) 
+{
+  Profile * xmlProfile = GetResourceManager().LoadXMLProfile("menu.xml", false);
+  XmlReader * xmlFile = xmlProfile->GetXMLDocument();
+
+  const xmlNode * mainMenuNode = xmlFile->GetFirstNamedChild(xmlFile->GetRoot(), "MainMenu");
+  if (NULL == mainMenuNode) {
+    Error("MainMenu: can't load 'MainMenu' xml node from menu.xml");
+    exit(EXIT_FAILURE);
+  }
+
+  LoadMenu(xmlFile, mainMenuNode);
 }
 
 void MainMenu::button_click() const

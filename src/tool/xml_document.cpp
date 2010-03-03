@@ -163,9 +163,9 @@ xmlNodeArray XmlReader::GetNamedChildren(const xmlNode* father, const std::strin
 }
 
 // Forward of GetMarker() with a new name (better) 
-// TODO: Refactor all GetMarker() call to GetFirstNamedChildren()
-const xmlNode * XmlReader::GetFirstNamedChildren(const xmlNode * father, 
-                                                 const std::string & nodeName)
+// TODO: Refactor all GetMarker() call to GetFirstNamedChild()
+const xmlNode * XmlReader::GetFirstNamedChild(const xmlNode * father, 
+                                              const std::string & nodeName)
 {
   return GetMarker(father, nodeName);
 }
@@ -175,7 +175,7 @@ unsigned long XmlReader::GetNbChildren(const xmlNode * father)
   return xmlChildElementCount((xmlNode*)father);
 }
 
-const xmlNode * XmlReader::GetFirstChildren(const xmlNode * father)
+const xmlNode * XmlReader::GetFirstChild(const xmlNode * father)
 {
   return xmlFirstElementChild((xmlNode*)father);
 }

@@ -38,14 +38,14 @@ public:
                                        const std::string & name);
 
   // Return the first child node element named "nodeName" of "father".
-  const xmlNode * GetFirstNamedChildren(const xmlNode * father, 
-                                        const std::string & nodeName);
+  const xmlNode * GetFirstNamedChild(const xmlNode * father, 
+                                     const std::string & nodeName);
 
-  // Return the current number of child nodes of "father" node.
+  // Return the current number of children nodes of "father" node.
   unsigned long GetNbChildren(const xmlNode * father);
 
   // Return the first child node of "father", otherwise NULL
-  const xmlNode * GetFirstChildren(const xmlNode * father);
+  const xmlNode * GetFirstChild(const xmlNode * father);
 
   // Return the first next sibling element of "node", otherwise NULL
   const xmlNode * GetNextSibling(const xmlNode * node);
