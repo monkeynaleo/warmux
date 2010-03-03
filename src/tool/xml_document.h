@@ -34,7 +34,24 @@ public:
   const xmlNode* GetRoot() const;
 
   // Return the direct children matching name
-  static xmlNodeArray GetNamedChildren(const xmlNode* father, const std::string& name);
+  static xmlNodeArray GetNamedChildren(const xmlNode* father, 
+                                       const std::string & name);
+
+  // Return the first child node element named "nodeName" of "father".
+  const xmlNode * GetFirstNamedChildren(const xmlNode * father, 
+                                        const std::string & nodeName);
+
+  // Return the current number of child nodes of "father" node.
+  unsigned long GetNbChildren(const xmlNode * father);
+
+  // Return the first child node of "father", otherwise NULL
+  const xmlNode * GetFirstChildren(const xmlNode * father);
+
+  // Return the first next sibling element of "node", otherwise NULL
+  const xmlNode * GetNextSibling(const xmlNode * node);
+
+  // Return the name of "node"
+  std::string GetNodeName(const xmlNode * node);
 
   // get a attribute marker
   static bool ReadString(const xmlNode* father,
