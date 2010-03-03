@@ -52,12 +52,14 @@ class Profile
   /*********************************************/
 
 public:
-  XmlReader *doc;
+  XmlReader *doc; //TODO move to private
   std::string filename;
   std::string relative_path;
 
   Profile();
   ~Profile();
+
+  XmlReader * GetXMLDocument(void) const { return this->doc; }
 };
 
 class ResourceManager : public Singleton<ResourceManager>
