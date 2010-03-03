@@ -37,6 +37,8 @@
    <gravity_factor>3</gravity_factor>
    <rebounding>true</rebounding>
    <rebound_factor>1.5</rebound_factor>
-
  </wind>
+
+ <music_playlist>diabolicux</music_playlist>
+
 </resources>
