@@ -38,4 +38,6 @@
     <rebounding>false</rebounding>
     <rebound_factor>1.0</rebound_factor>
   </wind>
+
+  <music_playlist>exoticux</music_playlist>
 </resources>

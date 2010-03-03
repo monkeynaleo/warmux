@@ -7,4 +7,7 @@
   <music type="funfair" playlist="ingame/funfair.m3u" />
   <music type="monkey" playlist="ingame/monkey.m3u" />
   <music type="construction" playlist="ingame/construction.m3u" />
+  <music type="circux" playlist="ingame/circux.m3u" />
+  <music type="diabolicux" playlist="ingame/diabolicux.m3u" />
+  <music type="exoticux" playlist="ingame/exoticux.m3u" />
 </profile>
