@@ -24,7 +24,8 @@
 
 #include "gui/widget_list.h"
 #include "include/base.h"
-#include "tool/xml_document.h"
+#include "tool/resource_manager.h"
+#include "gui/picture_widget.h"
 
 // Forward declarations
 class Button;
@@ -55,7 +56,7 @@ public:
    virtual ~Menu();
 
    // Start the xml menu configuration.
-   void LoadMenu(XmlReader * xmlFile,
+   void LoadMenu(Profile * profile,
                  const xmlNode * rootMenuNode);
 
    void Run(bool skip=false);
@@ -76,12 +77,14 @@ private:
    Widget *selected_widget;
  
    // Recursive function wich load the widgets, and fill the containers widgets.
-   void LoadWidget(XmlReader * xmlFile,
+   void LoadWidget(Profile * profile,
                    const xmlNode * rootMenuNode,
                    WidgetList * container);
    
-   // Detect and instanciate a widget from a type name.
-   Widget * CreateWidgetType(std::string & widgetName);
+   // Detect and instanciate a widget.
+   Widget * CreateWidget(Profile * profile,
+                         const xmlNode * rootMenuNode,
+                         std::string & widgetName);
 
    bool BasicOnClickUp(const Point2i &mousePosition);
    bool HandleGlobalEvent(const SDL_Event& event);

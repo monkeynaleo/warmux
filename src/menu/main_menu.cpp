@@ -109,7 +109,7 @@ void MainMenu::Init(void)
     exit(EXIT_FAILURE);
   }
 
-  LoadMenu(xmlFile, mainMenuNode);
+  LoadMenu(xmlProfile, mainMenuNode);
 }
 
 void MainMenu::button_click() const
