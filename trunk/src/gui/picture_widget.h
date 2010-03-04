@@ -22,8 +22,10 @@
 #ifndef PICTURE_WIDGET_H
 #define PICTURE_WIDGET_H
 
-#include "widget.h"
 #include <string>
+
+#include "widget.h"
+#include "tool/resource_manager.h"
 
 class Sprite;
 class Surface;
@@ -42,7 +44,10 @@ class PictureWidget : public Widget
  public:
   PictureWidget(const Point2i& size);
   PictureWidget(const Point2i& size, const std::string& resource_id, bool scale=false);
+  PictureWidget(Profile * profile,
+                const xmlNode * pictureNode);
   virtual ~PictureWidget();
+
   void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
   void SetNoSurface();
   virtual void Draw(const Point2i &mousePosition) const;

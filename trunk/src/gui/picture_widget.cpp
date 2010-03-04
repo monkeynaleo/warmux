@@ -44,6 +44,43 @@ PictureWidget::PictureWidget (const Point2i& _size, const std::string& resource_
   GetResourceManager().UnLoadXMLProfile( res);
 }
 
+PictureWidget::PictureWidget(Profile * profile, 
+                             const xmlNode * pictureNode) :
+  disabled(false),
+  spr(NULL)
+{
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string file;
+  if (!xmlFile->ReadStringAttr(pictureNode, "file", file)) {
+    //TODO error
+  }
+
+  bool activeAlpha = true;
+  file = profile->relative_path + file;
+  Surface surface(file.c_str());
+
+  if (!activeAlpha) {
+    surface = surface.DisplayFormat();
+  } else {
+    surface = surface.DisplayFormatAlpha();
+  }
+
+  int x = 0;
+  int y = 0;
+  xmlFile->ReadIntAttr(pictureNode, "x", x);
+  xmlFile->ReadIntAttr(pictureNode, "y", y);
+  SetPosition(Point2i(x, y));
+  
+  int width = 100;
+  int height = 100;
+  xmlFile->ReadIntAttr(pictureNode, "width", width);
+  xmlFile->ReadIntAttr(pictureNode, "height", height);
+  SetSize(Point2i(width, height));
+
+  SetSurface(surface);
+}
+
 PictureWidget::~PictureWidget()
 {
   if (spr != NULL)

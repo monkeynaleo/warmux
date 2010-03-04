@@ -79,29 +79,30 @@ Menu::~Menu()
   delete background;
 }
 
-void Menu::LoadMenu(XmlReader * xmlFile,
+void Menu::LoadMenu(Profile * profile,
                     const xmlNode * rootMenuNode) 
 {
-  LoadWidget(xmlFile, rootMenuNode, &widgets);
+  LoadWidget(profile, rootMenuNode, &widgets);
   widgets.Pack();
 }
 
-void Menu::LoadWidget(XmlReader * xmlFile,
+void Menu::LoadWidget(Profile * profile,
                       const xmlNode * rootMenuNode,
                       WidgetList * container) 
 {
+  XmlReader * xmlFile = profile->GetXMLDocument();
   unsigned int widgetCount = xmlFile->GetNbChildren(rootMenuNode);
   const xmlNode * currentNode = xmlFile->GetFirstChild(rootMenuNode);
   std::string currentNodeName;
 
   for ( ; widgetCount > 0; --widgetCount) {
     currentNodeName = xmlFile->GetNodeName(currentNode);
-    Widget * newWidget = CreateWidgetType(currentNodeName);
+    Widget * newWidget = CreateWidget(profile, currentNode, currentNodeName);
    
     if (NULL != newWidget) {
 
       if ("GridBox" == currentNodeName) {
-        LoadWidget(xmlFile, currentNode, (WidgetList*)newWidget);
+        LoadWidget(profile, currentNode, (WidgetList*)newWidget);
       }
       container->AddWidget(newWidget);
     }
@@ -113,11 +114,12 @@ void Menu::LoadWidget(XmlReader * xmlFile,
   }
 }
 
-Widget * Menu::CreateWidgetType(std::string & widgetName)
+Widget * Menu::CreateWidget(Profile * profile,
+                            const xmlNode * widgetNode,
+                            std::string & widgetName)
 {
-  if (widgetName == "Image") {
-    //TODO
-    return NULL;
+  if (widgetName == "Picture") {
+    return new PictureWidget(profile, widgetNode);
   } else if (widgetName == "GridBox") {
     //TODO
     return NULL;
