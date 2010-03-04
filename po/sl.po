@@ -1561,7 +1561,7 @@ msgstr "Preverjanje različice je spodletelo zaradi: %s"
 
 #: src/menu/network_menu.cpp:432
 msgid "Wait until some opponent(s) connect!"
-msgstr ""
+msgstr "Počakajte, da se poveže kak nasprotnik!"
 
 #: src/menu/network_menu.cpp:285
 #, c-format
