@@ -41,16 +41,28 @@ class PictureWidget : public Widget
   bool disabled;
   Sprite * spr;
 
+  Profile * profile;
+  const xmlNode * pictureNode;
+
  public:
-  PictureWidget(const Point2i& size);
-  PictureWidget(const Point2i& size, const std::string& resource_id, bool scale=false);
+  PictureWidget(const Point2i & size);
+  PictureWidget(const Point2i & size, 
+                const std::string & resource_id, 
+                bool scale = false);
   PictureWidget(Profile * profile,
                 const xmlNode * pictureNode);
   virtual ~PictureWidget();
 
-  void SetSurface(const Surface& s, bool enable_scaling=false, bool antialiasing=false);
+  void Init(void);
+
+  // Load all attributs from a "Picture" node.
+  bool LoadXMLConfiguration(void);
+
+  void SetSurface(const Surface & s, 
+                  bool enable_scaling = false, 
+                  bool antialiasing = false);
   void SetNoSurface();
-  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Draw(const Point2i & mousePosition) const;
   virtual void Pack() {};
 
   // Apply a transparency color mask

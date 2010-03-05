@@ -48,10 +48,10 @@ Menu::Menu(const std::string& bg, t_action _actions) :
 
   b_ok = NULL;
   b_cancel = NULL;
+
   if (actions == vNo) {
     actions_buttons = NULL;
   } else {
-
     actions_buttons = new HBox(50, false);
 
     if (actions == vOk || actions == vOkCancel) {
@@ -95,7 +95,9 @@ void Menu::LoadWidget(Profile * profile,
   const xmlNode * currentNode = xmlFile->GetFirstChild(rootMenuNode);
   std::string currentNodeName;
 
+  // For each sub-node ...
   for ( ; widgetCount > 0; --widgetCount) {
+
     currentNodeName = xmlFile->GetNodeName(currentNode);
     Widget * newWidget = CreateWidget(profile, currentNode, currentNodeName);
    
@@ -118,18 +120,21 @@ Widget * Menu::CreateWidget(Profile * profile,
                             const xmlNode * widgetNode,
                             std::string & widgetName)
 {
-  if (widgetName == "Picture") {
-    return new PictureWidget(profile, widgetNode);
-  } else if (widgetName == "GridBox") {
+  if ("Picture" == widgetName) {
+    PictureWidget * widget = new PictureWidget(profile, widgetNode);
+    return widget->LoadXMLConfiguration() ? widget : NULL;
+  } else if ("GridBox" == widgetName) {
     //TODO
     return NULL;
-  } else if (widgetName == "ButtonPic") {
+  } else if ("ButtonPic" == widgetName) {
     //TODO
     return NULL;
-  } else if (widgetName == "Text") {
+  } else if ("Text" == widgetName) {
     //TODO
     return NULL;
-  } 
+  }
+
+  // Unknown widget type ... 
   return NULL;
 }
 
@@ -166,13 +171,13 @@ void Menu::mouse_cancel()
 
 bool Menu::BasicOnClickUp(const Point2i &mousePosition)
 {
-  if( b_ok != NULL &&  b_ok->Contains(mousePosition) )
+  if (b_ok != NULL &&  b_ok->Contains(mousePosition)) {
     mouse_ok();
-  else if( b_cancel != NULL && b_cancel->Contains(mousePosition) )
+  } else if (b_cancel != NULL && b_cancel->Contains(mousePosition)) {
     mouse_cancel();
-  else
+  } else {
     return false;
-
+  }
   return true;
 }
 
@@ -217,7 +222,7 @@ void Menu::key_tab()
   widgets.SetFocusOnNextWidget();
 }
 
-void Menu::DisplayError(const std::string &msg)
+void Menu::DisplayError(const std::string & msg)
 {
   play_error_sound();
 
@@ -234,7 +239,7 @@ void Menu::DrawBackground()
   background->Blit(GetMainWindow(), 0, 0);
 }
 
-void Menu::RedrawBackground(const Rectanglei& rect)
+void Menu::RedrawBackground(const Rectanglei & rect)
 {
   background->Blit(GetMainWindow(), rect, rect.GetPosition());
 }
@@ -257,10 +262,11 @@ void Menu::WakeUpOnCallback()
   SDL_PushEvent(&event);
 }
 
-bool Menu::HandleGlobalEvent(const SDL_Event& event)
+bool Menu::HandleGlobalEvent(const SDL_Event & event)
 {
-  if (event.type != SDL_KEYDOWN)
+  if (event.type != SDL_KEYDOWN) {
     return false;
+  }
 
   // Emergency exit
   if (event.key.keysym.sym == SDLK_ESCAPE
@@ -322,8 +328,10 @@ void Menu::HandleEvent(const SDL_Event& event)
     }
   } else if (event.type == SDL_MOUSEBUTTONUP) {
     Point2i mousePosition(event.button.x, event.button.y);
-    if (!BasicOnClickUp(mousePosition))
+    
+    if (!BasicOnClickUp(mousePosition)) {
       OnClickUp(mousePosition, event.button.button);
+    }
   } else if (event.type == SDL_MOUSEBUTTONDOWN) {
     Point2i mousePosition(event.button.x, event.button.y);
     OnClick(mousePosition, event.button.button);
@@ -335,18 +343,18 @@ void Menu::HandleEvents()
   // Poll and treat events
   SDL_Event event;
 
-  if (!SDL_WaitEvent(&event))
+  if (!SDL_WaitEvent(&event)) {
     return;
+  }
 
   do {
-
-    if (!HandleGlobalEvent(event))
-	HandleEvent(event);
-
+    if (!HandleGlobalEvent(event)) {
+      HandleEvent(event);
+    }
   } while (SDL_PollEvent(&event) && !close_menu);
 }
 
-void Menu::Run (bool skip_menu)
+void Menu::Run(bool skip_menu)
 {
   signal_begin_run();
 
@@ -356,14 +364,14 @@ void Menu::Run (bool skip_menu)
   }
 
   Mouse::pointer_t old_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  int x=0, y=0;
-
+  int x = 0;
+  int y = 0;
   close_menu = false;
 
   // Display the background
   DrawBackground();
 
-  SDL_GetMouseState( &x, &y);
+  SDL_GetMouseState(&x, &y);
   Point2i mousePosition(x, y);
   Display(mousePosition);
 
@@ -379,7 +387,6 @@ void Menu::Run (bool skip_menu)
 
     // Avoid to calculate redraw menu when comming back for closing.
     if (!close_menu) {
-
       SDL_GetMouseState( &x, &y );
       Point2i mousePosition(x, y);
 
