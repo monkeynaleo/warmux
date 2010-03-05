@@ -1,3 +1,17 @@
+> 2010/03/08 - 0.9.1 release
+  - Bugfixes:
+      * Fix shoot key handling when user exceeds the weapon max strength
+      * Fix: Do not apply damage from explosion twice
+      * Fix rope size check when attaching
+      * Fix some memory leaks
+      * And some others...
+  - One new skin: bugzilla
+  - One new map: chess map
+  - 4 new musics: circux, diabolicux, exoticux and woodlux
+  - Menu improvement: better management of tabs on small screen.
+  - Cleaner code
+  - Update translations
+
 > 2010/01/26 - 0.9.0 release
   - Artificial Intelligence!!! No more hidden feature AI-stupid. The new AI is smart.
   - Improved quality of network games
