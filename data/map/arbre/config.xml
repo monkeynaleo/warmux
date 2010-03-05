@@ -38,4 +38,7 @@
     <rebounding>false</rebounding>
     <rebound_factor>2.3</rebound_factor>
   </wind>
+
+ <music_playlist>woodlux</music_playlist>
+
 </resources>
