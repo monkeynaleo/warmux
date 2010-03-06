@@ -89,12 +89,21 @@ public:
   static bool ReadIntAttr(const xmlNode* x,
                           const std::string &name,
                           int &output);
+  bool ReadPercentageAttr(const xmlNode* node,
+                          const std::string & attributName,
+                          double & outputValue);
+  bool ReadPixelAttr(const xmlNode* node,
+                     const std::string & attributName,
+                     int & outputValue);
   static bool ReadUintAttr(const xmlNode* x,
                            const std::string &name,
                            unsigned int &output);
   static bool ReadBoolAttr(const xmlNode* x,
                            const std::string &name,
                            bool &output);
+  bool IsAPercentageAttr(const xmlNode* node,
+                         const std::string & attributName);
+
 private:
   // Read marker value
   static bool ReadMarkerValue(const xmlNode* marker, std::string &output);
