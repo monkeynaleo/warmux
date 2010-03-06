@@ -100,7 +100,7 @@ void Menu::LoadWidget(Profile * profile,
 
     currentNodeName = xmlFile->GetNodeName(currentNode);
     Widget * newWidget = CreateWidget(profile, currentNode, currentNodeName);
-   
+
     if (NULL != newWidget) {
 
       if ("GridBox" == currentNodeName) {
@@ -124,8 +124,8 @@ Widget * Menu::CreateWidget(Profile * profile,
     PictureWidget * widget = new PictureWidget(profile, widgetNode);
     return widget->LoadXMLConfiguration() ? widget : NULL;
   } else if ("GridBox" == widgetName) {
-    //TODO
-    return NULL;
+    GridBox * widget = new GridBox(profile, widgetNode);
+    return widget->LoadXMLConfiguration() ? widget : NULL;
   } else if ("ButtonPic" == widgetName) {
     //TODO
     return NULL;

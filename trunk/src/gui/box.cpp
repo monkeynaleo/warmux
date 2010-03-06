@@ -23,7 +23,15 @@
 #include "graphic/surface.h"
 #include "graphic/colors.h"
 
-Box::Box(const Point2i &size, bool _draw_border) : WidgetList(size)
+Box::Box(void):
+  margin(0),
+  border()
+{
+}
+
+Box::Box(const Point2i & size, 
+         bool _draw_border) : 
+  WidgetList(size)
 {
   margin = 5;
   border.SetValues(5, 5);
@@ -36,6 +44,23 @@ Box::Box(const Point2i &size, bool _draw_border) : WidgetList(size)
 
 Box::~Box()
 {
+}
+
+void Box::ParseXMLBoxParameters(XmlReader * xmlFile,
+                                const xmlNode * boxNode)
+{
+  bool drawBorder = false;
+  xmlFile->ReadBoolAttr(boxNode, "drawBorder", drawBorder);
+  
+  int borderSize = 0;
+  xmlFile->ReadPixelAttr(boxNode, "borderSize", borderSize);
+
+  Color borderColor = defaultOptionColorRect;
+  xmlFile->ReadHexColorAttr(boxNode, "borderColor", borderColor); 
+  Widget::SetBorder(defaultOptionColorRect, borderSize);
+
+  //TODO
+  Widget::SetBackgroundColor(defaultOptionColorBox);
 }
 
 void Box::Update(const Point2i &mousePosition,
@@ -137,7 +162,9 @@ void HBox::Pack()
 
 // --------------------------------------------------
 
-GridBox::GridBox(uint _max_line_width, const Point2i& size_of_widget, bool _draw_border) :
+GridBox::GridBox(uint _max_line_width, 
+                 const Point2i & size_of_widget, 
+                 bool _draw_border) :
   Box(Point2i(-1, -1), _draw_border)
 {
   max_line_width = _max_line_width;
@@ -146,7 +173,32 @@ GridBox::GridBox(uint _max_line_width, const Point2i& size_of_widget, bool _draw
   last_column = 0;
 }
 
-void GridBox::PlaceWidget(Widget * a_widget, uint _line, uint _column)
+GridBox::GridBox(Profile * _profile,
+                 const xmlNode * _gridBoxNode) :
+  profile(_profile),
+  gridBoxNode(_gridBoxNode)
+{
+}
+
+bool GridBox::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == gridBoxNode) {
+    //TODO error ... xml attributs not initialized !
+    return false;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  ParseXMLPosition(xmlFile, gridBoxNode);
+  ParseXMLSize(xmlFile, gridBoxNode);
+
+  ParseXMLBoxParameters(xmlFile, gridBoxNode);
+
+  return true;
+}
+
+void GridBox::PlaceWidget(Widget * a_widget, 
+                          uint _line, 
+                          uint _column)
 {
   uint _x, _y;
 
@@ -185,6 +237,10 @@ uint GridBox::NbWidgetsPerLine(const uint nb_total_widgets)
 
 void GridBox::Pack()
 {
+  if (widget_list.size() == 0) {
+    return;
+  }
+
   WidgetList::Pack();
 
   uint nb_widgets_per_line = NbWidgetsPerLine(widget_list.size());

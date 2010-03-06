@@ -95,7 +95,7 @@ void Widget::RedrawBackground(const Rectanglei& rect)
     surf.RectangleColor(*this, c_red, border_size);
 }
 
-void Widget::parseXMLPosition(XmlReader * xmlFile,
+void Widget::ParseXMLPosition(XmlReader * xmlFile,
                               const xmlNode * pictureNode)
 {
   int x = 0;
@@ -118,10 +118,10 @@ void Widget::parseXMLPosition(XmlReader * xmlFile,
   SetPosition(x, y);
 }
 
-void Widget::parseXMLSize(XmlReader * xmlFile,
+void Widget::ParseXMLSize(XmlReader * xmlFile,
                           const xmlNode * pictureNode)
 {
-  int width = 0;
+  int width = 100;
   if (xmlFile->IsAPercentageAttr(pictureNode, "width")) {
     double tmpValue;
     xmlFile->ReadPercentageAttr(pictureNode, "width", tmpValue);
@@ -130,7 +130,7 @@ void Widget::parseXMLSize(XmlReader * xmlFile,
     xmlFile->ReadPixelAttr(pictureNode, "width", width);
   }
 
-  int height = 0;
+  int height = 100;
   if (xmlFile->IsAPercentageAttr(pictureNode, "height")) {
     double tmpValue;
     xmlFile->ReadPercentageAttr(pictureNode, "height", tmpValue);
