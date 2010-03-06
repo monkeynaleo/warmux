@@ -8,6 +8,7 @@
 #include "include/base.h"
 #include <string>
 #include <vector>
+#include "graphic/colors.h"
 
 // Forward declaration
 typedef struct _xmlNode xmlNode;
@@ -101,6 +102,9 @@ public:
   static bool ReadBoolAttr(const xmlNode* x,
                            const std::string &name,
                            bool &output);
+  bool ReadHexColorAttr(const xmlNode* node,
+                        const std::string & attributName,
+                        Color & outputColor);
   bool IsAPercentageAttr(const xmlNode* node,
                          const std::string & attributName);
 
