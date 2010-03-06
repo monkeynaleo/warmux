@@ -28,7 +28,6 @@
 #include "include/app.h"
 #include <WORMUX_debug.h>
 
-
 Widget::Widget():
   Rectanglei(),
   has_focus(false),
@@ -94,6 +93,52 @@ void Widget::RedrawBackground(const Rectanglei& rect)
 
   if (IsLOGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
+}
+
+void Widget::parseXMLPosition(XmlReader * xmlFile,
+                              const xmlNode * pictureNode)
+{
+  int x = 0;
+  if (xmlFile->IsAPercentageAttr(pictureNode, "x")) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(pictureNode, "x", tmpValue);
+    x = GetMainWindow().GetWidth() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(pictureNode, "x", x);
+  }
+
+  int y = 0;
+  if (xmlFile->IsAPercentageAttr(pictureNode, "y")) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(pictureNode, "y", tmpValue);
+    y = GetMainWindow().GetHeight() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(pictureNode, "y", y);
+  }
+  SetPosition(x, y);
+}
+
+void Widget::parseXMLSize(XmlReader * xmlFile,
+                          const xmlNode * pictureNode)
+{
+  int width = 0;
+  if (xmlFile->IsAPercentageAttr(pictureNode, "width")) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(pictureNode, "width", tmpValue);
+    width = GetMainWindow().GetWidth() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(pictureNode, "width", width);
+  }
+
+  int height = 0;
+  if (xmlFile->IsAPercentageAttr(pictureNode, "height")) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(pictureNode, "height", tmpValue);
+    height = GetMainWindow().GetHeight() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(pictureNode, "height", height);
+  }
+  SetSize(width, height);
 }
 
 void Widget::Update(const Point2i &mousePosition,

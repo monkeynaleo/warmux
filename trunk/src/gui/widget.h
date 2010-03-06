@@ -29,6 +29,7 @@
 #include "interface/mouse.h"
 #include <WORMUX_rectangle.h>
 #include <WORMUX_point.h>
+#include "tool/resource_manager.h"
 
 class Surface;
 struct SDL_keysym;
@@ -70,6 +71,11 @@ private:
   Font::font_size_t GetFontSize() const { return font_size; };
   Font::font_style_t GetFontStyle() const { return font_style; };
   bool IsFontShadowed() const { return font_shadowed; };
+
+  void parseXMLPosition(XmlReader * profile,
+                        const xmlNode * pictureNode);
+  void parseXMLSize(XmlReader * xmlFile,
+                    const xmlNode * pictureNode);
 
  public:
   Widget();
