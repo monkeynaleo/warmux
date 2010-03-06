@@ -24,7 +24,6 @@
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "include/app.h"
-#include "tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Point2i & _size) :
   disabled(false),
@@ -66,11 +65,6 @@ PictureWidget::~PictureWidget()
   }
 }
 
-void PictureWidget::Init(void)
-{
-  LoadXMLConfiguration();
-}
-
 /*
   Picture node example :
   <Picture file="menu/image.png" 
@@ -106,17 +100,8 @@ bool PictureWidget::LoadXMLConfiguration()
     surface = surface.DisplayFormatAlpha();
   }
 
-  int x = 0;
-  int y = 0;
-  xmlFile->ReadIntAttr(pictureNode, "x", x);
-  xmlFile->ReadIntAttr(pictureNode, "y", y);
-  SetPosition(x, y);
-  
-  int width = 100;
-  int height = 100;
-  xmlFile->ReadIntAttr(pictureNode, "width", width);
-  xmlFile->ReadIntAttr(pictureNode, "height", height);
-  SetSize(Point2i(width, height));
+  parseXMLPosition(xmlFile, pictureNode);
+  parseXMLSize(xmlFile, pictureNode);
 
   bool activeScale = false;
   xmlFile->ReadBoolAttr(pictureNode, "scale", activeScale);

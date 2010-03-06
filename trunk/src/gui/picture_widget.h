@@ -53,8 +53,6 @@ class PictureWidget : public Widget
                 const xmlNode * pictureNode);
   virtual ~PictureWidget();
 
-  void Init(void);
-
   // Load all attributs from a "Picture" node.
   bool LoadXMLConfiguration(void);
 
