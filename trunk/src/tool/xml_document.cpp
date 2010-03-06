@@ -357,6 +357,37 @@ bool XmlReader::ReadIntAttr(const xmlNode* x,
   return str2int (val, output);
 }
 
+bool XmlReader::ReadPercentageAttr(const xmlNode* node,
+                                   const std::string & attributName,
+                                   double & outputValue)
+{
+  std::string value;
+  if (!ReadStringAttr(node, attributName, value)) {
+    return false;
+  }
+  size_t foundPos = value.find("%");
+  if (std::string::npos == foundPos) {
+    return false;
+  }
+  value = value.substr(0, foundPos);
+  return str2double(value, outputValue);
+}
+
+bool XmlReader::ReadPixelAttr(const xmlNode* node,
+                              const std::string & attributName,
+                              int & outputValue)
+{
+  std::string value;
+  if (!ReadStringAttr(node, attributName, value)) {
+    return false;
+  }
+  size_t foundPos = value.find("px");
+  if (std::string::npos != foundPos) {
+    value = value.substr(0, foundPos);
+  }
+  return str2int(value, outputValue);
+}
+
 /** @see XmlReader::ReadString comment */
 bool XmlReader::ReadUintAttr(const xmlNode* x,
                              const std::string &name,
@@ -398,6 +429,19 @@ bool XmlReader::ReadDoubleAttr(const xmlNode* x,
 bool XmlReader::IsOk() const
 {
   return doc != NULL;
+}
+
+bool XmlReader::IsAPercentageAttr(const xmlNode * node,
+                                  const std::string & attributName)
+{
+  std::string value;
+  if (!ReadStringAttr(node, attributName, value)) {
+    return false;
+  }
+  if (std::string::npos == value.find("%")) {
+    return false;
+  }
+  return true;
 }
 
 const xmlNode* XmlReader::GetRoot() const
