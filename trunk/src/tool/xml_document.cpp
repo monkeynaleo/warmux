@@ -426,6 +426,30 @@ bool XmlReader::ReadDoubleAttr(const xmlNode* x,
   return str2double(val, output);
 }
 
+bool XmlReader::ReadHexColorAttr(const xmlNode* node,
+                                 const std::string & attributName,
+                                 Color & outputColor)
+{
+  std::string color;
+  if (!ReadStringAttr(node, attributName, color)) {
+    return false;
+  }
+  if (color.length() < 8) {
+    // Error, malformed Hex Color
+    return false;
+  }
+  unsigned int red, green, blue, alpha;
+
+  if (1 != sscanf(color.substr(0, 2).c_str(), "%2x", &red) ||
+      1 != sscanf(color.substr(2, 2).c_str(), "%2x", &green) ||
+      1 != sscanf(color.substr(4, 2).c_str(), "%2x", &blue) ||
+      1 != sscanf(color.substr(6, 2).c_str(), "%2x", &alpha)) {
+    return false;
+  }
+  outputColor.SetColor(red, green, blue, alpha);
+  return true;
+}
+
 bool XmlReader::IsOk() const
 {
   return doc != NULL;
