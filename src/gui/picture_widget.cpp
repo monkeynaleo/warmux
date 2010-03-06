@@ -100,8 +100,8 @@ bool PictureWidget::LoadXMLConfiguration()
     surface = surface.DisplayFormatAlpha();
   }
 
-  parseXMLPosition(xmlFile, pictureNode);
-  parseXMLSize(xmlFile, pictureNode);
+  ParseXMLPosition(xmlFile, pictureNode);
+  ParseXMLSize(xmlFile, pictureNode);
 
   bool activeScale = false;
   xmlFile->ReadBoolAttr(pictureNode, "scale", activeScale);

@@ -72,9 +72,9 @@ private:
   Font::font_style_t GetFontStyle() const { return font_style; };
   bool IsFontShadowed() const { return font_shadowed; };
 
-  void parseXMLPosition(XmlReader * profile,
+  void ParseXMLPosition(XmlReader * profile,
                         const xmlNode * pictureNode);
-  void parseXMLSize(XmlReader * xmlFile,
+  void ParseXMLSize(XmlReader * xmlFile,
                     const xmlNode * pictureNode);
 
  public:
