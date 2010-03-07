@@ -120,21 +120,29 @@ Widget * Menu::CreateWidget(Profile * profile,
                             const xmlNode * widgetNode,
                             std::string & widgetName)
 {
+  Widget * widget = NULL;
+
   if ("Picture" == widgetName) {
-    PictureWidget * widget = new PictureWidget(profile, widgetNode);
-    return widget->LoadXMLConfiguration() ? widget : NULL;
+    widget = new PictureWidget(profile, widgetNode);
   } else if ("GridBox" == widgetName) {
-    GridBox * widget = new GridBox(profile, widgetNode);
-    return widget->LoadXMLConfiguration() ? widget : NULL;
+    widget = new GridBox(profile, widgetNode);
   } else if ("ButtonPic" == widgetName) {
-    //TODO
     return NULL;
-  } else if ("Text" == widgetName) {
-    //TODO
+  } else if ("Label" == widgetName) {
+    return NULL;
+  } else if ("VerticalBox" == widgetName) {
+    return NULL;
+  } else if ("HorizontalBox" == widgetName) {
+    return NULL;
+  } else if ("SpinButton" == widgetName) {
+    return NULL;
+  } else if ("TextBox" == widgetName) {
     return NULL;
   }
 
-  // Unknown widget type ... 
+  if (NULL != widget) { 
+    return widget->LoadXMLConfiguration() ? widget : NULL;
+  }
   return NULL;
 }
 

@@ -82,6 +82,8 @@ private:
   Widget(const Point2i &size);
   virtual ~Widget() { };
 
+  virtual bool LoadXMLConfiguration(void) { return false; };
+
   virtual void Update(const Point2i &mousePosition,
 		      const Point2i &lastMousePosition); // Virtual for widget_list: to remove!
 
