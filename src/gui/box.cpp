@@ -57,10 +57,11 @@ void Box::ParseXMLBoxParameters(XmlReader * xmlFile,
 
   Color borderColor = defaultOptionColorRect;
   xmlFile->ReadHexColorAttr(boxNode, "borderColor", borderColor); 
-  Widget::SetBorder(defaultOptionColorRect, borderSize);
+  Widget::SetBorder(borderColor, borderSize);
 
-  //TODO
-  Widget::SetBackgroundColor(defaultOptionColorBox);
+  Color backgroundColor = defaultOptionColorBox;
+  xmlFile->ReadHexColorAttr(boxNode, "backgroundColor", backgroundColor);
+  Widget::SetBackgroundColor(backgroundColor);
 }
 
 void Box::Update(const Point2i &mousePosition,
