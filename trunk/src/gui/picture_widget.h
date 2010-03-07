@@ -54,7 +54,7 @@ class PictureWidget : public Widget
   virtual ~PictureWidget();
 
   // Load all attributs from a "Picture" node.
-  bool LoadXMLConfiguration(void);
+  virtual bool LoadXMLConfiguration(void);
 
   void SetSurface(const Surface & s, 
                   bool enable_scaling = false, 

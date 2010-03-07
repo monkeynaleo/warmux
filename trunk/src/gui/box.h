@@ -95,7 +95,7 @@ public:
   GridBox(Profile * _profile,
           const xmlNode * _gridBoxNode);
 
-  bool LoadXMLConfiguration(void);
+  virtual bool LoadXMLConfiguration(void);
 
   virtual void Pack();
 };
