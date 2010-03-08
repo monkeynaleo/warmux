@@ -26,7 +26,6 @@
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "tool/math_tools.h"
-#include "tool/resource_manager.h"
 
 ButtonPic::ButtonPic(const std::string &label,
 		     const std::string &resource_id,
@@ -43,8 +42,43 @@ ButtonPic::ButtonPic(const std::string &label,
 
 ButtonPic::~ButtonPic()
 {
-  if (txt_label)
+  if (txt_label) {
     delete txt_label;
+  }
+}
+
+ButtonPic::ButtonPic(Profile * profile,
+                     const xmlNode * buttonPicNode) :
+  Widget(profile, buttonPicNode)
+{
+}
+
+bool ButtonPic::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    //TODO error ... xml attributs not initialized !
+    return false;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string picture;
+  if (!xmlFile->ReadStringAttr(widgetNode, "picture", picture)) {
+    //TODO error
+    return false;
+  }
+
+  picture = profile->relative_path + picture;
+  Surface surface(picture.c_str());
+  m_img_normal = surface;
+
+  //TODO load label
+  //txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
+  //txt_label->SetMaxWidth(size.x);
+
+  ParseXMLPosition();
+  ParseXMLSize();
+
+  return true;
 }
 
 void ButtonPic::Draw(const Point2i &mousePosition) const

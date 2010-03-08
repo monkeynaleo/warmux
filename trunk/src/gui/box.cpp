@@ -175,24 +175,25 @@ GridBox::GridBox(uint _max_line_width,
 }
 
 GridBox::GridBox(Profile * _profile,
-                 const xmlNode * _gridBoxNode) :
-  profile(_profile),
-  gridBoxNode(_gridBoxNode)
+                 const xmlNode * _gridBoxNode)
 {
+  this->profile = _profile;
+  this->widgetNode = _gridBoxNode;
 }
 
 bool GridBox::LoadXMLConfiguration(void)
 {
-  if (NULL == profile || NULL == gridBoxNode) {
+  if (NULL == profile || NULL == widgetNode) {
     //TODO error ... xml attributs not initialized !
     return false;
   }
+
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  ParseXMLPosition(xmlFile, gridBoxNode);
-  ParseXMLSize(xmlFile, gridBoxNode);
+  ParseXMLPosition();
+  ParseXMLSize();
 
-  ParseXMLBoxParameters(xmlFile, gridBoxNode);
+  ParseXMLBoxParameters(xmlFile, widgetNode);
 
   return true;
 }

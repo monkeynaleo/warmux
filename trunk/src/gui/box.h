@@ -82,9 +82,6 @@ private:
   uint last_line;
   uint last_column;
 
-  Profile * profile;
-  const xmlNode * gridBoxNode;
-
   uint NbWidgetsPerLine(uint nb_total_widgets);
   void PlaceWidget(Widget * a_widget, uint line, uint column);
 
