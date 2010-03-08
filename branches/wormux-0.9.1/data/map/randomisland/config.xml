@@ -11,7 +11,6 @@
   </author>
 
   <surface name="sky" file="sky.jpg" />
-  <surface name="map" file="background.png" />
   <surface name="preview" file="preview.jpg" />
   <surface name="texture" file="texture.png" />
   <color name="border_color" r="234" g="219" b="106" a="255" />
