@@ -41,9 +41,6 @@ class PictureWidget : public Widget
   bool disabled;
   Sprite * spr;
 
-  Profile * profile;
-  const xmlNode * pictureNode;
-
  public:
   PictureWidget(const Point2i & size);
   PictureWidget(const Point2i & size, 

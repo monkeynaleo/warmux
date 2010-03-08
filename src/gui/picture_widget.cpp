@@ -27,9 +27,7 @@
 
 PictureWidget::PictureWidget (const Point2i & _size) :
   disabled(false),
-  spr(NULL),
-  profile(NULL),
-  pictureNode(NULL)
+  spr(NULL)
 {
   size = _size;
 }
@@ -38,9 +36,7 @@ PictureWidget::PictureWidget(const Point2i & _size,
                              const std::string & resource_id, 
                              bool scale) :
   disabled(false),
-  spr(NULL),
-  profile(NULL),
-  pictureNode(NULL)
+  spr(NULL)
 {
   size = _size;
 
@@ -49,12 +45,11 @@ PictureWidget::PictureWidget(const Point2i & _size,
   GetResourceManager().UnLoadXMLProfile( res);
 }
 
-PictureWidget::PictureWidget(Profile * _profile, 
-                             const xmlNode * _pictureNode) :
+PictureWidget::PictureWidget(Profile * profile, 
+                             const xmlNode * pictureNode) :
+  Widget(profile, pictureNode),
   disabled(false),
-  spr(NULL),
-  profile(_profile),
-  pictureNode(_pictureNode)
+  spr(NULL)
 {
 }
 
@@ -76,20 +71,20 @@ PictureWidget::~PictureWidget()
 */
 bool PictureWidget::LoadXMLConfiguration()
 {
-  if (NULL == profile || NULL == pictureNode) {
+  if (NULL == profile || NULL == widgetNode) {
     //TODO error ... xml attributs not initialized !
     return false;
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
   std::string file;
-  if (!xmlFile->ReadStringAttr(pictureNode, "file", file)) {
+  if (!xmlFile->ReadStringAttr(widgetNode, "file", file)) {
     //TODO error
     return false;
   }
 
   bool activeAlpha = false;
-  xmlFile->ReadBoolAttr(pictureNode, "alpha", activeAlpha);
+  xmlFile->ReadBoolAttr(widgetNode, "alpha", activeAlpha);
 
   file = profile->relative_path + file;
   Surface surface(file.c_str());
@@ -100,13 +95,13 @@ bool PictureWidget::LoadXMLConfiguration()
     surface = surface.DisplayFormatAlpha();
   }
 
-  ParseXMLPosition(xmlFile, pictureNode);
-  ParseXMLSize(xmlFile, pictureNode);
+  ParseXMLPosition();
+  ParseXMLSize();
 
   bool activeScale = false;
-  xmlFile->ReadBoolAttr(pictureNode, "scale", activeScale);
+  xmlFile->ReadBoolAttr(widgetNode, "scale", activeScale);
   bool activeAntialiasing = false;
-  xmlFile->ReadBoolAttr(pictureNode, "antialiasing", activeAntialiasing);
+  xmlFile->ReadBoolAttr(widgetNode, "antialiasing", activeAntialiasing);
 
   SetSurface(surface, activeScale, activeAntialiasing);
   return true;

@@ -42,7 +42,9 @@ Widget::Widget():
   font_size(Font::FONT_SMALL),
   font_style(Font::FONT_BOLD),
   ct(NULL),
-  need_redrawing(true)
+  need_redrawing(true),
+  profile(NULL),
+  widgetNode(NULL)
 {
 }
 
@@ -60,7 +62,30 @@ Widget::Widget(const Point2i &size):
   font_size(Font::FONT_SMALL),
   font_style(Font::FONT_BOLD),
   ct(NULL),
-  need_redrawing(true)
+  need_redrawing(true),
+  profile(NULL),
+  widgetNode(NULL)
+{
+}
+
+Widget::Widget(Profile * _profile,
+               const xmlNode * _widgetNode):
+  Rectanglei(0, 0, size.x, size.y),
+  has_focus(false),
+  visible(true),
+  is_highlighted(false),
+  border_color(white_color),
+  border_size(0),
+  background_color(transparent_color),
+  highlight_bg_color(transparent_color),
+  font_color(dark_gray_color),
+  font_shadowed(false),
+  font_size(Font::FONT_SMALL),
+  font_style(Font::FONT_BOLD),
+  ct(NULL),
+  need_redrawing(true),
+  profile(_profile),
+  widgetNode(_widgetNode)
 {
 }
 
@@ -95,48 +120,54 @@ void Widget::RedrawBackground(const Rectanglei& rect)
     surf.RectangleColor(*this, c_red, border_size);
 }
 
-void Widget::ParseXMLPosition(XmlReader * xmlFile,
-                              const xmlNode * pictureNode)
+void Widget::ParseXMLPosition(void)
 {
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
   int x = 0;
-  if (xmlFile->IsAPercentageAttr(pictureNode, "x")) {
+  if (xmlFile->IsAPercentageAttr(widgetNode, "x")) {
     double tmpValue;
-    xmlFile->ReadPercentageAttr(pictureNode, "x", tmpValue);
+    xmlFile->ReadPercentageAttr(widgetNode, "x", tmpValue);
     x = GetMainWindow().GetWidth() * tmpValue / 100;
   } else {
-    xmlFile->ReadPixelAttr(pictureNode, "x", x);
+    xmlFile->ReadPixelAttr(widgetNode, "x", x);
   }
 
   int y = 0;
-  if (xmlFile->IsAPercentageAttr(pictureNode, "y")) {
+  if (xmlFile->IsAPercentageAttr(widgetNode, "y")) {
     double tmpValue;
-    xmlFile->ReadPercentageAttr(pictureNode, "y", tmpValue);
+    xmlFile->ReadPercentageAttr(widgetNode, "y", tmpValue);
     y = GetMainWindow().GetHeight() * tmpValue / 100;
   } else {
-    xmlFile->ReadPixelAttr(pictureNode, "y", y);
+    xmlFile->ReadPixelAttr(widgetNode, "y", y);
   }
   SetPosition(x, y);
 }
 
-void Widget::ParseXMLSize(XmlReader * xmlFile,
-                          const xmlNode * pictureNode)
+void Widget::ParseXMLSize(void)
 {
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
   int width = 100;
-  if (xmlFile->IsAPercentageAttr(pictureNode, "width")) {
+  if (xmlFile->IsAPercentageAttr(widgetNode, "width")) {
     double tmpValue;
-    xmlFile->ReadPercentageAttr(pictureNode, "width", tmpValue);
+    xmlFile->ReadPercentageAttr(widgetNode, "width", tmpValue);
     width = GetMainWindow().GetWidth() * tmpValue / 100;
   } else {
-    xmlFile->ReadPixelAttr(pictureNode, "width", width);
+    xmlFile->ReadPixelAttr(widgetNode, "width", width);
   }
 
   int height = 100;
-  if (xmlFile->IsAPercentageAttr(pictureNode, "height")) {
+  if (xmlFile->IsAPercentageAttr(widgetNode, "height")) {
     double tmpValue;
-    xmlFile->ReadPercentageAttr(pictureNode, "height", tmpValue);
+    xmlFile->ReadPercentageAttr(widgetNode, "height", tmpValue);
     height = GetMainWindow().GetHeight() * tmpValue / 100;
   } else {
-    xmlFile->ReadPixelAttr(pictureNode, "height", height);
+    xmlFile->ReadPixelAttr(widgetNode, "height", height);
   }
   SetSize(width, height);
 }
