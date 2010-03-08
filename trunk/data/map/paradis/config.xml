@@ -8,7 +8,7 @@
 		<country>France</country>
 	</author>
 
-	<surface name="sky" file="decor_paradis_BG.jpg" />
+	<surface name="sky" file="decor_paradis_bg.jpg" />
 	<surface name="map" file="decor_paradis.png" />
 	<surface name="preview" file="paradis_preview.jpg" />
 
