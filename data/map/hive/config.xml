@@ -7,8 +7,8 @@
     <email>mmbenya AT primatestudios.com</email>
   </author>
 
-  <surface name="sky" file="BG.jpg" />
-  <surface name="map" file="FG.png" />
+  <surface name="sky" file="bg.jpg" />
+  <surface name="map" file="fg.png" />
   <surface name="preview" file="preview.jpg" />
 
   <name>The Hive</name>
