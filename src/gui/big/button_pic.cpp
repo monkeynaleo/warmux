@@ -53,6 +53,13 @@ ButtonPic::ButtonPic(Profile * profile,
 {
 }
 
+/*
+  <ButtonPic x="250px" y="50px" 
+             width="120px" height="110px"
+             action="localGame" 
+             picture="menu/i_play.png" 
+             text="Play" />
+*/
 bool ButtonPic::LoadXMLConfiguration(void)
 {
   if (NULL == profile || NULL == widgetNode) {
@@ -61,7 +68,10 @@ bool ButtonPic::LoadXMLConfiguration(void)
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  std::string picture;
+  ParseXMLPosition();
+  ParseXMLSize();
+
+  std::string picture("menu/notfound.png");
   if (!xmlFile->ReadStringAttr(widgetNode, "picture", picture)) {
     //TODO error
     return false;
@@ -71,12 +81,10 @@ bool ButtonPic::LoadXMLConfiguration(void)
   Surface surface(picture.c_str());
   m_img_normal = surface;
 
-  //TODO load label
-  //txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
+  std::string labelText("No Text");
+  xmlFile->ReadStringAttr(widgetNode, "text", labelText);
+  txt_label = new Text(_(labelText.c_str()), dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   //txt_label->SetMaxWidth(size.x);
-
-  ParseXMLPosition();
-  ParseXMLSize();
 
   return true;
 }

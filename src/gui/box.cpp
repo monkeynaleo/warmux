@@ -181,6 +181,14 @@ GridBox::GridBox(Profile * _profile,
   this->widgetNode = _gridBoxNode;
 }
 
+/*
+  <GridBox x="50px" y="50px" 
+           width="120px" height="110px"
+           drawBorder="true" borderSize="3"
+           borderColor="ff0102ff" backgroundColor="00ff00ff">
+    <!-- sub-widgets -->
+  </GridBox>
+*/
 bool GridBox::LoadXMLConfiguration(void)
 {
   if (NULL == profile || NULL == widgetNode) {
