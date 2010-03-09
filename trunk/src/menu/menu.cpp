@@ -31,6 +31,7 @@
 #include "interface/mouse.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
+#include "gui/big/button_pic.h"
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
@@ -127,7 +128,7 @@ Widget * Menu::CreateWidget(Profile * profile,
   } else if ("GridBox" == widgetName) {
     widget = new GridBox(profile, widgetNode);
   } else if ("ButtonPic" == widgetName) {
-    return NULL;
+    widget = new ButtonPic(profile, widgetNode);
   } else if ("Label" == widgetName) {
     return NULL;
   } else if ("VerticalBox" == widgetName) {
