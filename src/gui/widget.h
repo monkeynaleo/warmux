@@ -64,6 +64,9 @@ private:
   Profile * profile;
   const xmlNode * widgetNode;
 
+  // Attributs used to link a widget with an action
+  std::string actionName;
+
   virtual void __Update(const Point2i &/* mousePosition */,
 			const Point2i &/* lastMousePosition */) {};
 
@@ -76,6 +79,7 @@ private:
   Font::font_style_t GetFontStyle() const { return font_style; };
   bool IsFontShadowed() const { return font_shadowed; };
 
+  void ParseXMLMisc(void);
   void ParseXMLPosition(void);
   void ParseXMLSize(void);
 
@@ -91,13 +95,14 @@ private:
   virtual void Update(const Point2i &mousePosition,
 		      const Point2i &lastMousePosition); // Virtual for widget_list: to remove!
 
-
   virtual void Draw(const Point2i &mousePosition) const = 0;
   virtual void NeedRedrawing() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
   virtual bool SendKey(const SDL_keysym&) { return false; };
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  const std::string & GetActionName(void) const { return this->actionName; };
+  void SetActionName(const std::string & _actionName) { this->actionName = _actionName; };
 
   // widget may be hidden
   void SetVisible(bool _visible);
