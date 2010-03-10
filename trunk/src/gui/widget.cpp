@@ -44,7 +44,8 @@ Widget::Widget():
   ct(NULL),
   need_redrawing(true),
   profile(NULL),
-  widgetNode(NULL)
+  widgetNode(NULL),
+  actionName("NoAction")
 {
 }
 
@@ -64,7 +65,8 @@ Widget::Widget(const Point2i &size):
   ct(NULL),
   need_redrawing(true),
   profile(NULL),
-  widgetNode(NULL)
+  widgetNode(NULL),
+  actionName("NoAction")
 {
 }
 
@@ -85,7 +87,8 @@ Widget::Widget(Profile * _profile,
   ct(NULL),
   need_redrawing(true),
   profile(_profile),
-  widgetNode(_widgetNode)
+  widgetNode(_widgetNode),
+  actionName("NoAction")
 {
 }
 
@@ -118,6 +121,17 @@ void Widget::RedrawBackground(const Rectanglei& rect)
 
   if (IsLOGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
+}
+
+void Widget::ParseXMLMisc(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string widgetAction("NoAction");
+  xmlFile->ReadStringAttr(widgetNode, "action", widgetAction);
 }
 
 void Widget::ParseXMLPosition(void)
