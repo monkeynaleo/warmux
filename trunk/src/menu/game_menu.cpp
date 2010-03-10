@@ -59,6 +59,8 @@ GameMenu::GameMenu() :
   if (mapsHeight > 200) {
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
+  } else {
+    mapsHeight = 200;
   }
 
   MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
