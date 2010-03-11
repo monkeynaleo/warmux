@@ -22,13 +22,13 @@
 #include "gui/label.h"
 #include "graphic/text.h"
 
-Label::Label (const std::string &label,
-              uint max_width,
-              Font::font_size_t fsize,
-              Font::font_style_t fstyle,
-              const Color& color,
-              bool _center,
-              bool shadowed):
+Label::Label(const std::string & label,
+             uint max_width,
+             Font::font_size_t fsize,
+             Font::font_style_t fstyle,
+             const Color & color,
+             bool _center,
+             bool shadowed):
   center(_center)
 {
   Widget::SetFont(color, fsize, fstyle, shadowed, false);
@@ -39,9 +39,38 @@ Label::Label (const std::string &label,
   size.y = txt_label->GetHeight();
 }
 
+Label::Label(Profile * profile,
+             const xmlNode * pictureNode) :
+  Widget(profile, pictureNode),
+  txt_label(NULL),
+  center(false)
+{
+}
+
 Label::~Label()
 {
-  delete txt_label;
+  if (NULL != txt_label) {
+    delete txt_label;
+  }
+}
+
+bool Label::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    //TODO error ... xml attributs not initialized !
+    return false;
+  }
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string text("Text not found");
+  xmlFile->ReadStringAttr(widgetNode, "text", text);
+  txt_label = new Text(text);
+
+  ParseXMLPosition();
+  ParseXMLSize();
+
+  return true;
 }
 
 void Label::Draw(const Point2i &/*mousePosition*/) const
