@@ -29,7 +29,8 @@
 
 class Text;
 
-class Label : public Widget{
+class Label : public Widget
+{
   /* If you need this, implement it (correctly)*/
   Label(const Label&);
   Label operator=(const Label&);
@@ -49,8 +50,11 @@ class Label : public Widget{
         const Color& color = white_color,
         bool center = false,
         bool shadowed = true);
+  Label(Profile * profile,
+        const xmlNode * pictureNode);
   ~Label();
 
+  virtual bool LoadXMLConfiguration(void);
   virtual void Draw(const Point2i &mousePosition) const;
   void SetText(const std::string &new_txt);
   const std::string& GetText() const;
