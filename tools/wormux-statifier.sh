@@ -87,12 +87,9 @@ for i in $(strings SPackage/lib/libSDL_image*.so* |grep -E 'lib(.*).so'); do
     copylib $i SPackage/lib
 done
 
-# Would be great to have a cleanest way to get these ones
-# But are they really needed ??
-copylib libXrender.so.1	SPackage/lib
-copylib libXrandr.so.2	SPackage/lib
-copylib libXcursor.so.1	SPackage/lib
-copylib libXfixes.so.3	SPackage/lib
+copylib libX*.so.?	SPackage/lib
+copylib libpulse*.so.?  SPackage/lib
+copylib alsa-lib/libasound_module*.so  SPackage/lib
 
 #That was all dynamic loaded libraries... I hope !
 strip SPackage/lib/*
@@ -101,10 +98,10 @@ strip SPackage/bin/wormux
 # creating the shell script
 cat > SPackage/wormux.sh << EOF
 #!/bin/sh
-pulse=\`ps x|grep pulseaudio|wc -l\`
-if [ "\$pulse" -gt 1 ]; then
-    export SDL_AUDIODRIVER=pulse
-fi
+#pulse=\`ps x|grep pulseaudio|wc -l\`
+#if [ "\$pulse" -gt 1 ]; then
+#    export SDL_AUDIODRIVER=pulse
+#fi
 LD_LIBRARY_PATH=./lib WORMUX_DATADIR=./data/ WORMUX_LOCALEDIR=./data/locale WORMUX_FONT_PATH=./data/font/DejaVuSans.ttf ./lib/ld-linux.so.2 ./bin/wormux
 EOF
 
@@ -113,6 +110,8 @@ EOF
 
 DIR="wormux-`getwormuxversion`"
 rm -Rf $DIR
+rm -Rf $DIR.tar.gz
+rm -Rf $DIR.sh
 mv SPackage $DIR
 tar czf ${DIR}.tar.gz $DIR
 
@@ -133,3 +132,5 @@ EOF
 #If you've understood the previous part, it won't shock you too much....
 #Else you'll need some drugs to survive.
 cat ${DIR}.tar.gz >> ${DIR}.sh
+
+chmod 500 ${DIR}.sh
