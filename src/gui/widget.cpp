@@ -130,8 +130,7 @@ void Widget::ParseXMLMisc(void)
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  std::string widgetAction("NoAction");
-  xmlFile->ReadStringAttr(widgetNode, "action", widgetAction);
+  xmlFile->ReadStringAttr(widgetNode, "action", actionName);
 }
 
 void Widget::ParseXMLPosition(void)

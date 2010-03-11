@@ -37,9 +37,7 @@ class MainMenu : public Menu
   /**********************************************/
 
   ButtonPic *play, *network, *options, *help, *credits, *quit;
-
-  Text *version_text, *website_text;
-
+  Text * version_text, *website_text;
 
 public:
   typedef enum
@@ -59,12 +57,12 @@ public:
   ~MainMenu();
 
   void Init(void);
-  menu_item Run ();
+  menu_item Run();
 
 protected:
    bool signal_ok();
    bool signal_cancel();
-   void SelectAction(const Widget *w);
+   void SelectAction(const Widget * widget);
 
 private:
    virtual void DrawBackground();
