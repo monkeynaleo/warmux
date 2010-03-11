@@ -77,7 +77,19 @@ mkdir SPackage/bin/
 cp $(pwd)/install_dir/usr/local/bin/wormux SPackage/bin/
 
 mkdir SPackage/lib/
-cp /lib/ld-linux.so.2 SPackage/lib/
+
+file SPackage/bin/wormux|grep 64-bit > /dev/null
+if [ $? -eq 0 ]; then
+    LDSO=ld-linux-x86-64.so.2
+else
+    LDSO=ld-linux.so.2
+fi
+
+cp /lib/$LDSO SPackage/lib/
+if [ $? -ne 0 ]; then
+    echo "Fail to copy $LDSO"
+    exit 1
+fi
 
 for i in $(ldd SPackage/bin/wormux |awk -F '[>(]+' '{print $2}' |grep -v ')'); do
     copylib $i SPackage/lib/
@@ -102,7 +114,7 @@ cat > SPackage/wormux.sh << EOF
 #if [ "\$pulse" -gt 1 ]; then
 #    export SDL_AUDIODRIVER=pulse
 #fi
-LD_LIBRARY_PATH=./lib WORMUX_DATADIR=./data/ WORMUX_LOCALEDIR=./data/locale WORMUX_FONT_PATH=./data/font/DejaVuSans.ttf ./lib/ld-linux.so.2 ./bin/wormux
+LD_LIBRARY_PATH=./lib WORMUX_DATADIR=./data/ WORMUX_LOCALEDIR=./data/locale WORMUX_FONT_PATH=./data/font/DejaVuSans.ttf ./lib/$LDSO ./bin/wormux
 EOF
 
 #You thaught what you read was the most awful thing you've ever seen?
