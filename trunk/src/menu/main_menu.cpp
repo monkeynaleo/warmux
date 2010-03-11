@@ -117,31 +117,34 @@ void MainMenu::button_click() const
   JukeBox::GetInstance()->Play("default", "menu/clic");
 }
 
-void MainMenu::SelectAction(const Widget *w)
+void MainMenu::SelectAction(const Widget * widget)
 {
-  if (w == play) {
+  if (widget == play) {
     choice = PLAY;
     close_menu = true;
-  } else if(w == network) {
+  } else if (widget == network) {
     choice = NETWORK;
     close_menu = true;
-  } else if(w == options) {
+  } else if (widget == options) {
     choice = OPTIONS;
     close_menu = true;
-  } else if(w == help) {
+  } else if (widget == help) {
     choice = HELP;
     close_menu = true;
-  } else if(w == credits) {
+  } else if (widget == credits) {
     choice = CREDITS;
     close_menu = true;
-  } else if(w == quit) {
+  } else if (widget == quit) {
     choice = QUIT;
     close_menu = true;
   }
 
   // New implementation (XML custom menus)
   /*
-  std::string action = w->GetActionName();
+  if (NULL == widget) {
+    return;
+  }
+  std::string action = widget->GetActionName();
   if ("GoToLocalGameMenu" == action) {
     choice = PLAY;
     close_menu = true;

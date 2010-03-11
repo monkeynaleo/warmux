@@ -36,8 +36,7 @@ public:
   Box(const Point2i &size, bool _draw_border=true);
   virtual ~Box();
 
-  void ParseXMLBoxParameters(XmlReader * xmlFile,
-                             const xmlNode * boxNode);
+  void ParseXMLBoxParameters(void);
 
   void Update(const Point2i &mousePosition,
               const Point2i &lastMousePosition);

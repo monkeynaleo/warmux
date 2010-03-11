@@ -46,21 +46,22 @@ Box::~Box()
 {
 }
 
-void Box::ParseXMLBoxParameters(XmlReader * xmlFile,
-                                const xmlNode * boxNode)
+void Box::ParseXMLBoxParameters()
 {
+  XmlReader * xmlFile = profile->GetXMLDocument();
+  
   bool drawBorder = false;
-  xmlFile->ReadBoolAttr(boxNode, "drawBorder", drawBorder);
+  xmlFile->ReadBoolAttr(widgetNode, "drawBorder", drawBorder);
   
   int borderSize = 0;
-  xmlFile->ReadPixelAttr(boxNode, "borderSize", borderSize);
+  xmlFile->ReadPixelAttr(widgetNode, "borderSize", borderSize);
 
   Color borderColor = defaultOptionColorRect;
-  xmlFile->ReadHexColorAttr(boxNode, "borderColor", borderColor); 
+  xmlFile->ReadHexColorAttr(widgetNode, "borderColor", borderColor); 
   Widget::SetBorder(borderColor, borderSize);
 
   Color backgroundColor = defaultOptionColorBox;
-  xmlFile->ReadHexColorAttr(boxNode, "backgroundColor", backgroundColor);
+  xmlFile->ReadHexColorAttr(widgetNode, "backgroundColor", backgroundColor);
   Widget::SetBackgroundColor(backgroundColor);
 }
 
@@ -196,12 +197,9 @@ bool GridBox::LoadXMLConfiguration(void)
     return false;
   }
 
-  XmlReader * xmlFile = profile->GetXMLDocument();
-
   ParseXMLPosition();
   ParseXMLSize();
-
-  ParseXMLBoxParameters(xmlFile, widgetNode);
+  ParseXMLBoxParameters();
 
   return true;
 }

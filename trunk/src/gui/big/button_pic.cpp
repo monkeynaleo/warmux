@@ -68,10 +68,11 @@ bool ButtonPic::LoadXMLConfiguration(void)
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
+  ParseXMLMisc();
   ParseXMLPosition();
   ParseXMLSize();
 
-  std::string picture("menu/notfound.png");
+  std::string picture("menu/pic_not_found.png");
   if (!xmlFile->ReadStringAttr(widgetNode, "picture", picture)) {
     //TODO error
     return false;
