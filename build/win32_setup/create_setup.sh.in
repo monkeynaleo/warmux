@@ -33,7 +33,7 @@ else
 fi
 
 if test "@PACKAGE_VERSION@" = "svn"; then VIPV="0.0.0"
-else hen VIPV="@PACKAGE_VERSION@"; fi
+else VIPV="@PACKAGE_VERSION@"; fi
 
 mkdir -p $DEST
 
