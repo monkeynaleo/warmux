@@ -133,6 +133,32 @@ void Widget::ParseXMLMisc(void)
   xmlFile->ReadStringAttr(widgetNode, "action", actionName);
 }
 
+void Widget::ParseXMLBorder(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  int borderSize = 0;
+  xmlFile->ReadPixelAttr(widgetNode, "borderSize", borderSize);
+  Color borderColor = defaultOptionColorRect;
+  xmlFile->ReadHexColorAttr(widgetNode, "borderColor", borderColor);
+  SetBorder(borderColor, borderSize);
+}
+
+void Widget::ParseXMLBackground(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  Color backgroundColor = defaultOptionColorBox;
+  xmlFile->ReadHexColorAttr(widgetNode, "backgroundColor", backgroundColor);
+  SetBackgroundColor(backgroundColor);  
+}
+
 void Widget::ParseXMLPosition(void)
 {
   if (NULL == profile || NULL == widgetNode) {

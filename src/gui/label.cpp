@@ -63,12 +63,19 @@ bool Label::LoadXMLConfiguration()
 
   XmlReader * xmlFile = profile->GetXMLDocument();
 
+  ParseXMLPosition();
+  ParseXMLSize();
+
   std::string text("Text not found");
   xmlFile->ReadStringAttr(widgetNode, "text", text);
   txt_label = new Text(text);
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  Color textColor(0, 0, 0, 255);
+  xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
+  txt_label->SetColor(textColor);
+
+  ParseXMLBorder();
+  ParseXMLBackground();
 
   return true;
 }
