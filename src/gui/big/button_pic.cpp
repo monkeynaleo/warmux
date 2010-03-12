@@ -71,6 +71,8 @@ bool ButtonPic::LoadXMLConfiguration(void)
   ParseXMLMisc();
   ParseXMLPosition();
   ParseXMLSize();
+  ParseXMLBorder();
+  ParseXMLBackground();
 
   std::string picture("menu/pic_not_found.png");
   if (!xmlFile->ReadStringAttr(widgetNode, "picture", picture)) {
