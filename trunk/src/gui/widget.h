@@ -80,6 +80,8 @@ private:
   bool IsFontShadowed() const { return font_shadowed; };
 
   void ParseXMLMisc(void);
+  void ParseXMLBorder(void);
+  void ParseXMLBackground(void);
   void ParseXMLPosition(void);
   void ParseXMLSize(void);
 
