@@ -48,21 +48,8 @@ Box::~Box()
 
 void Box::ParseXMLBoxParameters()
 {
-  XmlReader * xmlFile = profile->GetXMLDocument();
-  
-  bool drawBorder = false;
-  xmlFile->ReadBoolAttr(widgetNode, "drawBorder", drawBorder);
-  
-  int borderSize = 0;
-  xmlFile->ReadPixelAttr(widgetNode, "borderSize", borderSize);
-
-  Color borderColor = defaultOptionColorRect;
-  xmlFile->ReadHexColorAttr(widgetNode, "borderColor", borderColor); 
-  Widget::SetBorder(borderColor, borderSize);
-
-  Color backgroundColor = defaultOptionColorBox;
-  xmlFile->ReadHexColorAttr(widgetNode, "backgroundColor", backgroundColor);
-  Widget::SetBackgroundColor(backgroundColor);
+  ParseXMLBorder();
+  ParseXMLBackground();
 }
 
 void Box::Update(const Point2i &mousePosition,
@@ -185,8 +172,8 @@ GridBox::GridBox(Profile * _profile,
 /*
   <GridBox x="50px" y="50px" 
            width="120px" height="110px"
-           drawBorder="true" borderSize="3"
-           borderColor="ff0102ff" backgroundColor="00ff00ff">
+           borderSize="3" borderColor="ff0102ff" 
+           backgroundColor="00ff00ff">
     <!-- sub-widgets -->
   </GridBox>
 */
