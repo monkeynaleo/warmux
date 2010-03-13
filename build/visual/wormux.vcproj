@@ -52,9 +52,8 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;CURL_STATICLIB;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
-				MinimalRebuild="true"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				FloatingPointExceptions="true"
@@ -76,7 +75,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllibd.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidid.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib libxml2.lib fribidid.lib libpng.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -149,10 +148,9 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;;&quot;$(GTK_BASEPATH)\include&quot;;&quot;$(GTK_BASEPATH)\include\libxml2&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;CURL_STATICLIB;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
-				MinimalRebuild="true"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
 				BufferSecurityCheck="false"
@@ -176,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib curllib.lib png.lib xml2.lib gmodule-2.0.lib gobject-2.0.lib gthread-2.0.lib fribidi.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib libpng.lib libxml2.lib fribidi.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib;libcmt.lib"
@@ -268,6 +266,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\ai\ai_weapons_weighting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\ai\ai_weapons_weighting.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\ai\trajectory.cpp"
 					>
 				</File>
@@ -335,14 +341,6 @@
 					RelativePath="..\..\src\character\movement.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\src\character\walk_intention.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\character\walk_intention.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="game"
@@ -377,14 +375,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\game\game_classic.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\game\game_init.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\game\game_init.h"
 					>
 				</File>
 				<File
@@ -868,6 +858,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\interface\movable_by_user.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\interface\movable_by_user.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\interface\move_intention.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\interface\move_intention.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\interface\weapon_menu.cpp"
 					>
 				</File>
@@ -1057,10 +1063,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\menu\pause_menu.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\menu\replay_menu.h"
 					>
 				</File>
 				<File
@@ -1840,6 +1842,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\weapon\weapon_launcher.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\weapon\weapon_strength_bar.cpp"
 					>
 				</File>
@@ -2247,6 +2253,90 @@
 				</File>
 				<File
 					RelativePath="..\..\lib\wormux\tools\random.cpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="XML"
+			>
+			<File
+				RelativePath="..\..\data\authors.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\..\data\cursors.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\..\data\graphism.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\..\data\weapons.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\..\data\wormux_default_config.xml"
+				>
+			</File>
+			<Filter
+				Name="game_mode"
+				>
+				<File
+					RelativePath="..\..\data\game_mode\blitz.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\game_mode\classic.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\game_mode\default_objects.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\game_mode\skin_viewer.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\game_mode\unlimited.xml"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="body"
+				>
+				<File
+					RelativePath="..\..\data\body\aliases.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\body\clothes.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\body\movements.xml"
+					>
+				</File>
+				<File
+					RelativePath="..\..\data\body\skeletons.xml"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="music"
+				>
+				<File
+					RelativePath="..\..\data\music\profile.xml"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="sound"
+				>
+				<File
+					RelativePath="..\..\data\sound\default\profile.xml"
 					>
 				</File>
 			</Filter>
