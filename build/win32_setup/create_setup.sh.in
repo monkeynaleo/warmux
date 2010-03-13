@@ -323,7 +323,7 @@ SDL_PATH=$(@SDL_CONFIG@ --prefix)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll       \
    "$SDL_PATH/bin/"{zlib1,jpeg62}.dll                      \
    "$SDL_PATH/bin/"lib{png3,intl3,iconv2,freetype-6}.dll   \
-   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll "$DEST"
+   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3,curl-4}.dll "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF
