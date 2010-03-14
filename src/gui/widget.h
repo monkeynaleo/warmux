@@ -84,6 +84,10 @@ private:
   void ParseXMLBackground(void);
   void ParseXMLPosition(void);
   void ParseXMLSize(void);
+  int ParseHorizontalTypeAttribut(const std::string & attributName,
+                                  int defaultValue);
+  int ParseVerticalTypeAttribut(const std::string & attributName,
+                                int defaultValue);
 
  public:
   Widget();

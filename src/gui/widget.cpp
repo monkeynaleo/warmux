@@ -161,54 +161,58 @@ void Widget::ParseXMLBackground(void)
 
 void Widget::ParseXMLPosition(void)
 {
-  if (NULL == profile || NULL == widgetNode) {
-    return;
-  }
-  XmlReader * xmlFile = profile->GetXMLDocument();
-  int x = 0;
-  if (xmlFile->IsAPercentageAttr(widgetNode, "x")) {
-    double tmpValue;
-    xmlFile->ReadPercentageAttr(widgetNode, "x", tmpValue);
-    x = GetMainWindow().GetWidth() * tmpValue / 100;
-  } else {
-    xmlFile->ReadPixelAttr(widgetNode, "x", x);
-  }
-
-  int y = 0;
-  if (xmlFile->IsAPercentageAttr(widgetNode, "y")) {
-    double tmpValue;
-    xmlFile->ReadPercentageAttr(widgetNode, "y", tmpValue);
-    y = GetMainWindow().GetHeight() * tmpValue / 100;
-  } else {
-    xmlFile->ReadPixelAttr(widgetNode, "y", y);
-  }
+  int x = ParseHorizontalTypeAttribut("x", 0);
+  int y = ParseVerticalTypeAttribut("y", 0);
   SetPosition(x, y);
 }
 
 void Widget::ParseXMLSize(void)
 {
+  int width = ParseHorizontalTypeAttribut("width", 100);
+  int height = ParseVerticalTypeAttribut("height", 100);
+  SetSize(width, height);
+}
+
+int Widget::ParseHorizontalTypeAttribut(const std::string & attributName,
+                                        int defaultValue)
+{
+  int finalValue = defaultValue;
+
   if (NULL == profile || NULL == widgetNode) {
-    return;
-  }
-  XmlReader * xmlFile = profile->GetXMLDocument();
-  int width = 100;
-  if (xmlFile->IsAPercentageAttr(widgetNode, "width")) {
-    double tmpValue;
-    xmlFile->ReadPercentageAttr(widgetNode, "width", tmpValue);
-    width = GetMainWindow().GetWidth() * tmpValue / 100;
-  } else {
-    xmlFile->ReadPixelAttr(widgetNode, "width", width);
+    return finalValue;
   }
 
-  int height = 100;
-  if (xmlFile->IsAPercentageAttr(widgetNode, "height")) {
+  XmlReader * xmlFile = profile->GetXMLDocument();
+  
+  if (xmlFile->IsAPercentageAttr(widgetNode, attributName)) {
     double tmpValue;
-    xmlFile->ReadPercentageAttr(widgetNode, "height", tmpValue);
-    height = GetMainWindow().GetHeight() * tmpValue / 100;
+    xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue);
+    finalValue = GetMainWindow().GetWidth() * tmpValue / 100;
   } else {
-    xmlFile->ReadPixelAttr(widgetNode, "height", height);
+    xmlFile->ReadPixelAttr(widgetNode, attributName, finalValue);
   }
-  SetSize(width, height);
+  return finalValue;
+}
+
+int Widget::ParseVerticalTypeAttribut(const std::string & attributName, 
+                                      int defaultValue)
+{
+  int finalValue = defaultValue;
+  
+  if (NULL == profile || NULL == widgetNode) {
+    return finalValue;
+  }
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  if (xmlFile->IsAPercentageAttr(widgetNode, attributName)) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue);
+    finalValue = GetMainWindow().GetHeight() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(widgetNode, attributName, finalValue);
+  }
+  return finalValue;
 }
 
 void Widget::Update(const Point2i &mousePosition,
