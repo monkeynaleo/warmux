@@ -58,9 +58,10 @@ Text::~Text()
 
 void Text::Render()
 {
-  if (!dummy)
-  {
-    if (txt=="") return;
+  if (!dummy) {
+    if ("" == txt) {
+      return;
+    }
 
     if (max_width != 0) {
       RenderMultiLines();
@@ -70,16 +71,13 @@ void Text::Render()
     Font* font = Font::GetInstance(font_size, font_style);
 
     surf = font->CreateSurface(txt, color);
-    if ( shadowed ) {
+    if (shadowed) {
       background = font->CreateSurface(txt, black_color);
     }
-  }
-  else
-  {
-    int psize = Font::GetPointSize(font_size);
-    surf = Surface(Point2i(psize, psize), 0);
-    if ( shadowed ) {
-      background = Surface(Point2i(psize, psize), 0);
+  } else {
+    surf = Surface(Point2i(font_size, font_size), 0);
+    if (shadowed) {
+      background = Surface(Point2i(font_size, font_size), 0);
     }
   }
 }
