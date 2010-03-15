@@ -26,7 +26,6 @@
 #include "map/map.h"
 #include <WORMUX_file_tools.h>
 
-//const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 10};
 bool  Font::LIB_INIT = false;
 
 std::map<int, Font *> Font::fontMapNormal;
