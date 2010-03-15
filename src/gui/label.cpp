@@ -68,11 +68,13 @@ bool Label::LoadXMLConfiguration()
 
   std::string text("Text not found");
   xmlFile->ReadStringAttr(widgetNode, "text", text);
-  txt_label = new Text(text);
 
   Color textColor(0, 0, 0, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
-  txt_label->SetColor(textColor);
+
+  int fontSize = ParseVerticalTypeAttribut("fontSize", 12);
+
+  txt_label = new Text(text, textColor, (Font::font_size_t)fontSize);
 
   ParseXMLBorder();
   ParseXMLBackground();
