@@ -41,7 +41,6 @@ private:
   typedef std::map<std::string, Surface>::value_type txt_sample;
   typedef std::map<std::string, Surface>::iterator txt_iterator;
 
-  //static const int FONT_SIZE[];
   static bool  LIB_INIT;
 
   static std::map<int, Font *> fontMapNormal;
@@ -73,9 +72,8 @@ public:
   } font_style_t;
 
   // type: defined as static consts above
-  static Font * GetInstance(font_size_t size, font_style_t style = FONT_BOLD);
-  static Font * GetFont(int fontSize, 
-                        font_style_t fstyle = FONT_BOLD);
+  static Font * GetInstance(font_size_t size, 
+                            font_style_t style = FONT_BOLD);
   static void ReleaseInstances(void);
 
   ~Font();
