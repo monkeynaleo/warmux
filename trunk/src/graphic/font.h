@@ -38,15 +38,15 @@ private:
   Font operator=(const Font&);
   /**********************************/
 
-  typedef std::map<std::string, Surface>::value_type
-    txt_sample;
-  typedef std::map<std::string, Surface>::iterator
-    txt_iterator;
-  static const int FONT_SIZE[];
-  static Font* FONT_ARRAY[6];
-  static Font* FONT_ARRAY_BOLD[6];
-  static Font* FONT_ARRAY_ITALIC[6];
+  typedef std::map<std::string, Surface>::value_type txt_sample;
+  typedef std::map<std::string, Surface>::iterator txt_iterator;
+
+  //static const int FONT_SIZE[];
   static bool  LIB_INIT;
+
+  static std::map<int, Font *> fontMapNormal;
+  static std::map<int, Font *> fontMapBold;
+  static std::map<int, Font *> fontMapItalic;
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
@@ -57,12 +57,12 @@ private:
 public:
   // Size
   typedef enum {
-    FONT_HUGE = 0,
-    FONT_LARGE = 1,
-    FONT_BIG = 2,
-    FONT_MEDIUM = 3,
-    FONT_SMALL = 4,
-    FONT_TINY = 5
+    FONT_HUGE = 40,
+    FONT_LARGE = 32,
+    FONT_BIG = 24,
+    FONT_MEDIUM = 16,
+    FONT_SMALL = 12,
+    FONT_TINY = 10
   } font_size_t;
 
   // Style
@@ -73,7 +73,9 @@ public:
   } font_style_t;
 
   // type: defined as static consts above
-  static Font* GetInstance(font_size_t size, font_style_t style = FONT_BOLD);
+  static Font * GetInstance(font_size_t size, font_style_t style = FONT_BOLD);
+  static Font * GetFont(int fontSize, 
+                        font_style_t fstyle = FONT_BOLD);
   static void ReleaseInstances(void);
 
   ~Font();
@@ -87,7 +89,6 @@ public:
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
 
-  static int GetPointSize(font_size_t size) { return FONT_SIZE[size]; };
   int GetWidth(const std::string &txt) const;
   int GetHeight() const;
   int GetHeight(const std::string &txt) const;
