@@ -4,7 +4,7 @@
   <rules>blitz</rules>
 
   <auto_change_character>true</auto_change_character>
-  <allow_character_selection>before_first_action_and_end_turn</allow_character_selection>
+  <allow_character_selection>before_first_action</allow_character_selection>
   <!-- either 'always','never','before_first_action' -->
 
   <duration_turn>30</duration_turn>
