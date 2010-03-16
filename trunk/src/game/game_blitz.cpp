@@ -80,7 +80,7 @@ bool GameBlitz::Run()
     times[*team] = GameMode::GetInstance()->duration_turn;
   }
 
-  counter = 0;;
+  counter = 0;
   return Game::Run();
 }
 
@@ -190,6 +190,7 @@ void GameBlitz::__SetState_HAS_PLAYED()
 {
   MSG_DEBUG("game.statechange", "Has played, now can move");
   last_clock_update = Time::GetInstance()->Read();
+
   CharacterCursor::GetInstance()->Hide();
 }
 
@@ -201,7 +202,9 @@ void GameBlitz::__SetState_END_TURN()
   CharacterCursor::GetInstance()->Hide();
   last_clock_update = Time::GetInstance()->Read();
   // Ensure the clock sprite isn't NULL:
-  Interface::GetInstance()->UpdateTimer(0, false, true);
+  Interface::GetInstance()->UpdateTimer(GameMode::GetInstance()->duration_exchange_player, 
+                                        false, 
+                                        true);
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();
