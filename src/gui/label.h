@@ -42,6 +42,8 @@ class Label : public Widget
  private:
   bool center;
 
+  Font::font_style_t DetectFontStyle(const std::string & fontStyle);
+
  public:
   Label(const std::string &label,
         uint max_width,
