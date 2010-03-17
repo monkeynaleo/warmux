@@ -65,6 +65,8 @@ bool Label::LoadXMLConfiguration()
 
   ParseXMLPosition();
   ParseXMLSize();
+  ParseXMLBorder();
+  ParseXMLBackground();
 
   std::string text("Text not found");
   xmlFile->ReadStringAttr(widgetNode, "text", text);
@@ -72,14 +74,31 @@ bool Label::LoadXMLConfiguration()
   Color textColor(0, 0, 0, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
 
+  // Load the font size ... 
   int fontSize = ParseVerticalTypeAttribut("fontSize", 12);
 
-  txt_label = new Text(text, textColor, (Font::font_size_t)fontSize);
+  std::string fontStyle;
+  xmlFile->ReadStringAttr(widgetNode, "fontStyle", fontStyle);
 
-  ParseXMLBorder();
-  ParseXMLBackground();
+  bool activeShadow = false;
+  xmlFile->ReadBoolAttr(widgetNode, "shadow", activeShadow);
+
+  txt_label = new Text(text, textColor, 
+                       (Font::font_size_t)fontSize, 
+                       DetectFontStyle(fontStyle),
+                       activeShadow);
 
   return true;
+}
+
+Font::font_style_t Label::DetectFontStyle(const std::string & fontStyle)
+{
+  if ("bold" == fontStyle) {
+    return Font::FONT_BOLD;
+  } else if ("italic" == fontStyle) {
+    return Font::FONT_ITALIC;
+  }
+  return Font::FONT_NORMAL;
 }
 
 void Label::Draw(const Point2i &/*mousePosition*/) const
