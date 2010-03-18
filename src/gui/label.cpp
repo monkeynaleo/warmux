@@ -34,7 +34,7 @@ Label::Label(const std::string & label,
   Widget::SetFont(color, fsize, fstyle, shadowed, false);
 
   size.x = max_width;
-  txt_label = new Text(label, color, fsize, fstyle, shadowed, label.empty());
+  txt_label = new Text(label, color, fsize, fstyle, shadowed, black_color, label.empty());
   txt_label->SetMaxWidth(size.x);
   size.y = txt_label->GetHeight();
 }
@@ -82,11 +82,14 @@ bool Label::LoadXMLConfiguration()
 
   bool activeShadow = false;
   xmlFile->ReadBoolAttr(widgetNode, "shadow", activeShadow);
+  Color shadowColor(255, 255, 255, 255);
+  xmlFile->ReadHexColorAttr(widgetNode, "shadowColor", shadowColor);
 
   txt_label = new Text(text, textColor, 
                        (Font::font_size_t)fontSize, 
                        DetectFontStyle(fontStyle),
-                       activeShadow);
+                       activeShadow,
+                       shadowColor);
 
   return true;
 }
@@ -122,7 +125,10 @@ void Label::SetText(const std::string &new_txt)
   if (txt_label)
     delete txt_label;
 
-  txt_label = new Text(new_txt, GetFontColor(), GetFontSize(), GetFontStyle(), IsFontShadowed(), new_txt.empty());
+  txt_label = new Text(new_txt, GetFontColor(), 
+                       GetFontSize(), GetFontStyle(), 
+                       IsFontShadowed(), GetShadowColor(),
+                       new_txt.empty());
   txt_label->SetMaxWidth(size.x);
   size.y = txt_label->GetHeight();
 }

@@ -45,7 +45,8 @@ Widget::Widget():
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction")
+  actionName("NoAction"),
+  shadowColor(white_color)
 {
 }
 
@@ -66,7 +67,8 @@ Widget::Widget(const Point2i &size):
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction")
+  actionName("NoAction"),
+  shadowColor(white_color)
 {
 }
 
@@ -88,7 +90,8 @@ Widget::Widget(Profile * _profile,
   need_redrawing(true),
   profile(_profile),
   widgetNode(_widgetNode),
-  actionName("NoAction")
+  actionName("NoAction"),
+  shadowColor(white_color)
 {
 }
 
@@ -318,7 +321,8 @@ void Widget::SetFont(const Color &_font_color,
 		     const Font::font_size_t _font_size,
 		     const Font::font_style_t _font_style,
 		     bool _font_shadowed,
-		     bool update_now)
+		     bool update_now,
+                     const Color & _shadowColor)
 {
   bool change = false;
 
@@ -336,6 +340,10 @@ void Widget::SetFont(const Color &_font_color,
   }
   if (font_shadowed != _font_shadowed) {
     font_shadowed = _font_shadowed;
+    change = true;
+  }
+  if (shadowColor != _shadowColor) {
+    shadowColor = _shadowColor;
     change = true;
   }
 

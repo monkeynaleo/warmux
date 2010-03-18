@@ -35,20 +35,26 @@ class Text
   bool dummy;
   uint bg_offset;
   uint max_width;
+  Color shadowColor;
 
   Font::font_size_t font_size;
   Font::font_style_t font_style;
 
   virtual void Render();
   void RenderMultiLines();
+
 public:
-  Text(const std::string &new_txt,
-       const Color& new_color = white_color,
-       Font::font_size_t fsize = Font::FONT_SMALL,
-       Font::font_style_t fstyle = Font::FONT_BOLD,
+  Text(const std::string & text,
+       const Color & fontColor = white_color,
+       uint fontSize = 12,
+       Font::font_style_t fontStyle = Font::FONT_BOLD,
        bool shadowed = true,
+       const Color & shadowColor = black_color,
        bool dummy = false);
+
   virtual ~Text();
+
+  void Init();
 
   //Draw method using windows coordinates
   void DrawCenter(const Point2i &position) const;
