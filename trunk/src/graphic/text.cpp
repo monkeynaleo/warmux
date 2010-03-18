@@ -24,36 +24,42 @@
 #include "interface/interface.h"
 #include "map/map.h"
 
-Text::Text(const std::string &new_txt,
-           const Color& new_color,
-           Font::font_size_t fsize,
-           Font::font_style_t fstyle,
-           bool _shadowed,
-           bool _dummy)
+Text::Text(const std::string & text,
+           const Color & fontColor,
+           uint fontSize,
+           Font::font_style_t fontStyle,
+           bool isShadowed,
+           const Color & _shadowColor,
+           bool _dummy) :
+  surf(),
+  background(),
+  txt(text),
+  color(fontColor),
+  shadowed(isShadowed),
+  dummy(_dummy),
+  bg_offset(0),
+  max_width(0),
+  shadowColor(_shadowColor),
+  font_size((Font::font_size_t)fontSize),
+  font_style(fontStyle)
 {
-  font_size = fsize;
-  font_style = fstyle;
-
-  txt = new_txt;
-  color = new_color;
-  shadowed = _shadowed;
-  dummy = _dummy;
-
-  if (shadowed) {
-    int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
-    bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
-    if (bg_offset < 1) bg_offset = 1;
-  }
-  else {
-    bg_offset = 0;
-  }
-  max_width = 0;
-
-  Render();
+  Init();
 }
 
 Text::~Text()
 {
+}
+
+void Text::Init() 
+{
+  if (shadowed) {
+    int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
+    bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
+    if (bg_offset < 1) {
+      bg_offset = 1;
+    }
+  }
+  Render();
 }
 
 void Text::Render()
@@ -72,7 +78,7 @@ void Text::Render()
 
     surf = font->CreateSurface(txt, color);
     if (shadowed) {
-      background = font->CreateSurface(txt, black_color);
+      background = font->CreateSurface(txt, shadowColor);
     }
   } else {
     surf = Surface(Point2i(font_size, font_size), 0);
@@ -84,15 +90,17 @@ void Text::Render()
 
 void Text::RenderMultiLines()
 {
-  if (txt=="") return;
+  if ("" == txt) {
+    return;
+  }
 
   Font* font = Font::GetInstance(font_size, font_style);
 
   // Make a first try
   if (font->GetWidth(txt) < int(max_width)) {
     surf = font->CreateSurface(txt, color);
-    if ( shadowed ) {
-      background = font->CreateSurface(txt, black_color);
+    if (shadowed) {
+      background = font->CreateSurface(txt, shadowColor);
     }
     return;
   }

@@ -66,6 +66,8 @@ private:
 
   // Attributs used to link a widget with an action
   std::string actionName;
+  
+  Color shadowColor;
 
   virtual void __Update(const Point2i &/* mousePosition */,
 			const Point2i &/* lastMousePosition */) {};
@@ -78,6 +80,7 @@ private:
   Font::font_size_t GetFontSize() const { return font_size; };
   Font::font_style_t GetFontStyle() const { return font_style; };
   bool IsFontShadowed() const { return font_shadowed; };
+  const Color & GetShadowColor(void) const { return this->shadowColor; };
 
   void ParseXMLMisc(void);
   void ParseXMLBorder(void);
@@ -137,7 +140,8 @@ private:
 	       const Font::font_size_t font_size,
 	       const Font::font_style_t font_style,
 	       bool font_shadowed,
-	       bool update_now = true);
+	       bool update_now = true,
+               const Color & shadowColor = black_color);
 
   void SetContainer(Container * _ct) { ct = _ct; };
 
