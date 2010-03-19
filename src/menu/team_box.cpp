@@ -224,7 +224,7 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
   associated_team = &_team;
 
   if (_team.IsRemote()) {
-    team_name->SetFont(dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false, false);
+    team_name->SetFont(dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
     // translators: this is the team listing and will expand in a context like "OOo team - Remote"
     team_name->SetText(Format(_("%s Team - Remote"), _team.GetName().c_str()));
@@ -234,7 +234,7 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
       next_custom_team->SetVisible(false);
     }
   } else {
-    team_name->SetFont(primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true, false);
+    team_name->SetFont(primary_red_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true);
     team_name->SetText(Format(_("%s Team"), _team.GetName().c_str()));
 
     if (previous_custom_team) {

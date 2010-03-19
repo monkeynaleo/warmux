@@ -24,7 +24,6 @@
 
 #include "include/base.h"
 #include "graphic/color.h"
-#include "graphic/font.h"
 #include "gui/container.h"
 #include "interface/mouse.h"
 #include <WORMUX_rectangle.h>
@@ -47,12 +46,7 @@ class Widget : public Rectanglei, public Container
     uint border_size;
     Color background_color;
     Color highlight_bg_color;
-
-    Color font_color;
-    bool font_shadowed;
-    Font::font_size_t font_size;
-    Font::font_style_t font_style;
-
+     
     Widget(const Widget&);
     const Widget& operator=(const Widget&);
 
@@ -67,21 +61,13 @@ class Widget : public Rectanglei, public Container
     // Attributs used to link a widget with an action
     std::string actionName;
   
-    Color shadowColor;
-
     virtual void __Update(const Point2i &/* mousePosition */,
                           const Point2i &/* lastMousePosition */) {};
 
     void RedrawBackground(const Rectanglei & rect);
 
-    // Handle font
     virtual void OnFontChange() {};
-    const Color & GetFontColor() const { return font_color; };
-    Font::font_size_t GetFontSize() const { return font_size; };
-    Font::font_style_t GetFontStyle() const { return font_style; };
-    bool IsFontShadowed() const { return font_shadowed; };
-    const Color & GetShadowColor(void) const { return this->shadowColor; };
-
+    
     void ParseXMLMisc(void);
     void ParseXMLBorder(void);
     void ParseXMLBackground(void);
@@ -133,15 +119,6 @@ class Widget : public Rectanglei, public Container
 
     void SetHighlightBgColor(const Color &highlight_bg_color);
     const Color& GetHighlightBgColor() const { return highlight_bg_color; };
-
-    // font color
-    // If (update_now == true), we call OnFontChange()
-    void SetFont(const Color &font_color,
-                 const Font::font_size_t font_size,
-                 const Font::font_style_t font_style,
-                 bool font_shadowed,
-                 bool update_now = true,
-                 const Color & shadowColor = black_color);
 
     void SetContainer(Container * _ct) { ct = _ct; };
 

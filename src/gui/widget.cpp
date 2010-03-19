@@ -37,16 +37,12 @@ Widget::Widget():
   border_size(0),
   background_color(transparent_color),
   highlight_bg_color(transparent_color),
-  font_color(dark_gray_color),
-  font_shadowed(false),
-  font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_BOLD),
   ct(NULL),
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction"),
-  shadowColor(white_color)
+  actionName("NoAction")/*,
+  shadowColor(white_color)*/
 {
 }
 
@@ -59,16 +55,12 @@ Widget::Widget(const Point2i &size):
   border_size(0),
   background_color(transparent_color),
   highlight_bg_color(transparent_color),
-  font_color(dark_gray_color),
-  font_shadowed(false),
-  font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_BOLD),
   ct(NULL),
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction"),
-  shadowColor(white_color)
+  actionName("NoAction")/*,
+  shadowColor(white_color)*/
 {
 }
 
@@ -82,16 +74,12 @@ Widget::Widget(Profile * _profile,
   border_size(0),
   background_color(transparent_color),
   highlight_bg_color(transparent_color),
-  font_color(dark_gray_color),
-  font_shadowed(false),
-  font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_BOLD),
   ct(NULL),
   need_redrawing(true),
   profile(_profile),
   widgetNode(_widgetNode),
-  actionName("NoAction"),
-  shadowColor(white_color)
+  actionName("NoAction")/*,
+  shadowColor(white_color)*/
 {
 }
 
@@ -317,37 +305,3 @@ void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
   }
 }
 
-void Widget::SetFont(const Color &_font_color,
-		     const Font::font_size_t _font_size,
-		     const Font::font_style_t _font_style,
-		     bool _font_shadowed,
-		     bool update_now,
-                     const Color & _shadowColor)
-{
-  bool change = false;
-
-  if (font_color != _font_color) {
-    font_color = _font_color;
-    change = true;
-  }
-  if (font_size != _font_size) {
-    font_size = _font_size;
-    change = true;
-  }
-  if (font_style != _font_style) {
-    font_style = _font_style;
-    change = true;
-  }
-  if (font_shadowed != _font_shadowed) {
-    font_shadowed = _font_shadowed;
-    change = true;
-  }
-  if (shadowColor != _shadowColor) {
-    shadowColor = _shadowColor;
-    change = true;
-  }
-
-  if (change && update_now) {
-    OnFontChange();
-  }
-}

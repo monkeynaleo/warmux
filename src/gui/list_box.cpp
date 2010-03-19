@@ -315,7 +315,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
 
 const std::string& ListBoxItem::GetLabel() const
 {
-  return txt_label->GetText();
+  return textEngine->GetText();
 }
 
 //-----------------------------------------------------------------------------
@@ -346,16 +346,18 @@ void ListBox::Select(const std::string& val)
   }
 }
 
-const std::string& ListBox::ReadLabel () const
+const std::string& ListBox::ReadLabel() const
 {
   ASSERT (selected_item != -1);
-  return GetItem(m_items[selected_item])->GetLabel();
+  const ListBoxItem * item = (const ListBoxItem*)m_items[selected_item];
+  return item->GetLabel();
 }
 
-const std::string& ListBox::ReadValue () const
+const std::string& ListBox::ReadValue() const
 {
   ASSERT (selected_item != -1);
-  return GetItem(m_items[selected_item])->GetValue();
+  const ListBoxItem * item = (const ListBoxItem*)m_items[selected_item];
+  return item->GetValue();
 }
 
 int ListBox::ReadIntValue() const

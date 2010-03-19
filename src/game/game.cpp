@@ -606,7 +606,7 @@ void Game::Draw ()
     pos.x = GetMainWindow().GetWidth()/2;
     pos.y = GetMainWindow().GetHeight()/2;
     std::string text = Format(_("Waiting for %s"), ActiveTeam().GetPlayerName().c_str());
-    waiting_for_network_text.Set(text);
+    waiting_for_network_text.SetText(text);
     waiting_for_network_text.DrawCenter(pos);
   }
 

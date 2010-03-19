@@ -121,5 +121,5 @@ void SpinButtonBig::ValueHasChanged()
   value_s << GetValue();
 
   std::string s(value_s.str());
-  txt_value->Set(s);
+  txt_value->SetText(s);
 }

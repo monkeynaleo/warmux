@@ -192,7 +192,7 @@ void Text::RenderMultiLines()
   }
 }
 
-void Text::Set(const std::string &new_txt)
+void Text::SetText(const std::string &new_txt)
 {
   if(txt == new_txt)
     return;
@@ -273,7 +273,7 @@ void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos
   uint txt_width = 1;
   if (GetText() != "") {
     Text txt_before_cursor(*this);
-    txt_before_cursor.Set(GetText().substr(0, cursor_pos));
+    txt_before_cursor.SetText(GetText().substr(0, cursor_pos));
     txt_width = txt_before_cursor.GetWidth();
   }
   GetMainWindow().VlineColor(text_pos.GetX()+txt_width,
@@ -323,5 +323,18 @@ void DrawTmpBoxText(Font& font, Point2i pos,
 
   pos.y += font.GetHeight(txt)/2;
   font.WriteCenter( pos, txt, white_color);
+}
+
+void Text::SetFont(const Color &_font_color,
+                   const Font::font_size_t _font_size,
+                   const Font::font_style_t _font_style,
+                   bool _font_shadowed,
+                   const Color & _shadowColor)
+{
+  color = _font_color;
+  font_size = _font_size;
+  font_style = _font_style;
+  font_shadowed = _font_shadowed;
+  shadowColor = _shadowColor;
 }
 

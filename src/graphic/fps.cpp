@@ -100,7 +100,7 @@ void FramePerSecond::Draw(){
 
   snprintf(buffer, sizeof(buffer)-1, "%.1f", average);
   buffer[sizeof(buffer)-1] = '\0';
-  text->Set (Format(_("%s fps"), buffer));
+  text->SetText(Format(_("%s fps"), buffer));
   text->DrawTopRight(Point2i(GetMainWindow().GetWidth()-1,0));
 }
 

@@ -33,6 +33,7 @@ protected:
   unsigned int max_nb_chars;
   std::string::size_type cursor_pos;
   virtual void BasicSetText(std::string const &new_txt);
+
 public:
   TextBox(const std::string &label,
           uint max_width,

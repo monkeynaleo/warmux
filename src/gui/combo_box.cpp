@@ -167,8 +167,8 @@ void ComboBox::SetChoice (std::vector<std::string>::size_type index)
 
   m_index = index;
 
-  txt_value_black->Set(m_choices[m_index].second);
-  txt_value_white->Set(m_choices[m_index].second);
+  txt_value_black->SetText(m_choices[m_index].second);
+  txt_value_white->SetText(m_choices[m_index].second);
 
   NeedRedrawing();
 }
