@@ -41,8 +41,7 @@ Widget::Widget():
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction")/*,
-  shadowColor(white_color)*/
+  actionName("NoAction")
 {
 }
 
@@ -59,8 +58,7 @@ Widget::Widget(const Point2i &size):
   need_redrawing(true),
   profile(NULL),
   widgetNode(NULL),
-  actionName("NoAction")/*,
-  shadowColor(white_color)*/
+  actionName("NoAction")
 {
 }
 
@@ -78,8 +76,7 @@ Widget::Widget(Profile * _profile,
   need_redrawing(true),
   profile(_profile),
   widgetNode(_widgetNode),
-  actionName("NoAction")/*,
-  shadowColor(white_color)*/
+  actionName("NoAction")
 {
 }
 
