@@ -923,7 +923,7 @@ void Character::SetCustomName(const std::string name)
 {
   if (!name.empty())
   {
-    name_text->Set(name);
+    name_text->SetText(name);
     character_name = name;
   }
 }

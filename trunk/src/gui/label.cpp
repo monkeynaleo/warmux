@@ -20,37 +20,44 @@
  *****************************************************************************/
 
 #include "gui/label.h"
-#include "graphic/text.h"
 
-Label::Label(const std::string & label,
+Label::Label(const std::string & _text,
              uint max_width,
              Font::font_size_t fsize,
              Font::font_style_t fstyle,
-             const Color & color,
+             const Color & fontColor,
              bool _center,
-             bool shadowed):
+             bool shadowed,
+             const Color & shadowColor) :
+  textEngine(NULL),
   center(_center)
 {
-  Widget::SetFont(color, fsize, fstyle, shadowed, false);
-
+  textEngine = new Text(_text, fontColor, fsize,
+                        fstyle, shadowed, shadowColor);
   size.x = max_width;
-  txt_label = new Text(label, color, fsize, fstyle, shadowed, black_color, label.empty());
-  txt_label->SetMaxWidth(size.x);
-  size.y = txt_label->GetHeight();
+  textEngine->SetMaxWidth(size.x);
+  size.y = textEngine->GetHeight();
+}
+
+Label::Label(const Point2i & size) :
+  Widget(size),
+  textEngine(NULL),
+  center(false)
+{
 }
 
 Label::Label(Profile * profile,
              const xmlNode * pictureNode) :
   Widget(profile, pictureNode),
-  txt_label(NULL),
+  textEngine(NULL),
   center(false)
 {
 }
 
 Label::~Label()
 {
-  if (NULL != txt_label) {
-    delete txt_label;
+  if (NULL != textEngine) {
+    delete textEngine;
   }
 }
 
@@ -68,8 +75,8 @@ bool Label::LoadXMLConfiguration()
   ParseXMLBorder();
   ParseXMLBackground();
 
-  std::string text("Text not found");
-  xmlFile->ReadStringAttr(widgetNode, "text", text);
+  std::string xmlText("Text not found");
+  xmlFile->ReadStringAttr(widgetNode, "text", xmlText);
 
   Color textColor(0, 0, 0, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
@@ -85,11 +92,12 @@ bool Label::LoadXMLConfiguration()
   Color shadowColor(255, 255, 255, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "shadowColor", shadowColor);
 
-  txt_label = new Text(text, textColor, 
-                       (Font::font_size_t)fontSize, 
-                       DetectFontStyle(fontStyle),
-                       activeShadow,
-                       shadowColor);
+  textEngine->SetText(xmlText);
+  textEngine->SetFont(textColor, 
+                      (Font::font_size_t)fontSize, 
+                      DetectFontStyle(fontStyle),
+                      activeShadow,
+                      shadowColor);
 
   return true;
 }
@@ -104,41 +112,50 @@ Font::font_style_t Label::DetectFontStyle(const std::string & fontStyle)
   return Font::FONT_NORMAL;
 }
 
-void Label::Draw(const Point2i &/*mousePosition*/) const
+void Label::Draw(const Point2i & mousePosition) const
 {
-  if (!center)
-    txt_label->DrawTopLeft(position);
-  else
-    txt_label->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+  (void)mousePosition;
+
+  if (!center) {
+    textEngine->DrawTopLeft(position);
+  } else {
+    textEngine->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+  }
+}
+
+void Label::DrawCursor(const Point2i & textPos, 
+                      std::string::size_type cursorPos) const
+{
+  textEngine->DrawCursor(textPos, cursorPos);
 }
 
 void Label::Pack()
 {
-  txt_label->SetMaxWidth(size.x);
-  size.y = txt_label->GetHeight();
+  textEngine->SetMaxWidth(size.x);
+  size.y = textEngine->GetHeight();
 }
 
-void Label::SetText(const std::string &new_txt)
+void Label::SetText(const std::string & new_txt)
 {
   NeedRedrawing();
 
-  if (txt_label)
-    delete txt_label;
+  textEngine->SetText(new_txt);
 
-  txt_label = new Text(new_txt, GetFontColor(), 
-                       GetFontSize(), GetFontStyle(), 
-                       IsFontShadowed(), GetShadowColor(),
-                       new_txt.empty());
-  txt_label->SetMaxWidth(size.x);
-  size.y = txt_label->GetHeight();
+  textEngine->SetMaxWidth(size.x);
+  size.y = textEngine->GetHeight();
 }
 
-const std::string& Label::GetText() const
+void Label::SetFont(const Color & fontColor,
+                    const Font::font_size_t fontSize,
+                    const Font::font_style_t fontStyle,
+                    bool fontShadowed,
+                    const Color & shadowColor)
 {
-  return txt_label->GetText();
+  textEngine->SetFont(fontColor, fontSize, fontStyle,
+                      fontShadowed, shadowColor);
 }
 
 void Label::OnFontChange()
 {
-  SetText(GetText());
+  SetText(textEngine->GetText());
 }

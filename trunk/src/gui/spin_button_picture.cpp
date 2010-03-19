@@ -139,6 +139,6 @@ void SpinButtonWithPicture::ValueHasChanged()
   value_s << GetValue();
 
   std::string s(value_s.str());
-  txt_value_black->Set(s);
-  txt_value_white->Set(s);
+  txt_value_black->SetText(s);
+  txt_value_white->SetText(s);
 }

@@ -125,7 +125,7 @@ void Chat::CloseInput()
 {
   check_input = false; //Hide input widget
 
-  input->Set("");
+  input->SetText("");
   cursor_pos = 0;
 
   // Disable key repeat during the game!
@@ -139,7 +139,7 @@ void Chat::HandleKeyPressed(const SDL_Event& event)
   std::string txt = input->GetText();
 
   if (TextHandle(txt, cursor_pos, key))
-    input->Set(txt);
+    input->SetText(txt);
 }
 
 void Chat::HandleKeyReleased(const SDL_Event& event)

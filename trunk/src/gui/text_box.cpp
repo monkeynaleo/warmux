@@ -82,7 +82,7 @@ bool TextBox::SendKey(const SDL_keysym& key)
 void TextBox::Draw(const Point2i &mousePosition) const
 {
   Label::Draw(mousePosition);
-  txt_label->DrawCursor(position, cursor_pos);
+  DrawCursor(position, cursor_pos);
 }
 
 Widget* TextBox::ClickUp(const Point2i &, uint button)
