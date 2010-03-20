@@ -60,7 +60,9 @@ class Label : public Widget
   virtual void Draw(const Point2i & mousePosition) const;
   void DrawCursor(const Point2i & text_pos,
                   std::string::size_type cursor_pos) const;
+  virtual void Pack();
 
+  // SETTER
   void SetText(const std::string & new_txt);
   void SetFont(const Color & fontColor,
                const Font::font_size_t fontSize,
@@ -68,13 +70,11 @@ class Label : public Widget
                bool fontShadowed,
                const Color & shadowColor = black_color);
 
+  // GETTER
   const std::string & GetText() { return textEngine->GetText(); };
   Text * GetTextEngine() const { return textEngine; };
   Font::font_size_t GetFontSize() const { return textEngine->GetFontSize(); };
   Font::font_style_t GetFontStyle() const { return textEngine->GetFontStyle(); };
-
-  virtual void OnFontChange();
-  virtual void Pack();
 };
 
 #endif

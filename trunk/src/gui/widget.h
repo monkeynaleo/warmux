@@ -65,8 +65,6 @@ class Widget : public Rectanglei, public Container
                           const Point2i &/* lastMousePosition */) {};
 
     void RedrawBackground(const Rectanglei & rect);
-
-    virtual void OnFontChange() {};
     
     void ParseXMLMisc(void);
     void ParseXMLBorder(void);
