@@ -81,7 +81,7 @@ bool Label::LoadXMLConfiguration()
   Color textColor(0, 0, 0, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
 
-  // Load the font size ... 
+  // Load the font size ... based on 72 DPI 
   int fontSize = ParseVerticalTypeAttribut("fontSize", 12);
 
   std::string fontStyle;
@@ -98,7 +98,6 @@ bool Label::LoadXMLConfiguration()
                       DetectFontStyle(fontStyle),
                       activeShadow,
                       shadowColor);
-
   return true;
 }
 
@@ -155,7 +154,3 @@ void Label::SetFont(const Color & fontColor,
                       fontShadowed, shadowColor);
 }
 
-void Label::OnFontChange()
-{
-  SetText(textEngine->GetText());
-}
