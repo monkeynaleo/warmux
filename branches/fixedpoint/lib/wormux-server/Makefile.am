@@ -12,4 +12,5 @@ libwormux_server_a_SOURCES = \
 	./src/config.cpp \
 	./src/env.cpp
 
-AM_CXXFLAGS = -I$(top_srcdir)/lib/wormux-server/include
+AM_CXXFLAGS = -I$(top_srcdir)/lib/wormux-server/include    \
+	-I$(top_srcdir)/lib/fixedpoint
