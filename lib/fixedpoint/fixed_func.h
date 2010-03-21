@@ -1,4 +1,7 @@
 /*
+Copyright (c) 2010, Wormux Team
+
+Large parts of the code are from the fixed point library of Markus Trenkwalder
 Copyright (c) 2007, Markus Trenkwalder
 
 Portions taken from the Vicent 3D rendering library
@@ -176,6 +179,9 @@ int32_t float2fix(float f)
 
 int32_t fixcos16(int32_t a);
 int32_t fixsin16(int32_t a);
+int32_t fixacos16(int32_t a);
+int32_t fixasin16(int32_t a);
+int32_t fixatan16(int32_t a);
 int32_t fixrsqrt16(int32_t a);
 int32_t fixsqrt16(int32_t a);
 
