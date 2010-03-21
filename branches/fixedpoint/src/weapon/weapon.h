@@ -100,7 +100,7 @@ protected:
   uint m_time_anim_begin;
 
   // Actual strength of the weapon
-  double m_strength;
+  Double m_strength;
 
   // time of beginning to load (for choosing the strength)
   uint m_first_time_loading;
@@ -125,7 +125,7 @@ protected:
   int m_initial_nb_ammo;
   int m_initial_nb_unit_per_ammo;
   int ammo_per_drop;
-  double drop_probability;
+  Double drop_probability;
   bool use_unit_on_first_shoot;
   bool can_be_used_on_closed_map;
   SoundSample loading_sound;
@@ -135,7 +135,7 @@ public:
   Sprite * icon;
 
   // if max_strength != 0, display the strength bar
-  double max_strength;
+  Double max_strength;
 
   bool use_flipping;
   const category_t& Category() const { return m_category; };
@@ -199,7 +199,7 @@ public:
   void WriteInitialNbAmmo(int nb) { m_initial_nb_ammo = nb; };
   int ReadInitialNbUnit() const { return m_initial_nb_unit_per_ammo; };
   int GetAmmoPerDrop() const { return ammo_per_drop; }
-  double GetDropProbability() const { return drop_probability; }
+  Double GetDropProbability() const { return drop_probability; }
 
   bool CanBeUsedOnClosedMap() const { return can_be_used_on_closed_map; };
   bool UseCrossHair() const { return min_angle != max_angle; };
@@ -228,9 +228,9 @@ public:
   // update strength (so the strength bar can be updated)
   virtual void UpdateStrength();
 
-  double GetStrength() const { return m_strength; };
+  Double GetStrength() const { return m_strength; };
 
-  double GetMaxStrength() const { return max_strength; };
+  Double GetMaxStrength() const { return max_strength; };
 
   const Point2i GetGunHolePosition() const;
 
@@ -303,7 +303,7 @@ public:
   bool LoadXml(const xmlNode*  weapon);
 
   // return the strength of the weapon
-  double ReadStrength() const { return m_strength; };
+  Double ReadStrength() const { return m_strength; };
 
   // Data access
   const std::string& GetName() const;
@@ -323,11 +323,11 @@ public:
   // a target. Default is true.
   bool mouse_character_selection;
 
-  inline void SetMinAngle(double min) {min_angle = min;}
-  inline const double &GetMinAngle() const {return min_angle;}
-  inline void SetMaxAngle(double max) {max_angle = max;}
-  inline const double &GetMaxAngle() const {return max_angle;}
-  bool IsAngleValid(double angle);
+  inline void SetMinAngle(Double min) {min_angle = min;}
+  inline const Double &GetMinAngle() const {return min_angle;}
+  inline void SetMaxAngle(Double max) {max_angle = max;}
+  inline const Double &GetMaxAngle() const {return max_angle;}
+  bool IsAngleValid(Double angle);
 
   virtual void StartMovingLeft() {};
   virtual void StopMovingLeft() {};
@@ -345,7 +345,7 @@ public:
   virtual void StopShooting();
 private:
   // Angle in radian between -PI to PI
-  double min_angle, max_angle;
+  Double min_angle, max_angle;
   // display crosshair ?
   bool m_display_crosshair;
 

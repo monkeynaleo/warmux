@@ -27,7 +27,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 
-IncreaseAngleCommand::IncreaseAngleCommand(double target_angle, bool slowly):
+IncreaseAngleCommand::IncreaseAngleCommand(Double target_angle, bool slowly):
   target_angle(target_angle),
   slowly(slowly),
   is_increasing(false)
@@ -37,7 +37,7 @@ IncreaseAngleCommand::IncreaseAngleCommand(double target_angle, bool slowly):
 
 bool IncreaseAngleCommand::Execute()
 {
-  double current_angle = ActiveCharacter().GetAbsFiringAngle();
+  Double current_angle = ActiveCharacter().GetAbsFiringAngle();
   if (current_angle >= target_angle) {
     if (is_increasing) {
       Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_DOWN);
@@ -56,7 +56,7 @@ bool IncreaseAngleCommand::Execute()
   }
 }
 
-DecreaseAngleCommand::DecreaseAngleCommand(double target_angle, bool slowly):
+DecreaseAngleCommand::DecreaseAngleCommand(Double target_angle, bool slowly):
   target_angle(target_angle),
   slowly(slowly),
   is_decreasing(false)
@@ -67,7 +67,7 @@ DecreaseAngleCommand::DecreaseAngleCommand(double target_angle, bool slowly):
 
 bool DecreaseAngleCommand::Execute()
 {
-  double current_angle = ActiveCharacter().GetAbsFiringAngle();
+  Double current_angle = ActiveCharacter().GetAbsFiringAngle();
   if (current_angle <= target_angle) {
     if (is_decreasing) {
       Action *a = new Action(Action::ACTION_CHARACTER_STOP_MOVING_UP);
@@ -118,7 +118,7 @@ int CommandList::Size()
   return commands.size();
 }
 
-SetWeaponAngleCommand::SetWeaponAngleCommand(double angle):target_angle(angle)
+SetWeaponAngleCommand::SetWeaponAngleCommand(Double angle):target_angle(angle)
 {
   // do nothing
 }
@@ -127,7 +127,7 @@ bool SetWeaponAngleCommand::Execute()
 {
   bool first_call = commands.Size() == 0;
   if (first_call) {
-    double current_angle = ActiveCharacter().GetAbsFiringAngle();
+    Double current_angle = ActiveCharacter().GetAbsFiringAngle();
     if (current_angle > target_angle) {
       commands.Add(new DecreaseAngleCommand(target_angle, false));
       commands.Add(new IncreaseAngleCommand(target_angle, true));
@@ -270,7 +270,7 @@ bool SelectCharacterCommand::Execute()
   return true;
 }
 
-WaitForStrengthCommand::WaitForStrengthCommand(double target_strength):
+WaitForStrengthCommand::WaitForStrengthCommand(Double target_strength):
 target_strength(target_strength)
 {
   // do nothing
@@ -278,7 +278,7 @@ target_strength(target_strength)
 
 bool WaitForStrengthCommand::Execute()
 {
-  double current_strength = ActiveTeam().GetWeapon().GetStrength();
+  Double current_strength = ActiveTeam().GetWeapon().GetStrength();
   return (current_strength >= target_strength);
 }
 

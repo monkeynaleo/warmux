@@ -41,7 +41,7 @@ EnergyBar::EnergyBar() : ProgressBar()
 Color EnergyBar::GetColorValue(long app_energy) const
 {
   for(int i = 0; i < NB_OF_ENERGY_COLOR - 1; ++i) {
-    if(energy_step[i] > ((float)app_energy / GetMaxVal()) * 100)
+    if(energy_step[i] > ((Double)app_energy / GetMaxVal()) * 100)
       return colors_value[i];
   }
   return colors_value[NB_OF_ENERGY_COLOR - 1];

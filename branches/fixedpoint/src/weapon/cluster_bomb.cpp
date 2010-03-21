@@ -49,7 +49,7 @@ public:
   Cluster(ClusterBombConfig& cfg,
           WeaponLauncher * p_launcher);
   void Refresh();
-  void Shoot(const Point2i & pos, double strength, double angle);
+  void Shoot(const Point2i & pos, Double strength, Double angle);
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
@@ -79,7 +79,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
   explode_colliding_character = true;
 }
 
-void Cluster::Shoot(const Point2i & pos, double strength, double angle)
+void Cluster::Shoot(const Point2i & pos, Double strength, Double angle)
 {
   SetCollisionModel(true, true, false ); // a bit hackish...
   // we do need to collide with objects, but if we allow for this, the clusters
@@ -96,8 +96,8 @@ void Cluster::Refresh()
 {
   WeaponProjectile::Refresh();
   // make it rotate
-  float flying_time = (float) GetMSSinceTimeoutStart();
-  const float rotations_per_second = 4;
+  Double flying_time = (Double) GetMSSinceTimeoutStart();
+  const Double rotations_per_second = 4;
   image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
 }
 
@@ -153,13 +153,13 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const float angle_range = M_PI / 2;
+  const Double angle_range = M_PI / 2;
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i ) 
   {
-    double angle = -M_PI / 2; // this angle is "upwards" here
-    double cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
-    double speed = RandomSync().GetDouble(10, 25);
+    Double angle = -M_PI / 2; // this angle is "upwards" here
+    Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / 2.0f;
+    Double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
     cluster->Shoot( pos, speed, angle + cluster_deviation );

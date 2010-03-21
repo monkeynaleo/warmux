@@ -31,7 +31,7 @@
 #include "team/teams_list.h"
 #include "include/action_handler.h"
 
-const double LOW_GRAVITY_FACTOR = 0.4;
+const Double LOW_GRAVITY_FACTOR = 0.4;
 
 LowGrav::LowGrav() :
   Weapon(WEAPON_LOWGRAV, "lowgrav", new WeaponConfig(), false),

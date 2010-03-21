@@ -37,10 +37,10 @@
 #include "include/action.h"
 
 // Physical constants
-const double STOP_REBOUND_LIMIT = 0.5 ;
-const double AIR_RESISTANCE_FACTOR = 40.0 ;
-const double PHYS_DELTA_T = 0.02 ;         // Physical simulation time step
-const double PENDULUM_REBOUND_FACTOR = 0.8 ;
+const Double STOP_REBOUND_LIMIT = 0.5 ;
+const Double AIR_RESISTANCE_FACTOR = 40.0 ;
+const Double PHYS_DELTA_T = 0.02 ;         // Physical simulation time step
+const Double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 Physics::Physics ():
   m_motion_type(NoMotion),
@@ -67,7 +67,7 @@ Physics::Physics ():
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
-void Physics::SetPhysXY(double x, double y)
+void Physics::SetPhysXY(Double x, Double y)
 {
   if (m_pos_x.x0 != x || m_pos_y.x0 != y) {
     m_pos_x.x0 = x;
@@ -109,7 +109,7 @@ void Physics::AddSpeedXY (Point2d vector)
   }
 }
 
-void Physics::GetSpeed(double &norm, double &angle) const
+void Physics::GetSpeed(Double &norm, Double &angle) const
 {
   Point2d speed ;
 
@@ -159,11 +159,11 @@ void Physics::SetExternForceXY (const Point2d& vector)
 }
 
 // Set fixation point positions
-void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
-                                     double dy)
+void Physics::SetPhysFixationPointXY(Double g_x, Double g_y, Double dx,
+                                     Double dy)
 {
-  double fix_point_x, fix_point_y ;
-  double old_length ;
+  Double fix_point_x, fix_point_y ;
+  Double old_length ;
 
   Point2d V ;
   m_fix_point_gnd.x = g_x ;
@@ -215,7 +215,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 
 void Physics::UnsetPhysFixationPoint()
 {
-  double speed_norm, angle ;
+  Double speed_norm, angle ;
 
   GetSpeed (speed_norm, angle);
 
@@ -234,7 +234,7 @@ void Physics::UnsetPhysFixationPoint()
   m_motion_type = FreeFall ;
 }
 
-void Physics::ChangePhysRopeSize(double dl)
+void Physics::ChangePhysRopeSize(Double dl)
 {
   if ((dl < 0) && (m_rope_length.x0 < 0.5))
     return ;
@@ -308,11 +308,11 @@ void Physics::UpdateTimeOfLastMove()
 }
 
 // Compute the next position of the object during a pendulum motion.
-void Physics::ComputePendulumNextXY (double delta_t)
+void Physics::ComputePendulumNextXY (Double delta_t)
 {
   MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %5f", typeid(*this).name(), m_mass);
 
-  //  double l0 = 5.0 ;
+  //  Double l0 = 5.0 ;
 
   //  printf ("Physics::ComputePendulumNextXY - Angle %f\n", m_rope_angle.x0);
 
@@ -336,9 +336,9 @@ void Physics::ComputePendulumNextXY (double delta_t)
                               +m_extern_force.x / m_rope_length.x0 * cos (m_rope_angle.x0),
                       delta_t);
 
-  double x = m_fix_point_gnd.x - m_fix_point_dxy.x
+  Double x = m_fix_point_gnd.x - m_fix_point_dxy.x
              + m_rope_length.x0 * sin(m_rope_angle.x0);
-  double y = m_fix_point_gnd.y - m_fix_point_dxy.y
+  Double y = m_fix_point_gnd.y - m_fix_point_dxy.y
              + m_rope_length.x0 * cos(m_rope_angle.x0);
 
   MSG_DEBUG( "physic.pendulum", "%s angle: %.2f %.2f %.2f pos: %.2f %.2f fixpoint: %.2f, %.2f",
@@ -356,13 +356,13 @@ void Physics::ComputePendulumNextXY (double delta_t)
 }
 
 // Compute the next position of the object during a free fall.
-void Physics::ComputeFallNextXY (double delta_t)
+void Physics::ComputeFallNextXY (Double delta_t)
 {
-  double speed_norm, speed_angle ;
-  double air_resistance_factor ;
+  Double speed_norm, speed_angle ;
+  Double air_resistance_factor ;
 
-  double weight_force ;
-  double wind_force ;
+  Double weight_force ;
+  Double wind_force ;
 
   // Free fall motion equation
   // m.g + wind -k.v = m.a
@@ -418,7 +418,7 @@ void Physics::ComputeFallNextXY (double delta_t)
 }
 
 // Compute the position of the object at current time.
-Point2d Physics::ComputeNextXY(double delta_t){
+Point2d Physics::ComputeNextXY(Double delta_t){
 
   MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t);
 
@@ -439,7 +439,7 @@ void Physics::RunPhysicalEngine()
     m_last_physical_engine_run = m_last_move;
 
   ASSERT(Time::GetInstance()->Read() >= m_last_physical_engine_run);
-  double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / 1000.0;
+  Double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / 1000.0;
   Point2d oldPos;
   Point2d newPos;
 
@@ -466,9 +466,9 @@ void Physics::RunPhysicalEngine()
 }
 
 /* contact_angle is the angle of the surface we are rebounding on */
-void Physics::Rebound(Point2d /*contactPos*/, double contact_angle)
+void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
 {
-  double norme, angle;
+  Double norme, angle;
 
   // Get norm and angle of the object speed vector.
   GetSpeed(norme, angle);

@@ -42,7 +42,7 @@ public:
   void Reset() const;
 
   // Refresh crosshair angle
-  void Refresh(double angle);
+  void Refresh(Double angle);
 
   // Draw crosshair
   void Draw() const;

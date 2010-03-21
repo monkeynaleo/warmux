@@ -141,15 +141,15 @@ class Polygon
                       const int num_steps = 20, const bool add_first_point = true,
                       const bool add_last_point = true);
   void AddRandomCurve(const Point2d& start, const Point2d& end,
-                      const double x_random_offset, const double y_random_offset,
+                      const Double x_random_offset, const Double y_random_offset,
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
-  Polygon * GetBezierInterpolation(double smooth_value = 1.0, int num_steps = 20, double rand = 0.0);
-  void Expand(double expand_value);
+  Polygon * GetBezierInterpolation(Double smooth_value = 1.0, int num_steps = 20, Double rand = 0.0);
+  void Expand(Double expand_value);
 
   // Size information
-  double GetWidth() const;
-  double GetHeight() const;
+  Double GetWidth() const;
+  Double GetHeight() const;
   Point2d GetSize() const;
   Point2i GetIntSize() const;
   int GetNbOfPoint() const;
@@ -200,13 +200,13 @@ class DecoratedBox : public Polygon
  public :
   enum Style {STYLE_ROUNDED, STYLE_SQUARE};
 
-  DecoratedBox(double width, double height);
+  DecoratedBox(Double width, Double height);
   ~DecoratedBox();
   virtual void Draw(Surface * dest);
   virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation);
   virtual void AddItem(PolygonItem * item);
   virtual void ResetTransformation();
-  void SetPosition(double x, double y);
+  void SetPosition(Double x, Double y);
   void SetStyle(Style style);
 
  private :

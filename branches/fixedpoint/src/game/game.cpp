@@ -830,9 +830,9 @@ bool Game::NewBox()
 
   // if started with "-d box", get one box per turn
   if (!IsLOGGING("box") || Network::IsConnected()) {
-    double boxDropProbability = (1 - pow(.5, 1.0 / nbr_teams));
+    Double boxDropProbability = (1 - pow(.5, 1.0 / nbr_teams));
     MSG_DEBUG("random.get", "Game::NewBox(...) drop box?");
-    double randValue = RandomSync().GetDouble();
+    Double randValue = RandomSync().GetDouble();
     if (randValue > boxDropProbability) {
       return false;
     }

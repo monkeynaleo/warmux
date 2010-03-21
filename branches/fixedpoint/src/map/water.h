@@ -37,7 +37,7 @@ private:
   static int pattern_height;
   Color* type_color;
   int height_mvt;
-  double shift1;
+  Double shift1;
   uint water_height;
   uint time_raise;
   std::vector<int> height;

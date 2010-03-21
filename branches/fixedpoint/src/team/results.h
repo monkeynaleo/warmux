@@ -43,7 +43,7 @@ class TopCharacters
   const Character* Clumsy;
   uint             clumsyness;
   const Character* Accurate;
-  double           accuracy;
+  Double           accuracy;
 
   uint             death_time;
 

@@ -156,7 +156,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   const xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
-    double rot_speed=0.0;
+    Double rot_speed=0.0;
     XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
     XmlReader::ReadDouble(xmlwind, "rotation_speed", rot_speed);
     wind.rotation_speed = rot_speed;

@@ -56,7 +56,7 @@ void CrossHair::Reset() const
 }
 
 // Compute crosshair position
-void CrossHair::Refresh(double angle)
+void CrossHair::Refresh(Double angle)
 {
   crosshair_position = Point2i(RAY, RAY) * Point2d(cos(angle), sin(angle)) - image.GetSize() / 2;
 }

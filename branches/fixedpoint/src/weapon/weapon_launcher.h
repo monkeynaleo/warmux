@@ -56,7 +56,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void Draw();
     // Call by the object list class to refresh the weapon's state
     virtual void Refresh();
-    virtual void Shoot(double strength);
+    virtual void Shoot(Double strength);
     virtual bool IsImmobile() const;
     virtual void SetEnergyDelta(int delta, bool do_report = true);
 
@@ -85,7 +85,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void ShootSound();
     virtual void Explosion();
     // Implement it in subclass to randomize fire
-    virtual void RandomizeShoot(double &/*angle*/,double &/*strength*/) { };
+    virtual void RandomizeShoot(Double &/*angle*/,Double &/*strength*/) { };
     virtual void DoExplosion();
 };
 
@@ -139,8 +139,8 @@ class WeaponLauncher : public Weapon
 
     // Methods to access data of the projectile
     int GetDamage();
-    double GetWindFactor();
-    double GetMass();
+    Double GetWindFactor();
+    Double GetMass();
 
     virtual void Draw();
 

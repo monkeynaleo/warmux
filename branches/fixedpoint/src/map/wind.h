@@ -46,7 +46,7 @@ private:
 
 public:
   WindParticle(const std::string & xml_file, 
-               float scale);
+               Double scale);
   ~WindParticle();
   void Draw();
   void Refresh();
@@ -69,7 +69,7 @@ private:
   friend class Singleton<Wind>;
 
 public:
-  double GetStrength() const;
+  Double GetStrength() const;
   void ChooseRandomVal();
 
   void SetVal(long val);

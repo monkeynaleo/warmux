@@ -87,20 +87,20 @@ void Particle::Refresh()
 
     m_left_time_to_live--;
 
-    float lived_time = m_initial_time_to_live - m_left_time_to_live;
+    Double lived_time = m_initial_time_to_live - m_left_time_to_live;
 
     //during the 1st quarter of the time increase size of particle
     //after the 1st quarter, decrease the alpha value
-    if((float)lived_time<m_initial_time_to_live/2.0)
+    if((Double)lived_time<m_initial_time_to_live/2.0)
     {
-      float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
+      Double coeff = sin((M_PI/2.0)*((Double)lived_time/((Double)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
       SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
     {
-      float alpha = 1.0 - sin((M_PI/2.0)*((float)lived_time-((float)m_initial_time_to_live/2.0))/((float)m_initial_time_to_live/2.0));
+      Double alpha = 1.0 - sin((M_PI/2.0)*((Double)lived_time-((Double)m_initial_time_to_live/2.0))/((Double)m_initial_time_to_live/2.0));
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
@@ -123,14 +123,14 @@ ParticleEngine::ParticleEngine(uint time):
 
 void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
                                  bool upper,
-                                 double angle, double norme)
+                                 Double angle, Double norme)
 {
   // time spent since last refresh (in milliseconds)
   uint time = Time::GetInstance()->Read() - m_last_refresh;
   uint tmp = Time::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "ParticleEngine::AddPeriodic(...)");
-  uint delta = uint(m_time_between_add * double(RandomSync().GetLong(3, 40)) / 10);
+  uint delta = uint(m_time_between_add * Double(RandomSync().GetLong(3, 40)) / 10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
@@ -193,13 +193,13 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 
 void ParticleEngine::AddNow(const Point2i &position,
                             uint nb_particles, particle_t type,
-                            bool upper, double angle, double norme)
+                            bool upper, Double angle, Double norme)
 {
   if (!sprites_loaded)
     return;
 
   Particle *particle = NULL;
-  double tmp_angle, tmp_norme;
+  Double tmp_angle, tmp_norme;
 
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
@@ -248,14 +248,14 @@ void ParticleEngine::AddNow(const Point2i &position,
 
       if( norme == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector length");
-        tmp_norme = double(RandomSync().GetLong(0, 5000))/100;
+        tmp_norme = Double(RandomSync().GetLong(0, 5000))/100;
       } else {
         tmp_norme = norme;
       }
 
       if( angle == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
-        tmp_angle = - double(RandomSync().GetLong(0, 3000))/1000;
+        tmp_angle = - Double(RandomSync().GetLong(0, 3000))/1000;
       } else {
         tmp_angle = angle;
       }
@@ -285,16 +285,16 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
   const uint little_partic_nbr = 1;
-  const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
-  const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
+  const Double little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
+  const Double little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
 
   Particle *particle = NULL;
-  float norme;
+  Double norme;
   uint size;
 
   for(uint i=0; i < little_partic_nbr ; i++)
   {
-//      angle = (float) i * M_PI * 2.0 / (float) little_partic_nbr;
+//      angle = (Double) i * M_PI * 2.0 / (Double) little_partic_nbr;
       size = radius *2;
       norme = 2.5 * radius / 3.0;
 
@@ -319,15 +319,15 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const uint big_partic_nbr = 1;
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
-  const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
-  const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
+  const Double big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
+  const Double big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
   Particle *particle = NULL;
-  float norme;
+  Double norme;
   uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
   {
-//      angle = (float) i * M_PI * 4.0 / (float)big_partic_nbr;
+//      angle = (Double) i * M_PI * 4.0 / (Double)big_partic_nbr;
       size = radius;
       norme = radius / 3.0;
 

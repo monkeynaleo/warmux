@@ -30,7 +30,7 @@
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-static const double DEFAULT_WATER_RESIST_FACTOR = 40;
+static const Double DEFAULT_WATER_RESIST_FACTOR = 40;
 
 ObjectConfig::ObjectConfig(void):
   m_mass(1.0),

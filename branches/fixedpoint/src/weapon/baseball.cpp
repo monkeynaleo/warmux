@@ -60,8 +60,8 @@ void Baseball::UpdateTranslationStrings()
 bool Baseball::p_Shoot()
 {
 
-  double angle = ActiveCharacter().GetFiringAngle();
-  double rayon = 0.0;
+  Double angle = ActiveCharacter().GetFiringAngle();
+  Double rayon = 0.0;
   bool end = false;
 
   JukeBox::GetInstance()->Play ("default","weapon/baseball");

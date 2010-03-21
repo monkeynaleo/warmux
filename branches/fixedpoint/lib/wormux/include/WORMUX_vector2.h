@@ -1,6 +1,7 @@
 #ifndef WORMUX_VECTOR2_H
 #define WORMUX_VECTOR2_H
 
+#include <WORMUX_types.h>
 #include <math.h>
 #undef min
 #undef max
@@ -275,11 +276,11 @@ template<class T> class Vector2
      *
      */
     /*
-    inline Vector2<T> operator*(const Vector2<double> &p2){
+    inline Vector2<T> operator*(const Vector2<Double> &p2){
       Vector2<T> r;
 
-      r.x = (T)((double)x * p2.x);
-      r.y = (T)((double)y * p2.y);
+      r.x = (T)((Double)x * p2.x);
+      r.y = (T)((Double)y * p2.y);
 
       return r;
     }
@@ -339,11 +340,11 @@ template<class T> class Vector2
     }
 
     /**
-     * [RCL]: using doubles, to keep the precision consistent with rest of
+     * [RCL]: using Doubles, to keep the precision consistent with rest of
      * functions here
     */
     Vector2<T> GetNormal() const {
-      double len = sqrt(x*x + y*y);
+      Double len = sqrt(x*x + y*y);
       if ( len > 0.00001 )
         return Vector2<T>( (T)(x/len), (T)(y/len) );
       return *this;
@@ -395,7 +396,7 @@ template<class T> class Vector2
     }
 
     /** Transform polar coordinate */
-    static Vector2<T> FromPolarCoordinates(double norm, double angle) { return Vector2<T>(T(norm*cos(angle)), T(norm*sin(angle))); }
+    static Vector2<T> FromPolarCoordinates(Double norm, Double angle) { return Vector2<T>(T(norm*cos(angle)), T(norm*sin(angle))); }
 
     /**
      *  Compute the angle of point M in the Cartesian plane
@@ -408,10 +409,10 @@ template<class T> class Vector2
      * - M=(10,-10) -> -PI/4 (-0.78)
      * - M=O -> 0
      */
-     double ComputeAngle() const{
+     Double ComputeAngle() const{
        if( !IsZero( x ) )
          if( !IsZero( y ) ){
-           double angle = atan(double(y)/double(x));
+           Double angle = atan(Double(y)/Double(x));
            if( x < 0 ){
              if( y > 0 ) return angle + M_PI;
              else        return angle - M_PI;
@@ -431,7 +432,7 @@ template<class T> class Vector2
      *
      * @param v2
      */
-    double ComputeAngle(const Vector2<T> & v2) const{
+    Double ComputeAngle(const Vector2<T> & v2) const{
       Vector2<T> veq( v2.x - x, v2.y - y);
 
       return veq.ComputeAngle();
@@ -442,23 +443,23 @@ template<class T> class Vector2
      * Computes angle at current point in triangle v1, this, v2
      * @param v1
      * @param v2
-     * [RCL]: by the way, why double? floats are not enough?
+     * [RCL]: by the way, why Double? Doubles are not enough?
      */
-    double ComputeAngle(const Vector2<T> & v1, const Vector2<T> & v2) const
+    Double ComputeAngle(const Vector2<T> & v1, const Vector2<T> & v2) const
     {
       Vector2<T> side1( v1.x - x, v1.y - y);
       Vector2<T> side2( v2.x - x, v2.y - y);
 
-      // we need double precision even for ints
-      double l1 = sqrt( side1.x * side1.x + side1.y * side1.y );
-      double l2 = sqrt( side2.x * side2.x + side2.y * side2.y );
+      // we need Double precision even for ints
+      Double l1 = sqrt( side1.x * side1.x + side1.y * side1.y );
+      Double l2 = sqrt( side2.x * side2.x + side2.y * side2.y );
 
       if ( l1 < 0.00001f || l2 < 0.00001f )
          return 0; // zero vector is collinear with every other
 
       // now we find the cos of the angle from dot product formula
       // side1 dot side2 = l1 * l2 * cos ( angle_between_side1_and_side2 )
-      double cosA = ( side1.x * side2.x + side1.y * side2.y ) / ( l1 * l2 );
+      Double cosA = ( side1.x * side2.x + side1.y * side2.y ) / ( l1 * l2 );
       return acos( cosA );
     }
 
@@ -472,7 +473,7 @@ template<class T> class Vector2
 
 template < >
 inline int Vector2<int>::Distance(const Vector2<int> & p2) const{
-  return (int)sqrt((float)((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y)));
+  return (int)sqrt((Double)((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y)));
 }
 
 // some other auxilliaries

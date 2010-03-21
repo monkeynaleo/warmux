@@ -256,11 +256,11 @@ bool XmlReader::ReadString(const xmlNode* x,
 /** @see XmlReader::ReadString comment */
 bool XmlReader::ReadDouble(const xmlNode *x,
                            const std::string &name,
-                           double &output)
+                           Double &output)
 {
   std::string val;
   if (!ReadString(x, name, val)) return false;
-  return str2double (val, output);
+  return str2Double (val, output);
 }
 
 /** @see XmlReader::ReadString comment */
@@ -359,7 +359,7 @@ bool XmlReader::ReadIntAttr(const xmlNode* x,
 
 bool XmlReader::ReadPercentageAttr(const xmlNode* node,
                                    const std::string & attributName,
-                                   double & outputValue)
+                                   Double & outputValue)
 {
   std::string value;
   if (!ReadStringAttr(node, attributName, value)) {
@@ -370,7 +370,7 @@ bool XmlReader::ReadPercentageAttr(const xmlNode* node,
     return false;
   }
   value = value.substr(0, foundPos);
-  return str2double(value, outputValue);
+  return str2Double(value, outputValue);
 }
 
 bool XmlReader::ReadPixelAttr(const xmlNode* node,
@@ -419,11 +419,11 @@ bool XmlReader::ReadBoolAttr(const xmlNode* x,
 /** @see XmlReader::ReadString comment */
 bool XmlReader::ReadDoubleAttr(const xmlNode* x,
                                const std::string &name,
-                               double &output)
+                               Double &output)
 {
   std::string val;
   if (!ReadStringAttr(x, name, val)) return false;
-  return str2double(val, output);
+  return str2Double(val, output);
 }
 
 bool XmlReader::ReadHexColorAttr(const xmlNode* node,

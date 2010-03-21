@@ -28,8 +28,8 @@
 class Profile;
 class ExplosiveWeaponConfig;
 
-int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, double distance);
-double GetForceFromExplosion(const ExplosiveWeaponConfig &config, double distance);
+int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, Double distance);
+Double GetForceFromExplosion(const ExplosiveWeaponConfig &config, Double distance);
 
 void ApplyExplosion(const Point2i &pos,
                     const ExplosiveWeaponConfig &config,

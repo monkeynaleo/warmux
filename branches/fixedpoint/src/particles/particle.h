@@ -122,7 +122,7 @@ class ParticleEngine
   void AddPeriodic(const Point2i &position,
                    particle_t type,
                    bool upper,
-                   double angle=-1, double norme=-1);
+                   Double angle=-1, Double norme=-1);
 
   static void Load();
   static void FreeMem();
@@ -131,7 +131,7 @@ class ParticleEngine
   static void AddNow(const Point2i &position,
                      uint nb_particles, particle_t type,
                      bool upper,
-                     double angle=-1, double norme=-1);
+                     Double angle=-1, Double norme=-1);
   static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)

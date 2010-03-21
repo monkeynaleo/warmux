@@ -40,9 +40,9 @@
 class ParachuteConfig : public WeaponConfig
 {
   public:
-     double wind_factor;
-     double air_resist_factor;
-     double force_side_displacement;
+     Double wind_factor;
+     Double air_resist_factor;
+     Double force_side_displacement;
      ParachuteConfig();
      void LoadXml(const xmlNode* elem);
 };
@@ -111,8 +111,8 @@ void Parachute::Refresh()
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
 
-  double speed;
-  double angle;
+  Double speed;
+  Double angle;
 
   ActiveCharacter().GetSpeed(speed, angle);
 

@@ -50,7 +50,7 @@ class InfoMap {
     uint nb_sprite;
     uint default_nb_sprite;
     bool need_flip; //do we need to flip the sprite when it changes direction?
-    float rotation_speed;
+    Double rotation_speed;
   };
 
 private:

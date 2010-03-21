@@ -71,7 +71,7 @@ private:
   MsgBox *msg_box;
   
   uint m_last_click_on_games_lst;
-  uint m_double_click_interval;
+  uint m_Double_click_interval;
 
   virtual void OnClick(const Point2i &mousePosition, int button);
   virtual void OnClickUp(const Point2i &mousePosition, int button);

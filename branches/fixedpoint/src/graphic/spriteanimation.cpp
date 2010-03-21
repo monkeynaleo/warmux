@@ -55,7 +55,7 @@ SpriteAnimation::SpriteAnimation(const SpriteAnimation & other, Sprite & p_sprit
 {
 }
 
-void SpriteAnimation::SetSpeedFactor( float nv_speed)
+void SpriteAnimation::SetSpeedFactor( Double nv_speed)
 {
   speed_factor = nv_speed;
 }
@@ -91,8 +91,8 @@ void SpriteAnimation::Update()
 
   //Delta to next frame used to enable frameskip
   //if delay between 2 frame is < fps
-  int delta_to_next_f = (int)((float)((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
-  last_update += (int)((float)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
+  int delta_to_next_f = (int)((Double)((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
+  last_update += (int)((Double)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
 
   //Animation is finished, when last frame have been fully played
   bool finish;

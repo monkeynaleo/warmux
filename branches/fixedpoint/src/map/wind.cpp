@@ -40,14 +40,14 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 1;
 
-WindParticle::WindParticle(const std::string &xml_file, float scale) :
+WindParticle::WindParticle(const std::string &xml_file, Double scale) :
   PhysicalObj("wind", xml_file)
 {
   SetCollisionModel(false, false, false);
 
   CanBeGhost(false);
   // Physic constants
-  double mass, wind_factor ;
+  Double mass, wind_factor ;
   //Mass = mass_mean + or - 25%
   mass = GetMass();
   mass *= (1.0 + RandomLocal().GetLong(-100, 100)/400.0);
@@ -118,10 +118,10 @@ void WindParticle::Refresh()
   else if (ActiveMap()->GetWind().rotation_speed != 0.0) // Rotate the sprite if needed
   {
     if (flipped && GetSpeed().x < 0) {
-      float new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
+      Double new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
       flipped->SetRotation_rad(new_angle);
     } else {
-      float new_angle = sprite->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
+      Double new_angle = sprite->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
       sprite->SetRotation_rad(new_angle);
     }
   }
@@ -178,7 +178,7 @@ Wind::~Wind()
   RemoveAllParticles();
 }
 
-double Wind::GetStrength() const
+Double Wind::GetStrength() const
 {
   return m_nv_val * WIND_STRENGTH / 100.0;
 }
@@ -219,7 +219,7 @@ void Wind::Reset()
   std::string config_file = ActiveMap()->GetConfigFilepath();
 
   for (uint i = 0; i < nb; ++i) {
-    WindParticle * tmp = new WindParticle(config_file, (float)i / nb);
+    WindParticle * tmp = new WindParticle(config_file, (Double)i / nb);
     particles.push_back(tmp);
   }
   RandomizeParticlesPos();

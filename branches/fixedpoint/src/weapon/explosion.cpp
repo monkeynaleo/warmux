@@ -42,14 +42,14 @@
 
 Profile *weapons_res_profile = NULL;
 
-int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, double distance)
+int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
 {
   if (distance > config.explosion_range)
     return 0;
 
-  double dmg;
+  Double dmg;
   if( config.explosion_range != 0)
-    dmg = cos(M_PI_2 * distance / (float)config.explosion_range);
+    dmg = cos(M_PI_2 * distance / (Double)config.explosion_range);
   else
     dmg = cos(M_PI_2 * distance);
 
@@ -57,11 +57,11 @@ int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, double distance)
   return (int) dmg;
 }
 
-double GetForceFromExplosion(const ExplosiveWeaponConfig &config, double distance)
+Double GetForceFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
 {
-  double force;
+  Double force;
   if(config.blast_range != 0)
-    force = cos(M_PI_2 * distance / (float)config.blast_range);
+    force = cos(M_PI_2 * distance / (Double)config.blast_range);
   else
     force = cos(M_PI_2 * distance);
 
@@ -84,7 +84,7 @@ void ApplyExplosion (const Point2i &pos,
   {
     for(int y=-config.explosion_range; y < (int)config.explosion_range; y += 10)
     {
-      int dx = (int) (cos(asin((float)y / config.explosion_range)) * (float) y);
+      int dx = (int) (cos(asin((Double)y / config.explosion_range)) * (Double) y);
       for(int x=-dx; x < dx; x += 10)
         ParticleEngine::AddNow(pos + Point2i(x-5,y-5), 1, particle_GROUND, true);
     }
@@ -104,11 +104,11 @@ void ApplyExplosion (const Point2i &pos,
 
   // Apply damage on the character.
   // Do not care about the death of the active character.
-  double highest_force = 0.0;
+  Double highest_force = 0.0;
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(team, character)
   {
-    double distance = pos.Distance(character -> GetCenter());
+    Double distance = pos.Distance(character -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
 
@@ -123,7 +123,7 @@ void ApplyExplosion (const Point2i &pos,
     // If the character is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
-      double force = GetForceFromExplosion(config, distance);
+      Double force = GetForceFromExplosion(config, distance);
 
       if ( force > highest_force )
       {
@@ -133,7 +133,7 @@ void ApplyExplosion (const Point2i &pos,
         highest_force = force;
       }
 
-      double angle;
+      Double angle;
       if (!EqualsZero(distance))
       {
         angle  = pos.ComputeAngle(character -> GetCenter());
@@ -161,7 +161,7 @@ void ApplyExplosion (const Point2i &pos,
 
      if (obj->CollidesWithGround() && !obj->IsGhost())
      {
-       double distance = pos.Distance(obj->GetCenter());
+       Double distance = pos.Distance(obj->GetCenter());
        if(distance < 1.0)
          distance = 1.0;
 
@@ -170,10 +170,10 @@ void ApplyExplosion (const Point2i &pos,
          obj->SetEnergyDelta(-dmg);
        }
 
-       if (distance <= (float)config.blast_range)
+       if (distance <= (Double)config.blast_range)
        {
-         double force = GetForceFromExplosion(config, distance);
-         double angle;
+         Double force = GetForceFromExplosion(config, distance);
+         Double angle;
          if (!EqualsZero(distance))
            angle  = pos.ComputeAngle(obj->GetCenter());
          else

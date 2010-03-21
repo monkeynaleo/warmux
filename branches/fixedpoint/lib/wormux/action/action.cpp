@@ -37,7 +37,7 @@ Action::Action(Action_t type, int value)
   Push(value);
 }
 
-Action::Action(Action_t type, double value)
+Action::Action(Action_t type, Double value)
 {
   Init(type);
   Push(value);
@@ -49,14 +49,14 @@ Action::Action(Action_t type, const std::string& value)
   Push(value);
 }
 
-Action::Action(Action_t type, double value1, double value2)
+Action::Action(Action_t type, Double value1, Double value2)
 {
   Init(type);
   Push(value1);
   Push(value2);
 }
 
-Action::Action(Action_t type, double value1, int value2)
+Action::Action(Action_t type, Double value1, int value2)
 {
   Init(type);
   Push(value1);
@@ -128,7 +128,7 @@ void Action::Push(int val)
   var.push_back(tmp);
 }
 
-void Action::Push(double val)
+void Action::Push(Double val)
 {
   uint32_t tmp[2];
   memcpy(tmp, &val, 8);
@@ -203,7 +203,7 @@ int Action::PopInt()
   return val;
 }
 
-double Action::PopDouble()
+Double Action::PopDouble()
 {
   NET_ASSERT(var.size() > 0)
   {
@@ -211,7 +211,7 @@ double Action::PopDouble()
     return 0.0;
   }
 
-  double val;
+  Double val;
   uint32_t tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   tmp[0] = var.front();
@@ -282,7 +282,7 @@ Point2i Action::PopPoint2i()
 
 Point2d Action::PopPoint2d()
 {
-  double x, y;
+  Double x, y;
   x = PopDouble();
   y = PopDouble();
   return Point2d(x, y);
@@ -290,7 +290,7 @@ Point2d Action::PopPoint2d()
 
 EulerVector Action::PopEulerVector()
 {
-  double x0, x1, x2;
+  Double x0, x1, x2;
   x0 = PopDouble();
   x1 = PopDouble();
   x2 = PopDouble();

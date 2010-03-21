@@ -30,7 +30,7 @@ void EulerVector::Clear(){
 /**
  *  Solve a.x'' + b.x' + c.x = d equation using Euler method.
  */
-void EulerVector::ComputeOneEulerStep(double a, double b, double c, double d, double dt){
+void EulerVector::ComputeOneEulerStep(Double a, Double b, Double c, Double d, Double dt){
   x2 = (d - b * x1 - c * x0) / a;
   x1 = x1 + x2 * dt;
   x0 = x0 + x1 * dt;

@@ -78,14 +78,14 @@ int ResourceManager::LoadInt(const Profile *profile, const std::string& resource
   return tmp;
 }
 
-double ResourceManager::LoadDouble(const Profile *profile, const std::string& resource_name) const
+Double ResourceManager::LoadDouble(const Profile *profile, const std::string& resource_name) const
 {
-  double tmp = 0.0;
-  const xmlNode* elem = GetElement(profile, "double", resource_name);
+  Double tmp = 0.0;
+  const xmlNode* elem = GetElement(profile, "Double", resource_name);
   if (elem == NULL)
-    Error("ResourceManager: can't find double resource \""+resource_name+"\" in profile "+profile->filename);
+    Error("ResourceManager: can't find Double resource \""+resource_name+"\" in profile "+profile->filename);
   if (!profile->doc->ReadDoubleAttr(elem, "value", tmp))
-    Error("ResourceManager: double resource \""+resource_name+"\" has no value field in profile "+profile->filename);
+    Error("ResourceManager: Double resource \""+resource_name+"\" has no value field in profile "+profile->filename);
   return tmp;
 }
 
@@ -130,7 +130,7 @@ Point2d ResourceManager::LoadPoint2d(const Profile *profile, const std::string& 
   if ( elem == NULL)
     Error("ResourceManager: can't find point resource \""+resource_name+"\" in profile "+profile->filename);
 
-  double point[2];
+  Double point[2];
   std::string tmp[2] = { "x", "y" };
   for(int i = 0; i < 2; i++) {
     if (!profile->doc->ReadDoubleAttr(elem, tmp[i], point[i]))

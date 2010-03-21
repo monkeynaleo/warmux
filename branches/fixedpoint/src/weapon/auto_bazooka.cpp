@@ -44,10 +44,10 @@
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
-    double uncontrolled_turn_speed;
-    double max_controlled_turn_speed;
-    double fuel_time;
-    double rocket_force;
+    Double uncontrolled_turn_speed;
+    Double max_controlled_turn_speed;
+    Double fuel_time;
+    Double rocket_force;
     AutomaticBazookaConfig();
     void LoadXml(const xmlNode* elem);
 };
@@ -58,17 +58,17 @@ private:
   ParticleEngine smoke_engine;
   SoundSample flying_sound;
 protected:
-  double m_initial_strength;
-  double angle_local;
+  Double m_initial_strength;
+  Double angle_local;
   Point2i m_targetPoint;
   bool m_targeted;
-  double m_force;
+  Double m_force;
   uint m_lastrefresh;
 public:
   RPG(AutomaticBazookaConfig& cfg,
       WeaponLauncher * p_launcher);
   void Refresh();
-  void Shoot(double strength);
+  void Shoot(Double strength);
   void Explosion();
   void SetTarget (int x,int y);
 
@@ -84,7 +84,7 @@ RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
   explode_colliding_character = true;
 }
 
-void RPG::Shoot(double strength)
+void RPG::Shoot(Double strength)
 {
   m_initial_strength = strength;
 
@@ -101,7 +101,7 @@ void RPG::Refresh()
 {
   AutomaticBazookaConfig &acfg = dynamic_cast<AutomaticBazookaConfig &>(cfg);
   uint time = Time::GetInstance()->Read();
-  float flying_time = GetMSSinceTimeoutStart();
+  Double flying_time = GetMSSinceTimeoutStart();
   uint timestep = time - m_lastrefresh;
   m_lastrefresh = time;
   if (!m_targeted)
@@ -129,9 +129,9 @@ void RPG::Refresh()
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-      double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
-      double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
-      double diff = fmod(wish_angle-angle_local, M_PI*2);
+      Double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
+      Double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
+      Double diff = fmod(wish_angle-angle_local, M_PI*2);
       if(diff < -M_PI) diff += M_PI*2;
       if(diff > M_PI) diff -= M_PI*2;
       //diff should now be between -M_PI and M_PI...

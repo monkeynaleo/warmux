@@ -29,12 +29,12 @@ typedef struct _xmlNode xmlNode;
 
 class member_mvt
 {  // Position of a member relative to its superior one
-  double angle_rad; // angle in radian
+  Double angle_rad; // angle in radian
 public:
   Point2f pos;
   Point2f scale;
   /* SetAngle take radian values */
-  inline void SetAngle(double angle)
+  inline void SetAngle(Double angle)
   {
     while(angle_rad > 2*M_PI)
       angle_rad -= 2 * M_PI;
@@ -43,8 +43,8 @@ public:
     angle_rad = angle;
   }
   /* GetAngle returns radian values */
-  inline const double &GetAngle() const { return angle_rad; }
-  float alpha;
+  inline const Double &GetAngle() const { return angle_rad; }
+  Double alpha;
   int follow_cursor_limit;
   bool follow_cursor;
   bool follow_crosshair;

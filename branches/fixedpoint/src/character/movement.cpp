@@ -75,7 +75,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 
       member_mvt mvt;
       int dx = 0, dy = 0, angle_deg = 0;
-      double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
+      Double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
 
       XmlReader::ReadIntAttr(child, "dx", dx);
       XmlReader::ReadIntAttr(child, "dy", dy);
