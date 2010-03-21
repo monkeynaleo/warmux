@@ -596,7 +596,7 @@ void Polygon::Expand(Double expand_value)
   if(!IsClockWise())
     expand_value = -expand_value;
   std::vector<Point2d> tmp_shape;
-  AffineTransform2D trans = AffineTransform2D::Rotate(M_PI_2);
+  AffineTransform2D trans = AffineTransform2D::Rotate(HALF_PI);
   Point2d current, next, vect, expand;
   int i, j, k;
   for(i = 0; i < (int)original_shape.size(); i++) {

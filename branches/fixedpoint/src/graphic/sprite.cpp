@@ -241,10 +241,10 @@ Double Sprite::GetAlpha() const
 
 void Sprite::SetRotation_rad( Double angle_rad)
 {
-   while(angle_rad > 2*M_PI)
-     angle_rad -= 2 * M_PI;
-   while(angle_rad <= -2*M_PI)
-     angle_rad += 2 * M_PI;
+   while(angle_rad > 2*PI)
+     angle_rad -= 2 * PI;
+   while(angle_rad <= -2*PI)
+     angle_rad += 2 * PI;
 
    if(rotation_rad == angle_rad) return;
 
@@ -254,7 +254,7 @@ void Sprite::SetRotation_rad( Double angle_rad)
 
 const Double &Sprite::GetRotation_rad() const
 {
-  ASSERT(rotation_rad > -2*M_PI && rotation_rad <= 2*M_PI);
+  ASSERT(rotation_rad > -2*PI && rotation_rad <= 2*PI);
   return rotation_rad;
 }
 

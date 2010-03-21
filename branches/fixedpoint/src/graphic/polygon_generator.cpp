@@ -70,7 +70,7 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
     top = Point2d(0.0, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) / 2.0);
-    trans.SetRotation((2.0 * M_PI * -i) / nb_point);
+    trans.SetRotation((2.0 * PI * -i) / nb_point);
     tmp->AddPoint(trans * top);
   }
   return tmp;
@@ -155,7 +155,7 @@ Polygon * PolygonGenerator::GeneratePie(Double diameter, int nb_point, Double an
     trans.SetRotation(angle_offset + ((i * angle) / nb_point));
     tmp->AddPoint(trans * top);
   }
-  if(angle < 2 * M_PI)
+  if(angle < 2 * PI)
     tmp->AddPoint(Point2d(0.0, 0.0));
   return tmp;
 }

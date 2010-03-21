@@ -98,7 +98,7 @@ void Cluster::Refresh()
   // make it rotate
   Double flying_time = (Double) GetMSSinceTimeoutStart();
   const Double rotations_per_second = 4;
-  image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
+  image->SetRotation_rad( rotations_per_second * 2 * PI * flying_time / 1000.0f );
 }
 
 void Cluster::Draw()
@@ -153,11 +153,11 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const Double angle_range = M_PI / 2;
+  const Double angle_range = PI / 2;
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i ) 
   {
-    Double angle = -M_PI / 2; // this angle is "upwards" here
+    Double angle = -PI / 2; // this angle is "upwards" here
     Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / 2.0f;
     Double speed = RandomSync().GetDouble(10, 25);
 

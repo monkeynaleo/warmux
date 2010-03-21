@@ -241,9 +241,9 @@ void Mine::Add(int x, int y)
 
   // add the character speed
   if(ActiveCharacter().GetDirection() == 1)
-    projectile->SetSpeed(1.0, -M_PI_4);
+    projectile->SetSpeed(1.0, -QUARTER_PI);
   else
-    projectile->SetSpeed(1.0, -3.0 * M_PI_4);
+    projectile->SetSpeed(1.0, -3.0 * QUARTER_PI);
 
   ObjectsList::GetRef().AddObject (projectile);
   projectile = NULL;

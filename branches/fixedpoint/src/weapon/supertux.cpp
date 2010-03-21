@@ -119,7 +119,7 @@ void SuperTux::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  image->SetRotation_rad(angle_rad + M_PI_2);
+  image->SetRotation_rad(angle_rad + HALF_PI);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
   {
     SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
@@ -142,7 +142,7 @@ void SuperTux::turn_left()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle_rad = angle_rad - M_PI / 12;
+      angle_rad = angle_rad - PI / 12;
     }
 }
 
@@ -152,7 +152,7 @@ void SuperTux::turn_right()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle_rad = angle_rad + M_PI / 12;
+      angle_rad = angle_rad + PI / 12;
     }
 }
 

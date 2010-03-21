@@ -46,8 +46,12 @@ typedef signed   __int16  int16_t;
 typedef unsigned __int32  uint32_t;
 #endif
 
-typedef struct fixedpoint::fixed_point<8> Double;
-typedef struct fixedpoint::fixed_point<8> Float;
+typedef struct fixedpoint::fixed_point<16> Double;
+typedef struct fixedpoint::fixed_point<16> Float;
+
+const Double QUARTER_PI = 0.78539816339744828;
+const Double HALF_PI = 1.5707963267948966;
+const Double PI = 3.1415926535897931f;
 
 enum LRDirection
 {

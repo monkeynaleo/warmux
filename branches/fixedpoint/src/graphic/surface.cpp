@@ -720,7 +720,7 @@ end:
 * Warning rotozoomSurfaceXY uses degrees so the rotation of image use degrees here,
 * but when accessing thanks to GetSurfaceForAngle the index is using radian
 * (because we juste need an index in array, not an angle) */
-static const Double ratio_deg_to_rad = 180 / M_PI;
+static const Double ratio_deg_to_rad = 180 / PI;
 Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
 {
   SDL_Surface *surf;

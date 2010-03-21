@@ -105,13 +105,13 @@ void FireParticle::Refresh()
       fire_cfg.particle_range = (uint)(1.1 * scale * image->GetWidth()) + 1;
     }
 
-    Double angle = cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
+    Double angle = cos((((now + oscil_delta) % 1000)/500.0) * PI) * 0.5; // 0.5 is arbirtary
     image->SetRotation_rad( angle);
   }
   else
   {
     Double angle = GetSpeedAngle();
-    image->SetRotation_rad((angle - M_PI_2));
+    image->SetRotation_rad((angle - HALF_PI));
   }
 
   m_last_refresh = now;

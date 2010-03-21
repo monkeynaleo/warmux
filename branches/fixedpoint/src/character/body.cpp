@@ -354,13 +354,13 @@ void Body::ApplyMovement(Movement * mvt,
 void Body::ProcessFollowCrosshair(member_mvt & mb_mvt) 
 {
   // Use the movement of the crosshair
-  Double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
+  Double angle = owner->GetFiringAngle(); /* Get -2 * PI < angle =< 2 * PI*/
   if (0 > angle) {
-    angle += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+    angle += 2 * PI; // so now 0 < angle < 2 * PI;
   }
 
   if (DIRECTION_LEFT == ActiveCharacter().GetDirection()) {
-    angle = M_PI - angle;
+    angle = PI - angle;
   }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle);
@@ -373,13 +373,13 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
   if (DIRECTION_RIGHT == ActiveCharacter().GetDirection())
     angle_rad /= 2; // -90 < angle < 90
   else
-  if (angle_rad > M_PI_2)
-    angle_rad = M_PI_2 - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
+  if (angle_rad > HALF_PI)
+    angle_rad = HALF_PI - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
   else
-    angle_rad = -M_PI_2 - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
+    angle_rad = -HALF_PI - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
 
   if (angle_rad < 0) {
-    angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+    angle_rad += 2 * PI; // so now 0 < angle < 2 * PI;
   }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
@@ -391,11 +391,11 @@ void Body::ProcessFollowSpeed(member_mvt & mb_mvt)
   Double angle_rad = owner->GetSpeedAngle();
 
   if (angle_rad < 0) {
-    angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
+    angle_rad += 2 * PI; // so now 0 < angle < 2 * PI;
   }
 
   if (owner->GetDirection() == DIRECTION_LEFT) {
-    angle_rad = M_PI - angle_rad;
+    angle_rad = PI - angle_rad;
   }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
@@ -405,7 +405,7 @@ void Body::ProcessFollowDirection(member_mvt & mb_mvt)
 {
   // Use the direction of the character
   if (DIRECTION_LEFT == owner->GetDirection()) {
-    mb_mvt.SetAngle(mb_mvt.GetAngle() + M_PI);
+    mb_mvt.SetAngle(mb_mvt.GetAngle() + PI);
   }
 }
 
@@ -426,7 +426,7 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
   if (v.Norm() < mb_mvt.follow_cursor_limit) {
     Double angle = v.ComputeAngle(Point2i(0, 0));
     angle *= owner->GetDirection();
-    angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
+    angle -= owner->GetDirection() == DIRECTION_RIGHT ? PI:0;
 
     angle_mvt.SetAngle(angle);
     member->ApplyMovement(angle_mvt, skel_lst);
