@@ -39,7 +39,6 @@ protected:
   Color shadowColor;
   Font::font_size_t font_size;
   Font::font_style_t font_style;
-  bool font_shadowed;
 
   virtual void Render();
   void RenderMultiLines();
@@ -81,7 +80,7 @@ public:
   const Color & GetFontColor() const { return color; };
   Font::font_size_t GetFontSize() const { return font_size; };
   Font::font_style_t GetFontStyle() const { return font_style; };
-  bool IsFontShadowed() const { return font_shadowed; };
+  bool IsFontShadowed() const { return shadowed; };
   const Color & GetShadowColor(void) const { return this->shadowColor; };
 
   void SetFont(const Color & font_color,

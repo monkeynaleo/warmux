@@ -28,12 +28,13 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-PictureTextCBox::PictureTextCBox(const std::string &label,
-                                 const std::string &resource_id,
-                                 const Point2i &_size, bool value):
-  CheckBox(new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false),
-	   _size.x, value)
+PictureTextCBox::PictureTextCBox(const std::string & label,
+                                 const std::string & resource_id,
+                                 const Point2i & _size, 
+                                 bool value):
+  CheckBox(label, _size.x, value)
 {
+  SetFont(dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   m_image = GetResourceManager().LoadImage(res, resource_id);
   m_enabled = GetResourceManager().LoadImage(res, "menu/enabled");
@@ -42,7 +43,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label,
   GetResourceManager().UnLoadXMLProfile( res);
   m_value = value;
 
-  txt_label->SetMaxWidth(size.x);
+  Text::SetMaxWidth(size.x);
 }
 
 void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
@@ -81,9 +82,8 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
 
   video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
-  txt_label->DrawCenterTop(GetPosition()
-			   + Point2i(GetSizeX()/2,
-				     GetSizeY() - txt_label->GetHeight()));
+  Text::DrawCenterTop(GetPosition() + Point2i(GetSizeX()/2,
+		      GetSizeY() - Text::GetHeight()));
 
   if (!m_value)
     {
@@ -95,5 +95,5 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
 
 void PictureTextCBox::Pack()
 {
-  txt_label->SetMaxWidth(size.x);
+  Text::SetMaxWidth(size.x);
 }
