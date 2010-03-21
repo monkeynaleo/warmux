@@ -117,9 +117,10 @@ void PictureWidget::SetSurface(const Surface & s,
 
   spr = new Sprite(s, antialiasing);
   if (enable_scaling) {
-    float scale = std::min(float(GetSizeY())/spr->GetHeight(),
-                           float(GetSizeX())/spr->GetWidth());
-    spr->Scale(scale, scale);
+    Double scale = std::min( Double(GetSizeY())/spr->GetHeight(),
+                            Double(GetSizeX())/spr->GetWidth() ) ;
+
+    spr->Scale (scale, scale);
   }
 }
 

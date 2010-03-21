@@ -27,7 +27,7 @@
 //wave_per is the number of periods of the wave when it is waved at the maximum
 //used on the skin during teleportation
 Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
-                    unsigned int duration, float wave_amp, float wave_per){
+                    unsigned int duration, Double wave_amp, Double wave_per){
   Sprite* sprite = new Sprite;
   Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
 
@@ -46,8 +46,8 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
         a.GetRGBA(col, r, g, bl, al);
         col = b.MapRGBA(r, g, bl, al);
 
-        float t = (float)nbr_frames * sin(M_PI*(float)f/(float)nbr_frames);
-        unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((float)t*wave_per*2.0*M_PI/(float)nbr_frames)*(float)y*2.0*M_PI/(float)a.GetHeight()))));
+        Double t = (Double)nbr_frames * sin(M_PI*(Double)f/(Double)nbr_frames);
+        unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((Double)t*wave_per*2.0*M_PI/(Double)nbr_frames)*(Double)y*2.0*M_PI/(Double)a.GetHeight()))));
         b.PutPixel(wave_x, y, col);
       }
     }
@@ -66,7 +66,7 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
 // dy_max offset max of the rebound ( 0 <= dy <= dy_max )
 void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 {
-  float scale_x, scale_y;
+  Double scale_x, scale_y;
   uint dt = (Time::GetInstance()->Read() - t0) % per;
 
   spr->Scale(1.0,1.0);
@@ -75,7 +75,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
   //sprite at bottom:
   if( dt < per / 4 )
   {
-    float dt2 = ((per / 4) - dt) / ((float)per / 4.0);
+    Double dt2 = ((per / 4) - dt) / ((Double)per / 4.0);
     scale_y =        2.0*dt2*dt2 - 2.0*dt2 + 1.0;
     scale_x = 2.0 - (2.0*dt2*dt2 - 2.0*dt2 + 1.0);
     dy = 0;
@@ -84,7 +84,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
   }
 
   dt -= per/4;
-  float dt2 = ((3*per/4)-dt)/(3.0*per/4.0);
+  Double dt2 = ((3*per/4)-dt)/(3.0*per/4.0);
   dy += (int)((-4.0*dt2*dt2 + 4.0*dt2) * dy_max);
 }
 
@@ -109,7 +109,7 @@ void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
   amp = amp * (dur - dt) / dur;
 
   //Scale
-  stretch_y = (int)(sin((float)per * (float)dt * 2.0 * M_PI / (float)dur) * (float)amp);
+  stretch_y = (int)(sin((Double)per * (Double)dt * 2.0 * M_PI / (Double)dur) * (Double)amp);
 
   //Offset
   if(stretch_y < 0.0)

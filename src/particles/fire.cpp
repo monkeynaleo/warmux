@@ -74,7 +74,7 @@ void FireParticle::Refresh()
   if (creation_time + living_time < now)
     m_left_time_to_live = 0;
 
-  float scale = (now - creation_time)/(float)living_time;
+  Double scale = (now - creation_time)/(Double)living_time;
   scale = 1.0 - scale;
   image->Scale(scale, scale);
 
@@ -105,12 +105,12 @@ void FireParticle::Refresh()
       fire_cfg.particle_range = (uint)(1.1 * scale * image->GetWidth()) + 1;
     }
 
-    double angle = cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
+    Double angle = cos((((now + oscil_delta) % 1000)/500.0) * M_PI) * 0.5; // 0.5 is arbirtary
     image->SetRotation_rad( angle);
   }
   else
   {
-    double angle = GetSpeedAngle();
+    Double angle = GetSpeedAngle();
     image->SetRotation_rad((angle - M_PI_2));
   }
 

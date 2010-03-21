@@ -93,10 +93,10 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/) const
   // 2. then draw the progress annulus
   static uint small_r = 25;
   static uint big_r = 35;
-  static double open_angle_value = 0.96; // 55
+  static Double open_angle_value = 0.96; // 55
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
-  double angle;
+  Double angle;
   if (m_choices.size () > 1)
     angle = (2 * M_PI - open_angle_value) * m_index / (m_choices.size () - 1);
   else

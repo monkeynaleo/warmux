@@ -80,14 +80,14 @@ bool BonusBox::ExplodesInsteadOfBonus(Character * c)
   // Empyric formula:
   // 1% chance of explosion for each 5 points of energy
   // (with max 20% for 100 energy)
-  float explosion_probability = (float)c->GetEnergy() / 5.0f;
+  Double explosion_probability = (Double)c->GetEnergy() / 5.0f;
   // clamp to some reasonable values
   if ( explosion_probability < 5.0f )
     explosion_probability = 5.0f;
   else if ( explosion_probability > 40.0f )
     explosion_probability = 40.0f;
 
-  float randval = RandomSync().GetDouble( 1, 100 );
+  Double randval = RandomSync().GetDouble( 1, 100 );
   bool exploding = randval < explosion_probability;
   MSG_DEBUG("bonus","explosion chance: %.2f%%, actual value: %.2f, %s",
     explosion_probability, randval, exploding ? "exploding!" : "not exploding");

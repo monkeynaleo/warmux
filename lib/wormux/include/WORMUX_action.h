@@ -146,10 +146,10 @@ public:
 
   // Action with various parameter
   Action (Action_t type, int value);
-  Action (Action_t type, double value);
+  Action (Action_t type, Double value);
   Action (Action_t type, const std::string& value);
-  Action (Action_t type, double value1, int value2);
-  Action (Action_t type, double value1, double value2);
+  Action (Action_t type, Double value1, int value2);
+  Action (Action_t type, Double value1, Double value2);
 
   // Build an action from a network packet
   Action (const char* buffer, DistantComputer* _creator);
@@ -159,14 +159,14 @@ public:
   // Push / Back functions to add / retreive datas
   // Work as a FIFO container, inspiteof the name of methods !
   void Push(int val);
-  void Push(double val);
+  void Push(Double val);
   void Push(const std::string& val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
   void Push(const EulerVector& val);
 
   int PopInt();
-  double PopDouble();
+  Double PopDouble();
   std::string PopString();
   Point2i PopPoint2i();
   Point2d PopPoint2d();

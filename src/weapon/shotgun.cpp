@@ -36,8 +36,8 @@
 
 const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
-const double SHOTGUN_RANDOM_ANGLE    = 0.04;
-const double SHOTGUN_RANDOM_STRENGTH = 2.0;
+const Double SHOTGUN_RANDOM_ANGLE    = 0.04;
+const Double SHOTGUN_RANDOM_STRENGTH = 2.0;
 
 class ShotgunBuckshot : public WeaponBullet
 {
@@ -46,7 +46,7 @@ class ShotgunBuckshot : public WeaponBullet
                     WeaponLauncher * p_launcher);
     bool IsOverlapping(const PhysicalObj* obj) const;
   protected:
-    void RandomizeShoot(double &angle,double &strength);
+    void RandomizeShoot(Double &angle,Double &strength);
 };
 
 
@@ -57,7 +57,7 @@ ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
   cfg.explosion_range = SHOTGUN_EXPLOSION_RANGE;
 }
 
-void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
+void ShotgunBuckshot::RandomizeShoot(Double &angle,Double &strength)
 {
   angle += M_PI * RandomSync().GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
   strength += RandomSync().GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);

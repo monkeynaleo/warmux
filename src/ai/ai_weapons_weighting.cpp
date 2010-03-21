@@ -45,17 +45,17 @@ void WeaponsWeighting::RandomizeFactors()
   }
 }
 
-double WeaponsWeighting::GetFactor(Weapon::Weapon_type type)
+Double WeaponsWeighting::GetFactor(Weapon::Weapon_type type)
 {
   return factor[type];
 }
 
-void WeaponsWeighting::SetMinFactor(Weapon::Weapon_type type, double value)
+void WeaponsWeighting::SetMinFactor(Weapon::Weapon_type type, Double value)
 {
   min_factor[type] = value;
 }
 
-void WeaponsWeighting::SetMaxFactor(Weapon::Weapon_type type, double value)
+void WeaponsWeighting::SetMaxFactor(Weapon::Weapon_type type, Double value)
 {
   max_factor[type] = value;
 }

@@ -32,7 +32,7 @@ class Trajectory {
     Point2d half_acceleration;
   public:
     Trajectory(Point2d pos_0, Point2d v_0, Point2d a);
-    const Point2i GetPositionAt(double time);
-    double GetSpeedAt(double time);
+    const Point2i GetPositionAt(Double time);
+    Double GetSpeedAt(Double time);
 };
 #endif

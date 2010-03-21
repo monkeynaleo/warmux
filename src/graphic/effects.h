@@ -26,7 +26,7 @@
 class Sprite;
 class Surface;
 
-Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per);
+Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, Double wave_amp, Double wave_per);
 void Rebound(Sprite* spr, int &y, uint t0, uint per, int dy_max);
 void Gelatine(int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per);
 

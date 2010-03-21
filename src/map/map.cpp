@@ -32,7 +32,7 @@
 #include "object/objbox.h"
 #include "tool/math_tools.h"
 
-const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
+const Double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
 const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
@@ -376,7 +376,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
 {
   Point2d diff = ( Point2d )( end - start );
   Point2d delta = diff.GetNormal();
-  double length = diff.Norm();
+  Double length = diff.Norm();
 
   // FIXME: use some Bresenham-like algorithm
   Point2i prev_point = start;

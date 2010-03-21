@@ -61,7 +61,7 @@ class RandomMap {
     ROUNDED_RECTANGLE
   } Shape_type;
  protected:
-   double border_size;
+   Double border_size;
    bool is_open;
    int number_of_island;
    Surface result;
@@ -92,7 +92,7 @@ class RandomMap {
    int GetHeight() const { return height; };
    void AddElement(const Surface * object, const Point2i& position);
    void DrawElement();
-   void SetBorderSize(const double border) { border_size = border; };
+   void SetBorderSize(const Double border) { border_size = border; };
    void SetBorderColor(const Color& color) { border_color = color; };
    bool IsOpen() const { return is_open; };
    void Generate(InfoMap::Island_type generator);

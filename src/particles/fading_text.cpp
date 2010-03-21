@@ -47,6 +47,6 @@ void FadingText::Refresh()
     m_left_time_to_live = start_to_fade + TEXT_FADE_TIME - current_time;
     m_left_time_to_live = (m_left_time_to_live > 0 ? m_left_time_to_live : 0);
     SetXY(GetPosition() + Point2i(0, -4));
-    image->SetAlpha(1.0 - ((float)(current_time - start_to_fade)) / TEXT_FADE_TIME);
+    image->SetAlpha(1.0 - ((Double)(current_time - start_to_fade)) / TEXT_FADE_TIME);
   }
 }

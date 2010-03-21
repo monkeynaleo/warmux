@@ -39,9 +39,9 @@ const uint GO_UP_OSCILLATION_TIME = 30; // seconds
 const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
 const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
-const double WAVE_HEIGHT_A = 5;
-const double WAVE_HEIGHT_B = 8;
-const double DEGREE = static_cast<double>(2*M_PI/360.0);
+const Double WAVE_HEIGHT_A = 5;
+const Double WAVE_HEIGHT_B = 8;
+const Double DEGREE = static_cast<Double>(2*M_PI/360.0);
 const int WAVE_INC = 5;
 const int WAVE_COUNT = 3;
 const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
@@ -167,16 +167,16 @@ void Water::Refresh()
   }
 
   // Height Calculation:
-  const float t = (GO_UP_OSCILLATION_TIME*1000.0);
-  const float a = GO_UP_STEP/t;
-  const float b = 1.0;
+  const Double t = (GO_UP_OSCILLATION_TIME*1000.0);
+  const Double a = GO_UP_STEP/t;
+  const Double b = 1.0;
 
   if (time_raise < now) {
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
       uint dt = now - time_raise;
-      height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP *
-               sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))
+      height_mvt = GO_UP_STEP + (uint)(((Double)GO_UP_STEP *
+               sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-0.25))
                    / GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI)
                )/(a*dt+b));
     } else {
@@ -189,8 +189,8 @@ void Water::Refresh()
 
 void Water::CalculateWaveHeights()
 {
-  double angle1 = -shift1;
-  double angle2 = shift1;
+  Double angle1 = -shift1;
+  Double angle2 = shift1;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
     // TODO: delete the first dimension of wave_height (now unused)

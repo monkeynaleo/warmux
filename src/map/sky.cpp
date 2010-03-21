@@ -98,8 +98,8 @@ Point2i Sky::GetSkyPos(uint layer) const
   ASSERT(layer < images.size());
 
   Point2i tmp = Camera::GetInstance()->GetPosition();
-  double x_sky = (double)(tmp.x) / (double)(GetWorld().GetWidth() - GetMainWindow().GetWidth());
-  double y_sky = (double)(tmp.y) / (double)(GetWorld().GetHeight() - GetMainWindow().GetHeight());
+  Double x_sky = (Double)(tmp.x) / (Double)(GetWorld().GetWidth() - GetMainWindow().GetWidth());
+  Double y_sky = (Double)(tmp.y) / (Double)(GetWorld().GetHeight() - GetMainWindow().GetHeight());
 
   return (images[layer].GetSize() - GetMainWindow().GetSize()) * Point2d(x_sky, y_sky);
 }

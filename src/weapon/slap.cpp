@@ -82,8 +82,8 @@ std::string Slap::GetWeaponWinString(const char *TeamName, uint items_count) con
 }
 
 bool Slap::p_Shoot (){
-  double angle = ActiveCharacter().GetFiringAngle();
-  double radius = 0.0;
+  Double angle = ActiveCharacter().GetFiringAngle();
+  Double radius = 0.0;
   bool end = false;
 
   JukeBox::GetInstance()->Play ("default","weapon/slap");

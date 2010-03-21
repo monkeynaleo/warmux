@@ -354,7 +354,7 @@ void Body::ApplyMovement(Movement * mvt,
 void Body::ProcessFollowCrosshair(member_mvt & mb_mvt) 
 {
   // Use the movement of the crosshair
-  double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
+  Double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
   if (0 > angle) {
     angle += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
   }
@@ -369,7 +369,7 @@ void Body::ProcessFollowCrosshair(member_mvt & mb_mvt)
 void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
 {
   // Use the movement of the crosshair
-  double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
+  Double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
   if (DIRECTION_RIGHT == ActiveCharacter().GetDirection())
     angle_rad /= 2; // -90 < angle < 90
   else
@@ -388,7 +388,7 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
 void Body::ProcessFollowSpeed(member_mvt & mb_mvt) 
 {
   // Use the movement of the character
-  double angle_rad = owner->GetSpeedAngle();
+  Double angle_rad = owner->GetSpeedAngle();
 
   if (angle_rad < 0) {
     angle_rad += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
@@ -424,7 +424,7 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
   v = Mouse::GetInstance()->GetWorldPosition() - v;
 
   if (v.Norm() < mb_mvt.follow_cursor_limit) {
-    double angle = v.ComputeAngle(Point2i(0, 0));
+    Double angle = v.ComputeAngle(Point2i(0, 0));
     angle *= owner->GetDirection();
     angle -= owner->GetDirection() == DIRECTION_RIGHT ? M_PI:0;
 
@@ -509,7 +509,7 @@ void Body::Build()
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
   member_mvt body_mvt;
-  float y_max = 0;
+  Double y_max = 0;
   Member * member;
 
   for (int lay=0; lay < layersCount; lay++) {
@@ -523,7 +523,7 @@ void Body::Build()
     }
   }
 
-  body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->GetTestBottom();
+  body_mvt.pos.y = (Double)GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
@@ -853,7 +853,7 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
   }
 }
 
-void Body::SetRotation(double angle)
+void Body::SetRotation(Double angle)
 {
   MSG_DEBUG("body", "%s -> new angle: %i", owner->GetName().c_str(), angle);
   main_rotation_rad = angle;

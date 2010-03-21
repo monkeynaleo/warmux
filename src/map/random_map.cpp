@@ -128,15 +128,15 @@ void RandomMap::GeneratePlatforms()
   result.Fill(0);
 
   for (uint i = 0; i < nplats; i++) {
-    double wid = RandomSync().GetDouble(minwidth, maxwidth);
-    double hei = RandomSync().GetDouble(minhei, maxhei);
+    Double wid = RandomSync().GetDouble(minwidth, maxwidth);
+    Double hei = RandomSync().GetDouble(minhei, maxhei);
     if (RandomSync().GetInt(0,99) < (int) vertchance) {
-      double tmp = wid;
+      Double tmp = wid;
       wid = hei;
       hei = tmp;
     }
-    double x = RandomSync().GetDouble(0, (width - wid));
-    double y = RandomSync().GetDouble(0, (height - hei));
+    Double x = RandomSync().GetDouble(0, (width - wid));
+    Double y = RandomSync().GetDouble(0, (height - hei));
 
     Polygon *tmp = new Polygon();
 
@@ -182,10 +182,10 @@ void RandomMap::GeneratePlatforms()
 
 void RandomMap::GenerateIsland()
 {
-  double minhei = height / RandomSync().GetDouble(7, 5);
-  double maxhei = height / RandomSync().GetDouble(1.5, 4);
+  Double minhei = height / RandomSync().GetDouble(7, 5);
+  Double maxhei = height / RandomSync().GetDouble(1.5, 4);
 
-  double current_y_pos = height - RandomSync().GetDouble(minhei, maxhei);
+  Double current_y_pos = height - RandomSync().GetDouble(minhei, maxhei);
   int num_of_points = RandomSync().GetInt(5, 20);
 
   result.Fill(0);
@@ -197,7 +197,7 @@ void RandomMap::GenerateIsland()
 
   for (int i = 1; i < num_of_points - 1; i++) {
     current_y_pos = height - RandomSync().GetDouble(minhei, maxhei);
-    double current_x_pos = (((double)i / (double) num_of_points) * (double)width);
+    Double current_x_pos = (((Double)i / (Double) num_of_points) * (Double)width);
     tmp->AddPoint(Point2d(current_x_pos, current_y_pos));
     if (RandomSync().GetInt(0, 5) < 1) {
       Surface * random_element = random_element_list.GetRandomElement();
@@ -214,7 +214,7 @@ void RandomMap::GenerateIsland()
   tmp->AddPoint(Point2d(width / 2, height + 100));
 
   // Get bezier interpolation
-  double nb = RandomSync().GetDouble(0.0, 0.5);
+  Double nb = RandomSync().GetDouble(0.0, 0.5);
   MSG_DEBUG("ground_generator.island", "bezier interpolation: 1.0, 30, %f", nb);
   bezier_shape = tmp->GetBezierInterpolation(1.0, 30, nb);
   delete tmp;

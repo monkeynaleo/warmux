@@ -63,7 +63,7 @@ void PolygonBuffer::SetSize(const int size)
   } else {
     int16_t * tmp_vx = vx;
     int16_t * tmp_vy = vy;
-    // double the buffer size (64, 128, 256, 512)
+    // Double the buffer size (64, 128, 256, 512)
     // to avoid call of delete/new at each new point
     array_size = (array_size * 2 > size ? array_size * 2 : size);
     vx = new int16_t[array_size];
@@ -426,12 +426,12 @@ void Polygon::ClearItem(bool free_mem)
   items.clear();
 }
 
-double Polygon::GetWidth() const
+Double Polygon::GetWidth() const
 {
   return max.x - min.x;
 }
 
-double Polygon::GetHeight() const
+Double Polygon::GetHeight() const
 {
   return max.y - min.y;
 }
@@ -506,11 +506,11 @@ void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
 {
   Point2d tmp1 = anchor1 + control1;
   Point2d tmp2 = anchor2 + control2;
-  double a, b;
+  Double a, b;
   if(add_first_point)
     AddPoint(anchor1);
   for(int step = 1; step < num_steps - 1; step++) {
-    a = ((float)step / (float)num_steps) * 1.0;
+    a = ((Double)step / (Double)num_steps) * 1.0;
     b = 1 - a;
     AddPoint(anchor1 * b * b * b + tmp1 * 3.0 * b * b * a + tmp2 * 3.0 * b * a * a + anchor2 * a * a * a);
   }
@@ -520,7 +520,7 @@ void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
 
 // Generate random point between 2 points
 void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
-                             const double x_random_offset, const double y_random_offset,
+                             const Double x_random_offset, const Double y_random_offset,
                              const int num_steps, const bool add_first_point,
                              const bool add_last_point)
 {
@@ -530,9 +530,9 @@ void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
     AddPoint(start);
   for (int i = 1; i < num_steps - 1; i++) {
     MSG_DEBUG("random.get", "Polygon::AddRandomCurve(...)");
-    double x = RandomSync().GetDouble(-x_random_offset, x_random_offset);
+    Double x = RandomSync().GetDouble(-x_random_offset, x_random_offset);
     MSG_DEBUG("random.get", "Polygon::AddRandomCurve(...)");
-    double y = RandomSync().GetDouble(-y_random_offset, y_random_offset);
+    Double y = RandomSync().GetDouble(-y_random_offset, y_random_offset);
     AddPoint(start + (step * i) + Point2d(x,y));
   }
   if(add_last_point)
@@ -540,11 +540,11 @@ void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
 }
 
 // Generate a new polygon with Bezier interpolation
-Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, double rand)
+Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Double rand)
 {
   Point2d p0, p1, p2, p3, c0, c1, c2, v1, v2;
   Polygon * shape = new Polygon();
-  double l1, l2, l3;
+  Double l1, l2, l3;
   AffineTransform2D trans = AffineTransform2D();
   for(int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
     p0 = original_shape[(index_p1 == 0 ? original_shape.size() : index_p1) - 1];
@@ -590,7 +590,7 @@ PolygonBuffer * Polygon::GetPolygonBuffer()
 }
 
 // expand the polygon (to draw a little border for example)
-void Polygon::Expand(double expand_value)
+void Polygon::Expand(Double expand_value)
 {
   if(original_shape.size() < 2) return;
   if(!IsClockWise())
@@ -713,7 +713,7 @@ void Polygon::DrawOnScreen()
 ////////////////////////////
 // DecoratedBox
 
-DecoratedBox::DecoratedBox(double width, double height):Polygon(),
+DecoratedBox::DecoratedBox(Double width, Double height):Polygon(),
 m_border(NULL),
 m_style(DecoratedBox::STYLE_ROUNDED)
 {
@@ -751,7 +751,7 @@ void DecoratedBox::SetStyle(DecoratedBox::Style style)
   m_style = style;
 }
 
-void DecoratedBox::SetPosition(double x, double y)
+void DecoratedBox::SetPosition(Double x, Double y)
 {
     for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {

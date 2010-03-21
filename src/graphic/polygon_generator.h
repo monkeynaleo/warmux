@@ -27,21 +27,21 @@
 class PolygonGenerator {
  public:
    static const int MIN_SPACE_BETWEEN_POINT;
-   static Polygon * GenerateCircle(double diameter, int nb_point);
-   static Polygon * GenerateDentedCircle(double diameter, int nb_point, double rand_offset);
-   static Polygon * GenerateRectangle(double width, double height);
+   static Polygon * GenerateCircle(Double diameter, int nb_point);
+   static Polygon * GenerateDentedCircle(Double diameter, int nb_point, Double rand_offset);
+   static Polygon * GenerateRectangle(Double width, Double height);
    static Polygon * GenerateRectangle(const Rectanglei & rectangle);
    static Polygon * GenerateRectangle(const Point2d & orig, const Point2d & size);
    static Polygon * GenerateRectangle(const Point2i & orig, const Point2i & size);
-   static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
+   static Polygon * GenerateRoundedRectangle(Double width, Double height, Double edge);
    static Polygon * GenerateRandomShape();
-   static Polygon * GenerateRandomTrapeze(const double width, const double height,
-                                          const double x_rand_offset, const double y_rand_offset,
-                                          const double coef);
-   static Polygon * GeneratePie(double diameter, int nb_point, double angle, double angle_offset = 0.0);
-   static Polygon * GeneratePartialTorus(double diameter, double min_diameter, int nb_point,
-                                         double angle, double angle_offset = 0.0);
-   static DecoratedBox * GenerateDecoratedBox(double width, double height);
+   static Polygon * GenerateRandomTrapeze(const Double width, const Double height,
+                                          const Double x_rand_offset, const Double y_rand_offset,
+                                          const Double coef);
+   static Polygon * GeneratePie(Double diameter, int nb_point, Double angle, Double angle_offset = 0.0);
+   static Polygon * GeneratePartialTorus(Double diameter, Double min_diameter, int nb_point,
+                                         Double angle, Double angle_offset = 0.0);
+   static DecoratedBox * GenerateDecoratedBox(Double width, Double height);
 };
 
 #endif /* POLYGON_GENERATOR_H */

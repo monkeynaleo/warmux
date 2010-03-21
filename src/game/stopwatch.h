@@ -31,13 +31,13 @@ private:
   uint paused_time;
   uint pause_begin;
   bool paused;
-  double speed;
+  Double speed;
 private:
   void Stop();
   void Resume();
 public:
   Stopwatch();
-  void Reset(double speed = 1);
+  void Reset(Double speed = 1);
   void SetPause(bool value);
   uint GetValue();
   bool IsPaused();

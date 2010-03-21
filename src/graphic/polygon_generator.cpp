@@ -26,12 +26,12 @@
 
 const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 
-Polygon * PolygonGenerator::GenerateCircle(double diameter, int nb_point)
+Polygon * PolygonGenerator::GenerateCircle(Double diameter, int nb_point)
 {
   return PolygonGenerator::GenerateDentedCircle(diameter, nb_point, 0.0);
 }
 
-Polygon * PolygonGenerator::GenerateRectangle(double width, double height)
+Polygon * PolygonGenerator::GenerateRectangle(Double width, Double height)
 {
   Polygon * tmp = new Polygon();
   tmp->AddPoint(Point2d( width / 2.0,  height / 2.0));
@@ -63,7 +63,7 @@ Polygon * PolygonGenerator::GenerateRectangle(const Point2i & orig, const Point2
                                              POINT2I_2_POINT2D(size));
 }
 
-Polygon * PolygonGenerator::GenerateDentedCircle(double diameter, int nb_point, double rand_offset)
+Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, Double rand_offset)
 {
   Polygon * tmp = new Polygon();
   AffineTransform2D trans = AffineTransform2D();
@@ -76,10 +76,10 @@ Polygon * PolygonGenerator::GenerateDentedCircle(double diameter, int nb_point, 
   return tmp;
 }
 
-Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height, double edge)
+Polygon * PolygonGenerator::GenerateRoundedRectangle(Double width, Double height, Double edge)
 {
   Polygon * tmp = new Polygon();
-  double edge_vector = edge / 2.0;
+  Double edge_vector = edge / 2.0;
   tmp->AddBezierCurve(Point2d(-width / 2 + edge, -height / 2),
                       Point2d(-edge_vector, 0),
                       Point2d(0, -edge_vector),
@@ -101,17 +101,17 @@ Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height
 
 Polygon * PolygonGenerator::GenerateRandomShape()
 {
-  double height = RandomSync().GetDouble(400.0, 600.0);
-  double width  = RandomSync().GetDouble(400.0, 2000.0);
+  Double height = RandomSync().GetDouble(400.0, 600.0);
+  Double width  = RandomSync().GetDouble(400.0, 2000.0);
   return GenerateRandomTrapeze(width, height, RandomSync().GetDouble(10.0, 15.0), RandomSync().GetDouble(10.0, 15.0),
                                RandomSync().GetSign() * RandomSync().GetDouble(0.5, 1.0));
 }
 
-Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const double height,
-                                                  const double x_rand_offset, const double y_rand_offset,
-                                                  const double coef)
+Polygon * PolygonGenerator::GenerateRandomTrapeze(const Double width, const Double height,
+                                                  const Double x_rand_offset, const Double y_rand_offset,
+                                                  const Double coef)
 {
-  double upper_width, lower_width, upper_offset, lower_offset;
+  Double upper_width, lower_width, upper_offset, lower_offset;
   int number_of_bottom_point, number_of_side_point;
   // XXX Unused !?
   // int number_of_upper_point;
@@ -145,7 +145,7 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
   return tmp;
 }
 
-Polygon * PolygonGenerator::GeneratePie(double diameter, int nb_point, double angle, double angle_offset)
+Polygon * PolygonGenerator::GeneratePie(Double diameter, int nb_point, Double angle, Double angle_offset)
 {
   Polygon * tmp = new Polygon();
   AffineTransform2D trans = AffineTransform2D();
@@ -160,10 +160,10 @@ Polygon * PolygonGenerator::GeneratePie(double diameter, int nb_point, double an
   return tmp;
 }
 
-Polygon * PolygonGenerator::GeneratePartialTorus(double diameter, double min_diameter, int nb_point, double angle, double angle_offset)
+Polygon * PolygonGenerator::GeneratePartialTorus(Double diameter, Double min_diameter, int nb_point, Double angle, Double angle_offset)
 {
   if(diameter < min_diameter) {
-    double tmp = diameter;
+    Double tmp = diameter;
     diameter = min_diameter;
     min_diameter = tmp;
   }
@@ -182,7 +182,7 @@ Polygon * PolygonGenerator::GeneratePartialTorus(double diameter, double min_dia
   return tmp;
 }
 
-DecoratedBox * PolygonGenerator::GenerateDecoratedBox(double width, double height)
+DecoratedBox * PolygonGenerator::GenerateDecoratedBox(Double width, Double height)
 {
   DecoratedBox * tmp = new DecoratedBox(width, height);
 

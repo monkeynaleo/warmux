@@ -106,7 +106,7 @@ public:
     snprintf(buffer, 16, "%i", score);
     SetWidgets(size, type, buffer, player);
   }
-  ResultBox(uint size, const std::string& type, double score, const Character* player)
+  ResultBox(uint size, const std::string& type, Double score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
     char buffer[16];
@@ -223,8 +223,8 @@ public:
 
   virtual void DrawTeamGraph(const Team *team,
 			     int x, int y,
-			     double duration_scale,
-			     double energy_scale,
+			     Double duration_scale,
+			     Double energy_scale,
                              uint   max_duration,
 			     const Color& color) const;
   virtual void DrawGraph(int x, int y, int w, int h) const;
@@ -245,8 +245,8 @@ void CanvasTeamsGraph::Draw(const Point2i& /*mousePosition*/) const
 
 void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 				     int x, int y,
-				     double duration_scale,
-				     double energy_scale,
+				     Double duration_scale,
+				     Double energy_scale,
                                      uint   max_duration,
 				     const Color& color) const
 {
@@ -333,8 +333,8 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
                Point2i(x+graph_w-20, y+graph_h+8));
 
   // Draw each team graph
-  double energy_scale = graph_h / (1.05*max_value);
-  double duration_scale = graph_w / (1.05*max_duration);
+  Double energy_scale = graph_h / (1.05*max_value);
+  Double duration_scale = graph_w / (1.05*max_duration);
   MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
             duration_scale, Time::GetInstance()->Read(), energy_scale);
 

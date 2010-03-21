@@ -28,14 +28,14 @@
 class AIStrategy
 {
   private:
-    const float rating;
+    const Double rating;
   public:
     typedef enum {LOWER_RATING, SIMILAR_RATING, HIGHER_RATING} CompareResult;
-    AIStrategy(float rating);
+    AIStrategy(Double rating);
     virtual ~AIStrategy() {}
     /** Creates a command which implements the strategy */
     virtual AICommand * CreateCommand() = 0;
-    float GetRating() { return rating; }
+    Double GetRating() { return rating; }
     CompareResult CompareRatingWith(AIStrategy * other);
 };
 
@@ -59,11 +59,11 @@ class ShootWithGunStrategy : public AIStrategy
     Character & shooter;
     Weapon::Weapon_type weapon;
     LRDirection  direction;
-    double angle;
+    Double angle;
     int bullets;
   public:
     virtual AICommand * CreateCommand();
-    ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int bullets);
+    ShootWithGunStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, int bullets);
 };
 
 class LoadAndFireStrategy : public AIStrategy
@@ -72,12 +72,12 @@ class LoadAndFireStrategy : public AIStrategy
     Character & shooter;
     Weapon::Weapon_type weapon;
     LRDirection  direction;
-    double angle;
-    double strength;
+    Double angle;
+    Double strength;
     int timeout;
   public:
     virtual AICommand * CreateCommand();
-    LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength, int timeout);
+    LoadAndFireStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, Double strength, int timeout);
 };
 
 

@@ -39,7 +39,7 @@ extern const uint MAX_WIND_OBJECTS;
 struct TraceResult
 {
   Point2i m_hit; // place where ray hit the ground
-  float m_fraction; // relative position of hit point (0=start, 1=end)
+  Double m_fraction; // relative position of hit point (0=start, 1=end)
   // more to come: ground normal, ground type, etc
 };
 
@@ -66,7 +66,7 @@ private:
 public:
   Ground ground;
   Sky sky;
-  double min_distance_between_characters;
+  Double min_distance_between_characters;
   Water water;
 
   std::list<Rectanglei> *to_redraw;
@@ -128,7 +128,7 @@ public:
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }
   Point2i GetSize() const{ return ground.GetSize(); }
-  double GetDistanceBetweenCharacters() const { return min_distance_between_characters; }
+  Double GetDistanceBetweenCharacters() const { return min_distance_between_characters; }
 
  private:
   bool HorizontalLine_IsInVacuum (int left, int y,  int right) const;

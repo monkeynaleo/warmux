@@ -39,7 +39,7 @@ private:
   static const uint MIN_NB_VALUES;
 
   int nb_valid_values;
-  double average;
+  Double average;
   std::list<uint> nb_frames;
   uint time_in_second;
   Text* text;

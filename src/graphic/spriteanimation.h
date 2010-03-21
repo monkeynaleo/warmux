@@ -43,7 +43,7 @@ private:
 
   // Speed
   unsigned int last_update;
-  float speed_factor;
+  Double speed_factor;
   int frame_delta; // Used in Update() to get next frame
   int loop_wait;
   int loop_wait_random;
@@ -68,7 +68,7 @@ public:
   void CalculateWait();
 
   // Control speed
-  void SetSpeedFactor(float nv_speed);
+  void SetSpeedFactor(Double nv_speed);
 
   // Control options
   void SetPlayBackward(bool enable);

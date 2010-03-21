@@ -28,7 +28,7 @@ Stopwatch::Stopwatch()
   Reset();
 }
 
-void Stopwatch::Reset(double speed_value)
+void Stopwatch::Reset(Double speed_value)
 {
   speed = speed_value;
   paused = false;

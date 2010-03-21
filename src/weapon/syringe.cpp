@@ -72,8 +72,8 @@ void Syringe::UpdateTranslationStrings()
 }
 
 bool Syringe::p_Shoot (){
-  double angle = ActiveCharacter().GetFiringAngle();
-  double radius = 0.0;
+  Double angle = ActiveCharacter().GetFiringAngle();
+  Double radius = 0.0;
   bool end = false;
 
   JukeBox::GetInstance()->Play ("default","weapon/syringe_shoot");

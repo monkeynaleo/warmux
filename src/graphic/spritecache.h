@@ -40,8 +40,8 @@ class SpriteFrameCache
 
 public:
   Surface flipped_surface;
-  Surface GetFlippedSurfaceForAngle(double angle) const;
-  Surface GetSurfaceForAngle(double angle) const;
+  Surface GetFlippedSurfaceForAngle(Double angle) const;
+  Surface GetSurfaceForAngle(Double angle) const;
 
   SpriteFrameCache();
   void CreateRotationCache(Surface &surface, unsigned int cache_size, bool smooth);
