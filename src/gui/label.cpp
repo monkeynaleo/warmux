@@ -21,27 +21,25 @@
 
 #include "gui/label.h"
 
-Label::Label(const std::string & _text,
-             uint max_width,
-             Font::font_size_t fsize,
-             Font::font_style_t fstyle,
+Label::Label(const std::string & text,
+             uint maxWidth,
+             Font::font_size_t fontSize,
+             Font::font_style_t fontStyle,
              const Color & fontColor,
-             bool _center,
+             bool centered,
              bool shadowed,
              const Color & shadowColor) :
-  textEngine(NULL),
-  center(_center)
+  Text(text, fontColor, fontSize,
+       fontStyle, shadowed, shadowColor),
+  center(centered)
 {
-  textEngine = new Text(_text, fontColor, fsize,
-                        fstyle, shadowed, shadowColor);
-  size.x = max_width;
-  textEngine->SetMaxWidth(size.x);
-  size.y = textEngine->GetHeight();
+  size.x = maxWidth;
+  SetMaxWidth(size.x);
+  size.y = GetHeight();
 }
 
 Label::Label(const Point2i & size) :
   Widget(size),
-  textEngine(NULL),
   center(false)
 {
 }
@@ -49,16 +47,12 @@ Label::Label(const Point2i & size) :
 Label::Label(Profile * profile,
              const xmlNode * pictureNode) :
   Widget(profile, pictureNode),
-  textEngine(NULL),
   center(false)
 {
 }
 
 Label::~Label()
 {
-  if (NULL != textEngine) {
-    delete textEngine;
-  }
 }
 
 bool Label::LoadXMLConfiguration()
@@ -92,12 +86,12 @@ bool Label::LoadXMLConfiguration()
   Color shadowColor(255, 255, 255, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "shadowColor", shadowColor);
 
-  textEngine->SetText(xmlText);
-  textEngine->SetFont(textColor, 
-                      (Font::font_size_t)fontSize, 
-                      DetectFontStyle(fontStyle),
-                      activeShadow,
-                      shadowColor);
+  SetText(xmlText);
+  SetFont(textColor, 
+          (Font::font_size_t)fontSize, 
+          DetectFontStyle(fontStyle),
+          activeShadow,
+          shadowColor);
   return true;
 }
 
@@ -116,41 +110,25 @@ void Label::Draw(const Point2i & mousePosition) const
   (void)mousePosition;
 
   if (!center) {
-    textEngine->DrawTopLeft(position);
+    DrawTopLeft(position);
   } else {
-    textEngine->DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+    DrawCenterTop(Point2i(position.x + size.x/2, position.y));
   }
-}
-
-void Label::DrawCursor(const Point2i & textPos, 
-                      std::string::size_type cursorPos) const
-{
-  textEngine->DrawCursor(textPos, cursorPos);
 }
 
 void Label::Pack()
 {
-  textEngine->SetMaxWidth(size.x);
-  size.y = textEngine->GetHeight();
+  SetMaxWidth(size.x);
+  size.y = GetHeight();
 }
 
 void Label::SetText(const std::string & new_txt)
 {
   NeedRedrawing();
 
-  textEngine->SetText(new_txt);
+  Text::SetText(new_txt);
 
-  textEngine->SetMaxWidth(size.x);
-  size.y = textEngine->GetHeight();
-}
-
-void Label::SetFont(const Color & fontColor,
-                    const Font::font_size_t fontSize,
-                    const Font::font_style_t fontStyle,
-                    bool fontShadowed,
-                    const Color & shadowColor)
-{
-  textEngine->SetFont(fontColor, fontSize, fontStyle,
-                      fontShadowed, shadowColor);
+  SetMaxWidth(size.x);
+  size.y = GetHeight();
 }
 
