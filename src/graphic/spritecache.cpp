@@ -37,7 +37,7 @@ void SpriteFrameCache::CreateRotationCache(Surface &surface, unsigned int cache_
 
   rotated_surface.push_back( surface );
   for(unsigned int i=1 ; i< cache_size ; i++){
-    Double angle = 2* M_PI * (1 /* to inverte rotation angle */ - static_cast<Double>(i) / static_cast<Double>(cache_size));
+    Double angle = 2* PI * (1 /* to inverte rotation angle */ - static_cast<Double>(i) / static_cast<Double>(cache_size));
     rotated_surface.push_back( surface.RotoZoom(angle, 1.0, 1.0, smooth) );
   }
 }
@@ -45,11 +45,11 @@ void SpriteFrameCache::CreateRotationCache(Surface &surface, unsigned int cache_
 Surface SpriteFrameCache::GetFlippedSurfaceForAngle(Double angle) const
 {
   Double angle_tmp = angle;
-  while(angle_tmp >= 2 * M_PI)
-    angle_tmp -= 2 * M_PI;
+  while(angle_tmp >= 2 * PI)
+    angle_tmp -= 2 * PI;
   while(angle_tmp < 0.0)
-    angle_tmp += 2 * M_PI;
-  int index = static_cast<uint>(angle_tmp*static_cast<Double>(rotated_flipped_surface.size()) / (2*M_PI));
+    angle_tmp += 2 * PI;
+  int index = static_cast<uint>(angle_tmp*static_cast<Double>(rotated_flipped_surface.size()) / (2*PI));
   return rotated_flipped_surface[index];
 }
 
@@ -57,11 +57,11 @@ Surface SpriteFrameCache::GetSurfaceForAngle(Double angle) const
 {
   Double angle_tmp = angle;
   while(angle_tmp < 0.0)
-      angle_tmp += 2 * M_PI;
-  while(angle_tmp >= 2 * M_PI)
-    angle_tmp -= 2 * M_PI;
+      angle_tmp += 2 * PI;
+  while(angle_tmp >= 2 * PI)
+    angle_tmp -= 2 * PI;
 
-  unsigned int index = static_cast<uint>(angle_tmp*static_cast<Double>(rotated_surface.size()) / (2*M_PI));
+  unsigned int index = static_cast<uint>(angle_tmp*static_cast<Double>(rotated_surface.size()) / (2*PI));
   ASSERT (rotated_surface.size()>index);
   return rotated_surface[index];
 }
@@ -78,7 +78,7 @@ void SpriteFrameCache::CreateFlippingCache(Surface &surface, bool smooth)
     const unsigned int n = rotated_surface.size();
     for(unsigned int i=1 ; i<n; i++)
     {
-      Double angle = 2 * M_PI * (1 - (Double) i / (Double) n);
+      Double angle = 2 * PI * (1 - (Double) i / (Double) n);
       rotated_flipped_surface.push_back( surface.RotoZoom(angle, -1.0, 1.0, smooth) );
     }
   }

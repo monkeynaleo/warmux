@@ -128,7 +128,7 @@ void Physics::GetSpeed(Double &norm, Double &angle) const
       if (m_rope_angle.x1 > 0)
         angle = fabs(m_rope_angle.x0) ;
       else
-        angle = fabs(m_rope_angle.x0) - M_PI ;
+        angle = fabs(m_rope_angle.x0) - PI ;
 
       if (m_rope_angle.x0 < 0)
         angle = -angle ;
@@ -187,7 +187,7 @@ void Physics::SetPhysFixationPointXY(Double g_x, Double g_y, Double dx,
       // And don't forget to recompute the angle, too!
       V.x = fix_point_x - g_x ;
       V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
+      m_rope_angle.x0 = HALF_PI - V.ComputeAngle() ;
 
       m_rope_angle.x1 = m_rope_angle.x1 * old_length / m_rope_length.x0 ;
     }
@@ -197,7 +197,7 @@ void Physics::SetPhysFixationPointXY(Double g_x, Double g_y, Double dx,
       // Compute the initial angle
       V.x = fix_point_x - g_x ;
       V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
+      m_rope_angle.x0 = HALF_PI - V.ComputeAngle() ;
 
       // Convert the linear speed to angular speed.
       m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
@@ -480,9 +480,9 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
       // Compute rebound angle.
       /* if no tangent rebound in the opposit direction */
       if(isNaN(contact_angle))
-        angle = angle + M_PI ;
+        angle = angle + PI ;
       else
-        angle =  M_PI - angle -2.0 *  contact_angle;
+        angle =  PI - angle -2.0 *  contact_angle;
 
       // Apply rebound factor to the object speed.
       norme = norme * m_rebound_factor;
@@ -509,13 +509,13 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
       V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
       V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
 
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
+      m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
       // Convert the linear speed of the rebound to angular speed.
       V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
       V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
 
-      angle = angle + M_PI;
+      angle = angle + PI;
 
       m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
                          norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;

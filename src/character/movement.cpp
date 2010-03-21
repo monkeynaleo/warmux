@@ -95,7 +95,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
       if (tmp_alpha < 0.0 || tmp_alpha > 1.0)
 	tmp_alpha = 1.0;
 
-      mvt.SetAngle(angle_deg * M_PI / 180);
+      mvt.SetAngle(angle_deg * PI / 180);
       mvt.pos.x = dx;
       mvt.pos.y = dy;
       mvt.alpha = tmp_alpha;

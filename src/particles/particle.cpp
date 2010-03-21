@@ -93,14 +93,14 @@ void Particle::Refresh()
     //after the 1st quarter, decrease the alpha value
     if((Double)lived_time<m_initial_time_to_live/2.0)
     {
-      Double coeff = sin((M_PI/2.0)*((Double)lived_time/((Double)m_initial_time_to_live/2.0)));
+      Double coeff = sin((PI/2.0)*((Double)lived_time/((Double)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);
       SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
     {
-      Double alpha = 1.0 - sin((M_PI/2.0)*((Double)lived_time-((Double)m_initial_time_to_live/2.0))/((Double)m_initial_time_to_live/2.0));
+      Double alpha = 1.0 - sin((PI/2.0)*((Double)lived_time-((Double)m_initial_time_to_live/2.0))/((Double)m_initial_time_to_live/2.0));
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
@@ -294,7 +294,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
 
   for(uint i=0; i < little_partic_nbr ; i++)
   {
-//      angle = (Double) i * M_PI * 2.0 / (Double) little_partic_nbr;
+//      angle = (Double) i * PI * 2.0 / (Double) little_partic_nbr;
       size = radius *2;
       norme = 2.5 * radius / 3.0;
 
@@ -327,7 +327,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
   {
-//      angle = (Double) i * M_PI * 4.0 / (Double)big_partic_nbr;
+//      angle = (Double) i * PI * 4.0 / (Double)big_partic_nbr;
       size = radius;
       norme = radius / 3.0;
 

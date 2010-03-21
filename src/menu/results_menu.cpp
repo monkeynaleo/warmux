@@ -325,7 +325,7 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   //DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
   surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Time"), black_color),
                Point2i(graph_x+graph_w/2, y+graph_h+8));
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(M_PI/2, 1.0, 1.0, false),
+  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(PI/2, 1.0, 1.0, false),
                Point2i(x+4, graph_h/2));
   char buffer[16];
   snprintf(buffer, 16, "%.1f", max_duration/1000.0);

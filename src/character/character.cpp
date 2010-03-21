@@ -571,7 +571,7 @@ void Character::Refresh()
     if (GetDirection() == DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     particle_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
-                              - M_PI_2 - (Double)GetDirection() * M_PI_4, 20.0);
+                              - HALF_PI - (Double)GetDirection() * QUARTER_PI, 20.0);
   }
 
   if (IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
@@ -615,7 +615,7 @@ void Character::Refresh()
        sin(GameMode::GetInstance()->character.back_jump_angle);
 
     Point2d speed = GetSpeedXY();
-    rotation = M_PI * speed.y / speed_init;
+    rotation = PI * speed.y / speed_init;
     body->SetRotation(rotation);
   }
 
@@ -840,10 +840,10 @@ Double Character::GetFiringAngle() const {
 
 #include <iostream>
 void Character::SetFiringAngle(Double angle) {
-  /*while(angle > 2 * M_PI)
-    angle -= 2 * M_PI;
-  while(angle <= -2 * M_PI)
-    angle += 2 * M_PI;*/
+  /*while(angle > 2 * PI)
+    angle -= 2 * PI;
+  while(angle <= -2 * PI)
+    angle += 2 * PI;*/
   angle = InRange_Double(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
                              -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;

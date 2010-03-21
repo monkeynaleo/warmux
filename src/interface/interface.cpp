@@ -217,7 +217,7 @@ void Interface::DrawWeaponInfo() const
   } else {
     weapon = weapon_under_cursor;
     nbr_munition = ActiveTeam().ReadNbAmmos(weapon_under_cursor->GetType());
-    icon_scale_factor = cos((Double)Time::GetInstance()->Read() / 1000 * M_PI) * 0.9;
+    icon_scale_factor = cos((Double)Time::GetInstance()->Read() / 1000 * PI) * 0.9;
   }
 
   std::string tmp;

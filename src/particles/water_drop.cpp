@@ -60,7 +60,7 @@ void WaterParticle::Refresh()
   }
 
   Double angle = GetSpeedAngle();
-  image->SetRotation_rad((angle - M_PI_2));
+  image->SetRotation_rad((angle - HALF_PI));
 
   m_last_refresh = now;
 }

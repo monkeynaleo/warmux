@@ -101,7 +101,7 @@ void FootBomb::Refresh()
   {
     Double flying_time = (Double) GetMSSinceTimeoutStart();
     const Double rotations_per_second = 4;
-    image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
+    image->SetRotation_rad( rotations_per_second * 2 * PI * flying_time / 1000.0f );
   }
 }
 
@@ -121,11 +121,11 @@ void FootBomb::DoExplosion()
   const uint fragments = static_cast<FootBombConfig &>(cfg).nb_fragments;
   FootBomb * cluster;
 
-  Double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * M_PI / 180;
+  Double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * PI / 180;
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i )
   {
-    Double angle = -M_PI / 2; // this angle is "upwards" here
+    Double angle = -PI / 2; // this angle is "upwards" here
     Double cluster_deviation = RandomSync().GetDouble( -half_angle_range, half_angle_range );
     Double speed = RandomSync().GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
         static_cast<FootBombConfig &>(cfg).nb_max_speed );

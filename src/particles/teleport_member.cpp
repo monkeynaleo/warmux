@@ -47,9 +47,9 @@ TeleportMemberParticle::TeleportMemberParticle(const Sprite& spr, const Point2i&
   time = Time::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "TeleportMemberParticle::TeleportMemberParticle(...)");
-  sin_x_max = RandomSync().GetDouble(M_PI_4, 3.0 * M_PI_4);
+  sin_x_max = RandomSync().GetDouble(QUARTER_PI, 3.0 * QUARTER_PI);
   MSG_DEBUG("random.get", "TeleportMemberParticle::TeleportMemberParticle(...)");
-  sin_y_max = RandomSync().GetDouble(M_PI_4, 3.0 * M_PI_4);
+  sin_y_max = RandomSync().GetDouble(QUARTER_PI, 3.0 * QUARTER_PI);
 
   Camera::GetInstance()->FollowObject(this);
 }

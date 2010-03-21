@@ -79,7 +79,7 @@ bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 
 void FlameThrowerBullet::RandomizeShoot(Double &angle, Double &/*strength*/)
 {
-  angle += M_PI * RandomSync().GetDouble(-FLAMETHROWER_RANDOM_ANGLE, FLAMETHROWER_RANDOM_ANGLE);
+  angle += PI * RandomSync().GetDouble(-FLAMETHROWER_RANDOM_ANGLE, FLAMETHROWER_RANDOM_ANGLE);
 }
 
 void FlameThrowerBullet::ShootSound()
@@ -158,8 +158,8 @@ bool FlameThrower::p_Shoot()
 
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
-  Double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
-               * (Double)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  Double angle =  - HALF_PI - ActiveCharacter().GetDirection()
+               * (Double)(Time::GetInstance()->Read() % 100) * QUARTER_PI / 100.0;
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,
                   5.0 + (Time::GetInstance()->Read() % 6));
   announce_missed_shots = false;
