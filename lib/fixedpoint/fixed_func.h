@@ -57,7 +57,7 @@ namespace fixedpoint {
 // Perform a fixed point multiplication without a 64-bit intermediate result.
 // This is fast but beware of overflow!
 template <int p> 
-inline int32_t fixmulf(int32_t a, int32_t b)
+inline int64_t fixmulf(int64_t a, int64_t b)
 {
 	return (a * b) >> p;
 }
@@ -65,17 +65,17 @@ inline int32_t fixmulf(int32_t a, int32_t b)
 // Perform a fixed point multiplication using a 64-bit intermediate result to
 // prevent overflow problems.
 template <int p>
-inline int32_t fixmul(int32_t a, int32_t b)
+inline int64_t fixmul(int64_t a, int64_t b)
 {
-	return (int32_t)(((int64_t)a * b) >> p);
+	return ((a * b) >> p);
 }
 
 // Fixed point division
 template <int p>
-inline int fixdiv(int32_t a, int32_t b)
+inline int fixdiv(int64_t a, int64_t b)
 {
-#if 0
-	return (int32_t)((((int64_t)a) << p) / b);
+#if 1
+	return ((a << p) / b);
 #else	
 	// The following produces the same results as the above but gcc 4.0.3 
 	// generates fewer instructions (at least on the ARM processor).
@@ -128,6 +128,12 @@ namespace detail {
 
 // q is the precision of the input
 // output has 32-q bits of fraction
+template <int p>
+inline int64_t fixinv(int64_t a)
+{
+	return fixdiv<p>(1 << p, a);
+}
+/* TODO fast 64 bit version of:
 template <int q>
 inline int fixinv(int32_t a)
 {
@@ -153,37 +159,38 @@ inline int fixinv(int32_t a)
 	else
 		x <<= exp;
 
-	/* two iterations of newton-raphson  x = x(2-ax) */
+	// two iterations of newton-raphson  x = x(2-ax) 
 	x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
 	x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
 
-	if (sign)
+	if (sign)fix2float
 		return -x;
 	else
 		return x;
 }
+*/
 
 // Conversion from and to float
 
 template <int p>
-float fix2float(int32_t f)
+float fix2float(int64_t f)
 {
 	return (float)f / (1 << p);
 }
 
 template <int p>
-int32_t float2fix(float f)
+int64_t float2fix(float f)
 {
-	return (int32_t)(f * (1 << p));
+	return (int64_t)(f * (1 << p));
 }
 
-int32_t fixcos16(int32_t a);
-int32_t fixsin16(int32_t a);
-int32_t fixacos16(int32_t a);
-int32_t fixasin16(int32_t a);
-int32_t fixatan16(int32_t a);
-int32_t fixrsqrt16(int32_t a);
-int32_t fixsqrt16(int32_t a);
+int64_t fixcos16(int64_t a);
+int64_t fixsin16(int64_t a);
+int64_t fixacos16(int64_t a);
+int64_t fixasin16(int64_t a);
+int64_t fixatan16(int64_t a);
+int64_t fixrsqrt16(int64_t a);
+int64_t fixsqrt16(int64_t a);
 
 } // end namespace fixedpoint
 
