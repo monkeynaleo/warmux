@@ -50,7 +50,7 @@ const char* BasicClock::DateStr()
 
 const char* BasicClock::UpTimeStr()
 {
-  Double d = difftime(time(NULL), start_time);
+  double d = difftime(time(NULL), start_time);
 
   unsigned long t = (unsigned long) d;
   unsigned short sec, min, hr, day;

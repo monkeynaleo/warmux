@@ -51,7 +51,7 @@ void BulletParticle::Refresh()
   if(start_to_fade > 0) {
     m_left_time_to_live = start_to_fade + BULLET_PARTICLE_FADE_TIME - current_time;
     m_left_time_to_live = (m_left_time_to_live > 0 ? m_left_time_to_live : 0);
-    image->SetAlpha(1.0 - ((Double)(current_time - start_to_fade)) / BULLET_PARTICLE_FADE_TIME);
+    image->SetAlpha(ONE - ((Double)(current_time - start_to_fade)) / BULLET_PARTICLE_FADE_TIME);
   } else {
     // FIXME this is still a ugly hack
     image->SetRotation_rad((Time::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ );

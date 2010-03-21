@@ -28,16 +28,16 @@ const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 
 Polygon * PolygonGenerator::GenerateCircle(Double diameter, int nb_point)
 {
-  return PolygonGenerator::GenerateDentedCircle(diameter, nb_point, 0.0);
+  return PolygonGenerator::GenerateDentedCircle(diameter, nb_point, ZERO);
 }
 
 Polygon * PolygonGenerator::GenerateRectangle(Double width, Double height)
 {
   Polygon * tmp = new Polygon();
-  tmp->AddPoint(Point2d( width / 2.0,  height / 2.0));
-  tmp->AddPoint(Point2d( width / 2.0, -height / 2.0));
-  tmp->AddPoint(Point2d(-width / 2.0, -height / 2.0));
-  tmp->AddPoint(Point2d(-width / 2.0,  height / 2.0));
+  tmp->AddPoint(Point2d( width / TWO,  height / TWO));
+  tmp->AddPoint(Point2d( width / TWO, -height / TWO));
+  tmp->AddPoint(Point2d(-width / TWO, -height / TWO));
+  tmp->AddPoint(Point2d(-width / TWO,  height / TWO));
   return tmp;
 }
 
@@ -69,8 +69,8 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
   AffineTransform2D trans = AffineTransform2D();
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
-    top = Point2d(0.0, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) / 2.0);
-    trans.SetRotation((2.0 * PI * -i) / nb_point);
+    top = Point2d(ZERO, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) / TWO);
+    trans.SetRotation((TWO * PI * -i) / nb_point);
     tmp->AddPoint(trans * top);
   }
   return tmp;
@@ -79,7 +79,7 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
 Polygon * PolygonGenerator::GenerateRoundedRectangle(Double width, Double height, Double edge)
 {
   Polygon * tmp = new Polygon();
-  Double edge_vector = edge / 2.0;
+  Double edge_vector = edge / TWO;
   tmp->AddBezierCurve(Point2d(-width / 2 + edge, -height / 2),
                       Point2d(-edge_vector, 0),
                       Point2d(0, -edge_vector),
@@ -116,31 +116,31 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const Double width, const Doub
   // XXX Unused !?
   // int number_of_upper_point;
   Polygon * tmp = new Polygon();
-  number_of_side_point = 1 + (int)RandomSync().GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
+  number_of_side_point = 1 + (int)RandomSync().GetDouble((height / FOUR) / MIN_SPACE_BETWEEN_POINT,
                                      height / MIN_SPACE_BETWEEN_POINT);
-  if(coef > 0.0) {
+  if(coef > ZERO) {
     upper_width = width;
     lower_width = width * coef;
-    upper_offset = RandomSync().GetDouble(0.0, width - lower_width);
-    lower_offset = 0.0;
+    upper_offset = RandomSync().GetDouble(ZERO, width - lower_width);
+    lower_offset = ZERO;
   } else {
     upper_width = - width * coef;
     lower_width = width;
-    upper_offset = 0.0;
-    lower_offset = RandomSync().GetDouble(0.0, width - upper_width);
+    upper_offset = ZERO;
+    lower_offset = RandomSync().GetDouble(ZERO, width - upper_width);
   }
   // XXX Unused !?
   //number_of_upper_point = RandomSync().GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
   //                                       (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
-  number_of_bottom_point = RandomSync().GetInt(1 + (int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+  number_of_bottom_point = RandomSync().GetInt(1 + (int)((lower_width / FOUR) / MIN_SPACE_BETWEEN_POINT),
                                           (int)((coef * lower_width) / MIN_SPACE_BETWEEN_POINT));
-  tmp->AddRandomCurve(Point2d(upper_offset, 0.0), Point2d(lower_offset, height),
+  tmp->AddRandomCurve(Point2d(upper_offset, ZERO), Point2d(lower_offset, height),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
   tmp->AddRandomCurve(Point2d(lower_offset, height), Point2d(lower_offset + lower_width, height),
                       x_rand_offset, y_rand_offset, number_of_bottom_point, false, false);
-  tmp->AddRandomCurve(Point2d(lower_offset + lower_width, height), Point2d(upper_offset + upper_width, 0.0),
+  tmp->AddRandomCurve(Point2d(lower_offset + lower_width, height), Point2d(upper_offset + upper_width, ZERO),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
-  tmp->AddRandomCurve(Point2d(upper_offset + upper_width, 0.0), Point2d(upper_offset, 0.0),
+  tmp->AddRandomCurve(Point2d(upper_offset + upper_width, ZERO), Point2d(upper_offset, ZERO),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);
   return tmp;
 }
@@ -151,12 +151,12 @@ Polygon * PolygonGenerator::GeneratePie(Double diameter, int nb_point, Double an
   AffineTransform2D trans = AffineTransform2D();
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
-    top = Point2d(0.0, diameter / 2.0);
+    top = Point2d(ZERO, diameter / TWO);
     trans.SetRotation(angle_offset + ((i * angle) / nb_point));
     tmp->AddPoint(trans * top);
   }
   if(angle < 2 * PI)
-    tmp->AddPoint(Point2d(0.0, 0.0));
+    tmp->AddPoint(Point2d(ZERO, ZERO));
   return tmp;
 }
 
@@ -169,12 +169,12 @@ Polygon * PolygonGenerator::GeneratePartialTorus(Double diameter, Double min_dia
   }
   Polygon * tmp = new Polygon();
   AffineTransform2D trans = AffineTransform2D();
-  Point2d top = Point2d(0.0, diameter / 2.0);
+  Point2d top = Point2d(ZERO, diameter / TWO);
   for(int i = 0; i < nb_point; i++) {
     trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
     tmp->AddPoint(trans * top);
   }
-  top = Point2d(0.0, min_diameter / 2.0);
+  top = Point2d(ZERO, min_diameter / TWO);
   for(int i = nb_point - 1; i >= 0; i--) {
     trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
     tmp->AddPoint(trans * top);

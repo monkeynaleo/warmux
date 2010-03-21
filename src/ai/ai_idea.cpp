@@ -42,6 +42,10 @@ const Double MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
 const Double MIN_GROUND_BONUS = 0.1;
 const Double MAX_GROUND_BONUS = 1.0;
 const Double GROUND_BONUS_RANGE = 2000.0;
+// At the time this code has been written the
+// bazooka did about 30-60 additional damage at 2500 force
+const Double MIN_DAMAGE_PER_FORCE_UNIT = 30.0/2500.0;
+const Double MAX_DAMAGE_PER_FORCE_UNIT = 60.0/2500.0;
 
 bool AIIdea::CanUseWeapon(Weapon * weapon)
 {
@@ -82,7 +86,7 @@ Double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character &
 {
   Double min_rating = RateDamageDoneToEnemy(min_damage, enemy);
   Double max_rating = RateDamageDoneToEnemy(max_damage, enemy);
-  return (min_rating + max_rating) / 2.0;
+  return (min_rating + max_rating) / 2;
 }
 
 
@@ -104,16 +108,15 @@ Double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     Double distance = position.Distance(character->GetCenter());
     distance += expected_additional_distance;
-    if(distance < 1.0)
-      distance = 1.0;
-    int min_damage = GetDamageFromExplosion(config, distance);
-    int max_damage = min_damage;
-    if (distance <= config.blast_range) {
+    Double min_distance = 1.0;
+    if(distance < min_distance)
+      distance = min_distance;
+    Double min_damage = GetDamageFromExplosion(config, distance);
+    Double max_damage = min_damage;
+    if (distance <= (int)config.blast_range) {
       Double force = GetForceFromExplosion(config, distance);
-      // At the time this code has been written the
-      // bazooka did about 30-60 additional damage at 2500 force
-      min_damage += 30.0/2500.0 * force;
-      max_damage += 60.0/2500.0 * force;
+      min_damage += MIN_DAMAGE_PER_FORCE_UNIT * force;
+      max_damage += MAX_DAMAGE_PER_FORCE_UNIT * force;
     }
     bool is_friend = shooter.GetTeamIndex() == character->GetTeamIndex();
     if (is_friend) {
@@ -340,7 +343,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   const Point2d pos_t = enemy.GetCenter();
   Double t = duration;
   // Calculate v_0 using "pos_t = 1/2 * a_x * t*t + v_0*t + pos_0":
-  Point2d v_0 = (pos_t - pos_0)/t - 0.5*a * t;
+  Point2d v_0 = (pos_t - pos_0)/t - a/2 * t;
 
   Double strength = v_0.Norm() / PIXEL_PER_METER;
   Double angle = v_0.ComputeAngle();

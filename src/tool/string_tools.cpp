@@ -65,10 +65,10 @@ bool str2bool(const std::string &str, bool &value)
   return false;
 }
 
-std::string Double2str (Double x)
+std::string Double2str (Double x, int places)
 {
   std::ostringstream ss;
-  ss << x;
+  printTo(ss, x, places);
   return ss.str();
 }
 

@@ -106,8 +106,8 @@ void RPG::Refresh()
   m_lastrefresh = time;
   if (!m_targeted)
   {
-    // rocket is turning around herself
-    angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
+    // rocket is turning around herself    
+    angle_local += acfg.uncontrolled_turn_speed * timestep / ((Double)1000);
     if(angle_local > PI) angle_local = -PI;
 
     // TPS_AV_ATTIRANCE msec later being launched, the rocket is homing to the target
@@ -126,14 +126,14 @@ void RPG::Refresh()
   {
     SetExternForce(m_force, angle_local+HALF_PI); // reverse the force applyed on the last Refresh()
 
-    if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
+    if(flying_time - GetTotalTimeout() < acfg.fuel_time* (Double)1000) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
       Double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
-      Double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
-      Double diff = fmod(wish_angle-angle_local, PI*2);
-      if(diff < -PI) diff += PI*2;
-      if(diff > PI) diff -= PI*2;
+      Double max_rotation = abs(acfg.max_controlled_turn_speed * timestep / (Double)1000);
+      Double diff = fmod(wish_angle-angle_local, PI*TWO);
+      if(diff < -PI) diff += PI*TWO;
+      if(diff > PI) diff -= PI*TWO;
       //diff should now be between -PI and PI...
       if(diff > max_rotation) {
         angle_local += max_rotation;
@@ -142,14 +142,14 @@ void RPG::Refresh()
       } else {
         angle_local = wish_angle;
       }
-      m_force = acfg.rocket_force * ((acfg.fuel_time*1300. - flying_time + GetTotalTimeout())/acfg.fuel_time/1300.);
-      SetGravityFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase gravity
-      SetWindFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase wind
+      m_force = acfg.rocket_force * ((acfg.fuel_time* ((Double)1300) - flying_time + GetTotalTimeout())/acfg.fuel_time/(Double)1300);
+      SetGravityFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/(Double)1000); // slowly increase gravity
+      SetWindFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/(Double)1000); // slowly increase wind
     } else {
       SetGravityFactor(1);
       m_force = 0; //if there's no fuel left just let it crash into the ground somewhere
       if(!IsDrowned()) {
-        angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
+        angle_local += acfg.uncontrolled_turn_speed * timestep / (Double)1000;
         if(angle_local > PI) angle_local = - PI;
       } else {
         angle_local = HALF_PI;

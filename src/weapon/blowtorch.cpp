@@ -82,7 +82,7 @@ bool Blowtorch::p_Shoot()
   Double char_height = ActiveCharacter().GetHeight();
   Double char_width = ActiveCharacter().GetWidth();
   Double size = sqrt(char_height * char_height + char_width * char_width)/2;
-  GetWorld().Dig(pos, size);
+  GetWorld().Dig(pos, (int)size);
   JukeBox::GetInstance()->Play("default", "weapon/blowtorch");
 
   return true;

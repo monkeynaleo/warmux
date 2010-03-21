@@ -36,7 +36,7 @@
 class SlapConfig : public WeaponConfig
 {
   public:
-    uint range;
+    Double range;
     uint damage;
     uint strength;
     SlapConfig();
@@ -55,7 +55,7 @@ SlapConfig::SlapConfig(){
 
 void SlapConfig::LoadXml(const xmlNode* elem){
   WeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "range", range);
+  XmlReader::ReadDouble(elem, "range", range);
   XmlReader::ReadUint(elem, "damage", damage);
   XmlReader::ReadUint(elem, "strength", strength);
 }
@@ -91,7 +91,7 @@ bool Slap::p_Shoot (){
   do
   {
     // Did we finish the computation?
-    radius += 1.0;
+    radius += ONE;
     if (cfg().range < radius)
     {
       radius = cfg().range;

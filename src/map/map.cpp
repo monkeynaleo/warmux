@@ -388,7 +388,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
     {
       if ( trace_flags & COMPUTE_HIT )
       {
-        tr.m_fraction = 1.0f - ( length / diff.Norm() );
+        tr.m_fraction = ONE - ( length / diff.Norm() );
 
         if ( trace_flags & RETURN_LAST_IN_VACUUM_AS_HIT )
         {
@@ -415,7 +415,7 @@ bool Map::TraceRay(const Point2i &start, const Point2i & end, TraceResult & tr, 
     // which was in the original find_first_contact function in Grapple
     new_point.x = ( int )round( iterated_point.x );
     new_point.y = ( int )round( iterated_point.y );
-    length--;
+    length -= 1;
   }
 
   return false;

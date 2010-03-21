@@ -140,13 +140,15 @@ void SnipeRifle::ComputeCrossPoint(bool force = false)
   uint distance = 0;
   targeting_something = false;
   // While test is not finished
-  while( distance < SNIPE_RIFLE_MAX_BEAM_SIZE ){
+  Double PI_3_div_4 = PI * THREE / FOUR;
+  Double PI_div_4 = PI / FOUR;
+  while( distance < SNIPE_RIFLE_MAX_BEAM_SIZE ){    
     // going upwards ( -3pi/4 < angle <-pi/4 )
-    if (angle < -0.78 && angle > -2.36){
+    if (angle < -PI_div_4 && angle > -PI_3_div_4){
       pos.x = (int)((pos.y-b)/a);       //Calculate x
       delta_pos.y = -1;                   //Increment y
     // going downwards ( 3pi/4 > angle > pi/4 )
-    } else if (angle > 0.78 && angle < 2.36){
+    } else if (angle > PI_div_4 && angle < PI_3_div_4){
       pos.x = (int)((pos.y-b)/a);       //Calculate x
       delta_pos.y = 1;                    //Increment y
     // else going at right or left
@@ -207,7 +209,7 @@ void SnipeRifle::DrawBeam()
   {
     // Double to int conversion...
     Point2i pos_i((int)pos.x, (int)pos.y);
-    if(delta.x < 0.0)
+    if(delta.x < ZERO)
     {
       pos_i.x -= delta_i.x;
       pos_i.x += 3;
@@ -215,7 +217,7 @@ void SnipeRifle::DrawBeam()
     else
       pos_i.x -= 3;
 
-    if(delta.y < 0.0)
+    if(delta.y < ZERO)
     {
       pos_i.y -= delta_i.y;
       pos_i.y += 3;

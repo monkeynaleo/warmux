@@ -108,7 +108,7 @@ void Gnu::Refresh()
     //Do the jump
     norm = RandomSync().GetDouble(2.0, 5.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norm , - norm * 3.0));
+    SetSpeedXY(Point2d(m_sens * norm , - norm * THREE));
     JukeBox::GetInstance()->Play("default", "weapon/gnu_bounce");
   }
 
@@ -121,17 +121,17 @@ void Gnu::Refresh()
   while(angle > PI)
     angle -= PI;
 
-  angle /= 2.0;
+  angle /= TWO;
   if(m_sens == -1)
   {
-    if(angle > 0)
+    if(angle > ZERO)
       angle -= HALF_PI;
     else
       angle += HALF_PI;
   }
 
-  if(angle > 4 * PI)
-    angle = 0;
+  if(angle > FOUR * PI)
+    angle = ZERO;
 
   image->SetRotation_rad(angle);
   image->Scale((Double)m_sens,1.0);

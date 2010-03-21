@@ -144,7 +144,7 @@ void Polecat::Refresh()
     //Do the jump
     norm = RandomSync().GetDouble(1.0, 2.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norm , -norm * 3.0));
+    SetSpeedXY(Point2d(m_sens * norm , -norm * THREE));
   }
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
@@ -155,7 +155,7 @@ void Polecat::Refresh()
   while(angle > PI)
     angle -= PI;
 
-  angle /= 2.0;
+  angle /= TWO;
   if(m_sens == -1) {
     if(angle > 0)
       angle -= HALF_PI;

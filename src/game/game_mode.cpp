@@ -137,24 +137,24 @@ bool GameMode::LoadXml(const xmlNode* xml)
     XmlReader::ReadDouble(character_xml, "air_resist_factor", character.air_resist_factor);
     item = XmlReader::GetMarker(character_xml, "jump");
     if (item != NULL) {
-      int angle_deg;
-      XmlReader::ReadUintAttr(item, "strength", character.jump_strength);
-      XmlReader::ReadIntAttr(item, "angle", angle_deg);
+      Double angle_deg;
+      XmlReader::ReadDoubleAttr(item, "strength", character.jump_strength);
+      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
       character.jump_angle = static_cast<Double>(angle_deg) * PI / 180;
     }
 
     item = XmlReader::GetMarker(character_xml, "super_jump");
     if (item != NULL) {
-      int angle_deg;
-      XmlReader::ReadUintAttr(item, "strength", character.super_jump_strength);
-      XmlReader::ReadIntAttr(item, "angle", angle_deg);
+      Double angle_deg;
+      XmlReader::ReadDoubleAttr(item, "strength", character.super_jump_strength);
+      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
       character.super_jump_angle = static_cast<Double>(angle_deg) * PI / 180;
     }
     item = XmlReader::GetMarker(character_xml, "back_jump");
     if (item != NULL) {
-      int angle_deg;
-      XmlReader::ReadUintAttr(item, "strength", character.back_jump_strength);
-      XmlReader::ReadIntAttr(item, "angle", angle_deg);
+      Double angle_deg;
+      XmlReader::ReadDoubleAttr(item, "strength", character.back_jump_strength);
+      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
       character.back_jump_angle = static_cast<Double>(angle_deg) * PI / 180;
     }
     XmlReader::ReadUint(character_xml, "walking_pause", character.walking_pause);

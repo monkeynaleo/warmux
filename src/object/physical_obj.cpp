@@ -41,6 +41,7 @@
 #include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
+#include "tool/string_tools.h"
 #include <WORMUX_point.h>
 #include <WORMUX_random.h>
 #include <WORMUX_rectangle.h>
@@ -219,8 +220,11 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   // Compute distance between old and new position.
   Double lg = oldPos.Distance( newPos);
 
-  MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), distance: %f",
-            typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y, lg);
+  MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), distance: %s",
+            typeid(*this).name(), 
+            Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+            Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
+            Double2str(lg).c_str());
 
   if (lg == 0)
     return NO_COLLISION;
@@ -234,8 +238,10 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   if (!m_collides_with_ground || IsInWater())
   {
-    MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f), collides ground:%d, water:%d",
-              typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
+    MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), collides ground:%d, water:%d",
+              typeid(*this).name(), 
+              Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+              Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
               m_collides_with_ground, IsInWater());
 
     SetXY(newPos);
@@ -244,7 +250,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   do
   {
-    Point2i tmpPos( lround(pos.x), lround(pos.y) );
+    Point2i tmpPos(round(pos.x), round(pos.y) );
 
     // Check if we exit the GetWorld(). If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
@@ -260,7 +266,9 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       SetXY( pos );
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
-                typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
+                typeid(*this).name(), 
+                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+                Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str());
       return NO_COLLISION;
     }
 
@@ -286,7 +294,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // Next motion step
     pos += offset;
     lg -= 1.0 ;
-  } while (0 < lg);
+  } while (ZERO < lg);
 
   Point2d speed_before_collision = GetSpeed();
   Point2d speed_collided_obj;
@@ -361,7 +369,8 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
   }
 
   // Make it rebound!!
-  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %d,%d", m_name.c_str(), contactPos.x, contactPos.y);
+  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %s,%s", m_name.c_str(), 
+            Double2str(contactPos.x).c_str(), Double2str(contactPos.y).c_str());
 
   Rebound(contactPos, contactAngle);
   CheckRebound();
@@ -695,7 +704,7 @@ bool PhysicalObj::IsInWater () const
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-    SetY(GetYDouble()+1.0);
+    SetY(GetYDouble()+ONE);
 }
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
