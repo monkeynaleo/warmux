@@ -24,12 +24,12 @@
 
 #include "include/base.h"
 #include "gui/widget.h"
-#include "graphic/text.h"
 #include <string>
 
 class Sprite;
+class Text;
 
-class CheckBox : public Text, public Widget
+class CheckBox : public Widget
 {
   /* If you need this, implement it (correctly)*/
  CheckBox(const CheckBox&);
@@ -38,19 +38,18 @@ class CheckBox : public Text, public Widget
  void Init(uint width);
 
  protected:
+  Text *txt_label;
   bool m_value;
-  Sprite * m_checked_image;
+  Sprite *m_checked_image;
 
  public:
-  CheckBox(const std::string & label, 
-           uint width, 
-           bool value = true);
+  CheckBox(const std::string &label, uint width, bool value = true);
+  CheckBox(Text* text, uint width, bool value = true);
   ~CheckBox();
 
-  virtual void Draw(const Point2i & mousePosition) const;
-  virtual Widget* Click(const Point2i &, uint) { return this; };
-  virtual Widget* ClickUp(const Point2i & mousePosition, 
-                          uint button);
+  virtual void Draw(const Point2i &mousePosition) const;
+  virtual Widget* Click(const Point2i&, uint) { return this; };
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   virtual void Pack();
 
   bool GetValue() const { return m_value; };

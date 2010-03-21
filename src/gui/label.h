@@ -27,12 +27,14 @@
 #include "graphic/text.h"
 #include <string>
 
-class Label : public Text, public Widget
+class Label : public Widget
 {
   /* If you need this, implement it (correctly)*/
   Label(const Label&);
   Label operator=(const Label&);
   /*********************************************/
+ protected:
+  Text * textEngine;
 
  private:
   bool center;
@@ -56,9 +58,23 @@ class Label : public Text, public Widget
 
   virtual bool LoadXMLConfiguration(void);
   virtual void Draw(const Point2i & mousePosition) const;
+  void DrawCursor(const Point2i & text_pos,
+                  std::string::size_type cursor_pos) const;
   virtual void Pack();
 
+  // SETTER
   void SetText(const std::string & new_txt);
+  void SetFont(const Color & fontColor,
+               const Font::font_size_t fontSize,
+               const Font::font_style_t fontStyle,
+               bool fontShadowed,
+               const Color & shadowColor = black_color);
+
+  // GETTER
+  const std::string & GetText() { return textEngine->GetText(); };
+  Text * GetTextEngine() const { return textEngine; };
+  Font::font_size_t GetFontSize() const { return textEngine->GetFontSize(); };
+  Font::font_style_t GetFontStyle() const { return textEngine->GetFontStyle(); };
 };
 
 #endif

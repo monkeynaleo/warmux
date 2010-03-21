@@ -27,13 +27,16 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string & label, 
-                   uint width, 
-                   bool value):
-  Text(label, 
-       white_color, 
-       Font::FONT_SMALL, 
-       Font::FONT_BOLD),
+CheckBox::CheckBox(const std::string& label, uint width, bool value):
+  txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_BOLD)),
+  m_value(value),
+  m_checked_image(NULL)
+{
+  Init(width);
+}
+
+CheckBox::CheckBox(Text *text, uint width, bool value):
+  txt_label(text),
   m_value(value),
   m_checked_image(NULL)
 {
@@ -42,26 +45,27 @@ CheckBox::CheckBox(const std::string & label,
 
 void CheckBox::Init(uint width)
 {
-  Profile * res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
-  GetResourceManager().UnLoadXMLProfile(res);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  m_checked_image = GetResourceManager().LoadSprite( res, "menu/check");
+  GetResourceManager().UnLoadXMLProfile( res);
 
   m_checked_image->cache.EnableLastFrameCache();
 
   position = Point2i(W_UNDEF, W_UNDEF);
   size.x = width;
-  size.y = Text::GetHeight();
+  size.y = txt_label->GetHeight();
 }
 
 CheckBox::~CheckBox()
 {
   delete m_checked_image;
+  delete txt_label;
 }
 
 void CheckBox::Pack()
 {
-  Text::SetMaxWidth(size.x - m_checked_image->GetWidth() -2);
-  size.y = std::max(uint(Text::GetHeight()),
+  txt_label->SetMaxWidth(size.x - m_checked_image->GetWidth() -2);
+  size.y = std::max(uint(txt_label->GetHeight()),
 		    m_checked_image->GetHeight());
 }
 
@@ -69,19 +73,17 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/) const
 {
   Surface& surf = GetMainWindow();
 
-  Text::DrawTopLeft(GetPosition());
+  txt_label->DrawTopLeft( GetPosition() );
 
-  if (m_value) {
+  if (m_value)
     m_checked_image->SetCurrentFrame(0);
-  } else {
+  else
     m_checked_image->SetCurrentFrame(1);
-  }
 
   m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
-Widget * CheckBox::ClickUp(const Point2i &/*mousePosition*/, 
-                           uint /*button*/)
+Widget* CheckBox::ClickUp(const Point2i &/*mousePosition*/, uint /*button*/)
 {
   NeedRedrawing();
   m_value = !m_value;

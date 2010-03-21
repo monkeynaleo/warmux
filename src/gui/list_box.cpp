@@ -315,7 +315,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
 
 const std::string& ListBoxItem::GetLabel() const
 {
-  return GetText();
+  return textEngine->GetText();
 }
 
 //-----------------------------------------------------------------------------
