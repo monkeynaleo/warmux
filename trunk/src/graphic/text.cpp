@@ -334,7 +334,7 @@ void Text::SetFont(const Color &_font_color,
   color = _font_color;
   font_size = _font_size;
   font_style = _font_style;
-  font_shadowed = _font_shadowed;
+  shadowed = _font_shadowed;
   shadowColor = _shadowColor;
 }
 
