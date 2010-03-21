@@ -13,7 +13,8 @@ wormux_server_LDFLAGS = -Wl,--as-needed
 
 AM_CXXFLAGS = -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
 	  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux-server/include \
-	-I$(top_srcdir)/lib/wormux/include
+	-I$(top_srcdir)/lib/wormux/include \
+	-I$(top_srcdir)/lib/fixedpoint
 
 LIBS += @LIBCURL@
 
