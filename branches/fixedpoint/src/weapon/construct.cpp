@@ -19,6 +19,7 @@
  * Add a structure to the ground
  *****************************************************************************/
 
+#include <WORMUX_types.h>
 #include "weapon/construct.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
@@ -46,7 +47,7 @@
 #include "include/app.h"
 #endif
 
-const Double DELTA_ANGLE = PI / 6.0; // should be a multiple
+const Double DELTA_ANGLE = PI / SIX; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
@@ -56,7 +57,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
   UpdateTranslationStrings();
 
   construct_spr = GetResourceManager().LoadSprite( weapons_res_profile, "construct_spr");
-  construct_spr->EnableRotationCache(static_cast<int>(2 * PI / DELTA_ANGLE));
+  construct_spr->EnableRotationCache(static_cast<int>(TWO * PI / DELTA_ANGLE));
   m_name = _("Construct");
   m_category = TOOL;
   m_can_change_weapon = true;

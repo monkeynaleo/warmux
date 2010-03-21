@@ -116,7 +116,7 @@ void Parachute::Refresh()
 
   ActiveCharacter().GetSpeed(speed, angle);
 
-  if(ActiveCharacter().FootsInVacuum() && speed != 0.0) { // We are falling
+  if(ActiveCharacter().FootsInVacuum() && speed != ZERO) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
       if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
         if(!m_used_this_turn)

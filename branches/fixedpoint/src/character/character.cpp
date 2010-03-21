@@ -715,7 +715,7 @@ void Character::Collision(const Point2d& speed_vector)
 
   Double norm = speed_vector.Norm();
 
-  if (norm > game_mode->safe_fall && speed_vector.y>0.0)
+  if (norm > game_mode->safe_fall && speed_vector.y > ZERO)
   {
     // TODO: take the angle of collision into account!
 
@@ -736,8 +736,11 @@ void Character::Collision(const Point2d& speed_vector)
 
 void Character::SignalGroundCollision(const Point2d& speed_before)
 {
-  MSG_DEBUG("character.collision", "%s collides on ground with speed %f, %f (norm = %f)",
-	    character_name.c_str(), speed_before.x, speed_before.y, speed_before.Norm());
+  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s)",
+            character_name.c_str(), 
+            Double2str(speed_before.x).c_str(), 
+            Double2str(speed_before.y).c_str(),
+            Double2str(speed_before.Norm()).c_str());
 
   Collision(speed_before);
 }
@@ -746,9 +749,11 @@ void Character::SignalObjectCollision(const Point2d& my_speed_before,
 				      PhysicalObj * /* obj */,
 				      const Point2d& /* obj_speed */)
 {
-  MSG_DEBUG("character.collision", "%s collides on object with speed %f, %f (norm = %f)",
-	    character_name.c_str(), my_speed_before.x, my_speed_before.y, my_speed_before.Norm());
-
+  MSG_DEBUG("character.collision", "%s collides on object with speed %s, %s (norm = %s)",
+            character_name.c_str(),
+            Double2str(my_speed_before.x).c_str(), 
+            Double2str(my_speed_before.y).c_str(),
+            Double2str(my_speed_before.Norm()).c_str());
   // In case an object collides with the character, we don't want
   // the character to have huge damage because of the speed of the object.
   // Damage should be applied when felt or when hurted by a weapon.

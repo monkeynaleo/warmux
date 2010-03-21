@@ -29,6 +29,7 @@
 #include "tool/resource_manager.h"
 #include <WORMUX_debug.h>
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 #include <sstream>
 
 Surface * RandomElementList::GetRandomElement()
@@ -194,6 +195,7 @@ void RandomMap::GenerateIsland()
 
   // +10 so it's outside the screen
   tmp->AddPoint(Point2d(-100, height + 100));
+  Double y_offset = 20.0;
 
   for (int i = 1; i < num_of_points - 1; i++) {
     current_y_pos = height - RandomSync().GetDouble(minhei, maxhei);
@@ -202,9 +204,9 @@ void RandomMap::GenerateIsland()
     if (RandomSync().GetInt(0, 5) < 1) {
       Surface * random_element = random_element_list.GetRandomElement();
       if(random_element != NULL) {
-        Point2i position((int)current_x_pos, (int)(current_y_pos + 20.0));
+        Point2i position((int)current_x_pos, (int)(current_y_pos + y_offset));
         Surface * tmp_surf = new Surface(random_element->GetSurface());
-        AddElement(tmp_surf, Point2i((int)current_x_pos, (int)(current_y_pos + 20.0)));
+        AddElement(tmp_surf, Point2i((int)current_x_pos, (int)(current_y_pos + y_offset)));
         MSG_DEBUG("ground_generator.element", "Add an element in (x = %f, y = %f)", position.GetX(), position.GetY());
       }
     }
@@ -215,7 +217,7 @@ void RandomMap::GenerateIsland()
 
   // Get bezier interpolation
   Double nb = RandomSync().GetDouble(0.0, 0.5);
-  MSG_DEBUG("ground_generator.island", "bezier interpolation: 1.0, 30, %f", nb);
+  MSG_DEBUG("ground_generator.island", "bezier interpolation: 1.0, 30, %s", Double2str(nb).c_str());
   bezier_shape = tmp->GetBezierInterpolation(1.0, 30, nb);
   delete tmp;
 

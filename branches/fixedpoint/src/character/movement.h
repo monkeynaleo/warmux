@@ -24,6 +24,7 @@
 #include <vector>
 #include "include/base.h"
 #include <WORMUX_point.h>
+#include <WORMUX_types.h>
 
 typedef struct _xmlNode xmlNode;
 
@@ -36,10 +37,10 @@ public:
   /* SetAngle take radian values */
   inline void SetAngle(Double angle)
   {
-    while(angle_rad > 2*PI)
-      angle_rad -= 2 * PI;
-    while(angle_rad <= -2*PI)
-      angle_rad += 2 * PI;
+    while(angle_rad > TWO * PI)
+      angle_rad -= TWO * PI;
+    while(angle_rad <= -TWO * PI)
+      angle_rad += TWO * PI;
     angle_rad = angle;
   }
   /* GetAngle returns radian values */

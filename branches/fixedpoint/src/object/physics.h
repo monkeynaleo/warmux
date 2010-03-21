@@ -32,6 +32,8 @@
 #include <WORMUX_point.h>
 #include "object_cfg.h"
 
+const Double MIN_FALL_SPEED = 0.1;
+
 enum MotionType_t
 {
   NoMotion,
@@ -162,7 +164,7 @@ public:
   virtual bool IsSleeping() const;
 
   // The object is falling ?
-  bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > 0.1); };
+  bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > MIN_FALL_SPEED); };
 
 protected:
   // Compute current (x,y) position

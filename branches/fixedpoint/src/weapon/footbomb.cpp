@@ -22,7 +22,7 @@
 #include "weapon/footbomb.h"
 #include "weapon/weapon_cfg.h"
 #include <sstream>
-#include <math.h>
+#include <WORMUX_types.h>
 #include "weapon/explosion.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -101,7 +101,7 @@ void FootBomb::Refresh()
   {
     Double flying_time = (Double) GetMSSinceTimeoutStart();
     const Double rotations_per_second = 4;
-    image->SetRotation_rad( rotations_per_second * 2 * PI * flying_time / 1000.0f );
+    image->SetRotation_rad( rotations_per_second * TWO * PI * flying_time / (Double)1000 );
   }
 }
 

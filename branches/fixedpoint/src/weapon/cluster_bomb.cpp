@@ -23,7 +23,7 @@
 #include "weapon/cluster_bomb.h"
 #include "weapon/weapon_cfg.h"
 #include <sstream>
-#include <math.h>
+#include <WORMUX_types.h>
 #include "weapon/explosion.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
@@ -98,7 +98,7 @@ void Cluster::Refresh()
   // make it rotate
   Double flying_time = (Double) GetMSSinceTimeoutStart();
   const Double rotations_per_second = 4;
-  image->SetRotation_rad( rotations_per_second * 2 * PI * flying_time / 1000.0f );
+  image->SetRotation_rad( rotations_per_second * TWO * PI * flying_time / (Double)1000  );
 }
 
 void Cluster::Draw()
@@ -153,12 +153,12 @@ void ClusterBomb::DoExplosion()
   const uint fragments = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
   Cluster * cluster;
 
-  const Double angle_range = PI / 2;
+  const Double angle_range = HALF_PI;
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i ) 
   {
-    Double angle = -PI / 2; // this angle is "upwards" here
-    Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / 2.0f;
+    Double angle = -HALF_PI; // this angle is "upwards" here
+    Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / TWO;
     Double speed = RandomSync().GetDouble(10, 25);
 
     cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);

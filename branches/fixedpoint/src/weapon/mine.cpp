@@ -40,6 +40,7 @@
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 // XXX Not used
 //const Double DEPART_FONCTIONNEMENT = 5;
@@ -132,8 +133,9 @@ void ObjMine::Detection()
         MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
 
       (*obj)->GetSpeed(norm, angle);
-      if (norm < speed_detection && norm > 0.0) {
-        MSG_DEBUG("mine", "norm: %d, speed_detection: %d", norm, speed_detection);
+      if (norm < speed_detection && norm > ZERO) {
+        MSG_DEBUG("mine", "norm: %s, speed_detection: %s", 
+                  Double2str(norm).c_str(), Double2str(speed_detection).c_str());
         StartTimeout();
         return;
       }
@@ -243,7 +245,7 @@ void Mine::Add(int x, int y)
   if(ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(1.0, -QUARTER_PI);
   else
-    projectile->SetSpeed(1.0, -3.0 * QUARTER_PI);
+    projectile->SetSpeed(1.0, -THREE * QUARTER_PI);
 
   ObjectsList::GetRef().AddObject (projectile);
   projectile = NULL;

@@ -21,7 +21,7 @@
 
 #include "team/team_energy.h"
 #include <sstream>
-#include <math.h>
+#include <WORMUX_types.h>
 #include "map/camera.h"
 #include "map/map.h"
 #include "game/time.h"
@@ -191,14 +191,14 @@ void TeamEnergy::Move()
 
     // displacement in arc only when losing place ranking
     if( new_rank > rank ) {
-      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
+      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * ONE_HALF *
            sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     } else {
-      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
+      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * ONE_HALF *
           sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     }
     // End of movement ?
-    if( (global_time->Read() - move_start_time) > MOVE_DURATION)
+    if( ((long)global_time->Read() - (long)move_start_time) > (long)MOVE_DURATION)
       FinalizeMove();
   } else {
     // While moving, it came back to previous place in ranking

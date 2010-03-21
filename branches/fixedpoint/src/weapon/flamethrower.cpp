@@ -159,7 +159,8 @@ bool FlameThrower::p_Shoot()
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
   Double angle =  - HALF_PI - ActiveCharacter().GetDirection()
-               * (Double)(Time::GetInstance()->Read() % 100) * QUARTER_PI / 100.0;
+               * (Double)(Time::GetInstance()->Read() % 100) * QUARTER_PI / (Double)100;
+
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,
                   5.0 + (Time::GetInstance()->Read() % 6));
   announce_missed_shots = false;

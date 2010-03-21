@@ -41,7 +41,7 @@ const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
 const Double WAVE_HEIGHT_A = 5;
 const Double WAVE_HEIGHT_B = 8;
-const Double DEGREE = static_cast<Double>(2*PI/360.0);
+const Double DEGREE = TWO*PI/static_cast<Double>(360.0);
 const int WAVE_INC = 5;
 const int WAVE_COUNT = 3;
 const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
@@ -175,9 +175,9 @@ void Water::Refresh()
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
       uint dt = now - time_raise;
-      height_mvt = GO_UP_STEP + (uint)(((Double)GO_UP_STEP *
-               sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-0.25))
-                   / GO_UP_OSCILLATION_TIME/1000.0)*2*PI)
+      height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
+               sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
+                   / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO*PI)
                )/(a*dt+b));
     } else {
       time_raise += GO_UP_TIME * 60 * 1000;

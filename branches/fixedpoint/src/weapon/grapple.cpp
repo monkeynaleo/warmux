@@ -22,7 +22,7 @@
 #include "weapon/grapple.h"
 #include "weapon/weapon_cfg.h"
 
-#include <math.h>
+#include <WORMUX_types.h>
 #include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
@@ -38,6 +38,7 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 const uint DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 80 ;  //dst_minimal between 2 nodes
@@ -229,7 +230,7 @@ bool Grapple::TryAddNode(int CurrentSense)
   V.x = handPos.x - m_fixation_point.x;
   V.y = handPos.y - m_fixation_point.y;
   angle = V.ComputeAngle();
-  lg = static_cast<uint>(V.Norm());
+  lg = static_cast<int>(V.Norm());
 
   if (lg < DST_MIN)
     return false;
@@ -240,8 +241,9 @@ bool Grapple::TryAddNode(int CurrentSense)
     {
       rope_angle = ActiveCharacter().GetRopeAngle() ;
 
+      Double min_difference = 0.1;
       if ( (last_broken_node_sense * CurrentSense > 0) &&
-           (fabs(last_broken_node_angle - rope_angle) < 0.1))
+           (abs(last_broken_node_angle - rope_angle) < min_difference))
         return false ;
 
       // if contact point is the same as position of the last node
@@ -337,7 +339,7 @@ void Grapple::NotifyMove(bool collision)
   if (collision)
     {
       // Yes there has been a collision.
-      if (delta_len != 0)
+      if (delta_len != ZERO)
         {
           // The character tryed to change the rope size.
           // There has been a collision, so we cancel the rope length change.
@@ -470,7 +472,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   root_node.sense = 0;
   rope_nodes.push_back(root_node);
 
-  ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
+  ActiveCharacter().ChangePhysRopeSize (((Double)(-10)) / PIXEL_PER_METER);
   ActiveCharacter().SetMovement("ninja-rope");
 
   ActiveCharacter().SetFiringAngle(-PI / 3);
@@ -509,7 +511,7 @@ void Grapple::AttachNode(const Point2i& contact_point,
   node.sense = sense;
   rope_nodes.push_back(node);
 
-  MSG_DEBUG("grapple.node", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+  MSG_DEBUG("grapple.node", "+ %d,%d %s %d", node.pos.x, node.pos.y, Double2str(node.angle).c_str(), node.sense);
 }
 
 void Grapple::DetachNode()
@@ -520,7 +522,7 @@ void Grapple::DetachNode()
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
-    MSG_DEBUG("grapple.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+    MSG_DEBUG("grapple.node", "- %d,%d %s %d", node.pos.x, node.pos.y, Double2str(node.angle).c_str(), node.sense);
   }
 #endif
 
@@ -746,17 +748,13 @@ void Grapple::StopShooting()
 
 void Grapple::PrintDebugRope()
 {
-  printf("%05d %05d %03.3f\n",
-         ActiveCharacter().GetX(),
-         ActiveCharacter().GetY(),
-         ActiveCharacter().GetRopeAngle());
+  std::cout << ActiveCharacter().GetX() << " " << ActiveCharacter().GetY() << " " << ActiveCharacter().GetRopeAngle() << std::endl;
 
   for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
        it != rope_nodes.end();
        it++) {
 
-    printf("%05d %05d %03.3f %d\n", it->pos.x, it->pos.y,
-           it->angle, it->sense);
+    std::cout << it->pos.x << " " << it->pos.y << " " << it->angle << " " << it->sense << std::endl;
   }
 }
 

@@ -47,8 +47,8 @@ void ObjectsList::PlaceMines()
   for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
-
-    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER *1.5 ))
+    Double detection_range_factor = 1.5;
+    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * PIXEL_PER_METER * detection_range_factor))
       // detection range is in meter
       push_back(obj);
     else

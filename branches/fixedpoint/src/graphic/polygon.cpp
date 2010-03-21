@@ -481,12 +481,13 @@ Point2d Polygon::GetRandomUpperPoint()
   int i;
   for(i = 0; i < start; i++)
     point++;
+  Double max_tmp = 0.4;
   while(point != transformed_shape.end()) {
     previous = *point++;
     i++;
     tmp = *point - previous;
     tmp = tmp / tmp.Norm();
-    if(tmp.y > 0.4)
+    if(tmp.y > max_tmp)
       return tmp;
   }
   return Point2d();
@@ -510,9 +511,9 @@ void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
   if(add_first_point)
     AddPoint(anchor1);
   for(int step = 1; step < num_steps - 1; step++) {
-    a = ((Double)step / (Double)num_steps) * 1.0;
+    a = ((Double)step / (Double)num_steps) * ONE;
     b = 1 - a;
-    AddPoint(anchor1 * b * b * b + tmp1 * 3.0 * b * b * a + tmp2 * 3.0 * b * a * a + anchor2 * a * a * a);
+    AddPoint(anchor1 * b * b * b + tmp1 * THREE * b * b * a + tmp2 * THREE * b * a * a + anchor2 * a * a * a);
   }
   if(add_last_point)
     AddPoint(anchor2);
@@ -553,9 +554,9 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
     p3 = original_shape[(index_p1 + 2) % original_shape.size()];
 
     // compute center of [p0,p1], [p1,p2] and [p2,p3]
-    c0 = p0 + ((p1 - p0) / 2.0);
-    c1 = p1 + ((p2 - p1) / 2.0);
-    c2 = p2 + ((p3 - p2) / 2.0);
+    c0 = p0 + ((p1 - p0) / TWO);
+    c1 = p1 + ((p2 - p1) / TWO);
+    c2 = p2 + ((p3 - p2) / TWO);
 
     // Distance
     l1 = p0.Distance(p1);
@@ -567,7 +568,7 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
     v2 = (c1 - c2) * (l2 / (l2 + l3)) * smooth_value;
 
     // Randomization
-    if(rand != 0.0) {
+    if(rand != ZERO) {
       MSG_DEBUG("random.get", "Polygon::GetBezierInterpolation(...)");
       trans.SetRotation(RandomSync().GetDouble(-rand, rand));
       v1 = trans * v1;
@@ -606,7 +607,8 @@ void Polygon::Expand(Double expand_value)
     // If the next point is to close to current point skip next point
     // Avoid visual artefact
     k = 0;
-    while(k < 10 && next.Distance(current) < 0.1) {
+    Double min_distance = 0.1;
+    while(k < 10 && next.Distance(current) < min_distance) {
       j = (j + 1) % original_shape.size();
       next    = original_shape[j];
       k++;
@@ -889,7 +891,8 @@ void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool sav
   Point2d new_min =  trans * original_min;
   Point2d new_max = trans * original_max;
 
-  if((round(max.x - min.x +0.5)!=round( new_max.x -new_min.x+0.5)) || (round(max.y - min.y )!=round( new_max.y -new_min.y)))
+  Double one_half = 0.5;
+  if((round(max.x - min.x +one_half)!=round( new_max.x -new_min.x+one_half)) || (round(max.y - min.y )!=round( new_max.y -new_min.y)))
   {
       delete m_border;
       m_border = NULL;

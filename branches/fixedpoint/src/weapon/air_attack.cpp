@@ -105,13 +105,13 @@ void Plane::Shoot(Double speed, const Point2i& target)
 
   cible_x = target.x;
   SetY(0);
-  distance_to_release =(int)(speed * sqrt(2.0 * (GetY() + target.y)));
+  distance_to_release =(int)(speed * sqrt(TWO * (GetY() + target.y)));
 
   image->Scale(dir, 1);
 
   if (dir == 1) {
     speed_vector.SetValues(speed, 0);
-    SetX(1.0 - Double(image->GetWidth()));
+    SetX(ONE - Double(image->GetWidth()));
     //distance_to_release -= obus_dx;
    if(distance_to_release > cible_x) distance_to_release=0;
 
@@ -140,7 +140,7 @@ void Plane::DropBomb()
   fx *= GetDirection();
   int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
 
-  speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
+  speed_vector.SetValues(speed_vector.x + fx/(Double)30.0, speed_vector.y + fy/(Double)30.0);
   instance->SetSpeedXY(speed_vector);
 
   ObjectsList::GetRef().AddObject(instance);

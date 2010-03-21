@@ -22,10 +22,7 @@
 #ifndef MATH_TOOLS_H
 #define MATH_TOOLS_H
 
-#include <math.h>
-
-// Limit under which, real numbers are considered as NULL
-#define EPS_ZERO 0.05;
+#include <WORMUX_types.h>
 
 // Template to force a value into a range.
 template <class T>
@@ -62,8 +59,8 @@ inline Double InverseAngleDeg (const Double &angle) {
 inline Double InverseAngleRad (const Double &angle) { return InverseAngle(angle); }
 
 // Absolute value
-inline Double AbsoluteValue (const Double x) { return fabs(x); }
-inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPS_ZERO; }
+inline Double AbsoluteValue (const Double x) { return x >= 0 ? x : -x; }
+inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPSILON; }
 
 #ifdef _MSC_VER
 // MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html

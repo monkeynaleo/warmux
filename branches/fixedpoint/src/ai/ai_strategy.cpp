@@ -21,7 +21,7 @@
 
 #include "ai/ai_strategy.h"
 
-const uint RATING_EPSILON = 0.00001;
+const Double RATING_EPSILON = 0.00001;
 const uint WATCH_MISSILE_TIME_IN_MS = 2000;
 
 AIStrategy::AIStrategy(Double rating):

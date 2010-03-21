@@ -34,6 +34,7 @@
 #include <WORMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
+#include "tool/string_tools.h"
 #include "include/action.h"
 
 // Physical constants
@@ -123,12 +124,12 @@ void Physics::GetSpeed(Double &norm, Double &angle) const
     case Pendulum:
       // Transform angular speed to linear speed.
 
-      norm = fabs(m_rope_length.x0 * m_rope_angle.x1);
+      norm = AbsoluteValue(m_rope_length.x0 * m_rope_angle.x1);
 
       if (m_rope_angle.x1 > 0)
-        angle = fabs(m_rope_angle.x0) ;
+        angle = AbsoluteValue(m_rope_angle.x0) ;
       else
-        angle = fabs(m_rope_angle.x0) - PI ;
+        angle = AbsoluteValue(m_rope_angle.x0) - PI ;
 
       if (m_rope_angle.x0 < 0)
         angle = -angle ;
@@ -236,7 +237,8 @@ void Physics::UnsetPhysFixationPoint()
 
 void Physics::ChangePhysRopeSize(Double dl)
 {
-  if ((dl < 0) && (m_rope_length.x0 < 0.5))
+  Double one_half = 0.5;
+  if ((dl < 0) && (m_rope_length.x0 < one_half))
     return ;
 
   bool was_moving = IsMoving();
@@ -310,7 +312,7 @@ void Physics::UpdateTimeOfLastMove()
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (Double delta_t)
 {
-  MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %5f", typeid(*this).name(), m_mass);
+  MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %s", typeid(*this).name(), Double2str(m_mass,5).c_str());
 
   //  Double l0 = 5.0 ;
 
@@ -341,12 +343,12 @@ void Physics::ComputePendulumNextXY (Double delta_t)
   Double y = m_fix_point_gnd.y - m_fix_point_dxy.y
              + m_rope_length.x0 * cos(m_rope_angle.x0);
 
-  MSG_DEBUG( "physic.pendulum", "%s angle: %.2f %.2f %.2f pos: %.2f %.2f fixpoint: %.2f, %.2f",
+  MSG_DEBUG( "physic.pendulum", "%s angle: %s %s %s pos: %s %s fixpoint: %s, %s",
              typeid(*this).name(),
-             m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2,
-             x, y,
-             m_fix_point_gnd.x,
-             m_fix_point_gnd.y
+             Double2str(m_rope_angle.x0, 2).c_str() , Double2str(m_rope_angle.x1, 2).c_str(), Double2str(m_rope_angle.x2,  2).c_str(),
+             Double2str(x, 2).c_str(), Double2str(y, 2).c_str(),
+             Double2str(m_fix_point_gnd.x, 2).c_str(),
+             Double2str(m_fix_point_gnd.y, 2).c_str()
             );
 
   //  printf ("Physics::ComputePendulumNextXY - Angle(%f,%f,%f)\n",
@@ -387,14 +389,19 @@ void Physics::ComputeFallNextXY (Double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
-  MSG_DEBUG( "physic.fall", "%s falls; mass %5f, weight %5f, wind %5f, air %5f, delta %f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor, delta_t);
+  MSG_DEBUG( "physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(), 
+             Double2str(m_mass, 5).c_str(), 
+             Double2str(weight_force, 5).c_str(),
+             Double2str(wind_force, 5).c_str(), 
+             Double2str(air_resistance_factor, 5).c_str(), 
+             Double2str(delta_t).c_str());
 
-  MSG_DEBUG( "physic.fall", "%s before - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f",
+  MSG_DEBUG( "physic.fall", "%s before - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
              typeid(*this).name(),
-             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             delta_t,
-             m_extern_force.x, m_extern_force.y);
+             Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+             Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+             Double2str(delta_t).c_str(),
+             Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
 
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
@@ -404,13 +411,12 @@ void Physics::ComputeFallNextXY (Double delta_t)
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
                       weight_force + m_extern_force.y, delta_t);
 
-  MSG_DEBUG( "physic.fall", "%s after - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - delta:%f - extern_force: %f, %f",
+  MSG_DEBUG( "physic.fall", "%s after - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
              typeid(*this).name(),
-             m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-             m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-             delta_t,
-             m_extern_force.x, m_extern_force.y);
-
+             Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+             Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+             Double2str(delta_t).c_str(),
+             Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 
    // printf ("ap : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
@@ -420,7 +426,7 @@ void Physics::ComputeFallNextXY (Double delta_t)
 // Compute the position of the object at current time.
 Point2d Physics::ComputeNextXY(Double delta_t){
 
-  MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t);
+  MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), Double2str(delta_t).c_str());
 
   if (FreeFall == m_motion_type) {
     ComputeFallNextXY(delta_t);
@@ -439,11 +445,12 @@ void Physics::RunPhysicalEngine()
     m_last_physical_engine_run = m_last_move;
 
   ASSERT(Time::GetInstance()->Read() >= m_last_physical_engine_run);
-  Double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / 1000.0;
+  Double ms_per_s = 1000;
+  Double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / ms_per_s;
   Point2d oldPos;
   Point2d newPos;
 
-  m_last_physical_engine_run += floor(delta_t/PHYS_DELTA_T) * PHYS_DELTA_T * 1000;
+  m_last_physical_engine_run += (long)(floor(delta_t/PHYS_DELTA_T) * PHYS_DELTA_T * ms_per_s);
 
   // Compute object move for each physical engine time step.
   while (delta_t >= PHYS_DELTA_T)
@@ -453,11 +460,13 @@ void Physics::RunPhysicalEngine()
 
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
-      MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) - x0:%f, x1:%f, x2:%f - y0:%f, y1:%f, y2:%f - step:%f",
-                typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y,
-                m_pos_x.x0, m_pos_x.x1, m_pos_x.x2,
-                m_pos_y.x0, m_pos_y.x1, m_pos_y.x2,
-                PHYS_DELTA_T);
+      MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s) - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - step:%s",
+                typeid(*this).name(), 
+                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+                Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
+                Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+                Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+                Double2str(PHYS_DELTA_T).c_str());
       NotifyMove(oldPos, newPos);
     }
     delta_t -= PHYS_DELTA_T;
@@ -482,7 +491,7 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
       if(isNaN(contact_angle))
         angle = angle + PI ;
       else
-        angle =  PI - angle -2.0 *  contact_angle;
+        angle =  PI - angle -TWO *  contact_angle;
 
       // Apply rebound factor to the object speed.
       norme = norme * m_rebound_factor;

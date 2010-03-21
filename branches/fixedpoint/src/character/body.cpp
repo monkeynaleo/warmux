@@ -36,6 +36,7 @@
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
+#include "tool/string_tools.h"
 //#include "tool/xml_document.h"
 
 Body::Body(const xmlNode *     xml, 
@@ -355,8 +356,8 @@ void Body::ProcessFollowCrosshair(member_mvt & mb_mvt)
 {
   // Use the movement of the crosshair
   Double angle = owner->GetFiringAngle(); /* Get -2 * PI < angle =< 2 * PI*/
-  if (0 > angle) {
-    angle += 2 * PI; // so now 0 < angle < 2 * PI;
+  if (ZERO > angle) {
+    angle += TWO * PI; // so now 0 < angle < 2 * PI;
   }
 
   if (DIRECTION_LEFT == ActiveCharacter().GetDirection()) {
@@ -379,7 +380,7 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
     angle_rad = -HALF_PI - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
 
   if (angle_rad < 0) {
-    angle_rad += 2 * PI; // so now 0 < angle < 2 * PI;
+    angle_rad += TWO * PI; // so now 0 < angle < 2 * PI;
   }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
@@ -391,7 +392,7 @@ void Body::ProcessFollowSpeed(member_mvt & mb_mvt)
   Double angle_rad = owner->GetSpeedAngle();
 
   if (angle_rad < 0) {
-    angle_rad += 2 * PI; // so now 0 < angle < 2 * PI;
+    angle_rad += TWO * PI; // so now 0 < angle < 2 * PI;
   }
 
   if (owner->GetDirection() == DIRECTION_LEFT) {
@@ -426,7 +427,9 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
   if (v.Norm() < mb_mvt.follow_cursor_limit) {
     Double angle = v.ComputeAngle(Point2i(0, 0));
     angle *= owner->GetDirection();
-    angle -= owner->GetDirection() == DIRECTION_RIGHT ? PI:0;
+    if (owner->GetDirection() == DIRECTION_RIGHT) {
+      angle -= PI;
+    }
 
     angle_mvt.SetAngle(angle);
     member->ApplyMovement(angle_mvt, skel_lst);
@@ -855,7 +858,7 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 
 void Body::SetRotation(Double angle)
 {
-  MSG_DEBUG("body", "%s -> new angle: %i", owner->GetName().c_str(), angle);
+  MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
   main_rotation_rad = angle;
   need_rebuild = true;
 }

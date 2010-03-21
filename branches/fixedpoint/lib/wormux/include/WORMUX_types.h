@@ -53,6 +53,18 @@ const Double QUARTER_PI = 0.78539816339744828;
 const Double HALF_PI = 1.5707963267948966;
 const Double PI = 3.1415926535897931f;
 
+// Limit under which, real numbers are considered as NULL
+const Double EPSILON = 0.001f;
+
+const Double ZERO = 0;
+const Double ONE = 1;
+const Double TWO = 2;
+const Double THREE = 3;
+const Double FOUR = 4;
+const Double FIVE = 5;
+const Double SIX = 6;
+const Double ONE_HALF = 0.5;
+
 enum LRDirection
 {
   DIRECTION_LEFT = -1,
