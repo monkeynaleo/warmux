@@ -46,6 +46,21 @@ Text::Text(const std::string & text,
   Init();
 }
 
+Text::Text() :
+  surf(),
+  background(),
+  txt("No text"),
+  color(black_color),
+  shadowed(true),
+  dummy(false),
+  bg_offset(0),
+  max_width(0),
+  shadowColor(),
+  font_size(Font::FONT_SMALL),
+  font_style(Font::FONT_NORMAL)
+{
+}
+
 Text::~Text()
 {
 }

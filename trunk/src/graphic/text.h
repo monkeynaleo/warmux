@@ -51,7 +51,7 @@ public:
        bool shadowed = true,
        const Color & shadowColor = black_color,
        bool dummy = false);
-  Text(void) {}
+  Text(void);
 
   virtual ~Text();
 
