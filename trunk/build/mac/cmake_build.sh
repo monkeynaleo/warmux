@@ -7,6 +7,8 @@
 #         lynxlynxlynx and Snaggle              #
 #################################################
 
+# run ./cmake_build.sh --help for more info on how to use
+
 
 #
 # Set environment for compile
@@ -16,12 +18,6 @@ MAC=`pwd`/
 ROOT=${MAC}../../
 SRC=${ROOT}src/
 
-
-# Set up build flags
-# to build as universal, add 'universal' as the first
-# command line parameter when running this script
-# eg ./cmake_build.sh universal     : can't guarantee this one works. On Snow Leopard it seems to fail.
-#    ./cmake_build.sh ppc           : cross-compile to PPC
 
 # we are building x86 all the time for now. since we want backward compatibility even when building
 # on 10.6, use GCC 4.0.
@@ -59,9 +55,18 @@ DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
 
 if [ "$1" = "--help" ]
 then
+    echo "This script builds Wormux on Mac OS X by using the CMake build system"
+    echo "Requirements :"
+    echo "  - CMake 2.6 +"
+    echo "  - libintl (gnu gettext) headers [a universal binary of the library is included"
+    echo "                                   along this script but not the headers]"
+    echo "  - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)"
+    echo "    installed in your /Library/Frameworks directory."
+    echo ""
     echo "targets :"
-    echo "./cmake_build universal : build a universal app and its dmg file"
-    echo "./cmake_build.sh ppc : cross-compile to PPC"
+    echo "./cmake_build              : default build (i386, compatible OS X 10.5+)"
+    echo "./cmake_build    universal : build a universal app"
+    echo "./cmake_build.sh ppc       : cross-compile to PPC"
     echo ""
     echo "arguments :"
     echo "-j<x> : launch make with x threads"

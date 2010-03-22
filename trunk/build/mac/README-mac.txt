@@ -2,29 +2,38 @@
 Use of mac scripts
 ******************
 
-For compile wormux you have to get some libraries
+First and foremost, the Xcode package must be installed in order to have gcc and other dev stuff.
 
-Some parts are commented, you can uncomment them if you need it.
+The cmake_build.sh script builds Wormux on Mac OS X by using the CMake build system.
+./cmake_build.sh --help will list its options. They currently are :
 
-You can see 3 scripts :
-launch first.sh
-fink.sh
-macports.sh
+Requirements :
+  - CMake 2.6 +
+  - libintl (gnu gettext) headers [a universal binary of the library is included
+                                   along this script but not the headers]
+  - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)
+    installed in your /Library/Frameworks directory.
 
-You have to edit the first one, select if you prefer fink or macports (comment)
-And select the good name for several tools.
-Maybe you'll don't need to use the first, but just uncomment the fink or macports script,
-but on my computer i need to do all exports in order to have fink release working.
+targets :
+    ./cmake_build.sh           : default build (i386, compatible OS X 10.5+)
+    ./cmake_build.sh universal : build a universal app
+    ./cmake_build.sh ppc       : cross-compile to PPC
 
-Give me feedbacks about all this scripts
+arguments :
+    -j<x>                      : launch make with x threads
+    
+To build a universal binary :
+    1) build once in intel mode
+    2) Save the generated .app
+    3) Remove all build files
+    4) Run again in PPC mode
+    5) Merge both builds by using terminal app "lipo"
+       (the frameworks from the dependency package are already universal)
+    
 
-The XCode package have to be installed in order to have gcc and other staff.
 
 Have fun :)
 
-Yoann Katchourine
-post your problem on the forum at http://wormux.org/forum
 
-thanks to :
-Hanspeter Niederstrasser for fink script
-Ingo Hoffman for macports script
+-- Auria, Plorf (Yoann Katchourine), Snaggle, lynxlynxlynx
+
