@@ -86,12 +86,13 @@ bool Label::LoadXMLConfiguration()
   Color shadowColor(255, 255, 255, 255);
   xmlFile->ReadHexColorAttr(widgetNode, "shadowColor", shadowColor);
 
-  SetText(xmlText);
-  SetFont(textColor, 
-          (Font::font_size_t)fontSize, 
-          DetectFontStyle(fontStyle),
-          activeShadow,
-          shadowColor);
+  Text::SetText(xmlText);
+  Text::SetFont(textColor, 
+                (Font::font_size_t)fontSize, 
+                 DetectFontStyle(fontStyle),
+                 activeShadow,
+                 shadowColor);
+  Text::Init();
   return true;
 }
 
