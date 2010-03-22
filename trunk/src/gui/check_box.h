@@ -45,6 +45,8 @@ class CheckBox : public Text, public Widget
   CheckBox(const std::string & label, 
            uint width, 
            bool value = true);
+  CheckBox(Profile * profile,
+           const xmlNode * pictureNode);
   ~CheckBox();
 
   virtual void Draw(const Point2i & mousePosition) const;
@@ -52,6 +54,7 @@ class CheckBox : public Text, public Widget
   virtual Widget* ClickUp(const Point2i & mousePosition, 
                           uint button);
   virtual void Pack();
+  virtual bool LoadXMLConfiguration(void);
 
   bool GetValue() const { return m_value; };
   void SetValue(bool value) { m_value = value; };

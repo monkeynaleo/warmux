@@ -33,6 +33,7 @@
 #include "tool/resource_manager.h"
 #include "gui/big/button_pic.h"
 #include "gui/label.h"
+#include "gui/check_box.h"
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
@@ -131,7 +132,9 @@ Widget * Menu::CreateWidget(Profile * profile,
   } else if ("ButtonPic" == widgetName) {
     widget = new ButtonPic(profile, widgetNode);
   } else if ("Label" == widgetName) {
-    widget = new Label(profile, widgetNode); 
+    widget = new Label(profile, widgetNode);
+  } else if ("CheckBox" == widgetName) {
+    widget = new CheckBox(profile, widgetNode);
   } else if ("VerticalBox" == widgetName) {
     return NULL;
   } else if ("HorizontalBox" == widgetName) {
