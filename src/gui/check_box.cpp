@@ -40,6 +40,12 @@ CheckBox::CheckBox(const std::string & label,
   Init(width);
 }
 
+CheckBox::CheckBox(Profile * profile,
+                   const xmlNode * pictureNode) :
+  Widget(profile, pictureNode)
+{
+}
+
 void CheckBox::Init(uint width)
 {
   Profile * res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
@@ -64,6 +70,31 @@ void CheckBox::Pack()
   size.y = std::max(uint(Text::GetHeight()),
 		    m_checked_image->GetHeight());
 }
+
+bool CheckBox::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBorder();
+
+  std::string xmlText("Text not found");
+  xmlFile->ReadStringAttr(widgetNode, "text", xmlText);
+
+  Profile * res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
+  GetResourceManager().UnLoadXMLProfile(res);
+
+  m_checked_image->cache.EnableLastFrameCache();
+
+  return true;
+}
+
 
 void CheckBox::Draw(const Point2i &/*mousePosition*/) const
 {
