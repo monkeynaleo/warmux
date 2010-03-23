@@ -42,7 +42,9 @@ CheckBox::CheckBox(const std::string & label,
 
 CheckBox::CheckBox(Profile * profile,
                    const xmlNode * pictureNode) :
-  Widget(profile, pictureNode)
+  Widget(profile, pictureNode),
+  m_value(false),
+  m_checked_image(NULL)
 {
 }
 
@@ -61,7 +63,9 @@ void CheckBox::Init(uint width)
 
 CheckBox::~CheckBox()
 {
-  delete m_checked_image;
+  if (NULL != m_checked_image) {
+    delete m_checked_image;
+  }
 }
 
 void CheckBox::Pack()
@@ -86,11 +90,21 @@ bool CheckBox::LoadXMLConfiguration()
   std::string xmlText("Text not found");
   xmlFile->ReadStringAttr(widgetNode, "text", xmlText);
 
-  Profile * res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
-  GetResourceManager().UnLoadXMLProfile(res);
+  std::string file("menu/pic_not_found.png");
+  xmlFile->ReadStringAttr(widgetNode, "pictureChecked", file);
+  file = profile->relative_path + file;
+  Surface picChecked(file.c_str());
 
-  m_checked_image->cache.EnableLastFrameCache();
+  file = "menu/pic_not_found.png";
+  xmlFile->ReadStringAttr(widgetNode, "pictureUnchecked", file);
+  file = profile->relative_path + file;
+  Surface picUnchecked(file.c_str());
+
+  m_checked_image = new Sprite();
+  m_checked_image->AddFrame(picChecked);
+  m_checked_image->AddFrame(picUnchecked);
+
+  //m_checked_image->cache.EnableLastFrameCache();
 
   return true;
 }
