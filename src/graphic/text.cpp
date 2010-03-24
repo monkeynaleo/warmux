@@ -77,6 +77,52 @@ void Text::Init()
   Render();
 }
 
+void Text::LoadXMLConfiguration(XmlReader * xmlFile,
+                                const xmlNode * textNode)
+{
+  std::string xmlText("Text not found");
+  xmlFile->ReadStringAttr(textNode, "text", xmlText);
+
+  Color textColor(0, 0, 0, 255);
+  xmlFile->ReadHexColorAttr(textNode, "textColor", textColor);
+
+  // Load the font size ... based on 72 DPI
+  int fontSize = 12;
+  if (xmlFile->IsAPercentageAttr(textNode, "fontSize")) {
+    double tmpValue;
+    xmlFile->ReadPercentageAttr(textNode, "fontSize", tmpValue);
+    fontSize = GetMainWindow().GetHeight() * tmpValue / 100;
+  } else {
+    xmlFile->ReadPixelAttr(textNode, "fontSize", fontSize);
+  }
+
+  std::string fontStyle;
+  xmlFile->ReadStringAttr(textNode, "fontStyle", fontStyle);
+
+  bool activeShadow = false;
+  xmlFile->ReadBoolAttr(textNode, "shadow", activeShadow);
+  Color shadowColor(255, 255, 255, 255);
+  xmlFile->ReadHexColorAttr(textNode, "shadowColor", shadowColor);
+
+  SetText(xmlText);
+  SetFont(textColor,
+          (Font::font_size_t)fontSize,
+          DetectFontStyle(fontStyle),
+          activeShadow,
+          shadowColor);
+  Init();
+}
+
+Font::font_style_t Text::DetectFontStyle(const std::string & fontStyle)
+{
+  if ("bold" == fontStyle) {
+    return Font::FONT_BOLD;
+  } else if ("italic" == fontStyle) {
+    return Font::FONT_ITALIC;
+  }
+  return Font::FONT_NORMAL;
+}
+
 void Text::Render()
 {
   if (!dummy) {

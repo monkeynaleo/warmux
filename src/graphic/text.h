@@ -24,6 +24,7 @@
 #include "colors.h"
 #include "font.h"
 #include "surface.h"
+#include "tool/xml_document.h"
 
 class Text
 {
@@ -56,6 +57,9 @@ public:
   virtual ~Text();
 
   void Init();
+  void LoadXMLConfiguration(XmlReader * xmlFile,
+                            const xmlNode * textNode);
+  Font::font_style_t DetectFontStyle(const std::string & fontStyle);
 
   //Draw method using windows coordinates
   void DrawCenter(const Point2i & position) const;
