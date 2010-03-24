@@ -45,8 +45,8 @@ Label::Label(const Point2i & size) :
 }
 
 Label::Label(Profile * profile,
-             const xmlNode * pictureNode) :
-  Widget(profile, pictureNode),
+             const xmlNode * labelNode) :
+  Widget(profile, labelNode),
   center(false)
 {
 }
@@ -58,52 +58,18 @@ Label::~Label()
 bool Label::LoadXMLConfiguration()
 {
   if (NULL == profile || NULL == widgetNode) {
-    //TODO error ... xml attributs not initialized !
     return false;
   }
-
-  XmlReader * xmlFile = profile->GetXMLDocument();
 
   ParseXMLPosition();
   ParseXMLSize();
   ParseXMLBorder();
   ParseXMLBackground();
+  
+  Text::LoadXMLConfiguration(profile->GetXMLDocument(), 
+                             widgetNode);
 
-  std::string xmlText("Text not found");
-  xmlFile->ReadStringAttr(widgetNode, "text", xmlText);
-
-  Color textColor(0, 0, 0, 255);
-  xmlFile->ReadHexColorAttr(widgetNode, "textColor", textColor);
-
-  // Load the font size ... based on 72 DPI 
-  int fontSize = ParseVerticalTypeAttribut("fontSize", 12);
-
-  std::string fontStyle;
-  xmlFile->ReadStringAttr(widgetNode, "fontStyle", fontStyle);
-
-  bool activeShadow = false;
-  xmlFile->ReadBoolAttr(widgetNode, "shadow", activeShadow);
-  Color shadowColor(255, 255, 255, 255);
-  xmlFile->ReadHexColorAttr(widgetNode, "shadowColor", shadowColor);
-
-  Text::SetText(xmlText);
-  Text::SetFont(textColor, 
-                (Font::font_size_t)fontSize, 
-                 DetectFontStyle(fontStyle),
-                 activeShadow,
-                 shadowColor);
-  Text::Init();
   return true;
-}
-
-Font::font_style_t Label::DetectFontStyle(const std::string & fontStyle)
-{
-  if ("bold" == fontStyle) {
-    return Font::FONT_BOLD;
-  } else if ("italic" == fontStyle) {
-    return Font::FONT_ITALIC;
-  }
-  return Font::FONT_NORMAL;
 }
 
 void Label::Draw(const Point2i & mousePosition) const
