@@ -67,16 +67,6 @@ class ShootDirectlyAtEnemyIdea : public AIIdea
     virtual AIStrategy * CreateStrategy();
 };
 
-class BazookaAgainstForceIdea : public AIIdea
-{
-  private:
-    Character & shooter;
-    Character & enemy;
-  public:
-    BazookaAgainstForceIdea(Character & shooter, Character & enemy);
-    virtual AIStrategy * CreateStrategy();
-};
-
 class FireMissileWithFixedDurationIdea : public AIIdea
 {
   private:
