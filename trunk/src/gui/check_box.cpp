@@ -87,8 +87,7 @@ bool CheckBox::LoadXMLConfiguration()
   ParseXMLSize();
   ParseXMLBorder();
 
-  std::string xmlText("Text not found");
-  xmlFile->ReadStringAttr(widgetNode, "text", xmlText);
+  Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
   std::string file("menu/pic_not_found.png");
   xmlFile->ReadStringAttr(widgetNode, "pictureChecked", file);
