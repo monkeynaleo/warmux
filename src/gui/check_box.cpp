@@ -41,8 +41,8 @@ CheckBox::CheckBox(const std::string & label,
 }
 
 CheckBox::CheckBox(Profile * profile,
-                   const xmlNode * pictureNode) :
-  Widget(profile, pictureNode),
+                   const xmlNode * checkBoxNode) :
+  Widget(profile, checkBoxNode),
   m_value(false),
   m_checked_image(NULL)
 {
