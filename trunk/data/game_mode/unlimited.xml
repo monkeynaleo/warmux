@@ -105,7 +105,7 @@
       <particle_range>80</particle_range>
       <blast_range>75</blast_range>
       <blast_force>2500</blast_force>
-      <timeout>3</timeout>
+      <timeout>1</timeout>
       <uncontrolled_turn_speed>25</uncontrolled_turn_speed>
       <max_controlled_turn_speed>10</max_controlled_turn_speed>
       <fuel_time>10</fuel_time>
@@ -151,7 +151,7 @@
       <particle_range>20</particle_range>
       <blast_range>50</blast_range>
       <blast_force>4500</blast_force>
-      <timeout>3</timeout>
+      <timeout>1</timeout>
       <allow_change_timeout>1</allow_change_timeout>
       <nb_fragments>5</nb_fragments>
       <nb_angle_dispersion>75</nb_angle_dispersion>
@@ -252,7 +252,7 @@
       <particle_range>110</particle_range>
       <blast_force>3000</blast_force>
       <blast_range>100</blast_range>
-      <timeout>3</timeout>
+      <timeout>5</timeout>
       <allow_change_timeout>1</allow_change_timeout>
       <drop_probability>0.9</drop_probability>
       <ammo_per_drop>2</ammo_per_drop>
