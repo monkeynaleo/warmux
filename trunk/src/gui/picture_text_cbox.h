@@ -27,16 +27,23 @@
 
 class PictureTextCBox : public CheckBox
 {
- private:
-  Surface m_image;
-  Surface m_enabled;
-  Surface m_disabled_front;
-  Surface m_disabled_back;
+  private:
+    Surface m_image;
+    Surface m_enabled;
+    Surface m_disabled_front;
+    Surface m_disabled_back;
 
- public:
-  PictureTextCBox(const std::string& label, const std::string& resource_id, const Point2i& size, bool value = true);
-  virtual void Draw(const Point2i& mousePosition) const;
-  virtual void Pack();
+  public:
+    PictureTextCBox(const std::string & label, 
+                    const std::string & resource_id, 
+                    const Point2i & size, 
+                    bool value = true);
+    PictureTextCBox(Profile * profile,
+                    const xmlNode * pictureNode);
+
+    virtual bool LoadXMLConfiguration(void);
+    virtual void Draw(const Point2i & mousePosition) const;
+    virtual void Pack();
 };
 
 #endif
