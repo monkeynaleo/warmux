@@ -21,6 +21,14 @@
 
 #include "map/ground.h"
 #include <iostream>
+#include <SDL_stdinc.h>
+
+// a hack I need I have no clue why
+#ifndef SDL_static_cast
+#define SDL_reinterpret_cast(type, expression) ((type)(expression))
+#define SDL_static_cast(type, expression) ((type)(expression))
+#endif
+
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <limits.h>

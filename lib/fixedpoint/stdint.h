@@ -56,9 +56,11 @@ typedef unsigned  int  uint_fast32_t;
 typedef long long  int_fast64_t;
 typedef unsigned long long   uint_fast64_t;
 
+#ifndef __APPLE__
 /* 7.18.1.4  Integer types capable of holding object pointers */
 typedef int intptr_t;
 typedef unsigned uintptr_t;
+#endif
 
 /* 7.18.1.5  Greatest-width integer types */
 typedef long long  intmax_t;
