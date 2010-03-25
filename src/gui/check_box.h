@@ -32,32 +32,32 @@ class Sprite;
 class CheckBox : public Text, public Widget
 {
   /* If you need this, implement it (correctly)*/
- CheckBox(const CheckBox&);
- CheckBox operator=(const CheckBox&);
- /**********************************************/
- void Init(uint width);
+  CheckBox(const CheckBox&);
+  CheckBox operator=(const CheckBox&);
+  /**********************************************/
+  void Init(uint width);
 
- protected:
-  bool m_value;
-  Sprite * m_checked_image;
+  protected:
+    bool m_value;
+    Sprite * m_checked_image;
 
- public:
-  CheckBox(const std::string & label, 
-           uint width, 
-           bool value = true);
-  CheckBox(Profile * profile,
-           const xmlNode * checkBoxNode);
-  ~CheckBox();
+  public:
+    CheckBox(const std::string & label, 
+             uint width, 
+             bool value = true);
+    CheckBox(Profile * profile,
+             const xmlNode * checkBoxNode);
+    ~CheckBox();
 
-  virtual void Draw(const Point2i & mousePosition) const;
-  virtual Widget* Click(const Point2i &, uint) { return this; };
-  virtual Widget* ClickUp(const Point2i & mousePosition, 
-                          uint button);
-  virtual void Pack();
-  virtual bool LoadXMLConfiguration(void);
+    virtual void Draw(const Point2i & mousePosition) const;
+    virtual Widget * Click(const Point2i &, uint) { return this; };
+    virtual Widget* ClickUp(const Point2i & mousePosition, 
+                            uint button);
+    virtual void Pack();
+    virtual bool LoadXMLConfiguration(void);
 
-  bool GetValue() const { return m_value; };
-  void SetValue(bool value) { m_value = value; };
+    bool GetValue() const { return m_value; };
+    void SetValue(bool value) { m_value = value; };
 };
 
 #endif
