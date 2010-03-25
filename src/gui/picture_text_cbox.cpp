@@ -32,7 +32,11 @@ PictureTextCBox::PictureTextCBox(const std::string & label,
                                  const std::string & resource_id,
                                  const Point2i & _size, 
                                  bool value):
-  CheckBox(label, _size.x, value)
+  CheckBox(label, _size.x, value),
+  m_image(),
+  m_enabled(),
+  m_disabled_front(),
+  m_disabled_back()
 {
   SetFont(dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
@@ -46,36 +50,81 @@ PictureTextCBox::PictureTextCBox(const std::string & label,
   Text::SetMaxWidth(size.x);
 }
 
+PictureTextCBox::PictureTextCBox(Profile * profile,
+                                 const xmlNode * widgetNode) :
+  CheckBox(profile, widgetNode),
+  m_image(),
+  m_enabled(),
+  m_disabled_front(),
+  m_disabled_back()
+{
+}
+
+bool PictureTextCBox::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBorder();
+
+  Text::LoadXMLConfiguration(xmlFile, widgetNode);
+
+  std::string file("menu/pic_not_found.png");
+  xmlFile->ReadStringAttr(widgetNode, "pictureEnabled", file);
+  file = profile->relative_path + file;
+  m_enabled.ImgLoad(file);
+
+  file = "menu/pic_not_found.png";
+  xmlFile->ReadStringAttr(widgetNode, "picture", file);
+  file = profile->relative_path + file;
+  m_image.ImgLoad(file);
+
+  file = "menu/pic_not_found.png";
+  xmlFile->ReadStringAttr(widgetNode, "pictureDisabledFront", file);
+  file = profile->relative_path + file;
+  m_disabled_front.ImgLoad(file);
+
+  file = "menu/pic_not_found.png";
+  xmlFile->ReadStringAttr(widgetNode, "pictureDisabledBack", file);
+  file = profile->relative_path + file;
+  m_disabled_back.ImgLoad(file);
+
+  return true;
+}
+
 void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
 {
-  Surface& video_window = GetMainWindow();
+  Surface & video_window = GetMainWindow();
 
-  if (m_value)
-    {
-      uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth())/2 ;
-      uint enabled_y = GetPositionY();
-      uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
-      uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
+  if (m_value) {
+    uint enabled_x = GetPositionX() + (GetSizeX() - m_enabled.GetWidth())/2 ;
+    uint enabled_y = GetPositionY();
+    uint outside_x = std::max(uint(0), GetPositionX() - enabled_x);
+    uint outside_y = std::max(uint(0), GetPositionY() - enabled_y);
 
-      enabled_x+= outside_x;
-      enabled_y+= outside_y;
-      Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x,
-			 m_enabled.GetHeight() - outside_y);
-      video_window.Blit(m_enabled, srcRect, Point2i(enabled_x, enabled_y));
-    }
-  else
-    {
-      uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth())/2 ;
-      uint disabled_y = GetPositionY();
-      uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
-      uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
+    enabled_x += outside_x;
+    enabled_y += outside_y;
+    Rectanglei srcRect(outside_x, outside_y, m_enabled.GetWidth() - outside_x,
+                       m_enabled.GetHeight() - outside_y);
+    video_window.Blit(m_enabled, srcRect, Point2i(enabled_x, enabled_y));
+  } else {
+    uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_back.GetWidth())/2 ;
+    uint disabled_y = GetPositionY();
+    uint outside_x = std::max(uint(0), GetPositionX() - disabled_x);
+    uint outside_y = std::max(uint(0), GetPositionY() - disabled_y);
 
-      disabled_x+= outside_x;
-      disabled_y+= outside_y;
-      Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x,
-			 m_disabled_back.GetHeight() - outside_y);
-      video_window.Blit(m_disabled_back, srcRect, Point2i(disabled_x, disabled_y));
-    }
+    disabled_x += outside_x;
+    disabled_y += outside_y;
+    Rectanglei srcRect(outside_x, outside_y, m_disabled_back.GetWidth() - outside_x,
+                       m_disabled_back.GetHeight() - outside_y);
+    video_window.Blit(m_disabled_back, srcRect, Point2i(disabled_x, disabled_y));
+  }
+
   // center the image
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/2 ;
   uint tmp_y = GetPositionY() + (m_enabled.GetHeight() - m_image.GetHeight())/2;
@@ -85,12 +134,11 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
   Text::DrawCenterTop(GetPosition() + Point2i(GetSizeX()/2,
 		      GetSizeY() - Text::GetHeight()));
 
-  if (!m_value)
-    {
-      uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth())/2 ;
-      uint disabled_y = GetPositionY() + (m_enabled.GetHeight() - m_disabled_front.GetHeight())/2;
-      video_window.Blit(m_disabled_front, Point2i(disabled_x, disabled_y));
-    }
+  if (!m_value) {
+    uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth())/2 ;
+    uint disabled_y = GetPositionY() + (m_enabled.GetHeight() - m_disabled_front.GetHeight())/2;
+    video_window.Blit(m_disabled_front, Point2i(disabled_x, disabled_y));
+  }
 }
 
 void PictureTextCBox::Pack()
