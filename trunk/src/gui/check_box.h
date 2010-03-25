@@ -46,7 +46,7 @@ class CheckBox : public Text, public Widget
            uint width, 
            bool value = true);
   CheckBox(Profile * profile,
-           const xmlNode * pictureNode);
+           const xmlNode * checkBoxNode);
   ~CheckBox();
 
   virtual void Draw(const Point2i & mousePosition) const;
