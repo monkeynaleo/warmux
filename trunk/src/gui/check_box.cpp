@@ -89,15 +89,25 @@ bool CheckBox::LoadXMLConfiguration()
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
-  std::string file("menu/pic_not_found.png");
+  std::string file;
+
+  Surface picChecked;
   xmlFile->ReadStringAttr(widgetNode, "pictureChecked", file);
   file = profile->relative_path + file;
-  Surface picChecked(file.c_str());
+  if (!picChecked.ImgLoad(file)) {
+    if (!picChecked.ImgLoad(profile->relative_path + "menu/cbox_checked.png")) {
+      Error("XML Loading -> CheckBox: can't load menu/cbox_checked.png");
+    }
+  }
 
-  file = "menu/pic_not_found.png";
+  Surface picUnchecked;
   xmlFile->ReadStringAttr(widgetNode, "pictureUnchecked", file);
   file = profile->relative_path + file;
-  Surface picUnchecked(file.c_str());
+  if (!picUnchecked.ImgLoad(file)) {
+    if (!picUnchecked.ImgLoad(profile->relative_path + "menu/cbox_unchecked.png")) {
+      Error("XML Loading -> CheckBox: can't load menu/cbox_unchecked.png");
+    }
+  }
 
   m_checked_image = new Sprite();
   m_checked_image->AddFrame(picChecked);

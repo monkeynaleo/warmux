@@ -74,30 +74,39 @@ bool PictureTextCBox::LoadXMLConfiguration()
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
-  std::string picNotFound(profile->relative_path + "menu/pic_not_found.png");
   std::string file;
+
   xmlFile->ReadStringAttr(widgetNode, "pictureEnabled", file);
   file = profile->relative_path + file;
   if (!m_enabled.ImgLoad(file)) {
-    m_enabled.ImgLoad(picNotFound);
+    file = profile->relative_path + "menu/enabled.png";
+    if (!m_enabled.ImgLoad(file)) {
+      Error("XML Loading -> PictureTextCBox: can't load " + file); 
+    }
   }
 
   xmlFile->ReadStringAttr(widgetNode, "picture", file);
   file = profile->relative_path + file;
   if (!m_image.ImgLoad(file)) {
-    m_image.ImgLoad(picNotFound);
+    Error("XML Loading -> PictureTextCBox: Node 'picture': can't load the file : " + file);
   }
 
   xmlFile->ReadStringAttr(widgetNode, "pictureDisabledFront", file);
   file = profile->relative_path + file;
   if (!m_disabled_front.ImgLoad(file)) {
-    m_disabled_front.ImgLoad(picNotFound);
+    file = profile->relative_path + "menu/disabled_front.png";
+    if (!m_disabled_front.ImgLoad(file)) {
+      Error("XML Loading -> PictureTextCBox: can't load " + file);
+    }
   }
 
   xmlFile->ReadStringAttr(widgetNode, "pictureDisabledBack", file);
   file = profile->relative_path + file;
   if (!m_disabled_back.ImgLoad(file)) {
-    m_disabled_back.ImgLoad(picNotFound);
+    file = profile->relative_path + "menu/disabled_back.png";
+    if (!m_disabled_back.ImgLoad(file)) {
+      Error("XML Loading -> PictureTextCBox: can't load " + file);
+    }
   }
 
   return true;
