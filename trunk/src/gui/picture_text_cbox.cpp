@@ -74,25 +74,31 @@ bool PictureTextCBox::LoadXMLConfiguration()
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
-  std::string file("menu/pic_not_found.png");
+  std::string picNotFound(profile->relative_path + "menu/pic_not_found.png");
+  std::string file;
   xmlFile->ReadStringAttr(widgetNode, "pictureEnabled", file);
   file = profile->relative_path + file;
-  m_enabled.ImgLoad(file);
+  if (!m_enabled.ImgLoad(file)) {
+    m_enabled.ImgLoad(picNotFound);
+  }
 
-  file = "menu/pic_not_found.png";
   xmlFile->ReadStringAttr(widgetNode, "picture", file);
   file = profile->relative_path + file;
-  m_image.ImgLoad(file);
+  if (!m_image.ImgLoad(file)) {
+    m_image.ImgLoad(picNotFound);
+  }
 
-  file = "menu/pic_not_found.png";
   xmlFile->ReadStringAttr(widgetNode, "pictureDisabledFront", file);
   file = profile->relative_path + file;
-  m_disabled_front.ImgLoad(file);
+  if (!m_disabled_front.ImgLoad(file)) {
+    m_disabled_front.ImgLoad(picNotFound);
+  }
 
-  file = "menu/pic_not_found.png";
   xmlFile->ReadStringAttr(widgetNode, "pictureDisabledBack", file);
   file = profile->relative_path + file;
-  m_disabled_back.ImgLoad(file);
+  if (!m_disabled_back.ImgLoad(file)) {
+    m_disabled_back.ImgLoad(picNotFound);
+  }
 
   return true;
 }
