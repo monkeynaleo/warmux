@@ -444,6 +444,8 @@
       <damage>1</damage> <!-- per bullet! -->
       <drop_probability>1</drop_probability>
       <ammo_per_drop>1</ammo_per_drop>
+      <explosion_range>5</explosion_range>
+      <speed_on_hit>8</speed_on_hit>
     </shotgun>
 
     <skip_turn>
