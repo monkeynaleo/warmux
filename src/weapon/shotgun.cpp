@@ -35,7 +35,6 @@
 #include "tool/resource_manager.h"
 
 const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
-const uint   SHOTGUN_EXPLOSION_RANGE = 1;
 const double SHOTGUN_RANDOM_ANGLE    = 0.04;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
 
@@ -54,7 +53,6 @@ ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :
   WeaponBullet("buckshot", cfg, p_launcher)
 {
-  cfg.explosion_range = SHOTGUN_EXPLOSION_RANGE;
 }
 
 void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
