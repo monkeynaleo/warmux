@@ -86,6 +86,7 @@ bool CheckBox::LoadXMLConfiguration()
   ParseXMLPosition();
   ParseXMLSize();
   ParseXMLBorder();
+  ParseXMLBackground();
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
@@ -95,8 +96,9 @@ bool CheckBox::LoadXMLConfiguration()
   xmlFile->ReadStringAttr(widgetNode, "pictureChecked", file);
   file = profile->relative_path + file;
   if (!picChecked.ImgLoad(file)) {
-    if (!picChecked.ImgLoad(profile->relative_path + "menu/cbox_checked.png")) {
-      Error("XML Loading -> CheckBox: can't load menu/cbox_checked.png");
+    file = profile->relative_path + "menu/cbox_checked.png";
+    if (!picChecked.ImgLoad(file)) {
+      Error("XML Loading -> CheckBox: can't load " + file);
     }
   }
 
@@ -104,8 +106,9 @@ bool CheckBox::LoadXMLConfiguration()
   xmlFile->ReadStringAttr(widgetNode, "pictureUnchecked", file);
   file = profile->relative_path + file;
   if (!picUnchecked.ImgLoad(file)) {
-    if (!picUnchecked.ImgLoad(profile->relative_path + "menu/cbox_unchecked.png")) {
-      Error("XML Loading -> CheckBox: can't load menu/cbox_unchecked.png");
+    file = profile->relative_path + "menu/cbox_unchecked.png";
+    if (!picUnchecked.ImgLoad(file)) {
+      Error("XML Loading -> CheckBox: can't load " + file);
     }
   }
 

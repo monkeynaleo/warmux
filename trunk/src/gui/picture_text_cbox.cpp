@@ -71,6 +71,7 @@ bool PictureTextCBox::LoadXMLConfiguration()
   ParseXMLPosition();
   ParseXMLSize();
   ParseXMLBorder();
+  ParseXMLBackground();
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
