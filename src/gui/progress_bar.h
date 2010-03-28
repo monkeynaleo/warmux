@@ -79,6 +79,14 @@ protected:
 
 public:
   ProgressBar();
+  ProgressBar(uint _x,
+              uint _y,
+              uint _width,
+              uint _height,
+              long _value,
+              long minValue,
+              long maxValue,
+              enum orientation _orientation);// = PROG_BAR_HORIZONTAL);
   virtual ~ProgressBar() {};
 
   int GetCurrentValue() { return val; };
@@ -104,12 +112,15 @@ public:
   // Draw the progress bar
   virtual void DrawXY(const Point2i &pos) const;
 
-  inline const long & GetMaxVal() const { return max; }
-  inline const long & GetVal() const { return val; }
+  inline const long & GetMaxVal() const { return this->max; }
+  inline const long & GetMinVal() const { return this->min; }
+  inline const long & GetVal() const { return this->val; }
 
   int GetWidth() const { return larg; }
   int GetHeight() const { return haut; }
   Point2i GetSize() const { return Point2i(larg, haut); }
+  uint GetX() const { return this->x; }
+  uint GetY() const { return this->y; }
 
   // add/remove value tag
   marqueur_it AddTag (long val, const Color& coul);

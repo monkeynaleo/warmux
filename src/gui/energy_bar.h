@@ -24,15 +24,37 @@
 
 #include "gui/progress_bar.h"
 
-class EnergyBar : public ProgressBar {
+class EnergyBar : public ProgressBar 
+{
   public:
+    struct Threshold
+    {
+      float thresholdValue;
+      Color color;
+      float redCoef;
+      float greenCoef;
+      float blueCoef;
+      float alphaCoef; 
+    };
+    
     static const int NB_OF_ENERGY_COLOR = 6;
-    Color colors_value[NB_OF_ENERGY_COLOR];
+    Threshold thresholds[NB_OF_ENERGY_COLOR];
 
   public:
-    EnergyBar();
+    EnergyBar(uint _x,
+              uint _y,
+              uint _width,
+              uint _height,
+              long _value = 0,
+              long minValue = 0,
+              long maxValue = 100,
+              enum orientation _orientation = PROG_BAR_HORIZONTAL);
+
+    void ProcessThresholds(int thresholdNumber,
+                           float thresholdMax,
+                           Color & colorMax);
+    void SortThresholds();
     void Actu(long val);
-    Color GetColorValue(long app_energy) const;
 };
 
 #endif /* ENERGY_BAR_H */

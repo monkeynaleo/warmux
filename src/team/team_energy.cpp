@@ -64,7 +64,7 @@ void EnergyList::AddValue(uint value)
 
 
 TeamEnergy::TeamEnergy(Team * _team):
-  energy_bar(),
+  energy_bar(NULL),
   value(0),
   new_value(0),
   max_value(0),
@@ -82,15 +82,21 @@ TeamEnergy::TeamEnergy(Team * _team):
   status(EnergyStatusOK),
   energy_list()
 {
-  energy_bar.InitPos(0, 0, BAR_WIDTH, BAR_HEIGHT);
-  energy_bar.SetBorderColor(Color(255, 255, 255, ALPHA));
-  energy_bar.SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
+  energy_bar = new EnergyBar(0, 0, BAR_WIDTH, BAR_HEIGHT,
+                             0, 0, 100, ProgressBar::PROG_BAR_VERTICAL);
+
+  energy_bar->SetBorderColor(Color(255, 255, 255, ALPHA));
+  energy_bar->SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
 }
 
 TeamEnergy::~TeamEnergy()
 {
-  if(icon) delete icon;
-  if(t_team_energy) delete t_team_energy;
+  if (icon) delete icon;
+  if (t_team_energy) delete t_team_energy;
+
+  if (NULL != energy_bar) {
+    delete energy_bar;
+  }
 }
 
 void TeamEnergy::Config(uint _current_energy,
@@ -101,7 +107,7 @@ void TeamEnergy::Config(uint _current_energy,
   value = _current_energy;
   new_value = _current_energy;
   ASSERT(max_value != 0)
-  energy_bar.InitVal(value, 0, max_value, ProgressBar::PROG_BAR_VERTICAL);
+  energy_bar->InitVal(value, 0, max_value, ProgressBar::PROG_BAR_VERTICAL);
   icon = NULL;
   SetIcon(team->GetFlag());
   energy_list.Reset();
@@ -151,10 +157,10 @@ void TeamEnergy::Refresh()
 
 void TeamEnergy::Draw(const Point2i& pos)
 {
-  energy_bar.Actu(value);
+  energy_bar->Actu(value);
   Point2i tmp = pos + Point2i(BAR_SPACING / 2 + rank * (BAR_WIDTH + BAR_SPACING) + dx, dy);
-  energy_bar.DrawXY(tmp);
-  icon->DrawXY(tmp + Point2i(energy_bar.GetWidth() / 2, 0));
+  energy_bar->DrawXY(tmp);
+  icon->DrawXY(tmp + Point2i(energy_bar->GetWidth() / 2, 0));
 }
 
 void TeamEnergy::SetValue(uint new_energy)

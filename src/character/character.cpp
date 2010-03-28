@@ -124,7 +124,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
-  energy_bar(),
+  energy_bar(NULL),
   survivals(0),
   name_text(NULL),
   rl_motion_pause(0),
@@ -157,14 +157,18 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
 
   // Energy
   m_energy = GameMode::GetInstance()->character.init_energy;
-  energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
-                      0,
-                      GameMode::GetInstance()->character.init_energy);
-  energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
-  energy_bar.SetBorderColor( black_color );
-  energy_bar.SetBackgroundColor( gray_color );
+
+  energy_bar = new EnergyBar(0, 0, 
+                             LARG_ENERGIE, HAUT_ENERGIE,
+                             GameMode::GetInstance()->character.init_energy,
+                             0,
+                             GameMode::GetInstance()->character.init_energy);
+
+  energy_bar->SetBorderColor(black_color);
+  energy_bar->SetBackgroundColor(gray_color);
 
   SetEnergy(GameMode::GetInstance()->character.init_energy);
+
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
@@ -181,7 +185,7 @@ Character::Character (const Character& acharacter) :
   disease_damage_per_turn(acharacter.disease_damage_per_turn),
   disease_duration(acharacter.disease_duration),
   damage_stats(new DamageStatistics(*acharacter.damage_stats, *this)),
-  energy_bar(acharacter.energy_bar),
+  energy_bar(NULL),
   survivals(acharacter.survivals),
   name_text(NULL),
   rl_motion_pause(acharacter.rl_motion_pause),
@@ -197,6 +201,17 @@ Character::Character (const Character& acharacter) :
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
+  energy_bar = new EnergyBar(acharacter.energy_bar->GetX(), 
+                             acharacter.energy_bar->GetY(),
+                             acharacter.energy_bar->GetWidth(), 
+                             acharacter.energy_bar->GetHeight(),
+                             acharacter.energy_bar->GetVal(),
+                             acharacter.energy_bar->GetMinVal(),
+                             acharacter.energy_bar->GetMaxVal());
+  energy_bar->SetBorderColor(black_color);
+  energy_bar->SetBackgroundColor(gray_color);
+  SetEnergy(GameMode::GetInstance()->character.init_energy);
+ 
   if (acharacter.body) {
     Body * newBody = new Body(*acharacter.body);
     SetBody(newBody);
@@ -213,18 +228,19 @@ Character::~Character()
   if (body) {
     delete body;
   }
-
   if (name_text) {
     delete name_text;
   }
-
-  if(particle_engine) {
+  if (particle_engine) {
     delete particle_engine;
   }
-
+  if (NULL != energy_bar) {
+    delete energy_bar;
+  }
   body            = NULL;
   name_text       = NULL;
   particle_engine = NULL;
+  energy_bar      = NULL;
 }
 
 void Character::SignalDrowning()
@@ -265,7 +281,7 @@ void Character::DrawEnergyBar(int dy) const
   if( IsDead() )
         return;
 
-  energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)
+  energy_bar->DrawXY( Point2i( GetCenterX() - energy_bar->GetWidth() / 2, GetY() + dy)
                      - Camera::GetInstance()->GetPosition() );
 }
 
@@ -338,7 +354,7 @@ void Character::SetEnergy(int new_energy)
   // Change energy
   m_energy = InRange_Long((int)new_energy, 0,
                      GameMode::GetInstance()->character.max_energy);
-  energy_bar.Actu(m_energy);
+  energy_bar->Actu(m_energy);
 
   // Dead character ?
   if (GetEnergy() <= 0) Die();

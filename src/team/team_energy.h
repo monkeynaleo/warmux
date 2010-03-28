@@ -81,7 +81,7 @@ class TeamEnergy
     TeamEnergy operator=(const TeamEnergy&);
     /**********************************************/
 
-    EnergyBar   energy_bar;
+    EnergyBar * energy_bar;
     // displayed value
     uint        value;
     // team value

@@ -59,7 +59,7 @@ private:
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
   DamageStatistics *damage_stats;
-  EnergyBar energy_bar;
+  EnergyBar * energy_bar;
 
   // survived games
   int survivals;

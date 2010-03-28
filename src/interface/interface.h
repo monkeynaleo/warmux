@@ -77,7 +77,7 @@ public:
    int start_show_display;
    bool display_timer;
    bool display_minimap;
-   EnergyBar energy_bar;
+   EnergyBar * energy_bar;
    ProgressBar wind_bar;
    WeaponStrengthBar weapon_strength_bar;
 
