@@ -26,7 +26,7 @@
 #include "map/map.h"
 #include "tool/math_tools.h"
 
-ProgressBar::ProgressBar():
+ProgressBar::ProgressBar() :
   border_color(0, 0, 0, 255),
   value_color(255, 255, 255, 255),
   background_color(100, 100, 100, 255),
@@ -52,6 +52,42 @@ ProgressBar::ProgressBar():
   colorMax(),
   marqueur()
 {
+}
+
+ProgressBar::ProgressBar(uint _x,
+                         uint _y,
+                         uint _width,
+                         uint _height,
+                         long _value, 
+                         long minValue, 
+                         long maxValue, 
+                         enum orientation _orientation) :
+  border_color(0, 0, 0, 255),
+  value_color(255, 255, 255, 255),
+  background_color(100, 100, 100, 255),
+  image(),
+  coefRed(),
+  coefGreen(),
+  coefBlue(),
+  coefAlpha(),
+  divisor(),
+  gradientMode(false),
+  x(_x),
+  y(_y),
+  larg(_width),
+  haut(_height),
+  val(_value),
+  min(minValue),
+  max(maxValue),
+  m_use_ref_val(false),
+  m_ref_val(0),
+  val_barre(0),
+  orientation(_orientation),
+  colorMin(),
+  colorMax(),
+  marqueur()
+{
+  image.NewSurface(Point2i(larg, haut), SDL_SWSURFACE | SDL_SRCALPHA, true);
 }
 
 void ProgressBar::SetMinMaxValueColor(const Color & min, 
@@ -159,17 +195,18 @@ void ProgressBar::DrawXY(const Point2i & pos) const
   }
 
   Rectanglei r_value;
-  if(PROG_BAR_HORIZONTAL == orientation)
+  if (PROG_BAR_HORIZONTAL == orientation) {
     r_value = Rectanglei(begin, 1, end - begin, haut - 2);
-  else
+  } else {
     r_value = Rectanglei(1, haut - end + begin - 1, larg - 2, end -1 );
+  }
 
   image.FillRect(r_value, value_color);
 
   if (m_use_ref_val) {
     int ref = ComputeBarValue (m_ref_val);
     Rectanglei r_ref;
-    if(PROG_BAR_HORIZONTAL == orientation)
+    if (PROG_BAR_HORIZONTAL == orientation)
        r_ref = Rectanglei(1 + ref, 1, 1, haut - 2);
     else
        r_ref = Rectanglei(1, 1 + ref, larg - 2, 1);
@@ -178,10 +215,9 @@ void ProgressBar::DrawXY(const Point2i & pos) const
 
   // Marqueurs
   marqueur_it_const it = marqueur.begin(), it_end = marqueur.end();
-  for (; it != it_end; ++it)
-  {
+  for (; it != it_end; ++it) {
     Rectanglei r_marq;
-    if(PROG_BAR_HORIZONTAL == orientation)
+    if (PROG_BAR_HORIZONTAL == orientation)
       r_marq = Rectanglei(1 + it->val, 1, 1, haut - 2);
     else
       r_marq = Rectanglei(1, 1 + it->val, larg -2, 1);
