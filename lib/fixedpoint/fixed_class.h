@@ -57,8 +57,8 @@ struct fixed_point {
 	/*explicit*/ fixed_point(int64_t i) : intValue(i << p) {}
 	/*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
 	/*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
-	/*explicit*/ fixed_point(long int l) : intValue(l << p) {}
-	/*explicit*/ fixed_point(unsigned int l) : intValue(l << p) {}
+	/*explicit*/ fixed_point(long int l) : intValue(((int64_t)l) << p) {}
+	/*explicit*/ fixed_point(unsigned int l) : intValue(((int64_t)l) << p) {}
 #ifdef __APPLE__
     /*explicit*/ fixed_point(size_t i) : intValue(((int64_t)i) << p) {}
 #endif
@@ -78,16 +78,16 @@ struct fixed_point {
 	fixed_point operator / (fixed_point r) const { fixed_point x = *this; x /= r; return x;}
 
 	bool operator == (fixed_point r) const { return intValue == r.intValue; }
-	bool operator == (int i) const { return intValue == (i << p); }
+	bool operator == (int i) const { return intValue == (((int64_t)i) << p); }
 	bool operator != (fixed_point r) const { return !(*this == r); }
 	bool operator <  (fixed_point r) const { return intValue < r.intValue; }
-	bool operator < (int i) const { return intValue < (i << p); }
+	bool operator < (int i) const { return intValue < (((int64_t)i)  << p); }
 	bool operator >  (fixed_point r) const { return intValue > r.intValue; }
-	bool operator > (int i) const { return intValue > (i << p); }
+	bool operator > (int i) const { return intValue > (((int64_t)i)  << p); }
 	bool operator <= (fixed_point r) const { return intValue <= r.intValue; }
-	bool operator <= (int i) const { return intValue <= (i << p); }
+	bool operator <= (int i) const { return intValue <= (((int64_t)i)  << p); }
 	bool operator >= (fixed_point r) const { return intValue >= r.intValue; }
-	bool operator >= (int i) const { return intValue >= (i << p); }
+	bool operator >= (int i) const { return intValue >= (((int64_t)i) << p); }
 
 	fixed_point operator + (int32_t r) const { fixed_point x = *this; x += r; return x;}
 	fixed_point operator - (int32_t r) const { fixed_point x = *this; x -= r; return x;}
