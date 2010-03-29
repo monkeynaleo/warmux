@@ -9,10 +9,12 @@ The cmake_build.sh script builds Wormux on Mac OS X by using the CMake build sys
 
 Requirements :
   - CMake 2.6 +
-  - libintl (gnu gettext) headers [a universal binary of the library is included
-                                   along this script but not the headers]
+  - libintl (gnu gettext) headers (you can simply take the 'libintl.h' included along this
+    script and copy it to /usr/local/include)
   - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)
     installed in your /Library/Frameworks directory (NOT $(HOME)/Library/Frameworks)
+  - xgettext, part of gnu gettext (this dependency could probably be removed by tweaking CMake
+    scripts to make them not update translation files, but for now it does)
 
 targets :
     ./cmake_build.sh           : default build (i386, compatible OS X 10.5+)
