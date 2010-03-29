@@ -12,7 +12,7 @@ Requirements :
   - libintl (gnu gettext) headers [a universal binary of the library is included
                                    along this script but not the headers]
   - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)
-    installed in your /Library/Frameworks directory.
+    installed in your /Library/Frameworks directory (NOT $(HOME)/Library/Frameworks)
 
 targets :
     ./cmake_build.sh           : default build (i386, compatible OS X 10.5+)
