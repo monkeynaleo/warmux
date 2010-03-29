@@ -23,9 +23,14 @@
 #define ENERGY_BAR_H
 
 #include "gui/progress_bar.h"
+#include "tool/resource_manager.h"
 
 class EnergyBar : public ProgressBar 
 {
+  private:
+    Profile * profile;
+    const xmlNode * widgetNode;
+
   public:
     struct Threshold
     {
@@ -49,7 +54,10 @@ class EnergyBar : public ProgressBar
               long minValue = 0,
               long maxValue = 100,
               enum orientation _orientation = PROG_BAR_HORIZONTAL);
+    EnergyBar(Profile * _profile,
+              const xmlNode * _widgetNode);
 
+    virtual bool LoadXMLConfiguration(void);
     void ProcessThresholds(int thresholdNumber,
                            float thresholdMax,
                            Color & colorMax);

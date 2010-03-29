@@ -57,6 +57,41 @@ EnergyBar::EnergyBar(uint _x,
   SortThresholds();
 }
 
+EnergyBar::EnergyBar(Profile * _profile,
+                     const xmlNode * _widgetNode) :
+  profile(_profile),
+  widgetNode(_widgetNode)
+{
+}
+
+bool EnergyBar::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  unsigned int thresholdCount = xmlFile->GetNbChildren(widgetNode);
+  const xmlNode * thresholdNode = xmlFile->GetFirstChild(widgetNode);
+  uint i = 0;
+  double thresholdValue;
+
+  for ( ; thresholdCount > 0; --thresholdCount) {
+
+    if ("threshold" == xmlFile->GetNodeName(thresholdNode)) {
+      if (xmlFile->ReadPercentageAttr(thresholdNode, "value", thresholdValue)) {
+        Color thresholdColor(0, 0, 0, 255);
+        xmlFile->ReadHexColorAttr(thresholdNode, "color", thresholdColor);
+        ProcessThresholds(i++, thresholdValue, thresholdColor);
+      } else {
+        // Malformed threshold value !
+      }
+    }
+    thresholdNode = xmlFile->GetNextSibling(thresholdNode);
+  } 
+  return true;
+}
+
 void EnergyBar::ProcessThresholds(int thresholdNumber,
                                   float thresholdMax,
                                   Color & colorMax)
