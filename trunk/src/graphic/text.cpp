@@ -88,9 +88,9 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
 
   // Load the font size ... based on 72 DPI
   int fontSize = 12;
-  if (xmlFile->IsAPercentageAttr(textNode, "fontSize")) {
-    double tmpValue;
-    xmlFile->ReadPercentageAttr(textNode, "fontSize", tmpValue);
+  double tmpValue;
+
+  if (xmlFile->ReadPercentageAttr(textNode, "fontSize", tmpValue)) {
     fontSize = GetMainWindow().GetHeight() * tmpValue / 100;
   } else {
     xmlFile->ReadPixelAttr(textNode, "fontSize", fontSize);
