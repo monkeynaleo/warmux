@@ -153,19 +153,22 @@ void EnergyBar::Actu(long real_energy)
   Threshold thresholdMin;
   Threshold thresholdMax;
 
-  for (int i = 0; i < NB_OF_ENERGY_COLOR; ++i) {
-    if (currentPercentage > thresholds[i].thresholdValue) {
-      continue;
-    } else {
-      if (i > 0) {
-        thresholdMin = thresholds[i - 1];
-      } else {
-        thresholdMin = thresholds[0];
-      }
-      thresholdMax = thresholds[i];
-      break;
-    }
+  int i = 0;
+  while ((i < NB_OF_ENERGY_COLOR) 
+    && (currentPercentage > thresholds[i].thresholdValue)) {
+    i++;
   }
+  ASSERT (i < NB_OF_ENERGY_COLOR);
+  if (i >= NB_OF_ENERGY_COLOR){
+     return;
+  }
+  if (i > 0) {
+    thresholdMin = thresholds[i - 1];
+  } else {
+    thresholdMin = thresholds[0];
+  }
+  thresholdMax = thresholds[i];
+  
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) - 
                  ComputeBarValue(max * thresholdMin.thresholdValue / 100.0);
