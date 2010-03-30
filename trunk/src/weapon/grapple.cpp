@@ -144,8 +144,7 @@ class GrappleConfig : public EmptyWeaponConfig
 //-----------------------------------------------------------------------------
 
 Grapple::Grapple() :
-  Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig()),
-  last_broken_node_sense(0)
+  Weapon(WEAPON_GRAPPLE, "grapple", new GrappleConfig())
 {
   UpdateTranslationStrings();
 
@@ -214,7 +213,7 @@ bool Grapple::TryAttachRope()
   return false;
 }
 
-bool Grapple::TryAddNode(int CurrentSense)
+bool Grapple::TryAddNode()
 {
   uint lg;
   Point2d V;
@@ -240,10 +239,6 @@ bool Grapple::TryAddNode(int CurrentSense)
     {
       rope_angle = ActiveCharacter().GetRopeAngle() ;
 
-      if ( (last_broken_node_sense * CurrentSense > 0) &&
-           (fabs(last_broken_node_angle - rope_angle) < 0.1))
-        return false ;
-
       // if contact point is the same as position of the last node
       // (can happen because of jitter applied in find_first_contact_point),
       // give up adding such node
@@ -252,7 +247,7 @@ bool Grapple::TryAddNode(int CurrentSense)
 
       // The rope has collided something...
       // Add a node on the rope and change the fixation point
-      AttachNode(contact_point, rope_angle, CurrentSense);
+      AttachNode(contact_point, rope_angle);
 
       return true;
     }
@@ -260,13 +255,11 @@ bool Grapple::TryAddNode(int CurrentSense)
   return false;
 }
 
-bool Grapple::TryRemoveNodes(int currentSense)
+bool Grapple::TryRemoveNodes()
 {
   if ( rope_nodes.size() < 2 )
     return false;
 
-  // [RCL]: nodeSense check seems to be useless... either remove node senses at all or
-  // find an example where it is required
   double currentAngle = ActiveCharacter().GetRopeAngle();
   Point2i mapRopeStart;
   ActiveCharacter().GetHandPosition(mapRopeStart);
@@ -316,7 +309,6 @@ bool Grapple::TryRemoveNodes(int currentSense)
   for ( int i = 0; i < nodes_to_remove; i ++ )
   {
      last_broken_node_angle = currentAngle;
-     last_broken_node_sense = currentSense;
 
      // remove last node
      DetachNode();
@@ -328,7 +320,6 @@ bool Grapple::TryRemoveNodes(int currentSense)
 void Grapple::NotifyMove(bool collision)
 {
   bool addNode = false;
-  int currentSense;
 
   if (!attached)
     return;
@@ -347,10 +338,9 @@ void Grapple::NotifyMove(bool collision)
       return;
     }
 
-  currentSense = ActiveCharacter().GetAngularSpeed() >= 0 ? 1: -1;
 
   // While there is nodes to add, we add !
-  while (TryAddNode(currentSense))
+  while (TryAddNode())
     addNode = true;
 
   // If we have created nodes, we exit to avoid breaking what we
@@ -358,7 +348,7 @@ void Grapple::NotifyMove(bool collision)
   if (addNode)
     return;
 
-  TryRemoveNodes( currentSense );
+  TryRemoveNodes();
 }
 
 void Grapple::Refresh()
@@ -467,7 +457,6 @@ void Grapple::AttachRope(const Point2i& contact_point)
   rope_node_t root_node;
   root_node.pos = m_fixation_point;
   root_node.angle = 0;
-  root_node.sense = 0;
   rope_nodes.push_back(root_node);
 
   ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
@@ -488,9 +477,7 @@ void Grapple::DetachRope()
   cable_sound.Stop();
 }
 
-void Grapple::AttachNode(const Point2i& contact_point,
-                         double angle,
-                         int sense)
+void Grapple::AttachNode(const Point2i& contact_point, double angle)
 {
   // The rope has collided something...
   // Add a node on the rope and change the fixation point.
@@ -506,10 +493,9 @@ void Grapple::AttachNode(const Point2i& contact_point,
   rope_node_t node;
   node.pos = m_fixation_point;
   node.angle = angle;
-  node.sense = sense;
   rope_nodes.push_back(node);
 
-  MSG_DEBUG("grapple.node", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+  MSG_DEBUG("grapple.node", "+ %d,%d %f", node.pos.x, node.pos.y, node.angle);
 }
 
 void Grapple::DetachNode()
@@ -520,7 +506,7 @@ void Grapple::DetachNode()
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
-    MSG_DEBUG("grapple.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+    MSG_DEBUG("grapple.node", "- %d,%d %f", node.pos.x, node.pos.y, node.angle);
   }
 #endif
 
@@ -755,8 +741,7 @@ void Grapple::PrintDebugRope()
        it != rope_nodes.end();
        it++) {
 
-    printf("%05d %05d %03.3f %d\n", it->pos.x, it->pos.y,
-           it->angle, it->sense);
+    printf("%05d %05d %03.3f\n", it->pos.x, it->pos.y, it->angle);
   }
 }
 
