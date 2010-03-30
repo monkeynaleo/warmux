@@ -69,7 +69,7 @@ class Grapple : public Weapon
     bool WillBeAttached();
     bool TryAttachRope();
     bool TryAddNode();
-    bool TryRemoveNodes();
+    void TryRemoveNodes();
 
   public:
     enum {
