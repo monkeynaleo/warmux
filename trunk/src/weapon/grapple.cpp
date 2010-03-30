@@ -255,66 +255,15 @@ bool Grapple::TryAddNode()
   return false;
 }
 
-bool Grapple::TryRemoveNodes()
+void Grapple::TryRemoveNodes()
 {
-  if ( rope_nodes.size() < 2 )
-    return false;
-
-  double currentAngle = ActiveCharacter().GetRopeAngle();
-  Point2i mapRopeStart;
-  ActiveCharacter().GetHandPosition(mapRopeStart);
-
-  const int max_nodes_per_turn = 100; // safe value, was used to avoid network congestion
-  int nodes_to_remove = 0;
-
-  TraceResult tr;
-
-  for ( std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
-       it != rope_nodes.rend(); it++ )
-  {
-    if ( nodes_to_remove >= max_nodes_per_turn )
-        break;
-
-    // try tracing to current node:
-    // if we cannot trace, this means that previous node shouldn't have been removed
-    // (NOTE: since nodes are often in ground, we're ignoring traces hitting ground
-    // right at the end)
-    const float end_proximity_threshold = 0.95f;
-    if ( GetWorld().TraceRay( mapRopeStart, it->pos, tr ) && tr.m_fraction < end_proximity_threshold )
-    {
-        // collision detected!
-        if ( nodes_to_remove > 0 )
-            nodes_to_remove--; // undo the node remove
-
-        // now we can stop removing the nodes as we don't have the clear "sight"
-        // to current node
-        break;
-    };
-
-    double nodeAngle = it->angle;
-
-    int currentAngleSign = ( currentAngle < 0 ) ? -1 : 1;
-    int nodeAngleSign = ( nodeAngle < 0 ) ? -1 : 1;
-
-    if ( currentAngleSign != nodeAngleSign && rope_nodes.size() > 2 )
-        nodes_to_remove++;
-    else
-        break;
-
-  };
-
-  if ( nodes_to_remove > 0 )
-    MSG_DEBUG( "grapple.break", "nodes to remove %d", nodes_to_remove );
-
-  for ( int i = 0; i < nodes_to_remove; i ++ )
-  {
-     last_broken_node_angle = currentAngle;
-
-     // remove last node
-     DetachNode();
+  // Stupid algorithm: remove one node and try to add it again
+  // If a node is added, that means that there is no more node to remove
+  while (rope_nodes.size() > 2) {
+    DetachNode();
+    if (TryAddNode())
+      break;
   }
-
-  return nodes_to_remove > 0;
 }
 
 void Grapple::NotifyMove(bool collision)
