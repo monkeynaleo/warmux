@@ -36,12 +36,10 @@ class Grapple : public Weapon
     {
       Point2i pos;
       double angle;
-      int sense;
     };
 
     uint last_mvt;
     double last_broken_node_angle;
-    double last_broken_node_sense;
 
     // Rope launching data.
     bool attached;
@@ -70,8 +68,8 @@ class Grapple : public Weapon
 
     bool WillBeAttached();
     bool TryAttachRope();
-    bool TryAddNode(int CurrentSense) ;
-    bool TryRemoveNodes(int CurrentSense) ;
+    bool TryAddNode();
+    bool TryRemoveNodes();
 
   public:
     enum {
@@ -99,9 +97,7 @@ class Grapple : public Weapon
     void AttachRope(const Point2i& contact_point);
     void DetachRope();
 
-    void AttachNode(const Point2i& contact_point,
-		    double angle,
-		    int sense);
+    void AttachNode(const Point2i& contact_point, double angle);
     void DetachNode();
     void SetRopeSize(double length) const;
 
