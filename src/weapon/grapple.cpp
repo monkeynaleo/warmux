@@ -41,7 +41,7 @@
 
 const uint DT_MVT = 15; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 4;  //dst_minimal between 2 nodes
-const int SKIP_DST = 1;
+const int SKIP_DST = 8;
 
 bool find_first_contact_point (Point2i from, double angle, uint length,
                                int skip, Point2i &contact_point)
