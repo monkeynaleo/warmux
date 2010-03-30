@@ -15,14 +15,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "A(z) %s pálya nem található"
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:354
+#: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i játékos lépett be"
 msgstr[1] "%i játékos lépett be"
 
-#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:364
+#: src/menu/network_menu.cpp:133 src/menu/network_menu.cpp:370
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -39,13 +39,13 @@ msgstr "%s <%s>, ismertebb nevén %s a(z) %s csapatból"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a(z) %s csapatból"
 
-#: src/menu/team_box.cpp:236
+#: src/menu/team_box.cpp:238
 #, c-format
 msgid "%s Team"
 msgstr "%s Csapat"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:228
+#: src/menu/team_box.cpp:230
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Csapat - Távoli"
@@ -320,7 +320,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s csapat %u rohambombát kapott!"
 msgstr[1] "%s csapat %u rohambombát kapott!"
 
-#: src/weapon/shotgun.cpp:132
+#: src/weapon/shotgun.cpp:130
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -397,7 +397,7 @@ msgstr "%s csapat elpusztult."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s sírba vitte magával a(z) %s csapat tagját!"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:206
 msgid "(dead)"
 msgstr "(halott)"
 
@@ -411,7 +411,7 @@ msgid "(unknown time)"
 msgstr "(ismeretlen idõ)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
@@ -458,7 +458,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Üllõ"
 
-#: src/main.cpp:301
+#: src/main.cpp:292
 msgid "Authors:"
 msgstr "Szerzõk:"
 
@@ -515,7 +515,7 @@ msgstr "Nem találom a(z) %s csapatot!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Nem tudom megnyitni a személyes csapatok könyvtárát (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
@@ -525,27 +525,27 @@ msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nem tudom megnyitni az egyéni csapatok könyvtárát (%s)!"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "Center the camera on the character"
 msgstr "Kamera karakterre állítása"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "Change the active character"
 msgstr "Aktív karakter megváltoztatása"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Change the aim angle"
 msgstr "Célzás szögének megváltoztatása"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:86
 #, fuzzy
 msgid "Change the weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Change the weapon countdown"
 msgstr "Fegyver idõzítésének megváltoztatása"
@@ -571,13 +571,13 @@ msgstr "Véletlenszerûen választ a pályák közül"
 msgid "Classic"
 msgstr "Klasszikus"
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:81
 #, fuzzy
 msgid "Click: Center the camera on the character"
 msgstr "Kattintás: Kamera karakterre állítása"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:163 src/network/network.cpp:461
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "Kliens mód"
 
@@ -597,7 +597,7 @@ msgstr "Repesz-rakétavetõ"
 msgid "Commit Suicide"
 msgstr "Öngyilkosság"
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:84
 msgid "Configuration menu"
 msgstr "Konfigurációs menü"
 
@@ -643,11 +643,11 @@ msgstr "Diszkógránát"
 msgid "Displays this message"
 msgstr "Megjeleníti ezt az üzenetet"
 
-#: src/menu/network_menu.cpp:165
+#: src/menu/network_menu.cpp:171
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:80
 #, fuzzy
 msgid "Drag&drop: Move the camera"
 msgstr "Drag&drop: kamera mozgatása"
@@ -754,7 +754,7 @@ msgstr ""
 "nem közvetlenül kapcsolódsz az internetre, ellenõrizd a routered "
 "beállítását: a(z) %s-s TCP portot át kell irányítanod a számítógépedre."
 
-#: src/team/team.cpp:116
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
@@ -767,7 +767,7 @@ msgstr "Lángszóró"
 msgid "Football Bomb"
 msgstr "Rögbibomba"
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:83
 msgid "Fullscreen / window"
 msgstr "Teljesképernyõs / ablakban"
 
@@ -775,7 +775,7 @@ msgstr "Teljesképernyõs / ablakban"
 msgid "Fullscreen?"
 msgstr "Teljesképernyõs"
 
-#: src/menu/game_menu.cpp:93
+#: src/menu/game_menu.cpp:95
 msgid "Game"
 msgstr "Játék beállítások"
 
@@ -826,7 +826,7 @@ msgid "Head commander"
 msgstr "Parancsnok"
 
 #. Display player's name
-#: src/interface/interface.cpp:191
+#: src/interface/interface.cpp:197
 msgid "Head commander: "
 msgstr "Parancsnok: "
 
@@ -834,7 +834,7 @@ msgstr "Parancsnok: "
 msgid "Help"
 msgstr "Súgó"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:77
 msgid "High jump"
 msgstr "Magasugrás"
 
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Siess, túl lassú vagy!!"
 
-#: src/main.cpp:287
+#: src/main.cpp:278
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -938,11 +938,11 @@ msgstr "Ez egy ajándék!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:78
 msgid "Jump"
 msgstr "Ugrás"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:79
 msgid "Jump backwards"
 msgstr "Hátraugrás"
 
@@ -984,8 +984,8 @@ msgstr "Alacsony gravitáció"
 msgid "Manual connection"
 msgstr "Kézi kapcsolat"
 
-#: src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
-#: src/menu/network_menu.cpp:94 src/menu/network_menu.cpp:98
+#: src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Map"
 msgstr "Pálya"
 
@@ -998,7 +998,7 @@ msgstr "A(z) %s pálya készítõje: "
 msgid "Maps"
 msgstr "Pályák"
 
-#: src/menu/network_menu.cpp:424 src/menu/network_menu.cpp:425
+#: src/menu/network_menu.cpp:430 src/menu/network_menu.cpp:431
 #, fuzzy
 msgid "Master mode"
 msgstr "Játékmód"
@@ -1039,12 +1039,12 @@ msgstr "Leghaszontalanabb"
 msgid "Most violent"
 msgstr "Legerõszakosabb"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Move the camera with mouse or arrows"
 msgstr "Kamera mozgatása egérrel vagy nyilakkal"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Move the character"
 msgstr "Karakter mozgatása"
@@ -1106,12 +1106,12 @@ msgstr "Karakterek száma"
 msgid "Number of teams:"
 msgstr "Csapatok száma:"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "On a character: Select it"
 msgstr "Egy karakteren: Kiválasztja az aktívat"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:90
 msgid "On map: Select a target"
 msgstr "A térképen: célpont kijelölése"
 
@@ -1137,7 +1137,7 @@ msgstr "Jelszó:"
 msgid "Play"
 msgstr "Irány a játék!"
 
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:126
 msgid "Play several times"
 msgstr "Több játék engedélyezése"
 
@@ -1166,7 +1166,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Nyilvános játékok"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:99
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1174,7 +1174,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Kilépés"
 
-#: src/main.cpp:276
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Kilépés a Wormuxból"
 
@@ -1182,7 +1182,7 @@ msgstr "Kilépés a Wormuxból"
 msgid "Quit battle"
 msgstr "Kilépés"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:75
 msgid "Quit game"
 msgstr "Kilépés a játékból"
 
@@ -1208,7 +1208,7 @@ msgstr "Felbontás"
 msgid "Riot Bomb"
 msgstr "Rohambomba"
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Játék futtatása"
 
@@ -1234,25 +1234,25 @@ msgid "Server available on Internet"
 msgstr "Interneten elérhetõ szerver"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:491
+#: src/menu/network_menu.cpp:175 src/network/network.cpp:491
 msgid "Server mode"
 msgstr "Szerver mód"
 
-#: src/weapon/shotgun.cpp:89
+#: src/weapon/shotgun.cpp:87
 msgid "Shotgun"
 msgstr "Sörétespuska"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Show the weapons menu"
 msgstr "Fegyverek megjelenítése"
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:82
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Kezelõfelület megjelenítése/elrejtése"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Show/hide the minimap"
 msgstr "Minitérkép megjelenítése/elrejtése"
@@ -1269,7 +1269,7 @@ msgstr "Pofon"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Vágd pofon az ellenséget, hogy ugorjon egy kicsit."
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:93
 msgid "Smaller aim angle and walk step"
 msgstr "Kisebb irányszög és lépés"
 
@@ -1317,7 +1317,7 @@ msgstr "Hangok"
 msgid "Starting a new game"
 msgstr "Új játék indítása"
 
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "Stock:"
 msgstr "Készlet:"
 
@@ -1333,7 +1333,7 @@ msgstr "Szuperpingvin"
 msgid "Syringe"
 msgstr "Fecskendõ"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:85
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Beszélgetés hálózati játék közben"
@@ -1346,8 +1346,8 @@ msgstr "Csapat grafikonok"
 msgid "Team stats"
 msgstr "Csapat statisztikák"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:75 src/menu/game_menu.cpp:79
-#: src/menu/network_menu.cpp:93 src/menu/network_menu.cpp:97
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
 msgid "Teams"
 msgstr "Csapatok"
 
@@ -1414,7 +1414,7 @@ msgstr "Megszakadt a játék, mert kijelentkeztél."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "A gránát elhagyta a csatateret robbanás elõtt"
 
-#: src/menu/network_menu.cpp:370
+#: src/menu/network_menu.cpp:376
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "A többiek várnak rád! Ébresztõ :-)"
@@ -1443,7 +1443,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:271
+#: src/menu/network_menu.cpp:277
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1508,7 +1508,7 @@ msgstr "Ismeretlen parancs"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#: src/main.cpp:206
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Verzió"
 
@@ -1517,11 +1517,11 @@ msgstr "Verzió"
 msgid "Version verification failed because: %s"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
 
-#: src/menu/network_menu.cpp:432
+#: src/menu/network_menu.cpp:438
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:285
+#: src/menu/network_menu.cpp:291
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1537,12 +1537,12 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:500
+#: src/menu/network_menu.cpp:506
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Várakozás a szerverre, visszaléphetsz vagy csetelhetsz!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Lövés / Ajándék gyorsabban esik"
@@ -1551,13 +1551,13 @@ msgstr "Lövés / Ajándék gyorsabban esik"
 msgid "Weapons"
 msgstr "Fegyverek"
 
-#: src/main.cpp:310
+#: src/main.cpp:301
 msgid "Website: "
 msgstr "Honlap: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:155
+#: src/menu/network_menu.cpp:161
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr ""
@@ -1581,11 +1581,11 @@ msgstr "Hulló dísztárgyak"
 msgid "Winner"
 msgstr "Gyõztes"
 
-#: src/main.cpp:218
+#: src/main.cpp:209
 msgid "Wormux launching..."
 msgstr "Wormux indítása..."
 
-#: src/main.cpp:300
+#: src/main.cpp:291
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
@@ -1601,16 +1601,16 @@ msgstr "Hibás pályanév!"
 msgid "Wrong team!"
 msgstr "Hibás csapat!"
 
-#: src/menu/network_menu.cpp:374
+#: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Egyedül vagy :-/"
 
-#: src/menu/network_menu.cpp:279
+#: src/menu/network_menu.cpp:285
 msgid "You are alone..."
 msgstr "Egyedül vagy..."
 
-#: src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -1624,7 +1624,7 @@ msgstr "Választanod kell legalább egy pályát!"
 msgid "You need at least two valid teams!"
 msgstr "Választanod kell legalább két csapatot!"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:261
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nem tudsz játszani csapatválasztás nélkül!"

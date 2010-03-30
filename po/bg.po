@@ -24,14 +24,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:354
+#: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i играч се свърза"
 msgstr[1] "%i играча се свързаха"
 
-#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:364
+#: src/menu/network_menu.cpp:133 src/menu/network_menu.cpp:370
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -48,13 +48,13 @@ msgstr "%s <%s> познат и като %s от %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> от %s"
 
-#: src/menu/team_box.cpp:236
+#: src/menu/team_box.cpp:238
 #, c-format
 msgid "%s Team"
 msgstr "%s Отбор"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:228
+#: src/menu/team_box.cpp:230
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Отбор  %s - Отдалечен"
@@ -333,7 +333,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Отборът %s спечели %u Звуков заряд!"
 msgstr[1] "Отборът %s спечели %u Звукови заряди!"
 
-#: src/weapon/shotgun.cpp:132
+#: src/weapon/shotgun.cpp:130
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -412,7 +412,7 @@ msgstr "Всички от отбора %s са убити."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:206
 msgid "(dead)"
 msgstr "(мъртъв)"
 
@@ -426,7 +426,7 @@ msgid "(unknown time)"
 msgstr "(незнайно време)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "(unlimited)"
 msgstr "(безкраен)"
 
@@ -473,7 +473,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Наковалня"
 
-#: src/main.cpp:301
+#: src/main.cpp:292
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -529,7 +529,7 @@ msgstr "Не мога да намеря отборът на %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя личната директория на отборите (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -539,23 +539,23 @@ msgstr "Не мога да отворя директорията на отбор
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не мога да отворя личната директорията на отбора (%s)!"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:98
 msgid "Center the camera on the character"
 msgstr "Центрирай войника"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:97
 msgid "Change the active character"
 msgstr "Смени активния войник"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:88
 msgid "Change the aim angle"
 msgstr "Смени ъгълът на насочване"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:86
 msgid "Change the weapon category"
 msgstr "Смени категорията на оъжието"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:87
 msgid "Change the weapon countdown"
 msgstr "Смени времето за обратно броене на оръжието"
 
@@ -579,12 +579,12 @@ msgstr "Избери случайно измежду картите"
 msgid "Classic"
 msgstr "Класически"
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:81
 msgid "Click: Center the camera on the character"
 msgstr "Клик: Центрирай войника"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:163 src/network/network.cpp:461
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "Клиентски режим"
 
@@ -604,7 +604,7 @@ msgstr "Шрапнел РПГ"
 msgid "Commit Suicide"
 msgstr "Последен опит"
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:84
 msgid "Configuration menu"
 msgstr "Конфигурационно меню"
 
@@ -649,11 +649,11 @@ msgstr "Диско-граната!"
 msgid "Displays this message"
 msgstr "Покажи това съобщение"
 
-#: src/menu/network_menu.cpp:165
+#: src/menu/network_menu.cpp:171
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Не забравяй да потвърдиш след като си избрал отбора(ите) си !"
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:80
 msgid "Drag&drop: Move the camera"
 msgstr "Влачи&Пусни: Движи камерата"
 
@@ -755,7 +755,7 @@ msgstr ""
 "свързан директно към интернет, провери конфигурацията на рутера си: TCP Порт "
 "%s трябва да е препратен към твоя компютър."
 
-#: src/team/team.cpp:116
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Грешка: Не мога да намеря телата на \"%s\" отбора \"%s\"."
@@ -768,7 +768,7 @@ msgstr "Огнехвъргачка"
 msgid "Football Bomb"
 msgstr "Футбол-бомба"
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:83
 msgid "Fullscreen / window"
 msgstr "Цял екран/Прозорец"
 
@@ -776,7 +776,7 @@ msgstr "Цял екран/Прозорец"
 msgid "Fullscreen?"
 msgstr "Цял екран?"
 
-#: src/menu/game_menu.cpp:93
+#: src/menu/game_menu.cpp:95
 msgid "Game"
 msgstr "Игра"
 
@@ -826,7 +826,7 @@ msgid "Head commander"
 msgstr "Командир"
 
 #. Display player's name
-#: src/interface/interface.cpp:191
+#: src/interface/interface.cpp:197
 msgid "Head commander: "
 msgstr "Командир:"
 
@@ -834,7 +834,7 @@ msgstr "Командир:"
 msgid "Help"
 msgstr "Помощ"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:77
 msgid "High jump"
 msgstr "Висок скок"
 
@@ -884,7 +884,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
-#: src/main.cpp:287
+#: src/main.cpp:278
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -933,11 +933,11 @@ msgstr "Подаръче..."
 msgid "Jetpack"
 msgstr "Реактивна раница"
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:78
 msgid "Jump"
 msgstr "Подскочи"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:79
 msgid "Jump backwards"
 msgstr "Задно салто"
 
@@ -979,8 +979,8 @@ msgstr "Ниска гравитация"
 msgid "Manual connection"
 msgstr "Ръчна връзка"
 
-#: src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
-#: src/menu/network_menu.cpp:94 src/menu/network_menu.cpp:98
+#: src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Map"
 msgstr "Карта"
 
@@ -993,7 +993,7 @@ msgstr "Картата %s е творение на: "
 msgid "Maps"
 msgstr "Карти"
 
-#: src/menu/network_menu.cpp:424 src/menu/network_menu.cpp:425
+#: src/menu/network_menu.cpp:430 src/menu/network_menu.cpp:431
 msgid "Master mode"
 msgstr "Господарски Режим"
 
@@ -1033,11 +1033,11 @@ msgstr "Най-Безполезен"
 msgid "Most violent"
 msgstr "Най-Буен"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 msgid "Move the camera with mouse or arrows"
 msgstr "Движи камерата с мишката или стрелкичките"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:89
 msgid "Move the character"
 msgstr "Премести войника"
 
@@ -1095,11 +1095,11 @@ msgstr "Войници"
 msgid "Number of teams:"
 msgstr "Отбори"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:91
 msgid "On a character: Select it"
 msgstr "На войник: Избиране"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:90
 msgid "On map: Select a target"
 msgstr "На картата: Избери цел"
 
@@ -1125,7 +1125,7 @@ msgstr "Парола:"
 msgid "Play"
 msgstr "Играй!"
 
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:126
 msgid "Play several times"
 msgstr "Играй няколко пъти"
 
@@ -1154,7 +1154,7 @@ msgstr "Порт:"
 msgid "Public battles"
 msgstr "Публични Битки"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:99
 msgid "Quickly quit game with Ctrl"
 msgstr "Излез бързо от играта с Ctrl"
 
@@ -1162,7 +1162,7 @@ msgstr "Излез бързо от играта с Ctrl"
 msgid "Quit"
 msgstr "Излез!"
 
-#: src/main.cpp:276
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
@@ -1170,7 +1170,7 @@ msgstr "Излизане от Wormux"
 msgid "Quit battle"
 msgstr "Напусни"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:75
 msgid "Quit game"
 msgstr "Напусни играта"
 
@@ -1194,7 +1194,7 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Пусни играта"
 
@@ -1220,23 +1220,23 @@ msgid "Server available on Internet"
 msgstr "Достъпен сървър в интернет"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:491
+#: src/menu/network_menu.cpp:175 src/network/network.cpp:491
 msgid "Server mode"
 msgstr "Сървъров Режим"
 
-#: src/weapon/shotgun.cpp:89
+#: src/weapon/shotgun.cpp:87
 msgid "Shotgun"
 msgstr "Помпа"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:92
 msgid "Show the weapons menu"
 msgstr "Показване на менюто с оръжията"
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:82
 msgid "Show/hide the interface"
 msgstr "Покажи/Скрий интерфейса"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:96
 msgid "Show/hide the minimap"
 msgstr "Покажи/Скрий Картата"
 
@@ -1252,7 +1252,7 @@ msgstr "Шамарче"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Зашлеви врага за да го накараш да подскочи малко."
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:93
 msgid "Smaller aim angle and walk step"
 msgstr "По-малък ъгъл на насочване и стъпка при вървене"
 
@@ -1299,7 +1299,7 @@ msgstr "Звуци"
 msgid "Starting a new game"
 msgstr "Стартирам нова игра"
 
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "Stock:"
 msgstr "Наличност:"
 
@@ -1315,7 +1315,7 @@ msgstr "Супер-Tux"
 msgid "Syringe"
 msgstr "Отрова"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:85
 msgid "Talk in network battles"
 msgstr "Говори в мрежова битка"
 
@@ -1327,8 +1327,8 @@ msgstr "Графика на Отборите"
 msgid "Team stats"
 msgstr "Статистика"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:75 src/menu/game_menu.cpp:79
-#: src/menu/network_menu.cpp:93 src/menu/network_menu.cpp:97
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
 msgid "Teams"
 msgstr "Отбори"
 
@@ -1389,7 +1389,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:370
+#: src/menu/network_menu.cpp:376
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
@@ -1418,7 +1418,7 @@ msgstr ""
 "Оръжието %s има безкрайни муниции, но все пак бонус-кутиите могат да "
 "съдържат муниции за него!"
 
-#: src/menu/network_menu.cpp:271
+#: src/menu/network_menu.cpp:277
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1480,7 +1480,7 @@ msgstr "Непозната команда"
 msgid "Unlimited"
 msgstr "Безкраен"
 
-#: src/main.cpp:206
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Версия"
 
@@ -1489,11 +1489,11 @@ msgstr "Версия"
 msgid "Version verification failed because: %s"
 msgstr "Проверка на версията се провали заради: %s"
 
-#: src/menu/network_menu.cpp:432
+#: src/menu/network_menu.cpp:438
 msgid "Wait until some opponent(s) connect!"
 msgstr "Изчакай да се свърже(ат) опонент(и)!"
 
-#: src/menu/network_menu.cpp:285
+#: src/menu/network_menu.cpp:291
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1509,12 +1509,12 @@ msgstr "Чакам за %s"
 msgid "Waiting for remote players"
 msgstr "Чакам за отдалечени играчи"
 
-#: src/menu/network_menu.cpp:500
+#: src/menu/network_menu.cpp:506
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:95
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 
@@ -1522,13 +1522,13 @@ msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:310
+#: src/main.cpp:301
 msgid "Website: "
 msgstr "Страница: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:155
+#: src/menu/network_menu.cpp:161
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Добре Дошъл %s във %s!"
@@ -1553,11 +1553,11 @@ msgstr "Красотички носени от вятъра?"
 msgid "Winner"
 msgstr "Победител"
 
-#: src/main.cpp:218
+#: src/main.cpp:209
 msgid "Wormux launching..."
 msgstr "Wormux се зарежда..."
 
-#: src/main.cpp:300
+#: src/main.cpp:291
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
@@ -1573,15 +1573,15 @@ msgstr "Грешно име на картата !"
 msgid "Wrong team!"
 msgstr "Грешен отбор !"
 
-#: src/menu/network_menu.cpp:374
+#: src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Ти си сам :-/"
 
-#: src/menu/network_menu.cpp:279
+#: src/menu/network_menu.cpp:285
 msgid "You are alone..."
 msgstr "Ти си сам..."
 
-#: src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
 msgstr "Ти си новия господар на хода!"
 
@@ -1593,7 +1593,7 @@ msgstr "Трябва ми поне една валидна карта!"
 msgid "You need at least two valid teams!"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:261
 msgid "You won't be able to play before selecting a team!"
 msgstr "Не може да играеш без отбор. Избери един!"
 
