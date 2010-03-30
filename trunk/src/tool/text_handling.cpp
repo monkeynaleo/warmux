@@ -126,8 +126,6 @@ bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym
   case SDLK_UP:
   case SDLK_DOWN:
   case SDLK_INSERT:
-  case SDLK_HOME:
-  case SDLK_END:
   case SDLK_PAGEUP:
   case SDLK_PAGEDOWN:
     // all those keys are forbidden!
@@ -136,6 +134,12 @@ bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym
 
     // we return true for all the following cases because even if action has failed,
     // the action has not be handled by something else
+  case SDLK_HOME:
+    pos = 0;
+    break;
+  case SDLK_END:
+    pos = text.size();
+    break;
   case SDLK_LEFT:
     MoveCursorLeft(text, pos);
     break;
