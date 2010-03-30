@@ -39,8 +39,9 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-const uint DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
-const uint DST_MIN = 80 ;  //dst_minimal between 2 nodes
+const uint DT_MVT = 15; //delta_t between 2 up/down/left/right mvt
+const uint DST_MIN = 8;  //dst_minimal between 2 nodes
+const int SKIP_DST = 2;
 
 bool find_first_contact_point (Point2i from, double angle, uint length,
                                int skip, Point2i &contact_point)
@@ -205,7 +206,7 @@ bool Grapple::TryAttachRope()
   angle = ActiveCharacter().GetFiringAngle();
 
   Point2i contact_point;
-  if (find_first_contact_point(pos, angle, length, 4, contact_point)) {
+  if (find_first_contact_point(pos, angle, length, SKIP_DST, contact_point)) {
     AttachRope(contact_point);
     return true;
   }
@@ -235,7 +236,7 @@ bool Grapple::TryAddNode()
 
   // Check if the rope collide something
 
-  if (find_first_contact_point(m_fixation_point, angle, lg, 2, contact_point))
+  if (find_first_contact_point(m_fixation_point, angle, lg, SKIP_DST, contact_point))
     {
       rope_angle = ActiveCharacter().GetRopeAngle() ;
 
@@ -257,12 +258,29 @@ bool Grapple::TryAddNode()
 
 void Grapple::TryRemoveNodes()
 {
-  // Stupid algorithm: remove one node and try to add it again
-  // If a node is added, that means that there is no more node to remove
+  std::list<rope_node_t>::reverse_iterator nodeit;
+
+  uint lg;
+  Point2d V;
+  Point2i handPos, contact_point;
+  double angle;
+
+  ActiveCharacter().GetHandPosition(handPos);
+
   while (rope_nodes.size() > 2) {
-    DetachNode();
-    if (TryAddNode())
+
+    nodeit = rope_nodes.rbegin();
+    ++nodeit;
+
+    V.x = handPos.x - nodeit->pos.x;
+    V.y = handPos.y - nodeit->pos.y;
+    angle = V.ComputeAngle();
+    lg = static_cast<uint>(V.Norm());
+
+    if (find_first_contact_point(nodeit->pos, angle, lg, SKIP_DST, contact_point))
       break;
+
+    DetachNode();
   }
 }
 
