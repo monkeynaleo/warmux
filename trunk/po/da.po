@@ -21,14 +21,14 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Banen %s blev ikke fundet :-("
 
-#: src/menu/network_menu.cpp:123 src/menu/network_menu.cpp:354
+#: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: src/menu/network_menu.cpp:127 src/menu/network_menu.cpp:364
+#: src/menu/network_menu.cpp:133 src/menu/network_menu.cpp:370
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -45,13 +45,13 @@ msgstr "%s <%s> også kendt som %s fra %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: src/menu/team_box.cpp:236
+#: src/menu/team_box.cpp:238
 #, c-format
 msgid "%s Team"
 msgstr "Hold %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:228
+#: src/menu/team_box.cpp:230
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Hold %s – Fjernt"
@@ -329,7 +329,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Holdet %s har fået %u oprørsbombe!"
 msgstr[1] "Holdet %s har fået %u oprørsbomber!"
 
-#: src/weapon/shotgun.cpp:132
+#: src/weapon/shotgun.cpp:130
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -405,7 +405,7 @@ msgstr "Holdet %s blev udryddet."
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tog et medlem af holdet %s med i graven!"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:206
 msgid "(dead)"
 msgstr "(død)"
 
@@ -419,7 +419,7 @@ msgid "(unknown time)"
 msgstr "(ukendt tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:301
+#: src/main.cpp:292
 msgid "Authors:"
 msgstr "Forfattere:"
 
@@ -523,7 +523,7 @@ msgstr "Kan ikke finde holdet %s!"
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan ikke åbne det personlige holdkatalog (%s)!"
 
-#: src/menu/skin_menu.cpp:76 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne holdkataloget (%s)!"
@@ -533,27 +533,27 @@ msgstr "Kan ikke åbne holdkataloget (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan ikke åbne det brugerdefinerede holdkatalog (%s)!"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "Center the camera on the character"
 msgstr "Centrér kamera på kriger"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "Change the active character"
 msgstr "Ændr aktiv kriger"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Change the aim angle"
 msgstr "Ændr sigtevinkel"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:86
 #, fuzzy
 msgid "Change the weapon category"
 msgstr "Ændr våbenkatalog"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Change the weapon countdown"
 msgstr "Ændr våbennedtælling"
@@ -578,13 +578,13 @@ msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 msgid "Classic"
 msgstr "Klassisk"
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:81
 #, fuzzy
 msgid "Click: Center the camera on the character"
 msgstr "Klik: Centrér kamera på kriger"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:163 src/network/network.cpp:461
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -604,7 +604,7 @@ msgstr "Cluzooka"
 msgid "Commit Suicide"
 msgstr "Begå selvmord"
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:84
 msgid "Configuration menu"
 msgstr "Konfigurationsmenu"
 
@@ -649,11 +649,11 @@ msgstr "Diskogranat"
 msgid "Displays this message"
 msgstr "Vis denne meddelelse"
 
-#: src/menu/network_menu.cpp:165
+#: src/menu/network_menu.cpp:171
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:80
 #, fuzzy
 msgid "Drag&drop: Move the camera"
 msgstr "Træk og slip: Panorér kamera"
@@ -759,7 +759,7 @@ msgstr ""
 "er forbundet direkte til internettet, så check din routerkonfiguration i "
 "stedet. I så fald skal du forwarde TCP-port %s til din computer."
 
-#: src/team/team.cpp:116
+#: src/team/team.cpp:123
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
@@ -772,7 +772,7 @@ msgstr "Flammekaster"
 msgid "Football Bomb"
 msgstr "Fodboldbombe"
 
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:83
 msgid "Fullscreen / window"
 msgstr "Fuld skærm/vindue"
 
@@ -780,7 +780,7 @@ msgstr "Fuld skærm/vindue"
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
-#: src/menu/game_menu.cpp:93
+#: src/menu/game_menu.cpp:95
 msgid "Game"
 msgstr "Spil"
 
@@ -831,7 +831,7 @@ msgid "Head commander"
 msgstr "Hovedkommandør"
 
 #. Display player's name
-#: src/interface/interface.cpp:191
+#: src/interface/interface.cpp:197
 msgid "Head commander: "
 msgstr "Hovedkommandør: "
 
@@ -839,7 +839,7 @@ msgstr "Hovedkommandør: "
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:77
 msgid "High jump"
 msgstr "Højt hop"
 
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynd dig, du er for langsom!"
 
-#: src/main.cpp:287
+#: src/main.cpp:278
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -944,11 +944,11 @@ msgstr "Det er en gave!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:78
 msgid "Jump"
 msgstr "Hop"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:79
 msgid "Jump backwards"
 msgstr "Hop baglæns"
 
@@ -990,8 +990,8 @@ msgstr "Svag tyngdekraft"
 msgid "Manual connection"
 msgstr "Manuel forbindelse"
 
-#: src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
-#: src/menu/network_menu.cpp:94 src/menu/network_menu.cpp:98
+#: src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Map"
 msgstr "Bane"
 
@@ -1004,7 +1004,7 @@ msgstr "Banen %s, en kreation af: "
 msgid "Maps"
 msgstr "Baner"
 
-#: src/menu/network_menu.cpp:424 src/menu/network_menu.cpp:425
+#: src/menu/network_menu.cpp:430 src/menu/network_menu.cpp:431
 msgid "Master mode"
 msgstr "Administratormodus"
 
@@ -1044,12 +1044,12 @@ msgstr "Mest ubrugelig"
 msgid "Most violent"
 msgstr "Mest voldelig"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Move the camera with mouse or arrows"
 msgstr "Flyt kameraet med mus eller piletaster"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Move the character"
 msgstr "Flyt kriger"
@@ -1110,12 +1110,12 @@ msgstr "Antal krigere"
 msgid "Number of teams:"
 msgstr "Antal hold:"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "On a character: Select it"
 msgstr "Med en kriger: Skifter aktiv kriger"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:90
 msgid "On map: Select a target"
 msgstr "Med kortet: Vælger et mål"
 
@@ -1141,7 +1141,7 @@ msgstr "Kodeord:"
 msgid "Play"
 msgstr "Spil"
 
-#: src/menu/network_menu.cpp:120
+#: src/menu/network_menu.cpp:126
 msgid "Play several times"
 msgstr "Spil flere gange"
 
@@ -1170,7 +1170,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Offentlige kampe"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:99
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1178,7 +1178,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Afslut"
 
-#: src/main.cpp:276
+#: src/main.cpp:267
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
@@ -1186,7 +1186,7 @@ msgstr "Afslut Wormux"
 msgid "Quit battle"
 msgstr "Forlad kampen"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:75
 msgid "Quit game"
 msgstr "Afslut spillet"
 
@@ -1212,7 +1212,7 @@ msgstr "Opløsning"
 msgid "Riot Bomb"
 msgstr "Oprørsbombe"
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 msgid "Run game"
 msgstr "Kører spillet"
 
@@ -1238,25 +1238,25 @@ msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:491
+#: src/menu/network_menu.cpp:175 src/network/network.cpp:491
 msgid "Server mode"
 msgstr "Servermodus"
 
-#: src/weapon/shotgun.cpp:89
+#: src/weapon/shotgun.cpp:87
 msgid "Shotgun"
 msgstr "Haglgevær"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Show the weapons menu"
 msgstr "Vis våbenmenu"
 
-#: src/menu/help_menu.cpp:78
+#: src/menu/help_menu.cpp:82
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Vis/skjul interface"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Show/hide the minimap"
 msgstr "Vis/skjul minimap"
@@ -1273,7 +1273,7 @@ msgstr "Slå"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Slå fjenden for at få ham til at flytte sig lidt."
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:93
 msgid "Smaller aim angle and walk step"
 msgstr "Mindre sigtevinkel og skridt"
 
@@ -1321,7 +1321,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:231
+#: src/interface/interface.cpp:237
 msgid "Stock:"
 msgstr "Lager:"
 
@@ -1337,7 +1337,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Sprøjte"
 
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:85
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Snak i netværkskamp"
@@ -1350,8 +1350,8 @@ msgstr "Hold-grafer"
 msgid "Team stats"
 msgstr "Hold-statistik"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:75 src/menu/game_menu.cpp:79
-#: src/menu/network_menu.cpp:93 src/menu/network_menu.cpp:97
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
 msgid "Teams"
 msgstr "Hold"
 
@@ -1417,7 +1417,7 @@ msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: src/menu/network_menu.cpp:370
+#: src/menu/network_menu.cpp:376
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
@@ -1446,7 +1446,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:271
+#: src/menu/network_menu.cpp:277
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1511,7 +1511,7 @@ msgstr "Ukendt kommando"
 msgid "Unlimited"
 msgstr "Ubegrænset"
 
-#: src/main.cpp:206
+#: src/main.cpp:197
 msgid "Version"
 msgstr "Version"
 
@@ -1520,11 +1520,11 @@ msgstr "Version"
 msgid "Version verification failed because: %s"
 msgstr "Version-verifikation fejlede fordi: %s"
 
-#: src/menu/network_menu.cpp:432
+#: src/menu/network_menu.cpp:438
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:285
+#: src/menu/network_menu.cpp:291
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -1540,13 +1540,13 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:500
+#: src/menu/network_menu.cpp:506
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Venter på serveren; det eneste du kan gøre er at annullere eller chatte!"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: fall fast"
 msgstr "Våben: Affyr / bonusboks: falder hurtigt"
@@ -1555,13 +1555,13 @@ msgstr "Våben: Affyr / bonusboks: falder hurtigt"
 msgid "Weapons"
 msgstr "Våben"
 
-#: src/main.cpp:310
+#: src/main.cpp:301
 msgid "Website: "
 msgstr "Hjemmeside: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:155
+#: src/menu/network_menu.cpp:161
 #, fuzzy, c-format
 #| msgid "Welcome to %s!"
 msgid "Welcome to %s on %s!"
@@ -1586,11 +1586,11 @@ msgstr "Vindpartikler?"
 msgid "Winner"
 msgstr "Vinder"
 
-#: src/main.cpp:218
+#: src/main.cpp:209
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: src/main.cpp:300
+#: src/main.cpp:291
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -1606,16 +1606,16 @@ msgstr "Ugyldigt banenavn!"
 msgid "Wrong team!"
 msgstr "Ugyldigt hold!"
 
-#: src/menu/network_menu.cpp:374
+#: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:279
+#: src/menu/network_menu.cpp:285
 msgid "You are alone..."
 msgstr "Du er alene..."
 
-#: src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
 msgstr "Du er den nye tur-bestyrer!"
 
@@ -1629,7 +1629,7 @@ msgstr "Du skal vælge mindst én gyldig bane!"
 msgid "You need at least two valid teams!"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:261
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kan ikke spille før du har valgt et hold!"
