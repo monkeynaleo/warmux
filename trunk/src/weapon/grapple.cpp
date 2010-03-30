@@ -40,8 +40,8 @@
 #include "tool/xml_document.h"
 
 const uint DT_MVT = 15; //delta_t between 2 up/down/left/right mvt
-const uint DST_MIN = 8;  //dst_minimal between 2 nodes
-const int SKIP_DST = 2;
+const uint DST_MIN = 4;  //dst_minimal between 2 nodes
+const int SKIP_DST = 1;
 
 bool find_first_contact_point (Point2i from, double angle, uint length,
                                int skip, Point2i &contact_point)
@@ -267,10 +267,9 @@ void Grapple::TryRemoveNodes()
 
   ActiveCharacter().GetHandPosition(handPos);
 
-  while (rope_nodes.size() > 2) {
+  while (rope_nodes.size() > 1) {
 
     nodeit = rope_nodes.rbegin();
-    ++nodeit;
 
     V.x = handPos.x - nodeit->pos.x;
     V.y = handPos.y - nodeit->pos.y;
