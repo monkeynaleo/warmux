@@ -42,7 +42,7 @@ void TextBox::BasicSetText(std::string const &new_txt)
   if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
     _new_txt.resize(max_nb_chars);
 
-  Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
+  const Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
   if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText(_new_txt);
@@ -85,20 +85,42 @@ void TextBox::Draw(const Point2i &mousePosition) const
   DrawCursor(position, cursor_pos);
 }
 
-Widget* TextBox::ClickUp(const Point2i &, uint button)
+Widget* TextBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  bool used = true;
-
   NeedRedrawing();
+
   if (button == SDL_BUTTON_MIDDLE)
   {
     std::string new_txt = GetText();
-    used = RetrieveBuffer(new_txt, cursor_pos);
+    bool        used    = RetrieveBuffer(new_txt, cursor_pos);
 
     if (new_txt != GetText())
       BasicSetText(new_txt);
+    return used ? this : NULL;
   }
-  return used ? this : NULL;
+  else if (button == SDL_BUTTON_LEFT)
+  {
+    const std::string      cur_txt = GetText();
+    const Font*            font    = Font::GetInstance(GetFontSize(), GetFontStyle());
+    std::string            txt     = "";
+    std::string::size_type pos     = 0;
+      
+    cursor_pos = 0;
+    while (pos < cur_txt.size() && this->position.x + font->GetWidth(txt) < mousePosition.x+2)
+    {
+      cursor_pos = pos;
+      while ((cur_txt[++pos] & 0xc0) == 0x80) { }
+      txt = cur_txt.substr(0, pos);
+    }
+
+    Label::Draw(mousePosition);
+    DrawCursor(position, cursor_pos);
+      
+    return this;
+  }
+  
+  // Om nom nom
+  return this;
 }
 
 
