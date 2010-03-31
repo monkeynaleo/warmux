@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "gui/energy_bar.h"
 #include "tool/resource_manager.h"
 #include "gui/progress_bar.h"
@@ -42,7 +43,10 @@ EnergyBar::EnergyBar(uint _x,
               _value,
               minValue,
               maxValue,
-              _orientation)
+              _orientation),
+  profile(NULL),
+  widgetNode(NULL),
+  listThresholds()
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
@@ -60,7 +64,8 @@ EnergyBar::EnergyBar(uint _x,
 EnergyBar::EnergyBar(Profile * _profile,
                      const xmlNode * _widgetNode) :
   profile(_profile),
-  widgetNode(_widgetNode)
+  widgetNode(_widgetNode),
+  listThresholds()
 {
 }
 
@@ -99,79 +104,71 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
     if (0 == thresholdNumber) {
       Threshold first;
-      first.thresholdValue = 0.0;
+      first.value = 0.0;
       first.color = colorMax;
       first.redCoef = 0.0;
       first.greenCoef = 0.0;
       first.blueCoef = 0.0;
       first.alphaCoef = 0.0;
-      thresholds[0] = first; 
+      listThresholds.push_back(first);
     }
     return;
   }
   
-  Color colorMin = thresholds[thresholdNumber - 1].color;
-  float thresholdMin = thresholds[thresholdNumber - 1].thresholdValue;
+  Color colorMin = listThresholds[thresholdNumber - 1].color;
+  float thresholdMin = listThresholds[thresholdNumber - 1].value;
   uint size = orientation == PROG_BAR_HORIZONTAL ? larg : haut; 
   float range = size * (thresholdMax - thresholdMin) / 100.0;
 
   Threshold newThreshold; 
-
-  newThreshold.thresholdValue = thresholdMax; 
+  newThreshold.value = thresholdMax; 
   newThreshold.color = colorMax;
-
   newThreshold.redCoef   = (colorMax.GetRed()   - colorMin.GetRed())   / range;
   newThreshold.greenCoef = (colorMax.GetGreen() - colorMin.GetGreen()) / range;
   newThreshold.blueCoef  = (colorMax.GetBlue()  - colorMin.GetBlue())  / range;
   newThreshold.alphaCoef = (colorMax.GetAlpha() - colorMin.GetAlpha()) / range;
-
-  thresholds[thresholdNumber] = newThreshold;
+  listThresholds.push_back(newThreshold);
 }
 
 void EnergyBar::SortThresholds()
 {
-  bool needMove;
-
-  do {
-    needMove = false;
-    for (int i = 0; i < NB_OF_ENERGY_COLOR - 1; ++i) {
-      if (thresholds[i].thresholdValue > thresholds[i + 1].thresholdValue) {
-        Threshold tmp = thresholds[i + 1];
-        thresholds[i + 1] = thresholds[i];
-        thresholds[i] = tmp;
-        needMove = true;
-      }
-    }
-  } while (needMove);
+  if (2 > listThresholds.size()) {
+    return;
+  }
+  sort(listThresholds.begin(), listThresholds.end());
 }
 
 void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
-  val_barre   = ComputeBarValue(val);
+  val_barre = ComputeBarValue(val);
   float currentPercentage = abs(val) / (float)max * 100.0;
   Threshold thresholdMin;
   Threshold thresholdMax;
-
   int i = 0;
-  while ((i < NB_OF_ENERGY_COLOR) 
-    && (currentPercentage > thresholds[i].thresholdValue)) {
-    i++;
+  int nbThresholds = listThresholds.size();
+
+  while ((i < nbThresholds) &&
+         (currentPercentage > listThresholds[i].value)) {
+    ++i;
   }
-  ASSERT (i < NB_OF_ENERGY_COLOR);
-  if (i >= NB_OF_ENERGY_COLOR){
-     return;
+
+  ASSERT(i < nbThresholds);
+
+  if (i >= nbThresholds) {
+    return;
   }
+
   if (i > 0) {
-    thresholdMin = thresholds[i - 1];
+    thresholdMin = listThresholds[i - 1];
   } else {
-    thresholdMin = thresholds[0];
+    thresholdMin = listThresholds[0];
   }
-  thresholdMax = thresholds[i];
-  
+  thresholdMax = listThresholds[i];
+
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) - 
-                 ComputeBarValue(max * thresholdMin.thresholdValue / 100.0);
+                 ComputeBarValue(max * thresholdMin.value / 100.0);
 
   value_color.SetColor((Uint8) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
                        (Uint8) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
