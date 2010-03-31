@@ -24,26 +24,31 @@
 
 #include "gui/progress_bar.h"
 #include "tool/resource_manager.h"
+#include <vector>
 
 class EnergyBar : public ProgressBar 
 {
+  public:
+    class Threshold
+    {
+      public:
+        float value;
+        Color color;
+        float redCoef;
+        float greenCoef;
+        float blueCoef;
+        float alphaCoef;
+        
+        bool operator < (const Threshold & threshold) const {
+          return value < threshold.value;
+        }
+    };
+    static const int NB_OF_ENERGY_COLOR = 6;
+
   private:
     Profile * profile;
     const xmlNode * widgetNode;
-
-  public:
-    struct Threshold
-    {
-      float thresholdValue;
-      Color color;
-      float redCoef;
-      float greenCoef;
-      float blueCoef;
-      float alphaCoef; 
-    };
-    
-    static const int NB_OF_ENERGY_COLOR = 6;
-    Threshold thresholds[NB_OF_ENERGY_COLOR];
+    std::vector<Threshold> listThresholds;
 
   public:
     EnergyBar(uint _x,
