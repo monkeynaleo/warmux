@@ -270,6 +270,7 @@ void Grapple::TryRemoveNodes()
   while (rope_nodes.size() > 1) {
 
     nodeit = rope_nodes.rbegin();
+    ++nodeit;
 
     V.x = handPos.x - nodeit->pos.x;
     V.y = handPos.y - nodeit->pos.y;
