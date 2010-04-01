@@ -35,12 +35,12 @@
 #include "game/game.h"
 
 
-WeaponStrengthBar::WeaponStrengthBar() :ProgressBar(),
-m_box(NULL),
-last_fire(NULL),
-m_item_last_fire(NULL)
+WeaponStrengthBar::WeaponStrengthBar() :
+  ProgressBar(),
+  m_box(NULL),
+  last_fire(NULL),
+  m_item_last_fire(NULL)
 {
-
 }
 
 WeaponStrengthBar::~WeaponStrengthBar()
@@ -49,18 +49,17 @@ WeaponStrengthBar::~WeaponStrengthBar()
   delete m_box;
 }
 
-void WeaponStrengthBar::InitPos (uint px, uint py, uint plarg, uint phaut){
-  ProgressBar::InitPos(px,py,plarg,phaut);
+void WeaponStrengthBar::InitPos(uint px, uint py, uint pwidth, uint pheight)
+{
+  ProgressBar::InitPos(px, py, pwidth, pheight);
 
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   if(last_fire) {delete last_fire;}
   last_fire = new Sprite(GetResourceManager().LoadImage( res, "interface/weapon_strength_bar_last_fire"),true);
 
   if(m_box) { delete m_box;}
-  m_box = PolygonGenerator::GenerateDecoratedBox(plarg, phaut);
+  m_box = PolygonGenerator::GenerateDecoratedBox(pwidth, pheight);
   m_box->SetStyle(DecoratedBox::STYLE_SQUARE);
-
-
 }
 
 static uint ScaleStrengthtoUInt(double strength)
@@ -119,27 +118,25 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
   } else {
     begin = 1;
     end = 1+val_barre;
-
   }
 
   Color bar_color = ComputeValueColor(val);
 
   Rectanglei r_value;
-  if(orientation == PROG_BAR_HORIZONTAL)
-    r_value = Rectanglei(begin, 1, end - begin, haut - 2);
-  else
-    r_value = Rectanglei(1, haut - end + begin - 1, larg - 2, end -1 );
+  if (orientation == PROG_BAR_HORIZONTAL) {
+    r_value = Rectanglei(begin, 1, end - begin, height - 2);
+  } else {
+    r_value = Rectanglei(1, height - end + begin - 1, width - 2, end -1 );
+  }
 
   image.FillRect(r_value, bar_color);
 
   // Marqueurs
   marqueur_it_const it=marqueur.begin(), it_end = marqueur.end();
-  for (; it != it_end; ++it)
-  {
+  for (; it != it_end; ++it) {
+    Point2i p_marq(1+it->val, height/2);
 
-    Point2i p_marq(1+it->val,haut/2);
-
-    if(m_item_last_fire){
+    if(m_item_last_fire) {
       m_box->DelItem(0);
       delete m_item_last_fire;
     }
@@ -147,18 +144,15 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
     PolygonItem * item = new PolygonItem(last_fire, p_marq);
     const_cast<PolygonItem *&>(m_item_last_fire) = item;
     m_box->AddItem(m_item_last_fire);
-
   }
 
-  Rectanglei dst(pos.x, pos.y, larg, haut);
+  Rectanglei dst(pos.x, pos.y, width, height);
   GetMainWindow().Blit(image, pos);
 
   m_box->SetPosition(pos.x,pos.y);
   m_box->DrawOnScreen();
 
-
   GetWorld().ToRedrawOnScreen(dst);
-
 }
 
 Color WeaponStrengthBar::ComputeValueColor(long val) const
