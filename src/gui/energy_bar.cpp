@@ -117,7 +117,7 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   
   Color colorMin = listThresholds[thresholdNumber - 1].color;
   float thresholdMin = listThresholds[thresholdNumber - 1].value;
-  uint size = orientation == PROG_BAR_HORIZONTAL ? larg : haut; 
+  uint size = orientation == PROG_BAR_HORIZONTAL ? width : height; 
   float range = size * (thresholdMax - thresholdMin) / 100.0;
 
   Threshold newThreshold; 

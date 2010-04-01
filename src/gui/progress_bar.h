@@ -48,7 +48,10 @@ private:
   bool gradientMode;
 
 protected:
-  uint x, y, larg, haut; // Position
+  uint x;
+  uint y;
+  uint width;
+  uint height;
   long val, min, max; // current, min and max values
   bool m_use_ref_val; // use reference value ?
   long m_ref_val; // reference value
@@ -58,8 +61,8 @@ protected:
   Color colorMin; // Color used for start value
   Color colorMax; // Color used for end value
 
-  long ComputeValue (long val) const;
-  uint ComputeBarValue (long val) const;
+  long ComputeValue(long val) const;
+  uint ComputeBarValue(long val) const;
 
   typedef struct s_marqueur_t{
     Color color;
@@ -67,9 +70,9 @@ protected:
   } marqueur_t;
 
  public:
-  void SetBorderColor(const Color& color) { border_color = color; };
-  void SetBackgroundColor(const Color& color) { background_color = color; };
-  void SetValueColor(const Color& color) { value_color = color; };
+  void SetBorderColor(const Color & color) { border_color = color; };
+  void SetBackgroundColor(const Color & color) { background_color = color; };
+  void SetValueColor(const Color & color) { value_color = color; };
   void SetMinMaxValueColor(const Color & min, const Color & max);
 
  protected:
@@ -86,7 +89,7 @@ public:
               long _value,
               long minValue,
               long maxValue,
-              enum orientation _orientation);// = PROG_BAR_HORIZONTAL);
+              enum orientation _orientation);
   virtual ~ProgressBar() {};
 
   int GetCurrentValue() { return val; };
@@ -97,33 +100,41 @@ public:
   void UpdateValue (long val);
 
   // Initialise la position
-  virtual void InitPos (uint x, uint y, uint larg, uint haut);
+  virtual void InitPos(uint x, 
+                       uint y, 
+                       uint width, 
+                       uint height);
 
   // Initialise les valeurs
-  void InitVal (long val, long min, long max, enum orientation orientation = PROG_BAR_HORIZONTAL);
+  void InitVal(long val, 
+               long min, 
+               long max, 
+               enum orientation orientation = PROG_BAR_HORIZONTAL);
 
   // Set reference value
   // Use it after InitVal !
-  void SetReferenceValue (bool use, long value=0);
+  void SetReferenceValue(bool use, 
+                         long value = 0);
 
   // Draw la barre de progresssion
-  void Draw() const {  DrawXY( Point2i(x, y) ); };
+  void Draw() const { DrawXY(Point2i(x, y)); };
 
   // Draw the progress bar
-  virtual void DrawXY(const Point2i &pos) const;
+  virtual void DrawXY(const Point2i & pos) const;
 
   inline const long & GetMaxVal() const { return this->max; }
   inline const long & GetMinVal() const { return this->min; }
   inline const long & GetVal() const { return this->val; }
 
-  int GetWidth() const { return larg; }
-  int GetHeight() const { return haut; }
-  Point2i GetSize() const { return Point2i(larg, haut); }
+  int GetWidth() const { return width; }
+  int GetHeight() const { return height; }
+  Point2i GetSize() const { return Point2i(width, height); }
   uint GetX() const { return this->x; }
   uint GetY() const { return this->y; }
 
   // add/remove value tag
-  marqueur_it AddTag (long val, const Color& coul);
+  marqueur_it AddTag(long val, 
+                     const Color & coul);
   void ResetTag() { marqueur.clear(); };
 };
 
