@@ -1497,7 +1497,7 @@ msgstr "Verifica versione fallita: %s"
 
 #: src/menu/network_menu.cpp:438
 msgid "Wait until some opponent(s) connect!"
-msgstr ""
+msgstr "Aspetta che qualche avversario si connetta!"
 
 #: src/menu/network_menu.cpp:291
 #, c-format
