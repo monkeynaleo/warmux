@@ -35,6 +35,7 @@
 #include "gui/label.h"
 #include "gui/check_box.h"
 #include "gui/picture_text_cbox.h"
+#include "gui/text_box.h"
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
@@ -145,7 +146,7 @@ Widget * Menu::CreateWidget(Profile * profile,
   } else if ("SpinButton" == widgetName) {
     return NULL;
   } else if ("TextBox" == widgetName) {
-    return NULL;
+    widget = new TextBox(profile, widgetNode);
   }
 
   if (NULL != widget) { 
