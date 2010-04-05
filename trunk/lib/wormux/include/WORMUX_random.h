@@ -45,9 +45,9 @@ public:
   void SetSeed(uint seed);
 
   bool GetBool();
-  double GetDouble();
-  double GetDouble(double max);
-  double GetDouble(double min, double max);
+  Double GetDouble();
+  Double GetDouble(Double max);
+  Double GetDouble(Double min, Double max);
   int GetInt(int min, int max);
   uint GetUint(uint min, uint max);
   long GetLong(long min, long max);

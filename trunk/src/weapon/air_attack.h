@@ -59,7 +59,7 @@ class Plane : public PhysicalObj
   public:
     Plane(AirAttackConfig& cfg);
     virtual ~Plane();
-    void Shoot(double speed, const Point2i& target);
+    void Shoot(Double speed, const Point2i& target);
     void Draw();
     void Refresh();
 };

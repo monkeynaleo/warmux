@@ -32,12 +32,12 @@
 #undef NAN // please don't use C99 NAN
 #endif
 
-static inline double getNaN()
+static inline Double getNaN()
 {
-  return std::numeric_limits<double>::quiet_NaN();
+  return std::numeric_limits<Double>::quiet_NaN();
 }
 
-static inline bool isNaN(double x)
+static inline bool isNaN(Double x)
 {
   return (x != x);
 }

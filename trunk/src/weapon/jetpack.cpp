@@ -34,7 +34,7 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 
-const double JETPACK_FORCE = 1800.0;
+const Double JETPACK_FORCE = 1800.0;
 
 const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
 
@@ -94,7 +94,7 @@ void JetPack::Refresh()
     {
       // We are using fuel !!!
       uint current = Time::GetInstance()->Read() ;
-      double delta = (double)(current - m_last_fuel_down);
+      Double delta = (Double)(current - m_last_fuel_down);
 
       while (delta >= DELTA_FUEL_DOWN)
       {

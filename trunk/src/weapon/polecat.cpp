@@ -44,14 +44,14 @@ class Polecat : public WeaponProjectile
   int save_x, save_y;
   uint last_fart_time;
   uint last_rebound_time;
-  double angle;
+  Double angle;
   void Fart();
  protected:
   void SignalOutOfMap();
  public:
   Polecat(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
-  void Shoot(double strength);
+  void Shoot(Double strength);
   void Refresh();
 
   virtual void Explosion();
@@ -68,14 +68,14 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
   last_rebound_time = 0;
 }
 
-void Polecat::Shoot(double strength)
+void Polecat::Shoot(Double strength)
 {
   WeaponProjectile::Shoot(strength);
 
   save_x=GetX();
   save_y=GetY();
 
-  double angle = ActiveCharacter().GetFiringAngle();
+  Double angle = ActiveCharacter().GetFiringAngle();
 
   if(angle<M_PI/2 && angle>-M_PI/2)
     m_sens = 1;
@@ -86,8 +86,8 @@ void Polecat::Shoot(double strength)
 void Polecat::Fart()
 {
   // particles must be exactly the same accross the network
-  double norme = double(RandomSync().GetLong(0, 500))/100;
-  double angle = double(RandomSync().GetLong(0, 3000))/100;
+  Double norme = Double(RandomSync().GetLong(0, 500))/100;
+  Double angle = Double(RandomSync().GetLong(0, 3000))/100;
   ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
   last_fart_time = Time::GetInstance()->Read();
   JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
@@ -119,7 +119,7 @@ void Polecat::Refresh()
     SignalTimeout();
   }
 
-  double norm, angle;
+  Double norm, angle;
   if (last_fart_time && last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
     Fart();
   }
@@ -164,7 +164,7 @@ void Polecat::Refresh()
   }
 
   image->SetRotation_rad(angle);
-  image->Scale((double)m_sens,1.0);
+  image->Scale((Double)m_sens,1.0);
   image->Update();
 }
 

@@ -44,7 +44,7 @@
 
 const uint    FLAMETHROWER_BULLET_SPEED       = 5;
 const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 40;
-const double  FLAMETHROWER_RANDOM_ANGLE       = 0.06;
+const Double  FLAMETHROWER_RANDOM_ANGLE       = 0.06;
 
 class FlameThrowerBullet : public WeaponBullet
 {
@@ -55,7 +55,7 @@ class FlameThrowerBullet : public WeaponBullet
   protected:
     ParticleEngine particle;
     void ShootSound();
-    void RandomizeShoot(double &angle, double &strength);
+    void RandomizeShoot(Double &angle, Double &strength);
     void DoExplosion();
     void SignalGroundCollision(const Point2d& speed_before);
     void SignalDrowning();
@@ -77,7 +77,7 @@ bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
   return m_overlapping_object == obj;
 }
 
-void FlameThrowerBullet::RandomizeShoot(double &angle, double &/*strength*/)
+void FlameThrowerBullet::RandomizeShoot(Double &angle, Double &/*strength*/)
 {
   angle += M_PI * RandomSync().GetDouble(-FLAMETHROWER_RANDOM_ANGLE, FLAMETHROWER_RANDOM_ANGLE);
 }
@@ -158,8 +158,8 @@ bool FlameThrower::p_Shoot()
 
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
-  double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
-               * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  Double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
+               * (Double)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,
                   5.0 + (Time::GetInstance()->Read() % 6));
   announce_missed_shots = false;

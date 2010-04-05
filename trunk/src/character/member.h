@@ -43,8 +43,8 @@ private:
   /**********************************************/
 
   Member* parent;
-  double  angle_rad;
-  float   alpha;
+  Double  angle_rad;
+  Double   alpha;
   bool    go_through_ground;
   std::map<std::string, v_attached> attached_members;
   Point2f pos;
@@ -72,7 +72,7 @@ public:
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt &                mvt, 
                      std::vector<class c_junction *> & skel_lst);
-  void SetAngle(const double & angle);
+  void SetAngle(const Double & angle);
   void RefreshSprite(LRDirection direction);
 
   void SetPos(const Point2f & pos);

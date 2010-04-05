@@ -29,36 +29,36 @@
 class AffineTransform2D {
  protected:
   // The matrix
-  double x1, x2, xt;
-  double y1, y2, yt;
-  double w1, w2, wt;
+  Double x1, x2, xt;
+  Double y1, y2, yt;
+  Double w1, w2, wt;
  public:
   AffineTransform2D();
   void Init();
   void Set(const AffineTransform2D &mat);
-  void SetRotation(double rad_angle);
-  void SetTranslation(double trans_x, double trans_y);
+  void SetRotation(Double rad_angle);
+  void SetTranslation(Double trans_x, Double trans_y);
   void SetTranslation(const Point2i & position);
   void SetTranslation(const Point2d & position);
-  void SetShrink(double shrink_x, double shrink_y);
-  void SetShear(double shear_x, double shear_y);
+  void SetShrink(Double shrink_x, Double shrink_y);
+  void SetShear(Double shear_x, Double shear_y);
   void SetTranslationAnimation(int start_time, int duration, int time, bool invert, const Point2d & start, const Point2d & end);
-  void SetRotationAnimation(int start_time, int duration, int time, bool invert, double angle_start, double angle_end = 0.0);
-  void SetShrinkAnimation(int start_time, int duration, int time, bool invert, double shrink_x_start, double shrink_y_start,
-                          double shrink_x_end = 1.0, double shrink_y_end = 1.0);
-  void SetShearAnimation(int start_time, int duration, int time, bool invert, double shear_tremor,
-                         double shear_x_start, double shear_y_start,
-                         double shear_x_end = 0.0, double shear_y_end = 0.0);
+  void SetRotationAnimation(int start_time, int duration, int time, bool invert, Double angle_start, Double angle_end = 0.0);
+  void SetShrinkAnimation(int start_time, int duration, int time, bool invert, Double shrink_x_start, Double shrink_y_start,
+                          Double shrink_x_end = 1.0, Double shrink_y_end = 1.0);
+  void SetShearAnimation(int start_time, int duration, int time, bool invert, Double shear_tremor,
+                         Double shear_x_start, Double shear_y_start,
+                         Double shear_x_end = 0.0, Double shear_y_end = 0.0);
   /* Matrix multiplication */
   AffineTransform2D operator*(const AffineTransform2D &mat) const;
   Point2i operator*(const Point2i& p) const;
   Point2d operator*(const Point2d& p) const;
   void DisplayMatrix();
   // Creation of instance
-  static AffineTransform2D Rotate(double rad_angle);
-  static AffineTransform2D Translate(double trans_x, double trans_y);
-  static AffineTransform2D Shrink(double shrink_x, double shrink_y);
-  static AffineTransform2D Shear(double shear_x, double shear_y);
+  static AffineTransform2D Rotate(Double rad_angle);
+  static AffineTransform2D Translate(Double trans_x, Double trans_y);
+  static AffineTransform2D Shrink(Double shrink_x, Double shrink_y);
+  static AffineTransform2D Shear(Double shear_x, Double shear_y);
 };
 
 #endif /* AFFINE_TRANSFORM_2D */

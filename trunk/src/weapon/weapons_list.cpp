@@ -168,7 +168,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
 Weapon * WeaponsList::GetRandomWeaponToDrop()
 {
   std::list<Weapon*>::iterator it;
-  double probability_sum = 0;
+  Double probability_sum = 0;
   for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
     probability_sum += (*it)->GetDropProbability();
     it++;
@@ -176,9 +176,9 @@ Weapon * WeaponsList::GetRandomWeaponToDrop()
   ASSERT(probability_sum > 0);
 
   MSG_DEBUG("random.get", "WeaponList::GetRandomWeaponToDrop()");
-  double num = RandomSync().GetDouble(0, probability_sum);
-  double total_bf_weapon = 0;
-  double total_after_weapon = 0;
+  Double num = RandomSync().GetDouble(0, probability_sum);
+  Double total_bf_weapon = 0;
+  Double total_after_weapon = 0;
 
   for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
     Weapon * weapon = *it;

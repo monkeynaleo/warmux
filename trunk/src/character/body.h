@@ -82,7 +82,7 @@ class Body
     uint                              last_refresh;
 
     bool                              walking;
-    double                            main_rotation_rad;
+    Double                            main_rotation_rad;
     std::vector<junction *>           skel_lst; // Body skeleton:
                                                 // Order to use to build the body
                                                 // First element: member to build
@@ -146,7 +146,7 @@ class Body
     void                    SetClotheOnce(const std::string & name);
     // play the movement only once ...
     void                    SetMovementOnce(const std::string & name);
-    void                    SetRotation(double angle);
+    void                    SetRotation(Double angle);
     void                    SetFrame(uint no);
     void                    SetDirection(LRDirection dir)    { direction = dir;      };
     inline void             SetOwner(const Character * belonger) { owner     = belonger; };

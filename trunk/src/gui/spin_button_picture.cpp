@@ -80,10 +80,10 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
   // 2. then draw the progress annulus
   static uint small_r = 25;
   static uint big_r = 35;
-  static double open_angle_value = 0.96; // 55
+  static Double open_angle_value = 0.96; // 55
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
-  double angle = (2 * M_PI - open_angle_value) * (GetValue() - GetMinValue()) / (GetMaxValue() - GetMinValue());
+  Double angle = (2 * M_PI - open_angle_value) * (GetValue() - GetMinValue()) / (GetMaxValue() - GetMinValue());
   Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / 2.0);
   tmp->SetPlaneColor(m_progress_color);
   tmp->ApplyTransformation(AffineTransform2D::Translate(center_x, center_y));

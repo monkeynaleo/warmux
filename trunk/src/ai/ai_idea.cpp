@@ -37,11 +37,11 @@
 
 // This constant defines how how much damage is worth killing one character?
 // e.g. Killing one Character with 20 health is about the same worth like doing a sum of 120 damage (60 each) to two characters without killing them. Both cases would get a rating of 120 when this constant is 100.
-const double BONUS_FOR_KILLING_CHARACTER = 100;
-const double MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
-const double MIN_GROUND_BONUS = 0.1;
-const double MAX_GROUND_BONUS = 1.0;
-const double GROUND_BONUS_RANGE = 2000.0;
+const Double BONUS_FOR_KILLING_CHARACTER = 100;
+const Double MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
+const Double MIN_GROUND_BONUS = 0.1;
+const Double MAX_GROUND_BONUS = 1.0;
+const Double GROUND_BONUS_RANGE = 2000.0;
 
 bool AIIdea::CanUseWeapon(Weapon * weapon)
 {
@@ -62,7 +62,7 @@ bool AIIdea::CanUseCharacter(Character & character)
   return (character.IsActiveCharacter() || can_change_character);
 }
 
-LRDirection AIIdea::XDeltaToDirection(double delta)
+LRDirection AIIdea::XDeltaToDirection(Double delta)
 {
   if (delta < 0)
     return DIRECTION_LEFT;
@@ -70,7 +70,7 @@ LRDirection AIIdea::XDeltaToDirection(double delta)
     return DIRECTION_RIGHT;
 }
 
-double AIIdea::GetDirectionRelativeAngle(LRDirection direction, double angle)
+Double AIIdea::GetDirectionRelativeAngle(LRDirection direction, Double angle)
 {
   if (direction == DIRECTION_LEFT)
     return InverseAngleRad(angle);
@@ -78,38 +78,38 @@ double AIIdea::GetDirectionRelativeAngle(LRDirection direction, double angle)
     return angle;
 }
 
-double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy)
+Double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy)
 {
-  double min_rating = RateDamageDoneToEnemy(min_damage, enemy);
-  double max_rating = RateDamageDoneToEnemy(max_damage, enemy);
+  Double min_rating = RateDamageDoneToEnemy(min_damage, enemy);
+  Double max_rating = RateDamageDoneToEnemy(max_damage, enemy);
   return (min_rating + max_rating) / 2.0;
 }
 
 
-double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
+Double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
 {
-  double rating = std::min(damage, enemy.GetEnergy());
+  Double rating = std::min(damage, enemy.GetEnergy());
   if (damage >= enemy.GetEnergy()) {
     rating += BONUS_FOR_KILLING_CHARACTER;
-    double unused_damage = damage - enemy.GetEnergy();
+    Double unused_damage = damage - enemy.GetEnergy();
     rating -= MALUS_PER_UNUSED_DAMGE_POINT * unused_damage;
   }
   return rating;
 }
 
-double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config, double expected_additional_distance)
+Double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config, Double expected_additional_distance)
 {
-  double rating = 0.0;
+  Double rating = 0.0;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    double distance = position.Distance(character->GetCenter());
+    Double distance = position.Distance(character->GetCenter());
     distance += expected_additional_distance;
     if(distance < 1.0)
       distance = 1.0;
     int min_damage = GetDamageFromExplosion(config, distance);
     int max_damage = min_damage;
     if (distance <= config.blast_range) {
-      double force = GetForceFromExplosion(config, distance);
+      Double force = GetForceFromExplosion(config, distance);
       // At the time this code has been written the
       // bazooka did about 30-60 additional damage at 2500 force
       min_damage += 30.0/2500.0 * force;
@@ -140,11 +140,11 @@ AIStrategy * WasteAmmoUnitsIdea::CreateStrategy()
     return NULL;
   Weapon::Weapon_type weapon_type = ActiveTeam().GetWeapon().GetType();
   int used_ammo_units = ActiveTeam().ReadNbUnits(weapon_type);
-  double max_angle = -ActiveTeam().GetWeapon().GetMinAngle();
+  Double max_angle = -ActiveTeam().GetWeapon().GetMinAngle();
   return new ShootWithGunStrategy(-0.1, ActiveCharacter(), weapon_type, ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
 }
 
-ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double max_distance):
+ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double max_distance):
   weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
@@ -253,10 +253,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   if (departure.Distance(arrival) > max_distance)
     return NULL;
 
-  double original_angle = departure.ComputeAngle(arrival);
+  Double original_angle = departure.ComputeAngle(arrival);
 
   LRDirection direction = XDeltaToDirection(arrival.x - departure.x);
-  double shoot_angle = GetDirectionRelativeAngle(direction, original_angle);
+  Double shoot_angle = GetDirectionRelativeAngle(direction, original_angle);
 
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
@@ -275,12 +275,12 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   int used_ammo_units = std::min(required_ammo_units, available_ammo_units);
   int damage = used_ammo_units * damage_per_ammo_unit;
 
-  double rating = RateDamageDoneToEnemy(damage, enemy);
+  Double rating = RateDamageDoneToEnemy(damage, enemy);
   rating = rating * weapons_weighting.GetFactor(weapon_type);
   return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
 }
 
-FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, double duration, int timeout):
+FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double duration, int timeout):
   weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
@@ -307,12 +307,12 @@ static bool IsPositionEmpty(Character & character_to_ignore, Point2i pos)
 
 static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory & trajectory)
 {
-  double time = 0;
+  Double time = 0;
   Point2i pos;
   do {
     pos = trajectory.GetPositionAt(time);
-    double pixel_per_second = trajectory.GetSpeedAt(time);
-    double seconds_per_pixel = 1 / pixel_per_second;
+    Double pixel_per_second = trajectory.GetSpeedAt(time);
+    Double seconds_per_pixel = 1 / pixel_per_second;
     time += seconds_per_pixel;
   } while(IsPositionEmpty(character_to_ignore, pos));
   return pos;
@@ -331,21 +331,21 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
 
   if (!CanUseWeapon(weapon))
     return NULL;
-  double g = GameMode::GetInstance()->gravity;
-  double wind_factor = weapon->GetWindFactor();
-  double mass = weapon->GetMass();
+  Double g = GameMode::GetInstance()->gravity;
+  Double wind_factor = weapon->GetWindFactor();
+  Double mass = weapon->GetMass();
   Point2d f(Wind::GetRef().GetStrength() * wind_factor, g * mass);
   Point2d a = f / mass * PIXEL_PER_METER;;
   const Point2d pos_0 = shooter.GetCenter();
   const Point2d pos_t = enemy.GetCenter();
-  double t = duration;
+  Double t = duration;
   // Calculate v_0 using "pos_t = 1/2 * a_x * t*t + v_0*t + pos_0":
   Point2d v_0 = (pos_t - pos_0)/t - 0.5*a * t;
 
-  double strength = v_0.Norm() / PIXEL_PER_METER;
-  double angle = v_0.ComputeAngle();
+  Double strength = v_0.Norm() / PIXEL_PER_METER;
+  Double angle = v_0.ComputeAngle();
   LRDirection direction = XDeltaToDirection(v_0.x);
-  double shoot_angle = GetDirectionRelativeAngle(direction, angle);
+  Double shoot_angle = GetDirectionRelativeAngle(direction, angle);
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
 
@@ -355,19 +355,19 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
   Trajectory trajectory(pos_0, v_0, a);
   Point2i explosion_pos = GetFirstContact(shooter, trajectory);
   PhysicalObj * aim = GetObjectAt(explosion_pos);
-  double rating;
+  Double rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
   if (aim == &enemy || explodes_on_contact) {
-    double expected_additional_distance = explodes_on_contact ? 0.0 : 30;
+    Double expected_additional_distance = explodes_on_contact ? 0.0 : 30;
     rating = RateExplosion(shooter, explosion_pos, weapon->cfg(), expected_additional_distance);
 
     // Explosions remove ground and make it possible to hit the characters behind the ground.
     // That is why ground hits get rewared with a small positive rating.
     if (explodes_on_contact) {
-      double distance = explosion_pos.Distance(enemy.GetCenter());
+      Double distance = explosion_pos.Distance(enemy.GetCenter());
       // Give more bonus if the explosion is near the target.
       // This will make the AI focus on one character
-      double ground_bonus = max(MIN_GROUND_BONUS, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
+      Double ground_bonus = max(MIN_GROUND_BONUS, MAX_GROUND_BONUS - distance/GROUND_BONUS_RANGE);
       rating += ground_bonus;
     }
   } else {

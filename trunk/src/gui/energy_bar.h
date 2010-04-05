@@ -32,12 +32,12 @@ class EnergyBar : public ProgressBar
     class Threshold
     {
       public:
-        float value;
+        Double value;
         Color color;
-        float redCoef;
-        float greenCoef;
-        float blueCoef;
-        float alphaCoef;
+        Double redCoef;
+        Double greenCoef;
+        Double blueCoef;
+        Double alphaCoef;
         
         bool operator < (const Threshold & threshold) const {
           return value < threshold.value;
@@ -64,7 +64,7 @@ class EnergyBar : public ProgressBar
 
     virtual bool LoadXMLConfiguration(void);
     void ProcessThresholds(int thresholdNumber,
-                           float thresholdMax,
+                           Double thresholdMax,
                            Color & colorMax);
     void SortThresholds();
     void Actu(long val);

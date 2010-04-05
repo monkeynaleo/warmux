@@ -53,8 +53,8 @@ const uint BLING_JELLY_TIME = 300;      // Bling bling version
 const uint ROTATION_TIME = 0;           // Number of rotation
 const uint BLING_ROTATION_TIME = 2;     // bling bling !
 
-const double DEFAULT_ICON_SCALE = 0.7;
-const double MAX_ICON_SCALE = 1.1;
+const Double DEFAULT_ICON_SCALE = 0.7;
+const Double MAX_ICON_SCALE = 1.1;
 
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
@@ -85,7 +85,7 @@ bool WeaponMenuItem::IsMouseOver()
     return false;
   }
   Point2i mouse_pos = Mouse::GetInstance()->GetPosition();
-  if(Contains(Point2d((double)mouse_pos.x, (double)mouse_pos.y))) {
+  if(Contains(Point2d((Double)mouse_pos.x, (Double)mouse_pos.y))) {
     if(!zoom)
       SetZoom(true);
     return true;
@@ -103,9 +103,9 @@ void WeaponMenuItem::SetZoom(bool value)
 
 void WeaponMenuItem::Draw(Surface * dest)
 {
-  double scale = DEFAULT_ICON_SCALE;
+  Double scale = DEFAULT_ICON_SCALE;
   if(zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
-    scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)GetZoomTime();
+    scale = (Time::GetInstance()->Read() - zoom_start_time) / (Double)GetZoomTime();
     if(zoom) {
       scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
       scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
@@ -115,7 +115,7 @@ void WeaponMenuItem::Draw(Surface * dest)
     }
   }
   item->SetAlpha(1);
-  item->Scale((float)scale, (float)scale);
+  item->Scale((Double)scale, (Double)scale);
 
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);

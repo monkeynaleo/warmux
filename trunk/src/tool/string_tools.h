@@ -29,13 +29,13 @@
 // Renvoie false cas d'erreur
 bool str2long (const std::string &txt, long &valeur);
 bool str2int (const std::string &txt, int &valeur);
-bool str2double (const std::string &txt, double &valeur);
+bool str2Double (const std::string &txt, Double &valeur);
 bool str2bool(const std::string &str, bool &value);
 
 // Conversion type -> string
 std::string long2str (long x);
 std::string ulong2str (ulong x);
-std::string double2str (ulong x);
+std::string Double2str (ulong x);
 std::string bool2str (bool x);
 
 #ifdef _WIN32

@@ -20,18 +20,20 @@
 #ifndef WORMUX_EULER_VECTOR_H
 #define WORMUX_EULER_VECTOR_H
 
+#include <WORMUX_types.h>
+
 class EulerVector{
   public:
-    double x0, x1, x2;
+    Double x0, x1, x2;
 
     EulerVector() :
                   x0(0.0), x1(0.0), x2(0.0)
                 { };
-    EulerVector(double v0, double v1, double v2) :
+    EulerVector(Double v0, Double v1, Double v2) :
                   x0(v0), x1(v1), x2(v2)
                 { };
     void Clear();
-    void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
+    void ComputeOneEulerStep(Double a, Double b, Double c, Double d, Double dt);
 };
 
 #endif

@@ -31,12 +31,12 @@ half_acceleration(a/2)
   // do nothing
 }
 
-const Point2i Trajectory::GetPositionAt(double time)
+const Point2i Trajectory::GetPositionAt(Double time)
 {
   return half_acceleration * (time * time) + initial_speed * time + initial_position;
 }
 
-double Trajectory::GetSpeedAt(double time)
+Double Trajectory::GetSpeedAt(Double time)
 {
   Point2d speed = acceleration * time + initial_speed;
   return speed.Norm();

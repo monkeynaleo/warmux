@@ -198,7 +198,7 @@ const SpriteFrame& Sprite::GetCurrentFrameObject() const
    return frames[current_frame];
 }
 
-void Sprite::Scale( float _scale_x, float _scale_y)
+void Sprite::Scale( Double _scale_x, Double _scale_y)
 {
    this->scale_x = _scale_x;
    this->scale_y = _scale_y;
@@ -207,8 +207,8 @@ void Sprite::Scale( float _scale_x, float _scale_y)
 
 void Sprite::ScaleSize(int width, int height)
 {
-  Scale(float(width)/float(frame_width_pix),
-        float(height)/float(frame_height_pix));
+  Scale(Double(width)/Double(frame_width_pix),
+        Double(height)/Double(frame_height_pix));
 }
 
 void Sprite::ScaleSize(const Point2i& size)
@@ -216,7 +216,7 @@ void Sprite::ScaleSize(const Point2i& size)
         ScaleSize(size.x, size.y);
 }
 
-void Sprite::GetScaleFactors( float &_scale_x, float &_scale_y) const
+void Sprite::GetScaleFactors( Double &_scale_x, Double &_scale_y) const
 {
    _scale_x = this->scale_x;
    _scale_y = this->scale_y;
@@ -228,18 +228,18 @@ void Sprite::SetFrameSpeed(unsigned int nv_fs)
      frames[f].delay = nv_fs;
 }
 
-void Sprite::SetAlpha( float _alpha)
+void Sprite::SetAlpha( Double _alpha)
 {
   ASSERT(_alpha >= 0.0 && _alpha <= 1.0);
   this->alpha = _alpha;
 }
 
-float Sprite::GetAlpha() const
+Double Sprite::GetAlpha() const
 {
   return alpha;
 }
 
-void Sprite::SetRotation_rad( double angle_rad)
+void Sprite::SetRotation_rad( Double angle_rad)
 {
    while(angle_rad > 2*M_PI)
      angle_rad -= 2 * M_PI;
@@ -252,7 +252,7 @@ void Sprite::SetRotation_rad( double angle_rad)
    cache.InvalidLastFrame();
 }
 
-const double &Sprite::GetRotation_rad() const
+const Double &Sprite::GetRotation_rad() const
 {
   ASSERT(rotation_rad > -2*M_PI && rotation_rad <= 2*M_PI);
   return rotation_rad;
@@ -314,8 +314,8 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   // Don't let the compiler any choice with which types the resulting program will calculate with.
   Point2i old_hotspot_delta_i = center - rhs_pos_tmp;
   Point2d old_hotspot_delta = old_hotspot_delta_i;
-  double rhs_dst = old_hotspot_delta.Norm();
-  double rhs_angle = 0.0;
+  Double rhs_dst = old_hotspot_delta.Norm();
+  Double rhs_angle = 0.0;
   if (rhs_dst != 0.0)
     rhs_angle = -acos(-old_hotspot_delta.x / rhs_dst);
   if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0)

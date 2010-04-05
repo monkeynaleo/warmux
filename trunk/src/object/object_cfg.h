@@ -29,25 +29,25 @@ class ObjectConfig
 {
 public:
   // Masse of the objct
-  double m_mass;
+  Double m_mass;
 
   // Wind effect factor on the object. 0 means not affected.
-  double m_wind_factor;
+  Double m_wind_factor;
 
   // Air resistance factor. 1 = normal air resistance.
-  double m_air_resist_factor;
+  Double m_air_resist_factor;
 
   // Water resistance factor. Related to air_resist_factor.
-  double m_water_resist_factor;
+  Double m_water_resist_factor;
 
   // Define how the object is affected by gravity.
-  double m_gravity_factor;
+  Double m_gravity_factor;
 
   // Tell if it's a rebounding object...
   bool  m_rebounding;
 
   // Object rebound factor when the object collide with the ground.
-  double m_rebound_factor;
+  Double m_rebound_factor;
 
   // Active alignment for wind particles
   bool m_align_particle_state;

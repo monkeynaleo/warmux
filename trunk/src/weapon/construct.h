@@ -33,7 +33,7 @@ class Construct : public Weapon
 private:
   bool target_chosen;
   Sprite* construct_spr;
-  double angle;
+  Double angle;
   Point2i dst;
 
   void Up() const;
@@ -56,7 +56,7 @@ public:
   virtual void HandleMouseWheelUp(bool) { Up(); };
   virtual void HandleMouseWheelDown(bool) { Down(); };
 
-  void SetAngle(double _angle) { angle = _angle; }; // to be used by network
+  void SetAngle(Double _angle) { angle = _angle; }; // to be used by network
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
   WeaponConfig& cfg();

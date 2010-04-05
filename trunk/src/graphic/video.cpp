@@ -131,7 +131,7 @@ void Video::ComputeAvailableConfigs()
   // Sort the list
   available_configs.sort(CompareConfigs);
 
-  // Remove double items
+  // Remove Double items
   std::list<Point2i>::iterator prev = available_configs.begin(),
     it = available_configs.begin() ,
     end = available_configs.end();

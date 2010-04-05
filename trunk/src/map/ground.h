@@ -33,7 +33,7 @@ private:
                     int pas_bon_x,int pas_bon_y) const;
   Point2i lastPos;
 
-  static float table[5][5];
+  static Double table[5][5];
 
 public:
   Ground();
@@ -49,7 +49,7 @@ public:
   bool IsOpen() const { return open; }
 
   //returns the angle formed by the ground tangent au terrain
-  double Tangent(int x,int y) const ;
+  Double Tangent(int x,int y) const ;
 
   void RedrawParticleList(std::list<Rectanglei> &list) const;
 };

@@ -43,11 +43,11 @@ const uint DT_MVT = 15; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 4;  //dst_minimal between 2 nodes
 const int SKIP_DST = 8;
 
-bool find_first_contact_point (Point2i from, double angle, uint length,
+bool find_first_contact_point (Point2i from, Double angle, uint length,
                                int skip, Point2i &contact_point)
 {
   Point2d posd;
-  double x_step, y_step;
+  Double x_step, y_step;
 
   if ((int)length <= skip) /* to avoid integer overflow */
     return false;
@@ -55,11 +55,11 @@ bool find_first_contact_point (Point2i from, double angle, uint length,
   x_step = cos(angle);
   y_step = sin(angle);
 
-  posd.x = (double)from.x;
-  posd.y = (double)from.y;
+  posd.x = (Double)from.x;
+  posd.y = (Double)from.y;
 
-  posd.x += ((double)skip) * x_step;
-  posd.y += ((double)skip) * y_step;
+  posd.x += ((Double)skip) * x_step;
+  posd.y += ((Double)skip) * y_step;
 
   from.x = (int)round(posd.x);
   from.y = (int)round(posd.y);
@@ -196,7 +196,7 @@ bool Grapple::TryAttachRope()
 {
   Point2i pos;
   uint length;
-  double angle;
+  Double angle;
 
   ASSERT(rope_nodes.empty());
 
@@ -219,7 +219,7 @@ bool Grapple::TryAddNode()
   uint lg;
   Point2d V;
   Point2i contact_point;
-  double angle, rope_angle;
+  Double angle, rope_angle;
   Point2i handPos;
 
   ActiveCharacter().GetHandPosition(handPos);
@@ -263,7 +263,7 @@ void Grapple::TryRemoveNodes()
   uint lg;
   Point2d V;
   Point2i handPos, contact_point;
-  double angle;
+  Double angle;
 
   ActiveCharacter().GetHandPosition(handPos);
 
@@ -342,7 +342,7 @@ void Grapple::Refresh()
 void Grapple::Draw()
 {
   int x, y;
-  double angle, prev_angle;
+  Double angle, prev_angle;
   Point2i handPos;
 
   struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;} quad;
@@ -361,28 +361,28 @@ void Grapple::Draw()
   x = handPos.x;
   y = handPos.y;
 
-  quad.x1 = (int)round((double)x - 2 * cos(angle));
-  quad.y1 = (int)round((double)y + 2 * sin(angle));
-  quad.x2 = (int)round((double)x + 2 * cos(angle));
-  quad.y2 = (int)round((double)y - 2 * sin(angle));
+  quad.x1 = (int)round((Double)x - 2 * cos(angle));
+  quad.y1 = (int)round((Double)y + 2 * sin(angle));
+  quad.x2 = (int)round((Double)x + 2 * cos(angle));
+  quad.y2 = (int)round((Double)y - 2 * sin(angle));
 
   for (std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
        it != rope_nodes.rend(); it++)
     {
-      quad.x3 = (int)round((double)it->pos.x + 2 * cos(angle));
-      quad.y3 = (int)round((double)it->pos.y - 2 * sin(angle));
-      quad.x4 = (int)round((double)it->pos.x - 2 * cos(angle));
-      quad.y4 = (int)round((double)it->pos.y + 2 * sin(angle));
+      quad.x3 = (int)round((Double)it->pos.x + 2 * cos(angle));
+      quad.y3 = (int)round((Double)it->pos.y - 2 * sin(angle));
+      quad.x4 = (int)round((Double)it->pos.x - 2 * cos(angle));
+      quad.y4 = (int)round((Double)it->pos.y + 2 * sin(angle));
 
-      float dx = sin(angle) * (float)m_node_sprite->GetHeight();
-      float dy = cos(angle) * (float)m_node_sprite->GetHeight();
+      Double dx = sin(angle) * (Double)m_node_sprite->GetHeight();
+      Double dy = cos(angle) * (Double)m_node_sprite->GetHeight();
       int step = 0;
       int size = (quad.x1-quad.x4) * (quad.x1-quad.x4)
                 +(quad.y1-quad.y4) * (quad.y1-quad.y4);
       size -= m_node_sprite->GetHeight();
       while( (step*dx*step*dx)+(step*dy*step*dy) < size ) {
-	m_node_sprite->Draw(Point2i(quad.x4 + (int)((float) step * dx),
-				    quad.y4 + (int)((float) step * dy)));
+	m_node_sprite->Draw(Point2i(quad.x4 + (int)((Double) step * dx),
+				    quad.y4 + (int)((Double) step * dy)));
         step++;
       }
       quad.x1 = quad.x4 ;
@@ -416,8 +416,8 @@ void Grapple::AttachRope(const Point2i& contact_point)
   ActiveCharacter().SetPhysFixationPointXY(
                                            contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
-                                           (double)pos.x / PIXEL_PER_METER,
-                                           (double)pos.y / PIXEL_PER_METER);
+                                           (Double)pos.x / PIXEL_PER_METER,
+                                           (Double)pos.y / PIXEL_PER_METER);
 
   m_fixation_point = contact_point;
 
@@ -444,7 +444,7 @@ void Grapple::DetachRope()
   cable_sound.Stop();
 }
 
-void Grapple::AttachNode(const Point2i& contact_point, double angle)
+void Grapple::AttachNode(const Point2i& contact_point, Double angle)
 {
   // The rope has collided something...
   // Add a node on the rope and change the fixation point.
@@ -453,8 +453,8 @@ void Grapple::AttachNode(const Point2i& contact_point, double angle)
 
   ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
                                            contact_point.y / PIXEL_PER_METER,
-                                           (double)pos.x / PIXEL_PER_METER,
-                                           (double)pos.y / PIXEL_PER_METER);
+                                           (Double)pos.x / PIXEL_PER_METER,
+                                           (Double)pos.y / PIXEL_PER_METER);
 
   m_fixation_point = contact_point;
   rope_node_t node;
@@ -487,15 +487,15 @@ void Grapple::DetachNode()
 
   ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
                                            m_fixation_point.y / PIXEL_PER_METER,
-                                           (double)pos.x / PIXEL_PER_METER,
-                                           (double)pos.y / PIXEL_PER_METER);
+                                           (Double)pos.x / PIXEL_PER_METER,
+                                           (Double)pos.y / PIXEL_PER_METER);
 }
 
 // =========================== Moves management
 
-void Grapple::SetRopeSize(double length) const
+void Grapple::SetRopeSize(Double length) const
 {
-  double delta = length - ActiveCharacter().GetRopeLength();
+  Double delta = length - ActiveCharacter().GetRopeLength();
   ActiveCharacter().ChangePhysRopeSize (delta);
 }
 

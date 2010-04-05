@@ -48,7 +48,7 @@ protected:
 public:
   Gnu(ExplosiveWeaponConfig& cfg,
       WeaponLauncher * p_launcher);
-  void Shoot(double strength);
+  void Shoot(Double strength);
   void Refresh();
 
   virtual void Explosion();
@@ -63,14 +63,14 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   last_rebound_time = 0;
 }
 
-void Gnu::Shoot(double strength)
+void Gnu::Shoot(Double strength)
 {
   WeaponProjectile::Shoot(strength);
 
   save_x=GetX();
   save_y=GetY();
 
-  double angle = ActiveCharacter().GetFiringAngle();
+  Double angle = ActiveCharacter().GetFiringAngle();
 
   if(angle<M_PI/2 && angle>-M_PI/2)
     m_sens = 1;
@@ -87,7 +87,7 @@ void Gnu::Refresh()
   int tmp = GetMSSinceTimeoutStart();
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 
-  double norm, angle;
+  Double norm, angle;
   //When we hit the ground, jump !
   if(!IsMoving()&& !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
@@ -134,7 +134,7 @@ void Gnu::Refresh()
     angle = 0;
 
   image->SetRotation_rad(angle);
-  image->Scale((double)m_sens,1.0);
+  image->Scale((Double)m_sens,1.0);
   image->Update();
 }
 
