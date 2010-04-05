@@ -46,8 +46,8 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
         a.GetRGBA(col, r, g, bl, al);
         col = b.MapRGBA(r, g, bl, al);
 
-        Double t = (Double)nbr_frames * sin(M_PI*(Double)f/(Double)nbr_frames);
-        unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((Double)t*wave_per*2.0*M_PI/(Double)nbr_frames)*(Double)y*2.0*M_PI/(Double)a.GetHeight()))));
+        Double t = (Double)nbr_frames * sin(PI*(Double)f/(Double)nbr_frames);
+        unsigned int wave_x = (unsigned int)(x+(wave_amp*(1+sin(((Double)t*wave_per*2.0*PI/(Double)nbr_frames)*(Double)y*2.0*PI/(Double)a.GetHeight()))));
         b.PutPixel(wave_x, y, col);
       }
     }
@@ -109,7 +109,7 @@ void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
   amp = amp * (dur - dt) / dur;
 
   //Scale
-  stretch_y = (int)(sin((Double)per * (Double)dt * 2.0 * M_PI / (Double)dur) * (Double)amp);
+  stretch_y = (int)(sin((Double)per * (Double)dt * 2.0 * PI / (Double)dur) * (Double)amp);
 
   //Offset
   if(stretch_y < 0.0)

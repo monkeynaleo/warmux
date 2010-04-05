@@ -414,17 +414,17 @@ template<class T> class Vector2
          if( !IsZero( y ) ){
            Double angle = atan(Double(y)/Double(x));
            if( x < 0 ){
-             if( y > 0 ) return angle + M_PI;
-             else        return angle - M_PI;
+             if( y > 0 ) return angle + PI;
+             else        return angle - PI;
            }
            return angle;
          }
          else
-           return (x > 0) ? 0 : M_PI;
+           return (x > 0) ? 0 : PI;
        else if( y > 0 )
-         return M_PI_2;
+         return HALF_PI;
        else if(y < 0)
-         return -M_PI_2;
+         return -HALF_PI;
        return 0;
     }
 

@@ -72,7 +72,7 @@ void Gnu::Shoot(Double strength)
 
   Double angle = ActiveCharacter().GetFiringAngle();
 
-  if(angle<M_PI/2 && angle>-M_PI/2)
+  if(angle<PI/2 && angle>-PI/2)
     m_sens = 1;
   else
     m_sens = -1;
@@ -116,21 +116,21 @@ void Gnu::Refresh()
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norm, angle);
 
-  while(angle < -M_PI)
-    angle += M_PI;
-  while(angle > M_PI)
-    angle -= M_PI;
+  while(angle < -PI)
+    angle += PI;
+  while(angle > PI)
+    angle -= PI;
 
   angle /= 2.0;
   if(m_sens == -1)
   {
     if(angle > 0)
-      angle -= M_PI_2;
+      angle -= HALF_PI;
     else
-      angle += M_PI_2;
+      angle += HALF_PI;
   }
 
-  if(angle > 4 * M_PI)
+  if(angle > 4 * PI)
     angle = 0;
 
   image->SetRotation_rad(angle);

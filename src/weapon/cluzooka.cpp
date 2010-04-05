@@ -183,7 +183,7 @@ void CluzookaCluster::DoSpawn()
   speed = 25;// always
   Point2i parent_position = GetPosition();
 
-  Double angle_range = M_PI / 4;
+  Double angle_range = PI / 4;
 
   uint rec_depth = 0;
 #ifdef CLUSTERS_SPAWN_CLUSTERS
@@ -267,7 +267,7 @@ void CluzookaRocket::Refresh()
         // when t is approaching 1
         //Double rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
         image->SetRotation_rad( speed_angle + 
-                 2 * M_PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
+                 2 * PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
     }
     else
     {
@@ -279,14 +279,14 @@ void CluzookaRocket::Refresh()
   }
   else
   {
-    image->SetRotation_rad(M_PI_2);
+    image->SetRotation_rad(HALF_PI);
   }
 }
 
 void CluzookaRocket::DoSpawn()
 {  
   const uint fragments = static_cast<CluzookaConfig &>(cfg).m_fragments;
-  const Double angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * M_PI / 180.0f;
+  const Double angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * PI / 180.0f;
 
   const uint recursion_depth = 0;
 

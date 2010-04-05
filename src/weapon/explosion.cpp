@@ -49,9 +49,9 @@ int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
 
   Double dmg;
   if( config.explosion_range != 0)
-    dmg = cos(M_PI_2 * distance / (Double)config.explosion_range);
+    dmg = cos(HALF_PI * distance / (Double)config.explosion_range);
   else
-    dmg = cos(M_PI_2 * distance);
+    dmg = cos(HALF_PI * distance);
 
   dmg *= config.damage;
   return (int) dmg;
@@ -61,9 +61,9 @@ Double GetForceFromExplosion(const ExplosiveWeaponConfig &config, Double distanc
 {
   Double force;
   if(config.blast_range != 0)
-    force = cos(M_PI_2 * distance / (Double)config.blast_range);
+    force = cos(HALF_PI * distance / (Double)config.blast_range);
   else
-    force = cos(M_PI_2 * distance);
+    force = cos(HALF_PI * distance);
 
   force *= config.blast_force;
   return force;
@@ -141,7 +141,7 @@ void ApplyExplosion (const Point2i &pos,
           angle  = - angle;
       }
       else
-        angle = -M_PI/2;
+        angle = -PI/2;
 
 
       MSG_DEBUG("explosion", "force = %f", force);
@@ -177,7 +177,7 @@ void ApplyExplosion (const Point2i &pos,
          if (!EqualsZero(distance))
            angle  = pos.ComputeAngle(obj->GetCenter());
          else
-           angle = -M_PI_2;
+           angle = -HALF_PI;
 
          ASSERT( obj->GetMass() != 0.0);
 

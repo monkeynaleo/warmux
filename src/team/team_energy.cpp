@@ -198,10 +198,10 @@ void TeamEnergy::Move()
     // displacement in arc only when losing place ranking
     if( new_rank > rank ) {
       dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
-           sin( M_PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
+           sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     } else {
       dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
-          sin( M_PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
+          sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     }
     // End of movement ?
     if( (global_time->Read() - move_start_time) > MOVE_DURATION)

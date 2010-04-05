@@ -76,7 +76,7 @@ void RiotBombRocket::Refresh()
   }
   else
   {
-    image->SetRotation_rad(M_PI_2);
+    image->SetRotation_rad(HALF_PI);
   }
 }
 
