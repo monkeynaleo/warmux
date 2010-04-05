@@ -114,11 +114,11 @@ Double Ground::Tangent(int x,int y) const {
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
   const Double table[5][5] = {
-    {      .78539,       .46364,     PI, -.46364+PI, -.78539+PI},
-    {      1.1071,       .78539,     PI, -.78539+PI, -1.1071+PI},
-    {    PI/2.0,     PI/2.0, PI/2.0,     PI/2.0,   PI / 2.0},
-    {-1.1071+PI, -.78539+PI,     PI,        78539,       1.1071},
-    {-.78539+PI, -.46364+PI,     PI,       .46364,       .78539}};
+    {     QUARTER_PI,          .46364,      PI,    -.46364+M_PI, PI - QUARTER_PI},
+    {         1.1071,      QUARTER_PI,      PI, PI - QUARTER_PI,     1.1071+M_PI},
+    {        HALF_PI,         HALF_PI, HALF_PI,         HALF_PI,         HALF_PI},
+    {   -1.1071+M_PI, PI - QUARTER_PI,      PI,      QUARTER_PI,          1.1071},
+    {PI - QUARTER_PI,     -.46364+M_PI,     PI,          .46364,     QUARTER_PI}};
 
   ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
   ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);

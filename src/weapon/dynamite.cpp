@@ -132,7 +132,7 @@ bool Dynamite::p_Shoot ()
   if(ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(3.0, -QUARTER_PI);
   else
-    projectile->SetSpeed(3.0, -3.0 * QUARTER_PI);
+    projectile->SetSpeed(3.0, -THREE * QUARTER_PI);
 
   projectile = NULL;
   ReloadLauncher();

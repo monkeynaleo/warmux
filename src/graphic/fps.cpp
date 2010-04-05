@@ -24,7 +24,7 @@
 #include "graphic/fps.h"
 #include "graphic/text.h"
 #include "graphic/video.h"
-
+#include "tool/string_tools.h"
 
 const uint FramePerSecond::MIN_NB_VALUES = 4;
 
@@ -96,11 +96,7 @@ void FramePerSecond::Draw(){
   if( average < 0 )
     return;
 
-  char buffer[20];
-
-  snprintf(buffer, sizeof(buffer)-1, "%.1f", average);
-  buffer[sizeof(buffer)-1] = '\0';
-  text->SetText(Format(_("%s fps"), buffer));
+  text->SetText(Format(_("%s fps"), Double2str(average,1).c_str()));
   text->DrawTopRight(Point2i(GetMainWindow().GetWidth()-1,0));
 }
 

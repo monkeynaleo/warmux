@@ -38,6 +38,7 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "tool/string_tools.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
 #include "weapon/weapon_launcher.h"
@@ -156,7 +157,7 @@ WeaponProjectile::~WeaponProjectile()
 
 void WeaponProjectile::Shoot(Double strength)
 {
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%s", Double2str(strength).c_str());
 
   Init();
 
@@ -184,8 +185,8 @@ void WeaponProjectile::Shoot(Double strength)
             hand_position.GetX(),
             hand_position.GetY());
 
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
-            strength, angle, GetX(), GetY());
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%s, angle:%s, position:%d,%d",
+            Double2str(strength).c_str(), Double2str(angle).c_str(), GetX(), GetY());
 
   StartTimeout();
 

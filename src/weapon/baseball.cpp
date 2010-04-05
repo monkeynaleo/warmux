@@ -36,8 +36,8 @@
 class BaseballConfig : public WeaponConfig
 {
   public:
-    uint range;
-    uint strength;
+    Double range;
+    Double strength;
     BaseballConfig();
     void LoadXml(const xmlNode* elem);
 };
@@ -69,7 +69,7 @@ bool Baseball::p_Shoot()
   do
   {
     // Did we have finished the computation
-    rayon += 1.0;
+    rayon += ONE;
     if (cfg().range < rayon)
     {
       rayon = cfg().range;
@@ -125,6 +125,6 @@ BaseballConfig::BaseballConfig()
 void BaseballConfig::LoadXml(const xmlNode* elem)
 {
   WeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "range", range);
-  XmlReader::ReadUint(elem, "strength", strength);
+  XmlReader::ReadDouble(elem, "range", range);
+  XmlReader::ReadDouble(elem, "strength", strength);
 }

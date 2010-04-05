@@ -31,6 +31,7 @@
 #include <WORMUX_random.h>
 #include <WORMUX_file_tools.h>
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 JukeBox::JukeBox()
   : music(NULL)
@@ -385,8 +386,8 @@ void JukeBox::LoadXML(const std::string& profile)
     XmlReader::ReadStringAttr(*it, "file", file);
     XmlReader::ReadDoubleAttr(*it, "level", level);
 
-    MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s (%.3f)",
-              profile.c_str(), sample.c_str(), file.c_str(), level);
+    MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s (%s)",
+              profile.c_str(), sample.c_str(), file.c_str(), Double2str(level,3).c_str());
 
     // Load sound
     std::string sample_filename = folder + file;
@@ -469,8 +470,8 @@ int JukeBox::StopAll() const
 int JukeBox::PlaySample (Mix_Chunk * sample, Double level, int loop)
 {
   if (loop != -1) loop--;
-
-  Mix_VolumeChunk(sample, int(0.5+level*Config::GetInstance()->GetVolumeEffects()));
+  Double one_half = 0.5;
+  Mix_VolumeChunk(sample, int(one_half+level*Config::GetInstance()->GetVolumeEffects()));
   int channel = Mix_PlayChannel(-1, sample, loop);
 
   if (channel == -1)

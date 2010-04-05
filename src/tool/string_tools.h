@@ -35,7 +35,7 @@ bool str2bool(const std::string &str, bool &value);
 // Conversion type -> string
 std::string long2str (long x);
 std::string ulong2str (ulong x);
-std::string Double2str (ulong x);
+std::string Double2str (Double x, int places = -1);
 std::string bool2str (bool x);
 
 #ifdef _WIN32

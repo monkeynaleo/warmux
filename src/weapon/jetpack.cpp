@@ -36,7 +36,7 @@
 
 const Double JETPACK_FORCE = 1800.0;
 
-const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
+const long DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
@@ -94,7 +94,7 @@ void JetPack::Refresh()
     {
       // We are using fuel !!!
       uint current = Time::GetInstance()->Read() ;
-      Double delta = (Double)(current - m_last_fuel_down);
+      long delta = current - m_last_fuel_down;
 
       while (delta >= DELTA_FUEL_DOWN)
       {

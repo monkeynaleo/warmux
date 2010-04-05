@@ -91,16 +91,16 @@ void Particle::Refresh()
 
     //during the 1st quarter of the time increase size of particle
     //after the 1st quarter, decrease the alpha value
-    if((Double)lived_time<m_initial_time_to_live/2.0)
+    if((Double)lived_time<m_initial_time_to_live/TWO)
     {
-      Double coeff = sin((PI/2.0)*((Double)lived_time/((Double)m_initial_time_to_live/2.0)));
+      Double coeff = sin((HALF_PI)*((Double)lived_time/((Double)m_initial_time_to_live/TWO)));
       image->Scale(coeff,coeff);
       SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
     {
-      Double alpha = 1.0 - sin((PI/2.0)*((Double)lived_time-((Double)m_initial_time_to_live/2.0))/((Double)m_initial_time_to_live/2.0));
+      Double alpha = ONE - sin((HALF_PI)*((Double)lived_time-((Double)m_initial_time_to_live/TWO))/((Double)m_initial_time_to_live/TWO));
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
@@ -130,7 +130,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
   uint tmp = Time::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "ParticleEngine::AddPeriodic(...)");
-  uint delta = uint(m_time_between_add * Double(RandomSync().GetLong(3, 40)) / 10);
+  uint delta = long(m_time_between_add * Double(RandomSync().GetLong(3, 40)) / 10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);

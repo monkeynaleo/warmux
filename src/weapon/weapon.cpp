@@ -39,6 +39,7 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 #ifdef DEBUG
 #include "map/map.h"
@@ -219,7 +220,7 @@ bool Weapon::CanChangeWeapon() const
 void Weapon::PrepareShoot()
 {
   MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
-            m_strength, ActiveCharacter().GetFiringAngle());
+            Double2str(m_strength).c_str(), Double2str(ActiveCharacter().GetFiringAngle()).c_str());
   StopLoading();
 
   ActiveCharacter().PrepareShoot();
@@ -265,7 +266,7 @@ bool Weapon::Shoot()
     UseAmmoUnit();
   }
 
-  if (max_strength != 0) ActiveCharacter().previous_strength = m_strength;
+  if (max_strength != ZERO) ActiveCharacter().previous_strength = m_strength;
 
   Game::GetInstance()->SetCharacterChosen(true);
 
@@ -312,13 +313,13 @@ void Weapon::StartShooting()
   if (ActiveCharacter().IsPreparingShoot())
     return;
 
-  if (max_strength != 0 && IsReady())
+  if (max_strength != ZERO && IsReady())
     InitLoading();
 }
 
 void Weapon::StopShooting()
 {
-  if (max_strength != 0 && !IsLoading())
+  if (max_strength != ZERO && !IsLoading())
     /* User has probably exceed the max_strength */
     return;
 
@@ -557,12 +558,12 @@ void Weapon::Draw(){
     if (!EqualsZero(min_angle - max_angle))
     {
       Double angle = m_image->GetRotation_rad();
-      angle += sin( HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) * 2 * PI;
+      angle += sin( HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) * TWO * PI;
       m_image->SetRotation_rad (angle);
     }
     else
     {
-      Double scale = sin( 1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) / sin(1.5 * HALF_PI);
+      Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) / sin((Double)1.5 * HALF_PI);
       m_image->Scale(ActiveCharacter().GetDirection() * scale,scale);
 
       if(origin == weapon_origin_OVER) PosXY(x,y); //Recompute position to get the icon centered over the skin
@@ -669,7 +670,7 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   XmlReader::ReadInt(elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
   XmlReader::ReadInt(elem, "ammo_per_drop", ammo_per_drop);
   XmlReader::ReadDouble(elem, "drop_probability", drop_probability);
-  if (m_initial_nb_ammo == INFINITE_AMMO && drop_probability != 0) {
+  if (m_initial_nb_ammo == INFINITE_AMMO && drop_probability != ZERO) {
     std::cerr << Format(_("The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"), m_id.c_str());
     std::cerr << std::endl;
   }
@@ -689,8 +690,8 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   int min_angle_deg = 0, max_angle_deg = 0;
   XmlReader::ReadInt(elem, "min_angle", min_angle_deg);
   XmlReader::ReadInt(elem, "max_angle", max_angle_deg);
-  min_angle = static_cast<Double>(min_angle_deg) * PI / 180.0;
-  max_angle = static_cast<Double>(max_angle_deg) * PI / 180.0;
+  min_angle = static_cast<Double>(min_angle_deg) * PI / (Double)180;
+  max_angle = static_cast<Double>(max_angle_deg) * PI / (Double)180;
   if(EqualsZero(min_angle - max_angle))
     m_display_crosshair = false;
 

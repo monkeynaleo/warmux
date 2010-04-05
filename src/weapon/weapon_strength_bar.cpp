@@ -64,7 +64,7 @@ void WeaponStrengthBar::InitPos(uint px, uint py, uint pwidth, uint pheight)
 
 static uint ScaleStrengthtoUInt(Double strength)
 {
-  return uint(100 * strength);
+  return long(100 * strength);
 }
 
 void WeaponStrengthBar::FetchData()
@@ -72,7 +72,7 @@ void WeaponStrengthBar::FetchData()
   const Weapon & weapon = ActiveTeam().GetWeapon();
   Double max_strength = weapon.GetMaxStrength();
   bool playing = (Game::GetInstance()->ReadState() == Game::PLAYING);
-  visible = playing && (max_strength != 0);
+  visible = playing && (max_strength != ZERO);
   if (!visible)
     return;
 
@@ -87,7 +87,7 @@ void WeaponStrengthBar::FetchData()
   // init stamp on the stength_bar
   Double previous_strength = ActiveCharacter().previous_strength;
   ResetTag();
-  if (0 < previous_strength && previous_strength < max_strength) {
+  if (ZERO < previous_strength && previous_strength < max_strength) {
     uint previous_value = ScaleStrengthtoUInt(previous_strength);
     AddTag(previous_value, primary_red_color);
   }
