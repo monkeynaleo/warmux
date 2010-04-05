@@ -84,18 +84,18 @@ public:
   Point2i GetSize() const;
   Point2i GetSizeMax() const;
 
-  void GetScaleFactors(float &_scale_x, float &_scale_y) const;
-  float GetScaleX(void) const { return scale_x; }
-  float GetScaleY(void) const { return scale_y; }
+  void GetScaleFactors(Double &_scale_x, Double &_scale_y) const;
+  Double GetScaleX(void) const { return scale_x; }
+  Double GetScaleY(void) const { return scale_y; }
   void SetSize(unsigned int w, unsigned int h);
   void SetSize(const Point2i &size);
-  void Scale( float scale_x, float scale_y);
+  void Scale( Double scale_x, Double scale_y);
   void ScaleSize(int width, int height);
   void ScaleSize(const Point2i& size);
 
   // Rotation
-  void SetRotation_rad( double angle_rad);
-  const double &GetRotation_rad() const;
+  void SetRotation_rad( Double angle_rad);
+  const Double &GetRotation_rad() const;
   void SetRotation_HotSpot( const Point2i& new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() const { return rotation_point; };
@@ -115,8 +115,8 @@ public:
   bool IsFinished() const;
 
   // Alpha
-  void SetAlpha( float alpha); // Can't be combined with per pixel alpha
-  float GetAlpha() const;
+  void SetAlpha( Double alpha); // Can't be combined with per pixel alpha
+  Double GetAlpha() const;
 
   // Cache
   void EnableRotationCache(unsigned int cache_size);
@@ -145,9 +145,9 @@ private:
    std::vector<SpriteFrame> frames;
 
    // Gfx
-   float alpha;
-   float scale_x,scale_y;
-   double rotation_rad;
+   Double alpha;
+   Double scale_x,scale_y;
+   Double rotation_rad;
    Point2i rhs_pos;
    Rotation_HotSpot rot_hotspot;
    Point2i rotation_point;

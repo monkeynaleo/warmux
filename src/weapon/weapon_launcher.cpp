@@ -83,8 +83,8 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
 #else
   // multiply by ten to get something more funny
-  double bullet_mass = GetMass()/* * 10*/;
-  double total_mass = bullet_mass + obj->GetMass();
+  Double bullet_mass = GetMass()/* * 10*/;
+  Double total_mass = bullet_mass + obj->GetMass();
   // computing new speed of character
   Point2d v2 = (my_speed_before * (1 + 0.8) * bullet_mass +
                 obj->GetSpeed() * (obj->GetMass() - 0.8 * bullet_mass)) / total_mass;
@@ -154,7 +154,7 @@ WeaponProjectile::~WeaponProjectile()
   delete image;
 }
 
-void WeaponProjectile::Shoot(double strength)
+void WeaponProjectile::Shoot(Double strength)
 {
   MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
 
@@ -170,7 +170,7 @@ void WeaponProjectile::Shoot(double strength)
   SetOverlappingObject(&ActiveCharacter(), 100);
   ObjectsList::GetRef().AddObject(this);
 
-  double angle = ActiveCharacter().GetFiringAngle();
+  Double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle, strength);
 
   Point2i hand_position;
@@ -455,12 +455,12 @@ int WeaponLauncher::GetDamage()
   return cfg().damage;
 }
 
-double WeaponLauncher::GetWindFactor()
+Double WeaponLauncher::GetWindFactor()
 {
   return projectile->GetWindFactor();
 }
 
-double WeaponLauncher::GetMass()
+Double WeaponLauncher::GetMass()
 {
   return projectile->GetMass();
 }

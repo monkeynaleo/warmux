@@ -69,8 +69,8 @@ protected:
   friend class Singleton<MineConfig>;
 public:
   uint escape_time;
-  double detection_range;
-  double speed_detection;
+  Double detection_range;
+  Double speed_detection;
 private:
   MineConfig();
 public:

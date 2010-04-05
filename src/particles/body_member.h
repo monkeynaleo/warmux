@@ -25,7 +25,7 @@
 
 class BodyMemberParticle : public Particle
 {
-  double angle_rad;
+  Double angle_rad;
  public:
   BodyMemberParticle(const Sprite& spr, const Point2i& position);
  private:

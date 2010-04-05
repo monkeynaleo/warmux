@@ -28,8 +28,8 @@
 #include <WORMUX_vector2.h>
 
 typedef Vector2<int>    Point2i;
-typedef Vector2<float>  Point2f;
-typedef Vector2<double> Point2d;
+typedef Vector2<Double>  Point2f;
+typedef Vector2<Double> Point2d;
 
 #define POINT2D_2_POINT2I(point) \
     (Point2i)( point )
@@ -37,6 +37,6 @@ typedef Vector2<double> Point2d;
 
 #define POINT2I_2_POINT2D(point) \
     (Point2d)( point )
-//  Point2d((double)point.x, (double)point.y)
+//  Point2d((Double)point.x, (Double)point.y)
 
 #endif // WORMUX_POINT_H

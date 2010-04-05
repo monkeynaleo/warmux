@@ -379,7 +379,7 @@ void JukeBox::LoadXML(const std::string& profile)
     // reads XML
     std::string sample = "no_sample";
     std::string file   = "no_file";
-    double      level  = 1.0;
+    Double      level  = 1.0;
 
     XmlReader::ReadStringAttr(*it, "sample", sample);
     XmlReader::ReadStringAttr(*it, "file", file);
@@ -466,7 +466,7 @@ int JukeBox::StopAll() const
   return Mix_HaltChannel(-1);
 }
 
-int JukeBox::PlaySample (Mix_Chunk * sample, double level, int loop)
+int JukeBox::PlaySample (Mix_Chunk * sample, Double level, int loop)
 {
   if (loop != -1) loop--;
 

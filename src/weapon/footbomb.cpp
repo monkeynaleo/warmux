@@ -39,9 +39,9 @@ class FootBombConfig : public ExplosiveWeaponConfig
 public:
   uint nb_fragments;
   uint nb_recursions;
-  double nb_angle_dispersion;
-  double nb_min_speed;
-  double nb_max_speed;
+  Double nb_angle_dispersion;
+  Double nb_min_speed;
+  Double nb_max_speed;
 
   FootBombConfig();
   virtual void LoadXml(const xmlNode *elem);
@@ -56,7 +56,7 @@ public:
               WeaponLauncher * p_launcher);
   void Refresh();
   virtual void SetEnergyDelta(int delta, bool do_report = true);
-  void Shoot(const Point2i & pos, double strength, double angle, int recursions);
+  void Shoot(const Point2i & pos, Double strength, Double angle, int recursions);
 
 protected:
   void DoExplosion();
@@ -79,7 +79,7 @@ FootBomb::FootBomb(FootBombConfig& cfg,
   SetUniqueId("footbomb");
 }
 
-void FootBomb::Shoot(const Point2i & pos, double strength, double angle, int recursions)
+void FootBomb::Shoot(const Point2i & pos, Double strength, Double angle, int recursions)
 {
   m_recursions = recursions;
   SetCollisionModel(true, true, false ); // a bit hackish...
@@ -99,8 +99,8 @@ void FootBomb::Refresh()
 //  image->SetRotation_rad(GetSpeedAngle());
   if ( IsMoving() )
   {
-    float flying_time = (float) GetMSSinceTimeoutStart();
-    const float rotations_per_second = 4;
+    Double flying_time = (Double) GetMSSinceTimeoutStart();
+    const Double rotations_per_second = 4;
     image->SetRotation_rad( rotations_per_second * 2 * M_PI * flying_time / 1000.0f );
   }
 }
@@ -121,13 +121,13 @@ void FootBomb::DoExplosion()
   const uint fragments = static_cast<FootBombConfig &>(cfg).nb_fragments;
   FootBomb * cluster;
 
-  double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * M_PI / 180;
+  Double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * M_PI / 180;
   Point2i pos = GetPosition();
   for (uint i = 0; i < fragments; ++i )
   {
-    double angle = -M_PI / 2; // this angle is "upwards" here
-    double cluster_deviation = RandomSync().GetDouble( -half_angle_range, half_angle_range );
-    double speed = RandomSync().GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
+    Double angle = -M_PI / 2; // this angle is "upwards" here
+    Double cluster_deviation = RandomSync().GetDouble( -half_angle_range, half_angle_range );
+    Double speed = RandomSync().GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
         static_cast<FootBombConfig &>(cfg).nb_max_speed );
 
     cluster = new FootBomb(static_cast<FootBombConfig &>(cfg), launcher);

@@ -45,12 +45,12 @@ const uint FORCE_Y_MIN = 1;
 const uint FORCE_Y_MAX = 40;
 
 // XXX Unused ?
-//const double OBUS_SPEED = 7 ;
+//const Double OBUS_SPEED = 7 ;
 
 class AirAttackConfig : public ExplosiveWeaponConfig
 {
   public:
-    double speed;
+    Double speed;
     uint nbr_obus;
     AirAttackConfig();
     virtual void LoadXml(const xmlNode* elem);
@@ -94,7 +94,7 @@ Plane::~Plane()
   flying_sound.Stop();
 }
 
-void Plane::Shoot(double speed, const Point2i& target)
+void Plane::Shoot(Double speed, const Point2i& target)
 {
   MSG_DEBUG("weapon.shoot", "Plane Shoot");
   nb_dropped_bombs = 0;
@@ -111,13 +111,13 @@ void Plane::Shoot(double speed, const Point2i& target)
 
   if (dir == 1) {
     speed_vector.SetValues(speed, 0);
-    SetX(1.0 - double(image->GetWidth()));
+    SetX(1.0 - Double(image->GetWidth()));
     //distance_to_release -= obus_dx;
    if(distance_to_release > cible_x) distance_to_release=0;
 
   } else {
     speed_vector.SetValues(-speed, 0) ;
-    SetX(double(GetWorld().GetWidth() - 1));
+    SetX(Double(GetWorld().GetWidth() - 1));
     //distance_to_release += obus_dx;
     if(distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx)) distance_to_release=0;
   }
@@ -177,7 +177,7 @@ void Plane::Refresh()
 
 int Plane::GetDirection() const
 {
-  float x,y;
+  Double x,y;
   image->GetScaleFactors(x,y);
   return (x<0)?-1:1;
 }

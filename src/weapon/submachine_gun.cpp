@@ -39,7 +39,7 @@
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
-const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
+const Double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
 
 class SubMachineGunBullet : public WeaponBullet
 {
@@ -49,7 +49,7 @@ class SubMachineGunBullet : public WeaponBullet
     ~SubMachineGunBullet() { };
   protected:
     void ShootSound();
-    void RandomizeShoot(double &angle,double &strength);
+    void RandomizeShoot(Double &angle,Double &strength);
 };
 
 
@@ -59,7 +59,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
 {
 }
 
-void SubMachineGunBullet::RandomizeShoot(double &angle,double &/*strength*/)
+void SubMachineGunBullet::RandomizeShoot(Double &angle,Double &/*strength*/)
 {
   angle += M_PI * RandomSync().GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }
@@ -126,8 +126,8 @@ bool SubMachineGun::p_Shoot()
 
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
-  double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
-               * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  Double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
+               * (Double)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
   particle.AddNow(pos, 1, particle_BULLET, true, angle,
                   5.0 + (Time::GetInstance()->Read() % 6));
 

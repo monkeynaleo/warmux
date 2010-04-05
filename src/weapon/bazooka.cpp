@@ -39,7 +39,7 @@ public:
   BazookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
   void Explosion();
-  void Shoot(double strength);
+  void Shoot(Double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -67,7 +67,7 @@ void BazookaRocket::Refresh()
   }
 }
 
-void BazookaRocket::Shoot(double strength)
+void BazookaRocket::Shoot(Double strength)
 {
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield

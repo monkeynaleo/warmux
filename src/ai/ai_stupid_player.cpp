@@ -29,10 +29,10 @@
 
 const uint MAX_GAME_TIME_USED_THINKING_IN_MS = 10000;
 const uint REAL_THINK_TIME_PER_REFRESH_IN_MS = 1;
-const double MAX_GUN_DISTANCE = 600;
-const double MAX_SHOTGUN_DISTANCE = 250;
-const double MAX_SNIPER_RIFILE_DISTANCE = 10E10;
-const double MAX_SUBMACHINE_GUN_DISTANCE = 500;
+const Double MAX_GUN_DISTANCE = 600;
+const Double MAX_SHOTGUN_DISTANCE = 250;
+const Double MAX_SNIPER_RIFILE_DISTANCE = 10E10;
+const Double MAX_SUBMACHINE_GUN_DISTANCE = 500;
 
 AIStupidPlayer::AIStupidPlayer(Team * team):
   team(team),

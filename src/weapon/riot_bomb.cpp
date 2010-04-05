@@ -42,7 +42,7 @@ public:
                    WeaponLauncher * p_launcher);
   void Refresh();
   void Explosion();
-  void Shoot(double strength);
+  void Shoot(Double strength);
 protected:
   void SignalOutOfMap();
   void SignalDrowning();
@@ -55,7 +55,7 @@ RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
   explode_colliding_character = true;
 }
 
-void RiotBombRocket::Shoot(double strength)
+void RiotBombRocket::Shoot(Double strength)
 {
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield

@@ -54,7 +54,7 @@ class SuperTux : public WeaponProjectile
   private:
     bool swimming; // Supertux is not in the air, it is swimming!
     ParticleEngine particle_engine;
-    double angle_rad;
+    Double angle_rad;
     SoundSample flying_sound;
 
   public:
@@ -67,10 +67,10 @@ class SuperTux : public WeaponProjectile
              WeaponLauncher * p_launcher);
     void Refresh();
 
-    inline void SetAngle(double angle) {angle_rad = angle;}
+    inline void SetAngle(Double angle) {angle_rad = angle;}
     void turn_left();
     void turn_right();
-    void Shoot(double strength);
+    void Shoot(Double strength);
     virtual void Explosion();
     virtual void SignalDrowning();
     virtual void SignalGoingOutOfWater();
@@ -95,7 +95,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   SetTestRect(1, 1, 2, 2);
 }
 
-void SuperTux::Shoot(double strength)
+void SuperTux::Shoot(Double strength)
 {
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield

@@ -69,7 +69,7 @@ Member::Member(const xmlNode *     xml,
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
     MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
-    anchor = Point2f((float)dx,(float)dy);
+    anchor = Point2f((Double)dx,(Double)dy);
     spr->SetRotation_HotSpot(Point2i(dx,dy));
   } else {
     MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
@@ -98,7 +98,7 @@ Member::Member(const xmlNode *     xml,
     XmlReader::ReadIntAttr(*it, "dx", dx);
     XmlReader::ReadIntAttr(*it, "dy", dy);
     MSG_DEBUG("body", "   Attached member %s has anchor (%i,%i)\n", att_type.c_str(), dx, dy);
-    d.SetValues((float)dx, (float)dy);
+    d.SetValues((Double)dx, (Double)dy);
     XmlReader::ReadStringAttr(*it, "frame", frame_str);
 
     if ("*" == frame_str) {
@@ -254,7 +254,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
     frame = spr->GetCurrentFrame();
   }
 
-  float radius;
+  Double radius;
 
   // We first apply to the child (makes calcules simpler in this order):
   for (std::map<std::string, v_attached>::iterator child = attached_members.begin();
@@ -278,7 +278,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       Point2f child_delta = child->second[frame] - anchor;
       radius = child_delta.Norm();
       if (0.0 != radius) {
-        float angle_init = child_delta.ComputeAngle();
+        Double angle_init = child_delta.ComputeAngle();
         child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
         child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
       }
@@ -306,7 +306,7 @@ void Member::ResetMovement()
   scale.y   = 1.0;
 }
 
-void Member::SetAngle(const double & angle)
+void Member::SetAngle(const Double & angle)
 {
   angle_rad = angle;
 }

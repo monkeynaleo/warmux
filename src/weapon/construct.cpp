@@ -46,7 +46,7 @@
 #include "include/app.h"
 #endif
 
-const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
+const Double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
@@ -154,7 +154,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
 void Construct::Up() const
 {
-  double new_angle = angle + DELTA_ANGLE;
+  Double new_angle = angle + DELTA_ANGLE;
 
   Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
   ActionHandler::GetInstance()->NewAction(a);
@@ -162,7 +162,7 @@ void Construct::Up() const
 
 void Construct::Down() const
 {
-  double new_angle = angle - DELTA_ANGLE;
+  Double new_angle = angle - DELTA_ANGLE;
 
   Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
   ActionHandler::GetInstance()->NewAction(a);

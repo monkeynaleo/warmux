@@ -79,7 +79,7 @@ private:
   typedef struct
   {
     std::string filename;
-    double      level;
+    Double      level;
   } sample_info;
   typedef std::multimap<std::string, sample_info>::value_type
     sound_sample;
@@ -173,7 +173,7 @@ private:
    * @return the channel used to play the sample
    * <i>loop</i>: -1 for loop forever, else number of times -1 to play
    */
-  int PlaySample (Mix_Chunk * sample, double level=1.0, int loop=0);
+  int PlaySample (Mix_Chunk * sample, Double level=1.0, int loop=0);
 };
 //-----------------------------------------------------------------------------
 #endif

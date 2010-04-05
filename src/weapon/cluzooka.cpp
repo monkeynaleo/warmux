@@ -47,7 +47,7 @@ protected:
     virtual ~ClusterSpawner() {};
 
     virtual void SpawnClusters( uint fragments, uint recursion_depth,
-       const Point2i pos, double speed, double angle, double angle_range,
+       const Point2i pos, Double speed, Double angle, Double angle_range,
         ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher )
     {
 #ifndef CLUSTERS_SPAWN_CLUSTERS
@@ -64,7 +64,7 @@ protected:
 
         for (uint i = 0; i < fragments; ++i ) 
         {
-            float cluster_deviation = angle_range * i / ( float )fragments - angle_range / 2.0f;
+            Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / 2.0f;
 
             cluster = new ClusterType( cfg, p_launcher );
             cluster->Shoot( pos, speed, angle + cluster_deviation, recursion_depth );
@@ -106,12 +106,12 @@ class CluzookaCluster : public WeaponProjectile, public ClusterSpawner< Cluzooka
   uint m_recursion_depth;
 #endif
 
-  float m_time_before_spawn;
+  Double m_time_before_spawn;
 
 public:
   CluzookaCluster(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
-  void Shoot(const Point2i & start_pos, double strength, double angle, uint recurse_times);
+  void Shoot(const Point2i & start_pos, Double strength, Double angle, uint recurse_times);
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
@@ -128,7 +128,7 @@ CluzookaCluster::CluzookaCluster(ExplosiveWeaponConfig& cfg,
   explode_colliding_character = true;
 }
 
-void CluzookaCluster::Shoot(const Point2i & start_pos, double strength, double angle, uint recurse_times)
+void CluzookaCluster::Shoot(const Point2i & start_pos, Double strength, Double angle, uint recurse_times)
 {
 #ifdef CLUSTERS_SPAWN_CLUSTERS
   m_recursion_depth = recurse_times;
@@ -158,7 +158,7 @@ void CluzookaCluster::Refresh()
   if ( m_recursion_depth > 1 )
   {
       uint time = Time::GetInstance()->Read();
-      float flying_time = ( float )( time - begin_time );
+      Double flying_time = ( Double )( time - begin_time );
 
       if ( flying_time >= m_time_before_spawn )
       {
@@ -177,13 +177,13 @@ void CluzookaCluster::Refresh()
 void CluzookaCluster::DoSpawn()
 {  
   const uint fragments = 2;
-  double angle;
-  double speed;
+  Double angle;
+  Double speed;
   GetSpeed( speed, angle );
   speed = 25;// always
   Point2i parent_position = GetPosition();
 
-  float angle_range = M_PI / 4;
+  Double angle_range = M_PI / 4;
 
   uint rec_depth = 0;
 #ifdef CLUSTERS_SPAWN_CLUSTERS
@@ -228,7 +228,7 @@ public:
   CluzookaRocket(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
   void Explosion();
-  void Shoot(double strength);
+  void Shoot(Double strength);
 protected:
   virtual void DoSpawn();
   virtual void DoExplosion();
@@ -252,20 +252,20 @@ void CluzookaRocket::Refresh()
   if(!IsDrowned())
   {
     //image->SetRotation_rad(GetSpeedAngle());
-    float flying_time = ( float )(GetMSSinceTimeoutStart());
+    Double flying_time = ( Double )(GetMSSinceTimeoutStart());
 
-    float speed_angle = GetSpeedAngle();
-    const float time_to_rotate = 500;
-    const float num_of_full_rotates = 4;
+    Double speed_angle = GetSpeedAngle();
+    const Double time_to_rotate = 500;
+    const Double num_of_full_rotates = 4;
 
     // make it rotate itself for first N msec
     if( flying_time < time_to_rotate )
     {
-        float t = flying_time / time_to_rotate; // portion of time
-        float inv_t = 1.0f - t;
+        Double t = flying_time / time_to_rotate; // portion of time
+        Double inv_t = 1.0f - t;
         // rotate speed is max when t is close to 0, and slows down to 1
         // when t is approaching 1
-        //float rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
+        //Double rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
         image->SetRotation_rad( speed_angle + 
                  2 * M_PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
     }
@@ -286,7 +286,7 @@ void CluzookaRocket::Refresh()
 void CluzookaRocket::DoSpawn()
 {  
   const uint fragments = static_cast<CluzookaConfig &>(cfg).m_fragments;
-  const float angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * M_PI / 180.0f;
+  const Double angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * M_PI / 180.0f;
 
   const uint recursion_depth = 0;
 
@@ -294,8 +294,8 @@ void CluzookaRocket::DoSpawn()
   ASSERT( recursion_depth == 0 );
 #endif
 
-  double angle;
-  double speed;
+  Double angle;
+  Double speed;
   GetSpeed( speed, angle );
   speed = 25;// always
   Point2i parent_position = GetPosition();
@@ -320,7 +320,7 @@ void CluzookaRocket::DoExplosion()
 */
 }
 
-void CluzookaRocket::Shoot(double strength)
+void CluzookaRocket::Shoot(Double strength)
 {
   // Sound must be launched before WeaponProjectile::Shoot
   // in case that the projectile leave the battlefield

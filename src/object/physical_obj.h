@@ -42,9 +42,9 @@ typedef enum
 
 class Action;
 
-extern const double PIXEL_PER_METER;
+extern const Double PIXEL_PER_METER;
 
-double MeterDistance (const Point2i &p1, const Point2i &p2);
+Double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
@@ -99,15 +99,15 @@ public:
   void CanBeGhost(bool state);
 
   // Set/Get position
-  void SetX(double x) { SetXY( Point2d(x, GetYdouble()) ); };
-  void SetY(double y) { SetXY( Point2d(GetXdouble(), y) ); };
+  void SetX(Double x) { SetXY( Point2d(x, GetYDouble()) ); };
+  void SetY(Double y) { SetXY( Point2d(GetXDouble(), y) ); };
   void SetXY(const Point2i &position);
   void SetXY(const Point2d &position);
   int GetX() const;
   int GetY() const;
-  double GetXdouble() const;
-  double GetYdouble() const;
-  const Point2d GetPosition() const { return Point2d(GetXdouble(), GetYdouble()) ;};
+  Double GetXDouble() const;
+  Double GetYDouble() const;
+  const Point2d GetPosition() const { return Point2d(GetXDouble(), GetYDouble()) ;};
 
   // Set/Get size
   void SetSize(const Point2i &newSize);
@@ -148,7 +148,7 @@ public:
 
   // Move the character until he gets out of the ground
   bool PutOutOfGround();
-  bool PutOutOfGround(double direction, double max_distance=30); //Where direction is the angle of the direction
+  bool PutOutOfGround(Double direction, Double max_distance=30); //Where direction is the angle of the direction
                                          // where the object is moved
                                          // and max_distance is max distance allowed when putting out
 
@@ -204,7 +204,7 @@ public:
   // Do the point p touch the object ?
   bool Contain(const Point2i &p) const { return  GetTestRect().Contains( p ); };
 
-  bool PutRandomly(bool on_top_of_world, double min_dst_with_characters, bool net_sync = true);
+  bool PutRandomly(bool on_top_of_world, Double min_dst_with_characters, bool net_sync = true);
 
   collision_t NotifyMove(Point2d oldPos, Point2d newPos);
 
@@ -231,7 +231,7 @@ private:
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
 				 Point2d& contactPos,
-				 double& contactAngle) const;
+				 Double& contactAngle) const;
 };
 
 #endif

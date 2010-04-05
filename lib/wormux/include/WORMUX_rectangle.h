@@ -336,6 +336,6 @@ template<class T> class rectangle
 };
 
 typedef rectangle<int>    Rectanglei;
-typedef rectangle<float>  Rectanglef;
-typedef rectangle<double> Rectangled;
+typedef rectangle<Double>  Rectanglef;
+typedef rectangle<Double> Rectangled;
 #endif // _RECTANGLE_H

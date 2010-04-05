@@ -171,7 +171,7 @@ int Widget::ParseHorizontalTypeAttribut(const std::string & attributName,
   }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  double tmpValue;
+  Double tmpValue;
   
   if (xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue)) {
     finalValue = GetMainWindow().GetWidth() * tmpValue / 100;
@@ -191,7 +191,7 @@ int Widget::ParseVerticalTypeAttribut(const std::string & attributName,
   }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  double tmpValue;
+  Double tmpValue;
 
   if (xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue)) {
     finalValue = GetMainWindow().GetHeight() * tmpValue / 100;

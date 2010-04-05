@@ -79,7 +79,7 @@ bool EnergyBar::LoadXMLConfiguration()
   unsigned int thresholdCount = xmlFile->GetNbChildren(widgetNode);
   const xmlNode * thresholdNode = xmlFile->GetFirstChild(widgetNode);
   uint i = 0;
-  double thresholdValue;
+  Double thresholdValue;
 
   for ( ; thresholdCount > 0; --thresholdCount) {
 
@@ -98,7 +98,7 @@ bool EnergyBar::LoadXMLConfiguration()
 }
 
 void EnergyBar::ProcessThresholds(int thresholdNumber,
-                                  float thresholdMax,
+                                  Double thresholdMax,
                                   Color & colorMax)
 {
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
@@ -116,9 +116,9 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   }
   
   Color colorMin = listThresholds[thresholdNumber - 1].color;
-  float thresholdMin = listThresholds[thresholdNumber - 1].value;
+  Double thresholdMin = listThresholds[thresholdNumber - 1].value;
   uint size = orientation == PROG_BAR_HORIZONTAL ? width : height; 
-  float range = size * (thresholdMax - thresholdMin) / 100.0;
+  Double range = size * (thresholdMax - thresholdMin) / 100.0;
 
   Threshold newThreshold; 
   newThreshold.value = thresholdMax; 
@@ -142,7 +142,7 @@ void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
   val_barre = ComputeBarValue(val);
-  float currentPercentage = abs(val) / (float)max * 100.0;
+  Double currentPercentage = abs(val) / (Double)max * 100.0;
   Threshold thresholdMin;
   Threshold thresholdMax;
   int i = 0;

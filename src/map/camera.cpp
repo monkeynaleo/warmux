@@ -39,16 +39,16 @@
 
 const Point2d MAX_CAMERA_SPEED(5000, 5000);
 const Point2d MAX_CAMERA_ACCELERATION(1.5,1.5);
-const double ANTICIPATION = 18;
-const double REACTIVITY = 0.6;
-const double SPEED_REACTIVITY = 0.05;
-const double SPEED_REACTIVITY_CEIL = 4;
+const Double ANTICIPATION = 18;
+const Double REACTIVITY = 0.6;
+const Double SPEED_REACTIVITY = 0.05;
+const Double SPEED_REACTIVITY_CEIL = 4;
 
 const uint SCROLL_KEYBOARD = 20; // pixel
 
-const double ADVANCE_ANTICIPATION = 10;
-const double REALTIME_FOLLOW_LIMIT = 25;
-const double REALTIME_FOLLOW_FACTOR = 0.15;
+const Double ADVANCE_ANTICIPATION = 10;
+const Double REALTIME_FOLLOW_LIMIT = 25;
+const Double REALTIME_FOLLOW_FACTOR = 0.15;
 
 uint MAX_REFRESHES_PER_SECOND = 100;
 
@@ -428,23 +428,23 @@ Point2i Camera::ComputeShake() const
     return m_shake;
 
   // FIXME: we can underflow to 0 if time and m_started_shaking are large enough
-  float t = (float)(time - m_started_shaking) / (float)m_shake_duration;
+  Double t = (Double)(time - m_started_shaking) / (Double)m_shake_duration;
 
-  float func_val = 1.0f;
+  Double func_val = 1.0f;
   if (t >= 0.0001f) {
-    const float k_scale_angle = 10 * M_PI;
-    float arg = k_scale_angle * t;
+    const Double k_scale_angle = 10 * M_PI;
+    Double arg = k_scale_angle * t;
     // denormalized sinc
     func_val = (1 - t) * sin(arg) / arg;
   }
 
-  float x_ampl = (float)RandomLocal().GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
-  float y_ampl = (float)RandomLocal().GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
+  Double x_ampl = (Double)RandomLocal().GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
+  Double y_ampl = (Double)RandomLocal().GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
 
-  m_shake.x = (int)(x_ampl * func_val//( float )m_shake_amplitude.x * func_val
-		    + (float)m_shake_centerpoint.x);
-  m_shake.y = (int)(y_ampl * func_val//( float )m_shake_amplitude.y * func_val
-		    + (float)m_shake_centerpoint.y);
+  m_shake.x = (int)(x_ampl * func_val//( Double )m_shake_amplitude.x * func_val
+		    + (Double)m_shake_centerpoint.x);
+  m_shake.y = (int)(y_ampl * func_val//( Double )m_shake_amplitude.y * func_val
+		    + (Double)m_shake_centerpoint.y);
 
   static uint t_last_time_logged = 0;
   if (time - t_last_time_logged > 10) {

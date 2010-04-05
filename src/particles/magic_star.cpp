@@ -51,8 +51,8 @@ void MagicStarParticle::Refresh()
   uint time = Time::GetInstance()->Read() - m_last_refresh;
   if (time >= m_time_between_scale) {
     if (m_left_time_to_live <= 0) return ;
-    float lived_time = m_initial_time_to_live - m_left_time_to_live;
-    float coeff = sin(M_PI_2*((float)lived_time/((float)m_initial_time_to_live)));
+    Double lived_time = m_initial_time_to_live - m_left_time_to_live;
+    Double coeff = sin(M_PI_2*((Double)lived_time/((Double)m_initial_time_to_live)));
     image->SetRotation_rad(coeff * 2 * M_PI);
   }
   Particle::Refresh();

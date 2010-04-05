@@ -68,7 +68,7 @@ static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Si
     int code1, code2;
     int draw = 0;
     Sint16 swaptmp;
-    float m;
+    Double m;
 
     /*
      * Get clipping boundary
@@ -99,7 +99,7 @@ static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Si
                 code1 = swaptmp;
             }
             if (*x2 != *x1) {
-                m = (*y2 - *y1) / (float) (*x2 - *x1);
+                m = (*y2 - *y1) / (Double) (*x2 - *x1);
             } else {
                 m = 1.0f;
             }
@@ -280,7 +280,7 @@ int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, 
     return (pixelColorNolock(dst, x, y, (color & (Uint32) 0xffffff00) | (Uint32) a));
 }
 
-Uint32 interpolateColor(Uint32 color1, Uint32 color2, float step)
+Uint32 interpolateColor(Uint32 color1, Uint32 color2, Double step)
 {
   int c1, c2, c3, c4;
   c1 = color1 & 0xFF000000;
@@ -304,7 +304,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     int result;
     int dx, dy, tmp, xdir;
     Uint32 color = color1;
-    float step;
+    Double step;
 
     if (y1 == y2) {
         /* Horizontal line */
@@ -319,7 +319,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         }
         step = dx;
         while (--dx) {
-            color = interpolateColor(color2, color1, (float)dx / step);
+            color = interpolateColor(color2, color1, (Double)dx / step);
             result |= pixelColorNolock(dst, x1, y1, color);
             x1 += xdir;
         }
@@ -394,7 +394,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         /* Vertical line */
         step = dy;
         while (--dy) {
-            color = interpolateColor(color2, color1, (float)dy / step);
+            color = interpolateColor(color2, color1, (Double)dy / step);
             result |= pixelColorNolock(dst, x1, ++yy0, color);
         }
     } else if (dy == 0) {
@@ -402,7 +402,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
         /* Diagonal line */
         step = dx;
         while (--dx) {
-            color = interpolateColor(color2, color1, (float)dx / step);
+            color = interpolateColor(color2, color1, (Double)dx / step);
             result |= pixelColorNolock(dst, xx0, ++yy0, color);
             xx0 += xdir;
         }
@@ -436,7 +436,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
             int x0pxdir = xx0 + xdir;
             step = dy;
             while (--dy) {
-                color = interpolateColor(color2, color1, (float)dy / step);
+                color = interpolateColor(color2, color1, (Double)dy / step);
                 erracctmp = erracc;
                 erracc += erradj;
                 if (erracc <= erracctmp) {
@@ -478,7 +478,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
             int y0p1 = yy0 + 1;
             step = dx;
             while (--dx) {
-                color = interpolateColor(color2, color1, (float)dx / step);
+                color = interpolateColor(color2, color1, (Double)dx / step);
                 erracctmp = erracc;
                 erracc += erradj;
                 if (erracc <= erracctmp) {

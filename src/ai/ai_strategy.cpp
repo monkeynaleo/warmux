@@ -24,7 +24,7 @@
 const uint RATING_EPSILON = 0.00001;
 const uint WATCH_MISSILE_TIME_IN_MS = 2000;
 
-AIStrategy::AIStrategy(float rating):
+AIStrategy::AIStrategy(Double rating):
 rating(rating)
 {
   // do nothing
@@ -67,7 +67,7 @@ AICommand * SkipTurnStrategy::CreateCommand()
   return commands;
 }
 
-static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int timeout = -1)
+static CommandList * CreateSelectCommandList(Character & character, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, int timeout = -1)
 {
   CommandList * commands = new CommandList();
   commands->Add(new SelectCharacterCommand(&character));
@@ -84,7 +84,7 @@ static CommandList * CreateSelectCommandList(Character & character, Weapon::Weap
   return commands;
 }
 
-ShootWithGunStrategy::ShootWithGunStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, int bullets):
+ShootWithGunStrategy::ShootWithGunStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, int bullets):
 AIStrategy(rating),
 shooter(shooter),
 weapon(weapon),
@@ -108,7 +108,7 @@ AICommand * ShootWithGunStrategy::CreateCommand()
   return commands;
 }
 
-LoadAndFireStrategy::LoadAndFireStrategy(double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, double angle, double strength, int timeout):
+LoadAndFireStrategy::LoadAndFireStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, Double strength, int timeout):
 AIStrategy(rating),
 shooter(shooter),
 weapon(weapon),

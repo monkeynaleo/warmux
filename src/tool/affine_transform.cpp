@@ -48,7 +48,7 @@ void AffineTransform2D::Set(const AffineTransform2D &mat)
   wt = mat.wt;
 }
 
-void AffineTransform2D::SetRotation(double rad_angle)
+void AffineTransform2D::SetRotation(Double rad_angle)
 {
   Init();
   x1 = y2 = cos(rad_angle);
@@ -56,7 +56,7 @@ void AffineTransform2D::SetRotation(double rad_angle)
   y1 = - x2;
 }
 
-void AffineTransform2D::SetTranslation(double trans_x, double trans_y)
+void AffineTransform2D::SetTranslation(Double trans_x, Double trans_y)
 {
   Init();
   xt = trans_x;
@@ -65,7 +65,7 @@ void AffineTransform2D::SetTranslation(double trans_x, double trans_y)
 
 void AffineTransform2D::SetTranslation(const Point2i & position)
 {
-  SetTranslation((double)position.x, (double)position.y);
+  SetTranslation((Double)position.x, (Double)position.y);
 }
 
 void AffineTransform2D::SetTranslation(const Point2d & position)
@@ -73,14 +73,14 @@ void AffineTransform2D::SetTranslation(const Point2d & position)
   SetTranslation(position.x, position.y);
 }
 
-void AffineTransform2D::SetShrink(double shrink_x, double shrink_y)
+void AffineTransform2D::SetShrink(Double shrink_x, Double shrink_y)
 {
   Init();
   x1 = shrink_x;
   y2 = shrink_y;
 }
 
-void AffineTransform2D::SetShear(double shear_x, double shear_y)
+void AffineTransform2D::SetShear(Double shear_x, Double shear_y)
 {
   Init();
   x2 = shear_x;
@@ -90,7 +90,7 @@ void AffineTransform2D::SetShear(double shear_x, double shear_y)
 void AffineTransform2D::SetTranslationAnimation(int start_time, int duration, int time, bool invert,
                                                 const Point2d & start, const Point2d & end)
 {
-  double coef = (time - start_time) / (double)duration;
+  Double coef = (time - start_time) / (Double)duration;
   coef = (coef > 0.0 ? coef : 0.0);
   coef = (coef < 1.0 ? coef : 1.0);
   if(invert)
@@ -99,9 +99,9 @@ void AffineTransform2D::SetTranslationAnimation(int start_time, int duration, in
 }
 
 void AffineTransform2D::SetRotationAnimation(int start_time, int duration, int time, bool invert,
-                                             double angle_start, double angle_end)
+                                             Double angle_start, Double angle_end)
 {
-  double coef = (time - start_time) / (double)duration;
+  Double coef = (time - start_time) / (Double)duration;
   coef = (coef > 0.0 ? coef : 0.0);
   coef = (coef < 1.0 ? coef : 1.0);
   if(invert)
@@ -110,10 +110,10 @@ void AffineTransform2D::SetRotationAnimation(int start_time, int duration, int t
 }
 
 void AffineTransform2D::SetShrinkAnimation(int start_time, int duration, int time, bool invert,
-                                           double shrink_x_start, double shrink_y_start,
-                                           double shrink_x_end, double shrink_y_end)
+                                           Double shrink_x_start, Double shrink_y_start,
+                                           Double shrink_x_end, Double shrink_y_end)
 {
-  double coef = (time - start_time) / (double)duration;
+  Double coef = (time - start_time) / (Double)duration;
   coef = (coef > 0.0 ? coef : 0.0);
   coef = (coef < 1.0 ? coef : 1.0);
   if(invert)
@@ -122,11 +122,11 @@ void AffineTransform2D::SetShrinkAnimation(int start_time, int duration, int tim
 }
 
 void AffineTransform2D::SetShearAnimation(int start_time, int duration, int time, bool invert,
-                                          double shear_tremor, double shear_x_start, double shear_y_start,
-                                          double shear_x_end, double shear_y_end)
+                                          Double shear_tremor, Double shear_x_start, Double shear_y_start,
+                                          Double shear_x_end, Double shear_y_end)
 {
   if(time < start_time + duration && time > start_time) {
-    double coef = 1.0 - (time - start_time) / (double)duration;
+    Double coef = 1.0 - (time - start_time) / (Double)duration;
     if(invert)
       coef = 1.0 - coef;
     coef = -(cos((1.0 - coef) * M_PI * 2 * shear_tremor) * coef);
@@ -136,28 +136,28 @@ void AffineTransform2D::SetShearAnimation(int start_time, int duration, int time
   }
 }
 
-AffineTransform2D AffineTransform2D::Rotate(double rad_angle)
+AffineTransform2D AffineTransform2D::Rotate(Double rad_angle)
 {
   AffineTransform2D tmp;
   tmp.SetRotation(rad_angle);
   return tmp;
 }
 
-AffineTransform2D AffineTransform2D::Translate(double trans_x, double trans_y)
+AffineTransform2D AffineTransform2D::Translate(Double trans_x, Double trans_y)
 {
   AffineTransform2D tmp;
   tmp.SetTranslation(trans_x, trans_y);
   return tmp;
 }
 
-AffineTransform2D AffineTransform2D::Shrink(double shrink_x, double shrink_y)
+AffineTransform2D AffineTransform2D::Shrink(Double shrink_x, Double shrink_y)
 {
   AffineTransform2D tmp;
   tmp.SetShrink(shrink_x, shrink_y);
   return tmp;
 }
 
-AffineTransform2D AffineTransform2D::Shear(double shear_x, double shear_y)
+AffineTransform2D AffineTransform2D::Shear(Double shear_x, Double shear_y)
 {
   AffineTransform2D tmp;
   tmp.SetShear(shear_x, shear_y);
@@ -185,16 +185,16 @@ AffineTransform2D AffineTransform2D::operator*(const AffineTransform2D &mat) con
 Point2i AffineTransform2D::operator*(const Point2i& p) const
 {
   Point2i tmp;
-  tmp.x = (int)(x1 * (double)p.x + x2 * (double)p.y + xt);
-  tmp.y = (int)(y1 * (double)p.x + y2 * (double)p.y + yt);
+  tmp.x = (int)(x1 * (Double)p.x + x2 * (Double)p.y + xt);
+  tmp.y = (int)(y1 * (Double)p.x + y2 * (Double)p.y + yt);
   return tmp;
 }
 
 Point2d AffineTransform2D::operator*(const Point2d& p) const
 {
   Point2d tmp;
-  tmp.x = (double)(x1 * (double)p.x + x2 * (double)p.y + xt);
-  tmp.y = (double)(y1 * (double)p.x + y2 * (double)p.y + yt);
+  tmp.x = (Double)(x1 * (Double)p.x + x2 * (Double)p.y + xt);
+  tmp.y = (Double)(y1 * (Double)p.x + y2 * (Double)p.y + yt);
   return tmp;
 }
 

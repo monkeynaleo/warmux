@@ -42,34 +42,34 @@ T BorneTpl (const T &valeur, const T &min, const T &max){
 inline long InRange_Long (const long &valeur, const long &min, const long &max) {
   return BorneTpl (valeur, min, max);
 }
-inline double InRange_Double (const double &valeur, const double &min, const double &max) {
+inline Double InRange_Double (const Double &valeur, const Double &min, const Double &max) {
   return BorneTpl (valeur, min, max);
 }
 
 // Invert an angle along the vertical axis
-inline double InverseAngle (const double &angle) {
+inline Double InverseAngle (const Double &angle) {
   if (angle < 0)
     return -M_PI -angle;
   return M_PI - angle;
 }
 
-inline double InverseAngleDeg (const double &angle) {
+inline Double InverseAngleDeg (const Double &angle) {
   if (angle < 0)
     return -180 - angle;
   return 180 - angle;
 }
 
-inline double InverseAngleRad (const double &angle) { return InverseAngle(angle); }
+inline Double InverseAngleRad (const Double &angle) { return InverseAngle(angle); }
 
 // Absolute value
-inline double AbsoluteValue (const double x) { return fabs(x); }
-inline bool EqualsZero (const double x) { return AbsoluteValue(x) <= EPS_ZERO; }
+inline Double AbsoluteValue (const Double x) { return fabs(x); }
+inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPS_ZERO; }
 
 #ifdef _MSC_VER
 // MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
-#  include <float.h>
-double inline round(double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
-long int inline lround(double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
+#  include <Double.h>
+Double inline round(Double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
+long int inline lround(Double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
 #endif
 
 template <class T> T max(T a, T b)

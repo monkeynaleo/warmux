@@ -55,7 +55,7 @@ const uint HAUT_FONT_MIX = 13;
 // Space between the name, the skin and the energy bar
 const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
-const double MIN_SPEED_TO_FLY = 15.0;
+const Double MIN_SPEED_TO_FLY = 15.0;
 
 // Pause for the animation
 #ifdef DEBUG
@@ -78,7 +78,7 @@ const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
 // Delta angle used to move the crosshair
-const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
+const Double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
 
 // Pause between changing direction
 const uint PAUSE_CHG_DIRECTION = 80; // ms
@@ -473,7 +473,7 @@ void Character::Draw()
 #endif
 }
 
-void Character::Jump(double strength, double angle /*in radian */)
+void Character::Jump(Double strength, Double angle /*in radian */)
 {
   Camera::GetInstance()->FollowObject(this);
 
@@ -587,7 +587,7 @@ void Character::Refresh()
     if (GetDirection() == DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     particle_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
-                              - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
+                              - M_PI_2 - (Double)GetDirection() * M_PI_4, 20.0);
   }
 
   if (IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
@@ -626,8 +626,8 @@ void Character::Refresh()
   if (back_jumping)
   {
     ASSERT(&ActiveCharacter() == this);
-    double rotation;
-    static double speed_init = GameMode::GetInstance()->character.back_jump_strength *
+    Double rotation;
+    static Double speed_init = GameMode::GetInstance()->character.back_jump_strength *
        sin(GameMode::GetInstance()->character.back_jump_angle);
 
     Point2d speed = GetSpeedXY();
@@ -659,7 +659,7 @@ void Character::Refresh()
   }
 
   // Stop flying if we don't go fast enough
-  double n, a;
+  Double n, a;
   GetSpeed(n, a);
   if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
     SetMovement("breathe");
@@ -686,7 +686,7 @@ void Character::UpdateFiringAngle()
   if (can_change && ud_move_intention) {
     UpdateLastMovingTime();
     CharacterCursor::GetInstance()->Hide();
-    double delta = DELTA_CROSSHAIR;
+    Double delta = DELTA_CROSSHAIR;
     if (ud_move_intention->IsToDoItSlowly())
       delta /= 10.0;
     if (ud_move_intention->GetDirection() == DIRECTION_UP)
@@ -729,14 +729,14 @@ void Character::Collision(const Point2d& speed_vector)
   body->SetRotation(0.0);
   back_jumping = false;
 
-  double norm = speed_vector.Norm();
+  Double norm = speed_vector.Norm();
 
   if (norm > game_mode->safe_fall && speed_vector.y>0.0)
   {
     // TODO: take the angle of collision into account!
 
     norm -= game_mode->safe_fall;
-    double degat = norm * game_mode->damage_per_fall_unit;
+    Double degat = norm * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
@@ -775,7 +775,7 @@ void Character::SignalExplosion()
 {
   if (IsDead()) return;
 
-  double n, a;
+  Double n, a;
   GetSpeed(n, a);
   SetRebounding(true);
 
@@ -848,14 +848,14 @@ void Character::GetRelativeHandPosition(Point2i & result) const
   body->GetRelativeHandPosition(result);
 }
 
-double Character::GetFiringAngle() const {
+Double Character::GetFiringAngle() const {
   if (GetDirection() == DIRECTION_LEFT)
     return InverseAngleRad(firing_angle);
   return firing_angle;
 }
 
 #include <iostream>
-void Character::SetFiringAngle(double angle) {
+void Character::SetFiringAngle(Double angle) {
   /*while(angle > 2 * M_PI)
     angle -= 2 * M_PI;
   while(angle <= -2 * M_PI)
@@ -1072,7 +1072,7 @@ bool Character::ComputeHeightMovement(int & height)
     //We can go down, but the step is too big -> the character will fall
     bool falling = true;
     if (falling) {
-      SetX (GetXdouble() + GetDirection());
+      SetX (GetXDouble() + GetDirection());
       UpdatePosition();
       SetMovement("fall");
     }

@@ -78,7 +78,7 @@ bool Ground::IsEmpty(const Point2i & pos) const {
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangent(int x,int y) const {
+Double Ground::Tangent(int x,int y) const {
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)
@@ -103,7 +103,7 @@ double Ground::Tangent(int x,int y) const {
 */
   //ASSERT (p1.x != p2.x);
 
-  /* double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
+  /* Double tangeante = atan((Double)(p2.y-p1.y)/(Double)(p2.x-p1.x));
 
   while(tangeante <= 0.0)
     tangeante += M_PI;
@@ -113,7 +113,7 @@ double Ground::Tangent(int x,int y) const {
   return tangeante; */
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
-  const float table[5][5] = {
+  const Double table[5][5] = {
     {      .78539,       .46364,     M_PI, -.46364+M_PI, -.78539+M_PI},
     {      1.1071,       .78539,     M_PI, -.78539+M_PI, -1.1071+M_PI},
     {    M_PI/2.0,     M_PI/2.0, M_PI/2.0,     M_PI/2.0,   M_PI / 2.0},

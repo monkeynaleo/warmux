@@ -40,7 +40,7 @@ const uint BAR_HEIGHT = 50;
 const uchar ALPHA = 127;
 const uchar BACK_ALPHA = 0;
 
-const float MOVE_DURATION = 750.0;
+const Double MOVE_DURATION = 750.0;
 
 void EnergyList::Reset()
 {
@@ -193,14 +193,14 @@ void TeamEnergy::Move()
     if(move_start_time == 0)
       move_start_time = global_time->Read();
 
-    dx = (int)(((float)new_rank - rank) * (BAR_WIDTH + BAR_SPACING) * ((global_time->Read() - move_start_time) / MOVE_DURATION));
+    dx = (int)(((Double)new_rank - rank) * (BAR_WIDTH + BAR_SPACING) * ((global_time->Read() - move_start_time) / MOVE_DURATION));
 
     // displacement in arc only when losing place ranking
     if( new_rank > rank ) {
-      dy = (int)((BAR_HEIGHT * ((float)rank - new_rank)) * 0.5 *
+      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
            sin( M_PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     } else {
-      dy = (int)((BAR_HEIGHT * ((float)rank - new_rank)) * 0.5 *
+      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * 0.5 *
           sin( M_PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
     }
     // End of movement ?
@@ -208,8 +208,8 @@ void TeamEnergy::Move()
       FinalizeMove();
   } else {
     // While moving, it came back to previous place in ranking
-    dy = (int)((float)dy - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dy);
-    dx = (int)((float)dx - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dx);
+    dy = (int)((Double)dy - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dy);
+    dx = (int)((Double)dx - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dx);
   }
 }
 

@@ -20,6 +20,7 @@
 #ifndef WORMUX_TYPES_H
 #define WORMUX_TYPES_H
 //-----------------------------------------------------------------------------
+#include <fixed_class.h>
 
 #ifndef _MSC_VER
 #include <stdint.h>
@@ -44,6 +45,9 @@ typedef long int         ssize_t;
 typedef signed   __int16  int16_t;
 typedef unsigned __int32  uint32_t;
 #endif
+
+typedef struct fixedpoint::fixed_point<8> Double;
+typedef struct fixedpoint::fixed_point<8> Float;
 
 enum LRDirection
 {

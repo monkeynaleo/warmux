@@ -35,11 +35,11 @@ class Grapple : public Weapon
     struct rope_node_t
     {
       Point2i pos;
-      double angle;
+      Double angle;
     };
 
     uint last_mvt;
-    double last_broken_node_angle;
+    Double last_broken_node_angle;
 
     // Rope launching data.
     bool attached;
@@ -83,7 +83,7 @@ class Grapple : public Weapon
     std::list<rope_node_t> rope_nodes;
     Point2i m_fixation_point;
     bool go_left, go_right;
-    double delta_len ;
+    Double delta_len ;
 
     Grapple();
     ~Grapple();
@@ -97,9 +97,9 @@ class Grapple : public Weapon
     void AttachRope(const Point2i& contact_point);
     void DetachRope();
 
-    void AttachNode(const Point2i& contact_point, double angle);
+    void AttachNode(const Point2i& contact_point, Double angle);
     void DetachNode();
-    void SetRopeSize(double length) const;
+    void SetRopeSize(Double length) const;
 
     void UpdateTranslationStrings();
     std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
