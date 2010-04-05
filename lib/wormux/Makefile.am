@@ -42,4 +42,6 @@ libwormux_a_SOURCES = \
 	./tools/file_tools.cpp \
 	./tools/random.cpp
 
-AM_CXXFLAGS = -I$(top_srcdir)/lib/wormux/include @LIBCURL_CPPFLAGS@
+AM_CXXFLAGS = -I$(top_srcdir)/lib/wormux/include \
+	-I$(top_srcdir)/lib/fixedpoint           \
+	@LIBCURL_CPPFLAGS@

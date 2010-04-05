@@ -1,5 +1,5 @@
 if BUILD_SERVERS
-SUBDIRS=wormux wormux-server
+SUBDIRS=wormux wormux-server fixedpoint
 else
-SUBDIRS=wormux
+SUBDIRS=wormux fixedpoint
 endif
