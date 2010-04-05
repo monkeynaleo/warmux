@@ -293,7 +293,7 @@ msgstr[1] "Ekipa %s je osvojila %u nogometni bombi!"
 msgstr[2] "Ekipa %s je osvojila %u nogometne bombe!"
 msgstr[3] "Ekipa %s je osvojila %u nogometnih bomb!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

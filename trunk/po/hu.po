@@ -254,7 +254,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s csapat %u rögbibombát kapott!"
 msgstr[1] "%s csapat %u rögbibombát kapott!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

@@ -297,7 +297,7 @@ msgstr[0] "Drużyna %s zyskała %u bombę futbolową!"
 msgstr[1] "Drużyna %s zyskała %u bomby futbolowe!"
 msgstr[2] "Drużyna %s zyskała %u bomb futbolowych!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

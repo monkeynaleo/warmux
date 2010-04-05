@@ -284,7 +284,7 @@ msgstr[0] "Tým %s získal %u ragbyovou bombu!"
 msgstr[1] "Tým %s získal %u ragbyové bomby!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

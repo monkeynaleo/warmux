@@ -265,7 +265,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

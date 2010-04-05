@@ -272,7 +272,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Η ομάδα %s κέρδισε %u εκρηκτική μπάλα!"
 msgstr[1] "Η ομάδα %s κέρδισε %u εκρηκτικές μπάλες!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
