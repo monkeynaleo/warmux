@@ -53,11 +53,11 @@ class ExplosiveWeaponConfig : public WeaponConfig
 public:
   uint timeout;
   bool allow_change_timeout;
-  uint blast_range ;
-  uint blast_force ;
-  uint explosion_range;
-  uint particle_range;
-  uint speed_on_hit;
+  Double blast_range ;
+  Double blast_force ;
+  Double explosion_range;
+  Double particle_range;
+  Double speed_on_hit;
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};

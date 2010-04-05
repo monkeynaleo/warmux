@@ -58,11 +58,11 @@ public:
     uint max_energy;
     uint mass;
     Double air_resist_factor;
-    uint jump_strength;
+    Double jump_strength;
     Double jump_angle;
-    uint super_jump_strength;
+    Double super_jump_strength;
     Double super_jump_angle;
-    uint back_jump_strength;
+    Double back_jump_strength;
     Double back_jump_angle;
     uint walking_pause;
   } character;

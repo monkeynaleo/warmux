@@ -22,7 +22,7 @@
 #ifndef AFFINE_TRANSFORM_2D
 #define AFFINE_TRANSFORM_2D
 
-#include <math.h>
+#include <WORMUX_types.h>
 #include <stdio.h>
 #include <WORMUX_point.h>
 
@@ -53,7 +53,6 @@ class AffineTransform2D {
   AffineTransform2D operator*(const AffineTransform2D &mat) const;
   Point2i operator*(const Point2i& p) const;
   Point2d operator*(const Point2d& p) const;
-  void DisplayMatrix();
   // Creation of instance
   static AffineTransform2D Rotate(Double rad_angle);
   static AffineTransform2D Translate(Double trans_x, Double trans_y);

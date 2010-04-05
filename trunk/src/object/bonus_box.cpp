@@ -34,6 +34,7 @@
 #include <WORMUX_random.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+#include "tool/string_tools.h"
 
 BonusBox::BonusBox(Weapon * weapon):
   ObjBox("bonus_box"),
@@ -80,17 +81,20 @@ bool BonusBox::ExplodesInsteadOfBonus(Character * c)
   // Empyric formula:
   // 1% chance of explosion for each 5 points of energy
   // (with max 20% for 100 energy)
-  Double explosion_probability = (Double)c->GetEnergy() / 5.0f;
+  Double explosion_probability = (Double)c->GetEnergy() / FIVE;
+
+  Double MIN_EXPLOSION_PROBABILITY = 5;
+  Double MAX_EXPLOSION_PROPABILITY = 40;
   // clamp to some reasonable values
-  if ( explosion_probability < 5.0f )
-    explosion_probability = 5.0f;
-  else if ( explosion_probability > 40.0f )
-    explosion_probability = 40.0f;
+  if ( explosion_probability < MIN_EXPLOSION_PROBABILITY )
+    explosion_probability = MIN_EXPLOSION_PROBABILITY;
+  else if ( explosion_probability > MAX_EXPLOSION_PROPABILITY )
+    explosion_probability = MAX_EXPLOSION_PROPABILITY;
 
   Double randval = RandomSync().GetDouble( 1, 100 );
   bool exploding = randval < explosion_probability;
-  MSG_DEBUG("bonus","explosion chance: %.2f%%, actual value: %.2f, %s",
-    explosion_probability, randval, exploding ? "exploding!" : "not exploding");
+  MSG_DEBUG("bonus","explosion chance: %s%%, actual value: %s, %s",
+    Double2str(explosion_probability,2).c_str(), Double2str(randval,2).c_str(), exploding ? "exploding!" : "not exploding");
 
   return exploding;
 }

@@ -104,19 +104,19 @@ static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Si
                 m = 1.0f;
             }
             if (code1 & CLIP_LEFT_EDGE) {
-                *y1 += (Sint16) ((left - *x1) * m);
+                *y1 += (Sint16) ((int)((left - *x1) * m));
                 *x1 = left;
             } else if (code1 & CLIP_RIGHT_EDGE) {
-                *y1 += (Sint16) ((right - *x1) * m);
+                *y1 += (Sint16) ((int)((right - *x1) * m));
                 *x1 = right;
             } else if (code1 & CLIP_BOTTOM_EDGE) {
                 if (*x2 != *x1) {
-                    *x1 += (Sint16) ((bottom - *y1) / m);
+                    *x1 += (Sint16) ((int)((bottom - *y1) / m));
                 }
                 *y1 = bottom;
             } else if (code1 & CLIP_TOP_EDGE) {
                 if (*x2 != *x1) {
-                    *x1 += (Sint16) ((top - *y1) / m);
+                    *x1 += (Sint16) ((int)((top - *y1) / m));
                 }
                 *y1 = top;
             }
@@ -280,20 +280,18 @@ int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, 
     return (pixelColorNolock(dst, x, y, (color & (Uint32) 0xffffff00) | (Uint32) a));
 }
 
+int interpolateInt(int start, int stop, Double step)
+{
+  Double diff = stop - start;
+  return start + (int)(diff * step);
+}
+
 Uint32 interpolateColor(Uint32 color1, Uint32 color2, Double step)
 {
-  int c1, c2, c3, c4;
-  c1 = color1 & 0xFF000000;
-  c1 = (c1 + (int)((((int)color2 & 0xFF000000) - c1) * step)) & 0xFF000000;
-
-  c2 = color1 & 0x00FF0000;
-  c2 = (c2 + (int)((((int)color2 & 0x00FF0000) - c2) * step)) & 0x00FF0000;
-
-  c3 = color1 & 0x0000FF00;
-  c3 = (c3 + (int)((((int)color2 & 0x0000FF00) - c3) * step)) & 0x0000FF00;
-
-  c4 = color1 & 0x000000FF;
-  c4 = (c4 + (int)((((int)color2 & 0x000000FF) - c4) * step)) & 0x000000FF;
+  int c1 = interpolateInt(color1 & 0xFF000000, color2 & 0xFF000000, step) & 0xFF000000;
+  int c2 = interpolateInt(color1 & 0x00FF0000, color2 & 0x00FF0000, step) & 0x00FF0000;
+  int c3 = interpolateInt(color1 & 0x0000FF00, color2 & 0x0000FF00, step) & 0x0000FF00;
+  int c4 = interpolateInt(color1 & 0x000000FF, color2 & 0x000000FF, step) & 0x000000FF;
   return (Uint32)(c1 | c2 | c3 | c4);
 }
 

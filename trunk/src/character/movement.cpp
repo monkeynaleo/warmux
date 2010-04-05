@@ -92,7 +92,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 	  && !XmlReader::ReadIntAttr(child, "follow_cursor_limit", mvt.follow_cursor_limit))
 	fprintf(stderr, "Warning ! \"follow_cursor\" flag used while \"follow_cursor_limit\" isn't defined, this won't do anything!\n");
 
-      if (tmp_alpha < 0.0 || tmp_alpha > 1.0)
+      if (tmp_alpha < ZERO || tmp_alpha > ONE)
 	tmp_alpha = 1.0;
 
       mvt.SetAngle(angle_deg * PI / 180);

@@ -36,7 +36,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   // delete the sprite of the ExplosionSmoke
   delete image;
   image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
-  SetAirResistFactor( GetAirResistFactor() * 3.0 );
+  SetAirResistFactor( GetAirResistFactor() * THREE );
 
   MSG_DEBUG("random.get", "IllBubble::IllBubble()");
   vib_phi = RandomSync().GetLong(0, vib_period);
@@ -50,8 +50,9 @@ void IllBubble::Refresh()
 
   Double scale_x, scale_y;
   image->GetScaleFactors(scale_x, scale_y);
-  scale_x *= 1.0 + 0.2 * sin(2.0 * PI * time / (Double)vib_period);
-  scale_y *= 1.0 + 0.2 * cos(2.0 * PI * time / (Double)vib_period);
+  Double scale_factor = 1.2;
+  scale_x *= scale_factor* sin(TWO * PI * time / (Double)vib_period);
+  scale_y *= scale_factor * cos(TWO * PI * time / (Double)vib_period);
   scale_x = std::max(MIN_SCALE, std::min(scale_x, MAX_SCALE));
   scale_y = std::max(MIN_SCALE, std::min(scale_y, MAX_SCALE));
   image->Scale(scale_x, scale_y);
@@ -60,7 +61,7 @@ void IllBubble::Refresh()
 void IllBubble::Draw()
 {
   if (m_left_time_to_live > m_initial_time_to_live - 3)
-    image->SetAlpha( (Double)(m_initial_time_to_live - m_left_time_to_live) / 3.0 );
+    image->SetAlpha( (Double)(m_initial_time_to_live - m_left_time_to_live) / THREE );
   else
     image->SetAlpha(1.0);
 

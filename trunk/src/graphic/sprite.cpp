@@ -34,6 +34,7 @@
 #include <WORMUX_rectangle.h>
 #include <WORMUX_debug.h>
 #include "graphic/spriteframe.h"
+#include "tool/string_tools.h"
 
 Sprite::Sprite(bool _smooth) :
   smooth(_smooth),
@@ -131,7 +132,8 @@ void Sprite::SetSize(const Point2i &size){
 }
 
 unsigned int Sprite::GetWidth() const{
-   return static_cast<uint>(fabsf(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)) + 0.5);
+  Double one_half = 0.5; 
+  return static_cast<int>(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
 }
 
 unsigned int Sprite::GetWidthMax() const{
@@ -142,7 +144,7 @@ unsigned int Sprite::GetWidthMax() const{
 }
 
 unsigned int Sprite::GetHeight() const{
-   return static_cast<uint>(fabsf(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)) + 0.5);
+   return static_cast<int>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
 }
 
 unsigned int Sprite::GetHeightMax() const{
@@ -230,7 +232,7 @@ void Sprite::SetFrameSpeed(unsigned int nv_fs)
 
 void Sprite::SetAlpha( Double _alpha)
 {
-  ASSERT(_alpha >= 0.0 && _alpha <= 1.0);
+  ASSERT(_alpha >= ZERO && _alpha <= ONE);
   this->alpha = _alpha;
 }
 
@@ -304,10 +306,10 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   }
 
   Point2i rhs_pos_tmp;
-  rhs_pos_tmp.x = static_cast<uint>(rhs_pos.x * scale_x);
-  rhs_pos_tmp.y = static_cast<uint>(rhs_pos.y * scale_y);
-  surfaceWidth  = static_cast<uint>(surfaceWidth  * scale_x);
-  surfaceHeight = static_cast<uint>(surfaceHeight * scale_y);
+  rhs_pos_tmp.x = static_cast<int>(rhs_pos.x * scale_x);
+  rhs_pos_tmp.y = static_cast<int>(rhs_pos.y * scale_y);
+  surfaceWidth  = static_cast<int>(surfaceWidth  * scale_x);
+  surfaceHeight = static_cast<int>(surfaceHeight * scale_y);
   //Calculate the position of the hotspot after a rotation around the center of the surface:
 
   Point2i center(surfaceWidth / 2, surfaceHeight / 2);
@@ -316,7 +318,7 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   Point2d old_hotspot_delta = old_hotspot_delta_i;
   Double rhs_dst = old_hotspot_delta.Norm();
   Double rhs_angle = 0.0;
-  if (rhs_dst != 0.0)
+  if (rhs_dst != ZERO)
     rhs_angle = -acos(-old_hotspot_delta.x / rhs_dst);
   if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0)
     rhs_angle = -rhs_angle;
@@ -364,13 +366,14 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
 
-  if(alpha == 1.0) {
+  if(alpha == ONE) {
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
   } else {
     Surface surf_alpha;
     surf_alpha.NewSurface(srcRect.GetSize(),SDL_SWSURFACE,false);
     surf_alpha.Blit(dest,dstRect,Point2i(0,0));
-    surf_alpha.SetAlpha(SDL_SRCALPHA, (int)(alpha * 255.0));
+    Double max_unsigned_char = 255.0;
+    surf_alpha.SetAlpha(SDL_SRCALPHA, (int)(alpha * max_unsigned_char));
     surf_alpha.Blit(current_surface,srcRect,Point2i(0,0));
     dest.Blit(surf_alpha, srcRect, dstRect.GetPosition());
   }
@@ -432,8 +435,8 @@ void Sprite::EnableFlippingCache()
 
 void Sprite::RefreshSurface()
 {
-  MSG_DEBUG("sprite", "rotation: %d, scale_x: %d, scale_y: %d", rotation_rad,
-	    scale_x, scale_y);
+  MSG_DEBUG("sprite", "rotation: %s, scale_x: %s, scale_y: %s", 
+            Double2str(rotation_rad, 0).c_str(), Double2str(scale_x, 0).c_str(), Double2str(scale_y, 0).c_str());
 
   current_surface.Free();
 
@@ -451,24 +454,24 @@ void Sprite::RefreshSurface()
     }
   else if (cache.have_flipping_cache && !cache.have_rotation_cache)
     {
-      if (rotation_rad != 0.0 || scale_y != 1.0 || (scale_x != 1.0 && scale_x != -1.0))
+      if (rotation_rad != ZERO || scale_y != ONE || (scale_x != ZERO && scale_x != -ONE))
 	current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y, smooth);
-      else if (scale_x == 1.0)
+      else if (scale_x == ONE)
         current_surface = frames[current_frame].surface;
       else
         current_surface = cache.frames[current_frame].flipped_surface;
     }
   else if (!cache.have_flipping_cache && cache.have_rotation_cache)
     {
-      if (scale_x != 1.0 || scale_y != 1.0)
+      if (scale_x != ONE || scale_y != ONE)
         current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
       else
         current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
     }
   //cache.have_flipping_cache==true && cache.have_rotation_cache==true
-  else if ((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
+  else if ((scale_x != ONE && scale_x != -ONE)  || scale_y != ONE)
     current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y, smooth);
-  else if (scale_x == 1.0) //Scale_y == 1.0
+  else if (scale_x == ONE) //Scale_y == 1.0
     current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
   else
     current_surface = cache.frames[current_frame].GetFlippedSurfaceForAngle(rotation_rad);
@@ -478,7 +481,7 @@ void Sprite::RefreshSurface()
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
   rotation_point.y=0;
-  if(rot_hotspot != center || rotation_rad!=0.0)
+  if(rot_hotspot != center || rotation_rad!=ZERO)
     Calculate_Rotation_Offset(current_surface);
 }
 

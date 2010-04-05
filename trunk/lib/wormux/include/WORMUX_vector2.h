@@ -2,7 +2,6 @@
 #define WORMUX_VECTOR2_H
 
 #include <WORMUX_types.h>
-#include <math.h>
 #undef min
 #undef max
 #define VECTOR2_EPS_ZERO (0.005)
@@ -345,7 +344,7 @@ template<class T> class Vector2
     */
     Vector2<T> GetNormal() const {
       Double len = sqrt(x*x + y*y);
-      if ( len > 0.00001 )
+      if ( len > EPSILON )
         return Vector2<T>( (T)(x/len), (T)(y/len) );
       return *this;
     }
@@ -420,7 +419,7 @@ template<class T> class Vector2
            return angle;
          }
          else
-           return (x > 0) ? 0 : PI;
+           return (x > 0) ? ZERO : PI;
        else if( y > 0 )
          return HALF_PI;
        else if(y < 0)
@@ -454,7 +453,7 @@ template<class T> class Vector2
       Double l1 = sqrt( side1.x * side1.x + side1.y * side1.y );
       Double l2 = sqrt( side2.x * side2.x + side2.y * side2.y );
 
-      if ( l1 < 0.00001f || l2 < 0.00001f )
+      if ( l1 < EPSILON || l2 < EPSILON )
          return 0; // zero vector is collinear with every other
 
       // now we find the cos of the angle from dot product formula

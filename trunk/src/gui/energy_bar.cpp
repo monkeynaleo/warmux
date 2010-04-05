@@ -117,8 +117,9 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   
   Color colorMin = listThresholds[thresholdNumber - 1].color;
   Double thresholdMin = listThresholds[thresholdNumber - 1].value;
-  uint size = orientation == PROG_BAR_HORIZONTAL ? width : height; 
-  Double range = size * (thresholdMax - thresholdMin) / 100.0;
+  uint size = orientation == PROG_BAR_HORIZONTAL ? width : height;
+  Double one_hunderd = 100;
+  Double range = size * (thresholdMax - thresholdMin) / one_hunderd;
 
   Threshold newThreshold; 
   newThreshold.value = thresholdMax; 
@@ -142,7 +143,8 @@ void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
   val_barre = ComputeBarValue(val);
-  Double currentPercentage = abs(val) / (Double)max * 100.0;
+  Double one_hunderd = 100;
+  Double currentPercentage = abs(val) / (Double)max * one_hunderd;
   Threshold thresholdMin;
   Threshold thresholdMax;
   int i = 0;
@@ -168,11 +170,11 @@ void EnergyBar::Actu(long real_energy)
 
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) - 
-                 ComputeBarValue(max * thresholdMin.value / 100.0);
+                 ComputeBarValue((Double)max * (Double)thresholdMin.value / one_hunderd);
 
-  value_color.SetColor((Uint8) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
-                       (Uint8) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
-                       (Uint8) (colorMin.GetBlue()  + (thresholdMax.blueCoef  * coefVal)),
-                       (Uint8) (colorMin.GetAlpha() + (thresholdMax.alphaCoef * coefVal)));
+  value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
+                       (int) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
+                       (int) (colorMin.GetBlue()  + (thresholdMax.blueCoef  * coefVal)),
+                       (int) (colorMin.GetAlpha() + (thresholdMax.alphaCoef * coefVal)));
 }
 

@@ -91,10 +91,10 @@ void AffineTransform2D::SetTranslationAnimation(int start_time, int duration, in
                                                 const Point2d & start, const Point2d & end)
 {
   Double coef = (time - start_time) / (Double)duration;
-  coef = (coef > 0.0 ? coef : 0.0);
-  coef = (coef < 1.0 ? coef : 1.0);
+  coef = (coef > ZERO ? coef : ZERO);
+  coef = (coef < ONE ? coef : ONE);
   if(invert)
-    coef = 1.0 - coef;
+    coef = ONE - coef;
   SetTranslation(start + (end - start) * coef);
 }
 
@@ -102,10 +102,10 @@ void AffineTransform2D::SetRotationAnimation(int start_time, int duration, int t
                                              Double angle_start, Double angle_end)
 {
   Double coef = (time - start_time) / (Double)duration;
-  coef = (coef > 0.0 ? coef : 0.0);
-  coef = (coef < 1.0 ? coef : 1.0);
+  coef = (coef > ZERO ? coef : ZERO);
+  coef = (coef < ONE ? coef : ONE);
   if(invert)
-    coef = 1.0 - coef;
+    coef = ONE - coef;
   SetRotation(angle_start + coef * (angle_end - angle_start));
 }
 
@@ -114,10 +114,10 @@ void AffineTransform2D::SetShrinkAnimation(int start_time, int duration, int tim
                                            Double shrink_x_end, Double shrink_y_end)
 {
   Double coef = (time - start_time) / (Double)duration;
-  coef = (coef > 0.0 ? coef : 0.0);
-  coef = (coef < 1.0 ? coef : 1.0);
+  coef = (coef > ZERO ? coef : ZERO);
+  coef = (coef < ONE ? coef : ONE);
   if(invert)
-    coef = 1.0 - coef;
+    coef = ONE - coef;
   SetShrink(shrink_x_start + (shrink_x_end - shrink_x_start) * coef, shrink_y_start + (shrink_y_end - shrink_y_start) * coef);
 }
 
@@ -126,10 +126,10 @@ void AffineTransform2D::SetShearAnimation(int start_time, int duration, int time
                                           Double shear_x_end, Double shear_y_end)
 {
   if(time < start_time + duration && time > start_time) {
-    Double coef = 1.0 - (time - start_time) / (Double)duration;
+    Double coef = ONE - (time - start_time) / (Double)duration;
     if(invert)
-      coef = 1.0 - coef;
-    coef = -(cos((1.0 - coef) * PI * 2 * shear_tremor) * coef);
+    coef = ONE - coef;
+    coef = -(cos((ONE - coef) * PI * TWO * shear_tremor) * coef);
     SetShear(shear_x_end + (coef * (shear_x_start - shear_x_end)), shear_y_end + (coef * (shear_y_start - shear_y_end)));
   } else {
     Init();
@@ -196,12 +196,5 @@ Point2d AffineTransform2D::operator*(const Point2d& p) const
   tmp.x = (Double)(x1 * (Double)p.x + x2 * (Double)p.y + xt);
   tmp.y = (Double)(y1 * (Double)p.x + y2 * (Double)p.y + yt);
   return tmp;
-}
-
-void AffineTransform2D::DisplayMatrix()
-{
-  printf("[ %3.3f %3.3f %3.3f ]\n", x1, x2, xt);
-  printf("[ %3.3f %3.3f %3.3f ]\n", y1, y2, yt);
-  printf("[ %3.3f %3.3f %3.3f ]\n", w1, w2, wt);
 }
 

@@ -46,6 +46,7 @@
 #include <WORMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
+#include "tool/string_tools.h"
 
 #define DEF_BORDER      8
 #define DEF_SIZE       32
@@ -109,10 +110,13 @@ public:
   ResultBox(uint size, const std::string& type, Double score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
-    char buffer[16];
-    if (score+0.05<100.0) snprintf(buffer, 16, "%.1f", score);
-    else                  snprintf(buffer, 16, "%.0f", score);
-    SetWidgets(size, type, buffer, player);
+    std::string score_str;
+    if (score+(Double)0.05<(Double)100.0) {
+      score_str = Double2str(score, 1);      
+    } else {
+      score_str = Double2str(score, 0);
+    }
+    SetWidgets(size, type, score_str.c_str(), player);
   }
   void Draw(const Point2i &mousePosition) const
   {
@@ -260,8 +264,8 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
     return;
   }
 
-  int sx = x+lround((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
-    sy = y-lround((*it)->GetValue()*energy_scale);
+  int sx = x+round((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
+    sy = y-round((*it)->GetValue()*energy_scale);
   Surface &surface = GetMainWindow();
   MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)",
             (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
@@ -270,8 +274,8 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 
   while (it != end)
   {
-    int ex = x+lround((*it)->GetDuration()*duration_scale),
-      ey = y-lround((*it)->GetValue()*energy_scale);
+    int ex = x+round((*it)->GetDuration()*duration_scale),
+      ey = y-round((*it)->GetValue()*energy_scale);
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
               (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
@@ -287,7 +291,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
   --it;
   if ((*it)->GetDuration() < max_duration)
   {
-    int ex = x+lround(max_duration*duration_scale);
+    int ex = x+round(max_duration*duration_scale);
     MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
   }
@@ -335,8 +339,8 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   // Draw each team graph
   Double energy_scale = graph_h / (1.05*max_value);
   Double duration_scale = graph_w / (1.05*max_duration);
-  MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
-            duration_scale, Time::GetInstance()->Read(), energy_scale);
+  MSG_DEBUG("menu", "Scaling: %s (duration; %u) and %s\n",
+            Double2str(duration_scale,1).c_str(), Time::GetInstance()->Read(), Double2str(energy_scale,1).c_str());
 
   uint               index   = 0;
   static const Color clist[] =

@@ -75,7 +75,7 @@ void FireParticle::Refresh()
     m_left_time_to_live = 0;
 
   Double scale = (now - creation_time)/(Double)living_time;
-  scale = 1.0 - scale;
+  scale = ONE - scale;
   image->Scale(scale, scale);
 
   if(image->GetSize().x != 0 && image->GetSize().y != 0)
@@ -101,11 +101,12 @@ void FireParticle::Refresh()
       expl_pos.x -= GetWidth()/2;
 
       ApplyExplosion(expl_pos, fire_cfg, "", false, ParticleEngine::LittleESmoke);
-      fire_cfg.explosion_range = (uint)(scale * image->GetWidth()) + 1;
-      fire_cfg.particle_range = (uint)(1.1 * scale * image->GetWidth()) + 1;
+      fire_cfg.explosion_range = (int)(scale * image->GetWidth()) + 1;
+      Double particle_range_factor = 1.1;
+      fire_cfg.particle_range = (int)(particle_range_factor * scale * image->GetWidth()) + 1;
     }
 
-    Double angle = cos((((now + oscil_delta) % 1000)/500.0) * PI) * 0.5; // 0.5 is arbirtary
+    Double angle = cos((((now + oscil_delta) % 1000)/(Double)500.0) * PI) * ONE_HALF; // 0.5 is arbirtary
     image->SetRotation_rad( angle);
   }
   else
