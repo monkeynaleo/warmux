@@ -272,7 +272,7 @@ msgstr[0] "%s komanda ir ieguvusi %u dumpja bumbu!"
 msgstr[1] "%s komanda ir ieguvusi %u dumpja bumbas!"
 msgstr[2] "%s komanda ir ieguvusi %u dumpja bumbas!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"

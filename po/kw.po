@@ -311,7 +311,7 @@ msgstr[1] "Para %s re waynyas %u danbellen beldroos!"
 msgstr[2] "Para %s re waynyas %u thanbellen beldroos!"
 msgstr[3] "Para %s re waynyas %u tanbellen beldroos!"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:718
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
