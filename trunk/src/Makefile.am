@@ -408,7 +408,8 @@ endif
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux/include
+  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux/include                 \
+  -I$(top_srcdir)/lib/fixedpoint
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
@@ -424,5 +425,5 @@ else
 LIBS += @LIBCURL@
 endif
 
-wormux_LDADD=$(top_srcdir)/lib/wormux/libwormux.a
-wormux_DEPENDENCIES=$(top_srcdir)/lib/wormux/libwormux.a
+wormux_LDADD=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/wormux/libwormux.a
+wormux_DEPENDENCIES=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/wormux/libwormux.a

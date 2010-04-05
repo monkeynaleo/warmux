@@ -386,6 +386,7 @@ AC_CONFIG_FILES([Makefile
                  data/Makefile
                  src/Makefile
                  lib/Makefile
+                 lib/fixedpoint/Makefile
                  lib/wormux/Makefile
                  lib/wormux-server/Makefile
                  build/win32_setup/create_setup.sh
