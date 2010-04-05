@@ -57,9 +57,9 @@ static const uint16_t atan_tab[] = {
 };
 
 
-int32_t fixcos16(int32_t a) 
+int64_t fixcos16(int64_t a) 
 {
-    int32_t v;
+    int64_t v;
     /* reduce to [0,1) */
     while (a < 0) a += FIX16_2PI;
     a = fixmul<16>(a, FIX16_R2PI);
@@ -73,9 +73,9 @@ int32_t fixcos16(int32_t a)
     return (a & 0x800) ? -v : v;
 }
 
-int32_t fixsin16(int32_t a)
+int64_t fixsin16(int64_t a)
 {
-    int32_t v;
+    int64_t v;
 
     /* reduce to [0,1) */
     while (a < 0) a += FIX16_2PI;
@@ -89,12 +89,12 @@ int32_t fixsin16(int32_t a)
     return (a & 0x800) ? -v : v;
 }
 
-int32_t fixacos16(int32_t a)
+int64_t fixacos16(int64_t a)
 {
   return FIX16_HALF_PI - fixasin16(a);
 }
 
-int32_t fixasin16(int32_t a)
+int64_t fixasin16(int64_t a)
 {
   if (a > 0) {
     if (a >= 0x10000)
@@ -107,7 +107,7 @@ int32_t fixasin16(int32_t a)
   }
 }
 
-int32_t fixatan16(int32_t a)
+int64_t fixatan16(int64_t a)
 {
   if (a > 0) {
     if (a <= 0x10000) {
@@ -124,15 +124,15 @@ int32_t fixatan16(int32_t a)
   }
 }
 
-int32_t fixrsqrt16(int32_t a)
+int64_t fixrsqrt16(int64_t a)
 {
-    int32_t x;
+    int64_t x;
 
     static const uint16_t rsq_tab[] = { /* domain 0.5 .. 1.0-1/16 */
 		0xb504, 0xaaaa, 0xa1e8, 0x9a5f, 0x93cd, 0x8e00, 0x88d6, 0x8432,
     };
 
-    int32_t i, exp;
+    int64_t i, exp;
     if (a == 0) return 0x7fffffff;
     if (a == (1<<16)) return a;
 
@@ -158,7 +158,7 @@ int32_t fixrsqrt16(int32_t a)
     return x;
 }
 
-static inline int32_t fast_div16(int32_t a, int32_t b)
+static inline int64_t fast_div16(int64_t a, int64_t b)
 {
 	if ((b >> 24) && (b >> 24) + 1) {
 		return fixmul<16>(a >> 8, fixinv<16>(b >> 8));
@@ -167,15 +167,19 @@ static inline int32_t fast_div16(int32_t a, int32_t b)
 	}
 }
 
-int32_t fixsqrt16(int32_t a) 
+int64_t fixsqrt16(int64_t a) 
 {
-    int32_t s;
-    int32_t i;
-    s = (a + (1<<16)) >> 1;
-    /* 6 iterations to converge */
-    for (i = 0; i < 6; i++)
-		s = (s + fast_div16(a, s)) >> 1;
-    return s;
+  if (a < 1<<7) {
+    return 0;
+  }
+  int64_t s;
+  int64_t i;
+  s = (a + (1<<16)) >> 1;
+  /* 6 iterations to converge */
+  for (i = 0; i < 20; i++) {
+    s = (s + (a<<16) /s) >> 1;
+  }
+  return  s ;
 }
 
 } // end namespace fixedpoint

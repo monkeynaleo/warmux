@@ -50,10 +50,11 @@ namespace fixedpoint {
 
 template <int p>
 struct fixed_point {
-	int32_t intValue;
-
+	int64_t intValue;
+	
 	fixed_point() {}
-	/*explicit*/ fixed_point(int32_t i) : intValue(i << p) {}
+	/*explicit*/ fixed_point(int32_t i) : intValue(((int64_t)i) << p) {}
+	/*explicit*/ fixed_point(int64_t i) : intValue(i << p) {}
 	/*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
 	/*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
 	/*explicit*/ fixed_point(long int l) : intValue(l << p) {}
@@ -94,7 +95,12 @@ struct fixed_point {
 	fixed_point operator * (unsigned int r) const { fixed_point x = *this; x *= r; return x;}
 	fixed_point operator / (unsigned int r) const { fixed_point x = *this; x /= r; return x;}
 
-	operator int() const { return intValue / (1<< 16); }
+	operator int() const { return intValue / (1<< p); }
+	operator long() const { return intValue / (1<< p); }
+	
+	
+	// Must be used explicily as we don't want to calculate with doubles!
+	double toDouble() const { return (double)intValue / (double)(1 << p); }
 };
 
 // Specializations for use with plain integers
@@ -205,7 +211,7 @@ void printTo(std::ostream & os, const fixed_point<p> & r, int digits = -1)
 		rounding_correction = - rounding_correction;
 	fixed_point<p> to_print = r + rounding_correction;
 
-	int left_of_dot = (int) r;
+	int64_t left_of_dot = (int) r;
 	os << left_of_dot;
 	if (digits == 0) {
 		return;
@@ -279,6 +285,12 @@ inline fixed_point<p> abs(fixed_point<p> a)
 	fixed_point<p> r; 
 	r.intValue = a.intValue > 0 ? a.intValue : -a.intValue; 
 	return r; 
+}
+
+template <int p>
+inline fixed_point<p> fmod(fixed_point<p> numerator, fixed_point<p> denominator)
+{
+	return  numerator - denominator * floor(numerator / denominator) ;
 }
 
 template <int p>
