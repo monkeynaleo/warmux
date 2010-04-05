@@ -1,4 +1,7 @@
 /*
+Copyright (c) 2010, Wormux Team
+
+Large parts of the code are from the fixed point library of Markus Trenkwalder
 Copyright (c) 2007, Markus Trenkwalder
 
 Portions taken from the Vicent 3D rendering library
@@ -38,11 +41,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace fixedpoint {
 
 static const int32_t FIX16_2PI	= float2fix<16>(6.28318530717958647692f);
+static const int32_t FIX16_HALF_PI = float2fix<16>(1.5707963267948966);
 static const int32_t FIX16_R2PI = float2fix<16>(1.0f/6.28318530717958647692f);
 
 static const uint16_t sin_tab[] = {
 #include "fixsintab.h"
 };
+
+static const int32_t asin_tab[] = {
+#include "fixasintab.h"
+};
+
+static const uint16_t atan_tab[] = {
+#include "fixatantab.h"
+};
+
 
 int32_t fixcos16(int32_t a) 
 {
@@ -74,6 +87,41 @@ int32_t fixsin16(int32_t a)
     v = (a & 0x400) ? sin_tab[0x3ff - (a & 0x3ff)] : sin_tab[a & 0x3ff];
     v = fixmul<16>(v, 1 << 16);
     return (a & 0x800) ? -v : v;
+}
+
+int32_t fixacos16(int32_t a)
+{
+  return FIX16_HALF_PI - fixasin16(a);
+}
+
+int32_t fixasin16(int32_t a)
+{
+  if (a > 0) {
+    if (a >= 0x10000)
+      a = 0x10000;
+    return asin_tab[a];;
+  } else {
+    if (a <= -0x10000)
+      a = -0x10000;
+    return -asin_tab[-a];
+  }
+}
+
+int32_t fixatan16(int32_t a)
+{
+  if (a > 0) {
+    if (a <= 0x10000) {
+      return atan_tab[a];
+    } else {
+      return FIX16_HALF_PI - atan_tab[fixinv<16>(a)];;
+    }
+  } else {
+    if (a >= -0x10000) {
+      return - atan_tab[-a];
+    } else {
+      return -FIX16_HALF_PI + atan_tab[-fixinv<16>(a)];
+    }
+  }
 }
 
 int32_t fixrsqrt16(int32_t a)
