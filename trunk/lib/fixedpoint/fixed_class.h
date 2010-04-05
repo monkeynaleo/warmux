@@ -59,6 +59,9 @@ struct fixed_point {
 	/*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
 	/*explicit*/ fixed_point(long int l) : intValue(l << p) {}
 	/*explicit*/ fixed_point(unsigned int l) : intValue(l << p) {}
+#ifdef __APPLE__
+    /*explicit*/ fixed_point(size_t i) : intValue(((int64_t)i) << p) {}
+#endif
 
 	fixed_point& operator += (fixed_point r) { intValue += r.intValue; return *this; }
 	fixed_point& operator -= (fixed_point r) { intValue -= r.intValue; return *this; }
@@ -137,6 +140,24 @@ inline fixed_point<p> operator * (unsigned int a, fixed_point<p> b)
 template <int p>
 inline fixed_point<p> operator / (unsigned int a, fixed_point<p> b)
 { fixed_point<p> r(a); r /= b; return r; }
+
+#ifdef __APPLE__
+template <int p>
+inline fixed_point<p> operator + (size_t a, fixed_point<p> b)
+{ return b + a; }
+
+template <int p>
+inline fixed_point<p> operator - (size_t a, fixed_point<p> b)
+{ return -b + a; }
+
+template <int p>
+inline fixed_point<p> operator * (size_t a, fixed_point<p> b)
+{ return b * a; }
+
+template <int p>
+inline fixed_point<p> operator / (size_t a, fixed_point<p> b)
+{ fixed_point<p> r(a); r /= b; return r; }
+#endif
 
 template <int p>
 inline fixed_point<p> round(fixed_point<p> r)

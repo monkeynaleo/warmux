@@ -98,7 +98,7 @@ void ComboBox::Draw(const Point2i &/*mousePosition*/) const
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
   Double angle;
   if (m_choices.size () > 1)
-    angle = (TWO * PI - open_angle_value) * m_index / (m_choices.size () - 1);
+     angle = (TWO * PI - open_angle_value) * (Double)m_index / (Double)(m_choices.size () - 1);
   else
     angle = 0;
   Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / TWO);
