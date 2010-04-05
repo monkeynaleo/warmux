@@ -144,12 +144,9 @@ public:
     disease_damage_per_turn = damage_per_turn;
     disease_duration = duration;
   }
-// Keep almost 1 in energy
   uint GetDiseaseDamage() const
   {
-    if (disease_damage_per_turn < static_cast<uint>(GetEnergy()))
-      return disease_damage_per_turn;
-    return GetEnergy() - 1;
+    return std::min(disease_damage_per_turn, static_cast<uint>(GetEnergy()));
   }
   void DecDiseaseDuration()
   {
