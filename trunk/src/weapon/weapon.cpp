@@ -421,7 +421,7 @@ const Point2i Weapon::GetGunHolePosition() const
   if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
     angle += ActiveCharacter().GetFiringAngle();
   else
-    angle += ActiveCharacter().GetFiringAngle() - M_PI;
+    angle += ActiveCharacter().GetFiringAngle() - PI;
 
   return pos + Point2i(static_cast<int>(dst * cos(angle)),
 		       static_cast<int>(dst * sin(angle)));
@@ -538,7 +538,7 @@ void Weapon::Draw(){
     if(ActiveCharacter().GetDirection() == 1)
       m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle());
     else
-      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle() - M_PI);
+      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle() - PI);
   }
 
   // flip image if needed
@@ -557,12 +557,12 @@ void Weapon::Draw(){
     if (!EqualsZero(min_angle - max_angle))
     {
       Double angle = m_image->GetRotation_rad();
-      angle += sin( M_PI_2 * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) * 2 * M_PI;
+      angle += sin( HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) * 2 * PI;
       m_image->SetRotation_rad (angle);
     }
     else
     {
-      Double scale = sin( 1.5 * M_PI_2 * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) / sin(1.5 * M_PI_2);
+      Double scale = sin( 1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) /(Double) ANIM_DISPLAY_TIME) / sin(1.5 * HALF_PI);
       m_image->Scale(ActiveCharacter().GetDirection() * scale,scale);
 
       if(origin == weapon_origin_OVER) PosXY(x,y); //Recompute position to get the icon centered over the skin
@@ -622,7 +622,7 @@ void Weapon::DrawWeaponFire()
   angle += ActiveCharacter().GetFiringAngle();
 
   if( ActiveCharacter().GetDirection() == DIRECTION_LEFT)
-    angle -= M_PI;
+    angle -= PI;
 
   Point2i spr_pos =  hand + Point2i(static_cast<int>(dst * cos(angle)),
                                    static_cast<int>(dst * sin(angle)));
@@ -689,8 +689,8 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   int min_angle_deg = 0, max_angle_deg = 0;
   XmlReader::ReadInt(elem, "min_angle", min_angle_deg);
   XmlReader::ReadInt(elem, "max_angle", max_angle_deg);
-  min_angle = static_cast<Double>(min_angle_deg) * M_PI / 180.0;
-  max_angle = static_cast<Double>(max_angle_deg) * M_PI / 180.0;
+  min_angle = static_cast<Double>(min_angle_deg) * PI / 180.0;
+  max_angle = static_cast<Double>(max_angle_deg) * PI / 180.0;
   if(EqualsZero(min_angle - max_angle))
     m_display_crosshair = false;
 

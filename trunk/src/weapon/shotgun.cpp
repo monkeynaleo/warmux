@@ -57,7 +57,7 @@ ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
 
 void ShotgunBuckshot::RandomizeShoot(Double &angle,Double &strength)
 {
-  angle += M_PI * RandomSync().GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
+  angle += PI * RandomSync().GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
   strength += RandomSync().GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
 }
 

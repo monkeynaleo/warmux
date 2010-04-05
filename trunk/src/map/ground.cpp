@@ -97,28 +97,28 @@ Double Ground::Tangent(int x,int y) const {
   }
 /*
   if(p1.x == p2.x)
-    return M_PI / 2.0;
+    return PI / 2.0;
   if(p1.y == p2.y)
-    return M_PI;
+    return PI;
 */
   //ASSERT (p1.x != p2.x);
 
   /* Double tangeante = atan((Double)(p2.y-p1.y)/(Double)(p2.x-p1.x));
 
   while(tangeante <= 0.0)
-    tangeante += M_PI;
-  while(tangeante > 2 * M_PI)
-    tangeante -= M_PI;
+    tangeante += PI;
+  while(tangeante > 2 * PI)
+    tangeante -= PI;
 
   return tangeante; */
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
   const Double table[5][5] = {
-    {      .78539,       .46364,     M_PI, -.46364+M_PI, -.78539+M_PI},
-    {      1.1071,       .78539,     M_PI, -.78539+M_PI, -1.1071+M_PI},
-    {    M_PI/2.0,     M_PI/2.0, M_PI/2.0,     M_PI/2.0,   M_PI / 2.0},
-    {-1.1071+M_PI, -.78539+M_PI,     M_PI,        78539,       1.1071},
-    {-.78539+M_PI, -.46364+M_PI,     M_PI,       .46364,       .78539}};
+    {      .78539,       .46364,     PI, -.46364+PI, -.78539+PI},
+    {      1.1071,       .78539,     PI, -.78539+PI, -1.1071+PI},
+    {    PI/2.0,     PI/2.0, PI/2.0,     PI/2.0,   PI / 2.0},
+    {-1.1071+PI, -.78539+PI,     PI,        78539,       1.1071},
+    {-.78539+PI, -.46364+PI,     PI,       .46364,       .78539}};
 
   ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
   ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);

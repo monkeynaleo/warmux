@@ -36,10 +36,10 @@ public:
   /* SetAngle take radian values */
   inline void SetAngle(Double angle)
   {
-    while(angle_rad > 2*M_PI)
-      angle_rad -= 2 * M_PI;
-    while(angle_rad <= -2*M_PI)
-      angle_rad += 2 * M_PI;
+    while(angle_rad > 2*PI)
+      angle_rad -= 2 * PI;
+    while(angle_rad <= -2*PI)
+      angle_rad += 2 * PI;
     angle_rad = angle;
   }
   /* GetAngle returns radian values */

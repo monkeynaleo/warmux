@@ -89,9 +89,9 @@ bool Airhammer::p_Shoot()
                         ActiveCharacter().GetHeight()  -16);
 
   ParticleEngine::AddNow(pos + Point2i(impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
-                         true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
+                         true, -3.0 * QUARTER_PI, 5.0 + Time::GetInstance()->Read() % 5);
   ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
-                         true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
+                         true, -QUARTER_PI, 5.0 + Time::GetInstance()->Read() % 5);
   GetWorld().Dig( pos, impact );
 
   return true;

@@ -81,7 +81,7 @@ void DiscoGrenade::Explosion()
 
   for(uint i=0;i < star_nbr;i++)
   {
-    Double angle = 2.0*(Double)i*M_PI/(Double)star_nbr;
+    Double angle = 2.0*(Double)i*PI/(Double)star_nbr;
     //  cos_angle[i] = cos(angle);
     //  sin_angle[i] = sin(angle);
     smoke_engine.AddNow(Point2i(GetX()+(int)(cos_angle[i]*(Double)cfg.explosion_range),
@@ -103,11 +103,11 @@ void DiscoGrenade::Refresh()
     Double norme,angle;
     GetSpeed(norme,angle);
     for(int i = -3; i<4 ; i++)
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*M_PI_4/3.0)+M_PI_2,2.0);
+      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*QUARTER_PI/3.0)+HALF_PI,2.0);
   }
   else
   {
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((Double)(Time::GetInstance()->Read()%500)-250.0) * M_PI / 250.0,3.0);
+      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((Double)(Time::GetInstance()->Read()%500)-250.0) * PI / 250.0,3.0);
   }
 #else //  :-P
   smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);

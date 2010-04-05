@@ -50,8 +50,8 @@ void IllBubble::Refresh()
 
   Double scale_x, scale_y;
   image->GetScaleFactors(scale_x, scale_y);
-  scale_x *= 1.0 + 0.2 * sin(2.0 * M_PI * time / (Double)vib_period);
-  scale_y *= 1.0 + 0.2 * cos(2.0 * M_PI * time / (Double)vib_period);
+  scale_x *= 1.0 + 0.2 * sin(2.0 * PI * time / (Double)vib_period);
+  scale_y *= 1.0 + 0.2 * cos(2.0 * PI * time / (Double)vib_period);
   scale_x = std::max(MIN_SCALE, std::min(scale_x, MAX_SCALE));
   scale_y = std::max(MIN_SCALE, std::min(scale_y, MAX_SCALE));
   image->Scale(scale_x, scale_y);

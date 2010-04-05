@@ -108,7 +108,7 @@ void RPG::Refresh()
   {
     // rocket is turning around herself
     angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
-    if(angle_local > M_PI) angle_local = -M_PI;
+    if(angle_local > PI) angle_local = -PI;
 
     // TPS_AV_ATTIRANCE msec later being launched, the rocket is homing to the target
     if(flying_time > (1000 * GetTotalTimeout()) * (m_initial_strength/ActiveTeam().AccessWeapon().max_strength))
@@ -124,17 +124,17 @@ void RPG::Refresh()
   }
   else
   {
-    SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
+    SetExternForce(m_force, angle_local+HALF_PI); // reverse the force applyed on the last Refresh()
 
     if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
       Double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
       Double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
-      Double diff = fmod(wish_angle-angle_local, M_PI*2);
-      if(diff < -M_PI) diff += M_PI*2;
-      if(diff > M_PI) diff -= M_PI*2;
-      //diff should now be between -M_PI and M_PI...
+      Double diff = fmod(wish_angle-angle_local, PI*2);
+      if(diff < -PI) diff += PI*2;
+      if(diff > PI) diff -= PI*2;
+      //diff should now be between -PI and PI...
       if(diff > max_rotation) {
         angle_local += max_rotation;
       } else if (diff < -max_rotation) {
@@ -150,9 +150,9 @@ void RPG::Refresh()
       m_force = 0; //if there's no fuel left just let it crash into the ground somewhere
       if(!IsDrowned()) {
         angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
-        if(angle_local > M_PI) angle_local = - M_PI;
+        if(angle_local > PI) angle_local = - PI;
       } else {
-        angle_local = M_PI_2;
+        angle_local = HALF_PI;
       }
     }
 
@@ -308,8 +308,8 @@ AutomaticBazookaConfig &AutomaticBazooka::cfg() {
 }
 
 AutomaticBazookaConfig::AutomaticBazookaConfig() {
-    uncontrolled_turn_speed = M_PI*8;
-    max_controlled_turn_speed = M_PI*4;
+    uncontrolled_turn_speed = PI*8;
+    max_controlled_turn_speed = PI*4;
     fuel_time = 10;
     rocket_force = 2500;
 }

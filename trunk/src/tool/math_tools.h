@@ -49,8 +49,8 @@ inline Double InRange_Double (const Double &valeur, const Double &min, const Dou
 // Invert an angle along the vertical axis
 inline Double InverseAngle (const Double &angle) {
   if (angle < 0)
-    return -M_PI -angle;
-  return M_PI - angle;
+    return -PI -angle;
+  return PI - angle;
 }
 
 inline Double InverseAngleDeg (const Double &angle) {

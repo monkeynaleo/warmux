@@ -50,7 +50,7 @@ void BodyMemberParticle::Refresh()
   UpdatePosition();
 
   angle_rad += GetSpeedXY().Norm() * 20;
-  angle_rad = fmod(angle_rad, 2 *M_PI);
+  angle_rad = fmod(angle_rad, 2 *PI);
   //FIXME what about negatives values ? what would happen ?
   if(m_left_time_to_live < 50)
     image->SetAlpha(m_left_time_to_live / 50.0);
