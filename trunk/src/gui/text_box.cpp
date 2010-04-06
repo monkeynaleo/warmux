@@ -25,11 +25,9 @@
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
 
-TextBox::TextBox(const std::string & label, 
-                 uint max_width,
-                 Font::font_size_t fsize, 
-                 Font::font_style_t fstyle) :
-  Label(label, max_width, fsize, fstyle),
+TextBox::TextBox (const std::string &label, uint max_width,
+                  Font::font_size_t fsize, Font::font_style_t fstyle) :
+  Label(label, max_width, fsize, fstyle, white_color, false, true),
   max_nb_chars(0),
   cursor_pos(label.size())
 {
@@ -68,7 +66,7 @@ void TextBox::BasicSetText(std::string const & new_txt)
 {
   std::string _new_txt = new_txt;
 
-  if (max_nb_chars != 0 && 
+  if (max_nb_chars != 0 &&
       _new_txt.size() > max_nb_chars) {
     _new_txt.resize(max_nb_chars);
   }
@@ -116,7 +114,7 @@ void TextBox::Draw(const Point2i & mousePosition) const
   DrawCursor(position, cursor_pos);
 }
 
-Widget * TextBox::ClickUp(const Point2i & mousePosition, 
+Widget * TextBox::ClickUp(const Point2i & mousePosition,
                           uint button)
 {
   NeedRedrawing();
@@ -133,9 +131,9 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
     const Font*            font    = Font::GetInstance(GetFontSize(), GetFontStyle());
     std::string            txt     = "";
     std::string::size_type pos     = 0;
-      
+
     cursor_pos = 0;
-    while (pos < cur_txt.size() && 
+    while (pos < cur_txt.size() &&
            this->position.x + font->GetWidth(txt) < mousePosition.x+2) {
       cursor_pos = pos;
       while ((cur_txt[++pos] & 0xc0) == 0x80) { }
@@ -144,10 +142,10 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
 
     Label::Draw(mousePosition);
     DrawCursor(position, cursor_pos);
-      
+
     return this;
   }
-  
+
   // Om nom nom
   return this;
 }
