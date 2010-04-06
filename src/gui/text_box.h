@@ -66,6 +66,8 @@ class PasswordBox : public TextBox
                 uint max_width,
                 Font::font_size_t fsize = Font::FONT_SMALL,
                 Font::font_style_t fstyle = Font::FONT_BOLD);
+    PasswordBox(Profile * profile,
+                const xmlNode * passwordBoxNode);
 
     bool SendKey(const SDL_keysym & key);
     const std::string & GetPassword() const { return clear_text; };
