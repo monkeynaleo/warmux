@@ -65,7 +65,7 @@ Text::~Text()
 {
 }
 
-void Text::Init() 
+void Text::Init()
 {
   if (shadowed) {
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
@@ -395,7 +395,12 @@ void Text::SetFont(const Color &_font_color,
   color = _font_color;
   font_size = _font_size;
   font_style = _font_style;
-  shadowed = _font_shadowed;
   shadowColor = _shadowColor;
+
+  if (shadowed != _font_shadowed) {
+    // recompute shadow offset
+    shadowed = _font_shadowed;
+    Init();
+  }
 }
 
