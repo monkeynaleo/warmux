@@ -153,32 +153,41 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
 }
 
 
-PasswordBox::PasswordBox(const std::string &label, uint max_width,
-                         Font::font_size_t fsize, Font::font_style_t fstyle)
-  : TextBox(label, max_width, fsize, fstyle)
+PasswordBox::PasswordBox(const std::string & label, 
+                         uint max_width,
+                         Font::font_size_t fsize, 
+                         Font::font_style_t fstyle) : 
+  TextBox(label, max_width, fsize, fstyle)
 {
 }
 
-void PasswordBox::BasicSetText(std::string const &new_txt)
+PasswordBox::PasswordBox(Profile * profile,
+                         const xmlNode * passwordBoxNode) :
+  TextBox(profile, passwordBoxNode)
+{
+}
+
+void PasswordBox::BasicSetText(std::string const & new_txt)
 {
   std::string _new_txt = new_txt;
 
-  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars)
+  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars) {
     _new_txt.resize(max_nb_chars);
+  }
   clear_text = _new_txt;
 
   //printf("Real text: %s\n", clear_text.c_str());
 
-  Font* font = Font::GetInstance(GetFontSize(), GetFontStyle());
+  Font * font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
   if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText( std::string(clear_text.size(), '*') );
-  }
-  else
+  } else {
     cursor_pos = GetText().size();
+  }
 }
 
-bool PasswordBox::SendKey(const SDL_keysym& key)
+bool PasswordBox::SendKey(const SDL_keysym & key)
 {
   bool used = true;
 
@@ -188,8 +197,9 @@ bool PasswordBox::SendKey(const SDL_keysym& key)
 
   used = TextHandle(new_txt, cursor_pos, key);
 
-  if (new_txt != GetText())
+  if (new_txt != GetText()) {
     BasicSetText(new_txt);
+  }
 
   return used;
 }
