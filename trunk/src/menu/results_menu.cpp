@@ -65,9 +65,8 @@ class ResultBox : public HBox
     margin = DEF_BORDER;
     border = BorderSize;
     size -= 4*DEF_BORDER + 40;
-    // Should resize more depending on font size
-    Font::font_size_t font = (size > 400) ? Font::FONT_BIG : Font::FONT_MEDIUM;
-    //printf("Size=%u\n", size);
+
+    Font::font_size_t font = Font::FONT_SMALL;
 
     AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_BOLD));
 
@@ -112,7 +111,7 @@ public:
   {
     std::string score_str;
     if (score+(Double)0.05<(Double)100.0) {
-      score_str = Double2str(score, 1);      
+      score_str = Double2str(score, 1);
     } else {
       score_str = Double2str(score, 0);
     }
@@ -385,16 +384,16 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
     winner_box = new VBox(240, true);
     winner_box->AddWidget(new Label(_("Winner"), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    white_color, true));
+                                    dark_gray_color, true));
     PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(first_team->GetName(), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    white_color, true));
+                                    dark_gray_color, true));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
     winner_box->AddWidget(new Label(tmp, 240, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                                    white_color, true));
+                                    dark_gray_color, true));
 
     winner_box->SetPosition(x, y);
     widgets.AddWidget(winner_box);
