@@ -152,7 +152,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
   refresh_net_games_label = new Label(_("Public battles"), width,
-                                  Font::FONT_MEDIUM, Font::FONT_BOLD, c_red);
+				      Font::FONT_MEDIUM, Font::FONT_BOLD, c_red, false, true);
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
@@ -173,7 +173,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   // Manual connection
   cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
-                                         Font::FONT_MEDIUM, Font::FONT_BOLD, c_red));
+                                         Font::FONT_MEDIUM, Font::FONT_BOLD, c_red, false, true));
 
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false);

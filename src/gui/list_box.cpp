@@ -306,7 +306,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
                          Font::font_style_t fstyle,
                          const std::string& _value,
                          const Color& color) :
-  Label(_label, 200, fsize, fstyle, color),
+  Label(_label, 200, fsize, fstyle, color, false, true),
   value(_value)
 {
 }

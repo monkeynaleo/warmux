@@ -27,13 +27,15 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string & label, 
-                   uint width, 
+CheckBox::CheckBox(const std::string & label,
+                   uint width,
                    bool value):
-  Text(label, 
-       white_color, 
-       Font::FONT_SMALL, 
-       Font::FONT_BOLD),
+  Text(label,
+       dark_gray_color,
+       Font::FONT_SMALL,
+       Font::FONT_BOLD,
+       false,
+       true),
   m_value(value),
   m_checked_image(NULL)
 {
@@ -137,7 +139,7 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/) const
   m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
-Widget * CheckBox::ClickUp(const Point2i &/*mousePosition*/, 
+Widget * CheckBox::ClickUp(const Point2i &/*mousePosition*/,
                            uint /*button*/)
 {
   NeedRedrawing();
