@@ -149,6 +149,8 @@ Widget * Menu::CreateWidget(Profile * profile,
     widget = new PasswordBox(profile, widgetNode);
   } else if ("TextBox" == widgetName) {
     widget = new TextBox(profile, widgetNode);
+  } else if ("Button" == widgetName) {
+    widget = new Button(profile, widgetNode);
   }
 
   if (NULL != widget) { 

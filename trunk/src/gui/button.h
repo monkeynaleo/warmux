@@ -43,8 +43,11 @@ protected:
 public:
   Button (const Profile *res_profile, const std::string& resource_id,
           bool img_scale = false);
+  Button(Profile * profile,
+         const xmlNode * baseListBoxNode);
   virtual ~Button();
 
+  virtual bool LoadXMLConfiguration(void);
   virtual void Draw(const Point2i &mousePosition) const;
   virtual void Pack();
 };
