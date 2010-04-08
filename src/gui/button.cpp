@@ -25,14 +25,22 @@
 #include "graphic/video.h"
 #include "tool/resource_manager.h"
 
-
-Button::Button (const Profile *res_profile,
-                const std::string& resource_id, bool _img_scale):
+Button::Button(const Profile * res_profile,
+               const std::string & resource_id, 
+               bool _img_scale):
   img_scale(_img_scale),
-  image(GetResourceManager().LoadSprite(res_profile,resource_id))
+  image(GetResourceManager().LoadSprite(res_profile, resource_id))
 {
   position = Point2i(-1, -1);
   size = image->GetSize();
+}
+
+Button::Button(Profile * profile,
+               const xmlNode * baseListBoxNode) :
+  Widget(profile, baseListBoxNode),
+  img_scale(false),
+  image()
+{
 }
 
 Button::~Button()
@@ -40,7 +48,49 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &mousePosition) const
+bool Button::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBorder();
+  ParseXMLBackground();
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string file;
+
+  Surface pictureUp;
+  xmlFile->ReadStringAttr(widgetNode, "pictureUp", file);
+  file = profile->relative_path + file;
+  if (!pictureUp.ImgLoad(file)) {
+    file = profile->relative_path + "menu/pic_not_found.png";
+    if (!pictureUp.ImgLoad(file)) {
+      Error("XML Loading -> Button : can't load " + file);
+    }
+  }
+
+  Surface pictureDown;
+  xmlFile->ReadStringAttr(widgetNode, "pictureDown", file);
+  file = profile->relative_path + file;
+  if (!pictureDown.ImgLoad(file)) {
+    file = profile->relative_path + "menu/pic_not_found.png";
+    if (!pictureDown.ImgLoad(file)) {
+      Error("XML Loading -> Button : can't load " + file);
+    }
+  }
+
+  image = new Sprite();
+  image->AddFrame(pictureUp);
+  image->AddFrame(pictureDown);
+
+  return true;
+}
+
+void Button::Draw(const Point2i & mousePosition) const
 {
   Surface& surf = GetMainWindow();
 
