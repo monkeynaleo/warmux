@@ -36,6 +36,7 @@
 #include "gui/check_box.h"
 #include "gui/picture_text_cbox.h"
 #include "gui/text_box.h"
+#include "gui/list_box.h"
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
@@ -151,6 +152,8 @@ Widget * Menu::CreateWidget(Profile * profile,
     widget = new TextBox(profile, widgetNode);
   } else if ("Button" == widgetName) {
     widget = new Button(profile, widgetNode);
+  } else if ("ListBox" == widgetName) {
+    widget = new ListBox(profile, widgetNode);
   }
 
   if (NULL != widget) { 

@@ -29,7 +29,8 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-BaseListBox::BaseListBox (const Point2i &_size, bool always_one_selected_b):
+BaseListBox::BaseListBox(const Point2i & _size, 
+                         bool always_one_selected_b):
   Widget(Point2i(_size.x, _size.y)),
   always_one_selected(always_one_selected_b),
   scrolling(false),
@@ -51,12 +52,66 @@ BaseListBox::BaseListBox (const Point2i &_size, bool always_one_selected_b):
   Widget::SetBackgroundColor(defaultListColor1);
 }
 
+BaseListBox::BaseListBox(Profile * profile,
+                         const xmlNode * baseListBoxNode) :
+  Widget(profile, baseListBoxNode),
+  always_one_selected(),
+  scrolling(false),
+  first_visible_item(0),
+  selected_item(-1),
+  m_items(),
+  m_up(NULL),
+  m_down(NULL),
+  selected_item_color(),
+  default_item_color(),
+  margin(0)
+{
+}
+
 BaseListBox::~BaseListBox()
 {
-  delete m_up;
-  delete m_down;
+  if (NULL != m_up) {
+    delete m_up;
+  }
+
+  if (NULL != m_down) {
+    delete m_down;
+  }
 
   ClearItems();
+}
+
+bool BaseListBox::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBorder();
+  ParseXMLBackground();
+
+  //Text::LoadXMLConfiguration(xmlFile, widgetNode);
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+  const xmlNode * buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp");
+  const xmlNode * buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
+    
+  if (NULL == buttonUpNode || NULL == buttonDownNode) {
+    return false;
+  }
+  m_up   = new Button(profile, buttonUpNode);
+  m_up->LoadXMLConfiguration();
+  m_up->SetPosition(0, 0);
+  m_up->SetSize(0, 0);
+
+  m_down = new Button(profile, buttonDownNode);
+  m_down->LoadXMLConfiguration();
+  m_down->SetPosition(0, 0);
+  m_down->SetSize(0, 0);   
+
+  return true;
 }
 
 void BaseListBox::ClearItems()
@@ -320,6 +375,36 @@ const std::string& ListBoxItem::GetLabel() const
 
 //-----------------------------------------------------------------------------
 
+ListBox::ListBox(Profile * profile,
+                 const xmlNode * listBoxNode) :
+  BaseListBox(profile, listBoxNode)
+{
+}
+
+bool ListBox::LoadXMLConfiguration()
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  BaseListBox::LoadXMLConfiguration();
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+  const xmlNode * labelListNode = xmlFile->GetFirstNamedChild(widgetNode, "List");
+  const xmlNode * currentListNode = xmlFile->GetFirstChild(labelListNode);
+  std::string labelValue = "No text";
+
+  Color black(0, 0, 0, 255);
+
+  while (NULL != currentListNode) {
+    xmlFile->ReadString(currentListNode, "Label", labelValue);
+    AddItem(false, labelValue, "no value", Font::FONT_SMALL, Font::FONT_BOLD, black);
+    currentListNode = xmlFile->GetNextSibling(currentListNode);
+  }
+  BaseListBox::Pack();
+  return true;
+}
+
 void ListBox::AddItem (bool selected,
                        const std::string &label,
                        const std::string &value,
@@ -334,7 +419,7 @@ void ListBox::AddItem (bool selected,
 void ListBox::Select(const std::string& val)
 {
   uint index = 0;
-  for(std::vector<Widget*>::iterator it=m_items.begin();
+  for (std::vector<Widget*>::iterator it=m_items.begin();
       it != m_items.end();
       it++,index++)
   {

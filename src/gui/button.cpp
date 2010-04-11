@@ -39,13 +39,15 @@ Button::Button(Profile * profile,
                const xmlNode * baseListBoxNode) :
   Widget(profile, baseListBoxNode),
   img_scale(false),
-  image()
+  image(NULL)
 {
 }
 
 Button::~Button()
 {
-  delete image;
+  if (NULL != image) {
+    delete image;
+  }
 }
 
 bool Button::LoadXMLConfiguration()

@@ -64,9 +64,13 @@ public:
   void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
   void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
 
-  BaseListBox (const Point2i &size, bool always_one_selected_b = true);
-  ~BaseListBox();
+  BaseListBox (const Point2i & size, 
+               bool always_one_selected_b = true);
+  BaseListBox(Profile * profile,
+              const xmlNode * baseListBoxNode);
+  virtual ~BaseListBox();
 
+  virtual bool LoadXMLConfiguration(void);
   virtual void Draw(const Point2i &mousePosition) const;
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);
@@ -91,9 +95,17 @@ class ListBoxItem;
 
 class ListBox : public BaseListBox
 {
+private:
   static const ListBoxItem* GetItem(const Widget* w) { return (const ListBoxItem*)w; }
+
 public:
-  ListBox(const Point2i &size, bool b = true) : BaseListBox(size, b) { }
+  ListBox(const Point2i & size, 
+          bool b = true) : BaseListBox(size, b) { }
+  ListBox(Profile * profile,
+          const xmlNode * baseListBoxNode);
+  virtual ~ListBox() { }
+
+  virtual bool LoadXMLConfiguration(void);
   void AddItem(bool selected, const std::string &label,
                const std::string &value,
                Font::font_size_t fsize = Font::FONT_SMALL,
