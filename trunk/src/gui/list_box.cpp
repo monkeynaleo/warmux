@@ -141,26 +141,29 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   scrolling = false;
 
-  if (m_items.empty())
+  if (m_items.empty()) {
     return NULL;
+  }
 
   // buttons for listbox with more items than visible (first or last item not visible)
   if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
       (button == Mouse::BUTTON_LEFT() && m_down->Contains(mousePosition))) {
 
     // bottom button
-    if (last_visible_item < m_items.size() - 1)
-      first_visible_item++ ;
-
+    if (last_visible_item < m_items.size() - 1) {
+      first_visible_item++;
+    }
+    NeedRedrawing();
     return this;
-  }
-  else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	   (button == Mouse::BUTTON_LEFT() && m_up->Contains(mousePosition))) {
+  } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+	     (button == Mouse::BUTTON_LEFT() && m_up->Contains(mousePosition))) {
 
     // top button
-    if (first_visible_item > 0)
-      first_visible_item-- ;
+    if (first_visible_item > 0) {
+      first_visible_item--;
+    }
 
+    NeedRedrawing();
     return this;
   }
 
@@ -181,29 +184,33 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* BaseListBox::Click(const Point2i &mousePosition, uint button)
+Widget * BaseListBox::Click(const Point2i & mousePosition, 
+                            uint button)
 {
-  if (!Contains(mousePosition)) return NULL;
+  if (!Contains(mousePosition)) {
+    return NULL;
+  }
 
   if (ScrollBarPos().Contains(mousePosition) && button == Mouse::BUTTON_LEFT()) {
     scrolling = true;
   }
+
   return this;
 }
 
-void BaseListBox::__Update(const Point2i &mousePosition,
-		       const Point2i &/*lastMousePosition*/)
+void BaseListBox::__Update(const Point2i & mousePosition,
+		       const Point2i & lastMousePosition)
 {
+  (void) lastMousePosition;
   if (!Contains(mousePosition)) {
     scrolling = false;
   }
   // update position of items because of scrolling with scroll bar
   if (scrolling &&
       uint(mousePosition.y) < GetPositionY() + GetSizeY() - 12 -margin&&
-      mousePosition.y > GetPositionY() + 12)
-    {
-      first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20-margin);
-    }
+      mousePosition.y > GetPositionY() + 12) {
+    first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20-margin);
+  }
 }
 
 void BaseListBox::Draw(const Point2i &mousePosition) const
@@ -365,7 +372,6 @@ ListBoxItem::ListBoxItem(const std::string& _label,
   value(_value)
 {
 }
-
 
 
 const std::string& ListBoxItem::GetLabel() const
