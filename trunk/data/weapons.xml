@@ -301,7 +301,7 @@
 
   <surface name="grapple_ico" file="weapon/grapple/grapple_ico.png" />
   <surface name="grapple" file="weapon/grapple/grapple.png" />
-  <position name="grapple" origin="hand" x="25" y="27" />
+  <position name="grapple" origin="hand" x="30" y="26" />
   <sprite name="grapple">
     <image file="weapon/grapple/grapple.png" />
   </sprite>
