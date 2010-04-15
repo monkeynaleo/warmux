@@ -832,9 +832,11 @@
 <movement name="ninja-rope" duration_per_frame="100">
 	<collision_rect left="0" right="0" top="0" bottom="2"/>
 	<frame>
-		<member type="body" angle="-90" follow_speed="true" follow_direction="true"/>
-		<member type="arm-left" angle="-90"/>
-		<member type="arm-right" angle="-10"/>
+		<member type="body" angle="0" follow_speed="false" follow_direction="false"/>
+		<member type="arm-left" angle="20"/>
+		<member type="arm-right" angle="20"/>
+		<member type="arm2-left" angle="-80"/>
+		<member type="arm2-right" angle="-80"/>
 		<member type="foot-left" angle="-45"/>
 		<member type="foot-right" angle="-45"/>
 	</frame>
