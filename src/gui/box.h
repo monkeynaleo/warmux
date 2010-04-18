@@ -34,6 +34,8 @@ protected:
 public:
   Box(void);
   Box(const Point2i &size, bool _draw_border=true);
+  Box(Profile * _profile,
+      const xmlNode * _boxNode);
   virtual ~Box();
 
   void ParseXMLBoxParameters(void);

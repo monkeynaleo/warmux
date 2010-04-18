@@ -44,6 +44,8 @@ protected:
 public:
   WidgetList();
   WidgetList(const Point2i &size);
+  WidgetList(Profile * profile,
+             const xmlNode * widgetListNode);
   virtual ~WidgetList();
 
   virtual void Update(const Point2i &mousePosition);

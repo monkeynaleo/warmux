@@ -25,14 +25,22 @@
 #include "interface/mouse.h"
 #include <iostream>
 
-WidgetList::WidgetList()
+WidgetList::WidgetList() :
+  selected_widget(NULL)
 {
-  selected_widget = NULL;
 }
 
-WidgetList::WidgetList(const Point2i &size) : Widget(size)
+WidgetList::WidgetList(const Point2i &size) : 
+  Widget(size),
+  selected_widget(NULL)
 {
-  selected_widget = NULL;
+}
+
+WidgetList::WidgetList(Profile * profile,
+                       const xmlNode * widgetListNode) :
+  Widget(profile, widgetListNode),
+  selected_widget(NULL)
+{
 }
 
 WidgetList::~WidgetList()
