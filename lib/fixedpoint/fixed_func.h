@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef _MSC_VER
 #include <stdint.h>
 #else
-#include "stdint.h"
+#include "stdint_fallback.h"
 #endif
 
 namespace fixedpoint {
