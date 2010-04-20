@@ -47,6 +47,12 @@ namespace fixedpoint {
 
 // The template argument p in all of the following functions refers to the 
 // fixed point precision (e.g. p = 8 gives 24.8 fixed point functions).
+#ifdef __APPLE__
+  #define SIZE_T_FIXEDPOINT_METHODS
+#endif
+#if __WORDSIZE == 64
+  #define SIZE_T_FIXEDPOINT_METHODS
+#endif
 
 template <int p>
 struct fixed_point {
@@ -57,9 +63,11 @@ struct fixed_point {
 	/*explicit*/ fixed_point(int64_t i) : intValue(i << p) {}
 	/*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
 	/*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
+#if __WORDSIZE != 64
 	/*explicit*/ fixed_point(long int l) : intValue(((int64_t)l) << p) {}
+#endif
 	/*explicit*/ fixed_point(unsigned int l) : intValue(((int64_t)l) << p) {}
-#ifdef __APPLE__
+#ifdef SIZE_T_FIXEDPOINT_METHODS
     /*explicit*/ fixed_point(size_t i) : intValue(((int64_t)i) << p) {}
 #endif
 
@@ -141,7 +149,7 @@ template <int p>
 inline fixed_point<p> operator / (unsigned int a, fixed_point<p> b)
 { fixed_point<p> r(a); r /= b; return r; }
 
-#ifdef __APPLE__
+#ifdef SIZE_T_FIXEDPOINT_METHODS
 template <int p>
 inline fixed_point<p> operator + (size_t a, fixed_point<p> b)
 { return b + a; }
