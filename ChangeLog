@@ -1,3 +1,6 @@
+> 2010/04/20 - 0.9.2.1 release
+  - Fix build on 64 bits system
+
 > 2010/04/16 - 0.9.2 release
   - The rope of grapple no longer gets stuck in ground.
   - Network games between specific computers which didn't work properly before should work now.
