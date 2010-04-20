@@ -22,14 +22,9 @@ targets :
     ./cmake_build.sh ppc       : cross-compile to PPC
 
 arguments :
-    <x>                        : launch make with x threads (e.g. ./cmake_build.sh universal 2)
-
-To make a debug build, use 'export DEBUG_BUILD=1' before launching the script
-
-* Note that this script does not make a clean build on each invocation. To make a clean
-  build, simply remove the generated build folder and launch again.
+    -j<x>                      : launch make with x threads
     
-More reliable way to build a universal binary :
+To build a universal binary :
     1) build once in intel mode
     2) Save the generated .app
     3) Remove all build files
@@ -37,6 +32,7 @@ More reliable way to build a universal binary :
     5) Merge both builds by using terminal app "lipo"
        (the frameworks from the dependency package are already universal)
     
+
 
 Have fun :)
 

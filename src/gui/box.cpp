@@ -22,7 +22,6 @@
 #include "gui/box.h"
 #include "graphic/surface.h"
 #include "graphic/colors.h"
-#include "graphic/video.h"
 
 Box::Box(void):
   margin(0),
@@ -32,22 +31,15 @@ Box::Box(void):
 
 Box::Box(const Point2i & size, 
          bool _draw_border) : 
-  WidgetList(size),
-  margin(5)
+  WidgetList(size)
 {
+  margin = 5;
   border.SetValues(5, 5);
 
   if (_draw_border) {
     Widget::SetBorder(defaultOptionColorRect, 2);
     Widget::SetBackgroundColor(defaultOptionColorBox);
   }
-}
-
-Box::Box(Profile * profile,
-         const xmlNode * boxNode) :
-  WidgetList(profile, boxNode),
-  margin(5)
-{
 }
 
 Box::~Box()
@@ -170,17 +162,14 @@ GridBox::GridBox(uint _max_line_width,
   last_column = 0;
 }
 
-GridBox::GridBox(Profile * profile,
-                 const xmlNode * gridBoxNode) :
-  Box(profile, gridBoxNode)
+GridBox::GridBox(Profile * _profile,
+                 const xmlNode * _gridBoxNode)
 {
-  max_line_width = GetMainWindow().GetWidth();;
-  last_line = 0;
-  last_column = 0;
+  this->profile = _profile;
+  this->widgetNode = _gridBoxNode;
 }
 
 /*
-  Example:
   <GridBox x="50px" y="50px" 
            width="120px" height="110px"
            borderSize="3" borderColor="ff0102ff" 
@@ -191,14 +180,13 @@ GridBox::GridBox(Profile * profile,
 bool GridBox::LoadXMLConfiguration(void)
 {
   if (NULL == profile || NULL == widgetNode) {
+    //TODO error ... xml attributs not initialized !
     return false;
   }
 
   ParseXMLPosition();
   ParseXMLSize();
   ParseXMLBoxParameters();
-
-  widget_size = GetSize();
 
   return true;
 }

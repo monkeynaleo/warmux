@@ -24,13 +24,6 @@ SRC=${ROOT}src/
 export CC=gcc-4.0
 export CXX=g++-4.0
 export LD=g++-4.0
-NBTHREADS=1
-
-if [ ! -n "$DEBUG_BUILD" ]
-then
-    export DEBUG_BUILD=0
-    echo "> Making a RELEASE build"
-fi
 
 # used for non-universal builds (universal builds change this to 10.4)
 export MACOSX_DEPLOYMENT_TARGET=10.5
@@ -51,7 +44,7 @@ export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i38
 export FAT_LDFLAGS="-mmacosx-version-min=10.4 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
 # flags only used when cross-building to PCC
-export PPC_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -I/usr/include -mmacosx-version-min=10.4"
+export PPC_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include -mmacosx-version-min=10.4"
 export PPC_LDFLAGS="-mmacosx-version-min=10.4 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
 APP_VERSION=0.8.3
@@ -71,18 +64,13 @@ then
     echo "    installed in your /Library/Frameworks directory."
     echo ""
     echo "targets :"
-    echo "./cmake_build.sh           : default build (i386, compatible OS X 10.5+)"
-    echo "./cmake_build.sh universal : build a universal app"
+    echo "./cmake_build              : default build (i386, compatible OS X 10.5+)"
+    echo "./cmake_build    universal : build a universal app"
     echo "./cmake_build.sh ppc       : cross-compile to PPC"
     echo ""
     echo "arguments :"
-    echo "<x> : launch make with x threads (e.g. ./cmake_build.sh universal 2)"
-    echo ""
-    echo "To make a debug build, use 'export DEBUG_BUILD=1' before launching the script"
-    echo ""
-    echo "* Note that this script does not make a clean build on each invocation. To make a clean"
-    echo "  build, simply remove the generated build folder and launch again."
-    
+    echo "-j<x> : launch make with x threads"
+
     exit 1
 fi
 
@@ -98,7 +86,7 @@ then
         PPC_BUILD=1
     else
         NBTHREADS=$1
-        echo "> Using ${NBTHREADS} threads"
+        echo "Launch with ${NBTHREADS} !"
     fi
 fi
 
@@ -121,7 +109,7 @@ then
     fi
         
     NBTHREADS=$TMP2
-    echo "> Using ${NBTHREADS} threads"
+    echo "Launch with ${NBTHREADS} !"
 fi
 
 if [ ${UNIVERSAL_BUILD} = 1 ]; then
@@ -200,8 +188,10 @@ mkdir -p ${TMP}
 APP=${MAC}Wormux.app
 if [ -e ${APP} ]
 then
-    echo "Cleaning existing Wormux.app..."
+    echo "******************"
+    echo "Clean package Wormux.app"
     rm -rf ${APP}
+    echo "******************"
 fi
 
 if [ -e ${DMG_OUT}.app ]
@@ -242,27 +232,13 @@ cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
 cd ${TMP}
 echo "Configuring CMake build"
 
-if [ ${DEBUG_BUILD} = 1 ]; then
-
-    echo "Making a DEBUG build"
-
-    if ! cmake ${ROOT} --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Debug -DPREFIX=${RES} #-DGETTEXT_LIBRARY="../../libintl.a"
-    then
-        echo "CMake error"
-        exit 1
-    fi
-
-else
-
-    if ! cmake ${ROOT} --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES} #-DGETTEXT_LIBRARY="../../libintl.a"
-    then
-        echo "CMake error"
-        exit 1
-    fi
-
+if ! cmake ${ROOT} --graphviz=viz.dot -DDATA_PATH=${RES} -DBIN_PATH=${APP}/Contents/MacOS/ -DBUILD=Release -DPREFIX=${RES} #-DGETTEXT_LIBRARY="../../libintl.a"
+then
+    echo "CMake error"
+    exit 1
 fi
 
-if ! make VERBOSE=1 -j${NBTHREADS}
+if ! make VERBOSE=1 -j2
 then
     echo "make error"
     exit 1
