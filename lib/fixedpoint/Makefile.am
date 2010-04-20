@@ -9,7 +9,7 @@ libfixedpoint_a_SOURCES = \
   fixed_func.cpp \
   fixed_func.h \
   fixsintab.h \
-  stdint.h
+  stdint_fallback.h
 
 
 AM_CXXFLAGS = -I$(top_srcdir)/lib/fixedpoint           \
