@@ -265,6 +265,11 @@ dnl === Check for PNG =====================================================
 AC_MSG_CHECKING(for libpng)
 for PNG in png14 png13 png12 png dummypng; do
   if $PACKAGE_CONFIG --exists lib$PNG > /dev/null 2>&1 ; then
+     LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags lib$PNG`
+     LIBPNG_LIB=`$PACKAGE_CONFIG --libs lib$PNG`
+     CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
+     CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS"
+     LIBS="$LIBS $LIBPNG_LIB"
     break
   fi
 done
@@ -346,12 +351,9 @@ dnl === Add libxml2 and libpng flags ======================================
 LIBXML_CFLAGS=`$PACKAGE_CONFIG libxml-2.0 --cflags`
 LIBXML_LIBS=`$PACKAGE_CONFIG libxml-2.0 --libs`
 
-LIBPNG_CFLAGS=`$PACKAGE_CONFIG lib$PNG --cflags`
-LIBPNG_LIBS=`$PACKAGE_CONFIG lib$PNG --libs`
-
-CFLAGS="$CFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS $LIBPNG_CFLAGS"
-LIBS="$LIBS $LIBXML_LIBS $LIBPNG_LIBS"
+CFLAGS="$CFLAGS $LIBXML_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS"
+LIBS="$LIBS $LIBXML_LIBS"
 
 dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
 if test "x${debug}" = "xyes"; then
