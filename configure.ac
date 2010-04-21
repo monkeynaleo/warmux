@@ -40,7 +40,6 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 AC_CHECK_TOOL(STRIP, strip)
 AC_CHECK_TOOL(WINDRES, windres)
-AC_CHECK_TOOL(PACKAGE_CONFIG, pkg-config)
 
 AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
 if test "x$cxx_present" != "xyes"; then
@@ -241,42 +240,28 @@ if test "x$OSX" != "xyes" ; then
   fi
 fi
 
+dnl === Check for libxml2, fribidi and libpng using pkg-confg =============
+PKG_PROG_PKG_CONFIG()
+PKG_CHECK_MODULES(LIBXML2, libxml-2.0 >= 2.7.3, [], [AC_MSG_FAILURE([libxml2 >= 2.7.3 not found])])
+PKG_CHECK_MODULES(LIBPNG, libpng, [], [AC_MSG_FAILURE([libpng not found])])
+CFLAGS="$CFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
+LIBS="$LIBS $LIBPNG_LIBS $LIBXML2_LIBS"
+
 dnl === Check for FriBidi =================================================
 AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
 if test "${enable_fribidi}" = "yes"; then
-   use_fribidi="true"
-   AC_CHECK_LIB(fribidi, fribidi_log2vis,
-                [ LIBS="$LIBS `$PACKAGE_CONFIG --libs fribidi`"
-                  CFLAGS="$CFLAGS `$PACKAGE_CONFIG --cflags fribidi`"
-                  CXXFLAGS="$CXXFLAGS `$PACKAGE_CONFIG --cflags fribidi`"
-                  AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
-                [ AC_MSG_WARN([unable to use FriBidi])
-                  use_fribidi="false" ],
-                [ `$PACKAGE_CONFIG --libs fribidi` ])
-   if ! ${use_fribidi}; then
-     AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.])
-   fi
+   PKG_CHECK_MODULES(FRIBIDI, [fribidi],
+                     [ use_fribidi="true"
+                       AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
+                     [ use_fribidi="false"
+                       AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.]) ])
+   # Will be empty if not found
+   LIBS="$LIBS $FRIBIDI_LIBS"
+   CFLAGS="$CFLAGS $FRIBIDI_CFLAGS"
+   CXXFLAGS="$CXXFLAGS $FRIBIDI_CFLAGS"                  
 else
   AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
-fi
-
-dnl === Check for PNG =====================================================
-
-AC_MSG_CHECKING(for libpng)
-for PNG in png14 png13 png12 png dummypng; do
-  if $PACKAGE_CONFIG --exists lib$PNG > /dev/null 2>&1 ; then
-     LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags lib$PNG`
-     LIBPNG_LIB=`$PACKAGE_CONFIG --libs lib$PNG`
-     CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
-     CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS"
-     LIBS="$LIBS $LIBPNG_LIB"
-    break
-  fi
-done
-if test "$PNG" = "dummypng"; then
-  AC_MSG_ERROR([*** libpng not found])
-else
-  AC_MSG_RESULT(lib$PNG)
 fi
 
 dnl === Check for SDL_gfx ===========================================================
@@ -294,15 +279,14 @@ if test "$static" = yes; then
   LIBS="$LIBS -lm -ldl -lfreetype -lz"
 fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
-AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
+AC_CHECK_HEADER(SDL_rotozoom.h,,check_sdl_gfx="no")
 
 dnl === Check for curl ==============================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
-dnl === Check for SDL image, mixer, etc., libxml2, and libpng ==============
+dnl === Check for SDL image, mixer, etc. ==============
 
-AC_CHECK_LIB($PNG, png_error,,,)
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
 AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
@@ -311,8 +295,6 @@ if test "${WIN32}" = "yes"; then
   LIBS="$LIBS -lwsock32 -lws2_32 -luser32"
   CXXFLAGS="$CXXFLAGS -D_WIN32_WINNT=0x501"
 fi
-
-PKG_CHECK_MODULES(LIBXML2, libxml-2.0 >= 2.7.3, [], [AC_MSG_FAILURE([libxml2 >= 2.7.3 not found])])
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
 
@@ -346,14 +328,6 @@ if test \
   fi
   exit 1
 fi
-
-dnl === Add libxml2 and libpng flags ======================================
-LIBXML_CFLAGS=`$PACKAGE_CONFIG libxml-2.0 --cflags`
-LIBXML_LIBS=`$PACKAGE_CONFIG libxml-2.0 --libs`
-
-CFLAGS="$CFLAGS $LIBXML_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXML_CFLAGS"
-LIBS="$LIBS $LIBXML_LIBS"
 
 dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
 if test "x${debug}" = "xyes"; then
