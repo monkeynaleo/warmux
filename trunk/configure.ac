@@ -25,7 +25,7 @@ AM_INIT_AUTOMAKE([foreign 1.5])
 AM_GNU_GETTEXT([external], [need-ngettext])
 
 if test "x$USE_NLS" != "xyes"; then
-  AC_MSG_WARN([gettext is disabled. If you want internationalisation, please install gettext package.])
+  AC_MSG_ERROR([gettext is disabled. If you want internationalisation, please install gettext package.])
 fi
 
 dnl ========================================================================
