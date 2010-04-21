@@ -263,12 +263,8 @@ fi
 dnl === Check for PNG =====================================================
 
 AC_MSG_CHECKING(for libpng)
-for PNG in png png12 png13 dummypng; do
+for PNG in png14 png13 png12 png dummypng; do
   if $PACKAGE_CONFIG --exists lib$PNG > /dev/null 2>&1 ; then
-    LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags lib$PNG`
-    LIBPNG_LIB=`$PACKAGE_CONFIG --libs lib$PNG`
-    CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS"
-    LIBS="$LIBS $LIBPNG_LIB"
     break
   fi
 done
