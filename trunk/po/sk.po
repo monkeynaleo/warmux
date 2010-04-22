@@ -60,7 +60,7 @@ msgstr "Tími"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
@@ -115,7 +115,7 @@ msgstr[2] "%s zvíťazil %u bodmi energie! "
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s tímu!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
@@ -126,7 +126,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tím už má nekonečné množstvo nábojov pre %s!"
@@ -226,7 +226,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, fuzzy, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s tím vyhral %u dynamitom!"
 msgstr[1] "%s tím vyhral %u dynamitmi!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -265,7 +265,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, fuzzy, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -307,7 +307,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, fuzzy, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -355,7 +355,7 @@ msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
 msgstr[2] "%s tími vyhrali %u %s!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -439,7 +439,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -454,7 +454,7 @@ msgstr "Letecký  útok"
 msgid "Airhammer"
 msgstr "Vŕtačka"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Všetky tímy"
 
@@ -600,7 +600,7 @@ msgstr "Počet postáv"
 msgid "Client mode"
 msgstr ""
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 #, fuzzy
 msgid "Clumsiest"
 msgstr "Najužitočnejší"
@@ -636,11 +636,11 @@ msgstr "Pripojený !"
 msgid "Connected players: "
 msgstr "Koniec hry !"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Stavať"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr ""
 
@@ -694,7 +694,7 @@ msgstr "KONIEC HRY"
 msgid "Effects volume"
 msgstr ""
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 #, fuzzy
 msgid "Energy"
 msgstr "Energia:"
@@ -819,7 +819,7 @@ msgstr "Gnu raketomet"
 msgid "Graphics"
 msgstr "Nastavenie grafiky"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr ""
 
@@ -831,7 +831,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granát"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Inicializuje sa okolie..."
 
@@ -1022,7 +1022,7 @@ msgstr "Základná energia"
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Mína "
 
@@ -1031,23 +1031,23 @@ msgstr "Mína "
 msgid "Misc"
 msgstr "Hudba?"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr ""
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Najvypredávanejší"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Najužitočnejší"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Najneužitočnejší "
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Najnásilnejší "
 
@@ -1096,7 +1096,7 @@ msgstr "Sieťová hra"
 msgid "New player warning?"
 msgstr ""
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
@@ -1291,7 +1291,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Sniper puška"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1349,12 +1349,12 @@ msgstr "Syringe"
 msgid "Talk in network battles"
 msgstr ""
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 #, fuzzy
 msgid "Team graphs"
 msgstr "Tími"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 #, fuzzy
 msgid "Team stats"
 msgstr "Tími"
@@ -1449,7 +1449,7 @@ msgstr "Server odmietol pripojenie."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odmietol pripojenie."
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1464,7 +1464,7 @@ msgstr[1] "Sú tu len %i tímy."
 msgstr[2] "Sú tu len %i tímy."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr ""
 
@@ -1517,7 +1517,7 @@ msgstr "(neobmedzene)"
 msgid "Version"
 msgstr "Verzia"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1582,7 +1582,7 @@ msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 msgid "Wind particles?"
 msgstr "Častice vetra?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 #, fuzzy
 msgid "Winner"
 msgstr "Mína "
@@ -1634,7 +1634,7 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "You won't be able to play before selecting a team!"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
@@ -1659,7 +1659,7 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "koniec"
 
@@ -1677,17 +1677,17 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 #, fuzzy
 msgid "o Loading music"
 msgstr "=== Načítavam ==="
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""

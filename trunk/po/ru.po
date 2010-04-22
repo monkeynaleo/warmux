@@ -66,7 +66,7 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удаленно"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s кадров/с"
@@ -121,7 +121,7 @@ msgstr[2] "%s получил %u единиц энергии!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
@@ -132,7 +132,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Команда %s уже имеет бесконечный запас боеприпасов для %s!"
@@ -250,7 +250,7 @@ msgstr[0] "Команда %s выиграла %u кассетную бомбу!"
 msgstr[1] "Команда %s выиграла %u кассетные бомбы!"
 msgstr[2] "Команда %s выиграла %u кассетных бомб!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -275,7 +275,7 @@ msgstr[0] "Команда %s выиграла %u динамитную шашку
 msgstr[1] "Команда %s выиграла %u динамитные шашки!"
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -291,7 +291,7 @@ msgstr[0] "Команда %s выиграла %u футбольную бомбу
 msgstr[1] "Команда %s выиграла %u футбольные бомбы!"
 msgstr[2] "Команда %s выиграла %u пустотных бомб!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -334,7 +334,7 @@ msgstr[0] "Команда %s выиграла %u антигравитатор! �
 msgstr[1] "Команда %s выиграла %u антигравитатора! Я Юра Гагарин!"
 msgstr[2] "Команда %s выиграла %u антигравитаторов! Я Юра Гагарин!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -382,7 +382,7 @@ msgstr[0] "Команда %s выиграла %u удар-шлепок по вр
 msgstr[1] "Команда %s выиграла %u ударов-шлепков по врагу! Попробуй увернись!"
 msgstr[2] "Команда %s выиграла %u захватов!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -481,7 +481,7 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -498,7 +498,7 @@ msgstr "Воздушная атака"
 msgid "Airhammer"
 msgstr "Отбойный молоток"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Все команды"
 
@@ -647,7 +647,7 @@ msgstr "Клик: камера на игроке"
 msgid "Client mode"
 msgstr "Режим клиента"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Самый неуклюжий"
 
@@ -680,11 +680,11 @@ msgstr "Подключен !"
 msgid "Connected players: "
 msgstr "Подключен !"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Строительство"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Контролируется: "
 
@@ -739,7 +739,7 @@ msgstr "КОНЕЦ ИГРЫ"
 msgid "Effects volume"
 msgstr "Громкость эффектов"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Энергия"
 
@@ -858,7 +858,7 @@ msgstr "Антилопа гну"
 msgid "Graphics"
 msgstr "Графический"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "\"Кошка\""
 
@@ -870,7 +870,7 @@ msgstr "Гравитация"
 msgid "Grenade"
 msgstr "Граната"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Инициализация местности..."
 
@@ -1074,7 +1074,7 @@ msgstr "Максимальная начальная энергия"
 msgid "Maximum FPS"
 msgstr "Максимальный FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Мина"
 
@@ -1082,23 +1082,23 @@ msgstr "Мина"
 msgid "Misc"
 msgstr "Разное"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Самый точный"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Самый продажный"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Самый полезный"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Самый бесполезный"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Самый жестокий"
 
@@ -1147,7 +1147,7 @@ msgstr "Новая игра по сети"
 msgid "New player warning?"
 msgstr "Предупреждение о появлении нового игрока"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -1340,7 +1340,7 @@ msgstr "Меньший угол прицела и шаг хода"
 msgid "Sniper Rifle"
 msgstr "Снайперская винтовка"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнере была мина-ловушка!"
 
@@ -1401,11 +1401,11 @@ msgstr "Шприц"
 msgid "Talk in network battles"
 msgstr "Разговор в сетевой игре"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Графики команды"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Статистика команды"
 
@@ -1499,7 +1499,7 @@ msgstr "Сервер отклонил соединение."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Сервер отклонил соединение: неверный пароль!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1514,7 +1514,7 @@ msgstr[1] "Всего %i команды."
 msgstr[2] "Всего %i команд"
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Время"
 
@@ -1575,7 +1575,7 @@ msgstr "(бесконечно)"
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Проверка версии не удалась из-за: %s\n"
@@ -1643,7 +1643,7 @@ msgstr "Какой позор для %s - его убили из простог�
 msgid "Wind particles?"
 msgstr "Частицы в воздухе?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Победитель"
 
@@ -1695,7 +1695,7 @@ msgstr "Вам нужны хотя бы две команды !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Вы не сможете играть не выбрав команду !"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
@@ -1723,7 +1723,7 @@ msgstr "не могу загрузить конфиг"
 msgid "custom player"
 msgstr "созданный игрок"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "готово"
 
@@ -1739,16 +1739,16 @@ msgstr "из"
 msgid "no configuration file!"
 msgstr "нет конфигурационного файла!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Загрузка музыки"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Загрузка звукового профиля: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"

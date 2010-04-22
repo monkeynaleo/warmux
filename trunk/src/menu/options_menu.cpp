@@ -308,6 +308,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "fi",    "Suomi",               "fi");
   lbox_languages->AddItem(config->GetLanguage() == "sv",    "Svenska",             "sv");
   lbox_languages->AddItem(config->GetLanguage() == "tr",    "Türkçe",              "tr");
+  lbox_languages->AddItem(config->GetLanguage() == "ua",    "украї́нська мо́ва",     "ua");
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
 

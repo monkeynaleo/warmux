@@ -50,7 +50,7 @@ msgstr "%s Csapat"
 msgid "%s Team - Remote"
 msgstr "%s Csapat - Távoli"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s FPS"
@@ -104,7 +104,7 @@ msgstr[1] "%s energiája %u egységgel nõtt!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s egy taposóakna mellett mászkál!"
@@ -115,7 +115,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A(z) %s csapatnak végtelen lõszere van a(z) %s fegyverhez!"
@@ -218,7 +218,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s csapat %u repeszbombát kapott!"
 msgstr[1] "%s csapat %u repeszbombát kapott!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -240,7 +240,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s csapat %u dinamitot kapott!"
 msgstr[1] "%s csapat %u dinamitot kapott!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -254,7 +254,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s csapat %u rögbibombát kapott!"
 msgstr[1] "%s csapat %u rögbibombát kapott!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -292,7 +292,7 @@ msgid_plural ""
 msgstr[0] "%s csapat %u alacsony gravitációt kapott! Én vagyok Neil Armstrong!"
 msgstr[1] "%s csapat %u alacsony gravitációt kapott! Én vagyok Neil Armstrong!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -334,7 +334,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s csapat %u pofont  kapott!"
 msgstr[1] "%s csapat %u pofont kapott!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -415,7 +415,7 @@ msgstr "(ismeretlen idõ)"
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -432,7 +432,7 @@ msgstr "Légitámadás"
 msgid "Airhammer"
 msgstr "Légkalapács"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Összes csapat"
 
@@ -581,7 +581,7 @@ msgstr "Kattintás: Kamera karakterre állítása"
 msgid "Client mode"
 msgstr "Kliens mód"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Legügyetlenebb"
 
@@ -614,11 +614,11 @@ msgstr "Kapcsolódva !"
 msgid "Connected players: "
 msgstr "VÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ã„Â‚Ã‚Â„Ã„Å¡Ã„Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â ge!"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Építõ"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Irányítja:"
 
@@ -673,7 +673,7 @@ msgstr "JÁTÉK VÉGE"
 msgid "Effects volume"
 msgstr "Hanghatások hangereje"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Energia"
 
@@ -796,7 +796,7 @@ msgstr "Gnú-lövõ"
 msgid "Graphics"
 msgstr "Grafika"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Szigony"
 
@@ -808,7 +808,7 @@ msgstr "Gravitáció"
 msgid "Grenade"
 msgstr "Gránát"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Terep elõkészítése..."
 
@@ -1011,7 +1011,7 @@ msgstr "Maximális energia"
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Taposóakna"
 
@@ -1019,23 +1019,23 @@ msgstr "Taposóakna"
 msgid "Misc"
 msgstr "Egyéb"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Leghatékonyabb"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Legmûvészibb"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Leghasznosabb"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Leghaszontalanabb"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Legerõszakosabb"
 
@@ -1084,7 +1084,7 @@ msgstr "Új hálózati játék"
 msgid "New player warning?"
 msgstr "Figyelmeztetés új játékosnál?"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "A(z) <%s> elem nem található a konfigurációs XML fájlban!"
@@ -1277,7 +1277,7 @@ msgstr "Kisebb irányszög és lépés"
 msgid "Sniper Rifle"
 msgstr "Mesterlövész puska"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Valaki bombát rejtett a ládába!"
 
@@ -1338,11 +1338,11 @@ msgstr "Fecskendõ"
 msgid "Talk in network battles"
 msgstr "Beszélgetés hálózati játék közben"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Csapat grafikonok"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Csapat statisztikák"
 
@@ -1437,7 +1437,7 @@ msgstr "A szerver elutasította a kapcsolatot."
 msgid "The server rejected the connection: wrong password!"
 msgstr "A szerver elutasította a kapcsolatot: hibás jelszó!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1451,7 +1451,7 @@ msgstr[0] "Csak %i csapat van."
 msgstr[1] "Csak %i csapat van."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Idõ"
 
@@ -1512,7 +1512,7 @@ msgstr "Korlátlan"
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verzió-ellenõrzés sikertelen: %s\n"
@@ -1577,7 +1577,7 @@ msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
 msgid "Wind particles?"
 msgstr "Hulló dísztárgyak"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Gyõztes"
 
@@ -1629,7 +1629,7 @@ msgstr "Választanod kell legalább két csapatot!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nem tudsz játszani csapatválasztás nélkül!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 
@@ -1657,7 +1657,7 @@ msgstr "nem tudom betölteni a konfigurációt"
 msgid "custom player"
 msgstr "egyéni játékos"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "kész"
 
@@ -1673,16 +1673,16 @@ msgstr "a következõtõl:"
 msgid "no configuration file!"
 msgstr "nincs konfigurációs fájl!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "Zene betöltése"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Hangprofil betöltése: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"

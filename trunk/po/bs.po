@@ -57,7 +57,7 @@ msgstr "%s Tim"
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
@@ -111,7 +111,7 @@ msgstr[1] "%s je dobio %u poena energije"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
@@ -122,7 +122,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s tim već ima neograničenu municiju za %s!"
@@ -225,7 +225,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s tim je dobio %u kasatnih bombi!"
 msgstr[1] "%s tim je dobio %u kasatnih bombi!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -247,7 +247,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s tim je dobio %u dinamita"
 msgstr[1] "%s tim je dobio %u dinamita"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -261,7 +261,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s tim je dobio %u džumbus bombi!"
 msgstr[1] "%s tim je dobio %u džumbus bombi!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -299,7 +299,7 @@ msgid_plural ""
 msgstr[0] "%s tim je dobio %u lowgrav! Ja sam Neil Armstrong!"
 msgstr[1] "%s tim je dobio %u lowgrav! Ja sam Neil Armstrong!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -341,7 +341,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s tim je dobio %u kuke!"
 msgstr[1] "%s tim je dobio %u kuke!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -419,7 +419,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -434,7 +434,7 @@ msgstr "Zračni napad"
 msgid "Airhammer"
 msgstr "Zračni čekić"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Svi timovi"
 
@@ -583,7 +583,7 @@ msgstr "Broj likova"
 msgid "Client mode"
 msgstr "Klijent mod"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 #, fuzzy
 msgid "Clumsiest"
 msgstr "Najkorisniji"
@@ -619,11 +619,11 @@ msgstr "Konektovan !"
 msgid "Connected players: "
 msgstr "Konektovan !"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Konstruiraj"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Kontroliran od strane:"
 
@@ -677,7 +677,7 @@ msgstr "KRAJ IGRE"
 msgid "Effects volume"
 msgstr ""
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr ""
 
@@ -802,7 +802,7 @@ msgstr "Lansiraj GNU-a"
 msgid "Graphics"
 msgstr ""
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Kuka"
 
@@ -814,7 +814,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granata"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Inicijalizacija zemljišta ..."
 
@@ -1016,7 +1016,7 @@ msgstr "Početna energija"
 msgid "Maximum FPS"
 msgstr "Maximalaan broj FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Mina"
 
@@ -1025,23 +1025,23 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Muzika?"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Najprecizniji"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Najveća izdajica"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Najkorisniji"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Najučikovitiji"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Najagresivniji"
 
@@ -1090,7 +1090,7 @@ msgstr "Mrežna Igra"
 msgid "New player warning?"
 msgstr ""
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
@@ -1284,7 +1284,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Snajper"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
@@ -1342,12 +1342,12 @@ msgstr "Šprica"
 msgid "Talk in network battles"
 msgstr ""
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 #, fuzzy
 msgid "Team graphs"
 msgstr "Timovi"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 #, fuzzy
 msgid "Team stats"
 msgstr "Timovi"
@@ -1443,7 +1443,7 @@ msgstr "Server odbio konekciju."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server odbio konekciju."
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1457,7 +1457,7 @@ msgstr[0] "Postoji samo %i tim."
 msgstr[1] "Tu je samo %i tim."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr ""
 
@@ -1519,7 +1519,7 @@ msgstr "(neograničeno)"
 msgid "Version"
 msgstr "Verzija"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1583,7 +1583,7 @@ msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
 msgid "Wind particles?"
 msgstr "Prikazuj trunke vjetra?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 #, fuzzy
 msgid "Winner"
 msgstr "Mina"
@@ -1636,7 +1636,7 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nećeš biti u stanju da igraš prije nego izabereš tim!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 
@@ -1665,7 +1665,7 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "gotov"
 
@@ -1684,16 +1684,16 @@ msgstr "od"
 msgid "no configuration file!"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Učitavam muziku"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Učitavam zvučne profile: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"

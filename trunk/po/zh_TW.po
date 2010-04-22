@@ -54,7 +54,7 @@ msgstr " %s 隊伍"
 msgid "%s Team - Remote"
 msgstr " %s 隊伍- 遙控"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s 幀fps"
@@ -108,7 +108,7 @@ msgstr[0] "%s 贏得 %u 點能量！"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是瘋子，他幹掉了一個%s的倒霉蛋！"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s 在地雷身邊！"
@@ -119,7 +119,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s 隊有無窮的 %s彈夾！"
@@ -203,7 +203,7 @@ msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s 隊得到 %u 集束炸彈！"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -222,7 +222,7 @@ msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s 隊得到 %u 炸彈了！"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -234,7 +234,7 @@ msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s 隊得到 %u 足球炸彈！"
 
-#: src/weapon/grapple.cpp:766
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -267,7 +267,7 @@ msgid_plural ""
 "software!"
 msgstr[0] "%s 隊得到 %u 低重力了！"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -303,7 +303,7 @@ msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s 隊拿到 %u 拍子了！快竄！"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -374,7 +374,7 @@ msgstr "(未知時間)"
 msgid "(unlimited)"
 msgstr "(無限的)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -390,7 +390,7 @@ msgstr "空襲"
 msgid "Airhammer"
 msgstr "飛錘"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "全部的隊伍"
 
@@ -538,7 +538,7 @@ msgstr "點擊：鏡頭調校角色"
 msgid "Client mode"
 msgstr "用戶端型態 "
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "最笨手笨腳的"
 
@@ -570,11 +570,11 @@ msgstr "已連線！"
 msgid "Connected players: "
 msgstr "連線的玩家："
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "建筑工具"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "控制者: "
 
@@ -629,7 +629,7 @@ msgstr "游戲結束"
 msgid "Effects volume"
 msgstr "音效大小"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "能量"
 
@@ -744,7 +744,7 @@ msgstr "Gnu-北美野牛發射器"
 msgid "Graphics"
 msgstr "影像"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "飛索"
 
@@ -756,7 +756,7 @@ msgstr "重力"
 msgid "Grenade"
 msgstr "手雷"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "地面搆建中。。。"
 
@@ -958,7 +958,7 @@ msgstr "最大能量"
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "地雷"
 
@@ -966,23 +966,23 @@ msgstr "地雷"
 msgid "Misc"
 msgstr "其他"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "最准"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "最賣力的"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "最有價值的"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "最失敗的"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "最暴力的"
 
@@ -1031,7 +1031,7 @@ msgstr "網上游戲"
 msgid "New player warning?"
 msgstr "新玩家警告？"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "沒找到 <%s>重點 xml配置檔案 ！"
@@ -1223,7 +1223,7 @@ msgstr "慢步精准"
 msgid "Sniper Rifle"
 msgstr "狙擊步槍"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "有人在箱子裡布置了炸彈作禮物！"
 
@@ -1283,11 +1283,11 @@ msgstr "注射器"
 msgid "Talk in network battles"
 msgstr "網路戰斗中對話"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "隊伍圖示"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "隊伍狀態"
 
@@ -1379,7 +1379,7 @@ msgstr "伺服器拒絕"
 msgid "The server rejected the connection: wrong password!"
 msgstr "伺服器拒絕: 密碼錯了。"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1392,7 +1392,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "只有%i隊"
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "時間"
 
@@ -1453,7 +1453,7 @@ msgstr "無限"
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "版本改變失敗原因: %s"
@@ -1519,7 +1519,7 @@ msgid "Wind particles?"
 msgstr "風來了?"
 
 #
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "勝者"
 
@@ -1571,7 +1571,7 @@ msgstr "至少有2組才能開始 ！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "沒有隊伍，就不會有戰斗！"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 
@@ -1600,7 +1600,7 @@ msgstr "無法讀取設定"
 msgid "custom player"
 msgstr "玩家設定"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "成"
 
@@ -1617,16 +1617,16 @@ msgstr "從"
 msgid "no configuration file!"
 msgstr "沒有配置檔案！"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o 讀取音樂"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o讀取音樂檔案 : %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
