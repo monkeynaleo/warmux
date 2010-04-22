@@ -56,7 +56,7 @@ msgstr "Equipe %s"
 msgid "%s Team - Remote"
 msgstr "Equipe %s - Remoto"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
@@ -110,7 +110,7 @@ msgstr[1] "%s ganhou %u pontos de energia!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s é um psicopata, ele matou um jogador da equipe %s !"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s está perto de uma mina!"
@@ -121,7 +121,7 @@ msgid "%s needs a pause."
 msgstr "%s precisa de uma pausa."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A equipe %s já possui munição infinita para %s!"
@@ -224,7 +224,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "A equipe '%s' ganhou %u bomba de agrupamento!"
 msgstr[1] "A equipe '%s' ganhou %u bombas de agrupamento!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -250,7 +250,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "A equipe '%s' ganhou %u dinamite!"
 msgstr[1] "A equipe '%s' ganhou %u dinamites!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -264,7 +264,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "A equipe '%s' ganhou %u futebomba!"
 msgstr[1] "A equipe '%s' ganhou %u futebombas!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -306,7 +306,7 @@ msgstr[1] ""
 "A equipe '%s' ganhou %u baixa gravidade! Pequeno passo para um homem, grande "
 "salto para o software livre!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -350,7 +350,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "A equipe '%s' ganhou %u tapa!"
 msgstr[1] "A equipe '%s' ganhou %u tapas!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -433,7 +433,7 @@ msgstr "(tempo desconhecido)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -450,7 +450,7 @@ msgstr "Ataque aéreo"
 msgid "Airhammer"
 msgstr "Britadeira"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Todas as equipes"
 
@@ -591,7 +591,7 @@ msgstr "Clique: Centralizar câmera no personagem"
 msgid "Client mode"
 msgstr "Modo de cliente"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Mais desajeitado"
 
@@ -623,11 +623,11 @@ msgstr "Conectado !"
 msgid "Connected players: "
 msgstr "Jogadores conectados:"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Construir"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Controlado por: "
 
@@ -681,7 +681,7 @@ msgstr "FIM DO JOGO"
 msgid "Effects volume"
 msgstr "Volume de efeitos"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Energia"
 
@@ -804,7 +804,7 @@ msgstr "Lançador Gnu"
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Gancho"
 
@@ -816,7 +816,7 @@ msgstr "Gravidade"
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Inicialização do terreno..."
 
@@ -1015,7 +1015,7 @@ msgstr "Energia Máxima"
 msgid "Maximum FPS"
 msgstr "FPS Máximo"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Mina"
 
@@ -1023,23 +1023,23 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Misc"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Mais preciso"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Mais interessante"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Mais útil"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Mais inútil"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Mais violento"
 
@@ -1084,7 +1084,7 @@ msgstr "Novo jogo em rede "
 msgid "New player warning?"
 msgstr "Aviso ao novo jogador?"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elemento <%s> não encontrado no arquivo de configuração xml!"
@@ -1270,7 +1270,7 @@ msgstr "Ângulo de mira pequeno e andar em passos"
 msgid "Sniper Rifle"
 msgstr "Rifle Sniper"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Alguém colocou uma armadilha no caixote!"
 
@@ -1329,11 +1329,11 @@ msgstr "Seringa"
 msgid "Talk in network battles"
 msgstr "Falar em batalha multiplayer"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Gráfico das equipes"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Estatísticas das equipes"
 
@@ -1420,7 +1420,7 @@ msgstr "O servidor rejeitou a conexão."
 msgid "The server rejected the connection: wrong password!"
 msgstr "O servidor rejeitou a conexão: senha incorreta!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1436,7 +1436,7 @@ msgstr[0] "Existe apenas %i equipe"
 msgstr[1] "Existe apenas %i equipes"
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Time"
 
@@ -1495,7 +1495,7 @@ msgstr "Ilimitado"
 msgid "Version"
 msgstr "Versão"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verificação de versão falhou porque: %s"
@@ -1559,7 +1559,7 @@ msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
 msgid "Wind particles?"
 msgstr "Partículas de vento?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Vencedor"
 
@@ -1607,7 +1607,7 @@ msgstr "Você precisa de pelo menos duas equipes válidas!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Você não conseguirá jogar antes de selecionar uma equipe!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Você errou o tiro!"
 
@@ -1634,7 +1634,7 @@ msgstr "falha ao carregar configuração"
 msgid "custom player"
 msgstr "jogador custumisado"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "pronto"
 
@@ -1650,16 +1650,16 @@ msgstr "de"
 msgid "no configuration file!"
 msgstr "arquivo de configuração não encontrado!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Carregando música"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Carregando perfil de som: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio carregado a %d Hz %d bit"

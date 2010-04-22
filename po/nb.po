@@ -55,7 +55,7 @@ msgstr "%s -laget"
 msgid "%s Team - Remote"
 msgstr "%s -laget - Fjernstyrt"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s bps"
@@ -109,7 +109,7 @@ msgstr[1] "%s har fått %u livspoeng !"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s er i nærheten av en mine !"
@@ -120,7 +120,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s-laget har allere uendelig med ammunisjon for %s !"
@@ -223,7 +223,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s-laget har vunnet %u klasebombe !"
 msgstr[1] "%s-laget har vunnet %u klasebomber !"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -245,7 +245,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s-laget har vunnet %u Dynamittkubbe !"
 msgstr[1] "%s-laget har vunnet %u Dynamittkubber !"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -259,7 +259,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s-laget har vunnet %u fotballbombe !"
 msgstr[1] "%s-laget har vunnet %u fotballbomber !"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -298,7 +298,7 @@ msgstr[0] "%s-laget har vunnet %u lavgravitetsmaskin, Jeg er Niel Armstrong !"
 msgstr[1] ""
 "%s-laget har vunnet %u lavgravitetsmaskiner, Jeg er Niel Armstrong !"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -340,7 +340,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s-laget har vunnet %u slag !"
 msgstr[1] "%s-laget har vunnet %u slag !"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -424,7 +424,7 @@ msgstr "(ukjent tid)"
 msgid "(unlimited)"
 msgstr "(uendelig)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -441,7 +441,7 @@ msgstr "Luftangrep"
 msgid "Airhammer"
 msgstr "Lufthammer"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Alle lag"
 
@@ -589,7 +589,7 @@ msgstr "Antall lagmedlemmer"
 msgid "Client mode"
 msgstr "Mottagermodus"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Mest klønete"
 
@@ -623,11 +623,11 @@ msgstr "Tilkoblet !"
 msgid "Connected players: "
 msgstr "Tilkoblet !"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Konstruer"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Kontrollert av: "
 
@@ -681,7 +681,7 @@ msgstr "Spillet er slutt"
 msgid "Effects volume"
 msgstr "Effektsvolum"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Liv"
 
@@ -801,7 +801,7 @@ msgstr "Gnu-kaster"
 msgid "Graphics"
 msgstr "Grafikk"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Entrehaker"
 
@@ -813,7 +813,7 @@ msgstr "Tyngdekraft"
 msgid "Grenade"
 msgstr "Granat"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Laster kart ..."
 
@@ -1010,7 +1010,7 @@ msgstr "Livspoeng ved start"
 msgid "Maximum FPS"
 msgstr "Maksimum BPS"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Mine"
 
@@ -1018,23 +1018,23 @@ msgstr "Mine"
 msgid "Misc"
 msgstr "Diverse"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Mest treffsikker"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Mest utsolgt"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Mest brukbar"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Mest ubrukbar"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Mest voldelig"
 
@@ -1082,7 +1082,7 @@ msgstr "Nytt nettverksspill på"
 msgid "New player warning?"
 msgstr ""
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ikke noe element <%s> kunne bli funnet i konfigurasjonsfilet for XML !"
@@ -1273,7 +1273,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr "Snikskytterrifle"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Noen har plassert en felle i krateret!"
 
@@ -1331,11 +1331,11 @@ msgstr "Sprøyte"
 msgid "Talk in network battles"
 msgstr "Tilbake til slaget"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Laggrafer"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Lagstatistikk"
 
@@ -1429,7 +1429,7 @@ msgstr "Tjeneren nektet tilkoblingen"
 msgid "The server rejected the connection: wrong password!"
 msgstr "Tjeneren nektet tilkoblingen: feil passord!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1443,7 +1443,7 @@ msgstr[0] "Det er i øyeblikket %i lag."
 msgstr[1] "Det er i øyeblikket %i lag."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Tid"
 
@@ -1503,7 +1503,7 @@ msgstr "(uendelig)"
 msgid "Version"
 msgstr "Versjon"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versjonsjekken feilet fordi: %s\n"
@@ -1567,7 +1567,7 @@ msgstr "For en skam for %s : han ble drept av en liten pistol !"
 msgid "Wind particles?"
 msgstr "Vindpartikler ?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Vinner"
 
@@ -1619,7 +1619,7 @@ msgstr "Du må ha minst to godkjente lag!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kan ikke spille uten å ha valgt et lag"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Du bommet"
 
@@ -1645,7 +1645,7 @@ msgstr "Kunne ikke laste konfigurasjonsfilen"
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "ferdig"
 
@@ -1661,16 +1661,16 @@ msgstr "fra"
 msgid "no configuration file!"
 msgstr "Konfigurasjonsfilen ble ikke funnet!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Laster musikk"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Kunne ikke laste lydprofilen : %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åpnet lydfilen på %d Hz %d bit"

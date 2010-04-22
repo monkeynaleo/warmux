@@ -58,7 +58,7 @@ msgstr "Para %s"
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s imaj/s"
@@ -114,7 +114,7 @@ msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "Yma %s ogas dhe grampothen dardhus!"
@@ -125,7 +125,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
@@ -258,7 +258,7 @@ msgstr[1] "Para %s re waynyas %u danbellen omvrewus!"
 msgstr[2] "Para %s re waynyas %u thanbellen omvrewus!"
 msgstr[3] "Para %s re waynyas %u tanbellen omvrewus!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -293,7 +293,7 @@ msgstr[1] "Para %s re waynyas %u bren a dhynamit!"
 msgstr[2] "Para %s re waynyas %u fren a dhynamit!"
 msgstr[3] "Para %s re waynyas %u pren a dhynamit!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -311,7 +311,7 @@ msgstr[1] "Para %s re waynyas %u danbellen beldroos!"
 msgstr[2] "Para %s re waynyas %u thanbellen beldroos!"
 msgstr[3] "Para %s re waynyas %u tanbellen beldroos!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -359,7 +359,7 @@ msgstr[1] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[2] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 msgstr[3] "Para %s re waynyas %u iselgrav! Neil Armstrong o'ma!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -413,7 +413,7 @@ msgstr[1] "Para %s re waynyas %u veltynk! Skap hemma!"
 msgstr[2] "Para %s re waynyas %u beltynk! Skap hemma!"
 msgstr[3] "Para %s re waynyas %u beltynk! Skap hemma!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -513,7 +513,7 @@ msgstr "(prys ankoth)"
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -530,7 +530,7 @@ msgstr "Omsettyans Ayr"
 msgid "Airhammer"
 msgstr "Morthol-Ayr"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Pub para"
 
@@ -678,7 +678,7 @@ msgstr "Klyck: Kresenni kamera war berson"
 msgid "Client mode"
 msgstr "Modh omajer"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Brassa lorden"
 
@@ -710,11 +710,11 @@ msgstr "Junys!"
 msgid "Connected players: "
 msgstr "Gwarioryon junys: "
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Daffar drehevel"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Kontrolys gans: "
 
@@ -769,7 +769,7 @@ msgstr "DIWEDH AN GWARI"
 msgid "Effects volume"
 msgstr "Sonradh an effeythyow son"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Nerth"
 
@@ -888,7 +888,7 @@ msgstr "Lonchyer-Gnu"
 msgid "Graphics"
 msgstr "Grafek"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Grabel"
 
@@ -900,7 +900,7 @@ msgstr "Gravedh"
 msgid "Grenade"
 msgstr "Pinaval tardhus"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Ow tarbari an grond..."
 
@@ -1105,7 +1105,7 @@ msgstr "Brassa nerth"
 msgid "Maximum FPS"
 msgstr "Brassa niver a skeusennow orth an eylen"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Krampothen dardhus"
 
@@ -1113,23 +1113,23 @@ msgstr "Krampothen dardhus"
 msgid "Misc"
 msgstr "Kemyskys"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Moyha kewar"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Brassa traytour"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Moyha dhe les"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Moyha heb les"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Moyha freudhek"
 
@@ -1178,7 +1178,7 @@ msgstr "Gwari rosweyth nowyth orth "
 msgid "New player warning?"
 msgstr "Gwarnyans gwarier nowyth?"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ny gavas elven <%s> yn restren restransow xml!"
@@ -1370,7 +1370,7 @@ msgstr "Lehe elin medra ha kamm kerdhes"
 msgid "Sniper Rifle"
 msgstr "Kelsethwon"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 
@@ -1431,11 +1431,11 @@ msgstr "Skitel"
 msgid "Talk in network battles"
 msgstr "Keskewsel yn kas rosweyth"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Grafow an paraow"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Stats an paraow"
 
@@ -1529,7 +1529,7 @@ msgstr "An servyer a nahas an junyans."
 msgid "The server rejected the connection: wrong password!"
 msgstr "An servyer a nahas an junyans: ger-tremena kamm!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1545,7 +1545,7 @@ msgstr[2] "Nyns eus saw %i para."
 msgstr[3] "Nyns eus saw %i para."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Termyn"
 
@@ -1607,7 +1607,7 @@ msgstr "Heb finwedh"
 msgid "Version"
 msgstr "Versyon"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
@@ -1675,7 +1675,7 @@ msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
 msgid "Wind particles?"
 msgstr "Manylyon gwyns?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Gwaynyer"
 
@@ -1727,7 +1727,7 @@ msgstr "Res yw bos dhe'n leha dew bara da!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Ny yllydh gwari kyns dewis para!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
@@ -1755,7 +1755,7 @@ msgstr "Ny allas karga an dewisyansow"
 msgid "custom player"
 msgstr "gwarier personelhes"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "kowlwrys"
 
@@ -1771,16 +1771,16 @@ msgstr "a"
 msgid "no configuration file!"
 msgstr "Ny gavas an restren-dhewisyansow!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Ow karga an ilow"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ow karga an profil-son: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"

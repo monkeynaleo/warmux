@@ -56,7 +56,7 @@ msgstr "Meeskond %s"
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s kaadrit/sek"
@@ -110,7 +110,7 @@ msgstr[1] "%s võitis %u elupunkti!"
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s seisab miini kõrval!"
@@ -121,7 +121,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Meeskonnal %s on nüüd %s jaoks lõputult laskemoona!"
@@ -224,7 +224,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Meeskond %s võitis %u kildgranaadi!"
 msgstr[1] "Meeskond %s võitis %u kildgranaati!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -246,7 +246,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Meeskond %s võitis %u dünamiidi!"
 msgstr[1] "Meeskond %s võitis %u dünamiiti!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -260,7 +260,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Meeskond %s võitis %u jalgpommi!"
 msgstr[1] "Meeskond %s võitis %u jalgpommi!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -298,7 +298,7 @@ msgid_plural ""
 msgstr[0] "Meeskond %s võitis %u antigravikiivri! Ema on sul Neil Armstrong!"
 msgstr[1] "Meeskond %s võitis %u antigravikiivri! Ema on sul Neil Armstrong!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -340,7 +340,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "Meeskond %s on võitnud %u litaka!"
 msgstr[1] "Meeskond %s on võitnud %u litakat!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -420,7 +420,7 @@ msgstr "(teadmata aeg)"
 msgid "(unlimited)"
 msgstr "(piiramatu)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -437,7 +437,7 @@ msgstr "Õhurünnak"
 msgid "Airhammer"
 msgstr "Suruõhuhaamer"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Kõik meeskonnad"
 
@@ -586,7 +586,7 @@ msgstr "Klõpsa: Fokuseeri kaamera tegelaskujul"
 msgid "Client mode"
 msgstr "Kliendire¸iim"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "Lollakaim"
 
@@ -618,11 +618,11 @@ msgstr "Ühendatud!"
 msgid "Connected players: "
 msgstr "Ühendet mängijaid:"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Ehitusplokk"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Pealik:"
 
@@ -677,7 +677,7 @@ msgstr "MÄNGU LÕPP"
 msgid "Effects volume"
 msgstr "Heliefektide valjus"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Elupunktid"
 
@@ -794,7 +794,7 @@ msgstr "Gnuheitja"
 msgid "Graphics"
 msgstr "Graafika"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Pootshaak"
 
@@ -806,7 +806,7 @@ msgstr "Gravitatsioon"
 msgid "Grenade"
 msgstr "Granaat"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Sätin mänguvälja..."
 
@@ -1009,7 +1009,7 @@ msgstr "Elupunkte maksimaalselt"
 msgid "Maximum FPS"
 msgstr "Kaadrit/sek ülempiir"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Miin"
 
@@ -1017,23 +1017,23 @@ msgstr "Miin"
 msgid "Misc"
 msgstr "Täppisseaded"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Täpseim"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "Reeturlikem"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "Kasulikem"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "Kasutuim"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "Vägivaldseim"
 
@@ -1082,7 +1082,7 @@ msgstr "Uus võrgumäng asukohas"
 msgid "New player warning?"
 msgstr "Hoiatus uue mängija puhul?"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Ei leia elementi <%s> XML-seadistuste säilikust!"
@@ -1274,7 +1274,7 @@ msgstr "Väiksem sihtimisnurk ja liikumissamm"
 msgid "Sniper Rifle"
 msgstr "Täpsuspüss"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Keegi oli na üllatuse kasti pistnud!"
 
@@ -1334,11 +1334,11 @@ msgstr "Süstal"
 msgid "Talk in network battles"
 msgstr "Lobise võrgulahingus"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Meeskonnagraafikud"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Meeskonnastatistika"
 
@@ -1432,7 +1432,7 @@ msgstr "Server keeldus ühendusest."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Server keeldus ühendusest: vale salasõna!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1446,7 +1446,7 @@ msgstr[0] "On vaid %i meeskond."
 msgstr[1] "On vaid %i meeskonda."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Aeg"
 
@@ -1507,7 +1507,7 @@ msgstr "Piiramatu"
 msgid "Version"
 msgstr "Väljalase"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Väljalaske kontrollimine kukkus läbi, sest: %s\n"
@@ -1573,7 +1573,7 @@ msgstr "Häbilugu! %s lasti lihtsalt püstoliga maha!"
 msgid "Wind particles?"
 msgstr "Tuuleosakesed?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Võitja"
 
@@ -1625,7 +1625,7 @@ msgstr "Sul on vaja vähemalt kahte meeskonda!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Sa ei saa mängida enne, kui oled meeskonna valinud!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Mööda lasid!"
 
@@ -1653,7 +1653,7 @@ msgstr "ei suutnud laadida seadistusi"
 msgid "custom player"
 msgstr "kohandet mängija"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "valmis"
 
@@ -1669,16 +1669,16 @@ msgstr "asukohast"
 msgid "no configuration file!"
 msgstr "seadistusi ei leitud!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Laadin muusikat"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Laadin heliprofiili: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio sätitud %d Hz ja %d biti peale"

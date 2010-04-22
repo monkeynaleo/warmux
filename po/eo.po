@@ -56,7 +56,7 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/graphic/fps.cpp:103
+#: src/graphic/fps.cpp:99
 #, c-format
 msgid "%s fps"
 msgstr "%s bildoj po sekundo (fps)"
@@ -110,7 +110,7 @@ msgstr[1] "%s gajnis %u energiajn poentojn."
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
 
-#: src/weapon/mine.cpp:120
+#: src/weapon/mine.cpp:121
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino..."
@@ -121,7 +121,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:69
+#: src/object/bonus_box.cpp:70
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s teamo jam havas senlimajn municiojn por la %s!"
@@ -223,7 +223,7 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "%s teamo gajnis %u disgrenadon!"
 msgstr[1] "%s teamo gajnis %u disgrenadojn!"
 
-#: src/weapon/construct.cpp:83
+#: src/weapon/construct.cpp:84
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -245,7 +245,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s teamo gajnis %u dinamitan bastonon!"
 msgstr[1] "%s teamo gajnis %u dinamitajn bastonojn!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:196
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -259,7 +259,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s teamo gajnis %u futbalbombon!"
 msgstr[1] "%s teamo gajnis %u futbalbombojn!"
 
-#: src/weapon/grapple.cpp:718
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -297,7 +297,7 @@ msgid_plural ""
 msgstr[0] "%s teamo gajnis %u malpezigilon! Mi estas Neil Armstrong!"
 msgstr[1] "%s teamo gajnis %u malpezigilojn! Mi estas Neil Armstrong!"
 
-#: src/weapon/mine.cpp:256
+#: src/weapon/mine.cpp:258
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -339,7 +339,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s teamo gajnis %u vangofrapon! Evitu tion!"
 msgstr[1] "%s teamo gajnis %u vangofrapojn! Evitu tion!"
 
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -421,7 +421,7 @@ msgstr "(nekonata tempo)"
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
-#: src/menu/options_menu.cpp:463
+#: src/menu/options_menu.cpp:464
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -438,7 +438,7 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr "Pneŭmatika martelo"
 
-#: src/menu/results_menu.cpp:426
+#: src/menu/results_menu.cpp:429
 msgid "All teams"
 msgstr "Ĉiuj teamoj"
 
@@ -587,7 +587,7 @@ msgstr "Klako: Centrigi la kameraon ĉe la ulo"
 msgid "Client mode"
 msgstr "Klientmodo"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Clumsiest"
 msgstr "La plej mallerta"
 
@@ -620,11 +620,11 @@ msgstr "Konektita!"
 msgid "Connected players: "
 msgstr "Konektita!"
 
-#: src/weapon/construct.cpp:60 src/weapon/construct.cpp:69
+#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
 msgstr "Konstruilo"
 
-#: src/menu/results_menu.cpp:391
+#: src/menu/results_menu.cpp:394
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
@@ -679,7 +679,7 @@ msgstr "LUDFINO"
 msgid "Effects volume"
 msgstr "Laŭteco de efektoj"
 
-#: src/menu/results_menu.cpp:328
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Energio"
 
@@ -797,7 +797,7 @@ msgstr "Gnuĵetilo"
 msgid "Graphics"
 msgstr "Grafikoj"
 
-#: src/weapon/grapple.cpp:171
+#: src/weapon/grapple.cpp:172
 msgid "Grapple"
 msgstr "Alkroĉilo"
 
@@ -809,7 +809,7 @@ msgstr "Gravito"
 msgid "Grenade"
 msgstr "Grenado"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:51
 msgid "Ground initialization..."
 msgstr "Preparante la grundon..."
 
@@ -1011,7 +1011,7 @@ msgstr "Maks energio"
 msgid "Maximum FPS"
 msgstr "Maksimumaj bildoj po sekundo (fps)"
 
-#: src/weapon/mine.cpp:212
+#: src/weapon/mine.cpp:214
 msgid "Mine"
 msgstr "Mino"
 
@@ -1019,23 +1019,23 @@ msgstr "Mino"
 msgid "Misc"
 msgstr "Diversaĵoj"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "La plej akurata"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most sold-out"
 msgstr "La plej perfida"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most useful"
 msgstr "La plej utila"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useless"
 msgstr "La plej malutila"
 
-#: src/menu/results_menu.cpp:136 src/menu/results_menu.cpp:138
+#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
 msgid "Most violent"
 msgstr "La plej perforta"
 
@@ -1084,7 +1084,7 @@ msgstr "Nova reta ludo ĉe"
 msgid "New player warning?"
 msgstr "Ĉu averti pri nova ludanto?"
 
-#: src/weapon/weapon.cpp:661
+#: src/weapon/weapon.cpp:662
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Neniu ero <%s> trovita en la XML dosiero de agordo!"
@@ -1277,7 +1277,7 @@ msgstr "Pli malgranda celangulo kaj paŝo"
 msgid "Sniper Rifle"
 msgstr "Tiraljora fusilo"
 
-#: src/object/bonus_box.cpp:57
+#: src/object/bonus_box.cpp:58
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
@@ -1337,11 +1337,11 @@ msgstr "Injektilo"
 msgid "Talk in network battles"
 msgstr "Babili dum reta batalo"
 
-#: src/menu/results_menu.cpp:431
+#: src/menu/results_menu.cpp:434
 msgid "Team graphs"
 msgstr "Teamaj grafikaĵoj"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:432
 msgid "Team stats"
 msgstr "Teamaj statistikoj"
 
@@ -1435,7 +1435,7 @@ msgstr "La servilo forĵetis la konekton."
 msgid "The server rejected the connection: wrong password!"
 msgstr "La servilo forĵetis la konekton pro malbona pasvorto!"
 
-#: src/weapon/weapon.cpp:673
+#: src/weapon/weapon.cpp:674
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1449,7 +1449,7 @@ msgstr[0] "Estas nur %i teamo."
 msgstr[1] "Estas nur %i teamoj."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:329
 msgid "Time"
 msgstr "Tempo"
 
@@ -1509,7 +1509,7 @@ msgstr "(senlimaj)"
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:471
+#: src/menu/options_menu.cpp:472
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
@@ -1574,7 +1574,7 @@ msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
 msgid "Wind particles?"
 msgstr "Venterojn?"
 
-#: src/menu/results_menu.cpp:383
+#: src/menu/results_menu.cpp:386
 msgid "Winner"
 msgstr "Gajnanto"
 
@@ -1626,7 +1626,7 @@ msgstr "Vi bezonas almenaŭ du teamojn!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:546
 msgid "Your shot has missed!"
 msgstr "Vi mispafis!"
 
@@ -1654,7 +1654,7 @@ msgstr "ne eblis ŝargi agordon"
 msgid "custom player"
 msgstr "propra lundanto"
 
-#: src/map/ground.cpp:60
+#: src/map/ground.cpp:68
 msgid "done"
 msgstr "farita"
 
@@ -1670,16 +1670,16 @@ msgstr "el"
 msgid "no configuration file!"
 msgstr "neniu agordodosiero!"
 
-#: src/sound/jukebox.cpp:167
+#: src/sound/jukebox.cpp:168
 msgid "o Loading music"
 msgstr "o Legante muzikon"
 
-#: src/sound/jukebox.cpp:355
+#: src/sound/jukebox.cpp:356
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Legante sonan profilon: %s"
 
-#: src/sound/jukebox.cpp:89
+#: src/sound/jukebox.cpp:90
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
