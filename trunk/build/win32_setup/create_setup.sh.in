@@ -37,16 +37,7 @@ else VIPV="@PACKAGE_VERSION@"; fi
 
 mkdir -p $DEST
 
-function pkg_path
-{
-  if [ -z "$1" ]; then return ""; fi
-  var=$(@PACKAGE_CONFIG@ --variable=prefix $1 2>/dev/null || exit 1)
-  if [ -z "$var" ]; then echo "Couldn't find $1, aborting..." 1>&2; exit 1; fi
-  echo "Found $1 in $var" 1>&2
-  echo "$var"
-}
-
-if ! @PACKAGE_CONFIG@ --help 2>/dev/null 1>&2 ; then
+if ! pkg-config --help 2>/dev/null 1>&2 ; then
   echo "pkg-config not found, aborting..."
   exit 1
 fi
@@ -320,10 +311,12 @@ EOF
 # Files that must not be stripped (all MSVC, mainly SDL and vorbis)
 # Make sure freetype, libpng and jpeg dll are matching your libs.
 SDL_PATH=$(@SDL_CONFIG@ --prefix)
+PNG_PATH=$(pkg-config --variable=prefix libpng)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll       \
-   "$SDL_PATH/bin/"{zlib1,jpeg62}.dll                      \
-   "$SDL_PATH/bin/"lib{png3,intl3,iconv2,freetype-6}.dll   \
-   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3,curl-4}.dll "$DEST"
+   "$PNG_PATH/bin/"{intl,iconv,freetype6}.dll              \
+   "$PNG_PATH/bin/"lib{png14-14,jpeg-7}.dll                \
+   "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll    \
+   "$SDL_PATH/bin/zlib1.dll" "$DEST"
 
 # Continue producing installer
 cat >> $NSIS <<EOF
