@@ -76,12 +76,15 @@ public:
 private:
    Sprite *background;
    Widget *selected_widget;
- 
+
+   void LoadBackground(Profile * profile,
+                       const xmlNode * rootMenuNode);
+
    // Recursive function wich load the widgets, and fill the containers widgets.
    void LoadWidget(Profile * profile,
                    const xmlNode * rootMenuNode,
                    WidgetList * container);
-   
+
    // Detect and instanciate a widget.
    Widget * CreateWidget(Profile * profile,
                          const xmlNode * rootMenuNode,
