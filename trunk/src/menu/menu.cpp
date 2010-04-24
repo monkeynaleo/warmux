@@ -102,8 +102,21 @@ Menu::~Menu()
 void Menu::LoadMenu(Profile * profile,
                     const xmlNode * rootMenuNode) 
 {
+  LoadBackground(profile, rootMenuNode);
   LoadWidget(profile, rootMenuNode, &widgets);
   widgets.Pack();
+}
+
+void Menu::LoadBackground(Profile * profile,
+                          const xmlNode * rootMenuNode)
+{
+  XmlReader * xmlFile = profile->GetXMLDocument();
+  std::string file("menu/pic_not_found.png");
+  xmlFile->ReadStringAttr(rootMenuNode, "backgroundPicture", file);
+  file = profile->relative_path + file;
+  Surface surface(file.c_str());
+  background = new Sprite(surface, true);
+  background->cache.EnableLastFrameCache();
 }
 
 void Menu::LoadWidget(Profile * profile,
