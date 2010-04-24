@@ -79,10 +79,24 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
+Menu::Menu(void) :
+  widgets(),
+  actions(vNo),
+  background(NULL),
+  selected_widget(NULL),
+  b_cancel(NULL),
+  b_ok(NULL),
+  close_menu(false),
+  actions_buttons(NULL)
+{
+}
+
 Menu::~Menu()
 {
   AppWormux::GetInstance()->SetCurrentMenu(NULL);
-  delete background;
+  if (NULL != background) {
+    delete background;
+  }
 }
 
 void Menu::LoadMenu(Profile * profile,
@@ -259,12 +273,18 @@ void Menu::DisplayError(const std::string & msg)
 
 void Menu::DrawBackground()
 {
+  if (NULL == background) {
+    return;
+  }
   background->ScaleSize(GetMainWindow().GetSize());
   background->Blit(GetMainWindow(), 0, 0);
 }
 
 void Menu::RedrawBackground(const Rectanglei & rect)
 {
+  if (NULL == background) {
+    return;
+  }
   background->Blit(GetMainWindow(), rect, rect.GetPosition());
 }
 
