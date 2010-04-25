@@ -198,7 +198,9 @@ bool GridBox::LoadXMLConfiguration(void)
   ParseXMLSize();
   ParseXMLBoxParameters();
 
-  widget_size = GetSize();
+  int subWidgetHeight = Widget::ParseVerticalTypeAttribut("subWidgetHeight", 100);
+  int subWidgetWidth  = Widget::ParseHorizontalTypeAttribut("subWidgetWidth", 100);
+  widget_size = Point2i(subWidgetWidth, subWidgetHeight);
 
   return true;
 }
