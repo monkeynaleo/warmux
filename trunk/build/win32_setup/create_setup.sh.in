@@ -314,7 +314,7 @@ SDL_PATH=$(@SDL_CONFIG@ --prefix)
 PNG_PATH=$(pkg-config --variable=prefix libpng)
 cp "$SDL_PATH/bin/"SDL{,_mixer,_ttf,_image,_net}.dll       \
    "$PNG_PATH/bin/"{intl,iconv,freetype6}.dll              \
-   "$PNG_PATH/bin/"lib{png14-14,jpeg-7,xml2-2,tiff-3}.dll  \
+   "$PNG_PATH/bin/"lib{png14-14,jpeg-8,xml2-2,tiff-3}.dll  \
    "$SDL_PATH/bin/"lib{ogg-0,vorbis-0,vorbisfile-3}.dll    \
    "$SDL_PATH/bin/zlib1.dll" "$DEST"
 
