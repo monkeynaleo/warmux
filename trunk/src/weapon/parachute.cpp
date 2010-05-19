@@ -87,7 +87,6 @@ void Parachute::p_Deselect()
 
 bool Parachute::p_Shoot()
 {
-  m_used_this_turn = false;
   GameMessages::GetInstance()->Add(_("The parachute is activated automatically."));
   return false;
 }
@@ -118,7 +117,7 @@ void Parachute::Refresh()
 
   if(ActiveCharacter().FootsInVacuum() && speed != ZERO) { // We are falling
     if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
-      if(EnoughAmmo()) { // We have enough ammo => start opening the parachute
+      if (EnoughAmmo() && !m_used_this_turn) { // We have enough ammo => start opening the parachute
         if(!m_used_this_turn)
         {
           UseAmmo();
@@ -153,6 +152,7 @@ void Parachute::Refresh()
         }
       }
     }
+    m_used_this_turn = false;
   }
   if (open) {
     ActiveCharacter().UpdateLastMovingTime();
