@@ -48,6 +48,7 @@ PictureTextCBox::PictureTextCBox(const std::string & label,
   m_value = value;
 
   Text::SetMaxWidth(size.x);
+  SetSize(_size);
 }
 
 PictureTextCBox::PictureTextCBox(Profile * profile,
