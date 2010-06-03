@@ -59,7 +59,7 @@ public:
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   // to add a widget
-  void AddWidget(Widget* widget);
+  virtual void AddWidget(Widget* widget);
   void RemoveWidget(Widget* w);
 
   // Navigate between widget with keyboard
