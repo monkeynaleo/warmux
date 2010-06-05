@@ -65,7 +65,7 @@ OptionMenu::OptionMenu() :
 
   /* Tabs */
   MultiTabs * tabs = new MultiTabs(Point2i(max_width,
-					   app->video->window.GetHeight()-100));
+                                           app->video->window.GetHeight()-100));
   tabs->SetPosition(25, 25);
 
   /* Graphic options */
@@ -90,9 +90,9 @@ OptionMenu::OptionMenu() :
 #endif
 
   opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-					  option_size,
-					  50, 5,
-					  20, 50);
+                                          option_size,
+                                          50, 5,
+                                          20, 50);
   graphic_options->AddWidget(opt_max_fps);
 
   // Get available video resolution
@@ -196,15 +196,15 @@ OptionMenu::OptionMenu() :
   misc_options->AddWidget(opt_updates);
 
   opt_lefthanded_mouse = new PictureTextCBox(_("Left-handed mouse?"),
-					     "menu/ico_lefthanded_mouse", option_size);
+                                             "menu/ico_lefthanded_mouse", option_size);
   misc_options->AddWidget(opt_lefthanded_mouse);
 
   opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
   misc_options->AddWidget(opt_scroll_on_border);
 
   opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
-						     option_size,
-						     50, 5, 5, 80);
+                                                     option_size,
+                                                     50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 
 
@@ -220,7 +220,7 @@ OptionMenu::OptionMenu() :
 
   initial_vol_mus = config->GetVolumeMusic();
   volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
-					   option_size,
+                                           option_size,
                                            fromVolume(initial_vol_mus), 5,
                                            0, 100);
   sound_options->AddWidget(volume_music);
@@ -230,7 +230,7 @@ OptionMenu::OptionMenu() :
 
   initial_vol_eff = config->GetVolumeEffects();
   volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
-					     option_size,
+                                             option_size,
                                              fromVolume(initial_vol_eff), 5,
                                              0, 100);
   sound_options->AddWidget(volume_effects);
@@ -251,7 +251,7 @@ OptionMenu::OptionMenu() :
     current_sound_freq = "11025";
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-				 option_size, sound_freqs, current_sound_freq);
+                                 option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 
   warn_cbox = new PictureTextCBox(_("New player warning?"), "menu/warn_on_new_player", option_size);
@@ -460,12 +460,12 @@ void OptionMenu::CheckUpdates()
       std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
       const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
       if (latest_version != cur_version) {
-	Question new_version;
-	std::string txt = Format(_("A new version %s is available, while your version is %s. "
-				   "You may want to check whether an update is available for your OS!"),
-				 latest_version.c_str(), cur_version);
-	new_version.Set(txt, true, 0);
-	new_version.Ask();
+        Question new_version;
+        std::string txt = Format(_("A new version %s is available, while your version is %s. "
+                                   "You may want to check whether an update is available for your OS!"),
+                                 latest_version.c_str(), cur_version);
+        new_version.Set(txt, true, 0);
+        new_version.Ask();
       }
   }
   catch (const std::string err) {
@@ -578,8 +578,8 @@ void OptionMenu::ReloadTeamList()
     }
 
     lbox_teams->AddItem((selected_team == custom_team_list[i]),
-			custom_team_list[i]->GetName(),
-			custom_team_list[i]->GetName());
+                        custom_team_list[i]->GetName(),
+                        custom_team_list[i]->GetName());
 
   }
 }
