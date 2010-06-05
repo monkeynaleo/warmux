@@ -72,7 +72,9 @@ class OptionMenu : public Menu
    CheckBox *warn_cbox;
 
    /* Misc options controllers */
+#ifdef HAVE_LIBCURL
    CheckBox *opt_updates;
+#endif
    CheckBox *opt_lefthanded_mouse;
    CheckBox *opt_scroll_on_border;
    SpinButtonWithPicture * opt_scroll_border_size;
