@@ -191,9 +191,11 @@ OptionMenu::OptionMenu() :
 
   /* Misc options */
   Box * misc_options = new GridBox(max_width, option_size, false);
+#ifdef HAVE_LIBCURL
   opt_updates = new PictureTextCBox(_("Check updates online?"),
                                     "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
+#endif
 
   opt_lefthanded_mouse = new PictureTextCBox(_("Left-handed mouse?"),
                                              "menu/ico_lefthanded_mouse", option_size);
@@ -312,7 +314,9 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
 
+#ifdef HAVE_LIBCURL
   opt_updates->SetValue(config->GetCheckUpdates());
+#endif
   opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
@@ -381,7 +385,9 @@ void OptionMenu::SaveOptions()
   config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
 
   // Misc options
+#ifdef HAVE_LIBCURL
   config->SetCheckUpdates(opt_updates->GetValue());
+#endif
   config->SetLeftHandedMouse(opt_lefthanded_mouse->GetValue());
 
   // Sound settings - volume already saved
@@ -435,7 +441,9 @@ void OptionMenu::SaveOptions()
 bool OptionMenu::signal_ok()
 {
   SaveOptions();
+#ifdef HAVE_LIBCURL
   CheckUpdates();
+#endif
   return true;
 }
 
@@ -450,6 +458,7 @@ void OptionMenu::Draw(const Point2i &/*mousePosition*/)
 {
 }
 
+#ifdef HAVE_LIBCURL
 void OptionMenu::CheckUpdates()
 {
   if (!Config::GetInstance()->GetCheckUpdates()
@@ -472,6 +481,7 @@ void OptionMenu::CheckUpdates()
     AppWormux::DisplayError(Format(_("Version verification failed because: %s"), err.c_str()));
   }
 }
+#endif
 
 uint OptionMenu::toVolume(uint level)
 {

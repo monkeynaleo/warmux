@@ -27,9 +27,10 @@
 #include <vector>
 #include <getopt.h>
 #ifndef WIN32
-#include <signal.h>
+# include <signal.h>
 #endif
 #include <SDL.h>
+#include "config.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_index_server.h>
 #include <WORMUX_random.h>
@@ -101,7 +102,9 @@ int AppWormux::Main(void)
   {
     DisplayLoadingPicture();
 
+#ifdef HAVE_LIBCURL
     OptionMenu::CheckUpdates();
+#endif
 
     Action_Handler_Init();
 
@@ -173,8 +176,8 @@ int AppWormux::Main(void)
   catch(const std::exception & e)
   {
     std::cerr << std::endl
-	 << "C++ exception caught:" << std::endl
-	 << e.what() << std::endl << std::endl;
+         << "C++ exception caught:" << std::endl
+         << e.what() << std::endl << std::endl;
     AppWormux::DisplayError(e.what());
     WakeUpDebugger();
   }
@@ -322,12 +325,12 @@ void PrintUsage(const char* cmd_name)
   printf("%s -v|--version : show the version\n", cmd_name);
   printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
-	 " [-s|--server] [-c|--client [ip]]\n"
-	 " [-l [ip/hostname of index server]]\n"
+         " [-s|--server] [-c|--client [ip]]\n"
+         " [-l [ip/hostname of index server]]\n"
 #ifdef WMX_LOG
-	 " [-d|--debug <debug_masks>|all]\n"
+         " [-d|--debug <debug_masks>|all]\n"
 #endif
-	 , cmd_name);
+         , cmd_name);
 #ifdef WMX_LOG
   printf("\nWith :\n");
   printf(" <debug_masks> ::= { %s }\n", used_debug_masks.c_str());
@@ -358,7 +361,7 @@ void ParseArgs(int argc, char * argv[])
       switch (c)
         {
         case 'h':
-	  PrintUsage(argv[0]);
+          PrintUsage(argv[0]);
           exit(EXIT_SUCCESS);
           break;
         case 'v':
@@ -383,7 +386,7 @@ void ParseArgs(int argc, char * argv[])
           printf("Debug: %s\n", optarg);
           AddDebugMode(optarg);
 #else
-	  fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
+          fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
 #endif
           break;
         case 's':
@@ -395,23 +398,23 @@ void ParseArgs(int argc, char * argv[])
           if (optarg) IndexServer::GetInstance()->SetAddress(optarg);
           else        IndexServer::GetInstance()->SetAddress("127.0.0.1");
           break;
-	case 'g':
-	  printf("Game-mode: %s\n", optarg);
-	  Config::GetInstance()->SetGameMode(optarg);
-	  break;
-	case 'r':
-	  {
-	    bool r;
-	    r = Config::GetInstance()->RemovePersonalConfigFile();
-	    if (!r)
-	      exit(EXIT_FAILURE);
-	    exit(EXIT_SUCCESS);
-	  }
-	  break;
-	default:
-	  fprintf(stderr, "Unknow option %c", c);
-	  PrintUsage(argv[0]);
-	  exit(EXIT_FAILURE);
+        case 'g':
+          printf("Game-mode: %s\n", optarg);
+          Config::GetInstance()->SetGameMode(optarg);
+          break;
+        case 'r':
+          {
+            bool r;
+            r = Config::GetInstance()->RemovePersonalConfigFile();
+            if (!r)
+              exit(EXIT_FAILURE);
+            exit(EXIT_SUCCESS);
+          }
+          break;
+        default:
+          fprintf(stderr, "Unknow option %c", c);
+          PrintUsage(argv[0]);
+          exit(EXIT_FAILURE);
         }
     }
 }
