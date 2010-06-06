@@ -233,7 +233,7 @@ AutomaticBazooka::~AutomaticBazooka()
 
 WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
 {
-  //return new RPG(cfg(), this);
+  return new RPG(cfg(), this);
 }
 
 void AutomaticBazooka::Draw()
