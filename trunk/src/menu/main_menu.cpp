@@ -52,7 +52,7 @@ MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
   Point2i size(120,110);
-  Box* box = new GridBox(1, 6, 0, true);
+  Box* box = new GridBox(2, 3, 16, true);
 
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
   box->AddWidget(play);
