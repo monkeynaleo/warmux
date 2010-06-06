@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!ELEMENT resources (author,description?,surface+,name,water,nb_mine,nb_barrel?,is_open,infinite_background?,(sprite,wind)?,music_playlist?) >
+<!ELEMENT resources (author,description?,surface+,name,water,nb_mine,nb_barrel?,alpha_threshold?,is_open,infinite_background?,(sprite,wind)?,music_playlist?) >
 <!ELEMENT section (author+)>
 <!ATTLIST section title CDATA #REQUIRED>
 
@@ -21,6 +21,7 @@
 <!ELEMENT is_open (#PCDATA)>
 <!ELEMENT infinite_background (#PCDATA)>
 
+<!ELEMENT alpha_threshold (#PCDATA)>
 <!ELEMENT sprite (image, animation?)>
 <!ATTLIST sprite name CDATA #REQUIRED>
 <!ELEMENT image (grid?)>

@@ -48,6 +48,7 @@ InfoMap::InfoMap(const std::string &map_name,
   preview(),
   nb_mine(4),
   nb_barrel(4),
+  alpha_threshold(255),
   is_opened(false),
   is_basic_info_loaded(false),
   is_data_loaded(false),
@@ -129,6 +130,8 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadUint(xml, "nb_mine", nb_mine);
   XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
   XmlReader::ReadBool(xml, "is_open", is_opened);
+  
+  XmlReader::ReadUint(xml, "alpha_threshold", alpha_threshold);
 
   // reading water type
   water_type = "no";
