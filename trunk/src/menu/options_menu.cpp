@@ -69,7 +69,7 @@ OptionMenu::OptionMenu() :
   tabs->SetPosition(25, 25);
 
   /* Graphic options */
-  Box * graphic_options = new GridBox(max_width, option_size, false);
+  Box * graphic_options = new GridBox(2, 4, 0, false);
 
   // Various options
   opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
@@ -114,7 +114,7 @@ OptionMenu::OptionMenu() :
   cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
                                  video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
-
+  
   tabs->AddNewTab("unused", _("Graphics"), graphic_options);
 
   /* Language selection */
@@ -146,7 +146,8 @@ OptionMenu::OptionMenu() :
 
     Point2i names_size(190, 20);
 
-    Box * teams_editor_names = new GridBox(max_width - option_size.x - 40, names_size, false);
+    Box * teams_editor_names = new GridBox(5, 2, 0, false);
+
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
@@ -190,7 +191,8 @@ OptionMenu::OptionMenu() :
   }
 
   /* Misc options */
-  Box * misc_options = new GridBox(max_width, option_size, false);
+  Box * misc_options = new GridBox(3, 3, 0, false);
+
 #ifdef HAVE_LIBCURL
   opt_updates = new PictureTextCBox(_("Check updates online?"),
                                     "menu/ico_update", option_size);
@@ -209,13 +211,10 @@ OptionMenu::OptionMenu() :
                                                      50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 
-
-
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 
-
   /* Sound options */
-  Box * sound_options = new GridBox(max_width, option_size, false);
+  Box * sound_options = new GridBox(3, 3, 0, false);
 
   music_cbox = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
   sound_options->AddWidget(music_cbox);
