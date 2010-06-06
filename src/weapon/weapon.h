@@ -347,7 +347,11 @@ public:
   // Functions to avoid dynamic_cast
   virtual void SetProjectileTimeOut(int)
   {
-    Error("Timeout can be set for non-launcher weapon");
+    Error("Timeout can be set for non-launcher weapon!");
+  }
+  virtual void SetAngle(Double)
+  {
+    Error("This weapon is not a construct!");
   }
 
 private:

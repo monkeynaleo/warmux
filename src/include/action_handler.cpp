@@ -784,13 +784,7 @@ static void Action_Weapon_StopMovingDown(Action */*a*/)
 
 static void Action_Weapon_Construction (Action *a)
 {
-  Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(construct_weapon != NULL)
-  {
-    return;
-  }
-
-  construct_weapon->SetAngle(a->PopDouble());
+  ActiveTeam().AccessWeapon().SetAngle(a->PopDouble());
 }
 
 // ########################################################
