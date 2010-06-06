@@ -98,11 +98,10 @@ std::string bol2str (bool x)
 
 #ifdef _WIN32
 #  include <windows.h>
-
 char* LocaleToUTF8(const char* data)
 {
   assert(data);
-  printf("Converting %s\n", data);
+  //printf("Converting %s\n", data);
 
   // Convert from OEM to UTF-16
   int len = 2*MultiByteToWideChar(CP_OEMCP, 0, data, -1, NULL, 0);
