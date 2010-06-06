@@ -37,12 +37,12 @@ class WeaponsList
 public:
   typedef std::list<Weapon*> weapons_list_type;
   typedef std::list<Weapon*>::const_iterator weapons_list_it;
-  typedef std::list<Weapon*> weapons_list_launcher_type;
-  typedef std::list<Weapon*>::const_iterator weapons_list_launcher_it;
+  typedef std::list<WeaponLauncher*> launcher_weapons_list_type;
+  typedef std::list<WeaponLauncher*>::const_iterator launcher_weapons_list_it;
 
 private:
   weapons_list_type m_weapons_list;
-  weapons_list_launcher_type m_launcher_weapons_list;
+  launcher_weapons_list_type m_launcher_weapons_list;
   Weapon* GetNextWeapon(uint sort, uint index);
 
 protected:
