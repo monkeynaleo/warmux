@@ -57,7 +57,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 5;
   Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2 -15);
 
-  Box * teams_grid_box = new GridBox(teams_box_w, team_box_size, false);
+  Box * teams_grid_box = new GridBox(2, 2, 16, false);
   teams_grid_box->SetNoBorder();
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
@@ -68,12 +68,10 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     teams_selections.push_back(new TeamBox(player_name, team_box_size));
     teams_grid_box->AddWidget(teams_selections.at(i));
   }
-
   AddWidget(teams_grid_box);
 
   // Load Teams' list
   GetTeamsList().full_list.sort(compareTeams);
-
 
   // initialize teams
   if (network) {

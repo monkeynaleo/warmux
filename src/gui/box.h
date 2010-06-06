@@ -78,21 +78,32 @@ public:
 class GridBox : public Box
 {
 private:
-  uint max_line_width;
-  Point2i widget_size;
-  uint last_line;
-  uint last_column;
+  bool autoResize;
+  uint fixedMargin;
+  uint lines;
+  uint columns;
+  Widget *** grid;
 
   uint NbWidgetsPerLine(uint nb_total_widgets);
-  void PlaceWidget(Widget * a_widget, uint line, uint column);
+  void PlaceWidget(Widget * widget, 
+                   uint line, 
+                   uint column);
+  int GetMaxHeightByLine(uint line);
+  int GetMaxWidthByColumn(uint column);
+  void InitGrid(void);
 
 public:
-  GridBox(uint max_line_width, 
-          const Point2i & widget_size, 
+  GridBox(uint lines, 
+          uint columns,
+          uint margin, 
           bool _draw_border = true);
   GridBox(Profile * _profile,
           const xmlNode * _gridBoxNode);
-
+  virtual ~GridBox(void);
+  virtual void AddWidget(Widget * widget);
+  virtual void AddWidget(Widget * widget,
+                         uint x,
+                         uint y);
   virtual bool LoadXMLConfiguration(void);
 
   virtual void Pack();

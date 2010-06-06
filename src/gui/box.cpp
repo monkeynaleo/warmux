@@ -159,35 +159,39 @@ void HBox::Pack()
 
 // --------------------------------------------------
 
-GridBox::GridBox(uint _max_line_width, 
-                 const Point2i & size_of_widget, 
+GridBox::GridBox(uint _lines,
+                 uint _columns, 
+                 uint margin, 
                  bool _draw_border) :
-  Box(Point2i(-1, -1), _draw_border)
+  Box(Point2i(-1, -1), _draw_border),
+  autoResize(true),
+  fixedMargin(margin),
+  lines(_lines),
+  columns(_columns),
+  grid(NULL)
 {
-  max_line_width = _max_line_width;
-  widget_size = size_of_widget;
-  last_line = 0;
-  last_column = 0;
+  InitGrid();
 }
 
 GridBox::GridBox(Profile * profile,
                  const xmlNode * gridBoxNode) :
-  Box(profile, gridBoxNode)
+  Box(profile, gridBoxNode),
+  autoResize(false),
+  fixedMargin(0),
+  lines(10),
+  columns(10),
+  grid(NULL)
 {
-  max_line_width = GetMainWindow().GetWidth();;
-  last_line = 0;
-  last_column = 0;
 }
 
-/*
-  Example:
-  <GridBox x="50px" y="50px" 
-           width="120px" height="110px"
-           borderSize="3" borderColor="ff0102ff" 
-           backgroundColor="00ff00ff">
-    <!-- sub-widgets -->
-  </GridBox>
-*/
+GridBox::~GridBox(void)
+{
+  for (uint i = 0; i < lines; ++i) {
+    delete [] grid[i];
+  }
+  delete [] grid;
+}
+
 bool GridBox::LoadXMLConfiguration(void)
 {
   if (NULL == profile || NULL == widgetNode) {
@@ -198,82 +202,151 @@ bool GridBox::LoadXMLConfiguration(void)
   ParseXMLSize();
   ParseXMLBoxParameters();
 
-  int subWidgetHeight = Widget::ParseVerticalTypeAttribut("subWidgetHeight", 100);
-  int subWidgetWidth  = Widget::ParseHorizontalTypeAttribut("subWidgetWidth", 100);
-  widget_size = Point2i(subWidgetWidth, subWidgetHeight);
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  xmlFile->ReadUintAttr(widgetNode, "lines", lines);
+  xmlFile->ReadUintAttr(widgetNode, "columns", columns);
+  xmlFile->ReadUintAttr(widgetNode, "margin", fixedMargin);
+ 
+  InitGrid();
 
   return true;
 }
 
-void GridBox::PlaceWidget(Widget * a_widget, 
-                          uint _line, 
-                          uint _column)
+void GridBox::InitGrid(void) 
 {
-  uint _x, _y;
+  grid = new Widget **[lines];
 
-  _x = position.x + border.x + _column * (widget_size.GetX() + margin);
-  _y = position.y + border.y + _line * (widget_size.GetY() + margin);
-
-  a_widget->SetPosition(_x, _y);
-  a_widget->SetSize(widget_size);
+  for (uint i = 0; i < lines; ++i) {
+    grid[i] = new Widget*[columns];
+    for (uint j = 0; j < columns; ++j) {
+      grid[i][j] = NULL;
+    }
+  }
 }
 
-uint GridBox::NbWidgetsPerLine(const uint nb_total_widgets)
+void GridBox::PlaceWidget(Widget * widget, 
+                          uint line, 
+                          uint column)
 {
-  uint max_nb_widgets_per_line = nb_total_widgets;
-
-  while (max_line_width - 2 * border.x <
-	 max_nb_widgets_per_line * (widget_size.GetX()+margin) - margin) {
-    max_nb_widgets_per_line--;
+  if (line >= lines || column >= columns) {
+    return;
   }
+  grid[line][column] = widget;
+}
 
-  if (max_nb_widgets_per_line < 1) {
-    max_nb_widgets_per_line = 1;
+void GridBox::AddWidget(Widget * widget)
+{
+  ASSERT(widget != NULL);
+
+  for (uint i = 0; i < lines; ++i) {
+    for (uint j = 0; j < columns; ++j) {
+      if (NULL == grid[i][j]) {
+        grid[i][j] = widget;
+	WidgetList::AddWidget(widget);
+        return;
+      }
+    }
   }
+}
 
-  uint nb_lines = nb_total_widgets / max_nb_widgets_per_line;
-  if (nb_total_widgets % max_nb_widgets_per_line != 0) {
-    nb_lines++;
+void GridBox::AddWidget(Widget * widget, 
+                        uint line, 
+                        uint column)
+{
+  ASSERT(widget != NULL);
+  grid[line][column] = widget;
+}
+
+int GridBox::GetMaxHeightByLine(uint line)
+{
+  int height = 0;
+  Widget * widget = NULL;
+
+  for (uint i = 0; i < columns; ++i) {
+    widget = grid[line][i];
+    if (NULL == widget) {
+      continue;
+    }
+    widget->Pack();
+    if (widget->GetSizeY() > height) {
+      height = widget->GetSizeY();
+    }
   }
+  return height + fixedMargin;
+}
 
-  uint nb_widgets_per_line = nb_total_widgets / nb_lines;
-  if (nb_total_widgets % nb_lines != 0) {
-    nb_widgets_per_line++;
+int GridBox::GetMaxWidthByColumn(uint column)
+{
+  int width = 0;
+  Widget * widget = NULL;
+
+  for (uint i = 0; i < lines; ++i) {
+    widget = grid[i][column];
+    if (NULL == widget) {
+      continue;
+    }
+    widget->Pack();
+    if (widget->GetSizeX() > width) {
+      width = widget->GetSizeX();
+    }
   }
-
-  return nb_widgets_per_line;
+  return width + fixedMargin;
 }
 
 void GridBox::Pack()
 {
-  if (widget_list.size() == 0) {
+  if (0 == widget_list.size()) {
     return;
   }
+  int heightMax;
+  int widthMax;
+  uint x       = position.x;
+  uint y       = position.y;
+  uint marginX = 0;
+  uint marginY = 0;
 
-  WidgetList::Pack();
-
-  uint nb_widgets_per_line = NbWidgetsPerLine(widget_list.size());
-
-  std::list<Widget *>::iterator it;
-  uint line = 0, column = 0;
-  for( it = widget_list.begin();
-       it != widget_list.end();
-       ++it ){
-
-    last_line = line;
-    PlaceWidget((*it), line, column);
-
-    if (column + 1 == nb_widgets_per_line) {
-      column = 0;
-      line++;
-    } else {
-      column++;
-    }
-
+  int totalWidth = 0;
+  for (uint columnIt = 0; columnIt < columns; ++columnIt) { 
+    totalWidth += GetMaxWidthByColumn(columnIt);
+  }
+  if (totalWidth < GetSize().x) {
+    marginX = (GetSize().x - totalWidth) / (columns + 1);
+  }
+  
+  int totalHeight = 0;
+  for (uint lineIt = 0; lineIt < lines; ++lineIt) {
+    totalHeight += GetMaxHeightByLine(lineIt);
+  }
+  if (totalHeight < GetSize().y) {
+    marginY = (GetSize().y - totalHeight) / (lines + 1);
   }
 
-  size.x = 2*border.x + nb_widgets_per_line * (widget_size.GetX() + margin) - margin;
-  size.y = 2*border.y + (last_line+1) * (widget_size.GetY() + margin) - margin;
+  uint gridWidth  = 0;
+  uint gridHeight = 0;
 
-  WidgetList::Pack();
+  for (uint lineIt = 0; lineIt < lines; ++lineIt) {
+    heightMax = GetMaxHeightByLine(lineIt);
+
+    gridHeight += heightMax;
+    gridWidth = 0;
+
+    for (uint columnIt = 0; columnIt < columns; ++columnIt) {
+      widthMax = GetMaxWidthByColumn(columnIt);
+      gridWidth += widthMax;
+
+      if (NULL != grid[lineIt][columnIt]) {
+        Widget * widget = grid[lineIt][columnIt];
+        widget->Pack();
+
+        widget->SetPosition(x + marginX + ((widthMax + marginX) * columnIt) + ((widthMax - widget->GetSizeX()) / 2), 
+                            y + marginY + ((heightMax + marginY) * lineIt) + ((heightMax - widget->GetSizeY()) / 2));
+        widget->Pack();
+      }
+    }
+  }
+  if (true == autoResize) {
+    SetSize(gridWidth, gridHeight);
+  }
 }
+
