@@ -23,7 +23,8 @@
 #include <fixed_class.h>
 
 #ifndef _MSC_VER
-#include <stdint.h>
+# include <stdint.h>
+# define SIZE_T_FORMAT "z"
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;
@@ -33,6 +34,7 @@ typedef unsigned char  uint8;
 typedef signed char    sint8;
 typedef signed long    sint32;
 #else
+# define SIZE_T_FORMAT "l"
 typedef unsigned __int8  uchar;
 typedef unsigned __int16 ushort;
 typedef unsigned int     uint;
