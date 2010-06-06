@@ -33,6 +33,7 @@
 
 #ifdef ENABLE_NLS /* gettext */
 #  include <libintl.h>
+void InitI18N(const std::string &dir, const std::string &default_language);
 #  ifdef USE_FRIBIDI
 #    define _(X) localization(X)
 char * localization(const char * buffer);
@@ -45,6 +46,5 @@ char * localization(const char * buffer);
 #endif /* ENABLE_NLS aka gettext */
 
 std::string Format (const char *format, ...);
-void InitI18N(const std::string &dir, const std::string &default_language);
 
 #endif /* FORMAT_H */
