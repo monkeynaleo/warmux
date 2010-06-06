@@ -55,6 +55,8 @@ class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
 class RPG : public WeaponProjectile
 {
 private:
+  // Avoid dynamic_cast, hoping no race condition between WeaponProjectile::cfg and it
+  AutomaticBazookaConfig& acfg;
   ParticleEngine smoke_engine;
   SoundSample flying_sound;
 protected:
@@ -77,8 +79,11 @@ protected:
   void SignalDrowning();
 };
 
-RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher) :
-  WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20), m_lastrefresh(0)
+RPG::RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher)
+ : WeaponProjectile("rocket", cfg, p_launcher)
+ , acfg(cfg)
+ , smoke_engine(20)
+ , m_lastrefresh(0)
 {
   m_targeted = false;
   explode_colliding_character = true;
@@ -99,14 +104,13 @@ void RPG::Shoot(Double strength)
 
 void RPG::Refresh()
 {
-  AutomaticBazookaConfig &acfg = dynamic_cast<AutomaticBazookaConfig &>(cfg);
   uint time = Time::GetInstance()->Read();
   Double flying_time = GetMSSinceTimeoutStart();
   uint timestep = time - m_lastrefresh;
   m_lastrefresh = time;
   if (!m_targeted)
   {
-    // rocket is turning around herself    
+    // rocket is turning around herself
     angle_local += acfg.uncontrolled_turn_speed * timestep / ((Double)1000);
     if(angle_local > PI) angle_local = -PI;
 
