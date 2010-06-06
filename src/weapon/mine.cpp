@@ -134,7 +134,7 @@ void ObjMine::Detection()
 
       (*obj)->GetSpeed(norm, angle);
       if (norm < speed_detection && norm > ZERO) {
-        MSG_DEBUG("mine", "norm: %s, speed_detection: %s", 
+        MSG_DEBUG("mine", "norm: %s, speed_detection: %s",
                   Double2str(norm).c_str(), Double2str(speed_detection).c_str());
         StartTimeout();
         return;
@@ -218,8 +218,7 @@ void Mine::UpdateTranslationStrings()
 
 WeaponProjectile * Mine::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this)));
+  return new ObjMine(cfg(), this);
 }
 
 bool Mine::p_Shoot()

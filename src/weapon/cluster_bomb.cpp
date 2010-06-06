@@ -155,7 +155,7 @@ void ClusterBomb::DoExplosion()
 
   const Double angle_range = HALF_PI;
   Point2i pos = GetPosition();
-  for (uint i = 0; i < fragments; ++i ) 
+  for (uint i = 0; i < fragments; ++i )
   {
     Double angle = -HALF_PI; // this angle is "upwards" here
     Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / TWO;
@@ -190,8 +190,7 @@ void ClusterLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * ClusterLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new ClusterBomb(cfg(), this);
 }
 
 ClusterBombConfig& ClusterLauncher::cfg()

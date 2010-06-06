@@ -42,7 +42,7 @@ private:
   SoundSample disco_sound;
 public:
   DiscoGrenade(ExplosiveWeaponConfig& cfg,
-	       WeaponLauncher * p_launcher);
+         WeaponLauncher * p_launcher);
   void Refresh();
   void Shoot(Double strength);
 protected:
@@ -161,8 +161,7 @@ void DiscoGrenadeLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new DiscoGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new DiscoGrenade(cfg(), this);
 }
 std::string DiscoGrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {

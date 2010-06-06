@@ -122,8 +122,7 @@ void RiotBomb::UpdateTranslationStrings()
 
 WeaponProjectile * RiotBomb::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new RiotBombRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new RiotBombRocket(cfg(), this);
 }
 
 std::string RiotBomb::GetWeaponWinString(const char *TeamName, uint items_count ) const

@@ -120,8 +120,7 @@ void Dynamite::UpdateTranslationStrings()
 
 WeaponProjectile * Dynamite::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new DynamiteStick(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new DynamiteStick(cfg(), this);
 }
 
 // drop a dynamite

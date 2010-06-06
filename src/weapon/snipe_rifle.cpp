@@ -96,8 +96,7 @@ void SnipeRifle::UpdateTranslationStrings()
 
 WeaponProjectile * SnipeRifle::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new SnipeBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new SnipeBullet(cfg(), this);
 }
 
 bool SnipeRifle::p_Shoot()
@@ -142,7 +141,7 @@ void SnipeRifle::ComputeCrossPoint(bool force = false)
   // While test is not finished
   Double PI_3_div_4 = PI * THREE / FOUR;
   Double PI_div_4 = PI / FOUR;
-  while( distance < SNIPE_RIFLE_MAX_BEAM_SIZE ){    
+  while( distance < SNIPE_RIFLE_MAX_BEAM_SIZE ){
     // going upwards ( -3pi/4 < angle <-pi/4 )
     if (angle < -PI_div_4 && angle > -PI_3_div_4){
       pos.x = (int)((pos.y-b)/a);       //Calculate x

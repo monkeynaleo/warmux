@@ -54,15 +54,15 @@ protected:
         ASSERT(recursion_depth == 0);
 #endif
 
-        // fake explosion 
+        // fake explosion
         JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
-        ParticleEngine::AddExplosionSmoke( pos, 
+        ParticleEngine::AddExplosionSmoke( pos,
             50,
             ParticleEngine::LittleESmoke );
 
         ClusterType * cluster;
 
-        for (uint i = 0; i < fragments; ++i ) 
+        for (uint i = 0; i < fragments; ++i )
         {
             Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / TWO;
 
@@ -175,7 +175,7 @@ void CluzookaCluster::Refresh()
 }
 
 void CluzookaCluster::DoSpawn()
-{  
+{
   const uint fragments = 2;
   Double angle;
   Double speed;
@@ -266,7 +266,7 @@ void CluzookaRocket::Refresh()
         // rotate speed is max when t is close to 0, and slows down to 1
         // when t is approaching 1
         //Double rotate_speed = 1 + num_of_full_rotates * ( 1.0f - t );
-        image->SetRotation_rad( speed_angle + 
+        image->SetRotation_rad( speed_angle +
                  TWO * PI * num_of_full_rotates * inv_t * inv_t * inv_t * inv_t );
     }
     else
@@ -284,7 +284,7 @@ void CluzookaRocket::Refresh()
 }
 
 void CluzookaRocket::DoSpawn()
-{  
+{
   const uint fragments = static_cast<CluzookaConfig &>(cfg).m_fragments;
   const Double angle_range = static_cast<CluzookaConfig &>(cfg).m_angle_dispersion * PI / (Double)180;
 
@@ -379,8 +379,7 @@ Cluzooka::Cluzooka() :
 
 WeaponProjectile * Cluzooka::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new CluzookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new CluzookaRocket(cfg(), this);
 }
 
 void Cluzooka::UpdateTranslationStrings()
