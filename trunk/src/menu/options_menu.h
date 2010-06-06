@@ -51,7 +51,9 @@ class OptionMenu : public Menu
 
    /* Graphic options controllers */
    ComboBox *cbox_video_mode;
+#ifdef ENABLE_NLS
    ListBox *lbox_languages;
+#endif
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_multisky;
    CheckBox *opt_display_energy;

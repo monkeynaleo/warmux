@@ -61,8 +61,10 @@ public:
                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
+#if ENABLE_NLS
   void SetLanguage(const std::string language);
   std::string GetLanguage() const { return default_language; };
+#endif
 
   bool GetDisplayEnergyCharacter() const { return display_energy_character; };
   void SetDisplayEnergyCharacter(const bool dec) { display_energy_character = dec; };
@@ -225,7 +227,9 @@ protected:
   std::list<ConfigTeam> network_local_teams;
 
   // Font setting
+#if ENABLE_NLS
   std::map<std::string, std::string>  fonts;
+#endif
   std::string font_dir;
   std::string ttf_filename;
 

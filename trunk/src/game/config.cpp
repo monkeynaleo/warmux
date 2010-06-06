@@ -242,8 +242,10 @@ Config::Config():
   std::string dir;
   if (!DoLoading())
   {
+#if ENABLE_NLS
     // Failed, still try to apply default config then
     SetLanguage("");
+#endif
   }
 
   dir = TranslateDirectory(data_dir);
@@ -292,6 +294,7 @@ bool Config::RemovePersonalConfigFile() const
   return true;
 }
 
+#if ENABLE_NLS
 void Config::SetLanguage(const std::string language)
 {
   default_language = language;
@@ -302,6 +305,7 @@ void Config::SetLanguage(const std::string language)
     Game::GetInstance()->UpdateTranslation();
   }
 }
+#endif
 
 /*
  * Load physics constants from the xml file and cache it.
@@ -375,6 +379,7 @@ void Config::LoadDefaultValue()
       resolution_available.push_back(tmp);
   }
 
+#if ENABLE_NLS
   //=== Default fonts value ===
   const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_language_fonts");
   if (node) {
@@ -390,6 +395,7 @@ void Config::LoadDefaultValue()
       }
     }
   }
+#endif
 
 #if 0 //== Team Color
   int number_of_team_color = GetResourceManager().LoadInt(res, "team_colors/number_of_team_color");
@@ -426,7 +432,9 @@ void Config::LoadXml(const xmlNode *xml)
 
   //=== Language ===
   XmlReader::ReadString(xml, "default_language", default_language);
+#if ENABLE_NLS
   SetLanguage(default_language);
+#endif
 
   //=== Teams ===
   if ((elem = XmlReader::GetMarker(xml, "teams")) != NULL)
@@ -722,10 +730,14 @@ uint Config::GetMaxVolume()
 
 const std::string& Config::GetTtfFilename()
 {
+#if ENABLE_NLS
   if (fonts.find(default_language) == fonts.end())
     return ttf_filename;
   else
     return fonts[default_language];
+#else
+  return ttf_filename;
+#endif
 }
 
 void Config::SetNetworkLocalTeams()
