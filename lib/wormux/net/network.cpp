@@ -173,7 +173,7 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
 
     sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 
-    if (sfd == -1)
+    if (sfd == INVALID_SOCKET)
       continue;
 
     // Try to set the timeout
@@ -267,11 +267,11 @@ void WNet::FinalizeBatch(void* data, size_t len)
 //-----------------------------------------------------------------------------
 
 bool WNet::Server_HandShake(WSocket& client_socket,
-			    const std::string& game_name,
-			    const std::string& password,
-			    std::string& nickname,
-			    uint client_player_id,
-			    bool client_will_be_master)
+                            const std::string& game_name,
+                            const std::string& password,
+                            std::string& nickname,
+                            uint client_player_id,
+                            bool client_will_be_master)
 {
   bool ret = false;
   std::string version;
@@ -290,7 +290,7 @@ bool WNet::Server_HandShake(WSocket& client_socket,
 
   if (WORMUX_VERSION != version) {
     std::cerr << "Client disconnected: wrong version " << version.c_str()
-	     << std::endl;
+             << std::endl;
     goto error;
   }
 
@@ -300,7 +300,7 @@ bool WNet::Server_HandShake(WSocket& client_socket,
 
   if (_password != password) {
     std::cerr << "Client disconnected: wrong password " << _password.c_str()
-	      << std::endl;
+              << std::endl;
     client_socket.SendInt(1);
     goto error;
   }
