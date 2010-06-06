@@ -32,8 +32,8 @@ std::map<int, Font *> Font::fontMapNormal;
 std::map<int, Font *> Font::fontMapBold;
 std::map<int, Font *> Font::fontMapItalic;
 
-Font* Font::GetInstance(font_size_t _fontSize, 
-                        font_style_t fontStyle) 
+Font* Font::GetInstance(font_size_t _fontSize,
+                        font_style_t fontStyle)
 {
   int fontSize = (int)_fontSize;
 
@@ -64,7 +64,7 @@ Font* Font::GetInstance(font_size_t _fontSize,
       if (!fontMapItalic.count(fontSize)) {
         font = new Font(fontSize);
         font->SetItalic();
-        fontMapItalic[fontSize] = font; 
+        fontMapItalic[fontSize] = font;
       } else {
         return fontMapItalic[fontSize];
       }
@@ -115,22 +115,22 @@ void Font::ReleaseInstances(void)
 {
   std::map<int, Font *>::iterator fontMapIte;
 
-  for (fontMapIte = fontMapNormal.begin(); 
-       fontMapIte != fontMapNormal.end(); 
+  for (fontMapIte = fontMapNormal.begin();
+       fontMapIte != fontMapNormal.end();
        ++fontMapIte) {
     delete fontMapIte->second;
   }
   fontMapNormal.clear();
 
-  for (fontMapIte = fontMapBold.begin(); 
-       fontMapIte != fontMapBold.end(); 
+  for (fontMapIte = fontMapBold.begin();
+       fontMapIte != fontMapBold.end();
        ++fontMapIte) {
     delete fontMapIte->second;
   }
   fontMapBold.clear();
 
-  for (fontMapIte = fontMapItalic.begin();  
-       fontMapIte != fontMapItalic.end();  
+  for (fontMapIte = fontMapItalic.begin();
+       fontMapIte != fontMapItalic.end();
        ++fontMapIte) {
     delete fontMapIte->second;
   }
@@ -150,8 +150,8 @@ void Font::SetItalic()
   TTF_SetFontStyle(m_font, TTF_STYLE_ITALIC);
 }
 
-void Font::Write(const Point2i & pos, 
-                 const Surface & surface) const 
+void Font::Write(const Point2i & pos,
+                 const Surface & surface) const
 {
   GetMainWindow().Blit(surface, pos);
 
@@ -159,7 +159,7 @@ void Font::Write(const Point2i & pos,
   GetWorld().ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
-void Font::WriteLeft(const Point2i & pos, 
+void Font::WriteLeft(const Point2i & pos,
                      const std::string & txt,
                      const Color & color)
 {
@@ -167,7 +167,7 @@ void Font::WriteLeft(const Point2i & pos,
   Write(pos, surface);
 }
 
-void Font::WriteLeftBottom(const Point2i & pos, 
+void Font::WriteLeftBottom(const Point2i & pos,
                            const std::string & txt,
                            const Color & color)
 {
@@ -175,7 +175,7 @@ void Font::WriteLeftBottom(const Point2i & pos,
   Write(pos - Point2i(0, surface.GetHeight()), surface);
 }
 
-void Font::WriteRight(const Point2i & pos, 
+void Font::WriteRight(const Point2i & pos,
                       const std::string & txt,
                       const Color & color)
 {
@@ -183,7 +183,7 @@ void Font::WriteRight(const Point2i & pos,
   Write(pos - Point2i(surface.GetWidth(), 0), surface);
 }
 
-void Font::WriteCenter (const Point2i & pos, 
+void Font::WriteCenter (const Point2i & pos,
                         const std::string & txt,
                         const Color & color)
 {
@@ -191,7 +191,7 @@ void Font::WriteCenter (const Point2i & pos,
   Write(pos - Point2i(surface.GetWidth()/2, surface.GetHeight()), surface);
 }
 
-void Font::WriteCenterTop(const Point2i & pos, 
+void Font::WriteCenterTop(const Point2i & pos,
                           const std::string & txt,
                           const Color & color)
 {
@@ -199,14 +199,14 @@ void Font::WriteCenterTop(const Point2i & pos,
   Write(pos - Point2i(surface.GetWidth()/2, 0), surface);
 }
 
-Surface Font::CreateSurface(const std::string & txt, 
+Surface Font::CreateSurface(const std::string & txt,
                             const Color & color)
 {
   return Surface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor()) );
 }
 
-Surface Font::Render(const std::string & txt, 
-                     const Color & color, 
+Surface Font::Render(const std::string & txt,
+                     const Color & color,
                      bool cache)
 {
   Surface surface;
@@ -232,7 +232,7 @@ Surface Font::Render(const std::string & txt,
   return surface;
 }
 
-int Font::GetWidth(const std::string & txt) const 
+int Font::GetWidth(const std::string & txt) const
 {
   int width=-1;
 
@@ -241,26 +241,26 @@ int Font::GetWidth(const std::string & txt) const
   return width;
 }
 
-int Font::GetHeight() const 
+int Font::GetHeight() const
 {
   return TTF_FontHeight(m_font);
 }
 
-int Font::GetHeight(const std::string & str) const 
+int Font::GetHeight(const std::string & str) const
 {
   int height = -1;
   TTF_SizeUTF8(m_font, str.c_str(), NULL, &height);
   return height;
 }
 
-Point2i Font::GetSize(const std::string & txt) const 
+Point2i Font::GetSize(const std::string & txt) const
 {
   return Point2i(GetWidth(txt), GetHeight(txt));
 }
 
-Surface Font::GenerateSurface(const std::string & txt, 
+Surface Font::GenerateSurface(const std::string & txt,
                               const Color & color,
-                              font_size_t font_size, 
+                              font_size_t font_size,
                               font_style_t font_style)
 {
   return Surface(Font::GetInstance(font_size, font_style)->CreateSurface(txt, color));
