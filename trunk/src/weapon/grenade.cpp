@@ -80,8 +80,7 @@ void GrenadeLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * GrenadeLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new Grenade(cfg(), this);
 }
 
 std::string GrenadeLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

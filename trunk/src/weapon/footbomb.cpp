@@ -160,8 +160,7 @@ void FootBombLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * FootBombLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new FootBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new FootBomb(cfg(), this);
 }
 
 FootBombConfig& FootBombLauncher::cfg()

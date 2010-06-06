@@ -92,8 +92,7 @@ void BounceBallLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new BounceBall(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new BounceBall(cfg(), this);
 }
 
 bool BounceBallLauncher::p_Shoot ()

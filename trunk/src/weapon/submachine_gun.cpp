@@ -102,8 +102,7 @@ void SubMachineGun::UpdateTranslationStrings()
 // Return a projectile instance for the submachine gun
 WeaponProjectile * SubMachineGun::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new SubMachineGunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new SubMachineGunBullet(cfg(), this);
 }
 
 void SubMachineGun::IncMissedShots()

@@ -242,8 +242,7 @@ void GnuLauncher::SignalEndOfProjectile()
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new Gnu(cfg(), this);
 }
 
 std::string GnuLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

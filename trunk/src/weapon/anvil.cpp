@@ -57,8 +57,8 @@ class Anvil : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& /* speed_before */);
     virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-				       PhysicalObj * obj,
-				       const Point2d& /* obj_speed_before */);
+               PhysicalObj * obj,
+               const Point2d& /* obj_speed_before */);
     virtual void SignalOutOfMap();
 };
 
@@ -78,8 +78,8 @@ Anvil::~Anvil()
 }
 
 void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
-				  PhysicalObj * obj,
-				  const Point2d& /* obj_speed_before */)
+          PhysicalObj * obj,
+          const Point2d& /* obj_speed_before */)
 {
   merge_time = Time::GetInstance()->Read() + 5000;
   obj->SetEnergyDelta(-200);
@@ -186,8 +186,7 @@ void AnvilLauncher::p_Select()
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new Anvil(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new Anvil(cfg(), this);
 }
 
 std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

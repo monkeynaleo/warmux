@@ -228,8 +228,7 @@ void TuxLauncher::UpdateTranslationStrings()
 
 WeaponProjectile * TuxLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new SuperTux(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new SuperTux(cfg(), this);
 }
 
 bool TuxLauncher::p_Shoot ()

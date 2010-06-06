@@ -206,7 +206,7 @@ struct target_t
 };
 
 AutomaticBazooka::AutomaticBazooka() :
-  WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new AutomaticBazookaConfig() )
+  WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka", new AutomaticBazookaConfig() )
 {
   UpdateTranslationStrings();
 
@@ -233,8 +233,7 @@ AutomaticBazooka::~AutomaticBazooka()
 
 WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new RPG(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  //return new RPG(cfg(), this);
 }
 
 void AutomaticBazooka::Draw()

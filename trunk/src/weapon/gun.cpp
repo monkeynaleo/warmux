@@ -77,8 +77,7 @@ void Gun::UpdateTranslationStrings()
 
 WeaponProjectile * Gun::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new GunBullet(cfg(), this);
 }
 
 bool Gun::p_Shoot()

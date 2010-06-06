@@ -113,7 +113,7 @@ void Polecat::Refresh()
   if (cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
     if (!last_fart_time) {
       std::string txt = Format(_("%s has done something for the environment, he has not ordered the polecat to fart."),
-			       ActiveCharacter().GetName().c_str());
+             ActiveCharacter().GetName().c_str());
       GameMessages::GetInstance()->Add (txt);
     }
     SignalTimeout();
@@ -267,8 +267,7 @@ void PolecatLauncher::SignalEndOfProjectile()
 
 WeaponProjectile * PolecatLauncher::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-    (new Polecat(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new Polecat(cfg(), this);
 }
 
 std::string PolecatLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const

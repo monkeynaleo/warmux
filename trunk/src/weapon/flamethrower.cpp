@@ -139,8 +139,7 @@ void FlameThrower::UpdateTranslationStrings()
 // Return a projectile instance for the submachine gun
 WeaponProjectile * FlameThrower::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new FlameThrowerBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new FlameThrowerBullet(cfg(), this);
 }
 
 void FlameThrower::IncMissedShots()

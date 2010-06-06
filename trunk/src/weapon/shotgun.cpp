@@ -92,8 +92,7 @@ void Shotgun::UpdateTranslationStrings()
 // Return a buckshot instance for the shotgun
 WeaponProjectile * Shotgun::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new ShotgunBuckshot(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new ShotgunBuckshot(cfg(), this);
 }
 
 void Shotgun::ShootSound() const

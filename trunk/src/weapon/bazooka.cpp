@@ -113,8 +113,7 @@ Bazooka::Bazooka() :
 
 WeaponProjectile * Bazooka::GetProjectileInstance()
 {
-  return dynamic_cast<WeaponProjectile *>
-      (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+  return new BazookaRocket(cfg(), this);
 }
 
 void Bazooka::UpdateTranslationStrings()
