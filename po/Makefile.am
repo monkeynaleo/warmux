@@ -72,6 +72,8 @@ POTFILES = \
         src/gui/abstract_spin_button.h \
         src/gui/big/button_pic.cpp \
         src/gui/big/button_pic.h \
+        src/gui/grid_box.cpp \
+        src/gui/grid_box.h \
         src/gui/box.cpp \
         src/gui/box.h \
         src/gui/button.cpp \

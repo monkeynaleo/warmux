@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 #include "menu/main_menu.h"
-#include "gui/box.h"
+#include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
 #include "game/config.h"
 #include "graphic/text.h"

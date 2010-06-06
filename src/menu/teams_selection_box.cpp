@@ -29,6 +29,7 @@
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
+#include "gui/grid_box.h"
 
 #include <iostream>
 

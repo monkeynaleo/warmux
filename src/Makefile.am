@@ -3,7 +3,7 @@ SUBDIRS = .
 bin_PROGRAMS = wormux
 
 wormux_SOURCES = \
-  ai/ai_command.cpp \
+        ai/ai_command.cpp \
         ai/ai_command.h \
         ai/ai_idea.cpp \
         ai/ai_idea.h \
@@ -81,6 +81,8 @@ wormux_SOURCES = \
         gui/abstract_spin_button.h \
         gui/big/button_pic.cpp \
         gui/big/button_pic.h \
+        gui/grid_box.cpp \
+        gui/grid_box.h \
         gui/box.cpp \
         gui/box.h \
         gui/button.cpp \

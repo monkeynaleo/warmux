@@ -27,7 +27,7 @@
 #include "game/config.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
-#include "gui/box.h"
+#include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
 #include "include/app.h"
 #include "menu/options_menu.h"

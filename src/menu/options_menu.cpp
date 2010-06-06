@@ -33,7 +33,7 @@
 #include "graphic/sprite.h"
 #include "gui/button.h"
 #include "gui/label.h"
-#include "gui/box.h"
+#include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
 #include "gui/list_box.h"
 #include "gui/combo_box.h"

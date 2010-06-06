@@ -27,6 +27,7 @@
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
+#include "gui/grid_box.h"
 #include "gui/question.h"
 #include "interface/mouse.h"
 #include "sound/jukebox.h"
