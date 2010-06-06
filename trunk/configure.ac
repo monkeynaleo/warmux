@@ -24,10 +24,6 @@ AM_INIT_AUTOMAKE([foreign 1.5])
 
 AM_GNU_GETTEXT([external], [need-ngettext])
 
-if test "x$USE_NLS" != "xyes"; then
-  AC_MSG_ERROR([gettext is disabled. If you want internationalisation, please install gettext package.])
-fi
-
 dnl ========================================================================
 dnl === Check for tools                                                    =
 dnl ========================================================================
@@ -240,7 +236,7 @@ if test "x$OSX" != "xyes" ; then
   fi
 fi
 
-dnl === Check for libxml2, fribidi and libpng using pkg-confg =============
+dnl === Check for libxml2 and libpng using pkg-confg =============
 PKG_PROG_PKG_CONFIG()
 PKG_CHECK_MODULES(LIBXML2, libxml-2.0 >= 2.7.3, [], [AC_MSG_FAILURE([libxml2 >= 2.7.3 not found])])
 PKG_CHECK_MODULES(LIBPNG, libpng, [], [AC_MSG_FAILURE([libpng not found])])
@@ -251,17 +247,23 @@ LIBS="$LIBS $LIBPNG_LIBS $LIBXML2_LIBS"
 dnl === Check for FriBidi =================================================
 AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
 if test "${enable_fribidi}" = "yes"; then
-   PKG_CHECK_MODULES(FRIBIDI, [fribidi],
-                     [ use_fribidi="true"
-                       AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
-                     [ use_fribidi="false"
-                       AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.]) ])
+   if test "x$USE_NLS" != "xyes"; then
+     AC_MSG_WARN([NLS disabled, not enabling fribidi support])
+   else
+     PKG_CHECK_MODULES(FRIBIDI, [fribidi],
+                       [ use_fribidi="true"
+                         AC_DEFINE(USE_FRIBIDI, 1, [Define to use FriBidi]) ],
+                       [ use_fribidi="false"
+                         AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please install fribidi dev package.]) ])
+   fi
    # Will be empty if not found
    LIBS="$LIBS $FRIBIDI_LIBS"
    CFLAGS="$CFLAGS $FRIBIDI_CFLAGS"
-   CXXFLAGS="$CXXFLAGS $FRIBIDI_CFLAGS"                  
+   CXXFLAGS="$CXXFLAGS $FRIBIDI_CFLAGS"
 else
-  AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
+  if test "x$USE_NLS" == "xyes"; then
+    AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
+  fi
 fi
 
 dnl === Check for SDL_gfx ===========================================================
