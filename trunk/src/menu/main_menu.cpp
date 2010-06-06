@@ -51,10 +51,8 @@ MainMenu::~MainMenu()
 MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
-  uint window_width = GetMainWindow().GetWidth();
-
   Point2i size(120,110);
-  Box* box = new GridBox(window_width, size, true);
+  Box* box = new GridBox(1, 6, 0, true);
 
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
   box->AddWidget(play);
