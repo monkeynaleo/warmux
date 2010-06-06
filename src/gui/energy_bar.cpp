@@ -35,7 +35,7 @@ EnergyBar::EnergyBar(uint _x,
                      long _value,
                      long minValue,
                      long maxValue,
-                     enum orientation _orientation) : 
+                     enum orientation _orientation) :
   ProgressBar(_x,
               _y,
               _width,
@@ -93,7 +93,7 @@ bool EnergyBar::LoadXMLConfiguration()
       }
     }
     thresholdNode = xmlFile->GetNextSibling(thresholdNode);
-  } 
+  }
   return true;
 }
 
@@ -114,15 +114,15 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
     }
     return;
   }
-  
+
   Color colorMin = listThresholds[thresholdNumber - 1].color;
   Double thresholdMin = listThresholds[thresholdNumber - 1].value;
   uint size = orientation == PROG_BAR_HORIZONTAL ? width : height;
   Double one_hunderd = 100;
   Double range = size * (thresholdMax - thresholdMin) / one_hunderd;
 
-  Threshold newThreshold; 
-  newThreshold.value = thresholdMax; 
+  Threshold newThreshold;
+  newThreshold.value = thresholdMax;
   newThreshold.color = colorMax;
   newThreshold.redCoef   = (colorMax.GetRed()   - colorMin.GetRed())   / range;
   newThreshold.greenCoef = (colorMax.GetGreen() - colorMin.GetGreen()) / range;
@@ -136,7 +136,7 @@ void EnergyBar::SortThresholds()
   if (2 > listThresholds.size()) {
     return;
   }
-  sort(listThresholds.begin(), listThresholds.end());
+  std::sort(listThresholds.begin(), listThresholds.end());
 }
 
 void EnergyBar::Actu(long real_energy)
@@ -169,7 +169,7 @@ void EnergyBar::Actu(long real_energy)
   thresholdMax = listThresholds[i];
 
   Color colorMin = thresholdMin.color;
-  uint coefVal = ComputeBarValue(abs(real_energy)) - 
+  uint coefVal = ComputeBarValue(abs(real_energy)) -
                  ComputeBarValue((Double)max * (Double)thresholdMin.value / one_hunderd);
 
   value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
