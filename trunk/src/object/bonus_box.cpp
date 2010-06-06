@@ -67,7 +67,7 @@ void BonusBox::ApplyBonus(Character * c)
     txt << weapon->GetWeaponWinString(c->AccessTeam().GetName().c_str(), won_ammo);
   } else {
     // Can happen if the configuration is wrong...
-    txt << Format(gettext("%s team already has infinite ammo for the %s!"),
+    txt << Format(_("%s team already has infinite ammo for the %s!"),
            c->AccessTeam().GetName().c_str(), weapon->GetName().c_str());
   }
   GameMessages::GetInstance()->Add(txt.str());
