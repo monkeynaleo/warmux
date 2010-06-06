@@ -117,9 +117,11 @@ OptionMenu::OptionMenu() :
   
   tabs->AddNewTab("unused", _("Graphics"), graphic_options);
 
+#ifdef ENABLE_NLS
   /* Language selection */
   lbox_languages = new ListBox(option_size);
   tabs->AddNewTab("unused", _("Language"), lbox_languages);
+#endif
 
   /* Team editor */
 
@@ -273,6 +275,7 @@ OptionMenu::OptionMenu() :
   effects_cbox->SetValue(config->GetSoundEffects());
   warn_cbox->SetValue(config->GetWarnOnNewPlayer());
 
+#ifdef ENABLE_NLS
   // Setting language selection
   lbox_languages->AddItem(config->GetLanguage() == "",    _("(system language)"),  "");
   lbox_languages->AddItem(config->GetLanguage() == "bg",    "Български (bg)",      "bg");
@@ -312,6 +315,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "ua",    "украї́нська мо́ва",     "ua");
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
   lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
+#endif
 
 #ifdef HAVE_LIBCURL
   opt_updates->SetValue(config->GetCheckUpdates());
@@ -324,7 +328,6 @@ OptionMenu::OptionMenu() :
 
   widgets.AddWidget(tabs);
   widgets.Pack();
-
 }
 
 OptionMenu::~OptionMenu()
@@ -368,7 +371,6 @@ void OptionMenu::OnClick(const Point2i &mousePosition, int button)
 
 void OptionMenu::SaveOptions()
 {
-
   Config * config = Config::GetInstance();
 
   // Graphic options
@@ -413,9 +415,11 @@ void OptionMenu::SaveOptions()
 
   SetActionButtonsXY(x, y);
 
+#if ENABLE_NLS
   // Language
   std::string s_language = lbox_languages->ReadValue();
   config->SetLanguage(s_language);
+#endif
 
   // Sound
   std::string sfreq = cbox_sound_freq->GetValue();
