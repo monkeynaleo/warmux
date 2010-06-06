@@ -29,15 +29,20 @@
 #include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
+class WeaponLauncher;
+
 // Classe de gestion des armes
 class WeaponsList
 {
 public:
   typedef std::list<Weapon*> weapons_list_type;
   typedef std::list<Weapon*>::const_iterator weapons_list_it;
+  typedef std::list<Weapon*> weapons_list_launcher_type;
+  typedef std::list<Weapon*>::const_iterator weapons_list_launcher_it;
 
 private:
   weapons_list_type m_weapons_list;
+  weapons_list_launcher_type m_launcher_weapons_list;
   Weapon* GetNextWeapon(uint sort, uint index);
 
 protected:
@@ -55,6 +60,7 @@ public:
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };
   Weapon* GetWeapon(Weapon::Weapon_type type);
+  WeaponLauncher* GetWeaponLauncher(Weapon::Weapon_type type);
   bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
   Weapon * GetRandomWeaponToDrop();
 };
