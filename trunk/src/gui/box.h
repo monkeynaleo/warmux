@@ -75,38 +75,5 @@ public:
   virtual void Pack();
 };
 
-class GridBox : public Box
-{
-private:
-  bool autoResize;
-  uint fixedMargin;
-  uint lines;
-  uint columns;
-  Widget *** grid;
-
-  uint NbWidgetsPerLine(uint nb_total_widgets);
-  void PlaceWidget(Widget * widget, 
-                   uint line, 
-                   uint column);
-  int GetMaxHeightByLine(uint line);
-  int GetMaxWidthByColumn(uint column);
-  void InitGrid(void);
-
-public:
-  GridBox(uint lines, 
-          uint columns,
-          uint margin, 
-          bool _draw_border = true);
-  GridBox(Profile * _profile,
-          const xmlNode * _gridBoxNode);
-  virtual ~GridBox(void);
-  virtual void AddWidget(Widget * widget);
-  virtual void AddWidget(Widget * widget,
-                         uint x,
-                         uint y);
-  virtual bool LoadXMLConfiguration(void);
-
-  virtual void Pack();
-};
 #endif
 

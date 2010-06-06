@@ -16,47 +16,46 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game mode editor
+ * Grid Box
  *****************************************************************************/
 
-#ifndef GAME_MODE_EDITOR_H
-#define GAME_MODE_EDITOR_H
+#ifndef GUI_GRID_BOX_H
+#define GUI_GRID_BOX_H
 
-#include "gui/grid_box.h"
+#include "gui/box.h"
 
-// Forward declarations
-class SpinButtonWithPicture;
-class ComboBox;
-class CheckBox;
-
-class GameModeEditor : public GridBox
+class GridBox : public Box
 {
-  /* If you need this, implement it (correctly)*/
-  GameModeEditor(const GameModeEditor&);
-  GameModeEditor operator=(const GameModeEditor&);
-  /********************************************/
+  private:
+    bool autoResize;
+    uint fixedMargin;
+    uint lines;
+    uint columns;
+    Widget *** grid;
 
-  ComboBox *opt_game_mode;
+    uint NbWidgetsPerLine(uint nb_total_widgets);
+    void PlaceWidget(Widget * widget,
+                     uint line,
+                     uint column);
+    int GetMaxHeightByLine(uint line);
+    int GetMaxWidthByColumn(uint column);
+    void InitGrid(void);
 
-  ComboBox *opt_allow_character_selection;
-
-  SpinButtonWithPicture *opt_duration_turn;
-
-  SpinButtonWithPicture *opt_energy_ini;
-  SpinButtonWithPicture *opt_energy_max;
-
-  SpinButtonWithPicture *opt_time_before_death_mode;
-  SpinButtonWithPicture *opt_damage_during_death_mode;
-  SpinButtonWithPicture *opt_gravity;
-
-public:
-  GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
-  ~GameModeEditor();
-
-  const ComboBox* GetGameModeComboBox() const { return opt_game_mode; };
-
-  void LoadGameMode();
-  void ValidGameMode() const;
+  public:
+    GridBox(uint lines,
+            uint columns,
+            uint margin,
+            bool _draw_border = true);
+    GridBox(Profile * _profile,
+            const xmlNode * _gridBoxNode);
+    virtual ~GridBox(void);
+    virtual void AddWidget(Widget * widget);
+    virtual void AddWidget(Widget * widget,
+                           uint x,
+                           uint y);
+    virtual bool LoadXMLConfiguration(void);
+    virtual void Pack();
 };
 
 #endif
+
