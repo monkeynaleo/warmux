@@ -343,6 +343,13 @@ public:
 
   virtual void StartShooting();
   virtual void StopShooting();
+
+  // Functions to avoid dynamic_cast
+  virtual void SetProjectileTimeOut(int)
+  {
+    Error("Timeout can be set for non-launcher weapon");
+  }
+
 private:
   // Angle in radian between -PI to PI
   Double min_angle, max_angle;

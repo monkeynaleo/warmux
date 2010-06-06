@@ -73,8 +73,8 @@ class WeaponProjectile : public PhysicalObj
 
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj * obj,
-				       const Point2d& obj_speed);
+                                       PhysicalObj * obj,
+                                       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
@@ -100,8 +100,8 @@ class WeaponBullet : public WeaponProjectile
   protected:
     virtual void SignalGroundCollision(const Point2d& speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj * obj,
-				       const Point2d& obj_speed);
+                                       PhysicalObj * obj,
+                                       const Point2d& obj_speed);
     virtual void SignalOutOfMap();
     void DoExplosion();
 };
@@ -190,6 +190,9 @@ class WeaponLauncher : public Weapon
 
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();
+
+    // Implemeting a method that would otherwise have required RTTI
+    void SetProjectileTimeOut(int timeout) { projectile->SetTimeOut(timeout); }
 };
 
 #endif /* WEAPON_LAUNCHER_H */
