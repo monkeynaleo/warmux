@@ -56,7 +56,9 @@ public:
   virtual void HandleMouseWheelUp(bool) { Up(); };
   virtual void HandleMouseWheelDown(bool) { Down(); };
 
+  // Implemeting a method that would otherwise have required RTTI
   void SetAngle(Double _angle) { angle = _angle; }; // to be used by network
+
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
   WeaponConfig& cfg();
