@@ -77,7 +77,11 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
   m_launcher_weapons_list.push_back(new Mine);
 
   // Copy launcher weapons to normal list
-  m_weapons_list = m_launcher_weapons_list;
+  //m_weapons_list = m_launcher_weapons_list;
+  m_weapons_list.insert(m_weapons_list.end(),
+                        m_launcher_weapons_list.begin(),
+                        m_launcher_weapons_list.end());
+
 
   // Add other weapons
   m_weapons_list.push_back(new Baseball);
@@ -222,7 +226,7 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
 
 WeaponLauncher* WeaponsList::GetWeaponLauncher(Weapon::Weapon_type type)
 {
-  weapons_launcher_list_it it;
+  launcher_weapons_list_it it;
   it = std::find_if(m_launcher_weapons_list.begin(), m_launcher_weapons_list.end(), test_weapon_type(type));
   ASSERT (it != m_launcher_weapons_list.end());
   return *it;
