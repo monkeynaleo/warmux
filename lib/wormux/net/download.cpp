@@ -24,12 +24,14 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
-#include <curl/curl.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_download.h>
 #include <WORMUX_error.h>
 #include <WORMUX_i18n.h>
 #include <WORMUX_file_tools.h>
+
+#ifdef HAVE_LIBCURL
+# include <curl/curl.h>
 
 Downloader::Downloader():
   curl(curl_easy_init())
@@ -55,6 +57,11 @@ bool Downloader::Get(const char* url, FILE* file) const
   fflush(file);
   return (r == CURLE_OK);
 }
+#else // waiting for an alternate implementation
+Downloader::Downloader() { }
+Downloader::~Downloader() { }
+bool Downloader::Get(const char* url, FILE* file) const { return false; }
+#endif
 
 static ssize_t getline(std::string& line, FILE* file)
 {
@@ -131,8 +138,8 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
   while (getline(line, file) > 0) {
     if (line.at(0) == '#'
-	|| line.at(0) == '\n'
-	|| line.at(0) == '\0')
+        || line.at(0) == '\n'
+        || line.at(0) == '\0')
       continue;
 
     std::string::size_type port_pos = line.find(':', 0);
@@ -153,4 +160,3 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
 
   return server_lst;
 }
-

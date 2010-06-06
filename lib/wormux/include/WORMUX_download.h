@@ -24,13 +24,17 @@
 
 #include <map>
 
-// Load config about curl...
+// Load config about download librart (curl, ...)
 #ifdef _MSC_VER
 #  include "msvc/config.h"
 #else
 #  include "config.h"
 #endif
+
+#ifdef HAVE_LIBCURL
+// Actual definition from curl.h
 typedef void CURL;
+#endif
 
 #include <WORMUX_singleton.h>
 
@@ -41,7 +45,9 @@ class Downloader : public Singleton<Downloader>
   const Downloader& operator=(const Downloader&);
   /**********************************************/
 
+#ifdef HAVE_LIBCURL
   CURL* curl;
+#endif
 
   // Return true if the download was successful
   bool Get(const char* url, FILE* file) const;
