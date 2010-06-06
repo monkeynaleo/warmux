@@ -64,6 +64,9 @@ void Ground::Init(){
 
   // Check if the map is "opened"
   open = ActiveMap()->IsOpened();
+  
+  //Load alpha threshold from XML
+  alpha_threshold = ActiveMap()->GetAlphaThreshold();
 
   std::cout << _("done") << std::endl;
 }
@@ -76,7 +79,7 @@ void Ground::Reset(){
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i & pos) const {
   ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
-  return GetAlpha(pos) != 255; // IsTransparent
+  return GetAlpha(pos) < alpha_threshold; // IsTransparent
 }
 
 /*

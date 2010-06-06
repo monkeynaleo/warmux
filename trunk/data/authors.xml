@@ -573,6 +573,13 @@
 
     <section title="Patches / Code">
       <author>
+	<nickname>FUZxxl</nickname>
+	<name>Robert CLAUSECKER</name>
+	<desription>Wrote supprt for alpha threshold in map files</desription>
+	<email>fuzxxl _AT_ gmail.com </email>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>AbsintheSyringe</nickname>
 	<name>Adnan HODZIC</name>
 	<description>Physics constant for wind particles, Bug fixes, SlackBuilds, Bosnian translation</description>
@@ -1004,14 +1011,6 @@
 	<description>CSS stylesheet for our old website</description>
 	<email>ddevedjian_AT_tema.rms_DOT_fr</email>
 	<country>France</country>
-      </author>
-      <author>
-	<nickname>FUZxxl</nickname>
-	<name>Robert Clausecker</name>
-	<description>Good job on data-src</description>
-	<email>fuzxxl_AT_gmail_DOT_com</email>
-	<website>http://www.fuzxxl.de</website>
-	<country>Germany</country>
       </author>
       <author>
 	<nickname>Jika</nickname>

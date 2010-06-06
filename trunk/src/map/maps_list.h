@@ -70,6 +70,8 @@ private:
   uint nb_mine;
   uint nb_barrel;
 
+  uint alpha_threshold;
+
   bool is_opened;
   bool is_basic_info_loaded;
   bool is_data_loaded;
@@ -109,6 +111,7 @@ public:
 
   uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; }
   uint GetNbMine() { LoadBasicInfo(); return nb_mine; }
+  uint GetAlphaThreshold() { LoadBasicInfo(); return alpha_threshold; }
   Profile * ResProfile() const { return res_profile; }
 
   bool IsOpened() { LoadBasicInfo(); return is_opened; }

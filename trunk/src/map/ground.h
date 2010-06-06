@@ -33,6 +33,8 @@ private:
                     int pas_bon_x,int pas_bon_y) const;
   Point2i lastPos;
 
+  uint alpha_threshold; //Keep redundant to rise performance
+
   static Double table[5][5];
 
 public:
