@@ -24,7 +24,6 @@
 #define WORMUX_FORMAT_H
 
 #include <string>
-#include <libintl.h>
 
 #ifdef _MSC_VER
 #  include "msvc/config.h"
@@ -37,6 +36,7 @@
 char * localization(const char * buffer);
 #else
 #  ifdef ENABLE_NLS /* gettext */
+#    include <libintl.h>
 #    define _(X) gettext(X)
 #  else
 #    define _(X) X
