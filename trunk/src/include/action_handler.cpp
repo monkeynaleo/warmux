@@ -76,10 +76,10 @@ static void FAIL_IF_GAMEMASTER(Action *a)
 
   if (Network::GetInstance()->IsGameMaster()) {
     fprintf(stderr,
-	    "Game Master received an action (%s) that is normally sent only by the game master only to a client,"
-	    " we are going to force disconnection of evil client: %s",
-	    ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
-	    a->GetCreator()->ToString().c_str());
+            "Game Master received an action (%s) that is normally sent only by the game master only to a client,"
+            " we are going to force disconnection of evil client: %s",
+            ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
+            a->GetCreator()->ToString().c_str());
 
     a->GetCreator()->ForceDisconnection();
   }
@@ -149,7 +149,7 @@ static void Action_Network_MasterChangeState (Action *a)
     if (server_state == WNet::NETWORK_LOADING_DATA)
       Network::GetInstance()->SetState(WNet::NETWORK_LOADING_DATA);
     ASSERT(server_state == WNet::NETWORK_LOADING_DATA
-	   || server_state == WNet::NETWORK_NEXT_GAME);
+           || server_state == WNet::NETWORK_NEXT_GAME);
     break;
 
   case WNet::NETWORK_READY_TO_PLAY:
@@ -166,10 +166,10 @@ static void Action_Network_MasterChangeState (Action *a)
 
   default:
     NET_ASSERT(false)
-      {
-	if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
-	return;
-      }
+    {
+      if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
+        return;
+    }
   }
 }
 
@@ -258,8 +258,8 @@ static void DisconnectOnError(enum net_error error)
 static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
 {
   std::string str = Format(_("Error initializing network: Client %s does not agree with you!! - %s"),
-			   a->GetCreator()->GetAddress().c_str(),
-			   NetErrorId_2_String(error).c_str());
+                           a->GetCreator()->GetAddress().c_str(),
+                           NetErrorId_2_String(error).c_str());
   std::cerr << str << std::endl;
   DisconnectOnError(error);
   AppWormux::DisplayError(str);
@@ -739,12 +739,7 @@ static void Action_Weapon_SetTarget (Action *a)
 
 static void Action_Weapon_SetTimeout (Action *a)
 {
-  WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  NET_ASSERT(launcher != NULL)
-  {
-    return;
-  }
-  launcher->GetProjectile()->SetTimeOut(a->PopInt());
+  ActiveTeam().AccessWeapon().SetProjectileTimeOut(a->PopInt());
 }
 
 static void Action_Weapon_StartMovingLeft(Action */*a*/)
