@@ -42,6 +42,8 @@ WeaponsList::~WeaponsList()
   for (; it != end; ++it)
     delete *it;
 
+  // no need to delete objects in m_weapons_launcher_list nor clear the 2 lists !
+
   delete weapons_res_profile;
   weapons_res_profile = NULL;
 }
@@ -51,28 +53,35 @@ WeaponsList::~WeaponsList()
 WeaponsList::WeaponsList(const xmlNode* weapons_xml)
 {
   weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
-  m_weapons_list.push_back(new Bazooka);
-  m_weapons_list.push_back(new SubMachineGun);
-  m_weapons_list.push_back(new Gun);
-  m_weapons_list.push_back(new Shotgun);
-  m_weapons_list.push_back(new SnipeRifle);
-  m_weapons_list.push_back(new RiotBomb);
-  m_weapons_list.push_back(new Cluzooka);
-  m_weapons_list.push_back(new AutomaticBazooka);
-  m_weapons_list.push_back(new Dynamite);
-  m_weapons_list.push_back(new GrenadeLauncher);
-  m_weapons_list.push_back(new DiscoGrenadeLauncher);
-  m_weapons_list.push_back(new ClusterLauncher);
-  m_weapons_list.push_back(new FootBombLauncher);
-  m_weapons_list.push_back(new FlameThrower);
+
+  // First launcher weapons
+  m_launcher_weapons_list.push_back(new AnvilLauncher);
+  m_launcher_weapons_list.push_back(new TuxLauncher);
+  m_launcher_weapons_list.push_back(new GnuLauncher);
+  m_launcher_weapons_list.push_back(new PolecatLauncher);
+  m_launcher_weapons_list.push_back(new BounceBallLauncher);
+  m_launcher_weapons_list.push_back(new AutomaticBazooka);
+  m_launcher_weapons_list.push_back(new GrenadeLauncher);
+  m_launcher_weapons_list.push_back(new DiscoGrenadeLauncher);
+  m_launcher_weapons_list.push_back(new ClusterLauncher);
+  m_launcher_weapons_list.push_back(new FootBombLauncher);
+  m_launcher_weapons_list.push_back(new Bazooka);
+  m_launcher_weapons_list.push_back(new RiotBomb);
+  m_launcher_weapons_list.push_back(new Cluzooka);
+  m_launcher_weapons_list.push_back(new SubMachineGun);
+  m_launcher_weapons_list.push_back(new Gun);
+  m_launcher_weapons_list.push_back(new Shotgun);
+  m_launcher_weapons_list.push_back(new SnipeRifle);
+  m_launcher_weapons_list.push_back(new Dynamite);
+  m_launcher_weapons_list.push_back(new FlameThrower);
+  m_launcher_weapons_list.push_back(new Mine);
+
+  // Copy launcher weapons to normal list
+  m_weapons_list = m_launcher_weapons_list;
+
+  // Add other weapons
   m_weapons_list.push_back(new Baseball);
-  m_weapons_list.push_back(new Mine);
   m_weapons_list.push_back(new AirAttack);
-  m_weapons_list.push_back(new AnvilLauncher);
-  m_weapons_list.push_back(new TuxLauncher);
-  m_weapons_list.push_back(new GnuLauncher);
-  m_weapons_list.push_back(new PolecatLauncher);
-  m_weapons_list.push_back(new BounceBallLauncher);
   m_weapons_list.push_back(new Slap);
   m_weapons_list.push_back(new Teleportation);
   m_weapons_list.push_back(new Parachute);
@@ -208,6 +217,14 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
   weapons_list_it it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
   ASSERT (it != m_weapons_list.end());
+  return *it;
+}
+
+WeaponLauncher* WeaponsList::GetWeaponLauncher(Weapon::Weapon_type type)
+{
+  weapons_launcher_list_it it;
+  it = std::find_if(m_launcher_weapons_list.begin(), m_launcher_weapons_list.end(), test_weapon_type(type));
+  ASSERT (it != m_launcher_weapons_list.end());
   return *it;
 }
 

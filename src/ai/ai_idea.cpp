@@ -240,8 +240,8 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   if (!CanUseCharacter(shooter))
     return NULL;
 
-  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(weapons_list->GetWeapon(weapon_type));
+  WeaponsList *weapons_list = Game::GetInstance()->GetWeaponsList();
+  WeaponLauncher *weapon = weapons_list->GetWeaponLauncher(weapon_type);
 
   if (!CanUseWeapon(weapon))
     return NULL;
@@ -330,7 +330,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
     return NULL;
 
   WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-  WeaponLauncher * weapon = dynamic_cast<WeaponLauncher*>(weapons_list->GetWeapon(weapon_type));
+  WeaponLauncher * weapon = weapons_list->GetWeaponLauncher(weapon_type);
 
   if (!CanUseWeapon(weapon))
     return NULL;
