@@ -114,7 +114,9 @@ Config::Config():
   sound_effects(true),
   sound_frequency(44100),
   warn_on_new_player(true),
+#ifdef HAVE_LIBCURL
   check_updates(false),
+#endif
   lefthanded_mouse(false),
   m_network_client_host("localhost"),
   m_network_client_port(WORMUX_NETWORK_PORT),
@@ -520,7 +522,9 @@ void Config::LoadXml(const xmlNode *xml)
   //=== misc ===
   if ((elem = XmlReader::GetMarker(xml, "misc")) != NULL)
   {
+#ifdef HAVE_LIBCURL
     XmlReader::ReadBool(elem, "check_updates", check_updates);
+#endif
     XmlReader::ReadBool(elem, "left-handed_mouse", lefthanded_mouse);
   }
 
@@ -546,10 +550,10 @@ bool Config::Save(bool save_current_teams)
   if (!MkdirPersonalConfigDir())
   {
     std::cerr << "o "
-	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
-			rep.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+              << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
+                        rep.c_str())
+              << " " << strerror(errno)
+              << std::endl;
     return false;
   }
 
@@ -678,7 +682,11 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
+#ifdef HAVE_LIBCURL
   doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
+#else
+  doc.WriteElement(misc_node, "check_updates", "0");
+#endif
   doc.WriteElement(misc_node, "left-handed_mouse", ulong2str(lefthanded_mouse));
 
   //=== game mode ===
@@ -732,13 +740,13 @@ void Config::SetNetworkLocalTeams()
   for (int i=0; it != end; ++it, i++)
     {
       if ((**it).IsLocal())
-	{
-	  ConfigTeam config;
-	  config.id = (**it).GetId();
-	  config.player_name = (**it).GetPlayerName();
-	  config.nb_characters = (**it).GetNbCharacters();
-	  config.ai = (**it).GetAIName();
-	  network_local_teams.push_back(config);
-	}
+        {
+          ConfigTeam config;
+          config.id = (**it).GetId();
+          config.player_name = (**it).GetPlayerName();
+          config.nb_characters = (**it).GetNbCharacters();
+          config.ai = (**it).GetAIName();
+          network_local_teams.push_back(config);
+        }
     }
 }
