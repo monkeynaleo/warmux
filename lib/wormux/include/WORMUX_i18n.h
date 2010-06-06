@@ -31,17 +31,18 @@
 #  include "config.h"
 #endif
 
-#ifdef USE_FRIBIDI
-#  define _(X) localization(X)
+#ifdef ENABLE_NLS /* gettext */
+#  include <libintl.h>
+#  ifdef USE_FRIBIDI
+#    define _(X) localization(X)
 char * localization(const char * buffer);
-#else
-#  ifdef ENABLE_NLS /* gettext */
-#    include <libintl.h>
-#    define _(X) gettext(X)
 #  else
-#    define _(X) X
-#  endif /* ENABLE_NLS aka gettext */
-#endif /* USE_FRIBIDI */
+#    define _(X) gettext(X)
+#  endif /* USE_FRIBIDI */
+#else
+#  define _(X) X
+#  define ngettext(sing_, plur_, val) ((val<2) ? (sing_) : (plur_)), val
+#endif /* ENABLE_NLS aka gettext */
 
 std::string Format (const char *format, ...);
 void InitI18N(const std::string &dir, const std::string &default_language);
