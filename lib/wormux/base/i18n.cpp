@@ -91,11 +91,9 @@ static void I18N_SetDir(const std::string &dir)
          "o Text domain: %s\n",
          bindtextdomain(PACKAGE, dir.c_str()), bind_textdomain_codeset(PACKAGE, "UTF-8"), textdomain(PACKAGE));
 }
-#endif
 
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
-#ifdef ENABLE_NLS
   setlocale(LC_ALL, "");
 
 #ifdef _WIN32
@@ -106,5 +104,5 @@ void InitI18N(const std::string &dir, const std::string &default_language)
   setenv("LANGUAGE", default_language.c_str(), 1);
 #endif
   I18N_SetDir(dir);
-#endif
 }
+#endif
