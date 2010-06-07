@@ -104,16 +104,16 @@ void PhysicalObj::SetXY(const Point2d &position)
   CheckOverlapping();
 
   if( IsOutsideWorldXY( Point2i(int(position.x), int(position.y)) ) && can_be_ghost )
-    {
-      SetPhysXY( position / PIXEL_PER_METER );
-      Ghost();
-      SignalOutOfMap();
-    }
+  {
+    SetPhysXY( position / PIXEL_PER_METER );
+    Ghost();
+    SignalOutOfMap();
+  }
   else
-    {
-      SetPhysXY( position / PIXEL_PER_METER );
-      if( FootsInVacuum() ) StartMoving();
-    }
+  {
+    SetPhysXY( position / PIXEL_PER_METER );
+    if( FootsInVacuum() ) StartMoving();
+  }
 }
 
 Double PhysicalObj::GetXDouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
@@ -125,7 +125,7 @@ int PhysicalObj::GetY() const { return (int)GetYDouble(); };
 void PhysicalObj::SetSize(const Point2i &newSize)
 {
   if( newSize == Point2i(0, 0) )
-          Error( "New size of (0, 0) !");
+    Error( "New size of (0, 0) !");
   m_width = newSize.x;
   m_height = newSize.y;
 
@@ -166,14 +166,14 @@ void PhysicalObj::CheckOverlapping()
       m_minimum_overlapse_time <= Time::GetInstance()->Read())
   {
     MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)",
-	      GetName().c_str(), m_overlapping_object->GetName().c_str(),
-	      (m_minimum_overlapse_time - Time::GetInstance()->Read()));
+              GetName().c_str(), m_overlapping_object->GetName().c_str(),
+              (m_minimum_overlapse_time - Time::GetInstance()->Read()));
     SetOverlappingObject(NULL);
   }
   else
   {
     MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",
-	       GetName().c_str(), m_overlapping_object->GetName().c_str());
+              GetName().c_str(), m_overlapping_object->GetName().c_str());
   }
 }
 
@@ -221,8 +221,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   Double lg = oldPos.Distance( newPos);
 
   MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), distance: %s",
-            typeid(*this).name(), 
-            Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+            typeid(*this).name(),
+            Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
             Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
             Double2str(lg).c_str());
 
@@ -239,8 +239,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   if (!m_collides_with_ground || IsInWater())
   {
     MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), collides ground:%d, water:%d",
-              typeid(*this).name(), 
-              Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+              typeid(*this).name(),
+              Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
               Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
               m_collides_with_ground, IsInWater());
 
@@ -266,8 +266,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       SetXY( pos );
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
-                typeid(*this).name(), 
-                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+                typeid(*this).name(),
+                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
                 Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str());
       return NO_COLLISION;
     }
@@ -363,13 +363,13 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
     // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
     // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
     collided_obj->SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
-			  angle1);
+                           angle1);
     SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
     break;
   }
 
   // Make it rebound!!
-  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %s,%s", m_name.c_str(), 
+  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %s,%s", m_name.c_str(),
             Double2str(contactPos.x).c_str(), Double2str(contactPos.y).c_str());
 
   Rebound(contactPos, contactAngle);
@@ -377,8 +377,8 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
 }
 
 void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
-					    Point2d& contactPos,
-					    Double& contactAngle) const
+                                            Point2d& contactPos,
+                                            Double& contactAngle) const
 {
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
@@ -405,7 +405,7 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
 void PhysicalObj::UpdatePosition ()
 {
   // No ghost allowed here !
-  if (IsGhost()) { 
+  if (IsGhost()) {
     return;
   }
 
@@ -576,7 +576,7 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
   }
 }
 
-void PhysicalObj::CanBeGhost(bool state) 
+void PhysicalObj::CanBeGhost(bool state)
 {
   can_be_ghost = state;
 }
@@ -640,31 +640,31 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
                  m_width - m_test_right - m_test_left, m_height - m_test_bottom - m_test_top);
 
   if (m_collides_with_characters)
+  {
+    FOR_ALL_LIVING_CHARACTERS(team,character)
     {
-      FOR_ALL_LIVING_CHARACTERS(team,character)
-      {
-        // We check both objet if one overlapse the other
-        if (&(*character) != this && !IsOverlapping(&(*character)) && !character->IsOverlapping(this)
-        && character->GetTestRect().Intersect( rect ))
-          return (PhysicalObj*) &(*character);
-      }
+      // We check both objet if one overlapse the other
+      if (&(*character) != this && !IsOverlapping(&(*character)) && !character->IsOverlapping(this)
+      && character->GetTestRect().Intersect( rect ))
+        return (PhysicalObj*) &(*character);
     }
+  }
 
   if (m_collides_with_objects)
+  {
+    FOR_EACH_OBJECT(it)
     {
-      FOR_EACH_OBJECT(it)
+      PhysicalObj * object=*it;
+      // We check both objet if one overlapse the other
+      if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
+          && object->m_collides_with_objects
+          && object->GetTestRect().Intersect(rect) )
       {
-        PhysicalObj * object=*it;
-        // We check both objet if one overlapse the other
-        if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
-            && object->m_collides_with_objects
-            && object->GetTestRect().Intersect(rect) )
-        {
-          if (!m_is_character || object->m_collides_with_characters)
-            return object;
-        }
+        if (!m_is_character || object->m_collides_with_characters)
+          return object;
       }
     }
+  }
   return NULL;
 }
 
@@ -720,10 +720,10 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   for (int x = GetX() + m_test_left; x <= GetX() + m_width - m_test_right; x++) {
     pointA.SetValues(x, y1);
     pointB.SetValues(x, y2);
- 
-    if (!GetWorld().IsOutsideWorld(pointA) && 
-        !GetWorld().IsOutsideWorld(pointB) && 
-        GetWorld().ground.IsEmpty(pointB) && 
+
+    if (!GetWorld().IsOutsideWorld(pointA) &&
+        !GetWorld().IsOutsideWorld(pointB) &&
+        GetWorld().ground.IsEmpty(pointB) &&
         !GetWorld().ground.IsEmpty(pointA)) {
       contact_x = x;
       contact_y = GetY() + m_height - m_test_bottom;
@@ -734,12 +734,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
   // We are looking for a point in contact on the left hand of object:
   x1 = GetX() + m_test_left;
   x2 = x1 + 1;
-  
+
   for (int y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++) {
     pointA.SetValues(x1, y);
     pointB.SetValues(x2, y);
 
-    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) && 
+    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) &&
         !GetWorld().ground.IsEmpty(pointA) &&  GetWorld().ground.IsEmpty(pointB)) {
       contact_x = GetX() + m_test_left;
       contact_y = y;
@@ -755,7 +755,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
     pointA.SetValues(x1, y);
     pointB.SetValues(x2, y);
 
-    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) && 
+    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) &&
         !GetWorld().ground.IsEmpty(pointA) && GetWorld().ground.IsEmpty(pointB)) {
       contact_x = GetX() + m_width - m_test_right;
       contact_y = y;
@@ -770,7 +770,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
     pointA.SetValues(x, y1);
     pointB.SetValues(x, y2);
 
-    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) && 
+    if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) &&
         !GetWorld().ground.IsEmpty(pointA) && GetWorld().ground.IsEmpty(pointB)) {
       contact_x = x;
       contact_y = GetY() + m_test_top;
