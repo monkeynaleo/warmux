@@ -331,14 +331,14 @@ if test \
   exit 1
 fi
 
-dnl === Add Werror flag for gcc/g++ if debug mode is enabled ==============
+dnl === Add Werror flag for gcc/g++ if debug mode is enabled, ==============
+dnl === but allow RTTI (ie dynamic_cast, typeid/typeinfo unavailable) ======
 if test "x${debug}" = "xyes"; then
-   CFLAGS="$CFLAGS -Werror"
-   CXXFLAGS="$CXXFLAGS -Werror"
+  CFLAGS="$CFLAGS -Werror"
+  CXXFLAGS="$CXXFLAGS -Werror"
+else
+  CXXFLAGS="$CXXFLAGS -fno-rtti"
 fi
-
-dnl === Disallow RTTI (ie dynamic_cast, typeid/typeinfo unavailable ========
-CXXFLAGS="$CXXFLAGS -fno-rtti"
 
 dnl ========================================================================
 dnl == Check for header files                                              =

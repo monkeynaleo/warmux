@@ -41,7 +41,14 @@
 #  define MSG_DEBUG(LEVEL, MESSAGE, ...) \
    PrintDebug( __FILE__, __FUNCTION__, __LINE__, LEVEL, MESSAGE, ## __VA_ARGS__)
 #else
-#  define MSG_DEBUG(LEVEL, MESSAGE, ...) do {} while (0)
+#  define MSG_DEBUG(...) do {} while (0)
+#endif
+
+// RTTI is only based on debug, not just WMX_LOG
+#ifdef DEBUG
+#  define MSG_DBG_RTTI  MSG_DEBUG
+#else
+#  define MSG_DBG_RTTI(...) do {} while (0)
 #endif
 
 extern bool debug_all;

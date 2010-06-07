@@ -151,7 +151,7 @@ void Physics::SetExternForceXY (const Point2d& vector)
   bool was_moving = IsMoving();
 
   UpdateTimeOfLastMove();
-  MSG_DEBUG ("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
+  MSG_DBG_RTTI("physic.physic", "EXTERN FORCE %s.", typeid(*this).name());
 
   m_extern_force.SetValues(vector);
 
@@ -264,14 +264,15 @@ void Physics::StartMoving()
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;
 
-  MSG_DEBUG ("physic.physic", "Starting to move: %s.", typeid(*this).name());
+  MSG_DBG_RTTI("physic.physic", "Starting to move: %s.", typeid(*this).name());
 }
 
 void Physics::StopMoving()
 {
   if(!IsMoving()) return;
 
-  if (IsMoving()) MSG_DEBUG ("physic.physic", "Stops moving: %s.", typeid(*this).name());
+  if (IsMoving())
+    MSG_DBG_RTTI("physic.physic", "Stops moving: %s.", typeid(*this).name());
   // Always called by PhysicalObj::StopMoving
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;
@@ -297,10 +298,11 @@ bool Physics::IsSleeping() const
   // return true if not moving since 1 sec.
   int delta = Time::GetInstance()->Read() - m_last_move;
   if(delta > 400) {
-    MSG_DEBUG( "physic.sleep", "%s is sleeping since %d ms.", typeid(*this).name(), delta);
+    MSG_DBG_RTTI("physic.sleep", "%s is sleeping since %d ms.",
+                 typeid(*this).name(), delta);
     return true;
   }
-  MSG_DEBUG( "physic.notsleeping", "%s is not sleeping.", typeid(*this).name());
+  MSG_DBG_RTTI("physic.notsleeping", "%s is not sleeping.", typeid(*this).name());
   return false;
 }
 
@@ -312,7 +314,7 @@ void Physics::UpdateTimeOfLastMove()
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (Double delta_t)
 {
-  MSG_DEBUG( "physic.pendulum", "%s: Pendulum; mass %s", typeid(*this).name(), Double2str(m_mass,5).c_str());
+  MSG_DBG_RTTI( "physic.pendulum", "%s: Pendulum; mass %s", typeid(*this).name(), Double2str(m_mass,5).c_str());
 
   //  Double l0 = 5.0 ;
 
@@ -343,13 +345,15 @@ void Physics::ComputePendulumNextXY (Double delta_t)
   Double y = m_fix_point_gnd.y - m_fix_point_dxy.y
              + m_rope_length.x0 * cos(m_rope_angle.x0);
 
-  MSG_DEBUG( "physic.pendulum", "%s angle: %s %s %s pos: %s %s fixpoint: %s, %s",
-             typeid(*this).name(),
-             Double2str(m_rope_angle.x0, 2).c_str() , Double2str(m_rope_angle.x1, 2).c_str(), Double2str(m_rope_angle.x2,  2).c_str(),
-             Double2str(x, 2).c_str(), Double2str(y, 2).c_str(),
-             Double2str(m_fix_point_gnd.x, 2).c_str(),
-             Double2str(m_fix_point_gnd.y, 2).c_str()
-            );
+  MSG_DBG_RTTI("physic.pendulum", "%s angle: %s %s %s pos: %s %s fixpoint: %s, %s",
+               typeid(*this).name(),
+               Double2str(m_rope_angle.x0, 2).c_str(),
+               Double2str(m_rope_angle.x1, 2).c_str(),
+               Double2str(m_rope_angle.x2,  2).c_str(),
+               Double2str(x, 2).c_str(), Double2str(y, 2).c_str(),
+               Double2str(m_fix_point_gnd.x, 2).c_str(),
+               Double2str(m_fix_point_gnd.y, 2).c_str()
+              );
 
   //  printf ("Physics::ComputePendulumNextXY - Angle(%f,%f,%f)\n",
   //            m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2);
@@ -389,19 +393,19 @@ void Physics::ComputeFallNextXY (Double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
-  MSG_DEBUG( "physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(),
-             Double2str(m_mass, 5).c_str(),
-             Double2str(weight_force, 5).c_str(),
-             Double2str(wind_force, 5).c_str(),
-             Double2str(air_resistance_factor, 5).c_str(),
-             Double2str(delta_t).c_str());
+  MSG_DBG_RTTI("physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(),
+               Double2str(m_mass, 5).c_str(),
+               Double2str(weight_force, 5).c_str(),
+               Double2str(wind_force, 5).c_str(),
+               Double2str(air_resistance_factor, 5).c_str(),
+               Double2str(delta_t).c_str());
 
-  MSG_DEBUG( "physic.fall", "%s before - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
-             typeid(*this).name(),
-             Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-             Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-             Double2str(delta_t).c_str(),
-             Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
+  MSG_DBG_RTTI("physic.fall", "%s before - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
+               typeid(*this).name(),
+               Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+               Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+               Double2str(delta_t).c_str(),
+               Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
 
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
@@ -411,12 +415,12 @@ void Physics::ComputeFallNextXY (Double delta_t)
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
                       weight_force + m_extern_force.y, delta_t);
 
-  MSG_DEBUG( "physic.fall", "%s after - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
-             typeid(*this).name(),
-             Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-             Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-             Double2str(delta_t).c_str(),
-             Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
+  MSG_DBG_RTTI("physic.fall", "%s after - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
+               typeid(*this).name(),
+               Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+               Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+               Double2str(delta_t).c_str(),
+               Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 
    // printf ("ap : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
@@ -426,7 +430,8 @@ void Physics::ComputeFallNextXY (Double delta_t)
 // Compute the position of the object at current time.
 Point2d Physics::ComputeNextXY(Double delta_t){
 
-  MSG_DEBUG("physic.compute", "%s: delta: %f", typeid(*this).name(), Double2str(delta_t).c_str());
+  MSG_DBG_RTTI("physic.compute", "%s: delta: %f",
+               typeid(*this).name(), Double2str(delta_t).c_str());
 
   if (FreeFall == m_motion_type) {
     ComputeFallNextXY(delta_t);
@@ -460,13 +465,13 @@ void Physics::RunPhysicalEngine()
 
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
-      MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s) - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - step:%s",
-                typeid(*this).name(),
-                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
-                Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
-                Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-                Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-                Double2str(PHYS_DELTA_T).c_str());
+      MSG_DBG_RTTI("physic.move", "%s moves (%s, %s) -> (%s, %s) - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - step:%s",
+                   typeid(*this).name(),
+                   Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
+                   Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
+                   Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
+                   Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
+                   Double2str(PHYS_DELTA_T).c_str());
       NotifyMove(oldPos, newPos);
     }
     delta_t -= PHYS_DELTA_T;
