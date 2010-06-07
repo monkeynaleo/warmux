@@ -23,17 +23,13 @@
 #define DOWNLOAD_H
 
 #include <map>
+#include <string>
 
 // Load config about download librart (curl, ...)
 #ifdef _MSC_VER
 #  include "msvc/config.h"
 #else
 #  include "config.h"
-#endif
-
-#ifdef HAVE_LIBCURL
-// Actual definition from curl.h
-typedef void CURL;
 #endif
 
 #include <WORMUX_singleton.h>
@@ -45,12 +41,15 @@ class Downloader : public Singleton<Downloader>
   const Downloader& operator=(const Downloader&);
   /**********************************************/
 
+  std::string error;
+
 #ifdef HAVE_LIBCURL
-  CURL* curl;
+  void* curl;
+  char* curl_error_buf;
 #endif
 
   // Return true if the download was successful
-  bool Get(const char* url, FILE* file) const;
+  bool Get(const char* url, FILE* file);
 
 protected:
   friend class Singleton<Downloader>;
@@ -58,8 +57,10 @@ protected:
   ~Downloader();
 
 public:
-  std::string GetLatestVersion() const;
-  std::map<std::string, int> GetServerList(std::string list_name) const;
+  bool GetLatestVersion(std::string& line);
+  bool GetServerList(std::map<std::string, int>& server_lst, const std::string& list_name);
+
+  const std::string& GetLastError() const { return error; };
 };
 
 #endif

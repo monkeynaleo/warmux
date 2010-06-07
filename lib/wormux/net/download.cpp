@@ -33,9 +33,17 @@
 #ifdef HAVE_LIBCURL
 # include <curl/curl.h>
 
+static size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
+{
+  return fwrite(buf, size, nmemb, (FILE*)fd);
+}
+
 Downloader::Downloader():
   curl(curl_easy_init())
 {
+  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
+  curl_error_buf = new char[CURL_ERROR_SIZE];
+  curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curl_error_buf);
 }
 
 Downloader::~Downloader()
@@ -43,19 +51,18 @@ Downloader::~Downloader()
   curl_easy_cleanup(curl);
 }
 
-size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
-{
-  return fwrite(buf, size, nmemb, (FILE*)fd);
-}
-
-bool Downloader::Get(const char* url, FILE* file) const
+bool Downloader::Get(const char* url, FILE* file)
 {
   curl_easy_setopt(curl, CURLOPT_FILE, file);
   curl_easy_setopt(curl, CURLOPT_URL, url);
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
   CURLcode r = curl_easy_perform(curl);
   fflush(file);
-  return (r == CURLE_OK);
+
+  if (r == CURLE_OK)
+    return true;
+
+  error = std::string(curl_error_buf);
+  return false;
 }
 #else // waiting for an alternate implementation
 Downloader::Downloader() { }
@@ -75,46 +82,44 @@ static ssize_t getline(std::string& line, FILE* file)
   return line.size();
 }
 
-std::string Downloader::GetLatestVersion() const
+bool Downloader::GetLatestVersion(std::string& line)
 {
   static const char url[] = "http://www.wormux.org/last";
   int fd;
   const std::string last_file = CreateTmpFile("wormux_version", &fd);
 
   if (fd == -1) {
-    std::string err = Format(_("Fail to create temporary file: %s"), strerror(errno));
-    fprintf(stderr, "%s\n", err.c_str());
-    throw err;
+    error = Format(_("Fail to create temporary file: %s"), strerror(errno));
+    fprintf(stderr, "%s\n", error.c_str());
+    return false;
   }
 
   FILE* file = fdopen(fd, "r+");
   if (!file) {
-    std::string err = Format(_("Fail to open temporary file: %s"), strerror(errno));
-    fprintf(stderr, "%s\n", err.c_str());
-    throw err;
+    error = Format(_("Fail to open temporary file: %s"), strerror(errno));
+    fprintf(stderr, "%s\n", error.c_str());
+    return false;
   }
 
   if (!Get(url, file)) {
-    std::string err = Format(_("Couldn't fetch last version from %s"), url);
-    fprintf(stderr, "%s\n", err.c_str());
-    throw err;
+    error = Format(_("Couldn't fetch last version from %s"), url);
+    fprintf(stderr, "%s\n", error.c_str());
+    return false;
   }
 
   // Parse the file
   rewind(file);
-  std::string line;
   getline(line, file);
   fclose(file);
 
   // remove the file
   remove(last_file.c_str());
 
-  return line;
+  return true;
 }
 
-std::map<std::string, int> Downloader::GetServerList(std::string list_name) const
+bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std::string& list_name)
 {
-  std::map<std::string, int> server_lst;
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
@@ -123,13 +128,14 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
   const std::string server_file = CreateTmpFile("wormux_servers", &fd);
 
   if (fd == -1) {
-    std::string err = Format(_("Fail to create temporary file: %s"), strerror(errno));
-    throw err;
+    error = Format(_("Fail to create temporary file: %s"), strerror(errno));
+    fprintf(stderr, "%s\n", error.c_str());
+    return false;
   }
 
   FILE* file = fdopen(fd, "r+");
   if (!Get(list_url.c_str(), file))
-    return server_lst;
+    return false;
 
   // Parse the file
   std::string line;
@@ -158,5 +164,5 @@ std::map<std::string, int> Downloader::GetServerList(std::string list_name) cons
 
   MSG_DEBUG("downloader", "Server list retrieved. %i servers are running", server_lst.size());
 
-  return server_lst;
+  return true;
 }

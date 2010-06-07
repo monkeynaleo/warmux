@@ -468,8 +468,9 @@ void OptionMenu::CheckUpdates()
       || Constants::WORMUX_VERSION.find("svn") != std::string::npos)
     return;
 
-  try {
-      std::string latest_version = Downloader::GetInstance()->GetLatestVersion();
+  Downloader *dl = Downloader::GetInstance();
+  std::string latest_version;
+  if (dl->GetLatestVersion(latest_version)) {
       const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
       if (latest_version != cur_version) {
         Question new_version;
@@ -479,9 +480,9 @@ void OptionMenu::CheckUpdates()
         new_version.Set(txt, true, 0);
         new_version.Ask();
       }
-  }
-  catch (const std::string err) {
-    AppWormux::DisplayError(Format(_("Version verification failed because: %s"), err.c_str()));
+  } else {
+    AppWormux::DisplayError(Format(_("Version verification failed because: %s"),
+                                   dl->GetLastError().c_str()));
   }
 }
 #endif
