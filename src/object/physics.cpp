@@ -389,11 +389,11 @@ void Physics::ComputeFallNextXY (Double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
-  MSG_DEBUG( "physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(), 
-             Double2str(m_mass, 5).c_str(), 
+  MSG_DEBUG( "physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(),
+             Double2str(m_mass, 5).c_str(),
              Double2str(weight_force, 5).c_str(),
-             Double2str(wind_force, 5).c_str(), 
-             Double2str(air_resistance_factor, 5).c_str(), 
+             Double2str(wind_force, 5).c_str(),
+             Double2str(air_resistance_factor, 5).c_str(),
              Double2str(delta_t).c_str());
 
   MSG_DEBUG( "physic.fall", "%s before - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
@@ -461,8 +461,8 @@ void Physics::RunPhysicalEngine()
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
       MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s) - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - step:%s",
-                typeid(*this).name(), 
-                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(), 
+                typeid(*this).name(),
+                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
                 Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
                 Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
                 Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
