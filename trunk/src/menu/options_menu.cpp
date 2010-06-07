@@ -44,6 +44,7 @@
 #include "gui/tabs.h"
 #include "gui/text_box.h"
 #include "gui/question.h"
+#include "gui/vertical_box.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
 #include "sound/jukebox.h"

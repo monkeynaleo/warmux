@@ -23,7 +23,7 @@
 #define MAP_SELECTION_BOX_H
 
 #include "graphic/surface.h"
-#include "gui/box.h"
+#include "gui/vertical_box.h"
 #include "include/base.h"
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>

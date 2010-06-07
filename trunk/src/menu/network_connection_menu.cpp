@@ -23,6 +23,7 @@
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/box.h"
+#include "gui/vertical_box.h"
 #include "gui/check_box.h"
 #include "gui/list_box.h"
 #include "gui/msg_box.h"

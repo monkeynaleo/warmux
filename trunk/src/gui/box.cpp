@@ -74,49 +74,6 @@ void Box::Update(const Point2i &mousePosition,
 
 // --------------------------------------------------
 
-VBox::VBox(uint width, bool _draw_border, bool _force_widget_size) :
-  Box(Point2i(width, 100), _draw_border),
-  force_widget_size(_force_widget_size)
-{
-}
-
-void VBox::Pack()
-{
-  uint _y = position.y;
-  uint max_size_x = 0;
-
-  std::list<Widget *>::iterator it;
-  for (it = widget_list.begin();
-       it != widget_list.end();
-       ++it) {
-
-    if (it == widget_list.begin())
-      _y += border.y - margin;
-
-    (*it)->SetPosition(position.x + border.x,
-		       _y + margin);
-
-    if (force_widget_size) {
-      (*it)->SetSize(size.x - 2*border.x,
-		     (*it)->GetSizeY());
-    } else {
-      max_size_x = std::max(max_size_x, uint((*it)->GetSizeX()));
-    }
-
-    (*it)->Pack();
-
-    _y = (*it)->GetPositionY() + (*it)->GetSizeY();
-  }
-
-  size.y = _y - position.y + border.y;
-
-  if (!force_widget_size) {
-    size.x = max_size_x + 2*border.x;
-  }
-}
-
-// --------------------------------------------------
-
 HBox::HBox(uint height, bool _draw_border, bool _force_widget_size) :
   Box(Point2i(100, height), _draw_border),
   force_widget_size(_force_widget_size)
