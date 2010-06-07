@@ -93,7 +93,12 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
 
   // Download the server if it's empty
   if (server_lst.size() == 0) {
-    server_lst = Downloader::GetInstance()->GetServerList("server_list");
+    Downloader *dl = Downloader::GetInstance();
+    if (!dl->GetServerList(server_lst, "server_list")) {
+      fprintf(stderr, "Error: %s\n", dl->GetLastError().c_str());
+      r = CONN_BAD_HOST;
+      goto out;
+    }
     first_server = server_lst.end();
     current_server = server_lst.end();
   }
