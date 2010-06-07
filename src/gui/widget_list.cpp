@@ -121,13 +121,15 @@ Widget* WidgetList::GetFirstWidget() const
        it != widget_list.end();
        it++) {
     if ((*it)->IsWidgetBrowser()) {
-      MSG_DEBUG("widgetlist", "%s:%p is a widget browser!\n", typeid(*it).name(), (*it));
+      MSG_DBG_RTTI("widgetlist", "%s:%p is a widget browser!\n",
+                   typeid(*it).name(), (*it));
 
       first = (*it)->GetFirstWidget();
       if (first != NULL)
         return first;
     } else {
-      MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
+      MSG_DBG_RTTI("widgetlist", "%s:%p is NOT a widget browser!\n",
+                   typeid(*it).name(), (*it));
 
       return (*it);
     }
@@ -161,7 +163,8 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
 
   ASSERT(!w || !w->IsWidgetBrowser());
 
-  MSG_DEBUG("widgetlist", "%p::GetNextWidget(%s:%p)", this, typeid(w).name(), w);
+  MSG_DBG_RTTI("widgetlist", "%p::GetNextWidget(%s:%p)",
+               this, typeid(w).name(), w);
 
   if (widget_list.size() == 0) {
     return NULL;
@@ -169,17 +172,18 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
 
   if (w == NULL) {
     r = GetFirstWidget();
-    MSG_DEBUG("widgetlist", "%p::GetNextWidget(%s:%p) ==> %s%p", this, typeid(w).name(), w, typeid(r).name(), r);
+    MSG_DBG_RTTI("widgetlist", "%p::GetNextWidget(%s:%p) ==> %s%p",
+                 this, typeid(w).name(), w, typeid(r).name(), r);
     return r;
   }
 
   std::list<Widget*>::const_iterator it;
   for (it = widget_list.begin(); it != widget_list.end(); it++) {
 
-    MSG_DEBUG("widgetlist", "iterate on %s:%p", typeid(*it).name(), (*it));
+    MSG_DBG_RTTI("widgetlist", "iterate on %s:%p", typeid(*it).name(), (*it));
 
     if (w == (*it)) {
-      MSG_DEBUG("widgetlist", "we have found %s:%p", typeid(*it).name(), (*it));
+      MSG_DBG_RTTI("widgetlist", "we have found %s:%p", typeid(*it).name(), (*it));
 
       it++;
       if (it != widget_list.end())
@@ -192,16 +196,17 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
     }
 
     if ((*it)->IsWidgetBrowser()) {
-      MSG_DEBUG("widgetlist", "%s:%p is a widget browser!\n", typeid(*it).name(), (*it));
+      MSG_DBG_RTTI("widgetlist", "%s:%p is a widget browser!\n",
+                   typeid(*it).name(), (*it));
 
       r = (*it)->GetNextWidget(w, false);
 
       if (r && r == w && it != widget_list.end()) {
-        MSG_DEBUG("widgetlist", "r == w %s:%p", typeid(r).name(), (r));
+        MSG_DBG_RTTI("widgetlist", "r == w %s:%p", typeid(r).name(), (r));
         it++;
         if (it != widget_list.end()) {
           r = (*it);
-          MSG_DEBUG("widgetlist", "r ==>  %s:%p", typeid(r).name(), (r));
+          MSG_DBG_RTTI("widgetlist", "r ==>  %s:%p", typeid(r).name(), (r));
           if (r->IsWidgetBrowser()) {
             r = r->GetFirstWidget();
           }
@@ -212,13 +217,15 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
       if (r)
         break;
     } else {
-      MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
+      MSG_DBG_RTTI("widgetlist", "%s:%p is NOT a widget browser!\n",
+                   typeid(*it).name(), (*it));
     }
   }
 
   ASSERT(!r || !r->IsWidgetBrowser());
 
-  MSG_DEBUG("widgetlist", "%p::GetNextWidget(%s:%p) ==> %s%p", this, typeid(w).name(), w, typeid(r).name(), r);
+  MSG_DBG_RTTI("widgetlist", "%p::GetNextWidget(%s:%p) ==> %s%p",
+               this, typeid(w).name(), w, typeid(r).name(), r);
 
   return r;
 }
@@ -231,7 +238,8 @@ void WidgetList::SetFocusOnNextWidget()
     return;
   }
 
-  MSG_DEBUG("widgetlist", "before %s:%p", typeid(selected_widget).name(), selected_widget);
+  MSG_DBG_RTTI("widgetlist", "before %s:%p",
+               typeid(selected_widget).name(), selected_widget);
 
   Widget* w = GetNextWidget(selected_widget, true);
   SetFocusOn(w, true);

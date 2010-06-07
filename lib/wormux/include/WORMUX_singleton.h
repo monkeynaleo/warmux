@@ -51,8 +51,8 @@ protected:
   static T* singleton;
   ~Singleton()
   {
-    //MSG_DEBUG("singleton", "Deleting singleton %p of type %s",
-    //          singleton, typeid(T).name());
+    MSG_DBG_RTTI("singleton", "Deleting singleton %p of type %s",
+                 singleton, typeid(T).name());
     if (singleton == this)
       singleton = NULL;
   }
@@ -63,8 +63,8 @@ public:
     if (!singleton)
     {
       singleton = new T();
-      //MSG_DEBUG("singleton", "Created singleton %p of type %s",
-      //          singleton, typeid(singleton).name());
+      MSG_DBG_RTTI("singleton", "Created singleton %p of type %s",
+                   singleton, typeid(singleton).name());
     }
     return singleton;
   }

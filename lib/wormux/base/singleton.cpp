@@ -35,7 +35,7 @@ BaseSingleton::BaseSingleton()
   singletons.push_back(this);
   SDL_UnlockMutex(mutex);
 
-  MSG_DEBUG("singleton", "Added singleton %p", this);
+  MSG_DBG_RTTI("singleton", "Added singleton %p", this);
 }
 
 BaseSingleton::~BaseSingleton()
@@ -44,7 +44,7 @@ BaseSingleton::~BaseSingleton()
   singletons.remove(this);
   SDL_UnlockMutex(mutex);
 
-  MSG_DEBUG("singleton", "Removed singleton %p", this);
+  MSG_DBG_RTTI("singleton", "Removed singleton %p", this);
 }
 
 void BaseSingleton::ReleaseSingletons()
