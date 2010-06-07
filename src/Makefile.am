@@ -83,6 +83,8 @@ wormux_SOURCES = \
         gui/big/button_pic.h \
         gui/grid_box.cpp \
         gui/grid_box.h \
+        gui/vertical_box.cpp \
+        gui/vertical_box.h \
         gui/box.cpp \
         gui/box.h \
         gui/button.cpp \

@@ -16,47 +16,23 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Talk box: box handling chat in network menus
+ * Vertical Box
  *****************************************************************************/
 
-#ifndef TALK_BOX_H
-#define TALK_BOX_H
+#ifndef GUI_VERTICAL_BOX_H
+#define GUI_VERTICAL_BOX_H
 
-#include "graphic/surface.h"
-#include "gui/vertical_box.h"
-#include "include/base.h"
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include "gui/box.h"
 
-class Button;
-class MsgBox;
-class TextBox;
-
-class TalkBox : public VBox
+class VBox : public Box
 {
- private:
-  /* If you need this, implement it (correctly) */
-  TalkBox(const TalkBox&);
-  TalkBox operator=(const TalkBox&);
-  /**********************************************/
+  protected:
+    bool force_widget_size;
 
-  MsgBox* msg_box;
-  TextBox* line_to_send_tbox;
-  Button* send_txt_bt;
-
- public:
-  TalkBox(const Point2i& size, Font::font_size_t font_size, Font::font_style_t font_style);
-
-  void NewMessage(const std::string &msg, const Color& color = white_color);
-  void SendChatMsg();
-  void Clear();
-
-  bool TextHasFocus() const;
-  TextBox* GetTextBox() const {return line_to_send_tbox; };
-
-  bool SendKey(SDL_keysym key);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  public:
+    VBox(uint width, bool _draw_border=true, bool force_widget_size = true);
+    virtual void Pack();
 };
 
-
 #endif
+

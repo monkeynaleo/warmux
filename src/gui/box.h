@@ -55,16 +55,6 @@ public:
   virtual void Pack() = 0;
 };
 
-class VBox : public Box
-{
-protected:
-  bool force_widget_size;
-
-public:
-  VBox(uint width, bool _draw_border=true, bool force_widget_size = true);
-  virtual void Pack();
-};
-
 class HBox : public Box
 {
 protected:

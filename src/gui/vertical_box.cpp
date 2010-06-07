@@ -16,47 +16,52 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Talk box: box handling chat in network menus
+ * Vertical Box
  *****************************************************************************/
 
-#ifndef TALK_BOX_H
-#define TALK_BOX_H
-
-#include "graphic/surface.h"
 #include "gui/vertical_box.h"
-#include "include/base.h"
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
 
-class Button;
-class MsgBox;
-class TextBox;
-
-class TalkBox : public VBox
+VBox::VBox(uint width, 
+           bool _draw_border, 
+           bool _force_widget_size) :
+  Box(Point2i(width, 100), _draw_border),
+  force_widget_size(_force_widget_size)
 {
- private:
-  /* If you need this, implement it (correctly) */
-  TalkBox(const TalkBox&);
-  TalkBox operator=(const TalkBox&);
-  /**********************************************/
+}
 
-  MsgBox* msg_box;
-  TextBox* line_to_send_tbox;
-  Button* send_txt_bt;
+void VBox::Pack()
+{
+  uint _y = position.y;
+  uint max_size_x = 0;
 
- public:
-  TalkBox(const Point2i& size, Font::font_size_t font_size, Font::font_style_t font_style);
+  std::list<Widget *>::iterator it;
+  for (it = widget_list.begin();
+       it != widget_list.end();
+       ++it) {
 
-  void NewMessage(const std::string &msg, const Color& color = white_color);
-  void SendChatMsg();
-  void Clear();
+    if (it == widget_list.begin())
+      _y += border.y - margin;
 
-  bool TextHasFocus() const;
-  TextBox* GetTextBox() const {return line_to_send_tbox; };
+    (*it)->SetPosition(position.x + border.x,
+                       _y + margin);
 
-  bool SendKey(SDL_keysym key);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-};
+    if (force_widget_size) {
+      (*it)->SetSize(size.x - 2*border.x,
+                     (*it)->GetSizeY());
+    } else {
+      max_size_x = std::max(max_size_x, uint((*it)->GetSizeX()));
+    }
+
+    (*it)->Pack();
+
+    _y = (*it)->GetPositionY() + (*it)->GetSizeY();
+  }
+
+  size.y = _y - position.y + border.y;
+
+  if (!force_widget_size) {
+    size.x = max_size_x + 2*border.x;
+  }
+}
 
 
-#endif
