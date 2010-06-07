@@ -52,7 +52,7 @@ void BaseSingleton::ReleaseSingletons()
   SingletonList::iterator it = singletons.begin();
 
   while (it != singletons.end()) {
-    MSG_DEBUG("singleton", "Releasing singleton %p of type %s", *it, typeid(*it).name());
+    //MSG_DEBUG("singleton", "Releasing singleton %p of type %s", *it, typeid(*it).name());
     delete (*it);
     it = singletons.begin();
   }
