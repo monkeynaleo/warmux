@@ -1,4 +1,8 @@
-SUBDIRS = data lib src po doc
+SUBDIRS = data lib src doc
+
+if NLS
+SUBDIRS += po
+endif
 
 EXTRA_DIST = build/visual/gettext.rules            \
              build/visual/wormux.sln               \
@@ -27,12 +31,12 @@ EXTRA_DIST = build/visual/gettext.rules            \
              doc/howto_play_online/en.pdf          \
              doc/howto_play_online/nl.pdf          \
              src/msvc/getopt.c                     \
-	     build/mac/Info.plist.in               \
+             build/mac/Info.plist.in               \
              build/mac/PkgInfo.in                  \
              build/mac/README-mac.txt              \
              build/mac/README-mac.txt              \
              build/mac/cmake_build.sh              \
-	     build/win32_setup/create_setup.sh.in  \
+             build/win32_setup/create_setup.sh.in  \
              build/win32_setup/English.nsh         \
              build/win32_setup/French.nsh          \
              build/win32_setup/Greek.nsh           \

@@ -23,6 +23,7 @@ AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE([foreign 1.5])
 
 AM_GNU_GETTEXT([external], [need-ngettext])
+AM_CONDITIONAL([NLS], test "$USE_NLS" = "yes")
 
 dnl ========================================================================
 dnl === Check for tools                                                    =
@@ -261,7 +262,7 @@ if test "${enable_fribidi}" = "yes"; then
    CFLAGS="$CFLAGS $FRIBIDI_CFLAGS"
    CXXFLAGS="$CXXFLAGS $FRIBIDI_CFLAGS"
 else
-  if test "x$USE_NLS" == "xyes"; then
+  if test "x$USE_NLS" = "xyes"; then
     AC_MSG_WARN([fribidi is disabled. If you want bi-directional text rendering, please use configure with this option : --enable-fribidi])
   fi
 fi
