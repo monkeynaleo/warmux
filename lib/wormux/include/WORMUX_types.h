@@ -49,7 +49,7 @@ typedef unsigned __int32  uint32_t;
 #ifndef WIN32
 # define SIZE_T_FORMAT "z"
 #else
-# define SIZE_T_FORMAT "l"
+# define SIZE_T_FORMAT "I"
 #endif
 
 typedef struct fixedpoint::fixed_point<16> Double;
