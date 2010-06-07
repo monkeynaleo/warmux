@@ -337,6 +337,9 @@ if test "x${debug}" = "xyes"; then
    CXXFLAGS="$CXXFLAGS -Werror"
 fi
 
+dnl === Disallow RTTI (ie dynamic_cast, typeid/typeinfo unavailable ========
+CXXFLAGS="$CXXFLAGS -fno-rtti"
+
 dnl ========================================================================
 dnl == Check for header files                                              =
 dnl ========================================================================
