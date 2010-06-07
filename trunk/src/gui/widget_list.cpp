@@ -30,7 +30,7 @@ WidgetList::WidgetList() :
 {
 }
 
-WidgetList::WidgetList(const Point2i &size) : 
+WidgetList::WidgetList(const Point2i &size) :
   Widget(size),
   selected_widget(NULL)
 {
@@ -103,10 +103,10 @@ void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
     selected_widget->SetFocus(true);
 
     if (force_mouse_position &&
-	!selected_widget->Contains(Mouse::GetInstance()->GetPosition())) {
+        !selected_widget->Contains(Mouse::GetInstance()->GetPosition())) {
 
       Mouse::GetInstance()->SetPosition(selected_widget->GetPosition() +
-					selected_widget->GetSize()/2);
+                                        selected_widget->GetSize()/2);
     }
   }
 }
@@ -125,7 +125,7 @@ Widget* WidgetList::GetFirstWidget() const
 
       first = (*it)->GetFirstWidget();
       if (first != NULL)
-	return first;
+        return first;
     } else {
       MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
 
@@ -146,7 +146,7 @@ Widget* WidgetList::GetLastWidget() const
     if ((*it)->IsWidgetBrowser()) {
       last = (*it)->GetLastWidget();
       if (last != NULL)
-	return last;
+        return last;
     } else {
       return (*it);
     }
@@ -183,11 +183,11 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
 
       it++;
       if (it != widget_list.end())
-	r = (*it);
+        r = (*it);
       else if (loop)
-	r = GetFirstWidget();
+        r = GetFirstWidget();
       else
-	r = (Widget*)w;
+        r = (Widget*)w;
       break;
     }
 
@@ -197,20 +197,20 @@ Widget* WidgetList::GetNextWidget(const Widget *w, bool loop) const
       r = (*it)->GetNextWidget(w, false);
 
       if (r && r == w && it != widget_list.end()) {
-	MSG_DEBUG("widgetlist", "r == w %s:%p", typeid(r).name(), (r));
-	it++;
-	if (it != widget_list.end()) {
-	  r = (*it);
-	  MSG_DEBUG("widgetlist", "r ==>  %s:%p", typeid(r).name(), (r));
-	  if (r->IsWidgetBrowser()) {
-	    r = r->GetFirstWidget();
-	  }
-	} else if (loop) {
-	  r = GetFirstWidget();
-	}
+        MSG_DEBUG("widgetlist", "r == w %s:%p", typeid(r).name(), (r));
+        it++;
+        if (it != widget_list.end()) {
+          r = (*it);
+          MSG_DEBUG("widgetlist", "r ==>  %s:%p", typeid(r).name(), (r));
+          if (r->IsWidgetBrowser()) {
+            r = r->GetFirstWidget();
+          }
+        } else if (loop) {
+          r = GetFirstWidget();
+        }
       }
       if (r)
-	break;
+        break;
     } else {
       MSG_DEBUG("widgetlist", "%s:%p is NOT a widget browser!\n", typeid(*it).name(), (*it));
     }
@@ -256,11 +256,11 @@ Widget* WidgetList::GetPreviousWidget(const Widget *w, bool loop) const
     if (w == (*it)) {
       it++;
       if (it != widget_list.rend())
-	r = (*it);
+        r = (*it);
       else if (loop)
-	r = (*widget_list.rbegin());
+        r = (*widget_list.rbegin());
       else
-	r = NULL;
+        r = NULL;
       break;
     }
   }
