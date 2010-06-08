@@ -67,7 +67,7 @@ bool Downloader::Get(const char* url, FILE* file)
 #else // waiting for an alternate implementation
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::Get(const char* url, FILE* file) const { return false; }
+bool Downloader::Get(const char* url, FILE* file) { return false; }
 #endif
 
 static ssize_t getline(std::string& line, FILE* file)
