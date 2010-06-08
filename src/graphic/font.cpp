@@ -37,16 +37,11 @@ Font* Font::GetInstance(font_size_t _fontSize,
 {
   int fontSize = (int)_fontSize;
 
-  try {
-    if (!LIB_INIT && TTF_Init() == -1) {
-      Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
-      exit(1);
-    }
-    LIB_INIT = true;
-  } catch (const std::string & e) {
-    std::cerr << e << std::endl;
-    exit(-1);
+  if (!LIB_INIT && TTF_Init() == -1) {
+    Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
+    exit(1);
   }
+  LIB_INIT = true;
 
   Font * font = NULL;
 
