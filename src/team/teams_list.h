@@ -46,7 +46,7 @@ private:
   std::list<uint> selection;
   std::vector<Team*>::iterator active_team;
 
-  void LoadOneTeam (const std::string &dir, const std::string &file);
+  bool LoadOneTeam(const std::string &dir, const std::string &file);
   void LoadList();
 
   void AddTeam(Team* the_team, int pos, const ConfigTeam& the_team_cfg, bool is_local);

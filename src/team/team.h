@@ -37,26 +37,14 @@ const std::string DEFAULT_AI_NAME = "default";
 class Character;
 class CustomTeam;
 class WeaponsList;
+class XmlReader;
+class Profile;
 
 class Team
 {
-  /* If you need this, implement it (correctly) */
-  Team(const Team&);
-  Team operator=(const Team&);
-  /**********************************************/
-
   public:
     typedef std::list<Character>::iterator iterator;
     typedef std::list<Character>::const_iterator const_iterator;
-
-    std::vector<int> m_nb_ammos;
-    std::vector<int> m_nb_units;
-    std::vector<int> m_energy;
-
-    // Autres
-    CrossHair        crosshair;
-    TeamEnergy       energy;
-
 
   private:
     Surface mini_flag;
@@ -78,17 +66,23 @@ class Team
     bool remote;
     bool abandoned;
     CustomTeam *attached_custom_team;
-
-    Team (const std::string& _teams_dir,
-          const std::string& _id,
-          const std::string& _name,
-          const Surface &_flag,
-          const std::string& _sound_profile);
-
     bool LoadCharacters();
     WeaponsList * weapons_list;
+
+protected:
+  Team(XmlReader& doc, Profile* res,
+       const std::string& name, const std::string &teams_dir, const std::string &id);
+
   public:
-    Team (const std::string &teams_dir, const std::string &id);
+  static Team* LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error);
+
+  std::vector<int> m_nb_ammos;
+  std::vector<int> m_nb_units;
+  std::vector<int> m_energy;
+
+  // Others
+  CrossHair        crosshair;
+  TeamEnergy       energy;
 
     void LoadGamingData(WeaponsList * weapons);
     void UnloadGamingData();
@@ -153,7 +147,6 @@ class Team
     int ReadNbAmmos() const;
     int ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const;
     int& AccessNbAmmos();
-
 
   // Number of current unit per ammo for the selected weapon.
     int ReadNbUnits() const;

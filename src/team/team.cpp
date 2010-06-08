@@ -45,31 +45,48 @@
 #include <sstream>
 #include <iostream>
 
-
-Team::Team(const std::string & teams_dir, 
-           const std::string & id) : 
-  energy(this), 
-  m_teams_dir(teams_dir), 
-  m_id(id), 
-  ai(NULL), 
-  ai_name(NO_AI_NAME), 
-  remote(false), 
-  abandoned(false)
+Team* Team::LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error)
 {
-  std::string nomfich;
+  std::string nomfich = teams_dir+id+ PATH_SEPARATOR "team.xml";
+  std::string name;
   XmlReader   doc;
 
   // Load XML
-  nomfich = teams_dir+id+ PATH_SEPARATOR "team.xml";
+  if (!doc.Load(nomfich)) {
+    error = "Unable to load file of team data";
+    return NULL;
+  }
 
-  if (!doc.Load(nomfich))
-    throw "unable to load file of team data";
+  if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) {
+    error = "Invalid file structure: cannot find a name for team";
+    return NULL;
+  }
 
-  if (!XmlReader::ReadString(doc.GetRoot(), "name", m_name))
-    throw "Invalid file structure: cannot find a name for team ";
-
-  // Load flag
   Profile *res = GetResourceManager().LoadXMLProfile(nomfich, true);
+  if (!res) {
+    error = "Invalid file structure: cannot load resources";
+    return NULL;
+  }
+
+  // The constructor will unload res
+  return new Team(doc, res, name, teams_dir, id);
+}
+
+Team::Team(XmlReader& doc, Profile* res,
+           const std::string& name, const std::string &teams_dir, const std::string &id)
+  : m_teams_dir(teams_dir)
+  , m_id(id)
+  , m_name(name)
+  , m_player_name("")
+  , active_weapon(NULL)
+  , ai(NULL)
+  , ai_name(NO_AI_NAME)
+  , remote(false)
+  , abandoned(false)
+  , attached_custom_team(NULL)
+  , energy(this)
+{
+  // Load flag
   flag = GetResourceManager().LoadImage(res, "flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
   death_flag = GetResourceManager().LoadImage(res, "death_flag");
@@ -81,12 +98,6 @@ Team::Team(const std::string & teams_dir,
     m_sound_profile = "default";
 
   active_character = characters.end();
-
-  active_weapon = NULL;
-  attached_custom_team = NULL;
-
-  m_player_name = "";
-
   nb_characters = GameMode::GetInstance()->nb_characters;
 }
 
@@ -217,7 +228,7 @@ void Team::NextCharacter(bool newturn)
     do {
       ++active_character;
       if (active_character == characters.end())
-	active_character = characters.begin();
+  active_character = characters.begin();
     } while (ActiveCharacter().IsDead());
   }
   ActiveCharacter().StartPlaying();
