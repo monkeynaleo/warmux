@@ -57,12 +57,12 @@ Video::Video()
   // The icon must be larger then 32x32 pixels as some desktops display larger icons.
   // For example on a mac system the icon got displayed in a resolution of 64x64 pixels.
   // The even higher resolution allows the system to scale the icon down to an anti-aliased version.
-  #ifndef WIN32
-    SetWindowIcon( config->GetDataDir() + "wormux_128x128.xpm" );
-  #else
-    // The SDL manual of SDL_WM_SetIcon states that "Win32 icons must be 32x32.":
-    SetWindowIcon( config->GetDataDir() + "wormux_32x32.xpm" );
-  #endif
+#ifndef WIN32
+  SetWindowIcon(config->GetDataDir() + "wormux_128x128.xpm");
+#else
+  // The SDL manual of SDL_WM_SetIcon states that "Win32 icons must be 32x32.":
+  SetWindowIcon(config->GetDataDir() + "wormux_32x32.xpm");
+#endif
 
   ComputeAvailableConfigs();
 }
@@ -94,8 +94,8 @@ void Video::AddConfigIfAbsent(int w, int h)
 {
   Point2i p(w, h);
 
-  if ( !CompareConfigs((*available_configs.begin()), p) &&
-       find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
+  if (!CompareConfigs((*available_configs.begin()), p) &&
+      find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
     available_configs.push_back(p);
 }
 
@@ -200,22 +200,21 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
   // Trying with hardware acceleration
   r = __SetConfig(width, height, _fullscreen, true);
   if (!r) {
-	fprintf(stderr, 
-		"WARNING: Fail to initialize main window with the following configuration: %dx%d, "
-		"fullscreen: %d, WITH hardware acceleration\n",
-		old_width, old_height, _fullscreen);
+    fprintf(stderr,
+            "WARNING: Fail to initialize main window with the following configuration: %dx%d,\n"
+            "fullscreen: %d, WITH hardware acceleration\n",
+            old_width, old_height, _fullscreen);
 
     // Trying previous configuration
     if (! __SetConfig(old_width, old_height, old_fullscreen, old_hw)) {
 
       // previous configuration fails !?!
-      
+
       // let's have another try without hw acceleration and without fullscreen
       if (! __SetConfig(old_width, old_height, false, false)) {
-	Error(Format("ERROR: Fail to initialize main window with the following configuration: %dx%d, "
-		     "no fullscreen, no hardware acceleration\n",
-		     old_width, old_height));
-	exit(EXIT_FAILURE);
+        Error(Format("ERROR: Fail to initialize main window with the following configuration: %dx%d, "
+                     "no fullscreen, no hardware acceleration\n", old_width, old_height));
+        exit(EXIT_FAILURE);
       }
     }
   }
@@ -255,10 +254,10 @@ void Video::SetWindowIcon(const std::string& filename)
 
 void Video::InitSDL()
 {
-  if( SDLReady )
+  if (SDLReady)
     return;
 
-  if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ) {
+  if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0) {
     Error(Format("Unable to initialize SDL library: %s", SDL_GetError()));
     exit (EXIT_FAILURE);
   }
