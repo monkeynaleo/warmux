@@ -27,7 +27,6 @@
 
 //-----------------------------------------------------------------------------
 
-
 class CustomTeam
 {
 private:
@@ -39,9 +38,16 @@ private:
 
   bool SaveXml();
 
+protected:
+  CustomTeam(const std::vector<std::string>& list, const std::string& name);
+
 public:
+  static const uint MAX_CHARACTERS = 10;
+  static CustomTeam* LoadCustomTeam(const std::string &teams_dir,
+                                    const std::string &id,
+                                    std::string& error);
+
   CustomTeam(const std::string &team_name);
-  CustomTeam(const std::string &teams_dir, const std::string &id);
   ~CustomTeam();
   std::string GetName();
   std::vector<std::string> GetCharactersNameList();
@@ -52,7 +58,6 @@ public:
   void SetName(const std::string &new_name);
   void SetCharacterName(unsigned id, const std::string &new_name);
 };
-
 
 //-----------------------------------------------------------------------------
 #endif
