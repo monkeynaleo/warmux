@@ -61,7 +61,7 @@ public:
                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
   void SetLanguage(const std::string language);
   std::string GetLanguage() const { return default_language; };
 #endif
@@ -136,7 +136,9 @@ public:
   const std::string& GetTtfFilename();
 
   std::string GetDataDir() const { return data_dir; };
+#ifdef ENABLE_NLS
   std::string GetLocaleDir() const { return locale_dir; };
+#endif
   std::string GetPersonalDataDir() const { return personal_data_dir; };
   std::string GetPersonalConfigDir() const { return personal_config_dir; };
   std::string GetChatLogDir() const { return chat_log_dir; };
@@ -176,7 +178,10 @@ protected:
   std::string m_filename;
 
   // Code setting it must make sure it ends with the path separator
-  std::string data_dir, locale_dir, personal_data_dir, personal_config_dir, chat_log_dir;
+#ifdef ENABLE_NLS
+  std::string locale_dir;
+#endif
+  std::string data_dir, personal_data_dir, personal_config_dir, chat_log_dir;
 
   std::list<ConfigTeam> teams;
   std::string map_name;
@@ -227,7 +232,7 @@ protected:
   std::list<ConfigTeam> network_local_teams;
 
   // Font setting
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
   std::map<std::string, std::string>  fonts;
 #endif
   std::string font_dir;
