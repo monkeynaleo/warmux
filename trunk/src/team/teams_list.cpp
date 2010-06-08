@@ -94,27 +94,30 @@ Team& TeamsList::ActiveTeam()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name)
+bool TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name)
 {
   // Skip '.', '..' and hidden files
-  if (team_name[0] == '.') return;
+  if (team_name[0] == '.')
+    return false;
 
   // Is it a directory ?
-  if (!DoesFolderExist(dir+team_name)) return;
+  if (!DoesFolderExist(dir+team_name))
+    return false;
 
   // Add the team
-  try {
-    full_list.push_back(new Team(dir, team_name));
+  std::string error;
+  Team *team = Team::LoadTeam(dir, team_name, error);
+  if (team) {
+    full_list.push_back(team);
     std::cout << ((1<full_list.size())?", ":" ") << team_name;
     std::cout.flush();
+    return true;
   }
 
-  catch (char const *error) {
     std::cerr << std::endl
               << Format(_("Error loading team :")) << team_name <<":"<< error
               << std::endl;
-    return;
-  }
+  return false;
 }
 
 //-----------------------------------------------------------------------------
