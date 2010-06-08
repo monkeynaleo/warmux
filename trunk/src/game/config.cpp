@@ -90,14 +90,6 @@ const std::string FILENAME="config.xml";
 Config::Config():
   default_language(""),
   m_game_mode("classic"),
-  m_filename(),
-  data_dir(),
-  locale_dir(),
-  personal_data_dir(),
-  personal_config_dir(),
-  chat_log_dir(),
-  teams(),
-  map_name(),
   display_energy_character(true),
   display_name_character(true),
   display_wind_particles(true),
@@ -123,9 +115,7 @@ Config::Config():
   m_network_server_game_name("Wormux party"),
   m_network_server_port(WORMUX_NETWORK_PORT),
   m_network_server_public(true),
-  ttf_filename(),
-  transparency(ALPHA),
-  config_set()
+  transparency(ALPHA)
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume();
@@ -146,7 +136,9 @@ Config::Config():
   // directories
 #ifdef USE_AUTOPACKAGE
   data_dir     = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
+#  ifdef ENABLE_NLS
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
+#  endif
   font_dir     = data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR;
   filename     = font_dir + PATH_SEPARATOR "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
@@ -166,28 +158,36 @@ Config::Config():
       // executable is inside an app bundle, use app bundle-relative paths
       std::string default_data_dir = contents + std::string("/Resources/data/");
       std::string default_ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
-      std::string default_locale_dir = contents + std::string("/Resources/locale/");
 
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
-      locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, default_locale_dir);
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, default_ttf_filename);
+#  ifdef ENABLE_NLS
+      std::string default_locale_dir = contents + std::string("/Resources/locale/");
+      locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, default_locale_dir);
+#endif
   }
   else {
       // executable is installed Unix-style, use default paths
       data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+#  ifdef ENABLE_NLS
       locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+#  endif
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
   }
 #else
 #  ifdef _WIN32
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + "\\data\\";
+#    ifdef ENABLE_NLS
   locale_dir   = basepath + "\\locale\\";
+#    endif
   ttf_filename = basepath + "\\" FONT_FILE;
 #  else
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+#    ifdef ENABLE_NLS
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+#    endif
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
 #  endif
   font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR);
@@ -242,7 +242,7 @@ Config::Config():
   std::string dir;
   if (!DoLoading())
   {
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
     // Failed, still try to apply default config then
     SetLanguage("");
 #endif
@@ -294,7 +294,7 @@ bool Config::RemovePersonalConfigFile() const
   return true;
 }
 
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
 void Config::SetLanguage(const std::string language)
 {
   default_language = language;
@@ -379,7 +379,7 @@ void Config::LoadDefaultValue()
       resolution_available.push_back(tmp);
   }
 
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
   //=== Default fonts value ===
   const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_language_fonts");
   if (node) {
@@ -432,7 +432,7 @@ void Config::LoadXml(const xmlNode *xml)
 
   //=== Language ===
   XmlReader::ReadString(xml, "default_language", default_language);
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
   SetLanguage(default_language);
 #endif
 
@@ -730,7 +730,7 @@ uint Config::GetMaxVolume()
 
 const std::string& Config::GetTtfFilename()
 {
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
   if (fonts.find(default_language) == fonts.end())
     return ttf_filename;
   else
