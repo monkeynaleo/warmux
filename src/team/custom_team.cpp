@@ -32,50 +32,62 @@
 #include "tool/xml_document.h"
 
 CustomTeam::CustomTeam(const std::string &team_name)
+  : is_name_changed(false)
+  , nb_characters(MAX_CHARACTERS)
+  , name(team_name)
 {
-  nb_characters = 10;
-  is_name_changed = false;
-  name = team_name;
 }
 
-CustomTeam::CustomTeam(const std::string &custom_teams_dir, const std::string &id) :
-  characters_name_list()
+CustomTeam::CustomTeam(const std::vector<std::string>& list, const std::string& name)
+  : is_name_changed(false)
+  , directory_name(name)
+  , characters_name_list(list)
 {
-  std::string nomfich;
+  nb_characters = list.size();
+}
+
+CustomTeam* CustomTeam::LoadCustomTeam(const std::string &custom_teams_dir,
+                                       const std::string &id, std::string& error)
+{
+  std::vector<std::string> list;
+  std::string name    = custom_teams_dir + id + PATH_SEPARATOR;
+  std::string nomfich = name + "team.xml";
   XmlReader   doc;
 
-  directory_name = custom_teams_dir + id +PATH_SEPARATOR;
-
   // Load XML
-  nomfich = custom_teams_dir + id + PATH_SEPARATOR "team.xml";
+  if (!doc.Load(nomfich)) {
+    error = "unable to load file of team data";
+    return NULL;
+  }
 
-  if (!doc.Load(nomfich))
-    throw "unable to load file of team data";
-
-  if (!XmlReader::ReadString(doc.GetRoot(), "name", name))
-    throw "Invalid file structure: cannot find a name for team ";
-
-  // Load character names
-  nb_characters = 10;
+  if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) {
+    error = "Invalid file structure: cannot find a name for team in " + nomfich;
+    return NULL;
+  }
 
   // Create the characters
   xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
   xmlNodeArray::const_iterator it = nodes.begin();
-  is_name_changed = false;
 
   do {
     std::string character_name = "Unknown Soldier (it's all over)";
 
     XmlReader::ReadString(*it, "name", character_name);
-    characters_name_list.push_back(character_name);
-
+    list.push_back(character_name);
 
     MSG_DEBUG("team", "Add %s in  custom team %s", character_name.c_str(), name.c_str());
 
     // Did we reach the end ?
     ++it;
 
-  } while (it != nodes.end() && characters_name_list.size() < nb_characters);
+  } while (it != nodes.end() || list.size() < MAX_CHARACTERS);
+
+  if (list.size() > MAX_CHARACTERS) {
+    error = "Too many players in " + nomfich;
+    return NULL;
+  }
+
+  return new CustomTeam(list, name);
 }
 
 
@@ -89,19 +101,19 @@ void CustomTeam::Delete()
   if (!DeleteFile(directory_name+"team.xml")) {
     std::string file = directory_name + "team.xml";
     std::cerr << "o "
-	      << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
-			file.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+        << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
+      file.c_str())
+        << " " << strerror(errno)
+        << std::endl;
     return;
   }
 
   if (!DeleteFolder(directory_name)) {
     std::cerr << "o "
-	      << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
-			directory_name.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+        << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
+      directory_name.c_str())
+        << " " << strerror(errno)
+        << std::endl;
   }
 }
 
@@ -152,10 +164,10 @@ bool CustomTeam::Save()
   // Create the directory if it doesn't exist
   if (!config->MkdirPersonalConfigDir()) {
     std::cerr << "o "
-	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
-			rep.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+        << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
+      rep.c_str())
+        << " " << strerror(errno)
+        << std::endl;
     return false;
   }
 
@@ -163,10 +175,10 @@ bool CustomTeam::Save()
 
   if (!CreateFolder(config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR)) {
     std::cerr << "o "
-	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
-			rep.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+        << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
+      rep.c_str())
+        << " " << strerror(errno)
+        << std::endl;
     return false;
   }
 
@@ -174,10 +186,10 @@ bool CustomTeam::Save()
 
   if (!CreateFolder(directory_name)) {
     std::cerr << "o "
-	      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
-			rep.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+        << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
+      rep.c_str())
+        << " " << strerror(errno)
+        << std::endl;
     return false;
   }
 

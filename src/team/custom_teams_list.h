@@ -47,7 +47,7 @@ private:
 
   void Clear();
   void Sort();
-  void LoadOneTeam (const std::string &dir, const std::string &file);
+  bool LoadOneTeam (const std::string &dir, const std::string &file);
   static bool CompareItems( CustomTeam* p1, CustomTeam* p2 );
 };
 

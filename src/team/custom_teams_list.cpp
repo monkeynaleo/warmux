@@ -89,24 +89,28 @@ void CustomTeamsList::LoadList()
 }
 
 
-void CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &custom_team_name)
+bool CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &custom_team_name)
 {
   // Skip '.', '..' and hidden files
-  if (custom_team_name[0] == '.') return;
+  if (custom_team_name[0] == '.')
+    return true;
 
   // Is it a directory ?
-  if (!DoesFolderExist(dir + custom_team_name)) return;
+  if (!DoesFolderExist(dir + custom_team_name))
+    return false;
 
   // Add the team
-  try {
-    full_list.push_back(new CustomTeam(dir, custom_team_name));
+  std::string error;
+  CustomTeam *team = CustomTeam::LoadCustomTeam(dir, custom_team_name, error);
+  if (team) {
+    full_list.push_back(team);
+    return true;
+  }
 
-  } catch (char const *error) {
     std::cerr << std::endl
               << Format(_("Error loading team :")) << custom_team_name <<":"<< error
               << std::endl;
-    return;
-  }
+  return false;
 }
 
 void CustomTeamsList::Sort()
