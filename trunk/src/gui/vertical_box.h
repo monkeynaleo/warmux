@@ -31,7 +31,7 @@ class VBox : public Box
 
   public:
     VBox(uint width, 
-         bool _draw_border = true, 
+         bool draw_border = true, 
          bool force_widget_size = true);
     virtual ~VBox() { }
     virtual void Pack();

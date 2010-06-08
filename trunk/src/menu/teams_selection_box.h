@@ -23,7 +23,7 @@
 #define TEAMS_SELECTION_BOX_H
 
 #include <vector>
-#include "gui/box.h"
+#include "gui/horizontal_box.h"
 
 // Forward declarations
 class SpinButtonWithPicture;

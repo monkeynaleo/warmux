@@ -76,6 +76,8 @@ POTFILES = \
         src/gui/grid_box.h \
         src/gui/vertical_box.cpp \
         src/gui/vertical_box.h \
+        src/gui/horizontal_box.cpp \
+        src/gui/horizontal_box.h \
         src/gui/box.cpp \
         src/gui/box.h \
         src/gui/button.cpp \

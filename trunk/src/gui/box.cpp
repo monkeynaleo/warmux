@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ * Generic Box
  *****************************************************************************/
 
 #include "gui/box.h"
@@ -72,45 +72,4 @@ void Box::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-// --------------------------------------------------
-
-HBox::HBox(uint height, bool _draw_border, bool _force_widget_size) :
-  Box(Point2i(100, height), _draw_border),
-  force_widget_size(_force_widget_size)
-{
-}
-
-void HBox::Pack()
-{
-  uint _x = position.x;
-  uint max_size_y = 0;
-
-  std::list<Widget *>::iterator it;
-  for (it = widget_list.begin();
-       it != widget_list.end();
-       ++it) {
-
-    if (it == widget_list.begin())
-      _x += border.x - margin;
-
-    (*it)->SetPosition(_x + margin,
-		       position.y + border.y);
-
-    if (force_widget_size) {
-      (*it)->SetSize((*it)->GetSizeX(),
-		     size.y - 2*border.y);
-    } else {
-      max_size_y = std::max(max_size_y, uint((*it)->GetSizeY()));
-    }
-
-    (*it)->Pack();
-
-    _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
-  }
-  size.x = _x - position.x + border.x;
-
-  if (!force_widget_size) {
-    size.y = max_size_y + 2*border.y;
-  }
-}
 

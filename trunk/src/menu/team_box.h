@@ -24,7 +24,7 @@
 
 #include <string>
 #include <vector>
-#include "gui/box.h"
+#include "gui/horizontal_box.h"
 
 class Button;
 class CustomTeam;
@@ -33,7 +33,6 @@ class SpinButton;
 class Label;
 class PictureWidget;
 class TextBox;
-
 
 class TeamBox : public HBox
 {

@@ -16,44 +16,50 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ * Horizontal Box
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
+#include "gui/horizontal_box.h"
 
-#include "gui/widget_list.h"
-#include "tool/resource_manager.h"
-
-class Box : public WidgetList
+HBox::HBox(uint height, 
+           bool draw_border, 
+           bool _force_widget_size) :
+  Box(Point2i(100, height), draw_border),
+  force_widget_size(_force_widget_size)
 {
-protected:
-  uint margin;
-  Point2i border;
+}
 
-public:
-  Box(void);
-  Box(const Point2i &size, bool _draw_border=true);
-  Box(Profile * _profile,
-      const xmlNode * _boxNode);
-  virtual ~Box();
+void HBox::Pack()
+{
+  uint _x = position.x;
+  uint max_size_y = 0;
 
-  void ParseXMLBoxParameters(void);
+  std::list<Widget *>::iterator it;
+  for (it = widget_list.begin();
+       it != widget_list.end();
+       ++it) {
 
-  void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition);
+    if (it == widget_list.begin())
+      _x += border.x - margin;
 
-  Widget* Click(const Point2i &mousePosition, uint button) { return WidgetList::Click(mousePosition, button); };
-  Widget* ClickUp(const Point2i &mousePosition, uint button) { return WidgetList::ClickUp(mousePosition, button); };
+    (*it)->SetPosition(_x + margin,
+                       position.y + border.y);
 
-  void SetMargin(uint _margin) { margin = _margin; };
+    if (force_widget_size) {
+      (*it)->SetSize((*it)->GetSizeX(),
+                     size.y - 2*border.y);
+    } else {
+      max_size_y = std::max(max_size_y, uint((*it)->GetSizeY()));
+    }
 
-  void SetBorder(const Point2i &newBorder) { border = newBorder; };
-  void SetBorder(uint x, uint y) { border.SetValues(x, y); };
-  void SetNoBorder() { border.SetValues(0, 0); };
+    (*it)->Pack();
 
-  virtual void Pack() = 0;
-};
+    _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
+  }
+  size.x = _x - position.x + border.x;
 
-#endif
+  if (!force_widget_size) {
+    size.y = max_size_y + 2*border.y;
+  }
+}
 
