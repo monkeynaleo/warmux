@@ -66,7 +66,7 @@ void TeamsList::NextTeam ()
 
   printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
   printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+  printf("Alive characters: %i / %i\n\n", ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
 }
 
 //-----------------------------------------------------------------------------
@@ -114,9 +114,9 @@ bool TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
     return true;
   }
 
-    std::cerr << std::endl
-              << Format(_("Error loading team :")) << team_name <<":"<< error
-              << std::endl;
+  std::cerr << std::endl
+    << Format(_("Error loading team :")) << team_name <<":"<< error
+    << std::endl;
   return false;
 }
 
@@ -209,7 +209,8 @@ void TeamsList::UnloadGamingData()
   full_iterator it=full_list.begin(), end = full_list.end();
 
   // Unload the data of all teams
-  for (; it != end; ++it) (**it).UnloadGamingData();
+  for (; it != end; ++it)
+    (**it).UnloadGamingData();
 }
 
 //-----------------------------------------------------------------------------
@@ -276,9 +277,8 @@ void TeamsList::InitList (const std::list<ConfigTeam> &lst)
 {
   Clear();
   std::list<ConfigTeam>::const_iterator it=lst.begin(), end=lst.end();
-  for (; it != end; ++it) {
+  for (; it != end; ++it)
     AddTeam (*it, true, false);
-  }
   active_team = playing_list.begin();
 }
 
@@ -299,9 +299,7 @@ void TeamsList::InitEnergy()
   // Init each team's energy bar
   it=playing_list.begin();
   for (; it != end; ++it)
-  {
     (**it).InitEnergy (max);
-  }
 
   // Initial ranking
   it=playing_list.begin();
@@ -348,14 +346,14 @@ void TeamsList::RefreshEnergy()
   bool waiting = true; // every energy bar are waiting
 
   for (; it != end; ++it) {
-    if( (**it).energy.status != EnergyStatusWait) {
+    if ((**it).energy.status != EnergyStatusWait) {
       waiting = false;
       break;
     }
   }
 
   // one of the energy bar is changing ?
-  if(!waiting) {
+  if (!waiting) {
     status = EnergyStatusOK;
 
     // change an energy bar value ?
@@ -368,8 +366,8 @@ void TeamsList::RefreshEnergy()
 
     // change a ranking ?
     for (it=playing_list.begin(); it != end; ++it) {
-      if( (**it).energy.status == EnergyStatusRankChange
-             && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
+      if ((**it).energy.status == EnergyStatusRankChange
+          && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
         status = EnergyStatusRankChange;
         break;
       }
@@ -410,7 +408,7 @@ void TeamsList::RefreshSort ()
     iterator it2=playing_list.begin();
     for (; it2 != end; ++it2)
     {
-      if((it != it2)
+      if ((it != it2)
           && (**it2).ReadEnergy() > (**it).ReadEnergy() )
         ++rank;
     }
@@ -425,7 +423,7 @@ void TeamsList::RefreshSort ()
     iterator it2=playing_list.begin();
     for (it2 = it; it2 != end; ++it2)
     {
-      if((it != it2)
+      if ((it != it2)
           && (**it2).ReadEnergy() == (**it).ReadEnergy() )
         ++rank;
     }
@@ -441,7 +439,8 @@ void TeamsList::ChangeSelection (const std::list<uint>& nv_selection)
 
   selection_iterator it=selection.begin(), end = selection.end();
   playing_list.clear();
-  for (; it != end; ++it) playing_list.push_back (FindByIndex(*it));
+  for (; it != end; ++it)
+    playing_list.push_back (FindByIndex(*it));
   active_team = playing_list.begin();
 }
 
@@ -462,7 +461,7 @@ void TeamsList::Clear()
 //-----------------------------------------------------------------------------
 
 void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
-			bool is_local)
+                        bool is_local)
 {
   ASSERT(the_team != NULL);
 
@@ -476,16 +475,14 @@ void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
 }
 
 void TeamsList::AddTeam(const ConfigTeam &the_team_cfg, bool is_local,
-			bool generate_error)
+                        bool generate_error)
 {
   MSG_DEBUG("team", "%s, local: %d\n", the_team_cfg.id.c_str(), is_local);
 
   int pos;
   Team *the_team = FindById (the_team_cfg.id, pos);
   if (the_team != NULL) {
-
     AddTeam(the_team, pos, the_team_cfg, is_local);
-
   } else {
     std::string msg = Format(_("Can't find team %s!"), the_team_cfg.id.c_str());
     if (generate_error)
@@ -508,7 +505,7 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
 }
 
 void TeamsList::UpdateTeam (const std::string& old_team_id,
-			    const ConfigTeam &the_team_cfg)
+                            const ConfigTeam &the_team_cfg)
 {
   int pos;
 
@@ -528,13 +525,13 @@ void TeamsList::UpdateTeam (const std::string& old_team_id,
   } else {
 
     // here we are replacing a team by another one
-    Team *the_old_team = FindById (old_team_id, pos);
+    Team *the_old_team = FindById(old_team_id, pos);
     if (the_old_team == NULL) {
       Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
       return;
     }
 
-    Team *the_team = FindById (the_team_cfg.id, pos);
+    Team *the_team = FindById(the_team_cfg.id, pos);
     if (the_team == NULL) {
       Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
       return;
@@ -561,17 +558,15 @@ void TeamsList::DelTeam(Team* the_team)
 
   selection_iterator it = find(selection.begin(), selection.end(), pos);
 
-  if (it != selection.end()) {
+  if (it != selection.end())
     selection.erase(it);
-  }
 
   iterator playing_it = find(playing_list.begin(), playing_list.end(), the_team);
 
   ASSERT(playing_it != playing_list.end());
 
-  if (playing_it != playing_list.end()) {
+  if (playing_it != playing_list.end())
     playing_list.erase(playing_it);
-  }
 
   active_team = playing_list.begin();
 }
