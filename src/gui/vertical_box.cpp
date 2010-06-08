@@ -22,9 +22,9 @@
 #include "gui/vertical_box.h"
 
 VBox::VBox(uint width, 
-           bool _draw_border, 
+           bool draw_border, 
            bool _force_widget_size) :
-  Box(Point2i(width, 100), _draw_border),
+  Box(Point2i(width, 100), draw_border),
   force_widget_size(_force_widget_size)
 {
 }

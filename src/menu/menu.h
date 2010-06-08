@@ -26,12 +26,12 @@
 #include "include/base.h"
 #include "tool/resource_manager.h"
 #include "gui/picture_widget.h"
+#include "gui/horizontal_box.h"
 
 // Forward declarations
 class Button;
 class Label;
 class Box;
-class HBox;
 class Sprite;
 
 typedef enum {

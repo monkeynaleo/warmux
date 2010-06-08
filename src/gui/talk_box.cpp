@@ -24,6 +24,7 @@
 #include "gui/button.h"
 #include "gui/msg_box.h"
 #include "gui/text_box.h"
+#include "gui/horizontal_box.h"
 #include "include/app.h"
 #include "network/admin_commands.h"
 #include "network/chat.h"

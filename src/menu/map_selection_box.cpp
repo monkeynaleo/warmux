@@ -26,6 +26,7 @@
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/question.h"
+#include "gui/horizontal_box.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"

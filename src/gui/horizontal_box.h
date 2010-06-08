@@ -16,43 +16,25 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ * Horizontal Box
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
+#ifndef GUI_HORIZONTAL_BOX_H
+#define GUI_HORIZONTAL_BOX_H
 
-#include "gui/widget_list.h"
-#include "tool/resource_manager.h"
+#include "gui/box.h"
 
-class Box : public WidgetList
+class HBox : public Box
 {
-protected:
-  uint margin;
-  Point2i border;
+  protected:
+    bool force_widget_size;
 
-public:
-  Box(void);
-  Box(const Point2i &size, bool _draw_border=true);
-  Box(Profile * _profile,
-      const xmlNode * _boxNode);
-  virtual ~Box();
-
-  void ParseXMLBoxParameters(void);
-
-  void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition);
-
-  Widget* Click(const Point2i &mousePosition, uint button) { return WidgetList::Click(mousePosition, button); };
-  Widget* ClickUp(const Point2i &mousePosition, uint button) { return WidgetList::ClickUp(mousePosition, button); };
-
-  void SetMargin(uint _margin) { margin = _margin; };
-
-  void SetBorder(const Point2i &newBorder) { border = newBorder; };
-  void SetBorder(uint x, uint y) { border.SetValues(x, y); };
-  void SetNoBorder() { border.SetValues(0, 0); };
-
-  virtual void Pack() = 0;
+  public:
+    HBox(uint height, 
+         bool draw_border = true, 
+         bool force_widget_size = true);
+    virtual ~HBox() { }
+    virtual void Pack();
 };
 
 #endif
