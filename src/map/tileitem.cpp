@@ -118,10 +118,13 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
     int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
 
-    for( int py = starting_y ; py < ending_y ; py++)
-        for( int px = starting_x ; px < ending_x ; px++)
-            if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
-                *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
+    for (int py = starting_y ; py < ending_y ; py++) {
+        for (int px = starting_x ; px < ending_x ; px++) {
+            if ( *(Uint32 *)(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4) != 0) {
+                *(Uint32 *)(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4) = 0;
+            }
+        }
+    }
 }
 
 void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
