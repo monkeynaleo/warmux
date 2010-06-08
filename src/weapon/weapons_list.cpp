@@ -126,9 +126,9 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
   weapons_list_it it, end=m_weapons_list.end();
 
   /* find the current position */
-  it = find(m_weapons_list.begin(),
-            m_weapons_list.end(),
-            &ActiveTeam().GetWeapon());
+  it = std::find(m_weapons_list.begin(),
+                 m_weapons_list.end(),
+                 &ActiveTeam().GetWeapon());
 
   /* if the current weapon match the criteria */
   if (it != end && ActiveTeam().GetWeapon().Category() == sort)

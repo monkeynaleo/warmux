@@ -556,12 +556,12 @@ void TeamsList::DelTeam(Team* the_team)
 
   the_team->SetDefaultPlayingConfig();
 
-  selection_iterator it = find(selection.begin(), selection.end(), pos);
+  selection_iterator it = std::find(selection.begin(), selection.end(), pos);
 
   if (it != selection.end())
     selection.erase(it);
 
-  iterator playing_it = find(playing_list.begin(), playing_list.end(), the_team);
+  iterator playing_it = std::find(playing_list.begin(), playing_list.end(), the_team);
 
   ASSERT(playing_it != playing_list.end());
 
