@@ -95,7 +95,7 @@ void Video::AddConfigIfAbsent(int w, int h)
   Point2i p(w, h);
 
   if (!CompareConfigs((*available_configs.begin()), p) &&
-      find(available_configs.begin(), available_configs.end(), p) == available_configs.end() )
+      std::find(available_configs.begin(), available_configs.end(), p) == available_configs.end())
     available_configs.push_back(p);
 }
 
