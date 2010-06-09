@@ -21,7 +21,7 @@
 #include <WORMUX_error.h>
 #include <WORMUX_i18n.h>
 #include <WORMUX_index_server.h>
-#include <WSERVER_config.h>
+#include <config.h>
 #include <server.h>
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
