@@ -33,8 +33,13 @@ class HBox : public Box
     HBox(uint height, 
          bool draw_border = true, 
          bool force_widget_size = true);
+    HBox(Profile * profile,
+         const xmlNode * horizontalBoxNode);
+
     virtual ~HBox() { }
+
     virtual void Pack();
+    virtual bool LoadXMLConfiguration(void);
 };
 
 #endif
