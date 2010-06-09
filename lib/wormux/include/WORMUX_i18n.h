@@ -25,11 +25,7 @@
 
 #include <string>
 
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
-#  include "config.h"
-#endif
+#include "WORMUX_config.h"
 
 #ifdef ENABLE_NLS /* gettext */
 #  include <libintl.h>

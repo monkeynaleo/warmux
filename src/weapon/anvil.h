@@ -22,7 +22,7 @@
 #ifndef ANVIL_H
 #define ANVIL_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "weapon/weapon_launcher.h"
 
 class AnvilLauncher : public WeaponLauncher

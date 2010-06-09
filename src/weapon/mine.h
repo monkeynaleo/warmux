@@ -23,7 +23,7 @@
 #define MINE_H
 
 #include <WORMUX_singleton.h>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "weapon/weapon_cfg.h"
 #include "weapon/weapon_launcher.h"
 

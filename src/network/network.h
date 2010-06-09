@@ -27,7 +27,7 @@
 #include <WORMUX_network.h>
 #include <WORMUX_player.h>
 #include <WORMUX_singleton.h>
-#include "include/base.h"
+#include <WORMUX_base.h>
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file

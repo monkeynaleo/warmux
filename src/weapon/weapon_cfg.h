@@ -22,7 +22,7 @@
 #ifndef WEAPON_CONFIGURATION_H
 #define WEAPON_CONFIGURATION_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
+#include <WORMUX_base.h>
 typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------

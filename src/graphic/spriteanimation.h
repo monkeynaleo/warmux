@@ -25,7 +25,7 @@
 #ifndef _SPRITE_ANIMATION_H
 #define _SPRITE_ANIMATION_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class Sprite;
 

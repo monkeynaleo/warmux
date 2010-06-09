@@ -22,7 +22,7 @@
 #ifndef WEAPON_MENU_H
 #define WEAPON_MENU_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "interface/mouse.h"
 #include "graphic/polygon.h"
 #include "tool/affine_transform.h"

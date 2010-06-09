@@ -22,7 +22,7 @@
 #ifndef GUI_WIDGET_H
 #define GUI_WIDGET_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/color.h"
 #include "gui/container.h"
 #include "interface/mouse.h"

@@ -23,7 +23,7 @@
 #define WATER_H
 
 #include <vector>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/surface.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;

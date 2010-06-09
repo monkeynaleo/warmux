@@ -25,7 +25,7 @@
 #include <list>
 #include <map>
 #include "weapon.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 

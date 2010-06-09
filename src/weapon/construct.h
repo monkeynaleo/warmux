@@ -22,7 +22,7 @@
 #ifndef CONSTRUCT_H
 #define CONSTRUCT_H
 #include "weapon.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_point.h>
 
 class Sprite;

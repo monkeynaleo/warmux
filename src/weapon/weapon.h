@@ -23,7 +23,7 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 #include <string>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "sound/sound_sample.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_point.h>

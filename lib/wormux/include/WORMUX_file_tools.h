@@ -21,7 +21,8 @@
 
 #ifndef FILE_TOOLS_H
 #define FILE_TOOLS_H
-#include "include/base.h"
+
+#include "WORMUX_base.h"
 
 // Check if a file exists
 bool DoesFileExist(const std::string &name);

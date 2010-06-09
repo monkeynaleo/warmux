@@ -23,7 +23,7 @@
 #define LST_TERRAINS_H
 
 #include <vector>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "graphic/surface.h"
 #include "map/water.h"

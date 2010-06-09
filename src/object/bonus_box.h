@@ -22,7 +22,7 @@
 #ifndef BONUS_BOX_H
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "weapon/weapon.h"
 #include "objbox.h"
 

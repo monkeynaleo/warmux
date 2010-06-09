@@ -26,7 +26,7 @@
 #include <vector>
 #include "widget.h"
 #include "label.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class Button;
 

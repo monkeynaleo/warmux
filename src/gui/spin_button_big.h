@@ -22,7 +22,7 @@
 #ifndef SPIN_BUTTON_BIG_H
 #define SPIN_BUTTON_BIG_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "widget.h"
 #include "abstract_spin_button.h"
 #include <string>

@@ -22,7 +22,7 @@
 #ifndef COMBO_BOX_H
 #define COMBO_BOX_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/surface.h"
 #include "widget.h"
 #include <string>

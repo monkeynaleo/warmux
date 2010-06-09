@@ -23,7 +23,7 @@
 #define AUTO_BAZOOKA_H
 
 #include "weapon/weapon_launcher.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class AutomaticBazookaConfig;
 struct target_t;

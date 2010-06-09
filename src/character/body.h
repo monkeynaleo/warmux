@@ -24,7 +24,7 @@
 #include <map>
 
 #include <vector>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_point.h>
 #include "tool/xml_document.h"
 #include "character/movement.h"

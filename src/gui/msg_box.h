@@ -22,7 +22,7 @@
 #ifndef MSG_BOX_H
 #define MSG_BOX_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/font.h"
 #include <WORMUX_rectangle.h>
 #include "widget.h"

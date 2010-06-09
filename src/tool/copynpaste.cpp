@@ -18,11 +18,7 @@
  *****************************************************************************
  * Retrieve string pasted depending on OS mechanisms.
  *****************************************************************************/
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#elif defined(HAVE_CONFIG_H)
-#  include "config.h"
-#endif
+#include <WORMUX_config.h>
 
 #include <SDL_syswm.h>
 #include "copynpaste.h"

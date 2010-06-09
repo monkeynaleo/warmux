@@ -23,7 +23,6 @@ POTFILES = \
         src/character/member.h \
         src/character/movement.cpp \
         src/character/movement.h \
-        src/config.h \
         src/game/config.cpp \
         src/game/config.h \
         src/game/game_blitz.cpp \
@@ -129,7 +128,6 @@ POTFILES = \
         src/include/action_handler.cpp \
         src/include/action_handler.h \
         src/include/app.h \
-        src/include/base.h \
         src/include/binreloc.h \
         src/include/constant.cpp \
         src/include/constant.h \
@@ -205,8 +203,6 @@ POTFILES = \
         src/menu/team_box.h \
         src/menu/teams_selection_box.cpp \
         src/menu/teams_selection_box.h \
-        src/msvc/config.h \
-        src/msvc/getopt.h \
         src/network/admin_commands.cpp \
         src/network/admin_commands.h \
         src/network/chat.cpp \

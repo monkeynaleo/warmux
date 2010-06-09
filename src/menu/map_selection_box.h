@@ -24,7 +24,7 @@
 
 #include "graphic/surface.h"
 #include "gui/vertical_box.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
 

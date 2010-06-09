@@ -24,7 +24,7 @@
 #define CHAT_H
 
 #include <string>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/text_list.h"
 
 // Forward declarations

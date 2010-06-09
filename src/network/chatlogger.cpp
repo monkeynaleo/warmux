@@ -1,7 +1,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #ifdef DEBUG
 #include <WORMUX_random.h>
 #endif
