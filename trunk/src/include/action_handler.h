@@ -26,7 +26,7 @@
 #include <list>
 #include <WORMUX_action_handler.h>
 #include "include/action.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 //-----------------------------------------------------------------------------
 

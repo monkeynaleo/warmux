@@ -26,7 +26,7 @@
 #include <string>
 #include "character/body.h"
 #include "gui/energy_bar.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "object/physical_obj.h"
 #include "character/body.h"
 #include "interface/movable_by_user.h"

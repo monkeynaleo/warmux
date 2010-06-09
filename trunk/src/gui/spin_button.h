@@ -22,7 +22,7 @@
 #ifndef SPIN_BUTTON_H
 #define SPIN_BUTTON_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/colors.h"
 #include "widget.h"
 #include "abstract_spin_button.h"

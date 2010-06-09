@@ -23,7 +23,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "network/chat.h"
 #include "sound/sound_sample.h"

@@ -22,7 +22,7 @@
 #ifndef SLAP_H
 #define SLAP_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "weapon.h"
 
 class SlapConfig;

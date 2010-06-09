@@ -22,7 +22,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 #include <vector>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "weapon_menu.h"
 #include "graphic/colors.h"

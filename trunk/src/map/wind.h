@@ -23,7 +23,7 @@
 #define WIND_H
 
 #include <list>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "object/physical_obj.h"
 

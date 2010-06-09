@@ -26,7 +26,7 @@
 #define _SPRITE_CACHE_H
 
 #include <vector>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "graphic/spriteframe.h"
 #include "graphic/surface.h"
 

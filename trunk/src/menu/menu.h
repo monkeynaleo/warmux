@@ -23,7 +23,7 @@
 #define MENU_H
 
 #include "gui/widget_list.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "tool/resource_manager.h"
 #include "gui/picture_widget.h"
 #include "gui/horizontal_box.h"

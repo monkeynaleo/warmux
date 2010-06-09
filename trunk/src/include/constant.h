@@ -21,7 +21,7 @@
 
 #ifndef CONSTANT_H
 #define CONSTANT_H
-#include "base.h"
+#include <WORMUX_base.h>
 #include <string>
 #include <vector>
 #include <WORMUX_singleton.h>

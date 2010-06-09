@@ -23,7 +23,7 @@
 #include <string>
 #include <list>
 #include "surface.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class Video{
  private:

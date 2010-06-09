@@ -22,7 +22,7 @@
 #ifndef CHECK_BOX_H
 #define CHECK_BOX_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "gui/widget.h"
 #include "graphic/text.h"
 #include <string>

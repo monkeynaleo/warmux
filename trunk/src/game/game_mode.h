@@ -26,7 +26,7 @@
 #include <string>
 #include <vector>
 #include <WORMUX_singleton.h>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "weapon/weapon_cfg.h"
 #include "tool/xml_document.h"
 

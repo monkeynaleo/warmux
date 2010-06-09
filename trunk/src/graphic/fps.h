@@ -23,7 +23,7 @@
 #define FPS_H
 
 #include <list>
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class Text;
 

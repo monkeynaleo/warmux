@@ -29,7 +29,7 @@
 #include "game/game_mode.h"
 #include "graphic/sprite.h"
 #include "interface/cursor.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "include/constant.h"
 #include "map/camera.h"
 #include "map/map.h"

@@ -22,7 +22,7 @@
 #ifndef MEDKIT_H
 #define MEDKIT_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "objbox.h"
 
 class Team;

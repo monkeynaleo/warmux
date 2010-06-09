@@ -22,7 +22,7 @@
 #ifndef SCROLLING_H
 #define SCROLLING_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include "interface/mouse.h"
 #include "interface/movable_by_user.h"
 #include <WORMUX_point.h>

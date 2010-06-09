@@ -22,7 +22,7 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 //-----------------------------------------------------------------------------
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 //-----------------------------------------------------------------------------
 

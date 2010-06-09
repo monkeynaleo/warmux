@@ -30,7 +30,8 @@
 # include <signal.h>
 #endif
 #include <SDL.h>
-#include "config.h"
+#include <WORMUX_config.h>
+#include <WORMUX_base.h>
 #include <WORMUX_debug.h>
 #include <WORMUX_index_server.h>
 #include <WORMUX_random.h>
@@ -44,7 +45,6 @@
 #include "graphic/video.h"
 #include "include/action_handler.h"
 #include "include/app.h"
-#include "include/base.h"
 #include "include/constant.h"
 #include "map/map.h"
 #include "menu/credits_menu.h"

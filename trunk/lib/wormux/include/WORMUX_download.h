@@ -26,11 +26,7 @@
 #include <string>
 
 // Load config about download librart (curl, ...)
-#ifdef _MSC_VER
-#  include "msvc/config.h"
-#else
-#  include "config.h"
-#endif
+#include "WORMUX_config.h"
 
 #include <WORMUX_singleton.h>
 

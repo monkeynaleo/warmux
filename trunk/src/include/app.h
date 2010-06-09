@@ -23,7 +23,7 @@
 #define APP_WORMUX_H
 
 #include <string>
-#include "base.h"
+#include <WORMUX_base.h>
 
 class Video;
 class Menu;

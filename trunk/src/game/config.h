@@ -33,7 +33,7 @@
 #include <list>
 #include <string>
 #include <map>
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include <WORMUX_point.h>
 #include <WORMUX_team_config.h>

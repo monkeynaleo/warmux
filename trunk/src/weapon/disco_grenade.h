@@ -23,7 +23,7 @@
 #define DISCO_GRENADE_H
 
 #include "weapon/weapon_launcher.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class DiscoGrenadeLauncher : public WeaponLauncher
 {

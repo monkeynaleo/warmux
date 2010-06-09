@@ -22,7 +22,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "map/ground.h"
 #include "map/sky.h"

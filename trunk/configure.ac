@@ -377,7 +377,7 @@ AC_CONFIG_FILES([Makefile
                  tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
-AM_CONFIG_HEADER(src/config.h)
+AM_CONFIG_HEADER(lib/wormux/include/config_autotools.h)
 
 AC_OUTPUT
 chmod +x build/win32_setup/create_setup.sh

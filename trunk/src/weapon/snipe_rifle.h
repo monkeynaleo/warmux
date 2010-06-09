@@ -25,7 +25,7 @@
 #include <vector>
 #include "weapon/weapon_launcher.h"
 #include "graphic/color.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class SnipeRifle : public WeaponLauncher
 {

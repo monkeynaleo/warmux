@@ -24,7 +24,7 @@
 
 #include <list>
 #include "object/physical_obj.h"
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 // Forward declarations
 class Sprite;

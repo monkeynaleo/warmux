@@ -21,7 +21,7 @@
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
-#include "include/base.h"
+#include <WORMUX_base.h>
 
 class Sprite;
 class Surface;
