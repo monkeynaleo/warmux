@@ -26,6 +26,8 @@
 #  include "config_visual.h"
 #elif defined(HAVE_CONFIG_H)
 #  include "config_autotools.h"
+#else
+#  error "Please add a config_${your_system}.h and include it properly"
 #endif
 
 #endif // WORMUX_CONFIG_H
