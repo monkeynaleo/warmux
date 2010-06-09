@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Usefull class to manage the configuration of a team
+ * Proxy header including the actual config header for the host system.
  *****************************************************************************/
 
 #ifndef WORMUX_CONFIG_H
