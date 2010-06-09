@@ -26,8 +26,9 @@
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "gui/button.h"
-#include "gui/box.h"
 #include "gui/grid_box.h"
+#include "gui/vertical_box.h"
+#include "gui/horizontal_box.h"
 #include "gui/question.h"
 #include "interface/mouse.h"
 #include "sound/jukebox.h"
@@ -137,7 +138,9 @@ void Menu::LoadWidget(Profile * profile,
 
     if (NULL != newWidget) {
 
-      if ("GridBox" == currentNodeName) {
+      if ("GridBox" == currentNodeName ||
+          "HorizontalBox" == currentNodeName ||
+          "VerticalBox" == currentNodeName) {
         LoadWidget(profile, currentNode, (WidgetList*)newWidget);
       }
       container->AddWidget(newWidget);
@@ -169,9 +172,9 @@ Widget * Menu::CreateWidget(Profile * profile,
   } else if ("PicTxtCheckBox" == widgetName ) {
     widget = new PictureTextCBox(profile, widgetNode);
   } else if ("VerticalBox" == widgetName) {
-    return NULL;
+    widget = new VBox(profile, widgetNode);
   } else if ("HorizontalBox" == widgetName) {
-    return NULL;
+    widget = new HBox(profile, widgetNode);
   } else if ("SpinButton" == widgetName) {
     return NULL;
   } else if ("PasswordBox" == widgetName) {
