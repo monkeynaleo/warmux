@@ -29,6 +29,13 @@ HBox::HBox(uint height,
 {
 }
 
+HBox::HBox(Profile * profile,
+           const xmlNode * horizontalBoxNode) :
+  Box(profile, horizontalBoxNode),
+  force_widget_size(false)
+{
+}
+
 void HBox::Pack()
 {
   uint _x = position.x;
@@ -61,5 +68,20 @@ void HBox::Pack()
   if (!force_widget_size) {
     size.y = max_size_y + 2*border.y;
   }
+}
+
+bool HBox::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBoxParameters();
+
+  //TODO
+
+  return true;
 }
 

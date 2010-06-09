@@ -29,6 +29,13 @@ VBox::VBox(uint width,
 {
 }
 
+VBox::VBox(Profile * profile,
+           const xmlNode * verticalBoxNode) :
+  Box(profile, verticalBoxNode),
+  force_widget_size(false)
+{
+}
+
 void VBox::Pack()
 {
   uint _y = position.y;
@@ -62,6 +69,21 @@ void VBox::Pack()
   if (!force_widget_size) {
     size.x = max_size_x + 2*border.x;
   }
+}
+
+bool VBox::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  ParseXMLPosition();
+  ParseXMLSize();
+  ParseXMLBoxParameters();
+
+  //TODO
+
+  return true;
 }
 
 
