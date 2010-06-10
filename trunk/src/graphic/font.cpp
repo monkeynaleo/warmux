@@ -87,7 +87,7 @@ Font::Font(int size):
     if (!m_font)
       Error(Format("Error in font file %s (size:%d): %s", filename.c_str(), size, TTF_GetError()));
   } else {
-    Error("Can't find font file");
+    Error(Format("Can't find font file '%s'", filename.c_str()));
   }
 
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
