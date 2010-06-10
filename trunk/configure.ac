@@ -142,13 +142,6 @@ AC_ARG_WITH([font-path],
             [FONTFILE="$withval"])
 AC_SUBST([FONTFILE])
 
-AC_ARG_ENABLE([autopackage],
-              [AS_HELP_STRING([--enable-autopackage],
-                              [Enable autopackage @<:@default=disable@:>@])],
-              [],
-              [enable_autopackage=no])
-AM_CONDITIONAL([AUTOPACKAGE], [test "$enable_autopackage" = "yes"])
-
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
 
@@ -385,13 +378,9 @@ chmod +x build/win32_setup/create_setup.sh
 echo "***********************************************************"
 echo "Configuration complete"
 echo ""
-if test "$enable_autopackage" = "yes"; then
-   echo "Use autopackage for file locations"
-else
-   echo "* Game data will be installed into $DATADIR"
-   echo "* Game locale will be installed into $LOCALEDIR"
-   echo "* Font file will be $FONTFILE"
-fi
+echo "* Game data will be installed into $DATADIR"
+echo "* Game locale will be installed into $LOCALEDIR"
+echo "* Font file will be $FONTFILE"
 echo ""
 echo "* [[Optional]] DEBUG                              : ${debug:-no}"
 if test "$debug" != "yes"; then

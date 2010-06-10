@@ -31,7 +31,7 @@ wormux_SOURCES = \
         character/movement.cpp \
         character/movement.h \
         config.h \
-	game/config.cpp \
+        game/config.cpp \
         game/config.h \
         game/game.cpp \
         game/game.h \
@@ -45,7 +45,7 @@ wormux_SOURCES = \
         game/time.h \
         game/stopwatch.cpp \
         game/stopwatch.h \
-	graphic/color.cpp \
+        graphic/color.cpp \
         graphic/color.h \
         graphic/colors.h \
         graphic/composite_shape.cpp \
@@ -142,7 +142,7 @@ wormux_SOURCES = \
         include/binreloc.h \
         include/constant.cpp \
         include/constant.h \
-	include/debugmasks.h \
+        include/debugmasks.h \
         interface/cursor.cpp \
         interface/cursor.h \
         interface/game_msg.cpp \
@@ -407,15 +407,11 @@ wormux_SOURCES = \
 
 wormux_LDFLAGS = -Wl,--as-needed
 
-if AUTOPACKAGE
-DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
-endif
+AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
+  -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"    \
+  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" @LIBCURL_CPPFLAGS@       \
+  -I$(top_srcdir)/lib/wormux/include -I$(top_srcdir)/lib/fixedpoint
 
-AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"      \
-  -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"        \
-  -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE)        \
-  @LIBCURL_CPPFLAGS@ -I$(top_srcdir)/lib/wormux/include                 \
-  -I$(top_srcdir)/lib/fixedpoint
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico

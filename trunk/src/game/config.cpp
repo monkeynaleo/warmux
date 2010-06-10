@@ -51,13 +51,10 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
-#ifdef USE_AUTOPACKAGE
-#  include "include/binreloc.h"
-#endif
 
 #ifdef _WIN32
-#include <windows.h>
-#include <direct.h>
+#  include <windows.h>
+#  include <direct.h>
 
 // Under windows, binary may be relocated
 static std::string GetWormuxPath()
@@ -121,28 +118,10 @@ Config::Config():
   volume_music = JukeBox::GetMaxVolume();
   volume_effects = JukeBox::GetMaxVolume();
 
-#ifdef USE_AUTOPACKAGE
-  BrInitError error;
-  std::string filename;
-
-  if (br_init (&error) == 0 && error != BR_INIT_ERROR_DISABLED) {
-    std::cout << "Warning: BinReloc failed to initialize (error code "
-              << error << ")" << std::endl;
-    std::cout << "Will fallback to hardcoded default path." << std::endl;
-  }
-#endif
   Constants::GetInstance();
 
   // directories
-#ifdef USE_AUTOPACKAGE
-  data_dir     = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
-#  ifdef ENABLE_NLS
-  locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
-#  endif
-  font_dir     = data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR;
-  filename     = font_dir + PATH_SEPARATOR "DejaVuSans.ttf";
-  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
-#elif defined(__APPLE__)
+#if defined(__APPLE__)
   // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
   // configure with './configure ... CPPFLAGS=-DOSX_BUNDLE' to enable
   char path[1024];
@@ -165,7 +144,7 @@ Config::Config():
 #  ifdef ENABLE_NLS
       std::string default_locale_dir = contents + std::string("/Resources/locale/");
       locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, default_locale_dir);
-#endif
+#  endif
   }
   else {
       // executable is installed Unix-style, use default paths
@@ -175,25 +154,24 @@ Config::Config():
 #  endif
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
   }
-#else
-#  ifdef _WIN32
+#elif defined(_WIN32)
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + "\\data\\";
-#    ifdef ENABLE_NLS
+#  ifdef ENABLE_NLS
   locale_dir   = basepath + "\\locale\\";
-#    endif
-  ttf_filename = basepath + "\\" FONT_FILE;
-#  else
-  data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
-#    ifdef ENABLE_NLS
-  locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
-#    endif
-  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
 #  endif
-  font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR);
-#endif
+  ttf_filename = basepath + "\\" FONT_FILE;
 
-#ifndef WIN32
+  personal_config_dir = GetHome() + "\\Wormux\\";
+  personal_data_dir = personal_config_dir;
+
+#else //Neither WIN32 nor __APPLE__
+  data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+#  ifdef ENABLE_NLS
+  locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+#  endif
+  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
+  font_dir     = GetEnv(Constants::ENV_FONT_PATH, data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR);
 
   // To respect XDG Base Directory Specification from FreeDesktop
   // http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html
@@ -227,10 +205,6 @@ Config::Config():
   std::string old_config_file_name = personal_data_dir + "config.xml";
   std::string config_file_name = personal_config_dir + "config.xml";
   rename(old_config_file_name.c_str(), config_file_name.c_str());
-
-#else
-  personal_config_dir = GetHome() + "\\Wormux\\";
-  personal_data_dir = personal_config_dir;
 #endif
 
   chat_log_dir = personal_data_dir + "logs" PATH_SEPARATOR;
