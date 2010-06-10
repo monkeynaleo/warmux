@@ -156,13 +156,13 @@ Config::Config():
   }
 #elif defined(_WIN32)
   std::string basepath = GetWormuxPath();
-  data_dir     = basepath + "\\data\\";
+  data_dir     = basepath + PATH_SEPARATOR "data" PATH_SEPARATOR;
 #  ifdef ENABLE_NLS
-  locale_dir   = basepath + "\\locale\\";
+  locale_dir   = basepath + PATH_SEPARATOR "locale" PATH_SEPARATOR;
 #  endif
-  ttf_filename = basepath + "\\" FONT_FILE;
+  ttf_filename = FONT_FILE;
 
-  personal_config_dir = GetHome() + "\\Wormux\\";
+  personal_config_dir = GetHome() + PATH_SEPARATOR "Wormux" PATH_SEPARATOR;
   personal_data_dir = personal_config_dir;
 
 #else //Neither WIN32 nor __APPLE__
