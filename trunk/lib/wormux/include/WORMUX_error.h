@@ -53,23 +53,12 @@ void WakeUpDebugger();
   if(!(COND))
 #endif
 
-void TriggerError (const char *filename, unsigned long line,
-                   const std::string &txt);
+void TriggerWarning(const char *filename, unsigned long line,
+                    const std::string &txt);
+void TriggerError(const char *filename, unsigned long line,
+                  const std::string &txt);
 
+#define Warning(txt) TriggerWarning(__FILE__, __LINE__, txt)
 #define Error(txt) TriggerError(__FILE__, __LINE__, txt)
-
-
-class CError : public std::exception
-{
-protected:
-  std::string m_filename, m_txt;
-  unsigned long m_line;
-
-public:
-  CError (const char *filename, unsigned long line, const std::string &txt);
-  ~CError() throw();
-  virtual const char* what() const throw();
-  std::ostream& operator<< (std::ostream &os) const;
-};
 
 #endif

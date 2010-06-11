@@ -26,70 +26,55 @@
 #include <WORMUX_i18n.h>
 #include <WORMUX_types.h>
 
-#if !defined WIN32 || defined __MINGW32__
-#include <sys/types.h>
-#include <unistd.h>
+#if !defined(WIN32) || !defined(__MINGW32__)
+#  include <sys/types.h>
+#  include <unistd.h>
 #endif
 
 static const std::string WORMUX_VERSION = PACKAGE_VERSION;
 
 void WakeUpDebugger()
 {
-
 #ifdef LOVE_HAYPO_HACKS
   // Generate SIGTRAP
-  asm ("int $0x03");
+  asm("int $0x03");
 #endif
 
-#if !defined WIN32
-  kill (getpid(), SIGABRT);
+#if !defined(WIN32)
+  kill(getpid(), SIGABRT);
 #endif
 }
 
-void MissedAssertion (const char *filename, unsigned long line,
-                      const char *message)
+void MissedAssertion(const char *filename, unsigned long line,
+                     const char *message)
 {
   std::cout << std::endl;
   std::cerr << filename << ':' << line
             << ": Missed assertion \"" << message << "\"."
             << std::endl;
-#if defined DEBUG
+#ifdef DEBUG
   WakeUpDebugger();
   abort();
 #endif
 }
 
-std::string FormatError(const char *filename, unsigned long line,
-			const std::string &txt)
+static std::string FormatError(const char *filename, unsigned long line,
+                               const std::string &txt)
 {
   return Format(_("Error in %s:%lu (Wormux %s) : %s"), filename, line, WORMUX_VERSION.c_str(), txt.c_str());
 }
 
-
-CError::CError (const char *filename, unsigned long line,
-                const std::string &txt)
-  : m_filename(filename), m_txt(txt), m_line(line)
-{}
-
-CError::~CError() throw()
-{}
-
-const char* CError::what() const throw()
+void TriggerWarning(const char *filename, unsigned long line,
+                    const std::string &txt)
 {
-  return FormatError(m_filename.c_str(), m_line, m_txt).c_str();
-}
-
-std::ostream& CError::operator<< (std::ostream &os) const
-{
-  os << FormatError(m_filename.c_str(), m_line, m_txt);
-  return os;
+  std::cerr << "! " << FormatError(filename, line, txt) << std::endl;
 }
 
 void TriggerError (const char *filename, unsigned long line,
                    const std::string &txt)
 {
-  std::cerr << "! " << FormatError(filename, line, txt) << std::endl;
+  TriggerWarning(filename, line, txt);
 
   ASSERT(false);
-  throw CError (filename, line, txt);
+  exit(-1);
 }
