@@ -79,6 +79,9 @@ static std::string GetWormuxPath()
   return std::string(buffer);
 }
 #else
+#  if defined(ANDROID)
+static std::string GetWormuxPath() { return ANDROID_HOME; }
+#  endif
 #  include <unistd.h> // not needed by mingw
 #endif
 
@@ -154,7 +157,7 @@ Config::Config():
 #  endif
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
   }
-#elif defined(_WIN32)
+#elif defined(_WIN32) || defined(ANDROID)
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + PATH_SEPARATOR "data" PATH_SEPARATOR;
 #  ifdef ENABLE_NLS

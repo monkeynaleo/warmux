@@ -106,6 +106,8 @@ const std::string NetworkTeamsSelectionBox::GetLocalPlayerName()
   char* name = LocaleToUTF8(getenv("USERNAME"));
   result = name;
   delete[] name;
+#elif defined(ANDROID)
+  result = "Android";
 #else
   result = getenv("USER");
 #endif

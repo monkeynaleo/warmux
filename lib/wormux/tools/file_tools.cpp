@@ -180,15 +180,20 @@ void CloseFolder(FolderSearch *f)
 }
 
 #else
+
 // Return the path to the home directory of the user
 std::string GetHome()
 {
+#if defined(ANDROID)
+  return ANDROID_HOME;
+#else
   char *txt = std::getenv("HOME");
 
   if (txt == NULL)
-    Error (_("HOME directory (environment variable $HOME) could not be found!"));
+    Error(_("HOME directory (environment variable $HOME) could not be found!"));
 
   return txt;
+#endif
 }
 
 #include <dirent.h>
@@ -231,6 +236,7 @@ void CloseFolder(FolderSearch *f)
 // Return the path to the home directory of the user
 std::string GetTmpDir()
 {
+#ifdef WIN32
   char *txt = std::getenv("TMPDIR");
   if (txt != NULL)
     return txt;
@@ -243,14 +249,16 @@ std::string GetTmpDir()
   if (txt != NULL)
     return txt;
 
-#ifndef WIN32
-  return "/tmp";
-#endif
-
   if (txt == NULL)
     Error (_("TEMP directory could not be found!"));
 
   return txt;
+
+#elif defined(ANDROID)
+  return ANDROID_HOME;
+#else
+  return "/tmp";
+#endif
 }
 
 std::string CreateTmpFile(const std::string& prefix, int* fd)
