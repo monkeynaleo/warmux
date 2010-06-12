@@ -1,9 +1,8 @@
 // Wormux resource for win32 target
 
 #include <winver.h>
-#ifdef __MINGW32__
-#  include "config.h"
-#else
+#include <WORMUX_config.h>
+#ifdef _MSC_VER
 #  include "msvc/config.h"
 // Is build automatically by a pre-built event
 #  include "../visual/resource.h"
