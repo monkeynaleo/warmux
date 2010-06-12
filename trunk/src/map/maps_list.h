@@ -23,6 +23,7 @@
 #define LST_TERRAINS_H
 
 #include <vector>
+#include <assert.h>
 #include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "graphic/surface.h"
@@ -33,6 +34,8 @@
 class Action;
 class Profile;
 class Water;
+class InfoMapBasicAccessor;
+class InfoMapAccessor;
 typedef struct _xmlNode xmlNode;
 
 class InfoMap {
@@ -53,7 +56,9 @@ class InfoMap {
     Double rotation_speed;
   };
 
-private:
+protected:
+  friend class InfoMapBasicAccessor;
+  friend class InfoMapAccessor;
 
   std::string name;
   std::string author_info;
@@ -73,8 +78,6 @@ private:
   uint alpha_threshold;
 
   bool is_opened;
-  bool is_basic_info_loaded;
-  bool is_data_loaded;
   bool random_generated;
   Point2i upper_left_pad;
   Point2i lower_right_pad;
@@ -82,12 +85,12 @@ private:
   std::string water_type;
 
   struct s_wind wind;
+  InfoMapBasicAccessor *basic;
+  InfoMapAccessor      *normal;
 
   Profile *res_profile;
 
   bool ProcessXmlData(const xmlNode* xml);
-  void LoadData();
-  void LoadBasicInfo(); // Fails with abort if error
 
 public:
   InfoMap(const std::string&, const std::string&);
@@ -96,33 +99,48 @@ public:
 
   const std::string& GetRawName() const { return m_map_name; }
   const std::string& GetDirectory() const { return m_directory; }
-  const std::string& ReadFullMapName() { LoadBasicInfo(); return name; }
-  const std::string& ReadAuthorInfo() { LoadBasicInfo(); return author_info; }
-  const std::string& ReadMusicPlaylist() { LoadBasicInfo(); return music_playlist; }
   std::string GetConfigFilepath() const;
 
-  Surface& ReadImgGround();
-  Surface& ReadImgSky();
-  std::vector<Surface>& ReadSkyLayer();
-
-  const Surface& ReadPreview() { LoadBasicInfo(); return preview; }
-
-  const struct s_wind& GetWind() const { return wind; }
-
-  uint GetNbBarrel() { LoadBasicInfo(); return nb_barrel; }
-  uint GetNbMine() { LoadBasicInfo(); return nb_mine; }
-  uint GetAlphaThreshold() { LoadBasicInfo(); return alpha_threshold; }
   Profile * ResProfile() const { return res_profile; }
 
-  bool IsOpened() { LoadBasicInfo(); return is_opened; }
-  bool IsRandomGenerated() { LoadBasicInfo(); return random_generated; }
+  // Shouldn't those be protected?
+  const struct s_wind& GetWind() const { return wind; }
   const std::string& GetWaterType() { return water_type; }
-
   Point2i GetUpperLeftPad() { return upper_left_pad; }
   Point2i GetLowerRightPad() { return lower_right_pad; }
   void SetUpperLeftPad(const Point2i & value) { upper_left_pad = value; }
   void SetLowerRightPad(const Point2i & value) { lower_right_pad = value; }
 
+  // The 2 below must be checked for NULL, otherwise...
+  InfoMapAccessor      *LoadData();
+  InfoMapBasicAccessor *LoadBasicInfo();
+
+  InfoMapBasicAccessor *LoadedInfo() { assert(basic); return basic; }
+  InfoMapAccessor      *LoadedData() { assert(normal); return normal; }
+};
+
+class InfoMapBasicAccessor {
+protected:
+  InfoMap* info;
+public:
+  InfoMapBasicAccessor(InfoMap* info_) : info(info_) { }
+  const std::string& ReadFullMapName() const { return info->name; }
+  const std::string& ReadAuthorInfo() const { return info->author_info; }
+  const std::string& ReadMusicPlaylist() const { return info->music_playlist; }
+  const Surface& ReadPreview() const { return info->preview; }
+  uint GetNbBarrel() const { return info->nb_barrel; }
+  uint GetNbMine() const { return info->nb_mine; }
+  uint GetAlphaThreshold() const { return info->alpha_threshold; }
+  bool IsOpened() const { return info->is_opened; }
+  bool IsRandomGenerated() const { return info->random_generated; }
+};
+
+class InfoMapAccessor : public InfoMapBasicAccessor {
+public:
+  InfoMapAccessor(InfoMap* info_) : InfoMapBasicAccessor(info_) { }
+  Surface& ReadImgGround() { return info->img_ground; }
+  const Surface& ReadImgSky() const { return info->img_sky; }
+  const std::vector<Surface>& ReadSkyLayer() const { return info->sky_layer; }
 };
 
 

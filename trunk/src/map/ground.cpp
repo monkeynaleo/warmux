@@ -52,8 +52,9 @@ void Ground::Init(){
   std::cout.flush();
 
   // Load ground data
-  Surface& m_image = ActiveMap()->ReadImgGround();
-  if(ActiveMap()->IsOpened()) {
+  InfoMapAccessor *normal = ActiveMap()->LoadData();
+  Surface& m_image = normal->ReadImgGround();
+  if(normal->IsOpened()) {
     LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
   } else {
     LoadImage(m_image, Point2i(), Point2i());
@@ -63,10 +64,10 @@ void Ground::Init(){
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
-  open = ActiveMap()->IsOpened();
-  
+  open = normal->IsOpened();
+
   //Load alpha threshold from XML
-  alpha_threshold = ActiveMap()->GetAlphaThreshold();
+  alpha_threshold = normal->GetAlphaThreshold();
 
   std::cout << _("done") << std::endl;
 }
@@ -153,86 +154,87 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   // check adjacents pixels one by one:
   //upper right pixel
   if (x-1 != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x-1,y-1)) && 
-      (IsEmpty(Point2i(x-1,y)) || 
-      IsEmpty(Point2i(x,y-1)))) {
-    p_x=x-1;
-    p_y=y-1;
-    return true;
-  }
+    if (!IsEmpty(Point2i(x-1,y-1)) &&
+        (IsEmpty(Point2i(x-1,y)) ||
+        IsEmpty(Point2i(x,y-1)))) {
+      p_x=x-1;
+      p_y=y-1;
+      return true;
+    }
 
   //upper pixel
   if (x != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x,y-1)) &&
-      (IsEmpty(Point2i(x-1,y-1)) || 
-      IsEmpty(Point2i(x+1,y-1)))) {
-    p_x=x;
-    p_y=y-1;
-    return true;
-  }
+    if (!IsEmpty(Point2i(x,y-1)) &&
+        (IsEmpty(Point2i(x-1,y-1)) ||
+        IsEmpty(Point2i(x+1,y-1)))) {
+      p_x=x;
+      p_y=y-1;
+      return true;
+    }
 
   //upper right pixel
   if (x+1 != bad_x || y-1 != bad_y)
-  if (!IsEmpty(Point2i(x+1,y-1)) && 
-      (IsEmpty(Point2i(x,y-1)) || 
-      IsEmpty(Point2i(x+1,y)))) {
-    p_x=x+1;
-    p_y=y-1;
-    return true;
-  }
+    if (!IsEmpty(Point2i(x+1,y-1)) &&
+        (IsEmpty(Point2i(x,y-1)) ||
+        IsEmpty(Point2i(x+1,y)))) {
+      p_x=x+1;
+      p_y=y-1;
+      return true;
+    }
 
   //pixel at the right
   if (x+1 != bad_x || y != bad_y)
-  if (!IsEmpty(Point2i(x+1,y)) && 
-      (IsEmpty(Point2i(x+1,y-1)) || 
-      IsEmpty(Point2i(x,y+1)))) {
-    p_x=x+1;
-    p_y=y;
-    return true;
-  }
+    if (!IsEmpty(Point2i(x+1,y)) &&
+        (IsEmpty(Point2i(x+1,y-1)) ||
+        IsEmpty(Point2i(x,y+1)))) {
+      p_x=x+1;
+      p_y=y;
+      return true;
+    }
 
   //bottom right pixel
   if (x+1 != bad_x || y+1 != bad_y)
-  if (!IsEmpty(Point2i(x+1,y+1)) &&
-      (IsEmpty(Point2i(x+1,y)) || 
-      IsEmpty(Point2i(x,y+1)))) {
-    p_x=x+1;
-    p_y=y+1;
-    return true;
-  }
+    if (!IsEmpty(Point2i(x+1,y+1)) &&
+        (IsEmpty(Point2i(x+1,y)) ||
+        IsEmpty(Point2i(x,y+1)))) {
+      p_x=x+1;
+      p_y=y+1;
+      return true;
+    }
+
   //bottom pixel
-  if(x != bad_x
-  || y+1 != bad_y)
-  if(!IsEmpty(Point2i(x,y+1))
-  &&(IsEmpty(Point2i(x-1,y+1))
-  || IsEmpty(Point2i(x+1,y+1))))
-  {
-    p_x=x;
-    p_y=y+1;
-    return true;
-  }
+  if (x != bad_x || y+1 != bad_y)
+    if (!IsEmpty(Point2i(x,y+1))
+        &&(IsEmpty(Point2i(x-1,y+1))
+        || IsEmpty(Point2i(x+1,y+1))))
+    {
+      p_x=x;
+      p_y=y+1;
+      return true;
+    }
+
   //bottom left pixel
-  if(x-1 != bad_x
-  || y+1 != bad_y)
-  if(!IsEmpty(Point2i(x-1,y+1))
-  &&(IsEmpty(Point2i(x-1,y))
-  || IsEmpty(Point2i(x,y+1))))
-  {
-    p_x=x-1;
-    p_y=y+1;
-    return true;
-  }
+  if (x-1 != bad_x || y+1 != bad_y)
+    if (!IsEmpty(Point2i(x-1,y+1))
+        &&(IsEmpty(Point2i(x-1,y))
+        || IsEmpty(Point2i(x,y+1))))
+    {
+      p_x=x-1;
+      p_y=y+1;
+      return true;
+    }
+
   //pixel at left
-  if(x-1 == bad_x
-  && y == bad_y)
-  if(!IsEmpty(Point2i(x-1,y))
-  &&(IsEmpty(Point2i(x-1,y-1))
-  || IsEmpty(Point2i(x-1,y+1))))
-  {
-    p_x=x-1;
-    p_y=y;
-    return true;
-  }
+  if (x-1 == bad_x && y == bad_y)
+    if (!IsEmpty(Point2i(x-1,y))
+        &&(IsEmpty(Point2i(x-1,y-1))
+        || IsEmpty(Point2i(x-1,y+1))))
+    {
+      p_x=x-1;
+      p_y=y;
+      return true;
+    }
+
   return false;
 }
 

@@ -178,35 +178,34 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     return;
   }
 
-  InfoMap* info = MapsList::GetInstance()->lst[index];
-  try {
-    widget->SetSurface(info->ReadPreview(), true, true);
-  }
-  catch (const char* msg) {
-    Question question(Question::WARNING);
-    std::string err = Format("Map %s in folder '%s' is invalid: %s",
-                             info->GetRawName().c_str(), info->GetDirectory().c_str(), msg);
-    std::cerr << err << std::endl;
-    question.Set(err, 1, 0);
-    question.Ask();
+  InfoMapBasicAccessor* basic = NULL;
+
+  basic = MapsList::GetInstance()->lst[index]->LoadBasicInfo();
+  if (!basic)
+  {
+    // Error already reported by LoadBasicInfo()
 
     // Crude
     MapsList::iterator it = MapsList::GetInstance()->lst.begin();
     while (index--)
       it++;
+
     //delete *it;
     MapsList::GetInstance()->lst.erase(it);
     return;
   }
 
+  widget->SetSurface(basic->ReadPreview(), true, true);
+
   if (display_only && !selected)
     widget->Disable();
   else
     widget->Enable();
+
   // If selected update general information
   if (selected) {
-    map_name_label->SetText(MapsList::GetInstance()->lst[index]->ReadFullMapName());
-    map_author_label->SetText(MapsList::GetInstance()->lst[index]->ReadAuthorInfo());
+    map_name_label->SetText(basic->ReadFullMapName());
+    map_author_label->SetText(basic->ReadAuthorInfo());
   }
 }
 

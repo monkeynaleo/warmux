@@ -300,11 +300,10 @@ void Map::DrawAuthorName()
   }
 
   if (author_info1 == NULL) {
-    std::string txt;
-    txt  = Format(_("Map %s, a creation of: "),
-                  ActiveMap()->ReadFullMapName().c_str());
+    InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
+    std::string txt = Format(_("Map %s, a creation of: "), basic->ReadFullMapName().c_str());
     author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD);
-    txt = ActiveMap()->ReadAuthorInfo();
+    txt = basic->ReadAuthorInfo();
     author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD);
   }
 
