@@ -26,6 +26,7 @@
 #include "map/water.h"
 #include "game/config.h"
 #include "graphic/surface.h"
+#include "gui/question.h"
 #include "tool/resource_manager.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_file_tools.h>
@@ -36,54 +37,82 @@
 
 extern const uint MAX_WIND_OBJECTS;
 
-InfoMap::InfoMap(const std::string &map_name,
-                 const std::string &directory):
-  name("not initialized"),
-  author_info("not initialized"),
-  music_playlist("ingame"),
-  m_directory(directory),
-  m_map_name(map_name),
-  img_ground(),
-  img_sky(),
-  preview(),
-  nb_mine(4),
-  nb_barrel(4),
-  alpha_threshold(255),
-  is_opened(false),
-  is_basic_info_loaded(false),
-  is_data_loaded(false),
-  random_generated(false),
-  island_type(RANDOM_GENERATED),
-  water_type("no"),
-  res_profile(NULL)
+InfoMap::InfoMap(const std::string &map_name, const std::string &directory)
+  : name("not initialized")
+  , author_info("not initialized")
+  , music_playlist("ingame")
+  , m_directory(directory)
+  , m_map_name(map_name)
+  , img_ground()
+  , img_sky()
+  , preview()
+  , nb_mine(4)
+  , nb_barrel(4)
+  , alpha_threshold(255)
+  , is_opened(false)
+  , random_generated(false)
+  , island_type(RANDOM_GENERATED)
+  , water_type("no")
+  , basic(NULL)
+  , normal(NULL)
+  , res_profile(NULL)
 {
   wind.nb_sprite = 0;
   wind.need_flip = false;
   wind.rotation_speed = 0;
 }
 
-void InfoMap::LoadBasicInfo()
+InfoMapBasicAccessor* InfoMap::LoadBasicInfo()
 {
-  if(is_basic_info_loaded)
-    return;
+  std::string error;
+
+  if (basic)
+    return basic;
 
   std::string nomfich = m_directory + "config.xml";
 
   // Load resources
   if (!DoesFileExist(nomfich))
-    throw _("no configuration file!");
+  {
+    error = _("no configuration file!");
+    goto err;
+  }
+
   // FIXME: not freed
   res_profile = GetResourceManager().LoadXMLProfile(nomfich, true);
   if (!res_profile)
-    throw _("couldn't load config");
+  {
+    error = _("couldn't load config");
+    goto err;
+  }
   // Load preview
   preview = GetResourceManager().LoadImage(res_profile, "preview");
-  is_basic_info_loaded = true;
   // Load other informations
   if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
-    throw _("error parsing the config file");
+  {
+    error = _("error parsing the config file");
+    goto err;
+  }
 
   MSG_DEBUG("map.load", "Map loaded: %s", m_map_name.c_str());
+  basic = new InfoMapBasicAccessor(this);
+  return basic;
+
+err:
+  if (res_profile)
+  {
+    GetResourceManager().UnLoadXMLProfile(res_profile);
+    res_profile = NULL;
+  }
+
+  Question question(Question::WARNING);
+  std::string msg = Format(_("Map %s in folder '%s' is invalid: %s"),
+                           m_map_name.c_str(), m_directory.c_str(), error.c_str());
+  std::cerr << msg << std::endl;
+  question.Set(msg, 1, 0);
+  question.Ask();
+
+  return NULL;
 }
 
 bool InfoMap::ProcessXmlData(const xmlNode *xml)
@@ -142,7 +171,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
     std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
       "water" + PATH_SEPARATOR + water_type;
     if (!DoesFolderExist(path)) {
-      std::cerr << "Map " << GetRawName() << " (" << ReadFullMapName()
+      std::cerr << "Map " << GetRawName() << " (" << LoadedData()->ReadFullMapName()
         << ") uses invalid water type " << water_type << std::endl;
       water_type = "no";
     }
@@ -181,20 +210,22 @@ InfoMap::~InfoMap()
 {
   if (res_profile)
     delete res_profile;
+  if (normal)
+    delete normal;
+  if (basic)
+    delete basic;
 }
 
-void InfoMap::LoadData()
+InfoMapAccessor *InfoMap::LoadData()
 {
-  if (is_data_loaded)
-    return;
-  is_data_loaded = true;
+  if (normal)
+    return normal;
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_sky = GetResourceManager().LoadImage(res_profile, "sky");
 
   if (Config::GetInstance()->GetDisplayMultiLayerSky()) {
-
     uint layer = 0;
     XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
 
@@ -210,6 +241,9 @@ void InfoMap::LoadData()
   } else {
     img_ground = GetResourceManager().GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
   }
+
+  normal = new InfoMapAccessor(this);
+  return normal;
 }
 
 void InfoMap::FreeData()
@@ -223,28 +257,7 @@ void InfoMap::FreeData()
   }
 
   img_ground.Free();
-  is_data_loaded = false;
-}
-
-Surface& InfoMap::ReadImgGround()
-{
-  LoadBasicInfo();
-  LoadData();
-  return img_ground;
-}
-
-Surface& InfoMap::ReadImgSky()
-{
-  LoadBasicInfo();
-  LoadData();
-  return img_sky;
-}
-
-std::vector<Surface>& InfoMap::ReadSkyLayer()
-{
-  LoadBasicInfo();
-  LoadData();
-  return sky_layer;
+  delete normal; normal = NULL;
 }
 
 std::string InfoMap::GetConfigFilepath() const

@@ -124,6 +124,7 @@ void WeaponsList::UpdateTranslation()
 bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &type)
 {
   weapons_list_it it, end=m_weapons_list.end();
+  bool open = ActiveMap()->LoadedData()->IsOpened();
 
   /* find the current position */
   it = std::find(m_weapons_list.begin(),
@@ -139,7 +140,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
       } while(it != end
               && ((*it)->Category() != sort
                   || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-                  || (!((*it)->CanBeUsedOnClosedMap()) && !(ActiveMap()->IsOpened())))
+                  || (!((*it)->CanBeUsedOnClosedMap()) && !open))
               );
 
       /* Ok, a weapon was found let's return it */
@@ -164,7 +165,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
   while(it != end
       && ((*it)->Category() != sort
         || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap()->IsOpened())))
+            || (!(*it)->CanBeUsedOnClosedMap() && open)))
     ++it;
 
   /* Ok, a weapon was found let's return it if it is not the one active */

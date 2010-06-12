@@ -336,11 +336,11 @@ void Game::Start()
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
-  try
-  {
     InitEverything();
 
-    JukeBox::GetInstance()->PlayMusic(ActiveMap()->ReadMusicPlaylist());
+  InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
+  if (basic) {
+    JukeBox::GetInstance()->PlayMusic(basic->ReadMusicPlaylist());
 
     bool game_finished = Run();
 
@@ -348,21 +348,10 @@ void Game::Start()
     JukeBox::GetInstance()->StopAll();
 
     UnloadDatas(game_finished);
+  }
 
     Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
     JukeBox::GetInstance()->PlayMusic("menu");
-
-  }
-  catch (const std::exception &e)
-  {
-    // thanks to exception mechanism, cancel some things by hand...
-    Mouse::GetInstance()->Show();
-
-    std::string err_msg = e.what();
-    std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
-    std::cout << std::endl << txt << std::endl;
-    DisplayError(txt);
-  }
 }
 
 void Game::UnloadDatas(bool game_finished) const

@@ -96,10 +96,6 @@ int AppWormux::Main(void)
 {
   bool quit = false;
 
-#ifndef DEBUG
-  try
-#endif
-  {
     DisplayLoadingPicture();
 
 #ifdef HAVE_LIBCURL
@@ -110,7 +106,6 @@ int AppWormux::Main(void)
 
     do
     {
-
       if (choice == MainMenu::NONE)
       {
         MainMenu main_menu;
@@ -171,23 +166,6 @@ int AppWormux::Main(void)
     while (!quit);
 
     End();
-  }
-#ifndef DEBUG
-  catch(const std::exception & e)
-  {
-    std::cerr << std::endl
-         << "C++ exception caught:" << std::endl
-         << e.what() << std::endl << std::endl;
-    AppWormux::DisplayError(e.what());
-    WakeUpDebugger();
-  }
-  catch(...)
-  {
-    std::cerr << std::endl
-      << "Unexpected exception caught..." << std::endl << std::endl;
-    WakeUpDebugger();
-  }
-#endif
 
   return 0;
 }
@@ -418,8 +396,7 @@ void ParseArgs(int argc, char * argv[])
         }
     }
 }
-
-int main(int argc, char *argv[])
+extern "C" int main(int argc, char *argv[])
 {
 #ifndef WIN32
   signal(SIGPIPE, SIG_IGN);

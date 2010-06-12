@@ -30,14 +30,15 @@
 
 void Sky::Init()
 {
-  std::vector<Surface> sky_layer = ActiveMap()->ReadSkyLayer();
+  InfoMapAccessor *normal = ActiveMap()->LoadData();
+  std::vector<Surface> sky_layer = normal->ReadSkyLayer();
 
   if (0 < sky_layer.size()) {
     for (uint i = 0; i < sky_layer.size(); i++) {
       images.push_back(sky_layer[i]);
     }
   } else {
-    Surface tmp_image = ActiveMap()->ReadImgSky();
+    Surface tmp_image = normal->ReadImgSky();
     tmp_image.SetAlpha(0, 0);
     images.push_back(tmp_image.DisplayFormat());
   }

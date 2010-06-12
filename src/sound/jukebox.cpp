@@ -132,20 +132,6 @@ void JukeBox::SetFrequency (int frequency)
   Init();
 }
 
-// Code not used
-#if 0
-void JukeBox::SetNumbersOfChannel(int channels)
-{
-  if (m_config.channels == channels) return;
-
-  m_config.channels = channels;
-
-  // Close and reopen audio device
-  End();
-  Init();
-}
-#endif
-
 void JukeBox::ActiveMusic (bool on)
 {
    if(IsPlayingMusic() && !on)

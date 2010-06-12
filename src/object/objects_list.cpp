@@ -44,7 +44,7 @@ ObjectsList::~ObjectsList()
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
-  for (uint i=0; i<ActiveMap()->GetNbMine(); ++i)
+  for (uint i=0; i<ActiveMap()->LoadedData()->GetNbMine(); ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
     Double detection_range_factor = 1.5;
@@ -59,7 +59,7 @@ void ObjectsList::PlaceMines()
 void ObjectsList::PlaceBarrels()
 {
   MSG_DEBUG("lst_objects","Placing barrels");
-  for (uint i= 0; i<ActiveMap()->GetNbBarrel(); ++i)
+  for (uint i= 0; i<ActiveMap()->LoadedData()->GetNbBarrel(); ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
 

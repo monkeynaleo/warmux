@@ -138,7 +138,7 @@ public:
   Uint8 GetBytesPerPixel() const;
   unsigned char *GetPixels() const;
 
-  Uint32 ComputeCRC();
+  Uint32 ComputeCRC() const;
 };
 
 #endif
