@@ -334,6 +334,9 @@ else
   CXXFLAGS="$CXXFLAGS -fno-rtti"
 fi
 
+dnl === Forbid exceptions (Android platform requirement) ===================
+CXXFLAGS="$CXXFLAGS -fno-exceptions"
+
 dnl ========================================================================
 dnl == Check for header files                                              =
 dnl ========================================================================
