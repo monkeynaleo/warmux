@@ -40,8 +40,14 @@ JukeBox::JukeBox()
 {
   m_config.music = true;
   m_config.effects = true;
+#ifdef ANDROID
+  // reduce memory usage
+  m_config.frequency = 22050; //MIX_DEFAULT_FREQUENCY;
+  m_config.channels = 1; // mono
+#else
   m_config.frequency = 44100; //MIX_DEFAULT_FREQUENCY;
   m_config.channels = 2; // stereo
+#endif
 }
 
 void JukeBox::Pause() const
@@ -119,6 +125,8 @@ void JukeBox::End()
 
 void JukeBox::SetFrequency (int frequency)
 {
+  // We ignore frequency changes requests
+#ifndef ANDROID
   if ((frequency != 11025)
       && (frequency != 22050)
       && (frequency != 44100)) frequency = 44100;
@@ -130,6 +138,7 @@ void JukeBox::SetFrequency (int frequency)
   // Close and reopen audio device
   End();
   Init();
+#endif
 }
 
 void JukeBox::ActiveMusic (bool on)

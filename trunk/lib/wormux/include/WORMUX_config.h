@@ -24,6 +24,8 @@
 
 #ifdef _MSC_VER
 #  include "config_visual.h"
+#elif defined(ANDROID)
+#  include "config_android.h"
 #elif defined(HAVE_CONFIG_H)
 #  include "config_autotools.h"
 #else
