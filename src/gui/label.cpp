@@ -61,8 +61,7 @@ bool Label::LoadXMLConfiguration()
     return false;
   }
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  ParseGeometry();
   ParseXMLBorder();
   ParseXMLBackground();
   

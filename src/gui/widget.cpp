@@ -201,6 +201,34 @@ int Widget::ParseVerticalTypeAttribut(const std::string & attributName,
   return finalValue;
 }
 
+void Widget::ParseGeometry(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return;
+  }
+
+  ParseXMLSize();
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  std::string alignType;
+  xmlFile->ReadStringAttr(widgetNode, "alignType", alignType);
+  if ("manual" == alignType) {
+    ParseXMLPosition();
+  } else if ("centeredInX" == alignType) {
+    SetPosition((GetMainWindow().GetWidth() - GetSizeX()) / 2,
+                ParseVerticalTypeAttribut("y", 0));
+  } else if ("centeredInY" == alignType) {
+    SetPosition(ParseHorizontalTypeAttribut("x", 0),
+                (GetMainWindow().GetHeight() - GetSizeY()) / 2);
+  } else if ("centeredInXY" == alignType) {
+    SetPosition((GetMainWindow().GetWidth() - GetSizeX()) / 2,
+                (GetMainWindow().GetHeight() - GetSizeY()) / 2);
+  } else {
+    ParseXMLPosition();
+  }
+}
+
 void Widget::Update(const Point2i &mousePosition,
                     const Point2i &lastMousePosition)
 {
