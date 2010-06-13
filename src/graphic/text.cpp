@@ -21,6 +21,7 @@
 #include "graphic/text.h"
 #include "graphic/video.h"
 #include "include/app.h"
+#include "include/constant.h"
 #include "interface/interface.h"
 #include "map/map.h"
 
@@ -82,6 +83,11 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
 {
   std::string xmlText("Text not found");
   xmlFile->ReadStringAttr(textNode, "text", xmlText);
+  if ("%VERSION%" == xmlText) {  
+    xmlText = Constants::WORMUX_VERSION;
+  } else if ("%WEB_SITE%" == xmlText) {
+    xmlText = Constants::WEB_SITE;
+  }
 
   Color textColor(0, 0, 0, 255);
   xmlFile->ReadHexColorAttr(textNode, "textColor", textColor);
