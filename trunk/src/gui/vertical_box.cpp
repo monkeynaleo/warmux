@@ -77,8 +77,7 @@ bool VBox::LoadXMLConfiguration(void)
     return false;
   }
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  ParseGeometry();
   ParseXMLBoxParameters();
 
   //TODO

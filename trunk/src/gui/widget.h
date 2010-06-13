@@ -75,6 +75,7 @@ class Widget : public Rectanglei, public Container
                                     int defaultValue);
     int ParseVerticalTypeAttribut(const std::string & attributName,
                                   int defaultValue);
+    void ParseGeometry(void);
 
   public:
     Widget();

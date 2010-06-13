@@ -59,9 +59,8 @@ bool GridBox::LoadXMLConfiguration(void)
   if (NULL == profile || NULL == widgetNode) {
     return false;
   }
-
-  ParseXMLPosition();
-  ParseXMLSize();
+  
+  ParseGeometry();
   ParseXMLBoxParameters();
 
   XmlReader * xmlFile = profile->GetXMLDocument();

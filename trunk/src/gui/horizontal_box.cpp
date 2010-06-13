@@ -32,7 +32,7 @@ HBox::HBox(uint height,
 HBox::HBox(Profile * profile,
            const xmlNode * horizontalBoxNode) :
   Box(profile, horizontalBoxNode),
-  force_widget_size(false)
+  force_widget_size(true)
 {
 }
 
@@ -58,7 +58,6 @@ void HBox::Pack()
     } else {
       max_size_y = std::max(max_size_y, uint((*it)->GetSizeY()));
     }
-
     (*it)->Pack();
 
     _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
@@ -77,10 +76,11 @@ bool HBox::LoadXMLConfiguration(void)
   }
 
   ParseXMLPosition();
-  ParseXMLSize();
   ParseXMLBoxParameters();
 
-  //TODO
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  xmlFile->ReadBool(widgetNode, "forceWidgetSize", force_widget_size);
 
   return true;
 }
