@@ -87,8 +87,7 @@ bool BaseListBox::LoadXMLConfiguration()
     return false;
   }
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  ParseXMLGeometry();
   ParseXMLBorder();
   ParseXMLBackground();
 

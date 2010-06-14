@@ -85,9 +85,7 @@ bool CheckBox::LoadXMLConfiguration()
 
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  ParseXMLPosition();
-  ParseXMLSize();
-  ParseXMLBorder();
+  ParseXMLGeometry();
   ParseXMLBackground();
 
   Text::LoadXMLConfiguration(xmlFile, widgetNode);

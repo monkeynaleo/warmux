@@ -56,8 +56,7 @@ bool Button::LoadXMLConfiguration()
     return false;
   }
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  ParseXMLGeometry();
   ParseXMLBorder();
   ParseXMLBackground();
 

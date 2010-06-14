@@ -69,8 +69,7 @@ bool PictureTextCBox::LoadXMLConfiguration()
 
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  ParseXMLPosition();
-  ParseXMLSize();
+  ParseXMLGeometry();
   ParseXMLBorder();
   ParseXMLBackground();
 
