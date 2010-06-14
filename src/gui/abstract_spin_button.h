@@ -43,6 +43,10 @@ public:
       ASSERT(m_max_value >= m_value);
       ASSERT(m_step <= (m_max_value - m_min_value));
     }
+  AbstractSpinButton(Profile * profile,
+                     const xmlNode * spinButtonNode) :
+    Widget(profile, spinButtonNode) {}
+  virtual ~AbstractSpinButton(void) {}
 
   int GetValue() const { return m_value; }
 

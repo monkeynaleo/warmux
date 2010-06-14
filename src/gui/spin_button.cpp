@@ -56,12 +56,29 @@ SpinButton::SpinButton (const std::string &label, int width,
   ValueHasChanged();
 }
 
+SpinButton::SpinButton(Profile * profile,
+                       const xmlNode * spinButtonNode) :
+  AbstractSpinButton(profile, spinButtonNode)
+{
+}
+
 SpinButton::~SpinButton ()
 {
   delete txt_label;
   delete txt_value;
   delete m_plus;
   delete m_minus;
+}
+
+bool SpinButton::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  ParseXMLGeometry();
+
+  return true;
 }
 
 void SpinButton::Pack()

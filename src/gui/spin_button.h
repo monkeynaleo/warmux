@@ -48,13 +48,16 @@ class SpinButton : public AbstractSpinButton
   SpinButton(const std::string &label, int width,
              int value, int step, int min_value, int max_value,
              const Color& color = white_color, bool shadowed = true);
-  virtual ~SpinButton();
+  SpinButton(Profile * profile,
+             const xmlNode * spinButtonNode);
+  virtual ~SpinButton(void);
 
   // From Widget
   virtual void Pack();
   virtual void Draw(const Point2i &mousePosition) const;
   virtual Widget* Click(const Point2i &/*mousePosition*/, uint /*button*/) const { return NULL; };
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual bool LoadXMLConfiguration(void);
 
   // From AbstractSpinButton
   virtual void ValueHasChanged();
