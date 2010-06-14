@@ -32,13 +32,13 @@ class Sprite;
 class CheckBox : public Text, public Widget
 {
   /* If you need this, implement it (correctly)*/
-  CheckBox(const CheckBox&);
-  CheckBox operator=(const CheckBox&);
+  CheckBox(const CheckBox &);
+  CheckBox operator = (const CheckBox &);
   /**********************************************/
   void Init(uint width);
 
   protected:
-    bool m_value;
+    bool     m_value;
     Sprite * m_checked_image;
 
   public:
@@ -51,8 +51,8 @@ class CheckBox : public Text, public Widget
 
     virtual void Draw(const Point2i & mousePosition) const;
     virtual Widget * Click(const Point2i &, uint) { return this; };
-    virtual Widget* ClickUp(const Point2i & mousePosition, 
-                            uint button);
+    virtual Widget * ClickUp(const Point2i & mousePosition, 
+                             uint button);
     virtual void Pack();
     virtual bool LoadXMLConfiguration(void);
 
