@@ -201,7 +201,7 @@ int Widget::ParseVerticalTypeAttribut(const std::string & attributName,
   return finalValue;
 }
 
-void Widget::ParseGeometry(void)
+void Widget::ParseXMLGeometry(void)
 {
   if (NULL == profile || NULL == widgetNode) {
     return;

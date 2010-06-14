@@ -60,7 +60,7 @@ bool GridBox::LoadXMLConfiguration(void)
     return false;
   }
   
-  ParseGeometry();
+  ParseXMLGeometry();
   ParseXMLBoxParameters();
 
   XmlReader * xmlFile = profile->GetXMLDocument();

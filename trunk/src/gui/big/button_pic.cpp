@@ -68,9 +68,8 @@ bool ButtonPic::LoadXMLConfiguration(void)
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
+  ParseXMLGeometry();
   ParseXMLMisc();
-  ParseXMLPosition();
-  ParseXMLSize();
   ParseXMLBorder();
   ParseXMLBackground();
 

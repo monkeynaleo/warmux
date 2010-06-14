@@ -75,7 +75,7 @@ bool HBox::LoadXMLConfiguration(void)
     return false;
   }
 
-  ParseXMLPosition();
+  ParseXMLGeometry();
   ParseXMLBoxParameters();
 
   XmlReader * xmlFile = profile->GetXMLDocument();
