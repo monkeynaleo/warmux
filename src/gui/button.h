@@ -32,24 +32,25 @@ class Profile;
 class Button : public Widget
 {
   /* If you need this, implement it (correctly)*/
-  Button(const Button&);
-  Button operator=(const Button&);
+  Button(const Button &);
+  Button operator = (const Button &);
   /*********************************************/
 
-protected:
-  bool img_scale;
-  Sprite *image;
+  protected:
+    bool     img_scale;
+    Sprite * image;
 
-public:
-  Button (const Profile *res_profile, const std::string& resource_id,
-          bool img_scale = false);
-  Button(Profile * profile,
-         const xmlNode * baseListBoxNode);
-  virtual ~Button();
+  public:
+    Button (const Profile * res_profile, 
+            const std::string & resource_id,
+            bool img_scale = false);
+    Button(Profile * profile,
+           const xmlNode * baseListBoxNode);
+    virtual ~Button();
 
-  virtual bool LoadXMLConfiguration(void);
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual void Pack();
+    virtual bool LoadXMLConfiguration(void);
+    virtual void Draw(const Point2i & mousePosition) const;
+    virtual void Pack();
 };
 
 #endif

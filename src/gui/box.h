@@ -27,32 +27,39 @@
 
 class Box : public WidgetList
 {
-protected:
-  uint margin;
-  Point2i border;
+  protected:
+    uint    margin;
+    Point2i border;
 
-public:
-  Box(void);
-  Box(const Point2i &size, bool _draw_border=true);
-  Box(Profile * _profile,
-      const xmlNode * _boxNode);
-  virtual ~Box();
+  public:
+    Box(void);
+    Box(const Point2i & size, 
+        bool _draw_border = true);
+    Box(Profile * _profile,
+        const xmlNode * _boxNode);
+    virtual ~Box();
 
-  void ParseXMLBoxParameters(void);
+    void ParseXMLBoxParameters(void);
+    void Update(const Point2i & mousePosition,
+                const Point2i & lastMousePosition);
 
-  void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition);
+    Widget * Click(const Point2i & mousePosition, 
+                   uint button) { 
+      return WidgetList::Click(mousePosition, button); 
+    };
 
-  Widget* Click(const Point2i &mousePosition, uint button) { return WidgetList::Click(mousePosition, button); };
-  Widget* ClickUp(const Point2i &mousePosition, uint button) { return WidgetList::ClickUp(mousePosition, button); };
+    Widget * ClickUp(const Point2i & mousePosition, 
+                     uint button) { 
+      return WidgetList::ClickUp(mousePosition, button); 
+    };
 
-  void SetMargin(uint _margin) { margin = _margin; };
+    void SetMargin(uint _margin) { margin = _margin; };
 
-  void SetBorder(const Point2i &newBorder) { border = newBorder; };
-  void SetBorder(uint x, uint y) { border.SetValues(x, y); };
-  void SetNoBorder() { border.SetValues(0, 0); };
+    void SetBorder(const Point2i & newBorder) { border = newBorder; };
+    void SetBorder(uint x, uint y) { border.SetValues(x, y); };
+    void SetNoBorder() { border.SetValues(0, 0); };
 
-  virtual void Pack() = 0;
+    virtual void Pack() = 0;
 };
 
 #endif

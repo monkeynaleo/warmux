@@ -30,33 +30,33 @@
 class Label : public Text, public Widget
 {
   /* If you need this, implement it (correctly)*/
-  Label(const Label&);
-  Label operator=(const Label&);
+  Label(const Label &);
+  Label operator = (const Label &);
   /*********************************************/
 
- private:
-  bool center;
+  private:
+    bool center;
 
- public:
-  Label(const std::string & label,
-        uint max_width,
-        Font::font_size_t font_size = Font::FONT_SMALL,
-        Font::font_style_t font_style = Font::FONT_BOLD,
-        const Color & color = dark_gray_color,
-        bool center = false,
-        bool shadowed = false,
-        const Color & shadowColor = black_color);
-  Label(const Point2i & size);
-  Label(Profile * profile,
-        const xmlNode * pictureNode);
-  Label(void) {}
-  virtual ~Label();
+  public:
+    Label(const std::string & label,
+          uint max_width,
+          Font::font_size_t font_size = Font::FONT_SMALL,
+          Font::font_style_t font_style = Font::FONT_BOLD,
+          const Color & color = dark_gray_color,
+          bool center = false,
+          bool shadowed = false,
+          const Color & shadowColor = black_color);
+    Label(const Point2i & size);
+    Label(Profile * profile,
+          const xmlNode * pictureNode);
+    Label(void) {}
+    virtual ~Label();
 
-  virtual bool LoadXMLConfiguration(void);
-  virtual void Draw(const Point2i & mousePosition) const;
-  virtual void Pack();
+    virtual bool LoadXMLConfiguration(void);
+    virtual void Draw(const Point2i & mousePosition) const;
+    virtual void Pack();
 
-  void SetText(const std::string & new_txt);
+    void SetText(const std::string & new_txt);
 };
 
 #endif
