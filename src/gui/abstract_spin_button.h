@@ -27,89 +27,35 @@
 
 class AbstractSpinButton : public Widget
 {
-private:
-  int m_value, m_step, m_min_value, m_max_value;
+  private:
+    int m_value;
+    int m_step;
+    int m_min_value;
+    int m_max_value;
 
-protected:
-  int GetStep() const { return m_step; }
-  int GetMinValue() const { return m_min_value; }
-  int GetMaxValue() const { return m_max_value; }
+  protected:
+    int GetStep() const { return m_step; }
+    int GetMinValue() const { return m_min_value; }
+    int GetMaxValue() const { return m_max_value; }
 
-public:
-  AbstractSpinButton(int value, int step, int min_value, int max_value) :
-    m_value(value), m_step(step), m_min_value(min_value), m_max_value(max_value)
-    {
-      ASSERT(m_value >= m_min_value);
-      ASSERT(m_max_value >= m_value);
-      ASSERT(m_step <= (m_max_value - m_min_value));
-    }
-  AbstractSpinButton(Profile * profile,
-                     const xmlNode * spinButtonNode) :
-    Widget(profile, spinButtonNode) {}
-  virtual ~AbstractSpinButton(void) {}
+  public:
+    AbstractSpinButton(int value, 
+                       int step, 
+                       int min_value, 
+                       int max_value);
+    AbstractSpinButton(Profile * profile,
+                       const xmlNode * spinButtonNode);
+    virtual ~AbstractSpinButton(void) {}
 
-  int GetValue() const { return m_value; }
-
-  int IncValue()
-  {
-    SetValue(m_value + m_step);
-    return m_value;
-  }
-
-  int DecValue()
-  {
-    SetValue(m_value - m_step);
-    return m_value;
-  }
-
-  void SetValue(int value, bool force = false)
-  {
-    int old_value = m_value;
-
-    if (!force) {
-      m_value = InRange_Long(value, m_min_value, m_max_value);
-    } else {
-      m_value = value;
-      if (value > m_max_value)
-	m_max_value = value;
-      else if (value < m_min_value)
-	m_min_value = value;
-    }
-
-    if (old_value != m_value) {
-      ValueHasChanged();
-      NeedRedrawing();
-    }
-  }
-
-  virtual void ValueHasChanged() = 0;
-
-  void SetMaxValue(int max_value)
-  {
-    if (m_max_value != max_value) {
-      m_max_value = max_value;
-      SetValue(m_value);
-      NeedRedrawing();
-    }
-    ASSERT(m_min_value < m_max_value);
-    ASSERT(m_step <= (m_max_value - m_min_value));
-  }
-
-  void SetMinValue(int min_value)
-  {
-    if (m_min_value != min_value) {
-      m_min_value = min_value;
-      SetValue(m_value);
-      NeedRedrawing();
-    }
-    ASSERT(m_min_value < m_max_value);
-    ASSERT(m_step <= (m_max_value - m_min_value));
-  }
-
-  void SetStep(int step)
-  {
-    m_step = step;
-  }
+    int GetValue() const { return m_value; }
+    int IncValue();
+    int DecValue();
+    void SetValue(int value, 
+                  bool force = false);
+    virtual void ValueHasChanged() = 0;
+    void SetMaxValue(int max_value);
+    void SetMinValue(int min_value);
+    void SetStep(int step) { m_step = step; }
 };
 
 #endif

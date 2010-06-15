@@ -68,6 +68,7 @@ POTFILES = \
         src/graphic/textured_polygon.h \
         src/graphic/video.cpp \
         src/graphic/video.h \
+        src/gui/abstract_spin_button.cpp \
         src/gui/abstract_spin_button.h \
         src/gui/big/button_pic.cpp \
         src/gui/big/button_pic.h \

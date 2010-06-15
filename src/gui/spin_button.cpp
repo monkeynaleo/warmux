@@ -25,10 +25,18 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-SpinButton::SpinButton (const std::string &label, int width,
-                        int value, int step, int min_value, int max_value,
-                        const Color& color, bool _shadowed) :
-  AbstractSpinButton(value, step, min_value, max_value)
+SpinButton::SpinButton (const std::string & label, 
+                        int width,
+                        int value, 
+                        int step, 
+                        int min_value, 
+                        int max_value,
+                        const Color & color, 
+                        bool _shadowed) :
+  AbstractSpinButton(value, 
+                     step, 
+                     min_value, 
+                     max_value)
 {
   position = Point2i(-1, -1);
   size.x = width;
@@ -77,6 +85,8 @@ bool SpinButton::LoadXMLConfiguration(void)
   }
 
   ParseXMLGeometry();
+
+  txt_label = new Text();
 
   return true;
 }
