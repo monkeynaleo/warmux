@@ -48,9 +48,8 @@
 #include "weapon/weapon_launcher.h"
 
 const int Y_OBJET_MIN = -10000;
-const Double PIXEL_PER_METER = 40;
 
-Double MeterDistance (const Point2i &p1, const Point2i &p2)
+Double MeterDistance(const Point2i &p1, const Point2i &p2)
 {
   return p1.Distance(p2) / PIXEL_PER_METER;
 }
@@ -94,11 +93,6 @@ PhysicalObj::~PhysicalObj ()
 //--                         Class Parameters SET/GET                      --//
 //---------------------------------------------------------------------------//
 
-void PhysicalObj::SetXY(const Point2i &position)
-{
-  SetXY(Point2d(Double(position.x), Double(position.y)));
-}
-
 void PhysicalObj::SetXY(const Point2d &position)
 {
   CheckOverlapping();
@@ -115,12 +109,6 @@ void PhysicalObj::SetXY(const Point2d &position)
     if( FootsInVacuum() ) StartMoving();
   }
 }
-
-Double PhysicalObj::GetXDouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-Double PhysicalObj::GetYDouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
-
-int PhysicalObj::GetX() const { return (int)GetXDouble(); };
-int PhysicalObj::GetY() const { return (int)GetYDouble(); };
 
 void PhysicalObj::SetSize(const Point2i &newSize)
 {

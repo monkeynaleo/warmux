@@ -42,9 +42,9 @@ typedef enum
 
 class Action;
 
-extern const Double PIXEL_PER_METER;
+#define PIXEL_PER_METER 40
 
-Double MeterDistance (const Point2i &p1, const Point2i &p2);
+Double MeterDistance(const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
@@ -101,12 +101,12 @@ public:
   // Set/Get position
   void SetX(Double x) { SetXY( Point2d(x, GetYDouble()) ); };
   void SetY(Double y) { SetXY( Point2d(GetXDouble(), y) ); };
-  void SetXY(const Point2i &position);
+  void SetXY(const Point2i &position) { SetXY(Point2d(Double(position.x), Double(position.y))); };
   void SetXY(const Point2d &position);
-  int GetX() const;
-  int GetY() const;
-  Double GetXDouble() const;
-  Double GetYDouble() const;
+  int GetX() const { return (int)GetXDouble(); };
+  int GetY() const { return (int)GetYDouble(); };
+  Double GetXDouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
+  Double GetYDouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
   const Point2d GetPosition() const { return Point2d(GetXDouble(), GetYDouble()) ;};
 
   // Set/Get size
@@ -212,8 +212,8 @@ protected:
   virtual void SignalRebound();
   virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-				     PhysicalObj * /* collided/ing object */,
-				     const Point2d& /* object speed_before */) { };
+             PhysicalObj * /* collided/ing object */,
+             const Point2d& /* object speed_before */) { };
   virtual void SignalOutOfMap() { };
 
 private:
@@ -230,8 +230,8 @@ private:
   void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
-				 Point2d& contactPos,
-				 Double& contactAngle) const;
+         Point2d& contactPos,
+         Double& contactAngle) const;
 };
 
 #endif
