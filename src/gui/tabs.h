@@ -54,7 +54,7 @@ private:
 
 public:
   MultiTabs(const Point2i& size);
-  ~MultiTabs();
+  virtual ~MultiTabs();
 
   void AddNewTab(const std::string& id, const std::string& title, Widget* w);
   const std::string& GetCurrentTabId() const;
