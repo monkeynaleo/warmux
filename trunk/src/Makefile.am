@@ -78,6 +78,7 @@ wormux_SOURCES = \
         graphic/textured_polygon.h \
         graphic/video.cpp \
         graphic/video.h \
+        gui/abstract_spin_button.cpp \
         gui/abstract_spin_button.h \
         gui/big/button_pic.cpp \
         gui/big/button_pic.h \
