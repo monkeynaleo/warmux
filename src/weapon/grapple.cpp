@@ -382,8 +382,8 @@ void Grapple::Draw()
                 +(quad.y1-quad.y4) * (quad.y1-quad.y4);
       size -= m_node_sprite->GetHeight();
       while( (step*dx*step*dx)+(step*dy*step*dy) < size ) {
-	m_node_sprite->Draw(Point2i(quad.x4 + (int)((Double) step * dx),
-				    quad.y4 + (int)((Double) step * dy)));
+  m_node_sprite->Draw(Point2i(quad.x4 + (int)((Double) step * dx),
+            quad.y4 + (int)((Double) step * dy)));
         step++;
       }
       quad.x1 = quad.x4 ;
@@ -523,7 +523,7 @@ void Grapple::GoDown()
     return;
   last_mvt = Time::GetInstance()->Read();
 
-  if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
+  if (ActiveCharacter().GetRopeLength()*PIXEL_PER_METER >= (int)cfg().max_rope_length)
     return;
 
   delta_len = 0.1 ;
