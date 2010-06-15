@@ -43,7 +43,7 @@ class ButtonText : public Button
                const std::string & new_text,
                Font::font_size_t font_size,
                Font::font_style_t font_style);
-    ~ButtonText();
+    virtual ~ButtonText();
 
     void Draw(const Point2i & mousePosition) const;
 };

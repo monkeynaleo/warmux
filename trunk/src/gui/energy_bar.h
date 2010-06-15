@@ -61,6 +61,7 @@ class EnergyBar : public ProgressBar
               enum orientation _orientation = PROG_BAR_HORIZONTAL);
     EnergyBar(Profile * _profile,
               const xmlNode * _widgetNode);
+    virtual ~EnergyBar(void) {}
 
     virtual bool LoadXMLConfiguration(void);
     void ProcessThresholds(int thresholdNumber,

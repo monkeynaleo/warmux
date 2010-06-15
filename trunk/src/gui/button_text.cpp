@@ -22,10 +22,6 @@
 #include "gui/button_text.h"
 #include "graphic/text.h"
 
-ButtonText::~ButtonText(){
-  delete text;
-}
-
 ButtonText::ButtonText(const Profile *res_profile,
                        const std::string& resource_id,
                        const std::string &new_text,
@@ -34,6 +30,11 @@ ButtonText::ButtonText(const Profile *res_profile,
   Button(res_profile, resource_id),
   text(new Text(new_text, white_color, font_size, font_style))
 { }
+
+ButtonText::~ButtonText()
+{
+  delete text;
+}
 
 void ButtonText::Draw(const Point2i &mousePosition) const
 {
