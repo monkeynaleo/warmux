@@ -31,7 +31,6 @@
 #include "map/camera.h"
 #include "map/map.h"
 #include <WORMUX_rectangle.h>
-#include <WORMUX_debug.h>
 #include "graphic/spriteframe.h"
 #include "tool/string_tools.h"
 
@@ -119,127 +118,6 @@ void Sprite::AddFrame(const Surface &surf, unsigned int delay){
   frames.push_back( SpriteFrame(surf, delay) );
 }
 
-void Sprite::SetSize(unsigned int w, unsigned int h){
-  ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
-
-  frame_width_pix = w;
-  frame_height_pix = h;
-}
-
-void Sprite::SetSize(const Point2i &size){
-  SetSize(size.x, size.y);
-}
-
-unsigned int Sprite::GetWidth() const{
-  Double one_half = 0.5;
-  return static_cast<int>(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
-}
-
-unsigned int Sprite::GetWidthMax() const{
-  if(!current_surface.IsNull() )
-    return current_surface.GetWidth();
-  else
-    return GetWidth();
-}
-
-unsigned int Sprite::GetHeight() const{
-   return static_cast<int>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
-}
-
-unsigned int Sprite::GetHeightMax() const{
-  if(!current_surface.IsNull() )
-    return current_surface.GetHeight();
-  else
-    return GetHeight();
-}
-
-Point2i Sprite::GetSize() const
-{
-  return Point2i(GetWidth(), GetHeight());
-}
-
-Point2i Sprite::GetSizeMax() const
-{
-  return Point2i(GetWidthMax(), GetHeightMax());
-}
-
-unsigned int Sprite::GetFrameCount() const
-{
-  return frames.size();
-}
-
-void Sprite::SetCurrentFrame(unsigned int frame_no)
-{
-  ASSERT (frame_no < frames.size());
-  if (current_frame != frame_no) {
-    cache.InvalidLastFrame();
-    MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
-  }
-  current_frame = frame_no;
-}
-
-unsigned int Sprite::GetCurrentFrame() const
-{
-  ASSERT(current_frame < frames.size());
-  return current_frame;
-}
-
-SpriteFrame& Sprite::operator[] (unsigned int index)
-{
-  return frames.at(index);
-}
-
-const SpriteFrame& Sprite::operator[] (unsigned int index) const
-{
-  return frames.at(index);
-}
-
-const SpriteFrame& Sprite::GetCurrentFrameObject() const
-{
-  return frames[current_frame];
-}
-
-void Sprite::Scale( Double _scale_x, Double _scale_y)
-{
-  this->scale_x = _scale_x;
-  this->scale_y = _scale_y;
-  cache.InvalidLastFrame();
-}
-
-void Sprite::ScaleSize(int width, int height)
-{
-  Scale(Double(width)/Double(frame_width_pix),
-        Double(height)/Double(frame_height_pix));
-}
-
-void Sprite::ScaleSize(const Point2i& size)
-{
-  ScaleSize(size.x, size.y);
-}
-
-void Sprite::GetScaleFactors( Double &_scale_x, Double &_scale_y) const
-{
-  _scale_x = this->scale_x;
-  _scale_y = this->scale_y;
-}
-
-void Sprite::SetFrameSpeed(unsigned int nv_fs)
-{
-  for ( unsigned int f = 0 ; f < frames.size() ; f++)
-    frames[f].delay = nv_fs;
-}
-
-void Sprite::SetAlpha( Double _alpha)
-{
-  ASSERT(_alpha >= ZERO && _alpha <= ONE);
-  this->alpha = _alpha;
-}
-
-Double Sprite::GetAlpha() const
-{
-  return alpha;
-}
-
 void Sprite::SetRotation_rad( Double angle_rad)
 {
   while(angle_rad > 2*PI)
@@ -251,12 +129,6 @@ void Sprite::SetRotation_rad( Double angle_rad)
 
   rotation_rad = angle_rad;
   cache.InvalidLastFrame();
-}
-
-const Double &Sprite::GetRotation_rad() const
-{
-  ASSERT(rotation_rad > -2*PI && rotation_rad <= 2*PI);
-  return rotation_rad;
 }
 
 void Sprite::SetRotation_HotSpot( const Point2i& new_hotspot)
@@ -339,23 +211,6 @@ void Sprite::Start()
   cache.InvalidLastFrame();
 }
 
-void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y)
-{
-  RefreshSurface();
-  Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
-}
-
-void Sprite::Blit( Surface &dest, const Point2i &pos)
-{
-  Blit(dest, pos.GetX(), pos.GetY());
-}
-
-void Sprite::Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos)
-{
-  Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(),
-       srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY());
-}
-
 void Sprite::Blit(Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
 {
   if (!show)
@@ -401,11 +256,6 @@ void Sprite::Finish()
   cache.InvalidLastFrame();
 }
 
-void Sprite::Update()
-{
-  animation.Update();
-}
-
 void Sprite::Draw(const Point2i &pos)
 {
   DrawXY(pos - Camera::GetInstance()->GetPosition());
@@ -417,20 +267,6 @@ void Sprite::DrawXY(const Point2i &pos)
     return;
 
   Blit(GetMainWindow(), pos);
-}
-
-void Sprite::Show() { show = true; }
-void Sprite::Hide() { show = false; }
-bool Sprite::IsFinished() const { return animation.IsFinished(); }
-
-void Sprite::EnableRotationCache(unsigned int cache_size)
-{
-  cache.EnableRotationCache(frames, cache_size);
-}
-
-void Sprite::EnableFlippingCache()
-{
-  cache.EnableFlippingCache(frames);
 }
 
 void Sprite::RefreshSurface()
@@ -491,15 +327,4 @@ Surface Sprite::GetSurface() const
 {
   ASSERT(!current_surface.IsNull());
   return current_surface;
-}
-
-void Sprite::SetAntialiasing(bool on)
-{
-  smooth = on;
-  cache.InvalidLastFrame();
-}
-
-bool Sprite::IsAntialiased() const
-{
-  return smooth;
 }
