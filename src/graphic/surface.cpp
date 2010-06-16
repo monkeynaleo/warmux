@@ -39,43 +39,6 @@
 #define BUGGY_SDLGFX 1
 
 /**
- * Default constructor.
- *
- * Build a null surface with autoFree at true.
- */
-Surface::Surface()
-{
-  surface = NULL;
-  autoFree = true;
-}
-
-/**
- * Constructor building a surface object using an existing SDL_Surface pointer.
- *
- * @param sdl_surface The existing sdl_surface.
- */
-Surface::Surface(SDL_Surface *sdl_surface)
-{
-  surface = sdl_surface;
-  autoFree = true;
-}
-
-/**
- * Constructor building a surface object using the NewSurface function.
- *
- * @param size
- * @param flags
- * @param useAlpha
- * @see NewSurface
- */
-Surface::Surface(const Point2i &size, Uint32 flags, bool useAlpha)
-{
-  surface = NULL;
-  autoFree = true;
-  NewSurface(size, flags, useAlpha);
-}
-
-/**
  * Constructor building a surface by reading the image from a file.
  *
  * @param filename_str A string containing the path to the graphic file.
@@ -101,52 +64,6 @@ Surface::Surface(const Surface &src)
     surface->refcount++;
 }
 
-/**
- * Destructor of the surface.
- *
- * Will free the memory used by the surface if autoFree is set to true and if the counter of reference reach 0
- */
-Surface::~Surface()
-{
-  AutoFree();
-}
-
-bool Surface::IsNull() const
-{
-  return surface == NULL;
-}
-
-/**
- * Return the size of a surface.
- */
-Point2i Surface::GetSize() const
-{
-  return Point2i( GetWidth(), GetHeight() );
-}
-
-Uint32 Surface::GetFlags() const
-{
-  return surface->flags;
-}
-
-/// Return the length of a surface scanline in bytes.
-Uint16 Surface::GetPitch() const
-{
-  return surface->pitch;
-}
-
-/// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
-Uint8 Surface::GetBytesPerPixel() const
-{
-  return surface->format->BytesPerPixel;
-}
-
-/// Return a pointer on the pixels data.
-unsigned char *Surface::GetPixels() const
-{
-  return (unsigned char *) surface->pixels;
-}
-
 Surface &Surface::operator=(const Surface & src)
 {
   AutoFree();
@@ -169,23 +86,6 @@ void Surface::Free()
     SDL_FreeSurface( surface );
     surface = NULL;
   }
-}
-
-void Surface::AutoFree()
-{
-  if( autoFree )
-    Free();
-}
-
-/**
- * Set the auto free status of a surface.
- *
- * In general it should always be true for non-system surface.
- * @param newAutoFree the new autoFree status.
- */
-void Surface::SetAutoFree( bool newAutoFree )
-{
-  autoFree = newAutoFree;
 }
 
 /**
@@ -257,16 +157,6 @@ void Surface::Unlock()
 int Surface::Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect)
 {
   return SDL_BlitSurface( src.surface, srcRect, surface, dstRect );
-}
-
-/**
- * Blit the whole surface src on the current surface.
- *
- * @param src The source surface.
- */
-int Surface::Blit(const Surface& src)
-{
-  return Blit(src, NULL, NULL);
 }
 
 /**
@@ -928,7 +818,7 @@ void Surface::MergeAlphaSurface(const Surface &mask, const Point2i &pos)
   if(dest_x<0){
     dest_x = 0;
     mask_x = -pos.x;
-	}
+  }
   if(dest_y<0){
     dest_y = 0;
     mask_y = -pos.y;

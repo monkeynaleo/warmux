@@ -41,18 +41,48 @@ private:
   SDL_Rect GetSDLRect(const Point2i &r) const;
 
 public:
-  explicit Surface();
-  explicit Surface(SDL_Surface *sdl_surface);
-  explicit Surface(const Point2i &size, Uint32 flags, bool useAlpha = true);
+  /**
+   * Default constructor.
+   *
+   * Build a null surface with autoFree at true.
+   */
+  explicit Surface() : surface(NULL), autoFree(true) { };
+  /**
+   * Constructor building a surface object using an existing SDL_Surface pointer.
+   *
+   * @param sdl_surface The existing sdl_surface.
+   */
+  explicit Surface(SDL_Surface *sdl_surface) : surface(sdl_surface), autoFree(true) { };
+  /**
+   * Constructor building a surface object using the NewSurface function.
+   *
+   * @param size
+   * @param flags
+   * @param useAlpha
+   * @see NewSurface
+   */
+  explicit Surface(const Point2i &size, Uint32 flags, bool useAlpha = true)
+  : surface(NULL), autoFree(true) { NewSurface(size, flags, useAlpha); }
   explicit Surface(const std::string &filename);
   Surface(const Surface &src);
-  ~Surface();
+  /**
+   * Destructor of the surface.
+   *
+   * Will free the memory used by the surface if autoFree is set to true and if the counter of reference reach 0
+   */
+  ~Surface() { AutoFree(); };
 
   Surface &operator=(const Surface &src);
 
   void Free();
-  void AutoFree();
-  void SetAutoFree(bool newAutoFree);
+  void AutoFree() { if (autoFree) Free(); };
+  /**
+   * Set the auto free status of a surface.
+   *
+   * In general it should always be true for non-system surface.
+   * @param newAutoFree the new autoFree status.
+   */
+  void SetAutoFree(bool newAutoFree) { autoFree = newAutoFree; };
 
   /**
    * Change the surface pointer.
@@ -80,12 +110,17 @@ public:
   int Lock();
   void Unlock();
 
-  int Blit(const Surface& src);
+  /**
+   * Blit the whole surface src on the current surface.
+   *
+   * @param src The source surface.
+   */
+  int Blit(const Surface& src) { return Blit(src, NULL, NULL); };
   int Blit(const Surface& src, const Point2i& dst);
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
   void MergeSurface( Surface &spr, const Point2i &position);
   void MergeAlphaSurface(const Surface &mask, const Point2i &pos);
-  
+
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
@@ -127,16 +162,21 @@ public:
   Uint32 GetPixel(int x, int y) const;
   void PutPixel(int x, int y, Uint32 pixel) const;
 
-  bool IsNull() const;
-  Point2i GetSize() const;
+  bool IsNull() const { return surface == NULL; };
+  Point2i GetSize() const { return Point2i( GetWidth(), GetHeight() ); };
 
   inline int GetWidth() const { return surface->w; }
   inline int GetHeight() const { return surface->h; }
 
-  Uint32 GetFlags() const;
-  Uint16 GetPitch() const;
-  Uint8 GetBytesPerPixel() const;
-  unsigned char *GetPixels() const;
+  Uint32 GetFlags() const { return surface->flags; };
+  /** Return the length of a surface scanline in bytes. */
+  Uint16 GetPitch() const { return surface->pitch; };
+  /** Return the number of bytes used to represent each pixel
+   *  in a surface. Usually one to four.
+   */
+  Uint8 GetBytesPerPixel() const { return surface->format->BytesPerPixel; };
+  /** Return a pointer on the pixels data. */
+  unsigned char *GetPixels() const { return (unsigned char *)surface->pixels; }
 
   Uint32 ComputeCRC() const;
 };
