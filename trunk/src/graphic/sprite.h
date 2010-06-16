@@ -28,6 +28,7 @@
 #include <SDL.h>
 #include <vector>
 #include <WORMUX_base.h>
+#include <WORMUX_debug.h>
 #include "spritecache.h"
 #include "spriteanimation.h"
 
@@ -56,7 +57,6 @@ public:
   SpriteCache cache;
   SpriteAnimation animation;
 
-public:
   explicit Sprite(bool _smooth=false);
   explicit Sprite(const Surface& surface, bool _smooth=false);
   Sprite(const Sprite &other);
@@ -66,95 +66,171 @@ public:
   Surface GetSurface() const;
 
   // Frame number
-  unsigned int GetCurrentFrame() const;
-  void SetCurrentFrame( unsigned int frame_no);
-  unsigned int GetFrameCount() const;
+  unsigned int GetCurrentFrame() const
+  {
+    ASSERT(current_frame < frames.size());
+    return current_frame;
+  }
+  void SetCurrentFrame( unsigned int frame_no)
+  {
+    ASSERT (frame_no < frames.size());
+    if (current_frame != frame_no) {
+      cache.InvalidLastFrame();
+      MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
+    }
+    current_frame = frame_no;
+  }
+  unsigned int GetFrameCount() const { return frames.size(); };
 
   // Antialiasing
-  void SetAntialiasing(bool on);
-  bool IsAntialiased() const;
+  void SetAntialiasing(bool on)
+  {
+    smooth = on;
+    cache.InvalidLastFrame();
+  }
+  bool IsAntialiased() const { return smooth; };
 
   // Size
-  unsigned int GetWidth() const;
-  unsigned int GetWidthMax() const; // gives height of the surface
-                                     // (takes rotations into acount)
-  unsigned int GetHeight() const;
-  unsigned int GetHeightMax() const; // gives height of the surface
-                                     // (takes rotations into acount)
-  Point2i GetSize() const;
-  Point2i GetSizeMax() const;
+  unsigned int GetWidth() const
+  {
+    Double one_half = 0.5;
+    return static_cast<int>(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
+  }
+  // gives height of the surface (takes rotations into acount)
+  unsigned int GetWidthMax() const
+  {
+    if(!current_surface.IsNull() )
+      return current_surface.GetWidth();
+    else
+      return GetWidth();
+  }
+  unsigned int GetHeight() const
+  {
+    return static_cast<int>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
+  }
+  // gives height of the surface (takes rotations into acount)
+  unsigned int GetHeightMax() const
+  {
+    if(!current_surface.IsNull() )
+      return current_surface.GetHeight();
+    else
+      return GetHeight();
+  }
+  Point2i GetSize() const { return Point2i(GetWidth(), GetHeight()); };
+  Point2i GetSizeMax() const { return Point2i(GetWidthMax(), GetHeightMax()); };
 
-  void GetScaleFactors(Double &_scale_x, Double &_scale_y) const;
+  void GetScaleFactors(Double &_scale_x, Double &_scale_y) const
+  {
+    _scale_x = this->scale_x;
+    _scale_y = this->scale_y;
+  }
   Double GetScaleX(void) const { return scale_x; }
   Double GetScaleY(void) const { return scale_y; }
-  void SetSize(unsigned int w, unsigned int h);
-  void SetSize(const Point2i &size);
-  void Scale( Double scale_x, Double scale_y);
-  void ScaleSize(int width, int height);
-  void ScaleSize(const Point2i& size);
+  void SetSize(unsigned int w, unsigned int h)
+  {
+    ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
+
+    frame_width_pix = w;
+    frame_height_pix = h;
+  }
+  void SetSize(const Point2i &size) { SetSize(size.x, size.y); };
+
+  void Scale(Double _scale_x, Double _scale_y)
+  {
+    this->scale_x = _scale_x;
+    this->scale_y = _scale_y;
+    cache.InvalidLastFrame();
+  }
+  void ScaleSize(int width, int height)
+  {
+    Scale(Double(width)/Double(frame_width_pix),
+          Double(height)/Double(frame_height_pix));
+  }
+  void ScaleSize(const Point2i& size) { ScaleSize(size.x, size.y); };
 
   // Rotation
   void SetRotation_rad( Double angle_rad);
-  const Double &GetRotation_rad() const;
+  const Double &GetRotation_rad() const
+  {
+    ASSERT(rotation_rad > -2*PI && rotation_rad <= 2*PI);
+    return rotation_rad;
+  }
   void SetRotation_HotSpot( const Point2i& new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() const { return rotation_point; };
 
-  SpriteFrame& operator[] (unsigned int frame_no);
-  const SpriteFrame& operator[] (unsigned int frame_no) const;
-  const SpriteFrame& GetCurrentFrameObject() const;
+  SpriteFrame& operator[] (unsigned int index) { return frames.at(index); };
+  const SpriteFrame& operator[] (unsigned int index) const { return frames.at(index); };
+  const SpriteFrame& GetCurrentFrameObject() const { return frames[current_frame]; };
 
   // Prepare animation
   void AddFrame( const Surface& surf, unsigned int delay = 100);
-  void SetFrameSpeed(unsigned int nv_fs);
+  void SetFrameSpeed(unsigned int nv_fs)
+  {
+    for (uint f = 0 ; f < frames.size() ; f++)
+      frames[f].delay = nv_fs;
+  }
 
   // Animation
   void Start();
-  void Update();
+  void Update() { animation.Update(); };
   void Finish();
-  bool IsFinished() const;
+  bool IsFinished() const { return animation.IsFinished(); };
 
   // Alpha
-  void SetAlpha( Double alpha); // Can't be combined with per pixel alpha
-  Double GetAlpha() const;
+   // Can't be combined with per pixel alpha
+  void SetAlpha(Double _alpha)
+  {
+    ASSERT(_alpha >= ZERO && _alpha <= ONE);
+    this->alpha = _alpha;
+  }
+  Double GetAlpha() const { return alpha; };
 
   // Cache
-  void EnableRotationCache(unsigned int cache_size);
-  void EnableFlippingCache();
+  void EnableRotationCache(unsigned int cache_size)
+  { cache.EnableRotationCache(frames, cache_size); }
+  void EnableFlippingCache() { cache.EnableFlippingCache(frames); };
 
   // Show flag
-  void Show();
-  void Hide();
+  void Show() { show = true; };
+  void Hide() { show = false; };
 
   // Draw
-  void Blit(Surface &dest, uint pox_x, uint pos_y);
-  void Blit(Surface &dest, const Point2i &pos);
-  void Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos);
+  void Blit(Surface &dest, uint pos_x, uint pos_y)
+  {
+    RefreshSurface();
+    Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
+  }
+  void Blit(Surface &dest, const Point2i &pos) { Blit(dest, pos.GetX(), pos.GetY()); };
+  void Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos)
+  {
+    Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(),
+         srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY());
+  }
   void Blit(Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
   void Draw(const Point2i &pos);
   void DrawXY(const Point2i &pos);
 
-   void RefreshSurface();
+  void RefreshSurface();
 
 private:
-   Surface current_surface;
-   bool show;
-   // Frames
-   unsigned int current_frame;
-   int frame_width_pix,frame_height_pix;
-   std::vector<SpriteFrame> frames;
+  Surface current_surface;
+  bool show;
+  // Frames
+  unsigned int current_frame;
+  int frame_width_pix,frame_height_pix;
+  std::vector<SpriteFrame> frames;
 
-   // Gfx
-   Double alpha;
-   Double scale_x,scale_y;
-   Double rotation_rad;
-   Point2i rhs_pos;
-   Rotation_HotSpot rot_hotspot;
-   Point2i rotation_point;
+  // Gfx
+  Double alpha;
+  Double scale_x,scale_y;
+  Double rotation_rad;
+  Point2i rhs_pos;
+  Rotation_HotSpot rot_hotspot;
+  Point2i rotation_point;
 
-private:
-   void Constructor();
-   void Calculate_Rotation_Offset(const Surface& tmp_surface);
+  void Constructor();
+  void Calculate_Rotation_Offset(const Surface& tmp_surface);
 };
 
 #endif /* _SPRITE_H */
