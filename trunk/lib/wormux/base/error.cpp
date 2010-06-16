@@ -26,6 +26,10 @@
 #include <WORMUX_i18n.h>
 #include <WORMUX_types.h>
 
+#ifdef ANDROID
+#  include <android/log.h>
+#endif
+
 #if !defined(WIN32) || !defined(__MINGW32__)
 #  include <sys/types.h>
 #  include <unistd.h>
@@ -67,13 +71,21 @@ static std::string FormatError(const char *filename, unsigned long line,
 void TriggerWarning(const char *filename, unsigned long line,
                     const std::string &txt)
 {
-  std::cerr << "! " << FormatError(filename, line, txt) << std::endl;
+  std::string err = FormatError(filename, line, txt);
+  std::cerr << "! " << err << std::endl;
+#ifdef ANDROID
+  __android_log_print(ANDROID_LOG_WARN, "Wormux", err.c_str());
+#endif
 }
 
 void TriggerError (const char *filename, unsigned long line,
                    const std::string &txt)
 {
-  TriggerWarning(filename, line, txt);
+  std::string err = FormatError(filename, line, txt);
+  std::cerr << "! " << err << std::endl;
+#ifdef ANDROID
+  __android_log_print(ANDROID_LOG_FATAL, "Wormux", err.c_str());
+#endif
 
   ASSERT(false);
   exit(-1);
