@@ -31,6 +31,7 @@
 
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 240;
+static bool warned = false;
 
 GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border) :
   GridBox(4, 4, 0, _draw_border)
@@ -131,12 +132,13 @@ void GameModeEditor::LoadGameMode()
 
   NeedRedrawing();
 
-  if (mode == "blitz") {
+  if (!warned && mode == "blitz") {
     Question puppy_attention_span(Question::WARNING);
     puppy_attention_span.Set(_("The blitz mode does not reset the time between each team turn. "
                                "A team looses when it has no players left or its time has ran out."),
                              true, 0);
     puppy_attention_span.Ask();
+    warned = true;
   }
 }
 
