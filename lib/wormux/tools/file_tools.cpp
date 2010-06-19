@@ -143,7 +143,11 @@ bool Rename(const std::string& old_name, const std::string& new_name)
 {
   DWORD flags = MOVEFILE_COPY_ALLOWED|MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH;
   if (!MoveFileEx(old_name.c_str(), new_name.c_str(), flags)) {
-    fprintf(stderr, "%s not moved to %s: %i\n", old_name.c_str(), new_name.c_str(), GetLastError());
+
+    // Don't report the error if the source doesn't exist
+    if (DoesFolderExist(old_name))
+      fprintf(stderr, "%s not moved to %s: %i\n",
+              old_name.c_str(), new_name.c_str(), GetLastError());
     return false;
   }
   return true;
