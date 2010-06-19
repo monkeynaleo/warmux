@@ -102,29 +102,49 @@ void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha)
   Uint32 greenMask;
   Uint32 blueMask;
 
-  if( autoFree )
+
+  if (autoFree)
     Free();
 
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-  redMask   = 0xff000000;
-  greenMask = 0x00ff0000;
-  blueMask  = 0x0000ff00;
-  alphaMask = 0x000000ff;
-#else
-  redMask   = 0x000000ff;
-  greenMask = 0x0000ff00;
-  blueMask  = 0x00ff0000;
-  alphaMask = 0xff000000;
-#endif
+  const SDL_PixelFormat* fmt = SDL_GetVideoSurface()->format;
 
-  if( !useAlpha )
+  // Only use display format if it is at least 32 bits
+  if (fmt->BitsPerPixel >= 24) {
+    redMask   = fmt->Rmask;
+    greenMask = fmt->Gmask;
+    blueMask  = fmt->Bmask;
+  } else {
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+    redMask   = 0xff000000;
+    greenMask = 0x00ff0000;
+    blueMask  = 0x0000ff00;
+#else
+    redMask   = 0x000000ff;
+    greenMask = 0x0000ff00;
+    blueMask  = 0x00ff0000;
+#endif
+  }
+
+  if (!useAlpha) {
     alphaMask = 0;
+  } else {
+    // Try using display format mask
+    if (fmt->BitsPerPixel == 32 && fmt->Amask) {
+      alphaMask = fmt->Amask;
+    } else {
+      // Use the mask most obvious from the others masks
+      if (redMask==0xff || blueMask==0xff || greenMask==0xff)
+        alphaMask = 0xff000000;
+      else
+        alphaMask = 0x000000ff;
+    }
+  }
 
   surface = SDL_CreateRGBSurface(flags, size.x, size.y, 32,
-                                 redMask, greenMask, blueMask, alphaMask );
+                                 redMask, greenMask, blueMask, alphaMask);
 
   if( surface == NULL )
-    Error( std::string("Can't create SDL RGBA surface: ") + SDL_GetError() );
+    Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
 }
 
 /**
