@@ -26,6 +26,7 @@
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "gui/combo_box.h"
+#include "gui/question.h"
 #include "gui/spin_button_picture.h"
 
 const uint TPS_TOUR_MIN = 10;
@@ -41,7 +42,7 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   std::string selected_gamemode = Config::GetInstance()->GetGameMode();
 
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-			       GameMode::ListGameModes(), selected_gamemode);
+                               GameMode::ListGameModes(), selected_gamemode);
   AddWidget(opt_game_mode);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
@@ -55,8 +56,10 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   character_selections.push_back(std::pair<std::string, std::string>("before_action", _("Before action")));
   character_selections.push_back(std::pair<std::string, std::string>("never", _("Never")));
 
-  opt_allow_character_selection = new ComboBox(_("Character switching"), "menu/character_selection", option_size,
-					       character_selections, "always");
+  opt_allow_character_selection = new ComboBox(_("Character switching"),
+                                               "menu/character_selection",
+                                               option_size,
+                                               character_selections, "always");
   AddWidget(opt_allow_character_selection);
 
   /* Characters energy */
@@ -76,21 +79,22 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   /* some death mode options */
 
   opt_time_before_death_mode = new SpinButtonWithPicture(_("Duration before death mode"), "menu/timing_death",
-							 option_size,
-							 200, 50,
-							 200, 3000);
+                                                         option_size,
+                                                         200, 50,
+                                                         200, 3000);
   AddWidget(opt_time_before_death_mode);
 
-  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"), "menu/death_energy",
-							   option_size,
-							   1, 1,
-							   1, 20);
+  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"),
+                                                           "menu/death_energy",
+                                                           option_size,
+                                                           1, 1,
+                                                           1, 20);
   AddWidget(opt_damage_during_death_mode);
 
   opt_gravity = new SpinButtonWithPicture(_("Gravity"), "menu/gravity",
-							   option_size,
-							   10, 5,
-							   10, 60);
+                                          option_size,
+                                          10, 5,
+                                          10, 60);
   AddWidget(opt_gravity);
 
   LoadGameMode();
@@ -103,7 +107,8 @@ GameModeEditor::~GameModeEditor()
 
 void GameModeEditor::LoadGameMode()
 {
-  Config::GetInstance()->SetGameMode(opt_game_mode->GetValue());
+  std::string mode = opt_game_mode->GetValue();
+  Config::GetInstance()->SetGameMode(mode);
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
 
@@ -125,6 +130,14 @@ void GameModeEditor::LoadGameMode()
   opt_gravity->SetValue((int)(game_mode->gravity), true);
 
   NeedRedrawing();
+
+  if (mode == "blitz") {
+    Question puppy_attention_span(Question::WARNING);
+    puppy_attention_span.Set(_("The blitz mode does not reset the time between each team turn. "
+                               "A team looses when it has no players left or its time has ran out."),
+                             true, 0);
+    puppy_attention_span.Ask();
+  }
 }
 
 void GameModeEditor::ValidGameMode() const
