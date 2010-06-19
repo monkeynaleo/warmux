@@ -241,13 +241,8 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
       cur_pix = ((Uint32*)surface->pixels)[current_offset];
 
       // Retreiving each chanel of the pixel using pixel format
-      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
-      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-
-      // Retreiving previous alpha value
-      p_a = (Uint8)(((cur_pix & current_fmt->Amask) >> current_fmt->Ashift) << current_fmt->Aloss);
+      SDL_GetRGBA(spr_pix, spr_fmt, &r, &g, &b, &a);
+      SDL_GetRGBA(cur_pix, current_fmt, &p_r, &p_g, &p_b, &p_a);
 
       if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
         ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
@@ -255,10 +250,6 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
         f_a = (Double)a / (Double)255.0;
         f_ca = ONE - f_a;
         f_pa = (Double)p_a / (Double)255.0;
-
-        p_r = (Uint8)(((cur_pix & current_fmt->Rmask) >> current_fmt->Rshift) << current_fmt->Rloss);
-        p_g = (Uint8)(((cur_pix & current_fmt->Gmask) >> current_fmt->Gshift) << current_fmt->Gloss);
-        p_b = (Uint8)(((cur_pix & current_fmt->Bmask) >> current_fmt->Bshift) << current_fmt->Bloss);
 
         r = (int)((Double)p_r * f_ca * f_pa + (Double)r * f_a);
         g = (int)((Double)p_g * f_ca * f_pa + (Double)g * f_a);
@@ -597,11 +588,8 @@ int Surface::ImgSave(const std::string& filename)
       Uint32  spr_pix = ((Uint32*)surface->pixels)[y * surface->w  + x];
 
       // Retreiving each chanel of the pixel using pixel format
-      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
-      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-      tmp_line[x * spr_fmt->BytesPerPixel] = r;
+      SDL_GetRGBA(spr_pix, surface->format, &r, &g, &b, &a);
+      tmp_line[x * spr_fmt->BytesPerPixel + 0] = r;
       tmp_line[x * spr_fmt->BytesPerPixel + 1] = g;
       tmp_line[x * spr_fmt->BytesPerPixel + 2] = b;
       tmp_line[x * spr_fmt->BytesPerPixel + 3] = a;
