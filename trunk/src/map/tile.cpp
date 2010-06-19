@@ -357,6 +357,9 @@ void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
+      if (item[c.y*nbCells.x + c.x]->IsTotallyEmpty())
+        continue;
+
       // For all selected items, clip source and destination blitting rectangles
       Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
 
