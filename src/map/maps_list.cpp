@@ -159,7 +159,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   XmlReader::ReadUint(xml, "nb_mine", nb_mine);
   XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
   XmlReader::ReadBool(xml, "is_open", is_opened);
-  
+
   XmlReader::ReadUint(xml, "alpha_threshold", alpha_threshold);
 
   // reading water type
@@ -171,7 +171,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
     std::string path = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR +
       "water" + PATH_SEPARATOR + water_type;
     if (!DoesFolderExist(path)) {
-      std::cerr << "Map " << GetRawName() << " (" << LoadedData()->ReadFullMapName()
+      std::cerr << "Map " << GetRawName() << " (" << name
         << ") uses invalid water type " << water_type << std::endl;
       water_type = "no";
     }
