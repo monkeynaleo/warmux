@@ -56,26 +56,21 @@
 #  include <windows.h>
 #  include <direct.h>
 
-// Under windows, binary may be relocated
+// Under Windows, binary may be relocated
 static std::string GetWormuxPath()
 {
   char  buffer[MAX_PATH];
-  DWORD size = MAX_PATH;
-#  if 0
-  HKEY  hK;
-  DWORD type;
+  DWORD size = GetModuleFileName(NULL, buffer, MAX_PATH);
 
-  buffer[0] = 0;
-  if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "SOFTWARE\\Games\\Wormux", 0, KEY_READ, &hK) != ERROR_SUCCESS ||
-      RegQueryValueEx(hK, "Path", NULL, &type, buffer, &size) != ERROR_SUCCESS && type != REG_SZ)
-#  endif
-  {
-    size = GetModuleFileName(NULL, buffer, MAX_PATH);
-    if (size<1) return std::string("");
-    char *ptr = strrchr(buffer, '\\');
-    if (ptr) ptr[0] = 0; // Mask name
-    else     return std::string("");
-  }
+  if (size<1)
+    return std::string("");
+
+  char *ptr = strrchr(buffer, '\\');
+  if (!ptr)
+    return "";
+
+  // Mask name
+  ptr[0] = 0;
   return std::string(buffer);
 }
 #else
