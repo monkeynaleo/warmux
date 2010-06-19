@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2010-06-19 10:04+0200\n"
 "PO-Revision-Date: 2010-01-12 18:58+0100\n"
-"Last-Translator: Frédéric Bertolus <fredb219@gmail.com>\n"
+"Last-Translator: Christophe Gisquet <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -510,7 +510,7 @@ msgstr "Avant l'action"
 
 #: src/game/game_mode.cpp:343
 msgid "Blitz"
-msgstr "Blitz"
+msgstr "Partie éclair"
 
 #: src/weapon/blowtorch.cpp:63
 msgid "Blowtorch"
@@ -1387,6 +1387,8 @@ msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
 msgstr ""
+"La partie éclair ne réinitialise pas le temps entre chaque tour d'une équipe. "
+"Une équipe perd quand elle n'a plus de joueur ou que son temps imparti s'est écoulé."
 
 #: src/network/network_client.cpp:96
 #, c-format
@@ -1675,105 +1677,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid ""
-#~ "Error:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Erreur :\n"
-#~ "%s"
-
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
-#~ msgstr ""
-#~ "Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires."
-
-#~ msgid "Max number of players:"
-#~ msgstr "Nombre de joueurs max. :"
-
-#~ msgid "%s changes target to %s"
-#~ msgstr "%s change de cible pour %s"
-
-#~ msgid "%s has decided to injure %s"
-#~ msgstr "%s a décidé de s'attaquer à %s"
-
-#~ msgid "%s will shoot %s"
-#~ msgstr "%s va tirer sur %s"
-
-#~ msgid "Add custom team"
-#~ msgstr "Ajouter une équipe personnalisée"
-
-#, fuzzy
-#~ msgid "Automatically join a game"
-#~ msgstr "Joindre automatiquement une partie (si possible)."
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Impossible de récupérer la version depuis %s"
-
-#~ msgid "Delete custom team"
-#~ msgstr "Supprimer l'équipe personnalisée"
-
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Erreur dans %s:%lu (Wormux %s) : %s"
-
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration"
-#~ msgstr ""
-#~ "Erreur : Votre serveur n'est pas accessible depuis internet. Vérifier les "
-#~ "paramètres de votre firewall."
-
-#, fuzzy
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration: TCP Port %u must accept connection from the "
-#~ "outside. If you are not directly connected to the internet, check your "
-#~ "router configuration: TCP Port %u must be forwarded on your computer."
-#~ msgstr ""
-#~ "Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifiez la "
-#~ "configuration de votre firewall : le port TCP %s doit accepter les "
-#~ "connexions extérieures. Si vous n'êtes pas directement connecté à "
-#~ "Internet, vérifiez la configuration de votre routeur : le port TCP %s "
-#~ "doit être redirigé vers votre ordinateur."
-
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr "Répertoire HOME (variable d'environnement $HOME) introuvable !"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Commandant : "
-
-#~ msgid "Network initialization"
-#~ msgstr "Initialisation du réseau"
-
-#, fuzzy
-#~ msgid ""
-#~ "No public servers available and incorrect manual connection settings. Try "
-#~ "connecting manually."
-#~ msgstr ""
-#~ "Pas de serveur public sans mot de passe et paramètres de connexion "
-#~ "manuelles incorrects. Veuillez essayer en connexion manuelle."
-
-#~ msgid "Pause"
-#~ msgstr "Pause"
-
-#~ msgid "Player name"
-#~ msgstr "Nom du joueur"
-
-#, fuzzy
-#~ msgid ""
-#~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
-#~ "php"
-#~ msgstr ""
-#~ "Désolé, votre version du jeu n'est plus supporté. Les versions supportées "
-#~ "sont les versions %s. Vous pouvez télécharger une version à jour sur "
-#~ "http://www.wormux.org/wiki/download.php"
-
-#~ msgid "Tools"
-#~ msgstr "Outils"
-
-#~ msgid "Unnamed"
-#~ msgstr "Anonyme"
-
-#~ msgid "Warn when a new player joins?"
-#~ msgstr "Prévenir lorsqu'un nouveau joueur arrive?"
