@@ -219,7 +219,6 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
 {
   Uint32 spr_pix, cur_pix;
   Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
-  Double f_a, f_ca, f_pa;
   SDL_PixelFormat * current_fmt = surface->format;
   SDL_PixelFormat * spr_fmt = spr.surface->format;
   int current_offset, spr_offset;
@@ -247,13 +246,12 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
       if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
         ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
       else if (a > 0) { // alpha is lower => merge color with previous value
-        f_a = (Double)a / (Double)255.0;
-        f_ca = ONE - f_a;
-        f_pa = (Double)p_a / (Double)255.0;
+        uint f_a  = a + 1;
+        uint f_ca = 256 - f_a;
 
-        r = (int)((Double)p_r * f_ca * f_pa + (Double)r * f_a);
-        g = (int)((Double)p_g * f_ca * f_pa + (Double)g * f_a);
-        b = (int)((Double)p_b * f_ca * f_pa + (Double)b * f_a);
+        r = (p_r * f_ca + r * f_a)>>8;
+        g = (p_g * f_ca + g * f_a)>>8;
+        b = (p_b * f_ca + b * f_a)>>8;
 
         a = (a > p_a ? a : p_a);
         ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
