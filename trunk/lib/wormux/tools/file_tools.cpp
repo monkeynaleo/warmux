@@ -127,14 +127,26 @@ std::string FileExtension (const std::string &name)
 
 #ifdef WIN32
 // Return the path to the home directory of the user
-std::string GetHome (){
-  TCHAR szPath[MAX_PATH];
+static std::string GetWindowsPath(int csidl){
+  static TCHAR szPath[MAX_PATH];
 
   // "Documents and Settings\user" is CSIDL_PROFILE
-  if(SHGetSpecialFolderPath(NULL, szPath, CSIDL_APPDATA, FALSE) == TRUE)
+  if (SHGetSpecialFolderPath(NULL, szPath, csidl, FALSE) == TRUE)
     return szPath;
 
   return "";
+}
+
+std::string GetOldPersonalDir() { return GetWindowsPath(CSIDL_APPDATA) + "\\Wormux\\"; }
+std::string GetHome() { return GetWindowsPath(CSIDL_PERSONAL); }
+bool Rename(const std::string& old_name, const std::string& new_name)
+{
+  DWORD flags = MOVEFILE_COPY_ALLOWED|MOVEFILE_REPLACE_EXISTING|MOVEFILE_WRITE_THROUGH;
+  if (!MoveFileEx(old_name.c_str(), new_name.c_str(), flags)) {
+    fprintf(stderr, "%s not moved to %s: %i\n", old_name.c_str(), new_name.c_str(), GetLastError());
+    return false;
+  }
+  return true;
 }
 
 #include <windows.h>
@@ -179,21 +191,55 @@ void CloseFolder(FolderSearch *f)
   }
 }
 
+std::string GetTmpDir()
+{
+  char *txt = std::getenv("TMPDIR");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TMP");
+  if (txt != NULL)
+    return txt;
+
+  txt = std::getenv("TEMP");
+  if (txt != NULL)
+    return txt;
+
+  if (txt == NULL)
+    Error (_("TEMP directory could not be found!"));
+
+  return txt;
+}
+
 #else
 
-// Return the path to the home directory of the user
+#  if defined(ANDROID)
+std::string GetHome() { return ANDROID_HOME; }
+std::string GetOldPersonalDir() { return ""; }
+std::string GetTmpDir() { return ANDROID_HOME; }
+#  else // Linux or Apple
 std::string GetHome()
 {
-#if defined(ANDROID)
-  return ANDROID_HOME;
-#else
   char *txt = std::getenv("HOME");
 
   if (txt == NULL)
     Error(_("HOME directory (environment variable $HOME) could not be found!"));
 
   return txt;
-#endif
+}
+
+std::string GetTmpDir() { return "/tmp"; }
+
+#    ifdef __APPLE__
+std::string GetOldPersonalDir() { return ""; }
+#    else
+std::string GetOldPersonalDir() { return GetHome() + "/.wormux/"; }
+#    endif
+#  endif // Linux or Apple
+
+bool Rename(const std::string& old_name, const std::string& new_name)
+{
+  return rename(old_name.c_str(), new_name.c_str()) == 0;
 }
 
 #include <dirent.h>
@@ -232,34 +278,6 @@ void CloseFolder(FolderSearch *f)
   }
 }
 #endif
-
-// Return the path to the home directory of the user
-std::string GetTmpDir()
-{
-#ifdef WIN32
-  char *txt = std::getenv("TMPDIR");
-  if (txt != NULL)
-    return txt;
-
-  txt = std::getenv("TMP");
-  if (txt != NULL)
-    return txt;
-
-  txt = std::getenv("TEMP");
-  if (txt != NULL)
-    return txt;
-
-  if (txt == NULL)
-    Error (_("TEMP directory could not be found!"));
-
-  return txt;
-
-#elif defined(ANDROID)
-  return ANDROID_HOME;
-#else
-  return "/tmp";
-#endif
-}
 
 std::string CreateTmpFile(const std::string& prefix, int* fd)
 {

@@ -191,22 +191,31 @@ Config::Config():
     personal_data_dir = c_data_dir;
 
   personal_data_dir += "/wormux/";
+#endif
 
-  // create the directories
-  MkdirPersonalConfigDir();
-  MkdirPersonalDataDir();
-
-  // move from old directory ($HOME/.wormux/)
-  std::string old_dir = GetHome() + "/.wormux/";
-  rename(old_dir.c_str(), personal_data_dir.c_str());
+  std::string old_dir = GetOldPersonalDir();
+  if (old_dir != "") {
+    std::cout << "Moving " << old_dir << " to " << personal_data_dir << std::endl;
+    if (old_dir != personal_data_dir)
+      Rename(old_dir, personal_data_dir);
+  }
 
   std::string old_config_file_name = personal_data_dir + "config.xml";
   std::string config_file_name = personal_config_dir + "config.xml";
-  rename(old_config_file_name.c_str(), config_file_name.c_str());
-#endif
+  if (old_config_file_name != config_file_name) {
+    std::cout << "Moving " << old_config_file_name
+              << " to " << config_file_name << std::endl;
+    Rename(old_config_file_name, config_file_name);
+  }
 
   chat_log_dir = personal_data_dir + "logs" PATH_SEPARATOR;
+
+  // Create the directories
+  // Delayed after copy/creation of personal_data_dir, because they
+  // might cause an access denied (because of indexing under Windows)
   MkdirChatLogDir();
+  MkdirPersonalConfigDir();
+  MkdirPersonalDataDir();
 
   LoadDefaultValue();
 

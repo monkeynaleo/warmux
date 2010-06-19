@@ -46,11 +46,17 @@ std::string FileExtension(const std::string &name);
 // Return the path to the home directory of the user
 std::string GetHome();
 
+// Return the path to the old home user directory, for removal
+std::string GetOldPersonalDir();
+
 // Return the path to the tmp directory
 std::string GetTmpDir();
 
 // Create a tmp file
 std::string CreateTmpFile(const std::string& prefix, int *fd);
+
+// Move a file or folder
+bool Rename(const std::string& old_name, const std::string& new_name);
 
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
