@@ -60,12 +60,19 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
 {
   m_upper_left_offset = upper_left_offset;
   m_lower_right_offset = lower_right_offset;
-  size = pSize + upper_left_offset + lower_right_offset;
-  nbCells = size / CELL_SIZE;
+  startCell = upper_left_offset / CELL_SIZE;
 
+  size = pSize + upper_left_offset;
+  endCell = size / CELL_SIZE;
+  if (size.x % CELL_SIZE.x)
+    endCell.x++;
+  if (size.y % CELL_SIZE.y)
+    endCell.y++;
+
+  size += lower_right_offset;
+  nbCells = size / CELL_SIZE;
   if (size.x % CELL_SIZE.x)
     nbCells.x++;
-
   if (size.y % CELL_SIZE.y)
     nbCells.y++;
 }
@@ -280,50 +287,52 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   uint8_t *dst  = m_preview->GetPixels();
   uint    pitch = m_preview->GetPitch();
 
-  // Create the TileItem objects
-  for (int i = 0; i < nbCells.x * nbCells.y; i++)
-    item.push_back(new TileItem_AlphaSoftware(CELL_SIZE));
-
   // Fill the TileItem objects
   Point2i i;
-  for (i.y = 0; i.y < nbCells.y; i.y++) {
-    for (i.x = 0; i.x < nbCells.x; i.x++) {
-      int piece = i.y * nbCells.x + i.x;
+  terrain.SetAlpha(0, 0);
+
+  // Top transparent+empty row
+  for (i.y = 0; i.y < startCell.y; i.y++)
+    for (i.x = 0; i.x < nbCells.x; i.x++)
+      item.push_back(&EmptyTile);
+
+  dst += startCell.y*(CELL_SIZE.y>>m_shift)*pitch;
+  for (; i.y < endCell.y; i.y++) {
+    // Empty left border
+    for (i.x = 0; i.x<startCell.x; i.x++)
+      item.push_back(&EmptyTile);
+
+    for (; i.x < endCell.x; i.x++) {
+      TileItem_AlphaSoftware *ti = new TileItem_AlphaSoftware(CELL_SIZE);
       Rectanglei sr(i * CELL_SIZE - upper_left_offset, CELL_SIZE);
 
-      terrain.SetAlpha(0, 0);
-      item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
-      item[piece]->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+      ti->GetSurface().Blit(terrain, sr, Point2i(0, 0));
+
+      if (ti->CheckEmpty()) {
+        // no need to display this tile as it can be deleted!
+#ifdef DBG_TILE
+        printf("Deleting tile %i\n",i);
+#endif
+        delete ti;
+        // Don't instanciate a new empty tile but use the already existing one
+        item.push_back(&EmptyTile);
+      } else {
+        ti->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift),
+                         pitch, m_shift);
+        item.push_back(ti);
+      }
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
+
+    // Empty right border
+    for (; i.x < nbCells.x; i.x++)
+      item.push_back(&EmptyTile);
   }
 
-  TileItem_AlphaSoftware * t;
-
-  // Replace transparent tiles by TileItem_Empty tiles
-  for (int i=0; i < nbCells.x * nbCells.y; i++) {
-    t = static_cast<TileItem_AlphaSoftware*>(item[i]);
-
-    while (t->need_check_empty) {
-      t->CheckEmpty();
-    }
-
-    if (t->NeedDelete()) {
-#ifdef DBG_TILE
-      printf("\nDeleting tile %i",i);
-#endif
-      delete item[i];
-      item[i] = (TileItem*)&EmptyTile;
-    }
-#ifdef DBG_TILE
-    else {
-      if (i % nbCells.x % 2 == (i / nbCells.x) % 2)
-        item[i]->FillWithRGB(0, 0, 255);
-      else
-        item[i]->FillWithRGB(0, 255, 0);
-    }
-#endif
-  }
+  // Bottom transparent+empty row
+  for (; i.y < nbCells.y; i.y++)
+    for (i.x = 0; i.x < nbCells.x; i.x++)
+      item.push_back(&EmptyTile);
 }
 
 uchar Tile::GetAlpha(const Point2i & pos) const
