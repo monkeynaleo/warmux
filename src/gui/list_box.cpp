@@ -115,28 +115,34 @@ bool BaseListBox::LoadXMLConfiguration()
 
 void BaseListBox::ClearItems()
 {
-  for (std::vector<Widget*>::iterator lbi=m_items.begin(); lbi!=m_items.end(); lbi++)
+  for (std::vector<Widget*>::iterator lbi = m_items.begin(); 
+       lbi!=m_items.end(); 
+       lbi++) {
      delete *lbi;
+  }
 
   m_items.clear();
 }
 
-int BaseListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
+int BaseListBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
 {
-  if( !Contains(mousePosition) )
+  if (!Contains(mousePosition)) {
     return -1;
+  }
 
-  for (uint i=first_visible_item; i < m_items.size(); i++) {
-    if ( m_items[i]->GetPositionY() <= mousePosition.y
-         && m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y)
+  for (uint i = first_visible_item; i < m_items.size(); i++) {
+    if (m_items[i]->GetPositionY() <= mousePosition.y && 
+        m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y) {
       return i;
+    }
   }
   return -1;
 }
 
 static uint last_visible_item = 0; // to not break Draw constness
 
-Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget * BaseListBox::ClickUp(const Point2i & mousePosition, 
+                              uint button)
 {
   scrolling = false;
 
@@ -169,13 +175,15 @@ Widget* BaseListBox::ClickUp(const Point2i &mousePosition, uint button)
   if (button == Mouse::BUTTON_LEFT()) {
     int item = MouseIsOnWhichItem(mousePosition);
 
-    if (item == -1)
+    if (item == -1) {
       return NULL;
+    }
 
-    if (item == selected_item && !always_one_selected)
+    if (item == selected_item && !always_one_selected) {
       Deselect();
-    else
+    } else {
       Select (item);
+    }
 
     return this;
   }
@@ -206,13 +214,13 @@ void BaseListBox::__Update(const Point2i & mousePosition,
   }
   // update position of items because of scrolling with scroll bar
   if (scrolling &&
-      uint(mousePosition.y) < GetPositionY() + GetSizeY() - 12 -margin&&
+      uint(mousePosition.y) < GetPositionY() + GetSizeY() - 12 - margin &&
       mousePosition.y > GetPositionY() + 12) {
     first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20-margin);
   }
 }
 
-void BaseListBox::Draw(const Point2i &mousePosition) const
+void BaseListBox::Draw(const Point2i & mousePosition) const
 {
   Surface& surf = GetMainWindow();
   int item = MouseIsOnWhichItem(mousePosition);
@@ -222,7 +230,6 @@ void BaseListBox::Draw(const Point2i &mousePosition) const
   bool draw_it = true;
 
   for (uint i=first_visible_item; i < m_items.size(); i++) {
-
     Rectanglei rect(GetPositionX() + 1,
                     pos.GetY() + 1,
                     GetSizeX() - 2,
@@ -273,40 +280,42 @@ Rectanglei BaseListBox::ScrollBarPos() const
   uint tmp_y, tmp_h;
   if(m_items.size() != 0)
   {
-    tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20-margin) / m_items.size();
-    tmp_h = /*nb_visible_items_max * */(GetSizeY()-20-margin) / m_items.size();
-  }
-  else
-  {
-    tmp_y = GetPositionY()+ 10;
-    tmp_h = /*nb_visible_items_max * */GetSizeY()-20-margin;
+    tmp_y = GetPositionY() + 10 + first_visible_item * (GetSizeY() - 20 - margin) / m_items.size();
+    tmp_h = /*nb_visible_items_max * */(GetSizeY() - 20 - margin) / m_items.size();
+  } else {
+    tmp_y = GetPositionY() + 10;
+    tmp_h = /*nb_visible_items_max * */GetSizeY() - 20 - margin;
   }
 
-  if (tmp_h < 5) tmp_h =5;
+  if (tmp_h < 5) {
+    tmp_h = 5;
+  }
 
-  return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
+  return Rectanglei(GetPositionX() + GetSizeX() - 11, tmp_y, 9, /*tmp_y+*/tmp_h);
 }
 
 void BaseListBox::Pack()
 {
-  m_up->SetPosition(position.x + size.x - 12, position.y +2);
-  m_down->SetPosition(position.x + size.x - 12, position.y + size.y - 7 -margin);
+  m_up->SetPosition(position.x + size.x - 12, position.y + 2);
+  m_down->SetPosition(position.x + size.x - 12, position.y + size.y - 7 - margin);
 
-  for(std::vector<Widget*>::iterator it=m_items.begin();
-      it != m_items.end(); it++)
-  {
+  for(std::vector<Widget*>::iterator it = m_items.begin();
+      it != m_items.end(); 
+      it++) {
     (*it)->Pack();
   }
 }
 
-void BaseListBox::AddWidgetItem(bool selected, Widget* item)
+void BaseListBox::AddWidgetItem(bool selected, 
+                                Widget * item)
 {
   uint pos = m_items.size();
-  m_items.push_back (item);
+  m_items.push_back(item);
 
   // Select it if selected
-  if( selected )
+  if (selected) {
     Select (pos);
+  }
 }
 
 bool BaseListBox::IsSelectedItem()
@@ -316,28 +325,28 @@ bool BaseListBox::IsSelectedItem()
 
 void BaseListBox::Sort() const
 {
-  //std::sort( m_items.begin(), m_items.end(), CompareItems() );
+  //std::sort(m_items.begin(), m_items.end(), CompareItems());
 }
 
 void BaseListBox::RemoveSelected()
 {
   ASSERT (always_one_selected == false);
 
-  if( selected_item != -1 ){
-    m_items.erase( m_items.begin() + selected_item );
+  if (selected_item != -1) {
+    m_items.erase(m_items.begin() + selected_item);
     selected_item =- 1;
   }
   NeedRedrawing();
 }
 
-void BaseListBox::Select (uint index)
+void BaseListBox::Select(uint index)
 {
   ASSERT(index < m_items.size());
   selected_item = index;
   NeedRedrawing();
 }
 
-void BaseListBox::Deselect ()
+void BaseListBox::Deselect()
 {
   ASSERT (always_one_selected == false);
   selected_item = -1;
@@ -352,20 +361,20 @@ private:
   std::string value;
 
 public:
-  ListBoxItem(const std::string& _label,
+  ListBoxItem(const std::string & _label,
               Font::font_size_t font_size,
               Font::font_style_t font_style,
-              const std::string& value,
+              const std::string & value,
               const Color& color = white_color);
 
-  const std::string& GetLabel() const;
-  const std::string& GetValue() const { return value; };
+  const std::string & GetLabel() const;
+  const std::string & GetValue() const { return value; };
 };
 
-ListBoxItem::ListBoxItem(const std::string& _label,
+ListBoxItem::ListBoxItem(const std::string & _label,
                          Font::font_size_t fsize,
                          Font::font_style_t fstyle,
-                         const std::string& _value,
+                         const std::string & _value,
                          const Color& color) :
   Label(_label, 200, fsize, fstyle, color, false, true),
   value(_value)
@@ -373,7 +382,7 @@ ListBoxItem::ListBoxItem(const std::string& _label,
 }
 
 
-const std::string& ListBoxItem::GetLabel() const
+const std::string & ListBoxItem::GetLabel() const
 {
   return GetText();
 }
@@ -410,40 +419,38 @@ bool ListBox::LoadXMLConfiguration()
   return true;
 }
 
-void ListBox::AddItem (bool selected,
-                       const std::string &label,
-                       const std::string &value,
-                       Font::font_size_t fsize,
-                       Font::font_style_t fstyle,
-                       const Color& color)
+void ListBox::AddItem(bool selected,
+                      const std::string & label,
+                      const std::string & value,
+                      Font::font_size_t fsize,
+                      Font::font_style_t fstyle,
+                      const Color & color)
 {
   // Push item
   AddWidgetItem(selected, new ListBoxItem(label, fsize, fstyle, value, color));
 }
 
-void ListBox::Select(const std::string& val)
+void ListBox::Select(const std::string & val)
 {
   uint index = 0;
-  for (std::vector<Widget*>::iterator it=m_items.begin();
+  for(std::vector<Widget*>::iterator it = m_items.begin();
       it != m_items.end();
-      it++,index++)
-  {
-    if(GetItem(*it)->GetLabel() == val)
-    {
+      it++, index++) {
+    if (GetItem(*it)->GetLabel() == val) {
       BaseListBox::Select(index);
       return;
     }
   }
 }
 
-const std::string& ListBox::ReadLabel() const
+const std::string & ListBox::ReadLabel() const
 {
   ASSERT (selected_item != -1);
   const ListBoxItem * item = (const ListBoxItem*)m_items[selected_item];
   return item->GetLabel();
 }
 
-const std::string& ListBox::ReadValue() const
+const std::string & ListBox::ReadValue() const
 {
   ASSERT (selected_item != -1);
   const ListBoxItem * item = (const ListBoxItem*)m_items[selected_item];
@@ -457,7 +464,7 @@ int ListBox::ReadIntValue() const
   return tmp;
 }
 
-const std::string& ListBox::ReadValue (int index) const
+const std::string & ListBox::ReadValue(int index) const
 {
   ASSERT (index != -1 && index < (int)m_items.size());
   return GetItem(m_items[index])->GetValue();
