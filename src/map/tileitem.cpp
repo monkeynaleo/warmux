@@ -32,7 +32,11 @@
 #include "graphic/colors.h"
 #endif
 
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
 static const uint TRANSPARENT = 0x00FFFFFF;
+#else
+static const uint TRANSPARENT = 0xFFFFFF00;
+#endif
 
 void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
 {
