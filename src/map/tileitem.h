@@ -85,9 +85,10 @@ public:
   void MergeSprite(const Point2i &position, Surface& spr);
   void ScalePreview(uint8_t *odata, uint opitch, uint shift);
   void Draw(const Point2i &pos);
+  Surface GetSurface() { return m_surface; };
 
   bool NeedDelete() const {return need_delete; };
-  void CheckEmpty();
+  bool CheckEmpty();
   void ResetEmptyCheck();
 
   bool IsTotallyEmpty() const {return false;};
@@ -98,7 +99,6 @@ private:
   unsigned char GetAlpha_Index0(const Point2i &pos) const;
   inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
   inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
-  Surface GetSurface() { return m_surface; };
 
   void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
   void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;

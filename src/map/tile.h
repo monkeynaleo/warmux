@@ -84,7 +84,7 @@ protected:
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
 
   // Ground dimensions
-  Point2i nbCells;
+  Point2i nbCells, startCell, endCell;
 
   void InitPreview();
   Surface*   m_preview;

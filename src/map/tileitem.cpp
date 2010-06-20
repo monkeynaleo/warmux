@@ -149,8 +149,8 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
 
     //Nothing to empty, just darken
     if ((uint)abs(dac) > radius) {
-	Darken(center.x-blength, center.x+blength, buf, bpp);
-	continue;
+      Darken(center.x-blength, center.x+blength, buf, bpp);
+      continue;
     }
 
     //Zone of the line which needs to be emptied
@@ -179,12 +179,12 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, uint opitch, uint shif
   uint p1;
   uint p2;
   uint p3;
-  
+
   for (int j=0; j<m_size.y>>shift; j++) {
     for (int i=0; i<m_size.x>>shift; i++) {
       p0 = 0;
-      p1 = 0; 
-      p2 = 0; 
+      p1 = 0;
+      p2 = 0;
       p3 = 0;
       const Uint8* ptr = idata + (i<<(2+shift));
 
@@ -299,7 +299,7 @@ void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
 }
 #endif
 
-void TileItem_AlphaSoftware::CheckEmpty()
+bool TileItem_AlphaSoftware::CheckEmpty()
 {
   ASSERT(need_check_empty);
   unsigned char alpha;
@@ -318,4 +318,5 @@ void TileItem_AlphaSoftware::CheckEmpty()
   } else {
     need_check_empty = false;
   }
+  return need_delete;
 }
