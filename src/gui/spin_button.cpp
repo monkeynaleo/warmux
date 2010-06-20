@@ -36,7 +36,12 @@ SpinButton::SpinButton (const std::string & label,
   AbstractSpinButton(value, 
                      step, 
                      min_value, 
-                     max_value)
+                     max_value),
+  shadowed(false),
+  txt_label(NULL),
+  txt_value(NULL),
+  m_plus(NULL),
+  m_minus(NULL)
 {
   position = Point2i(-1, -1);
   size.x = width;
@@ -72,10 +77,18 @@ SpinButton::SpinButton(Profile * profile,
 
 SpinButton::~SpinButton ()
 {
-  delete txt_label;
-  delete txt_value;
-  delete m_plus;
-  delete m_minus;
+  if (NULL != txt_label) {
+    delete txt_label;
+  }
+  if (NULL != txt_value) {
+    delete txt_value;
+  }
+  if (NULL != m_plus) {
+    delete m_plus;
+  }
+  if (NULL != m_minus) {
+    delete m_minus;
+  }
 }
 
 bool SpinButton::LoadXMLConfiguration(void)
@@ -85,9 +98,29 @@ bool SpinButton::LoadXMLConfiguration(void)
   }
 
   ParseXMLGeometry();
+  ParseXMLBorder();
+  ParseXMLBackground();
 
-  txt_label = new Text();
+  XmlReader * xmlFile = profile->GetXMLDocument();
 
+  txt_label = new Text("test", Color(0, 0, 0), Font::FONT_SMALL, Font::FONT_BOLD, false);
+  txt_value = new Text("", Color(0, 0, 0), Font::FONT_SMALL, Font::FONT_BOLD, false);
+
+  const xmlNode * buttonMinusNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonMinus");
+  if (NULL != buttonMinusNode) {
+    m_plus = new Button(profile, buttonMinusNode);
+    m_plus->LoadXMLConfiguration();
+    m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), position.y);
+  }
+
+  const xmlNode * buttonPlusNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonPlus");
+  if (NULL != buttonPlusNode) {
+    m_minus = new Button(profile, buttonPlusNode);
+    m_minus->LoadXMLConfiguration();
+    m_minus->SetPosition(position.x + size.x - m_minus->GetSizeX(), position.y + size.y - m_minus->GetSizeY());
+  }
+
+  // TODO: Lami: Remove Pack() process
   return true;
 }
 

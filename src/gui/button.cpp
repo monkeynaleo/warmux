@@ -38,7 +38,7 @@ Button::Button(const Profile * res_profile,
 Button::Button(Profile * profile,
                const xmlNode * baseListBoxNode) :
   Widget(profile, baseListBoxNode),
-  img_scale(false),
+  img_scale(true),
   image(NULL)
 {
 }
