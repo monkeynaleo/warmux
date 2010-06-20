@@ -38,16 +38,6 @@ static const uint TRANSPARENT = 0x00FFFFFF;
 static const uint TRANSPARENT = 0xFFFFFF00;
 #endif
 
-void TileItem::ScalePreview(uint8_t *odata, uint opitch, uint shift)
-{
-  for (int j=0; j<CELL_SIZE.y>>shift; j++) {
-    for (int i=0; i<(CELL_SIZE.x>>shift)>>2; i++)
-      memcpy(odata+(i<<2), &TRANSPARENT, 4);
-    odata += opitch;
-  }
-}
-
-
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem_AlphaSoftware::Draw(const Point2i &pos){
   GetMainWindow().Blit(GetSurface(),
@@ -83,9 +73,6 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size){
             }
         }
     }
-}
-
-TileItem_AlphaSoftware::~TileItem_AlphaSoftware(){
 }
 
 void TileItem_AlphaSoftware::ResetEmptyCheck()
