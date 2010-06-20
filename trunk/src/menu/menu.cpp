@@ -39,6 +39,7 @@
 #include "gui/picture_text_cbox.h"
 #include "gui/text_box.h"
 #include "gui/list_box.h"
+#include "gui/spin_button.h"
 
 Menu::Menu(const std::string& bg, t_action _actions) :
   actions(_actions),
@@ -176,7 +177,7 @@ Widget * Menu::CreateWidget(Profile * profile,
   } else if ("HorizontalBox" == widgetName) {
     widget = new HBox(profile, widgetNode);
   } else if ("SpinButton" == widgetName) {
-    return NULL;
+    widget = new SpinButton(profile, widgetNode);
   } else if ("PasswordBox" == widgetName) {
     widget = new PasswordBox(profile, widgetNode);
   } else if ("TextBox" == widgetName) {
