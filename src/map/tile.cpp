@@ -79,23 +79,25 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
 
 void Tile::Dig(const Point2i &position, const Surface& dig)
 {
-  Point2i firstCell = Clamp(position / CELL_SIZE);
-  Point2i lastCell  = Clamp((position + dig.GetSize()) / CELL_SIZE);
-  uint    index     = firstCell.y*nbCells.x;
-  uint8_t *dst      = m_preview->GetPixels();
-  uint    pitch     = m_preview->GetPitch();
+  Point2i  firstCell = Clamp(position / CELL_SIZE);
+  Point2i  lastCell  = Clamp((position + dig.GetSize()) / CELL_SIZE);
+  uint     index     = firstCell.y*nbCells.x;
+  uint8_t *dst       = m_preview->GetPixels();
+  int      pitch     = m_preview->GetPitch();
   Point2i c;
 
-  dst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
+  dst += (firstCell.y-startCell.y)*(CELL_SIZE.y>>m_shift)*pitch;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for(c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
-
-      Point2i offset = position - c * CELL_SIZE;
-      item[index + c.x]->Dig(offset, dig);
-      item[index + c.x]->ScalePreview(dst+4*c.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+      TileItem *ti = item[index + c.x];
+      if (!ti->IsTotallyEmpty()) {
+        ti->Dig(position - c * CELL_SIZE, dig);
+        ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+                         pitch, m_shift);
+      }
     }
-    dst += (CELL_SIZE.y>>m_shift)*pitch;
+    dst   += (CELL_SIZE.y>>m_shift)*pitch;
     index += nbCells.x;
   }
 
@@ -109,23 +111,25 @@ void Tile::Dig(const Point2i &center, const uint radius)
   Point2i position  = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
                                        radius + EXPLOSION_BORDER_SIZE);
 
-  Point2i firstCell = Clamp(position/CELL_SIZE);
-  Point2i lastCell  = Clamp((position+size)/CELL_SIZE);
-  uint    index     = firstCell.y*nbCells.x;
-  uint8_t *dst      = m_preview->GetPixels();
-  uint    pitch     = m_preview->GetPitch();
-  Point2i c;
+  Point2i  firstCell = Clamp(position/CELL_SIZE);
+  Point2i  lastCell  = Clamp((position+size)/CELL_SIZE);
+  uint     index     = firstCell.y*nbCells.x;
+  uint8_t *dst       = m_preview->GetPixels();
+  int      pitch     = m_preview->GetPitch();
+  Point2i  c;
 
-  dst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
+  dst += (firstCell.y-startCell.y)*(CELL_SIZE.y>>m_shift)*pitch;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
-
-      Point2i offset = center - c * CELL_SIZE;
-      item[index + c.x]->Dig(offset, radius);
-      item[index + c.x]->ScalePreview(dst+4*c.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+      TileItem *ti = item[index + c.x];
+      if (!ti->IsTotallyEmpty()) {
+        ti->Dig(center - c * CELL_SIZE, radius);
+        ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+                         pitch, m_shift);
+      }
     }
-    dst += (CELL_SIZE.y>>m_shift)*pitch;
+    dst   += (CELL_SIZE.y>>m_shift)*pitch;
     index += nbCells.x;
   }
 
@@ -139,11 +143,11 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
   Point2i    lastCell  = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
   Surface    s         = spr->GetSurface();
   uint8_t   *pdst      = m_preview->GetPixels();
-  uint       pitch     = m_preview->GetPitch();
+  int        pitch     = m_preview->GetPitch();
   Point2i c;
 
   s.SetAlpha(0, 0);
-  pdst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
+  pdst += (firstCell.y-startCell.y)*(CELL_SIZE.y>>m_shift)*pitch;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
@@ -181,7 +185,8 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 
       ti->GetSurface().Blit(s, dst, src.GetPosition());
       static_cast<TileItem_AlphaSoftware*>(ti)->ResetEmptyCheck();
-      ti->ScalePreview(pdst+4*c.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+      ti->ScalePreview(pdst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+                       pitch, m_shift);
     }
     pdst += (CELL_SIZE.y>>m_shift)*pitch;
   }
@@ -196,10 +201,10 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
   Point2i  firstCell = Clamp(position/CELL_SIZE);
   Point2i  lastCell  = Clamp((position + surf.GetSize())/CELL_SIZE);
   uint8_t *dst       = m_preview->GetPixels();
-  uint     pitch     = m_preview->GetPitch();
+  int      pitch     = m_preview->GetPitch();
   Point2i  c;
 
-  dst += firstCell.y*(CELL_SIZE.y>>m_shift)*pitch;
+  dst += (firstCell.y-startCell.y)*(CELL_SIZE.y>>m_shift)*pitch;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
@@ -215,7 +220,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
         ti->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
       }
       ti->MergeSprite(offset, surf);
-      ti->ScalePreview(dst+4*c.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+      ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+                       pitch, m_shift);
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
   }
@@ -226,27 +232,28 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
 // Initialize preview depending on current video and map sizes
 void Tile::InitPreview()
 {
-  Point2i offset     = m_upper_left_offset + m_lower_right_offset;
-  Point2i world_size = size - offset;
+  Point2i world_size = (endCell+1-startCell)*CELL_SIZE;
 
   m_last_video_size  = GetMainWindow().GetSize();
   m_shift = 0;
 
   // Task 6730: biggest dimension won't be bigger than one third, often less in fact
-  while (5*world_size.x>2*m_last_video_size.x || 5*world_size.y>2*m_last_video_size.y) {
+  while (5*world_size>2*m_last_video_size) {
     world_size >>= 1;
     m_shift++;
   }
   if (m_preview)
     delete m_preview;
 
-  m_preview = new Surface();
-  *m_preview = Surface(Point2i(nbCells.x*(CELL_SIZE.x>>m_shift), nbCells.y*(CELL_SIZE.y>>m_shift)),
-                       SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+
+  m_preview = new Surface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
-  m_preview_size = world_size;
-  m_preview_rect = Rectanglei(m_upper_left_offset / (1<<m_shift), m_preview_size);
+  // Actual preview size from pixel-wise information
+  m_preview_size = (size - m_upper_left_offset - m_lower_right_offset)>>m_shift;
+  // Offset is the difference between pixel-wise info and cell-wise one
+  m_preview_rect = Rectanglei((m_upper_left_offset % CELL_SIZE)>>m_shift,
+                              m_preview_size);
 
   m_last_preview_redraw = Time::GetInstance()->Read();
 }
@@ -262,18 +269,20 @@ void Tile::CheckPreview()
     return;
 
   InitPreview();
-  uint8_t *dst  = m_preview->GetPixels();
-  uint    pitch = m_preview->GetPitch();
+  uint8_t *dst   = m_preview->GetPixels();
+  int      pitch = m_preview->GetPitch();
 
   // Fill the TileItem objects
   Point2i i;
-  int     piece = 0;
+  uint    offset = startCell.y*nbCells.x;
 
-  for (i.y = 0; i.y < nbCells.y; i.y++) {
-    for (i.x = 0; i.x < nbCells.x; i.x++, piece++) {
-      item[piece]->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift), pitch, m_shift);
+  for (i.y = startCell.y; i.y < endCell.y; i.y++) {
+    for (i.x =startCell.x; i.x < endCell.x; i.x++) {
+      item[i.x + offset]->ScalePreview(dst+4*(i.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+                                       pitch, m_shift);
     }
-    dst += (CELL_SIZE.y>>m_shift)*pitch;
+    dst    += (CELL_SIZE.y>>m_shift)*pitch;
+    offset += nbCells.x;
   }
 }
 
@@ -284,8 +293,8 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   InitTile(terrain.GetSize(), upper_left_offset, lower_right_offset);
 
   InitPreview();
-  uint8_t *dst  = m_preview->GetPixels();
-  uint    pitch = m_preview->GetPitch();
+  uint8_t *dst   = m_preview->GetPixels();
+  int      pitch = m_preview->GetPitch();
 
   // Fill the TileItem objects
   Point2i i;
@@ -296,7 +305,6 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
     for (i.x = 0; i.x < nbCells.x; i.x++)
       item.push_back(&EmptyTile);
 
-  dst += startCell.y*(CELL_SIZE.y>>m_shift)*pitch;
   for (; i.y < endCell.y; i.y++) {
     // Empty left border
     for (i.x = 0; i.x<startCell.x; i.x++)
@@ -317,7 +325,7 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
         // Don't instanciate a new empty tile but use the already existing one
         item.push_back(&EmptyTile);
       } else {
-        ti->ScalePreview(dst+4*i.x*(CELL_SIZE.x>>m_shift),
+        ti->ScalePreview(dst+4*(i.x-startCell.x)*(CELL_SIZE.x>>m_shift),
                          pitch, m_shift);
         item.push_back(ti);
       }
