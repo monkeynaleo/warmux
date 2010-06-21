@@ -99,7 +99,7 @@ class RandomMap {
    void GenerateIsland();
    void GeneratePlatforms();
    void GenerateGridElements();
-   void SaveMap();
+   std::string SaveMap();
    Surface GetRandomMap() const { return result; };
 };
 

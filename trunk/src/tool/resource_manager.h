@@ -82,6 +82,7 @@ public:
   Double LoadDouble(const Profile *profile, const std::string& resource_name) const;
   Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
   Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
+  std::string LoadImageFilename(const Profile *profile, const std::string& resource_name) const;
   Surface LoadImage(const Profile *profile, const std::string& resource_name) const;
 
   Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
@@ -89,9 +90,10 @@ public:
   // the following method is usefull if you have direct access to the xml file
   Sprite *LoadSprite(const xmlNode* sprite_elem, const std::string& resource_name, const std::string& main_folder) const;
 
-  Surface GenerateMap(Profile *profile, InfoMap::Island_type generator, const int width, const int height) const;
+  std::string GenerateMap(Profile *profile, InfoMap::Island_type generator,
+                          const int width, const int height) const;
   const xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type,
-			     const std::string& ressource_name) const;
+                             const std::string& ressource_name) const;
 
  private:
   std::string base_path;

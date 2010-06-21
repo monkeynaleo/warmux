@@ -43,9 +43,6 @@ InfoMap::InfoMap(const std::string &map_name, const std::string &directory)
   , music_playlist("ingame")
   , m_directory(directory)
   , m_map_name(map_name)
-  , img_ground()
-  , img_sky()
-  , preview()
   , nb_mine(4)
   , nb_barrel(4)
   , alpha_threshold(255)
@@ -237,10 +234,13 @@ InfoMapAccessor *InfoMap::LoadData()
   }
 
   if (!random_generated) {
-    img_ground = GetResourceManager().LoadImage(res_profile, "map");
+    ground_filename = GetResourceManager().LoadImageFilename(res_profile, "map");
   } else {
-    img_ground = GetResourceManager().GenerateMap(res_profile, island_type, img_sky.GetWidth(), img_sky.GetHeight());
+    ground_filename = GetResourceManager().GenerateMap(res_profile, island_type,
+                                                       img_sky.GetWidth(), img_sky.GetHeight());
   }
+  if (!DoesFileExist(ground_filename))
+    return NULL;
 
   normal = new InfoMapAccessor(this);
   return normal;
@@ -256,7 +256,6 @@ void InfoMap::FreeData()
     sky_layer.erase(it);
   }
 
-  img_ground.Free();
   delete normal; normal = NULL;
 }
 

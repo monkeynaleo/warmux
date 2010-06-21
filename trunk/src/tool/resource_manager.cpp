@@ -230,7 +230,7 @@ const xmlNode*  ResourceManager::GetElement(const Profile *profile, const std::s
   return elem;
 }
 
-Surface ResourceManager::LoadImage(const Profile *profile, const std::string& resource_name) const
+std::string ResourceManager::LoadImageFilename(const Profile *profile, const std::string& resource_name) const
 {
   const xmlNode* elem = GetElement(profile, "surface", resource_name);
   if (!elem)
@@ -240,10 +240,16 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
   if (!profile->doc->ReadStringAttr(elem, "file", filename))
     Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
 
-  
-  bool alpha = true;
-  Surface image = LoadImage(profile->relative_path+filename, alpha);
-  std::string size;
+  return profile->relative_path+filename;
+}
+
+Surface ResourceManager::LoadImage(const Profile *profile, const std::string& resource_name) const
+{
+  std::string    filename = LoadImageFilename(profile, resource_name);
+  bool           alpha    = true;
+  Surface        image    = LoadImage(filename, alpha);
+  const xmlNode *elem     = GetElement(profile, "surface", resource_name);
+  std::string    size;
 
   if (XmlReader::ReadStringAttr(elem, "size", size)) {
     Rectanglei source_rect(0,0,image.GetSize().x,image.GetSize().y);
@@ -378,13 +384,12 @@ Sprite *ResourceManager::LoadSprite(const xmlNode* elem_sprite, const std::strin
   return sprite;
 }
 
-Surface ResourceManager::GenerateMap(Profile *profile, InfoMap::Island_type generator,
-                                     const int width, const int height) const
+std::string ResourceManager::GenerateMap(Profile *profile, InfoMap::Island_type generator,
+                                         const int width, const int height) const
 {
   RandomMap random_map(profile, width, height);
   random_map.Generate(generator);
-  random_map.SaveMap();
-  return random_map.GetRandomMap();
+  return random_map.SaveMap();
 }
 
 
