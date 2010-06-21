@@ -317,7 +317,7 @@ bool Tile::LoadImage(const std::string& filename,
   int          offsetx, offsety, endoffy;
   Point2i      i;
   uint8_t     *dst;
-  int          width, height, pitch;
+  int          width, height, pitch, color_type, depth, has_tRNS;
 
   // Opening the existing file
   f = fopen(filename.c_str(), "rb");
@@ -337,11 +337,23 @@ bool Tile::LoadImage(const std::string& filename,
   png_read_info(png_ptr, info_ptr);
   width  = png_get_image_width(png_ptr, info_ptr);
   height = png_get_image_height(png_ptr, info_ptr);
+  color_type = png_get_color_type(png_ptr, info_ptr);
+  depth = png_get_bit_depth(png_ptr, info_ptr);
+
+  // expand paletted colors into true RGB triplets
+  has_tRNS = png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS);
+  if (color_type == PNG_COLOR_TYPE_PALETTE || has_tRNS
+      || (color_type == PNG_COLOR_TYPE_GRAY && depth < 8))
+    png_set_expand(png_ptr);
+  if (color_type == PNG_COLOR_TYPE_GRAY || color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
+    png_set_gray_to_rgb(png_ptr) ;
 
   // tell libpng to strip 16 bit/color files down to 8 bits/color
-  png_set_strip_16(png_ptr);
-  // expand paletted colors into true RGB triplets
-  png_set_expand(png_ptr);
+  if (depth == 16)
+    png_set_strip_16(png_ptr);
+
+  // Find the proper mapping of channels
+  png_set_bgr(png_ptr);
 
   FreeMem();
   crc = 0;
@@ -350,7 +362,7 @@ bool Tile::LoadImage(const std::string& filename,
   buffer  = new uint8_t[CELL_SIZE.y*stride];
   offsetx = (upper_left_offset.x % CELL_SIZE.x)*4;
   offsety = upper_left_offset.y % CELL_SIZE.y;
-  endoffy = CELL_SIZE.y - ((height + upper_left_offset.y) % CELL_SIZE.y);
+  endoffy = (height + upper_left_offset.y) % CELL_SIZE.y;
 
   InitPreview();
   dst   = m_preview->GetPixels();
