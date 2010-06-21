@@ -25,7 +25,7 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-SpinButton::SpinButton (const std::string & label, 
+SpinButton::SpinButton (const std::string & _label, 
                         int width,
                         int value, 
                         int step, 
@@ -38,8 +38,8 @@ SpinButton::SpinButton (const std::string & label,
                      min_value, 
                      max_value),
   shadowed(false),
-  txt_label(NULL),
-  txt_value(NULL),
+  txtLabel(NULL),
+  txtValue(NULL),
   m_plus(NULL),
   m_minus(NULL)
 {
@@ -50,10 +50,10 @@ SpinButton::SpinButton (const std::string & label,
 
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
 
-  txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_BOLD, shadowed);
-  txt_label->SetMaxWidth(size.x - 30);
+  txtLabel = new Label(_label, 100, Font::FONT_SMALL, Font::FONT_BOLD, color, false, shadowed);
+  txtLabel->SetMaxWidth(size.x - 30);
 
-  txt_value = new Text("", color, Font::FONT_SMALL, Font::FONT_BOLD, shadowed);
+  txtValue = new Label(" ", 100, Font::FONT_SMALL, Font::FONT_BOLD, color, false, shadowed);
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
@@ -77,11 +77,11 @@ SpinButton::SpinButton(Profile * profile,
 
 SpinButton::~SpinButton ()
 {
-  if (NULL != txt_label) {
-    delete txt_label;
+  if (NULL != txtLabel) {
+    delete txtLabel;
   }
-  if (NULL != txt_value) {
-    delete txt_value;
+  if (NULL != txtValue) {
+    delete txtValue;
   }
   if (NULL != m_plus) {
     delete m_plus;
@@ -103,24 +103,35 @@ bool SpinButton::LoadXMLConfiguration(void)
 
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  txt_label = new Text("test", Color(0, 0, 0), Font::FONT_SMALL, Font::FONT_BOLD, false);
-  txt_value = new Text("", Color(0, 0, 0), Font::FONT_SMALL, Font::FONT_BOLD, false);
+  txtLabel = new Label("test", 100);
+  txtLabel->Pack();
+  txtLabel->SetPosition(position.x, 
+                        position.y + (size.y / 2) - (txtLabel->GetSizeY() / 2));
+
+  txtValue = new Label("0", 100);
+  txtValue->Pack();
+  txtValue->SetPosition(position.x + size.x - txtValue->GetWidth(), 
+                        position.y + (size.y / 2) - (txtValue->GetSizeY() / 2));
+  
+  AbstractSpinButton::LoadXMLConfiguration();
+  ValueHasChanged();
 
   const xmlNode * buttonMinusNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonMinus");
   if (NULL != buttonMinusNode) {
-    m_plus = new Button(profile, buttonMinusNode);
-    m_plus->LoadXMLConfiguration();
-    m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), position.y);
+    m_minus = new Button(profile, buttonMinusNode);
+    m_minus->LoadXMLConfiguration();
+    m_minus->SetPosition(position.x + size.x - m_minus->GetSizeX(), 
+                         position.y);
   }
 
   const xmlNode * buttonPlusNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonPlus");
   if (NULL != buttonPlusNode) {
-    m_minus = new Button(profile, buttonPlusNode);
-    m_minus->LoadXMLConfiguration();
-    m_minus->SetPosition(position.x + size.x - m_minus->GetSizeX(), position.y + size.y - m_minus->GetSizeY());
+    m_plus = new Button(profile, buttonPlusNode);
+    m_plus->LoadXMLConfiguration();
+    m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), 
+                        position.y + size.y - m_plus->GetSizeY());
   }
 
-  // TODO: Lami: Remove Pack() process
   return true;
 }
 
@@ -135,13 +146,18 @@ void SpinButton::Pack()
   m_plus->SetPosition(position.x + size.x - 5, position.y);
   m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
 
-  txt_label->SetMaxWidth(size.x - 30);
-  size.y = txt_label->GetHeight();
+  txtLabel->SetMaxWidth(size.x - 30);
+  size.y = txtLabel->GetHeight();
+
 }
 
 void SpinButton::Draw(const Point2i &mousePosition) const
 {
-  txt_label->DrawTopLeft(position);
+  txtLabel->DrawTopLeft(position);
+
+  //value->Draw(mousePosition);
+  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
+  txtValue->DrawCenterTop(Point2i(center, position.y));
 
   if (GetValue() != GetMinValue()) {
     m_minus->Draw(mousePosition);
@@ -149,9 +165,6 @@ void SpinButton::Draw(const Point2i &mousePosition) const
   if (GetValue() != GetMaxValue()) {
     m_plus->Draw(mousePosition);
   }
-
-  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
-  txt_value->DrawCenterTop(Point2i(center, position.y));
 }
 
 Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
@@ -176,5 +189,5 @@ void SpinButton::ValueHasChanged()
   value_s << GetValue() ;
 
   std::string s(value_s.str());
-  txt_value->SetText(s);
+  txtValue->SetText(s);
 }

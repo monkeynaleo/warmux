@@ -37,8 +37,26 @@ AbstractSpinButton::AbstractSpinButton(int value,
 
 AbstractSpinButton::AbstractSpinButton(Profile * profile,
                                        const xmlNode * spinButtonNode) :
-  Widget(profile, spinButtonNode) 
+  Widget(profile, spinButtonNode),
+  m_value(0),
+  m_step(1),
+  m_min_value(0),
+  m_max_value(100)
 {
+}
+
+bool AbstractSpinButton::LoadXMLConfiguration(void)
+{
+  if (NULL == profile || NULL == widgetNode) {
+    return false;
+  }
+
+  XmlReader * xmlFile = profile->GetXMLDocument();
+
+  const xmlNode * valueNode = xmlFile->GetFirstNamedChild(widgetNode, "Value");
+  xmlFile->ReadIntAttr(valueNode, "initValue", m_value);
+
+  return true;
 }
 
 int AbstractSpinButton::IncValue() 

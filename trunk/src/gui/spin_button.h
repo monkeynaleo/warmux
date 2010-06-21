@@ -27,9 +27,10 @@
 #include "widget.h"
 #include "abstract_spin_button.h"
 #include <string>
+#include "gui/label.h"
 
 class Button;
-class Text;
+//class Text;
 
 class SpinButton : public AbstractSpinButton
 {
@@ -40,8 +41,8 @@ class SpinButton : public AbstractSpinButton
     /*********************************************/
 
     bool     shadowed;
-    Text *   txt_label;
-    Text *   txt_value;
+    Label *  txtLabel;
+    Label *  txtValue;
     Button * m_plus;
     Button * m_minus;
 
