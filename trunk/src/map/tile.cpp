@@ -317,7 +317,7 @@ bool Tile::LoadImage(const std::string& filename,
   int          offsetx, offsety, endoffy;
   Point2i      i;
   uint8_t     *dst;
-  int          pitch;
+  int          width, height, pitch;
 
   // Opening the existing file
   f = fopen(filename.c_str(), "rb");
@@ -335,6 +335,8 @@ bool Tile::LoadImage(const std::string& filename,
   // Associate png struture with a file
   png_init_io(png_ptr, f);
   png_read_info(png_ptr, info_ptr);
+  width  = png_get_image_width(png_ptr, info_ptr);
+  height = png_get_image_height(png_ptr, info_ptr);
 
   // tell libpng to strip 16 bit/color files down to 8 bits/color
   png_set_strip_16(png_ptr);
@@ -343,12 +345,12 @@ bool Tile::LoadImage(const std::string& filename,
 
   FreeMem();
   crc = 0;
-  InitTile(Point2i(info_ptr->width, info_ptr->height), upper_left_offset, lower_right_offset);
+  InitTile(Point2i(width, height), upper_left_offset, lower_right_offset);
   stride  = (endCell.x+1 - startCell.x)*CELL_SIZE.x*4;
   buffer  = new uint8_t[CELL_SIZE.y*stride];
   offsetx = (upper_left_offset.x % CELL_SIZE.x)*4;
   offsety = upper_left_offset.y % CELL_SIZE.y;
-  endoffy = CELL_SIZE.y - ((info_ptr->height + upper_left_offset.y) % CELL_SIZE.y);
+  endoffy = CELL_SIZE.y - ((height + upper_left_offset.y) % CELL_SIZE.y);
 
   InitPreview();
   dst   = m_preview->GetPixels();
@@ -371,17 +373,17 @@ bool Tile::LoadImage(const std::string& filename,
       crc = read_png_rows(png_ptr,
                           buffer + offsetx + offsety*stride,
                           CELL_SIZE.y - offsety, stride,
-                          crc, info_ptr->width);
+                          crc, width);
     } else if (i.y == endCell.y-1) {
       memset(buffer, 0, CELL_SIZE.y*stride);
       // Only some lines are to be loaded
       crc = read_png_rows(png_ptr,
                           buffer + offsetx, endoffy, stride,
-                          crc, info_ptr->width);
+                          crc, width);
     } else {
       crc = read_png_rows(png_ptr,
                           buffer + offsetx, CELL_SIZE.y, stride,
-                          crc, info_ptr->width);
+                          crc, width);
     }
 
     for (; i.x < endCell.x; i.x++) {
