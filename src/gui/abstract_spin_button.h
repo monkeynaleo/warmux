@@ -47,6 +47,7 @@ class AbstractSpinButton : public Widget
                        const xmlNode * spinButtonNode);
     virtual ~AbstractSpinButton(void) {}
 
+    virtual bool LoadXMLConfiguration(void);
     int GetValue() const { return m_value; }
     int IncValue();
     int DecValue();
