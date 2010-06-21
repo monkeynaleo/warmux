@@ -155,7 +155,7 @@ public:
   int FillRect(const Rectanglei &dstRect, const Color &color) const;
 
   int ImgLoad(const std::string& filename);
-  int ImgSave(const std::string& filename);
+  bool ImgSave(const std::string& filename);
   Surface RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth=1 /* auto-aliasing = ON */);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
@@ -177,8 +177,6 @@ public:
   Uint8 GetBytesPerPixel() const { return surface->format->BytesPerPixel; };
   /** Return a pointer on the pixels data. */
   unsigned char *GetPixels() const { return (unsigned char *)surface->pixels; }
-
-  Uint32 ComputeCRC() const;
 };
 
 #endif

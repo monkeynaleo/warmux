@@ -23,6 +23,7 @@
 #include <vector>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
+#include <assert.h>
 
 // Forward declarations
 class Surface;
@@ -48,7 +49,9 @@ public:
   void MergeSprite(const Point2i &position, Surface & provider);
 
   // Load an image
-  void LoadImage(Surface& ground_surface, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+  bool LoadImage(const std::string& filename,
+                 const Point2i & upper_left_offset,
+                 const Point2i & lower_right_offset);
 
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
@@ -77,6 +80,8 @@ public:
 
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
+
+  uint32_t GetCRC() const { assert(crc); return crc; }
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
 
@@ -96,6 +101,9 @@ protected:
 
   Point2i m_upper_left_offset;
   Point2i m_lower_right_offset;
+
+  // Pseudo-CRC to validate map data
+  uint32_t crc;
 
   // Canvas giving access to tiles
   std::vector<TileItem *> item;

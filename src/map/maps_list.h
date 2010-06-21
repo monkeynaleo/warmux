@@ -67,7 +67,8 @@ protected:
 
   std::string m_map_name;
 
-  Surface img_ground, img_sky;
+  Surface     img_sky;
+  std::string ground_filename;
   Surface preview;
   std::vector<Surface> sky_layer;
   XmlReader doc;
@@ -138,7 +139,7 @@ public:
 class InfoMapAccessor : public InfoMapBasicAccessor {
 public:
   InfoMapAccessor(InfoMap* info_) : InfoMapBasicAccessor(info_) { }
-  Surface& ReadImgGround() { return info->img_ground; }
+  const std::string& GetGroundFileName() { return info->ground_filename; }
   const Surface& ReadImgSky() const { return info->img_sky; }
   const std::vector<Surface>& ReadSkyLayer() const { return info->sky_layer; }
 };

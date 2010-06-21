@@ -300,7 +300,10 @@ void RandomMap::Generate(InfoMap::Island_type generator)
   MSG_DEBUG("map.generation", "< End creation of random generated map");
 }
 
-void RandomMap::SaveMap()
+std::string RandomMap::SaveMap()
 {
-  result.ImgSave(Config::GetInstance()->GetPersonalDataDir() + ActiveMap()->LoadedInfo()->ReadFullMapName() + " - last random generation.png");
+  std::string filename = Config::GetInstance()->GetPersonalDataDir() +
+                         ActiveMap()->LoadedInfo()->ReadFullMapName() +
+                         " - last random generation.png";
+  return (result.ImgSave(filename)) ? filename : "";
 }

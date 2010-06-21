@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
+#include <png.h>
 #include "map/tile.h"
 #include "map/tileitem.h"
 #include "game/game.h"
@@ -49,6 +50,8 @@ void Tile::FreeMem()
   if (m_preview)
     delete m_preview;
   m_preview = NULL;
+
+  crc = 0;
 }
 
 Tile::~Tile()
@@ -286,19 +289,70 @@ void Tile::CheckPreview()
   }
 }
 
-void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const Point2i & lower_right_offset)
+static uint32_t read_png_rows(png_structp png_ptr,
+                              uint8_t *buffer, uint height, int stride,
+                              uint32_t crc, uint width)
 {
-  Point2i offset = upper_left_offset + lower_right_offset;
+  while (height--) {
+    uint i;
+    png_read_row(png_ptr, buffer, NULL);
+    for (i=0; i<4*width; i++)
+      crc += buffer[i+0] + buffer[i+1] + buffer[i+2] + buffer[i+3];
+    buffer += stride;
+    crc = crc % 429496000;
+  }
+  return crc;
+}
+
+bool Tile::LoadImage(const std::string& filename,
+                     const Point2i & upper_left_offset,
+                     const Point2i & lower_right_offset)
+{
+  FILE        *f        = NULL;
+  png_structp  png_ptr  = NULL;
+  png_infop    info_ptr = NULL;
+  bool         ret      = false;
+  uint8_t     *buffer   = NULL;
+  int          stride;
+  int          offsetx, offsety, endoffy;
+  Point2i      i;
+  uint8_t     *dst;
+  int          pitch;
+
+  // Opening the existing file
+  f = fopen(filename.c_str(), "rb");
+  if(f == NULL)
+    goto end;
+
+  // Creating a png ...
+  png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+  if(png_ptr == NULL) // Structure and ...
+    goto end;
+  info_ptr = png_create_info_struct(png_ptr);
+  if(info_ptr == NULL) // Information.
+    goto end;
+
+  // Associate png struture with a file
+  png_init_io(png_ptr, f);
+  png_read_info(png_ptr, info_ptr);
+
+  // tell libpng to strip 16 bit/color files down to 8 bits/color
+  png_set_strip_16(png_ptr);
+  // expand paletted colors into true RGB triplets
+  png_set_expand(png_ptr);
+
   FreeMem();
-  InitTile(terrain.GetSize(), upper_left_offset, lower_right_offset);
+  crc = 0;
+  InitTile(Point2i(info_ptr->width, info_ptr->height), upper_left_offset, lower_right_offset);
+  stride  = (endCell.x+1 - startCell.x)*CELL_SIZE.x*4;
+  buffer  = new uint8_t[CELL_SIZE.y*stride];
+  offsetx = (upper_left_offset.x % CELL_SIZE.x)*4;
+  offsety = upper_left_offset.y % CELL_SIZE.y;
+  endoffy = CELL_SIZE.y - ((info_ptr->height + upper_left_offset.y) % CELL_SIZE.y);
 
   InitPreview();
-  uint8_t *dst   = m_preview->GetPixels();
-  int      pitch = m_preview->GetPitch();
-
-  // Fill the TileItem objects
-  Point2i i;
-  terrain.SetAlpha(0, 0);
+  dst   = m_preview->GetPixels();
+  pitch = m_preview->GetPitch();
 
   // Top transparent+empty row
   for (i.y = 0; i.y < startCell.y; i.y++)
@@ -310,11 +364,38 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
     for (i.x = 0; i.x<startCell.x; i.x++)
       item.push_back(&EmptyTile);
 
-    for (; i.x < endCell.x; i.x++) {
-      TileItem_AlphaSoftware *ti = new TileItem_AlphaSoftware(CELL_SIZE);
-      Rectanglei sr(i * CELL_SIZE - upper_left_offset, CELL_SIZE);
+    // Prepare buffer for current line
+    if (i.y == startCell.y) {
+      memset(buffer, 0, CELL_SIZE.y*stride);
+      // Only some lines are to be loaded
+      crc = read_png_rows(png_ptr,
+                          buffer + offsetx + offsety*stride,
+                          CELL_SIZE.y - offsety, stride,
+                          crc, info_ptr->width);
+    } else if (i.y == endCell.y-1) {
+      memset(buffer, 0, CELL_SIZE.y*stride);
+      // Only some lines are to be loaded
+      crc = read_png_rows(png_ptr,
+                          buffer + offsetx, endoffy, stride,
+                          crc, info_ptr->width);
+    } else {
+      crc = read_png_rows(png_ptr,
+                          buffer + offsetx, CELL_SIZE.y, stride,
+                          crc, info_ptr->width);
+    }
 
-      ti->GetSurface().Blit(terrain, sr, Point2i(0, 0));
+    for (; i.x < endCell.x; i.x++) {
+      TileItem_AlphaSoftware *ti        = new TileItem_AlphaSoftware(CELL_SIZE);
+      const uint8_t          *ptr       = buffer + (i.x - startCell.x)*CELL_SIZE.x*4;
+      uint8_t                *ti_ptr    = ti->GetSurface().GetPixels();
+      int                     ti_stride = ti->GetSurface().GetPitch();
+      int                     h         = CELL_SIZE.y;
+
+      while (h--) {
+        memcpy(ti_ptr, ptr, CELL_SIZE.x*4);
+        ti_ptr += ti_stride;
+        ptr    += stride;
+      }
 
       if (ti->CheckEmpty()) {
         // no need to display this tile as it can be deleted!
@@ -341,6 +422,18 @@ void Tile::LoadImage(Surface& terrain, const Point2i & upper_left_offset, const 
   for (; i.y < nbCells.y; i.y++)
     for (i.x = 0; i.x < nbCells.x; i.x++)
       item.push_back(&EmptyTile);
+  ret = true;
+
+end:
+  if (buffer)
+    delete[] buffer;
+  if (png_ptr)
+    png_destroy_read_struct(&png_ptr, &info_ptr, NULL);
+  if (info_ptr)
+    png_destroy_info_struct(png_ptr, &info_ptr);
+  if (f)
+    fclose(f);
+  return ret;
 }
 
 uchar Tile::GetAlpha(const Point2i & pos) const

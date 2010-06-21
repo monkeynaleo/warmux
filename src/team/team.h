@@ -73,7 +73,7 @@ protected:
   Team(XmlReader& doc, Profile* res,
        const std::string& name, const std::string &teams_dir, const std::string &id);
 
-  public:
+public:
   static Team* LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error);
 
   std::vector<int> m_nb_ammos;

@@ -53,12 +53,16 @@ void Ground::Init(){
 
   // Load ground data
   InfoMapAccessor *normal = ActiveMap()->LoadData();
-  Surface& m_image = normal->ReadImgGround();
-  if(normal->IsOpened()) {
-    LoadImage(m_image, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
+  const std::string& filename = normal->GetGroundFileName();
+  bool ret;
+  if (normal->IsOpened()) {
+    ret = LoadImage(filename, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
   } else {
-    LoadImage(m_image, Point2i(), Point2i());
+    ret = LoadImage(filename, Point2i(), Point2i());
   }
+  if (!ret)
+    Error(_("Error loading ground"));
+
   // Check the size of the map
   ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);

@@ -207,7 +207,7 @@ static void Action_Network_Check_Phase1 (Action *a)
 
   // At that point, data is loaded or this is a bug
   b.Push(ActiveMap()->GetRawName());
-  b.Push(int(ActiveMap()->LoadedData()->ReadImgGround().ComputeCRC()));
+  b.Push(int(GetWorld().ground.GetCRC()));
   TeamsList::iterator it = GetTeamsList().playing_list.begin();
   for (; it != GetTeamsList().playing_list.end() ; ++it) {
     b.Push((*it)->GetId());
@@ -282,7 +282,7 @@ static void Action_Network_Check_Phase2 (Action *a)
   }
 
   // Check the map CRC
-  int crc = int(ActiveMap()->LoadedData()->ReadImgGround().ComputeCRC());
+  int crc = int(GetWorld().ground.GetCRC());
   int remote_crc = a->PopInt();
   if (crc != remote_crc) {
     std::cerr << map << " is different (crc=" << crc << ", remote crc="<< remote_crc << ")" << std::endl;
