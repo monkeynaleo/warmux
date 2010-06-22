@@ -55,6 +55,9 @@ bool AbstractSpinButton::LoadXMLConfiguration(void)
 
   const xmlNode * valueNode = xmlFile->GetFirstNamedChild(widgetNode, "Value");
   xmlFile->ReadIntAttr(valueNode, "initValue", m_value);
+  xmlFile->ReadIntAttr(valueNode, "minValue", m_min_value);
+  xmlFile->ReadIntAttr(valueNode, "maxValue", m_max_value);
+  xmlFile->ReadIntAttr(valueNode, "stepValue", m_step);
 
   return true;
 }

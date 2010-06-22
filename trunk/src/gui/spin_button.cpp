@@ -75,7 +75,7 @@ SpinButton::SpinButton(Profile * profile,
 {
 }
 
-SpinButton::~SpinButton ()
+SpinButton::~SpinButton()
 {
   if (NULL != txtLabel) {
     delete txtLabel;
@@ -103,12 +103,24 @@ bool SpinButton::LoadXMLConfiguration(void)
 
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  txtLabel = new Label("test", 100);
+  const xmlNode * labelNode = xmlFile->GetFirstNamedChild(widgetNode, "Label");
+  if (NULL != labelNode) {
+    txtLabel = new Label(profile, labelNode);
+    txtLabel->LoadXMLConfiguration();
+  } else {
+    txtLabel = new Label("n/a", 100);
+  }
   txtLabel->Pack();
   txtLabel->SetPosition(position.x, 
                         position.y + (size.y / 2) - (txtLabel->GetSizeY() / 2));
 
-  txtValue = new Label("0", 100);
+  const xmlNode * valueNode = xmlFile->GetFirstNamedChild(widgetNode, "Value");
+  if (NULL != valueNode) {
+    txtValue = new Label(profile, valueNode);
+    txtValue->LoadXMLConfiguration();
+  } else {
+    txtValue = new Label("0", 100);
+  }
   txtValue->Pack();
   txtValue->SetPosition(position.x + size.x - txtValue->GetWidth(), 
                         position.y + (size.y / 2) - (txtValue->GetSizeY() / 2));
@@ -148,14 +160,12 @@ void SpinButton::Pack()
 
   txtLabel->SetMaxWidth(size.x - 30);
   size.y = txtLabel->GetHeight();
-
 }
 
-void SpinButton::Draw(const Point2i &mousePosition) const
+void SpinButton::Draw(const Point2i & mousePosition) const
 {
   txtLabel->DrawTopLeft(position);
 
-  //value->Draw(mousePosition);
   uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
   txtValue->DrawCenterTop(Point2i(center, position.y));
 
@@ -167,7 +177,8 @@ void SpinButton::Draw(const Point2i &mousePosition) const
   }
 }
 
-Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
+Widget * SpinButton::ClickUp(const Point2i & mousePosition, 
+                             uint button)
 {
   NeedRedrawing();
 
