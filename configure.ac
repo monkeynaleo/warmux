@@ -232,7 +232,7 @@ fi
 
 dnl === Check for libxml2 and libpng using pkg-confg =============
 PKG_PROG_PKG_CONFIG()
-PKG_CHECK_MODULES(LIBXML2, libxml-2.0 >= 2.7.3, [], [AC_MSG_FAILURE([libxml2 >= 2.7.3 not found])])
+PKG_CHECK_MODULES(LIBXML2, libxml-2.0, [], [AC_MSG_FAILURE([libxml2 not found])])
 PKG_CHECK_MODULES(LIBPNG, libpng, [], [AC_MSG_FAILURE([libpng not found])])
 CFLAGS="$CFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
