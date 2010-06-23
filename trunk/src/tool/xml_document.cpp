@@ -162,9 +162,9 @@ xmlNodeArray XmlReader::GetNamedChildren(const xmlNode* father, const std::strin
   return tab;
 }
 
-// Forward of GetMarker() with a new name (better) 
+// Forward of GetMarker() with a new name (better)
 // TODO: Refactor all GetMarker() call to GetFirstNamedChild()
-const xmlNode * XmlReader::GetFirstNamedChild(const xmlNode * father, 
+const xmlNode * XmlReader::GetFirstNamedChild(const xmlNode * father,
                                               const std::string & nodeName)
 {
   return GetMarker(father, nodeName);
@@ -172,17 +172,97 @@ const xmlNode * XmlReader::GetFirstNamedChild(const xmlNode * father,
 
 unsigned long XmlReader::GetNbChildren(const xmlNode * father)
 {
+#if LIBXML_VERSION > 20702
   return xmlChildElementCount((xmlNode*)father);
+#else
+  // This code is taken from libxml2, release under the MIT license:
+  // Copyright (C) 1998-2003 Daniel Veillard. All Rights Reserved.
+  unsigned long ret = 0;
+  xmlNodePtr    cur = NULL;
+
+  if (father == NULL)
+    return(0);
+  switch (father->type) {
+  case XML_ELEMENT_NODE:
+  case XML_ENTITY_NODE:
+  case XML_DOCUMENT_NODE:
+  case XML_HTML_DOCUMENT_NODE:
+    cur = father->children;
+    break;
+  default:
+    return(0);
+  }
+  while (cur != NULL) {
+    if (cur->type == XML_ELEMENT_NODE)
+      ret++;
+    cur = cur->next;
+  }
+  return(ret);
+#endif
 }
 
 const xmlNode * XmlReader::GetFirstChild(const xmlNode * father)
 {
+#if LIBXML_VERSION > 20702
   return xmlFirstElementChild((xmlNode*)father);
+#else
+  // This code is taken from libxml2, release under the MIT license:
+  // Copyright (C) 1998-2003 Daniel Veillard. All Rights Reserved.
+  xmlNodePtr cur = NULL;
+
+  if (father == NULL)
+    return(NULL);
+  switch (father->type) {
+    case XML_ELEMENT_NODE:
+    case XML_ENTITY_NODE:
+    case XML_DOCUMENT_NODE:
+    case XML_HTML_DOCUMENT_NODE:
+      cur = father->children;
+      break;
+    default:
+      return(NULL);
+  }
+  while (cur != NULL) {
+    if (cur->type == XML_ELEMENT_NODE)
+      return(cur);
+    cur = cur->next;
+  }
+  return(NULL);
+#endif
 }
 
 const xmlNode * XmlReader::GetNextSibling(const xmlNode * node)
 {
+#if LIBXML_VERSION > 20702
   return xmlNextElementSibling((xmlNode*)node);
+#else
+  // This code is taken from libxml2, release under the MIT license:
+  // Copyright (C) 1998-2003 Daniel Veillard. All Rights Reserved.
+  if (node == NULL)
+    return(NULL);
+  switch (node->type) {
+  case XML_ELEMENT_NODE:
+  case XML_TEXT_NODE:
+  case XML_CDATA_SECTION_NODE:
+  case XML_ENTITY_REF_NODE:
+  case XML_ENTITY_NODE:
+  case XML_PI_NODE:
+  case XML_COMMENT_NODE:
+  case XML_DTD_NODE:
+  case XML_XINCLUDE_START:
+  case XML_XINCLUDE_END:
+    node = node->next;
+    break;
+  default:
+    return(NULL);
+  }
+  while (node != NULL) {
+    if (node->type == XML_ELEMENT_NODE)
+      return(node);
+    node = node->next;
+  }
+  return(NULL);
+#endif
 }
 
 std::string XmlReader::GetNodeName(const xmlNode * node)
@@ -306,7 +386,7 @@ bool XmlReader::ReadMarkerValue(const xmlNode* marker,
   marker = marker->children;
   if (std::string("text") != (const char*)marker->name) {
     printf("Element '%s' had content '%s'\n",
-              marker->name, marker->content);
+           marker->name, marker->content);
     return "";
   }
   output = (marker->content) ? (const char*)marker->content : "";
