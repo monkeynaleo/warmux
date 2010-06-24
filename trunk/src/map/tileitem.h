@@ -36,14 +36,13 @@ public:
   virtual ~TileItem () {};
 
   bool IsEmpty ();
-  virtual unsigned char GetAlpha(const Point2i &pos) = 0;
-  virtual void Dig(const Point2i &position, const Surface& dig) = 0;
-  virtual void Dig(const Point2i &center, const uint radius) = 0;
-  virtual void ScalePreview(uint8_t* /*odata*/, uint /*opitch*/, uint /*shift*/) { };
-  virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
-  virtual Surface GetSurface() = 0;
-  virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
+  virtual void ScalePreview(uint8_t* /*odata*/, uint /*opitch*/, uint /*shift*/) { };
+  virtual unsigned char GetAlpha(const Point2i &pos) = 0;
+  virtual void Draw(const Point2i &pos) = 0;
+  //~ virtual void Dig(const Point2i &position, const Surface& dig) = 0;
+  //~ virtual void Dig(const Point2i &center, const uint radius) = 0;
+  //~ virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
 #ifdef DBG_TILE
   virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
 #endif
@@ -58,56 +57,66 @@ public:
   Surface *empty;
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
-  Surface GetSurface() {
-    if (!empty) empty = new Surface();
-    return *empty;
-  };
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i &pos);
   bool IsTotallyEmpty() const {return true;};
 };
 
-class TileItem_AlphaSoftware : public TileItem
+class TileItem_NonEmpty : public TileItem
 {
+protected:
+  //friend class TileItem_AlphaSoftware;
   unsigned char* last_filled_pixel;
-  const TileItem_AlphaSoftware& operator=(const TileItem_AlphaSoftware&);
-
-public:
   bool need_check_empty;
   bool need_delete;
+  Surface        m_surface;
+  uint           m_offset;
 
-  TileItem_AlphaSoftware(const Point2i &size);
+  TileItem_NonEmpty() { };
+  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
 
-  unsigned char GetAlpha(const Point2i &pos);
+  virtual void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const = 0;
+
+public:
+  virtual void ScalePreview(uint8_t *odata, uint opitch, uint shift) = 0;
+  virtual bool CheckEmpty() = 0;
+
+  void MergeSprite(const Point2i &position, Surface& spr);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
-  void MergeSprite(const Point2i &position, Surface& spr);
-  void ScalePreview(uint8_t *odata, uint opitch, uint shift);
-  void Draw(const Point2i &pos);
-  Surface GetSurface() { return m_surface; };
-
+  bool NeedCheckEmpty() const { return need_check_empty; }
   bool NeedDelete() const {return need_delete; };
-  bool CheckEmpty();
+  bool IsTotallyEmpty() const { return false; };
+  Surface& GetSurface() { return m_surface; };
+  void Draw(const Point2i &pos);
   void ResetEmptyCheck();
+};
 
-  bool IsTotallyEmpty() const {return false;};
-
-private:
-  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
-  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos) const;
-  unsigned char GetAlpha_Index0(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Index3(const Point2i &pos) const;
-  inline unsigned char GetAlpha_Generic(const Point2i &pos) const;
-
-  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+class TileItem_AlphaSoftware : public TileItem_NonEmpty
+{
   void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-
-  Point2i m_size;
-  Surface m_surface;
+  void SetDefaults(void);
 
 #ifdef DBG_TILE
   void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
 #endif
+
+public:
+  TileItem_AlphaSoftware();
+  TileItem_AlphaSoftware(void *pixels, int stride);
+  // Fill as empty
+  static TileItem_NonEmpty* NewEmpty(void);
+
+  unsigned char GetAlpha(const Point2i &pos)
+  {
+    return m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
+  }
+
+  void Dig(const Point2i &position, const Surface& dig);
+  void Dig(const Point2i &center, const uint radius);
+  void MergeSprite(const Point2i &position, Surface& spr);
+  void ScalePreview(uint8_t *odata, uint opitch, uint shift);
+  bool CheckEmpty();
 };
 
 #endif

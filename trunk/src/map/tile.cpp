@@ -96,8 +96,9 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
     for(c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
       TileItem *ti = item[index + c.x];
       if (!ti->IsTotallyEmpty()) {
-        ti->Dig(position - c * CELL_SIZE, dig);
-        ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+        TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty *>(ti);
+        tin->Dig(position - c * CELL_SIZE, dig);
+        tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
                          pitch, m_shift);
       }
     }
@@ -128,8 +129,10 @@ void Tile::Dig(const Point2i &center, const uint radius)
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
       TileItem *ti = item[index + c.x];
       if (!ti->IsTotallyEmpty()) {
-        ti->Dig(center - c * CELL_SIZE, radius);
-        ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+        TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty *>(ti);
+
+        tin->Dig(center - c * CELL_SIZE, radius);
+        tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
                          pitch, m_shift);
       }
     }
@@ -138,6 +141,23 @@ void Tile::Dig(const Point2i &center, const uint radius)
   }
 
   m_last_preview_redraw = Time::GetInstance()->Read();
+}
+
+TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
+{
+  TileItem          *ti  = item[y*nbCells.x + x];
+  TileItem_NonEmpty *tin = NULL;
+
+  if (ti->IsTotallyEmpty()) {
+    // Delete the TileItem_Empty object
+    delete item[y*nbCells.x + x];
+    tin = TileItem_AlphaSoftware::NewEmpty();
+    item[y*nbCells.x +x] = tin;
+  } else {
+    tin = static_cast<TileItem_NonEmpty*>(ti);
+  }
+
+  return tin;
 }
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
@@ -155,16 +175,6 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
-
-      TileItem *ti = item[c.y*nbCells.x + c.x];
-      if (ti->IsTotallyEmpty()) {
-        delete item[c.y*nbCells.x + c.x];
-        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
-        ti->GetSurface().SetAlpha(0, 0);
-        ti->GetSurface().Fill(0x00000000);
-        ti->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
-      }
-
       Point2i cell_pos = c * CELL_SIZE;
       Rectanglei src;
       Rectanglei dst;
@@ -187,9 +197,10 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
         dst.SetPositionY(0);
       dst.SetSize(src.GetSize());
 
-      ti->GetSurface().Blit(s, dst, src.GetPosition());
-      static_cast<TileItem_AlphaSoftware*>(ti)->ResetEmptyCheck();
-      ti->ScalePreview(pdst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
+      tin->GetSurface().Blit(s, dst, src.GetPosition());
+      tin->ResetEmptyCheck();
+      tin->ScalePreview(pdst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
                        pitch, m_shift);
     }
     pdst += (CELL_SIZE.y>>m_shift)*pitch;
@@ -213,18 +224,11 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
 
-      TileItem *ti = item[c.y*nbCells.x + c.x];
       Point2i offset = position - c * CELL_SIZE;
-      if (ti->IsTotallyEmpty()) {
-        // Don't delete the old item as we use only one empty tile
-        // delete item[c.y*nbCells.x + c.x];
-        ti = item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
-        ti->GetSurface().SetAlpha(0, 0);
-        ti->GetSurface().Fill(0x00000000);
-        ti->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
-      }
-      ti->MergeSprite(offset, surf);
-      ti->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
+      TileItem_NonEmpty *tin    = GetNonEmpty(c.x, c.y);
+
+      tin->MergeSprite(offset, surf);
+      tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
                        pitch, m_shift);
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
@@ -401,17 +405,8 @@ bool Tile::LoadImage(const std::string& filename,
     }
 
     for (; i.x < endCell.x; i.x++) {
-      TileItem_AlphaSoftware *ti        = new TileItem_AlphaSoftware(CELL_SIZE);
-      const uint8_t          *ptr       = buffer + (i.x - startCell.x)*CELL_SIZE.x*4;
-      uint8_t                *ti_ptr    = ti->GetSurface().GetPixels();
-      int                     ti_stride = ti->GetSurface().GetPitch();
-      int                     h         = CELL_SIZE.y;
-
-      while (h--) {
-        memcpy(ti_ptr, ptr, CELL_SIZE.x*4);
-        ti_ptr += ti_stride;
-        ptr    += stride;
-      }
+      TileItem_NonEmpty *ti =
+        new TileItem_AlphaSoftware(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride);
 
       if (ti->CheckEmpty()) {
         // no need to display this tile as it can be deleted!
@@ -485,6 +480,7 @@ void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
       if (item[c.y*nbCells.x + c.x]->IsTotallyEmpty())
         continue;
+      TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(item[c.y*nbCells.x + c.x]);
 
       // For all selected items, clip source and destination blitting rectangles
       Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
@@ -494,7 +490,8 @@ void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
         Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
         Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 
-        GetMainWindow().Blit(item[c.y*nbCells.x + c.x]->GetSurface(),
+
+        GetMainWindow().Blit(tin->GetSurface(),
                              Rectanglei(ptSrc, destRect.GetSize()),
                              ptDest);
       }
@@ -515,9 +512,10 @@ Surface Tile::GetPart(const Rectanglei& rec)
 
   for (i.y = firstCell.y; i.y <= lastCell.y; i.y++) {
     for (i.x = firstCell.x; i.x <= lastCell.x; i.x++) {
-
-      if (item[i.y*nbCells.x + i.x]->IsTotallyEmpty())
+      TileItem *ti = item[i.y*nbCells.x + i.x];
+      if (ti->IsTotallyEmpty())
         continue;
+      TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(ti);
 
       Point2i cell_pos = i * CELL_SIZE;
       Rectanglei src;
@@ -534,9 +532,9 @@ Surface Tile::GetPart(const Rectanglei& rec)
       if (dst.x < 0) dst.x = 0;
       if (dst.y < 0) dst.y = 0;
 
-      item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(0, 0);
-      part.Blit(item[i.y*nbCells.x + i.x]->GetSurface(), src, dst);
-      item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
+      tin->GetSurface().SetAlpha(0, 0);
+      part.Blit(tin->GetSurface(), src, dst);
+      tin->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
     }
   }
   return part;
@@ -544,28 +542,24 @@ Surface Tile::GetPart(const Rectanglei& rec)
 
 void Tile::CheckEmptyTiles()
 {
-  TileItem_AlphaSoftware * t;
   int cellsCount = nbCells.x * nbCells.y;
 
   for (int i = 0; i < cellsCount; i++) {
-    if (item[i]->IsTotallyEmpty()) {
+    if (item[i]->IsTotallyEmpty())
       continue;
-    }
+    TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
 
-    t = static_cast<TileItem_AlphaSoftware*>(item[i]);
-
-    if (t->need_check_empty) {
+    if (t->NeedCheckEmpty())
       t->CheckEmpty();
-    }
 
-    if (t->need_delete) {
+    if (t->NeedDelete()) {
       // no need to display this tile as it can be deleted!
 #ifdef DBG_TILE
       printf("Deleting tile %i\n",i);
 #endif
       delete item[i];
       // Don't instanciate a new empty tile but use the already existing one
-      item[i] = (TileItem*)&EmptyTile;
+      item[i] = &EmptyTile;
     }
   }
 }
