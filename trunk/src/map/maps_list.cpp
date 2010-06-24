@@ -220,17 +220,22 @@ InfoMapAccessor *InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_sky = GetResourceManager().LoadImage(res_profile, "sky");
-
+  uint layer = 0;
   if (Config::GetInstance()->GetDisplayMultiLayerSky()) {
-    uint layer = 0;
     XmlReader::ReadUint(doc.GetRoot(), "sky_layer", layer);
 
     for (uint i = 0; i < layer; i++) {
       std::ostringstream ss;
       ss << "sky_layer_" << i;
-      sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()));
+      sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()).DisplayFormatAlpha());
     }
+  }
+
+  // If no layer, load sky and change it to display format
+  if (!layer) {
+    Surface img = GetResourceManager().LoadImage(res_profile, "sky");
+    img.SetAlpha(0, 0);
+    img_sky = img.DisplayFormat();
   }
 
   if (!random_generated) {

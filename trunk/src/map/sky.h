@@ -24,14 +24,15 @@
 
 #include <list>
 #include <vector>
-#include "graphic/surface.h"
 #include <WORMUX_base.h>
 #include <WORMUX_point.h>
 #include <WORMUX_rectangle.h>
+#include "graphic/surface.h"
 
 class Sky {
   private:
-    std::vector<Surface> images;
+    // Only keep reference of already loaded images
+    std::vector<const Surface*> images;
     Point2i last_pos;
 
     void RedrawParticleList(std::list<Rectanglei> &list) const;
