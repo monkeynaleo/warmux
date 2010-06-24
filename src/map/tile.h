@@ -30,6 +30,7 @@ class Surface;
 class Sprite;
 class TileItem;
 class TileItem_Empty;
+class TileItem_NonEmpty;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
@@ -85,6 +86,7 @@ public:
   uint32_t GetCRC() const { assert(crc); return crc; }
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
+  TileItem_NonEmpty* GetNonEmpty(uint x, uint y);
 
   void FreeMem();
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };
