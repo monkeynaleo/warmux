@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
+#include <SDL.h>
 #include <png.h>
 #include "map/tile.h"
 #include "map/tileitem.h"
@@ -245,11 +246,10 @@ void Tile::InitPreview()
     world_size >>= 1;
     m_shift++;
   }
-  if (m_preview)
-    delete m_preview;
 
-
-  m_preview = new Surface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  m_preview = new Surface;
+  Surface tmp(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  *m_preview = tmp.DisplayFormatAlpha();
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
   // Actual preview size from pixel-wise information
@@ -358,6 +358,7 @@ bool Tile::LoadImage(const std::string& filename,
   FreeMem();
   crc = 0;
   InitTile(Point2i(width, height), upper_left_offset, lower_right_offset);
+
   stride  = (endCell.x+1 - startCell.x)*CELL_SIZE.x*4;
   buffer  = new uint8_t[CELL_SIZE.y*stride];
   offsetx = (upper_left_offset.x % CELL_SIZE.x)*4;
