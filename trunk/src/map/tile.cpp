@@ -305,6 +305,7 @@ static uint32_t read_png_rows(png_structp png_ptr,
 }
 
 bool Tile::LoadImage(const std::string& filename,
+                     uint /*alpha_threshold*/,
                      const Point2i & upper_left_offset,
                      const Point2i & lower_right_offset)
 {

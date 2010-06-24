@@ -24,7 +24,7 @@
 #include <SDL_stdinc.h>
 
 // a hack I need I have no clue why
-#ifndef SDL_static_cast
+#if 0//ndef SDL_static_cast
 #define SDL_reinterpret_cast(type, expression) ((type)(expression))
 #define SDL_static_cast(type, expression) ((type)(expression))
 #endif
@@ -53,12 +53,21 @@ void Ground::Init(){
 
   // Load ground data
   InfoMapAccessor *normal = ActiveMap()->LoadData();
+
+  //Load alpha threshold from XML
+  alpha_threshold = normal->GetAlphaThreshold();
+
+  // Check if the map is "opened"
+  open = normal->IsOpened();
+
   const std::string& filename = normal->GetGroundFileName();
   bool ret;
-  if (normal->IsOpened()) {
-    ret = LoadImage(filename, ActiveMap()->GetUpperLeftPad(), ActiveMap()->GetLowerRightPad());
+  if (open) {
+    ret = LoadImage(filename, alpha_threshold,
+                    ActiveMap()->GetUpperLeftPad(),
+                    ActiveMap()->GetLowerRightPad());
   } else {
-    ret = LoadImage(filename, Point2i(), Point2i());
+    ret = LoadImage(filename, alpha_threshold, Point2i(), Point2i());
   }
   if (!ret)
     Error(_("Error loading ground"));
@@ -66,12 +75,6 @@ void Ground::Init(){
   // Check the size of the map
   ASSERT(Constants::MAP_MIN_SIZE <= GetSize());
   ASSERT(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
-
-  // Check if the map is "opened"
-  open = normal->IsOpened();
-
-  //Load alpha threshold from XML
-  alpha_threshold = normal->GetAlphaThreshold();
 
   std::cout << _("done") << std::endl;
 }
