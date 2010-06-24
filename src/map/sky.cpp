@@ -31,16 +31,14 @@
 void Sky::Init()
 {
   InfoMapAccessor *normal = ActiveMap()->LoadData();
-  std::vector<Surface> sky_layer = normal->ReadSkyLayer();
+  const std::vector<Surface>& sky_layer = normal->ReadSkyLayer();
 
   if (0 < sky_layer.size()) {
     for (uint i = 0; i < sky_layer.size(); i++) {
-      images.push_back(sky_layer[i]);
+      images.push_back(&(sky_layer[i]));
     }
   } else {
-    Surface tmp_image = normal->ReadImgSky();
-    tmp_image.SetAlpha(0, 0);
-    images.push_back(tmp_image.DisplayFormat());
+    images.push_back(&normal->ReadImgSky());
   }
 }
 
@@ -53,11 +51,6 @@ void Sky::Reset()
 
 void Sky::Free()
 {
-  std::vector<Surface>::iterator it = images.begin();
-
-  for ( ; it != images.end(); ++it) {
-    (*it).Free();
-  }
   images.clear();
 }
 
@@ -90,7 +83,7 @@ void Sky::RedrawParticle(const Rectanglei & particle) const
 
   for (uint layer = 0; layer < images.size(); ++layer) {
     ds.SetPosition(GetSkyPos(layer) + tmpPos);
-    GetMainWindow().Blit(images[layer], ds, tmpPos);
+    GetMainWindow().Blit(*(images[layer]), ds, tmpPos);
   }
 }
 
@@ -102,5 +95,5 @@ Point2i Sky::GetSkyPos(uint layer) const
   Double x_sky = (Double)(tmp.x) / (Double)(GetWorld().GetWidth() - GetMainWindow().GetWidth());
   Double y_sky = (Double)(tmp.y) / (Double)(GetWorld().GetHeight() - GetMainWindow().GetHeight());
 
-  return (images[layer].GetSize() - GetMainWindow().GetSize()) * Point2d(x_sky, y_sky);
+  return (images[layer]->GetSize() - GetMainWindow().GetSize()) * Point2d(x_sky, y_sky);
 }

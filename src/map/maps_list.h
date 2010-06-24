@@ -139,7 +139,7 @@ public:
 class InfoMapAccessor : public InfoMapBasicAccessor {
 public:
   InfoMapAccessor(InfoMap* info_) : InfoMapBasicAccessor(info_) { }
-  const std::string& GetGroundFileName() { return info->ground_filename; }
+  const std::string& GetGroundFileName() const { return info->ground_filename; }
   const Surface& ReadImgSky() const { return info->img_sky; }
   const std::vector<Surface>& ReadSkyLayer() const { return info->sky_layer; }
 };
