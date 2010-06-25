@@ -217,47 +217,67 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
  */
 void Surface::MergeSurface( Surface &spr, const Point2i &pos)
 {
-  Uint32 spr_pix, cur_pix;
-  Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
-  SDL_PixelFormat * current_fmt = surface->format;
+  SDL_PixelFormat* cur_fmt = surface->format;
   SDL_PixelFormat * spr_fmt = spr.surface->format;
-  int current_offset, spr_offset;
-  Point2i offset;
 
   spr.Lock();
   Lock();
 
   // for each pixel lines of a source image
-  for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
-    for (offset.y = (pos.y > 0 ? 0 : -pos.y); offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
+  if (cur_fmt->BytesPerPixel == spr_fmt->BytesPerPixel && cur_fmt->BytesPerPixel == 4) {
+    int     cur_pitch = (surface->pitch>>2);
+    Uint32* cur_ptr   = (Uint32*)surface->pixels;
+    int     spr_pitch = (spr.surface->pitch>>2);
+    Uint32* spr_ptr   = (Uint32*)spr.surface->pixels;
+    Uint32  ashift    = cur_fmt->Ashift;
+    Uint32  amask     = cur_fmt->Amask;
+    // shift necessary to move the RGB triplet into the LSBs
+    Uint32  shift     = (ashift) ? 0 : 8;
+    Uint32  spr_pix, cur_pix, a, p_a;
+    Point2i offset;
 
-      // Computing offset on both sprite
-      current_offset = (pos.y + offset.y) * surface->w + pos.x + offset.x;
-      spr_offset = offset.y * spr.surface->w + offset.x;
+    offset.y = (pos.y > 0) ? 0 : -pos.y;
 
-      // Retrieving a pixel of sprite to merge
-      spr_pix = ((Uint32*)spr.surface->pixels)[spr_offset];
-      cur_pix = ((Uint32*)surface->pixels)[current_offset];
+    cur_ptr += pos.x + (pos.y + offset.y) * cur_pitch;
+    spr_ptr += offset.y * spr_pitch;
 
-      // Retreiving each chanel of the pixel using pixel format
-      SDL_GetRGBA(spr_pix, spr_fmt, &r, &g, &b, &a);
-      SDL_GetRGBA(cur_pix, current_fmt, &p_r, &p_g, &p_b, &p_a);
+    for (; offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
+      for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
+        // Retrieving a pixel of sprite to merge
+        spr_pix = spr_ptr[offset.x];
+        cur_pix = cur_ptr[offset.x];
 
-      if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
-        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
-      else if (a > 0) { // alpha is lower => merge color with previous value
-        uint f_a  = a + 1;
-        uint f_ca = 256 - f_a;
+        a   = (spr_pix&amask)>>ashift;
+        p_a = (cur_pix&amask)>>ashift;
 
-        r = (p_r * f_ca + r * f_a)>>8;
-        g = (p_g * f_ca + g * f_a)>>8;
-        b = (p_b * f_ca + b * f_a)>>8;
+        if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) // new pixel with no alpha or nothing on previous pixel
+          cur_ptr[offset.x] = spr_pix;
+        else if (a) { // alpha is lower => merge color with previous value
+          uint f_a  = a + 1;
+          uint f_ca = 256 - f_a;
 
-        a = (a > p_a ? a : p_a);
-        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
+          // A will be discarded either by this shift or the bitmasks used
+          cur_pix >>= shift;
+          spr_pix >>= shift;
+          // Only do 2 components at a time, and avoid one component overflowing
+          // to bleed into other components
+          Uint32 tmp = ((cur_pix&0xFF00FF)*f_ca + (spr_pix&0xFF00FF)*f_a)>>8;
+          tmp &= 0xFF00FF;
+
+          tmp |= (((cur_pix&0xFF00)*f_ca + (spr_pix&0xFF00)*f_a)>>8) & 0xFF00;
+
+          a = (a > p_a) ? a : p_a;
+          cur_ptr[offset.x] = (tmp<<shift) | (a<<ashift);
+        }
       }
+
+      spr_ptr += spr_pitch;
+      cur_ptr += cur_pitch;
     }
+  } else {
+    Error("Not handling that case\n");
   }
+
   Unlock();
   spr.Unlock();
 }
