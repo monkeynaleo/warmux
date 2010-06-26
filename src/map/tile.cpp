@@ -98,8 +98,7 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
       if (!ti->IsTotallyEmpty()) {
         TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty *>(ti);
         tin->Dig(position - c * CELL_SIZE, dig);
-        tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                         pitch, m_shift);
+        tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       }
     }
     dst   += (CELL_SIZE.y>>m_shift)*pitch;
@@ -132,8 +131,7 @@ void Tile::Dig(const Point2i &center, const uint radius)
         TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty *>(ti);
 
         tin->Dig(center - c * CELL_SIZE, radius);
-        tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                         pitch, m_shift);
+        tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       }
     }
     dst   += (CELL_SIZE.y>>m_shift)*pitch;
@@ -200,8 +198,7 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
       TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
       tin->GetSurface().Blit(s, dst, src.GetPosition());
       tin->ResetEmptyCheck();
-      tin->ScalePreview(pdst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                       pitch, m_shift);
+      tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
     }
     pdst += (CELL_SIZE.y>>m_shift)*pitch;
   }
@@ -228,8 +225,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       TileItem_NonEmpty *tin    = GetNonEmpty(c.x, c.y);
 
       tin->MergeSprite(offset, surf);
-      tin->ScalePreview(dst+4*(c.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                       pitch, m_shift);
+      tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
     }
     dst += (CELL_SIZE.y>>m_shift)*pitch;
   }
@@ -252,8 +248,7 @@ void Tile::InitPreview()
   }
 
   m_preview = new Surface;
-  Surface tmp(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  *m_preview = tmp.DisplayFormatAlpha();
+  m_preview->NewSurface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
   // Actual preview size from pixel-wise information
@@ -285,8 +280,7 @@ void Tile::CheckPreview()
 
   for (i.y = startCell.y; i.y < endCell.y; i.y++) {
     for (i.x =startCell.x; i.x < endCell.x; i.x++) {
-      item[i.x + offset]->ScalePreview(dst+4*(i.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                                       pitch, m_shift);
+      item[i.x + offset]->ScalePreview(dst, i.x-startCell.x, pitch, m_shift);
     }
     dst    += (CELL_SIZE.y>>m_shift)*pitch;
     offset += nbCells.x;
@@ -309,7 +303,7 @@ static uint32_t read_png_rows(png_structp png_ptr,
 }
 
 bool Tile::LoadImage(const std::string& filename,
-                     uint /*alpha_threshold*/,
+                     uint alpha_threshold,
                      const Point2i & upper_left_offset,
                      const Point2i & lower_right_offset)
 {
@@ -318,6 +312,7 @@ bool Tile::LoadImage(const std::string& filename,
   png_infop    info_ptr = NULL;
   bool         ret      = false;
   uint8_t     *buffer   = NULL;
+  int          bpp      = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   int          stride;
   int          offsetx, offsety, endoffy;
   Point2i      i;
@@ -405,10 +400,14 @@ bool Tile::LoadImage(const std::string& filename,
     }
 
     for (; i.x < endCell.x; i.x++) {
-      TileItem_NonEmpty *ti =
-        new TileItem_AlphaSoftware(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride);
+      TileItem_NonEmpty *ti;
 
-      if (ti->CheckEmpty()) {
+      if (bpp==2)
+        ti = new TileItem_ColorKey(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride, alpha_threshold);
+      else
+        ti = new TileItem_AlphaSoftware(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride);
+
+      if (ti->NeedDelete()) {
         // no need to display this tile as it can be deleted!
 #ifdef DBG_TILE
         printf("Deleting tile %i\n",i);
@@ -417,8 +416,7 @@ bool Tile::LoadImage(const std::string& filename,
         // Don't instanciate a new empty tile but use the already existing one
         item.push_back(&EmptyTile);
       } else {
-        ti->ScalePreview(dst+4*(i.x-startCell.x)*(CELL_SIZE.x>>m_shift),
-                         pitch, m_shift);
+        ti->ScalePreview(dst, i.x-startCell.x, pitch, m_shift);
         item.push_back(ti);
       }
     }
@@ -549,10 +547,7 @@ void Tile::CheckEmptyTiles()
       continue;
     TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
 
-    if (t->NeedCheckEmpty())
-      t->CheckEmpty();
-
-    if (t->NeedDelete()) {
+    if (t->NeedCheckEmpty() && t->NeedDelete()) {
       // no need to display this tile as it can be deleted!
 #ifdef DBG_TILE
       printf("Deleting tile %i\n",i);

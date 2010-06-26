@@ -37,8 +37,9 @@ public:
 
   bool IsEmpty ();
   virtual bool IsTotallyEmpty() const = 0;
-  virtual void ScalePreview(uint8_t* /*odata*/, uint /*opitch*/, uint /*shift*/) { };
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
+  virtual void ScalePreview(uint8_t* /*odata*/, int /*x*/,
+                            uint /*opitch*/, uint /*shift*/) { };
   virtual void Draw(const Point2i &pos) = 0;
   //~ virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   //~ virtual void Dig(const Point2i &center, const uint radius) = 0;
@@ -65,36 +66,55 @@ public:
 class TileItem_NonEmpty : public TileItem
 {
 protected:
-  //friend class TileItem_AlphaSoftware;
-  unsigned char* last_filled_pixel;
-  bool need_check_empty;
-  bool need_delete;
   Surface        m_surface;
   uint           m_offset;
 
   TileItem_NonEmpty() { };
-  void Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
-
-  virtual void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const = 0;
 
 public:
-  virtual void ScalePreview(uint8_t *odata, uint opitch, uint shift) = 0;
-  virtual bool CheckEmpty() = 0;
+  bool           need_check_empty;
+
+  virtual bool NeedDelete() = 0;
+  virtual void Empty(const int start_x, const int end_x, unsigned char* buf) = 0;
+  virtual void Darken(const int start_x, const int end_x, unsigned char* buf) = 0;
+  virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
   void MergeSprite(const Point2i &position, Surface& spr);
-  void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
-  bool NeedCheckEmpty() const { return need_check_empty; }
-  bool NeedDelete() const {return need_delete; };
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };
+  void ResetEmptyCheck() { need_check_empty = false; }
+  bool NeedCheckEmpty() const { return need_check_empty; }
   void Draw(const Point2i &pos);
-  void ResetEmptyCheck();
+};
+
+class TileItem_ColorKey : public TileItem_NonEmpty
+{
+  Uint32  color_key;
+  void DarkenLine(uint8_t* buf, int start, int len);
+
+public:
+  static Uint32 ColorKey;
+  TileItem_ColorKey();
+  TileItem_ColorKey(void *pixels, int stride, uint threshold);
+  // Fill as empty
+  static TileItem_NonEmpty* NewEmpty(void);
+
+  unsigned char GetAlpha(const Point2i &pos)
+  {
+    return (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
+  }
+
+  void Empty(const int start_x, const int end_x, unsigned char* buf);
+  void Darken(const int start_x, const int end_x, unsigned char* buf);
+  void Dig(const Point2i &position, const Surface& dig);
+  void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
+  bool NeedDelete();
 };
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
-  void Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp) const;
+  void DarkenLine(uint8_t* buf, int start, int len);
   void SetDefaults(void);
 
 #ifdef DBG_TILE
@@ -112,11 +132,11 @@ public:
     return m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
   }
 
+  void Empty(const int start_x, const int end_x, unsigned char* buf);
+  void Darken(const int start_x, const int end_x, unsigned char* buf);
   void Dig(const Point2i &position, const Surface& dig);
-  void Dig(const Point2i &center, const uint radius);
-  void MergeSprite(const Point2i &position, Surface& spr);
-  void ScalePreview(uint8_t *odata, uint opitch, uint shift);
-  bool CheckEmpty();
+  void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
+  bool NeedDelete();
 };
 
 #endif

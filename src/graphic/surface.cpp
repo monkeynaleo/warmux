@@ -102,49 +102,50 @@ void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha)
   Uint32 greenMask;
   Uint32 blueMask;
 
-
   if (autoFree)
     Free();
 
   const SDL_PixelFormat* fmt = SDL_GetVideoSurface()->format;
 
-  // Only use display format if it is at least 32 bits
-  if (fmt->BitsPerPixel >= 24) {
-    redMask   = fmt->Rmask;
-    greenMask = fmt->Gmask;
-    blueMask  = fmt->Bmask;
-  } else {
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-    redMask   = 0xff000000;
-    greenMask = 0x00ff0000;
-    blueMask  = 0x0000ff00;
-#else
-    redMask   = 0x000000ff;
-    greenMask = 0x0000ff00;
-    blueMask  = 0x00ff0000;
-#endif
-  }
-
+  // If no alpha, use default parameters
   if (!useAlpha) {
     alphaMask = 0;
-  } else {
+    surface = SDL_CreateRGBSurface(flags, size.x, size.y,
+                                   fmt->BitsPerPixel, 0, 0, 0, 0);
+
+    if (!surface)
+      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
+ } else {
     // Try using display format mask
-    if (fmt->BitsPerPixel == 32 && fmt->Amask) {
-      alphaMask = fmt->Amask;
+    if (fmt->BitsPerPixel >= 24) {
+      redMask   = fmt->Rmask;
+      greenMask = fmt->Gmask;
+      blueMask  = fmt->Bmask;
     } else {
-      // Use the mask most obvious from the others masks
-      if (redMask==0xff || blueMask==0xff || greenMask==0xff)
-        alphaMask = 0xff000000;
-      else
-        alphaMask = 0x000000ff;
+#if SDL_BYTEORDER != SDL_LIL_ENDIAN
+      redMask   = 0xff000000;
+      greenMask = 0x00ff0000;
+      blueMask  = 0x0000ff00;
+#else
+      redMask   = 0x000000ff;
+      greenMask = 0x0000ff00;
+      blueMask  = 0x00ff0000;
+#endif
     }
+
+    // Use the mask most obvious from the others masks
+    if (redMask==0xff || blueMask==0xff || greenMask==0xff)
+      alphaMask = 0xff000000;
+    else
+      alphaMask = 0x000000ff;
+
+    surface = SDL_CreateRGBSurface(flags, size.x, size.y, 32,
+                                   redMask, greenMask, blueMask, alphaMask);
+
+
+    if (!surface)
+      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
   }
-
-  surface = SDL_CreateRGBSurface(flags, size.x, size.y, 32,
-                                 redMask, greenMask, blueMask, alphaMask);
-
-  if( surface == NULL )
-    Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
 }
 
 /**
@@ -215,7 +216,7 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
  * @param spr
  * @param position
  */
-void Surface::MergeSurface( Surface &spr, const Point2i &pos)
+void Surface::MergeSurface(Surface &spr, const Point2i &pos)
 {
   SDL_PixelFormat* cur_fmt = surface->format;
   SDL_PixelFormat * spr_fmt = spr.surface->format;
@@ -229,13 +230,14 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
     Uint32* cur_ptr   = (Uint32*)surface->pixels;
     int     spr_pitch = (spr.surface->pitch>>2);
     Uint32* spr_ptr   = (Uint32*)spr.surface->pixels;
-    Uint32  ashift    = cur_fmt->Ashift;
-    Uint32  amask     = cur_fmt->Amask;
     // shift necessary to move the RGB triplet into the LSBs
-    Uint32  shift     = (ashift) ? 0 : 8;
     Uint32  spr_pix, cur_pix, a, p_a;
     Point2i offset;
 
+    if (spr_fmt->Ashift!=cur_fmt->Ashift || spr_fmt->Rshift!=cur_fmt->Rshift)
+      fprintf(stderr, "Merging (%u,%u,%u) with (%u,%u,%u)\n",
+              spr_fmt->BytesPerPixel, spr_fmt->Rshift, spr_fmt->Ashift,
+              cur_fmt->BytesPerPixel, cur_fmt->Rshift, cur_fmt->Ashift);
     offset.y = (pos.y > 0) ? 0 : -pos.y;
 
     cur_ptr += pos.x + (pos.y + offset.y) * cur_pitch;
@@ -247,27 +249,27 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
         spr_pix = spr_ptr[offset.x];
         cur_pix = cur_ptr[offset.x];
 
-        a   = (spr_pix&amask)>>ashift;
-        p_a = (cur_pix&amask)>>ashift;
+        a   = (spr_pix&spr_fmt->Amask)>>spr_fmt->Ashift;
+        p_a = (cur_pix&cur_fmt->Amask)>>cur_fmt->Ashift;
 
-        if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) // new pixel with no alpha or nothing on previous pixel
+        if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) {
+          // new pixel with no alpha or nothing on previous pixel
           cur_ptr[offset.x] = spr_pix;
-        else if (a) { // alpha is lower => merge color with previous value
+        } else if (a) {
+          // alpha is lower => merge color with previous value
           uint f_a  = a + 1;
           uint f_ca = 256 - f_a;
 
-          // A will be discarded either by this shift or the bitmasks used
-          cur_pix >>= shift;
-          spr_pix >>= shift;
-          // Only do 2 components at a time, and avoid one component overflowing
-          // to bleed into other components
-          Uint32 tmp = ((cur_pix&0xFF00FF)*f_ca + (spr_pix&0xFF00FF)*f_a)>>8;
-          tmp &= 0xFF00FF;
-
-          tmp |= (((cur_pix&0xFF00)*f_ca + (spr_pix&0xFF00)*f_a)>>8) & 0xFF00;
+          Uint32 r = (((cur_pix&cur_fmt->Rmask)>>cur_fmt->Rshift)*f_ca +
+                      ((spr_pix&spr_fmt->Rmask)>>spr_fmt->Rshift)*f_a)>>8;
+          Uint32 g = (((cur_pix&cur_fmt->Gmask)>>cur_fmt->Gshift)*f_ca +
+                      ((spr_pix&spr_fmt->Gmask)>>spr_fmt->Gshift)*f_a)>>8;
+          Uint32 b = (((cur_pix&cur_fmt->Bmask)>>cur_fmt->Bshift)*f_ca +
+                      ((spr_pix&spr_fmt->Bmask)>>spr_fmt->Bshift)*f_a)>>8;
 
           a = (a > p_a) ? a : p_a;
-          cur_ptr[offset.x] = (tmp<<shift) | (a<<ashift);
+          cur_ptr[offset.x] = (r<<cur_fmt->Rshift)|(g<<cur_fmt->Gshift)|
+                              (b<<cur_fmt->Bshift)|(a<<cur_fmt->Ashift);
         }
       }
 
@@ -275,7 +277,9 @@ void Surface::MergeSurface( Surface &spr, const Point2i &pos)
       cur_ptr += cur_pitch;
     }
   } else {
-    Error("Not handling that case\n");
+    fprintf(stderr, "Not handling: spr=(bpp=%u,rmask=%X) vs surf=(bpp=%u,rmask=%X)\n",
+            spr_fmt->BytesPerPixel, spr_fmt->Rmask, cur_fmt->BytesPerPixel, cur_fmt->Rmask);
+    Blit(spr, pos);
   }
 
   Unlock();
