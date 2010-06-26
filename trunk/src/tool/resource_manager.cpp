@@ -163,7 +163,7 @@ MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::
 }
 
 Surface ResourceManager::LoadImage(const std::string& filename,
-        bool alpha, bool set_colorkey, Uint32 colorkey) const
+                                   bool alpha, bool set_colorkey, Uint32 colorkey) const
 {
   Surface pre_surface(filename.c_str());
   Surface end_surface;
@@ -253,7 +253,7 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
 
   if (XmlReader::ReadStringAttr(elem, "size", size)) {
     Rectanglei source_rect(0,0,image.GetSize().x,image.GetSize().y);
-    
+
     if (size.find(",") != size.npos) {
       source_rect.SetSizeX(atoi((size.substr(0, size.find(","))).c_str()));
       source_rect.SetSizeY(atoi((size.substr(size.find(",") + 1, size.length())).c_str()));
@@ -268,11 +268,10 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
       } else
         Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
     }
-    
+
     Surface sub_image(source_rect.GetSize(), SDL_SWSURFACE, true);
     sub_image.MergeSurface(image, -source_rect.GetPosition());
     return sub_image;
-    
   }
   else {
     return image;
@@ -280,7 +279,7 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
 
   // TODO load more properties in xml : alpha, colorkey....
   //      By now force alpha and no colorkey
- 
+
 }
 
 Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& resource_name) const

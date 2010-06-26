@@ -373,7 +373,6 @@ void Interface::DrawMapPreview()
       // Draw box with color according to water type
       water_surf.BoxColor(water, water_color);
       minimap->MergeSurface(water_surf,Point2i(0,0));
-
     }
     GenerateStyledBox(*minimap);
   }
