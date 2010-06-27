@@ -158,7 +158,7 @@ IF(FRIBIDI_FOUND)
 ENDIF(FRIBIDI_FOUND)
 
 # config.h and compile-flags
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/src/config.h.cmake ${PROJECT_SOURCE_DIR}/src/config.h)
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/src/config.h.cmake ${PROJECT_SOURCE_DIR}/lib/wormux/include/config_autotools.h)
 ADD_DEFINITIONS(-DHAVE_CONFIG_H)
 
 ADD_DEFINITIONS(-DINSTALL_DATADIR=\\"${INSTALL_DATADIR}\\")
