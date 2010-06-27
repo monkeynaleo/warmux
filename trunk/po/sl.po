@@ -1047,7 +1047,7 @@ msgstr "Karta"
 #: src/map/maps_list.cpp:109
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
-msgstr ""
+msgstr "Karta %s v imeniku '%s' ni veljavna: %s"
 
 #: src/map/map.cpp:304
 #, c-format
@@ -1435,6 +1435,8 @@ msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
 msgstr ""
+"V načinu Blitz se po vsaki potezi ekipni čas *ne* ponastavi. Ekipa izgubi, če "
+"ji zmanjka članov ali časa."
 
 #: src/network/network_client.cpp:96
 #, c-format
