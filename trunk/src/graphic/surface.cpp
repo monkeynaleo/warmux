@@ -234,47 +234,86 @@ void Surface::MergeSurface(Surface &spr, const Point2i &pos)
     Uint32  spr_pix, cur_pix, a, p_a;
     Point2i offset;
 
-    if (spr_fmt->Ashift!=cur_fmt->Ashift || spr_fmt->Rshift!=cur_fmt->Rshift)
-      fprintf(stderr, "Merging (%u,%u,%u) with (%u,%u,%u)\n",
-              spr_fmt->BytesPerPixel, spr_fmt->Rshift, spr_fmt->Ashift,
-              cur_fmt->BytesPerPixel, cur_fmt->Rshift, cur_fmt->Ashift);
     offset.y = (pos.y > 0) ? 0 : -pos.y;
 
     cur_ptr += pos.x + (pos.y + offset.y) * cur_pitch;
     spr_ptr += offset.y * spr_pitch;
 
-    for (; offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
-      for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
-        // Retrieving a pixel of sprite to merge
-        spr_pix = spr_ptr[offset.x];
-        cur_pix = cur_ptr[offset.x];
+    // Same masks: use more optimized version
+    if (cur_fmt->Amask == spr_fmt->Amask) {
+      Uint32  ashift    = cur_fmt->Ashift;
+      Uint32  amask     = cur_fmt->Amask;
+      // shift necessary to move the RGB triplet into the LSBs
+      Uint32  shift     = (ashift) ? 0 : 8;
 
-        a   = (spr_pix&spr_fmt->Amask)>>spr_fmt->Ashift;
-        p_a = (cur_pix&cur_fmt->Amask)>>cur_fmt->Ashift;
-
-        if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) {
-          // new pixel with no alpha or nothing on previous pixel
-          cur_ptr[offset.x] = spr_pix;
-        } else if (a) {
-          // alpha is lower => merge color with previous value
-          uint f_a  = a + 1;
-          uint f_ca = 256 - f_a;
-
-          Uint32 r = (((cur_pix&cur_fmt->Rmask)>>cur_fmt->Rshift)*f_ca +
-                      ((spr_pix&spr_fmt->Rmask)>>spr_fmt->Rshift)*f_a)>>8;
-          Uint32 g = (((cur_pix&cur_fmt->Gmask)>>cur_fmt->Gshift)*f_ca +
-                      ((spr_pix&spr_fmt->Gmask)>>spr_fmt->Gshift)*f_a)>>8;
-          Uint32 b = (((cur_pix&cur_fmt->Bmask)>>cur_fmt->Bshift)*f_ca +
-                      ((spr_pix&spr_fmt->Bmask)>>spr_fmt->Bshift)*f_a)>>8;
-
-          a = (a > p_a) ? a : p_a;
-          cur_ptr[offset.x] = (r<<cur_fmt->Rshift)|(g<<cur_fmt->Gshift)|
-                              (b<<cur_fmt->Bshift)|(a<<cur_fmt->Ashift);
+      for (; offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
+        for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
+          // Retrieving a pixel of sprite to merge
+          spr_pix = spr_ptr[offset.x];
+          cur_pix = cur_ptr[offset.x];
+  
+          a   = (spr_pix&amask)>>ashift;
+          p_a = (cur_pix&amask)>>ashift;
+  
+          if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) // new pixel with no alpha or nothing on previous pixel
+            cur_ptr[offset.x] = spr_pix;
+          else if (a) { // alpha is lower => merge color with previous value
+            uint f_a  = a + 1;
+            uint f_ca = 256 - f_a;
+  
+            // A will be discarded either by this shift or the bitmasks used
+            cur_pix >>= shift;
+            spr_pix >>= shift;
+            // Only do 2 components at a time, and avoid one component overflowing
+            // to bleed into other components
+            Uint32 tmp = ((cur_pix&0xFF00FF)*f_ca + (spr_pix&0xFF00FF)*f_a)>>8;
+            tmp &= 0xFF00FF;
+  
+            tmp |= (((cur_pix&0xFF00)*f_ca + (spr_pix&0xFF00)*f_a)>>8) & 0xFF00;
+  
+            a = (a > p_a) ? a : p_a;
+            cur_ptr[offset.x] = (tmp<<shift) | (a<<ashift);
+          }
         }
+  
+        spr_ptr += spr_pitch;
+        cur_ptr += cur_pitch;
       }
-
-      spr_ptr += spr_pitch;
-      cur_ptr += cur_pitch;
+    } else {
+      // Troublesome masks: use generic version
+      for (; offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
+        for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
+          // Retrieving a pixel of sprite to merge
+          spr_pix = spr_ptr[offset.x];
+          cur_pix = cur_ptr[offset.x];
+  
+          a   = (spr_pix&spr_fmt->Amask)>>spr_fmt->Ashift;
+          p_a = (cur_pix&cur_fmt->Amask)>>cur_fmt->Ashift;
+  
+          if (a == SDL_ALPHA_OPAQUE || (!p_a && a)) {
+            // new pixel with no alpha or nothing on previous pixel
+            cur_ptr[offset.x] = spr_pix;
+          } else if (a) {
+            // alpha is lower => merge color with previous value
+            uint f_a  = a + 1;
+            uint f_ca = 256 - f_a;
+  
+            Uint32 r = (((cur_pix&cur_fmt->Rmask)>>cur_fmt->Rshift)*f_ca +
+                        ((spr_pix&spr_fmt->Rmask)>>spr_fmt->Rshift)*f_a)>>8;
+            Uint32 g = (((cur_pix&cur_fmt->Gmask)>>cur_fmt->Gshift)*f_ca +
+                        ((spr_pix&spr_fmt->Gmask)>>spr_fmt->Gshift)*f_a)>>8;
+            Uint32 b = (((cur_pix&cur_fmt->Bmask)>>cur_fmt->Bshift)*f_ca +
+                        ((spr_pix&spr_fmt->Bmask)>>spr_fmt->Bshift)*f_a)>>8;
+  
+            a = (a > p_a) ? a : p_a;
+            cur_ptr[offset.x] = (r<<cur_fmt->Rshift)|(g<<cur_fmt->Gshift)|
+                                (b<<cur_fmt->Bshift)|(a<<cur_fmt->Ashift);
+          }
+        }
+  
+        spr_ptr += spr_pitch;
+        cur_ptr += cur_pitch;
+      }
     }
   } else {
     fprintf(stderr, "Not handling: spr=(bpp=%u,rmask=%X) vs surf=(bpp=%u,rmask=%X)\n",
