@@ -27,9 +27,9 @@
 
 #include <WORMUX_vector2.h>
 
-typedef Vector2<int>    Point2i;
+typedef Vector2<int32_t> Point2i;
 typedef Vector2<Double>  Point2f;
-typedef Vector2<Double> Point2d;
+typedef Vector2<Double>  Point2d;
 
 #define POINT2D_2_POINT2I(point) \
     (Point2i)( point )

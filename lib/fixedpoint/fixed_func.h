@@ -49,7 +49,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "stdint_fallback.h"
 #endif
 
+#define FIXINT_BITS  64
+
 namespace fixedpoint {
+
+#if FIXINT_BITS == 64
+typedef int64_t fixint_t;
+#else
+typedef int32_t fixint_t;
+#endif
 
 // The template argument p in all of the following functions refers to the 
 // fixed point precision (e.g. p = 8 gives 24.8 fixed point functions).
@@ -57,7 +65,7 @@ namespace fixedpoint {
 // Perform a fixed point multiplication without a 64-bit intermediate result.
 // This is fast but beware of overflow!
 template <int p> 
-inline int64_t fixmulf(int64_t a, int64_t b)
+inline fixint_t fixmulf(fixint_t a, fixint_t b)
 {
 	return (a * b) >> p;
 }
@@ -65,14 +73,14 @@ inline int64_t fixmulf(int64_t a, int64_t b)
 // Perform a fixed point multiplication using a 64-bit intermediate result to
 // prevent overflow problems.
 template <int p>
-inline int64_t fixmul(int64_t a, int64_t b)
+inline fixint_t fixmul(fixint_t a, fixint_t b)
 {
 	return ((a * b) >> p);
 }
 
 // Fixed point division
 template <int p>
-inline int fixdiv(int64_t a, int64_t b)
+inline int fixdiv(fixint_t a, fixint_t b)
 {
 #if 1
 	return ((a << p) / b);
@@ -80,7 +88,7 @@ inline int fixdiv(int64_t a, int64_t b)
 	// The following produces the same results as the above but gcc 4.0.3 
 	// generates fewer instructions (at least on the ARM processor).
 	union {
-		int64_t a;
+		fixint_t a;
 		struct {
 			int32_t l;
 			int32_t h;
@@ -129,7 +137,7 @@ namespace detail {
 // q is the precision of the input
 // output has 32-q bits of fraction
 template <int p>
-inline int64_t fixinv(int64_t a)
+inline fixint_t fixinv(fixint_t a)
 {
 	return fixdiv<p>(1 << p, a);
 }
@@ -173,24 +181,24 @@ inline int fixinv(int32_t a)
 // Conversion from and to float
 
 template <int p>
-float fix2float(int64_t f)
+float fix2float(fixint_t f)
 {
 	return (float)f / (1 << p);
 }
 
 template <int p>
-int64_t float2fix(float f)
+fixint_t float2fix(float f)
 {
-	return (int64_t)(f * (1 << p));
+	return (fixint_t)(f * (1 << p));
 }
 
-int64_t fixcos16(int64_t a);
-int64_t fixsin16(int64_t a);
-int64_t fixacos16(int64_t a);
-int64_t fixasin16(int64_t a);
-int64_t fixatan16(int64_t a);
-int64_t fixrsqrt16(int64_t a);
-int64_t fixsqrt16(int64_t a);
+fixint_t fixcos16(fixint_t a);
+fixint_t fixsin16(fixint_t a);
+fixint_t fixacos16(fixint_t a);
+fixint_t fixasin16(fixint_t a);
+fixint_t fixatan16(fixint_t a);
+fixint_t fixrsqrt16(fixint_t a);
+fixint_t fixsqrt16(fixint_t a);
 
 } // end namespace fixedpoint
 

@@ -471,8 +471,8 @@ template<class T> class Vector2
 };
 
 template < >
-inline int Vector2<int>::Distance(const Vector2<int> & p2) const{
-  return (int)sqrt((Double)((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y)));
+inline int Vector2<int32_t>::Distance(const Vector2<int32_t> & p2) const{
+  return (int32_t)sqrt((Double)((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y)));
 }
 
 // some other auxilliaries
