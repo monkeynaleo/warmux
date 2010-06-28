@@ -130,14 +130,19 @@ void Action::Push(int val)
 
 void Action::Push(Double val)
 {
+#if FIXINT_BITS == 32
+  uint32_t tmp = *((uint32_t*)&val);
+  var.push_back(tmp);
+#else
   uint32_t tmp[2];
   memcpy(tmp, &val, 8);
-#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+#  if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
-#else
+#  else
   var.push_back(tmp[1]);
   var.push_back(tmp[0]);
+#  endif
 #endif
 }
 
@@ -212,18 +217,25 @@ Double Action::PopDouble()
   }
 
   Double val;
-  uint32_t tmp[2];
-#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-  tmp[0] = var.front();
+
+#if FIXINT_BITS == 32
+  uint32_t tmp = var.front();
   var.pop_front();
-  tmp[1] = var.front();
+  val = *((Double*)&tmp);
 #else
+  uint32_t tmp[2];
+#  if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+  tmp[0] = var.front();
+  var.pop_front();
+  tmp[1] = var.front();
+#  else
   tmp[1] = var.front();
   var.pop_front();
   tmp[0] = var.front();
-#endif
+#  endif
   var.pop_front();
   memcpy(&val, tmp, 8);
+#endif
 
   return val;
 }

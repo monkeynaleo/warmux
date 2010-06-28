@@ -48,9 +48,9 @@ public:
   Double GetDouble();
   Double GetDouble(Double max);
   Double GetDouble(Double min, Double max);
-  int GetInt(int min, int max);
-  uint GetUint(uint min, uint max);
-  long GetLong(long min, long max);
+  int32_t GetInt(int32_t min, int32_t max);
+  uint GetUint(uint32_t min, uint32_t max);
+  int32_t GetLong(int32_t min, int32_t max);
   Point2i GetPoint(const Rectanglei &rect);
   Point2i GetPoint(const Point2i &pt);
   int GetSign();

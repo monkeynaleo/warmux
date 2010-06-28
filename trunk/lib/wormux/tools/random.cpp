@@ -91,12 +91,12 @@ Double RandomGenerator::GetDouble()
 /**
  *  Get a random number between min and max
  */
-long RandomGenerator::GetLong(long min, long max)
+int32_t RandomGenerator::GetLong(int32_t min, int32_t max)
 {
-  return min + (long)GetDouble(max - min + 1);
+  return min + (int32_t)GetDouble(max - min + 1);
 }
 
-int RandomGenerator::GetInt(int min, int max)
+int32_t RandomGenerator::GetInt(int32_t min, int32_t max)
 {
   return GetLong(min, max);
 }
@@ -126,15 +126,15 @@ Point2i RandomGenerator::GetPoint(const Rectanglei &rect)
 {
   Point2i topPoint = rect.GetPosition();
   Point2i bottomPoint = rect.GetBottomRightPoint();
-  long x = GetLong(topPoint.x, bottomPoint.x);
-  long y = GetLong(topPoint.y, bottomPoint.y);
+  int32_t x = GetLong(topPoint.x, bottomPoint.x);
+  int32_t y = GetLong(topPoint.y, bottomPoint.y);
   return Point2i( x, y );
 }
 
 Point2i RandomGenerator::GetPoint(const Point2i &pt)
 {
-  long x = GetLong(0, pt.x - 1);
-  long y = GetLong(0, pt.y - 1);
+  int32_t x = GetLong(0, pt.x - 1);
+  int32_t y = GetLong(0, pt.y - 1);
   return Point2i( x, y );
 }
 
