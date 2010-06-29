@@ -91,7 +91,6 @@ public:
 class TileItem_ColorKey : public TileItem_NonEmpty
 {
   Uint32  color_key;
-  void DarkenLine(uint8_t* buf, int start, int len);
 
 public:
   static Uint32 ColorKey;
@@ -114,7 +113,6 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
-  void DarkenLine(uint8_t* buf, int start, int len);
   void SetDefaults(void);
 
 #ifdef DBG_TILE
