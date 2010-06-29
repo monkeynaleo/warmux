@@ -75,8 +75,8 @@ public:
   bool           need_check_empty;
 
   virtual bool NeedDelete() = 0;
-  virtual void Empty(const int start_x, const int end_x, unsigned char* buf) = 0;
-  virtual void Darken(const int start_x, const int end_x, unsigned char* buf) = 0;
+  virtual void Empty(int start_x, int end_x, unsigned char* buf) = 0;
+  virtual void Darken(int start_x, int end_x, unsigned char* buf) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
   void MergeSprite(const Point2i &position, Surface& spr);
@@ -105,8 +105,8 @@ public:
     return (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
   }
 
-  void Empty(const int start_x, const int end_x, unsigned char* buf);
-  void Darken(const int start_x, const int end_x, unsigned char* buf);
+  void Empty(int start_x, int end_x, unsigned char* buf);
+  void Darken(int start_x, int end_x, unsigned char* buf);
   void Dig(const Point2i &position, const Surface& dig);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
   bool NeedDelete();
@@ -132,8 +132,8 @@ public:
     return m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
   }
 
-  void Empty(const int start_x, const int end_x, unsigned char* buf);
-  void Darken(const int start_x, const int end_x, unsigned char* buf);
+  void Empty(int start_x, int end_x, unsigned char* buf);
+  void Darken(int start_x, int end_x, unsigned char* buf);
   void Dig(const Point2i &position, const Surface& dig);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
   bool NeedDelete();

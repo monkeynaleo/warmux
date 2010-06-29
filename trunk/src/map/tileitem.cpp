@@ -148,16 +148,16 @@ TileItem_NonEmpty* TileItem_ColorKey::NewEmpty(void)
   return ti;
 }
 
-void TileItem_ColorKey::Darken(const int start_x, const int end_x, unsigned char* buf)
+void TileItem_ColorKey::Darken(int start_x, int end_x, unsigned char* buf)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    int tile_length = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
     uint16_t *ptr = (uint16_t*)buf;
-    ptr += tile_start_x;
-    while(tile_length--) {
+    ptr += start_x;
+    while(end_x--) {
       uint16_t s = ptr[0];
       if (s != color_key)
         ptr[0] = (s>>1)&0x7BEF;
@@ -166,16 +166,16 @@ void TileItem_ColorKey::Darken(const int start_x, const int end_x, unsigned char
   }
 }
 
-void TileItem_ColorKey::Empty(const int start_x, const int end_x, unsigned char* buf)
+void TileItem_ColorKey::Empty(int start_x, int end_x, unsigned char* buf)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    int tile_length = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
     uint16_t *ptr = (uint16_t*)buf;
-    ptr += tile_start_x;
-    while (tile_length--)
+    ptr += start_x;
+    while (end_x--)
       *(ptr++) = color_key;
   }
 }
@@ -354,15 +354,15 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, ui
   }
 }
 
-void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf)
+void TileItem_AlphaSoftware::Empty(int start_x, int end_x, unsigned char* buf)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    int tile_length = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
-    buf += tile_start_x * 4;
-    memset(buf, 0 , 4 * tile_length);
+    buf += start_x * 4;
+    memset(buf, 0 , 4 * end_x);
   }
 }
 
@@ -382,16 +382,16 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
   }
 }
 
-void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf)
+void TileItem_AlphaSoftware::Darken(int start_x, int end_x, unsigned char* buf)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    int tile_length = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
     uint32_t *ptr = (uint32_t*)buf;
-    ptr += tile_start_x;
-    while(tile_length--) {
+    ptr += start_x;
+    while(end_x--) {
       uint32_t s = ptr[0];
       // Mask component MSBs and alpha, then readd alpha
   #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
