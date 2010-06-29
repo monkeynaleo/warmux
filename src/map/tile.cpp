@@ -241,8 +241,10 @@ void Tile::InitPreview()
   m_last_video_size  = GetMainWindow().GetSize();
   m_shift = 0;
 
-  // Task 6730: biggest dimension won't be bigger than one third, often less in fact
-  while (5*world_size>2*m_last_video_size) {
+  // Task 6730: biggest dimension won't be bigger than 2/5,
+  // often less in fact
+  while (5*world_size.x>2*m_last_video_size.x ||
+         5*world_size.y>2*m_last_video_size.y) {
     world_size >>= 1;
     m_shift++;
   }
