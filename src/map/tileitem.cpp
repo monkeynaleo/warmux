@@ -327,27 +327,10 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, ui
         ptr += ipitch;
       }
 
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-      p3 = (p3 + (1<<(2*shift-1)))>>(2*shift);
-      if (p3 < 160) {
-        *((Uint32*)(odata+4*i)) = 0;
-      } else {
-        odata[4*i+0] = (p0 + (1<<(2*shift-1)))>>(2*shift);
-        odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
-        odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
-        odata[4*i+3] = 255;
-      }
-#else
-      p0 = (p0 + (1<<(2*shift-1)))>>(2*shift);
-      if (p0 < 160) {
-        *((Uint32*)(odata+4*i)) = 0;
-      } else {
-        odata[4*i+0] = 255;
-        odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
-        odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
-        odata[4*i+3] = (p3 + (1<<(2*shift-1)))>>(2*shift);
-      }
-#endif
+      odata[4*i+0] = (p0 + (1<<(2*shift-1)))>>(2*shift);
+      odata[4*i+1] = (p1 + (1<<(2*shift-1)))>>(2*shift);
+      odata[4*i+2] = (p2 + (1<<(2*shift-1)))>>(2*shift);
+      odata[4*i+3] = (p3 + (1<<(2*shift-1)))>>(2*shift);
     }
     odata += opitch;
     idata += ipitch<<shift;
