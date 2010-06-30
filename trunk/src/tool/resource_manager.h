@@ -84,8 +84,7 @@ public:
   Point2i LoadPoint2i(const Profile *profile, const std::string& resource_name) const;
   Point2d LoadPoint2d(const Profile *profile, const std::string& resource_name) const;
   std::string LoadImageFilename(const Profile *profile, const std::string& resource_name) const;
-  Surface LoadImage(const Profile *profile, const std::string& resource_name,
-                    bool alpha = true, bool set_colorkey = false, Uint32 colorkey = 0) const;
+  Surface LoadImage(const Profile *profile, const std::string& resource_name, bool alpha = true) const;
 
   Sprite *LoadSprite(const Profile *profile, const std::string& resource_name) const;
 
