@@ -243,8 +243,7 @@ std::string ResourceManager::LoadImageFilename(const Profile *profile, const std
   return profile->relative_path+filename;
 }
 
-Surface ResourceManager::LoadImage(const Profile *profile, const std::string& resource_name,
-                                   bool alpha, bool set_colorkey, Uint32 colorkey) const
+Surface ResourceManager::LoadImage(const Profile *profile, const std::string& resource_name, bool alpha) const
 {
   std::string    filename = LoadImageFilename(profile, resource_name);
   Surface        image    = LoadImage(filename, alpha, set_colorkey, colorkey);
