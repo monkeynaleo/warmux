@@ -87,6 +87,8 @@ public:
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
   TileItem_NonEmpty* GetNonEmpty(uint x, uint y);
+  TileItem_NonEmpty* CreateNonEmpty(uint8_t *ptr, int stride,
+                                    uint alpha_threshold);
 
   void FreeMem();
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };

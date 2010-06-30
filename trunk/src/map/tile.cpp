@@ -158,6 +158,22 @@ TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
   return tin;
 }
 
+TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride,
+                                        uint alpha_threshold)
+{
+  Uint32 *pix = (Uint32 *)ptr;
+
+  for (int y=0; y<CELL_SIZE.y; y++) {
+    for (int x=0; x<CELL_SIZE.x; x++)
+      if (pix[x])
+        return new TileItem_AlphaSoftware(ptr, stride);
+    pix += stride>>2;
+  }
+
+  printf(">>>   Really had non-alpha one\n");
+  return new TileItem_ColorKey24(ptr, stride, alpha_threshold);
+}
+
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 {
   Rectanglei rec       = Rectanglei(pos, spr->GetSizeMax());
@@ -404,10 +420,13 @@ bool Tile::LoadImage(const std::string& filename,
     for (; i.x < endCell.x; i.x++) {
       TileItem_NonEmpty *ti;
 
-      if (bpp==2)
-        ti = new TileItem_ColorKey(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride, alpha_threshold);
-      else
-        ti = new TileItem_AlphaSoftware(buffer + (i.x - startCell.x)*CELL_SIZE.x*4, stride);
+      if (bpp==2) {
+        ti = new TileItem_ColorKey16(buffer + (i.x - startCell.x)*CELL_SIZE.x*4,
+                                     stride, alpha_threshold);
+      } else {
+        ti = CreateNonEmpty(buffer + (i.x - startCell.x)*CELL_SIZE.x*4,
+                            stride, alpha_threshold);
+      }
 
       if (ti->NeedDelete()) {
         // no need to display this tile as it can be deleted!
