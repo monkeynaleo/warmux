@@ -33,7 +33,7 @@ HelpMenu::HelpMenu()  :
   img_keyboard(NULL)
 {
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  img_keyboard = new Sprite(GetResourceManager().LoadImage(res, "help/shortkeys"), true);
+  img_keyboard = new Sprite(GetResourceManager().LoadImage(res, "help/shortkeys", true), true);
   img_keyboard->cache.EnableLastFrameCache();
   GetResourceManager().UnLoadXMLProfile(res);
 }
