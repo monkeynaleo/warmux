@@ -25,10 +25,6 @@
 
 const Point2i CELL_SIZE(64, 64);
 
-#ifdef DEBUG
-//#define DBG_TILE
-#endif
-
 class TileItem
 {
 public:
@@ -44,9 +40,6 @@ public:
   //~ virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   //~ virtual void Dig(const Point2i &center, const uint radius) = 0;
   //~ virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
-#ifdef DBG_TILE
-  virtual void FillWithRGB(Uint8 /*r*/, Uint8 /*g*/, Uint8 /*b*/) {};
-#endif
 };
 
 class TileItem_Empty : public TileItem
@@ -59,7 +52,7 @@ public:
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
-  void Draw(const Point2i &pos);
+  void Draw(const Point2i &pos) { };
   bool IsTotallyEmpty() const {return true;};
 };
 
@@ -142,10 +135,6 @@ public:
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
   void SetDefaults(void);
-
-#ifdef DBG_TILE
-  void FillWithRGB(Uint8 r, Uint8 g, Uint8 b);
-#endif
 
 public:
   TileItem_AlphaSoftware();

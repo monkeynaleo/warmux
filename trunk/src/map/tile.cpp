@@ -429,9 +429,6 @@ bool Tile::LoadImage(const std::string& filename,
 
       if (ti->NeedDelete()) {
         // no need to display this tile as it can be deleted!
-#ifdef DBG_TILE
-        printf("Deleting tile %i\n",i);
-#endif
         delete ti;
         // Don't instanciate a new empty tile but use the already existing one
         item.push_back(&EmptyTile);
@@ -569,9 +566,6 @@ void Tile::CheckEmptyTiles()
 
     if (t->NeedCheckEmpty() && t->NeedDelete()) {
       // no need to display this tile as it can be deleted!
-#ifdef DBG_TILE
-      printf("Deleting tile %i\n",i);
-#endif
       delete item[i];
       // Don't instanciate a new empty tile but use the already existing one
       item[i] = &EmptyTile;

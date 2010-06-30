@@ -28,18 +28,6 @@
 #include "map/camera.h"
 #include "tool/math_tools.h"
 #include <WORMUX_point.h>
-#ifdef DBG_TILE
-#include "graphic/colors.h"
-#endif
-
-void TileItem_Empty::Draw(const Point2i &/*pos*/)
-{
-#ifdef DBG_TILE
-  GetMainWindow().FillRect(Rectanglei(pos * CELL_SIZE - Camera::GetInstance()->GetPosition(),
-                                      CELL_SIZE),
-                           c_red);
-#endif
-}
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem_NonEmpty::Draw(const Point2i &pos)
@@ -532,30 +520,6 @@ void TileItem_AlphaSoftware::Darken(int start_x, int end_x, unsigned char* buf)
     }
   }
 }
-
-#ifdef DBG_TILE
-void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
-{
-  int x=0, y=0;
-  while(y < CELL_SIZE.y)
-  {
-    Uint32 pixel = m_surface.GetPixel();
-    Uint8 tmp,a;
-    m_surface.GetRGBA(pixel, tmp, tmp, tmp, a);
-    if(a != SDL_ALPHA_TRANSPARENT)
-    {
-      Uint32 col = m_surface.MapRGBA(r, g, b, a);
-      m_surface.PutPixel(x, y, col);
-    }
-    x++;
-    if(x == CELL_SIZE.y)
-    {
-      x = 0;
-      y++;
-    }
-  }
-}
-#endif
 
 bool TileItem_AlphaSoftware::NeedDelete()
 {
