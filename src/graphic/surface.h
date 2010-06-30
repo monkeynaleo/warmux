@@ -122,14 +122,12 @@ public:
   void MergeAlphaSurface(const Surface &mask, const Point2i &pos);
 
   int SetColorKey(Uint32 flag, Uint32 key);
-  int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
   void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const;
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
   Color GetColor(Uint32 color) const;
   Uint32 MapColor(const Color& color) const;
 
-  void SetClipRect(const Rectanglei &rect);
   void Flip();
 
   int BoxColor(const Rectanglei &rect, const Color &color);
