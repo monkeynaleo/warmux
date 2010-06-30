@@ -52,7 +52,7 @@ public:
   unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
-  void Draw(const Point2i &pos) { };
+  void Draw(const Point2i&) { };
   bool IsTotallyEmpty() const {return true;};
 };
 
