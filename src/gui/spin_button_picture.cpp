@@ -38,12 +38,12 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
   position = Point2i(-1, -1);
   size = _size;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  m_image = GetResourceManager().LoadImage(res, resource_id);
-  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background");
-  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground");
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  m_image = GetResourceManager().LoadImage(res, resource_id, true);
+  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background", true);
+  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground", true);
   m_progress_color = GetResourceManager().LoadColor(res, "menu/annulus_progress_color");
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -84,7 +84,8 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
   uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
   uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
 
-  Double angle = (TWO * PI - open_angle_value) * (GetValue() - GetMinValue()) / (GetMaxValue() - GetMinValue());
+  Double angle = (TWO * PI - open_angle_value) * (GetValue() - GetMinValue())
+               / (GetMaxValue() - GetMinValue());
   Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / TWO);
 
   tmp->SetPlaneColor(m_progress_color);
@@ -112,7 +113,7 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
 
   // 6. and finally the label image
   txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-				   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+                                   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)

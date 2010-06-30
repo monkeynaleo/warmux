@@ -25,17 +25,17 @@
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 
-SpinButton::SpinButton (const std::string & _label, 
+SpinButton::SpinButton (const std::string & _label,
                         int width,
-                        int value, 
-                        int step, 
-                        int min_value, 
+                        int value,
+                        int step,
+                        int min_value,
                         int max_value,
-                        const Color & color, 
+                        const Color & color,
                         bool _shadowed) :
-  AbstractSpinButton(value, 
-                     step, 
-                     min_value, 
+  AbstractSpinButton(value,
+                     step,
+                     min_value,
                      max_value),
   shadowed(false),
   txtLabel(NULL),
@@ -48,7 +48,7 @@ SpinButton::SpinButton (const std::string & _label,
   size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   shadowed = _shadowed;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   txtLabel = new Label(_label, 100, Font::FONT_SMALL, Font::FONT_BOLD, color, false, shadowed);
   txtLabel->SetMaxWidth(size.x - 30);
@@ -64,7 +64,7 @@ SpinButton::SpinButton (const std::string & _label,
   m_plus->SetPosition(position.x + size.x - 5, position.y);
   m_minus = new Button(res, "menu/minus");
   m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   ValueHasChanged();
 }
@@ -111,7 +111,7 @@ bool SpinButton::LoadXMLConfiguration(void)
     txtLabel = new Label("n/a", 100);
   }
   txtLabel->Pack();
-  txtLabel->SetPosition(position.x, 
+  txtLabel->SetPosition(position.x,
                         position.y + (size.y / 2) - (txtLabel->GetSizeY() / 2));
 
   const xmlNode * valueNode = xmlFile->GetFirstNamedChild(widgetNode, "Value");
@@ -122,9 +122,9 @@ bool SpinButton::LoadXMLConfiguration(void)
     txtValue = new Label("0", 100);
   }
   txtValue->Pack();
-  txtValue->SetPosition(position.x + size.x - txtValue->GetWidth(), 
+  txtValue->SetPosition(position.x + size.x - txtValue->GetWidth(),
                         position.y + (size.y / 2) - (txtValue->GetSizeY() / 2));
-  
+
   AbstractSpinButton::LoadXMLConfiguration();
   ValueHasChanged();
 
@@ -132,7 +132,7 @@ bool SpinButton::LoadXMLConfiguration(void)
   if (NULL != buttonMinusNode) {
     m_minus = new Button(profile, buttonMinusNode);
     m_minus->LoadXMLConfiguration();
-    m_minus->SetPosition(position.x + size.x - m_minus->GetSizeX(), 
+    m_minus->SetPosition(position.x + size.x - m_minus->GetSizeX(),
                          position.y);
   }
 
@@ -140,7 +140,7 @@ bool SpinButton::LoadXMLConfiguration(void)
   if (NULL != buttonPlusNode) {
     m_plus = new Button(profile, buttonPlusNode);
     m_plus->LoadXMLConfiguration();
-    m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), 
+    m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(),
                         position.y + size.y - m_plus->GetSizeY());
   }
 
@@ -166,7 +166,7 @@ void SpinButton::Draw(const Point2i & mousePosition) const
 {
   txtLabel->DrawTopLeft(position);
 
-  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
+  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX())/2;
   txtValue->DrawCenterTop(Point2i(center, position.y));
 
   if (GetValue() != GetMinValue()) {
@@ -177,17 +177,17 @@ void SpinButton::Draw(const Point2i & mousePosition) const
   }
 }
 
-Widget * SpinButton::ClickUp(const Point2i & mousePosition, 
+Widget * SpinButton::ClickUp(const Point2i & mousePosition,
                              uint button)
 {
   NeedRedrawing();
 
-  if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition)) ){
+  if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
+      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition))){
     DecValue();
     return this;
-  } else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition)) ){
+  } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition))){
     IncValue();
     return this;
   }
