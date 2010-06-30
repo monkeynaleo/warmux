@@ -28,12 +28,12 @@
 #include "tool/math_tools.h"
 
 ButtonPic::ButtonPic(const std::string &label,
-		     const std::string &resource_id,
-		     const Point2i &_size) :
+         const std::string &resource_id,
+         const Point2i &_size) :
   Widget(_size)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_img_normal = GetResourceManager().LoadImage(res, resource_id);
+  m_img_normal = GetResourceManager().LoadImage(res, resource_id, true);
   GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -54,10 +54,10 @@ ButtonPic::ButtonPic(Profile * profile,
 }
 
 /*
-  <ButtonPic x="250px" y="50px" 
+  <ButtonPic x="250px" y="50px"
              width="120px" height="110px"
-             action="localGame" 
-             picture="menu/i_play.png" 
+             action="localGame"
+             picture="menu/i_play.png"
              text="Play" />
 */
 bool ButtonPic::LoadXMLConfiguration(void)
@@ -109,8 +109,8 @@ void ButtonPic::Draw(const Point2i &mousePosition) const
   }
 
   txt_label->DrawCenterTop(GetPosition()
-			   + Point2i(GetSizeX()/2,
-				     GetSizeY() - txt_label->GetHeight()));
+         + Point2i(GetSizeX()/2,
+             GetSizeY() - txt_label->GetHeight()));
 }
 
 void ButtonPic::Pack()
