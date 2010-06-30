@@ -265,8 +265,7 @@ void Tile::InitPreview()
     m_shift++;
   }
 
-  m_preview = new Surface;
-  m_preview->NewSurface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  m_preview = new Surface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
   // Actual preview size from pixel-wise information
