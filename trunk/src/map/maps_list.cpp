@@ -227,15 +227,13 @@ InfoMapAccessor *InfoMap::LoadData()
     for (uint i = 0; i < layer; i++) {
       std::ostringstream ss;
       ss << "sky_layer_" << i;
-      sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str()).DisplayFormatAlpha());
+      sky_layer.push_back(GetResourceManager().LoadImage(res_profile, ss.str(), true));
     }
   }
 
-  // If no layer, load sky and change it to display format
+  // If no layer, load sky in display format
   if (!layer) {
-    Surface img = GetResourceManager().LoadImage(res_profile, "sky");
-    img.SetAlpha(0, 0);
-    img_sky = img.DisplayFormat();
+    img_sky = GetResourceManager().LoadImage(res_profile, "sky", false);
   }
 
   if (!random_generated) {
