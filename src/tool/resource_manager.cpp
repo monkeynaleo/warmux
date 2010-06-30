@@ -246,7 +246,7 @@ std::string ResourceManager::LoadImageFilename(const Profile *profile, const std
 Surface ResourceManager::LoadImage(const Profile *profile, const std::string& resource_name, bool alpha) const
 {
   std::string    filename = LoadImageFilename(profile, resource_name);
-  Surface        image    = LoadImage(filename, alpha, set_colorkey, colorkey);
+  Surface        image    = LoadImage(filename, alpha);
   const xmlNode *elem     = GetElement(profile, "surface", resource_name);
   std::string    size;
 
