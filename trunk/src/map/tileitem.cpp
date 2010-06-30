@@ -88,7 +88,7 @@ TileItem_BaseColorKey::TileItem_BaseColorKey(uint bpp)
                                                CELL_SIZE.x, CELL_SIZE.y, bpp,
                                                0, 0, 0, 0);
   m_surface = Surface(SDL_DisplayFormat(surf));
-  color_key = SDL_MapRGBA(m_surface.GetSurface()->format, 255, 0, 255, 0);
+  color_key = m_surface.MapRGBA(255, 0, 255, 0);
   m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
   SDL_FreeSurface(surf);
 
