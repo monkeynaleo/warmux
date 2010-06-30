@@ -66,6 +66,9 @@ public:
 class TileItem_NonEmpty : public TileItem
 {
 protected:
+  friend class TileItem_BaseColorKey;
+  friend class TileItem_ColorKey16;
+  friend class TileItem_ColorKey24;
   Surface        m_surface;
   uint           m_offset;
 
@@ -88,27 +91,52 @@ public:
   void Draw(const Point2i &pos);
 };
 
-class TileItem_ColorKey : public TileItem_NonEmpty
+class TileItem_BaseColorKey : public TileItem_NonEmpty
 {
+protected:
+  friend class TileItem_ColorKey16;
+  friend class TileItem_ColorKey24;
   Uint32  color_key;
+  TileItem_BaseColorKey(uint bpp);
+  TileItem_BaseColorKey() { };
 
 public:
-  static Uint32 ColorKey;
-  TileItem_ColorKey();
-  TileItem_ColorKey(void *pixels, int stride, uint threshold);
-  // Fill as empty
-  static TileItem_NonEmpty* NewEmpty(void);
+  static const Uint32 ColorKey = 0xFF00FF;
 
   unsigned char GetAlpha(const Point2i &pos)
   {
     return (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
   }
 
+  void Dig(const Point2i &position, const Surface& dig);
+};
+
+class TileItem_ColorKey16: public TileItem_BaseColorKey
+{
+public:
+  TileItem_ColorKey16() : TileItem_BaseColorKey(16) { };
+  TileItem_ColorKey16(void *pixels, int stride, uint threshold);
+
+  // Fill as empty
+  static TileItem_NonEmpty* NewEmpty();
+  bool NeedDelete();
   void Empty(int start_x, int end_x, unsigned char* buf);
   void Darken(int start_x, int end_x, unsigned char* buf);
-  void Dig(const Point2i &position, const Surface& dig);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
+};
+
+class TileItem_ColorKey24: public TileItem_BaseColorKey
+{
+public:
+  TileItem_ColorKey24() : TileItem_BaseColorKey(24) { };
+  TileItem_ColorKey24(void *pixels, int stride, uint threshold);
+
+  // Fill as empty
+  static TileItem_NonEmpty* NewEmpty();
   bool NeedDelete();
+  void Empty(int start_x, int end_x, unsigned char* buf);
+  void Darken(int start_x, int end_x, unsigned char* buf);
+  void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
 };
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
