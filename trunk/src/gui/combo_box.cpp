@@ -31,21 +31,22 @@
 #include "tool/affine_transform.h"
 
 ComboBox::ComboBox (const std::string &label,
-		    const std::string &resource_id,
-		    const Point2i &_size,
-		    const std::vector<std::pair<std::string, std::string> > &choices,
-		    const std::string choice):
-  m_choices(choices), m_index(0)
+                    const std::string &resource_id,
+                    const Point2i &_size,
+                    const std::vector<std::pair<std::string, std::string> > &choices,
+                    const std::string choice)
+  : m_choices(choices)
+  , m_index(0)
 {
   position = Point2i(-1, -1);
   size = _size;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_image = GetResourceManager().LoadImage(res, resource_id);
-  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background");
-  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground");
+  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background", true);
+  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground", true);
   m_progress_color = GetResourceManager().LoadColor(res, "menu/annulus_progress_color");
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -55,7 +56,7 @@ ComboBox::ComboBox (const std::string &label,
 
   std::vector<std::string>::size_type index = 0;
   for (std::vector<std::pair<std::string, std::string> >::const_iterator iter
-	 = choices.begin ();
+       = choices.begin ();
        iter != choices.end ();
        iter++) {
 
@@ -145,12 +146,12 @@ Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
     SetChoice(m_index - 1);
     return this;
 
-  } else if( button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition) ) {
+  } else if (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) {
 
     SetChoice (m_index - 1);
     return this;
 
-  } else if( button == SDL_BUTTON_WHEELUP && Contains(mousePosition) ) {
+  } else if (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) {
 
     SetChoice(m_index + 1);
     return this;

@@ -31,7 +31,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
   position = Point2i(-1, -1);
   size = _size;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
@@ -47,7 +47,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Point2i &_size,
   m_plus->SetPosition(position.x + size.x - margin, position.y);
   m_minus = new Button(res, "menu/big_minus");
   m_minus->SetPosition(position.x + size.x - max_value_w - margin - 2 * margin, position.y);
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
 
   ValueHasChanged();
 }
@@ -74,10 +74,10 @@ void SpinButtonBig::Pack()
   uint center_y = position.y + size.y/2 - txt_label->GetHeight()/2;
 
   m_minus->SetPosition(center_x - max_value_w/2 - m_minus->GetSizeX() - 5,
-		       center_y - m_minus->GetSizeY()/2);
+                       center_y - m_minus->GetSizeY()/2);
 
   m_plus->SetPosition(center_x + max_value_w/2 + 5,
-		      center_y - m_plus->GetSizeY()/2);
+                      center_y - m_plus->GetSizeY()/2);
 }
 
 void SpinButtonBig::Draw(const Point2i &mousePosition) const
@@ -103,12 +103,12 @@ Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
 {
   NeedRedrawing();
 
-  if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition)) ){
+  if((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
+      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition))){
     DecValue();
     return this;
-  } else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition)) ){
+  } else if((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition))){
     IncValue();
     return this;
   }
