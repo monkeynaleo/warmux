@@ -85,6 +85,7 @@ public:
   // and manage left-handed mouse option "transparently"
   static Uint8 BUTTON_RIGHT();
   static Uint8 BUTTON_LEFT();
+  static bool  IS_CLICK_BUTTON(uint button);
 
   bool HandleClic (const SDL_Event& event) const;
   void Refresh();
