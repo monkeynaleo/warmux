@@ -96,7 +96,7 @@ public:
   void SetPosition(Point2i pos);
 
   // Choose the pointer
-  pointer_t GetPointer() const;
+  pointer_t GetPointer() const { return current_pointer; }
   pointer_t SetPointer(pointer_t pointer);
   void Draw() const;
 
