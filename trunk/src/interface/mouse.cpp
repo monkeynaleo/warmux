@@ -69,8 +69,8 @@ Mouse::Mouse():
 
   for (int i=POINTER_SELECT; i < POINTER_ATTACK; i++) {
     cursors.insert(std::make_pair(Mouse::pointer_t(i),
-				  GetResourceManager().LoadMouseCursor(res, __pointers[i],
-								   Mouse::pointer_t(i))));
+                                  GetResourceManager().LoadMouseCursor(res, __pointers[i],
+                                                                       Mouse::pointer_t(i))));
   }
 
   current_pointer = POINTER_STANDARD;
@@ -95,7 +95,7 @@ void Mouse::ActionLeftClic(bool) const
   const Point2i pos_monde = GetWorldPosition();
 
   // Action in weapon menu ?
-  if( Interface::GetInstance()->weapons_menu.ActionClic( GetPosition() ) )
+  if (Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()))
     return;
 
   //Change character by mouse click only if the choosen weapon allows it
@@ -103,14 +103,14 @@ void Mouse::ActionLeftClic(bool) const
       ActiveTeam().GetWeapon().mouse_character_selection) {
 
     // Choose a character of our own team
-    bool character_found=false;
-    Team::iterator it = ActiveTeam().begin(),
-                         end = ActiveTeam().end();
+    bool character_found = false;
+    Team::iterator it    = ActiveTeam().begin(),
+                   end   = ActiveTeam().end();
 
-    for( ; it != end; ++it) {
-      if( &(*it) != &ActiveCharacter()
-        && !it -> IsDead()
-        && it->GetRect().Contains( pos_monde ) ){
+    for (; it != end; ++it) {
+      if (&(*it) != &ActiveCharacter()
+          && !it -> IsDead()
+          && it->GetRect().Contains(pos_monde)) {
 
         character_found = true;
         break;
@@ -118,7 +118,7 @@ void Mouse::ActionLeftClic(bool) const
     }
 
     if (character_found) {
-      while ( &(*it) != &ActiveCharacter() )
+      while (&(*it) != &ActiveCharacter())
         ActiveTeam().NextCharacter ();
 
       Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
@@ -129,7 +129,7 @@ void Mouse::ActionLeftClic(bool) const
       return;
     }
 
-    if( ActiveCharacter().GetRect().Contains( pos_monde ) ){
+    if (ActiveCharacter().GetRect().Contains(pos_monde)) {
       CharacterCursor::GetInstance()->FollowActiveCharacter();
       return;
     }
@@ -187,18 +187,18 @@ bool Mouse::HandleClic (const SDL_Event& event) const
     return false;
   }
 
-  if ( event.type != SDL_MOUSEBUTTONDOWN &&
-       event.type != SDL_MOUSEBUTTONUP ) {
+  if (event.type != SDL_MOUSEBUTTONDOWN &&
+       event.type != SDL_MOUSEBUTTONUP) {
     return false;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return true;
 
-  if(!ActiveTeam().IsLocalHuman())
+  if (!ActiveTeam().IsLocalHuman())
     return true;
 
-  if( event.type == SDL_MOUSEBUTTONDOWN ){
+  if (event.type == SDL_MOUSEBUTTONDOWN) {
     bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
 
     if (event.button.button == Mouse::BUTTON_RIGHT())
@@ -222,16 +222,16 @@ void Mouse::GetDesignatedCharacter() const
 
   // Which character is pointed by the mouse ? (appart from the active one)
   Interface::GetInstance()->character_under_cursor = NULL;
-  FOR_ALL_LIVING_CHARACTERS(team, character){
-    if ((&(*character) != &ActiveCharacter())
-       && character->GetRect().Contains(pos_monde) ){
+  FOR_ALL_LIVING_CHARACTERS(team, character) {
+    if (&(*character) != &ActiveCharacter()
+        && character->GetRect().Contains(pos_monde)) {
       Interface::GetInstance()->character_under_cursor = &(*character);
     }
   }
 
   // No character is pointed... what about the active one ?
-  if ((Interface::GetConstInstance()->character_under_cursor == NULL)
-      && ActiveCharacter().GetRect().Contains( pos_monde)){
+  if (Interface::GetConstInstance()->character_under_cursor
+      && ActiveCharacter().GetRect().Contains(pos_monde)) {
       Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
 
@@ -247,25 +247,23 @@ void Mouse::Refresh()
 
   Point2i pos = GetPosition();
 
-  if (lastpos != pos)
-    {
-      Show();
-      lastpos = pos;
-      counter = NB_LOOP_BEFORE_HIDE;
-      ShowGameInterface();
-    }
-  else
-    if (visible == MOUSE_VISIBLE)
-      /* The mouse is hidden after a while when not moving */
-      if (--counter <= 0)
-        Hide();
+  if (lastpos != pos) {
+    Show();
+    lastpos = pos;
+    counter = NB_LOOP_BEFORE_HIDE;
+    ShowGameInterface();
+  } else if (visible == MOUSE_VISIBLE) {
+    /* The mouse is hidden after a while when not moving */
+    if (--counter <= 0)
+      Hide();
+  }
 }
 
 Point2i Mouse::GetPosition() const
 {
   int x, y;
 
-  SDL_GetMouseState( &x, &y);
+  SDL_GetMouseState(&x, &y);
   return Point2i(x, y);
 }
 
@@ -330,7 +328,7 @@ void Mouse::Draw() const
 
 void Mouse::Show()
 {
-  if(((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
+  if (((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
   {
       CenterPointer();
   }
@@ -344,7 +342,7 @@ void Mouse::Show()
 
 void Mouse::Hide()
 {
-  if(visible == MOUSE_VISIBLE)
+  if (visible == MOUSE_VISIBLE)
   {
     last_hide_time = Time::GetConstInstance()->Read();
   }
