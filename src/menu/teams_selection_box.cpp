@@ -42,16 +42,16 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   // How many teams ?
   if (network) {
     local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
-					       "menu/team_number",
-					       Point2i(130, W_UNDEF),
-					       0, 1,
-					       0, MAX_NB_TEAMS-1);
+                                               "menu/team_number",
+                                               Point2i(130, W_UNDEF),
+                                               0, 1,
+                                               0, MAX_NB_TEAMS-1);
   } else {
     local_teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
-					       "menu/team_number",
-					       Point2i(130, W_UNDEF),
-					       2, 1,
-					       2, MAX_NB_TEAMS);
+                                               "menu/team_number",
+                                               Point2i(130, W_UNDEF),
+                                               2, 1,
+                                               2, MAX_NB_TEAMS);
   }
   AddWidget(local_teams_nb);
 
@@ -96,7 +96,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     uint j=0;
     for (; it != end && j<teams_selections.size(); ++it, j++)
       {
-	teams_selections.at(j)->SetTeam((**it), true);
+        teams_selections.at(j)->SetTeam((**it), true);
       }
 
     // we need at least 2 teams
@@ -129,21 +129,21 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
                        teams_selections.at(i)->GetPositionY(),
                        38,
                        38);
-          if ( r.Contains(mousePosition) ) {
-            if ( button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN ) {
+          if (r.Contains(mousePosition)) {
+            if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
               NextTeam(i);
-            } else if ( button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP ) {
+            } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
               PrevTeam(i);
             }
           } else {
-	    Rectanglei r2(teams_selections.at(i)->GetPositionX(),
-			  teams_selections.at(i)->GetPositionY() + 39,
-			  38,
-			  30);
-	    if (r2.Contains(mousePosition)) {
-	      teams_selections.at(i)->SwitchPlayerType();
-	    }
-	  }
+            Rectanglei r2(teams_selections.at(i)->GetPositionX(),
+                          teams_selections.at(i)->GetPositionY() + 39,
+                          38,
+                          30);
+            if (r2.Contains(mousePosition)) {
+              teams_selections.at(i)->SwitchPlayerType();
+            }
+          }
         } else {
           return w;
         }
@@ -177,7 +177,7 @@ void TeamsSelectionBox::PrevTeam(int i)
       to_continue = false;
 
       // select the last team if we are outside list
-      if ( index < 0 )
+      if (index < 0)
         index = int(GetTeamsList().full_list.size())-1;
 
       // Get the team at current index
@@ -195,7 +195,7 @@ void TeamsSelectionBox::PrevTeam(int i)
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
         teams_selections.at(i)->SetTeam(*tmp);
-    } while ( index != previous_index && to_continue);
+    } while (index != previous_index && to_continue);
 }
 
 void TeamsSelectionBox::NextTeam(int i)
@@ -215,7 +215,7 @@ void TeamsSelectionBox::NextTeam(int i)
       to_continue = false;
 
       // select the first team if we are outside list
-      if ( index >= int(GetTeamsList().full_list.size()) )
+      if (index >= int(GetTeamsList().full_list.size()))
         index = 0;
 
       // Get the team at current index
@@ -233,7 +233,7 @@ void TeamsSelectionBox::NextTeam(int i)
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
         teams_selections.at(i)->SetTeam(*tmp);
-    } while ( index != previous_index && to_continue);
+    } while (index != previous_index && to_continue);
 }
 
 void TeamsSelectionBox::SetNbTeams(uint nb_teams)
