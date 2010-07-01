@@ -285,11 +285,6 @@ MouseCursor& Mouse::GetCursor(pointer_t pointer) const
   return (*cursors.find(pointer)).second;
 }
 
-Mouse::pointer_t Mouse::GetPointer() const
-{
-  return current_pointer;
-}
-
 // set the new pointer type and return the previous one
 Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 {
