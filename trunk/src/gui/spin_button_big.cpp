@@ -103,12 +103,13 @@ Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
 {
   NeedRedrawing();
 
-  if((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition))){
+  bool is_click = Mouse::IS_CLICK_BUTTON(button);
+  if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
+      (is_click && m_minus->Contains(mousePosition))){
     DecValue();
     return this;
-  } else if((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition))){
+  } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+             (is_click && m_plus->Contains(mousePosition))){
     IncValue();
     return this;
   }

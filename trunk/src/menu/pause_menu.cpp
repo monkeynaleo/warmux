@@ -131,7 +131,7 @@ void PauseMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   widgets.ClickUp(mousePosition, button);
 
-  if (button == Mouse::BUTTON_LEFT()) {
+  if (Mouse::IS_CLICK_BUTTON(button)) {
     if (bt_main_menu->Contains(mousePosition)) {
       BackToMainMenu();
     } else if (bt_continue_play->Contains(mousePosition)) {
