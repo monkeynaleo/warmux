@@ -469,7 +469,7 @@ void Game::RefreshInput()
     }
 
     // Mouse event
-    if (Mouse::GetInstance()->HandleClic(event))
+    if (Mouse::GetInstance()->HandleEvent(event))
       continue;
 
     // Keyboard event
