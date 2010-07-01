@@ -323,10 +323,11 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
   }
 
   // Init animation parameter
-  Point2d start(5,
+  Point2d start(5 + scroll_border,
                 GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
-  Point2i pos((int) 5,
-              (int) (GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5) );
+  // Results in end y bigger than scroll border
+  Point2i pos(5 + scroll_border,
+              GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5);
 
   if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
     start.y -= Interface::GetRef().GetHeight();
@@ -349,10 +350,10 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
   }
 
   // Init animation parameter
-  Point2d start(5,
-                GetMainWindow().GetHeight());
-  Point2i pos(5,
-              (int) (GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10) );
+  Point2d start(5 + scroll_border, GetMainWindow().GetHeight());
+  // Results in end y bigger than scroll border
+  Point2i pos(5 + scroll_border,
+              GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10);
 
   if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
     start.y -= Interface::GetRef().GetHeight();
