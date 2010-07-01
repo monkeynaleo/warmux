@@ -136,26 +136,17 @@ Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   NeedRedrawing();
 
-  if (button == Mouse::BUTTON_LEFT() && Contains(mousePosition)) {
-
+  bool is_click = Mouse::IS_CLICK_BUTTON(button);
+  if ( (is_click && mousePosition.x+5 > (GetPositionX() + GetSizeX()/2))
+       || button == SDL_BUTTON_WHEELUP ) {
     SetChoice(m_index + 1);
     return this;
-
-  } else if (button == Mouse::BUTTON_RIGHT() && Contains(mousePosition)) {
-
+  } else if ( (is_click && mousePosition.x+5 <= (GetPositionX() + GetSizeX()/2))
+              || button == SDL_BUTTON_WHEELDOWN ) {
     SetChoice(m_index - 1);
     return this;
-
-  } else if (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) {
-
-    SetChoice (m_index - 1);
-    return this;
-
-  } else if (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) {
-
-    SetChoice(m_index + 1);
-    return this;
   }
+
   return NULL;
 }
 
