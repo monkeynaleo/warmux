@@ -42,7 +42,8 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size, bool w_
 
 Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  if (!Contains(mousePosition)) return NULL;
+  if (!Contains(mousePosition))
+    return NULL;
 
   uint current_nb_teams = local_teams_nb->GetValue();
 
@@ -57,31 +58,31 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
 
-      if ( teams_selections.at(i)->Contains(mousePosition) &&
-           teams_selections.at(i)->IsLocal() ) {
+      if (teams_selections.at(i)->Contains(mousePosition) &&
+           teams_selections.at(i)->IsLocal()) {
 
         Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
-        if ( w == NULL ) {
-	  Rectanglei r(teams_selections.at(i)->GetPositionX(),
+        if (w == NULL) {
+          Rectanglei r(teams_selections.at(i)->GetPositionX(),
                        teams_selections.at(i)->GetPositionY(),
                        38,
                        38);
-          if ( r.Contains(mousePosition) ) {
-            if ( button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN ) {
+          if (r.Contains(mousePosition)) {
+            if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
               NextTeam(i);
-            } else if ( button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP ) {
+            } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
               PrevTeam(i);
             }
           } else {
-	    Rectanglei r2(teams_selections.at(i)->GetPositionX(),
-			  teams_selections.at(i)->GetPositionY() + 39,
-			  38,
-			  30);
-	    if (r2.Contains(mousePosition)) {
-	      teams_selections.at(i)->SwitchPlayerType();
-	    }
-	  }
+            Rectanglei r2(teams_selections.at(i)->GetPositionX(),
+                          teams_selections.at(i)->GetPositionY() + 39,
+                          38,
+                          30);
+            if (r2.Contains(mousePosition)) {
+              teams_selections.at(i)->SwitchPlayerType();
+            }
+          }
         } else {
           return w;
         }
@@ -131,7 +132,7 @@ void NetworkTeamsSelectionBox::PrevTeam(uint i)
       to_continue = false;
 
       // select the last team if we are outside list
-      if ( index < 0 )
+      if (index < 0)
         index = int(GetTeamsList().full_list.size())-1;
 
       // Get the team at current index
@@ -169,7 +170,7 @@ void NetworkTeamsSelectionBox::NextTeam(uint i)
       to_continue = false;
 
       // select the first team if we are outside list
-      if ( index >= int(GetTeamsList().full_list.size()) )
+      if (index >= int(GetTeamsList().full_list.size()))
         index = 0;
 
       // Get the team at current index
@@ -190,7 +191,7 @@ void NetworkTeamsSelectionBox::NextTeam(uint i)
           tmp->SetPlayerName(GetLocalPlayerName());
         SetLocalTeam(i, *tmp);
       }
-    } while ( index != previous_index && to_continue);
+    } while (index != previous_index && to_continue);
 }
 
 void NetworkTeamsSelectionBox::RequestTeam()
@@ -282,7 +283,7 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
 }
 
 void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& old_team_id,
-						  const std::string& team_id)
+                                                  const std::string& team_id)
 {
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL &&
