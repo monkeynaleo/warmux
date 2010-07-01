@@ -170,7 +170,6 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride,
     pix += stride>>2;
   }
 
-  printf(">>>   Really had non-alpha one\n");
   return new TileItem_ColorKey24(ptr, stride, alpha_threshold);
 }
 
