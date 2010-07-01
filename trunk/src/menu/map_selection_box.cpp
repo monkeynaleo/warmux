@@ -61,8 +61,8 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 
   uint margin = 0;
 
-  if ( uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()
-			   + border.x)) {
+  if (uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX()
+                          + bt_map_minus->GetSizeX() + border.x)) {
     margin = (size.x -
               (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX() + border.x) ) / 6;
   }
@@ -227,23 +227,26 @@ void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
 
 Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  if (display_only) return NULL;
+  if (display_only)
+    return NULL;
 
-  if (!Contains(mousePosition)) return NULL;
+  if (!Contains(mousePosition))
+    return NULL;
 
-  if (button == Mouse::BUTTON_LEFT() && bt_map_minus->Contains(mousePosition)) {
+  bool is_click = Mouse::IS_CLICK_BUTTON(button);
+  if (is_click && bt_map_minus->Contains(mousePosition)) {
     ChangeMapDelta(-3);
-  } else if (button == Mouse::BUTTON_LEFT() && map_preview_before2->Contains(mousePosition)) {
+  } else if (is_click && map_preview_before2->Contains(mousePosition)) {
     ChangeMapDelta(-2);
-  } else if ((button == Mouse::BUTTON_LEFT() && map_preview_before->Contains(mousePosition))
-             || (button == SDL_BUTTON_WHEELUP )) {
+  } else if ((is_click && map_preview_before->Contains(mousePosition))
+             || button==SDL_BUTTON_WHEELUP) {
     ChangeMapDelta(-1);
-  } else if ((button == Mouse::BUTTON_LEFT() && map_preview_after->Contains(mousePosition))
-             || (button == SDL_BUTTON_WHEELDOWN)) {
+  } else if ((is_click && map_preview_after->Contains(mousePosition))
+             || button==SDL_BUTTON_WHEELDOWN) {
     ChangeMapDelta(+1);
-  } else if (button == Mouse::BUTTON_LEFT() && map_preview_after2->Contains(mousePosition)) {
+  } else if (is_click && map_preview_after2->Contains(mousePosition)) {
     ChangeMapDelta(+2);
-  } else if (button == Mouse::BUTTON_LEFT() && bt_map_plus->Contains(mousePosition)) {
+  } else if (is_click && bt_map_plus->Contains(mousePosition)) {
     ChangeMapDelta(+3);
   }
 

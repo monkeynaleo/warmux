@@ -326,23 +326,23 @@ Widget* MultiTabs::ClickUp(const Point2i &mousePosition, uint button)
 			   prev_tab_bt->GetSizeY());
 
     if (rect_header.Contains(mousePosition)) {
-
-	if (button == Mouse::BUTTON_LEFT() && prev_tab_bt->Contains(mousePosition)) {
+      if (button == SDL_BUTTON_WHEELDOWN) {
 	  PrevTab();
 
-	} else if (button == Mouse::BUTTON_LEFT() && next_tab_bt->Contains(mousePosition)) {
+      } else if (button == SDL_BUTTON_WHEELUP) {
 	  NextTab();
 
-	} else if (button == SDL_BUTTON_WHEELDOWN) {
+      } else {
+        // Either Left, Middle or Right buttons.
+        if (prev_tab_bt->Contains(mousePosition)) {
 	  PrevTab();
-
-	} else if (button == SDL_BUTTON_WHEELUP) {
+        } else if (next_tab_bt->Contains(mousePosition)) {
 	  NextTab();
-
-	} else if (nb_visible_tabs > 1 && button == Mouse::BUTTON_LEFT()) {
-	  uint clicked_tab = (mousePosition.x - prev_tab_bt->GetPositionX() - prev_tab_bt->GetSizeX() - 5)/tab_header_width + first_tab;
+        } else if (nb_visible_tabs > 1) {
+          uint clicked_tab = (mousePosition.x - prev_tab_bt->GetPositionX() - prev_tab_bt->GetSizeX() - 5)
+                           / tab_header_width + first_tab;
 	  SelectTab(clicked_tab);
-
+        }
 	}
 	return this;
       }

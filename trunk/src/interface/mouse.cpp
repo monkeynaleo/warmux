@@ -99,7 +99,7 @@ void Mouse::ActionLeftClic(bool) const
     return;
 
   //Change character by mouse click only if the choosen weapon allows it
-  if( GameMode::GetInstance()->AllowCharacterSelection() &&
+  if (GameMode::GetConstInstance()->AllowCharacterSelection() &&
       ActiveTeam().GetWeapon().mouse_character_selection) {
 
     // Choose a character of our own team
@@ -160,9 +160,14 @@ void Mouse::ActionWheelDown(bool shift) const
   ActiveTeam().AccessWeapon().HandleMouseWheelDown(shift);
 }
 
+bool Mouse::IS_CLICK_BUTTON(uint button)
+{
+  return (button==SDL_BUTTON_LEFT || button==SDL_BUTTON_RIGHT || button==SDL_BUTTON_MIDDLE);
+}
+
 Uint8 Mouse::BUTTON_RIGHT() // static method
 {
-  if (Config::GetRef().GetLeftHandedMouse())
+  if (Config::GetConstRef().GetLeftHandedMouse())
     return SDL_BUTTON_LEFT;
 
   return SDL_BUTTON_RIGHT;
@@ -170,7 +175,7 @@ Uint8 Mouse::BUTTON_RIGHT() // static method
 
 Uint8 Mouse::BUTTON_LEFT() // static method
 {
-  if (Config::GetRef().GetLeftHandedMouse())
+  if (Config::GetConstRef().GetLeftHandedMouse())
     return SDL_BUTTON_RIGHT;
 
   return SDL_BUTTON_LEFT;
@@ -225,7 +230,7 @@ void Mouse::GetDesignatedCharacter() const
   }
 
   // No character is pointed... what about the active one ?
-  if ((Interface::GetInstance()->character_under_cursor == NULL)
+  if ((Interface::GetConstInstance()->character_under_cursor == NULL)
       && ActiveCharacter().GetRect().Contains( pos_monde)){
       Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
@@ -266,7 +271,7 @@ Point2i Mouse::GetPosition() const
 
 Point2i Mouse::GetWorldPosition() const
 {
-  return GetPosition() + Camera::GetInstance()->GetPosition();
+  return GetPosition() + Camera::GetConstInstance()->GetPosition();
 }
 
 MouseCursor& Mouse::GetCursor(pointer_t pointer) const
@@ -290,7 +295,7 @@ Mouse::pointer_t Mouse::GetPointer() const
 // set the new pointer type and return the previous one
 Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 {
-  if (Config::GetInstance()->GetDefaultMouseCursor()) {
+  if (Config::GetConstInstance()->GetDefaultMouseCursor()) {
     Show(); // be sure cursor is visible
     return Mouse::POINTER_STANDARD;
   }
@@ -318,21 +323,20 @@ void Mouse::Draw() const
 
   const MouseCursor& cursor = GetCursor(current_pointer);
   const Surface& surf = cursor.GetSurface();
-  GetMainWindow().Blit(surf, GetPosition() - cursor.GetClicPos());
-  GetWorld().ToRedrawOnScreen(Rectanglei(GetPosition().x - cursor.GetClicPos().x,
-                                    GetPosition().y - cursor.GetClicPos().y,
-				    surf.GetWidth(), surf.GetHeight()));
+  Point2i pos = GetPosition() - cursor.GetClicPos();
+  GetMainWindow().Blit(surf, pos);
+  GetWorld().ToRedrawOnScreen(Rectanglei(pos, surf.GetSize()));
 }
 
 void Mouse::Show()
 {
-  if(((Time::GetInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
+  if(((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
   {
       CenterPointer();
   }
   visible = MOUSE_VISIBLE;
 
-  if (Config::GetInstance()->GetDefaultMouseCursor()) {
+  if (Config::GetConstInstance()->GetDefaultMouseCursor()) {
     SDL_ShowCursor(true); // be sure cursor is visible
   }
 
@@ -342,7 +346,7 @@ void Mouse::Hide()
 {
   if(visible == MOUSE_VISIBLE)
   {
-    last_hide_time = Time::GetInstance()->Read();
+    last_hide_time = Time::GetConstInstance()->Read();
   }
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
@@ -352,8 +356,7 @@ void Mouse::Hide()
 // Center the pointer on the screen
 void Mouse::CenterPointer()
 {
-  SetPosition(Point2i(GetMainWindow().GetWidth() / 2,
-		      GetMainWindow().GetHeight() / 2));
+  SetPosition(GetMainWindow().GetSize() / 2);
 }
 
 void Mouse::SetPosition(Point2i pos)
