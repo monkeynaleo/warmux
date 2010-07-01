@@ -177,17 +177,17 @@ void SpinButton::Draw(const Point2i & mousePosition) const
   }
 }
 
-Widget * SpinButton::ClickUp(const Point2i & mousePosition,
-                             uint button)
+Widget * SpinButton::ClickUp(const Point2i & mousePosition, uint button)
 {
   NeedRedrawing();
 
+  bool is_click = Mouse::IS_CLICK_BUTTON(button);
   if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == Mouse::BUTTON_LEFT() && m_minus->Contains(mousePosition))){
+      (is_click && m_minus->Contains(mousePosition))){
     DecValue();
     return this;
   } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-             (button == Mouse::BUTTON_LEFT() && m_plus->Contains(mousePosition))){
+             (is_click && m_plus->Contains(mousePosition))){
     IncValue();
     return this;
   }

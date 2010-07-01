@@ -29,7 +29,7 @@
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
-BaseListBox::BaseListBox(const Point2i & _size, 
+BaseListBox::BaseListBox(const Point2i & _size,
                          bool always_one_selected_b):
   Widget(Point2i(_size.x, _size.y)),
   always_one_selected(always_one_selected_b),
@@ -43,7 +43,7 @@ BaseListBox::BaseListBox(const Point2i & _size,
   default_item_color(defaultListColor3),
   margin(0)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
   GetResourceManager().UnLoadXMLProfile(res);
@@ -96,7 +96,7 @@ bool BaseListBox::LoadXMLConfiguration()
   XmlReader * xmlFile = profile->GetXMLDocument();
   const xmlNode * buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp");
   const xmlNode * buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
-    
+
   if (NULL == buttonUpNode || NULL == buttonDownNode) {
     return false;
   }
@@ -108,15 +108,15 @@ bool BaseListBox::LoadXMLConfiguration()
   m_down = new Button(profile, buttonDownNode);
   m_down->LoadXMLConfiguration();
   m_down->SetPosition(0, 0);
-  m_down->SetSize(0, 0);   
+  m_down->SetSize(0, 0);
 
   return true;
 }
 
 void BaseListBox::ClearItems()
 {
-  for (std::vector<Widget*>::iterator lbi = m_items.begin(); 
-       lbi!=m_items.end(); 
+  for (std::vector<Widget*>::iterator lbi = m_items.begin();
+       lbi!=m_items.end();
        lbi++) {
      delete *lbi;
   }
@@ -131,7 +131,7 @@ int BaseListBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
   }
 
   for (uint i = first_visible_item; i < m_items.size(); i++) {
-    if (m_items[i]->GetPositionY() <= mousePosition.y && 
+    if (m_items[i]->GetPositionY() <= mousePosition.y &&
         m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y) {
       return i;
     }
@@ -141,8 +141,7 @@ int BaseListBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
 
 static uint last_visible_item = 0; // to not break Draw constness
 
-Widget * BaseListBox::ClickUp(const Point2i & mousePosition, 
-                              uint button)
+Widget * BaseListBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   scrolling = false;
 
@@ -150,9 +149,10 @@ Widget * BaseListBox::ClickUp(const Point2i & mousePosition,
     return NULL;
   }
 
+  bool is_click = Mouse::IS_CLICK_BUTTON(button);
   // buttons for listbox with more items than visible (first or last item not visible)
   if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-      (button == Mouse::BUTTON_LEFT() && m_down->Contains(mousePosition))) {
+      (is_click && m_down->Contains(mousePosition))) {
 
     // bottom button
     if (last_visible_item < m_items.size() - 1) {
@@ -161,7 +161,7 @@ Widget * BaseListBox::ClickUp(const Point2i & mousePosition,
     NeedRedrawing();
     return this;
   } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	     (button == Mouse::BUTTON_LEFT() && m_up->Contains(mousePosition))) {
+             (is_click && m_up->Contains(mousePosition))) {
 
     // top button
     if (first_visible_item > 0) {
@@ -172,7 +172,7 @@ Widget * BaseListBox::ClickUp(const Point2i & mousePosition,
     return this;
   }
 
-  if (button == Mouse::BUTTON_LEFT()) {
+  if (is_click) {
     int item = MouseIsOnWhichItem(mousePosition);
 
     if (item == -1) {
@@ -191,14 +191,13 @@ Widget * BaseListBox::ClickUp(const Point2i & mousePosition,
   return NULL;
 }
 
-Widget * BaseListBox::Click(const Point2i & mousePosition, 
-                            uint button)
+Widget * BaseListBox::Click(const Point2i & mousePosition, uint button)
 {
   if (!Contains(mousePosition)) {
     return NULL;
   }
 
-  if (ScrollBarPos().Contains(mousePosition) && button == Mouse::BUTTON_LEFT()) {
+  if (ScrollBarPos().Contains(mousePosition) && Mouse::IS_CLICK_BUTTON(button)) {
     scrolling = true;
   }
 
@@ -206,7 +205,7 @@ Widget * BaseListBox::Click(const Point2i & mousePosition,
 }
 
 void BaseListBox::__Update(const Point2i & mousePosition,
-		       const Point2i & lastMousePosition)
+                           const Point2i & lastMousePosition)
 {
   (void) lastMousePosition;
   if (!Contains(mousePosition)) {
@@ -278,7 +277,7 @@ void BaseListBox::Draw(const Point2i & mousePosition) const
 Rectanglei BaseListBox::ScrollBarPos() const
 {
   uint tmp_y, tmp_h;
-  if(m_items.size() != 0)
+  if (m_items.size() != 0)
   {
     tmp_y = GetPositionY() + 10 + first_visible_item * (GetSizeY() - 20 - margin) / m_items.size();
     tmp_h = /*nb_visible_items_max * */(GetSizeY() - 20 - margin) / m_items.size();
@@ -300,13 +299,13 @@ void BaseListBox::Pack()
   m_down->SetPosition(position.x + size.x - 12, position.y + size.y - 7 - margin);
 
   for(std::vector<Widget*>::iterator it = m_items.begin();
-      it != m_items.end(); 
+      it != m_items.end();
       it++) {
     (*it)->Pack();
   }
 }
 
-void BaseListBox::AddWidgetItem(bool selected, 
+void BaseListBox::AddWidgetItem(bool selected,
                                 Widget * item)
 {
   uint pos = m_items.size();
