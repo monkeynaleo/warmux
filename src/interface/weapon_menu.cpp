@@ -323,9 +323,9 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
   }
 
   // Init animation parameter
-  Point2d start(GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5 - scroll_border,
+  Point2d start(5,
                 GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
-  Point2i pos((int) (GetMainWindow().GetWidth() - tools_menu->GetWidth() - 5 - scroll_border),
+  Point2i pos((int) 5,
               (int) (GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5) );
 
   if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
@@ -349,9 +349,9 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
   }
 
   // Init animation parameter
-  Point2d start(GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5 - scroll_border,
+  Point2d start(5,
                 GetMainWindow().GetHeight());
-  Point2i pos((int) (GetMainWindow().GetWidth() - weapons_menu->GetWidth() - 5 - scroll_border),
+  Point2i pos(5,
               (int) (GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10) );
 
   if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
