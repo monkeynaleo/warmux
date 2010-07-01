@@ -243,8 +243,8 @@ void Game::EndInitGameData_NetClient()
   std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
 
   while (Network::IsConnected()
-	 && !Network::GetInstance()->IsGameMaster()
-	 && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
+         && !Network::GetInstance()->IsGameMaster()
+         && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
   {
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(100);
@@ -375,7 +375,7 @@ void Game::UnloadDatas(bool game_finished) const
 
       // Fix bug #10613: ensure all teams are reseted as local teams
       FOR_EACH_TEAM(team)
-	(**team).SetDefaultPlayingConfig();
+        (**team).SetDefaultPlayingConfig();
     }
     // else: we will start a new round!
   } else {
