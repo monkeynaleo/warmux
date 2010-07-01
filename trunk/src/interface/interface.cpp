@@ -691,3 +691,45 @@ void ShowGameInterface()
 {
   Interface::GetInstance()->Show();
 }
+
+bool Interface::ActionClick(const Point2i &mouse_pos)
+{
+  // From Interface::DrawWeaponInfo()
+  Weapon* weapon;
+  Double icon_scale_factor = 0.75;
+
+  if (!display)
+    return false;
+
+  // Get the weapon
+  if (!weapon_under_cursor) {
+    weapon = &ActiveTeam().AccessWeapon();
+  } else {
+    weapon = weapon_under_cursor;
+    icon_scale_factor = cos((Double)Time::GetInstance()->Read()/1000 * PI)
+                      * Double(0.9);
+  }
+
+  weapon->GetIcon().Scale(icon_scale_factor, 0.75);
+  Point2i top_left = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() - weapon->GetIcon().GetWidth()/ 2 , 0);
+  Point2i bottom_right = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2, game_menu.GetHeight());
+  Rectanglei weapon_button = Rectanglei(top_left, -top_left+bottom_right);
+
+  top_left = Point2i((game_menu.GetWidth() - clock_background.GetWidth())/ 2, 0);
+  Rectanglei clock_button = Rectanglei(top_left, clock_background.GetSize());
+
+  Rectanglei character_button = Rectanglei(Point2i(0,0), Point2i(weapon_button.GetPositionX(), game_menu.GetHeight()));
+
+  if (weapon_button.Contains(mouse_pos-bottom_bar_pos) && ActiveTeam().IsLocalHuman()) {
+    weapons_menu.SwitchDisplay();
+    return true;
+  } else if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
+    Game::GetInstance()->UserAsksForMenu();
+    return true;
+  } else if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+    Camera::GetInstance()->CenterOnActiveCharacter();
+    return true;
+  }
+
+  return false;
+}

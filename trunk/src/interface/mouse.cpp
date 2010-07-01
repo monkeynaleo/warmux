@@ -90,7 +90,7 @@ bool Mouse::HasFocus() const
   return false;
 }
 
-void Mouse::ActionLeftClic(bool) const
+void Mouse::ActionLeftClick(bool) const
 {
   const Point2i pos_monde = GetWorldPosition();
 
@@ -145,7 +145,7 @@ void Mouse::ActionLeftClic(bool) const
 }
 
 
-void Mouse::ActionRightClic(bool) const
+void Mouse::ActionRightClick(bool) const
 {
   Interface::GetInstance()->weapons_menu.SwitchDisplay();
 }
@@ -181,35 +181,41 @@ Uint8 Mouse::BUTTON_LEFT() // static method
   return SDL_BUTTON_LEFT;
 }
 
-bool Mouse::HandleClic (const SDL_Event& event) const
+bool Mouse::HandleEvent(const SDL_Event& event) const
 {
   if (!HasFocus()) {
     return false;
   }
 
   if (event.type != SDL_MOUSEBUTTONDOWN &&
-       event.type != SDL_MOUSEBUTTONUP) {
+      event.type != SDL_MOUSEBUTTONUP) {
     return false;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return true;
 
+  if (event.type == SDL_MOUSEBUTTONDOWN) {
+    if (event.button.button == Mouse::BUTTON_LEFT())
+      if (Interface::GetInstance()->ActionClick(GetPosition()))
+        return true;
+  }
+
   if (!ActiveTeam().IsLocalHuman())
     return true;
 
+  bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
   if (event.type == SDL_MOUSEBUTTONDOWN) {
-    bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-
     if (event.button.button == Mouse::BUTTON_RIGHT())
-      ActionRightClic(shift);
+      ActionRightClick(shift);
     else if (event.button.button == Mouse::BUTTON_LEFT())
-      ActionLeftClic(shift);
+      ActionLeftClick(shift);
     else if (event.button.button == SDL_BUTTON_WHEELDOWN)
       ActionWheelDown(shift);
     else if (event.button.button == SDL_BUTTON_WHEELUP)
       ActionWheelUp(shift);
   }
+
   return true;
 }
 
@@ -325,7 +331,7 @@ void Mouse::Show()
 {
   if (((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
   {
-      CenterPointer();
+    CenterPointer();
   }
   visible = MOUSE_VISIBLE;
 

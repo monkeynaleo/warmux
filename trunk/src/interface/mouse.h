@@ -69,8 +69,8 @@ private:
 
   void GetDesignatedCharacter() const;
 
-  void ActionLeftClic(bool shift = false) const;
-  void ActionRightClic(bool shift = false) const;
+  void ActionLeftClick(bool shift = false) const;
+  void ActionRightClick(bool shift = false) const;
   void ActionWheelDown(bool shift = false) const;
   void ActionWheelUp(bool shift = false) const;
   MouseCursor& GetCursor(pointer_t pointer) const;
@@ -87,7 +87,7 @@ public:
   static Uint8 BUTTON_LEFT();
   static bool  IS_CLICK_BUTTON(uint button);
 
-  bool HandleClic (const SDL_Event& event) const;
+  bool HandleEvent(const SDL_Event& event) const;
   void Refresh();
 
   Point2i GetPosition() const;
