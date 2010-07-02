@@ -54,13 +54,13 @@ const Double REALTIME_FOLLOW_FACTOR = 0.15;
 uint MAX_REFRESHES_PER_SECOND = 100;
 
 Camera::Camera():
-  m_started_shaking( 0 ),
-  m_shake_duration( 0 ),
-  m_shake_amplitude( 0, 0 ),
-  m_shake_centerpoint( 0, 0 ),
-  m_shake( 0, 0 ),
-  m_last_time_shake_calculated( 0 ),
-  m_speed( 0, 0 ),
+  m_started_shaking(0),
+  m_shake_duration(0),
+  m_shake_amplitude(0, 0),
+  m_shake_centerpoint(0, 0),
+  m_shake(0, 0),
+  m_last_time_shake_calculated(0),
+  m_speed(0, 0),
   m_stop(false),
   m_control_mode(NO_CAMERA_CONTROL),
   m_begin_controlled_move_time(0),
@@ -132,7 +132,7 @@ void Camera::AutoCrop()
     obj_pos = followed_object->GetCenter();
 
     if (obj_pos > GetPosition() + GetSize() / 7 &&
-	obj_pos < GetPosition() + 6 * GetSize() / 7) {
+        obj_pos < GetPosition() + 6 * GetSize() / 7) {
       if (m_stop)
         stop = true;
 
@@ -163,16 +163,11 @@ void Camera::AutoCrop()
   }
 
   //Compute new speed to reach target
-  Point2d acceleration(0,0);
-  acceleration.x = REACTIVITY * (target.x - ANTICIPATION * m_speed.x - position.x) ;
-  acceleration.y = REACTIVITY * (target.y - ANTICIPATION * m_speed.y - position.y) ;
+  Point2d acceleration = (target - ANTICIPATION*m_speed - position)*REACTIVITY;
   // Limit acceleration
-  if (acceleration.x > MAX_CAMERA_ACCELERATION.x) acceleration.x = MAX_CAMERA_ACCELERATION.x;
-  if (acceleration.y > MAX_CAMERA_ACCELERATION.y) acceleration.y = MAX_CAMERA_ACCELERATION.y;
-  if (acceleration.x < -MAX_CAMERA_ACCELERATION.x) acceleration.x = -MAX_CAMERA_ACCELERATION.x;
-  if (acceleration.y < -MAX_CAMERA_ACCELERATION.y) acceleration.y = -MAX_CAMERA_ACCELERATION.y;
+  acceleration = acceleration.clamp(-MAX_CAMERA_ACCELERATION, MAX_CAMERA_ACCELERATION);
 
- // std::cout<<"acceleration before : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
+  // std::cout<<"acceleration before : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
   if (abs((int)m_speed.x) > SPEED_REACTIVITY_CEIL) {
     acceleration.x *= (1 + SPEED_REACTIVITY * (abs((int)m_speed.x) - SPEED_REACTIVITY_CEIL));
   }
@@ -200,23 +195,15 @@ void Camera::AutoCrop()
     }
 
     //Limit
-    if (m_speed.x > MAX_CAMERA_SPEED.x) m_speed.x = MAX_CAMERA_SPEED.x;
-    if (m_speed.y > MAX_CAMERA_SPEED.y) m_speed.y = MAX_CAMERA_SPEED.y;
-    if (m_speed.x < -MAX_CAMERA_SPEED.x) m_speed.x = -MAX_CAMERA_SPEED.x;
-    if (m_speed.y < -MAX_CAMERA_SPEED.y) m_speed.y = -MAX_CAMERA_SPEED.y;
+    m_speed = m_speed.clamp(-MAX_CAMERA_SPEED, MAX_CAMERA_SPEED);
   }
 
   //Update position
-  Point2i next_position(0,0);
-  next_position.x = (int)m_speed.x;
-  next_position.y = (int)m_speed.y;
+  Point2i next_position = m_speed;
   SetXY(next_position);
 
-  if (!m_stop &&
-      next_position.x == 0 && next_position.y == 0 &&
-      followed_object->GetSpeed().x == 0 &&
-      followed_object->GetSpeed().y == 0) {
-      m_stop = true;
+  if (!m_stop && next_position.IsNull() && followed_object->GetSpeed().IsNull()) {
+    m_stop = true;
   }
 }
 
@@ -385,7 +372,7 @@ void Camera::Refresh(){
 
 void Camera::FollowObject(const PhysicalObj *obj, bool follow_closely)
 {
-  MSG_DEBUG( "camera.tracking", "Following object %s (%d)", obj->GetName().c_str(), follow_closely);
+  MSG_DEBUG("camera.tracking", "Following object %s (%d)", obj->GetName().c_str(), follow_closely);
 
   Mouse::GetInstance()->Hide();
 
@@ -407,7 +394,7 @@ void Camera::StopFollowingObj(const PhysicalObj* obj)
 
 bool Camera::IsVisible(const PhysicalObj &obj) const
 {
-   return Intersect( obj.GetRect() );
+   return Intersect(obj.GetRect());
 }
 
 void Camera::CenterOnActiveCharacter()
@@ -439,18 +426,18 @@ Point2i Camera::ComputeShake() const
     func_val = (1 - t) * sin(arg) / arg;
   }
 
-  Double x_ampl = (Double)RandomLocal().GetDouble( -m_shake_amplitude.x, m_shake_amplitude.x );
-  Double y_ampl = (Double)RandomLocal().GetDouble( -m_shake_amplitude.y, m_shake_amplitude.y );
+  Double x_ampl = RandomLocal().GetDouble(-m_shake_amplitude.x, m_shake_amplitude.x);
+  Double y_ampl = RandomLocal().GetDouble(-m_shake_amplitude.y, m_shake_amplitude.y);
 
-  m_shake.x = (int)(x_ampl * func_val//( Double )m_shake_amplitude.x * func_val
-		    + (Double)m_shake_centerpoint.x);
-  m_shake.y = (int)(y_ampl * func_val//( Double )m_shake_amplitude.y * func_val
-		    + (Double)m_shake_centerpoint.y);
+  m_shake.x = (int)(x_ampl * func_val//(Double)m_shake_amplitude.x * func_val
+                    + (Double)m_shake_centerpoint.x);
+  m_shake.y = (int)(y_ampl * func_val//(Double)m_shake_amplitude.y * func_val
+                    + (Double)m_shake_centerpoint.y);
 
   static uint t_last_time_logged = 0;
   if (time - t_last_time_logged > 10) {
     MSG_DEBUG("camera.shake", "Shaking: time = %d, t = %s, func_val = %s, shake: %d, %d",
-	      time, Double2str(t).c_str(), Double2str(func_val).c_str(), m_shake.x, m_shake.y);
+              time, Double2str(t).c_str(), Double2str(func_val).c_str(), m_shake.x, m_shake.y);
     t_last_time_logged = time;
   }
 
@@ -468,11 +455,11 @@ void Camera::Shake(uint how_long_msec, const Point2i & amplitude, const Point2i 
 
   if (m_started_shaking + m_shake_duration > time) {
     // still shaking, so add amplitude/centerpoint to allow shakes to combine
-    m_shake_amplitude = max( m_shake_amplitude, amplitude );
+    m_shake_amplitude = max(m_shake_amplitude, amplitude);
     m_shake_centerpoint = centerpoint;
 
     // increase shake duration so it lasts how_long_msec from this time
-    m_shake_duration = how_long_msec + ( time - m_started_shaking );
+    m_shake_duration = how_long_msec + (time - m_started_shaking);
   } else {
     // reinit the shake
     m_started_shaking = time;
@@ -487,5 +474,5 @@ void Camera::ResetShake()
   m_started_shaking = 0;
   m_shake_duration = 0;
   m_last_time_shake_calculated = 0;
-  m_shake = Point2i( 0, 0 );
+  m_shake = Point2i(0, 0);
 }

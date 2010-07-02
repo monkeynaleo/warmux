@@ -102,17 +102,17 @@ public:
 
   inline Point2i GetPosition() const
   {
-      return position + ComputeShake();
+    return position + ComputeShake();
   }
 
   inline int GetPositionX() const
   {
-      return position.x + ComputeShake().x;
+    return position.x + ComputeShake().x;
   }
 
   inline int GetPositionY() const
   {
-      return position.y + ComputeShake().y;
+    return position.y + ComputeShake().y;
   }
 
   void Shake(uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint);
