@@ -174,7 +174,7 @@ RequestExecutionLevel highest
   ;--------------------------------
   ;Folder-selection page
   InstallDir "\$PROGRAMFILES\Wormux"
-  ; Registry key to check for directory (so if you install again, it will 
+  ; Registry key to check for directory (so if you install again, it will
   ; overwrite the old one automatically)
   InstallDirRegKey HKLM "\${WORMUX_REG_KEY}" "Path"
   AutoCloseWindow false
@@ -294,7 +294,7 @@ SectionEnd
 Section \$(TITLE_Wormux) Sec_Wormux
   ; Create install and config folders
   CreateDirectory "\$INSTDIR"
-  CreateDirectory "\$APPDATA\\Wormux"
+  CreateDirectory "\$DOCUMENTS\\Wormux"
   ; Set output path to the installation directory.
   SetOutPath "\$INSTDIR"
   File "${WIN_WORMUXDIR}\src\wormux.ico"
@@ -372,7 +372,7 @@ SectionGroup /e \$(WORMUX_SHORCUTS_TITLE) Sec_Shortcuts
     SetOutPath "\$INSTDIR"
     SetOverwrite on
     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Wormux"
-    CreateShortcut  "\$SMPROGRAMS\\Wormux\\Config.lnk" "\$APPDATA\\Wormux" "" "" 0
+    CreateShortcut  "\$SMPROGRAMS\\Wormux\\Config.lnk" "\$DOCUMENTS\\Wormux" "" "" 0
     SetOverwrite off
   SectionEnd
 
@@ -421,7 +421,6 @@ cat >> $NSIS <<EOF
   ; Wormux uninstall shortcut in start menu
   ; Might be forced if user has no install rights, because it would be complex otherwise:
   ; - No uninstall available in Windows "Program uninstall"
-  ; - Folder lost in APPDATA, which can be hidden, etc
   Section \$(WORMUX_UNINST_SC_DESC) Sec_UninstallShortCut
     SetOverwrite on
     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Wormux"
