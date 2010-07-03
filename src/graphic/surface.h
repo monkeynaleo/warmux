@@ -37,8 +37,8 @@ private:
   SDL_Surface* surface;
   bool autoFree;
   int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
-  SDL_Rect GetSDLRect(const Rectanglei &r) const;
-  SDL_Rect GetSDLRect(const Point2i &r) const;
+  static SDL_Rect GetSDLRect(const Rectanglei &r);
+  static SDL_Rect GetSDLRect(const Point2i &r);
 
 public:
   /**
@@ -118,6 +118,7 @@ public:
   int Blit(const Surface& src) { return Blit(src, NULL, NULL); };
   int Blit(const Surface& src, const Point2i& dst);
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
+
   void MergeSurface( Surface &spr, const Point2i &position);
   void MergeAlphaSurface(const Surface &mask, const Point2i &pos);
 
