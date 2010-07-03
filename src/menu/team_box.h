@@ -29,10 +29,13 @@
 class Button;
 class CustomTeam;
 class Team;
-class SpinButton;
+class SpinButtonWithPicture;
 class Label;
 class PictureWidget;
 class TextBox;
+
+#define TEAMS_BOX_H  250
+
 
 class TeamBox : public HBox
 {
@@ -56,7 +59,7 @@ class TeamBox : public HBox
   TextBox * player_name;
   Button * next_custom_team;
   Button * previous_custom_team;
-  SpinButton * nb_characters;
+  SpinButtonWithPicture * nb_characters;
 
   std::vector<CustomTeam *> custom_team_list;
   unsigned custom_team_current_id;
