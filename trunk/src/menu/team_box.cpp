@@ -20,10 +20,11 @@
  *****************************************************************************/
 
 #include "ai/ai_stupid_player.h"
+#include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/label.h"
 #include "gui/picture_widget.h"
-#include "gui/spin_button.h"
+#include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "gui/vertical_box.h"
 #include "menu/team_box.h"
@@ -35,7 +36,7 @@
 #include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(W_UNDEF, false, false),
+  HBox(_size.y, false, false),
   ai_name(NO_AI_NAME)
 {
   associated_team = NULL;
@@ -43,8 +44,9 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   SetMargin(2);
   SetNoBorder();
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
+  /********        Logos: team mascott, player type icon      ********/
   Box * tmp_logo_box = new VBox(W_UNDEF, false, false);
   tmp_logo_box->SetMargin(1);
   tmp_logo_box->SetNoBorder();
@@ -63,56 +65,57 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
   AddWidget(tmp_logo_box);
 
-  Box * tmp_box = new VBox(W_UNDEF, false, false);
-  tmp_box->SetMargin(2);
-  tmp_box->SetNoBorder();
-  previous_player_name = "team";
-  team_name = new Label(previous_player_name, _size.x - 50,
-                        Font::FONT_MEDIUM, Font::FONT_BOLD,
-                        dark_gray_color, false, false);
-
-  Box * tmp_player_box = new HBox(W_UNDEF, false, false);
+  /********    Center box: team name, commander   *********/
+  int width = _size.x - (2*2+(38+2*2)+(92+2*2));
+  Box * tmp_player_box = new VBox(_size.y, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
+
+  previous_player_name = "team";
+  team_name = new Label(previous_player_name, width,
+                        Font::FONT_MEDIUM, Font::FONT_BOLD,
+                        dark_gray_color, false, false);
+  tmp_player_box->AddWidget(team_name);
+
+  /********    Names: "Head commander" + text/custom team    *******/
+  tmp_player_box->AddWidget(new Label(_("Head commander"), width,
+                                      Font::FONT_SMALL, Font::FONT_BOLD,
+                                      dark_gray_color, false, false));
 
   custom_team_list = GetCustomTeamsList().GetList();
   custom_team_current_id = 0;
 
-  player_name = new TextBox(_player_name, 100,
-                            Font::FONT_SMALL, Font::FONT_BOLD);
-
   if (custom_team_list.empty()) {
-    tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-50-100,
-                                      Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
-
+    player_name = new TextBox(_player_name, width,
+                              Font::FONT_MEDIUM, Font::FONT_BOLD);
     tmp_player_box->AddWidget(player_name);
 
     next_custom_team = NULL;
     previous_custom_team = NULL;
 
   } else {
-    tmp_player_box->AddWidget(new Label(_("Head commander"), _size.GetX()-60-100,
-					Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, false, false));
+    Box * tmp_name_box = new VBox(width, false, false);
 
     next_custom_team = new Button(res, "menu/plus");
-
     previous_custom_team = new Button(res, "menu/minus");
 
-    tmp_player_box->AddWidget(previous_custom_team);
-    tmp_player_box->AddWidget(player_name);
-    tmp_player_box->AddWidget(next_custom_team);
+    player_name = new TextBox(_player_name, width - 2*(10+2),
+                              Font::FONT_MEDIUM, Font::FONT_BOLD);
+
+    tmp_name_box->AddWidget(previous_custom_team);
+    tmp_name_box->AddWidget(player_name);
+    tmp_name_box->AddWidget(next_custom_team);
+    tmp_player_box->AddWidget(tmp_name_box);
   }
-
-  nb_characters = new SpinButton(_("Number of characters"), _size.GetX()-50,
-                                 6,1,1,10,
-                                 dark_gray_color, false);
-
-  tmp_box->AddWidget(team_name);
-  tmp_box->AddWidget(tmp_player_box);
-  tmp_box->AddWidget(nb_characters);
+  AddWidget(tmp_player_box);
 
 
-  AddWidget(tmp_box);
+  /**********     Number of characters        **********/
+  nb_characters = new SpinButtonWithPicture(_("Number of characters"),
+                                            "menu/ico_play",
+                                            Point2i(92, _size.y-2),
+                                            6, 1, 1, 10);
+  AddWidget(nb_characters);
 
   GetResourceManager().UnLoadXMLProfile(res);
 }
@@ -142,6 +145,9 @@ CustomTeam* TeamBox::GetCustomTeam()
 void TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
+  Rectanglei r(GetPosition(), GetSize());
+  SwapWindowClip(r);
+
   Box::Update(mousePosition, lastMousePosition);
   if (need_redrawing) {
     Draw(mousePosition);
@@ -160,6 +166,7 @@ void TeamBox::Update(const Point2i &mousePosition,
     }
   }
 
+  SwapWindowClip(r);
   need_redrawing = false;
 }
 
@@ -191,7 +198,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
       if (w == next_custom_team) {
         player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-        if(custom_team_current_id == custom_team_list.size()-1) {
+        if (custom_team_current_id == custom_team_list.size()-1) {
           custom_team_current_id = 0;
         } else {
           custom_team_current_id++;
@@ -202,7 +209,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
         player_name->SetText(custom_team_list[custom_team_current_id]->GetName());
 
-        if(custom_team_current_id == 0) {
+        if (custom_team_current_id == 0) {
           custom_team_current_id = custom_team_list.size()-1;
         } else {
           custom_team_current_id--;
