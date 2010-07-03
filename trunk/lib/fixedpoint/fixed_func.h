@@ -9,18 +9,18 @@ Copyright (c) 2004, David Blythe, Hans Martin Will
 
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above copyright notice, 
+* Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
 
 * Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation 
+  this list of conditions and the following disclaimer in the documentation
   and/or other materials provided with the distribution.
 
-* Neither the name of the library's copyright owner nor the names of its 
-  contributors may be used to endorse or promote products derived from this 
+* Neither the name of the library's copyright owner nor the names of its
+  contributors may be used to endorse or promote products derived from this
   software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -59,15 +59,15 @@ typedef int64_t fixint_t;
 typedef int32_t fixint_t;
 #endif
 
-// The template argument p in all of the following functions refers to the 
+// The template argument p in all of the following functions refers to the
 // fixed point precision (e.g. p = 8 gives 24.8 fixed point functions).
 
 // Perform a fixed point multiplication without a 64-bit intermediate result.
 // This is fast but beware of overflow!
-template <int p> 
+template <int p>
 inline fixint_t fixmulf(fixint_t a, fixint_t b)
 {
-	return (a * b) >> p;
+  return (a * b) >> p;
 }
 
 // Perform a fixed point multiplication using a 64-bit intermediate result to
@@ -75,7 +75,7 @@ inline fixint_t fixmulf(fixint_t a, fixint_t b)
 template <int p>
 inline fixint_t fixmul(fixint_t a, fixint_t b)
 {
-	return ((a * b) >> p);
+  return ((a * b) >> p);
 }
 
 // Fixed point division
@@ -83,55 +83,55 @@ template <int p>
 inline int fixdiv(fixint_t a, fixint_t b)
 {
 #if 1
-	return ((a << p) / b);
-#else	
-	// The following produces the same results as the above but gcc 4.0.3 
-	// generates fewer instructions (at least on the ARM processor).
-	union {
-		fixint_t a;
-		struct {
-			int32_t l;
-			int32_t h;
-		};
-	} x;
+  return ((a << p) / b);
+#else
+  // The following produces the same results as the above but gcc 4.0.3
+  // generates fewer instructions (at least on the ARM processor).
+  union {
+    fixint_t a;
+    struct {
+      int32_t l;
+      int32_t h;
+    };
+  } x;
 
-	x.l = a << p;
-	x.h = a >> (sizeof(int32_t) * 8 - p);
-	return (int32_t)(x.a / b);
+  x.l = a << p;
+  x.h = a >> (sizeof(int32_t) * 8 - p);
+  return (int32_t)(x.a / b);
 #endif
 }
 
 namespace detail {
-	inline uint32_t CountLeadingZeros(uint32_t x)
-	{
-		uint32_t exp = 31;
-	
-		if (x & 0xffff0000) { 
-			exp -= 16; 
-			x >>= 16; 
-		}
-	
-		if (x & 0xff00) { 
-			exp -= 8; 
-			x >>= 8; 
-		}
-		
-		if (x & 0xf0) { 
-			exp -= 4; 
-			x >>= 4; 
-		}
-	
-		if (x & 0xc) { 
-			exp -= 2; 
-			x >>= 2; 
-		}
-		
-		if (x & 0x2) { 
-			exp -= 1; 
-		}
-	
-		return exp;
-	}
+  inline uint32_t CountLeadingZeros(uint32_t x)
+  {
+    uint32_t exp = 31;
+
+    if (x & 0xffff0000) {
+      exp -= 16;
+      x >>= 16;
+    }
+
+    if (x & 0xff00) {
+      exp -= 8;
+      x >>= 8;
+    }
+
+    if (x & 0xf0) {
+      exp -= 4;
+      x >>= 4;
+    }
+
+    if (x & 0xc) {
+      exp -= 2;
+      x >>= 2;
+    }
+
+    if (x & 0x2) {
+      exp -= 1;
+    }
+
+    return exp;
+  }
 }
 
 // q is the precision of the input
@@ -139,42 +139,42 @@ namespace detail {
 template <int p>
 inline fixint_t fixinv(fixint_t a)
 {
-	return fixdiv<p>(1 << p, a);
+  return fixdiv<p>(1 << p, a);
 }
 /* TODO fast 64 bit version of:
 template <int q>
 inline int fixinv(int32_t a)
 {
-	int32_t x;
+  int32_t x;
 
-	bool sign = false;
+  bool sign = false;
 
-	if (a < 0) {
-		sign = true;
-		a = -a;
-	}
+  if (a < 0) {
+    sign = true;
+    a = -a;
+  }
 
-	static const uint16_t rcp_tab[] = { 
-		0x8000, 0x71c7, 0x6666, 0x5d17, 0x5555, 0x4ec4, 0x4924, 0x4444
-	};
-		
-	int32_t exp = detail::CountLeadingZeros(a);
-	x = ((int32_t)rcp_tab[(a>>(28-exp))&0x7]) << 2;
-	exp -= 16;
+  static const uint16_t rcp_tab[] = {
+    0x8000, 0x71c7, 0x6666, 0x5d17, 0x5555, 0x4ec4, 0x4924, 0x4444
+  };
 
-	if (exp <= 0)
-		x >>= -exp;
-	else
-		x <<= exp;
+  int32_t exp = detail::CountLeadingZeros(a);
+  x = ((int32_t)rcp_tab[(a>>(28-exp))&0x7]) << 2;
+  exp -= 16;
 
-	// two iterations of newton-raphson  x = x(2-ax) 
-	x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
-	x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
+  if (exp <= 0)
+    x >>= -exp;
+  else
+    x <<= exp;
 
-	if (sign)fix2float
-		return -x;
-	else
-		return x;
+  // two iterations of newton-raphson  x = x(2-ax)
+  x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
+  x = fixmul<(32-q)>(x,((2<<(32-q)) - fixmul<q>(a,x)));
+
+  if (sign)fix2float
+    return -x;
+  else
+    return x;
 }
 */
 
@@ -183,13 +183,13 @@ inline int fixinv(int32_t a)
 template <int p>
 float fix2float(fixint_t f)
 {
-	return (float)f / (1 << p);
+  return (float)f / (1 << p);
 }
 
 template <int p>
 fixint_t float2fix(float f)
 {
-	return (fixint_t)(f * (1 << p));
+  return (fixint_t)(f * (1 << p));
 }
 
 fixint_t fixcos16(fixint_t a);
