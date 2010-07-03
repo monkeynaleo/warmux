@@ -282,3 +282,8 @@ Surface& GetMainWindow()
 {
   return AppWormux::GetInstance()->video->window;
 }
+
+void SwapWindowClip(Rectanglei& r)
+{
+  AppWormux::GetInstance()->video->window.SwapClipRect(r);
+}
