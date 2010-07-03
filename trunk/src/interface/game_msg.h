@@ -50,6 +50,7 @@ public:
 
   inline uint get_time() { return time; }
 };
+
 /*
  * class GameMessages
  * stores and displays messages on the screen
@@ -60,7 +61,7 @@ public:
  */
 class GameMessages : public Singleton<GameMessages>
 {
- public:
+public:
   // remove all messages
   void Reset();
 
@@ -73,8 +74,8 @@ class GameMessages : public Singleton<GameMessages>
   // Add a message
   void Add(const std::string &message);
 
- private:
-  std::list<Message *> liste;
+private:
+  std::list<Message *> list;
   typedef std::list<Message *>::iterator iterator;
 
 protected:
