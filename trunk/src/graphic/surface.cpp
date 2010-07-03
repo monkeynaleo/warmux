@@ -175,6 +175,21 @@ void Surface::Unlock()
   SDL_UnlockSurface(surface);
 }
 
+void Surface::SwapClipRect(Rectanglei& rect)
+{
+  SDL_Rect sdlClipRect = GetSDLRect(rect);
+  SDL_Rect oldClipRect;
+
+  SDL_GetClipRect(surface, &oldClipRect);
+  SDL_SetClipRect(surface, &sdlClipRect);
+
+  rect.SetPositionX(oldClipRect.x);
+  rect.SetPositionY(oldClipRect.y);
+  rect.SetSizeX(oldClipRect.w);
+  rect.SetSizeY(oldClipRect.h);
+}
+
+
 int Surface::Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect)
 {
   return SDL_BlitSurface(src.surface, srcRect, surface, dstRect);
