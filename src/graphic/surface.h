@@ -110,6 +110,8 @@ public:
   int Lock();
   void Unlock();
 
+  void SwapClipRect(Rectanglei& rect);
+
   /**
    * Blit the whole surface src on the current surface.
    *
