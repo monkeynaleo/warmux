@@ -78,8 +78,8 @@ bool XmlReader::Load(const std::string &filename)
 
   // Activate XInclude (to include content of other files)
   int nb_subst = xmlXIncludeProcessFlags(doc, XML_PARSE_NOENT);
-  if (nb_subst != 0) {
-    printf("(%p) %s: %d substitutions\n", this, filename.c_str(), nb_subst);
+  if (nb_subst == -1) {
+    printf("(%p) %s: failed to do substitutions\n", this, filename.c_str());
     ASSERT(nb_subst != -1);
   }
 
