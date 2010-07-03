@@ -73,39 +73,36 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
   //  the computed positions are to center on the image part of the widget
 
   // 1. first draw the annulus background
-  uint tmp_back_x = GetPositionX() + (GetSizeX() - m_annulus_background.GetWidth())/4 ;
-  uint tmp_back_y = GetPositionY();
-  surf.Blit(m_annulus_background, Point2i(tmp_back_x, tmp_back_y));
+  int aw = m_annulus_background.GetWidth();
+  Point2i tmp(GetPositionX() + (GetSizeX()-aw)/2, GetPositionY());
+  surf.Blit(m_annulus_background, tmp);
 
   // 2. then draw the progress annulus
-  static uint small_r = 25;
-  static uint big_r = 35;
+  #define SMALL_R 25
+  #define BIG_R   35
   static Double open_angle_value = 0.96; // 55
-  uint center_x = tmp_back_x + m_annulus_background.GetWidth() / 2;
-  uint center_y = tmp_back_y + m_annulus_background.GetHeight() / 2;
+  Point2i center = tmp + m_annulus_background.GetSize() / 2;
 
-  Double angle = (TWO * PI - open_angle_value) * (GetValue() - GetMinValue())
+  Double angle = (PI*2 - open_angle_value) * (GetValue() - GetMinValue())
                / (GetMaxValue() - GetMinValue());
-  Polygon *tmp = PolygonGenerator::GeneratePartialTorus(big_r * 2, small_r * 2, 100, angle, open_angle_value / TWO);
+  Polygon *p = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 100,
+                                                      angle, open_angle_value / 2);
 
-  tmp->SetPlaneColor(m_progress_color);
-  tmp->ApplyTransformation(AffineTransform2D::Translate(center_x, center_y));
-  tmp->Draw(&surf);
-  delete(tmp);
+  p->SetPlaneColor(m_progress_color);
+  p->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
+  p->Draw(&surf);
+  delete(p);
 
   // 3. then draw the annulus foreground
-  uint tmp_fore_x = tmp_back_x;
-  uint tmp_fore_y = tmp_back_y;
-  surf.Blit(m_annulus_foreground, Point2i(tmp_fore_x, tmp_fore_y));
+  surf.Blit(m_annulus_foreground, tmp);
 
   // 4. then draw the image
-  uint tmp_x = center_x - m_image.GetWidth() / 2;
-  uint tmp_y = center_y - m_image.GetHeight() / 2;
-  surf.Blit(m_image, Point2i(tmp_x, tmp_y));
+  tmp = center - m_image.GetSize()/2;
+  surf.Blit(m_image, tmp);
 
   // 5. add in the value image
-  tmp_x = center_x;
-  tmp_y = center_y + small_r - 3;
+  int tmp_x = center.x;
+  int tmp_y = center.y + SMALL_R - 3;
   uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
   txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
