@@ -67,5 +67,6 @@ public:
 };
 
 Surface& GetMainWindow();
+void SwapWindowClip(Rectanglei& clip);
 
 #endif
