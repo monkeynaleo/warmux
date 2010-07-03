@@ -30,8 +30,8 @@ Box::Box(void):
 {
 }
 
-Box::Box(const Point2i & size, 
-         bool _draw_border) : 
+Box::Box(const Point2i & size,
+         bool _draw_border) :
   WidgetList(size),
   margin(5)
 {
@@ -61,11 +61,15 @@ void Box::ParseXMLBoxParameters()
 }
 
 void Box::Update(const Point2i &mousePosition,
-		 const Point2i &/*lastMousePosition*/)
+                 const Point2i &/*lastMousePosition*/)
 {
   if (need_redrawing) {
+    //Rectanglei r(GetPosition(), GetSize());
+
+    //SwapWindowClip(r);
     Widget::RedrawBackground(*this);
     Draw(mousePosition);
+    //SwapWindowClip(r);
   }
 
   WidgetList::Update(mousePosition);

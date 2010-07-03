@@ -20,6 +20,7 @@
  * It is a fake widget.
  *****************************************************************************/
 #include <SDL_keyboard.h>
+#include "graphic/video.h" // For WindowClip
 #include "gui/widget_list.h"
 #include "gui/widget.h"
 #include "interface/mouse.h"
@@ -302,7 +303,11 @@ void WidgetList::Draw(const Point2i &mousePosition) const
       w != widget_list.end();
       w++)
   {
+    Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
+
+    SwapWindowClip(r);
     (*w)->Draw(mousePosition);
+    SwapWindowClip(r);
   }
 }
 

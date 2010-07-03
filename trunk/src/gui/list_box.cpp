@@ -21,11 +21,11 @@
 
 #include <algorithm>
 
+#include "graphic/text.h"
+#include "graphic/video.h"
 #include "gui/list_box.h"
 #include "gui/button.h"
 #include "gui/container.h"
-#include "graphic/text.h"
-#include "graphic/video.h"
 #include "include/app.h"
 #include "tool/resource_manager.h"
 
@@ -250,14 +250,19 @@ void BaseListBox::Draw(const Point2i & mousePosition) const
     }
 
     // Really draw items
-    m_items.at(i)->SetPosition(pos);
-    m_items.at(i)->SetSize(size.x - 12, m_items.at(i)->GetSizeY() - 2);
-    m_items.at(i)->Pack();
+    Widget *w = m_items[i];
+    w->SetPosition(pos);
+    w->SetSize(size.x - 12, m_items.at(i)->GetSizeY() - 2);
+    w->Pack();
     if (draw_it) {
-      m_items.at(i)->Draw(mousePosition);
+      Rectanglei r(w->GetPosition(), w->GetSize());
+
+      SwapWindowClip(r);
+      w->Draw(mousePosition);
+      SwapWindowClip(r);
     }
 
-    pos += Point2i(0, m_items.at(i)->GetSizeY());
+    pos += Point2i(0, w->GetSizeY());
   }
 
   if (draw_it) {
