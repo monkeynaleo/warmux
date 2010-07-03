@@ -53,19 +53,23 @@ const Double REALTIME_FOLLOW_FACTOR = 0.15;
 
 uint MAX_REFRESHES_PER_SECOND = 100;
 
-Camera::Camera():
-  m_started_shaking(0),
-  m_shake_duration(0),
-  m_shake_amplitude(0, 0),
-  m_shake_centerpoint(0, 0),
-  m_shake(0, 0),
-  m_last_time_shake_calculated(0),
-  m_speed(0, 0),
-  m_stop(false),
-  m_control_mode(NO_CAMERA_CONTROL),
-  m_begin_controlled_move_time(0),
-  auto_crop(true),
-  followed_object(NULL)
+Camera::Camera()
+  : m_started_shaking(0)
+  , m_shake_duration(0)
+  , m_shake_amplitude(0, 0)
+  , m_shake_centerpoint(0, 0)
+  , m_shake(0, 0)
+  , m_last_time_shake_calculated(0)
+  , m_speed(0, 0)
+  , m_stop(false)
+  , m_control_mode(NO_CAMERA_CONTROL)
+  , m_begin_controlled_move_time(0)
+  , m_mouse_counter(0)
+  , m_scroll_start_pos(0,0)
+  , m_last_mouse_pos(0,0)
+  , m_scroll_vector(0.0,0.0)
+  , auto_crop(true)
+  , followed_object(NULL)
 {
   pointer_used_before_scroll = Mouse::POINTER_SELECT;
 }
@@ -145,14 +149,9 @@ void Camera::AutoCrop()
     if (followed_object->IsMoving()) {
       Point2d anticipation = ADVANCE_ANTICIPATION * followed_object->GetSpeed();
 
-      Point2d anticipation_limit = GetSize()/3;
       //limit anticipation to screen size/3
-      if (anticipation.x > anticipation_limit.x) anticipation.x = anticipation_limit.x;
-      if (anticipation.y > anticipation_limit.y) anticipation.y = anticipation_limit.y;
-      if (anticipation.x < -anticipation_limit.x) anticipation.x = -anticipation_limit.x;
-      if (anticipation.y < -anticipation_limit.y) anticipation.y = -anticipation_limit.y;
-
-      target += anticipation;
+      Point2d anticipation_limit = GetSize()/3;
+      target += anticipation.clamp(-anticipation_limit, anticipation_limit);
     }
 
     target -= GetSize()/2;
@@ -235,45 +234,90 @@ void Camera::ScrollCamera()
 
   Point2i mousePos = Mouse::GetInstance()->GetPosition();
 
-  uint zone_size = Config::GetInstance()->GetScrollBorderSize();
-  Point2i sensitZone(zone_size, zone_size);
+  if (!Config::GetInstance()->GetScrollOnBorder()) {
+    /* Kinetic scrolling */
+    if (!SDL_GetMouseState(NULL, NULL)) {
+      m_scroll_start_pos = Point2i();
+      m_last_mouse_pos   = Point2i();
+      m_mouse_counter    = 0;
 
-  /* tstVector represents the vector of how deep the cursor is in a sensit
-   * zone; negative value means that the camera has to reduce its coordinates,
-   * a positive value means that it should increase. Actually reduce means
-   * LEFT/UP (for x/y) and increase RIGHT/DOWN directions.
-   * The bigger tstVector is, the faster the camera will scroll. */
-  Point2i tstVector;
-  tstVector = GetSize().inf(mousePos + sensitZone) * (mousePos + sensitZone - GetSize()) ;
-  tstVector -= mousePos.inf(sensitZone) * (sensitZone - mousePos);
+      if (!m_scroll_vector.IsNull()) {
+        Point2d brk = m_scroll_vector.GetNormal() * Double(0.2);
 
-  if (!tstVector.IsNull()) {
-    SetXY(tstVector);
-    SetAutoCrop(false);
+        MSG_DEBUG("camera", "scroll_vector=(%f,%f)  scroll_vector_break=(%f,%f)\n",
+                  m_scroll_vector.GetX(), m_scroll_vector.GetY(), brk.GetX(), brk.GetY());
+
+        m_scroll_vector -= brk;
+        SetXY(-m_scroll_vector);
+        SetAutoCrop(false);
+        if (m_scroll_vector.Norm() < 1)
+          m_scroll_vector = Point2d();
+      }
+      return;
+    }
+    m_mouse_counter++;
+
+    if (m_scroll_start_pos.IsNull())
+      m_scroll_start_pos = mousePos;
+    if (m_last_mouse_pos.IsNull())
+      m_last_mouse_pos = mousePos;
+
+      m_scroll_vector = mousePos - m_scroll_start_pos;
+      m_scroll_vector = m_scroll_vector / m_mouse_counter;
+      MSG_DEBUG("camera",
+                "scroll_vector=(%f,%f)\n"
+                "mousePos=(%i,%i)"
+                "lastMousePos=(%i,%i)"
+                "scrollStartPos=(%i,%i)",
+                m_scroll_vector.GetX(), m_scroll_vector.GetY(),
+                m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
+                m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
+
+      SetXY(-(mousePos-m_last_mouse_pos));
+      m_last_mouse_pos = mousePos;
+      SetAutoCrop(false);
+  } else {
+
+    uint zone_size = Config::GetInstance()->GetScrollBorderSize();
+    Point2i sensitZone(zone_size, zone_size);
+
+    /* tstVector represents the vector of how deep the cursor is in a sensit
+     * zone; negative value means that the camera has to reduce its coordinates,
+     * a positive value means that it should increase. Actually reduce means
+     * LEFT/UP (for x/y) and increase RIGHT/DOWN directions.
+     * The bigger tstVector is, the faster the camera will scroll. */
+    Point2i tstVector;
+    tstVector = GetSize().inf(mousePos + sensitZone) * (mousePos + sensitZone - GetSize()) ;
+    tstVector -= mousePos.inf(sensitZone) * (sensitZone - mousePos);
+
+    if (!tstVector.IsNull()) {
+      SetXY(tstVector);
+      SetAutoCrop(false);
+    }
+
+    /* mouse pointer ***********************************************************/
+    SaveMouseCursor();
+
+    if (tstVector.IsNull())
+      RestoreMouseCursor();
+    else if (tstVector.IsXNull() && tstVector.y < 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP);
+    else if (tstVector.IsXNull() && tstVector.y > 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN);
+    else if (tstVector.IsYNull() && tstVector.x < 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_LEFT);
+    else if (tstVector.IsYNull() && tstVector.x > 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_RIGHT);
+    else if (tstVector.y > 0 && tstVector.x > 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_RIGHT);
+    else if (tstVector.y < 0 && tstVector.x > 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_RIGHT);
+    else if (tstVector.y < 0 && tstVector.x < 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_LEFT);
+    else if (tstVector.y > 0 && tstVector.x < 0)
+      Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_LEFT);
+    /***************************************************************************/
   }
-
-  /* mouse pointer ***********************************************************/
-  SaveMouseCursor();
-
-  if (tstVector.IsNull())
-    RestoreMouseCursor();
-  else if (tstVector.IsXNull() && tstVector.y < 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP);
-  else if (tstVector.IsXNull() && tstVector.y > 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN);
-  else if (tstVector.IsYNull() && tstVector.x < 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_LEFT);
-  else if (tstVector.IsYNull() && tstVector.x > 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_RIGHT);
-  else if (tstVector.y > 0 && tstVector.x > 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_RIGHT);
-  else if (tstVector.y < 0 && tstVector.x > 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_RIGHT);
-  else if (tstVector.y < 0 && tstVector.x < 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_UP_LEFT);
-  else if (tstVector.y > 0 && tstVector.x < 0)
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_ARROW_DOWN_LEFT);
-  /***************************************************************************/
 }
 
 void Camera::HandleMouseMovement()
@@ -330,10 +374,8 @@ void Camera::HandleMouseMovement()
     m_begin_controlled_move_time = 0;
   }
 
+  ScrollCamera();
   last_mouse_pos = curr_pos;
-
-  if (Config::GetInstance()->GetScrollOnBorder())
-    ScrollCamera();
 }
 
 void Camera::HandleMoveIntentions()

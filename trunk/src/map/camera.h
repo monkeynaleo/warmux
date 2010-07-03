@@ -58,6 +58,12 @@ private:
   CameraControlMode m_control_mode;
   int m_begin_controlled_move_time;
 
+  // Kinetic scrolling
+  uint m_mouse_counter;
+  Point2i m_scroll_start_pos;
+  Point2i m_last_mouse_pos;
+  Point2d m_scroll_vector;
+
   void SaveMouseCursor();
   void RestoreMouseCursor();
 
