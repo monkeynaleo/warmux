@@ -34,7 +34,7 @@
 // Lifespan of messages
 #define MSG_LIFESPAN 7000 // ms
 
-#define NBR_MSG_MAX  14;
+#define NBR_MSG_MAX  14
 
 // Clean up the message list
 void GameMessages::Reset() {
