@@ -71,7 +71,12 @@ SpinButton::SpinButton (const std::string & _label,
 
 SpinButton::SpinButton(Profile * profile,
                        const xmlNode * spinButtonNode) :
-  AbstractSpinButton(profile, spinButtonNode)
+  AbstractSpinButton(profile, spinButtonNode),
+  shadowed(false),
+  txtLabel(NULL),
+  txtValue(NULL),
+  m_plus(NULL),
+  m_minus(NULL)
 {
 }
 
@@ -151,12 +156,12 @@ void SpinButton::Pack()
 {
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
-  uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
+  uint max_value_w = (*Font::GetInstance(txtValue->GetFontSize())).GetWidth(max_value_s.str());
 
-  uint margin = 5;
-
-  m_plus->SetPosition(position.x + size.x - 5, position.y);
-  m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
+  m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), 
+                      position.y + (size.y / 2) - (m_plus->GetSizeY() / 2));
+  m_minus->SetPosition(position.x + size.x - (m_plus->GetSizeX() + max_value_w + m_plus->GetSizeX()), 
+                       position.y + (size.y / 2) - (m_minus->GetSizeY() / 2));
 
   txtLabel->SetMaxWidth(size.x - 30);
   size.y = txtLabel->GetHeight();
@@ -166,8 +171,8 @@ void SpinButton::Draw(const Point2i & mousePosition) const
 {
   txtLabel->DrawTopLeft(position);
 
-  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX())/2;
-  txtValue->DrawCenterTop(Point2i(center, position.y));
+  uint center = m_plus->GetPositionX() - (m_plus->GetPositionX() - (m_minus->GetPositionX() + m_minus->GetSizeX())) / 2;
+  txtValue->DrawCenterTop(Point2i(center, position.y)); //CenterTop
 
   if (GetValue() != GetMinValue()) {
     m_minus->Draw(mousePosition);
@@ -177,7 +182,8 @@ void SpinButton::Draw(const Point2i & mousePosition) const
   }
 }
 
-Widget * SpinButton::ClickUp(const Point2i & mousePosition, uint button)
+Widget * SpinButton::ClickUp(const Point2i & mousePosition, 
+                             uint button)
 {
   NeedRedrawing();
 
