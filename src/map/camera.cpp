@@ -244,8 +244,12 @@ void Camera::ScrollCamera()
       if (!m_scroll_vector.IsNull()) {
         Point2d brk = m_scroll_vector.GetNormal() * Double(0.2);
 
-        MSG_DEBUG("camera", "scroll_vector=(%f,%f)  scroll_vector_break=(%f,%f)\n",
-                  m_scroll_vector.GetX(), m_scroll_vector.GetY(), brk.GetX(), brk.GetY());
+        MSG_DEBUG("camera",
+                  "scroll_vector=(%s,%s)  scroll_vector_break=(%s,%s)\n",
+                  Double2str(m_scroll_vector.GetX(), 3).c_str(),
+                  Double2str(m_scroll_vector.GetY(), 3).c_str(),
+                  Double2str(brk.GetX(), 3).c_str(),
+                  Double2str(brk.GetY(), 3).c_str());
 
         m_scroll_vector -= brk;
         SetXY(-m_scroll_vector);
@@ -269,9 +273,12 @@ void Camera::ScrollCamera()
                 "mousePos=(%i,%i)"
                 "lastMousePos=(%i,%i)"
                 "scrollStartPos=(%i,%i)",
-                m_scroll_vector.GetX(), m_scroll_vector.GetY(),
-                m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
-                m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
+                Double2str(m_scroll_vector.GetX(), 3).c_str(),
+                Double2str(m_scroll_vector.GetY(), 3).c_str(),
+                Double2str(m_last_mouse_pos.GetX(), 3).c_str(),
+                Double2str(m_last_mouse_pos.GetY(), 3).c_str(),
+                Double2str(m_scroll_start_pos.GetX(), 3).c_str(),
+                Double2str(m_scroll_start_pos.GetY(), 3).c_str());
 
       SetXY(-(mousePos-m_last_mouse_pos));
       m_last_mouse_pos = mousePos;
