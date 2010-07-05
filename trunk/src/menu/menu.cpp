@@ -48,9 +48,6 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
 
-  uint x = app->video->window.GetWidth() / 2;
-  uint y = app->video->window.GetHeight() - 50;
-
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( GetResourceManager().LoadImage( res, bg), true);
   background->cache.EnableLastFrameCache();
@@ -72,6 +69,9 @@ Menu::Menu(const std::string& bg, t_action _actions) :
       b_cancel = new Button(res, "menu/annuler");
       actions_buttons->AddWidget(b_cancel);
     }
+
+    uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
+    uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
 
     actions_buttons->SetPosition(x, y);
     widgets.AddWidget(actions_buttons);
@@ -103,7 +103,7 @@ Menu::~Menu()
 }
 
 void Menu::LoadMenu(Profile * profile,
-                    const xmlNode * rootMenuNode) 
+                    const xmlNode * rootMenuNode)
 {
   LoadBackground(profile, rootMenuNode);
   LoadWidget(profile, rootMenuNode, &widgets);
@@ -124,7 +124,7 @@ void Menu::LoadBackground(Profile * profile,
 
 void Menu::LoadWidget(Profile * profile,
                       const xmlNode * rootMenuNode,
-                      WidgetList * container) 
+                      WidgetList * container)
 {
   XmlReader * xmlFile = profile->GetXMLDocument();
   unsigned int widgetCount = xmlFile->GetNbChildren(rootMenuNode);
@@ -188,7 +188,7 @@ Widget * Menu::CreateWidget(Profile * profile,
     widget = new ListBox(profile, widgetNode);
   }
 
-  if (NULL != widget) { 
+  if (NULL != widget) {
     return widget->LoadXMLConfiguration() ? widget : NULL;
   }
   return NULL;
@@ -354,43 +354,43 @@ void Menu::HandleEvent(const SDL_Event& event)
     bool used_by_widget = false;
 
     if (event.key.keysym.sym != SDLK_ESCAPE &&
-	event.key.keysym.sym != SDLK_RETURN &&
-	event.key.keysym.sym != SDLK_KP_ENTER)
+        event.key.keysym.sym != SDLK_RETURN &&
+        event.key.keysym.sym != SDLK_KP_ENTER)
       used_by_widget = widgets.SendKey(event.key.keysym);
 
     if (!used_by_widget) {
       switch (event.key.keysym.sym)
-	{
-	case SDLK_ESCAPE:
-	  key_cancel();
-	  break;
-	case SDLK_RETURN:
-	case SDLK_KP_ENTER:
-	  key_ok();
-	  break;
-	case SDLK_UP:
-	  key_up();
-	  break;
-	case SDLK_DOWN:
-	  key_down();
-	  break;
-	case SDLK_LEFT:
-	  key_left();
-	  break;
-	case SDLK_RIGHT:
-	  key_right();
-	  break;
-	case SDLK_TAB:
-	  key_tab();
-	  break;
-	default:
-	  // should have been handle upper!
-	  break;
-	}
+        {
+        case SDLK_ESCAPE:
+          key_cancel();
+          break;
+        case SDLK_RETURN:
+        case SDLK_KP_ENTER:
+          key_ok();
+          break;
+        case SDLK_UP:
+          key_up();
+          break;
+        case SDLK_DOWN:
+          key_down();
+          break;
+        case SDLK_LEFT:
+          key_left();
+          break;
+        case SDLK_RIGHT:
+          key_right();
+          break;
+        case SDLK_TAB:
+          key_tab();
+          break;
+        default:
+          // should have been handle upper!
+          break;
+        }
     }
   } else if (event.type == SDL_MOUSEBUTTONUP) {
     Point2i mousePosition(event.button.x, event.button.y);
-    
+
     if (!BasicOnClickUp(mousePosition)) {
       OnClickUp(mousePosition, event.button.button);
     }
