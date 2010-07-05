@@ -128,7 +128,7 @@ void MultiTabs::NextTab()
   if (tabs.empty())
     return;
 
-  if (current_tab == int(tabs.size())-1) {
+  if (current_tab+1 == tabs.size()) {
 #if CIRCULAR_TABS
     SelectTab(0);
 #endif
