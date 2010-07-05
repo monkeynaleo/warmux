@@ -34,9 +34,6 @@ class Label;
 class PictureWidget;
 class TextBox;
 
-#define TEAMS_BOX_H  250
-
-
 class TeamBox : public HBox
 {
  private:

@@ -46,7 +46,6 @@ GameMenu::GameMenu() :
   Menu("menu/bg_play")
 {
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
-  Point2i stdSize(130, W_UNDEF);
 
   Surface& window = GetMainWindow();
 
@@ -89,7 +88,7 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-  Point2i option_size(130, 130);
+  Point2i option_size(114, 114);
 
   game_options = new GameModeEditor(mainBoxWidth, option_size, false);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);

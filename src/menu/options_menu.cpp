@@ -60,40 +60,49 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Config * config = Config::GetInstance();
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  Point2i option_size(90, 90);
+  int window_w = app->video->window.GetWidth();
+  int window_h = app->video->window.GetHeight();
 
-  uint max_width = app->video->window.GetWidth()-10;
+  Point2i option_size((window_w<640 || window_h<480) ? 104 : 130,
+                      (window_w<640 || window_h<480) ? 104 : 130);
+
+  int border    = 0.03 * window_w;
+  int max_width = window_w - 2*border;
 
   /* Tabs */
-  MultiTabs * tabs = new MultiTabs(Point2i(max_width,
-                                           app->video->window.GetHeight()-50));
-  tabs->SetPosition(5, 5);
+  MultiTabs * tabs =
+    new MultiTabs(Point2i(max_width, window_h -actions_buttons->GetSizeY() -border));
+  tabs->SetPosition(border, border);
 
   /* Graphic options */
   Box * graphic_options = new GridBox(2, 4, 0, false);
 
   // Various options
-  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
+  opt_display_wind_particles =
+    new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
   graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_display_multisky = new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size);
+  opt_display_multisky =
+    new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size);
   graphic_options->AddWidget(opt_display_multisky);
 
-  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
+  opt_display_energy =
+    new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
   graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
+  opt_display_name =
+    new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
 #ifndef __APPLE__
-  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
+  full_screen =
+    new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
 #endif
 
-  opt_max_fps = new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                                          option_size,
-                                          50, 5,
-                                          20, 50);
+  opt_max_fps =
+    new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
+                              option_size, 50, 5, 20, 50);
   graphic_options->AddWidget(opt_max_fps);
 
   // Get available video resolution
@@ -107,13 +116,14 @@ OptionMenu::OptionMenu() :
     std::string text;
     ss << mode->GetX() << "x" << mode->GetY() ;
     text = ss.str();
-    if (app->video->window.GetWidth() == mode->GetX() && app->video->window.GetHeight() == mode->GetY())
+    if (window_w == mode->GetX() && window_h == mode->GetY())
       current_resolution = text;
 
     video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
-  cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
-                                 video_resolutions, current_resolution);
+  cbox_video_mode =
+    new ComboBox(_("Resolution"), "menu/resolution", option_size,
+                 video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
 
   tabs->AddNewTab("unused", _("Graphics"), graphic_options);
@@ -137,15 +147,18 @@ OptionMenu::OptionMenu() :
     Box * teams_editor_inf = new VBox(lwidth, true, false);
     Box * box_team_name = new HBox(30, false, true);
 
-    team_name = new Label(Format("%s:", _("Head commander")), 100, Font::FONT_SMALL, Font::FONT_BOLD);
+    team_name = new Label(Format("%s:", _("Head commander")), 100,
+                          Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(team_name);
 
-    tbox_team_name = new TextBox("", lwidth - 100 - 40, Font::FONT_SMALL, Font::FONT_BOLD);
+    tbox_team_name = new TextBox("", lwidth - 100 - 40,
+                                 Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(tbox_team_name);
 
     teams_editor_inf->AddWidget(box_team_name);
 
-    Label* label_ch_names = new Label(_("Character names:"), 0, Font::FONT_SMALL, Font::FONT_BOLD);
+    Label* label_ch_names = new Label(_("Character names:"), 0,
+                                      Font::FONT_SMALL, Font::FONT_BOLD);
     teams_editor_inf->AddWidget(label_ch_names);
 
     Box * teams_editor_names = new GridBox(5, 2, 2, false);
@@ -153,7 +166,8 @@ OptionMenu::OptionMenu() :
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40,Font::FONT_SMALL, Font::FONT_BOLD));
+      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40,
+                                                     Font::FONT_SMALL, Font::FONT_BOLD));
       Label * lab = new Label(oss.str(), 30, Font::FONT_SMALL, Font::FONT_BOLD);
 
       Box * name_box = new HBox(20, false, true);
@@ -196,21 +210,25 @@ OptionMenu::OptionMenu() :
   Box * misc_options = new GridBox(3, 3, 0, false);
 
 #ifdef HAVE_LIBCURL
-  opt_updates = new PictureTextCBox(_("Check updates online?"),
-                                    "menu/ico_update", option_size);
+  opt_updates =
+    new PictureTextCBox(_("Check updates online?"),
+                        "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 #endif
 
-  opt_lefthanded_mouse = new PictureTextCBox(_("Left-handed mouse?"),
-                                             "menu/ico_lefthanded_mouse", option_size);
+  opt_lefthanded_mouse =
+    new PictureTextCBox(_("Left-handed mouse?"),
+                        "menu/ico_lefthanded_mouse", option_size);
   misc_options->AddWidget(opt_lefthanded_mouse);
 
-  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", option_size);
+  opt_scroll_on_border =
+    new PictureTextCBox(_("Scroll on border"),
+                        "menu/scroll_on_border", option_size);
   misc_options->AddWidget(opt_scroll_on_border);
 
-  opt_scroll_border_size = new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
-                                                     option_size,
-                                                     50, 5, 5, 80);
+  opt_scroll_border_size =
+    new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
+                              option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 
   tabs->AddNewTab("unused", _("Misc"), misc_options);
@@ -218,33 +236,35 @@ OptionMenu::OptionMenu() :
   /* Sound options */
   Box * sound_options = new GridBox(3, 3, 0, false);
 
-  music_cbox = new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
+  music_cbox =
+    new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
   sound_options->AddWidget(music_cbox);
 
   initial_vol_mus = config->GetVolumeMusic();
-  volume_music = new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
-                                           option_size,
-                                           fromVolume(initial_vol_mus), 5,
-                                           0, 100);
+  volume_music =
+    new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
+                              option_size,
+                              fromVolume(initial_vol_mus), 5, 0, 100);
   sound_options->AddWidget(volume_music);
 
-  effects_cbox = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", option_size);
+  effects_cbox =
+    new PictureTextCBox(_("Sound effects?"),
+                        "menu/sound_effects_enable", option_size);
   sound_options->AddWidget(effects_cbox);
 
   initial_vol_eff = config->GetVolumeEffects();
-  volume_effects = new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
-                                             option_size,
-                                             fromVolume(initial_vol_eff), 5,
-                                             0, 100);
+  volume_effects =
+    new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
+                              option_size, fromVolume(initial_vol_eff), 5, 0, 100);
   sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
   uint current_freq = JukeBox::GetInstance()->GetFrequency();
   std::vector<std::pair<std::string, std::string> > sound_freqs;
   std::string current_sound_freq;
-  sound_freqs.push_back (std::pair<std::string, std::string> ("11025", "11 kHz"));
-  sound_freqs.push_back (std::pair<std::string, std::string> ("22050", "22 kHz"));
-  sound_freqs.push_back (std::pair<std::string, std::string> ("44100", "44 kHz"));
+  sound_freqs.push_back(std::pair<std::string, std::string>("11025", "11 kHz"));
+  sound_freqs.push_back(std::pair<std::string, std::string>("22050", "22 kHz"));
+  sound_freqs.push_back(std::pair<std::string, std::string>("44100", "44 kHz"));
 
   if (current_freq == 44100)
     current_sound_freq = "44100";
@@ -257,7 +277,8 @@ OptionMenu::OptionMenu() :
                                  option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 
-  warn_cbox = new PictureTextCBox(_("New player warning?"), "menu/warn_on_new_player", option_size);
+  warn_cbox = new PictureTextCBox(_("New player warning?"),
+                                  "menu/warn_on_new_player", option_size);
   sound_options->AddWidget(warn_cbox);
 
   tabs->AddNewTab("unused", _("Sound"), sound_options);
@@ -296,7 +317,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית (Hebrew)",      "he");
   lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
   lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
-  lbox_languages->AddItem(config->GetLanguage() == "ja_JP", "日本語 (japanese)",   "ja_JP");
+  lbox_languages->AddItem(config->GetLanguage() == "ja_JP", "日本語 (japanese)",    "ja_JP");
   lbox_languages->AddItem(config->GetLanguage() == "kw",    "Kernewek",            "kw");
   lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
   lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk (bokmål)",      "nb");
@@ -314,7 +335,7 @@ OptionMenu::OptionMenu() :
   lbox_languages->AddItem(config->GetLanguage() == "tr",    "Türkçe",              "tr");
   lbox_languages->AddItem(config->GetLanguage() == "ua",    "украї́нська мо́ва",     "ua");
   lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
-  lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",              "zh_TW");
+  lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",        "zh_TW");
 #endif
 
 #ifdef HAVE_LIBCURL
@@ -410,10 +431,11 @@ void OptionMenu::SaveOptions()
   app->video->SetConfig(w, h, full_screen->GetValue());
 #endif
 
-  uint x = app->video->window.GetWidth() / 2;
-  uint y = app->video->window.GetHeight() - 50;
+  uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
+  uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
 
   SetActionButtonsXY(x, y);
+
 
 #if ENABLE_NLS
   // Language
