@@ -144,7 +144,7 @@ void Widget::ParseXMLBackground(void)
 
   Color backgroundColor = defaultOptionColorBox;
   xmlFile->ReadHexColorAttr(widgetNode, "backgroundColor", backgroundColor);
-  SetBackgroundColor(backgroundColor);  
+  SetBackgroundColor(backgroundColor);
 }
 
 void Widget::ParseXMLPosition(void)
@@ -171,8 +171,8 @@ int Widget::ParseHorizontalTypeAttribut(const std::string & attributName,
   }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  Double tmpValue;
-  
+  float tmpValue;
+
   if (xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue)) {
     finalValue = GetMainWindow().GetWidth() * tmpValue / 100;
   } else {
@@ -181,17 +181,17 @@ int Widget::ParseHorizontalTypeAttribut(const std::string & attributName,
   return finalValue;
 }
 
-int Widget::ParseVerticalTypeAttribut(const std::string & attributName, 
+int Widget::ParseVerticalTypeAttribut(const std::string & attributName,
                                       int defaultValue)
 {
   int finalValue = defaultValue;
-  
+
   if (NULL == profile || NULL == widgetNode) {
     return finalValue;
   }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  Double tmpValue;
+  float tmpValue;
 
   if (xmlFile->ReadPercentageAttr(widgetNode, attributName, tmpValue)) {
     finalValue = GetMainWindow().GetHeight() * tmpValue / 100;

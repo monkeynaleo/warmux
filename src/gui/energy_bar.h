@@ -26,19 +26,19 @@
 #include "tool/resource_manager.h"
 #include <vector>
 
-class EnergyBar : public ProgressBar 
+class EnergyBar : public ProgressBar
 {
   public:
     class Threshold
     {
       public:
-        Double value;
+        float value;
         Color color;
-        Double redCoef;
-        Double greenCoef;
-        Double blueCoef;
-        Double alphaCoef;
-        
+        float redCoef;
+        float greenCoef;
+        float blueCoef;
+        float alphaCoef;
+
         bool operator < (const Threshold & threshold) const {
           return value < threshold.value;
         }
@@ -65,7 +65,7 @@ class EnergyBar : public ProgressBar
 
     virtual bool LoadXMLConfiguration(void);
     void ProcessThresholds(int thresholdNumber,
-                           Double thresholdMax,
+                           float thresholdMax,
                            Color & colorMax);
     void SortThresholds();
     void Actu(long val);

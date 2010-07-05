@@ -40,10 +40,10 @@ public:
   };
 
 private:
-  Double coefRed;
-  Double coefGreen;
-  Double coefBlue;
-  Double coefAlpha;
+  float coefRed;
+  float coefGreen;
+  float coefBlue;
+  float coefAlpha;
   int divisor;
   bool gradientMode;
 
