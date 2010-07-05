@@ -96,7 +96,7 @@ void FramePerSecond::Draw(){
   if( average < 0 )
     return;
 
-  text->SetText(Format(_("%s fps"), Double2str(average,1).c_str()));
+  text->SetText(Format(_("%.1f fps"), average));
   text->DrawTopRight(Point2i(GetMainWindow().GetWidth()-1,0));
 }
 
