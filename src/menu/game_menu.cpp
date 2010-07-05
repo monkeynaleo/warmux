@@ -55,7 +55,7 @@ GameMenu::GameMenu() :
   uint mapsHeight = mainBoxHeight - TEAMS_BOX_H - 80;
   uint multitabsWidth = mainBoxWidth;
   bool multitabs = false;
-  if (mapsHeight > 200) {
+  if (window.GetWidth() > 640 && mapsHeight > 200) {
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
   } else {
