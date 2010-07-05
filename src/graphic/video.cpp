@@ -111,10 +111,6 @@ void Video::ComputeAvailableConfigs()
   if(modes != NULL){
     // We also had the current window resolution if it is not already in the list!
     for(int i=0;modes[i];++i) {
-#ifndef ANDROID
-      // We accept only modes that are bigger than 640x480
-      if (modes[i]->w < 640 || modes[i]->h < 480) break;
-#endif
       available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
     }
   }
@@ -189,13 +185,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
   int old_width, old_height;
   bool old_fullscreen, old_hw;
   if (window_was_null) {
-#ifdef ANDROID
-    old_width = 480;
-    old_height = 320;
-#else
     old_width = 640;
     old_height = 480;
-#endif
     old_hw = true;
   } else {
     old_width = window.GetWidth();
