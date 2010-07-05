@@ -60,14 +60,14 @@ OptionMenu::OptionMenu() :
   AppWormux * app = AppWormux::GetInstance();
   Config * config = Config::GetInstance();
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  Point2i option_size(140, 130);
+  Point2i option_size(90, 90);
 
-  uint max_width = app->video->window.GetWidth()-50;
+  uint max_width = app->video->window.GetWidth()-10;
 
   /* Tabs */
   MultiTabs * tabs = new MultiTabs(Point2i(max_width,
-                                           app->video->window.GetHeight()-100));
-  tabs->SetPosition(25, 25);
+                                           app->video->window.GetHeight()-50));
+  tabs->SetPosition(5, 5);
 
   /* Graphic options */
   Box * graphic_options = new GridBox(2, 4, 0, false);
@@ -115,7 +115,7 @@ OptionMenu::OptionMenu() :
   cbox_video_mode = new ComboBox(_("Resolution"), "menu/resolution", option_size,
                                  video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
-  
+
   tabs->AddNewTab("unused", _("Graphics"), graphic_options);
 
 #ifdef ENABLE_NLS
@@ -128,18 +128,19 @@ OptionMenu::OptionMenu() :
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
   if (!Game::IsRunning()) {
-    Box * teams_editor = new HBox(option_size.x, false, true);
-    Box * teams_editor_inf = new VBox(max_width - option_size.x - 10, true, false);
+    Box * teams_editor = new HBox(option_size.y, false, true);
 
     lbox_teams = new ListBox(option_size, false);
     teams_editor->AddWidget(lbox_teams);
 
+    uint lwidth = max_width - option_size.x - 30;
+    Box * teams_editor_inf = new VBox(lwidth, true, false);
     Box * box_team_name = new HBox(30, false, true);
 
-    team_name = new Label(Format("%s:", _("Head commander")), 150, Font::FONT_SMALL, Font::FONT_BOLD);
+    team_name = new Label(Format("%s:", _("Head commander")), 100, Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(team_name);
 
-    tbox_team_name = new TextBox("", 160, Font::FONT_SMALL, Font::FONT_BOLD);
+    tbox_team_name = new TextBox("", lwidth - 100 - 40, Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(tbox_team_name);
 
     teams_editor_inf->AddWidget(box_team_name);
@@ -147,14 +148,12 @@ OptionMenu::OptionMenu() :
     Label* label_ch_names = new Label(_("Character names:"), 0, Font::FONT_SMALL, Font::FONT_BOLD);
     teams_editor_inf->AddWidget(label_ch_names);
 
-    Point2i names_size(190, 20);
-
-    Box * teams_editor_names = new GridBox(5, 2, 0, false);
+    Box * teams_editor_names = new GridBox(5, 2, 2, false);
 
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("",160,Font::FONT_SMALL, Font::FONT_BOLD));
+      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40,Font::FONT_SMALL, Font::FONT_BOLD));
       Label * lab = new Label(oss.str(), 30, Font::FONT_SMALL, Font::FONT_BOLD);
 
       Box * name_box = new HBox(20, false, true);
