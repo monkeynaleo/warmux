@@ -82,7 +82,11 @@ void WidgetList::Update(const Point2i &mousePosition)
       w++)
   {
     // Then redraw the widget
+    Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
+
+    SwapWindowClip(r);
     (*w)->Update(mousePosition, lastMousePosition);
+    SwapWindowClip(r);
   }
 
   lastMousePosition = mousePosition;
