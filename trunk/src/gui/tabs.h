@@ -38,7 +38,7 @@ private:
 
   uint max_visible_tabs;
 
-  int current_tab;
+  uint current_tab;
   uint first_tab;
   uint nb_visible_tabs;
   uint tab_header_width;
@@ -67,7 +67,7 @@ public:
   virtual void NeedRedrawing();
   virtual void Draw(const Point2i &mousePosition) const;
   virtual void Update(const Point2i &mousePosition,
-		      const Point2i &lastMousePosition);
+          const Point2i &lastMousePosition);
   virtual void Pack();
 
   virtual bool SendKey(const SDL_keysym&);
