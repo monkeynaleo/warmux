@@ -106,15 +106,10 @@ public:
     snprintf(buffer, 16, "%i", score);
     SetWidgets(size, type, buffer, player);
   }
-  ResultBox(uint size, const std::string& type, Double score, const Character* player)
+  ResultBox(uint size, const std::string& type, float score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
-    std::string score_str;
-    if (score+(Double)0.05<(Double)100.0) {
-      score_str = Double2str(score, 1);
-    } else {
-      score_str = Double2str(score, 0);
-    }
+    std::string score_str = float2str(score);
     SetWidgets(size, type, score_str.c_str(), player);
   }
   void Draw(const Point2i &mousePosition) const
@@ -220,23 +215,23 @@ private:
 
 public:
   CanvasTeamsGraph(const Point2i& size,
-		   std::vector<TeamResults*>& results);
+                   std::vector<TeamResults*>& results);
   virtual ~CanvasTeamsGraph() {};
   virtual void Draw(const Point2i&) const;
 
   virtual void DrawTeamGraph(const Team *team,
-			     int x, int y,
-			     Double duration_scale,
-			     Double energy_scale,
+                             int x, int y,
+                             float duration_scale,
+                             float energy_scale,
                              uint   max_duration,
-			     const Color& color) const;
+                             const Color& color) const;
   virtual void DrawGraph(int x, int y, int w, int h) const;
 
   virtual void Pack() {};
 };
 
 CanvasTeamsGraph::CanvasTeamsGraph(const Point2i& size,
-				   std::vector<TeamResults*>& _results) :
+                                   std::vector<TeamResults*>& _results) :
   Widget(size), results(_results)
 {}
 
@@ -247,11 +242,11 @@ void CanvasTeamsGraph::Draw(const Point2i& /*mousePosition*/) const
 }
 
 void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
-				     int x, int y,
-				     Double duration_scale,
-				     Double energy_scale,
+                                     int x, int y,
+                                     float duration_scale,
+                                     float energy_scale,
                                      uint   max_duration,
-				     const Color& color) const
+                                     const Color& color) const
 {
   EnergyList::const_iterator it = team->energy.energy_list.begin(),
     end = team->energy.energy_list.end();
@@ -328,18 +323,18 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   //DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
   surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Time"), black_color),
                Point2i(graph_x+graph_w/2, y+graph_h+8));
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(PI/2, 1.0, 1.0, false),
+  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(M_PI/2, 1.0, 1.0, false),
                Point2i(x+4, graph_h/2));
   char buffer[16];
-  snprintf(buffer, 16, "%.1f", max_duration/1000.0);
+  snprintf(buffer, 16, "%.1f", max_duration/1000.0f);
   surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
                Point2i(x+graph_w-20, y+graph_h+8));
 
   // Draw each team graph
-  Double energy_scale = graph_h / (1.05*max_value);
-  Double duration_scale = graph_w / (1.05*max_duration);
-  MSG_DEBUG("menu", "Scaling: %s (duration; %u) and %s\n",
-            Double2str(duration_scale,1).c_str(), Time::GetInstance()->Read(), Double2str(energy_scale,1).c_str());
+  float energy_scale = graph_h / (1.05f*max_value);
+  float duration_scale = graph_w / (1.05f*max_duration);
+  MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
+            duration_scale, Time::GetInstance()->Read(), energy_scale);
 
   uint               index   = 0;
   static const Color clist[] =
