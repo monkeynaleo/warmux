@@ -39,14 +39,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef FIXEDP_FUNC_H_INCLUDED
 #define FIXEDP_FUNC_H_INCLUDED
 
+#include <math.h>
 #ifdef _MSC_VER
-#pragma once
-#endif
-
-#ifndef _MSC_VER
-#include <stdint.h>
+#  pragma once
+#  include "stdint_fallback.h"
 #else
-#include "stdint_fallback.h"
+#  include <stdint.h>
 #endif
 
 #define FIXINT_BITS  64

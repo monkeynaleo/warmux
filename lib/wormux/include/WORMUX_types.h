@@ -53,11 +53,10 @@ typedef unsigned __int32  uint32_t;
 #endif
 
 typedef struct fixedpoint::fixed_point<16> Double;
-typedef struct fixedpoint::fixed_point<16> Float;
 
-const Double QUARTER_PI = 0.78539816339744828;
-const Double HALF_PI = 1.5707963267948966;
-const Double PI = 3.1415926535897931f;
+const Double QUARTER_PI = 0.25*M_PI;
+const Double HALF_PI    = 0.5*M_PI;
+const Double PI         = M_PI;
 
 // Limit under which, real numbers are considered as NULL
 const Double EPSILON = 0.001f;

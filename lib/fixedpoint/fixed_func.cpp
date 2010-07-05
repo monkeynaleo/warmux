@@ -9,18 +9,18 @@ Copyright (c) 2004, David Blythe, Hans Martin Will
 
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above copyright notice, 
+* Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
 
 * Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation 
+  this list of conditions and the following disclaimer in the documentation
   and/or other materials provided with the distribution.
 
-* Neither the name of the library's copyright owner nor the names of its 
-  contributors may be used to endorse or promote products derived from this 
+* Neither the name of the library's copyright owner nor the names of its
+  contributors may be used to endorse or promote products derived from this
   software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -40,9 +40,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace fixedpoint {
 
-static const int32_t FIX16_2PI	= float2fix<16>(6.28318530717958647692f);
-static const int32_t FIX16_HALF_PI = float2fix<16>(1.5707963267948966);
-static const int32_t FIX16_R2PI = float2fix<16>(1.0f/6.28318530717958647692f);
+static const int32_t FIX16_2PI     = float2fix<16>(2*M_PI);
+static const int32_t FIX16_HALF_PI = float2fix<16>(0.5*M_PI);
+static const int32_t FIX16_R2PI    = float2fix<16>(1/(2*M_PI));
 
 static const uint16_t sin_tab[] = {
 #include "fixsintab.h"
@@ -57,7 +57,7 @@ static const uint16_t atan_tab[] = {
 };
 
 
-fixint_t fixcos16(fixint_t a) 
+fixint_t fixcos16(fixint_t a)
 {
   fixint_t v;
   /* reduce to [0,1) */
@@ -166,7 +166,7 @@ static inline fixint_t fast_div16(fixint_t a, fixint_t b)
   }
 }
 
-fixint_t fixsqrt16(fixint_t a) 
+fixint_t fixsqrt16(fixint_t a)
 {
   if (a < 1<<7) {
     return 0;
