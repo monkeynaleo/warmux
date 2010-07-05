@@ -392,7 +392,7 @@ bool WSocket::SendInt_NoLock(const int& nbr)
   // this is not cute, but we don't want an int -> uint conversion here
   Uint32 u_nbr = *((const Uint32*)&nbr);
 
-  SDLNet_Write32(u_nbr, tmppacket);
+  SDLNet_Write32(u_nbr, (void*)tmppacket);
   int len = SDLNet_TCP_Send_noBlocking(socket, tmppacket, sizeof(tmppacket));
   if (len < int(sizeof(tmppacket))) {
     print_net_error("SDLNet_TCP_Send");
@@ -534,7 +534,7 @@ bool WSocket::ReceiveInt_NoLock(int& nbr)
     return false;
   }
 
-  u_nbr = SDLNet_Read32(tmppacket);
+  u_nbr = SDLNet_Read32((void*)tmppacket);
   nbr = *((int*)&u_nbr);
 
   return true;
@@ -653,7 +653,7 @@ bool WSocket::ReceivePacket(char** data, size_t* len)
 
     if (m_packet_size > uint32_t(MAX_VALID_PACKET_SIZE)) {
       fprintf(stderr, "ERROR: network packet is too big: %u bytes. (max: %u)\n",
-	      m_packet_size, MAX_VALID_PACKET_SIZE);
+        m_packet_size, MAX_VALID_PACKET_SIZE);
       goto error;
     }
 
