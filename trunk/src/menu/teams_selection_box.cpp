@@ -23,13 +23,15 @@
 #include "menu/teams_selection_box.h"
 #include "menu/team_box.h"
 #include "gui/label.h"
+#include "gui/vertical_box.h"
+#include "gui/grid_box.h"
+#include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
 #include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
 #include "team/teams_list.h"
 #include "team/team.h"
-#include "gui/grid_box.h"
 
 #include <iostream>
 
@@ -38,27 +40,27 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 {
   if (!w_border)
     SetNoBorder();
+  SetMargin(0);
 
   // How many teams ?
+  VBox *tmp = new VBox(120, false, true);
   if (network) {
-    local_teams_nb = new SpinButtonWithPicture(_("Local teams:"),
-                                               "menu/team_number",
-                                               Point2i(130, W_UNDEF),
-                                               0, 1,
-                                               0, MAX_NB_TEAMS-1);
+    local_teams_nb =
+      new SpinButtonWithPicture(_("Local teams:"), "menu/team_number",
+                                Point2i(100, 130), 0, 1, 0, MAX_NB_TEAMS-1);
   } else {
-    local_teams_nb = new SpinButtonWithPicture(_("Number of teams:"),
-                                               "menu/team_number",
-                                               Point2i(130, W_UNDEF),
-                                               2, 1,
-                                               2, MAX_NB_TEAMS);
+    local_teams_nb =
+      new SpinButtonWithPicture(_("Number of teams:"), "menu/team_number",
+                                Point2i(100, 130), 2, 1, 2, MAX_NB_TEAMS);
   }
-  AddWidget(local_teams_nb);
+  tmp->AddWidget(local_teams_nb);
+  //tmp->AddWidget(new NullWidget(Point2i(120, 120)));
+  AddWidget(tmp);
 
-  uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 5;
-  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2 -15);
+  uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 10;
+  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2-15);
 
-  Box * teams_grid_box = new GridBox(2, 2, 16, false);
+  Box * teams_grid_box = new GridBox(2, 2, 10, false);
   teams_grid_box->SetNoBorder();
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {

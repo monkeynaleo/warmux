@@ -66,7 +66,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   AddWidget(tmp_logo_box);
 
   /********    Center box: team name, commander   *********/
-  int width = _size.x - (2*2+(38+2*2)+(114+2*2));
+  int width = _size.x - (2*2+(38+2*2)+(100+2*2));
   Box * tmp_player_box = new VBox(_size.y, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
@@ -87,7 +87,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
   if (custom_team_list.empty()) {
     player_name = new TextBox(_player_name, width,
-                              Font::FONT_MEDIUM, Font::FONT_BOLD);
+                              Font::FONT_SMALL, Font::FONT_BOLD);
     tmp_player_box->AddWidget(player_name);
 
     next_custom_team = NULL;
@@ -100,7 +100,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
     previous_custom_team = new Button(res, "menu/minus");
 
     player_name = new TextBox(_player_name, width - 2*(10+2),
-                              Font::FONT_MEDIUM, Font::FONT_BOLD);
+                              Font::FONT_SMALL, Font::FONT_BOLD);
 
     tmp_name_box->AddWidget(previous_custom_team);
     tmp_name_box->AddWidget(player_name);
@@ -113,7 +113,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   /**********     Number of characters        **********/
   nb_characters = new SpinButtonWithPicture(_("Number of characters"),
                                             "menu/ico_play",
-                                            Point2i(114, _size.y-2),
+                                            Point2i(100, _size.y-2),
                                             6, 1, 1, 10);
   AddWidget(nb_characters);
 
