@@ -73,20 +73,20 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
   //  the computed positions are to center on the image part of the widget
 
   // 1. first draw the annulus background
-  int aw = m_annulus_background.GetWidth();
-  Point2i tmp(GetPositionX() + (GetSizeX()-aw)/2, GetPositionY());
+  Point2i tmp(GetPositionX() + (GetSizeX()-m_annulus_background.GetWidth())/2,
+              GetPositionY());
   surf.Blit(m_annulus_background, tmp);
 
   // 2. then draw the progress annulus
   #define SMALL_R 25
   #define BIG_R   35
-  static Double open_angle_value = 0.96; // 55
-  Point2i center = tmp + m_annulus_background.GetSize() / 2;
+  #define OPEN_ANGLE 0.96f // 55
 
-  Double angle = (PI*2 - open_angle_value) * (GetValue() - GetMinValue())
-               / (GetMaxValue() - GetMinValue());
+  Point2i center = tmp + m_annulus_background.GetSize() / 2;
+  float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
+              / (GetMaxValue() - GetMinValue());
   Polygon *p = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 100,
-                                                      angle, open_angle_value / 2);
+                                                      angle, OPEN_ANGLE / 2);
 
   p->SetPlaneColor(m_progress_color);
   p->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
@@ -97,8 +97,7 @@ void SpinButtonWithPicture::Draw(const Point2i &/*mousePosition*/) const
   surf.Blit(m_annulus_foreground, tmp);
 
   // 4. then draw the image
-  tmp = center - m_image.GetSize()/2;
-  surf.Blit(m_image, tmp);
+  surf.Blit(m_image, center - m_image.GetSize()/2);
 
   // 5. add in the value image
   int tmp_x = center.x;
