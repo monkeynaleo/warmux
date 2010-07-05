@@ -53,7 +53,7 @@ public:
   uint GetFriendlyFireDamage() const { return damage_friendly_fire; }
   uint GetItselfDamage() const { return damage_itself; }
   uint GetOthersDamage() const { return damage_other_teams; }
-  Double GetAccuracy() const { return (total_shots) ? (Double)damage_other_teams/(Double)total_shots : ZERO; }
+  float GetAccuracy() const { return (total_shots) ? damage_other_teams/(float)total_shots : 0; }
 
   void SetDeathTime(uint _death_time) { death_time = _death_time; };
   uint GetDeathTime() const { return death_time; };
