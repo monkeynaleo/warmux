@@ -61,6 +61,9 @@ public:
   static bool ReadDouble(const xmlNode* father,
                          const std::string &name,
                          Double &output);
+  static bool Readfloat(const xmlNode* father,
+                        const std::string &name,
+                        float &output);
   static bool ReadInt(const xmlNode* father,
                       const std::string &name,
                       int &output);
@@ -87,12 +90,15 @@ public:
   static bool ReadDoubleAttr(const xmlNode* x,
                              const std::string &name,
                              Double &output);
+  static bool ReadfloatAttr(const xmlNode* x,
+                            const std::string &name,
+                            float &output);
   static bool ReadIntAttr(const xmlNode* x,
                           const std::string &name,
                           int &output);
   bool ReadPercentageAttr(const xmlNode* node,
                           const std::string & attributName,
-                          Double & outputValue);
+                          float & outputValue);
   bool ReadPixelAttr(const xmlNode* node,
                      const std::string & attributName,
                      int & outputValue);

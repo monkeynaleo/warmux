@@ -58,9 +58,9 @@ ProgressBar::ProgressBar(uint _x,
                          uint _y,
                          uint _width,
                          uint _height,
-                         long _value, 
-                         long minValue, 
-                         long maxValue, 
+                         long _value,
+                         long minValue,
+                         long maxValue,
                          enum orientation _orientation) :
   border_color(0, 0, 0, 255),
   value_color(255, 255, 255, 255),
@@ -90,18 +90,18 @@ ProgressBar::ProgressBar(uint _x,
   image.NewSurface(Point2i(width, height), SDL_SWSURFACE | SDL_SRCALPHA, true);
 }
 
-void ProgressBar::SetMinMaxValueColor(const Color & min, 
-                                      const Color & max) 
+void ProgressBar::SetMinMaxValueColor(const Color & min,
+                                      const Color & max)
 {
   this->gradientMode = true;
   this->colorMin     = min;
   this->colorMax     = max;
 }
 
-void ProgressBar::InitPos(uint px, 
-                          uint py, 
-			  uint pwidth, 
-			  uint pheight)
+void ProgressBar::InitPos(uint px,
+                          uint py,
+        uint pwidth,
+        uint pheight)
 {
   ASSERT (3 <= pwidth);
   ASSERT (3 <= pheight);
@@ -118,10 +118,10 @@ void ProgressBar::InitPos(uint px,
  *                         ProgressBar::PROG_BAR_HORIZONTAL
  * default orientation is ProgressBar::PROG_BAR_HORIZONTAL
  */
-void ProgressBar::InitVal (long pval, 
-                           long pmin, 
-			   long pmax, 
-			   enum orientation porientation)
+void ProgressBar::InitVal (long pval,
+                           long pmin,
+         long pmax,
+         enum orientation porientation)
 {
   ASSERT (pmin < pmax);
   val         = pval;
@@ -131,10 +131,11 @@ void ProgressBar::InitVal (long pval,
   val_barre   = ComputeBarValue(val);
 
   if (gradientMode) {
-    coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   / static_cast<Double>(max);
-    coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) / static_cast<Double>(max);
-    coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  / static_cast<Double>(max);
-    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) / static_cast<Double>(max);
+    float fmax = max;
+    coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   / fmax;
+    coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) / fmax;
+    coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  / fmax;
+    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) / fmax;
   }
 }
 
@@ -143,17 +144,17 @@ void ProgressBar::UpdateValue(long pval)
   val       = ComputeValue(pval);
   val_barre = ComputeBarValue(val);
 
-  if (gradientMode) {    
-    long absVal = abs(val);
-    value_color.SetColor((Uint8) (colorMin.GetRed()   + (int)(coefRed   * (Double)absVal)),
-                         (Uint8) (colorMin.GetGreen() + (int)(coefGreen * (Double)absVal)),
-                         (Uint8) (colorMin.GetBlue()  + (int)(coefBlue  * (Double)absVal)),
-                         (Uint8) (colorMin.GetAlpha() + (int)(coefAlpha * (Double)absVal)));
+  if (gradientMode) {
+    float absVal = abs(val);
+    value_color.SetColor((Uint8) (colorMin.GetRed()   + (int)(coefRed   * absVal)),
+                         (Uint8) (colorMin.GetGreen() + (int)(coefGreen * absVal)),
+                         (Uint8) (colorMin.GetBlue()  + (int)(coefBlue  * absVal)),
+                         (Uint8) (colorMin.GetAlpha() + (int)(coefAlpha * absVal)));
   }
-		       
+
 }
 
-long ProgressBar::ComputeValue(long pval) const 
+long ProgressBar::ComputeValue(long pval) const
 {
   return InRange_Long(pval, min, max);
 }
@@ -168,7 +169,7 @@ uint ProgressBar::ComputeBarValue(long val) const
 }
 
 // TODO pass a Surface as parameter
-void ProgressBar::DrawXY(const Point2i & pos) const 
+void ProgressBar::DrawXY(const Point2i & pos) const
 {
   int begin, end;
 
@@ -233,7 +234,7 @@ void ProgressBar::DrawXY(const Point2i & pos) const
 }
 
 // Ajoute/supprime un marqueur
-ProgressBar::marqueur_it ProgressBar::AddTag(long val, 
+ProgressBar::marqueur_it ProgressBar::AddTag(long val,
                                              const Color & color)
 {
   marqueur_t m;
@@ -244,7 +245,7 @@ ProgressBar::marqueur_it ProgressBar::AddTag(long val,
   return --marqueur.end();
 }
 
-void ProgressBar::SetReferenceValue(bool use, 
+void ProgressBar::SetReferenceValue(bool use,
                                     long value)
 {
   m_use_ref_val = use;

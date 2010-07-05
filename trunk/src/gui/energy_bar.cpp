@@ -79,7 +79,7 @@ bool EnergyBar::LoadXMLConfiguration()
   unsigned int thresholdCount = xmlFile->GetNbChildren(widgetNode);
   const xmlNode * thresholdNode = xmlFile->GetFirstChild(widgetNode);
   uint i = 0;
-  Double thresholdValue;
+  float thresholdValue;
 
   for ( ; thresholdCount > 0; --thresholdCount) {
 
@@ -98,7 +98,7 @@ bool EnergyBar::LoadXMLConfiguration()
 }
 
 void EnergyBar::ProcessThresholds(int thresholdNumber,
-                                  Double thresholdMax,
+                                  float thresholdMax,
                                   Color & colorMax)
 {
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
@@ -116,10 +116,10 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   }
 
   Color colorMin = listThresholds[thresholdNumber - 1].color;
-  Double thresholdMin = listThresholds[thresholdNumber - 1].value;
+  float thresholdMin = listThresholds[thresholdNumber - 1].value;
   uint size = orientation == PROG_BAR_HORIZONTAL ? width : height;
-  Double one_hunderd = 100;
-  Double range = size * (thresholdMax - thresholdMin) / one_hunderd;
+  float one_hunderd = 100;
+  float range = size * (thresholdMax - thresholdMin) / one_hunderd;
 
   Threshold newThreshold;
   newThreshold.value = thresholdMax;
@@ -143,8 +143,8 @@ void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
   val_barre = ComputeBarValue(val);
-  Double one_hundred = 100;
-  Double currentPercentage = Double(abs(val) * 100) / Double(max);
+  #define one_hundred 100.0f
+  float currentPercentage = abs(val) * one_hundred / max;
   Threshold thresholdMin;
   Threshold thresholdMax;
   int i = 0;
@@ -170,7 +170,7 @@ void EnergyBar::Actu(long real_energy)
 
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) -
-                 ComputeBarValue((Double)max * (Double)thresholdMin.value / one_hundred);
+                 ComputeBarValue(max * thresholdMin.value / one_hundred);
 
   value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
                        (int) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
