@@ -520,13 +520,16 @@ void Body::Build()
       continue;
     }
     member = current_clothe->GetLayers()[lay];
-    if (member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y > y_max &&
-        !member->IsGoingThroughGround()) {
+    if (member->GetPosFloat().y 
+	+ member->GetSprite().GetHeightMax() 
+	+ member->GetSprite().GetRotationPoint().y > y_max.toDouble() 
+	&& !member->IsGoingThroughGround()) {
         y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
     }
   }
-
-  body_mvt.pos.y = (Double)GetSize().y - y_max + current_mvt->GetTestBottom();
+  
+  Double pos_y = GetSize().y - y_max;
+  body_mvt.pos.y = pos_y.toDouble() + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);

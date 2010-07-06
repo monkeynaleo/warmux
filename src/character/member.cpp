@@ -69,8 +69,8 @@ Member::Member(const xmlNode *     xml,
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
     MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
-    anchor = Point2f((Double)dx,(Double)dy);
-    spr->SetRotation_HotSpot(Point2i(dx,dy));
+    anchor = Point2f(dx, dy);
+    spr->SetRotation_HotSpot(Point2i(dx, dy));
   } else {
     MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
   }
@@ -98,7 +98,7 @@ Member::Member(const xmlNode *     xml,
     XmlReader::ReadIntAttr(*it, "dx", dx);
     XmlReader::ReadIntAttr(*it, "dy", dy);
     MSG_DEBUG("body", "   Attached member %s has anchor (%i,%i)\n", att_type.c_str(), dx, dy);
-    d.SetValues((Double)dx, (Double)dy);
+    d.SetValues(dx, dy);
     XmlReader::ReadStringAttr(*it, "frame", frame_str);
 
     if ("*" == frame_str) {
@@ -165,8 +165,8 @@ void Member::RotateSprite()
     refreshSprite = true;
   }
 
-  if (spr->GetScaleX() != scale.x &&
-      spr->GetScaleY() != scale.y) {
+  if (spr->GetScaleX().toDouble() != scale.x &&
+      spr->GetScaleY().toDouble() != scale.y) {
     spr->Scale(scale.x, scale.y);
     refreshSprite = true;
   }
@@ -279,8 +279,10 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       radius = child_delta.Norm();
       if (ZERO != radius) {
         Double angle_init = child_delta.ComputeAngle();
-        child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
-        child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
+	Double pos_x = radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
+        child_mvt.pos.x += pos_x.toDouble();
+	Double pos_y = radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
+        child_mvt.pos.y += pos_y.toDouble();
       }
 
       // Apply recursively to children:
