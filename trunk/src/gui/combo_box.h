@@ -44,6 +44,9 @@ class ComboBox : public Widget
   Surface m_annulus_foreground;
   Color m_progress_color;
 
+  Sprite *m_img_plus;
+  Sprite *m_img_minus;
+
  protected:
   Text *txt_label, *txt_value_white, *txt_value_black;
 
