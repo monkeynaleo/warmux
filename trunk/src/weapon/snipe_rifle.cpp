@@ -194,8 +194,8 @@ void SnipeRifle::DrawBeam()
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw
   Double redraw_size = 20.0;
-  Point2f pos = Point2f((Double)laser_beam_start.x, (Double)laser_beam_start.y);
-  Point2f delta = ( Point2f((Double)targeted_point.x, (Double)targeted_point.y) - pos ) * redraw_size / dst;
+  Point2f pos = Point2f(laser_beam_start.x, laser_beam_start.y);
+  Point2f delta = ( Point2f(targeted_point.x, targeted_point.y) - pos ) * redraw_size.toDouble() / dst.toDouble();
   Point2i delta_i((int)delta.x, (int)delta.y);
 
   if(delta_i.x < 0) delta_i.x = - delta_i.x; // the Map::ToRedraw method doesn't support negative rectangles
@@ -208,7 +208,7 @@ void SnipeRifle::DrawBeam()
   {
     // Double to int conversion...
     Point2i pos_i((int)pos.x, (int)pos.y);
-    if(delta.x < ZERO)
+    if(delta.x < 0)
     {
       pos_i.x -= delta_i.x;
       pos_i.x += 3;
@@ -216,7 +216,7 @@ void SnipeRifle::DrawBeam()
     else
       pos_i.x -= 3;
 
-    if(delta.y < ZERO)
+    if(delta.y < 0)
     {
       pos_i.y -= delta_i.y;
       pos_i.y += 3;

@@ -99,7 +99,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
       mvt.pos.x = dx;
       mvt.pos.y = dy;
       mvt.alpha = tmp_alpha;
-      mvt.scale = Point2f(scale_x, scale_y);
+      mvt.scale = Point2f(scale_x.toDouble(), scale_y.toDouble());
 
       always_moving |= mvt.follow_cursor;
       always_moving |= mvt.follow_crosshair;
