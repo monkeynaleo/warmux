@@ -152,7 +152,7 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
   if (_hardware) {
-    flags |= SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF;
+    flags |= SDL_HWSURFACE | SDL_DOUBLEBUF;
   } else {
     flags |= SDL_SWSURFACE;
   }
