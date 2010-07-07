@@ -31,7 +31,7 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-Member::Member(const xmlNode *     xml, 
+Member::Member(const xmlNode *     xml,
                const std::string & main_folder):
   parent(NULL),
   angle_rad(0),
@@ -63,13 +63,13 @@ Member::Member(const xmlNode *     xml,
   ASSERT(type!="");
 
   const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
-  
+
   if (NULL != el) {
     int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
     MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
-    anchor = Point2f(dx, dy);
+    anchor = Point2d(dx, dy);
     spr->SetRotation_HotSpot(Point2i(dx, dy));
   } else {
     MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
@@ -84,7 +84,7 @@ Member::Member(const xmlNode *     xml,
   std::string att_type;
   int         dx = 0;
   int         dy = 0;
-  Point2f     d;     // TODO: Rename !!
+  Point2d     d;     // TODO: Rename !!
   std::string frame_str;
 
   for (; it != itEnd; ++it) {
@@ -115,7 +115,7 @@ Member::Member(const xmlNode *     xml,
 
       if(attached_members.find(att_type) == attached_members.end()) {
         v_attached rot_spot;
-        rot_spot.resize(spr->GetFrameCount(), Point2f(0.0, 0.0));
+        rot_spot.resize(spr->GetFrameCount(), Point2d(0.0, 0.0));
         attached_members[att_type] = rot_spot;
       }
       (attached_members.find(att_type)->second)[frame] = d;
@@ -165,8 +165,7 @@ void Member::RotateSprite()
     refreshSprite = true;
   }
 
-  if (spr->GetScaleX().toDouble() != scale.x &&
-      spr->GetScaleY().toDouble() != scale.y) {
+  if (spr->GetScaleX() != scale.x && spr->GetScaleY() != scale.y) {
     spr->Scale(scale.x, scale.y);
     refreshSprite = true;
   }
@@ -194,8 +193,8 @@ void Member::RefreshSprite(LRDirection direction)
   spr->Update();
 }
 
-void Member::Draw(const Point2i & _pos, 
-                  int             flip_center, 
+void Member::Draw(const Point2i & _pos,
+                  int             flip_center,
                   LRDirection   direction)
 {
   ASSERT(name != "weapon" && type != "weapon");
@@ -233,7 +232,7 @@ void Member::ApplySqueleton(Member * parent_member)
   pos = parent->pos - anchor;
 
   std::map<std::string, v_attached>::iterator itAttachedMember = parent->attached_members.find(type);
- 
+
   if (itAttachedMember != parent->attached_members.end()) {
     pos += itAttachedMember->second[parent->spr->GetCurrentFrame()];
   }
@@ -242,7 +241,7 @@ void Member::ApplySqueleton(Member * parent_member)
 
 // TODO lami : THE function to optimize !!! 30 % CPU !!!
 
-void Member::ApplyMovement(const member_mvt &        mvt, 
+void Member::ApplyMovement(const member_mvt &        mvt,
                            std::vector<junction *> & skel_lst)
 {
   // Apply the movment to the member,
@@ -275,14 +274,13 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
 
-      Point2f child_delta = child->second[frame] - anchor;
+      Point2d child_delta = child->second[frame] - anchor;
       radius = child_delta.Norm();
       if (ZERO != radius) {
-        Double angle_init = child_delta.ComputeAngle();
-	Double pos_x = radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
-        child_mvt.pos.x += pos_x.toDouble();
-	Double pos_y = radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
-        child_mvt.pos.y += pos_y.toDouble();
+        Double angle_init = child_delta.ComputeAngle() + angle_rad;
+        Double angle_new  = angle_init + mvt.GetAngle();
+        child_mvt.pos.x  += radius * (cos(angle_new) - cos(angle_init));
+        child_mvt.pos.y  += radius * (sin(angle_new) - sin(angle_init));
       }
 
       // Apply recursively to children:
@@ -290,7 +288,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
 
     }
   }
-  
+
   // Apply the movement to the current member
   SetAngle(angle_rad + mvt.GetAngle());
   pos   += mvt.pos;
@@ -318,12 +316,12 @@ const Sprite& Member::GetSprite() const
   return *spr;
 }
 
-void Member::SetPos(const Point2f & _pos)
+void Member::SetPos(const Point2d & _pos)
 {
   pos = _pos;
 }
 
-const Point2f & Member::GetPosFloat() const
+const Point2d & Member::GetPosFloat() const
 {
   return pos;
 }
@@ -358,17 +356,17 @@ const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
   return attached_members;
 }
 
-WeaponMember::WeaponMember(void) : 
+WeaponMember::WeaponMember(void) :
   Member(NULL, "")
 {
   name   = "weapon";
   type   = "weapon";
   spr    = NULL;
-  anchor = Point2f(0.0,0.0);
+  anchor = Point2d(0.0, 0.0);
 }
 
-void WeaponMember::Draw(const Point2i & /*_pos*/, 
-                        int /*flip_center*/, 
+void WeaponMember::Draw(const Point2i & /*_pos*/,
+                        int /*flip_center*/,
                         LRDirection /*direction*/)
 {
   if (!ActiveCharacter().IsDead() && (Game::END_TURN != Game::GetInstance()->ReadState()) ) {

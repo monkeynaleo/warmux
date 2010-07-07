@@ -442,7 +442,7 @@ void Body::ApplySqueleton()
   std::vector<junction *>::iterator member = skel_lst.begin();
 
   // The first member is the body, we set it to pos:
-  (*member)->member->SetPos(Point2f(0.0, 0.0));
+  (*member)->member->SetPos(Point2d(0.0, 0.0));
   (*member)->member->SetAngle(0.0);
   member++;
 
@@ -520,16 +520,14 @@ void Body::Build()
       continue;
     }
     member = current_clothe->GetLayers()[lay];
-    if (member->GetPosFloat().y 
-	+ member->GetSprite().GetHeightMax() 
-	+ member->GetSprite().GetRotationPoint().y > y_max.toDouble() 
-	&& !member->IsGoingThroughGround()) {
-        y_max = member->GetPosFloat().y + member->GetSprite().GetHeightMax() + member->GetSprite().GetRotationPoint().y;
+    Double val = member->GetPosFloat().y + member->GetSprite().GetHeightMax()
+               + member->GetSprite().GetRotationPoint().y;
+    if (val > y_max && !member->IsGoingThroughGround()) {
+        y_max = val;
     }
   }
-  
-  Double pos_y = GetSize().y - y_max;
-  body_mvt.pos.y = pos_y.toDouble() + current_mvt->GetTestBottom();
+
+  body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
