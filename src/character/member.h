@@ -72,24 +72,27 @@ public:
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt &                mvt,
                      std::vector<class c_junction *> & skel_lst);
-  void SetAngle(const Double & angle);
+  void SetAngle(const Double & angle) { angle_rad = angle; };
   void RefreshSprite(LRDirection direction);
 
-  void SetPos(const Point2d & pos);
+  void SetPos(const Point2d & _pos) { pos = _pos; };
 
-  const Sprite & GetSprite() const;
+  const Sprite & GetSprite() const { return *spr; };
 
-  const Point2i GetPos() const;
-  const Point2d & GetPosFloat() const;
+  const Point2i GetPos() const { return Point2i(pos.x, pos.y); };
+  const Point2d & GetPosFloat() const { return pos; };
 
-  const Point2i GetAnchorPos() const;
+  const Point2i GetAnchorPos() const { return Point2i(anchor.x, anchor.y); };
 
-  const std::string & GetName() const;
-  const std::string & GetType() const;
+  const std::string & GetName() const { return name; };
+  const std::string & GetType() const { return type; };
 
-  bool IsGoingThroughGround() const;
+  bool IsGoingThroughGround() const { return go_through_ground; };
 
-  const std::map<std::string, v_attached> & GetAttachedMembers() const;
+  const std::map<std::string, v_attached> & GetAttachedMembers() const
+  {
+    return attached_members;
+  }
 };
 
 class WeaponMember : public Member

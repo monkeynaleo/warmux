@@ -138,7 +138,7 @@ Member::Member(const Member & m):
   type(m.type),
   anchor(m.anchor)
 {
-  Point2i rot((int)anchor.x, (int)anchor.y);
+  Point2i rot(anchor.x, anchor.y);
   spr->SetRotation_HotSpot(rot);
 
   // TODO: Move ! ... No process in any constructor !
@@ -195,7 +195,7 @@ void Member::RefreshSprite(LRDirection direction)
 
 void Member::Draw(const Point2i & _pos,
                   int             flip_center,
-                  LRDirection   direction)
+                  LRDirection     direction)
 {
   ASSERT(name != "weapon" && type != "weapon");
   ASSERT(parent != NULL || type == "body");
@@ -205,7 +205,7 @@ void Member::Draw(const Point2i & _pos,
     return;
   }
 
-  Point2i posi((int)pos.x, (int)pos.y);
+  Point2i posi(pos.x, pos.y);
   posi += _pos;
 
   if (DIRECTION_LEFT == direction) {
@@ -304,56 +304,6 @@ void Member::ResetMovement()
   alpha     = 1.0;
   scale.x   = 1.0;
   scale.y   = 1.0;
-}
-
-void Member::SetAngle(const Double & angle)
-{
-  angle_rad = angle;
-}
-
-const Sprite& Member::GetSprite() const
-{
-  return *spr;
-}
-
-void Member::SetPos(const Point2d & _pos)
-{
-  pos = _pos;
-}
-
-const Point2d & Member::GetPosFloat() const
-{
-  return pos;
-}
-
-const Point2i Member::GetPos() const
-{
-  return Point2i((int)pos.x, (int)pos.y);
-}
-
-const Point2i Member::GetAnchorPos() const
-{
-  return Point2i((int)anchor.x, (int)anchor.y);
-}
-
-const std::string & Member::GetName() const
-{
-  return name;
-}
-
-const std::string & Member::GetType() const
-{
-  return type;
-}
-
-bool Member::IsGoingThroughGround() const
-{
-  return go_through_ground;
-}
-
-const std::map<std::string, v_attached> & Member::GetAttachedMembers() const
-{
-  return attached_members;
 }
 
 WeaponMember::WeaponMember(void) :
