@@ -32,8 +32,8 @@ class member_mvt
 {  // Position of a member relative to its superior one
   Double angle_rad; // angle in radian
 public:
-  Point2f pos;
-  Point2f scale;
+  Point2d pos;
+  Point2d scale;
   /* SetAngle take radian values */
   inline void SetAngle(Double angle)
   {

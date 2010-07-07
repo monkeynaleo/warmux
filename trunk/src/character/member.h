@@ -25,7 +25,7 @@
 #include <WORMUX_point.h>
 #include "character/body.h"
 
-typedef std::vector<Point2f> v_attached;
+typedef std::vector<Point2d> v_attached;
 
 // Forward declaration
 class Sprite;
@@ -47,40 +47,40 @@ private:
   Double   alpha;
   bool    go_through_ground;
   std::map<std::string, v_attached> attached_members;
-  Point2f pos;
-  Point2f scale;
+  Point2d pos;
+  Point2d scale;
 
 protected:
   Sprite*     spr;
   std::string name;
   std::string type;
-  Point2f     anchor;
+  Point2d     anchor;
 
 public:
 
   virtual ~Member();
-  Member(const xmlNode *     xml, 
+  Member(const xmlNode *     xml,
          const std::string & main_folder);
   Member(const Member & m);
 
-  virtual void Draw(const Point2i & _pos, 
-                    int             flip_x, 
+  virtual void Draw(const Point2i & _pos,
+                    int             flip_x,
                     LRDirection   direction);
 
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
-  void ApplyMovement(const member_mvt &                mvt, 
+  void ApplyMovement(const member_mvt &                mvt,
                      std::vector<class c_junction *> & skel_lst);
   void SetAngle(const Double & angle);
   void RefreshSprite(LRDirection direction);
 
-  void SetPos(const Point2f & pos);
+  void SetPos(const Point2d & pos);
 
   const Sprite & GetSprite() const;
 
   const Point2i GetPos() const;
-  const Point2f & GetPosFloat() const;
+  const Point2d & GetPosFloat() const;
 
   const Point2i GetAnchorPos() const;
 
@@ -96,8 +96,8 @@ class WeaponMember : public Member
 {
 public:
   WeaponMember(void);
-  void Draw(const Point2i & _pos, 
-            int             flip_x, 
+  void Draw(const Point2i & _pos,
+            int             flip_x,
             LRDirection   direction);
 };
 
