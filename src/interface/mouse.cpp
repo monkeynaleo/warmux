@@ -40,6 +40,8 @@
 #include "weapon/weapon.h"
 #include "game/time.h"
 
+#define MOUSE_CLICK_DISTANCE 5
+
 std::string __pointers[] = {
   "mouse/pointer_standard",
   "mouse/pointer_select",
@@ -181,8 +183,10 @@ Uint8 Mouse::BUTTON_LEFT() // static method
   return SDL_BUTTON_LEFT;
 }
 
-bool Mouse::HandleEvent(const SDL_Event& event) const
+bool Mouse::HandleEvent(const SDL_Event& event)
 {
+  static Point2i mouse_button_down_pos = Point2i(-1,-1);
+
   if (!HasFocus()) {
     return false;
   }
@@ -197,15 +201,25 @@ bool Mouse::HandleEvent(const SDL_Event& event) const
 
   if (event.type == SDL_MOUSEBUTTONDOWN) {
     if (event.button.button == Mouse::BUTTON_LEFT())
+      mouse_button_down_pos = GetPosition();
+    return true;
+  }
+
+  if (event.type == SDL_MOUSEBUTTONUP) {
+    if (mouse_button_down_pos.Distance(GetPosition()) > MOUSE_CLICK_DISTANCE) {
+      return true;
+    }
+    if (event.button.button == Mouse::BUTTON_LEFT()) {
       if (Interface::GetInstance()->ActionClick(GetPosition()))
         return true;
+    }
   }
 
   if (!ActiveTeam().IsLocalHuman())
     return true;
 
   bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-  if (event.type == SDL_MOUSEBUTTONDOWN) {
+  if (event.type == SDL_MOUSEBUTTONUP) {
     if (event.button.button == Mouse::BUTTON_RIGHT())
       ActionRightClick(shift);
     else if (event.button.button == Mouse::BUTTON_LEFT())
