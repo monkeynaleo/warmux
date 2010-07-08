@@ -31,11 +31,22 @@ void RandomSyncGen::InitRandom()
   MSG_DEBUG("random", "Initialization...");
 
   if (Network::GetInstance()->IsLocal()) {
+    if (unrandom) {
+      MSG_DEBUG("random.set", "no, unrandom set");
+      return;
+    }
     int seed = time(NULL);
     SetRand(seed);
   } else if (Network::GetInstance()->IsGameMaster()) {
-    int seed = time(NULL);
-    SetRand(seed);
+    int seed;
+
+    if (unrandom) {
+      MSG_DEBUG("random.set", "no, unrandom set");
+      seed = 0;
+    } else {
+      seed = time(NULL);
+      SetRand(seed);
+    }
 
     MSG_DEBUG("random", "Server sending seed %d", seed);
 
@@ -53,13 +64,17 @@ uint RandomSyncGen::GetRand()
 
   if (Network::IsConnected())
     ASSERT(Network::GetInstance()->GetState() == WNet::NETWORK_LOADING_DATA
-	   || Network::GetInstance()->GetState() == WNet::NETWORK_PLAYING);
+     || Network::GetInstance()->GetState() == WNet::NETWORK_PLAYING);
 #endif
   return nbr;
 }
 
 void RandomSyncGen::SetRand(uint seed)
 {
+  if (unrandom) {
+    MSG_DEBUG("random.set", "no, unrandom set");
+    return;
+  }
 #ifdef DEBUG
   nb_get = 0;
 #endif

@@ -55,6 +55,7 @@
 #include "menu/options_menu.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
+#include "tool/stats.h"
 #ifdef WMX_LOG
 #include "include/debugmasks.h"
 #endif
@@ -321,6 +322,7 @@ void ParseArgs(int argc, char * argv[])
   int option_index = 0;
   struct option long_options[] =
     {
+      {"unrandom",   no_argument,       NULL, 'u'},
       {"help",       no_argument,       NULL, 'h'},
       {"blitz",      no_argument,       NULL, 'b'},
       {"version",    no_argument,       NULL, 'v'},
@@ -333,11 +335,14 @@ void ParseArgs(int argc, char * argv[])
       {NULL,         no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "hbvpc::l::sy::g:d:",
+  while ((c = getopt_long (argc, argv, "uhbvpc::l::sy::g:d:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
         {
+        case 'u':
+          RandomLocal().UnRandom();
+          break;
         case 'h':
           PrintUsage(argv[0]);
           exit(EXIT_SUCCESS);

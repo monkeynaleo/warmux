@@ -43,6 +43,10 @@ void RandomGenerator::UnRandom()
 
 void RandomGenerator::InitRandom()
 {
+  if (unrandom) {
+    MSG_DEBUG("random.set", "no, unrandom set");
+    return;
+  }
   SetRand(time(NULL));
 }
 
