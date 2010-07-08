@@ -573,6 +573,13 @@
 
     <section title="Patches / Code">
       <author>
+        <nickname>mikkov</nickname>
+        <name>Mikko Vartiainen</name>
+        <description>Touchscreen, usability and generic handheld improvements</description>
+        <email>mvartiainen_AT_gmail_DOT_com</email>
+        <country>Finland</country>
+      </author>
+      <author>
         <nickname>FUZxxl</nickname>
         <name>Robert CLAUSECKER</name>
         <desription>Wrote supprt for alpha threshold in map files</desription>
