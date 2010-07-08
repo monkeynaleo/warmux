@@ -63,6 +63,6 @@ class RandomLocalGen : public RandomGenerator, public Singleton<RandomLocalGen>
 {
 };
 
-RandomLocalGen& RandomLocal();
+inline RandomLocalGen& RandomLocal() { return RandomLocalGen::GetRef(); }
 
 #endif

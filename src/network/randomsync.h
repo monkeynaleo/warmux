@@ -39,6 +39,6 @@ public:
   void Verify();
 };
 
-RandomSyncGen& RandomSync();
+inline RandomSyncGen& RandomSync() { return RandomSyncGen::GetRef(); }
 
 #endif

@@ -93,8 +93,3 @@ void RandomSyncGen::Verify()
   action->Push((int)seed);
   ActionHandler::GetInstance()->NewAction(action);
 }
-
-RandomSyncGen& RandomSync()
-{
-  return (*RandomSyncGen::GetInstance());
-}

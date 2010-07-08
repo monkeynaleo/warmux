@@ -165,10 +165,3 @@ int RandomGenerator::GetSign()
   if (GetBool()) return 1;
   else return -1;
 }
-
-// =============================================================
-
-RandomLocalGen& RandomLocal()
-{
-  return RandomLocalGen::GetRef();
-}
