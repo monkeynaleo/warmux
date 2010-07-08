@@ -24,12 +24,22 @@
 #include <WORMUX_random.h>
 
 RandomGenerator::RandomGenerator() :
-  next(0), initialized(false)
+  next(0), initialized(false), unrandom(false)
 {
 }
 
 RandomGenerator::~RandomGenerator()
 {}
+
+void RandomGenerator::UnRandom()
+{
+  if (unrandom) {
+    MSG_DEBUG("random.set", "no, unrandom set");
+    return;
+  }
+  SetRand(0);
+  unrandom = true;
+}
 
 void RandomGenerator::InitRandom()
 {
@@ -38,6 +48,10 @@ void RandomGenerator::InitRandom()
 
 void RandomGenerator::SetRand(uint seed)
 {
+  if (unrandom) {
+    MSG_DEBUG("random.set", "no, unrandom set");
+    return;
+  }
   MSG_DEBUG("random.set", "srand: %d", seed);
   next = seed;
   initialized = true;
@@ -45,6 +59,10 @@ void RandomGenerator::SetRand(uint seed)
 
 void RandomGenerator::SetSeed(uint seed)
 {
+  if (unrandom) {
+    MSG_DEBUG("random.set", "no, unrandom set");
+    return;
+  }
   SetRand(seed);
 }
 
