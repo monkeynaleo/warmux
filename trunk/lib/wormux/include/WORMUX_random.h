@@ -31,6 +31,7 @@ class RandomGenerator
 private:
   uint next;
   bool initialized;
+  bool unrandom;
 
 protected:
   virtual void SetRand(uint seed);
@@ -41,6 +42,7 @@ public:
   virtual ~RandomGenerator();
   virtual void InitRandom();
 
+  void UnRandom();
   uint GetSeed();
   void SetSeed(uint seed);
 
