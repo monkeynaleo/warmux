@@ -72,25 +72,25 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
 
 WeaponMenuItem::~WeaponMenuItem()
 {
-  if(item)
+  if (item)
     delete item;
 }
 
 bool WeaponMenuItem::IsMouseOver()
 {
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
-  if(nb_bullets == 0) {
-    if(zoom)
+  if (nb_bullets == 0) {
+    if (zoom)
       SetZoom(false);
     return false;
   }
   Point2i mouse_pos = Mouse::GetInstance()->GetPosition();
-  if(Contains(Point2d((Double)mouse_pos.x, (Double)mouse_pos.y))) {
-    if(!zoom)
+  if (Contains(Point2d((Double)mouse_pos.x, (Double)mouse_pos.y))) {
+    if (!zoom)
       SetZoom(true);
     return true;
   }
-  if(zoom)
+  if (zoom)
     SetZoom(false);
   return false;
 }
@@ -104,9 +104,9 @@ void WeaponMenuItem::SetZoom(bool value)
 void WeaponMenuItem::Draw(Surface * dest)
 {
   Double scale = DEFAULT_ICON_SCALE;
-  if(zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
+  if (zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
     scale = (Time::GetInstance()->Read() - zoom_start_time) / (Double)GetZoomTime();
-    if(zoom) {
+    if (zoom) {
       scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
       scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
     } else {
@@ -120,10 +120,10 @@ void WeaponMenuItem::Draw(Surface * dest)
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
 
-  if(nb_bullets ==  INFINITE_AMMO) {
+  if (nb_bullets ==  INFINITE_AMMO) {
     PolygonItem::Draw(dest);
     (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
-  } else if(nb_bullets == 0) {
+  } else if (nb_bullets == 0) {
       if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
         PolygonItem::Draw(dest);
         tmp.y -= 4;
@@ -175,7 +175,7 @@ WeaponsMenu::WeaponsMenu():
 {
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_not_yet_available = GetResourceManager().LoadSprite( res, "interface/hourglass");
+  m_not_yet_available = GetResourceManager().LoadSprite(res, "interface/hourglass");
 
 
   // Polygon Size
@@ -198,11 +198,11 @@ WeaponsMenu::WeaponsMenu():
 
 WeaponsMenu::~WeaponsMenu()
 {
-  if(weapons_menu)
+  if (weapons_menu)
     delete weapons_menu;
-  if(tools_menu)
+  if (tools_menu)
     delete tools_menu;
-  if(help)
+  if (help)
     delete help;
   if (m_not_yet_available)
     delete m_not_yet_available;
@@ -213,12 +213,12 @@ WeaponsMenu::~WeaponsMenu()
 // Add a new weapon to the weapon menu.
 void WeaponsMenu::AddWeapon(Weapon* new_item)
 {
-  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap()->LoadedInfo()->IsOpened())
+  if (!new_item->CanBeUsedOnClosedMap() && !ActiveMap()->LoadedInfo()->IsOpened())
     return;
 
   Point2d position;
   Weapon::category_t num_sort = new_item->Category();
-  if(num_sort < 6) {
+  if (num_sort < 6) {
     position = weapons_menu->GetMin() + Point2d(30 + nb_weapon_type[num_sort - 1] * 45, 25 + (num_sort - 1) * 45);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
     item->SetParent(this);
@@ -237,8 +237,8 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
 void WeaponsMenu::Show()
 {
   ShowGameInterface();
-  if(!show) {
-    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
+  if (!show) {
+    if (motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
@@ -252,9 +252,9 @@ void WeaponsMenu::Show()
 
 void WeaponsMenu::Hide(bool play_sound)
 {
-  if(show) {
+  if (show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-    if(motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
+    if (motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
       motion_start_time = Time::GetInstance()->Read();
     else
       motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
@@ -273,7 +273,7 @@ void WeaponsMenu::Reset()
   RefreshWeaponList();
   motion_start_time = 0;
   show = false;
-  if(Config::GetInstance()->IsBlingBlingInterface()) {
+  if (Config::GetInstance()->IsBlingBlingInterface()) {
     SetJellyTime(BLING_JELLY_TIME);
     SetIconsDrawTime(BLING_ICONS_DRAW_TIME);
     SetRotationTime(BLING_ROTATION_TIME);
@@ -287,7 +287,7 @@ void WeaponsMenu::Reset()
 void WeaponsMenu::RefreshWeaponList()
 {
   // reset number of weapon
-  for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
+  for (int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
     nb_weapon_type[i] = 0;
   weapons_menu->ResetTransformation();
   tools_menu->ResetTransformation();
@@ -295,7 +295,7 @@ void WeaponsMenu::RefreshWeaponList()
 
   std::vector<PolygonItem *> items = weapons_menu->GetItem();
   std::vector<PolygonItem *>::iterator item = items.begin();
-  for(; item != items.end(); item++) {
+  for (; item != items.end(); item++) {
     delete (*item);
   }
   weapons_menu->ClearItem(false);
@@ -303,7 +303,7 @@ void WeaponsMenu::RefreshWeaponList()
   // Tools menu
   items = tools_menu->GetItem();
   item = items.begin();
-  for(; item != items.end(); item++) {
+  for (; item != items.end(); item++) {
     delete (*item);
   }
   tools_menu->ClearItem(false);
@@ -334,7 +334,7 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
     pos.y -= Interface::GetRef().GetHeight();
   }
 
-  Point2d end(POINT2I_2_POINT2D(pos));
+  Point2d end(pos);
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
@@ -360,7 +360,7 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
     pos.y -= Interface::GetRef().GetHeight();
   }
 
-  Point2d end(POINT2I_2_POINT2D(pos));
+  Point2d end(pos);
 
  // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
@@ -370,7 +370,7 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 
 void WeaponsMenu::Draw()
 {
-  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
+  if (!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
     return;
 
   // Update animation
@@ -382,7 +382,7 @@ void WeaponsMenu::Draw()
   tools_menu->ApplyTransformation(ComputeToolTransformation());
   tools_menu->DrawOnScreen();
   // Update overfly weapon/tool
-  if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
+  if (!UpdateCurrentOverflyItem(weapons_menu))
     UpdateCurrentOverflyItem(tools_menu);
 }
 
@@ -392,12 +392,12 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
   WeaponMenuItem * tmp;
   Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
   std::vector<PolygonItem *>::iterator item = items.begin();
-  for(; item != items.end(); item++) {
+  for (; item != items.end(); item++) {
     tmp = (WeaponMenuItem *)(*item);
-    if(tmp->IsMouseOver()) {
+    if (tmp->IsMouseOver()) {
       Interface::GetInstance()->SetCurrentOverflyWeapon(tmp->GetWeapon());
-      if(current_overfly_item != tmp) {
-        if(current_overfly_item != NULL)
+      if (current_overfly_item != tmp) {
+        if (current_overfly_item)
           current_overfly_item->SetZoom(false);
         current_overfly_item = tmp;
       }
@@ -410,14 +410,15 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
 bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
 {
   Weapon * tmp;
-  if(!show)
+  if (!show)
     return false;
-  if((tmp = UpdateCurrentOverflyItem(weapons_menu)) == NULL)
+  tmp = UpdateCurrentOverflyItem(weapons_menu);
+  if (!tmp)
     tmp = UpdateCurrentOverflyItem(tools_menu);
-  if(tmp != NULL) {
+  if (tmp) {
     // Check we have enough ammo
     int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetType());
-    if((nb_bullets == INFINITE_AMMO || nb_bullets > 0) && ActiveTeam().GetWeapon().CanChangeWeapon()) {
+    if ((nb_bullets == INFINITE_AMMO || nb_bullets > 0) && ActiveTeam().GetWeapon().CanChangeWeapon()) {
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
       Hide(false);
       return true;
