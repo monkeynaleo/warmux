@@ -52,8 +52,15 @@ Interface::Interface()
   , minimap(NULL)
   , m_last_minimap_redraw(0)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  game_menu = GetResourceManager().LoadImage(res, "interface/background_interface");
+  int      width = AppWormux::GetInstance()->video->window.GetWidth();
+  Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  Surface  tmp   = GetResourceManager().LoadImage(res, "interface/background_interface");
+  if (width < tmp.GetWidth()+20) {
+    Double zoom = width / Double(tmp.GetWidth()+20);
+    game_menu = tmp.RotoZoom(0.0, zoom, zoom);
+  }
+  else
+    game_menu = tmp;
   small_background_interface = GetResourceManager().LoadImage(res, "interface/small_background_interface");
   clock_background = GetResourceManager().LoadImage(res, "interface/clock_background");
   clock_normal = GetResourceManager().LoadSprite(res, "interface/clock_normal");
