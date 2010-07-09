@@ -29,15 +29,13 @@ RandomGenerator::RandomGenerator() :
 }
 
 RandomGenerator::~RandomGenerator()
-{}
+{
+}
 
 void RandomGenerator::UnRandom()
 {
-  if (unrandom) {
-    MSG_DEBUG("random.set", "no, unrandom set");
-    return;
-  }
-  SetRand(0);
+  next = 0x12345678;
+  initialized = true;
   unrandom = true;
 }
 
