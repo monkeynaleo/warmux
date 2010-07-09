@@ -217,7 +217,7 @@ class test_weapon_type {
     bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
 };
 
-Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
+Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type) const
 {
   weapons_list_it it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
@@ -225,7 +225,7 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
   return *it;
 }
 
-WeaponLauncher* WeaponsList::GetWeaponLauncher(Weapon::Weapon_type type)
+WeaponLauncher* WeaponsList::GetWeaponLauncher(Weapon::Weapon_type type) const
 {
   launcher_weapons_list_it it;
   it = std::find_if(m_launcher_weapons_list.begin(), m_launcher_weapons_list.end(), test_weapon_type(type));

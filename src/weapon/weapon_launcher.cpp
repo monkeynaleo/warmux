@@ -451,17 +451,17 @@ WeaponLauncher::~WeaponLauncher()
     delete projectile;
 }
 
-int WeaponLauncher::GetDamage()
+int WeaponLauncher::GetDamage() const
 {
   return cfg().damage;
 }
 
-Double WeaponLauncher::GetWindFactor()
+Double WeaponLauncher::GetWindFactor() const
 {
   return projectile->GetWindFactor();
 }
 
-Double WeaponLauncher::GetMass()
+Double WeaponLauncher::GetMass() const
 {
   return projectile->GetMass();
 }
@@ -627,7 +627,7 @@ void WeaponLauncher::HandleMouseWheelDown(bool /*shift*/)
   SetTimeoutForAllPlayers(GetTimeout() - 1);
 }
 
-ExplosiveWeaponConfig& WeaponLauncher::cfg()
+ExplosiveWeaponConfig& WeaponLauncher::cfg() const
 {
   return static_cast<ExplosiveWeaponConfig&>(*extra_params);
 }

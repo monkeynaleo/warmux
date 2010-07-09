@@ -47,7 +47,7 @@ const Double GROUND_BONUS_RANGE = 2000.0;
 const Double MIN_DAMAGE_PER_FORCE_UNIT = 30.0/2500.0;
 const Double MAX_DAMAGE_PER_FORCE_UNIT = 60.0/2500.0;
 
-bool AIIdea::CanUseWeapon(Weapon * weapon)
+bool AIIdea::CanUseWeapon(const Weapon * weapon)
 {
   bool correct_weapon = weapon == &(ActiveTeam().GetWeapon());
   bool can_change_weapon = ActiveTeam().GetWeapon().CanChangeWeapon()
@@ -55,7 +55,7 @@ bool AIIdea::CanUseWeapon(Weapon * weapon)
   return correct_weapon || (can_change_weapon && weapon->EnoughAmmo());
 }
 
-bool AIIdea::CanUseCharacter(Character & character)
+bool AIIdea::CanUseCharacter(const Character & character)
 {
   if (character.IsDead())
     return false;
@@ -66,7 +66,7 @@ bool AIIdea::CanUseCharacter(Character & character)
   return (character.IsActiveCharacter() || can_change_character);
 }
 
-LRDirection AIIdea::XDeltaToDirection(Double delta)
+LRDirection AIIdea::XDeltaToDirection(const Double& delta)
 {
   if (delta < 0)
     return DIRECTION_LEFT;
@@ -74,7 +74,7 @@ LRDirection AIIdea::XDeltaToDirection(Double delta)
     return DIRECTION_RIGHT;
 }
 
-Double AIIdea::GetDirectionRelativeAngle(LRDirection direction, Double angle)
+Double AIIdea::GetDirectionRelativeAngle(LRDirection direction, const Double& angle)
 {
   if (direction == DIRECTION_LEFT)
     return InverseAngleRad(angle);
@@ -82,7 +82,7 @@ Double AIIdea::GetDirectionRelativeAngle(LRDirection direction, Double angle)
     return angle;
 }
 
-Double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy)
+Double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy)
 {
   Double min_rating = RateDamageDoneToEnemy(min_damage, enemy);
   Double max_rating = RateDamageDoneToEnemy(max_damage, enemy);
@@ -90,7 +90,7 @@ Double AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, Character &
 }
 
 
-Double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
+Double AIIdea::RateDamageDoneToEnemy(int damage, const Character & enemy)
 {
   Double rating = std::min(damage, enemy.GetEnergy());
   if (damage >= enemy.GetEnergy()) {
@@ -101,7 +101,9 @@ Double AIIdea::RateDamageDoneToEnemy(int damage, Character & enemy)
   return rating;
 }
 
-Double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig& config, Double expected_additional_distance)
+Double AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
+                             const ExplosiveWeaponConfig& config,
+                             const Double& expected_additional_distance)
 {
   Double rating = 0.0;
 
@@ -128,16 +130,16 @@ Double AIIdea::RateExplosion(Character & shooter, Point2i position, ExplosiveWea
   return rating;
 }
 
-AIStrategy * SkipTurnIdea::CreateStrategy()
+AIStrategy * SkipTurnIdea::CreateStrategy() const
 {
-  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-  Weapon * weapon = weapons_list->GetWeapon(Weapon::WEAPON_SKIP_TURN);
+  const WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
+  const Weapon * weapon = weapons_list->GetWeapon(Weapon::WEAPON_SKIP_TURN);
   if (!CanUseWeapon(weapon))
     return NULL;
   return new SkipTurnStrategy();
 }
 
-AIStrategy * WasteAmmoUnitsIdea::CreateStrategy()
+AIStrategy * WasteAmmoUnitsIdea::CreateStrategy() const
 {
   if (ActiveTeam().GetWeapon().CanChangeWeapon())
     return NULL;
@@ -175,7 +177,7 @@ static PhysicalObj* GetObjectAt(const Point2i & pos)
 }
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
-static PhysicalObj* GetCollisionObject(Character * character_to_ignore, const Point2i from, const Point2i to) {
+static PhysicalObj* GetCollisionObject(const Character * character_to_ignore, const Point2i& from, const Point2i& to) {
   Point2i pos = from;
   Point2i delta = to - from;
   int steps_x = abs(delta.x);
@@ -233,15 +235,15 @@ static PhysicalObj* GetCollisionObject(Character * character_to_ignore, const Po
   return NULL;
 }
 
-AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
+AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
   if (enemy.IsDead())
     return NULL;
 
   if (!CanUseCharacter(shooter))
     return NULL;
 
-  WeaponsList *weapons_list = Game::GetInstance()->GetWeaponsList();
-  WeaponLauncher *weapon = weapons_list->GetWeaponLauncher(weapon_type);
+  const WeaponsList *weapons_list = Game::GetInstance()->GetWeaponsList();
+  const WeaponLauncher *weapon = weapons_list->GetWeaponLauncher(weapon_type);
 
   if (!CanUseWeapon(weapon))
     return NULL;
@@ -264,7 +266,7 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
 
-  PhysicalObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
+  const PhysicalObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
   if (collision_object != &enemy)
     return NULL;
 
@@ -283,7 +285,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() {
   return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
 }
 
-FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double duration, int timeout):
+FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
+                                                                   const Character & shooter, const Character & enemy,
+                                                                   Weapon::Weapon_type weapon_type,
+                                                                   Double duration, int timeout):
   weapons_weighting(weapons_weighting),
   shooter(shooter),
   enemy(enemy),
@@ -294,7 +299,7 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(WeaponsWeight
   // do nothing
 }
 
-static bool IsPositionEmpty(Character & character_to_ignore, Point2i pos)
+static bool IsPositionEmpty(const Character & character_to_ignore, const Point2i& pos)
 {
   if (GetWorld().IsOutsideWorld(pos))
     return false;
@@ -308,7 +313,7 @@ static bool IsPositionEmpty(Character & character_to_ignore, Point2i pos)
   return true;
 }
 
-static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory & trajectory)
+static const Point2i GetFirstContact(const Character & character_to_ignore, const Trajectory & trajectory)
 {
   Double time = 0;
   Point2i pos;
@@ -321,7 +326,7 @@ static const Point2i GetFirstContact(Character & character_to_ignore, Trajectory
   return pos;
 }
 
-AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy()
+AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
 {
   if (enemy.IsDead())
     return NULL;

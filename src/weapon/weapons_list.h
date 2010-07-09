@@ -59,8 +59,8 @@ public:
 
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };
-  Weapon* GetWeapon(Weapon::Weapon_type type);
-  WeaponLauncher* GetWeaponLauncher(Weapon::Weapon_type type);
+  Weapon* GetWeapon(Weapon::Weapon_type type) const;
+  WeaponLauncher* GetWeaponLauncher(Weapon::Weapon_type type) const;
   bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
   Weapon * GetRandomWeaponToDrop();
 };

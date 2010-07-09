@@ -136,7 +136,7 @@ public:
   static void ResetUniqueIds();
   static bool IsRunning();
   uint GetCurrentTurn();
-  WeaponsList * GetWeaponsList() { return weapons_list; }
+  WeaponsList * GetWeaponsList() const { return weapons_list; }
   void UpdateTranslation();
 
   Chat                chatsession;

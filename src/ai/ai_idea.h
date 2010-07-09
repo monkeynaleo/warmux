@@ -30,55 +30,60 @@
 class AIIdea
 {
   protected:
-    static bool CanUseWeapon(Weapon * weapon);
-    static bool CanUseCharacter(Character & character);
-    static LRDirection XDeltaToDirection(Double delta);
-    static Double GetDirectionRelativeAngle(LRDirection direction, Double angle);
-    static Double RateDamageDoneToEnemy(int damage, Character & enemy);
-    static Double RateDamageDoneToEnemy(int min_damage, int max_damage, Character & enemy);
-    static Double RateExplosion(Character & shooter, Point2i position, ExplosiveWeaponConfig & cfg, Double expected_additional_distance);
+    static bool CanUseWeapon(const Weapon * weapon);
+    static bool CanUseCharacter(const Character & character);
+    static LRDirection XDeltaToDirection(const Double& delta);
+    static Double GetDirectionRelativeAngle(LRDirection direction, const Double& angle);
+    static Double RateDamageDoneToEnemy(int damage, const Character & enemy);
+    static Double RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy);
+    static Double RateExplosion(const Character & shooter, const Point2i& position,
+                                const ExplosiveWeaponConfig & cfg,
+                                const Double& expected_additional_distance);
   public:
-    virtual AIStrategy * CreateStrategy() = 0;
+    virtual AIStrategy * CreateStrategy() const = 0;
     virtual ~AIIdea() {}
 };
 
 class SkipTurnIdea : public AIIdea
 {
   public:
-    virtual AIStrategy * CreateStrategy();
+    virtual AIStrategy * CreateStrategy() const;
 };
 
 class WasteAmmoUnitsIdea : public AIIdea
 {
   public:
-    virtual AIStrategy * CreateStrategy();
+    virtual AIStrategy * CreateStrategy() const;
 };
 
 class ShootDirectlyAtEnemyIdea : public AIIdea
 {
   private:
-    WeaponsWeighting & weapons_weighting;
-    Character & shooter;
-    Character & enemy;
+    const WeaponsWeighting & weapons_weighting;
+    const Character & shooter;
+    const Character & enemy;
     Weapon::Weapon_type weapon_type;
     Double max_distance;
   public:
     ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double max_distance);
-    virtual AIStrategy * CreateStrategy();
+    virtual AIStrategy * CreateStrategy() const;
 };
 
 class FireMissileWithFixedDurationIdea : public AIIdea
 {
   private:
-    WeaponsWeighting & weapons_weighting;
-    Character & shooter;
-    Character & enemy;
+    const WeaponsWeighting & weapons_weighting;
+    const Character & shooter;
+    const Character & enemy;
     Weapon::Weapon_type weapon_type;
     Double duration;
     int timeout; // if positive the character will set it to the specified value.
   public:
-    FireMissileWithFixedDurationIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double duration, int timeout = -1);
-    virtual AIStrategy * CreateStrategy();
+    FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
+                                     const Character & shooter, const Character & enemy,
+                                     Weapon::Weapon_type weapon_type,
+                                     Double duration, int timeout = -1);
+    virtual AIStrategy * CreateStrategy() const;
 };
 
 #endif
