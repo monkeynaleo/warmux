@@ -37,7 +37,7 @@ const float MAX_SHOTGUN_DISTANCE = 250;
 const float MAX_SNIPER_RIFILE_DISTANCE = 10E10;
 const float MAX_SUBMACHINE_GUN_DISTANCE = 500;
 
-//#define DBG_AI_TIME
+#define DBG_AI_TIME
 
 class AIStats {
   const char *name;
