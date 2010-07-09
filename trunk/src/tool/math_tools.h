@@ -49,6 +49,11 @@ inline Double InverseAngle (const Double &angle) {
     return -PI -angle;
   return PI - angle;
 }
+inline float InverseAngle (const float angle) {
+  if (angle < 0)
+    return -M_PI -angle;
+  return M_PI - angle;
+}
 
 inline Double InverseAngleDeg (const Double &angle) {
   if (angle < 0)
@@ -57,6 +62,7 @@ inline Double InverseAngleDeg (const Double &angle) {
 }
 
 inline Double InverseAngleRad (const Double &angle) { return InverseAngle(angle); }
+inline float InverseAngleRad (const float angle) { return InverseAngle(angle); }
 
 // Absolute value
 inline Double AbsoluteValue (const Double x) { return x >= 0 ? x : -x; }

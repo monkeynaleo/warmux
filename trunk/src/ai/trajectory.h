@@ -26,13 +26,13 @@
 
 class Trajectory {
   private:
-    Point2d initial_position;
-    Point2d initial_speed;
-    Point2d acceleration;
-    Point2d half_acceleration;
+    Point2f initial_position;
+    Point2f initial_speed;
+    Point2f acceleration;
+    Point2f half_acceleration;
   public:
-    Trajectory(Point2d pos_0, Point2d v_0, Point2d a);
-    const Point2i GetPositionAt(Double time) const;
-    Double GetSpeedAt(Double time) const;
+    Trajectory(Point2f pos_0, Point2f v_0, Point2f a);
+    const Point2i GetPositionAt(float time) const;
+    float GetSpeedAt(float time) const;
 };
 #endif

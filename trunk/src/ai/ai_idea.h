@@ -32,13 +32,13 @@ class AIIdea
   protected:
     static bool CanUseWeapon(const Weapon * weapon);
     static bool CanUseCharacter(const Character & character);
-    static LRDirection XDeltaToDirection(const Double& delta);
-    static Double GetDirectionRelativeAngle(LRDirection direction, const Double& angle);
-    static Double RateDamageDoneToEnemy(int damage, const Character & enemy);
-    static Double RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy);
-    static Double RateExplosion(const Character & shooter, const Point2i& position,
+    static LRDirection XDeltaToDirection(const float& delta);
+    static float GetDirectionRelativeAngle(LRDirection direction, const float& angle);
+    static float RateDamageDoneToEnemy(int damage, const Character & enemy);
+    static float RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy);
+    static float RateExplosion(const Character & shooter, const Point2i& position,
                                 const ExplosiveWeaponConfig & cfg,
-                                const Double& expected_additional_distance);
+                                const float& expected_additional_distance);
   public:
     virtual AIStrategy * CreateStrategy() const = 0;
     virtual ~AIIdea() {}
@@ -63,9 +63,9 @@ class ShootDirectlyAtEnemyIdea : public AIIdea
     const Character & shooter;
     const Character & enemy;
     Weapon::Weapon_type weapon_type;
-    Double max_distance;
+    float max_distance;
   public:
-    ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, Double max_distance);
+    ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, float max_distance);
     virtual AIStrategy * CreateStrategy() const;
 };
 
@@ -76,13 +76,13 @@ class FireMissileWithFixedDurationIdea : public AIIdea
     const Character & shooter;
     const Character & enemy;
     Weapon::Weapon_type weapon_type;
-    Double duration;
+    float duration;
     int timeout; // if positive the character will set it to the specified value.
   public:
     FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
                                      const Character & shooter, const Character & enemy,
                                      Weapon::Weapon_type weapon_type,
-                                     Double duration, int timeout = -1);
+                                     float duration, int timeout = -1);
     virtual AIStrategy * CreateStrategy() const;
 };
 
