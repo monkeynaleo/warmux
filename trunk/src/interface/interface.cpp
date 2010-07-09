@@ -42,45 +42,44 @@ const Point2i BORDER_POSITION(5, 5);
 
 const uint MARGIN = 4;
 
-Interface::Interface() :
-  energy_bar(NULL),
-  m_last_minimap_redraw(0)
+Interface::Interface()
+  : display(true)
+  , start_hide_display(0)
+  , start_show_display(0)
+  , display_minimap(true)
+  , energy_bar(NULL)
+  , clock(NULL)
+  , minimap(NULL)
+  , m_last_minimap_redraw(0)
 {
-  display = true;
-  start_hide_display = 0;
-  start_show_display = 0;
-  display_minimap = true;
-  minimap = NULL;
-
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  game_menu = GetResourceManager().LoadImage( res, "interface/background_interface");
-  small_background_interface = GetResourceManager().LoadImage( res, "interface/small_background_interface");
-  clock_background = GetResourceManager().LoadImage( res, "interface/clock_background");
-  clock = NULL;
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  game_menu = GetResourceManager().LoadImage(res, "interface/background_interface");
+  small_background_interface = GetResourceManager().LoadImage(res, "interface/small_background_interface");
+  clock_background = GetResourceManager().LoadImage(res, "interface/clock_background");
   clock_normal = GetResourceManager().LoadSprite(res, "interface/clock_normal");
   clock_emergency = GetResourceManager().LoadSprite(res, "interface/clock_emergency");
-  wind_icon = GetResourceManager().LoadImage( res, "interface/wind");
-  wind_indicator = GetResourceManager().LoadImage( res, "interface/wind_indicator");
+  wind_icon = GetResourceManager().LoadImage(res, "interface/wind");
+  wind_indicator = GetResourceManager().LoadImage(res, "interface/wind_indicator");
 
   // styled box
-  rounding_style[1][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom");
-  rounding_style[0][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom_left");
-  rounding_style[2][2] = GetResourceManager().LoadImage( res, "interface/rounding_bottom_right");
-  rounding_style[1][0] = GetResourceManager().LoadImage( res, "interface/rounding_top");
-  rounding_style[0][0] = GetResourceManager().LoadImage( res, "interface/rounding_top_left");
-  rounding_style[2][0] = GetResourceManager().LoadImage( res, "interface/rounding_top_right");
-  rounding_style[0][1] = GetResourceManager().LoadImage( res, "interface/rounding_left");
-  rounding_style[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_right");
-  rounding_style[1][1] = GetResourceManager().LoadImage( res, "interface/rounding_center");
+  rounding_style[1][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom");
+  rounding_style[0][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom_left");
+  rounding_style[2][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom_right");
+  rounding_style[1][0] = GetResourceManager().LoadImage(res, "interface/rounding_top");
+  rounding_style[0][0] = GetResourceManager().LoadImage(res, "interface/rounding_top_left");
+  rounding_style[2][0] = GetResourceManager().LoadImage(res, "interface/rounding_top_right");
+  rounding_style[0][1] = GetResourceManager().LoadImage(res, "interface/rounding_left");
+  rounding_style[2][1] = GetResourceManager().LoadImage(res, "interface/rounding_right");
+  rounding_style[1][1] = GetResourceManager().LoadImage(res, "interface/rounding_center");
 
-  rounding_style_mask[1][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom");
-  rounding_style_mask[0][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_left");
-  rounding_style_mask[2][2] = GetResourceManager().LoadImage( res, "interface/rounding_mask_bottom_right");
-  rounding_style_mask[1][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top");
-  rounding_style_mask[0][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_left");
-  rounding_style_mask[2][0] = GetResourceManager().LoadImage( res, "interface/rounding_mask_top_right");
-  rounding_style_mask[0][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_left");
-  rounding_style_mask[2][1] = GetResourceManager().LoadImage( res, "interface/rounding_mask_right");
+  rounding_style_mask[1][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom");
+  rounding_style_mask[0][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom_left");
+  rounding_style_mask[2][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom_right");
+  rounding_style_mask[1][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top");
+  rounding_style_mask[0][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top_left");
+  rounding_style_mask[2][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top_right");
+  rounding_style_mask[0][1] = GetResourceManager().LoadImage(res, "interface/rounding_mask_left");
+  rounding_style_mask[2][1] = GetResourceManager().LoadImage(res, "interface/rounding_mask_right");
 
   // energy bar
   energy_bar = new EnergyBar(0, 0, 120, 15,
@@ -129,7 +128,7 @@ Interface::Interface() :
   t_weapon_stock = new Text("0", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_character_energy = new Text("Dead", energy_text_color, Font::FONT_SMALL, Font::FONT_BOLD);
 
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Interface::~Interface()
@@ -178,7 +177,7 @@ void Interface::DrawCharacterInfo()
   energy_bar->DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
-  if(energy_bar->GetCurrentValue() == energy_bar->GetMinValue())
+  if (energy_bar->GetCurrentValue() == energy_bar->GetMinValue())
     app->video->window.Blit(character_under_cursor->GetTeam().GetDeathFlag(), bottom_bar_pos + BORDER_POSITION);
   else
     app->video->window.Blit(character_under_cursor->GetTeam().GetFlag(), bottom_bar_pos + BORDER_POSITION);
@@ -217,7 +216,7 @@ void Interface::DrawWeaponInfo() const
   Double icon_scale_factor = 0.75;
 
   // Get the weapon
-  if(weapon_under_cursor==NULL) {
+  if (weapon_under_cursor==NULL) {
     weapon = &ActiveTeam().AccessWeapon();
     nbr_munition = ActiveTeam().ReadNbAmmos();
   } else {
@@ -282,7 +281,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   int height;
 
   // draw wind icon
-  if(draw_icon) {
+  if (draw_icon) {
     app->video->window.Blit(wind_icon, wind_bar_pos);
     GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
     height = wind_icon.GetHeight() - wind_indicator.GetHeight();
@@ -308,7 +307,7 @@ void Interface::DrawWindInfo() const
 // draw mini info when hidding interface
 void Interface::DrawSmallInterface() const
 {
-  if(display) return;
+  if (display) return;
   AppWormux * app = AppWormux::GetInstance();
   int height;
   height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
@@ -327,7 +326,7 @@ void Interface::DrawTeamEnergy() const
 {
   Point2i team_bar_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + wind_icon.GetWidth() + MARGIN, MARGIN);
   FOR_EACH_TEAM(tmp_team) {
-    if(!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
+    if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
       (**tmp_team).GetEnergyBar().FinalizeMove();
     (**tmp_team).DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
@@ -430,7 +429,7 @@ void Interface::DrawMapPreview()
     line_on_bottom = false;
   }
 
-  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x ) {
+  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x) {
     cameraBottomRightCorner.x = offset.x + GetWorld().ground.GetPreviewSize().x;
     line_on_right = false;
   }
@@ -492,7 +491,7 @@ void Interface::GenerateStyledBox(Surface & source)
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
   source.MergeSurface(rounding_style[2][2],temp_position);
 
-  for(int i = rounding_style[0][0].GetSize().x;
+  for (int i = rounding_style[0][0].GetSize().x;
       i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
       ++i) {
     temp_position = temp_rect.GetPosition();
@@ -503,7 +502,7 @@ void Interface::GenerateStyledBox(Surface & source)
     source.MergeSurface(rounding_style[1][2],temp_position);
   }
 
-  for(int i = rounding_style[0][0].GetSize().y;
+  for (int i = rounding_style[0][0].GetSize().y;
       i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
       ++i) {
     temp_position = temp_rect.GetPosition();
@@ -514,11 +513,11 @@ void Interface::GenerateStyledBox(Surface & source)
     source.MergeSurface(rounding_style[2][1],temp_position);
   }
 
-  for(int i = rounding_style[0][0].GetSize().x;
+  for (int i = rounding_style[0][0].GetSize().x;
       i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
       ++i) {
 
-    for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
+    for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
       source.MergeSurface(rounding_style[1][1],temp_position);
     }
@@ -578,11 +577,11 @@ void Interface::Draw()
 
 int Interface::GetHeight() const
 {
-  if(!display) {
+  if (!display) {
     int height = GetMenuHeight() - ((int)Time::GetInstance()->Read() - start_hide_display)/3;
     height = (height > 0 ? height : 0);
     return (height < GetMenuHeight() ? height : GetMenuHeight());
-  } else if(start_show_display != 0) {
+  } else if (start_show_display != 0) {
     int height = ((int)Time::GetInstance()->Read() - start_show_display)/3;
     height = (height < GetMenuHeight() ? height : GetMenuHeight());
     return (height < GetMenuHeight() ? height : GetMenuHeight());
@@ -612,9 +611,9 @@ void Interface::EnableDisplay(bool _display)
 
 void Interface::Show()
 {
-  if(display) return;
+  if (display) return;
   display = true;
-  if(start_show_display + 1000 < (int)Time::GetInstance()->Read())
+  if (start_show_display + 1000 < (int)Time::GetInstance()->Read())
     start_show_display = Time::GetInstance()->Read();
   else
     start_show_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_show_display));
@@ -622,9 +621,9 @@ void Interface::Show()
 
 void Interface::Hide()
 {
-  if(!display) return;
+  if (!display) return;
   display = false;
-  if(start_hide_display + 1000 < (int)Time::GetInstance()->Read())
+  if (start_hide_display + 1000 < (int)Time::GetInstance()->Read())
     start_hide_display = Time::GetInstance()->Read();
   else
     start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
@@ -667,7 +666,7 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
 
-  if( !rectSurface.Intersect(*Camera::GetInstance()))
+  if (!rectSurface.Intersect(*Camera::GetInstance()))
     return;
 
   GetWorld().ToRedrawOnMap(rectSurface);
@@ -682,7 +681,7 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
 
 void HideGameInterface()
 {
-  if(Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
+  if (Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
   Mouse::GetInstance()->Hide();
   Interface::GetInstance()->Hide();
 }
