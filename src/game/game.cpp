@@ -480,7 +480,6 @@ void Game::RefreshInput()
 
   // Keyboard, Joystick and mouse refresh
   Mouse::GetInstance()->Refresh();
-  ActiveTeam().RefreshAI();
   GameMessages::GetInstance()->Refresh();
 
   if (!IsGameFinished())
@@ -704,6 +703,8 @@ void Game::MessageEndOfGame() const
 
 void Game::MainLoop()
 {
+  static bool draw = true;
+
   if (!Time::GetInstance()->IsWaitingForUser()) {
     // If we are waiting for the network then we have already done those steps.
     if (!Time::GetInstance()->IsWaitingForNetwork()) {
@@ -743,6 +744,8 @@ void Game::MainLoop()
     StatStart("Game:RefreshInput()");
     RefreshInput();
     StatStop("Game:RefreshInput()");
+    if (draw)
+      ActiveTeam().RefreshAI();
     ActionHandler::GetInstance()->ExecFrameLessActions();
 
     bool is_turn_master = Network::GetInstance()->IsTurnMaster();
@@ -783,7 +786,7 @@ void Game::MainLoop()
   }
 
   // try to adjust to max Frame by seconds
-  bool draw = time_of_next_frame < SDL_GetTicks();
+  draw = time_of_next_frame < SDL_GetTicks();
   // Only display if the physic engine isn't late
   draw = draw && !(Time::GetInstance()->CanBeIncreased() && !Time::GetInstance()->IsWaiting());
 #ifdef USE_VALGRIND
