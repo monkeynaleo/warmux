@@ -23,18 +23,23 @@
 #define AI_STUPID_PLAYER_H
 
 #include "ai/ai_player.h"
-#include "ai/ai_command.h"
-#include "ai/ai_strategy.h"
-#include "ai/ai_idea.h"
 #include "ai/ai_weapons_weighting.h"
 #include "team/team.h"
+
+class AICommand;
+class AIStrategy;
+class AIIdea;
+class Team;
+class AIStats;
 
 class AIStupidPlayer : public AIPlayer
 {
   private:
     Team * team;
-    std::vector<AIIdea*> ideas;
-    std::vector<AIIdea*>::iterator idea_iterator;
+
+    typedef std::pair<AIIdea*, AIStats*> AIItem;
+    std::vector<AIItem> items;
+    std::vector<AIItem>::iterator item_iterator;
     AICommand * command;
     AIStrategy * best_strategy;
     bool command_executed;
