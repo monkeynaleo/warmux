@@ -58,6 +58,7 @@ const Double MAX_ICON_SCALE = 1.1;
 
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
+#define LOW_RESOLUTION_FACTOR  0.7
 
 WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
   PolygonItem(),
@@ -115,7 +116,7 @@ void WeaponMenuItem::Draw(Surface * dest)
     }
   }
   if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
-    scale /= 2;
+    scale = (scale*int(10*LOW_RESOLUTION_FACTOR))/10;
   item->SetAlpha(1);
   item->Scale(scale, scale);
 
@@ -183,11 +184,11 @@ WeaponsMenu::WeaponsMenu():
   int height = AppWormux::GetInstance()->video->window.GetHeight();
   Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
   if (height < 480)
-    size = (size*2)/3;
+    size = size*LOW_RESOLUTION_FACTOR;
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
   if (height < 480)
-    size = (size*2)/3;
+    size = size*LOW_RESOLUTION_FACTOR;
   tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   help = NULL;
   // Setting colors
@@ -226,7 +227,7 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
   Weapon::category_t num_sort = new_item->Category();
   Double factor = 1;
   if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
-    factor = 0.6667;
+    factor = LOW_RESOLUTION_FACTOR;
   if (num_sort < 6) {
     position = weapons_menu->GetMin() + Point2d(30,25)*factor
              + Point2d(nb_weapon_type[num_sort - 1], num_sort - 1)*int(45*factor);
