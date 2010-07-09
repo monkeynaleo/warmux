@@ -427,14 +427,37 @@ template<class T> class Vector2
        return 0;
     }
 
+    float ComputeAngleFloat() const {
+      if (!IsZero(x)) {
+        if (!IsZero(y)) {
+          float angle = atan(y/(float)x);
+          if (x<0)
+            return (y>0) ? angle+M_PI : angle-M_PI;
+          return angle;
+        } else {
+          return (x>0) ? 0 : M_PI;
+        }
+      } else if (y>0) {
+        return 0.5f*M_PI;
+      } else if (y<0) {
+        return -0.5f*M_PI;
+      }
+      return 0;
+    }
+
     /**
      *
      * @param v2
      */
-    Double ComputeAngle(const Vector2<T> & v2) const{
+    Double ComputeAngle(const Vector2<T> & v2) const {
       Vector2<T> veq( v2.x - x, v2.y - y);
 
       return veq.ComputeAngle();
+    }
+    float ComputeAngleFloat(const Vector2<T> & v2) const {
+      Vector2<T> veq( v2.x - x, v2.y - y);
+
+      return veq.ComputeAngleFloat();
     }
 
     /**

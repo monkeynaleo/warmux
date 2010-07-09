@@ -22,7 +22,7 @@
 
 #include "trajectory.h"
 
-Trajectory::Trajectory(Point2d pos_0, Point2d v_0, Point2d a):
+Trajectory::Trajectory(Point2f pos_0, Point2f v_0, Point2f a):
 initial_position(pos_0),
 initial_speed(v_0),
 acceleration(a),
@@ -31,13 +31,13 @@ half_acceleration(a/2)
   // do nothing
 }
 
-const Point2i Trajectory::GetPositionAt(Double time) const
+const Point2i Trajectory::GetPositionAt(float time) const
 {
   return half_acceleration * (time * time) + initial_speed * time + initial_position;
 }
 
-Double Trajectory::GetSpeedAt(Double time) const
+float Trajectory::GetSpeedAt(float time) const
 {
-  Point2d speed = acceleration * time + initial_speed;
+  Point2f speed = acceleration * time + initial_speed;
   return speed.Norm();
 }

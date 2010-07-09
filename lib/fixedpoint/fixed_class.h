@@ -116,6 +116,7 @@ struct fixed_point {
 
   // Must be used explicily as we don't want to calculate with doubles!
   double toDouble() const { return (double)intValue / (double)(1 << p); }
+  float tofloat() const { return intValue / float(1<<p); }
 };
 
 // Specializations for use with plain integers

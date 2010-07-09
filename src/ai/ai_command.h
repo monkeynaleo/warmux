@@ -52,11 +52,11 @@ class DoNothingForeverCommand : public AICommand
 class IncreaseAngleCommand : public AICommand
 {
   private:
-    const Double target_angle;
+    const float target_angle;
     const bool slowly;
     bool is_increasing;
   public:
-    IncreaseAngleCommand(Double target_angle, bool slowly);
+    IncreaseAngleCommand(float target_angle, bool slowly);
     virtual bool Execute();
 };
 
@@ -68,11 +68,11 @@ class IncreaseAngleCommand : public AICommand
 class DecreaseAngleCommand : public AICommand
 {
   private:
-    const Double target_angle;
+    const float target_angle;
     const bool slowly;
     bool is_decreasing;
   public:
-    DecreaseAngleCommand(Double target_angle, bool slowly);
+    DecreaseAngleCommand(float target_angle, bool slowly);
     virtual bool Execute();
 };
 
@@ -92,9 +92,9 @@ class SetWeaponAngleCommand : public AICommand
 {
   private:
     CommandList commands;
-    const Double target_angle;
+    const float target_angle;
   public:
-    SetWeaponAngleCommand(Double angle);
+    SetWeaponAngleCommand(float angle);
     virtual bool Execute();
 };
 
@@ -146,10 +146,10 @@ class SetDirectionCommand : public AICommand
 class LoadAndShootCommand : public AICommand
 {
   private:
-    const Double target_strength;
+    const float target_strength;
     bool is_shooting;
   public:
-    LoadAndShootCommand(Double strength);
+    LoadAndShootCommand(float strength);
     virtual bool Execute();
 };*/
 
@@ -184,9 +184,9 @@ class SelectCharacterCommand : public AICommand
 class WaitForStrengthCommand : public AICommand
 {
   private:
-    Double target_strength;
+    float target_strength;
   public:
-    WaitForStrengthCommand(Double target_strength);
+    WaitForStrengthCommand(float target_strength);
     virtual bool Execute();
 };
 

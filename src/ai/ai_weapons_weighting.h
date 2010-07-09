@@ -30,16 +30,16 @@
 class WeaponsWeighting
 {
   private:
-    Double factor[Weapon::LAST+1];
-    Double min_factor[Weapon::LAST+1];
-    Double max_factor[Weapon::LAST+1];
+    float factor[Weapon::LAST+1];
+    float min_factor[Weapon::LAST+1];
+    float max_factor[Weapon::LAST+1];
 
   public:
     WeaponsWeighting();
     void RandomizeFactors();
-    Double GetFactor(Weapon::Weapon_type type) const;
-    void SetMinFactor(Weapon::Weapon_type type, Double min_factor);
-    void SetMaxFactor(Weapon::Weapon_type type, Double max_factor);
+    float GetFactor(Weapon::Weapon_type type) const;
+    void SetMinFactor(Weapon::Weapon_type type, float min_factor);
+    void SetMaxFactor(Weapon::Weapon_type type, float max_factor);
 };
 
 #endif
