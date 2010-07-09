@@ -114,8 +114,10 @@ void WeaponMenuItem::Draw(Surface * dest)
       scale = (scale > DEFAULT_ICON_SCALE ? scale : DEFAULT_ICON_SCALE);
     }
   }
+  if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
+    scale /= 2;
   item->SetAlpha(1);
-  item->Scale((Double)scale, (Double)scale);
+  item->Scale(scale, scale);
 
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
@@ -177,11 +179,15 @@ WeaponsMenu::WeaponsMenu():
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_not_yet_available = GetResourceManager().LoadSprite(res, "interface/hourglass");
 
-
   // Polygon Size
+  int height = AppWormux::GetInstance()->video->window.GetHeight();
   Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
+  if (height < 480)
+    size = (size*2)/3;
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
+  if (height < 480)
+    size = (size*2)/3;
   tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   help = NULL;
   // Setting colors
@@ -218,13 +224,18 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
 
   Point2d position;
   Weapon::category_t num_sort = new_item->Category();
+  Double factor = 1;
+  if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
+    factor = 0.6667;
   if (num_sort < 6) {
-    position = weapons_menu->GetMin() + Point2d(30 + nb_weapon_type[num_sort - 1] * 45, 25 + (num_sort - 1) * 45);
+    position = weapons_menu->GetMin() + Point2d(30,25)*factor
+             + Point2d(nb_weapon_type[num_sort - 1], num_sort - 1)*int(45*factor);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
     item->SetParent(this);
     weapons_menu->AddItem(item);
   } else {
-    position = tools_menu->GetMin() + Point2d(30 + nb_weapon_type[num_sort - 1] * 45, 25 + (num_sort - 6) * 45);
+    position = tools_menu->GetMin() + Point2d(30,25)*factor
+             + Point2d(nb_weapon_type[num_sort - 1], num_sort - 6)*int(45*factor);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
     item->SetParent(this);
     tools_menu->AddItem(item);
