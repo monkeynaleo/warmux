@@ -175,9 +175,9 @@ class SelectWeaponCommand : public AICommand
 class SelectCharacterCommand : public AICommand
 {
   private:
-    Character * character;
+    const Character * character;
   public:
-    SelectCharacterCommand(Character * character);
+    SelectCharacterCommand(const Character * character);
     virtual bool Execute();
 };
 

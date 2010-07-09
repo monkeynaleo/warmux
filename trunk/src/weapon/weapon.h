@@ -327,7 +327,7 @@ public:
   inline const Double &GetMinAngle() const {return min_angle;}
   inline void SetMaxAngle(Double max) {max_angle = max;}
   inline const Double &GetMaxAngle() const {return max_angle;}
-  bool IsAngleValid(Double angle);
+  bool IsAngleValid(Double angle) const;
 
   virtual void StartMovingLeft() {};
   virtual void StopMovingLeft() {};

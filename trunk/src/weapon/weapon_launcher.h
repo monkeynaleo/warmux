@@ -138,9 +138,9 @@ class WeaponLauncher : public Weapon
     virtual ~WeaponLauncher();
 
     // Methods to access data of the projectile
-    int GetDamage();
-    Double GetWindFactor();
-    Double GetMass();
+    int GetDamage() const;
+    Double GetWindFactor() const;
+    Double GetMass() const;
 
     virtual void Draw();
 
@@ -189,7 +189,7 @@ class WeaponLauncher : public Weapon
     virtual void HandleKeyReleased_More();
 
     WeaponProjectile* GetProjectile() { return projectile; };
-    ExplosiveWeaponConfig& cfg();
+    ExplosiveWeaponConfig& cfg() const;
 
     // Implemeting a method that would otherwise have required RTTI
     void SetProjectileTimeOut(int timeout) { projectile->SetTimeOut(timeout); }

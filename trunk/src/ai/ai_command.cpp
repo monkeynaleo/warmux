@@ -253,7 +253,7 @@ bool SelectWeaponCommand::Execute()
   return true;
 }
 
-SelectCharacterCommand::SelectCharacterCommand(Character * character):
+SelectCharacterCommand::SelectCharacterCommand(const Character * character):
   character(character)
 {
   // do nothing

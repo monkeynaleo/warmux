@@ -726,7 +726,7 @@ void Weapon::p_Deselect()
   ActiveCharacter().SetMovement("breathe");
 }
 
-bool Weapon::IsAngleValid(Double angle)
+bool Weapon::IsAngleValid(Double angle) const
 {
   angle = -angle; // work around incorrect sign
   return min_angle <= angle && angle <= max_angle;

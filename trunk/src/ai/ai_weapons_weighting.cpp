@@ -45,7 +45,7 @@ void WeaponsWeighting::RandomizeFactors()
   }
 }
 
-Double WeaponsWeighting::GetFactor(Weapon::Weapon_type type)
+Double WeaponsWeighting::GetFactor(Weapon::Weapon_type type) const
 {
   return factor[type];
 }

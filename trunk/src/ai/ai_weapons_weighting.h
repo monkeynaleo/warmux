@@ -37,7 +37,7 @@ class WeaponsWeighting
   public:
     WeaponsWeighting();
     void RandomizeFactors();
-    Double GetFactor(Weapon::Weapon_type type);
+    Double GetFactor(Weapon::Weapon_type type) const;
     void SetMinFactor(Weapon::Weapon_type type, Double min_factor);
     void SetMaxFactor(Weapon::Weapon_type type, Double max_factor);
 };

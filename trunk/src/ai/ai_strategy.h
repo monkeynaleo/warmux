@@ -34,50 +34,54 @@ class AIStrategy
     AIStrategy(Double rating);
     virtual ~AIStrategy() {}
     /** Creates a command which implements the strategy */
-    virtual AICommand * CreateCommand() = 0;
-    Double GetRating() { return rating; }
-    CompareResult CompareRatingWith(AIStrategy * other);
+    virtual AICommand * CreateCommand() const = 0;
+    Double GetRating() const { return rating; }
+    CompareResult CompareRatingWith(AIStrategy * other) const;
 };
 
 class DoNothingStrategy : public AIStrategy
 {
   public:
     DoNothingStrategy();
-    virtual AICommand * CreateCommand();
+    virtual AICommand * CreateCommand() const;
 };
 
 class SkipTurnStrategy : public AIStrategy
 {
   public:
     SkipTurnStrategy();
-    virtual AICommand * CreateCommand();
+    virtual AICommand * CreateCommand() const;
 };
 
 class ShootWithGunStrategy : public AIStrategy
 {
   private:
-    Character & shooter;
+    const Character & shooter;
     Weapon::Weapon_type weapon;
     LRDirection  direction;
     Double angle;
     int bullets;
   public:
-    virtual AICommand * CreateCommand();
-    ShootWithGunStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, int bullets);
+    virtual AICommand * CreateCommand() const;
+    ShootWithGunStrategy(Double rating, const Character & shooter,
+                         Weapon::Weapon_type weapon, LRDirection  direction,
+                         Double angle, int bullets);
 };
 
 class LoadAndFireStrategy : public AIStrategy
 {
   private:
-    Character & shooter;
+    const Character & shooter;
     Weapon::Weapon_type weapon;
     LRDirection  direction;
     Double angle;
     Double strength;
     int timeout;
   public:
-    virtual AICommand * CreateCommand();
-    LoadAndFireStrategy(Double rating, Character & shooter, Weapon::Weapon_type weapon, LRDirection  direction, Double angle, Double strength, int timeout);
+    virtual AICommand * CreateCommand() const;
+    LoadAndFireStrategy(Double rating, const Character & shooter,
+                        Weapon::Weapon_type weapon, LRDirection direction,
+                        Double angle, Double strength, int timeout);
 };
 
 
