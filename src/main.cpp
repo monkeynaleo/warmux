@@ -53,6 +53,7 @@
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
+#include "network/randomsync.h"
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "tool/stats.h"
@@ -341,6 +342,7 @@ void ParseArgs(int argc, char * argv[])
       switch (c)
         {
         case 'u':
+          RandomSync().UnRandom();
           RandomLocal().UnRandom();
           break;
         case 'h':
