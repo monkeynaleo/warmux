@@ -169,10 +169,12 @@ static PhysicalObj* GetObjectAt(const Point2i & pos)
       return object;
     it++;
   }
+
   FOR_ALL_CHARACTERS(team, character) {
     if (character->GetTestRect().Contains(pos) && !character->IsDead())
       return &(*character);
   }
+
   return NULL;
 }
 
@@ -299,21 +301,26 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const Weapons
   // do nothing
 }
 
-static bool IsPositionEmpty(const Character & character_to_ignore, const Point2i& pos)
+static bool IsPositionEmpty(const Character & character_to_ignore,
+                            const Point2i& pos, PhysicalObj** object)
 {
+  *object = NULL;
   if (GetWorld().IsOutsideWorld(pos))
     return false;
 
   if (!GetWorld().IsInVacuum(pos))
     return false;
 
-  PhysicalObj* object = GetObjectAt(pos);
-  if (object != NULL && object != &character_to_ignore)
+  *object = GetObjectAt(pos);
+  if (*object != NULL && *object != &character_to_ignore)
     return false;
+  *object = NULL;
   return true;
 }
 
-static const Point2i GetFirstContact(const Character & character_to_ignore, const Trajectory & trajectory)
+static const Point2i GetFirstContact(const Character & character_to_ignore,
+                                     const Trajectory & trajectory,
+                                     PhysicalObj** object)
 {
   float time = 0;
   Point2i pos;
@@ -322,7 +329,7 @@ static const Point2i GetFirstContact(const Character & character_to_ignore, cons
     float pixel_per_second = trajectory.GetSpeedAt(time);
     float seconds_per_pixel = 1 / pixel_per_second;
     time += seconds_per_pixel;
-  } while(IsPositionEmpty(character_to_ignore, pos));
+  } while(IsPositionEmpty(character_to_ignore, pos, object));
   return pos;
 }
 
@@ -361,8 +368,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
     return NULL;
 
   Trajectory trajectory(pos_0, v_0, a);
-  Point2i explosion_pos = GetFirstContact(shooter, trajectory);
-  PhysicalObj * aim = GetObjectAt(explosion_pos);
+  PhysicalObj * aim;
+  Point2i explosion_pos = GetFirstContact(shooter, trajectory, &aim);
   float rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
   if (aim == &enemy || explodes_on_contact) {
