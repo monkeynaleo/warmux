@@ -159,12 +159,12 @@ ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_we
   // do nothing
 }
 
-static PhysicalObj* GetObjectAt(const Point2i & pos)
+static const PhysicalObj* GetObjectAt(const Point2i & pos)
 {
-  ObjectsList * objects = ObjectsList::GetInstance();
-  ObjectsList::iterator it = objects->begin();
+  const ObjectsList * objects = ObjectsList::GetConstInstance();
+  ObjectsList::const_iterator it = objects->begin();
   while(it != objects->end()) {
-    PhysicalObj* object = *it;
+    const PhysicalObj* object = *it;
     if (object->GetTestRect().Contains(pos) && !object->IsDead())
       return object;
     it++;
@@ -179,7 +179,8 @@ static PhysicalObj* GetObjectAt(const Point2i & pos)
 }
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
-static PhysicalObj* GetCollisionObject(const Character * character_to_ignore, const Point2i& from, const Point2i& to) {
+static const PhysicalObj* GetCollisionObject(const Character * character_to_ignore,
+                                             const Point2i& from, const Point2i& to) {
   Point2i pos = from;
   Point2i delta = to - from;
   int steps_x = abs(delta.x);
@@ -230,7 +231,7 @@ static PhysicalObj* GetCollisionObject(const Character * character_to_ignore, co
     if (!GetWorld().IsInVacuum(pos))
       return NULL;
 
-    PhysicalObj* object = GetObjectAt(pos);
+    const PhysicalObj* object = GetObjectAt(pos);
     if (object != NULL && object != character_to_ignore)
       return object;
   }
@@ -302,7 +303,7 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const Weapons
 }
 
 static bool IsPositionEmpty(const Character & character_to_ignore,
-                            const Point2i& pos, PhysicalObj** object)
+                            const Point2i& pos, const PhysicalObj** object)
 {
   *object = NULL;
   if (GetWorld().IsOutsideWorld(pos))
@@ -320,7 +321,7 @@ static bool IsPositionEmpty(const Character & character_to_ignore,
 
 static const Point2i GetFirstContact(const Character & character_to_ignore,
                                      const Trajectory & trajectory,
-                                     PhysicalObj** object)
+                                     const PhysicalObj** object)
 {
   float time = 0;
   Point2i pos;
@@ -341,8 +342,8 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
   if (!CanUseCharacter(shooter))
     return NULL;
 
-  WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-  WeaponLauncher * weapon = weapons_list->GetWeaponLauncher(weapon_type);
+  const WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
+  const WeaponLauncher * weapon = weapons_list->GetWeaponLauncher(weapon_type);
 
   if (!CanUseWeapon(weapon))
     return NULL;
@@ -368,7 +369,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
     return NULL;
 
   Trajectory trajectory(pos_0, v_0, a);
-  PhysicalObj * aim;
+  const PhysicalObj * aim;
   Point2i explosion_pos = GetFirstContact(shooter, trajectory, &aim);
   float rating;
   bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
