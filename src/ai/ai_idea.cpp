@@ -319,6 +319,8 @@ static bool IsPositionEmpty(const Character & character_to_ignore,
   return true;
 }
 
+#define STEP_IN_PIXEL 4
+
 static const Point2i GetFirstContact(const Character & character_to_ignore,
                                      const Trajectory & trajectory,
                                      const PhysicalObj** object)
@@ -329,7 +331,7 @@ static const Point2i GetFirstContact(const Character & character_to_ignore,
     pos = trajectory.GetPositionAt(time);
     float pixel_per_second = trajectory.GetSpeedAt(time);
     float seconds_per_pixel = 1 / pixel_per_second;
-    time += 2*seconds_per_pixel;
+    time += STEP_IN_PIXEL*seconds_per_pixel;
   } while(IsPositionEmpty(character_to_ignore, pos, object));
   return pos;
 }
