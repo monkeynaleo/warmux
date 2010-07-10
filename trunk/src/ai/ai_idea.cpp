@@ -329,7 +329,7 @@ static const Point2i GetFirstContact(const Character & character_to_ignore,
     pos = trajectory.GetPositionAt(time);
     float pixel_per_second = trajectory.GetSpeedAt(time);
     float seconds_per_pixel = 1 / pixel_per_second;
-    time += seconds_per_pixel;
+    time += 2*seconds_per_pixel;
   } while(IsPositionEmpty(character_to_ignore, pos, object));
   return pos;
 }
