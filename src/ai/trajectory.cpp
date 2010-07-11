@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Represtents he trajectory of a missile.
+ * Represents the trajectory of a missile.
  *****************************************************************************/
 
 
@@ -29,15 +29,4 @@ acceleration(a),
 half_acceleration(a/2)
 {
   // do nothing
-}
-
-const Point2i Trajectory::GetPositionAt(float time) const
-{
-  return half_acceleration * (time * time) + initial_speed * time + initial_position;
-}
-
-float Trajectory::GetSpeedAt(float time) const
-{
-  Point2f speed = acceleration * time + initial_speed;
-  return speed.Norm();
 }
