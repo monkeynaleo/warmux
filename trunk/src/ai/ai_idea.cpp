@@ -178,11 +178,51 @@ static const PhysicalObj* GetObjectAt(const Point2i & pos)
   return NULL;
 }
 
+bool ObjectLiesOnSegment(const PhysicalObj* object, const Point2i& from,
+                         const Point2i& to)
+{
+  Rectanglei r = object->GetTestRect();
+  int x = r.GetPositionX() + r.GetSizeX()/2;
+  int y = r.GetPositionY() + r.GetSizeY()/2;
+
+  if (from.y == to.y) {
+    // Horizontal shot
+    return r.Contains(Point2i(x, to.y));
+  } else if (from.x == to.x) {
+    // Vertical shot
+    return r.Contains(Point2i(to.x, y));
+  }
+
+  // Are the ordinates within the segment
+  if ((x<from.x && x<to.x) || (x>from.x && x>to.x) ||
+      (y<from.y && y<to.y) || (y>from.y && y>to.y))
+    return false;
+  y = from.y + ((x-from.x)*(to.y-from.y))/(to.x-from.x);
+  return r.Contains(Point2i(x, y));
+}
+
+
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
 static const PhysicalObj* GetCollisionObject(const Character * character_to_ignore,
                                              const Point2i& from, const Point2i& to) {
   Point2i pos = from;
   Point2i delta = to - from;
+
+  const ObjectsList * objects = ObjectsList::GetConstInstance();
+  ObjectsList::const_iterator it = objects->begin();
+  while(it != objects->end()) {
+    const PhysicalObj* object = *it;
+    if (ObjectLiesOnSegment(object, from, to) && !object->IsDead())
+      return object;
+    it++;
+  }
+
+  FOR_ALL_CHARACTERS(team, character) {
+    const PhysicalObj* object = &(*character);
+    if (ObjectLiesOnSegment(object, from, to) && !object->IsDead())
+      return object;
+  }
+
   int steps_x = abs(delta.x);
   int steps_y = abs(delta.y);
   int step_x = delta.x < 0 ? -1 : 1;
@@ -230,10 +270,6 @@ static const PhysicalObj* GetCollisionObject(const Character * character_to_igno
 
     if (!GetWorld().IsInVacuum(pos))
       return NULL;
-
-    const PhysicalObj* object = GetObjectAt(pos);
-    if (object != NULL && object != character_to_ignore)
-      return object;
   }
   return NULL;
 }
