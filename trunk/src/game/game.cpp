@@ -564,11 +564,6 @@ void Game::Draw ()
   GetWorld().DrawWater();
   StatStop("GameDraw:water");
 
-  // Draw game messages
-  StatStart("GameDraw::game_messages");
-  GameMessages::GetInstance()->Draw();
-  StatStop("GameDraw::game_messages");
-
   // Draw optionals
   StatStart("GameDraw:fps_and_map_author_name");
   GetWorld().DrawAuthorName();
@@ -581,6 +576,11 @@ void Game::Draw ()
   StatStart("GameDraw:interface");
   Interface::GetInstance()->Draw ();
   StatStop("GameDraw:interface");
+
+  // Draw game messages
+  StatStart("GameDraw::game_messages");
+  GameMessages::GetInstance()->Draw();
+  StatStop("GameDraw::game_messages");
 
   // Draw MsgBox for chat network
   if(Network::GetInstance()->IsConnected()){
