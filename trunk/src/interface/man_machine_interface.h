@@ -100,11 +100,11 @@ protected:
 
   virtual void SetDefaultConfig() { };
   std::map<int, std::vector<Key_t> > layout;
-  std::list<uint8> registred_event;
+  std::list<uint32_t> registred_event;
   bool PressedKeys[256]; // stupid default value
 
-  void RegisterEvent(uint8 event_type) { registred_event.push_back(event_type); };
-  bool IsRegistredEvent(uint8 event_type);
+  void RegisterEvent(uint32_t event_type) { registred_event.push_back(event_type); };
+  bool IsRegistredEvent(uint32_t event_type);
   void HandleKeyPressed(const Key_t &action_key);
   void HandleKeyReleased(const Key_t &action_key);
 

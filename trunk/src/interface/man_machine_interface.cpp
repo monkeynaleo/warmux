@@ -45,9 +45,9 @@ void ManMachineInterface::Reset()
     PressedKeys[i] = false ;
 }
 
-bool ManMachineInterface::IsRegistredEvent(uint8 event_type)
+bool ManMachineInterface::IsRegistredEvent(uint32_t event_type)
 {
-  std::list<uint8>::iterator it;
+  std::list<uint32_t>::iterator it;
   for(it = registred_event.begin(); it != registred_event.end(); it ++) {
     if(event_type == (*it))
       return true;
@@ -542,6 +542,7 @@ int ManMachineInterface::GetKeyFromKeyName(const std::string &name) const
   if(name == "delete") return SDLK_DELETE;
   // End of ASCII mapped keysyms
 
+#if SDL_MINOR_VERSION == 2
   // International keyboard syms
   if(name == "world_0") return SDLK_WORLD_0;
   if(name == "world_1") return SDLK_WORLD_1;
@@ -639,6 +640,7 @@ int ManMachineInterface::GetKeyFromKeyName(const std::string &name) const
   if(name == "world_93") return SDLK_WORLD_93;
   if(name == "world_94") return SDLK_WORLD_94;
   if(name == "world_95") return SDLK_WORLD_95;
+#endif
 
   // Numeric keypad
   if(name == "kp0") return SDLK_KP0;
@@ -797,6 +799,7 @@ std::string ManMachineInterface::GetKeyNameFromKey(int key) const
   if(key == SDLK_DELETE) return "delete";
   // End of ASCII mapped keysyms
 
+#if SDL_MINOR_VERSION == 2
   // International keyboard syms
   if(key == SDLK_WORLD_0) return "world_0";
   if(key == SDLK_WORLD_1) return "world_1";
@@ -894,6 +897,7 @@ std::string ManMachineInterface::GetKeyNameFromKey(int key) const
   if(key == SDLK_WORLD_93) return "world_93";
   if(key == SDLK_WORLD_94) return "world_94";
   if(key == SDLK_WORLD_95) return "world_95";
+#endif
 
   // Numeric keypad
   if(key == SDLK_KP0) return "kp0";
