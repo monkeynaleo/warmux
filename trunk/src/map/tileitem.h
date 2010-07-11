@@ -98,7 +98,11 @@ public:
 
   unsigned char GetAlpha(const Point2i &pos)
   {
-    return (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
+    int a;
+    m_surface.Lock();
+    a = (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
+    m_surface.Unlock();
+    return a;
   }
 
   void Dig(const Point2i &position, const Surface& dig);
@@ -144,7 +148,11 @@ public:
 
   unsigned char GetAlpha(const Point2i &pos)
   {
-    return m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
+    int a;
+    m_surface.Lock();
+    a = m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
+    m_surface.Unlock();
+    return a;
   }
 
   void Empty(int start_x, int end_x, unsigned char* buf);
