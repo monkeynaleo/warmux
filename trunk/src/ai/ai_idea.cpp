@@ -203,8 +203,8 @@ bool ObjectLiesOnSegment(const PhysicalObj* object, const Point2i& from,
 
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
-static const bool ShotMisses(const Character *shooter, const Character *enemy,
-                             const Point2i& from, const Point2i& to) {
+static bool ShotMisses(const Character *shooter, const Character *enemy,
+                       const Point2i& from, const Point2i& to) {
   Point2i pos = from;
   Point2i delta = to - from;
 
@@ -357,7 +357,7 @@ static bool IsPositionEmpty(const Character & character_to_ignore,
   return true;
 }
 
-#define STEP_IN_PIXEL 4
+#define STEP_IN_PIXEL 2
 
 static const Point2i GetFirstContact(const Character & character_to_ignore,
                                      const Trajectory & trajectory,
