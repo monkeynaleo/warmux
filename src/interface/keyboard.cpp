@@ -33,6 +33,9 @@
 #define CONTROL_OFFSET (MODIFIER_OFFSET * CONTROL_BIT)
 #define ALT_OFFSET (MODIFIER_OFFSET * ALT_BIT)
 
+#if SDL_MINOR_VERSION != 2
+#  define SDLK_LAST  SDL_NUM_SCANCODES
+#endif
 
 Keyboard::Keyboard() :
   ManMachineInterface(),
