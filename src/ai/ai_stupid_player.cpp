@@ -203,8 +203,8 @@ void AIStupidPlayer::CheckNextIdea()
 {
   Stopwatch stopwatch;
   AIStrategy * strategy = (*item_iterator).first->CreateStrategy();
+  (*item_iterator).second->AddTiming(stopwatch.GetValue());
   if (strategy) {
-    (*item_iterator).second->AddTiming(stopwatch.GetValue());
     AIStrategy::CompareResult compare_result = strategy->CompareRatingWith(best_strategy);
     bool replace_best;
     if (compare_result != AIStrategy::LOWER_RATING) {
