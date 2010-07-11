@@ -203,8 +203,8 @@ bool ObjectLiesOnSegment(const PhysicalObj* object, const Point2i& from,
 
 
 /* Returns the object the missile has collided with or NULL if the missile has collided with the ground. */
-static const PhysicalObj* GetCollisionObject(const Character * character_to_ignore,
-                                             const Point2i& from, const Point2i& to) {
+static const bool ShotMisses(const Character *shooter, const Character *enemy,
+                             const Point2i& from, const Point2i& to) {
   Point2i pos = from;
   Point2i delta = to - from;
 
@@ -212,15 +212,16 @@ static const PhysicalObj* GetCollisionObject(const Character * character_to_igno
   ObjectsList::const_iterator it = objects->begin();
   while(it != objects->end()) {
     const PhysicalObj* object = *it;
-    if (ObjectLiesOnSegment(object, from, to) && !object->IsDead())
-      return object;
+    if (!object->IsDead() && ObjectLiesOnSegment(object, from, to))
+      return true;
     it++;
   }
 
   FOR_ALL_CHARACTERS(team, character) {
     const PhysicalObj* object = &(*character);
-    if (ObjectLiesOnSegment(object, from, to) && !object->IsDead())
-      return object;
+    if (object!=shooter && object!=enemy && !object->IsDead() &&
+        ObjectLiesOnSegment(object, from, to))
+      return true;
   }
 
   int steps_x = abs(delta.x);
@@ -266,12 +267,12 @@ static const PhysicalObj* GetCollisionObject(const Character * character_to_igno
     }
 
     if (GetWorld().IsOutsideWorld(pos))
-      return NULL;
+      return true;
 
     if (!GetWorld().IsInVacuum(pos))
-      return NULL;
+      return true;
   }
-  return NULL;
+  return false;
 }
 
 AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
@@ -305,8 +306,7 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
 
-  const PhysicalObj * collision_object = GetCollisionObject(&shooter, departure, arrival);
-  if (collision_object != &enemy)
+  if (ShotMisses(&shooter, &enemy, departure, arrival))
     return NULL;
 
   int available_ammo_units = ActiveTeam().ReadNbUnits(weapon_type);
@@ -315,13 +315,15 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
   if (weapon_type == Weapon::WEAPON_SHOTGUN) {
     damage_per_ammo_unit *= SHOTGUN_BULLETS;
   }
-  int required_ammo_units = (enemy.GetEnergy() + damage_per_ammo_unit -1) / damage_per_ammo_unit;
+  int required_ammo_units = (enemy.GetEnergy() + damage_per_ammo_unit -1)
+                          / damage_per_ammo_unit;
   int used_ammo_units = std::min(required_ammo_units, available_ammo_units);
   int damage = used_ammo_units * damage_per_ammo_unit;
 
   float rating = RateDamageDoneToEnemy(damage, enemy);
   rating = rating * weapons_weighting.GetFactor(weapon_type);
-  return new ShootWithGunStrategy(rating, shooter, weapon_type , direction, shoot_angle, used_ammo_units);
+  return new ShootWithGunStrategy(rating, shooter, weapon_type, direction,
+                                  shoot_angle, used_ammo_units);
 }
 
 FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
