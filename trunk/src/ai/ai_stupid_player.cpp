@@ -37,7 +37,7 @@ const float MAX_SHOTGUN_DISTANCE = 250;
 const float MAX_SNIPER_RIFILE_DISTANCE = 10E10;
 const float MAX_SUBMACHINE_GUN_DISTANCE = 500;
 
-#define DBG_AI_TIME
+//#define DBG_AI_TIME
 
 class AIStats {
   const char *name;
@@ -54,8 +54,8 @@ public:
 #ifdef DBG_AI_TIME
     if (calls) {
       float avg = time/(float)calls;
-      printf("Strategy '%s': calls=%u  avg=%.2fms  min=%ums max=%ums stddev=%.3fms\n",
-             name, calls, avg, min, max, sqrt( (sq_time/(float)calls) - avg*avg ));
+      printf("Strategy '%s': calls=%u  total=%llums  min=%ums  max=%ums  avg=%.2fms  stddev=%.3fms\n",
+             name, calls, time, min, max, avg, sqrt( (sq_time/(float)calls) - avg*avg ));
     } else {
       printf("Strategy '%s': not called\n", name);
     }
