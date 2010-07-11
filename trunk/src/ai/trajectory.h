@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Represtents he trajectory of a missile.
+ * Represents the trajectory of a missile.
  *****************************************************************************/
 
 #ifndef TRAJECTORY_H
@@ -32,7 +32,14 @@ class Trajectory {
     Point2f half_acceleration;
   public:
     Trajectory(Point2f pos_0, Point2f v_0, Point2f a);
-    const Point2i GetPositionAt(float time) const;
-    float GetSpeedAt(float time) const;
+    const Point2i GetPositionAt(float t) const
+    {
+      return half_acceleration*(t*t) + initial_speed*t + initial_position;
+    }
+    float GetSpeedAt(float t) const
+    {
+      Point2f speed = acceleration*t + initial_speed;
+      return speed.Norm();
+    }
 };
 #endif
