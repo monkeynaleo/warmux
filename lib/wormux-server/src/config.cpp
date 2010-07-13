@@ -33,7 +33,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
   return line.size();
 }
 
-void BasicConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
+void ServerConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
 {
   // split the string on ','
   std::string::size_type prev_pos = 0;
@@ -54,7 +54,7 @@ void BasicConfig::SplitVersionsString(const std::string& val, std::list<std::str
   } while (comma_pos != std::string::npos);
 }
 
-void BasicConfig::Load(const std::string & config_file)
+void ServerConfig::Load(const std::string & config_file)
 {
   int line_nbr = 0;
 
@@ -86,10 +86,10 @@ void BasicConfig::Load(const std::string & config_file)
       std::string val = line.substr(equ_pos+1);
 
       if (opt == "versions") {
-	BasicConfig::SplitVersionsString(val, supported_versions);
+	ServerConfig::SplitVersionsString(val, supported_versions);
 	continue;
       } else if (opt == "hidden_versions") {
-	BasicConfig::SplitVersionsString(val, hidden_supported_versions);
+	ServerConfig::SplitVersionsString(val, hidden_supported_versions);
 	continue;
       }
 
@@ -128,7 +128,7 @@ void BasicConfig::Load(const std::string & config_file)
   }
 }
 
-void BasicConfig::Display() const
+void ServerConfig::Display() const
 {
   DPRINT(INFO, "Current config:");
   for(std::map<std::string, bool>::const_iterator cfg = bool_value.begin();
@@ -153,12 +153,12 @@ void BasicConfig::Display() const
     }
 
   DPRINT(INFO, "Supported versions: %s",
-	 BasicConfig::SupportedVersions2Str(supported_versions).c_str());
+	 ServerConfig::SupportedVersions2Str(supported_versions).c_str());
   DPRINT(INFO, "Hidden but supported versions: %s",
-	 BasicConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
+	 ServerConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
 }
 
-bool BasicConfig::Get(const std::string & name, bool & value) const
+bool ServerConfig::Get(const std::string & name, bool & value) const
 {
   std::map<std::string, bool>::const_iterator it = bool_value.find(name);
 
@@ -171,7 +171,7 @@ bool BasicConfig::Get(const std::string & name, bool & value) const
   return true;
 }
 
-bool BasicConfig::Get(const std::string & name, int & value) const
+bool ServerConfig::Get(const std::string & name, int & value) const
 {
   std::map<std::string, int>::const_iterator it = int_value.find(name);
 
@@ -184,7 +184,7 @@ bool BasicConfig::Get(const std::string & name, int & value) const
   return true;
 }
 
-bool BasicConfig::Get(const std::string & name, std::string & value) const
+bool ServerConfig::Get(const std::string & name, std::string & value) const
 {
   std::map<std::string, std::string>::const_iterator it = str_value.find(name);
 
@@ -197,7 +197,7 @@ bool BasicConfig::Get(const std::string & name, std::string & value) const
   return true;
 }
 
-void BasicConfig::SetDefault(const std::string & name, const bool & value)
+void ServerConfig::SetDefault(const std::string & name, const bool & value)
 {
   bool val;
   if( ! Get(name, val) )
@@ -207,7 +207,7 @@ void BasicConfig::SetDefault(const std::string & name, const bool & value)
     }
 }
 
-void BasicConfig::SetDefault(const std::string & name, const int & value)
+void ServerConfig::SetDefault(const std::string & name, const int & value)
 {
   int val;
   if( ! Get(name, val) )
@@ -217,7 +217,7 @@ void BasicConfig::SetDefault(const std::string & name, const int & value)
     }
 }
 
-void BasicConfig::SetDefault(const std::string & name, const std::string & value)
+void ServerConfig::SetDefault(const std::string & name, const std::string & value)
 {
   std::string val;
   if( ! Get(name, val) )
@@ -228,7 +228,7 @@ void BasicConfig::SetDefault(const std::string & name, const std::string & value
 }
 
 
-bool BasicConfig::IsVersionSupported(const std::string & version) const
+bool ServerConfig::IsVersionSupported(const std::string & version) const
 {
   std::list<std::string>::const_iterator it;
   for (it = supported_versions.begin();
@@ -249,7 +249,7 @@ bool BasicConfig::IsVersionSupported(const std::string & version) const
 }
 
 // static method
-const std::string BasicConfig::SupportedVersions2Str(const std::list<std::string>& versions_lst)
+const std::string ServerConfig::SupportedVersions2Str(const std::list<std::string>& versions_lst)
 {
  std::string versions = "";
   std::list<std::string>::const_iterator it;
@@ -263,8 +263,8 @@ const std::string BasicConfig::SupportedVersions2Str(const std::list<std::string
 }
 
 // returns only the officially supported versions
-const std::string BasicConfig::SupportedVersions2Str() const
+const std::string ServerConfig::SupportedVersions2Str() const
 {
-  return BasicConfig::SupportedVersions2Str(supported_versions);
+  return ServerConfig::SupportedVersions2Str(supported_versions);
 
 }

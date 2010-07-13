@@ -17,13 +17,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef BASIC_CONFIG_H
-#define BASIC_CONFIG_H
+#ifndef WSERVER_CONFIG_H
+#define WSERVER_CONFIG_H
 #include <list>
 #include <map>
 #include <string>
 
-class BasicConfig
+class ServerConfig
 {
   std::map<std::string, std::string> str_value;
   std::map<std::string, int> int_value;

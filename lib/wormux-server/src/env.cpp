@@ -24,9 +24,9 @@
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 
-static BasicConfig* config = NULL;
+static ServerConfig* config = NULL;
 
-void Env::SetConfigClass(BasicConfig& _config)
+void Env::SetConfigClass(ServerConfig& _config)
 {
   config = &_config;
 }

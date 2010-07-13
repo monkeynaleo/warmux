@@ -22,7 +22,7 @@
 
 #include <WSERVER_config.h>
 
-class Config : public BasicConfig
+class Config : public ServerConfig
 {
 public:
   virtual void Load(const std::string & config_file);
