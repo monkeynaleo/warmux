@@ -111,7 +111,9 @@ void Video::ComputeAvailableConfigs()
   if(modes != NULL){
     // We also had the current window resolution if it is not already in the list!
     for(int i=0;modes[i];++i) {
-      available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
+      if (modes[i]->w>=480 && modes[i]->h>=320) {
+        available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
+      }
     }
   }
 
@@ -185,8 +187,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
   int old_width, old_height;
   bool old_fullscreen, old_hw;
   if (window_was_null) {
-    old_width = 640;
-    old_height = 480;
+    old_width = available_configs.begin()->GetX();
+    old_height = available_configs.begin()->GetY();
     old_hw = true;
   } else {
     old_width = window.GetWidth();
