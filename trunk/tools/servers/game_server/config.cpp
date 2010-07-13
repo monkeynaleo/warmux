@@ -24,6 +24,9 @@
 
 Config config;
 
+Config::Config() : ServerConfig(false)
+{}
+
 void Config::Load(const std::string & config_file)
 {
   ServerConfig::Load(config_file);

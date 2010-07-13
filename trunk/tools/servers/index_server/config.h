@@ -27,6 +27,7 @@ const int VERSION = 2;
 class Config : public ServerConfig
 {
 public:
+  Config();
   virtual void Load(const std::string& config_file);
 };
 
