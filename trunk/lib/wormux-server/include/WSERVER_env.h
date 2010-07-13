@@ -20,12 +20,12 @@
 #ifndef WORMUX_SERVER_ENV_H
 #define WORMUX_SERVER_ENV_H
 
-class BasicConfig;
+class ServerConfig;
 
 class Env
 {
 public:
-  static void SetConfigClass(BasicConfig& config);
+  static void SetConfigClass(ServerConfig& config);
 
   static void SetChroot();
   static void SetWorkingDir();
