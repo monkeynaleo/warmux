@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <getopt.h>
 #include <netinet/in.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
@@ -46,16 +47,41 @@
 BasicClock wx_clock;
 std::string config_file = "wormux_server.conf";
 
+void printUsage(char *argv[])
+{
+  printf("Usage: %s [OPTIONS]\n", argv[0]);
+  printf("OPTIONS:\n"
+	 "  -h|--help: print this help and exit\n"
+	 "  -f|--file: specify config file\n"
+	 "  -v|--version: print version and exit\n");
+}
+
 void parseArgs(int argc, char *argv[])
 {
   int opt;
 
-  while ((opt = getopt(argc, argv, "f:")) != -1) {
+  struct option long_options[] = {
+    {"help", 0, 0, 'h'},
+    {"version", 0, 0, 'v'},
+    {"file", 1, 0, 'f'},
+    {0, 0, 0, 0}
+  };
+
+  while ((opt = getopt_long(argc, argv, "hvf:", long_options, NULL)) != -1) {
     switch (opt) {
+    case 'h':
+      printUsage(argv);
+      exit(EXIT_SUCCESS);
+      break;
+    case 'v':
+      printf("Wormux game server version %s\n", PACKAGE_VERSION);
+      exit(EXIT_SUCCESS);
     case 'f':
       config_file = optarg;
       break;
     default:
+      printUsage(argv);
+      exit(EXIT_FAILURE);
       break;
     }
   }
