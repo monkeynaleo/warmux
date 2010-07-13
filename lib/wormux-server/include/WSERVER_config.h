@@ -25,6 +25,8 @@
 
 class ServerConfig
 {
+  bool support_versions;
+
   std::map<std::string, std::string> str_value;
   std::map<std::string, int> int_value;
   std::map<std::string, bool> bool_value;
@@ -41,7 +43,9 @@ protected:
 
   virtual void Load(const std::string & config_file);
   void Display() const;
+
 public:
+  ServerConfig(bool support_versions);
 
   bool Get(const std::string & name, std::string & value) const;
   bool Get(const std::string & name, int & value) const;

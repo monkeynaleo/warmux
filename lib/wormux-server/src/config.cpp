@@ -33,6 +33,9 @@ static ssize_t getline(std::string& line, std::ifstream& file)
   return line.size();
 }
 
+ServerConfig::ServerConfig(bool versions) : support_versions(versions)
+{}
+
 void ServerConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
 {
   // split the string on ','
@@ -76,20 +79,27 @@ void ServerConfig::Load(const std::string & config_file)
         continue;
 
       std::string::size_type equ_pos = line.find('=',0);
-      if(equ_pos == std::string::npos)
-        {
-          DPRINT(INFO, "Wrong format on line %i",line_nbr);
-          continue;
-        }
+      if (equ_pos == std::string::npos) {
+	DPRINT(INFO, "Wrong format on line %i",line_nbr);
+	continue;
+      }
 
       std::string opt = line.substr(0, equ_pos);
       std::string val = line.substr(equ_pos+1);
 
       if (opt == "versions") {
-	ServerConfig::SplitVersionsString(val, supported_versions);
+	if (support_versions) {
+	  ServerConfig::SplitVersionsString(val, supported_versions);
+	} else {
+	  fprintf(stderr, "Option 'versions' is ignored.\n");
+	}
 	continue;
       } else if (opt == "hidden_versions") {
-	ServerConfig::SplitVersionsString(val, hidden_supported_versions);
+	if (support_versions) {
+	  ServerConfig::SplitVersionsString(val, hidden_supported_versions);
+	} else {
+	  fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
+	}
 	continue;
       }
 
@@ -122,7 +132,7 @@ void ServerConfig::Load(const std::string & config_file)
 
   DPRINT(INFO, "Config loaded successfully from %s", config_file.c_str());
 
-  if (supported_versions.empty()) {
+  if (support_versions && supported_versions.empty()) {
     DPRINT(INFO, "No supported versions ?!? You must fill option 'versions'");
     exit(EXIT_FAILURE);
   }
@@ -152,10 +162,12 @@ void ServerConfig::Display() const
       DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
     }
 
-  DPRINT(INFO, "Supported versions: %s",
-	 ServerConfig::SupportedVersions2Str(supported_versions).c_str());
-  DPRINT(INFO, "Hidden but supported versions: %s",
-	 ServerConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
+  if (support_versions) {
+    DPRINT(INFO, "Supported versions: %s",
+	   ServerConfig::SupportedVersions2Str(supported_versions).c_str());
+    DPRINT(INFO, "Hidden but supported versions: %s",
+	   ServerConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
+  }
 }
 
 bool ServerConfig::Get(const std::string & name, bool & value) const

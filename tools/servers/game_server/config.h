@@ -25,6 +25,7 @@
 class Config : public ServerConfig
 {
 public:
+  Config();
   virtual void Load(const std::string & config_file);
 };
 
