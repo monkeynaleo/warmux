@@ -25,6 +25,8 @@ class ServerConfig;
 class Env
 {
 public:
+  static void Daemonize();
+
   static void SetConfigClass(ServerConfig& config);
 
   static void SetChroot();

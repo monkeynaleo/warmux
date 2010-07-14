@@ -31,6 +31,26 @@ void Env::SetConfigClass(ServerConfig& _config)
   config = &_config;
 }
 
+void Env::Daemonize(void)
+{
+  pid_t fwis = fork();
+  switch (fwis) {
+    case EAGAIN:
+      DPRINT(INFO, "Cannot fork due to system restriction. Try to increase KERN_MAXPROC, KERN_MAXPROCPERUID or RLIMIT_NPROC.");
+      exit(EXIT_FAILURE);
+      break;
+    case ENOMEM:
+      DPRINT(INFO, "Cannot fork due to insufficient swap or memory space.");
+      exit(EXIT_FAILURE);
+      break;
+    case 0: // Forked successfully
+      break;
+    default:
+      exit(EXIT_SUCCESS);
+      break;
+  }
+}
+
 void Env::SetChroot()
 {
   bool r;

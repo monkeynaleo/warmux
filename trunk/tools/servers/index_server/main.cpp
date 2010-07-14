@@ -61,26 +61,6 @@ void ShowUsage(void)
   return;
 }
 
-void DoFork(void)
-{
-  pid_t fwis = fork();
-  switch (fwis) {
-    case EAGAIN:
-      DPRINT(INFO, "Cannot fork due to system restriction. Try to increase KERN_MAXPROC, KERN_MAXPROCPERUID or RLIMIT_NPROC.");
-      exit(EXIT_FAILURE);
-      break;
-    case ENOMEM:
-      DPRINT(INFO, "Cannot fork due to insufficient swap or memory space.");
-      exit(EXIT_FAILURE);
-      break;
-    case 0: // Forked successfully
-      break;
-    default:
-      exit(EXIT_SUCCESS);
-      break;
-  }
-}
-
 void parseArgs(int argc, char *argv[])
 {
   int opt;
@@ -91,7 +71,7 @@ void parseArgs(int argc, char *argv[])
       config_file = optarg;
       break;
     case 'd':
-      DoFork();
+      Env::Daemonize();
       break;
     case '?':
     default:
