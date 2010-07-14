@@ -58,6 +58,7 @@ void printUsage(char *argv[])
 	 "  -f|--file: specify config file\n"
 	 "  -i|--index-server [ip/hostname of index server]]\n"
 	 );
+  printf("\nConfig file is reloaded when receiving a -HUP signal BUT some configuration options need program to be restarted\n");
 }
 
 void parseArgs(int argc, char *argv[])
@@ -127,6 +128,7 @@ int main(int argc, char* argv[])
   Env::SetChroot();
   Env::MaskSigPipe();
   Env::SetMaxConnection();
+  Env::SetupAutoReloadConf();
 
   int port = 0;
   if (!config.Get("port", port)) {
