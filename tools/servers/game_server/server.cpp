@@ -281,26 +281,16 @@ bool GameServer::ConnectToIndexServer()
     return true;
   }
 
-  std::string index_server_address;
-  if (config.Get("index_server_address", index_server_address)) {
-    int index_server_port = 9997;
-    config.Get("index_server_port", index_server_port);
-
-    DPRINT(INFO, "Connect to the index server on %s:%d. Use this option only for debugging!",
-	   index_server_address.c_str(), index_server_port);
-    IndexServer::GetInstance()->SetAddress(index_server_address.c_str(), index_server_port);
-  }
-
   connection_state_t conn = IndexServer::GetInstance()->Connect(PACKAGE_VERSION);
   if (conn != CONNECTED) {
     if (conn == CONN_WRONG_VERSION) {
-      fprintf(stderr,"%s", Format(_("Sorry, your version is not supported anymore. "
+      fprintf(stderr,"%s\n", Format(_("Sorry, your version is not supported anymore. "
 			       "Supported versions are %s. "
 			       "You can download an updated version "
 			       "from http://www.wormux.org/wiki/download.php"),
 			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
-      fprintf(stderr, "ERROR: Fail to connect to the index server");
+      fprintf(stderr, "ERROR: Fail to connect to the index server\n");
     }
     return false;
   }

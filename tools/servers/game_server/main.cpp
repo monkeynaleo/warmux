@@ -33,6 +33,7 @@
 #include <list>
 #include <map>
 
+#include <WORMUX_index_server.h>
 #include <WORMUX_types.h>
 #include <WORMUX_network.h>
 #include <WORMUX_random.h>
@@ -52,8 +53,10 @@ void printUsage(char *argv[])
   printf("Usage: %s [OPTIONS]\n", argv[0]);
   printf("OPTIONS:\n"
 	 "  -h|--help: print this help and exit\n"
+	 "  -v|--version: print version and exit\n"
 	 "  -f|--file: specify config file\n"
-	 "  -v|--version: print version and exit\n");
+	 "  -i|--index-server [ip/hostname of index server]]\n"
+	 );
 }
 
 void parseArgs(int argc, char *argv[])
@@ -61,13 +64,14 @@ void parseArgs(int argc, char *argv[])
   int opt;
 
   struct option long_options[] = {
-    {"help", 0, 0, 'h'},
-    {"version", 0, 0, 'v'},
-    {"file", 1, 0, 'f'},
-    {0, 0, 0, 0}
+    {"help",	     no_argument,       NULL, 'h'},
+    {"version",	     no_argument,       NULL, 'v'},
+    {"file",         required_argument, NULL, 'f'},
+    {"index-server", optional_argument, NULL, 'i'},
+    {NULL,           no_argument,       NULL,  0 }
   };
 
-  while ((opt = getopt_long(argc, argv, "hvf:", long_options, NULL)) != -1) {
+  while ((opt = getopt_long(argc, argv, "hvf:i::", long_options, NULL)) != -1) {
     switch (opt) {
     case 'h':
       printUsage(argv);
@@ -79,8 +83,25 @@ void parseArgs(int argc, char *argv[])
     case 'f':
       config_file = optarg;
       break;
-    default:
+    case 'i':
+      {
+	std::string index_server_address;
+	if (optarg) index_server_address = optarg;
+	else index_server_address = "127.0.0.1";
+	printf("Using %s as address for index server. This option must be used only for debugging.\n",
+	       index_server_address.c_str());
+	IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
+      }
+      break;
+
+    case '?': /* returns by getopt if option was invalid */
       printUsage(argv);
+      exit(EXIT_FAILURE);
+      break;
+
+    default:
+      fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", opt);
+      ASSERT(false);
       exit(EXIT_FAILURE);
       break;
     }
