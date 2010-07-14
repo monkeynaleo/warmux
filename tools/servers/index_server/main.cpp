@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <getopt.h>
 #include <netinet/in.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
@@ -49,33 +50,57 @@ std::multimap<std::string, Client*> clients;
 
 std::string config_file = "wormux_index_server.conf";
 
-void ShowUsage(void)
+void printUsage(char *argv[])
 {
-  std::cout << "Wormux Index Server (" << PACKAGE_VERSION <<")" << std::endl
-	    << "===================" << std::endl
-	    << "Usage: wormux-inder_server [OPTIONS]" << std::endl
-	    << "       -d             : run as daemon" << std::endl
-	    << "       -f config_file : set an alternative configuration file" << std::endl;
-  exit(EXIT_FAILURE);
-
-  return;
+  printf("Usage: %s [OPTIONS]\n", argv[0]);
+  printf("OPTIONS:\n"
+	 "  -h|--help: print this help and exit\n"
+	 "  -v|--version: print version and exit\n"
+	 "  -d|--daemon: start as daemon (in background)\n"
+	 "  -f|--file: specify config file\n"
+	 );
 }
 
 void parseArgs(int argc, char *argv[])
 {
   int opt;
 
-  while ((opt = getopt(argc, argv, "f:d")) != -1) {
+  struct option long_options[] = {
+    {"help",	     no_argument,       NULL, 'h'},
+    {"version",	     no_argument,       NULL, 'v'},
+    {"daemon",       no_argument,       NULL, 'd'},
+    {"file",         required_argument, NULL, 'f'},
+    {NULL,           no_argument,       NULL,  0 }
+  };
+
+  while ((opt = getopt_long(argc, argv, "hvdf:", long_options, NULL)) != -1) {
     switch (opt) {
-    case 'f':
-      config_file = optarg;
+    case 'h':
+      printUsage(argv);
+      exit(EXIT_SUCCESS);
       break;
+
+    case 'v':
+      printf("Wormux index server version %s\n", PACKAGE_VERSION);
+      exit(EXIT_SUCCESS);
+      break;
+
     case 'd':
       Env::Daemonize();
       break;
-    case '?':
+
+    case 'f':
+      config_file = optarg;
+      break;
+
+    case '?': /* returns by getopt if option was invalid */
+      printUsage(argv);
+      exit(EXIT_FAILURE);
+      break;
+
     default:
-      ShowUsage();
+      fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", opt);
+      exit(EXIT_FAILURE);
       break;
     }
   }
