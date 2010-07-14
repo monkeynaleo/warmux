@@ -59,6 +59,7 @@ void printUsage(char *argv[])
 	 "  -d|--daemon: start as daemon (in background)\n"
 	 "  -f|--file: specify config file\n"
 	 );
+  printf("\nConfig file is reloaded when receiving a -HUP signal BUT some configuration options need program to be restarted\n");
 }
 
 void parseArgs(int argc, char *argv[])
@@ -132,6 +133,7 @@ int main(int argc, char* argv[])
 
   // Set the maximum number of connection
   Env::SetMaxConnection();
+  Env::SetupAutoReloadConf();
 
   stats.Init();
 

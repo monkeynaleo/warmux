@@ -20,10 +20,16 @@
 #ifndef WORMUX_SERVER_ENV_H
 #define WORMUX_SERVER_ENV_H
 
+#include <signal.h>
+
 class ServerConfig;
 
 class Env
 {
+private:
+  static ServerConfig *config;
+  friend void reload_config(int, siginfo_t *, void *);
+
 public:
   static void Daemonize();
 
@@ -33,6 +39,7 @@ public:
   static void SetWorkingDir();
   static void SetMaxConnection();
   static void MaskSigPipe();
+  static void SetupAutoReloadConf();
 };
 
 #endif

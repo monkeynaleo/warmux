@@ -34,34 +34,35 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 }
 
 ServerConfig::ServerConfig(bool versions) : support_versions(versions)
-{}
-
-void ServerConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
 {
-  // split the string on ','
-  std::string::size_type prev_pos = 0;
-  std::string::size_type comma_pos = 0;
-  std::string version;
-
-  do {
-    comma_pos = val.find(',', prev_pos);
-
-    if  (comma_pos != std::string::npos) {
-      version = val.substr(prev_pos, comma_pos - prev_pos);
-      prev_pos = comma_pos+1;
-    } else {
-      version = val.substr(prev_pos);
-    }
-    versions_lst.push_back(version);
-
-  } while (comma_pos != std::string::npos);
+  config_file = ""; // to be set with Load()
 }
 
-void ServerConfig::Load(const std::string & config_file)
+void ServerConfig::Load(const std::string & _config_file)
 {
-  int line_nbr = 0;
+  if (config_file != "") {
+        DPRINTMSG(stderr,
+		  "Config file %s is already loaded. %s will not be loaded",
+		  config_file.c_str(), _config_file.c_str());
+	exit(EXIT_FAILURE);
+  }
 
-  // Parse the file
+  // Get its full pathname to allow "automatic" reloading
+  char *config_path = realpath(_config_file.c_str(), NULL);
+  if (!config_path) {
+    DPRINTMSG(stderr, "Unable to open config file %s: %s", _config_file.c_str(), strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+
+  config_file = config_path;
+  free(config_path);
+
+  LoadConfigFile();
+}
+
+void ServerConfig::LoadConfigFile()
+{
+  // Open the config file
   std::ifstream fin;
   fin.open(config_file.c_str(), std::ios::in);
   if (!fin) {
@@ -69,8 +70,23 @@ void ServerConfig::Load(const std::string & config_file)
     exit(EXIT_FAILURE);
   }
 
+  Parse(fin);
+
+  fin.close();
+
+  DPRINT(INFO, "Config loaded successfully from %s", config_file.c_str());
+
+  if (support_versions && supported_versions.empty()) {
+    DPRINT(INFO, "No supported versions ?!? You must fill option 'versions'");
+    exit(EXIT_FAILURE);
+  }
+}
+
+void ServerConfig::Parse(std::ifstream & fin)
+{
   ssize_t read;
   std::string line;
+  int line_nbr = 0;
 
   while ((read = getline(line, fin)) >= 0)
     {
@@ -89,6 +105,7 @@ void ServerConfig::Load(const std::string & config_file)
 
       if (opt == "versions") {
 	if (support_versions) {
+	  supported_versions.clear(); // useful only for reloading
 	  ServerConfig::SplitVersionsString(val, supported_versions);
 	} else {
 	  fprintf(stderr, "Option 'versions' is ignored.\n");
@@ -96,6 +113,7 @@ void ServerConfig::Load(const std::string & config_file)
 	continue;
       } else if (opt == "hidden_versions") {
 	if (support_versions) {
+	  hidden_supported_versions.clear(); // useful only for reloading
 	  ServerConfig::SplitVersionsString(val, hidden_supported_versions);
 	} else {
 	  fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
@@ -127,15 +145,11 @@ void ServerConfig::Load(const std::string & config_file)
               str_value[ opt ] = val;
         }
     }
+}
 
-  fin.close();
-
-  DPRINT(INFO, "Config loaded successfully from %s", config_file.c_str());
-
-  if (support_versions && supported_versions.empty()) {
-    DPRINT(INFO, "No supported versions ?!? You must fill option 'versions'");
-    exit(EXIT_FAILURE);
-  }
+void ServerConfig::Reload()
+{
+  LoadConfigFile();
 }
 
 void ServerConfig::Display() const
@@ -260,6 +274,12 @@ bool ServerConfig::IsVersionSupported(const std::string & version) const
   return false;
 }
 
+// returns only the officially supported versions
+const std::string ServerConfig::SupportedVersions2Str() const
+{
+  return ServerConfig::SupportedVersions2Str(supported_versions);
+}
+
 // static method
 const std::string ServerConfig::SupportedVersions2Str(const std::list<std::string>& versions_lst)
 {
@@ -274,9 +294,24 @@ const std::string ServerConfig::SupportedVersions2Str(const std::list<std::strin
   return versions.substr(0, versions.size()-1);
 }
 
-// returns only the officially supported versions
-const std::string ServerConfig::SupportedVersions2Str() const
+// static method
+void ServerConfig::SplitVersionsString(const std::string& val, std::list<std::string>& versions_lst)
 {
-  return ServerConfig::SupportedVersions2Str(supported_versions);
+  // split the string on ','
+  std::string::size_type prev_pos = 0;
+  std::string::size_type comma_pos = 0;
+  std::string version;
 
+  do {
+    comma_pos = val.find(',', prev_pos);
+
+    if  (comma_pos != std::string::npos) {
+      version = val.substr(prev_pos, comma_pos - prev_pos);
+      prev_pos = comma_pos+1;
+    } else {
+      version = val.substr(prev_pos);
+    }
+    versions_lst.push_back(version);
+
+  } while (comma_pos != std::string::npos);
 }

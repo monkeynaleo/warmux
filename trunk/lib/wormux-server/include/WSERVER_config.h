@@ -26,6 +26,7 @@
 class ServerConfig
 {
   bool support_versions;
+  std::string config_file;
 
   std::map<std::string, std::string> str_value;
   std::map<std::string, int> int_value;
@@ -36,12 +37,17 @@ class ServerConfig
   static void SplitVersionsString(const std::string& all_versions, std::list<std::string>& versions_lst);
   static const std::string SupportedVersions2Str(const std::list<std::string>& versions_lst);
 
+  void Parse(std::ifstream & fin);
+  void LoadConfigFile();
+
 protected:
   void SetDefault(const std::string & name, const std::string & value);
   void SetDefault(const std::string & name, const int & value);
   void SetDefault(const std::string & name, const bool & value);
 
+  /* must be called only once */
   virtual void Load(const std::string & config_file);
+
   void Display() const;
 
 public:
@@ -58,6 +64,9 @@ public:
   // Return as string the list of officially supported versions
   // (development versions are hidden)
   const std::string SupportedVersions2Str() const;
+
+  // To squash previous configuration with the new one from the file
+  void Reload();
 };
 
 extern bool WSERVER_Verbose;
