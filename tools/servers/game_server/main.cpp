@@ -54,6 +54,7 @@ void printUsage(char *argv[])
   printf("OPTIONS:\n"
 	 "  -h|--help: print this help and exit\n"
 	 "  -v|--version: print version and exit\n"
+	 "  -d|--daemon: start as daemon (in background)\n"
 	 "  -f|--file: specify config file\n"
 	 "  -i|--index-server [ip/hostname of index server]]\n"
 	 );
@@ -66,12 +67,13 @@ void parseArgs(int argc, char *argv[])
   struct option long_options[] = {
     {"help",	     no_argument,       NULL, 'h'},
     {"version",	     no_argument,       NULL, 'v'},
+    {"daemon",       no_argument,       NULL, 'd'},
     {"file",         required_argument, NULL, 'f'},
     {"index-server", optional_argument, NULL, 'i'},
     {NULL,           no_argument,       NULL,  0 }
   };
 
-  while ((opt = getopt_long(argc, argv, "hvf:i::", long_options, NULL)) != -1) {
+  while ((opt = getopt_long(argc, argv, "hvdf:i::", long_options, NULL)) != -1) {
     switch (opt) {
     case 'h':
       printUsage(argv);
@@ -80,6 +82,9 @@ void parseArgs(int argc, char *argv[])
     case 'v':
       printf("Wormux game server version %s\n", PACKAGE_VERSION);
       exit(EXIT_SUCCESS);
+    case 'd':
+      Env::Daemonize();
+      break;
     case 'f':
       config_file = optarg;
       break;
