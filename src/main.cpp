@@ -306,7 +306,7 @@ void PrintUsage(const char* cmd_name)
   printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
          " [-s|--server] [-c|--client [ip]]\n"
-         " [-l [ip/hostname of index server]]\n"
+         " [-i|--index-server] [ip/hostname of index server]]\n"
 #ifdef WMX_LOG
          " [-d|--debug <debug_masks>|all]\n"
 #endif
@@ -330,13 +330,14 @@ void ParseArgs(int argc, char * argv[])
       {"play",       no_argument,       NULL, 'p'},
       {"client",     optional_argument, NULL, 'c'},
       {"server",     no_argument,       NULL, 's'},
+      {"index-server", optional_argument, NULL, 'i'},
       {"game-mode",  required_argument, NULL, 'g'},
       {"debug",      required_argument, NULL, 'd'},
       {"reset-config", no_argument,     NULL, 'r'},
       {NULL,         no_argument,       NULL,  0 }
     };
 
-  while ((c = getopt_long (argc, argv, "uhbvpc::l::sy::g:d:",
+  while ((c = getopt_long (argc, argv, "uhbvpc::i::sg:d:",
                            long_options, &option_index)) != -1)
     {
       switch (c)
@@ -379,9 +380,15 @@ void ParseArgs(int argc, char * argv[])
           net_action = NetworkConnectionMenu::NET_HOST;
           skip_menu = true;
           break;
-        case 'l':
-          if (optarg) IndexServer::GetInstance()->SetAddress(optarg);
-          else        IndexServer::GetInstance()->SetAddress("127.0.0.1");
+        case 'i':
+	  {
+	    std::string index_server_address;
+	    if (optarg) index_server_address = optarg;
+	    else index_server_address = "127.0.0.1";
+	    printf("Using %s as address for index server. This option must be used only for debugging.\n",
+		   index_server_address.c_str());
+	    IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
+	  }
           break;
         case 'g':
           printf("Game-mode: %s\n", optarg);
@@ -396,10 +403,17 @@ void ParseArgs(int argc, char * argv[])
             exit(EXIT_SUCCESS);
           }
           break;
-        default:
-          fprintf(stderr, "Unknow option %c", c);
+
+	case '?': /* returns by getopt if option was invalid */
           PrintUsage(argv[0]);
           exit(EXIT_FAILURE);
+	  break;
+
+        default:
+	  fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", c);
+	  ASSERT(false);
+          exit(EXIT_FAILURE);
+	  break;
         }
     }
 }
