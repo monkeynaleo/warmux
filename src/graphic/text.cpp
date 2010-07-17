@@ -83,7 +83,7 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
 {
   std::string xmlText("Text not found");
   xmlFile->ReadStringAttr(textNode, "text", xmlText);
-  if ("%VERSION%" == xmlText) {  
+  if ("%VERSION%" == xmlText) {
     xmlText = Constants::WORMUX_VERSION;
   } else if ("%WEB_SITE%" == xmlText) {
     xmlText = Constants::WEB_SITE;
@@ -177,14 +177,13 @@ void Text::RenderMultiLines()
   std::string::size_type old_pos = 0, current_pos = 0;
 
   while ( old_pos < txt.size() &&
-          (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos )
-    {
-      std::string tmp = txt.substr(old_pos, current_pos-old_pos);
-      if (tmp != " " && tmp != "") {
-        tokens.push_back(tmp);
-      }
-      old_pos = current_pos+1;
+          (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos ) {
+    std::string tmp = txt.substr(old_pos, current_pos-old_pos);
+    if (tmp != " " && tmp != "") {
+      tokens.push_back(tmp);
     }
+    old_pos = current_pos+1;
+  }
   tokens.push_back(txt.substr(old_pos));
 
   // Compute size
@@ -194,40 +193,39 @@ void Text::RenderMultiLines()
   uint line_width = 0;
   uint max_line_width = 0;
 
-  while (index_word < tokens.size())
-    {
-      if ( lines.size() == index_lines ) {
-        // first word of a line
-        lines.push_back(tokens.at(index_word));
+  while (index_word < tokens.size()) {
+    if (lines.size() == index_lines) {
+      // first word of a line
+      lines.push_back(tokens.at(index_word));
 
-        // compute current line size
-        line_width = font->GetWidth(tokens.at(index_word));
-        if (line_width > max_line_width) {
-            max_line_width = line_width;
-        }
-
-      } else {
-        line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
-
-        if ( line_width > max_width ) {
-
-          // line will be too long : prepare next line!
-          index_lines++;
-          index_word--;
-
-        } else {
-          lines.at(index_lines) += " " + tokens.at(index_word);
-
-          // this is the longest line
-          if (line_width > max_line_width) {
-            max_line_width = line_width;
-          }
-        }
-
+      // compute current line size
+      line_width = font->GetWidth(tokens.at(index_word));
+      if (line_width > max_line_width) {
+        max_line_width = line_width;
       }
 
-      index_word++;
+    } else {
+      line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
+
+      if ( line_width > max_width ) {
+
+        // line will be too long : prepare next line!
+        index_lines++;
+        index_word--;
+
+      } else {
+        lines.at(index_lines) += " " + tokens.at(index_word);
+
+        // this is the longest line
+        if (line_width > max_line_width) {
+          max_line_width = line_width;
+        }
+      }
+
     }
+
+    index_word++;
+  }
 
   // really Render !
 
@@ -235,14 +233,14 @@ void Text::RenderMultiLines()
   if (max_line_width == 0) {
     max_line_width = max_width;
   }
-  Point2i size(max_line_width, (font->GetHeight()+2) * lines.size());
+  Point2i size(max_line_width, GetLineHeight(font)*lines.size());
   Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
-    surf.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
+    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
@@ -255,7 +253,7 @@ void Text::RenderMultiLines()
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
-    background.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
+    background.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 }
 
@@ -344,8 +342,8 @@ void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos
     txt_width = txt_before_cursor.GetWidth();
   }
   GetMainWindow().VlineColor(text_pos.GetX()+txt_width,
-						     text_pos.GetY()+2,
-						     text_pos.GetY()+GetHeight()-4, c_white);
+                             text_pos.GetY(),
+                             text_pos.GetY()+GetHeight()-2, c_white);
 }
 
 void Text::SetMaxWidth(uint max_w)
