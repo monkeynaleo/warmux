@@ -42,6 +42,7 @@ protected:
   Font::font_style_t font_style;
 
   virtual void Render();
+  int GetLineHeight(const Font *f) const { return (7*f->GetHeight())>>3; }
   void RenderMultiLines();
 
 public:
@@ -68,7 +69,7 @@ public:
   void DrawCenterTop(const Point2i & position) const;
 
   //Draw text cursor only (text_pos = position for DrawTopLeft)
-  void DrawCursor(const Point2i & text_pos, 
+  void DrawCursor(const Point2i & text_pos,
                   std::string::size_type cursor_pos) const;
 
   //Draw method using map coordinates
