@@ -35,15 +35,12 @@ HelpMenu::HelpMenu()
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Surface tmp  = GetResourceManager().LoadImage(res, "help/shortkeys", true);
-  if (GetMainWindow().GetWidth() < tmp.GetWidth()+10 ||
-      GetMainWindow().GetHeight() < tmp.GetHeight()+10) {
-    float zoomx = GetMainWindow().GetWidth() / float(tmp.GetWidth()+10);
-    float zoomy = GetMainWindow().GetHeight() / float(tmp.GetHeight()+10);
-    zoom = std::min(zoomx, zoomy);
-    img_keyboard = new Sprite(tmp.RotoZoom(0, zoom, zoom), true);
-  } else {
-    img_keyboard = new Sprite(tmp, true);
-  }
+
+  float zoomx = GetMainWindow().GetWidth() * 0.95f / tmp.GetWidth();
+  float zoomy = GetMainWindow().GetHeight() * 0.95f / tmp.GetHeight();
+  zoom = std::min(zoomx, zoomy);
+  img_keyboard = new Sprite(tmp.RotoZoom(0, zoom, zoom), true);
+
   img_keyboard->cache.EnableLastFrameCache();
   GetResourceManager().UnLoadXMLProfile(res);
 }
@@ -69,21 +66,14 @@ void HelpMenu::DrawBackground()
 {
   Menu::DrawBackground();
 
-  int border_x = int(GetMainWindow().GetWidth() - img_keyboard->GetWidth()) / 2;
-  if (border_x < 0)
-    border_x = 0;
-
-  int border_y = int(GetMainWindow().GetHeight() - img_keyboard->GetHeight()) / 2;
-  if (border_y < 0)
-    border_y = 0;
-
-  img_keyboard->Blit(GetMainWindow(), border_x, border_y);
+  Point2i offset = (GetMainWindow().GetSize()-img_keyboard->GetSize()) / 2;
+  img_keyboard->Blit(GetMainWindow(), offset);
 
   const uint MIDDLE_X = 64;
   const uint MIDDLE_Y = 13;
 
-  Text tmp("", dark_gray_color, Font::FONT_TINY, Font::FONT_BOLD, false);
-  tmp.SetMaxWidth(130*zoom + 0.5f);
+  Text tmp("", dark_gray_color, 12*sqrtf(zoom), Font::FONT_BOLD, false);
+  tmp.SetMaxWidth(132*zoom + 0.5f);
 
   struct {
     const char* string;
@@ -91,36 +81,36 @@ void HelpMenu::DrawBackground()
   } texts[] = {
     { _("Quit game"), 15, 1 },
     { _("High jump"), 373, 313 },
-    { _("Jump backwards"), 373, 284 },
+    { _("Jump backwards"), 373, 285 },
     { _("Jump backwards"), 373, 342 },
-    { _("Drag&drop: Move the camera"), 454, 380 },
-    { _("Click: Center the camera on the character"), 454, 410 },
+    { _("Drag&drop: Move camera"), 454, 383 },
+    { _("Center camera on character"), 454, 411 },
     { _("Show/hide the interface"), 205, 31 },
-    { _("Fullscreen / window"), 425, 30 },
-    { _("Configuration menu"), 425, 59 },
-    { _("Talk in network battles"), 26, 284 },
-    { _("Change the weapon category"), 15, 60 },
-    { _("Change the weapon countdown"), 552, 153 },
-    { _("Change the aim angle"), 552, 182 },
-    { _("Move the character"), 552, 274 },
-    { _("On map: Select a target"), 552, 213 },
-    { _("On a character: Select it"), 552, 244 },
-    { _("Show the weapons menu"), 552, 121 },
-    { _("Smaller aim angle and walk step"), 26, 314 },
-    { _("Move the camera with mouse or arrows"), 320, 380 },
-    { _("Weapon: Fire / Bonus box: fall fast"), 194, 313 },
-    { _("Show/hide the minimap"), 205, 60 },
-    { _("Change the active character"), 26, 343 },
-    { _("Center the camera on the character"), 320, 410 },
-    { _("Quickly quit game with Ctrl"), 15, 30 },
+    { _("Fullscreen / window"), 425, 31 },
+    { _("Configuration menu"), 425, 61 },
+    { _("Talk in network battles"), 26, 285 },
+    { _("Change weapon category"), 15, 61 },
+    { _("Change weapon countdown"), 552, 153 },
+    { _("Change aim angle"), 552, 182 },
+    { _("Move character"), 552, 275 },
+    { _("On map: select a target"), 552, 214 },
+    { _("On a character: select it"), 552, 245 },
+    { _("Show weapons menu"), 552, 122 },
+    { _("Smaller aim angle and walk step"), 26, 315 },
+    { _("Move camera with mouse or arrows"), 320, 383 },
+    { _("Weapon: Fire / Bonus box: drop"), 194, 315 },
+    { _("Show/hide minimap"), 205, 61 },
+    { _("Change active character"), 26, 345 },
+    { _("Center camera on character"), 320, 411 },
+    { _("Quickly quit game with Ctrl"), 15, 31 },
     { NULL, 0, 0 }
   };
 
   int i = 0;
   while (texts[i].string) {
     tmp.SetText(texts[i].string);
-    tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + 0.5f + border_x,
-                           (texts[i].y+MIDDLE_Y)*zoom + 0.5f + border_y));
+    tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + offset.x + 0.5f,
+                           (texts[i].y+MIDDLE_Y)*zoom + offset.y + 0.5f));
     i++;
   }
 }
