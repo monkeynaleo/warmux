@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-06-19 10:04+0200\n"
+"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2009-07-18 20:57+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
@@ -17,10 +17,15 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0 \n"
 
-#: src/map/maps_list.cpp:378
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "！地圖 %s未找到 :-("
+
+#: src/graphic/fps.cpp:99
+#, fuzzy, c-format
+msgid "%.1f fps"
+msgstr "%s 幀fps"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
@@ -34,59 +39,54 @@ msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i 玩家准備好了"
 
-#: src/map/maps_list.cpp:145
+#: src/map/maps_list.cpp:142
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s 從 %s"
 
-#: src/map/maps_list.cpp:152
+#: src/map/maps_list.cpp:149
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 從 %s"
 
-#: src/menu/team_box.cpp:239
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team"
 msgstr " %s 隊伍"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:231
+#: src/menu/team_box.cpp:238
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s 隊伍- 遙控"
 
-#: src/graphic/fps.cpp:99
-#, c-format
-msgid "%s fps"
-msgstr "%s 幀fps"
-
-#: src/game/game.cpp:985
+#: src/game/game.cpp:988
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (%s)自盡了 ！"
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了。。。"
 
-#: src/game/game.cpp:976
+#: src/game/game.cpp:979
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (%s)入水——深呼吸，沉了！"
 
-#: src/game/game.cpp:970
+#: src/game/game.cpp:973
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (%s)飛出地圖邊緣。。。訣別！"
 
-#: src/game/game.cpp:991
+#: src/game/game.cpp:994
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (%s) 親吻大地，可是對方太硬了！"
 
 # what about female names?
-#: src/game/game.cpp:998
+#: src/game/game.cpp:1001
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s)的死因是: 太笨 ！"
@@ -104,7 +104,7 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 贏得 %u 點能量！"
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1013
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是瘋子，他幹掉了一個%s的倒霉蛋！"
@@ -352,17 +352,17 @@ msgstr[0] "%s 隊得到 %u 企鵝發射器！ 沒見過滿天飛的企鵝嗎?"
 msgid "%s team was fragged down."
 msgstr "%s 被打垮了。"
 
-#: src/game/game.cpp:1006
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s 帶走了 %s 的一員！"
 
-#: src/interface/interface.cpp:206
+#: src/interface/interface.cpp:212
 msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:281
+#: src/menu/options_menu.cpp:301
 msgid "(system language)"
 msgstr "(系統語言)"
 
@@ -371,11 +371,11 @@ msgid "(unknown time)"
 msgstr "(未知時間)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:237
+#: src/interface/interface.cpp:243
 msgid "(unlimited)"
 msgstr "(無限的)"
 
-#: src/menu/options_menu.cpp:478
+#: src/menu/options_menu.cpp:499
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -391,11 +391,11 @@ msgstr "空襲"
 msgid "Airhammer"
 msgstr "飛錘"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:424
 msgid "All teams"
 msgstr "全部的隊伍"
 
-#: src/menu/game_mode_editor.cpp:55
+#: src/menu/game_mode_editor.cpp:56
 msgid "Always"
 msgstr "總是"
 
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "鐵砧"
 
-#: src/main.cpp:273
+#: src/main.cpp:275
 msgid "Authors:"
 msgstr "作者:"
 
@@ -441,7 +441,7 @@ msgstr "棒球歐"
 msgid "Bazooka"
 msgstr "火箭炮"
 
-#: src/menu/game_mode_editor.cpp:56
+#: src/menu/game_mode_editor.cpp:57
 msgid "Before action"
 msgstr "行動之前"
 
@@ -484,40 +484,40 @@ msgstr "打不開團隊目錄 (%s)！"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不開自訂的團隊目錄 (%s)！"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
 #, fuzzy
-msgid "Center the camera on the character"
+msgid "Center camera on character"
 msgstr "鏡頭中心調校角色"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:103
 #, fuzzy
-msgid "Change the active character"
+msgid "Change active character"
 msgstr "轉換現行角色"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:94
 #, fuzzy
-msgid "Change the aim angle"
+msgid "Change aim angle"
 msgstr "改變發射角度"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:92
 #, fuzzy
-msgid "Change the weapon category"
+msgid "Change weapon category"
 msgstr "改變武器分類"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:93
 #, fuzzy
-msgid "Change the weapon countdown"
+msgid "Change weapon countdown"
 msgstr "改變武器起爆時間"
 
-#: src/menu/options_menu.cpp:147
+#: src/menu/options_menu.cpp:160
 msgid "Character names:"
 msgstr "角色名稱："
 
-#: src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:60
 msgid "Character switching"
 msgstr "角色切換"
 
-#: src/menu/options_menu.cpp:200
+#: src/menu/options_menu.cpp:214
 msgid "Check updates online?"
 msgstr "網上檢查升級？"
 
@@ -529,17 +529,12 @@ msgstr "在地圖中隨機選取"
 msgid "Classic"
 msgstr "經典"
 
-#: src/menu/help_menu.cpp:81
-#, fuzzy
-msgid "Click: Center the camera on the character"
-msgstr "點擊：鏡頭調校角色"
-
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "用戶端型態 "
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Clumsiest"
 msgstr "最笨手笨腳的"
 
@@ -555,7 +550,7 @@ msgstr "開花彈"
 msgid "Commit Suicide"
 msgstr "自殺"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:90
 msgid "Configuration menu"
 msgstr "配置功能表"
 
@@ -575,7 +570,7 @@ msgstr "連線的玩家："
 msgid "Construct"
 msgstr "建筑工具"
 
-#: src/menu/results_menu.cpp:394
+#: src/menu/results_menu.cpp:389
 msgid "Controlled by: "
 msgstr "控制者: "
 
@@ -588,7 +583,7 @@ msgstr "無法開啟檔案%s"
 msgid "Credits"
 msgstr "貢獻者"
 
-#: src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "死亡型態每回合傷害"
 
@@ -604,17 +599,17 @@ msgstr "察看這條資訊"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:86
 #, fuzzy
-msgid "Drag&drop: Move the camera"
+msgid "Drag&drop: Move camera"
 msgstr "拖拉：移動鏡頭"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
 msgstr "多久之后進入死亡型態"
 
-#: src/menu/game_mode_editor.cpp:48
+#: src/menu/game_mode_editor.cpp:49
 msgid "Duration of a turn"
 msgstr "回合時間長度"
 
@@ -626,11 +621,11 @@ msgstr "炸藥"
 msgid "END OF GAME"
 msgstr "游戲結束"
 
-#: src/menu/options_menu.cpp:236
+#: src/menu/options_menu.cpp:257
 msgid "Effects volume"
 msgstr "音效大小"
 
-#: src/menu/results_menu.cpp:331
+#: src/menu/results_menu.cpp:326
 msgid "Energy"
 msgstr "能量"
 
@@ -639,11 +634,16 @@ msgstr "能量"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "網路初始錯誤：用戶端 %s 不同意你！ - %s"
 
+#: src/map/ground.cpp:73
+#, fuzzy
+msgid "Error loading ground"
+msgstr "讀取隊伍出錯 :"
+
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "讀取隊伍出錯 :"
 
-#: src/game/config.cpp:538 src/team/custom_team.cpp:167
+#: src/game/config.cpp:542 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -707,19 +707,19 @@ msgstr "噴火器"
 msgid "Football Bomb"
 msgstr "足球炸彈"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:89
 msgid "Fullscreen / window"
 msgstr "全屏 / 視窗"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:99
 msgid "Fullscreen?"
 msgstr "全屏?"
 
-#: src/menu/game_menu.cpp:95
+#: src/menu/game_menu.cpp:94
 msgid "Game"
 msgstr "游戲"
 
-#: src/menu/game_mode_editor.cpp:44
+#: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "游戲型態"
 
@@ -731,7 +731,7 @@ msgstr "游戲名:"
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛發射器"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:129
 #, fuzzy
 msgid "Graphics"
 msgstr "影像"
@@ -740,7 +740,7 @@ msgstr "影像"
 msgid "Grapple"
 msgstr "飛索"
 
-#: src/menu/game_mode_editor.cpp:94
+#: src/menu/game_mode_editor.cpp:95
 msgid "Gravity"
 msgstr "重力"
 
@@ -760,14 +760,14 @@ msgstr "槍"
 msgid "Have a good game!"
 msgstr "來吧！"
 
-#: src/menu/options_menu.cpp:139 src/menu/team_box.cpp:85
-#: src/menu/team_box.cpp:94
+#. *******    Names: "Head commander" + text/custom team    ******
+#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指揮官"
 
 #
 #. Display player's name
-#: src/interface/interface.cpp:197
+#: src/interface/interface.cpp:203
 msgid "Head commander: "
 msgstr "指揮官: "
 
@@ -775,7 +775,7 @@ msgstr "指揮官: "
 msgid "Help"
 msgstr "輔助說明"
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:83
 msgid "High jump"
 msgstr "高跳"
 
@@ -829,7 +829,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "快點,伙計你也太慢了！"
 
-#: src/main.cpp:259
+#: src/main.cpp:261
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -837,7 +837,7 @@ msgid ""
 msgstr "假如你發現Bug或想要什么游戲特徴, 請發英文郵件給我們"
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:67
 msgid "Initial energy"
 msgstr "初始耐久"
 
@@ -870,7 +870,7 @@ msgstr "音響起始化"
 msgid "Initialise teams"
 msgstr "隊伍起始化"
 
-#: src/game/game.cpp:852
+#: src/game/game.cpp:855
 msgid "It's a present!"
 msgstr "就是現在！"
 
@@ -878,11 +878,7 @@ msgstr "就是現在！"
 msgid "Jetpack"
 msgstr "噴射包"
 
-#: src/menu/help_menu.cpp:78
-msgid "Jump"
-msgstr "跳躍"
-
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr "后空翻"
 
@@ -890,11 +886,11 @@ msgstr "后空翻"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "踢出 <nickname> "
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:134
 msgid "Language"
 msgstr "語言"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:220
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -902,7 +898,7 @@ msgstr ""
 msgid "List the connected players"
 msgstr "列出已經連線的玩家"
 
-#: src/map/maps_list.cpp:280
+#: src/map/maps_list.cpp:282
 msgid "Load maps:"
 msgstr "讀取地圖:"
 
@@ -910,7 +906,7 @@ msgstr "讀取地圖:"
 msgid "Load teams:"
 msgstr "讀取隊伍:"
 
-#: src/menu/teams_selection_box.cpp:44
+#: src/menu/teams_selection_box.cpp:49
 msgid "Local teams:"
 msgstr "區域隊伍:"
 
@@ -924,12 +920,12 @@ msgstr "漫步-低重力"
 msgid "Manual connection"
 msgstr "手動連線"
 
-#: src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Map"
 msgstr "地圖"
 
-#: src/map/maps_list.cpp:109
+#: src/map/maps_list.cpp:106
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
 msgstr ""
@@ -947,11 +943,11 @@ msgstr "地圖"
 msgid "Master mode"
 msgstr "控制者型態"
 
-#: src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:73
 msgid "Max energy"
 msgstr "最大能量"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:104
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
@@ -959,49 +955,49 @@ msgstr "最大 FPS"
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:234
 msgid "Misc"
 msgstr "其他"
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "最准"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "最賣力的"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "最有價值的"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "最失敗的"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:100
 #, fuzzy
-msgid "Move the camera with mouse or arrows"
+msgid "Move camera with mouse or arrows"
 msgstr "用滑鼠或方向鍵移動鏡頭"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:95
 #, fuzzy
-msgid "Move the character"
+msgid "Move character"
 msgstr "移動"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:86
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:226
+#: src/menu/options_menu.cpp:245
 msgid "Music volume"
 msgstr "音樂音量:"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:240
 msgid "Music?"
 msgstr "音樂?"
 
@@ -1014,7 +1010,7 @@ msgstr "網路游戲"
 msgid "Network Game"
 msgstr "網路游戲"
 
-#: src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:58
 msgid "Never"
 msgstr "沒有"
 
@@ -1023,7 +1019,7 @@ msgstr "沒有"
 msgid "New network game at "
 msgstr "網上游戲"
 
-#: src/menu/options_menu.cpp:261
+#: src/menu/options_menu.cpp:280
 msgid "New player warning?"
 msgstr "新玩家警告？"
 
@@ -1040,21 +1036,23 @@ msgstr "沒有玩家連線"
 msgid "Nobody!"
 msgstr "空房間！"
 
-#: src/menu/team_box.cpp:106
+#. *********     Number of characters        *********
+#: src/menu/team_box.cpp:114
 msgid "Number of characters"
 msgstr "角色數目"
 
-#: src/menu/teams_selection_box.cpp:50
+#: src/menu/teams_selection_box.cpp:53
 msgid "Number of teams:"
 msgstr "隊伍數量:"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:97
 #, fuzzy
-msgid "On a character: Select it"
+msgid "On a character: select it"
 msgstr "選取角色：換到一個現行角色"
 
-#: src/menu/help_menu.cpp:90
-msgid "On map: Select a target"
+#: src/menu/help_menu.cpp:96
+#, fuzzy
+msgid "On map: select a target"
 msgstr "地圖上：選取一個目標"
 
 #: src/menu/main_menu.cpp:63
@@ -1083,15 +1081,15 @@ msgstr "要玩了哦"
 msgid "Play several times"
 msgstr "玩了几次了"
 
-#: src/menu/teams_selection_box.cpp:65
+#: src/menu/teams_selection_box.cpp:67
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:90
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:94
 msgid "Player's name?"
 msgstr "請問尊姓大名?"
 
@@ -1108,7 +1106,7 @@ msgstr "通訊埠:"
 msgid "Public battles"
 msgstr "公開戰斗"
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:105
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1116,15 +1114,15 @@ msgstr ""
 msgid "Quit"
 msgstr "結束"
 
-#: src/main.cpp:248
+#: src/main.cpp:250
 msgid "Quit Wormux"
 msgstr "結束"
 
-#: src/menu/pause_menu.cpp:59
+#: src/menu/pause_menu.cpp:58
 msgid "Quit battle"
 msgstr "推出戰斗"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:82
 msgid "Quit game"
 msgstr "結束游戲"
 
@@ -1132,17 +1130,17 @@ msgstr "結束游戲"
 msgid "Random map"
 msgstr "隨機讀取地圖"
 
-#: src/game/config.cpp:345
+#: src/game/config.cpp:349
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "正讀取預設設定檔案"
 
-#: src/game/config.cpp:405
+#: src/game/config.cpp:409
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "正讀取個人設定檔案"
 
-#: src/menu/options_menu.cpp:115
+#: src/menu/options_menu.cpp:125
 msgid "Resolution"
 msgstr "解析度"
 
@@ -1150,7 +1148,7 @@ msgstr "解析度"
 msgid "Riot Bomb"
 msgstr "爆炸彈"
 
-#: src/main.cpp:83
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "執行游戲"
 
@@ -1158,11 +1156,11 @@ msgstr "執行游戲"
 msgid "Say: "
 msgstr "說: "
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:230
 msgid "Scroll border size"
 msgstr "捲動邊線大小"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:225
 msgid "Scroll on border"
 msgstr "捲動邊線"
 
@@ -1184,20 +1182,20 @@ msgstr "伺服器設定"
 msgid "Shotgun"
 msgstr "獵槍"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:98
 #, fuzzy
-msgid "Show the weapons menu"
+msgid "Show weapons menu"
 msgstr "察看武器功能表"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:102
+#, fuzzy
+msgid "Show/hide minimap"
+msgstr "察看/隱藏小地圖"
+
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "察看/隱藏介面"
-
-#: src/menu/help_menu.cpp:96
-#, fuzzy
-msgid "Show/hide the minimap"
-msgstr "察看/隱藏小地圖"
 
 #: src/weapon/skip_turn.cpp:46
 msgid "Skip turn"
@@ -1211,7 +1209,7 @@ msgstr "拍子"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "拍一下，讓那家伙跳一跳"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:99
 msgid "Smaller aim angle and walk step"
 msgstr "慢步精准"
 
@@ -1237,15 +1235,15 @@ msgstr ""
 "抱歉哦，你的版本已經不支援了。現在使用%s。。下載吧，http://www。wormux。org/"
 "wiki/download。php 最好。"
 
-#: src/menu/options_menu.cpp:264
+#: src/menu/options_menu.cpp:284
 msgid "Sound"
 msgstr "音響"
 
-#: src/menu/options_menu.cpp:232
+#: src/menu/options_menu.cpp:251
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:276
 msgid "Sound frequency"
 msgstr "聲訊"
 
@@ -1258,7 +1256,7 @@ msgstr "音響"
 msgid "Starting a new game"
 msgstr "重新來游戲"
 
-#: src/interface/interface.cpp:237
+#: src/interface/interface.cpp:243
 msgid "Stock:"
 msgstr "箱子:"
 
@@ -1274,25 +1272,25 @@ msgstr "SuperTux-超級企鵝"
 msgid "Syringe"
 msgstr "注射器"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "網路戰斗中對話"
 
-#: src/menu/results_menu.cpp:434
+#: src/menu/results_menu.cpp:429
 msgid "Team graphs"
 msgstr "隊伍圖示"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:427
 msgid "Team stats"
 msgstr "隊伍狀態"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
 msgid "Teams"
 msgstr "隊伍"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:197
 msgid "Teams editor"
 msgstr "團隊編輯程式"
 
@@ -1327,7 +1325,7 @@ msgstr "制導火箭離開戰場。。。"
 msgid "The ball left the battlefield before exploding!"
 msgstr "球膨脹前離開戰場"
 
-#: src/menu/game_mode_editor.cpp:136
+#: src/menu/game_mode_editor.cpp:137
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -1349,7 +1347,7 @@ msgstr "連線逾時。請檢查防火牆！"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "disco榴彈離開舞池前發生爆炸"
 
-#: src/game/game.cpp:691
+#: src/game/game.cpp:690
 msgid "The game was interrupted because you got disconnected."
 msgstr "您斷線了。"
 
@@ -1394,7 +1392,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "只有%i隊"
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:329
+#: src/menu/results_menu.cpp:324
 msgid "Time"
 msgstr "時間"
 
@@ -1429,12 +1427,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "連不上主機"
 
-#: src/map/maps_list.cpp:290
+#: src/map/maps_list.cpp:292
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "打不開地圖目錄(%s)！"
 
-#: src/map/maps_list.cpp:302
+#: src/map/maps_list.cpp:304
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "無法開啟個人地圖目錄 (%s)！"
@@ -1451,11 +1449,11 @@ msgstr "未知指令"
 msgid "Unlimited"
 msgstr "無限"
 
-#: src/main.cpp:178
+#: src/main.cpp:180
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:485
+#: src/menu/options_menu.cpp:506
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "版本改變失敗原因: %s"
@@ -1470,7 +1468,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "請等待！ %i沒准備好！"
 
-#: src/game/game.cpp:597
+#: src/game/game.cpp:596
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1484,16 +1482,16 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服務吧, 現在先聊天 ！"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:101
 #, fuzzy
-msgid "Weapon: Fire / Bonus box: fall fast"
+msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：開火/"
 
 #: src/game/game.cpp:148
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:282
+#: src/main.cpp:284
 msgid "Website: "
 msgstr "網站Website: "
 
@@ -1504,31 +1502,30 @@ msgstr "網站Website: "
 msgid "Welcome to %s on %s!"
 msgstr "歡迎來到%s！"
 
-#: src/game/game.cpp:963
+#: src/game/game.cpp:966
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1015
+#: src/game/game.cpp:1018
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s悲慘死去，無法瞑目！"
 
-#. Various options
-#: src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:82
 msgid "Wind particles?"
 msgstr "風來了?"
 
 #
-#: src/menu/results_menu.cpp:386
+#: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "勝者"
 
-#: src/main.cpp:190
+#: src/main.cpp:192
 msgid "Wormux launching..."
 msgstr "准備中, Wormux！！！"
 
-#: src/main.cpp:272
+#: src/main.cpp:274
 msgid "Wormux version "
 msgstr " Wormux 版本"
 
@@ -1557,7 +1554,7 @@ msgstr "你是孤單的。。。"
 msgid "You are the new turn master!"
 msgstr "你是這回合的控制者！"
 
-#: src/map/maps_list.cpp:311
+#: src/map/maps_list.cpp:313
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "你需要可用的地圖！"
@@ -1592,7 +1589,7 @@ msgstr ""
 "爆炸 : 左鍵點擊目標\n"
 "每回合一次"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:82
 msgid "couldn't load config"
 msgstr "無法讀取設定"
 
@@ -1601,11 +1598,11 @@ msgstr "無法讀取設定"
 msgid "custom player"
 msgstr "玩家設定"
 
-#: src/map/ground.cpp:72
+#: src/map/ground.cpp:79
 msgid "done"
 msgstr "成"
 
-#: src/map/maps_list.cpp:93
+#: src/map/maps_list.cpp:90
 msgid "error parsing the config file"
 msgstr "黏貼配置檔案出錯"
 
@@ -1614,7 +1611,7 @@ msgstr "黏貼配置檔案出錯"
 msgid "from"
 msgstr "從"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "沒有配置檔案！"
 
@@ -1631,6 +1628,13 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Click: Center the camera on the character"
+#~ msgstr "點擊：鏡頭調校角色"
+
+#~ msgid "Jump"
+#~ msgstr "跳躍"
 
 #~ msgid ""
 #~ "Error:\n"

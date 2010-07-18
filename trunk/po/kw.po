@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-06-19 10:04+0200\n"
+"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -15,10 +15,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n==3) ? 2 : 3;\n"
 
-#: src/map/maps_list.cpp:378
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "Ny gavas mappa %s :-("
+
+#: src/graphic/fps.cpp:99
+#, fuzzy, c-format
+msgid "%.1f fps"
+msgstr "%s imaj/s"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
@@ -38,58 +43,53 @@ msgstr[1] "%i warier yw parys"
 msgstr[2] "%i gwarier yw parys"
 msgstr[3] "%i gwarier yw parys"
 
-#: src/map/maps_list.cpp:145
+#: src/map/maps_list.cpp:142
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> leshenwys %s (%s)"
 
-#: src/map/maps_list.cpp:152
+#: src/map/maps_list.cpp:149
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a %s"
 
-#: src/menu/team_box.cpp:239
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team"
 msgstr "Para %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:231
+#: src/menu/team_box.cpp:238
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/graphic/fps.cpp:99
-#, c-format
-msgid "%s fps"
-msgstr "%s imaj/s"
-
-#: src/game/game.cpp:985
+#: src/game/game.cpp:988
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:976
+#: src/game/game.cpp:979
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:970
+#: src/game/game.cpp:973
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:991
+#: src/game/game.cpp:994
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
-#: src/game/game.cpp:998
+#: src/game/game.cpp:1001
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
@@ -110,7 +110,7 @@ msgstr[1] "Gwarier %s re gavas %u boynt a nerth!"
 msgstr[2] "Gwarier %s re gavas %u foynt a nerth!"
 msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1013
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -491,17 +491,17 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:1006
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
 
-#: src/interface/interface.cpp:206
+#: src/interface/interface.cpp:212
 msgid "(dead)"
 msgstr "(marow)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:281
+#: src/menu/options_menu.cpp:301
 msgid "(system language)"
 msgstr "(yeth an system)"
 
@@ -510,11 +510,11 @@ msgid "(unknown time)"
 msgstr "(prys ankoth)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:237
+#: src/interface/interface.cpp:243
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
 
-#: src/menu/options_menu.cpp:478
+#: src/menu/options_menu.cpp:499
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -531,11 +531,11 @@ msgstr "Omsettyans Ayr"
 msgid "Airhammer"
 msgstr "Morthol-Ayr"
 
-#: src/menu/results_menu.cpp:429
+#: src/menu/results_menu.cpp:424
 msgid "All teams"
 msgstr "Pub para"
 
-#: src/menu/game_mode_editor.cpp:55
+#: src/menu/game_mode_editor.cpp:56
 msgid "Always"
 msgstr "Pup-prys"
 
@@ -557,7 +557,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Anwan"
 
-#: src/main.cpp:273
+#: src/main.cpp:275
 msgid "Authors:"
 msgstr "Awtours:"
 
@@ -581,7 +581,7 @@ msgstr "Bat Pelsel"
 msgid "Bazooka"
 msgstr "Bazooka"
 
-#: src/menu/game_mode_editor.cpp:56
+#: src/menu/game_mode_editor.cpp:57
 msgid "Before action"
 msgstr "Kyns gwrians"
 
@@ -624,40 +624,40 @@ msgstr "Ny yllir ygeri arayel an paraow (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow personal (%s)!"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
 #, fuzzy
-msgid "Center the camera on the character"
+msgid "Center camera on character"
 msgstr "Kresenni kamera war berson"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:103
 #, fuzzy
-msgid "Change the active character"
+msgid "Change active character"
 msgstr "Chanjya person a-lemmyn"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:94
 #, fuzzy
-msgid "Change the aim angle"
+msgid "Change aim angle"
 msgstr "Chanjya elin medra"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:92
 #, fuzzy
-msgid "Change the weapon category"
+msgid "Change weapon category"
 msgstr "Chanjya ehen arv"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:93
 #, fuzzy
-msgid "Change the weapon countdown"
+msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
 
-#: src/menu/options_menu.cpp:147
+#: src/menu/options_menu.cpp:160
 msgid "Character names:"
 msgstr "Henwyn an bersons:"
 
-#: src/menu/game_mode_editor.cpp:59
+#: src/menu/game_mode_editor.cpp:60
 msgid "Character switching"
 msgstr "Chanjya person"
 
-#: src/menu/options_menu.cpp:200
+#: src/menu/options_menu.cpp:214
 msgid "Check updates online?"
 msgstr "Checkya nowedhansow warlinen?"
 
@@ -669,17 +669,12 @@ msgstr "Dewis dre hap ynter an mappaow dyffrans"
 msgid "Classic"
 msgstr "Klassek"
 
-#: src/menu/help_menu.cpp:81
-#, fuzzy
-msgid "Click: Center the camera on the character"
-msgstr "Klyck: Kresenni kamera war berson"
-
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:461
 msgid "Client mode"
 msgstr "Modh omajer"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:166 src/menu/results_menu.cpp:168
 msgid "Clumsiest"
 msgstr "Brassa lorden"
 
@@ -695,7 +690,7 @@ msgstr "Omvrewzooka"
 msgid "Commit Suicide"
 msgstr "Omladha"
 
-#: src/menu/help_menu.cpp:84
+#: src/menu/help_menu.cpp:90
 msgid "Configuration menu"
 msgstr "Dewisel restrans"
 
@@ -715,7 +710,7 @@ msgstr "Gwarioryon junys: "
 msgid "Construct"
 msgstr "Daffar drehevel"
 
-#: src/menu/results_menu.cpp:394
+#: src/menu/results_menu.cpp:389
 msgid "Controlled by: "
 msgstr "Kontrolys gans: "
 
@@ -728,7 +723,7 @@ msgstr "Ny allas ygeri an restren %s"
 msgid "Credits"
 msgstr "Aswonvosow"
 
-#: src/menu/game_mode_editor.cpp:87
+#: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "Damaj orth an dro yn modh marwel"
 
@@ -744,17 +739,17 @@ msgstr "A dhisplet an messach ma"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:86
 #, fuzzy
-msgid "Drag&drop: Move the camera"
+msgid "Drag&drop: Move camera"
 msgstr "Halya&gasagodha: Movya an kamera"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:81
+#: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
 msgstr "Pesyans kyns modh marwel"
 
-#: src/menu/game_mode_editor.cpp:48
+#: src/menu/game_mode_editor.cpp:49
 msgid "Duration of a turn"
 msgstr "Pesyans unn dro"
 
@@ -766,11 +761,11 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "DIWEDH AN GWARI"
 
-#: src/menu/options_menu.cpp:236
+#: src/menu/options_menu.cpp:257
 msgid "Effects volume"
 msgstr "Sonradh an effeythyow son"
 
-#: src/menu/results_menu.cpp:331
+#: src/menu/results_menu.cpp:326
 msgid "Energy"
 msgstr "Nerth"
 
@@ -779,11 +774,16 @@ msgstr "Nerth"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Gwall pan dharbaras an rosweyth: Ny akord an omajer %s orthis!! - %s"
 
+#: src/map/ground.cpp:73
+#, fuzzy
+msgid "Error loading ground"
+msgstr "Gwall pan gargas para:"
+
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Gwall pan gargas para:"
 
-#: src/game/config.cpp:538 src/team/custom_team.cpp:167
+#: src/game/config.cpp:542 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -851,19 +851,19 @@ msgstr "Stifeller-Tan"
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:89
 msgid "Fullscreen / window"
 msgstr "Skrin leun / fenester"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:99
 msgid "Fullscreen?"
 msgstr "Skrin leun?"
 
-#: src/menu/game_menu.cpp:95
+#: src/menu/game_menu.cpp:94
 msgid "Game"
 msgstr "Gwari"
 
-#: src/menu/game_mode_editor.cpp:44
+#: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "Modh gwari"
 
@@ -875,7 +875,7 @@ msgstr "Hanow an gwari ma:"
 msgid "Gnu Launcher"
 msgstr "Lonchyer-Gnu"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:129
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafek"
@@ -884,7 +884,7 @@ msgstr "Grafek"
 msgid "Grapple"
 msgstr "Grabel"
 
-#: src/menu/game_mode_editor.cpp:94
+#: src/menu/game_mode_editor.cpp:95
 msgid "Gravity"
 msgstr "Gravedh"
 
@@ -904,13 +904,13 @@ msgstr "Gonn"
 msgid "Have a good game!"
 msgstr "Omlowenhewgh!"
 
-#: src/menu/options_menu.cpp:139 src/menu/team_box.cpp:85
-#: src/menu/team_box.cpp:94
+#. *******    Names: "Head commander" + text/custom team    ******
+#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Penn an para"
 
 #. Display player's name
-#: src/interface/interface.cpp:197
+#: src/interface/interface.cpp:203
 msgid "Head commander: "
 msgstr "Penn an para: "
 
@@ -918,7 +918,7 @@ msgstr "Penn an para: "
 msgid "Help"
 msgstr "Gweres"
 
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:83
 msgid "High jump"
 msgstr "Lamma yn uhel"
 
@@ -973,7 +973,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Gwra feski, re lent os ta!!"
 
-#: src/main.cpp:259
+#: src/main.cpp:261
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -983,7 +983,7 @@ msgstr ""
 "Wormux, danvon e-bost (yn Sowsnek, soweth) dhe: "
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:66
+#: src/menu/game_mode_editor.cpp:67
 msgid "Initial energy"
 msgstr "Nerth orth an dalleth"
 
@@ -1017,7 +1017,7 @@ msgstr "Darbari sonyow"
 msgid "Initialise teams"
 msgstr "Darbari paraow"
 
-#: src/game/game.cpp:852
+#: src/game/game.cpp:855
 msgid "It's a present!"
 msgstr "Ro ywa!"
 
@@ -1025,11 +1025,7 @@ msgstr "Ro ywa!"
 msgid "Jetpack"
 msgstr "Stifelback"
 
-#: src/menu/help_menu.cpp:78
-msgid "Jump"
-msgstr "Lamma"
-
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
 msgid "Jump backwards"
 msgstr "Killamma"
 
@@ -1037,11 +1033,11 @@ msgstr "Killamma"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Defendya an warioryon leshenwys <nickname> dhe-ves a'n gwari."
 
-#: src/menu/options_menu.cpp:124
+#: src/menu/options_menu.cpp:134
 msgid "Language"
 msgstr "Yeth"
 
-#: src/menu/options_menu.cpp:205
+#: src/menu/options_menu.cpp:220
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -1049,7 +1045,7 @@ msgstr ""
 msgid "List the connected players"
 msgstr "Rol an warioryon junys"
 
-#: src/map/maps_list.cpp:280
+#: src/map/maps_list.cpp:282
 msgid "Load maps:"
 msgstr "Karga mappaow:"
 
@@ -1057,7 +1053,7 @@ msgstr "Karga mappaow:"
 msgid "Load teams:"
 msgstr "Karga paraow:"
 
-#: src/menu/teams_selection_box.cpp:44
+#: src/menu/teams_selection_box.cpp:49
 msgid "Local teams:"
 msgstr "Paraow leel:"
 
@@ -1071,12 +1067,12 @@ msgstr "Gravedh Isel"
 msgid "Manual connection"
 msgstr "Junyans dre dhorn"
 
-#: src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Map"
 msgstr "Mappa"
 
-#: src/map/maps_list.cpp:109
+#: src/map/maps_list.cpp:106
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
 msgstr ""
@@ -1094,11 +1090,11 @@ msgstr "Mappaow"
 msgid "Master mode"
 msgstr "Modh arludh"
 
-#: src/menu/game_mode_editor.cpp:72
+#: src/menu/game_mode_editor.cpp:73
 msgid "Max energy"
 msgstr "Brassa nerth"
 
-#: src/menu/options_menu.cpp:93
+#: src/menu/options_menu.cpp:104
 msgid "Maximum FPS"
 msgstr "Brassa niver a skeusennow orth an eylen"
 
@@ -1106,49 +1102,49 @@ msgstr "Brassa niver a skeusennow orth an eylen"
 msgid "Mine"
 msgstr "Krampothen dardhus"
 
-#: src/menu/options_menu.cpp:217
+#: src/menu/options_menu.cpp:234
 msgid "Misc"
 msgstr "Kemyskys"
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:174 src/menu/results_menu.cpp:176
 msgid "Most accurate"
 msgstr "Moyha kewar"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:158 src/menu/results_menu.cpp:160
 msgid "Most sold-out"
 msgstr "Brassa traytour"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:142 src/menu/results_menu.cpp:144
 msgid "Most useful"
 msgstr "Moyha dhe les"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:150 src/menu/results_menu.cpp:152
 msgid "Most useless"
 msgstr "Moyha heb les"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:134 src/menu/results_menu.cpp:136
 msgid "Most violent"
 msgstr "Moyha freudhek"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:100
 #, fuzzy
-msgid "Move the camera with mouse or arrows"
+msgid "Move camera with mouse or arrows"
 msgstr "Movya an kamera gans logosen po sethow"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:95
 #, fuzzy
-msgid "Move the character"
+msgid "Move character"
 msgstr "Movya person"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:86
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:226
+#: src/menu/options_menu.cpp:245
 msgid "Music volume"
 msgstr "Sonradh an ilow"
 
-#: src/menu/options_menu.cpp:222
+#: src/menu/options_menu.cpp:240
 msgid "Music?"
 msgstr "Ilow?"
 
@@ -1161,7 +1157,7 @@ msgstr "Gwari Rosweyth"
 msgid "Network Game"
 msgstr "Gwari Rosweyth"
 
-#: src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:58
 msgid "Never"
 msgstr "Nevra"
 
@@ -1170,7 +1166,7 @@ msgstr "Nevra"
 msgid "New network game at "
 msgstr "Gwari rosweyth nowyth orth "
 
-#: src/menu/options_menu.cpp:261
+#: src/menu/options_menu.cpp:280
 msgid "New player warning?"
 msgstr "Gwarnyans gwarier nowyth?"
 
@@ -1187,21 +1183,23 @@ msgstr "Nyns eus gwarier vyth junys"
 msgid "Nobody!"
 msgstr "Den vyth!"
 
-#: src/menu/team_box.cpp:106
+#. *********     Number of characters        *********
+#: src/menu/team_box.cpp:114
 msgid "Number of characters"
 msgstr "Niver a bersons"
 
-#: src/menu/teams_selection_box.cpp:50
+#: src/menu/teams_selection_box.cpp:53
 msgid "Number of teams:"
 msgstr "Niver a baraow:"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:97
 #, fuzzy
-msgid "On a character: Select it"
+msgid "On a character: select it"
 msgstr "War neb person: Rag chanjya an onan a-lemmyn"
 
-#: src/menu/help_menu.cpp:90
-msgid "On map: Select a target"
+#: src/menu/help_menu.cpp:96
+#, fuzzy
+msgid "On map: select a target"
 msgstr "War an mappa: Dewis kosten"
 
 #: src/menu/main_menu.cpp:63
@@ -1230,15 +1228,15 @@ msgstr "Gwari"
 msgid "Play several times"
 msgstr "Gwari lieskweyth"
 
-#: src/menu/teams_selection_box.cpp:65
+#: src/menu/teams_selection_box.cpp:67
 msgid "Player"
 msgstr "Gwarier"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:90
 msgid "Player energy?"
 msgstr "Nerth an warioryon?"
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:94
 msgid "Player's name?"
 msgstr "Hanow an gwarier?"
 
@@ -1255,7 +1253,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Kasow poblek"
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:105
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1263,15 +1261,15 @@ msgstr ""
 msgid "Quit"
 msgstr "Kwitya"
 
-#: src/main.cpp:248
+#: src/main.cpp:250
 msgid "Quit Wormux"
 msgstr "Kwitya Wormux"
 
-#: src/menu/pause_menu.cpp:59
+#: src/menu/pause_menu.cpp:58
 msgid "Quit battle"
 msgstr "Kwitya an gas"
 
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:82
 msgid "Quit game"
 msgstr "Kwitya an gwari"
 
@@ -1279,17 +1277,17 @@ msgstr "Kwitya an gwari"
 msgid "Random map"
 msgstr "Mappa dre hap"
 
-#: src/game/config.cpp:345
+#: src/game/config.cpp:349
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Ow redya restren restrans savonek"
 
-#: src/game/config.cpp:405
+#: src/game/config.cpp:409
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Ow redya restren restrans personel"
 
-#: src/menu/options_menu.cpp:115
+#: src/menu/options_menu.cpp:125
 msgid "Resolution"
 msgstr "Klerder"
 
@@ -1297,7 +1295,7 @@ msgstr "Klerder"
 msgid "Riot Bomb"
 msgstr "Tanbellen Wustel"
 
-#: src/main.cpp:83
+#: src/main.cpp:85
 msgid "Run game"
 msgstr "Lonchya an gwari"
 
@@ -1305,11 +1303,11 @@ msgstr "Lonchya an gwari"
 msgid "Say: "
 msgstr "Leverel:"
 
-#: src/menu/options_menu.cpp:212
+#: src/menu/options_menu.cpp:230
 msgid "Scroll border size"
 msgstr "Myns an amal skrolya"
 
-#: src/menu/options_menu.cpp:209
+#: src/menu/options_menu.cpp:225
 msgid "Scroll on border"
 msgstr "Skrolya war an emlow"
 
@@ -1331,20 +1329,20 @@ msgstr "Modh servyer"
 msgid "Shotgun"
 msgstr "Helghwon"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:98
 #, fuzzy
-msgid "Show the weapons menu"
+msgid "Show weapons menu"
 msgstr "Diskwedhes dewisel arvow"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:102
+#, fuzzy
+msgid "Show/hide minimap"
+msgstr "Displegya/kudha korrvappa"
+
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Displegya/kudha ynterfas"
-
-#: src/menu/help_menu.cpp:96
-#, fuzzy
-msgid "Show/hide the minimap"
-msgstr "Displegya/kudha korrvappa"
 
 #: src/weapon/skip_turn.cpp:46
 msgid "Skip turn"
@@ -1358,7 +1356,7 @@ msgstr "Beltynk"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Ri beltynk dhe'n eskar may hwra'va lamma tamm."
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:99
 msgid "Smaller aim angle and walk step"
 msgstr "Lehe elin medra ha kamm kerdhes"
 
@@ -1385,15 +1383,15 @@ msgstr ""
 "skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:264
+#: src/menu/options_menu.cpp:284
 msgid "Sound"
 msgstr "Son"
 
-#: src/menu/options_menu.cpp:232
+#: src/menu/options_menu.cpp:251
 msgid "Sound effects?"
 msgstr "Effeythyow son?"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:276
 msgid "Sound frequency"
 msgstr "Menowghder an son"
 
@@ -1406,7 +1404,7 @@ msgstr "Sonyow"
 msgid "Starting a new game"
 msgstr "Ow lonchya gwari nowyth"
 
-#: src/interface/interface.cpp:237
+#: src/interface/interface.cpp:243
 msgid "Stock:"
 msgstr "Daffar:"
 
@@ -1422,25 +1420,25 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Skitel"
 
-#: src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Keskewsel yn kas rosweyth"
 
-#: src/menu/results_menu.cpp:434
+#: src/menu/results_menu.cpp:429
 msgid "Team graphs"
 msgstr "Grafow an paraow"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:427
 msgid "Team stats"
 msgstr "Stats an paraow"
 
-#: src/game/game.cpp:152 src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
 msgid "Teams"
 msgstr "Paraow"
 
-#: src/menu/options_menu.cpp:184
+#: src/menu/options_menu.cpp:197
 msgid "Teams editor"
 msgstr "Chanjyel baraow"
 
@@ -1475,7 +1473,7 @@ msgstr "An fusen awtomatek re asas an gaslan..."
 msgid "The ball left the battlefield before exploding!"
 msgstr "An bel a asas an gaslan kyns omdardha."
 
-#: src/menu/game_mode_editor.cpp:136
+#: src/menu/game_mode_editor.cpp:137
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -1499,7 +1497,7 @@ msgstr "An junyans a verwis. Check mars eus problem gans dha fos-tan!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "An pinaval tardhus disco re asas an leur-donsya kyns omdardha."
 
-#: src/game/game.cpp:691
+#: src/game/game.cpp:690
 msgid "The game was interrupted because you got disconnected."
 msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 
@@ -1547,7 +1545,7 @@ msgstr[2] "Nyns eus saw %i para."
 msgstr[3] "Nyns eus saw %i para."
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:329
+#: src/menu/results_menu.cpp:324
 msgid "Time"
 msgstr "Termyn"
 
@@ -1583,12 +1581,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Ny yllir kestava orth an ost."
 
-#: src/map/maps_list.cpp:290
+#: src/map/maps_list.cpp:292
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Ny yllir ygeri an arayel vappaow (%s)!"
 
-#: src/map/maps_list.cpp:302
+#: src/map/maps_list.cpp:304
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Ny yllir ygeri an arayel vappaow personel (%s) !"
@@ -1605,11 +1603,11 @@ msgstr "Gorhemmyn ankoth"
 msgid "Unlimited"
 msgstr "Heb finwedh"
 
-#: src/main.cpp:178
+#: src/main.cpp:180
 msgid "Version"
 msgstr "Versyon"
 
-#: src/menu/options_menu.cpp:485
+#: src/menu/options_menu.cpp:506
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
@@ -1627,7 +1625,7 @@ msgstr[1] "Gortewgh! %i warier nyns yns parys hwath!"
 msgstr[2] "Gortewgh! %i gwarier nyns yns parys hwath!"
 msgstr[3] "Gortewgh! %i gwarier nyns yns parys hwath!"
 
-#: src/game/game.cpp:597
+#: src/game/game.cpp:596
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1641,16 +1639,16 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:101
 #, fuzzy
-msgid "Weapon: Fire / Bonus box: fall fast"
+msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
 
 #: src/game/game.cpp:148
 msgid "Weapons"
 msgstr "Arvow"
 
-#: src/main.cpp:282
+#: src/main.cpp:284
 msgid "Website: "
 msgstr "Gwiasva: "
 
@@ -1661,30 +1659,29 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s on %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:963
+#: src/game/game.cpp:966
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1015
+#: src/game/game.cpp:1018
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
 
-#. Various options
-#: src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:82
 msgid "Wind particles?"
 msgstr "Manylyon gwyns?"
 
-#: src/menu/results_menu.cpp:386
+#: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "Gwaynyer"
 
-#: src/main.cpp:190
+#: src/main.cpp:192
 msgid "Wormux launching..."
 msgstr "Yma Wormux ow lonchya..."
 
-#: src/main.cpp:272
+#: src/main.cpp:274
 msgid "Wormux version "
 msgstr "Versyon Wormux"
 
@@ -1713,7 +1710,7 @@ msgstr "Genes dha honan th esos..."
 msgid "You are the new turn master!"
 msgstr "Mester nowyth an dro os ta!"
 
-#: src/map/maps_list.cpp:311
+#: src/map/maps_list.cpp:313
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Res yw bos dhe'n leha unn mappa da!"
@@ -1747,7 +1744,7 @@ msgstr ""
 "Tanbelenna : klyck kledh war an gosten\n"
 "unn tanbelennans orth an dro"
 
-#: src/map/maps_list.cpp:85
+#: src/map/maps_list.cpp:82
 msgid "couldn't load config"
 msgstr "Ny allas karga an dewisyansow"
 
@@ -1756,11 +1753,11 @@ msgstr "Ny allas karga an dewisyansow"
 msgid "custom player"
 msgstr "gwarier personelhes"
 
-#: src/map/ground.cpp:72
+#: src/map/ground.cpp:79
 msgid "done"
 msgstr "kowlwrys"
 
-#: src/map/maps_list.cpp:93
+#: src/map/maps_list.cpp:90
 msgid "error parsing the config file"
 msgstr "Erreur lors de la lecture du fichier de configuration"
 
@@ -1768,7 +1765,7 @@ msgstr "Erreur lors de la lecture du fichier de configuration"
 msgid "from"
 msgstr "a"
 
-#: src/map/maps_list.cpp:77
+#: src/map/maps_list.cpp:74
 msgid "no configuration file!"
 msgstr "Ny gavas an restren-dhewisyansow!"
 
@@ -1785,6 +1782,13 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#, fuzzy
+#~ msgid "Click: Center the camera on the character"
+#~ msgstr "Klyck: Kresenni kamera war berson"
+
+#~ msgid "Jump"
+#~ msgstr "Lamma"
 
 #~ msgid ""
 #~ "Error:\n"
