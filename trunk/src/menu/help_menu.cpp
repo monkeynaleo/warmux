@@ -37,7 +37,7 @@ HelpMenu::HelpMenu()
   Surface tmp  = GetResourceManager().LoadImage(res, "help/shortkeys", true);
 
   float zoomx = GetMainWindow().GetWidth() * 0.95f / tmp.GetWidth();
-  float zoomy = GetMainWindow().GetHeight() * 0.95f / tmp.GetHeight();
+  float zoomy = (GetMainWindow().GetHeight() - 25.0f) / tmp.GetHeight();
   zoom = std::min(zoomx, zoomy);
   img_keyboard = new Sprite(tmp.RotoZoom(0, zoom, zoom), true);
 
@@ -66,14 +66,16 @@ void HelpMenu::DrawBackground()
 {
   Menu::DrawBackground();
 
-  Point2i offset = (GetMainWindow().GetSize()-img_keyboard->GetSize()) / 2;
-  img_keyboard->Blit(GetMainWindow(), offset);
+  int offset_x = (GetMainWindow().GetWidth()-img_keyboard->GetWidth()) / 2;
+  int offset_y = (GetMainWindow().GetHeight() - 25 - img_keyboard->GetHeight())/2;
+  printf("Offset: %i,%i\n", offset_x, offset_y);
+  img_keyboard->Blit(GetMainWindow(), offset_x, offset_y);
 
   const uint MIDDLE_X = 64;
   const uint MIDDLE_Y = 13;
 
   Text tmp("", dark_gray_color, 12*sqrtf(zoom), Font::FONT_BOLD, false);
-  tmp.SetMaxWidth(132*zoom + 0.5f);
+  tmp.SetMaxWidth(132*zoom);
 
   struct {
     const char* string;
@@ -109,8 +111,8 @@ void HelpMenu::DrawBackground()
   int i = 0;
   while (texts[i].string) {
     tmp.SetText(texts[i].string);
-    tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + offset.x + 0.5f,
-                           (texts[i].y+MIDDLE_Y)*zoom + offset.y + 0.5f));
+    tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + offset_x,
+                           (texts[i].y+MIDDLE_Y)*zoom + offset_y));
     i++;
   }
 }
