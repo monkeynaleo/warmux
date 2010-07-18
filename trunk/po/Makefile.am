@@ -129,7 +129,6 @@ POTFILES = \
         src/include/action_handler.cpp \
         src/include/action_handler.h \
         src/include/app.h \
-        src/include/binreloc.h \
         src/include/constant.cpp \
         src/include/constant.h \
         src/include/debugmasks.h \
