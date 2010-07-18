@@ -22,9 +22,8 @@ msgid "! Map %s not found :-("
 msgstr "! המפה %s לא נמצאה :-("
 
 #: src/graphic/fps.cpp:99
-#, fuzzy, c-format
 msgid "%.1f fps"
-msgstr "%s תמונות בשניה"
+msgstr "%.1f תמונות בשניה"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format

@@ -22,9 +22,8 @@ msgid "! Map %s not found :-("
 msgstr "نقشه‌ی %s پیدا نشد."
 
 #: src/graphic/fps.cpp:99
-#, fuzzy, c-format
 msgid "%.1f fps"
-msgstr "%s فریم بر ثانیه"
+msgstr "%.1f فریم بر ثانیه"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
