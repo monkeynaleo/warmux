@@ -23,9 +23,8 @@ msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas:-("
 
 #: src/graphic/fps.cpp:99
-#, fuzzy, c-format
 msgid "%.1f fps"
-msgstr "%s bildoj po sekundo (fps)"
+msgstr "%.1f bildoj po sekundo (fps)"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
