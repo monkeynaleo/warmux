@@ -22,9 +22,8 @@ msgid "! Map %s not found :-("
 msgstr "Le terrain %s est introuvable :-("
 
 #: src/graphic/fps.cpp:99
-#, fuzzy, c-format
 msgid "%.1f fps"
-msgstr "%s img/s"
+msgstr "%.1f img/s"
 
 #: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
 #, c-format
@@ -547,29 +546,24 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes personnalisées (%s) !"
 
 #: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
-#, fuzzy
 msgid "Center camera on character"
-msgstr "Centrer la caméra sur le personnage"
+msgstr "Centre la caméra sur le personnage"
 
 #: src/menu/help_menu.cpp:103
-#, fuzzy
 msgid "Change active character"
-msgstr "Changer de personnage courant"
+msgstr "Change de personnage courant"
 
 #: src/menu/help_menu.cpp:94
-#, fuzzy
 msgid "Change aim angle"
-msgstr "Modifier l'angle de visée"
+msgstr "Modifie l'angle de visée"
 
 #: src/menu/help_menu.cpp:92
-#, fuzzy
 msgid "Change weapon category"
-msgstr "Changer de catégorie d'armes"
+msgstr "Change de catégorie d'armes"
 
 #: src/menu/help_menu.cpp:93
-#, fuzzy
 msgid "Change weapon countdown"
-msgstr "Modifier le délai avant détonation"
+msgstr "Modifie le délai avant détonation"
 
 #: src/menu/options_menu.cpp:160
 msgid "Character names:"
@@ -664,9 +658,8 @@ msgstr ""
 "équipes!"
 
 #: src/menu/help_menu.cpp:86
-#, fuzzy
 msgid "Drag&drop: Move camera"
-msgstr "Glissez-déplacez : Déplacer la caméra"
+msgstr "Glissez-déplacez : déplace la caméra"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -701,9 +694,8 @@ msgstr ""
 "avec vous !! - %s"
 
 #: src/map/ground.cpp:73
-#, fuzzy
 msgid "Error loading ground"
-msgstr "Erreur au chargement de l'équipe :"
+msgstr "Erreur au chargement du terrain"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
 msgid "Error loading team :"
@@ -999,7 +991,7 @@ msgstr "Terrain"
 #: src/map/maps_list.cpp:106
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
-msgstr ""
+msgstr "La carte %s dans le dossier '%s' est invalide: %s"
 
 #: src/map/map.cpp:304
 #, c-format
@@ -1051,14 +1043,12 @@ msgid "Most violent"
 msgstr "Le plus violent"
 
 #: src/menu/help_menu.cpp:100
-#, fuzzy
 msgid "Move camera with mouse or arrows"
-msgstr "Déplacez la caméra avec la souris ou avec les flèches"
+msgstr "Déplace la caméra avec la souris / les flèches"
 
 #: src/menu/help_menu.cpp:95
-#, fuzzy
 msgid "Move character"
-msgstr "Déplacer le personnage"
+msgstr "Déplace le personnage"
 
 #: src/menu/options_menu.cpp:86
 msgid "Multi-layer sky?"
@@ -1073,7 +1063,6 @@ msgid "Music?"
 msgstr "Musique ?"
 
 #: src/game/game.cpp:168
-#, fuzzy
 msgid "Network"
 msgstr "Jeu en réseau"
 
@@ -1118,12 +1107,10 @@ msgid "Number of teams:"
 msgstr "Nombre d'équipes :"
 
 #: src/menu/help_menu.cpp:97
-#, fuzzy
 msgid "On a character: select it"
 msgstr "Sur un personnage : change le personnage actif"
 
 #: src/menu/help_menu.cpp:96
-#, fuzzy
 msgid "On map: select a target"
 msgstr "Sur la carte : choisir une cible"
 
@@ -1253,12 +1240,10 @@ msgid "Shotgun"
 msgstr "Fusil à Pompe"
 
 #: src/menu/help_menu.cpp:98
-#, fuzzy
 msgid "Show weapons menu"
-msgstr "Afficher le menu d'armement"
+msgstr "Afficher le menu des armes"
 
 #: src/menu/help_menu.cpp:102
-#, fuzzy
 msgid "Show/hide minimap"
 msgstr "Afficher/Masquer la mini-carte"
 
@@ -1551,9 +1536,8 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Attente du serveur, vous pouvez seulement annuler ou discuter !"
 
 #: src/menu/help_menu.cpp:101
-#, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
-msgstr "Arme : Tirer / Boite de bonus : Chute rapide"
+msgstr "Arme : tir / Boite de bonus : chute"
 
 #: src/game/game.cpp:148
 msgid "Weapons"
@@ -1688,9 +1672,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "Click: Center the camera on the character"
-#~ msgstr "Cliquer : Centrer la caméra sur le personnage"
-
-#~ msgid "Jump"
-#~ msgstr "Saut"
