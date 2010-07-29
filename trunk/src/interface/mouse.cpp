@@ -206,11 +206,10 @@ bool Mouse::HandleEvent(const SDL_Event& event)
   }
 
   if (event.type == SDL_MOUSEBUTTONUP) {
-    if (mouse_button_down_pos.Distance(GetPosition()) > MOUSE_CLICK_DISTANCE) {
+    if (Interface::GetInstance()->ActionClick(GetPosition()))
       return true;
-    }
     if (event.button.button == Mouse::BUTTON_LEFT()) {
-      if (Interface::GetInstance()->ActionClick(GetPosition()))
+      if (mouse_button_down_pos.Distance(GetPosition()) > MOUSE_CLICK_DISTANCE)
         return true;
     }
   }
