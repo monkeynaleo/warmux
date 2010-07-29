@@ -4,19 +4,22 @@
 #
 # Michael Prager <X_X_L@gmx.net>, 2004, 2006.
 # Reiner Herrmann <reiner@reiner-h.de>, 2006, 2007, 2008.
+# Robert Clausecker <fuzxxl@gmail.com>, 2010
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2010-07-18 02:20+0200\n"
-"PO-Revision-Date: 2010-03-08 00:58+0100\n"
-"Last-Translator: Wuzzy <almikes@aol.com>\n"
+"PO-Revision-Date: 2010-07-29 13:44+0100\n"
+"Last-Translator: Robert Clausecker <fuzxxl@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: /home/robert/wormux\n"
 
 #: src/map/maps_list.cpp:380
 #, c-format
@@ -195,8 +198,8 @@ msgstr[1] "Mannschaft %s hat %u Baseballschläger gewonnen!"
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
-msgstr[0] "Mannschaft %s hat %u Bazooka gewonnen!"
-msgstr[1] "Mannschaft %s hat %u Bazookas gewonnen!"
+msgstr[0] "Mannschaft %s hat %u Panzerfaust gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Panzerfäuste gewonnen!"
 
 #: src/weapon/blowtorch.cpp:154
 #, c-format
@@ -562,9 +565,8 @@ msgid "Center camera on character"
 msgstr "Kamera auf aktive Figur zentrieren"
 
 #: src/menu/help_menu.cpp:103
-#, fuzzy
 msgid "Change active character"
-msgstr "aktiven Charakter wechseln"
+msgstr "Figur wechseln"
 
 #: src/menu/help_menu.cpp:94
 #, fuzzy
@@ -640,7 +642,7 @@ msgstr "Verbundene Spieler"
 
 #: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
 msgid "Construct"
-msgstr "Träger"
+msgstr "Stahlträger"
 
 #: src/menu/results_menu.cpp:389
 msgid "Controlled by: "
@@ -707,13 +709,12 @@ msgstr "Lebensenergie"
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
-"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit Ihnen einverstanden! - %"
-"s"
+"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit Ihnen einverstanden! - "
+"%s"
 
 #: src/map/ground.cpp:73
-#, fuzzy
 msgid "Error loading ground"
-msgstr "Fehler beim Laden der Mannschaft:"
+msgstr "Fehler beim Laden der Oberfläche"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
 msgid "Error loading team :"
@@ -725,8 +726,8 @@ msgstr "Fehler beim Laden der Mannschaft:"
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
-"Fehler beim Erstellen des Verzeichnisses »%s«: kann Konfigurationsdatei nicht "
-"speichern."
+"Fehler beim Erstellen des Verzeichnisses »%s«: kann Konfigurationsdatei "
+"nicht speichern."
 
 #: src/team/custom_team.cpp:113
 #, c-format
@@ -771,7 +772,7 @@ msgid ""
 msgstr ""
 "Fehler: Dein Server ist nicht aus dem Internet erreichbar. Prüfe deine "
 "Firewallkonfiguration: TCP-Port %s muss Verbindungen von außen akzeptieren. "
-"Prüf die Routerkonfiguration, falls du nicht direkt mit dem Internet "
+"Prüfe die Routerkonfiguration, falls du nicht direkt mit dem Internet "
 "verbunden bist: TCP-Port %s muss an deinem Computer weitergeleitet werden."
 
 #: src/team/team.cpp:134
@@ -829,7 +830,7 @@ msgstr "Granate"
 
 #: src/map/ground.cpp:51
 msgid "Ground initialization..."
-msgstr "Initialisiere Spielfeld …"
+msgstr "Initialisiere Spielfeld ..."
 
 #: src/weapon/gun.cpp:73
 msgid "Gun"
@@ -867,7 +868,7 @@ msgid ""
 "Angle : Up/Down\n"
 "an ammo per turn"
 msgstr ""
-"Wie man es benutzt: Leertaste gedrückt halten\n"
+"Leertaste gedrückt halten\n"
 "Winkel : Hoch/Runter\n"
 "eine Munition pro Runde"
 
@@ -876,7 +877,7 @@ msgid ""
 "How to use it : keep the space key pressed\n"
 "an ammo per turn"
 msgstr ""
-"Wie man es benutzt: Leertaste gedrückt halten\n"
+"Leertaste gedrückt halten\n"
 "ein Schuss pro Zug"
 
 #: src/weapon/auto_bazooka.cpp:225
@@ -886,7 +887,7 @@ msgid ""
 "Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Wie man es benutzt: Linksklick auf das Ziel\n"
+"Linksklick auf das Ziel\n"
 "Feuerwinkel am Anfang: Hoch/Runter\n"
 "Feuer : Leertaste gedrückt halten bis die gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
@@ -896,7 +897,7 @@ msgid ""
 "How to use it : left click on the target\n"
 "an ammo per turn"
 msgstr ""
-"Wie man es benutzt: Linksklick aufs Ziel\n"
+"Linksklick aufs Ziel\n"
 "eine Munition pro Runde"
 
 #: src/game/game_classic.cpp:198
@@ -959,7 +960,8 @@ msgstr "Rückwärtssalto"
 #: src/network/admin_commands.cpp:32
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
-"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler »kicken«)"
+"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler "
+"»kicken«)"
 
 #: src/menu/options_menu.cpp:134
 msgid "Language"
@@ -1003,7 +1005,7 @@ msgstr "Karte"
 #: src/map/maps_list.cpp:106
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
-msgstr ""
+msgstr "Karte %s (%s) ist ungültig: %s"
 
 #: src/map/map.cpp:304
 #, c-format
@@ -1066,7 +1068,7 @@ msgstr "Figur bewegen"
 
 #: src/menu/options_menu.cpp:86
 msgid "Multi-layer sky?"
-msgstr "Mehr-Ebenen-Himmel"
+msgstr "Himmel mit mehreren Ebenen?"
 
 #: src/menu/options_menu.cpp:245
 msgid "Music volume"
@@ -1117,7 +1119,7 @@ msgstr "Anzahl der Figuren"
 
 #: src/menu/teams_selection_box.cpp:53
 msgid "Number of teams:"
-msgstr "Anzahl der Mannschaften:"
+msgstr "Anzahl der Mannschaften"
 
 #: src/menu/help_menu.cpp:97
 #, fuzzy
@@ -1161,11 +1163,11 @@ msgstr "Spieler"
 
 #: src/menu/options_menu.cpp:90
 msgid "Player energy?"
-msgstr "Spielerenergie?"
+msgstr "Energieleiste anzeigen?"
 
 #: src/menu/options_menu.cpp:94
 msgid "Player's name?"
-msgstr "Spielername?"
+msgstr "Spielernamen anzeigen?"
 
 #: src/weapon/polecat.cpp:196
 msgid "Polecat Launcher"
@@ -1182,7 +1184,7 @@ msgstr "Öffentliche Spiele"
 
 #: src/menu/help_menu.cpp:105
 msgid "Quickly quit game with Ctrl"
-msgstr "sofort verlassen mit [Strg]"
+msgstr "Spiel sofort verlassen"
 
 #: src/menu/main_menu.cpp:72
 msgid "Quit"
@@ -1230,11 +1232,11 @@ msgstr "Sagen: "
 
 #: src/menu/options_menu.cpp:230
 msgid "Scroll border size"
-msgstr "Scrollempfindlichkeit"
+msgstr "Größe des Scrollrandes"
 
 #: src/menu/options_menu.cpp:225
 msgid "Scroll on border"
-msgstr "Am Rand scrollen"
+msgstr "Am Rand scrollen?"
 
 #: src/menu/network_connection_menu.cpp:184
 msgid "Server address:"
@@ -1278,7 +1280,7 @@ msgstr "Schlag"
 
 #: src/weapon/slap.cpp:73
 msgid "Slap the enemy to make him jump a bit."
-msgstr "Schlag den Gegner, so dass er ein wenig springt."
+msgstr "Schlag den Gegner, sodass er ein wenig springt."
 
 #: src/menu/help_menu.cpp:99
 msgid "Smaller aim angle and walk step"
@@ -1305,7 +1307,7 @@ msgid ""
 msgstr ""
 "Entschuldigung, diese Version ist nicht mehr unterstützt. Die unterstützten "
 "Versionen sind %s. Du kannst eine neue Version auf http://www.wormux.org/"
-"wiki/download.php herunterlaten."
+"phpboost/download/download.php herunterlaten."
 
 #: src/menu/options_menu.cpp:284
 msgid "Sound"
@@ -1326,7 +1328,7 @@ msgstr "Geräusche"
 
 #: src/game/game.cpp:188
 msgid "Starting a new game"
-msgstr "Starte ein neues Spiel"
+msgstr "Neues Spiel starten"
 
 #: src/interface/interface.cpp:243
 msgid "Stock:"
@@ -1403,6 +1405,8 @@ msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
 msgstr ""
+"Der Blitzmodus setzt die Zeit nach einem Zug nicht zurück, es verliert das "
+"Team, dessen Zeit zuerst abgelaufen ist. "
 
 #: src/network/network_client.cpp:96
 #, c-format
@@ -1410,8 +1414,8 @@ msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
-"Die Versionen von Client und Server sind inkompatibel (local=%s, server=%s). "
-"Versuche es mit einem anderen Server."
+"Die Versionen von Client und Server sind inkompatibel (Lokale Version: %s, "
+"Version des Servers: %s). Versuche es mit einem anderen Server."
 
 #: src/network/net_error_msg.cpp:47
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1481,9 +1485,9 @@ msgid ""
 "Fire : keep the space key pressed until the desired strength\n"
 "an ammo per turn"
 msgstr ""
-"Detonationstimer : Mausrad oder Bild Auf/Ab\n"
-"Winkel : Hoch/Runter\n"
-"Feuer : Leertaste gedrückt halten, bis die gewünschte Stärke erreicht ist\n"
+"Zeitzünder: Mausrad oder Bild Auf/Ab\n"
+"Winkel: Hoch/Runter\n"
+"Feuer: Leertaste gedrückt halten, bis die gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
 #: src/weapon/bounce_ball.cpp:90
@@ -1605,7 +1609,7 @@ msgstr "Wormux-Version "
 
 #: src/include/action_handler.cpp:235
 msgid "Wrong map CRC!"
-msgstr "Die Karte hat eine falsche CRC (Prüfsumme)!"
+msgstr "Die Karte hat eine falsche Prüfsumme!"
 
 #: src/include/action_handler.cpp:232
 msgid "Wrong map name!"
