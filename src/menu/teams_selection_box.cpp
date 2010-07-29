@@ -36,7 +36,7 @@
 #include <iostream>
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
-  HBox(_size.y, w_border)
+  HBox(_size.y+10, w_border)
 {
   if (!w_border)
     SetNoBorder();
@@ -58,7 +58,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   AddWidget(tmp);
 
   uint teams_box_w = _size.x - local_teams_nb->GetSizeX() - 10;
-  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2-15);
+  Point2i team_box_size(teams_box_w / (MAX_NB_TEAMS /2) - 10, _size.y/2-10);
 
   Box * teams_grid_box = new GridBox(2, 2, 10, false);
   teams_grid_box->SetNoBorder();
