@@ -68,7 +68,6 @@ void HelpMenu::DrawBackground()
 
   int offset_x = (GetMainWindow().GetWidth()-img_keyboard->GetWidth()) / 2;
   int offset_y = (GetMainWindow().GetHeight() - 25 - img_keyboard->GetHeight())/2;
-  printf("Offset: %i,%i\n", offset_x, offset_y);
   img_keyboard->Blit(GetMainWindow(), offset_x, offset_y);
 
   const uint MIDDLE_X = 64;
