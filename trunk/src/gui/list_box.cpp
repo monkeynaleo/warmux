@@ -30,18 +30,20 @@
 #include "tool/resource_manager.h"
 
 BaseListBox::BaseListBox(const Point2i & _size,
-                         bool always_one_selected_b):
-  Widget(Point2i(_size.x, _size.y)),
-  always_one_selected(always_one_selected_b),
-  scrolling(false),
-  first_visible_item(0),
-  selected_item(-1),
-  m_items(),
-  m_up(NULL),
-  m_down(NULL),
-  selected_item_color(defaultListColor2),
-  default_item_color(defaultListColor3),
-  margin(0)
+                         bool always_one_selected_b,
+                         bool color_selection)
+  : Widget(Point2i(_size.x, _size.y))
+  , always_one_selected(always_one_selected_b)
+  , color_selection(color_selection)
+  , scrolling(false)
+  , first_visible_item(0)
+  , selected_item(-1)
+  , m_items()
+  , m_up(NULL)
+  , m_down(NULL)
+  , selected_item_color(defaultListColor2)
+  , default_item_color(defaultListColor3)
+  , margin(0)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_up = new Button(res, "menu/up");
@@ -53,18 +55,19 @@ BaseListBox::BaseListBox(const Point2i & _size,
 }
 
 BaseListBox::BaseListBox(Profile * profile,
-                         const xmlNode * baseListBoxNode) :
-  Widget(profile, baseListBoxNode),
-  always_one_selected(),
-  scrolling(false),
-  first_visible_item(0),
-  selected_item(-1),
-  m_items(),
-  m_up(NULL),
-  m_down(NULL),
-  selected_item_color(),
-  default_item_color(),
-  margin(0)
+                         const xmlNode * baseListBoxNode)
+  : Widget(profile, baseListBoxNode)
+  , always_one_selected(false)
+  , color_selection(false)
+  , scrolling(false)
+  , first_visible_item(0)
+  , selected_item(-1)
+  , m_items()
+  , m_up(NULL)
+  , m_down(NULL)
+  , selected_item_color()
+  , default_item_color()
+  , margin(0)
 {
 }
 
@@ -241,7 +244,7 @@ void BaseListBox::Draw(const Point2i & mousePosition) const
     }
 
     // item is selected or mouse-overed
-    if (draw_it) {
+    if (draw_it && color_selection) {
       if (int(i) == selected_item) {
         surf.BoxColor(rect, selected_item_color);
       } else if (i == uint(item)) {

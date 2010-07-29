@@ -123,8 +123,8 @@ public:
 class ResultListBox : public BaseListBox
 {
 public:
-  ResultListBox(const TeamResults* res, const Point2i &size, bool force = true)
-    : BaseListBox(size, force)
+  ResultListBox(const TeamResults* res, const Point2i &size)
+    : BaseListBox(size, true) 
   {
     ResultBox       *box;
     const Character *player = res->getMostViolent();
