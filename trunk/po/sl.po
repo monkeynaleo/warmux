@@ -605,29 +605,24 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
 #: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
-#, fuzzy
 msgid "Center camera on character"
 msgstr "Osredotoči kamero na člana"
 
 #: src/menu/help_menu.cpp:103
-#, fuzzy
 msgid "Change active character"
 msgstr "Zamenjaj aktivnega člana"
 
 #: src/menu/help_menu.cpp:94
-#, fuzzy
 msgid "Change aim angle"
 msgstr "Spremeni kot merjenja"
 
 #: src/menu/help_menu.cpp:92
-#, fuzzy
 msgid "Change weapon category"
 msgstr "Spremeni skupino orožja"
 
 #: src/menu/help_menu.cpp:93
-#, fuzzy
 msgid "Change weapon countdown"
-msgstr "Spremeni čas orožja"
+msgstr "Spremeni čas do sprožitve"
 
 #: src/menu/options_menu.cpp:160
 msgid "Character names:"
@@ -720,7 +715,6 @@ msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Po izbiri ekip(e) ne pozabite potrditi igre!"
 
 #: src/menu/help_menu.cpp:86
-#, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Povleci&spusti: premakne kamero"
 
@@ -756,9 +750,8 @@ msgstr ""
 "Napaka pri inicializaciji omrežja: odjemalec %s se ne strinja z vami!! - %s"
 
 #: src/map/ground.cpp:73
-#, fuzzy
 msgid "Error loading ground"
-msgstr "Napaka pri nalaganju ekipe:"
+msgstr "Napaka pri nalaganju tal"
 
 #: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
 msgid "Error loading team :"
@@ -1101,12 +1094,10 @@ msgid "Most violent"
 msgstr "Najbolj nasilen"
 
 #: src/menu/help_menu.cpp:100
-#, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Premakni kamero z miško ali puščicami"
 
 #: src/menu/help_menu.cpp:95
-#, fuzzy
 msgid "Move character"
 msgstr "Premakni člana"
 
@@ -1166,12 +1157,10 @@ msgid "Number of teams:"
 msgstr "Število ekip:"
 
 #: src/menu/help_menu.cpp:97
-#, fuzzy
 msgid "On a character: select it"
 msgstr "Na člana: spremeni aktivnega"
 
 #: src/menu/help_menu.cpp:96
-#, fuzzy
 msgid "On map: select a target"
 msgstr "Na karto: izbere tarčo"
 
@@ -1301,12 +1290,10 @@ msgid "Shotgun"
 msgstr "Šibrovka"
 
 #: src/menu/help_menu.cpp:98
-#, fuzzy
 msgid "Show weapons menu"
 msgstr "Pokaži orožni meni"
 
 #: src/menu/help_menu.cpp:102
-#, fuzzy
 msgid "Show/hide minimap"
 msgstr "Pokaži/skrij minikarto"
 
@@ -1600,7 +1587,6 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
 #: src/menu/help_menu.cpp:101
-#, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Orožje: streljaj / Paket: hiter padec"
 
