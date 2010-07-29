@@ -32,65 +32,61 @@ class Button;
 
 class BaseListBox : public Widget
 {
-  /* If you need this, implement it (correctly)*/
-  BaseListBox(const BaseListBox&);
-  BaseListBox operator=(const BaseListBox&);
-  /*********************************************/
-
   bool always_one_selected;
+  bool color_selection;
 
-  protected:
-    bool scrolling;
-    // what are the items ?
-    uint first_visible_item;
-    int selected_item;
-    std::vector<Widget*> m_items;
+protected:
+  bool scrolling;
+  // what are the items ?
+  uint first_visible_item;
+  int selected_item;
+  std::vector<Widget*> m_items;
 
-    // Buttons
-    Button * m_up;
-    Button * m_down;
+  // Buttons
+  Button * m_up;
+  Button * m_down;
 
-    // Colors
-    Color selected_item_color;
-    Color default_item_color;
+  // Colors
+  Color selected_item_color;
+  Color default_item_color;
 
-    uint margin; // for BaseListBoxWithLabel
+  uint margin; // for BaseListBoxWithLabel
 
-    Rectanglei ScrollBarPos() const;
-    virtual void __Update(const Point2i & mousePosition,
-                          const Point2i & lastMousePosition);
-    void AddWidgetItem(bool selected, 
-                       Widget * w);
+  Rectanglei ScrollBarPos() const;
+  virtual void __Update(const Point2i & mousePosition,
+                        const Point2i & lastMousePosition);
+  void AddWidgetItem(bool selected, Widget * w);
 
-  public:
-    void SetSelectedItemColor(const Color & selected_item) { selected_item_color = selected_item; };
-    void SetDefaultItemColor(const Color & default_item) { default_item_color = default_item; };
+public:
+  void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
+  void SetDefaultItemColor(const Color& color) { default_item_color = color; };
 
-    BaseListBox (const Point2i & size, 
-                 bool always_one_selected_b = true);
-    BaseListBox(Profile * profile,
-                const xmlNode * baseListBoxNode);
-    virtual ~BaseListBox();
+  BaseListBox (const Point2i & size,
+               bool always_one_selected_b = true,
+               bool color_selection = true);
+  BaseListBox(Profile * profile,
+              const xmlNode * baseListBoxNode);
+  virtual ~BaseListBox();
 
-    virtual bool LoadXMLConfiguration(void);
-    virtual void Draw(const Point2i & mousePosition) const;
+  virtual bool LoadXMLConfiguration(void);
+  virtual void Draw(const Point2i & mousePosition) const;
 
-    virtual Widget * Click(const Point2i & mousePosition, 
+  virtual Widget * Click(const Point2i & mousePosition,
+                         uint button);
+  virtual Widget * ClickUp(const Point2i & mousePosition,
                            uint button);
-    virtual Widget * ClickUp(const Point2i & mousePosition, 
-                             uint button);
-    virtual void Pack();
+  virtual void Pack();
 
-    void Sort() const;
-    int MouseIsOnWhichItem(const Point2i & mousePosition) const;
-    void Select(uint index);
-    int GetSelectedItem() const { return selected_item; };
-    void Deselect();
-    void RemoveSelected();
-    void ClearItems();
-    bool IsSelectedItem();
+  void Sort() const;
+  int MouseIsOnWhichItem(const Point2i & mousePosition) const;
+  void Select(uint index);
+  int GetSelectedItem() const { return selected_item; };
+  void Deselect();
+  void RemoveSelected();
+  void ClearItems();
+  bool IsSelectedItem();
 
-    uint Size() const { return m_items.size(); };
+  uint Size() const { return m_items.size(); };
 };
 
 class ListBoxItem;
@@ -101,14 +97,14 @@ class ListBox : public BaseListBox
     static const ListBoxItem * GetItem(const Widget * w) { return (const ListBoxItem*)w; }
 
   public:
-    ListBox(const Point2i & size, 
+    ListBox(const Point2i & size,
             bool b = true) : BaseListBox(size, b) { }
     ListBox(Profile * profile,
             const xmlNode * baseListBoxNode);
     virtual ~ListBox() { }
 
     virtual bool LoadXMLConfiguration(void);
-    void AddItem(bool selected,  
+    void AddItem(bool selected,
                  const std::string & label,
                  const std::string & value,
                  Font::font_size_t fsize = Font::FONT_SMALL,

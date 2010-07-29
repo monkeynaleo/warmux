@@ -27,6 +27,7 @@
 
 // Forward declarations
 class SpinButtonWithPicture;
+class TeamListBox;
 class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
@@ -36,24 +37,23 @@ const uint MAX_NB_TEAMS=4;
 
 class TeamsSelectionBox : public HBox
 {
- private:
-  /* If you need this, implement it (correctly) */
-  TeamsSelectionBox(const TeamsSelectionBox&);
-  TeamsSelectionBox operator=(const TeamsSelectionBox&);
-  /**********************************************/
+private:
+  TeamListBox* list_box;
+
   void SetNbTeams(uint nb_teams);
   void PrevTeam(int i);
   void NextTeam(int i);
 
   void Init(bool network);
- protected:
+protected:
   SpinButtonWithPicture *local_teams_nb;
   std::vector<TeamBox*> teams_selections;
 
- public:
+public:
   TeamsSelectionBox(const Point2i &size, bool network, bool w_border);
 
   virtual void ValidTeamsSelection();
+  virtual void Draw(const Point2i &mousePosition);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
