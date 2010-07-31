@@ -199,7 +199,7 @@ std::istream & operator>> (std::istream & is, fixed_point<p> & r)
   }
   buffer << '0'; // assuming a leading zero makes it possible to parse numbers starting with a dot and parses "" as 0.
   next = is.peek();
-  while (next != is.eof() && detail::isDigit(next)) {
+  while (next != (int)is.eof() && detail::isDigit(next)) {
     char c = is.get();
     buffer << c;
     next = is.peek();
@@ -213,7 +213,7 @@ std::istream & operator>> (std::istream & is, fixed_point<p> & r)
     next = is.peek();
     fixed_point<p> factor = 1;
     fixed_point<p> ten = 10;
-    while (next != is.eof() && detail::isDigit(next)) {
+    while (next != (int)is.eof() && detail::isDigit(next)) {
       factor /= ten;
       char c;
       is >> c;
