@@ -183,7 +183,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
     if (w == nb_characters) {
       if (Network::GetInstance()->IsConnected()) {
-              ValidOptions();
+	ValidOptions();
       }
       return w;
     }
