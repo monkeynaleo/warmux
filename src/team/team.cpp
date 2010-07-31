@@ -69,13 +69,12 @@ Team* Team::LoadTeam(const std::string &teams_dir, const std::string &id, std::s
   }
 
   // The constructor will unload res
-  return new Team(doc, res, name, teams_dir, id);
+  return new Team(doc, res, name, id);
 }
 
 Team::Team(XmlReader& doc, Profile* res,
-           const std::string& name, const std::string &teams_dir, const std::string &id)
-  : m_teams_dir(teams_dir)
-  , m_id(id)
+           const std::string& name, const std::string &id)
+  : m_id(id)
   , m_name(name)
   , m_player_name("")
   , remote(false)
@@ -96,6 +95,20 @@ Team::Team(XmlReader& doc, Profile* res,
   // Get sound profile
   if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))
     m_sound_profile = "default";
+
+  // read body id and default character name for each character
+  xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
+  xmlNodeArray::const_iterator it = nodes.begin();
+  do {
+    std::string character_name = "Unknown Soldier";
+    std::string body_id = "";
+    XmlReader::ReadStringAttr(*it, "name", character_name);
+    XmlReader::ReadStringAttr(*it, "body", body_id);
+
+    default_characters_names.push_back(character_name);
+    bodies_ids.push_back(body_id);
+    ++it;
+  } while (it != nodes.end());
 
   active_character = characters.end();
   nb_characters = GameMode::GetInstance()->nb_characters;
@@ -124,20 +137,21 @@ void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
   MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 }
 
-bool Team::AddPlayingCharacters(const std::vector<std::string> bodies,
-				const std::vector<std::string> names)
+bool Team::AddPlayingCharacters(const std::vector<std::string> names)
 {
   // Check that we have enough information
   if (names.size() < nb_characters
-      || bodies.size() < nb_characters)
+      || bodies_ids.size() < nb_characters)
     return false;
+
+  active_character = characters.begin();
 
   // Time to effectively create the characters
   for (uint i = 0; i < nb_characters; i++) {
-    Body *body = BodyList::GetRef().GetBody(bodies[i]);
+    Body *body = BodyList::GetRef().GetBody(bodies_ids[i]);
     if (!body) {
       std::cerr << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-			  bodies[i].c_str(),
+			  bodies_ids[i].c_str(),
 			  m_name.c_str())
 		<< std::endl;
       return false;
@@ -154,47 +168,18 @@ bool Team::AddPlayingCharacters(const std::vector<std::string> bodies,
 bool Team::LoadCharacters()
 {
   ASSERT(characters.size() == 0);
+  ASSERT(bodies_ids.size() >= nb_characters);
   ASSERT(nb_characters <= 10);
-
-  std::string nomfich = m_teams_dir+m_id+ PATH_SEPARATOR "team.xml";
-  // Load XML
-  if (!DoesFileExist(nomfich))
-    return false;
-
-  XmlReader doc;
-  if (!doc.Load(nomfich))
-    return false;
-
-  xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
-  xmlNodeArray::const_iterator it = nodes.begin();
-
-  active_character = characters.end();
-
-  std::vector<std::string> default_characters_name;
-  std::vector<std::string> bodies_name;
-
-  // read body name and character name for all characters
-  do {
-    std::string character_name = "Unknown Soldier";
-    std::string body_name = "";
-    XmlReader::ReadStringAttr(*it, "name", character_name);
-    XmlReader::ReadStringAttr(*it, "body", body_name);
-
-    default_characters_name.push_back(character_name);
-    bodies_name.push_back(body_name);
-
-    ++it;
-  } while (it != nodes.end());
 
   // handle custom names for characters
   std::vector<std::string> characters_name;
   if (attached_custom_team && IsLocal() && !Network::IsConnected()) {
     characters_name = attached_custom_team->GetCharactersNameList();
   } else {
-    characters_name = default_characters_name;
+    characters_name = default_characters_names;
   }
 
-  return AddPlayingCharacters(bodies_name, characters_name);
+  return AddPlayingCharacters(characters_name);
 }
 
 void Team::InitEnergy (uint max)
