@@ -34,6 +34,7 @@
 const std::string NO_AI_NAME = "none";
 const std::string DEFAULT_AI_NAME = "default";
 
+class Body;
 class Character;
 class CustomTeam;
 class WeaponsList;
@@ -68,6 +69,8 @@ private:
   CustomTeam *attached_custom_team;
   bool LoadCharacters();
   WeaponsList * weapons_list;
+
+  void AddOnePlayingCharacter(const std::string& character_name, Body *body);
 
 protected:
   Team(XmlReader& doc, Profile* res,
