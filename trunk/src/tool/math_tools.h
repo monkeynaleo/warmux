@@ -68,17 +68,9 @@ inline float InverseAngleRad (const float angle) { return InverseAngle(angle); }
 inline Double AbsoluteValue (const Double x) { return x >= 0 ? x : -x; }
 inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPSILON; }
 
-#ifdef _MSC_VER
-// MIT licensed from http://opensource.adobe.com/cmath_8hpp-source.html
-#  include <Double.h>
-Double inline round(Double a) { return (a<0.0) ? ceil(a-0.5) : floor(a+0.5); };
-long int inline lround(Double a) { return static_cast<long>(a + (a < 0.0 ? -0.5 : 0.5)); }
-#endif
-
 template <class T> T max(T a, T b)
 {
   return a > b ? a : b;
 };
 
 #endif
-
