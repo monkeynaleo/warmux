@@ -48,27 +48,34 @@ public:
   typedef std::list<Character>::const_iterator const_iterator;
 
 private:
+  // parameters that never change after first loading
   Surface mini_flag;
   Surface flag;
   Surface death_flag;
   Surface big_flag;
-  std::string m_teams_dir; // parent directory hosting the data
-  std::string m_id;
-  std::string m_name;
-  std::string m_player_name;
+  const std::string m_teams_dir; // parent directory hosting the data
+  const std::string m_id;
+  const std::string m_name;
   std::string m_sound_profile;
+
+  // parameters reseted by SetDefaultPlayingConfig
+  std::string m_player_name;
+  uint nb_characters;
+  bool remote;
+  AIPlayer * ai;
+  std::string ai_name;
+  CustomTeam *attached_custom_team;
+
+  // parameters changed just before game or in game
   std::list<Character> characters;
   iterator active_character;
   Weapon *active_weapon;
-  uint nb_characters;
   uint current_turn;
-  AIPlayer * ai;
-  std::string ai_name;
-  bool remote;
   bool abandoned;
-  CustomTeam *attached_custom_team;
-  bool LoadCharacters();
   WeaponsList * weapons_list;
+
+
+  bool LoadCharacters();
 
   void AddOnePlayingCharacter(const std::string& character_name, Body *body);
   bool AddPlayingCharacters(const std::vector<std::string> bodies,
