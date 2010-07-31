@@ -504,44 +504,44 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
   the_team->SetAIName(the_team_cfg.ai);
 }
 
-void TeamsList::UpdateTeam (const std::string& old_team_id,
-                            const ConfigTeam &the_team_cfg)
+Team* TeamsList::UpdateTeam(const std::string& old_team_id,
+			    const ConfigTeam &the_team_cfg)
 {
   int pos;
+  Team *the_team = NULL;
 
   MSG_DEBUG("team", "%s/%s\n", old_team_id.c_str(), the_team_cfg.id.c_str());
 
   if (old_team_id == the_team_cfg.id) {
     // this is a simple update
 
-    Team *the_team = FindById (the_team_cfg.id, pos);
+    the_team = FindById (the_team_cfg.id, pos);
     if (the_team != NULL) {
       UpdateTeam(the_team, the_team_cfg);
     } else {
       Error(Format(_("Can't find team %s!"), the_team_cfg.id.c_str()));
-      return;
     }
+    return the_team;
 
-  } else {
-
-    // here we are replacing a team by another one
-    Team *the_old_team = FindById(old_team_id, pos);
-    if (the_old_team == NULL) {
-      Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
-      return;
-    }
-
-    Team *the_team = FindById(the_team_cfg.id, pos);
-    if (the_team == NULL) {
-      Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
-      return;
-    }
-
-    bool is_local = the_old_team->IsLocal();
-    DelTeam(the_old_team);
-    AddTeam(the_team, pos, the_team_cfg, is_local);
   }
 
+  // here we are replacing a team by another one
+  Team *the_old_team = FindById(old_team_id, pos);
+  if (the_old_team == NULL) {
+    Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
+    return NULL;
+  }
+
+  the_team = FindById(the_team_cfg.id, pos);
+  if (the_team == NULL) {
+    Error(Format(_("Can't find team %s!"), old_team_id.c_str()));
+    return NULL;
+  }
+
+  bool is_local = the_old_team->IsLocal();
+  DelTeam(the_old_team);
+  AddTeam(the_team, pos, the_team_cfg, is_local);
+  return the_team;
 }
 
 //-----------------------------------------------------------------------------
