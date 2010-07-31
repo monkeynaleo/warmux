@@ -144,18 +144,37 @@ CustomTeam* TeamBox::GetCustomTeam() const
   return GetCustomTeamsList().GetByName(player_name->GetText());
 }
 
+void TeamBox::UpdatePlayerNameColor()
+{
+  if (associated_team) {
+    if (associated_team->IsLocal()) {
+      if (GetCustomTeam()) {
+	// player name is head commander of custom team
+	player_name->SetColor(c_yellow);
+      } else {
+	player_name->SetColor(c_white);
+      }
+    } else {
+      // remote team
+      player_name->SetColor(light_gray_color);
+    }
+  }
+}
+
 void TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
   Rectanglei r(GetPosition(), GetSize());
   SwapWindowClip(r);
 
+  UpdatePlayerNameColor();
+
   Box::Update(mousePosition, lastMousePosition);
   if (need_redrawing) {
     Draw(mousePosition);
   }
 
-  if (associated_team != NULL){
+  if (associated_team != NULL) {
     WidgetList::Update(mousePosition);
   } else {
     RedrawBackground(*this);
