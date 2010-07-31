@@ -101,6 +101,29 @@ Team::Team(XmlReader& doc, Profile* res,
   nb_characters = GameMode::GetInstance()->nb_characters;
 }
 
+void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
+{
+  Character new_character(*this, character_name, body);
+  characters.push_back(new_character);
+  active_character = characters.begin(); // we need active_character to be initialized here !!
+
+  if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
+    {
+      // We haven't found any place to put the characters!!
+      if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
+        std::cerr << std::endl;
+        std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+        std::cerr << std::endl;
+
+        // Put it with no space...
+        characters.back().PutRandomly(false, 0);
+      }
+    }
+  characters.back().Init();
+
+  MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+}
+
 bool Team::LoadCharacters()
 {
   ASSERT(characters.size() == 0);
@@ -115,58 +138,54 @@ bool Team::LoadCharacters()
   if (!doc.Load(nomfich))
     return false;
 
-  // Create the characters
   xmlNodeArray nodes = XmlReader::GetNamedChildren(XmlReader::GetMarker(doc.GetRoot(), "team"), "character");
   xmlNodeArray::const_iterator it = nodes.begin();
 
   active_character = characters.end();
-  do
-  {
-    Body* body;
-    std::string character_name = "Unknown Soldier (it's all over)";
+
+  std::vector<std::string> default_characters_name;
+  std::vector<std::string> bodies_name;
+
+  // read body name and character name for all characters
+  do {
+    std::string character_name = "Unknown Soldier";
     std::string body_name = "";
     XmlReader::ReadStringAttr(*it, "name", character_name);
     XmlReader::ReadStringAttr(*it, "body", body_name);
 
-    if (!(body = BodyList::GetRef().GetBody(body_name)) )
-    {
-      std::cerr
-          << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-                    body_name.c_str(),
-                    m_name.c_str())
-          << std::endl;
+    default_characters_name.push_back(character_name);
+    bodies_name.push_back(body_name);
+
+    ++it;
+  } while (it != nodes.end());
+
+  // handle custom names for characters
+  std::vector<std::string> characters_name;
+  if ((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected()) {
+    characters_name = attached_custom_team->GetCharactersNameList();
+  } else {
+    characters_name = default_characters_name;
+  }
+
+  // Check that we have enough information
+  if (characters_name.size() < nb_characters
+      || bodies_name.size() < nb_characters)
+    return false;
+
+  // Time to effectively create the characters
+  for (uint i = 0; i < nb_characters; i++) {
+    Body *body = BodyList::GetRef().GetBody(bodies_name[i]);
+    if (!body) {
+      std::cerr << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+			  bodies_name[i].c_str(),
+			  m_name.c_str())
+		<< std::endl;
       return false;
     }
 
-    if((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected())
-    {
-      character_name = attached_custom_team->GetCharactersNameList().at(characters.size());
-    }
-
     // Create a new character and add him to the team
-    Character new_character(*this, character_name, body);
-    characters.push_back(new_character);
-    active_character = characters.begin(); // we need active_character to be initialized here !!
-    if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
-    {
-      // We haven't found any place to put the characters!!
-      if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
-        std::cerr << std::endl;
-        std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
-        std::cerr << std::endl;
-
-        // Put it with no space...
-        characters.back().PutRandomly(false, 0);
-      }
-    }
-    characters.back().Init();
-
-    MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
-
-    // Did we reach the end ?
-    ++it;
-  } while (it != nodes.end() && characters.size() < nb_characters );
-
+    AddOnePlayingCharacter(characters_name[i], body);
+  }
   active_character = characters.begin();
 
   return (characters.size() == nb_characters);
