@@ -42,16 +42,18 @@ Video::Video()
   window.SetAutoFree( false );
 
   Config * config = Config::GetInstance();
+  SetMaxFps(config->GetMaxFps());
+
+  ComputeAvailableConfigs();
   SetConfig((int)(config->GetVideoWidth()),
             (int)(config->GetVideoHeight()),
-            config->IsVideoFullScreen());
-
-  SetMaxFps(config->GetMaxFps());
+            config->IsVideoFullScreen());  // Add the current resolution
 
   if( window.IsNull() ) {
     Error(Format("Unable to initialize SDL window: %s", SDL_GetError()));
     exit (1);
   }
+  AddConfigIfAbsent(window.GetWidth(), window.GetHeight());
 
   SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION );
   // The icon must be larger then 32x32 pixels as some desktops display larger icons.
@@ -63,8 +65,6 @@ Video::Video()
   // The SDL manual of SDL_WM_SetIcon states that "Win32 icons must be 32x32.":
   SetWindowIcon(config->GetDataDir() + "wormux_32x32.xpm");
 #endif
-
-  ComputeAvailableConfigs();
 }
 
 Video::~Video()
@@ -116,9 +116,6 @@ void Video::ComputeAvailableConfigs()
       }
     }
   }
-
-  // Add the current resolution
-  AddConfigIfAbsent(window.GetWidth(), window.GetHeight());
 
   // If biggest resolution is big enough, we propose standard resolutions
   // such as 1600x1200, 1280x1024, 1024x768, 800x600.
