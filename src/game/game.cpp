@@ -336,7 +336,7 @@ void Game::Start()
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
-    InitEverything();
+  InitEverything();
 
   InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
   if (basic) {
@@ -350,8 +350,8 @@ void Game::Start()
     UnloadDatas(game_finished);
   }
 
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-    JukeBox::GetInstance()->PlayMusic("menu");
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
+  JukeBox::GetInstance()->PlayMusic("menu");
 }
 
 void Game::UnloadDatas(bool game_finished) const
