@@ -77,17 +77,22 @@ void WidgetList::RemoveWidget(Widget* w)
 
 void WidgetList::Update(const Point2i &mousePosition)
 {
+  Rectanglei wlr = (Rectanglei)*this;
+
+  SwapWindowClip(wlr);
   for (std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
+       w != widget_list.end();
+       w++)
   {
     // Then redraw the widget
     Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
+    r.Clip(wlr);
 
     SwapWindowClip(r);
     (*w)->Update(mousePosition, lastMousePosition);
     SwapWindowClip(r);
   }
+  SwapWindowClip(wlr);
 
   lastMousePosition = mousePosition;
 }
@@ -303,16 +308,21 @@ bool WidgetList::SendKey(SDL_keysym key)
 
 void WidgetList::Draw(const Point2i &mousePosition) const
 {
+  Rectanglei wlr = (Rectanglei)*this;
+
+  SwapWindowClip(wlr);
   for (std::list<Widget*>::const_iterator w=widget_list.begin();
       w != widget_list.end();
       w++)
   {
     Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
+    r.Clip(wlr);
 
     SwapWindowClip(r);
     (*w)->Draw(mousePosition);
     SwapWindowClip(r);
   }
+  SwapWindowClip(wlr);
 }
 
 Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
