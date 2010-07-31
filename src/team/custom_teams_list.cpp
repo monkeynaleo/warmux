@@ -72,7 +72,7 @@ void CustomTeamsList::LoadList()
   const Config *config = Config::GetInstance();
 
   // Load personal custom teams
-  std::string dirname = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR;
+  std::string dirname = config->GetPersonalConfigDir() + "custom_team";
   FolderSearch *f = OpenFolder(dirname);
 
   if (f) {
@@ -96,7 +96,7 @@ bool CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
     return true;
 
   // Is it a directory ?
-  if (!DoesFolderExist(dir + custom_team_name))
+  if (!DoesFolderExist(dir + PATH_SEPARATOR + custom_team_name))
     return false;
 
   // Add the team

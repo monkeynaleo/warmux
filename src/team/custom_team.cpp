@@ -36,11 +36,31 @@ CustomTeam::CustomTeam(const std::string &team_name)
   , nb_characters(MAX_CHARACTERS)
   , name(team_name)
 {
+  Config *config = Config::GetInstance();
+  int team_count = 0;
+
+  do {
+    team_count++;
+    std::ostringstream oss;
+    oss << team_count;
+    // the default player name for custom teams
+    name = _("custom player");
+    name += "  " + oss.str();
+    directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name);
+
+  } while (DoesFolderExist(directory_name));
+
+  for (uint i = 1; i < nb_characters + 1; i++) {
+    characters_name_list.push_back("");
+  }
 }
 
-CustomTeam::CustomTeam(const std::vector<std::string>& list, const std::string& name)
+CustomTeam::CustomTeam(const std::string& team_name,
+		       const std::string& directory,
+		       const std::vector<std::string>& list)
   : is_name_changed(false)
-  , directory_name(name)
+  , name(team_name)
+  , directory_name(directory)
   , characters_name_list(list)
 {
   nb_characters = list.size();
@@ -50,18 +70,19 @@ CustomTeam* CustomTeam::LoadCustomTeam(const std::string &custom_teams_dir,
                                        const std::string &id, std::string& error)
 {
   std::vector<std::string> list;
-  std::string name    = custom_teams_dir + id + PATH_SEPARATOR;
-  std::string nomfich = name + "team.xml";
+  std::string directory = custom_teams_dir + PATH_SEPARATOR + id;
+  std::string filename = directory + PATH_SEPARATOR "team.xml";
+  std::string teamname;
   XmlReader   doc;
 
   // Load XML
-  if (!doc.Load(nomfich)) {
-    error = "unable to load file of team data";
+  if (!doc.Load(filename)) {
+    error = "unable to load file "+ filename + "of team data";
     return NULL;
   }
 
-  if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) {
-    error = "Invalid file structure: cannot find a name for team in " + nomfich;
+  if (!XmlReader::ReadString(doc.GetRoot(), "name", teamname)) {
+    error = "Invalid file structure: cannot find a name for team in " + filename;
     return NULL;
   }
 
@@ -75,7 +96,7 @@ CustomTeam* CustomTeam::LoadCustomTeam(const std::string &custom_teams_dir,
     XmlReader::ReadString(*it, "name", character_name);
     list.push_back(character_name);
 
-    MSG_DEBUG("team", "Add %s in  custom team %s", character_name.c_str(), name.c_str());
+    MSG_DEBUG("team", "Add %s in  custom team %s", character_name.c_str(), teamname.c_str());
 
     // Did we reach the end ?
     ++it;
@@ -83,11 +104,11 @@ CustomTeam* CustomTeam::LoadCustomTeam(const std::string &custom_teams_dir,
   } while (it != nodes.end() || list.size() < MAX_CHARACTERS);
 
   if (list.size() > MAX_CHARACTERS) {
-    error = "Too many players in " + nomfich;
+    error = "Too many players in " + filename;
     return NULL;
   }
 
-  return new CustomTeam(list, name);
+  return new CustomTeam(teamname, directory, list);
 }
 
 
@@ -95,25 +116,25 @@ CustomTeam::~CustomTeam()
 {
 }
 
-
 void CustomTeam::Delete()
 {
-  if (!DeleteFile(directory_name+"team.xml")) {
-    std::string file = directory_name + "team.xml";
+  std::string fullpath = directory_name + PATH_SEPARATOR "team.xml";
+
+  if (!DeleteFile(fullpath)) {
     std::cerr << "o "
-        << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
-      file.c_str())
-        << " " << strerror(errno)
-        << std::endl;
+	      << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
+			fullpath.c_str())
+	      << " " << strerror(errno)
+	      << std::endl;
     return;
   }
 
   if (!DeleteFolder(directory_name)) {
     std::cerr << "o "
-        << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
-      directory_name.c_str())
-        << " " << strerror(errno)
-        << std::endl;
+	      << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
+			directory_name.c_str())
+	      << " " << strerror(errno)
+	      << std::endl;
   }
 }
 
@@ -129,34 +150,13 @@ std::string CustomTeam::GetName()
   return name;
 }
 
-void CustomTeam::NewTeam()
-{
-  Config *config = Config::GetInstance();
-  int team_count = 0;
-
-  do {
-    team_count++;
-    std::ostringstream oss;
-    oss << team_count;
-    // the default player name for custom teams
-    name = _("custom player");
-    name +="  "+oss.str();
-    directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
-
-  } while (DoesFolderExist(directory_name));
-
-  for (uint i = 1; i < nb_characters + 1; i++) {
-    characters_name_list.push_back("");
-  }
-}
-
 bool CustomTeam::Save()
 {
   Config *config = Config::GetInstance();
 
   if (is_name_changed) {
     Delete();
-    directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name) + PATH_SEPARATOR;
+    directory_name = config->GetPersonalConfigDir() + "custom_team" PATH_SEPARATOR + FormatFileName(name);
     is_name_changed = false;
   }
 
@@ -207,7 +207,7 @@ bool CustomTeam::SaveXml()
     }
   }
 
-  std::string m_filename = directory_name + "team.xml";
+  std::string m_filename = directory_name + PATH_SEPARATOR "team.xml";
   doc.Create(m_filename, "resources", "1.0", "utf-8");
   xmlNode *root = doc.GetRoot();
   doc.WriteElement(root, "name", name);
