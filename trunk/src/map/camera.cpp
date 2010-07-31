@@ -45,7 +45,7 @@ const Double REACTIVITY = 0.6;
 const Double SPEED_REACTIVITY = 0.05;
 const int SPEED_REACTIVITY_CEIL = 4;
 
-const uint SCROLL_KEYBOARD = 20; // pixel
+#define SCROLL_KEYBOARD  20 // pixel
 
 const Double ADVANCE_ANTICIPATION = 10;
 const int REALTIME_FOLLOW_LIMIT = 25;
