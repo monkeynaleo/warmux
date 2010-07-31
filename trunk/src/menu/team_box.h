@@ -61,7 +61,7 @@ class TeamBox : public HBox
   std::vector<CustomTeam *> custom_team_list;
   unsigned custom_team_current_id;
 
-
+  CustomTeam *GetCustomTeam() const;
   void UpdateTeam(const std::string& old_team_id) const;
 
  public:
@@ -72,7 +72,6 @@ class TeamBox : public HBox
   void UpdatePlayerType();
   void ClearTeam();
   Team* GetTeam() const;
-  CustomTeam *GetCustomTeam();
 
   void ValidOptions() const;
 

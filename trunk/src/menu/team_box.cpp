@@ -135,7 +135,7 @@ Team* TeamBox::GetTeam() const
   return associated_team;
 }
 
-CustomTeam* TeamBox::GetCustomTeam()
+CustomTeam* TeamBox::GetCustomTeam() const
 {
   if (custom_team_list.empty()) {
     return NULL;
@@ -303,6 +303,8 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
 
   // change only for local teams...
   if (associated_team->IsLocal()) {
+    associated_team->AttachCustomTeam(GetCustomTeam());
+
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
       Action* a = new Action(Action::ACTION_GAME_UPDATE_TEAM);
