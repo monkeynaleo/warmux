@@ -64,6 +64,8 @@ class TeamBox : public HBox
   CustomTeam *GetCustomTeam() const;
   void UpdateTeam(const std::string& old_team_id) const;
 
+  void UpdatePlayerNameColor();
+
  public:
   TeamBox(const std::string& player_name, const Point2i &size);
 
@@ -77,11 +79,11 @@ class TeamBox : public HBox
 
   bool IsLocal() const;
 
-  void Update(const Point2i &mousePosition,
-              const Point2i &lastMousePosition);
+  virtual void Update(const Point2i &mousePosition,
+		      const Point2i &lastMousePosition);
 
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void SwitchPlayerType();
 };
