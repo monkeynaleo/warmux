@@ -189,12 +189,12 @@ void GridBox::Pack()
   for (uint lineIt = 0; lineIt < lines; ++lineIt) {
     heightMax = GetMaxHeightByLine(lineIt);
 
-    gridHeight += heightMax;
+    gridHeight += heightMax + marginY;
     gridWidth = 0;
 
     for (uint columnIt = 0; columnIt < columns; ++columnIt) {
       widthMax = GetMaxWidthByColumn(columnIt);
-      gridWidth += widthMax;
+      gridWidth += widthMax + marginX;
 
       if (NULL != grid[lineIt][columnIt]) {
         Widget * widget = grid[lineIt][columnIt];
