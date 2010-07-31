@@ -2,12 +2,11 @@
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the Wormux package.
 # Steve <gba2211 AT gmail DOT com>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -26,6 +25,7 @@ msgid "! Map %s not found :-("
 msgstr "! Ο χάρτης %s δεν βρέθηκε :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f εικ./δευτ."
 
@@ -53,13 +53,13 @@ msgstr "%s <%s> γνωστός και ως %s από %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> από %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Ομάδα %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ομάδα %s - Απομακρυσμένη"
@@ -557,27 +557,27 @@ msgstr "Αδύνατον να ανοίξει ο φάκελος με τις ομ�
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις προσωπικές ομάδες (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Κέντραρε την κάμερα στο χαρακτήρα σου"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Αλλαγή γωνίας σκόπευσης"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Αλλαγή αντίστροφης μέτρησης όπλου"
@@ -625,7 +625,7 @@ msgstr "Μπαζούκα διασποράς"
 msgid "Commit Suicide"
 msgstr "Αυτοκτονία"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Μενού Διαμόρφωσης"
 
@@ -675,7 +675,7 @@ msgstr "Εμφανίζει αυτό το μήνυμα"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Μη ξεχάσεις να επικυρώσεις μόλις επιλέξεις την ομάδα σου!"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Σύρε & άφησε: Μετακίνησε την κάμερα"
@@ -729,7 +729,7 @@ msgstr ""
 "Λάθος κατά τη δημιουργία του φακέλου \"%s\": αδύνατον να αποθηκευτεί το "
 "αρχείο διαμόρφωσης."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -737,7 +737,7 @@ msgstr ""
 "Λάθος κατά τη διαγραφή του φακέλου \"%s\". Αδύνατον να διαγραφεί η προσωπική "
 "ομάδα."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -770,7 +770,7 @@ msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -784,7 +784,7 @@ msgstr ""
 "ρύθμιση του δρομολογητή:  Η TCP θύρα %s πρέπει να διαβιβάζεται στον "
 "υπολογιστή σας."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Λάθος: αδύνατον να βρεθεί το σώμα \"%s\" για την ομάδα \"%s\"."
@@ -798,7 +798,7 @@ msgstr "Φλογοβόλο"
 msgid "Football Bomb"
 msgstr "Εκρηκτική μπάλα"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Πλήρης οθόνη / παράθυρο"
 
@@ -864,7 +864,7 @@ msgstr "Διοικητής: "
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Ψηλό άλμα"
 
@@ -966,7 +966,7 @@ msgstr "Πάρε ένα δωράκι!"
 msgid "Jetpack"
 msgstr "Σακίδιο Τζετ"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Άλμα προς τα πίσω"
 
@@ -994,7 +994,7 @@ msgstr "Φόρτωση χαρτών:"
 msgid "Load teams:"
 msgstr "Φόρτωση ομάδων:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Ομάδες τοπικά:"
 
@@ -1067,12 +1067,12 @@ msgstr "Πιο άχρηστος"
 msgid "Most violent"
 msgstr "Πιο βίαιος"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Μετακίνησε την κάμερα με το ποντίκι ή με τα βέλη"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Μετακίνησε χαρακτήρα"
@@ -1124,20 +1124,20 @@ msgid "Nobody!"
 msgstr "Κανένας!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Πλήθος παικτών ανά ομάδα"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Πλήθος ομάδων:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Πάνω σε χαρακτήρα: Αλλάζει τον ενεργό χαρακτήρα"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Πάνω στο χάρτη: Επέλεξε ένα στόχο"
@@ -1168,7 +1168,7 @@ msgstr "Παίξε"
 msgid "Play several times"
 msgstr "Παίξτε πολλές φορές"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Παίκτης"
 
@@ -1194,7 +1194,7 @@ msgstr "Θύρα:"
 msgid "Public battles"
 msgstr "Δημόσιες μάχες"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "Γρήγορα εγκατάλειψε το παιχνίδι με το Ctrl"
 
@@ -1211,7 +1211,7 @@ msgstr "Εγκατάλειψε το  Wormux"
 msgid "Quit battle"
 msgstr "Εγκατάλειψε τη μάχη"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Εγκατάλειψε το παιχνίδι"
 
@@ -1270,17 +1270,17 @@ msgstr "Κατάσταση διακομιστή"
 msgid "Shotgun"
 msgstr "Καραμπίνα"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Δείξε το μενού με τα όπλα"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Δείξε/Κρύψε το μίνι χάρτη"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
@@ -1297,7 +1297,7 @@ msgstr "Χαστούκι"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Χαστούκισε τον αντίπαλο για να τον κάνεις να αναπηδήσει λίγο."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Μικρότερη γωνία σκόπευσης και βηματισμός"
 
@@ -1316,7 +1316,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1363,7 +1363,7 @@ msgstr "Υπέρ-Tux"
 msgid "Syringe"
 msgstr "Σύριγγα"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "Μίλησε σε δικτυακή μάχη"
 
@@ -1581,7 +1581,7 @@ msgstr "Περιμένοντας για απομακρισμένους παίκ�
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
@@ -1690,7 +1690,7 @@ msgid "couldn't load config"
 msgstr "δεν φορτώθηκε το αρχείο διαμόρφωσης"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "Προσωπικός παίκτης"
 

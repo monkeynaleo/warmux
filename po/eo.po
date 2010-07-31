@@ -1,13 +1,12 @@
 # translation of eo_new.po to esperanto
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Axel Rousseau <axel584 AT axel584.org>, 2006.
 # Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -23,6 +22,7 @@ msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas:-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f bildoj po sekundo (fps)"
 
@@ -50,13 +50,13 @@ msgstr "%s <%s> kiel %s el %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "%s Teamo"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
@@ -531,27 +531,27 @@ msgstr "Ne eblas malfermi la dosierujon de teamoj (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Centrigi la kameraon ĉe la ulo"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Ŝanĝi aktivan ulon"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Ŝanĝi celangulon"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Ŝanĝi templimon de armilo"
@@ -598,7 +598,7 @@ msgstr "Disbazuko"
 msgid "Commit Suicide"
 msgstr "Sinmortigi"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Agordmenuo"
 
@@ -648,7 +648,7 @@ msgstr "Montri tiun mesaĝon"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Ŝovi&demeti: movi kameraon"
@@ -700,13 +700,13 @@ msgid ""
 msgstr ""
 "Eraro kreante dosierujon \"%s\": ne eblas konservi la dosieron de agordo."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr "Eraro forigante dosierujon \"%s\": ne eblas forigi la propran teamon."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -733,7 +733,7 @@ msgid "Error: Unable to start the server"
 msgstr "Eraro: Ne eblas starti servilon"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -746,7 +746,7 @@ msgstr ""
 "vi ne estas senpere konektita al la interreto, kontroli la agordon de via "
 "kursilo: la TCP pordo %s devas trasendiĝi al via komputilo."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
@@ -759,7 +759,7 @@ msgstr "Flamĵetilo"
 msgid "Football Bomb"
 msgstr "Futbalbombo"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Plen-ekrane/fenestre"
 
@@ -826,7 +826,7 @@ msgstr "Ĉefkomandoro:"
 msgid "Help"
 msgstr "Helpo"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Supersalti"
 
@@ -929,7 +929,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Salti malantaŭen"
 
@@ -957,7 +957,7 @@ msgstr "Muntas la mapojn:"
 msgid "Load teams:"
 msgstr "Muntas la teamojn:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Lokaj teamoj:"
 
@@ -1031,12 +1031,12 @@ msgstr "La plej malutila"
 msgid "Most violent"
 msgstr "La plej perforta"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Movi la kameraon per muso aŭ sagoj"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Movi ulon"
@@ -1090,20 +1090,20 @@ msgid "Nobody!"
 msgstr "Neniu!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Kvanto da ludantoj"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Kvanto da teamoj:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Sur ulo: ŝanĝi la aktiva ulon"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Sur mapo: elekti celon"
@@ -1134,7 +1134,7 @@ msgstr "Ludi"
 msgid "Play several times"
 msgstr "Ludi plurfoje"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Ludanto"
 
@@ -1159,7 +1159,7 @@ msgstr "Pordo:"
 msgid "Public battles"
 msgstr "Publikaj bataloj"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1175,7 +1175,7 @@ msgstr "Foriri el Wormux"
 msgid "Quit battle"
 msgstr "Foriri el batalo"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Foriri el ludo"
 
@@ -1235,17 +1235,17 @@ msgstr "Servila modo"
 msgid "Shotgun"
 msgstr "Blovfusilo"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Montri la menuon de armiloj"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Montri/Kaŝi minimapon"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Montri/Kaŝi interfacon"
@@ -1262,7 +1262,7 @@ msgstr "Vangofrapi"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Vangofrapi la malamikon por saltigi lin iomete."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Pli malgranda celangulo kaj paŝo"
 
@@ -1279,7 +1279,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1325,7 +1325,7 @@ msgstr "SuperTukso"
 msgid "Syringe"
 msgstr "Injektilo"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Babili dum reta batalo"
@@ -1538,7 +1538,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
@@ -1648,7 +1648,7 @@ msgid "couldn't load config"
 msgstr "ne eblis ŝargi agordon"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "propra lundanto"
 

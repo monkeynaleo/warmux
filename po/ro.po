@@ -2,13 +2,12 @@
 # Romanian translation of the Wormux messages.
 # Copyright (C) YEAR Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-#
+# 
 # Eddy Petrișor <eddy.petrisor@gmail.com>, 2006, 2007, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2009-09-08 14:34+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -28,6 +27,7 @@ msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f C/S"
 
@@ -57,13 +57,13 @@ msgstr "%s <%s> cunoscut și ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Echipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
@@ -671,7 +671,7 @@ msgstr "Rachetă automată"
 msgid "Back to battle"
 msgstr "Înapoi pe câmpul de bătălie"
 
-#
+# 
 #: src/network/net_error_msg.cpp:41
 msgid "Bad socket ..."
 msgstr "Socket greșit ..."
@@ -726,27 +726,27 @@ msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Centrează camera pe personaj"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Schimbă personajul activ"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Schimbă unghiul de țintire"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Schimbă categoria armei"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Schimbă cronometrul armei"
@@ -792,7 +792,7 @@ msgstr "Proiectil reactiv cu schije"
 msgid "Commit Suicide"
 msgstr "Comite suicid"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Meniu de configurare"
 
@@ -841,7 +841,7 @@ msgstr "Afișează acest mesaj"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Tragere cu mausul: Mută camera"
@@ -894,7 +894,7 @@ msgstr ""
 "Eroare în timpul creări directorului „%s”: fișierul de configurare nu poate "
 "fi stocat."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -902,7 +902,7 @@ msgstr ""
 "Eroare în timpul ștergerii directorului „%s”: echipa particularizată nu "
 "poate fi ștearsă."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -933,7 +933,7 @@ msgid "Error: Unable to start the server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -946,7 +946,7 @@ msgstr ""
 "Dacă nu ai conexiune directă la internet, verifică configurația router-ului: "
 "Portul TCP %s trebuie să fie redirectat către calculatorul tău."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -959,7 +959,7 @@ msgstr "Aruncător de flăcări"
 msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Tot ecranul / fereastră"
 
@@ -1016,7 +1016,7 @@ msgstr "Distracție plăcută!"
 msgid "Head commander"
 msgstr "Comandant șef"
 
-#
+# 
 #. Display player's name
 #: src/interface/interface.cpp:203
 msgid "Head commander: "
@@ -1026,7 +1026,7 @@ msgstr "Comandant șef: "
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Salt înalt"
 
@@ -1125,7 +1125,7 @@ msgstr "E un cadou!"
 msgid "Jetpack"
 msgstr "Propulsor personal"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Salt înapoi"
 
@@ -1153,7 +1153,7 @@ msgstr "Încărcare hărți:"
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Echipe locale:"
 
@@ -1227,12 +1227,12 @@ msgstr "Cel mai inutil"
 msgid "Most violent"
 msgstr "Cel mai violent"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Mută camera cu mausul sau săgețile"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Mută personajul"
@@ -1285,20 +1285,20 @@ msgid "Nobody!"
 msgstr "Nimeni!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Numărul de personaje"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Numărul de echipe:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Pe un personaj: Îl selectează"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Pe hartă: Selectează ținta"
@@ -1330,7 +1330,7 @@ msgstr "Pornește jocul"
 msgid "Play several times"
 msgstr "Joacă de câteva ori"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Jucător"
 
@@ -1355,7 +1355,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Bătălii publice"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1371,7 +1371,7 @@ msgstr "Ieșire din Wormux"
 msgid "Quit battle"
 msgstr "Părăsește bătălia"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Părăsește jocul"
 
@@ -1430,17 +1430,17 @@ msgid "Shotgun"
 msgstr "Pușcă"
 
 # XXX: nu-mi place cum sună; probabil am să revin la "Opțiuni"
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Arată meniul de arme"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Arată/ascunde mini-harta"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "Arată/ascunde interfața"
 
@@ -1456,7 +1456,7 @@ msgstr "Plesneală"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Plesnește inamicul să sară un pic."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Unghi de țintire și pași mai mici"
 
@@ -1473,7 +1473,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1520,7 +1520,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringă"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "Discuție în bătăliile în rețea"
 
@@ -1730,7 +1730,7 @@ msgstr "Se așteaptă harta"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Se așteaptă serverul. Tot ce puteți face e să anulați sau să vorbiți!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Armă: Foc / Cutie cu bonus: cadere rapidă"
@@ -1764,7 +1764,7 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
-#
+# 
 #: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "Câștigător"
@@ -1817,7 +1817,7 @@ msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
-#
+# 
 #: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "zis"
@@ -1837,7 +1837,7 @@ msgid "couldn't load config"
 msgstr "configurația nu a putut fi încărcată"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "jucător personalizat"
 
@@ -1849,7 +1849,7 @@ msgstr "finalizat"
 msgid "error parsing the config file"
 msgstr "eroare la analiza fișierului de configurare"
 
-#
+# 
 #: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "de la:"
@@ -2261,7 +2261,7 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ msgid "HOME directory (environment variable $HOME) could not be found!"
 #~ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
-#
+# 
 #, fuzzy
 #~ msgid "Head commander:"
 #~ msgstr "Comandant șef: "

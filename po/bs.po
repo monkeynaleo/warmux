@@ -2,13 +2,12 @@
 # translation of bs.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Adnan Hodzic <AbsintheSyringe@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -24,6 +23,7 @@ msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -51,13 +51,13 @@ msgstr "%s <%s> aka %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "%s Tim"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tim - Udaljenost"
@@ -529,26 +529,26 @@ msgstr "Ne mogu otvorit direktorij tima  (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ne mogu otvorit direktorij  (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Broj likova"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Broj likova"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Broj likova"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 msgid "Change weapon countdown"
 msgstr ""
 
@@ -597,7 +597,7 @@ msgstr "Bazuka"
 msgid "Commit Suicide"
 msgstr "Ubij se"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
@@ -648,7 +648,7 @@ msgstr ""
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -700,7 +700,7 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, fuzzy, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -708,7 +708,7 @@ msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, fuzzy, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -741,7 +741,7 @@ msgid "Error: Unable to start the server"
 msgstr "Greška: Nemoguće startati server"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -750,7 +750,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
@@ -764,7 +764,7 @@ msgstr "Bacač Plamena"
 msgid "Football Bomb"
 msgstr "Džumbus bomba"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Pun ekran?"
@@ -832,7 +832,7 @@ msgstr "Vojskovođa:"
 msgid "Help"
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr ""
 
@@ -933,7 +933,7 @@ msgstr "Pa to je poklon!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr ""
 
@@ -961,7 +961,7 @@ msgstr "Učitaj mape:"
 msgid "Load teams:"
 msgstr "Učitaj timove:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Lokalni timovi:"
 
@@ -1038,11 +1038,11 @@ msgstr "Najučikovitiji"
 msgid "Most violent"
 msgstr "Najagresivniji"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Padobran"
@@ -1097,19 +1097,19 @@ msgid "Nobody!"
 msgstr "Niko!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Broj likova"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Broj timova:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 msgid "On a character: select it"
 msgstr ""
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 msgid "On map: select a target"
 msgstr ""
 
@@ -1140,7 +1140,7 @@ msgstr "Igraj"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Igrač"
 
@@ -1165,7 +1165,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr ""
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1181,7 +1181,7 @@ msgstr "Izađi iz Wormux-a"
 msgid "Quit battle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Quit game"
 msgstr "Pokreni igru"
@@ -1244,16 +1244,16 @@ msgstr "Server mod"
 msgid "Shotgun"
 msgstr "Sačma"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Opcije"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 msgid "Show/hide minimap"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1269,7 +1269,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1286,7 +1286,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, trenutno nema igre koja čeka igrače"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1331,7 +1331,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šprica"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čekanje za server, sve što sad možeš uraditi je odustati ili chatati!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -1659,7 +1659,7 @@ msgid "couldn't load config"
 msgstr ""
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr ""
 

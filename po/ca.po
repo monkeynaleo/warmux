@@ -10,7 +10,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux_ca\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2008-09-06 15:07+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
@@ -29,6 +28,7 @@ msgid "! Map %s not found :-("
 msgstr "Mape %s no trobat :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -56,13 +56,13 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Equip %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
@@ -526,27 +526,27 @@ msgstr "No es pot obrir el directori d'equips (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips personalitzats (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Centrar la càmera al personatge"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Canvia el personatge actiu"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Canviar l'angle de tir"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Canviar la categoria d'arma "
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
@@ -593,7 +593,7 @@ msgstr "Bazooka"
 msgid "Commit Suicide"
 msgstr "Suïcidi"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Menú de configuració"
 
@@ -643,7 +643,7 @@ msgstr "Mostra aquest missatge"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Prémer i arrossegar: Mou la càmera"
@@ -696,7 +696,7 @@ msgstr ""
 "Error mentre es creava el directori \"%s\": no es pot guardar el fitxer de "
 "configuració."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -704,7 +704,7 @@ msgstr ""
 "Error mentre s'esborrava el directori \"%s\". No es pot esborrar l'equip "
 "personalitzat."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -734,7 +734,7 @@ msgid "Error: Unable to start the server"
 msgstr "Error: Imposible iniciar servidor"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -747,7 +747,7 @@ msgstr ""
 "està directament connectat a Internet, comprova la configuració de la teva "
 "router: Port TCP %s ha de ser dirigit al teu ordinador."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -760,7 +760,7 @@ msgstr "Llançaflames"
 msgid "Football Bomb"
 msgstr "Pantalla completa?"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Pantalla completa / finestra"
 
@@ -827,7 +827,7 @@ msgstr "Comandant cap:"
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Salt gran"
 
@@ -934,7 +934,7 @@ msgstr "Això és un regal! "
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Salt d'esquena"
 
@@ -962,7 +962,7 @@ msgstr "Carrega els mapas:"
 msgid "Load teams:"
 msgstr "Carrega els equips:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Equips locals:"
 
@@ -1036,12 +1036,12 @@ msgstr "El més inutil"
 msgid "Most violent"
 msgstr "El més violent"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Mou la càmera amb el ratolí o amb les fletxes "
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Moure el personatge"
@@ -1095,20 +1095,20 @@ msgid "Nobody!"
 msgstr "Ningú!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Nombre de jugadors"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Nombre de equips:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "En el personatge: Canvia el jugador actiu "
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "En el mapa: Selecciona un personatge "
@@ -1139,7 +1139,7 @@ msgstr "Jugar"
 msgid "Play several times"
 msgstr "Jugar diverses partides"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Jugador"
 
@@ -1164,7 +1164,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Batalla publica "
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1180,7 +1180,7 @@ msgstr "Sortir de Wormux"
 msgid "Quit battle"
 msgstr "Sortir de la batalla"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Sortir del joc "
 
@@ -1240,17 +1240,17 @@ msgstr "Servidor"
 msgid "Shotgun"
 msgstr "Escopeta"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Veure el menú d'armes "
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Veure/ocultar minimapa "
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Veure/ocultar la informació"
@@ -1267,7 +1267,7 @@ msgstr "Manotada"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Manotada a l'enemic per fer-li donar un petit salt. "
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr ""
 "Angle lent\n"
@@ -1286,7 +1286,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Lo siento, actualmente, ningún juego está esperando a jugadores"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1333,7 +1333,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Xeringa"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Parla en la batalla en xarxa"
@@ -1553,7 +1553,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Esperant al servidor, tot el que pots fer és cancel·lar o xerrar!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
@@ -1665,7 +1665,7 @@ msgid "couldn't load config"
 msgstr "No es pot carregar el fitxer de configuració"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "jugador personalitzat"
 

@@ -1,12 +1,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2007-03-07 15:07+0100\n"
 "Last-Translator: Martin Vojčík <stryco@gmail.com>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
@@ -25,6 +24,7 @@ msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -54,13 +54,13 @@ msgstr "%s <%s> aka %s od %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, fuzzy, c-format
 msgid "%s Team"
 msgstr "Tími"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr ""
@@ -546,26 +546,26 @@ msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Počet postáv"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Počet postáv"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Počet postáv"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 msgid "Change weapon countdown"
 msgstr ""
 
@@ -614,7 +614,7 @@ msgstr "Raketomet"
 msgid "Commit Suicide"
 msgstr "Spáchať samovraždu"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Chyba počas načítavania konfiguračného súboru: %s"
@@ -665,7 +665,7 @@ msgstr ""
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -718,14 +718,14 @@ msgid ""
 msgstr ""
 "Chyba počas vytvárania priečinka  \"%s\": nedá sa uložiť konfiguračný súbor. "
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, fuzzy, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Chyba počas vytvárania priečinka  \"%s\": nedá sa uložiť konfiguračný súbor. "
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, fuzzy, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -755,7 +755,7 @@ msgid "Error: Unable to start the server"
 msgstr "Chyba: Nedá sa spustiť server"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -764,7 +764,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
@@ -778,7 +778,7 @@ msgstr ""
 msgid "Football Bomb"
 msgstr "Riot Bomba"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Celá obrazovka?"
@@ -850,7 +850,7 @@ msgstr "Hlavný veliteľ"
 msgid "Help"
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr ""
 
@@ -938,7 +938,7 @@ msgstr "To je dar!"
 msgid "Jetpack"
 msgstr "Vznášadlo"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr ""
 
@@ -966,7 +966,7 @@ msgstr "Načítavam mapy:"
 msgid "Load teams:"
 msgstr "Načítavam tímy"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Miestne tímy:"
 
@@ -1044,11 +1044,11 @@ msgstr "Najneužitočnejší "
 msgid "Most violent"
 msgstr "Najnásilnejší "
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Padák"
@@ -1103,19 +1103,19 @@ msgid "Nobody!"
 msgstr "Nikto!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Počet postáv"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Počet tímov:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 msgid "On a character: select it"
 msgstr ""
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 msgid "On map: select a target"
 msgstr ""
 
@@ -1146,7 +1146,7 @@ msgstr "Hraj"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Hráč"
 
@@ -1171,7 +1171,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr ""
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1187,7 +1187,7 @@ msgstr "Ukončiť Wormuxa"
 msgid "Quit battle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Quit game"
 msgstr "Spusti hru"
@@ -1251,16 +1251,16 @@ msgstr "Adresa servera:"
 msgid "Shotgun"
 msgstr "Brokovnica"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Nastavenie"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 msgid "Show/hide minimap"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1276,7 +1276,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1293,7 +1293,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1338,7 +1338,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Syringe"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr ""
 
@@ -1547,7 +1547,7 @@ msgstr "Čakám na mapu"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -1653,7 +1653,7 @@ msgid "couldn't load config"
 msgstr ""
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr ""
 
