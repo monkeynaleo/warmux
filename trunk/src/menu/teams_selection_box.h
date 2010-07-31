@@ -37,23 +37,32 @@ const uint MAX_NB_TEAMS=4;
 
 class TeamsSelectionBox : public HBox
 {
-private:
-  TeamListBox* list_box;
-
-  void SetNbTeams(uint nb_teams);
-  void PrevTeam(int i);
-  void NextTeam(int i);
-
-  void Init(bool network);
 protected:
+  TeamListBox* list_box;
   SpinButtonWithPicture *local_teams_nb;
   std::vector<TeamBox*> teams_selections;
 
 public:
   TeamsSelectionBox(const Point2i &size, bool network, bool w_border);
 
-  virtual void ValidTeamsSelection();
   virtual void Draw(const Point2i &mousePosition);
+
+  virtual void ValidTeamsSelection() = 0;
+  virtual Widget* Click(const Point2i &mousePosition, uint button) = 0;
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button) = 0;
+};
+
+class LocalTeamsSelectionBox : public TeamsSelectionBox
+{
+private:
+  void PrevTeam(int i);
+  void NextTeam(int i);
+  void SetNbTeams(uint nb_teams);
+
+public:
+  LocalTeamsSelectionBox(const Point2i &size, bool border);
+
+  virtual void ValidTeamsSelection();
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
