@@ -510,21 +510,23 @@ static void Action_Game_UpdateTeam (Action *a)
   uint player_id = a->PopInt();
   std::string old_team_id = a->PopString();
 
-  ConfigTeam the_team;
+  ConfigTeam team_cfg;
 
-  the_team.id = a->PopString();
-  the_team.player_name = a->PopString();
-  the_team.nb_characters = uint(a->PopInt());
-  the_team.ai = a->PopString();
+  team_cfg.id = a->PopString();
+  team_cfg.player_name = a->PopString();
+  team_cfg.nb_characters = uint(a->PopInt());
+  team_cfg.ai = a->PopString();
 
-  GetTeamsList().UpdateTeam(old_team_id, the_team);
+  Team* the_team = GetTeamsList().UpdateTeam(old_team_id, team_cfg);
+  ASSERT(the_team != NULL);
+  the_team->SetCustomCharactersNamesFromAction(a);
 
   if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, the_team.id);
+    Network::GetInstance()->network_menu->UpdateTeamCallback(old_team_id, team_cfg.id);
 
   Player* player = _Action_GetPlayer(a, player_id);
   if (player) {
-    player->UpdateTeam(old_team_id, the_team);
+    player->UpdateTeam(old_team_id, team_cfg);
   }
 }
 

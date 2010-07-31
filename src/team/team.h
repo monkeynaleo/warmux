@@ -185,6 +185,9 @@ public:
   void SetCustomCharactersNames(const std::vector<std::string>& custom_names);
   void ClearCustomCharactersNames();
 
+  void SetCustomCharactersNamesFromAction(Action *a);
+  void PushCustomCharactersNamesIntoAction(Action *a) const;
+
   void Abandon() { abandoned = true; }
   bool IsAbandoned() { return abandoned; }
 };

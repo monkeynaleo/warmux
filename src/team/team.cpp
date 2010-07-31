@@ -18,31 +18,32 @@
  ******************************************************************************
  * A team
  *****************************************************************************/
+#include <sstream>
+#include <iostream>
+
+#include <WORMUX_action.h>
+#include <WORMUX_debug.h>
+#include <WORMUX_file_tools.h>
+#include <WORMUX_point.h>
 
 #include "ai/ai_stupid_player.h"
-#include "team/team.h"
-#include "team/teams_list.h"
 #include "character/character.h"
 #include "character/body_list.h"
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "graphic/sprite.h"
-#include "interface/cursor.h"
-#include <WORMUX_base.h>
 #include "include/constant.h"
+#include "interface/cursor.h"
 #include "map/camera.h"
 #include "map/map.h"
 #include "network/network.h"
 #include "sound/jukebox.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_file_tools.h>
-#include <WORMUX_point.h>
+#include "team/team.h"
+#include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
-#include <sstream>
-#include <iostream>
 
 Team* Team::LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error)
 {
@@ -171,7 +172,7 @@ bool Team::LoadCharacters()
 
   // handle custom names for characters
   std::vector<std::string> *characters_name = &default_characters_names;
-  if (IsLocal() && !Network::IsConnected() && custom_characters_names.size() >= nb_characters) {
+  if (custom_characters_names.size() >= nb_characters) {
     characters_name = &custom_characters_names;
   }
 
@@ -495,6 +496,30 @@ void Team::SetDefaultPlayingConfig()
 void Team::SetCustomCharactersNames(const std::vector<std::string> &custom_names)
 {
   custom_characters_names = custom_names;
+}
+
+void Team::SetCustomCharactersNamesFromAction(Action *a)
+{
+  uint nb_custom_names = a->PopInt();
+  if (nb_custom_names == 0)
+    return;
+
+  std::vector<std::string> custom_names;
+  std::string name;
+  for (uint i = 0; i < nb_custom_names; i++) {
+    name = a->PopString();
+    custom_names.push_back(name);
+  }
+  SetCustomCharactersNames(custom_names);
+}
+
+void Team::PushCustomCharactersNamesIntoAction(Action *a) const
+{
+  uint nb_custom_names = custom_characters_names.size();
+  a->Push(nb_custom_names);
+  for (uint i = 0; i < nb_custom_names; i++) {
+    a->Push(custom_characters_names[i]);
+  }
 }
 
 void Team::ClearCustomCharactersNames()
