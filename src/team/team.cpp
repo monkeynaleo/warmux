@@ -188,7 +188,7 @@ bool Team::LoadCharacters()
 
   // handle custom names for characters
   std::vector<std::string> characters_name;
-  if ((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected()) {
+  if (attached_custom_team && IsLocal() && !Network::IsConnected()) {
     characters_name = attached_custom_team->GetCharactersNameList();
   } else {
     characters_name = default_characters_name;
