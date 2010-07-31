@@ -124,6 +124,33 @@ void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
   MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 }
 
+bool Team::AddPlayingCharacters(const std::vector<std::string> bodies,
+				const std::vector<std::string> names)
+{
+  // Check that we have enough information
+  if (names.size() < nb_characters
+      || bodies.size() < nb_characters)
+    return false;
+
+  // Time to effectively create the characters
+  for (uint i = 0; i < nb_characters; i++) {
+    Body *body = BodyList::GetRef().GetBody(bodies[i]);
+    if (!body) {
+      std::cerr << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+			  bodies[i].c_str(),
+			  m_name.c_str())
+		<< std::endl;
+      return false;
+    }
+
+    // Create a new character and add him to the team
+    AddOnePlayingCharacter(names[i], body);
+  }
+  active_character = characters.begin();
+
+  return (characters.size() == nb_characters);
+}
+
 bool Team::LoadCharacters()
 {
   ASSERT(characters.size() == 0);
@@ -167,28 +194,7 @@ bool Team::LoadCharacters()
     characters_name = default_characters_name;
   }
 
-  // Check that we have enough information
-  if (characters_name.size() < nb_characters
-      || bodies_name.size() < nb_characters)
-    return false;
-
-  // Time to effectively create the characters
-  for (uint i = 0; i < nb_characters; i++) {
-    Body *body = BodyList::GetRef().GetBody(bodies_name[i]);
-    if (!body) {
-      std::cerr << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-			  bodies_name[i].c_str(),
-			  m_name.c_str())
-		<< std::endl;
-      return false;
-    }
-
-    // Create a new character and add him to the team
-    AddOnePlayingCharacter(characters_name[i], body);
-  }
-  active_character = characters.begin();
-
-  return (characters.size() == nb_characters);
+  return AddPlayingCharacters(bodies_name, characters_name);
 }
 
 void Team::InitEnergy (uint max)
