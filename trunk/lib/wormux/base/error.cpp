@@ -30,7 +30,7 @@
 #  include <android/log.h>
 #endif
 
-#if !defined(WIN32) || !defined(__MINGW32__)
+#ifndef _MSC_VER
 #  include <sys/types.h>
 #  include <unistd.h>
 #endif
