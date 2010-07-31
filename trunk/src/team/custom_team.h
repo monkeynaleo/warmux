@@ -39,7 +39,9 @@ private:
   bool SaveXml();
 
 protected:
-  CustomTeam(const std::vector<std::string>& list, const std::string& name);
+  CustomTeam(const std::string& team_name,
+	     const std::string& directory,
+	     const std::vector<std::string>& list);
 
 public:
   static const uint MAX_CHARACTERS = 10;
@@ -51,7 +53,6 @@ public:
   ~CustomTeam();
   std::string GetName();
   std::vector<std::string> GetCharactersNameList();
-  void NewTeam();
   bool Save();
   void Delete();
 

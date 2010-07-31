@@ -138,12 +138,13 @@ bool Team::LoadCharacters()
       return false;
     }
 
-    // Create a new character and add him to the team
-    Character new_character(*this, character_name, body);
     if((attached_custom_team != NULL) && (IsLocalHuman()) && !Network::IsConnected())
     {
-      new_character.SetCustomName(attached_custom_team->GetCharactersNameList().at(characters.size()));
+      character_name = attached_custom_team->GetCharactersNameList().at(characters.size());
     }
+
+    // Create a new character and add him to the team
+    Character new_character(*this, character_name, body);
     characters.push_back(new_character);
     active_character = characters.begin(); // we need active_character to be initialized here !!
     if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))

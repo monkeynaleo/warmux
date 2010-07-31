@@ -545,7 +545,6 @@ void OptionMenu::AddTeam()
     return;
 
   CustomTeam *new_team = new CustomTeam(tbox_team_name->GetText());
-  new_team->NewTeam();
 
   selected_team = new_team;
   SaveTeam();
