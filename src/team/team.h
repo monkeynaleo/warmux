@@ -36,7 +36,6 @@ const std::string DEFAULT_AI_NAME = "default";
 
 class Body;
 class Character;
-class CustomTeam;
 class WeaponsList;
 class XmlReader;
 class Profile;
@@ -61,11 +60,11 @@ private:
 
   // parameters reseted by SetDefaultPlayingConfig
   std::string m_player_name;
+  std::vector<std::string> custom_characters_names;
   uint nb_characters;
   bool remote;
   AIPlayer * ai;
   std::string ai_name;
-  CustomTeam *attached_custom_team;
 
   // parameters changed just before game or in game
   std::list<Character> characters;
@@ -183,8 +182,9 @@ public:
   // reset characters number, type_of_player and player name
   void SetDefaultPlayingConfig();
 
-  // Custom team
-  void AttachCustomTeam(CustomTeam*);
+  void SetCustomCharactersNames(const std::vector<std::string>& custom_names);
+  void ClearCustomCharactersNames();
+
   void Abandon() { abandoned = true; }
   bool IsAbandoned() { return abandoned; }
 };
