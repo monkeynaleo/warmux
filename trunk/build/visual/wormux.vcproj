@@ -52,8 +52,8 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
-				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				FloatingPointExceptions="true"
@@ -75,7 +75,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib libxml2.lib fribidid.lib libpng.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libxml2.lib fribidid.lib libpng.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -148,8 +148,8 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
@@ -174,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib libpng.lib libxml2.lib fribidi.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libpng.lib libxml2.lib fribidi.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib;libcmt.lib"
@@ -225,6 +225,22 @@
 			<File
 				RelativePath="..\..\src\wormux.rc"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+						AdditionalIncludeDirectories=""
+					/>
+				</FileConfiguration>
 			</File>
 			<Filter
 				Name="ai"
@@ -542,6 +558,10 @@
 				Name="gui"
 				>
 				<File
+					RelativePath="..\..\src\gui\abstract_spin_button.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\gui\abstract_spin_button.h"
 					>
 				</File>
@@ -595,6 +615,22 @@
 				</File>
 				<File
 					RelativePath="..\..\src\gui\energy_bar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\grid_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\grid_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\horizontal_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\horizontal_box.h"
 					>
 				</File>
 				<File
@@ -711,6 +747,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\gui\text_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\vertical_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\vertical_box.h"
 					>
 				</File>
 				<File
@@ -1071,14 +1115,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\menu\results_menu.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\menu\skin_menu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\menu\skin_menu.h"
 					>
 				</File>
 				<File
@@ -2094,11 +2130,19 @@
 				Name="include"
 				>
 				<File
+					RelativePath="..\..\lib\wormux\include\config_visual.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\lib\wormux\include\WORMUX_action.h"
 					>
 				</File>
 				<File
 					RelativePath="..\..\lib\wormux\include\WORMUX_action_handler.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\lib\wormux\include\WORMUX_config.h"
 					>
 				</File>
 				<File
@@ -2340,6 +2384,38 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Double"
+			>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixasintab.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixatantab.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixed_class.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixed_func.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixed_func.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\fixsintab.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\lib\fixedpoint\stdint_fallback.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
