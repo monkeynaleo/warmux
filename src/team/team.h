@@ -71,6 +71,8 @@ private:
   WeaponsList * weapons_list;
 
   void AddOnePlayingCharacter(const std::string& character_name, Body *body);
+  bool AddPlayingCharacters(const std::vector<std::string> bodies,
+			    const std::vector<std::string> characters);
 
 protected:
   Team(XmlReader& doc, Profile* res,
