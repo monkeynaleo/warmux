@@ -114,39 +114,6 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 
   // Load Teams' list
   GetTeamsList().full_list.sort(compareTeams);
-
-  // initialize teams
-  if (network) {
-    // for network game
-    GetTeamsList().Clear();
-
-    // No selected team(s) by default
-    for (uint i=0; i<teams_selections.size(); i++) {
-      teams_selections.at(i)->ClearTeam();
-    }
-
-  } else {
-    // for local game
-
-    GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
-
-    TeamsList::iterator it  = GetTeamsList().playing_list.begin(),
-                        end = GetTeamsList().playing_list.end();
-
-    uint j=0;
-    for (; it != end && j<teams_selections.size(); ++it, j++) {
-      teams_selections.at(j)->SetTeam((**it), true);
-    }
-
-    // we need at least 2 teams
-    if (j < 2) {
-      SetNbTeams(2);
-      local_teams_nb->SetValue(2);
-      teams_selections.at(1)->SetAIName(DEFAULT_AI_NAME);
-    } else {
-      local_teams_nb->SetValue(j);
-    }
-  }
 }
 
 void TeamsSelectionBox::Draw(const Point2i& mousePosition)
@@ -155,7 +122,32 @@ void TeamsSelectionBox::Draw(const Point2i& mousePosition)
     list_box->Draw(mousePosition);
 }
 
-Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
+// =============================================================================
+
+LocalTeamsSelectionBox::LocalTeamsSelectionBox(const Point2i &size, bool border) :
+  TeamsSelectionBox(size, false, border)
+{
+  GetTeamsList().InitList(Config::GetInstance()->AccessTeamList());
+
+  TeamsList::iterator it  = GetTeamsList().playing_list.begin(),
+    end = GetTeamsList().playing_list.end();
+
+  uint j=0;
+  for (; it != end && j<teams_selections.size(); ++it, j++) {
+    teams_selections.at(j)->SetTeam((**it), true);
+  }
+
+  // we need at least 2 teams
+  if (j < 2) {
+    SetNbTeams(2);
+    local_teams_nb->SetValue(2);
+    teams_selections.at(1)->SetAIName(DEFAULT_AI_NAME);
+  } else {
+    local_teams_nb->SetValue(j);
+  }
+}
+
+Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition))
     return NULL;
@@ -200,12 +192,12 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+Widget* LocalTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
 {
   return (list_box) ? list_box->Click(mousePosition, button) : NULL;
 }
 
-void TeamsSelectionBox::PrevTeam(int i)
+void LocalTeamsSelectionBox::PrevTeam(int i)
 {
   if (!teams_selections.at(i)->GetTeam())
     return;
@@ -242,7 +234,7 @@ void TeamsSelectionBox::PrevTeam(int i)
   } while (index != previous_index && !stop);
 }
 
-void TeamsSelectionBox::NextTeam(int i)
+void LocalTeamsSelectionBox::NextTeam(int i)
 {
   if (!teams_selections.at(i)->GetTeam())
     return;
@@ -280,7 +272,7 @@ void TeamsSelectionBox::NextTeam(int i)
   } while (index != previous_index && to_continue);
 }
 
-void TeamsSelectionBox::SetNbTeams(uint nb_teams)
+void LocalTeamsSelectionBox::SetNbTeams(uint nb_teams)
 {
   // we hide the useless teams selector
   for (uint i=nb_teams; i<teams_selections.size(); i++) {
@@ -299,7 +291,7 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
     list_box->SetNbTeams(nb_teams);
 }
 
-void TeamsSelectionBox::ValidTeamsSelection()
+void LocalTeamsSelectionBox::ValidTeamsSelection()
 {
   uint nb_teams=0;
   for (uint i=0; i < teams_selections.size(); i++) {

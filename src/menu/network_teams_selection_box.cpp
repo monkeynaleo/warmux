@@ -38,6 +38,13 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Point2i &_size, bool w_
   TeamsSelectionBox(_size, true, w_border)
 {
   local_teams_nb->SetMaxValue(GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer());
+
+  GetTeamsList().Clear();
+
+  // No selected team(s) by default
+  for (uint i=0; i<teams_selections.size(); i++) {
+    teams_selections.at(i)->ClearTeam();
+  }
 }
 
 Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
@@ -96,6 +103,8 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
 
 Widget* NetworkTeamsSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
 {
+  // TODO ?
+  //return (list_box) ? list_box->Click(mousePosition, button) : NULL;
   return NULL;
 }
 

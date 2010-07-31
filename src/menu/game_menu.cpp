@@ -68,7 +68,7 @@ GameMenu::GameMenu() :
   // ##  TEAM AND MAP SELECTION
   // ################################################
 
-  team_box = new TeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), false, multitabs);
+  team_box = new LocalTeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), multitabs);
 
   map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs);
 
