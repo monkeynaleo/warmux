@@ -31,68 +31,27 @@ VersionInfo::VersionInfo():
 {}
 
 ConnectionStats::ConnectionStats(const std::string & fn)
-  : fd(NULL)
+  : LogFile(fn)
 {
-  Reset();
-  filename = fn;
 }
 
 ConnectionStats::~ConnectionStats()
 {
-  Write();
-  CloseFile();
+  LogFile::CloseFile();
 }
 
-void ConnectionStats::OpenFile()
+void ConnectionStats::AtOpen()
 {
-  std::string full_name;
-  config.Get("my_hostname", full_name);
-
-  struct tm* t;
-  time_t now = time(NULL);
-  t = localtime(&now);
-  char time_str[1024];
-  snprintf(time_str, 1024, "%4i-%02i-%02i_",
-           1900 + t->tm_year, 1 + t->tm_mon,t->tm_mday);
-
-  full_name = std::string(time_str) + full_name + '_' + filename;
-
-  if (fd) {
-    DPRINT(INFO, "Closing previous logfile");
-    fclose(fd);
-  }
-
-  DPRINT(INFO, "Opening logfile : %s",full_name.c_str());
-  fd = fopen(full_name.c_str(), "a+");
-
-  if (fd == NULL)
-    PRINT_FATAL_ERROR;
-
   fprintf(fd, "# YYYY-MM-DD hh-mm-ss "
 	  "fake_servers, servers, clients, clients_w_empty_list "
 	  "nb_version version-1 fake_servers, servers, clients, clients_w_empty_list "
 	  "version-2 fake_servers, servers, clients, clients_w_empty_list "
 	  "... version-N fake_servers, servers, clients, clients_w_empty_list\n");
-  fflush(fd);
 }
 
-void ConnectionStats::CloseFile()
-{
-  if (fd)
-    fclose(fd);
-  fd = NULL;
-}
-
-void ConnectionStats::Reset()
-{
-  version_stats.clear();
-}
-
-void ConnectionStats::Rotate()
+void ConnectionStats::AtClose()
 {
   Write();
-  CloseFile();
-  OpenFile();
 }
 
 void ConnectionStats::Write()
@@ -139,8 +98,7 @@ void ConnectionStats::Write()
   }
   fprintf(fd, "\n");
 
-  fflush(fd);
-  Reset();
+  version_stats.clear();
 }
 
 void ConnectionStats::NewServer(const std::string& version)
