@@ -1,12 +1,11 @@
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Victor Stinner <victor.stinner@haypocalc.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -21,6 +20,7 @@ msgid "! Map %s not found :-("
 msgstr "Ny gavas mappa %s :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f imaj/s"
 
@@ -52,13 +52,13 @@ msgstr "%s <%s> leshenwys %s (%s)"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Para %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
@@ -623,27 +623,27 @@ msgstr "Ny yllir ygeri arayel an paraow (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow personal (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Kresenni kamera war berson"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Chanjya person a-lemmyn"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Chanjya elin medra"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Chanjya ehen arv"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
@@ -689,7 +689,7 @@ msgstr "Omvrewzooka"
 msgid "Commit Suicide"
 msgstr "Omladha"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Dewisel restrans"
 
@@ -738,7 +738,7 @@ msgstr "A dhisplet an messach ma"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Halya&gasagodha: Movya an kamera"
@@ -789,14 +789,14 @@ msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Gwall pan wrug an arayel \"%s\": ny allas gwitha restransow an gwari."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Gwall pan dhileas an arayel \"%s\". Ny allas dilea an para personelhes."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -824,7 +824,7 @@ msgid "Error: Unable to start the server"
 msgstr "Gwall: Ny allas lonchya an servyer"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -837,7 +837,7 @@ msgstr ""
 "osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
 "dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
@@ -850,7 +850,7 @@ msgstr "Stifeller-Tan"
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Skrin leun / fenester"
 
@@ -917,7 +917,7 @@ msgstr "Penn an para: "
 msgid "Help"
 msgstr "Gweres"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Lamma yn uhel"
 
@@ -1024,7 +1024,7 @@ msgstr "Ro ywa!"
 msgid "Jetpack"
 msgstr "Stifelback"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Killamma"
 
@@ -1052,7 +1052,7 @@ msgstr "Karga mappaow:"
 msgid "Load teams:"
 msgstr "Karga paraow:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Paraow leel:"
 
@@ -1125,12 +1125,12 @@ msgstr "Moyha heb les"
 msgid "Most violent"
 msgstr "Moyha freudhek"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Movya an kamera gans logosen po sethow"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Movya person"
@@ -1183,20 +1183,20 @@ msgid "Nobody!"
 msgstr "Den vyth!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Niver a bersons"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Niver a baraow:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "War neb person: Rag chanjya an onan a-lemmyn"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "War an mappa: Dewis kosten"
@@ -1227,7 +1227,7 @@ msgstr "Gwari"
 msgid "Play several times"
 msgstr "Gwari lieskweyth"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Gwarier"
 
@@ -1252,7 +1252,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Kasow poblek"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1268,7 +1268,7 @@ msgstr "Kwitya Wormux"
 msgid "Quit battle"
 msgstr "Kwitya an gas"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Kwitya an gwari"
 
@@ -1328,17 +1328,17 @@ msgstr "Modh servyer"
 msgid "Shotgun"
 msgstr "Helghwon"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Diskwedhes dewisel arvow"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Displegya/kudha korrvappa"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Displegya/kudha ynterfas"
@@ -1355,7 +1355,7 @@ msgstr "Beltynk"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Ri beltynk dhe'n eskar may hwra'va lamma tamm."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Lehe elin medra ha kamm kerdhes"
 
@@ -1372,7 +1372,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1419,7 +1419,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Skitel"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Keskewsel yn kas rosweyth"
@@ -1638,7 +1638,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
@@ -1748,7 +1748,7 @@ msgid "couldn't load config"
 msgstr "Ny allas karga an dewisyansow"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "gwarier personelhes"
 

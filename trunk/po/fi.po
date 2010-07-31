@@ -1,14 +1,13 @@
 # translation of fi.po to fi_FI
 # Copyright (C) YEAR Wormux Development Team
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Bastian Salmela <bastian.salmela@hel.fi>, 2006.
 # Bastian Salmela <basse@kulma.org>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-01-27 06:07+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -27,6 +26,7 @@ msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -54,13 +54,13 @@ msgstr "%s <%s> aka %s, kotipaikka: %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> maasta %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Joukkue %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
@@ -541,27 +541,27 @@ msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Keskitä kamera hahmoon"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Vaihda aktiivista hahmoa"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Muuta tähtäyskulmaa"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Vaihda aseluokkaa"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
@@ -607,7 +607,7 @@ msgstr "Rypälesinko"
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
@@ -656,7 +656,7 @@ msgstr "Näyttää tämän viestin"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Älä unohda tarkistaa oikeellisuutta valittuasi tiimisi!"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Vedä&pudota: Siirrä kameraa"
@@ -708,7 +708,7 @@ msgid ""
 msgstr ""
 "Virhe luotaessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -716,7 +716,7 @@ msgstr ""
 "Virhe poistettaessa kansiota \"%s\". Ei kyetty poistamaan henkilökohtaista "
 "tiimiä."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -743,7 +743,7 @@ msgid "Error: Unable to start the server"
 msgstr "Virhe: Palvelimen käynnistäminen epäonnistui"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -756,7 +756,7 @@ msgstr ""
 "yhdistetty suoraan Internetiin, tarkista reitittimesi asetukset: TCP-portin %"
 "s täytyy olla ohjattu koneellesi."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
@@ -769,7 +769,7 @@ msgstr "Liekinheitin"
 msgid "Football Bomb"
 msgstr "Jalkapallopommi"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Kokoruutu / ikkuna"
 
@@ -835,7 +835,7 @@ msgstr "Ylikomentaja: "
 msgid "Help"
 msgstr "Ohje"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Korkea hyppy"
 
@@ -934,7 +934,7 @@ msgstr "Taivaalta sataa lahjoja!"
 msgid "Jetpack"
 msgstr "Lentoreppu"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Hyppää taaksepäin"
 
@@ -962,7 +962,7 @@ msgstr "Lataa kartat:"
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Paikalliset joukkueet:"
 
@@ -1035,12 +1035,12 @@ msgstr "Hyödyttömin"
 msgid "Most violent"
 msgstr "Väkivaltaisin"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Siirrä kameraa hiirellä tai nuolilla"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Siirrä hahmoa"
@@ -1092,20 +1092,20 @@ msgid "Nobody!"
 msgstr "Ei kukaan!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Pelaajien määrä"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Joukkueita"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Hahmolla: Vaihda aktiivista"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Kartalla: Valitse kohde"
@@ -1136,7 +1136,7 @@ msgstr "Pelaa"
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Pelaaja"
 
@@ -1161,7 +1161,7 @@ msgstr "Portti:"
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "Lopeta peli nopeasti Ctrl-näppäimellä"
 
@@ -1177,7 +1177,7 @@ msgstr "Lopeta Wormux"
 msgid "Quit battle"
 msgstr "Lopeta taistelu"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Lopeta peli"
 
@@ -1235,17 +1235,17 @@ msgstr "Palvelimen tila"
 msgid "Shotgun"
 msgstr "Haulikko"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Näytä asevalikko"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Näytä/piilota peinoiskartta"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
@@ -1261,7 +1261,7 @@ msgstr "Läpsäytä"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Läpsäytä vihollista hypäyttääksesi häntä hieman."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Pienempi tähtäyskulma ja kävelyaskeleet"
 
@@ -1278,7 +1278,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1324,7 +1324,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Ruisku"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "Puhu verkkotaisteluissa"
 
@@ -1528,7 +1528,7 @@ msgstr "Odotetaan etäpelaajia"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
@@ -1632,7 +1632,7 @@ msgid "couldn't load config"
 msgstr "ei voitu lukea asetuksia"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "henkilökohtainen pelaaja"
 

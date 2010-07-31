@@ -1,13 +1,12 @@
 # translation of et.po to Estonian
 # This file is distributed under the same license as the Wormux package.
 # Copyright (C) Wormux Development Team
-#
+# 
 # Guido Tabbernuk <guido.tabbernuk@mail.ee>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2008-11-23 21:59+0300\n"
 "Last-Translator: Guido Tabbernuk <guido.tabbernuk@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -23,6 +22,7 @@ msgid "! Map %s not found :-("
 msgstr "! Ei leia mänguvälja %s :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f kaadrit/sek"
 
@@ -50,13 +50,13 @@ msgstr "%s <%s> elik %s asukohast %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> asukohast %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Meeskond %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
@@ -530,27 +530,27 @@ msgstr "Ei suuda avada meeskondade kausta (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei suuda avada kohandet meeskondade kausta (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Fokuseeri kaamera tegelaskujule"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Vaheta aktiivset tegelaskuju"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Muuda sihtimisnurka"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Muuda relva kehtivusaega"
@@ -597,7 +597,7 @@ msgstr "Granaadiheitja"
 msgid "Commit Suicide"
 msgstr "Enesetapp"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Seadistusmenüü"
 
@@ -646,7 +646,7 @@ msgstr "Näita seda sõnumit"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Klõpsa ja vea: Liiguta kaamerat"
@@ -697,14 +697,14 @@ msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Viga kausta \"%s\" loomisel. Ei suuda salvestada seadistusi."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Viga kataloogi \"%s\" kustutamisel. Ei suuda kustutada kohandet meeskonda."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Viga faili \"%s\" kustutamisel. Ei suuda kustutada kohandet meeskonda."
@@ -730,7 +730,7 @@ msgid "Error: Unable to start the server"
 msgstr "Viga: Ei suuda serverit käivitada"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -743,7 +743,7 @@ msgstr ""
 "väljastpoolt. Kui sa pole ühendatud interneti otse, siis vaata üle ka oma "
 "ruuteri seadistused: TCP port %s peab olema tunneldatud sinu arvutisse."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Viga: Ei suuda leida keha \"%s\" meeskonna \"%s\" jaoks."
@@ -756,7 +756,7 @@ msgstr "Leegiheitja"
 msgid "Football Bomb"
 msgstr "Jalgpomm"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Täisekraan/aken"
 
@@ -823,7 +823,7 @@ msgstr "Pealik:"
 msgid "Help"
 msgstr "Appi"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Kõrgushüpe"
 
@@ -928,7 +928,7 @@ msgstr "Teile on pakk!"
 msgid "Jetpack"
 msgstr "Reaktiivranits"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Tagasihüpe"
 
@@ -956,7 +956,7 @@ msgstr "Laadi mänguvälju:"
 msgid "Load teams:"
 msgstr "Laadi meeskondi:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Kohalikud meeskonnad:"
 
@@ -1029,12 +1029,12 @@ msgstr "Kasutuim"
 msgid "Most violent"
 msgstr "Vägivaldseim"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Kaamerat liiguta hiire või nooleklahvidega"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Liiguta tegelaskuju"
@@ -1087,20 +1087,20 @@ msgid "Nobody!"
 msgstr "Eikedagi!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Tegelaskujusid:"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Meeskondade arv"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Tegelaskuju peal: vahetab aktiivset"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Mänguväljal: vali sobiv"
@@ -1131,7 +1131,7 @@ msgstr "Mäng"
 msgid "Play several times"
 msgstr "Mängu korduvalt"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Mängija"
 
@@ -1156,7 +1156,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Jäta lahing sinnapaika"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1172,7 +1172,7 @@ msgstr "Välju Wormuxist"
 msgid "Quit battle"
 msgstr "Välju lahingust"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Välju mängust"
 
@@ -1232,17 +1232,17 @@ msgstr "Serverire¸iim"
 msgid "Shotgun"
 msgstr "Haavlipüss"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Näita relvamenüüd"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Näita/peida navigaator"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Näita/peida liides"
@@ -1259,7 +1259,7 @@ msgstr "Litakas"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Viruta vastasele, et ta natuke eemale lendaks."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Väiksem sihtimisnurk ja liikumissamm"
 
@@ -1276,7 +1276,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1322,7 +1322,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Süstal"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Lobise võrgulahingus"
@@ -1536,7 +1536,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ootan serverit. Sa saad kas katkestada või lobiseda!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Relv: Tule/hüve laegas: Kukub kähku"
@@ -1646,7 +1646,7 @@ msgid "couldn't load config"
 msgstr "ei suutnud laadida seadistusi"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "kohandet mängija"
 

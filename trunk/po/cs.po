@@ -1,14 +1,13 @@
 # translation of cs.po to Čeština
 # Copyright (C) YEAR Wormux Development Team
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Marek Stopka <marekstopka@gmail.com>, 2008.
 # Vojtěch Gondžala <vojtech.gondzala@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2009-09-09 14:39+0100\n"
 "Last-Translator: Vojtěch Horký <vojta.horky@seznam.cz>\n"
 "Language-Team: Čeština\n"
@@ -24,6 +23,7 @@ msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebyla nalezena :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -53,13 +53,13 @@ msgstr "%s <%s> jako %s z %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "%s Tým"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
@@ -573,27 +573,27 @@ msgstr "Nepodařilo se otevřít adresář týmů (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Vystředit kameru na hráče"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Změnit aktivního hráče"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Změnit náměr"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Změnit odpočet zbraní"
@@ -640,7 +640,7 @@ msgstr "Cluzuka"
 msgid "Commit Suicide"
 msgstr "Spáchat sebevraždu"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Menu nastavení"
 
@@ -689,7 +689,7 @@ msgstr "Zobrazí tuto zprávu"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Táhni&pusť: posun kamery"
@@ -741,14 +741,14 @@ msgid ""
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, fuzzy, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, fuzzy, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -778,7 +778,7 @@ msgid "Error: Unable to start the server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -791,7 +791,7 @@ msgstr ""
 "Internetu, zkontrolujte nastavení routeru: TCP port %s musí být přesměrován "
 "na váš počítač."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
@@ -804,7 +804,7 @@ msgstr "Plamenomet"
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Celá obrazovka?"
@@ -873,7 +873,7 @@ msgstr "Velitel: "
 msgid "Help"
 msgstr "Nápověda"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Vysoký skok"
 
@@ -978,7 +978,7 @@ msgstr "To je dáreček!"
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Skočit dozadu"
 
@@ -1007,7 +1007,7 @@ msgstr "Nahrát mapy:"
 msgid "Load teams:"
 msgstr "Nahrát týmy:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Místní týmy:"
 
@@ -1082,12 +1082,12 @@ msgstr "Nejzbytečnější"
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Posuň kameru myší nebo šipkami"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Padák"
@@ -1141,20 +1141,20 @@ msgid "Nobody!"
 msgstr "Nikdo!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Počet hráčů"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Počet týmů:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Na hráči: změní aktivního"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Na mapě: vybrat cíl"
@@ -1185,7 +1185,7 @@ msgstr "Hrát"
 msgid "Play several times"
 msgstr "Hrát několikrát"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Hráč"
 
@@ -1210,7 +1210,7 @@ msgstr "Port:"
 msgid "Public battles"
 msgstr "Veřejné hry"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1226,7 +1226,7 @@ msgstr "Ukončit Wormux"
 msgid "Quit battle"
 msgstr "Ukončit hru"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Quit game"
 msgstr "Spustit hru"
@@ -1288,17 +1288,17 @@ msgstr "Serverový režim"
 msgid "Shotgun"
 msgstr "Brokovnice"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Volby menu"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Zobrazit/skrýt minimapu"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Zobrazit/skrýt rozhraní"
@@ -1315,7 +1315,7 @@ msgstr "Pohlavek"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Dejte nepříteli pohlavek až poskočí."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Menší posun náměru a menší krok"
 
@@ -1332,7 +1332,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1379,7 +1379,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Stříkačka"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Zpět do hry"
@@ -1596,7 +1596,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Zbraň: palba / Krabice s překvapením: spadne rychleji"
@@ -1707,7 +1707,7 @@ msgid "couldn't load config"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr ""
 

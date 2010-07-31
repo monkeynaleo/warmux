@@ -1,13 +1,12 @@
 # translation of wormux-tr.po to Turkish
 # Copyright (C) 2006 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-#
+# 
 # Furkan Duman <coderlord@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -26,6 +25,7 @@ msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -51,13 +51,13 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, fuzzy, c-format
 msgid "%s Team"
 msgstr "Takımlar"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr ""
@@ -484,24 +484,24 @@ msgstr "Takım dizini açılamadı (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 msgid "Center camera on character"
 msgstr ""
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Paraşüt"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 msgid "Change aim angle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 msgid "Change weapon category"
 msgstr ""
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 msgid "Change weapon countdown"
 msgstr ""
 
@@ -549,7 +549,7 @@ msgstr "Bazuka"
 msgid "Commit Suicide"
 msgstr "İntihar"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -599,7 +599,7 @@ msgstr ""
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -650,13 +650,13 @@ msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, fuzzy, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, fuzzy, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
@@ -684,7 +684,7 @@ msgid "Error: Unable to start the server"
 msgstr "(%s) harita dizini açılamadı!"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -693,7 +693,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
@@ -707,7 +707,7 @@ msgstr ""
 msgid "Football Bomb"
 msgstr "Ses Bombası"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Fullscreen / window"
 msgstr "Tam ekran?"
@@ -774,7 +774,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr ""
 
@@ -862,7 +862,7 @@ msgstr ""
 msgid "Jetpack"
 msgstr "Jet çantası"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr ""
 
@@ -890,7 +890,7 @@ msgstr "Haritaları yükle:"
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 #, fuzzy
 msgid "Local teams:"
 msgstr "Takımları yükle:"
@@ -967,11 +967,11 @@ msgstr ""
 msgid "Most violent"
 msgstr ""
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Paraşüt"
@@ -1025,19 +1025,19 @@ msgid "Nobody!"
 msgstr ""
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr ""
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 msgid "On a character: select it"
 msgstr ""
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 msgid "On map: select a target"
 msgstr ""
 
@@ -1068,7 +1068,7 @@ msgstr "Oyna"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 #, fuzzy
 msgid "Player"
 msgstr "Oyna"
@@ -1094,7 +1094,7 @@ msgstr ""
 msgid "Public battles"
 msgstr ""
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1110,7 +1110,7 @@ msgstr "Wormux'dan çıkılıyor"
 msgid "Quit battle"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 #, fuzzy
 msgid "Quit game"
 msgstr "Oyunu çalıştır"
@@ -1173,16 +1173,16 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Pompalı tüfek"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Seçenekler"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 msgid "Show/hide minimap"
 msgstr ""
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1198,7 +1198,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1215,7 +1215,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1260,7 +1260,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Şırınga"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr ""
 
@@ -1461,7 +1461,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -1566,7 +1566,7 @@ msgid "couldn't load config"
 msgstr ""
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr ""
 

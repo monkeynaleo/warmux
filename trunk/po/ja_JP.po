@@ -1,13 +1,12 @@
 # Japanese (Japan) translation for Wormux
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-#
+# 
 # <akicks@gmail.com>,2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -25,6 +24,7 @@ msgid "! Map %s not found :-("
 msgstr "! マップ「%s」が見つかりません :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -50,13 +50,13 @@ msgstr "%s <%s> aka %s from %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> from %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr " %s チーム"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s チーム - 操作"
@@ -490,27 +490,27 @@ msgstr "チームのディレクトリが開けません (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "カスタムチームのディレクトリが開けません (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "カメラの中心をキャラクターにする"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "行動するキャラクターを切り替える"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "照準角度を変更する"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "武器のカウントダウンを変更する"
@@ -556,7 +556,7 @@ msgstr "クラスターバズーカ"
 msgid "Commit Suicide"
 msgstr "自殺"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "オプションメニュー"
 
@@ -605,7 +605,7 @@ msgstr "メッセージを表示"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "一度あなたのチームを選択し確認することを忘れずに"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "ドラッグ&ドロップ:カメラの操作"
@@ -657,14 +657,14 @@ msgid ""
 msgstr ""
 "\"%s\" ディレクトリ作成エラー: 構成ファイルを格納することができません。"
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr ""
 " \"%s\" ディレクトリ削除エラー: カスタムチームを削除することができません。"
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr " \"%s\" ファイル削除エラー: カスタムチームを削除することができません。"
@@ -691,7 +691,7 @@ msgid "Error: Unable to start the server"
 msgstr "エラー: サーバーが開始できません"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -704,7 +704,7 @@ msgstr ""
 "あなたは直接インターネットに接続していないなら、ルーターを確認してください。"
 "TCP Port %s は、あなたのコンピュータにフォワーディングする必要があります。"
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "エラー: 見つかりません。 ボディ\"%s\" チーム \"%s\"."
@@ -717,7 +717,7 @@ msgstr "火炎放射器"
 msgid "Football Bomb"
 msgstr "ラグビーボム"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "フルスクリーン / ウインドウ"
 
@@ -774,7 +774,7 @@ msgstr "楽しんで！"
 msgid "Head commander"
 msgstr "指揮官"
 
-#
+# 
 #. Display player's name
 #: src/interface/interface.cpp:203
 msgid "Head commander: "
@@ -784,7 +784,7 @@ msgstr "指揮官: "
 msgid "Help"
 msgstr "ヘルプ"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "ハイジャンプ"
 
@@ -881,7 +881,7 @@ msgstr "プレゼントだ！"
 msgid "Jetpack"
 msgstr "ジェットパック"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "バックジャンプ"
 
@@ -909,7 +909,7 @@ msgstr "マップ読込:"
 msgid "Load teams:"
 msgstr "チーム読込:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "ローカルチーム:"
 
@@ -982,12 +982,12 @@ msgstr "最も失敗作"
 msgid "Most violent"
 msgstr "最も暴力的"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "カーソルやマウスにカメラを追従"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "キャラクターの移動"
@@ -1039,20 +1039,20 @@ msgid "Nobody!"
 msgstr "誰もいない！"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "キャラクター数"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "チーム数:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "キャラクターに関して:行動するキャラクターを切り替えます"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "マップに関して: ターゲットを選択します"
@@ -1083,7 +1083,7 @@ msgstr "プレイ"
 msgid "Play several times"
 msgstr "何度かプレイ"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "プレイヤー"
 
@@ -1108,7 +1108,7 @@ msgstr "ポート:"
 msgid "Public battles"
 msgstr "パブリックバトル"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "Ctrlでクイック終了"
 
@@ -1124,7 +1124,7 @@ msgstr "Wormux を終了"
 msgid "Quit battle"
 msgstr "バトルを終了"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "ゲームを終了"
 
@@ -1182,17 +1182,17 @@ msgstr "サーバーモード"
 msgid "Shotgun"
 msgstr "ショットガン"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "武器メニューを表示"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "ミニマップの表示/非表示"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "インターフェースの表示/非表示"
 
@@ -1208,7 +1208,7 @@ msgstr "ビンタ"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "ビンタでは相手を少し飛ばすことができます。"
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "照準角度と移動の微調整"
 
@@ -1225,7 +1225,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "このゲームはプレイヤーを受け付けていません"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1272,7 +1272,7 @@ msgstr "スーパーTux"
 msgid "Syringe"
 msgstr "注射器"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "ネットワーク対戦で話す"
 
@@ -1474,7 +1474,7 @@ msgstr "リモートプレイヤーを待っています"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "サーバーを待っています。キャンセルとチャットができます！"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：攻撃 / ボーナスボックス: 急落下"
@@ -1508,7 +1508,7 @@ msgstr " %s はハンドガンごときにやられました...これは恥ず�
 msgid "Wind particles?"
 msgstr "風の表示？"
 
-#
+# 
 #: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "勝者"
@@ -1561,7 +1561,7 @@ msgstr "ゲーム開始前にチームを選択してください！"
 msgid "Your shot has missed!"
 msgstr "ミス！"
 
-#
+# 
 #: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "aka"
@@ -1581,7 +1581,7 @@ msgid "couldn't load config"
 msgstr "構成が読み込めませんでした。"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "カスタムプレイヤー"
 
@@ -1593,7 +1593,7 @@ msgstr "完了"
 msgid "error parsing the config file"
 msgstr "構成ファイルを解析しているエラー"
 
-#
+# 
 #: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "from"

@@ -1,14 +1,13 @@
 # Chinese (China) translation for Wormux
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-#
+# 
 # <luojie-dune@operamail.com>,2007.
 # jiero <lililjlj@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-01-10 19:51+1100\n"
 "Last-Translator: jiero <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <i10n>\n"
@@ -24,6 +23,7 @@ msgid "! Map %s not found :-("
 msgstr "！地图 %s未找到 :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f 帧fps"
 
@@ -49,13 +49,13 @@ msgstr "%s <%s> aka %s 从 %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr " %s 队伍"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
@@ -483,27 +483,27 @@ msgstr "打不开团队目录 (%s)！"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不开定制的团队目录 (%s)！"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "镜头中心对准角色"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "转换活动角色"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "改变发射角度"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "改变武器分类"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "改变武器起爆时间"
@@ -549,7 +549,7 @@ msgstr "开花弹"
 msgid "Commit Suicide"
 msgstr "自杀"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "配置菜单"
 
@@ -598,7 +598,7 @@ msgstr "显示这条信息"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "别忘了选择队伍之后要确认！"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "拖拉：移动镜头"
@@ -649,13 +649,13 @@ msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目录失败 \"%s\": 不能储存设置文件。"
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr "删除目录 \"%s\"失败: 不能删除自定义队伍。"
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "删除文件 \"%s\"失败: 不能删除自定义队伍。"
@@ -680,7 +680,7 @@ msgid "Error: Unable to start the server"
 msgstr "错误: 无法开始服务器"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -692,7 +692,7 @@ msgstr ""
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"。"
@@ -705,7 +705,7 @@ msgstr "喷火器"
 msgid "Football Bomb"
 msgstr "足球炸弹"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "全屏 / 窗口"
 
@@ -762,7 +762,7 @@ msgstr "来吧！"
 msgid "Head commander"
 msgstr "指挥官"
 
-#
+# 
 #. Display player's name
 #: src/interface/interface.cpp:203
 msgid "Head commander: "
@@ -772,7 +772,7 @@ msgstr "指挥官: "
 msgid "Help"
 msgstr "帮助"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "高跳"
 
@@ -869,7 +869,7 @@ msgstr "就是现在！"
 msgid "Jetpack"
 msgstr "喷射包"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "后空翻"
 
@@ -897,7 +897,7 @@ msgstr "读取地图:"
 msgid "Load teams:"
 msgstr "读取队伍:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "本地队伍:"
 
@@ -970,12 +970,12 @@ msgstr "最失败的"
 msgid "Most violent"
 msgstr "最暴力的"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "用鼠标或方向键移动镜头"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "移动"
@@ -1027,20 +1027,20 @@ msgid "Nobody!"
 msgstr "空房间！"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "角色数目"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "队伍数量:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "选择角色：换到一个活动角色"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "地图上：选择一个目标"
@@ -1071,7 +1071,7 @@ msgstr "要玩了哦"
 msgid "Play several times"
 msgstr "玩了几次了"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "玩家"
 
@@ -1096,7 +1096,7 @@ msgstr "端口:"
 msgid "Public battles"
 msgstr "公开战斗"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "借用Ctrl快速退出游戏"
 
@@ -1112,7 +1112,7 @@ msgstr "退出"
 msgid "Quit battle"
 msgstr "推出战斗"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "退出游戏"
 
@@ -1170,17 +1170,17 @@ msgstr "服务器设置"
 msgid "Shotgun"
 msgstr "猎枪"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "显示武器菜单"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "显示/隐藏小地图"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "显示/隐藏界面"
 
@@ -1196,7 +1196,7 @@ msgstr "拍子"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "拍一下，让那家伙跳一跳"
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "慢步精准"
 
@@ -1213,7 +1213,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢。没人等你。"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1259,7 +1259,7 @@ msgstr "SuperTux-超级企鹅"
 msgid "Syringe"
 msgstr "注射器"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "网络战斗中对话"
 
@@ -1457,7 +1457,7 @@ msgstr "等待远方的玩家"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服务吧, 现在先聊天 ！"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：开火/"
@@ -1491,7 +1491,7 @@ msgstr " %s 悲惨死去，不能瞑目！"
 msgid "Wind particles?"
 msgstr "风来了?"
 
-#
+# 
 #: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "胜者"
@@ -1544,7 +1544,7 @@ msgstr "没有队伍，就不会有战斗！"
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 
-#
+# 
 #: src/menu/credits_menu.cpp:74
 msgid "aka"
 msgstr "即"
@@ -1564,7 +1564,7 @@ msgid "couldn't load config"
 msgstr "无法读取设置"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "玩家设置"
 
@@ -1576,7 +1576,7 @@ msgstr "成"
 msgid "error parsing the config file"
 msgstr "粘贴配置文件出错"
 
-#
+# 
 #: src/menu/credits_menu.cpp:78
 msgid "from"
 msgstr "从"

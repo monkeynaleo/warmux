@@ -2,13 +2,12 @@
 # translation of wormux.po to
 # This file is distributed under the same license as the Wormux package.
 # Copyright (C) 2007 THE Wormux Development Team
-#
+# 
 # Romulo Fernandes <razor85@users.sourceforge.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-01-11 12:49-0300\n"
 "Last-Translator: Renan Valente Rangel <rvr777@gmail.com>\n"
 "Language-Team: Portuguese/Brazil <razor85@users.sourceforge.net>\n"
@@ -23,6 +22,7 @@ msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -50,13 +50,13 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Equipe %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Equipe %s - Remoto"
@@ -542,27 +542,27 @@ msgstr "Não foi possível abrir diretório (%s) das equipes!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Centralizar câmera no personagem"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Mudar personagem ativo"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Mudar ângulo da arma"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Mudar contagem regressiva da arma"
@@ -608,7 +608,7 @@ msgstr "Cluzooka"
 msgid "Commit Suicide"
 msgstr "Cometer suicídio"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Menu de configuração"
 
@@ -657,7 +657,7 @@ msgstr "Mostrar essa mensagem"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Não esqueça de confirmar assim que vocẽ selecionar seu time(s)!"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Clicar & arrastar: Mover câmera"
@@ -710,7 +710,7 @@ msgstr ""
 "Erro ao criar o directório \"%s\": não foi possível salvar o arquivo de "
 "configuração."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -718,7 +718,7 @@ msgstr ""
 "Erro ao deletar o directório \"%s\": não foi possível deletar o time "
 "custumisado."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -748,7 +748,7 @@ msgid "Error: Unable to start the server"
 msgstr "Erro: Não foi possível iniciar o servidor"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -761,7 +761,7 @@ msgstr ""
 "você não está conectado diretamente à internet, verifique a configuração do "
 "seu roteador: Porta TCP %s precisa estar redirecionada para o seu computador."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não foi possível localizar o corpo \"%s\" para a equipe \"%s\"."
@@ -774,7 +774,7 @@ msgstr "Lança Chamas"
 msgid "Football Bomb"
 msgstr "Futebomba"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Tela cheia?"
 
@@ -840,7 +840,7 @@ msgstr "Comandante: "
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Pulo alto"
 
@@ -941,7 +941,7 @@ msgstr "É um presente!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Pular para trás"
 
@@ -969,7 +969,7 @@ msgstr "Carregar mapas:"
 msgid "Load teams:"
 msgstr "Carregar equipes:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Carregar equipes:"
 
@@ -1042,12 +1042,12 @@ msgstr "Mais inútil"
 msgid "Most violent"
 msgstr "Mais violento"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Mova a câmera com o mouse ou com as setas direcionais"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Mover o personagem"
@@ -1099,20 +1099,20 @@ msgid "Nobody!"
 msgstr "Ninguém"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Número de personagens"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Número de equipes:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "No personagem: Selecionar personagem ativo"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "No mapa: Selecionar alvo"
@@ -1143,7 +1143,7 @@ msgstr "Jogar"
 msgid "Play several times"
 msgstr "Jogar várias veses"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Jogador"
 
@@ -1168,7 +1168,7 @@ msgstr "Porta:"
 msgid "Public battles"
 msgstr "Batalhas públicas"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "Sair rapidamente do jogo com Ctrl"
 
@@ -1184,7 +1184,7 @@ msgstr "Sair do Wormux"
 msgid "Quit battle"
 msgstr "Sair da batalha"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Sair do jogo"
 
@@ -1242,17 +1242,17 @@ msgstr "Modo do Servidor"
 msgid "Shotgun"
 msgstr "Espingarda"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Mostrar menu de armas"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Mostrar mini-mapa?"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "Mostrar interface?"
 
@@ -1268,7 +1268,7 @@ msgstr "Tapa"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Dê um tapa no inimigo para fazer ele dar um pulo."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Ângulo de mira pequeno e andar em passos"
 
@@ -1285,7 +1285,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Desculpe, atualmente nenhum jogo está esperando jogadores"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1331,7 +1331,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringa"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "Falar em batalha multiplayer"
 
@@ -1537,7 +1537,7 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Esperando pelo servidor, tudo que você pode fazer é conversar ou cancelar!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arma: Fogo / Caixa bônus: cai rápido"
@@ -1642,7 +1642,7 @@ msgid "couldn't load config"
 msgstr "falha ao carregar configuração"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "jogador custumisado"
 

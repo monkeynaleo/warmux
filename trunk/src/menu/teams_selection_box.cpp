@@ -102,6 +102,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 
     AddWidget(list_box);
   } else {
+    list_box = NULL;
     Box * teams_grid_box = new GridBox(2, 2, 10, false);
     teams_grid_box->SetNoBorder();
 

@@ -2,12 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-07-18 02:20+0200\n"
 "PO-Revision-Date: 2010-01-10 17:48+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -25,6 +24,7 @@ msgid "! Map %s not found :-("
 msgstr "! Kaart %s niet gevonden :-("
 
 #: src/graphic/fps.cpp:99
+#, c-format
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
@@ -52,13 +52,13 @@ msgstr "%s <%s> aka %s uit %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> uit %s"
 
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:248
 #, c-format
 msgid "%s Team"
 msgstr "Team %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:238
+#: src/menu/team_box.cpp:240
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
@@ -554,27 +554,27 @@ msgstr "Kan teams directory niet openen (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
 
-#: src/menu/help_menu.cpp:87 src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:88 src/menu/help_menu.cpp:105
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Camera centreren op het karakter"
 
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:104
 #, fuzzy
 msgid "Change active character"
 msgstr "Het actief karakter veranderen"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:95
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Richthoek veranderen"
 
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:93
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Wapencategorie veranderen"
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Wapenteller veranderen"
@@ -620,7 +620,7 @@ msgstr "Clusterbazooka"
 msgid "Commit Suicide"
 msgstr "Pleeg Zelfmoord"
 
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:91
 msgid "Configuration menu"
 msgstr "Configuratie menu"
 
@@ -669,7 +669,7 @@ msgstr "Laat dit bericht zien"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Vergeet uw team(s) niet te controleren na het selecteren!"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:87
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Slepen: Camera bewegen"
@@ -724,7 +724,7 @@ msgstr ""
 "Fout bij het aanmaken van directory \"%s\": kon configuratiebestand niet "
 "opslaan."
 
-#: src/team/custom_team.cpp:113
+#: src/team/custom_team.cpp:134
 #, c-format
 msgid ""
 "Error while deleting the directory \"%s\". Unable to delete the custom team."
@@ -732,7 +732,7 @@ msgstr ""
 "Fout bij het verwijderen van het pad \"%s\": kon het aangepaste team niet "
 "wissen."
 
-#: src/team/custom_team.cpp:104
+#: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
@@ -759,7 +759,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fout: Kon server niet starten"
 
 #: src/menu/network_connection_menu.cpp:472
-#: tools/servers/game_server/server.cpp:312
+#: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -772,7 +772,7 @@ msgstr ""
 "Contoleer uw router configuratie wanneer u niet direct met het internet "
 "verbonden bent: TCP Poort %s moet doorgestuurd worden naar deze computer."
 
-#: src/team/team.cpp:134
+#: src/team/team.cpp:179
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
@@ -785,7 +785,7 @@ msgstr "Vlammenwerper"
 msgid "Football Bomb"
 msgstr "Voetbalbom"
 
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:90
 msgid "Fullscreen / window"
 msgstr "Volledig scherm / venster"
 
@@ -851,7 +851,7 @@ msgstr "Hoofdcommandant: "
 msgid "Help"
 msgstr "Help"
 
-#: src/menu/help_menu.cpp:83
+#: src/menu/help_menu.cpp:84
 msgid "High jump"
 msgstr "Hoge sprong"
 
@@ -950,7 +950,7 @@ msgstr "Het is een cadeau!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/menu/help_menu.cpp:84 src/menu/help_menu.cpp:85
+#: src/menu/help_menu.cpp:85 src/menu/help_menu.cpp:86
 msgid "Jump backwards"
 msgstr "Achterwaartse sprong"
 
@@ -978,7 +978,7 @@ msgstr "Kaarten worden geladen:"
 msgid "Load teams:"
 msgstr "Teams worden geladen:"
 
-#: src/menu/teams_selection_box.cpp:49
+#: src/menu/teams_selection_box.cpp:72
 msgid "Local teams:"
 msgstr "Lokale teams:"
 
@@ -1051,12 +1051,12 @@ msgstr "Meest zinloos"
 msgid "Most violent"
 msgstr "Meest gewelddadig"
 
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:101
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Camera met muis of pijltjestoetsen bewegen"
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:96
 #, fuzzy
 msgid "Move character"
 msgstr "Bewegen"
@@ -1108,20 +1108,20 @@ msgid "Nobody!"
 msgstr "Niemand!"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:116
 msgid "Number of characters"
 msgstr "Aantal karakters"
 
-#: src/menu/teams_selection_box.cpp:53
+#: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
 msgstr "Aantal teams:"
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:98
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Op een karakter: Selecteren"
 
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Op het slagveld: Een doelwit selecteren"
@@ -1152,7 +1152,7 @@ msgstr "Spelen"
 msgid "Play several times"
 msgstr "Speel meerdere keren"
 
-#: src/menu/teams_selection_box.cpp:67
+#: src/menu/teams_selection_box.cpp:91
 msgid "Player"
 msgstr "Speler"
 
@@ -1177,7 +1177,7 @@ msgstr "Poort:"
 msgid "Public battles"
 msgstr "Openbare gevechten"
 
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:106
 msgid "Quickly quit game with Ctrl"
 msgstr "Spel snel afsluiten met Ctrl"
 
@@ -1193,7 +1193,7 @@ msgstr "Wormux afsluiten"
 msgid "Quit battle"
 msgstr "Beëindig gevecht"
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:83
 msgid "Quit game"
 msgstr "Spel afsluiten"
 
@@ -1251,17 +1251,17 @@ msgstr "Server modus"
 msgid "Shotgun"
 msgstr "Jachtgeweer"
 
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:99
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Wapenmenu weergeven"
 
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:103
 #, fuzzy
 msgid "Show/hide minimap"
 msgstr "Minikaart verbergen/tonen"
 
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 msgid "Show/hide the interface"
 msgstr "Interface verbergen/tonen"
 
@@ -1277,7 +1277,7 @@ msgstr "Slaan"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Sla de vijand om hem een beetje te laten springen."
 
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:100
 msgid "Smaller aim angle and walk step"
 msgstr "Nauwkeuriger richten en lopen"
 
@@ -1294,7 +1294,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
 #: src/menu/network_connection_menu.cpp:421
-#: tools/servers/game_server/server.cpp:297
+#: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1341,7 +1341,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Injectienaald"
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:92
 msgid "Talk in network battles"
 msgstr "Chatten tijdens netwerkstrijd"
 
@@ -1547,7 +1547,7 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:102
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Wapen: Vuren / Bonuskist: snel laten vallen"
@@ -1652,7 +1652,7 @@ msgid "couldn't load config"
 msgstr "kan de configuratie niet laden"
 
 #. the default player name for custom teams
-#: src/team/custom_team.cpp:142
+#: src/team/custom_team.cpp:47
 msgid "custom player"
 msgstr "aangepaste speler"
 
