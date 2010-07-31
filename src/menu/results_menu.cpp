@@ -258,8 +258,8 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
     return;
   }
 
-  int sx = x+round((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
-    sy = y-round((*it)->GetValue()*energy_scale);
+  int sx = x+int((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
+      sy = y-int((*it)->GetValue()*energy_scale);
   Surface &surface = GetMainWindow();
   MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)",
             (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
@@ -268,8 +268,8 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 
   while (it != end)
   {
-    int ex = x+round((*it)->GetDuration()*duration_scale),
-      ey = y-round((*it)->GetValue()*energy_scale);
+    int ex = x+int((*it)->GetDuration()*duration_scale),
+        ey = y-int((*it)->GetValue()*energy_scale);
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
               (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
@@ -285,7 +285,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
   --it;
   if ((*it)->GetDuration() < max_duration)
   {
-    int ex = x+round(max_duration*duration_scale);
+    int ex = x+int(max_duration*duration_scale);
     MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
   }
