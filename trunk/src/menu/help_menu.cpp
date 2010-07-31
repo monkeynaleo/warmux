@@ -77,8 +77,8 @@ void HelpMenu::DrawBackground()
   tmp.SetMaxWidth(132*zoom);
 
   struct {
-    const char* string;
-    int         x, y;
+    const std::string string; // gcc does not support correctly a char* here.
+    int x, y;
   } texts[] = {
     { _("Quit game"), 15, 1 },
     { _("High jump"), 373, 313 },
@@ -104,11 +104,11 @@ void HelpMenu::DrawBackground()
     { _("Change active character"), 26, 345 },
     { _("Center camera on character"), 320, 411 },
     { _("Quickly quit game with Ctrl"), 15, 31 },
-    { NULL, 0, 0 }
+    { "", 0, 0 }
   };
 
   int i = 0;
-  while (texts[i].string) {
+  while (texts[i].x != 0 && texts[i].y != 0) {
     tmp.SetText(texts[i].string);
     tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + offset_x,
                            (texts[i].y+MIDDLE_Y)*zoom + offset_y));
