@@ -305,7 +305,6 @@ void TeamsSelectionBox::ValidTeamsSelection()
   for (uint i=0; i < teams_selections.size(); i++) {
     if (teams_selections.at(i)->GetTeam() != NULL) {
       nb_teams++;
-      teams_selections.at(i)->GetTeam()->AttachCustomTeam(teams_selections.at(i)->GetCustomTeam());
     }
   }
 
