@@ -94,13 +94,15 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
     previous_custom_team = NULL;
 
   } else {
-    Box * tmp_name_box = new VBox(width, false, false);
-
     next_custom_team = new Button(res, "menu/plus");
     previous_custom_team = new Button(res, "menu/minus");
 
-    player_name = new TextBox(_player_name, width - 2*(10+2),
+    player_name = new TextBox(_player_name, width - 2 * (next_custom_team->GetSizeY() + 2),
                               Font::FONT_SMALL, Font::FONT_BOLD);
+
+    Box * tmp_name_box = new HBox(player_name->GetSizeY(), false, false);
+    tmp_name_box->SetNoBorder();
+    tmp_name_box->SetMargin(2);
 
     tmp_name_box->AddWidget(previous_custom_team);
     tmp_name_box->AddWidget(player_name);
