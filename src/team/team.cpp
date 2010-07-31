@@ -78,12 +78,12 @@ Team::Team(XmlReader& doc, Profile* res,
   , m_id(id)
   , m_name(name)
   , m_player_name("")
-  , active_weapon(NULL)
+  , remote(false)
   , ai(NULL)
   , ai_name(NO_AI_NAME)
-  , remote(false)
-  , abandoned(false)
   , attached_custom_team(NULL)
+  , active_weapon(NULL)
+  , abandoned(false)
   , energy(this)
 {
   // Load flag
@@ -508,10 +508,11 @@ void Team::SetDefaultPlayingConfig()
   SetPlayerName("");
   SetNbCharacters(GameMode::GetInstance()->nb_characters);
   SetAIName(NO_AI_NAME);
+  AttachCustomTeam(NULL);
 }
 
 void Team::AttachCustomTeam(CustomTeam *custom_team)
 {
- attached_custom_team = custom_team;
+  attached_custom_team = custom_team;
 }
 
