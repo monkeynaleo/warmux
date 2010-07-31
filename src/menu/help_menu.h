@@ -25,7 +25,6 @@
 #include "menu/menu.h"
 
 // Forward declarations
-class ListBox;
 class Sprite;
 
 class HelpMenu : public Menu
