@@ -53,10 +53,11 @@ private:
   Surface flag;
   Surface death_flag;
   Surface big_flag;
-  const std::string m_teams_dir; // parent directory hosting the data
   const std::string m_id;
   const std::string m_name;
   std::string m_sound_profile;
+  std::vector<std::string> default_characters_names;
+  std::vector<std::string> bodies_ids;
 
   // parameters reseted by SetDefaultPlayingConfig
   std::string m_player_name;
@@ -78,12 +79,11 @@ private:
   bool LoadCharacters();
 
   void AddOnePlayingCharacter(const std::string& character_name, Body *body);
-  bool AddPlayingCharacters(const std::vector<std::string> bodies,
-			    const std::vector<std::string> characters);
+  bool AddPlayingCharacters(const std::vector<std::string> characters);
 
 protected:
   Team(XmlReader& doc, Profile* res,
-       const std::string& name, const std::string &teams_dir, const std::string &id);
+       const std::string& name, const std::string &id);
 
 public:
   static Team* LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error);
