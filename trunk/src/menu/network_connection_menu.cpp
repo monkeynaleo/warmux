@@ -152,7 +152,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
-  refresh_net_games_label = new Label(_("Public battles"), width,
+  refresh_net_games_label = new Label(_("Public battles"), width - cl_refresh_net_games->GetSizeX(),
 				      Font::FONT_MEDIUM, Font::FONT_BOLD, c_red, false, true);
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
