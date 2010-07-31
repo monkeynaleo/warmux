@@ -200,7 +200,7 @@ public:
   // Access to character info
   const std::string& GetName() const;
   bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
-  void SetCustomName(const std::string name);
+
    // Hand position
   void GetHandPosition(Point2i & result) const;
   void GetRelativeHandPosition(Point2i & result) const;

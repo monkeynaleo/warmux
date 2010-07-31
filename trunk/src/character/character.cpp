@@ -940,15 +940,6 @@ const std::string& Character::GetName() const
     return character_name;
 }
 
-void Character::SetCustomName(const std::string name)
-{
-  if (!name.empty())
-  {
-    name_text->SetText(name);
-    character_name = name;
-  }
-}
-
 // ###################################################################
 // ###################################################################
 // ###################################################################
