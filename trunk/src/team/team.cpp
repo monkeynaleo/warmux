@@ -35,7 +35,6 @@
 #include "map/map.h"
 #include "network/network.h"
 #include "sound/jukebox.h"
-#include "team/custom_team.h"
 #include <WORMUX_debug.h>
 #include <WORMUX_file_tools.h>
 #include <WORMUX_point.h>
@@ -80,7 +79,6 @@ Team::Team(XmlReader& doc, Profile* res,
   , remote(false)
   , ai(NULL)
   , ai_name(NO_AI_NAME)
-  , attached_custom_team(NULL)
   , active_weapon(NULL)
   , abandoned(false)
   , energy(this)
@@ -172,14 +170,12 @@ bool Team::LoadCharacters()
   ASSERT(nb_characters <= 10);
 
   // handle custom names for characters
-  std::vector<std::string> characters_name;
-  if (attached_custom_team && IsLocal() && !Network::IsConnected()) {
-    characters_name = attached_custom_team->GetCharactersNameList();
-  } else {
-    characters_name = default_characters_names;
+  std::vector<std::string> *characters_name = &default_characters_names;
+  if (IsLocal() && !Network::IsConnected() && custom_characters_names.size() >= nb_characters) {
+    characters_name = &custom_characters_names;
   }
 
-  return AddPlayingCharacters(characters_name);
+  return AddPlayingCharacters(*characters_name);
 }
 
 void Team::InitEnergy (uint max)
@@ -489,15 +485,19 @@ bool Team::IsActiveTeam() const
 
 void Team::SetDefaultPlayingConfig()
 {
-  SetRemote(false);
   SetPlayerName("");
+  ClearCustomCharactersNames();
   SetNbCharacters(GameMode::GetInstance()->nb_characters);
+  SetRemote(false);
   SetAIName(NO_AI_NAME);
-  AttachCustomTeam(NULL);
 }
 
-void Team::AttachCustomTeam(CustomTeam *custom_team)
+void Team::SetCustomCharactersNames(const std::vector<std::string> &custom_names)
 {
-  attached_custom_team = custom_team;
+  custom_characters_names = custom_names;
 }
 
+void Team::ClearCustomCharactersNames()
+{
+  custom_characters_names.clear();
+}

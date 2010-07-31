@@ -303,7 +303,13 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
 
   // change only for local teams...
   if (associated_team->IsLocal()) {
-    associated_team->AttachCustomTeam(GetCustomTeam());
+
+    CustomTeam* custom = GetCustomTeam();
+    if (custom) {
+      associated_team->SetCustomCharactersNames(custom->GetCharactersNameList());
+    } else {
+      associated_team->ClearCustomCharactersNames();
+    }
 
     // send team configuration to the remote clients
     if (Network::GetInstance()->IsConnected()) {
