@@ -116,6 +116,8 @@ wormux_SOURCES = \
         gui/progress_bar.h \
         gui/question.cpp \
         gui/question.h \
+        gui/scroll_box.cpp \
+        gui/scroll_box.h \
         gui/spin_button.cpp \
         gui/spin_button.h \
         gui/spin_button_picture.cpp \
