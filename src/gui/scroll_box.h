@@ -45,6 +45,7 @@ class ScrollBox : public WidgetList
   // Scroll information
   bool         always_one_selected;
   bool         scrolling;
+  bool         moving;
   int          offset;
   Widget      *highlit;
   Point2i      track_size;
