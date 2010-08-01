@@ -100,7 +100,6 @@ void WidgetList::Update(const Point2i& mousePosition,
     SwapWindowClip(r);
   }
   SwapWindowClip(wlr);
-
   need_redrawing = false;
 }
 
