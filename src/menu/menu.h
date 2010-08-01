@@ -97,6 +97,7 @@ protected:
    Button *b_cancel;
    Button *b_ok;
    bool close_menu;
+   Point2i last_mouse_position;
    /* Actions buttons  */
    HBox *actions_buttons;
 

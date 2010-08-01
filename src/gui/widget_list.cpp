@@ -75,11 +75,18 @@ void WidgetList::RemoveWidget(Widget* w)
   delete w;
 }
 
-void WidgetList::Update(const Point2i &mousePosition)
+void WidgetList::Update(const Point2i& mousePosition,
+                        const Point2i& lastMousePosition)
 {
+  if (need_redrawing) {
+    Widget::RedrawBackground(*this);
+    Draw(mousePosition);
+  }
+
   Rectanglei wlr = (Rectanglei)*this;
 
   SwapWindowClip(wlr);
+
   for (std::list<Widget*>::iterator w=widget_list.begin();
        w != widget_list.end();
        w++)
@@ -94,7 +101,7 @@ void WidgetList::Update(const Point2i &mousePosition)
   }
   SwapWindowClip(wlr);
 
-  lastMousePosition = mousePosition;
+  need_redrawing = false;
 }
 
 void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
