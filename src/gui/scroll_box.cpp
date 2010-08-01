@@ -193,10 +193,22 @@ void ScrollBox::RemoveWidget(Widget* w)
 
 void ScrollBox::SetFocusOn(Widget* widget, bool force_mouse_position)
 {
-  if (widget!=this && widget!=m_up && widget!=m_down)
+  if (widget!=this && widget!=m_up && widget!=m_down && widget!=vbox)
     highlit = widget;
 
   WidgetList::SetFocusOn(widget, force_mouse_position);
+}
+
+void ScrollBox::Update(const Point2i & mousePosition,
+                       const Point2i & lastMousePosition)
+{
+  if (need_redrawing) {
+    Widget::RedrawBackground(*this);
+    Draw(mousePosition);
+  }
+
+  WidgetList::Update(mousePosition);
+  need_redrawing = false;  
 }
 
 void ScrollBox::Draw(const Point2i &mousePosition) const
