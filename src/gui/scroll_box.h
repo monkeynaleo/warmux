@@ -29,6 +29,7 @@ class Button;
 
 class ScrollBox : public WidgetList
 {
+protected:
   // Internal box
   VBox *vbox;
 
@@ -40,15 +41,12 @@ class ScrollBox : public WidgetList
   Color selected_item_color;
   Color default_item_color;
 
-  uint margin; // for BaseListBoxWithLabel
-
   // Scroll information
   bool         always_one_selected;
   bool         scrolling;
   bool         moving;
   int          offset;
   Widget      *highlit;
-  Point2i      track_size;
 
   virtual void __Update(const Point2i & mousePosition,
                         const Point2i & lastMousePosition);
@@ -56,6 +54,7 @@ class ScrollBox : public WidgetList
   Rectanglei GetScrollTrack() const;
   Point2i    GetScrollTrackPos() const;
   int GetMaxOffset() const;
+  int GetTrackHeight() const;
 
 public:
   void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
@@ -71,24 +70,11 @@ public:
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
 
-
-
   virtual void Draw(const Point2i & mousePosition) const;
   virtual Widget* Click(const Point2i & mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
 
   virtual void SetFocusOn(Widget* widget, bool force_mouse_position = false);
-#if 0
-  void Sort() const;
-  void Select(uint index);
-  int GetSelectedItem() const { return selected_item; };
-  void Deselect();
-  void RemoveSelected();
-  void ClearItems();
-  bool IsSelectedItem();
-
-  uint Size() const { return m_items.size(); };
-#endif
 };
 
 #endif  //VERTICAL_SCROLL_BOX
