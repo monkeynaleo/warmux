@@ -37,6 +37,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool always)
   , default_item_color(defaultListColor3)
   , always_one_selected(always)
   , scrolling(false)
+  , moving(false)
   , offset(0)
   , highlit(NULL)
 {
@@ -65,6 +66,7 @@ ScrollBox::~ScrollBox()
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   scrolling = false;
+  moving    = false;
 
   if (!vbox->GetFirstWidget()) {
     return NULL;
@@ -110,7 +112,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     return m_up;
   } else {
     Rectanglei scroll_track = GetScrollTrack();
-    if (scroll_track.Contains(mousePosition) && is_click) {
+    if (scroll_track.Contains(mousePosition) && is_click && !scrolling) {
       // Set this as new scroll thumb position
       offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
              / track_size.GetY();
@@ -132,15 +134,41 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
     scrolling = true;
   }
 
+  if (!moving && (m_down->Contains(mousePosition) || m_up->Contains(mousePosition))) {
+    moving = true;
+  }
+
   return WidgetList::Click(mousePosition, button);
 }
 
 void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & lastMousePosition)
 {
-  (void)lastMousePosition;
   if (!Contains(mousePosition)) {
     scrolling = false;
+    moving = false;
+    return;
+  }
+
+  if (moving) {
+    // Does not work because called only once, waiting for
+    // new events before reentering => we should try to
+    // generate activity (fake event?) ?
+    if (m_down->Contains(mousePosition)) {
+      // bottom button
+      offset += 6;
+      if (offset > GetMaxOffset())
+        offset = GetMaxOffset();
+      return;
+    } else if (m_up->Contains(mousePosition)) {
+      // top button
+      offset -= 6;
+      if (offset < 0)
+        offset = 0;
+      return;
+    }
+    moving = false;
+    return;
   }
 
   // update position of items because of scrolling with scroll bar
