@@ -53,6 +53,7 @@ class Widget : public Rectanglei, public Container
   protected:
     Container * ct;
     bool need_redrawing;
+    bool clickable;
 
     // Attributs for XML loading process
     Profile * profile;
@@ -79,7 +80,7 @@ class Widget : public Rectanglei, public Container
 
   public:
     Widget();
-    Widget(const Point2i & size);
+    Widget(const Point2i & size, bool clickable = true);
     Widget(Profile * profile,
            const xmlNode * widgetNode);
     virtual ~Widget() { };
