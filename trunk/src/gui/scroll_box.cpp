@@ -27,7 +27,7 @@
 #include "include/app.h"
 
 #define BORDER           2
-#define SCROLLBAR_WIDTH 12
+#define SCROLLBAR_WIDTH 10
 
 ScrollBox::ScrollBox(const Point2i & _size, bool always)
   : WidgetList(_size)
@@ -48,10 +48,10 @@ ScrollBox::ScrollBox(const Point2i & _size, bool always)
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(defaultListColor1);
 
-  vbox = new VBox(_size.x-SCROLLBAR_WIDTH-2*(BORDER+5), false, false);
+  vbox = new VBox(_size.x - SCROLLBAR_WIDTH -2*BORDER, false, true);
   vbox->SetBorder(Point2i(5, 5));
 
-  track_size = Point2i(SCROLLBAR_WIDTH, GetSizeY() - 2*(m_up->GetSizeY()+BORDER));
+  track_size = Point2i(SCROLLBAR_WIDTH, GetSizeY() - 2*(m_up->GetSizeY()+BORDER+1));
 
   WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
@@ -110,7 +110,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     return m_up;
   } else {
     Rectanglei scroll_track = GetScrollTrack();
-    if (scroll_track.Contains(mousePosition)) {
+    if (scroll_track.Contains(mousePosition) && is_click) {
       // Set this as new scroll thumb position
       offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
              / track_size.GetY();
