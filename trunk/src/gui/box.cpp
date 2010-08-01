@@ -59,21 +59,3 @@ void Box::ParseXMLBoxParameters()
   ParseXMLBorder();
   ParseXMLBackground();
 }
-
-void Box::Update(const Point2i &mousePosition,
-                 const Point2i &lastMousePosition)
-{
-  if (need_redrawing) {
-    //Rectanglei r(GetPosition(), GetSize());
-
-    //SwapWindowClip(r);
-    Widget::RedrawBackground(*this);
-    Draw(mousePosition);
-    //SwapWindowClip(r);
-  }
-
-  WidgetList::Update(mousePosition, lastMousePosition);
-  need_redrawing = false;
-}
-
-

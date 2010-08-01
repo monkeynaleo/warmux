@@ -199,18 +199,6 @@ void ScrollBox::SetFocusOn(Widget* widget, bool force_mouse_position)
   WidgetList::SetFocusOn(widget, force_mouse_position);
 }
 
-void ScrollBox::Update(const Point2i & mousePosition,
-                       const Point2i & lastMousePosition)
-{
-  if (need_redrawing) {
-    Widget::RedrawBackground(*this);
-    Draw(mousePosition);
-  }
-
-  WidgetList::Update(mousePosition);
-  need_redrawing = false;  
-}
-
 void ScrollBox::Draw(const Point2i &mousePosition) const
 {
   vbox->Pack();

@@ -73,9 +73,6 @@ public:
   virtual void Draw(const Point2i & mousePosition) const;
   virtual Widget* Click(const Point2i & mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
-  void Update(const Point2i & mousePosition,
-              const Point2i & lastMousePosition);
-
   virtual void SetFocusOn(Widget* widget, bool force_mouse_position = false);
 };
 

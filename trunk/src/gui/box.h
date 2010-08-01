@@ -40,8 +40,6 @@ class Box : public WidgetList
     virtual ~Box();
 
     void ParseXMLBoxParameters(void);
-    void Update(const Point2i & mousePosition,
-                const Point2i & lastMousePosition);
 
     Widget * Click(const Point2i & mousePosition, 
                    uint button) { 
