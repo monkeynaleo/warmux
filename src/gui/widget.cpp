@@ -28,37 +28,39 @@
 #include "include/app.h"
 #include <WORMUX_debug.h>
 
-Widget::Widget():
-  Rectanglei(),
-  has_focus(false),
-  visible(true),
-  is_highlighted(false),
-  border_color(white_color),
-  border_size(0),
-  background_color(transparent_color),
-  highlight_bg_color(transparent_color),
-  ct(NULL),
-  need_redrawing(true),
-  profile(NULL),
-  widgetNode(NULL),
-  actionName("NoAction")
+Widget::Widget()
+  : Rectanglei()
+  , has_focus(false)
+  , visible(true)
+  , is_highlighted(false)
+  , border_color(white_color)
+  , border_size(0)
+  , background_color(transparent_color)
+  , highlight_bg_color(transparent_color)
+  , ct(NULL)
+  , need_redrawing(true)
+  , clickable(true)
+  , profile(NULL)
+  , widgetNode(NULL)
+  , actionName("NoAction")
 {
 }
 
-Widget::Widget(const Point2i &size):
-  Rectanglei(0, 0, size.x, size.y),
-  has_focus(false),
-  visible(true),
-  is_highlighted(false),
-  border_color(white_color),
-  border_size(0),
-  background_color(transparent_color),
-  highlight_bg_color(transparent_color),
-  ct(NULL),
-  need_redrawing(true),
-  profile(NULL),
-  widgetNode(NULL),
-  actionName("NoAction")
+Widget::Widget(const Point2i &size, bool clickable)
+  : Rectanglei(0, 0, size.x, size.y)
+  , has_focus(false)
+  , visible(true)
+  , is_highlighted(false)
+  , border_color(white_color)
+  , border_size(0)
+  , background_color(transparent_color)
+  , highlight_bg_color(transparent_color)
+  , ct(NULL)
+  , need_redrawing(true)
+  , clickable(clickable)
+  , profile(NULL)
+  , widgetNode(NULL)
+  , actionName("NoAction")
 {
 }
 
@@ -260,19 +262,21 @@ void Widget::SetFocus(bool focus)
 
 Widget* Widget::Click(const Point2i &mousePosition, uint /* button */)
 {
-  if (Contains(mousePosition)) {
+  if (clickable && visible && Contains(mousePosition)) {
     NeedRedrawing();
     return this;
   }
+
   return NULL;
 }
 
 Widget* Widget::ClickUp(const Point2i &mousePosition, uint /* button */)
 {
-  if (Contains(mousePosition)) {
+  if (clickable && visible && Contains(mousePosition)) {
     NeedRedrawing();
     return this;
   }
+
   return NULL;
 }
 
