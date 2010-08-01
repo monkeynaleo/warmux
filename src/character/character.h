@@ -96,8 +96,12 @@ public:
   Body* body;
 
 private:
-  void DrawEnergyBar(int dy) const;
-  void DrawName(int dy) const;
+  bool MustBeDrawn() const;
+  bool MustDrawLostEnergy() const;
+  bool MustDrawEnergyBar() const;
+  bool MustDrawName() const;
+  void DrawEnergyBar() const;
+  void DrawLostEnergy() const;
 
   virtual void SignalDrowning();
   virtual void SignalGhostState(bool was_dead);
@@ -157,6 +161,7 @@ public:
   }
 
   void Draw();
+  void DrawName() const;
   void Refresh();
 
   void PrepareTurn();
