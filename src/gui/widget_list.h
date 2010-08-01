@@ -60,7 +60,7 @@ public:
 
   // to add a widget
   virtual void AddWidget(Widget* widget);
-  void RemoveWidget(Widget* w);
+  virtual void RemoveWidget(Widget* w);
 
   // Navigate between widget with keyboard
   virtual void SetFocusOnNextWidget();
@@ -74,7 +74,7 @@ public:
   virtual Widget* GetPreviousWidget(const Widget *w, bool loop) const;
   virtual bool IsWidgetBrowser() const { return true; };
 
-  void SetFocusOn(Widget* widget, bool force_mouse_position = false);
+  virtual void SetFocusOn(Widget* widget, bool force_mouse_position = false);
   virtual void Pack();
 };
 
