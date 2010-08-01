@@ -158,7 +158,7 @@ Config::Config():
 #  ifdef ENABLE_NLS
   locale_dir   = basepath + PATH_SEPARATOR "locale" PATH_SEPARATOR;
 #  endif
-  ttf_filename = FONT_FILE;
+  ttf_filename = basepath + PATH_SEPARATOR FONT_FILE;
 
   personal_config_dir = GetHome() + PATH_SEPARATOR "Wormux" PATH_SEPARATOR;
   personal_data_dir = personal_config_dir;
