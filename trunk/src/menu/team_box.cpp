@@ -164,8 +164,8 @@ void TeamBox::UpdatePlayerNameColor()
 void TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
-  Rectanglei r(GetPosition(), GetSize());
-  SwapWindowClip(r);
+  //Rectanglei r(GetPosition(), GetSize());
+  //SwapWindowClip(r);
 
   UpdatePlayerNameColor();
 
@@ -175,7 +175,7 @@ void TeamBox::Update(const Point2i &mousePosition,
   }
 
   if (associated_team != NULL) {
-    WidgetList::Update(mousePosition);
+    WidgetList::Update(mousePosition, lastMousePosition);
   } else {
     RedrawBackground(*this);
   }
@@ -187,7 +187,7 @@ void TeamBox::Update(const Point2i &mousePosition,
     }
   }
 
-  SwapWindowClip(r);
+  //SwapWindowClip(r);
   need_redrawing = false;
 }
 

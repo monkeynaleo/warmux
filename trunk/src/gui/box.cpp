@@ -61,7 +61,7 @@ void Box::ParseXMLBoxParameters()
 }
 
 void Box::Update(const Point2i &mousePosition,
-                 const Point2i &/*lastMousePosition*/)
+                 const Point2i &lastMousePosition)
 {
   if (need_redrawing) {
     //Rectanglei r(GetPosition(), GetSize());
@@ -72,7 +72,7 @@ void Box::Update(const Point2i &mousePosition,
     //SwapWindowClip(r);
   }
 
-  WidgetList::Update(mousePosition);
+  WidgetList::Update(mousePosition, lastMousePosition);
   need_redrawing = false;
 }
 
