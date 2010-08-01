@@ -258,11 +258,11 @@ void BaseListBox::Draw(const Point2i & mousePosition) const
     w->SetSize(size.x - 12, m_items.at(i)->GetSizeY() - 2);
     w->Pack();
     if (draw_it) {
-      Rectanglei r(w->GetPosition(), w->GetSize());
+      //Rectanglei r(w->GetPosition(), w->GetSize());
 
-      SwapWindowClip(r);
+      //SwapWindowClip(r);
       w->Draw(mousePosition);
-      SwapWindowClip(r);
+      //SwapWindowClip(r);
     }
 
     pos += Point2i(0, w->GetSizeY());
