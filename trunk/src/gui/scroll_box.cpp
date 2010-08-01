@@ -145,9 +145,10 @@ void ScrollBox::__Update(const Point2i & mousePosition,
 
   // update position of items because of scrolling with scroll bar
   if (scrolling) {
-    Rectanglei scroll_track = GetScrollTrack();
-    if (scroll_track.Contains(mousePosition)) {
-      offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
+    Point2i track_pos = GetScrollTrackPos();
+    if (mousePosition.y >= track_pos.GetY() &&
+        mousePosition.y <  track_pos.GetY() + track_size.GetY()) {
+      offset = ((mousePosition.y - track_pos.GetY()) * GetMaxOffset())
              / track_size.GetY();
     }
   }
