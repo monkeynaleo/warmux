@@ -118,8 +118,6 @@ wormux_SOURCES = \
         gui/question.h \
         gui/spin_button.cpp \
         gui/spin_button.h \
-        gui/spin_button_big.cpp \
-        gui/spin_button_big.h \
         gui/spin_button_picture.cpp \
         gui/spin_button_picture.h \
         gui/tabs.cpp \
