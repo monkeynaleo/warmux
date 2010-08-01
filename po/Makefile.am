@@ -95,8 +95,6 @@ POTFILES = \
         src/gui/label.h \
         src/gui/list_box.cpp \
         src/gui/list_box.h \
-        src/gui/list_box_w_label.cpp \
-        src/gui/list_box_w_label.h \
         src/gui/msg_box.cpp \
         src/gui/msg_box.h \
         src/gui/null_widget.h \
@@ -108,8 +106,6 @@ POTFILES = \
         src/gui/progress_bar.h \
         src/gui/question.cpp \
         src/gui/question.h \
-        src/gui/spin_button_big.cpp \
-        src/gui/spin_button_big.h \
         src/gui/spin_button.cpp \
         src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
