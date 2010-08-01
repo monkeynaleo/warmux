@@ -52,8 +52,6 @@ ScrollBox::ScrollBox(const Point2i & _size, bool always)
   vbox = new VBox(_size.x - SCROLLBAR_WIDTH -2*BORDER, false, true);
   vbox->SetBorder(Point2i(5, 5));
 
-  track_size = Point2i(SCROLLBAR_WIDTH, GetSizeY() - 2*(m_up->GetSizeY()+BORDER+1));
-
   WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
   WidgetList::AddWidget(m_down);
@@ -115,7 +113,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     if (scroll_track.Contains(mousePosition) && is_click && !scrolling) {
       // Set this as new scroll thumb position
       offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
-             / track_size.GetY();
+             / scroll_track.GetSizeY();
       NeedRedrawing();
       return this;
     }
@@ -174,10 +172,11 @@ void ScrollBox::__Update(const Point2i & mousePosition,
   // update position of items because of scrolling with scroll bar
   if (scrolling) {
     Point2i track_pos = GetScrollTrackPos();
+    int     height    = GetTrackHeight();
     if (mousePosition.y >= track_pos.GetY() &&
-        mousePosition.y <  track_pos.GetY() + track_size.GetY()) {
+        mousePosition.y <  track_pos.GetY() + height) {
       offset = ((mousePosition.y - track_pos.GetY()) * GetMaxOffset())
-             / track_size.GetY();
+             / height;
     }
   }
 }
@@ -202,9 +201,14 @@ void ScrollBox::SetFocusOn(Widget* widget, bool force_mouse_position)
 
 void ScrollBox::Draw(const Point2i &mousePosition) const
 {
+  vbox->Pack();
+  int max_offset = GetMaxOffset();
+
   m_up->SetPosition(GetScrollTrack().GetPositionX(),
                     GetPositionY() + BORDER);
   m_down->SetPosition(GetPosition() + GetSize() - m_down->GetSize() - BORDER);
+  m_up->SetVisible(max_offset > 0);
+  m_down->SetVisible(max_offset > 0);
 
   if (GetMaxOffset() > 0) {
     vbox->SetPosition(GetPositionX() + BORDER, GetPositionY() + BORDER - offset);
@@ -212,10 +216,9 @@ void ScrollBox::Draw(const Point2i &mousePosition) const
     vbox->SetPosition(GetPosition() + BORDER);
   }
 
-  vbox->Pack();
   WidgetList::Draw(mousePosition);
 
-  if (GetMaxOffset() > 0) {
+  if (max_offset > 0) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
 
     Rectanglei thumb = GetScrollThumb();
@@ -232,7 +235,8 @@ Point2i ScrollBox::GetScrollTrackPos() const
 
 Rectanglei ScrollBox::GetScrollTrack() const
 {
-  return Rectanglei(GetScrollTrackPos(), track_size);
+  return Rectanglei(GetScrollTrackPos(),
+                    Point2i(SCROLLBAR_WIDTH, GetTrackHeight()));
 }
 
 Rectanglei ScrollBox::GetScrollThumb() const
@@ -253,4 +257,9 @@ Rectanglei ScrollBox::GetScrollThumb() const
 int ScrollBox::GetMaxOffset() const
 {
   return vbox->GetSizeY() - GetSizeY();
+}
+
+int ScrollBox::GetTrackHeight() const
+{
+  return GetSizeY() - 2*(m_up->GetSizeY()+BORDER+1);
 }
