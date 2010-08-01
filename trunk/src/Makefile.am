@@ -105,8 +105,6 @@ wormux_SOURCES = \
         gui/label.h \
         gui/list_box.cpp \
         gui/list_box.h \
-        gui/list_box_w_label.cpp \
-        gui/list_box_w_label.h \
         gui/msg_box.cpp \
         gui/msg_box.h \
         gui/null_widget.h \
