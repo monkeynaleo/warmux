@@ -539,8 +539,15 @@ void Game::Draw ()
   ParticleEngine::Draw(true);
   StatStart("GameDraw:objects");
 
-  // Draw the characters
+  // Draw the characters in 2 steps:
+  // 1) draw names
+  // 2) draw characters
+  // It allows to have characters in front of names
   StatStart("GameDraw:characters");
+  FOR_ALL_CHARACTERS(team,character)
+    if (!character->IsActiveCharacter())
+      character->DrawName();
+
   FOR_ALL_CHARACTERS(team,character)
     if (!character->IsActiveCharacter())
       character->Draw();
@@ -551,6 +558,7 @@ void Game::Draw ()
 
   StatStart("GameDraw:active_character");
   ActiveCharacter().Draw();
+  ActiveCharacter().DrawName();
   StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
 

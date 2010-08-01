@@ -50,10 +50,10 @@
 #include "graphic/video.h"
 #endif
 
-const uint HAUT_FONT_MIX = 13;
+const int HEIGHT_FONT_NAME = 13;
 
 // Space between the name, the skin and the energy bar
-const uint ESPACE = 3; // pixels
+const int SPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
 const Double MIN_SPEED_TO_FLY = 15.0;
 
@@ -74,8 +74,8 @@ const Double MIN_SPEED_TO_FLY = 15.0;
 #endif
 
 // Energy bar
-const uint LARG_ENERGIE = 40;
-const uint HAUT_ENERGIE = 6;
+const int WIDTH_ENERGY = 40;
+const int HEIGHT_ENERGY = 6;
 
 // Delta angle used to move the crosshair
 const Double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
@@ -158,8 +158,8 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   // Energy
   m_energy = GameMode::GetInstance()->character.init_energy;
 
-  energy_bar = new EnergyBar(0, 0, 
-                             LARG_ENERGIE, HAUT_ENERGIE,
+  energy_bar = new EnergyBar(0, 0,
+                             WIDTH_ENERGY, HEIGHT_ENERGY,
                              GameMode::GetInstance()->character.init_energy,
                              0,
                              GameMode::GetInstance()->character.init_energy);
@@ -201,9 +201,9 @@ Character::Character (const Character& acharacter) :
   previous_strength(acharacter.previous_strength),
   body(NULL)
 {
-  energy_bar = new EnergyBar(acharacter.energy_bar->GetX(), 
+  energy_bar = new EnergyBar(acharacter.energy_bar->GetX(),
                              acharacter.energy_bar->GetY(),
-                             acharacter.energy_bar->GetWidth(), 
+                             acharacter.energy_bar->GetWidth(),
                              acharacter.energy_bar->GetHeight(),
                              acharacter.energy_bar->GetVal(),
                              acharacter.energy_bar->GetMinVal(),
@@ -211,7 +211,7 @@ Character::Character (const Character& acharacter) :
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
   SetEnergy(GameMode::GetInstance()->character.init_energy);
- 
+
   if (acharacter.body) {
     Body * newBody = new Body(*acharacter.body);
     SetBody(newBody);
@@ -276,26 +276,80 @@ void Character::SetDirection (LRDirection nv_direction)
   m_team.crosshair.Refresh(GetFiringAngle());
 }
 
-void Character::DrawEnergyBar(int dy) const
+bool Character::MustDrawLostEnergy() const
 {
-  if( IsDead() )
-        return;
+  bool draw_loosing_energy = (lost_energy != 0);
+  if ((IsActiveCharacter()
+       && Game::GetInstance()->ReadState() != Game::END_TURN)
+      || IsDead())
+    draw_loosing_energy = false;
 
-  energy_bar->DrawXY( Point2i( GetCenterX() - energy_bar->GetWidth() / 2, GetY() + dy)
-                     - Camera::GetInstance()->GetPosition() );
+  return draw_loosing_energy;
 }
 
-void Character::DrawName(int dy) const
+bool Character::MustDrawEnergyBar() const
 {
-  if (IsDead()) return;
+  if (Config::GetInstance()->GetDisplayEnergyCharacter()
+      && ((!IsActiveCharacter()
+	   && Game::GetInstance()->ReadState() != Game::END_TURN
+	   && !IsDead())
+	  || MustDrawLostEnergy()) )
+    return true;
+
+  return false;
+}
+
+bool Character::MustDrawName() const
+{
+  if (!MustBeDrawn())
+    return false;
+
+  if (Config::GetInstance()->GetDisplayNameCharacter()
+      && !IsActiveCharacter()
+      && Game::GetInstance()->ReadState() != Game::END_TURN)
+    return true;
+
+  return false;
+}
+
+void Character::DrawEnergyBar() const
+{
+  if (!MustDrawEnergyBar())
+    return;
+
+  int dy = -SPACE - HEIGHT_ENERGY;
+  energy_bar->DrawXY(Point2i( GetCenterX() - energy_bar->GetWidth() / 2, GetY() + dy)
+		     - Camera::GetInstance()->GetPosition() );
+}
+
+void Character::DrawLostEnergy() const
+{
+  if (!MustDrawLostEnergy())
+    return;
+
+  std::ostringstream ss;
+  ss << lost_energy;
+  int dy = - SPACE - HEIGHT_FONT_NAME - SPACE - HEIGHT_ENERGY;
+  if (MustDrawName()) {
+    dy = dy - HEIGHT_FONT_NAME - SPACE;
+  }
+  Text text(ss.str());
+  text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
+}
+
+void Character::DrawName() const
+{
+  if (!MustDrawName())
+    return;
+
+  int dy = -SPACE - HEIGHT_FONT_NAME;
+  if (MustDrawEnergyBar()) {
+    dy = dy - HEIGHT_ENERGY - SPACE;
+  }
 
   const int x = GetCenterX();
   const int y = GetY() + dy;
-
-  if (Config::GetInstance()->GetDisplayNameCharacter()) {
-    name_text->DrawCenterTopOnMap(Point2i(x,y));
-  }
-
+  name_text->DrawCenterTopOnMap(Point2i(x,y));
 }
 
 void Character::ResetDamageStats()
@@ -308,7 +362,7 @@ void Character::SetEnergyDelta(int delta, bool do_report)
   // If already dead, do nothing
   if (IsDead()) return;
 
-  MSG_DEBUG("character.energy", "%s has win %d life points\n",
+  MSG_DEBUG("character.eneforce_drawingrgy", "%s has win %d life points\n",
 	    character_name.c_str(), delta);
 
   // Report damage to damage performer
@@ -393,69 +447,52 @@ void Character::Die()
   Camera::GetInstance()->StopFollowingObj(this);
 }
 
-void Character::Draw()
+bool Character::MustBeDrawn() const
 {
-  if (hidden) return; // Character is teleporting...
+  if (hidden)
+    return false; // Character is teleporting...
 
   // Gone in another world ?
-  if (IsGhost()) return;
+  if (IsGhost())
+    return false;
 
   // Character is visible on camera? If not, just leave the function
   // WARNING, this optimization is disabled if it is the active character
   // because there could be some tricks in the drawing of the weapon (cf bug #10242)
   if (!IsActiveCharacter()) {
     Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
-    if (!rect.Intersect(*Camera::GetInstance())) return;
+    if (!rect.Intersect(*Camera::GetInstance()))
+      return false;
   }
 
-  bool draw_loosing_energy = (lost_energy != 0);
-  if ((IsActiveCharacter()
-       && Game::GetInstance()->ReadState() != Game::END_TURN)
-      || IsDead())
-    draw_loosing_energy = false;
+  return true;
+}
 
+void Character::Draw()
+{
+  if (!MustBeDrawn())
+    return;
 
   Point2i pos = GetPosition();
   body->Draw(pos);
 
-  // Draw energy bar
-  int dy = -((int)ESPACE);
-  if (Config::GetInstance()->GetDisplayEnergyCharacter()
-      && ((!IsActiveCharacter()
-	   && Game::GetInstance()->ReadState() != Game::END_TURN
-	   && !IsDead())
-	  || draw_loosing_energy) )
-  {
-    dy -= HAUT_ENERGIE;
-    DrawEnergyBar (dy);
-    dy -= ESPACE;
-  }
+  DrawEnergyBar();
 
-  // Draw name
-  if (Config::GetInstance()->GetDisplayNameCharacter()
-      && !IsActiveCharacter()
-      && Game::GetInstance()->ReadState() != Game::END_TURN)
-  {
-    dy -= HAUT_FONT_MIX;
-    DrawName (dy);
-    dy -= ESPACE;
-  }
+  DrawName();
 
-  // Draw lost energy
-  if (draw_loosing_energy)
-  {
-    std::ostringstream ss;
-    ss << lost_energy;
-    dy -= HAUT_FONT_MIX;
-	Text text(ss.str());
-	text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
-  }
+  DrawLostEnergy();
 
 #ifdef DEBUG
-
   if (IsLOGGING("body"))
   {
-    dy -= HAUT_FONT_MIX;
+    int dy = -SPACE - HEIGHT_FONT_NAME;
+    if (MustDrawEnergyBar())
+      dy = -SPACE - HEIGHT_ENERGY;
+    if (MustDrawName())
+      dy = -SPACE - HEIGHT_FONT_NAME;
+    if (MustDrawLostEnergy())
+      dy = -SPACE - HEIGHT_FONT_NAME;
+
     std::string txt = body->GetClothe() + " " + body->GetMovement() + " " + body->GetFrameLoop();
     Text skin_text(txt);
     skin_text.DrawCenterTopOnMap(Point2i(GetX(), GetY() - dy));
@@ -753,8 +790,8 @@ void Character::Collision(const Point2d& speed_vector)
 void Character::SignalGroundCollision(const Point2d& speed_before)
 {
   MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s)",
-            character_name.c_str(), 
-            Double2str(speed_before.x).c_str(), 
+            character_name.c_str(),
+            Double2str(speed_before.x).c_str(),
             Double2str(speed_before.y).c_str(),
             Double2str(speed_before.Norm()).c_str());
 
@@ -767,7 +804,7 @@ void Character::SignalObjectCollision(const Point2d& my_speed_before,
 {
   MSG_DEBUG("character.collision", "%s collides on object with speed %s, %s (norm = %s)",
             character_name.c_str(),
-            Double2str(my_speed_before.x).c_str(), 
+            Double2str(my_speed_before.x).c_str(),
             Double2str(my_speed_before.y).c_str(),
             Double2str(my_speed_before.Norm()).c_str());
   // In case an object collides with the character, we don't want
