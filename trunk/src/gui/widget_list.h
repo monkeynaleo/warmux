@@ -61,6 +61,7 @@ public:
   // to add a widget
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
+  void Empty() { widget_list.clear(); }
 
   // Navigate between widget with keyboard
   virtual void SetFocusOnNextWidget();
