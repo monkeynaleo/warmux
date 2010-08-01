@@ -28,18 +28,18 @@ Label::Label(const std::string & text,
              const Color & fontColor,
              bool centered,
              bool shadowed,
-             const Color & shadowColor) :
-  Text(text, fontColor, fontSize,
-       fontStyle, shadowed, shadowColor),
-  center(centered)
+             const Color & shadowColor)
+  : Text(text, fontColor, fontSize, fontStyle, shadowed, shadowColor)
+  , center(centered)
 {
   size.x = maxWidth;
   SetMaxWidth(size.x);
   size.y = GetHeight();
+  Widget::clickable = false;
 }
 
 Label::Label(const Point2i & size) :
-  Widget(size),
+  Widget(size, false),
   center(false)
 {
 }
