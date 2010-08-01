@@ -339,6 +339,7 @@ Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
         SetFocusOn(child);
         return child;
       }
+      return NULL;
     }
   }
   return NULL;
