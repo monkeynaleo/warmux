@@ -177,11 +177,11 @@ void Surface::Unlock()
 
 void Surface::SwapClipRect(Rectanglei& rect)
 {
-  SDL_Rect sdlClipRect = GetSDLRect(rect);
+  SDL_Rect newClipRect = GetSDLRect(rect);
   SDL_Rect oldClipRect;
 
   SDL_GetClipRect(surface, &oldClipRect);
-  SDL_SetClipRect(surface, &sdlClipRect);
+  SDL_SetClipRect(surface, &newClipRect);
 
   rect.SetPositionX(oldClipRect.x);
   rect.SetPositionY(oldClipRect.y);
