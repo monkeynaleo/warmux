@@ -217,6 +217,9 @@ void ScrollBox::Draw(const Point2i &mousePosition) const
   }
 
   WidgetList::Draw(mousePosition);
+  if (highlit) {
+    //GetMainWindow().BoxColor(*highlit, selected_item_color);
+  }
 
   if (max_offset > 0) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
