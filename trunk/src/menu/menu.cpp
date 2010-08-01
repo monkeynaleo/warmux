@@ -462,9 +462,10 @@ void Menu::Run(bool skip_menu)
 
 void Menu::Display(const Point2i& mousePosition)
 {
-  widgets.Update(mousePosition);
+  widgets.Update(mousePosition, last_mouse_position);
   Draw(mousePosition);
   AppWormux::GetInstance()->video->Flip();
+  last_mouse_position = mousePosition;
 }
 
 void Menu::SetActionButtonsXY(int x, int y)

@@ -34,7 +34,6 @@ private:
   WidgetList operator=(const WidgetList&);
   /*********************************************/
 
-  Point2i lastMousePosition;
   Widget* selected_widget;
 
 protected:
@@ -48,7 +47,8 @@ public:
              const xmlNode * widgetListNode);
   virtual ~WidgetList();
 
-  virtual void Update(const Point2i &mousePosition);
+  virtual void Update(const Point2i &mousePosition,
+                      const Point2i &lastMousePosition);
   virtual void Draw(const Point2i &mousePosition) const;
   // set need_redrawing to true for all sub widgets;
   virtual void NeedRedrawing();
