@@ -25,9 +25,9 @@
 #include <iostream>
 #include <algorithm>  //std::transform
 #include "game/config.h"
-#include "graphic/font.h"
 #include "graphic/video.h"
-#include "gui/list_box.h"
+#include "gui/label.h"
+#include "gui/scroll_box.h"
 #include "include/app.h"
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
@@ -65,16 +65,13 @@ std::string Author::PrettyString(bool with_email) const
 {
   std::ostringstream ss;
   ss << "* " << name;
-  if (with_email)
-  {
+  if (with_email) {
     ss << " <" << email << ">";
   }
-  if (!nickname.empty())
-  {
+  if (!nickname.empty()) {
     ss << " " << _("aka") << " " << nickname;
   }
-  if (!country.empty())
-  {
+  if (!country.empty()) {
     ss << " " << _("from") << " " << country;
   }
   ss << ": " << description;
@@ -87,71 +84,68 @@ std::string Author::PrettyString(bool with_email) const
 CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
-  ListBox * lbox_authors = new ListBox(Point2i(GetMainWindow().GetWidth()-60,
-					       GetMainWindow().GetHeight()-60-30),
-				       false);
+  const Surface& window = GetMainWindow();
+  lbox_authors = new ScrollBox(Point2i(0.9*window.GetWidth(),
+				       0.9*window.GetHeight() - 30),
+			       false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
-  lbox_authors->SetPosition(30, 30);
+  lbox_authors->SetPosition(0.05*window.GetWidth(), 0.05*window.GetHeight());
+
+  PrepareAuthorsList();
 
   widgets.AddWidget(lbox_authors);
   widgets.Pack();
-
-  PrepareAuthorsList(lbox_authors);
 }
 
 CreditsMenu::~CreditsMenu()
 {
 }
 
-bool CreditsMenu::signal_ok()
+void CreditsMenu::AddItem(const std::string & label,
+                          Font::font_size_t fsize,
+                          Font::font_style_t fstyle,
+                          const Color & color)
 {
-  return true;
+  lbox_authors->AddWidget(new Label(label, lbox_authors->GetSizeX() - 10,
+                                    fsize, fstyle, color));
 }
 
-bool CreditsMenu::signal_cancel()
-{
-  return true;
-}
-
-
-void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
+void CreditsMenu::PrepareAuthorsList()
 {
   std::string filename = Config::GetInstance()->GetDataDir() + "authors.xml";
   XmlReader doc;
-  if(!doc.Load(filename))
-  {
+  if(!doc.Load(filename)) {
     // Error: do something ...
     return;
   }
   // Use an array for this is the best solution I think, but there is perhaps a better code...
   static const std::string teams[] = { "team", "contributors", "thanks" };
 
-  for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
-  {
+  for (uint i = 0; i < (sizeof teams / sizeof* teams); ++i) {
     xmlNodeArray team = XmlReader::GetNamedChildren(doc.GetRoot(), teams[i]);
 
     if (team.empty())
       continue;
 
     std::string team_title = teams[i];
-    std::transform( team_title.begin(), team_title.end(), team_title.begin(), static_cast<int (*)(int)>(toupper) );
+    std::transform(team_title.begin(), team_title.end(), team_title.begin(),
+                   static_cast<int (*)(int)>(toupper) );
 
     // I think this is ugly, but someone can use a better presentation
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
-    lbox_authors->AddItem (false, " ", "",
-                           Font::FONT_BIG, Font::FONT_BOLD);
-    lbox_authors->AddItem (false, team_title, teams[i],
-                           Font::FONT_BIG, Font::FONT_BOLD, c_red);
+    AddItem(" ", Font::FONT_BIG, Font::FONT_BOLD);
+    AddItem(team_title,  Font::FONT_BIG, Font::FONT_BOLD, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlNodeArray sections = XmlReader::GetNamedChildren(team.front(), "section");
-    xmlNodeArray::const_iterator section=sections.begin(), end_section=sections.end();
+    xmlNodeArray::const_iterator section     = sections.begin(),
+                                 end_section = sections.end();
 
-    for (; section != end_section; ++section)
-    {
+    for (; section != end_section; ++section) {
       xmlNodeArray authors = XmlReader::GetNamedChildren(*section, "author");
-      xmlNodeArray::const_iterator node=authors.begin(), end=authors.end();
+      xmlNodeArray::const_iterator node = authors.begin(),
+                                   end  = authors.end();
       std::string title;
 
       if (!XmlReader::ReadStringAttr(*section, "title", title))
@@ -159,21 +153,18 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors) const
 
       std::cout << "== " << title << " ==" << std::endl;
 
-      lbox_authors->AddItem (false, " ", "");
-      lbox_authors->AddItem (false, "   "+title, title,
-                             Font::FONT_MEDIUM, Font::FONT_BOLD, c_yellow);
+      AddItem(" ");
+      AddItem("   "+title, Font::FONT_MEDIUM, Font::FONT_BOLD, c_yellow);
 
-      for (; node != end; ++node)
-      {
+      for (; node != end; ++node) {
         Author author;
-        if (author.Feed(*node))
-        {
+        if (author.Feed(*node)) {
           std::cout << author.PrettyString(false) << std::endl;
-          lbox_authors->AddItem (false, author.PrettyString(false), author.name);
+          AddItem(author.PrettyString(false));
         }
       }
       std::cout << std::endl;
-      lbox_authors->AddItem (false, "", "");
+      AddItem("");
     }
   }
 }
@@ -191,5 +182,3 @@ void CreditsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   widgets.ClickUp(mousePosition, button);
 }
-
-//-----------------------------------------------------------------------------
