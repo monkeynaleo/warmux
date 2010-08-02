@@ -650,14 +650,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\gui\list_box_w_label.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\gui\list_box_w_label.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\gui\msg_box.cpp"
 					>
 				</File>
@@ -702,19 +694,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\gui\scroll_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\scroll_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\select_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\select_box.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\gui\spin_button.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\src\gui\spin_button.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\gui\spin_button_big.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\gui\spin_button_big.h"
 					>
 				</File>
 				<File
