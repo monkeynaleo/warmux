@@ -186,42 +186,29 @@ template<class T> class rectangle
      *
      * @param cr The rectangle used for clipping
      */
-    void Clip( const rectangle &cr){
-      if (!Intersect(cr)) {
+    void Clip(const rectangle &cr) {
+      if( IsSizeZero() || cr.IsSizeZero() ) {
         size.x = 0;
         size.y = 0;
         return;
       }
 
-      Vector2<T> newPositionBR = GetBottomRightPoint();
-      Vector2<T> crBottomRightPoint = cr.GetBottomRightPoint();
+      Vector2<T> r1BR = GetBottomRightPoint();
+      Vector2<T> r2BR = cr.GetBottomRightPoint();
+      Vector2<T> r1TL = GetTopLeftPoint();
+      Vector2<T> r2TL = cr.GetTopLeftPoint();
 
-      if (position.x < cr.position.x) {
-        position.x = cr.position.x;
-      } else if (position.x > crBottomRightPoint.x) {
-        position.x = crBottomRightPoint.x;
+      if (r1BR.x < r2TL.x || r1BR.y < r2TL.y ||
+          r2BR.x < r1TL.x || r2BR.y < r1TL.y ) {
+        size.x = 0;
+        size.y = 0;
+        return;
       }
 
-      if (position.y < cr.position.y) {
-        position.y = cr.position.y;
-      } else if (position.y > crBottomRightPoint.y) {
-        position.y = crBottomRightPoint.y;
-      }
-
-      if (newPositionBR.x < cr.position.x) {
-        newPositionBR.x = cr.position.x;
-      } else if (newPositionBR.x > crBottomRightPoint.x) {
-        newPositionBR.x = crBottomRightPoint.x;
-      }
-
-      if (newPositionBR.y < cr.position.y) {
-        newPositionBR.y = cr.position.y;
-      } else if (newPositionBR.y > crBottomRightPoint.y) {
-        newPositionBR.y = crBottomRightPoint.y;
-      }
-
-      size = newPositionBR - position + 1 ;
-      ASSERT( cr.Contains( *this ) );
+      position.x = std::max(r1TL.x, r2TL.x);
+      position.y = std::max(r1TL.y, r2TL.y);
+      size.x     = std::min(r1BR.x, r2BR.x) - position.x + 1;
+      size.y     = std::min(r1BR.y, r2BR.y) - position.y + 1;
     }
 
     /**
