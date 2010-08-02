@@ -78,7 +78,7 @@ void WidgetList::RemoveWidget(Widget* w)
 void WidgetList::Update(const Point2i& mousePosition,
                         const Point2i& lastMousePosition)
 {
-  Rectanglei wlr = GetClipRect();
+  Rectanglei wlr = *this;
   Rectanglei wlr_original, wlr_tmp;
 
   // Get current clip rectangle in wlr_original, SDL clip rectangle is now garbage
@@ -327,7 +327,7 @@ bool WidgetList::SendKey(SDL_keysym key)
 
 void WidgetList::Draw(const Point2i &mousePosition) const
 {
-  Rectanglei wlr = GetClipRect();
+  Rectanglei wlr = *this;
   Rectanglei wlr_original, wlr_tmp;
 
   // Get current clip rectangle in wlr_original, SDL clip rectangle is now garbage
