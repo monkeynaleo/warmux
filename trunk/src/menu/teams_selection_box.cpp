@@ -54,7 +54,8 @@ public:
     for (uint i=0; i<nb; i++)
       AddWidgetItem(false, teams[i]);
     // Otherwise list doesn't get refreshed until next GUI event
-    need_redrawing = true;
+    Pack();
+    NeedRedrawing();
   }
 };
 
@@ -178,10 +179,6 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
             }
           }
         } else {
-          if (0 && list_box) {
-            printf("Got here\n");
-            return list_box->ClickUp(mousePosition, button);
-          }
           return w;
         }
         break;
@@ -189,7 +186,7 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
     }
   }
 
-  return NULL;
+  return (list_box) ? list_box->ClickUp(mousePosition, button) : NULL;
 }
 
 Widget* LocalTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
