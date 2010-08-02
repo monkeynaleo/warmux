@@ -35,7 +35,7 @@
 
 static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
-static const uint MARGIN_BOTTOM = 50;
+static const uint MARGIN_BOTTOM = 40;
 
 static const uint TEAMS_BOX_H = 240;
 
