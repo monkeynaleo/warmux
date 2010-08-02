@@ -99,11 +99,6 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
   return (list_box) ? list_box->ClickUp(mousePosition, button) : NULL;
 }
 
-Widget* NetworkTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
-{
-  return (list_box) ? list_box->Click(mousePosition, button) : NULL;
-}
-
 const std::string NetworkTeamsSelectionBox::GetLocalPlayerName()
 {
   std::string result;

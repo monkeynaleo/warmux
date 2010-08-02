@@ -60,8 +60,8 @@ public:
   virtual void Draw(const Point2i &mousePosition);
 
   virtual void ValidTeamsSelection() = 0;
-  virtual Widget* Click(const Point2i &mousePosition, uint button) = 0;
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button) = 0;
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
 };
 
 class LocalTeamsSelectionBox : public TeamsSelectionBox
@@ -75,7 +75,6 @@ public:
   LocalTeamsSelectionBox(const Point2i &size, bool border);
 
   virtual void ValidTeamsSelection();
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 

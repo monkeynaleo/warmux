@@ -142,6 +142,11 @@ void TeamsSelectionBox::Draw(const Point2i& mousePosition)
     list_box->Draw(mousePosition);
 }
 
+Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+{
+  return (list_box) ? list_box->Click(mousePosition, button) : NULL;
+}
+
 // =============================================================================
 
 LocalTeamsSelectionBox::LocalTeamsSelectionBox(const Point2i &size, bool border) :
@@ -206,11 +211,6 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
   }
 
   return (list_box) ? list_box->ClickUp(mousePosition, button) : NULL;
-}
-
-Widget* LocalTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
-{
-  return (list_box) ? list_box->Click(mousePosition, button) : NULL;
 }
 
 void LocalTeamsSelectionBox::PrevTeam(int i)
