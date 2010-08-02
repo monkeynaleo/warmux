@@ -27,6 +27,7 @@
 
 
 class ButtonPic;
+class ItemBox;
 class ListBox;
 class CheckBox;
 class ComboBox;
@@ -37,77 +38,80 @@ class TextBox;
 
 class OptionMenu : public Menu
 {
- public:
-   OptionMenu();
-   ~OptionMenu();
-   static void CheckUpdates();
+public:
+  OptionMenu();
+  ~OptionMenu();
+  static void CheckUpdates();
 
  private:
 
-   /* If you need this, implement it (correctly)*/
-   OptionMenu(const OptionMenu&);
-   OptionMenu operator=(const OptionMenu&);
-   /********************************************/
+  /* If you need this, implement it (correctly)*/
+  OptionMenu(const OptionMenu&);
+  OptionMenu operator=(const OptionMenu&);
+  /********************************************/
 
-   /* Graphic options controllers */
-   ComboBox *cbox_video_mode;
+  /* Graphic options controllers */
+  ComboBox *cbox_video_mode;
 #ifdef ENABLE_NLS
-   ListBox *lbox_languages;
+  ItemBox *lbox_languages;
 #endif
-   CheckBox *opt_display_wind_particles;
-   CheckBox *opt_display_multisky;
-   CheckBox *opt_display_energy;
-   CheckBox *opt_display_name;
+  CheckBox *opt_display_wind_particles;
+  CheckBox *opt_display_multisky;
+  CheckBox *opt_display_energy;
+  CheckBox *opt_display_name;
 #ifndef __APPLE__
-   CheckBox *full_screen;
+  CheckBox *full_screen;
 #endif
-   SpinButtonWithPicture *opt_max_fps;
+  SpinButtonWithPicture *opt_max_fps;
 
-   /* Sound options controllers */
-   ComboBox *cbox_sound_freq;
-   uint initial_vol_mus;
-   uint initial_vol_eff;
-   SpinButtonWithPicture *volume_music;
-   SpinButtonWithPicture *volume_effects;
-   CheckBox *music_cbox;
-   CheckBox *effects_cbox;
-   CheckBox *warn_cbox;
+  /* Sound options controllers */
+  ComboBox *cbox_sound_freq;
+  uint initial_vol_mus;
+  uint initial_vol_eff;
+  SpinButtonWithPicture *volume_music;
+  SpinButtonWithPicture *volume_effects;
+  CheckBox *music_cbox;
+  CheckBox *effects_cbox;
+  CheckBox *warn_cbox;
 
-   /* Misc options controllers */
+  /* Misc options controllers */
 #ifdef HAVE_LIBCURL
-   CheckBox *opt_updates;
+  CheckBox *opt_updates;
 #endif
-   CheckBox *opt_lefthanded_mouse;
-   CheckBox *opt_scroll_on_border;
-   SpinButtonWithPicture * opt_scroll_border_size;
+  CheckBox *opt_lefthanded_mouse;
+  CheckBox *opt_scroll_on_border;
+  SpinButtonWithPicture * opt_scroll_border_size;
 
-   void SaveOptions();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
-   static uint fromVolume(uint vol);
-   static uint toVolume(uint level);
+  void SaveOptions();
+  void OnClick(const Point2i &mousePosition, int button);
+  void OnClickUp(const Point2i &mousePosition, int button);
+  void Draw(const Point2i &mousePosition);
+  static uint fromVolume(uint vol);
+  static uint toVolume(uint level);
 
-   /* Teams controllers */
+  /* Teams controllers */
 
-   ListBox *lbox_teams;
-   Button *add_team;
-   Button *delete_team;
-   CustomTeam  *selected_team;
-   TextBox *tbox_team_name;
-   Label *team_name;
-   std::vector<TextBox *> tbox_character_name_list;
+  ListBox *lbox_teams;
+  Button *add_team;
+  Button *delete_team;
+  CustomTeam  *selected_team;
+  TextBox *tbox_team_name;
+  Label *team_name;
+  std::vector<TextBox *> tbox_character_name_list;
 
-   bool TeamInfoValid();
-   void AddTeam();
-   void DeleteTeam();
-   void LoadTeam();
-   void ReloadTeamList();
-   bool SaveTeam();
-   void SelectTeam();
+#ifdef ENABLE_NLS
+  void AddLanguageItem(const char* label, const char* value);
+#endif
+  bool TeamInfoValid();
+  void AddTeam();
+  void DeleteTeam();
+  void LoadTeam();
+  void ReloadTeamList();
+  bool SaveTeam();
+  void SelectTeam();
 
-   bool signal_ok();
-   bool signal_cancel();
+  bool signal_ok();
+  bool signal_cancel();
 };
 
 #endif

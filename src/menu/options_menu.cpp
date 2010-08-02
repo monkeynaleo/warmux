@@ -35,6 +35,7 @@
 #include "gui/label.h"
 #include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
+#include "gui/select_box.h"
 #include "gui/list_box.h"
 #include "gui/combo_box.h"
 #include "gui/check_box.h"
@@ -130,7 +131,7 @@ OptionMenu::OptionMenu() :
 
 #ifdef ENABLE_NLS
   /* Language selection */
-  lbox_languages = new ListBox(option_size);
+  lbox_languages = new ItemBox(tabs->GetSize() - 10);
   tabs->AddNewTab("unused", _("Language"), lbox_languages);
 #endif
 
@@ -298,44 +299,44 @@ OptionMenu::OptionMenu() :
 
 #ifdef ENABLE_NLS
   // Setting language selection
-  lbox_languages->AddItem(config->GetLanguage() == "",    _("(system language)"),  "");
-  lbox_languages->AddItem(config->GetLanguage() == "bg",    "Български (bg)",      "bg");
-  lbox_languages->AddItem(config->GetLanguage() == "bs",    "Bosanski",            "bs");
-  lbox_languages->AddItem(config->GetLanguage() == "es",    "Castellano",          "es");
-  lbox_languages->AddItem(config->GetLanguage() == "ca",    "Català",              "ca");
-  lbox_languages->AddItem(config->GetLanguage() == "cs",    "čeština (Czech)",     "cs");
-  lbox_languages->AddItem(config->GetLanguage() == "cpf",   "Créole",              "cpf");
-  lbox_languages->AddItem(config->GetLanguage() == "da",    "Dansk",               "da");
-  lbox_languages->AddItem(config->GetLanguage() == "de",    "Deutsch",             "de");
-  lbox_languages->AddItem(config->GetLanguage() == "eo",    "Esperanto",           "eo");
-  lbox_languages->AddItem(config->GetLanguage() == "en",    "English",             "en");
-  lbox_languages->AddItem(config->GetLanguage() == "el",    "Ελληνικά",            "el");
-  lbox_languages->AddItem(config->GetLanguage() == "et",    "Eesti keel",          "et");
-  lbox_languages->AddItem(config->GetLanguage() == "fa",    "فارسی (Farsi)",       "fa");
-  lbox_languages->AddItem(config->GetLanguage() == "fr",    "Français",            "fr");
-  lbox_languages->AddItem(config->GetLanguage() == "gl",    "Galego",              "gl");
-  lbox_languages->AddItem(config->GetLanguage() == "he",    "עברית (Hebrew)",      "he");
-  lbox_languages->AddItem(config->GetLanguage() == "hu",    "Magyar",              "hu");
-  lbox_languages->AddItem(config->GetLanguage() == "it",    "Italiano",            "it");
-  lbox_languages->AddItem(config->GetLanguage() == "ja_JP", "日本語 (japanese)",    "ja_JP");
-  lbox_languages->AddItem(config->GetLanguage() == "kw",    "Kernewek",            "kw");
-  lbox_languages->AddItem(config->GetLanguage() == "lv",    "latviešu valoda",     "lv");
-  lbox_languages->AddItem(config->GetLanguage() == "nb",    "Norsk (bokmål)",      "nb");
-  lbox_languages->AddItem(config->GetLanguage() == "nn",    "Norsk (nynorsk)",     "nn");
-  lbox_languages->AddItem(config->GetLanguage() == "nl",    "Nederlands",          "nl");
-  lbox_languages->AddItem(config->GetLanguage() == "pl",    "Polski",              "pl");
-  lbox_languages->AddItem(config->GetLanguage() == "pt",    "Português",           "pt");
-  lbox_languages->AddItem(config->GetLanguage() == "pt_BR", "Português do Brasil", "pt_BR");
-  lbox_languages->AddItem(config->GetLanguage() == "ro",    "Română",              "ro");
-  lbox_languages->AddItem(config->GetLanguage() == "ru",    "Pусский язык (ru)",   "ru");
-  lbox_languages->AddItem(config->GetLanguage() == "sk",    "Slovenčina",          "sk");
-  lbox_languages->AddItem(config->GetLanguage() == "sl",    "Slovenščina",         "sl");
-  lbox_languages->AddItem(config->GetLanguage() == "fi",    "Suomi",               "fi");
-  lbox_languages->AddItem(config->GetLanguage() == "sv",    "Svenska",             "sv");
-  lbox_languages->AddItem(config->GetLanguage() == "tr",    "Türkçe",              "tr");
-  lbox_languages->AddItem(config->GetLanguage() == "ua",    "украї́нська мо́ва",     "ua");
-  lbox_languages->AddItem(config->GetLanguage() == "zh_CN", "汉语 (hànyǔ)",        "zh_CN");
-  lbox_languages->AddItem(config->GetLanguage() == "zh_TW", "闽语 (mǐnyǔ)",        "zh_TW");
+    AddLanguageItem(_("(system language)"),"");
+    AddLanguageItem("Български (bg)",      "bg");
+    AddLanguageItem("Bosanski",            "bs");
+    AddLanguageItem("Castellano",          "es");
+    AddLanguageItem("Català",              "ca");
+    AddLanguageItem("čeština (Czech)",     "cs");
+    AddLanguageItem("Créole",              "cpf");
+    AddLanguageItem("Dansk",               "da");
+    AddLanguageItem("Deutsch",             "de");
+    AddLanguageItem("Esperanto",           "eo");
+    AddLanguageItem("English",             "en");
+    AddLanguageItem("Ελληνικά",            "el");
+    AddLanguageItem("Eesti keel",          "et");
+    AddLanguageItem("ارسی (Farsi)",        "fa");
+    AddLanguageItem("Français",            "fr");
+    AddLanguageItem("Galego",              "gl");
+    AddLanguageItem("עברית (Hebrew)",      "he");
+    AddLanguageItem("Magyar",              "hu");
+    AddLanguageItem("Italiano",            "it");
+    AddLanguageItem("日本語 (japanese)",    "ja_JP");
+    AddLanguageItem("Kernewek",            "kw");
+    AddLanguageItem("latviešu valoda",     "lv");
+    AddLanguageItem("Norsk (bokmål)",      "nb");
+    AddLanguageItem("Norsk (nynorsk)",     "nn");
+    AddLanguageItem("Nederlands",          "nl");
+    AddLanguageItem("Polski",              "pl");
+    AddLanguageItem("Português",           "pt");
+    AddLanguageItem("Português do Brasil", "pt_BR");
+    AddLanguageItem("Română",              "ro");
+    AddLanguageItem("Pусский язык (ru)",   "ru");
+    AddLanguageItem("Slovenčina",          "sk");
+    AddLanguageItem("Slovenščina",         "sl");
+    AddLanguageItem("Suomi",               "fi");
+    AddLanguageItem("Svenska",             "sv");
+    AddLanguageItem("Türkçe",              "tr");
+    AddLanguageItem("украї́нська мо́ва",     "ua");
+    AddLanguageItem("汉语 (hànyǔ)",         "zh_CN");
+    AddLanguageItem("闽语 (mǐnyǔ)",         "zh_TW");
 #endif
 
 #ifdef HAVE_LIBCURL
@@ -439,8 +440,7 @@ void OptionMenu::SaveOptions()
 
 #if ENABLE_NLS
   // Language
-  std::string s_language = lbox_languages->ReadValue();
-  config->SetLanguage(s_language);
+  config->SetLanguage(lbox_languages->GetSelectedValue());
 #endif
 
   // Sound
@@ -655,3 +655,13 @@ void OptionMenu::SelectTeam()
     }
   }
 }
+
+#ifdef ENABLE_NLS
+void OptionMenu::AddLanguageItem(const char* label, const char* value)
+{
+  lbox_languages->AddItem(Config::GetConstInstance()->GetLanguage() == value,
+                          new Label(label, 400, Font::FONT_SMALL,
+                                    Font::FONT_BOLD, white_color, false, true),
+                          value);
+}
+#endif
