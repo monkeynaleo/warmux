@@ -19,8 +19,8 @@
  * Vertical Scroll Box
  *****************************************************************************/
 
-#ifndef VERTICAL_SCROLL_BOX
-#define VERTICAL_SCROLL_BOX
+#ifndef SCROLL_BOX
+#define SCROLL_BOX
 
 #include "widget_list.h"
 
@@ -37,16 +37,11 @@ protected:
   Button * m_up;
   Button * m_down;
 
-  // Colors
-  Color selected_item_color;
-  Color default_item_color;
-
   // Scroll information
-  bool         always_one_selected;
   bool         scrolling;
   bool         moving;
   int          offset;
-  Widget      *highlit;
+  int          scrollbar_width;
 
   virtual void __Update(const Point2i & mousePosition,
                         const Point2i & lastMousePosition);
@@ -57,23 +52,19 @@ protected:
   int GetTrackHeight() const;
 
 public:
-  void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
-  void SetDefaultItemColor(const Color& color) { default_item_color = color; };
-
   ScrollBox(const Point2i & size, bool always_one_selected = true);
-  ScrollBox(Profile * profile, const xmlNode * baseListBoxNode);
-  virtual ~ScrollBox();
+  ~ScrollBox();
 
-  //virtual bool LoadXMLConfiguration(void);
+  virtual void Pack();
 
   // to add a widget
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
+  virtual void Empty();
 
   virtual void Draw(const Point2i & mousePosition) const;
   virtual Widget* Click(const Point2i & mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
-  virtual void SetFocusOn(Widget* widget, bool force_mouse_position = false);
 };
 
-#endif  //VERTICAL_SCROLL_BOX
+#endif  //SCROLL_BOX
