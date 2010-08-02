@@ -26,7 +26,8 @@
 #include "gui/scroll_box.h"
 #include "include/app.h"
 
-#define BORDER           2
+#define SCROLL_SPEED  6
+#define BORDER        2
 
 ScrollBox::ScrollBox(const Point2i & _size, bool always)
   : WidgetList(_size)
@@ -83,7 +84,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       (is_click && m_down->Contains(mousePosition))) {
 
     // bottom button
-    offset += 6;
+    offset += SCROLL_SPEED;
     if (offset > GetMaxOffset())
       offset = GetMaxOffset();
 
@@ -93,7 +94,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
              (is_click && m_up->Contains(mousePosition))) {
 
     // top button
-    offset -= 6;
+    offset -= SCROLL_SPEED;
     if (offset < 0)
       offset = 0;
 
@@ -145,14 +146,14 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     // generate activity (fake event?) ?
     if (m_down->Contains(mousePosition)) {
       // bottom button
-      offset += 6;
+      offset += SCROLL_SPEED;
       if (offset > GetMaxOffset())
         offset = GetMaxOffset();
       Pack();
       return;
     } else if (m_up->Contains(mousePosition)) {
       // top button
-      offset -= 6;
+      offset -= SCROLL_SPEED;
       if (offset < 0)
         offset = 0;
       Pack();
@@ -200,8 +201,8 @@ void ScrollBox::Draw(const Point2i &mousePosition) const
 
 Point2i ScrollBox::GetScrollTrackPos() const
 {
-  return Point2i(GetPositionX() + GetSizeX() - BORDER - scrollbar_width,
-                 GetPositionY() + BORDER + m_up->GetSizeY());
+  return Point2i(position.x + size.x - BORDER - scrollbar_width,
+                 position.y + BORDER + m_up->GetSizeY());
 }
 
 Rectanglei ScrollBox::GetScrollTrack() const
@@ -214,11 +215,11 @@ Rectanglei ScrollBox::GetScrollThumb() const
 {
   // Height: (part of the vbox that is displayed / vbox size) * scrollbar height
   Rectanglei scroll_track = GetScrollTrack();
-  uint tmp_h = ((GetSizeY() - 2*BORDER) * scroll_track.GetSizeY())
-             / ((GetSizeY() - 2*BORDER) + GetMaxOffset());
+  uint tmp_h = ((size.y - 2*BORDER) * scroll_track.GetSizeY())
+             / ((size.y - 2*BORDER) + GetMaxOffset());
   // Start position: from the offset
   uint tmp_y = scroll_track.GetPositionY()
-             + (offset * scroll_track.GetSizeY()) / (GetSizeY() + GetMaxOffset());
+             + (offset * scroll_track.GetSizeY()) / (size.y + GetMaxOffset());
   if (tmp_h < 6)
     tmp_h = 6;
   return Rectanglei(scroll_track.GetPositionX(), tmp_y,
@@ -227,12 +228,12 @@ Rectanglei ScrollBox::GetScrollThumb() const
 
 int ScrollBox::GetMaxOffset() const
 {
-  return vbox->GetSizeY() - GetSizeY();
+  return vbox->GetSizeY() - size.y;
 }
 
 int ScrollBox::GetTrackHeight() const
 {
-  return GetSizeY() - 2*(m_up->GetSizeY()+BORDER+1);
+  return size.y - 2*(m_up->GetSizeY()+BORDER+1);
 }
 
 void ScrollBox::Empty()
