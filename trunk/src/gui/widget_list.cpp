@@ -78,10 +78,7 @@ void WidgetList::RemoveWidget(Widget* w)
 void WidgetList::Update(const Point2i& mousePosition,
                         const Point2i& lastMousePosition)
 {
-  if (need_redrawing) {
-    Widget::RedrawBackground(*this);
-    Draw(mousePosition);
-  }
+  Widget::Update(mousePosition, lastMousePosition);
 
   Rectanglei wlr = (Rectanglei)*this;
 
@@ -100,7 +97,6 @@ void WidgetList::Update(const Point2i& mousePosition,
     SwapWindowClip(r);
   }
   SwapWindowClip(wlr);
-  need_redrawing = false;
 }
 
 void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
