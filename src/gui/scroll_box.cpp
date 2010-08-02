@@ -140,7 +140,7 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 }
 
 void ScrollBox::__Update(const Point2i & mousePosition,
-                         const Point2i & lastMousePosition)
+                         const Point2i & /*lastMousePosition*/)
 {
   if (!Contains(mousePosition)) {
     scrolling = false;
