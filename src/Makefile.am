@@ -118,6 +118,8 @@ wormux_SOURCES = \
         gui/question.h \
         gui/scroll_box.cpp \
         gui/scroll_box.h \
+        gui/select_box.cpp \
+        gui/select_box.h \
         gui/spin_button.cpp \
         gui/spin_button.h \
         gui/spin_button_picture.cpp \
