@@ -51,10 +51,7 @@
 
 static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
-static const uint MARGIN_BOTTOM = 60;
-
-static const uint TEAMS_BOX_H = 180;
-static const uint CHAT_BOX_H = 150;
+static const uint MARGIN_BOTTOM = 50;
 
 NetworkMenu::NetworkMenu() :
   Menu("menu/bg_network")
@@ -67,25 +64,31 @@ NetworkMenu::NetworkMenu() :
   Surface& window = GetMainWindow();
 
   // Calculate main box size
+  int chat_box_height = window.GetHeight()/4;
+  int team_box_height = 180;
   int mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  int mainBoxHeight = window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE - CHAT_BOX_H;
-  int mapsHeight = mainBoxHeight - TEAMS_BOX_H - 80;
+  int mainBoxHeight = window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE - chat_box_height;
+  int mapsHeight = mainBoxHeight - team_box_height - 60;
   int multitabsWidth = mainBoxWidth;
   bool multitabs = false;
 
   if (window.GetWidth() > 640 && mapsHeight > 200) {
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
+    mapsHeight = 200;
+    team_box_height = mainBoxHeight - mapsHeight - 60;
   } else {
     mapsHeight = 200;
+    team_box_height = mainBoxHeight - 60;
   }
+
 
   MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
 
   // ################################################
   // ##  TEAM AND MAP SELECTION
   // ################################################
-  team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), multitabs);
+  team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-10, team_box_height), multitabs);
 
   if (Network::GetInstance()->IsGameMaster()) {
     map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs, false);
@@ -115,7 +118,7 @@ NetworkMenu::NetworkMenu() :
   // ##  GAME OPTIONS
   // ################################################
 
-  Box* bottom_box = new HBox(CHAT_BOX_H, false, true);
+  Box* bottom_box = new HBox(chat_box_height, false, true);
   bottom_box->SetNoBorder();
 
   Box* options_box = new VBox(200, true);
@@ -141,7 +144,7 @@ NetworkMenu::NetworkMenu() :
   // ##  CHAT BOX
   // ################################################
 
-  msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, CHAT_BOX_H),
+  msg_box = new TalkBox(Point2i(mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE, chat_box_height),
                         Font::FONT_SMALL, Font::FONT_BOLD);
   msg_box->SetPosition(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
                        options_box->GetPositionY());
