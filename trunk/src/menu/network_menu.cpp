@@ -51,7 +51,7 @@
 
 static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
-static const uint MARGIN_BOTTOM = 50;
+static const uint MARGIN_BOTTOM = 40;
 
 NetworkMenu::NetworkMenu() :
   Menu("menu/bg_network")
@@ -76,25 +76,21 @@ NetworkMenu::NetworkMenu() :
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
     mapsHeight = 200;
-    team_box_height = mainBoxHeight - mapsHeight - 60;
+    team_box_height = mainBoxHeight - 200 - 60;
   } else {
-    mapsHeight = 200;
+    mapsHeight = mainBoxHeight - 60;
     team_box_height = mainBoxHeight - 60;
   }
-
 
   MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
 
   // ################################################
   // ##  TEAM AND MAP SELECTION
   // ################################################
-  team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-10, team_box_height), multitabs);
+  team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
-  if (Network::GetInstance()->IsGameMaster()) {
-    map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs, false);
-  } else {
-    map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs, true);
-  }
+  map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight),
+                                multitabs, Network::GetInstance()->IsGameMaster());
 
   if (!multitabs) {
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
