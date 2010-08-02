@@ -136,7 +136,7 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
     while (pos <= cur_txt.size() &&
            this->position.x + font->GetWidth(txt) < mousePosition.x+2) {
       cursor_pos = pos;
-      while ((cur_txt[++pos] & 0xc0) == 0x80
+      while ((cur_txt[pos++] & 0xc0) == 0x80
 	     && pos < cur_txt.size()) { } // eat all UTF-8 characters
       txt = cur_txt.substr(0, pos);
     }
