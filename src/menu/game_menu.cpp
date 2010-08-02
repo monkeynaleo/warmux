@@ -37,8 +37,6 @@ static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
 static const uint MARGIN_BOTTOM = 40;
 
-static const uint TEAMS_BOX_H = 240;
-
 // ################################################
 // ##  GAME MENU CLASS
 // ################################################
@@ -50,16 +48,20 @@ GameMenu::GameMenu() :
   Surface& window = GetMainWindow();
 
   // Calculate main box size
+  int  team_box_height = 240;
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
   uint mainBoxHeight = window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE;
-  uint mapsHeight = mainBoxHeight - TEAMS_BOX_H - 80;
+  uint mapsHeight = mainBoxHeight - team_box_height - 60;
   uint multitabsWidth = mainBoxWidth;
   bool multitabs = false;
   if (window.GetWidth() > 640 && mapsHeight > 200) {
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
-  } else {
     mapsHeight = 200;
+    team_box_height = mainBoxHeight - 200 - 60;
+  } else {
+    mapsHeight = mainBoxHeight - 60;
+    team_box_height = mainBoxHeight - 60;
   }
 
   MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
@@ -68,9 +70,9 @@ GameMenu::GameMenu() :
   // ##  TEAM AND MAP SELECTION
   // ################################################
 
-  team_box = new LocalTeamsSelectionBox(Point2i(multitabsWidth, TEAMS_BOX_H), multitabs);
+  team_box = new LocalTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
-  map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight), multitabs);
+  map_box = new MapSelectionBox(Point2i(multitabsWidth-4, mapsHeight), multitabs);
 
   if (!multitabs) {
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
