@@ -97,8 +97,8 @@ bool BaseListBox::LoadXMLConfiguration()
   //Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  const xmlNode* buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp"),
-                 buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
+  const xmlNode* buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp");
+  const xmlNode* buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
 
   if (NULL == buttonUpNode || NULL == buttonDownNode) {
     return false;
