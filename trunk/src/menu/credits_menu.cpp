@@ -86,8 +86,7 @@ CreditsMenu::CreditsMenu()  :
 {
   const Surface& window = GetMainWindow();
   lbox_authors = new ScrollBox(Point2i(0.9*window.GetWidth(),
-                                       0.9*window.GetHeight() - 30),
-                               false);
+                                       0.9*window.GetHeight() - 30));
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
   lbox_authors->SetPosition(0.05f*window.GetWidth(), 0.05f*window.GetHeight());
 
