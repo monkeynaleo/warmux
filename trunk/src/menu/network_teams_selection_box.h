@@ -52,7 +52,6 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   NetworkTeamsSelectionBox(const Point2i &size, bool w_border);
 
   virtual void ValidTeamsSelection();
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(const std::string& team_id);
