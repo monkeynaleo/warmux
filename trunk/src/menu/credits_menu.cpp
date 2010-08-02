@@ -86,8 +86,8 @@ CreditsMenu::CreditsMenu()  :
 {
   const Surface& window = GetMainWindow();
   lbox_authors = new ScrollBox(Point2i(0.9*window.GetWidth(),
-				       0.9*window.GetHeight() - 30),
-			       false);
+                                       0.9*window.GetHeight() - 30),
+                               false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
   lbox_authors->SetPosition(0.05*window.GetWidth(), 0.05*window.GetHeight());
 
@@ -99,6 +99,7 @@ CreditsMenu::CreditsMenu()  :
 
 CreditsMenu::~CreditsMenu()
 {
+  // Don't pass to widgets: causes a double display
 }
 
 void CreditsMenu::AddItem(const std::string & label,
@@ -114,7 +115,7 @@ void CreditsMenu::PrepareAuthorsList()
 {
   std::string filename = Config::GetInstance()->GetDataDir() + "authors.xml";
   XmlReader doc;
-  if(!doc.Load(filename)) {
+  if (!doc.Load(filename)) {
     // Error: do something ...
     return;
   }
@@ -171,6 +172,7 @@ void CreditsMenu::PrepareAuthorsList()
 
 void CreditsMenu::Draw(const Point2i& /*mousePosition*/)
 {
+  // Don't pass to widgets: causes a double display
 }
 
 void CreditsMenu::OnClick(const Point2i &mousePosition, int button)
