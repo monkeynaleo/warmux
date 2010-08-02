@@ -89,7 +89,7 @@ CreditsMenu::CreditsMenu()  :
                                        0.9*window.GetHeight() - 30),
                                false);
   lbox_authors->SetBackgroundColor(Color(0,0,0,200));
-  lbox_authors->SetPosition(0.05*window.GetWidth(), 0.05*window.GetHeight());
+  lbox_authors->SetPosition(0.05f*window.GetWidth(), 0.05f*window.GetHeight());
 
   PrepareAuthorsList();
 
