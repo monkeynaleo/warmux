@@ -29,7 +29,7 @@
 #define SCROLL_SPEED  6
 #define BORDER        2
 
-ScrollBox::ScrollBox(const Point2i & _size, bool always)
+ScrollBox::ScrollBox(const Point2i & _size)
   : WidgetList(_size)
   , m_up(NULL)
   , m_down(NULL)
