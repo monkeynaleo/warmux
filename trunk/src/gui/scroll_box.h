@@ -55,6 +55,8 @@ public:
   ScrollBox(const Point2i & size, bool always_one_selected = true);
   ~ScrollBox();
 
+  virtual void Update(const Point2i &mousePosition,
+                      const Point2i &lastMousePosition);
   virtual void Pack();
 
   // to add a widget
