@@ -19,6 +19,7 @@
  *  Network teams selection box
  *****************************************************************************/
 
+#include "menu/teams_selection_box.h"
 #include "menu/network_teams_selection_box.h"
 #include "menu/team_box.h"
 #include "game/config.h"
@@ -65,16 +66,13 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
 
-      if (teams_selections.at(i)->Contains(mousePosition) &&
-           teams_selections.at(i)->IsLocal()) {
+      if (teams_selections[i]->Contains(mousePosition) &&
+          teams_selections[i]->IsLocal()) {
+        Widget * at = teams_selections[i];
+        Widget * w  = at->ClickUp(mousePosition, button);
 
-        Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
-
-        if (w == NULL) {
-          Rectanglei r(teams_selections.at(i)->GetPositionX(),
-                       teams_selections.at(i)->GetPositionY(),
-                       38,
-                       38);
+        if (!w) {
+          Rectanglei r(at->GetPosition(), Point2i(38,38));
           if (r.Contains(mousePosition)) {
             if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
               NextTeam(i);
@@ -87,7 +85,7 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
                           38,
                           30);
             if (r2.Contains(mousePosition)) {
-              teams_selections.at(i)->SwitchPlayerType();
+              teams_selections[i]->SwitchPlayerType();
             }
           }
         } else {
@@ -98,14 +96,12 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
     }
   }
 
-  return NULL;
+  return (list_box) ? list_box->ClickUp(mousePosition, button) : NULL;
 }
 
-Widget* NetworkTeamsSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
+Widget* NetworkTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
 {
-  // TODO ?
-  //return (list_box) ? list_box->Click(mousePosition, button) : NULL;
-  return NULL;
+  return (list_box) ? list_box->Click(mousePosition, button) : NULL;
 }
 
 const std::string NetworkTeamsSelectionBox::GetLocalPlayerName()
