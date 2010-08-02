@@ -41,16 +41,6 @@ class Box : public WidgetList
 
     void ParseXMLBoxParameters(void);
 
-    Widget * Click(const Point2i & mousePosition, 
-                   uint button) { 
-      return WidgetList::Click(mousePosition, button); 
-    };
-
-    Widget * ClickUp(const Point2i & mousePosition, 
-                     uint button) { 
-      return WidgetList::ClickUp(mousePosition, button); 
-    };
-
     void SetMargin(uint _margin) { margin = _margin; };
 
     void SetBorder(const Point2i & newBorder) { border = newBorder; };
