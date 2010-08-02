@@ -52,7 +52,7 @@ protected:
   int GetTrackHeight() const;
 
 public:
-  ScrollBox(const Point2i & size, bool always_one_selected = true);
+  ScrollBox(const Point2i & size);
   ~ScrollBox();
 
   virtual void Update(const Point2i &mousePosition,
