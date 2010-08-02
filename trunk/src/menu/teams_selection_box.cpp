@@ -44,6 +44,9 @@ public:
    : ScrollBox(size, false)
    , teams(teams)
   {
+    // SetNbTeams not called immediately
+    AddWidget(teams[0]);
+    AddWidget(teams[1]);
   }
   void Select(uint /*index*/) { /*BaseListBox::Select(index);*/ }
   void SetNbTeams(uint nb)
@@ -52,7 +55,6 @@ public:
     highlit = NULL;
     for (uint i=0; i<nb; i++)
       AddWidget(teams[i]);
-    // Otherwise list doesn't get refreshed until next GUI event
     Pack();
     NeedRedrawing();
   }
@@ -82,7 +84,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 
   bool use_list = _size.y < 2*120 || _size.x < 2*300;
   uint box_w = _size.x - local_teams_nb->GetSizeX() - 10;
-  Point2i box_size = use_list ? Point2i(box_w - 30, 120)
+  Point2i box_size = use_list ? Point2i(box_w - 40, 120)
                               : Point2i((box_w*2) / MAX_NB_TEAMS - 10,
                                         _size.y/2-10);
   printf("Size: %ix%i\n", _size.x, _size.y);
