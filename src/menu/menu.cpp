@@ -70,12 +70,12 @@ Menu::Menu(const std::string& bg, t_action _actions) :
       actions_buttons->AddWidget(b_cancel);
     }
 
+    widgets.AddWidget(actions_buttons);
+    widgets.Pack();
     uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
     uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
 
     actions_buttons->SetPosition(x, y);
-    widgets.AddWidget(actions_buttons);
-    widgets.Pack();
   }
 
   widgets.SetContainer(this);
