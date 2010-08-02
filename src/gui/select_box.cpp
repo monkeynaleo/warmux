@@ -39,7 +39,7 @@ void SelectBox::Update(const Point2i& mousePosition,
 {
   Surface& surf = GetMainWindow();
 
-  Rectanglei clip = GetClipRect();
+  Rectanglei clip = *this;
   SwapWindowClip(clip);
 
   if (selected_item != -1) {
@@ -61,7 +61,7 @@ void SelectBox::Draw(const Point2i &mousePosition) const
 {
   Surface& surf = GetMainWindow();
 
-  Rectanglei clip = GetClipRect();
+  Rectanglei clip = *this;
   SwapWindowClip(clip);
 
   if (selected_item != -1) {
