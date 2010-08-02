@@ -27,19 +27,14 @@
 #include "include/app.h"
 
 #define BORDER           2
-#define SCROLLBAR_WIDTH 10
 
 ScrollBox::ScrollBox(const Point2i & _size, bool always)
   : WidgetList(_size)
   , m_up(NULL)
   , m_down(NULL)
-  , selected_item_color(defaultListColor2)
-  , default_item_color(defaultListColor3)
-  , always_one_selected(always)
   , scrolling(false)
   , moving(false)
   , offset(0)
-  , highlit(NULL)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_up = new Button(res, "menu/up");
@@ -49,8 +44,10 @@ ScrollBox::ScrollBox(const Point2i & _size, bool always)
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(defaultListColor1);
 
-  vbox = new VBox(_size.x - SCROLLBAR_WIDTH -2*BORDER, false, true);
-  vbox->SetBorder(Point2i(5, 5));
+  scrollbar_width = m_up->GetSizeX();
+  vbox = new VBox(_size.x - scrollbar_width -2*BORDER, false, true);
+  vbox->SetBorder(Point2i(BORDER, BORDER));
+  vbox->SetMargin(BORDER);
 
   WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
@@ -73,12 +70,6 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   if (vbox->Contains(mousePosition)) {
     Widget *w = vbox->ClickUp(mousePosition, button);
     if (w) {
-      if (w == highlit && !always_one_selected) {
-        highlit = NULL;
-      } else {
-        highlit = w;
-      }
-
       NeedRedrawing();
       return w;
     }
@@ -96,7 +87,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     if (offset > GetMaxOffset())
       offset = GetMaxOffset();
 
-    NeedRedrawing();
+    Pack();
     return m_down;
   } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
              (is_click && m_up->Contains(mousePosition))) {
@@ -106,7 +97,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     if (offset < 0)
       offset = 0;
 
-    NeedRedrawing();
+    Pack();
     return m_up;
   } else {
     Rectanglei scroll_track = GetScrollTrack();
@@ -114,7 +105,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       // Set this as new scroll thumb position
       offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
              / scroll_track.GetSizeY();
-      NeedRedrawing();
+      Pack();
       return this;
     }
   }
@@ -157,12 +148,14 @@ void ScrollBox::__Update(const Point2i & mousePosition,
       offset += 6;
       if (offset > GetMaxOffset())
         offset = GetMaxOffset();
+      Pack();
       return;
     } else if (m_up->Contains(mousePosition)) {
       // top button
       offset -= 6;
       if (offset < 0)
         offset = 0;
+      Pack();
       return;
     }
     moving = false;
@@ -177,7 +170,8 @@ void ScrollBox::__Update(const Point2i & mousePosition,
         mousePosition.y <  track_pos.GetY() + height) {
       offset = ((mousePosition.y - track_pos.GetY()) * GetMaxOffset())
              / height;
-    }
+      Pack();
+   }
   }
 }
 
@@ -191,37 +185,11 @@ void ScrollBox::RemoveWidget(Widget* w)
   vbox->RemoveWidget(w);
 }
 
-void ScrollBox::SetFocusOn(Widget* widget, bool force_mouse_position)
-{
-  if (widget!=this && widget!=m_up && widget!=m_down && widget!=vbox)
-    highlit = widget;
-
-  WidgetList::SetFocusOn(widget, force_mouse_position);
-}
-
 void ScrollBox::Draw(const Point2i &mousePosition) const
 {
-  vbox->Pack();
-  int max_offset = GetMaxOffset();
-
-  m_up->SetPosition(GetScrollTrack().GetPositionX(),
-                    GetPositionY() + BORDER);
-  m_down->SetPosition(GetPosition() + GetSize() - m_down->GetSize() - BORDER);
-  m_up->SetVisible(max_offset > 0);
-  m_down->SetVisible(max_offset > 0);
+  WidgetList::Draw(mousePosition);
 
   if (GetMaxOffset() > 0) {
-    vbox->SetPosition(GetPositionX() + BORDER, GetPositionY() + BORDER - offset);
-  } else {
-    vbox->SetPosition(GetPosition() + BORDER);
-  }
-
-  WidgetList::Draw(mousePosition);
-  if (highlit) {
-    //GetMainWindow().BoxColor(*highlit, selected_item_color);
-  }
-
-  if (max_offset > 0) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
 
     Rectanglei thumb = GetScrollThumb();
@@ -232,14 +200,14 @@ void ScrollBox::Draw(const Point2i &mousePosition) const
 
 Point2i ScrollBox::GetScrollTrackPos() const
 {
-  return Point2i(GetPositionX() + GetSizeX() - BORDER - SCROLLBAR_WIDTH,
+  return Point2i(GetPositionX() + GetSizeX() - BORDER - scrollbar_width,
                  GetPositionY() + BORDER + m_up->GetSizeY());
 }
 
 Rectanglei ScrollBox::GetScrollTrack() const
 {
   return Rectanglei(GetScrollTrackPos(),
-                    Point2i(SCROLLBAR_WIDTH, GetTrackHeight()));
+                    Point2i(scrollbar_width, GetTrackHeight()));
 }
 
 Rectanglei ScrollBox::GetScrollThumb() const
@@ -254,7 +222,7 @@ Rectanglei ScrollBox::GetScrollThumb() const
   if (tmp_h < 6)
     tmp_h = 6;
   return Rectanglei(scroll_track.GetPositionX(), tmp_y,
-                    SCROLLBAR_WIDTH, tmp_h);
+                    scrollbar_width, tmp_h);
 }
 
 int ScrollBox::GetMaxOffset() const
@@ -265,4 +233,39 @@ int ScrollBox::GetMaxOffset() const
 int ScrollBox::GetTrackHeight() const
 {
   return GetSizeY() - 2*(m_up->GetSizeY()+BORDER+1);
+}
+
+void ScrollBox::Empty()
+{
+  // We want to leave around the buttons and the box
+  vbox->Empty();
+}
+
+void ScrollBox::Update(const Point2i &mousePosition,
+                       const Point2i &lastMousePosition)
+{
+  bool redraw = need_redrawing;
+  Widget::Update(mousePosition, lastMousePosition);
+  need_redrawing = redraw;
+
+  WidgetList::Update(mousePosition, lastMousePosition);
+}
+
+void ScrollBox::Pack()
+{
+  vbox->SetSizeX(size.x - scrollbar_width -2*BORDER);
+  vbox->Pack();
+  int max_offset = GetMaxOffset();
+  if (max_offset > 0) {
+    vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
+  } else {
+    vbox->SetPosition(position.x + BORDER, position.y + BORDER);
+  }
+
+  m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
+  m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
+  m_up->SetVisible(max_offset > 0);
+  m_down->SetVisible(max_offset > 0);
+
+  WidgetList::Pack();
 }
