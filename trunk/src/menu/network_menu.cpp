@@ -51,7 +51,7 @@
 
 static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
-static const uint MARGIN_BOTTOM = 70;
+static const uint MARGIN_BOTTOM = 60;
 
 static const uint TEAMS_BOX_H = 180;
 static const uint CHAT_BOX_H = 150;
@@ -73,7 +73,7 @@ NetworkMenu::NetworkMenu() :
   int multitabsWidth = mainBoxWidth;
   bool multitabs = false;
 
-  if (mapsHeight > 200) {
+  if (window.GetWidth() > 640 && mapsHeight > 200) {
     multitabs = true;
     multitabsWidth = mainBoxWidth - 20;
   } else {
@@ -351,7 +351,7 @@ bool NetworkMenu::signal_cancel()
   return true;
 }
 
-void NetworkMenu::Draw(const Point2i &/*mousePosition*/)
+void NetworkMenu::Draw(const Point2i &mousePosition)
 {
   if (Network::GetInstance()->IsConnected())
   {
