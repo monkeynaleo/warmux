@@ -27,7 +27,7 @@
 
 // Forward declarations
 class SpinButtonWithPicture;
-class TeamListBox;
+class TeamScrollBox;
 class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
@@ -38,7 +38,7 @@ const uint MAX_NB_TEAMS=4;
 class TeamsSelectionBox : public HBox
 {
 protected:
-  TeamListBox* list_box;
+  TeamScrollBox* list_box;
   SpinButtonWithPicture *local_teams_nb;
   std::vector<TeamBox*> teams_selections;
 

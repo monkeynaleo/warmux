@@ -24,7 +24,7 @@
 #include "menu/team_box.h"
 #include "gui/grid_box.h"
 #include "gui/label.h"
-#include "gui/list_box.h"
+#include "gui/scroll_box.h"
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button.h"
@@ -36,23 +36,22 @@
 
 #include <iostream>
 
-class TeamListBox : public BaseListBox
+class TeamScrollBox : public ScrollBox
 {
   const std::vector<TeamBox*>& teams;
 public:
-  TeamListBox(const std::vector<TeamBox*>& teams, const Point2i &size)
-   : BaseListBox(size, true, false)
+  TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &size)
+   : ScrollBox(size, false)
    , teams(teams)
   {
-    AddWidgetItem(false, teams[0]);
-    AddWidgetItem(false, teams[1]);
   }
   void Select(uint /*index*/) { /*BaseListBox::Select(index);*/ }
-  void SetNbTeams(uint nb) {
-    // ClearItems also delete widgets pointed to by m_items, so just empty it
-    m_items.clear();
+  void SetNbTeams(uint nb)
+  {
+    vbox->Empty();
+    highlit = NULL;
     for (uint i=0; i<nb; i++)
-      AddWidgetItem(false, teams[i]);
+      AddWidget(teams[i]);
     // Otherwise list doesn't get refreshed until next GUI event
     Pack();
     NeedRedrawing();
@@ -60,7 +59,7 @@ public:
 };
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
-  HBox(_size.y+10, w_border)
+  HBox(_size.y, w_border)
 {
   if (!w_border)
     SetNoBorder();
@@ -99,7 +98,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   // If the intended gridbox would be too big for the intended size,
   // instead create a listbox
   if (use_list) {
-    list_box = new TeamListBox(teams_selections, Point2i(box_w-20, _size.y-10));
+    list_box = new TeamScrollBox(teams_selections, Point2i(box_w-20, _size.y-10));
 
     AddWidget(list_box);
   } else {
