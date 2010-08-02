@@ -24,13 +24,25 @@
 
 #include <vector>
 #include "gui/horizontal_box.h"
+#include "gui/scroll_box.h"
 
 // Forward declarations
 class SpinButtonWithPicture;
-class TeamScrollBox;
 class TeamBox;
 
 const uint MAX_NB_TEAMS=4;
+
+class TeamScrollBox : public ScrollBox
+{
+  // We need a real copy around for when we get destroyed
+  std::vector<TeamBox*> teams;
+  // Number of teams to be displayed
+  uint  count;
+public:
+  TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &size);
+  ~TeamScrollBox();
+  void SetNbTeams(uint nb);
+};
 
 // -----------------------------------------------
 // -----------------------------------------------

@@ -36,49 +36,42 @@
 
 #include <iostream>
 
-class TeamScrollBox : public ScrollBox
+TeamScrollBox::TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &size)
+  : ScrollBox(size)
+  , teams(teams)
+  , count(2)
 {
-  // We need a real copy around for when we get destroyed
-  std::vector<TeamBox*> teams;
-  // Number of teams to be displayed
-  uint  count;
-public:
-  TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &size)
-   : ScrollBox(size)
-   , teams(teams)
-   , count(2)
-  {
-    // SetNbTeams not called immediately
-    AddWidget(teams[0]);
-    AddWidget(teams[1]);
-  }
-  ~TeamScrollBox()
-  {
-    // Don't let the vbox delete the items, we're doing it ourselves
+  // SetNbTeams not called immediately
+  AddWidget(teams[0]);
+  AddWidget(teams[1]);
+}
+
+TeamScrollBox::~TeamScrollBox()
+{
+  // Don't let the vbox delete the items, we're doing it ourselves
+  vbox->Empty();
+
+  // Destroy widgets
+  for (uint i=0; i<teams.size() ; i++)
+    delete (teams[i]);
+
+  teams.clear();
+}
+
+void TeamScrollBox::SetNbTeams(uint nb)
+{
+  if (nb < count) {
+    count = 0;
     vbox->Empty();
-
-    // Destroy widgets
-    for (uint i=0; i<teams.size() ; i++)
-      delete (teams[i]);
-
-    teams.clear();
   }
-  void Select(uint /*index*/) { /*BaseListBox::Select(index);*/ }
-  void SetNbTeams(uint nb)
-  {
-    if (nb < count) {
-      count = 0;
-      vbox->Empty();
-    }
 
-    for (uint i=count; i<nb; i++)
-      AddWidget(teams[i]);
-    count = nb;
+  for (uint i=count; i<nb; i++)
+    AddWidget(teams[i]);
+  count = nb;
 
-    Pack();
-    NeedRedrawing();
-  }
-};
+  Pack();
+  NeedRedrawing();
+}
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
   HBox(_size.y, w_border)
