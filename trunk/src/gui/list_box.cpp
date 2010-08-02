@@ -97,8 +97,8 @@ bool BaseListBox::LoadXMLConfiguration()
   //Text::LoadXMLConfiguration(xmlFile, widgetNode);
 
   XmlReader * xmlFile = profile->GetXMLDocument();
-  const xmlNode * buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp");
-  const xmlNode * buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
+  const xmlNode* buttonUpNode   = xmlFile->GetFirstNamedChild(widgetNode, "ButtonUp"),
+                 buttonDownNode = xmlFile->GetFirstNamedChild(widgetNode, "ButtonDown");
 
   if (NULL == buttonUpNode || NULL == buttonDownNode) {
     return false;
@@ -185,7 +185,7 @@ Widget * BaseListBox::ClickUp(const Point2i & mousePosition, uint button)
     if (item == selected_item && !always_one_selected) {
       Deselect();
     } else {
-      Select (item);
+      Select(item);
     }
 
     return this;
@@ -232,10 +232,8 @@ void BaseListBox::Draw(const Point2i & mousePosition) const
   bool draw_it = true;
 
   for (uint i=first_visible_item; i < m_items.size(); i++) {
-    Rectanglei rect(GetPositionX() + 1,
-                    pos.GetY() + 1,
-                    GetSizeX() - 2,
-                    m_items.at(i)->GetSizeY() - 2);
+    Rectanglei rect(GetPositionX() + 1, pos.GetY() + 1,
+                    GetSizeX() - 2, m_items.at(i)->GetSizeY() - 2);
 
     // no more place to add item
     if (draw_it && uint(rect.GetPositionY() + rect.GetSizeY()) >= GetPositionY() + GetSizeY() -2 - margin) {
@@ -321,7 +319,7 @@ void BaseListBox::AddWidgetItem(bool selected,
 
   // Select it if selected
   if (selected) {
-    Select (pos);
+    Select(pos);
   }
 }
 
