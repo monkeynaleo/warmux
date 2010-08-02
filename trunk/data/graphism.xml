@@ -154,12 +154,12 @@
   </sprite>
   <sprite name="up">
     <image file="menu/up.png">
-      <grid pos="0,0" size="10,5" array="1,2" />
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="down">
     <image file="menu/down.png">
-      <grid pos="0,0" size="10,5" array="1,2" />
+      <grid pos="0,0" size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="refresh_small">
