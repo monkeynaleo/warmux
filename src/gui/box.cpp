@@ -59,3 +59,17 @@ void Box::ParseXMLBoxParameters()
   ParseXMLBorder();
   ParseXMLBackground();
 }
+
+
+void Box::Update(const Point2i &mousePosition,
+                 const Point2i &lastMousePosition)
+{
+  if (need_redrawing) {
+    // Redraw the border and the background
+    RedrawBackground(*this);
+    Draw(mousePosition);
+  }
+
+  WidgetList::Update(mousePosition, lastMousePosition);
+  need_redrawing = false;
+}

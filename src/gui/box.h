@@ -33,7 +33,7 @@ class Box : public WidgetList
 
   public:
     Box(void);
-    Box(const Point2i & size, 
+    Box(const Point2i & size,
         bool _draw_border = true);
     Box(Profile * _profile,
         const xmlNode * _boxNode);
@@ -48,6 +48,8 @@ class Box : public WidgetList
     void SetNoBorder() { border.SetValues(0, 0); };
 
     virtual void Pack() = 0;
+    virtual void Update(const Point2i &mousePosition,
+                        const Point2i &lastMousePosition);
 };
 
 #endif
