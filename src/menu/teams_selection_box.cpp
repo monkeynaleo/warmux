@@ -38,23 +38,43 @@
 
 class TeamScrollBox : public ScrollBox
 {
-  const std::vector<TeamBox*>& teams;
+  // We need a real copy around for when we get destroyed
+  std::vector<TeamBox*> teams;
+  // Number of teams to be displayed
+  uint  count;
 public:
   TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &size)
-   : ScrollBox(size, false)
+   : ScrollBox(size)
    , teams(teams)
+   , count(2)
   {
     // SetNbTeams not called immediately
     AddWidget(teams[0]);
     AddWidget(teams[1]);
   }
+  ~TeamScrollBox()
+  {
+    // Don't let the vbox delete the items, we're doing it ourselves
+    vbox->Empty();
+
+    // Destroy widgets
+    for (uint i=0; i<teams.size() ; i++)
+      delete (teams[i]);
+
+    teams.clear();
+  }
   void Select(uint /*index*/) { /*BaseListBox::Select(index);*/ }
   void SetNbTeams(uint nb)
   {
-    vbox->Empty();
-    highlit = NULL;
-    for (uint i=0; i<nb; i++)
+    if (nb < count) {
+      count = 0;
+      vbox->Empty();
+    }
+
+    for (uint i=count; i<nb; i++)
       AddWidget(teams[i]);
+    count = nb;
+
     Pack();
     NeedRedrawing();
   }
@@ -100,6 +120,11 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   // If the intended gridbox would be too big for the intended size,
   // instead create a listbox
   if (use_list) {
+    // Warning: this box takes the ownership of the widgets in teams_selections:
+    // while any other Box will delete the ones it contains, TeamScrollBox
+    // doesn't really contain them as widgets. They therefore aren't released
+    // through this mechanism, but with a manual one. This manual mechanism
+    // requires we have a *real* copy of the vector for when it is destroyed.
     list_box = new TeamScrollBox(teams_selections, Point2i(box_w-20, _size.y-10));
 
     AddWidget(list_box);
