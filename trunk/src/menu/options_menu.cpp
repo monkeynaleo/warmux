@@ -35,12 +35,11 @@
 #include "gui/label.h"
 #include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
-#include "gui/select_box.h"
-#include "gui/list_box.h"
 #include "gui/combo_box.h"
 #include "gui/check_box.h"
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
+#include "gui/select_box.h"
 #include "gui/spin_button_picture.h"
 #include "gui/tabs.h"
 #include "gui/text_box.h"
@@ -141,7 +140,7 @@ OptionMenu::OptionMenu() :
   if (!Game::IsRunning()) {
     Box * teams_editor = new HBox(option_size.y, false, true);
 
-    lbox_teams = new ListBox(option_size, false);
+    lbox_teams = new ItemBox(option_size, false);
     teams_editor->AddWidget(lbox_teams);
 
     uint lwidth = max_width - option_size.x - 30;
@@ -440,7 +439,7 @@ void OptionMenu::SaveOptions()
 
 #if ENABLE_NLS
   // Language
-  config->SetLanguage(lbox_languages->GetSelectedValue());
+  config->SetLanguage((const char*)lbox_languages->GetSelectedValue());
 #endif
 
   // Sound
@@ -456,7 +455,7 @@ void OptionMenu::SaveOptions()
 
   //Team editor
   if (!Game::IsRunning()) {
-    if (!lbox_teams->IsSelectedItem()) {
+    if (!lbox_teams->IsItemSelected()) {
       AddTeam();
     }
     SaveTeam();
@@ -561,7 +560,7 @@ void OptionMenu::DeleteTeam()
   if (selected_team) {
     selected_team->Delete();
     selected_team = NULL;
-    if (lbox_teams->IsSelectedItem()) {
+    if (lbox_teams->IsItemSelected()) {
       lbox_teams->Deselect();
     }
     ReloadTeamList();
@@ -597,7 +596,7 @@ void OptionMenu::ReloadTeamList()
   if (Game::IsRunning())
     return;
 
-  lbox_teams->ClearItems();
+  lbox_teams->Clear();
   std::string selected_team_name ="";
   if (selected_team) {
     selected_team_name = selected_team->GetName();
@@ -612,9 +611,9 @@ void OptionMenu::ReloadTeamList()
       LoadTeam();
     }
 
-    lbox_teams->AddItem((selected_team == custom_team_list[i]),
-                        custom_team_list[i]->GetName(),
-                        custom_team_list[i]->GetName());
+    lbox_teams->AddLabelItem((selected_team == custom_team_list[i]),
+                             custom_team_list[i]->GetName(),
+                             custom_team_list[i]->GetName().c_str());
 
   }
 }
@@ -645,9 +644,9 @@ void OptionMenu::SelectTeam()
   if (Game::IsRunning())
     return;
 
-  if (lbox_teams->IsSelectedItem()) {
+  if (lbox_teams->IsItemSelected()) {
     bool is_changed_name = SaveTeam();
-    std::string s_selected_team = lbox_teams->ReadValue();
+    const std::string& s_selected_team = (const char*)lbox_teams->GetSelectedValue();
     selected_team = GetCustomTeamsList().GetByName(s_selected_team);
     LoadTeam();
     if (is_changed_name) {

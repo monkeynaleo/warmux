@@ -28,7 +28,6 @@
 
 class ButtonPic;
 class ItemBox;
-class ListBox;
 class CheckBox;
 class ComboBox;
 class CustomTeam;
@@ -91,7 +90,7 @@ public:
 
   /* Teams controllers */
 
-  ListBox *lbox_teams;
+  ItemBox *lbox_teams;
   Button *add_team;
   Button *delete_team;
   CustomTeam  *selected_team;
