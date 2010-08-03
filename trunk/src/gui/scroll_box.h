@@ -68,6 +68,7 @@ public:
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
   virtual void Empty();
+  virtual void Clear();
 };
 
 #endif  //SCROLL_BOX_H
