@@ -350,7 +350,7 @@ bool NetworkMenu::signal_cancel()
   return true;
 }
 
-void NetworkMenu::Draw(const Point2i &mousePosition)
+void NetworkMenu::Draw(const Point2i& /*mousePosition*/)
 {
   if (Network::GetInstance()->IsConnected())
   {
