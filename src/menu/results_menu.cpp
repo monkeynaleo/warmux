@@ -32,7 +32,7 @@
 #include "gui/box.h"
 #include "gui/button.h"
 #include "gui/label.h"
-#include "gui/list_box.h"
+#include "gui/scroll_box.h"
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/tabs.h"
@@ -109,22 +109,17 @@ public:
   ResultBox(uint size, const std::string& type, float score, const Character* player)
     : HBox(W_UNDEF, false, false)
   {
-    std::string score_str = float2str(score);
-    SetWidgets(size, type, score_str.c_str(), player);
-  }
-  void Draw(const Point2i &mousePosition) const
-  {
-    HBox::Draw(mousePosition);
-    for (std::list<Widget*>::const_iterator it = widget_list.begin(); it != widget_list.end(); ++it)
-      (*it)->Draw(mousePosition);
+    char buffer[16];
+    snprintf(buffer, 16, "%.1f", score);
+    SetWidgets(size, type, buffer, player);
   }
 };
 
-class ResultListBox : public BaseListBox
+class ResultListBox : public ScrollBox
 {
 public:
   ResultListBox(const TeamResults* res, const Point2i &size)
-    : BaseListBox(size, true) 
+    : ScrollBox(size)
   {
     ResultBox       *box;
     const Character *player = res->getMostViolent();
@@ -134,7 +129,7 @@ public:
       box = new ResultBox(size.x, _("Most violent"), player->GetDamageStats()->GetMostDamage(), player);
     else
       box = new ResultBox(size.x, _("Most violent"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
 
     //Most useful
     player = res->getMostUseful();
@@ -142,7 +137,7 @@ public:
       box = new ResultBox(size.x, _("Most useful"), player->GetDamageStats()->GetOthersDamage(), player);
     else
       box = new ResultBox(size.x, _("Most useful"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
 
     //Most useless
     player = res->getMostUseless();
@@ -150,7 +145,7 @@ public:
       box = new ResultBox(size.x, _("Most useless"), player->GetDamageStats()->GetOthersDamage(), player);
     else
       box = new ResultBox(size.x, _("Most useless"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
 
     // Biggest sold-out
     player = res->getBiggestTraitor();
@@ -158,7 +153,7 @@ public:
       box = new ResultBox(size.x, _("Most sold-out"), player->GetDamageStats()->GetFriendlyFireDamage(), player);
     else
       box = new ResultBox(size.x, _("Most sold-out"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
 
     // Most clumsy
     player = res->getMostClumsy();
@@ -166,7 +161,7 @@ public:
       box = new ResultBox(size.x, _("Clumsiest"), player->GetDamageStats()->GetItselfDamage(), player);
     else
       box = new ResultBox(size.x, _("Clumsiest"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
 
     // Most accurate
     player = res->getMostAccurate();
@@ -174,7 +169,7 @@ public:
       box = new ResultBox(size.x, _("Most accurate"), player->GetDamageStats()->GetAccuracy(), player);
     else
       box = new ResultBox(size.x, _("Most accurate"));
-    AddWidgetItem(false, box);
+    AddWidget(box);
   }
 };
 
