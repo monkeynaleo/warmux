@@ -25,8 +25,8 @@
 #include "surface.h"
 #include <WORMUX_base.h>
 
-class Video{
- private:
+class Video
+{
   uint m_max_fps;     // If equals to zero, it means no limit
   uint m_max_delay;
   bool SDLReady;
@@ -48,9 +48,8 @@ public:
   void SetMaxFps(uint max_fps);
   uint GetMaxFps() const { return m_max_fps; };
   uint GetMaxDelay() const { return m_max_delay; };
-  void AddConfigIfAbsent(int w, int h);
+  void AddUniqueConfigSorted(int w, int h);
 
-public:
   Video();
   ~Video();
 

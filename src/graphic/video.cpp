@@ -49,11 +49,11 @@ Video::Video()
             (int)(config->GetVideoHeight()),
             config->IsVideoFullScreen());  // Add the current resolution
 
-  if( window.IsNull() ) {
+  if (window.IsNull()) {
     Error(Format("Unable to initialize SDL window: %s", SDL_GetError()));
     exit (1);
   }
-  AddConfigIfAbsent(window.GetWidth(), window.GetHeight());
+  AddUniqueConfigSorted(window.GetWidth(), window.GetHeight());
 
   SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION );
   // The icon must be larger then 32x32 pixels as some desktops display larger icons.
@@ -71,7 +71,7 @@ Video::~Video()
 {
   if (icon)
     SDL_FreeSurface(icon);
-  if( SDLReady )
+  if ( SDLReady )
     SDL_Quit();
   SDLReady = false;
 }
@@ -90,13 +90,27 @@ static bool CompareConfigs(const Point2i& a, const Point2i& b)
   return  (a.x < b.x) || ((a.x == b.x) && (a.y < b.y));
 }
 
-void Video::AddConfigIfAbsent(int w, int h)
+void Video::AddUniqueConfigSorted(int w, int h)
 {
   Point2i p(w, h);
 
-  if (!CompareConfigs((*available_configs.begin()), p) &&
-      std::find(available_configs.begin(), available_configs.end(), p) == available_configs.end())
-    available_configs.push_back(p);
+  std::list<Point2i>::iterator res  = available_configs.begin(),
+                               end  = available_configs.end();
+
+  for (std::list<Point2i>::iterator res = available_configs.begin();
+       res != available_configs.end();
+       res++) {
+    // Are they identical ?
+    if (p == *res)
+      return;
+
+    // Is it bigger?
+    if (!CompareConfigs(*res, p)) {
+      available_configs.insert(res, p);
+      return;
+    }
+  }
+  available_configs.push_back(p);
 }
 
 void Video::ComputeAvailableConfigs()
@@ -108,36 +122,21 @@ void Video::ComputeAvailableConfigs()
   modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
 
   // Check is there are any modes available
-  if(modes != NULL){
+  if (modes != NULL){
     // We also had the current window resolution if it is not already in the list!
-    for(int i=0;modes[i];++i) {
+    for (int i=0;modes[i];++i) {
       if (modes[i]->w>=480 && modes[i]->h>=320) {
-        available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
+        AddUniqueConfigSorted(modes[i]->w, modes[i]->h);
       }
     }
   }
 
   // If biggest resolution is big enough, we propose standard resolutions
   // such as 1600x1200, 1280x1024, 1024x768, 800x600.
-  for(std::list<Point2i>::iterator res = Config::GetInstance()->GetResolutionAvailable().begin();
-      res != Config::GetInstance()->GetResolutionAvailable().end();
-      res++) {
-    AddConfigIfAbsent((*res).GetX(), (*res).GetY());
-  }
-
-  // Sort the list
-  available_configs.sort(CompareConfigs);
-
-  // Remove Double items
-  std::list<Point2i>::iterator prev = available_configs.begin(),
-    it = available_configs.begin() ,
-    end = available_configs.end();
-
-  for (++it; it != end ; ++it) {
-    if ((*prev)==(*it)) // the two items are equals
-      prev = available_configs.erase(prev);
-    else
-      prev++;
+  for (std::list<Point2i>::iterator res = Config::GetInstance()->GetResolutionAvailable().begin();
+       res != Config::GetInstance()->GetResolutionAvailable().end();
+       res++) {
+    AddUniqueConfigSorted((*res).GetX(), (*res).GetY());
   }
 }
 
