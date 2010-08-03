@@ -50,23 +50,23 @@ protected:
   Point2i    GetScrollTrackPos() const;
   int GetMaxOffset() const;
   int GetTrackHeight() const;
+  bool HasScrollBar() const { return GetMaxOffset() > 0; }
 
 public:
   ScrollBox(const Point2i & size);
   ~ScrollBox();
 
+  // No need for a Draw method: the additional stuff drawn is made by Update
   virtual void Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
+  virtual Widget* Click(const Point2i & mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
   virtual void Pack();
 
   // to add a widget
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
   virtual void Empty();
-
-  virtual void Draw(const Point2i & mousePosition) const;
-  virtual Widget* Click(const Point2i & mousePosition, uint button);
-  virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
 };
 
 #endif  //SCROLL_BOX

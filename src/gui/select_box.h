@@ -41,7 +41,7 @@ protected:
 public:
   SelectBox(const Point2i& size, bool always_one_selected = true);
 
-  virtual void Draw(const Point2i& mousePosition) const;
+  // No need for a Draw method: the additional stuff drawn is made by Update
   virtual void Update(const Point2i& mousePosition,
                       const Point2i& lastMousePosition);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
@@ -58,7 +58,7 @@ public:
 
   void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
   void SetDefaultItemColor(const Color& color) { default_item_color = color; };
-  void Select(uint index);
+  virtual void Select(uint index);
   void Deselect();
   Widget* MouseIsOnWhichWidget(const Point2i & mousePosition) const
   {
@@ -72,20 +72,17 @@ class ItemBox : public SelectBox
   std::vector<const char*> m_values;
 public:
   ItemBox(const Point2i& size, bool always = false) : SelectBox(size, always) { };
-  void AddWidget(Widget* w) { SelectBox::AddWidget(w); m_values.push_back(""); }
-  void AddItem(bool select, Widget* w, const char* value)
-  { SelectBox::AddWidgetItem(select, w); m_values.push_back(value); }
-  void RemoveSelected()
+  void AddWidget(Widget* /*w*/)
   {
-    if (selected_item != -1) {
-      SelectBox::RemoveSelected();
-      m_values.erase(m_values.begin() + selected_item);
-    }
+    fprintf(stderr, "ItemBox::AddWidget called\n");
+    exit(1);
   }
+  void AddItem(bool select, Widget* w, const char* value);
+  void RemoveSelected();
   void Empty() { m_values.clear(); SelectBox::Empty(); }
+  void Select(uint index);
 
-  const char* GetSelectedValue()
-  { return (selected_item==-1) ? "" : m_values[selected_item]; };
+  const char* GetSelectedValue() const;
 };
 
 #endif //SELECT_BOX
