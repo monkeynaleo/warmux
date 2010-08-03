@@ -36,8 +36,6 @@ protected:
   bool always_one_selected;
   int  selected_item;
 
-  int MouseIsOnWhichItem(const Point2i & mousePosition) const;
-
 public:
   SelectBox(const Point2i& size, bool always_one_selected = true);
 
@@ -50,10 +48,12 @@ public:
   virtual void RemoveSelected();
   virtual void AddWidget(Widget* w) { m_items.push_back(w); ScrollBox::AddWidget(w); }
   virtual void AddWidgetItem(bool select, Widget* w);
-  virtual void Empty() { m_items.clear(); ScrollBox::Empty(); }
+  virtual void Empty() { m_items.clear(); selected_item = -1; ScrollBox::Empty(); }
 
   // Specific to selection
-  Widget* GetSelectedItem() const { return (selected_item==-1) ? NULL : m_items[selected_item]; };
+  int MouseIsOnWhichItem(const Point2i & mousePosition) const;
+  Widget* GetSelectedWidget() const { return (selected_item==-1) ? NULL : m_items[selected_item]; };
+  int GetSelectedItem() const { return selected_item; };
   int Size() { return m_items.size(); }
 
   void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
