@@ -109,12 +109,7 @@ void Button::Draw(const Point2i & mousePosition) const
     image->Blit(surf, position);
   } else {
     // centering image
-    Point2i pos = position;
-
-    pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
-    pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-
-    image->Blit(surf, pos);
+    image->Blit(surf, position + (GetSize() - image->GetWidth())/2);
   }
 }
 
