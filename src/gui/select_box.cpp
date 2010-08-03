@@ -37,12 +37,11 @@ SelectBox::SelectBox(const Point2i& size, bool always)
 void SelectBox::Update(const Point2i& mousePosition,
                        const Point2i& lastMousePosition)
 {
-  Surface& surf = GetMainWindow();
+  ScrollBox::Update(mousePosition, lastMousePosition);
 
+  Surface& surf = GetMainWindow();
   Rectanglei clip = *this;
   SwapWindowClip(clip);
-
-  ScrollBox::Update(mousePosition, lastMousePosition);
 
   if (selected_item != -1) {
     Widget *sel = m_items[selected_item];
@@ -53,7 +52,6 @@ void SelectBox::Update(const Point2i& mousePosition,
   if (item!=-1 && item!=selected_item) {
     surf.BoxColor(*(m_items[item]), default_item_color);
   }
-
   SwapWindowClip(clip);
 }
 
