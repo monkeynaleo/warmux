@@ -1,7 +1,7 @@
 # translation of fr.po to
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Victor Stinner <victor.stinner@haypocalc.com>, 2006.
 msgid ""
 msgstr ""
@@ -1100,7 +1100,7 @@ msgstr "Personne !"
 #. *********     Number of characters        *********
 #: src/menu/team_box.cpp:116
 msgid "Number of characters"
-msgstr "Nombre de personnages par équipe"
+msgstr "Nombre de personnages"
 
 #: src/menu/teams_selection_box.cpp:76
 msgid "Number of teams:"
