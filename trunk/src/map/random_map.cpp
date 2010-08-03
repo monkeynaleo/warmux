@@ -34,14 +34,14 @@
 
 Surface * RandomElementList::GetRandomElement()
 {
-  if(size() == 0)
+  if (size() == 0)
     return NULL;
   return (*this)[RandomSync().GetInt(0, size() - 1)];
 }
 
 RandomElementList::~RandomElementList()
 {
-  for(iterator elt = begin(); elt != end(); elt++) {
+  for (iterator elt = begin(); elt != end(); elt++) {
     delete((*elt));
   }
 }
@@ -63,7 +63,7 @@ RandomMap::RandomMap(Profile *profile, const int width, const int height)
   // Loading resources
   border_color = GetResourceManager().LoadColor(profile, "border_color");
   texture = GetResourceManager().LoadImage(profile, "texture");
-  for(uint i = 0; i < number_of_element; i++) {
+  for (uint i = 0; i < number_of_element; i++) {
     std::stringstream ss;
     ss << "element_" << (i + 1);
     element = GetResourceManager().LoadImage(profile, ss.str());
@@ -85,7 +85,7 @@ void RandomMap::AddElement(const Surface * object, const Point2i& position)
 
 void RandomMap::DrawElement()
 {
-  for(std::vector<MapElement>::iterator elt = element_list.begin(); elt != element_list.end(); elt++) {
+  for (std::vector<MapElement>::iterator elt = element_list.begin(); elt != element_list.end(); elt++) {
     Surface & tmp = elt->GetElement();
     result.MergeSurface(tmp, elt->GetPosition() - Point2i((int)(tmp.GetWidth() / 2.0), tmp.GetHeight()));
   }
@@ -203,7 +203,7 @@ void RandomMap::GenerateIsland()
     tmp->AddPoint(Point2d(current_x_pos, current_y_pos));
     if (RandomSync().GetInt(0, 5) < 1) {
       Surface * random_element = random_element_list.GetRandomElement();
-      if(random_element != NULL) {
+      if (random_element) {
         Point2i position((int)current_x_pos, (int)(current_y_pos + y_offset));
         Surface * tmp_surf = new Surface(random_element->GetSurface());
         AddElement(tmp_surf, Point2i((int)current_x_pos, (int)(current_y_pos + y_offset)));
@@ -240,53 +240,57 @@ void RandomMap::GenerateIsland()
 
 void RandomMap::GenerateGridElements()
 {
-    uint grid_wid = 300, grid_hei = 300;
-    uint elemchance = 75;
-    uint elem_adj_x_min = 0, elem_adj_x_max = 0;
-    uint elem_adj_y_min = 0, elem_adj_y_max = 0;
+  uint grid_wid = 300, grid_hei = 300;
+  uint elemchance = 75;
+  uint elem_adj_x_min = 0, elem_adj_x_max = 0;
+  uint elem_adj_y_min = 0, elem_adj_y_max = 0;
 
-    uint dx, dy;
+  uint dx, dy;
 
-    if (number_of_element < 1) return;
+  if (number_of_element < 1) return;
 
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_wid", grid_wid);
-    if (grid_wid < 1) grid_wid = 1;
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_wid", grid_wid);
+  if (grid_wid < 1)
+    grid_wid = 1;
 
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_hei", grid_hei);
-    if (grid_hei < 1) grid_hei = 1;
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_grid_hei", grid_hei);
+  if (grid_hei < 1)
+    grid_hei = 1;
 
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_chance", elemchance);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_chance", elemchance);
 
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_min", elem_adj_x_min);
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_max", elem_adj_x_max);
-    if (elem_adj_x_min > elem_adj_x_max) elem_adj_x_min = elem_adj_x_max;
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_min", elem_adj_x_min);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_x_max", elem_adj_x_max);
+  if (elem_adj_x_min > elem_adj_x_max)
+    elem_adj_x_min = elem_adj_x_max;
 
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_min", elem_adj_y_min);
-    XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_max", elem_adj_y_max);
-    if (elem_adj_y_min > elem_adj_y_max) elem_adj_y_min = elem_adj_y_max;
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_min", elem_adj_y_min);
+  XmlReader::ReadUint(profile->doc->GetRoot(), "generator_element_adj_y_max", elem_adj_y_max);
+  if (elem_adj_y_min > elem_adj_y_max)
+    elem_adj_y_min = elem_adj_y_max;
 
-    result.Fill(0);
+  result.Fill(0);
 
-    for (dx = grid_wid; dx < (uint)width; dx += grid_wid)
-	for (dy = grid_hei; dy < (uint)height; dy += grid_hei)
-	    if (RandomSync().GetInt(0,99) < (int)elemchance) {
-		Surface * random_element = random_element_list.GetRandomElement();
-		if (random_element != NULL) {
-		    uint ex = dx + RandomSync().GetInt(elem_adj_x_min, elem_adj_x_max);
-		    uint ey = dy + RandomSync().GetInt(elem_adj_y_min, elem_adj_y_max);
-		    Surface * tmp_surf = new Surface(random_element->GetSurface());
-		    AddElement(tmp_surf, Point2i(ex, ey));
-		}
-	    }
+  for (dx = grid_wid; dx < (uint)width; dx += grid_wid)
+    for (dy = grid_hei; dy < (uint)height; dy += grid_hei)
+      if (RandomSync().GetInt(0,99) < (int)elemchance) {
+        Surface * random_element = random_element_list.GetRandomElement();
+        if (random_element) {
+          uint ex = dx + RandomSync().GetInt(elem_adj_x_min, elem_adj_x_max);
+          uint ey = dy + RandomSync().GetInt(elem_adj_y_min, elem_adj_y_max);
+          Surface * tmp_surf = new Surface(random_element->GetSurface());
+          AddElement(tmp_surf, Point2i(ex, ey));
+        }
+      }
 
-    DrawElement();
+  DrawElement();
 }
 
 void RandomMap::Generate(InfoMap::Island_type generator)
 {
   MSG_DEBUG("map.generation", "> Begin creation of random generated map");
 
-  if(generator == InfoMap::RANDOM_GENERATED) {
+  if (generator == InfoMap::RANDOM_GENERATED) {
     generator = (InfoMap::Island_type) RandomSync().GetInt(InfoMap::SINGLE_ISLAND, InfoMap::DEFAULT);
     generator = InfoMap::PLATEFORMS;
   }

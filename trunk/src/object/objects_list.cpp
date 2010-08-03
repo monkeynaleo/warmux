@@ -86,7 +86,7 @@ void ObjectsList::Refresh()
       (*object)->Refresh();
     }
 
-    if((*object)->IsGhost()) {
+    if ((*object)->IsGhost()) {
       // Stop following this object, remove from overlapse reference then delete it.
       Camera::GetInstance()->StopFollowingObj(*object);
       RemoveOverlappedObjectReference(*object);
@@ -119,7 +119,8 @@ bool ObjectsList::AllReady() const
   {
     if (!(*object)->IsImmobile())
     {
-      MSG_DEBUG("lst_objects", "\"%s\" is not ready ( IsImmobile()==false )", (*object)->GetName().c_str());
+      MSG_DEBUG("lst_objects", "\"%s\" is not ready ( IsImmobile()==false )",
+                (*object)->GetName().c_str());
       return false;
     }
   }
@@ -131,11 +132,9 @@ bool ObjectsList::AllReady() const
 void ObjectsList::FreeMem()
 {
   ObjectsList::iterator object;
-  for (object = begin();
-       object != end();
-       ++object) {
-    if((*object))
-      delete (*object);
+  for (object = begin(); object != end(); ++object) {
+    if ((*object))
+      delete(*object);
   }
   clear();
 }
@@ -144,7 +143,7 @@ void ObjectsList::FreeMem()
 
 void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
 {
-  for(iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
+  for (iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
 
     if ((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" (%p) in \"%s\"",
@@ -163,7 +162,7 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
 void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
 {
   MSG_DEBUG("lst_objects", "adding overlapsed object \"%s\" %p",
-	    obj->GetName().c_str(), obj);
+            obj->GetName().c_str(), obj);
 
   overlapped_objects.push_back(obj);
 }
@@ -171,7 +170,7 @@ void ObjectsList::AddOverlappedObject(PhysicalObj * obj)
 void ObjectsList::RemoveOverlappedObject(PhysicalObj * obj)
 {
   MSG_DEBUG("lst_objects", "removing overlapsed object \"%s\" %p",
-	    obj->GetName().c_str(), obj);
+            obj->GetName().c_str(), obj);
 
   overlapped_objects.remove(obj);
 }

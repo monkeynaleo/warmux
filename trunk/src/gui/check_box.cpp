@@ -73,8 +73,7 @@ CheckBox::~CheckBox()
 void CheckBox::Pack()
 {
   Text::SetMaxWidth(size.x - m_checked_image->GetWidth() -2);
-  size.y = std::max(uint(Text::GetHeight()),
-		    m_checked_image->GetHeight());
+  size.y = std::max(uint(Text::GetHeight()), m_checked_image->GetHeight());
 }
 
 bool CheckBox::LoadXMLConfiguration()

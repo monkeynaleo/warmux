@@ -107,8 +107,8 @@ private:
   virtual void SignalGhostState(bool was_dead);
   virtual void SignalGroundCollision(const Point2d& speed_before);
   virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				     PhysicalObj * obj,
-				     const Point2d& obj_speed);
+                                     PhysicalObj * obj,
+                                     const Point2d& obj_speed);
   void Collision(const Point2d& speed_vector);
   void SetBody(Body* char_body);
 

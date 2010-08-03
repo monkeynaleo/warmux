@@ -47,19 +47,19 @@
 
 static int clipEncode(Sint16 x, Sint16 y, Sint16 left, Sint16 top, Sint16 right, Sint16 bottom)
 {
-    int code = 0;
+  int code = 0;
 
-    if (x < left) {
-        code |= CLIP_LEFT_EDGE;
-    } else if (x > right) {
-        code |= CLIP_RIGHT_EDGE;
-    }
-    if (y < top) {
-        code |= CLIP_TOP_EDGE;
-    } else if (y > bottom) {
-        code |= CLIP_BOTTOM_EDGE;
-    }
-    return code;
+  if (x < left) {
+    code |= CLIP_LEFT_EDGE;
+  } else if (x > right) {
+    code |= CLIP_RIGHT_EDGE;
+  }
+  if (y < top) {
+    code |= CLIP_TOP_EDGE;
+  } else if (y > bottom) {
+    code |= CLIP_BOTTOM_EDGE;
+  }
+  return code;
 }
 
 static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Sint16 * y2)
@@ -243,41 +243,41 @@ int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint
 
 int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 {
-    Uint8 alpha;
-    Uint32 mcolor;
-    int result = 0;
+  Uint8 alpha;
+  Uint32 mcolor;
+  int result = 0;
 
-    /*
-     * Setup color
-     */
-    alpha = color & 0x000000ff;
-    mcolor =
-        SDL_MapRGBA(dst->format, (color & 0xff000000) >> 24,
-                    (color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
+  /*
+   * Setup color
+   */
+  alpha = color & 0x000000ff;
+  mcolor =
+    SDL_MapRGBA(dst->format, (color & 0xff000000) >> 24,
+                (color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
-    /*
-     * Draw
-     */
-    result = _putPixelAlpha(dst, x, y, mcolor, alpha);
+  /*
+   * Draw
+   */
+  result = _putPixelAlpha(dst, x, y, mcolor, alpha);
 
-    return (result);
+  return (result);
 }
 
 int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, Uint32 weight)
 {
-    Uint32 a;
+  Uint32 a;
 
-    /*
-     * Get alpha
-     */
-    a = (color & (Uint32) 0x000000ff);
+  /*
+   * Get alpha
+   */
+  a = (color & (Uint32) 0x000000ff);
 
-    /*
-     * Modify Alpha by weight
-     */
-    a = ((a * weight) >> 8);
+  /*
+   * Modify Alpha by weight
+   */
+  a = ((a * weight) >> 8);
 
-    return (pixelColorNolock(dst, x, y, (color & (Uint32) 0xffffff00) | (Uint32) a));
+  return (pixelColorNolock(dst, x, y, (color & (Uint32) 0xffffff00) | (Uint32) a));
 }
 
 int interpolateInt(int start, int stop, Double step)
@@ -298,228 +298,228 @@ Uint32 interpolateColor(Uint32 color1, Uint32 color2, Double step)
 int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color1,
                          Uint32 color2, int draw_endpoint)
 {
-    Sint32 xx0, yy0, xx1, yy1;
-    int result;
-    int dx, dy, tmp, xdir;
-    Uint32 color = color1;
-    Double step;
+  Sint32 xx0, yy0, xx1, yy1;
+  int result;
+  int dx, dy, tmp, xdir;
+  Uint32 color = color1;
+  Double step;
 
-    if (y1 == y2) {
-        /* Horizontal line */
-        dx = x2-x1;
-        xdir = 1;
-	if (dx == 0) {
-	  return 0;
-	}
-        if (dx < 0) {
-            dx = -dx;
-            xdir = -1;
+  if (y1 == y2) {
+    /* Horizontal line */
+    dx = x2-x1;
+    xdir = 1;
+    if (dx == 0) {
+      return 0;
+    }
+    if (dx < 0) {
+      dx = -dx;
+      xdir = -1;
+    }
+    step = dx;
+    while (--dx) {
+      color = interpolateColor(color2, color1, (Double)dx / step);
+      result |= pixelColorNolock(dst, x1, y1, color);
+      x1 += xdir;
+    }
+  }
+  if (y1 > y2) {
+    color = color1;
+    color1 = color2;
+    color2 = color;
+  }
+
+  /*
+   * Clip line and test if we have to draw
+   */
+  if (!(clipLine(dst, &x1, &y1, &x2, &y2))) {
+    return (0);
+  }
+
+  /*
+   * Keep on working with 32bit numbers
+   */
+  xx0 = x1;
+  yy0 = y1;
+  xx1 = x2;
+  yy1 = y2;
+
+  /*
+   * Reorder points if required
+   */
+  if (yy0 > yy1) {
+      tmp = yy0;
+      yy0 = yy1;
+      yy1 = tmp;
+      tmp = xx0;
+      xx0 = xx1;
+      xx1 = tmp;
+  }
+
+  /*
+   * Calculate distance
+   */
+  dx = xx1 - xx0;
+  dy = yy1 - yy0;
+
+  /*
+   * Adjust for negative dx and set xdir
+   */
+  if (dx >= 0) {
+    xdir = 1;
+  } else {
+    xdir = -1;
+    dx = (-dx);
+  }
+
+  /* Lock surface */
+  if (SDL_MUSTLOCK(dst)) {
+    if (SDL_LockSurface(dst) < 0) {
+      return (-1);
+    }
+  }
+
+  /*
+   * Draw the initial pixel in the foreground color
+   */
+  result = pixelColorNolock(dst, x1, y1, color1);
+
+  /*
+   * Check for special cases
+   */
+  if (dx == 0 && dy == 0) {
+    /* nothing to do */
+  } else if (dx == 0) {
+    /* Vertical line */
+    step = dy;
+    while (--dy) {
+      color = interpolateColor(color2, color1, (Double)dy / step);
+      result |= pixelColorNolock(dst, x1, ++yy0, color);
+    }
+  } else if (dy == 0) {
+  } else if (dx == dy) {
+    /* Diagonal line */
+    step = dx;
+    while (--dx) {
+      color = interpolateColor(color2, color1, (Double)dx / step);
+      result |= pixelColorNolock(dst, xx0, ++yy0, color);
+      xx0 += xdir;
+    }
+  } else {
+    Uint32 erracc = 0; /* Zero accumulator */
+    Uint32 intshift = 32 - AAbits; /* # of bits by which to shift erracc to get intensity level */
+    Uint32 erradj;
+    Uint32 erracctmp, wgt;
+
+    /*
+     * x-major or y-major?
+     */
+    if (dy > dx) {
+
+      /*
+       * y-major.  Calculate 16-bit fixed point fractional part of a
+       * pixel that X advances every time Y advances 1 pixel, truncating
+       * the result so that we won't overrun the endpoint along the
+       * X axis
+       */
+      /*
+       * Not-so-portable version:
+       * erradj = ((Uint64)dx << 32) / (Uint64)dy;
+       */
+      erradj = ((dx << 16) / dy) << 16;
+
+      /*
+       * draw all pixels other than the first and last
+       */
+      int x0pxdir = xx0 + xdir;
+      step = dy;
+      while (--dy) {
+        color = interpolateColor(color2, color1, (Double)dy / step);
+        erracctmp = erracc;
+        erracc += erradj;
+        if (erracc <= erracctmp) {
+          /*
+           * rollover in error accumulator, x coord advances
+           */
+          xx0 = x0pxdir;
+          x0pxdir += xdir;
         }
-        step = dx;
-        while (--dx) {
-            color = interpolateColor(color2, color1, (Double)dx / step);
-            result |= pixelColorNolock(dst, x1, y1, color);
-            x1 += xdir;
-        }
-    }
-    if (y1 > y2) {
-        color = color1;
-        color1 = color2;
-        color2 = color;
-    }
+        yy0++;              /* y-major so always advance Y */
 
-    /*
-     * Clip line and test if we have to draw
-     */
-    if (!(clipLine(dst, &x1, &y1, &x2, &y2))) {
-        return (0);
-    }
+        /*
+         * the AAbits most significant bits of erracc give us the
+         * intensity weighting for this pixel, and the complement of
+         * the weighting for the paired pixel.
+         */
+        wgt = (erracc >> intshift) & 255;
+        result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
+        result |= pixelColorWeightNolock (dst, x0pxdir, yy0, color, wgt);
+      }
 
-    /*
-     * Keep on working with 32bit numbers
-     */
-    xx0 = x1;
-    yy0 = y1;
-    xx1 = x2;
-    yy1 = y2;
-
-    /*
-     * Reorder points if required
-     */
-    if (yy0 > yy1) {
-        tmp = yy0;
-        yy0 = yy1;
-        yy1 = tmp;
-        tmp = xx0;
-        xx0 = xx1;
-        xx1 = tmp;
-    }
-
-    /*
-     * Calculate distance
-     */
-    dx = xx1 - xx0;
-    dy = yy1 - yy0;
-
-    /*
-     * Adjust for negative dx and set xdir
-     */
-    if (dx >= 0) {
-        xdir = 1;
     } else {
-        xdir = -1;
-        dx = (-dx);
-    }
 
-    /* Lock surface */
-    if (SDL_MUSTLOCK(dst)) {
-        if (SDL_LockSurface(dst) < 0) {
-            return (-1);
+      /*
+       * x-major line.  Calculate 16-bit fixed-point fractional part of
+       * a pixel that Y advances each time X advances 1 pixel truncating
+       * the result so that we won't overrun the endpoint along the
+       * X axis.
+       */
+      /*
+       * Not-so-portable version:
+       * erradj = ((Uint64)dy << 32) / (Uint64)dx;
+       */
+      erradj = ((dy << 16) / dx) << 16;
+
+      /*
+       * draw all pixels other than the first and last
+       */
+      int y0p1 = yy0 + 1;
+      step = dx;
+      while (--dx) {
+        color = interpolateColor(color2, color1, (Double)dx / step);
+        erracctmp = erracc;
+        erracc += erradj;
+        if (erracc <= erracctmp) {
+          /*
+           * Accumulator turned over, advance y
+           */
+          yy0 = y0p1;
+          y0p1++;
         }
-    }
-
-    /*
-     * Draw the initial pixel in the foreground color
-     */
-    result = pixelColorNolock(dst, x1, y1, color1);
-
-    /*
-     * Check for special cases
-     */
-    if (dx == 0 && dy == 0) {
-      /* nothing to do */
-    } else if (dx == 0) {
-        /* Vertical line */
-        step = dy;
-        while (--dy) {
-            color = interpolateColor(color2, color1, (Double)dy / step);
-            result |= pixelColorNolock(dst, x1, ++yy0, color);
-        }
-    } else if (dy == 0) {
-    } else if (dx == dy) {
-        /* Diagonal line */
-        step = dx;
-        while (--dx) {
-            color = interpolateColor(color2, color1, (Double)dx / step);
-            result |= pixelColorNolock(dst, xx0, ++yy0, color);
-            xx0 += xdir;
-        }
-    }
-    else {
-        Uint32 erracc = 0; /* Zero accumulator */
-        Uint32 intshift = 32 - AAbits; /* # of bits by which to shift erracc to get intensity level */
-        Uint32 erradj;
-        Uint32 erracctmp, wgt;
-
+        xx0 += xdir;        /* x-major so always advance X */
         /*
-         * x-major or y-major?
+         * the AAbits most significant bits of erracc give us the
+         * intensity weighting for this pixel, and the complement of
+         * the weighting for the paired pixel.
          */
-        if (dy > dx) {
-
-            /*
-             * y-major.  Calculate 16-bit fixed point fractional part of a
-             * pixel that X advances every time Y advances 1 pixel, truncating
-             * the result so that we won't overrun the endpoint along the
-             * X axis
-             */
-            /*
-             * Not-so-portable version:
-             * erradj = ((Uint64)dx << 32) / (Uint64)dy;
-             */
-            erradj = ((dx << 16) / dy) << 16;
-
-            /*
-             * draw all pixels other than the first and last
-             */
-            int x0pxdir = xx0 + xdir;
-            step = dy;
-            while (--dy) {
-                color = interpolateColor(color2, color1, (Double)dy / step);
-                erracctmp = erracc;
-                erracc += erradj;
-                if (erracc <= erracctmp) {
-                    /*
-                     * rollover in error accumulator, x coord advances
-                     */
-                    xx0 = x0pxdir;
-                    x0pxdir += xdir;
-                }
-                yy0++;              /* y-major so always advance Y */
-
-                /*
-                 * the AAbits most significant bits of erracc give us the
-                 * intensity weighting for this pixel, and the complement of
-                 * the weighting for the paired pixel.
-                 */
-                wgt = (erracc >> intshift) & 255;
-                result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
-                result |= pixelColorWeightNolock (dst, x0pxdir, yy0, color, wgt);
-            }
-
-        } else {
-
-            /*
-             * x-major line.  Calculate 16-bit fixed-point fractional part of
-             * a pixel that Y advances each time X advances 1 pixel truncating
-             * the result so that we won't overrun the endpoint along the
-             * X axis.
-             */
-            /*
-             * Not-so-portable version:
-             * erradj = ((Uint64)dy << 32) / (Uint64)dx;
-             */
-            erradj = ((dy << 16) / dx) << 16;
-
-            /*
-             * draw all pixels other than the first and last
-             */
-            int y0p1 = yy0 + 1;
-            step = dx;
-            while (--dx) {
-                color = interpolateColor(color2, color1, (Double)dx / step);
-                erracctmp = erracc;
-                erracc += erradj;
-                if (erracc <= erracctmp) {
-                    /*
-                     * Accumulator turned over, advance y
-                     */
-                    yy0 = y0p1;
-                    y0p1++;
-                }
-                xx0 += xdir;        /* x-major so always advance X */
-                /*
-                 * the AAbits most significant bits of erracc give us the
-                 * intensity weighting for this pixel, and the complement of
-                 * the weighting for the paired pixel.
-                 */
-                wgt = (erracc >> intshift) & 255;
-                result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
-                result |= pixelColorWeightNolock (dst, xx0, y0p1, color, wgt);
-            }
-        }
+        wgt = (erracc >> intshift) & 255;
+        result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
+        result |= pixelColorWeightNolock (dst, xx0, y0p1, color, wgt);
+      }
     }
+  }
+  /*
+   * Do we have to draw the endpoint
+   */
+  if (draw_endpoint) {
     /*
-     * Do we have to draw the endpoint
+     * Draw final pixel, always exactly intersected by the line and doesn't
+     * need to be weighted.
      */
-    if (draw_endpoint) {
-        /*
-         * Draw final pixel, always exactly intersected by the line and doesn't
-         * need to be weighted.
-         */
-        result |= pixelColorNolock (dst, x2, y2, color2);
-    }
+    result |= pixelColorNolock (dst, x2, y2, color2);
+  }
 
-    /* Unlock surface */
-    if (SDL_MUSTLOCK(dst)) {
-        SDL_UnlockSurface(dst);
-    }
+  /* Unlock surface */
+  if (SDL_MUSTLOCK(dst)) {
+    SDL_UnlockSurface(dst);
+  }
 
-    return (result);
+  return (result);
 }
 
-int aafadingLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color1, Uint32 color2)
+int aafadingLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1,
+                      Sint16 x2, Sint16 y2, Uint32 color1, Uint32 color2)
 {
-    return (aafadingLineColorInt(dst, x1, y1, x2, y2, color1, color2, 1));
+  return (aafadingLineColorInt(dst, x1, y1, x2, y2, color1, color2, 1));
 }
 
 #endif /* FADING_EFFECT_H */

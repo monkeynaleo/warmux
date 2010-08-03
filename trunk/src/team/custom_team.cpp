@@ -56,8 +56,8 @@ CustomTeam::CustomTeam(const std::string &team_name)
 }
 
 CustomTeam::CustomTeam(const std::string& team_name,
-		       const std::string& directory,
-		       const std::vector<std::string>& list)
+                       const std::string& directory,
+                       const std::vector<std::string>& list)
   : is_name_changed(false)
   , name(team_name)
   , directory_name(directory)
@@ -122,19 +122,19 @@ void CustomTeam::Delete()
 
   if (!DeleteFile(fullpath)) {
     std::cerr << "o "
-	      << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
-			fullpath.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+              << Format(_("Error while deleting the file \"%s\". Unable to delete the custom team."),
+                        fullpath.c_str())
+              << " " << strerror(errno)
+              << std::endl;
     return;
   }
 
   if (!DeleteFolder(directory_name)) {
     std::cerr << "o "
-	      << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
-			directory_name.c_str())
-	      << " " << strerror(errno)
-	      << std::endl;
+              << Format(_("Error while deleting the directory \"%s\". Unable to delete the custom team."),
+                        directory_name.c_str())
+              << " " << strerror(errno)
+              << std::endl;
   }
 }
 

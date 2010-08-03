@@ -49,11 +49,11 @@ const uint FORCE_Y_MAX = 40;
 
 class AirAttackConfig : public ExplosiveWeaponConfig
 {
-  public:
-    Double speed;
-    uint nbr_obus;
-    AirAttackConfig();
-    virtual void LoadXml(const xmlNode* elem);
+public:
+  Double speed;
+  uint nbr_obus;
+  AirAttackConfig();
+  virtual void LoadXml(const xmlNode* elem);
 };
 
 Obus::Obus(AirAttackConfig& cfg) :
@@ -105,7 +105,7 @@ void Plane::Shoot(Double speed, const Point2i& target)
 
   cible_x = target.x;
   SetY(0);
-  distance_to_release =(int)(speed * sqrt(TWO * (GetY() + target.y)));
+  distance_to_release = (int)(speed * sqrt(TWO * (GetY() + target.y)));
 
   image->Scale(dir, 1);
 
@@ -113,13 +113,15 @@ void Plane::Shoot(Double speed, const Point2i& target)
     speed_vector.SetValues(speed, 0);
     SetX(ONE - Double(image->GetWidth()));
     //distance_to_release -= obus_dx;
-   if(distance_to_release > cible_x) distance_to_release=0;
+   if (distance_to_release > cible_x)
+     distance_to_release = 0;
 
   } else {
     speed_vector.SetValues(-speed, 0) ;
     SetX(Double(GetWorld().GetWidth() - 1));
     //distance_to_release += obus_dx;
-    if(distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx)) distance_to_release=0;
+    if (distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx))
+      distance_to_release = 0;
   }
 
   SetSpeedXY (speed_vector);
@@ -132,7 +134,7 @@ void Plane::Shoot(Double speed, const Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY(Point2i(GetX(), obus_dy) );
+  instance->SetXY(Point2i(GetX(), obus_dy));
 
   Point2d speed_vector = GetSpeedXY();
 
@@ -159,15 +161,14 @@ void Plane::Refresh()
   UpdatePosition();
   image->Update();
   // First shoot !!
-  if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
+  if (OnTopOfTarget() && nb_dropped_bombs == 0) {
     DropBomb();
     m_ignore_movements = true;
     MSG_DEBUG("random.get", "Plane::Refresh() first bomb");
     next_height = RandomSync().GetInt(20,100);
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
-    if (!last_dropped_bomb
-	|| last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height) {
+    if (!last_dropped_bomb || last_dropped_bomb->GetY() > GetY()+GetHeight()+next_height) {
       MSG_DEBUG("random.get", "Plane::Refresh() another bomb");
       next_height = RandomSync().GetInt(20,100);
       DropBomb();
@@ -184,7 +185,8 @@ int Plane::GetDirection() const
 
 void Plane::Draw()
 {
-  if (IsGhost()) return;
+  if (IsGhost())
+    return;
   image->Draw(GetPosition());
 }
 
@@ -226,7 +228,7 @@ void AirAttack::ChooseTarget(Point2i mouse_pos)
 bool AirAttack::p_Shoot ()
 {
   MSG_DEBUG("weapon.shoot", "AirAttack p_Shoot");
-  if(!target_chosen)
+  if (!target_chosen)
     return false;
 
   // Go back to default cursor
@@ -252,7 +254,7 @@ AirAttackConfig& AirAttack::cfg()
   return static_cast<AirAttackConfig&>(*extra_params);
 }
 
-std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
             "%s team has won %u air attack!",

@@ -77,11 +77,11 @@ public:
   static void FinalizeBatch(void* buffer, size_t len);
 
   static bool Server_HandShake(WSocket& client_socket,
-			       const std::string& game_name,
-			       const std::string& password,
-			       std::string& client_nickname,
-			       uint client_player_id,
-			       bool client_will_be_master);
+                               const std::string& game_name,
+                               const std::string& password,
+                               std::string& client_nickname,
+                               uint client_player_id,
+                               bool client_will_be_master);
 
   static const char * GetGameStateAsString(net_game_state_t state);
 };

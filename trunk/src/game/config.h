@@ -58,11 +58,11 @@ public:
   static const int COLORKEY = 1;
 
   const ObjectConfig &GetObjectConfig(const std::string &name,
-                                     const std::string &xml_config) const;
+                                      const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
 
 #ifdef ENABLE_NLS
-  void SetLanguage(const std::string language);
+  void SetLanguage(const std::string& language);
   std::string GetLanguage() const { return default_language; };
 #endif
 

@@ -40,11 +40,11 @@
 
 #define FOR_EACH_CHARACTER(team,character) \
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team,character) \
-  	if (!character -> IsGhost())
+          if (!character -> IsGhost())
 
 #define FOR_EACH_LIVING_CHARACTER(team,character)    \
   FOR_EACH_LIVING_AND_DEAD_CHARACTER(team,character) \
-  	if (!character -> IsDead())
+          if (!character -> IsDead())
 
 #define FOR_ALL_LIVING_AND_DEAD_CHARACTER(team, character) \
   FOR_EACH_TEAM(team) \
@@ -52,16 +52,16 @@
 
 #define FOR_ALL_CHARACTERS(team,character) \
   FOR_EACH_TEAM(team) \
-  	FOR_EACH_CHARACTER(*team,character)
+          FOR_EACH_CHARACTER(*team,character)
 
 #define FOR_ALL_LIVING_CHARACTERS(team,character) \
   FOR_EACH_TEAM(team) \
   FOR_EACH_LIVING_CHARACTER(*team,character)
 
-#define FOR_ALL_LIVING_ENEMIES(shooter,team,character)	\
-  FOR_EACH_TEAM(team)					\
-  	if (!(*team)->IsSameAs(shooter.GetTeam()))	\
-  		FOR_EACH_LIVING_CHARACTER(*team,character)
+#define FOR_ALL_LIVING_ENEMIES(shooter,team,character)        \
+  FOR_EACH_TEAM(team)                                        \
+    if (!(*team)->IsSameAs(shooter.GetTeam()))        \
+      FOR_EACH_LIVING_CHARACTER(*team,character)
 
 //-----------------------------------------------------------------------------
 #endif

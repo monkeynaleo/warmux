@@ -101,21 +101,19 @@ void Water::Init()
   pattern_height = bottom.GetHeight();
 
   pattern.NewSurface(Point2i(PATTERN_WIDTH, pattern_height),
-		     SDL_SWSURFACE|SDL_SRCALPHA, true);
+                     SDL_SWSURFACE|SDL_SRCALPHA, true);
   /* Convert the pattern into the same format than surface. This allow not to
    * need conversions on fly and thus saves CPU */
-  pattern.SetSurface(
-		     SDL_ConvertSurface(pattern.GetSurface(),
-					surface.GetSurface()->format,
-					SDL_SWSURFACE|SDL_SRCALPHA),
-		     true /* free old one */);
+  pattern.SetSurface(SDL_ConvertSurface(pattern.GetSurface(),
+                                        surface.GetSurface()->format,
+                                        SDL_SWSURFACE|SDL_SRCALPHA),
+                     true /* free old one */);
 
   // Turn on transparency for water bottom texture
-  bottom.SetSurface(
-		    SDL_ConvertSurface(bottom.GetSurface(),
-				       bottom.GetSurface()->format,
-				       SDL_SWSURFACE|SDL_SRCALPHA),
-		    true);
+  bottom.SetSurface(SDL_ConvertSurface(bottom.GetSurface(),
+                                       bottom.GetSurface()->format,
+                                       SDL_SWSURFACE|SDL_SRCALPHA),
+                    true);
 
   shift1 = 0;
   next_wave_shift = 0;
@@ -248,7 +246,7 @@ void Water::Draw()
   int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
   int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
 
-  if ( screen_bottom < water_top ) {
+  if (screen_bottom < water_top) {
     return; // save precious CPU time
   }
 
@@ -256,17 +254,16 @@ void Water::Draw()
 
   int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
   int cameraRightPosition = Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
- 
+
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
-  for (; y < screen_bottom;
-       y += pattern_height) {
+  for (; y < screen_bottom; y += pattern_height) {
     for (int x = Camera::GetInstance()->GetPosition().x - x0;
          x < cameraRightPosition;
          x += PATTERN_WIDTH) {
       AbsoluteDraw(bottom, Point2i(x, y));
     }
   }
- 
+
   y = water_top;
   for (int wave = 0; wave < WAVE_COUNT; wave++) {
     for (int x = Camera::GetInstance()->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);

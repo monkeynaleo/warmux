@@ -66,8 +66,7 @@ void TextBox::BasicSetText(std::string const & new_txt)
 {
   std::string _new_txt = new_txt;
 
-  if (max_nb_chars != 0 &&
-      _new_txt.size() > max_nb_chars) {
+  if (max_nb_chars != 0 && _new_txt.size() > max_nb_chars) {
     _new_txt.resize(max_nb_chars);
   }
 
@@ -137,7 +136,7 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
            this->position.x + font->GetWidth(txt) < mousePosition.x+2) {
       cursor_pos = pos;
       while ((cur_txt[pos++] & 0xc0) == 0x80
-	     && pos < cur_txt.size()) { } // eat all UTF-8 characters
+             && pos < cur_txt.size()) { } // eat all UTF-8 characters
       txt = cur_txt.substr(0, pos);
     }
 
@@ -152,10 +151,10 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
 }
 
 
-PasswordBox::PasswordBox(const std::string & label, 
+PasswordBox::PasswordBox(const std::string & label,
                          uint max_width,
-                         Font::font_size_t fsize, 
-                         Font::font_style_t fstyle) : 
+                         Font::font_size_t fsize,
+                         Font::font_style_t fstyle) :
   TextBox(label, max_width, fsize, fstyle)
 {
 }
@@ -180,7 +179,7 @@ void PasswordBox::BasicSetText(std::string const & new_txt)
   Font * font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
   if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
-    Label::SetText( std::string(clear_text.size(), '*') );
+    Label::SetText(std::string(clear_text.size(), '*'));
   } else {
     cursor_pos = GetText().size();
   }

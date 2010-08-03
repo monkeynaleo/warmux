@@ -61,8 +61,7 @@ GameBlitz::time_iterator GameBlitz::GetCurrentTeam()
 
 GameBlitz::time_iterator GameBlitz::KillTeam(GameBlitz::time_iterator cur)
 {
-  FOR_EACH_LIVING_CHARACTER(cur->first, character)
-  {
+  FOR_EACH_LIVING_CHARACTER(cur->first, character) {
     character->Die();
   }
   GameMessages::GetInstance()->Add (Format(_("%s team was fragged down."), cur->first->GetName().c_str()));
@@ -75,8 +74,7 @@ bool GameBlitz::Run()
 {
   // Make sure map is empty
   times.clear();
-  FOR_EACH_TEAM(team)
-  {
+  FOR_EACH_TEAM(team) {
     times[*team] = GameMode::GetInstance()->duration_turn;
   }
 
@@ -108,15 +106,15 @@ void GameBlitz::RefreshClock()
         } else {
           duration--;
 
-	  if (duration == 12) {
-	    countdown_sample.Play("default", "countdown-end_turn");
-	  }
+          if (duration == 12) {
+            countdown_sample.Play("default", "countdown-end_turn");
+          }
 
-	  if (duration > 10) {
-	    Interface::GetInstance()->UpdateTimer(duration, false, false);
-	  } else {
-	    Interface::GetInstance()->UpdateTimer(duration, true, false);
-	  }
+          if (duration > 10) {
+            Interface::GetInstance()->UpdateTimer(duration, false, false);
+          } else {
+            Interface::GetInstance()->UpdateTimer(duration, true, false);
+          }
         }
         break;
 
@@ -164,7 +162,7 @@ uint GameBlitz::GetRemainingTime() const
 // Beginning of a new turn
 void GameBlitz::__SetState_PLAYING()
 {
-  MSG_DEBUG("game.statechange", "Playing" );
+  MSG_DEBUG("game.statechange", "Playing");
 
   Wind::GetRef().ChooseRandomVal();
 
@@ -202,8 +200,8 @@ void GameBlitz::__SetState_END_TURN()
   CharacterCursor::GetInstance()->Hide();
   last_clock_update = Time::GetInstance()->Read();
   // Ensure the clock sprite isn't NULL:
-  Interface::GetInstance()->UpdateTimer(GameMode::GetInstance()->duration_exchange_player, 
-                                        false, 
+  Interface::GetInstance()->UpdateTimer(GameMode::GetInstance()->duration_exchange_player,
+                                        false,
                                         true);
 
   // Applying Disease damage and Death mode.

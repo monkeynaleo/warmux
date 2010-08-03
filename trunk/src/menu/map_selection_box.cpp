@@ -37,7 +37,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 {
   display_only = _display_only;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(res, "menu/big_plus", false);
@@ -63,13 +63,14 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 
   if (uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX()
                           + bt_map_minus->GetSizeX() + border.x)) {
-    margin = (size.x -
-              (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX() + border.x) ) / 6;
+    margin = ( size.x - (total_width_previews + bt_map_plus->GetSizeX() +
+                         bt_map_minus->GetSizeX() + border.x) ) / 6;
   }
 
   if (margin < 5) {
     margin = 5;
-    uint total_size_wo_margin = size.x - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX() - border.x;
+    uint total_size_wo_margin = size.x - 6*margin - bt_map_plus->GetSizeX()
+                              - bt_map_minus->GetSizeX() - border.x;
     map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
     map_preview_height = 3/4 * map_preview_width;
   }
@@ -78,7 +79,8 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 
   previews_box->AddWidget(bt_map_minus);
 
-  map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
+  map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4,
+                                                  map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
 
   map_preview_before = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
@@ -100,11 +102,11 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 
   // Map information
   map_name_label = new Label("Map", W_UNDEF, Font::FONT_SMALL,
-			     Font::FONT_BOLD, dark_gray_color, true, false);
+                             Font::FONT_BOLD, dark_gray_color, true, false);
   AddWidget(map_name_label);
 
   map_author_label = new Label("Author", W_UNDEF, Font::FONT_SMALL,
-			       Font::FONT_BOLD, dark_gray_color, true, false);
+                               Font::FONT_BOLD, dark_gray_color, true, false);
   AddWidget(map_author_label);
 
   // Load Maps' list
@@ -268,7 +270,7 @@ void MapSelectionBox::ValidMapSelection()
       map_name = "random";
 
       if (Network::GetInstance()->IsLocal()) {
-	MapsList::GetInstance()->SelectMapByName(map_name);
+        MapsList::GetInstance()->SelectMapByName(map_name);
       }
   } else {
     map_name = MapsList::GetInstance()->lst[selected_map_index]->GetRawName();

@@ -30,7 +30,7 @@
 
 PictureTextCBox::PictureTextCBox(const std::string & label,
                                  const std::string & resource_id,
-                                 const Point2i & _size, 
+                                 const Point2i & _size,
                                  bool value):
   CheckBox(label, _size.x, value),
   m_image(),
@@ -39,12 +39,12 @@ PictureTextCBox::PictureTextCBox(const std::string & label,
   m_disabled_back()
 {
   SetFont(dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_image = GetResourceManager().LoadImage(res, resource_id);
   m_enabled = GetResourceManager().LoadImage(res, "menu/enabled");
   m_disabled_front = GetResourceManager().LoadImage(res, "menu/disabled_front");
   m_disabled_back = GetResourceManager().LoadImage(res, "menu/disabled_back");
-  GetResourceManager().UnLoadXMLProfile( res);
+  GetResourceManager().UnLoadXMLProfile(res);
   m_value = value;
 
   Text::SetMaxWidth(size.x);
@@ -82,7 +82,7 @@ bool PictureTextCBox::LoadXMLConfiguration()
   if (!m_enabled.ImgLoad(file)) {
     file = profile->relative_path + "menu/enabled.png";
     if (!m_enabled.ImgLoad(file)) {
-      Error("XML Loading -> PictureTextCBox: can't load " + file); 
+      Error("XML Loading -> PictureTextCBox: can't load " + file);
     }
   }
 
@@ -148,7 +148,7 @@ void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
   video_window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
   Text::DrawCenterTop(GetPosition() + Point2i(GetSizeX()/2,
-		      GetSizeY() - Text::GetHeight()));
+                      GetSizeY() - Text::GetHeight()));
 
   if (!m_value) {
     uint disabled_x = GetPositionX() + (GetSizeX() - m_disabled_front.GetWidth())/2 ;
