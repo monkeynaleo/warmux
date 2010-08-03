@@ -83,7 +83,7 @@ class IndexServer : public Singleton<IndexServer>
   bool GetServerAddress(std::string& address, int& port, uint& nb_tries);
   // Connect to a server
   connection_state_t ConnectTo(const std::string& address, const int& port,
-			       const std::string& wormux_version);
+                               const std::string& wormux_version);
 
   // Perform a handshake with the server
   connection_state_t HandShake(const std::string& wormux_version);
@@ -118,7 +118,7 @@ public:
 
   // returns a list of game servers
   std::list<GameServerInfo> GetHostList(bool symbolic_name
-					/*make a reverse DNS resolution*/);
+                                        /*make a reverse DNS resolution*/);
 
   const std::string& GetSupportedVersions() const;
 };

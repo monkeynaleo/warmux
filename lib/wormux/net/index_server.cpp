@@ -111,8 +111,7 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
 
   // Cycle through the list of server
   // Until we find one running
-  while (GetServerAddress(addr, port, nb_servers_tried))
-  {
+  while (GetServerAddress(addr, port, nb_servers_tried)) {
     r = ConnectTo(addr, port, wormux_version);
     if (r == CONNECTED)
       goto out;
@@ -129,7 +128,7 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
 
 // must be called protected by the semaphore
 connection_state_t IndexServer::ConnectTo(const std::string& address, const int& port,
-					  const std::string& wormux_version)
+                                          const std::string& wormux_version)
 {
   connection_state_t r;
 
@@ -164,8 +163,7 @@ connection_state_t IndexServer::ConnectTo(const std::string& address, const int&
 // Must be called protected by the semaphore
 void IndexServer::__Disconnect()
 {
-  if (hidden_server)
-  {
+  if (hidden_server) {
     hidden_server = false;
     return;
   }
@@ -201,23 +199,22 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
   MSG_DEBUG("index_server", "Trying a new server");
   // Cycle through the server list to find the first one
   // accepting connection
-  if (first_server == server_lst.end())
-    {
-      // First try :
-      // Randomly select a server in the list
-      int nbr = RandomLocal().GetLong( 0, server_lst.size()-1 );
-      first_server = server_lst.begin();
-      while(nbr--)
-	++first_server;
+  if (first_server == server_lst.end()) {
+    // First try :
+    // Randomly select a server in the list
+    int nbr = RandomLocal().GetLong( 0, server_lst.size()-1 );
+    first_server = server_lst.begin();
+    while(nbr--)
+      ++first_server;
 
-      ASSERT(first_server != server_lst.end());
+    ASSERT(first_server != server_lst.end());
 
-      current_server = first_server;
+    current_server = first_server;
 
-      address = current_server->first;
-      port = current_server->second;
-      return true;
-    }
+    address = current_server->first;
+    port = current_server->second;
+    return true;
+  }
 
   ++current_server;
   if (current_server == server_lst.end())
@@ -327,7 +324,7 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   WNet::FinalizeBatch(buffer, used);
 
   MSG_DEBUG("index_server", "Sending server information - name:%s, port:%d, use pwd:%d\n",
-	    game_name.c_str(), port, pwd);
+            game_name.c_str(), port, pwd);
   bool r = socket.SendBuffer(buffer, used);
   if (!r)
     goto disconnect;
@@ -338,12 +335,12 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
     goto disconnect;
 
   MSG_DEBUG("index_server", "ACK received \\o/\n",
-	    game_name.c_str(), pwd, port);
+            game_name.c_str(), pwd, port);
 
   Unlock();
   return true;
 
- disconnect:
+disconnect:
   __Disconnect();
   Unlock();
 
@@ -366,8 +363,7 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
   if (!r || lst_size == 0)
     goto out;
 
-  while (lst_size--)
-  {
+  while (lst_size--) {
     GameServerInfo game_server_info;
     IPaddress ip;
     int nb;
@@ -393,10 +389,8 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
 
     unsigned char* str_ip = (unsigned char*)&ip.host;
     char formated_ip[16];
-    snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
-	     (int)str_ip[1],
-	     (int)str_ip[2],
-	     (int)str_ip[3]);
+    snprintf(formated_ip, 16, "%i.%i.%i.%i",
+             (int)str_ip[0], (int)str_ip[1], (int)str_ip[2], (int)str_ip[3]);
     game_server_info.ip_address = std::string(formated_ip);
 
     char port[10];
@@ -404,9 +398,9 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
     game_server_info.port = std::string(port);
 
     MSG_DEBUG("index_server","ip: %s, port: %s, name: %s, pwd=%s\n",
-	      game_server_info.ip_address.c_str(),
-	      game_server_info.port.c_str(),
-	      game_server_info.game_name.c_str(),
+              game_server_info.ip_address.c_str(),
+              game_server_info.port.c_str(),
+              game_server_info.game_name.c_str(),
               (game_server_info.passworded) ? "yes" : "no");
 
     if (symbolic_name) {
@@ -418,7 +412,7 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
     lst.push_back(game_server_info);
   }
 
- out:
+out:
   Unlock();
   return lst;
 }
@@ -474,11 +468,11 @@ void IndexServer::Refresh(bool nowait)
   if (!r)
     goto disconnect;
 
- out:
+out:
   Unlock();
   return;
 
- disconnect:
+disconnect:
   __Disconnect();
   goto out;
 }

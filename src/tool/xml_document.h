@@ -35,11 +35,11 @@ public:
   const xmlNode* GetRoot() const;
 
   // Return the direct children matching name
-  static xmlNodeArray GetNamedChildren(const xmlNode* father, 
+  static xmlNodeArray GetNamedChildren(const xmlNode* father,
                                        const std::string & name);
 
   // Return the first child node element named "nodeName" of "father".
-  const xmlNode * GetFirstNamedChild(const xmlNode * father, 
+  const xmlNode * GetFirstNamedChild(const xmlNode * father,
                                      const std::string & nodeName);
 
   // Return the current number of children nodes of "father" node.
@@ -76,12 +76,12 @@ public:
 
   // get an XML element
   static const xmlNode* GetMarker(const xmlNode* x,
-				  const std::string &name);
+                                  const std::string &name);
 
   // Access to the 'anchor' <[name] name="[attr_name]"> : have to be uniq !
   static const xmlNode* Access(const xmlNode* x,
-			       const std::string &name,
-			       const std::string &attr_name);
+                               const std::string &name,
+                               const std::string &attr_name);
 
   // Lit un attribut d'un noeud
   static bool ReadStringAttr(const xmlNode* x,

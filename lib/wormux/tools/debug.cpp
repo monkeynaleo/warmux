@@ -53,7 +53,7 @@ bool IsLOGGING(const char* mode)
 
     if (strncmp(strMode, mode, modeSize) == 0) {
       if ( (mSize != modeSize) && ( mode[modeSize] != '.' ) && modeSize != 0)
-	continue;
+        continue;
 
       return true;
     }

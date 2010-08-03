@@ -48,7 +48,7 @@ TeamsList::~TeamsList()
 {
   UnloadGamingData();
   Clear();
-  for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
+  for (full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
   full_list.clear();
 }
@@ -75,10 +75,10 @@ Team* TeamsList::GetNextTeam()
 {
   // Next team
   std::vector<Team*>::iterator it=active_team;
-  do
-  {
+  do {
     ++it;
-    if (it == playing_list.end()) it = playing_list.begin();
+    if (it == playing_list.end())
+      it = playing_list.begin();
   } while ((**it).NbAliveCharacter() == 0);
   return (*it);
 }
@@ -135,7 +135,8 @@ void TeamsList::LoadList()
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
+    while ((name = FolderSearchNext(f)) != NULL)
+      LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
     Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
@@ -146,7 +147,8 @@ void TeamsList::LoadList()
   f = OpenFolder(dirname);
   if (f) {
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
+    while ((name = FolderSearchNext(f)) != NULL)
+      LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
     std::cerr << std::endl
@@ -195,7 +197,7 @@ void TeamsList::RandomizeFirstPlayer()
   active_team = playing_list.begin();
   MSG_DEBUG("random.get", "TeamList::RandomizeFirstPlayer()");
   int skip = RandomSync().GetLong(0, playing_list.size() - 1);
-  for(int i = 0; i < skip; i++)
+  for (int i = 0; i < skip; i++)
     active_team++;
 }
 
@@ -215,14 +217,12 @@ void TeamsList::UnloadGamingData()
 
 //-----------------------------------------------------------------------------
 
-Team *TeamsList::FindById (const std::string &id, int &pos)
+Team *TeamsList::FindById(const std::string &id, int &pos)
 {
   full_iterator it=full_list.begin(), end = full_list.end();
   int i=0;
-  for (; it != end; ++it, ++i)
-  {
-    if ((*it)->GetId() == id)
-    {
+  for (; it != end; ++it, ++i) {
+    if ((*it)->GetId() == id) {
       pos = i;
       return (*it);
     }
@@ -233,12 +233,11 @@ Team *TeamsList::FindById (const std::string &id, int &pos)
 
 //-----------------------------------------------------------------------------
 
-Team *TeamsList::FindByIndex (uint index)
+Team *TeamsList::FindByIndex(uint index)
 {
-  full_iterator it=full_list.begin(), end = full_list.end();
+  full_iterator it = full_list.begin(), end = full_list.end();
   uint i=0;
-  for (; it != end; ++it, ++i)
-  {
+  for (; it != end; ++it, ++i) {
     if (i == index)
       return (*it);
   }
@@ -260,8 +259,7 @@ Team* TeamsList::FindPlayingById(const std::string &id, int &index)
 {
   iterator it = playing_list.begin(), end = playing_list.end();
   index=0;
-  for (; it != end; ++it, ++index)
-  {
+  for (; it != end; ++it, ++index) {
     if ((*it) -> GetId() == id)
       return *it;
   }
@@ -288,11 +286,10 @@ void TeamsList::InitEnergy()
 {
   // Looking at team with the greatest energy
   // (in case teams does not have same amount of character)
-  iterator it=playing_list.begin(), end = playing_list.end();
+  iterator it = playing_list.begin(), end = playing_list.end();
   uint max = 0;
-  for (; it != end; ++it)
-  {
-    if( (**it).ReadEnergy() > max)
+  for (; it != end; ++it) {
+    if ((**it).ReadEnergy() > max)
       max = (**it).ReadEnergy();
   }
 
@@ -303,27 +300,21 @@ void TeamsList::InitEnergy()
 
   // Initial ranking
   it=playing_list.begin();
-  for (; it != end; ++it)
-  {
+  for (; it != end; ++it) {
     uint rank = 0;
     iterator it2=playing_list.begin();
-    for (; it2 != end; ++it2)
-    {
-      if((it != it2)
-          && (**it2).ReadEnergy() > (**it).ReadEnergy() )
+    for (; it2 != end; ++it2) {
+      if (it != it2 && (**it2).ReadEnergy() > (**it).ReadEnergy())
         ++rank;
     }
     (**it).energy.rank_tmp = rank;
   }
   it=playing_list.begin();
-  for (; it != end; ++it)
-  {
+  for (; it != end; ++it) {
     uint rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
-    for (it2 = it; it2 != end; ++it2)
-    {
-      if((it != it2)
-          && (**it2).ReadEnergy() == (**it).ReadEnergy() )
+    for (it2 = it; it2 != end; ++it2) {
+      if (it != it2 && (**it2).ReadEnergy() == (**it).ReadEnergy())
         ++rank;
     }
     (**it).energy.SetRanking(rank);
@@ -358,7 +349,7 @@ void TeamsList::RefreshEnergy()
 
     // change an energy bar value ?
     for (it=playing_list.begin(); it != end; ++it) {
-      if( (**it).energy.status == EnergyStatusValueChange) {
+      if ((**it).energy.status == EnergyStatusValueChange) {
         status = EnergyStatusValueChange;
         break;
       }
@@ -380,8 +371,8 @@ void TeamsList::RefreshEnergy()
   }
 
   // Setting event to process in every energy bar
-  if(status != EnergyStatusOK || waiting) {
-    it=playing_list.begin();
+  if (status != EnergyStatusOK || waiting) {
+    it = playing_list.begin();
     for (; it != end; ++it) {
       (**it).energy.status = status;
     }
@@ -401,30 +392,24 @@ void TeamsList::RefreshSort ()
   uint rank;
 
   // Find a ranking without taking acount of the equalities
-  it=playing_list.begin();
-  for (; it != end; ++it)
-  {
+  it = playing_list.begin();
+  for (; it != end; ++it) {
     rank = 0;
     iterator it2=playing_list.begin();
-    for (; it2 != end; ++it2)
-    {
-      if ((it != it2)
-          && (**it2).ReadEnergy() > (**it).ReadEnergy() )
+    for (; it2 != end; ++it2) {
+      if (it != it2 && (**it2).ReadEnergy() > (**it).ReadEnergy())
         ++rank;
     }
     (**it).energy.rank_tmp = rank;
   }
 
   // Fix equalities
-  it=playing_list.begin();
-  for (; it != end; ++it)
-  {
+  it = playing_list.begin();
+  for (; it != end; ++it) {
     rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
-    for (it2 = it; it2 != end; ++it2)
-    {
-      if ((it != it2)
-          && (**it2).ReadEnergy() == (**it).ReadEnergy() )
+    for (it2 = it; it2 != end; ++it2) {
+      if (it != it2 && (**it2).ReadEnergy() == (**it).ReadEnergy())
         ++rank;
     }
     (**it).energy.NewRanking(rank);
@@ -505,7 +490,7 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
 }
 
 Team* TeamsList::UpdateTeam(const std::string& old_team_id,
-			    const ConfigTeam &the_team_cfg)
+                            const ConfigTeam &the_team_cfg)
 {
   int pos;
   Team *the_team = NULL;
@@ -583,19 +568,16 @@ void TeamsList::DelTeam(const std::string &id)
 
 void TeamsList::SetActive(const std::string &id)
 {
-  iterator it = playing_list.begin(),
-  end = playing_list.end();
-  for (; it != end; ++it)
-  {
+  iterator it = playing_list.begin(), end = playing_list.end();
+  for (; it != end; ++it) {
     Team &team = **it;
-    if (team.GetId() == id)
-    {
+    if (team.GetId() == id) {
       active_team = it;
       ActiveTeam().PrepareTurn();
       return;
     }
   }
-  Error (Format(_("Can't find team %s!"), id.c_str()));
+  Error(Format(_("Can't find team %s!"), id.c_str()));
 }
 
 //-----------------------------------------------------------------------------

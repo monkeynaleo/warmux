@@ -22,8 +22,8 @@
 #include "interface/mouse_cursor.h"
 #include "tool/resource_manager.h"
 
-MouseCursor::MouseCursor(Mouse::pointer_t _pointer_id, 
-			 std::string filename, Point2i _clic_pos)
+MouseCursor::MouseCursor(Mouse::pointer_t _pointer_id,
+                         std::string filename, Point2i _clic_pos)
 {
   pointer_id = _pointer_id;
   surf.ImgLoad(filename);
@@ -34,7 +34,7 @@ Mouse::pointer_t MouseCursor::GetPointerId() const
 {
   return pointer_id;
 }
-  
+
 const Surface& MouseCursor::GetSurface() const
 {
   return surf;
@@ -44,4 +44,3 @@ const Point2i& MouseCursor::GetClicPos() const
 {
   return clic_pos;
 }
-

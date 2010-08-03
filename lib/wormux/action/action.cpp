@@ -173,8 +173,7 @@ void Action::Push(const std::string& val)
   char* ch = (char*)val.c_str();
 
   int count = val.size();
-  while(count > 0)
-  {
+  while(count > 0) {
     uint32_t tmp = 0;
     // Fix-me : We are reading out of the c_str() buffer there :
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -258,8 +257,7 @@ std::string Action::PopString()
     return "";
   }
 
-  while(length > 0)
-  {
+  while(length > 0) {
     NET_ASSERT(var.size() > 0)
     {
       if(creator) creator->ForceDisconnection();
@@ -323,11 +321,11 @@ DistantComputer* Action::GetCreator() const
 
 int Action::GetSize() const
 {
-  return sizeof(uint32_t)	 // Size of packet len
-    + sizeof(uint32_t)		 // Size of the type
-    + sizeof(uint32_t)		 // Size of the timestamp
-    + sizeof(uint32_t)		 // Size of the number of variable
-    + int(var.size()) * 4;
+  return sizeof(uint32_t)         // Size of packet len
+       + sizeof(uint32_t)         // Size of the type
+       + sizeof(uint32_t)         // Size of the timestamp
+       + sizeof(uint32_t)         // Size of the number of variable
+       + int(var.size()) * 4;
 }
 
 uint Action::GetTimestamp() const
@@ -344,4 +342,3 @@ bool Action::IsFrameLess() const
 {
   return m_type <= LAST_FRAME_LESS_ACTION;
 }
-

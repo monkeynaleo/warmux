@@ -381,14 +381,14 @@ void ParseArgs(int argc, char * argv[])
           skip_menu = true;
           break;
         case 'i':
-	  {
-	    std::string index_server_address;
-	    if (optarg) index_server_address = optarg;
-	    else index_server_address = "127.0.0.1";
-	    printf("Using %s as address for index server. This option must be used only for debugging.\n",
-		   index_server_address.c_str());
-	    IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
-	  }
+          {
+            std::string index_server_address;
+            if (optarg) index_server_address = optarg;
+            else index_server_address = "127.0.0.1";
+            printf("Using %s as address for index server. This option must be used only for debugging.\n",
+                   index_server_address.c_str());
+            IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
+          }
           break;
         case 'g':
           printf("Game-mode: %s\n", optarg);
@@ -404,16 +404,16 @@ void ParseArgs(int argc, char * argv[])
           }
           break;
 
-	case '?': /* returns by getopt if option was invalid */
+        case '?': /* returns by getopt if option was invalid */
           PrintUsage(argv[0]);
           exit(EXIT_FAILURE);
-	  break;
+          break;
 
         default:
-	  fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", c);
-	  ASSERT(false);
+          fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", c);
+          ASSERT(false);
           exit(EXIT_FAILURE);
-	  break;
+          break;
         }
     }
 }

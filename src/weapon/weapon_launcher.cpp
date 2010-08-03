@@ -77,8 +77,8 @@ void WeaponBullet::SignalOutOfMap()
 }
 
 void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
-					 PhysicalObj * obj,
-					 const Point2d& /*obj_speed*/)
+                                         PhysicalObj * obj,
+                                         const Point2d& /*obj_speed*/)
 {
 #if 1
   obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
@@ -135,7 +135,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   can_drown = true;
   camera_follow_closely = false;
 
-  image = GetResourceManager().LoadSprite( weapons_res_profile, name);
+  image = GetResourceManager().LoadSprite(weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
 
@@ -258,7 +258,7 @@ void WeaponProjectile::Draw()
       ss << tmp ;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
-	  Text text(ss.str());
+          Text text(ss.str());
       text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
     }
   }
@@ -285,12 +285,12 @@ bool WeaponProjectile::IsImmobile() const
 
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(const Point2d& /* my_speed_before */,
-					     PhysicalObj * obj,
-					     const Point2d& /* obj_speed_before */)
+                                             PhysicalObj * obj,
+                                             const Point2d& /* obj_speed_before */)
 {
   ASSERT(obj != NULL);
   MSG_DEBUG("weapon.projectile", "SignalObjectCollision \"%s\" with \"%s\": %d, %d",
-	    m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
+            m_name.c_str(), obj->GetName().c_str(), GetX(), GetY());
   if (explode_colliding_character)
     Explosion();
 
@@ -498,8 +498,7 @@ void WeaponLauncher::DirectExplosion()
 void WeaponLauncher::Draw()
 {
   //Display timeout for projectil if can be changed.
-  if (projectile->change_timeout_allowed())
-  {
+  if (projectile->change_timeout_allowed()) {
     if (IsOnCooldownFromShot()) //Do not display after launching.
       return;
 
@@ -509,31 +508,30 @@ void WeaponLauncher::Draw()
     ss << "s";
     int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
     int txt_y = ActiveCharacter().GetY() - 4*ActiveCharacter().GetHeight()/5;
-	Text text(ss.str());
-      text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
+    Text text(ss.str());
+    text.DrawCenterTop(Point2i(txt_x, txt_y) - Camera::GetInstance()->GetPosition());
   }
 
   Weapon::Draw();
 
 #ifdef DEBUG_EXPLOSION_CONFIG
   ExplosiveWeaponConfig* cfg = dynamic_cast<ExplosiveWeaponConfig*>(extra_params);
-  if( cfg != NULL )
-  {
+  if (cfg) {
     Point2i p = ActiveCharacter().GetHandPosition() - Camera::GetInstance()->GetPosition();
     // Red color for the blast range (should be superior to the explosion_range)
     GetMainWindow().CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
     // Yellow color for the blast range (should be superior to the explosion_range)
     GetMainWindow().CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
   }
-  GetMainWindow().CircleColor(GetGunHolePosition().x-Camera::GetInstance()->GetPositionX(), GetGunHolePosition().y-Camera::GetInstance()->GetPositionY(), 5, c_black);
+  GetMainWindow().CircleColor(GetGunHolePosition().x-Camera::GetInstance()->GetPositionX(),
+                              GetGunHolePosition().y-Camera::GetInstance()->GetPositionY(), 5, c_black);
 #endif
 }
 
 void WeaponLauncher::p_Select()
 {
   missed_shots = 0;
-  if (projectile->change_timeout_allowed())
-  {
+  if (projectile->change_timeout_allowed()) {
     projectile->ResetTimeOut();
   }
   Weapon::p_Select();
@@ -542,8 +540,8 @@ void WeaponLauncher::p_Select()
 void WeaponLauncher::IncMissedShots()
 {
   missed_shots++;
-  if(announce_missed_shots)
-    GameMessages::GetInstance()->Add (_("Your shot has missed!"));
+  if (announce_missed_shots)
+    GameMessages::GetInstance()->Add(_("Your shot has missed!"));
 }
 
 void WeaponLauncher::HandleKeyReleased_Num1()

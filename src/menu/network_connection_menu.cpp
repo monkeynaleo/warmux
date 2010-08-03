@@ -130,7 +130,7 @@ int RefreshNetInfo(void *)
 NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Menu("menu/bg_network", vOkCancel)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
   uint max_width = GetMainWindow().GetWidth()-50;
   uint width     = max_width - 10;
@@ -153,11 +153,11 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
   refresh_net_games_label = new Label(_("Public battles"), width - cl_refresh_net_games->GetSizeX(),
-				      Font::FONT_MEDIUM, Font::FONT_BOLD, c_red, false, true);
+                                      Font::FONT_MEDIUM, Font::FONT_BOLD, c_red, false, true);
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
-  cl_net_games_lst = new GameListBox( Point2i(width, 30), false);
+  cl_net_games_lst = new GameListBox(Point2i(width, 30), false);
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Server password
@@ -252,7 +252,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   // Available on internet ?
   srv_internet_server = new CheckBox(_("Server available on Internet"), width,
-				     Config::GetInstance()->GetNetworkServerPublic());
+                                     Config::GetInstance()->GetNetworkServerPublic());
   srv_connection_box->AddWidget(srv_internet_server);
 
   tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
@@ -385,7 +385,7 @@ void NetworkConnectionMenu::__RefreshList()
     if (current > ((int) cl_net_games_lst->Size())-1) {
       current = 0;
     }
-    cl_net_games_lst->Select( current );
+    cl_net_games_lst->Select(current);
   }
 
   cl_net_games_lst->NeedRedrawing();
@@ -419,10 +419,10 @@ void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)
 
   if (conn == CONN_WRONG_VERSION) {
     error_msg = Format(_("Sorry, your version is not supported anymore. "
-			 "Supported versions are %s. "
-			 "You can download an updated version "
-			 "from http://www.wormux.org/wiki/download.php"),
-		       IndexServer::GetInstance()->GetSupportedVersions().c_str());
+                         "Supported versions are %s. "
+                         "You can download an updated version "
+                         "from http://www.wormux.org/wiki/download.php"),
+                       IndexServer::GetInstance()->GetSupportedVersions().c_str());
   } else {
     error_msg = NetworkErrorToString(conn);
   }
@@ -470,7 +470,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
     if (false == r) {
       DisplayNetError(CONN_BAD_PORT);
       msg_box->NewMessage(Format(_("Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."), port.c_str(), port.c_str()),
-			  c_red);
+                          c_red);
       goto out;
     }
   }
@@ -519,9 +519,9 @@ bool NetworkConnectionMenu::signal_ok()
   if (id == "TAB_server") {
     // Hosting your own server
     r = HostingServer(srv_port_number->GetText(),
-		      srv_game_name->GetText(),
-		      srv_game_pwd->GetPassword(),
-		      srv_internet_server->GetValue());
+                      srv_game_name->GetText(),
+                      srv_game_pwd->GetPassword(),
+                      srv_internet_server->GetValue());
     if (!r)
       goto out;
 
@@ -535,8 +535,8 @@ bool NetworkConnectionMenu::signal_ok()
     if (cl_net_games_lst->GetSelectedItem() != -1) {
       // Connect to an internet game!
       r = ConnectToClient(cl_net_games_lst->GetAddress(),
-			  cl_net_games_lst->GetPort(),
-			  cl_net_server_pwd->GetPassword());
+                          cl_net_games_lst->GetPort(),
+                          cl_net_server_pwd->GetPassword());
       if (!r)
         goto out;
 

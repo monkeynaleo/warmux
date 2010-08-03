@@ -126,11 +126,11 @@ NetworkMenu::NetworkMenu() :
   options_box->AddWidget(play_in_loop);
 
   connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-				0, Font::FONT_SMALL, Font::FONT_BOLD);
+                                0, Font::FONT_SMALL, Font::FONT_BOLD);
   options_box->AddWidget(connected_players);
 
   initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-				  0, Font::FONT_SMALL, Font::FONT_BOLD);
+                                  0, Font::FONT_SMALL, Font::FONT_BOLD);
   options_box->AddWidget(initialized_players);
 
   options_box->Pack();
@@ -158,9 +158,9 @@ NetworkMenu::NetworkMenu() :
     // First %s will be replaced with the name of the network game,
     // second %s by the server hostname
     msg_box->NewMessage(Format(_("Welcome to %s on %s!"),
-			       Network::GetInstance()->GetGameName().c_str(),
-			       ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
-			, c_red);
+                               Network::GetInstance()->GetGameName().c_str(),
+                               ((NetworkClient*)Network::GetInstance())->GetServerAddress().c_str())
+                        , c_red);
   }
 
   if (!Network::GetInstance()->IsGameMaster()) {
@@ -313,8 +313,8 @@ bool NetworkMenu::signal_ok()
     Game::GetInstance()->Start();
 
     if (Network::GetInstance()->IsConnected()
-	&& Network::GetInstance()->GetNbPlayersConnected() != 0
-	&& play_in_loop->GetValue()) {
+        && Network::GetInstance()->GetNbPlayersConnected() != 0
+        && play_in_loop->GetValue()) {
       PrepareForNewGame();
       return false;
     }
@@ -364,20 +364,20 @@ void NetworkMenu::Draw(const Point2i& /*mousePosition*/)
       //Refresh the number of players ready (does not work on client):
       nbr = Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED);
       if (Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK)
-	nbr++;
+        nbr++;
 
       pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
       if (initialized_players->GetText() != pl) {
-	initialized_players->SetText(pl);
-	msg_box->NewMessage(pl, c_red);
-	if (Network::GetInstance()->GetNbPlayersConnected() ==
-	    Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED)) {
-	  msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
-	  JukeBox::GetInstance()->Play("default", "menu/newcomer");
-	}
-	else if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
-	  msg_box->NewMessage(_("You are alone. :-/"), c_red);
-	}
+        initialized_players->SetText(pl);
+        msg_box->NewMessage(pl, c_red);
+        if (Network::GetInstance()->GetNbPlayersConnected() ==
+            Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED)) {
+          msg_box->NewMessage(_("The others are waiting for you! Wake up! :-)"), c_red);
+          JukeBox::GetInstance()->Play("default", "menu/newcomer");
+        }
+        else if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
+          msg_box->NewMessage(_("You are alone. :-/"), c_red);
+        }
       }
     }
   }
@@ -425,8 +425,8 @@ void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
   AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
-						     Constants::WORMUX_VERSION + " - " +
-						     _("Master mode"));
+                                                     Constants::WORMUX_VERSION + " - " +
+                                                     _("Master mode"));
   mode_label->SetText(_("Master mode"));
   connected_players->SetVisible(true);
   initialized_players->SetVisible(true);
@@ -467,18 +467,18 @@ void NetworkMenu::HandleEvent(const SDL_Event& event)
     switch (event.key.keysym.sym)
       {
       case SDLK_ESCAPE:
-	Menu::mouse_cancel();
-	break;
+        Menu::mouse_cancel();
+        break;
       case SDLK_RETURN:
       case SDLK_KP_ENTER:
-	msg_box->SendChatMsg();
-	break;
+        msg_box->SendChatMsg();
+        break;
       case SDLK_F10:
-	AppWormux::GetInstance()->video->ToggleFullscreen();
-	break;
+        AppWormux::GetInstance()->video->ToggleFullscreen();
+        break;
       default:
-	widgets.SendKey(event.key.keysym);
-	break;
+        widgets.SendKey(event.key.keysym);
+        break;
       }
   } else if (event.type == SDL_MOUSEBUTTONUP) {
 
@@ -518,7 +518,7 @@ void NetworkMenu::WaitingForGameMaster()
     Menu::Display(mousePosition);
 
   } while (Network::GetInstance()->IsConnected() &&
-	   Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
+           Network::GetInstance()->GetState() == WNet::NETWORK_MENU_OK);
 
   waiting_for_server = false;
 }

@@ -276,7 +276,7 @@ bool Config::RemovePersonalConfigFile() const
 }
 
 #ifdef ENABLE_NLS
-void Config::SetLanguage(const std::string language)
+void Config::SetLanguage(const std::string& language)
 {
   default_language = language;
   InitI18N(TranslateDirectory(locale_dir), language);

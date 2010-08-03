@@ -28,11 +28,11 @@
 #include "tool/affine_transform.h"
 #include "tool/resource_manager.h"
 
-SpinButtonWithPicture::SpinButtonWithPicture (const std::string& label,
-                                              const std::string& resource_id,
-                                              const Point2i& _size,
-                                              int value, int step,
-                                              int min_value, int max_value) :
+SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
+                                             const std::string& resource_id,
+                                             const Point2i& _size,
+                                             int value, int step,
+                                             int min_value, int max_value) :
   AbstractSpinButton(value, step, min_value, max_value)
 {
   position = Point2i(-1, -1);
@@ -109,8 +109,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
 
   if (GetValue() > GetMinValue()) {
 
-    if (Contains(mousePosition)
-	&& mousePosition.x < center.x)
+    if (Contains(mousePosition) && mousePosition.x < center.x)
       m_img_minus->SetCurrentFrame(1);
     else
       m_img_minus->SetCurrentFrame(0);
@@ -119,14 +118,13 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
   }
 
   if (GetValue() < GetMaxValue()) {
-    if (Contains(mousePosition)
-	&& mousePosition.x > center.x)
+    if (Contains(mousePosition) && mousePosition.x > center.x)
       m_img_plus->SetCurrentFrame(1);
     else
       m_img_plus->SetCurrentFrame(0);
 
     m_img_plus->Blit(surf, GetPosition().x + GetSize().x - m_img_plus->GetWidth() - IMG_BUTTONS_W,
-		     GetPosition().y + IMG_BUTTONS_H);
+                     GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 6. add in the value image

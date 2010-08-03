@@ -114,12 +114,12 @@ public:
 
   // Start a client
   static connection_state_t ClientStart(const std::string &host, const std::string &port,
-					const std::string& password);
+                                        const std::string& password);
 
   // Start a server
   static connection_state_t ServerStart(const std::string &port,
-					const std::string& game_name,
-					const std::string& password);
+                                        const std::string& game_name,
+                                        const std::string& password);
 
   static void Disconnect();
   static bool IsConnected();

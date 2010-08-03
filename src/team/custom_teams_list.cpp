@@ -81,8 +81,8 @@ void CustomTeamsList::LoadList()
     CloseFolder(f);
   } else {
     std::cerr << std::endl
-	      << Format(_("Cannot open the custom teams directory (%s)!"), dirname.c_str())
-	      << std::endl;
+              << Format(_("Cannot open the custom teams directory (%s)!"), dirname.c_str())
+              << std::endl;
   }
 
   Sort();
@@ -115,12 +115,10 @@ bool CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
 
 void CustomTeamsList::Sort()
 {
-  std::sort( full_list.begin(), full_list.end(), CustomTeamsList::CompareItems );
+  std::sort(full_list.begin(), full_list.end(), CustomTeamsList::CompareItems);
 }
 
-bool CustomTeamsList::CompareItems( CustomTeam* p1, CustomTeam* p2 )
+bool CustomTeamsList::CompareItems(CustomTeam* p1, CustomTeam* p2)
 {
-  return  (p1->GetName().compare(p2->GetName()) < 0);
+  return (p1->GetName().compare(p2->GetName()) < 0);
 }
-
-

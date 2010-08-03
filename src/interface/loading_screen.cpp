@@ -34,16 +34,15 @@ LoadingScreen::LoadingScreen(int icon_count):
   Config * config = Config::GetInstance();
   AppWormux * app = AppWormux::GetInstance();
 
-  loading_bg = new Sprite(Surface((
-                                   config->GetDataDir()
+  loading_bg = new Sprite(Surface((config->GetDataDir()
                                    + "menu" + PATH_SEPARATOR
                                    + "background_loading.jpg").c_str()),
-			  true);
+                          true);
   loading_bg->cache.EnableLastFrameCache();
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
   // Get profile from resource manager
-  res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   DrawBackground();
 }
 
@@ -56,7 +55,7 @@ LoadingScreen::~LoadingScreen()
 void LoadingScreen::DrawBackground()
 {
   loading_bg->ScaleSize(GetMainWindow().GetWidth(), GetMainWindow().GetHeight());
-  loading_bg->Blit( GetMainWindow(), 0, 0);
+  loading_bg->Blit(GetMainWindow(), 0, 0);
   AppWormux::GetInstance()->video->Flip();
 }
 
@@ -70,13 +69,11 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
   int x = ((GetMainWindow().GetWidth() - icon_count*120)/2)+ index*120;
   int y = (GetMainWindow().GetHeight()/2)+40;
 
-  Rectanglei dest ( x+slot_margin_x,
-                    y,
-                    image.GetWidth(),
-                    image.GetHeight() );
-  GetMainWindow().Blit( image, dest.GetPosition());
+  Rectanglei dest (x+slot_margin_x, y, image.GetWidth(), image.GetHeight());
+  GetMainWindow().Blit(image, dest.GetPosition());
 
-  Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80), label, white_color);
+  Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80),
+                                                    label, white_color);
 
   AppWormux::GetInstance()->video->Flip();
 }

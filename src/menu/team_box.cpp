@@ -113,10 +113,8 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
 
   /**********     Number of characters        **********/
-  nb_characters = new SpinButtonWithPicture(_("Number of characters"),
-                                            "menu/ico_play",
-                                            Point2i(100, _size.y-2),
-                                            6, 1, 1, 10);
+  nb_characters = new SpinButtonWithPicture(_("Number of characters"), "menu/ico_play",
+                                            Point2i(100, _size.y-2), 6, 1, 1, 10);
   AddWidget(nb_characters);
 
   GetResourceManager().UnLoadXMLProfile(res);
@@ -149,10 +147,10 @@ void TeamBox::UpdatePlayerNameColor()
   if (associated_team) {
     if (associated_team->IsLocal()) {
       if (GetCustomTeam()) {
-	// player name is head commander of custom team
-	player_name->SetColor(c_yellow);
+        // player name is head commander of custom team
+        player_name->SetColor(c_yellow);
       } else {
-	player_name->SetColor(c_white);
+        player_name->SetColor(c_white);
       }
     } else {
       // remote team
@@ -202,7 +200,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 
     if (w == nb_characters) {
       if (Network::GetInstance()->IsConnected()) {
-	ValidOptions();
+        ValidOptions();
       }
       return w;
     }

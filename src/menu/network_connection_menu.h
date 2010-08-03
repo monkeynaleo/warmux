@@ -69,7 +69,7 @@ private:
   PasswordBox* cl_server_pwd;
 
   MsgBox *msg_box;
-  
+
   uint m_last_click_on_games_lst;
   uint m_Double_click_interval;
 
@@ -86,12 +86,12 @@ private:
   void __RefreshList();
 
   bool HostingServer(const std::string& port,
-		     const std::string& game_name,
+                     const std::string& game_name,
                      const std::string& passwd,
-		     bool internet);
+                     bool internet);
   bool ConnectToClient(const std::string& srv_address,
-		       const std::string& port,
-		       const std::string& passwd);
+                       const std::string& port,
+                       const std::string& passwd);
 
   static SDL_Thread* thread_refresh;
   void ThreadRefreshList();

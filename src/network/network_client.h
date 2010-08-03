@@ -45,7 +45,7 @@ public:
 
   // Client specific methods
   connection_state_t ClientConnect(const std::string& host,
-				   const std::string& port);
+                                   const std::string& port);
 
   std::string GetServerAddress() const;
 };

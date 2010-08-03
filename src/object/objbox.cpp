@@ -50,7 +50,8 @@
 const uint SPEED = 5; // meter / seconde
 
 ObjBox::ObjBox(const std::string &name)
-  : PhysicalObj(name) {
+  : PhysicalObj(name)
+{
   m_allow_negative_y = true;
 
   parachute = true;
@@ -62,7 +63,8 @@ ObjBox::ObjBox(const std::string &name)
   JukeBox::GetInstance()->Play("default","box/falling");
 }
 
-ObjBox::~ObjBox(){
+ObjBox::~ObjBox()
+{
   delete anim;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
@@ -87,8 +89,8 @@ void ObjBox::SignalGroundCollision(const Point2d& /*my_speed_before*/)
 }
 
 void ObjBox::SignalObjectCollision(const Point2d& my_speed_before,
-				   PhysicalObj * obj,
-				   const Point2d& /*obj_speed_before*/)
+                                   PhysicalObj * obj,
+                                   const Point2d& /*obj_speed_before*/)
 {
   // The box has (probably) landed on an object (a barrel for instance)
   if (my_speed_before.Norm() != ZERO)
@@ -119,8 +121,7 @@ void ObjBox::Draw()
   anim->Draw(GetPosition());
 
 #ifdef DEBUG
-  if (IsLOGGING("test_rectangle"))
-  {
+  if (IsLOGGING("test_rectangle")) {
     Rectanglei test_rect(GetTestRect());
     test_rect.SetPosition(test_rect.GetPosition() - Camera::GetInstance()->GetPosition());
     GetMainWindow().RectangleColor(test_rect, primary_red_color, 1);
@@ -134,8 +135,7 @@ void ObjBox::Draw()
 void ObjBox::Refresh()
 {
   // If we touch a character, we remove the medkit
-  FOR_ALL_LIVING_CHARACTERS(team, character)
-  {
+  FOR_ALL_LIVING_CHARACTERS(team, character) {
     if(Overlapse(*character)) {
       ApplyBonus(&(*character));
       Ghost();
@@ -151,7 +151,7 @@ void ObjBox::Explode()
 {
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
   ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
-};
+}
 
 void ObjBox::SignalGhostState(bool /*was_already_dead*/)
 {

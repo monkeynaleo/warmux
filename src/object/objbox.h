@@ -63,8 +63,8 @@ class ObjBox : public PhysicalObj //it would be nice to name this "Box", but tha
 
     virtual void SignalGroundCollision(const Point2d& my_speed_before);
     virtual void SignalObjectCollision(const Point2d& my_speed_before,
-				       PhysicalObj *object,
-				       const Point2d& object_speed);
+                                       PhysicalObj *object,
+                                       const Point2d& object_speed);
     virtual void SignalDrowning();
     virtual void SignalGhostState(bool was_already_dead);
 };

@@ -33,7 +33,7 @@ Question::Question(type _type)
   background = NULL;
   text = NULL;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   switch (_type) {
   case WARNING:
     icon = new Sprite(GetResourceManager().LoadImage(res,"menu/ico_warning"));
@@ -96,7 +96,7 @@ void Question::Draw() const
   }
   else if (text->GetText() != "") {
     Point2i rect_size(text->GetWidth() + icon_size.GetX() + icon_border.GetX() + 10,
-		      std::max(text->GetHeight(), icon_size.GetY() + icon_border.GetY()) + 10);
+                      std::max(text->GetHeight(), icon_size.GetY() + icon_border.GetY()) + 10);
 
     top_corner = app->video->window.GetSize() / 2 - rect_size / 2;
     rect = Rectanglei(top_corner, rect_size);
@@ -128,10 +128,10 @@ int Question::Ask ()
 
   Draw();
   Mouse::pointer_t prev_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  do{
-    while( SDL_PollEvent( &event) ){
-      if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONUP) &&
-           default_choice.active ){
+  do {
+    while (SDL_PollEvent(&event)){
+      if ((event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONUP) &&
+          default_choice.active) {
         answer = default_choice.value;
         end_of_boucle = true;
       }
@@ -165,22 +165,18 @@ void Question::Set (const std::string &pmessage,
   default_choice.active = default_active;
   default_choice.value = default_value;
 
-  if(background != NULL)
-  {
+  if (background) {
     delete background;
     background = NULL;
   }
 
-  if(bg_sprite != "")
-  {
-    Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  if (bg_sprite != "") {
+    Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
     background = new Sprite(GetResourceManager().LoadImage(res,bg_sprite), true);
     background->cache.EnableLastFrameCache();
     background->ScaleSize(GetMainWindow().GetSize());
     GetResourceManager().UnLoadXMLProfile( res);
-  }
-  else
-  {
+  } else {
     text->SetMaxWidth(GetMainWindow().GetWidth()/2);
   }
 }

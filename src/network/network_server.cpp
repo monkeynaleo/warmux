@@ -72,7 +72,7 @@ uint NetworkServer::NextPlayerId() const
 
     for (player = players.begin(); player != players.end(); player++) {
       if (player_id <= player->GetId()) {
-	player_id = player->GetId() + 1;
+        player_id = player->GetId() + 1;
       }
     }
   }
@@ -81,9 +81,12 @@ uint NetworkServer::NextPlayerId() const
   return player_id;
 }
 
-bool NetworkServer::HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const
+bool NetworkServer::HandShake(WSocket& client_socket,
+                              std::string& nickname,
+                              uint player_id) const
 {
-  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(), nickname, player_id, false);
+  return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(),
+                                nickname, player_id, false);
 }
 
 void NetworkServer::WaitActionSleep()
@@ -97,7 +100,7 @@ void NetworkServer::WaitActionSleep()
       uint player_id = NextPlayerId();
 
       if (!HandShake(*incoming, nickname, player_id))
- 	return;
+        return;
 
       socket_set->AddSocket(incoming);
 

@@ -122,8 +122,7 @@ void ComboBox::Draw(const Point2i &mousePosition) const
 
   if (m_index > 0) {
 
-    if (Contains(mousePosition)
-	&& mousePosition.x < center.x)
+    if (Contains(mousePosition) && mousePosition.x < center.x)
       m_img_minus->SetCurrentFrame(1);
     else
       m_img_minus->SetCurrentFrame(0);
@@ -132,14 +131,13 @@ void ComboBox::Draw(const Point2i &mousePosition) const
   }
 
   if (m_index < m_choices.size() - 1) {
-    if (Contains(mousePosition)
-	&& mousePosition.x > center.x)
+    if (Contains(mousePosition) && mousePosition.x > center.x)
       m_img_plus->SetCurrentFrame(1);
     else
       m_img_plus->SetCurrentFrame(0);
 
     m_img_plus->Blit(video_window, GetPosition().x + GetSize().x - m_img_plus->GetWidth() - IMG_BUTTONS_W,
-		     GetPosition().y + IMG_BUTTONS_H);
+                     GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 6. add in the value image
@@ -152,7 +150,7 @@ void ComboBox::Draw(const Point2i &mousePosition) const
 
   // 7. and finally the label image
   txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-                            GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+                                   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)

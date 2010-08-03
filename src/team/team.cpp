@@ -119,18 +119,17 @@ void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
   characters.push_back(new_character);
   active_character = characters.begin(); // we need active_character to be initialized here !!
 
-  if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters()))
-    {
-      // We haven't found any place to put the characters!!
-      if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
-        std::cerr << std::endl;
-        std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
-        std::cerr << std::endl;
+  if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters())) {
+    // We haven't found any place to put the characters!!
+    if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
+      std::cerr << std::endl;
+      std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+      std::cerr << std::endl;
 
-        // Put it with no space...
-        characters.back().PutRandomly(false, 0);
-      }
+      // Put it with no space...
+      characters.back().PutRandomly(false, 0);
     }
+  }
   characters.back().Init();
 
   MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
@@ -150,9 +149,9 @@ bool Team::AddPlayingCharacters(const std::vector<std::string> names)
     Body *body = BodyList::GetRef().GetBody(bodies_ids[i]);
     if (!body) {
       std::cerr << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-			  bodies_ids[i].c_str(),
-			  m_name.c_str())
-		<< std::endl;
+                          bodies_ids[i].c_str(),
+                          m_name.c_str())
+                << std::endl;
       return false;
     }
 
@@ -236,7 +235,7 @@ void Team::NextCharacter(bool newturn)
     do {
       ++active_character;
       if (active_character == characters.end())
-  active_character = characters.begin();
+        active_character = characters.begin();
     } while (ActiveCharacter().IsDead());
   }
   ActiveCharacter().StartPlaying();
@@ -253,8 +252,7 @@ void Team::PreviousCharacter()
 {
   ASSERT (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
-  do
-  {
+  do {
     if (active_character == characters.begin())
       active_character = characters.end();
     --active_character;
@@ -341,7 +339,7 @@ int Team::ReadNbAmmos() const
 
 int Team::ReadNbUnits() const
 {
-  return ReadNbUnits( active_weapon->GetType());
+  return ReadNbUnits(active_weapon->GetType());
 }
 
 int Team::ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const
@@ -381,8 +379,7 @@ Character* Team::FindByIndex(uint index)
   ASSERT(index < characters.size());
   iterator it= characters.begin(), end=characters.end();
 
-  while(index != 0 && it != end)
-  {
+  while (index != 0 && it != end) {
     index--;
     it++;
   }
@@ -417,9 +414,8 @@ void Team::LoadGamingData(WeaponsList * weapons)
   }
 
   // Disable non-working weapons in network games
-  if(Network::GetInstance()->IsConnected())
-  {
-    //m_nb_ammos[ Weapon::WEAPON_GRAPPLE ] = 0;
+  if(Network::GetInstance()->IsConnected()) {
+    //m_nb_ammos[Weapon::WEAPON_GRAPPLE] = 0;
   }
 
   active_weapon = weapons_list->GetWeapon(Weapon::WEAPON_DYNAMITE);

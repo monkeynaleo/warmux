@@ -56,10 +56,10 @@ class ComboBox : public Widget
  public:
 
   ComboBox(const std::string &label,
-	   const std::string &resource_id,
-	   const Point2i &size,
-	   const std::vector<std::pair <std::string, std::string> > &choices,
-	   const std::string choice);
+           const std::string &resource_id,
+           const Point2i &size,
+           const std::vector<std::pair <std::string, std::string> > &choices,
+           const std::string choice);
 
   virtual ~ComboBox();
 

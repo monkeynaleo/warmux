@@ -291,9 +291,9 @@ bool Character::MustDrawEnergyBar() const
 {
   if (Config::GetInstance()->GetDisplayEnergyCharacter()
       && ((!IsActiveCharacter()
-	   && Game::GetInstance()->ReadState() != Game::END_TURN
-	   && !IsDead())
-	  || MustDrawLostEnergy()) )
+           && Game::GetInstance()->ReadState() != Game::END_TURN
+           && !IsDead())
+          || MustDrawLostEnergy()))
     return true;
 
   return false;
@@ -318,8 +318,8 @@ void Character::DrawEnergyBar() const
     return;
 
   int dy = -SPACE - HEIGHT_ENERGY;
-  energy_bar->DrawXY(Point2i( GetCenterX() - energy_bar->GetWidth() / 2, GetY() + dy)
-		     - Camera::GetInstance()->GetPosition() );
+  energy_bar->DrawXY(Point2i(GetCenterX() - energy_bar->GetWidth()/2, GetY() + dy)
+                     - Camera::GetInstance()->GetPosition());
 }
 
 void Character::DrawLostEnergy() const
@@ -334,7 +334,8 @@ void Character::DrawLostEnergy() const
     dy = dy - HEIGHT_FONT_NAME - SPACE;
   }
   Text text(ss.str());
-  text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() + Point2i( GetWidth()/2, dy));
+  text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() +
+                     Point2i(GetWidth()/2, dy));
 }
 
 void Character::DrawName() const
@@ -363,7 +364,7 @@ void Character::SetEnergyDelta(int delta, bool do_report)
   if (IsDead()) return;
 
   MSG_DEBUG("character.eneforce_drawingrgy", "%s has win %d life points\n",
-	    character_name.c_str(), delta);
+            character_name.c_str(), delta);
 
   // Report damage to damage performer
   if (do_report)
@@ -374,30 +375,31 @@ void Character::SetEnergyDelta(int delta, bool do_report)
   // Update energy
   SetEnergy(GetEnergy() + delta);
 
-  if(IsDead()) return;
+  if (IsDead())
+    return;
 
   // Compute energy lost
   if (delta < 0) {
     lost_energy += (int)GetEnergy() - (int)saved_energy;
 
-    if ( lost_energy > -33 )
-      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_light");
-    else if ( lost_energy > -66 )
-      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_medium");
+    if (lost_energy > -33)
+      JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_light");
+    else if (lost_energy > -66)
+      JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_medium");
     else
-      JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "injured_high");
+      JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_high");
   } else
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if ( !IsActiveCharacter() && ActiveTeam().IsSameAs(m_team) )
+  if (!IsActiveCharacter() && ActiveTeam().IsSameAs(m_team))
     JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "friendly_fire");
 }
 
 void Character::SetEnergy(int new_energy)
 {
   int diff = new_energy - m_energy;
-  if(diff < 0) {
+  if (diff < 0) {
     Particle *tmp = new FadingText(long2str(diff));
     tmp->SetXY(GetPosition());
     ParticleEngine::AddNow(tmp);
@@ -435,7 +437,7 @@ void Character::Die()
     ud_move_intentions.clear();
     lr_move_intentions.clear();
 
-    if(death_explosion)
+    if (death_explosion)
       ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
     ASSERT(IsDead());
 
@@ -612,8 +614,8 @@ void Character::Refresh()
   if (FootsInVacuum()) {
     bool closely = false;
     if (IsActiveCharacter() &&
-	(ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK
-	 || ActiveTeam().GetWeaponType() == Weapon::WEAPON_PARACHUTE))
+        (ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK
+         || ActiveTeam().GetWeaponType() == Weapon::WEAPON_PARACHUTE))
       closely = true;
     Camera::GetInstance()->FollowObject(this, closely);
   }
@@ -634,7 +636,7 @@ void Character::Refresh()
 
     if (walking_time + 1000 < global_time->Read() && body->GetMovement().find("-shoot") == std::string::npos)
       if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
-	body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
+        body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
   }
   else
   {
@@ -688,8 +690,8 @@ void Character::Refresh()
   if (IsActiveCharacter()
       && Game::GetInstance()->ReadState() == Game::PLAYING
       && (body->GetMovement().substr(0,9) == "animation"
-	  || body->GetClothe().substr(0,9) == "animation"
-	  || body->GetClothe() == "black"))
+          || body->GetClothe().substr(0,9) == "animation"
+          || body->GetClothe() == "black"))
   {
     SetClothe("normal");
     SetMovement("breathe");
@@ -799,8 +801,8 @@ void Character::SignalGroundCollision(const Point2d& speed_before)
 }
 
 void Character::SignalObjectCollision(const Point2d& my_speed_before,
-				      PhysicalObj * /* obj */,
-				      const Point2d& /* obj_speed */)
+                                      PhysicalObj * /* obj */,
+                                      const Point2d& /* obj_speed */)
 {
   MSG_DEBUG("character.collision", "%s collides on object with speed %s, %s (norm = %s)",
             character_name.c_str(),
@@ -830,9 +832,9 @@ void Character::SignalExplosion()
   else
   {
     SetMovementOnce("black");
-    if (body->GetClothe() == "black"
-	&& body->GetMovement() != "black")
-      std::cerr << "Error: the clothe \"black\" of the character " << GetName() << " is set, but the skin have no \"black\" movement !!!" << std::endl;
+    if (body->GetClothe() == "black" && body->GetMovement() != "black")
+      std::cerr << "Error: the clothe \"black\" of the character " << GetName()
+                << " is set, but the skin have no \"black\" movement !!!" << std::endl;
   }
 
   Game::GetInstance()->SignalCharacterDamage(this);
@@ -962,9 +964,7 @@ uint Character::GetTeamIndex() const
 uint Character::GetCharacterIndex() const
 {
   uint index = 0;
-  for (Team::iterator it = m_team.begin();
-       it != m_team.end() ; ++it, ++index )
-  {
+  for (Team::iterator it = m_team.begin(); it != m_team.end() ; ++it, ++index) {
     if (&(*it) == this)
       return index;
   }
@@ -1054,9 +1054,9 @@ void Character::MakeSteps()
 
   // If character moves out of the world, no need to go further: it is dead
   if (GetDirection() == DIRECTION_LEFT)
-    ghost = IsOutsideWorld ( Point2i(-1, 0) );
+    ghost = IsOutsideWorld(Point2i(-1, 0));
   else
-    ghost = IsOutsideWorld ( Point2i(1, 0) );
+    ghost = IsOutsideWorld(Point2i(1, 0));
 
   if (ghost) {
     MSG_DEBUG("ghost", "%s will be a ghost.", GetName().c_str());
@@ -1071,7 +1071,7 @@ void Character::MakeSteps()
     rl_motion_pause = rl_motion_pause + walking_pause;
 
     // Eventually moves the character
-    SetXY( Point2i(GetX() + GetDirection(), GetY() + height));
+    SetXY(Point2i(GetX() + GetDirection(), GetY() + height));
 
     // If no collision, let gravity do its job
     UpdatePosition();
@@ -1086,7 +1086,7 @@ bool Character::IsChangingDirection()
 bool Character::ComputeHeightMovement(int & height)
 {
   if (IsInVacuum(Point2i(GetDirection(), 0))
-      && !IsInVacuum(Point2i(GetDirection(), +1)) ){
+      && !IsInVacuum(Point2i(GetDirection(), +1))){
     //Land is flat, we can move!
     height = 0;
     return true;
