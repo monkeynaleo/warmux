@@ -46,12 +46,24 @@ WidgetList::WidgetList(Profile * profile,
 
 WidgetList::~WidgetList()
 {
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
+  // Do not use Clear/Empty methods, they might be implemented
+  // for other purposes
+  for (std::list<Widget*>::iterator w=widget_list.begin();
+       w != widget_list.end();
+       w++)
     delete *w;
 
   widget_list.clear();
+}
+
+void WidgetList::Clear()
+{
+  for (std::list<Widget*>::iterator w=widget_list.begin();
+       w != widget_list.end();
+       w++)
+    delete *w;
+
+  Empty();
 }
 
 void WidgetList::DelFirstWidget()
