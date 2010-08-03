@@ -57,9 +57,8 @@ const Color defaultOptionColorRect(59, 88, 129, SDL_ALPHA_OPAQUE);
 
 const Color highlightOptionColorBox(200, 100, 100, 206);
 
-//const Color defaultListColor1(255, 255, 255, 255*3/10);
 const Color defaultListColor1(75, 163, 200, 255*3/10);
-const Color defaultListColor2(0, 0, 255*6/10, 255*8/10);
-const Color defaultListColor3(0, 0, 255*6/10, 255*4/10);
+const Color defaultListColor2(0, 0, (255*6)/10, (255*6)/10);
+const Color defaultListColor3(0, 0, (255*6)/10, (255*3)/10);
 
 #endif /* COLORS_H */
