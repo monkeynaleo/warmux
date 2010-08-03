@@ -93,8 +93,6 @@ POTFILES = \
         src/gui/energy_bar.h \
         src/gui/label.cpp \
         src/gui/label.h \
-        src/gui/list_box.cpp \
-        src/gui/list_box.h \
         src/gui/msg_box.cpp \
         src/gui/msg_box.h \
         src/gui/null_widget.h \

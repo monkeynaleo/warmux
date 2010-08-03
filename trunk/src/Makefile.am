@@ -103,8 +103,6 @@ wormux_SOURCES = \
         gui/energy_bar.h \
         gui/label.cpp \
         gui/label.h \
-        gui/list_box.cpp \
-        gui/list_box.h \
         gui/msg_box.cpp \
         gui/msg_box.h \
         gui/null_widget.h \
