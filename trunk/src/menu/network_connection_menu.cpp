@@ -25,10 +25,10 @@
 #include "gui/box.h"
 #include "gui/vertical_box.h"
 #include "gui/check_box.h"
-#include "gui/list_box.h"
 #include "gui/msg_box.h"
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
+#include "gui/select_box.h"
 #include "gui/tabs.h"
 #include "gui/text_box.h"
 #include "include/app.h"
@@ -45,11 +45,11 @@ class GameInfoBox : public HBox
 public:
   bool password;
   std::string port, ip_address;
-  GameInfoBox(uint width, bool pwd, const std::string& ip, const std::string& p,
-              const std::string& name)
-    : HBox(width, true, false)
+  GameInfoBox(uint width, bool pwd, const std::string& ip,
+              const std::string& port, const std::string& name)
+    : HBox(width, false, false)
     , password(pwd)
-    , port(p)
+    , port(port)
     , ip_address(ip)
   {
     if (pwd) {
@@ -57,25 +57,27 @@ public:
     } else {
       AddWidget(new NullWidget(Point2i(16, 16)));
     }
-    AddWidget(new Label(ip, 100));
-    AddWidget(new Label(p, 40));
-    AddWidget(new Label(name, 200));
+    width -= 20;
+    AddWidget(new Label(ip, 0.3f*width));
+    AddWidget(new Label(port, 0.2f*width));
+    AddWidget(new Label(name, 0.5f*width));
+    SetNoBorder();
     Pack();
   }
 };
 
-class GameListBox : public BaseListBox
+class GameListBox : public SelectBox
 {
 public:
-  GameListBox(const Point2i &size, bool b = true) : BaseListBox(size, b) { }
-  void Select(uint index) { BaseListBox::Select(index); }
+  GameListBox(const Point2i &size) : SelectBox(size, true) { }
+  void Select(uint index) { SelectBox::Select(index); }
   void AddItem(bool selected, bool pwd, const std::string& ip_address,
                const std::string& port, const std::string& name)
   {
-    AddWidgetItem(selected, new GameInfoBox(600, pwd, ip_address, port, name));
+    AddWidgetItem(selected, new GameInfoBox(size.x-10, pwd, ip_address, port, name));
   }
-  const std::string& GetAddress() { return ((GameInfoBox*)m_items[selected_item])->ip_address; }
-  const std::string& GetPort() { return ((GameInfoBox*)m_items[selected_item])->port; }
+  const std::string& GetAddress() { return ((GameInfoBox*)GetSelectedItem())->ip_address; }
+  const std::string& GetPort() { return ((GameInfoBox*)GetSelectedItem())->port; }
 };
 
 struct shared_net_info {
@@ -157,7 +159,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
-  cl_net_games_lst = new GameListBox(Point2i(width, 30), false);
+  cl_net_games_lst = new GameListBox(Point2i(width, 30));
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Server password
@@ -322,8 +324,7 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
   //Hack to handle Double click
   if (w == cl_net_games_lst)
   {
-    if (m_last_click_on_games_lst + m_Double_click_interval > SDL_GetTicks())
-    {
+    if (m_last_click_on_games_lst + m_Double_click_interval > SDL_GetTicks()) {
       if (cl_net_games_lst->GetSelectedItem() == -1) {
         cl_net_games_lst->Select(cl_net_games_lst->MouseIsOnWhichItem(mousePosition));
       }
@@ -353,13 +354,11 @@ void NetworkConnectionMenu::__RefreshList()
 
   // Save the currently selected address
   int current = cl_net_games_lst->GetSelectedItem();
-  if (current == -1) current = 0;
+  if (current == -1)
+    current = 0;
 
   // Empty the list:
-  while (cl_net_games_lst->Size() != 0) {
-    cl_net_games_lst->Select(0);
-    cl_net_games_lst->RemoveSelected();
-  }
+  cl_net_games_lst->Empty();
 
   if (net_info.index_conn_state != CONNECTED) {
     DisplayNetError(net_info.index_conn_state);
@@ -381,14 +380,14 @@ void NetworkConnectionMenu::__RefreshList()
   }
   SDL_SemPost(net_info.lock);
 
-  if (cl_net_games_lst->Size() != 0) {
-    if (current > ((int) cl_net_games_lst->Size())-1) {
+  if (cl_net_games_lst->Size()) {
+    if (current+1 > cl_net_games_lst->Size()) {
       current = 0;
     }
     cl_net_games_lst->Select(current);
   }
 
-  cl_net_games_lst->NeedRedrawing();
+  cl_net_games_lst->Pack();
 }
 
 void NetworkConnectionMenu::ThreadRefreshList()
