@@ -42,34 +42,12 @@ void SelectBox::Update(const Point2i& mousePosition,
   Rectanglei clip = *this;
   SwapWindowClip(clip);
 
-  if (selected_item != -1) {
-    Widget *sel = m_items[selected_item];
-    surf.BoxColor(*sel, selected_item_color);
-  }
-
   ScrollBox::Update(mousePosition, lastMousePosition);
 
-  int item = MouseIsOnWhichItem(mousePosition);
-  if (item!=-1 && item!=selected_item) {
-    surf.BoxColor(*(m_items[item]), default_item_color);
-  }
-
-  SwapWindowClip(clip);
-}
-
-void SelectBox::Draw(const Point2i &mousePosition) const
-{
-  Surface& surf = GetMainWindow();
-
-  Rectanglei clip = *this;
-  SwapWindowClip(clip);
-
   if (selected_item != -1) {
     Widget *sel = m_items[selected_item];
     surf.BoxColor(*sel, selected_item_color);
   }
-
-  ScrollBox::Draw(mousePosition);
 
   int item = MouseIsOnWhichItem(mousePosition);
   if (item!=-1 && item!=selected_item) {
@@ -100,7 +78,9 @@ Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
 
 void SelectBox::AddWidgetItem(bool select, Widget* w)
 {
-  AddWidget(w);
+  // Let's make sure we call SelectBox method and not a child method,
+  // as we are not sure of the consequences
+  SelectBox::AddWidget(w);
   if (select)
     Select(m_items.size()-1);
 }
@@ -141,4 +121,33 @@ int SelectBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
       return i;
   }
   return -1;
+}
+
+//--------------------------------------------------------------------------
+
+void ItemBox::AddItem(bool select, Widget* w, const char* value)
+{
+  // First put the value, because it is accessed by Select
+  m_values.push_back(value);
+  SelectBox::AddWidgetItem(select, w);
+}
+
+void ItemBox::Select(uint index)
+{
+  ASSERT(index < m_items.size());
+  selected_item = index;
+  NeedRedrawing();
+}
+
+void ItemBox::RemoveSelected()
+{
+  if (selected_item != -1) {
+    SelectBox::RemoveSelected();
+    m_values.erase(m_values.begin() + selected_item);
+  }
+}
+
+const char* ItemBox::GetSelectedValue() const
+{
+  return (selected_item==-1) ? "" : m_values[selected_item];
 }
