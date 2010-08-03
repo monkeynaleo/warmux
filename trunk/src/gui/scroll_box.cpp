@@ -53,9 +53,9 @@ ScrollBox::ScrollBox(const Point2i & _size)
   vbox->SetBorder(Point2i(BORDER, BORDER));
   vbox->SetMargin(BORDER);
 
-  WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
   WidgetList::AddWidget(m_down);
+  WidgetList::AddWidget(vbox);
 }
 
 ScrollBox::~ScrollBox()
@@ -282,11 +282,11 @@ void ScrollBox::Pack()
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // No that we known better, account for the scrollbar
+  m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
+  m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
   if (HasScrollBar()) {
     vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
     vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
-    m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
-    m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
   } else {
     vbox->SetPosition(position.x + BORDER, position.y + BORDER);
   }
