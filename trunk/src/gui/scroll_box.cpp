@@ -52,7 +52,7 @@ ScrollBox::ScrollBox(const Point2i & _size)
 
   scrollbar_width = m_up->GetSizeX();
   // Let's consider the scrollbar is not displayed for now.
-  vbox = new VBox(_size.x - 2*BORDER, false, true);
+  vbox = new VBox(_size.x - 2*BORDER - scrollbar_width, false, true);
   vbox->SetBorder(Point2i(BORDER, BORDER));
   vbox->SetMargin(BORDER);
 
@@ -262,14 +262,13 @@ void ScrollBox::Update(const Point2i &mousePosition,
 void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
-  vbox->SetSizeX(size.x -2*BORDER);
-  vbox->Pack();
+  vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
+  //vbox->Pack();
 
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // No that we known better, account for the scrollbar
   if (HasScrollBar()) {
-    vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
     vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
     m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
     m_down->SetPosition(position + size - m_down->GetSize() - BORDER);

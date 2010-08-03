@@ -19,8 +19,8 @@
  * Vertical Scroll Box
  *****************************************************************************/
 
-#ifndef SCROLL_BOX
-#define SCROLL_BOX
+#ifndef SCROLL_BOX_H
+#define SCROLL_BOX_H
 
 #include "widget_list.h"
 
@@ -69,4 +69,4 @@ public:
   virtual void Empty();
 };
 
-#endif  //SCROLL_BOX
+#endif  //SCROLL_BOX_H
