@@ -1,7 +1,7 @@
 # Chinese (China) translation for Wormux
 # Copyright (C) 2007 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-# 
+#
 # <luojie-dune@operamail.com>,2007.
 # jiero <lililjlj@gmail.com>, 2010.
 msgid ""
@@ -49,44 +49,44 @@ msgstr "%s <%s> aka %s 从 %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr " %s 队伍"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (%s)自尽了 ！"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了。。。"
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (%s)入水——深呼吸，沉了！"
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (%s)飞出地图边缘。。。诀别！"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (%s) 亲吻大地，可是对方太硬了！"
 
 # what about female names?
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s)的死因是: 太笨 ！"
@@ -104,7 +104,7 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s 赢得 %u 点能量！"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是疯子，他干掉了一个%s的倒霉蛋！"
@@ -352,7 +352,7 @@ msgstr[0] "%s 队得到 %u 企鹅发射器！ 没见过满天飞的企鹅吗?"
 msgid "%s team was fragged down."
 msgstr "%s 被打垮了。"
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s 带走了 %s 的一员！"
@@ -362,7 +362,7 @@ msgid "(dead)"
 msgstr "(死掉的)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(系统语言)"
 
@@ -461,8 +461,8 @@ msgstr "弹力球"
 msgid "Bye bye Tux..."
 msgstr "Bye bye 企鹅。。。"
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -508,7 +508,7 @@ msgstr "改变武器分类"
 msgid "Change weapon countdown"
 msgstr "改变武器起爆时间"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 msgid "Character names:"
 msgstr "角色名称："
 
@@ -516,7 +516,7 @@ msgstr "角色名称："
 msgid "Character switching"
 msgstr "角色切换"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "网上检查升级？"
 
@@ -620,7 +620,7 @@ msgstr "炸药"
 msgid "END OF GAME"
 msgstr "游戏结束"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "音效大小"
 
@@ -692,7 +692,7 @@ msgstr ""
 "连接。加入你不能直接连接互联网，检查路由器设置：TCP端口 %s 必须在你计算机端口"
 "之前。"
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "错误: 找不到 body\"%s\" 队伍 \"%s\"。"
@@ -709,7 +709,7 @@ msgstr "足球炸弹"
 msgid "Fullscreen / window"
 msgstr "全屏 / 窗口"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "全屏?"
 
@@ -729,7 +729,7 @@ msgstr "游戏名:"
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛发射器"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 msgid "Graphics"
 msgstr "图象"
 
@@ -758,11 +758,11 @@ msgid "Have a good game!"
 msgstr "来吧！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指挥官"
 
-# 
+#
 #. Display player's name
 #: src/interface/interface.cpp:203
 msgid "Head commander: "
@@ -861,7 +861,7 @@ msgstr "声音初始化"
 msgid "Initialise teams"
 msgstr "队伍初始化"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "就是现在！"
 
@@ -877,11 +877,11 @@ msgstr "后空翻"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "踢出 <nickname> "
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "语言"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr "左手鼠标？"
 
@@ -897,7 +897,7 @@ msgstr "读取地图:"
 msgid "Load teams:"
 msgstr "读取队伍:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "本地队伍:"
 
@@ -938,7 +938,7 @@ msgstr "控制者模式"
 msgid "Max energy"
 msgstr "最大能量"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
@@ -946,7 +946,7 @@ msgstr "最大 FPS"
 msgid "Mine"
 msgstr "地雷"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "其他"
 
@@ -980,15 +980,15 @@ msgstr "用鼠标或方向键移动镜头"
 msgid "Move character"
 msgstr "移动"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr "多层次天空？"
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "音乐音量:"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "音乐?"
 
@@ -1009,7 +1009,7 @@ msgstr "没有"
 msgid "New network game at "
 msgstr "网上游戏"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "新玩家警告？"
 
@@ -1031,7 +1031,7 @@ msgstr "空房间！"
 msgid "Number of characters"
 msgstr "角色数目"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "队伍数量:"
 
@@ -1071,15 +1071,15 @@ msgstr "要玩了哦"
 msgid "Play several times"
 msgstr "玩了几次了"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "请问尊姓大名?"
 
@@ -1128,7 +1128,7 @@ msgstr "正读取默认设置文件"
 msgid "Reading the personal config file"
 msgstr "正读取个人设置文件"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -1144,11 +1144,11 @@ msgstr "运行游戏"
 msgid "Say: "
 msgstr "说: "
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "滚动边界尺寸"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "滚动边界"
 
@@ -1222,15 +1222,15 @@ msgstr ""
 "抱歉哦，你的版本已经不支持了。现在使用%s。。下载吧，http://www。wormux。org/"
 "wiki/download。php 最好。"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "声音"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "音效?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "声频"
 
@@ -1276,7 +1276,7 @@ msgstr "队伍状态"
 msgid "Teams"
 msgstr "队伍"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "团队编辑器"
 
@@ -1329,7 +1329,7 @@ msgstr "连接超时。请检查防火墙！"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "disco榴弹离开舞池前发生爆炸"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "您断线了。"
 
@@ -1444,7 +1444,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "请等待！ %i没准备好！"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr "等待 %s"
@@ -1477,21 +1477,21 @@ msgstr "网站Website: "
 msgid "Welcome to %s on %s!"
 msgstr "欢迎来到 %s %s！"
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "光彩的回老家了！%s 已经离开 %s ，到达了另一个世界。"
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 悲惨死去，不能瞑目！"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "风来了?"
 
-# 
+#
 #: src/menu/results_menu.cpp:381
 msgid "Winner"
 msgstr "胜者"
@@ -1544,8 +1544,8 @@ msgstr "没有队伍，就不会有战斗！"
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 
-# 
-#: src/menu/credits_menu.cpp:74
+#
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "即"
 
@@ -1576,8 +1576,8 @@ msgstr "成"
 msgid "error parsing the config file"
 msgstr "粘贴配置文件出错"
 
-# 
-#: src/menu/credits_menu.cpp:78
+#
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "从"
 

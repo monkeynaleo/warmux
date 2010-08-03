@@ -1,7 +1,7 @@
 # translation of ru.po to Russian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR Wormux Development Team.
-# 
+#
 # Alexandre Prokoudine <alexandre.prokoudine@gmail.com>, 2006.
 # Igor Murzov <igor@gplsoft.org>, 2007, 2008.
 # Dmitry 'RCL' Rekman <rcl@mail.ru>, 2008.
@@ -59,43 +59,43 @@ msgstr "%s <%s>, также известный как %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "Команда %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удалённо"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "Игрок %s из команды %s кончает жизнь самоубийством !"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "Игрок %s из команды %s погиб."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "Игрок %s из команды %s упал в воду."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "Игрок %s из команды %s выпал с карты!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Игрок %s из команды %s очень сильно ударился об землю!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "Игрок %s из команды %s погиб, потому что он недотёпа!"
@@ -115,7 +115,7 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
@@ -466,7 +466,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Команда %s была уничтожена"
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s увёл члена команды %s с собой в могилу!"
@@ -476,7 +476,7 @@ msgid "(dead)"
 msgstr "(мёртв)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(системный язык)"
 
@@ -576,8 +576,8 @@ msgstr "Прыгучий мяч"
 msgid "Bye bye Tux..."
 msgstr "Пока-пока Tux..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -623,7 +623,7 @@ msgstr "Сменить вид оружия"
 msgid "Change weapon countdown"
 msgstr "Изменить время запала"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 msgid "Character names:"
 msgstr "Имена персонажей:"
 
@@ -631,7 +631,7 @@ msgstr "Имена персонажей:"
 msgid "Character switching"
 msgstr "Выбор игрока"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Проверять обновления игры?"
 
@@ -736,7 +736,7 @@ msgstr "Динамит"
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Громкость эффектов"
 
@@ -813,7 +813,7 @@ msgstr ""
 "подсоединены к интернету не напрямую, проверьте настройки вашего "
 "маршрутизатора: TCP порт %s дожен быть открыт на вашем компьютере."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -830,7 +830,7 @@ msgstr "Футбольная бомба"
 msgid "Fullscreen / window"
 msgstr "Полноэкранный режим/Оконный режим"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "На весь экран?"
 
@@ -851,7 +851,7 @@ msgstr "Имя игры:"
 msgid "Gnu Launcher"
 msgstr "Антилопа GNU"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 msgid "Graphics"
 msgstr "Графика"
 
@@ -880,7 +880,7 @@ msgid "Have a good game!"
 msgstr "Удачной игры!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Командующий"
 
@@ -989,7 +989,7 @@ msgstr "Инициализация звуков"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Это - подарок!"
 
@@ -1005,11 +1005,11 @@ msgstr "Обратное сальто"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Выкидывает участников, обозначеных <nickname>, из игры"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Язык"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr "Обменять назначение кнопок мыши?"
 
@@ -1025,7 +1025,7 @@ msgstr "Загрузка карт:"
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Локальные команды:"
 
@@ -1067,7 +1067,7 @@ msgstr "Режим игры"
 msgid "Max energy"
 msgstr "Максимальная энергия"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Максимальный FPS"
 
@@ -1075,7 +1075,7 @@ msgstr "Максимальный FPS"
 msgid "Mine"
 msgstr "Мина"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Разное"
 
@@ -1109,15 +1109,15 @@ msgstr "Переместить камеру с помощью мыши или к
 msgid "Move character"
 msgstr "Перемещение персонажа"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr "Много-слойное небо?"
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Громкость музыки"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Музыка?"
 
@@ -1138,7 +1138,7 @@ msgstr "Никогда"
 msgid "New network game at "
 msgstr "Новая игра по сети"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Предупреждение о новом игроке?"
 
@@ -1160,7 +1160,7 @@ msgstr "Никто!"
 msgid "Number of characters"
 msgstr "Количество игроков"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Количество команд:"
 
@@ -1200,15 +1200,15 @@ msgstr "Играть"
 msgid "Play several times"
 msgstr "Играть несколько раз"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Игрок"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Энергия игрока?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Имена игроков?"
 
@@ -1259,7 +1259,7 @@ msgstr "Чтение конфига по умолчанию"
 msgid "Reading the personal config file"
 msgstr "Чтение персонального конфига"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Разрешение"
 
@@ -1275,11 +1275,11 @@ msgstr "Начать игру"
 msgid "Say: "
 msgstr "Сказать: "
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Размер прокрутки"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Прокрутка на границе"
 
@@ -1354,15 +1354,15 @@ msgstr ""
 "версии следующие: %s. Вы можете загрузить свежую версию по адресу http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "Звуки"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Звуковые эффекты?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Частота звука"
 
@@ -1409,7 +1409,7 @@ msgstr "Статистика команды"
 msgid "Teams"
 msgstr "Команды"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Редактор команд"
 
@@ -1467,7 +1467,7 @@ msgstr "Превышено время подключения. Проверьте
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско-граната улетела с поля битвы не успев взорваться"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "Игра была прервана, потому что вы были отсоединены."
 
@@ -1591,7 +1591,7 @@ msgstr[0] "Подождите! %i-й игрок пока не готов!"
 msgstr[1] "Подождите! %i игрока пока не готовы!"
 msgstr[2] "Подождите! %i игроков пока не готовы!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr "Ожидание %s"
@@ -1626,17 +1626,17 @@ msgstr "Веб-сайт: "
 msgid "Welcome to %s on %s!"
 msgstr "Приветствуем в %s на %s!"
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Какой красивый побег! %s из команды %s уже в другом мире..."
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Частицы в воздухе?"
 
@@ -1695,7 +1695,7 @@ msgstr "Вы не сможете играть не выбрав команду!"
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "также известный как"
 
@@ -1727,7 +1727,7 @@ msgstr "готово"
 msgid "error parsing the config file"
 msgstr "ошибка разбора конфигурационного файла"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "из"
 

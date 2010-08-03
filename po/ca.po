@@ -56,43 +56,43 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "Equip %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Equip - Remot"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s de l'equip %s és un suicida!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s de l'equip %s ha mort."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s de l'equip %s ha caigut dins l'aigua!"
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s de l'equip %s ha caigut del mapa!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s de l'equip %s ha picat massa fort a terra!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'equip %s s'ha mort per pocatraça!"
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "¡El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip: %s"
@@ -393,7 +393,7 @@ msgstr[1] "L'equip %s aconsegueix %u llançador de tux!"
 msgid "%s team was fragged down."
 msgstr "L'equip %s ha guanyat."
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s s'ha emportat un membre de %s a la tomba amb ell!"
@@ -403,7 +403,7 @@ msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(idioma del sistema)"
 
@@ -504,8 +504,8 @@ msgstr "Bounce Ball"
 msgid "Bye bye Tux..."
 msgstr "Fins ara tux... "
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -551,7 +551,7 @@ msgstr "Canviar la categoria d'arma "
 msgid "Change weapon countdown"
 msgstr "Cambiar el valor de algunas armas"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Personatge"
@@ -560,7 +560,7 @@ msgstr "Personatge"
 msgid "Character switching"
 msgstr "Canviar de personatge"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Comprovar actualitzacions a Internet? "
 
@@ -665,7 +665,7 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "Fi del joc"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Volum dels efectes"
 
@@ -747,7 +747,7 @@ msgstr ""
 "està directament connectat a Internet, comprova la configuració de la teva "
 "router: Port TCP %s ha de ser dirigit al teu ordinador."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -764,7 +764,7 @@ msgstr "Pantalla completa?"
 msgid "Fullscreen / window"
 msgstr "Pantalla completa / finestra"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
 
@@ -784,7 +784,7 @@ msgstr "Nom de joc:"
 msgid "Gnu Launcher"
 msgstr "Llançador de Gnu"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 #, fuzzy
 msgid "Graphics"
 msgstr "Opcions gràfiques"
@@ -814,7 +814,7 @@ msgid "Have a good game!"
 msgstr "Que tinguis una bona partida!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Comandant cap"
 
@@ -926,7 +926,7 @@ msgstr "Inicialització de sons"
 msgid "Initialise teams"
 msgstr "Inicialització d'equips"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Això és un regal! "
 
@@ -942,11 +942,11 @@ msgstr "Salt d'esquena"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Treu els jugadors designats per <nickname> fora del joc"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Idioma"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -962,7 +962,7 @@ msgstr "Carrega els mapas:"
 msgid "Load teams:"
 msgstr "Carrega els equips:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Equips locals:"
 
@@ -1004,7 +1004,7 @@ msgstr "Estil de joc"
 msgid "Max energy"
 msgstr "Energia màxima"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Numero màxim de FPS"
 
@@ -1012,7 +1012,7 @@ msgstr "Numero màxim de FPS"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Miscel·lània"
 
@@ -1046,15 +1046,15 @@ msgstr "Mou la càmera amb el ratolí o amb les fletxes "
 msgid "Move character"
 msgstr "Moure el personatge"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Volum de la música"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Música?"
 
@@ -1076,7 +1076,7 @@ msgstr "Mai"
 msgid "New network game at "
 msgstr "Nou joc de la xarxa en"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Avís de nou jugador?"
 
@@ -1099,7 +1099,7 @@ msgstr "Ningú!"
 msgid "Number of characters"
 msgstr "Nombre de jugadors"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Nombre de equips:"
 
@@ -1139,15 +1139,15 @@ msgstr "Jugar"
 msgid "Play several times"
 msgstr "Jugar diverses partides"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Jugador"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Energia del jugador?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "¿Nom del jugador?"
 
@@ -1198,7 +1198,7 @@ msgstr "Llegint fitxer de configuració"
 msgid "Reading the personal config file"
 msgstr "Llegint fitxer de configuració personal"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Resolució"
 
@@ -1214,11 +1214,11 @@ msgstr "Arrenca el joc"
 msgid "Say: "
 msgstr "Parla:"
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Desplaçament en les vores"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Desplaçament en les vores"
 
@@ -1296,15 +1296,15 @@ msgstr ""
 "descarregar una versió actualitzada en http://www.wormux.org/wiki/download."
 "php "
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "So"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Efectes sonors?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Freqüència del so"
 
@@ -1351,7 +1351,7 @@ msgstr "estat dels equips"
 msgid "Teams"
 msgstr "Equips"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Editor d'equips"
 
@@ -1416,7 +1416,7 @@ msgstr "Ha passat el temps de connexió. Mira si no hi ha algun firewall."
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "El disc bomba ha abandonat la pista de ball abans d'explotar. "
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "El joc es va interrompre per que t'has desconnectat. "
 
@@ -1539,7 +1539,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espera! %i jugador no està preparat encara! "
 msgstr[1] "Espera! %i jugadors no estan preparats encara! "
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1575,17 +1575,17 @@ msgstr "Pagina web: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s: ha estat mort per una simple pistola!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Mostra les particulas del vent?"
 
@@ -1645,7 +1645,7 @@ msgstr "No podràs jugar abans de seleccionar un equip!"
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "aqui "
 
@@ -1677,7 +1677,7 @@ msgstr "Acabat"
 msgid "error parsing the config file"
 msgstr "Llegint fitxer de configuració"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "de"
 

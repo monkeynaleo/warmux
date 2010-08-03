@@ -1,6 +1,6 @@
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Victor Stinner <victor.stinner@haypocalc.com>, 2006.
 msgid ""
 msgstr ""
@@ -52,43 +52,43 @@ msgstr "%s <%s> leshenwys %s (%s)"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "Para %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
@@ -109,7 +109,7 @@ msgstr[1] "Gwarier %s re gavas %u boynt a nerth!"
 msgstr[2] "Gwarier %s re gavas %u foynt a nerth!"
 msgstr[3] "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -490,7 +490,7 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
@@ -500,7 +500,7 @@ msgid "(dead)"
 msgstr "(marow)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(yeth an system)"
 
@@ -601,8 +601,8 @@ msgstr "Pel derlemmel"
 msgid "Bye bye Tux..."
 msgstr "Duw genes tux..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -648,7 +648,7 @@ msgstr "Chanjya ehen arv"
 msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 msgid "Character names:"
 msgstr "Henwyn an bersons:"
 
@@ -656,7 +656,7 @@ msgstr "Henwyn an bersons:"
 msgid "Character switching"
 msgstr "Chanjya person"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Checkya nowedhansow warlinen?"
 
@@ -760,7 +760,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "DIWEDH AN GWARI"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Sonradh an effeythyow son"
 
@@ -837,7 +837,7 @@ msgstr ""
 "osta junys yn tidro dhe'n Gesrosweyth, check fyttyans dha routyer: Res yw "
 "dhe'n Port TCP %s bos danvenys pella y'th jynn-amontya."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
@@ -854,7 +854,7 @@ msgstr "Tanbellen Peldroos"
 msgid "Fullscreen / window"
 msgstr "Skrin leun / fenester"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Skrin leun?"
 
@@ -874,7 +874,7 @@ msgstr "Hanow an gwari ma:"
 msgid "Gnu Launcher"
 msgstr "Lonchyer-Gnu"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafek"
@@ -904,7 +904,7 @@ msgid "Have a good game!"
 msgstr "Omlowenhewgh!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Penn an para"
 
@@ -1016,7 +1016,7 @@ msgstr "Darbari sonyow"
 msgid "Initialise teams"
 msgstr "Darbari paraow"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Ro ywa!"
 
@@ -1032,11 +1032,11 @@ msgstr "Killamma"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Defendya an warioryon leshenwys <nickname> dhe-ves a'n gwari."
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Yeth"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -1052,7 +1052,7 @@ msgstr "Karga mappaow:"
 msgid "Load teams:"
 msgstr "Karga paraow:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Paraow leel:"
 
@@ -1093,7 +1093,7 @@ msgstr "Modh arludh"
 msgid "Max energy"
 msgstr "Brassa nerth"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Brassa niver a skeusennow orth an eylen"
 
@@ -1101,7 +1101,7 @@ msgstr "Brassa niver a skeusennow orth an eylen"
 msgid "Mine"
 msgstr "Krampothen dardhus"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Kemyskys"
 
@@ -1135,15 +1135,15 @@ msgstr "Movya an kamera gans logosen po sethow"
 msgid "Move character"
 msgstr "Movya person"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Sonradh an ilow"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Ilow?"
 
@@ -1165,7 +1165,7 @@ msgstr "Nevra"
 msgid "New network game at "
 msgstr "Gwari rosweyth nowyth orth "
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Gwarnyans gwarier nowyth?"
 
@@ -1187,7 +1187,7 @@ msgstr "Den vyth!"
 msgid "Number of characters"
 msgstr "Niver a bersons"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Niver a baraow:"
 
@@ -1227,15 +1227,15 @@ msgstr "Gwari"
 msgid "Play several times"
 msgstr "Gwari lieskweyth"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Gwarier"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Nerth an warioryon?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Hanow an gwarier?"
 
@@ -1286,7 +1286,7 @@ msgstr "Ow redya restren restrans savonek"
 msgid "Reading the personal config file"
 msgstr "Ow redya restren restrans personel"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Klerder"
 
@@ -1302,11 +1302,11 @@ msgstr "Lonchya an gwari"
 msgid "Say: "
 msgstr "Leverel:"
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Myns an amal skrolya"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Skrolya war an emlow"
 
@@ -1382,15 +1382,15 @@ msgstr ""
 "skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "Son"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Effeythyow son?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Menowghder an son"
 
@@ -1437,7 +1437,7 @@ msgstr "Stats an paraow"
 msgid "Teams"
 msgstr "Paraow"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Chanjyel baraow"
 
@@ -1496,7 +1496,7 @@ msgstr "An junyans a verwis. Check mars eus problem gans dha fos-tan!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "An pinaval tardhus disco re asas an leur-donsya kyns omdardha."
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 
@@ -1624,7 +1624,7 @@ msgstr[1] "Gortewgh! %i warier nyns yns parys hwath!"
 msgstr[2] "Gortewgh! %i gwarier nyns yns parys hwath!"
 msgstr[3] "Gortewgh! %i gwarier nyns yns parys hwath!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1658,17 +1658,17 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s on %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Manylyon gwyns?"
 
@@ -1728,7 +1728,7 @@ msgstr "Ny yllydh gwari kyns dewis para!"
 msgid "Your shot has missed!"
 msgstr "Dha denn re fyllis!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "leshenwys"
 
@@ -1760,7 +1760,7 @@ msgstr "kowlwrys"
 msgid "error parsing the config file"
 msgstr "Erreur lors de la lecture du fichier de configuration"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "a"
 
