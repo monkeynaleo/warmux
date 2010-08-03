@@ -30,12 +30,7 @@ class Team;
 
 class NetworkTeamsSelectionBox : public TeamsSelectionBox
 {
- private:
-  /* If you need this, implement it (correctly) */
-  NetworkTeamsSelectionBox(const NetworkTeamsSelectionBox&);
-  NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
-  /**********************************************/
-
+private:
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team);
 
@@ -47,6 +42,7 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
   bool IsSelected(Team * team);
 
   void RequestTeamRemoval();
+  void UpdateNbTeams();
 
  public:
   NetworkTeamsSelectionBox(const Point2i &size, bool w_border);

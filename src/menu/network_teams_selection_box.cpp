@@ -63,6 +63,7 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
     } else if (delta < 0){
       RequestTeamRemoval();
     }
+    UpdateNbTeams();
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
 
@@ -279,7 +280,9 @@ void NetworkTeamsSelectionBox::AddTeamCallback(const std::string& team_id)
       nb_local_teams++;
     }
   }
+
   local_teams_nb->SetValue(nb_local_teams);
+  UpdateNbTeams();
 }
 
 void NetworkTeamsSelectionBox::UpdateTeamCallback(const std::string& old_team_id,
@@ -318,6 +321,7 @@ void NetworkTeamsSelectionBox::DelTeamCallback(const std::string& team_id)
     }
   }
   local_teams_nb->SetValue(nb_local_teams);
+  UpdateNbTeams();
 }
 
 
@@ -347,4 +351,19 @@ void NetworkTeamsSelectionBox::ValidTeamsSelection()
   }
 
   Config::GetInstance()->SetNetworkLocalTeams();
+}
+
+void NetworkTeamsSelectionBox::UpdateNbTeams()
+{
+  // If we are not running this special widget, this is useless
+  if (!list_box)
+    return;
+
+  uint nb_teams = 0;
+  for (uint i=0; i < teams_selections.size(); i++) {
+    if (teams_selections.at(i)->GetTeam() != NULL)
+      nb_teams++;
+  }
+
+  list_box->SetNbTeams(nb_teams);
 }
