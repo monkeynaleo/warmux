@@ -1,7 +1,7 @@
 # translation of fr.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Victor Stinner <victor.stinner@haypocalc.com>, 2006.
 msgid ""
 msgstr ""
@@ -53,43 +53,43 @@ msgstr "%s <%s> y dit %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "%s Équipes"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s équipe - loin là bas"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s la jette son corps la mer !"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) lé mort."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s la tombe dans l'eau."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s la sorte du terrain !"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s lé mort à koz son 2 mains gauches..."
@@ -108,7 +108,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Marmaille %s la gagné %u point d'vie !"
 msgstr[1] "Marmaille %s la gagné %u points d'vie !"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s l'est gazé ça !! Boug là, la kine son camarades (%s) !"
@@ -398,7 +398,7 @@ msgstr[1] "L'équipe %s a gagné %u !"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -408,7 +408,7 @@ msgid "(dead)"
 msgstr "(kapoute)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "ça c'est la langue du système"
 
@@ -508,8 +508,8 @@ msgstr "Balle y rebondi"
 msgid "Bye bye Tux..."
 msgstr "Nartrouvé tux!!"
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -553,7 +553,7 @@ msgstr "Nombre de joueurs par équipe"
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Parachute"
@@ -563,7 +563,7 @@ msgstr "Parachute"
 msgid "Character switching"
 msgstr "Parachute"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr ""
 
@@ -669,7 +669,7 @@ msgstr "Dynamite"
 msgid "END OF GAME"
 msgstr "LE JEU LA FINI"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr ""
 
@@ -748,7 +748,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : le skin \"%s\" pour l'équipe \"%s\" la fané ça..."
@@ -767,7 +767,7 @@ msgstr "Bombe lacrimogène"
 msgid "Fullscreen / window"
 msgstr "Plein écran ?"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
@@ -790,7 +790,7 @@ msgstr "Options du jeu"
 msgid "Gnu Launcher"
 msgstr "Lance Gnu"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 msgid "Graphics"
 msgstr ""
 
@@ -819,7 +819,7 @@ msgid "Have a good game!"
 msgstr "Bonne partie !"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Lo chef"
 
@@ -925,7 +925,7 @@ msgstr "Initialisation du sond"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Trape kado là pou ou !"
 
@@ -941,11 +941,11 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "la langue"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -961,7 +961,7 @@ msgstr "Terrains lé en train de charger :"
 msgid "Load teams:"
 msgstr "Chargement des équipes :"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Equipes local :"
 
@@ -1006,7 +1006,7 @@ msgstr "Options du jeu"
 msgid "Max energy"
 msgstr "Énergie initiale"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec"
 
@@ -1014,7 +1014,7 @@ msgstr "Nbr. max. d'images/sec"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 #, fuzzy
 msgid "Misc"
 msgstr "Musique ?"
@@ -1048,15 +1048,15 @@ msgstr ""
 msgid "Move character"
 msgstr "Parachute"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Musique ?"
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Jeu en réseau"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr ""
 
@@ -1102,7 +1102,7 @@ msgstr "Personne!"
 msgid "Number of characters"
 msgstr "Nombre de joueurs par équipe"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Nombre d'équipe :"
 
@@ -1140,15 +1140,15 @@ msgstr "Jouer"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Joueur"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Affiche l'énergie des joueurs ?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Affiche le ti'nom des joueurs ?"
 
@@ -1201,7 +1201,7 @@ msgstr "An train'e lire ou'te fichier de configuration"
 msgid "Reading the personal config file"
 msgstr "An train'e lire oute fichier de configuration a ou même"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -1217,12 +1217,12 @@ msgstr "Lancement du jeu"
 msgid "Say: "
 msgstr "y dit:"
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 #, fuzzy
 msgid "Scroll border size"
 msgstr "Scrolling actif sur les bords"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Scrolling actif sur les bords"
 
@@ -1294,16 +1294,16 @@ msgid ""
 "can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 #, fuzzy
 msgid "Sound"
 msgstr "Options sonores"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Effets sonores ?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Fréquence d'échantillonage ?"
 
@@ -1352,7 +1352,7 @@ msgstr "Équipes"
 msgid "Teams"
 msgstr "Équipes"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr ""
 
@@ -1412,7 +1412,7 @@ msgstr "La connexion terminé. Vérifi na point de firewall !"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "La grenade boite de nuit la barré de la piste avant lu pête."
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1535,7 +1535,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Attend tééééé ! %i joueur lé pas encore prêt !"
 msgstr[1] "Attend à zot tééééé ! %i joueurs lé pas encore prêt !"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1570,17 +1570,17 @@ msgstr "Site internet : "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : un simple pistolet la kine à lu !"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
@@ -1640,7 +1640,7 @@ msgstr "Gaingne pas joué avant de prendre une équipe !"
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "ti nom gaté"
 
@@ -1670,7 +1670,7 @@ msgstr "Lé bon"
 msgid "error parsing the config file"
 msgstr "An train'e lire ou'te fichier de configuration"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "de"
 

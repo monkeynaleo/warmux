@@ -1,7 +1,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.7\n"
@@ -54,43 +54,43 @@ msgstr "%s <%s> aka %s od %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, fuzzy, c-format
 msgid "%s Team"
 msgstr "Tími"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s spáchal samovraždu !"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s tím)  zomrel."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s spadol do vody."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s vypadol z mapy!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
@@ -110,7 +110,7 @@ msgstr[0] "%s zvíťazil %u bodom energie!"
 msgstr[1] "%s zvíťazil %u bodmi energie! "
 msgstr[2] "%s zvíťazil %u bodmi energie! "
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s tímu!"
@@ -416,7 +416,7 @@ msgstr[2] "%s tími vyhrali %u %s!"
 msgid "%s team was fragged down."
 msgstr "%s tím vyhral.\n"
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -426,7 +426,7 @@ msgid "(dead)"
 msgstr "(mŕtvy)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr ""
 
@@ -524,8 +524,8 @@ msgstr "Odrazená lopta"
 msgid "Bye bye Tux..."
 msgstr "Maj sa tux..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -569,7 +569,7 @@ msgstr "Počet postáv"
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Padák"
@@ -579,7 +579,7 @@ msgstr "Padák"
 msgid "Character switching"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "KONIEC HRY"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr ""
 
@@ -764,7 +764,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť telo \"%s\" pre tím \"%s\"."
@@ -783,7 +783,7 @@ msgstr "Riot Bomba"
 msgid "Fullscreen / window"
 msgstr "Celá obrazovka?"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
@@ -806,7 +806,7 @@ msgstr "Nastavenie hry"
 msgid "Gnu Launcher"
 msgstr "Gnu raketomet"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 #, fuzzy
 msgid "Graphics"
 msgstr "Nastavenie grafiky"
@@ -836,7 +836,7 @@ msgid "Have a good game!"
 msgstr "Prajem dobrú hru!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Hlavný veliteľ"
 
@@ -930,7 +930,7 @@ msgstr "Inicializácia tímov"
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "To je dar!"
 
@@ -946,11 +946,11 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr ""
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -966,7 +966,7 @@ msgstr "Načítavam mapy:"
 msgid "Load teams:"
 msgstr "Načítavam tímy"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Miestne tímy:"
 
@@ -1011,7 +1011,7 @@ msgstr "Nastavenie hry"
 msgid "Max energy"
 msgstr "Základná energia"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -1019,7 +1019,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Mína "
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 #, fuzzy
 msgid "Misc"
 msgstr "Hudba?"
@@ -1053,15 +1053,15 @@ msgstr ""
 msgid "Move character"
 msgstr "Padák"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Hudba?"
 
@@ -1084,7 +1084,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Sieťová hra"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr ""
 
@@ -1107,7 +1107,7 @@ msgstr "Nikto!"
 msgid "Number of characters"
 msgstr "Počet postáv"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Počet tímov:"
 
@@ -1146,15 +1146,15 @@ msgstr "Hraj"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Hráč"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Zobraziť energiu hráča?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Zobraziť hráčovo meno ?"
 
@@ -1207,7 +1207,7 @@ msgstr "Čítam osobný konfiguračný súbor"
 msgid "Reading the personal config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Rozlíšenie"
 
@@ -1223,12 +1223,12 @@ msgstr "Spusti hru"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 #, fuzzy
 msgid "Scroll border size"
 msgstr "Posúvanie mapou"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Posúvanie mapou"
 
@@ -1300,16 +1300,16 @@ msgid ""
 "can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 #, fuzzy
 msgid "Sound"
 msgstr "Zvuky"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Zvukové efekty?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Zvuková frekvencia"
 
@@ -1357,7 +1357,7 @@ msgstr "Tími"
 msgid "Teams"
 msgstr "Tími"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr ""
 
@@ -1415,7 +1415,7 @@ msgstr "Pripojenie vypršalo. Skontroluj či nie je povolený firewall!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Disco granát opustil parket pred výbuchom"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1533,7 +1533,7 @@ msgstr[0] "Čakaj! %i hráč nie je ešte pripravený!"
 msgstr[1] "Čakaj! %i hráči nie sú ešte pripravení!"
 msgstr[2] "Čakaj! %i hráči nie sú ešte pripravení!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, fuzzy, c-format
 msgid "Waiting for %s"
 msgstr "Čakám na mapu"
@@ -1566,17 +1566,17 @@ msgstr "Web stránka: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Častice vetra?"
 
@@ -1636,7 +1636,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 #, fuzzy
 msgid "aka"
 msgstr "Raketomet"
@@ -1666,7 +1666,7 @@ msgstr "koniec"
 msgid "error parsing the config file"
 msgstr "Čítam osobný konfiguračný súbor"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr ""
 

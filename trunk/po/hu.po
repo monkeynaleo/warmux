@@ -44,43 +44,43 @@ msgstr "%s <%s>, ismertebb nevén %s a(z) %s csapatból"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> a(z) %s csapatból"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "%s Csapat"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Csapat - Távoli"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s a(z) %s csapatból öngyilkos lett!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a(z) %s csapatból meghalt."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a(z) %s csapatból vízbe esett."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a(z) %s csapatból kiesett a pályáról!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a(z) %s csapatból túl keményen érkezett a földre!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a(z) %s csapatból meghalt, mert egy kicsit ügyefogyott volt!"
@@ -99,7 +99,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiája %u egységgel nõtt!"
 msgstr[1] "%s energiája %u egységgel nõtt!"
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s egy pszichopata, megölte a(z) %s csapat egy tagját!"
@@ -392,7 +392,7 @@ msgstr[1] "%s csapat %u pingvinkilövõt kapott! Sosem láttál repülõ pingvint?"
 msgid "%s team was fragged down."
 msgstr "%s csapat elpusztult."
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s sírba vitte magával a(z) %s csapat tagját!"
@@ -402,7 +402,7 @@ msgid "(dead)"
 msgstr "(halott)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(rendszernyelv)"
 
@@ -503,8 +503,8 @@ msgstr "Pattogó labda"
 msgid "Bye bye Tux..."
 msgstr "Viszlát, pingvin..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -550,7 +550,7 @@ msgstr "Fegyverkategória váltása"
 msgid "Change weapon countdown"
 msgstr "Fegyver idõzítésének megváltoztatása"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Karakter"
@@ -559,7 +559,7 @@ msgstr "Karakter"
 msgid "Character switching"
 msgstr "Karakterváltás lehetõsége"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Frissítések keresése?"
 
@@ -664,7 +664,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "JÁTÉK VÉGE"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Hanghatások hangereje"
 
@@ -745,7 +745,7 @@ msgstr ""
 "nem közvetlenül kapcsolódsz az internetre, ellenõrizd a routered "
 "beállítását: a(z) %s-s TCP portot át kell irányítanod a számítógépedre."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
@@ -762,7 +762,7 @@ msgstr "Rögbibomba"
 msgid "Fullscreen / window"
 msgstr "Teljesképernyõs / ablakban"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Teljesképernyõs"
 
@@ -782,7 +782,7 @@ msgstr "Játék neve:"
 msgid "Gnu Launcher"
 msgstr "Gnú-lövõ"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafika"
@@ -812,7 +812,7 @@ msgid "Have a good game!"
 msgstr "Jó játékot!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Parancsnok"
 
@@ -921,7 +921,7 @@ msgstr "Hangok elõkészítése"
 msgid "Initialise teams"
 msgstr "Csapatok elõkészítése"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Ez egy ajándék!"
 
@@ -937,11 +937,11 @@ msgstr "Hátraugrás"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Kidobja a <nickname> nevû játékost a játékból"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Nyelv"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -957,7 +957,7 @@ msgstr "Térképek betöltése:"
 msgid "Load teams:"
 msgstr "Csapatok betöltése:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Helyi csapatok:"
 
@@ -999,7 +999,7 @@ msgstr "Játékmód"
 msgid "Max energy"
 msgstr "Maximális energia"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Maximum FPS"
 
@@ -1007,7 +1007,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Taposóakna"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Egyéb"
 
@@ -1041,15 +1041,15 @@ msgstr "Kamera mozgatása egérrel vagy nyilakkal"
 msgid "Move character"
 msgstr "Karakter mozgatása"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Zene hangereje"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Zene"
 
@@ -1071,7 +1071,7 @@ msgstr "Soha"
 msgid "New network game at "
 msgstr "Új hálózati játék"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Figyelmeztetés új játékosnál?"
 
@@ -1094,7 +1094,7 @@ msgstr "Senki!"
 msgid "Number of characters"
 msgstr "Karakterek száma"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Csapatok száma:"
 
@@ -1134,15 +1134,15 @@ msgstr "Irány a játék!"
 msgid "Play several times"
 msgstr "Több játék engedélyezése"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Játékos"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Játékos energiája"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Játékos neve"
 
@@ -1193,7 +1193,7 @@ msgstr "Alapértelmezett konfigurációs fájl beolvasása"
 msgid "Reading the personal config file"
 msgstr "Személyes konfigurációs fájl olvasása"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Felbontás"
 
@@ -1209,11 +1209,11 @@ msgstr "Játék futtatása"
 msgid "Say: "
 msgstr "Üzenet: "
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Görgetõ keret mérete"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Görgetés a széleknél"
 
@@ -1289,15 +1289,15 @@ msgstr ""
 "http://www.wormux.org/wiki/download.php címen találod a frissített verziót. "
 "cí"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "Hangok"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Hanghatások?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Hangfrekvencia"
 
@@ -1344,7 +1344,7 @@ msgstr "Csapat statisztikák"
 msgid "Teams"
 msgstr "Csapatok"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Csapatszerkesztõ"
 
@@ -1404,7 +1404,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "A diszkó-gránát elhagyta a táncparkettet robbanás elõtt"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "Megszakadt a játék, mert kijelentkeztél."
 
@@ -1527,7 +1527,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Várj! %i játékos még nem áll készen!"
 msgstr[1] "Várj! %i játékos még nem áll készen!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1561,17 +1561,17 @@ msgstr "Honlap: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s - egy sima pisztoly kinyírta!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Hulló dísztárgyak"
 
@@ -1631,7 +1631,7 @@ msgstr "Nem tudsz játszani csapatválasztás nélkül!"
 msgid "Your shot has missed!"
 msgstr "Ez mellé ment!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "aka"
 
@@ -1663,7 +1663,7 @@ msgstr "kész"
 msgid "error parsing the config file"
 msgstr "hiba a konfigurációs fájl olvasása közben"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "a következõtõl:"
 

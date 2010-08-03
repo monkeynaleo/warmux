@@ -1,7 +1,7 @@
 # translation of wormux-tr.po to Turkish
 # Copyright (C) 2006 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
-# 
+#
 # Furkan Duman <coderlord@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
@@ -51,43 +51,43 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, fuzzy, c-format
 msgid "%s Team"
 msgstr "Takımlar"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, fuzzy, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s intihar etti !"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) öldü."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s suya daldı."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -105,7 +105,7 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] ""
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
@@ -353,7 +353,7 @@ msgstr[0] "%s takımı %u %s kazandı!"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -363,7 +363,7 @@ msgid "(dead)"
 msgstr "(ölü)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr ""
 
@@ -462,8 +462,8 @@ msgstr "Zıplayan Top"
 msgid "Bye bye Tux..."
 msgstr "Bay bay tux..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -505,7 +505,7 @@ msgstr ""
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Paraşüt"
@@ -515,7 +515,7 @@ msgstr "Paraşüt"
 msgid "Character switching"
 msgstr "Paraşüt"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr ""
 
@@ -620,7 +620,7 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr ""
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr ""
 
@@ -693,7 +693,7 @@ msgid ""
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
@@ -712,7 +712,7 @@ msgstr "Ses Bombası"
 msgid "Fullscreen / window"
 msgstr "Tam ekran?"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
@@ -732,7 +732,7 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Gnu Mancınığı"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 msgid "Graphics"
 msgstr ""
 
@@ -761,7 +761,7 @@ msgid "Have a good game!"
 msgstr ""
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr ""
 
@@ -854,7 +854,7 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr ""
 
@@ -870,11 +870,11 @@ msgstr ""
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr ""
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -890,7 +890,7 @@ msgstr "Haritaları yükle:"
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 #, fuzzy
 msgid "Local teams:"
 msgstr "Takımları yükle:"
@@ -934,7 +934,7 @@ msgstr ""
 msgid "Max energy"
 msgstr "Başlangıç enerjisi"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "En fazla FPS"
 
@@ -942,7 +942,7 @@ msgstr "En fazla FPS"
 msgid "Mine"
 msgstr "Mayın"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 #, fuzzy
 msgid "Misc"
 msgstr "Müzik?"
@@ -976,15 +976,15 @@ msgstr ""
 msgid "Move character"
 msgstr "Paraşüt"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr ""
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Müzik?"
 
@@ -1007,7 +1007,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Ağ Oyunu"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr ""
 
@@ -1029,7 +1029,7 @@ msgstr ""
 msgid "Number of characters"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr ""
 
@@ -1068,16 +1068,16 @@ msgstr "Oyna"
 msgid "Play several times"
 msgstr ""
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 #, fuzzy
 msgid "Player"
 msgstr "Oyna"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Oyuncu enerjisi?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Oyuncu isimleri?"
 
@@ -1130,7 +1130,7 @@ msgstr "Kişisel ayar dosyası okunuyor"
 msgid "Reading the personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Çözünürlük"
 
@@ -1146,12 +1146,12 @@ msgstr "Oyunu çalıştır"
 msgid "Say: "
 msgstr ""
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 #, fuzzy
 msgid "Scroll border size"
 msgstr "Sınırlarda kaydır"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Sınırlarda kaydır"
 
@@ -1222,16 +1222,16 @@ msgid ""
 "can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 #, fuzzy
 msgid "Sound"
 msgstr "Sesler"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Ses frekansı"
 
@@ -1279,7 +1279,7 @@ msgstr "Takımlar"
 msgid "Teams"
 msgstr "Takımlar"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr ""
 
@@ -1337,7 +1337,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Disko el bombası, patlamadan dans pistini terketti"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1448,7 +1448,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1480,17 +1480,17 @@ msgstr "Web sitesi: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Rüzgar parçacıkları?"
 
@@ -1549,7 +1549,7 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 #, fuzzy
 msgid "aka"
 msgstr "Bazuka"
@@ -1579,7 +1579,7 @@ msgstr "tamam"
 msgid "error parsing the config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr ""
 

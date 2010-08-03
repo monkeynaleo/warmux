@@ -1,6 +1,6 @@
 # translation of eo_new.po to esperanto
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Axel Rousseau <axel584 AT axel584.org>, 2006.
 # Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>, 2007, 2008.
 msgid ""
@@ -50,43 +50,43 @@ msgstr "%s <%s> kiel %s el %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "%s Teamo"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s (teamo %s) mortigis sin!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (teamo %s) mortis."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (teamo %s) droniĝis!"
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (teamo %s) falis el la mapo!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (teamo %s) grundtrafis tro perforte!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
@@ -105,7 +105,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
@@ -398,7 +398,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s teamo primurditis."
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s entombigis membron de la %s teamo kun li!"
@@ -408,7 +408,7 @@ msgid "(dead)"
 msgstr "(mortinta)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(sistema lingvo)"
 
@@ -509,8 +509,8 @@ msgstr "Resaltanta pilko"
 msgid "Bye bye Tux..."
 msgstr "Adiaŭ, tukso..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -556,7 +556,7 @@ msgstr "Ŝanĝi kategorion de armilo"
 msgid "Change weapon countdown"
 msgstr "Ŝanĝi templimon de armilo"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 #, fuzzy
 msgid "Character names:"
 msgstr "Ulo"
@@ -565,7 +565,7 @@ msgstr "Ulo"
 msgid "Character switching"
 msgstr "Ulŝanĝo"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Ĉu kontroli la ĝisdatigaĵoj enrete?"
 
@@ -670,7 +670,7 @@ msgstr "Dinamito"
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Laŭteco de efektoj"
 
@@ -746,7 +746,7 @@ msgstr ""
 "vi ne estas senpere konektita al la interreto, kontroli la agordon de via "
 "kursilo: la TCP pordo %s devas trasendiĝi al via komputilo."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
@@ -763,7 +763,7 @@ msgstr "Futbalbombo"
 msgid "Fullscreen / window"
 msgstr "Plen-ekrane/fenestre"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Plenekrane?"
 
@@ -783,7 +783,7 @@ msgstr "Ludnomo:"
 msgid "Gnu Launcher"
 msgstr "Gnuĵetilo"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafikoj"
@@ -813,7 +813,7 @@ msgid "Have a good game!"
 msgstr "Bone amuzu!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Ĉefkomandoro"
 
@@ -921,7 +921,7 @@ msgstr "Preparante sonojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Tio estas donaco!"
 
@@ -937,11 +937,11 @@ msgstr "Salti malantaŭen"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Forĵetas la ludantojn nomitajn kiel <nickname> el la ludo"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Lingvo"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr ""
 
@@ -957,7 +957,7 @@ msgstr "Muntas la mapojn:"
 msgid "Load teams:"
 msgstr "Muntas la teamojn:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Lokaj teamoj:"
 
@@ -999,7 +999,7 @@ msgstr "Ludmodo"
 msgid "Max energy"
 msgstr "Maks energio"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Maksimumaj bildoj po sekundo (fps)"
 
@@ -1007,7 +1007,7 @@ msgstr "Maksimumaj bildoj po sekundo (fps)"
 msgid "Mine"
 msgstr "Mino"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Diversaĵoj"
 
@@ -1041,15 +1041,15 @@ msgstr "Movi la kameraon per muso aŭ sagoj"
 msgid "Move character"
 msgstr "Movi ulon"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr ""
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Muzika laŭteco"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Muziko?"
 
@@ -1071,7 +1071,7 @@ msgstr "Neniam"
 msgid "New network game at "
 msgstr "Nova reta ludo ĉe"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Ĉu averti pri nova ludanto?"
 
@@ -1094,7 +1094,7 @@ msgstr "Neniu!"
 msgid "Number of characters"
 msgstr "Kvanto da ludantoj"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Kvanto da teamoj:"
 
@@ -1134,15 +1134,15 @@ msgstr "Ludi"
 msgid "Play several times"
 msgstr "Ludi plurfoje"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Ludanto"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Energio de ludanto?"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Nomo de ludanto?"
 
@@ -1193,7 +1193,7 @@ msgstr "Legante norman agordaron"
 msgid "Reading the personal config file"
 msgstr "Legante personan agordaron"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Difino"
 
@@ -1209,11 +1209,11 @@ msgstr "Komencas partion"
 msgid "Say: "
 msgstr "Diri: "
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Grandeco de rulumrando"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Rulumi sur randoj"
 
@@ -1288,15 +1288,15 @@ msgstr ""
 "Pardonu, via versio ne plu estas subtenita. Subtenita versio estas %s. Vi "
 "povas elŝuti ĝisdatan version ĉe http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "Sono"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Sonaj efektoj?"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Sona frekvenco"
 
@@ -1343,7 +1343,7 @@ msgstr "Teamaj statistikoj"
 msgid "Teams"
 msgstr "Teamoj"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Teama redaktilo"
 
@@ -1402,7 +1402,7 @@ msgstr "La konekto tempolimis. Certiĝu, ke ne estas ie fajroŝirmilo!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "La diskogrenado foriris de la diskejo antaŭ ol explodi"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 
@@ -1524,7 +1524,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu! %i ludanto ankoraŭ ne pretas!"
 msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -1558,17 +1558,17 @@ msgstr "TTT-ejo: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Venterojn?"
 
@@ -1628,7 +1628,7 @@ msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"
 msgid "Your shot has missed!"
 msgstr "Vi mispafis!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "alinome"
 
@@ -1660,7 +1660,7 @@ msgstr "farita"
 msgid "error parsing the config file"
 msgstr "eraro dum analizo de la agordodosiero"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "el"
 

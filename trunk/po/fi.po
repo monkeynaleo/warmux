@@ -1,7 +1,7 @@
 # translation of fi.po to fi_FI
 # Copyright (C) YEAR Wormux Development Team
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Bastian Salmela <bastian.salmela@hel.fi>, 2006.
 # Bastian Salmela <basse@kulma.org>, 2008.
 msgid ""
@@ -54,43 +54,43 @@ msgstr "%s <%s> aka %s, kotipaikka: %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> maasta %s"
 
-#: src/menu/team_box.cpp:248
+#: src/menu/team_box.cpp:267
 #, c-format
 msgid "%s Team"
 msgstr "Joukkue %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:240
+#: src/menu/team_box.cpp:259
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team commited suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1029
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:979
+#: src/game/game.cpp:987
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:973
+#: src/game/game.cpp:981
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1002
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1009
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -111,7 +111,7 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game.cpp:1013
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -409,7 +409,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -419,7 +419,7 @@ msgid "(dead)"
 msgstr "(kuollut)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:301
+#: src/menu/options_menu.cpp:302
 msgid "(system language)"
 msgstr "(järjestelmän kieli)"
 
@@ -519,8 +519,8 @@ msgstr "Pomppupallo"
 msgid "Bye bye Tux..."
 msgstr "Hei hei Tux..."
 
-#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:521
-#: src/team/teams_list.cpp:530 src/team/teams_list.cpp:536
+#: src/team/teams_list.cpp:487 src/team/teams_list.cpp:522
+#: src/team/teams_list.cpp:531 src/team/teams_list.cpp:537
 #: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
@@ -566,7 +566,7 @@ msgstr "Vaihda aseluokkaa"
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:161
 msgid "Character names:"
 msgstr "Hahmonimet:"
 
@@ -574,7 +574,7 @@ msgstr "Hahmonimet:"
 msgid "Character switching"
 msgstr "Hahmon vaihto"
 
-#: src/menu/options_menu.cpp:214
+#: src/menu/options_menu.cpp:215
 msgid "Check updates online?"
 msgstr "Tarkista päivitykset"
 
@@ -678,7 +678,7 @@ msgstr "Dynamiitti"
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:258
 msgid "Effects volume"
 msgstr "Efektien voimakkuus"
 
@@ -756,7 +756,7 @@ msgstr ""
 "yhdistetty suoraan Internetiin, tarkista reitittimesi asetukset: TCP-portin %"
 "s täytyy olla ohjattu koneellesi."
 
-#: src/team/team.cpp:179
+#: src/team/team.cpp:152
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
@@ -773,7 +773,7 @@ msgstr "Jalkapallopommi"
 msgid "Fullscreen / window"
 msgstr "Kokoruutu / ikkuna"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:100
 msgid "Fullscreen?"
 msgstr "Kokoruutu"
 
@@ -793,7 +793,7 @@ msgstr "Pelin nimi:"
 msgid "Gnu Launcher"
 msgstr "Gnu"
 
-#: src/menu/options_menu.cpp:129
+#: src/menu/options_menu.cpp:130
 msgid "Graphics"
 msgstr "Graafit"
 
@@ -822,7 +822,7 @@ msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/menu/options_menu.cpp:150 src/menu/team_box.cpp:81
+#: src/menu/options_menu.cpp:151 src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Ylikomentaja"
 
@@ -926,7 +926,7 @@ msgstr "Alusta äänet"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:855
+#: src/game/game.cpp:863
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -942,11 +942,11 @@ msgstr "Hyppää taaksepäin"
 msgid "Kicks the players designated by <nickname> out of the game"
 msgstr "Potkaisee <nickname>-nimiset pelaajat ulos pelistä"
 
-#: src/menu/options_menu.cpp:134
+#: src/menu/options_menu.cpp:135
 msgid "Language"
 msgstr "Kieli"
 
-#: src/menu/options_menu.cpp:220
+#: src/menu/options_menu.cpp:221
 msgid "Left-handed mouse?"
 msgstr "Vasenkätisen hiiri?"
 
@@ -962,7 +962,7 @@ msgstr "Lataa kartat:"
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
-#: src/menu/teams_selection_box.cpp:72
+#: src/menu/teams_selection_box.cpp:94
 msgid "Local teams:"
 msgstr "Paikalliset joukkueet:"
 
@@ -1003,7 +1003,7 @@ msgstr "Mestaritila"
 msgid "Max energy"
 msgstr "Maksimienergia"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:105
 msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
@@ -1011,7 +1011,7 @@ msgstr "Maksimi FPS"
 msgid "Mine"
 msgstr "Miina"
 
-#: src/menu/options_menu.cpp:234
+#: src/menu/options_menu.cpp:235
 msgid "Misc"
 msgstr "Sekalaiset"
 
@@ -1045,15 +1045,15 @@ msgstr "Siirrä kameraa hiirellä tai nuolilla"
 msgid "Move character"
 msgstr "Siirrä hahmoa"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:87
 msgid "Multi-layer sky?"
 msgstr "Monitasoinen taivas?"
 
-#: src/menu/options_menu.cpp:245
+#: src/menu/options_menu.cpp:246
 msgid "Music volume"
 msgstr "Musiikin voimakkuus"
 
-#: src/menu/options_menu.cpp:240
+#: src/menu/options_menu.cpp:241
 msgid "Music?"
 msgstr "Musiikki"
 
@@ -1074,7 +1074,7 @@ msgstr "Ei koskaan"
 msgid "New network game at "
 msgstr "Uusi verkkopeli paikassa"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:281
 msgid "New player warning?"
 msgstr "Varoitus uudesta pelaajasta?"
 
@@ -1096,7 +1096,7 @@ msgstr "Ei kukaan!"
 msgid "Number of characters"
 msgstr "Pelaajien määrä"
 
-#: src/menu/teams_selection_box.cpp:76
+#: src/menu/teams_selection_box.cpp:98
 msgid "Number of teams:"
 msgstr "Joukkueita"
 
@@ -1136,15 +1136,15 @@ msgstr "Pelaa"
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
-#: src/menu/teams_selection_box.cpp:91
+#: src/menu/teams_selection_box.cpp:113
 msgid "Player"
 msgstr "Pelaaja"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 msgid "Player energy?"
 msgstr "Näytä voimat"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:95
 msgid "Player's name?"
 msgstr "Näytä nimi"
 
@@ -1193,7 +1193,7 @@ msgstr "Luetaan oletusasetuksia"
 msgid "Reading the personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:126
 msgid "Resolution"
 msgstr "Tarkkuus"
 
@@ -1209,11 +1209,11 @@ msgstr "Aloita peli"
 msgid "Say: "
 msgstr "Sano: "
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:231
 msgid "Scroll border size"
 msgstr "Reunuksen koko"
 
-#: src/menu/options_menu.cpp:225
+#: src/menu/options_menu.cpp:226
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
@@ -1287,15 +1287,15 @@ msgstr ""
 "Versiotasi ei enää tueta. Tuetut versiot ovat%s. Voit ladata päivitetyn "
 "version osoitteesta http://www.wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:284
+#: src/menu/options_menu.cpp:285
 msgid "Sound"
 msgstr "Ääniasetukset"
 
-#: src/menu/options_menu.cpp:251
+#: src/menu/options_menu.cpp:252
 msgid "Sound effects?"
 msgstr "Ääniefektit"
 
-#: src/menu/options_menu.cpp:276
+#: src/menu/options_menu.cpp:277
 msgid "Sound frequency"
 msgstr "Äänitaajuus"
 
@@ -1341,7 +1341,7 @@ msgstr "Joukkueen tilastot"
 msgid "Teams"
 msgstr "Joukkueet"
 
-#: src/menu/options_menu.cpp:197
+#: src/menu/options_menu.cpp:198
 msgid "Teams editor"
 msgstr "Joukkue-editori"
 
@@ -1396,7 +1396,7 @@ msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskokranaatti jätti tanssilattian ennen räjähtämistä!"
 
-#: src/game/game.cpp:690
+#: src/game/game.cpp:698
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
@@ -1515,7 +1515,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/game/game.cpp:596
+#: src/game/game.cpp:604
 #, c-format
 msgid "Waiting for %s"
 msgstr "Odotetaan henkilöä %s"
@@ -1548,17 +1548,17 @@ msgstr "Verkkosivu:"
 msgid "Welcome to %s on %s!"
 msgstr "Tervetuloa kohteeseen %s paikassa %s!"
 
-#: src/game/game.cpp:966
+#: src/game/game.cpp:974
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Loistava kunnari! %s joukkueesta %s  on toisessa maailmassa..."
 
-#: src/game/game.cpp:1018
+#: src/game/game.cpp:1026
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
@@ -1614,7 +1614,7 @@ msgstr "Et voi aloittaa peliä ennen kuin olet olet valinnut joukkueen!"
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
-#: src/menu/credits_menu.cpp:74
+#: src/menu/credits_menu.cpp:72
 msgid "aka"
 msgstr "aka"
 
@@ -1644,7 +1644,7 @@ msgstr "valmis"
 msgid "error parsing the config file"
 msgstr "virhe luettaessa asetustiedostoa"
 
-#: src/menu/credits_menu.cpp:78
+#: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr ", "
 
