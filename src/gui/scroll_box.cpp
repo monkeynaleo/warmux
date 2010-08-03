@@ -237,7 +237,7 @@ Rectanglei ScrollBox::GetScrollThumb() const
 
 int ScrollBox::GetMaxOffset() const
 {
-  return vbox->GetSizeY() - size.y;
+  return (vbox) ? vbox->GetSizeY() - size.y : -1;
 }
 
 int ScrollBox::GetTrackHeight() const
@@ -248,7 +248,15 @@ int ScrollBox::GetTrackHeight() const
 void ScrollBox::Empty()
 {
   // We want to leave around the buttons and the box
-  vbox->Empty();
+  if (vbox)
+    vbox->Empty();
+}
+
+void ScrollBox::Clear()
+{
+  // We want to leave around the buttons and the box
+  if (vbox)
+    vbox->Clear();
 }
 
 void ScrollBox::Update(const Point2i &mousePosition,
@@ -288,6 +296,7 @@ void ScrollBox::Pack()
     vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
     vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
   } else {
+    vbox->SetSizeX(size.x -2*BORDER);
     vbox->SetPosition(position.x + BORDER, position.y + BORDER);
   }
 
