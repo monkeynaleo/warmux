@@ -38,8 +38,8 @@ Video::Video()
 
   InitSDL();
 
-  window.SetSurface( NULL , false );
-  window.SetAutoFree( false );
+  window.SetSurface(NULL, false);
+  window.SetAutoFree(false);
 
   Config * config = Config::GetInstance();
   SetMaxFps(config->GetMaxFps());
@@ -55,7 +55,7 @@ Video::Video()
   }
   AddUniqueConfigSorted(window.GetWidth(), window.GetHeight());
 
-  SetWindowCaption( std::string("Wormux ") + Constants::WORMUX_VERSION );
+  SetWindowCaption(std::string("Wormux ") + Constants::WORMUX_VERSION);
   // The icon must be larger then 32x32 pixels as some desktops display larger icons.
   // For example on a mac system the icon got displayed in a resolution of 64x64 pixels.
   // The even higher resolution allows the system to scale the icon down to an anti-aliased version.
@@ -71,7 +71,7 @@ Video::~Video()
 {
   if (icon)
     SDL_FreeSurface(icon);
-  if ( SDLReady )
+  if (SDLReady)
     SDL_Quit();
   SDLReady = false;
 }
@@ -87,7 +87,7 @@ void Video::SetMaxFps(uint max_fps)
 
 static bool CompareConfigs(const Point2i& a, const Point2i& b)
 {
-  return  (a.x < b.x) || ((a.x == b.x) && (a.y < b.y));
+  return (a.x < b.x) || ((a.x == b.x) && (a.y < b.y));
 }
 
 void Video::AddUniqueConfigSorted(int w, int h)
@@ -155,7 +155,7 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
     flags |= SDL_SWSURFACE;
   }
 
-  window.SetSurface( SDL_SetVideoMode(width, height, 32, flags) );
+  window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
 
   if (window.IsNull())
     return false;
@@ -228,7 +228,7 @@ void Video::ToggleFullscreen()
 {
 #ifndef WIN32
 #  ifndef __APPLE__ // Prevent buggy fullscreen under OSX
-  SDL_WM_ToggleFullScreen( window.GetSurface() );
+  SDL_WM_ToggleFullScreen(window.GetSurface());
   fullscreen = !fullscreen;
 #  endif
 #else
@@ -239,13 +239,13 @@ void Video::ToggleFullscreen()
 
 void Video::SetWindowCaption(const std::string& caption) const
 {
-  SDL_WM_SetCaption( caption.c_str(), NULL );
+  SDL_WM_SetCaption(caption.c_str(), NULL);
 }
 
 void Video::SetWindowIcon(const std::string& filename)
 {
   icon = IMG_Load(filename.c_str());
-  SDL_WM_SetIcon( icon, NULL );
+  SDL_WM_SetIcon(icon, NULL);
 }
 
 void Video::InitSDL()
