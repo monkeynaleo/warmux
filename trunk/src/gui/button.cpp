@@ -26,7 +26,7 @@
 #include "tool/resource_manager.h"
 
 Button::Button(const Profile * res_profile,
-               const std::string & resource_id, 
+               const std::string & resource_id,
                bool _img_scale):
   img_scale(_img_scale),
   image(GetResourceManager().LoadSprite(res_profile, resource_id))
@@ -36,8 +36,8 @@ Button::Button(const Profile * res_profile,
 }
 
 Button::Button(Profile * profile,
-               const xmlNode * baseListBoxNode) :
-  Widget(profile, baseListBoxNode),
+               const xmlNode * buttonNode) :
+  Widget(profile, buttonNode),
   img_scale(true),
   image(NULL)
 {
