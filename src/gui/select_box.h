@@ -22,6 +22,7 @@
 #ifndef SELECT_BOX
 #define SELECT_BOX
 
+#include "gui/label.h"
 #include "gui/scroll_box.h"
 
 class SelectBox : public ScrollBox
@@ -54,6 +55,7 @@ public:
   int MouseIsOnWhichItem(const Point2i & mousePosition) const;
   Widget* GetSelectedWidget() const { return (selected_item==-1) ? NULL : m_items[selected_item]; };
   int GetSelectedItem() const { return selected_item; };
+  bool IsItemSelected() const { return selected_item != -1; }
   int Size() { return m_items.size(); }
 
   void SetSelectedItemColor(const Color& color) { selected_item_color = color; };
@@ -69,7 +71,7 @@ public:
 
 class ItemBox : public SelectBox
 {
-  std::vector<const char*> m_values;
+  std::vector<const void*> m_values;
 public:
   ItemBox(const Point2i& size, bool always = false) : SelectBox(size, always) { };
   void AddWidget(Widget* /*w*/)
@@ -77,12 +79,18 @@ public:
     fprintf(stderr, "ItemBox::AddWidget called\n");
     exit(1);
   }
-  void AddItem(bool select, Widget* w, const char* value);
+  void AddItem(bool select, Widget* w, const void* value);
+  void AddLabelItem(bool selected,
+                    const std::string & label,
+                    const void* value,
+                    Font::font_size_t fsize = Font::FONT_SMALL,
+                    Font::font_style_t fstyle = Font::FONT_BOLD,
+                    const Color & color = white_color);
   void RemoveSelected();
   void Empty() { m_values.clear(); SelectBox::Empty(); }
   void Select(uint index);
 
-  const char* GetSelectedValue() const;
+  const void* GetSelectedValue() const;
 };
 
 #endif //SELECT_BOX
