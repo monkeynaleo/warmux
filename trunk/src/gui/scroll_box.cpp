@@ -33,7 +33,8 @@ ScrollBox::ScrollBox(const Point2i & _size)
   : WidgetList(_size)
   , m_up(NULL)
   , m_down(NULL)
-  , scrolling(false)
+  , start_scroll_y(-1)
+  , start_offset(0)
   , moving(false)
   , offset(0)
 {
@@ -42,10 +43,6 @@ ScrollBox::ScrollBox(const Point2i & _size)
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
   GetResourceManager().UnLoadXMLProfile(res);
-
-  // Make them initially not visible: Pack() will determine of they are
-  m_up->SetVisible(false);
-  m_down->SetVisible(false);
 
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(defaultListColor1);
@@ -67,8 +64,8 @@ ScrollBox::~ScrollBox()
 
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
-  scrolling = false;
-  moving    = false;
+  start_offset = 0;
+  moving = false;
 
   if (!vbox->GetFirstWidget()) {
     return NULL;
@@ -107,9 +104,11 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 
       Pack();
       return m_up;
-    } else {
+    } else if (is_click) {
+      if (start_scroll_y == mousePosition.y)
+        return this;
       Rectanglei scroll_track = GetScrollTrack();
-      if (scroll_track.Contains(mousePosition) && is_click && !scrolling) {
+      if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
         offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
                / scroll_track.GetSizeY();
@@ -130,7 +129,14 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 
   if (HasScrollBar()) {
     if (GetScrollThumb().Contains(mousePosition) && Mouse::IS_CLICK_BUTTON(button)) {
-      scrolling = true;
+      start_scroll_y = mousePosition.y;
+      if (!offset) {
+        // Not yet set, derive from mouse position
+        Rectanglei scroll_track = GetScrollTrack();
+        offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
+               / scroll_track.GetSizeY();
+      }
+      start_offset = offset;
     }
 
     if (!moving && (m_down->Contains(mousePosition) || m_up->Contains(mousePosition))) {
@@ -145,44 +151,49 @@ void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & /*lastMousePosition*/)
 {
   if (!Contains(mousePosition)) {
-    scrolling = false;
+    start_offset = 0;
     moving = false;
     return;
   }
 
   //printf("__Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
-  if (moving && HasScrollBar()) {
-    // Does not work because called only once, waiting for
-    // new events before reentering => we should try to
-    // generate activity (fake event?) ?
-    if (m_down->Contains(mousePosition)) {
-      // bottom button
-      offset += SCROLL_SPEED;
-      if (offset > GetMaxOffset())
-        offset = GetMaxOffset();
-      Pack();
-      return;
-    } else if (m_up->Contains(mousePosition)) {
-      // top button
-      offset -= SCROLL_SPEED;
-      if (offset < 0)
-        offset = 0;
-      Pack();
+  if (HasScrollBar()) {
+    if (moving) {
+      // Does not work because called only once, waiting for
+      // new events before reentering => we should try to
+      // generate activity (fake event?) ?
+      if (m_down->Contains(mousePosition)) {
+        // bottom button
+        offset += SCROLL_SPEED;
+        if (offset > GetMaxOffset())
+          offset = GetMaxOffset();
+        Pack();
+        return;
+      } else if (m_up->Contains(mousePosition)) {
+        // top button
+        offset -= SCROLL_SPEED;
+        if (offset < 0)
+          offset = 0;
+        Pack();
+        return;
+      }
+      moving = false;
       return;
     }
-    moving = false;
-    return;
-  }
 
-  // update position of items because of scrolling with scroll bar
-  if (scrolling && HasScrollBar()) {
-    Point2i track_pos = GetScrollTrackPos();
-    int     height    = GetTrackHeight();
-    if (mousePosition.y >= track_pos.GetY() &&
-        mousePosition.y <  track_pos.GetY() + height) {
-      offset = ((mousePosition.y - track_pos.GetY()) * GetMaxOffset())
-             / height;
+    // update position of items because of scrolling with scroll bar
+    if (start_offset) {
+      Point2i track_pos  = GetScrollTrackPos();
+      int     height     = GetTrackHeight();
+      int     max_offset = GetMaxOffset();
+      offset = start_offset +
+               ((mousePosition.y - start_scroll_y) * max_offset)/height;
+      if (offset < 0)
+        offset = 0;
+      if (offset > max_offset)
+        offset = max_offset;
       Pack();
+      return;
     }
   }
 }
@@ -247,15 +258,19 @@ void ScrollBox::Update(const Point2i &mousePosition,
   Widget::Update(mousePosition, lastMousePosition);
   need_redrawing = redraw;
 
+  bool has_scrollbar = HasScrollBar();
+  m_up->SetVisible(has_scrollbar);
+  m_down->SetVisible(has_scrollbar);
+
   //printf("Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
   WidgetList::Update(mousePosition, lastMousePosition);
 
-  if (HasScrollBar()) {
+  if (has_scrollbar) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
 
     Rectanglei thumb = GetScrollThumb();
-    GetMainWindow().BoxColor(thumb,
-                             (scrolling || thumb.Contains(mousePosition)) ? white_color : gray_color);
+    bool over = start_offset || thumb.Contains(mousePosition);
+    GetMainWindow().BoxColor(thumb, over ? white_color : gray_color);
   }
 }
 
@@ -263,21 +278,17 @@ void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
   vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
-  //vbox->Pack();
 
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // No that we known better, account for the scrollbar
   if (HasScrollBar()) {
+    vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
     vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
     m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
     m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
-    m_up->SetVisible(true);
-    m_down->SetVisible(true);
   } else {
     vbox->SetPosition(position.x + BORDER, position.y + BORDER);
-    m_up->SetVisible(false);
-    m_down->SetVisible(false);
   }
 
   WidgetList::Pack();

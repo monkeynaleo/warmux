@@ -38,7 +38,8 @@ protected:
   Button * m_down;
 
   // Scroll information
-  bool         scrolling;
+  int          start_scroll_y;
+  int          start_offset;
   bool         moving;
   int          offset;
   int          scrollbar_width;
