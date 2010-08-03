@@ -123,7 +123,7 @@ int SelectBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
 
 //--------------------------------------------------------------------------
 
-void ItemBox::AddItem(bool select, Widget* w, const char* value)
+void ItemBox::AddItem(bool select, Widget* w, const void* value)
 {
   // First put the value, because it is accessed by Select
   m_values.push_back(value);
@@ -145,7 +145,17 @@ void ItemBox::RemoveSelected()
   }
 }
 
-const char* ItemBox::GetSelectedValue() const
+const void* ItemBox::GetSelectedValue() const
 {
   return (selected_item==-1) ? "" : m_values[selected_item];
+}
+
+void ItemBox::AddLabelItem(bool selected,
+                           const std::string & label,
+                           const void* value,
+                           Font::font_size_t fsize,
+                           Font::font_style_t fstyle,
+                           const Color & color)
+{
+  AddItem(selected, new Label(label, 200, fsize, fstyle, color, false, true), value);
 }
