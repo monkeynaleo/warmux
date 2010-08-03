@@ -69,8 +69,8 @@ void TeamScrollBox::SetNbTeams(uint nb)
     AddWidget(teams[i]);
   count = nb;
 
+  //printf("Set nb=%u\n", nb);
   Pack();
-  NeedRedrawing();
 }
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
@@ -100,7 +100,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   Point2i box_size = use_list ? Point2i(box_w - 40, 120)
                               : Point2i((box_w*2) / MAX_NB_TEAMS - 10,
                                         _size.y/2-10);
-  printf("Size: %ix%i\n", _size.x, _size.y);
+  //printf("Size: %ix%i\n", _size.x, _size.y);
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
     std::string player_name = _("Player") ;

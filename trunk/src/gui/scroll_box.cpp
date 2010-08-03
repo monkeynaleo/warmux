@@ -150,6 +150,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     return;
   }
 
+  //printf("__Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
   if (moving && HasScrollBar()) {
     // Does not work because called only once, waiting for
     // new events before reentering => we should try to
@@ -182,7 +183,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
       offset = ((mousePosition.y - track_pos.GetY()) * GetMaxOffset())
              / height;
       Pack();
-   }
+    }
   }
 }
 
@@ -246,6 +247,7 @@ void ScrollBox::Update(const Point2i &mousePosition,
   Widget::Update(mousePosition, lastMousePosition);
   need_redrawing = redraw;
 
+  //printf("Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
   WidgetList::Update(mousePosition, lastMousePosition);
 
   if (HasScrollBar()) {
@@ -262,6 +264,8 @@ void ScrollBox::Pack()
   // Make a first guess about the box properties
   vbox->SetSizeX(size.x -2*BORDER);
   vbox->Pack();
+
+  //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // No that we known better, account for the scrollbar
   if (HasScrollBar()) {
