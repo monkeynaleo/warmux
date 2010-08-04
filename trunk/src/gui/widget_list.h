@@ -61,6 +61,7 @@ public:
   // to add a widget
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
+  virtual size_t WidgetCount() const { return widget_list.size(); }
   virtual void Empty() { widget_list.clear(); }
   virtual void Clear();
 
