@@ -60,58 +60,67 @@ static const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 
 class ResultBox : public HBox
 {
-  void SetWidgets(uint size, const std::string& type, const char* buffer, const Character* player)
+  Label  *category;
+  Label  *character;
+  Label  *score;
+  Widget *img;
+  std::string score_str;
+
+  void SetWidgets(const std::string& type, const char* buffer, const Character* player)
   {
     margin = DEF_BORDER;
     border = BorderSize;
-    size -= 4*DEF_BORDER + 40;
 
     Font::font_size_t font = Font::FONT_SMALL;
 
-    AddWidget(new Label(type, (size*TypeW)/TotalW, font, Font::FONT_BOLD));
+    category = new Label(type, W_UNDEF, font, Font::FONT_BOLD);
+    AddWidget(category);
+    character = new Label((player) ? player->GetName() : _("Nobody!"),
+                          W_UNDEF, font, Font::FONT_BOLD);
+    AddWidget(character);
 
-    AddWidget(new Label((player) ? player->GetName() : _("Nobody!"),
-                        (size*NameW)/TotalW, font, Font::FONT_BOLD));
+    score_str = buffer;
+    score = new Label(score_str, 30, font, Font::FONT_BOLD);
+    AddWidget(score);
 
-    std::string score_str(buffer);
-    AddWidget(new Label(score_str, (size*ScoreW)/TotalW, font, Font::FONT_BOLD));
-
-    if (player)
-    {
+    if (player) {
       PictureWidget *team_picture = new PictureWidget(DefSize);
       team_picture->SetSurface(player->GetTeam().GetFlag());
       AddWidget(team_picture);
-    }
-    else
-    {
-      AddWidget(new NullWidget(DefSize));
+      img = team_picture;
+    } else {
+      img = new NullWidget(DefSize);
+      AddWidget(img);
     }
   }
-public:
-  // Label widthes and font sizes should be inferred from the resolution
-  static const uint TypeW  = 180;
-  static const uint NameW  = 160;
-  static const uint ScoreW = 50;
-  static const uint TotalW = TypeW + NameW + ScoreW;
 
+public:
   ResultBox(uint size, const std::string& type)
-    : HBox(W_UNDEF, false, false)
+    : HBox(size, false, false)
   {
-    SetWidgets(size, type, "?", NULL);
+    SetWidgets(type, "?", NULL);
   }
   ResultBox(uint size, const std::string& type, uint score, const Character* player)
-    : HBox(W_UNDEF, false, false)
+    : HBox(size, false, false)
   {
     char buffer[16];
     snprintf(buffer, 16, "%i", score);
-    SetWidgets(size, type, buffer, player);
+    SetWidgets(type, buffer, player);
   }
   ResultBox(uint size, const std::string& type, float score, const Character* player)
-    : HBox(W_UNDEF, false, false)
+    : HBox(size, false, false)
   {
     char buffer[16];
     snprintf(buffer, 16, "%.1f", score);
-    SetWidgets(size, type, buffer, player);
+    SetWidgets(type, buffer, player);
+  }
+  void Pack()
+  {
+    int width = size.x - (4*margin + img->GetSizeX() + score->GetSizeX());
+    category->SetSizeX(width/2);
+    character->SetSizeX(width/2);
+
+    HBox::Pack();
   }
 };
 
@@ -261,8 +270,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 
   ++it;
 
-  while (it != end)
-  {
+  while (it != end) {
     int ex = x+int((*it)->GetDuration()*duration_scale),
         ey = y-int((*it)->GetValue()*energy_scale);
 
@@ -278,8 +286,7 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
 
   // Missing point
   --it;
-  if ((*it)->GetDuration() < max_duration)
-  {
+  if ((*it)->GetDuration() < max_duration) {
     int ex = x+int(max_duration*duration_scale);
     MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
@@ -370,7 +377,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // And the winner is :
   if (first_team) {
-    JukeBox::GetInstance()->Play("default","victory");
+    JukeBox::GetInstance()->Play("default", "victory");
 
     winner_box = new VBox(240, true);
     winner_box->AddWidget(new Label(_("Winner"), 240, Font::FONT_BIG, Font::FONT_BOLD,
