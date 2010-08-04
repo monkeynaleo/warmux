@@ -94,6 +94,7 @@ CreditsMenu::CreditsMenu()  :
 
   widgets.AddWidget(lbox_authors);
   widgets.Pack();
+  widgets.SetFocusOn(lbox_authors);
 }
 
 CreditsMenu::~CreditsMenu()
