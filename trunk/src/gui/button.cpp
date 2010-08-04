@@ -93,9 +93,11 @@ bool Button::LoadXMLConfiguration()
 
 void Button::Draw(const Point2i & mousePosition) const
 {
+  if (!IsVisible())
+    return;
   Surface& surf = GetMainWindow();
 
-  uint frame = (IsHighlighted() || Contains(mousePosition));
+  uint frame = (IsHighlighted() || Rectanglei::Contains(mousePosition));
 
   // Check that there are enough frames in the image...
   if (image->GetFrameCount() <= frame) {
