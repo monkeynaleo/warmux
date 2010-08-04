@@ -383,6 +383,8 @@ void Interface::DrawMapPreview()
     GenerateStyledBox(*minimap);
   }
 
+  Rectanglei clip = rect_preview;
+  SwapWindowClip(clip);
   window.Blit(*minimap, offset);
 
   Point2i coord;
@@ -413,58 +415,13 @@ void Interface::DrawMapPreview()
     }
   }
 
-  Point2i cameraTopLeftCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()) + offset;
-  Point2i cameraBottomRightCorner = GetWorld().ground.PreviewCoordinates(Camera::GetInstance()->GetPosition()+Camera::GetInstance()->GetSize()) + offset;
+  const Camera* cam = Camera::GetConstInstance();
+  Point2i TopLeft = GetWorld().ground.PreviewCoordinates(cam->GetPosition());
+  Point2i BottomR = GetWorld().ground.PreviewCoordinates(cam->GetPosition()+cam->GetSize());
 
-  bool line_on_top = true;
-  bool line_on_bottom = true;
-  bool line_on_right = true;
-  bool line_on_left = true;
-
-  if (cameraTopLeftCorner.y < offset.y) {
-    cameraTopLeftCorner.y = offset.y;
-    line_on_top = false;
-  }
-
-  if (cameraTopLeftCorner.x < offset.x) {
-    cameraTopLeftCorner.x = offset.x;
-    line_on_left = false;
-  }
-
-  if (cameraBottomRightCorner.y >  offset.y + GetWorld().ground.GetPreviewSize().y) {
-    cameraBottomRightCorner.y = offset.y + GetWorld().ground.GetPreviewSize().y;
-    line_on_bottom = false;
-  }
-
-  if (cameraBottomRightCorner.x > offset.x + GetWorld().ground.GetPreviewSize().x) {
-    cameraBottomRightCorner.x = offset.x + GetWorld().ground.GetPreviewSize().x;
-    line_on_right = false;
-  }
-
-  if (line_on_top) {
-    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
-                              cameraTopLeftCorner.y, cameraTopLeftCorner.y,
-                              m_camera_preview_color);
-  }
-
-  if (line_on_right) {
-    GetMainWindow().LineColor(cameraBottomRightCorner.x, cameraBottomRightCorner.x,
-                              cameraTopLeftCorner.y, cameraBottomRightCorner.y,
-                              m_camera_preview_color);
-  }
-
-  if (line_on_bottom) {
-    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraBottomRightCorner.x,
-                              cameraBottomRightCorner.y,cameraBottomRightCorner.y,
-                              m_camera_preview_color);
-  }
-
-  if (line_on_left) {
-    GetMainWindow().LineColor(cameraTopLeftCorner.x, cameraTopLeftCorner.x,
-                              cameraTopLeftCorner.y, cameraBottomRightCorner.y,
-                              m_camera_preview_color);
-  }
-
+  GetMainWindow().RectangleColor(Rectanglei(TopLeft + offset, BottomR-TopLeft),
+                                 m_camera_preview_color);
+  SwapWindowClip(clip);
 
   GetWorld().ToRedrawOnScreen(rect_preview);
 }
