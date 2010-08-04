@@ -112,7 +112,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       Rectanglei scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
-        offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
+        offset = ((mousePosition.y - scroll_track.GetPositionY()) * size.y+GetMaxOffset())
                / scroll_track.GetSizeY();
         Pack();
         return this;
@@ -136,7 +136,7 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
       if (!offset) {
         // Not yet set, derive from mouse position
         Rectanglei scroll_track = GetScrollTrack();
-        offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
+        offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset()))
                / scroll_track.GetSizeY();
       }
       start_drag_offset = offset;
@@ -153,12 +153,6 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & /*lastMousePosition*/)
 {
-  if (!Contains(mousePosition)) {
-    start_drag_offset = NO_DRAG;
-    moving = false;
-    return;
-  }
-
   //printf("__Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
   if (HasScrollBar()) {
     if (moving) {
@@ -190,7 +184,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
       int     height     = GetTrackHeight();
       int     max_offset = GetMaxOffset();
       offset = start_drag_offset +
-               ((mousePosition.y - start_drag_y) * max_offset)/height;
+               ((mousePosition.y - start_drag_y) * (size.y+max_offset))/height;
       if (offset < 0)
         offset = 0;
       if (offset > max_offset)
@@ -240,12 +234,12 @@ Rectanglei ScrollBox::GetScrollThumb() const
 
 int ScrollBox::GetMaxOffset() const
 {
-  return (vbox) ? vbox->GetSizeY() - size.y : -1;
+  return vbox->GetSizeY() - size.y;
 }
 
 int ScrollBox::GetTrackHeight() const
 {
-  return size.y - 2*(m_up->GetSizeY()+BORDER+1);
+  return size.y - 2*(m_up->GetSizeY()+BORDER);
 }
 
 void ScrollBox::Empty()
