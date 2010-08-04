@@ -43,6 +43,7 @@ HelpMenu::HelpMenu()
 
   img_keyboard->cache.EnableLastFrameCache();
   GetResourceManager().UnLoadXMLProfile(res);
+  widgets.Pack();
 }
 
 HelpMenu::~HelpMenu()
@@ -118,6 +119,7 @@ void HelpMenu::DrawBackground()
 
 void HelpMenu::Draw(const Point2i& /*mousePosition*/)
 {
+  /* not needed to draw, Update will do */
 }
 
 void HelpMenu::OnClick(const Point2i &mousePosition, int button)
