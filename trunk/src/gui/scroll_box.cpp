@@ -19,7 +19,6 @@
  * Vertical Scroll Box
  *****************************************************************************/
 
-//#include "graphic/text.h"
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/vertical_box.h"
@@ -286,6 +285,7 @@ void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
   vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
+  vbox->Pack();
 
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
@@ -295,7 +295,8 @@ void ScrollBox::Pack()
   } else {
     vbox->SetPosition(position.x + BORDER, position.y + BORDER);
   }
-  m_up->SetPosition(GetScrollTrack().GetPositionX(), position.y + BORDER);
+  m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - BORDER,
+                    position.y + BORDER);
   m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
 
   WidgetList::Pack();
