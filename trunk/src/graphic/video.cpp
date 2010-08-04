@@ -156,7 +156,7 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
   }
 
 #ifdef ANDROID
-  window.SetSurface(SDL_SetVideoMode(width, height, 16, flags));
+  window.SetSurface(SDL_SetVideoMode(width, height, 16, flags&~SDL_DOUBLEBUF));
 #else
   window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
 #endif
