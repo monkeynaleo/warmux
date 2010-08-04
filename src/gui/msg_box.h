@@ -24,30 +24,20 @@
 
 #include <WORMUX_base.h>
 #include "graphic/font.h"
-#include <WORMUX_rectangle.h>
-#include "widget.h"
-#include <list>
+#include "scroll_box.h"
 
-class Text;
-
-class MsgBox : public Widget
+class MsgBox : public ScrollBox
 {
   Font::font_size_t font_size;
   Font::font_style_t font_style;
-  std::list<Text*> messages;
-  void Flush();
+  uint  max_history;
 
- public:
-
-  MsgBox(const Point2i& size, Font::font_size_t font_size, Font::font_style_t font_style);
+public:
+  MsgBox(const Point2i& size, Font::font_size_t font_size,
+         Font::font_style_t font_style, uint max_lines = 25);
   virtual ~MsgBox();
 
   void NewMessage(const std::string& msg, const Color& color = white_color);
-
-  void Clear();
-
-  virtual void Draw (const Point2i &mousePosition) const;
-  virtual void Pack();
 };
 
 #endif

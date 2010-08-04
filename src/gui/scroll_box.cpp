@@ -205,6 +205,19 @@ void ScrollBox::RemoveWidget(Widget* w)
   vbox->RemoveWidget(w);
 }
 
+void ScrollBox::RemoveFirstWidget()
+{
+  Widget *w = vbox->GetFirstWidget();
+  if (w) {
+    RemoveWidget(w);
+  }
+}
+
+size_t ScrollBox::WidgetCount() const
+{
+  return vbox->WidgetCount();
+}
+
 Point2i ScrollBox::GetScrollTrackPos() const
 {
   return Point2i(position.x + size.x - BORDER - scrollbar_width,

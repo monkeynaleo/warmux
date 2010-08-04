@@ -20,95 +20,42 @@
  *****************************************************************************/
 
 #include "gui/msg_box.h"
-#include "gui/widget.h"
-#include "graphic/text.h"
-#include "graphic/video.h"
-#include "include/app.h"
+#include "gui/scroll_box.h"
+#include "gui/label.h"
 
-const uint vmargin = 5;
-const uint hmargin = 5;
-
-MsgBox::MsgBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Widget(size), font_size(fsize), font_style(fstyle)
+MsgBox::MsgBox(const Point2i& size, Font::font_size_t fsize,
+               Font::font_style_t fstyle, uint max_lines)
+  : ScrollBox(size)
+  , font_size(fsize)
+  , font_style(fstyle)
+  , max_history(max_lines)
 {
+  Widget::SetBorder(defaultOptionColorRect, 2);
+  Widget::SetBackgroundColor(defaultOptionColorBox);
 }
 
 MsgBox::~MsgBox()
 {
-  Clear();
-}
-
-void MsgBox::Clear()
-{
-  for (std::list<Text*>::iterator t=messages.begin(); t != messages.end(); t++)
-    delete *t;
-  messages.clear();
-}
-
-void MsgBox::Flush()
-{
-  std::list<Text *>::reverse_iterator it ;
-  Text *last_visible_msg = NULL;
-
-  int y = vmargin;
-
-  /* find the last item that can be displayed */
-  for (it = messages.rbegin(); it != messages.rend(); ++it)
-    {
-      y += (*it)->GetHeight() + vmargin;
-      if (y > GetSizeY())
-        break;
-      last_visible_msg = *it;
-    }
-
-  /* list doesn't need fflush as it doesn't fullfill the textbox */
-  if (it == messages.rend())
-    return;
-
-  while (messages.front() != last_visible_msg && !messages.empty())
-    {
-      delete (messages.front());
-      messages.pop_front();
-    }
 }
 
 void MsgBox::NewMessage(const std::string &msg, const Color& color)
 {
-  messages.push_back(new Text(msg, color, font_size, font_style));
-  messages.back()->SetMaxWidth(GetSizeX() - (2*hmargin));
+  bool del;
 
-  // Remove old messages if needed
-  Flush();
-
-  NeedRedrawing();
-}
-
-void MsgBox::Draw(const Point2i &/*mousePosition*/) const
-{
-  Surface& surf = GetMainWindow();
-
-  // Draw the border
-  surf.BoxColor(*this, defaultOptionColorBox);
-  surf.RectangleColor(*this, defaultOptionColorRect,2);
-
-  // Draw the messages
-  std::list<Text*>::const_iterator it;
-  int x = GetPositionX()+hmargin;
-  int y = GetPositionY()+vmargin;
-  for (it = messages.begin(); it != messages.end(); it++) {
-    (*it)->DrawTopLeft(Point2i(x,y));
-    y += (*it)->GetHeight() + vmargin;
+  if (WidgetCount() >= max_history+1) {
+    // Remove first lines
+    RemoveFirstWidget();
+    del = true;
   }
-}
+  int max = GetMaxOffset();
+  Label *lbl = new Label(msg, size.x-10, font_size, font_style, color);
 
-void MsgBox::Pack()
-{
-  // render the messages with the correct width
-  std::list<Text*>::iterator it;
-  for (it = messages.begin(); it != messages.end(); it++) {
-    (*it)->SetMaxWidth(size.x - (2*hmargin));
+  AddWidget(lbl);
+  if (!del) {
+    max += lbl->GetSizeY();
   }
+  if (max > 0)
+    offset = max;
 
-  // Remove old messages if needed
-  Flush();
+  Pack();
 }
