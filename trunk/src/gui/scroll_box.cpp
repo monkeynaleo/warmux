@@ -316,9 +316,7 @@ void ScrollBox::Pack()
 
 bool ScrollBox::SendKey(const SDL_keysym & key)
 {
-  printf("Got %i\n", key.sym);
   if (!WidgetList::SendKey(key)) {
-    printf("Handling %i\n", key.sym);
     switch(key.sym)
     {
     case SDLK_PAGEUP:
