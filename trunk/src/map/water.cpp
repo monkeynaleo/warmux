@@ -293,7 +293,7 @@ int Water::GetHeight(int x) const
 
 uint Water::GetSelfHeight() const
 {
-  return water_height+(pattern_height/2);
+  return water_height + GO_UP_STEP;
 }
 
 const Color* Water::GetColor() const
