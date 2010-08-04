@@ -19,6 +19,7 @@
  * Vertical Scroll Box
  *****************************************************************************/
 
+#include <SDL.h>
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/vertical_box.h"
@@ -311,4 +312,31 @@ void ScrollBox::Pack()
   m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
 
   WidgetList::Pack();
+}
+
+bool ScrollBox::SendKey(const SDL_keysym & key)
+{
+  printf("Got %i\n", key.sym);
+  if (!WidgetList::SendKey(key)) {
+    printf("Handling %i\n", key.sym);
+    switch(key.sym)
+    {
+    case SDLK_PAGEUP:
+      offset -= size.y;
+      break;
+    case SDLK_PAGEDOWN:
+      offset += size.y;
+      break;
+    default:
+      return false;
+    }
+
+    if (offset < 0)
+      offset = 0;
+    if (offset > GetMaxOffset())
+      offset = GetMaxOffset();
+
+    Pack();
+  }
+  return true;
 }
