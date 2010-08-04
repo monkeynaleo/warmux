@@ -235,19 +235,23 @@ void Interface::DrawWeaponInfo() const
   std::string tmp;
 
   // Draw weapon name
+  int offset = (game_menu.GetWidth() - clock_background.GetWidth()) / 2;
   t_weapon_name->SetText(weapon->GetName());
-  Point2i weapon_name_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_name->GetWidth() - MARGIN, 0);
+  Point2i weapon_name_offset(offset - t_weapon_name->GetWidth() - MARGIN, 0);
   t_weapon_name->DrawTopLeft(bottom_bar_pos + weapon_name_offset);
 
   // Display number of ammo
   t_weapon_stock->SetText((nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : _("Stock:") + Format("%i", nbr_munition)));
-  Point2i weapon_stock_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_stock->GetWidth() - MARGIN, t_weapon_name->GetHeight());
+  Point2i weapon_stock_offset(offset - t_weapon_stock->GetWidth() - MARGIN,
+                              t_weapon_name->GetHeight());
   t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
 
   // Draw weapon icon
-  weapon->GetIcon().Scale(icon_scale_factor, 0.75);
-  Point2i weapon_icon_offset = game_menu.GetSize() / 2 - weapon->GetIcon().GetSize() / 2 + Point2i(- clock_background.GetWidth(), MARGIN);
-  weapon->GetIcon().DrawXY(bottom_bar_pos + weapon_icon_offset);
+  Sprite& icon = weapon->GetIcon();
+  icon.Scale(icon_scale_factor, 0.75);
+  Point2i weapon_icon_offset = (game_menu.GetSize() - icon.GetSize()) / 2
+                             + Point2i(- clock_background.GetWidth(), MARGIN);
+  icon.DrawXY(bottom_bar_pos + weapon_icon_offset);
 }
 
 void Interface::DrawTimeInfo() const
