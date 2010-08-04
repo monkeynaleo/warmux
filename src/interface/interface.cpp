@@ -370,13 +370,13 @@ void Interface::DrawMapPreview()
       const Color * color = GetWorld().water.GetColor();
       ASSERT(color);
       Color water_color = *color;
-      water_color.SetColor(water_color.GetRed(),water_color.GetGreen(),water_color.GetBlue(),200) ;
+      water_color.SetAlpha(200);
 
       // Scale water height according to preview size
-      uint h = (GetWorld().water.GetSelfHeight() * rect_preview.GetSizeY() + (GetWorld().GetSize().GetY()/2))
-                  / GetWorld().GetSize().GetY();
+      int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
+      int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
-      Rectanglei water(0, rect_preview.GetSizeY()-h, rect_preview.GetSizeX(), h);
+      Rectanglei water(0, h, rect_preview.GetSizeX(), rect_preview.GetSizeY()-h);
 
       Surface water_surf(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
 
