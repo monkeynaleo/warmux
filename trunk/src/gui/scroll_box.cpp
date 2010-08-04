@@ -27,13 +27,14 @@
 
 #define SCROLL_SPEED  6
 #define BORDER        2
+#define NO_DRAG      -1
 
 ScrollBox::ScrollBox(const Point2i & _size)
   : WidgetList(_size)
   , m_up(NULL)
   , m_down(NULL)
-  , start_scroll_y(-1)
-  , start_offset(0)
+  , start_drag_y(-1)
+  , start_drag_offset(NO_DRAG)
   , moving(false)
   , offset(0)
 {
@@ -63,7 +64,8 @@ ScrollBox::~ScrollBox()
 
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
-  start_offset = 0;
+  bool was_drag = start_drag_offset != NO_DRAG;
+  start_drag_offset = NO_DRAG;
   moving = false;
 
   if (!vbox->GetFirstWidget()) {
@@ -104,7 +106,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       Pack();
       return m_up;
     } else if (is_click) {
-      if (start_scroll_y == mousePosition.y)
+      // Was it released after a drag operation?
+      if (was_drag) // or start_drag_y != mousePosition.y
         return this;
       Rectanglei scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
@@ -127,15 +130,16 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
   }
 
   if (HasScrollBar()) {
+    // If the position is inside the scrollthumb, it really is a drag operation
     if (GetScrollThumb().Contains(mousePosition) && Mouse::IS_CLICK_BUTTON(button)) {
-      start_scroll_y = mousePosition.y;
+      start_drag_y = mousePosition.y;
       if (!offset) {
         // Not yet set, derive from mouse position
         Rectanglei scroll_track = GetScrollTrack();
         offset = ((mousePosition.y - scroll_track.GetPositionY()) * GetMaxOffset())
                / scroll_track.GetSizeY();
       }
-      start_offset = offset;
+      start_drag_offset = offset;
     }
 
     if (!moving && (m_down->Contains(mousePosition) || m_up->Contains(mousePosition))) {
@@ -150,7 +154,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & /*lastMousePosition*/)
 {
   if (!Contains(mousePosition)) {
-    start_offset = 0;
+    start_drag_offset = NO_DRAG;
     moving = false;
     return;
   }
@@ -181,12 +185,12 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     }
 
     // update position of items because of scrolling with scroll bar
-    if (start_offset) {
+    if (start_drag_offset>0) {
       Point2i track_pos  = GetScrollTrackPos();
       int     height     = GetTrackHeight();
       int     max_offset = GetMaxOffset();
-      offset = start_offset +
-               ((mousePosition.y - start_scroll_y) * max_offset)/height;
+      offset = start_drag_offset +
+               ((mousePosition.y - start_drag_y) * max_offset)/height;
       if (offset < 0)
         offset = 0;
       if (offset > max_offset)
@@ -276,7 +280,7 @@ void ScrollBox::Update(const Point2i &mousePosition,
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
 
     Rectanglei thumb = GetScrollThumb();
-    bool over = start_offset || thumb.Contains(mousePosition);
+    bool over = start_drag_offset>0 || thumb.Contains(mousePosition);
     GetMainWindow().BoxColor(thumb, over ? white_color : gray_color);
   }
 }
