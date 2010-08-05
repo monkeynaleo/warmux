@@ -48,7 +48,7 @@ HelpMenu::HelpMenu()
 
   m_keyboard = new PictureWidget(Point2i(max_w,
                                          tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                                 "help/shortkeys", true);
+                                 "help/shortkeys", PictureWidget::FIT_SCALING);
 
   tabs->AddNewTab("unused", _("Keyboard"), m_keyboard);
   widgets.AddWidget(tabs);

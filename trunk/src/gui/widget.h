@@ -46,7 +46,7 @@ private:
   uint border_size;
   Color background_color;
   Color highlight_bg_color;
-   
+
   Widget(const Widget&);
   const Widget& operator=(const Widget&);
 
@@ -65,8 +65,8 @@ protected:
   virtual void __Update(const Point2i &/* mousePosition */,
                         const Point2i &/* lastMousePosition */) {};
 
-  void RedrawBackground(const Rectanglei & rect);
-  
+  void RedrawBackground(const Rectanglei& rect);
+
   void ParseXMLMisc(void);
   void ParseXMLBorder(void);
   void ParseXMLBackground(void);

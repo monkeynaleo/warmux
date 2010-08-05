@@ -197,7 +197,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     return;
   }
 
-  widget->SetSurface(basic->ReadPreview(), true, true);
+  widget->SetSurface(basic->ReadPreview(), PictureWidget::FIT_SCALING, true);
 
   if (display_only && !selected)
     widget->Disable();
@@ -213,7 +213,7 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
 
 void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
 {
-  widget->SetSurface(random_map_preview, true, true);
+  widget->SetSurface(random_map_preview, PictureWidget::FIT_SCALING, true);
   if ((display_only && !selected))
     widget->Disable();
   else
