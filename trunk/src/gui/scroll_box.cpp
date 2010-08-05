@@ -113,7 +113,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       Rectanglei scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
-        offset = ((mousePosition.y - scroll_track.GetPositionY()) * size.y+GetMaxOffset())
+        offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset()))
                / scroll_track.GetSizeY();
         Pack();
         return this;
@@ -141,6 +141,8 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
                / scroll_track.GetSizeY();
       }
       start_drag_offset = offset;
+    } else {
+      start_drag_offset = NO_DRAG;
     }
 
     if (!moving && (m_down->Contains(mousePosition) || m_up->Contains(mousePosition))) {
