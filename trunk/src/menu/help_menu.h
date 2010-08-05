@@ -25,11 +25,11 @@
 #include "menu/menu.h"
 
 // Forward declarations
-class PictureWidget;
+class FigureWidget;
 
 class HelpMenu : public Menu
 {
-  PictureWidget *m_keyboard;
+  FigureWidget *m_keyboard;
   bool signal_ok();
   bool signal_cancel();
 
