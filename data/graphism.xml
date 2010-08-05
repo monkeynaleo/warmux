@@ -217,7 +217,7 @@
   <color name="background_color" r="255" g="255" b="255" a="128" />
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapons_interface_size" x="290" y="235" />
-  <point name="tools_interface_size" x="290" y="100" />
+  <point name="tools_interface_size" x="100" y="235" />
   <surface name="clock_background" file="interface/not_skin/clock_background.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
   <sprite name="clock_normal">
