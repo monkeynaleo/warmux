@@ -36,7 +36,6 @@ ScrollBox::ScrollBox(const Point2i & _size)
   , m_down(NULL)
   , start_drag_y(-1)
   , start_drag_offset(NO_DRAG)
-  , moving(false)
   , offset(0)
 {
   // Load buttons
@@ -67,7 +66,6 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   bool was_drag = start_drag_offset != NO_DRAG;
   start_drag_offset = NO_DRAG;
-  moving = false;
 
   if (!vbox->GetFirstWidget()) {
     return NULL;
@@ -144,10 +142,6 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
     } else {
       start_drag_offset = NO_DRAG;
     }
-
-    if (!moving && (m_down->Contains(mousePosition) || m_up->Contains(mousePosition))) {
-      moving = true;
-    }
   }
 
   return WidgetList::Click(mousePosition, button);
@@ -157,44 +151,19 @@ void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & /*lastMousePosition*/)
 {
   //printf("__Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
-  if (HasScrollBar()) {
-    if (moving) {
-      // Does not work because called only once, waiting for
-      // new events before reentering => we should try to
-      // generate activity (fake event?) ?
-      if (m_down->Contains(mousePosition)) {
-        // bottom button
-        offset += SCROLL_SPEED;
-        if (offset > GetMaxOffset())
-          offset = GetMaxOffset();
-        Pack();
-        return;
-      } else if (m_up->Contains(mousePosition)) {
-        // top button
-        offset -= SCROLL_SPEED;
-        if (offset < 0)
-          offset = 0;
-        Pack();
-        return;
-      }
-      moving = false;
-      return;
-    }
 
-    // update position of items because of scrolling with scroll bar
-    if (start_drag_offset>0) {
-      Point2i track_pos  = GetScrollTrackPos();
-      int     height     = GetTrackHeight();
-      int     max_offset = GetMaxOffset();
-      offset = start_drag_offset +
-               ((mousePosition.y - start_drag_y) * (size.y+max_offset))/height;
-      if (offset < 0)
-        offset = 0;
-      if (offset > max_offset)
-        offset = max_offset;
-      Pack();
-      return;
-    }
+  // update position of items because of scrolling with scroll bar
+  if (HasScrollBar() && start_drag_offset>0) {
+    Point2i track_pos  = GetScrollTrackPos();
+    int     height     = GetTrackHeight();
+    int     max_offset = GetMaxOffset();
+    offset = start_drag_offset +
+             ((mousePosition.y - start_drag_y) * (size.y+max_offset))/height;
+    if (offset < 0)
+      offset = 0;
+    if (offset > max_offset)
+      offset = max_offset;
+    Pack();
   }
 }
 

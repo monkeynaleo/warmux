@@ -42,7 +42,6 @@ protected:
   // Scroll information
   int          start_drag_y;
   int          start_drag_offset;
-  bool         moving;
   int          offset;
   int          scrollbar_width;
 
