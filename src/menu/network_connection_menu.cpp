@@ -53,7 +53,8 @@ public:
     , ip_address(ip)
   {
     if (pwd) {
-      AddWidget(new PictureWidget(Point2i(16, 16), "menu/password_lock", true));
+      AddWidget(new PictureWidget(Point2i(16, 16), "menu/password_lock",
+                                  PictureWidget::FIT_SCALING));
     } else {
       AddWidget(new NullWidget(Point2i(16, 16)));
     }

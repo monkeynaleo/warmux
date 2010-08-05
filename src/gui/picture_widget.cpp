@@ -25,8 +25,11 @@
 #include "graphic/video.h"
 #include "include/app.h"
 
-PictureWidget::PictureWidget (const Point2i & _size)
-  : disabled(false)
+PictureWidget::PictureWidget(const Point2i & _size)
+  : Widget(size, false)
+  , disabled(false)
+  , type(NO_SCALING)
+  , picture_size(0, 0)
   , spr(NULL)
 {
   size = _size;
@@ -34,22 +37,27 @@ PictureWidget::PictureWidget (const Point2i & _size)
 
 PictureWidget::PictureWidget(const Point2i & _size,
                              const std::string & resource_id,
-                             bool scale) :
-  disabled(false),
-  spr(NULL)
+                             ScalingType _type)
+  : Widget(size, false)
+  , disabled(false)
+  , type(_type)
+  , spr(NULL)
 {
   size = _size;
+  printf("Creating: %ix%i\n", size.x, size.y);
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  SetSurface(GetResourceManager().LoadImage(res, resource_id), scale, scale);
-  GetResourceManager().UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  SetSurface(GetResourceManager().LoadImage(res, resource_id),
+             type, type != NO_SCALING);
+  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 PictureWidget::PictureWidget(Profile * profile,
-                             const xmlNode * pictureNode) :
-  Widget(profile, pictureNode),
-  disabled(false),
-  spr(NULL)
+                             const xmlNode * pictureNode)
+  : Widget(profile, pictureNode)
+  , disabled(false)
+  , type(NO_SCALING)
+  , spr(NULL)
 {
 }
 
@@ -100,12 +108,36 @@ bool PictureWidget::LoadXMLConfiguration()
   bool activeAntialiasing = false;
   xmlFile->ReadBoolAttr(widgetNode, "antialiasing", activeAntialiasing);
 
-  SetSurface(surface, activeScale, activeAntialiasing);
+  SetSurface(surface, activeScale ? FIT_SCALING : NO_SCALING, activeAntialiasing);
   return true;
 }
 
+void PictureWidget::ApplyScaling(ScalingType t)
+{
+  if (spr) {
+    Point2d scale(Double(size.x) / picture_size.x,
+                  Double(size.y) / picture_size.y);
+
+    switch (t) {
+    case NO_SCALING: break;
+    case X_SCALING: spr->Scale(scale.x, 1.0); break;
+    case Y_SCALING: spr->Scale(1.0, scale.x); break;
+    case STRETCH_SCALING: spr->Scale(scale.x, scale.y); break;
+    case FIT_SCALING:
+    default:
+      {
+        Double zoom = std::min(scale.x, scale.y);
+        spr->Scale(zoom, zoom);
+        break;
+      }
+    }
+  }
+
+  type = t;
+}
+
 void PictureWidget::SetSurface(const Surface & s,
-                               bool enable_scaling,
+                               ScalingType type,
                                bool antialiasing)
 {
   NeedRedrawing();
@@ -114,13 +146,9 @@ void PictureWidget::SetSurface(const Surface & s,
     delete spr;
   }
 
+  picture_size = s.GetSize();
   spr = new Sprite(s, antialiasing);
-  if (enable_scaling) {
-    Double scale = std::min( Double(GetSizeY())/spr->GetHeight(),
-                             Double(GetSizeX())/spr->GetWidth() );
-
-    spr->Scale(scale, scale);
-  }
+  ApplyScaling(type);
 }
 
 void PictureWidget::SetNoSurface()
@@ -158,4 +186,9 @@ Point2i PictureWidget::GetPicturePosition() const
 Point2f PictureWidget::GetScale() const
 {
   return Point2f(spr->GetScaleX().tofloat(), spr->GetScaleY().tofloat());
+}
+
+void PictureWidget::Pack()
+{
+  ApplyScaling(type);
 }
