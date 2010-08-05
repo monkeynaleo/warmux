@@ -416,9 +416,14 @@ int Surface::RectangleColor(const Rectanglei &rect, const Color &color,
   return 1;
 }
 
-int Surface::VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color)
+int Surface::VlineColor(const uint &x, const uint &y1, const uint &y2, const Color &color)
 {
-  return vlineRGBA(surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+  return vlineRGBA(surface, x, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
+int Surface::HlineColor(const uint &x1, const uint &x2, const uint &y, const Color &color)
+{
+  return hlineRGBA(surface, x1, x2, y, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
 int Surface::LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color)

@@ -55,6 +55,8 @@ public:
 };
 
 #define CIRCULAR_TABS   0
+#define BORDER          2
+#define MARGIN          5
 
 MultiTabs::MultiTabs(const Point2i& size)
  : Widget(size)
@@ -64,14 +66,13 @@ MultiTabs::MultiTabs(const Point2i& size)
  , nb_visible_tabs(1)
  , tab_header_width(TAB_MIN_WIDTH)
 {
-  tab_size = Point2i(size.x, size.y - 32);
-
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
   prev_tab_bt = new Button(res, "menu/really_big_minus", false);
   next_tab_bt = new Button(res, "menu/really_big_plus", false);
+  tab_header_height = prev_tab_bt->GetSizeY() + 4;
 
-  Widget::SetBorder(defaultOptionColorRect, 2);
+  Widget::SetBorder(defaultOptionColorRect, BORDER);
   Widget::SetBackgroundColor(defaultOptionColorBox);
 
   GetResourceManager().UnLoadXMLProfile(res);
@@ -166,50 +167,27 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
   }
 
   for (uint i = first_tab; i < first_tab + nb_visible_tabs; i++) {
-
     // Draw the title
     uint pos_x = prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX()
-               + 5 + (i-first_tab)*tab_header_width;
+               + MARGIN + (i-first_tab)*tab_header_width;
 
-    if (i == current_tab) {
-      Text tab_title(tabs.at(i).GetTitle(), primary_red_color,
-                     Font::FONT_MEDIUM, Font::FONT_BOLD, true);
+    bool is_current = i == current_tab;
+    Text tab_title(tabs[i].GetTitle(), is_current ? primary_red_color : dark_gray_color,
+                   Font::FONT_MEDIUM, Font::FONT_BOLD, is_current);
 
-      tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
-    } else {
-      Text tab_title(tabs.at(i).GetTitle(), dark_gray_color,
-                     Font::FONT_MEDIUM, Font::FONT_BOLD, false);
-
-      tab_title.DrawCenterTop(Point2i(pos_x + tab_header_width/2, position.y + 3) + 5);
-    }
+    tab_title.DrawCenter(Point2i(pos_x + tab_header_width/2,
+                                 position.y + tab_header_height/2));
   }
 
   if (nb_visible_tabs > 1) {
+    uint end_y = position.y + tab_header_height - 2;
     uint current_tab_pos_x = prev_tab_bt->GetPositionX() + prev_tab_bt->GetSizeX()
-                           + 5 + (current_tab-first_tab)*tab_header_width;
+                           + MARGIN + (current_tab-first_tab)*tab_header_width;
 
-    GetMainWindow().LineColor(current_tab_pos_x,
-                              current_tab_pos_x,
-                              position.y +1,
-                              position.y + GetHeaderHeight() - 2,
-                              GetBorderColor());
-    GetMainWindow().LineColor(current_tab_pos_x + tab_header_width,
-                              current_tab_pos_x + tab_header_width,
-                              position.y +1,
-                              position.y + GetHeaderHeight() - 2,
-                              GetBorderColor());
-
-    GetMainWindow().LineColor(position.x,
-                              current_tab_pos_x,
-                              position.y + GetHeaderHeight() - 2,
-                              position.y + GetHeaderHeight() - 2,
-                              GetBorderColor());
-
-    GetMainWindow().LineColor(current_tab_pos_x + tab_header_width,
-                              position.x + size.x - 2,
-                              position.y + GetHeaderHeight() - 2,
-                              position.y + GetHeaderHeight() - 2,
-                              GetBorderColor());
+    GetMainWindow().VlineColor(current_tab_pos_x, position.y +1, end_y, GetBorderColor());
+    GetMainWindow().VlineColor(current_tab_pos_x + tab_header_width, position.y +1, end_y, GetBorderColor());
+    GetMainWindow().HlineColor(position.x, current_tab_pos_x, end_y, GetBorderColor());
+    GetMainWindow().HlineColor(current_tab_pos_x + tab_header_width, position.x + size.x - 2, end_y, GetBorderColor());
   }
 }
 
@@ -250,14 +228,13 @@ void MultiTabs::Update(const Point2i &mousePosition,
 void MultiTabs::Pack()
 {
   // Update buttons position
-  uint margin = 5;
-  prev_tab_bt->SetPosition(position.x + margin, position.y + 2);
-  next_tab_bt->SetPosition(position.x + size.x - margin - next_tab_bt->GetSizeX(),
+  prev_tab_bt->SetPosition(position.x + MARGIN, position.y + 2);
+  next_tab_bt->SetPosition(position.x + size.x - MARGIN - next_tab_bt->GetSizeX(),
                            position.y + 2);
 
   // Update tabs position
-  Point2i tab_pos(position.x + margin, position.y + GetHeaderHeight());
-  Point2i tab_size(size.x - 2*margin, size.y - GetHeaderHeight() - margin);
+  Point2i tab_pos(position.x + MARGIN, position.y + GetHeaderHeight());
+  Point2i tab_size(size.x - 2*MARGIN, size.y - GetHeaderHeight() - MARGIN);
 
   for (std::vector<Tab>::iterator it=tabs.begin(); it!=tabs.end(); it++) {
     (*it).box->SetPosition(tab_pos);
@@ -357,16 +334,4 @@ const std::string& MultiTabs::GetCurrentTabId() const
 {
   ASSERT(!tabs.empty());
   return tabs[current_tab].GetId();
-}
-
-uint MultiTabs::GetHeaderHeight() const
-{
-  uint header_h = prev_tab_bt->GetSizeY();
-  header_h += 5;
-  return header_h;
-}
-
-void MultiTabs::SetMaxVisibleTabs(uint max)
-{
-  max_visible_tabs = max;
 }
