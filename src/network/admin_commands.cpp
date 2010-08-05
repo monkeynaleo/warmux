@@ -62,7 +62,7 @@ static void UserCommand(const std::string& nick, UserCommandType type)
         msg = std::string(Format(_("%s kicked from game"), nick.c_str()));
         break;
       case USER_ADDRESS:
-        msg = std::string(Format(_("%s has address %s"), nick.c_str(), (*cpu)->GetAddress()));
+        msg = std::string(Format(_("%s has address %s"), nick.c_str(), (*cpu)->GetAddress().c_str()));
         break;
       default:
         msg = std::string(_("Unknown command of type %i"), type);
