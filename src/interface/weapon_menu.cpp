@@ -223,24 +223,26 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
   if (!new_item->CanBeUsedOnClosedMap() && !ActiveMap()->LoadedInfo()->IsOpened())
     return;
 
-  Point2d position;
+  Point2f pos;
   Weapon::category_t num_sort = new_item->Category();
-  Double factor = 1;
+  float factor = 1;
+  Polygon *menu;
+
   if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
     factor = LOW_RESOLUTION_FACTOR;
   if (num_sort < 6) {
-    position = weapons_menu->GetMin() + Point2d(30,25)*factor
-             + Point2d(nb_weapon_type[num_sort - 1], num_sort - 1)*int(45*factor);
-    WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
-    item->SetParent(this);
-    weapons_menu->AddItem(item);
+    menu = weapons_menu;
+    pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
+        +  Point2f(nb_weapon_type[num_sort - 1], num_sort - 1)*int(45*factor);
   } else {
-    position = tools_menu->GetMin() + Point2d(30,25)*factor
-             + Point2d(nb_weapon_type[num_sort - 1], num_sort - 6)*int(45*factor);
-    WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
-    item->SetParent(this);
-    tools_menu->AddItem(item);
+    menu = tools_menu;
+    pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
+        +  Point2f(num_sort - 6, nb_weapon_type[num_sort - 1])*int(45*factor);
   }
+
+  WeaponMenuItem * item = new WeaponMenuItem(new_item, pos);
+  item->SetParent(this);
+  menu->AddItem(item);
 
   nb_weapon_type[num_sort - 1]++;
 }
