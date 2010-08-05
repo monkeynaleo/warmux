@@ -84,6 +84,7 @@ public:
     KEY_NEXT_CHARACTER,
     KEY_MENU_OPTIONS_FROM_GAME,
     KEY_MINIMAP_FROM_GAME,
+    KEY_HELP,
     KEY_NONE
   } Key_t;
 

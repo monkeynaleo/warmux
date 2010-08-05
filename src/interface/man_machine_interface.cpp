@@ -206,6 +206,9 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     // Always available
     switch(key){
       // Managing interface
+    case KEY_HELP:
+      Game::GetInstance()->UserAsksForHelpMenu();
+      return;
     case KEY_QUIT:
     case KEY_PAUSE:
       Game::GetInstance()->UserAsksForMenu();
@@ -1008,6 +1011,7 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
   if(name == "move_camera_down") return KEY_MOVE_CAMERA_DOWN;
   if(name == "jump") return KEY_JUMP;
   if(name == "high_jump") return KEY_HIGH_JUMP;
+  if(name == "help") return KEY_HELP;
   if(name == "back_jump") return KEY_BACK_JUMP;
   if(name == "shoot") return KEY_SHOOT;
   if(name == "change_weapon") return KEY_CHANGE_WEAPON;
@@ -1061,6 +1065,7 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
   if(key == KEY_MOVE_CAMERA_DOWN) return "move_camera_down";
   if(key == KEY_JUMP) return "jump";
   if(key == KEY_HIGH_JUMP) return "high_jump";
+  if(key == KEY_HELP) return "help";
   if(key == KEY_BACK_JUMP) return "back_jump";
   if(key == KEY_SHOOT) return "shoot";
   if(key == KEY_CHANGE_WEAPON) return "change_weapon";

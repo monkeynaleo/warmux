@@ -42,6 +42,7 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
+#include "menu/help_menu.h"
 #include "menu/pause_menu.h"
 #include "menu/results_menu.h"
 #include "menu/network_menu.h"
@@ -423,21 +424,22 @@ std::string Game::GetUniqueId()
 // ####################################################################
 
 
-Game::Game():
-  state(PLAYING),
-  give_objbox(true),
-  last_clock_update(0),
-  isGameLaunched(false),
-  current_ObjBox(NULL),
-  ask_for_menu(false),
-  fps(new FramePerSecond()),
-  delay(0),
-  time_of_next_frame(0),
-  time_of_next_phy_frame(0),
-  character_already_chosen(false),
-  m_current_turn(0),
-  waiting_for_network_text("Waiting for turn master"),
-  weapons_list(NULL)
+Game::Game()
+  : state(PLAYING)
+  , give_objbox(true)
+  , last_clock_update(0)
+  , isGameLaunched(false)
+  , current_ObjBox(NULL)
+  , ask_for_menu(false)
+  , ask_for_help_menu(false)
+  , fps(new FramePerSecond())
+  , delay(0)
+  , time_of_next_frame(0)
+  , time_of_next_phy_frame(0)
+  , character_already_chosen(false)
+  , m_current_turn(0)
+  , waiting_for_network_text("Waiting for turn master")
+  , weapons_list(NULL)
 { }
 
 Game::~Game()
@@ -656,10 +658,15 @@ bool Game::Run()
   do
     {
       ask_for_menu = false;
+      ask_for_help_menu = false;
       MainLoop();
 
       if (ask_for_menu && MenuQuitPause())
         break;
+
+      if (ask_for_help_menu) {
+        MenuHelpPause();
+      }
 
   } while(!IsGameFinished());
 
@@ -1097,6 +1104,23 @@ bool Game::MenuQuitPause() const
   JukeBox::GetInstance()->Resume();
 
   return exit;
+}
+
+void Game::MenuHelpPause() const
+{
+  JukeBox::GetInstance()->Pause();
+
+  Time::GetInstance()->SetWaitingForUser(true);
+
+  Action a(Action::ACTION_ANNOUNCE_PAUSE);
+  Network::GetInstance()->SendActionToAll(a);
+
+  HelpMenu menu;
+  menu.Run();
+
+  Time::GetInstance()->SetWaitingForUser(false);
+
+  JukeBox::GetInstance()->Resume();
 }
 
 uint Game::GetCurrentTurn()
