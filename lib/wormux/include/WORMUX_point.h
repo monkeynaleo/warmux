@@ -31,12 +31,9 @@ typedef Vector2<int32_t> Point2i;
 typedef Vector2<float>   Point2f;
 typedef Vector2<Double>  Point2d;
 
-#define POINT2D_2_POINT2I(point) \
-    (Point2i)( point )
-//  Point2i((int)point.x, (int)point.y)
-
-#define POINT2I_2_POINT2D(point) \
-    (Point2d)( point )
-//  Point2d((Double)point.x, (Double)point.y)
+static inline Point2f P2D_TO_P2F(const Point2d& p)
+{
+  return Point2f(p.GetX().tofloat(), p.GetY().tofloat());
+}
 
 #endif // WORMUX_POINT_H
