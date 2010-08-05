@@ -58,7 +58,7 @@ const Double MAX_ICON_SCALE = 1.1;
 
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
-#define LOW_RESOLUTION_FACTOR  0.7
+#define LOW_RESOLUTION_FACTOR  0.9
 
 WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
   PolygonItem(),
@@ -337,21 +337,17 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
   }
 
   // Init animation parameter
-  Point2d start(5 + scroll_border,
-                GetMainWindow().GetHeight() + weapons_menu->GetHeight() + 50);
+  uint x = 5 + scroll_border + int(weapons_menu->GetWidth()) + 10;
+  uint y = Interface::GetRef().GetMenuPosition().GetY()
+         - int(weapons_menu->GetHeight()) - 10;
+  Point2d start(x - weapons_menu->GetWidth() - tools_menu->GetWidth(), y);
   // Results in end y bigger than scroll border
-  Point2i pos(5 + scroll_border,
-              GetMainWindow().GetHeight()- tools_menu->GetHeight() - 5);
-
-  if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
-    start.y -= Interface::GetRef().GetHeight();
-    pos.y -= Interface::GetRef().GetHeight();
-  }
-
-  Point2d end(pos);
+  Point2i end(x, y);
 
   // Define the animation
-  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
+  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
+                                   Time::GetInstance()->Read(),
+                                   !show, start, end);
 
   return position ;
 }
@@ -364,22 +360,18 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
   }
 
   // Init animation parameter
-  Point2d start(5 + scroll_border, GetMainWindow().GetHeight());
-  // Results in end y bigger than scroll border
-  Point2i pos(5 + scroll_border,
-              GetMainWindow().GetHeight()- weapons_menu->GetHeight() - tools_menu->GetHeight() - 10);
+  uint x = 5 + scroll_border;
+  uint y = Interface::GetRef().GetMenuPosition().GetY()
+         - int(weapons_menu->GetHeight()) - 10;
+  Point2d start(x - weapons_menu->GetWidth() - tools_menu->GetWidth(), y);
+  Point2i end(x, y);
 
-  if (Interface::GetRef().GetMenuPosition().GetX() + (Double)Interface::GetRef().GetWidth() > start.GetX()) {
-    start.y -= Interface::GetRef().GetHeight();
-    pos.y -= Interface::GetRef().GetHeight();
-  }
+  // Define the animation
+  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
+                                   Time::GetInstance()->Read(),
+                                   !show, start, end);
 
-  Point2d end(pos);
-
- // Define the animation
-  position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(), Time::GetInstance()->Read(), !show, start, end);
-
-  return position ;
+  return position;
 }
 
 void WeaponsMenu::Draw()
