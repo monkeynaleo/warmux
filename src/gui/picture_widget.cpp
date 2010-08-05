@@ -44,7 +44,6 @@ PictureWidget::PictureWidget(const Point2i & _size,
   , spr(NULL)
 {
   size = _size;
-  printf("Creating: %ix%i\n", size.x, size.y);
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   SetSurface(GetResourceManager().LoadImage(res, resource_id),
