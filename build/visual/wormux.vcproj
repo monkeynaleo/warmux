@@ -642,14 +642,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\gui\list_box.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\gui\list_box.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\gui\msg_box.cpp"
 					>
 				</File>
