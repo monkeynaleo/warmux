@@ -55,7 +55,7 @@ protected:
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
 
 public:
-  ScrollBox(const Point2i & size);
+  ScrollBox(const Point2i & size, bool force_widget_size = true);
   ~ScrollBox();
 
   // No need for a Draw method: the additional stuff drawn is made by Update

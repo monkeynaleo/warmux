@@ -38,7 +38,9 @@ protected:
   int  selected_item;
 
 public:
-  SelectBox(const Point2i& size, bool always_one_selected = true);
+  SelectBox(const Point2i& size,
+            bool always_one_selected = true,
+            bool force_widget_size = true);
 
   // No need for a Draw method: the additional stuff drawn is made by Update
   virtual void Update(const Point2i& mousePosition,
@@ -73,7 +75,8 @@ class ItemBox : public SelectBox
 {
   std::vector<const void*> m_values;
 public:
-  ItemBox(const Point2i& size, bool always = false) : SelectBox(size, always) { };
+  ItemBox(const Point2i& size, bool always = false, bool force = true)
+    : SelectBox(size, always, force) { };
   void AddWidget(Widget* /*w*/)
   {
     fprintf(stderr, "ItemBox::AddWidget called\n");

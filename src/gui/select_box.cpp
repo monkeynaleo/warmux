@@ -24,8 +24,8 @@
 #include "gui/vertical_box.h"
 #include "include/app.h"
 
-SelectBox::SelectBox(const Point2i& size, bool always)
-  : ScrollBox(size)
+SelectBox::SelectBox(const Point2i& size, bool always, bool force)
+  : ScrollBox(size, force)
   , selected_item_color(defaultListColor2)
   , default_item_color(defaultListColor3)
   , always_one_selected(always)
@@ -40,7 +40,7 @@ void SelectBox::Update(const Point2i& mousePosition,
   ScrollBox::Update(mousePosition, lastMousePosition);
 
   Surface& surf = GetMainWindow();
-  Rectanglei clip = *this;
+  Rectanglei clip(position, Point2i(size.x - scrollbar_width, size.y));
   SwapWindowClip(clip);
 
   if (selected_item != -1) {
