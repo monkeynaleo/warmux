@@ -23,6 +23,8 @@
 #include "graphic/text.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "gui/tabs.h"
+#include "gui/picture_widget.h"
 #include "menu/help_menu.h"
 #include "game/config.h"
 #include "tool/resource_manager.h"
@@ -30,27 +32,34 @@
 
 HelpMenu::HelpMenu()
   : Menu("help/background", vOk)
-  , zoom(1.0f)
-  , img_keyboard(NULL)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  Surface tmp  = GetResourceManager().LoadImage(res, "help/shortkeys", true);
 
-  float zoomx = GetMainWindow().GetWidth() * 0.95f / tmp.GetWidth();
-  float zoomy = (GetMainWindow().GetHeight() - 25.0f) / tmp.GetHeight();
-  zoom = std::min(zoomx, zoomy);
-  img_keyboard = new Sprite(tmp.RotoZoom(0, zoom, zoom), true);
+  int window_w = GetMainWindow().GetWidth();
+  int window_h = GetMainWindow().GetHeight();
 
-  img_keyboard->cache.EnableLastFrameCache();
+  int border   = 0.02 * window_w;
+  int max_w    = window_w - 2*border;
+
+
+  MultiTabs * tabs =
+    new MultiTabs(Point2i(max_w, window_h -actions_buttons->GetSizeY() -border));
+  tabs->SetPosition(border, border);
+
+  m_keyboard = new PictureWidget(Point2i(max_w,
+                                         tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                                 "help/shortkeys", true);
+
+  tabs->AddNewTab("unused", _("Keyboard"), m_keyboard);
+  widgets.AddWidget(tabs);
+
   GetResourceManager().UnLoadXMLProfile(res);
   widgets.Pack();
 }
 
 HelpMenu::~HelpMenu()
 {
-  if (NULL != img_keyboard) {
-    delete img_keyboard;
-  }
+
 }
 
 bool HelpMenu::signal_ok()
@@ -63,63 +72,54 @@ bool HelpMenu::signal_cancel()
   return true;
 }
 
-void HelpMenu::DrawBackground()
+void HelpMenu::Draw(const Point2i& mousePosition)
 {
-  Menu::DrawBackground();
+  widgets.Draw(mousePosition);
+  Point2f zoom = m_keyboard->GetScale();
 
-  int offset_x = (GetMainWindow().GetWidth()-img_keyboard->GetWidth()) / 2;
-  int offset_y = (GetMainWindow().GetHeight() - 25 - img_keyboard->GetHeight())/2;
-  img_keyboard->Blit(GetMainWindow(), offset_x, offset_y);
-
-  const uint MIDDLE_X = 64;
-  const uint MIDDLE_Y = 13;
-
-  Text tmp("", dark_gray_color, 12*sqrtf(zoom), Font::FONT_BOLD, false);
-  tmp.SetMaxWidth(132*zoom);
+  Text tmp("", dark_gray_color, 12*zoom.GetX(), Font::FONT_BOLD, false);
+  tmp.SetMaxWidth(130*zoom.GetX());
 
   struct {
     const std::string string; // gcc does not support correctly a char* here.
     int x, y;
   } texts[] = {
-    { _("Quit game"), 15, 1 },
-    { _("High jump"), 373, 313 },
-    { _("Jump backwards"), 373, 285 },
-    { _("Jump backwards"), 373, 342 },
-    { _("Drag&drop: Move camera"), 454, 383 },
-    { _("Center camera on character"), 454, 411 },
-    { _("Show/hide the interface"), 205, 31 },
-    { _("Fullscreen / window"), 425, 31 },
-    { _("Configuration menu"), 425, 61 },
-    { _("Talk in network battles"), 26, 285 },
-    { _("Change weapon category"), 15, 61 },
-    { _("Change weapon countdown"), 552, 153 },
-    { _("Change aim angle"), 552, 182 },
-    { _("Move character"), 552, 275 },
-    { _("On map: select a target"), 552, 214 },
-    { _("On a character: select it"), 552, 245 },
-    { _("Show weapons menu"), 552, 122 },
-    { _("Smaller aim angle and walk step"), 26, 315 },
-    { _("Move camera with mouse or arrows"), 320, 383 },
-    { _("Weapon: Fire / Bonus box: drop"), 194, 315 },
-    { _("Show/hide minimap"), 205, 61 },
-    { _("Change active character"), 26, 345 },
-    { _("Center camera on character"), 320, 411 },
-    { _("Quickly quit game with Ctrl"), 15, 31 },
+    { _("Quit game"), 81, 12 },
+    { _("High jump"), 439, 324 },
+    { _("Jump backwards"), 439, 296 },
+    { _("Jump backwards"), 439, 353 },
+    { _("Drag&drop: Move camera"), 520, 394 },
+    { _("Center camera on character"), 520, 422 },
+    { _("Show/hide the interface"), 271, 42 },
+    { _("Fullscreen / window"), 491, 42 },
+    { _("Configuration menu"), 491, 72 },
+    { _("Talk in network battles"), 92, 296 },
+    { _("Change weapon category"), 81, 72 },
+    { _("Change weapon countdown"), 618, 164 },
+    { _("Change aim angle"), 618, 193 },
+    { _("Move character"), 618, 286 },
+    { _("On map: select a target"), 618, 225 },
+    { _("On a character: select it"), 618, 256 },
+    { _("Show weapons menu"), 618, 133 },
+    { _("Smaller aim angle and walk step"), 92, 326 },
+    { _("Move camera with mouse or arrows"), 386, 394 },
+    { _("Weapon: Fire / Bonus box: drop"), 260, 326 },
+    { _("Show/hide minimap"), 271, 72 },
+    { _("Change active character"), 92, 356 },
+    { _("Center camera on character"), 386, 422 },
+    { _("Quickly quit game with Ctrl"), 81, 42 },
     { "", 0, 0 }
   };
 
   int i = 0;
   while (texts[i].x != 0 && texts[i].y != 0) {
     tmp.SetText(texts[i].string);
-    tmp.DrawCenter(Point2i((texts[i].x+MIDDLE_X)*zoom + offset_x,
-                           (texts[i].y+MIDDLE_Y)*zoom + offset_y));
+    Point2i pos = Point2i(zoom.x * texts[i].x, zoom.y * texts[i].y)
+                + m_keyboard->GetPicturePosition();
+
+    tmp.DrawCenter(pos);
     i++;
   }
-}
-
-void HelpMenu::Draw(const Point2i& /*mousePosition*/)
-{
-  /* not needed to draw, Update will do */
 }
 
 void HelpMenu::OnClick(const Point2i &mousePosition, int button)

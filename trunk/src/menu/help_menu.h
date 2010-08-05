@@ -25,18 +25,15 @@
 #include "menu/menu.h"
 
 // Forward declarations
-class Sprite;
+class PictureWidget;
 
 class HelpMenu : public Menu
 {
-  float   zoom;
-  Sprite* img_keyboard;
-
+  PictureWidget *m_keyboard;
   bool signal_ok();
   bool signal_cancel();
 
   void Draw(const Point2i &mousePosition);
-  void DrawBackground();
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);

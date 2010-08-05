@@ -25,15 +25,15 @@
 #include "graphic/video.h"
 #include "include/app.h"
 
-PictureWidget::PictureWidget (const Point2i & _size) :
-  disabled(false),
-  spr(NULL)
+PictureWidget::PictureWidget (const Point2i & _size)
+  : disabled(false)
+  , spr(NULL)
 {
   size = _size;
 }
 
-PictureWidget::PictureWidget(const Point2i & _size, 
-                             const std::string & resource_id, 
+PictureWidget::PictureWidget(const Point2i & _size,
+                             const std::string & resource_id,
                              bool scale) :
   disabled(false),
   spr(NULL)
@@ -45,7 +45,7 @@ PictureWidget::PictureWidget(const Point2i & _size,
   GetResourceManager().UnLoadXMLProfile( res);
 }
 
-PictureWidget::PictureWidget(Profile * profile, 
+PictureWidget::PictureWidget(Profile * profile,
                              const xmlNode * pictureNode) :
   Widget(profile, pictureNode),
   disabled(false),
@@ -62,11 +62,11 @@ PictureWidget::~PictureWidget()
 
 /*
   Picture node example :
-  <Picture file="menu/image.png" 
-           alpha="false" 
-           x="0" y="0" 
+  <Picture file="menu/image.png"
+           alpha="false"
+           x="0" y="0"
            width="100" height="100"
-           scale="true" 
+           scale="true"
            antialiasing="true" />
 */
 bool PictureWidget::LoadXMLConfiguration()
@@ -104,8 +104,8 @@ bool PictureWidget::LoadXMLConfiguration()
   return true;
 }
 
-void PictureWidget::SetSurface(const Surface & s, 
-                               bool enable_scaling, 
+void PictureWidget::SetSurface(const Surface & s,
+                               bool enable_scaling,
                                bool antialiasing)
 {
   NeedRedrawing();
@@ -117,9 +117,9 @@ void PictureWidget::SetSurface(const Surface & s,
   spr = new Sprite(s, antialiasing);
   if (enable_scaling) {
     Double scale = std::min( Double(GetSizeY())/spr->GetHeight(),
-                            Double(GetSizeX())/spr->GetWidth() ) ;
+                             Double(GetSizeX())/spr->GetWidth() );
 
-    spr->Scale (scale, scale);
+    spr->Scale(scale, scale);
   }
 }
 
@@ -140,14 +140,22 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/) const
   }
 
   Surface & surf = GetMainWindow();
-  int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
-  int y = GetPositionY() + ( GetSizeY()/2 ) - (spr->GetHeight()/2);
+  Point2i pos = GetPicturePosition();
 
-  spr->Blit(surf, x, y);
+  spr->Blit(surf, pos);
 
   // Draw a transparency mask
   if (disabled) {
-    surf.BoxColor(Rectanglei(x , y, spr->GetWidth(), spr->GetHeight()),
-                  defaultOptionColorBox);
+    surf.BoxColor(Rectanglei(pos, spr->GetSize()), defaultOptionColorBox);
   }
+}
+
+Point2i PictureWidget::GetPicturePosition() const
+{
+  return position + (size - spr->GetSize()) / 2;
+}
+
+Point2f PictureWidget::GetScale() const
+{
+  return Point2f(spr->GetScaleX().tofloat(), spr->GetScaleY().tofloat());
 }
