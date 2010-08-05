@@ -53,14 +53,12 @@ Polygon * PolygonGenerator::GenerateRectangle(const Point2d & orig, const Point2
 
 Polygon * PolygonGenerator::GenerateRectangle(const Rectanglei & r)
 {
-  return PolygonGenerator::GenerateRectangle(POINT2I_2_POINT2D(r.GetPosition()),
-                                             POINT2I_2_POINT2D(r.GetSize()));
+  return PolygonGenerator::GenerateRectangle(r.GetPosition(), r.GetSize());
 }
 
 Polygon * PolygonGenerator::GenerateRectangle(const Point2i & orig, const Point2i & size)
 {
-  return PolygonGenerator::GenerateRectangle(POINT2I_2_POINT2D(orig),
-                                             POINT2I_2_POINT2D(size));
+  return PolygonGenerator::GenerateRectangle(orig, size);
 }
 
 Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, Double rand_offset)
