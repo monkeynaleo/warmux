@@ -58,13 +58,14 @@ const Double MAX_ICON_SCALE = 1.1;
 
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
+#define MAX_ICON_SIZE          45
 #define LOW_RESOLUTION_FACTOR  0.9
 
-WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
-  PolygonItem(),
-  zoom(false),
-  weapon(new_weapon),
-  zoom_start_time(0)
+WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position)
+  : PolygonItem()
+  , zoom(false)
+  , weapon(new_weapon)
+  , zoom_start_time(0)
 {
   SetSprite(new Sprite(weapon->GetIcon()));
   SetPosition(position);
@@ -85,8 +86,15 @@ bool WeaponMenuItem::IsMouseOver()
       SetZoom(false);
     return false;
   }
-  Point2i mouse_pos = Mouse::GetInstance()->GetPosition();
-  if (Contains(Point2d((Double)mouse_pos.x, (Double)mouse_pos.y))) {
+
+  // Compute the size of the icon bounding box
+  float scale = (AppWormux::GetInstance()->video->window.GetHeight() < 480)
+              ? LOW_RESOLUTION_FACTOR : 1.0;
+  Point2i size(MAX_ICON_SIZE*scale, MAX_ICON_SIZE*scale);
+
+  // The icon bounding box for this is centered around the transformed position
+  Rectanglei r(transformed_position + 1 - size/2, size);
+  if (r.Contains(Mouse::GetInstance()->GetPosition())) {
     if (!zoom)
       SetZoom(true);
     return true;
@@ -125,7 +133,7 @@ void WeaponMenuItem::Draw(Surface * dest)
 
   if (nb_bullets ==  INFINITE_AMMO) {
     PolygonItem::Draw(dest);
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, "∞", dark_gray_color);
+    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, "∞", dark_gray_color);
   } else if (nb_bullets == 0) {
       if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
         PolygonItem::Draw(dest);
@@ -147,7 +155,7 @@ void WeaponMenuItem::Draw(Surface * dest)
     PolygonItem::Draw(dest);
     std::ostringstream txt;
     txt << nb_bullets;
-    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_gray_color);
+    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, txt.str(), dark_gray_color);
   }
 }
 
@@ -157,24 +165,23 @@ void WeaponMenuItem::SetParent(WeaponsMenu *parent)
 }
 
 
-WeaponsMenu::WeaponsMenu():
-  m_not_yet_available(NULL),
-  weapons_menu(NULL),
-  tools_menu(NULL),
-  current_overfly_item(NULL),
-  position(),
-  shear(),
-  rotation(),
-  zoom(),
-
-  show(false),
-  motion_start_time(0),
-  icons_draw_time(ICONS_DRAW_TIME),
-  jelly_time(JELLY_TIME),
-  rotation_time(ROTATION_TIME),
-  nbr_weapon_type(0),
-  nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON]),
-  old_pointer(Mouse::POINTER_SELECT)
+WeaponsMenu::WeaponsMenu()
+  : m_not_yet_available(NULL)
+  , weapons_menu(NULL)
+  , tools_menu(NULL)
+  , current_overfly_item(NULL)
+  , position()
+  , shear()
+  , rotation()
+  , zoom()
+  , show(false)
+  , motion_start_time(0)
+  , icons_draw_time(ICONS_DRAW_TIME)
+  , jelly_time(JELLY_TIME)
+  , rotation_time(ROTATION_TIME)
+  , nbr_weapon_type(0)
+  , nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON])
+  , old_pointer(Mouse::POINTER_SELECT)
 {
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -233,11 +240,11 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
   if (num_sort < 6) {
     menu = weapons_menu;
     pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
-        +  Point2f(nb_weapon_type[num_sort - 1], num_sort - 1)*int(45*factor);
+        +  Point2f(nb_weapon_type[num_sort - 1], num_sort - 1)*int(MAX_ICON_SIZE*factor);
   } else {
     menu = tools_menu;
     pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
-        +  Point2f(num_sort - 6, nb_weapon_type[num_sort - 1])*int(45*factor);
+        +  Point2f(num_sort - 6, nb_weapon_type[num_sort - 1])*int(MAX_ICON_SIZE*factor);
   }
 
   WeaponMenuItem * item = new WeaponMenuItem(new_item, pos);
