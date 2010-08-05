@@ -30,7 +30,7 @@
 #define BORDER        2
 #define NO_DRAG      -1
 
-ScrollBox::ScrollBox(const Point2i & _size)
+ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size)
   : WidgetList(_size)
   , m_up(NULL)
   , m_down(NULL)
@@ -49,7 +49,7 @@ ScrollBox::ScrollBox(const Point2i & _size)
 
   scrollbar_width = m_up->GetSizeX();
   // Let's consider the scrollbar is not displayed for now.
-  vbox = new VBox(_size.x - 2*BORDER - scrollbar_width, false, true);
+  vbox = new VBox(_size.x - 2*BORDER - scrollbar_width, false, force_widget_size);
   vbox->SetBorder(Point2i(BORDER, BORDER));
   vbox->SetMargin(BORDER);
 
