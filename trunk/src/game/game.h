@@ -53,6 +53,7 @@ protected:
   void ApplyDiseaseDamage() const;
   int  NbrRemainingTeams() const;
   bool MenuQuitPause() const;
+  void MenuHelpPause() const;
 
   SoundSample         countdown_sample;
   game_loop_state_t   state;
@@ -70,6 +71,7 @@ private:
   ObjBox              *current_ObjBox;
   // Set that the user requested a pause/end of the game
   bool                ask_for_menu;
+  bool                ask_for_help_menu;
 
   FramePerSecond      *fps;
 
@@ -163,6 +165,7 @@ public:
   void SetState(game_loop_state_t new_state, bool begin_game=false);
 
   void UserAsksForMenu() { ask_for_menu = true; };
+  void UserAsksForHelpMenu() { ask_for_help_menu = true; };
 
   // Signal death of a player
   void SignalCharacterDeath (const Character *character);
