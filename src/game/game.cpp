@@ -114,7 +114,7 @@ Game * Game::UpdateGameRules()
 void Game::InitEverything()
 {
   int icon_count = Network::GetInstance()->IsLocal() ? 4 : 5;
-  LoadingScreen loading_sreen(icon_count);
+  LoadingScreen loading_screen(icon_count);
 
   Config::GetInstance()->RemoveAllObjectConfigs();
 
@@ -142,19 +142,19 @@ void Game::InitEverything()
 
   // Load the map
   std::cout << "o " << _("Initialise map") << std::endl;
-  loading_sreen.StartLoading(1, "map_icon", _("Maps"));
+  loading_screen.StartLoading(1, "map_icon", _("Maps"));
   InitMap();
 
-  loading_sreen.StartLoading(2, "weapon_icon", _("Weapons"));
-  weapons_list = new WeaponsList(GameMode::GetInstance()->GetWeaponsXml());
+  loading_screen.StartLoading(2, "weapon_icon", _("Weapons"));
+  InitWeapons();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
-  loading_sreen.StartLoading(3, "team_icon", _("Teams"));
+  loading_screen.StartLoading(3, "team_icon", _("Teams"));
   InitTeams();
 
   std::cout << "o " << _("Initialise sounds") << std::endl;
   // Load teams' sound profiles
-  loading_sreen.StartLoading(4, "sound_icon", _("Sounds"));
+  loading_screen.StartLoading(4, "sound_icon", _("Sounds"));
   InitSounds();
 
   InitInterface();
@@ -165,7 +165,7 @@ void Game::InitEverything()
   // Waiting for others players
   if (!Network::GetInstance()->IsLocal()) {
     std::cout << "o " << _("Waiting for remote players") << std::endl;
-    loading_sreen.StartLoading(5, "network_icon", _("Network"));
+    loading_screen.StartLoading(5, "network_icon", _("Network"));
     WaitForOtherPlayers();
   }
   ActionHandler::GetInstance()->ExecFrameLessActions();
@@ -248,6 +248,14 @@ void Game::EndInitGameData_NetClient()
   {
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(100);
+  }
+}
+
+void Game::InitWeapons()
+{
+  if (!weapons_list) {
+    weapons_list = new WeaponsList(GameMode::GetInstance()->GetWeaponsXml());
+    //weapons_list->UpdateTranslation();
   }
 }
 
