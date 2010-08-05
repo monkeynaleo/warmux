@@ -42,10 +42,10 @@ private:
   uint first_tab;
   uint nb_visible_tabs;
   uint tab_header_width;
+  uint tab_header_height;
 
   Button* prev_tab_bt;
   Button* next_tab_bt;
-  Point2i tab_size;
 
   void PrevTab();
   void NextTab();
@@ -59,7 +59,7 @@ public:
   void AddNewTab(const std::string& id, const std::string& title, Widget* w);
   const std::string& GetCurrentTabId() const;
 
-  uint GetHeaderHeight() const;
+  uint GetHeaderHeight() const { return tab_header_height; }
 
   void SelectTab(uint current);
 
@@ -67,14 +67,14 @@ public:
   virtual void NeedRedrawing();
   virtual void Draw(const Point2i &mousePosition) const;
   virtual void Update(const Point2i &mousePosition,
-          const Point2i &lastMousePosition);
+                      const Point2i &lastMousePosition);
   virtual void Pack();
 
   virtual bool SendKey(const SDL_keysym&);
   virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
-  void SetMaxVisibleTabs(uint max);
+  void SetMaxVisibleTabs(uint max) { max_visible_tabs = max; }
 };
 
 #endif // GUI_TABS_H
