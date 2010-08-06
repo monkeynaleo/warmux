@@ -55,7 +55,6 @@ static const FigureWidget::Caption captions[] = {
   { _("Change active character"), 92, 356 },
   { _("Center camera on character"), 386, 422 },
   { _("Quickly quit game with Ctrl"), 81, 43 },
-  { "", 0, 0 }
 };
 
 HelpMenu::HelpMenu()
@@ -76,8 +75,8 @@ HelpMenu::HelpMenu()
   m_keyboard = new FigureWidget(Point2i(max_w,
                                         tabs->GetSizeY() - tabs->GetHeaderHeight()),
                                 "help/shortkeys",
-                                captions, 12,
-                                PictureWidget::FIT_SCALING);
+                                captions, ARRAY_SIZE(captions),
+                                12, PictureWidget::FIT_SCALING);
 
   tabs->AddNewTab("unused", _("Keyboard"), m_keyboard);
   widgets.AddWidget(tabs);
