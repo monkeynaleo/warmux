@@ -82,6 +82,8 @@ wormux_SOURCES = \
         gui/abstract_spin_button.h \
         gui/big/button_pic.cpp \
         gui/big/button_pic.h \
+        gui/control_config.h \
+        gui/control_config.cpp \
         gui/grid_box.cpp \
         gui/grid_box.h \
         gui/vertical_box.cpp \

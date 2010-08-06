@@ -33,22 +33,11 @@ class ComboBox;
 class CustomTeam;
 class SpinButtonWithPicture;
 class TextBox;
-
+class ControlConfig;
 
 class OptionMenu : public Menu
 {
-public:
-  OptionMenu();
-  ~OptionMenu();
-  static void CheckUpdates();
-
- private:
-
-  /* If you need this, implement it (correctly)*/
-  OptionMenu(const OptionMenu&);
-  OptionMenu operator=(const OptionMenu&);
-  /********************************************/
-
+private:
   /* Graphic options controllers */
   ComboBox *cbox_video_mode;
 #ifdef ENABLE_NLS
@@ -109,8 +98,16 @@ public:
   bool SaveTeam();
   void SelectTeam();
 
+  /* Controls config */
+  ControlConfig *controls;
+
   bool signal_ok();
   bool signal_cancel();
+
+public:
+  OptionMenu();
+  ~OptionMenu();
+  static void CheckUpdates();
 };
 
 #endif

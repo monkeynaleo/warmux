@@ -89,6 +89,9 @@ public:
   } Key_t;
 
 protected:
+  // This is a widget in charge of displaying and setting the config
+  friend class ControlItem;
+  friend class ControlConfig;
 
   typedef enum
   {
@@ -117,6 +120,7 @@ protected:
 
   Key_t GetActionFromActionName(const std::string &name) const;
   std::string GetActionNameFromAction(Key_t) const;
+  std::string GetHumanReadableActionName(Key_t) const;
 
   ManMachineInterface() { SetDefaultConfig(); };
   virtual ~ManMachineInterface() { };

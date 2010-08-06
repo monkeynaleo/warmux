@@ -23,8 +23,9 @@
 #include "graphic/text.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
-#include "gui/tabs.h"
+#include "gui/control_config.h"
 #include "gui/figure_widget.h"
+#include "gui/tabs.h"
 #include "menu/help_menu.h"
 #include "game/config.h"
 #include "tool/resource_manager.h"
@@ -58,7 +59,7 @@ static const FigureWidget::Caption captions[] = {
 };
 
 HelpMenu::HelpMenu()
-  : Menu("help/background", vOk)
+  : Menu("help/background", vNo)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
@@ -69,17 +70,19 @@ HelpMenu::HelpMenu()
   int max_w    = window_w - 2*border;
 
   MultiTabs * tabs =
-    new MultiTabs(Point2i(max_w, window_h -actions_buttons->GetSizeY() -border));
+    new MultiTabs(Point2i(max_w, window_h - border));
   tabs->SetPosition(border, border);
 
-  m_keyboard = new FigureWidget(Point2i(max_w,
-                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                                "help/shortkeys",
-                                captions, ARRAY_SIZE(captions),
-                                12, PictureWidget::FIT_SCALING);
-
-  tabs->AddNewTab("unused", _("Keyboard"), m_keyboard);
+  Widget *w = new FigureWidget(Point2i(max_w,
+                                       tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                               "help/shortkeys",
+                               captions, ARRAY_SIZE(captions),
+                               12, PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
+
+  w = new ControlConfig(tabs->GetSize() - 10, true, false);
+  tabs->AddNewTab("unused", _("Current controls"), w);
 
   GetResourceManager().UnLoadXMLProfile(res);
   widgets.Pack();
