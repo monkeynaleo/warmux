@@ -22,7 +22,10 @@
 #ifndef GUI_FIGURE_WIDGET_H
 #define GUI_FIGURE_WIDGET_H
 
+#include <vector>
 #include "picture_widget.h"
+
+#define ARRAY_SIZE(array_) (sizeof(array_)/sizeof(*array_))
 
 class FigureWidget : public PictureWidget
 {
@@ -32,20 +35,30 @@ public:
     std::string string; // gcc does not support correctly a char* here.
     int x, y;
   } Caption;
+  typedef std::vector<Caption> Captions;
 
 private:
-  const Caption *captions;
-  uint           font_size;
+  Captions   captions;
+  uint       font_size;
 
 public:
   // caps must be static const, as we aren't doing copies
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
-               const Caption *caps,
+               const Captions& caps,
                uint  fsize = 12,
                ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
     , captions(caps)
+    , font_size(fsize)
+  { }
+  FigureWidget(const Point2i & size,
+               const std::string & resource_id,
+               const Caption* caps, size_t num,
+               uint  fsize = 12,
+               ScalingType type = FIT_SCALING)
+    : PictureWidget(size, resource_id, type)
+    , captions(caps, caps+num)
     , font_size(fsize)
   { }
 

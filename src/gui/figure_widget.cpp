@@ -24,7 +24,6 @@
 
 void FigureWidget::Draw(const Point2i& mousePosition) const
 {
-  uint i = 0;
   Point2f zoom = GetScale();
 
   PictureWidget::Draw(mousePosition);
@@ -32,12 +31,11 @@ void FigureWidget::Draw(const Point2i& mousePosition) const
   Text tmp("", dark_gray_color, font_size*powf(zoom.GetX(), 0.75f), Font::FONT_BOLD, false);
   tmp.SetMaxWidth(130*zoom.GetX());
 
-  while (captions[i].x != 0 && captions[i].y != 0) {
+  for (uint i=0; i<captions.size(); i++) {
     tmp.SetText(captions[i].string);
     Point2i pos = Point2i(zoom.x * captions[i].x, zoom.y * captions[i].y)
                 + GetPicturePosition();
 
     tmp.DrawCenter(pos);
-    i++;
   }
 }
