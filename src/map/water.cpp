@@ -256,36 +256,56 @@ void Water::Draw()
     return; // save precious CPU time
   }
 
-  CalculateWavePattern();
-
   int x0 = cam->GetPosition().x % PATTERN_WIDTH;
   int cameraRightPosition = cam->GetPosition().x + cam->GetSize().x;
-
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
-  for (; y < screen_bottom; y += pattern_height) {
-    for (int x = cam->GetPosition().x - x0;
-         x < cameraRightPosition;
-         x += PATTERN_WIDTH) {
-      AbsoluteDraw(bottom, Point2i(x, y));
-    }
-  }
 
-  y = water_top;
-  for (int wave = 0; wave < WAVE_COUNT; wave++) {
-    for (int x = cam->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
-         x < cameraRightPosition;
-         x += PATTERN_WIDTH) {
-      AbsoluteDraw(pattern, Point2i(x, y));
+#if 0  // Refresh doesn't work, as it directly written
+  if (simple_mode) {
+    // We draw just the color, not even the pattern
+    y = screen_bottom - y;
+
+    if (y > 0) {
+      Rectanglei rect(0, cam->GetSize().y - y, cam->GetSize().x, y);
+      //printf("Drawing %ix%i at (%i,%i)\n", cam->GetSize().x, y, 0, cam->GetSize().y - y);
+
+      GetMainWindow().BoxColor(rect, *type_color);
+      //rect.SetPosition(rect.GetPosition() + cam->GetPosition());
+      //GetWorld().ToRedrawOnMap(rect);
     }
-    y += wave * WAVE_INC;
+  } else
+#endif
+
+  {
+    for (; y < screen_bottom; y += pattern_height) {
+      for (int x = cam->GetPosition().x - x0;
+           x < cameraRightPosition;
+           x += PATTERN_WIDTH) {
+        AbsoluteDraw(bottom, Point2i(x, y));
+      }
+    }
+
+    if (!simple_mode) {
+      CalculateWavePattern();
+      y = water_top;
+      for (int wave = 0; wave < WAVE_COUNT; wave++) {
+        for (int x = cam->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
+             x < cameraRightPosition;
+             x += PATTERN_WIDTH) {
+          AbsoluteDraw(pattern, Point2i(x, y));
+        }
+        y += wave * WAVE_INC;
+      }
+    }
   }
 }
 
 int Water::GetHeight(int x) const
 {
   if (IsActive()) {
-    return GetWorld().GetHeight() - (water_height + height_mvt) +
-           height[x % PATTERN_WIDTH];
+    //printf("Height would have been %i\n", height[x % PATTERN_WIDTH]);
+    int h = (simple_mode) ? 0 : height[x % PATTERN_WIDTH];
+    return h + GetWorld().GetHeight() - int(water_height + height_mvt);
   } else {
     return GetWorld().GetHeight();
   }

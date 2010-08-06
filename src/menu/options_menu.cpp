@@ -32,6 +32,7 @@
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "gui/button.h"
+#include "gui/control_config.h"
 #include "gui/label.h"
 #include "gui/grid_box.h"
 #include "gui/big/button_pic.h"
@@ -133,6 +134,10 @@ OptionMenu::OptionMenu() :
   lbox_languages = new ItemBox(tabs->GetSize() - 10);
   tabs->AddNewTab("unused", _("Language"), lbox_languages);
 #endif
+
+  /* Controls editing */
+  controls = new ControlConfig(tabs->GetSize() - 10, false, false);
+  tabs->AddNewTab("unused", _("Controls"), controls);
 
   /* Team editor */
 
@@ -441,6 +446,9 @@ void OptionMenu::SaveOptions()
   // Language
   config->SetLanguage((const char*)lbox_languages->GetSelectedValue());
 #endif
+
+  // Controls
+  controls->SaveControlConfig();
 
   // Sound
   std::string sfreq = cbox_sound_freq->GetValue();

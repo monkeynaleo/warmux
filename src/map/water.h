@@ -33,7 +33,6 @@ class Color;
 
 class Water
 {
-private:
   static int pattern_height;
   Color* type_color;
   int height_mvt;

@@ -1086,3 +1086,57 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
 
   return "none";
 }
+
+std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
+{
+  if(key == KEY_QUIT) return _("Quit");
+  if(key == KEY_WEAPONS1) return _("Select 'Heavy' weapon category");
+  if(key == KEY_WEAPONS2) return _("Select 'Rifle' weapon category");
+  if(key == KEY_WEAPONS3) return _("Select 'Throwing' weapon category");
+  if(key == KEY_WEAPONS4) return _("Select 'Special' weapon category");
+  if(key == KEY_WEAPONS5) return _("Select 'Duel' category");
+  if(key == KEY_WEAPONS6) return _("Select 'Move' category");
+  if(key == KEY_WEAPONS7) return _("Select 'Tool' category");
+  if(key == KEY_WEAPONS8) return _("Select weapon category 8");
+  if(key == KEY_PAUSE) return _("Pause");
+  if(key == KEY_FULLSCREEN) return _("Fullscreen");
+  if(key == KEY_TOGGLE_INTERFACE) return _("Toggle interface");
+  if(key == KEY_CENTER) return _("Center on active character");
+  if(key == KEY_TOGGLE_WEAPONS_MENUS) return _("Toggle weapons menu");
+  if(key == KEY_CHAT) return _("Chat");
+  if(key == KEY_MOVE_LEFT) return _("Move left");
+  if(key == KEY_MOVE_LEFT_SLOWLY) return _("Move left slowly");
+  if(key == KEY_MOVE_RIGHT) return _("Move right");
+  if(key == KEY_MOVE_RIGHT_SLOWLY) return _("Move right slowly");
+  if(key == KEY_UP) return _("Up");
+  if(key == KEY_UP_SLOWLY) return _("Up slowly");
+  if(key == KEY_DOWN) return _("Down");
+  if(key == KEY_DOWN_SLOWLY) return _("Down slowly");
+  if(key == KEY_MOVE_CAMERA_LEFT) return _("Move camera left");
+  if(key == KEY_MOVE_CAMERA_RIGHT) return _("Move camera right");
+  if(key == KEY_MOVE_CAMERA_UP) return _("Move camera up");
+  if(key == KEY_MOVE_CAMERA_DOWN) return _("Move camera down");
+  if(key == KEY_JUMP) return _("Jump");
+  if(key == KEY_HIGH_JUMP) return _("High jump");
+  if(key == KEY_HELP) return _("Help");
+  if(key == KEY_BACK_JUMP) return _("Back jump");
+  if(key == KEY_SHOOT) return _("Shoot");
+  if(key == KEY_CHANGE_WEAPON) return _("Change weapon");
+  if(key == KEY_WEAPON_1) return Format(_("Set explosion delay to %u"), 1);
+  if(key == KEY_WEAPON_2) return Format(_("Set explosion delay to %u"), 2);
+  if(key == KEY_WEAPON_3) return Format(_("Set explosion delay to %u"), 3);
+  if(key == KEY_WEAPON_4) return Format(_("Set explosion delay to %u"), 4);
+  if(key == KEY_WEAPON_5) return Format(_("Set explosion delay to %u"), 5);
+  if(key == KEY_WEAPON_6) return Format(_("Set explosion delay to %u"), 6);
+  if(key == KEY_WEAPON_7) return Format(_("Set explosion delay to %u"), 7);
+  if(key == KEY_WEAPON_8) return Format(_("Set explosion delay to %u"), 8);
+  if(key == KEY_WEAPON_9) return Format(_("Set explosion delay to %u"), 9);
+  if(key == KEY_WEAPON_LESS) return _("Decrease explosion delay");
+  if(key == KEY_WEAPON_MORE) return _("Increase explosion delay");
+  if(key == KEY_NEXT_CHARACTER) return _("Next character");
+  if(key == KEY_MENU_OPTIONS_FROM_GAME) return _("Open options menu");
+  if(key == KEY_MINIMAP_FROM_GAME) return _("Toggle minimap");
+
+  return _("None");
+}
+

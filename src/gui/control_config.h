@@ -16,30 +16,23 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Credits menu
+ * Widget to configure controls
  *****************************************************************************/
 
-#ifndef HELP_MENU_H
-#define HELP_MENU_H
+#ifndef GUI_CONTROL_CONFIG_H
+#define GUI_CONTROL_CONFIG_H
 
-#include "menu/menu.h"
+#include "select_box.h"
 
-// Forward declarations
-class FigureWidget;
-
-class HelpMenu : public Menu
+class ControlConfig : public SelectBox
 {
-  bool signal_ok();
-  bool signal_cancel();
-
-  void Draw(const Point2i &mousePosition);
-
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
+  bool read_only;
 
 public:
-  HelpMenu();
-  virtual ~HelpMenu();
+  ControlConfig(const Point2i& size, bool readonly = true,
+                bool force_widget_size = true);
+  virtual bool SendKey(const SDL_keysym & key);
+  void SaveControlConfig() const;
 };
 
-#endif /* HELP_MENU_H */
+#endif //GUI_CONTROL_CONFIG_H
