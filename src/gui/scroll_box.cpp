@@ -81,29 +81,25 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   }
 
   if (HasScrollBar()) {
-    bool is_click = Mouse::IS_CLICK_BUTTON(button);
+    bool is_click   = Mouse::IS_CLICK_BUTTON(button);
+    int  max_offset = GetMaxOffset();
+    int  new_offset = offset;
 
     // The event involves the scrollbar or its buttons
     if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
         (is_click && m_down->Contains(mousePosition))) {
 
       // bottom button
-      offset += SCROLL_SPEED;
-      if (offset > GetMaxOffset())
-        offset = GetMaxOffset();
-
-      Pack();
-      return m_down;
+      new_offset = offset+SCROLL_SPEED;
+      if (new_offset > max_offset)
+        new_offset = max_offset;
     } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
                (is_click && m_up->Contains(mousePosition))) {
 
       // top button
-      offset -= SCROLL_SPEED;
-      if (offset < 0)
-        offset = 0;
-
-      Pack();
-      return m_up;
+      new_offset = offset-SCROLL_SPEED;
+      if (new_offset < 0)
+        new_offset = 0;
     } else if (is_click) {
       // Was it released after a drag operation?
       if (was_drag) // or start_drag_y != mousePosition.y
@@ -111,11 +107,15 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       Rectanglei scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
-        offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset()))
-               / scroll_track.GetSizeY();
-        Pack();
-        return this;
+        new_offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+max_offset))
+                   / scroll_track.GetSizeY();
       }
+    }
+
+    if (new_offset != offset) {
+      offset = new_offset;
+      Pack();
+      NeedRedrawing();
     }
   }
 
@@ -157,13 +157,17 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     Point2i track_pos  = GetScrollTrackPos();
     int     height     = GetTrackHeight();
     int     max_offset = GetMaxOffset();
-    offset = start_drag_offset +
+    int     new_offset = start_drag_offset +
              ((mousePosition.y - start_drag_y) * (size.y+max_offset))/height;
-    if (offset < 0)
-      offset = 0;
-    if (offset > max_offset)
-      offset = max_offset;
-    Pack();
+    if (new_offset < 0)
+      new_offset = 0;
+    if (new_offset > max_offset)
+      new_offset = max_offset;
+
+    if (new_offset != offset) {
+      offset = new_offset;
+      Pack();
+    }
   }
 }
 
@@ -288,24 +292,29 @@ void ScrollBox::Pack()
 bool ScrollBox::SendKey(const SDL_keysym & key)
 {
   if (!WidgetList::SendKey(key)) {
+    int new_offset = offset;
     switch(key.sym)
     {
     case SDLK_PAGEUP:
-      offset -= size.y;
+      new_offset -= size.y;
       break;
     case SDLK_PAGEDOWN:
-      offset += size.y;
+      new_offset += size.y;
       break;
     default:
       return false;
     }
 
-    if (offset < 0)
-      offset = 0;
-    if (offset > GetMaxOffset())
-      offset = GetMaxOffset();
+    if (new_offset < 0)
+      new_offset = 0;
+    if (new_offset > GetMaxOffset())
+      new_offset = GetMaxOffset();
 
-    Pack();
+    if (new_offset != offset) {
+      offset = new_offset;
+      Pack();
+      //NeedRedrawing();
+    }
   }
   return true;
 }

@@ -29,11 +29,6 @@
 class WidgetList : public Widget
 {
 private:
-  /* If you need this, implement it (correctly)*/
-  WidgetList(const WidgetList&);
-  WidgetList operator=(const WidgetList&);
-  /*********************************************/
-
   Widget* selected_widget;
 
 protected:

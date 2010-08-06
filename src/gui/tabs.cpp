@@ -212,15 +212,15 @@ void MultiTabs::Update(const Point2i &mousePosition,
 
   if (need_redrawing) {
     Widget::Update(mousePosition, lastMousePosition);
-
   } else if ((header.Contains(mousePosition) && mousePosition != lastMousePosition) ||
              (header.Contains(lastMousePosition) && !header.Contains(mousePosition))) {
     RedrawBackground(header);
-    DrawHeader(mousePosition);
-  }
 
-  if (!tabs.empty())
-    tabs[current_tab].box->Update(mousePosition, lastMousePosition);
+    DrawHeader(mousePosition);
+    RedrawForeground();
+  }
+    if (!tabs.empty())
+      tabs[current_tab].box->Update(mousePosition, lastMousePosition);
 
   need_redrawing = false;
 }

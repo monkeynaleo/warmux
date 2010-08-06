@@ -210,4 +210,3 @@ void GridBox::Pack()
     SetSize(gridWidth, gridHeight);
   }
 }
-
