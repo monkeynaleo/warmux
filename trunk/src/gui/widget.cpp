@@ -85,32 +85,32 @@ Widget::Widget(Profile * _profile,
 // From Container: it redraws the border and the background
 void Widget::RedrawBackground(const Rectanglei& rect)
 {
-  Surface& surf = GetMainWindow();
-
   if (ct != NULL)
     ct->RedrawBackground(rect);
 
   if (!visible)
     return;
 
+  Surface& surf = GetMainWindow();
+
   if (IsHighlighted() && highlight_bg_color != transparent_color) {
     surf.BoxColor(*this, highlight_bg_color);
   } else if (background_color != transparent_color) {
     surf.BoxColor(rect, background_color);
   }
+}
 
-  if (border_size != 0 && border_color != transparent_color) {
-    if (rect == *this)
-      surf.RectangleColor(*this, border_color, border_size);
-    else {
-      // TODO: partial redraw of the border...
-      ASSERT(border_color.GetAlpha() == SDL_ALPHA_OPAQUE);
-      surf.RectangleColor(*this, border_color, border_size);
-    }
-  }
+void Widget::RedrawForeground()
+{
+  if (!visible)
+    return;
+
+  Surface& surf = GetMainWindow();
 
   if (IsLOGGING("widget.border"))
     surf.RectangleColor(*this, c_red, border_size);
+  else if (border_size != 0 && border_color != transparent_color)
+    surf.RectangleColor(*this, border_color, border_size);
 }
 
 void Widget::ParseXMLMisc(void)
@@ -235,8 +235,8 @@ void Widget::Update(const Point2i &mousePosition,
                     const Point2i &lastMousePosition)
 {
   if (need_redrawing ||
-      (Contains(mousePosition) && mousePosition != lastMousePosition) ||
-      (Contains(lastMousePosition) && !Contains(mousePosition))) {
+    (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
+      (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition))) {
 
     // Redraw the border and the background
     RedrawBackground(*this);
@@ -246,6 +246,7 @@ void Widget::Update(const Point2i &mousePosition,
     if (visible) {
       Draw(mousePosition);
     }
+    RedrawForeground();
   }
   need_redrawing = false;
 }

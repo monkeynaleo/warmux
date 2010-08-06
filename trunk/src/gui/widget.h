@@ -66,6 +66,7 @@ protected:
                         const Point2i &/* lastMousePosition */) {};
 
   void RedrawBackground(const Rectanglei& rect);
+  void RedrawForeground();
 
   void ParseXMLMisc(void);
   void ParseXMLBorder(void);

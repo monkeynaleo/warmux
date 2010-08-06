@@ -87,47 +87,6 @@ void WidgetList::RemoveWidget(Widget* w)
   delete w;
 }
 
-void WidgetList::Update(const Point2i& mousePosition,
-                        const Point2i& lastMousePosition)
-{
-  Rectanglei wlr = *this;
-  Rectanglei wlr_original, wlr_tmp;
-
-  // Get current clip rectangle in wlr_original, SDL clip rectangle is now garbage
-  SwapWindowClip(wlr_original);
-
-  if (wlr.GetSizeX()>0 && wlr.GetSizeY()>0) {
-    // Clip widget clip rectangle with current one
-    wlr.Clip(wlr_original);
-    if (!wlr.GetSizeX() || !wlr.GetSizeY())
-      return;
-    // Back up final clip rectangle
-    wlr_tmp = wlr;
-  } else {
-    // Clip rectangle was in fact garbage
-    wlr_tmp = wlr = wlr_original;
-  }
-  // Set final clip rectangle, wlr_tmp now has the previous garbage clip rectangle
-  SwapWindowClip(wlr_tmp);
-
-  for (std::list<Widget*>::const_iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
-    Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
-    r.Clip(wlr);
-
-    if (r.GetSizeX() && r.GetSizeY()) {
-      SwapWindowClip(r);
-      (*w)->Update(mousePosition, lastMousePosition);
-      SwapWindowClip(r);
-    }
-  }
-
-  // Restore initial clip rectangle
-  SwapWindowClip(wlr_original);
-}
-
 void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
 {
   if (widget == selected_widget)
@@ -335,6 +294,55 @@ bool WidgetList::SendKey(SDL_keysym key)
     return selected_widget->SendKey(key);
 
   return false;
+}
+
+void WidgetList::Update(const Point2i& mousePosition,
+                        const Point2i& lastMousePosition)
+{
+  Rectanglei wlr = *this;
+  Rectanglei wlr_original, wlr_tmp;
+
+  // Get current clip rectangle in wlr_original, SDL clip rectangle is now garbage
+  SwapWindowClip(wlr_original);
+
+  if (wlr.GetSizeX()>0 && wlr.GetSizeY()>0) {
+    // Clip widget clip rectangle with current one
+    wlr.Clip(wlr_original);
+    if (!wlr.GetSizeX() || !wlr.GetSizeY())
+      return;
+    // Back up final clip rectangle
+    wlr_tmp = wlr;
+  } else {
+    // Clip rectangle was in fact garbage
+    wlr_tmp = wlr = wlr_original;
+  }
+  // Set final clip rectangle, wlr_tmp now has the previous garbage clip rectangle
+  SwapWindowClip(wlr_tmp);
+
+  // Redraw the background
+  if (need_redrawing)
+    RedrawBackground(*this);
+
+  for (std::list<Widget*>::const_iterator w=widget_list.begin();
+      w != widget_list.end();
+      w++)
+  {
+    Rectanglei r((*w)->GetPosition(), (*w)->GetSize());
+    r.Clip(wlr);
+
+    if (r.GetSizeX() && r.GetSizeY()) {
+      SwapWindowClip(r);
+      (*w)->Update(mousePosition, lastMousePosition);
+      SwapWindowClip(r);
+    }
+  }
+
+  if (need_redrawing)
+    RedrawForeground();
+
+  // Restore initial clip rectangle
+  SwapWindowClip(wlr_original);
+  need_redrawing = false;
 }
 
 void WidgetList::Draw(const Point2i &mousePosition) const
