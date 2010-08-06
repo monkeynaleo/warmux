@@ -47,8 +47,9 @@ private:
   Surface bottom;
   Surface wpattern;
   std::string water_type;
-  uint       m_last_preview_redraw;
+  uint m_last_preview_redraw;
   uint next_wave_shift;
+  bool simple_mode;
 
   void Init();
   void CalculateWaveHeights();
@@ -62,13 +63,15 @@ public:
   void Refresh();
   void Draw();
 
-  bool IsActive() const;
+  bool IsActive() const { return water_type != "no"; }
   int GetHeight(int x) const;
-  uint GetSelfHeight() const;
-  const Color* GetColor() const;
+  uint GetSelfHeight() const { return water_height + height_mvt; }
+  const Color* GetColor() const { return type_color; }
 
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;
   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
+  void SetMode(bool s) { simple_mode = s; }
+  bool GetMode() { return simple_mode; }
 };
 #endif

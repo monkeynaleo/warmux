@@ -23,6 +23,7 @@
 #include <SDL.h>
 #include "game/game_mode.h"
 #include "game/time.h"
+#include "graphic/video.h"
 #include "interface/interface.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -48,17 +49,18 @@ const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
 int Water::pattern_height = 0;
 
-Water::Water() :
-  type_color(NULL),
-  height_mvt(0),
-  shift1(0),
-  water_height(0),
-  time_raise(0),
-  height(PATTERN_WIDTH, 0),
-  wave_height(3, EMPTY_WAVE_HEIGHT_VECTOR),
-  water_type("no"),
-  m_last_preview_redraw(0),
-  next_wave_shift(0)
+Water::Water()
+  : type_color(NULL)
+  , height_mvt(0)
+  , shift1(0)
+  , water_height(0)
+  , time_raise(0)
+  , height(PATTERN_WIDTH, 0)
+  , wave_height(3, EMPTY_WAVE_HEIGHT_VECTOR)
+  , water_type("no")
+  , m_last_preview_redraw(0)
+  , next_wave_shift(0)
+  , simple_mode(false)
 {
 }
 
@@ -173,15 +175,20 @@ void Water::Refresh()
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
       uint dt = now - time_raise;
-      height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
-               sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
-                   / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO*PI)
-               )/(a*dt+b));
+      if (simple_mode) {
+        height_mvt = (GO_UP_STEP*dt)/t;
+      } else {
+        height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
+                 sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
+                     / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO*PI)
+                 )/(a*dt+b));
+      }
     } else {
       time_raise += GO_UP_TIME * 60 * 1000;
       water_height += GO_UP_STEP;
     }
   }
+
   CalculateWaveHeights();
 }
 
@@ -209,7 +216,6 @@ void Water::CalculateWavePattern()
   /* Locks on SDL_Surface must be taken when accessing pixel member */
   SDL_LockSurface(surface.GetSurface());
   SDL_LockSurface(pattern.GetSurface());
-  SDL_LockSurface(bottom.GetSurface());
 
   /* Copy directly the surface image into the pattern image. This doesn't use
    * blit in order to save CPU but it makes this code not really easy to read...
@@ -230,7 +236,6 @@ void Water::CalculateWavePattern()
     }
   }
 
-  SDL_UnlockSurface(bottom.GetSurface());
   SDL_UnlockSurface(pattern.GetSurface());
   SDL_UnlockSurface(surface.GetSurface());
 
@@ -243,7 +248,8 @@ void Water::Draw()
     return;
   }
 
-  int screen_bottom = (int)Camera::GetInstance()->GetPosition().y + (int)Camera::GetInstance()->GetSize().y;
+  const Camera* cam = Camera::GetConstInstance();
+  int screen_bottom = (int)cam->GetPosition().y + (int)cam->GetSize().y;
   int water_top = GetWorld().GetHeight() - (water_height + height_mvt) - 20;
 
   if (screen_bottom < water_top) {
@@ -252,12 +258,12 @@ void Water::Draw()
 
   CalculateWavePattern();
 
-  int x0 = Camera::GetInstance()->GetPosition().x % PATTERN_WIDTH;
-  int cameraRightPosition = Camera::GetInstance()->GetPosition().x + Camera::GetInstance()->GetSize().x;
+  int x0 = cam->GetPosition().x % PATTERN_WIDTH;
+  int cameraRightPosition = cam->GetPosition().x + cam->GetSize().x;
 
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
   for (; y < screen_bottom; y += pattern_height) {
-    for (int x = Camera::GetInstance()->GetPosition().x - x0;
+    for (int x = cam->GetPosition().x - x0;
          x < cameraRightPosition;
          x += PATTERN_WIDTH) {
       AbsoluteDraw(bottom, Point2i(x, y));
@@ -266,7 +272,7 @@ void Water::Draw()
 
   y = water_top;
   for (int wave = 0; wave < WAVE_COUNT; wave++) {
-    for (int x = Camera::GetInstance()->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
+    for (int x = cam->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
          x < cameraRightPosition;
          x += PATTERN_WIDTH) {
       AbsoluteDraw(pattern, Point2i(x, y));
@@ -275,30 +281,14 @@ void Water::Draw()
   }
 }
 
-bool Water::IsActive() const
-{
-  return water_type != "no";
-}
-
 int Water::GetHeight(int x) const
 {
   if (IsActive()) {
-    return height[x % PATTERN_WIDTH]
-           + GetWorld().GetHeight()
-           - (water_height + height_mvt);
+    return GetWorld().GetHeight() - (water_height + height_mvt) +
+           height[x % PATTERN_WIDTH];
   } else {
     return GetWorld().GetHeight();
   }
-}
-
-uint Water::GetSelfHeight() const
-{
-  return water_height + height_mvt;
-}
-
-const Color* Water::GetColor() const
-{
-  return type_color;
 }
 
 void Water::Splash(const Point2i& pos) const
