@@ -36,11 +36,11 @@ public:
 
   ControlItem(ManMachineInterface::Key_t action,
               uint height, bool force_widget_size = true)
-    : HBox(height, true, force_widget_size)
+    : HBox(height, false, force_widget_size)
     , key_action(action)
   {
     SetMargin(0);
-    SetBorder(1, 1);
+    SetBorder(0, 0);
 
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
