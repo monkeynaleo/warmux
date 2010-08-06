@@ -70,7 +70,7 @@ HelpMenu::HelpMenu()
   int max_w    = window_w - 2*border;
 
   MultiTabs * tabs =
-    new MultiTabs(Point2i(max_w, window_h - border));
+    new MultiTabs(Point2i(max_w, window_h - 2*border));
   tabs->SetPosition(border, border);
 
   Widget *w = new FigureWidget(Point2i(max_w,
