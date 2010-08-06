@@ -40,7 +40,7 @@ MsgBox::~MsgBox()
 
 void MsgBox::NewMessage(const std::string &msg, const Color& color)
 {
-  bool del;
+  bool del = false;
 
   if (WidgetCount() >= max_history+1) {
     // Remove first lines
