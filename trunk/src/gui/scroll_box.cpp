@@ -30,8 +30,12 @@
 #define BORDER        2
 #define NO_DRAG      -1
 
-ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size)
+static const Color c_even(0x80, 0x80, 0x80, 0x40);
+static const Color  c_odd(0x80, 0x80, 0x80, 0x20);
+
+ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alternate)
   : WidgetList(_size)
+  , alternate_colors(alternate)
   , m_up(NULL)
   , m_down(NULL)
   , start_drag_y(-1)
@@ -174,6 +178,9 @@ void ScrollBox::__Update(const Point2i & mousePosition,
 void ScrollBox::AddWidget(Widget* widget)
 {
   vbox->AddWidget(widget);
+  if (alternate_colors) {
+    widget->SetBackgroundColor((vbox->WidgetCount()&1) ? c_odd : c_even);
+  }
 }
 
 void ScrollBox::RemoveWidget(Widget* w)
