@@ -295,7 +295,7 @@ void Menu::DrawBackground()
   background->Blit(GetMainWindow(), 0, 0);
 }
 
-void Menu::RedrawBackground(const Rectanglei & rect)
+void Menu::RedrawBackground(const Rectanglei & rect) const
 {
   if (NULL == background) {
     return;

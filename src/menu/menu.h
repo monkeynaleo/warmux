@@ -61,7 +61,7 @@ public:
                  const xmlNode * rootMenuNode);
 
    void Run(bool skip=false);
-   virtual void RedrawBackground(const Rectanglei& rect);
+   virtual void RedrawBackground(const Rectanglei& rect) const;
    virtual void RedrawMenu();
 
    void DisplayError(const std::string &msg);

@@ -28,6 +28,9 @@
 
 class WidgetList : public Widget
 {
+public:
+  typedef std::list<Widget*>::iterator wit;
+
 private:
   Widget* selected_widget;
 
@@ -41,6 +44,11 @@ public:
   WidgetList(Profile * profile,
              const xmlNode * widgetListNode);
   virtual ~WidgetList();
+
+  virtual void SetBackgroundColor(const Color &background_color);
+  virtual void SetHighlightBgColor(const Color &highlight_bg_color);
+  virtual void SetSelfBackgroundColor(const Color &background_color);
+  virtual void SetSelfHighlightBgColor(const Color &highlight_bg_color);
 
   virtual void Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
