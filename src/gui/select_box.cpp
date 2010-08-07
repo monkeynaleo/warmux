@@ -30,6 +30,7 @@ SelectBox::SelectBox(const Point2i& size, bool always, bool force, bool alt)
   , default_item_color(defaultListColor3)
   , always_one_selected(always)
   , selected_item(-1)
+  , last(NULL)
 {
   vbox->SetMargin(0);
 }
@@ -37,22 +38,18 @@ SelectBox::SelectBox(const Point2i& size, bool always, bool force, bool alt)
 void SelectBox::Update(const Point2i& mousePosition,
                        const Point2i& lastMousePosition)
 {
-  ScrollBox::Update(mousePosition, lastMousePosition);
-
-  Surface& surf = GetMainWindow();
-  Rectanglei clip(position, Point2i(size.x - scrollbar_width, size.y));
-  SwapWindowClip(clip);
-
-  if (selected_item != -1) {
-    Widget *sel = m_items[selected_item];
-    surf.BoxColor(*sel, selected_item_color);
+  if (last && (selected_item==-1 || m_items[selected_item]!=last)) {
+    last->SetHighlighted(false);
+    last->SetHighlightBgColor(selected_item_color);
   }
-
   int item = MouseIsOnWhichItem(mousePosition);
   if (item!=-1 && item!=selected_item) {
-    surf.BoxColor(*(m_items[item]), default_item_color);
+    last = m_items[item];
+    last->SetHighlighted(true);
+    last->SetHighlightBgColor(default_item_color);
   }
-  SwapWindowClip(clip);
+
+  ScrollBox::Update(mousePosition, lastMousePosition);
 }
 
 Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
@@ -74,11 +71,18 @@ Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
   return ScrollBox::ClickUp(mousePosition, button);
 }
 
+void SelectBox::AddWidget(Widget* w)
+{
+  m_items.push_back(w);
+  w->SetHighlightBgColor(selected_item_color);
+  ScrollBox::AddWidget(w);
+}
+
 void SelectBox::AddWidgetItem(bool select, Widget* w)
 {
   // Let's make sure we call SelectBox method and not a child method,
   // as we are not sure of the consequences
-  SelectBox::AddWidget(w);
+  AddWidget(w);
   if (select)
     Select(m_items.size()-1);
 }
@@ -86,13 +90,22 @@ void SelectBox::AddWidgetItem(bool select, Widget* w)
 void SelectBox::Select(uint index)
 {
   ASSERT(index < m_items.size());
+  if (selected_item != -1)
+    Deselect();
   selected_item = index;
+  m_items[index]->SetHighlightBgColor(selected_item_color);
+  m_items[index]->SetHighlighted(true);
+  //m_items[index]->NeedRedrawing();
   NeedRedrawing();
 }
 
 void SelectBox::Deselect()
 {
   ASSERT(always_one_selected == false);
+  if (selected_item != -1) {
+    m_items[selected_item]->SetHighlighted(false);
+    //m_items[selected_item]->NeedRedrawing();
+  }
   selected_item = -1;
   NeedRedrawing();
 }
@@ -102,6 +115,8 @@ void SelectBox::RemoveSelected()
   ASSERT (always_one_selected == false);
 
   if (selected_item != -1) {
+    if (last == m_items[selected_item])
+      last = NULL;
     m_items.erase(m_items.begin() + selected_item);
     selected_item =- 1;
   }
@@ -128,13 +143,6 @@ void ItemBox::AddItem(bool select, Widget* w, const void* value)
   // First put the value, because it is accessed by Select
   m_values.push_back(value);
   SelectBox::AddWidgetItem(select, w);
-}
-
-void ItemBox::Select(uint index)
-{
-  ASSERT(index < m_items.size());
-  selected_item = index;
-  NeedRedrawing();
 }
 
 void ItemBox::RemoveSelected()

@@ -36,6 +36,7 @@ protected:
   std::vector<Widget*> m_items;
   bool always_one_selected;
   int  selected_item;
+  Widget *last;
 
 public:
   SelectBox(const Point2i& size,
@@ -50,7 +51,7 @@ public:
 
   // to add a widget
   virtual void RemoveSelected();
-  virtual void AddWidget(Widget* w) { m_items.push_back(w); ScrollBox::AddWidget(w); }
+  virtual void AddWidget(Widget* w);
   virtual void AddWidgetItem(bool select, Widget* w);
   virtual void Empty() { m_items.clear(); selected_item = -1; ScrollBox::Empty(); }
 
@@ -78,11 +79,6 @@ class ItemBox : public SelectBox
 public:
   ItemBox(const Point2i& size, bool always = false, bool force = true)
     : SelectBox(size, always, force) { };
-  void AddWidget(Widget* /*w*/)
-  {
-    fprintf(stderr, "ItemBox::AddWidget called\n");
-    exit(1);
-  }
   void AddItem(bool select, Widget* w, const void* value);
   void AddLabelItem(bool selected,
                     const std::string & label,
@@ -92,7 +88,6 @@ public:
                     const Color & color = white_color);
   void RemoveSelected();
   void Empty() { m_values.clear(); SelectBox::Empty(); }
-  void Select(uint index);
 
   const void* GetSelectedValue() const;
 };

@@ -30,6 +30,9 @@ class WidgetList : public Widget
 {
 public:
   typedef std::list<Widget*>::iterator wit;
+  typedef std::list<Widget*>::const_iterator cwit;
+  typedef std::list<Widget*>::reverse_iterator rwit;
+  typedef std::list<Widget*>::const_reverse_iterator crwit;
 
 private:
   Widget* selected_widget;
@@ -45,6 +48,8 @@ public:
              const xmlNode * widgetListNode);
   virtual ~WidgetList();
 
+  // Highlight and background
+  virtual void SetHighlighted(bool focus);
   virtual void SetBackgroundColor(const Color &background_color);
   virtual void SetHighlightBgColor(const Color &highlight_bg_color);
   virtual void SetSelfBackgroundColor(const Color &background_color);

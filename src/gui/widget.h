@@ -110,7 +110,7 @@ public:
   void SetFocus(bool focus);
 
   bool IsHighlighted() const;
-  void SetHighlighted(bool focus);
+  virtual void SetHighlighted(bool focus);
 
   // border, background color
   virtual void SetBorder(const Color & border_color, uint boder_size);

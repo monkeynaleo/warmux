@@ -87,6 +87,13 @@ void WidgetList::RemoveWidget(Widget* w)
   delete w;
 }
 
+void WidgetList::SetHighlighted(bool focus)
+{
+  Widget::SetHighlighted(focus);
+  for (wit w = widget_list.begin(); w != widget_list.end(); w++)
+    (*w)->SetHighlighted(focus);
+}
+
 void WidgetList::SetFocusOn(Widget* widget, bool force_mouse_position)
 {
   if (widget == selected_widget)
@@ -117,9 +124,7 @@ Widget* WidgetList::GetFirstWidget() const
 
   MSG_DEBUG("widgetlist", "%p::GetFirstWidget()", this);
 
-  for (std::list<Widget*>::const_iterator it = widget_list.begin();
-       it != widget_list.end();
-       it++) {
+  for (cwit it = widget_list.begin(); it != widget_list.end(); it++) {
     if ((*it)->IsWidgetBrowser()) {
       MSG_DBG_RTTI("widgetlist", "%s:%p is a widget browser!\n",
                    typeid(*it).name(), (*it));
@@ -142,12 +147,10 @@ Widget* WidgetList::GetLastWidget() const
 {
   Widget *last = NULL;
 
-  for (std::list<Widget*>::const_reverse_iterator it = widget_list.rbegin();
-       it != widget_list.rend();
-       it++) {
+  for (crwit it = widget_list.rbegin(); it != widget_list.rend(); it++) {
     if ((*it)->IsWidgetBrowser()) {
       last = (*it)->GetLastWidget();
-      if (last != NULL)
+      if (last)
         return last;
     } else {
       return (*it);
