@@ -26,11 +26,11 @@ Label::Label(const std::string & text,
              Font::font_size_t fontSize,
              Font::font_style_t fontStyle,
              const Color & fontColor,
-             bool centered,
+             Text::Alignment align,
              bool shadowed,
              const Color & shadowColor)
   : Text(text, fontColor, fontSize, fontStyle, shadowed, shadowColor)
-  , center(centered)
+  , align(align)
 {
   size.x = maxWidth;
   SetMaxWidth(size.x);
@@ -38,16 +38,16 @@ Label::Label(const std::string & text,
   Widget::clickable = false;
 }
 
-Label::Label(const Point2i & size) :
-  Widget(size, false),
-  center(false)
+Label::Label(const Point2i & size)
+  : Widget(size, false)
+  , align(Text::ALIGN_TOP_LEFT)
 {
 }
 
 Label::Label(Profile * profile,
-             const xmlNode * labelNode) :
-  Widget(profile, labelNode),
-  center(false)
+             const xmlNode * labelNode)
+  : Widget(profile, labelNode)
+  , align(Text::ALIGN_TOP_LEFT)
 {
 }
 
@@ -75,10 +75,24 @@ void Label::Draw(const Point2i & mousePosition) const
 {
   (void)mousePosition;
 
-  if (!center) {
+  switch (align)
+  {
+  case Text::ALIGN_TOP_LEFT:
     DrawTopLeft(position);
-  } else {
+    break;
+  case Text::ALIGN_CENTER_TOP:
     DrawCenterTop(Point2i(position.x + size.x/2, position.y));
+    break;
+  case Text::ALIGN_TOP_RIGHT:
+    DrawTopRight(Point2i(position.x + size.x, position.y));
+    break;
+  case Text::ALIGN_CENTER:
+    DrawCenter(position + size/2);
+    break;
+  case Text::ALIGN_CENTER_LEFT:
+  default:
+    DrawCenterLeft(Point2i(position.x, position.y + size.y/2));
+    break;
   }
 }
 

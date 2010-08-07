@@ -50,10 +50,12 @@ SpinButton::SpinButton (const std::string & _label,
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  txtLabel = new Label(_label, 100, Font::FONT_SMALL, Font::FONT_BOLD, color, false, shadowed);
+  txtLabel = new Label(_label, 100, Font::FONT_SMALL, Font::FONT_BOLD,
+                       color, Text::ALIGN_TOP_LEFT, shadowed);
   txtLabel->SetMaxWidth(size.x - 30);
 
-  txtValue = new Label(" ", 100, Font::FONT_SMALL, Font::FONT_BOLD, color, false, shadowed);
+  txtValue = new Label(" ", 100, Font::FONT_SMALL, Font::FONT_BOLD,
+                       color, Text::ALIGN_TOP_LEFT, shadowed);
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());

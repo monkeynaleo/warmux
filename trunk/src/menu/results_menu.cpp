@@ -381,16 +381,16 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
     winner_box = new VBox(240, true);
     winner_box->AddWidget(new Label(_("Winner"), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    dark_gray_color, true));
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
     PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
     winner_logo->SetSurface(first_team->GetBigFlag());
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(first_team->GetName(), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    dark_gray_color, true));
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
 
     std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
     winner_box->AddWidget(new Label(tmp, 240, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                                    dark_gray_color, true));
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
 
     winner_box->SetPosition(x, y);
     widgets.AddWidget(winner_box);

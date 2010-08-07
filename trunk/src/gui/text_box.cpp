@@ -27,7 +27,8 @@
 
 TextBox::TextBox (const std::string &label, uint max_width,
                   Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Label(label, max_width, fsize, fstyle, white_color, false, true),
+  Label(label, max_width, fsize, fstyle,
+        white_color, Text::ALIGN_TOP_LEFT, true),
   max_nb_chars(0),
   cursor_pos(label.size())
 {

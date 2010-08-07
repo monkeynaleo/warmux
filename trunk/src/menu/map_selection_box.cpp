@@ -102,11 +102,13 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
 
   // Map information
   map_name_label = new Label("Map", W_UNDEF, Font::FONT_SMALL,
-                             Font::FONT_BOLD, dark_gray_color, true, false);
+                             Font::FONT_BOLD, dark_gray_color,
+                             Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_name_label);
 
   map_author_label = new Label("Author", W_UNDEF, Font::FONT_SMALL,
-                               Font::FONT_BOLD, dark_gray_color, true, false);
+                               Font::FONT_BOLD, dark_gray_color,
+                               Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_author_label);
 
   // Load Maps' list
