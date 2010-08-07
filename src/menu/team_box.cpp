@@ -73,14 +73,12 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
   previous_player_name = "team";
   team_name = new Label(previous_player_name, width,
-                        Font::FONT_MEDIUM, Font::FONT_BOLD,
-                        dark_gray_color, false, false);
+                        Font::FONT_MEDIUM, Font::FONT_BOLD);
   tmp_player_box->AddWidget(team_name);
 
   /********    Names: "Head commander" + text/custom team    *******/
   tmp_player_box->AddWidget(new Label(_("Head commander"), width,
-                                      Font::FONT_SMALL, Font::FONT_BOLD,
-                                      dark_gray_color, false, false));
+                                      Font::FONT_SMALL, Font::FONT_BOLD));
 
   custom_team_list = GetCustomTeamsList().GetList();
   custom_team_current_id = 0;

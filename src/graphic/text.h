@@ -28,6 +28,17 @@
 
 class Text
 {
+public:
+  typedef enum
+  {
+    ALIGN_CENTER,
+    ALIGN_TOP_LEFT,
+    ALIGN_TOP_RIGHT,
+    ALIGN_CENTER_TOP,
+    ALIGN_CENTER_LEFT,
+    ALIGN_CENTER_RIGHT
+  } Alignment;
+
 protected:
   Surface surf;
   Surface background; //shadow or outline or nothing;
@@ -67,6 +78,8 @@ public:
   void DrawTopLeft(const Point2i & position) const;
   void DrawTopRight(const Point2i & position) const;
   void DrawCenterTop(const Point2i & position) const;
+  void DrawCenterLeft(const Point2i & position) const;
+  void DrawCenterRight(const Point2i & position) const;
 
   //Draw text cursor only (text_pos = position for DrawTopLeft)
   void DrawCursor(const Point2i & text_pos,

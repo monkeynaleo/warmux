@@ -297,6 +297,16 @@ void Text::DrawCenterTop (const Point2i &position) const
   DrawTopLeft(position - Point2i(surf.GetWidth()/2, 0));
 }
 
+void Text::DrawCenterLeft (const Point2i &position) const
+{
+  DrawTopLeft(position - Point2i(0, surf.GetHeight()/2));
+}
+
+void Text::DrawCenterRight (const Point2i &position) const
+{
+  DrawTopLeft(position - Point2i(surf.GetWidth(), surf.GetHeight()/2));
+}
+
 void Text::DrawTopLeft(const Point2i &position) const
 {
   if(txt == "" && !dummy) return;
