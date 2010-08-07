@@ -45,15 +45,15 @@ public:
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
     label_action = new Label(kbd->GetHumanReadableActionName(action),
-                             320, Font::FONT_MEDIUM, Font::FONT_BOLD);
-    //label_action->SetBorder(black_color, 1);
+                             320, Font::FONT_MEDIUM, Font::FONT_BOLD,
+                             dark_gray_color, Text::ALIGN_CENTER_LEFT);
     AddWidget(label_action);
 
     // Actual key
     key_value = kbd->GetKeyAssociatedToAction(action);
     label_key = new Label(kbd->GetKeyNameFromKey(key_value),
-                          70, Font::FONT_SMALL, Font::FONT_NORMAL);
-    //label_key->SetBorder(black_color, 1);
+                          70, Font::FONT_SMALL, Font::FONT_NORMAL,
+                          dark_gray_color, Text::ALIGN_CENTER_LEFT);
     AddWidget(label_key);
   }
 
@@ -76,11 +76,12 @@ public:
 
 ControlConfig::ControlConfig(const Point2i& size, bool readonly,
                              bool force_widget_size)
-  : SelectBox(size, !readonly, force_widget_size)
+  : SelectBox(size, !readonly, force_widget_size, true)
   , read_only(readonly)
 {
+  SetBackgroundColor(transparent_color);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
-    AddWidget(new ControlItem((ManMachineInterface::Key_t)i, 24, false));
+    AddWidget(new ControlItem((ManMachineInterface::Key_t)i, 24));
   }
 }
 

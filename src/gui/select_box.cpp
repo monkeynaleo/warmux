@@ -24,8 +24,8 @@
 #include "gui/vertical_box.h"
 #include "include/app.h"
 
-SelectBox::SelectBox(const Point2i& size, bool always, bool force)
-  : ScrollBox(size, force)
+SelectBox::SelectBox(const Point2i& size, bool always, bool force, bool alt)
+  : ScrollBox(size, force, alt)
   , selected_item_color(defaultListColor2)
   , default_item_color(defaultListColor3)
   , always_one_selected(always)
@@ -157,5 +157,8 @@ void ItemBox::AddLabelItem(bool selected,
                            Font::font_style_t fstyle,
                            const Color & color)
 {
-  AddItem(selected, new Label(label, 200, fsize, fstyle, color, false, true), value);
+  AddItem(selected,
+          new Label(label, 200, fsize, fstyle,
+                    color, Text::ALIGN_TOP_LEFT, true),
+          value);
 }

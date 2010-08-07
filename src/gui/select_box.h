@@ -40,7 +40,8 @@ protected:
 public:
   SelectBox(const Point2i& size,
             bool always_one_selected = true,
-            bool force_widget_size = true);
+            bool force_widget_size = true,
+            bool alternate_colors = true);
 
   // No need for a Draw method: the additional stuff drawn is made by Update
   virtual void Update(const Point2i& mousePosition,

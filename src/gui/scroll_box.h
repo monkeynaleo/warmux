@@ -34,6 +34,7 @@ class ScrollBox : public WidgetList
 protected:
   // Internal box
   VBox *vbox;
+  bool alternate_colors;
 
   // Buttons
   Button * m_up;
@@ -55,7 +56,7 @@ protected:
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
 
 public:
-  ScrollBox(const Point2i & size, bool force_widget_size = true);
+  ScrollBox(const Point2i & size, bool force = true, bool alternate = false);
   ~ScrollBox();
 
   // No need for a Draw method: the additional stuff drawn is made by Update
