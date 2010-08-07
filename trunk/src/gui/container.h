@@ -30,7 +30,7 @@ class Container
 {
  public:
   virtual ~Container() {};
-  virtual void RedrawBackground(const Rectanglei& rect) = 0;
+  virtual void RedrawBackground(const Rectanglei& rect) const = 0;
 };
 
 #endif

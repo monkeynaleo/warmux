@@ -374,8 +374,11 @@ void WidgetList::Draw(const Point2i &mousePosition) const
     r.Clip(wlr);
 
     if (r.GetSizeX() && r.GetSizeY()) {
+      Rectanglei wr = r;
       SwapWindowClip(r);
+      (*w)->RedrawBackground(wr);
       (*w)->Draw(mousePosition);
+      (*w)->RedrawForeground();
       SwapWindowClip(r);
     }
   }
@@ -386,35 +389,26 @@ void WidgetList::Draw(const Point2i &mousePosition) const
 
 Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
 {
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
-    if((*w)->Contains(mousePosition))
-    {
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++) {
+    if ((*w)->Contains(mousePosition)) {
       Widget* child = (*w)->ClickUp(mousePosition,button);
-      if(child != NULL)
-      {
+
+      if (child)
         SetFocusOn(child);
-        return child;
-      }
-      return NULL;
+
+      return child;
     }
   }
+
   return NULL;
 }
 
 Widget* WidgetList::Click(const Point2i &mousePosition, uint button)
 {
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
-    if((*w)->Contains(mousePosition))
-    {
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++)
+    if ((*w)->Contains(mousePosition))
       (*w)->Click(mousePosition,button);
-    }
-  }
+
   return NULL;
 }
 
@@ -422,20 +416,36 @@ void WidgetList::NeedRedrawing()
 {
   need_redrawing = true;
 
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++)
     (*w)->NeedRedrawing();
-  }
 }
 
 void WidgetList::Pack()
 {
-  for(std::list<Widget*>::iterator w=widget_list.begin();
-      w != widget_list.end();
-      w++)
-  {
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++)
     (*w)->Pack();
-  }
+}
+
+void WidgetList::SetSelfBackgroundColor(const Color &background_color)
+{
+  Widget::SetBackgroundColor(background_color);
+}
+
+void WidgetList::SetSelfHighlightBgColor(const Color &highlight_bg_color)
+{
+  Widget::SetHighlightBgColor(highlight_bg_color);
+}
+
+void WidgetList::SetBackgroundColor(const Color &background_color)
+{
+  Widget::SetBackgroundColor(background_color);
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++)
+    (*w)->SetBackgroundColor(background_color);
+}
+
+void WidgetList::SetHighlightBgColor(const Color &highlight_bg_color)
+{
+  Widget::SetHighlightBgColor(highlight_bg_color);
+  for (wit w=widget_list.begin(); w != widget_list.end(); w++)
+    (*w)->SetHighlightBgColor(highlight_bg_color);
 }

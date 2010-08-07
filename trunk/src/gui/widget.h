@@ -65,9 +65,6 @@ protected:
   virtual void __Update(const Point2i &/* mousePosition */,
                         const Point2i &/* lastMousePosition */) {};
 
-  void RedrawBackground(const Rectanglei& rect);
-  void RedrawForeground();
-
   void ParseXMLMisc(void);
   void ParseXMLBorder(void);
   void ParseXMLBackground(void);
@@ -85,6 +82,9 @@ public:
   Widget(Profile * profile,
          const xmlNode * widgetNode);
   virtual ~Widget() { };
+
+  void RedrawBackground(const Rectanglei& rect) const;
+  void RedrawForeground() const;
 
   virtual bool LoadXMLConfiguration(void) { return false; };
 
@@ -113,10 +113,10 @@ public:
   void SetHighlighted(bool focus);
 
   // border, background color
-  void SetBorder(const Color & border_color, uint boder_size);
+  virtual void SetBorder(const Color & border_color, uint boder_size);
   const Color & GetBorderColor() const { return border_color; };
 
-  void SetBackgroundColor(const Color &background_color);
+  virtual void SetBackgroundColor(const Color &background_color);
   const Color& GetBackgroundColor() const { return background_color; };
 
   void SetHighlightBgColor(const Color &highlight_bg_color);

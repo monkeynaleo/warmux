@@ -83,7 +83,7 @@ Widget::Widget(Profile * _profile,
 }
 
 // From Container: it redraws the border and the background
-void Widget::RedrawBackground(const Rectanglei& rect)
+void Widget::RedrawBackground(const Rectanglei& rect) const
 {
   if (ct != NULL)
     ct->RedrawBackground(rect);
@@ -100,7 +100,7 @@ void Widget::RedrawBackground(const Rectanglei& rect)
   }
 }
 
-void Widget::RedrawForeground()
+void Widget::RedrawForeground() const
 {
   if (!visible)
     return;
