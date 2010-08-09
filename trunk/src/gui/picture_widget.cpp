@@ -26,13 +26,12 @@
 #include "include/app.h"
 
 PictureWidget::PictureWidget(const Point2i & _size)
-  : Widget(size, false)
+  : Widget(_size, false)
   , disabled(false)
   , type(NO_SCALING)
   , picture_size(0, 0)
   , spr(NULL)
 {
-  size = _size;
 }
 
 PictureWidget::PictureWidget(const Point2i & _size,

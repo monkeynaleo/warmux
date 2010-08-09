@@ -52,6 +52,9 @@ private:
 
 public:
   PictureWidget(const Point2i & size);
+  PictureWidget(const Surface& surface,
+                ScalingType type = NO_SCALING,
+                bool antialiasing = false);
   PictureWidget(const Point2i & size,
                 const std::string & resource_id,
                 ScalingType type = NO_SCALING);
