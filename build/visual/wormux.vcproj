@@ -610,11 +610,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\gui\control_config.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\control_config.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\gui\energy_bar.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\src\gui\energy_bar.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\figure_widget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\figure_widget.h"
 					>
 				</File>
 				<File
