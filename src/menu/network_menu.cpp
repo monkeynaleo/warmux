@@ -120,7 +120,7 @@ NetworkMenu::NetworkMenu() :
   Box* options_box = new VBox(200, true);
 
   mode_label = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                         primary_red_color, Text::ALIGN_TOP_LEFT, true);
+                         primary_red_color, Text::ALIGN_LEFT_TOP, true);
   options_box->AddWidget(mode_label);
 
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);

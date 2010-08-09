@@ -108,9 +108,8 @@ void ButtonPic::Draw(const Point2i &mousePosition) const
     txt_label->SetColor(dark_gray_color);
   }
 
-  txt_label->DrawCenterTop(GetPosition()
-         + Point2i(GetSizeX()/2,
-             GetSizeY() - txt_label->GetHeight()));
+  txt_label->DrawCenterTop(GetPosition() + Point2i(GetSizeX()/2,
+                           GetSizeY() - txt_label->GetHeight()));
 }
 
 void ButtonPic::Pack()

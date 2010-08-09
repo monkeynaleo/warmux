@@ -37,7 +37,7 @@ public:
         Font::font_size_t font_size = Font::FONT_SMALL,
         Font::font_style_t font_style = Font::FONT_BOLD,
         const Color & color = dark_gray_color,
-        Text::Alignment align = Text::ALIGN_TOP_LEFT,
+        Text::Alignment align = Text::ALIGN_LEFT_TOP,
         bool shadowed = false,
         const Color & shadowColor = black_color);
   Label(const Point2i & size);

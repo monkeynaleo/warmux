@@ -61,7 +61,7 @@ void TextList::Draw(int x, int y, int height){
 
   for(; it!=end; it++){
     //Draw each item in the list
-    (*it)->DrawTopLeft(Point2i(x, y));
+    (*it)->DrawLeftTop(Point2i(x, y));
     y+=height;
   }
 }
@@ -70,5 +70,5 @@ void TextList::DrawLine(const Text* newline, int x, int y, int height) const {
   int size = list.size();
 
   y += (size * height);
-  newline->DrawTopLeft(Point2i(x, y));
+  newline->DrawLeftTop(Point2i(x, y));
 }
