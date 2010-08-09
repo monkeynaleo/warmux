@@ -32,30 +32,30 @@
 #include "tool/xml_document.h"
 
 static const FigureWidget::Caption captions[] = {
-  { _("Quit game"), 81, 13 },
-  { _("High jump"), 439, 326 },
-  { _("Jump backwards"), 439, 297 },
-  { _("Jump backwards"), 439, 356 },
-  { _("Drag&drop: Move camera"), 520, 395 },
-  { _("Center camera on character"), 520, 422 },
-  { _("Show/hide the interface"), 271, 43 },
-  { _("Fullscreen / window"), 491, 42 },
-  { _("Configuration menu"), 491, 72 },
-  { _("Talk in network battles"), 92, 296 },
-  { _("Change weapon category"), 81, 72 },
-  { _("Change weapon countdown"), 618, 164 },
-  { _("Change aim angle"), 618, 194 },
-  { _("Move character"), 618, 286 },
-  { _("On map: select a target"), 618, 225 },
-  { _("On a character: select it"), 618, 256 },
-  { _("Show weapons menu"), 618, 134 },
-  { _("Smaller aim angle and walk step"), 92, 326 },
-  { _("Move camera with mouse or arrows"), 386, 394 },
-  { _("Weapon: Fire / Bonus box: drop"), 260, 326 },
-  { _("Show/hide minimap"), 271, 72 },
-  { _("Change active character"), 92, 356 },
-  { _("Center camera on character"), 386, 422 },
-  { _("Quickly quit game with Ctrl"), 81, 43 },
+  { _("Quit game"), 81, 13, DEF_CAPTIONS_PARAMS },
+  { _("High jump"), 439, 326, DEF_CAPTIONS_PARAMS },
+  { _("Jump backwards"), 439, 297, DEF_CAPTIONS_PARAMS },
+  { _("Jump backwards"), 439, 356, DEF_CAPTIONS_PARAMS },
+  { _("Drag&drop: Move camera"), 520, 395, DEF_CAPTIONS_PARAMS },
+  { _("Center camera on character"), 520, 422, DEF_CAPTIONS_PARAMS },
+  { _("Show/hide the interface"), 271, 43, DEF_CAPTIONS_PARAMS },
+  { _("Fullscreen / window"), 491, 42, DEF_CAPTIONS_PARAMS },
+  { _("Configuration menu"), 491, 72, DEF_CAPTIONS_PARAMS },
+  { _("Talk in network battles"), 92, 296, DEF_CAPTIONS_PARAMS },
+  { _("Change weapon category"), 81, 72, DEF_CAPTIONS_PARAMS },
+  { _("Change weapon countdown"), 618, 164, DEF_CAPTIONS_PARAMS },
+  { _("Change aim angle"), 618, 194, DEF_CAPTIONS_PARAMS },
+  { _("Move character"), 618, 286, DEF_CAPTIONS_PARAMS },
+  { _("On map: select a target"), 618, 225, DEF_CAPTIONS_PARAMS },
+  { _("On a character: select it"), 618, 256, DEF_CAPTIONS_PARAMS },
+  { _("Show weapons menu"), 618, 134, DEF_CAPTIONS_PARAMS },
+  { _("Smaller aim angle and walk step"), 92, 326, DEF_CAPTIONS_PARAMS },
+  { _("Move camera with mouse or arrows"), 386, 394, DEF_CAPTIONS_PARAMS },
+  { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_CAPTIONS_PARAMS },
+  { _("Show/hide minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
+  { _("Change active character"), 92, 356, DEF_CAPTIONS_PARAMS },
+  { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
+  { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
 };
 
 HelpMenu::HelpMenu()
@@ -77,7 +77,7 @@ HelpMenu::HelpMenu()
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
                                "help/shortkeys",
                                captions, ARRAY_SIZE(captions),
-                               12, PictureWidget::FIT_SCALING);
+                               PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 

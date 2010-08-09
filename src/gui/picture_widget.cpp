@@ -51,6 +51,16 @@ PictureWidget::PictureWidget(const Point2i & _size,
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
+PictureWidget::PictureWidget(const Surface & s, ScalingType type, bool antialiasing)
+  : Widget(s.GetSize(), false)
+  , disabled(false)
+  , type(type)
+  , spr(NULL)
+{
+  size = s.GetSize();
+  SetSurface(s, type, antialiasing);
+}
+
 PictureWidget::PictureWidget(Profile * profile,
                              const xmlNode * pictureNode)
   : Widget(profile, pictureNode)

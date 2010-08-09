@@ -31,6 +31,7 @@
 #include "graphic/video.h"
 #include "gui/box.h"
 #include "gui/button.h"
+#include "gui/figure_widget.h"
 #include "gui/label.h"
 #include "gui/scroll_box.h"
 #include "gui/null_widget.h"
@@ -359,6 +360,11 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
 
 //=========================================================
 
+static bool IsPodiumSeparate()
+{
+  return GetMainWindow().GetSize() >= Point2i(640, 480);
+}
+
 ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   : Menu("menu/bg_results", vOk)
   , results(v)
@@ -368,51 +374,29 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , msg_box(NULL)
   , winner_box(NULL)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  uint x = 20;
-  uint y = 20;
+  Profile *res  = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  Point2i wsize = GetMainWindow().GetSize();
+  bool    small = !IsPodiumSeparate();
+  uint x        = wsize.GetX() * 0.02;
+  uint tab_x    = small ? x : 260+16+x;
+  uint y        = wsize.GetY() * 0.02;
 
+  printf("Set x=%i\n", tab_x);
   if (!disconnected)
     ComputeTeamsOrder();
 
-  // And the winner is :
-  if (first_team) {
-    JukeBox::GetInstance()->Play("default", "victory");
-
-    winner_box = new VBox(240, true);
-    winner_box->AddWidget(new Label(_("Winner"), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
-    PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64));
-    winner_logo->SetSurface(first_team->GetBigFlag());
-    winner_box->AddWidget(winner_logo);
-    winner_box->AddWidget(new Label(first_team->GetName(), 240, Font::FONT_BIG, Font::FONT_BOLD,
-                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
-
-    std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
-    winner_box->AddWidget(new Label(tmp, 240, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
-
-    winner_box->SetPosition(x, y);
-    widgets.AddWidget(winner_box);
-    widgets.Pack();
-  }
-
   // Load the podium img
   podium_img = GetResourceManager().LoadImage(res, "menu/podium");
+  podium_img.SetAlpha(0, 0);
   GetResourceManager().UnLoadXMLProfile(res);
 
-  x+=260;
-  const Point2i& wsize = GetMainWindow().GetSize();
-
-  Point2i tab_size = wsize - Point2i(x+16, y+70);
-
-  VBox* tmp_box = new VBox(tab_size.x, false, false);
-  tmp_box->SetNoBorder();
+  Point2i tab_size = wsize - Point2i(tab_x + x, y+actions_buttons->GetSizeY());
 
   // Are we in network ? yes, so display a talkbox
   if (Network::IsConnected()) {
-    msg_box = new TalkBox(Point2i(tab_size.x, 120), Font::FONT_SMALL, Font::FONT_BOLD);
-    tab_size.y -= 125;
+    int talk_size = tab_size.y/4;
+    msg_box = new TalkBox(Point2i(tab_size.x, talk_size), Font::FONT_SMALL, Font::FONT_BOLD);
+    tab_size.y -= talk_size;
   }
 
   tabs = new MultiTabs(tab_size);
@@ -420,8 +404,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   // Create tabs for each team result
   stats = new MultiTabs(tab_size - 2*BorderSize);
   stats->SetMaxVisibleTabs(1);
-  for (uint i=0; i<v.size(); i++)
-  {
+  for (uint i=0; i<v.size(); i++) {
     const Team* team = v[i]->getTeam();
     const std::string name = (team) ? team->GetName() : _("All teams");
     stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
@@ -431,12 +414,55 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
                   new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
 
+  // Podium
+  FigureWidget::Captions captions;
+  if (second_team)
+    DrawTeamOnPodium(*second_team, Point2i(20,30));
+
+  if (third_team)
+    DrawTeamOnPodium(*third_team, Point2i(98,52));
+
+  winner_box = new VBox(240, true, true);
+  if (first_team) {
+    Font::font_size_t title = (small) ? Font::FONT_MEDIUM : Font::FONT_BIG;
+    Font::font_size_t txt   = (small) ? Font::FONT_SMALL : Font::FONT_MEDIUM;
+    JukeBox::GetInstance()->Play("default", "victory");
+
+    DrawTeamOnPodium(*first_team, Point2i(60,20));
+
+    winner_box->AddWidget(new Label(_("Winner"), 240, title, Font::FONT_BOLD,
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
+    PictureWidget* winner_logo = new PictureWidget(Point2i(64, 64)/(small+1));
+    winner_logo->SetSurface(first_team->GetFlag());
+    winner_box->AddWidget(winner_logo);
+    winner_box->AddWidget(new Label(first_team->GetName(), 240, title, Font::FONT_BOLD,
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
+
+    std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
+    winner_box->AddWidget(new Label(tmp, 240, txt, Font::FONT_BOLD,
+                                    dark_gray_color, Text::ALIGN_CENTER_TOP));
+  }
+
+  podium_img.SetAlpha(SDL_SRCALPHA, 0);
+  podium = new PictureWidget(podium_img);
+  winner_box->AddWidget(podium);
+  if (IsPodiumSeparate()) {
+    winner_box->SetPosition(x, y);
+    widgets.AddWidget(winner_box);
+    tabs->SetPosition(tab_x, y);
+  } else {
+    tabs->AddNewTab("TAB_podium", _("Podium"), winner_box);
+  }
+
+  // Final box
+  VBox* tmp_box = new VBox(tab_size.x, false, false);
+  tmp_box->SetNoBorder();
   tmp_box->AddWidget(tabs);
 
-  if (msg_box != NULL) {
+  if (msg_box) {
     tmp_box->AddWidget(msg_box);
   }
-  tmp_box->SetPosition(x, y);
+  tmp_box->SetPosition(tab_x, y);
 
   widgets.AddWidget(tmp_box);
   widgets.Pack();
@@ -458,30 +484,13 @@ void ResultsMenu::ComputeTeamsOrder()
     third_team = NULL;
 }
 
-void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position,
-                                   const Point2i& relative_position) const
+void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_position)
 {
-  Point2i flag_pos(team.GetFlag().GetWidth()/2, team.GetFlag().GetHeight());
-  Point2i position = podium_position + relative_position - flag_pos;
+  Point2i flag_pos = team.GetFlag().GetSize()/2;
+  Point2i position = relative_position - flag_pos;
 
-  Surface team_character(team.GetFlag());
-  //team_character.Flip(); ==> Why does it not work ?
-
-  GetMainWindow().Blit(team_character, position);
-}
-
-void ResultsMenu::DrawPodium(const Point2i& position) const
-{
-  GetMainWindow().Blit(podium_img, position);
-
-  if (first_team)
-    DrawTeamOnPodium(*first_team, position, Point2i(60,8));
-
-  if (second_team)
-    DrawTeamOnPodium(*second_team, position, Point2i(20,20));
-
-  if (third_team)
-    DrawTeamOnPodium(*third_team, position, Point2i(98,42));
+  Surface tmp(team.GetFlag());
+  podium_img.MergeSurface(tmp, position);
 }
 
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
@@ -508,8 +517,6 @@ void ResultsMenu::key_ok()
 
 void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
 {
-  DrawPodium(Point2i(70,250));
-
   if (Network::IsConnected()) {
     ActionHandler * action_handler = ActionHandler::GetInstance();
     action_handler->ExecFrameLessActions();
