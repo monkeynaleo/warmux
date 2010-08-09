@@ -66,9 +66,12 @@ public:
 
     // Actual key
     label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
-                          64, Font::FONT_SMALL, Font::FONT_NORMAL,
+                          70, Font::FONT_SMALL, Font::FONT_NORMAL,
                           c_black, Text::ALIGN_LEFT_CENTER);
     AddWidget(label_key);
+
+    // Spacing
+    AddWidget(new NullWidget(Point2i(6, height)));
 
     // Modifiers
     shift_box = new CheckBox("", 18, shift); AddWidget(shift_box);
