@@ -47,10 +47,12 @@ private:
   CheckBox *opt_display_multisky;
   CheckBox *opt_display_energy;
   CheckBox *opt_display_name;
-#ifndef __APPLE__
+#ifndef ANDROID
+# ifndef __APPLE__
   CheckBox *full_screen;
-#endif
+# endif
   SpinButtonWithPicture *opt_max_fps;
+#endif
 
   /* Sound options controllers */
   ComboBox *cbox_sound_freq;
