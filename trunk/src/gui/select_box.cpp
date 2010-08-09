@@ -167,6 +167,6 @@ void ItemBox::AddLabelItem(bool selected,
 {
   AddItem(selected,
           new Label(label, 200, fsize, fstyle,
-                    color, Text::ALIGN_TOP_LEFT, true),
+                    color, Text::ALIGN_CENTER, true),
           value);
 }

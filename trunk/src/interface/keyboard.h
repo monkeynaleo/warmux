@@ -44,6 +44,12 @@ public:
   void HandleKeyEvent(const SDL_Event& event);
   void SetConfig(const xmlNode *node);
   void SaveConfig( xmlNode *node) const;
+
+  int  GetRawKeyCode(int keycode) const;
+  bool HasShiftModifier(int key_code) const;
+  bool HasAltModifier(int key_code) const;
+  bool HasControlModifier(int key_code) const;
+  void SaveKeyEvent(Key_t at, int key_code, bool shift, bool alt, bool control);
 };
 
 //-----------------------------------------------------------------------------

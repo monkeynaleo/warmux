@@ -238,13 +238,13 @@ void Interface::DrawWeaponInfo() const
   int offset = (game_menu.GetWidth() - clock_background.GetWidth()) / 2;
   t_weapon_name->SetText(weapon->GetName());
   Point2i weapon_name_offset(offset - t_weapon_name->GetWidth() - MARGIN, 0);
-  t_weapon_name->DrawTopLeft(bottom_bar_pos + weapon_name_offset);
+  t_weapon_name->DrawLeftTop(bottom_bar_pos + weapon_name_offset);
 
   // Display number of ammo
   t_weapon_stock->SetText((nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : _("Stock:") + Format("%i", nbr_munition)));
   Point2i weapon_stock_offset(offset - t_weapon_stock->GetWidth() - MARGIN,
                               t_weapon_name->GetHeight());
-  t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
+  t_weapon_stock->DrawLeftTop(bottom_bar_pos + weapon_stock_offset);
 
   // Draw weapon icon
   Sprite& icon = weapon->GetIcon();
@@ -329,7 +329,7 @@ void Interface::DrawSmallInterface() const
   GetWorld().ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
   DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
   if (display_timer)
-    timer->DrawTopLeft(small_interface_position + Point2i(MARGIN * 2 + wind_bar.GetWidth(), MARGIN));
+    timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 2 + wind_bar.GetWidth(), MARGIN));
 }
 
 // draw team energy

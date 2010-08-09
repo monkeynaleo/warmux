@@ -51,11 +51,11 @@ SpinButton::SpinButton (const std::string & _label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   txtLabel = new Label(_label, 100, Font::FONT_SMALL, Font::FONT_BOLD,
-                       color, Text::ALIGN_TOP_LEFT, shadowed);
+                       color, Text::ALIGN_LEFT_TOP, shadowed);
   txtLabel->SetMaxWidth(size.x - 30);
 
   txtValue = new Label(" ", 100, Font::FONT_SMALL, Font::FONT_BOLD,
-                       color, Text::ALIGN_TOP_LEFT, shadowed);
+                       color, Text::ALIGN_LEFT_TOP, shadowed);
   std::ostringstream max_value_s;
   max_value_s << GetMaxValue();
   uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
@@ -160,9 +160,9 @@ void SpinButton::Pack()
   max_value_s << GetMaxValue();
   uint max_value_w = (*Font::GetInstance(txtValue->GetFontSize())).GetWidth(max_value_s.str());
 
-  m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(), 
+  m_plus->SetPosition(position.x + size.x - m_plus->GetSizeX(),
                       position.y + (size.y / 2) - (m_plus->GetSizeY() / 2));
-  m_minus->SetPosition(position.x + size.x - (m_plus->GetSizeX() + max_value_w + m_plus->GetSizeX()), 
+  m_minus->SetPosition(position.x + size.x - (m_plus->GetSizeX() + max_value_w + m_plus->GetSizeX()),
                        position.y + (size.y / 2) - (m_minus->GetSizeY() / 2));
 
   txtLabel->SetMaxWidth(size.x - 30);
@@ -171,7 +171,7 @@ void SpinButton::Pack()
 
 void SpinButton::Draw(const Point2i & mousePosition) const
 {
-  txtLabel->DrawTopLeft(position);
+  txtLabel->DrawCenterTop(position + Point2i(0, 6));
 
   uint center = m_plus->GetPositionX() - (m_plus->GetPositionX() - (m_minus->GetPositionX() + m_minus->GetSizeX())) / 2;
   txtValue->DrawCenterTop(Point2i(center, position.y)); //CenterTop
@@ -184,7 +184,7 @@ void SpinButton::Draw(const Point2i & mousePosition) const
   }
 }
 
-Widget * SpinButton::ClickUp(const Point2i & mousePosition, 
+Widget * SpinButton::ClickUp(const Point2i & mousePosition,
                              uint button)
 {
   NeedRedrawing();

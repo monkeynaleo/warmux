@@ -40,14 +40,14 @@ Label::Label(const std::string & text,
 
 Label::Label(const Point2i & size)
   : Widget(size, false)
-  , align(Text::ALIGN_TOP_LEFT)
+  , align(Text::ALIGN_LEFT_TOP)
 {
 }
 
 Label::Label(Profile * profile,
              const xmlNode * labelNode)
   : Widget(profile, labelNode)
-  , align(Text::ALIGN_TOP_LEFT)
+  , align(Text::ALIGN_LEFT_TOP)
 {
 }
 
@@ -64,8 +64,8 @@ bool Label::LoadXMLConfiguration()
   ParseXMLGeometry();
   ParseXMLBorder();
   ParseXMLBackground();
-  
-  Text::LoadXMLConfiguration(profile->GetXMLDocument(), 
+
+  Text::LoadXMLConfiguration(profile->GetXMLDocument(),
                              widgetNode);
 
   return true;
@@ -77,21 +77,27 @@ void Label::Draw(const Point2i & mousePosition) const
 
   switch (align)
   {
-  case Text::ALIGN_TOP_LEFT:
-    DrawTopLeft(position);
+  case Text::ALIGN_CENTER:
+    DrawCenter(position + size/2);
     break;
   case Text::ALIGN_CENTER_TOP:
     DrawCenterTop(Point2i(position.x + size.x/2, position.y));
     break;
-  case Text::ALIGN_TOP_RIGHT:
-    DrawTopRight(Point2i(position.x + size.x, position.y));
+  case Text::ALIGN_CENTER_BOTTOM:
+    DrawCenterBottom(Point2i(position.x + size.x/2, position.y + size.y));
     break;
-  case Text::ALIGN_CENTER:
-    DrawCenter(position + size/2);
+  case Text::ALIGN_LEFT_CENTER:
+    DrawLeftCenter(Point2i(position.x, position.y + size.y/2));
     break;
-  case Text::ALIGN_CENTER_LEFT:
+  case Text::ALIGN_RIGHT_CENTER:
+    DrawRightCenter(Point2i(position.x + size.x, position.y + size.y/2));
+    break;
+   case Text::ALIGN_RIGHT_TOP:
+    DrawRightTop(Point2i(position.x + size.x, position.y));
+    break;
+  case Text::ALIGN_LEFT_TOP:
   default:
-    DrawCenterLeft(Point2i(position.x, position.y + size.y/2));
+    DrawLeftTop(position);
     break;
   }
 }

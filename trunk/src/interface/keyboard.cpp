@@ -37,6 +37,42 @@
 #  define SDLK_LAST  SDL_NUM_SCANCODES
 #endif
 
+int  Keyboard::GetRawKeyCode(int key_code) const
+{
+  int value = key_code;
+  if (value > ALT_OFFSET)
+    value -= ALT_OFFSET;
+  if (value > SHIFT_OFFSET)
+    value -= SHIFT_OFFSET;
+  if (value > CONTROL_OFFSET)
+    value -= CONTROL_OFFSET;
+
+  return value;
+}
+
+bool Keyboard::HasShiftModifier(int key_code) const
+{
+  return (key_code/SHIFT_OFFSET)&1;
+}
+
+bool Keyboard::HasAltModifier(int key_code) const
+{
+  return (key_code/ALT_OFFSET)&1;
+}
+
+bool Keyboard::HasControlModifier(int key_code) const
+{
+  return (key_code/CONTROL_OFFSET)&1;
+}
+
+void Keyboard::SaveKeyEvent(Key_t at, int key_code,
+                            bool shift, bool alt, bool ctrl)
+{
+  SetKeyAction(key_code + shift*SHIFT_OFFSET + alt*ALT_OFFSET + ctrl*CONTROL_OFFSET,
+               at);
+}
+
+
 Keyboard::Keyboard() :
   ManMachineInterface(),
   modifier_bits(0)
