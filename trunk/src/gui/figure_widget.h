@@ -25,41 +25,43 @@
 #include <vector>
 #include "picture_widget.h"
 
+/** To help determine at compilation time the size of an array */
 #define ARRAY_SIZE(array_) (sizeof(array_)/sizeof(*array_))
+
+/** Why can't I initialize such a simple struct like an aggregate !? */
+#define DEF_CAPTIONS_PARAMS  Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color
 
 class FigureWidget : public PictureWidget
 {
 public:
-  typedef struct
+  struct Caption
   {
-    std::string string; // gcc does not support correctly a char* here.
-    int x, y;
-  } Caption;
+    std::string        string; // gcc does not support correctly a char* here.
+    int                x, y;
+    Font::font_size_t  fsize;
+    Font::font_style_t fstyle;
+    Color              color;
+  };
   typedef std::vector<Caption> Captions;
 
 private:
   Captions   captions;
-  uint       font_size;
 
 public:
   // caps must be static const, as we aren't doing copies
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Captions& caps,
-               uint  fsize = 12,
                ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
     , captions(caps)
-    , font_size(fsize)
   { }
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Caption* caps, size_t num,
-               uint  fsize = 12,
                ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
     , captions(caps, caps+num)
-    , font_size(fsize)
   { }
 
   virtual void Draw(const Point2i& mousePosition) const;

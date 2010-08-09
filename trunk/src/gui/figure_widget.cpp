@@ -28,14 +28,19 @@ void FigureWidget::Draw(const Point2i& mousePosition) const
 
   PictureWidget::Draw(mousePosition);
 
-  Text tmp("", dark_gray_color, font_size*powf(zoom.GetX(), 0.75f), Font::FONT_BOLD, false);
-  tmp.SetMaxWidth(130*zoom.GetX());
+  uint lsize = 130*zoom.GetX() + 0.5;
 
   for (uint i=0; i<captions.size(); i++) {
-    tmp.SetText(captions[i].string);
+    Text tmp(captions[i].string,
+             captions[i].color,
+             captions[i].fsize*powf(zoom.GetX(), 0.75f),
+             captions[i].fstyle,
+             false);
+    tmp.SetMaxWidth(lsize);
     Point2i pos = Point2i(zoom.x * captions[i].x, zoom.y * captions[i].y)
                 + GetPicturePosition();
 
     tmp.DrawCenter(pos);
   }
 }
+
