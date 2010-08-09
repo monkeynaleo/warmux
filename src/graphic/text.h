@@ -32,11 +32,12 @@ public:
   typedef enum
   {
     ALIGN_CENTER,
-    ALIGN_TOP_LEFT,
-    ALIGN_TOP_RIGHT,
+    ALIGN_LEFT_TOP,
+    ALIGN_RIGHT_TOP,
+    ALIGN_LEFT_CENTER,
+    ALIGN_RIGHT_CENTER,
     ALIGN_CENTER_TOP,
-    ALIGN_CENTER_LEFT,
-    ALIGN_CENTER_RIGHT
+    ALIGN_CENTER_BOTTOM
   } Alignment;
 
 protected:
@@ -75,11 +76,12 @@ public:
 
   //Draw method using windows coordinates
   void DrawCenter(const Point2i & position) const;
-  void DrawTopLeft(const Point2i & position) const;
-  void DrawTopRight(const Point2i & position) const;
+  void DrawLeftTop(const Point2i & position) const;
+  void DrawRightTop(const Point2i & position) const;
   void DrawCenterTop(const Point2i & position) const;
-  void DrawCenterLeft(const Point2i & position) const;
-  void DrawCenterRight(const Point2i & position) const;
+  void DrawLeftCenter(const Point2i & position) const;
+  void DrawRightCenter(const Point2i & position) const;
+  void DrawCenterBottom(const Point2i & position) const;
 
   //Draw text cursor only (text_pos = position for DrawTopLeft)
   void DrawCursor(const Point2i & text_pos,
