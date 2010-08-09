@@ -95,7 +95,7 @@ OptionMenu::OptionMenu() :
     new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
-#ifndef __APPLE__
+#if !defined(__APPLE__) && !defined(ANDROID)
   full_screen =
     new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
@@ -106,6 +106,7 @@ OptionMenu::OptionMenu() :
                               option_size, 50, 5, 20, 50);
   graphic_options->AddWidget(opt_max_fps);
 
+#if !defined(ANDROID)
   // Get available video resolution
   const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::const_iterator mode;
@@ -126,6 +127,7 @@ OptionMenu::OptionMenu() :
     new ComboBox(_("Resolution"), "menu/resolution", option_size,
                  video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
+#endif
 
   tabs->AddNewTab("unused", _("Graphics"), graphic_options);
 
@@ -294,7 +296,7 @@ OptionMenu::OptionMenu() :
   opt_display_multisky->SetValue(config->GetDisplayMultiLayerSky());
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
-#ifndef __APPLE__
+#if !defined(__APPLE__) && !defined(ANDROID)
   full_screen->SetValue(app->video->IsFullScreen());
 #endif
   music_cbox->SetValue(config->GetSoundMusic());
@@ -424,23 +426,25 @@ void OptionMenu::SaveOptions()
 
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
+
+#ifndef ANDROID
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-#ifdef __APPLE__
+# ifdef __APPLE__
   // The mac version of SDL does not support fullscreen properly
   app->video->SetConfig(w, h, false);
-#else
+# else
   app->video->SetConfig(w, h, full_screen->GetValue());
-#endif
+# endif
 
   uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
   uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
 
   SetActionButtonsXY(x, y);
-
+#endif
 
 #if ENABLE_NLS
   // Language
