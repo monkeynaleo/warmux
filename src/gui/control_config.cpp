@@ -20,8 +20,10 @@
  *****************************************************************************/
 
 #include "game/config.h"
+#include "gui/check_box.h"
 #include "gui/horizontal_box.h"
 #include "gui/label.h"
+#include "gui/null_widget.h"
 #include "interface/keyboard.h"
 
 #include "control_config.h"
@@ -29,10 +31,14 @@
 class ControlItem : public HBox
 {
   Label *label_action, *label_key;
+  CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
   ManMachineInterface::Key_t key_action;
   int  key_value;
+  bool shift;
+  bool alt;
+  bool ctrl;
 
   ControlItem(ManMachineInterface::Key_t action,
               uint height, bool force_widget_size = true)
@@ -45,16 +51,29 @@ public:
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
     label_action = new Label(kbd->GetHumanReadableActionName(action),
-                             320, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                             dark_gray_color, Text::ALIGN_CENTER_LEFT);
+                             280, (Font::font_size_t)14, Font::FONT_BOLD,
+                             dark_gray_color, Text::ALIGN_RIGHT_CENTER);
     AddWidget(label_action);
 
+    // Spacing
+    AddWidget(new NullWidget(Point2i(12, height)));
+
+    int key_code = kbd->GetKeyAssociatedToAction(action);
+    key_value = kbd->GetRawKeyCode(key_code);
+    shift = kbd->HasShiftModifier(key_code);
+    alt = kbd->HasAltModifier(key_code);
+    ctrl = kbd->HasControlModifier(key_code);
+
     // Actual key
-    key_value = kbd->GetKeyAssociatedToAction(action);
-    label_key = new Label(kbd->GetKeyNameFromKey(key_value),
-                          70, Font::FONT_SMALL, Font::FONT_NORMAL,
-                          dark_gray_color, Text::ALIGN_CENTER_LEFT);
+    label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
+                          64, Font::FONT_SMALL, Font::FONT_NORMAL,
+                          c_black, Text::ALIGN_LEFT_CENTER);
     AddWidget(label_key);
+
+    // Modifiers
+    shift_box = new CheckBox("", 18, shift); AddWidget(shift_box);
+    alt_box   = new CheckBox("", 18, alt); AddWidget(alt_box);
+    ctrl_box  = new CheckBox("", 18, ctrl); AddWidget(ctrl_box);
   }
 
   virtual bool SendKey(const SDL_keysym & key)
@@ -62,26 +81,37 @@ public:
     //printf("Received key %i\n", key.sym);
     key_value = key.sym;
     label_key->SetText(Keyboard::GetConstInstance()->GetKeyNameFromKey(key_value));
-    NeedRedrawing();
+
+    SDLMod sdl_modifier_bits = SDL_GetModState();
+    shift_box->SetValue(sdl_modifier_bits & KMOD_SHIFT);
+    alt_box->SetValue(sdl_modifier_bits & KMOD_ALT);
+    ctrl_box->SetValue(sdl_modifier_bits & KMOD_CTRL);
+
+    // A simple NeedRedraw would reset the packing
+    Pack();
     return HBox::SendKey(key);
   }
 
   virtual void Pack()
   {
     HBox::Pack();
-    label_action->SetSizeY(size.y-2*border.y);
-    label_key->SetSizeY(size.y-2*border.y);
+    int height = size.y-2*border.y;
+    label_action->SetSizeY(height);
+    label_key->SetSizeY(height);
+    shift_box->SetSizeY(height);
+    alt_box->SetSizeY(height);
+    ctrl_box->SetSizeY(height);
   }
 };
 
 ControlConfig::ControlConfig(const Point2i& size, bool readonly,
                              bool force_widget_size)
-  : SelectBox(size, !readonly, force_widget_size, true)
+  : SelectBox(size, false, force_widget_size, true)
   , read_only(readonly)
 {
   SetBackgroundColor(transparent_color);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
-    AddWidget(new ControlItem((ManMachineInterface::Key_t)i, 24));
+    AddWidget(new ControlItem((ManMachineInterface::Key_t)i, 32));
   }
 }
 
@@ -103,6 +133,7 @@ void ControlConfig::SaveControlConfig() const
   kbd->ClearKeyAction();
   for (uint i=0; i<m_items.size(); i++) {
     const ControlItem* item = static_cast<ControlItem*>(m_items[i]);
-    kbd->SetKeyAction(item->key_value, item->key_action);
+    kbd->SaveKeyEvent(item->key_action, item->key_value,
+                      item->shift, item->alt, item->ctrl);
   }
 }
