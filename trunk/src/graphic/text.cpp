@@ -284,30 +284,35 @@ void Text::SetColor(const Color &new_color)
 
 void Text::DrawCenter (const Point2i &position) const
 {
-  DrawTopLeft(position - surf.GetSize() / 2);
+  DrawLeftTop(position - surf.GetSize() / 2);
 }
 
-void Text::DrawTopRight (const Point2i &position) const
+void Text::DrawRightTop (const Point2i &position) const
 {
-  DrawTopLeft(position - Point2i(surf.GetWidth(), 0));
+  DrawLeftTop(position - Point2i(surf.GetWidth(), 0));
 }
 
 void Text::DrawCenterTop (const Point2i &position) const
 {
-  DrawTopLeft(position - Point2i(surf.GetWidth()/2, 0));
+  DrawLeftTop(position - Point2i(surf.GetWidth()/2, 0));
 }
 
-void Text::DrawCenterLeft (const Point2i &position) const
+void Text::DrawLeftCenter (const Point2i &position) const
 {
-  DrawTopLeft(position - Point2i(0, surf.GetHeight()/2));
+  DrawLeftTop(position - Point2i(0, surf.GetHeight()/2));
 }
 
-void Text::DrawCenterRight (const Point2i &position) const
+void Text::DrawRightCenter (const Point2i &position) const
 {
-  DrawTopLeft(position - Point2i(surf.GetWidth(), surf.GetHeight()/2));
+  DrawLeftTop(position - Point2i(surf.GetWidth(), surf.GetHeight()/2));
 }
 
-void Text::DrawTopLeft(const Point2i &position) const
+void Text::DrawCenterBottom (const Point2i &position) const
+{
+  DrawLeftTop(position - surf.GetSize());
+}
+
+void Text::DrawLeftTop(const Point2i &position) const
 {
   if(txt == "" && !dummy) return;
 
