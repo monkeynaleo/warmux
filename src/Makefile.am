@@ -377,6 +377,8 @@ wormux_SOURCES = \
         weapon/parachute.h \
         weapon/polecat.cpp \
         weapon/polecat.h \
+        weapon/rail_gun.cpp \
+        weapon/rail_gun.h \
         weapon/riot_bomb.cpp \
         weapon/riot_bomb.h \
         weapon/shotgun.cpp \
