@@ -90,7 +90,7 @@ NetworkMenu::NetworkMenu() :
   team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
   map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight),
-                                multitabs, Network::GetInstance()->IsGameMaster());
+                                multitabs, !Network::GetInstance()->IsGameMaster());
 
   if (!multitabs) {
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
