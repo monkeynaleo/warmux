@@ -43,91 +43,56 @@ const uint SNIPE_RIFLE_BULLET_SPEED = 28;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 const uint SNIPE_RIFLE_FADE_BEAM_SIZE = 400;
 
-class SnipeBullet : public WeaponBullet
-{
-  public:
-    SnipeBullet(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
-  protected:
-    void ShootSound();
-};
-
-
-SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
-                     WeaponLauncher * p_launcher) :
-    WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
-{
-}
-
-void SnipeBullet::ShootSound()
-{
-  JukeBox::GetInstance()->Play("default","weapon/gun");
-}
-
 //-----------------------------------------------------------------------------
 
-SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new ExplosiveWeaponConfig())
+BaseSnipeRifle::BaseSnipeRifle(Weapon_type type, const std::string &id)
+  : WeaponLauncher(type, id, new ExplosiveWeaponConfig())
 {
-  UpdateTranslationStrings();
-
   m_category = RIFLE;
 
   last_angle = 0.0;
-  targeting_something = false;
-  m_laser_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_laser"));
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
-  laser_beam_color = GetResourceManager().LoadColor(weapons_res_profile,m_id+"_laser_color");
 
-  ReloadLauncher();
+  targeting_something = false;
+  m_laser_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_laser"));
+  laser_beam_color = GetResourceManager().LoadColor(weapons_res_profile,m_id+"_laser_color");
 }
 
-SnipeRifle::~SnipeRifle()
+BaseSnipeRifle::~BaseSnipeRifle()
 {
   delete m_laser_image;
 }
 
-void SnipeRifle::UpdateTranslationStrings()
-{
-  m_name = _("Sniper Rifle");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
-}
-
-WeaponProjectile * SnipeRifle::GetProjectileInstance()
-{
-  return new SnipeBullet(cfg(), this);
-}
-
-bool SnipeRifle::p_Shoot()
+bool BaseSnipeRifle::p_Shoot()
 {
   if (IsOnCooldownFromShot())
     return false;
 
-  projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
+  projectile->Shoot(SNIPE_RIFLE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
   return true;
 }
 
 // When an explosion occurs, we compute a new targeted point
-void SnipeRifle::SignalProjectileGhostState()
+void BaseSnipeRifle::SignalProjectileGhostState()
 {
   ReloadLauncher();
   ComputeCrossPoint(true);
 }
 
-void SnipeRifle::ComputeCrossPoint(bool force = false)
+void BaseSnipeRifle::ComputeCrossPoint(bool force = false)
 {
   // Did the current character is moving ?
   Point2i pos = GetGunHolePosition();
   Double angle = ActiveCharacter().GetFiringAngle();
-  if ( !force && last_rifle_pos == pos && last_angle == angle )
+  if (!force && last_rifle_pos==pos && last_angle==angle)
     return;
   else
   {
-    last_rifle_pos=pos;
-    last_angle=angle;
+    last_rifle_pos = pos;
+    last_angle = angle;
   }
 
   // Equation of movement : y = ax + b
@@ -174,20 +139,20 @@ void SnipeRifle::ComputeCrossPoint(bool force = false)
 }
 
 // Reset crosshair when switching from a weapon to another to avoid misused
-void SnipeRifle::p_Deselect()
+void BaseSnipeRifle::p_Deselect()
 {
   ActiveCharacter().SetFiringAngle(0.);
   ActiveCharacter().SetMovement("breathe");
 }
 
-void SnipeRifle::DrawBeam()
+void BaseSnipeRifle::DrawBeam()
 {
   Point2i pos1 = laser_beam_start - Camera::GetInstance()->GetPosition();
   Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
   Double dst = laser_beam_start.Distance(targeted_point);
 
   GetMainWindow().
-    AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, Color(255, 0, 0, 0));
+    AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, laser_beam_color);
 
   // GetMainWindow().AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
@@ -230,7 +195,7 @@ void SnipeRifle::DrawBeam()
   }
 }
 
-void SnipeRifle::Draw()
+void BaseSnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
   if( Game::GetInstance()->ReadState() != Game::PLAYING || IsOnCooldownFromShot() ) return;
@@ -241,6 +206,49 @@ void SnipeRifle::Draw()
     m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));
 }
 
+//------------------------------------------------------------------------------
+
+class SnipeBullet : public WeaponBullet
+{
+public:
+  SnipeBullet(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
+protected:
+  void ShootSound();
+};
+
+
+SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
+                         WeaponLauncher * p_launcher) :
+    WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
+{
+}
+
+void SnipeBullet::ShootSound()
+{
+  JukeBox::GetInstance()->Play("default","weapon/gun");
+}
+
+//-----------------------------------------------------------------------------
+
+SnipeRifle::SnipeRifle()
+  : BaseSnipeRifle(WEAPON_SNIPE_RIFLE, "snipe_rifle")
+{
+  UpdateTranslationStrings();
+  ReloadLauncher();
+}
+
+void SnipeRifle::UpdateTranslationStrings()
+{
+  m_name = _("Sniper Rifle");
+  /* TODO: FILL IT */
+  /* m_help = _(""); */
+}
+
+WeaponProjectile * SnipeRifle::GetProjectileInstance()
+{
+  return new SnipeBullet(cfg(), this);
+}
+
 std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
   return Format(ngettext(
@@ -248,4 +256,3 @@ std::string SnipeRifle::GetWeaponWinString(const char *TeamName, uint items_coun
             "%s team has won %u sniper rifles! Aim and shoot between the eyes!",
             items_count), TeamName, items_count);
 }
-
