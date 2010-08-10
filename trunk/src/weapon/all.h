@@ -44,6 +44,7 @@
 #include "weapon/mine.h"
 #include "weapon/parachute.h"
 #include "weapon/polecat.h"
+#include "weapon/rail_gun.h"
 #include "weapon/riot_bomb.h"
 #include "weapon/shotgun.h"
 #include "weapon/skip_turn.h"
