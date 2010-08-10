@@ -383,6 +383,19 @@
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>
 
+<!-- Rail gun ressources -->
+
+  <surface name="rail_gun" file="weapon/rail_gun/rail_gun.png" />
+  <position name="rail_gun" origin="hand" x="13" y="10" />
+  <hole name="rail_gun" dx="6" dy="-5" />
+  <surface name="rail_gun_ico" file="weapon/rail_gun/rail_gun_ico.png" />
+  <color name="rail_gun_laser_color" r="0" g="0" b="221" a="255" />
+  <surface name="rail_gun_laser" file="weapon/rail_gun/rail_gun_laser.png" />
+  <surface name="rail_gun_fire" file="weapon/snipe_rifle/gun_fire.png" />
+  <sprite name="rail_bullet">
+    <image file="weapon/rail_gun/rail_bullet.png" />
+  </sprite>
+
 <!-- Blowtorch rifle ressources -->
 
   <surface name="blowtorch" file="weapon/blowtorch/blowtorch.png" />

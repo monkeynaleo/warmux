@@ -483,6 +483,20 @@
       <ammo_per_drop>1</ammo_per_drop>
     </snipe_rifle>
 
+    <rail_gun>
+      <change_weapon>1</change_weapon>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <nb_ammo>1</nb_ammo>
+      <unit_per_ammo>2</unit_per_ammo>
+      <damage>1</damage>
+      <explosion_range>15</explosion_range>
+      <particle_range>16</particle_range>
+      <display_crosshair>0</display_crosshair>
+      <drop_probability>1</drop_probability>
+      <ammo_per_drop>1</ammo_per_drop>
+    </rail_gun>
+
     <suicide>
       <change_weapon>1</change_weapon>
       <nb_ammo>-1</nb_ammo>
