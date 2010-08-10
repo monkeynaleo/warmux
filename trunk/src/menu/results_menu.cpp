@@ -381,7 +381,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   uint tab_x    = small ? x : 260+16+x;
   uint y        = wsize.GetY() * 0.02;
 
-  printf("Set x=%i\n", tab_x);
   if (!disconnected)
     ComputeTeamsOrder();
 
