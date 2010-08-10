@@ -183,9 +183,8 @@ Weapon * WeaponsList::GetRandomWeaponToDrop()
 {
   std::list<Weapon*>::iterator it;
   Double probability_sum = 0;
-  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
+  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); ++it) {
     probability_sum += (*it)->GetDropProbability();
-    it++;
   }
   ASSERT(probability_sum > 0);
 
