@@ -58,6 +58,8 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
+  m_go_through_objects(false),
+  m_last_collided_object(NULL),
   m_rebound_position(-1,-1),
   m_test_left(0),
   m_test_right(0),
@@ -263,9 +265,20 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Test if we collide...
     collided_obj = CollidedObjectXY(tmpPos);
-    if (collided_obj != NULL) {
-      MSG_DEBUG("physic.state", "%s collide on %s", GetName().c_str(), collided_obj->GetName().c_str() );
-      collision = COLLISION_ON_OBJECT;
+    if (collided_obj) {
+      if (m_last_collided_object != collided_obj) {
+        MSG_DEBUG("physic.state", "%s collide on %s", GetName().c_str(), collided_obj->GetName().c_str() );
+
+        if (m_go_through_objects) {
+          SignalObjectCollision(GetSpeed(), collided_obj, collided_obj->GetSpeed());
+          collision = NO_COLLISION;
+        } else {
+          collision = COLLISION_ON_OBJECT;
+        }
+        m_last_collided_object = collided_obj;
+      } else {
+        collided_obj = NULL;
+      }
     } else if (!IsInVacuumXY(tmpPos, false)) {
       collision = COLLISION_ON_GROUND;
     }
@@ -288,8 +301,9 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   Point2d speed_before_collision = GetSpeed();
   Point2d speed_collided_obj;
-  if (collided_obj)
+  if (collided_obj) {
     speed_collided_obj = collided_obj->GetSpeed();
+  }
 
   Collide(collision, collided_obj, pos);
 
@@ -548,11 +562,13 @@ void PhysicalObj::SignalRebound()
 
 void PhysicalObj::SetCollisionModel(bool collides_with_ground,
                                     bool collides_with_characters,
-                                    bool collides_with_objects)
+                                    bool collides_with_objects,
+                                    bool go_through_objects)
 {
   m_collides_with_ground = collides_with_ground;
   m_collides_with_characters = collides_with_characters;
   m_collides_with_objects = collides_with_objects;
+  m_go_through_objects = go_through_objects;
 
   // Check boolean values
   {
