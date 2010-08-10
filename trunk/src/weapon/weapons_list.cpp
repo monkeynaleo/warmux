@@ -72,6 +72,7 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
   m_launcher_weapons_list.push_back(new Gun);
   m_launcher_weapons_list.push_back(new Shotgun);
   m_launcher_weapons_list.push_back(new SnipeRifle);
+  m_launcher_weapons_list.push_back(new RailGun);
   m_launcher_weapons_list.push_back(new Dynamite);
   m_launcher_weapons_list.push_back(new FlameThrower);
   m_launcher_weapons_list.push_back(new Mine);
