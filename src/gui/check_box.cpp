@@ -135,10 +135,12 @@ void CheckBox::Draw(const Point2i &/*mousePosition*/) const
     // No text, center
     m_checked_image->Blit(surf, position + (GetSize() - m_checked_image->GetSizeMax())/2);
   } else {
+    // Image on the right
     m_checked_image->Blit(surf,
-                          position.x + (size.x - m_checked_image->GetWidthMax())/2,
-                          position.y);
-    Text::DrawCenterBottom(GetPosition()+Point2i(size.x/2, size.y-font_size));
+                          position.x + size.x - m_checked_image->GetWidthMax(),
+                          position.y + (size.y - m_checked_image->GetHeightMax())/2);
+    // Text on the left
+    Text::DrawLeftCenter(GetPosition()+Point2i(0, size.y/2));
   }
 }
 
