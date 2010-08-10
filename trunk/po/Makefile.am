@@ -349,6 +349,8 @@ POTFILES = \
         src/weapon/parachute.h \
         src/weapon/polecat.cpp \
         src/weapon/polecat.h \
+        src/weapon/rail_gun.cpp \
+        src/weapon/rail_gun.h \
         src/weapon/riot_bomb.cpp \
         src/weapon/riot_bomb.h \
         src/weapon/shotgun.cpp \

@@ -1786,6 +1786,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\weapon\rail_gun.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\weapon\rail_gun.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\weapon\riot_bomb.cpp"
 					>
 				</File>
