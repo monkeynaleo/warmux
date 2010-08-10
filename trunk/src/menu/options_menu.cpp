@@ -139,7 +139,7 @@ OptionMenu::OptionMenu() :
 
   /* Controls editing */
   controls = new ControlConfig(tabs->GetSize() - 10, false, false);
-  tabs->AddNewTab("unused", _("Controls"), controls);
+  tabs->AddNewTab("unused", _("Key bindings"), controls);
 
   /* Team editor */
 
@@ -341,8 +341,8 @@ OptionMenu::OptionMenu() :
     AddLanguageItem("Svenska",             "sv");
     AddLanguageItem("Türkçe",              "tr");
     AddLanguageItem("украї́нська мо́ва",     "ua");
-    AddLanguageItem("汉语 (hànyǔ)",         "zh_CN");
-    AddLanguageItem("闽语 (mǐnyǔ)",         "zh_TW");
+    AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN");
+    AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW");
 #endif
 
 #ifdef HAVE_LIBCURL
