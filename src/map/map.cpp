@@ -106,7 +106,8 @@ void Map::FreeMem()
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
   r.SetPosition( r.GetPosition() + Camera::GetInstance()->GetPosition() );
-  to_redraw->push_back(r);
+  if (!r.IsSizeZero())
+    to_redraw->push_back(r);
 }
 
 void Map::SwitchDrawingCache()
