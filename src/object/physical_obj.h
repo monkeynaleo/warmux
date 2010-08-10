@@ -48,15 +48,15 @@ Double MeterDistance(const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
-  /* If you need this, implement it (correctly)*/
-  const PhysicalObj& operator=(const PhysicalObj&);
-  /*********************************************/
-
-private:
   // collision management
   bool m_collides_with_ground;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
+  // Special meaning, SignalObjectCollision is called but trajectory continues
+  // until out of map
+  bool m_go_through_objects;
+  PhysicalObj *m_last_collided_object;
+
   Point2i m_rebound_position;
 
   // Rectangle used for collision tests
@@ -85,6 +85,12 @@ protected:
   int m_energy;
 
   bool m_allow_negative_y;
+
+  void StartMoving()
+  {
+    m_last_collided_object = NULL;
+    Physics::StartMoving();
+  }
 
 public:
   PhysicalObj (const std::string &name, const std::string &xml_config="");
@@ -155,7 +161,8 @@ public:
   // Collision management
   void SetCollisionModel(bool collides_with_ground,
                          bool collides_with_characters,
-                         bool collides_with_objects);
+                         bool collides_with_objects,
+                         bool go_through_objects = false);
   void SetOverlappingObject(PhysicalObj* obj, int timeout = 0);
   const PhysicalObj* GetOverlappingObject() const { return m_overlapping_object; };
   virtual bool IsOverlapping(const PhysicalObj* obj) const { return m_overlapping_object == obj; };
@@ -212,8 +219,8 @@ protected:
   virtual void SignalRebound();
   virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
   virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-             PhysicalObj * /* collided/ing object */,
-             const Point2d& /* object speed_before */) { };
+                                     PhysicalObj * /* collided/ing object */,
+                                     const Point2d& /* object speed_before */) { };
   virtual void SignalOutOfMap() { };
 
 private:
