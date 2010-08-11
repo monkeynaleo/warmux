@@ -24,9 +24,15 @@
 #include "gui/horizontal_box.h"
 #include "gui/label.h"
 #include "gui/null_widget.h"
+#include "gui/select_box.h"
 #include "interface/keyboard.h"
 
 #include "control_config.h"
+
+#define MIN_ACTION_WIDTH  276
+#define MIN_KEY_WIDTH      70
+#define SPACING_WIDTH       8
+#define CHECKBOX_WIDTH     18
 
 class ControlItem : public HBox
 {
@@ -51,12 +57,12 @@ public:
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
     label_action = new Label(kbd->GetHumanReadableActionName(action),
-                             280, (Font::font_size_t)14, Font::FONT_BOLD,
+                             MIN_ACTION_WIDTH, (Font::font_size_t)14, Font::FONT_BOLD,
                              dark_gray_color, Text::ALIGN_RIGHT_CENTER);
     AddWidget(label_action);
 
-    // Spacing
-    AddWidget(new NullWidget(Point2i(12, height)));
+    // First spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
 
     int key_code = kbd->GetKeyAssociatedToAction(action);
     key_value = kbd->GetRawKeyCode(key_code);
@@ -66,17 +72,22 @@ public:
 
     // Actual key
     label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
-                          70, Font::FONT_SMALL, Font::FONT_NORMAL,
+                          MIN_KEY_WIDTH, Font::FONT_SMALL, Font::FONT_NORMAL,
                           c_black, Text::ALIGN_LEFT_CENTER);
     AddWidget(label_key);
 
-    // Spacing
-    AddWidget(new NullWidget(Point2i(6, height)));
+    // Second spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
 
     // Modifiers
-    shift_box = new CheckBox("", 18, shift); AddWidget(shift_box);
-    alt_box   = new CheckBox("", 18, alt); AddWidget(alt_box);
-    ctrl_box  = new CheckBox("", 18, ctrl); AddWidget(ctrl_box);
+    shift_box = new CheckBox("", CHECKBOX_WIDTH, shift);
+    AddWidget(shift_box);
+
+    alt_box   = new CheckBox("", CHECKBOX_WIDTH, alt);
+    AddWidget(alt_box);
+
+    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH, ctrl);
+    AddWidget(ctrl_box);
   }
 
   virtual bool SendKey(const SDL_keysym & key)
@@ -97,34 +108,92 @@ public:
 
   virtual void Pack()
   {
+    // Call first HBox::Pack to set positions
     HBox::Pack();
+
+    // Set proper height now
     int height = size.y-2*border.y;
-    label_action->SetSizeY(height);
-    label_key->SetSizeY(height);
-    shift_box->SetSizeY(height);
-    alt_box->SetSizeY(height);
-    ctrl_box->SetSizeY(height);
+    for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
+      (*it)->SetSizeY(height);
+  }
+};
+
+class HeaderItem : public HBox
+{
+  Label *label_action, *label_key, *label_mods;
+
+public:
+  HeaderItem(uint height, bool force_widget_size = true)
+    : HBox(height, false, force_widget_size)
+  {
+    SetMargin(0);
+    SetBorder(0, 0);
+
+    // Action name
+    label_action = new Label(_("Action"),
+                             MIN_ACTION_WIDTH, Font::FONT_MEDIUM, Font::FONT_BOLD,
+                             light_gray_color, Text::ALIGN_RIGHT_CENTER);
+    AddWidget(label_action);
+
+    // Spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
+
+    // Actual key
+    label_key = new Label(_("Key"),
+                          MIN_KEY_WIDTH, Font::FONT_MEDIUM, Font::FONT_NORMAL,
+                          c_black, Text::ALIGN_LEFT_CENTER);
+    AddWidget(label_key);
+
+    // Spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
+
+    // Modifiers
+    label_mods = new Label(_("Modifiers"),
+                           90, Font::FONT_MEDIUM, Font::FONT_NORMAL,
+                           c_black, Text::ALIGN_LEFT_CENTER);
+    AddWidget(label_mods);
+
+    SetBackgroundColor(light_gray_color);
+  }
+
+  virtual void Pack()
+  {
+    // Call first HBox::Pack to set positions
+    HBox::Pack();
+
+    // Set proper height now
+    int height = size.y-2*border.y;
+    for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
+      (*it)->SetSizeY(height);
   }
 };
 
 ControlConfig::ControlConfig(const Point2i& size, bool readonly,
                              bool force_widget_size)
-  : SelectBox(size, false, force_widget_size, true)
+  : WidgetList(size)
   , read_only(readonly)
 {
-  SetBackgroundColor(transparent_color);
+  header = new HeaderItem(32, force_widget_size);
+  AddWidget(header);
+
+  box = new SelectBox(size, false, force_widget_size, true);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
-    AddWidget(new ControlItem((ManMachineInterface::Key_t)i, 32));
+    ControlItem *item = new ControlItem((ManMachineInterface::Key_t)i, 32);
+    items.push_back(item);
+    box->AddWidget(item);
   }
+  AddWidget(box);
+  //SetBackgroundColor(transparent_color);
 }
 
 bool ControlConfig::SendKey(const SDL_keysym & key)
 {
   if (read_only)
-    return SelectBox::SendKey(key);
-  if (selected_item == -1)
-    return false;
-  return m_items[selected_item]->SendKey(key);
+    return WidgetList::SendKey(key);
+  Widget *sel = box->GetSelectedWidget();
+  if (sel)
+    return sel->SendKey(key);
+  return false;
 }
 
 void ControlConfig::SaveControlConfig() const
@@ -134,9 +203,20 @@ void ControlConfig::SaveControlConfig() const
 
   Keyboard *kbd = Keyboard::GetInstance();
   kbd->ClearKeyAction();
-  for (uint i=0; i<m_items.size(); i++) {
-    const ControlItem* item = static_cast<ControlItem*>(m_items[i]);
+  for (uint i=0; i<items.size(); i++) {
+    const ControlItem* item = static_cast<ControlItem*>(items[i]);
     kbd->SaveKeyEvent(item->key_action, item->key_value,
                       item->shift, item->alt, item->ctrl);
   }
+}
+
+void ControlConfig::Pack()
+{
+  //printf("Set widget at (%i,%i) as %ix%i\n", position.x, position.y, size.x, size.y);
+  header->SetPosition(position);
+  header->SetSizeX(size.x);
+  header->Pack();
+  box->SetPosition(position.x, position.y + header->GetSizeY());
+  box->SetSize(size.x, size.y - header->GetSizeY());
+  box->Pack();
 }
