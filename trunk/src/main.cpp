@@ -126,6 +126,7 @@ int AppWormux::Main(void)
           game_menu.Run(skip_menu);
           break;
         }
+#ifndef ANDROID
         case MainMenu::NETWORK:
         {
           NetworkConnectionMenu network_connection_menu(net_action);
@@ -133,6 +134,7 @@ int AppWormux::Main(void)
           network_connection_menu.Run(skip_menu);
           break;
         }
+#endif
         case MainMenu::HELP:
         {
           HelpMenu help_menu;
