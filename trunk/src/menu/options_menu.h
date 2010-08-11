@@ -39,7 +39,6 @@ class OptionMenu : public Menu
 {
 private:
   /* Graphic options controllers */
-  ComboBox *cbox_video_mode;
 #ifdef ENABLE_NLS
   ItemBox *lbox_languages;
 #endif
@@ -51,8 +50,9 @@ private:
 # ifndef __APPLE__
   CheckBox *full_screen;
 # endif
-  SpinButtonWithPicture *opt_max_fps;
+  ComboBox *cbox_video_mode;
 #endif
+  SpinButtonWithPicture *opt_max_fps;
 
   /* Sound options controllers */
   ComboBox *cbox_sound_freq;
