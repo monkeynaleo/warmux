@@ -106,33 +106,35 @@ void BaseSnipeRifle::ComputeCrossPoint(bool force = false)
   // While test is not finished
   Double PI_3_div_4 = PI * THREE / FOUR;
   Double PI_div_4 = PI / FOUR;
-  while( distance < SNIPE_RIFLE_MAX_BEAM_SIZE ){
+  while (distance < SNIPE_RIFLE_MAX_BEAM_SIZE) {
     // going upwards ( -3pi/4 < angle <-pi/4 )
-    if (angle < -PI_div_4 && angle > -PI_3_div_4){
+    if (angle < -PI_div_4 && angle > -PI_3_div_4) {
       pos.x = (int)((pos.y-b)/a);       //Calculate x
       delta_pos.y = -1;                   //Increment y
     // going downwards ( 3pi/4 > angle > pi/4 )
-    } else if (angle > PI_div_4 && angle < PI_3_div_4){
+    } else if (angle > PI_div_4 && angle < PI_3_div_4) {
       pos.x = (int)((pos.y-b)/a);       //Calculate x
       delta_pos.y = 1;                    //Increment y
     // else going at right or left
     } else {
-      pos.y = (int)((a*pos.x) + b);   //Calculate y
+      pos.y = (a*pos.x) + b;   //Calculate y
       delta_pos.x = ActiveCharacter().GetDirection();   //Increment x
     }
     // start point of the laser beam
-    if ( distance < SNIPE_RIFLE_BEAM_START ) laser_beam_start = pos;
+    if (distance < SNIPE_RIFLE_BEAM_START)
+      laser_beam_start = pos;
 
     // the point is outside the map
-    if ( GetWorld().IsOutsideWorldX(pos.x) || GetWorld().IsOutsideWorldY(pos.y) ) break;
+    if (GetWorld().IsOutsideWorldX(pos.x) || GetWorld().IsOutsideWorldY(pos.y))
+      break;
 
     // is there a collision ??
-    if ( distance > 30 && !projectile->IsInVacuumXY( pos )){
+    if (distance > 30 && !projectile->IsInVacuumXY(pos)) {
       targeting_something = true;
       break;
     }
     pos += delta_pos;
-    distance = (int) start_point.Distance(pos);
+    distance = start_point.Distance(pos);
   }
   targeted_point=pos;
   return;
