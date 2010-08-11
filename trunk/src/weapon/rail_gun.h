@@ -29,6 +29,7 @@ class RailGun : public BaseSnipeRifle
 {
 protected:
   virtual bool p_Shoot();
+  virtual void IncMissedShots();
 
   // Must be implemented
   virtual WeaponProjectile * GetProjectileInstance();
