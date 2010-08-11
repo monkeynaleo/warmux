@@ -43,11 +43,6 @@ typedef enum {
 
 class Menu : public Container
 {
-  /* if you need this, implement it (correctly)*/
-  Menu(const Menu&);
-  const Menu &operator=(const Menu&);
-  /*********************************************/
-
 public:
    WidgetList widgets;
    const t_action actions;
