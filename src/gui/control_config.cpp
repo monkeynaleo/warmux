@@ -36,16 +36,13 @@
 
 class ControlItem : public HBox
 {
+  ManMachineInterface::Key_t key_action;
+  int  key_value;
+
   Label *label_action, *label_key;
   CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
-  ManMachineInterface::Key_t key_action;
-  int  key_value;
-  bool shift;
-  bool alt;
-  bool ctrl;
-
   ControlItem(ManMachineInterface::Key_t action,
               uint height, bool force_widget_size = true)
     : HBox(height, false, force_widget_size)
@@ -66,9 +63,6 @@ public:
 
     int key_code = kbd->GetKeyAssociatedToAction(action);
     key_value = kbd->GetRawKeyCode(key_code);
-    shift = kbd->HasShiftModifier(key_code);
-    alt = kbd->HasAltModifier(key_code);
-    ctrl = kbd->HasControlModifier(key_code);
 
     // Actual key
     label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
@@ -80,13 +74,16 @@ public:
     AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
 
     // Modifiers
-    shift_box = new CheckBox("", CHECKBOX_WIDTH, shift);
+    shift_box = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasShiftModifier(key_code));
     AddWidget(shift_box);
 
-    alt_box   = new CheckBox("", CHECKBOX_WIDTH, alt);
+    alt_box   = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasAltModifier(key_code));
     AddWidget(alt_box);
 
-    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH, ctrl);
+    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasControlModifier(key_code));
     AddWidget(ctrl_box);
   }
 
@@ -115,6 +112,14 @@ public:
     int height = size.y-2*border.y;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
+  }
+
+  void SaveAction(Keyboard *kbd)
+  {
+    kbd->SaveKeyEvent(key_action, key_value,
+                      shift_box->GetValue(),
+                      alt_box->GetValue(),
+                      ctrl_box->GetValue());
   }
 };
 
@@ -204,9 +209,7 @@ void ControlConfig::SaveControlConfig() const
   Keyboard *kbd = Keyboard::GetInstance();
   kbd->ClearKeyAction();
   for (uint i=0; i<items.size(); i++) {
-    const ControlItem* item = static_cast<ControlItem*>(items[i]);
-    kbd->SaveKeyEvent(item->key_action, item->key_value,
-                      item->shift, item->alt, item->ctrl);
+    items[i]->SaveAction(kbd);
   }
 }
 
