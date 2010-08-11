@@ -30,7 +30,7 @@
 class BaseSnipeRifle : public WeaponLauncher
 {
 private:
-  Double last_angle;
+  float last_angle;
   bool targeting_something;
   Point2i last_rifle_pos;
   Point2i laser_beam_start;

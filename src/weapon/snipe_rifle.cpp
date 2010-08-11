@@ -86,38 +86,36 @@ void BaseSnipeRifle::ComputeCrossPoint(bool force = false)
 {
   // Did the current character is moving ?
   Point2i pos = GetGunHolePosition();
-  Double angle = ActiveCharacter().GetFiringAngle();
+  float angle = ActiveCharacter().GetFiringAngle().tofloat();
   if (!force && last_rifle_pos==pos && last_angle==angle)
     return;
-  else
-  {
+  else {
     last_rifle_pos = pos;
     last_angle = angle;
   }
 
   // Equation of movement : y = ax + b
-  Double a, b;
-  a = sin(angle) / cos(angle);
-  b = pos.y - ( a * pos.x );
+  float a = sin(angle) / cos(angle);
+  float b = pos.y - a*pos.x;
   Point2i delta_pos, size, start_point;
   start_point = pos;
   uint distance = 0;
   targeting_something = false;
   // While test is not finished
-  Double PI_3_div_4 = PI * THREE / FOUR;
-  Double PI_div_4 = PI / FOUR;
+  float PI_3_div_4 = (3*M_PI)/4;
+  float PI_div_4 = M_PI/4;
   while (distance < SNIPE_RIFLE_MAX_BEAM_SIZE) {
     // going upwards ( -3pi/4 < angle <-pi/4 )
     if (angle < -PI_div_4 && angle > -PI_3_div_4) {
-      pos.x = (int)((pos.y-b)/a);       //Calculate x
+      pos.x = (pos.y-b)/a;       //Calculate x
       delta_pos.y = -1;                   //Increment y
     // going downwards ( 3pi/4 > angle > pi/4 )
     } else if (angle > PI_div_4 && angle < PI_3_div_4) {
-      pos.x = (int)((pos.y-b)/a);       //Calculate x
+      pos.x = (pos.y-b)/a;       //Calculate x
       delta_pos.y = 1;                    //Increment y
     // else going at right or left
     } else {
-      pos.y = (a*pos.x) + b;   //Calculate y
+      pos.y = a*pos.x + b;   //Calculate y
       delta_pos.x = ActiveCharacter().GetDirection();   //Increment x
     }
     // start point of the laser beam
