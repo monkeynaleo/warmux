@@ -22,17 +22,24 @@
 #ifndef GUI_CONTROL_CONFIG_H
 #define GUI_CONTROL_CONFIG_H
 
-#include "select_box.h"
+#include "gui/widget_list.h"
 
-class ControlConfig : public SelectBox
+class SelectBox;
+class ControlItem;
+
+class ControlConfig : public WidgetList
 {
+  std::vector<ControlItem*> items;
   bool read_only;
+  SelectBox *box;
+  Widget *header;
 
 public:
   ControlConfig(const Point2i& size, bool readonly = true,
                 bool force_widget_size = true);
   virtual bool SendKey(const SDL_keysym & key);
   void SaveControlConfig() const;
+  virtual void Pack();
 };
 
 #endif //GUI_CONTROL_CONFIG_H
