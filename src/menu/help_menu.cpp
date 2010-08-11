@@ -59,19 +59,20 @@ static const FigureWidget::Caption captions[] = {
 };
 
 HelpMenu::HelpMenu()
-  : Menu("help/background", vNo)
+  : Menu("help/background", vCancel)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   int window_w = GetMainWindow().GetWidth();
   int window_h = GetMainWindow().GetHeight();
 
-  int border   = 0.02 * window_w;
-  int max_w    = window_w - 2*border;
+  int border_x = 0.02 * window_w;
+  int border_y = 0.02 * window_h;
+  int max_w    = window_w - 2*border_x;
+  int max_h    = window_h - actions_buttons->GetSizeY() - border_y;
 
-  MultiTabs * tabs =
-    new MultiTabs(Point2i(max_w, window_h - 2*border));
-  tabs->SetPosition(border, border);
+  MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
+  tabs->SetPosition(border_x, border_y);
 
   Widget *w = new FigureWidget(Point2i(max_w,
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -81,7 +82,7 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 
-  w = new ControlConfig(tabs->GetSize() - 10, true, false);
+  w = new ControlConfig(tabs->GetSize(), true, false);
   tabs->AddNewTab("unused", _("Current controls"), w);
 
   GetResourceManager().UnLoadXMLProfile(res);
