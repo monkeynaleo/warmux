@@ -625,7 +625,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   if( IsOutsideWorldXY(position) )
     return GetWorld().IsOpen();
 
-  if( check_object && CollidedObjectXY(position) )
+  if(check_object && !m_go_through_objects && CollidedObjectXY(position) )
     return false;
 
   int width = m_width - m_test_right - m_test_left;
