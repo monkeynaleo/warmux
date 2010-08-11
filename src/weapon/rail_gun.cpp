@@ -21,6 +21,7 @@
 
 #include "weapon/weapon_cfg.h"
 #include "graphic/sprite.h"
+#include "interface/game_msg.h"
 #include "weapon/rail_gun.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
@@ -29,9 +30,11 @@
 
 class RailBullet : public WeaponBullet
 {
-  int     hits;
+  uint     hits;
 public:
   RailBullet(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
+
+  uint GetNumHits() const { return hits; }
 protected:
   ParticleEngine particle;
   void ShootSound();
@@ -60,8 +63,7 @@ void RailBullet::ShootSound()
 
 void RailBullet::SignalDrowning()
 {
-  if (!hits)
-    launcher->IncMissedShots();
+  launcher->IncMissedShots();
   Ghost();
 }
 
@@ -70,8 +72,7 @@ void RailBullet::SignalGroundCollision(const Point2d& speed_before)
   // Change that sound?
   //JukeBox::GetInstance()->Play("default", "weapon/ricoche1");
   WeaponProjectile::SignalGroundCollision(speed_before);
-  if (hits)
-    launcher->IncMissedShots();
+  launcher->IncMissedShots();
 }
 
 void RailBullet::SignalObjectCollision(const Point2d& /*my_speed_before*/,
@@ -80,8 +81,7 @@ void RailBullet::SignalObjectCollision(const Point2d& /*my_speed_before*/,
 {
   int delta = (int)cfg.damage;
   obj->SetEnergyDelta(-delta);
-  if (obj->IsCharacter())
-    hits++;
+  hits++;
 }
 
 //---------------------------------------------------------------------------
@@ -113,6 +113,16 @@ bool RailGun::p_Shoot()
   projectile = NULL;
   ReloadLauncher();
   return true;
+}
+
+void RailGun::IncMissedShots()
+{
+  uint hits = static_cast<RailBullet*>(projectile)->GetNumHits();
+  if (!hits) {
+    WeaponLauncher::IncMissedShots();
+  } else if (hits > 1) {
+    GameMessages::GetInstance()->Add(Format(_("Woah! Combo of %u!"), hits));
+  }
 }
 
 std::string RailGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
