@@ -122,9 +122,11 @@ void MainMenu::SelectAction(const Widget * widget)
   if (widget == play) {
     choice = PLAY;
     close_menu = true;
+#ifndef ANDROID
   } else if (widget == network) {
     choice = NETWORK;
     close_menu = true;
+#endif
   } else if (widget == options) {
     choice = OPTIONS;
     close_menu = true;

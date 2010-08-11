@@ -36,7 +36,10 @@ class MainMenu : public Menu
   MainMenu operator=(const MainMenu&);
   /**********************************************/
 
-  ButtonPic *play, *network, *options, *help, *credits, *quit;
+  ButtonPic *play, *options, *help, *credits, *quit;
+#ifndef ANDROID
+  ButtonPic *network;
+#endif
   Text * version_text, *website_text;
 
 public:
