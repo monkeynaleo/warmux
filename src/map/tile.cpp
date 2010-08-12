@@ -373,15 +373,15 @@ bool Tile::LoadImage(const std::string& filename,
 
   // Opening the existing file
   f = fopen(filename.c_str(), "rb");
-  if(f == NULL)
+  if (!f)
     goto end;
 
   // Creating a png ...
   png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-  if(png_ptr == NULL) // Structure and ...
+  if (!png_ptr) // Structure and ...
     goto end;
   info_ptr = png_create_info_struct(png_ptr);
-  if(info_ptr == NULL) // Information.
+  if (!info_ptr) // Information.
     goto end;
 
   // Associate png struture with a file
