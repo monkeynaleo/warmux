@@ -74,7 +74,6 @@ public:
   virtual void Clear();
 
   // Navigate between widget with keyboard
-  virtual void RemoveWidgetFocus() { selected_widget = NULL; };
   virtual void SetFocusOnNextWidget();
   virtual void SetFocusOnPreviousWidget();
   Widget * GetCurrentKeyboardSelectedWidget() const { return selected_widget; };
