@@ -188,8 +188,6 @@ ControlConfig::ControlConfig(const Point2i& size, bool readonly)
   : WidgetList(size)
   , read_only(readonly)
 {
-  SetBorder(c_black, 1);
-
   header = new HeaderItem(32);
   AddWidget(header);
 
