@@ -322,7 +322,7 @@ bool ScrollBox::SendKey(const SDL_keysym & key)
     if (new_offset != offset) {
       offset = new_offset;
       Pack();
-      //NeedRedrawing();
+      NeedRedrawing();
     }
   }
   return true;
