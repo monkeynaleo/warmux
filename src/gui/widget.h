@@ -42,15 +42,12 @@ private:
   bool visible;
   bool is_highlighted;
 
+protected:
   Color border_color;
   uint border_size;
   Color background_color;
   Color highlight_bg_color;
 
-  Widget(const Widget&);
-  const Widget& operator=(const Widget&);
-
-protected:
   Container * ct;
   bool need_redrawing;
   bool clickable;
