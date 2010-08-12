@@ -62,19 +62,8 @@ public:
     // First spacing
     AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
 
-    int key_code = kbd->GetKeyAssociatedToAction(key_action);
-    key_value = kbd->GetRawKeyCode(key_code);
-
-    // Actual key
-    label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
-                          MIN_KEY_WIDTH, Font::FONT_SMALL, Font::FONT_NORMAL,
-                          c_black, Text::ALIGN_LEFT_CENTER);
-    AddWidget(label_key);
-
-    // Second spacing
-    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
-
     // Modifiers
+    int key_code = kbd->GetKeyAssociatedToAction(key_action);
     shift_box = new CheckBox("", CHECKBOX_WIDTH,
                              kbd->HasShiftModifier(key_code));
     AddWidget(shift_box);
@@ -86,6 +75,16 @@ public:
     ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
                              kbd->HasControlModifier(key_code));
     AddWidget(ctrl_box);
+
+    // Second spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
+
+    // Actual key
+    key_value = kbd->GetRawKeyCode(key_code);
+    label_key = new Label((key_value) ? kbd->GetKeyNameFromKey(key_value) : _("None"),
+                          MIN_KEY_WIDTH, Font::FONT_SMALL, Font::FONT_NORMAL,
+                          c_black, Text::ALIGN_LEFT_CENTER);
+    AddWidget(label_key);
   }
 
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button)
@@ -120,6 +119,8 @@ public:
     int height = size.y-2*border.y;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
+
+    label_key->SetSizeX(size.x - 2*SPACING_WIDTH - MIN_ACTION_WIDTH);
   }
 
   void SaveAction(Keyboard *kbd)
@@ -143,19 +144,10 @@ public:
     SetBorder(0, 0);
 
     // Action name
-    label_action = new Label(_("Action"),
+    label_action = new Label(_("Interface action"),
                              MIN_ACTION_WIDTH, Font::FONT_MEDIUM, Font::FONT_BOLD,
                              light_gray_color, Text::ALIGN_RIGHT_CENTER);
     AddWidget(label_action);
-
-    // Spacing
-    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
-
-    // Actual key
-    label_key = new Label(_("Key"),
-                          MIN_KEY_WIDTH, Font::FONT_MEDIUM, Font::FONT_NORMAL,
-                          c_black, Text::ALIGN_LEFT_CENTER);
-    AddWidget(label_key);
 
     // Spacing
     AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
@@ -165,6 +157,15 @@ public:
                            90, Font::FONT_MEDIUM, Font::FONT_NORMAL,
                            c_black, Text::ALIGN_LEFT_CENTER);
     AddWidget(label_mods);
+
+    // Spacing
+    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
+
+    // Actual key
+    label_key = new Label(_("Key"),
+                          MIN_KEY_WIDTH, Font::FONT_MEDIUM, Font::FONT_NORMAL,
+                          c_black, Text::ALIGN_LEFT_CENTER);
+    AddWidget(label_key);
 
     SetBackgroundColor(light_gray_color);
   }
@@ -178,6 +179,8 @@ public:
     int height = size.y-2*border.y;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
+
+    label_key->SetSizeX(size.x - 2*SPACING_WIDTH - MIN_ACTION_WIDTH);
   }
 };
 
@@ -185,10 +188,13 @@ ControlConfig::ControlConfig(const Point2i& size, bool readonly)
   : WidgetList(size)
   , read_only(readonly)
 {
+  SetBorder(c_black, 1);
+
   header = new HeaderItem(32);
   AddWidget(header);
 
   box = new SelectBox(size, false, true);
+  box->SetBorder(c_black, 0);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
     ControlItem *item = new ControlItem(i, readonly, 32);
     items.push_back(item);
