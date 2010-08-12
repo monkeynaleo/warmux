@@ -37,23 +37,25 @@
 class ControlItem : public HBox
 {
   ManMachineInterface::Key_t key_action;
-  int  key_value;
+  int   key_value;
+  bool  read_only;
 
   Label *label_action, *label_key;
   CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
-  ControlItem(ManMachineInterface::Key_t action,
+  ControlItem(int action, bool ro,
               uint height, bool force_widget_size = true)
     : HBox(height, false, force_widget_size)
-    , key_action(action)
+    , key_action((ManMachineInterface::Key_t)action)
+    , read_only(ro)
   {
     SetMargin(0);
     SetBorder(0, 0);
 
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
-    label_action = new Label(kbd->GetHumanReadableActionName(action),
+    label_action = new Label(kbd->GetHumanReadableActionName(key_action),
                              MIN_ACTION_WIDTH, (Font::font_size_t)14, Font::FONT_BOLD,
                              dark_gray_color, Text::ALIGN_RIGHT_CENTER);
     AddWidget(label_action);
@@ -61,7 +63,7 @@ public:
     // First spacing
     AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
 
-    int key_code = kbd->GetKeyAssociatedToAction(action);
+    int key_code = kbd->GetKeyAssociatedToAction(key_action);
     key_value = kbd->GetRawKeyCode(key_code);
 
     // Actual key
@@ -87,9 +89,16 @@ public:
     AddWidget(ctrl_box);
   }
 
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button)
+  {
+    WidgetList::ClickUp(mousePosition, button);
+    return NULL;
+  }
+
   virtual bool SendKey(const SDL_keysym & key)
   {
-    //printf("Received key %i\n", key.sym);
+    if (read_only)
+      return false;
     key_value = key.sym;
     label_key->SetText(Keyboard::GetConstInstance()->GetKeyNameFromKey(key_value));
 
@@ -100,7 +109,7 @@ public:
 
     // A simple NeedRedraw would reset the packing
     Pack();
-    return HBox::SendKey(key);
+    return true;
   }
 
   virtual void Pack()
@@ -183,22 +192,12 @@ ControlConfig::ControlConfig(const Point2i& size, bool readonly,
 
   box = new SelectBox(size, false, force_widget_size, true);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
-    ControlItem *item = new ControlItem((ManMachineInterface::Key_t)i, 32);
+    ControlItem *item = new ControlItem(i, readonly, 32);
     items.push_back(item);
     box->AddWidget(item);
   }
   AddWidget(box);
   //SetBackgroundColor(transparent_color);
-}
-
-bool ControlConfig::SendKey(const SDL_keysym & key)
-{
-  if (read_only)
-    return WidgetList::SendKey(key);
-  Widget *sel = box->GetSelectedWidget();
-  if (sel)
-    return sel->SendKey(key);
-  return false;
 }
 
 void ControlConfig::SaveControlConfig() const
