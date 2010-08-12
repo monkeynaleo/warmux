@@ -37,7 +37,6 @@ class ControlConfig : public WidgetList
 public:
   ControlConfig(const Point2i& size, bool readonly = true,
                 bool force_widget_size = true);
-  virtual bool SendKey(const SDL_keysym & key);
   void SaveControlConfig() const;
   virtual void Pack();
 };
