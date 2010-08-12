@@ -27,7 +27,6 @@
 #include "include/app.h"
 
 #define SCROLL_SPEED  6
-#define BORDER        2
 #define NO_DRAG      -1
 
 static const Color c_even(0x80, 0x80, 0x80, 0x40);
@@ -53,9 +52,9 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
 
   scrollbar_width = m_up->GetSizeX();
   // Let's consider the scrollbar is not displayed for now.
-  vbox = new VBox(_size.x - 2*BORDER - scrollbar_width, false, force_widget_size);
-  vbox->SetBorder(Point2i(BORDER, BORDER));
-  vbox->SetMargin(BORDER);
+  vbox = new VBox(_size.x - 2*border_size - scrollbar_width, false, force_widget_size);
+  vbox->SetBorder(Point2i(0, 0));
+  vbox->SetMargin(0);
 
   WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
@@ -205,8 +204,8 @@ size_t ScrollBox::WidgetCount() const
 
 Point2i ScrollBox::GetScrollTrackPos() const
 {
-  return Point2i(position.x + size.x - BORDER - scrollbar_width,
-                 position.y + BORDER + m_up->GetSizeY());
+  return Point2i(position.x + size.x - border_size - scrollbar_width,
+                 position.y + border_size + m_up->GetSizeY());
 }
 
 Rectanglei ScrollBox::GetScrollTrack() const
@@ -219,8 +218,8 @@ Rectanglei ScrollBox::GetScrollThumb() const
 {
   // Height: (part of the vbox that is displayed / vbox size) * scrollbar height
   Rectanglei scroll_track = GetScrollTrack();
-  uint tmp_h = ((size.y - 2*BORDER) * scroll_track.GetSizeY())
-             / ((size.y - 2*BORDER) + GetMaxOffset());
+  uint tmp_h = ((size.y - 2*border_size) * scroll_track.GetSizeY())
+             / ((size.y - 2*border_size) + GetMaxOffset());
   // Start position: from the offset
   uint tmp_y = scroll_track.GetPositionY()
              + (offset * scroll_track.GetSizeY()) / (size.y + GetMaxOffset());
@@ -237,7 +236,7 @@ int ScrollBox::GetMaxOffset() const
 
 int ScrollBox::GetTrackHeight() const
 {
-  return size.y - 2*(m_up->GetSizeY()+BORDER);
+  return size.y - 2*(m_up->GetSizeY()+border_size);
 }
 
 void ScrollBox::Empty()
@@ -280,20 +279,21 @@ void ScrollBox::Update(const Point2i &mousePosition,
 void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
-  vbox->SetSizeX(size.x -2*BORDER - scrollbar_width);
+  vbox->SetSizeX(size.x -2*border_size - scrollbar_width);
   vbox->Pack();
 
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // No that we known better, account for the scrollbar
   if (HasScrollBar()) {
-    vbox->SetPosition(position.x + BORDER, position.y + BORDER - offset);
+    vbox->SetPosition(position.x + border_size,
+                      position.y + border_size - offset);
   } else {
-    vbox->SetPosition(position.x + BORDER, position.y + BORDER);
+    vbox->SetPosition(position + border_size);
   }
-  m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - BORDER,
-                    position.y + BORDER);
-  m_down->SetPosition(position + size - m_down->GetSize() - BORDER);
+  m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - border_size,
+                    position.y + border_size);
+  m_down->SetPosition(position + size - m_down->GetSize() - border_size);
 
   WidgetList::Pack();
 }
