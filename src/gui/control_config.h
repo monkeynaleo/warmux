@@ -35,8 +35,7 @@ class ControlConfig : public WidgetList
   Widget *header;
 
 public:
-  ControlConfig(const Point2i& size, bool readonly = true,
-                bool force_widget_size = true);
+  ControlConfig(const Point2i& size, bool readonly = true);
   void SaveControlConfig() const;
   virtual void Pack();
 };

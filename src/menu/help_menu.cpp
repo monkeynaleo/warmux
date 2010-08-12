@@ -82,7 +82,7 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 
-  w = new ControlConfig(tabs->GetSize(), true, false);
+  w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
 
   GetResourceManager().UnLoadXMLProfile(res);
