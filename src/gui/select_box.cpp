@@ -60,15 +60,13 @@ Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
     if (item!=-1) {
       Widget *w = m_items[item]->ClickUp(mousePosition, button);
       if (item==selected_item) {
-        if (w)
-          return w;
         if (!always_one_selected)
           Deselect();
       } else {
         Select(item);
       }
 
-      return w;
+      return (selected_item == -1) ? this : m_items[selected_item];
     }
   }
 
@@ -99,6 +97,7 @@ void SelectBox::Select(uint index)
   selected_item = index;
   m_items[index]->SetHighlightBgColor(selected_item_color);
   m_items[index]->SetHighlighted(true);
+  SetFocusOn(m_items[index]);
   //m_items[index]->NeedRedrawing();
   NeedRedrawing();
 }
@@ -111,6 +110,7 @@ void SelectBox::Deselect()
     //m_items[selected_item]->NeedRedrawing();
   }
   selected_item = -1;
+  SetFocusOn(NULL);
   NeedRedrawing();
 }
 
@@ -121,6 +121,8 @@ void SelectBox::RemoveSelected()
   if (selected_item != -1) {
     if (last == m_items[selected_item])
       last = NULL;
+    SetFocusOnPreviousWidget();
+    RemoveWidget(m_items[selected_item]);
     m_items.erase(m_items.begin() + selected_item);
     selected_item =- 1;
   }
