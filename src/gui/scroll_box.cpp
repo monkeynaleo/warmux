@@ -77,9 +77,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 
   if (vbox->Contains(mousePosition)) {
     Widget *w = vbox->ClickUp(mousePosition, button);
-    if (w) {
-      return w;
-    }
+    SetFocusOn(w);
+    return w;
 
     // The click was not handled, let's try using it for scrolling
   }
@@ -121,6 +120,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       Pack();
       NeedRedrawing();
     }
+
+    return this;
   }
 
   return NULL;
@@ -143,6 +144,7 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
                / scroll_track.GetSizeY();
       }
       start_drag_offset = offset;
+      return this;
     } else {
       start_drag_offset = NO_DRAG;
     }
