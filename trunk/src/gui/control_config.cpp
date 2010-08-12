@@ -144,26 +144,20 @@ public:
     SetBorder(0, 0);
 
     // Action name
-    label_action = new Label(_("Interface action"),
-                             MIN_ACTION_WIDTH, Font::FONT_MEDIUM, Font::FONT_BOLD,
-                             light_gray_color, Text::ALIGN_RIGHT_CENTER);
+    label_action = new Label(_("Action"), MIN_ACTION_WIDTH,
+                             Font::FONT_MEDIUM, Font::FONT_NORMAL,
+                             c_black, Text::ALIGN_RIGHT_CENTER);
     AddWidget(label_action);
 
-    // Spacing
-    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
-
     // Modifiers
-    label_mods = new Label(_("Modifiers"),
-                           90, Font::FONT_MEDIUM, Font::FONT_NORMAL,
-                           c_black, Text::ALIGN_LEFT_CENTER);
+    label_mods = new Label(_("Modifiers"), 90,
+                           Font::FONT_MEDIUM, Font::FONT_NORMAL,
+                           c_black, Text::ALIGN_CENTER);
     AddWidget(label_mods);
 
-    // Spacing
-    AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
-
     // Actual key
-    label_key = new Label(_("Key"),
-                          MIN_KEY_WIDTH, Font::FONT_MEDIUM, Font::FONT_NORMAL,
+    label_key = new Label(_("Key"), MIN_KEY_WIDTH,
+                          Font::FONT_MEDIUM, Font::FONT_NORMAL,
                           c_black, Text::ALIGN_LEFT_CENTER);
     AddWidget(label_key);
 
