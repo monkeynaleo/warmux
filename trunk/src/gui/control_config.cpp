@@ -44,9 +44,8 @@ class ControlItem : public HBox
   CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
-  ControlItem(int action, bool ro,
-              uint height, bool force_widget_size = true)
-    : HBox(height, false, force_widget_size)
+  ControlItem(int action, bool ro, uint height)
+    : HBox(height, false, true /* use full height */)
     , key_action((ManMachineInterface::Key_t)action)
     , read_only(ro)
   {
@@ -137,8 +136,8 @@ class HeaderItem : public HBox
   Label *label_action, *label_key, *label_mods;
 
 public:
-  HeaderItem(uint height, bool force_widget_size = true)
-    : HBox(height, false, force_widget_size)
+  HeaderItem(uint height)
+    : HBox(height, false, true)
   {
     SetMargin(0);
     SetBorder(0, 0);
@@ -182,22 +181,20 @@ public:
   }
 };
 
-ControlConfig::ControlConfig(const Point2i& size, bool readonly,
-                             bool force_widget_size)
+ControlConfig::ControlConfig(const Point2i& size, bool readonly)
   : WidgetList(size)
   , read_only(readonly)
 {
-  header = new HeaderItem(32, force_widget_size);
+  header = new HeaderItem(32);
   AddWidget(header);
 
-  box = new SelectBox(size, false, force_widget_size, true);
+  box = new SelectBox(size, false, true);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
     ControlItem *item = new ControlItem(i, readonly, 32);
     items.push_back(item);
     box->AddWidget(item);
   }
   AddWidget(box);
-  //SetBackgroundColor(transparent_color);
 }
 
 void ControlConfig::SaveControlConfig() const

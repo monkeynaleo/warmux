@@ -138,7 +138,7 @@ OptionMenu::OptionMenu() :
 #endif
 
   /* Controls editing */
-  controls = new ControlConfig(tabs->GetSize() - 10, false, false);
+  controls = new ControlConfig(tabs->GetSize() - 10, false);
   tabs->AddNewTab("unused", _("Key bindings"), controls);
 
   /* Team editor */
