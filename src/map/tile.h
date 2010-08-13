@@ -76,9 +76,9 @@ public:
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
 
-  // Translate world coordinates into a preview ones
-  // @warning assumes CELL_SIZE is 64x64
+  // Translate world coordinates into a preview ones and vice versa
   Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
+  Point2i FromPreviewCoordinates(const Point2i& pos) { return (pos<<m_shift) + m_upper_left_offset; };
 
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
