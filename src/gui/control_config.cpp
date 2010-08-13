@@ -32,6 +32,7 @@
 #define MIN_ACTION_WIDTH  276
 #define MIN_KEY_WIDTH      70
 #define SPACING_WIDTH       8
+#define MODIFIERS_WIDTH    86
 #define CHECKBOX_WIDTH     18
 
 class ControlItem : public HBox
@@ -112,6 +113,11 @@ public:
 
   virtual void Pack()
   {
+    // First this so that HBox::Pack does not reset label_key width back
+    // to its minimal value
+    label_key->SetSizeX(size.x - MIN_ACTION_WIDTH -
+                        2*SPACING_WIDTH - 3*CHECKBOX_WIDTH);
+
     // Call first HBox::Pack to set positions
     HBox::Pack();
 
@@ -119,8 +125,6 @@ public:
     int height = size.y-2*border.y;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
-
-    label_key->SetSizeX(size.x - 2*SPACING_WIDTH - MIN_ACTION_WIDTH);
   }
 
   void SaveAction(Keyboard *kbd)
@@ -150,7 +154,7 @@ public:
     AddWidget(label_action);
 
     // Modifiers
-    label_mods = new Label(_("Modifiers"), 90,
+    label_mods = new Label(_("Modifiers"), MODIFIERS_WIDTH,
                            Font::FONT_MEDIUM, Font::FONT_NORMAL,
                            c_black, Text::ALIGN_CENTER);
     AddWidget(label_mods);
@@ -166,6 +170,10 @@ public:
 
   virtual void Pack()
   {
+    // First this so that HBox::Pack does not reset label_key width back
+    // to its minimal value
+    label_key->SetSizeX(size.x - MIN_ACTION_WIDTH - MODIFIERS_WIDTH);
+
     // Call first HBox::Pack to set positions
     HBox::Pack();
 
@@ -173,8 +181,6 @@ public:
     int height = size.y-2*border.y;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
-
-    label_key->SetSizeX(size.x - 2*SPACING_WIDTH - MIN_ACTION_WIDTH);
   }
 };
 
@@ -185,7 +191,7 @@ ControlConfig::ControlConfig(const Point2i& size, bool readonly)
   header = new HeaderItem(32);
   AddWidget(header);
 
-  box = new SelectBox(size, false, true);
+  box = new SelectBox(size, false, true /* full box width used*/);
   box->SetBorder(c_black, 0);
   for (int i=0; i<ManMachineInterface::KEY_NONE; i++) {
     ControlItem *item = new ControlItem(i, readonly, 32);
