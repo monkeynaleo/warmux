@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2009-09-09 14:39+0100\n"
 "Last-Translator: Vojtěch Horký <vojta.horky@seznam.cz>\n"
 "Language-Team: Čeština\n"
@@ -1412,8 +1412,9 @@ msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Změnit druh zbraně"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1421,8 +1422,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "Změnit druh zbraně"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Změnit druh zbraně"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1440,8 +1442,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Změnit druh zbraně"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Změnit druh zbraně"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

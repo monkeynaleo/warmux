@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2009-07-18 20:57+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
@@ -1303,8 +1303,9 @@ msgid "Scroll on border"
 msgstr "捲動邊線"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "改變武器分類"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1312,8 +1313,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "改變武器分類"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "改變武器分類"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1331,8 +1333,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "改變武器分類"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "改變武器分類"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

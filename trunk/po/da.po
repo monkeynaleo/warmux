@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2009-07-01 16:01+0200\n"
 "Last-Translator: Ysangkok <ysangkok@gmail.com>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -1363,8 +1363,9 @@ msgid "Scroll on border"
 msgstr "Rul ved kanten"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Ændr våbenkatalog"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1372,8 +1373,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "Ændr våbenkatalog"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Ændr våbenkatalog"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1391,8 +1393,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Ændr våbenkatalog"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Ændr våbenkatalog"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

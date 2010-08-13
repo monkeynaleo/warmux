@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2009-09-11 15:45+0100\n"
 "Last-Translator: Peter Olsson <peterdenbra@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -1358,8 +1358,9 @@ msgid "Scroll on border"
 msgstr "Skrolla vid kant"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Ändra vapenkategori"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1367,8 +1368,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "Ändra vapenkategori"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Ändra vapenkategori"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1386,8 +1388,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Ändra vapenkategori"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Ändra vapenkategori"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

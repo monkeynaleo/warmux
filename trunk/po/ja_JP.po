@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -1306,8 +1306,9 @@ msgid "Scroll on border"
 msgstr "スクロール枠"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "武器カテゴリを切り替える"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1315,8 +1316,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "武器カテゴリを切り替える"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "武器カテゴリを切り替える"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1334,8 +1336,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "武器カテゴリを切り替える"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "武器カテゴリを切り替える"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

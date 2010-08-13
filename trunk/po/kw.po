@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -1454,8 +1454,9 @@ msgid "Scroll on border"
 msgstr "Skrolya war an emlow"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Chanjya ehen arv"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1463,8 +1464,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "Chanjya ehen arv"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Chanjya ehen arv"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1482,8 +1484,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Chanjya ehen arv"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Chanjya ehen arv"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2010-08-11 23:08+0800\n"
 "Last-Translator: Robert Clausecker <fuzxxl@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -1355,16 +1355,18 @@ msgid "Scroll on border"
 msgstr "Am Rand scrollen?"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr "Aus Nahkampfwaffen wählen"
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Aus Spezialwaffen wählen"
 
 #: src/interface/man_machine_interface.cpp:1103
 msgid "Select 'Heavy' weapon category"
 msgstr "Aus Raketen wählen"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr "Aus Transportutensilien wählen"
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Aus Raketen wählen"
 
 #: src/interface/man_machine_interface.cpp:1104
 msgid "Select 'Rifle' weapon category"
@@ -1379,8 +1381,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Aus Wurfwaffen wählen"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr "Aus Werkzeugen wählen"
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Aus Schusswaffen wählen"
 
 #: src/interface/man_machine_interface.cpp:1110
 msgid "Select weapon category 8"
@@ -1895,6 +1898,15 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#~ msgid "Select 'Duel' category"
+#~ msgstr "Aus Nahkampfwaffen wählen"
+
+#~ msgid "Select 'Move' category"
+#~ msgstr "Aus Transportutensilien wählen"
+
+#~ msgid "Select 'Tool' category"
+#~ msgstr "Aus Werkzeugen wählen"
 
 #~ msgid "Head commander: "
 #~ msgstr "Anführer: "
