@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2010-01-10 11:20+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@gmail.com>\n"
 "Language-Team: Bulgarian <thedeadly91@gmail.com>\n"
@@ -1356,8 +1356,9 @@ msgid "Scroll on border"
 msgstr "Скролиране от краищата на екрана"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Duel' weapon category"
+msgstr "Смени категорията на оъжието"
 
 #: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
@@ -1365,8 +1366,9 @@ msgid "Select 'Heavy' weapon category"
 msgstr "Смени категорията на оъжието"
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Move' weapon category"
+msgstr "Смени категорията на оъжието"
 
 #: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
@@ -1384,8 +1386,9 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Смени категорията на оъжието"
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
-msgstr ""
+#, fuzzy
+msgid "Select 'Tool' weapon category"
+msgstr "Смени категорията на оъжието"
 
 #: src/interface/man_machine_interface.cpp:1110
 #, fuzzy

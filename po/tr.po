@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 18:31+0200\n"
+"POT-Creation-Date: 2010-08-13 20:22+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -1293,7 +1293,7 @@ msgid "Scroll on border"
 msgstr "Sınırlarda kaydır"
 
 #: src/interface/man_machine_interface.cpp:1107
-msgid "Select 'Duel' category"
+msgid "Select 'Duel' weapon category"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1103
@@ -1301,7 +1301,7 @@ msgid "Select 'Heavy' weapon category"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1108
-msgid "Select 'Move' category"
+msgid "Select 'Move' weapon category"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1104
@@ -1317,7 +1317,7 @@ msgid "Select 'Throwing' weapon category"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1109
-msgid "Select 'Tool' category"
+msgid "Select 'Tool' weapon category"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1110
