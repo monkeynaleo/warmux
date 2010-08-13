@@ -39,15 +39,7 @@
 
 int  Keyboard::GetRawKeyCode(int key_code) const
 {
-  int value = key_code;
-  if (value > ALT_OFFSET)
-    value -= ALT_OFFSET;
-  if (value > SHIFT_OFFSET)
-    value -= SHIFT_OFFSET;
-  if (value > CONTROL_OFFSET)
-    value -= CONTROL_OFFSET;
-
-  return value;
+  return key_code % MODIFIER_OFFSET;
 }
 
 bool Keyboard::HasShiftModifier(int key_code) const
@@ -65,11 +57,30 @@ bool Keyboard::HasControlModifier(int key_code) const
   return (key_code/CONTROL_OFFSET)&1;
 }
 
-void Keyboard::SaveKeyEvent(Key_t at, int key_code,
-                            bool shift, bool alt, bool ctrl)
+ManMachineInterface::Key_t
+Keyboard::GetRegisteredAction(int raw_key_code, bool ctrl, bool alt, bool shift) const
 {
-  SetKeyAction(key_code + shift*SHIFT_OFFSET + alt*ALT_OFFSET + ctrl*CONTROL_OFFSET,
-               at);
+  int key_code = raw_key_code + shift*SHIFT_OFFSET +
+                 alt*ALT_OFFSET + ctrl*CONTROL_OFFSET;
+
+  // If the map doesn't have such key, exit immediately
+  if (layout.find(key_code) == layout.end())
+    return KEY_NONE;
+
+  // Must use at because [] has side effect of inserting a new key,
+  // despite our previous verification
+  return (layout.at(key_code).size()) ? layout.at(key_code)[0] : KEY_NONE;
+}
+
+bool Keyboard::SaveKeyEvent(Key_t at, int raw_key_code,
+                            bool ctrl, bool alt, bool shift)
+{
+  int key_code = raw_key_code + shift*SHIFT_OFFSET +
+                 alt*ALT_OFFSET + ctrl*CONTROL_OFFSET;
+  if (layout.find(key_code) == layout.end() || layout.at(key_code).size())
+    return false;
+  SetKeyAction(key_code, at);
+  return true;
 }
 
 

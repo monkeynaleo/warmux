@@ -46,10 +46,13 @@ public:
   void SaveConfig( xmlNode *node) const;
 
   int  GetRawKeyCode(int keycode) const;
-  bool HasShiftModifier(int key_code) const;
-  bool HasAltModifier(int key_code) const;
   bool HasControlModifier(int key_code) const;
-  void SaveKeyEvent(Key_t at, int key_code, bool shift, bool alt, bool control);
+  bool HasAltModifier(int key_code) const;
+  bool HasShiftModifier(int key_code) const;
+  ManMachineInterface::Key_t
+    GetRegisteredAction(int raw_key_code, bool control, bool alt, bool shift) const;
+  bool SaveKeyEvent(Key_t at, int raw_key_code,
+                    bool control, bool alt, bool shift);
 };
 
 //-----------------------------------------------------------------------------
