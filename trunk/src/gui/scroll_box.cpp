@@ -76,9 +76,11 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 
   if (vbox->Contains(mousePosition)) {
     Widget *w = vbox->ClickUp(mousePosition, button);
-    SetFocusOn(w);
-    return w;
 
+    if (w) {
+      SetFocusOn(w);
+      return w;
+    }
     // The click was not handled, let's try using it for scrolling
   }
 
@@ -158,7 +160,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
   //printf("__Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
   // update position of items because of scrolling with scroll bar
-  if (HasScrollBar() && start_drag_offset>0) {
+  if (HasScrollBar() && start_drag_offset!=NO_DRAG) {
     Point2i track_pos  = GetScrollTrackPos();
     int     height     = GetTrackHeight();
     int     max_offset = GetMaxOffset();
