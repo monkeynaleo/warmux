@@ -200,7 +200,7 @@ void Interface::DrawCharacterInfo()
   t_character_name->DrawCenter(bottom_bar_pos + character_name_offset);
 
   // Display player's name
-  t_player_name->SetText(_("Head commander: ") + character_under_cursor->GetTeam().GetPlayerName());
+  t_player_name->SetText(_("Head commander") + ": " + character_under_cursor->GetTeam().GetPlayerName());
   Point2i player_name_offset = energy_bar_offset + Point2i(energy_bar->GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
   t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
 
