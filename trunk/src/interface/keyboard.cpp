@@ -78,9 +78,6 @@ bool Keyboard::SaveKeyEvent(Key_t at, int raw_key_code,
 {
   int key_code = raw_key_code + shift*SHIFT_OFFSET +
                  alt*ALT_OFFSET + ctrl*CONTROL_OFFSET;
-  std::map<int, std::vector<Key_t> >::iterator it = layout.find(key_code);
-  if (it == layout.end() || (*it).second.size())
-    return false;
   SetKeyAction(key_code, at);
   return true;
 }
