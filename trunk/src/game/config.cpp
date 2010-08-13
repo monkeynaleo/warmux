@@ -82,35 +82,51 @@ static std::string GetWormuxPath() { return ANDROID_HOME; }
 
 const std::string FILENAME="config.xml";
 
-Config::Config():
-  default_language(""),
-  m_game_mode("classic"),
-  display_energy_character(true),
-  display_name_character(true),
-  display_wind_particles(true),
-  display_multi_layer_sky(true),
-  default_mouse_cursor(false),
-  video_width(800),
-  video_height(600),
-  video_fullscreen(false),
-  max_fps(50),
-  bling_bling_interface(false),
-  scroll_on_border(true),
-  scroll_border_size(50),
-  sound_music(true),
-  sound_effects(true),
-  sound_frequency(44100),
-  warn_on_new_player(true),
-#ifdef HAVE_LIBCURL
-  check_updates(false),
+Config::Config()
+  : default_language("")
+  , m_game_mode("classic")
+  , display_energy_character(true)
+  , display_name_character(true)
+#ifdef ANDROID
+  , display_wind_particles(false) // Too CPU intensive
+  , display_multi_layer_sky(false) // Memory hungry + CPU intensive
+  , default_mouse_cursor(false)
+  , video_width(480)
+  , video_height(320)
+  , video_fullscreen(true) // No other mode supported
+  , max_fps(25)
+  , bling_bling_interface(false) // Obvious kinetic scrolling user
+  , scroll_on_border(false)
+  , scroll_border_size(50)
+  , sound_music(true)
+  , sound_effects(true)
+  , sound_frequency(22050) // Reduce memory usage
+#else
+  , display_wind_particles(true)
+  , display_multi_layer_sky(true)
+  , default_mouse_cursor(false)
+  , video_width(800)
+  , video_height(600)
+  , video_fullscreen(false)
+  , max_fps(50)
+  , bling_bling_interface(false)
+  , scroll_on_border(true)
+  , scroll_border_size(50)
+  , sound_music(true)
+  , sound_effects(true)
+  , sound_frequency(44100)
 #endif
-  lefthanded_mouse(false),
-  m_network_client_host("localhost"),
-  m_network_client_port(WORMUX_NETWORK_PORT),
-  m_network_server_game_name("Wormux party"),
-  m_network_server_port(WORMUX_NETWORK_PORT),
-  m_network_server_public(true),
-  transparency(ALPHA)
+  , warn_on_new_player(true)
+#ifdef HAVE_LIBCURL
+  , check_updates(false)
+#endif
+  , lefthanded_mouse(false)
+  , m_network_client_host("localhost")
+  , m_network_client_port(WORMUX_NETWORK_PORT)
+  , m_network_server_game_name("Wormux party")
+  , m_network_server_port(WORMUX_NETWORK_PORT)
+  , m_network_server_public(true)
+  , transparency(ALPHA)
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume();
