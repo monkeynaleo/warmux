@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 20:22+0200\n"
-"PO-Revision-Date: 2010-01-12 18:58+0100\n"
+"POT-Creation-Date: 2010-08-14 01:25+0200\n"
+"PO-Revision-Date: 2010-08-14 01:29+0100\n"
 "Last-Translator: Christophe Gisquet <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +94,7 @@ msgstr "%s de l'équipe %s est mort à cause de sa maladresse !"
 #: src/network/admin_commands.cpp:65
 #, c-format
 msgid "%s has address %s"
-msgstr ""
+msgstr "%s a pour adresse %s"
 
 #: src/weapon/polecat.cpp:115
 #, c-format
@@ -105,12 +105,10 @@ msgstr ""
 "%s a fait un geste pour l'environnement, il n'a pas ordonné au putois de "
 "péter."
 
-#: src/object/medkit.cpp:69
-#, c-format
-msgid "%s has won %u point of energy!"
-msgid_plural "%s has won %u points of energy!"
-msgstr[0] "%s a gagné %u point de vie !"
-msgstr[1] "%s a gagné %u points de vie !"
+#: src/object/medkit.cpp:57
+#, fuzzy, c-format
+msgid "%s has won %u points of energy!"
+msgstr "%s a gagné %u point de vie !"
 
 #: src/game/game.cpp:1036
 #, c-format
@@ -125,7 +123,7 @@ msgstr "%s est près d'une mine !"
 #: src/network/admin_commands.cpp:62
 #, c-format
 msgid "%s kicked from game"
-msgstr ""
+msgstr "%s bouté hors de la partie"
 
 #: src/include/action_handler.cpp:402
 #, c-format
@@ -344,14 +342,13 @@ msgstr[0] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 msgstr[1] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 
 #: src/weapon/rail_gun.cpp:131
+#, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
 msgstr[0] ""
-"L'équipe %s a gagné %u Railgun ! Attention à ne pas trop se "
-"disperser !"
+"L'équipe %s a gagné %u Railgun ! Attention à ne pas trop se disperser !"
 msgstr[1] ""
-"L'équipe %s a gagné %u Railguns ! Attention à ne pas trop se "
-"disperser !"
+"L'équipe %s a gagné %u Railguns ! Attention à ne pas trop se disperser !"
 
 #: src/weapon/riot_bomb.cpp:131
 #, c-format
@@ -441,7 +438,7 @@ msgstr "%s a emmené un membre de l'équipe %s dans la tombe avec lui !"
 #: src/network/admin_commands.cpp:77
 #, c-format
 msgid "%s: no such nickame"
-msgstr ""
+msgstr "%s: personne de ce nom"
 
 #: src/interface/interface.cpp:212
 msgid "(dead)"
@@ -515,7 +512,7 @@ msgstr "Bazooka Automatique"
 
 #: src/interface/man_machine_interface.cpp:1132
 msgid "Back jump"
-msgstr ""
+msgstr "Saut arrière"
 
 #: src/menu/pause_menu.cpp:47
 msgid "Back to battle"
@@ -613,7 +610,7 @@ msgstr "Changement de personnage"
 
 #: src/interface/man_machine_interface.cpp:1116
 msgid "Chat"
-msgstr ""
+msgstr "Tchat"
 
 #: src/menu/options_menu.cpp:230
 msgid "Check updates online?"
@@ -683,7 +680,7 @@ msgstr "Crédits"
 
 #: src/menu/help_menu.cpp:86
 msgid "Current controls"
-msgstr ""
+msgstr "Contrôles actuels"
 
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
@@ -691,7 +688,7 @@ msgstr "Dégâts par tour durant le mode mort subite"
 
 #: src/interface/man_machine_interface.cpp:1144
 msgid "Decrease explosion delay"
-msgstr ""
+msgstr "Diminuer le retardateur"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -709,11 +706,11 @@ msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1123
 msgid "Down"
-msgstr ""
+msgstr "Bas"
 
 #: src/interface/man_machine_interface.cpp:1124
 msgid "Down slowly"
-msgstr ""
+msgstr "Bas lentement"
 
 #: src/menu/help_menu.cpp:39
 msgid "Drag&drop: Move camera"
@@ -962,7 +959,7 @@ msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1145
 msgid "Increase explosion delay"
-msgstr "Accroît le retardateur"
+msgstr "Augmenter le retardateur"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:67
@@ -1696,6 +1693,7 @@ msgid "Unknown command"
 msgstr "Commande inconnue"
 
 #: src/network/admin_commands.cpp:68
+#, c-format
 msgid "Unknown command of type %i"
 msgstr "Commande inconnue de type %i"
 
