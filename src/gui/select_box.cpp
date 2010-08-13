@@ -58,15 +58,12 @@ Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
     int item = MouseIsOnWhichItem(mousePosition);
 
     if (item!=-1) {
-      Widget *w = m_items[item]->ClickUp(mousePosition, button);
       if (item==selected_item) {
         if (!always_one_selected)
           Deselect();
       } else {
         Select(item);
       }
-
-      return (selected_item == -1) ? this : m_items[selected_item];
     }
   }
 
