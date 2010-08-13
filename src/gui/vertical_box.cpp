@@ -45,23 +45,22 @@ void VBox::Pack()
   for (it = widget_list.begin();
        it != widget_list.end();
        ++it) {
+    Widget *w = *it;
 
     if (it == widget_list.begin())
       _y += border.y - margin;
 
-    (*it)->SetPosition(position.x + border.x,
-                       _y + margin);
+    w->SetPosition(position.x + border.x, _y + margin);
 
     if (force_widget_size) {
-      (*it)->SetSize(size.x - 2*border.x,
-                     (*it)->GetSizeY());
+      w->SetSize(size.x - 2*border.x, w->GetSizeY());
     } else {
-      max_size_x = std::max(max_size_x, uint((*it)->GetSizeX()));
+      max_size_x = std::max(max_size_x, uint(w->GetSizeX()));
     }
 
-    (*it)->Pack();
+    w->Pack();
 
-    _y = (*it)->GetPositionY() + (*it)->GetSizeY();
+    _y = w->GetPositionY() + w->GetSizeY();
   }
 
   size.y = _y - position.y + border.y;

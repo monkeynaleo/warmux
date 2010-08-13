@@ -45,22 +45,21 @@ void HBox::Pack()
   for (it = widget_list.begin();
        it != widget_list.end();
        ++it) {
+    Widget *w = *it;
 
     if (it == widget_list.begin())
       _x += border.x - margin;
 
-    (*it)->SetPosition(_x + margin,
-                       position.y + border.y);
+    w->SetPosition(_x + margin, position.y + border.y);
 
     if (force_widget_size) {
-      (*it)->SetSize((*it)->GetSizeX(),
-                     size.y - 2*border.y);
+      w->SetSize(w->GetSizeX(), size.y - 2*border.y);
     } else {
-      max_size_y = std::max(max_size_y, uint((*it)->GetSizeY()));
+      max_size_y = std::max(max_size_y, uint(w->GetSizeY()));
     }
-    (*it)->Pack();
+    w->Pack();
 
-    _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
+    _x = w->GetPositionX()+ w->GetSizeX();
   }
   size.x = _x - position.x + border.x;
 
