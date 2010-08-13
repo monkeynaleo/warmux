@@ -696,6 +696,15 @@ bool Interface::ActionClick(const Point2i &mouse_pos)
   } else if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
     Camera::GetInstance()->CenterOnActiveCharacter();
     return true;
+  } else {
+    Surface &  window  = GetMainWindow();
+    Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+    Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
+    if (rect_preview.Contains(mouse_pos)) {
+      offset = GetWorld().ground.FromPreviewCoordinates(mouse_pos - offset);
+      Camera::GetInstance()->SetXYabs(offset - Camera::GetInstance()->GetSize()/2);
+      return true;
+    }
   }
 
   return false;
