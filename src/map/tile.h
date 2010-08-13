@@ -71,10 +71,11 @@ public:
 
   // Return the preview
   const Surface* GetPreview() const { return m_preview; };
-  void  CheckPreview();
+  void  CheckPreview(bool force = false);
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
+  void SetPreviewSizeDelta(int delta);
 
   // Translate world coordinates into a preview ones and vice versa
   Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
@@ -84,6 +85,7 @@ public:
   void CheckEmptyTiles();
 
   uint32_t GetCRC() const { assert(crc); return crc; }
+
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
   TileItem_NonEmpty* GetNonEmpty(uint x, uint y);

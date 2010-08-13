@@ -136,6 +136,7 @@ public:
   void UpdateWindIndicator(int wind_value);
   void EnableDisplayTimer (bool _display) {display_timer = _display;};
   void ToggleMinimap() { display_minimap = !display_minimap; };
+  void MinimapSizeDelta(int delta);
   bool ActionClick(const Point2i &mouse_pos);
 };
 

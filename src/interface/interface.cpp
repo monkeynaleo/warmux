@@ -709,3 +709,8 @@ bool Interface::ActionClick(const Point2i &mouse_pos)
 
   return false;
 }
+
+void Interface::MinimapSizeDelta(int delta)
+{
+  GetWorld().ground.SetPreviewSizeDelta(delta);
+}

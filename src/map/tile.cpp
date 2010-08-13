@@ -277,19 +277,10 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
 // Initialize preview depending on current video and map sizes
 void Tile::InitPreview()
 {
-  Point2i world_size = (endCell+1-startCell)*CELL_SIZE;
+  Point2i world_size = ((endCell+1-startCell)*CELL_SIZE)>>m_shift;
 
-  m_last_video_size  = GetMainWindow().GetSize();
-  m_shift = 0;
-
-  // Task 6730: biggest dimension won't be bigger than 2/5,
-  // often less in fact
-  while (5*world_size.x>2*m_last_video_size.x ||
-         5*world_size.y>2*m_last_video_size.y) {
-    world_size >>= 1;
-    m_shift++;
-  }
-
+  if (m_preview)
+    delete m_preview;
   m_preview = new Surface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   m_preview->SetAlpha(SDL_SRCALPHA, 0);
 
@@ -303,13 +294,13 @@ void Tile::InitPreview()
 }
 
 // Rerender all of the preview
-void Tile::CheckPreview()
+void Tile::CheckPreview(bool force)
 {
   if (m_last_preview_redraw == 0) {
     m_last_preview_redraw = Time::GetInstance()->Read();
   }
 
-  if (GetMainWindow().GetSize() == m_last_video_size)
+  if (!force && GetMainWindow().GetSize() == m_last_video_size)
     return;
 
   InitPreview();
@@ -337,6 +328,21 @@ void Tile::CheckPreview()
   }
 
   m_preview->Unlock();
+  m_last_video_size = GetMainWindow().GetSize();
+}
+
+void Tile::SetPreviewSizeDelta(int delta)
+{
+  // Preview too big
+  if (m_shift+delta < 3)
+    return;
+
+  // Preview too small
+  if (1<<(m_shift+delta) > CELL_SIZE.x)
+    return;
+
+  m_shift += delta;
+  CheckPreview(true);
 }
 
 static uint32_t read_png_rows(png_structp png_ptr,
@@ -367,7 +373,7 @@ bool Tile::LoadImage(const std::string& filename,
   int          bpp      = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   int          stride;
   int          offsetx, offsety, endoffy;
-  Point2i      i;
+  Point2i      i, world_size;
   uint8_t     *dst;
   int          width, height, pitch, color_type, depth, has_tRNS;
 
@@ -411,13 +417,24 @@ bool Tile::LoadImage(const std::string& filename,
   crc = 0;
   InitTile(Point2i(width, height), upper_left_offset, lower_right_offset);
 
+  // Task 6730: biggest dimension won't be bigger than 2/5,
+  // often less in fact
+  m_shift = 0;
+  world_size = (endCell+1-startCell)*CELL_SIZE;
+  m_last_video_size = GetMainWindow().GetSize();
+  while (5*world_size.x>2*m_last_video_size.x ||
+         5*world_size.y>2*m_last_video_size.y) {
+    world_size >>= 1;
+    m_shift++;
+  }
+  InitPreview();
+
   stride  = (endCell.x+1 - startCell.x)*CELL_SIZE.x*4;
   buffer  = new uint8_t[CELL_SIZE.y*stride];
   offsetx = (upper_left_offset.x % CELL_SIZE.x)*4;
   offsety = upper_left_offset.y % CELL_SIZE.y;
   endoffy = (height + upper_left_offset.y) % CELL_SIZE.y;
 
-  InitPreview();
   m_preview->Lock();
   dst   = m_preview->GetPixels();
   pitch = m_preview->GetPitch();

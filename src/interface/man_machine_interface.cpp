@@ -224,10 +224,10 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       Camera::GetInstance()->CenterOnActiveCharacter();
       return;
     case KEY_TOGGLE_INTERFACE:
-      Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
+      Interface::GetInstance()->EnableDisplay(!Interface::GetInstance()->IsDisplayed());
       return;
     case KEY_MINIMAP_FROM_GAME:
-      Interface::GetInstance()->ToggleMinimap ();
+      Interface::GetInstance()->ToggleMinimap();
       return;
     case KEY_MENU_OPTIONS_FROM_GAME: {
       OptionMenu options_menu;
@@ -245,6 +245,12 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_MOVE_CAMERA_DOWN:
       Camera::GetInstance()->RemoveUDMoveIntention(INTENTION_MOVE_DOWN);
+      return;
+    case KEY_DECREASE_MINIMAP:
+      Interface::GetInstance()->MinimapSizeDelta(1);
+      return;
+    case KEY_INCREASE_MINIMAP:
+      Interface::GetInstance()->MinimapSizeDelta(-1);
       return;
     default:
       break;
@@ -1029,6 +1035,8 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
   if(name == "next_character") return KEY_NEXT_CHARACTER;
   if(name == "menu_options_from_game") return KEY_MENU_OPTIONS_FROM_GAME;
   if(name == "minimap_from_game") return KEY_MINIMAP_FROM_GAME;
+  if(name == "decrease_minimap") return KEY_DECREASE_MINIMAP;
+  if(name == "increase_minimap") return KEY_INCREASE_MINIMAP;
 
   return KEY_NONE;
 
@@ -1083,6 +1091,8 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
   if(key == KEY_NEXT_CHARACTER) return "next_character";
   if(key == KEY_MENU_OPTIONS_FROM_GAME) return "menu_options_from_game";
   if(key == KEY_MINIMAP_FROM_GAME) return "minimap_from_game";
+  if(key == KEY_DECREASE_MINIMAP) return "decrease_minimap";
+  if(key == KEY_INCREASE_MINIMAP) return "increase_minimap";
 
   return "none";
 }
@@ -1136,6 +1146,8 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_NEXT_CHARACTER) return _("Next character");
   if(key == KEY_MENU_OPTIONS_FROM_GAME) return _("Open options menu");
   if(key == KEY_MINIMAP_FROM_GAME) return _("Toggle minimap");
+  if(key == KEY_DECREASE_MINIMAP) return "Decrease minimap size";
+  if(key == KEY_INCREASE_MINIMAP) return "Increase minimap size";
 
   return _("None");
 }
