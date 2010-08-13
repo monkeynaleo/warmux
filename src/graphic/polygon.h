@@ -41,7 +41,7 @@ class PolygonBuffer
   PolygonBuffer operator=(const PolygonBuffer&);
   /*********************************************/
 
- public:
+public:
   int16_t * vx;
   int16_t * vy;
   int buffer_size;
@@ -55,24 +55,20 @@ class PolygonBuffer
 /** Store information about a item (sprite) of the polygon */
 class PolygonItem
 {
-
-  /* if you need that, implement it (correctly)*/
-  PolygonItem( PolygonItem&);
-  PolygonItem operator=( PolygonItem&);
-  /*********************************************/
-
- public:
+public:
   typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
   typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
- protected:
+
+protected:
   Point2d position;
   Point2d transformed_position;
   Sprite * item;
   H_align h_align;
   V_align v_align;
- protected:
+
   virtual Point2i GetOffsetAlignment() const;
- public:
+
+public:
   PolygonItem();
   PolygonItem(PolygonItem * item);
   PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
@@ -94,10 +90,10 @@ class PolygonItem
 /** Store information about a simple shape */
 class Polygon
 {
- private:
+private:
   void Init();
 
- protected:
+protected:
   bool is_closed;
   Surface * texture;
   Color * plane_color;
@@ -111,9 +107,11 @@ class Polygon
   std::vector<PolygonItem *> items;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
- private:
+
+private:
   Polygon operator=(const Polygon&);
- public:
+
+public:
   Polygon();
   Polygon(const std::vector<Point2d>& shape);
   Polygon(Polygon & poly);
@@ -194,7 +192,6 @@ class Polygon
   void ClearItem(bool free_mem = true);
 };
 
-
 class DecoratedBox : public Polygon
 {
  public :
@@ -218,9 +215,6 @@ class DecoratedBox : public Polygon
   Style m_style;
 
   void GenerateBorder(Surface & source);
-
-
-
 };
 
 #endif /* POLYGON_H */
