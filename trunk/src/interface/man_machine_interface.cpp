@@ -1104,9 +1104,9 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_WEAPONS2) return _("Select 'Rifle' weapon category");
   if(key == KEY_WEAPONS3) return _("Select 'Throwing' weapon category");
   if(key == KEY_WEAPONS4) return _("Select 'Special' weapon category");
-  if(key == KEY_WEAPONS5) return _("Select 'Duel' category");
-  if(key == KEY_WEAPONS6) return _("Select 'Move' category");
-  if(key == KEY_WEAPONS7) return _("Select 'Tool' category");
+  if(key == KEY_WEAPONS5) return _("Select 'Duel' weapon category");
+  if(key == KEY_WEAPONS6) return _("Select 'Move' weapon category");
+  if(key == KEY_WEAPONS7) return _("Select 'Tool' weapon category");
   if(key == KEY_WEAPONS8) return _("Select weapon category 8");
   if(key == KEY_PAUSE) return _("Pause");
   if(key == KEY_FULLSCREEN) return _("Fullscreen");
