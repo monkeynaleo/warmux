@@ -38,7 +38,7 @@ class Medkit : public ObjBox//public PhysicalObj
     //static int start_life_points;
 
   private:
-    void ApplyMedkit (Team &team, Character &character) const;
+    void ApplyMedkit(Team &team, Character &character) const;
   public:
     Medkit();
 
