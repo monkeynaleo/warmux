@@ -58,7 +58,7 @@ Polygon * PolygonGenerator::GenerateRectangle(const Rectanglei & r)
 
 Polygon * PolygonGenerator::GenerateRectangle(const Point2i & orig, const Point2i & size)
 {
-  return PolygonGenerator::GenerateRectangle(orig, size);
+  return PolygonGenerator::GenerateRectangle((Point2d)orig, (Point2d)size);
 }
 
 Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, Double rand_offset)
