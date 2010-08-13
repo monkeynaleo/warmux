@@ -60,7 +60,11 @@ Water::Water()
   , water_type("no")
   , m_last_preview_redraw(0)
   , next_wave_shift(0)
+#ifdef ANDROID
+  , simple_mode(true)
+#else
   , simple_mode(false)
+#endif
 {
 }
 
