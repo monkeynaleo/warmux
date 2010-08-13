@@ -66,13 +66,13 @@ HelpMenu::HelpMenu()
   int window_w = GetMainWindow().GetWidth();
   int window_h = GetMainWindow().GetHeight();
 
-  int border_x = 0.02 * window_w;
-  int border_y = 0.02 * window_h;
-  int max_w    = window_w - 2*border_x;
-  int max_h    = window_h - actions_buttons->GetSizeY() - border_y;
+  float factor = (window_w < 640) ? 0.02f : 0.05f;
+  int border   = window_w * factor;
+  int max_w    = window_w - 2*border;
+  int max_h    = window_h - actions_buttons->GetSizeY() - border;
 
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
-  tabs->SetPosition(border_x, border_y);
+  tabs->SetPosition(border, border);
 
   Widget *w = new FigureWidget(Point2i(max_w,
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
