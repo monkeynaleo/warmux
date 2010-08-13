@@ -344,14 +344,13 @@ msgstr[0] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 msgstr[1] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 
 #: src/weapon/rail_gun.cpp:131
-#, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
 msgstr[0] ""
-"L'équipe %s a gagné %u Grenade à Fragmentation ! Attention à ne pas trop se "
+"L'équipe %s a gagné %u Railgun ! Attention à ne pas trop se "
 "disperser !"
 msgstr[1] ""
-"L'équipe %s a gagné %u Grenades à Fragmentation ! Attention à ne pas trop se "
+"L'équipe %s a gagné %u Railguns ! Attention à ne pas trop se "
 "disperser !"
 
 #: src/weapon/riot_bomb.cpp:131
@@ -581,9 +580,8 @@ msgid "Center camera on character"
 msgstr "Centre la caméra sur le personnage"
 
 #: src/interface/man_machine_interface.cpp:1114
-#, fuzzy
 msgid "Center on active character"
-msgstr "Change de personnage courant"
+msgstr "Centre la caméra sur personnage courant"
 
 #: src/menu/help_menu.cpp:56
 msgid "Change active character"
@@ -594,9 +592,8 @@ msgid "Change aim angle"
 msgstr "Modifie l'angle de visée"
 
 #: src/interface/man_machine_interface.cpp:1134
-#, fuzzy
 msgid "Change weapon"
-msgstr "Change de catégorie d'armes"
+msgstr "Change d'arme"
 
 #: src/menu/help_menu.cpp:45
 msgid "Change weapon category"
@@ -838,9 +835,8 @@ msgid "Football Bomb"
 msgstr "Ballon Explosif"
 
 #: src/interface/man_machine_interface.cpp:1112
-#, fuzzy
 msgid "Fullscreen"
-msgstr "Plein écran ?"
+msgstr "Plein écran"
 
 #: src/menu/help_menu.cpp:42
 msgid "Fullscreen / window"
@@ -966,7 +962,7 @@ msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1145
 msgid "Increase explosion delay"
-msgstr ""
+msgstr "Accroît le retardateur"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:67
@@ -1011,7 +1007,7 @@ msgstr "Jetpack"
 
 #: src/interface/man_machine_interface.cpp:1129
 msgid "Jump"
-msgstr ""
+msgstr "Saut"
 
 #: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
 msgid "Jump backwards"
@@ -1019,16 +1015,15 @@ msgstr "Saut en arrière"
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
-msgstr ""
+msgstr "Touches"
 
 #: src/menu/help_menu.cpp:82
 msgid "Keyboard"
-msgstr ""
+msgstr "Clavier"
 
 #: src/network/admin_commands.cpp:32
-#, fuzzy
 msgid "Kicks the player designated by <nickname> out of the game"
-msgstr "Expulse les joueurs désignés par <nickname>."
+msgstr "Expulse le joueur désigné par <nickname>."
 
 #: src/menu/options_menu.cpp:146
 msgid "Language"
@@ -1039,9 +1034,8 @@ msgid "Left-handed mouse?"
 msgstr "Souris pour gaucher ?"
 
 #: src/network/admin_commands.cpp:34
-#, fuzzy
 msgid "Lists the connected players"
-msgstr "Liste des joueurs connectés"
+msgstr "Liste les joueurs connectés"
 
 #: src/map/maps_list.cpp:282
 msgid "Load maps:"
@@ -1125,24 +1119,20 @@ msgid "Most violent"
 msgstr "Le plus violent"
 
 #: src/interface/man_machine_interface.cpp:1128
-#, fuzzy
 msgid "Move camera down"
-msgstr "Déplace le personnage"
+msgstr "Descend la caméra"
 
 #: src/interface/man_machine_interface.cpp:1125
-#, fuzzy
 msgid "Move camera left"
-msgstr "Déplace le personnage"
+msgstr "Déplace la caméra à gauche"
 
 #: src/interface/man_machine_interface.cpp:1126
-#, fuzzy
 msgid "Move camera right"
-msgstr "Déplace le personnage"
+msgstr "Déplace la caméra à droite"
 
 #: src/interface/man_machine_interface.cpp:1127
-#, fuzzy
 msgid "Move camera up"
-msgstr "Déplace le personnage"
+msgstr "Monte la caméra"
 
 #: src/menu/help_menu.cpp:53
 msgid "Move camera with mouse or arrows"
@@ -1154,19 +1144,19 @@ msgstr "Déplace le personnage"
 
 #: src/interface/man_machine_interface.cpp:1117
 msgid "Move left"
-msgstr ""
+msgstr "Va à gauche"
 
 #: src/interface/man_machine_interface.cpp:1118
 msgid "Move left slowly"
-msgstr ""
+msgstr "Va lentement à gauche"
 
 #: src/interface/man_machine_interface.cpp:1119
 msgid "Move right"
-msgstr ""
+msgstr "Va à droite"
 
 #: src/interface/man_machine_interface.cpp:1120
 msgid "Move right slowly"
-msgstr ""
+msgstr "Va lentement à droite"
 
 #: src/menu/options_menu.cpp:96
 msgid "Multi-layer sky?"
@@ -1202,9 +1192,8 @@ msgid "New player warning?"
 msgstr "Avertissement de nouveau joueur ?"
 
 #: src/interface/man_machine_interface.cpp:1146
-#, fuzzy
 msgid "Next character"
-msgstr "Déplace le personnage"
+msgstr "Personnage suivant"
 
 #: src/weapon/weapon.cpp:650
 #, c-format
@@ -1221,9 +1210,8 @@ msgid "Nobody!"
 msgstr "Personne !"
 
 #: src/interface/man_machine_interface.cpp:1152
-#, fuzzy
 msgid "None"
-msgstr "terminé"
+msgstr "Aucune"
 
 #. *********     Number of characters        *********
 #: src/menu/team_box.cpp:114
@@ -1243,9 +1231,8 @@ msgid "On map: select a target"
 msgstr "Sur la carte : choisir une cible"
 
 #: src/interface/man_machine_interface.cpp:1147
-#, fuzzy
 msgid "Open options menu"
-msgstr "Menu Options"
+msgstr "Ouvrir le menu des options"
 
 #: src/menu/main_menu.cpp:65
 msgid "Options"
@@ -1267,7 +1254,7 @@ msgstr "Mot de passe :"
 
 #: src/interface/man_machine_interface.cpp:1111
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: src/menu/main_menu.cpp:57
 msgid "Play"
@@ -1291,7 +1278,7 @@ msgstr "Nom des joueurs ?"
 
 #: src/menu/results_menu.cpp:453
 msgid "Podium"
-msgstr ""
+msgstr "Podium"
 
 #: src/weapon/polecat.cpp:196
 msgid "Polecat Launcher"
@@ -1328,7 +1315,7 @@ msgstr "Quitter la partie"
 
 #: src/weapon/rail_gun.cpp:98
 msgid "Rail Gun"
-msgstr ""
+msgstr "Rail Gun"
 
 #: src/menu/map_selection_box.cpp:226
 msgid "Random map"
@@ -1367,44 +1354,36 @@ msgid "Scroll on border"
 msgstr "Défilement sur les bords"
 
 #: src/interface/man_machine_interface.cpp:1107
-#, fuzzy
 msgid "Select 'Duel' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie des armes de duel"
 
 #: src/interface/man_machine_interface.cpp:1103
-#, fuzzy
 msgid "Select 'Heavy' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie des armes lourdes"
 
 #: src/interface/man_machine_interface.cpp:1108
-#, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Change de catégorie d'armes"
 
 #: src/interface/man_machine_interface.cpp:1104
-#, fuzzy
 msgid "Select 'Rifle' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie des fusils"
 
 #: src/interface/man_machine_interface.cpp:1106
-#, fuzzy
 msgid "Select 'Special' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie des armes 'spéciales'"
 
 #: src/interface/man_machine_interface.cpp:1105
-#, fuzzy
 msgid "Select 'Throwing' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie des armes à lancer"
 
 #: src/interface/man_machine_interface.cpp:1109
-#, fuzzy
 msgid "Select 'Tool' weapon category"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie 'Outils'"
 
 #: src/interface/man_machine_interface.cpp:1110
-#, fuzzy
 msgid "Select weapon category 8"
-msgstr "Change de catégorie d'armes"
+msgstr "Sélectionne la catégorie 8 d'armes"
 
 #: src/menu/network_connection_menu.cpp:189
 msgid "Server address:"
@@ -1431,16 +1410,15 @@ msgstr "Mode serveur"
 #: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
-msgstr ""
+msgstr "Régler le retardateur à %u"
 
 #: src/interface/man_machine_interface.cpp:1133
-#, fuzzy
 msgid "Shoot"
-msgstr "Fusil à Pompe"
+msgstr "Tir"
 
 #: src/weapon/rail_gun.cpp:99
 msgid "Shoots all players in a straight line!"
-msgstr ""
+msgstr "Touche tous les joueurs sur une ligne!"
 
 #: src/weapon/shotgun.cpp:87
 msgid "Shotgun"
@@ -1456,7 +1434,7 @@ msgstr "Afficher/Masquer l'interface"
 
 #: src/network/admin_commands.cpp:36
 msgid "Shows the designated player address"
-msgstr ""
+msgstr "Indique l'adresse du joueur désigné"
 
 #: src/weapon/skip_turn.cpp:46
 msgid "Skip turn"
@@ -1684,17 +1662,14 @@ msgstr ""
 "une munition par tour"
 
 #: src/interface/man_machine_interface.cpp:1113
-#, fuzzy
 msgid "Toggle interface"
-msgstr "Afficher/Masquer l'interface"
+msgstr "Afficher l'interface"
 
 #: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
-#, fuzzy
 msgid "Toggle minimap"
-msgstr "Afficher/Masquer la mini-carte"
+msgstr "Afficher la mini-carte"
 
 #: src/interface/man_machine_interface.cpp:1115
-#, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Afficher le menu des armes"
 
@@ -1721,9 +1696,8 @@ msgid "Unknown command"
 msgstr "Commande inconnue"
 
 #: src/network/admin_commands.cpp:68
-#, fuzzy, c-format
 msgid "Unknown command of type %i"
-msgstr "Commande inconnue"
+msgstr "Commande inconnue de type %i"
 
 #: src/game/game_mode.cpp:342
 msgid "Unlimited"
@@ -1731,11 +1705,11 @@ msgstr "Illimité"
 
 #: src/interface/man_machine_interface.cpp:1121
 msgid "Up"
-msgstr ""
+msgstr "Haut"
 
 #: src/interface/man_machine_interface.cpp:1122
 msgid "Up slowly"
-msgstr ""
+msgstr "Haut lentement"
 
 #: src/main.cpp:182
 msgid "Version"
@@ -1810,7 +1784,7 @@ msgstr "Vainqueur"
 #: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
-msgstr ""
+msgstr "Ouah! Combo de %u!"
 
 #: src/main.cpp:194
 msgid "Wormux launching..."
@@ -1912,6 +1886,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "Head commander: "
-#~ msgstr "Commandant : "
