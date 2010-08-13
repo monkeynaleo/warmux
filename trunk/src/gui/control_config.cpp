@@ -66,8 +66,6 @@ public:
 
     // Modifiers
     int key_code = kbd->GetKeyAssociatedToAction(key_action);
-    printf("%s: %i=>%i\n", kbd->GetHumanReadableActionName(key_action).c_str(),
-           key_code, kbd->GetRawKeyCode(key_code));
     ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
                              kbd->HasControlModifier(key_code));
     AddWidget(ctrl_box);
@@ -102,18 +100,24 @@ public:
     if (read_only)
       return false;
 
+    // Ignore modifiers-only key presses
+    if (key.sym >= SDLK_NUMLOCK && key.sym <= SDLK_COMPOSE)
+      return true;
+
     SDLMod mod_bits = SDL_GetModState();
     const Keyboard *kbd = Keyboard::GetConstInstance();
     ManMachineInterface::Key_t tmp =
-      kbd->GetRegisteredAction(key.sym, mod_bits & KMOD_SHIFT,
-                               mod_bits & KMOD_ALT, mod_bits & KMOD_CTRL);
+      kbd->GetRegisteredAction(key.sym, mod_bits & KMOD_CTRL,
+                               mod_bits & KMOD_ALT, mod_bits & KMOD_SHIFT);
 
     // Check and warn if key already attributed
     if (tmp != ManMachineInterface::KEY_NONE) {
       Question question(Question::WARNING);
-      question.Set(Format(_("This key has already been attributed to %s"),
+      question.Set(Format(_("This key has already been attributed to '%s'"),
                           kbd->GetHumanReadableActionName(tmp).c_str()),
                    true, 0);
+
+      // React only to key press, not releases, as one key is being pressed now
       question.Ask(false);
       return true;
     }
