@@ -119,12 +119,12 @@ void Question::Draw() const
   }
 }
 
-int Question::Ask ()
+int Question::Ask(bool onKeyUp)
 {
   SDL_Event event;
 
-  int answer = default_choice.value;
-  bool end_of_boucle = false;
+  int  answer = default_choice.value;
+  bool end    = false;
 
   Draw();
   Mouse::pointer_t prev_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
@@ -133,23 +133,23 @@ int Question::Ask ()
       if ((event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONUP) &&
           default_choice.active) {
         answer = default_choice.value;
-        end_of_boucle = true;
+        end = true;
       }
 
-      if (event.type == SDL_KEYUP) {
+      if ((onKeyUp && event.type == SDL_KEYUP) || event.type == SDL_KEYDOWN) {
         answer = TreatsKey(event);
         if (answer != -1)
-          end_of_boucle = true;
+          end = true;
       }
     } // SDL_PollEvent
 
     // To not use all CPU
-    if (!end_of_boucle) {
+    if (!end) {
       SDL_Delay(50);
     }
 
     AppWormux::GetInstance()->video->Flip();
-  } while (!end_of_boucle);
+  } while (!end);
 
   AppWormux::GetInstance()->RefreshDisplay();
   Mouse::GetInstance()->SetPointer(prev_pointer);

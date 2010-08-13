@@ -24,6 +24,7 @@
 #include "gui/horizontal_box.h"
 #include "gui/label.h"
 #include "gui/null_widget.h"
+#include "gui/question.h"
 #include "gui/select_box.h"
 #include "interface/keyboard.h"
 
@@ -65,17 +66,19 @@ public:
 
     // Modifiers
     int key_code = kbd->GetKeyAssociatedToAction(key_action);
-    shift_box = new CheckBox("", CHECKBOX_WIDTH,
-                             kbd->HasShiftModifier(key_code));
-    AddWidget(shift_box);
+    printf("%s: %i=>%i\n", kbd->GetHumanReadableActionName(key_action).c_str(),
+           key_code, kbd->GetRawKeyCode(key_code));
+    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasControlModifier(key_code));
+    AddWidget(ctrl_box);
 
     alt_box   = new CheckBox("", CHECKBOX_WIDTH,
                              kbd->HasAltModifier(key_code));
     AddWidget(alt_box);
 
-    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
-                             kbd->HasControlModifier(key_code));
-    AddWidget(ctrl_box);
+    shift_box = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasShiftModifier(key_code));
+    AddWidget(shift_box);
 
     // Second spacing
     AddWidget(new NullWidget(Point2i(SPACING_WIDTH, height)));
@@ -98,13 +101,29 @@ public:
   {
     if (read_only)
       return false;
+
+    SDLMod mod_bits = SDL_GetModState();
+    const Keyboard *kbd = Keyboard::GetConstInstance();
+    ManMachineInterface::Key_t tmp =
+      kbd->GetRegisteredAction(key.sym, mod_bits & KMOD_SHIFT,
+                               mod_bits & KMOD_ALT, mod_bits & KMOD_CTRL);
+
+    // Check and warn if key already attributed
+    if (tmp != ManMachineInterface::KEY_NONE) {
+      Question question(Question::WARNING);
+      question.Set(Format(_("This key has already been attributed to %s"),
+                          kbd->GetHumanReadableActionName(tmp).c_str()),
+                   true, 0);
+      question.Ask(false);
+      return true;
+    }
+
     key_value = key.sym;
     label_key->SetText(Keyboard::GetConstInstance()->GetKeyNameFromKey(key_value));
 
-    SDLMod sdl_modifier_bits = SDL_GetModState();
-    shift_box->SetValue(sdl_modifier_bits & KMOD_SHIFT);
-    alt_box->SetValue(sdl_modifier_bits & KMOD_ALT);
-    ctrl_box->SetValue(sdl_modifier_bits & KMOD_CTRL);
+    shift_box->SetValue(mod_bits & KMOD_SHIFT);
+    alt_box->SetValue(mod_bits & KMOD_ALT);
+    ctrl_box->SetValue(mod_bits & KMOD_CTRL);
 
     // A simple NeedRedraw would reset the packing
     Pack();
@@ -130,9 +149,9 @@ public:
   void SaveAction(Keyboard *kbd)
   {
     kbd->SaveKeyEvent(key_action, key_value,
-                      shift_box->GetValue(),
+                      ctrl_box->GetValue(),
                       alt_box->GetValue(),
-                      ctrl_box->GetValue());
+                      shift_box->GetValue());
   }
 };
 

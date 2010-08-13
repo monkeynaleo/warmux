@@ -88,7 +88,7 @@ public:
            bool default_active,
            int default_value,
       const std::string &bg_sprite="");
-  int Ask();
+  int Ask(bool onKeyUp = true);
   void Draw() const;
 
   inline void add_choice(int key, int value)
