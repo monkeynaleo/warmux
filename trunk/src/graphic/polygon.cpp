@@ -715,9 +715,10 @@ void Polygon::DrawOnScreen()
 ////////////////////////////
 // DecoratedBox
 
-DecoratedBox::DecoratedBox(Double width, Double height):Polygon(),
-m_border(NULL),
-m_style(DecoratedBox::STYLE_ROUNDED)
+DecoratedBox::DecoratedBox(Double width, Double height)
+ : Polygon()
+ , m_border(NULL)
+ , m_style(DecoratedBox::STYLE_ROUNDED)
 {
   min =  Point2d(0.0, 0.0);
   max = Point2d(width, height);
@@ -729,7 +730,8 @@ m_style(DecoratedBox::STYLE_ROUNDED)
 
 DecoratedBox::~DecoratedBox()
 {
-  delete m_border;
+  if (m_border)
+    delete m_border;
 }
 
 void DecoratedBox::Draw(Surface * dest)
@@ -772,11 +774,10 @@ void DecoratedBox::SetPosition(Double x, Double y)
 
 void DecoratedBox::GenerateBorder(Surface & source)
 {
-
   Surface rounding_style [3][3];
   Surface rounding_style_mask [3][3];
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   std::string style;
 
@@ -791,24 +792,26 @@ void DecoratedBox::GenerateBorder(Surface & source)
   }
 
   // styled box
-  rounding_style[1][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_bottom");
-  rounding_style[0][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_bottom_left");
-  rounding_style[2][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_bottom_right");
-  rounding_style[1][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_top");
-  rounding_style[0][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_top_left");
-  rounding_style[2][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_top_right");
-  rounding_style[0][1] = GetResourceManager().LoadImage( res, "interface/"+style+"_left");
-  rounding_style[2][1] = GetResourceManager().LoadImage( res, "interface/"+style+"_right");
-  rounding_style[1][1] = GetResourceManager().LoadImage( res, "interface/"+style+"_center");
+  rounding_style[1][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom");
+  rounding_style[0][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom_left");
+  rounding_style[2][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom_right");
+  rounding_style[1][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top");
+  rounding_style[0][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top_left");
+  rounding_style[2][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top_right");
+  rounding_style[0][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_left");
+  rounding_style[2][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_right");
+  rounding_style[1][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_center");
 
-  rounding_style_mask[1][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_bottom");
-  rounding_style_mask[0][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_bottom_left");
-  rounding_style_mask[2][2] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_bottom_right");
-  rounding_style_mask[1][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_top");
-  rounding_style_mask[0][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_top_left");
-  rounding_style_mask[2][0] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_top_right");
-  rounding_style_mask[0][1] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_left");
-  rounding_style_mask[2][1] = GetResourceManager().LoadImage( res, "interface/"+style+"_mask_right");
+  rounding_style_mask[1][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom");
+  rounding_style_mask[0][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom_left");
+  rounding_style_mask[2][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom_right");
+  rounding_style_mask[1][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top");
+  rounding_style_mask[0][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top_left");
+  rounding_style_mask[2][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top_right");
+  rounding_style_mask[0][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_left");
+  rounding_style_mask[2][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_right");
+
+  GetResourceManager().UnLoadXMLProfile(res);
 
   Surface save_surf(source.GetSize(),SDL_SWSURFACE, true);
   save_surf.MergeSurface(source, Point2i(0,0));
