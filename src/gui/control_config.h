@@ -37,6 +37,7 @@ class ControlConfig : public WidgetList
 public:
   ControlConfig(const Point2i& size, bool readonly = true);
   void SaveControlConfig() const;
+
   virtual void Pack();
 };
 

@@ -211,9 +211,11 @@ void ControlConfig::Pack()
 {
   //printf("Set widget at (%i,%i) as %ix%i\n", position.x, position.y, size.x, size.y);
   header->SetPosition(position);
-  header->SetSizeX(size.x);
+  header->SetSizeX(size.x - 2*border_size);
   header->Pack();
-  box->SetPosition(position.x, position.y + header->GetSizeY());
-  box->SetSize(size.x, size.y - header->GetSizeY());
+  box->SetPosition(position.x + border_size,
+                   position.y + header->GetSizeY() + border_size);
+  box->SetSize(size.x - 2*border_size,
+               size.y - header->GetSizeY() - 2*border_size);
   box->Pack();
 }
