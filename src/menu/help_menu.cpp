@@ -52,7 +52,7 @@ static const FigureWidget::Caption captions[] = {
   { _("Smaller aim angle and walk step"), 92, 326, DEF_CAPTIONS_PARAMS },
   { _("Move camera with mouse or arrows"), 386, 394, DEF_CAPTIONS_PARAMS },
   { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_CAPTIONS_PARAMS },
-  { _("Show/hide minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
+  { _("Toggle minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
   { _("Change active character"), 92, 356, DEF_CAPTIONS_PARAMS },
   { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
   { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
