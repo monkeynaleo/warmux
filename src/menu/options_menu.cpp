@@ -64,15 +64,24 @@ OptionMenu::OptionMenu() :
   int window_w = app->video->window.GetWidth();
   int window_h = app->video->window.GetHeight();
 
-  Point2i option_size((window_w<640 || window_h<480) ? 104 : 130,
-                      (window_w<640 || window_h<480) ? 104 : 130);
+  Point2i option_size;
+  float   factor;
 
-  int border    = 0.03 * window_w;
-  int max_width = window_w - 2*border;
+  if (window_w<640 || window_h<480) {
+    // Everything smaller to try to squeeze it
+    option_size.SetValues(104, 104);
+    factor = 0.02f;
+  } else {
+    option_size.SetValues(130, 130);
+    factor = 0.05f;
+  }
+
+  int border = window_w * factor;
+  int max_w  = window_w - 2*border;
 
   /* Tabs */
   MultiTabs * tabs =
-    new MultiTabs(Point2i(max_width, window_h -actions_buttons->GetSizeY() -border));
+    new MultiTabs(Point2i(max_w, window_h - actions_buttons->GetSizeY() -border));
   tabs->SetPosition(border, border);
 
   /* Graphic options */
@@ -150,7 +159,7 @@ OptionMenu::OptionMenu() :
     lbox_teams = new ItemBox(option_size, false);
     teams_editor->AddWidget(lbox_teams);
 
-    uint lwidth = max_width - option_size.x - 30;
+    uint lwidth = max_w - option_size.x - 30;
     Box * teams_editor_inf = new VBox(lwidth, true, false);
     Box * box_team_name = new HBox(30, false, true);
 
