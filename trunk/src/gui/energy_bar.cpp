@@ -143,8 +143,8 @@ void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
   bar_value = ComputeBarValue(val);
-  #define one_hundred 100.0f
-  float currentPercentage = abs(val) * one_hundred / max;
+  float scale = 100.0f / max;
+  float currentPercentage = abs(val) * scale;
   Threshold thresholdMin;
   Threshold thresholdMax;
   int i = 0;
@@ -170,7 +170,7 @@ void EnergyBar::Actu(long real_energy)
 
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) -
-                 ComputeBarValue(max * thresholdMin.value / one_hundred);
+                 ComputeBarValue(thresholdMin.value * scale);
 
   value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
                        (int) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
