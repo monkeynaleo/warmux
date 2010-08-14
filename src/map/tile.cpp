@@ -519,7 +519,7 @@ end:
   return ret;
 }
 
-uchar Tile::GetAlpha(const Point2i & pos) const
+uint8_t Tile::GetAlpha(const Point2i & pos) const
 {
   return item[pos.y / CELL_SIZE.y * nbCells.x + pos.x / CELL_SIZE.x]->GetAlpha(pos % CELL_SIZE);
 }

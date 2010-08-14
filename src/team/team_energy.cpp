@@ -37,10 +37,10 @@ const uint BAR_HEIGHT = 50;
 // XXX Not used
 //const uint SPACING = 3;
 
-const uchar ALPHA = 127;
-const uchar BACK_ALPHA = 0;
+#define   ALPHA      127
+#define   BACK_ALPHA  0
 
-const Double MOVE_DURATION = 750.0;
+static const Double MOVE_DURATION = 750.0;
 
 void EnergyList::Reset()
 {
