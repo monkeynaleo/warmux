@@ -49,7 +49,7 @@ void WakeUpDebugger()
 #endif
 }
 
-void MissedAssertion(const char *filename, unsigned long line,
+void MissedAssertion(const char *filename, unsigned int line,
                      const char *message)
 {
   std::cout << std::endl;
@@ -62,13 +62,14 @@ void MissedAssertion(const char *filename, unsigned long line,
 #endif
 }
 
-static std::string FormatError(const char *filename, unsigned long line,
+static std::string FormatError(const char *filename, unsigned int line,
                                const std::string &txt)
 {
-  return Format(_("Error in %s:%lu (Wormux %s) : %s"), filename, line, WORMUX_VERSION.c_str(), txt.c_str());
+  return Format(_("Error in %s:%lu (Wormux %s) : %s"),
+                filename, line, WORMUX_VERSION.c_str(), txt.c_str());
 }
 
-void TriggerWarning(const char *filename, unsigned long line,
+void TriggerWarning(const char *filename, unsigned int line,
                     const std::string &txt)
 {
   std::string err = FormatError(filename, line, txt);
@@ -78,8 +79,8 @@ void TriggerWarning(const char *filename, unsigned long line,
 #endif
 }
 
-void TriggerError (const char *filename, unsigned long line,
-                   const std::string &txt)
+void TriggerError(const char *filename, unsigned int line,
+                  const std::string &txt)
 {
   std::string err = FormatError(filename, line, txt);
   std::cerr << "! " << err << std::endl;
