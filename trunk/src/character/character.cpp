@@ -400,7 +400,7 @@ void Character::SetEnergy(int new_energy)
 {
   int diff = new_energy - m_energy;
   if (diff < 0) {
-    Particle *tmp = new FadingText(long2str(diff));
+    Particle *tmp = new FadingText(int2str(diff));
     tmp->SetXY(GetPosition());
     ParticleEngine::AddNow(tmp);
   }

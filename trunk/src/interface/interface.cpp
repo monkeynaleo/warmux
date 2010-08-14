@@ -125,8 +125,8 @@ Interface::Interface()
   // Color turn_timer_text_color = GetResourceManager().LoadColor(res, "interface/turn_timer_text_color");
   // Color global_clock_text_color = GetResourceManager().LoadColor(res, "interface/global_clock_text_color");
 
-  global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_BOLD, false);
-  timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  global_timer = new Text("0", gray_color, Font::FONT_BIG, Font::FONT_BOLD, false);
+  timer = new Text("0", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_team_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -206,7 +206,7 @@ void Interface::DrawCharacterInfo()
 
   // Display energy
   if (!character_under_cursor->IsDead()) {
-    t_character_energy->SetText(ulong2str(character_under_cursor->GetEnergy())+"%");
+    t_character_energy->SetText(uint2str(character_under_cursor->GetEnergy())+"%");
     energy_bar->Actu(character_under_cursor->GetEnergy());
   } else {
     t_character_energy->SetText(_("(dead)"));
@@ -609,7 +609,7 @@ void Interface::UpdateTimer(uint utimer, bool emergency, bool reset_anim)
     timer->SetColor(black_color);
   }
 
-  timer->SetText(ulong2str(utimer));
+  timer->SetText(uint2str(utimer));
   remaining_turn_time = utimer;
 
   if (prev_clock != clock || reset_anim) {
