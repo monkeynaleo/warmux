@@ -471,7 +471,7 @@ void Game::RefreshInput()
     if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
       AppWormux::EmergencyExit();
 
-    if ( event.type == SDL_QUIT) {
+    if (event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       UserAsksForMenu();
       std::cout << _("END OF GAME") << std::endl;
