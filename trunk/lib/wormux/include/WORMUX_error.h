@@ -24,8 +24,8 @@
 
 #include <string>
 
-void MissedAssertion (const char *filename, unsigned long line,
-                      const char *message);
+void MissedAssertion(const char *filename, unsigned int line,
+                     const char *message);
 void WakeUpDebugger();
 
 // Assertion (disabled in release mode)
@@ -53,9 +53,9 @@ void WakeUpDebugger();
   if(!(COND))
 #endif
 
-void TriggerWarning(const char *filename, unsigned long line,
+void TriggerWarning(const char *filename, unsigned int line,
                     const std::string &txt);
-void TriggerError(const char *filename, unsigned long line,
+void TriggerError(const char *filename, unsigned int line,
                   const std::string &txt);
 
 #define Warning(txt) TriggerWarning(__FILE__, __LINE__, txt)
