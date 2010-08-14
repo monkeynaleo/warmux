@@ -80,8 +80,7 @@ WeaponMenuItem::~WeaponMenuItem()
 
 bool WeaponMenuItem::IsMouseOver()
 {
-  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
-  if (nb_bullets == 0) {
+  if (!ActiveTeam().ReadNbAmmos(weapon->GetType()) {
     if (zoom)
       SetZoom(false);
     return false;
@@ -146,7 +145,7 @@ void WeaponMenuItem::Draw(Surface * dest)
         std::ostringstream txt;
         txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
         txt << " ";
-        (*Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), dark_red_color);
+        Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)->WriteLeft(tmp, txt.str(), dark_red_color);
       }  else{
         item->SetAlpha(0.3);
         PolygonItem::Draw(dest);
