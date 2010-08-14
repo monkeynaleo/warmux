@@ -53,12 +53,14 @@ void WeaponStrengthBar::InitPos(uint px, uint py, uint pwidth, uint pheight)
 {
   ProgressBar::InitPos(px, py, pwidth, pheight);
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  if(last_fire) {delete last_fire;}
-  last_fire = new Sprite(GetResourceManager().LoadImage( res, "interface/weapon_strength_bar_last_fire"),true);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  if (last_fire)
+    delete last_fire;
+  last_fire = new Sprite(GetResourceManager().LoadImage(res, "interface/weapon_strength_bar_last_fire"),true);
   GetResourceManager().UnLoadXMLProfile(res);
 
-  if(m_box) { delete m_box;}
+  if (m_box)
+    delete m_box;
   m_box = PolygonGenerator::GenerateDecoratedBox(pwidth, pheight);
   m_box->SetStyle(DecoratedBox::STYLE_SQUARE);
 }
@@ -127,7 +129,7 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
   if (orientation == PROG_BAR_HORIZONTAL) {
     r_value = Rectanglei(begin, 1, end - begin, height - 2);
   } else {
-    r_value = Rectanglei(1, height - end + begin - 1, width - 2, end -1 );
+    r_value = Rectanglei(1, height - end + begin - 1, width - 2, end -1);
   }
 
   image.FillRect(r_value, bar_color);
@@ -137,7 +139,7 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
   for (; it != it_end; ++it) {
     Point2i p_marq(1+it->val, height/2);
 
-    if(m_item_last_fire) {
+    if (m_item_last_fire) {
       m_box->DelItem(0);
       delete m_item_last_fire;
     }

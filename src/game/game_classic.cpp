@@ -51,7 +51,7 @@ void GameClassic::EndOfGame()
 {
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
-  GameMessages::GetInstance()->Add (_("And the winner is..."));
+  GameMessages::GetInstance()->Add(_("And the winner is..."));
 
   while (duration >= 1) {
     MainLoop();
