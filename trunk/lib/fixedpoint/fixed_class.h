@@ -98,8 +98,6 @@ struct fixed_point {
   fixed_point operator / (unsigned int r) const { fixed_point x = *this; x /= r; return x;}
 
   operator int() const { return intValue / (1<< p); }
-  operator long() const { return intValue / (1<< p); }
-
 
   // Must be used explicily as we don't want to calculate with doubles!
   double toDouble() const { return (double)intValue / (double)(1 << p); }
