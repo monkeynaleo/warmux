@@ -32,21 +32,21 @@ typedef unsigned int     uint;
 
 typedef struct fixedpoint::fixed_point<16> Double;
 
-const Double QUARTER_PI = 0.25*M_PI;
-const Double HALF_PI    = 0.5*M_PI;
-const Double PI         = M_PI;
+static const Double QUARTER_PI = 0.25*M_PI;
+static const Double HALF_PI    = 0.5*M_PI;
+static const Double PI         = M_PI;
 
 // Limit under which, real numbers are considered as NULL
-const Double EPSILON = 0.001f;
+static const Double EPSILON = 0.001f;
 
-const Double ZERO = 0;
-const Double ONE = 1;
-const Double TWO = 2;
-const Double THREE = 3;
-const Double FOUR = 4;
-const Double FIVE = 5;
-const Double SIX = 6;
-const Double ONE_HALF = 0.5;
+static const Double ZERO = 0;
+static const Double ONE = 1;
+static const Double TWO = 2;
+static const Double THREE = 3;
+static const Double FOUR = 4;
+static const Double FIVE = 5;
+static const Double SIX = 6;
+static const Double ONE_HALF = 0.5;
 
 enum LRDirection
 {
