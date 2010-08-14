@@ -112,15 +112,15 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
   if (m_use_ref_val) {
     int ref = ComputeBarValue (m_ref_val);
     if (val < m_ref_val) { // FIXME hum, this seems buggy
-      begin = 1+val_barre;
+      begin = 1+bar_value;
       end = 1+ref;
     } else {
       begin = 1+ref;
-      end = 1+val_barre;
+      end = 1+bar_value;
     }
   } else {
     begin = 1;
-    end = 1+val_barre;
+    end = 1+bar_value;
   }
 
   Color bar_color = ComputeValueColor(val);
@@ -134,8 +134,8 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
 
   image.FillRect(r_value, bar_color);
 
-  // Marqueurs
-  marqueur_it_const it=marqueur.begin(), it_end = marqueur.end();
+  // marks
+  mark_it_const it=mark.begin(), it_end = mark.end();
   for (; it != it_end; ++it) {
     Point2i p_marq(1+it->val, height/2);
 

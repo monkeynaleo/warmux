@@ -55,7 +55,7 @@ protected:
   long val, min, max; // current, min and max values
   bool m_use_ref_val; // use reference value ?
   long m_ref_val; // reference value
-  uint val_barre; // current value in the progress bar
+  uint bar_value; // current value in the progress bar
   enum orientation orientation;
 
   Color colorMin; // Color used for start value
@@ -64,10 +64,10 @@ protected:
   long ComputeValue(long val) const;
   uint ComputeBarValue(long val) const;
 
-  typedef struct s_marqueur_t{
+  typedef struct s_mark_t {
     Color color;
     uint val;
-  } marqueur_t;
+  } mark_t;
 
  public:
   void SetBorderColor(const Color & color) { border_color = color; };
@@ -76,9 +76,9 @@ protected:
   void SetMinMaxValueColor(const Color & min, const Color & max);
 
  protected:
-  typedef std::list<marqueur_t>::iterator marqueur_it;
-  typedef std::list<marqueur_t>::const_iterator marqueur_it_const;
-  std::list<marqueur_t> marqueur;
+  typedef std::list<mark_t>::iterator mark_it;
+  typedef std::list<mark_t>::const_iterator mark_it_const;
+  std::list<mark_t> mark;
 
 public:
   ProgressBar();
@@ -133,9 +133,9 @@ public:
   uint GetY() const { return this->y; }
 
   // add/remove value tag
-  marqueur_it AddTag(long val, 
+  mark_it AddTag(long val, 
                      const Color & coul);
-  void ResetTag() { marqueur.clear(); };
+  void ResetTag() { mark.clear(); };
 };
 
 #endif
