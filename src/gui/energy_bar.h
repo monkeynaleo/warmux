@@ -55,9 +55,9 @@ class EnergyBar : public ProgressBar
               uint _y,
               uint _width,
               uint _height,
-              long _value = 0,
-              long minValue = 0,
-              long maxValue = 100,
+              int _value = 0,
+              int minValue = 0,
+              int maxValue = 100,
               enum orientation _orientation = PROG_BAR_HORIZONTAL);
     EnergyBar(Profile * _profile,
               const xmlNode * _widgetNode);
@@ -68,7 +68,7 @@ class EnergyBar : public ProgressBar
                            float thresholdMax,
                            Color & colorMax);
     void SortThresholds();
-    void Actu(long val);
+    void Actu(int val);
 };
 
 #endif /* ENERGY_BAR_H */

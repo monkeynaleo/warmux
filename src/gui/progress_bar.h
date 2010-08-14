@@ -52,17 +52,17 @@ protected:
   uint y;
   uint width;
   uint height;
-  long val, min, max; // current, min and max values
+  int val, min, max; // current, min and max values
   bool m_use_ref_val; // use reference value ?
-  long m_ref_val; // reference value
+  int m_ref_val; // reference value
   uint bar_value; // current value in the progress bar
   enum orientation orientation;
 
   Color colorMin; // Color used for start value
   Color colorMax; // Color used for end value
 
-  long ComputeValue(long val) const;
-  uint ComputeBarValue(long val) const;
+  int ComputeValue(int val) const;
+  uint ComputeBarValue(int val) const;
 
   typedef struct s_mark_t {
     Color color;
@@ -86,9 +86,9 @@ public:
               uint _y,
               uint _width,
               uint _height,
-              long _value,
-              long minValue,
-              long maxValue,
+              int _value,
+              int minValue,
+              int maxValue,
               enum orientation _orientation);
   virtual ~ProgressBar() {};
 
@@ -97,7 +97,7 @@ public:
   int GetMaxValue() { return max; };
 
   // Update current value
-  void UpdateValue (long val);
+  void UpdateValue (int val);
 
   // Initialise la position
   virtual void InitPos(uint x, 
@@ -106,15 +106,15 @@ public:
                        uint height);
 
   // Initialise les valeurs
-  void InitVal(long val, 
-               long min, 
-               long max, 
+  void InitVal(int val, 
+               int min, 
+               int max, 
                enum orientation orientation = PROG_BAR_HORIZONTAL);
 
   // Set reference value
   // Use it after InitVal !
   void SetReferenceValue(bool use, 
-                         long value = 0);
+                         int value = 0);
 
   // Draw la barre de progresssion
   void Draw() const { DrawXY(Point2i(x, y)); };
@@ -122,9 +122,9 @@ public:
   // Draw the progress bar
   virtual void DrawXY(const Point2i & pos) const;
 
-  inline const long & GetMaxVal() const { return this->max; }
-  inline const long & GetMinVal() const { return this->min; }
-  inline const long & GetVal() const { return this->val; }
+  inline const int & GetMaxVal() const { return this->max; }
+  inline const int & GetMinVal() const { return this->min; }
+  inline const int & GetVal() const { return this->val; }
 
   int GetWidth() const { return width; }
   int GetHeight() const { return height; }
@@ -133,7 +133,7 @@ public:
   uint GetY() const { return this->y; }
 
   // add/remove value tag
-  mark_it AddTag(long val, 
+  mark_it AddTag(int val, 
                      const Color & coul);
   void ResetTag() { mark.clear(); };
 };

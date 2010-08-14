@@ -58,9 +58,9 @@ ProgressBar::ProgressBar(uint _x,
                          uint _y,
                          uint _width,
                          uint _height,
-                         long _value,
-                         long minValue,
-                         long maxValue,
+                         int _value,
+                         int minValue,
+                         int maxValue,
                          enum orientation _orientation) :
   border_color(0, 0, 0, 255),
   value_color(255, 255, 255, 255),
@@ -118,10 +118,8 @@ void ProgressBar::InitPos(uint px,
  *                         ProgressBar::PROG_BAR_HORIZONTAL
  * default orientation is ProgressBar::PROG_BAR_HORIZONTAL
  */
-void ProgressBar::InitVal (long pval,
-                           long pmin,
-         long pmax,
-         enum orientation porientation)
+void ProgressBar::InitVal(int pval, int pmin, int pmax,
+                          enum orientation porientation)
 {
   ASSERT (pmin < pmax);
   val         = pval;
@@ -139,7 +137,7 @@ void ProgressBar::InitVal (long pval,
   }
 }
 
-void ProgressBar::UpdateValue(long pval)
+void ProgressBar::UpdateValue(int pval)
 {
   val       = ComputeValue(pval);
   bar_value = ComputeBarValue(val);
@@ -154,12 +152,12 @@ void ProgressBar::UpdateValue(long pval)
 
 }
 
-long ProgressBar::ComputeValue(long pval) const
+int ProgressBar::ComputeValue(int pval) const
 {
-  return InRange_Long(pval, min, max);
+  return BorneTpl<int>(pval, min, max);
 }
 
-uint ProgressBar::ComputeBarValue(long val) const
+uint ProgressBar::ComputeBarValue(int val) const
 {
   if (PROG_BAR_HORIZONTAL == orientation) {
     return (ComputeValue(val) -min)*(width - 2)/(max-min);
@@ -234,8 +232,7 @@ void ProgressBar::DrawXY(const Point2i & pos) const
 }
 
 // Ajoute/supprime un mark
-ProgressBar::mark_it ProgressBar::AddTag(long val,
-                                             const Color & color)
+ProgressBar::mark_it ProgressBar::AddTag(int val, const Color & color)
 {
   mark_t m;
   m.val   = ComputeBarValue(val);
@@ -245,10 +242,8 @@ ProgressBar::mark_it ProgressBar::AddTag(long val,
   return --mark.end();
 }
 
-void ProgressBar::SetReferenceValue(bool use,
-                                    long value)
+void ProgressBar::SetReferenceValue(bool use, int value)
 {
   m_use_ref_val = use;
   m_ref_val     = ComputeValue(value);
 }
-

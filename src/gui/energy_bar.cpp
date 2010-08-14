@@ -32,9 +32,9 @@ EnergyBar::EnergyBar(uint _x,
                      uint _y,
                      uint _width,
                      uint _height,
-                     long _value,
-                     long minValue,
-                     long maxValue,
+                     int _value,
+                     int minValue,
+                     int maxValue,
                      enum orientation _orientation) :
   ProgressBar(_x,
               _y,
@@ -139,7 +139,7 @@ void EnergyBar::SortThresholds()
   std::sort(listThresholds.begin(), listThresholds.end());
 }
 
-void EnergyBar::Actu(long real_energy)
+void EnergyBar::Actu(int real_energy)
 {
   val = ComputeValue(real_energy);
   bar_value = ComputeBarValue(val);

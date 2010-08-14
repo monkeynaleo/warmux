@@ -36,11 +36,11 @@ T BorneTpl (const T &valeur, const T &min, const T &max){
 }
 
 // Force a value into range [min;max]
-inline long InRange_Long (const long &valeur, const long &min, const long &max) {
-  return BorneTpl (valeur, min, max);
+inline long InRange_Long(const long &valeur, const long &min, const long &max) {
+  return BorneTpl(valeur, min, max);
 }
-inline Double InRange_Double (const Double &valeur, const Double &min, const Double &max) {
-  return BorneTpl (valeur, min, max);
+inline Double InRange_Double(const Double &valeur, const Double &min, const Double &max) {
+  return BorneTpl(valeur, min, max);
 }
 
 // Invert an angle along the vertical axis
