@@ -385,21 +385,6 @@ inline fixed_point<16> inv(fixed_point<16> a)
   return r;
 }
 
-// The multiply accumulate case can be optimized.
-template <int p>
-inline fixed_point<p> multiply_accumulate(
-  int count,
-  const fixed_point<p> *a,
-  const fixed_point<p> *b)
-{
-  long long result = 0;
-  for (int i = 0; i < count; ++i)
-    result += static_cast<long long>(a[i].intValue) * b[i].intValue;
-  fixed_point<p> r;
-  r.intValue = static_cast<int>(result >> p);
-  return r;
-}
-
 } // end namespace fixedpoint
 
 #endif
