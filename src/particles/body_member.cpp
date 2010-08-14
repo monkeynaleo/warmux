@@ -38,7 +38,7 @@ BodyMemberParticle::BodyMemberParticle(const Sprite& spr, const Point2i& positio
   SetSize(image->GetSize());
   SetOnTop(true);
   MSG_DEBUG("random.get", "BodyMemberParticle::BodyMemberParticle(...) speed vector length");
-  Double speed_vector_length = (Double)RandomSync().GetLong(10, 15);
+  Double speed_vector_length = (Double)RandomSync().GetInt(10, 15);
   MSG_DEBUG("random.get", "BodyMemberParticle::BodyMemberParticle(...) speed vector angle");
   Double speed_vector_angle = - RandomSync().GetDouble(0, 3);
   SetSpeed(speed_vector_length, speed_vector_angle);

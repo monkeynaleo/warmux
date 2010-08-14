@@ -86,8 +86,8 @@ void Polecat::Shoot(Double strength)
 void Polecat::Fart()
 {
   // particles must be exactly the same accross the network
-  Double norme = Double(RandomSync().GetLong(0, 500))/100;
-  Double angle = Double(RandomSync().GetLong(0, 3000))/100;
+  Double norme = Double(RandomSync().GetInt(0, 500))/100;
+  Double angle = Double(RandomSync().GetInt(0, 3000))/100;
   ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
   last_fart_time = Time::GetInstance()->Read();
   JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");

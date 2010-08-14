@@ -364,7 +364,7 @@ void MapsList::SelectMapByName (const std::string &name)
 {
   // Random map!!
   if (name == "random") {
-    active_map_index = RandomLocal().GetLong(0, lst.size()-1);
+    active_map_index = RandomLocal().GetInt(0, lst.size()-1);
 
     MSG_DEBUG("map.random", "select %u", active_map_index);
     random_map = true;

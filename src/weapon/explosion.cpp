@@ -203,11 +203,10 @@ void ApplyExplosion (const Point2i &pos,
   if ( config.explosion_range > 25 && config.damage > 0 )
   {
      int reduced_range = ( int )config.explosion_range / 2;
-     Camera::GetInstance()->Shake( (int)(config.explosion_range * 15),
-         Point2i( RandomLocal().GetLong( -reduced_range, reduced_range  ),
-                (int)config.explosion_range ),
-         Point2i( 0, 0 )
-        );
+     Camera::GetInstance()->Shake((int)(config.explosion_range * 15),
+                                  Point2i(RandomLocal().GetInt(-reduced_range, reduced_range  ),
+                                          (int)config.explosion_range),
+                                  Point2i( 0, 0 ));
   };
 }
 

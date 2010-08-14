@@ -202,7 +202,7 @@ bool IndexServer::GetServerAddress( std::string & address, int & port, uint & nb
   if (first_server == server_lst.end()) {
     // First try :
     // Randomly select a server in the list
-    int nbr = RandomLocal().GetLong( 0, server_lst.size()-1 );
+    int nbr = RandomLocal().GetInt( 0, server_lst.size()-1 );
     first_server = server_lst.begin();
     while(nbr--)
       ++first_server;

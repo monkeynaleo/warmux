@@ -101,14 +101,14 @@ void Character::SetBody(Body * char_body)
   MSG_DEBUG("random.get", "Character::SetBody(...) direction");
   SetDirection(RandomSync().GetBool() ? DIRECTION_LEFT : DIRECTION_RIGHT);
   MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
-  body->SetFrame(RandomSync().GetLong(0, body->GetFrameCount() - 1));
+  body->SetFrame(RandomSync().GetInt(0, body->GetFrameCount() - 1));
   SetSize(body->GetSize());
 }
 
 static uint GetRandomAnimationTimeValue()
 {
   MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
-  return Time::GetInstance()->Read() + RandomSync().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
+  return Time::GetInstance()->Read() + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
@@ -683,7 +683,8 @@ void Character::Refresh()
   {
     body->PlayAnimation();
     MSG_DEBUG("random.get", "Character::Refresh()");
-    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + RandomSync().GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
+    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration()
+                   + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
   }
 
   // Stop the animation or the black skin if we are playing

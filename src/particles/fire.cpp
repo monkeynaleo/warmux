@@ -28,15 +28,15 @@
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
 
-const uint living_time = 5000;
-const uint dig_ground_time = 1000;
+static const uint living_time = 5000;
+static const uint dig_ground_time = 1000;
 
 ExplosiveWeaponConfig fire_cfg;
 
-static long GetRandomDigGroundTime()
+static int GetRandomDigGroundTime()
 {
   MSG_DEBUG("random.get", "GetRandomDigGroundTime");
-  return RandomSync().GetLong(0, dig_ground_time);
+  return RandomSync().GetInt(0, dig_ground_time);
 }
 
 FireParticle::FireParticle() :

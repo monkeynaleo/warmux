@@ -420,7 +420,7 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     // Choose a random sound sample
     if (nb_sons > 1)
     {
-      uint selection = uint(RandomLocal().GetLong(0, nb_sons));
+      uint selection = RandomLocal().GetUint(0, nb_sons);
       if (selection == nb_sons) --selection ;
 
       it = p.first ;

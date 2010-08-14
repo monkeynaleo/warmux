@@ -27,9 +27,9 @@
 #include "network/randomsync.h"
 
 // Vibration period of the bubble
-const uint vib_period = 250;
-const Double MAX_SCALE = 1.0f;
-const Double MIN_SCALE = 0.25f;
+static const uint vib_period = 250;
+static const Double MAX_SCALE = 1.0f;
+static const Double MIN_SCALE = 0.25f;
 
 IllBubble::IllBubble() : ExplosionSmoke(20)
 {
@@ -39,7 +39,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
   SetAirResistFactor( GetAirResistFactor() * THREE );
 
   MSG_DEBUG("random.get", "IllBubble::IllBubble()");
-  vib_phi = RandomSync().GetLong(0, vib_period);
+  vib_phi = RandomSync().GetUint(0, vib_period);
   image->Scale(MIN_SCALE, MIN_SCALE);
 }
 
