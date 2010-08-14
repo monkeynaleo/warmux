@@ -46,11 +46,11 @@ ProgressBar::ProgressBar() :
   max(0),
   m_use_ref_val(false),
   m_ref_val(0),
-  val_barre(0),
+  bar_value(0),
   orientation(),
   colorMin(),
   colorMax(),
-  marqueur()
+  mark()
 {
 }
 
@@ -81,11 +81,11 @@ ProgressBar::ProgressBar(uint _x,
   max(maxValue),
   m_use_ref_val(false),
   m_ref_val(0),
-  val_barre(0),
+  bar_value(0),
   orientation(_orientation),
   colorMin(),
   colorMax(),
-  marqueur()
+  mark()
 {
   image.NewSurface(Point2i(width, height), SDL_SWSURFACE | SDL_SRCALPHA, true);
 }
@@ -128,7 +128,7 @@ void ProgressBar::InitVal (long pval,
   min         = pmin;
   max         = pmax;
   orientation = porientation;
-  val_barre   = ComputeBarValue(val);
+  bar_value   = ComputeBarValue(val);
 
   if (gradientMode) {
     float fmax = max;
@@ -142,7 +142,7 @@ void ProgressBar::InitVal (long pval,
 void ProgressBar::UpdateValue(long pval)
 {
   val       = ComputeValue(pval);
-  val_barre = ComputeBarValue(val);
+  bar_value = ComputeBarValue(val);
 
   if (gradientMode) {
     float absVal = abs(val);
@@ -184,15 +184,15 @@ void ProgressBar::DrawXY(const Point2i & pos) const
   if (m_use_ref_val) {
     int ref = ComputeBarValue (m_ref_val);
     if (val < m_ref_val) { // FIXME hum, this seems buggy
-      begin = 1+val_barre;
+      begin = 1+bar_value;
       end = 1+ref;
     } else {
       begin = 1+ref;
-      end = 1+val_barre;
+      end = 1+bar_value;
     }
   } else {
     begin = 1;
-    end = 1+val_barre;
+    end = 1+bar_value;
   }
 
   Rectanglei r_value;
@@ -215,8 +215,8 @@ void ProgressBar::DrawXY(const Point2i & pos) const
     image.FillRect(r_ref, border_color);
   }
 
-  // Marqueurs
-  marqueur_it_const it = marqueur.begin(), it_end = marqueur.end();
+  // marks
+  mark_it_const it = mark.begin(), it_end = mark.end();
 
   for (; it != it_end; ++it) {
     Rectanglei r_marq;
@@ -233,16 +233,16 @@ void ProgressBar::DrawXY(const Point2i & pos) const
   GetWorld().ToRedrawOnScreen(dst);
 }
 
-// Ajoute/supprime un marqueur
-ProgressBar::marqueur_it ProgressBar::AddTag(long val,
+// Ajoute/supprime un mark
+ProgressBar::mark_it ProgressBar::AddTag(long val,
                                              const Color & color)
 {
-  marqueur_t m;
+  mark_t m;
   m.val   = ComputeBarValue(val);
   m.color = color;
-  marqueur.push_back(m);
+  mark.push_back(m);
 
-  return --marqueur.end();
+  return --mark.end();
 }
 
 void ProgressBar::SetReferenceValue(bool use,

@@ -142,7 +142,7 @@ void EnergyBar::SortThresholds()
 void EnergyBar::Actu(long real_energy)
 {
   val = ComputeValue(real_energy);
-  val_barre = ComputeBarValue(val);
+  bar_value = ComputeBarValue(val);
   #define one_hundred 100.0f
   float currentPercentage = abs(val) * one_hundred / max;
   Threshold thresholdMin;
