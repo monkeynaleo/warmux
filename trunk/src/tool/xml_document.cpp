@@ -177,7 +177,7 @@ uint XmlReader::GetNbChildren(const xmlNode * father)
 #else
   // This code is taken from libxml2, release under the MIT license:
   // Copyright (C) 1998-2003 Daniel Veillard. All Rights Reserved.
-  unsigned long ret = 0;
+  uint ret = 0;
   xmlNodePtr    cur = NULL;
 
   if (father == NULL)

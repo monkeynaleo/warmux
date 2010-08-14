@@ -32,7 +32,7 @@ class WeaponStrengthBar : public ProgressBar
   ~WeaponStrengthBar();
   virtual void DrawXY(const Point2i &pos);
   virtual void InitPos (uint x, uint y, uint larg, uint haut);
-  Color ComputeValueColor(long val) const;
+  Color ComputeValueColor(int val) const;
  private:
   bool visible ;
   DecoratedBox * m_box;

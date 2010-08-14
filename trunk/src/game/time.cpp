@@ -64,14 +64,14 @@ bool Time::CanBeIncreased()
 void Time::LetRealTimePassUntilFrameEnd()
 {
   ASSERT(!IsWaiting());
-  long delay;
+  int64_t delay;
   do {
-    delay = static_cast<long>(current_time) - stopwatch.GetValue();
+    delay = current_time - (int64_t)stopwatch.GetValue();
     if (delay > 0) {
       SDL_Delay((uint)delay);
       MSG_DEBUG("time.skip","Do nothing for: %d", delay);
     }
-  } while(delay > 0);
+  } while (delay > 0);
 }
 
 bool Time::IsWaiting()

@@ -34,9 +34,9 @@
 #include "team/teams_list.h"
 #include "team/team.h"
 
-const Double JETPACK_FORCE = 1800.0;
+static const Double JETPACK_FORCE = 1800.0;
 
-const long DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
+#define DELTA_FUEL_DOWN   100  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
@@ -90,26 +90,22 @@ void JetPack::Refresh()
 
     ActiveCharacter().SetExternForceXY(F);
 
-    if (!F.IsNull())
-    {
+    if (!F.IsNull()) {
       // We are using fuel !!!
       uint current = Time::GetInstance()->Read() ;
-      long delta = current - m_last_fuel_down;
+      int64_t delta = current - m_last_fuel_down;
 
-      while (delta >= DELTA_FUEL_DOWN)
-      {
-        if (EnoughAmmoUnit())
-        {
+      while (delta >= DELTA_FUEL_DOWN) {
+        if (EnoughAmmoUnit()) {
           UseAmmoUnit();
           m_last_fuel_down += DELTA_FUEL_DOWN ;
           delta -= DELTA_FUEL_DOWN ;
-        }
-        else
-        {
+        } else {
           p_Deselect();
           break;
         }
       }
+
     }
   }
 }
