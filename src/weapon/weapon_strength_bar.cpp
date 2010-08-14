@@ -67,7 +67,7 @@ void WeaponStrengthBar::InitPos(uint px, uint py, uint pwidth, uint pheight)
 
 static uint ScaleStrengthtoUInt(Double strength)
 {
-  return long(100 * strength);
+  return int(100 * strength);
 }
 
 void WeaponStrengthBar::FetchData()
@@ -158,7 +158,7 @@ void WeaponStrengthBar::DrawXY(const Point2i &pos) {
   GetWorld().ToRedrawOnScreen(dst);
 }
 
-Color WeaponStrengthBar::ComputeValueColor(long val) const
+Color WeaponStrengthBar::ComputeValueColor(int val) const
 {
   Color start_color(242,239,22,255);
   Color end_color(160,0,0,255);
