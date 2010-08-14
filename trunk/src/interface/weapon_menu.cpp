@@ -80,7 +80,7 @@ WeaponMenuItem::~WeaponMenuItem()
 
 bool WeaponMenuItem::IsMouseOver()
 {
-  if (!ActiveTeam().ReadNbAmmos(weapon->GetType()) {
+  if (!ActiveTeam().ReadNbAmmos(weapon->GetType())) {
     if (zoom)
       SetZoom(false);
     return false;
