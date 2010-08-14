@@ -47,7 +47,6 @@ private:
 
  public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
-  ~WeaponMenuItem();
   bool IsMouseOver();
   void SetZoom(bool value);
   void Draw(Surface * dest);

@@ -72,12 +72,6 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position)
   SetZoomTime(ICON_ZOOM_TIME);
 }
 
-WeaponMenuItem::~WeaponMenuItem()
-{
-  if (item)
-    delete item;
-}
-
 bool WeaponMenuItem::IsMouseOver()
 {
   if (!ActiveTeam().ReadNbAmmos(weapon->GetType())) {
