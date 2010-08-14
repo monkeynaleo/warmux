@@ -106,7 +106,7 @@ PolygonItem::PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a
 
 PolygonItem::~PolygonItem()
 {
-  // delete(item);
+  delete item;
 }
 
 void PolygonItem::SetPosition(const Point2d & pos)
