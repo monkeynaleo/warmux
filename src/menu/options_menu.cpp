@@ -465,8 +465,9 @@ void OptionMenu::SaveOptions()
 
   // Sound
   std::string sfreq = cbox_sound_freq->GetValue();
-  long freq;
-  if (str2long(sfreq,freq)) JukeBox::GetInstance()->SetFrequency(freq);
+  int freq;
+  if (str2int(sfreq,freq))
+    JukeBox::GetInstance()->SetFrequency(freq);
   config->SetWarnOnNewPlayer(warn_cbox->GetValue());
 
   JukeBox::GetInstance()->Init(); // commit modification on sound options
