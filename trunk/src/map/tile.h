@@ -56,7 +56,7 @@ public:
                  const Point2i & lower_right_offset);
 
   // Get alpha value of a pixel
-  unsigned char GetAlpha(const Point2i &pos) const;
+  uint8_t GetAlpha(const Point2i &pos) const;
 
   // Draw it (on the entire visible part)
   void DrawTile();
