@@ -34,7 +34,7 @@ MagicStarParticle::MagicStarParticle() :
   m_time_between_scale = 25;
 
   MSG_DEBUG("random.get", "MagicStarParticle::MagicStarParticle()");
-  uint color=RandomSync().GetLong(0,2);
+  uint color=RandomSync().GetUint(0,2);
   switch(color)
   {
     case 0 : image = ParticleEngine::GetSprite(MAGIC_STAR_R_spr); break;

@@ -714,7 +714,7 @@ void Body::PlayAnimation()
 {
   std::ostringstream name;
   MSG_DEBUG("random.get", "Body::PlayAnimation()");
-  name << "animation" << RandomSync().GetLong(0, animation_number - 1);
+  name << "animation" << RandomSync().GetInt(0, animation_number - 1);
   SetClotheOnce(name.str());
   SetMovementOnce(name.str());
 }

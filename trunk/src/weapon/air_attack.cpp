@@ -39,10 +39,10 @@
 #include "weapon/weapon_cfg.h"
 
 
-const int FORCE_X_MIN = -50;
-const uint FORCE_X_MAX = 0;
-const uint FORCE_Y_MIN = 1;
-const uint FORCE_Y_MAX = 40;
+static const int FORCE_X_MIN = -50;
+static const uint FORCE_X_MAX = 0;
+static const uint FORCE_Y_MIN = 1;
+static const uint FORCE_Y_MAX = 40;
 
 // XXX Unused ?
 //const Double OBUS_SPEED = 7 ;
@@ -138,9 +138,9 @@ void Plane::DropBomb()
 
   Point2d speed_vector = GetSpeedXY();
 
-  int fx = RandomSync().GetLong(FORCE_X_MIN, FORCE_X_MAX);
+  int fx = RandomSync().GetInt(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
-  int fy = RandomSync().GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
+  int fy = RandomSync().GetInt(FORCE_Y_MIN, FORCE_Y_MAX);
 
   speed_vector.SetValues(speed_vector.x + fx/(Double)30.0, speed_vector.y + fy/(Double)30.0);
   instance->SetSpeedXY(speed_vector);

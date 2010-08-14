@@ -130,7 +130,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
   uint tmp = Time::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "ParticleEngine::AddPeriodic(...)");
-  uint delta = long(m_time_between_add * Double(RandomSync().GetLong(3, 40)) / 10);
+  uint delta = uint(m_time_between_add * Double(RandomSync().GetUint(3, 40)) / 10);
   if (time >= delta) {
     m_last_refresh = tmp;
     ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
@@ -248,14 +248,14 @@ void ParticleEngine::AddNow(const Point2i &position,
 
       if( norme == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector length");
-        tmp_norme = Double(RandomSync().GetLong(0, 5000))/100;
+        tmp_norme = Double(RandomSync().GetUint(0, 5000))/100;
       } else {
         tmp_norme = norme;
       }
 
       if( angle == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
-        tmp_angle = - Double(RandomSync().GetLong(0, 3000))/1000;
+        tmp_angle = - Double(RandomSync().GetUint(0, 3000))/1000;
       } else {
         tmp_angle = angle;
       }

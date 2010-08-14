@@ -73,20 +73,20 @@ void ObjMine::FakeExplosion()
     animation = false;
     image->SetCurrentFrame(0);
   }
-  if (launcher != NULL) launcher->SignalProjectileTimeout();
+  if (launcher)
+    launcher->SignalProjectileTimeout();
   // Mine fall into the ground after a fake explosion
   SetCollisionModel(true, false, false);
 }
 
 void ObjMine::StartTimeout()
 {
-  if (!animation)
-  {
+  if (!animation) {
     animation=true;
 
     // is it a fake mine ? (here because Constructor is called before random
     // number generator is synchronized over the network)
-    fake = !(RandomSync().GetLong(0, 9));
+    fake = !(RandomSync().GetUint(0, 9));
 
     Camera::GetInstance()->FollowObject(this);
 
