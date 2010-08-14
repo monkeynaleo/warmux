@@ -43,7 +43,7 @@ public:
                                      const std::string & nodeName);
 
   // Return the current number of children nodes of "father" node.
-  unsigned long GetNbChildren(const xmlNode * father);
+  uint GetNbChildren(const xmlNode * father);
 
   // Return the first child node of "father", otherwise NULL
   const xmlNode * GetFirstChild(const xmlNode * father);

@@ -170,7 +170,7 @@ const xmlNode * XmlReader::GetFirstNamedChild(const xmlNode * father,
   return GetMarker(father, nodeName);
 }
 
-unsigned long XmlReader::GetNbChildren(const xmlNode * father)
+uint XmlReader::GetNbChildren(const xmlNode * father)
 {
 #if LIBXML_VERSION > 20702
   return xmlChildElementCount((xmlNode*)father);
