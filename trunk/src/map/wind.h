@@ -55,7 +55,7 @@ public:
 class Wind : public Singleton<Wind>
 {
 private:
-  long m_val, m_nv_val;
+  int m_val, m_nv_val;
   uint m_last_move;
   uint m_last_part_mvt;
 
@@ -72,7 +72,7 @@ public:
   Double GetStrength() const;
   void ChooseRandomVal();
 
-  void SetVal(long val);
+  void SetVal(int val);
   void Refresh();
   void Reset();
   void DrawParticles();
