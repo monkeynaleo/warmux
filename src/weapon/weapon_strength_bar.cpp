@@ -163,10 +163,15 @@ Color WeaponStrengthBar::ComputeValueColor(long val) const
   Color start_color(242,239,22,255);
   Color end_color(160,0,0,255);
 
-  int r = (end_color.GetRed()-start_color.GetRed()) * val /(max-min) + start_color.GetRed();
-  int g = (end_color.GetGreen()-start_color.GetGreen()) * val /(max-min) + start_color.GetGreen();
-  int b = (end_color.GetBlue()-start_color.GetBlue()) * val /(max-min) + start_color.GetBlue();
-  int a = (end_color.GetAlpha()-start_color.GetAlpha()) * val /(max-min) + start_color.GetAlpha();
+  int scale = (val << 16)/(max-min);
+
+#define SCALE_COL(fun)   \
+  (((end_color.fun - start_color.fun)*scale)>>16) + start_color.fun
+
+  int r = SCALE_COL(GetRed());
+  int g = SCALE_COL(GetGreen());
+  int b = SCALE_COL(GetBlue());
+  int a = SCALE_COL(GetAlpha());
 
   return Color(r,g,b,a);
 }
