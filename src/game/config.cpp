@@ -434,13 +434,13 @@ void Config::LoadXml(const xmlNode *xml)
 #endif
 
   //=== Teams ===
-  if ((elem = XmlReader::GetMarker(xml, "teams")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "teams")))
   {
     int i = 0;
 
     const xmlNode *team;
 
-    while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL) {
+    while ((team = XmlReader::GetMarker(elem, "team_" + int2str(i)))) {
       ConfigTeam one_team;
       XmlReader::ReadString(team, "id", one_team.id);
       XmlReader::ReadString(team, "player_name", one_team.player_name);
@@ -458,7 +458,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== Video ===
-  if ((elem = XmlReader::GetMarker(xml, "video")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "video")))
   {
     XmlReader::ReadBool(elem, "bling_bling_interface", bling_bling_interface);
     XmlReader::ReadUint(elem, "max_fps", max_fps);
@@ -475,7 +475,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== Sound ===
-  if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "sound")))
   {
     XmlReader::ReadBool(elem, "music", sound_music);
     XmlReader::ReadBool(elem, "effects", sound_effects);
@@ -485,15 +485,15 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== network ===
-  if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "network")))
   {
     const xmlNode *sub_elem;
-    if ((sub_elem = XmlReader::GetMarker(elem, "as_client")) != NULL)
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_client")))
     {
       XmlReader::ReadString(sub_elem, "host", m_network_client_host);
       XmlReader::ReadString(sub_elem, "port", m_network_client_port);
     }
-    if ((sub_elem = XmlReader::GetMarker(elem, "as_server")) != NULL)
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_server")))
     {
       XmlReader::ReadString(sub_elem, "game_name", m_network_server_game_name);
       XmlReader::ReadString(sub_elem, "port", m_network_server_port);
@@ -501,12 +501,12 @@ void Config::LoadXml(const xmlNode *xml)
     }
 
     //=== personal teams used in last network game ===
-    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")) != NULL)
+    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")))
     {
       int i = 0;
       const xmlNode *team;
 
-      while ((team = XmlReader::GetMarker(sub_elem, "team_" + ulong2str(i))) != NULL) {
+      while ((team = XmlReader::GetMarker(sub_elem, "team_" + int2str(i)))) {
         ConfigTeam one_team;
         XmlReader::ReadString(team, "id", one_team.id);
         XmlReader::ReadString(team, "player_name", one_team.player_name);
@@ -525,7 +525,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== misc ===
-  if ((elem = XmlReader::GetMarker(xml, "misc")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "misc")))
   {
 #ifdef HAVE_LIBCURL
     XmlReader::ReadBool(elem, "check_updates", check_updates);
@@ -537,7 +537,7 @@ void Config::LoadXml(const xmlNode *xml)
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 
   //=== controls ===
-  if ((elem = XmlReader::GetMarker(xml, "controls")) != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "controls")))
   {
     const xmlNode *node = XmlReader::GetMarker(elem, "keyboard");
     if (node)
@@ -613,12 +613,12 @@ bool Config::SaveXml(bool save_current_teams)
 
     for (int i=0; it != end; ++it, i++)
     {
-       std::string name = "team_"+ulong2str(i);
+       std::string name = "team_"+int2str(i);
        xmlNode* a_team = xmlAddChild(team_elements,
                                      xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
        doc.WriteElement(a_team, "id", (*it).id);
        doc.WriteElement(a_team, "player_name", (*it).player_name);
-       doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
+       doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
        doc.WriteElement(a_team, "ai", (*it).ai);
     }
   }
@@ -626,20 +626,18 @@ bool Config::SaveXml(bool save_current_teams)
   //=== Video ===
   Video * video = AppWormux::GetInstance()->video;
   xmlNode* video_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"video"));
-  doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
-  doc.WriteElement(video_node, "display_multi_layer_sky", ulong2str(display_multi_layer_sky));
-  doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
-  doc.WriteElement(video_node, "display_name_character", ulong2str(display_name_character));
-  doc.WriteElement(video_node, "bling_bling_interface", ulong2str(bling_bling_interface));
-  doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
-  doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
-  doc.WriteElement(video_node, "scroll_border_size", ulong2str(scroll_border_size));
-  doc.WriteElement(video_node, "width", ulong2str(video->window.GetWidth()));
-  doc.WriteElement(video_node, "height", ulong2str(video->window.GetHeight()));
-  doc.WriteElement(video_node, "full_screen",
-                   ulong2str(static_cast<uint>(video->IsFullScreen())) );
-  doc.WriteElement(video_node, "max_fps",
-                   long2str(static_cast<int>(video->GetMaxFps())));
+  doc.WriteElement(video_node, "display_wind_particles", bool2str(display_wind_particles));
+  doc.WriteElement(video_node, "display_multi_layer_sky", bool2str(display_multi_layer_sky));
+  doc.WriteElement(video_node, "display_energy_character", bool2str(display_energy_character));
+  doc.WriteElement(video_node, "display_name_character", bool2str(display_name_character));
+  doc.WriteElement(video_node, "bling_bling_interface", bool2str(bling_bling_interface));
+  doc.WriteElement(video_node, "default_mouse_cursor", bool2str(default_mouse_cursor));
+  doc.WriteElement(video_node, "scroll_on_border", bool2str(scroll_on_border));
+  doc.WriteElement(video_node, "scroll_border_size", uint2str(scroll_border_size));
+  doc.WriteElement(video_node, "width", uint2str(video->window.GetWidth()));
+  doc.WriteElement(video_node, "height", uint2str(video->window.GetHeight()));
+  doc.WriteElement(video_node, "full_screen", bool2str(video->IsFullScreen()));
+  doc.WriteElement(video_node, "max_fps", uint2str(video->GetMaxFps()));
 
   if (transparency == ALPHA)
     doc.WriteElement(video_node, "transparency", "alpha");
@@ -648,11 +646,11 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Sound ===
   xmlNode *sound_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"sound"));
-  doc.WriteElement(sound_node, "music",  ulong2str(JukeBox::GetConstInstance()->UseMusic()));
-  doc.WriteElement(sound_node, "effects", ulong2str(JukeBox::GetConstInstance()->UseEffects()));
-  doc.WriteElement(sound_node, "frequency", ulong2str(JukeBox::GetConstInstance()->GetFrequency()));
-  doc.WriteElement(sound_node, "volume_music",  ulong2str(volume_music));
-  doc.WriteElement(sound_node, "volume_effects", ulong2str(volume_effects));
+  doc.WriteElement(sound_node, "music",  bool2str(JukeBox::GetConstInstance()->UseMusic()));
+  doc.WriteElement(sound_node, "effects", bool2str(JukeBox::GetConstInstance()->UseEffects()));
+  doc.WriteElement(sound_node, "frequency", uint2str(JukeBox::GetConstInstance()->GetFrequency()));
+  doc.WriteElement(sound_node, "volume_music",  uint2str(volume_music));
+  doc.WriteElement(sound_node, "volume_effects", uint2str(volume_effects));
 
   //=== Network ===
   xmlNode *net_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"network"));
@@ -666,7 +664,7 @@ bool Config::SaveXml(bool save_current_teams)
   xmlNode *net_as_server_node = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"as_server"));
   doc.WriteElement(net_as_server_node, "game_name", m_network_server_game_name);
   doc.WriteElement(net_as_server_node, "port", m_network_server_port);
-  doc.WriteElement(net_as_server_node, "public", ulong2str(m_network_server_public));
+  doc.WriteElement(net_as_server_node, "public", bool2str(m_network_server_public));
 
   // personal teams used durint last network game
   xmlNode *net_teams = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"local_teams"));
@@ -674,25 +672,24 @@ bool Config::SaveXml(bool save_current_teams)
     it = network_local_teams.begin(),
     end = network_local_teams.end();
 
-  for (int i=0; it != end; ++it, i++)
-    {
-       std::string name = "team_"+ulong2str(i);
-       xmlNode* a_team = xmlAddChild(net_teams,
-                                     xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
-       doc.WriteElement(a_team, "id", (*it).id);
-       doc.WriteElement(a_team, "player_name", (*it).player_name);
-       doc.WriteElement(a_team, "nb_characters", ulong2str((*it).nb_characters));
-       doc.WriteElement(a_team, "ai", (*it).ai);
-    }
+  for (int i=0; it != end; ++it, i++) {
+     std::string name = "team_"+int2str(i);
+     xmlNode* a_team = xmlAddChild(net_teams,
+                                   xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
+     doc.WriteElement(a_team, "id", (*it).id);
+     doc.WriteElement(a_team, "player_name", (*it).player_name);
+     doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
+     doc.WriteElement(a_team, "ai", (*it).ai);
+  }
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
 #ifdef HAVE_LIBCURL
-  doc.WriteElement(misc_node, "check_updates", ulong2str(check_updates));
+  doc.WriteElement(misc_node, "check_updates", bool2str(check_updates));
 #else
   doc.WriteElement(misc_node, "check_updates", "0");
 #endif
-  doc.WriteElement(misc_node, "left-handed_mouse", ulong2str(lefthanded_mouse));
+  doc.WriteElement(misc_node, "left-handed_mouse", bool2str(lefthanded_mouse));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
