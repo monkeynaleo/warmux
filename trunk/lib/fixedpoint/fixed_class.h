@@ -59,7 +59,6 @@ struct fixed_point {
 #endif
   /*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
   /*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
-  /*explicit*/ fixed_point(unsigned int l) : intValue(((fixint_t)l) << p) {}
   /*explicit*/ fixed_point(size_t i) : intValue(((fixint_t)i) << p) {}
 
   fixed_point& operator += (fixed_point r) { intValue += r.intValue; return *this; }
