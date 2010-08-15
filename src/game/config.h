@@ -119,10 +119,8 @@ public:
   bool GetWarnOnNewPlayer() const { return warn_on_new_player; }
   void SetWarnOnNewPlayer(bool w) { warn_on_new_player = w; }
 
-#ifdef HAVE_LIBCURL
   bool GetCheckUpdates() const { return check_updates; }
   void SetCheckUpdates(const bool check) { check_updates = check; }
-#endif
 
   bool GetLeftHandedMouse() const { return lefthanded_mouse; }
   void SetLeftHandedMouse(const bool left) { lefthanded_mouse = left; }
@@ -214,9 +212,7 @@ protected:
   bool warn_on_new_player;
 
   // various settings
-#ifdef HAVE_LIBCURL
   bool check_updates;
-#endif
   bool lefthanded_mouse;
 
   // network previous connection as client
