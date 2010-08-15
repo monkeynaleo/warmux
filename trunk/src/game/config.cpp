@@ -117,9 +117,7 @@ Config::Config()
   , sound_frequency(44100)
 #endif
   , warn_on_new_player(true)
-#ifdef HAVE_LIBCURL
   , check_updates(false)
-#endif
   , lefthanded_mouse(false)
   , m_network_client_host("localhost")
   , m_network_client_port(WORMUX_NETWORK_PORT)
@@ -527,9 +525,7 @@ void Config::LoadXml(const xmlNode *xml)
   //=== misc ===
   if ((elem = XmlReader::GetMarker(xml, "misc")))
   {
-#ifdef HAVE_LIBCURL
     XmlReader::ReadBool(elem, "check_updates", check_updates);
-#endif
     XmlReader::ReadBool(elem, "left-handed_mouse", lefthanded_mouse);
   }
 
@@ -684,11 +680,7 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
-#ifdef HAVE_LIBCURL
   doc.WriteElement(misc_node, "check_updates", bool2str(check_updates));
-#else
-  doc.WriteElement(misc_node, "check_updates", "0");
-#endif
   doc.WriteElement(misc_node, "left-handed_mouse", bool2str(lefthanded_mouse));
 
   //=== game mode ===
