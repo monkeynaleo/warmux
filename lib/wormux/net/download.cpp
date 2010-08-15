@@ -65,7 +65,7 @@ bool Downloader::Get(const char* url, FILE* file)
   return false;
 }
 #elif defined(ANDROID)
-# include <lib.h>
+# include <jni.h>
 
 #ifndef SDL_JAVA_PACKAGE_PATH
 # error SDL_JAVA_PACKAGE_PATH undefined!
