@@ -100,17 +100,24 @@ bool Downloader::Get(const char* url, FILE* file)
   jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl);
   int        len    = env->GetArrayLength(buffer);
 
-  if (!len)
+  if (!len) {
+    error = Format(_("Read only %i bytes"), len);
     return false;
+  }
 
   jbyte *ptr = env->GetByteArrayElements(buffer, &isCopy);
-  if (!ptr)
+  if (!ptr) {
+    error = _("No pointer");
     return false;
+  }
 
-  bool success = fwrite(ptr, len, sizeof(jbyte), file) == len;
+  int written = fwrite(ptr, len, sizeof(jbyte), file);
   if (isCopy == JNI_TRUE)
     env->ReleaseByteArrayElements(buffer, ptr, 0);
-  return success;
+  if (written == len)
+    return true;
+  error = Format(_("Wrote %i/%i bytes"), written, len);
+  return false;
 }
 #else  // waiting for an alternate implementation
 Downloader::Downloader() { }
@@ -149,8 +156,10 @@ bool Downloader::GetLatestVersion(std::string& line)
     return false;
   }
 
+  error.clear();
   if (!Get(url, file)) {
-    error = Format(_("Couldn't fetch last version from %s"), url);
+    if (error.empty())
+      error = Format(_("Couldn't fetch last version from %s"), url);
     fprintf(stderr, "%s\n", error.c_str());
     return false;
   }
