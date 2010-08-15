@@ -230,6 +230,7 @@ OptionMenu::OptionMenu() :
                         "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 
+#ifndef ANDROID
   opt_lefthanded_mouse =
     new PictureTextCBox(_("Left-handed mouse?"),
                         "menu/ico_lefthanded_mouse", option_size);
@@ -244,7 +245,7 @@ OptionMenu::OptionMenu() :
     new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
                               option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
-
+#endif
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 
   /* Sound options */
@@ -353,10 +354,11 @@ OptionMenu::OptionMenu() :
 #endif
 
   opt_updates->SetValue(config->GetCheckUpdates());
+#ifndef ANDROID
   opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
-
+#endif
   GetResourceManager().UnLoadXMLProfile(res);
 
   widgets.AddWidget(tabs);
@@ -415,12 +417,14 @@ void OptionMenu::SaveOptions()
   config->SetDisplayMultiLayerSky(opt_display_multisky->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
-  config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
-  config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
 
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());
+#ifndef ANDROID
   config->SetLeftHandedMouse(opt_lefthanded_mouse->GetValue());
+  config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
+  config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
+#endif
 
   // Sound settings - volume already saved
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());

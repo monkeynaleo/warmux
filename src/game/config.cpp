@@ -465,8 +465,10 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
+#ifndef ANDROID // Those should never be set
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
     XmlReader::ReadUint(elem, "scroll_border_size", scroll_border_size);
+#endif
     XmlReader::ReadUint(elem, "width", video_width);
     XmlReader::ReadUint(elem, "height", video_height);
     XmlReader::ReadBool(elem, "full_screen", video_fullscreen);

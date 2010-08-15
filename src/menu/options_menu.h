@@ -66,9 +66,11 @@ private:
 
   /* Misc options controllers */
   CheckBox *opt_updates;
+#ifndef ANDROID
   CheckBox *opt_lefthanded_mouse;
   CheckBox *opt_scroll_on_border;
   SpinButtonWithPicture * opt_scroll_border_size;
+#endif
 
   void SaveOptions();
   void OnClick(const Point2i &mousePosition, int button);
