@@ -31,7 +31,7 @@
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have a functional curl library. */
-#define HAVE_LIBCURL 1
+/* #define HAVE_LIBCURL 1 */
 
 /* Define to 1 if you have the `SDL_gfx' library (-lSDL_gfx). */
 #define HAVE_LIBSDL_GFX 1

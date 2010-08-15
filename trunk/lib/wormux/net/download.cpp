@@ -64,10 +64,58 @@ bool Downloader::Get(const char* url, FILE* file)
   error = std::string(curl_error_buf);
   return false;
 }
-#else // waiting for an alternate implementation
+#elif defined(ANDROID)
+# include <lib.h>
+
+#ifndef SDL_JAVA_PACKAGE_PATH
+# error SDL_JAVA_PACKAGE_PATH undefined!
+#endif
+#define JAVA_EXPORT_NAME2(name,package) Java_##package##_##name
+#define JAVA_EXPORT_NAME1(name,package) JAVA_EXPORT_NAME2(name,package)
+#define JAVA_EXPORT_NAME(name) JAVA_EXPORT_NAME1(name,SDL_JAVA_PACKAGE_PATH)
+
+extern "C" {
+
+static JNIEnv    *env       = NULL;
+static jmethodID  FetchURL  = NULL;
+static jobject    dler      = NULL;
+
+void
+JAVA_EXPORT_NAME(URLDownloader_nativeInitCallbacks)(JNIEnv * libEnv, jobject thiz)
+{
+  env  = libEnv;
+  dler = thiz;
+  jclass dlerClass = env->GetObjectClass(thiz);
+  FetchURL = env->GetMethodID(dlerClass, "FetchURL", "(Ljava/lang/String;)[B");
+}
+
+};
+
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::Get(const char* url, FILE* file) { return false; }
+bool Downloader::Get(const char* url, FILE* file)
+{
+  jboolean   isCopy = JNI_FALSE;
+  jstring    jurl   = env->NewStringUTF(url);
+  jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl);
+  int        len    = env->GetArrayLength(buffer);
+
+  if (!len)
+    return false;
+
+  jbyte *ptr = env->GetByteArrayElements(buffer, &isCopy);
+  if (!ptr)
+    return false;
+
+  bool success = fwrite(ptr, len, sizeof(jbyte), file) == len;
+  if (isCopy == JNI_TRUE)
+    env->ReleaseByteArrayElements(buffer, ptr, 0);
+  return success;
+}
+#else  // waiting for an alternate implementation
+Downloader::Downloader() { }
+Downloader::~Downloader() { }
+bool Downloader::Get(const char* /*url*/, FILE* /*file*/) { return false; }
 #endif
 
 static ssize_t getline(std::string& line, FILE* file)
