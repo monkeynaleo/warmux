@@ -28,47 +28,47 @@
 
 class EnergyBar : public ProgressBar
 {
-  public:
-    class Threshold
-    {
-      public:
-        float value;
-        Color color;
-        float redCoef;
-        float greenCoef;
-        float blueCoef;
-        float alphaCoef;
+public:
+  class Threshold
+  {
+    public:
+      float value;
+      Color color;
+      float redCoef;
+      float greenCoef;
+      float blueCoef;
+      float alphaCoef;
 
-        bool operator < (const Threshold & threshold) const {
-          return value < threshold.value;
-        }
-    };
-    static const int NB_OF_ENERGY_COLOR = 6;
+      bool operator < (const Threshold & threshold) const {
+        return value < threshold.value;
+      }
+  };
+  static const uint NB_OF_ENERGY_COLOR = 6;
 
-  private:
-    Profile * profile;
-    const xmlNode * widgetNode;
-    std::vector<Threshold> listThresholds;
+private:
+  Profile * profile;
+  const xmlNode * widgetNode;
+  std::vector<Threshold> listThresholds;
 
-  public:
-    EnergyBar(uint _x,
-              uint _y,
-              uint _width,
-              uint _height,
-              int _value = 0,
-              int minValue = 0,
-              int maxValue = 100,
-              enum orientation _orientation = PROG_BAR_HORIZONTAL);
-    EnergyBar(Profile * _profile,
-              const xmlNode * _widgetNode);
-    virtual ~EnergyBar(void) {}
+public:
+  EnergyBar(uint _x,
+            uint _y,
+            uint _width,
+            uint _height,
+            int _value = 0,
+            int minValue = 0,
+            int maxValue = 100,
+            enum orientation _orientation = PROG_BAR_HORIZONTAL);
+  EnergyBar(Profile * _profile,
+            const xmlNode * _widgetNode);
+  virtual ~EnergyBar(void) {}
 
-    virtual bool LoadXMLConfiguration(void);
-    void ProcessThresholds(int thresholdNumber,
-                           float thresholdMax,
-                           Color & colorMax);
-    void SortThresholds();
-    void Actu(int val);
+  virtual bool LoadXMLConfiguration(void);
+  void ProcessThresholds(int thresholdNumber,
+                         float thresholdMax,
+                         Color & colorMax);
+  void SortThresholds();
+  void Actu(int val);
 };
 
 #endif /* ENERGY_BAR_H */
