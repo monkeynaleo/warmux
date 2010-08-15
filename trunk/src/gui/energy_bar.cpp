@@ -50,7 +50,7 @@ EnergyBar::EnergyBar(uint _x,
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  for(int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
+  for (int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
     std::ostringstream color_name;
     color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
     Color colors_value = GetResourceManager().LoadColor(res, color_name.str());
@@ -104,12 +104,12 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
     if (0 == thresholdNumber) {
       Threshold first;
-      first.value = 0.0;
+      first.value = 0.0f;
       first.color = colorMax;
-      first.redCoef = 0.0;
-      first.greenCoef = 0.0;
-      first.blueCoef = 0.0;
-      first.alphaCoef = 0.0;
+      first.redCoef = 0.0f;
+      first.greenCoef = 0.0f;
+      first.blueCoef = 0.0f;
+      first.alphaCoef = 0.0f;
       listThresholds.push_back(first);
     }
     return;
@@ -117,17 +117,16 @@ void EnergyBar::ProcessThresholds(int thresholdNumber,
 
   Color colorMin = listThresholds[thresholdNumber - 1].color;
   float thresholdMin = listThresholds[thresholdNumber - 1].value;
-  uint size = orientation == PROG_BAR_HORIZONTAL ? width : height;
-  float one_hunderd = 100;
-  float range = size * (thresholdMax - thresholdMin) / one_hunderd;
+  uint size = (orientation == PROG_BAR_HORIZONTAL) ? width : height;
+  float inv_range = 100.0f / (size * (thresholdMax - thresholdMin));
 
   Threshold newThreshold;
   newThreshold.value = thresholdMax;
   newThreshold.color = colorMax;
-  newThreshold.redCoef   = (colorMax.GetRed()   - colorMin.GetRed())   / range;
-  newThreshold.greenCoef = (colorMax.GetGreen() - colorMin.GetGreen()) / range;
-  newThreshold.blueCoef  = (colorMax.GetBlue()  - colorMin.GetBlue())  / range;
-  newThreshold.alphaCoef = (colorMax.GetAlpha() - colorMin.GetAlpha()) / range;
+  newThreshold.redCoef   = (colorMax.GetRed()   - colorMin.GetRed())   * inv_range;
+  newThreshold.greenCoef = (colorMax.GetGreen() - colorMin.GetGreen()) * inv_range;
+  newThreshold.blueCoef  = (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_range;
+  newThreshold.alphaCoef = (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_range;
   listThresholds.push_back(newThreshold);
 }
 

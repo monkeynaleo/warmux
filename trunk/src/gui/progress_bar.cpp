@@ -129,11 +129,11 @@ void ProgressBar::InitVal(int pval, int pmin, int pmax,
   bar_value   = ComputeBarValue(val);
 
   if (gradientMode) {
-    float fmax = max;
-    coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   / fmax;
-    coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) / fmax;
-    coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  / fmax;
-    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) / fmax;
+    float inv_fmax = 1.0f / max;
+    coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   * inv_fmax;
+    coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) * inv_fmax;
+    coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_fmax;
+    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_fmax;
   }
 }
 
