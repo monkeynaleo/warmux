@@ -94,7 +94,18 @@ static void I18N_SetDir(const std::string &dir)
 
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
-  setlocale(LC_ALL, "");
+#ifdef ANDROID
+  // setlocale always return NULL
+  setenv("LANG", default_language.c_str(), 1);
+#else
+  const char *locale = setlocale(LC_ALL, "");
+
+  if (!locale) {
+    fprintf(stderr, "Couldn't set locale!\n");
+    return;
+  }
+  printf("o Locale: %s\n", locale);
+#endif
 
 #ifdef _WIN32
   std::string variable = "LANGUAGE=";
