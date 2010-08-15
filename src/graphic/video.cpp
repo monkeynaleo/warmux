@@ -143,9 +143,13 @@ void Video::ComputeAvailableConfigs()
 bool Video::__SetConfig(const int width, const int height, const bool _fullscreen, const bool _hardware)
 {
   bool __fullscreen = _fullscreen;
-#ifdef __APPLE__
+
+#ifdef ANDROID
+  window.SetSurface(SDL_SetVideoMode(width, height, 16, SDL_SWSURFACE));
+#else
+#  ifdef __APPLE__
   __fullscreen = false; // Never set fullscreen with OSX, as it's buggy
-#endif
+#  endif
 
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
@@ -154,10 +158,6 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
   } else {
     flags |= SDL_SWSURFACE;
   }
-
-#ifdef ANDROID
-  window.SetSurface(SDL_SetVideoMode(width, height, 16, flags&~SDL_DOUBLEBUF));
-#else
   window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
 #endif
 
