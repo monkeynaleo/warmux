@@ -34,11 +34,11 @@ class WeaponStrengthBar : public ProgressBar
   virtual void InitPos (uint x, uint y, uint larg, uint haut);
   Color ComputeValueColor(int val) const;
  private:
-  bool visible ;
+  bool visible;
   DecoratedBox * m_box;
   Sprite *last_fire;
   PolygonItem * m_item_last_fire;
   void FetchData();
-} ;
+};
 
 #endif // WEAPON_STRENGTH_BAR_H
