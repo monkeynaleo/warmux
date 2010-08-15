@@ -3,7 +3,7 @@
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
-//#define ENABLE_NLS 0
+#define ENABLE_NLS 1
 
 /* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
    CoreFoundation framework. */
@@ -15,14 +15,14 @@
 
 /* Define if the GNU dcgettext() function is already present or preinstalled.
    */
-//#define HAVE_DCGETTEXT 0
+#define HAVE_DCGETTEXT 1
 
 /* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
    */
 //#define HAVE_DIRENT_H 1
 
 /* Define if the GNU gettext() function is already present or preinstalled. */
-//#define HAVE_GETTEXT 0
+#define HAVE_GETTEXT 1
 
 /* Define if you have the iconv() function and it works. */
 #define HAVE_ICONV 1
