@@ -218,9 +218,9 @@ std::string GetTmpDir()
 #else
 
 #  if defined(ANDROID)
-std::string GetHome() { return ANDROID_HOME; }
+std::string GetHome() { return "/sdcard"; }
 std::string GetOldPersonalDir() { return ""; }
-std::string GetTmpDir() { return ANDROID_HOME; }
+std::string GetTmpDir() { return "/sdcard"; }
 #  else // Linux or Apple
 std::string GetHome()
 {
