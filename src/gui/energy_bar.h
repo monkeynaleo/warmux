@@ -64,7 +64,7 @@ public:
   virtual ~EnergyBar(void) {}
 
   virtual bool LoadXMLConfiguration(void);
-  void ProcessThresholds(int thresholdNumber,
+  void ProcessThresholds(uint thresholdNumber,
                          float thresholdMax,
                          Color & colorMax);
   void SortThresholds();

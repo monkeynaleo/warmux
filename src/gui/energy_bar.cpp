@@ -50,7 +50,7 @@ EnergyBar::EnergyBar(uint _x,
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  for (int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
+  for (uint i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
     std::ostringstream color_name;
     color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
     Color colors_value = GetResourceManager().LoadColor(res, color_name.str());
@@ -97,7 +97,7 @@ bool EnergyBar::LoadXMLConfiguration()
   return true;
 }
 
-void EnergyBar::ProcessThresholds(int thresholdNumber,
+void EnergyBar::ProcessThresholds(uint thresholdNumber,
                                   float thresholdMax,
                                   Color & colorMax)
 {
