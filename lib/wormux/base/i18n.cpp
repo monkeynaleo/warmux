@@ -46,26 +46,27 @@ char* localization(const char * message) {
 }
 #endif /* USE_FRIBIDI */
 
+#define BUFFER_SIZE   512
+
 std::string Format(const char *format, ...)
 {
-  const int bufferSize = 256;
-  char buffer[bufferSize];
+  char buffer[BUFFER_SIZE];
   va_list argp;
   std::string result;
 
   va_start(argp, format);
-  int size = vsnprintf(buffer, bufferSize, format, argp);
+  int size = vsnprintf(buffer, BUFFER_SIZE, format, argp);
   va_end(argp);
 
-  if (size < 0)
-    Error("Error formating string...");
+  //if (size < 0)
+  //  Error("Error formating string...");
 
-  if (size < bufferSize) {
+  if (size < BUFFER_SIZE) {
     result = std::string(buffer);
   } else {
     char *bigBuffer = (char *)malloc((size + 1) * sizeof(char));
     if (bigBuffer == NULL)
-      Error( "Out of memory !");
+      Error("Out of memory !");
 
     // We need to redo va_start/va_end before calling vsnprintf
     // with same arguments else the va_list may be already modified
