@@ -155,8 +155,7 @@ DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
 void DiscoGrenadeLauncher::UpdateTranslationStrings()
 {
   m_name = _("Disco Grenade");
-  /* FILL IT */
-  /* m_help = _(" "); */
+  m_help = _("Up/Down: Set direction\nSet timer 1-6 using +/- or 1-6 keys\nPress space till desired strength");
 }
 
 WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()

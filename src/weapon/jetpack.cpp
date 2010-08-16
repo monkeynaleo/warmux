@@ -55,8 +55,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 void JetPack::UpdateTranslationStrings()
 {
   m_name = _("Jetpack");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to rise up\nTry to have a soft landing.");
 }
 
 

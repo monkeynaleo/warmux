@@ -74,7 +74,7 @@ Airhammer::Airhammer():
 void Airhammer::UpdateTranslationStrings()
 {
   m_name = _("Airhammer");
-  m_help = _("How to use it : keep the space key pressed\nan ammo per turn");
+  m_help = _("Press space to dig\nAmmo is used when counter reaches zero\nOne ammo per turn");
 }
 
 //-----------------------------------------------------------------------------

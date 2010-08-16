@@ -85,8 +85,7 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
 void Shotgun::UpdateTranslationStrings()
 {
   m_name = _("Shotgun");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot\nUse Up/Down to change initial angle");
 }
 
 // Return a buckshot instance for the shotgun

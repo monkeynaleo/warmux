@@ -170,8 +170,7 @@ Grapple::Grapple() :
 void Grapple::UpdateTranslationStrings()
 {
   m_name = _("Grapple");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot grapple\nUse left/right to swing\nPress space to release");
 }
 
 Grapple::~Grapple()

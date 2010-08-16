@@ -222,8 +222,7 @@ TuxLauncher::TuxLauncher() :
 void TuxLauncher::UpdateTranslationStrings()
 {
   m_name = _("SuperTux");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Set initial direction with up/down\nPress space to launch\nUse Left/Right to change direction");
 }
 
 WeaponProjectile * TuxLauncher::GetProjectileInstance()

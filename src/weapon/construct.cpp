@@ -68,9 +68,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 void Construct::UpdateTranslationStrings()
 {
   m_name = _("Construct");
-
-  /* TODO: FILL IT */
-  /* m_help = */
+  m_help = _("Klick onto the place, where you\nwant to place the construction.\nUp/down changes direction.");
 }
 
 Construct::~Construct()

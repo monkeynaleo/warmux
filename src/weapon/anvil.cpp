@@ -139,7 +139,7 @@ AnvilLauncher::AnvilLauncher() :
 void AnvilLauncher::UpdateTranslationStrings()
 {
   m_name = _("Anvil");
-  m_help = _("How to use it : left click on the target\nan ammo per turn");
+  m_help = _("Left click on the target\nAnvil kill all guys below it.\nOne ammo per turn");
 }
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)

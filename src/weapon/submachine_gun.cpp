@@ -95,8 +95,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
 void SubMachineGun::UpdateTranslationStrings()
 {
   m_name = _("Submachine Gun");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot\nUse Up/Down to change initial angle\nChange angle while shooting");
 }
 
 // Return a projectile instance for the submachine gun

@@ -61,7 +61,7 @@ Blowtorch::Blowtorch() :
 void Blowtorch::UpdateTranslationStrings()
 {
   m_name = _("Blowtorch");
-  m_help = _("How to use it : keep the space key pressed\nAngle : Up/Down\nan ammo per turn");
+  m_help = _("Keep the space key pressed\nAngle: Up/Down\nOne ammo per turn");
 }
 
 void Blowtorch::p_Deselect()

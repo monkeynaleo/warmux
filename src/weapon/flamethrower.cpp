@@ -132,8 +132,7 @@ FlameThrower::FlameThrower() : WeaponLauncher(WEAPON_FLAMETHROWER, "flamethrower
 void FlameThrower::UpdateTranslationStrings()
 {
   m_name = _("Flame Thrower");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot\nUse Up/Down to change initial angle\nChange angle while shooting");
 }
 
 // Return a projectile instance for the submachine gun

@@ -114,8 +114,7 @@ Dynamite::Dynamite() :
 void Dynamite::UpdateTranslationStrings()
 {
   m_name = _("Dynamite");
-  /*TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Set timer 1-6 using +/- or 1-6 keys\nSpace to place dynamite");
 }
 
 WeaponProjectile * Dynamite::GetProjectileInstance()

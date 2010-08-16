@@ -47,8 +47,7 @@ LowGrav::LowGrav() :
 void LowGrav::UpdateTranslationStrings()
 {
   m_name = _("LowGrav");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to use\nGravity is decreased\nEnds when selecting another weapon");
 }
 
 void LowGrav::p_Deselect()
