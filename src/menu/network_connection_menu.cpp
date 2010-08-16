@@ -135,18 +135,20 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
-  uint max_width = GetMainWindow().GetWidth()-50;
+  uint max_width = 0.95f*GetMainWindow().GetWidth();
+  uint offset    = (GetMainWindow().GetWidth() - max_width)/2;
   uint width     = max_width - 10;
 
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
-                               GetMainWindow().GetHeight()-180));
-  tabs->SetPosition(25, 25);
+                               GetMainWindow().GetHeight()-140));
+  tabs->SetPosition(offset, offset);
 
   // #############################
   /* client connection related widgets */
   Box * cl_connection_box = new VBox(W_UNDEF, false, false);
   cl_connection_box->SetBorder(Point2i(0,0));
+  tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
 
   // Public battles
   Box * cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -177,9 +179,17 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   // #############################
   // Manual connection
-  cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
-                                         Font::FONT_MEDIUM, Font::FONT_BOLD, c_red,
-                                         Text::ALIGN_LEFT_TOP, true));
+  Box *manual_connection_box;
+  if (GetMainWindow().GetHeight() < 480) {
+    manual_connection_box = new VBox(W_UNDEF, false, false);
+    manual_connection_box->SetBorder(Point2i(0,0));
+    tabs->AddNewTab("TAB_manual", _("Manual connection"), manual_connection_box);
+  } else {
+    cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
+                                           Font::FONT_MEDIUM, Font::FONT_BOLD, c_red,
+                                           Text::ALIGN_LEFT_TOP, true));
+    manual_connection_box = cl_connection_box;
+  }
 
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -190,7 +200,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_server_address = new TextBox(Config::GetInstance()->GetNetworkClientHost(), (3*width)/4);
   cl_tmp_box->AddWidget(cl_server_address);
 
-  cl_connection_box->AddWidget(cl_tmp_box);
+  manual_connection_box->AddWidget(cl_tmp_box);
 
   // Server port
   cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -201,7 +211,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_port_number = new TextBox(Config::GetInstance()->GetNetworkClientPort(), (3*width)/4);
   cl_tmp_box->AddWidget(cl_port_number);
 
-  cl_connection_box->AddWidget(cl_tmp_box);
+  manual_connection_box->AddWidget(cl_tmp_box);
 
   // Server password
   cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -212,8 +222,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_server_pwd = new PasswordBox("", (3*width)/4);
   cl_tmp_box->AddWidget(cl_server_pwd);
 
-  cl_connection_box->AddWidget(cl_tmp_box);
-  tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
+  manual_connection_box->AddWidget(cl_tmp_box);
 
   // #############################
   /* server connection related widgets */
@@ -274,7 +283,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_net_games_lst->SetSize(net_games_lst_width, net_games_lst_height);
 
   // Warning about experimental networking
-  Point2i msg_box_pos(25, tabs->GetPositionY() + tabs->GetSizeY() + 10);
+  Point2i msg_box_pos(offset, tabs->GetPositionY() + tabs->GetSizeY() + 10);
   Point2i msg_box_size(max_width,
                        GetMainWindow().GetHeight() - 50 - msg_box_pos.y);
 
