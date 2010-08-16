@@ -111,9 +111,8 @@ msgstr ""
 "furzen lassen."
 
 #: src/object/medkit.cpp:57
-#, fuzzy, c-format
 msgid "%s has won %u points of energy!"
-msgstr "%s hat %u Lebenspunkt gewonnen!"
+msgstr "%s hat %u Lebenspunkte gewonnen!"
 
 #: src/game/game.cpp:1036
 #, c-format
@@ -121,7 +120,6 @@ msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied der Mannschaft %s getötet!"
 
 #: src/weapon/mine.cpp:121
-#, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
 
@@ -347,7 +345,7 @@ msgstr[1] ""
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
 msgstr[0] "Mannschaft %s hat %u Railgun gewonnen, spieß sie auf!"
-msgstr[1] "Mannschaft %s hat %u Railguns gewonnen!"
+msgstr[1] "Mannschaft %s hat %u Railguns gewonnen, spieß sie auf!"
 
 #: src/weapon/riot_bomb.cpp:131
 #, c-format
@@ -498,7 +496,6 @@ msgid "And the winner is..."
 msgstr "Und der Gewinner ist …"
 
 #: src/weapon/baseball.cpp:57
-#, fuzzy
 msgid ""
 "Angle: Up/Down\n"
 "Fire: space key\n"
@@ -639,6 +636,8 @@ msgid ""
 "Click onto map to teleport yourself\n"
 "to a place of your choice."
 msgstr ""
+"Klick auf die Karte, um dich selbst\n"
+"zum gewählten Ort zu teleportieren."
 
 #: src/weapon/construct.cpp:71
 msgid ""
@@ -646,6 +645,9 @@ msgid ""
 "want to place the construction.\n"
 "Up/down changes direction."
 msgstr ""
+"Klick auf die Karte, um einen\n"
+"Stahlträger zu platzieren.\n"
+"Hoch/Runter dreht den Träger."
 
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:457
@@ -881,6 +883,9 @@ msgid ""
 "Press space to inject toxic\n"
 "Opponent will die soon"
 msgstr ""
+"Gehe zu einem Gegner,\n"
+"drücke Space, um Gift zu spritzen,\n"
+"gegn. Figur wird bald sterben."
 
 #: src/menu/options_menu.cpp:141
 msgid "Graphics"
@@ -953,7 +958,6 @@ msgstr "Startenergie"
 
 #: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:120
-#, fuzzy
 msgid ""
 "Initial fire angle: Up/Down\n"
 "Fire: Press space until desired strength is reached\n"
@@ -997,7 +1001,6 @@ msgid "Jump backwards"
 msgstr "Rückwärtssalto"
 
 #: src/weapon/blowtorch.cpp:64
-#, fuzzy
 msgid ""
 "Keep the space key pressed\n"
 "Angle: Up/Down\n"
@@ -1246,6 +1249,9 @@ msgid ""
 "Opens automatically\n"
 "Use left/right to change direction"
 msgstr ""
+"Der Fallschirm öffnet sich selbständig,\n"
+"Mit ihm ist eine sanfte Landung sicher.\n"
+"Mit Links/Rechts kann die Richtung gest. werden"
 
 #: src/menu/network_connection_menu.cpp:172
 #: src/menu/network_connection_menu.cpp:211
@@ -1263,6 +1269,9 @@ msgid ""
 "Mine explodes when someone steps onto it\n"
 "May be a fake mine by chance"
 msgstr ""
+"Platziere Mine mit Space\n"
+"Die Mine explodiert bei Berührung\n"
+"Minen können zuf. Blindgänger sein."
 
 #: src/menu/main_menu.cpp:57
 msgid "Play"
@@ -1298,9 +1307,8 @@ msgid "Port:"
 msgstr "Port:"
 
 #: src/weapon/suicide.cpp:47
-#, fuzzy
 msgid "Press space to commit suicide"
-msgstr "%s von Team %s beging Selbstmord!"
+msgstr "Leertaste drücken, um Selbstmord zu begehen."
 
 #: src/weapon/airhammer.cpp:77
 msgid ""
@@ -1308,12 +1316,17 @@ msgid ""
 "Ammo is used when counter reaches zero\n"
 "One ammo per turn"
 msgstr ""
+"Space zum graben drücken\n"
+"Wenn Zähler 0 erreicht, \n"
+"ist der Presslufthammer verbraucht."
 
 #: src/weapon/jetpack.cpp:58
 msgid ""
 "Press space to rise up\n"
 "Try to have a soft landing."
 msgstr ""
+"Drücke Space um höher zu steigen.\n"
+"Probiere weich zu landen."
 
 #: src/weapon/gun.cpp:74 src/weapon/shotgun.cpp:88
 #: src/weapon/snipe_rifle.cpp:243
@@ -1321,6 +1334,8 @@ msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle"
 msgstr ""
+"Space: Schuss abgeben\n"
+"Hoch/Runter: Schusswinkel anpassen."
 
 #: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:98
 msgid ""
@@ -1328,6 +1343,8 @@ msgid ""
 "Use Up/Down to change initial angle\n"
 "Change angle while shooting"
 msgstr ""
+"Space: Schuss abgeben\n"
+"Hoch/Runter: Schusswinkel anpassen."
 
 #: src/weapon/grapple.cpp:173
 msgid ""
@@ -1335,12 +1352,17 @@ msgid ""
 "Use left/right to swing\n"
 "Press space to release"
 msgstr ""
+"Enterhaken mit Space werfen\n"
+"Links/Rechts um zu schaukeln\n"
+"Space drücken, um los zu lassen."
 
 #: src/weapon/skip_turn.cpp:47
 msgid ""
 "Press space to skip turn.\n"
 "Please notice: No chance to undo!"
 msgstr ""
+"Space drücken, um Zug zu überspringen.\n"
+"Achtung: Aktion kann nicht rückgängig gemacht werden."
 
 #: src/weapon/lowgrav.cpp:50
 msgid ""
@@ -1348,6 +1370,9 @@ msgid ""
 "Gravity is decreased\n"
 "Ends when selecting another weapon"
 msgstr ""
+"Mit Space verwenden,\n"
+"die Gravitation wird verringert.\n"
+"Effekt endet, wenn andere Waffe gewählt wird."
 
 #: src/menu/network_connection_menu.cpp:158
 msgid "Public battles"
@@ -1375,7 +1400,7 @@ msgstr "Spiel verlassen"
 
 #: src/weapon/rail_gun.cpp:98
 msgid "Rail Gun"
-msgstr ""
+msgstr "Railgun"
 
 #: src/menu/map_selection_box.cpp:226
 msgid "Random map"
@@ -1414,18 +1439,16 @@ msgid "Scroll on border"
 msgstr "Am Rand scrollen?"
 
 #: src/interface/man_machine_interface.cpp:1107
-#, fuzzy
 msgid "Select 'Duel' weapon category"
-msgstr "Aus Spezialwaffen wählen"
+msgstr "Aus Nahkampfwaffen wählen"
 
 #: src/interface/man_machine_interface.cpp:1103
 msgid "Select 'Heavy' weapon category"
 msgstr "Aus Raketen wählen"
 
 #: src/interface/man_machine_interface.cpp:1108
-#, fuzzy
 msgid "Select 'Move' weapon category"
-msgstr "Aus Raketen wählen"
+msgstr "Aus Bewegungsutensilien wählen"
 
 #: src/interface/man_machine_interface.cpp:1104
 msgid "Select 'Rifle' weapon category"
@@ -1440,9 +1463,8 @@ msgid "Select 'Throwing' weapon category"
 msgstr "Aus Wurfwaffen wählen"
 
 #: src/interface/man_machine_interface.cpp:1109
-#, fuzzy
 msgid "Select 'Tool' weapon category"
-msgstr "Aus Schusswaffen wählen"
+msgstr "Aus Werkzeugen wählen"
 
 #: src/interface/man_machine_interface.cpp:1110
 msgid "Select weapon category 8"
@@ -1481,6 +1503,9 @@ msgid ""
 "Press space to launch\n"
 "Use Left/Right to change direction"
 msgstr ""
+"Anfangsrichtung mit hoch/runter wählen\n"
+"Leertaste zum abfeuern drücken\n"
+"Mit Links/Rechts lenken"
 
 #: src/weapon/gnu.cpp:174 src/weapon/polecat.cpp:197
 msgid ""
@@ -1488,12 +1513,17 @@ msgid ""
 "Press space to shoot\n"
 "One shoot per turn"
 msgstr ""
+"Zeitzünder auf 1-6 mit +/- setzen,\n"
+"Mit Leertaste schießen.\n"
+"Ein Schuss pro Runde."
 
 #: src/weapon/dynamite.cpp:117
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Space to place dynamite"
 msgstr ""
+"Zeitzünder auf 1-6 mit +/- setzen,\n"
+"Dynamit mit Space platzieren."
 
 #: src/interface/man_machine_interface.cpp:1133
 msgid "Shoot"
@@ -1728,7 +1758,6 @@ msgid "Time"
 msgstr "Zeit"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
-#, fuzzy
 msgid ""
 "Timeout: Mouse wheel or Page Up/Down\n"
 "Angle: Up/Down\n"
@@ -1737,11 +1766,10 @@ msgid ""
 msgstr ""
 "Zeitzünder: Mausrad oder Bild Auf/Ab\n"
 "Winkel: Hoch/Runter\n"
-"Feuer: Leertaste gedrückt halten, bis die gewünschte Stärke erreicht ist\n"
+"Feuer: Space drücken, gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
 #: src/weapon/bounce_ball.cpp:90
-#, fuzzy
 msgid ""
 "Timeout: Mouse wheel or Page Up/Down\n"
 "Angle: Up/Down\n"
@@ -1810,19 +1838,21 @@ msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space till desired strength"
 msgstr ""
+"Schusswinkel mit hoch/runter festlegen\n"
+"Zeitzünder auf 1-6 mit +/- setzen\n"
+"Space bis zur gewünschten Stärke halten."
 
 #: src/weapon/anvil.cpp:142
-#, fuzzy
 msgid ""
 "Usage: left click on the target\n"
 "Anvil kill all characters beneath.\n"
 "One ammo per turn"
 msgstr ""
 "Linksklick aufs Ziel\n"
-"eine Munition pro Runde"
+"Spieler unter Amboss werden zerquetscht\n"
+"Ein Amboss pro Runde."
 
 #: src/weapon/auto_bazooka.cpp:225
-#, fuzzy
 msgid ""
 "Usage: left click on the target\n"
 "Initial fire angle: Up/Down\n"
@@ -1831,7 +1861,7 @@ msgid ""
 msgstr ""
 "Linksklick auf das Ziel\n"
 "Feuerwinkel am Anfang: Hoch/Runter\n"
-"Feuer : Leertaste gedrückt halten bis die gewünschte Stärke erreicht ist\n"
+"Feuer: Space halten, bis gewünschte Stärke erreicht ist\n"
 "eine Munition pro Runde"
 
 #: src/main.cpp:182
@@ -1907,7 +1937,7 @@ msgstr "Sieger"
 #: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
-msgstr ""
+msgstr "Was für ein Schuss! Das waren %u auf einmal."
 
 #: src/main.cpp:194
 msgid "Wormux launching..."
@@ -1962,7 +1992,6 @@ msgid "aka"
 msgstr "aka"
 
 #: src/weapon/air_attack.cpp:218
-#, fuzzy
 msgid ""
 "attack direction: Left/Right\n"
 "Bombing: Left click on the target\n"
@@ -2010,139 +2039,3 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
-
-#~ msgid ""
-#~ "How to use it : keep the space key pressed\n"
-#~ "an ammo per turn"
-#~ msgstr ""
-#~ "Leertaste gedrückt halten\n"
-#~ "ein Schuss pro Zug"
-
-#~ msgid "Select 'Duel' category"
-#~ msgstr "Aus Nahkampfwaffen wählen"
-
-#~ msgid "Select 'Move' category"
-#~ msgstr "Aus Transportutensilien wählen"
-
-#~ msgid "Select 'Tool' category"
-#~ msgstr "Aus Werkzeugen wählen"
-
-#~ msgid "Head commander: "
-#~ msgstr "Anführer: "
-
-#~ msgid "Show/hide minimap"
-#~ msgstr "zeige/verberge Übersichtskarte"
-
-#~ msgid "Click: Center the camera on the character"
-#~ msgstr "Klick: Kamera auf akt. Figur zentrieren"
-
-#~ msgid ""
-#~ "Error:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Fehler:\n"
-#~ "%s"
-
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
-#~ msgstr "Komm nach #wormux auf irc.freenode.net um Gegner zu finden."
-
-#~ msgid "Max number of players:"
-#~ msgstr "Maximale Anzahl an Spielern:"
-
-#~ msgid "%s has decided to injure %s"
-#~ msgstr "%s hat sich entschlossen %s zu verletzen"
-
-#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
-#~ msgstr ""
-#~ "%s versucht mit einer anderen Version zu verbinden: Client=%s, Server=%s."
-
-#, fuzzy
-#~ msgid "%s will shoot %s"
-#~ msgstr "%s erschießt %s"
-
-#, fuzzy
-#~ msgid "Add custom team"
-#~ msgstr "Füge eigenes (modifiziertes) Team hinzu"
-
-#~ msgid "Connect !"
-#~ msgstr "Verbinden !"
-
-#~ msgid "Connect to an internet game"
-#~ msgstr "Zu einem Internetspiel verbinden"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Konnte die neuste Version von %s nicht abrufen"
-
-#~ msgid "Delete custom team"
-#~ msgstr "Lösche eigenes (modifiziertes) Team"
-
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Fehler in %s:%lu (Wormux %s) : %s"
-
-#~ msgid "Error loading team's data %s:"
-#~ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
-
-#~ msgid "Error while loading configuration file: %s"
-#~ msgstr "Fehler beim Laden der Konfigurationsdatei: %s"
-
-#~ msgid "Error while loading default configuration file: %s"
-#~ msgstr "Fehler beim Laden der Standard-Konfigurationsdatei: %s"
-
-#~ msgid "Error while loading game mode %s (file %s):"
-#~ msgstr "Fehler beim Laden des Spielmodus %s (Datei %s):"
-
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration"
-#~ msgstr ""
-#~ "Fehler: Dein Server kann über das Internet nicht erreicht werden. "
-#~ "Überprüfe deine Firewall-Konfiguration"
-
-#, fuzzy
-#~ msgid ""
-#~ "Error: Your server is not reachable from the internet. Check your "
-#~ "firewall configuration: TCP Port %u must accept connection from the "
-#~ "outside. If you are not directly connected to the internet, check your "
-#~ "router configuration: TCP Port %u must be forwarded on your computer."
-#~ msgstr ""
-#~ "Fehler: Ihr Server ist nicht aus dem Internet erreichbar. Prüfen Sie ihre "
-#~ "Firewallkonfiguration: TCP-Port %s muss Verbindungen von aussen "
-#~ "akzeptieren. Prüfen sie ihre Routerkonfiguration, falls sie nicht direkt "
-#~ "mit dem Internet verbunden sind: TCP-Port %s muss an ihren Computer "
-#~ "weitergeleitet werden."
-
-#~ msgid "HOME directory (environment variable $HOME) could not be found!"
-#~ msgstr ""
-#~ "HOME-Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
-
-#, fuzzy
-#~ msgid "Head commander:"
-#~ msgstr "Hauptkommandant:"
-
-#~ msgid "Network initialization"
-#~ msgstr "Netzwerkinitialisierung"
-
-#~ msgid "Player name"
-#~ msgstr "Spielername?"
-
-#~ msgid "Refresh"
-#~ msgstr "Aktualisieren"
-
-#, fuzzy
-#~ msgid ""
-#~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
-#~ "php"
-#~ msgstr ""
-#~ "Entschuldigen Sie, ihre Version ist nicht mehr unterstützt. Die "
-#~ "unterstützten Versionen sind %s. Sie können eine neue Version auf http://"
-#~ "www.wormux.org/wiki/download.php herunterlaten."
-
-#~ msgid "Tools"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Unnamed"
-#~ msgstr "Namenlos"
-
-#~ msgid "XML error during loading map '%s': "
-#~ msgstr "XML-Fehler beim Laden der Karte '%s':"
