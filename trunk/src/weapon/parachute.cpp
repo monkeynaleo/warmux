@@ -62,8 +62,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 void Parachute::UpdateTranslationStrings()
 {
   m_name = _("Parachute");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Parachute avoids hitting the ground to hard\nOpens automatically\nUse left/right to manipulate direction");
 }
 
 Parachute::~Parachute()

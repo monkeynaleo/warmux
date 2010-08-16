@@ -71,8 +71,7 @@ Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 void Gun::UpdateTranslationStrings()
 {
   m_name = _("Gun");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot\nUse Up/Down to change initial angle");
 }
 
 WeaponProjectile * Gun::GetProjectileInstance()

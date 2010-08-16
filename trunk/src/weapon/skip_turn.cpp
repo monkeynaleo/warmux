@@ -44,8 +44,7 @@ SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 void SkipTurn::UpdateTranslationStrings()
 {
   m_name = _("Skip turn");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to skip turn.\nPlease notice: No chance to undo!");
 }
 
 //-----------------------------------------------------------------------------

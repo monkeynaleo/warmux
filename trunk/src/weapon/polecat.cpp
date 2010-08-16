@@ -194,8 +194,7 @@ PolecatLauncher::PolecatLauncher() :
 void PolecatLauncher::UpdateTranslationStrings()
 {
   m_name = _("Polecat Launcher");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Set timer 1-6 using +/- or 1-6 keys\nPress space to shoot\nOne shoot per turn");
 }
 
 bool PolecatLauncher::p_Shoot()

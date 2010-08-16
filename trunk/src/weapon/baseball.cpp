@@ -54,7 +54,7 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 void Baseball::UpdateTranslationStrings()
 {
   m_name = _("Baseball Bat");
-  m_help = _("Angle : Up/Down\nFire : space key\na hit per turn");
+  m_help = _("Angle: Up/Down\nFire: space key\na hit per turn");
 }
 
 bool Baseball::p_Shoot()

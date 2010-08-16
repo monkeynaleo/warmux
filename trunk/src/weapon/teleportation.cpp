@@ -48,8 +48,7 @@ Teleportation::Teleportation() :
 void Teleportation::UpdateTranslationStrings()
 {
   m_name = _("Teleportation");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Click onto map to teleport yourself\nto a place of your choice.");
 }
 
 bool Teleportation::p_Shoot ()

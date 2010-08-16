@@ -87,7 +87,7 @@ BounceBallLauncher::BounceBallLauncher() :
 void BounceBallLauncher::UpdateTranslationStrings()
 {
   m_name = _("Bounce Ball");
-  m_help = _("Timeout : Mouse wheel or Page Up/Down\nAngle : Up/Down\nFire : space key\nan ammo per turn");
+  m_help = _("Timeout: Mouse wheel or Page Up/Down\nAngle: Up/Down\nFire: space key\nOne ammo per turn");
 }
 
 WeaponProjectile * BounceBallLauncher::GetProjectileInstance()

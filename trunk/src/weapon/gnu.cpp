@@ -171,8 +171,7 @@ GnuLauncher::GnuLauncher() :
 void GnuLauncher::UpdateTranslationStrings()
 {
   m_name = _("Gnu Launcher");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Set timer 1-6 using +/- or 1-6 keys\nPress space to shoot\nOne shoot per turn");
 }
 
 bool GnuLauncher::p_Shoot()

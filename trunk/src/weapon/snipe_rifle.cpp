@@ -240,8 +240,7 @@ SnipeRifle::SnipeRifle()
 void SnipeRifle::UpdateTranslationStrings()
 {
   m_name = _("Sniper Rifle");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to shoot\nUse Up/Down to change initial angle");
 }
 
 WeaponProjectile * SnipeRifle::GetProjectileInstance()

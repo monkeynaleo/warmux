@@ -44,8 +44,7 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig
 void Suicide::UpdateTranslationStrings()
 {
   m_name = _("Commit Suicide");
-  /* TODO: FILL IT */
-  /* m_help = _(""); */
+  m_help = _("Press space to commit suicide");
 }
 
 bool Suicide::p_Shoot()
