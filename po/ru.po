@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 20:22+0200\n"
+"POT-Creation-Date: 2010-08-16 14:35+0200\n"
 "PO-Revision-Date: 2010-05-12 23:05+0700\n"
 "Last-Translator: Vladislav 'SnoUweR' Kovalev <snouwer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -113,13 +113,10 @@ msgid ""
 "fart."
 msgstr "%s сделал кое-что для окружающей среды, он не приказал скунсу пукнуть."
 
-#: src/object/medkit.cpp:69
-#, c-format
-msgid "%s has won %u point of energy!"
-msgid_plural "%s has won %u points of energy!"
-msgstr[0] "%s получил %u единицу энергии!"
-msgstr[1] "%s получил %u единицы энергии!"
-msgstr[2] "%s получил %u единиц энергии!"
+#: src/object/medkit.cpp:57
+#, fuzzy, c-format
+msgid "%s has won %u points of energy!"
+msgstr "%s получил %u единицу энергии!"
 
 #: src/game/game.cpp:1036
 #, c-format
@@ -148,7 +145,7 @@ msgid "%s team already has infinite ammo for the %s!"
 msgstr "Команда %s уже имеет бесконечный запас боеприпасов для %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:56
+#: src/weapon/skip_turn.cpp:55
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Команда %s пропустила свой ход."
@@ -161,7 +158,7 @@ msgstr[0] "Команда %s выиграла %u осколочную базук
 msgstr[1] "Команда %s выиграла %u осколочные базуки!"
 msgstr[2] "Команда %s выиграла %u базук!"
 
-#: src/weapon/gnu.cpp:251
+#: src/weapon/gnu.cpp:250
 #, fuzzy, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -203,7 +200,7 @@ msgstr[0] "Команда '%s выиграла %u наковальню! Разм
 msgstr[1] "Команда '%s выиграла %u наковальни! Размажьте их!"
 msgstr[2] "Команда '%s выиграла %u наковален! Размажьте их!"
 
-#: src/weapon/auto_bazooka.cpp:331
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -260,7 +257,7 @@ msgstr[0] "Команда %s выиграла %u кассетную бомбу!"
 msgstr[1] "Команда %s выиграла %u кассетные бомбы!"
 msgstr[2] "Команда %s выиграла %u кассетных бомб!"
 
-#: src/weapon/construct.cpp:84
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
@@ -268,7 +265,7 @@ msgstr[0] "Команда %s выиграла %u строительство! Н�
 msgstr[1] "Команда %s выиграла %u строительства! Не забудьте надеть каску."
 msgstr[2] "Команда %s выиграла %u строительств! Не забудьте надеть каску."
 
-#: src/weapon/disco_grenade.cpp:169
+#: src/weapon/disco_grenade.cpp:168
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -277,7 +274,7 @@ msgstr[0] "Команда %s выиграла %u диско-гранату! Ст
 msgstr[1] "Команда %s выиграла %u диско-гранаты! Станцуй пока бросаешь их!"
 msgstr[2] "Команда %s выиграла %u диско-гранат! Станцуй пока бросаешь их!"
 
-#: src/weapon/dynamite.cpp:149
+#: src/weapon/dynamite.cpp:148
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
@@ -285,7 +282,7 @@ msgstr[0] "Команда %s выиграла %u динамитную шашку
 msgstr[1] "Команда %s выиграла %u динамитные шашки!"
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:194
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -301,7 +298,7 @@ msgstr[0] "Команда %s выиграла %u футбольную бомбу
 msgstr[1] "Команда %s выиграла %u футбольные бомбы!"
 msgstr[2] "Команда %s выиграла %u пустотных бомб!"
 
-#: src/weapon/grapple.cpp:716
+#: src/weapon/grapple.cpp:715
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -309,7 +306,7 @@ msgstr[0] "Команда %s выиграла %u верёвку!"
 msgstr[1] "Команда %s выиграла %u захвата!"
 msgstr[2] "Команда %s выиграла %u захватов!"
 
-#: src/weapon/grenade.cpp:89
+#: src/weapon/grenade.cpp:88
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
@@ -317,7 +314,7 @@ msgstr[0] "Команда %s выиграла %u гранату!"
 msgstr[1] "Команда %s выиграла %u гранаты!"
 msgstr[2] "Команда %s выиграла %u гранат!"
 
-#: src/weapon/gun.cpp:97
+#: src/weapon/gun.cpp:96
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -325,7 +322,7 @@ msgstr[0] "Команда %s выиграла %u пистолет!"
 msgstr[1] "Команда %s выиграла %u пистолета!"
 msgstr[2] "Команда %s выиграла %u пистолетов!"
 
-#: src/weapon/jetpack.cpp:209
+#: src/weapon/jetpack.cpp:204
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -333,7 +330,7 @@ msgstr[0] "Команда %s выиграла %u реактивный ранец
 msgstr[1] "Команда %s выиграла %u реактивных ранца! Клёво!"
 msgstr[2] "Команда %s выиграла %u реактивных ранцев! Клёво!"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:83
 #, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
@@ -350,7 +347,7 @@ msgstr[2] ""
 "Команда %s выиграла %u антигравитаторов! Маленький шаг для человека, "
 "гигантский прыжок для бесплатного программного обеспечения!"
 
-#: src/weapon/mine.cpp:257
+#: src/weapon/mine.cpp:256
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -358,7 +355,7 @@ msgstr[0] "Команда %s выиграла %u мину!"
 msgstr[1] "Команда %s выиграла %u мины!"
 msgstr[2] "Команда %s выиграла %u мин!"
 
-#: src/weapon/parachute.cpp:176
+#: src/weapon/parachute.cpp:175
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -366,7 +363,7 @@ msgstr[0] "Команда %s выиграла %u парашют!"
 msgstr[1] "Команда %s выиграла %u парашюта!"
 msgstr[2] "Команда %s выиграла %u парашютов!"
 
-#: src/weapon/polecat.cpp:276
+#: src/weapon/polecat.cpp:275
 #, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -393,7 +390,7 @@ msgstr[0] "Команда %s выиграла %u пустотную бомбу!"
 msgstr[1] "Команда %s выиграла %u пустотные бомбы!"
 msgstr[2] "Команда %s выиграла %u пустотных бомб!"
 
-#: src/weapon/shotgun.cpp:129
+#: src/weapon/shotgun.cpp:128
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -409,7 +406,7 @@ msgstr[0] "Команда %s выиграла %u удар-шлепок по вр
 msgstr[1] "Команда %s выиграла %u ударов-шлепков по врагу! Попробуй увернись!"
 msgstr[2] "Команда %s выиграла %u захватов!"
 
-#: src/weapon/snipe_rifle.cpp:255
+#: src/weapon/snipe_rifle.cpp:254
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -424,7 +421,7 @@ msgstr[2] ""
 "Команда %s выиграла %u снайперских винтовок! Прицелься и пальни ему промеж "
 "глаз!"
 
-#: src/weapon/submachine_gun.cpp:149
+#: src/weapon/submachine_gun.cpp:148
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -432,7 +429,7 @@ msgstr[0] "Команда %s выиграла %u автомат!"
 msgstr[1] "Команда %s выиграла %u автомата!"
 msgstr[2] "Команда %s выиграла %u автоматов!"
 
-#: src/weapon/suicide.cpp:78
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -444,7 +441,7 @@ msgstr[2] ""
 "Команда %s выиграла %u суицидов! Используйте их все для получения экстра "
 "бонуса"
 
-#: src/weapon/syringe.cpp:117
+#: src/weapon/syringe.cpp:116
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -452,7 +449,7 @@ msgstr[0] "Команда %s выиграла %u шприц!"
 msgstr[1] "Команда %s выиграла %u шприца!"
 msgstr[2] "Команда %s выиграла %u шприцей!"
 
-#: src/weapon/teleportation.cpp:122
+#: src/weapon/teleportation.cpp:121
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -460,7 +457,7 @@ msgstr[0] "Команда %s выиграла %u телепортацию!"
 msgstr[1] "Команда %s выиграла %u телепортации!"
 msgstr[2] "Команда %s выиграла %u телепортаций!"
 
-#: src/weapon/skip_turn.cpp:67
+#: src/weapon/skip_turn.cpp:66
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -468,7 +465,7 @@ msgstr[0] "Команда %s выиграла %u пропуск хода! Вам
 msgstr[1] "Команда %s выиграла %u пропуска хода! Вам это понравится."
 msgstr[2] "Команда %s выиграла %u пропусков хода! Вам это понравится."
 
-#: src/weapon/supertux.cpp:314
+#: src/weapon/supertux.cpp:313
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -500,7 +497,7 @@ msgid "(dead)"
 msgstr "(мёртв)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:317
+#: src/menu/options_menu.cpp:316
 msgid "(system language)"
 msgstr "(системный язык)"
 
@@ -513,7 +510,7 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:519
+#: src/menu/options_menu.cpp:515
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -543,9 +540,10 @@ msgid "And the winner is..."
 msgstr "И победителем станосится..."
 
 #: src/weapon/baseball.cpp:57
+#, fuzzy
 msgid ""
-"Angle : Up/Down\n"
-"Fire : space key\n"
+"Angle: Up/Down\n"
+"Fire: space key\n"
 "a hit per turn"
 msgstr ""
 "Угол : Вверх/Вниз\n"
@@ -673,7 +671,7 @@ msgstr "Выбор игрока"
 msgid "Chat"
 msgstr ""
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:229
 msgid "Check updates online?"
 msgstr "Проверять обновления игры?"
 
@@ -684,6 +682,19 @@ msgstr "Выбрать карту случайно"
 #: src/game/game_mode.cpp:341
 msgid "Classic"
 msgstr "Классический"
+
+#: src/weapon/teleportation.cpp:51
+msgid ""
+"Click onto map to teleport yourself\n"
+"to a place of your choice."
+msgstr ""
+
+#: src/weapon/construct.cpp:71
+msgid ""
+"Click onto the place, where you\n"
+"want to place the construction.\n"
+"Up/down changes direction."
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:457
@@ -794,7 +805,7 @@ msgstr "Динамит"
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
-#: src/menu/options_menu.cpp:273
+#: src/menu/options_menu.cpp:272
 msgid "Effects volume"
 msgstr "Громкость эффектов"
 
@@ -816,7 +827,7 @@ msgstr "Ошибка при загрузке команды :"
 msgid "Error loading team :"
 msgstr "Ошибка при загрузке команды :"
 
-#: src/game/config.cpp:558 src/team/custom_team.cpp:167
+#: src/game/config.cpp:556 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -914,6 +925,13 @@ msgstr "Имя игры:"
 msgid "Gnu Launcher"
 msgstr "Антилопа GNU"
 
+#: src/weapon/syringe.cpp:70
+msgid ""
+"Go to opponent\n"
+"Press space to inject toxic\n"
+"Opponent will die soon"
+msgstr ""
+
 #: src/menu/options_menu.cpp:141
 msgid "Graphics"
 msgstr "Графика"
@@ -962,48 +980,6 @@ msgstr "Высокий прыжок"
 msgid "Host a game"
 msgstr "Стать сервером"
 
-#: src/weapon/blowtorch.cpp:64
-#, fuzzy
-msgid ""
-"How to use it : keep the space key pressed\n"
-"Angle : Up/Down\n"
-"an ammo per turn"
-msgstr ""
-"Правила использования : зажмите пробел\n"
-"Угол : Вверх/Вниз\n"
-"патрон за ход"
-
-#: src/weapon/airhammer.cpp:77
-#, fuzzy
-msgid ""
-"How to use it : keep the space key pressed\n"
-"an ammo per turn"
-msgstr ""
-"Правила использования : зажмите пробел\n"
-"патрон за ход"
-
-#: src/weapon/auto_bazooka.cpp:225
-#, fuzzy
-msgid ""
-"How to use it : left click on the target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Правила использования : щелкните левой кнопкой мыши на цели\n"
-"Начальный угол стрельбы : Вверх/Вниз\n"
-"Стрельба : удерживайте пробел до достижения желаемой силы\n"
-"патрон за ход"
-
-#: src/weapon/anvil.cpp:142
-#, fuzzy
-msgid ""
-"How to use it : left click on the target\n"
-"an ammo per turn"
-msgstr ""
-"Правила использования : щелкните левой кнопкой мыши на цели\n"
-"патрон за ход"
-
 #: src/game/game_classic.cpp:196
 msgid "Hurry up, you are too slow !!"
 msgstr "Торопитесь, вы слишком медленные !!"
@@ -1029,9 +1005,9 @@ msgstr "Начальная энергия"
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
-"Initial fire angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
+"Initial fire angle: Up/Down\n"
+"Fire: Press space until desired strength is reached\n"
+"One ammo per turn"
 msgstr ""
 "Начальный угол стрельбы : Вверх/Вниз\n"
 "Стрельба : удерживайте пробел до достижения желаемой силы\n"
@@ -1070,6 +1046,17 @@ msgstr "Прыжок"
 msgid "Jump backwards"
 msgstr "Обратное сальто"
 
+#: src/weapon/blowtorch.cpp:64
+#, fuzzy
+msgid ""
+"Keep the space key pressed\n"
+"Angle: Up/Down\n"
+"One ammo per turn"
+msgstr ""
+"Правила использования : зажмите пробел\n"
+"Угол : Вверх/Вниз\n"
+"патрон за ход"
+
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
 msgstr ""
@@ -1087,7 +1074,7 @@ msgstr "Выкидывает участников, обозначеных <nickn
 msgid "Language"
 msgstr "Язык"
 
-#: src/menu/options_menu.cpp:236
+#: src/menu/options_menu.cpp:235
 msgid "Left-handed mouse?"
 msgstr "Обменять назначение кнопок мыши?"
 
@@ -1154,7 +1141,7 @@ msgstr "Максимальный FPS"
 msgid "Mine"
 msgstr "Мина"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:249
 msgid "Misc"
 msgstr "Разное"
 
@@ -1228,11 +1215,11 @@ msgstr ""
 msgid "Multi-layer sky?"
 msgstr "Много-слойное небо?"
 
-#: src/menu/options_menu.cpp:261
+#: src/menu/options_menu.cpp:260
 msgid "Music volume"
 msgstr "Громкость музыки"
 
-#: src/menu/options_menu.cpp:256
+#: src/menu/options_menu.cpp:255
 msgid "Music?"
 msgstr "Музыка?"
 
@@ -1253,7 +1240,7 @@ msgstr "Никогда"
 msgid "New network game at "
 msgstr "Новая игра по сети"
 
-#: src/menu/options_menu.cpp:296
+#: src/menu/options_menu.cpp:295
 msgid "New player warning?"
 msgstr "Предупреждение о новом игроке?"
 
@@ -1316,6 +1303,13 @@ msgstr "Меню настроек"
 msgid "Parachute"
 msgstr "Парашют"
 
+#: src/weapon/parachute.cpp:65
+msgid ""
+"Parachute avoids hitting the ground too hard\n"
+"Opens automatically\n"
+"Use left/right to change direction"
+msgstr ""
+
 #: src/menu/network_connection_menu.cpp:172
 #: src/menu/network_connection_menu.cpp:211
 #: src/menu/network_connection_menu.cpp:251
@@ -1325,6 +1319,13 @@ msgstr "Пароль:"
 #: src/interface/man_machine_interface.cpp:1111
 msgid "Pause"
 msgstr "Пауза"
+
+#: src/weapon/mine.cpp:215
+msgid ""
+"Place mine by pressing space\n"
+"Mine explodes when someone steps onto it\n"
+"May be a fake mine by chance"
+msgstr ""
 
 #: src/menu/main_menu.cpp:57
 msgid "Play"
@@ -1359,6 +1360,58 @@ msgstr "Скунс"
 msgid "Port:"
 msgstr "Порт:"
 
+#: src/weapon/suicide.cpp:47
+#, fuzzy
+msgid "Press space to commit suicide"
+msgstr "Игрок %s из команды %s кончает жизнь самоубийством !"
+
+#: src/weapon/airhammer.cpp:77
+msgid ""
+"Press space to dig\n"
+"Ammo is used when counter reaches zero\n"
+"One ammo per turn"
+msgstr ""
+
+#: src/weapon/jetpack.cpp:58
+msgid ""
+"Press space to rise up\n"
+"Try to have a soft landing."
+msgstr ""
+
+#: src/weapon/gun.cpp:74 src/weapon/shotgun.cpp:88
+#: src/weapon/snipe_rifle.cpp:243
+msgid ""
+"Press space to shoot\n"
+"Use Up/Down to change initial angle"
+msgstr ""
+
+#: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:98
+msgid ""
+"Press space to shoot\n"
+"Use Up/Down to change initial angle\n"
+"Change angle while shooting"
+msgstr ""
+
+#: src/weapon/grapple.cpp:173
+msgid ""
+"Press space to shoot grapple\n"
+"Use left/right to swing\n"
+"Press space to release"
+msgstr ""
+
+#: src/weapon/skip_turn.cpp:47
+msgid ""
+"Press space to skip turn.\n"
+"Please notice: No chance to undo!"
+msgstr ""
+
+#: src/weapon/lowgrav.cpp:50
+msgid ""
+"Press space to use\n"
+"Gravity is decreased\n"
+"Ends when selecting another weapon"
+msgstr ""
+
 #: src/menu/network_connection_menu.cpp:158
 msgid "Public battles"
 msgstr "Доступные битвы"
@@ -1391,12 +1444,12 @@ msgstr ""
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: src/game/config.cpp:365
+#: src/game/config.cpp:363
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Чтение конфига по умолчанию"
 
-#: src/game/config.cpp:425
+#: src/game/config.cpp:423
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Чтение персонального конфига"
@@ -1417,11 +1470,11 @@ msgstr "Начать игру"
 msgid "Say: "
 msgstr "Сказать: "
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:245
 msgid "Scroll border size"
 msgstr "Размер прокрутки"
 
-#: src/menu/options_menu.cpp:241
+#: src/menu/options_menu.cpp:240
 msgid "Scroll on border"
 msgstr "Прокрутка на границе"
 
@@ -1492,6 +1545,26 @@ msgstr "Режим сервера"
 msgid "Set explosion delay to %u"
 msgstr ""
 
+#: src/weapon/supertux.cpp:225
+msgid ""
+"Set initial direction with up/down\n"
+"Press space to launch\n"
+"Use Left/Right to change direction"
+msgstr ""
+
+#: src/weapon/gnu.cpp:174 src/weapon/polecat.cpp:197
+msgid ""
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Press space to shoot\n"
+"One shoot per turn"
+msgstr ""
+
+#: src/weapon/dynamite.cpp:117
+msgid ""
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Space to place dynamite"
+msgstr ""
+
 #: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Shoot"
@@ -1557,15 +1630,15 @@ msgstr ""
 "версии следующие: %s. Вы можете загрузить свежую версию по адресу http://www."
 "wormux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:300
+#: src/menu/options_menu.cpp:299
 msgid "Sound"
 msgstr "Звуки"
 
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:266
 msgid "Sound effects?"
 msgstr "Звуковые эффекты?"
 
-#: src/menu/options_menu.cpp:292
+#: src/menu/options_menu.cpp:291
 msgid "Sound frequency"
 msgstr "Частота звука"
 
@@ -1682,7 +1755,7 @@ msgstr "Граната улетела за пределы поля битвы п
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Все ждут тебя! Проснись! :-)"
 
-#: src/weapon/parachute.cpp:90
+#: src/weapon/parachute.cpp:89
 msgid "The parachute is activated automatically."
 msgstr "Парашют раскрылся автоматически."
 
@@ -1723,10 +1796,10 @@ msgstr "Время"
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
 #, fuzzy
 msgid ""
-"Timeout : Mouse wheel or Page Up/Down\n"
-"Angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
+"Timeout: Mouse wheel or Page Up/Down\n"
+"Angle: Up/Down\n"
+"Fire: Press space until desired strength is reached\n"
+"One ammo per turn"
 msgstr ""
 "Задержка : Колесо мыши или Page Up/Down\n"
 "Угол : Вверх/Вниз\n"
@@ -1736,10 +1809,10 @@ msgstr ""
 #: src/weapon/bounce_ball.cpp:90
 #, fuzzy
 msgid ""
-"Timeout : Mouse wheel or Page Up/Down\n"
-"Angle : Up/Down\n"
-"Fire : space key\n"
-"an ammo per turn"
+"Timeout: Mouse wheel or Page Up/Down\n"
+"Angle: Up/Down\n"
+"Fire: space key\n"
+"One ammo per turn"
 msgstr ""
 "Задержка : Колесо мыши или Page Up/Down\n"
 "Угол : Вверх/Вниз\n"
@@ -1801,11 +1874,41 @@ msgstr ""
 msgid "Up slowly"
 msgstr ""
 
+#: src/weapon/disco_grenade.cpp:158 src/weapon/grenade.cpp:77
+msgid ""
+"Up/Down: Set direction\n"
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Press space till desired strength"
+msgstr ""
+
+#: src/weapon/anvil.cpp:142
+#, fuzzy
+msgid ""
+"Usage: left click on the target\n"
+"Anvil kill all characters beneath.\n"
+"One ammo per turn"
+msgstr ""
+"Правила использования : щелкните левой кнопкой мыши на цели\n"
+"патрон за ход"
+
+#: src/weapon/auto_bazooka.cpp:225
+#, fuzzy
+msgid ""
+"Usage: left click on the target\n"
+"Initial fire angle: Up/Down\n"
+"Firing: keep the space key pressed until the desired strength\n"
+"One ammo per turn"
+msgstr ""
+"Правила использования : щелкните левой кнопкой мыши на цели\n"
+"Начальный угол стрельбы : Вверх/Вниз\n"
+"Стрельба : удерживайте пробел до достижения желаемой силы\n"
+"патрон за ход"
+
 #: src/main.cpp:182
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:526
+#: src/menu/options_menu.cpp:522
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Проверка версии не удалась из-за: %s\n"
@@ -1938,9 +2041,9 @@ msgstr "также известный как"
 #: src/weapon/air_attack.cpp:218
 #, fuzzy
 msgid ""
-"attack direction : Left/Right\n"
-"Bombing : left click on the target\n"
-"one bombing per turn"
+"attack direction: Left/Right\n"
+"Bombing: Left click on the target\n"
+"One bombing per turn"
 msgstr ""
 "направление атаки : Влево/Вправо\n"
 "Бомбежка : щелкните левой кнопкой мыши на цели\n"
@@ -1984,6 +2087,14 @@ msgstr "o Загрузка звукового профиля: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
+#, fuzzy
+#~ msgid ""
+#~ "How to use it : keep the space key pressed\n"
+#~ "an ammo per turn"
+#~ msgstr ""
+#~ "Правила использования : зажмите пробел\n"
+#~ "патрон за ход"
 
 #~ msgid "Head commander: "
 #~ msgstr "Командующий: "

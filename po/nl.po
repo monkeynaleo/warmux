@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-13 20:22+0200\n"
+"POT-Creation-Date: 2010-08-16 14:35+0200\n"
 "PO-Revision-Date: 2010-01-10 17:48+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -108,12 +108,10 @@ msgstr ""
 "%s heeft iets goeds voor het milieu gedaan, dankzij hem heeft het stinkdier "
 "geen bouten gelegd."
 
-#: src/object/medkit.cpp:69
-#, c-format
-msgid "%s has won %u point of energy!"
-msgid_plural "%s has won %u points of energy!"
-msgstr[0] "%s heeft %u punt energie gekregen!"
-msgstr[1] "%s heeft %u punten energie gekregen!"
+#: src/object/medkit.cpp:57
+#, fuzzy, c-format
+msgid "%s has won %u points of energy!"
+msgstr "%s heeft %u punt energie gekregen!"
 
 #: src/game/game.cpp:1036
 #, c-format
@@ -142,7 +140,7 @@ msgid "%s team already has infinite ammo for the %s!"
 msgstr "Team %s heeft al oneindige munitie voor %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:56
+#: src/weapon/skip_turn.cpp:55
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Team %s heeft een beurt overgeslagen."
@@ -154,7 +152,7 @@ msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "Team %s heeft %u clusterbazooka gekregen!"
 msgstr[1] "Team %s heeft %u clusterbazooka's gekregen!"
 
-#: src/weapon/gnu.cpp:251
+#: src/weapon/gnu.cpp:250
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -190,7 +188,7 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "Team %s heeft %u aambeeld gekregen! Plet ze allemaal!"
 msgstr[1] "Team %s heeft %u aambeelden gekregen! Plet ze allemaal!"
 
-#: src/weapon/auto_bazooka.cpp:331
+#: src/weapon/auto_bazooka.cpp:332
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -239,14 +237,14 @@ msgid_plural "%s team has won %u cluster bombs!"
 msgstr[0] "Team %s heeft %u clusterbom gekregen!"
 msgstr[1] "Team %s heeft %u clusterbommen gekregen!"
 
-#: src/weapon/construct.cpp:84
+#: src/weapon/construct.cpp:82
 #, c-format
 msgid "%s team has won %u construct weapon! Don't forget your helmet."
 msgid_plural "%s team has won %u construct weapons! Don't forget your helmet."
 msgstr[0] "Team %s heeft %u constructiewapen gekregen! Vergeet uw helm niet."
 msgstr[1] "Team %s heeft %u constructiewapens gekregen! Vergeet uw helm niet."
 
-#: src/weapon/disco_grenade.cpp:169
+#: src/weapon/disco_grenade.cpp:168
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -258,14 +256,14 @@ msgstr[1] ""
 "Team %s heeft %u discogranaten gekregen! Schud met uw lichaam terwijl u ze "
 "gooit!"
 
-#: src/weapon/dynamite.cpp:149
+#: src/weapon/dynamite.cpp:148
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "Team %s heeft %u staaf dynamiet gekregen!"
 msgstr[1] "Team %s heeft %u staven dynamiet gekregen!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:194
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -279,35 +277,35 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Team %s heeft %u voetbalbom gekregen!"
 msgstr[1] "Team %s heeft %u voetbalbommen gekregen!"
 
-#: src/weapon/grapple.cpp:716
+#: src/weapon/grapple.cpp:715
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
 msgstr[0] "Team %s heeft %u haak gekregen!"
 msgstr[1] "Team %s heeft %u haken gekregen!"
 
-#: src/weapon/grenade.cpp:89
+#: src/weapon/grenade.cpp:88
 #, c-format
 msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "Team %s heeft %u granaat gekregen!"
 msgstr[1] "Team %s heeft %u granaten gekregen!"
 
-#: src/weapon/gun.cpp:97
+#: src/weapon/gun.cpp:96
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
 msgstr[0] "Team %s heeft %u geweer gekregen!"
 msgstr[1] "Team %s heeft %u geweren gekregen!"
 
-#: src/weapon/jetpack.cpp:209
+#: src/weapon/jetpack.cpp:204
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
 msgstr[0] "Team %s heeft %u jetpack gekregen"
 msgstr[1] "Team %s heeft %u jetpacks gekregen"
 
-#: src/weapon/lowgrav.cpp:84
+#: src/weapon/lowgrav.cpp:83
 #, c-format
 msgid ""
 "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
@@ -321,21 +319,21 @@ msgstr[1] ""
 "Team %s heeft %u lagezwaartekrachten gekregen! Kleine stap voor een mens, "
 "grote sprong voor de vrije software!"
 
-#: src/weapon/mine.cpp:257
+#: src/weapon/mine.cpp:256
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "Team %s heeft %u mijn gekregen!"
 msgstr[1] "Team %s heeft %u mijnen gekregen!"
 
-#: src/weapon/parachute.cpp:176
+#: src/weapon/parachute.cpp:175
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "Team %s heeft %u parachute gekregen!"
 msgstr[1] "Team %s heeft %u parachutes gekregen!"
 
-#: src/weapon/polecat.cpp:276
+#: src/weapon/polecat.cpp:275
 #, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -358,7 +356,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Team %s heeft %u rellenbom gekregen!"
 msgstr[1] "Team %s heeft %u rellenbommen gekregen!"
 
-#: src/weapon/shotgun.cpp:129
+#: src/weapon/shotgun.cpp:128
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -373,7 +371,7 @@ msgstr[0] "Team %s heeft %u slag gekregen!"
 msgstr[1] ""
 "Team %s heeft %u slagen gekregen! Probeer dit maar eens te ontwijken!"
 
-#: src/weapon/snipe_rifle.cpp:255
+#: src/weapon/snipe_rifle.cpp:254
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -385,14 +383,14 @@ msgstr[1] ""
 "Team %s heeft %u sluipschuttersgeweren gekregen! Schiet ermee tussen zijn "
 "ogen!"
 
-#: src/weapon/submachine_gun.cpp:149
+#: src/weapon/submachine_gun.cpp:148
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
 msgstr[0] "Team %s heeft %u automatisch geweer gekregen!"
 msgstr[1] "Team %s heeft %u automatische geweren gekregen!"
 
-#: src/weapon/suicide.cpp:78
+#: src/weapon/suicide.cpp:77
 #, c-format
 msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
@@ -401,21 +399,21 @@ msgstr[1] ""
 "Team %s heeft %u zelfmoorden gekregen! Gebruik ze allemaal voor een extra "
 "bonus!"
 
-#: src/weapon/syringe.cpp:117
+#: src/weapon/syringe.cpp:116
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "Team %s heeft %u injectienaald gekregen!"
 msgstr[1] "Team %s heeft %u injectienaalden gekregen!"
 
-#: src/weapon/teleportation.cpp:122
+#: src/weapon/teleportation.cpp:121
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "Team %s heeft %u teleportatie gekregen!"
 msgstr[1] "Team %s heeft %u teleportaties gekregen!"
 
-#: src/weapon/skip_turn.cpp:67
+#: src/weapon/skip_turn.cpp:66
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -425,7 +423,7 @@ msgstr[1] ""
 "Team %s heeft %u keer een beurt overslaan gekregen! Ik weet dat u daar gek "
 "op bent."
 
-#: src/weapon/supertux.cpp:314
+#: src/weapon/supertux.cpp:313
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -455,7 +453,7 @@ msgid "(dead)"
 msgstr "(dood)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:317
+#: src/menu/options_menu.cpp:316
 msgid "(system language)"
 msgstr "(systeemtaal)"
 
@@ -468,7 +466,7 @@ msgstr "(onbekende tijd)"
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
 
-#: src/menu/options_menu.cpp:519
+#: src/menu/options_menu.cpp:515
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -498,9 +496,10 @@ msgid "And the winner is..."
 msgstr "En de winnaar is..."
 
 #: src/weapon/baseball.cpp:57
+#, fuzzy
 msgid ""
-"Angle : Up/Down\n"
-"Fire : space key\n"
+"Angle: Up/Down\n"
+"Fire: space key\n"
 "a hit per turn"
 msgstr ""
 "Hoek : Omhoog/Omlaag\n"
@@ -628,7 +627,7 @@ msgstr "Karakter schakeling"
 msgid "Chat"
 msgstr ""
 
-#: src/menu/options_menu.cpp:230
+#: src/menu/options_menu.cpp:229
 msgid "Check updates online?"
 msgstr "Online op updates controleren?"
 
@@ -639,6 +638,19 @@ msgstr "Kies een willekeurige kaart"
 #: src/game/game_mode.cpp:341
 msgid "Classic"
 msgstr "Klassiek"
+
+#: src/weapon/teleportation.cpp:51
+msgid ""
+"Click onto map to teleport yourself\n"
+"to a place of your choice."
+msgstr ""
+
+#: src/weapon/construct.cpp:71
+msgid ""
+"Click onto the place, where you\n"
+"want to place the construction.\n"
+"Up/down changes direction."
+msgstr ""
 
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:457
@@ -748,7 +760,7 @@ msgstr "Dynamiet"
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
-#: src/menu/options_menu.cpp:273
+#: src/menu/options_menu.cpp:272
 msgid "Effects volume"
 msgstr "Effecten volume"
 
@@ -772,7 +784,7 @@ msgstr "Fout bij het laden van team :"
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
-#: src/game/config.cpp:558 src/team/custom_team.cpp:167
+#: src/game/config.cpp:556 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -871,6 +883,13 @@ msgstr "Spelnaam:"
 msgid "Gnu Launcher"
 msgstr "Gnu Lanceren"
 
+#: src/weapon/syringe.cpp:70
+msgid ""
+"Go to opponent\n"
+"Press space to inject toxic\n"
+"Opponent will die soon"
+msgstr ""
+
 #: src/menu/options_menu.cpp:141
 msgid "Graphics"
 msgstr "Grafisch"
@@ -919,44 +938,6 @@ msgstr "Hoge sprong"
 msgid "Host a game"
 msgstr "Host een spel"
 
-#: src/weapon/blowtorch.cpp:64
-msgid ""
-"How to use it : keep the space key pressed\n"
-"Angle : Up/Down\n"
-"an ammo per turn"
-msgstr ""
-"Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
-"Hoek : Omhoog/Omlaag\n"
-"eenmaal per beurt"
-
-#: src/weapon/airhammer.cpp:77
-msgid ""
-"How to use it : keep the space key pressed\n"
-"an ammo per turn"
-msgstr ""
-"Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
-"eenmaal per beurt"
-
-#: src/weapon/auto_bazooka.cpp:225
-msgid ""
-"How to use it : left click on the target\n"
-"Initial fire angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
-msgstr ""
-"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
-"Initiële vuurhoek : Omhoog/Omlaag\n"
-"Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
-"een schot per beurt"
-
-#: src/weapon/anvil.cpp:142
-msgid ""
-"How to use it : left click on the target\n"
-"an ammo per turn"
-msgstr ""
-"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
-"slechts één per beurt"
-
 #: src/game/game_classic.cpp:196
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
@@ -980,10 +961,11 @@ msgstr "Initiële energie"
 
 #: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:388
 #: src/weapon/riot_bomb.cpp:120
+#, fuzzy
 msgid ""
-"Initial fire angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
+"Initial fire angle: Up/Down\n"
+"Fire: Press space until desired strength is reached\n"
+"One ammo per turn"
 msgstr ""
 "Initiële vuurhoek : Omhoog/Omlaag\n"
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
@@ -1022,6 +1004,17 @@ msgstr "Sprong"
 msgid "Jump backwards"
 msgstr "Achterwaartse sprong"
 
+#: src/weapon/blowtorch.cpp:64
+#, fuzzy
+msgid ""
+"Keep the space key pressed\n"
+"Angle: Up/Down\n"
+"One ammo per turn"
+msgstr ""
+"Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
+"Hoek : Omhoog/Omlaag\n"
+"eenmaal per beurt"
+
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
 msgstr ""
@@ -1039,7 +1032,7 @@ msgstr "Kickt de spelers onder de naam <nickname> uit het spel"
 msgid "Language"
 msgstr "Taal"
 
-#: src/menu/options_menu.cpp:236
+#: src/menu/options_menu.cpp:235
 msgid "Left-handed mouse?"
 msgstr "Linkshandige muis?"
 
@@ -1105,7 +1098,7 @@ msgstr "Maximum FPS"
 msgid "Mine"
 msgstr "Mijn"
 
-#: src/menu/options_menu.cpp:250
+#: src/menu/options_menu.cpp:249
 msgid "Misc"
 msgstr "Overigen"
 
@@ -1179,11 +1172,11 @@ msgstr ""
 msgid "Multi-layer sky?"
 msgstr "Meerlagige lucht?"
 
-#: src/menu/options_menu.cpp:261
+#: src/menu/options_menu.cpp:260
 msgid "Music volume"
 msgstr "Muziek volume"
 
-#: src/menu/options_menu.cpp:256
+#: src/menu/options_menu.cpp:255
 msgid "Music?"
 msgstr "Muziek?"
 
@@ -1204,7 +1197,7 @@ msgstr "Nooit"
 msgid "New network game at "
 msgstr "Nieuw netwerkspel op"
 
-#: src/menu/options_menu.cpp:296
+#: src/menu/options_menu.cpp:295
 msgid "New player warning?"
 msgstr "Waarschuwing bij nieuwe speler?"
 
@@ -1267,6 +1260,13 @@ msgstr "Opties"
 msgid "Parachute"
 msgstr "Parachute"
 
+#: src/weapon/parachute.cpp:65
+msgid ""
+"Parachute avoids hitting the ground too hard\n"
+"Opens automatically\n"
+"Use left/right to change direction"
+msgstr ""
+
 #: src/menu/network_connection_menu.cpp:172
 #: src/menu/network_connection_menu.cpp:211
 #: src/menu/network_connection_menu.cpp:251
@@ -1276,6 +1276,13 @@ msgstr "Wachtwoord:"
 #: src/interface/man_machine_interface.cpp:1111
 msgid "Pause"
 msgstr "Pauze"
+
+#: src/weapon/mine.cpp:215
+msgid ""
+"Place mine by pressing space\n"
+"Mine explodes when someone steps onto it\n"
+"May be a fake mine by chance"
+msgstr ""
 
 #: src/menu/main_menu.cpp:57
 msgid "Play"
@@ -1310,6 +1317,58 @@ msgstr "Stinkdier Lanceren"
 msgid "Port:"
 msgstr "Poort:"
 
+#: src/weapon/suicide.cpp:47
+#, fuzzy
+msgid "Press space to commit suicide"
+msgstr "%s van team %s pleegde zelfmoord!"
+
+#: src/weapon/airhammer.cpp:77
+msgid ""
+"Press space to dig\n"
+"Ammo is used when counter reaches zero\n"
+"One ammo per turn"
+msgstr ""
+
+#: src/weapon/jetpack.cpp:58
+msgid ""
+"Press space to rise up\n"
+"Try to have a soft landing."
+msgstr ""
+
+#: src/weapon/gun.cpp:74 src/weapon/shotgun.cpp:88
+#: src/weapon/snipe_rifle.cpp:243
+msgid ""
+"Press space to shoot\n"
+"Use Up/Down to change initial angle"
+msgstr ""
+
+#: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:98
+msgid ""
+"Press space to shoot\n"
+"Use Up/Down to change initial angle\n"
+"Change angle while shooting"
+msgstr ""
+
+#: src/weapon/grapple.cpp:173
+msgid ""
+"Press space to shoot grapple\n"
+"Use left/right to swing\n"
+"Press space to release"
+msgstr ""
+
+#: src/weapon/skip_turn.cpp:47
+msgid ""
+"Press space to skip turn.\n"
+"Please notice: No chance to undo!"
+msgstr ""
+
+#: src/weapon/lowgrav.cpp:50
+msgid ""
+"Press space to use\n"
+"Gravity is decreased\n"
+"Ends when selecting another weapon"
+msgstr ""
+
 #: src/menu/network_connection_menu.cpp:158
 msgid "Public battles"
 msgstr "Openbare gevechten"
@@ -1342,11 +1401,11 @@ msgstr ""
 msgid "Random map"
 msgstr "Willekeurige kaart"
 
-#: src/game/config.cpp:365
+#: src/game/config.cpp:363
 msgid "Reading the default config file"
 msgstr "Standaard configbestand wordt gelezen"
 
-#: src/game/config.cpp:425
+#: src/game/config.cpp:423
 msgid "Reading the personal config file"
 msgstr "Persoonlijk configbestand wordt gelezen"
 
@@ -1366,11 +1425,11 @@ msgstr "Spel wordt gestart"
 msgid "Say: "
 msgstr "Zeg: "
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:245
 msgid "Scroll border size"
 msgstr "Scroll-rand grootte"
 
-#: src/menu/options_menu.cpp:241
+#: src/menu/options_menu.cpp:240
 msgid "Scroll on border"
 msgstr "Scroll bij de rand"
 
@@ -1441,6 +1500,26 @@ msgstr "Server modus"
 msgid "Set explosion delay to %u"
 msgstr ""
 
+#: src/weapon/supertux.cpp:225
+msgid ""
+"Set initial direction with up/down\n"
+"Press space to launch\n"
+"Use Left/Right to change direction"
+msgstr ""
+
+#: src/weapon/gnu.cpp:174 src/weapon/polecat.cpp:197
+msgid ""
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Press space to shoot\n"
+"One shoot per turn"
+msgstr ""
+
+#: src/weapon/dynamite.cpp:117
+msgid ""
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Space to place dynamite"
+msgstr ""
+
 #: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Shoot"
@@ -1506,15 +1585,15 @@ msgstr ""
 "U kunt een nieuwere versie downloaden op http://www.wormux.org/phpboost/"
 "download/download.php"
 
-#: src/menu/options_menu.cpp:300
+#: src/menu/options_menu.cpp:299
 msgid "Sound"
 msgstr "Geluid"
 
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:266
 msgid "Sound effects?"
 msgstr "Geluidseffecten?"
 
-#: src/menu/options_menu.cpp:292
+#: src/menu/options_menu.cpp:291
 msgid "Sound frequency"
 msgstr "Geluids- frequentie"
 
@@ -1628,7 +1707,7 @@ msgstr "De granaat heeft het slagveld verlaten alvorens te ontploffen!"
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "De anderen wachten op u! Wakker worden! :-)"
 
-#: src/weapon/parachute.cpp:90
+#: src/weapon/parachute.cpp:89
 msgid "The parachute is activated automatically."
 msgstr "Parachute wordt automatisch geactiveerd."
 
@@ -1666,11 +1745,12 @@ msgid "Time"
 msgstr "Tijd"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
+#, fuzzy
 msgid ""
-"Timeout : Mouse wheel or Page Up/Down\n"
-"Angle : Up/Down\n"
-"Fire : keep the space key pressed until the desired strength\n"
-"an ammo per turn"
+"Timeout: Mouse wheel or Page Up/Down\n"
+"Angle: Up/Down\n"
+"Fire: Press space until desired strength is reached\n"
+"One ammo per turn"
 msgstr ""
 "Timeout : Muiswiel of Page Up/Down\n"
 "Hoek : Omhoog/Omlaag\n"
@@ -1678,11 +1758,12 @@ msgstr ""
 "slechts een per beurt"
 
 #: src/weapon/bounce_ball.cpp:90
+#, fuzzy
 msgid ""
-"Timeout : Mouse wheel or Page Up/Down\n"
-"Angle : Up/Down\n"
-"Fire : space key\n"
-"an ammo per turn"
+"Timeout: Mouse wheel or Page Up/Down\n"
+"Angle: Up/Down\n"
+"Fire: space key\n"
+"One ammo per turn"
 msgstr ""
 "Timeout : Muiswiel of Page Up/Down\n"
 "Hoek : Omhoog/Omlaag\n"
@@ -1743,11 +1824,41 @@ msgstr ""
 msgid "Up slowly"
 msgstr ""
 
+#: src/weapon/disco_grenade.cpp:158 src/weapon/grenade.cpp:77
+msgid ""
+"Up/Down: Set direction\n"
+"Set timer 1-6 using +/- or 1-6 keys\n"
+"Press space till desired strength"
+msgstr ""
+
+#: src/weapon/anvil.cpp:142
+#, fuzzy
+msgid ""
+"Usage: left click on the target\n"
+"Anvil kill all characters beneath.\n"
+"One ammo per turn"
+msgstr ""
+"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
+"slechts één per beurt"
+
+#: src/weapon/auto_bazooka.cpp:225
+#, fuzzy
+msgid ""
+"Usage: left click on the target\n"
+"Initial fire angle: Up/Down\n"
+"Firing: keep the space key pressed until the desired strength\n"
+"One ammo per turn"
+msgstr ""
+"Hoe te gebruiken : klik met de linkermuisknop op het doel\n"
+"Initiële vuurhoek : Omhoog/Omlaag\n"
+"Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
+"een schot per beurt"
+
 #: src/main.cpp:182
 msgid "Version"
 msgstr "Versie"
 
-#: src/menu/options_menu.cpp:526
+#: src/menu/options_menu.cpp:522
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Versie verificatie mislukt omdat: %s"
@@ -1873,10 +1984,11 @@ msgid "aka"
 msgstr "aka"
 
 #: src/weapon/air_attack.cpp:218
+#, fuzzy
 msgid ""
-"attack direction : Left/Right\n"
-"Bombing : left click on the target\n"
-"one bombing per turn"
+"attack direction: Left/Right\n"
+"Bombing: Left click on the target\n"
+"One bombing per turn"
 msgstr ""
 "aanvalsrichting : Links/Rechts\n"
 "Bombarderen: klik met de linkermuisknop op het doel\n"
@@ -1920,6 +2032,13 @@ msgstr "o Geluidsprofiel wordt geladen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
+
+#~ msgid ""
+#~ "How to use it : keep the space key pressed\n"
+#~ "an ammo per turn"
+#~ msgstr ""
+#~ "Hoe te gebruiken : houd de spatiebalk ingedrukt\n"
+#~ "eenmaal per beurt"
 
 #~ msgid "Head commander: "
 #~ msgstr "Hoofdcommandant: "
