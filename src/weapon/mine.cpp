@@ -212,7 +212,7 @@ Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstan
 void Mine::UpdateTranslationStrings()
 {
     m_name = _("Mine");
-    m_help = _("Place mine by pressing space\nMine explodes when smb. step onto it\nMay be a fake mine by chance");
+    m_help = _("Place mine by pressing space\nMine explodes when someone steps onto it\nMay be a fake mine by chance");
 }
 
 WeaponProjectile * Mine::GetProjectileInstance()

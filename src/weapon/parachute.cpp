@@ -62,7 +62,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 void Parachute::UpdateTranslationStrings()
 {
   m_name = _("Parachute");
-  m_help = _("Parachute avoids hitting the ground to hard\nOpens automatically\nUse left/right to manipulate direction");
+  m_help = _("Parachute avoids hitting the ground too hard\nOpens automatically\nUse left/right to change direction");
 }
 
 Parachute::~Parachute()
@@ -122,7 +122,7 @@ void Parachute::Refresh()
           UseAmmo();
           m_used_this_turn = true;
         }
-        
+
         ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
         ActiveCharacter().SetWindFactor(cfg().wind_factor);
         open = true;

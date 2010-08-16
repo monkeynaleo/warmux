@@ -222,7 +222,8 @@ AutomaticBazooka::AutomaticBazooka() :
 void AutomaticBazooka::UpdateTranslationStrings()
 {
   m_name = _("Automatic Bazooka");
-  m_help = _("Left click on the target\nInitial fire angle: Up/Down\nFire: keep the space key pressed until the desired strength\none ammo per turn");
+  m_help = _("Usage: left click on the target\nInitial fire angle: Up/Down\n"
+             "Firing: keep the space key pressed until the desired strength\nOne ammo per turn");
 }
 
 AutomaticBazooka::~AutomaticBazooka()
