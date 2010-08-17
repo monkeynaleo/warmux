@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -411,6 +411,12 @@ msgstr ""
 "最新版 %s が見つかりました。現在あなたがお使いのバージョンは %s です。最新版"
 "があなたの OS で使用できるか確認して下さい。"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "オプション"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "空爆"
@@ -454,7 +460,7 @@ msgstr "作者:"
 msgid "Automatic Bazooka"
 msgstr "オートバズーカ"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -521,7 +527,7 @@ msgstr "カスタムチームのディレクトリが開けません (%s)!"
 msgid "Center camera on character"
 msgstr "カメラの中心をキャラクターにする"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "行動するキャラクターを切り替える"
@@ -536,7 +542,7 @@ msgstr "行動するキャラクターを切り替える"
 msgid "Change aim angle"
 msgstr "照準角度を変更する"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "武器カテゴリを切り替える"
@@ -559,7 +565,7 @@ msgstr "キャラクター名:"
 msgid "Character switching"
 msgstr "キャラクターの切り替え"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -581,7 +587,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -613,7 +619,7 @@ msgstr "自殺"
 msgid "Configuration menu"
 msgstr "オプションメニュー"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "ゲームに接続する"
 
@@ -625,13 +631,18 @@ msgstr "接続しました！"
 msgid "Connected players: "
 msgstr "接続しました！"
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "建設資材"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "コントロール: "
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "%s から最新版を取得することができませんでした"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -650,7 +661,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "デスモード中のターン毎ダメージ"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -666,12 +677,12 @@ msgstr "メッセージを表示"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "一度あなたのチームを選択し確認することを忘れずに"
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 #, fuzzy
 msgid "Down"
 msgstr "ダウンロード"
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 #, fuzzy
 msgid "Down slowly"
 msgstr "ダウンロード"
@@ -720,7 +731,7 @@ msgstr "チーム読み込みエラー :"
 msgid "Error loading team :"
 msgstr "チーム読み込みエラー :"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -741,27 +752,27 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr " \"%s\" ファイル削除エラー: カスタムチームを削除することができません。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "エラー: 接続できません %s:%s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "エラー: ゲームをホストするためにインデックスサーバーに接続できません"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "エラー: インターネットゲームを検索するためにインデックスサーバーに接続できま"
 "せん"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 msgid "Error: Unable to start the server"
 msgstr "エラー: サーバーが開始できません"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
@@ -780,6 +791,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "エラー: 見つかりません。 ボディ\"%s\" チーム \"%s\"."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "マップディレクトリが開けません (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "火炎放射器"
@@ -788,7 +809,7 @@ msgstr "火炎放射器"
 msgid "Football Bomb"
 msgstr "ラグビーボム"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "フルスクリーン？"
@@ -809,7 +830,7 @@ msgstr "ゲーム"
 msgid "Game mode"
 msgstr "ゲームモード"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "ゲーム名"
 
@@ -848,7 +869,7 @@ msgstr "地面を初期化中..."
 msgid "Gun"
 msgstr "ハンドガン"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "楽しんで！"
 
@@ -859,16 +880,16 @@ msgstr "楽しんで！"
 msgid "Head commander"
 msgstr "指揮官"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "ヘルプ"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "ハイジャンプ"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "ゲームをホストする"
 
@@ -882,7 +903,7 @@ msgid ""
 "please):"
 msgstr "もしバグを発見したり、機能要望があればE-mailを送ってください（英語で）"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -928,7 +949,7 @@ msgstr "プレゼントだ！"
 msgid "Jetpack"
 msgstr "ジェットパック"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "ジャンプ"
 
@@ -946,6 +967,11 @@ msgstr ""
 "使用方法: スペースキーを押し続ける\n"
 "角度: 上/下\n"
 "ターン毎で1つの弾薬"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -989,9 +1015,8 @@ msgstr "ローカルチーム:"
 msgid "LowGrav"
 msgstr "低重力装置"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "マニュアル接続"
 
@@ -1034,6 +1059,11 @@ msgstr "地雷"
 msgid "Misc"
 msgstr "その他"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "最精密"
@@ -1054,22 +1084,22 @@ msgstr "最も失敗作"
 msgid "Most violent"
 msgstr "最も暴力的"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "キャラクターの移動"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "キャラクターの移動"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "キャラクターの移動"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "キャラクターの移動"
@@ -1084,19 +1114,19 @@ msgstr "カーソルやマウスにカメラを追従"
 msgid "Move character"
 msgstr "キャラクターの移動"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1133,7 +1163,7 @@ msgstr "新規ネットワークゲーム"
 msgid "New player warning?"
 msgstr "新規プレイヤーのお知らせ？"
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "キャラクターの移動"
@@ -1147,11 +1177,15 @@ msgstr "xml設定ファイル内に<%s>要素が見つかりません！"
 msgid "No player connected"
 msgstr "%i人のプレイヤーが接続しています"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "誰もいない！"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "完了"
@@ -1175,7 +1209,7 @@ msgstr "キャラクターに関して:行動するキャラクターを切り�
 msgid "On map: select a target"
 msgstr "マップに関して: ターゲットを選択します"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "オプション メニュー"
@@ -1199,13 +1233,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "パスワード"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr "ポーズ"
 
@@ -1244,8 +1278,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "スカンクランチャー"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "ポート:"
 
@@ -1301,7 +1335,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "パブリックバトル"
 
@@ -1309,7 +1343,7 @@ msgstr "パブリックバトル"
 msgid "Quickly quit game with Ctrl"
 msgstr "Ctrlでクイック終了"
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "終了"
 
@@ -1333,11 +1367,16 @@ msgstr ""
 msgid "Random map"
 msgstr "ランダムマップ"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "%i チームがあります。"
+
+#: src/game/config.cpp:368
 msgid "Reading the default config file"
 msgstr "デフォルト構成ファイルの読込中"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 msgid "Reading the personal config file"
 msgstr "個人構成ファイルを読込中"
 
@@ -1365,52 +1404,52 @@ msgstr "スクロール枠のサイズ"
 msgid "Scroll on border"
 msgstr "スクロール枠"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "武器カテゴリを切り替える"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "サーバーアドレス"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "インターネットでサーバーが使用できます"
 
@@ -1419,6 +1458,7 @@ msgstr "インターネットでサーバーが使用できます"
 msgid "Server mode"
 msgstr "サーバーモード"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1427,7 +1467,6 @@ msgstr "サーバーモード"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1452,7 +1491,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "ショットガン"
@@ -1502,11 +1541,11 @@ msgstr "スナイパーライフル"
 msgid "Someone put a booby trap into the crate!"
 msgstr "誰かが箱に罠を仕掛けたぞ！"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "このゲームはプレイヤーを受け付けていません"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
@@ -1669,6 +1708,11 @@ msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "%i チームがあります。"
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1700,17 +1744,17 @@ msgstr ""
 "投下: スペースキーを押し続けて強さを決定\n"
 "ターン毎で1つの弾薬"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "インターフェースの表示/非表示"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "ミニマップの表示/非表示"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "武器メニューを表示"
@@ -1746,11 +1790,11 @@ msgstr "不明なコマンド"
 msgid "Unlimited"
 msgstr "無制限"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -1880,6 +1924,11 @@ msgstr "名前が間違っているマップです！"
 msgid "Wrong team!"
 msgstr "チームが間違っています！"
 
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
+
 #: src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "あなたは孤独・・・ :-/"
@@ -2000,9 +2049,6 @@ msgstr "o 音楽 %d Hz %d bit"
 
 #~ msgid "Connect to an internet game"
 #~ msgstr "インターネットゲームに接続"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "%s から最新版を取得することができませんでした"
 
 #~ msgid "Do you really want to quit? (Y/N)"
 #~ msgstr "本当に終了してよろしいですか？ (\"Y\"はい or \"N\"いいえ)"
