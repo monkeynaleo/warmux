@@ -372,12 +372,12 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
   // Use the movement of the crosshair
   Double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
   if (DIRECTION_RIGHT == ActiveCharacter().GetDirection())
-    angle_rad /= 2; // -90 < angle < 90
+    angle_rad *= ONE_HALF; // -90 < angle < 90
   else
   if (angle_rad > HALF_PI)
-    angle_rad = HALF_PI - angle_rad / 2;//formerly in deg to 45 + (90 - angle) / 2;
+    angle_rad = HALF_PI - ONE_HALF * angle_rad;//formerly in deg to 45 + (90 - angle) / 2;
   else
-    angle_rad = -HALF_PI - angle_rad / 2;//formerly in deg to -45 + (-90 - angle) / 2;
+    angle_rad = -HALF_PI - ONE_HALF * angle_rad;//formerly in deg to -45 + (-90 - angle) / 2;
 
   if (angle_rad < 0) {
     angle_rad += TWO * PI; // so now 0 < angle < 2 * PI;
@@ -419,7 +419,7 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
   v += member->GetAnchorPos();
 
   if (DIRECTION_LEFT == owner->GetDirection()) {
-    v.x = 2 * (int)owner->GetPosition().x + GetSize().x/2 - v.x;
+    v.x = (((int)owner->GetPosition().x)<<1) + (GetSize().x>>1) - v.x;
     //v.x -= member->GetSprite().GetWidth();
   }
   v = Mouse::GetInstance()->GetWorldPosition() - v;
@@ -528,7 +528,7 @@ void Body::Build()
   }
 
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = GetSize().x / 2.0 - skel_lst.front()->member->GetSprite().GetWidth() / 2.0;
+  body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
 
