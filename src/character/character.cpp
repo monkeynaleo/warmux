@@ -647,18 +647,17 @@ void Character::Refresh()
   if (body->IsWalking() && body->GetMovement() == "walk")
   {
     // Play the step sound only twice during the walking animation
-    uint frame_nbr = body->GetFrameCount();
+    uint frame_nbr = body->GetFrameCount()>>1;
     uint cur = body->GetFrame();
-    frame_nbr /= 2;
     cur %= frame_nbr;
 
-    if (cur < frame_nbr / 2 && !step_sound_played)
+    if (cur < frame_nbr>>1 && !step_sound_played)
     {
       step_sound_played = true;
       JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(),"step");
     }
 
-    if (cur > frame_nbr / 2)
+    if (cur > frame_nbr>>1)
       step_sound_played = false;
   }
 
@@ -728,7 +727,7 @@ void Character::UpdateFiringAngle()
     CharacterCursor::GetInstance()->Hide();
     Double delta = DELTA_CROSSHAIR;
     if (ud_move_intention->IsToDoItSlowly())
-      delta /= 10.0;
+      delta *= 0.1;
     if (ud_move_intention->GetDirection() == DIRECTION_UP)
       delta = -delta;
     AddFiringAngle(delta);
@@ -906,7 +905,7 @@ void Character::SetFiringAngle(Double angle) {
   while(angle <= -2 * PI)
     angle += 2 * PI;*/
   angle = InRange_Double(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
-                             -(ActiveTeam().GetWeapon().GetMinAngle()));
+                                -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;
   m_team.crosshair.Refresh(GetFiringAngle());
   body->Rebuild();
