@@ -358,7 +358,11 @@ bool Config::DoLoading(void)
 void Config::LoadDefaultValue()
 {
   // Load default XML conf
+#ifdef ANDROID
+  m_default_config = GetDataDir() + "wormux_default_android_config.xml";
+#else
   m_default_config = GetDataDir() + "wormux_default_config.xml";
+#endif
   Profile *res = GetResourceManager().LoadXMLProfile(m_default_config, true);
 
   std::cout << "o " << _("Reading the default config file") << std::endl;
