@@ -281,10 +281,11 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       }
     } else if (!IsInVacuumXY(tmpPos, false)) {
       collision = COLLISION_ON_GROUND;
+      m_last_collided_object = NULL;
     }
 
-    if (collision != NO_COLLISION) // Nothing more to do!
-    {
+    if (collision != NO_COLLISION) {
+      // Nothing more to do!
       MSG_DEBUG("physic.state", "%s - Collision at %d,%d : on %s",
                 GetName().c_str(), tmpPos.x, tmpPos.y,
                 collision == COLLISION_ON_GROUND ? "ground" : "an object");
@@ -371,6 +372,9 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
     SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
     break;
   }
+
+  // Mark it as last collided object
+  m_last_collided_object = collided_obj;
 
   // Make it rebound!!
   MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %s,%s", GetName().c_str(),
@@ -557,7 +561,10 @@ void PhysicalObj::SignalRebound()
 {
   // TO CLEAN...
    if (!m_rebound_sound.empty())
-     JukeBox::GetInstance()->Play("default", m_rebound_sound) ;
+     JukeBox::GetInstance()->Play("default", m_rebound_sound);
+
+  // It's ok to collide the same object again
+  m_last_collided_object = NULL;
 }
 
 void PhysicalObj::SetCollisionModel(bool collides_with_ground,
