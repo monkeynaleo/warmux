@@ -116,7 +116,7 @@ bool DeleteFile(const std::string &name)
 
 
 // Find the extension part of a filename
-std::string FileExtension (const std::string &name)
+std::string FileExtension(const std::string &name)
 {
   int pos = name.rfind('.');
   if (pos != -1)
@@ -218,9 +218,9 @@ std::string GetTmpDir()
 #else
 
 #  if defined(ANDROID)
-std::string GetHome() { return "/sdcard"; }
+std::string GetHome() { return "./"; }
 std::string GetOldPersonalDir() { return ""; }
-std::string GetTmpDir() { return "/sdcard"; }
+std::string GetTmpDir() { return "./"; }
 #  else // Linux or Apple
 std::string GetHome()
 {
