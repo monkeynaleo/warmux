@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2009-09-09 14:39+0100\n"
 "Last-Translator: Vojtěch Horký <vojta.horky@seznam.cz>\n"
 "Language-Team: Čeština\n"
@@ -493,6 +493,12 @@ msgstr ""
 "Je dostupná nová verze %s, pokud je vaše verze %s. Můžete zjistit, zda je "
 "dostupná aktualizace pro Váš operační systém!"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "Volby"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Vzdušný útok"
@@ -536,7 +542,7 @@ msgstr "Autoři:"
 msgid "Automatic Bazooka"
 msgstr "Automatická bazuka"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -604,7 +610,7 @@ msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 msgid "Center camera on character"
 msgstr "Vystředit kameru na hráče"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "Změnit aktivního hráče"
@@ -619,7 +625,7 @@ msgstr "Změnit aktivního hráče"
 msgid "Change aim angle"
 msgstr "Změnit náměr"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "Změnit druh zbraně"
@@ -643,7 +649,7 @@ msgstr "Jména hráčů:"
 msgid "Character switching"
 msgstr "Výměna hráčů"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -665,7 +671,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -697,7 +703,7 @@ msgstr "Spáchat sebevraždu"
 msgid "Configuration menu"
 msgstr "Menu nastavení"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "Připojit ke hře"
 
@@ -709,13 +715,18 @@ msgstr "Připojeno !"
 msgid "Connected players: "
 msgstr "Připojení hráči: "
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "Stavba"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "Řízeno: "
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Nepodařilo se získat poslední verzi z %s"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -734,7 +745,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Ztráta na kolo během zabijáckého režimu"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -750,11 +761,11 @@ msgstr "Zobrazí tuto zprávu"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 msgid "Down slowly"
 msgstr ""
 
@@ -802,7 +813,7 @@ msgstr "Chyba při nahrávání týmu :"
 msgid "Error loading team :"
 msgstr "Chyba při nahrávání týmu :"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -824,29 +835,29 @@ msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
@@ -865,6 +876,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "Nepodařilo se otevřít adresář s mapami (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Plamenomet"
@@ -873,7 +894,7 @@ msgstr "Plamenomet"
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "Celá obrazovka?"
@@ -896,7 +917,7 @@ msgstr "Hra"
 msgid "Game mode"
 msgstr "Jméno hry:"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "Jméno hry:"
 
@@ -936,7 +957,7 @@ msgstr "Inicializace teréhu..."
 msgid "Gun"
 msgstr "Pistole"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
@@ -947,16 +968,16 @@ msgstr "Přeji dobrou hru!"
 msgid "Head commander"
 msgstr "Velitel"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Nápověda"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "Vysoký skok"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "Hostovat hru"
 
@@ -973,7 +994,7 @@ msgstr ""
 "Pokud naleznete chybu, nebo máte nápad na zlepšení, pošlete nám email (v "
 "angličtine):"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -1019,7 +1040,7 @@ msgstr "To je dáreček!"
 msgid "Jetpack"
 msgstr "Tryskový batoh"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "Skočit"
 
@@ -1037,6 +1058,11 @@ msgstr ""
 "Použití : držet stisknutý mezerník\n"
 "Úhel : Nahoru/Dolů\n"
 "munice letí obloukem"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -1080,9 +1106,8 @@ msgstr "Místní týmy:"
 msgid "LowGrav"
 msgstr "Nízká gravitace"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "Připojit se ručně"
 
@@ -1127,6 +1152,11 @@ msgstr "Mina"
 msgid "Misc"
 msgstr "Ostatní"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Nejpřesnější"
@@ -1147,22 +1177,22 @@ msgstr "Nejzbytečnější"
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "Padák"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "Padák"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "Padák"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "Padák"
@@ -1177,19 +1207,19 @@ msgstr "Posuň kameru myší nebo šipkami"
 msgid "Move character"
 msgstr "Padák"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1227,7 +1257,7 @@ msgstr "Nová síťová hra na "
 msgid "New player warning?"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "Padák"
@@ -1242,11 +1272,15 @@ msgstr "V konfiguračním xml souboru nebyl nalezen žádný element <%s>!"
 msgid "No player connected"
 msgstr "%i hráč připojen"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "Nikdo!"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "hotovo"
@@ -1270,7 +1304,7 @@ msgstr "Na hráči: změní aktivního"
 msgid "On map: select a target"
 msgstr "Na mapě: vybrat cíl"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "Volby menu"
@@ -1294,13 +1328,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "Heslo:"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr ""
 
@@ -1339,8 +1373,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Odpalovač tchořů"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "Port:"
 
@@ -1396,7 +1430,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "Veřejné hry"
 
@@ -1404,7 +1438,7 @@ msgstr "Veřejné hry"
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Ukončit"
 
@@ -1429,12 +1463,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "Zde je jen %i tým."
+
+#: src/game/config.cpp:368
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Čtu výchozí konfigurační soubor"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Čtu osobní konfigurační soubor"
@@ -1464,52 +1503,52 @@ msgstr "Velikost posuvníků"
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Změnit druh zbraně"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "Adresa serveru:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
@@ -1518,6 +1557,7 @@ msgstr "Server přístupný z Internetu"
 msgid "Server mode"
 msgstr "Serverový režim"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1526,7 +1566,6 @@ msgstr "Serverový režim"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1551,7 +1590,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "Brokovnice"
@@ -1602,11 +1641,11 @@ msgstr "Ostřelovací puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
@@ -1777,6 +1816,11 @@ msgstr[0] "Zde je jen %i tým."
 msgstr[1] "Zde jsou jen %i týmy."
 msgstr[2] "Zde je jen %i týmů."
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1808,17 +1852,17 @@ msgstr ""
 "Odpálení : Mezerník\n"
 "munice letí obloukem"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Zobrazit/skrýt rozhraní"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Zobrazit/skrýt minimapu"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Volby menu"
@@ -1856,11 +1900,11 @@ msgstr "Neznámý příkaz"
 msgid "Unlimited"
 msgstr "(neomezeně)"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -1993,6 +2037,11 @@ msgstr "Špatné jméno mapy!"
 msgid "Wrong team!"
 msgstr "Špatný tým!"
 
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
+
 #: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
@@ -2106,9 +2155,6 @@ msgstr "o Otevřena hudba o %d Hz %d bitech"
 
 #~ msgid "Max number of players:"
 #~ msgstr "Maximální počet hráčů:"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Nepodařilo se získat poslední verzi z %s"
 
 #, fuzzy
 #~ msgid "Error in %s:%lu (Wormux %s) : %s"

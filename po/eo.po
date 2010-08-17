@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -451,6 +451,12 @@ msgstr ""
 "Nova versio %s estas havebla, dum via estas %s. Vi eble volas kontroli ĉu "
 "estas ĝisdatigaĵo por via mastruma sistemo!"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "Opcioj"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Aeratako"
@@ -494,7 +500,7 @@ msgstr "Aŭtoroj:"
 msgid "Automatic Bazooka"
 msgstr "Aŭtomatika bazuko"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -562,7 +568,7 @@ msgstr "Ne eblas malfermi la dosierujon de propraj teamoj (%s)!"
 msgid "Center camera on character"
 msgstr "Centrigi la kameraon ĉe la ulo"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "Ŝanĝi aktivan ulon"
@@ -577,7 +583,7 @@ msgstr "Ŝanĝi aktivan ulon"
 msgid "Change aim angle"
 msgstr "Ŝanĝi celangulon"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "Ŝanĝi kategorion de armilo"
@@ -601,7 +607,7 @@ msgstr "Ulo"
 msgid "Character switching"
 msgstr "Ulŝanĝo"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -623,7 +629,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -655,7 +661,7 @@ msgstr "Sinmortigi"
 msgid "Configuration menu"
 msgstr "Agordmenuo"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "Konekti al ludo"
 
@@ -668,13 +674,18 @@ msgstr "Konektita!"
 msgid "Connected players: "
 msgstr "Konektita!"
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "Konstruilo"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "Stirato per:"
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Ne ebli elpreni la lastan version el %s"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -693,7 +704,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Vundo per vico ĉe subitmorta modo"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -709,11 +720,11 @@ msgstr "Montri tiun mesaĝon"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 msgid "Down slowly"
 msgstr ""
 
@@ -761,7 +772,7 @@ msgstr "Eraro ŝargante teamon:"
 msgid "Error loading team :"
 msgstr "Eraro ŝargante teamon:"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -782,26 +793,26 @@ msgstr ""
 "Eraro forigante dosierujon \"%s\": ne eblas forigi la dosieron de agordo."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s: %s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Eraro: Ne eblas starti servilon"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
@@ -820,6 +831,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "Ne eblas malfermi la dosierujon de mapoj (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Flamĵetilo"
@@ -828,7 +849,7 @@ msgstr "Flamĵetilo"
 msgid "Football Bomb"
 msgstr "Futbalbombo"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "Plenekrane?"
@@ -849,7 +870,7 @@ msgstr "Ludo"
 msgid "Game mode"
 msgstr "Ludmodo"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "Ludnomo:"
 
@@ -889,7 +910,7 @@ msgstr "Preparante la grundon..."
 msgid "Gun"
 msgstr "Pistolo"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "Bone amuzu!"
 
@@ -900,16 +921,16 @@ msgstr "Bone amuzu!"
 msgid "Head commander"
 msgstr "Ĉefkomandoro"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Helpo"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "Supersalti"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "Gastigi ludon"
 
@@ -926,7 +947,7 @@ msgstr ""
 "Se vi trovas cimon aŭ havas demandon pri funcio, sendu retleteron al ni "
 "(bonvolu angllingve):"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -972,7 +993,7 @@ msgstr "Tio estas donaco!"
 msgid "Jetpack"
 msgstr "Jetpako"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "Salti"
 
@@ -989,6 +1010,11 @@ msgid ""
 msgstr ""
 "Kiel uzi ĝin: apogu kontinue spacetosignon\n"
 "Unu uzo vice"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -1032,9 +1058,8 @@ msgstr "Lokaj teamoj:"
 msgid "LowGrav"
 msgstr "Malpezigilo"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "Manuma konekto"
 
@@ -1078,6 +1103,11 @@ msgstr "Mino"
 msgid "Misc"
 msgstr "Diversaĵoj"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "La plej akurata"
@@ -1098,22 +1128,22 @@ msgstr "La plej malutila"
 msgid "Most violent"
 msgstr "La plej perforta"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "Movi ulon"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "Movi ulon"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "Movi ulon"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "Movi ulon"
@@ -1128,19 +1158,19 @@ msgstr "Movi la kameraon per muso aŭ sagoj"
 msgid "Move character"
 msgstr "Movi ulon"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1178,7 +1208,7 @@ msgstr "Nova reta ludo ĉe"
 msgid "New player warning?"
 msgstr "Ĉu averti pri nova ludanto?"
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "Movi ulon"
@@ -1193,11 +1223,15 @@ msgstr "Neniu ero <%s> trovita en la XML dosiero de agordo!"
 msgid "No player connected"
 msgstr "%i ludanto konektiĝis"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "Neniu!"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "farita"
@@ -1221,7 +1255,7 @@ msgstr "Sur ulo: ŝanĝi la aktiva ulon"
 msgid "On map: select a target"
 msgstr "Sur mapo: elekti celon"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "Opciomenuo"
@@ -1245,13 +1279,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "Pasvorto:"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr "Paŭzi"
 
@@ -1290,8 +1324,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Putorĵetilo"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "Pordo:"
 
@@ -1347,7 +1381,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "Publikaj bataloj"
 
@@ -1355,7 +1389,7 @@ msgstr "Publikaj bataloj"
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Forlasi"
 
@@ -1379,12 +1413,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Hazarda mapo"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "Estas nur %i teamo."
+
+#: src/game/config.cpp:368
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Legante personan agordaron"
@@ -1413,52 +1452,52 @@ msgstr "Grandeco de rulumrando"
 msgid "Scroll on border"
 msgstr "Rulumi sur randoj"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Ŝanĝi kategorion de armilo"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "Servila adreso:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
@@ -1467,6 +1506,7 @@ msgstr "Interretebla servilo"
 msgid "Server mode"
 msgstr "Servila modo"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1475,7 +1515,6 @@ msgstr "Servila modo"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1500,7 +1539,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "Blovfusilo"
@@ -1551,11 +1590,11 @@ msgstr "Tiraljora fusilo"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
@@ -1724,6 +1763,11 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Estas nur %i teamo."
 msgstr[1] "Estas nur %i teamoj."
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1753,17 +1797,17 @@ msgstr ""
 "Angulo: Supren/Malsupren\n"
 "Pafo: spacetosignoUnu pafo vice"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Montri/Kaŝi interfacon"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Montri/Kaŝi minimapon"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Montri la menuon de armiloj"
@@ -1801,11 +1845,11 @@ msgstr "Nekonata komando"
 msgid "Unlimited"
 msgstr "(senlimaj)"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -1935,6 +1979,11 @@ msgstr "Malbona mapnomo!"
 msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
+
 #: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
@@ -2054,9 +2103,6 @@ msgstr "o Malferminte %d Hz %d bit-an sonon"
 
 #~ msgid "Automatically join a game"
 #~ msgstr "Aŭtomate aliĝi al ludo"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Ne ebli elpreni la lastan version el %s"
 
 #~ msgid "Delete custom team"
 #~ msgstr "Forigi propran teamon"

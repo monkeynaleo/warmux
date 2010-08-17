@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2008-11-23 21:59+0300\n"
 "Last-Translator: Guido Tabbernuk <guido.tabbernuk@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -450,6 +450,12 @@ msgstr ""
 "Uus väljalase %s on saadaval. Kasutatav väljalase on %s. Võiksid "
 "kontrollida, kas on olemas uuendus sinu süsteemi jaoks!"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "Suvandid"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Õhurünnak"
@@ -493,7 +499,7 @@ msgstr "Autorid:"
 msgid "Automatic Bazooka"
 msgstr "Intelligentne mürsk"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -561,7 +567,7 @@ msgstr "Ei suuda avada kohandet meeskondade kausta (%s)!"
 msgid "Center camera on character"
 msgstr "Fokuseeri kaamera tegelaskujule"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "Vaheta aktiivset tegelaskuju"
@@ -576,7 +582,7 @@ msgstr "Vaheta aktiivset tegelaskuju"
 msgid "Change aim angle"
 msgstr "Muuda sihtimisnurka"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "Muuda relvatüüpi"
@@ -600,7 +606,7 @@ msgstr "Tegelaskuju"
 msgid "Character switching"
 msgstr "Vaheta tegelaskuju"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -622,7 +628,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -654,7 +660,7 @@ msgstr "Enesetapp"
 msgid "Configuration menu"
 msgstr "Seadistusmenüü"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "Ühendu mängu"
 
@@ -666,13 +672,18 @@ msgstr "Ühendatud!"
 msgid "Connected players: "
 msgstr "Ühendet mängijaid:"
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "Ehitusplokk"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "Pealik:"
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Ei suuda alla laadida viimast väljalaset serverist %s"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -691,7 +702,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Kahju käigu kohta surmare¸iimis"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -707,11 +718,11 @@ msgstr "Näita seda sõnumit"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 msgid "Down slowly"
 msgstr ""
 
@@ -759,7 +770,7 @@ msgstr "Viga meeskonna laadimisel:"
 msgid "Error loading team :"
 msgstr "Viga meeskonna laadimisel:"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -779,26 +790,26 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Viga faili \"%s\" kustutamisel. Ei suuda kustutada kohandet meeskonda."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Viga: Ei saa ühenduda serveriga %s:%s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Viga: Ei saa ühendust indeksserveriga, et mängu üles seada"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Viga: Ei saa ühendust indeksserveriga, et valida mängu internetis"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Viga: Ei suuda serverit käivitada"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
@@ -817,6 +828,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Viga: Ei suuda leida keha \"%s\" meeskonna \"%s\" jaoks."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "Ei suuda avada mängväljade kausta (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Leegiheitja"
@@ -825,7 +846,7 @@ msgstr "Leegiheitja"
 msgid "Football Bomb"
 msgstr "Jalgpomm"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "Täisekraan?"
@@ -846,7 +867,7 @@ msgstr "Mäng"
 msgid "Game mode"
 msgstr "Mängure¸iim"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "Mängu nimi:"
 
@@ -886,7 +907,7 @@ msgstr "Sätin mänguvälja..."
 msgid "Gun"
 msgstr "Püstol"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "Õnn kaasa!"
 
@@ -897,16 +918,16 @@ msgstr "Õnn kaasa!"
 msgid "Head commander"
 msgstr "Pealik"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Appi"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "Kõrgushüpe"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "Sea mäng üles"
 
@@ -923,7 +944,7 @@ msgstr ""
 "Falls du einen Fehler gefunden oder einen Featurewunsch hast, sende uns eine "
 "E-Mail (in English bitte):"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -969,7 +990,7 @@ msgstr "Teile on pakk!"
 msgid "Jetpack"
 msgstr "Reaktiivranits"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "Hüpe"
 
@@ -987,6 +1008,11 @@ msgstr ""
 "Kasutamine: Hoia tühikut all\n"
 "Nurk: Üles/alla\n"
 "üks soru käigu kohta"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -1030,9 +1056,8 @@ msgstr "Kohalikud meeskonnad:"
 msgid "LowGrav"
 msgstr "Antigravikiiver"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "Käsitsi ühendumine"
 
@@ -1075,6 +1100,11 @@ msgstr "Miin"
 msgid "Misc"
 msgstr "Täppisseaded"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Täpseim"
@@ -1095,22 +1125,22 @@ msgstr "Kasutuim"
 msgid "Most violent"
 msgstr "Vägivaldseim"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "Liiguta tegelaskuju"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "Liiguta tegelaskuju"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "Liiguta tegelaskuju"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "Liiguta tegelaskuju"
@@ -1125,19 +1155,19 @@ msgstr "Kaamerat liiguta hiire või nooleklahvidega"
 msgid "Move character"
 msgstr "Liiguta tegelaskuju"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1175,7 +1205,7 @@ msgstr "Uus võrgumäng asukohas"
 msgid "New player warning?"
 msgstr "Hoiatus uue mängija puhul?"
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "Liiguta tegelaskuju"
@@ -1189,11 +1219,15 @@ msgstr "Ei leia elementi <%s> XML-seadistuste säilikust!"
 msgid "No player connected"
 msgstr "Ühtki mängijat pole ühendet"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "Eikedagi!"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "valmis"
@@ -1217,7 +1251,7 @@ msgstr "Tegelaskuju peal: vahetab aktiivset"
 msgid "On map: select a target"
 msgstr "Mänguväljal: vali sobiv"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "Suvandite menüü"
@@ -1241,13 +1275,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "Salasõna:"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr "Paus"
 
@@ -1286,8 +1320,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Haisutuhkur"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "Port:"
 
@@ -1343,7 +1377,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "Jäta lahing sinnapaika"
 
@@ -1351,7 +1385,7 @@ msgstr "Jäta lahing sinnapaika"
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Välju"
 
@@ -1375,12 +1409,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Juhuslik mänguväli"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "On vaid %i meeskond."
+
+#: src/game/config.cpp:368
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Laadi standardseadistus"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Laadi isikik seadistus"
@@ -1409,52 +1448,52 @@ msgstr "Kerimisraami suurus"
 msgid "Scroll on border"
 msgstr "Kerimisraam?"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Muuda relvatüüpi"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Muuda relvatüüpi"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "Serveriaadress:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "Server on saadaval internetis"
 
@@ -1463,6 +1502,7 @@ msgstr "Server on saadaval internetis"
 msgid "Server mode"
 msgstr "Serverire¸iim"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1471,7 +1511,6 @@ msgstr "Serverire¸iim"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1496,7 +1535,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "Haavlipüss"
@@ -1547,11 +1586,11 @@ msgstr "Täpsuspüss"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Keegi oli na üllatuse kasti pistnud!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
@@ -1720,6 +1759,11 @@ msgid_plural "There are only %i teams."
 msgstr[0] "On vaid %i meeskond."
 msgstr[1] "On vaid %i meeskonda."
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1751,17 +1795,17 @@ msgstr ""
 "Tulistamine: Tühik\n"
 "üks soru käigu kohta"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Näita/peida liides"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Näita/peida navigaator"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Näita relvamenüüd"
@@ -1798,11 +1842,11 @@ msgstr "Tundmatu käsk"
 msgid "Unlimited"
 msgstr "Piiramatu"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -1933,6 +1977,11 @@ msgstr "Vale mänguvälja nimi!"
 msgid "Wrong team!"
 msgstr "Vale meeskond!"
 
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
+
 #: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
@@ -2050,9 +2099,6 @@ msgstr "o Audio sätitud %d Hz ja %d biti peale"
 
 #~ msgid "Add custom team"
 #~ msgstr "Lisa kohandet meeskond"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Ei suuda alla laadida viimast väljalaset serverist %s"
 
 #~ msgid "Delete custom team"
 #~ msgstr "Kustuta kohandet meeskond"

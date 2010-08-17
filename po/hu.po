@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2008-11-09 22:37+0100\n"
 "Last-Translator: Varady Tamas <tvarady@freemail.hu>\n"
 "Language-Team: Hungarian\n"
@@ -445,6 +445,12 @@ msgstr ""
 "Egy új verzió %s elérhetõ, a te verziód: %s. Megnézhetnéd, hogy van-e az "
 "operációs rendszeredhez tartozó frissítés!"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "Beállítások"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Légitámadás"
@@ -488,7 +494,7 @@ msgstr "Szerzõk:"
 msgid "Automatic Bazooka"
 msgstr "Automata rakétavetõ"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -556,7 +562,7 @@ msgstr "Nem tudom megnyitni az egyéni csapatok könyvtárát (%s)!"
 msgid "Center camera on character"
 msgstr "Kamera karakterre állítása"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "Aktív karakter megváltoztatása"
@@ -571,7 +577,7 @@ msgstr "Aktív karakter megváltoztatása"
 msgid "Change aim angle"
 msgstr "Célzás szögének megváltoztatása"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "Fegyverkategória váltása"
@@ -595,7 +601,7 @@ msgstr "Karakter"
 msgid "Character switching"
 msgstr "Karakterváltás lehetõsége"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -617,7 +623,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -649,7 +655,7 @@ msgstr "Öngyilkosság"
 msgid "Configuration menu"
 msgstr "Konfigurációs menü"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "Kapcsolódás játékhoz"
 
@@ -662,13 +668,18 @@ msgstr "Kapcsolódva !"
 msgid "Connected players: "
 msgstr "VÄ‚Â„Ã‚Â‚Ä‚Â‚Ã‚Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â‚Ã„Â‚Ã‚Â„Ã„Å¡Ã„Â„Ã„Â‚Ã‚Â‚Ä‚Â‚Ã‚Â ge!"
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "Építõ"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "Irányítja:"
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Nem tudom leszedni az utolsó verziót: %s"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -687,7 +698,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Sérülés halál módban"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -703,11 +714,11 @@ msgstr "Megjeleníti ezt az üzenetet"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 msgid "Down slowly"
 msgstr ""
 
@@ -755,7 +766,7 @@ msgstr "Hiba a csapat betöltése közben:"
 msgid "Error loading team :"
 msgstr "Hiba a csapat betöltése közben:"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -779,28 +790,28 @@ msgstr ""
 "Hiba a(z) \"%s\" fájl törlése közben: nem lehet az egyéni csapatot törölni."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Hiba: Nem sikerült csatlakozni (%s:%s)"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Hiba: Nem sikerült kapcsolódni a központi szerverhez a játék létrehozásához"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Hiba: Nem sikerült a központi szerverhez kapcsolódni játékok kereséséhez"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Hiba: Nem sikerült a szerver indítása"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
@@ -819,6 +830,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem találom a(z) \"%s\" testet a(z) \"%s\" csapathoz."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "Nem sikerült megnyitni a pályák könyvtárát (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Lángszóró"
@@ -827,7 +848,7 @@ msgstr "Lángszóró"
 msgid "Football Bomb"
 msgstr "Rögbibomba"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "Teljesképernyõs"
@@ -848,7 +869,7 @@ msgstr "Játék beállítások"
 msgid "Game mode"
 msgstr "Játékmód"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "Játék neve:"
 
@@ -888,7 +909,7 @@ msgstr "Terep elõkészítése..."
 msgid "Gun"
 msgstr "Pisztoly"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "Jó játékot!"
 
@@ -899,16 +920,16 @@ msgstr "Jó játékot!"
 msgid "Head commander"
 msgstr "Parancsnok"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Súgó"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "Magasugrás"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "Játék létrehozása"
 
@@ -924,7 +945,7 @@ msgid ""
 msgstr ""
 "Ha hibát találtál vagy hasznos ötleted van, írd meg e-mailben (angolul):"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -970,7 +991,7 @@ msgstr "Ez egy ajándék!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "Ugrás"
 
@@ -988,6 +1009,11 @@ msgstr ""
 "Így használd : tartsd lenyomva a space-t\n"
 "Irányzék : Fel/Le\n"
 "egy lövés körönként"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -1031,9 +1057,8 @@ msgstr "Helyi csapatok:"
 msgid "LowGrav"
 msgstr "Alacsony gravitáció"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "Kézi kapcsolat"
 
@@ -1077,6 +1102,11 @@ msgstr "Taposóakna"
 msgid "Misc"
 msgstr "Egyéb"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Leghatékonyabb"
@@ -1097,22 +1127,22 @@ msgstr "Leghaszontalanabb"
 msgid "Most violent"
 msgstr "Legerõszakosabb"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "Karakter mozgatása"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "Karakter mozgatása"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "Karakter mozgatása"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "Karakter mozgatása"
@@ -1127,19 +1157,19 @@ msgstr "Kamera mozgatása egérrel vagy nyilakkal"
 msgid "Move character"
 msgstr "Karakter mozgatása"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1177,7 +1207,7 @@ msgstr "Új hálózati játék"
 msgid "New player warning?"
 msgstr "Figyelmeztetés új játékosnál?"
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "Karakter mozgatása"
@@ -1192,11 +1222,15 @@ msgstr "A(z) <%s> elem nem található a konfigurációs XML fájlban!"
 msgid "No player connected"
 msgstr "%i játékos lépett be"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "Senki!"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "kész"
@@ -1220,7 +1254,7 @@ msgstr "Egy karakteren: Kiválasztja az aktívat"
 msgid "On map: select a target"
 msgstr "A térképen: célpont kijelölése"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "Beállítások"
@@ -1244,13 +1278,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "Jelszó:"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr "Szünet"
 
@@ -1289,8 +1323,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Borz-lövõ"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "Port:"
 
@@ -1346,7 +1380,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "Nyilvános játékok"
 
@@ -1354,7 +1388,7 @@ msgstr "Nyilvános játékok"
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Kilépés"
 
@@ -1378,12 +1412,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Véletlen pálya"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "Csak %i csapat van."
+
+#: src/game/config.cpp:368
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Alapértelmezett konfigurációs fájl beolvasása"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Személyes konfigurációs fájl olvasása"
@@ -1412,52 +1451,52 @@ msgstr "Görgetõ keret mérete"
 msgid "Scroll on border"
 msgstr "Görgetés a széleknél"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Fegyverkategória váltása"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Fegyverkategória váltása"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "Szerver címe:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "Interneten elérhetõ szerver"
 
@@ -1466,6 +1505,7 @@ msgstr "Interneten elérhetõ szerver"
 msgid "Server mode"
 msgstr "Szerver mód"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1474,7 +1514,6 @@ msgstr "Szerver mód"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1499,7 +1538,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "Sörétespuska"
@@ -1550,11 +1589,11 @@ msgstr "Mesterlövész puska"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Valaki bombát rejtett a ládába!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sajnálom, most egy játék sem vár játékosokat!"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
@@ -1725,6 +1764,11 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Csak %i csapat van."
 msgstr[1] "Csak %i csapat van."
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1756,17 +1800,17 @@ msgstr ""
 "Tûz : space\n"
 "egy lövés körönként"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Kezelõfelület megjelenítése/elrejtése"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Minitérkép megjelenítése/elrejtése"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Fegyverek megjelenítése"
@@ -1803,11 +1847,11 @@ msgstr "Ismeretlen parancs"
 msgid "Unlimited"
 msgstr "Korlátlan"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -1937,6 +1981,11 @@ msgstr "Hibás pályanév!"
 #: src/include/action_handler.cpp:238
 msgid "Wrong team!"
 msgstr "Hibás csapat!"
+
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
 
 #: src/menu/network_menu.cpp:380
 #, fuzzy
@@ -2194,9 +2243,6 @@ msgstr "Hangminõség: %d Hz, %d bit"
 
 #~ msgid "Connect to an internet game"
 #~ msgstr "Kapcsolódás internetes játékhoz"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Nem tudom leszedni az utolsó verziót: %s"
 
 #~ msgid "Delete custom team"
 #~ msgstr "Egyéni csapat törlése"

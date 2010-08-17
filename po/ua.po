@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ua\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-16 14:35+0200\n"
+"POT-Creation-Date: 2010-08-18 01:07+0200\n"
 "PO-Revision-Date: 2010-04-19 22:12+0200\n"
 "Last-Translator: Victor VMC <postvmc@gmail.com>\n"
 "Language-Team: Ukrainian <ua@li.org>\n"
@@ -507,6 +507,12 @@ msgstr ""
 "Вже з'явилась версія %s, яка є більш новою, ніж Ваша версія %s. Перевірте, "
 "чи нема оновлення гри для вашої операційної системи!"
 
+#. Action name
+#: src/gui/control_config.cpp:190
+#, fuzzy
+msgid "Action"
+msgstr "Налаштування"
+
 #: src/weapon/air_attack.cpp:217
 msgid "Air Attack"
 msgstr "Повітряна атака"
@@ -550,7 +556,7 @@ msgstr "Автори:"
 msgid "Automatic Bazooka"
 msgstr "Автоматична базука"
 
-#: src/interface/man_machine_interface.cpp:1132
+#: src/interface/man_machine_interface.cpp:1131
 msgid "Back jump"
 msgstr ""
 
@@ -618,7 +624,7 @@ msgstr "Не виходить відкрити особистий каталог
 msgid "Center camera on character"
 msgstr "Перемістити камеру на активного гравця"
 
-#: src/interface/man_machine_interface.cpp:1114
+#: src/interface/man_machine_interface.cpp:1113
 #, fuzzy
 msgid "Center on active character"
 msgstr "Змінити активного гравця"
@@ -633,7 +639,7 @@ msgstr "Змінити активного гравця"
 msgid "Change aim angle"
 msgstr "Змінити кут прицілу"
 
-#: src/interface/man_machine_interface.cpp:1134
+#: src/interface/man_machine_interface.cpp:1133
 #, fuzzy
 msgid "Change weapon"
 msgstr "Змінити вид зброї"
@@ -657,7 +663,7 @@ msgstr "Гравець:"
 msgid "Character switching"
 msgstr "Вибір гравця"
 
-#: src/interface/man_machine_interface.cpp:1116
+#: src/interface/man_machine_interface.cpp:1115
 msgid "Chat"
 msgstr ""
 
@@ -679,7 +685,7 @@ msgid ""
 "to a place of your choice."
 msgstr ""
 
-#: src/weapon/construct.cpp:71
+#: src/weapon/construct.cpp:72
 msgid ""
 "Click onto the place, where you\n"
 "want to place the construction.\n"
@@ -711,7 +717,7 @@ msgstr "Самогубство"
 msgid "Configuration menu"
 msgstr "Меню налаштувань"
 
-#: src/menu/network_connection_menu.cpp:216
+#: src/menu/network_connection_menu.cpp:151
 msgid "Connect to game"
 msgstr "Підключитись до гри"
 
@@ -724,13 +730,18 @@ msgstr "Підключений !"
 msgid "Connected players: "
 msgstr "Підключений !"
 
-#: src/weapon/construct.cpp:61 src/weapon/construct.cpp:70
+#: src/weapon/construct.cpp:62 src/weapon/construct.cpp:71
 msgid "Construct"
 msgstr "Будівництво"
 
 #: src/menu/results_menu.cpp:440
 msgid "Controlled by: "
 msgstr "Головуючий: "
+
+#: lib/wormux/net/download.cpp:162
+#, c-format
+msgid "Couldn't fetch last version from %s"
+msgstr "Не виходить скачати останню версію з %s"
 
 #: src/network/chatlogger.cpp:55
 #, c-format
@@ -749,7 +760,7 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Пошкодження за хід під час режиму смерті"
 
-#: src/interface/man_machine_interface.cpp:1144
+#: src/interface/man_machine_interface.cpp:1143
 msgid "Decrease explosion delay"
 msgstr ""
 
@@ -765,11 +776,11 @@ msgstr "Показувати це повідомлення"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1123
+#: src/interface/man_machine_interface.cpp:1122
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1124
+#: src/interface/man_machine_interface.cpp:1123
 msgid "Down slowly"
 msgstr ""
 
@@ -817,7 +828,7 @@ msgstr "Помилка при завантаженні команди :"
 msgid "Error loading team :"
 msgstr "Помилка при завантаженні команди :"
 
-#: src/game/config.cpp:556 src/team/custom_team.cpp:167
+#: src/game/config.cpp:561 src/team/custom_team.cpp:167
 #: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
 #, c-format
 msgid ""
@@ -839,27 +850,27 @@ msgstr ""
 "Помилка при видаленні файлу \"%s\": не вийшло видалити особисту команду."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:503
+#: src/menu/network_connection_menu.cpp:512
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Помилка: не вийшло підключитись к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:462
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Помилка: Не вийшло з'єднатися з сервером, щоб створити гру"
 
-#: src/menu/network_connection_menu.cpp:369
+#: src/menu/network_connection_menu.cpp:378
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Помилка: Не вийшло з'єднатися з вказаним сервером, щоб знайти Інтернет-гру"
 
-#: src/menu/network_connection_menu.cpp:481
+#: src/menu/network_connection_menu.cpp:490
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Помилка: Не вийшло запустити сервер"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:483
 #: tools/servers/game_server/server.cpp:302
 #, fuzzy, c-format
 msgid ""
@@ -878,6 +889,16 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Помилка: не виходить знайти тему \"%s\" для команди \"%s\"."
 
+#: lib/wormux/net/download.cpp:147 lib/wormux/net/download.cpp:188
+#, c-format
+msgid "Fail to create temporary file: %s"
+msgstr ""
+
+#: lib/wormux/net/download.cpp:154
+#, fuzzy, c-format
+msgid "Fail to open temporary file: %s"
+msgstr "Неможливо відкрити каталог з мапами (%s)!"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Вогнемет"
@@ -886,7 +907,7 @@ msgstr "Вогнемет"
 msgid "Football Bomb"
 msgstr "Футбольна бомба"
 
-#: src/interface/man_machine_interface.cpp:1112
+#: src/interface/man_machine_interface.cpp:1111
 #, fuzzy
 msgid "Fullscreen"
 msgstr "На весь екран?"
@@ -907,7 +928,7 @@ msgstr "Гра"
 msgid "Game mode"
 msgstr "Режим гри"
 
-#: src/menu/network_connection_menu.cpp:239
+#: src/menu/network_connection_menu.cpp:248
 msgid "Game name:"
 msgstr "Ім'я гри:"
 
@@ -947,7 +968,7 @@ msgstr "Ініціалізація місцевості..."
 msgid "Gun"
 msgstr "Пістолет"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:296
 msgid "Have a good game!"
 msgstr "Гарної гри!"
 
@@ -958,16 +979,16 @@ msgstr "Гарної гри!"
 msgid "Head commander"
 msgstr "Головуючий"
 
-#: src/interface/man_machine_interface.cpp:1131 src/menu/main_menu.cpp:68
+#: src/interface/man_machine_interface.cpp:1130 src/menu/main_menu.cpp:68
 #: src/menu/pause_menu.cpp:55
 msgid "Help"
 msgstr "Довідка"
 
-#: src/interface/man_machine_interface.cpp:1130 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1129 src/menu/help_menu.cpp:36
 msgid "High jump"
 msgstr "Високий стрибок"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:272
 msgid "Host a game"
 msgstr "Стати сервером"
 
@@ -984,7 +1005,7 @@ msgstr ""
 "Якщо ви знашли помилку чи у вас є якісь побажання, надішліть нам email "
 "(англійською, будь-ласка):"
 
-#: src/interface/man_machine_interface.cpp:1145
+#: src/interface/man_machine_interface.cpp:1144
 msgid "Increase explosion delay"
 msgstr ""
 
@@ -1030,7 +1051,7 @@ msgstr "Це подарунок!"
 msgid "Jetpack"
 msgstr "Реактивний ранець"
 
-#: src/interface/man_machine_interface.cpp:1129
+#: src/interface/man_machine_interface.cpp:1128
 msgid "Jump"
 msgstr "Стрибок"
 
@@ -1048,6 +1069,11 @@ msgstr ""
 "Правила використання : зажміть пробіл\n"
 "Кут : Вверх/Вниз\n"
 "патрон за хід"
+
+#. Actual key
+#: src/gui/control_config.cpp:202
+msgid "Key"
+msgstr ""
 
 #: src/menu/options_menu.cpp:151
 msgid "Key bindings"
@@ -1091,9 +1117,8 @@ msgstr "Локальні команди:"
 msgid "LowGrav"
 msgstr "Антигравітатор"
 
-#. #############################
-#. Manual connection
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:186
+#: src/menu/network_connection_menu.cpp:188
 msgid "Manual connection"
 msgstr "З'єднання вручну"
 
@@ -1137,6 +1162,11 @@ msgstr "Міна"
 msgid "Misc"
 msgstr "Різне"
 
+#. Modifiers
+#: src/gui/control_config.cpp:196
+msgid "Modifiers"
+msgstr ""
+
 #: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Most accurate"
 msgstr "Самий точний"
@@ -1157,22 +1187,22 @@ msgstr "Самий даремний"
 msgid "Most violent"
 msgstr "Самий жорстокий"
 
-#: src/interface/man_machine_interface.cpp:1128
+#: src/interface/man_machine_interface.cpp:1127
 #, fuzzy
 msgid "Move camera down"
 msgstr "Курсори руху"
 
-#: src/interface/man_machine_interface.cpp:1125
+#: src/interface/man_machine_interface.cpp:1124
 #, fuzzy
 msgid "Move camera left"
 msgstr "Курсори руху"
 
-#: src/interface/man_machine_interface.cpp:1126
+#: src/interface/man_machine_interface.cpp:1125
 #, fuzzy
 msgid "Move camera right"
 msgstr "Курсори руху"
 
-#: src/interface/man_machine_interface.cpp:1127
+#: src/interface/man_machine_interface.cpp:1126
 #, fuzzy
 msgid "Move camera up"
 msgstr "Курсори руху"
@@ -1187,19 +1217,19 @@ msgstr "Перемістити камеру з допомогою мишки ч�
 msgid "Move character"
 msgstr "Курсори руху"
 
-#: src/interface/man_machine_interface.cpp:1117
+#: src/interface/man_machine_interface.cpp:1116
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1118
+#: src/interface/man_machine_interface.cpp:1117
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1119
+#: src/interface/man_machine_interface.cpp:1118
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1120
+#: src/interface/man_machine_interface.cpp:1119
 msgid "Move right slowly"
 msgstr ""
 
@@ -1237,7 +1267,7 @@ msgstr "Нова гра по мережі"
 msgid "New player warning?"
 msgstr "Застереження про появу нового гравця?"
 
-#: src/interface/man_machine_interface.cpp:1146
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Next character"
 msgstr "Курсори руху"
@@ -1252,11 +1282,15 @@ msgstr "Елемент <%s> не знайдений в файлі з налаш�
 msgid "No player connected"
 msgstr "%i гравець приєднався"
 
+#: lib/wormux/net/download.cpp:110
+msgid "No pointer"
+msgstr ""
+
 #: src/menu/results_menu.cpp:79
 msgid "Nobody!"
 msgstr "Ніхто!"
 
-#: src/interface/man_machine_interface.cpp:1152
+#: src/gui/control_config.cpp:89 src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "None"
 msgstr "Добре"
@@ -1280,7 +1314,7 @@ msgstr "На гравці: Вибрати гравця"
 msgid "On map: select a target"
 msgstr "На мапі: Вибрати ціль"
 
-#: src/interface/man_machine_interface.cpp:1147
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Open options menu"
 msgstr "Меню налаштувань"
@@ -1304,13 +1338,13 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:172
-#: src/menu/network_connection_menu.cpp:211
-#: src/menu/network_connection_menu.cpp:251
+#: src/menu/network_connection_menu.cpp:174
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:260
 msgid "Password:"
 msgstr "Пароль:"
 
-#: src/interface/man_machine_interface.cpp:1111
+#: src/interface/man_machine_interface.cpp:1110
 msgid "Pause"
 msgstr "Пауза"
 
@@ -1349,8 +1383,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Скунс"
 
-#: src/menu/network_connection_menu.cpp:200
-#: src/menu/network_connection_menu.cpp:228
+#: src/menu/network_connection_menu.cpp:210
+#: src/menu/network_connection_menu.cpp:237
 msgid "Port:"
 msgstr "Порт:"
 
@@ -1406,7 +1440,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:158
+#: src/menu/network_connection_menu.cpp:160
 msgid "Public battles"
 msgstr "Доступні битви"
 
@@ -1414,7 +1448,7 @@ msgstr "Доступні битви"
 msgid "Quickly quit game with Ctrl"
 msgstr "Швидкий вихід з гри з Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1102 src/menu/main_menu.cpp:74
+#: src/interface/man_machine_interface.cpp:1101 src/menu/main_menu.cpp:74
 msgid "Quit"
 msgstr "Вийти"
 
@@ -1438,12 +1472,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Випадкова мапа"
 
-#: src/game/config.cpp:363
+#: lib/wormux/net/download.cpp:104
+#, fuzzy, c-format
+msgid "Read only %i bytes"
+msgstr "Всього %i команда."
+
+#: src/game/config.cpp:368
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Зчитування конфігу за замовчанням"
 
-#: src/game/config.cpp:423
+#: src/game/config.cpp:428
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Зчитування персонального конфігу"
@@ -1472,52 +1511,52 @@ msgstr "Розмір прокрутки"
 msgid "Scroll on border"
 msgstr "Прокрутка на межі"
 
-#: src/interface/man_machine_interface.cpp:1107
+#: src/interface/man_machine_interface.cpp:1106
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1103
+#: src/interface/man_machine_interface.cpp:1102
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1108
+#: src/interface/man_machine_interface.cpp:1107
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1104
+#: src/interface/man_machine_interface.cpp:1103
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1106
+#: src/interface/man_machine_interface.cpp:1105
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1105
+#: src/interface/man_machine_interface.cpp:1104
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1109
+#: src/interface/man_machine_interface.cpp:1108
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Змінити вид зброї"
 
-#: src/interface/man_machine_interface.cpp:1110
+#: src/interface/man_machine_interface.cpp:1109
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Змінити вид зброї"
 
-#: src/menu/network_connection_menu.cpp:189
+#: src/menu/network_connection_menu.cpp:199
 msgid "Server address:"
 msgstr "Адреса сервера:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:259
+#: src/menu/network_connection_menu.cpp:268
 msgid "Server available on Internet"
 msgstr "Сервер доступний в інтернеті"
 
@@ -1526,6 +1565,7 @@ msgstr "Сервер доступний в інтернеті"
 msgid "Server mode"
 msgstr "Режим сервера"
 
+#: src/interface/man_machine_interface.cpp:1134
 #: src/interface/man_machine_interface.cpp:1135
 #: src/interface/man_machine_interface.cpp:1136
 #: src/interface/man_machine_interface.cpp:1137
@@ -1534,7 +1574,6 @@ msgstr "Режим сервера"
 #: src/interface/man_machine_interface.cpp:1140
 #: src/interface/man_machine_interface.cpp:1141
 #: src/interface/man_machine_interface.cpp:1142
-#: src/interface/man_machine_interface.cpp:1143
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1559,7 +1598,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1133
+#: src/interface/man_machine_interface.cpp:1132
 #, fuzzy
 msgid "Shoot"
 msgstr "Дробовик"
@@ -1610,11 +1649,11 @@ msgstr "Снайперська гвинтівка"
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнері була міна-пастка!"
 
-#: src/menu/network_connection_menu.cpp:374
+#: src/menu/network_connection_menu.cpp:383
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Вибачте, на даний момент немає ігор, що очікують гравців"
 
-#: src/menu/network_connection_menu.cpp:423
+#: src/menu/network_connection_menu.cpp:432
 #: tools/servers/game_server/server.cpp:287
 #, fuzzy, c-format
 msgid ""
@@ -1785,6 +1824,11 @@ msgstr[0] "Всього %i команда."
 msgstr[1] "Всього %i команди."
 msgstr[2] "Всього %i команд"
 
+#: src/gui/control_config.cpp:127
+#, c-format
+msgid "This key has already been attributed to '%s'"
+msgstr ""
+
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
 #: src/menu/results_menu.cpp:327
 msgid "Time"
@@ -1816,17 +1860,17 @@ msgstr ""
 "Стрільба : пробіл\n"
 "патрон за хід"
 
-#: src/interface/man_machine_interface.cpp:1113
+#: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Показати/заховати панель"
 
-#: src/interface/man_machine_interface.cpp:1148 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1147 src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Показати/заховати мінікарту"
 
-#: src/interface/man_machine_interface.cpp:1115
+#: src/interface/man_machine_interface.cpp:1114
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Показати меню зброї"
@@ -1863,11 +1907,11 @@ msgstr "Невідома команда"
 msgid "Unlimited"
 msgstr "(Нескінченно)"
 
-#: src/interface/man_machine_interface.cpp:1121
+#: src/interface/man_machine_interface.cpp:1120
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1122
+#: src/interface/man_machine_interface.cpp:1121
 msgid "Up slowly"
 msgstr ""
 
@@ -2001,6 +2045,11 @@ msgstr "Невірне ім'я карти!"
 msgid "Wrong team!"
 msgstr "Невірна команда!"
 
+#: lib/wormux/net/download.cpp:119
+#, c-format
+msgid "Wrote %i/%i bytes"
+msgstr ""
+
 #: src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
@@ -2118,9 +2167,6 @@ msgstr "o Відкрито аудіо в %d Hz %d bit"
 
 #~ msgid "Add custom team"
 #~ msgstr "Додати свою команду"
-
-#~ msgid "Couldn't fetch last version from %s"
-#~ msgstr "Не виходить скачати останню версію з %s"
 
 #~ msgid "Delete custom team"
 #~ msgstr "Видалити команду "
