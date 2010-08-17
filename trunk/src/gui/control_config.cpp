@@ -156,10 +156,11 @@ public:
 
   void SaveAction(Keyboard *kbd)
   {
-    kbd->SaveKeyEvent(key_action, key_value,
-                      ctrl_box->GetValue(),
-                      alt_box->GetValue(),
-                      shift_box->GetValue());
+    if (!read_only && key_value!=SDLK_UNKNOWN)
+      kbd->SaveKeyEvent(key_action, key_value,
+                        ctrl_box->GetValue(),
+                        alt_box->GetValue(),
+                        shift_box->GetValue());
   }
 };
 
