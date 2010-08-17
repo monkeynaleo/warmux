@@ -9,400 +9,201 @@
 MAINTAINERCLEANFILES =
 
 POTFILES = \
+        lib/wormux/net/download.cpp \
         src/character/body.cpp \
-        src/character/body.h \
         src/character/body_list.cpp \
-        src/character/body_list.h \
         src/character/character.cpp \
-        src/character/character.h \
         src/character/clothe.cpp \
-        src/character/clothe.h \
         src/character/damage_stats.cpp \
-        src/character/damage_stats.h \
         src/character/member.cpp \
-        src/character/member.h \
         src/character/movement.cpp \
-        src/character/movement.h \
         src/game/config.cpp \
-        src/game/config.h \
         src/game/game_blitz.cpp \
-        src/game/game_blitz.h \
         src/game/game_classic.cpp \
-        src/game/game_classic.h \
         src/game/game.cpp \
-        src/game/game.h \
         src/game/game_mode.cpp \
-        src/game/game_mode.h \
         src/game/time.cpp \
-        src/game/time.h \
         src/graphic/color.cpp \
-        src/graphic/color.h \
-        src/graphic/colors.h \
         src/graphic/composite_shape.cpp \
-        src/graphic/composite_shape.h \
         src/graphic/effects.cpp \
-        src/graphic/effects.h \
-        src/graphic/fading_effect.h \
         src/graphic/font.cpp \
-        src/graphic/font.h \
         src/graphic/fps.cpp \
-        src/graphic/fps.h \
         src/graphic/polygon.cpp \
         src/graphic/polygon_generator.cpp \
-        src/graphic/polygon_generator.h \
-        src/graphic/polygon.h \
         src/graphic/spriteanimation.cpp \
-        src/graphic/spriteanimation.h \
         src/graphic/spritecache.cpp \
-        src/graphic/spritecache.h \
         src/graphic/sprite.cpp \
         src/graphic/spriteframe.cpp \
-        src/graphic/spriteframe.h \
-        src/graphic/sprite.h \
         src/graphic/surface.cpp \
-        src/graphic/surface.h \
         src/graphic/text.cpp \
-        src/graphic/text.h \
         src/graphic/text_list.cpp \
-        src/graphic/text_list.h \
-        src/graphic/textured_polygon.h \
         src/graphic/video.cpp \
-        src/graphic/video.h \
         src/gui/abstract_spin_button.cpp \
-        src/gui/abstract_spin_button.h \
         src/gui/big/button_pic.cpp \
-        src/gui/big/button_pic.h \
         src/gui/grid_box.cpp \
-        src/gui/grid_box.h \
         src/gui/vertical_box.cpp \
-        src/gui/vertical_box.h \
         src/gui/horizontal_box.cpp \
-        src/gui/horizontal_box.h \
         src/gui/box.cpp \
-        src/gui/box.h \
         src/gui/button.cpp \
-        src/gui/button.h \
         src/gui/button_text.cpp \
-        src/gui/button_text.h \
         src/gui/check_box.cpp \
-        src/gui/check_box.h \
         src/gui/combo_box.cpp \
-        src/gui/combo_box.h \
-        src/gui/container.h \
+        src/gui/control_config.cpp \
         src/gui/energy_bar.cpp \
-        src/gui/energy_bar.h \
         src/gui/label.cpp \
-        src/gui/label.h \
         src/gui/msg_box.cpp \
-        src/gui/msg_box.h \
-        src/gui/null_widget.h \
         src/gui/picture_text_cbox.cpp \
-        src/gui/picture_text_cbox.h \
         src/gui/picture_widget.cpp \
-        src/gui/picture_widget.h \
         src/gui/progress_bar.cpp \
-        src/gui/progress_bar.h \
         src/gui/question.cpp \
-        src/gui/question.h \
         src/gui/spin_button.cpp \
-        src/gui/spin_button.h \
         src/gui/spin_button_picture.cpp \
-        src/gui/spin_button_picture.h \
         src/gui/tabs.cpp \
-        src/gui/tabs.h \
         src/gui/talk_box.cpp \
-        src/gui/talk_box.h \
         src/gui/text_box.cpp \
-        src/gui/text_box.h \
         src/gui/widget.cpp \
-        src/gui/widget.h \
         src/gui/widget_list.cpp \
-        src/gui/widget_list.h \
         src/include/action.cpp \
-        src/include/action.h \
         src/include/action_handler.cpp \
-        src/include/action_handler.h \
-        src/include/app.h \
         src/include/constant.cpp \
-        src/include/constant.h \
-        src/include/debugmasks.h \
         src/interface/cursor.cpp \
-        src/interface/cursor.h \
         src/interface/game_msg.cpp \
-        src/interface/game_msg.h \
         src/interface/interface.cpp \
-        src/interface/interface.h \
         src/interface/joystick.cpp \
-        src/interface/joystick.h \
         src/interface/keyboard.cpp \
-        src/interface/keyboard.h \
         src/interface/loading_screen.cpp \
-        src/interface/loading_screen.h \
         src/interface/man_machine_interface.cpp \
-        src/interface/man_machine_interface.h \
         src/interface/mouse.cpp \
         src/interface/mouse_cursor.cpp \
-        src/interface/mouse_cursor.h \
-        src/interface/mouse.h \
         src/interface/weapon_menu.cpp \
-        src/interface/weapon_menu.h \
         src/main.cpp \
         src/map/camera.cpp \
-        src/map/camera.h \
         src/map/ground.cpp \
-        src/map/ground.h \
         src/map/map.cpp \
-        src/map/map.h \
         src/map/maps_list.cpp \
-        src/map/maps_list.h \
         src/map/random_map.cpp \
-        src/map/random_map.h \
         src/map/sky.cpp \
-        src/map/sky.h \
         src/map/tile.cpp \
-        src/map/tile.h \
         src/map/tileitem.cpp \
-        src/map/tileitem.h \
         src/map/water.cpp \
-        src/map/water.h \
         src/map/wind.cpp \
-        src/map/wind.h \
         src/menu/credits_menu.cpp \
-        src/menu/credits_menu.h \
         src/menu/game_menu.cpp \
-        src/menu/game_menu.h \
         src/menu/game_mode_editor.cpp \
-        src/menu/game_mode_editor.h \
         src/menu/help_menu.cpp \
-        src/menu/help_menu.h \
         src/menu/main_menu.cpp \
-        src/menu/main_menu.h \
         src/menu/map_selection_box.cpp \
-        src/menu/map_selection_box.h \
         src/menu/menu.cpp \
-        src/menu/menu.h \
         src/menu/network_connection_menu.cpp \
-        src/menu/network_connection_menu.h \
         src/menu/network_menu.cpp \
-        src/menu/network_menu.h \
         src/menu/network_teams_selection_box.cpp \
-        src/menu/network_teams_selection_box.h \
         src/menu/options_menu.cpp \
-        src/menu/options_menu.h \
         src/menu/pause_menu.cpp \
-        src/menu/pause_menu.h \
         src/menu/results_menu.cpp \
-        src/menu/results_menu.h \
         src/menu/team_box.cpp \
-        src/menu/team_box.h \
         src/menu/teams_selection_box.cpp \
-        src/menu/teams_selection_box.h \
         src/network/admin_commands.cpp \
-        src/network/admin_commands.h \
         src/network/chat.cpp \
-        src/network/chat.h \
         src/network/chatlogger.cpp \
-        src/network/chatlogger.h \
         src/network/net_error_msg.cpp \
-        src/network/net_error_msg.h \
         src/network/network_client.cpp \
-        src/network/network_client.h \
         src/network/network.cpp \
-        src/network/network.h \
         src/network/network_local.cpp \
-        src/network/network_local.h \
         src/network/network_server.cpp \
-        src/network/network_server.h \
         src/network/randomsync.cpp \
-        src/network/randomsync.h \
         src/object/barrel.cpp \
-        src/object/barrel.h \
         src/object/bonus_box.cpp \
-        src/object/bonus_box.h \
         src/object/medkit.cpp \
-        src/object/medkit.h \
         src/object/objbox.cpp \
-        src/object/objbox.h \
         src/object/object_cfg.cpp \
-        src/object/object_cfg.h \
         src/object/objects_list.cpp \
-        src/object/objects_list.h \
         src/object/physical_obj.cpp \
-        src/object/physical_obj.h \
         src/object/physics.cpp \
-        src/object/physics.h \
         src/particles/body_member.cpp \
-        src/particles/body_member.h \
         src/particles/bullet.cpp \
-        src/particles/bullet.h \
         src/particles/dark_smoke.cpp \
-        src/particles/dark_smoke.h \
         src/particles/explosion_smoke.cpp \
-        src/particles/explosion_smoke.h \
         src/particles/fading_text.cpp \
-        src/particles/fading_text.h \
         src/particles/fire.cpp \
-        src/particles/fire.h \
         src/particles/ground_particles.cpp \
-        src/particles/ground_particles.h \
         src/particles/ill_bubble.cpp \
-        src/particles/ill_bubble.h \
         src/particles/magic_star.cpp \
-        src/particles/magic_star.h \
         src/particles/particle.cpp \
-        src/particles/particle.h \
         src/particles/polecat_fart.cpp \
-        src/particles/polecat_fart.h \
         src/particles/smoke.cpp \
-        src/particles/smoke.h \
         src/particles/star.cpp \
-        src/particles/star.h \
         src/particles/teleport_member.cpp \
-        src/particles/teleport_member.h \
         src/particles/water_drop.cpp \
-        src/particles/water_drop.h \
         src/sound/jukebox.cpp \
-        src/sound/jukebox.h \
         src/sound/sample_cache.cpp \
-        src/sound/sample_cache.h \
         src/sound/sound_sample.cpp \
-        src/sound/sound_sample.h \
         src/team/custom_team.cpp \
-        src/team/custom_team.h \
         src/team/custom_teams_list.cpp \
-        src/team/custom_teams_list.h \
-        src/team/macro.h \
         src/team/results.cpp \
-        src/team/results.h \
         src/team/team.cpp \
         src/team/team_energy.cpp \
-        src/team/team_energy.h \
-        src/team/team.h \
         src/team/teams_list.cpp \
-        src/team/teams_list.h \
         src/tool/affine_transform.cpp \
-        src/tool/affine_transform.h \
         src/tool/copynpaste.cpp \
-        src/tool/copynpaste.h \
-        src/tool/isnan.h \
-        src/tool/math_tools.h \
         src/tool/resource_manager.cpp \
-        src/tool/resource_manager.h \
         src/tool/stats.cpp \
-        src/tool/stats.h \
         src/tool/string_tools.cpp \
-        src/tool/string_tools.h \
         src/tool/text_handling.cpp \
-        src/tool/text_handling.h \
         src/tool/xml_document.cpp \
-        src/tool/xml_document.h \
         src/weapon/air_attack.cpp \
-        src/weapon/air_attack.h \
         src/weapon/airhammer.cpp \
-        src/weapon/airhammer.h \
-        src/weapon/all.h \
         src/weapon/anvil.cpp \
-        src/weapon/anvil.h \
         src/weapon/auto_bazooka.cpp \
-        src/weapon/auto_bazooka.h \
         src/weapon/baseball.cpp \
-        src/weapon/baseball.h \
         src/weapon/bazooka.cpp \
-        src/weapon/bazooka.h \
         src/weapon/blowtorch.cpp \
-        src/weapon/blowtorch.h \
         src/weapon/bounce_ball.cpp \
-        src/weapon/bounce_ball.h \
         src/weapon/cluster_bomb.cpp \
-        src/weapon/cluster_bomb.h \
         src/weapon/cluzooka.cpp \
-        src/weapon/cluzooka.h \
         src/weapon/construct.cpp \
-        src/weapon/construct.h \
         src/weapon/crosshair.cpp \
-        src/weapon/crosshair.h \
         src/weapon/disco_grenade.cpp \
-        src/weapon/disco_grenade.h \
         src/weapon/dynamite.cpp \
-        src/weapon/dynamite.h \
         src/weapon/explosion.cpp \
-        src/weapon/explosion.h \
         src/weapon/flamethrower.cpp \
-        src/weapon/flamethrower.h \
         src/weapon/footbomb.cpp \
-        src/weapon/footbomb.h \
         src/weapon/gnu.cpp \
-        src/weapon/gnu.h \
         src/weapon/grapple.cpp \
-        src/weapon/grapple.h \
         src/weapon/grenade.cpp \
-        src/weapon/grenade.h \
         src/weapon/gun.cpp \
-        src/weapon/gun.h \
         src/weapon/jetpack.cpp \
-        src/weapon/jetpack.h \
         src/weapon/lowgrav.cpp \
-        src/weapon/lowgrav.h \
         src/weapon/mine.cpp \
-        src/weapon/mine.h \
         src/weapon/parachute.cpp \
-        src/weapon/parachute.h \
         src/weapon/polecat.cpp \
-        src/weapon/polecat.h \
         src/weapon/rail_gun.cpp \
-        src/weapon/rail_gun.h \
         src/weapon/riot_bomb.cpp \
-        src/weapon/riot_bomb.h \
         src/weapon/shotgun.cpp \
-        src/weapon/shotgun.h \
         src/weapon/skip_turn.cpp \
-        src/weapon/skip_turn.h \
         src/weapon/slap.cpp \
-        src/weapon/slap.h \
         src/weapon/snipe_rifle.cpp \
-        src/weapon/snipe_rifle.h \
         src/weapon/submachine_gun.cpp \
-        src/weapon/submachine_gun.h \
         src/weapon/suicide.cpp \
-        src/weapon/suicide.h \
         src/weapon/supertux.cpp \
-        src/weapon/supertux.h \
         src/weapon/syringe.cpp \
-        src/weapon/syringe.h \
         src/weapon/teleportation.cpp \
-        src/weapon/teleportation.h \
         src/weapon/weapon_cfg.cpp \
-        src/weapon/weapon_cfg.h \
         src/weapon/weapon.cpp \
-        src/weapon/weapon.h \
         src/weapon/weapon_launcher.cpp \
-        src/weapon/weapon_launcher.h \
         src/weapon/weapons_list.cpp \
-        src/weapon/weapons_list.h \
         src/weapon/weapon_strength_bar.cpp \
-        src/weapon/weapon_strength_bar.h \
         tools/servers/game_server/config.cpp \
-        tools/servers/game_server/config.h \
         tools/servers/game_server/main.cpp \
         tools/servers/game_server/server.cpp \
-        tools/servers/game_server/server.h \
         tools/servers/index_server/client.cpp \
-        tools/servers/index_server/client.h \
         tools/servers/index_server/clock.cpp \
-        tools/servers/index_server/clock.h \
         tools/servers/index_server/config.cpp \
-        tools/servers/index_server/config.h \
         tools/servers/index_server/download.cpp \
-        tools/servers/index_server/download.h \
         tools/servers/index_server/main.cpp \
         tools/servers/index_server/net_data.cpp \
-        tools/servers/index_server/net_data.h \
         tools/servers/index_server/server.cpp \
-        tools/servers/index_server/server.h \
         tools/servers/index_server/stat.cpp \
-        tools/servers/index_server/stat.h \
-        tools/servers/index_server/sync_slave.cpp \
-        tools/servers/index_server/sync_slave.h
+        tools/servers/index_server/sync_slave.cpp
 
 DOMAIN = $(PACKAGE)
 
