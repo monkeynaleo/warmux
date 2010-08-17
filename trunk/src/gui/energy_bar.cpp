@@ -103,13 +103,7 @@ void EnergyBar::ProcessThresholds(uint thresholdNumber,
 {
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
     if (0 == thresholdNumber) {
-      Threshold first;
-      first.value = 0.0f;
-      first.color = colorMax;
-      first.redCoef = 0.0f;
-      first.greenCoef = 0.0f;
-      first.blueCoef = 0.0f;
-      first.alphaCoef = 0.0f;
+      Threshold first = { 0.0f, colorMax, 0.0f, 0.0f, 0.0f, 0.0f };
       listThresholds.push_back(first);
     }
     return;
@@ -120,13 +114,11 @@ void EnergyBar::ProcessThresholds(uint thresholdNumber,
   uint size = (orientation == PROG_BAR_HORIZONTAL) ? width : height;
   float inv_range = 100.0f / (size * (thresholdMax - thresholdMin));
 
-  Threshold newThreshold;
-  newThreshold.value = thresholdMax;
-  newThreshold.color = colorMax;
-  newThreshold.redCoef   = (colorMax.GetRed()   - colorMin.GetRed())   * inv_range;
-  newThreshold.greenCoef = (colorMax.GetGreen() - colorMin.GetGreen()) * inv_range;
-  newThreshold.blueCoef  = (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_range;
-  newThreshold.alphaCoef = (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_range;
+  Threshold newThreshold = { thresholdMax, colorMax,
+                             (colorMax.GetRed()   - colorMin.GetRed())   * inv_range,
+                             (colorMax.GetGreen() - colorMin.GetGreen()) * inv_range,
+                             (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_range,
+                             (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_range };
   listThresholds.push_back(newThreshold);
 }
 
@@ -169,7 +161,7 @@ void EnergyBar::Actu(int real_energy)
 
   Color colorMin = thresholdMin.color;
   uint coefVal = ComputeBarValue(abs(real_energy)) -
-                 ComputeBarValue(thresholdMin.value * scale);
+                 ComputeBarValue(thresholdMin.value / scale);
 
   value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
                        (int) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),

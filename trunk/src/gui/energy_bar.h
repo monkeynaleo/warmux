@@ -31,17 +31,17 @@ class EnergyBar : public ProgressBar
 public:
   class Threshold
   {
-    public:
-      float value;
-      Color color;
-      float redCoef;
-      float greenCoef;
-      float blueCoef;
-      float alphaCoef;
+  public:
+    float value;
+    Color color;
+    float redCoef;
+    float greenCoef;
+    float blueCoef;
+    float alphaCoef;
 
-      bool operator < (const Threshold & threshold) const {
-        return value < threshold.value;
-      }
+    bool operator < (const Threshold & threshold) const {
+      return value < threshold.value;
+    }
   };
   static const uint NB_OF_ENERGY_COLOR = 6;
 
