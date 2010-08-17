@@ -57,7 +57,8 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
   UpdateTranslationStrings();
 
   construct_spr = GetResourceManager().LoadSprite( weapons_res_profile, "construct_spr");
-  construct_spr->EnableRotationCache(static_cast<int>(TWO * PI / DELTA_ANGLE));
+  // The 12 is the result of (TWO * PI) / DELTA_ANGLE
+  construct_spr->EnableRotationCache(12);
   m_name = _("Construct");
   m_category = TOOL;
   m_can_change_weapon = true;
@@ -78,15 +79,15 @@ Construct::~Construct()
 
 std::string Construct::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
-  return Format(ngettext(
-            "%s team has won %u construct weapon! Don't forget your helmet.",
-            "%s team has won %u construct weapons! Don't forget your helmet.",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u construct weapon! Don't forget your helmet.",
+                         "%s team has won %u construct weapons! Don't forget your helmet.",
+                         items_count),
+                TeamName, items_count);
 }
 
-bool Construct::p_Shoot ()
+bool Construct::p_Shoot()
 {
-  if(!target_chosen)
+  if (!target_chosen)
     return false;
   JukeBox::GetInstance()->Play("default", "weapon/construct");
   GetWorld().MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
@@ -100,10 +101,11 @@ void Construct::Draw()
   Weapon::Draw();
 
   if (EnoughAmmo()
-    && EnoughAmmoUnit()
-    && !Interface::GetInstance()->weapons_menu.IsDisplayed()
-    && Interface::GetInstance()->IsDisplayed()
-    && Network::GetInstance()->IsTurnMaster()) {
+      && EnoughAmmoUnit()
+      && !Interface::GetInstance()->weapons_menu.IsDisplayed()
+      && Interface::GetInstance()->IsDisplayed()
+      && Network::GetInstance()->IsTurnMaster()) {
+
     dst = Mouse::GetInstance()->GetWorldPosition();
     construct_spr->SetRotation_rad(angle);
     construct_spr->Draw(dst - construct_spr->GetSize() / 2);
@@ -137,13 +139,13 @@ void Construct::ChooseTarget(Point2i mouse_pos)
 
   // Check collision with characters and other physical objects
   FOR_ALL_CHARACTERS(team, c) {
-    if ((c->GetTestRect()).Intersect(rect))
+    if (c->GetTestRect().Intersect(rect))
       return;
   }
 
   FOR_ALL_OBJECTS(it) {
     PhysicalObj *obj = *it;
-    if ((obj->GetTestRect()).Intersect(rect))
+    if (obj->GetTestRect().Intersect(rect))
       return;
   }
 
