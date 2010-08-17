@@ -46,6 +46,9 @@ class ControlItem : public HBox
   CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
+  // Ease parsing all other keys
+  static std::vector<ControlItem*> *selves;
+
   ControlItem(int action, bool ro, uint height)
     : HBox(height, false, true /* use full height */)
     , key_action((ManMachineInterface::Key_t)action)
@@ -105,36 +108,42 @@ public:
       return true;
 
     SDLMod mod_bits = SDL_GetModState();
+    bool has_shift = mod_bits & KMOD_SHIFT;
+    bool has_alt = mod_bits & KMOD_ALT;
+    bool has_ctrl = mod_bits & KMOD_CTRL;
     const Keyboard *kbd = Keyboard::GetConstInstance();
-    ManMachineInterface::Key_t tmp =
-      kbd->GetRegisteredAction(key.sym, mod_bits & KMOD_CTRL,
-                               mod_bits & KMOD_ALT, mod_bits & KMOD_SHIFT);
 
-    // Don't bother if that's the exact same setting
-    if (tmp == key_action)
-      return true;
+    for (std::vector<ControlItem*>::const_iterator it = selves->begin();
+         it != selves->end();
+         ++it) {
+      const ControlItem *c = (*it);
 
-    // Check and warn if key already attributed
-    if (tmp != ManMachineInterface::KEY_NONE) {
-      Question question(Question::WARNING);
-      question.Set(Format(_("This key has already been attributed to '%s'"),
-                          kbd->GetHumanReadableActionName(tmp).c_str()),
-                   true, 0);
+      if (c!=this && c->key_value==key.sym
+          && has_ctrl  == c->ctrl_box->GetValue()
+          && has_alt   == c->alt_box->GetValue()
+          && has_shift == c->shift_box->GetValue()) {
+        // A box different from this already has this setting
+        Question question(Question::WARNING);
+        question.Set(Format(_("This key has already been attributed to '%s'"),
+                            kbd->GetHumanReadableActionName(c->key_action).c_str()),
+                     true, 0);
 
-      // React only to key press, not releases, as one key is being pressed now
-      question.Ask(false);
-      return true;
+        // React only to key press, not releases, as one key is being pressed now
+        question.Ask(false);
+        return true;
+      }
     }
 
     key_value = key.sym;
-    label_key->SetText(Keyboard::GetConstInstance()->GetKeyNameFromKey(key_value));
+    label_key->SetText(kbd->GetKeyNameFromKey(key_value));
 
-    shift_box->SetValue(mod_bits & KMOD_SHIFT);
-    alt_box->SetValue(mod_bits & KMOD_ALT);
-    ctrl_box->SetValue(mod_bits & KMOD_CTRL);
+    ctrl_box->SetValue(has_ctrl);
+    alt_box->SetValue(has_alt);
+    shift_box->SetValue(has_shift);
 
     // A simple NeedRedraw would reset the packing
     Pack();
+    NeedRedrawing();
     return true;
   }
 
@@ -163,6 +172,8 @@ public:
                         shift_box->GetValue());
   }
 };
+
+std::vector<ControlItem*>* ControlItem::selves = NULL;
 
 class HeaderItem : public HBox
 {
@@ -226,6 +237,7 @@ ControlConfig::ControlConfig(const Point2i& size, bool readonly)
     items.push_back(item);
     box->AddWidget(item);
   }
+  ControlItem::selves = &items;
   AddWidget(box);
 }
 
