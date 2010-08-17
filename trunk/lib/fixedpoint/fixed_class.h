@@ -96,11 +96,19 @@ struct fixed_point {
   fixed_point operator * (unsigned int r) const { fixed_point x = *this; x *= r; return x;}
   fixed_point operator / (unsigned int r) const { fixed_point x = *this; x /= r; return x;}
 
-  operator int() const { return intValue / (1<< p); }
+  operator int() const { return intValue / (1<<p); }
 
   // Must be used explicily as we don't want to calculate with doubles!
-  double toDouble() const { return (double)intValue / (double)(1 << p); }
-  float tofloat() const { return intValue / float(1<<p); }
+  double toDouble() const
+  {
+    static const double factor = 1.0 / (double)(1 << p);
+    return factor * intValue;
+  }
+  float tofloat() const
+  {
+    static const float factor = 1.0f / (float)(1 << p);
+    return factor * intValue;
+  }
 };
 
 // Specializations for use with plain integers
