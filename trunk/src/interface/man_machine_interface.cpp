@@ -1039,7 +1039,6 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
   if(name == "increase_minimap") return KEY_INCREASE_MINIMAP;
 
   return KEY_NONE;
-
 }
 
 std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Key_t key) const

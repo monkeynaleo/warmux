@@ -152,16 +152,15 @@ void Keyboard::SaveConfig( xmlNode *node) const
   xmlNode *keyboard_node = xmlAddChild(node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"keyboard"));
   std::map<int, std::vector<Key_t> >::const_iterator it;
 
-  for (it = layout.begin(); it != layout.end(); it++)
-  {
+  for (it = layout.begin(); it != layout.end(); it++) {
     const std::vector<Key_t> actions = it->second;
-    for (uint i = 0; i < actions.size(); i++)
-    {
-      bool shift, control, alt;
-      shift = false;
-      control = false;
-      alt = false;
+    for (uint i = 0; i < actions.size(); i++) {
       int key = it->first;
+
+      if (key == SDLK_UNKNOWN)
+        continue;
+
+      bool shift = false, control = false, alt = false;
 
       if (key > CONTROL_OFFSET)
       {
