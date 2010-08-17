@@ -75,7 +75,7 @@ static std::string GetWormuxPath()
 }
 #else
 #  if defined(ANDROID)
-static std::string GetWormuxPath() { return ANDROID_HOME; }
+static std::string GetWormuxPath() { return "./"; }
 #  endif
 #  include <unistd.h> // not needed by mingw
 #endif
