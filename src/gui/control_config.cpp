@@ -110,6 +110,10 @@ public:
       kbd->GetRegisteredAction(key.sym, mod_bits & KMOD_CTRL,
                                mod_bits & KMOD_ALT, mod_bits & KMOD_SHIFT);
 
+    // Don't bother if that's the exact same setting
+    if (tmp == key_action)
+      return true;
+
     // Check and warn if key already attributed
     if (tmp != ManMachineInterface::KEY_NONE) {
       Question question(Question::WARNING);
