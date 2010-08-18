@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -849,15 +849,6 @@ msgstr "Flamĵetilo"
 msgid "Football Bomb"
 msgstr "Futbalbombo"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Plenekrane?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Plen-ekrane/fenestre"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Plenekrane?"
@@ -1397,11 +1388,7 @@ msgstr "Forlasi"
 msgid "Quit Wormux"
 msgstr "Foriri el Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Foriri el batalo"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Foriri el ludo"
 
@@ -1797,6 +1784,11 @@ msgstr ""
 "Angulo: Supren/Malsupren\n"
 "Pafo: spacetosignoUnu pafo vice"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Plenekrane?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1984,14 +1976,10 @@ msgstr "Malbona teamo!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Vi estas sola:-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Vi estas sola..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2069,6 +2057,15 @@ msgstr "o Legante sonan profilon: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Plen-ekrane/fenestre"
+
+#~ msgid "Quit battle"
+#~ msgstr "Foriri el batalo"
+
+#~ msgid "You are alone..."
+#~ msgstr "Vi estas sola..."
 
 #, fuzzy
 #~ msgid ""

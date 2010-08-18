@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-09-11 15:45+0100\n"
 "Last-Translator: Peter Olsson <peterdenbra@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -857,15 +857,6 @@ msgstr "Eldkastare"
 msgid "Football Bomb"
 msgstr "Am. fotbollsbomb"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Helskärm?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Helskärm / fönster"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Helskärm?"
@@ -1402,11 +1393,7 @@ msgstr "Avsluta"
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Avbryt strid"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Avsluta spel"
 
@@ -1797,6 +1784,11 @@ msgstr ""
 "Avfyra : mellanslag\n"
 "en ammunition per omgång"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Helskärm?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1982,13 +1974,9 @@ msgstr "Fel lag!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Du är ensam :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Du är ensam..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2063,6 +2051,15 @@ msgstr "o Läser in ljudprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Öppnade ljud med %d Hz, %d bitar"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Helskärm / fönster"
+
+#~ msgid "Quit battle"
+#~ msgstr "Avbryt strid"
+
+#~ msgid "You are alone..."
+#~ msgstr "Du är ensam..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

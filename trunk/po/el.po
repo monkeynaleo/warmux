@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -892,15 +892,6 @@ msgstr "Φλογοβόλο"
 msgid "Football Bomb"
 msgstr "Εκρηκτική μπάλα"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Πλήρης οθόνη;"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Πλήρης οθόνη / παράθυρο"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Πλήρης οθόνη;"
@@ -1439,11 +1430,7 @@ msgstr "Εγκατάλειψε"
 msgid "Quit Wormux"
 msgstr "Εγκατάλειψε το  Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Εγκατάλειψε τη μάχη"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Εγκατάλειψε το παιχνίδι"
 
@@ -1851,6 +1838,11 @@ msgstr ""
 "Πυρ: κουμπί space\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Πλήρης οθόνη;"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -2043,13 +2035,9 @@ msgid "Wrote %i/%i bytes"
 msgstr ""
 
 # T'es tout seul :-/
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Είσαι μονάχος :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2125,6 +2113,15 @@ msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Πλήρης οθόνη / παράθυρο"
+
+#~ msgid "Quit battle"
+#~ msgstr "Εγκατάλειψε τη μάχη"
+
+#~ msgid "You are alone..."
+#~ msgstr "Θέλετε σίγουρα να παίξετε μόνος σας;!"
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

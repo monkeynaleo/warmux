@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2008-01-22 18:12+0100\n"
 "Last-Translator: GG <jeronimo974_@_gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -852,16 +852,6 @@ msgstr "lance-flammes"
 msgid "Football Bomb"
 msgstr "Bombe lacrimogène"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Plein écran ?"
-
-#: src/menu/help_menu.cpp:42
-#, fuzzy
-msgid "Fullscreen / window"
-msgstr "Plein écran ?"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
@@ -1404,11 +1394,7 @@ msgstr "Barré"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Allons barer"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 #, fuzzy
 msgid "Quit game"
 msgstr "Lancement du jeu"
@@ -1809,6 +1795,11 @@ msgstr ""
 "page en en haut/page en basangle: en haut/en bastir: pèse dessus bar espace "
 "jusqu'à ce avoir la force que ou veut.une action par tour"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Plein écran ?"
+
 #: src/interface/man_machine_interface.cpp:1112
 msgid "Toggle interface"
 msgstr ""
@@ -1995,14 +1986,10 @@ msgstr ""
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Ou lé tout seul."
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Ou lé sur vouloir jouer tout seul ?!"
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2078,6 +2065,16 @@ msgstr "o Profile son en train'e charger : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Fullscreen / window"
+#~ msgstr "Plein écran ?"
+
+#~ msgid "Quit battle"
+#~ msgstr "Allons barer"
+
+#~ msgid "You are alone..."
+#~ msgstr "Ou lé sur vouloir jouer tout seul ?!"
 
 #, fuzzy
 #~ msgid ""

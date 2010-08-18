@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-09-08 14:34+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -1057,15 +1057,6 @@ msgstr "Aruncător de flăcări"
 msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Tot ecranul?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Tot ecranul / fereastră"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
@@ -1605,11 +1596,7 @@ msgstr "Ieșire"
 msgid "Quit Wormux"
 msgstr "Ieșire din Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Părăsește bătălia"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Părăsește jocul"
 
@@ -2001,6 +1988,11 @@ msgstr ""
 "Foc : țineți tasta spațiu\n"
 "un proiectil per rundă"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Tot ecranul?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -2193,13 +2185,9 @@ msgstr "Echipa e greșită!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Ești singur. :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Nu mai e nimeni altcineva..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2276,6 +2264,19 @@ msgstr "o Se încarcă profilul de sunet: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
+
+#, fuzzy
+#~ msgid "Fullscreen"
+#~ msgstr "Tot ecranul?"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Tot ecranul / fereastră"
+
+#~ msgid "Quit battle"
+#~ msgstr "Părăsește bătălia"
+
+#~ msgid "You are alone..."
+#~ msgstr "Nu mai e nimeni altcineva..."
 
 #~ msgid "%s has won %u point of energy!"
 #~ msgid_plural "%s has won %u points of energy!"
@@ -3081,10 +3082,6 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #, fuzzy
 #~ msgid "frequency"
 #~ msgstr "Frecvența sunetului"
-
-#, fuzzy
-#~ msgid "full_screen"
-#~ msgstr "Tot ecranul?"
 
 #~ msgid "general: "
 #~ msgstr "general: "

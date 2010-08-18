@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-01-07 23:04+0100\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
@@ -867,15 +867,6 @@ msgstr "Lanzachamas"
 msgid "Football Bomb"
 msgstr "Bomba de rugbi"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Pantalla completa?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Pantalla completa / Fiestra"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
@@ -1411,11 +1402,7 @@ msgstr "Saír"
 msgid "Quit Wormux"
 msgstr "Saír do Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Saír da batalla"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Saír da partida"
 
@@ -1809,6 +1796,11 @@ msgstr ""
 "Disparo: barra espaciadora\n"
 "Un uso por turno"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Pantalla completa?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1996,13 +1988,9 @@ msgstr "Equipo incorrecto!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Estás só. :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Estás só..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2077,6 +2065,15 @@ msgstr "o Cargando o perfil de son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bits"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Pantalla completa / Fiestra"
+
+#~ msgid "Quit battle"
+#~ msgstr "Saír da batalla"
+
+#~ msgid "You are alone..."
+#~ msgstr "Estás só..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -809,15 +809,6 @@ msgstr "火炎放射器"
 msgid "Football Bomb"
 msgstr "ラグビーボム"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "フルスクリーン？"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "フルスクリーン / ウインドウ"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "フルスクリーン？"
@@ -1351,11 +1342,7 @@ msgstr "終了"
 msgid "Quit Wormux"
 msgstr "Wormux を終了"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "バトルを終了"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "ゲームを終了"
 
@@ -1744,6 +1731,11 @@ msgstr ""
 "投下: スペースキーを押し続けて強さを決定\n"
 "ターン毎で1つの弾薬"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "フルスクリーン？"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1929,13 +1921,9 @@ msgstr "チームが間違っています！"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "あなたは孤独・・・ :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "あなたは孤独..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2012,6 +2000,15 @@ msgstr "o 音楽設定を読込中 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 音楽 %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "フルスクリーン / ウインドウ"
+
+#~ msgid "Quit battle"
+#~ msgstr "バトルを終了"
+
+#~ msgid "You are alone..."
+#~ msgstr "あなたは孤独..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

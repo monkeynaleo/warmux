@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-08-16 14:51+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -857,6 +857,7 @@ msgid "Fail to create temporary file: %s"
 msgstr "Impossible de créer le fichier temporaire: %s"
 
 #: lib/wormux/net/download.cpp:154
+#, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Impossible d'ouvrir le fichier temporaire: %s"
 
@@ -867,14 +868,6 @@ msgstr "Lance-Flammes"
 #: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
 msgstr "Ballon Explosif"
-
-#: src/interface/man_machine_interface.cpp:1111
-msgid "Fullscreen"
-msgstr "Plein écran"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Plein écran / Mode fenêtré"
 
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
@@ -1423,11 +1416,7 @@ msgstr "Quitter"
 msgid "Quit Wormux"
 msgstr "Quitter Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Quitter la bataille"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Quitter la partie"
 
@@ -1817,6 +1806,11 @@ msgstr ""
 "Tir : espace\n"
 "Une munition par tour"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Plein écran"
+
 #: src/interface/man_machine_interface.cpp:1112
 msgid "Toggle interface"
 msgstr "Afficher l'interface"
@@ -2000,13 +1994,9 @@ msgstr "Equipe erronée !"
 msgid "Wrote %i/%i bytes"
 msgstr "Seulement %i/%i octets écrits"
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "T'es tout seul :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Vous voulez vraiment jouer tout seul ?!"
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2080,3 +2070,12 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Plein écran / Mode fenêtré"
+
+#~ msgid "Quit battle"
+#~ msgstr "Quitter la bataille"
+
+#~ msgid "You are alone..."
+#~ msgstr "Vous voulez vraiment jouer tout seul ?!"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-08-11 23:08+0800\n"
 "Last-Translator: Robert Clausecker <fuzxxl@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
@@ -872,14 +872,6 @@ msgstr "Flammenwerfer"
 msgid "Football Bomb"
 msgstr "Football-Bombe"
 
-#: src/interface/man_machine_interface.cpp:1111
-msgid "Fullscreen"
-msgstr "Vollbild"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Vollbild / Fenster"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Vollbild?"
@@ -1426,11 +1418,7 @@ msgstr "Verlassen"
 msgid "Quit Wormux"
 msgstr "Wormux verlassen"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Schlacht verlassen"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Spiel verlassen"
 
@@ -1827,6 +1815,11 @@ msgstr ""
 "Feuer: Leertaste\n"
 "ein Schuss pro Zug"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Vollbild"
+
 #: src/interface/man_machine_interface.cpp:1112
 msgid "Toggle interface"
 msgstr "zeige/verberge Interface"
@@ -2010,13 +2003,9 @@ msgstr "Falsches Team!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Du bist alleine. :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Du bist alleine …"
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2090,3 +2079,12 @@ msgstr "o Lade Soundprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Vollbild / Fenster"
+
+#~ msgid "Quit battle"
+#~ msgstr "Schlacht verlassen"
+
+#~ msgid "You are alone..."
+#~ msgstr "Du bist alleine …"
