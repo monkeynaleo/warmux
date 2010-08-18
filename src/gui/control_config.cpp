@@ -100,7 +100,7 @@ public:
 
   virtual bool SendKey(const SDL_keysym & key)
   {
-    if (read_only)
+    if (read_only || key.sym == SDLK_UNKNOWN)
       return false;
 
     // Ignore modifiers-only key presses
