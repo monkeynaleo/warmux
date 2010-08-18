@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -940,15 +940,6 @@ msgstr "Stifeller-Tan"
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Skrin leun?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Skrin leun / fenester"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Skrin leun?"
@@ -1488,11 +1479,7 @@ msgstr "Kwitya"
 msgid "Quit Wormux"
 msgstr "Kwitya Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Kwitya an gas"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Kwitya an gwari"
 
@@ -1894,6 +1881,11 @@ msgstr ""
 "Tenna : spas\n"
 "unn bellen orth an dro"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Skrin leun?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -2084,14 +2076,10 @@ msgstr "Para kamm!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Genes dha honan th esos :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Genes dha honan th esos..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2169,6 +2157,15 @@ msgstr "o Ow karga an profil-son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Skrin leun / fenester"
+
+#~ msgid "Quit battle"
+#~ msgstr "Kwitya an gas"
+
+#~ msgid "You are alone..."
+#~ msgstr "Genes dha honan th esos..."
 
 #, fuzzy
 #~ msgid ""

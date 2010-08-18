@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-07-01 16:01+0200\n"
 "Last-Translator: Ysangkok <ysangkok@gmail.com>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -853,15 +853,6 @@ msgstr "Flammekaster"
 msgid "Football Bomb"
 msgstr "Fodboldbombe"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Fuld skærm?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Fuld skærm/vindue"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
@@ -1400,11 +1391,7 @@ msgstr "Afslut"
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Forlad kampen"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Afslut spillet"
 
@@ -1803,6 +1790,11 @@ msgstr ""
 "Affyr: Mellemrum\n"
 "Et stykke ammunition per tur"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Fuld skærm?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1991,14 +1983,10 @@ msgstr "Ugyldigt hold!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Du er alene :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Du er alene..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2076,6 +2064,15 @@ msgstr "o Indlæser lydprofilen: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Fuld skærm/vindue"
+
+#~ msgid "Quit battle"
+#~ msgstr "Forlad kampen"
+
+#~ msgid "You are alone..."
+#~ msgstr "Du er alene..."
 
 #, fuzzy
 #~ msgid ""

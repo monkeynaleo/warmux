@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-01-05 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -917,15 +917,6 @@ msgstr "Metalec plamenov"
 msgid "Football Bomb"
 msgstr "Nogometna bomba"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Celozaslonski način?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Cel zaslon / okno"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Celozaslonski način?"
@@ -1457,11 +1448,7 @@ msgstr "Končaj"
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Končaj bitko"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Končaj igro"
 
@@ -1853,6 +1840,11 @@ msgstr ""
 "Strel: pritisnite preslednico\n"
 "ena uporaba na potezo"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Celozaslonski način?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -2039,13 +2031,9 @@ msgstr "Napačna ekipa!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Sami ste. :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Sami ste ..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2120,6 +2108,15 @@ msgstr "o Nalaganje zvočnega profila: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Odprt avdio na %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Cel zaslon / okno"
+
+#~ msgid "Quit battle"
+#~ msgstr "Končaj bitko"
+
+#~ msgid "You are alone..."
+#~ msgstr "Sami ste ..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

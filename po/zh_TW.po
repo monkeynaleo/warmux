@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-07-18 20:57+1000\n"
 "Last-Translator: luojie <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <lililjlj@gmail.com>\n"
@@ -796,15 +796,6 @@ msgstr "噴火器"
 msgid "Football Bomb"
 msgstr "足球炸彈"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "全屏?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "全屏 / 視窗"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "全屏?"
@@ -1341,11 +1332,7 @@ msgstr "結束"
 msgid "Quit Wormux"
 msgstr "結束"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "推出戰斗"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "結束游戲"
 
@@ -1740,6 +1727,11 @@ msgstr ""
 "開火: 白字元鍵\n"
 "每回合一個彈夾"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "全屏?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1927,14 +1919,10 @@ msgstr "隊伍錯了！"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "你是孤單的 :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "你是孤單的。。。"
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2014,6 +2002,15 @@ msgstr "o讀取音樂檔案 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音樂 %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "全屏 / 視窗"
+
+#~ msgid "Quit battle"
+#~ msgstr "推出戰斗"
+
+#~ msgid "You are alone..."
+#~ msgstr "你是孤單的。。。"
 
 #, fuzzy
 #~ msgid ""

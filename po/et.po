@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2008-11-23 21:59+0300\n"
 "Last-Translator: Guido Tabbernuk <guido.tabbernuk@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -846,15 +846,6 @@ msgstr "Leegiheitja"
 msgid "Football Bomb"
 msgstr "Jalgpomm"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Täisekraan?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Täisekraan/aken"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Täisekraan?"
@@ -1393,11 +1384,7 @@ msgstr "Välju"
 msgid "Quit Wormux"
 msgstr "Välju Wormuxist"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Välju lahingust"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Välju mängust"
 
@@ -1795,6 +1782,11 @@ msgstr ""
 "Tulistamine: Tühik\n"
 "üks soru käigu kohta"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Täisekraan?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1982,14 +1974,10 @@ msgstr "Vale meeskond!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Sa oled üksi :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Sa oled üksi..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2067,6 +2055,15 @@ msgstr "o Laadin heliprofiili: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio sätitud %d Hz ja %d biti peale"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Täisekraan/aken"
+
+#~ msgid "Quit battle"
+#~ msgstr "Välju lahingust"
+
+#~ msgid "You are alone..."
+#~ msgstr "Sa oled üksi..."
 
 #, fuzzy
 #~ msgid ""

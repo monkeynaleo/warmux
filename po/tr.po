@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -795,16 +795,6 @@ msgstr ""
 msgid "Football Bomb"
 msgstr "Ses Bombası"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Tam ekran?"
-
-#: src/menu/help_menu.cpp:42
-#, fuzzy
-msgid "Fullscreen / window"
-msgstr "Tam ekran?"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
@@ -1338,11 +1328,7 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr ""
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 #, fuzzy
 msgid "Quit game"
 msgstr "Oyunu çalıştır"
@@ -1721,6 +1707,11 @@ msgid ""
 "One ammo per turn"
 msgstr ""
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Tam ekran?"
+
 #: src/interface/man_machine_interface.cpp:1112
 msgid "Toggle interface"
 msgstr ""
@@ -1897,12 +1888,8 @@ msgstr ""
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
-msgstr ""
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
 msgstr ""
 
 #: src/menu/network_menu.cpp:437
@@ -1979,6 +1966,10 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Fullscreen / window"
+#~ msgstr "Tam ekran?"
 
 #~ msgid ""
 #~ "Error:\n"

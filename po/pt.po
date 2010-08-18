@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-09-18 17:35+0100\n"
 "Last-Translator: Bruno Queiros\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
@@ -866,15 +866,6 @@ msgstr "Lança Chamas"
 msgid "Football Bomb"
 msgstr "Bomba Futebol"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Ecrã inteiro?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Ecrã inteiro / janela"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Ecrã inteiro?"
@@ -1412,11 +1403,7 @@ msgstr "Sair"
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Sair da batalha"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Sair do jogo"
 
@@ -1805,6 +1792,11 @@ msgstr ""
 "Disparar : barra de espaços\n"
 "uma munição por turno"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Ecrã inteiro?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1991,13 +1983,9 @@ msgstr "Equipa errada!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Você está sozinho :-/ "
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Você está sozinho..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2072,6 +2060,15 @@ msgstr "o carregar o perfil de som : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio aberto a %d Hz %d bit"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Ecrã inteiro / janela"
+
+#~ msgid "Quit battle"
+#~ msgstr "Sair da batalha"
+
+#~ msgid "You are alone..."
+#~ msgstr "Você está sozinho..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

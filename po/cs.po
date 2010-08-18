@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2009-09-09 14:39+0100\n"
 "Last-Translator: Vojtěch Horký <vojta.horky@seznam.cz>\n"
 "Language-Team: Čeština\n"
@@ -894,16 +894,6 @@ msgstr "Plamenomet"
 msgid "Football Bomb"
 msgstr "Ragbyová bomba"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Celá obrazovka?"
-
-#: src/menu/help_menu.cpp:42
-#, fuzzy
-msgid "Fullscreen / window"
-msgstr "Celá obrazovka?"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
@@ -1446,11 +1436,7 @@ msgstr "Ukončit"
 msgid "Quit Wormux"
 msgstr "Ukončit Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Ukončit hru"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 #, fuzzy
 msgid "Quit game"
 msgstr "Spustit hru"
@@ -1852,6 +1838,11 @@ msgstr ""
 "Odpálení : Mezerník\n"
 "munice letí obloukem"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Celá obrazovka?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -2042,14 +2033,10 @@ msgstr "Špatný tým!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Jste sám :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Jste sám..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2127,6 +2114,16 @@ msgstr "o Načítám hudební profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
+
+#, fuzzy
+#~ msgid "Fullscreen / window"
+#~ msgstr "Celá obrazovka?"
+
+#~ msgid "Quit battle"
+#~ msgstr "Ukončit hru"
+
+#~ msgid "You are alone..."
+#~ msgstr "Jste sám..."
 
 #, fuzzy
 #~ msgid ""

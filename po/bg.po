@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2010-01-10 11:20+0200\n"
 "Last-Translator: Dragomir Todorov <thedeadly91@gmail.com>\n"
 "Language-Team: Bulgarian <thedeadly91@gmail.com>\n"
@@ -856,15 +856,6 @@ msgstr "Огнехвъргачка"
 msgid "Football Bomb"
 msgstr "Футбол-бомба"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Цял екран?"
-
-#: src/menu/help_menu.cpp:42
-msgid "Fullscreen / window"
-msgstr "Цял екран/Прозорец"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Цял екран?"
@@ -1400,11 +1391,7 @@ msgstr "Излез!"
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr "Напусни"
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 msgid "Quit game"
 msgstr "Напусни играта"
 
@@ -1793,6 +1780,11 @@ msgstr ""
 "Огън : space\n"
 "муниция на ход"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Цял екран?"
+
 #: src/interface/man_machine_interface.cpp:1112
 #, fuzzy
 msgid "Toggle interface"
@@ -1980,13 +1972,9 @@ msgstr "Грешен отбор !"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 msgid "You are alone. :-/"
 msgstr "Ти си сам :-/"
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
-msgstr "Ти си сам..."
 
 #: src/menu/network_menu.cpp:437
 msgid "You are the new turn master!"
@@ -2061,6 +2049,15 @@ msgstr "o Зареждам звуков профил: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Отварям аудио на %d Hz %d бита"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Цял екран/Прозорец"
+
+#~ msgid "Quit battle"
+#~ msgstr "Напусни"
+
+#~ msgid "You are alone..."
+#~ msgstr "Ти си сам..."
 
 #~ msgid ""
 #~ "How to use it : keep the space key pressed\n"

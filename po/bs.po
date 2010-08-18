@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-08-18 01:07+0200\n"
+"POT-Creation-Date: 2010-08-18 08:46+0200\n"
 "PO-Revision-Date: 2007-11-10 21:40+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <local@linux.org.ba>\n"
@@ -854,16 +854,6 @@ msgstr "Bacač Plamena"
 msgid "Football Bomb"
 msgstr "Džumbus bomba"
 
-#: src/interface/man_machine_interface.cpp:1111
-#, fuzzy
-msgid "Fullscreen"
-msgstr "Pun ekran?"
-
-#: src/menu/help_menu.cpp:42
-#, fuzzy
-msgid "Fullscreen / window"
-msgstr "Pun ekran?"
-
 #: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Pun ekran?"
@@ -1403,11 +1393,7 @@ msgstr "Odustani"
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
-#: src/menu/pause_menu.cpp:58
-msgid "Quit battle"
-msgstr ""
-
-#: src/menu/help_menu.cpp:35
+#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:58
 #, fuzzy
 msgid "Quit game"
 msgstr "Pokreni igru"
@@ -1808,6 +1794,11 @@ msgstr ""
 "Pucaj : drži space\n"
 "municija po redu"
 
+#: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
+#, fuzzy
+msgid "Toggle fullscreen"
+msgstr "Pun ekran?"
+
 #: src/interface/man_machine_interface.cpp:1112
 msgid "Toggle interface"
 msgstr ""
@@ -1994,13 +1985,9 @@ msgstr ""
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
 #, fuzzy
 msgid "You are alone. :-/"
-msgstr "Sami ste ..."
-
-#: src/menu/network_menu.cpp:285
-msgid "You are alone..."
 msgstr "Sami ste ..."
 
 #: src/menu/network_menu.cpp:437
@@ -2083,6 +2070,13 @@ msgstr "o Učitavam zvučne profile: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otvoren audio na %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Fullscreen / window"
+#~ msgstr "Pun ekran?"
+
+#~ msgid "You are alone..."
+#~ msgstr "Sami ste ..."
 
 #, fuzzy
 #~ msgid ""
