@@ -55,7 +55,7 @@ PauseMenu::PauseMenu(bool& _exit_game)  :
   bt_help_menu = new ButtonPic(_("Help"), "menu/ico_help", size);
   box->AddWidget(bt_help_menu);
 
-  bt_main_menu = new ButtonPic(_("Quit battle"), "menu/ico_quit_battle", size);
+  bt_main_menu = new ButtonPic(_("Quit game"), "menu/ico_quit_battle", size);
   box->AddWidget(bt_main_menu);
 
   widgets.AddWidget(box);

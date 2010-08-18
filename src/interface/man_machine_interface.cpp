@@ -1108,7 +1108,7 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_WEAPONS7) return _("Select 'Tool' weapon category");
   if(key == KEY_WEAPONS8) return _("Select weapon category 8");
   if(key == KEY_PAUSE) return _("Pause");
-  if(key == KEY_FULLSCREEN) return _("Fullscreen");
+  if(key == KEY_FULLSCREEN) return _("Toggle fullscreen");
   if(key == KEY_TOGGLE_INTERFACE) return _("Toggle interface");
   if(key == KEY_CENTER) return _("Center on active character");
   if(key == KEY_TOGGLE_WEAPONS_MENUS) return _("Toggle weapons menu");
