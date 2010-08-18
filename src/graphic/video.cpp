@@ -45,9 +45,16 @@ Video::Video()
   SetMaxFps(config->GetMaxFps());
 
   ComputeAvailableConfigs();
-  SetConfig((int)(config->GetVideoWidth()),
-            (int)(config->GetVideoHeight()),
-            config->IsVideoFullScreen());  // Add the current resolution
+
+  // See if we can add the current config resolution
+  int w = config->GetVideoWidth();
+  int h = config->GetVideoHeight();
+  if (!w || !h) {
+    w = available_configs.begin()->GetX();
+    h = available_configs.begin()->GetY();
+  }
+
+  SetConfig(w, h, config->IsVideoFullScreen());
 
   if (window.IsNull()) {
     Error(Format("Unable to initialize SDL window: %s", SDL_GetError()));
