@@ -48,8 +48,8 @@ class c_junction
     Member * member;
     Member * parent;
 
-    c_junction(): 
-      member(NULL), 
+    c_junction():
+      member(NULL),
       parent(NULL) {};
 };
 
@@ -95,13 +95,13 @@ class Body
     const std::string                 mainFolder;
 
     void ResetMovement() const;
-    void ApplyMovement(Movement * mvt, 
+    void ApplyMovement(Movement * mvt,
                        uint       frame);
     void ApplySqueleton();
 
     void ProcessFollowCrosshair(member_mvt & mb_mvt);
     void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
-    void ProcessFollowSpeed(member_mvt & mb_mvt); 
+    void ProcessFollowSpeed(member_mvt & mb_mvt);
     void ProcessFollowDirection(member_mvt & mb_mvt);
     void ProcessFollowCursor(member_mvt & mb_mvt,
                              Member *     member);
@@ -118,7 +118,7 @@ class Body
     void FreeSkeletonVector();
 
   public:
-    Body(const xmlNode *     xml, 
+    Body(const xmlNode *     xml,
          const std::string & main_folder);
     Body(const Body & cpy);
     void Init(void);
@@ -156,9 +156,9 @@ class Body
     const std::string &     GetMovement() const;
     const std::string &     GetClothe() const;
     std::string             GetFrameLoop() const;
-    void                    GetTestRect(uint & l, 
-                                        uint & r, 
-                                        uint & t, 
+    void                    GetTestRect(uint & l,
+                                        uint & r,
+                                        uint & t,
                                         uint & b) const;
     const LRDirection & GetDirection() const { return direction; };
     void                    GetRelativeHandPosition(Point2i & result) const;
