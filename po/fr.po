@@ -1429,9 +1429,8 @@ msgid "Random map"
 msgstr "Terrain aléatoire"
 
 #: lib/wormux/net/download.cpp:104
-#, fuzzy, c-format
 msgid "Read only %i bytes"
-msgstr "Il n'y a qu' %i équipe."
+msgstr "Lu seulement %i octets"
 
 #: src/game/config.cpp:368
 msgid "Reading the default config file"
@@ -1807,7 +1806,6 @@ msgstr ""
 "Une munition par tour"
 
 #: src/interface/man_machine_interface.cpp:1111 src/menu/help_menu.cpp:42
-#, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Plein écran"
 
@@ -2070,12 +2068,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "Fullscreen / window"
-#~ msgstr "Plein écran / Mode fenêtré"
-
-#~ msgid "Quit battle"
-#~ msgstr "Quitter la bataille"
-
-#~ msgid "You are alone..."
-#~ msgstr "Vous voulez vraiment jouer tout seul ?!"
