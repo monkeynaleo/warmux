@@ -282,7 +282,7 @@ bool NetworkMenu::signal_ok()
     }
     if (Network::GetInstance()->GetNbPlayersConnected() == 0)
     {
-      msg_box->NewMessage(_("You are alone..."), c_red);
+      msg_box->NewMessage(_("You are alone. :-/"), c_red);
       goto error;
     }
     if (Network::GetInstance()->GetNbPlayersConnected() != Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED))

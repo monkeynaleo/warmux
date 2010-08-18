@@ -39,7 +39,7 @@ static const FigureWidget::Caption captions[] = {
   { _("Drag&drop: Move camera"), 520, 395, DEF_CAPTIONS_PARAMS },
   { _("Center camera on character"), 520, 422, DEF_CAPTIONS_PARAMS },
   { _("Show/hide the interface"), 271, 43, DEF_CAPTIONS_PARAMS },
-  { _("Fullscreen / window"), 491, 42, DEF_CAPTIONS_PARAMS },
+  { _("Toggle fullscreen"), 491, 42, DEF_CAPTIONS_PARAMS },
   { _("Configuration menu"), 491, 72, DEF_CAPTIONS_PARAMS },
   { _("Talk in network battles"), 92, 296, DEF_CAPTIONS_PARAMS },
   { _("Change weapon category"), 81, 72, DEF_CAPTIONS_PARAMS },
