@@ -161,11 +161,15 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
   if (_hardware) {
-    flags |= SDL_HWSURFACE | SDL_DOUBLEBUF;
+    flags |= SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_HWPALETTE;
   } else {
     flags |= SDL_SWSURFACE;
   }
   window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
+  const SDL_Surface *video = SDL_GetVideoSurface();
+  if (video && !(video->flags & SDL_HWSURFACE)) {
+    std::cerr << "WARNING: SDL refused to set hardware acceleration!" << std::endl;
+  }
 #endif
 
   if (window.IsNull())
