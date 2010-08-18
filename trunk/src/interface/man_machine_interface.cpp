@@ -23,6 +23,7 @@
 #include "interface/man_machine_interface.h"
 #include "interface/interface.h"
 #include "character/character.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/time.h"
@@ -252,6 +253,47 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     case KEY_INCREASE_MINIMAP:
       Interface::GetInstance()->MinimapSizeDelta(-1);
       return;
+    case KEY_DECREASE_VOLUME:
+      {
+        printf("There!\n");
+        Config *cfg = Config::GetInstance();
+        int volume = cfg->GetVolumeMusic() - 5;
+        if (volume > 0) {
+          cfg->SetVolumeMusic(volume);
+        } else {
+          cfg->SetVolumeMusic(0);
+          JukeBox::GetInstance()->ActiveMusic(false);
+        }
+        volume = cfg->GetVolumeEffects() - 5;
+        if (volume > 0) {
+          cfg->SetVolumeEffects(volume);
+        } else {
+          cfg->SetVolumeEffects(0);
+          JukeBox::GetInstance()->ActiveEffects(false);
+        }
+        return;
+      }
+    case KEY_INCREASE_VOLUME:
+      {
+        Config *cfg = Config::GetInstance();
+        int max_volume = cfg->GetMaxVolume();
+        int volume = cfg->GetVolumeMusic() + 5;
+        if (volume < max_volume) {
+          cfg->SetVolumeMusic(volume);
+        } else {
+          cfg->SetVolumeMusic(max_volume);
+        }
+        JukeBox::GetInstance()->ActiveMusic(true);
+
+        volume = cfg->GetVolumeEffects() + 5;
+        if (volume < max_volume) {
+          cfg->SetVolumeEffects(volume);
+        } else {
+          cfg->SetVolumeEffects(max_volume);
+        }
+        JukeBox::GetInstance()->ActiveEffects(true);
+        return;
+      }
     default:
       break;
     }
@@ -1092,6 +1134,8 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
   if(key == KEY_MINIMAP_FROM_GAME) return "minimap_from_game";
   if(key == KEY_DECREASE_MINIMAP) return "decrease_minimap";
   if(key == KEY_INCREASE_MINIMAP) return "increase_minimap";
+  if(key == KEY_DECREASE_VOLUME) return "decrease_volume";
+  if(key == KEY_INCREASE_VOLUME) return "increase_volume";
 
   return "none";
 }
@@ -1145,8 +1189,10 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_NEXT_CHARACTER) return _("Next character");
   if(key == KEY_MENU_OPTIONS_FROM_GAME) return _("Open options menu");
   if(key == KEY_MINIMAP_FROM_GAME) return _("Toggle minimap");
-  if(key == KEY_DECREASE_MINIMAP) return "Decrease minimap size";
-  if(key == KEY_INCREASE_MINIMAP) return "Increase minimap size";
+  if(key == KEY_DECREASE_MINIMAP) return _("Decrease minimap size");
+  if(key == KEY_INCREASE_MINIMAP) return _("Increase minimap size");
+  if(key == KEY_DECREASE_VOLUME) return _("Decrease sound volume");
+  if(key == KEY_INCREASE_VOLUME) return _("Increase sound volume");
 
   return _("None");
 }
