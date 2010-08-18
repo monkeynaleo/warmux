@@ -43,6 +43,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "fixed_func.h"
 #include <sstream>
 #include <stdio.h>
+#include <limits.h>
 
 namespace fixedpoint {
 
@@ -58,8 +59,11 @@ struct fixed_point {
   /*explicit*/ fixed_point(int32_t i) : intValue(((fixint_t)i) << p) {}
 #endif
   /*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
-  /*explicit*/ fixed_point(double f) : intValue(float2fix<p>((float)f)) {}
+  /*explicit*/ fixed_point(double d) : intValue(float2fix<p>((float)d)) {}
+  /*explicit*/ fixed_point(unsigned int u) : intValue(((fixint_t)u) << p) {}
+#if LONG_MAX != INT_MAX
   /*explicit*/ fixed_point(size_t i) : intValue(((fixint_t)i) << p) {}
+#endif
 
   fixed_point& operator += (fixed_point r) { intValue += r.intValue; return *this; }
   fixed_point& operator -= (fixed_point r) { intValue -= r.intValue; return *this; }
