@@ -93,8 +93,8 @@ uint RandomGenerator::GetRand()
 
 bool RandomGenerator::GetBool()
 {
-  Double middle = WORMUX_RAND_MAX/2;
-  Double random = GetRand();
+  uint middle = WORMUX_RAND_MAX/2;
+  uint random = GetRand();
   return (random <= middle);
 }
 
