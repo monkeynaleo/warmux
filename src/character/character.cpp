@@ -727,7 +727,7 @@ void Character::UpdateFiringAngle()
     CharacterCursor::GetInstance()->Hide();
     Double delta = DELTA_CROSSHAIR;
     if (ud_move_intention->IsToDoItSlowly())
-      delta *= 0.1;
+      delta /= 10;
     if (ud_move_intention->GetDirection() == DIRECTION_UP)
       delta = -delta;
     AddFiringAngle(delta);
