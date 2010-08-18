@@ -87,35 +87,39 @@ Config::Config()
   , m_game_mode("classic")
   , display_energy_character(true)
   , display_name_character(true)
+
 #ifdef ANDROID
   , display_wind_particles(false) // Too CPU intensive
   , display_multi_layer_sky(false) // Memory hungry + CPU intensive
+#else
+  , display_wind_particles(true)
+  , display_multi_layer_sky(true)
+#endif
+
   , default_mouse_cursor(false)
-  , video_width(480)
-  , video_height(320)
+  , video_width(0)
+  , video_height(0)
+
+#ifdef ANDROID
   , video_fullscreen(true) // No other mode supported
   , max_fps(25)
-  , bling_bling_interface(false) // Obvious kinetic scrolling user
+#else
+  , video_fullscreen(false)
+  , max_fps(50)
+#endif
+
+  , bling_bling_interface(false)
   , scroll_on_border(false)
   , scroll_border_size(50)
   , sound_music(true)
   , sound_effects(true)
+
+#ifdef ANDROID
   , sound_frequency(22050) // Reduce memory usage
 #else
-  , display_wind_particles(true)
-  , display_multi_layer_sky(true)
-  , default_mouse_cursor(false)
-  , video_width(800)
-  , video_height(600)
-  , video_fullscreen(false)
-  , max_fps(50)
-  , bling_bling_interface(false)
-  , scroll_on_border(true)
-  , scroll_border_size(50)
-  , sound_music(true)
-  , sound_effects(true)
   , sound_frequency(44100)
 #endif
+
   , warn_on_new_player(true)
   , check_updates(false)
   , lefthanded_mouse(false)
