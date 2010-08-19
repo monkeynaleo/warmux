@@ -11,7 +11,7 @@ baseball et autres bazookas,... exterminez votre adversaire dans un
 décor toon 2D destructible et une ambiance bon enfant.
 
 Chaque joueur (2 minimum, sur un même PC) commande l'équipe de son 
-choix (manchot, gnou, firefox, wilber,...) et doit détruire celle de 
+choix (tux, gnu, firefox, wilber,...) et doit détruire celle de 
 son adversaire à l'aide d'armes plus ou moins conventionnelles.
 
 Bien qu'un minimum de stratégie vous sera nécessaire pour vaincre, 
@@ -29,49 +29,49 @@ Vous n'aurez pas à vous casser la tête pour comprendre comment jouer
 ==============
 Contrôles clavier/souris pour jouer à Wormux.
 
+* Touche tab : changer de personnage actif
+* Touche 'c' : recentrer sur le personnage actif
 * Touche droite/gauche : marcher vers la droite ou la gauche
-* Touche haut/bas : Régler le viseur (utilisé pour le bazooka, le pistolet,
+* Touche haut/bas : régler le viseur (utilisé pour le bazooka, le pistolet,
  etc.), c'est-à-dire l'angle de tir
-* Touche espace : Tirer. Exceptions : le parachute se déclenche tout seul,
+* Touche espace : tirer. Exceptions : le parachute se déclenche tout seul,
  et la téléportation se fait avec un clic de souris.
-* Clic droit de souris : Affiche/cache le menu des armes.
-* Clic gauche de souris : Positionner la cible pour la téléportation ou le
+ Attention : le bazooka automatique a besoin que l'on sélectionne la cible
+ (avec un clic gauche) avant de tirer
+* Clic droit de la souris : affiche/cache le menu des armes.
+* Clic gauche de la souris : positionner la cible pour la téléportation ou le
  bazooka automatique.
-* Touche F1, F2, .. F5 : Changer d'arme parmi la catégorie 1, 2, ... 5
-* Touche echappe : Quitter le jeu (une confirmation est nécessaire)
-* Touche entrée : Saut ("horizontal")
-* Touche retour (backspace, au dessus d'entrée) : Saut ("vertical")
-* Déplacement de la souris dans les bordures de l'écran : Se déplacer dans
- le terrain 
-
-
+* Clic du milieu de la souris : déplacer la carte
+* Touche F1, F2, .. F5 : changer d'arme parmi la catégorie 1, 2, ... 5
+* Touche echap : quitter le jeu (une confirmation est nécessaire)
+* Touche 'b' : saut ("en arrière")
+* Touche entrée : saut ("horizontal")
+* Touche retour arrière (backspace, au dessus d'entrée) : saut ("vertical")
+* Déplacement de la souris dans les bordures de l'écran : se déplacer dans
+ le terrain
+ * Touche F10 : plein écran
 
 2.2/ Aide supplémentaire
 ========================
 
 Sur le site web :
-* Liste des armes: http://wormux.org/wiki/fr/armes.php
-* Liste des cartes : http://wormux.org/wiki/fr/cartes.php
-  * Comment créer votre propre carte : http://wormux.org/wiki/Create_your_own_map.php
-* Liste des avatars : http://wormux.org/wiki/fr/avatars.php
-* Forum: http://www.wormux.org/forum/
+* Liste des armes: http://www.wormux.org/phpboost/wiki/wiki.php
+* Liste des cartes : http://www.wormux.org/phpboost/wiki/wiki.php
+  * Comment créer votre propre carte : http://www.wormux.org/phpboost/wiki/wiki.php
+* Liste des avatars : http://www.wormux.org/phpboost/wiki/wiki.php
+* Forum: http://www.wormux.org/phpboost/forum/
 
 3/ Sur quelle système jouer sans compiler ?
 ==============================================
 
 Wormux est disponible sur de nombreux systèmes  (regardez 
-http://wormux.org/wiki/packages.php pour la liste mise à jour):
+http://www.wormux.org/phpboost/download pour la liste mise à jour):
 
 * Linux :
-  * Debian Sarge
-  * Debian Etch
-  * Debian Sid
-  * Ubuntu Dapper
-  * Ubuntu Edgy
-  * Fedora Core 4
-  * Fedora Core 5
-  * Mandriva 2006
-  * Mandriva 2007
+  * Debian (Sarge/Etch/Sid)
+  * Ubuntu (Dapper/Edgy)
+  * Fedora Core (4/5)
+  * Mandriva (2006/2007)
   * Gentoo
   * Slackware
   * SourceMage
@@ -89,4 +89,6 @@ http://wormux.org/wiki/packages.php pour la liste mise à jour):
 4/ Liens
 ========
 
-* Site officiel : http://wormux.org/fr/
+* Site officiel : http://www.wormux.org/
+* Page du projet sur Gna! : https://gna.org/projects/wormux/
+
