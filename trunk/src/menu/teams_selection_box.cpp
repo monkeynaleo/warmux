@@ -180,37 +180,40 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
   if (local_teams_nb->ClickUp(mousePosition, button)) {
     SetNbTeams(local_teams_nb->GetValue());
   } else {
+    Widget *w = (list_box) ? list_box->ClickUp(mousePosition, button)
+                           : WidgetList::ClickUp(mousePosition, button);
+
     for (uint i=0; i<teams_selections.size() ; i++) {
 
       if (teams_selections[i]->Contains(mousePosition)) {
         Widget * at = teams_selections[i];
-        Widget * w  = at->ClickUp(mousePosition, button);
+        Rectanglei r(at->GetPosition(), Point2i(38, 38));
 
-        if (!w) {
-          Rectanglei r(at->GetPosition(), Point2i(38, 38));
-
-          if (r.Contains(mousePosition)) {
-            if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
-              NextTeam(i);
-            } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
-              PrevTeam(i);
-            }
-          } else {
-            Rectanglei r2(at->GetPositionX(), at->GetPositionY() + 39,
-                          38, 30);
-            if (r2.Contains(mousePosition)) {
-              teams_selections[i]->SwitchPlayerType();
-            }
+        // Validate where the click really landed
+        if (r.Contains(mousePosition)) {
+          if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
+            NextTeam(i);
+          } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
+            PrevTeam(i);
           }
+          return at;
         } else {
-          return w;
+          Rectanglei r2(at->GetPositionX(), at->GetPositionY() + 39,
+                        38, 30);
+          if (r2.Contains(mousePosition)) {
+            teams_selections[i]->SwitchPlayerType();
+            return at;
+          }
         }
-        break;
+
+        return (w) ? w : at;
       }
     }
+
+    return w;
   }
 
-  return (list_box) ? list_box->ClickUp(mousePosition, button) : NULL;
+  return NULL;
 }
 
 void LocalTeamsSelectionBox::PrevTeam(int i)

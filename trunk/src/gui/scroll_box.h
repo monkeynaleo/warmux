@@ -31,6 +31,13 @@ class Button;
 
 class ScrollBox : public WidgetList
 {
+public:
+  typedef enum {
+    SCROLL_MODE_NONE,
+    SCROLL_MODE_THUMB,
+    SCROLL_MODE_DRAG
+  } ScrollMode;
+
 protected:
   // Internal box
   VBox *vbox;
@@ -45,6 +52,7 @@ protected:
   int          start_drag_offset;
   int          offset;
   int          scrollbar_width;
+  ScrollMode   scroll_mode;
 
   virtual void __Update(const Point2i & mousePosition,
                         const Point2i & lastMousePosition);
@@ -68,7 +76,10 @@ public:
   virtual void Pack();
 
   // to add a widget
-  virtual bool Contains(const Point2i & point) const;
+  virtual bool Contains(const Point2i & point) const
+  {
+    return scroll_mode != SCROLL_MODE_NONE || Widget::Contains(point);
+  }
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
   virtual void RemoveFirstWidget();
