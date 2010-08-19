@@ -65,6 +65,11 @@ ScrollBox::~ScrollBox()
 {
 }
 
+bool ScrollBox::Contains(const Point2i & point) const
+{
+  return start_drag_offset != NO_DRAG || Widget::Contains(point);
+}
+
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   bool was_drag = start_drag_offset != NO_DRAG;
@@ -264,6 +269,11 @@ void ScrollBox::Clear()
 void ScrollBox::Update(const Point2i &mousePosition,
                        const Point2i &lastMousePosition)
 {
+  // Force redrawing if we are scrolling and the mouse has moved
+  if (start_drag_offset!=NO_DRAG && mousePosition!=lastMousePosition) {
+    NeedRedrawing();
+  }
+
   bool redraw = need_redrawing;
   Widget::Update(mousePosition, lastMousePosition);
   need_redrawing = redraw;

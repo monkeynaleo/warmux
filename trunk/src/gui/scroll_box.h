@@ -68,6 +68,7 @@ public:
   virtual void Pack();
 
   // to add a widget
+  virtual bool Contains(const Point2i & point) const;
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w);
   virtual void RemoveFirstWidget();
