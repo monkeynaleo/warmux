@@ -683,6 +683,8 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
  */
 Surface Surface::DisplayFormatAlpha()
 {
+  if (surface->format->BitsPerPixel == 24)
+    return DisplayFormat();
   SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
 
   if (!surf)
