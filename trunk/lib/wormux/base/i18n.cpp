@@ -96,8 +96,27 @@ static void I18N_SetDir(const std::string &dir)
 void InitI18N(const std::string &dir, const std::string &default_language)
 {
 #ifdef ANDROID
+  // Yes this is a leak
+  static char *def = NULL;
+
+  if (!def) {
+    const char *lang = getenv("LANG");
+    if (lang) {
+      def = (char*)malloc(strlen(lang)+1);
+      strcpy(def, lang);
+    } else {
+      def = (char*)malloc(1);
+      def[0] = 0;
+    }
+  }
+
+  if (default_language == "")
+    setenv("LANG", def, 1);
+  else
+    setenv("LANG", default_language.c_str(), 1);
+
   // setlocale always return NULL
-  setenv("LANG", default_language.c_str(), 1);
+  printf("o Locale: %s\n", getenv("LANG"));
 #else
   const char *locale = setlocale(LC_ALL, "");
 
@@ -105,16 +124,17 @@ void InitI18N(const std::string &dir, const std::string &default_language)
     fprintf(stderr, "Couldn't set locale!\n");
     return;
   }
-  printf("o Locale: %s\n", locale);
-#endif
+  printf("o Locale: %s\n", default_language.c_str());
 
-#ifdef _WIN32
+# ifdef _WIN32
   std::string variable = "LANGUAGE=";
   variable += default_language;
   _putenv(variable.c_str());
-#else
+# else
   setenv("LANGUAGE", default_language.c_str(), 1);
+# endif
 #endif
+
   I18N_SetDir(dir);
 }
 #endif
