@@ -93,9 +93,11 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
           }
         }
 
-        return w ? w : at;
+        return w;
       }
     }
+
+    return w;
   }
 
   return NULL;
