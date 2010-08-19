@@ -206,7 +206,7 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
           }
         }
 
-        return (w) ? w : at;
+        return w;
       }
     }
 
