@@ -675,7 +675,7 @@ void OptionMenu::SelectTeam()
 void OptionMenu::AddLanguageItem(const char* label, const char* value)
 {
   lbox_languages->AddItem(Config::GetConstInstance()->GetLanguage() == value,
-                          new Label(label, 400, Font::FONT_SMALL,
+                          new Label(label, 400, Font::FONT_MEDIUM,
                                     Font::FONT_BOLD, white_color, Text::ALIGN_LEFT_TOP, true),
                           value);
 }
