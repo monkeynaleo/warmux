@@ -65,20 +65,20 @@ Widget::Widget(const Point2i &size, bool clickable)
 }
 
 Widget::Widget(Profile * _profile,
-               const xmlNode * _widgetNode):
-  Rectanglei(0, 0, size.x, size.y),
-  has_focus(false),
-  visible(true),
-  is_highlighted(false),
-  border_color(white_color),
-  border_size(0),
-  background_color(transparent_color),
-  highlight_bg_color(transparent_color),
-  ct(NULL),
-  need_redrawing(true),
-  profile(_profile),
-  widgetNode(_widgetNode),
-  actionName("NoAction")
+               const xmlNode * _widgetNode)
+  : Rectanglei(0, 0, size.x, size.y)
+  , has_focus(false)
+  , visible(true)
+  , is_highlighted(false)
+  , border_color(white_color)
+  , border_size(0)
+  , background_color(transparent_color)
+  , highlight_bg_color(transparent_color)
+  , ct(NULL)
+  , need_redrawing(true)
+  , profile(_profile)
+  , widgetNode(_widgetNode)
+  , actionName("NoAction")
 {
 }
 
@@ -224,8 +224,7 @@ void Widget::ParseXMLGeometry(void)
     SetPosition(ParseHorizontalTypeAttribut("x", 0),
                 (GetMainWindow().GetHeight() - GetSizeY()) / 2);
   } else if ("centeredInXY" == alignType) {
-    SetPosition((GetMainWindow().GetWidth() - GetSizeX()) / 2,
-                (GetMainWindow().GetHeight() - GetSizeY()) / 2);
+    SetPosition((GetMainWindow().GetSize() - GetSize()) / 2);
   } else {
     ParseXMLPosition();
   }
@@ -235,7 +234,7 @@ void Widget::Update(const Point2i &mousePosition,
                     const Point2i &lastMousePosition)
 {
   if (need_redrawing ||
-    (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
+      (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
       (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition))) {
 
     // Redraw the border and the background
@@ -296,8 +295,7 @@ bool Widget::Contains(const Point2i& point) const
 
 void Widget::SetBorder(const Color &_border_color, uint _border_size)
 {
-  if (border_color != _border_color ||
-      border_size != _border_size) {
+  if (border_color != _border_color || border_size != _border_size) {
     border_color = _border_color;
     border_size = _border_size;
     NeedRedrawing();
@@ -332,4 +330,3 @@ void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
     NeedRedrawing();
   }
 }
-
