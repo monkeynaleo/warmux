@@ -74,7 +74,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     return NULL;
   }
 
-  if (vbox->Contains(mousePosition)) {
+  // Handle the click up as a widget click only if we weren't dragging
+  if (vbox->Contains(mousePosition) && !was_drag) {
     Widget *w = vbox->ClickUp(mousePosition, button);
 
     if (w) {
