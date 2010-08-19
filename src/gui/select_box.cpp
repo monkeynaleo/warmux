@@ -61,7 +61,10 @@ Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
       if (item==selected_item) {
         if (!always_one_selected)
           Deselect();
-      } else {
+      } else if (abs(start_drag_y-mousePosition.y)<2) {
+        // We don't want to select a widget if we were scrolling
+        // If we click up close to where we clicked down, it will think it
+        // it was not scrolling, though
         Select(item);
       }
     }
