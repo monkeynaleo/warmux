@@ -45,8 +45,8 @@
 
 
 // The device screen dimensions to draw on
-int SDL_ANDROID_sWindowWidth  = 480;
-int SDL_ANDROID_sWindowHeight = 320;
+int SDL_ANDROID_sWindowWidth  = 800;
+int SDL_ANDROID_sWindowHeight = 480;
 
 // Extremely wicked JNI environment to call Java functions from C code
 static JNIEnv* JavaEnv = NULL;
@@ -70,34 +70,33 @@ int SDL_ANDROID_CallJavaSwapBuffers()
 #define JAVA_EXPORT_NAME(name) JAVA_EXPORT_NAME1(name,SDL_JAVA_PACKAGE_PATH)
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeResize) ( JNIEnv*  env, jobject  thiz, jint w, jint h )
+JAVA_EXPORT_NAME(DemoRenderer_nativeResize)(JNIEnv* env, jobject thiz, jint w, jint h)
 {
-    SDL_ANDROID_sWindowWidth  = w;
-    SDL_ANDROID_sWindowHeight = h;
-    __android_log_print(ANDROID_LOG_INFO, "libSDL", "Physical screen resolution is %dx%d", w, h);
+  SDL_ANDROID_sWindowWidth  = w;
+  SDL_ANDROID_sWindowHeight = h;
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "Physical screen resolution is %dx%d", w, h);
 }
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeDone) ( JNIEnv*  env, jobject  thiz )
+JAVA_EXPORT_NAME(DemoRenderer_nativeDone)(JNIEnv* env, jobject thiz)
 {
-        __android_log_print(ANDROID_LOG_INFO, "libSDL", "quitting...");
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "quitting...");
 #if SDL_VERSION_ATLEAST(1,3,0)
-        SDL_SendQuit();
+  SDL_SendQuit();
 #else
-        SDL_PrivateQuit();
+  SDL_PrivateQuit();
 #endif
-        __android_log_print(ANDROID_LOG_INFO, "libSDL", "quit OK");
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "quit OK");
 }
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks) ( JNIEnv*  env, jobject thiz )
+JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks)(JNIEnv* env, jobject thiz)
 {
-        JavaEnv = env;
-        JavaRenderer = thiz;
+  JavaEnv = env;
+  JavaRenderer = thiz;
 
-        JavaRendererClass = (*JavaEnv)->GetObjectClass(JavaEnv, thiz);
-        JavaSwapBuffers = (*JavaEnv)->GetMethodID(JavaEnv, JavaRendererClass, "swapBuffers", "()I");
+  JavaRendererClass = (*JavaEnv)->GetObjectClass(JavaEnv, thiz);
+  JavaSwapBuffers = (*JavaEnv)->GetMethodID(JavaEnv, JavaRendererClass, "swapBuffers", "()I");
 
-        ANDROID_InitOSKeymap();
-
+  ANDROID_InitOSKeymap();
 }
