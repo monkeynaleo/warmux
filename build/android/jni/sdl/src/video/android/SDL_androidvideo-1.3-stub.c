@@ -44,83 +44,83 @@ static void ANDROID_PumpEvents(_THIS);
 
 static void ANDROID_DeleteDevice(SDL_VideoDevice *device)
 {
- SDL_free(device);
+  SDL_free(device);
 }
 
 SDL_VideoDevice *ANDROID_CreateDevice_1_3(int devindex)
 {
- SDL_VideoDevice *device;
+  SDL_VideoDevice *device;
 
- /* Initialize all variables that we clean on shutdown */
- device = (SDL_VideoDevice *)SDL_malloc(sizeof(SDL_VideoDevice));
- if ( device ) {
-   SDL_memset(device, 0, sizeof (*device));
- }
- if ( (device == NULL) ) {
-   SDL_OutOfMemory();
-   if ( device ) {
-     SDL_free(device);
-   }
-   return(0);
- }
+  /* Initialize all variables that we clean on shutdown */
+  device = (SDL_VideoDevice *)SDL_malloc(sizeof(SDL_VideoDevice));
+  if ( device ) {
+    SDL_memset(device, 0, sizeof (*device));
+  }
+  if ( (device == NULL) ) {
+    SDL_OutOfMemory();
+    if ( device ) {
+      SDL_free(device);
+    }
+    return(0);
+  }
 
- /* Set the function pointers */
- device->VideoInit = ANDROID_VideoInit;
- device->GetDisplayBounds = ANDROID_GetDisplayBounds;
- device->GetDisplayModes = ANDROID_GetDisplayModes;
- device->PumpEvents = ANDROID_PumpEvents;
- device->VideoQuit = ANDROID_VideoQuit;
- device->free = ANDROID_DeleteDevice;
+  /* Set the function pointers */
+  device->VideoInit = ANDROID_VideoInit;
+  device->GetDisplayBounds = ANDROID_GetDisplayBounds;
+  device->GetDisplayModes = ANDROID_GetDisplayModes;
+  device->PumpEvents = ANDROID_PumpEvents;
+  device->VideoQuit = ANDROID_VideoQuit;
+  device->free = ANDROID_DeleteDevice;
 
- device->GL_SwapWindow = ANDROID_GL_SwapBuffers;
- device->GL_CreateContext = ANDROID_GL_CreateContext;
- device->GL_MakeCurrent = ANDROID_GL_MakeCurrent;
- device->GL_DeleteContext = ANDROID_GL_DeleteContext;
+  device->GL_SwapWindow = ANDROID_GL_SwapBuffers;
+  device->GL_CreateContext = ANDROID_GL_CreateContext;
+  device->GL_MakeCurrent = ANDROID_GL_MakeCurrent;
+  device->GL_DeleteContext = ANDROID_GL_DeleteContext;
 
- return device;
+  return device;
 }
 
 int ANDROID_VideoInit(_THIS)
 {
- SDL_VideoDisplay display;
- SDL_DisplayMode mode;
+  SDL_VideoDisplay display;
+  SDL_DisplayMode mode;
 
- mode.w = SDL_ANDROID_sWindowWidth;
- mode.h = SDL_ANDROID_sWindowHeight;
- mode.refresh_rate = 0;
- mode.format = SDL_PIXELFORMAT_RGB565;
- mode.driverdata = NULL;
+  mode.w = SDL_ANDROID_sWindowWidth;
+  mode.h = SDL_ANDROID_sWindowHeight;
+  mode.refresh_rate = 0;
+  mode.format = SDL_PIXELFORMAT_RGB565;
+  mode.driverdata = NULL;
 
- SDL_zero(display);
- display.desktop_mode = mode;
- display.current_mode = mode;
- display.driverdata = NULL;
- SDL_AddVideoDisplay(&display);
+  SDL_zero(display);
+  display.desktop_mode = mode;
+  display.current_mode = mode;
+  display.driverdata = NULL;
+  SDL_AddVideoDisplay(&display);
 
- return 0;
+  return 0;
 }
 
 void ANDROID_GetDisplayModes(_THIS, SDL_VideoDisplay * display)
 {
- SDL_DisplayMode mode;
- mode.w = SDL_ANDROID_sWindowWidth;
- mode.h = SDL_ANDROID_sWindowHeight;
- mode.refresh_rate = 0;
- mode.format = SDL_PIXELFORMAT_RGB565;
- mode.driverdata = NULL;
- SDL_AddDisplayMode(display, &mode);
+  SDL_DisplayMode mode;
+  mode.w = SDL_ANDROID_sWindowWidth;
+  mode.h = SDL_ANDROID_sWindowHeight;
+  mode.refresh_rate = 0;
+  mode.format = SDL_PIXELFORMAT_RGB565;
+  mode.driverdata = NULL;
+  SDL_AddDisplayMode(display, &mode);
 }
 
 int ANDROID_GetDisplayBounds(_THIS, SDL_VideoDisplay * display, SDL_Rect * rect)
 {
- rect->w = SDL_ANDROID_sWindowWidth;
- rect->h = SDL_ANDROID_sWindowHeight;
- return 1;
+  rect->w = SDL_ANDROID_sWindowWidth;
+  rect->h = SDL_ANDROID_sWindowHeight;
+  return 1;
 };
 
 int ANDROID_SetDisplayMode(_THIS, SDL_VideoDisplay * display, SDL_DisplayMode * mode)
 {
- return 1;
+  return 1;
 };
 
 void ANDROID_VideoQuit(_THIS)
@@ -133,16 +133,16 @@ void ANDROID_PumpEvents(_THIS)
 
 void ANDROID_GL_SwapBuffers(_THIS, SDL_Window * window)
 {
- SDL_ANDROID_CallJavaSwapBuffers();
+  SDL_ANDROID_CallJavaSwapBuffers();
 };
 
 SDL_GLContext ANDROID_GL_CreateContext(_THIS, SDL_Window * window)
 {
- return (SDL_GLContext)1;
+  return (SDL_GLContext)1;
 };
 int ANDROID_GL_MakeCurrent (_THIS, SDL_Window * window, SDL_GLContext context)
 {
- return 1;
+  return 1;
 };
 void ANDROID_GL_DeleteContext (_THIS, SDL_GLContext context)
 {
