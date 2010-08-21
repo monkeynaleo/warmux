@@ -1,2 +1,9 @@
+build/android/bin/
+build/android/gen/
+build/android/libs/
+build/android/obj/
+build/android/build.properties
+build/android/local.properties
+build/android/keystore.jks
 po/*.po~
 po/*.gmo
