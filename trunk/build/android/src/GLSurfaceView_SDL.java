@@ -584,17 +584,17 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
          * test if the interface supports GL11 or higher interfaces.
          */
         public abstract void onDrawFrame(GL10 gl);
-
+        
         public boolean SwapBuffers() {
             if( mSwapBuffersCallback != null )
                 return mSwapBuffersCallback.SwapBuffers();
             return false;
         }
-
+        
         public void setSwapBuffersCallback( SwapBuffersCallback c ) {
             mSwapBuffersCallback = c;
         }
-
+        
         private SwapBuffersCallback mSwapBuffersCallback = null;
     }
 
