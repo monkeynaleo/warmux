@@ -66,12 +66,12 @@ public:
   Surface GetSurface() const;
 
   // Frame number
-  unsigned int GetCurrentFrame() const
+  uint GetCurrentFrame() const
   {
     ASSERT(current_frame < frames.size());
     return current_frame;
   }
-  void SetCurrentFrame( unsigned int frame_no)
+  void SetCurrentFrame(uint frame_no)
   {
     ASSERT (frame_no < frames.size());
     if (current_frame != frame_no) {
@@ -80,7 +80,7 @@ public:
     }
     current_frame = frame_no;
   }
-  unsigned int GetFrameCount() const { return frames.size(); };
+  uint GetFrameCount() const { return frames.size(); };
 
   // Antialiasing
   void SetAntialiasing(bool on)
@@ -91,27 +91,27 @@ public:
   bool IsAntialiased() const { return smooth; };
 
   // Size
-  unsigned int GetWidth() const
+  uint GetWidth() const
   {
     Double one_half = 0.5;
     return static_cast<int>(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
   }
   // gives height of the surface (takes rotations into acount)
-  unsigned int GetWidthMax() const
+  uint GetWidthMax() const
   {
-    if(!current_surface.IsNull() )
+    if (!current_surface.IsNull())
       return current_surface.GetWidth();
     else
       return GetWidth();
   }
-  unsigned int GetHeight() const
+  uint GetHeight() const
   {
-    return static_cast<int>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
+    return static_cast<uint>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
   }
   // gives height of the surface (takes rotations into acount)
-  unsigned int GetHeightMax() const
+  uint GetHeightMax() const
   {
-    if(!current_surface.IsNull() )
+    if (!current_surface.IsNull())
       return current_surface.GetHeight();
     else
       return GetHeight();
@@ -126,7 +126,7 @@ public:
   }
   Double GetScaleX(void) const { return scale_x; }
   Double GetScaleY(void) const { return scale_y; }
-  void SetSize(unsigned int w, unsigned int h)
+  void SetSize(uint w, uint h)
   {
     ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
 
@@ -155,19 +155,19 @@ public:
     ASSERT(rotation_rad > -2*PI && rotation_rad <= 2*PI);
     return rotation_rad;
   }
-  void SetRotation_HotSpot( const Point2i& new_hotspot);
-  void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
+  void SetRotation_HotSpot(const Point2i& new_hotspot);
+  void SetRotation_HotSpot(const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() const { return rotation_point; };
 
-  SpriteFrame& operator[] (unsigned int index) { return frames.at(index); };
-  const SpriteFrame& operator[] (unsigned int index) const { return frames.at(index); };
+  SpriteFrame& operator[] (uint index) { return frames.at(index); };
+  const SpriteFrame& operator[] (uint index) const { return frames.at(index); };
   const SpriteFrame& GetCurrentFrameObject() const { return frames[current_frame]; };
 
   // Prepare animation
-  void AddFrame( const Surface& surf, unsigned int delay = 100);
-  void SetFrameSpeed(unsigned int nv_fs)
+  void AddFrame(const Surface& surf, uint delay = 100);
+  void SetFrameSpeed(uint nv_fs)
   {
-    for (uint f = 0 ; f < frames.size() ; f++)
+    for (uint f=0 ; f<frames.size(); f++)
       frames[f].delay = nv_fs;
   }
 
@@ -187,8 +187,7 @@ public:
   Double GetAlpha() const { return alpha; };
 
   // Cache
-  void EnableRotationCache(unsigned int cache_size)
-  { cache.EnableRotationCache(frames, cache_size); }
+  void EnableRotationCache(uint cache_size) { cache.EnableRotationCache(frames, cache_size); }
   void EnableFlippingCache() { cache.EnableFlippingCache(frames); };
 
   // Show flag
@@ -217,7 +216,7 @@ private:
   Surface current_surface;
   bool show;
   // Frames
-  unsigned int current_frame;
+  uint current_frame;
   int frame_width_pix,frame_height_pix;
   std::vector<SpriteFrame> frames;
 

@@ -73,14 +73,14 @@ Sprite::Sprite(const Sprite &other) :
   rot_hotspot = other.rot_hotspot;
   rotation_point = other.rotation_point;
 
-  for(unsigned int f=0;f<other.frames.size();f++)
+  for (uint f=0;f<other.frames.size();f++)
     AddFrame(other.frames[f].surface,other.frames[f].delay);
 
-  if(other.cache.have_lastframe_cache)
+  if (other.cache.have_lastframe_cache)
     cache.EnableLastFrameCache();
-  if(other.cache.have_rotation_cache)
+  if (other.cache.have_rotation_cache)
     EnableRotationCache(other.cache.rotation_cache_size);
-  if(other.cache.have_flipping_cache)
+  if (other.cache.have_flipping_cache)
     EnableFlippingCache();
 }
 
@@ -104,40 +104,40 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 
   surface.SetAlpha( 0, 0);
 
-  for( f.y = 0; f.y < nb_frames_y; f.y++)
-    for( f.x = 0; f.x < nb_frames_x; f.x++){
+  for (f.y=0; f.y<nb_frames_y; f.y++)
+    for (f.x=0; f.x<nb_frames_x; f.x++) {
       Surface new_surf(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
       Rectanglei sr(f * frameSize, frameSize);
 
-      new_surf.Blit( surface, sr, Point2i(0, 0));
-      frames.push_back( SpriteFrame(new_surf));
+      new_surf.Blit(surface, sr, Point2i(0, 0));
+      frames.push_back(SpriteFrame(new_surf));
     }
 }
 
-void Sprite::AddFrame(const Surface &surf, unsigned int delay){
-  frames.push_back( SpriteFrame(surf, delay) );
+void Sprite::AddFrame(const Surface &surf, uint delay){
+  frames.push_back(SpriteFrame(surf, delay));
 }
 
 void Sprite::SetRotation_rad( Double angle_rad)
 {
-  while(angle_rad > 2*PI)
+  while (angle_rad > 2*PI)
     angle_rad -= 2 * PI;
-  while(angle_rad <= -2*PI)
+  while (angle_rad <= -2*PI)
     angle_rad += 2 * PI;
 
-  if(rotation_rad == angle_rad) return;
+  if (rotation_rad == angle_rad)
+    return;
 
   rotation_rad = angle_rad;
   cache.InvalidLastFrame();
 }
 
-void Sprite::SetRotation_HotSpot( const Point2i& new_hotspot)
+void Sprite::SetRotation_HotSpot(const Point2i& new_hotspot)
 {
   rot_hotspot = user_defined;
   rhs_pos = new_hotspot;
 
-  if (rhs_pos.x * 2 == static_cast<int>(GetWidth()) &&
-      rhs_pos.y * 2 == static_cast<int>(GetHeight())  )
+  if (rhs_pos * 2 == GetSize())
     rot_hotspot = center; // avoid using Calculate_Rotation_Offset, thus avoiding a division by zero
 }
 
@@ -221,7 +221,7 @@ void Sprite::Blit(Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uin
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
 
-  if(alpha == ONE) {
+  if (alpha == ONE) {
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
   } else {
     Surface surf_alpha;
@@ -263,7 +263,7 @@ void Sprite::Draw(const Point2i &pos)
 
 void Sprite::DrawXY(const Point2i &pos)
 {
-  if( !show )
+  if (!show)
     return;
 
   Blit(GetMainWindow(), pos);
@@ -278,29 +278,28 @@ void Sprite::RefreshSurface()
 
   current_surface.Free();
 
-  if (!cache.have_rotation_cache && !cache.have_flipping_cache)
-  {
-    if (!cache.have_lastframe_cache)
+  //if (!cache.have_lastframe_cache && scale_x.tofloat() != 1)
+  //  printf("Refresh %p surface %u: %.3fx%.3f/%.3f\n", this, current_frame,
+  //         scale_x.tofloat(), scale_y.tofloat(), rotation_rad.tofloat());
+
+  if (!cache.have_rotation_cache && !cache.have_flipping_cache) {
+    if (!cache.have_lastframe_cache) {
       current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
-    else if (cache.last_frame.IsNull() )
-      {
-        current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
-        cache.last_frame = current_surface;
-      }
-    else
-        current_surface = cache.last_frame;
-  }
-  else if (cache.have_flipping_cache && !cache.have_rotation_cache)
-  {
+    } else if (cache.last_frame.IsNull()) {
+      current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
+      cache.last_frame = current_surface;
+    }
+    else {
+      current_surface = cache.last_frame;
+    }
+  } else if (cache.have_flipping_cache && !cache.have_rotation_cache) {
     if (rotation_rad != ZERO || scale_y != ONE || (scale_x != ZERO && scale_x != -ONE))
-      current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y, smooth);
+      current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
     else if (scale_x == ONE)
       current_surface = frames[current_frame].surface;
     else
       current_surface = cache.frames[current_frame].flipped_surface;
-  }
-  else if (!cache.have_flipping_cache && cache.have_rotation_cache)
-  {
+  } else if (!cache.have_flipping_cache && cache.have_rotation_cache) {
     if (scale_x != ONE || scale_y != ONE)
       current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
     else
@@ -308,18 +307,18 @@ void Sprite::RefreshSurface()
   }
   //cache.have_flipping_cache==true && cache.have_rotation_cache==true
   else if ((scale_x != ONE && scale_x != -ONE)  || scale_y != ONE)
-    current_surface = frames[current_frame].surface.RotoZoom( rotation_rad, scale_x, scale_y, smooth);
+    current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
   else if (scale_x == ONE) //Scale_y == 1.0
     current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
   else
     current_surface = cache.frames[current_frame].GetFlippedSurfaceForAngle(rotation_rad);
 
-  ASSERT( !current_surface.IsNull() );
+  ASSERT(!current_surface.IsNull());
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
   rotation_point.y=0;
-  if(rot_hotspot != center || rotation_rad!=ZERO)
+  if (rot_hotspot != center || rotation_rad!=ZERO)
     Calculate_Rotation_Offset(current_surface);
 }
 
