@@ -47,8 +47,8 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  background = new Sprite( GetResourceManager().LoadImage( res, bg), true);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  background = new Sprite(GetResourceManager().LoadImage(res, bg), true);
   background->cache.EnableLastFrameCache();
 
   b_ok = NULL;
@@ -436,8 +436,7 @@ void Menu::Run(bool skip_menu)
 
   SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-  do
-  {
+  do {
     // this is the current menu (here in case we had run a submenu)
     AppWormux::GetInstance()->SetCurrentMenu(this);
 
