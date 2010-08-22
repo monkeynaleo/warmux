@@ -96,10 +96,6 @@ void Mouse::ActionLeftClick(bool) const
 {
   const Point2i pos_monde = GetWorldPosition();
 
-  // Action in weapon menu ?
-  if (Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()))
-    return;
-
   //Change character by mouse click only if the choosen weapon allows it
   if (GameMode::GetConstInstance()->AllowCharacterSelection() &&
       ActiveTeam().GetWeapon().mouse_character_selection) {
@@ -206,7 +202,8 @@ bool Mouse::HandleEvent(const SDL_Event& event)
   }
 
   if (event.type == SDL_MOUSEBUTTONUP) {
-    if (Interface::GetInstance()->ActionClick(GetPosition()))
+    if (ActiveTeam().IsLocalHuman() &&
+        Interface::GetInstance()->ActionClick(GetPosition()))
       return true;
     if (event.button.button == Mouse::BUTTON_LEFT()) {
       if (mouse_button_down_pos.Distance(GetPosition()) > MOUSE_CLICK_DISTANCE)
