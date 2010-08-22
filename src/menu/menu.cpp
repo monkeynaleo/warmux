@@ -61,11 +61,13 @@ Menu::Menu(const std::string& bg, t_action _actions) :
 
     if (actions == vOk || actions == vOkCancel) {
       b_ok = new Button(res, "menu/valider");
+      b_ok->SetSizeX(80);
       actions_buttons->AddWidget(b_ok);
     }
 
     if (actions == vCancel  || actions == vOkCancel) {
       b_cancel = new Button(res, "menu/annuler");
+      b_cancel->SetSizeX(80);
       actions_buttons->AddWidget(b_cancel);
     }
 
