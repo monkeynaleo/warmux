@@ -683,14 +683,35 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
  */
 Surface Surface::DisplayFormatAlpha()
 {
-  if (surface->format->BitsPerPixel == 24)
+  switch (surface->format->BitsPerPixel)
+  {
+  case 24:
     return DisplayFormat();
-  SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
+  case 8: // paletted
+    {
+#if 0
+      Surface nsurf = DisplayFormat();
+      SDL_Color key = surface->format->palette->colors[surface->format->colorkey];
 
-  if (!surf)
-    Error("Unable to convert the surface to a surface compatible with the display format with alpha.");
+      nsurf.SetColorKey(SDL_SRCCOLORKEY,
+                        SDL_MapRGB(SDL_GetVideoSurface()->format, key.r, key.g, key.b));
+      printf("Using colorkey (%u,%u,%u)\n", key.r, key.g, key.b);
 
-  return Surface(surf);
+      return nsurf;
+#else
+      return *this;
+#endif
+    }
+  default:
+    {
+      SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
+
+      if (!surf)
+        Error("Unable to convert the surface to a surface compatible with the display format with alpha.");
+
+      return Surface(surf);
+    }
+  }
 }
 
 /**
