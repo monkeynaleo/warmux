@@ -113,13 +113,7 @@ Config::Config()
   , scroll_border_size(50)
   , sound_music(true)
   , sound_effects(true)
-
-#ifdef ANDROID
-  , sound_frequency(22050) // Reduce memory usage
-#else
   , sound_frequency(44100)
-#endif
-
   , warn_on_new_player(true)
   , check_updates(false)
   , lefthanded_mouse(false)
