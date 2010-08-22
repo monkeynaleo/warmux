@@ -19,8 +19,9 @@
 
 #include "graphic/spriteframe.h"
 
-SpriteFrame::SpriteFrame(const Surface& p_surface, unsigned int p_speed){
-  ASSERT( !p_surface.IsNull() );
+SpriteFrame::SpriteFrame(const Surface& p_surface, uint p_speed)
+{
+  ASSERT(!p_surface.IsNull());
 
   surface = p_surface;
   delay = p_speed;

@@ -52,7 +52,6 @@ class SpriteCache
 {
   Sprite &sprite;
 
-// TODO: Remove "public:" :-)
 public:
   bool have_rotation_cache;
   unsigned int rotation_cache_size;
