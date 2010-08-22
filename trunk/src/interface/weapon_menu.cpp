@@ -59,7 +59,6 @@ const Double MAX_ICON_SCALE = 1.1;
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
 #define MAX_ICON_SIZE          45
-#define LOW_RESOLUTION_FACTOR  0.9
 
 WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position)
   : PolygonItem()
@@ -81,9 +80,7 @@ bool WeaponMenuItem::IsMouseOver()
   }
 
   // Compute the size of the icon bounding box
-  float scale = (AppWormux::GetInstance()->video->window.GetHeight() < 480)
-              ? LOW_RESOLUTION_FACTOR : 1.0;
-  Point2i size(MAX_ICON_SIZE*scale, MAX_ICON_SIZE*scale);
+  Point2i size(MAX_ICON_SIZE, MAX_ICON_SIZE);
 
   // The icon bounding box for this is centered around the transformed position
   Rectanglei r(transformed_position + 1 - size/2, size);
@@ -116,8 +113,6 @@ void WeaponMenuItem::Draw(Surface * dest)
       scale = (scale > DEFAULT_ICON_SCALE ? scale : DEFAULT_ICON_SCALE);
     }
   }
-  if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
-    scale = (scale*int(10*LOW_RESOLUTION_FACTOR))/10;
   item->SetAlpha(1);
   item->Scale(scale, scale);
 
@@ -181,14 +176,9 @@ WeaponsMenu::WeaponsMenu()
   m_not_yet_available = GetResourceManager().LoadSprite(res, "interface/hourglass");
 
   // Polygon Size
-  int height = AppWormux::GetInstance()->video->window.GetHeight();
   Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
-  if (height < 480)
-    size = size*LOW_RESOLUTION_FACTOR;
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
-  if (height < 480)
-    size = size*LOW_RESOLUTION_FACTOR;
   tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   help = NULL;
   // Setting colors
@@ -225,20 +215,16 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
 
   Point2f pos;
   Weapon::category_t num_sort = new_item->Category();
-  float factor = 1;
   Polygon *menu;
 
-  if (AppWormux::GetInstance()->video->window.GetHeight() < 480)
-    factor = LOW_RESOLUTION_FACTOR;
   if (num_sort < 6) {
     menu = weapons_menu;
-    pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
-        +  Point2f(nb_weapon_type[num_sort - 1], num_sort - 1)*int(MAX_ICON_SIZE*factor);
+    pos  = Point2f(nb_weapon_type[num_sort-1], num_sort-1)*MAX_ICON_SIZE;
   } else {
     menu = tools_menu;
-    pos = P2D_TO_P2F(menu->GetMin()) + Point2f(30,25)*factor
-        +  Point2f(num_sort - 6, nb_weapon_type[num_sort - 1])*int(MAX_ICON_SIZE*factor);
+    pos  = Point2f(num_sort-6, nb_weapon_type[num_sort-1])*MAX_ICON_SIZE;
   }
+  pos += P2D_TO_P2F(menu->GetMin()) + Point2f(30,25);
 
   WeaponMenuItem * item = new WeaponMenuItem(new_item, pos);
   item->SetParent(this);
