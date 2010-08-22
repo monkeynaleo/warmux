@@ -697,6 +697,10 @@ bool Interface::ActionClick(const Point2i &mouse_pos)
   } else if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
     Camera::GetInstance()->CenterOnActiveCharacter();
     return true;
+  } else if (weapons_menu.ActionClic(mouse_pos)) {
+    // Process click on weapon menu before minimap as it should be
+    // overlayed on top of it.
+    return true;
   } else {
     Surface &  window  = GetMainWindow();
     Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
