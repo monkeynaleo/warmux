@@ -41,12 +41,23 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeInit) ( JNIEnv*  env, jobject thiz )
 
   // Launch
   main(argc, argv);
-};
+}
 
 extern C_LINKAGE void
 JAVA_EXPORT_NAME(Settings_nativeIsSdcardUsed) ( JNIEnv*  env, jobject thiz, jint flag )
 {
   isSdcardUsed = flag;
+}
+
+extern C_LINKAGE void
+JAVA_EXPORT_NAME(Settings_nativeSetEnv) ( JNIEnv*  env, jobject thiz, jstring j_name, jstring j_value )
+{
+  jboolean iscopy;
+  const char *name = (*env)->GetStringUTFChars(env, j_name, &iscopy);
+  const char *value = (*env)->GetStringUTFChars(env, j_value, &iscopy);
+  setenv(name, value, 1);
+  (*env)->ReleaseStringUTFChars(env, j_name, name);
+  (*env)->ReleaseStringUTFChars(env, j_value, value);
 }
 
 #undef JAVA_EXPORT_NAME
