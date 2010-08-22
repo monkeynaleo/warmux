@@ -664,13 +664,22 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
   if (zoomx < ZERO || zoomy < ZERO)
     smooth = SMOOTHING_OFF;
 #endif
+  
+  //printf("Called on %p with (%.3f,%.3f)/%.3f\n", this,
+  //       zoomx.toDouble(), zoomy.toDouble(), angle.toDouble());
 
-  if (EqualsZero(angle))
-    surf = zoomSurface(surface, zoomx.toDouble(), zoomy.toDouble(), smooth);
-  else if (zoomx == zoomy && zoomx > ZERO)
+  if (EqualsZero(angle)) {
+    if (zoomx!=Double(1) || zoomy!=Double(1))
+      surf = zoomSurface(surface, zoomx.toDouble(), zoomy.toDouble(), smooth);
+    else {
+      //printf("  Saved one\n");
+      return *this;
+    }
+  } else if (zoomx == zoomy && zoomx > ZERO) {
     surf = rotozoomSurface(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), smooth);
-  else
+  } else {
     surf = rotozoomSurfaceXY(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), zoomy.toDouble(), smooth);
+  }
 
   if (!surf)
     Error("Unable to make a rotozoom on the surface !");
