@@ -115,10 +115,11 @@ void TeamEnergy::Config(uint _current_energy,
 
 void TeamEnergy::SetIcon(const Surface & new_icon)
 {
-  if(icon)
+  if (icon)
     delete icon;
   icon = new Sprite(new_icon, true);
-  icon->Scale(0.8,0.8);
+  icon->cache.EnableLastFrameCache();
+  icon->Scale(0.8, 0.8);
 }
 
 void TeamEnergy::Refresh()
