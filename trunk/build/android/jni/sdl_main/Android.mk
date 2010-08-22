@@ -9,10 +9,13 @@ $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package wit
 endif
 
 LOCAL_CFLAGS := -I$(LOCAL_PATH)/../sdl/include \
-        -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH)
+	-DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) \
+	-DSDL_CURDIR_PATH=\"$(SDL_CURDIR_PATH)\"
 
 LOCAL_CPP_EXTENSION := .cpp
+
 LOCAL_SRC_FILES := sdl_main.c
+
 LOCAL_SHARED_LIBRARIES := sdl application
 LOCAL_LDLIBS := -llog
 
