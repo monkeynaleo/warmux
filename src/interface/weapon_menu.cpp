@@ -394,6 +394,8 @@ void WeaponsMenu::Draw()
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
 {
+  if (!show)
+    return false;
   std::vector<PolygonItem *> items = poly->GetItem();
   WeaponMenuItem * tmp;
   Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
@@ -415,10 +417,9 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
 
 bool WeaponsMenu::ActionClic(const Point2i &/*mouse_pos*/)
 {
-  Weapon * tmp;
   if (!show)
     return false;
-  tmp = UpdateCurrentOverflyItem(weapons_menu);
+  Weapon * tmp = UpdateCurrentOverflyItem(weapons_menu);
   if (!tmp)
     tmp = UpdateCurrentOverflyItem(tools_menu);
   if (tmp) {
