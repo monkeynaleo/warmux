@@ -585,20 +585,22 @@ void Game::Draw ()
   // Draw optionals
   StatStart("GameDraw:fps_and_map_author_name");
   GetWorld().DrawAuthorName();
-  fps->Draw();
   StatStop("GameDraw:fps_and_map_author_name");
 
   StatStop("GameDraw:other");
 
   // Draw the interface (current team information, weapon ammo)
   StatStart("GameDraw:interface");
-  Interface::GetInstance()->Draw ();
+  Interface::GetInstance()->Draw();
   StatStop("GameDraw:interface");
 
   // Draw game messages
   StatStart("GameDraw::game_messages");
   GameMessages::GetInstance()->Draw();
   StatStop("GameDraw::game_messages");
+
+  // Draw fps counter, even if over the minimap
+  fps->Draw();
 
   // Draw MsgBox for chat network
   if(Network::GetInstance()->IsConnected()){

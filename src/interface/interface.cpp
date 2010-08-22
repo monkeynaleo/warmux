@@ -347,7 +347,8 @@ void Interface::DrawTeamEnergy() const
 void Interface::DrawMapPreview()
 {
   Surface &  window  = GetMainWindow();
-  Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
+  Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN,
+                    2*MARGIN);
   Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
   if (minimap == NULL ||
