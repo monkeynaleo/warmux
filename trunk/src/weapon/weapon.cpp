@@ -107,8 +107,8 @@ Weapon::Weapon(Weapon_type type,
 
   if (drawable) {
     m_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, m_id));
-    if (!EqualsZero(min_angle - max_angle))
-      m_image->cache.EnableLastFrameCache();
+    //if (!EqualsZero(min_angle - max_angle))
+    m_image->cache.EnableLastFrameCache();
   }
 
   icon = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_ico"), true);
