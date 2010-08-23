@@ -407,12 +407,9 @@ void Config::LoadDefaultValue()
 #endif
 
   //== Default keyboard key
-  {
-    const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
-    if (node) {
-      Keyboard::GetInstance()->SetConfig(node);
-    }
-
+  node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
+  if (node) {
+    Keyboard::GetInstance()->SetConfig(node);
   }
 
   GetResourceManager().UnLoadXMLProfile(res);
@@ -435,8 +432,7 @@ void Config::LoadXml(const xmlNode *xml)
 #endif
 
   //=== Teams ===
-  if ((elem = XmlReader::GetMarker(xml, "teams")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "teams"))) {
     int i = 0;
 
     const xmlNode *team;
@@ -459,8 +455,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== Video ===
-  if ((elem = XmlReader::GetMarker(xml, "video")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "video"))) {
     XmlReader::ReadBool(elem, "bling_bling_interface", bling_bling_interface);
     XmlReader::ReadUint(elem, "max_fps", max_fps);
     XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
@@ -478,8 +473,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== Sound ===
-  if ((elem = XmlReader::GetMarker(xml, "sound")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "sound"))) {
     XmlReader::ReadBool(elem, "music", sound_music);
     XmlReader::ReadBool(elem, "effects", sound_effects);
     XmlReader::ReadUint(elem, "frequency", sound_frequency);
@@ -488,24 +482,21 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== network ===
-  if ((elem = XmlReader::GetMarker(xml, "network")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "network"))) {
     const xmlNode *sub_elem;
-    if ((sub_elem = XmlReader::GetMarker(elem, "as_client")))
-    {
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_client"))) {
       XmlReader::ReadString(sub_elem, "host", m_network_client_host);
       XmlReader::ReadString(sub_elem, "port", m_network_client_port);
     }
-    if ((sub_elem = XmlReader::GetMarker(elem, "as_server")))
-    {
+
+    if ((sub_elem = XmlReader::GetMarker(elem, "as_server"))) {
       XmlReader::ReadString(sub_elem, "game_name", m_network_server_game_name);
       XmlReader::ReadString(sub_elem, "port", m_network_server_port);
       XmlReader::ReadBool(sub_elem, "public", m_network_server_public);
     }
 
     //=== personal teams used in last network game ===
-    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")))
-    {
+    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams"))) {
       int i = 0;
       const xmlNode *team;
 
@@ -528,8 +519,7 @@ void Config::LoadXml(const xmlNode *xml)
   }
 
   //=== misc ===
-  if ((elem = XmlReader::GetMarker(xml, "misc")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "misc"))) {
     XmlReader::ReadBool(elem, "check_updates", check_updates);
     XmlReader::ReadBool(elem, "left-handed_mouse", lefthanded_mouse);
   }
@@ -538,11 +528,9 @@ void Config::LoadXml(const xmlNode *xml)
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 
   //=== controls ===
-  if ((elem = XmlReader::GetMarker(xml, "controls")))
-  {
+  if ((elem = XmlReader::GetMarker(xml, "controls"))) {
     const xmlNode *node = XmlReader::GetMarker(elem, "keyboard");
-    if (node)
-    {
+    if (node) {
       Keyboard::GetInstance()->SetConfig(node);
     }
   }
@@ -586,18 +574,15 @@ bool Config::SaveXml(bool save_current_teams)
   xmlNode *team_elements = xmlAddChild(root,
                                        xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"teams"));
 
-  if (TeamsList::IsLoaded())
-  {
-    if (save_current_teams)
-    {
+  if (TeamsList::IsLoaded()) {
+    if (save_current_teams) {
       teams.clear();
 
       TeamsList::iterator
         it = GetTeamsList().playing_list.begin(),
         end = GetTeamsList().playing_list.end();
 
-      for (int i=0; it != end; ++it, i++)
-      {
+      for (int i=0; it!=end; ++it, i++) {
         ConfigTeam config;
         config.id = (**it).GetId();
         config.player_name = (**it).GetPlayerName();
@@ -612,8 +597,7 @@ bool Config::SaveXml(bool save_current_teams)
       it = teams.begin(),
       end = teams.end();
 
-    for (int i=0; it != end; ++it, i++)
-    {
+    for (int i=0; it!=end; ++it, i++) {
        std::string name = "team_"+int2str(i);
        xmlNode* a_team = xmlAddChild(team_elements,
                                      xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
@@ -692,8 +676,8 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(root, "game_mode", m_game_mode);
 
   //=== controls ===
-   xmlNode *controls_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"controls"));
-   Keyboard::GetInstance()->SaveConfig(controls_node);
+  xmlNode *controls_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"controls"));
+  Keyboard::GetInstance()->SaveConfig(controls_node);
 
   return doc.Save();
 }
@@ -740,16 +724,14 @@ void Config::SetNetworkLocalTeams()
     it = GetTeamsList().playing_list.begin(),
     end = GetTeamsList().playing_list.end();
 
-  for (int i=0; it != end; ++it, i++)
-    {
-      if ((**it).IsLocal())
-        {
-          ConfigTeam config;
-          config.id = (**it).GetId();
-          config.player_name = (**it).GetPlayerName();
-          config.nb_characters = (**it).GetNbCharacters();
-          config.ai = (**it).GetAIName();
-          network_local_teams.push_back(config);
-        }
+  for (int i=0; it != end; ++it, i++) {
+    if ((**it).IsLocal()) {
+      ConfigTeam config;
+      config.id = (**it).GetId();
+      config.player_name = (**it).GetPlayerName();
+      config.nb_characters = (**it).GetNbCharacters();
+      config.ai = (**it).GetAIName();
+      network_local_teams.push_back(config);
     }
+  }
 }

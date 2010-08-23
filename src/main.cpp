@@ -69,10 +69,9 @@ AppWormux *AppWormux::singleton = NULL;
 
 AppWormux *AppWormux::GetInstance()
 {
-  if (singleton == NULL)
-    {
-      singleton = new AppWormux();
-    }
+  if (singleton) {
+    singleton = new AppWormux();
+  }
   return singleton;
 }
 
@@ -98,78 +97,75 @@ int AppWormux::Main(void)
 {
   bool quit = false;
 
-    DisplayLoadingPicture();
+  DisplayLoadingPicture();
 
 #ifdef HAVE_LIBCURL
-    OptionMenu::CheckUpdates();
+  OptionMenu::CheckUpdates();
 #endif
 
-    Action_Handler_Init();
+  Action_Handler_Init();
 
-    do
-    {
-      if (choice == MainMenu::NONE)
-      {
-        MainMenu main_menu;
-        SetCurrentMenu(&main_menu);
-        choice = main_menu.Run();
-      }
-
-      ActionHandler::GetInstance()->Flush();
-
-      switch (choice)
-      {
-        case MainMenu::PLAY:
-        {
-          GameMenu game_menu;
-          SetCurrentMenu(&game_menu);
-          game_menu.Run(skip_menu);
-          break;
-        }
-#ifndef ANDROID
-        case MainMenu::NETWORK:
-        {
-          NetworkConnectionMenu network_connection_menu(net_action);
-          SetCurrentMenu(&network_connection_menu);
-          network_connection_menu.Run(skip_menu);
-          break;
-        }
-#endif
-        case MainMenu::HELP:
-        {
-          HelpMenu help_menu;
-          SetCurrentMenu(&help_menu);
-          help_menu.Run();
-          break;
-        }
-        case MainMenu::OPTIONS:
-        {
-          OptionMenu options_menu;
-          SetCurrentMenu(&options_menu);
-          options_menu.Run();
-          break;
-        }
-        case MainMenu::CREDITS:
-        {
-          CreditsMenu credits_menu;
-          SetCurrentMenu(&credits_menu);
-          credits_menu.Run();
-          break;
-        }
-        case MainMenu::QUIT:
-          quit = true;
-          break;
-        default:
-          break;
-      }
-      SetCurrentMenu(NULL);
-      choice = MainMenu::NONE;
-      skip_menu = false;
-      net_action = NetworkConnectionMenu::NET_NOTHING;
+  do {
+    if (choice == MainMenu::NONE) {
+      MainMenu main_menu;
+      SetCurrentMenu(&main_menu);
+      choice = main_menu.Run();
     }
-    while (!quit);
 
-    End();
+    ActionHandler::GetInstance()->Flush();
+
+    switch (choice) {
+      case MainMenu::PLAY:
+      {
+        GameMenu game_menu;
+        SetCurrentMenu(&game_menu);
+        game_menu.Run(skip_menu);
+        break;
+      }
+#ifndef ANDROID
+      case MainMenu::NETWORK:
+      {
+        NetworkConnectionMenu network_connection_menu(net_action);
+        SetCurrentMenu(&network_connection_menu);
+        network_connection_menu.Run(skip_menu);
+        break;
+      }
+#endif
+      case MainMenu::HELP:
+      {
+        HelpMenu help_menu;
+        SetCurrentMenu(&help_menu);
+        help_menu.Run();
+        break;
+      }
+      case MainMenu::OPTIONS:
+      {
+        OptionMenu options_menu;
+        SetCurrentMenu(&options_menu);
+        options_menu.Run();
+        break;
+      }
+      case MainMenu::CREDITS:
+      {
+        CreditsMenu credits_menu;
+        SetCurrentMenu(&credits_menu);
+        credits_menu.Run();
+        break;
+      }
+      case MainMenu::QUIT:
+        quit = true;
+        break;
+      default:
+        break;
+    }
+    SetCurrentMenu(NULL);
+    choice = MainMenu::NONE;
+    skip_menu = false;
+    net_action = NetworkConnectionMenu::NET_NOTHING;
+  }
+  while (!quit);
+
+  End();
 
   return 0;
 }
@@ -323,101 +319,98 @@ void ParseArgs(int argc, char * argv[])
 {
   int c;
   int option_index = 0;
-  struct option long_options[] =
-    {
-      {"unrandom",   no_argument,       NULL, 'u'},
-      {"help",       no_argument,       NULL, 'h'},
-      {"blitz",      no_argument,       NULL, 'b'},
-      {"version",    no_argument,       NULL, 'v'},
-      {"play",       no_argument,       NULL, 'p'},
-      {"client",     optional_argument, NULL, 'c'},
-      {"server",     no_argument,       NULL, 's'},
-      {"index-server", optional_argument, NULL, 'i'},
-      {"game-mode",  required_argument, NULL, 'g'},
-      {"debug",      required_argument, NULL, 'd'},
-      {"reset-config", no_argument,     NULL, 'r'},
-      {NULL,         no_argument,       NULL,  0 }
-    };
+  struct option long_options[] = {
+    {"unrandom",   no_argument,       NULL, 'u'},
+    {"help",       no_argument,       NULL, 'h'},
+    {"blitz",      no_argument,       NULL, 'b'},
+    {"version",    no_argument,       NULL, 'v'},
+    {"play",       no_argument,       NULL, 'p'},
+    {"client",     optional_argument, NULL, 'c'},
+    {"server",     no_argument,       NULL, 's'},
+    {"index-server", optional_argument, NULL, 'i'},
+    {"game-mode",  required_argument, NULL, 'g'},
+    {"debug",      required_argument, NULL, 'd'},
+    {"reset-config", no_argument,     NULL, 'r'},
+    {NULL,         no_argument,       NULL,  0 }
+  };
 
   while ((c = getopt_long (argc, argv, "uhbvpc::i::sg:d:",
-                           long_options, &option_index)) != -1)
-    {
-      switch (c)
+                           long_options, &option_index)) != -1) {
+    switch (c) {
+    case 'u':
+      RandomSync().UnRandom();
+      RandomLocal().UnRandom();
+      break;
+    case 'h':
+      PrintUsage(argv[0]);
+      exit(EXIT_SUCCESS);
+      break;
+    case 'v':
+      DisplayWelcomeMessage();
+      exit(EXIT_SUCCESS);
+      break;
+    case 'p':
+      choice = MainMenu::PLAY;
+      skip_menu = true;
+      break;
+    case 'c':
+      choice = MainMenu::NETWORK;
+      net_action = NetworkConnectionMenu::NET_CONNECT;
+      if (optarg)
         {
-        case 'u':
-          RandomSync().UnRandom();
-          RandomLocal().UnRandom();
-          break;
-        case 'h':
-          PrintUsage(argv[0]);
-          exit(EXIT_SUCCESS);
-          break;
-        case 'v':
-          DisplayWelcomeMessage();
-          exit(EXIT_SUCCESS);
-          break;
-        case 'p':
-          choice = MainMenu::PLAY;
-          skip_menu = true;
-          break;
-        case 'c':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_CONNECT;
-          if (optarg)
-            {
-              Config::GetInstance()->SetNetworkClientHost(optarg);
-            }
-          skip_menu = true;
-          break;
-        case 'd':
-#ifdef WMX_LOG
-          printf("Debug: %s\n", optarg);
-          AddDebugMode(optarg);
-#else
-          fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
-#endif
-          break;
-        case 's':
-          choice = MainMenu::NETWORK;
-          net_action = NetworkConnectionMenu::NET_HOST;
-          skip_menu = true;
-          break;
-        case 'i':
-          {
-            std::string index_server_address;
-            if (optarg) index_server_address = optarg;
-            else index_server_address = "127.0.0.1";
-            printf("Using %s as address for index server. This option must be used only for debugging.\n",
-                   index_server_address.c_str());
-            IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
-          }
-          break;
-        case 'g':
-          printf("Game-mode: %s\n", optarg);
-          Config::GetInstance()->SetGameMode(optarg);
-          break;
-        case 'r':
-          {
-            bool r;
-            r = Config::GetInstance()->RemovePersonalConfigFile();
-            if (!r)
-              exit(EXIT_FAILURE);
-            exit(EXIT_SUCCESS);
-          }
-          break;
-
-        case '?': /* returns by getopt if option was invalid */
-          PrintUsage(argv[0]);
-          exit(EXIT_FAILURE);
-          break;
-
-        default:
-          fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", c);
-          ASSERT(false);
-          exit(EXIT_FAILURE);
-          break;
+          Config::GetInstance()->SetNetworkClientHost(optarg);
         }
+      skip_menu = true;
+      break;
+    case 'd':
+#ifdef WMX_LOG
+      printf("Debug: %s\n", optarg);
+      AddDebugMode(optarg);
+#else
+      fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
+#endif
+      break;
+    case 's':
+      choice = MainMenu::NETWORK;
+      net_action = NetworkConnectionMenu::NET_HOST;
+      skip_menu = true;
+      break;
+    case 'i':
+      {
+        std::string index_server_address;
+        if (optarg) index_server_address = optarg;
+        else index_server_address = "127.0.0.1";
+        printf("Using %s as address for index server. This option must be used only for debugging.\n",
+               index_server_address.c_str());
+        IndexServer::GetInstance()->SetAddress(index_server_address.c_str());
+      }
+      break;
+    case 'g':
+      printf("Game-mode: %s\n", optarg);
+      Config::GetInstance()->SetGameMode(optarg);
+      break;
+    case 'r':
+      {
+        bool r;
+        r = Config::GetInstance()->RemovePersonalConfigFile();
+        if (!r)
+          exit(EXIT_FAILURE);
+        exit(EXIT_SUCCESS);
+      }
+      break;
+
+    case '?': /* returns by getopt if option was invalid */
+      PrintUsage(argv[0]);
+      exit(EXIT_FAILURE);
+      break;
+
+    default:
+      fprintf(stderr, "Sorry, it seems that option '-%c' is not implemented!\n", c);
+      ASSERT(false);
+      exit(EXIT_FAILURE);
+      break;
     }
+  }
 }
 extern "C" int main(int argc, char *argv[])
 {
