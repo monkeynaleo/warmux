@@ -69,7 +69,7 @@ AppWormux *AppWormux::singleton = NULL;
 
 AppWormux *AppWormux::GetInstance()
 {
-  if (singleton) {
+  if (!singleton) {
     singleton = new AppWormux();
   }
   return singleton;
@@ -79,7 +79,6 @@ AppWormux::AppWormux():
   video(new Video()),
   menu(NULL)
 {
-  JukeBox::GetInstance()->Init();
   RandomLocal().InitRandom();
   std::cout << "[ " << _("Run game") << " ]" << std::endl;
 }
@@ -98,6 +97,9 @@ int AppWormux::Main(void)
   bool quit = false;
 
   DisplayLoadingPicture();
+
+  // Now that we are displaying a kind of 'please wait', do preload sounds
+  JukeBox::GetInstance()->Init();
 
 #ifdef HAVE_LIBCURL
   OptionMenu::CheckUpdates();
@@ -196,7 +198,7 @@ void AppWormux::DisplayLoadingPicture()
 
   text1.DrawCenter(windowCenter);
   text2.DrawCenter(windowCenter
-                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_BOLD)).GetHeight() + 20));
+                   + Point2i(0, Font::GetInstance(Font::FONT_HUGE, Font::FONT_BOLD)->GetHeight() + 20));
 
   video->window.Flip();
 }
