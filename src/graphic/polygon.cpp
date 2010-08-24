@@ -626,8 +626,9 @@ DecoratedBox::~DecoratedBox()
 void DecoratedBox::Draw(Surface * dest)
 {
   if (!m_border) {
-    m_border = new Surface(Point2i((int)GetSize().x,(int)GetSize().y),SDL_SWSURFACE, true);
-    GenerateBorder(*m_border);
+    //m_border = new Surface(Point2i(GetSize().x, GetSize().y), SDL_SWSURFACE, true);
+    m_border = new Surface(GetSize(), SDL_SWSURFACE, true);
+    GenerateStyledBorder(*m_border, m_style);
   }
   dest->Blit(*m_border, min);
 
@@ -661,44 +662,44 @@ void DecoratedBox::SetPosition(Double x, Double y)
     original_max = max;
 }
 
-void DecoratedBox::GenerateBorder(Surface & source)
+void GenerateStyledBorder(Surface & source, DecoratedBox::Style style)
 {
   Surface rounding_style [3][3];
   Surface rounding_style_mask [3][3];
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  std::string style;
+  std::string style_str;
 
-  switch (m_style)
+  switch (style)
   {
-    case STYLE_ROUNDED:
-    style = "rounding";
+    case DecoratedBox::STYLE_ROUNDED:
+    style_str = "rounding";
     break;
-    case STYLE_SQUARE:
-    style = "square";
+    case DecoratedBox::STYLE_SQUARE:
+    style_str = "square";
     break;
   }
 
   // styled box
-  rounding_style[1][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom");
-  rounding_style[0][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom_left");
-  rounding_style[2][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom_right");
-  rounding_style[1][0] = LOAD_RES_IMAGE("interface/"+style+"_top");
-  rounding_style[0][0] = LOAD_RES_IMAGE("interface/"+style+"_top_left");
-  rounding_style[2][0] = LOAD_RES_IMAGE("interface/"+style+"_top_right");
-  rounding_style[0][1] = LOAD_RES_IMAGE("interface/"+style+"_left");
-  rounding_style[2][1] = LOAD_RES_IMAGE("interface/"+style+"_right");
-  rounding_style[1][1] = LOAD_RES_IMAGE("interface/"+style+"_center");
+  rounding_style[1][2] = LOAD_RES_IMAGE("interface/"+style_str+"_bottom");
+  rounding_style[0][2] = LOAD_RES_IMAGE("interface/"+style_str+"_bottom_left");
+  rounding_style[2][2] = LOAD_RES_IMAGE("interface/"+style_str+"_bottom_right");
+  rounding_style[1][0] = LOAD_RES_IMAGE("interface/"+style_str+"_top");
+  rounding_style[0][0] = LOAD_RES_IMAGE("interface/"+style_str+"_top_left");
+  rounding_style[2][0] = LOAD_RES_IMAGE("interface/"+style_str+"_top_right");
+  rounding_style[0][1] = LOAD_RES_IMAGE("interface/"+style_str+"_left");
+  rounding_style[2][1] = LOAD_RES_IMAGE("interface/"+style_str+"_right");
+  rounding_style[1][1] = LOAD_RES_IMAGE("interface/"+style_str+"_center");
 
-  rounding_style_mask[1][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom");
-  rounding_style_mask[0][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom_left");
-  rounding_style_mask[2][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom_right");
-  rounding_style_mask[1][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top");
-  rounding_style_mask[0][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top_left");
-  rounding_style_mask[2][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top_right");
-  rounding_style_mask[0][1] = LOAD_RES_IMAGE("interface/"+style+"_mask_left");
-  rounding_style_mask[2][1] = LOAD_RES_IMAGE("interface/"+style+"_mask_right");
+  rounding_style_mask[1][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom");
+  rounding_style_mask[0][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom_left");
+  rounding_style_mask[2][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom_right");
+  rounding_style_mask[1][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top");
+  rounding_style_mask[0][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top_left");
+  rounding_style_mask[2][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top_right");
+  rounding_style_mask[0][1] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_left");
+  rounding_style_mask[2][1] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_right");
 
   GetResourceManager().UnLoadXMLProfile(res);
 
@@ -775,7 +776,6 @@ void DecoratedBox::GenerateBorder(Surface & source)
 
   source.MergeSurface(save_surf, Point2i(0,0));
 }
-
 
 void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
 {
