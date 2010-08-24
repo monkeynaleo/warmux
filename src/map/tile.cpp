@@ -262,8 +262,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       Point2i offset = position - c * CELL_SIZE;
       TileItem_NonEmpty *tin    = GetNonEmpty(c.x, c.y);
 
-      tin->GetSurface().Lock();
       tin->MergeSprite(offset, surf);
+      tin->GetSurface().Lock();
       tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }

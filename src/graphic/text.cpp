@@ -233,27 +233,31 @@ void Text::RenderMultiLines()
   if (max_line_width == 0) {
     max_line_width = max_width;
   }
+
   Point2i size(max_line_width, GetLineHeight(font)*lines.size());
-  Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  Surface tmp = Surface(size, SDL_HWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
-    tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
-    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
+    tmp = (font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
+    tmp.SetAlpha(0, 0);
+    surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
-  if (!shadowed) return;
+  if (!shadowed)
+    return;
 
-  tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  tmp = Surface(size, SDL_HWSURFACE|SDL_SRCALPHA, true);
   background = tmp.DisplayFormatAlpha();
 
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
-    tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
-    background.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
+    tmp = (font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
+    tmp.SetAlpha(0, 0);
+    background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 }
 
