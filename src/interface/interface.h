@@ -91,8 +91,6 @@ private:
   //Styled box
   Surface *mask;
   Surface *scratch;
-  Surface rounding_style [3][3];
-  Surface rounding_style_mask [3][3];
 
   Color m_camera_preview_color;
   Color m_playing_character_preview_color;
