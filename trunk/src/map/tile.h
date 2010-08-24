@@ -70,7 +70,7 @@ public:
   Surface GetPart(const Rectanglei& rec);
 
   // Return the preview
-  const Surface* GetPreview() const { return m_preview; };
+  Surface* GetPreview() const { return m_preview; };
   void  CheckPreview(bool force = false);
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };

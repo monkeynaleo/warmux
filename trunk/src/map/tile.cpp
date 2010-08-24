@@ -281,8 +281,9 @@ void Tile::InitPreview()
 
   if (m_preview)
     delete m_preview;
-  m_preview = new Surface(world_size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  m_preview->SetAlpha(SDL_SRCALPHA, 0);
+  m_preview = new Surface(world_size, SDL_SWSURFACE, true);
+  // Having an alpha channel forces SDL_SRCALPHA, so we must remove it
+  m_preview->SetAlpha(0, 0);
 
   // Actual preview size from pixel-wise information
   m_preview_size = (size - m_upper_left_offset - m_lower_right_offset)>>m_shift;
