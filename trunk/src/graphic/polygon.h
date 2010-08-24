@@ -215,8 +215,8 @@ class DecoratedBox : public Polygon
   Point2d original_min;
   Surface *m_border;
   Style m_style;
-
-  void GenerateBorder(Surface & source);
 };
+
+void GenerateStyledBorder(Surface & source, DecoratedBox::Style style);
 
 #endif /* POLYGON_H */
