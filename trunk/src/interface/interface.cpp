@@ -71,22 +71,6 @@ Interface::Interface()
   wind_icon = LOAD_RES_IMAGE("interface/wind");
   wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
 
-  // styled box
-  rounding_style[1][2] = LOAD_RES_IMAGE("interface/rounding_bottom");
-  rounding_style[0][2] = LOAD_RES_IMAGE("interface/rounding_bottom_left");
-  rounding_style[2][2] = LOAD_RES_IMAGE("interface/rounding_bottom_right");
-  rounding_style[1][0] = LOAD_RES_IMAGE("interface/rounding_top");
-  rounding_style[0][0] = LOAD_RES_IMAGE("interface/rounding_top_left");
-  rounding_style[2][0] = LOAD_RES_IMAGE("interface/rounding_top_right");
-  rounding_style[0][1] = LOAD_RES_IMAGE("interface/rounding_left");
-  rounding_style[2][1] = LOAD_RES_IMAGE("interface/rounding_right");
-  rounding_style[1][1] = LOAD_RES_IMAGE("interface/rounding_center");
-  for (int j=0; j<3; j++) {
-    for (int i=0; i<3; i++) {
-      rounding_style[j][i].SetAlpha(0, 0);
-    }
-  }
-
   // energy bar
   energy_bar = new EnergyBar(0, 0, 120, 15,
                              0, 0,
@@ -373,7 +357,6 @@ void Interface::DrawMapPreview()
     if (!minimap)
       minimap = new Surface(preview_size, SDL_HWSURFACE, true);
 
-
     // Recreate the scratch buffer
     if (!scratch)
       scratch = new Surface(preview_size, SDL_HWSURFACE, true);
@@ -452,61 +435,9 @@ void Interface::GenerateStyledBox()
     m_last_preview_size = GetWorld().ground.GetPreviewSize();
     mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
 
-    Rectanglei temp_rect;
-    temp_rect.SetPosition(Point2i(0,0));
-    temp_rect.SetSize(minimap->GetSize());
+    GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
 
-    Point2i temp_position;
-
-    temp_position = temp_rect.GetPosition();
-    mask->Blit(rounding_style[0][0], temp_position);
-
-    temp_position = temp_rect.GetPosition();
-    temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
-    mask->Blit(rounding_style[2][0],temp_position);
-
-    temp_position = temp_rect.GetPosition();
-    temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
-    mask->Blit(rounding_style[0][2],temp_position);
-
-    temp_position = temp_rect.GetPosition();
-    temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
-    temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
-    mask->Blit(rounding_style[2][2],temp_position);
-
-    for (int i = rounding_style[0][0].GetSize().x;
-        i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
-        ++i) {
-      temp_position = temp_rect.GetPosition();
-      temp_position.x += i;
-      mask->Blit(rounding_style[1][0],temp_position);
-
-      temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
-      mask->Blit(rounding_style[1][2],temp_position);
-    }
-
-    for (int i = rounding_style[0][0].GetSize().y;
-        i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
-        ++i) {
-      temp_position = temp_rect.GetPosition();
-      temp_position.y += i;
-      mask->Blit(rounding_style[0][1],temp_position);
-
-      temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
-      mask->Blit(rounding_style[2][1],temp_position);
-    }
-
-    for (int i = rounding_style[0][0].GetSize().x;
-        i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
-        ++i) {
-
-      for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
-        temp_position = temp_rect.GetPosition() + Point2i(i,j);
-        mask->Blit(rounding_style[1][1],temp_position);
-      }
-    }
     mask->SetAlpha(0, 0);
-    //printf("Recreated mask\n");
   }
 
   // Compose
