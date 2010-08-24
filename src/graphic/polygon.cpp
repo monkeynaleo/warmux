@@ -664,12 +664,10 @@ void DecoratedBox::SetPosition(Double x, Double y)
 
 void GenerateStyledBorder(Surface & source, DecoratedBox::Style style)
 {
-  Surface rounding_style [3][3];
-  Surface rounding_style_mask [3][3];
-
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-
+  Profile     *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  Surface     rounding_style[3][3];
   std::string style_str;
+  int         i, j;
 
   switch (style)
   {
@@ -691,90 +689,75 @@ void GenerateStyledBorder(Surface & source, DecoratedBox::Style style)
   rounding_style[0][1] = LOAD_RES_IMAGE("interface/"+style_str+"_left");
   rounding_style[2][1] = LOAD_RES_IMAGE("interface/"+style_str+"_right");
   rounding_style[1][1] = LOAD_RES_IMAGE("interface/"+style_str+"_center");
-
-  rounding_style_mask[1][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom");
-  rounding_style_mask[0][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom_left");
-  rounding_style_mask[2][2] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_bottom_right");
-  rounding_style_mask[1][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top");
-  rounding_style_mask[0][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top_left");
-  rounding_style_mask[2][0] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_top_right");
-  rounding_style_mask[0][1] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_left");
-  rounding_style_mask[2][1] = LOAD_RES_IMAGE("interface/"+style_str+"_mask_right");
+  for (j=0; j<3; j++)
+    for (i=0; i<3; i++)
+      rounding_style[j][i].SetAlpha(0, 0);
 
   GetResourceManager().UnLoadXMLProfile(res);
 
   Surface save_surf(source.GetSize(),SDL_SWSURFACE, true);
-  save_surf.MergeSurface(source, Point2i(0,0));
-  Rectanglei temp_rect;
+  source.SetAlpha(0, 0);
+  save_surf.Blit(source);
 
-  source = Surface(Surface(source.GetSize(),SDL_SWSURFACE, true));
-
-  temp_rect.SetPosition(Point2i(0,0));
-  temp_rect.SetSize(source.GetSize());
+  Rectanglei temp_rect(Point2i(0,0), source.GetSize());
 
   Point2i temp_position;
 
   temp_position = temp_rect.GetPosition();
-  source.MergeSurface(rounding_style[0][0], temp_position);
+  source.Blit(rounding_style[0][0], temp_position);
 
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
-  source.MergeSurface(rounding_style[2][0],temp_position);
+  source.Blit(rounding_style[2][0], temp_position);
 
   temp_position = temp_rect.GetPosition();
   temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
-  source.MergeSurface(rounding_style[0][2],temp_position);
+  source.Blit(rounding_style[0][2], temp_position);
 
   temp_position = temp_rect.GetPosition();
   temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
   temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
-  source.MergeSurface(rounding_style[2][2],temp_position);
+  source.Blit(rounding_style[2][2], temp_position);
 
 
-  for (int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for (i = rounding_style[0][0].GetSize().x;
+       i < temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
+       i++) {
     temp_position = temp_rect.GetPosition();
     temp_position.x += i;
-    source.MergeSurface(rounding_style[1][0],temp_position);
+    source.Blit(rounding_style[1][0], temp_position);
 
     temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
-    source.MergeSurface(rounding_style[1][2],temp_position);
+    source.Blit(rounding_style[1][2], temp_position);
 
   }
 
-  for (int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
+  for (i = rounding_style[0][0].GetSize().y;
+       i < temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
+       i++) {
     temp_position = temp_rect.GetPosition();
     temp_position.y += i;
-    source.MergeSurface(rounding_style[0][1],temp_position);
+    source.Blit(rounding_style[0][1],temp_position);
 
     temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
-    source.MergeSurface(rounding_style[2][1],temp_position);
+    source.Blit(rounding_style[2][1],temp_position);
 
   }
 
-  for (int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for (i = rounding_style[0][0].GetSize().x;
+       i < temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
+       i++) {
 
-    for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
+    for (j = rounding_style[0][0].GetSize().y;
+         j < temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
+         j++) {
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
-      source.MergeSurface(rounding_style[1][1],temp_position);
+      source.Blit(rounding_style[1][1],temp_position);
     }
   }
 
-  //Corner
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][0],Point2i(0,0));
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][0],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,0));
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][2],Point2i(0,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][2],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-
-  //Top
-  save_surf.MergeAlphaSurface(rounding_style_mask[1][0],Point2i(rounding_style_mask[0][0].GetSize().x,0));
-  //Bottom
-  save_surf.MergeAlphaSurface(rounding_style_mask[1][2],Point2i(rounding_style_mask[0][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-  //Left
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][1],Point2i(0,rounding_style_mask[0][0].GetSize().y));
-  //Right
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][1],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,rounding_style_mask[0][0].GetSize().y));
-
-  source.MergeSurface(save_surf, Point2i(0,0));
+  source.SetAlpha(SDL_SRCALPHA, 0);
+  source.Blit(save_surf);
 }
 
 void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
