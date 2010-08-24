@@ -51,14 +51,9 @@ PolygonBuffer::~PolygonBuffer()
   delete[] vy;
 }
 
-int PolygonBuffer::GetSize() const
-{
-  return buffer_size;
-}
-
 void PolygonBuffer::SetSize(const int size)
 {
-  if(array_size > size) {
+  if (array_size > size) {
     buffer_size = size;
   } else {
     int16_t * tmp_vx = vx;
@@ -68,7 +63,7 @@ void PolygonBuffer::SetSize(const int size)
     array_size = (array_size * 2 > size ? array_size * 2 : size);
     vx = new int16_t[array_size];
     vy = new int16_t[array_size];
-    for(int i = 0; i < buffer_size; i++) {
+    for (int i = 0; i < buffer_size; i++) {
       vx[i] = tmp_vx[i];
       vy[i] = tmp_vy[i];
     }
@@ -109,42 +104,6 @@ PolygonItem::~PolygonItem()
   delete item;
 }
 
-void PolygonItem::SetPosition(const Point2d & pos)
-{
-  transformed_position = position = pos;
-}
-
-void PolygonItem::SetAlignment(H_align h_a, V_align v_a)
-{
-  h_align = h_a;
-  v_align = v_a;
-}
-
-Point2d & PolygonItem::GetPosition()
-{
-  return position;
-}
-
-Point2d & PolygonItem::GetTransformedPosition()
-{
-  return transformed_position;
-}
-
-Point2i PolygonItem::GetIntTransformedPosition() const
-{
-  return Point2i((int)transformed_position.x, (int)transformed_position.y);
-}
-
-void PolygonItem::SetSprite(Sprite * sprite)
-{
-  item = sprite;
-}
-
-Sprite * PolygonItem::GetSprite()
-{
-  return item;
-}
-
 void PolygonItem::ApplyTransformation(const AffineTransform2D & trans)
 {
   transformed_position = trans * position;
@@ -152,14 +111,14 @@ void PolygonItem::ApplyTransformation(const AffineTransform2D & trans)
 
 void PolygonItem::Draw(Surface * dest)
 {
-  if(item == NULL)
+  if (!item)
     return;
   item->Blit(*dest, GetOffsetAlignment());
 }
 
 bool PolygonItem::Contains(const Point2d & p) const
 {
-  return Rectanglei(GetOffsetAlignment(), item->GetSize()).Contains(Point2i((int)p.x, (int)p.y));
+  return Rectanglei(GetOffsetAlignment(), item->GetSize()).Contains(Point2i(p.x, p.y));
 }
 
 Point2i PolygonItem::GetOffsetAlignment() const
@@ -198,15 +157,15 @@ Polygon::Polygon(Polygon & poly)
 {
   Init();
   texture = poly.texture;
-  if(poly.IsPlaneColor()) {
+  if (poly.IsPlaneColor()) {
     plane_color = new Color(poly.GetPlaneColor());
   }
-  if(poly.IsBordered()) {
+  if (poly.IsBordered()) {
     border_color = new Color(poly.GetBorderColor());
   }
   transformed_shape = original_shape = poly.original_shape;
   shape_buffer->SetSize(original_shape.size());
-  for(std::vector<PolygonItem *>::iterator elt = poly.items.begin(); elt != poly.items.end(); elt++) {
+  for (std::vector<PolygonItem *>::iterator elt = poly.items.begin(); elt != poly.items.end(); elt++) {
     AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
   }
 }
@@ -245,21 +204,21 @@ void Polygon::Init()
 void Polygon::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
 {
   int i = 0;
-  for(std::vector<Point2d>::iterator point = original_shape.begin();
+  for (std::vector<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
     transformed_shape[i] = trans * (*point);
-    if(save_transformation)
+    if (save_transformation)
       (*point) = transformed_shape[i];
     shape_buffer->vx[i] = (int)transformed_shape[i].x;
     shape_buffer->vy[i] = (int)transformed_shape[i].y;
-    if(i == 0) {
+    if (i == 0) {
       max = min = transformed_shape[i];
     } else {
       max = max.max(transformed_shape[i]);
       min = min.min(transformed_shape[i]);
     }
   }
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
     (*item)->ApplyTransformation(trans);
   }
@@ -268,23 +227,17 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans, bool save_tra
 // Reset the point
 void Polygon::ResetTransformation()
 {
-  for(int i = 0; i < (int)original_shape.size(); i++) {
+  for (int i = 0; i < (int)original_shape.size(); i++) {
     transformed_shape[i] = original_shape[i];
     shape_buffer->vx[i] = (int)original_shape[i].x;
     shape_buffer->vy[i] = (int)original_shape[i].y;
-    if(i == 0) {
+    if (i == 0) {
       max = min = transformed_shape[i];
     } else {
       max = max.max(transformed_shape[i]);
       min = min.min(transformed_shape[i]);
     }
   }
-}
-
-// Applying definitively the transformation
-void Polygon::SaveTransformation(const AffineTransform2D & trans)
-{
-  ApplyTransformation(trans, true);
 }
 
 // Check if a point is inside the polygon using Jordan curve theorem (amen).
@@ -338,7 +291,7 @@ void Polygon::AddPoint(const Point2d & p)
 
 void Polygon::InsertPoint(int index, const Point2d & p)
 {
-  if(index == GetNbOfPoint()) {
+  if (index == GetNbOfPoint()) {
     AddPoint(p);
     return;
   }
@@ -348,7 +301,7 @@ void Polygon::InsertPoint(int index, const Point2d & p)
   int i = 0;
   shape_buffer->SetSize(original_shape.size() + 1);
   // Inserting first part of the point
-  for(point = original_shape.begin();
+  for (point = original_shape.begin();
       point != original_shape.end() && i < index; point++, i++) {
     tmp = *point;
     vector_tmp.push_back(tmp);
@@ -360,7 +313,7 @@ void Polygon::InsertPoint(int index, const Point2d & p)
   shape_buffer->vx[i] = (int)p.x;
   shape_buffer->vy[i++] = (int)p.y;
   // And inserting remaining points of previous shape
-  for(; point != original_shape.end(); point++, i++) {
+  for (; point != original_shape.end(); point++, i++) {
     tmp = *point;
     vector_tmp.push_back(tmp);
     shape_buffer->vx[i] = (int)tmp.x;
@@ -375,9 +328,9 @@ void Polygon::DeletePoint(int index)
   Point2d tmp;
   int i = 0;
   shape_buffer->SetSize(shape_buffer->GetSize() - 1);
-  for(std::vector<Point2d>::iterator point = original_shape.begin();
+  for (std::vector<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
-    if(i == index) continue; // Skip point to remove
+    if (i == index) continue; // Skip point to remove
     tmp = (*point);
     vector_tmp.push_back(*point);
     shape_buffer->vx[i] = (int)tmp.x;
@@ -388,87 +341,28 @@ void Polygon::DeletePoint(int index)
   transformed_shape = original_shape = vector_tmp;
 }
 
-void Polygon::AddItem(const Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
-{
-  items.push_back(new PolygonItem(sprite, pos, h_a, v_a));
-}
-
-void Polygon::AddItem(PolygonItem * item)
-{
-  items.push_back(item);
-}
-
 void Polygon::DelItem(int index)
 {
   std::vector<PolygonItem *> vector_tmp;
   Point2d tmp;
   int i = 0;
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++, i++) {
-    if(i == index) continue; // Skip point to remove
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
+       item != items.end(); item++, i++) {
+    if (i == index) // Skip point to remove
+      continue;
     vector_tmp.push_back(*item);
   }
   items = vector_tmp;
 }
 
-std::vector<PolygonItem *> Polygon::GetItem() const
-{
-  return items;
-}
-
 void Polygon::ClearItem(bool free_mem)
 {
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++) {
-    if(free_mem)
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
+       item != items.end(); item++) {
+    if (free_mem)
       delete (*item);
   }
   items.clear();
-}
-
-Double Polygon::GetWidth() const
-{
-  return max.x - min.x;
-}
-
-Double Polygon::GetHeight() const
-{
-  return max.y - min.y;
-}
-
-Point2d Polygon::GetSize() const
-{
-  return max - min;
-}
-
-Point2i Polygon::GetIntSize() const
-{
-  return GetIntMax() - GetIntMin() + Point2i(1, 1);
-}
-
-Point2d Polygon::GetMin() const
-{
-  return min;
-}
-
-Point2i Polygon::GetIntMin() const
-{
-  return Point2i((int)min.x, (int)min.y);
-}
-
-Point2d Polygon::GetMax() const
-{
-  return max;
-}
-
-Point2i Polygon::GetIntMax() const
-{
-  return Point2i((int)max.x, (int)max.y);
-}
-
-Rectanglei Polygon::GetRectangleToRefresh() const
-{
-  return Rectanglei(GetIntMin(), GetIntSize());
 }
 
 Point2d Polygon::GetRandomUpperPoint()
@@ -479,7 +373,7 @@ Point2d Polygon::GetRandomUpperPoint()
   MSG_DEBUG("random.get", "Polygon::GetRandomUpperPoint()");
   int start = RandomSync().GetInt(0, GetNbOfPoint());
   int i;
-  for(i = 0; i < start; i++)
+  for (i = 0; i < start; i++)
     point++;
   Double max_tmp = 0.4;
   while(point != transformed_shape.end()) {
@@ -487,15 +381,10 @@ Point2d Polygon::GetRandomUpperPoint()
     i++;
     tmp = *point - previous;
     tmp = tmp / tmp.Norm();
-    if(tmp.y > max_tmp)
+    if (tmp.y > max_tmp)
       return tmp;
   }
   return Point2d();
-}
-
-int Polygon::GetNbOfPoint() const
-{
-  return (int)original_shape.size();
 }
 
 // And the famous Bezier curve. And this algorithm is that simple ? I'm so disappointed !
@@ -508,14 +397,14 @@ void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
   Point2d tmp1 = anchor1 + control1;
   Point2d tmp2 = anchor2 + control2;
   Double a, b;
-  if(add_first_point)
+  if (add_first_point)
     AddPoint(anchor1);
-  for(int step = 1; step < num_steps - 1; step++) {
-    a = ((Double)step / (Double)num_steps) * ONE;
+  for (int step = 1; step < num_steps - 1; step++) {
+    a = step / (Double)num_steps;
     b = 1 - a;
     AddPoint(anchor1 * b * b * b + tmp1 * THREE * b * b * a + tmp2 * THREE * b * a * a + anchor2 * a * a * a);
   }
-  if(add_last_point)
+  if (add_last_point)
     AddPoint(anchor2);
 }
 
@@ -527,7 +416,7 @@ void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
 {
   Point2d step = (end - start) / num_steps;
   Point2d tmp;
-  if(add_first_point)
+  if (add_first_point)
     AddPoint(start);
   for (int i = 1; i < num_steps - 1; i++) {
     MSG_DEBUG("random.get", "Polygon::AddRandomCurve(...)");
@@ -536,7 +425,7 @@ void Polygon::AddRandomCurve(const Point2d& start, const Point2d& end,
     Double y = RandomSync().GetDouble(-y_random_offset, y_random_offset);
     AddPoint(start + (step * i) + Point2d(x,y));
   }
-  if(add_last_point)
+  if (add_last_point)
     AddPoint(end);
 }
 
@@ -547,7 +436,7 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
   Polygon * shape = new Polygon();
   Double l1, l2, l3;
   AffineTransform2D trans = AffineTransform2D();
-  for(int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
+  for (int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
     p0 = original_shape[(index_p1 == 0 ? original_shape.size() : index_p1) - 1];
     p1 = original_shape[index_p1];
     p2 = original_shape[(index_p1 + 1) % original_shape.size()];
@@ -568,7 +457,7 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
     v2 = (c1 - c2) * (l2 / (l2 + l3)) * smooth_value;
 
     // Randomization
-    if(rand != ZERO) {
+    if (rand != ZERO) {
       MSG_DEBUG("random.get", "Polygon::GetBezierInterpolation(...)");
       trans.SetRotation(RandomSync().GetDouble(-rand, rand));
       v1 = trans * v1;
@@ -579,7 +468,7 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
 
     shape->AddBezierCurve(p1, v1, v2, p2, num_steps, false);
   }
-  for(std::vector<PolygonItem *>::iterator elt = items.begin(); elt != items.end(); elt++) {
+  for (std::vector<PolygonItem *>::iterator elt = items.begin(); elt != items.end(); elt++) {
     shape->AddItem((*elt)->GetSprite(), (*elt)->GetPosition(), (*elt)->GetHAlign(), (*elt)->GetVAlign());
   }
   return shape;
@@ -593,14 +482,15 @@ PolygonBuffer * Polygon::GetPolygonBuffer()
 // expand the polygon (to draw a little border for example)
 void Polygon::Expand(Double expand_value)
 {
-  if(original_shape.size() < 2) return;
-  if(!IsClockWise())
+  if (original_shape.size() < 2)
+    return;
+  if (!IsClockWise())
     expand_value = -expand_value;
   std::vector<Point2d> tmp_shape;
   AffineTransform2D trans = AffineTransform2D::Rotate(HALF_PI);
   Point2d current, next, vect, expand;
   int i, j, k;
-  for(i = 0; i < (int)original_shape.size(); i++) {
+  for (i = 0; i < (int)original_shape.size(); i++) {
     j = (i + 1) % original_shape.size();
     current = original_shape[i];
     next    = original_shape[j];
@@ -679,17 +569,17 @@ const Color & Polygon::GetPlaneColor() const
 void Polygon::Draw(Surface * dest)
 {
   // Draw polygon
-  if(is_closed) {
-    if(IsPlaneColor())
+  if (is_closed) {
+    if (IsPlaneColor())
       dest->FilledPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *plane_color);
-    if(IsTextured())
+    if (IsTextured())
       dest->TexturedPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), texture, 0, 0);
-    if(IsBordered())
+    if (IsBordered())
       dest->AAPolygonColor(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *border_color);
   } else {
     // Draw Line
     Color *tmp;
-    if(IsBordered())
+    if (IsBordered())
       tmp = border_color;
     else
       tmp = plane_color;
@@ -756,7 +646,7 @@ void DecoratedBox::SetStyle(DecoratedBox::Style style)
 
 void DecoratedBox::SetPosition(Double x, Double y)
 {
-    for(std::vector<PolygonItem *>::iterator item = items.begin();
+    for (std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
       Point2d old_pos = (*item)->GetPosition();
       old_pos.x += x - min.x;
@@ -840,7 +730,7 @@ void DecoratedBox::GenerateBorder(Surface & source)
   source.MergeSurface(rounding_style[2][2],temp_position);
 
 
-  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for (int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.x += i;
     source.MergeSurface(rounding_style[1][0],temp_position);
@@ -850,7 +740,7 @@ void DecoratedBox::GenerateBorder(Surface & source)
 
   }
 
-  for(int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
+  for (int i = rounding_style[0][0].GetSize().y; i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);i++){
     temp_position = temp_rect.GetPosition();
     temp_position.y += i;
     source.MergeSurface(rounding_style[0][1],temp_position);
@@ -860,9 +750,9 @@ void DecoratedBox::GenerateBorder(Surface & source)
 
   }
 
-  for(int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
+  for (int i = rounding_style[0][0].GetSize().x; i< (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);i++){
 
-    for(int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
+    for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
       temp_position = temp_rect.GetPosition() + Point2i(i,j);
       source.MergeSurface(rounding_style[1][1],temp_position);
     }
