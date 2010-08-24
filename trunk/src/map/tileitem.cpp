@@ -76,11 +76,6 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
   }
 }
 
-void TileItem_NonEmpty::MergeSprite(const Point2i &position, Surface& spr)
-{
-  m_surface.MergeSurface(spr, position);
-}
-
 // === Implemenation of TileItem_BaseColorKey ==============================
 TileItem_BaseColorKey::TileItem_BaseColorKey(uint bpp)
 {

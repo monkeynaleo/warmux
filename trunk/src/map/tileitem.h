@@ -37,9 +37,6 @@ public:
   virtual void ScalePreview(uint8_t* /*odata*/, int /*x*/,
                             uint /*opitch*/, uint /*shift*/) { };
   virtual void Draw(const Point2i &pos) = 0;
-  //~ virtual void Dig(const Point2i &position, const Surface& dig) = 0;
-  //~ virtual void Dig(const Point2i &center, const uint radius) = 0;
-  //~ virtual void MergeSprite(const Point2i &/*position*/, Surface& /*spr*/) {};
 };
 
 class TileItem_Empty : public TileItem
@@ -75,7 +72,14 @@ public:
   virtual void Darken(int start_x, int end_x, unsigned char* buf) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
-  void MergeSprite(const Point2i &position, Surface& spr);
+  void MergeSprite(const Point2i &position, Surface& spr)
+  {
+    spr.SetAlpha(0, 0);
+    m_surface.Blit(spr, position);
+    spr.SetAlpha(SDL_SRCALPHA, 0);
+    //m_surface.MergeSurface(spr, position);
+  }
+
   void Dig(const Point2i &center, const uint radius);
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };
