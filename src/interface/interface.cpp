@@ -314,17 +314,16 @@ void Interface::DrawSmallInterface() const
   if (display)
     return;
   Surface& window = GetMainWindow();
-  int height;
-  height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
+  int height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = height > 0 ? height : 0;
   height = (height < small_background_interface.GetHeight()) ? height : small_background_interface.GetHeight();
   Point2i small_interface_position = Point2i((window.GetWidth() - small_background_interface.GetWidth()) / 2,
                                               window.GetHeight() - height);
   window.Blit(small_background_interface, small_interface_position);
   GetWorld().ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
-  DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
+  DrawWindIndicator(small_interface_position + 2*MARGIN, false);
   if (display_timer)
-    timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 2 + wind_bar.GetWidth(), MARGIN));
+    timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
 }
 
 // draw team energy
