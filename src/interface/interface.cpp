@@ -298,14 +298,16 @@ void Interface::DrawWindInfo() const
 // draw mini info when hidding interface
 void Interface::DrawSmallInterface() const
 {
-  if (display) return;
-  AppWormux * app = AppWormux::GetInstance();
+  if (display)
+    return;
+  Surface& window = GetMainWindow();
   int height;
   height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
-  height = (height > 0 ? height : 0);
-  height = (height < small_background_interface.GetHeight() ? height : small_background_interface.GetHeight());
-  Point2i small_interface_position = Point2i(app->video->window.GetWidth() / 2 - small_background_interface.GetWidth() / 2, app->video->window.GetHeight() - height);
-  app->video->window.Blit(small_background_interface,small_interface_position);
+  height = height > 0 ? height : 0;
+  height = (height < small_background_interface.GetHeight()) ? height : small_background_interface.GetHeight();
+  Point2i small_interface_position = Point2i((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+                                              window.GetHeight() - height);
+  window.Blit(small_background_interface, small_interface_position);
   GetWorld().ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
   DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
   if (display_timer)
@@ -636,7 +638,7 @@ bool Interface::ActionClick(const Point2i &mouse_pos)
     // overlayed on top of it.
     return true;
   } else if (display_minimap && // We are not targetting
-             Mouse::GetInstance()->GetPointer() == Mouse::POINTER_STANDARD) {
+             Mouse::GetInstance()->GetPointer() == Mouse::POINTER_SELECT) {
     Surface &  window  = GetMainWindow();
     Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
     Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
