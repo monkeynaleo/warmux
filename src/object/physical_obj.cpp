@@ -126,6 +126,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 {
   m_minimum_overlapse_time = 0;
+  m_last_collided_object = obj;
   if (obj) {
     m_overlapping_object = obj;
     ObjectsList::GetRef().AddOverlappedObject(this);
@@ -163,7 +164,7 @@ void PhysicalObj::CheckOverlapping()
   }
 }
 
-void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
+void PhysicalObj::SetTestRect(uint left, uint right, uint top, uint bottom)
 {
   m_test_left =  left;
   m_test_right = right;
@@ -234,7 +235,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   }
 
   do {
-    Point2i tmpPos(round(pos.x), round(pos.y) );
+    Point2i tmpPos(round(pos.x), round(pos.y));
 
     // Check if we exit the GetWorld(). If so, we stop moving and return.
     if (IsOutsideWorldXY(tmpPos)) {
@@ -260,7 +261,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // Test if we collide...
     collided_obj = CollidedObjectXY(tmpPos);
     if (collided_obj) {
-      if (m_last_collided_object != collided_obj) {
+      if (!m_go_through_objects || m_last_collided_object != collided_obj) {
         MSG_DEBUG("physic.state", "%s collide on %s", GetName().c_str(), collided_obj->GetName().c_str() );
 
         if (m_go_through_objects) {
@@ -272,6 +273,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         m_last_collided_object = collided_obj;
       } else {
         collided_obj = NULL;
+        collision = NO_COLLISION;
       }
     } else if (!IsInVacuumXY(tmpPos, false)) {
       collision = COLLISION_ON_GROUND;
