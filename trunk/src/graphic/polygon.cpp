@@ -654,14 +654,14 @@ void Polygon::SetTexture(Surface * texture_surface)
 // Color handling
 void Polygon::SetBorderColor(const Color & color)
 {
-  if(border_color == NULL)
+  if (!border_color)
     border_color = new Color();
   *border_color = color;
 }
 
 void Polygon::SetPlaneColor(const Color & color)
 {
-  if(plane_color == NULL)
+  if (!plane_color)
     plane_color = new Color();
   *plane_color = color;
 }
@@ -693,15 +693,16 @@ void Polygon::Draw(Surface * dest)
       tmp = border_color;
     else
       tmp = plane_color;
-    if(tmp != NULL) {
-      for(int i = 0; i < shape_buffer->GetSize() - 1; i++) {
-        dest->AALineColor(shape_buffer->vx[i], shape_buffer->vx[i + 1], shape_buffer->vy[i], shape_buffer->vy[i + 1], *tmp);
+    if (tmp) {
+      for (int i = 0; i < shape_buffer->GetSize() - 1; i++) {
+        dest->AALineColor(shape_buffer->vx[i], shape_buffer->vx[i + 1],
+                          shape_buffer->vy[i], shape_buffer->vy[i + 1], *tmp);
       }
     }
   }
   // Draw Item
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++) {
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
+       item != items.end(); item++) {
     (*item)->Draw(dest);
   }
 }
@@ -720,12 +721,10 @@ DecoratedBox::DecoratedBox(Double width, Double height)
  , m_border(NULL)
  , m_style(DecoratedBox::STYLE_ROUNDED)
 {
-  min =  Point2d(0.0, 0.0);
+  min = Point2d(0.0, 0.0);
   max = Point2d(width, height);
   original_min = min;
   original_max = max;
-
-
 }
 
 DecoratedBox::~DecoratedBox()
@@ -736,7 +735,7 @@ DecoratedBox::~DecoratedBox()
 
 void DecoratedBox::Draw(Surface * dest)
 {
-  if(!m_border){
+  if (!m_border) {
     m_border = new Surface(Point2i((int)GetSize().x,(int)GetSize().y),SDL_SWSURFACE, true);
     GenerateBorder(*m_border);
   }
@@ -744,7 +743,7 @@ void DecoratedBox::Draw(Surface * dest)
 
 
   // Draw Item
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
     (*item)->Draw(dest);
   }
@@ -781,35 +780,35 @@ void DecoratedBox::GenerateBorder(Surface & source)
 
   std::string style;
 
-  switch(m_style)
+  switch (m_style)
   {
-      case STYLE_ROUNDED:
-      style = "rounding";
-      break;
-      case STYLE_SQUARE:
-      style = "square";
-      break;
+    case STYLE_ROUNDED:
+    style = "rounding";
+    break;
+    case STYLE_SQUARE:
+    style = "square";
+    break;
   }
 
   // styled box
-  rounding_style[1][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom");
-  rounding_style[0][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom_left");
-  rounding_style[2][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_bottom_right");
-  rounding_style[1][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top");
-  rounding_style[0][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top_left");
-  rounding_style[2][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_top_right");
-  rounding_style[0][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_left");
-  rounding_style[2][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_right");
-  rounding_style[1][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_center");
+  rounding_style[1][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom");
+  rounding_style[0][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom_left");
+  rounding_style[2][2] = LOAD_RES_IMAGE("interface/"+style+"_bottom_right");
+  rounding_style[1][0] = LOAD_RES_IMAGE("interface/"+style+"_top");
+  rounding_style[0][0] = LOAD_RES_IMAGE("interface/"+style+"_top_left");
+  rounding_style[2][0] = LOAD_RES_IMAGE("interface/"+style+"_top_right");
+  rounding_style[0][1] = LOAD_RES_IMAGE("interface/"+style+"_left");
+  rounding_style[2][1] = LOAD_RES_IMAGE("interface/"+style+"_right");
+  rounding_style[1][1] = LOAD_RES_IMAGE("interface/"+style+"_center");
 
-  rounding_style_mask[1][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom");
-  rounding_style_mask[0][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom_left");
-  rounding_style_mask[2][2] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_bottom_right");
-  rounding_style_mask[1][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top");
-  rounding_style_mask[0][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top_left");
-  rounding_style_mask[2][0] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_top_right");
-  rounding_style_mask[0][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_left");
-  rounding_style_mask[2][1] = GetResourceManager().LoadImage(res, "interface/"+style+"_mask_right");
+  rounding_style_mask[1][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom");
+  rounding_style_mask[0][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom_left");
+  rounding_style_mask[2][2] = LOAD_RES_IMAGE("interface/"+style+"_mask_bottom_right");
+  rounding_style_mask[1][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top");
+  rounding_style_mask[0][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top_left");
+  rounding_style_mask[2][0] = LOAD_RES_IMAGE("interface/"+style+"_mask_top_right");
+  rounding_style_mask[0][1] = LOAD_RES_IMAGE("interface/"+style+"_mask_left");
+  rounding_style_mask[2][1] = LOAD_RES_IMAGE("interface/"+style+"_mask_right");
 
   GetResourceManager().UnLoadXMLProfile(res);
 
@@ -884,43 +883,39 @@ void DecoratedBox::GenerateBorder(Surface & source)
   //Right
   save_surf.MergeAlphaSurface(rounding_style_mask[2][1],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,rounding_style_mask[0][0].GetSize().y));
 
-
-   source.MergeSurface(save_surf, Point2i(0,0));
+  source.MergeSurface(save_surf, Point2i(0,0));
 }
 
 
 void DecoratedBox::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
 {
-  Point2d new_min =  trans * original_min;
+  Point2d new_min = trans * original_min;
   Point2d new_max = trans * original_max;
 
-  Double one_half = 0.5;
-  if((round(max.x - min.x +one_half)!=round( new_max.x -new_min.x+one_half)) || (round(max.y - min.y )!=round( new_max.y -new_min.y)))
-  {
-      delete m_border;
-      m_border = NULL;
+  if ( round(max.x - min.x +ONE_HALF) != round(new_max.x -new_min.x+ONE_HALF) ||
+       round(max.y - min.y) != round(new_max.y -new_min.y) ) {
+    delete m_border;
+    m_border = NULL;
   }
 
   min = new_min;
   max = new_max;
 
-  if(save_transformation)
-  {
-
-   original_min = min;
-   original_max = max;
+  if (save_transformation) {
+    original_min = min;
+    original_max = max;
   }
 
-  for(std::vector<PolygonItem *>::iterator item = items.begin();
-      item != items.end(); item++) {
+  for (std::vector<PolygonItem *>::iterator item = items.begin();
+       item != items.end(); item++) {
     (*item)->ApplyTransformation(trans);
   }
 }
 
 void DecoratedBox::ResetTransformation()
 {
-  if((round(max.x - min.x )!=round( original_max.x -original_min.x)) || (round(max.y - min.y )!=round( original_max.y -original_min.y)))
-   {
+  if ( round(max.x - min.x)!=round(original_max.x -original_min.x) ||
+       round(max.y - min.y)!=round(original_max.y -original_min.y) ) {
       delete m_border;
       m_border = NULL;
    }

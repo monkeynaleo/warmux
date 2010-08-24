@@ -46,11 +46,6 @@ class MouseCursor;
 
 class Profile
 {
-  /* If you need this, implement it (correctly)*/
-  Profile(const Profile&);
-  const Profile& operator=(const Profile&);
-  /*********************************************/
-
 public:
   XmlReader *doc; //TODO move to private
   std::string filename;
@@ -64,12 +59,11 @@ public:
 
 class ResourceManager : public Singleton<ResourceManager>
 {
-private:
   ResourceManager();
   ~ResourceManager();
   friend class Singleton<ResourceManager>;
-public:
 
+public:
   void SetDataPath(const std::string& base_path);
   Surface LoadImage(const std::string& ressource_str, bool alpha = false,
                     bool set_colorkey = false, Uint32 colorkey = 0) const;
@@ -101,5 +95,9 @@ public:
 };
 
 ResourceManager& GetResourceManager();
+
+#define LOAD_RES_IMAGE(name) GetResourceManager().LoadImage(res, name)
+#define LOAD_RES_SPRITE(name) GetResourceManager().LoadSprite(res, name)
+#define LOAD_RES_COLOR(name) GetResourceManager().LoadColor(res, name)
 
 #endif /* _RESOURCE_MANAGER_H */
