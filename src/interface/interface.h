@@ -51,11 +51,6 @@ public:
   Team *tmp_team;
 
 private:
-  /* If you need this, implement it (correctly)*/
-  Interface(const Interface&);
-  const Interface& operator=(const Interface&);
-  /*********************************************/
-
   // Timers
   Text * global_timer;
   Text * timer;
@@ -92,12 +87,16 @@ private:
   //Minimap
   Surface *minimap;
   uint m_last_minimap_redraw;
+  Point2i m_last_preview_size;
   //Styled box
+  Surface *mask;
+  Surface *scratch;
   Surface rounding_style [3][3];
   Surface rounding_style_mask [3][3];
 
   Color m_camera_preview_color;
   Color m_playing_character_preview_color;
+
 protected:
   friend class Singleton<Interface>;
   Interface();
@@ -118,7 +117,7 @@ public:
   void DrawTimeInfo() const;
   void DrawMapPreview();
   void DrawSmallInterface() const;
-  void GenerateStyledBox(  Surface & source);
+  void GenerateStyledBox();
 
   bool IsDisplayed () const { return display; };
   void EnableDisplay(bool _display);
