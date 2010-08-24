@@ -705,7 +705,8 @@ bool Interface::ActionClick(const Point2i &mouse_pos)
     // Process click on weapon menu before minimap as it should be
     // overlayed on top of it.
     return true;
-  } else if (display_minimap) {
+  } else if (display_minimap && // We are not targetting
+             Mouse::GetInstance()->GetPointer() == Mouse::POINTER_STANDARD) {
     Surface &  window  = GetMainWindow();
     Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
     Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
