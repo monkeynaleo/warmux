@@ -93,12 +93,12 @@ protected:
   }
 
 public:
-  PhysicalObj (const std::string &name, const std::string &xml_config="");
+  PhysicalObj(const std::string &name, const std::string &xml_config="");
   /* Note : The copy constructor is not implemented (and this is not a bug)
    * because we can copy directly the pointer m_overlapping_object whereas this
    * object does not own it.
    * FIXME what happen if the object is deleted meanwhile ???*/
-  virtual ~PhysicalObj ();
+  virtual ~PhysicalObj();
 
   //-------- Set position and size -------
 
@@ -107,10 +107,10 @@ public:
   // Set/Get position
   void SetX(Double x) { SetXY( Point2d(x, GetYDouble()) ); };
   void SetY(Double y) { SetXY( Point2d(GetXDouble(), y) ); };
-  void SetXY(const Point2i &position) { SetXY(Point2d(Double(position.x), Double(position.y))); };
+  void SetXY(const Point2i &position) { SetXY(Point2d(position.x, position.y)); };
   void SetXY(const Point2d &position);
-  int GetX() const { return (int)GetXDouble(); };
-  int GetY() const { return (int)GetYDouble(); };
+  int GetX() const { return GetXDouble(); };
+  int GetY() const { return GetYDouble(); };
   Double GetXDouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
   Double GetYDouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
   const Point2d GetPosition() const { return Point2d(GetXDouble(), GetYDouble()) ;};
@@ -127,8 +127,8 @@ public:
   {
     int width = m_width - m_test_right - m_test_left;
     int height = m_height - m_test_bottom - m_test_top;
-    width = (width == 0 ? 1 : width);
-    height = (height == 0 ? 1 : height);
+    width  =  width == 0 ? 1 : width;
+    height = height == 0 ? 1 : height;
     return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
   }
   int GetTestWidth() const { return m_width -m_test_left -m_test_right; };
@@ -154,9 +154,10 @@ public:
 
   // Move the character until he gets out of the ground
   bool PutOutOfGround();
-  bool PutOutOfGround(Double direction, Double max_distance=30); //Where direction is the angle of the direction
-                                         // where the object is moved
-                                         // and max_distance is max distance allowed when putting out
+
+  // Where direction is the angle of the direction where the object is moved
+  // and max_distance is max distance allowed when putting out
+  bool PutOutOfGround(Double direction, Double max_distance=30);
 
   // Collision management
   void SetCollisionModel(bool collides_with_ground,
@@ -200,9 +201,9 @@ public:
 
   virtual bool IsImmobile() const { return IsSleeping() || m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST); };
 
-  bool IsGhost() const { return (m_alive == GHOST); };
-  bool IsDrowned() const { return (m_alive == DROWNED); };
-  bool IsDead() const { return (IsGhost() || IsDrowned() || (m_alive == DEAD)); };
+  bool IsGhost() const { return m_alive == GHOST; };
+  bool IsDrowned() const { return m_alive == DROWNED; };
+  bool IsDead() const { return IsGhost() || IsDrowned() || m_alive==DEAD; };
   bool IsFire() const { return m_is_fire; }
 
   // Are the two object in contact ? (uses test rectangles)
@@ -225,7 +226,7 @@ protected:
 
 private:
   //Retrun the position of the point of contact of the obj on the ground
-  bool ContactPoint (int &x, int &y) const;
+  bool ContactPoint(int &x, int &y) const;
 
 
   // The object fall directly to the ground (or become a ghost)
@@ -237,8 +238,8 @@ private:
   void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
-         Point2d& contactPos,
-         Double& contactAngle) const;
+                                 Point2d& contactPos,
+                                 Double& contactAngle) const;
 };
 
 #endif
