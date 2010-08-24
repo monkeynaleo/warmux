@@ -122,7 +122,6 @@ public:
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
 
   void MergeSurface( Surface &spr, const Point2i &position);
-  void MergeAlphaSurface(const Surface &mask, const Point2i &pos);
 
   int SetColorKey(Uint32 flag, Uint32 key);
 
