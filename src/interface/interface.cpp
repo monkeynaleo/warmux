@@ -58,21 +58,28 @@ Interface::Interface()
   int      width = AppWormux::GetInstance()->video->window.GetWidth();
   Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Surface  tmp   = LOAD_RES_IMAGE("interface/background_interface");
-  if (width < tmp.GetWidth()+20) {
-    Double zoom = width / Double(tmp.GetWidth()+20);
-    game_menu = tmp.RotoZoom(0.0, zoom, zoom);
-  }
-  else
-    game_menu = tmp;
-  small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
-  clock_background = LOAD_RES_IMAGE("interface/clock_background");
+
   clock_normal = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
+
+  Double zoom = 1.0;
+  if (width < tmp.GetWidth()+20) {
+    zoom = width / Double(tmp.GetWidth()+20);
+    game_menu = tmp.RotoZoom(0.0, zoom, zoom);
+    clock_background = LOAD_RES_IMAGE("interface/clock_background").RotoZoom(0.0, zoom, zoom);
+    clock_normal->Scale(zoom, zoom);
+    clock_emergency->Scale(zoom, zoom);
+  }
+  else {
+    game_menu = tmp;
+    clock_background = LOAD_RES_IMAGE("interface/clock_background");
+  }
+  small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
   wind_icon = LOAD_RES_IMAGE("interface/wind");
   wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
 
   // energy bar
-  energy_bar = new EnergyBar(0, 0, 120, 15,
+  energy_bar = new EnergyBar(0, 0, 120*zoom, 15*zoom,
                              0, 0,
                              GameMode::GetInstance()->character.init_energy);
 
@@ -181,9 +188,12 @@ void Interface::DrawCharacterInfo()
   t_character_name->DrawCenter(bottom_bar_pos + character_name_offset);
 
   // Display player's name
-  t_player_name->SetText(_("Head commander") + std::string(": ") + team.GetPlayerName());
-  Point2i player_name_offset = energy_bar_offset + Point2i(energy_bar->GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
-  t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
+  if (window.GetHeight() > 480) {
+    t_player_name->SetText(_("Head commander") + std::string(": ") + team.GetPlayerName());
+    Point2i player_name_offset = energy_bar_offset
+      + Point2i(energy_bar->GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
+    t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
+  }
 
   // Display energy
   if (!character_under_cursor->IsDead()) {
