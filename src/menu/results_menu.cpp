@@ -253,41 +253,37 @@ void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
                                      uint   max_duration,
                                      const Color& color) const
 {
-  EnergyList::const_iterator it = team->energy.energy_list.begin(),
-    end = team->energy.energy_list.end();
+  const EnergyList& list = team->energy.energy_list;
 
   MSG_DEBUG("menu", "Drawing graph for team %s", team->GetName().c_str());
 
-  if (it == end) {
+  if (!list.size()) {
     MSG_DEBUG("menu", "   No point !?!");
     return;
   }
 
-  int sx = x+int((*it)->GetDuration()*duration_scale)+LINE_THICKNESS,
-      sy = y-int((*it)->GetValue()*energy_scale);
+  int sx = x+int(list[0]->GetDuration()*duration_scale)+LINE_THICKNESS,
+      sy = y-int(list[0]->GetValue()*energy_scale);
   Surface &surface = GetMainWindow();
   MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)",
-            (*it)->GetDuration(), (*it)->GetValue(), sx, sy);
+            list[0]->GetDuration(), list[0]->GetValue(), sx, sy);
 
-  ++it;
-
-  while (it != end) {
-    int ex = x+int((*it)->GetDuration()*duration_scale),
-        ey = y-int((*it)->GetValue()*energy_scale);
+  for (uint i=0; i<list.size(); i++) {
+    EnergyValue *val = list[i];
+    int ex = x+int(val->GetDuration()*duration_scale),
+        ey = y-int(val->GetValue()*energy_scale);
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
-              (*it)->GetDuration(), (*it)->GetValue(), ex, ey);
+              val->GetDuration(), val->GetValue(), ex, ey);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
     surface.BoxColor(Rectanglei(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy)), color);
 
     sx = ex;
     sy = ey;
-    ++it;
   }
 
   // Missing point
-  --it;
-  if ((*it)->GetDuration() < max_duration) {
+  if (list[list.size()-1]->GetDuration() < max_duration) {
     int ex = x+int(max_duration*duration_scale);
     MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
@@ -304,11 +300,9 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   uint   graph_x        = x+32;
   std::vector<TeamResults*>::const_iterator it;
 
-  for (it=results.begin(); it!=results.end(); ++it)
-  {
+  for (it=results.begin(); it!=results.end(); ++it) {
     const Team* team = (*it)->getTeam();
-    if (team)
-    {
+    if (team) {
       if (team->energy.energy_list.GetMaxValue() > max_value)
         max_value = team->energy.energy_list.GetMaxValue();
       if (team->energy.energy_list.GetDuration() > max_duration)
@@ -342,11 +336,9 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
   uint               index   = 0;
   static const Color clist[] =
     { black_color, primary_red_color, gray_color, primary_green_color, black_color, primary_blue_color };
-  for (it=results.begin(); it!=results.end(); ++it)
-  {
+  for (it=results.begin(); it!=results.end(); ++it) {
     const Team* team = (*it)->getTeam();
-    if (team)
-    {
+    if (team) {
       // Legend line
       surface.BoxColor(Rectanglei(x+w-112, y+12+index*40,
                                   56, LINE_THICKNESS), clist[index]);
