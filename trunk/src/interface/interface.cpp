@@ -352,9 +352,10 @@ void Interface::DrawMapPreview()
       GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
 
     m_last_minimap_redraw = Time::GetInstance()->Read();
+    const Point2i& preview_size = GetWorld().ground.GetPreviewSize();
 
     // Check whether the whole minimap must be updated
-    if (m_last_preview_size != GetWorld().ground.GetPreviewSize()) {
+    if (m_last_preview_size != preview_size) {
       if (mask) {
         delete mask;
         mask = NULL;
@@ -370,10 +371,15 @@ void Interface::DrawMapPreview()
     }
 
     if (!minimap)
-      minimap = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
-    Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
+      minimap = new Surface(preview_size, SDL_HWSURFACE, true);
 
-    minimap->Blit(*GetWorld().ground.GetPreview(), mergePos);
+
+    // Recreate the scratch buffer
+    if (!scratch)
+      scratch = new Surface(preview_size, SDL_HWSURFACE, true);
+
+    Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
+    scratch->Blit(*GetWorld().ground.GetPreview(), mergePos);
 
     // Draw water
     if (GetWorld().water.IsActive()) {
@@ -384,14 +390,16 @@ void Interface::DrawMapPreview()
       int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
       int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
-      Surface water_surf(Point2i(rect_preview.GetSizeX(), rect_preview.GetSizeY()-h),
-                         SDL_SWSURFACE, false);
+      Surface water_surf(rect_preview.GetSize() - Point2i(0, h),
+                         SDL_HWSURFACE, false);
       water_surf.SetAlpha(SDL_SRCALPHA|SDL_RLEACCEL, 200);
       water_surf.Fill(*color);
 
       // Draw box with color according to water type
-      minimap->Blit(water_surf, Point2i(0, h));
+      scratch->Blit(water_surf, Point2i(0, h));
     }
+
+    scratch->SetAlpha(SDL_SRCALPHA, 0);
     GenerateStyledBox();
   }
 
@@ -501,17 +509,8 @@ void Interface::GenerateStyledBox()
     //printf("Recreated mask\n");
   }
 
-  // Recreate the scratch buffer
-  if (!scratch) {
-    scratch = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
-    scratch->SetAlpha(0, 0);
-  }
-
   // Compose
-  scratch->Blit(*mask);
-  scratch->Blit(*minimap);
-
-  // Save result
+  minimap->Blit(*mask);
   minimap->Blit(*scratch);
 }
 
