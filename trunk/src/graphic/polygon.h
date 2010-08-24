@@ -36,11 +36,6 @@ class Sprite;
 /** Use to draw the polygon */
 class PolygonBuffer
 {
-  /* if you need that, implement it (correctly)*/
-  PolygonBuffer(const PolygonBuffer&);
-  PolygonBuffer operator=(const PolygonBuffer&);
-  /*********************************************/
-
 public:
   int16_t * vx;
   int16_t * vy;
@@ -48,7 +43,7 @@ public:
   int array_size;
   PolygonBuffer();
   ~PolygonBuffer();
-  int GetSize() const;
+  int GetSize() const { return buffer_size; }
   void SetSize(const int size);
 };
 
@@ -73,16 +68,21 @@ public:
   PolygonItem(PolygonItem * item);
   PolygonItem(const Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   virtual ~PolygonItem();
-  void SetPosition(const Point2d & pos);
-  void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
+  void SetPosition(const Point2d & pos) { transformed_position = position = pos; }
+  void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED)
+  {
+    h_align = h_a;
+    v_align = v_a;
+  }
+
   H_align GetHAlign() const { return h_align; }
   V_align GetVAlign() const { return v_align; }
-  Point2d & GetPosition();
-  Point2d & GetTransformedPosition();
-  Point2i GetIntTransformedPosition() const;
+  Point2d & GetPosition() { return position; }
+  Point2d & GetTransformedPosition() { return transformed_position; }
+  Point2i GetIntTransformedPosition() const { return Point2i(transformed_position.x, transformed_position.y); }
   virtual bool Contains(const Point2d & p) const;
-  void SetSprite(Sprite * sprite);
-  Sprite * GetSprite();
+  void SetSprite(Sprite * sprite) { item = sprite; }
+  Sprite * GetSprite() { return item; }
   virtual void ApplyTransformation(const AffineTransform2D & trans);
   virtual void Draw(Surface * dest);
 };
@@ -122,7 +122,8 @@ public:
   void DeletePoint(int index);
   virtual void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation = false);
   virtual void ResetTransformation();
-  void SaveTransformation(const AffineTransform2D & trans);
+  // Applying definitively the transformation
+  void SaveTransformation(const AffineTransform2D & trans) { ApplyTransformation(trans, true); }
 
   // Test
   bool IsInsidePolygon(const Point2d & point) const;
@@ -146,16 +147,16 @@ public:
   void Expand(Double expand_value);
 
   // Size information
-  Double GetWidth() const;
-  Double GetHeight() const;
-  Point2d GetSize() const;
-  Point2i GetIntSize() const;
-  int GetNbOfPoint() const;
-  Point2d GetMin() const;
-  Point2i GetIntMin() const;
-  Point2d GetMax() const;
-  Point2i GetIntMax() const;
-  virtual Rectanglei GetRectangleToRefresh() const;
+  Double GetWidth() const { return max.x - min.x; }
+  Double GetHeight() const { return max.y - min.y; }
+  Point2d GetSize() const { return max - min; }
+  Point2i GetIntSize() const { return GetIntMax() - GetIntMin() + Point2i(1, 1); }
+  int GetNbOfPoint() const { return (int)original_shape.size(); }
+  Point2d GetMin() const { return min; }
+  Point2i GetIntMin() const { return Point2i(min.x, min.y); }
+  Point2d GetMax() const { return max; }
+  Point2i GetIntMax() const { return Point2i(max.x, max.y); }
+  virtual Rectanglei GetRectangleToRefresh() const { return Rectanglei(GetIntMin(), GetIntSize()); }
 
   // Buffer of transformed point
   PolygonBuffer * GetPolygonBuffer();
@@ -185,10 +186,11 @@ public:
   // Item management
   void AddItem(const Sprite * sprite, const Point2d & pos,
                PolygonItem::H_align h_a = PolygonItem::H_CENTERED,
-               PolygonItem::V_align v_a = PolygonItem::V_CENTERED);
-  virtual void AddItem(PolygonItem * item);
+               PolygonItem::V_align v_a = PolygonItem::V_CENTERED)
+  { items.push_back(new PolygonItem(sprite, pos, h_a, v_a)); }
+  virtual void AddItem(PolygonItem * item) { items.push_back(item); }
   void DelItem(int index);
-  std::vector<PolygonItem *> GetItem() const;
+  std::vector<PolygonItem *> GetItem() const { return items; }
   void ClearItem(bool free_mem = true);
 };
 
