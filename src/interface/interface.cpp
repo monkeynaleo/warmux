@@ -357,33 +357,30 @@ void Interface::DrawMapPreview()
 
     m_last_minimap_redraw = Time::GetInstance()->Read();
 
-    if (minimap) delete minimap;
+    if (minimap)
+      delete minimap;
 
-    Surface preview(*GetWorld().ground.GetPreview());
     minimap = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+    Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
 
-    Point2i mergePos = GetWorld().ground.GetPreviewRect().GetPosition();
-    mergePos = -mergePos;
-    minimap->MergeSurface(preview, mergePos);
+    minimap->Blit(*GetWorld().ground.GetPreview(), mergePos);
 
     // Draw water
     if (GetWorld().water.IsActive()) {
       const Color * color = GetWorld().water.GetColor();
       ASSERT(color);
-      Color water_color = *color;
-      water_color.SetAlpha(200);
 
       // Scale water height according to preview size
       int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
       int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
-      Rectanglei water(0, h, rect_preview.GetSizeX(), rect_preview.GetSizeY()-h);
-
-      Surface water_surf(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+      Surface water_surf(Point2i(rect_preview.GetSizeX(), rect_preview.GetSizeY()-h),
+                         SDL_SWSURFACE, false);
+      water_surf.SetAlpha(SDL_SRCALPHA|SDL_RLEACCEL, 200);
+      water_surf.Fill(*color);
 
       // Draw box with color according to water type
-      water_surf.BoxColor(water, water_color);
-      minimap->MergeSurface(water_surf,Point2i(0,0));
+      minimap->Blit(water_surf, Point2i(0, h));
     }
     GenerateStyledBox(*minimap);
   }
