@@ -57,30 +57,30 @@ Interface::Interface()
 {
   int      width = AppWormux::GetInstance()->video->window.GetWidth();
   Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  Surface  tmp   = GetResourceManager().LoadImage(res, "interface/background_interface");
+  Surface  tmp   = LOAD_RES_IMAGE("interface/background_interface");
   if (width < tmp.GetWidth()+20) {
     Double zoom = width / Double(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
   }
   else
     game_menu = tmp;
-  small_background_interface = GetResourceManager().LoadImage(res, "interface/small_background_interface");
-  clock_background = GetResourceManager().LoadImage(res, "interface/clock_background");
-  clock_normal = GetResourceManager().LoadSprite(res, "interface/clock_normal");
-  clock_emergency = GetResourceManager().LoadSprite(res, "interface/clock_emergency");
-  wind_icon = GetResourceManager().LoadImage(res, "interface/wind");
-  wind_indicator = GetResourceManager().LoadImage(res, "interface/wind_indicator");
+  small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
+  clock_background = LOAD_RES_IMAGE("interface/clock_background");
+  clock_normal = LOAD_RES_SPRITE("interface/clock_normal");
+  clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
+  wind_icon = LOAD_RES_IMAGE("interface/wind");
+  wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
 
   // styled box
-  rounding_style[1][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom");
-  rounding_style[0][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom_left");
-  rounding_style[2][2] = GetResourceManager().LoadImage(res, "interface/rounding_bottom_right");
-  rounding_style[1][0] = GetResourceManager().LoadImage(res, "interface/rounding_top");
-  rounding_style[0][0] = GetResourceManager().LoadImage(res, "interface/rounding_top_left");
-  rounding_style[2][0] = GetResourceManager().LoadImage(res, "interface/rounding_top_right");
-  rounding_style[0][1] = GetResourceManager().LoadImage(res, "interface/rounding_left");
-  rounding_style[2][1] = GetResourceManager().LoadImage(res, "interface/rounding_right");
-  rounding_style[1][1] = GetResourceManager().LoadImage(res, "interface/rounding_center");
+  rounding_style[1][2] = LOAD_RES_IMAGE("interface/rounding_bottom");
+  rounding_style[0][2] = LOAD_RES_IMAGE("interface/rounding_bottom_left");
+  rounding_style[2][2] = LOAD_RES_IMAGE("interface/rounding_bottom_right");
+  rounding_style[1][0] = LOAD_RES_IMAGE("interface/rounding_top");
+  rounding_style[0][0] = LOAD_RES_IMAGE("interface/rounding_top_left");
+  rounding_style[2][0] = LOAD_RES_IMAGE("interface/rounding_top_right");
+  rounding_style[0][1] = LOAD_RES_IMAGE("interface/rounding_left");
+  rounding_style[2][1] = LOAD_RES_IMAGE("interface/rounding_right");
+  rounding_style[1][1] = LOAD_RES_IMAGE("interface/rounding_center");
   for (int j=0; j<3; j++) {
     for (int i=0; i<3; i++) {
       rounding_style[j][i].SetAlpha(0, 0);
@@ -94,8 +94,8 @@ Interface::Interface()
 
   // wind bar
   wind_bar.InitPos(0, 0, wind_indicator.GetWidth() - 4, wind_indicator.GetHeight() - 4);
-  wind_bar.SetMinMaxValueColor(GetResourceManager().LoadColor(res, "interface/wind_color_min"),
-                               GetResourceManager().LoadColor(res, "interface/wind_color_max"));
+  wind_bar.SetMinMaxValueColor(LOAD_RES_COLOR("interface/wind_color_min"),
+                               LOAD_RES_COLOR("interface/wind_color_max"));
   wind_bar.InitVal(0, -100, 100);
 
   wind_bar.border_color.SetColor(0, 0, 0, 0);
@@ -108,21 +108,16 @@ Interface::Interface()
   weapon_strength_bar.InitPos (0, 0, 300, 15);
   weapon_strength_bar.InitVal (0, 0, 100);
 
-  weapon_strength_bar.SetValueColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_value"));
-  weapon_strength_bar.SetBorderColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_border"));
-  weapon_strength_bar.SetBackgroundColor(GetResourceManager().LoadColor(res, "interface/weapon_strength_bar_background"));
+  weapon_strength_bar.SetValueColor(LOAD_RES_COLOR("interface/weapon_strength_bar_value"));
+  weapon_strength_bar.SetBorderColor(LOAD_RES_COLOR("interface/weapon_strength_bar_border"));
+  weapon_strength_bar.SetBackgroundColor(LOAD_RES_COLOR("interface/weapon_strength_bar_background"));
 
-  Color text_color = GetResourceManager().LoadColor(res, "interface/text_color");
-  Color energy_text_color = GetResourceManager().LoadColor(res, "interface/energy_text_color");
+  Color text_color = LOAD_RES_COLOR("interface/text_color");
+  Color energy_text_color = LOAD_RES_COLOR("interface/energy_text_color");
 
-  m_camera_preview_color = GetResourceManager().LoadColor(res, "interface/camera_preview_color");
+  m_camera_preview_color = LOAD_RES_COLOR("interface/camera_preview_color");
 
-  m_playing_character_preview_color = GetResourceManager().LoadColor(res, "interface/playing_character_preview_color");
-
-
-  // XXX Unused !?
-  // Color turn_timer_text_color = GetResourceManager().LoadColor(res, "interface/turn_timer_text_color");
-  // Color global_clock_text_color = GetResourceManager().LoadColor(res, "interface/global_clock_text_color");
+  m_playing_character_preview_color = LOAD_RES_COLOR("interface/playing_character_preview_color");
 
   global_timer = new Text("0", gray_color, Font::FONT_BIG, Font::FONT_BOLD, false);
   timer = new Text("0", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);

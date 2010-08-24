@@ -41,12 +41,12 @@ ComboBox::ComboBox (const std::string &label,
   size = _size;
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_image = GetResourceManager().LoadImage(res, resource_id);
-  m_annulus_background = GetResourceManager().LoadImage(res, "menu/annulus_background", true);
-  m_annulus_foreground = GetResourceManager().LoadImage(res, "menu/annulus_foreground", true);
-  m_progress_color = GetResourceManager().LoadColor(res, "menu/annulus_progress_color");
-  m_img_plus = GetResourceManager().LoadSprite(res, "menu/big_plus");
-  m_img_minus = GetResourceManager().LoadSprite(res, "menu/big_minus");
+  m_image = LOAD_RES_IMAGE(resource_id);
+  m_annulus_background = LOAD_RES_IMAGE("menu/annulus_background");
+  m_annulus_foreground = LOAD_RES_IMAGE("menu/annulus_foreground");
+  m_progress_color = LOAD_RES_COLOR("menu/annulus_progress_color");
+  m_img_plus = LOAD_RES_SPRITE("menu/big_plus");
+  m_img_minus = LOAD_RES_SPRITE("menu/big_minus");
   GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);

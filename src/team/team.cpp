@@ -85,10 +85,10 @@ Team::Team(XmlReader& doc, Profile* res,
   , energy(this)
 {
   // Load flag
-  flag = GetResourceManager().LoadImage(res, "flag");
+  flag = LOAD_RES_IMAGE("flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
-  death_flag = GetResourceManager().LoadImage(res, "death_flag");
-  big_flag = GetResourceManager().LoadImage(res, "big_flag");
+  death_flag = LOAD_RES_IMAGE("death_flag");
+  big_flag = LOAD_RES_IMAGE("big_flag");
   GetResourceManager().UnLoadXMLProfile(res);
 
   // Get sound profile

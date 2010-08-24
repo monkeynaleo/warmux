@@ -146,29 +146,29 @@ Sprite* ParticleEngine::particle_sprite[particle_spr_nbr];
 void ParticleEngine::Load()
 {
   // Pre-load the sprite of each particle
-  Profile *res = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
-  particle_sprite[SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke");
-  particle_sprite[EXPLOSION_SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke_explosion");
-  particle_sprite[EXPLOSION_BIG_SMOKE_spr] = GetResourceManager().LoadSprite(res,"smoke_big_explosion");
-  particle_sprite[ILL_BUBBLE_spr] = GetResourceManager().LoadSprite(res,"ill_bubble");
-  particle_sprite[FIRE_spr]  = GetResourceManager().LoadSprite(res,"fire_particle");
-  particle_sprite[STAR_spr]  = GetResourceManager().LoadSprite(res,"star_particle");
-  particle_sprite[DARK_SMOKE_spr]  = GetResourceManager().LoadSprite(res,"dark_smoke");
-  particle_sprite[MAGIC_STAR_R_spr] = GetResourceManager().LoadSprite(res,"pink_star_particle");
+  Profile *res = GetResourceManager().LoadXMLProfile("weapons.xml", false);
+  particle_sprite[SMOKE_spr] = LOAD_RES_SPRITE("smoke");
+  particle_sprite[EXPLOSION_SMOKE_spr] = LOAD_RES_SPRITE("smoke_explosion");
+  particle_sprite[EXPLOSION_BIG_SMOKE_spr] = LOAD_RES_SPRITE("smoke_big_explosion");
+  particle_sprite[ILL_BUBBLE_spr] = LOAD_RES_SPRITE("ill_bubble");
+  particle_sprite[FIRE_spr]  = LOAD_RES_SPRITE("fire_particle");
+  particle_sprite[STAR_spr]  = LOAD_RES_SPRITE("star_particle");
+  particle_sprite[DARK_SMOKE_spr]  = LOAD_RES_SPRITE("dark_smoke");
+  particle_sprite[MAGIC_STAR_R_spr] = LOAD_RES_SPRITE("pink_star_particle");
   particle_sprite[MAGIC_STAR_R_spr]->EnableRotationCache(32);
-  particle_sprite[MAGIC_STAR_Y_spr] = GetResourceManager().LoadSprite(res,"yellow_star_particle");
+  particle_sprite[MAGIC_STAR_Y_spr] = LOAD_RES_SPRITE("yellow_star_particle");
   particle_sprite[MAGIC_STAR_Y_spr]->EnableRotationCache(32);
-  particle_sprite[MAGIC_STAR_B_spr] = GetResourceManager().LoadSprite(res,"blue_star_particle");
+  particle_sprite[MAGIC_STAR_B_spr] = LOAD_RES_SPRITE("blue_star_particle");
   particle_sprite[MAGIC_STAR_B_spr]->EnableRotationCache(32);
-  particle_sprite[BULLET_spr] = GetResourceManager().LoadSprite(res,"bullet_particle");
+  particle_sprite[BULLET_spr] = LOAD_RES_SPRITE("bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
-  particle_sprite[POLECAT_FART_spr] = GetResourceManager().LoadSprite(res,"polecat_fart");
-  particle_sprite[CLEARWATER_spr] = GetResourceManager().LoadSprite(res,"water_drop");
-  particle_sprite[LAVA_spr] = GetResourceManager().LoadSprite(res,"lava_drop");
-  particle_sprite[RADIOACTIVE_spr] = GetResourceManager().LoadSprite(res,"radioactive_drop");
-  particle_sprite[DIRTYWATER_spr] = GetResourceManager().LoadSprite(res,"dirtywater_drop");
-  particle_sprite[CHOCOLATEWATER_spr] = GetResourceManager().LoadSprite(res,"chocolate_drop");
-  particle_sprite[EXPLOSION_spr] = GetResourceManager().LoadSprite(res,"explosion_particle");
+  particle_sprite[POLECAT_FART_spr] = LOAD_RES_SPRITE("polecat_fart");
+  particle_sprite[CLEARWATER_spr] = LOAD_RES_SPRITE("water_drop");
+  particle_sprite[LAVA_spr] = LOAD_RES_SPRITE("lava_drop");
+  particle_sprite[RADIOACTIVE_spr] = LOAD_RES_SPRITE("radioactive_drop");
+  particle_sprite[DIRTYWATER_spr] = LOAD_RES_SPRITE("dirtywater_drop");
+  particle_sprite[CHOCOLATEWATER_spr] = LOAD_RES_SPRITE("chocolate_drop");
+  particle_sprite[EXPLOSION_spr] = LOAD_RES_SPRITE("explosion_particle");
   GetResourceManager().UnLoadXMLProfile(res);
 
   sprites_loaded = true;
