@@ -51,6 +51,9 @@ Interface::Interface()
   , clock(NULL)
   , minimap(NULL)
   , m_last_minimap_redraw(0)
+  , m_last_preview_size(0, 0)
+  , mask(NULL)
+  , scratch(NULL)
 {
   int      width = AppWormux::GetInstance()->video->window.GetWidth();
   Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -78,15 +81,11 @@ Interface::Interface()
   rounding_style[0][1] = GetResourceManager().LoadImage(res, "interface/rounding_left");
   rounding_style[2][1] = GetResourceManager().LoadImage(res, "interface/rounding_right");
   rounding_style[1][1] = GetResourceManager().LoadImage(res, "interface/rounding_center");
-
-  rounding_style_mask[1][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom");
-  rounding_style_mask[0][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom_left");
-  rounding_style_mask[2][2] = GetResourceManager().LoadImage(res, "interface/rounding_mask_bottom_right");
-  rounding_style_mask[1][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top");
-  rounding_style_mask[0][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top_left");
-  rounding_style_mask[2][0] = GetResourceManager().LoadImage(res, "interface/rounding_mask_top_right");
-  rounding_style_mask[0][1] = GetResourceManager().LoadImage(res, "interface/rounding_mask_left");
-  rounding_style_mask[2][1] = GetResourceManager().LoadImage(res, "interface/rounding_mask_right");
+  for (int j=0; j<3; j++) {
+    for (int i=0; i<3; i++) {
+      rounding_style[j][i].SetAlpha(0, 0);
+    }
+  }
 
   // energy bar
   energy_bar = new EnergyBar(0, 0, 120, 15,
@@ -150,10 +149,12 @@ Interface::~Interface()
   if (t_character_energy) delete t_character_energy;
   if (t_weapon_name) delete t_weapon_name;
   if (t_weapon_stock) delete t_weapon_stock;
+
   if (minimap) delete minimap;
-  if (NULL != energy_bar) {
-    delete energy_bar;
-  }
+  if (mask) delete mask;
+  if (scratch) delete scratch;
+
+  if (energy_bar) delete energy_bar;
 }
 
 void Interface::Reset()
@@ -357,10 +358,24 @@ void Interface::DrawMapPreview()
 
     m_last_minimap_redraw = Time::GetInstance()->Read();
 
-    if (minimap)
-      delete minimap;
+    // Check whether the whole minimap must be updated
+    if (m_last_preview_size != GetWorld().ground.GetPreviewSize()) {
+      if (mask) {
+        delete mask;
+        mask = NULL;
+      }
+      if (minimap) {
+        delete minimap;
+        minimap = NULL;
+      }
+      if (scratch) {
+        delete scratch;
+        scratch = NULL;
+      }
+    }
 
-    minimap = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+    if (!minimap)
+      minimap = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
     Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
 
     minimap->Blit(*GetWorld().ground.GetPreview(), mergePos);
@@ -382,7 +397,7 @@ void Interface::DrawMapPreview()
       // Draw box with color according to water type
       minimap->Blit(water_surf, Point2i(0, h));
     }
-    GenerateStyledBox(*minimap);
+    GenerateStyledBox();
   }
 
   Rectanglei clip = rect_preview;
@@ -428,84 +443,81 @@ void Interface::DrawMapPreview()
   GetWorld().ToRedrawOnScreen(rect_preview);
 }
 
-void Interface::GenerateStyledBox(Surface & source)
+void Interface::GenerateStyledBox()
 {
-  Surface save_surf(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
-  save_surf.MergeSurface(source, Point2i(0,0));
+  if (!mask) {
+    m_last_preview_size = GetWorld().ground.GetPreviewSize();
+    mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
 
-  source = Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+    Rectanglei temp_rect;
+    temp_rect.SetPosition(Point2i(0,0));
+    temp_rect.SetSize(minimap->GetSize());
 
-  Rectanglei temp_rect;
-  temp_rect.SetPosition(Point2i(0,0));
-  temp_rect.SetSize(source.GetSize());
+    Point2i temp_position;
 
-  Point2i temp_position;
-
-  temp_position = temp_rect.GetPosition();
-  source.MergeSurface(rounding_style[0][0], temp_position);
-
-  temp_position = temp_rect.GetPosition();
-  temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
-  source.MergeSurface(rounding_style[2][0],temp_position);
-
-  temp_position = temp_rect.GetPosition();
-  temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
-  source.MergeSurface(rounding_style[0][2],temp_position);
-
-  temp_position = temp_rect.GetPosition();
-  temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
-  temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
-  source.MergeSurface(rounding_style[2][2],temp_position);
-
-  for (int i = rounding_style[0][0].GetSize().x;
-      i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
-      ++i) {
     temp_position = temp_rect.GetPosition();
-    temp_position.x += i;
-    source.MergeSurface(rounding_style[1][0],temp_position);
+    mask->Blit(rounding_style[0][0], temp_position);
 
-    temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
-    source.MergeSurface(rounding_style[1][2],temp_position);
-  }
-
-  for (int i = rounding_style[0][0].GetSize().y;
-      i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
-      ++i) {
     temp_position = temp_rect.GetPosition();
-    temp_position.y += i;
-    source.MergeSurface(rounding_style[0][1],temp_position);
+    temp_position.x += temp_rect.GetSize().x - rounding_style[2][0].GetSize().x;
+    mask->Blit(rounding_style[2][0],temp_position);
 
-    temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
-    source.MergeSurface(rounding_style[2][1],temp_position);
-  }
+    temp_position = temp_rect.GetPosition();
+    temp_position.y += temp_rect.GetSize().y - rounding_style[0][2].GetSize().y;
+    mask->Blit(rounding_style[0][2],temp_position);
 
-  for (int i = rounding_style[0][0].GetSize().x;
-      i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
-      ++i) {
+    temp_position = temp_rect.GetPosition();
+    temp_position.x += temp_rect.GetSize().x - rounding_style[2][2].GetSize().x;
+    temp_position.y += temp_rect.GetSize().y - rounding_style[2][2].GetSize().y;
+    mask->Blit(rounding_style[2][2],temp_position);
 
-    for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
-      temp_position = temp_rect.GetPosition() + Point2i(i,j);
-      source.MergeSurface(rounding_style[1][1],temp_position);
+    for (int i = rounding_style[0][0].GetSize().x;
+        i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
+        ++i) {
+      temp_position = temp_rect.GetPosition();
+      temp_position.x += i;
+      mask->Blit(rounding_style[1][0],temp_position);
+
+      temp_position.y += temp_rect.GetSize().y - rounding_style[1][2].GetSize().y;
+      mask->Blit(rounding_style[1][2],temp_position);
     }
+
+    for (int i = rounding_style[0][0].GetSize().y;
+        i< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);
+        ++i) {
+      temp_position = temp_rect.GetPosition();
+      temp_position.y += i;
+      mask->Blit(rounding_style[0][1],temp_position);
+
+      temp_position.x += temp_rect.GetSize().x - rounding_style[2][1].GetSize().x;
+      mask->Blit(rounding_style[2][1],temp_position);
+    }
+
+    for (int i = rounding_style[0][0].GetSize().x;
+        i < (temp_rect.GetSize().x - rounding_style[2][0].GetSize().x);
+        ++i) {
+
+      for (int j = rounding_style[0][0].GetSize().y; j< (temp_rect.GetSize().y - rounding_style[0][2].GetSize().y);j++){
+        temp_position = temp_rect.GetPosition() + Point2i(i,j);
+        mask->Blit(rounding_style[1][1],temp_position);
+      }
+    }
+    mask->SetAlpha(0, 0);
+    //printf("Recreated mask\n");
   }
 
-  //Corner
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][0],Point2i(0,0));
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][0],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,0));
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][2],Point2i(0,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][2],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
+  // Recreate the scratch buffer
+  if (!scratch) {
+    scratch = new Surface(GetWorld().ground.GetPreviewSize(), SDL_SWSURFACE, true);
+    scratch->SetAlpha(0, 0);
+  }
 
-  //Top
-  save_surf.MergeAlphaSurface(rounding_style_mask[1][0],Point2i(rounding_style_mask[0][0].GetSize().x,0));
-  //Bottom
-  save_surf.MergeAlphaSurface(rounding_style_mask[1][2],Point2i(rounding_style_mask[0][0].GetSize().x,temp_rect.GetSize().y - rounding_style_mask[0][2].GetSize().y));
-  //Left
-  save_surf.MergeAlphaSurface(rounding_style_mask[0][1],Point2i(0,rounding_style_mask[0][0].GetSize().y));
-  //Right
-  save_surf.MergeAlphaSurface(rounding_style_mask[2][1],Point2i(temp_rect.GetSize().x - rounding_style_mask[2][0].GetSize().x,rounding_style_mask[0][0].GetSize().y));
+  // Compose
+  scratch->Blit(*mask);
+  scratch->Blit(*minimap);
 
-
-   source.MergeSurface(save_surf, Point2i(0,0));
+  // Save result
+  minimap->Blit(*scratch);
 }
 
 void Interface::Draw()
