@@ -44,9 +44,6 @@ public:
   void Reset();
   void Free() { FreeMem(); }
 
-  // Is point (x,y) in vacuum ?
-  bool IsEmpty(const Point2i &pos) const;
-
   // Is the playground "open" ?
   bool IsOpen() const { return open; }
 

@@ -29,12 +29,13 @@
 class Surface;
 class Sprite;
 class TileItem;
-class TileItem_Empty;
 class TileItem_NonEmpty;
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 
-class Tile : public Rectanglei{
+class Tile : public Rectanglei
+{
+  uint8_t m_alpha_threshold;
 public:
   Tile ();
   ~Tile ();
@@ -51,12 +52,13 @@ public:
 
   // Load an image
   bool LoadImage(const std::string& filename,
-                 uint alpha_threshold,
+                 uint8_t alpha_threshold,
                  const Point2i & upper_left_offset,
                  const Point2i & lower_right_offset);
 
-  // Get alpha value of a pixel
-  uint8_t GetAlpha(const Point2i &pos) const;
+
+  // Is point (x,y) in vacuum ?
+  bool IsEmpty(const Point2i &pos) const;
 
   // Draw it (on the entire visible part)
   void DrawTile();
@@ -88,9 +90,8 @@ public:
 
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
-  TileItem_NonEmpty* GetNonEmpty(uint x, uint y);
-  TileItem_NonEmpty* CreateNonEmpty(uint8_t *ptr, int stride,
-                                    uint alpha_threshold);
+  TileItem_NonEmpty* GetNonEmpty(uint x, uint y, uint8_t bpp);
+  TileItem_NonEmpty* CreateNonEmpty(uint8_t *ptr, int stride);
 
   void FreeMem();
   Point2i Clamp(const Point2i &v) const { return v.clamp(Point2i(0, 0), nbCells - 1); };

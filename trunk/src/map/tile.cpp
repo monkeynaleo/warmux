@@ -155,7 +155,7 @@ void Tile::Dig(const Point2i &center, const uint radius)
   m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
-TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
+TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y, uint8_t bpp)
 {
   TileItem          *ti  = item[y*nbCells.x + x];
   TileItem_NonEmpty *tin = NULL;
@@ -163,7 +163,7 @@ TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
   if (ti->IsTotallyEmpty()) {
     // Delete the TileItem_Empty object
     delete item[y*nbCells.x + x];
-    tin = TileItem_AlphaSoftware::NewEmpty();
+    tin = TileItem_BaseColorKey::NewEmpty(bpp, m_alpha_threshold);
     item[y*nbCells.x +x] = tin;
   } else {
     tin = static_cast<TileItem_NonEmpty*>(ti);
@@ -172,23 +172,23 @@ TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
   return tin;
 }
 
-TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride,
-                                        uint alpha_threshold)
+TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 {
   Uint32 *pix = (Uint32 *)ptr;
 
   for (int y=0; y<CELL_SIZE.y; y++) {
     for (int x=0; x<CELL_SIZE.x; x++)
       if (pix[x])
-        return new TileItem_AlphaSoftware(ptr, stride);
+        return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
     pix += stride>>2;
   }
 
-  return new TileItem_ColorKey24(ptr, stride, alpha_threshold);
+  return new TileItem_ColorKey24(ptr, stride, m_alpha_threshold);
 }
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 {
+  uint8_t    bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   Rectanglei rec       = Rectanglei(pos, spr->GetSizeMax());
   Point2i    firstCell = Clamp(pos/CELL_SIZE);
   Point2i    lastCell  = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
@@ -227,10 +227,10 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
         dst.SetPositionY(0);
       dst.SetSize(src.GetSize());
 
-      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
+      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
       tin->GetSurface().Blit(s, dst, src.GetPosition());
-      tin->ResetEmptyCheck();
       tin->GetSurface().Lock();
+      tin->CheckEmpty();
       tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
@@ -245,6 +245,7 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf)
 {
+  uint8_t  bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   Point2i  firstCell = Clamp(position/CELL_SIZE);
   Point2i  lastCell  = Clamp((position + surf.GetSize())/CELL_SIZE);
 
@@ -260,10 +261,11 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
 
       Point2i offset = position - (c<<CELL_BITS);
-      TileItem_NonEmpty *tin    = GetNonEmpty(c.x, c.y);
+      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
 
       tin->MergeSprite(offset, surf);
       tin->GetSurface().Lock();
+      tin->CheckEmpty();
       tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
@@ -362,7 +364,7 @@ static uint32_t read_png_rows(png_structp png_ptr,
 }
 
 bool Tile::LoadImage(const std::string& filename,
-                     uint alpha_threshold,
+                     uint8_t alpha_threshold,
                      const Point2i & upper_left_offset,
                      const Point2i & lower_right_offset)
 {
@@ -371,7 +373,7 @@ bool Tile::LoadImage(const std::string& filename,
   png_infop    info_ptr = NULL;
   bool         ret      = false;
   uint8_t     *buffer   = NULL;
-  int          bpp      = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
+  uint8_t      bpp      = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   int          stride;
   int          offsetx, offsety, endoffy;
   Point2i      i, world_size;
@@ -416,6 +418,7 @@ bool Tile::LoadImage(const std::string& filename,
 
   FreeMem();
   crc = 0;
+  m_alpha_threshold = alpha_threshold;
   InitTile(Point2i(width, height), upper_left_offset, lower_right_offset);
 
   // Task 6730: biggest dimension won't be bigger than 2/5,
@@ -475,10 +478,9 @@ bool Tile::LoadImage(const std::string& filename,
 
       if (bpp==2) {
         ti = new TileItem_ColorKey16(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)),
-                                     stride, alpha_threshold);
+                                     stride, m_alpha_threshold);
       } else {
-        ti = CreateNonEmpty(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)),
-                            stride, alpha_threshold);
+        ti = CreateNonEmpty(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)), stride);
       }
 
       if (ti->NeedDelete()) {
@@ -487,6 +489,7 @@ bool Tile::LoadImage(const std::string& filename,
         // Don't instanciate a new empty tile but use the already existing one
         item.push_back(&EmptyTile);
       } else {
+        //printf("Cell (%i,%i) not deleted\n", i.x, i.y);
         ti->GetSurface().Lock();
         ti->ScalePreview(dst, i.x-startCell.x, pitch, m_shift);
         ti->GetSurface().Unlock();
@@ -520,9 +523,9 @@ end:
   return ret;
 }
 
-uint8_t Tile::GetAlpha(const Point2i & pos) const
+bool Tile::IsEmpty(const Point2i & pos) const
 {
-  return item[(pos.y>>CELL_BITS) * nbCells.x + (pos.x>>CELL_BITS)]->GetAlpha(pos & CELL_MASK);
+  return item[(pos.y>>CELL_BITS) * nbCells.x + (pos.x>>CELL_BITS)]->IsEmpty(pos & CELL_MASK);
 }
 
 void Tile::DrawTile()
@@ -574,7 +577,7 @@ void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
 
 Surface Tile::GetPart(const Rectanglei& rec)
 {
-  Surface part(rec.GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  Surface part(rec.GetSize(), SDL_HWSURFACE|SDL_SRCALPHA, true);
   part.SetAlpha(0,0);
   part.Fill(0x00000000);
   part.SetAlpha(SDL_SRCALPHA,0);
@@ -624,7 +627,7 @@ void Tile::CheckEmptyTiles()
       continue;
     TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
 
-    if (t->NeedCheckEmpty() && t->NeedDelete()) {
+    if (t->NeedDelete()) {
       // no need to display this tile as it can be deleted!
       delete item[i];
       // Don't instanciate a new empty tile but use the already existing one

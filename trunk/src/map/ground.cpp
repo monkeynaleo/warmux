@@ -84,12 +84,6 @@ void Ground::Reset(){
   lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
-// Read the alpha channel of the pixel
-bool Ground::IsEmpty(const Point2i & pos) const {
-  ASSERT( !GetWorld().IsOutsideWorldXY(pos.x, pos.y) );
-  return GetAlpha(pos) < alpha_threshold; // IsTransparent
-}
-
 /*
  * Returns the angle between the tangent at point (x,y) of the ground and
  * horizontal
