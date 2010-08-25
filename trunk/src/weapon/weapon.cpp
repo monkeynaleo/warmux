@@ -210,6 +210,9 @@ bool Weapon::CanChangeWeapon() const
       !m_can_change_weapon)
     return false;
 
+  if (ActiveTeam().GetWeapon().IsOnCooldownFromShot())
+    return false;
+
   return true;
 }
 
