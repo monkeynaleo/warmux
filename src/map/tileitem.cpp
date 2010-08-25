@@ -204,11 +204,11 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
   const Uint16 *idata  = (Uint16*)m_surface.GetPixels();
   uint          ipitch = m_surface.GetPitch();
 
-  out  += 4*x*(CELL_SIZE.x>>shift);
+  out  += x<<(2+CELL_BITS-shift);
   ipitch >>= 1;
 
-  for (int j=0; j<CELL_SIZE.y>>shift; j++) {
-    for (int i=0; i<CELL_SIZE.x>>shift; i++) {
+  for (int j=0; j<1<<(CELL_BITS-shift); j++) {
+    for (int i=0; i<1<<(CELL_BITS-shift); i++) {
       const Uint16* ptr = idata + (i<<shift);
       uint count = 0, p0 = 0, p1 = 0, p2 = 0;
 
@@ -347,7 +347,7 @@ void TileItem_ColorKey24::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
   const uint8_t *idata  = m_surface.GetPixels();
   uint           ipitch = m_surface.GetPitch();
 
-  out  += 3*x*(CELL_SIZE.x>>shift);
+  out  += 3*(x<<(CELL_BITS-shift));
 
   for (int j=0; j<CELL_SIZE.y>>shift; j++) {
     for (int i=0; i<CELL_SIZE.x>>shift; i++) {
@@ -439,9 +439,9 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, ui
   uint         ipitch = m_surface.GetPitch();
   uint         p0, p1, p2, p3;
 
-  odata += 4*x*(CELL_SIZE.x>>shift);
-  for (int j=0; j<CELL_SIZE.y>>shift; j++) {
-    for (int i=0; i<CELL_SIZE.x>>shift; i++) {
+  odata += x<<(2+CELL_BITS-shift);
+  for (int j=0; j<1<<(CELL_BITS-shift); j++) {
+    for (int i=0; i<1<<(CELL_BITS-shift); i++) {
       const Uint8* ptr = idata + (i<<(2+shift));
 
       p0 = 0; p1 = 0; p2 = 0; p3 = 0;
@@ -523,7 +523,7 @@ bool TileItem_AlphaSoftware::NeedDelete()
   assert(need_check_empty);
   need_check_empty = false;
 
-  for (int i=0; i<CELL_SIZE.x*CELL_SIZE.y*4; i++)
+  for (int i=0; i<1<<(2*CELL_BITS+2); i++)
     if (ptr[i])
       return false;
 

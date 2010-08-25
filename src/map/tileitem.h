@@ -23,7 +23,9 @@
 #include <WORMUX_point.h>
 #include "graphic/surface.h"
 
-const Point2i CELL_SIZE(64, 64);
+#define  CELL_BITS   6
+#define  CELL_MASK   ((1<<CELL_BITS)-1)
+static const Point2i CELL_SIZE(1<<CELL_BITS, 1<<CELL_BITS);
 
 class TileItem
 {
