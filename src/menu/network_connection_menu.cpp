@@ -591,6 +591,7 @@ bool NetworkConnectionMenu::signal_ok()
 
 bool NetworkConnectionMenu::signal_cancel()
 {
+  IndexServer::GetInstance()->Disconnect();
   Network::Disconnect();
   return true;
 }
