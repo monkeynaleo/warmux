@@ -236,6 +236,9 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
 // Weapon menu display (init of the animation)
 void WeaponsMenu::Show()
 {
+  if (!ActiveTeam().GetWeapon().CanChangeWeapon())
+    return;
+
   ShowGameInterface();
   if (!show) {
     if (motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
