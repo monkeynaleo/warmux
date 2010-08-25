@@ -377,9 +377,15 @@ void Config::LoadDefaultValue()
       resolution_available.push_back(tmp);
   }
 
+  //== Default keyboard key
+  const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
+  if (node) {
+    Keyboard::GetInstance()->SetConfig(node);
+  }
+
 #ifdef ENABLE_NLS
   //=== Default fonts value ===
-  const xmlNode *node = GetResourceManager().GetElement(res, "section", "default_language_fonts");
+  node = GetResourceManager().GetElement(res, "section", "default_language_fonts");
   if (node) {
     xmlNodeArray list = XmlReader::GetNamedChildren(node, "language");
     for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it) {
@@ -405,12 +411,6 @@ void Config::LoadDefaultValue()
       resolution_available.push_back(tmp);
   }
 #endif
-
-  //== Default keyboard key
-  node = GetResourceManager().GetElement(res, "section", "default_keyboard_layout");
-  if (node) {
-    Keyboard::GetInstance()->SetConfig(node);
-  }
 
   GetResourceManager().UnLoadXMLProfile(res);
 }
