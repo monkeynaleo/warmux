@@ -23,6 +23,7 @@
 #include <WORMUX_point.h>
 #include "graphic/surface.h"
 
+// Must be at least 3
 #define  CELL_BITS   6
 #define  CELL_MASK   ((1<<CELL_BITS)-1)
 static const Point2i CELL_SIZE(1<<CELL_BITS, 1<<CELL_BITS);
@@ -30,12 +31,12 @@ static const Point2i CELL_SIZE(1<<CELL_BITS, 1<<CELL_BITS);
 class TileItem
 {
 public:
-  TileItem () {};
-  virtual ~TileItem () {};
+  TileItem() {};
+  virtual ~TileItem() {};
 
   bool IsEmpty ();
   virtual bool IsTotallyEmpty() const = 0;
-  virtual unsigned char GetAlpha(const Point2i &pos) = 0;
+  virtual bool IsEmpty(const Point2i &pos) const = 0;
   virtual void ScalePreview(uint8_t* /*odata*/, int /*x*/,
                             uint /*opitch*/, uint /*shift*/) { };
   virtual void Draw(const Point2i &pos) = 0;
@@ -44,15 +45,14 @@ public:
 class TileItem_Empty : public TileItem
 {
 public:
-  TileItem_Empty () { empty = NULL; };
-  ~TileItem_Empty () { if (empty) delete empty; };
+  TileItem_Empty() { };
+  ~TileItem_Empty() { };
 
-  Surface *empty;
-  unsigned char GetAlpha (const Point2i &/*pos*/){return 0;};
+  bool IsEmpty(const Point2i &/*pos*/) const { return true; };
   void Dig(const Point2i &/*position*/, const Surface& /*dig*/){};
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i&) { };
-  bool IsTotallyEmpty() const {return true;};
+  bool IsTotallyEmpty() const { return true; };
 };
 
 class TileItem_NonEmpty : public TileItem
@@ -63,15 +63,19 @@ protected:
   friend class TileItem_ColorKey24;
   Surface        m_surface;
   uint           m_offset;
+  uint8_t       *m_empty_bitfield;
+  bool           m_is_empty;
+  bool           m_need_check_empty;
+  uint8_t        m_alpha_threshold;
 
-  TileItem_NonEmpty() { };
+  TileItem_NonEmpty(uint8_t alpha_threshold);
 
 public:
-  bool           need_check_empty;
+  ~TileItem_NonEmpty() { delete[] m_empty_bitfield; }
 
-  virtual bool NeedDelete() = 0;
-  virtual void Empty(int start_x, int end_x, unsigned char* buf) = 0;
-  virtual void Darken(int start_x, int end_x, unsigned char* buf) = 0;
+  virtual bool CheckEmpty() = 0;
+  virtual void Empty(int start_x, int end_x, uint8_t* buf) = 0;
+  virtual void Darken(int start_x, int end_x, uint8_t* buf) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
   void MergeSprite(const Point2i &position, Surface& spr)
@@ -82,11 +86,25 @@ public:
     //m_surface.MergeSurface(spr, position);
   }
 
+  bool NeedDelete()
+  {
+    if (m_need_check_empty)
+      return CheckEmpty();
+
+    return m_is_empty;
+  }
+
+  bool IsEmpty(const Point2i &pos) const
+  {
+    ASSERT(!m_need_check_empty);
+    ASSERT(pos.x>-1);
+    return m_empty_bitfield[(pos.y<<(CELL_BITS-3)) + (pos.x>>3)] & (1 << (pos.x&7));
+  }
+
+
   void Dig(const Point2i &center, const uint radius);
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };
-  void ResetEmptyCheck() { need_check_empty = false; }
-  bool NeedCheckEmpty() const { return need_check_empty; }
   void Draw(const Point2i &pos);
 };
 
@@ -96,49 +114,40 @@ protected:
   friend class TileItem_ColorKey16;
   friend class TileItem_ColorKey24;
   Uint32  color_key;
-  TileItem_BaseColorKey(uint bpp);
-  TileItem_BaseColorKey() { };
+  TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold);
+  TileItem_BaseColorKey(uint8_t alpha_threshold)
+    : TileItem_NonEmpty(alpha_threshold) { };
 
 public:
   static const Uint32 ColorKey = 0xFF00FF;
 
-  unsigned char GetAlpha(const Point2i &pos)
-  {
-    int a;
-    m_surface.Lock();
-    a = (m_surface.GetPixel(pos.x, pos.y) == color_key) ? 0 : 255;
-    m_surface.Unlock();
-    return a;
-  }
+  static TileItem_NonEmpty* NewEmpty(uint8_t bpp, uint8_t alpha_threshold);
 
   void Dig(const Point2i &position, const Surface& dig);
+  bool CheckEmpty();
 };
 
 class TileItem_ColorKey16: public TileItem_BaseColorKey
 {
 public:
-  TileItem_ColorKey16() : TileItem_BaseColorKey(16) { };
-  TileItem_ColorKey16(void *pixels, int stride, uint threshold);
+  TileItem_ColorKey16(uint8_t threshold)
+    : TileItem_BaseColorKey(16, threshold) { };
+  TileItem_ColorKey16(void *pixels, int stride, uint8_t threshold);
 
-  // Fill as empty
-  static TileItem_NonEmpty* NewEmpty();
-  bool NeedDelete();
-  void Empty(int start_x, int end_x, unsigned char* buf);
-  void Darken(int start_x, int end_x, unsigned char* buf);
+  void Empty(int start_x, int end_x, uint8_t* buf);
+  void Darken(int start_x, int end_x, uint8_t* buf);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
 };
 
 class TileItem_ColorKey24: public TileItem_BaseColorKey
 {
 public:
-  TileItem_ColorKey24() : TileItem_BaseColorKey(24) { };
-  TileItem_ColorKey24(void *pixels, int stride, uint threshold);
+  TileItem_ColorKey24(uint8_t threshold)
+    : TileItem_BaseColorKey(24, threshold) { };
+  TileItem_ColorKey24(void *pixels, int stride, uint8_t threshold);
 
-  // Fill as empty
-  static TileItem_NonEmpty* NewEmpty();
-  bool NeedDelete();
-  void Empty(int start_x, int end_x, unsigned char* buf);
-  void Darken(int start_x, int end_x, unsigned char* buf);
+  void Empty(int start_x, int end_x, uint8_t* buf);
+  void Darken(int start_x, int end_x, uint8_t* buf);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
 };
 
@@ -147,25 +156,17 @@ class TileItem_AlphaSoftware : public TileItem_NonEmpty
   void SetDefaults(void);
 
 public:
-  TileItem_AlphaSoftware();
-  TileItem_AlphaSoftware(void *pixels, int stride);
+  TileItem_AlphaSoftware(uint8_t threshold);
+  TileItem_AlphaSoftware(void *pixels, int stride, uint8_t threshold);
   // Fill as empty
-  static TileItem_NonEmpty* NewEmpty(void);
 
-  unsigned char GetAlpha(const Point2i &pos)
-  {
-    int a;
-    m_surface.Lock();
-    a = m_surface.GetPixels()[pos.y*m_surface.GetPitch() + pos.x*4 + m_offset];
-    m_surface.Unlock();
-    return a;
-  }
-
-  void Empty(int start_x, int end_x, unsigned char* buf);
-  void Darken(int start_x, int end_x, unsigned char* buf);
+  bool CheckEmpty();
+  void Empty(int start_x, int end_x, uint8_t* buf);
+  void Darken(int start_x, int end_x, uint8_t* buf);
   void Dig(const Point2i &position, const Surface& dig);
   void ScalePreview(uint8_t *odata, int x, uint opitch, uint shift);
-  bool NeedDelete();
 };
+
+TileItem_NonEmpty* NewEmpty(uint8_t bpp, uint8_t alpha_threshold);
 
 #endif
