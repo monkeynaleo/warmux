@@ -53,7 +53,7 @@ class Action;
 class Physics : private ObjectConfig
 {
 private:
-  MotionType_t m_motion_type ;
+  MotionType_t m_motion_type;
   EulerVector m_pos_x;          // x0 = pos, x1 = speed, x2 = acc on the X axys
   EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
   Point2d m_extern_force;  // External strength applyed to the object
@@ -72,7 +72,7 @@ protected:
   Double m_balancing_damping;     // 0 means perpetual balancing.
 
   // Define if the rope is elastic or not.
-  bool m_elasticity_off ;
+  bool m_elasticity_off;
 
   // Other physics constants stored there :
   ObjectConfig m_cfg;
@@ -86,25 +86,25 @@ public:
 
   Double GetPhysX() const { return m_pos_x.x0; };
   Double GetPhysY() const { return m_pos_y.x0; };
-  Point2d GetPos() const { return Point2d( m_pos_x.x0, m_pos_y.x0); };
+  Point2d GetPos() const { return Point2d(m_pos_x.x0, m_pos_y.x0); };
 
   // Set size
-  void SetPhysSize (Double width, Double height) { m_phys_width = width; m_phys_height = height ; };
+  void SetPhysSize(Double width, Double height) { m_phys_width = width; m_phys_height = height; };
 
-  void SetMass (Double mass) { m_mass = mass ; };
+  void SetMass(Double mass) { m_mass = mass; };
   Double GetMass() const { return m_mass; }
 
-  void SetWindFactor (Double wind_factor) { m_wind_factor = wind_factor; };
-  Double GetWindFactor () const { return m_wind_factor; }
+  void SetWindFactor(Double wind_factor) { m_wind_factor = wind_factor; };
+  Double GetWindFactor() const { return m_wind_factor; }
 
-  void SetAirResistFactor (Double factor) { m_air_resist_factor = factor; };
-  Double GetAirResistFactor () const{ return m_air_resist_factor; }
+  void SetAirResistFactor(Double factor) { m_air_resist_factor = factor; };
+  Double GetAirResistFactor() const{ return m_air_resist_factor; }
 
-  void SetGravityFactor (Double factor) { m_gravity_factor = factor; };
-  Double GetGravityFactor () const { return m_gravity_factor; }
+  void SetGravityFactor(Double factor) { m_gravity_factor = factor; };
+  Double GetGravityFactor() const { return m_gravity_factor; }
 
-  void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
-  bool GetRebounding () const { return m_rebounding; }
+  void SetRebounding(bool rebounding) { m_rebounding = rebounding; }
+  bool GetRebounding() const { return m_rebounding; }
 
   void SetAlignParticleState(bool state) { m_align_particle_state = state; }
   bool GetAlignParticleState(void) const { return m_align_particle_state; }
@@ -113,30 +113,30 @@ public:
   void ResetConstants() { *((ObjectConfig*)this) = m_cfg; };
 
   // Set initial speed.
-  void SetSpeedXY (Point2d vector);
-  void SetSpeed (Double norm, Double angle) { SetSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void SetSpeedXY(Point2d vector);
+  void SetSpeed(Double norm, Double angle) { SetSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
 
   // Add a initial speed to the current speed.
-  void AddSpeedXY (Point2d vector);
-  void AddSpeed (Double norm, Double angle) { AddSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void AddSpeedXY(Point2d vector);
+  void AddSpeed(Double norm, Double angle) { AddSpeedXY(Point2d::FromPolarCoordinates(norm, angle)); };
 
   // Get current object speed
-  void GetSpeed (Double &norm, Double &angle) const;
-  Point2d GetSpeedXY () const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_pos_x.x1, m_pos_y.x1); };
+  void GetSpeed(Double &norm, Double &angle) const;
+  Point2d GetSpeedXY() const { return (!IsMoving()) ? Point2d(0.0, 0.0) : Point2d(m_pos_x.x1, m_pos_y.x1); };
   Point2d GetSpeed() const { return GetSpeedXY(); };
   Double GetAngularSpeed() const { return m_rope_angle.x1; };
   Double GetSpeedAngle() const { return GetSpeedXY().ComputeAngle(); };
 
   // Add new strength
-  void SetExternForceXY (const Point2d& vector);
-  void SetExternForce (Double norm, Double angle) { SetExternForceXY(Point2d::FromPolarCoordinates(norm, angle)); };
+  void SetExternForceXY(const Point2d& vector);
+  void SetExternForce(Double norm, Double angle) { SetExternForceXY(Point2d::FromPolarCoordinates(norm, angle)); };
   Point2d GetExternForce() const { return m_extern_force; };
 
   // Add / Remove a fixation point.
   void SetPhysFixationPointXY(Double g_x, Double g_y,
-                              Double dx, Double dy) ;
-  void UnsetPhysFixationPoint() ;
-  void ChangePhysRopeSize(Double delta) ;
+                              Double dx, Double dy);
+  void UnsetPhysFixationPoint();
+  void ChangePhysRopeSize(Double delta);
 
   Double GetRopeAngle() const { return m_rope_angle.x0; };
   void SetRopeAngle(Double angle) { m_rope_angle.x0 = angle; };
@@ -171,7 +171,7 @@ protected:
   Point2d ComputeNextXY(Double delta_t);
 
   virtual void SignalDeath() { };
-  virtual void SignalGhostState (bool) { };
+  virtual void SignalGhostState(bool) { };
   virtual void SignalDrowning() { };
   virtual void SignalGoingOutOfWater() { };
   virtual void SignalRebound() { };
@@ -180,9 +180,9 @@ protected:
   void Rebound(Point2d contactPos, Double contact_angle);
 private:
 
-  void ComputeFallNextXY (Double delta_t);
+  void ComputeFallNextXY(Double delta_t);
 
-  void ComputePendulumNextXY (Double delta_t);
+  void ComputePendulumNextXY(Double delta_t);
 
   void UpdateTimeOfLastMove();
 };
