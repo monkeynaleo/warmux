@@ -269,6 +269,10 @@ template<class T> class Vector2
       y >>= val;
     }
 
+    inline Vector2<T> operator&(const unsigned int val) const {
+      return Vector2<T>(x&val, y&val);
+    }
+
     // Special operators
 
     /**
