@@ -337,7 +337,7 @@ void Tile::CheckPreview(bool force)
 void Tile::SetPreviewSizeDelta(int delta)
 {
   // Preview too big
-  if (m_shift+delta < 3)
+  if (m_shift+delta < 2)
     return;
 
   // Preview too small
