@@ -211,7 +211,7 @@ void ParticleEngine::AddNow(const Point2i &position,
   Particle *particle = NULL;
   Double tmp_angle, tmp_norme;
 
-  for (uint i=0 ; i < nb_particles ; i++) {
+  for (uint i=0; i<nb_particles; i++) {
     switch (type) {
     case particle_SMOKE : particle = new Smoke();
       break;
@@ -254,9 +254,9 @@ void ParticleEngine::AddNow(const Point2i &position,
       break;
     }
 
-    if (particle != NULL) {
+    if (particle) {
 
-      if( norme == -1 ) {
+      if (norme == -1) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector length");
         tmp_norme = Double(RandomSync().GetUint(0, 5000))/100;
       } else {
@@ -265,7 +265,7 @@ void ParticleEngine::AddNow(const Point2i &position,
 
       if( angle == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
-        tmp_angle = - Double(RandomSync().GetUint(0, 3000))/1000;
+        tmp_angle = -Double(RandomSync().GetUint(0, 3000))/1000;
       } else {
         tmp_angle = angle;
       }
@@ -295,28 +295,26 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
   const uint little_partic_nbr = 1;
-  const Double little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
-  const Double little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
+  static const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
+  static const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
 
   Particle *particle = NULL;
-  Double norme;
-  uint size;
 
-  for(uint i=0; i < little_partic_nbr ; i++)
-  {
+  for (uint i=0; i<little_partic_nbr; i++) {
 //      angle = (Double) i * PI * 2.0 / (Double) little_partic_nbr;
-      size = radius *2;
-      norme = 2.5 * radius / 3.0;
+    uint size = radius *2;
+    float norme = 2.5f * radius / 3.0f;
 
-      particle = new ExplosionSmoke(size);
-      particle->SetOnTop(true);
+    particle = new ExplosionSmoke(size);
+    particle->SetOnTop(true);
 
-      Point2i pos = position; //Set position to center of explosion
-      pos = pos - size / 2;       //Set the center of the smoke to the center..
-      pos = pos + Point2i(int(norme * little_cos[i]),int(norme * little_sin[i])); //Put inside the circle of the explosion
+    Point2i pos = position; //Set position to center of explosion
+    pos = pos - size / 2;       //Set the center of the smoke to the center..
+    //Put inside the circle of the explosion
+    pos = pos + Point2i(norme * little_cos[i], norme * little_sin[i]);
 
-      particle->SetXY(pos);
-      lst_particles.push_back(particle);
+    particle->SetXY(pos);
+    lst_particles.push_back(particle);
   }
 }
 
@@ -329,27 +327,24 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const uint big_partic_nbr = 1;
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
-  const Double big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
-  const Double big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
+  static const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
+  static const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
   Particle *particle = NULL;
-  Double norme;
-  uint size;
-  for(uint i=0; i < big_partic_nbr ; i++)
-  {
+  for (uint i=0; i<big_partic_nbr; i++) {
 //      angle = (Double) i * PI * 4.0 / (Double)big_partic_nbr;
-      size = radius;
-      norme = radius / 3.0;
+    uint size = radius;
+    float norme = radius / 3.0f;
 
-      Point2i pos = position; //Set position to center of explosion
-      pos = pos - size / 2;       //Set the center of the smoke to the center..
-      pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
+    Point2i pos = position; //Set position to center of explosion
+    pos = pos - size / 2;       //Set the center of the smoke to the center..
+    pos = pos + Point2i(norme * big_cos[i], norme * big_sin[i]); //Put inside the circle of the explosion
 
-      particle = new ExplosionSmoke(size);
-      particle->SetXY(pos);
-      particle->SetOnTop(true);
+    particle = new ExplosionSmoke(size);
+    particle->SetXY(pos);
+    particle->SetOnTop(true);
 
-      lst_particles.push_back(particle);
+    lst_particles.push_back(particle);
   }
 }
 
@@ -358,13 +353,13 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
   if (!sprites_loaded)
     return;
 
-  if(style == NoESmoke) return;
+  if (style == NoESmoke)
+    return;
 
-
-  if(style == BigESmoke){
-    AddBigESmoke (position, radius);
+  if (style == BigESmoke) {
+    AddBigESmoke(position, radius);
   }else{
-    AddLittleESmoke (position, radius);
+    AddLittleESmoke(position, radius);
   }
 }
 
@@ -372,12 +367,9 @@ void ParticleEngine::Draw(bool upper)
 {
   std::list<Particle *>::iterator Particle_it;
   // draw the particles
-  for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it){
-    if ( (*Particle_it)->IsOnTop() == upper) {
+  for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it)
+    if ((*Particle_it)->IsOnTop() == upper)
       (*Particle_it)->Draw();
-    }
-  }
-
 }
 
 void ParticleEngine::Refresh()
@@ -388,9 +380,9 @@ void ParticleEngine::Refresh()
     if (! (*it)->StillUseful()) {
       delete *it;
       it = lst_particles.erase(it);
-    }
-    else
+    } else {
       it++;
+    }
   }
 
   // update the particles
