@@ -38,10 +38,10 @@
 #include "include/action.h"
 
 // Physical constants
-const Double STOP_REBOUND_LIMIT = 0.5;
-const Double AIR_RESISTANCE_FACTOR = 40.0;
-const Double PHYS_DELTA_T = 0.02;         // Physical simulation time step
-const Double PENDULUM_REBOUND_FACTOR = 0.8;
+static const Double STOP_REBOUND_LIMIT = 0.5;
+static const Double AIR_RESISTANCE_FACTOR = 40.0;
+static const Double PHYS_DELTA_T = 0.02;         // Physical simulation time step
+static const Double PENDULUM_REBOUND_FACTOR = 0.8;
 
 Physics::Physics ():
   m_motion_type(NoMotion),
@@ -185,37 +185,34 @@ void Physics::SetPhysFixationPointXY(Double g_x, Double g_y, Double dx,
   old_length = m_rope_length.x0;
   m_rope_length.x0 = Point2d(fix_point_x,fix_point_y).Distance(Point2d(g_x,g_y));
 
-  if (m_motion_type == Pendulum)
-    {
-      // We were already fixed. By changing the fixation point, we have
-      // to recompute the angular speed depending of the new rope length.
-      // And don't forget to recompute the angle, too!
-      V.x = fix_point_x - g_x;
-      V.y = fix_point_y - g_y;
-      m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
+  if (m_motion_type == Pendulum) {
+    // We were already fixed. By changing the fixation point, we have
+    // to recompute the angular speed depending of the new rope length.
+    // And don't forget to recompute the angle, too!
+    V.x = fix_point_x - g_x;
+    V.y = fix_point_y - g_y;
+    m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
-      m_rope_angle.x1 = m_rope_angle.x1 * old_length / m_rope_length.x0;
-    }
-  else
-    {
-      // We switch from a regular move to a pendulum move.
-      // Compute the initial angle
-      V.x = fix_point_x - g_x;
-      V.y = fix_point_y - g_y;
-      m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
+    m_rope_angle.x1 = m_rope_angle.x1 * old_length / m_rope_length.x0;
+  } else {
+    // We switch from a regular move to a pendulum move.
+    // Compute the initial angle
+    V.x = fix_point_x - g_x;
+    V.y = fix_point_y - g_y;
+    m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
-      // Convert the linear speed to angular speed.
-      m_rope_angle.x1 = ( m_pos_x.x1 * cos(m_rope_angle.x0) +
-                          m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+    // Convert the linear speed to angular speed.
+    m_rope_angle.x1 = ( m_pos_x.x1 * cos(m_rope_angle.x0) +
+                        m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
-      // Reset the angular acceleration.
-      m_rope_angle.x2 = 0;
+    // Reset the angular acceleration.
+    m_rope_angle.x2 = 0;
 
-      bool was_moving = IsMoving();
-      m_motion_type = Pendulum;
-      if (!was_moving && IsMoving())
-        StartMoving();
-    }
+    bool was_moving = IsMoving();
+    m_motion_type = Pendulum;
+    if (!was_moving && IsMoving())
+      StartMoving();
+  }
 }
 
 void Physics::UnsetPhysFixationPoint()
@@ -345,18 +342,14 @@ void Physics::ComputePendulumNextXY(Double delta_t)
                                delta_t);
 
   Double x = m_fix_point_gnd.x - m_fix_point_dxy.x
-             + m_rope_length.x0 * sin(m_rope_angle.x0);
+           + m_rope_length.x0 * sin(m_rope_angle.x0);
   Double y = m_fix_point_gnd.y - m_fix_point_dxy.y
-             + m_rope_length.x0 * cos(m_rope_angle.x0);
+           + m_rope_length.x0 * cos(m_rope_angle.x0);
 
-  MSG_DBG_RTTI("physic.pendulum", "%s angle: %s %s %s pos: %s %s fixpoint: %s, %s",
+  MSG_DBG_RTTI("physic.pendulum", "%s angle: %.2f %.2f %.2f pos: %.2f %.2f fixpoint: %s, %s",
                typeid(*this).name(),
-               Double2str(m_rope_angle.x0, 2).c_str(),
-               Double2str(m_rope_angle.x1, 2).c_str(),
-               Double2str(m_rope_angle.x2,  2).c_str(),
-               Double2str(x, 2).c_str(), Double2str(y, 2).c_str(),
-               Double2str(m_fix_point_gnd.x, 2).c_str(),
-               Double2str(m_fix_point_gnd.y, 2).c_str());
+               m_rope_angle.x0.tofloat(), m_rope_angle.x1.tofloat(), m_rope_angle.x2.tofloat()
+               x.tofloat(), y.tofloat(), m_fix_point_gnd.x.tofloat(), m_fix_point_gnd.y.tofloat());
 
   //  printf ("Physics::ComputePendulumNextXY - Angle(%f,%f,%f)\n",
   //            m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2);
@@ -396,19 +389,17 @@ void Physics::ComputeFallNextXY(Double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor;
 
-  MSG_DBG_RTTI("physic.fall", "%s falls; mass %s, weight %s, wind %s, air %s, delta %s", typeid(*this).name(),
-               Double2str(m_mass, 5).c_str(),
-               Double2str(weight_force, 5).c_str(),
-               Double2str(wind_force, 5).c_str(),
-               Double2str(air_resistance_factor, 5).c_str(),
-               Double2str(delta_t).c_str());
+  MSG_DBG_RTTI("physic.fall",
+               "%s falls; mass %.5f, weight %.5f, wind %.5f, air %.5f, delta %.2f",
+               typeid(*this).name(), m_mass.tofloat(), weight_force.tofloat(),
+               wind_force.tofloat(), air_resistance_factor.tofloat(),
+               delta_t.tofloat());
 
-  MSG_DBG_RTTI("physic.fall", "%s before - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
-               typeid(*this).name(),
-               Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-               Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-               Double2str(delta_t).c_str(),
-               Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
+  MSG_DBG_RTTI("physic.fall",
+               "%s before - x:{%.1f, %.1f, %.1f} - y:{%.1f, %.1f, %.1f} - delta:%.1f - extern_force: %.1f, %.1f",
+               typeid(*this).name(), m_pos_x.x0.tofloat(), m_pos_x.x1.tofloat(), m_pos_x.x2.tofloat(),
+               m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(),
+               delta_t.tofloat(), m_extern_force.x.tofloat(), m_extern_force.y.tofloat());
 
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
@@ -418,12 +409,12 @@ void Physics::ComputeFallNextXY(Double delta_t)
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
                               weight_force + m_extern_force.y, delta_t);
 
-  MSG_DBG_RTTI("physic.fall", "%s after - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - delta:%s - extern_force: %s, %s",
+  MSG_DBG_RTTI("physic.fall",
+               "%s after - x:{%.1f, %.1f, %.1f - y:{%.1f, %.1f, %.1f} - delta:%.1f - extern_force: %.1f, %.1f",
                typeid(*this).name(),
-               Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-               Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-               Double2str(delta_t).c_str(),
-               Double2str(m_extern_force.x).c_str(), Double2str(m_extern_force.y).c_str());
+               typeid(*this).name(), m_pos_x.x0.tofloat(), m_pos_x.x1.tofloat(), m_pos_x.x2.tofloat(),
+               m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(),
+               delta_t.tofloat(), m_extern_force.x.tofloat(), m_extern_force.y.tofloat());
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 
    // printf ("ap : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
@@ -467,13 +458,10 @@ void Physics::RunPhysicalEngine()
 
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
-      MSG_DBG_RTTI("physic.move", "%s moves (%s, %s) -> (%s, %s) - x0:%s, x1:%s, x2:%s - y0:%s, y1:%s, y2:%s - step:%s",
-                   typeid(*this).name(),
-                   Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
-                   Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
-                   Double2str(m_pos_x.x0).c_str(), Double2str(m_pos_x.x1).c_str(), Double2str(m_pos_x.x2).c_str(),
-                   Double2str(m_pos_y.x0).c_str(), Double2str(m_pos_y.x1).c_str(), Double2str(m_pos_y.x2).c_str(),
-                   Double2str(PHYS_DELTA_T).c_str());
+      MSG_DBG_RTTI("physic.move", "%s moves (%.1f, %.1f) -> (%.1f, %.1f) - x:{%.1f, %.1f, %.1f - y:{%.1f, %.1f, %.1f} - step:%.1f",
+                   typeid(*this).name(), oldPos.x.tofloat(), oldPos.y.tofloat(), newPos.x.tofloat(), newPos.y.tofloat(),
+                   m_pos_x.x0.tofloat(), m_pos_x.x1.tofloat(), m_pos_x.x2.tofloat(),
+                   m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(), PHYS_DELTA_T.tofloat());
       NotifyMove(oldPos, newPos);
     }
     delta_t -= PHYS_DELTA_T;
