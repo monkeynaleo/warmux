@@ -93,8 +93,7 @@ public:
   // Size
   uint GetWidth() const
   {
-    Double one_half = 0.5;
-    return static_cast<int>(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
+    return uint(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
   }
   // gives height of the surface (takes rotations into acount)
   uint GetWidthMax() const
@@ -106,7 +105,7 @@ public:
   }
   uint GetHeight() const
   {
-    return static_cast<uint>(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
+    return uint(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
   }
   // gives height of the surface (takes rotations into acount)
   uint GetHeightMax() const
@@ -143,8 +142,7 @@ public:
   }
   void ScaleSize(int width, int height)
   {
-    Scale(Double(width)/Double(frame_width_pix),
-          Double(height)/Double(frame_height_pix));
+    Scale(Double(width)/frame_width_pix, Double(height)/frame_height_pix);
   }
   void ScaleSize(const Point2i& size) { ScaleSize(size.x, size.y); };
 
