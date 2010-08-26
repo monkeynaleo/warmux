@@ -50,7 +50,7 @@ Sprite::Sprite(const Surface& surface, bool _smooth) :
   Constructor();
   frame_width_pix = surface.GetWidth();
   frame_height_pix = surface.GetHeight();
-  frames.push_back( SpriteFrame(surface));
+  frames.push_back(SpriteFrame(surface));
 }
 
 Sprite::Sprite(const Sprite &other) :
@@ -73,11 +73,11 @@ Sprite::Sprite(const Sprite &other) :
   rot_hotspot = other.rot_hotspot;
   rotation_point = other.rotation_point;
 
-  for (uint f=0;f<other.frames.size();f++)
+  for (uint f=0; f<other.frames.size(); f++)
     AddFrame(other.frames[f].surface,other.frames[f].delay);
 
   if (other.cache.have_lastframe_cache)
-    cache.EnableLastFrameCache();
+    EnableLastFrameCache();
   if (other.cache.have_rotation_cache)
     EnableRotationCache(other.cache.rotation_cache_size);
   if (other.cache.have_flipping_cache)
@@ -269,51 +269,70 @@ void Sprite::DrawXY(const Point2i &pos)
   Blit(GetMainWindow(), pos);
 }
 
+// Help tracking whether rotozooms are performed, depending on the
+// caching mechanisms
+//#define DEBUG_ROTOZOOM
+
 void Sprite::RefreshSurface()
 {
-  MSG_DEBUG("sprite", "rotation: %s, scale_x: %s, scale_y: %s",
-            Double2str(rotation_rad, 0).c_str(),
-            Double2str(scale_x, 0).c_str(),
-            Double2str(scale_y, 0).c_str());
-
   current_surface.Free();
 
-  //if (!cache.have_lastframe_cache && scale_x.tofloat() != 1)
-  //  printf("Refresh %p surface %u: %.3fx%.3f/%.3f\n", this, current_frame,
-  //         scale_x.tofloat(), scale_y.tofloat(), rotation_rad.tofloat());
+#ifdef DEBUG_ROTOZOOM
+  int rotozoom = 0;
+#endif
 
   if (!cache.have_rotation_cache && !cache.have_flipping_cache) {
     if (!cache.have_lastframe_cache) {
       current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
+#ifdef DEBUG_ROTOZOOM
+      rotozoom = 1;
+#endif
     } else if (cache.last_frame.IsNull()) {
       current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
       cache.last_frame = current_surface;
+#ifdef DEBUG_ROTOZOOM
+      rotozoom = 2;
+#endif
     }
     else {
       current_surface = cache.last_frame;
     }
   } else if (cache.have_flipping_cache && !cache.have_rotation_cache) {
-    if (rotation_rad != ZERO || scale_y != ONE || (scale_x != ZERO && scale_x != -ONE))
+    if (rotation_rad != ZERO || scale_y != ONE || (scale_x != ZERO && scale_x != -ONE)) {
       current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
-    else if (scale_x == ONE)
+#ifdef DEBUG_ROTOZOOM
+      rotozoom = 3;
+#endif
+    } else if (scale_x == ONE)
       current_surface = frames[current_frame].surface;
     else
       current_surface = cache.frames[current_frame].flipped_surface;
   } else if (!cache.have_flipping_cache && cache.have_rotation_cache) {
-    if (scale_x != ONE || scale_y != ONE)
+    if (scale_x != ONE || scale_y != ONE) {
       current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
-    else
+#ifdef DEBUG_ROTOZOOM
+      rotozoom = 4;
+#endif
+    } else
       current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
   }
   //cache.have_flipping_cache==true && cache.have_rotation_cache==true
-  else if ((scale_x != ONE && scale_x != -ONE)  || scale_y != ONE)
+  else if ((scale_x != ONE && scale_x != -ONE)  || scale_y != ONE) {
     current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
-  else if (scale_x == ONE) //Scale_y == 1.0
+#ifdef DEBUG_ROTOZOOM
+    rotozoom = 5;
+#endif
+  } else if (scale_x == ONE) //Scale_y == 1.0
     current_surface = cache.frames[current_frame].GetSurfaceForAngle(rotation_rad);
   else
     current_surface = cache.frames[current_frame].GetFlippedSurfaceForAngle(rotation_rad);
 
   ASSERT(!current_surface.IsNull());
+#ifdef DEBUG_ROTOZOOM
+   if (rotozoom && scale_x!=ONE && scale_y!=ONE && scale_x==scale_y)
+     MSG_DEBUG("sprite", "rotation: %.3f, scale_x: %.3f, scale_y: %.3f",
+               rotation_rad.tofloat(), scale_x.tofloat(), scale_y.tofloat());
+#endif
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
