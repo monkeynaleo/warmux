@@ -626,7 +626,7 @@ bool Surface::ImgSave(const std::string& filename)
     png_write_row(png_ptr, (Uint8 *)tmp_line);
   }
   Unlock();
-  free[] tmp_line;
+  delete[] tmp_line;
   png_write_flush(png_ptr);
   png_write_end(png_ptr, info_ptr);
   ret = true;
