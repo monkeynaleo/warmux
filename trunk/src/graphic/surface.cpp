@@ -577,9 +577,6 @@ int Surface::ImgLoad(const std::string& filename)
  *
  * @param filename
  */
-#ifdef WIN32
-#  define alloca _alloca
-#endif
 bool Surface::ImgSave(const std::string& filename)
 {
   FILE            *f        = NULL;
@@ -611,7 +608,7 @@ bool Surface::ImgSave(const std::string& filename)
   // Creating the png file
   png_write_info(png_ptr, info_ptr);
 
-  tmp_line = SDL_stack_alloc(Uint8, surface->w * spr_fmt->BytesPerPixel); // alloca
+  tmp_line = new Uint8[surface->w * spr_fmt->BytesPerPixel];
   Lock();
   for (int y = 0; y < surface->h; y++) {
     for (int x = 0; x < surface->w; x++) {
@@ -629,7 +626,7 @@ bool Surface::ImgSave(const std::string& filename)
     png_write_row(png_ptr, (Uint8 *)tmp_line);
   }
   Unlock();
-  SDL_stack_free(tmp_line);
+  free[] tmp_line;
   png_write_flush(png_ptr);
   png_write_end(png_ptr, info_ptr);
   ret = true;
