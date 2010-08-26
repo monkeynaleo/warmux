@@ -38,7 +38,7 @@ LoadingScreen::LoadingScreen(int icon_count):
                                    + "menu" + PATH_SEPARATOR
                                    + "background_loading.jpg").c_str()),
                           true);
-  loading_bg->cache.EnableLastFrameCache();
+  loading_bg->EnableLastFrameCache();
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
   // Get profile from resource manager

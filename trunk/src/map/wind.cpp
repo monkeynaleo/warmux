@@ -74,7 +74,6 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
 
   sprite = GetResourceManager().LoadSprite(ActiveMap()->ResProfile(), "wind_particle");
   sprite->Scale(scale, scale);
-  sprite->RefreshSurface();
   sprite->SetAlpha(scale);
   sprite->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount() - 1));
   SetSize( Point2i(sprite->GetWidth(), sprite->GetHeight()) );
@@ -82,14 +81,13 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   if (ActiveMap()->GetWind().need_flip) {
     flipped = new Sprite(*sprite);
     flipped->Scale(-scale, scale);
-    flipped->RefreshSurface();
     flipped->SetAlpha(scale);
     flipped->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount()-1));
   } else {
     flipped = NULL;
   }
 
-  if (!GetAlignParticleState() && ActiveMap()->GetWind().rotation_speed != ZERO) {
+  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed != ZERO) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
@@ -97,8 +95,17 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
       flipped->EnableRotationCache(64);
       flipped->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
     }
+  } else {
+    sprite->EnableLastFrameCache();
+    if (flipped) {
+      flipped->EnableLastFrameCache();
+    }
   }
 
+  // Now that caches have been set, refresh
+  sprite->RefreshSurface();
+  if (flipped)
+   flipped->RefreshSurface();
 }
 
 WindParticle::~WindParticle()

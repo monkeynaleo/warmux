@@ -56,7 +56,7 @@ void CheckBox::Init(uint width)
   m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
   GetResourceManager().UnLoadXMLProfile(res);
 
-  m_checked_image->cache.EnableLastFrameCache();
+  m_checked_image->EnableLastFrameCache();
 
   position = Point2i(W_UNDEF, W_UNDEF);
   size.x = width;
@@ -115,7 +115,7 @@ bool CheckBox::LoadXMLConfiguration()
   m_checked_image->AddFrame(picChecked);
   m_checked_image->AddFrame(picUnchecked);
 
-  //m_checked_image->cache.EnableLastFrameCache();
+  //m_checked_image->EnableLastFrameCache();
 
   return true;
 }

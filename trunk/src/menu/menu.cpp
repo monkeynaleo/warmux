@@ -49,7 +49,7 @@ Menu::Menu(const std::string& bg, t_action _actions)
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   background = new Sprite(GetResourceManager().LoadImage(res, bg), true);
-  background->cache.EnableLastFrameCache();
+  background->EnableLastFrameCache();
 
   b_ok = NULL;
   b_cancel = NULL;
@@ -120,7 +120,7 @@ void Menu::LoadBackground(Profile * profile,
   file = profile->relative_path + file;
   Surface surface(file.c_str());
   background = new Sprite(surface, true);
-  background->cache.EnableLastFrameCache();
+  background->EnableLastFrameCache();
 }
 
 void Menu::LoadWidget(Profile * profile,
