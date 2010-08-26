@@ -33,7 +33,6 @@ Video::Video()
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
-  hardware = false;
   icon = NULL;
 
   InitSDL();
@@ -125,8 +124,8 @@ void Video::ComputeAvailableConfigs()
   //Generate video mode list
   SDL_Rect **modes;
 
-  // Get available fullscreen/hardware modes
-  modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
+  // Get available fullscreen modes
+  modes = SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_SWSURFACE);
 
   // Check is there are any modes available
   if (modes != NULL){
@@ -147,7 +146,7 @@ void Video::ComputeAvailableConfigs()
   }
 }
 
-bool Video::__SetConfig(const int width, const int height, const bool _fullscreen, const bool _hardware)
+bool Video::__SetConfig(const int width, const int height, const bool _fullscreen)
 {
   bool __fullscreen = _fullscreen;
 
@@ -160,26 +159,14 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
 
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
-  if (_hardware) {
-    flags |= SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_HWPALETTE;
-  } else {
-    flags |= SDL_SWSURFACE;
-  }
+  flags |= SDL_SWSURFACE | SDL_DOUBLEBUF;
   window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
-  const SDL_Surface *video = SDL_GetVideoSurface();
-  if (video && !(video->flags & SDL_HWSURFACE)) {
-    std::cerr << "WARNING: SDL refused to set hardware acceleration!" << std::endl;
-  }
 #endif
 
   if (window.IsNull())
     return false;
 
-  if (!_hardware)
-      std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
-
   fullscreen = __fullscreen;
-  hardware = _hardware;
 
   return true;
 }
@@ -196,35 +183,32 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
     return true; // nothing to change :-)
 
   int old_width, old_height;
-  bool old_fullscreen, old_hw;
+  bool old_fullscreen;
   if (window_was_null) {
     old_width = available_configs.begin()->GetX();
     old_height = available_configs.begin()->GetY();
-    old_hw = true;
   } else {
     old_width = window.GetWidth();
     old_height = window.GetHeight();
-    old_hw = hardware;
   }
   old_fullscreen = fullscreen;
 
   // Trying with hardware acceleration
-  r = __SetConfig(width, height, _fullscreen, true);
+  r = __SetConfig(width, height, _fullscreen);
   if (!r) {
     fprintf(stderr,
-            "WARNING: Fail to initialize main window with the following configuration: %dx%d,\n"
-            "fullscreen: %d, WITH hardware acceleration\n",
-            old_width, old_height, _fullscreen);
+            "WARNING: Fail to initialize main window with the following configuration:\n"
+            " %dx%d, fullscreen: %d\n", old_width, old_height, _fullscreen);
 
     // Trying previous configuration
-    if (! __SetConfig(old_width, old_height, old_fullscreen, old_hw)) {
+    if (! __SetConfig(old_width, old_height, old_fullscreen)) {
 
       // previous configuration fails !?!
 
-      // let's have another try without hw acceleration and without fullscreen
-      if (! __SetConfig(old_width, old_height, false, false)) {
-        Error(Format("ERROR: Fail to initialize main window with the following configuration: %dx%d, "
-                     "no fullscreen, no hardware acceleration\n", old_width, old_height));
+      // let's have another try without fullscreen
+      if (! __SetConfig(old_width, old_height, false)) {
+        Error(Format("ERROR: Fail to initialize main window with the following configuration:\n"
+                     " %dx%d, no fullscreen,\n", old_width, old_height));
         exit(EXIT_FAILURE);
       }
     }

@@ -31,13 +31,12 @@ class Video
   uint m_max_delay;
   bool SDLReady;
   bool fullscreen;
-  bool hardware;
   SDL_Surface *icon;
 
   std::list<Point2i> available_configs;
   void ComputeAvailableConfigs();
 
-  bool __SetConfig(const int w, const int h, const bool _fullscreen, const bool _hardware);
+  bool __SetConfig(const int w, const int h, const bool _fullscreen);
 
   void SetWindowIcon(const std::string& icon);
   void InitSDL(void);
