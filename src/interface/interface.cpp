@@ -69,6 +69,8 @@ Interface::Interface()
     clock_background = LOAD_RES_IMAGE("interface/clock_background").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
+    clock_normal->EnableLastFrameCache();
+    clock_emergency->EnableLastFrameCache();
   }
   else {
     game_menu = tmp;

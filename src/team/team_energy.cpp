@@ -118,14 +118,13 @@ void TeamEnergy::SetIcon(const Surface & new_icon)
   if (icon)
     delete icon;
   icon = new Sprite(new_icon, true);
-  icon->cache.EnableLastFrameCache();
+  icon->EnableLastFrameCache();
   icon->Scale(0.8, 0.8);
 }
 
 void TeamEnergy::Refresh()
 {
-  switch(status)
-  {
+  switch (status) {
     // energy value from one team have changed
     case EnergyStatusValueChange:
       if(new_value > value)

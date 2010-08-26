@@ -56,7 +56,7 @@ Member::Member(const xmlNode *     xml,
   spr = GetResourceManager().LoadSprite(xml, name, main_folder);
   //spr->EnableRotationCache(32);
   //spr->EnableFlippingCache();
-  spr->cache.EnableLastFrameCache();
+  spr->EnableLastFrameCache();
 
   // Get the various option
   XmlReader::ReadStringAttr(xml, "type", type);

@@ -91,17 +91,14 @@ void Particle::Refresh()
 
     //during the 1st quarter of the time increase size of particle
     //after the 1st quarter, decrease the alpha value
-    if((Double)lived_time<m_initial_time_to_live/TWO)
-    {
+    if ((Double)lived_time<m_initial_time_to_live/TWO) {
       Double coeff = sin((HALF_PI)*((Double)lived_time/((Double)m_initial_time_to_live/TWO)));
       image->Scale(coeff,coeff);
       SetSize(image->GetSize());
       image->SetAlpha(1.0);
-    }
-    else
-    {
+    } else {
       Double alpha = ONE - sin((HALF_PI)*((Double)lived_time-((Double)m_initial_time_to_live/TWO))/((Double)m_initial_time_to_live/TWO));
-      image->Scale(1.0,1.0);
+      image->Scale(1.0, 1.0);
       image->SetAlpha(alpha);
     }
     m_last_refresh = Time::GetInstance()->Read() ;
@@ -119,7 +116,6 @@ ParticleEngine::ParticleEngine(uint time):
   m_last_refresh(Time::GetInstance()->Read()),
   m_time_between_add(time)
 {}
-
 
 void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
                                  bool upper,
@@ -148,12 +144,19 @@ void ParticleEngine::Load()
   // Pre-load the sprite of each particle
   Profile *res = GetResourceManager().LoadXMLProfile("weapons.xml", false);
   particle_sprite[SMOKE_spr] = LOAD_RES_SPRITE("smoke");
+  particle_sprite[SMOKE_spr]->EnableLastFrameCache();
   particle_sprite[EXPLOSION_SMOKE_spr] = LOAD_RES_SPRITE("smoke_explosion");
+  particle_sprite[EXPLOSION_SMOKE_spr]->EnableLastFrameCache();
   particle_sprite[EXPLOSION_BIG_SMOKE_spr] = LOAD_RES_SPRITE("smoke_big_explosion");
+  particle_sprite[EXPLOSION_BIG_SMOKE_spr]->EnableLastFrameCache();;
   particle_sprite[ILL_BUBBLE_spr] = LOAD_RES_SPRITE("ill_bubble");
+  particle_sprite[ILL_BUBBLE_spr]->EnableLastFrameCache();
   particle_sprite[FIRE_spr]  = LOAD_RES_SPRITE("fire_particle");
+  particle_sprite[FIRE_spr]->EnableLastFrameCache();
   particle_sprite[STAR_spr]  = LOAD_RES_SPRITE("star_particle");
+  particle_sprite[STAR_spr]->EnableLastFrameCache();
   particle_sprite[DARK_SMOKE_spr]  = LOAD_RES_SPRITE("dark_smoke");
+  particle_sprite[DARK_SMOKE_spr]->EnableLastFrameCache();
   particle_sprite[MAGIC_STAR_R_spr] = LOAD_RES_SPRITE("pink_star_particle");
   particle_sprite[MAGIC_STAR_R_spr]->EnableRotationCache(32);
   particle_sprite[MAGIC_STAR_Y_spr] = LOAD_RES_SPRITE("yellow_star_particle");
@@ -163,12 +166,19 @@ void ParticleEngine::Load()
   particle_sprite[BULLET_spr] = LOAD_RES_SPRITE("bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
   particle_sprite[POLECAT_FART_spr] = LOAD_RES_SPRITE("polecat_fart");
+  particle_sprite[POLECAT_FART_spr]->EnableLastFrameCache();
   particle_sprite[CLEARWATER_spr] = LOAD_RES_SPRITE("water_drop");
+  particle_sprite[CLEARWATER_spr]->EnableLastFrameCache();
   particle_sprite[LAVA_spr] = LOAD_RES_SPRITE("lava_drop");
+  particle_sprite[LAVA_spr]->EnableLastFrameCache();
   particle_sprite[RADIOACTIVE_spr] = LOAD_RES_SPRITE("radioactive_drop");
+  particle_sprite[RADIOACTIVE_spr]->EnableLastFrameCache();
   particle_sprite[DIRTYWATER_spr] = LOAD_RES_SPRITE("dirtywater_drop");
+  particle_sprite[DIRTYWATER_spr]->EnableLastFrameCache();
   particle_sprite[CHOCOLATEWATER_spr] = LOAD_RES_SPRITE("chocolate_drop");
+  particle_sprite[CHOCOLATEWATER_spr]->EnableLastFrameCache();
   particle_sprite[EXPLOSION_spr] = LOAD_RES_SPRITE("explosion_particle");
+  particle_sprite[EXPLOSION_spr]->EnableLastFrameCache();
   GetResourceManager().UnLoadXMLProfile(res);
 
   sprites_loaded = true;
