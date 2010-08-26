@@ -186,7 +186,8 @@ public:
 
   // Cache
   void EnableRotationCache(uint cache_size) { cache.EnableRotationCache(frames, cache_size); }
-  void EnableFlippingCache() { cache.EnableFlippingCache(frames); };
+  void EnableFlippingCache() { cache.EnableFlippingCache(frames); }
+  void EnableLastFrameCache() { cache.EnableLastFrameCache(); }
 
   // Show flag
   void Show() { show = true; };
