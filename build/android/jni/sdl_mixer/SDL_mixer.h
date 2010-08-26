@@ -67,9 +67,6 @@ extern DECLSPEC const SDL_version * SDLCALL Mix_Linked_Version(void);
 
 typedef enum
 {
-    MIX_INIT_FLAC = 0x00000001,
-    MIX_INIT_MOD  = 0x00000002,
-    MIX_INIT_MP3  = 0x00000004,
     MIX_INIT_OGG  = 0x00000008
 } MIX_InitFlags;
 
@@ -117,12 +114,7 @@ typedef enum {
  MUS_NONE,
  MUS_CMD,
  MUS_WAV,
- MUS_MOD,
- MUS_MID,
  MUS_OGG,
- MUS_MP3,
- MUS_MP3_MAD,
- MUS_FLAC
 } Mix_MusicType;
 
 /* The internal format for a music chunk interpreted via mikmod */
