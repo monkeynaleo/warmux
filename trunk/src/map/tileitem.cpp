@@ -35,6 +35,7 @@ TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)
   , m_alpha_threshold(alpha_threshold)
 {
   m_empty_bitfield = new uint8_t[1<<(2*CELL_BITS-3)];
+  ForceRecheck();
 }
 
 void TileItem_NonEmpty::Draw(const Point2i &pos)
@@ -48,19 +49,29 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
   uint8_t    *buf       = m_surface.GetPixels();
   const uint  line_size = m_surface.GetPitch();
 
-  int y = center.y - (int)(radius+EXPLOSION_BORDER_SIZE);
-  if (y < 0) y = 0;
+  int r = radius+EXPLOSION_BORDER_SIZE;
+  int y = center.y - r;
+  if (y < 0)
+    y = 0;
+  int endy = center.y + radius + EXPLOSION_BORDER_SIZE + 1;
+  if (endy >= CELL_SIZE.y)
+    endy = CELL_SIZE.y;
+
   buf += y * line_size;
 
   //Empties each line of the tile horizontaly that are in the circle
-  for (; (uint)y <= center.y + radius + EXPLOSION_BORDER_SIZE && y < CELL_SIZE.y;
-       buf += line_size, y++)
-  {
+  int maxx = 0, minx = CELL_SIZE.x;
+  for (; y < endy; buf += line_size, y++) {
     //Abscisse distance from the center of the circle to the circle
     int dac = center.y - y;
 
     //Darken the border of the removed ground
-    int blength = round(sqrt((Double)(radius+EXPLOSION_BORDER_SIZE)*(radius+EXPLOSION_BORDER_SIZE) - dac*dac));
+    int blength = round(sqrt(Double(r*r - dac*dac)));
+
+    if (minx>center.x-blength)
+      minx = center.x-blength;
+    if (maxx<center.x+blength+1)
+      maxx = center.x+blength+1;
 
     //Nothing to empty, just darken
     if ((uint)abs(dac) > radius) {
@@ -74,13 +85,39 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
     // Left half of the circle
     Darken(center.x-blength, center.x-length, buf);
 
-    // Rigth half of the circle
+    // Right half of the circle
     Darken(center.x+length, center.x+blength, buf);
 
     Empty(center.x-length, center.x+length, buf);
   }
 
+  if (minx < 0)
+    minx = 0;
+  if (maxx > CELL_SIZE.x)
+    maxx = CELL_SIZE.x;
+
+  m_start_check.SetValues(minx, (center.y - r)>0 ? center.y - r : 0);
+  m_end_check.SetValues(maxx, endy);
+
   m_need_check_empty = true;
+}
+
+bool TileItem_NonEmpty::CheckEmptyField() const
+{
+  const Uint32 *ptr = (Uint32 *)m_empty_bitfield;
+  for (int i=0; i<(CELL_SIZE.y*CELL_SIZE.x)>>2; i++) {
+    if (!(*(ptr++)))
+      return false;
+  }
+  return true;
+}
+
+void TileItem_NonEmpty::ForceRecheck()
+{
+  m_start_check.SetValues(0, 0);
+  m_end_check.SetValues(CELL_SIZE);
+  m_need_check_empty = true;
+  m_is_empty = true;
 }
 
 // === Implemenation of TileItem_BaseColorKey ==============================
@@ -98,13 +135,11 @@ TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshol
 
 void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
 {
-  int starting_x = position.x >= 0 ? position.x : 0;
-  int starting_y = position.y >= 0 ? position.y : 0;
-  int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
-  int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
+  m_start_check.SetValues(position.max(Point2i(0, 0)));
+  m_end_check.SetValues(m_surface.GetSize().min(position+dig.GetSize()));
 
-  for (int py = starting_y ; py < ending_y ; py++) {
-    for (int px = starting_x ; px < ending_x ; px++) {
+  for (int py = m_start_check.y ; py < m_end_check.y ; py++) {
+    for (int px = m_start_check.x ; px < m_end_check.x ; px++) {
       if (dig.GetPixel(px-position.x, py-position.y) != 0)
         m_surface.PutPixel(px, py, color_key);
     }
@@ -132,6 +167,7 @@ bool TileItem_BaseColorKey::CheckEmpty()
     }
   }
 
+  //m_empty = CheckEmptyField();
   m_need_check_empty = false;
   return m_is_empty;
 }
@@ -141,7 +177,7 @@ TileItem_NonEmpty* TileItem_BaseColorKey::NewEmpty(uint8_t bpp, uint8_t alpha_th
   TileItem_BaseColorKey *ti;
 
   switch (bpp) {
-  case 16: ti = new TileItem_ColorKey16(alpha_threshold); break;
+  case 2: ti = new TileItem_ColorKey16(alpha_threshold); break;
   default: ti = new TileItem_ColorKey24(alpha_threshold); break;
   }
 
@@ -170,8 +206,7 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
   int      x, y;
 
   // Set pixels considered as transparent as colorkey
-  for (y=0; y<CELL_SIZE.y; y++)
-  {
+  for (y=0; y<CELL_SIZE.y; y++) {
     for (x=0; x<CELL_SIZE.x; x++)
       if (ptr[x*4 + ALPHA_OFFSET] < threshold)
         *((Uint32*)(ptr + x*4)) = ColorKey;
@@ -185,8 +220,6 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
   color_key = SDL_MapRGBA(m_surface.GetSurface()->format, 255, 0, 255, 0);
   m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
   SDL_FreeSurface(surf);
-
-  m_need_check_empty = true;
 }
 
 void TileItem_ColorKey16::Darken(int start_x, int end_x, uint8_t* buf)
@@ -225,12 +258,15 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 {
   const Uint16 *idata  = (Uint16*)m_surface.GetPixels();
   uint          ipitch = m_surface.GetPitch();
+  Point2i       start  = m_start_check>>shift;
+  Point2i       end    = (m_end_check + (1<<shift) -1)>>shift;
 
-  out  += x<<(2+CELL_BITS-shift);
+  out   += (x<<(2+CELL_BITS-shift)) + start.y*opitch;
   ipitch >>= 1;
+  idata += (start.y<<shift)*ipitch;
 
-  for (int j=0; j<1<<(CELL_BITS-shift); j++) {
-    for (int i=0; i<1<<(CELL_BITS-shift); i++) {
+  for (int j=start.y; j<end.y; j++) {
+    for (int i=start.x; i<end.x; i++) {
       const Uint16* ptr = idata + (i<<shift);
       uint count = 0, p0 = 0, p1 = 0, p2 = 0;
 
@@ -299,8 +335,6 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
   color_key = SDL_MapRGBA(m_surface.GetSurface()->format, 255, 0, 255, 0);
   m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
   SDL_FreeSurface(surf);
-
-  m_need_check_empty = true;
 }
 
 void TileItem_ColorKey24::Darken(int start_x, int end_x, uint8_t* buf)
@@ -342,11 +376,14 @@ void TileItem_ColorKey24::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 {
   const uint8_t *idata  = m_surface.GetPixels();
   uint           ipitch = m_surface.GetPitch();
+  Point2i        start  = m_start_check>>shift;
+  Point2i        end    = (m_end_check + (1<<shift) -1)>>shift;
 
-  out  += 3*(x<<(CELL_BITS-shift));
+  out   += 4*(x<<(CELL_BITS-shift)) + start.y*opitch;
+  idata += (start.y<<shift)*ipitch;
 
-  for (int j=0; j<CELL_SIZE.y>>shift; j++) {
-    for (int i=0; i<CELL_SIZE.x>>shift; i++) {
+  for (int j=start.y; j<end.y; j++) {
+    for (int i=start.x; i<end.x; i++) {
       const uint8_t* ptr = idata + 3*(i<<shift);
       uint count = 0, p0 = 0, p1 = 0, p2 = 0;
 
@@ -401,8 +438,6 @@ void TileItem_AlphaSoftware::SetDefaults(void)
     fprintf(stderr, "Unexpected depth of %u for TileItem\n", m_surface.GetBytesPerPixel());
     m_offset = 2;
   }
-
-  m_need_check_empty = true;
 }
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
@@ -427,11 +462,19 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, ui
 {
   const Uint8 *idata  = m_surface.GetPixels();
   uint         ipitch = m_surface.GetPitch();
+  Point2i      start  = m_start_check>>shift;
+  Point2i      end    = (m_end_check + (1<<shift) -1)>>shift;
   uint         p0, p1, p2, p3;
 
-  odata += x<<(2+CELL_BITS-shift);
-  for (int j=0; j<1<<(CELL_BITS-shift); j++) {
-    for (int i=0; i<1<<(CELL_BITS-shift); i++) {
+  //printf("Converted (%i,%i)->(%i,%i) to (%i,%i)->(%i,%i)\n",
+  //       m_start_check.x, m_start_check.y, m_end_check.x, m_end_check.y,
+  //       start.x, start.y, end.x, end.y);
+
+  odata += (x<<(2+CELL_BITS-shift)) + start.y*opitch;
+  idata += (start.y<<shift)*ipitch;
+
+  for (int j=start.y; j<end.y; j++) {
+    for (int i=start.x; i<end.x; i++) {
       const Uint8* ptr = idata + (i<<(2+shift));
 
       p0 = 0; p1 = 0; p2 = 0; p3 = 0;
@@ -473,18 +516,16 @@ void TileItem_AlphaSoftware::Empty(int start_x, int end_x, uint8_t* buf)
 
 void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
 {
-  int starting_x = position.x >= 0 ? position.x : 0;
-  int starting_y = position.y >= 0 ? position.y : 0;
-  int ending_x   = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
-  int ending_y   = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
+  m_start_check.SetValues(position.max(Point2i(0, 0)));
+  m_end_check.SetValues(m_surface.GetSize().min(position+dig.GetSize()));
 
   Uint32 *ptr    = (Uint32 *)m_surface.GetPixels();
   int     pitch  = m_surface.GetPitch()>>2;
 
-  ptr += starting_y*pitch;
+  ptr += m_start_check.y*pitch;
 
-  for (int py = starting_y ; py < ending_y ; py++) {
-    for (int px = starting_x ; px < ending_x ; px++) {
+  for (int py = m_start_check.y ; py < m_end_check.y ; py++) {
+    for (int px = m_start_check.x ; px < m_end_check.x ; px++) {
       if (dig.GetPixel(px-position.x, py-position.y) != 0)
         ptr[px] = 0;
     }
@@ -494,7 +535,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
 
 void TileItem_AlphaSoftware::Darken(int start_x, int end_x, uint8_t* buf)
 {
-  if( start_x < CELL_SIZE.x && end_x >= 0) {
+  if (start_x < CELL_SIZE.x && end_x >= 0) {
     //Clamp the value to empty only the in this tile
     start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
     end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
@@ -527,10 +568,6 @@ bool TileItem_AlphaSoftware::CheckEmpty()
       for (int i=0; i<8; i++) {
         if ((ptr[px+i]&0xFF000000)>>24 < m_alpha_threshold) {
           empty |= 1<<i;
-          if (ptr[px+i]&0xFFFFFF) {
-            // Alpha is low enough that for emptyness check, it can be considered empty
-            m_is_empty = false;
-          }
         } else if (ptr[px+i]) {
           m_is_empty = false;
         }
