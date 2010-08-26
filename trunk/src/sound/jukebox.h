@@ -70,16 +70,10 @@
 
 class JukeBox : public Singleton<JukeBox>
 {
-private:
-  /* If you need this, implement it (correctly) */
-  JukeBox(const JukeBox&);
-  JukeBox operator=(const JukeBox&);
-  /**********************************************/
-
   typedef struct
   {
     std::string filename;
-    Double      level;
+    float       level;
   } sample_info;
   typedef std::multimap<std::string, sample_info>::value_type
     sound_sample;
@@ -96,7 +90,8 @@ private:
   PlayListMap::const_iterator playing_pl;
   std::vector<std::string>::const_iterator playing_music;
 
-  struct s_m_config{
+  struct s_m_config
+  {
     bool music;
     bool effects;
     int frequency;
@@ -124,17 +119,17 @@ public:
   void Init();
   void End();
 
-  bool UseMusic() const {return m_config.music;};
-  bool UseEffects() const {return m_config.effects;};
-  int GetFrequency() const {return m_config.frequency;};
-  int HowManyChannels() const {return m_config.channels;};
+  bool UseMusic() const { return m_config.music; }
+  bool UseEffects() const { return m_config.effects; }
+  int GetFrequency() const { return m_config.frequency; }
+  int HowManyChannels() const { return m_config.channels; }
   void Pause() const;
   void Resume() const;
 
-  void ActiveMusic (bool on);
-  void ActiveEffects (bool on) {m_config.effects = on;};
+  void ActiveMusic(bool on);
+  void ActiveEffects(bool on) { m_config.effects = on; }
 
-  void SetFrequency (int frequency);
+  void SetFrequency(int frequency);
   void SetNumbersOfChannel(int channels); // Not used
 
   void LoadXML(const std::string& profile);
@@ -145,14 +140,8 @@ public:
   void StopMusic();
   void NextMusic();
 
-  inline bool IsPlayingMusic() const
-    {
-      return (!playlist.empty() && playing_pl != playlist.end());
-    }
-  inline bool IsPlayingMusicSample() const
-    {
-      return (IsPlayingMusic() && playing_music != playing_pl->second.end());
-    }
+  bool IsPlayingMusic() const { return (!playlist.empty() && playing_pl != playlist.end()); }
+  bool IsPlayingMusicSample() const { return (IsPlayingMusic() && playing_music != playing_pl->second.end()); }
 
   /**
    * Playing a sound effect
@@ -173,7 +162,7 @@ private:
    * @return the channel used to play the sample
    * <i>loop</i>: -1 for loop forever, else number of times -1 to play
    */
-  int PlaySample (Mix_Chunk * sample, Double level=1.0, int loop=0);
+  int PlaySample(Mix_Chunk * sample, float level=1.0, int loop=0);
 };
 //-----------------------------------------------------------------------------
 #endif
