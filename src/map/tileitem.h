@@ -24,9 +24,10 @@
 #include "graphic/surface.h"
 
 // Must be at least 3
-#define  CELL_BITS   6
-#define  CELL_MASK   ((1<<CELL_BITS)-1)
-static const Point2i CELL_SIZE(1<<CELL_BITS, 1<<CELL_BITS);
+#define  CELL_BITS         6
+#define  CELL_DIM          (1<<CELL_BITS)
+#define  CELL_MASK         (CELL_DIM-1)
+static const Point2i CELL_SIZE(CELL_DIM, CELL_DIM);
 
 class TileItem
 {
@@ -68,7 +69,11 @@ protected:
   bool           m_need_check_empty;
   uint8_t        m_alpha_threshold;
 
+  Point2i        m_start_check, m_end_check;
+
   TileItem_NonEmpty(uint8_t alpha_threshold);
+
+  bool CheckEmptyField() const;
 
 public:
   ~TileItem_NonEmpty() { delete[] m_empty_bitfield; }
@@ -86,6 +91,8 @@ public:
     //m_surface.MergeSurface(spr, position);
   }
 
+  void ForceRecheck();
+
   bool NeedDelete()
   {
     if (m_need_check_empty)
@@ -97,7 +104,6 @@ public:
   bool IsEmpty(const Point2i &pos) const
   {
     ASSERT(!m_need_check_empty);
-    ASSERT(pos.x>-1);
     return m_empty_bitfield[(pos.y<<(CELL_BITS-3)) + (pos.x>>3)] & (1 << (pos.x&7));
   }
 

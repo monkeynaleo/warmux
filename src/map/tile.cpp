@@ -37,6 +37,7 @@ Tile::Tile() :
   m_preview(NULL),
   m_last_preview_redraw(0)
 {
+  ASSERT(CELL_BITS > 3);
 }
 
 void Tile::FreeMem()
