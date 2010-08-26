@@ -40,12 +40,12 @@
 #include "gui/text_box.h"
 #include "gui/spin_button.h"
 
-Menu::Menu(const std::string& bg, t_action _actions) :
-  actions(_actions),
-  selected_widget(NULL)
+Menu::Menu(const std::string& bg, t_action _actions)
+  : actions(_actions)
+  , selected_widget(NULL)
 {
   close_menu = false ;
-  AppWormux * app = AppWormux::GetInstance();
+  Surface& window = GetMainWindow();
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   background = new Sprite(GetResourceManager().LoadImage(res, bg), true);
@@ -73,8 +73,8 @@ Menu::Menu(const std::string& bg, t_action _actions) :
 
     widgets.AddWidget(actions_buttons);
     widgets.Pack();
-    uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
-    uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
+    uint x = (window.GetWidth() - actions_buttons->GetSizeX())/2;
+    uint y = window.GetHeight() - actions_buttons->GetSizeY();
 
     actions_buttons->SetPosition(x, y);
   }
@@ -83,22 +83,22 @@ Menu::Menu(const std::string& bg, t_action _actions) :
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
-Menu::Menu(void) :
-  widgets(),
-  actions(vNo),
-  background(NULL),
-  selected_widget(NULL),
-  b_cancel(NULL),
-  b_ok(NULL),
-  close_menu(false),
-  actions_buttons(NULL)
+Menu::Menu(void)
+  : widgets()
+  , actions(vNo)
+  , background(NULL)
+  , selected_widget(NULL)
+  , b_cancel(NULL)
+  , b_ok(NULL)
+  , close_menu(false)
+  , actions_buttons(NULL)
 {
 }
 
 Menu::~Menu()
 {
   AppWormux::GetInstance()->SetCurrentMenu(NULL);
-  if (NULL != background) {
+  if (background) {
     delete background;
   }
 }
@@ -293,7 +293,7 @@ void Menu::DrawBackground()
   if (NULL == background) {
     return;
   }
-  background->ScaleSize(GetMainWindow().GetSize());
+  background->ScaleSize(GetMainWindow().GetSize()+1);
   background->Blit(GetMainWindow(), 0, 0);
 }
 

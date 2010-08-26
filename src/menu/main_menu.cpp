@@ -39,8 +39,6 @@
 // Position du texte de la version
 const int VERSION_DY = -40;
 
-const int DEFAULT_SCREEN_HEIGHT = 768 ;
-
 MainMenu::~MainMenu()
 {
   delete version_text;
@@ -98,7 +96,7 @@ MainMenu::MainMenu() :
   StatStart("Main:Menu");
 }
 
-void MainMenu::Init(void) 
+void MainMenu::Init(void)
 {
   Profile * xmlProfile = GetResourceManager().LoadXMLProfile("menu.xml", false);
   XmlReader * xmlFile = xmlProfile->GetXMLDocument();
