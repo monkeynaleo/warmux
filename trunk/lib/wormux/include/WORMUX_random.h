@@ -50,10 +50,17 @@ public:
   Double GetDouble();
   Double GetDouble(Double max);
   Double GetDouble(Double min, Double max);
+
+  float  Getfloat();
+  float  Getfloat(float max);
+  float  Getfloat(float min, float max);
+
   int32_t GetInt(int32_t min, int32_t max);
   uint GetUint(uint32_t min, uint32_t max);
+
   Point2i GetPoint(const Rectanglei &rect);
   Point2i GetPoint(const Point2i &pt);
+
   int GetSign();
 };
 
