@@ -150,6 +150,8 @@ void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
 
 bool TileItem_BaseColorKey::CheckEmpty()
 {
+  uint8_t *buf = m_empty_bitfield;
+
   m_is_empty = true;
   for (int py=0; py<CELL_SIZE.y; py++) {
     for (int px=0; px<CELL_SIZE.x; px+=8) {
@@ -163,7 +165,7 @@ bool TileItem_BaseColorKey::CheckEmpty()
         }
       }
 
-      m_empty_bitfield[(py<<(CELL_BITS-3)) + (px>>3)] = empty;
+      buf[0] = empty; buf++;
     }
   }
 
@@ -208,7 +210,7 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
   // Set pixels considered as transparent as colorkey
   for (y=0; y<CELL_SIZE.y; y++) {
     for (x=0; x<CELL_SIZE.x; x++)
-      if (ptr[x*4 + ALPHA_OFFSET] < threshold)
+      if (ptr[x*4 + ALPHA_OFFSET] < m_alpha_threshold)
         *((Uint32*)(ptr + x*4)) = ColorKey;
     ptr += pitch;
   }
@@ -558,6 +560,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
 {
   const Uint32 *ptr   = (Uint32 *)m_surface.GetPixels();
   int           pitch = m_surface.GetPitch()>>2;
+  uint8_t      *buf   = m_empty_bitfield;
 
   ASSERT(m_surface.GetSurface()->format->Amask == 0xFF000000);
 
@@ -573,7 +576,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
         }
       }
 
-      m_empty_bitfield[(py<<(CELL_BITS-3)) + (px>>3)] = empty;
+      buf[0] = empty; buf++;
     }
     ptr += pitch;
   }
