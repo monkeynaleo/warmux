@@ -109,33 +109,30 @@ void Parachute::Refresh()
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
 
-  Double speed;
-  Double angle;
+  Character& active = ActiveCharacter();
+  Double speed = active.GetSpeedXY().Norm();
 
-  ActiveCharacter().GetSpeed(speed, angle);
-
-  if(ActiveCharacter().FootsInVacuum() && speed != ZERO) { // We are falling
-    if(!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
+  if (active.FootsInVacuum() && speed != ZERO) { // We are falling
+    if (!open && (speed > GameMode::GetInstance()->safe_fall)) { // with a sufficient speed
       if (EnoughAmmo() && !m_used_this_turn) { // We have enough ammo => start opening the parachute
-        if(!m_used_this_turn)
-        {
+        if (!m_used_this_turn) {
           UseAmmo();
           m_used_this_turn = true;
         }
 
-        ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
-        ActiveCharacter().SetWindFactor(cfg().wind_factor);
+        active.SetAirResistFactor(cfg().air_resist_factor);
+        active.SetWindFactor(cfg().wind_factor);
         open = true;
         img->animation.SetPlayBackward(false);
         img->Start();
-        ActiveCharacter().SetSpeedXY(Point2d(0,0));
-        ActiveCharacter().SetMovement("parachute");
-        Camera::GetInstance()->FollowObject(&ActiveCharacter());
+        active.SetSpeedXY(Point2d(0,0));
+        active.SetMovement("parachute");
+        Camera::GetInstance()->FollowObject(&active);
       }
     }
   } else { // We are on the ground
     if (open) { // The parachute is opened
-      ActiveCharacter().SetMovement("walk");
+      active.SetMovement("walk");
       if (!closing) { // We have just hit the ground. Start closing animation
         img->animation.SetPlayBackward(true);
         img->animation.SetShowOnFinish(SpriteAnimation::show_blank);
@@ -143,7 +140,7 @@ void Parachute::Refresh()
         closing = true;
         return;
       } else { // The parachute is closing
-        if(img->IsFinished()) {
+        if (img->IsFinished()) {
           // The animation is finished... We are done with the parachute
           open = false;
           closing = false;
@@ -154,27 +151,26 @@ void Parachute::Refresh()
     m_used_this_turn = false;
   }
   if (open) {
-    ActiveCharacter().UpdateLastMovingTime();
+    active.UpdateLastMovingTime();
 
     // If parachute is open => character can move a little to the left or to the right
-    const LRMoveIntention * lr_move_intention = ActiveCharacter().GetLastLRMoveIntention();
+    const LRMoveIntention * lr_move_intention = active.GetLastLRMoveIntention();
     if (lr_move_intention) {
       LRDirection direction = lr_move_intention->GetDirection();
-      ActiveCharacter().SetDirection(direction);
+      active.SetDirection(direction);
       if (direction == DIRECTION_LEFT)
-        ActiveCharacter().SetExternForce(-cfg().force_side_displacement, 0.0);
+        active.SetExternForce(-cfg().force_side_displacement, 0.0);
       else
-        ActiveCharacter().SetExternForce(cfg().force_side_displacement, 0.0);
+        active.SetExternForce(cfg().force_side_displacement, 0.0);
     }
   }
 }
 
 std::string Parachute::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u parachute!",
-            "%s team has won %u parachutes!",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u parachute!",
+                         "%s team has won %u parachutes!",
+                         items_count), TeamName, items_count);
 }
 
 void Parachute::StartShooting()
@@ -189,17 +185,20 @@ void Parachute::StartShooting()
   }
 }
 
-ParachuteConfig& Parachute::cfg() {
+ParachuteConfig& Parachute::cfg()
+{
   return static_cast<ParachuteConfig&>(*extra_params);
 }
 
-ParachuteConfig::ParachuteConfig(){
+ParachuteConfig::ParachuteConfig()
+{
   wind_factor = 10.0;
   air_resist_factor = 140.0;
   force_side_displacement = 2000.0;
 }
 
-void ParachuteConfig::LoadXml(const xmlNode* elem){
+void ParachuteConfig::LoadXml(const xmlNode* elem)
+{
   WeaponConfig::LoadXml(elem);
   XmlReader::ReadDouble(elem, "wind_factor", wind_factor);
   XmlReader::ReadDouble(elem, "air_resist_factor", air_resist_factor);
