@@ -346,10 +346,17 @@ template<class T> class Vector2
      * [RCL]: using Doubles, to keep the precision consistent with rest of
      * functions here
     */
-    Vector2<T> GetNormal() const {
+    Vector2<Double> GetNormal() const {
       Double len = sqrt(x*x + y*y);
       if ( len > EPSILON )
         return Vector2<T>( (T)(x/len), (T)(y/len) );
+      return *this;
+    }
+
+    Vector2<float> GetfloatNormal() const {
+      float len = sqrtf(x*x + y*y);
+      if (len > 0.001f)
+        return Vector2<float>(x/len, y/len);
       return *this;
     }
 
