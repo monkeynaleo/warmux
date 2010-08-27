@@ -34,16 +34,13 @@ class PhysicalObj;
 
 class Camera : public Rectanglei, public Singleton<Camera>, public MovableByUser
 {
-private:
-  Camera(const Camera&);
-  const Camera& operator=(const Camera&);
-
 public :
   enum CameraControlMode {
     NO_CAMERA_CONTROL,
     MOUSE_CAMERA_CONTROL,
     KEYBOARD_CAMERA_CONTROL
   };
+
 private:
   Mouse::pointer_t pointer_used_before_scroll;
   uint m_started_shaking;
@@ -53,7 +50,7 @@ private:
   mutable Point2i m_shake;
   mutable uint m_last_time_shake_calculated;
 
-  Point2d m_speed;
+  Point2f m_speed;
   bool m_stop;
   CameraControlMode m_control_mode;
   int m_begin_controlled_move_time;
@@ -62,7 +59,7 @@ private:
   uint m_mouse_counter;
   Point2i m_scroll_start_pos;
   Point2i m_last_mouse_pos;
-  Point2d m_scroll_vector;
+  Point2f m_scroll_vector;
 
   void SaveMouseCursor();
   void RestoreMouseCursor();
@@ -106,20 +103,11 @@ public:
 
   void Refresh();
 
-  inline Point2i GetPosition() const
-  {
-    return position + ComputeShake();
-  }
+  Point2i GetPosition() const { return position + ComputeShake(); }
 
-  inline int GetPositionX() const
-  {
-    return position.x + ComputeShake().x;
-  }
+  int GetPositionX() const { return position.x + ComputeShake().x; }
 
-  inline int GetPositionY() const
-  {
-    return position.y + ComputeShake().y;
-  }
+  int GetPositionY() const { return position.y + ComputeShake().y; }
 
   void Shake(uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint);
   void ResetShake();
