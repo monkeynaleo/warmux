@@ -98,19 +98,39 @@ bool RandomGenerator::GetBool()
   return (random <= middle);
 }
 
-/**
- * Get a random number between 0.0 and 1.0
- *
- * @return A number between 0.0 and 1.0
- */
+//==========================================================================
 Double RandomGenerator::GetDouble()
 {
-  return 1.0*GetRand()/(WORMUX_RAND_MAX + 1.0);
+  return GetRand()/(WORMUX_RAND_MAX + ONE);
 }
 
-/**
- *  Get a random number between min and max
- */
+Double RandomGenerator::GetDouble(Double max)
+{
+  return max * GetDouble();
+}
+
+Double RandomGenerator::GetDouble(Double min, Double max)
+{
+  return min + GetDouble(max - min);
+}
+
+//==========================================================================
+float RandomGenerator::Getfloat()
+{
+  return GetRand()/(WORMUX_RAND_MAX + 1.0f);
+}
+
+float RandomGenerator::Getfloat(float max)
+{
+  return max * Getfloat();
+}
+
+float RandomGenerator::Getfloat(float min, float max)
+{
+  return min + Getfloat(max - min);
+}
+
+//==========================================================================
 int32_t RandomGenerator::GetInt(int32_t min, int32_t max)
 {
   return min + (int32_t)GetDouble(max - min + 1);
@@ -119,16 +139,6 @@ int32_t RandomGenerator::GetInt(int32_t min, int32_t max)
 uint RandomGenerator::GetUint(uint min, uint max)
 {
   return (uint)GetInt(min, max);
-}
-
-Double RandomGenerator::GetDouble(Double min, Double max)
-{
-  return min + GetDouble(max - min);
-}
-
-Double RandomGenerator::GetDouble(Double max)
-{
-  return max * GetDouble();
 }
 
 /**
