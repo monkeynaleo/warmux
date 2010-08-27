@@ -25,7 +25,7 @@
 #include <map>
 #include <iostream>
 
-Clothe::Clothe(const xmlNode *                  xml, 
+Clothe::Clothe(const xmlNode *                  xml,
                std::map<std::string, Member*> & members_lst):
   name(),
   layers()
@@ -48,7 +48,7 @@ Clothe::Clothe(const xmlNode *                  xml,
     }
 
     std::map<std::string, Member *>::iterator itMember = members_lst.find(att);
-    
+
     if (itMember != members_lst.end()) {
       layers.push_back(itMember->second);
     } else {
@@ -57,7 +57,7 @@ Clothe::Clothe(const xmlNode *                  xml,
   }
 }
 
-Clothe::Clothe(Clothe *                         c, 
+Clothe::Clothe(Clothe *                         c,
                std::map<std::string, Member*> & members_lst):
   name(c->name),
   layers()
@@ -67,19 +67,4 @@ Clothe::Clothe(Clothe *                         c,
       ++it) {
     layers.push_back(members_lst.find((*it)->GetName())->second);
   }
-}
-
-Clothe::~Clothe()
-{
-  layers.clear();
-}
-
-const std::string & Clothe::GetName() const
-{
-  return name;
-}
-
-const std::vector<Member*> & Clothe::GetLayers() const
-{
-  return layers;
 }
