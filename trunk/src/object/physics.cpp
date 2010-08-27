@@ -348,7 +348,7 @@ void Physics::ComputePendulumNextXY(Double delta_t)
 
   MSG_DBG_RTTI("physic.pendulum", "%s angle: %.2f %.2f %.2f pos: %.2f %.2f fixpoint: %s, %s",
                typeid(*this).name(),
-               m_rope_angle.x0.tofloat(), m_rope_angle.x1.tofloat(), m_rope_angle.x2.tofloat()
+               m_rope_angle.x0.tofloat(), m_rope_angle.x1.tofloat(), m_rope_angle.x2.tofloat(),
                x.tofloat(), y.tofloat(), m_fix_point_gnd.x.tofloat(), m_fix_point_gnd.y.tofloat());
 
   //  printf ("Physics::ComputePendulumNextXY - Angle(%f,%f,%f)\n",
