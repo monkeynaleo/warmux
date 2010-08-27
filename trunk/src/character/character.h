@@ -183,7 +183,7 @@ public:
 
   void UpdateLastMovingTime();
 
-  bool HasGroundUnderFeets() const;
+  bool HasGroundUnderFeets() const { return IsImmobile() && !IsFalling(); }
   bool CanJump() const { return HasGroundUnderFeets(); };
 
   // Jumps

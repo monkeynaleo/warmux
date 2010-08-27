@@ -61,10 +61,6 @@ public:
 
 class Movement
 {
-  /* If you need this, implement it (correctly) */
-  const Movement& operator=(const Movement&);
-  Movement(const Movement&);
-  /**********************************************/
 public:
   typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
 
@@ -82,24 +78,24 @@ public:
   Movement(const xmlNode* xml);
   ~Movement();
 
-  void SetType(const std::string& type);
-  const std::string& GetType() const;
+  void SetType(const std::string& _type) { type = _type; }
+  const std::string& GetType() const { return type; }
 
-  uint GetFrameDuration() const;
-  uint GetNbLoops() const;
+  uint GetFrameDuration() const { return duration_per_frame; }
+  uint GetNbLoops() const { return nb_loops; }
 
-  bool IsAlwaysMoving() const;
+  bool IsAlwaysMoving() const { return always_moving; }
 
   // TODO lami: use a pointer ... std::vector<Movement::member_def *>
-  const std::vector<Movement::member_def> & GetFrames() const;
+  const std::vector<Movement::member_def> & GetFrames() const { return frames; }
 
-  uint GetTestLeft() const;
-  uint GetTestRight() const;
-  uint GetTestTop() const;
-  uint GetTestBottom() const;
+  uint GetTestLeft() const { return test_left; }
+  uint GetTestRight() const { return test_right; }
+  uint GetTestTop() const { return test_top; }
+  uint GetTestBottom() const { return test_bottom; }
 
-  static void ShareMovement(Movement* mvt);
-  static void UnshareMovement(Movement* mvt);
+  static void ShareMovement(Movement* mvt) { mvt->ref_count++; }
+  static void UnshareMovement(Movement* mvt) { if (!(--mvt->ref_count)) delete mvt; }
 };
 
 #endif //MEMBER_H

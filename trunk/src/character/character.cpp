@@ -589,11 +589,6 @@ void Character::UpdateLastMovingTime()
   do_nothing_time = Time::GetInstance()->Read();
 }
 
-bool Character::HasGroundUnderFeets() const
-{
-  return IsImmobile() && !IsFalling();
-}
-
 void Character::Refresh()
 {
   StartOrStopWalkingIfNecessary();
@@ -1227,4 +1222,3 @@ void Character::HandleKeyPressed_BackJump()
     ActionHandler::GetInstance()->NewAction(a);
   }
 }
-
