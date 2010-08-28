@@ -87,20 +87,31 @@ struct shared_net_info {
   std::list<GameServerInfo> lst_games;
   connection_state_t index_conn_state;
   bool todisplay;
-};
+  bool finished;
+} net_info;
 
-struct shared_net_info net_info;
-
-void InitNetInfo()
+static void InitNetInfo()
 {
   net_info.thread_refresh = NULL;
-  net_info.lst_games.clear();
   net_info.index_conn_state = CONNECTED;
   net_info.lock = SDL_CreateSemaphore(1);
   net_info.todisplay = false;
+  net_info.finished = true;
 }
 
-int RefreshNetInfo(void *)
+static void CleanNetInfo()
+{
+  SDL_SemWait(net_info.lock);
+  SDL_DestroySemaphore(net_info.lock);
+  int status;
+  if (net_info.thread_refresh)
+    SDL_WaitThread(net_info.thread_refresh, &status);
+  net_info.thread_refresh = NULL;
+  net_info.finished = true;
+  net_info.lst_games.clear();
+}
+
+static int RefreshNetInfo(void *)
 {
   MSG_DEBUG("network.refresh_games_list", "Begin");
 
@@ -109,7 +120,7 @@ int RefreshNetInfo(void *)
   if (conn != CONNECTED) {
     SDL_SemWait(net_info.lock);
     net_info.index_conn_state = conn;
-    net_info.thread_refresh = NULL;
+    net_info.finished = true;
     SDL_SemPost(net_info.lock);
     return -1;
   }
@@ -120,7 +131,7 @@ int RefreshNetInfo(void *)
   SDL_SemWait(net_info.lock);
   net_info.lst_games = lst;
   net_info.todisplay = true;
-  net_info.thread_refresh = NULL;
+  net_info.finished = true;
   SDL_SemPost(net_info.lock);
 
   // make sure the list will be updated right now
@@ -319,8 +330,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
 NetworkConnectionMenu::~NetworkConnectionMenu()
 {
-  SDL_SemWait(net_info.lock);
-  SDL_DestroySemaphore(net_info.lock);
+  CleanNetInfo();
 }
 
 void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
@@ -407,12 +417,19 @@ void NetworkConnectionMenu::ThreadRefreshList()
   SDL_SemWait(net_info.lock);
 
   if (net_info.thread_refresh != NULL) {
-    MSG_DEBUG("network.refresh_games_list", "A thread is already running");
-    SDL_SemPost(net_info.lock);
-    return;
+    // Check if the thread finished
+    if (net_info.finished) {
+      int status;
+      SDL_WaitThread(net_info.thread_refresh, &status);
+    } else {
+      MSG_DEBUG("network.refresh_games_list", "A thread is already running");
+      SDL_SemPost(net_info.lock);
+      return;
+    }
   }
   SDL_SemPost(net_info.lock);
 
+  net_info.finished = false;
   net_info.thread_refresh = SDL_CreateThread(RefreshNetInfo, NULL);
 }
 
