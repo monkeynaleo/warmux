@@ -95,7 +95,12 @@ public:
   uint GetTestBottom() const { return test_bottom; }
 
   static void ShareMovement(Movement* mvt) { mvt->ref_count++; }
-  static void UnshareMovement(Movement* mvt) { if (!(--mvt->ref_count)) delete mvt; }
+  static void UnshareMovement(Movement* mvt)
+  {
+    mvt->ref_count--;
+    if (!mvt)
+      delete mvt;
+  }
 };
 
 #endif //MEMBER_H
