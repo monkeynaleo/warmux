@@ -4,8 +4,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := freetype
 
-APP_SUBDIRS := src/autofit src/lzw src/smooth src/cache src/tools \
-               src/base src/gzip src/pcf src/sfnt src/truetype
+APP_SUBDIRS := src/autofit src/smooth src/cache src/tools \
+               src/base src/gzip src/sfnt src/truetype
 #$(patsubst $(LOCAL_PATH)/%, %, $(shell find $(LOCAL_PATH)/src -type d))
 
 # Add more subdirs here, like src/subdir1 src/subdir2

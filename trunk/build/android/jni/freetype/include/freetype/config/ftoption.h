@@ -149,7 +149,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*   Define this macro if you want to enable this `feature'.             */
   /*                                                                       */
-#define FT_CONFIG_OPTION_USE_LZW
+/*#define FT_CONFIG_OPTION_USE_LZW*/
 
 
   /*************************************************************************/
@@ -305,7 +305,7 @@ FT_BEGIN_HEADER
   /*   the FT_CONFIG_OPTION_MAC_FONTS option.                              */
   /*                                                                       */
 #ifdef FT_CONFIG_OPTION_MAC_FONTS
-#define FT_CONFIG_OPTION_GUESSING_EMBEDDED_RFORK
+/*#define FT_CONFIG_OPTION_GUESSING_EMBEDDED_RFORK*/
 #endif
 
 
@@ -339,7 +339,7 @@ FT_BEGIN_HEADER
   /*   The maximum number of modules that can be registered in a single    */
   /*   FreeType library object.  32 is the default.                        */
   /*                                                                       */
-#define FT_MAX_MODULES  16
+#define FT_MAX_MODULES  8
 
 
   /*************************************************************************/
@@ -586,7 +586,7 @@ FT_BEGIN_HEADER
   /* and avar tables).  This has many similarities to Type 1 Multiple      */
   /* Masters support.                                                      */
   /*                                                                       */
-#define TT_CONFIG_OPTION_GX_VAR_SUPPORT
+/*#define TT_CONFIG_OPTION_GX_VAR_SUPPORT*/
 
 
   /*************************************************************************/
