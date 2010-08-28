@@ -63,7 +63,6 @@ protected:
   friend class TileItem_ColorKey16;
   friend class TileItem_ColorKey24;
   Surface        m_surface;
-  uint           m_offset;
   uint8_t       *m_empty_bitfield;
   bool           m_is_empty;
   bool           m_need_check_empty;
@@ -112,8 +111,6 @@ public:
 class TileItem_BaseColorKey : public TileItem_NonEmpty
 {
 protected:
-  friend class TileItem_ColorKey16;
-  friend class TileItem_ColorKey24;
   Uint32  color_key;
   TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold);
   TileItem_BaseColorKey(uint8_t alpha_threshold);
@@ -153,8 +150,6 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
-  void SetDefaults(void);
-
 public:
   TileItem_AlphaSoftware(uint8_t threshold);
   TileItem_AlphaSoftware(void *pixels, int stride, uint8_t threshold);
