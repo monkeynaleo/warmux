@@ -189,15 +189,15 @@ void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
 bool TileItem_BaseColorKey::CheckEmpty()
 {
   uint8_t *buf = m_empty_bitfield;
-  int sx = m_start_check.x&0xFFFFFFF0,
-      ex = (m_end_check.x+7)&0xFFFFFFF0;
+  int      sx  = m_start_check.x&0xFFFFFFF8,
+           ex = (m_end_check.x+7)&0xFFFFFFF8;
 
   m_need_check_empty = false;
   m_is_empty = true;
-  buf += (sx + m_start_check.y*CELL_SIZE.x)>>8;
+  buf += m_start_check.y*(CELL_SIZE.x>>3);
 
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
-    for (int px=sx; px<ex; px+=8, buf++) {
+    for (int px=sx; px<ex; px+=8) {
       uint8_t empty_mask = 0;
 
       for (int i=0; i<8; i++) {
@@ -207,10 +207,10 @@ bool TileItem_BaseColorKey::CheckEmpty()
 
       if (empty_mask != 0xFF)
         m_is_empty = false;
-      *buf = empty_mask;
+      buf[px>>3] = empty_mask;
     }
 
-    buf += (CELL_SIZE.x-ex)>>3;
+    buf += CELL_SIZE.x>>3;
   }
 
   // Make sure it is empty
@@ -605,15 +605,15 @@ bool TileItem_AlphaSoftware::CheckEmpty()
   const Uint32 *ptr   = (Uint32 *)m_surface.GetPixels();
   int           pitch = m_surface.GetPitch()>>2;
   uint8_t      *buf   = m_empty_bitfield;
-  int           sx    = m_start_check.x&0xFFFFFFF0,
-                ex    = (m_end_check.x+7)&0xFFFFFFF0;
+  int           sx    = m_start_check.x&0xFFFFFFF8,
+                ex    = (m_end_check.x+7)&0xFFFFFFF8;
 
   m_is_empty = true;
   m_need_check_empty = false;
 
-  buf += (sx + m_start_check.y*CELL_SIZE.x)>>8;
+  buf += m_start_check.y*(CELL_SIZE.x>>3);
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
-    for (int px=sx; px<ex; px+=8, buf++) {
+    for (int px=sx; px<ex; px+=8) {
       uint8_t mask_empty = 0;
 
       for (int i=0; i<8; i++) {
@@ -623,11 +623,11 @@ bool TileItem_AlphaSoftware::CheckEmpty()
 
       if (mask_empty != 0xFF)
         m_is_empty = false;
-      buf[0] = mask_empty;
+      buf[px>>3] = mask_empty;
     }
 
     ptr += pitch;
-    buf += (CELL_SIZE.x-ex)>>3;
+    buf += CELL_SIZE.x>>3;
   }
 
   // Make sure it is empty
