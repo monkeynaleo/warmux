@@ -79,19 +79,14 @@ public:
   ~TileItem_NonEmpty() { delete[] m_empty_bitfield; }
 
   virtual bool CheckEmpty() = 0;
+  virtual void MergeSprite(const Point2i &position, Surface& spr) = 0;
   virtual void Empty(int start_x, int end_x, uint8_t* buf) = 0;
   virtual void Darken(int start_x, int end_x, uint8_t* buf) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
-  void MergeSprite(const Point2i &position, Surface& spr)
-  {
-    //spr.SetAlpha(0, 0);
-    //m_surface.Blit(spr, position);
-    //spr.SetAlpha(SDL_SRCALPHA, 0);
-    m_surface.MergeSurface(spr, position);
-  }
-
   void ForceRecheck();
+
+  static TileItem_NonEmpty* NewEmpty(uint8_t bpp, uint8_t alpha_threshold);
 
   bool NeedDelete()
   {
@@ -121,13 +116,14 @@ protected:
   friend class TileItem_ColorKey24;
   Uint32  color_key;
   TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold);
-  TileItem_BaseColorKey(uint8_t alpha_threshold)
-    : TileItem_NonEmpty(alpha_threshold) { };
+  TileItem_BaseColorKey(uint8_t alpha_threshold);
+
+  void MapColorKey();
 
 public:
-  static const Uint32 ColorKey = 0xFF00FF;
+  static const Uint32 COLOR_KEY = 0xFF00FF;
 
-  static TileItem_NonEmpty* NewEmpty(uint8_t bpp, uint8_t alpha_threshold);
+  void MergeSprite(const Point2i &position, Surface& spr);
 
   void Dig(const Point2i &position, const Surface& dig);
   bool CheckEmpty();
@@ -148,8 +144,6 @@ public:
 class TileItem_ColorKey24: public TileItem_BaseColorKey
 {
 public:
-  TileItem_ColorKey24(uint8_t threshold)
-    : TileItem_BaseColorKey(24, threshold) { };
   TileItem_ColorKey24(void *pixels, int stride, uint8_t threshold);
 
   void Empty(int start_x, int end_x, uint8_t* buf);
@@ -165,6 +159,12 @@ public:
   TileItem_AlphaSoftware(uint8_t threshold);
   TileItem_AlphaSoftware(void *pixels, int stride, uint8_t threshold);
   // Fill as empty
+
+  void MergeSprite(const Point2i &position, Surface& spr)
+  {
+    m_surface.MergeSurface(spr, position);
+    ForceRecheck();
+  }
 
   bool CheckEmpty();
   void Empty(int start_x, int end_x, uint8_t* buf);

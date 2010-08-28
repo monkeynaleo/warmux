@@ -34,7 +34,7 @@ TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)
   : TileItem()
   , m_alpha_threshold(alpha_threshold)
 {
-  m_empty_bitfield = new uint8_t[1<<(2*CELL_BITS-3)];
+  m_empty_bitfield = new uint8_t[(CELL_SIZE.x>>3) * CELL_SIZE.y];
   ForceRecheck();
 }
 
@@ -120,7 +120,33 @@ void TileItem_NonEmpty::ForceRecheck()
   m_is_empty = true;
 }
 
+TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_threshold)
+{
+  TileItem_NonEmpty *ti;
+
+  switch (bpp) {
+  case 2: ti = new TileItem_ColorKey16(alpha_threshold); break;
+  // Otherwise, we probably need to merge a sprite in, so let's be clean
+  default: ti = new TileItem_AlphaSoftware(alpha_threshold); break;
+  }
+
+  // Fill bitfield as empty
+  memset(ti->m_empty_bitfield, 0, (CELL_SIZE.x>>3)*CELL_SIZE.y);
+  ti->m_is_empty = true;
+  ti->m_need_check_empty = false;
+
+  return ti;
+}
+
 // === Implemenation of TileItem_BaseColorKey ==============================
+TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t alpha_threshold)
+  : TileItem_NonEmpty(alpha_threshold)
+{
+  m_surface.NewSurface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
+  MapColorKey();
+  m_surface.Fill(color_key);
+}
+
 TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
@@ -128,9 +154,15 @@ TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshol
                                                CELL_SIZE.x, CELL_SIZE.y, bpp,
                                                0, 0, 0, 0);
   m_surface = Surface(SDL_DisplayFormat(surf));
+  SDL_FreeSurface(surf);
+  MapColorKey();
+  m_surface.Fill(color_key);
+}
+
+void TileItem_BaseColorKey::MapColorKey()
+{
   color_key = m_surface.MapRGBA(255, 0, 255, 0);
   m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
-  SDL_FreeSurface(surf);
 }
 
 void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
@@ -174,23 +206,34 @@ bool TileItem_BaseColorKey::CheckEmpty()
   return m_is_empty;
 }
 
-TileItem_NonEmpty* TileItem_BaseColorKey::NewEmpty(uint8_t bpp, uint8_t alpha_threshold)
+void TileItem_BaseColorKey::MergeSprite(const Point2i &position, Surface& spr)
 {
-  TileItem_BaseColorKey *ti;
+  m_start_check.SetValues(position.max(Point2i(0, 0)));
+  m_end_check.SetValues(m_surface.GetSize().min(position+spr.GetSize()));
 
-  switch (bpp) {
-  case 2: ti = new TileItem_ColorKey16(alpha_threshold); break;
-  default: ti = new TileItem_ColorKey24(alpha_threshold); break;
+  spr.Lock();
+
+  for (int py = m_start_check.y ; py < m_end_check.y ; py++) {
+    for (int px = m_start_check.x ; px < m_end_check.x ; px++) {
+      Uint32 pixel = spr.GetPixel(px-position.x, py-position.y);
+      if (pixel) {
+        Uint8 r, g, b, a;
+        spr.GetRGBA(pixel, r, g, b, a);
+        if (a < m_alpha_threshold) {
+          pixel = color_key;
+        } else {
+          pixel = m_surface.MapRGBA(r, g, b, a);
+        }
+      } else {
+        pixel = color_key;
+      }
+
+      m_surface.PutPixel(px, py, pixel);
+    }
   }
 
-  ti->m_surface.Fill(ti->color_key);
-
-  // Fill bitfield as empty
-  memset(ti->m_empty_bitfield, 0, 1<<(2*CELL_BITS-3));
-  ti->m_is_empty = true;
-  ti->m_need_check_empty = false;
-
-  return ti;
+  spr.Unlock();
+  m_need_check_empty = true;
 }
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
@@ -211,17 +254,15 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
   for (y=0; y<CELL_SIZE.y; y++) {
     for (x=0; x<CELL_SIZE.x; x++)
       if (ptr[x*4 + ALPHA_OFFSET] < m_alpha_threshold)
-        *((Uint32*)(ptr + x*4)) = ColorKey;
+        *((Uint32*)(ptr + x*4)) = COLOR_KEY;
     ptr += pitch;
   }
 
   SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_SIZE.x, CELL_SIZE.y, 32, pitch,
                                                0xFF0000, 0xFF00, 0xFF, 0xFF000000);
-  SDL_SetAlpha(surf, 0, 0);
   m_surface = Surface(SDL_DisplayFormat(surf));
-  color_key = SDL_MapRGBA(m_surface.GetSurface()->format, 255, 0, 255, 0);
-  m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
   SDL_FreeSurface(surf);
+  MapColorKey();
 }
 
 void TileItem_ColorKey16::Darken(int start_x, int end_x, uint8_t* buf)
@@ -323,7 +364,7 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
   {
     for (x=0; x<CELL_SIZE.x; x++)
       if (!ptr[x*4 + ALPHA_OFFSET])
-        *((Uint32*)(ptr + x*4)) = ColorKey;
+        *((Uint32*)(ptr + x*4)) = COLOR_KEY;
     ptr += pitch;
   }
 
@@ -334,9 +375,8 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
   memset(&fmt, 0, sizeof(fmt));
   fmt.BitsPerPixel = 24;
   m_surface = Surface(SDL_ConvertSurface(surf, &fmt, SDL_SWSURFACE));
-  color_key = SDL_MapRGBA(m_surface.GetSurface()->format, 255, 0, 255, 0);
-  m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
   SDL_FreeSurface(surf);
+  MapColorKey();
 }
 
 void TileItem_ColorKey24::Darken(int start_x, int end_x, uint8_t* buf)
@@ -446,6 +486,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
   m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+  m_surface.Fill(0);
   SetDefaults();
 }
 
