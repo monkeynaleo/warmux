@@ -246,6 +246,8 @@ Network::~Network()
   SDL_DestroyMutex(cpus_lock);
   if (num_objects == 0) {
     WNet::Quit();
+    if (socket_set)
+      fprintf(stderr, "Forgot to disconnect network at some point?");
   }
 }
 
@@ -317,7 +319,7 @@ void Network::Disconnect()
   // Flush all actions
   ActionHandler::GetInstance()->Flush();
 
-  if (singleton != NULL) {
+  if (singleton) {
     NetworkThread::Stop();
     singleton->DisconnectNetwork();
     delete singleton;
@@ -333,20 +335,20 @@ void Network::DisconnectNetwork()
 {
   NetworkThread::Wait();
 
-  DistantComputer* tmp;
-
   SDL_LockMutex(cpus_lock);
   std::list<DistantComputer*>::iterator client = cpu.begin();
 
   while (client != cpu.end()) {
-    tmp = (*client);
+    DistantComputer* tmp = (*client);
+    // client must be removed from the list *before* being deleted!
     client = cpu.erase(client);
     delete tmp;
   }
   SDL_UnlockMutex(cpus_lock);
 
-  if (socket_set != NULL) {
+  if (socket_set) {
     delete socket_set;
+    socket_set = NULL;
   }
 }
 
