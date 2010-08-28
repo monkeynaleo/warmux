@@ -52,6 +52,7 @@ Downloader::~Downloader()
 {
   curl_easy_cleanup(curl);
   curl_global_cleanup();
+  delete[] curl_error_buf;
 }
 
 bool Downloader::Get(const char* url, FILE* file)
