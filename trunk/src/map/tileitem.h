@@ -96,7 +96,7 @@ public:
   bool IsEmpty(const Point2i &pos) const
   {
     ASSERT(!m_need_check_empty);
-    return m_empty_bitfield[(pos.y<<(CELL_BITS-3)) + (pos.x>>3)] & (1 << (pos.x&7));
+    return m_empty_bitfield[(pos.y*CELL_SIZE.x + pos.x)>>3] & (1 << (pos.x&7));
   }
 
 

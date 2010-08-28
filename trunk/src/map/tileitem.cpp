@@ -96,7 +96,8 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
   if (maxx > CELL_SIZE.x)
     maxx = CELL_SIZE.x;
 
-  m_start_check.SetValues(minx, (center.y - r)>0 ? center.y - r : 0);
+  y = center.y - r;
+  m_start_check.SetValues(minx, y>0 ? y : 0);
   m_end_check.SetValues(maxx, endy);
 
   m_need_check_empty = true;
@@ -186,18 +187,27 @@ void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
   m_need_check_empty = true;
 }
 
+#define SMALLER_CHECK
+
 bool TileItem_BaseColorKey::CheckEmpty()
 {
   uint8_t *buf = m_empty_bitfield;
+#ifdef SMALLER_CHECK
   int      sx  = m_start_check.x&0xFFFFFFF8,
            ex = (m_end_check.x+7)&0xFFFFFFF8;
+#endif
 
   m_need_check_empty = false;
   m_is_empty = true;
-  buf += m_start_check.y*(CELL_SIZE.x>>3);
 
+#ifdef SMALLER_CHECK
+  buf += (m_start_check.y*CELL_SIZE.x)>>3;
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
     for (int px=sx; px<ex; px+=8) {
+#else
+  for (int py=0; py<CELL_SIZE.y; py++) {
+    for (int px=0; px<CELL_SIZE.x; px+=8) {
+#endif
       uint8_t empty_mask = 0;
 
       for (int i=0; i<8; i++) {
@@ -213,9 +223,11 @@ bool TileItem_BaseColorKey::CheckEmpty()
     buf += CELL_SIZE.x>>3;
   }
 
+#ifdef SMALLER_CHECK
   // Make sure it is empty
   if (m_is_empty)
     CheckEmptyField();
+#endif
   return m_is_empty;
 }
 
@@ -586,8 +598,6 @@ void TileItem_AlphaSoftware::Darken(int start_x, int end_x, uint8_t* buf)
     start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
     end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
-    ASSERT(m_surface.GetSurface()->format->Amask == 0xFF000000);
-
     uint32_t *ptr = (uint32_t*)buf;
     ptr += start_x;
     while(end_x--) {
@@ -605,15 +615,24 @@ bool TileItem_AlphaSoftware::CheckEmpty()
   const Uint32 *ptr   = (Uint32 *)m_surface.GetPixels();
   int           pitch = m_surface.GetPitch()>>2;
   uint8_t      *buf   = m_empty_bitfield;
+#ifdef SMALLER_CHECK
   int           sx    = m_start_check.x&0xFFFFFFF8,
                 ex    = (m_end_check.x+7)&0xFFFFFFF8;
+#endif
 
   m_is_empty = true;
   m_need_check_empty = false;
 
-  buf += m_start_check.y*(CELL_SIZE.x>>3);
+#ifdef SMALLER_CHECK
+  ptr += m_start_check.y*pitch;
+  buf += (m_start_check.y*CELL_SIZE.x)>>3;
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
     for (int px=sx; px<ex; px+=8) {
+#else
+  for (int py=0; py<CELL_SIZE.y; py++) {
+    for (int px=0; px<CELL_SIZE.x; px+=8) {
+#endif
+
       uint8_t mask_empty = 0;
 
       for (int i=0; i<8; i++) {
@@ -630,8 +649,10 @@ bool TileItem_AlphaSoftware::CheckEmpty()
     buf += CELL_SIZE.x>>3;
   }
 
+#ifdef SMALLER_CHECK
   // Make sure it is empty
   if (m_is_empty)
     CheckEmptyField();
+#endif
   return m_is_empty;
 }
