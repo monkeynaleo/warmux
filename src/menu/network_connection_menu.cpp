@@ -77,8 +77,8 @@ public:
   {
     AddWidgetItem(selected, new GameInfoBox(size.x-10, pwd, ip_address, port, name));
   }
-  const std::string& GetAddress() { return ((GameInfoBox*)GetSelectedItem())->ip_address; }
-  const std::string& GetPort() { return ((GameInfoBox*)GetSelectedItem())->port; }
+  const std::string& GetAddress() { return ((GameInfoBox*)GetSelectedWidget())->ip_address; }
+  const std::string& GetPort() { return ((GameInfoBox*)GetSelectedWidget())->port; }
 };
 
 struct shared_net_info {
