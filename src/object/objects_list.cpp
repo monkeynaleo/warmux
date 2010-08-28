@@ -143,7 +143,7 @@ void ObjectsList::FreeMem()
 
 void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
 {
-  for (iterator it = overlapped_objects.begin(); it != overlapped_objects.end(); it ++) {
+  for (iterator it = overlapped_objects.begin(); it != overlapped_objects.end();) {
 
     if ((*it)->GetOverlappingObject() == obj) {
       MSG_DEBUG("lst_objects", "removing overlapse reference of \"%s\" (%p) in \"%s\"",
@@ -155,6 +155,8 @@ void ObjectsList::RemoveOverlappedObjectReference(const PhysicalObj * obj)
       MSG_DEBUG("lst_objects", "removing overlapse object of \"%s\" (%p)",
                 obj->GetName().c_str(), obj);
       it = overlapped_objects.erase(it);
+    } else {
+      ++it;
     }
   }
 }
