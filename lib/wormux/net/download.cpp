@@ -76,6 +76,19 @@ bool Downloader::Get(const char* url, FILE* file)
 
 extern "C" {
 
+static JavaVM    *vm        = NULL;
+
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *_vm, void *reserved)
+{
+  vm = _vm;
+  return JNI_VERSION_1_2;
+}
+
+JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *_vm, void *reserved)
+{
+  vm = _vm;
+}
+
 static JNIEnv    *env       = NULL;
 static jmethodID  FetchURL  = NULL;
 static jobject    dler      = NULL;
@@ -84,8 +97,8 @@ void
 JAVA_EXPORT_NAME(URLDownloader_nativeInitCallbacks)(JNIEnv * libEnv, jobject thiz)
 {
   env  = libEnv;
-  dler = thiz;
-  jclass dlerClass = env->GetObjectClass(thiz);
+  dler = env->NewGlobalRef(thiz);
+  jclass dlerClass = env->GetObjectClass(dler);
   FetchURL = env->GetMethodID(dlerClass, "FetchURL", "(Ljava/lang/String;)[B");
 }
 
@@ -96,6 +109,10 @@ Downloader::~Downloader() { }
 bool Downloader::Get(const char* url, FILE* file)
 {
   jboolean   isCopy = JNI_FALSE;
+
+  // Attach to avoid: "JNI ERROR: non-VM thread making JNI calls"
+  vm->AttachCurrentThread(&env, NULL);
+
   jstring    jurl   = env->NewStringUTF(url);
   jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl);
   int        len    = env->GetArrayLength(buffer);
@@ -114,6 +131,10 @@ bool Downloader::Get(const char* url, FILE* file)
   int written = fwrite(ptr, len, sizeof(jbyte), file);
   if (isCopy == JNI_TRUE)
     env->ReleaseByteArrayElements(buffer, ptr, 0);
+
+  // Done with JNI calls, detach
+  vm->DetachCurrentThread();
+
   if (written == len)
     return true;
   error = Format(_("Wrote %i/%i bytes"), written, len);
