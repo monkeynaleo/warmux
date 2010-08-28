@@ -125,8 +125,8 @@ Config::Config()
   , transparency(ALPHA)
 {
   // Set audio volume
-  volume_music = JukeBox::GetMaxVolume();
-  volume_effects = JukeBox::GetMaxVolume();
+  volume_music = JukeBox::GetMaxVolume()/2;
+  volume_effects = JukeBox::GetMaxVolume()/2;
 
   Constants::GetInstance();
 
