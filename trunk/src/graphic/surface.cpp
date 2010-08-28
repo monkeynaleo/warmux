@@ -484,6 +484,7 @@ int Surface::AAPolygonColor(std::list<Point2i> polygon, const Color & color)
 
 int Surface::FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color)
 {
+  // Internal static leak in sdl_gfx
   return filledPolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
