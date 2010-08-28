@@ -32,7 +32,7 @@ SpriteFrameCache::SpriteFrameCache()
 
 void SpriteFrameCache::CreateRotationCache(Surface &surface, uint cache_size, bool smooth)
 {
-  ASSERT (use_rotation == false);
+  ASSERT(use_rotation == false);
   use_rotation = true;
 
   rotated_surface.push_back(surface);
@@ -49,7 +49,8 @@ Surface SpriteFrameCache::GetFlippedSurfaceForAngle(Double angle) const
     angle_tmp -= TWO_PI;
   while (angle_tmp < ZERO)
     angle_tmp += TWO_PI;
-  int index = static_cast<int>(angle_tmp*(rotated_flipped_surface.size() / TWO_PI));
+  uint index = (uint)rotated_flipped_surface.size() * angle_tmp / TWO_PI;
+  ASSERT(rotated_flipped_surface.size()>index);
   return rotated_flipped_surface[index];
 }
 
@@ -61,22 +62,22 @@ Surface SpriteFrameCache::GetSurfaceForAngle(Double angle) const
   while (angle_tmp >= TWO_PI)
     angle_tmp -= TWO_PI;
 
-  uint index = static_cast<int>(angle_tmp*(rotated_surface.size() / TWO_PI));
-  ASSERT (rotated_surface.size()>index);
+  uint index = (uint)rotated_surface.size() * angle_tmp / TWO_PI;
+  ASSERT(rotated_surface.size()>index);
   return rotated_surface[index];
 }
 
 void SpriteFrameCache::CreateFlippingCache(Surface &surface, bool smooth)
 {
-  ASSERT (flipped_surface.IsNull());
+  ASSERT(flipped_surface.IsNull());
   flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, smooth);
   if (use_rotation) {
-    ASSERT (rotated_surface.size() != 0);
-    ASSERT (rotated_flipped_surface.size() == 0);
+    ASSERT(rotated_surface.size() != 0);
+    ASSERT(rotated_flipped_surface.size() == 0);
     rotated_flipped_surface.push_back(flipped_surface);
     const uint n = rotated_surface.size();
     for (uint i=1 ; i<n; i++) {
-      Double angle = TWO_PI * (1 - (Double) i / (Double) n);
+      Double angle = TWO_PI * (1 - Double(i) / n);
       rotated_flipped_surface.push_back(surface.RotoZoom(angle, -1.0, 1.0, smooth));
     }
   }
