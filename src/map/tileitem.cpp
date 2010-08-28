@@ -207,10 +207,10 @@ bool TileItem_BaseColorKey::CheckEmpty()
 
       if (empty_mask != 0xFF)
         m_is_empty = false;
-      buf[0] = empty_mask;
+      *buf = empty_mask;
     }
 
-    buf += CELL_SIZE.x>>8;
+    buf += (CELL_SIZE.x-ex)>>3;
   }
 
   // Make sure it is empty
@@ -627,7 +627,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
     }
 
     ptr += pitch;
-    buf += CELL_SIZE.x>>8;
+    buf += (CELL_SIZE.x-ex)>>3;
   }
 
   // Make sure it is empty
