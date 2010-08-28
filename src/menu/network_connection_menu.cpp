@@ -380,7 +380,7 @@ void NetworkConnectionMenu::__RefreshList()
     current = 0;
 
   // Empty the list:
-  cl_net_games_lst->Empty();
+  cl_net_games_lst->Clear();
 
   if (net_info.index_conn_state != CONNECTED) {
     DisplayNetError(net_info.index_conn_state);
