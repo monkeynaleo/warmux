@@ -85,10 +85,10 @@ public:
 
   void MergeSprite(const Point2i &position, Surface& spr)
   {
-    spr.SetAlpha(0, 0);
-    m_surface.Blit(spr, position);
-    spr.SetAlpha(SDL_SRCALPHA, 0);
-    //m_surface.MergeSurface(spr, position);
+    //spr.SetAlpha(0, 0);
+    //m_surface.Blit(spr, position);
+    //spr.SetAlpha(SDL_SRCALPHA, 0);
+    m_surface.MergeSurface(spr, position);
   }
 
   void ForceRecheck();
