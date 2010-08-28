@@ -22,22 +22,40 @@
 #ifndef MOVABLE_BY_USER_H
 #define MOVABLE_BY_USER_H
 
+#include <list>
 #include "interface/move_intention.h"
-#include <vector>
 
 class MovableByUser
 {
-  protected:
-    std::vector<const LRMoveIntention *> lr_move_intentions;
-    std::vector<const UDMoveIntention *> ud_move_intentions;
-  public:
-    const LRMoveIntention * GetLastLRMoveIntention();
-    void AddLRMoveIntention(const LRMoveIntention * intention);
-    void RemoveLRMoveIntention(const LRMoveIntention * intention);
+protected:
+  std::list<const LRMoveIntention *> lr_move_intentions;
+  std::list<const UDMoveIntention *> ud_move_intentions;
+public:
+  const LRMoveIntention * GetLastLRMoveIntention()
+  {
+    return (lr_move_intentions.size() == 0) ? NULL : lr_move_intentions.back();
+  }
+  void AddLRMoveIntention(const LRMoveIntention * intention)
+  {
+    lr_move_intentions.push_back(intention);
+  }
+  void RemoveLRMoveIntention(const LRMoveIntention * intention)
+  {
+    lr_move_intentions.remove(intention);
+  }
 
-    const UDMoveIntention * GetLastUDMoveIntention();
-    void AddUDMoveIntention(const UDMoveIntention * intention);
-    void RemoveUDMoveIntention(const UDMoveIntention * intention);
+  const UDMoveIntention * GetLastUDMoveIntention()
+  {
+    return (ud_move_intentions.size() == 0) ? NULL : ud_move_intentions.back();
+  }
+  void AddUDMoveIntention(const UDMoveIntention * intention)
+  {
+    ud_move_intentions.push_back(intention);
+  }
+  void RemoveUDMoveIntention(const UDMoveIntention * intention)
+  {
+    ud_move_intentions.remove(intention);
+  }
 };
 
 #endif

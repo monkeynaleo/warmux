@@ -164,7 +164,6 @@ wormux_SOURCES = \
         interface/mouse.h \
         interface/mouse_cursor.cpp \
         interface/mouse_cursor.h \
-        interface/movable_by_user.cpp \
         interface/movable_by_user.h \
         interface/move_intention.cpp \
         interface/move_intention.h \
