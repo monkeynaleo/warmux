@@ -162,8 +162,7 @@ TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y, uint8_t bpp)
   TileItem_NonEmpty *tin = NULL;
 
   if (ti->IsTotallyEmpty()) {
-    // Delete the TileItem_Empty object
-    delete item[y*nbCells.x + x];
+    // Do not delete the tile, it's a empty one!
     tin = TileItem_BaseColorKey::NewEmpty(bpp, m_alpha_threshold);
     item[y*nbCells.x +x] = tin;
   } else {
