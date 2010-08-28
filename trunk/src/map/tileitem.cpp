@@ -469,25 +469,11 @@ void TileItem_ColorKey24::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 }
 
 // === Implemenation of TileItem_SoftwareAlpha ==============================
-void TileItem_AlphaSoftware::SetDefaults(void)
-{
-  if (m_surface.GetBytesPerPixel() == 4) {
-    if (m_surface.GetSurface()->format->Amask == 0x000000ff)
-      m_offset = (SDL_BYTEORDER == SDL_LIL_ENDIAN) ? 0 : 3;
-    else
-      m_offset = (SDL_BYTEORDER == SDL_LIL_ENDIAN) ? 3 : 0;
-  } else {
-    fprintf(stderr, "Unexpected depth of %u for TileItem\n", m_surface.GetBytesPerPixel());
-    m_offset = 2;
-  }
-}
-
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
   m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
   m_surface.Fill(0);
-  SetDefaults();
 }
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t alpha_threshold)
@@ -498,7 +484,6 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t 
   // Required to have a copy of the area
   m_surface = Surface(SDL_DisplayFormatAlpha(surf));
   SDL_FreeSurface(surf);
-  SetDefaults();
 }
 
 void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, uint shift)
