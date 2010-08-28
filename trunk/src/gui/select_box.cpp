@@ -89,6 +89,24 @@ void SelectBox::AddWidgetItem(bool select, Widget* w)
     Select(m_items.size()-1);
 }
 
+void SelectBox::Empty()
+{
+  last = NULL;
+  SetFocusOn(NULL);
+  m_items.clear();
+  selected_item = -1;
+  ScrollBox::Empty();
+}
+
+void SelectBox::Clear()
+{
+  last = NULL;
+  SetFocusOn(NULL);
+  m_items.clear();
+  selected_item = -1;
+  ScrollBox::Clear();
+}
+
 void SelectBox::Select(uint index)
 {
   ASSERT(index < m_items.size());

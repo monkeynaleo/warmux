@@ -53,7 +53,8 @@ public:
   virtual void RemoveSelected();
   virtual void AddWidget(Widget* w);
   virtual void AddWidgetItem(bool select, Widget* w);
-  virtual void Empty() { m_items.clear(); selected_item = -1; ScrollBox::Empty(); }
+  virtual void Empty();
+  virtual void Clear();
 
   // Specific to selection
   int MouseIsOnWhichItem(const Point2i & mousePosition) const;
