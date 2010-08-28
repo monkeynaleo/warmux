@@ -38,9 +38,11 @@ static size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
   return fwrite(buf, size, nmemb, (FILE*)fd);
 }
 
-Downloader::Downloader():
-  curl(curl_easy_init())
+Downloader::Downloader()
 {
+  curl_global_init(CURL_GLOBAL_NOTHING);
+
+  curl = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
   curl_error_buf = new char[CURL_ERROR_SIZE];
   curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curl_error_buf);
@@ -49,6 +51,7 @@ Downloader::Downloader():
 Downloader::~Downloader()
 {
   curl_easy_cleanup(curl);
+  curl_global_cleanup();
 }
 
 bool Downloader::Get(const char* url, FILE* file)
