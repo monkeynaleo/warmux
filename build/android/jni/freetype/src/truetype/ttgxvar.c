@@ -52,12 +52,12 @@
 #include FT_MULTIPLE_MASTERS_H
 
 #include "ttpload.h"
-#include "ttgxvar.h"
 
 #include "tterrors.h"
 
 
 #ifdef TT_CONFIG_OPTION_GX_VAR_SUPPORT
+#include "ttgxvar.h"
 
 
 #define FT_Stream_FTell( stream )  \
