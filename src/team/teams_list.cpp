@@ -164,9 +164,9 @@ void TeamsList::LoadList()
 
   // Default selection
   std::list<uint> nv_selection;
-  nv_selection.push_back (0);
-  nv_selection.push_back (1);
-  ChangeSelection (nv_selection);
+  nv_selection.push_back(0);
+  nv_selection.push_back(1);
+  ChangeSelection(nv_selection);
 
   std::cout << std::endl;
   InitList(Config::GetInstance()->AccessTeamList());
@@ -235,13 +235,18 @@ Team *TeamsList::FindById(const std::string &id, int &pos)
 
 Team *TeamsList::FindByIndex(uint index)
 {
+  if (full_list.size() < index+1) {
+    ASSERT(false);
+    return NULL;
+  }
+
   full_iterator it = full_list.begin(), end = full_list.end();
   uint i=0;
   for (; it != end; ++it, ++i) {
     if (i == index)
       return (*it);
   }
-  ASSERT (false);
+
   return NULL;
 }
 
@@ -276,7 +281,7 @@ void TeamsList::InitList (const std::list<ConfigTeam> &lst)
   Clear();
   std::list<ConfigTeam>::const_iterator it=lst.begin(), end=lst.end();
   for (; it != end; ++it)
-    AddTeam (*it, true, false);
+    AddTeam(*it, true, false);
   active_team = playing_list.begin();
 }
 
@@ -418,14 +423,14 @@ void TeamsList::RefreshSort ()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::ChangeSelection (const std::list<uint>& nv_selection)
+void TeamsList::ChangeSelection(const std::list<uint>& nv_selection)
 {
   selection = nv_selection;
 
   selection_iterator it=selection.begin(), end = selection.end();
   playing_list.clear();
   for (; it != end; ++it)
-    playing_list.push_back (FindByIndex(*it));
+    playing_list.push_back(FindByIndex(*it));
   active_team = playing_list.begin();
 }
 
@@ -465,7 +470,7 @@ void TeamsList::AddTeam(const ConfigTeam &the_team_cfg, bool is_local,
   MSG_DEBUG("team", "%s, local: %d\n", the_team_cfg.id.c_str(), is_local);
 
   int pos;
-  Team *the_team = FindById (the_team_cfg.id, pos);
+  Team *the_team = FindById(the_team_cfg.id, pos);
   if (the_team != NULL) {
     AddTeam(the_team, pos, the_team_cfg, is_local);
   } else {
