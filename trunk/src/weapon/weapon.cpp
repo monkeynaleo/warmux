@@ -554,7 +554,7 @@ void Weapon::Draw(){
     if (!EqualsZero(min_angle - max_angle)) {
       Double angle = m_image->GetRotation_rad();
       angle += sin(HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
-             * TWO * PI;
+             * TWO_PI;
       m_image->SetRotation_rad (angle);
     }
     else {
@@ -681,8 +681,8 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   int min_angle_deg = 0, max_angle_deg = 0;
   XmlReader::ReadInt(elem, "min_angle", min_angle_deg);
   XmlReader::ReadInt(elem, "max_angle", max_angle_deg);
-  min_angle = static_cast<Double>(min_angle_deg) * PI / (Double)180;
-  max_angle = static_cast<Double>(max_angle_deg) * PI / (Double)180;
+  min_angle = min_angle_deg * PI / 180;
+  max_angle = max_angle_deg * PI / 180;
   if (EqualsZero(min_angle - max_angle))
     m_display_crosshair = false;
 

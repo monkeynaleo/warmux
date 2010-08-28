@@ -122,7 +122,7 @@ void WindParticle::Refresh()
     sprite->Update();
 
   if (GetAlignParticleState()) {
-    sprite->SetRotation_rad(GetSpeedAngle() - (PI / 2));
+    sprite->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
   else if (ActiveMap()->GetWind().rotation_speed != ZERO) // Rotate the sprite if needed
   {

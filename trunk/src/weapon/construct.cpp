@@ -47,7 +47,7 @@
 #include "include/app.h"
 #endif
 
-const Double DELTA_ANGLE = PI / SIX; // should be a multiple
+static const Double DELTA_ANGLE = PI / 6; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",

@@ -72,7 +72,7 @@ void Gnu::Shoot(Double strength)
 
   Double angle = ActiveCharacter().GetFiringAngle();
 
-  if(angle<PI/2 && angle>-PI/2)
+  if (angle<HALF_PI && angle>-HALF_PI)
     m_sens = 1;
   else
     m_sens = -1;

@@ -129,7 +129,7 @@ void AffineTransform2D::SetShearAnimation(int start_time, int duration, int time
     Double coef = ONE - (time - start_time) / (Double)duration;
     if(invert)
     coef = ONE - coef;
-    coef = -(cos((ONE - coef) * PI * TWO * shear_tremor) * coef);
+    coef = -(cos((ONE - coef) * TWO_PI * shear_tremor) * coef);
     SetShear(shear_x_end + (coef * (shear_x_start - shear_x_end)), shear_y_end + (coef * (shear_y_start - shear_y_end)));
   } else {
     Init();

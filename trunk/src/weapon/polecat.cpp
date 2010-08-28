@@ -77,7 +77,7 @@ void Polecat::Shoot(Double strength)
 
   Double angle = ActiveCharacter().GetFiringAngle();
 
-  if(angle<PI/2 && angle>-PI/2)
+  if (angle<HALF_PI && angle>-HALF_PI)
     m_sens = 1;
   else
     m_sens = -1;
@@ -150,13 +150,13 @@ void Polecat::Refresh()
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norm, angle);
 
-  while(angle < -PI)
+  while (angle < -PI)
     angle += PI;
-  while(angle > PI)
+  while (angle > PI)
     angle -= PI;
 
   angle /= TWO;
-  if(m_sens == -1) {
+  if (m_sens == -1) {
     if(angle > 0)
       angle -= HALF_PI;
     else

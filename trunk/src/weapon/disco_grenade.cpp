@@ -81,7 +81,7 @@ void DiscoGrenade::Explosion()
 
   for(uint i=0;i < star_nbr;i++)
   {
-    Double angle = TWO*(Double)i*PI/(Double)star_nbr;
+    Double angle = i*TWO_PI/star_nbr;
     //  cos_angle[i] = cos(angle);
     //  sin_angle[i] = sin(angle);
     smoke_engine.AddNow(Point2i(GetX()+(int)(cos_angle[i]*(Double)cfg.explosion_range),

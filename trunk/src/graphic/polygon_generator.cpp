@@ -68,7 +68,7 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
     top = Point2d(ZERO, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) / TWO);
-    trans.SetRotation((TWO * PI * -i) / nb_point);
+    trans.SetRotation((TWO_PI * -i) / nb_point);
     tmp->AddPoint(trans * top);
   }
   return tmp;
@@ -149,12 +149,12 @@ Polygon * PolygonGenerator::GeneratePie(Double diameter, int nb_point, Double an
   AffineTransform2D trans = AffineTransform2D();
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
-    top = Point2d(ZERO, diameter / TWO);
+    top = Point2d(ZERO, diameter * ONE_HALF);
     trans.SetRotation(angle_offset + ((i * angle) / nb_point));
     tmp->AddPoint(trans * top);
   }
-  if(angle < 2 * PI)
-    tmp->AddPoint(Point2d(ZERO, ZERO));
+  if(angle < TWO_PI)
+    tmp->AddPoint(Point2d(0, 0));
   return tmp;
 }
 
@@ -167,12 +167,12 @@ Polygon * PolygonGenerator::GeneratePartialTorus(Double diameter, Double min_dia
   }
   Polygon * tmp = new Polygon();
   AffineTransform2D trans = AffineTransform2D();
-  Point2d top = Point2d(ZERO, diameter / TWO);
+  Point2d top = Point2d(0, diameter*ONE_HALF);
   for(int i = 0; i < nb_point; i++) {
     trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
     tmp->AddPoint(trans * top);
   }
-  top = Point2d(ZERO, min_diameter / TWO);
+  top = Point2d(0, min_diameter*ONE_HALF);
   for(int i = nb_point - 1; i >= 0; i--) {
     trans.SetRotation(angle_offset + ((i * angle) / (nb_point - 1)));
     tmp->AddPoint(trans * top);
@@ -186,4 +186,3 @@ DecoratedBox * PolygonGenerator::GenerateDecoratedBox(Double width, Double heigh
 
   return tmp;
 }
-

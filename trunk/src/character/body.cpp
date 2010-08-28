@@ -357,7 +357,7 @@ void Body::ProcessFollowCrosshair(member_mvt & mb_mvt)
   // Use the movement of the crosshair
   Double angle = owner->GetFiringAngle(); /* Get -2 * PI < angle =< 2 * PI*/
   if (ZERO > angle) {
-    angle += TWO * PI; // so now 0 < angle < 2 * PI;
+    angle += TWO_PI; // so now 0 < angle < 2 * PI;
   }
 
   if (DIRECTION_LEFT == ActiveCharacter().GetDirection()) {
@@ -380,7 +380,7 @@ void Body::ProcessFollowHalfCrosshair(member_mvt & mb_mvt)
     angle_rad = -HALF_PI - ONE_HALF * angle_rad;//formerly in deg to -45 + (-90 - angle) / 2;
 
   if (angle_rad < 0) {
-    angle_rad += TWO * PI; // so now 0 < angle < 2 * PI;
+    angle_rad += TWO_PI; // so now 0 < angle < 2 * PI;
   }
 
   mb_mvt.SetAngle(mb_mvt.GetAngle() + angle_rad);
@@ -392,7 +392,7 @@ void Body::ProcessFollowSpeed(member_mvt & mb_mvt)
   Double angle_rad = owner->GetSpeedAngle();
 
   if (angle_rad < 0) {
-    angle_rad += TWO * PI; // so now 0 < angle < 2 * PI;
+    angle_rad += TWO_PI; // so now 0 < angle < 2 * PI;
   }
 
   if (owner->GetDirection() == DIRECTION_LEFT) {

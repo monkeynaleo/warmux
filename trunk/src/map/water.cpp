@@ -42,7 +42,7 @@ const uint MS_BETWEEN_SHIFTS = 20;
 const uint PATTERN_WIDTH = 180;
 const Double WAVE_HEIGHT_A = 5;
 const Double WAVE_HEIGHT_B = 8;
-const Double DEGREE = TWO*PI/static_cast<Double>(360.0);
+const Double DEGREE = TWO_PI/360;
 const int WAVE_INC = 5;
 const int WAVE_COUNT = 3;
 const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
@@ -184,7 +184,7 @@ void Water::Refresh()
       } else {
         height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
                  sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
-                     / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO*PI)
+                     / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO_PI)
                  )/(a*dt+b));
       }
     } else {
