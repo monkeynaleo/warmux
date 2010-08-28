@@ -136,8 +136,8 @@ void RPG::Refresh()
       Double wish_angle = GetPosition().ComputeAngle( m_targetPoint );
       Double max_rotation = abs(acfg.max_controlled_turn_speed * timestep / (Double)1000);
       Double diff = fmod(wish_angle-angle_local, PI*TWO);
-      if(diff < -PI) diff += PI*TWO;
-      if(diff > PI) diff -= PI*TWO;
+      if(diff < -PI) diff += TWO_PI;
+      if(diff > PI) diff -= TWO_PI;
       //diff should now be between -PI and PI...
       if(diff > max_rotation) {
         angle_local += max_rotation;

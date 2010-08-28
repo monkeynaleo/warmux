@@ -485,7 +485,7 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
       if (isNaN(contact_angle))
         angle = angle + PI;
       else
-        angle =  PI - angle -TWO *  contact_angle;
+        angle =  PI - angle - 2 *  contact_angle;
 
       // Apply rebound factor to the object speed.
       norme = norme * m_rebound_factor;

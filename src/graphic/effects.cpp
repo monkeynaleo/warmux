@@ -38,16 +38,16 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
     b.SetAlpha(SDL_SRCALPHA, 0);
     a.Lock();
     b.Lock();
-    for(int x = 0; x < a.GetWidth(); x++){
-      for(int y = 0; y < a.GetHeight(); y++){
+    for (int x = 0; x < a.GetWidth(); x++){
+      for (int y = 0; y < a.GetHeight(); y++){
         Uint32 col = a.GetPixel(x, y);
         Uint8 r, g, bl, al;
 
         a.GetRGBA(col, r, g, bl, al);
         col = b.MapRGBA(r, g, bl, al);
 
-        Double t = (Double)nbr_frames * sin(PI*(Double)f/(Double)nbr_frames);
-        unsigned int wave_x = (long)(x+(wave_amp*(1+sin(((Double)t*wave_per*TWO*PI/(Double)nbr_frames)*(Double)y*TWO*PI/(Double)a.GetHeight()))));
+        Double t = nbr_frames * sin(f*PI/nbr_frames);
+        uint wave_x = (long)(x+(wave_amp*(1+sin((t*wave_per*TWO_PI/nbr_frames)*y*TWO_PI/a.GetHeight()))));
         b.PutPixel(wave_x, y, col);
       }
     }

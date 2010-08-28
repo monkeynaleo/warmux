@@ -150,7 +150,7 @@ public:
   void SetRotation_rad( Double angle_rad);
   const Double &GetRotation_rad() const
   {
-    ASSERT(rotation_rad > -2*PI && rotation_rad <= 2*PI);
+    ASSERT(rotation_rad > -TWO_PI && rotation_rad <= TWO_PI);
     return rotation_rad;
   }
   void SetRotation_HotSpot(const Point2i& new_hotspot);

@@ -120,10 +120,10 @@ void Sprite::AddFrame(const Surface &surf, uint delay){
 
 void Sprite::SetRotation_rad( Double angle_rad)
 {
-  while (angle_rad > 2*PI)
-    angle_rad -= 2 * PI;
-  while (angle_rad <= -2*PI)
-    angle_rad += 2 * PI;
+  while (angle_rad > TWO_PI)
+    angle_rad -= TWO_PI;
+  while (angle_rad <= -TWO_PI)
+    angle_rad += TWO_PI;
 
   if (rotation_rad == angle_rad)
     return;

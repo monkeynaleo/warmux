@@ -39,6 +39,7 @@ typedef struct fixedpoint::fixed_point<16> Double;
 static const Double QUARTER_PI = 0.25*M_PI;
 static const Double HALF_PI    = 0.5*M_PI;
 static const Double PI         = M_PI;
+static const Double TWO_PI     = 2*M_PI;
 
 // Limit under which, real numbers are considered as NULL
 static const Double EPSILON = 0.001f;
