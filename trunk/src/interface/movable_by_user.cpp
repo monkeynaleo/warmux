@@ -27,7 +27,7 @@ static void DeleteMatchingFromVector(const T * t, std::vector<const T *> & v)
   typename std::vector<const T*>::iterator it = v.begin();
   while (it != v.end()) {
     if (*it == t)
-      v.erase(it);
+      it = v.erase(it);
     else
       it++;
   }
