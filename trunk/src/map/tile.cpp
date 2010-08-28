@@ -230,7 +230,6 @@ void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
       TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
       tin->GetSurface().Blit(s, dst, src.GetPosition());
       tin->GetSurface().Lock();
-      tin->CheckEmpty();
       tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
@@ -263,9 +262,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       Point2i offset = position - (c<<CELL_BITS);
       TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
 
-      tin->MergeSprite(offset, surf);
       tin->GetSurface().Lock();
-      tin->CheckEmpty();
+      tin->MergeSprite(offset, surf);
       tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
