@@ -128,7 +128,7 @@ bool Downloader::Get(const char* url, FILE* file)
     return false;
   }
 
-  int written = fwrite(ptr, len, sizeof(jbyte), file);
+  int written = fwrite(ptr, sizeof(jbyte), len, file);
   if (isCopy == JNI_TRUE)
     env->ReleaseByteArrayElements(buffer, ptr, 0);
 
