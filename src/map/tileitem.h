@@ -59,9 +59,6 @@ public:
 class TileItem_NonEmpty : public TileItem
 {
 protected:
-  friend class TileItem_BaseColorKey;
-  friend class TileItem_ColorKey16;
-  friend class TileItem_ColorKey24;
   Surface        m_surface;
   uint8_t       *m_empty_bitfield;
   bool           m_is_empty;
@@ -72,7 +69,8 @@ protected:
 
   TileItem_NonEmpty(uint8_t alpha_threshold);
 
-  bool CheckEmptyField() const;
+  void CheckEmptyField();
+  virtual void ForceEmpty();
 
 public:
   ~TileItem_NonEmpty() { delete[] m_empty_bitfield; }
@@ -116,6 +114,7 @@ protected:
   TileItem_BaseColorKey(uint8_t alpha_threshold);
 
   void MapColorKey();
+  void ForceEmpty();
 
 public:
   static const Uint32 COLOR_KEY = 0xFF00FF;
@@ -150,6 +149,9 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
+protected:
+  void ForceEmpty();
+
 public:
   TileItem_AlphaSoftware(uint8_t threshold);
   TileItem_AlphaSoftware(void *pixels, int stride, uint8_t threshold);
