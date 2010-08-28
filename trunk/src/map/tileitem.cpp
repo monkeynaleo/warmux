@@ -102,14 +102,19 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
   m_need_check_empty = true;
 }
 
-bool TileItem_NonEmpty::CheckEmptyField() const
+void TileItem_NonEmpty::CheckEmptyField()
 {
   const Uint32 *ptr = (Uint32 *)m_empty_bitfield;
-  for (int i=0; i<(CELL_SIZE.y*CELL_SIZE.x)>>2; i++) {
-    if (!(*(ptr++)))
-      return false;
+
+  m_need_check_empty = false;
+
+  for (int i=0; i<(CELL_SIZE.y*CELL_SIZE.x)>>(3+2); i++, ptr++) {
+    if (*ptr != 0xFFFFFFFF) {
+      m_is_empty = false;
+      return;
+    }
   }
-  return true;
+  m_is_empty = true;
 }
 
 void TileItem_NonEmpty::ForceRecheck()
@@ -118,6 +123,13 @@ void TileItem_NonEmpty::ForceRecheck()
   m_end_check.SetValues(CELL_SIZE);
   m_need_check_empty = true;
   m_is_empty = true;
+}
+
+void TileItem_NonEmpty::ForceEmpty()
+{
+  memset(m_empty_bitfield, 0xFF, (CELL_SIZE.x>>3)*CELL_SIZE.y);
+  m_is_empty = true;
+  m_need_check_empty = false;
 }
 
 TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_threshold)
@@ -130,23 +142,12 @@ TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_thresh
   default: ti = new TileItem_AlphaSoftware(alpha_threshold); break;
   }
 
-  // Fill bitfield as empty
-  memset(ti->m_empty_bitfield, 0, (CELL_SIZE.x>>3)*CELL_SIZE.y);
-  ti->m_is_empty = true;
-  ti->m_need_check_empty = false;
-
+  ti->ForceEmpty();
+  
   return ti;
 }
 
 // === Implemenation of TileItem_BaseColorKey ==============================
-TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t alpha_threshold)
-  : TileItem_NonEmpty(alpha_threshold)
-{
-  m_surface.NewSurface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
-  MapColorKey();
-  m_surface.Fill(color_key);
-}
-
 TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
@@ -156,6 +157,11 @@ TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshol
   m_surface = Surface(SDL_DisplayFormat(surf));
   SDL_FreeSurface(surf);
   MapColorKey();
+}
+
+void TileItem_BaseColorKey::ForceEmpty()
+{
+  TileItem_NonEmpty::ForceEmpty();
   m_surface.Fill(color_key);
 }
 
@@ -183,26 +189,33 @@ void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
 bool TileItem_BaseColorKey::CheckEmpty()
 {
   uint8_t *buf = m_empty_bitfield;
+  int sx = m_start_check.x&0xFFFFFFF0,
+      ex = (m_end_check.x+7)&0xFFFFFFF0;
 
+  m_need_check_empty = false;
   m_is_empty = true;
-  for (int py=0; py<CELL_SIZE.y; py++) {
-    for (int px=0; px<CELL_SIZE.x; px+=8) {
-      uint8_t empty = 0;
+  buf += (sx + m_start_check.y*CELL_SIZE.x)>>8;
+
+  for (int py=m_start_check.y; py<m_end_check.y; py++) {
+    for (int px=sx; px<ex; px+=8, buf++) {
+      uint8_t empty_mask = 0;
 
       for (int i=0; i<8; i++) {
-        if (m_surface.GetPixel(px+i, py) == color_key) {
-          empty |= 1<<i;
-        } else {
-          m_is_empty = false;
-        }
+        if (m_surface.GetPixel(px+i, py) == color_key)
+          empty_mask |= 1<<i;
       }
 
-      buf[0] = empty; buf++;
+      if (empty_mask != 0xFF)
+        m_is_empty = false;
+      buf[0] = empty_mask;
     }
+
+    buf += CELL_SIZE.x>>8;
   }
 
-  //m_empty = CheckEmptyField();
-  m_need_check_empty = false;
+  // Make sure it is empty
+  if (m_is_empty)
+    CheckEmptyField();
   return m_is_empty;
 }
 
@@ -245,7 +258,7 @@ void TileItem_BaseColorKey::MergeSprite(const Point2i &position, Surface& spr)
 
 // === Implemenation of TileItem_ColorKey16 ==============================
 TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t threshold)
-  : TileItem_BaseColorKey(threshold)
+  : TileItem_BaseColorKey(16, threshold)
 {
   uint8_t *ptr  = (uint8_t*)pixels;
   int      x, y;
@@ -274,7 +287,7 @@ void TileItem_ColorKey16::Darken(int start_x, int end_x, uint8_t* buf)
 
     uint16_t *ptr = (uint16_t*)buf;
     ptr += start_x;
-    while(end_x--) {
+    while (end_x--) {
       uint16_t s = ptr[0];
       if (s != color_key)
         ptr[0] = (s>>1)&0x7BEF;
@@ -291,9 +304,10 @@ void TileItem_ColorKey16::Empty(int start_x, int end_x, uint8_t* buf)
     end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
 
     uint16_t *ptr = (uint16_t*)buf;
+    uint16_t ckey = color_key;
     ptr += start_x;
     while (end_x--)
-      *(ptr++) = color_key;
+      *(ptr++) = ckey;
   }
 }
 
@@ -354,14 +368,13 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 
 // === Implemenation of TileItem_ColorKey24 ==============================
 TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t threshold)
-  : TileItem_BaseColorKey(threshold)
+  : TileItem_BaseColorKey(24, threshold)
 {
   uint8_t *ptr  = (uint8_t*)pixels;
   int      x, y;
 
   // Set pixels considered as transparent as colorkey
-  for (y=0; y<CELL_SIZE.y; y++)
-  {
+  for (y=0; y<CELL_SIZE.y; y++) {
     for (x=0; x<CELL_SIZE.x; x++)
       if (!ptr[x*4 + ALPHA_OFFSET])
         *((Uint32*)(ptr + x*4)) = COLOR_KEY;
@@ -473,6 +486,11 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
   m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+}
+
+void TileItem_AlphaSoftware::ForceEmpty()
+{
+  TileItem_NonEmpty::ForceEmpty();
   m_surface.Fill(0);
 }
 
@@ -587,26 +605,33 @@ bool TileItem_AlphaSoftware::CheckEmpty()
   const Uint32 *ptr   = (Uint32 *)m_surface.GetPixels();
   int           pitch = m_surface.GetPitch()>>2;
   uint8_t      *buf   = m_empty_bitfield;
+  int           sx    = m_start_check.x&0xFFFFFFF0,
+                ex    = (m_end_check.x+7)&0xFFFFFFF0;
 
-  ASSERT(m_surface.GetSurface()->format->Amask == 0xFF000000);
+  m_is_empty = true;
+  m_need_check_empty = false;
 
-  for (int py=0; py<CELL_SIZE.y; py++) {
-    for (int px=0; px<CELL_SIZE.x; px+=8) {
-      uint8_t empty = 0;
+  buf += (sx + m_start_check.y*CELL_SIZE.x)>>8;
+  for (int py=m_start_check.y; py<m_end_check.y; py++) {
+    for (int px=sx; px<ex; px+=8, buf++) {
+      uint8_t mask_empty = 0;
 
       for (int i=0; i<8; i++) {
-        if ((ptr[px+i]&0xFF000000)>>24 < m_alpha_threshold) {
-          empty |= 1<<i;
-        } else if (ptr[px+i]) {
-          m_is_empty = false;
-        }
+        if ((ptr[px+i]&0xFF000000)>>24 < m_alpha_threshold)
+          mask_empty |= 1<<i;
       }
 
-      buf[0] = empty; buf++;
+      if (mask_empty != 0xFF)
+        m_is_empty = false;
+      buf[0] = mask_empty;
     }
+
     ptr += pitch;
+    buf += CELL_SIZE.x>>8;
   }
 
-  m_need_check_empty = false;
+  // Make sure it is empty
+  if (m_is_empty)
+    CheckEmptyField();
   return m_is_empty;
 }
