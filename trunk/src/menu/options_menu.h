@@ -43,10 +43,10 @@ private:
   ItemBox *lbox_languages;
 #endif
   CheckBox *opt_display_wind_particles;
-  CheckBox *opt_display_multisky;
   CheckBox *opt_display_energy;
   CheckBox *opt_display_name;
 #ifndef ANDROID
+  CheckBox *opt_display_multisky;
 # ifndef __APPLE__
   CheckBox *full_screen;
 # endif
