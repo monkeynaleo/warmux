@@ -75,7 +75,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libxml2.lib fribidid.lib libpng.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libxml2.lib fribidid.lib libpng.lib zlib.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
@@ -174,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libpng.lib libxml2.lib fribidi.lib $(NOINHERIT)"
+				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDLmain.lib SDL_mixer.lib SDL_image.lib SDL_net.lib SDL_ttf.lib sdlgfx.lib intl.lib libcurl.lib wldap32.lib libpng.lib libxml2.lib fribidi.lib zlib.lib $(NOINHERIT)"
 				OutputFile="$(ProjectDir)..\..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrtd.lib;libcmt.lib"
@@ -907,10 +907,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\interface\mouse_cursor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\interface\movable_by_user.cpp"
 					>
 				</File>
 				<File
@@ -2155,6 +2151,10 @@
 				</File>
 				<File
 					RelativePath="..\..\lib\wormux\include\WORMUX_action_handler.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\lib\wormux\include\WORMUX_base.h"
 					>
 				</File>
 				<File
