@@ -346,19 +346,13 @@ void Tile::SetPreviewSizeDelta(int delta)
   CheckPreview(true);
 }
 
-static uint32_t read_png_rows(png_structp png_ptr,
-                              uint8_t *buffer, uint height, int stride,
-                              uint32_t crc, uint width)
+static void read_png_rows(png_structp png_ptr, uint8_t *buffer,
+                          uint height, int stride)
 {
   while (height--) {
-    uint i;
     png_read_row(png_ptr, buffer, NULL);
-    for (i=0; i<4*width; i++)
-      crc += buffer[i+0] + buffer[i+1] + buffer[i+2] + buffer[i+3];
     buffer += stride;
-    crc = crc % 429496000;
   }
-  return crc;
 }
 
 bool Tile::LoadImage(const std::string& filename,
@@ -415,7 +409,6 @@ bool Tile::LoadImage(const std::string& filename,
   png_set_bgr(png_ptr);
 
   FreeMem();
-  crc = 0;
   m_alpha_threshold = alpha_threshold;
   InitTile(Point2i(width, height), upper_left_offset, lower_right_offset);
 
@@ -455,20 +448,14 @@ bool Tile::LoadImage(const std::string& filename,
     if (i.y == startCell.y) {
       memset(buffer, 0, stride<<CELL_BITS);
       // Only some lines are to be loaded
-      crc = read_png_rows(png_ptr,
-                          buffer + offsetx + offsety*stride,
-                          CELL_SIZE.y - offsety, stride,
-                          crc, width);
+      read_png_rows(png_ptr, buffer + offsetx + offsety*stride,
+                    CELL_SIZE.y - offsety, stride);
     } else if (i.y == endCell.y-1) {
       memset(buffer, 0, stride<<CELL_BITS);
       // Only some lines are to be loaded
-      crc = read_png_rows(png_ptr,
-                          buffer + offsetx, endoffy, stride,
-                          crc, width);
+      read_png_rows(png_ptr, buffer + offsetx, endoffy, stride);
     } else {
-      crc = read_png_rows(png_ptr,
-                          buffer + offsetx, CELL_SIZE.y, stride,
-                          crc, width);
+      read_png_rows(png_ptr, buffer + offsetx, CELL_SIZE.y, stride);
     }
 
     for (; i.x < endCell.x; i.x++) {
@@ -491,6 +478,9 @@ bool Tile::LoadImage(const std::string& filename,
         ti->GetSurface().Lock();
         ti->ScalePreview(dst, i.x-startCell.x, pitch, m_shift);
         ti->GetSurface().Unlock();
+        // 16 bits values output, so 65536 non-empty tiles to overflow that result
+        // That's at list 1GB of memory for a map somewhere...
+        crc += ti->GetChecksum();
         item.push_back(ti);
       }
     }
