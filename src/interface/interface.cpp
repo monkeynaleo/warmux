@@ -678,37 +678,26 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   if (display) {
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      // From Interface::DrawWeaponInfo()
-      Weapon* weapon;
-      Double icon_scale_factor = 0.75;
-
-      // Get the weapon
-      if (!weapon_under_cursor) {
-        weapon = &ActiveTeam().AccessWeapon();
-      } else {
-        weapon = weapon_under_cursor;
-        icon_scale_factor = cos((Double)Time::GetInstance()->Read()/1000 * PI)
-                          * Double(0.9);
-      }
-
-      weapon->GetIcon().Scale(icon_scale_factor, 0.75);
-
-      Point2i top_left((game_menu.GetWidth()- weapon->GetIcon().GetWidth())/ 2 - clock_background.GetWidth(), 0);
-      Point2i bottom_right((game_menu.GetWidth() - clock_background.GetWidth()) / 2, game_menu.GetHeight());
-      Rectanglei weapon_button(top_left, -top_left+bottom_right);
+      // Positions are somewhat from Interface::DrawWeaponInfo()
+      Point2i bottom_right((game_menu.GetWidth() - clock_background.GetWidth())>>1,
+                           game_menu.GetHeight());
+      Point2i top_left;
 
       // Action that should only happen when the player is human
       if (ActiveTeam().IsLocalHuman()) {
+        // Weapon icon original width is 48, and has a default scale of 0.75
+        top_left.SetValues((game_menu.GetWidth()- 36)/ 2 - clock_background.GetWidth(), 0);
+        Rectanglei weapon_button(top_left, -top_left+bottom_right);
+
         // Check if we clicked the weapon icon: toggle weapon menu
         if (weapon_button.Contains(mouse_pos-bottom_bar_pos) && ActiveTeam().IsLocalHuman()) {
           weapons_menu.SwitchDisplay();
           return true;
         }
- 
+
         // Check if we clicked the shoot icon: release fire!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                (game_menu.GetHeight() - shoot.GetHeight())/2,
-                                shoot.GetWidth(), shoot.GetHeight());
+        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
+                                shoot.GetWidth(), game_menu.GetHeight());
         if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
           ActionShoot(false);
           return true;
@@ -716,15 +705,17 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
       }
 
       // Check if we clicked the clock icon: display pause menu
-      top_left = Point2i((game_menu.GetWidth() - clock_background.GetWidth())/ 2, 0);
+      top_left.SetValues((game_menu.GetWidth() - clock_background.GetWidth())/ 2, 0);
       Rectanglei clock_button(top_left, clock_background.GetSize());
       if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
         Game::GetInstance()->UserAsksForMenu();
         return true;
       }
-      
+
       // Check if we clicked the character icon: center on it
-      Rectanglei character_button(Point2i(0,0), Point2i(weapon_button.GetPositionX(), game_menu.GetHeight()));
+      Rectanglei character_button(0, 0,
+                                  (game_menu.GetWidth()- 36)/ 2 - clock_background.GetWidth(),
+                                  game_menu.GetHeight());
       if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
         Camera::GetInstance()->CenterOnActiveCharacter();
         return true;
@@ -751,7 +742,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
       return true;
     }
   }
-    
+
   if (display_minimap && // We are not targetting
       Mouse::GetInstance()->GetPointer() == Mouse::POINTER_SELECT) {
     Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
