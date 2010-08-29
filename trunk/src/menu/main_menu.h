@@ -31,15 +31,8 @@ class ButtonPic;
 
 class MainMenu : public Menu
 {
-  /* If you need this, implement it (correctly) */
-  MainMenu(const MainMenu&);
-  MainMenu operator=(const MainMenu&);
-  /**********************************************/
-
   ButtonPic *play, *options, *help, *credits, *quit;
-#ifndef ANDROID
   ButtonPic *network;
-#endif
   Text * version_text, *website_text;
 
 public:
