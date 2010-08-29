@@ -37,10 +37,16 @@
  * ./wormux -d ""          # print all debug messages
  *
  */
+extern bool debug_all;
+
 #ifdef WMX_LOG
+   bool IsLOGGING(const char* mode);
+
 #  define MSG_DEBUG(LEVEL, MESSAGE, ...) \
-   PrintDebug( __FILE__, __FUNCTION__, __LINE__, LEVEL, MESSAGE, ## __VA_ARGS__)
+   if (debug_all || IsLOGGING(LEVEL))    \
+     PrintDebug(__FILE__, __FUNCTION__, __LINE__, LEVEL, MESSAGE, ## __VA_ARGS__)
 #else
+#  define IsLOGGING(a) false
 #  define MSG_DEBUG(...) do {} while (0)
 #endif
 
@@ -51,16 +57,8 @@
 #  define MSG_DBG_RTTI(...) do {} while (0)
 #endif
 
-extern bool debug_all;
-
-void PrintDebug (const char *filename, const char *function, unsigned long line,
-                 const char *level, const char *message, ...);
+void PrintDebug(const char *filename, const char *function, unsigned long line,
+                const char *level, const char *message, ...);
 void AddDebugMode(const std::string& mode);
-
-#ifdef WMX_LOG
-bool IsLOGGING(const char* mode);
-#else
-#  define IsLOGGING(a) false
-#endif
 
 #endif

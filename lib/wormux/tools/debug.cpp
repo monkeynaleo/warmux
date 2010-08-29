@@ -71,19 +71,17 @@ bool IsLOGGING(const char* mode)
  * @param level
  * @param message
  */
-void PrintDebug (const char *filename, const char *function, unsigned long line,
-                 const char *level, const char *message, ...)
+void PrintDebug(const char *filename, const char *function, unsigned long line,
+                const char *level, const char *message, ...)
 {
-  if (debug_all || IsLOGGING(level)) {
-      va_list argp;
-      int pid = (int)getpid();
+  va_list argp;
+  int pid = (int)getpid();
 
-      fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
-      va_start(argp, message);
-      vfprintf(stderr, message, argp);
-      va_end(argp);
-      fprintf(stderr, "\n");
-  }
+  fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
+  va_start(argp, message);
+  vfprintf(stderr, message, argp);
+  va_end(argp);
+  fprintf(stderr, "\n");
 }
 
 
