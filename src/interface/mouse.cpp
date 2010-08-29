@@ -196,14 +196,15 @@ bool Mouse::HandleEvent(const SDL_Event& event)
     return true;
 
   if (event.type == SDL_MOUSEBUTTONDOWN) {
+    if (Interface::GetInstance()->ActionClickDown(GetPosition()))
+      return true;
     if (event.button.button == Mouse::BUTTON_LEFT())
       mouse_button_down_pos = GetPosition();
     return true;
   }
 
   if (event.type == SDL_MOUSEBUTTONUP) {
-    if (ActiveTeam().IsLocalHuman() &&
-        Interface::GetInstance()->ActionClick(GetPosition()))
+    if (Interface::GetInstance()->ActionClickUp(GetPosition()))
       return true;
     if (event.button.button == Mouse::BUTTON_LEFT()) {
       if (mouse_button_down_pos.Distance(GetPosition()) > MOUSE_CLICK_DISTANCE)

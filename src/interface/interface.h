@@ -83,6 +83,7 @@ private:
   Surface wind_icon;
   Surface wind_indicator;
   Point2i bottom_bar_pos;
+  Surface shoot;
 
   //Minimap
   Surface *minimap;
@@ -134,7 +135,8 @@ public:
   void EnableDisplayTimer (bool _display) {display_timer = _display;};
   void ToggleMinimap() { display_minimap = !display_minimap; };
   void MinimapSizeDelta(int delta);
-  bool ActionClick(const Point2i &mouse_pos);
+  bool ActionClickUp(const Point2i &mouse_pos);
+  bool ActionClickDown(const Point2i &mouse_pos);
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);
