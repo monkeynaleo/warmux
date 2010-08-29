@@ -337,25 +337,18 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
     //   std::cout << "X: " << (*jt).GetPositionX() << " ; " << (*jt).GetBottomRightPoint().GetX() << " - " ;
 //       std::cout << "Y: " << (*jt).GetPositionY() << " ; " << (*jt).GetBottomRightPoint().GetY();
 //       std::cout << std::endl;
-      tmp = jt;
-      ++tmp;
-      rectangleCache.erase(jt);
-      jt = tmp;
-
+      jt = rectangleCache.erase(jt);
     } else if ( (*jt).Contains(*it) ) {
 //       std::cout << "X: " << (*it).GetPositionX() << " ; " << (*it).GetBottomRightPoint().GetX() << " - " ;
 //       std::cout << "Y: " << (*it).GetPositionY() << " ; " << (*it).GetBottomRightPoint().GetY();
 //       std::cout << std::endl;
       tmp = it;
-      if (tmp == rectangleCache.begin())
-      {
+      if (tmp == rectangleCache.begin()) {
         rectangleCache.erase(it);
         it = rectangleCache.begin();
         if (jt == it)
           jt++;
-      }
-      else
-      {
+      } else {
         --tmp;
         rectangleCache.erase(it);
         it = tmp;
