@@ -149,8 +149,6 @@ uint16_t TileItem_NonEmpty::GetChecksum() const
   while (i--)
     crc = (crc<<8) ^ table[(crc>>8) ^ *(ptr++)];
 
-    crc += *(ptr++);
-
   return crc;
 }
 
