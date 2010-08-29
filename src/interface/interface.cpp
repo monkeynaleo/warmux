@@ -67,7 +67,7 @@ Interface::Interface()
   if (width < tmp.GetWidth()+20) {
     zoom = width / Double(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
-    shoot = LOAD_RES_IMAGE("loading_screen/weapon_icon").RotoZoom(0.0, zoom, zoom);
+    shoot = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
     wind_icon = LOAD_RES_IMAGE("interface/wind").RotoZoom(0.0, zoom, zoom);
     wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
@@ -77,7 +77,7 @@ Interface::Interface()
   }
   else {
     game_menu = tmp;
-    shoot = LOAD_RES_IMAGE("loading_screen/weapon_icon");
+    shoot = LOAD_RES_IMAGE("interface/shoot");
     wind_icon = LOAD_RES_IMAGE("interface/wind");
     wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
   }
@@ -310,7 +310,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset = Point2i((game_menu.GetWidth() + clock_width) / 2 + 3*MARGIN,
+  Point2i wind_pos_offset = Point2i((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
                                     (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
@@ -337,7 +337,7 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset = Point2i((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth() + 3*MARGIN,
+  Point2i team_bar_offset = Point2i((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth(),
                                     (game_menu.GetHeight() - 50)/2);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
