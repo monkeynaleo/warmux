@@ -26,8 +26,7 @@ static int isSdcardUsed = 0;
 extern C_LINKAGE void
 JAVA_EXPORT_NAME(DemoRenderer_nativeInit) ( JNIEnv*  env, jobject thiz )
 {
-  int argc = 1;
-  char * argv[] = { "sdl" };
+  char * argv[] = { "sdl" }; //, "-d", "network" };
 
   if (isSdcardUsed) {
     chdir("/sdcard/Wormux");
@@ -40,7 +39,7 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeInit) ( JNIEnv*  env, jobject thiz )
   freopen("./stderr.txt", "wt", stderr);
 
   // Launch
-  main(argc, argv);
+  main(sizeof(argv)/sizeof(char*), argv);
 }
 
 extern C_LINKAGE void
