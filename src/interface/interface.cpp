@@ -67,8 +67,9 @@ Interface::Interface()
   if (width < tmp.GetWidth()+20) {
     zoom = width / Double(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
-    clock_background = LOAD_RES_IMAGE("interface/clock_background").RotoZoom(0.0, zoom, zoom);
     shoot = LOAD_RES_IMAGE("loading_screen/weapon_icon").RotoZoom(0.0, zoom, zoom);
+    wind_icon = LOAD_RES_IMAGE("interface/wind").RotoZoom(0.0, zoom, zoom);
+    wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
     clock_normal->EnableLastFrameCache();
@@ -76,12 +77,12 @@ Interface::Interface()
   }
   else {
     game_menu = tmp;
-    clock_background = LOAD_RES_IMAGE("interface/clock_background");
     shoot = LOAD_RES_IMAGE("loading_screen/weapon_icon");
+    wind_icon = LOAD_RES_IMAGE("interface/wind");
+    wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
   }
+  clock_width = 70*zoom;
   small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
-  wind_icon = LOAD_RES_IMAGE("interface/wind");
-  wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
 
   // energy bar
   energy_bar = new EnergyBar(0, 0, 120*zoom, 15*zoom,
@@ -115,7 +116,7 @@ Interface::Interface()
 
   m_playing_character_preview_color = LOAD_RES_COLOR("interface/playing_character_preview_color");
 
-  global_timer = new Text("0", gray_color, Font::FONT_BIG, Font::FONT_BOLD, false);
+  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom, Font::FONT_BOLD, false);
   timer = new Text("0", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -231,22 +232,20 @@ void Interface::DrawWeaponInfo() const
   std::string tmp;
 
   // Draw weapon name
-  int offset = (game_menu.GetWidth() - clock_background.GetWidth()) / 2;
+  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - 0.75*48;
   t_weapon_name->SetText(weapon->GetName());
-  Point2i weapon_name_offset(offset - t_weapon_name->GetWidth() - MARGIN, 0);
-  t_weapon_name->DrawLeftTop(bottom_bar_pos + weapon_name_offset);
+  t_weapon_name->DrawCenterTop(bottom_bar_pos + Point2i(offset, 0));
 
   // Display number of ammo
-  t_weapon_stock->SetText((nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : _("Stock:") + Format("%i", nbr_munition)));
-  Point2i weapon_stock_offset(offset - t_weapon_stock->GetWidth() - MARGIN,
-                              t_weapon_name->GetHeight());
-  t_weapon_stock->DrawLeftTop(bottom_bar_pos + weapon_stock_offset);
+  t_weapon_stock->SetText(nbr_munition ==  INFINITE_AMMO ? _("(unlimited)")
+                                                         : _("Stock:") + Format("%i", nbr_munition));
+  t_weapon_stock->DrawCenterTop(bottom_bar_pos + Point2i(offset, t_weapon_name->GetHeight()));
 
   // Draw weapon icon
   Sprite& icon = weapon->GetIcon();
   icon.Scale(icon_scale_factor, 0.75);
-  Point2i weapon_icon_offset = (game_menu.GetSize() - icon.GetSize()) / 2
-                             + Point2i(- clock_background.GetWidth(), MARGIN);
+  Point2i weapon_icon_offset(offset - icon.GetWidth()/2,
+                             game_menu.GetHeight() - icon.GetHeight() - MARGIN);
   icon.DrawXY(bottom_bar_pos + weapon_icon_offset);
 
   // Draw shoot button
@@ -257,14 +256,13 @@ void Interface::DrawWeaponInfo() const
 void Interface::DrawTimeInfo() const
 {
   Surface& window = GetMainWindow();
-  Point2i turn_time_pos((window.GetWidth() - clock_background.GetWidth())/2,
+  Point2i turn_time_pos((window.GetWidth() - clock_width)/2,
                         window.GetHeight()  - GetHeight());
-  Rectanglei dr(turn_time_pos, clock_background.GetSize());
+  Rectanglei dr(turn_time_pos, Point2i(clock_width, game_menu.GetHeight()));
 
   // Draw background interface
-  window.Blit(clock_background, turn_time_pos);
   GetWorld().ToRedrawOnScreen(dr);
-  DrawClock(turn_time_pos + clock_background.GetSize() / 2);
+  DrawClock(turn_time_pos + clock->GetHeight());
 }
 
 // display time left in a turn
@@ -272,7 +270,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
 {
   // Draw turn time
   if (display_timer)
-    timer->DrawCenter(time_pos - Point2i(0, clock_background.GetHeight()/3));
+    timer->DrawCenter(time_pos - Point2i(0, game_menu.GetHeight()/3));
 
   // Draw clock
   Point2i tmp_point = time_pos - clock->GetSize() / 2;
@@ -282,7 +280,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
   // Draw global timer
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->SetText(tmp);
-  global_timer->DrawCenter(time_pos + Point2i(0, clock_background.GetHeight()/3));
+  global_timer->DrawCenter(time_pos + Point2i(0, game_menu.GetHeight()/3));
 }
 
 // draw wind indicator
@@ -312,7 +310,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset = Point2i((game_menu.GetWidth() + clock_background.GetWidth()) / 2 + MARGIN,
+  Point2i wind_pos_offset = Point2i((game_menu.GetWidth() + clock_width) / 2 + 3*MARGIN,
                                     (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
@@ -339,11 +337,13 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + wind_icon.GetWidth() + MARGIN, MARGIN);
+  Point2i team_bar_offset = Point2i((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth() + 3*MARGIN,
+                                    (game_menu.GetHeight() - 50)/2);
   FOR_EACH_TEAM(tmp_team) {
+    Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
-      (**tmp_team).GetEnergyBar().FinalizeMove();
-    (**tmp_team).DrawEnergy(bottom_bar_pos + team_bar_offset);
+      team->GetEnergyBar().FinalizeMove();
+    team->DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
 }
 
@@ -679,14 +679,14 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
       // Positions are somewhat from Interface::DrawWeaponInfo()
-      Point2i bottom_right((game_menu.GetWidth() - clock_background.GetWidth())>>1,
+      Point2i bottom_right((game_menu.GetWidth() - clock_width)>>1,
                            game_menu.GetHeight());
       Point2i top_left;
 
       // Action that should only happen when the player is human
       if (ActiveTeam().IsLocalHuman()) {
         // Weapon icon original width is 48, and has a default scale of 0.75
-        top_left.SetValues((game_menu.GetWidth()- 36)/ 2 - clock_background.GetWidth(), 0);
+        top_left.SetValues((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
         Rectanglei weapon_button(top_left, -top_left+bottom_right);
 
         // Check if we clicked the weapon icon: toggle weapon menu
@@ -705,8 +705,8 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
       }
 
       // Check if we clicked the clock icon: display pause menu
-      top_left.SetValues((game_menu.GetWidth() - clock_background.GetWidth())/ 2, 0);
-      Rectanglei clock_button(top_left, clock_background.GetSize());
+      Rectanglei clock_button((game_menu.GetWidth() - clock_width)/ 2, 0,
+                              clock_width, game_menu.GetHeight());
       if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
         Game::GetInstance()->UserAsksForMenu();
         return true;
@@ -714,7 +714,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
 
       // Check if we clicked the character icon: center on it
       Rectanglei character_button(0, 0,
-                                  (game_menu.GetWidth()- 36)/ 2 - clock_background.GetWidth(),
+                                  (game_menu.GetWidth()- 36)/ 2 - clock_width,
                                   game_menu.GetHeight());
       if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
         Camera::GetInstance()->CenterOnActiveCharacter();
