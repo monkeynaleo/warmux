@@ -69,24 +69,21 @@ InfoMapBasicAccessor* InfoMap::LoadBasicInfo()
   std::string nomfich = m_directory + "config.xml";
 
   // Load resources
-  if (!DoesFileExist(nomfich))
-  {
+  if (!DoesFileExist(nomfich)) {
     error = _("no configuration file!");
     goto err;
   }
 
   // FIXME: not freed
   res_profile = GetResourceManager().LoadXMLProfile(nomfich, true);
-  if (!res_profile)
-  {
+  if (!res_profile) {
     error = _("couldn't load config");
     goto err;
   }
   // Load preview
   preview = GetResourceManager().LoadImage(res_profile, "preview");
   // Load other informations
-  if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot()))
-  {
+  if (!doc.Load(nomfich) || !ProcessXmlData(doc.GetRoot())) {
     error = _("error parsing the config file");
     goto err;
   }
@@ -96,8 +93,7 @@ InfoMapBasicAccessor* InfoMap::LoadBasicInfo()
   return basic;
 
 err:
-  if (res_profile)
-  {
+  if (res_profile) {
     GetResourceManager().UnLoadXMLProfile(res_profile);
     res_profile = NULL;
   }
