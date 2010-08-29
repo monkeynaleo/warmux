@@ -100,6 +100,7 @@ public:
   }
 
 
+  uint16_t GetChecksum() const;
   void Dig(const Point2i &center, const uint radius);
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };
