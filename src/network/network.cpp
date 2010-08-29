@@ -285,8 +285,11 @@ void Network::AddRemoteHost(DistantComputer *host)
 void Network::RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it)
 {
   SDL_LockMutex(cpus_lock);
+  // A proper deference of the iterator must be obtained *before*
+  // the iterator is removed from the list and has become invalid!
+  DistantComputer *host =  *host_it;
   cpu.erase(host_it);
-  delete *host_it;
+  delete host;
   SDL_UnlockMutex(cpus_lock);
 }
 
@@ -300,7 +303,7 @@ Player * Network::LockRemoteHostsAndGetPlayer(uint player_id)
     player = &(GetPlayer());
 
   std::list<DistantComputer*>::const_iterator it = cpu.begin();
-  while ((player == NULL) && (it != cpu.end())) {
+  while (!player && (it != cpu.end())) {
     player = (*it)->GetPlayer(player_id);
     it++;
   }
@@ -340,7 +343,8 @@ void Network::DisconnectNetwork()
 
   while (client != cpu.end()) {
     DistantComputer* tmp = (*client);
-    // client must be removed from the list *before* being deleted!
+    // A proper deference of the iterator must be obtained *before*
+    // the iterator is removed from the list and has become invalid!
     client = cpu.erase(client);
     delete tmp;
   }
