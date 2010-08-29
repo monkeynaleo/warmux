@@ -352,9 +352,13 @@ void Menu::HandleEvent(const SDL_Event& event)
   } else if (event.type == SDL_KEYDOWN) {
     bool used_by_widget = false;
 
-    if (event.key.keysym.sym != SDLK_ESCAPE &&
-        event.key.keysym.sym != SDLK_RETURN &&
-        event.key.keysym.sym != SDLK_KP_ENTER)
+    // Drop key events that are purely modifiers
+    if (event.key.keysym.sym >= SDLK_NUMLOCK &&
+        event.key.keysym.sym <= SDLK_COMPOSE)
+      return;
+
+    // Allow widgets to interpret ENTER/... if they know it
+    if (event.key.keysym.sym != SDLK_ESCAPE)
       used_by_widget = widgets.SendKey(event.key.keysym);
 
     if (!used_by_widget) {
