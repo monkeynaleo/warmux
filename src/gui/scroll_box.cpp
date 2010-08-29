@@ -107,7 +107,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       new_offset = offset-SCROLL_SPEED;
     } else if (is_click) {
       // Was it released after a drag operation?
-      if (old_mode != SCROLL_MODE_NONE) // or start_drag_y != mousePosition.y
+      if (old_mode!=SCROLL_MODE_NONE /*&& start_drag_y != mousePosition.y*/)
         return this;
       Rectanglei scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
@@ -158,7 +158,8 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 
       start_drag_offset = offset;
       scroll_mode = SCROLL_MODE_THUMB;
-    } else {
+    } else if (vbox->Contains(mousePosition)) {
+      // The click occurred inside the vbox, this means scrolling
       scroll_mode = SCROLL_MODE_DRAG;
       start_drag_offset = offset;
     }
