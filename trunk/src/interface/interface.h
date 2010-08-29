@@ -77,9 +77,9 @@ private:
   WeaponStrengthBar weapon_strength_bar;
 
   Surface game_menu;
-  Surface clock_background;
   Surface small_background_interface;
   Sprite *clock, *clock_normal, *clock_emergency;
+  int     clock_width;
   Surface wind_icon;
   Surface wind_indicator;
   Point2i bottom_bar_pos;
