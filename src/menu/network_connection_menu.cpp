@@ -141,6 +141,10 @@ static int RefreshNetInfo(void *)
   return 0;
 }
 
+#define TAB_MANUAL_ID   "TAB_manual"
+#define TAB_CLIENT_ID   "TAB_client"
+#define TAB_SERVER_ID   "TAB_server"
+
 NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Menu("menu/bg_network", vOkCancel)
 {
@@ -159,7 +163,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   /* client connection related widgets */
   Box * cl_connection_box = new VBox(W_UNDEF, false, false);
   cl_connection_box->SetBorder(Point2i(0,0));
-  tabs->AddNewTab("TAB_client", _("Connect to game"), cl_connection_box);
+  tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
 
   // Public battles
   Box * cl_tmp_box = new HBox(W_UNDEF, false, false);
@@ -194,7 +198,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   if (GetMainWindow().GetHeight() < 480) {
     manual_connection_box = new VBox(W_UNDEF, false, false);
     manual_connection_box->SetBorder(Point2i(0,0));
-    tabs->AddNewTab("TAB_manual", _("Manual connection"), manual_connection_box);
+    tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
   } else {
     cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
                                            Font::FONT_MEDIUM, Font::FONT_BOLD, c_red,
@@ -280,7 +284,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
                                      Config::GetInstance()->GetNetworkServerPublic());
   srv_connection_box->AddWidget(srv_internet_server);
 
-  tabs->AddNewTab("TAB_server", _("Host a game"), srv_connection_box);
+  tabs->AddNewTab(TAB_SERVER_ID, _("Host a game"), srv_connection_box);
 
   // #############################
   widgets.AddWidget(tabs);
@@ -544,7 +548,7 @@ bool NetworkConnectionMenu::signal_ok()
   // Which tab is displayed ?
   std::string id = tabs->GetCurrentTabId();
 
-  if (id == "TAB_server") {
+  if (id == TAB_SERVER_ID) {
     // Hosting your own server
     r = HostingServer(srv_port_number->GetText(),
                       srv_game_name->GetText(),
@@ -558,7 +562,7 @@ bool NetworkConnectionMenu::signal_ok()
     Config::GetInstance()->SetNetworkServerGameName(srv_game_name->GetText());
     Config::GetInstance()->SetNetworkServerPublic(srv_internet_server->GetValue());
 
-  } else if (id == "TAB_client") { // Direct connexion to a server
+  } else if (id == TAB_CLIENT_ID) { // Direct connexion to a server
 
     if (cl_net_games_lst->GetSelectedItem() != -1) {
       // Connect to an internet game!
@@ -580,6 +584,18 @@ bool NetworkConnectionMenu::signal_ok()
       Config::GetInstance()->SetNetworkClientPort(cl_port_number->GetText());
     } else
       goto out;
+  } else if (id == TAB_MANUAL_ID) {
+    if (!cl_server_address->GetText().empty()) {
+      r = ConnectToClient(cl_server_address->GetText(),
+                          cl_port_number->GetText(),
+                          cl_server_pwd->GetPassword());
+      if (!r)
+        goto out;
+
+      // Remember the parameters
+      Config::GetInstance()->SetNetworkClientHost(cl_server_address->GetText());
+      Config::GetInstance()->SetNetworkClientPort(cl_port_number->GetText());
+    }
   }
 
   if (Network::IsConnected()) {
