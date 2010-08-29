@@ -185,16 +185,12 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
   InfoMapBasicAccessor* basic = NULL;
 
   basic = MapsList::GetInstance()->lst[index]->LoadBasicInfo();
-  if (!basic)
-  {
+  if (!basic) {
     // Error already reported by LoadBasicInfo()
 
     // Crude
-    MapsList::iterator it = MapsList::GetInstance()->lst.begin();
-    while (index--)
-      it++;
-
-    //delete *it;
+    MapsList::iterator it = MapsList::GetInstance()->lst.begin() + index;
+    delete *it;
     MapsList::GetInstance()->lst.erase(it);
     return;
   }
