@@ -321,7 +321,7 @@ void Text::DrawLeftTop(const Point2i &position) const
   if(txt == "" && !dummy) return;
 
   Rectanglei dst_rect(position, surf.GetSize());
-  AppWormux * app = AppWormux::GetInstance();
+  Surface& window = GetMainWindow();
 
   if(shadowed){
     Rectanglei shad_rect;
@@ -329,13 +329,13 @@ void Text::DrawLeftTop(const Point2i &position) const
     shad_rect.SetPosition(dst_rect.GetPosition() + bg_offset);
     shad_rect.SetSize(background.GetWidth(), background.GetHeight() );
 
-    app->video->window.Blit(background, shad_rect.GetPosition());
-    app->video->window.Blit(surf, dst_rect.GetPosition());
+    window.Blit(background, shad_rect.GetPosition());
+    window.Blit(surf, dst_rect.GetPosition());
 
     GetWorld().ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
-                                      shad_rect.GetSize() + bg_offset));
+                                           shad_rect.GetSize() + bg_offset));
   }else{
-    app->video->window.Blit(surf, dst_rect.GetPosition());
+    window.Blit(surf, dst_rect.GetPosition());
     GetWorld().ToRedrawOnScreen(dst_rect);
   }
 }
