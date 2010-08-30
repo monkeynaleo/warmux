@@ -63,7 +63,6 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
     } else if (delta < 0){
       RequestTeamRemoval();
     }
-    UpdateNbTeams();
   } else {
     Widget *w = (list_box) ? list_box->ClickUp(mousePosition, button)
                            : WidgetList::ClickUp(mousePosition, button);
