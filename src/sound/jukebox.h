@@ -110,6 +110,7 @@ class JukeBox : public Singleton<JukeBox>
 
 protected:
   JukeBox();
+  ~JukeBox() { End(); }
   friend class Singleton<JukeBox>;
 
 public:

@@ -22,13 +22,21 @@
 #include <SDL.h>
 #include "interface/joystick.h"
 
-Joystick::Joystick() :
-  ManMachineInterface(),
-  previous_x_value(0),
-  previous_y_value(0),
-  previous_x_axis(KEY_NONE),
-  previous_y_axis(KEY_NONE)
+Joystick::Joystick()
+  : ManMachineInterface()
+  , init(false)
+  , previous_x_value(0)
+  , previous_y_value(0)
+  , previous_x_axis(KEY_NONE)
+  , previous_y_axis(KEY_NONE)
 {
+  if (SDL_InitSubSystem(SDL_INIT_JOYSTICK) < 0) {
+    Error(Format("Unable to initialize SDL joystick: %s", SDL_GetError()));
+
+    // Don't crash for this, just ignore further request
+    return;
+  }
+
   SetDefaultConfig();
 
   // Registring SDL event
@@ -37,6 +45,12 @@ Joystick::Joystick() :
   RegisterEvent(SDL_JOYHATMOTION);
   RegisterEvent(SDL_JOYBUTTONDOWN);
   RegisterEvent(SDL_JOYBUTTONUP);
+}
+
+Joystick::~Joystick()
+{
+  if (init)
+    SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 }
 
 void Joystick::SetDefaultConfig()
@@ -54,13 +68,13 @@ void Joystick::SetDefaultConfig()
 
 int Joystick::GetNumberOfJoystick() const
 {
-  return SDL_NumJoysticks();
+  return (init) ? 0 : SDL_NumJoysticks();
 }
 
 void Joystick::HandleKeyEvent(const SDL_Event& event)
 {
   // Not a registred event
-  if(!IsRegistredEvent(event.type))
+  if(!init || !IsRegistredEvent(event.type))
     return;
 
   if (GetNumberOfJoystick() == 0)
@@ -120,9 +134,9 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
 
   std::vector<Key_t> keys = it->second;
   std::vector<Key_t>::const_iterator itv;
-  
+
   for(itv = keys.begin(); itv != keys.end() ; itv++)
-  {    
+  {
     if(event_type == KEY_PRESSED) {
       HandleKeyPressed(*itv);
       return;
@@ -138,7 +152,9 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
 void Joystick::Reset()
 {
   ManMachineInterface::Reset();
-  SDL_Init(SDL_INIT_JOYSTICK);
-  SDL_JoystickEventState(SDL_ENABLE);
-  SDL_JoystickOpen(0);
+
+  if (init) {
+    SDL_JoystickEventState(SDL_ENABLE);
+    SDL_JoystickOpen(0);
+  }
 }

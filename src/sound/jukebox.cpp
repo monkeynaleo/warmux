@@ -74,19 +74,20 @@ void JukeBox::Init()
     return;
   }
 
-  Uint16 audio_format = MIX_DEFAULT_FORMAT;
-
   /* Initialize the SDL library */
-  if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+  if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
     std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
     return;
   }
+  m_init = true;
 
+  Uint16 audio_format = MIX_DEFAULT_FORMAT;
   int audio_buffer = 1024;
 
   /* Open the audio device */
   if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
     std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
+    End();
     return;
   } else {
     Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
@@ -96,15 +97,14 @@ void JukeBox::Init()
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
 
-  m_init = true;
-
   LoadXML("default");
   LoadMusicXML();
 }
 
 void JukeBox::End()
 {
-  if (!m_init) return;
+  if (!m_init)
+    return;
 
   StopAll();
   StopMusic();
@@ -117,6 +117,8 @@ void JukeBox::End()
 
   Mix_CloseAudio();
 
+  if (SDL_WasInit(SDL_INIT_AUDIO))
+    SDL_QuitSubSystem(SDL_INIT_AUDIO);
   m_init = false;
 }
 
@@ -305,7 +307,7 @@ bool JukeBox::PlayMusic(const std::string& type)
 
 bool JukeBox::PlayMusicSample(const std::vector<std::string>::const_iterator& file_it)
 {
-  if (!UseMusic() || !m_init)
+  if (!m_init || !UseMusic())
     return false;
 
   std::string file = *file_it;
@@ -392,8 +394,8 @@ void JukeBox::LoadXML(const std::string& profile)
   m_profiles_loaded.insert(profile);
 }
 
-int JukeBox::Play (const std::string& category, const std::string& sample,
-                   const int loop)
+int JukeBox::Play(const std::string& category, const std::string& sample,
+                  const int loop)
 {
   if (!UseEffects() || !m_init) return -1;
 
@@ -428,7 +430,7 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
   return -1;
 }
 
-int JukeBox::Stop (int channel) const
+int JukeBox::Stop(int channel) const
 {
   if (!m_init) return 0;
   if (!m_config.music && !m_config.effects) return 0;
@@ -438,7 +440,8 @@ int JukeBox::Stop (int channel) const
 
 int JukeBox::StopAll() const
 {
-  if (!m_init) return 0;
+  if (!m_init)
+    return 0;
   if (!m_config.music && !m_config.effects) return 0;
 
   // halt playback on all channels

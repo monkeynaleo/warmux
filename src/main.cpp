@@ -427,7 +427,12 @@ extern "C" int main(int argc, char *argv[])
 
   DisplayWelcomeMessage();
 
+  if (SDL_Init(SDL_INIT_TIMER) < 0) {
+    fprintf(stderr, "Sorry, couldn't initialize SDL'!\n");
+    exit(EXIT_FAILURE);
+  }
   AppWormux::GetInstance()->Main();
   delete AppWormux::GetInstance();
+  SDL_Quit();
   exit(EXIT_SUCCESS);
 }

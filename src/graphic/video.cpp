@@ -75,11 +75,14 @@ Video::Video()
 
 Video::~Video()
 {
-  if (icon)
+  if (icon) {
     SDL_FreeSurface(icon);
-  if (SDLReady)
-    SDL_Quit();
-  SDLReady = false;
+    icon = NULL;
+  }
+  if (SDLReady) {
+    SDL_QuitSubSystem(SDL_INIT_VIDEO);
+    SDLReady = false;
+  }
 }
 
 void Video::SetMaxFps(uint max_fps)
@@ -252,9 +255,9 @@ void Video::InitSDL()
   if (SDLReady)
     return;
 
-  if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0) {
+  if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {
     Error(Format("Unable to initialize SDL library: %s", SDL_GetError()));
-    exit (EXIT_FAILURE);
+    exit(EXIT_FAILURE);
   }
 
   SDL_EnableUNICODE(1);
