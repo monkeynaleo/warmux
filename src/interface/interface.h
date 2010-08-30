@@ -96,17 +96,6 @@ private:
   Color m_camera_preview_color;
   Color m_playing_character_preview_color;
 
-protected:
-  friend class Singleton<Interface>;
-  Interface();
-  ~Interface();
-
-public:
-  const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; };
-
-  void Reset();
-  void Draw();
-
   void DrawCharacterInfo();
   void DrawTeamEnergy() const;
   void DrawWeaponInfo() const;
@@ -116,24 +105,34 @@ public:
   void DrawTimeInfo() const;
   void DrawMapPreview();
   void DrawSmallInterface() const;
-  void GenerateStyledBox();
 
-  bool IsDisplayed () const { return display; };
-  void EnableDisplay(bool _display);
+  int GetWidth() const { return game_menu.GetWidth(); }
+  int GetHeight() const;
+  int GetMenuHeight() const;
+  Point2i GetSize() const { return Point2i(GetWidth(), GetHeight()); }
+
+protected:
+  friend class Singleton<Interface>;
+  Interface();
+  ~Interface();
+
+public:
+  const WeaponsMenu &GetWeaponsMenu() const { return weapons_menu; }
+
+  void Reset();
+  void Draw();
+
+  Point2i GetMenuPosition() const { return bottom_bar_pos; }
+  bool IsDisplayed () const { return display; }
+  void EnableDisplay(bool _display) { display = _display; }
   void Show();
   void Hide();
 
-  int GetWidth() const { return game_menu.GetWidth(); };
-  int GetHeight() const;
-  int GetMenuHeight() const;
-  Point2i GetSize() const;
-  Point2i GetMenuPosition() const;
-
-  void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; };
+  void SetCurrentOverflyWeapon(Weapon * weapon) { weapon_under_cursor = weapon; }
   void UpdateTimer(uint utimer, bool emergency, bool reset_anim);
   void UpdateWindIndicator(int wind_value);
-  void EnableDisplayTimer (bool _display) {display_timer = _display;};
-  void ToggleMinimap() { display_minimap = !display_minimap; };
+  void EnableDisplayTimer(bool _display) { display_timer = _display; }
+  void ToggleMinimap() { display_minimap = !display_minimap; }
   void MinimapSizeDelta(int delta);
   bool ActionClickUp(const Point2i &mouse_pos);
   bool ActionClickDown(const Point2i &mouse_pos);

@@ -406,8 +406,19 @@ void Interface::DrawMapPreview()
       scratch->Blit(water_surf, Point2i(0, h));
     }
 
-    scratch->SetAlpha(SDL_SRCALPHA, 0);
-    GenerateStyledBox();
+    //scratch->SetAlpha(SDL_SRCALPHA, 0);
+    if (!mask) {
+      m_last_preview_size = GetWorld().ground.GetPreviewSize();
+      mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
+
+      GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
+
+      mask->SetAlpha(0, 0);
+    }
+
+    // Compose
+    minimap->Blit(*mask);
+    minimap->Blit(*scratch);
   }
 
   Rectanglei clip = rect_preview;
@@ -451,22 +462,6 @@ void Interface::DrawMapPreview()
   SwapWindowClip(clip);
 
   GetWorld().ToRedrawOnScreen(rect_preview);
-}
-
-void Interface::GenerateStyledBox()
-{
-  if (!mask) {
-    m_last_preview_size = GetWorld().ground.GetPreviewSize();
-    mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
-
-    GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
-
-    mask->SetAlpha(0, 0);
-  }
-
-  // Compose
-  minimap->Blit(*mask);
-  minimap->Blit(*scratch);
 }
 
 void Interface::Draw()
@@ -519,21 +514,6 @@ int Interface::GetHeight() const
 int Interface::GetMenuHeight() const
 {
   return game_menu.GetHeight() + MARGIN;
-}
-
-Point2i Interface::GetSize() const
-{
-  return Point2i(GetWidth(), GetHeight());
-}
-
-Point2i Interface::GetMenuPosition() const
-{
-  return bottom_bar_pos;
-}
-
-void Interface::EnableDisplay(bool _display)
-{
-  display = _display;
 }
 
 void Interface::Show()
@@ -604,18 +584,6 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
   Point2i ptDest = rectSurface.GetPosition() - Camera::GetInstance()->GetPosition();
 
   GetMainWindow().Blit(s, rectSource, ptDest);
-}
-
-void HideGameInterface()
-{
-  if (Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
-  Mouse::GetInstance()->Hide();
-  Interface::GetInstance()->Hide();
-}
-
-void ShowGameInterface()
-{
-  Interface::GetInstance()->Show();
 }
 
 static void ActionShoot(bool on)
@@ -761,4 +729,17 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
 void Interface::MinimapSizeDelta(int delta)
 {
   GetWorld().ground.SetPreviewSizeDelta(delta);
+}
+
+
+void HideGameInterface()
+{
+  if (Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
+  Mouse::GetInstance()->Hide();
+  Interface::GetInstance()->Hide();
+}
+
+void ShowGameInterface()
+{
+  Interface::GetInstance()->Show();
 }
