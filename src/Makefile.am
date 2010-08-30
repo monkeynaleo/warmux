@@ -419,7 +419,7 @@ AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
-wormux.o: wormux.rc ../lib/wormux/include/config_autotools.h
+.rc.o: $(top_srcdir)/lib/wormux/include/config_autotools.h
 	$(WINDRES) -I$(top_srcdir)/lib/wormux/include -D HAVE_CONFIG_H -o $@ -i $<
 endif
 
