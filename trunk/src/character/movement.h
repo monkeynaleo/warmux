@@ -98,7 +98,7 @@ public:
   static void UnshareMovement(Movement* mvt)
   {
     mvt->ref_count--;
-    if (!mvt)
+    if (!mvt->ref_count)
       delete mvt;
   }
 };
