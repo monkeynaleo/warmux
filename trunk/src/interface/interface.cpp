@@ -639,42 +639,6 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 {
   Surface &  window  = GetMainWindow();
 
-  if (ActiveTeam().IsLocalHuman()) {
-    if (display) {
-      Rectanglei menu_button(Point2i(), game_menu.GetSize());
-      if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-        // Check if we clicked the shoot icon: fire!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                (game_menu.GetHeight() - shoot.GetHeight())/2,
-                                shoot.GetWidth(), shoot.GetHeight());
-        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-          ActionShoot(true);
-          return true;
-        }
-
-        // Click on the interface, let's say we handled it
-        return true;
-      }
-    } else {
-      // Mini-interface drawn, check if we clicked on it
-      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
-                              window.GetHeight() - small_background_interface.GetHeight(),
-                              small_background_interface.GetWidth(),
-                              small_background_interface.GetHeight());
-      if (small_button.Contains(mouse_pos)) {
-        ActionShoot(true);
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
-
-bool Interface::ActionClickUp(const Point2i &mouse_pos)
-{
-  Surface &  window  = GetMainWindow();
-
   if (display) {
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
@@ -695,11 +659,12 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
           return true;
         }
 
-        // Check if we clicked the shoot icon: release fire!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
-                                shoot.GetWidth(), game_menu.GetHeight());
+        // Check if we clicked the shoot icon: start firing!
+        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
+                                (game_menu.GetHeight() - shoot.GetHeight())/2,
+                                shoot.GetWidth(), shoot.GetHeight());
         if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-          ActionShoot(false);
+          ActionShoot(true);
           return true;
         }
       }
@@ -723,23 +688,23 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
 
       // No actual button clicked, but still swallow that click
       return true;
-
     } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
       // Process click on weapon menu before minimap as it should be
       // overlayed on top of it.
       return true;
     }
 
-    // No button clicked, continue
   } else {
     // Mini-interface drawn, check if we clicked on it
-    Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
-                            window.GetHeight() - small_background_interface.GetHeight(),
-                            small_background_interface.GetWidth(),
-                            small_background_interface.GetHeight());
-    if (small_button.Contains(mouse_pos)) {
-      ActionShoot(false);
-      return true;
+    if (ActiveTeam().IsLocalHuman()) {
+      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+                              window.GetHeight() - small_background_interface.GetHeight(),
+                              small_background_interface.GetWidth(),
+                              small_background_interface.GetHeight());
+      if (small_button.Contains(mouse_pos)) {
+        ActionShoot(true);
+        return true;
+      }
     }
   }
 
@@ -751,6 +716,42 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
       offset = GetWorld().ground.FromPreviewCoordinates(mouse_pos - offset);
       Camera::GetInstance()->SetXYabs(offset - Camera::GetInstance()->GetSize()/2);
       return true;
+    }
+  }
+
+  return false;
+}
+
+bool Interface::ActionClickUp(const Point2i &mouse_pos)
+{
+  Surface &  window  = GetMainWindow();
+
+  if (display) {
+    Rectanglei menu_button(Point2i(), game_menu.GetSize());
+    if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
+      // Action that should only happen when the player is human
+      if (ActiveTeam().IsLocalHuman()) {
+        // Check if we clicked the shoot icon: release fire!
+        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
+                                shoot.GetWidth(), game_menu.GetHeight());
+        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
+          ActionShoot(false);
+          return true;
+        }
+      }
+    }
+    // No button clicked, continue
+  } else {
+    // Mini-interface drawn, check if we clicked on it
+    if (ActiveTeam().IsLocalHuman()) {
+      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+                              window.GetHeight() - small_background_interface.GetHeight(),
+                              small_background_interface.GetWidth(),
+                              small_background_interface.GetHeight());
+      if (small_button.Contains(mouse_pos)) {
+        ActionShoot(false);
+        return true;
+      }
     }
   }
 
