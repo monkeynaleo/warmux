@@ -43,29 +43,17 @@ static const Point2i BORDER_POSITION(5, 5);
 
 #define MARGIN  4
 
-Interface::Interface()
-  : display(true)
-  , start_hide_display(0)
-  , start_show_display(0)
-  , display_minimap(true)
-  , energy_bar(NULL)
-  , clock(NULL)
-  , minimap(NULL)
-  , m_last_minimap_redraw(0)
-  , m_last_preview_size(0, 0)
-  , mask(NULL)
-  , scratch(NULL)
+void Interface::LoadDataInternal(Profile *res)
 {
-  int      width = AppWormux::GetInstance()->video->window.GetWidth();
-  Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  Surface  tmp   = LOAD_RES_IMAGE("interface/background_interface");
+  Surface tmp     = LOAD_RES_IMAGE("interface/background_interface");
+  Double  zoom    = 1.0;
 
-  clock_normal = LOAD_RES_SPRITE("interface/clock_normal");
+  clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
-  Double zoom = 1.0;
-  if (width < tmp.GetWidth()+20) {
-    zoom = width / Double(tmp.GetWidth()+20);
+  last_width = AppWormux::GetInstance()->video->window.GetWidth();
+  if (last_width < tmp.GetWidth()+20) {
+    zoom = last_width / Double(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
     shoot = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
     wind_icon = LOAD_RES_IMAGE("interface/wind").RotoZoom(0.0, zoom, zoom);
@@ -85,9 +73,42 @@ Interface::Interface()
   small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
 
   // energy bar
+  if (energy_bar)
+    delete energy_bar;
   energy_bar = new EnergyBar(0, 0, 120*zoom, 15*zoom,
                              0, 0,
                              GameMode::GetInstance()->character.init_energy);
+
+  // Timer
+  if (global_timer)
+    delete global_timer;
+  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom, Font::FONT_BOLD, false);
+}
+
+void Interface::LoadData()
+{
+  Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  LoadDataInternal(res);
+  GetResourceManager().UnLoadXMLProfile(res);
+}
+
+Interface::Interface()
+  : global_timer(NULL)
+  , display(true)
+  , start_hide_display(0)
+  , start_show_display(0)
+  , display_minimap(true)
+  , energy_bar(NULL)
+  , clock(NULL)
+  , minimap(NULL)
+  , m_last_minimap_redraw(0)
+  , m_last_preview_size(0, 0)
+  , mask(NULL)
+  , scratch(NULL)
+{
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+
+  LoadDataInternal(res);
 
   // wind bar
   wind_bar.InitPos(0, 0, wind_indicator.GetWidth() - 4, wind_indicator.GetHeight() - 4);
@@ -116,7 +137,6 @@ Interface::Interface()
 
   m_playing_character_preview_color = LOAD_RES_COLOR("interface/playing_character_preview_color");
 
-  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom, Font::FONT_BOLD, false);
   timer = new Text("0", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -469,6 +489,11 @@ void Interface::Draw()
   Surface &window  = GetMainWindow();
   bottom_bar_pos = Point2i((window.GetWidth() - GetWidth())/2,
                            window.GetHeight() - GetHeight());
+
+  // Has the display size changed? Then reload data
+  if (last_width != window.GetWidth()) {
+    LoadData();
+  }
 
   if (display_minimap)
     DrawMapPreview();
