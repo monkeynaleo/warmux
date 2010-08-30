@@ -191,10 +191,10 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (associated_team != NULL) {
 
-    Widget* w = WidgetList::ClickUp(mousePosition, button);
-
     if (!associated_team->IsLocal())
       return NULL; // it's not a local team, we can't configure it !!
+
+    Widget* w = WidgetList::ClickUp(mousePosition, button);
 
     if (w == nb_characters) {
       if (Network::GetInstance()->IsConnected()) {
