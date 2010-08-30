@@ -28,7 +28,7 @@
 
 class Joystick : public ManMachineInterface, public Singleton<Joystick>
 {
-private:
+  bool init;
   int previous_x_value;
   int previous_y_value;
   Key_t previous_x_axis;
@@ -38,6 +38,7 @@ private:
 protected:
   friend class Singleton<Joystick>;
   Joystick();
+  ~Joystick();
 
 public:
   int GetNumberOfJoystick() const;
