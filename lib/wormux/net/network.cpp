@@ -132,7 +132,7 @@ connection_state_t WNet::GetError()
 
 connection_state_t WNet::CheckHost(const std::string &host, int prt)
 {
-  connection_state_t s;
+  connection_state_t s = CONN_BAD_SOCKET;
   int r;
   SOCKET sfd;
   char port[10];
@@ -196,20 +196,21 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
       continue;
     }
 
-    if (connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+    int err = connect(sfd, rp->ai_addr, rp->ai_addrlen);
+    if (err != -1)
       break; /* Success */
 
+    /* Set state to last error found */
+    s = WNet::GetError();
     closesocket(sfd);
   }
 
   if (rp == NULL) { /* No address succeeded */
     fprintf(stderr, "Could not connect\n");
-    s = CONN_BAD_SOCKET;
     goto error;
   }
 
   closesocket(sfd);
-
   s = CONNECTED;
 
  error:
