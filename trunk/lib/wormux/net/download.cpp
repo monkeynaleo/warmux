@@ -40,7 +40,11 @@ static size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
 
 Downloader::Downloader()
 {
+#ifdef WIN32
+  curl_global_init(CURL_GLOBAL_WIN32);
+#else
   curl_global_init(CURL_GLOBAL_NOTHING);
+#endif
 
   curl = curl_easy_init();
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
