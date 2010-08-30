@@ -38,7 +38,6 @@ class Video
 
   bool __SetConfig(const int w, const int h, const bool _fullscreen);
 
-  void SetWindowIcon(const std::string& icon);
   void InitSDL(void);
 
 public:
