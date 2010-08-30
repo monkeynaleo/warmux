@@ -131,31 +131,30 @@ void NetworkTeamsSelectionBox::PrevTeam(uint i)
 
   index = previous_index-1;
 
-  do
-    {
-      to_continue = false;
+  do {
+    to_continue = false;
 
-      // select the last team if we are outside list
-      if (index < 0)
-        index = int(GetTeamsList().full_list.size())-1;
+    // select the last team if we are outside list
+    if (index < 0)
+      index = int(GetTeamsList().full_list.size())-1;
 
-      // Get the team at current index
-      tmp = GetTeamsList().FindByIndex(index);
+    // Get the team at current index
+    tmp = GetTeamsList().FindByIndex(index);
 
-      // Check if that team is already selected
-      for (uint j = 0; j < MAX_NB_TEAMS; j++) {
-        if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
-          index--;
-          to_continue = true;
-          break;
-        }
+    // Check if that team is already selected
+    for (uint j = 0; j < MAX_NB_TEAMS; j++) {
+      if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+        index--;
+        to_continue = true;
+        break;
       }
+    }
 
-      // We have found a team which is not selected
-      if (tmp != NULL && !to_continue) {
-        SetLocalTeam(i, *tmp);
-      }
-    } while (index != previous_index && to_continue);
+    // We have found a team which is not selected
+    if (tmp != NULL && !to_continue) {
+      SetLocalTeam(i, *tmp);
+    }
+  } while (index != previous_index && to_continue);
 }
 
 void NetworkTeamsSelectionBox::NextTeam(uint i)
@@ -169,33 +168,32 @@ void NetworkTeamsSelectionBox::NextTeam(uint i)
 
   index = previous_index+1;
 
-  do
-    {
-      to_continue = false;
+  do {
+    to_continue = false;
 
-      // select the first team if we are outside list
-      if (index >= int(GetTeamsList().full_list.size()))
-        index = 0;
+    // select the first team if we are outside list
+    if (index >= int(GetTeamsList().full_list.size()))
+      index = 0;
 
-      // Get the team at current index
-      tmp = GetTeamsList().FindByIndex(index);
+    // Get the team at current index
+    tmp = GetTeamsList().FindByIndex(index);
 
-      // Check if that team is already selected
-      for (uint j = 0; j < MAX_NB_TEAMS; j++) {
-        if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
-          index++;
-          to_continue = true;
-          break;
-        }
+    // Check if that team is already selected
+    for (uint j = 0; j < MAX_NB_TEAMS; j++) {
+      if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+        index++;
+        to_continue = true;
+        break;
       }
+    }
 
-      // We have found a team which is not selected
-      if (tmp != NULL && !to_continue) {
-        if (teams_selections.at(i)->GetTeam() == NULL)
-          tmp->SetPlayerName(GetLocalPlayerName());
-        SetLocalTeam(i, *tmp);
-      }
-    } while (index != previous_index && to_continue);
+    // We have found a team which is not selected
+    if (tmp != NULL && !to_continue) {
+      if (teams_selections.at(i)->GetTeam() == NULL)
+        tmp->SetPlayerName(GetLocalPlayerName());
+      SetLocalTeam(i, *tmp);
+    }
+  } while (index != previous_index && to_continue);
 }
 
 void NetworkTeamsSelectionBox::RequestTeam()
