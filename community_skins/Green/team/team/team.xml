@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources SYSTEM "../team.dtd" []>
+<resources>
+  <name>Green</name>
+  <surface name="flag" file="flag.png" />
+  <surface name="death_flag" file="dead.png" />
+  <surface name="big_flag" file="flag64.png" />
+  <team>
+    <character name="Green" body="green" />
+    <character name="Vert" body="green" />
+    <character name="Grün" body="green" />
+    <character name="Zelen" body="green" />
+    <character name="Verde" body="green" />
+    <character name="Gron" body="green" />
+    <character name="Vihreä" body="green" />
+    <character name="Graenn" body="green" />
+	<character name="Zielony" body="green" />
+    <character name="Yesil" body="green" />
+	<character name="Zeleny" body="green" />
+  </team>
+</resources>
+
+
