@@ -347,17 +347,19 @@ void Game::Start()
 
   InitEverything();
 
+  bool game_finished = true;
   InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
   if (basic) {
     JukeBox::GetInstance()->PlayMusic(basic->ReadMusicPlaylist());
 
-    bool game_finished = Run();
+    game_finished = Run();
 
-    MSG_DEBUG( "game", "End of game_loop.Run()" );
+    MSG_DEBUG("game", "End of game_loop.Run()" );
     JukeBox::GetInstance()->StopAll();
-
-    UnloadDatas(game_finished);
+  } else {
+    fprintf(stderr, "Couldn't load map\n");
   }
+  UnloadDatas(game_finished);
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   JukeBox::GetInstance()->PlayMusic("menu");

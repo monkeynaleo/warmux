@@ -205,7 +205,6 @@ void TeamsList::RandomizeFirstPlayer()
 
 void TeamsList::UnloadGamingData()
 {
-  BodyList::GetRef().FreeMem();
   // Iterate over all teams not just he playing ones
   // in order to unload leaver teams.
   full_iterator it=full_list.begin(), end = full_list.end();
@@ -213,6 +212,9 @@ void TeamsList::UnloadGamingData()
   // Unload the data of all teams
   for (; it != end; ++it)
     (**it).UnloadGamingData();
+
+  // Run this now as no reference from Character are left
+  BodyList::GetRef().FreeMem();
 }
 
 //-----------------------------------------------------------------------------

@@ -40,7 +40,7 @@ void BodyList::FreeMem()
   //  only contains pointers to member/movement/clothes of the bodies in the body_list
   std::map<std::string, Body*>::iterator it = list.begin();
 
-  while(it != list.end()) {
+  while (it != list.end()) {
     delete it->second;
     ++it;
   }
