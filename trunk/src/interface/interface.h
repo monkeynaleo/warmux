@@ -37,6 +37,7 @@ class Team;
 class Text;
 class Polygon;
 class Weapon;
+class Profile;
 
 #ifdef WIN32
 #undef interface
@@ -83,6 +84,7 @@ private:
   Surface wind_icon;
   Surface wind_indicator;
   Point2i bottom_bar_pos;
+  int last_width;
   Surface shoot;
 
   //Minimap
@@ -106,6 +108,7 @@ private:
   void DrawMapPreview();
   void DrawSmallInterface() const;
 
+  void LoadDataInternal(Profile *res);
   int GetWidth() const { return game_menu.GetWidth(); }
   int GetHeight() const;
   int GetMenuHeight() const;
@@ -121,6 +124,7 @@ public:
 
   void Reset();
   void Draw();
+  void LoadData();
 
   Point2i GetMenuPosition() const { return bottom_bar_pos; }
   bool IsDisplayed () const { return display; }
