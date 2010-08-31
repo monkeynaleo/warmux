@@ -43,7 +43,7 @@ protected:
 public:
   void HandleKeyEvent(const SDL_Event& event);
   void SetConfig(const xmlNode *node);
-  void SaveConfig( xmlNode *node) const;
+  void SaveConfig(xmlNode *node) const;
 
   int  GetRawKeyCode(int keycode) const;
   bool HasControlModifier(int key_code) const;

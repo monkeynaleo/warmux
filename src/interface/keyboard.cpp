@@ -128,7 +128,12 @@ void Keyboard::SetConfig(const xmlNode *node)
     int key;
     Key_t action;
 
+    // Set internal key
     key = GetKeyFromKeyName(key_name);
+    // Reject config set for other values
+    if (SDLK_BACKSPACE == key || SDLK_DELETE == key)
+      continue;
+
     if (shift) {
       key += SHIFT_OFFSET;
     }
@@ -143,7 +148,6 @@ void Keyboard::SetConfig(const xmlNode *node)
 
     //Set association
     SetKeyAction(key, action);
-
   }
 }
 
