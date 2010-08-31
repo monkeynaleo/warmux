@@ -160,6 +160,7 @@ public:
 
   void MergeSprite(const Point2i &position, Surface& spr)
   {
+    // Can't force SDL_SRCALPHA to 0 and blit, as it may affect non-empty pixels
     m_surface.MergeSurface(spr, position);
     ForceRecheck();
   }
