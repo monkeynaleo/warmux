@@ -107,11 +107,26 @@ public:
     if (key.sym >= SDLK_NUMLOCK && key.sym <= SDLK_COMPOSE)
       return true;
 
+    Keyboard *kbd = Keyboard::GetInstance();
+
+    // Reset some configs
+    if (SDLK_BACKSPACE == key.sym || SDLK_DELETE == key.sym || SDLK_ESCAPE == key.sym) {
+      kbd->ClearKeyAction(key_action);
+      label_key->SetText(_("None"));
+      ctrl_box->SetValue(false);
+      alt_box->SetValue(false);
+      shift_box->SetValue(false);
+
+      // A simple NeedRedraw would reset the packing
+      Pack();
+      NeedRedrawing();
+      return true;
+    }
+
     SDLMod mod_bits = SDL_GetModState();
     bool has_shift = mod_bits & KMOD_SHIFT;
     bool has_alt = mod_bits & KMOD_ALT;
     bool has_ctrl = mod_bits & KMOD_CTRL;
-    const Keyboard *kbd = Keyboard::GetConstInstance();
 
     for (std::vector<ControlItem*>::const_iterator it = selves->begin();
          it != selves->end();
@@ -247,7 +262,7 @@ void ControlConfig::SaveControlConfig() const
     return;
 
   Keyboard *kbd = Keyboard::GetInstance();
-  kbd->ClearKeyAction();
+  kbd->ClearKeyBindings();
   for (uint i=0; i<items.size(); i++) {
     items[i]->SaveAction(kbd);
   }
