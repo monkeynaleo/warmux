@@ -50,16 +50,20 @@ JukeBox::JukeBox()
 #endif
 }
 
-void JukeBox::Pause() const
+void JukeBox::Pause(bool all) const
 {
   if (m_config.music || m_config.effects)
     Mix_Pause(-1);
+  if (all)
+    Mix_PauseMusic();
 }
 
-void JukeBox::Resume() const
+void JukeBox::Resume(bool all) const
 {
   if (m_config.music || m_config.effects)
     Mix_Resume(-1);
+  if (all)
+    Mix_ResumeMusic();
 }
 
 void JukeBox::Init()
