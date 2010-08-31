@@ -124,8 +124,8 @@ public:
   bool UseEffects() const { return m_config.effects; }
   int GetFrequency() const { return m_config.frequency; }
   int HowManyChannels() const { return m_config.channels; }
-  void Pause() const;
-  void Resume() const;
+  void Pause(bool all=false) const;
+  void Resume(bool all=false) const;
 
   void ActiveMusic(bool on);
   void ActiveEffects(bool on) { m_config.effects = on; }
