@@ -27,6 +27,7 @@
 
 class Video;
 class Menu;
+union SDL_Event;
 
 class AppWormux
 {
@@ -54,6 +55,9 @@ public:
   static void EmergencyExit();
 
   int Main(void);
+
+  // Calls this to check if Wormux must be moved to background
+  static bool CheckInactive(SDL_Event& event);
 };
 
 #endif

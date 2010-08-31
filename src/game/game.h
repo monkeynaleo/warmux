@@ -168,7 +168,7 @@ public:
   void UserAsksForHelpMenu() { ask_for_help_menu = true; };
 
   // Signal death of a player
-  void SignalCharacterDeath (const Character *character);
+  void SignalCharacterDeath(const Character *character);
 
   // Signal character damage
   void SignalCharacterDamage(const Character *character);

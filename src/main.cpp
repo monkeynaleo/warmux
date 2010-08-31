@@ -261,6 +261,34 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << std::endl;
 }
 
+
+bool AppWormux::CheckInactive(SDL_Event& event)
+{
+  if (event.type==SDL_ACTIVEEVENT && event.active.state&SDL_APPACTIVE) {
+    if (Network::IsConnected()) {
+      switch (event.active.gain) {
+      case 0: JukeBox::GetInstance()->Pause(); return true;
+      case 1: JukeBox::GetInstance()->Resume(); return true;
+      default: break;
+      }
+    }
+    else if (event.active.gain == 0) {
+      JukeBox::GetInstance()->Pause();
+      Time::GetInstance()->SetWaitingForUser(true);
+      while (SDL_WaitEvent(&event)) {
+        if (event.type == SDL_QUIT) AppWormux::EmergencyExit();
+        if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) {
+          JukeBox::GetInstance()->Resume();
+          Time::GetInstance()->SetWaitingForUser(false);
+          break;
+        }
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
 void AppWormux::EmergencyExit()
 {
   delete AppWormux::GetInstance();
@@ -412,6 +440,7 @@ void ParseArgs(int argc, char * argv[])
     }
   }
 }
+
 extern "C" int main(int argc, char *argv[])
 {
 #ifndef WIN32

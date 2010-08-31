@@ -412,6 +412,10 @@ void Menu::HandleEvents()
   }
 
   do {
+    // We might be set inactive while in here
+    if (AppWormux::CheckInactive(event))
+      continue;
+
     if (!HandleGlobalEvent(event)) {
       HandleEvent(event);
     }

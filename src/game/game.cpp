@@ -480,6 +480,10 @@ void Game::RefreshInput()
       return;
     }
 
+    // Inactive event
+    if (AppWormux::CheckInactive(event))
+      continue;
+
     // Mouse event
     if (Mouse::GetInstance()->HandleEvent(event))
       continue;
