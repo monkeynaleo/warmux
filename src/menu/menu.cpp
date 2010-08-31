@@ -350,16 +350,15 @@ void Menu::HandleEvent(const SDL_Event& event)
   if (event.type == SDL_QUIT) {
     key_cancel();
   } else if (event.type == SDL_KEYDOWN) {
-    bool used_by_widget = false;
 
     // Drop key events that are purely modifiers
     if (event.key.keysym.sym >= SDLK_NUMLOCK &&
         event.key.keysym.sym <= SDLK_COMPOSE)
       return;
 
-    // Allow widgets to interpret ENTER/... if they know it
-    if (event.key.keysym.sym != SDLK_ESCAPE)
-      used_by_widget = widgets.SendKey(event.key.keysym);
+    // Allow widgets to interpret any key they want,
+    // and do not reserve esc/return/delete/backspace
+    bool used_by_widget = widgets.SendKey(event.key.keysym);
 
     if (!used_by_widget) {
       switch (event.key.keysym.sym)

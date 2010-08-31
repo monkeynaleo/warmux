@@ -508,9 +508,11 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
   }
 }
 
-void ManMachineInterface::ClearKeyAction()
+void ManMachineInterface::ClearKeyAction(Key_t at)
 {
-  layout.clear();
+  int key = GetKeyAssociatedToAction(at);
+  if (key)
+    layout[key].clear();
 }
 
 int ManMachineInterface::GetKeyFromKeyName(const std::string &name) const

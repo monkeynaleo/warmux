@@ -117,7 +117,8 @@ protected:
   void HandleKeyReleased(const Key_t &action_key);
 
   void SetKeyAction(int key, Key_t at) { layout[key].push_back(at); };
-  void ClearKeyAction();
+  void ClearKeyAction(Key_t at);
+  void ClearKeyBindings() { layout.clear(); }
 
   int GetKeyFromKeyName(const std::string &name) const;
   std::string GetKeyNameFromKey(int key) const;
