@@ -130,12 +130,12 @@ class DataDownloader extends Thread
   public DataDownloader( MainActivity _Parent, TextView _Status )
   {
     Parent = _Parent;
-    DownloadComplete = false;
     Status = new StatusWriter( _Status, _Parent );
-    Status.setText( "Connecting to " + Globals.DataDownloadUrl );
+    //Status.setText( "Connecting to " + Globals.DataDownloadUrl );
     outFilesDir = Parent.getFilesDir().getAbsolutePath();
     if( Globals.DownloadToSdcard )
       outFilesDir = "/sdcard/Wormux/";
+    DownloadComplete = false;
     this.start();
   }
 
@@ -386,8 +386,8 @@ class DataDownloader extends Thread
     return outFilesDir + "/" + filename;
   };
 
-  public boolean DownloadComplete;
   public StatusWriter Status;
+  public boolean DownloadComplete;
   private MainActivity Parent;
   private String outFilesDir = null;
 }

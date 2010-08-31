@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.os.PowerManager;
 import android.widget.TextView;
+import android.content.res.Configuration;
 
 
 public class MainActivity extends Activity {
@@ -26,10 +26,12 @@ public class MainActivity extends Activity {
     _tv.setText("Initializing");
     setContentView(_tv);
 
-    Settings.Load(this);
-
-    mLoadLibraryStub = new LoadLibrary();
-    mAudioThread = new AudioThread(this);
+    if(mAudioThread == null) // Starting from background (should not happen)
+    {
+      mLoadLibraryStub = new LoadLibrary();
+      mAudioThread = new AudioThread(this);
+      Settings.Load(this);
+    }
   }
 
   public void startDownloader()
@@ -49,9 +51,6 @@ public class MainActivity extends Activity {
     mGLView.setFocusableInTouchMode(true);
     mGLView.setFocusable(true);
     mGLView.requestFocus();
-    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-    wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, Globals.ApplicationName);
-    wakeLock.acquire();
   }
 
   @Override
@@ -61,9 +60,7 @@ public class MainActivity extends Activity {
           downloader.setParent(null, null);
       }
     }
-    // TODO: if application pauses it's screen is messed up
-    if( wakeLock != null )
-      wakeLock.release();
+
     super.onPause();
     if( mGLView != null )
       mGLView.onPause();
@@ -71,12 +68,10 @@ public class MainActivity extends Activity {
 
   @Override
   protected void onResume() {
-    if( wakeLock != null )
-      wakeLock.acquire();
     super.onResume();
     if( mGLView != null )
       mGLView.onResume();
-    if( downloader != null ) {
+    else if( downloader != null ) {
       synchronized( downloader ) {
         downloader.setParent(this, _tv);
         if( downloader.DownloadComplete )
@@ -93,9 +88,6 @@ public class MainActivity extends Activity {
           downloader.setParent(null, null);
       }
     }
-    if( wakeLock != null )
-      wakeLock.release();
-
     if( mGLView != null )
       mGLView.exitApp();
     super.onStop();
@@ -107,7 +99,7 @@ public class MainActivity extends Activity {
     // Overrides Back key to use in our app
      if( mGLView != null )
        mGLView.nativeKey( keyCode, 1 );
-     if( keyCode == KeyEvent.KEYCODE_BACK && !downloader.DownloadComplete )
+     else if( keyCode == KeyEvent.KEYCODE_BACK && !downloader.DownloadComplete )
        onStop();
      return true;
   }
@@ -126,10 +118,33 @@ public class MainActivity extends Activity {
     return true;
   }
 
-  private DemoGLSurfaceView mGLView = null;
-  private LoadLibrary mLoadLibraryStub = null;
-  private AudioThread mAudioThread = null;
-  private PowerManager.WakeLock wakeLock = null;
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    // Do nothing here
+  }
+
+  public void setText(final String t)
+  {
+    class Callback implements Runnable
+    {
+      public TextView Status;
+      public String text;
+      public void run()
+      {
+        if(Status != null)
+          Status.setText(text);
+      }
+    }
+    Callback cb = new Callback();
+    cb.text = new String(t);
+    cb.Status = _tv;
+    this.runOnUiThread(cb);
+  }
+
+  private static DemoGLSurfaceView mGLView = null;
+  private static LoadLibrary mLoadLibraryStub = null;
+  private static AudioThread mAudioThread = null;
   private static DataDownloader downloader = null;
   private TextView _tv = null;
   private boolean sdlInited = false;

@@ -197,8 +197,8 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
   int bpp;
   SDL_zero(alphaFormat);
   SDL_PixelFormatEnumToMasks( SDL_PIXELFORMAT_RGBA4444, &bpp,
-                &alphaFormat.Rmask, &alphaFormat.Gmask,
-                &alphaFormat.Bmask, &alphaFormat.Amask );
+                              &alphaFormat.Rmask, &alphaFormat.Gmask,
+                              &alphaFormat.Bmask, &alphaFormat.Amask );
   alphaFormat.BitsPerPixel = ANDROID_BITSPERPIXEL;
   alphaFormat.BytesPerPixel = ANDROID_BYTESPERPIXEL;
   this->displayformatalphapixel = &alphaFormat;
@@ -208,7 +208,7 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
   this->info.blit_hw_CC = 1;
   this->info.blit_hw_A = 1;
   this->info.blit_fill = 1;
-  this->info.video_mem = 128 * 1024; // Random value
+  this->info.video_mem = 32 * 1024; // Random value
   this->info.current_w = SDL_ANDROID_sWindowWidth;
   this->info.current_h = SDL_ANDROID_sWindowHeight;
 
@@ -296,8 +296,8 @@ SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
   /* Allocate the new pixel format for the screen */
   SDL_zero(format);
   SDL_PixelFormatEnumToMasks( SDL_PIXELFORMAT_RGB565, &bpp1,
-                &format.Rmask, &format.Gmask,
-                &format.Bmask, &format.Amask );
+                              &format.Rmask, &format.Gmask,
+                              &format.Bmask, &format.Amask );
   format.BitsPerPixel = bpp1;
   format.BytesPerPixel = ANDROID_BYTESPERPIXEL;
 
@@ -359,8 +359,8 @@ static int ANDROID_AllocHWSurface(_THIS, SDL_Surface *surface)
     format = SDL_PIXELFORMAT_RGBA4444;
     SDL_zero(format1);
     SDL_PixelFormatEnumToMasks( format, &bpp,
-                  &format1.Rmask, &format1.Gmask,
-                  &format1.Bmask, &format1.Amask );
+                                &format1.Rmask, &format1.Gmask,
+                                &format1.Bmask, &format1.Amask );
     if( surface->format->BitsPerPixel != bpp ||
       surface->format->Rmask != format1.Rmask ||
       surface->format->Gmask != format1.Gmask ||

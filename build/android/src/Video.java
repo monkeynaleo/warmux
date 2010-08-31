@@ -27,9 +27,14 @@ import android.os.Build;
   {
     public static DifferentTouchInput getInstance()
     {
-      return SingleTouchInput.Holder.sInstance;
+      if (Integer.parseInt(Build.VERSION.SDK) <= 4)
+        return SingleTouchInput.Holder.sInstance;
+      else
+         return MultiTouchInput.Holder.sInstance;
     }
+
     public abstract void process(final MotionEvent event);
+
     private static class SingleTouchInput extends DifferentTouchInput
     {
       private static class Holder
@@ -46,7 +51,34 @@ import android.os.Build;
         if( event.getAction() == MotionEvent.ACTION_MOVE )
           action = 2;
         if ( action >= 0 )
-          DemoGLSurfaceView.nativeMouse( (int)event.getX(), (int)event.getY(), action, 0, 0, 0 );
+          DemoGLSurfaceView.nativeMouse( (int)event.getX(), (int)event.getY(), action, 0,
+                                         (int)(event.getPressure() * 1000.0),
+                                         (int)(event.getSize() * 1000.0));
+      }
+    }
+
+    private static class MultiTouchInput extends DifferentTouchInput
+    {
+      private static class Holder
+      {
+        private static final MultiTouchInput sInstance = new MultiTouchInput();
+      }
+      public void process(final MotionEvent event)
+      {
+        for( int i = 0; i < event.getPointerCount(); i++ )
+        {
+          int action = -1;
+          if( event.getAction() == MotionEvent.ACTION_DOWN )
+            action = 0;
+          if( event.getAction() == MotionEvent.ACTION_UP )
+            action = 1;
+          if( event.getAction() == MotionEvent.ACTION_MOVE )
+            action = 2;
+          if ( action >= 0 )
+            DemoGLSurfaceView.nativeMouse( (int)event.getX(i), (int)event.getY(i), action, event.getPointerId(i),
+                                           (int)(event.getPressure(i) * 1000.0),
+                                           (int)(event.getSize(i) * 1000.0));
+        }
       }
     }
   }
@@ -78,10 +110,13 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
     System.loadLibrary("application");
     System.loadLibrary("sdl_main");
     URLDownloader tmp = new URLDownloader();
-    Settings.Apply();
+    Settings.Apply(context);
+    // Tweak video thread priority, if user selected big audio buffer
+    if(Globals.AudioBufferConfig >= 2)
+      Thread.currentThread().setPriority( (Thread.NORM_PRIORITY + Thread.MIN_PRIORITY) / 2 ); // Lower than normal
 
     nativeInit(); // Calls main() and never returns, hehe - we'll call eglSwapBuffers() from native code
-    System.exit(0);
+    System.exit(0); // The main() returns here - I don't bother with deinit stuff, just terminate process
   }
 
   public int swapBuffers() // Called from native code, returns 1 on success, 0 when GL context lost (user put app to background)
@@ -126,7 +161,6 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
   public boolean onTouchEvent(final MotionEvent event)
   {
     touchInput.process(event);
-    // TODO: add multitouch support (added in Android 2.0 SDK)
     // Wait a bit, and try to synchronize to app framerate, or event thread will eat all CPU and we'll lose FPS
     synchronized (mRenderer) {
       try {

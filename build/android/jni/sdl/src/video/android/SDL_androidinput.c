@@ -177,44 +177,39 @@ static SDL_keysym *GetKeysym(SDLKey scancode, SDL_keysym *keysym)
 #endif
 
 #define SDL_KEY_VAL(X) X
+#define MAX_MULTITOUCH_POINTERS 4
 
 static int isTrackballUsed = 0;
 static int isMouseUsed = 0;
 static int isJoystickUsed = 0;
 static int isMultitouchUsed = 0;
-static SDL_Joystick *CurrentJoysticks[4] = {NULL, NULL, NULL, NULL};
+static SDL_Joystick *CurrentJoysticks[MAX_MULTITOUCH_POINTERS+1] = {NULL, };
+static int TrackballDampening = 0; // in milliseconds
+static int lastTrackballAction = 0;
 
 enum MOUSE_ACTION { MOUSE_DOWN = 0, MOUSE_UP=1, MOUSE_MOVE=2 };
 
 JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, jint x, jint y, jint action, jint pointerId, jint force, jint radius )
 {
-#if SDL_VIDEO_RENDER_RESIZE
-  // Translate mouse coordinates
-
-#if SDL_VERSION_ATLEAST(1,3,0)
-  SDL_Window * window = SDL_GetFocusWindow();
-  if( window && window->renderer->window ) {
-    x = x * window->w / window->display->desktop_mode.w;
-    y = y * window->h / window->display->desktop_mode.h;
-  }
-#endif
-
-#endif
-
   if( isMultitouchUsed )
   {
     if(pointerId < 0)
       pointerId = 0;
-    if(pointerId > 2)
-      pointerId = 2;
+    if(pointerId > MAX_MULTITOUCH_POINTERS)
+      pointerId = MAX_MULTITOUCH_POINTERS;
     pointerId++;
+
     if( CurrentJoysticks[pointerId] )
     {
-      SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, x);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, y);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, force);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[0], 3, radius);
+      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 0, x);
+      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 1, y);
+      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 2, force);
+      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 3, radius);
+      if( action == MOUSE_DOWN )
+        SDL_PrivateJoystickButton(CurrentJoysticks[pointerId+1], 0, SDL_PRESSED);
+      if( action == MOUSE_UP )
+        SDL_PrivateJoystickButton(CurrentJoysticks[pointerId+1], 0, SDL_RELEASED);
     }
   }
   if( !isMouseUsed )
@@ -223,7 +218,7 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
     #define SDL_ANDROID_KEYCODE_MOUSE RETURN
     #endif
     SDL_keysym keysym;
-    if( action != MOUSE_MOVE && SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_MOUSE)) != SDL_KEY(UNKNOWN) )
+    if( action != MOUSE_MOVE && SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_MOUSE)) != SDL_KEY(UNKNOWN))
       SDL_SendKeyboardKey( action == MOUSE_DOWN ? SDL_PRESSED : SDL_RELEASED, GetKeysym(SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_MOUSE)) ,&keysym) );
     return;
   }
@@ -433,14 +428,34 @@ void ANDROID_InitOSKeymap()
   keymap[KEYCODE_NOTIFICATION] = SDL_KEY(F7);
 }
 
+static float dx = 0.04, dy = 0.08, dz = 0.08; // For accelerometer
+
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSensitivity) ( JNIEnv* env, jobject thiz, jint value)
+{
+  dx = 0.04; dy = 0.08; dz = 0.08; // Fast sensitivity
+  if( value == 1 ) // Medium sensitivity
+  {
+    dx = 0.1; dy = 0.15; dz = 0.15;
+  }
+  if( value == 2 ) // Slow sensitivity
+  {
+    dx = 0.2; dy = 0.25; dz = 0.25;
+  }
+}
+
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(Settings_nativeSetTrackballDampening) ( JNIEnv* env, jobject thiz, jint value)
+{
+  TrackballDampening = (value * 200);
+}
+
 void updateOrientation ( float accX, float accY, float accZ )
 {
   SDL_keysym keysym;
   // TODO: use accelerometer as joystick, make this configurable
   // Currenly it's used as cursor + KP7/KP9 keys
   //static const float dx = 0.04, dy = 0.1, dz = 0.1;
-  static const float dx = 0.2, dy = 0.25, dz = 0.25;
-
   static float midX = 0, midY = 0, midZ = 0;
   static int pressLeft = 0, pressRight = 0, pressUp = 0, pressDown = 0, pressR = 0, pressL = 0;
 
@@ -589,9 +604,10 @@ void updateOrientation ( float accX, float accY, float accZ )
 
 }
 
+static int leftPressed = 0, rightPressed = 0, upPressed = 0, downPressed = 0;
+
 int processAndroidTrackball(int key, int action)
 {
-  static int leftPressed = 0, rightPressed = 0, upPressed = 0, downPressed = 0;
   SDL_keysym keysym;
 
   if( ! action && (
@@ -600,6 +616,7 @@ int processAndroidTrackball(int key, int action)
     key == KEYCODE_DPAD_LEFT ||
     key == KEYCODE_DPAD_RIGHT ) )
     return 1;
+  lastTrackballAction = SDL_GetTicks();
 
   if( key == KEYCODE_DPAD_UP )
   {
@@ -688,9 +705,31 @@ int processAndroidTrackball(int key, int action)
   return 0;
 }
 
+void SDL_ANDROID_processAndroidTrackballDampening()
+{
+  SDL_keysym keysym;
+  if( !TrackballDampening )
+    return;
+  if( SDL_GetTicks() - lastTrackballAction > TrackballDampening )
+  {
+    if( upPressed )
+      SDL_SendKeyboardKey( SDL_RELEASED, TranslateKey(KEYCODE_DPAD_UP ,&keysym) );
+    if( downPressed )
+      SDL_SendKeyboardKey( SDL_RELEASED, TranslateKey(KEYCODE_DPAD_DOWN ,&keysym) );
+    if( leftPressed )
+      SDL_SendKeyboardKey( SDL_RELEASED, TranslateKey(KEYCODE_DPAD_LEFT ,&keysym) );
+    if( rightPressed )
+      SDL_SendKeyboardKey( SDL_RELEASED, TranslateKey(KEYCODE_DPAD_RIGHT ,&keysym) );
+    upPressed = 0;
+    downPressed = 0;
+    leftPressed = 0;
+    rightPressed = 0;
+  }
+}
+
 int SDL_SYS_JoystickInit(void)
 {
-  SDL_numjoysticks = 4;
+  SDL_numjoysticks = MAX_MULTITOUCH_POINTERS+1;
   return(0);
 }
 
@@ -714,8 +753,10 @@ int SDL_SYS_JoystickOpen(SDL_Joystick *joystick)
   joystick->nballs = 0;
   if( joystick->index == 0 )
     joystick->naxes = 3;
-  else
+  else {
     joystick->naxes = 4;
+    joystick->nbuttons = 1;
+  }
   CurrentJoysticks[joystick->index] = joystick;
   return(0);
 }
@@ -741,7 +782,7 @@ void SDL_SYS_JoystickClose(SDL_Joystick *joystick)
 void SDL_SYS_JoystickQuit(void)
 {
   int i;
-  for(i=0; i<4; i++)
+  for(i=0; i<MAX_MULTITOUCH_POINTERS+1; i++)
     CurrentJoysticks[i] = NULL;
   return;
 }

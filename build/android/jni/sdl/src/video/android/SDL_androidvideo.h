@@ -29,6 +29,7 @@ extern void ANDROID_InitOSKeymap();
 extern int SDL_ANDROID_sWindowWidth;
 extern int SDL_ANDROID_sWindowHeight;
 extern int SDL_ANDROID_CallJavaSwapBuffers();
+extern void SDL_ANDROID_processAndroidTrackballDampening();
 // typedef struct SDL_VideoDevice SDL_VideoDevice;
 extern SDL_VideoDevice *ANDROID_CreateDevice_1_3(int devindex);
 
