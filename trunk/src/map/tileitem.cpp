@@ -198,6 +198,11 @@ TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_thresh
 }
 
 // === Implemenation of TileItem_BaseColorKey ==============================
+TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t alpha_threshold)
+  : TileItem_NonEmpty(alpha_threshold)
+{
+}
+
 TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
@@ -319,8 +324,17 @@ void TileItem_BaseColorKey::MergeSprite(const Point2i &position, Surface& spr)
 
 // === Implemenation of TileItem_ColorKey16 ==============================
 TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t threshold)
-  : TileItem_BaseColorKey(16, threshold)
+  : TileItem_BaseColorKey(threshold)
 {
+#if 1
+  SDL_PixelFormat fmt = { NULL /* palette */, 32 /*bpp*/, 4 /*Bpp*/,
+                          0 /*Rloss*/, 0 /*Gloss*/, 0 /*Bloss*/, 0 /*Aloss*/,
+                          16 /*Rshift*/, 8 /*Gshift*/, 0 /*Bshift*/, 24 /*Ashift*/,
+                          0xFF0000, 0xFF00, 0xFF, 0xFF000000,
+                          0 /*colorkey*/, 0 /*alpha*/ };
+  m_surface = Surface::DisplayFormatColorKey((uint32_t *)pixels, &fmt,
+                                             CELL_SIZE.x, CELL_SIZE.y, pitch, threshold);
+#else
   uint8_t *ptr  = (uint8_t*)pixels;
   int      x, y;
 
@@ -336,6 +350,7 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
                                                0xFF0000, 0xFF00, 0xFF, 0xFF000000);
   m_surface = Surface(SDL_DisplayFormat(surf));
   SDL_FreeSurface(surf);
+#endif
   MapColorKey();
 }
 
@@ -429,7 +444,7 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 
 // === Implemenation of TileItem_ColorKey24 ==============================
 TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t threshold)
-  : TileItem_BaseColorKey(24, threshold)
+  : TileItem_BaseColorKey(threshold)
 {
   uint8_t *ptr  = (uint8_t*)pixels;
   int      x, y;
