@@ -134,12 +134,18 @@ int Question::Ask(bool onKeyUp)
           default_choice.active) {
         answer = default_choice.value;
         end = true;
+        break;
       }
+
+      // We might be put inactive while there
+      AppWormux::CheckInactive(event);
 
       if ((onKeyUp && event.type == SDL_KEYUP) || event.type == SDL_KEYDOWN) {
         answer = TreatsKey(event);
-        if (answer != -1)
+        if (answer != -1) {
           end = true;
+          break;
+        }
       }
     } // SDL_PollEvent
 
