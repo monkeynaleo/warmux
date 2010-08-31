@@ -17,20 +17,103 @@ import android.content.res.Configuration;
 import android.os.Environment;
 import android.os.StatFs;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.zip.GZIPInputStream;
 
 class Settings
 {
   static String SettingsFileName = "libsdl-settings.cfg";
+
+  static AlertDialog changeConfigAlert = null;
+  static Thread changeConfigAlertThread = null;
+  static boolean settingsLoaded = false;
+
+  static void Save(final MainActivity p)
+  {
+    try {
+      ObjectOutputStream out = new ObjectOutputStream(p.openFileOutput( SettingsFileName, p.MODE_WORLD_READABLE ));
+      out.writeBoolean(Globals.DownloadToSdcard);
+      out.writeBoolean(Globals.PhoneHasArrowKeys);
+      out.writeBoolean(Globals.PhoneHasTrackball);
+      out.writeBoolean(Globals.UseAccelerometerAsArrowKeys);
+      out.writeInt(Globals.AccelerometerSensitivity);
+      out.writeInt(Globals.TrackballDampening);
+      out.writeInt(Globals.AudioBufferConfig);
+      out.close();
+      settingsLoaded = true;
+
+    } catch( FileNotFoundException e ) {
+    } catch( SecurityException e ) {
+    } catch ( IOException e ) {};
+  }
+
   static void Load( final MainActivity p )
   {
+    if(settingsLoaded) // Prevent starting twice
+    {
+      startDownloader(p);
+      return;
+    }
     try {
       ObjectInputStream settingsFile = new ObjectInputStream(new FileInputStream( p.getFilesDir().getAbsolutePath() + "/" + SettingsFileName ));
       Globals.DownloadToSdcard = settingsFile.readBoolean();
-      Globals.AppNeedsArrowKeys = settingsFile.readBoolean();
+      Globals.PhoneHasArrowKeys = settingsFile.readBoolean();
       Globals.PhoneHasTrackball = settingsFile.readBoolean();
+      Globals.UseAccelerometerAsArrowKeys = settingsFile.readBoolean();
+      Globals.AccelerometerSensitivity = settingsFile.readInt();
+      Globals.TrackballDampening = settingsFile.readInt();
+      Globals.AudioBufferConfig = settingsFile.readInt();
 
-      startDownloader(p);
+      settingsLoaded = true;
+
+      AlertDialog.Builder builder = new AlertDialog.Builder(p);
+      builder.setTitle("Phone configuration");
+      builder.setPositiveButton("Change phone configuration", new DialogInterface.OnClickListener()
+      {
+        public void onClick(DialogInterface dialog, int item)
+        {
+            changeConfigAlert = null;
+            dialog.dismiss();
+            showDownloadConfig(p);
+        }
+      });
+      /*
+      builder.setNegativeButton("Start", new DialogInterface.OnClickListener()
+      {
+        public void onClick(DialogInterface dialog, int item)
+        {
+            changeConfigAlert = null;
+            dialog.dismiss();
+            startDownloader(p);
+        }
+      });
+      */
+      AlertDialog alert = builder.create();
+      alert.setOwnerActivity(p);
+      changeConfigAlert = alert;
+
+      class Callback implements Runnable
+      {
+        MainActivity p;
+        Callback( MainActivity _p ) { p = _p; }
+        public void run()
+        {
+          try {
+            Thread.sleep(1500);
+          } catch( InterruptedException e ) {};
+          if( changeConfigAlert == null )
+            return;
+          changeConfigAlert.dismiss();
+          startDownloader(p);
+        }
+      };
+      changeConfigAlertThread = new Thread(new Callback(p));
+      changeConfigAlertThread.start();
+
+      alert.show();
+
       return;
+
     } catch( FileNotFoundException e ) {
     } catch( SecurityException e ) {
     } catch ( IOException e ) {};
@@ -56,6 +139,11 @@ class Settings
         "Unknown" ) );
     */
 
+    showDownloadConfig(p);
+  }
+
+  static void showDownloadConfig(final MainActivity p) {
+
     long freeSdcard = 0;
     long freePhone = 0;
     try {
@@ -68,7 +156,7 @@ class Settings
     final CharSequence[] items = {"Phone storage - " + String.valueOf(freePhone) + " Mb free", "SD card - " + String.valueOf(freeSdcard) + " Mb free"};
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("Where to download application data (42MB)");
+    builder.setTitle("Where to download application data");
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
@@ -82,19 +170,11 @@ class Settings
     AlertDialog alert = builder.create();
     alert.setOwnerActivity(p);
     alert.show();
-
   };
 
   static void showKeyboardConfig(final MainActivity p)
   {
-    if( ! Globals.AppNeedsArrowKeys )
-    {
-      Save(p);
-      startDownloader(p);
-      return;
-    }
-
-    final CharSequence[] items = {"Arrows / joystick / dpad", "Trackball", "None, only touchscreen"};
+    final CharSequence[] items = {"Arrows / joystick / dpad", "Trackball", "Accelerometer"};
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
     builder.setTitle("What kind of navigation keys does your phone have?");
@@ -102,11 +182,18 @@ class Settings
     {
       public void onClick(DialogInterface dialog, int item)
       {
-        Globals.AppNeedsArrowKeys = (item == 2);
+        Globals.PhoneHasArrowKeys = (item == 0);
         Globals.PhoneHasTrackball = (item == 1);
 
         dialog.dismiss();
-        showAccelermoeterConfig(p);
+        if (Globals.PhoneHasArrowKeys )
+        {
+          // Force arrows only
+          Globals.UseAccelerometerAsArrowKeys = false;
+          showAudioConfig(p);
+        }
+        else
+          showTrackballConfig(p);
       }
     });
     AlertDialog alert = builder.create();
@@ -114,27 +201,71 @@ class Settings
     alert.show();
   }
 
-  static void showAccelermoeterConfig(final MainActivity p)
+  static void showTrackballConfig(final MainActivity p)
   {
-    if( Globals.AppNeedsArrowKeys || Globals.AppUsesJoystick )
+    Globals.TrackballDampening = 0;
+    if( ! Globals.PhoneHasTrackball )
     {
-      Save(p);
-      startDownloader(p);
+      Globals.UseAccelerometerAsArrowKeys = true;
+      showAccelerometerConfig(p);
       return;
     }
 
-    final CharSequence[] items = {"Do not use accelerometer", "Use accelerometer as navigation keys"};
+    final CharSequence[] items = {"No dampening", "Fast", "Medium", "Slow"};
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("You may optionally use accelerometer as another navigation keys");
+    builder.setTitle("Trackball dampening");
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
       {
-        Globals.AppNeedsArrowKeys = (item == 1);
+        Globals.TrackballDampening = item;
 
-        Save(p);
         dialog.dismiss();
+        showAudioConfig(p);
+      }
+    });
+    AlertDialog alert = builder.create();
+    alert.setOwnerActivity(p);
+    alert.show();
+  }
+
+  static void showAccelerometerConfig(final MainActivity p)
+  {
+    Globals.AccelerometerSensitivity = 0;
+
+    final CharSequence[] items = {"Fast", "Medium", "Slow"};
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(p);
+    builder.setTitle("Accelerometer sensitivity");
+    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
+    {
+      public void onClick(DialogInterface dialog, int item)
+      {
+        Globals.AccelerometerSensitivity = item;
+
+        dialog.dismiss();
+        showAudioConfig(p);
+      }
+    });
+    AlertDialog alert = builder.create();
+    alert.setOwnerActivity(p);
+    alert.show();
+  }
+
+  static void showAudioConfig(final MainActivity p)
+  {
+    final CharSequence[] items = {"Small (fast devices)", "Medium", "Large (if sound is choppy)"};
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(p);
+    builder.setTitle("Size of audio buffer");
+    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
+    {
+      public void onClick(DialogInterface dialog, int item)
+      {
+        Globals.AudioBufferConfig = item;
+        dialog.dismiss();
+        Save(p);
         startDownloader(p);
       }
     });
@@ -143,21 +274,27 @@ class Settings
     alert.show();
   }
 
-  static void Save(final MainActivity p)
+  static byte [] loadRaw(Activity p,int res)
   {
-    try {
-      ObjectOutputStream out = new ObjectOutputStream(p.openFileOutput( SettingsFileName, p.MODE_WORLD_READABLE ));
-      out.writeBoolean(Globals.DownloadToSdcard);
-      out.writeBoolean(Globals.AppNeedsArrowKeys);
-      out.writeBoolean(Globals.PhoneHasTrackball);
-      out.close();
-    } catch( FileNotFoundException e ) {
-    } catch( SecurityException e ) {
-    } catch ( IOException e ) {};
+    byte [] buf = new byte[128];
+    byte [] a = new byte[0];
+    try{
+      InputStream is = new GZIPInputStream(p.getResources().openRawResource(res));
+      int readed = 0;
+      while( (readed = is.read(buf)) >= 0 )
+      {
+        byte [] b = new byte[a.length + readed];
+        for(int i = 0; i < a.length; i++)
+          b[i] = a[i];
+        for(int i = 0; i < readed; i++)
+          b[i+a.length] = buf[i];
+        a = b;
+      }
+    } catch(Exception e) {};
+    return a;
   }
 
-
-  static void Apply()
+  static void Apply(Activity p)
   {
     nativeIsSdcardUsed( Globals.DownloadToSdcard ? 1 : 0 );
 
@@ -165,16 +302,18 @@ class Settings
       nativeSetTrackballUsed();
     if( Globals.AppUsesMouse )
       nativeSetMouseUsed();
-    if( Globals.AppUsesJoystick && !Globals.AppNeedsArrowKeys )
+    if( Globals.AppUsesJoystick && !Globals.UseAccelerometerAsArrowKeys )
       nativeSetJoystickUsed();
     if( Globals.AppUsesMultitouch )
       nativeSetMultitouchUsed();
+    nativeSetAccelerometerSensitivity(Globals.AccelerometerSensitivity);
+    nativeSetTrackballDampening(Globals.TrackballDampening);
     String lang = new String(Locale.getDefault().getLanguage());
-    //if( Locale.getDefault().getCountry().length() > 0 )
-    //  lang = lang + "_" + Locale.getDefault().getCountry();
+    if( Locale.getDefault().getCountry().length() > 0 )
+      lang = lang + "_" + Locale.getDefault().getCountry();
     System.out.println( "libSDL: setting envvar LANG to '" + lang + "'");
     nativeSetEnv( "LANG", lang );
-    // TODO: get current user name and set envvar USER, the API is not available on Android 1.6 so I don't bother with this
+    // TODO: get current user name and set envvar USER, the API is not availalbe on Android 1.6 so I don't bother with this
   }
 
   static void startDownloader(MainActivity p)
@@ -193,11 +332,13 @@ class Settings
   };
 
 
-  private static native int nativeIsSdcardUsed(int flag);
-  private static native int nativeSetTrackballUsed();
-  private static native int nativeSetMouseUsed();
-  private static native int nativeSetJoystickUsed();
-  private static native int nativeSetMultitouchUsed();
+  private static native void nativeIsSdcardUsed(int flag);
+  private static native void nativeSetTrackballUsed();
+  private static native void nativeSetTrackballDampening(int value);
+  private static native void nativeSetAccelerometerSensitivity(int value);
+  private static native void nativeSetMouseUsed();
+  private static native void nativeSetJoystickUsed();
+  private static native void nativeSetMultitouchUsed();
   public static native void nativeSetEnv(final String name, final String value);
 }
 

@@ -56,6 +56,7 @@ static jmethodID JavaSwapBuffers = NULL;
 
 int SDL_ANDROID_CallJavaSwapBuffers()
 {
+  SDL_ANDROID_processAndroidTrackballDampening();
   return (*JavaEnv)->CallIntMethod(JavaEnv, JavaRenderer, JavaSwapBuffers);
 }
 
