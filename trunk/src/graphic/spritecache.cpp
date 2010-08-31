@@ -38,7 +38,7 @@ void SpriteFrameCache::CreateRotationCache(Surface &surface, uint cache_size, bo
   rotated_surface.push_back(surface);
   for (uint i=1; i<cache_size; i++){
     Double angle = TWO_PI * (1 /* to inverte rotation angle */ - i / Double(cache_size));
-    rotated_surface.push_back(surface.RotoZoom(angle, 1.0, 1.0, smooth));
+    rotated_surface.push_back(surface.RotoZoomC(angle, 1.0, 1.0, smooth));
   }
 }
 
@@ -70,7 +70,7 @@ Surface SpriteFrameCache::GetSurfaceForAngle(Double angle) const
 void SpriteFrameCache::CreateFlippingCache(Surface &surface, bool smooth)
 {
   ASSERT(flipped_surface.IsNull());
-  flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, smooth);
+  flipped_surface = surface.RotoZoomC(0.0, -1.0, 1.0, smooth);
   if (use_rotation) {
     ASSERT(rotated_surface.size() != 0);
     ASSERT(rotated_flipped_surface.size() == 0);
@@ -78,7 +78,7 @@ void SpriteFrameCache::CreateFlippingCache(Surface &surface, bool smooth)
     const uint n = rotated_surface.size();
     for (uint i=1 ; i<n; i++) {
       Double angle = TWO_PI * (1 - Double(i) / n);
-      rotated_flipped_surface.push_back(surface.RotoZoom(angle, -1.0, 1.0, smooth));
+      rotated_flipped_surface.push_back(surface.RotoZoomC(angle, -1.0, 1.0, smooth));
     }
   }
 }

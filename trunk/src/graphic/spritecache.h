@@ -32,6 +32,12 @@
 
 class Sprite;
 
+#if 0 //def ANDROID
+#  define RotoZoomC(a, x, y, s) RotoZoom(a, x, y, s).DisplayFormatColorKey(128)
+#else
+#  define RotoZoomC(a, x, y, s) RotoZoom(a, x, y, s)
+#endif
+
 class SpriteFrameCache
 {
   bool use_rotation;

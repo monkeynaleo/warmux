@@ -288,7 +288,7 @@ void Sprite::RefreshSurface()
       rotozoom = 1;
 #endif
     } else if (cache.last_frame.IsNull()) {
-      current_surface = frames[current_frame].surface.RotoZoom(-rotation_rad, scale_x, scale_y, smooth);
+      current_surface = frames[current_frame].surface.RotoZoomC(-rotation_rad, scale_x, scale_y, smooth);
       cache.last_frame = current_surface;
 #ifdef DEBUG_ROTOZOOM
       rotozoom = 2;
