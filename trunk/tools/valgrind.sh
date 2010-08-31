@@ -1,15 +1,10 @@
 #!/bin/sh
 if [ "$1" = "" ]; then
-    echo "Usage: $0 /path/to/wormux"
+    echo "Usage: $0 /path/to/wormux <wormux options>"
     exit
 fi
 
-APP=$1
 LOG=valgrind.log
-valgrind \
-    --verbose \
-    --show-reachable=yes \
-    --log-file=$LOG \
-    --leak-check=full \
-    --run-libc-freeres=no \
-    $APP
+valgrind --tool=memcheck --show-reachable=yes --log-file=$LOG \
+    --leak-check=yes --leak-resolution=high --num-callers=12 \
+    --suppressions=$(dirname $0)/wormux.supp $*
