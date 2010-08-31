@@ -110,7 +110,11 @@ public:
     Keyboard *kbd = Keyboard::GetInstance();
 
     // Reset some configs
-    if (SDLK_BACKSPACE == key.sym || SDLK_DELETE == key.sym || SDLK_ESCAPE == key.sym) {
+    if (SDLK_BACKSPACE == key.sym ||
+#ifdef ANDROID
+        SDLK_ESCAPE == key.sym ||
+#endif
+        SDLK_DELETE == key.sym) {
       kbd->ClearKeyAction(key_action);
       label_key->SetText(_("None"));
       ctrl_box->SetValue(false);
