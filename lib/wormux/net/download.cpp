@@ -105,7 +105,7 @@ void
 JAVA_EXPORT_NAME(URLDownloader_nativeInitCallbacks)(JNIEnv * libEnv, jobject thiz)
 {
   env  = libEnv;
-  dler = env->NewGlobalRef(thiz);
+  dler = env->NewGlobalRef(thiz); //Never freed!
   jclass dlerClass = env->GetObjectClass(dler);
   FetchURL = env->GetMethodID(dlerClass, "FetchURL", "(Ljava/lang/String;)[B");
 }
