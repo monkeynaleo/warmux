@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources SYSTEM "../team.dtd" []>
+<resources>
+  <name>Java</name>
+  <surface name="flag" file="flag.png" />
+  <surface name="death_flag" file="dead.png" />
+  <surface name="big_flag" file="flag64.png" />
+  <team>
+    <character name="Duke" body="java" />
+    <character name="Eli" body="java" />
+    <character name="Chub" body="java" />
+    <character name="Java" body="java" />
+    <character name="Idler" body="java" />
+    <character name="the Thing (TM)" body="java" />
+    <character name="Dave" body="java" />
+    <character name="Chiba" body="java" />
+    <character name="Funk" body="java" />
+    <character name="Ferb" body="java" />
+    <character name="Helio" body="java" />
+    <character name="Albert" body="java" />
+    <character name="Gomper" body="java" />
+    <character name="Bilbo" body="java" />   
+  </team>
+</resources>
