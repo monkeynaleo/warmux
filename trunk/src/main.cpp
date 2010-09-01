@@ -19,22 +19,11 @@
  *  Starting file. (the 'main' function is here.)
  *****************************************************************************/
 
-#include <algorithm>
-#include <exception>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <vector>
 #include <getopt.h>
 #ifndef WIN32
 # include <signal.h>
 #endif
 #include <SDL.h>
-#include <WORMUX_config.h>
-#include <WORMUX_base.h>
-#include <WORMUX_debug.h>
-#include <WORMUX_index_server.h>
-#include <WORMUX_random.h>
 #include <WORMUX_singleton.h>
 #include "game/config.h"
 #include "game/game.h"
@@ -58,7 +47,7 @@
 #include "sound/jukebox.h"
 #include "tool/stats.h"
 #ifdef WMX_LOG
-#include "include/debugmasks.h"
+# include "include/debugmasks.h"
 #endif
 
 static MainMenu::menu_item choice = MainMenu::NONE;
