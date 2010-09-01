@@ -275,8 +275,8 @@ void Ground::Draw(bool redraw_all)
   CheckPreview();
 }
 
-void Ground::RedrawParticleList(std::list<Rectanglei> &list) const {
-  std::list<Rectanglei>::iterator it;
+void Ground::RedrawParticleList(const std::list<Rectanglei>& list) const {
+  std::list<Rectanglei>::const_iterator it;
 
   for( it = list.begin(); it != list.end(); ++it )
     DrawTile_Clipped(*it);

@@ -50,7 +50,7 @@ public:
   //returns the angle formed by the ground tangent au terrain
   Double Tangent(int x,int y) const ;
 
-  void RedrawParticleList(std::list<Rectanglei> &list) const;
+  void RedrawParticleList(const std::list<Rectanglei>& list) const;
 };
 
 #endif
