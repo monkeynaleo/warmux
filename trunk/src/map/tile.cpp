@@ -526,7 +526,7 @@ void Tile::DrawTile()
       item[i.y*nbCells.x + i.x]->Draw(i);
 }
 
-void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
+void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
 {
   // Revision 514:
   // worldClip.SetSize( worldClip.GetSize() + 1); // mmm, does anything gives areas
@@ -535,7 +535,6 @@ void Tile::DrawTile_Clipped(Rectanglei & worldClip) const
   // Revision 3095:
   // Sorry, I don't understand that comment. Moreover the +1 produces a bug when the ground of
   // a map have an alpha value != 255 and != 0
-  worldClip.SetSize(worldClip.GetSize());
   Point2i firstCell = Clamp(worldClip.GetPosition() / CELL_SIZE);
   Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
   Point2i c;

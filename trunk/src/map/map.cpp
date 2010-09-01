@@ -169,6 +169,8 @@ void Map::DrawWater()
 
 void Map::Draw(bool redraw_all)
 {
+  // This is necessary because the WindParticles Sprites will set
+  // the Rectanglei's to redraw in the to_redraw list using ToRedrawOnScreen
   std::list<Rectanglei> *tmp = to_redraw;
   to_redraw_particles->clear();
   to_redraw = to_redraw_particles;

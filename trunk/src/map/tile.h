@@ -66,7 +66,7 @@ public:
   // Draw a part that is inside the given clipping rectangle
   // Clipping rectangle is in World coordinate not screen coordinates
   // usefull to redraw only a part that is under a sprite that has moved,...
-  void DrawTile_Clipped(Rectanglei & clip_rectangle) const;
+  void DrawTile_Clipped(const Rectanglei & clip_rectangle) const;
 
   // Return a surface of the ground inside the rect
   Surface GetPart(const Rectanglei& rec);
