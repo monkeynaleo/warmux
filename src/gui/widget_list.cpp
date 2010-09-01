@@ -319,12 +319,17 @@ void WidgetList::Update(const Point2i& mousePosition,
     // Clip rectangle was in fact garbage
     wlr_tmp = wlr = wlr_original;
   }
+  if (!wlr.GetSizeX() && !wlr.GetSizeY()) {
+    SwapWindowClip(wlr_original);
+    return;
+  }
+
   // Set final clip rectangle, wlr_tmp now has the previous garbage clip rectangle
   SwapWindowClip(wlr_tmp);
 
   // Redraw the background
   if (need_redrawing)
-    RedrawBackground(*this);
+    RedrawBackground(wlr);
 
   for (std::list<Widget*>::const_iterator w=widget_list.begin();
       w != widget_list.end();
