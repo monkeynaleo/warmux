@@ -62,6 +62,7 @@ void Interface::LoadDataInternal(Profile *res)
     clock_emergency->Scale(zoom, zoom);
     clock_normal->EnableLastFrameCache();
     clock_emergency->EnableLastFrameCache();
+    shoot->EnableLastFrameCache();
   }
   else {
     game_menu = tmp;
