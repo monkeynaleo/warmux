@@ -114,7 +114,7 @@ OptionMenu::OptionMenu() :
 
   opt_max_fps =
     new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                              option_size, 50, 5, 20, 50);
+                              option_size, 30, 5, 20, 60);
   graphic_options->AddWidget(opt_max_fps);
 
 #if !defined(ANDROID)
