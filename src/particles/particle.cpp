@@ -88,17 +88,17 @@ void Particle::Refresh()
 
     m_left_time_to_live--;
 
-    Double lived_time = m_initial_time_to_live - m_left_time_to_live;
+    uint lived_time = m_initial_time_to_live - m_left_time_to_live;
 
-    //during the 1st quarter of the time increase size of particle
-    //after the 1st quarter, decrease the alpha value
-    if ((Double)lived_time<m_initial_time_to_live/TWO) {
-      Double coeff = sin((HALF_PI)*((Double)lived_time/((Double)m_initial_time_to_live/TWO)));
-      image->Scale(coeff,coeff);
+    //during the 1st half of the time, increase size of particle
+    //after the 1st half, decrease the alpha value
+    if (2*lived_time<m_initial_time_to_live) {
+      Double coeff = sin(lived_time*PI/m_initial_time_to_live);
+      image->Scale(coeff, coeff);
       SetSize(image->GetSize());
       image->SetAlpha(1.0);
     } else {
-      Double alpha = ONE - sin((HALF_PI)*((Double)lived_time-((Double)m_initial_time_to_live/TWO))/((Double)m_initial_time_to_live/TWO));
+      Double alpha = ONE - sin((2*lived_time-m_initial_time_to_live)*HALF_PI/m_initial_time_to_live);
       image->Scale(1.0, 1.0);
       image->SetAlpha(alpha);
     }
@@ -259,14 +259,14 @@ void ParticleEngine::AddNow(const Point2i &position,
 
       if (norme == -1) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector length");
-        tmp_norme = Double(RandomSync().GetUint(0, 5000))/100;
+        tmp_norme = RandomSync().GetDouble(0, 5000/100);
       } else {
         tmp_norme = norme;
       }
 
       if( angle == -1 ) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
-        tmp_angle = -Double(RandomSync().GetUint(0, 3000))/1000;
+        tmp_angle = RandomSync().GetDouble(-3000/1000, 0);
       } else {
         tmp_angle = angle;
       }
