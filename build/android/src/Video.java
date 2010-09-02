@@ -176,7 +176,7 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
     accelerometer = null;
   };
 
-+ @Override
+  @Override
   public void onPause() {
     super.onPause();
     System.exit(0); // Not implemented yet
