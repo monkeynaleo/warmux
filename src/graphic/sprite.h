@@ -52,6 +52,14 @@ class Sprite
 {
 private:
   bool smooth;
+  // Surface growing as need be for any temporary operation inside Sprite members
+  // that need a SDL_SWSURFACE Surface without alpha.
+  // This surface is shared by all Sprite objects to save memory, but beware
+  // that its use is not thread-safe!
+  static Surface scratch;
+
+  // Use that to grow the scratch Surface as need be
+  void CheckScratch(const Point2i& size);
 
 public:
   SpriteCache cache;
@@ -196,7 +204,7 @@ public:
   // Draw
   void Blit(Surface &dest, uint pos_x, uint pos_y)
   {
-    RefreshSurface();
+    RefreshSurface(); // Might be NULL here
     Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
   }
   void Blit(Surface &dest, const Point2i &pos) { Blit(dest, pos.GetX(), pos.GetY()); };
