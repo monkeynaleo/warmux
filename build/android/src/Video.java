@@ -112,7 +112,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
     URLDownloader tmp = new URLDownloader();
     Settings.Apply(context);
     // Tweak video thread priority, if user selected big audio buffer
-    if(Globals.AudioBufferConfig >= 2)
+    if (Globals.AudioBufferConfig >= 2)
       Thread.currentThread().setPriority( (Thread.NORM_PRIORITY + Thread.MIN_PRIORITY) / 2 ); // Lower than normal
 
     nativeInit(); // Calls main() and never returns, hehe - we'll call eglSwapBuffers() from native code
@@ -170,23 +170,34 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
     return true;
   };
 
-   public void exitApp() {
-     mRenderer.exitApp();
-     accelerometer.stop();
-     accelerometer = null;
-   };
+  public void exitApp() {
+    mRenderer.exitApp();
+    accelerometer.stop();
+    accelerometer = null;
+  };
+
++ @Override
+  public void onPause() {
+    super.onPause();
+    System.exit(0); // Not implemented yet
+  };
+
+  @Override
+  public void onResume() {
+    super.onResume();
+  };
 
   @Override
   public boolean onKeyDown(int keyCode, final KeyEvent event) {
-     nativeKey( keyCode, 1 );
-     return true;
-   }
+    nativeKey( keyCode, 1 );
+    return true;
+  }
 
   @Override
   public boolean onKeyUp(int keyCode, final KeyEvent event) {
-     nativeKey( keyCode, 0 );
-     return true;
-   }
+    nativeKey( keyCode, 0 );
+    return true;
+  }
 
   DemoRenderer mRenderer;
   Activity mParent;
