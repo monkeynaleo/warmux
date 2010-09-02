@@ -34,6 +34,9 @@
 #include "graphic/spriteframe.h"
 #include "tool/string_tools.h"
 
+// Scratch surface without alpha, not thread-safe!
+Surface Sprite::scratch;
+
 Sprite::Sprite(bool _smooth) :
   smooth(_smooth),
   cache(*this),
@@ -118,7 +121,7 @@ void Sprite::AddFrame(const Surface &surf, uint delay){
   frames.push_back(SpriteFrame(surf, delay));
 }
 
-void Sprite::SetRotation_rad( Double angle_rad)
+void Sprite::SetRotation_rad(Double angle_rad)
 {
   while (angle_rad > TWO_PI)
     angle_rad -= TWO_PI;
@@ -211,26 +214,39 @@ void Sprite::Start()
   cache.InvalidLastFrame();
 }
 
+void Sprite::CheckScratch(const Point2i& size)
+{
+  int w = scratch.IsNull() ? 0 : scratch.GetWidth();
+  int h = scratch.IsNull() ? 0 : scratch.GetHeight();
+  if (w<size.GetX() || h<size.GetY()) {
+    w = std::max(size.GetX(), w);
+    h = std::max(size.GetY(), h);
+    scratch.NewSurface(Point2i(w, h), SDL_SWSURFACE, false);
+  }
+  scratch.SetAlpha(SDL_SRCALPHA, 0);
+}
+
 void Sprite::Blit(Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
 {
   if (!show)
     return;
 
   RefreshSurface();
-
-  Rectanglei srcRect (src_x, src_y, w, h);
-  Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
+  Rectanglei srcRect(src_x, src_y, w, h);
+  Rectanglei dstRect(pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
 
   if (alpha == ONE) {
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
+  } else if (current_surface.GetSurface()->format->Amask) {
+    CheckScratch(srcRect.GetSize());
+    scratch.Blit(dest, dstRect, Point2i(0,0));
+    scratch.SetAlpha(SDL_SRCALPHA, alpha * 255);
+    scratch.Blit(current_surface, srcRect, Point2i(0,0));
+    dest.Blit(scratch, srcRect, dstRect.GetPosition());
   } else {
-    Surface surf_alpha;
-    surf_alpha.NewSurface(srcRect.GetSize(),SDL_SWSURFACE,false);
-    surf_alpha.Blit(dest,dstRect,Point2i(0,0));
-    Double max_unsigned_char = 255.0;
-    surf_alpha.SetAlpha(SDL_SRCALPHA, (int)(alpha * max_unsigned_char));
-    surf_alpha.Blit(current_surface,srcRect,Point2i(0,0));
-    dest.Blit(surf_alpha, srcRect, dstRect.GetPosition());
+    // Surface doesn't have alpha, do a simple blit
+    current_surface.SetAlpha(SDL_SRCALPHA, alpha * 255);
+    dest.Blit(current_surface, srcRect, dstRect.GetPosition());
   }
 
   // For the cache mechanism
@@ -263,9 +279,6 @@ void Sprite::Draw(const Point2i &pos)
 
 void Sprite::DrawXY(const Point2i &pos)
 {
-  if (!show)
-    return;
-
   Blit(GetMainWindow(), pos);
 }
 
