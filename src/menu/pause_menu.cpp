@@ -36,9 +36,10 @@
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-PauseMenu::PauseMenu(bool& _exit_game)  :
-  Menu("interface/quit_screen", vNo),
-  exit_game(_exit_game)
+PauseMenu::PauseMenu(bool& _exit_game)
+  : Menu("interface/quit_screen", vNo)
+  , exit_game(_exit_game)
+  , sub_menu(NULL)
 {
   Point2i size(100, 100);
 
@@ -82,15 +83,17 @@ void PauseMenu::BackToGame()
 
 void PauseMenu::RunOptionsMenu()
 {
-  OptionMenu menu;
-  menu.Run();
+  sub_menu = new OptionMenu();
+  sub_menu->Run();
+  sub_menu = NULL;
   close_menu = true;
 }
 
 void PauseMenu::RunHelpMenu()
 {
-  HelpMenu menu;
-  menu.Run();
+  sub_menu = new HelpMenu();
+  sub_menu->Run();
+  sub_menu = NULL;
   close_menu = true;
 }
 
@@ -144,4 +147,22 @@ void PauseMenu::OnClickUp(const Point2i &mousePosition, int button)
   }
 }
 
+void PauseMenu::RedrawMenu()
+{
+  if (sub_menu) {
+    sub_menu->RedrawMenu();
+  } else {
+    Menu::RedrawMenu();
+  }
+}
+
+void PauseMenu::DisplayError(const std::string &msg)
+{
+  if (sub_menu) {
+    sub_menu->DisplayError(msg);
+  } else {
+    DisplayError(msg);
+  }
+}
+  
 //-----------------------------------------------------------------------------

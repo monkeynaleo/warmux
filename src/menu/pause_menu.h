@@ -29,7 +29,7 @@ class ButtonPic;
 
 class PauseMenu : public Menu
 {
- private:
+private:
   bool& exit_game;
 
   ButtonPic * bt_continue_play;
@@ -37,6 +37,7 @@ class PauseMenu : public Menu
   ButtonPic * bt_help_menu;
   ButtonPic * bt_main_menu;
 
+  Menu* sub_menu;
 
   bool signal_ok();
   bool signal_cancel();
@@ -50,9 +51,15 @@ class PauseMenu : public Menu
 
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
+
  public:
   PauseMenu(bool& exit_game);
   ~PauseMenu();
+
+  // Those are needed because PauseMenu might have those called through
+  // a callback while displaying a submenu
+  void RedrawMenu();
+  void DisplayError(const std::string &msg);
 };
 
 #endif

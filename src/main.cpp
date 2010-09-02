@@ -193,8 +193,13 @@ void AppWormux::DisplayLoadingPicture()
 void AppWormux::RefreshDisplay()
 {
   if (Game::IsRunning()) {
-    GetWorld().DrawSky(true);
-    GetWorld().Draw(true);
+    if (Game::GetCurrentMenu()) {
+      Game::GetCurrentMenu()->RedrawMenu();
+      return;
+    } else {
+      GetWorld().DrawSky(true);
+      GetWorld().Draw(true);
+    }
   }
   else if (GetCurrentMenu()) {
     GetCurrentMenu()->RedrawMenu();
@@ -206,6 +211,9 @@ void AppWormux::DisplayError(const std::string &msg)
   std::cerr << msg << std::endl;
 
   if (Game::IsRunning()) {
+    if (Game::GetCurrentMenu()) {
+      Game::GetCurrentMenu()->DisplayError(msg);
+    }
     // nothing to do
   } else if (singleton->GetCurrentMenu()) {
     singleton->GetCurrentMenu()->DisplayError(msg);
@@ -215,8 +223,12 @@ void AppWormux::DisplayError(const std::string &msg)
 void AppWormux::ReceiveMsgCallback(const std::string& msg)
 {
   if (Game::IsRunning()) {
-    //Add message to chat session in Game
-    Game::GetInstance()->chatsession.NewMessage(msg);
+    if (Game::GetCurrentMenu()) {
+      // Drop message, we should be paused anyway
+    } else {
+      // Add message to chat session in Game
+      Game::GetInstance()->chatsession.NewMessage(msg);
+    }
   } else if (GetCurrentMenu()) {
     GetCurrentMenu()->ReceiveMsgCallback(msg);
   }
