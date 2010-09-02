@@ -74,7 +74,7 @@ std::string Game::current_rules = "none";
 
 Game * Game::GetInstance()
 {
-  if (singleton == NULL) {
+  if (!singleton) {
 
     current_rules = GameMode::GetRef().rules;
 
@@ -102,7 +102,7 @@ Game * Game::UpdateGameRules()
 {
   const std::string& config_rules = GameMode::GetRef().rules;
   printf("Current rules: %s\n", config_rules.c_str());
-  if (singleton != NULL && current_rules != config_rules)
+  if (singleton && current_rules != config_rules)
   {
     printf("Rules change! %s -> %s\n", current_rules.c_str(), config_rules.c_str());
     delete singleton;
@@ -401,19 +401,9 @@ void Game::UnloadDatas(bool game_finished) const
   JukeBox::GetInstance()->StopAll();
 }
 
-bool Game::IsGameLaunched() const
-{
-  return isGameLaunched;
-}
-
 // ####################################################################
 
 uint Game::last_unique_id = 0;
-
-void Game::ResetUniqueIds()
-{
-  last_unique_id = 0;
-}
 
 std::string Game::GetUniqueId()
 {
@@ -446,7 +436,7 @@ Game::Game()
 
 Game::~Game()
 {
-  if(fps)
+  if (fps)
     delete fps;
   if (weapons_list)
     delete weapons_list;
@@ -505,11 +495,6 @@ void Game::RefreshInput()
 // ####################################################################
 // ####################################################################
 
-bool Game::IsCharacterAlreadyChosen() const
-{
-  return character_already_chosen;
-}
-
 void Game::SetCharacterChosen(bool chosen)
 {
   if (character_already_chosen == chosen)
@@ -537,7 +522,7 @@ void Game::RefreshObject() const
   CharacterCursor::GetInstance()->Refresh();
 }
 
-void Game::Draw ()
+void Game::Draw()
 {
   // Draw the sky
   StatStart("GameDraw:sky");
@@ -609,7 +594,7 @@ void Game::Draw ()
   fps->Draw();
 
   // Draw MsgBox for chat network
-  if(Network::GetInstance()->IsConnected()){
+  if (Network::GetInstance()->IsConnected()) {
     StatStart("GameDraw:chatsession");
     chatsession.Show();
     StatStop("GameDraw:chatsession");
@@ -707,16 +692,15 @@ bool Game::Run()
 
 bool Game::HasBeenNetworkDisconnected() const
 {
-  const Network* net          = Network::GetInstance();
-  return !net->IsLocal() && (net->GetNbPlayersConnected() == 0);
+  const Network* net = Network::GetInstance();
+  return !net->IsLocal() && !net->GetNbPlayersConnected();
 }
 
 void Game::MessageEndOfGame() const
 {
   bool disconnected = HasBeenNetworkDisconnected();
 
-  if (disconnected)
-  {
+  if (disconnected) {
     Question question(Question::WARNING);
     question.Set(_("The game was interrupted because you got disconnected."), true, 0);
     question.Ask();
@@ -751,7 +735,6 @@ void Game::MainLoop()
         character->GetBody()->Build();
         character->GetBody()->RefreshSprites();
       }
-
 
       if (Network::GetInstance()->IsTurnMaster()) {
         // The action which verifys the random seed must be the first action sheduled!
@@ -809,7 +792,7 @@ void Game::MainLoop()
       if (ActiveTeam().IsAbandoned()) {
         const std::string & team_id = ActiveTeam().GetId();
         GetTeamsList().DelTeam(team_id);
-        if (Network::GetInstance()->network_menu != NULL)
+        if (Network::GetInstance()->network_menu)
           Network::GetInstance()->network_menu->DelTeamCallback(team_id);
       }
     }
@@ -865,7 +848,7 @@ bool Game::NewBox()
   ObjBox * box;
   int type;
   MSG_DEBUG("random.get", "Game::NewBox(...) box type?");
-  if(RandomSync().GetBool()) {
+  if (RandomSync().GetBool()) {
     box = new Medkit();
     type = 1;
   } else {
@@ -892,7 +875,7 @@ bool Game::NewBox()
 void Game::RequestBonusBoxDrop()
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
-  if (current_box != NULL) {
+  if (current_box) {
     if (Network::GetInstance()->IsTurnMaster()) {
       Action a(Action::ACTION_DROP_BONUS_BOX);
       Network::GetInstance()->SendActionToAll(a);
@@ -916,8 +899,7 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
 
   Interface::GetInstance()->weapons_menu.Hide();
 
-  switch (state)
-  {
+  switch (state) {
   // Beginning of a new turn:
   case PLAYING:
     __SetState_PLAYING();
@@ -938,49 +920,42 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
 
 PhysicalObj* Game::GetMovingObject() const
 {
-  if (!ActiveCharacter().IsImmobile())
-  {
+  if (!ActiveCharacter().IsImmobile()) {
     MSG_DEBUG("game.endofturn", "Active character (%s) is not ready", ActiveCharacter().GetName().c_str());
     return &ActiveCharacter();
   }
 
-  FOR_ALL_CHARACTERS(team,character)
-  {
-    if (!character->IsImmobile() && !character->IsGhost())
-    {
+  FOR_ALL_CHARACTERS(team,character) {
+    if (!character->IsImmobile() && !character->IsGhost()) {
       MSG_DEBUG("game.endofturn", "Character (%s) is not ready", character->GetName().c_str());
       return &(*character);
     }
   }
 
-  FOR_EACH_OBJECT(object)
-  {
-    if (!(*object)->IsImmobile())
-    {
+  FOR_EACH_OBJECT(object) {
+    if (!(*object)->IsImmobile()) {
       MSG_DEBUG("game.endofturn", "Object (%s) is moving", (*object)->GetName().c_str());
       return (*object);
     }
   }
 
   PhysicalObj *obj = ParticleEngine::IsSomethingMoving();
-  if (obj != NULL)
-    {
-      MSG_DEBUG("game.endofturn", "ParticleEngine (%s) is moving", obj->GetName().c_str());
-      return obj;
-    }
+  if (obj) {
+    MSG_DEBUG("game.endofturn", "ParticleEngine (%s) is moving", obj->GetName().c_str());
+    return obj;
+  }
   return NULL;
 }
 
 bool Game::IsAnythingMoving() const
 {
   // Is the weapon still active or an object still moving ??
-  if (ActiveTeam().GetWeapon().IsOnCooldownFromShot())
-  {
+  if (ActiveTeam().GetWeapon().IsOnCooldownFromShot()) {
     MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
     return true;
   }
 
-  if (GetMovingObject() != NULL)
+  if (GetMovingObject())
     return true;
   return false;
 }
@@ -1086,8 +1061,8 @@ int Game::NbrRemainingTeams() const
 {
   uint nbr = 0;
 
-  FOR_EACH_TEAM(team){
-    if( (**team).NbAliveCharacter() > 0 )
+  FOR_EACH_TEAM(team) {
+    if ((**team).NbAliveCharacter() > 0)
       nbr++;
   }
 

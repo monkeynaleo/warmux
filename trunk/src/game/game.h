@@ -131,12 +131,12 @@ private:
   virtual void __SetState_HAS_PLAYED() = 0;
   virtual void __SetState_END_TURN() = 0;
 
-  bool IsGameLaunched() const;
+  bool IsGameLaunched() const { return isGameLaunched; }
 
 public:
   static Game * GetInstance();
   static std::string GetUniqueId();
-  static void ResetUniqueIds();
+  static void ResetUniqueIds() { last_unique_id = 0; }
   static bool IsRunning();
   uint GetCurrentTurn();
   WeaponsList * GetWeaponsList() const { return weapons_list; }
@@ -152,7 +152,7 @@ public:
 
   void Start();
 
-  bool IsCharacterAlreadyChosen() const;
+  bool IsCharacterAlreadyChosen() const { return character_already_chosen; }
   void SetCharacterChosen(bool chosen);
 
   // Get remaining time to play
