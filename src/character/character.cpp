@@ -462,7 +462,9 @@ bool Character::MustBeDrawn() const
   // WARNING, this optimization is disabled if it is the active character
   // because there could be some tricks in the drawing of the weapon (cf bug #10242)
   if (!IsActiveCharacter()) {
-    Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
+    // Beware that GetTestRect on character returns a smaller rectangle,
+    // so you can't use Camera::IsVisible
+    Rectanglei rect(GetPosition(), GetSize());
     if (!rect.Intersect(*Camera::GetInstance()))
       return false;
   }
