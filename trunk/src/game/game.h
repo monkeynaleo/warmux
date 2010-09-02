@@ -35,6 +35,7 @@ class ObjBox;
 class FramePerSecond;
 class PhysicalObj;
 class WeaponsList;
+class Menu;
 
 class Game : public Singleton<Game>
 {
@@ -52,8 +53,8 @@ protected:
   void MainLoop();
   void ApplyDiseaseDamage() const;
   int  NbrRemainingTeams() const;
-  bool MenuQuitPause() const;
-  void MenuHelpPause() const;
+  bool MenuQuitPause();
+  void MenuHelpPause();
 
   SoundSample         countdown_sample;
   game_loop_state_t   state;
@@ -133,6 +134,9 @@ private:
 
   bool IsGameLaunched() const { return isGameLaunched; }
 
+  // Menus might be launched while a game is running
+  static Menu *menu;
+
 public:
   static Game * GetInstance();
   static std::string GetUniqueId();
@@ -178,5 +182,7 @@ public:
   void SetCurrentBox(ObjBox * current_box) { current_ObjBox = current_box; };
   ObjBox * GetCurrentBox() { return current_ObjBox; };
   void RequestBonusBoxDrop();
+
+  static Menu* GetCurrentMenu() { return menu; }
 };
 #endif // GAME_H

@@ -72,6 +72,8 @@ const uint MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS = 500;
 
 std::string Game::current_rules = "none";
 
+Menu *Game::menu = NULL;
+
 Game * Game::GetInstance()
 {
   if (!singleton) {
@@ -86,6 +88,7 @@ Game * Game::GetInstance()
       fprintf(stderr, "%s game rules not implemented\n", GameMode::GetRef().rules.c_str());
       exit(1);
     }
+    singleton->menu = NULL;
   }
   return singleton;
 }
@@ -1069,7 +1072,7 @@ int Game::NbrRemainingTeams() const
   return nbr;
 }
 
-bool Game::MenuQuitPause() const
+bool Game::MenuQuitPause()
 {
   JukeBox::GetInstance()->Pause();
 
@@ -1079,8 +1082,10 @@ bool Game::MenuQuitPause() const
   Network::GetInstance()->SendActionToAll(a);
 
   bool exit = false;
-  PauseMenu menu(exit);
-  menu.Run();
+  menu = new PauseMenu(exit);
+  menu->Run();
+  delete menu;
+  menu = NULL;
 
   Time::GetInstance()->SetWaitingForUser(false);
 
@@ -1089,7 +1094,7 @@ bool Game::MenuQuitPause() const
   return exit;
 }
 
-void Game::MenuHelpPause() const
+void Game::MenuHelpPause()
 {
   JukeBox::GetInstance()->Pause();
 
@@ -1098,8 +1103,10 @@ void Game::MenuHelpPause() const
   Action a(Action::ACTION_ANNOUNCE_PAUSE);
   Network::GetInstance()->SendActionToAll(a);
 
-  HelpMenu menu;
-  menu.Run();
+  menu = new HelpMenu();
+  menu->Run();
+  delete menu;
+  menu = NULL;
 
   Time::GetInstance()->SetWaitingForUser(false);
 
