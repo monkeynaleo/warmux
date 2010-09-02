@@ -24,6 +24,7 @@
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "graphic/video.h"
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "network/randomsync.h"
@@ -69,8 +70,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   m_allow_negative_y = true;
 
   // Sprite loading
-  Double ONE_HALF = 0.5;
-  scale = ONE_HALF + scale / TWO;
+  scale = ONE_HALF * (1 + scale);
 
   sprite = GetResourceManager().LoadSprite(ActiveMap()->ResProfile(), "wind_particle");
   sprite->Scale(scale, scale);
@@ -166,11 +166,8 @@ void WindParticle::Refresh()
 void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
-  if (flipped && GetSpeed().x < 0) {
-    flipped->Draw(GetPosition());
-  } else {
-    sprite->Draw(GetPosition());
-  }
+  Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
+  spr->Draw(GetPosition());
 }
 
 //---------------------------------------------------
