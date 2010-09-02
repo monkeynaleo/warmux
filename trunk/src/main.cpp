@@ -190,16 +190,6 @@ void AppWormux::DisplayLoadingPicture()
   video->window.Flip();
 }
 
-void AppWormux::SetCurrentMenu(Menu* _menu)
-{
-  menu = _menu;
-}
-
-Menu* AppWormux::GetCurrentMenu() const
-{
-  return menu;
-}
-
 void AppWormux::RefreshDisplay()
 {
   if (Game::IsRunning()) {
