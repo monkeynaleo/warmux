@@ -19,18 +19,19 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "particles/particle.h"
 #include <SDL.h>
+#include <WORMUX_point.h>
 #include <map>
 #include "game/time.h"
 #include "graphic/sprite.h"
+#include "map/map.h"
+#include "map/camera.h"
+#include "network/randomsync.h"
 #include "object/objects_list.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_point.h>
 #include "weapon/explosion.h"
-#include "map/map.h"
-#include "network/randomsync.h"
 
+#include "particles/particle.h"
 #include "particles/body_member.h"
 #include "particles/teleport_member.h"
 #include "particles/bullet.h"
