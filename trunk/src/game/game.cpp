@@ -994,7 +994,7 @@ void Game::SignalCharacterDeath (const Character *character)
 
     // Is this a suicide ?
     if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUICIDE) {
-      txt = Format(_("%s from %s team commited suicide!"),
+      txt = Format(_("%s from %s team committed suicide!"),
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
 

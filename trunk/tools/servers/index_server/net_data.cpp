@@ -68,7 +68,7 @@ NetData::~NetData()
       }
     }
   else if (connected) {
-    DPRINT(INFO, "Inconsistant state: connected but no FD");
+    DPRINT(INFO, "Inconsistent state: connected but no FD");
   }
 
   DPRINT(CONN, "Disconnected.");
