@@ -501,14 +501,13 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     }
 
-    if ( weapon_sort != Weapon::INVALID ) {
+    if (weapon_sort != Weapon::INVALID && ActiveTeam().GetWeapon().CanChangeWeapon()) {
       Weapon::Weapon_type weapon;
       WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-      if (weapons_list->GetWeaponBySort(weapon_sort, weapon))
-        {
-          ASSERT (weapon >= Weapon::FIRST && weapon <= Weapon::LAST);
-          ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
-        }
+      if (weapons_list->GetWeaponBySort(weapon_sort, weapon)) {
+        ASSERT (weapon >= Weapon::FIRST && weapon <= Weapon::LAST);
+        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
+      }
     }
   }
 }

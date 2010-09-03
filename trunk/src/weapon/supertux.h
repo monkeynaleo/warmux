@@ -42,19 +42,21 @@ public:
   virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
 
   virtual void SignalEndOfProjectile();
+  bool IsReady() const { return !IsOnCooldownFromShot() && WeaponLauncher::IsReady(); }
+  bool IsOnCooldownFromShot() const { return (current_tux || tux_death_time); }
 
   void StartShooting();
   void StopShooting();
 
-  virtual bool IsPreventingLRMovement();
-  virtual bool IsPreventingJumps();
-  virtual bool IsPreventingWeaponAngleChanges();
+  virtual bool IsPreventingLRMovement() { return IsOnCooldownFromShot(); }
+  virtual bool IsPreventingJumps() { return IsOnCooldownFromShot(); }
+  virtual bool IsPreventingWeaponAngleChanges() { return IsOnCooldownFromShot(); }
 
 protected:
   WeaponProjectile * GetProjectileInstance();
   virtual bool p_Shoot();
   virtual void Refresh();
-  virtual bool ShouldBeDrawn();
+  virtual bool ShouldBeDrawn() { return !(current_tux || tux_death_time); }
 private:
   SuperTuxWeaponConfig& cfg();
 };

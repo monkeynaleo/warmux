@@ -260,11 +260,6 @@ void TuxLauncher::Refresh()
   }
 }
 
-bool TuxLauncher::ShouldBeDrawn()
-{
-  return !(current_tux || tux_death_time);
-}
-
 void TuxLauncher::SignalEndOfProjectile()
 {
   if (!current_tux)
@@ -282,7 +277,6 @@ void TuxLauncher::StartShooting()
   Weapon::StartShooting();
 }
 
-
 void TuxLauncher::StopShooting()
 {
   if (current_tux) {
@@ -292,27 +286,11 @@ void TuxLauncher::StopShooting()
     Weapon::StopShooting();
 }
 
-bool TuxLauncher::IsPreventingLRMovement()
-{
-  return (current_tux || tux_death_time);
-}
-
-bool TuxLauncher::IsPreventingJumps()
-{
-  return (current_tux || tux_death_time);
-}
-
-bool TuxLauncher::IsPreventingWeaponAngleChanges()
-{
-  return (current_tux || tux_death_time);
-}
-
 std::string TuxLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u tux launcher! Never seen a flying penguin?",
-            "%s team has won %u tux launchers! Never seen a flying penguin?",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u tux launcher! Never seen a flying penguin?",
+                         "%s team has won %u tux launchers! Never seen a flying penguin?",
+                         items_count), TeamName, items_count);
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()
