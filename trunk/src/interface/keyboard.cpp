@@ -88,9 +88,9 @@ bool Keyboard::SaveKeyEvent(Key_t at, int raw_key_code,
 }
 
 
-Keyboard::Keyboard() :
-  ManMachineInterface(),
-  modifier_bits(0)
+Keyboard::Keyboard()
+  : ManMachineInterface()
+  , modifier_bits(0)
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
@@ -103,7 +103,11 @@ Keyboard::Keyboard() :
 
 void Keyboard::SetDefaultConfig()
 {
-  SetKeyAction(SDLK_ESCAPE,                  ManMachineInterface::KEY_QUIT);
+  SetKeyAction(SDLK_ESCAPE, ManMachineInterface::KEY_QUIT);
+#ifdef MAEMO
+  SaveKeyEvent(ManMachineInterface::KEY_UP, SDLK_LEFT, false, true, false);
+  SaveKeyEvent(ManMachineInterface::KEY_DOWN, SDLK_RIGHT, false, true, false);
+#endif
 }
 
 void Keyboard::SetConfig(const xmlNode *node)
