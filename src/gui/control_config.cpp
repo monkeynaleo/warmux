@@ -184,11 +184,13 @@ public:
 
   void SaveAction(Keyboard *kbd)
   {
-    if (!read_only && key_value!=SDLK_UNKNOWN)
+    if (!read_only && key_value!=SDLK_UNKNOWN) {
+      kbd->ClearKeyAction(key_action);
       kbd->SaveKeyEvent(key_action, key_value,
                         ctrl_box->GetValue(),
                         alt_box->GetValue(),
                         shift_box->GetValue());
+    }
   }
 };
 
@@ -266,7 +268,6 @@ void ControlConfig::SaveControlConfig() const
     return;
 
   Keyboard *kbd = Keyboard::GetInstance();
-  kbd->ClearKeyBindings();
   for (uint i=0; i<items.size(); i++) {
     items[i]->SaveAction(kbd);
   }
