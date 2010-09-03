@@ -32,4 +32,9 @@
 #  error "Please add a config_${your_system}.h and include it properly"
 #endif
 
+#ifdef MAEMO
+#  define HAVE_TOUCHSCREEN
+#  define HAVE_HANDHELD
+#endif
+
 #endif // WORMUX_CONFIG_H
