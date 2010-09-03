@@ -88,7 +88,7 @@ Config::Config()
   , display_energy_character(true)
   , display_name_character(true)
 
-#ifdef ANDROID
+#ifdef HAVE_HANDHELD
   , display_wind_particles(false) // Too CPU intensive
   , display_multi_layer_sky(false) // Memory hungry + CPU intensive
 #else
@@ -100,7 +100,7 @@ Config::Config()
   , video_width(0)
   , video_height(0)
 
-#ifdef ANDROID
+#ifdef HAVE_TOUCHSCREEN
   , video_fullscreen(true) // No other mode supported
   , max_fps(25)
 #else
@@ -358,6 +358,8 @@ void Config::LoadDefaultValue()
   // Load default XML conf
 #ifdef ANDROID
   m_default_config = GetDataDir() + "wormux_default_android_config.xml";
+#elif MAEMO
+  m_default_config = GetDataDir() + "wormux_default_maemo_config.xml";
 #else
   m_default_config = GetDataDir() + "wormux_default_config.xml";
 #endif
@@ -463,7 +465,7 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
-#ifndef ANDROID // Those should never be set
+#ifndef HAVE_TOUCHSCREEN // Those should never be set
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
     XmlReader::ReadUint(elem, "scroll_border_size", scroll_border_size);
 #endif

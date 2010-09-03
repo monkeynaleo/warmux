@@ -45,11 +45,13 @@ private:
   CheckBox *opt_display_wind_particles;
   CheckBox *opt_display_energy;
   CheckBox *opt_display_name;
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   CheckBox *opt_display_multisky;
+#endif
 # ifndef __APPLE__
   CheckBox *full_screen;
 # endif
+#ifndef ANDROID
   ComboBox *cbox_video_mode;
 #endif
   SpinButtonWithPicture *opt_max_fps;
@@ -66,7 +68,7 @@ private:
 
   /* Misc options controllers */
   CheckBox *opt_updates;
-#ifndef ANDROID
+#ifndef HAVE_TOUCHSCREEN
   CheckBox *opt_lefthanded_mouse;
   CheckBox *opt_scroll_on_border;
   SpinButtonWithPicture * opt_scroll_border_size;

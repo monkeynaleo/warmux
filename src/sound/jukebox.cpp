@@ -40,7 +40,7 @@ JukeBox::JukeBox()
 {
   m_config.music = true;
   m_config.effects = true;
-#ifdef ANDROID
+#ifdef HAVE_HANDHELD
   // reduce memory usage
   m_config.frequency = 22050; //MIX_DEFAULT_FREQUENCY;
   m_config.channels = 1; // mono
@@ -129,7 +129,7 @@ void JukeBox::End()
 void JukeBox::SetFrequency(int frequency)
 {
   // We ignore frequency changes requests
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   if ((frequency != 11025)
       && (frequency != 22050)
       && (frequency != 44100)) frequency = 44100;

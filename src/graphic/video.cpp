@@ -168,7 +168,11 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
   flags |= SDL_SWSURFACE | SDL_DOUBLEBUF;
+#ifdef MAEMO
+  window.SetSurface(SDL_SetVideoMode(width, height, 16, flags));
+#else
   window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
+#endif
 #endif
 
   if (window.IsNull())
