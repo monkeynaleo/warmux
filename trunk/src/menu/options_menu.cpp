@@ -92,7 +92,7 @@ OptionMenu::OptionMenu() :
     new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
   graphic_options->AddWidget(opt_display_wind_particles);
 
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   opt_display_multisky =
     new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size);
   graphic_options->AddWidget(opt_display_multisky);
@@ -106,7 +106,7 @@ OptionMenu::OptionMenu() :
     new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
-#if !defined(__APPLE__) && !defined(ANDROID)
+#if !defined(__APPLE__) && !defined(HAVE_HANDHELD)
   full_screen =
     new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
@@ -117,7 +117,7 @@ OptionMenu::OptionMenu() :
                               option_size, 30, 5, 20, 60);
   graphic_options->AddWidget(opt_max_fps);
 
-#if !defined(ANDROID)
+#ifndef HAVE_TOUCHSCREEN
   // Get available video resolution
   const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::const_iterator mode;
@@ -232,7 +232,7 @@ OptionMenu::OptionMenu() :
                         "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 
-#ifndef ANDROID
+#ifndef HAVE_TOUCHSCREEN
   opt_lefthanded_mouse =
     new PictureTextCBox(_("Left-handed mouse?"),
                         "menu/ico_lefthanded_mouse", option_size);
@@ -248,7 +248,9 @@ OptionMenu::OptionMenu() :
                               option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 #endif
+#ifndef MAEMO
   tabs->AddNewTab("unused", _("Misc"), misc_options);
+#endif
 
   /* Sound options */
   Box * sound_options = new GridBox(3, 3, 0, false);
@@ -303,12 +305,12 @@ OptionMenu::OptionMenu() :
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());
   opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   opt_display_multisky->SetValue(config->GetDisplayMultiLayerSky());
 #endif
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
-#if !defined(__APPLE__) && !defined(ANDROID)
+#if !defined(__APPLE__) && !defined(HAVE_TOUCHSCREEN)
   full_screen->SetValue(app->video->IsFullScreen());
 #endif
   music_cbox->SetValue(config->GetSoundMusic());
@@ -358,7 +360,7 @@ OptionMenu::OptionMenu() :
 #endif
 
   opt_updates->SetValue(config->GetCheckUpdates());
-#ifndef ANDROID
+#ifndef HAVE_TOUCHSCREEN
   opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
@@ -418,7 +420,7 @@ void OptionMenu::SaveOptions()
   if (Game::IsRunning())
     Wind::GetRef().Reset();
 
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   config->SetDisplayMultiLayerSky(opt_display_multisky->GetValue());
 #endif
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
@@ -426,7 +428,7 @@ void OptionMenu::SaveOptions()
 
   // Misc options
   config->SetCheckUpdates(opt_updates->GetValue());
-#ifndef ANDROID
+#ifndef HAVE_TOUCHSCREEN
   config->SetLeftHandedMouse(opt_lefthanded_mouse->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
   config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
@@ -440,7 +442,7 @@ void OptionMenu::SaveOptions()
   AppWormux * app = AppWormux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
 
-#ifndef ANDROID
+#ifndef HAVE_TOUCHSCREEN
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
 

@@ -340,10 +340,12 @@ void Mouse::Draw() const
 
 void Mouse::Show()
 {
+#ifndef HAVE_TOUCHSCREEN
   if (((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
   {
     CenterPointer();
   }
+#endif
   visible = MOUSE_VISIBLE;
 
   if (Config::GetConstInstance()->GetDefaultMouseCursor()) {

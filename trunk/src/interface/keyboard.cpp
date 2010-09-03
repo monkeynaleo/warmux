@@ -37,6 +37,11 @@
 #  define SDLK_LAST  SDL_NUM_SCANCODES
 #endif
 
+#ifdef MAEMO
+#  undef KMOD_ALT
+#  define KMOD_ALT KMOD_MODE
+#endif
+
 int  Keyboard::GetRawKeyCode(int key_code) const
 {
   return key_code % MODIFIER_OFFSET;
