@@ -653,6 +653,8 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
     }
     ptr += pitch;
   }
+
+  m_need_check_empty = true;
 }
 
 void TileItem_AlphaSoftware::Darken(int start_x, int end_x, uint8_t* buf)
