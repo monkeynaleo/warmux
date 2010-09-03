@@ -116,5 +116,5 @@
 /* Version number of package */
 #define VERSION "svn"
 
-/* Define curl_free() as free() if our version of curl lacks curl_free. */
-/* #undef curl_free */
+#define HAVE_TOUCHSCREEN
+#define HAVE_HANDHELD
