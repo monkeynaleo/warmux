@@ -52,8 +52,8 @@ team attempts to produce maximum damage to their opponents.
 .br
 * Key 'c': Recenter to active character
 .br
-* Key space: Shoot. Exceptions: the parachute is automaticly deployed, 
-  and teleportation is made with a mouse click. 
+* Key space: Shoot. Exceptions: the parachute is automatically deployed,
+  and teleportation is made with a mouse click.
   Warning: The automatic bazooka and air strike first need a target to be selected (select it with a left click)
 .br
 * Mouse right click: Show/hide weapons menu
@@ -95,9 +95,9 @@ Wormux was written by:
 - Laurent DEFERT SIMONNEAU <lodesi2@yahoo.fr>
 .br
 - Lawrence AZZOUG <lawrenceazzoug@wanadoo.fr>
-.br 
+.br
 - Matthieu FERTRE <matthieu.fertre@free.fr>
-.br 
+.br
 - Renaud LOTTIAUX <renaud.lottiaux@free.fr>
 .br
 - Victor STINNER <victor.stinner@haypocalc.com>
