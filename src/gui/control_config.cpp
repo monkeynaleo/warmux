@@ -100,21 +100,23 @@ public:
 
   virtual bool SendKey(const SDL_keysym & key)
   {
-    if (read_only || key.sym == SDLK_UNKNOWN)
+    SDLKey key_code = key.sym;
+
+    if (read_only || key_code == SDLK_UNKNOWN)
       return false;
 
     // Ignore modifiers-only key presses
-    if (key.sym >= SDLK_NUMLOCK && key.sym <= SDLK_COMPOSE)
+    if (key_code >= SDLK_NUMLOCK && key_code <= SDLK_COMPOSE)
       return true;
 
     Keyboard *kbd = Keyboard::GetInstance();
 
     // Reset some configs
-    if (SDLK_BACKSPACE == key.sym ||
+    if (SDLK_BACKSPACE == key_code ||
 #ifdef ANDROID
-        SDLK_ESCAPE == key.sym ||
+        SDLK_ESCAPE == key_code ||
 #endif
-        SDLK_DELETE == key.sym) {
+        SDLK_DELETE == key_code) {
       kbd->ClearKeyAction(key_action);
       label_key->SetText(_("None"));
       ctrl_box->SetValue(false);
@@ -131,13 +133,21 @@ public:
     bool has_shift = mod_bits & KMOD_SHIFT;
     bool has_alt = mod_bits & KMOD_ALT;
     bool has_ctrl = mod_bits & KMOD_CTRL;
+#ifdef MAEMO
+    bool has_mode = mod_bits & KMOD_MODE;
+
+    if (has_mode) {
+      if (key_code == SDLK_LEFT) key_code = SDLK_UP;
+      if (key_code == SDLK_RIGHT) key_code = SDLK_DOWN;
+    }
+#endif
 
     for (std::vector<ControlItem*>::const_iterator it = selves->begin();
          it != selves->end();
          ++it) {
       const ControlItem *c = (*it);
 
-      if (c!=this && c->key_value==key.sym
+      if (c!=this && c->key_value==key_code
           && has_ctrl  == c->ctrl_box->GetValue()
           && has_alt   == c->alt_box->GetValue()
           && has_shift == c->shift_box->GetValue()) {
@@ -153,7 +163,7 @@ public:
       }
     }
 
-    key_value = key.sym;
+    key_value = key_code;
     label_key->SetText(kbd->GetKeyNameFromKey(key_value));
 
     ctrl_box->SetValue(has_ctrl);

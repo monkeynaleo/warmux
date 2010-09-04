@@ -37,10 +37,6 @@
 #  define SDLK_LAST  SDL_NUM_SCANCODES
 #endif
 
-#ifdef MAEMO
-#  undef KMOD_ALT
-#  define KMOD_ALT KMOD_MODE
-#endif
 
 int  Keyboard::GetRawKeyCode(int key_code) const
 {
@@ -104,10 +100,6 @@ Keyboard::Keyboard()
 void Keyboard::SetDefaultConfig()
 {
   SetKeyAction(SDLK_ESCAPE, ManMachineInterface::KEY_QUIT);
-#ifdef MAEMO
-  SaveKeyEvent(ManMachineInterface::KEY_UP, SDLK_LEFT, false, true, false);
-  SaveKeyEvent(ManMachineInterface::KEY_DOWN, SDLK_RIGHT, false, true, false);
-#endif
 }
 
 void Keyboard::SetConfig(const xmlNode *node)
@@ -293,6 +285,12 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
   SDLKey basic_key_code = event.key.keysym.sym;
   if (basic_key_code >= MODIFIER_OFFSET)
     return;
+#ifdef MAEMO
+  if (SDL_GetModState() & KMOD_MODE) {
+    if (basic_key_code == SDLK_LEFT) basic_key_code = SDLK_UP;
+    if (basic_key_code == SDLK_RIGHT) basic_key_code = SDLK_DOWN;
+  }
+#endif
   int key_code;
   if (modifier_bits != previous_modifier_bits) {
     std::set<SDLKey>::iterator it;

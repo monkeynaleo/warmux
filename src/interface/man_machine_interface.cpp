@@ -40,10 +40,6 @@
 #include "sound/jukebox.h"
 #include "weapon/weapons_list.h"
 
-#ifdef MAEMO
-#  undef SDLK_RALT
-#  define SDLK_RALT SDLK_MODE
-#endif
 
 void ManMachineInterface::Reset()
 {
@@ -754,11 +750,7 @@ int ManMachineInterface::GetKeyFromKeyName(const std::string &name) const
   if(name == "lshift") return SDLK_LSHIFT;
   if(name == "rctrl") return SDLK_RCTRL;
   if(name == "lctrl") return SDLK_LCTRL;
-#ifdef MAEMO
-  if(name == "ralt") return SDLK_MODE;
-#else
   if(name == "ralt") return SDLK_RALT;
-#endif
   if(name == "lalt") return SDLK_LALT;
   if(name == "rmeta") return SDLK_RMETA;
   if(name == "lmeta") return SDLK_LMETA;
@@ -1015,11 +1007,7 @@ std::string ManMachineInterface::GetKeyNameFromKey(int key) const
   if(key == SDLK_LSHIFT) return "lshift";
   if(key == SDLK_RCTRL) return "rctrl";
   if(key == SDLK_LCTRL) return "lctrl";
-#ifdef MAEMO
-  if(key == SDLK_MODE) return "ralt";
-#else
   if(key == SDLK_RALT) return "ralt";
-#endif
   if(key == SDLK_LALT) return "lalt";
   if(key == SDLK_RMETA) return "rmeta";
   if(key == SDLK_LMETA) return "lmeta";

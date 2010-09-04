@@ -12,10 +12,8 @@
   <bind key="right" action="move_right" />
   <bind key="right" action="move_right_slowly" shift="true" />
   <bind key="up" action="up" />
-  <bind key="left" action="up" alt="true" />
   <bind key="up" action="up_slowly" shift="true" />
   <bind key="down" action="down" />
-  <bind key="right" action="down" alt="true" />
   <bind key="down" action="down_slowly" shift="true" />
   <bind key="left" action="move_camera_left" control="true" />
   <bind key="right" action="move_camera_right" control="true" />
