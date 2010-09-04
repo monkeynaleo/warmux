@@ -127,7 +127,6 @@ void Camera::AutoCrop()
 
   Point2i target(0,0);
   bool stop = false;
-  Point2f speed;
 
   if (followed_object && !followed_object->IsGhost()) {
 
@@ -148,8 +147,8 @@ void Camera::AutoCrop()
     target = obj_pos;
 
     if (followed_object->IsMoving()) {
-      speed = Point2f(followed_object->GetSpeed().x.tofloat(),
-                      followed_object->GetSpeed().y.tofloat());
+      Point2f speed(followed_object->GetSpeed().x.tofloat(),
+                    followed_object->GetSpeed().y.tofloat());
       Point2f anticipation = ADVANCE_ANTICIPATION * speed;
 
       //limit anticipation to screen size/3
@@ -189,11 +188,11 @@ void Camera::AutoCrop()
     // Realtime follow is enabled if object is too fast to be correctly followed
     // stop can only be true if followed_obj!=NULL
     // speed is set to 0 if not moving
-    if (abs(speed.x) > REALTIME_FOLLOW_LIMIT) {
+    if (abs((int)followed_object->GetSpeed().x) > REALTIME_FOLLOW_LIMIT) {
       m_speed.x = (target.x - position.x) * REALTIME_FOLLOW_FACTOR;
     }
 
-    if (abs(speed.y) > REALTIME_FOLLOW_LIMIT) {
+    if (abs((int)followed_object->GetSpeed().y) > REALTIME_FOLLOW_LIMIT) {
       m_speed.y = (target.y - position.y) * REALTIME_FOLLOW_FACTOR;
     }
 
