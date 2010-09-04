@@ -670,13 +670,6 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
         return true;
       }
 
-      // Check if we clicked the character icon: center on it
-      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-      if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
-        Camera::GetInstance()->CenterOnActiveCharacter();
-        return true;
-      }
-
       // No actual button clicked, but still swallow that click
       return true;
     } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
@@ -729,6 +722,14 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
           ActionShoot(false);
           return true;
         }
+
+        // Check if we clicked the character icon: center on it
+        Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
+        if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+          Camera::GetInstance()->CenterOnActiveCharacter();
+          return true;
+        }
+
       }
     }
     // No button clicked, continue
