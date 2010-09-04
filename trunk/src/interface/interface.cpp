@@ -671,9 +671,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       }
 
       // Check if we clicked the character icon: center on it
-      Rectanglei character_button(0, 0,
-                                  (game_menu.GetWidth()- 36)/ 2 - clock_width,
-                                  game_menu.GetHeight());
+      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
       if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
         Camera::GetInstance()->CenterOnActiveCharacter();
         return true;
