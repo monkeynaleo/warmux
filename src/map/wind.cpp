@@ -212,7 +212,7 @@ void Wind::Reset()
   Interface::GetInstance()->UpdateWindIndicator(m_val);
 
   RemoveAllParticles();
-  uint nb = Config::GetConstInstance()->GetDisplayWindParticles();
+  uint nb = Config::GetConstInstance()->GetWindParticlesPercentage();
 
   if (!nb) {
     return;
