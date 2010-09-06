@@ -809,11 +809,11 @@ SDL_Rect Surface::GetSDLRect(const Point2i &pt)
   return sdlRect;
 }
 
-Surface Surface::DisplayFormatColorKey(const uint32_t* data, const SDL_PixelFormat *sfmt,
+Surface Surface::DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *sfmt,
                                        int w, int h, int stride, uint8_t alpha_threshold)
 {
-  const SDL_PixelFormat *fmt = SDL_GetVideoSurface()->format;
-  SDL_Surface    *surf = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, w, h, 16, 
+  SDL_PixelFormat *fmt = SDL_GetVideoSurface()->format;
+  SDL_Surface    *surf = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, w, h, 16,
                                               fmt->Rmask, fmt->Gmask, fmt->Bmask, 0);
   const uint32_t *src  = data;
   int             spitch = stride>>2;
