@@ -229,7 +229,7 @@ void LocalTeamsSelectionBox::PrevTeam(int i)
   index = previous_index-1;
 
   do {
-    stop = false;
+    stop = true;
 
     // select the last team if we are outside list
     if (index < 0)
