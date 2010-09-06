@@ -83,7 +83,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 
   // How many teams ?
   VBox *tmp = new VBox(120, false, true);
-  uint max_teams;
+  int max_teams;
   if (network) {
     max_teams = GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer();
     local_teams_nb =
@@ -99,14 +99,20 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   //tmp->AddWidget(new NullWidget(Point2i(120, 120)));
   AddWidget(tmp);
 
-  bool use_list = _size.y < 2*120 || _size.x < 2*300 || max_teams > MAX_NB_TEAMS;
   uint box_w = _size.x - local_teams_nb->GetSizeX() - 10;
-  Point2i box_size = use_list ? Point2i(box_w - 40, 120)
-                              : Point2i((box_w*2) / max_teams - 10,
-                                        _size.y/2-10);
-  //printf("Size: %ix%i\n", _size.x, _size.y);
+  Point2i grid_size = Point2i(box_w, _size.y);
+  Point2i grid_dim = grid_size / Point2i(300 + 10, 130 + 10);
+  Point2i box_size;
+  bool use_list;
+  if (grid_dim.x*grid_dim.y < max_teams) {
+    use_list = true;
+    box_size.SetValues(box_w - 40, 120);
+  } else {
+    use_list = false;
+    box_size.SetValues((grid_size / grid_dim) - 10);
+  }
 
-  for (uint i=0; i < max_teams; i++) {
+  for (int i=0; i < max_teams; i++) {
     std::string player_name = _("Player") ;
     char num_player[4];
     sprintf(num_player, " %d", i+1);
@@ -127,10 +133,10 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     AddWidget(list_box);
   } else {
     list_box = NULL;
-    Box * teams_grid_box = new GridBox(2, 2, 10, false);
+    Box * teams_grid_box = new GridBox(grid_dim.y, grid_dim.x, 10, false);
     teams_grid_box->SetNoBorder();
 
-    for (uint i=0; i<max_teams; i++)
+    for (int i=0; i<max_teams; i++)
       teams_grid_box->AddWidget(teams_selections[i]);
 
     AddWidget(teams_grid_box);
