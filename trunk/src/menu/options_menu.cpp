@@ -395,15 +395,16 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   else if (w == effects_cbox) {
     JukeBox::GetInstance()->ActiveEffects(effects_cbox->GetValue());
   }
-  else if (w == lbox_teams) {
-    SelectTeam();
-  }
   else if (w == add_team) {
     AddTeam();
   }
   else if (w == delete_team) {
     DeleteTeam();
   }
+  else if (w == NULL && lbox_teams->Contains(mousePosition)) {
+    SelectTeam();
+  }
+
 }
 
 void OptionMenu::OnClick(const Point2i &mousePosition, int button)
