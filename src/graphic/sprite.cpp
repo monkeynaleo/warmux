@@ -152,12 +152,12 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   // Calculate offset of the surface depending on hotspot rotation position :
   int surfaceHeight = surface.GetHeight();
   int surfaceWidth = surface.GetWidth();
-  int halfHeight = surfaceHeight / 2;
-  int halfWidth = surfaceWidth / 2;
+  int halfHeight = surfaceHeight >> 1;
+  int halfWidth = surfaceWidth >> 1;
 
   //Do as if hotspot is center of picture:
-  rotation_point.x = halfWidth  /*surfaceWidth  / 2*/ - tmp_surface.GetWidth()  / 2;
-  rotation_point.y = halfHeight /*surfaceHeight / 2*/ - tmp_surface.GetHeight() / 2;
+  rotation_point.x = halfWidth  - (tmp_surface.GetWidth()  >> 1);
+  rotation_point.y = halfHeight - (tmp_surface.GetHeight() >> 1);
 
   if (rot_hotspot == center) {
     return;
@@ -166,13 +166,13 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   if (rot_hotspot != user_defined) {
     switch(rot_hotspot) {
     case top_left:      rhs_pos = Point2i( 0,              0);               break;
-    case top_center:    rhs_pos = Point2i( halfWidth /*surfaceWidth/2*/, 0);               break;
+    case top_center:    rhs_pos = Point2i( halfWidth,      0);               break;
     case top_right:     rhs_pos = Point2i( surfaceWidth,   0);               break;
-    case left_center:   rhs_pos = Point2i( 0,              surfaceHeight/2); break;
-    case center:        rhs_pos = Point2i( halfWidth /*surfaceWidth/2*/, halfHeight /*surfaceHeight/2*/); break;
-    case right_center:  rhs_pos = Point2i( surfaceWidth,   halfHeight /*surfaceHeight/2*/); break;
+    case left_center:   rhs_pos = Point2i( 0,              halfHeight);      break;
+    case center:        rhs_pos = Point2i( halfWidth,      halfHeight);      break;
+    case right_center:  rhs_pos = Point2i( surfaceWidth,   halfHeight);      break;
     case bottom_left:   rhs_pos = Point2i( 0,              surfaceHeight);   break;
-    case bottom_center: rhs_pos = Point2i( halfWidth /*surfaceWidth/2*/, surfaceHeight);   break;
+    case bottom_center: rhs_pos = Point2i( halfWidth,      surfaceHeight);   break;
     case bottom_right:  rhs_pos = Point2i( surfaceWidth,   surfaceHeight);   break;
     default:
       ASSERT(false);
@@ -180,13 +180,13 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   }
 
   Point2i rhs_pos_tmp;
-  rhs_pos_tmp.x = static_cast<int>(rhs_pos.x * scale_x);
-  rhs_pos_tmp.y = static_cast<int>(rhs_pos.y * scale_y);
-  surfaceWidth  = static_cast<int>(surfaceWidth  * scale_x);
-  surfaceHeight = static_cast<int>(surfaceHeight * scale_y);
+  rhs_pos_tmp.x = int(rhs_pos.x * scale_x);
+  rhs_pos_tmp.y = int(rhs_pos.y * scale_y);
+  surfaceWidth  = int(surfaceWidth  * scale_x);
+  surfaceHeight = int(surfaceHeight * scale_y);
   //Calculate the position of the hotspot after a rotation around the center of the surface:
 
-  Point2i center(surfaceWidth / 2, surfaceHeight / 2);
+  Point2i center(surfaceWidth >> 1, surfaceHeight >> 1);
   // Don't let the compiler any choice with which types the resulting program will calculate with.
   Point2i old_hotspot_delta_i = center - rhs_pos_tmp;
   Point2d old_hotspot_delta = old_hotspot_delta_i;
