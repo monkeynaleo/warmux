@@ -119,7 +119,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
 
   // Read author informations
   const xmlNode *author = XmlReader::GetMarker(xml, "author");
-  if (author != NULL) {
+  if (author) {
     std::string
       a_name,
       a_nickname,
@@ -173,16 +173,18 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   // Load padding value
   bool add_pad = false;
   XmlReader::ReadBool(xml, "add_pad", add_pad);
-  if(is_opened && add_pad) {
+  if (is_opened && add_pad) {
     upper_left_pad = GetResourceManager().LoadPoint2i(res_profile, "upper_left_pad");
     lower_right_pad = GetResourceManager().LoadPoint2i(res_profile, "lower_right_pad");
   }
 
   const xmlNode* xmlwind = XmlReader::GetMarker(xml, "wind");
-  if (xmlwind != NULL)
-  {
+  if (xmlwind) {
     Double rot_speed=0.0;
     XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
+#ifdef HAVE_HANDHELD
+    wind.nb_sprite >>= 1;
+#endif
     XmlReader::ReadDouble(xmlwind, "rotation_speed", rot_speed);
     wind.rotation_speed = rot_speed;
     XmlReader::ReadBool(xmlwind, "need_flip", wind.need_flip);
@@ -418,4 +420,3 @@ InfoMap* ActiveMap()
 {
   return MapsList::GetInstance()->ActiveMap();
 }
-
