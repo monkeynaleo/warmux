@@ -305,7 +305,7 @@ OptionMenu::OptionMenu() :
 
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());
-  opt_wind_particles_percentage->SetValue(config->GetDisplayWindParticles());
+  opt_wind_particles_percentage->SetValue(config->GetWindParticlesPercentage());
 #ifndef HAVE_HANDHELD
   opt_display_multisky->SetValue(config->GetDisplayMultiLayerSky());
 #endif
@@ -417,7 +417,7 @@ void OptionMenu::SaveOptions()
   Config * config = Config::GetInstance();
 
   // Graphic options
-  config->SetDisplayWindParticles(opt_wind_particles_percentage->GetValue());
+  config->SetWindParticlesPercentage(opt_wind_particles_percentage->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
   if (Game::IsRunning())
     Wind::GetRef().Reset();

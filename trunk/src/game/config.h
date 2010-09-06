@@ -72,8 +72,8 @@ public:
   bool GetDisplayNameCharacter() const { return display_name_character; };
   void SetDisplayNameCharacter(const bool dnc) { display_name_character = dnc; };
 
-  uint GetDisplayWindParticles() const { return wind_particles_percentage; };
-  void SetDisplayWindParticles(uint dwp) { wind_particles_percentage = dwp; };
+  uint GetWindParticlesPercentage() const { return wind_particles_percentage; };
+  void SetWindParticlesPercentage(uint dwp) { wind_particles_percentage = dwp; };
 
   bool GetDisplayMultiLayerSky() const { return display_multi_layer_sky; };
   void SetDisplayMultiLayerSky(bool dmsl) { display_multi_layer_sky = dmsl; };
