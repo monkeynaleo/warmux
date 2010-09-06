@@ -218,7 +218,7 @@ void Wind::Reset()
     return;
   }
 
-  uint nb = (ActiveMap()->GetWind().nb_sprite * nb) / 100;
+  nb = (ActiveMap()->GetWind().nb_sprite * nb) / 100;
   if (!nb) {
     return;
   }
