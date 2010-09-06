@@ -72,8 +72,8 @@ public:
   bool GetDisplayNameCharacter() const { return display_name_character; };
   void SetDisplayNameCharacter(const bool dnc) { display_name_character = dnc; };
 
-  uint GetDisplayWindParticles() const { return display_wind_particles; };
-  void SetDisplayWindParticles(uint dwp) { display_wind_particles = dwp; };
+  uint GetDisplayWindParticles() const { return wind_particles_percentage; };
+  void SetDisplayWindParticles(uint dwp) { wind_particles_percentage = dwp; };
 
   bool GetDisplayMultiLayerSky() const { return display_multi_layer_sky; };
   void SetDisplayMultiLayerSky(bool dmsl) { display_multi_layer_sky = dmsl; };
@@ -189,7 +189,7 @@ protected:
   // Game settings
   bool display_energy_character;
   bool display_name_character;
-  uint display_wind_particles;
+  uint wind_particles_percentage;
   bool display_multi_layer_sky;
   bool default_mouse_cursor;
 

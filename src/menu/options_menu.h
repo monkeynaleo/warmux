@@ -42,7 +42,7 @@ private:
 #ifdef ENABLE_NLS
   ItemBox *lbox_languages;
 #endif
-  SpinButtonWithPicture *opt_display_wind_particles;
+  SpinButtonWithPicture *opt_wind_particles_percentage;
   CheckBox *opt_display_energy;
   CheckBox *opt_display_name;
 #ifndef HAVE_HANDHELD
