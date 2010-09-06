@@ -89,7 +89,7 @@ OptionMenu::OptionMenu() :
 
   // Various options
   opt_wind_particles_percentage =
-    new SpinButtonWithPicture(_("Wind particles?"), "menu/wind_particles_percentage",
+    new SpinButtonWithPicture(_("Wind particles?"), "menu/display_wind_particles",
                               option_size, 100, 20, 0, 100);
   graphic_options->AddWidget(opt_wind_particles_percentage);
 
