@@ -89,7 +89,8 @@ OptionMenu::OptionMenu() :
 
   // Various options
   opt_display_wind_particles =
-    new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", option_size);
+    new SpinButtonWithPicture(_("Wind particles?"), "menu/display_wind_particles",
+                              option_size, 100, 20, 0, 100);
   graphic_options->AddWidget(opt_display_wind_particles);
 
 #ifndef HAVE_HANDHELD
