@@ -88,10 +88,10 @@ OptionMenu::OptionMenu() :
   Box * graphic_options = new GridBox(2, 4, 0, false);
 
   // Various options
-  opt_display_wind_particles =
-    new SpinButtonWithPicture(_("Wind particles?"), "menu/display_wind_particles",
+  opt_wind_particles_percentage =
+    new SpinButtonWithPicture(_("Wind particles?"), "menu/wind_particles_percentage",
                               option_size, 100, 20, 0, 100);
-  graphic_options->AddWidget(opt_display_wind_particles);
+  graphic_options->AddWidget(opt_wind_particles_percentage);
 
 #ifndef HAVE_HANDHELD
   opt_display_multisky =
@@ -305,7 +305,7 @@ OptionMenu::OptionMenu() :
 
   // Values initialization
   opt_max_fps->SetValue(app->video->GetMaxFps());
-  opt_display_wind_particles->SetValue(config->GetDisplayWindParticles());
+  opt_wind_particles_percentage->SetValue(config->GetDisplayWindParticles());
 #ifndef HAVE_HANDHELD
   opt_display_multisky->SetValue(config->GetDisplayMultiLayerSky());
 #endif
@@ -417,7 +417,7 @@ void OptionMenu::SaveOptions()
   Config * config = Config::GetInstance();
 
   // Graphic options
-  config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
+  config->SetDisplayWindParticles(opt_wind_particles_percentage->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
   if (Game::IsRunning())
     Wind::GetRef().Reset();

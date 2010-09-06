@@ -89,10 +89,10 @@ Config::Config()
   , display_name_character(true)
 
 #ifdef HAVE_HANDHELD
-  , display_wind_particles(0) // Too CPU intensive
+  , wind_particles_percentage(0) // Too CPU intensive
   , display_multi_layer_sky(false) // Memory hungry + CPU intensive
 #else
-  , display_wind_particles(100)
+  , wind_particles_percentage(100)
   , display_multi_layer_sky(true)
 #endif
 
@@ -462,7 +462,9 @@ void Config::LoadXml(const xmlNode *xml)
   if ((elem = XmlReader::GetMarker(xml, "video"))) {
     XmlReader::ReadBool(elem, "bling_bling_interface", bling_bling_interface);
     XmlReader::ReadUint(elem, "max_fps", max_fps);
-    XmlReader::ReadUint(elem, "display_wind_particles", display_wind_particles);
+    XmlReader::ReadUint(elem, "wind_particles_percentage", wind_particles_percentage);
+    if (wind_particles_percentage > 100)
+      wind_particles_percentage = 100;
     XmlReader::ReadBool(elem, "display_multi_layer_sky", display_multi_layer_sky);
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
@@ -615,7 +617,7 @@ bool Config::SaveXml(bool save_current_teams)
   //=== Video ===
   Video * video = AppWormux::GetInstance()->video;
   xmlNode* video_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"video"));
-  doc.WriteElement(video_node, "display_wind_particles", uint2str(display_wind_particles));
+  doc.WriteElement(video_node, "wind_particles_percentage", uint2str(wind_particles_percentage));
   doc.WriteElement(video_node, "display_multi_layer_sky", bool2str(display_multi_layer_sky));
   doc.WriteElement(video_node, "display_energy_character", bool2str(display_energy_character));
   doc.WriteElement(video_node, "display_name_character", bool2str(display_name_character));
