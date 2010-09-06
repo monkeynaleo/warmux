@@ -182,13 +182,12 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
   if (xmlwind) {
     Double rot_speed=0.0;
     XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
-    wind.nb_sprite >>= 1;
     XmlReader::ReadDouble(xmlwind, "rotation_speed", rot_speed);
     wind.rotation_speed = rot_speed;
     XmlReader::ReadBool(xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
-      wind.nb_sprite = MAX_WIND_OBJECTS ;
+      wind.nb_sprite = MAX_WIND_OBJECTS;
   } else {
     wind.nb_sprite = 0;
   }
