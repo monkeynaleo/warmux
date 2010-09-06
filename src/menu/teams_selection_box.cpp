@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "game/config.h"
+#include "game/game_mode.h"
 #include "menu/teams_selection_box.h"
 #include "menu/team_box.h"
 #include "gui/grid_box.h"
@@ -82,27 +83,30 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
 
   // How many teams ?
   VBox *tmp = new VBox(120, false, true);
+  uint max_teams;
   if (network) {
+    max_teams = GameMode::GetInstance()->GetMaxTeamsPerNetworkPlayer();
     local_teams_nb =
       new SpinButtonWithPicture(_("Local teams:"), "menu/team_number",
-                                Point2i(100, 130), 0, 1, 0, MAX_NB_TEAMS-1);
+                                Point2i(100, 130), 0, 1, 0, max_teams);
   } else {
+    max_teams = MAX_NB_TEAMS;
     local_teams_nb =
       new SpinButtonWithPicture(_("Number of teams:"), "menu/team_number",
-                                Point2i(100, 130), 2, 1, 2, MAX_NB_TEAMS);
+                                Point2i(100, 130), 2, 1, 2, max_teams);
   }
   tmp->AddWidget(local_teams_nb);
   //tmp->AddWidget(new NullWidget(Point2i(120, 120)));
   AddWidget(tmp);
 
-  bool use_list = _size.y < 2*120 || _size.x < 2*300;
+  bool use_list = _size.y < 2*120 || _size.x < 2*300 || max_teams > MAX_NB_TEAMS;
   uint box_w = _size.x - local_teams_nb->GetSizeX() - 10;
   Point2i box_size = use_list ? Point2i(box_w - 40, 120)
-                              : Point2i((box_w*2) / MAX_NB_TEAMS - 10,
+                              : Point2i((box_w*2) / max_teams - 10,
                                         _size.y/2-10);
   //printf("Size: %ix%i\n", _size.x, _size.y);
 
-  for (uint i=0; i < MAX_NB_TEAMS; i++) {
+  for (uint i=0; i < max_teams; i++) {
     std::string player_name = _("Player") ;
     char num_player[4];
     sprintf(num_player, " %d", i+1);
@@ -126,7 +130,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     Box * teams_grid_box = new GridBox(2, 2, 10, false);
     teams_grid_box->SetNoBorder();
 
-    for (uint i=0; i < MAX_NB_TEAMS; i++)
+    for (uint i=0; i<max_teams; i++)
       teams_grid_box->AddWidget(teams_selections[i]);
 
     AddWidget(teams_grid_box);
