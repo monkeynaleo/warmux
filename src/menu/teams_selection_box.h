@@ -30,7 +30,7 @@
 class SpinButtonWithPicture;
 class TeamBox;
 
-const uint MAX_NB_TEAMS=4;
+const uint MAX_NB_TEAMS=8;
 
 class TeamScrollBox : public ScrollBox
 {
