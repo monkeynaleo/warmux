@@ -180,7 +180,7 @@ public:
   /** Return a pointer on the pixels data. */
   unsigned char *GetPixels() const { return (unsigned char *)surface->pixels; }
 
-  static Surface DisplayFormatColorKey(const uint32_t* data, const SDL_PixelFormat *fmt,
+  static Surface DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *fmt,
                                        int w, int h, int stride, uint8_t alpha_threshold);
   Surface DisplayFormatColorKey(uint8_t alpha_threshold);
 };
