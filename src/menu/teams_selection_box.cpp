@@ -101,7 +101,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
   Point2i grid_dim = grid_size / Point2i(300 + 10, 130 + 10);
   Point2i box_size;
   bool use_list;
-  if (grid_dim.x*grid_dim.y < MAX_NB_TEAMS) {
+  if (grid_dim.x*grid_dim.y < (int)MAX_NB_TEAMS) {
     use_list = true;
     box_size.SetValues(box_w - 40, 120);
   } else {
@@ -109,7 +109,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     box_size.SetValues((grid_size / grid_dim) - 10);
   }
 
-  for (int i=0; i < MAX_NB_TEAMS; i++) {
+  for (uint i=0; i < MAX_NB_TEAMS; i++) {
     std::string player_name = _("Player") ;
     char num_player[4];
     sprintf(num_player, " %d", i+1);
@@ -133,7 +133,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     Box * teams_grid_box = new GridBox(grid_dim.y, grid_dim.x, 10, false);
     teams_grid_box->SetNoBorder();
 
-    for (int i=0; i<MAX_NB_TEAMS; i++)
+    for (uint i=0; i<MAX_NB_TEAMS; i++)
       teams_grid_box->AddWidget(teams_selections[i]);
 
     AddWidget(teams_grid_box);
