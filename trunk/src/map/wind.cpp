@@ -212,13 +212,13 @@ void Wind::Reset()
   Interface::GetInstance()->UpdateWindIndicator(m_val);
 
   RemoveAllParticles();
+  uint nb = Config::GetConstInstance()->GetDisplayWindParticles();
 
-  if (!Config::GetInstance()->GetDisplayWindParticles()) {
+  if (!nb) {
     return;
   }
 
-  uint nb = ActiveMap()->GetWind().nb_sprite;
-
+  uint nb = (ActiveMap()->GetWind().nb_sprite * nb) / 100;
   if (!nb) {
     return;
   }
