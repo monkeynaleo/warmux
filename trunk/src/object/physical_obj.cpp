@@ -49,11 +49,6 @@
 
 const int Y_OBJET_MIN = -10000;
 
-Double MeterDistance(const Point2i &p1, const Point2i &p2)
-{
-  return p1.Distance(p2) / PIXEL_PER_METER;
-}
-
 PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
   m_collides_with_ground(true),
   m_collides_with_characters(false),
