@@ -414,10 +414,10 @@ void Grapple::AttachRope(const Point2i& contact_point)
   ActiveCharacter().GetRelativeHandPosition(pos);
 
   ActiveCharacter().SetPhysFixationPointXY(
-                                           contact_point.x / PIXEL_PER_METER,
-                                           contact_point.y / PIXEL_PER_METER,
-                                           (Double)pos.x / PIXEL_PER_METER,
-                                           (Double)pos.y / PIXEL_PER_METER);
+                                           contact_point.x * METER_PER_PIXEL,
+                                           contact_point.y * METER_PER_PIXEL,
+                                           (Double)pos.x * METER_PER_PIXEL,
+                                           (Double)pos.y * METER_PER_PIXEL);
 
   m_fixation_point = contact_point;
 
@@ -426,7 +426,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   root_node.angle = 0;
   rope_nodes.push_back(root_node);
 
-  ActiveCharacter().ChangePhysRopeSize (((Double)(-10)) / PIXEL_PER_METER);
+  ActiveCharacter().ChangePhysRopeSize (((Double)(-10)) * METER_PER_PIXEL);
   ActiveCharacter().SetMovement("ninja-rope");
 
   ActiveCharacter().SetFiringAngle(-PI / 3);
@@ -451,10 +451,10 @@ void Grapple::AttachNode(const Point2i& contact_point, Double angle)
   Point2i pos;
   ActiveCharacter().GetRelativeHandPosition(pos);
 
-  ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
-                                           contact_point.y / PIXEL_PER_METER,
-                                           (Double)pos.x / PIXEL_PER_METER,
-                                           (Double)pos.y / PIXEL_PER_METER);
+  ActiveCharacter().SetPhysFixationPointXY(contact_point.x * METER_PER_PIXEL,
+                                           contact_point.y * METER_PER_PIXEL,
+                                           (Double)pos.x * METER_PER_PIXEL,
+                                           (Double)pos.y * METER_PER_PIXEL);
 
   m_fixation_point = contact_point;
   rope_node_t node;
@@ -485,10 +485,10 @@ void Grapple::DetachNode()
   Point2i pos;
   ActiveCharacter().GetRelativeHandPosition(pos);
 
-  ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
-                                           m_fixation_point.y / PIXEL_PER_METER,
-                                           (Double)pos.x / PIXEL_PER_METER,
-                                           (Double)pos.y / PIXEL_PER_METER);
+  ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x * METER_PER_PIXEL,
+                                           m_fixation_point.y * METER_PER_PIXEL,
+                                           pos.x * METER_PER_PIXEL,
+                                           pos.y * METER_PER_PIXEL);
 }
 
 // =========================== Moves management
