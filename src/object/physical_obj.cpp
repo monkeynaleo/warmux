@@ -94,12 +94,13 @@ void PhysicalObj::SetXY(const Point2d &position)
 {
   CheckOverlapping();
 
+  // Don't use METER_PER_PIXEL here: bad truncation occurs
   if (IsOutsideWorldXY(Point2i(position.x, position.y)) && can_be_ghost) {
-    SetPhysXY(position * METER_PER_PIXEL);
+    SetPhysXY(position / PIXEL_PER_METER);
     Ghost();
     SignalOutOfMap();
   } else {
-    SetPhysXY(position * METER_PER_PIXEL);
+    SetPhysXY(position / PIXEL_PER_METER);
     if (FootsInVacuum())
       StartMoving();
   }
