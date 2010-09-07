@@ -27,40 +27,38 @@
 #include "weapon/weapon_cfg.h"
 #include "weapon/weapon_launcher.h"
 
-
 class Mine;
 class MineConfig;
 
 class ObjMine : public WeaponProjectile
 {
-private:
-    SoundSample timeout_sound;
+  SoundSample timeout_sound;
 
   // this is a fake mine ?
-    bool fake;
+  bool fake;
 
   // Is this mine active ?
-    bool is_active;
+  bool is_active;
 
   // Activation des mines ?
-    bool animation;
-    uint attente;
-    uint escape_time;
+  bool animation;
+  uint attente;
+  uint escape_time;
 
-  protected:
-    void FakeExplosion();
-  public:
-    ObjMine(MineConfig &cfg,
-            WeaponLauncher * p_launcher = NULL);
+protected:
+  void FakeExplosion();
+public:
+  ObjMine(MineConfig &cfg,
+          WeaponLauncher * p_launcher = NULL);
 
-    void StartTimeout();
-    void Detection();
-    virtual bool IsImmobile() const;
-    // Damage handling
-    void SetEnergyDelta(int delta, bool do_report = true);
+  void StartTimeout();
+  void Detection();
+  virtual bool IsImmobile() const;
+  // Damage handling
+  void SetEnergyDelta(int delta, bool do_report = true);
 
-    void Draw();
-    void Refresh();
+  void Draw();
+  void Refresh();
 };
 
 class MineConfig : public Singleton<MineConfig>, public ExplosiveWeaponConfig
@@ -79,17 +77,17 @@ public:
 
 class Mine : public WeaponLauncher
 {
-  private:
-    void Add (int x, int y);
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-    bool p_Shoot();
-    virtual bool ShouldBeDrawn();
-  public:
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-    Mine();
-    MineConfig& cfg();
+private:
+  void Add (int x, int y);
+protected:
+  WeaponProjectile * GetProjectileInstance();
+  bool p_Shoot();
+  virtual bool ShouldBeDrawn();
+public:
+  void UpdateTranslationStrings();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+  Mine();
+  MineConfig& cfg();
 };
 
 #endif /* MINE_H */
