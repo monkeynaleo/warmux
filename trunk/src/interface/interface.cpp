@@ -235,24 +235,11 @@ void Interface::DrawCharacterInfo()
 
 void Interface::DrawWeaponInfo() const
 {
-  Weapon* weapon;
-  int nbr_munition;
-  Double icon_scale_factor = 0.75;
-
-  // Get the weapon
-  if (weapon_under_cursor==NULL) {
-    weapon = &ActiveTeam().AccessWeapon();
-    nbr_munition = ActiveTeam().ReadNbAmmos();
-  } else {
-    weapon = weapon_under_cursor;
-    nbr_munition = ActiveTeam().ReadNbAmmos(weapon_under_cursor->GetType());
-    icon_scale_factor = cos((Double)Time::GetInstance()->Read() / 1000 * PI) * (Double)0.9;
-  }
-
-  std::string tmp;
+  Weapon* weapon = &ActiveTeam().AccessWeapon();
+  int nbr_munition = ActiveTeam().ReadNbAmmos();
 
   // Draw weapon name
-  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - 0.75*48;
+  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - (0.75*48);
   t_weapon_name->SetText(weapon->GetName());
   t_weapon_name->DrawCenterTop(bottom_bar_pos + Point2i(offset, 0));
 
@@ -263,8 +250,8 @@ void Interface::DrawWeaponInfo() const
 
   // Draw weapon icon
   Sprite& icon = weapon->GetIcon();
-  icon.Scale(icon_scale_factor, 0.75);
-  Point2i weapon_icon_offset(offset - icon.GetWidth()/2,
+  icon.Scale(0.75, 0.75);
+  Point2i weapon_icon_offset(offset - (icon.GetWidth()>>1),
                              game_menu.GetHeight() - icon.GetHeight() - MARGIN);
   icon.DrawXY(bottom_bar_pos + weapon_icon_offset);
 
