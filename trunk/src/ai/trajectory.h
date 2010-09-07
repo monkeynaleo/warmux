@@ -36,7 +36,7 @@ class Trajectory {
       : initial_position(pos_0)
       , initial_speed(v_0)
       , acceleration(a)
-      , half_acceleration(ONE_HALF*a)
+      , half_acceleration(0.5f*a)
     {
       // do nothing
     }
