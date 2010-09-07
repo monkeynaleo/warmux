@@ -17,9 +17,6 @@ class Globals {
   // Set this value to true if you're planning to render 3D using OpenGL - it eats some GFX resources, so disabled for 2D
   public static boolean HorizontalOrientation = true;
 
-  // Readme text to be shown on download page
-  public static String ReadmeText = "^Please wait while data is being downloaded.".replace("^","\n");
-
   public static boolean AppUsesMouse = true;
   public static boolean AppNeedsArrowKeys = true;
   public static boolean AppUsesJoystick = false;

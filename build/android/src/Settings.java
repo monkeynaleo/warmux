@@ -13,12 +13,16 @@ import android.util.Log;
 import java.io.*;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.Configuration;
 import android.os.Environment;
 import android.os.StatFs;
 import java.util.Locale;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
+
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import java.lang.String;
 
 class Settings
 {
@@ -67,8 +71,9 @@ class Settings
       settingsLoaded = true;
 
       AlertDialog.Builder builder = new AlertDialog.Builder(p);
-      builder.setTitle("Phone configuration");
-      builder.setPositiveButton("Change phone configuration", new DialogInterface.OnClickListener()
+      builder.setTitle(p.getResources().getString(R.string.device_config));
+      builder.setPositiveButton(p.getResources().getString(R.string.device_change_cfg),
+                                new DialogInterface.OnClickListener()
       {
         public void onClick(DialogInterface dialog, int item)
         {
@@ -153,10 +158,11 @@ class Settings
       freePhone = (long)phone.getAvailableBlocks() * phone.getBlockSize() / 1024 / 1024;
     }catch(Exception e) {}
 
-    final CharSequence[] items = {"Phone storage - " + String.valueOf(freePhone) + " Mb free", "SD card - " + String.valueOf(freeSdcard) + " Mb free"};
+    final CharSequence[] items = { p.getResources().getString(R.string.storage_phone, freePhone),
+                                   p.getResources().getString(R.string.storage_sd, freeSdcard) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("Where to download application data");
+    builder.setTitle(p.getResources().getString(R.string.storage_question));
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
@@ -174,10 +180,12 @@ class Settings
 
   static void showKeyboardConfig(final MainActivity p)
   {
-    final CharSequence[] items = {"Arrows / joystick / dpad", "Trackball", "Accelerometer"};
+    final CharSequence[] items = { p.getResources().getString(R.string.controls_arrows),
+                                   p.getResources().getString(R.string.controls_trackball),
+                                   p.getResources().getString(R.string.controls_accel) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("What kind of navigation keys does your phone have?");
+    builder.setTitle(p.getResources().getString(R.string.controls_question));
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
@@ -211,10 +219,13 @@ class Settings
       return;
     }
 
-    final CharSequence[] items = {"No dampening", "Fast", "Medium", "Slow"};
+    final CharSequence[] items = { p.getResources().getString(R.string.trackball_no_dampening),
+                                   p.getResources().getString(R.string.trackball_fast),
+                                   p.getResources().getString(R.string.trackball_medium),
+                                   p.getResources().getString(R.string.trackball_slow) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("Trackball dampening");
+    builder.setTitle(p.getResources().getString(R.string.trackball_question));
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
@@ -234,10 +245,12 @@ class Settings
   {
     Globals.AccelerometerSensitivity = 0;
 
-    final CharSequence[] items = {"Fast", "Medium", "Slow"};
+    final CharSequence[] items = { p.getResources().getString(R.string.accel_fast),
+                                   p.getResources().getString(R.string.accel_medium),
+                                   p.getResources().getString(R.string.accel_slow) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("Accelerometer sensitivity");
+    builder.setTitle(R.string.accel_question);
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)
@@ -255,10 +268,12 @@ class Settings
 
   static void showAudioConfig(final MainActivity p)
   {
-    final CharSequence[] items = {"Small (fast devices)", "Medium", "Large (if sound is choppy)"};
+    final CharSequence[] items = { p.getResources().getString(R.string.audiobuf_small),
+                                   p.getResources().getString(R.string.audiobuf_medium),
+                                   p.getResources().getString(R.string.audiobuf_large) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle("Size of audio buffer");
+    builder.setTitle(R.string.audiobuf_question);
     builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
     {
       public void onClick(DialogInterface dialog, int item)

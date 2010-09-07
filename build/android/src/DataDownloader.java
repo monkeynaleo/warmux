@@ -22,6 +22,10 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.content.Context;
+import android.content.res.Resources;
+import java.lang.String;
+
 class CountingInputStream extends BufferedInputStream {
 
   private long bytesReadMark = 0;
@@ -113,7 +117,7 @@ class DataDownloader extends Thread
         public String text;
         public void run()
         {
-          Status.setText(text + "\n" + Globals.ReadmeText);
+          Status.setText(text + "\n" + res.getString(R.string.readme).replace("^","\n"));
         }
       }
       synchronized(DataDownloader.this) {
@@ -125,11 +129,12 @@ class DataDownloader extends Thread
           Parent.runOnUiThread(cb);
       }
     }
-
   }
+
   public DataDownloader( MainActivity _Parent, TextView _Status )
   {
     Parent = _Parent;
+    res = Parent.getResources();
     Status = new StatusWriter( _Status, _Parent );
     //Status.setText( "Connecting to " + Globals.DataDownloadUrl );
     outFilesDir = Parent.getFilesDir().getAbsolutePath();
@@ -168,7 +173,7 @@ class DataDownloader extends Thread
           throw new IOException();
         if( compare.compareTo(Globals.DataDownloadUrl) != 0 )
           throw new IOException();
-        Status.setText( "No need to download" );
+        Status.setText(res.getString(R.string.download_unneeded));
         DownloadComplete = true;
         initParent();
         return;
@@ -199,8 +204,9 @@ class DataDownloader extends Thread
 
     while( downloadUrlIndex < downloadUrls.length && response == null )
     {
-      System.out.println("Connecting to " + downloadUrls[downloadUrlIndex]);
-      Status.setText( "Connecting to " + downloadUrls[downloadUrlIndex] );
+      String status = res.getString(R.string.connecting_to, downloadUrls[downloadUrlIndex]);
+      System.out.println(status);
+      Status.setText(status);
       request = new HttpGet(downloadUrls[downloadUrlIndex]);
       request.addHeader("Accept", "*/*");
       try {
@@ -208,7 +214,8 @@ class DataDownloader extends Thread
         client.getParams().setBooleanParameter("http.protocol.handle-redirects", true);
         response = client.execute(request);
       } catch (IOException e) {
-        System.out.println("Failed to connect to " + downloadUrls[downloadUrlIndex]);
+        System.out.println(res.getString(R.string.failed_connecting_to,
+                                         downloadUrls[downloadUrlIndex]));
         downloadUrlIndex++;
       };
       if( response != null )
@@ -216,24 +223,27 @@ class DataDownloader extends Thread
         if( response.getStatusLine().getStatusCode() != 200 )
         {
           response = null;
-          System.out.println("Failed to connect to " + downloadUrls[downloadUrlIndex]);
+          System.out.println(res.getString(R.string.failed_connecting_to,
+                                           downloadUrls[downloadUrlIndex]));
           downloadUrlIndex++;
         }
       }
     }
+
     if( response == null )
     {
-      System.out.println("Error connecting to " + Globals.DataDownloadUrl);
-      Status.setText( "Error connecting to " + Globals.DataDownloadUrl );
+      String status = res.getString(R.string.error_connecting_to, Globals.DataDownloadUrl);
+      System.out.println(status);
+      Status.setText(status);
       return;
     }
 
-    Status.setText( "Downloading data from " + Globals.DataDownloadUrl );
+    Status.setText(res.getString(R.string.dl_from, Globals.DataDownloadUrl));
     totalLen = response.getEntity().getContentLength();
     try {
       stream = new CountingInputStream(response.getEntity().getContent());
     } catch( java.io.IOException e ) {
-      Status.setText( "Error downloading data from " + Globals.DataDownloadUrl );
+      Status.setText(res.getString(R.string.error_dl_from, Globals.DataDownloadUrl));
       return;
     }
 
@@ -245,7 +255,7 @@ class DataDownloader extends Thread
       try {
         entry = zip.getNextEntry();
       } catch( java.io.IOException e ) {
-        Status.setText( "Error downloading data from " + Globals.DataDownloadUrl );
+        Status.setText(res.getString(R.string.error_dl_from, Globals.DataDownloadUrl));
         return;
       }
       if( entry == null )
@@ -282,15 +292,11 @@ class DataDownloader extends Thread
       } catch( SecurityException e ) { };
       if( out == null )
       {
-        Status.setText( "Error writing to " + path );
+        Status.setText(res.getString(R.string.error_write, path));
         return;
       }
 
-      String percent = "";
-      if( totalLen > 0 )
-        percent = String.valueOf(stream.getBytesRead() * 100 / totalLen) + "%: ";
-      Status.setText( percent + "writing file " + path );
-
+      Status.setText(res.getString(R.string.dl_progress, stream.getBytesRead() * 100 / totalLen, path));
       try {
         int len = zip.read(buf);
         while (len >= 0)
@@ -299,34 +305,16 @@ class DataDownloader extends Thread
             out.write(buf, 0, len);
           len = zip.read(buf);
 
-          percent = "";
-          if( totalLen > 0 )
-            percent = String.valueOf(stream.getBytesRead() * 100 / totalLen) + "%: ";
-          Status.setText( percent + "writing file " + path );
+          Status.setText(res.getString(R.string.dl_progress,
+                                       stream.getBytesRead() * 100 / totalLen,
+                                       path));
         }
         out.flush();
         out.close();
         out = null;
       } catch( java.io.IOException e ) {
-        Status.setText( "Error writing file " + path );
+        Status.setText(res.getString(R.string.error_write, path));
         return;
-      }
-
-      try {
-        CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
-        while( check.read(buf, 0, buf.length) > 0 ) {};
-        check.close();
-        if( check.getChecksum().getValue() != entry.getCrc() )
-        {
-          File ff = new File(path);
-          ff.delete();
-          throw new Exception();
-        }
-      } catch( Exception e )
-      {
-        Status.setText( "CRC32 check failed for file " + path );
-        continue downloading; // Start download over from the same URL
-        //return;
       }
     }
 
@@ -340,17 +328,17 @@ class DataDownloader extends Thread
     } catch( FileNotFoundException e ) {
     } catch( SecurityException e ) {
     } catch( java.io.IOException e ) {
-      Status.setText( "Error writing file " + path );
+      Status.setText(res.getString(R.string.error_write, path));
       return;
     };
 
     if( out == null )
     {
-      Status.setText( "Error writing to " + path );
+      Status.setText(res.getString(R.string.error_write, path));
       return;
     }
 
-    Status.setText( "Finished" );
+    Status.setText(res.getString(R.string.dl_finished));
     DownloadComplete = true;
 
     try {
@@ -390,4 +378,5 @@ class DataDownloader extends Thread
   public boolean DownloadComplete;
   private MainActivity Parent;
   private String outFilesDir = null;
+  private static Resources res = null;
 }
