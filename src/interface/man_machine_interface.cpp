@@ -148,7 +148,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
         return;
       break;
     case KEY_SCREENSHOT:
-      AppWormux::GetInstance()->video->SaveScreenshot();
+      //AppWormux::GetInstance()->video->SaveScreenshot();
       return;
     default:
       // key not supported
