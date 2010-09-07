@@ -290,10 +290,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\ai\trajectory.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\ai\trajectory.h"
 					>
 				</File>
