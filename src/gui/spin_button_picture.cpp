@@ -89,7 +89,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
   Point2i center = tmp + m_annulus_background.GetSize() / 2;
   float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
               / (GetMaxValue() - GetMinValue());
-  Polygon *p = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 100,
+  Polygon *p = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 30,
                                                       angle, OPEN_ANGLE / 2);
 
   p->SetPlaneColor(m_progress_color);
