@@ -30,11 +30,20 @@ class Trajectory {
     Point2f initial_speed;
     Point2f acceleration;
     Point2f half_acceleration;
+
   public:
-    Trajectory(Point2f pos_0, Point2f v_0, Point2f a);
+    Trajectory(Point2f pos_0, Point2f v_0, Point2f a)
+      : initial_position(pos_0)
+      , initial_speed(v_0)
+      , acceleration(a)
+      , half_acceleration(ONE_HALF*a)
+    {
+      // do nothing
+    }
+
     const Point2i GetPositionAt(float t) const
     {
-      return half_acceleration*(t*t) + initial_speed*t + initial_position;
+      return (half_acceleration*t + initial_speed)*t + initial_position;
     }
     float GetSpeedAt(float t) const
     {
