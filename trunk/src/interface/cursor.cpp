@@ -51,14 +51,14 @@ CharacterCursor::~CharacterCursor()
 void CharacterCursor::Draw()
 {
   if (!arrow) return;
-  if (ActiveCharacter().IsGhost()) return;
+  const Character& active = ActiveCharacter();
+  if (active.IsGhost()) return;
 
   // Draw cursor arround character
-  Point2i center = ActiveCharacter().GetCenter();
-  uint x = center.x - arrow->GetWidth()/2;
-  uint y = ActiveCharacter().GetY() - arrow->GetHeight() - y_min;
+  uint x = active.GetCenterX() - (arrow->GetWidth()>>1);
+  uint y = active.GetY() - arrow->GetHeight() - y_min;
 
-  arrow->Draw( Point2i(x, y) );
+  arrow->Draw(Point2i(x, y));
 }
 
 void CharacterCursor::Refresh()
