@@ -73,5 +73,3 @@ class AccelerometerReader implements SensorEventListener {
   private native void nativeAccelerometer(float accX, float accY, float accZ);
   private native void nativeOrientation(float accX, float accY, float accZ);
 }
-
-
