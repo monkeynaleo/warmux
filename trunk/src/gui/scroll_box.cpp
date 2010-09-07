@@ -37,7 +37,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   , alternate_colors(alternate)
   , m_up(NULL)
   , m_down(NULL)
-  , start_drag_y(-1)
+  , start_drag_y(NO_DRAG)
   , start_drag_offset(NO_DRAG)
   , offset(0)
   , scroll_mode(SCROLL_MODE_NONE)
@@ -79,7 +79,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   // Handle the click up as a widget click only if we weren't dragging
   // If we click up close to where we clicked down, it will however register
   // as a click and not a scrolling
-  if (vbox->Contains(mousePosition) && abs(start_drag_y-mousePosition.y)<2) {
+  if (vbox->Contains(mousePosition) &&
+      (start_drag_y==NO_DRAG || abs(start_drag_y-mousePosition.y)<2)) {
     Widget *w = vbox->ClickUp(mousePosition, button);
 
     if (w) {
