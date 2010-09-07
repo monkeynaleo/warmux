@@ -43,12 +43,7 @@ typedef enum
 class Action;
 
 #define PIXEL_PER_METER 40
-
-inline Double MeterDistance(const Point2i &p1, const Point2i &p2) {
-  static const Double METER_PER_PIXEL(1.0f/PIXEL_PER_METER);
-
-  return p1.Distance(p2) * METER_PER_PIXEL;
-};
+static const Double METER_PER_PIXEL(1.0/PIXEL_PER_METER);
 
 class PhysicalObj : public Physics
 {

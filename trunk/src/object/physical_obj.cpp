@@ -95,11 +95,11 @@ void PhysicalObj::SetXY(const Point2d &position)
   CheckOverlapping();
 
   if (IsOutsideWorldXY(Point2i(position.x, position.y)) && can_be_ghost) {
-    SetPhysXY(position / PIXEL_PER_METER);
+    SetPhysXY(position * METER_PER_PIXEL);
     Ghost();
     SignalOutOfMap();
   } else {
-    SetPhysXY(position / PIXEL_PER_METER);
+    SetPhysXY(position * METER_PER_PIXEL);
     if (FootsInVacuum())
       StartMoving();
   }
@@ -114,8 +114,7 @@ void PhysicalObj::SetSize(const Point2i &newSize)
 
   ASSERT(m_width >= 0);
   ASSERT(m_height >= 0);
-  SetPhysSize(newSize.x / (Double)PIXEL_PER_METER,
-              newSize.y / (Double)PIXEL_PER_METER );
+  SetPhysSize(newSize.x*METER_PER_PIXEL, newSize.y*METER_PER_PIXEL);
 }
 
 void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
@@ -389,8 +388,8 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
     if (ContactPoint(cx, cy)) {
       contactAngle = GetWorld().ground.Tangent(cx, cy);
       if(!isNaN(contactAngle)) {
-        contactPos.x = (Double)cx / PIXEL_PER_METER;
-        contactPos.y = (Double)cy / PIXEL_PER_METER;
+        contactPos.x = (Double)cx * METER_PER_PIXEL;
+        contactPos.y = (Double)cy * METER_PER_PIXEL;
       } else {
         contactAngle = - GetSpeedAngle();
         contactPos = oldPos;
