@@ -578,8 +578,12 @@ int Surface::ImgLoad(const std::string& filename)
  *
  * @param filename
  */
-bool Surface::ImgSave(const std::string& filename)
+bool Surface::ImgSave(const std::string& filename, bool bmp)
 {
+  if (bmp) {
+    return (surface) ? SDL_SaveBMP(surface, filename.c_str())==0 : false;
+  }
+
   FILE            *f        = NULL;
   png_structp      png_ptr  = NULL;
   png_infop        info_ptr = NULL;
