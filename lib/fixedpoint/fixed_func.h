@@ -179,13 +179,14 @@ inline int fixinv(int32_t a)
 // Conversion from and to float
 
 template <int p>
-float fix2float(fixint_t f)
+inline float fix2float(fixint_t f)
 {
-  return (float)f / (1 << p);
+  static const float inv = 1.0f / (1<<p);
+  return f * inv;
 }
 
 template <int p>
-fixint_t float2fix(float f)
+inline fixint_t float2fix(float f)
 {
   return (fixint_t)(f * (1 << p));
 }
