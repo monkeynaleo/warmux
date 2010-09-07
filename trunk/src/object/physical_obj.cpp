@@ -409,13 +409,18 @@ void PhysicalObj::UpdatePosition ()
   }
 
   if (m_collides_with_ground) {
-    // object is not moving and has no reason to move
-    if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) {
-    return;
+    // object is not moving
+    if (!IsMoving()) {
+      // and has no reason to move
+      if (!FootsInVacuum()) {
+        if (!IsInWater()) {
+          return;
+        }
+      } else {
+        // it should fall !
+        StartMoving();
+      }
     }
-
-    // object is not moving BUT it should fall !
-    if ( !IsMoving() && FootsInVacuum() ) StartMoving();
   }
 
   // Compute new position.
