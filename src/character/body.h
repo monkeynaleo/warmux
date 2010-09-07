@@ -87,7 +87,7 @@ class Body
                                                 // Order to use to build the body
                                                 // First element: member to build
                                                 // Secnd element: parent member
-    LRDirection                   direction;
+    LRDirection                       direction;
     int                               animation_number;
     bool                              need_rebuild;
     const Character *                 owner;
