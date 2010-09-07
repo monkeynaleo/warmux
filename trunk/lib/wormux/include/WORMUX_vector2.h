@@ -334,6 +334,9 @@ template<class T> class Vector2
     inline T Distance(const Vector2<T> & p2) const{
       return sqrt((p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y));
     }
+    inline T SquareDistance(const Vector2<T> & p2) const{
+      return (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+    }
 
     /**
      *
