@@ -104,7 +104,7 @@ void ComboBox::Draw(const Point2i &mousePosition) const
     angle = m_index*(2*M_PI - OPEN_ANGLE) / (m_choices.size () - 1);
   else
     angle = 0;
-  Polygon *ptmp = PolygonGenerator::GeneratePartialTorus(BIG_R*2, SMALL_R*2, 100, angle, OPEN_ANGLE/2);
+  Polygon *ptmp = PolygonGenerator::GeneratePartialTorus(BIG_R*2, SMALL_R*2, 30, angle, OPEN_ANGLE/2);
   ptmp->SetPlaneColor(m_progress_color);
   ptmp->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
   ptmp->Draw(&video_window);
