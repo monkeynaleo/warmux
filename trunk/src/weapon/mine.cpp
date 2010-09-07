@@ -102,22 +102,22 @@ void ObjMine::Detection()
 {
   uint current_time = Time::GetInstance()->ReadSec();
 
-  if (escape_time == 0)
-  {
+  if (escape_time == 0) {
     escape_time = current_time + static_cast<MineConfig&>(cfg).escape_time;
     MSG_DEBUG("mine", "Initialize escape_time : %d", current_time);
     return;
   }
 
-  if (current_time < escape_time) return;
+  if (current_time < escape_time || animation)
+    return;
 
   //MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
 
-  Double detection_range = static_cast<MineConfig&>(cfg).detection_range;
+  Double tmp = PIXEL_PER_METER*static_cast<MineConfig&>(cfg).detection_range;
+  int detection_range = tmp*tmp;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
-    if (MeterDistance(GetCenter(), character->GetCenter()) < detection_range &&
-        !animation) {
+    if (GetCenter().SquareDistance(character->GetCenter()) < detection_range) {
       std::string txt = Format(_("%s is next to a mine!"),
                                character->GetName().c_str());
       GameMessages::GetInstance()->Add(txt);
@@ -128,11 +128,12 @@ void ObjMine::Detection()
 
   Double speed_detection = static_cast<MineConfig&>(cfg).speed_detection;
   Double norm, angle;
-  FOR_EACH_OBJECT(obj) {
-    if ((*obj) != this && !animation && GetName() != (*obj)->GetName() &&
-        MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
+  FOR_EACH_OBJECT(it) {
+    PhysicalObj *obj = *it;
+    if (obj != this && GetName() != obj->GetName() &&
+        GetCenter().SquareDistance(obj->GetCenter()) < detection_range) {
 
-      (*obj)->GetSpeed(norm, angle);
+      obj->GetSpeed(norm, angle);
       if (norm < speed_detection && norm > ZERO) {
         MSG_DEBUG("mine", "norm: %s, speed_detection: %s",
                   Double2str(norm).c_str(), Double2str(speed_detection).c_str());
@@ -155,25 +156,20 @@ void ObjMine::Refresh()
 {
   // the mine is now out of the map
   // or it's a fake mine that has already exploded!
-  if (!is_active)
-  {
+  if (!is_active) {
     timeout_sound.Stop();
     escape_time = 0;
     return;
   }
 
   // try to detect a character near the mine
-  if (!animation)
-  {
+  if (!animation) {
     Detection();
-  }
-  else
-  {
+  } else {
     image->Update();
 
     // the timeout is finished !!
-    if (attente < Time::GetInstance()->ReadSec())
-    {
+    if (attente < Time::GetInstance()->ReadSec()) {
       is_active = false;
       timeout_sound.Stop();
       if (!fake)
@@ -211,8 +207,8 @@ Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstan
 
 void Mine::UpdateTranslationStrings()
 {
-    m_name = _("Mine");
-    m_help = _("Place mine by pressing space\nMine explodes when someone steps onto it\nMay be a fake mine by chance");
+  m_name = _("Mine");
+  m_help = _("Place mine by pressing space\nMine explodes when someone steps onto it\nMay be a fake mine by chance");
 }
 
 WeaponProjectile * Mine::GetProjectileInstance()
@@ -252,10 +248,9 @@ void Mine::Add(int x, int y)
 
 std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u mine!",
-            "%s team has won %u mines!",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u mine!",
+                         "%s team has won %u mines!",
+                         items_count), TeamName, items_count);
 }
 
 //-----------------------------------------------------------------------------
