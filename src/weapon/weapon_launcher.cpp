@@ -192,8 +192,8 @@ void WeaponProjectile::Shoot(Double strength)
   // Check if the object is colliding something between hand position and gun hole
   hand_position -= GetSize() / 2;
   Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
-  Point2d f_hand_position = hand_position / PIXEL_PER_METER;
-  Point2d f_hole_position = hole_position / PIXEL_PER_METER;
+  Point2d f_hand_position = hand_position * METER_PER_PIXEL;
+  Point2d f_hole_position = hole_position * METER_PER_PIXEL;
   SetXY(hand_position);
   SetSpeed(strength, angle);
 
