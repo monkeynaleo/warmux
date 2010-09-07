@@ -147,6 +147,9 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
       if (Game::GetInstance()->ReadState() == Game::HAS_PLAYED)
         return;
       break;
+    case KEY_SCREENSHOT:
+      AppWormux::GetInstance()->video->SaveScreenshot();
+      return;
     default:
       // key not supported
       return;
@@ -1081,6 +1084,7 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
   if(name == "minimap_from_game") return KEY_MINIMAP_FROM_GAME;
   if(name == "decrease_minimap") return KEY_DECREASE_MINIMAP;
   if(name == "increase_minimap") return KEY_INCREASE_MINIMAP;
+  if(name == "screenshot") return KEY_SCREENSHOT;
 
   return KEY_NONE;
 }
@@ -1138,6 +1142,7 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
   if(key == KEY_INCREASE_MINIMAP) return "increase_minimap";
   if(key == KEY_DECREASE_VOLUME) return "decrease_volume";
   if(key == KEY_INCREASE_VOLUME) return "increase_volume";
+  if(key == KEY_SCREENSHOT) return "screenshot";
 
   return "none";
 }
@@ -1195,6 +1200,7 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_INCREASE_MINIMAP) return _("Increase minimap size");
   if(key == KEY_DECREASE_VOLUME) return _("Decrease sound volume");
   if(key == KEY_INCREASE_VOLUME) return _("Increase sound volume");
+  if(key == KEY_SCREENSHOT) return _("Take screenshot");
 
   return _("None");
 }
