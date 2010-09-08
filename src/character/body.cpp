@@ -457,6 +457,7 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
+  bool visible = owner->MustBeDrawn() || owner->IsMoving();
 
   if (walking || current_mvt->GetType() != "walk") {
 
@@ -498,7 +499,8 @@ void Body::Build()
 
   ResetMovement();
   ApplySqueleton();
-  ApplyMovement(current_mvt, current_frame);
+  if (visible)
+    ApplyMovement(current_mvt, current_frame);
 
   int layersCount = (int)current_clothe->GetLayers().size();
 
@@ -530,18 +532,20 @@ void Body::Build()
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
   body_mvt.SetAngle(main_rotation_rad);
-  skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
+  if (visible)
+    skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
 
   need_rebuild = false;
 }
 
 void Body::RefreshSprites()
 {
-  Member* member;
-  int layersCount = (int)current_clothe->GetLayers().size();
+  if (!owner->MustBeDrawn() && !owner->IsMoving())
+    return;
 
-  for (int layer=0; layer < layersCount; layer++) {
-    member = current_clothe->GetLayers()[layer];
+  uint layersCount = current_clothe->GetLayers().size();
+  for (uint layer=0; layer < layersCount; layer++) {
+    Member* member = current_clothe->GetLayers()[layer];
 
     if ("weapon" != member->GetName()) {
       member->RefreshSprite(direction);
