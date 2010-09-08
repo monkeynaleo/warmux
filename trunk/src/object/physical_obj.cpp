@@ -213,7 +213,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Compute increments to move the object step by step from the old
   // to the new position.
-  lg = sqrt(lg)
+  lg = sqrt(lg);
   offset = (newPos - oldPos) / lg;
 
   // First iteration position.
