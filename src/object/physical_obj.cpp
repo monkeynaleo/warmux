@@ -289,7 +289,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Next motion step
     pos += offset;
-    lg -= 1.0 ;
+    lg -= ONE;
   } while (ZERO < lg);
 
   Point2d speed_before_collision = GetSpeed();
