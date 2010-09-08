@@ -457,7 +457,6 @@ void Body::Build()
 {
   // Increase frame number if needed
   unsigned int last_frame = current_frame;
-  bool visible = owner->MustBeDrawn() || owner->IsMoving();
 
   if (walking || current_mvt->GetType() != "walk") {
 
@@ -497,10 +496,15 @@ void Body::Build()
     return;
   }
 
+#if 0
+  bool visible = owner->MustBeDrawn() || owner->IsMoving();
+  if (!visible)
+    return;
+#endif
+
   ResetMovement();
   ApplySqueleton();
-  if (visible)
-    ApplyMovement(current_mvt, current_frame);
+  ApplyMovement(current_mvt, current_frame);
 
   int layersCount = (int)current_clothe->GetLayers().size();
 
@@ -513,15 +517,12 @@ void Body::Build()
   }
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
-  member_mvt body_mvt;
   Double y_max = 0;
-  Member * member;
-
   for (int lay=0; lay < layersCount; lay++) {
     if (current_clothe->GetLayers()[lay]->GetName() == "weapon") {
       continue;
     }
-    member = current_clothe->GetLayers()[lay];
+    Member *member = current_clothe->GetLayers()[lay];
     Double val = member->GetPosFloat().y + member->GetSprite().GetHeightMax()
                + member->GetSprite().GetRotationPoint().y;
     if (val > y_max && !member->IsGoingThroughGround()) {
@@ -529,19 +530,21 @@ void Body::Build()
     }
   }
 
+  member_mvt body_mvt;
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
   body_mvt.SetAngle(main_rotation_rad);
-  if (visible)
-    skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
+  skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
 
   need_rebuild = false;
 }
 
 void Body::RefreshSprites()
 {
+#if 0
   if (!owner->MustBeDrawn() && !owner->IsMoving())
     return;
+#endif
 
   uint layersCount = current_clothe->GetLayers().size();
   for (uint layer=0; layer < layersCount; layer++) {
