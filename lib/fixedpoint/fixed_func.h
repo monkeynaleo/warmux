@@ -47,6 +47,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #  include <stdint.h>
 #endif
 
+#ifdef _WIN32
+#  define PRIi64 "I64d"
+#endif
+
+
 #define FIXINT_BITS  64
 
 namespace fixedpoint {
