@@ -608,7 +608,7 @@ void Character::Refresh()
   Time * global_time = Time::GetInstance();
 
   // center on character who is falling
-  if (FootsInVacuum()) {
+  if (IsFalling()) {
     bool closely = false;
     if (IsActiveCharacter() &&
         (ActiveTeam().GetWeaponType() == Weapon::WEAPON_JETPACK
@@ -617,39 +617,33 @@ void Character::Refresh()
     Camera::GetInstance()->FollowObject(this, closely);
   }
 
-  if (IsDiseased())
-  {
+  if (IsDiseased()) {
     Point2i bubble_pos = GetPosition();
     if (GetDirection() == DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     particle_engine->AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
-                              - HALF_PI - (Double)GetDirection() * QUARTER_PI, 20.0);
+                                 - HALF_PI - (Double)GetDirection() * QUARTER_PI, 20.0);
   }
 
-  if (IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING)
-  {
+  if (IsActiveCharacter() && Game::GetInstance()->ReadState() == Game::PLAYING) {
     if (do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
 
     if (walking_time + 1000 < global_time->Read() && body->GetMovement().find("-shoot") == std::string::npos)
       if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
         body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
-  }
-  else
-  {
+  } else {
     if (body->GetMovement() == "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
       body->SetMovement("breathe");
   }
 
-  if (body->IsWalking() && body->GetMovement() == "walk")
-  {
+  if (body->IsWalking() && body->GetMovement() == "walk") {
     // Play the step sound only twice during the walking animation
     uint frame_nbr = body->GetFrameCount()>>1;
     uint cur = body->GetFrame();
     cur %= frame_nbr;
 
-    if (cur < frame_nbr>>1 && !step_sound_played)
-    {
+    if (cur < frame_nbr>>1 && !step_sound_played) {
       step_sound_played = true;
       JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(),"step");
     }
@@ -658,8 +652,7 @@ void Character::Refresh()
       step_sound_played = false;
   }
 
-  if (back_jumping)
-  {
+  if (back_jumping) {
     ASSERT(&ActiveCharacter() == this);
     Double rotation;
     static Double speed_init = GameMode::GetInstance()->character.back_jump_strength *
@@ -675,8 +668,7 @@ void Character::Refresh()
 
   if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
       && body->GetMovement().substr(0,9) != "animation"
-      &&  body->GetClothe().substr(0,9) != "animation")
-  {
+      &&  body->GetClothe().substr(0,9) != "animation") {
     body->PlayAnimation();
     MSG_DEBUG("random.get", "Character::Refresh()");
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration()
@@ -688,8 +680,7 @@ void Character::Refresh()
       && Game::GetInstance()->ReadState() == Game::PLAYING
       && (body->GetMovement().substr(0,9) == "animation"
           || body->GetClothe().substr(0,9) == "animation"
-          || body->GetClothe() == "black"))
-  {
+          || body->GetClothe() == "black")) {
     SetClothe("normal");
     SetMovement("breathe");
   }
@@ -704,10 +695,8 @@ void Character::Refresh()
   // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
   body->Build();
 
-  if (prepare_shoot)
-  {
-    if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
-    {
+  if (prepare_shoot) {
+    if (body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot") {
       // if the movement is finnished, shoot !
       DoShoot();
       prepare_shoot = false;
@@ -767,8 +756,7 @@ void Character::Collision(const Point2d& speed_vector)
 
   Double norm = speed_vector.Norm();
 
-  if (norm > game_mode->safe_fall && speed_vector.y > ZERO)
-  {
+  if (norm > game_mode->safe_fall && speed_vector.y > ZERO) {
     // TODO: take the angle of collision into account!
 
     norm -= game_mode->safe_fall;
@@ -822,12 +810,9 @@ void Character::SignalExplosion()
 
   SetClotheOnce("black");
 
-  if (n > MIN_SPEED_TO_FLY)
-  {
+  if (n > MIN_SPEED_TO_FLY) {
     SetMovement("fly-black");
-  }
-  else
-  {
+  } else {
     SetMovementOnce("black");
     if (body->GetClothe() == "black" && body->GetMovement() != "black")
       std::cerr << "Error: the clothe \"black\" of the character " << GetName()
