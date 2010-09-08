@@ -61,6 +61,8 @@ public:
   void ToggleFullscreen();
 
   void Flip(void);
+
+  bool SaveScreenshot();
 };
 
 Surface& GetMainWindow();
