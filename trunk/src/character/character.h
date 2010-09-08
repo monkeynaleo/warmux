@@ -96,7 +96,6 @@ public:
   Body* body;
 
 private:
-  bool MustBeDrawn() const;
   bool MustDrawLostEnergy() const;
   bool MustDrawEnergyBar() const;
   bool MustDrawName() const;
@@ -123,6 +122,7 @@ private:
   bool ComputeHeightMovement(int & height);
 public:
 
+  bool MustBeDrawn() const;
   Character (Team& my_team, const std::string &name, Body *char_body);
   Character (const Character& acharacter);
   ~Character();
