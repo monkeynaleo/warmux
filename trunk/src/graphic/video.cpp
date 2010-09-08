@@ -20,6 +20,7 @@
 #include <algorithm>
 #include <iostream>
 #include <SDL_image.h>
+#include <WORMUX_file_tools.h>
 
 #include "game/config.h"
 #include "graphic/video.h"
@@ -271,6 +272,31 @@ void Video::Flip()
 {
   window.Flip();
 }
+
+bool Video::SaveScreenshot()
+{
+  int u = 0;
+  char name[19];
+  std::string path = Config::GetConstInstance()->GetPersonalDataDir();
+  std::string filename;
+
+  // Generate and try names
+  do {
+    snprintf(name, sizeof(name), "screenshot%04u.bmp", u);
+    filename = path + name;
+    u++;
+  } while (DoesFileExist(filename) && u<10000);
+
+  if (u == 10000)
+    return false;
+  if (window.ImgSave(filename, true)) {
+    printf("Saved screenshot %s\n", filename.c_str());
+    return true;
+  }
+  printf("Failed saving screenshot %s: %s\n", filename.c_str(), SDL_GetError());
+  return false;
+}
+
 
 Surface& GetMainWindow()
 {
