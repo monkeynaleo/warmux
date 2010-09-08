@@ -45,6 +45,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <limits.h>
 
+//#define TRACK_MINMAX
+
 namespace fixedpoint {
 
 // The template argument p in all of the following functions refers to the
@@ -52,6 +54,20 @@ namespace fixedpoint {
 template <int p>
 struct fixed_point {
   fixint_t intValue;
+#ifdef TRACK_MINMAX
+  static fixint_t min, max;
+  ~fixed_point()
+  {
+    if (min > intValue) {
+      min = intValue;
+      printf("Min: %"PRIi64"\n", min);
+    }
+    if (max < intValue) {
+      max = intValue;
+      printf("Max: %"PRIi64"\n", max);
+    }
+  }
+#endif
 
   fixed_point() {}
   /*explicit*/ fixed_point(fixint_t i) : intValue(i << p) {}
@@ -131,7 +147,12 @@ inline fixed_point<p> operator * (int32_t a, fixed_point<p> b)
 template <int p>
 inline fixed_point<p> operator / (int32_t a, fixed_point<p> b)
 { fixed_point<p> r(a); r /= b; return r; }
-
+#ifdef TRACK_MINMAX
+template <int p>
+fixint_t fixed_point<p>::min = LLONG_MAX;
+template <int p>
+fixint_t fixed_point<p>::max = LLONG_MIN;
+#endif
 
 
 template <int p>
