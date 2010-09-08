@@ -174,23 +174,24 @@ static bool ObjectLiesOnSegment(const PhysicalObj* object,
                                 const Point2i& from, const Point2i& to)
 {
   Rectanglei r = object->GetTestRect();
-  int x = r.GetPositionX() + r.GetSizeX()/2;
-  int y = r.GetPositionY() + r.GetSizeY()/2;
+  const Point2i& center = object->GetCenter();
 
   if (from.y == to.y) {
     // Horizontal shot
-    return r.Contains(Point2i(x, to.y));
+    return r.Contains(Point2i(center.x, to.y));
   } else if (from.x == to.x) {
     // Vertical shot
-    return r.Contains(Point2i(to.x, y));
+    return r.Contains(Point2i(to.x, center.y));
   }
 
   // Are the ordinates within the segment
-  if ((x<from.x && x<to.x) || (x>from.x && x>to.x) ||
-      (y<from.y && y<to.y) || (y>from.y && y>to.y))
+  if ((center.x<from.x && center.x<to.x) || (center.x>from.x && center.x>to.x) ||
+      (center.y<from.y && center.y<to.y) || (center.y>from.y && center.y>to.y))
     return false;
-  y = from.y + ((x-from.x)*(to.y-from.y))/(to.x-from.x);
-  return r.Contains(Point2i(x, y));
+
+  // Find point on corresponding line
+  int y = from.y + ((center.x-from.x)*(to.y-from.y))/(to.x-from.x);
+  return r.Contains(Point2i(center.x, y));
 }
 
 
