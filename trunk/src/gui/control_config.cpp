@@ -111,24 +111,6 @@ public:
 
     Keyboard *kbd = Keyboard::GetInstance();
 
-    // Reset some configs
-    if (SDLK_BACKSPACE == key_code ||
-#ifdef ANDROID
-        SDLK_ESCAPE == key_code ||
-#endif
-        SDLK_DELETE == key_code) {
-      kbd->ClearKeyAction(key_action);
-      label_key->SetText(_("None"));
-      ctrl_box->SetValue(false);
-      alt_box->SetValue(false);
-      shift_box->SetValue(false);
-
-      // A simple NeedRedraw would reset the packing
-      Pack();
-      NeedRedrawing();
-      return true;
-    }
-
     SDLMod mod_bits = SDL_GetModState();
     bool has_shift = mod_bits & KMOD_SHIFT;
     bool has_alt = mod_bits & KMOD_ALT;
@@ -141,6 +123,21 @@ public:
       if (key_code == SDLK_RIGHT) key_code = SDLK_DOWN;
     }
 #endif
+
+    // Reset some configs if pure backspace is pressed
+    if ((SDLK_BACKSPACE == key_code || SDLK_DELETE == key_code) &&
+        !has_ctrl && !has_alt && !has_shift) {
+      kbd->ClearKeyAction(key_action);
+      label_key->SetText(_("None"));
+      ctrl_box->SetValue(false);
+      alt_box->SetValue(false);
+      shift_box->SetValue(false);
+
+      // A simple NeedRedraw would reset the packing
+      Pack();
+      NeedRedrawing();
+      return true;
+    }
 
     for (std::vector<ControlItem*>::const_iterator it = selves->begin();
          it != selves->end();
