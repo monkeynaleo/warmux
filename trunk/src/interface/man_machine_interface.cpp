@@ -1084,6 +1084,8 @@ ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const st
   if(name == "minimap_from_game") return KEY_MINIMAP_FROM_GAME;
   if(name == "decrease_minimap") return KEY_DECREASE_MINIMAP;
   if(name == "increase_minimap") return KEY_INCREASE_MINIMAP;
+  if(name == "decrease_volume") return KEY_DECREASE_VOLUME;
+  if(name == "increase_volume") return KEY_INCREASE_VOLUME;
   if(name == "screenshot") return KEY_SCREENSHOT;
 
   return KEY_NONE;
@@ -1204,4 +1206,3 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
 
   return _("None");
 }
-
