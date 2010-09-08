@@ -86,7 +86,7 @@ float AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, const Charac
 {
   float min_rating = RateDamageDoneToEnemy(min_damage, enemy);
   float max_rating = RateDamageDoneToEnemy(max_damage, enemy);
-  return (min_rating + max_rating) / 2;
+  return (min_rating + max_rating)* 0.5f;
 }
 
 float AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
@@ -98,7 +98,7 @@ float AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     float distance = position.Distance(character->GetCenter());
     distance += expected_additional_distance;
-    if(distance < 1.0f)
+    if (distance < 1.0f)
       distance = 1.0f;
     Double Dist = distance;
     float min_damage = GetDamageFromExplosion(config, Dist);
@@ -360,9 +360,8 @@ static const Point2i GetFirstContact(const Character & character_to_ignore,
   do {
     pos = trajectory.GetPositionAt(time);
     float pixel_per_second = trajectory.GetSpeedAt(time);
-    float seconds_per_pixel = 1 / pixel_per_second;
-    time += STEP_IN_PIXEL*seconds_per_pixel;
-  } while(IsPositionEmpty(character_to_ignore, pos, object));
+    time += STEP_IN_PIXEL / pixel_per_second;
+  } while (IsPositionEmpty(character_to_ignore, pos, object));
   return pos;
 }
 
