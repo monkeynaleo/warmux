@@ -200,9 +200,9 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   newPos *= PIXEL_PER_METER;
 
   // Compute distance between old and new position.
-  Double lg = oldPos.Distance( newPos);
+  Double lg = oldPos.SquareDistance(newPos);
 
-  MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), distance: %s",
+  MSG_DEBUG("physic.move", "%s moves (%s, %s) -> (%s, %s), square distance: %s",
             GetName().c_str(),
             Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
             Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str(),
@@ -213,6 +213,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   // Compute increments to move the object step by step from the old
   // to the new position.
+  lg = sqrt(lg)
   offset = (newPos - oldPos) / lg;
 
   // First iteration position.
