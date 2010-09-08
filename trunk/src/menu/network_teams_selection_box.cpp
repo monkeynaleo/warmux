@@ -369,4 +369,7 @@ void NetworkTeamsSelectionBox::UpdateNbTeams()
   }
 
   list_box->SetNbTeams(nb_teams);
+  // Fix scrollbox not being redrawn: this is performed *after* the
+  // screen has been refreshed, because of the callbacks
+  list_box->NeedRedrawing();
 }
