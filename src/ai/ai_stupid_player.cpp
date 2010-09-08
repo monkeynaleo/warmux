@@ -32,10 +32,10 @@
 
 const uint MAX_GAME_TIME_USED_THINKING_IN_MS = 10000;
 const uint REAL_THINK_TIME_PER_REFRESH_IN_MS = 1;
-const float MAX_GUN_DISTANCE = 600;
-const float MAX_SHOTGUN_DISTANCE = 250;
-const float MAX_SNIPER_RIFILE_DISTANCE = 10E10;
-const float MAX_SUBMACHINE_GUN_DISTANCE = 500;
+#define  MAX_GUN_DISTANCE               600
+#define  MAX_SHOTGUN_DISTANCE           250
+#define  MAX_SNIPER_RIFILE_DISTANCE   46000 // squared to int at some point => overflow!
+#define  MAX_SUBMACHINE_GUN_DISTANCE    500
 
 //#define DBG_AI_TIME
 

@@ -66,29 +66,10 @@ bool AIIdea::CanUseCharacter(const Character & character)
   return (character.IsActiveCharacter() || can_change_character);
 }
 
-LRDirection AIIdea::XDeltaToDirection(const float& delta)
+float AIIdea::GetDirectionRelativeAngle(LRDirection direction, float angle)
 {
-  if (delta < 0)
-    return DIRECTION_LEFT;
-  else
-    return DIRECTION_RIGHT;
+  return (direction == DIRECTION_LEFT) ? InverseAngleRad(angle) : angle;
 }
-
-float AIIdea::GetDirectionRelativeAngle(LRDirection direction, const float& angle)
-{
-  if (direction == DIRECTION_LEFT)
-    return InverseAngleRad(angle);
-  else
-    return angle;
-}
-
-float AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy)
-{
-  float min_rating = RateDamageDoneToEnemy(min_damage, enemy);
-  float max_rating = RateDamageDoneToEnemy(max_damage, enemy);
-  return (min_rating + max_rating) / 2;
-}
-
 
 float AIIdea::RateDamageDoneToEnemy(int damage, const Character & enemy)
 {
@@ -101,22 +82,29 @@ float AIIdea::RateDamageDoneToEnemy(int damage, const Character & enemy)
   return rating;
 }
 
-float AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
-                             const ExplosiveWeaponConfig& config,
-                             const float& expected_additional_distance)
+float AIIdea::RateDamageDoneToEnemy(int min_damage, int max_damage, const Character & enemy)
 {
-  float rating = 0.0;
+  float min_rating = RateDamageDoneToEnemy(min_damage, enemy);
+  float max_rating = RateDamageDoneToEnemy(max_damage, enemy);
+  return (min_rating + max_rating) / 2;
+}
+
+float AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
+                            const ExplosiveWeaponConfig& config,
+                            const float& expected_additional_distance)
+{
+  float rating = 0.0f;
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     float distance = position.Distance(character->GetCenter());
     distance += expected_additional_distance;
-    float min_distance = 1.0;
-    if(distance < min_distance)
-      distance = min_distance;
-    float min_damage = GetDamageFromExplosion(config, distance);
+    if(distance < 1.0f)
+      distance = 1.0f;
+    Double Dist = distance;
+    float min_damage = GetDamageFromExplosion(config, Dist);
     float max_damage = min_damage;
-    if (distance <= (int)config.blast_range) {
-      float force = GetForceFromExplosion(config, distance).tofloat();
+    if (Dist <= config.blast_range) {
+      float force = GetForceFromExplosion(config, Dist).tofloat();
       min_damage += MIN_DAMAGE_PER_FORCE_UNIT * force;
       max_damage += MAX_DAMAGE_PER_FORCE_UNIT * force;
     }
@@ -146,15 +134,19 @@ AIStrategy * WasteAmmoUnitsIdea::CreateStrategy() const
   Weapon::Weapon_type weapon_type = ActiveTeam().GetWeapon().GetType();
   int used_ammo_units = ActiveTeam().ReadNbUnits(weapon_type);
   float max_angle = -ActiveTeam().GetWeapon().GetMinAngle().tofloat();
-  return new ShootWithGunStrategy(-0.1, ActiveCharacter(), weapon_type, ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
+  return new ShootWithGunStrategy(-0.1f, ActiveCharacter(), weapon_type,
+                                  ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
 }
 
-ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting, Character & shooter, Character & enemy, Weapon::Weapon_type weapon_type, float max_distance):
-  weapons_weighting(weapons_weighting),
-  shooter(shooter),
-  enemy(enemy),
-  weapon_type(weapon_type),
-  max_distance(max_distance)
+ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting,
+                                                   Character & shooter, Character & enemy,
+                                                   Weapon::Weapon_type weapon_type,
+                                                   int max_distance)
+  : weapons_weighting(weapons_weighting)
+  , shooter(shooter)
+  , enemy(enemy)
+  , weapon_type(weapon_type)
+  , max_sq_distance(max_distance*max_distance)
 {
   // do nothing
 }
@@ -178,8 +170,8 @@ static const PhysicalObj* GetObjectAt(const Point2i & pos)
   return NULL;
 }
 
-bool ObjectLiesOnSegment(const PhysicalObj* object, const Point2i& from,
-                         const Point2i& to)
+static bool ObjectLiesOnSegment(const PhysicalObj* object,
+                                const Point2i& from, const Point2i& to)
 {
   Rectanglei r = object->GetTestRect();
   int x = r.GetPositionX() + r.GetSizeX()/2;
@@ -292,10 +284,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
   // of last weapon of the ActiveTeam() and not the future gunholePos
   // which will be select.
   // TODO: Please find an alternative to solve this tempory solution
-  Point2f departure = shooter.GetCenter();
-  Point2f arrival = enemy.GetCenter();
+  Point2i departure = shooter.GetCenter();
+  Point2i arrival = enemy.GetCenter();
 
-  if (departure.Distance(arrival) > max_distance)
+  if (departure.SquareDistance(arrival) > max_sq_distance)
     return NULL;
 
   float original_angle = departure.ComputeAngleFloat(arrival);
@@ -400,7 +392,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
 
   float strength = v_0.Norm() / PIXEL_PER_METER;
   float angle = v_0.ComputeAngleFloat();
-  LRDirection direction = XDeltaToDirection(v_0.x);
+  LRDirection direction = XDeltaToDirection(v_0.x<0);
   float shoot_angle = GetDirectionRelativeAngle(direction, angle);
   if (!weapon->IsAngleValid(shoot_angle))
     return NULL;
@@ -412,9 +404,9 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
   const PhysicalObj * aim;
   Point2i explosion_pos = GetFirstContact(shooter, trajectory, &aim);
   float rating;
-  bool explodes_on_contact = (weapon_type == Weapon::WEAPON_BAZOOKA);
+  bool explodes_on_contact = weapon_type == Weapon::WEAPON_BAZOOKA;
   if (aim == &enemy || explodes_on_contact) {
-    float expected_additional_distance = explodes_on_contact ? 0.0 : 30;
+    float expected_additional_distance = explodes_on_contact ? 0.0f : 30.0f;
     rating = RateExplosion(shooter, explosion_pos, weapon->cfg(), expected_additional_distance);
 
     // Explosions remove ground and make it possible to hit the characters behind the ground.
