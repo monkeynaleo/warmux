@@ -192,7 +192,7 @@ inline fixed_point<p> operator / (size_t a, fixed_point<p> b)
 template <int p>
 inline fixed_point<p> round(fixed_point<p> r)
 {
-  fixed_point<p> result = r>0? 0.5:-0.5;
+  fixed_point<p> result = r>0? ONE_HALF:-ONE_HALF;
   result += r;
   result /= (1<< p);
   return result.intValue;
@@ -325,6 +325,9 @@ template <int p>
 inline fixed_point<p> sqrt(fixed_point<p> a);
 
 template <int p>
+inline fixed_point<p> sqrt_approx(fixed_point<p> a);
+
+template <int p>
 inline fixed_point<p> rsqrt(fixed_point<p> a);
 
 template <int p>
@@ -398,6 +401,14 @@ inline fixed_point<16> sqrt(fixed_point<16> a)
 {
   fixed_point<16> r;
   r.intValue = fixsqrt16(a.intValue);
+  return r;
+}
+
+template <>
+inline fixed_point<16> sqrt_approx(fixed_point<16> a)
+{
+  fixed_point<16> r;
+  r.intValue = fixsqrt16_approx(a.intValue);
   return r;
 }
 
