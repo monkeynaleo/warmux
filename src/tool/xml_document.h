@@ -29,7 +29,7 @@ public:
   bool LoadFromString(const std::string &contents);
   std::string ExportToString() const;
 
-  bool IsOk() const;
+  bool IsOk() const { return doc != NULL; }
 
   // Return the *exploitable* root (use root->parent for the real one) */
   const xmlNode* GetRoot() const;
@@ -124,10 +124,6 @@ private:
 
 class XmlWriter
 {
-  /* if you need that, implement it (correctly)*/
-  XmlWriter(const XmlWriter&);
-  XmlWriter operator=(const XmlWriter&);
-  /*********************************************/
   void Reset();
 
 protected:
@@ -144,13 +140,13 @@ public:
   bool Create(const std::string &filename, const std::string &root,
               const std::string &version, const std::string &encoding);
 
-  bool IsOk() const;
+  bool IsOk() const { return m_doc && m_root; }
 
   xmlNode *GetRoot() const;
 
   xmlNode *WriteElement(xmlNode* x,
-                    const std::string &name,
-                    const std::string &value);
+                        const std::string &name,
+                        const std::string &value);
 
   void WriteComment(xmlNode* x,
                     const std::string& comment);
