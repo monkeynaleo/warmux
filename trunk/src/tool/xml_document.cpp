@@ -66,7 +66,7 @@ XmlReader::~XmlReader()
 bool XmlReader::Load(const std::string &filename)
 {
   if (!DoesFileExist(filename))
-     return false;
+    return false;
 
   Reset();
 
@@ -112,7 +112,7 @@ std::string XmlReader::ExportToString() const
   int     length  = 0;
   xmlDocDumpFormatMemoryEnc(doc, &buffer, &length,
                             NULL /* default UTF-8 encoding */, 0 /* Don't format */);
-  ASSERT (buffer != NULL);
+  ASSERT(buffer);
   std::string ret((char *)buffer, length);
   xmlFree(buffer);
   return ret;
@@ -409,7 +409,7 @@ bool XmlReader::ReadStringAttr(const xmlNode* x,
                                const std::string &name,
                                std::string &output)
 {
-  ASSERT (x != NULL);
+  ASSERT(x);
 
   xmlAttr *attr = xmlHasProp((xmlNode*)x, // cast to make libxml2 happy
                              (const xmlChar *)name.c_str()); //xmlpp::Attribute::get_attribute
@@ -541,11 +541,6 @@ bool XmlReader::ReadHexColorAttr(const xmlNode* node,
   return true;
 }
 
-bool XmlReader::IsOk() const
-{
-  return doc != NULL;
-}
-
 bool XmlReader::IsAPercentageAttr(const xmlNode * node,
                                   const std::string & attributName)
 {
@@ -563,7 +558,7 @@ const xmlNode* XmlReader::GetRoot() const
 {
   ASSERT(IsOk());
   const xmlNode* root = xmlDocGetRootElement(doc);
-  ASSERT(root != NULL);
+  ASSERT(root);
 
   return root;
 }
@@ -587,11 +582,6 @@ XmlWriter::~XmlWriter()
 {
   Save();
   Reset();
-}
-
-bool XmlWriter::IsOk() const
-{
-  return (m_doc != NULL) && (m_root != NULL);
 }
 
 xmlNode *XmlWriter::WriteElement(xmlNode* x,
@@ -625,13 +615,13 @@ bool XmlWriter::Create(const std::string &filename,const std::string &root,
   xmlDocSetRootElement(m_doc, node);
   m_root = xmlDocGetRootElement(m_doc);
 
-  ASSERT(m_root != NULL);
+  ASSERT(m_root);
   return true;
 }
 
 xmlNode* XmlWriter::GetRoot() const
 {
-  ASSERT(m_root != NULL);
+  ASSERT(m_root);
   return m_root;
 }
 
@@ -646,14 +636,14 @@ bool XmlWriter::Save()
 
 std::string XmlWriter::SaveToString() const
 {
-   xmlChar *buffer = NULL;
-   int     length  = 0;
+  xmlChar *buffer = NULL;
+  int     length  = 0;
 
-   xmlDocDumpFormatMemoryEnc(m_doc, &buffer, &length, NULL, 0);
-   ASSERT(buffer);
+  xmlDocDumpFormatMemoryEnc(m_doc, &buffer, &length, NULL, 0);
+  ASSERT(buffer);
 
-   std::string ret;
-   ret.copy((char *)buffer, length);
-   xmlFree(buffer);
-   return ret;
+  std::string ret;
+  ret.copy((char *)buffer, length);
+  xmlFree(buffer);
+  return ret;
 }
