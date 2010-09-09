@@ -407,9 +407,9 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
         for (uint v=0; v<(1U<<shift); v++) {
           Uint16 tmp = ptr[v];
           if (tmp != color_key) {
-            p0 += (tmp&0xF800)>>(11-3);
-            p1 += (tmp&0x07C0)>>(5-2);
-            p2 += (tmp&0x001F)<<3;
+            p0 += tmp&0xF800;
+            p1 += tmp&0x07C0;
+            p2 += tmp&0x001F;
             count++;
           }
         }
@@ -419,15 +419,15 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
       // Convert color_key count to alpha
       if (count) {
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-        out[4*i+0] = p0 / count;
-        out[4*i+1] = p1 / count;
-        out[4*i+2] = p2 / count;
+        out[4*i+0] = (p0 / count)>>(11-3);
+        out[4*i+1] = (p1 / count)>>(5-2);
+        out[4*i+2] = (p2 / count)<<3;
         out[4*i+3] = (255*count)>>(2*shift);
 #else
         out[4*i+0] = (255*count)>>(2*shift);
-        out[4*i+1] = p2 / count;
-        out[4*i+2] = p1 / count;
-        out[4*i+3] = p0 / count;
+        out[4*i+1] = (p2 / count)<<3;
+        out[4*i+2] = (p1 / count)>>(5-2);
+        out[4*i+3] = (p0 / count)>>(11-3);
 #endif
       } else {
         // Completely transparent
