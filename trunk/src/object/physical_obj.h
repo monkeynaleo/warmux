@@ -126,8 +126,8 @@ public:
   {
     int width = m_width - m_test_right - m_test_left;
     int height = m_height - m_test_bottom - m_test_top;
-    width  =  width == 0 ? 1 : width;
-    height = height == 0 ? 1 : height;
+    width  =  !width ? 1 : width;
+    height = !height ? 1 : height;
     return Rectanglei(GetX() + m_test_left, GetY() + m_test_top, width, height);
   }
   int GetTestWidth() const { return m_width -m_test_left -m_test_right; };
