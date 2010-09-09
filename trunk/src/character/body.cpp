@@ -504,23 +504,20 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  std::vector<Member*> layers = current_clothe->GetLayers();
-
-  // Rotate each sprite, because the next part need to know the height
-  // of the sprite once it is rotated
-  for (uint layer = 0; layer < layers.size(); layer++) {
-    if (!layers[layer]->IsNameWeapon()) {
-      layers[layer]->RotateSprite();
-    }
-  }
-
-  // Move the members to get the lowest member at the bottom of the skin rectangle
   Double y_max = 0;
+  std::vector<Member*> layers = current_clothe->GetLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
     if (member->IsNameWeapon()) {
       continue;
     }
+
+    // Rotate sprite, because the next part need to know the height
+    // of the sprite once it is rotated
+    member->RotateSprite();
+
+    // Move the members to get the lowest member at the bottom
+    // of the skin rectangle
     Double val = member->GetPosFloat().y + member->GetSprite().GetHeightMax()
                + member->GetSprite().GetRotationPoint().y;
     if (val > y_max && !member->IsGoingThroughGround()) {
