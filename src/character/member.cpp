@@ -32,18 +32,18 @@
 #include "tool/xml_document.h"
 
 Member::Member(const xmlNode *     xml,
-               const std::string & main_folder):
-  parent(NULL),
-  angle_rad(0),
-  alpha(0),
-  go_through_ground(false),
-  attached_members(),
-  pos(0,0),
-  scale(0,0),
-  spr(NULL),
-  name(""),
-  type(""),
-  anchor(0,0)
+               const std::string & main_folder)
+  : parent(NULL)
+  , angle_rad(0)
+  , alpha(0)
+  , go_through_ground(false)
+  , attached_members()
+  , pos(0,0)
+  , scale(0,0)
+  , spr(NULL)
+  , name("")
+  , type("")
+  , anchor(0,0)
 {
   if (NULL == xml) {
     return;
@@ -51,6 +51,7 @@ Member::Member(const xmlNode *     xml,
 
   XmlReader::ReadStringAttr(xml, "name", name);
   ASSERT(name!="");
+  name_is_weapon = name == "weapon";
 
   // Load the sprite
   spr = GetResourceManager().LoadSprite(xml, name, main_folder);
@@ -61,6 +62,7 @@ Member::Member(const xmlNode *     xml,
   // Get the various option
   XmlReader::ReadStringAttr(xml, "type", type);
   ASSERT(type!="");
+  type_is_weapon = type == "weapon";
 
   const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
 
@@ -125,18 +127,20 @@ Member::Member(const xmlNode *     xml,
   ResetMovement();
 }
 
-Member::Member(const Member & m):
-  parent(NULL),
-  angle_rad(m.angle_rad),
-  alpha(m.alpha),
-  go_through_ground(m.go_through_ground),
-  attached_members(),
-  pos(m.pos),
-  scale(m.scale),
-  spr(new Sprite(*m.spr)),
-  name(m.name),
-  type(m.type),
-  anchor(m.anchor)
+Member::Member(const Member & m)
+  : parent(NULL)
+  , angle_rad(m.angle_rad)
+  , alpha(m.alpha)
+  , go_through_ground(m.go_through_ground)
+  , attached_members()
+  , pos(m.pos)
+  , scale(m.scale)
+  , spr(new Sprite(*m.spr))
+  , name(m.name)
+  , type(m.type)
+  , anchor(m.anchor)
+  , name_is_weapon(m.name_is_weapon)
+  , type_is_weapon(m.type_is_weapon)
 {
   Point2i rot(anchor.x, anchor.y);
   spr->SetRotation_HotSpot(rot);
@@ -178,8 +182,9 @@ void Member::RotateSprite()
 void Member::RefreshSprite(LRDirection direction)
 {
   // The sprite pointer may be invalid at the weapon sprite.
-  ASSERT(name != "weapon" && type != "weapon");
-  ASSERT(parent != NULL || type == "body");
+  // Those are just asserts and not ASSERTs because they have never happened in fact
+  assert(!name_is_weapon && !type_is_weapon);
+  assert(parent != NULL || type == "body");
 
   if (DIRECTION_RIGHT == direction) {
     spr->SetRotation_rad(angle_rad);
@@ -197,13 +202,8 @@ void Member::Draw(const Point2i & _pos,
                   int             flip_center,
                   LRDirection     direction)
 {
-  ASSERT(name != "weapon" && type != "weapon");
-  ASSERT(parent != NULL || type == "body");
-
-  if (NULL == parent && "body" != type) {
-    std::cerr << "Error : Member " << name << " have no parent member!" << std::endl;
-    return;
-  }
+  assert(!name_is_weapon && !type_is_weapon);
+  assert(parent || type == "body");
 
   Point2i posi(pos.x, pos.y);
   posi += _pos;
@@ -218,15 +218,15 @@ void Member::Draw(const Point2i & _pos,
 void Member::ApplySqueleton(Member * parent_member)
 {
   // Place the member to shape the skeleton
-  ASSERT(parent_member != NULL);
+  assert(parent_member);
 
-  if(NULL == parent_member) {
+  if (!parent_member) {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;
     return;
   }
   parent = parent_member;
 
-  ASSERT(parent->name != "weapon" && parent->type != "weapon");
+  assert(!parent->name_is_weapon && !parent->type_is_weapon);
 
   // Set the position
   pos = parent->pos - anchor;
@@ -313,6 +313,8 @@ WeaponMember::WeaponMember(void) :
   type   = "weapon";
   spr    = NULL;
   anchor = Point2d(0.0, 0.0);
+  name_is_weapon = true;
+  type_is_weapon = true;
 }
 
 void WeaponMember::Draw(const Point2i & /*_pos*/,

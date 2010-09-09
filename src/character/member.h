@@ -55,6 +55,8 @@ protected:
   std::string name;
   std::string type;
   Point2d     anchor;
+  bool        name_is_weapon; // Store result of comparison of name to "weapon"
+  bool        type_is_weapon; // Store result of comparison of name to "weapon"
 
 public:
 
@@ -84,6 +86,8 @@ public:
 
   const Point2i GetAnchorPos() const { return Point2i(anchor.x, anchor.y); };
 
+  bool IsNameWeapon() const { return name_is_weapon; };
+  bool IsTypeWeapon() const { return type_is_weapon; };
   const std::string & GetName() const { return name; };
   const std::string & GetType() const { return type; };
 
