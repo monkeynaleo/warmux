@@ -627,12 +627,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   if (check_object && !m_go_through_objects && CollidedObjectXY(position))
     return false;
 
-  int width = m_width - m_test_right - m_test_left;
-  int height = m_height -m_test_bottom - m_test_top;
-  width  =  !width ? 1 : width;
-  height = !height ? 1 : height;
-  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-                  width, height);
+  const Rectanglei& rect = PhysicalObj::GetTestRect();
 
   return GetWorld().RectIsInVacuum (rect);
 }
@@ -642,8 +637,7 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
   if (IsOutsideWorldXY(position))
     return NULL;
 
-  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-                 m_width - m_test_right - m_test_left, m_height - m_test_bottom - m_test_top);
+  const Rectanglei& rect = PhysicalObj::GetTestRect();
 
   if (m_collides_with_characters) {
     FOR_ALL_LIVING_CHARACTERS(team,character) {
