@@ -203,6 +203,7 @@ fixint_t fixasin16(fixint_t a);
 fixint_t fixatan16(fixint_t a);
 fixint_t fixrsqrt16(fixint_t a);
 fixint_t fixsqrt16(fixint_t a);
+fixint_t fixsqrt16_approx(fixint_t a);
 
 } // end namespace fixedpoint
 

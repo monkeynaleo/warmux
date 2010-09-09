@@ -171,14 +171,25 @@ fixint_t fixsqrt16(fixint_t a)
   if (a < 1<<7) {
     return 0;
   }
-  fixint_t s;
-  fixint_t i;
-  s = (a + (1<<16)) >> 1;
+  fixint_t s = (a + (1<<16)) >> 1;
   /* 6 iterations to converge */
-  for (i = 0; i < 20; i++) {
+  for (int i = 0; i < 20; i++) {
     s = (s + (a<<16) / s) >> 1;
   }
-  return  s ;
+  return s;
+}
+
+fixint_t fixsqrt16_approx(fixint_t a)
+{
+  if (a < 1<<7) {
+    return 0;
+  }
+  fixint_t s = (a + (1<<16)) >> 1;
+  /* 6 iterations to converge */
+  for (int i = 0; i < 6; i++) {
+    s = (s + (a<<16) / s) >> 1;
+  }
+  return s;
 }
 
 } // end namespace fixedpoint
