@@ -26,7 +26,6 @@
 #include "character/character.h"
 #include "character/clothe.h"
 #include "character/member.h"
-//#include "character/movement.h"
 #include "game/time.h"
 #include "graphic/sprite.h"
 #include "interface/mouse.h"
@@ -37,7 +36,6 @@
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
-//#include "tool/xml_document.h"
 
 Body::Body(const xmlNode *     xml,
            const std::string & main_folder):
@@ -506,23 +504,23 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  int layersCount = (int)current_clothe->GetLayers().size();
+  std::vector<Member*> layers = current_clothe->GetLayers();
 
   // Rotate each sprite, because the next part need to know the height
   // of the sprite once it is rotated
-  for (int layer = 0; layer < layersCount; layer++) {
-    if (!current_clothe->GetLayers()[layer]->IsNameWeapon()) {
-      current_clothe->GetLayers()[layer]->RotateSprite();
+  for (uint layer = 0; layer < layers.size(); layer++) {
+    if (!layers[layer]->IsNameWeapon()) {
+      layers[layer]->RotateSprite();
     }
   }
 
   // Move the members to get the lowest member at the bottom of the skin rectangle
   Double y_max = 0;
-  for (int lay=0; lay < layersCount; lay++) {
-    if (current_clothe->GetLayers()[lay]->IsNameWeapon()) {
+  for (uint lay=0; lay < layers.size(); lay++) {
+    Member *member = layers[lay];
+    if (member->IsNameWeapon()) {
       continue;
     }
-    Member *member = current_clothe->GetLayers()[lay];
     Double val = member->GetPosFloat().y + member->GetSprite().GetHeightMax()
                + member->GetSprite().GetRotationPoint().y;
     if (val > y_max && !member->IsGoingThroughGround()) {
@@ -546,9 +544,9 @@ void Body::RefreshSprites()
     return;
 #endif
 
-  uint layersCount = current_clothe->GetLayers().size();
-  for (uint layer=0; layer < layersCount; layer++) {
-    Member* member = current_clothe->GetLayers()[layer];
+  std::vector<Member*> layers = current_clothe->GetLayers();
+  for (uint layer=0; layer < layers.size(); layer++) {
+    Member* member = layers[layer];
 
     if (!member->IsNameWeapon()) {
       member->RefreshSprite(direction);
@@ -587,18 +585,19 @@ void Body::Draw(const Point2i & _pos)
   int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
-  for (int layer=0; layer < (int)current_clothe->GetLayers().size() ;layer++) {
-
-    if (current_clothe->GetLayers()[layer]->IsNameWeapon()) {
+  std::vector<Member*> layers = current_clothe->GetLayers();
+  for (uint layer=0; layer < layers.size() ;layer++) {
+    Member *member = layers[layer];
+    if (member->IsNameWeapon()) {
       // We draw the weapon member only if currently drawing the active character
       if (owner->IsActiveCharacter()) {
         ASSERT(draw_weapon_member == 0);
-        ASSERT(current_clothe->GetLayers()[layer] == weapon_member);
+        ASSERT(member == weapon_member);
         DrawWeaponMember(_pos);
         draw_weapon_member++;
       }
     } else {
-      current_clothe->GetLayers()[layer]->Draw(_pos, _pos.x + GetSize().x/2, direction);
+      member->Draw(_pos, _pos.x + GetSize().x/2, direction);
     }
   }
 
@@ -618,21 +617,22 @@ void Body::AddChildMembers(Member * parent)
 
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
+  std::vector<Member*> layers = current_clothe->GetLayers();
   for ( ; child != parent->GetAttachedMembers().end(); ++child) {
 
     // Find if the current clothe uses this member:
-    for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++) {
-
-      if (current_clothe->GetLayers()[lay]->GetType() == child->first) {
+    for (uint lay = 0; lay < layers.size(); lay++) {
+      Member *member = layers[lay];
+      if (member->GetType() == child->first) {
         // This child member is attached to his parent
         junction * body = new junction();
-        body->member = current_clothe->GetLayers()[lay];
+        body->member = member;
         body->parent = parent;
         skel_lst.push_back(body);
 
         // continue recursively
-        if (0 != current_clothe->GetLayers()[lay]->GetAttachedMembers().size()) {
-          AddChildMembers(current_clothe->GetLayers()[lay]);
+        if (!member->GetAttachedMembers().empty()) {
+          AddChildMembers(member);
         }
       }
     }
@@ -647,19 +647,21 @@ void Body::BuildSqueleton()
   FreeSkeletonVector();
 
   // Find the "body" member as it is the top of the skeleton
-  for (uint lay = 0; lay < current_clothe->GetLayers().size(); lay++) {
-    if (current_clothe->GetLayers()[lay]->GetType() == "body") {
+  std::vector<Member*> layers = current_clothe->GetLayers();
+  for (uint lay = 0; lay < layers.size(); lay++) {
+    Member *member = layers[lay];
+    if (member->GetType() == "body") {
 
       // TODO lami : overwrite junction constructor
       junction * body = new junction();
-      body->member = current_clothe->GetLayers()[lay];
+      body->member = member;
       body->parent = NULL;
       skel_lst.push_back(body);
       break;
     }
   }
 
-  if (0 == skel_lst.size()) {
+  if (skel_lst.empty()) {
     std::cerr << "Unable to find the \"body\" member in the current clothe" << std::endl;
     ASSERT(false);
   }
