@@ -36,6 +36,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <stdio.h>
 #include "fixed_func.h"
 
 namespace fixedpoint {
@@ -171,9 +172,18 @@ fixint_t fixsqrt16(fixint_t a)
   if (a < 1<<7) {
     return 0;
   }
+
+#if 0
+  static fixint_t max = 0;
+  if (max < a) {
+    printf("max: %"PRIi64"\n", a);
+    max = a;
+  }
+#endif
+
   fixint_t s = (a + (1<<16)) >> 1;
-  /* 6 iterations to converge */
-  for (int i = 0; i < 20; i++) {
+  /* 14 iterations to find exact value for max 948015267840 */
+  for (int i = 0; i < 14; i++) {
     s = (s + (a<<16) / s) >> 1;
   }
   return s;
