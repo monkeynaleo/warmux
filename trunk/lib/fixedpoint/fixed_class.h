@@ -192,7 +192,7 @@ inline fixed_point<p> operator / (size_t a, fixed_point<p> b)
 template <int p>
 inline fixed_point<p> round(fixed_point<p> r)
 {
-  fixed_point<p> result = r>0? ONE_HALF:-ONE_HALF;
+  fixed_point<p> result = r>0? 0.5:-0.5;
   result += r;
   result /= (1<< p);
   return result.intValue;
