@@ -26,6 +26,8 @@
 #include <WORMUX_point.h>
 #include <WORMUX_types.h>
 
+#include "tool/math_tools.h"
+
 typedef struct _xmlNode xmlNode;
 
 class member_mvt
@@ -35,14 +37,7 @@ public:
   Point2d pos;
   Point2d scale;
   /* SetAngle take radian values */
-  inline void SetAngle(Double angle)
-  {
-    while (angle_rad > TWO_PI)
-      angle_rad -= TWO_PI;
-    while (angle_rad <= -TWO_PI)
-      angle_rad += TWO_PI;
-    angle_rad = angle;
-  }
+  inline void SetAngle(Double angle) { angle_rad = RestrictAngle(angle); }
   /* GetAngle returns radian values */
   inline const Double &GetAngle() const { return angle_rad; }
   Double alpha;
