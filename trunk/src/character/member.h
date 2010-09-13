@@ -44,7 +44,7 @@ typedef struct attachment
     }
   }
 
-  void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad)
+  inline void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad)
   {
     if (ZERO != radius) {
       Double angle_init = angle + angle_rad;
