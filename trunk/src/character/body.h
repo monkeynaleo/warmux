@@ -44,127 +44,124 @@ typedef struct _xmlNode xmlNode;
  * copy constructor, this is really suspect.... */
 class c_junction
 {
-  public:
-    Member * member;
-    Member * parent;
+public:
+  Member * member;
+  Member * parent;
 
-    c_junction():
-      member(NULL),
-      parent(NULL) {};
+  c_junction():
+    member(NULL),
+    parent(NULL) {};
 };
 
 typedef class c_junction junction;
 
 class Body
 {
-  private:
-    /* If you need this, implement it (correctly) */
-    const Body & operator = (const Body & obj);
-    /**********************************************/
-    friend class BodyList;
+private:
+  friend class BodyList;
 
-    std::map<std::string, Member *>   members_lst;
-    std::map<std::string, Clothe *>   clothes_lst;
-    std::map<std::string, Movement *> mvt_lst;
-    const Clothe *                    current_clothe;
-    Movement *                        current_mvt;
-    uint                              current_loop;
-    uint                              current_frame;
+  std::map<std::string, Member *>   members_lst;
+  std::map<std::string, Clothe *>   clothes_lst;
+  std::map<std::string, Movement *> mvt_lst;
+  const Clothe *                    current_clothe;
+  Movement *                        current_mvt;
+  uint                              current_loop;
+  uint                              current_frame;
 
-    // When a movement/clothe is played once, those variables save the previous state
-    const Clothe *                    previous_clothe;
-    Movement *                        previous_mvt;
+  // When a movement/clothe is played once, those variables save the previous state
+  const Clothe *                    previous_clothe;
+  Movement *                        previous_mvt;
 
-    // For weapon position handling
-    Member *                          weapon_member;
+  // For weapon position handling
+  Member *                          weapon_member;
 
-    // Time elapsed since last refresh
-    uint                              last_refresh;
+  // Time elapsed since last refresh
+  uint                              last_refresh;
 
-    bool                              walking;
-    Double                            main_rotation_rad;
-    std::vector<junction *>           skel_lst; // Body skeleton:
-                                                // Order to use to build the body
-                                                // First element: member to build
-                                                // Secnd element: parent member
-    LRDirection                       direction;
-    int                               animation_number;
-    bool                              need_rebuild;
-    const Character *                 owner;
-    const xmlNode *                   mainXmlNode;
-    const std::string                 mainFolder;
+  bool                              walking;
+  Double                            main_rotation_rad;
+  std::vector<junction *>           skel_lst; // Body skeleton:
+                                              // Order to use to build the body
+                                              // First element: member to build
+                                              // Secnd element: parent member
+  LRDirection                       direction;
+  int                               animation_number;
+  bool                              need_rebuild;
+  const Character *                 owner;
+  const xmlNode *                   mainXmlNode;
+  const std::string                 mainFolder;
 
-    void ResetMovement() const;
-    void ApplyMovement(Movement * mvt,
-                       uint       frame);
-    void ApplySqueleton();
+  void ResetMovement() const;
+  void ApplyMovement(Movement * mvt,
+                     uint       frame);
+  void ApplySqueleton();
 
-    void ProcessFollowCrosshair(member_mvt & mb_mvt);
-    void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
-    void ProcessFollowSpeed(member_mvt & mb_mvt);
-    void ProcessFollowDirection(member_mvt & mb_mvt);
-    void ProcessFollowCursor(member_mvt & mb_mvt,
-                             Member *     member);
+  void ProcessFollowCrosshair(member_mvt & mb_mvt);
+  void ProcessFollowHalfCrosshair(member_mvt & mb_mvt);
+  void ProcessFollowSpeed(member_mvt & mb_mvt);
+  void ProcessFollowDirection(member_mvt & mb_mvt);
+  void ProcessFollowCursor(member_mvt & mb_mvt,
+                           Member *     member);
 
-    void BuildSqueleton();
-    void AddChildMembers(Member * parent);
-    void DrawWeaponMember(const Point2i & _pos);
-    void LoadMembers(xmlNodeArray &      nodes,
-                     const std::string & main_folder);
-    void LoadClothes(xmlNodeArray &  nodes,
+  void BuildSqueleton();
+  void AddChildMembers(Member * parent);
+  void DrawWeaponMember(const Point2i & _pos);
+  void LoadMembers(xmlNodeArray &      nodes,
+                   const std::string & main_folder);
+  void LoadClothes(xmlNodeArray &  nodes,
+                   const xmlNode * xml);
+  void LoadMovements(xmlNodeArray &  nodes,
                      const xmlNode * xml);
-    void LoadMovements(xmlNodeArray &  nodes,
-                       const xmlNode * xml);
-    void FreeSkeletonVector();
+  void FreeSkeletonVector();
 
-  public:
-    Body(const xmlNode *     xml,
-         const std::string & main_folder);
-    Body(const Body & cpy);
-    void Init(void);
-    ~Body();
+public:
+  Body(const xmlNode *     xml,
+       const std::string & main_folder);
+  Body(const Body & cpy);
+  void Init(void);
+  ~Body();
 
-    //// MISC
-    void                    Draw(const Point2i & pos);
-    void                    PlayAnimation();
-    void                    Build();
-    void                    UpdateWeaponPosition(const Point2i & pos);
-    void                    RefreshSprites();
-    void                    StartWalking();
-    void                    StopWalking();
-    bool                    IsWalking() const { return walking; };
-    void                    MakeParticles(const Point2i & pos);
-    void                    MakeTeleportParticles(const Point2i & pos,
-                                                  const Point2i & dst);
-    void                    DebugState() const;
-    void                    Rebuild(void) { need_rebuild = true; }
+  //// MISC
+  void                    Draw(const Point2i & pos);
+  void                    PlayAnimation();
+  void                    Build();
+  void                    UpdateWeaponPosition(const Point2i & pos);
+  void                    RefreshSprites();
+  void                    StartWalking();
+  void                    StopWalking();
+  bool                    IsWalking() const { return walking; };
+  void                    MakeParticles(const Point2i & pos);
+  void                    MakeTeleportParticles(const Point2i & pos,
+                                                const Point2i & dst);
+  void                    DebugState() const;
+  void                    Rebuild(void) { need_rebuild = true; }
 
-    //// SETTERS
-    void                    SetClothe(const std::string & name);
-    void                    SetMovement(const std::string & name);
-    // use this only during one movement ...
-    void                    SetClotheOnce(const std::string & name);
-    // play the movement only once ...
-    void                    SetMovementOnce(const std::string & name);
-    void                    SetRotation(Double angle);
-    void                    SetFrame(uint no);
-    void                    SetDirection(LRDirection dir)    { direction = dir;      };
-    inline void             SetOwner(const Character * belonger) { owner     = belonger; };
+  //// SETTERS
+  void                    SetClothe(const std::string & name);
+  void                    SetMovement(const std::string & name);
+  // use this only during one movement ...
+  void                    SetClotheOnce(const std::string & name);
+  // play the movement only once ...
+  void                    SetMovementOnce(const std::string & name);
+  void                    SetRotation(Double angle);
+  void                    SetFrame(uint no);
+  void                    SetDirection(LRDirection dir)    { direction = dir;      };
+  inline void             SetOwner(const Character * belonger) { owner     = belonger; };
 
-    //// GETTERS
-    static Point2i          GetSize() { return Point2i(30,45); };
-    const std::string &     GetMovement() const;
-    const std::string &     GetClothe() const;
-    std::string             GetFrameLoop() const;
-    void                    GetTestRect(uint & l,
-                                        uint & r,
-                                        uint & t,
-                                        uint & b) const;
-    const LRDirection & GetDirection() const { return direction; };
-    void                    GetRelativeHandPosition(Point2i & result) const;
-    uint                    GetMovementDuration() const;
-    uint                    GetFrame() const { return current_frame; };
-    uint                    GetFrameCount() const;
+  //// GETTERS
+  static Point2i          GetSize() { return Point2i(30,45); };
+  const std::string &     GetMovement() const;
+  const std::string &     GetClothe() const;
+  std::string             GetFrameLoop() const;
+  void                    GetTestRect(uint & l,
+                                      uint & r,
+                                      uint & t,
+                                      uint & b) const;
+  const LRDirection & GetDirection() const { return direction; };
+  void                    GetRelativeHandPosition(Point2i & result) const;
+  uint                    GetMovementDuration() const;
+  uint                    GetFrame() const { return current_frame; };
+  uint                    GetFrameCount() const;
 };
 
 #endif //BODY_H
