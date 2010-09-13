@@ -637,6 +637,30 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   return GetWorld().RectIsInVacuum (rect);
 }
 
+inline bool PhysicalObj::Intersect(const PhysicalObj *object, const Rectanglei & rect) const
+{
+  int dim = object->m_width - object->m_test_right - object->m_test_left;
+  dim = dim ? dim : 1;
+
+  int obj_test1 = object->GetX() + object->m_test_left;
+  int obj_test2 = obj_test1 + dim - 1;
+  int test1 = rect.GetPositionX();
+  int test2 = test1 + rect.GetSizeX() - 1;
+
+  if (obj_test2 >= test1 && obj_test1 <= test2) {
+    dim = object->m_height - object->m_test_bottom - object->m_test_top;
+    dim = dim ? dim : 1;
+    obj_test1 = object->GetY() + object->m_test_top;
+    obj_test2 = obj_test1 + dim - 1;
+    test1 = rect.GetPositionY();
+    test2 = test1 + rect.GetSizeY() - 1;
+
+    if (obj_test2 >= test1 && obj_test1 <= test2)
+      return true;
+  }
+  return false;
+}
+
 PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
 {
   if (IsOutsideWorldXY(position))
@@ -647,21 +671,23 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
 
   if (m_collides_with_characters) {
     FOR_ALL_LIVING_CHARACTERS(team,character) {
-      // We check both objet if one overlapse the other
+      // We check both objet if one overlapses the other
       if (&(*character) != this && !IsOverlapping(&(*character)) &&
-          !character->IsOverlapping(this) && character->GetTestRect().Intersect(rect))
+          !character->IsOverlapping(this) && Intersect(&(*character), rect)) {
         return (PhysicalObj*) &(*character);
+      }
     }
   }
 
   if (m_collides_with_objects) {
     FOR_EACH_OBJECT(it) {
       PhysicalObj * object=*it;
-      // We check both objet if one overlapse the other
-      if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this) &&
-          object->m_collides_with_objects && object->GetTestRect().Intersect(rect)) {
-        if (!m_is_character || object->m_collides_with_characters)
-          return object;
+      // We check both objet if one overlapses the other
+      if (!m_is_character || object->m_collides_with_characters) {
+	if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this) &&
+            object->m_collides_with_objects && Intersect(object, rect)) {
+	  return object;
+	}
       }
     }
   }
