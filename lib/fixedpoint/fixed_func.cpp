@@ -194,8 +194,17 @@ fixint_t fixsqrt16_approx(fixint_t a)
   if (a < 1<<7) {
     return 0;
   }
+
+#if 0
+  static fixint_t max = 0;
+  if (max < a) {
+    printf("max: %"PRIi64"\n", a);
+    max = a;
+  }
+#endif
+
   fixint_t s = (a + (1<<16)) >> 1;
-  /* 6 iterations to converge */
+  /* 6 iterations to find exact value for max 34668544 */
   for (int i = 0; i < 6; i++) {
     s = (s + (a<<16) / s) >> 1;
   }
