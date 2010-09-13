@@ -247,25 +247,22 @@ void Member::ApplyMovement(const member_mvt &        mvt,
   // Apply the movment to the member,
   // And apply the movement accordingly to the child members
 
-  uint frame = 0;
+  // spr == NULL when Member is the weapon
+  uint frame = (spr) ? spr->GetCurrentFrame() : 0;
 
-  if (NULL != spr) { // spr == NULL when Member is the weapon
-    frame = spr->GetCurrentFrame();
-  }
-
-  Double radius;
-
-  // We first apply to the child (makes calcules simpler in this order):
+  // We first apply to the child (makes computations simpler in this order):
+  bool check = mvt.GetAngle() != ZERO;
   for (std::map<std::string, v_attached>::iterator child = attached_members.begin();
-      child != attached_members.end();
-      ++child) {
+       child != attached_members.end();
+       ++child) {
 
     // Find this member in the skeleton:
-    for (std::vector<junction *>::iterator member = skel_lst.begin();
-        member != skel_lst.end();
-        ++member) {
+    for (std::vector<junction *>::iterator junction = skel_lst.begin();
+         junction != skel_lst.end();
+         ++junction) {
 
-      if ((*member)->member->type != child->first) {
+      Member *member = (*junction)->member;
+      if (member->type != child->first) {
         continue;
       }
 
@@ -274,9 +271,9 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
 
-      if (mvt.GetAngle() != ZERO) {
+      if (check) {
         Point2d child_delta = child->second[frame] - anchor;
-        radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
+        Double radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
         if (ZERO != radius) {
           radius = sqrt_approx(radius);
           Double angle_init = child_delta.ComputeAngle() + angle_rad;
@@ -287,8 +284,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       }
 
       // Apply recursively to children:
-      (*member)->member->ApplyMovement(child_mvt, skel_lst);
-
+      member->ApplyMovement(child_mvt, skel_lst);
     }
   }
 
