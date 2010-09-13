@@ -27,6 +27,7 @@
 
 #include <SDL.h>
 #include <vector>
+#include <assert.h>
 #include <WORMUX_base.h>
 #include <WORMUX_debug.h>
 #include "spritecache.h"
@@ -158,7 +159,7 @@ public:
   void SetRotation_rad( Double angle_rad);
   const Double &GetRotation_rad() const
   {
-    ASSERT(rotation_rad > -TWO_PI && rotation_rad <= TWO_PI);
+    assert(rotation_rad > -TWO_PI && rotation_rad <= TWO_PI);
     return rotation_rad;
   }
   void SetRotation_HotSpot(const Point2i& new_hotspot);
