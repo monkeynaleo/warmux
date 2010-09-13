@@ -25,7 +25,46 @@
 #include <WORMUX_point.h>
 #include "character/body.h"
 
-typedef std::vector<Point2d> v_attached;
+typedef struct attachment
+{
+  Point2d point;
+  Double  radius;
+  Double  angle;
+
+  attachment(const Point2d& val)
+    : point(val), radius(ZERO), angle(ZERO) { }
+
+  void SetAnchor(const Point2d& anchor)
+  {
+    Point2d child_delta = point - anchor;
+    radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
+    if (ZERO != radius) {
+      radius = sqrt_approx(radius);
+      angle = child_delta.ComputeAngle();
+    }
+  }
+
+  void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad)
+  {
+    if (ZERO != radius) {
+      Double angle_init = angle + angle_rad;
+      Double angle_new  = angle_init + mvt_angle;
+      pos.x  += radius * (cos(angle_new) - cos(angle_init));
+      pos.y  += radius * (sin(angle_new) - sin(angle_init));
+    }
+  }
+} attachment;
+
+class v_attached : public std::vector<attachment>
+{
+public:
+  void SetAnchor(const Point2d& anchor)
+  {
+    std::vector<attachment>::iterator it = begin();
+    for (; it != end(); ++it)
+      it->SetAnchor(anchor);
+  }
+};
 
 // Forward declaration
 class Sprite;

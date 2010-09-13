@@ -124,6 +124,10 @@ Member::Member(const xmlNode *     xml,
     }
   }
 
+  std::map<std::string, v_attached>::iterator attachment_it = attached_members.begin();
+  for (; attachment_it != attached_members.end(); ++attachment_it)
+    attachment_it->second.SetAnchor(anchor);
+  
   ResetMovement();
 }
 
@@ -142,8 +146,7 @@ Member::Member(const Member & m)
   , name_is_weapon(m.name_is_weapon)
   , type_is_weapon(m.type_is_weapon)
 {
-  Point2i rot(anchor.x, anchor.y);
-  spr->SetRotation_HotSpot(rot);
+  spr->SetRotation_HotSpot(Point2i(anchor.x, anchor.y));
 
   // TODO: Move ! ... No process in any constructor !
   for (std::map<std::string, v_attached>::const_iterator it = m.attached_members.begin();
@@ -151,6 +154,11 @@ Member::Member(const Member & m)
       ++it) {
     attached_members[it->first] = it->second;
   }
+
+  std::map<std::string, v_attached>::iterator attachment_it = attached_members.begin();
+  for (; attachment_it != attached_members.end(); ++attachment_it)
+    attachment_it->second.SetAnchor(anchor);
+
   ResetMovement();
 }
 
@@ -234,7 +242,7 @@ void Member::ApplySqueleton(Member * parent_member)
   std::map<std::string, v_attached>::iterator itAttachedMember = parent->attached_members.find(type);
 
   if (itAttachedMember != parent->attached_members.end()) {
-    pos += itAttachedMember->second[parent->spr->GetCurrentFrame()];
+    pos += itAttachedMember->second[parent->spr->GetCurrentFrame()].point;
   }
 }
 
@@ -272,15 +280,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.pos = mvt.pos;
 
       if (check) {
-        Point2d child_delta = child->second[frame] - anchor;
-        Double radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
-        if (ZERO != radius) {
-          radius = sqrt_approx(radius);
-          Double angle_init = child_delta.ComputeAngle() + angle_rad;
-          Double angle_new  = angle_init + mvt.GetAngle();
-          child_mvt.pos.x  += radius * (cos(angle_new) - cos(angle_init));
-          child_mvt.pos.y  += radius * (sin(angle_new) - sin(angle_init));
-        }
+        child->second[frame].Propagate(child_mvt.pos, mvt.GetAngle(), angle_rad);
       }
 
       // Apply recursively to children:
