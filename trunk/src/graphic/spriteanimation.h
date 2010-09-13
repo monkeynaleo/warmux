@@ -30,6 +30,8 @@
 
 class Sprite;
 
+#define SPEED_BITS  8
+
 class SpriteAnimation
 {
 public:
@@ -44,7 +46,7 @@ private:
 
   // Speed
   unsigned int last_update;
-  Double speed_factor;
+  int speed_factor;
   int frame_delta; // Used in Update() to get next frame
   int loop_wait;
   int loop_wait_random;
@@ -69,7 +71,7 @@ public:
   void CalculateWait();
 
   // Control speed
-  void SetSpeedFactor(Double nv_speed) { speed_factor = nv_speed; }
+  void SetSpeedFactor(Double nv_speed) { speed_factor = nv_speed<<SPEED_BITS; }
 
   // Control options
   void SetPlayBackward(bool enable) { frame_delta = enable ? -1 : 1; }
