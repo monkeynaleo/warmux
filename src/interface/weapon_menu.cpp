@@ -296,17 +296,17 @@ void WeaponsMenu::RefreshWeaponList()
   tools_menu->ResetTransformation();
   // Refreshing Weapons menu
 
-  std::vector<PolygonItem *>& items = weapons_menu->GetItem();
-  std::vector<PolygonItem *>::const_iterator item = items.begin();
-  for (; item != items.end(); item++) {
+  const std::vector<PolygonItem *>& weapons = weapons_menu->GetItem();
+  std::vector<PolygonItem *>::const_iterator item = weapons.begin();
+  for (; item != weapons.end(); item++) {
     delete (*item);
   }
   weapons_menu->ClearItem(false);
 
   // Tools menu
-  items = tools_menu->GetItem();
-  item = items.begin();
-  for (; item != items.end(); item++) {
+  const std::vector<PolygonItem *>& tools = tools_menu->GetItem();
+  item = tools.begin();
+  for (; item != tools.end(); item++) {
     delete (*item);
   }
   tools_menu->ClearItem(false);
