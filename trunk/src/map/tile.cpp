@@ -188,8 +188,8 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 
 void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
 {
+  Rectanglei rec(pos, spr->GetSizeMax());
   uint8_t    bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
-  Rectanglei rec       = Rectanglei(pos, spr->GetSizeMax());
   Point2i    firstCell = Clamp(pos/CELL_SIZE);
   Point2i    lastCell  = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
   Surface    s         = spr->GetSurface();
