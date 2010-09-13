@@ -134,6 +134,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
   txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
                                    GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
+
 void SpinButtonWithPicture::RecreateTorus()
 {
   #define OPEN_ANGLE 0.96f // 55
