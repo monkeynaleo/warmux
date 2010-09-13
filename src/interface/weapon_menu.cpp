@@ -296,8 +296,8 @@ void WeaponsMenu::RefreshWeaponList()
   tools_menu->ResetTransformation();
   // Refreshing Weapons menu
 
-  std::vector<PolygonItem *> items = weapons_menu->GetItem();
-  std::vector<PolygonItem *>::iterator item = items.begin();
+  std::vector<PolygonItem *>& items = weapons_menu->GetItem();
+  std::vector<PolygonItem *>::const_iterator item = items.begin();
   for (; item != items.end(); item++) {
     delete (*item);
   }
@@ -385,10 +385,10 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)
 {
   if (!show)
     return false;
-  std::vector<PolygonItem *> items = poly->GetItem();
+  const std::vector<PolygonItem *>& items = poly->GetItem();
   WeaponMenuItem * tmp;
   Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-  std::vector<PolygonItem *>::iterator item = items.begin();
+  std::vector<PolygonItem *>::const_iterator item = items.begin();
   for (; item != items.end(); item++) {
     tmp = (WeaponMenuItem *)(*item);
     if (tmp->IsMouseOver()) {

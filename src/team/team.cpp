@@ -292,8 +292,8 @@ void Team::PrepareTurn()
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Updating weapon ammos (some weapons are not available from the beginning)
-  std::list<Weapon *> l_weapons_list = weapons_list->GetList() ;
-  std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
+  const std::list<Weapon *>& l_weapons_list = weapons_list->GetList() ;
+  std::list<Weapon *>::const_iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
   for (; itw != end ; ++itw) {
     if ((*itw)->AvailableAfterTurn() == (int)current_turn) {
@@ -394,9 +394,9 @@ void Team::LoadGamingData(WeaponsList * weapons)
   // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
-  std::list<Weapon *> l_weapons_list = weapons_list->GetList() ;
-  std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
-  end = l_weapons_list.end();
+  const std::list<Weapon *>& l_weapons_list = weapons_list->GetList() ;
+  std::list<Weapon *>::const_iterator itw = l_weapons_list.begin(),
+                                      end = l_weapons_list.end();
 
   m_nb_ammos.assign(l_weapons_list.size(), 0);
   m_nb_units.assign(l_weapons_list.size(), 0);
