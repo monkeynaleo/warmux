@@ -673,7 +673,6 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
                               small_background_interface.GetWidth(),
                               small_background_interface.GetHeight());
       if (small_button.Contains(mouse_pos)) {
-        ActionShoot(true);
         return true;
       }
     }
@@ -728,7 +727,6 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
                               small_background_interface.GetWidth(),
                               small_background_interface.GetHeight());
       if (small_button.Contains(mouse_pos)) {
-        ActionShoot(false);
         return true;
       }
     }
