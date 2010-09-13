@@ -173,7 +173,7 @@ static const PhysicalObj* GetObjectAt(const Point2i & pos)
 static bool ObjectLiesOnSegment(const PhysicalObj* object,
                                 const Point2i& from, const Point2i& to)
 {
-  Rectanglei r = object->GetTestRect();
+  const Rectanglei& r = object->GetTestRect();
   const Point2i& center = object->GetCenter();
 
   if (from.y == to.y) {

@@ -110,7 +110,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       // Was it released after a drag operation?
       if (old_mode!=SCROLL_MODE_NONE /*&& start_drag_y != mousePosition.y*/)
         return this;
-      Rectanglei scroll_track = GetScrollTrack();
+      const Rectanglei& scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
         int height = scroll_track.GetSizeY();
@@ -151,7 +151,7 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
     if (GetScrollThumb().Contains(mousePosition)) {
       if (!offset) {
         // Not yet set, derive from mouse position
-        Rectanglei scroll_track = GetScrollTrack();
+        const Rectanglei& scroll_track = GetScrollTrack();
         int height = scroll_track.GetSizeY();
         offset = ( (mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset())
                    + (height/2) ) / height;
@@ -242,7 +242,7 @@ Rectanglei ScrollBox::GetScrollTrack() const
 Rectanglei ScrollBox::GetScrollThumb() const
 {
   // Height: (part of the vbox that is displayed / vbox size) * scrollbar height
-  Rectanglei scroll_track = GetScrollTrack();
+  const Rectanglei& scroll_track = GetScrollTrack();
   uint tmp_h = ((size.y - 2*border_size) * scroll_track.GetSizeY())
              / ((size.y - 2*border_size) + GetMaxOffset());
   // Start position: from the offset
@@ -301,7 +301,7 @@ void ScrollBox::Update(const Point2i &mousePosition,
   if (has_scrollbar) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
 
-    Rectanglei thumb = GetScrollThumb();
+    const Rectanglei& thumb = GetScrollThumb();
     bool over = scroll_mode==SCROLL_MODE_THUMB || thumb.Contains(mousePosition);
     GetMainWindow().BoxColor(thumb, over ? white_color : gray_color);
   }
