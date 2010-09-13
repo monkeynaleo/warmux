@@ -274,14 +274,16 @@ void Member::ApplyMovement(const member_mvt &        mvt,
       child_mvt.SetAngle(mvt.GetAngle());
       child_mvt.pos = mvt.pos;
 
-      Point2d child_delta = child->second[frame] - anchor;
-      radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
-      if (ZERO != radius) {
-        radius = sqrt_approx(radius);
-        Double angle_init = child_delta.ComputeAngle() + angle_rad;
-        Double angle_new  = angle_init + mvt.GetAngle();
-        child_mvt.pos.x  += radius * (cos(angle_new) - cos(angle_init));
-        child_mvt.pos.y  += radius * (sin(angle_new) - sin(angle_init));
+      if (mvt.GetAngle() != ZERO) {
+        Point2d child_delta = child->second[frame] - anchor;
+        radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
+        if (ZERO != radius) {
+          radius = sqrt_approx(radius);
+          Double angle_init = child_delta.ComputeAngle() + angle_rad;
+          Double angle_new  = angle_init + mvt.GetAngle();
+          child_mvt.pos.x  += radius * (cos(angle_new) - cos(angle_init));
+          child_mvt.pos.y  += radius * (sin(angle_new) - sin(angle_init));
+        }
       }
 
       // Apply recursively to children:
