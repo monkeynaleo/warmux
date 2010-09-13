@@ -34,10 +34,10 @@ Polygon * PolygonGenerator::GenerateCircle(Double diameter, int nb_point)
 Polygon * PolygonGenerator::GenerateRectangle(Double width, Double height)
 {
   Polygon * tmp = new Polygon();
-  tmp->AddPoint(Point2d( width / TWO,  height / TWO));
-  tmp->AddPoint(Point2d( width / TWO, -height / TWO));
-  tmp->AddPoint(Point2d(-width / TWO, -height / TWO));
-  tmp->AddPoint(Point2d(-width / TWO,  height / TWO));
+  tmp->AddPoint(Point2d( width * ONE_HALF,  height * ONE_HALF));
+  tmp->AddPoint(Point2d( width * ONE_HALF, -height * ONE_HALF));
+  tmp->AddPoint(Point2d(-width * ONE_HALF, -height * ONE_HALF));
+  tmp->AddPoint(Point2d(-width * ONE_HALF,  height * ONE_HALF));
   return tmp;
 }
 
@@ -67,7 +67,7 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
   AffineTransform2D trans = AffineTransform2D();
   Point2d top;
   for(int i = 0; i < nb_point; i++) {
-    top = Point2d(ZERO, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) / TWO);
+    top = Point2d(ZERO, (diameter + RandomSync().GetDouble(-rand_offset, rand_offset)) * ONE_HALF);
     trans.SetRotation((TWO_PI * -i) / nb_point);
     tmp->AddPoint(trans * top);
   }
@@ -77,23 +77,23 @@ Polygon * PolygonGenerator::GenerateDentedCircle(Double diameter, int nb_point, 
 Polygon * PolygonGenerator::GenerateRoundedRectangle(Double width, Double height, Double edge)
 {
   Polygon * tmp = new Polygon();
-  Double edge_vector = edge / TWO;
-  tmp->AddBezierCurve(Point2d(-width / 2 + edge, -height / 2),
+  Double edge_vector = edge * ONE_HALF;
+  tmp->AddBezierCurve(Point2d(-width * ONE_HALF + edge, -height * ONE_HALF),
                       Point2d(-edge_vector, 0),
                       Point2d(0, -edge_vector),
-                      Point2d(-width / 2, -height / 2 + edge));
-  tmp->AddBezierCurve(Point2d(-width / 2, height / 2 - edge),
+                      Point2d(-width * ONE_HALF, -height * ONE_HALF + edge));
+  tmp->AddBezierCurve(Point2d(-width * ONE_HALF, height * ONE_HALF - edge),
                       Point2d(0, edge_vector),
                       Point2d(-edge_vector, 0),
-                      Point2d(-width / 2 + edge, height / 2));
-  tmp->AddBezierCurve(Point2d(width / 2 - edge, height / 2),
+                      Point2d(-width * ONE_HALF + edge, height * ONE_HALF));
+  tmp->AddBezierCurve(Point2d(width * ONE_HALF - edge, height * ONE_HALF),
                       Point2d(edge_vector, 0),
                       Point2d(0, edge_vector),
-                      Point2d(width / 2, height / 2 - edge));
-  tmp->AddBezierCurve(Point2d(width / 2, -height / 2 + edge),
+                      Point2d(width * ONE_HALF, height * ONE_HALF - edge));
+  tmp->AddBezierCurve(Point2d(width * ONE_HALF, -height * ONE_HALF + edge),
                       Point2d(0, -edge_vector),
                       Point2d(edge_vector, 0),
-                      Point2d(width / 2 - edge, -height / 2));
+                      Point2d(width * ONE_HALF - edge, -height * ONE_HALF));
   return tmp;
 }
 
