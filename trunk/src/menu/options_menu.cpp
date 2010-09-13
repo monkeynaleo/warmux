@@ -115,7 +115,11 @@ OptionMenu::OptionMenu() :
 
   opt_max_fps =
     new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                              option_size, 30, 5, 20, 60);
+#ifdef DEBUG
+                              option_size, 30, 5, 20,1000);
+#else
+                              option_size, 30, 5, 20,  60);
+#endif
   graphic_options->AddWidget(opt_max_fps);
 
 #ifndef HAVE_TOUCHSCREEN
