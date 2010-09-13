@@ -505,7 +505,7 @@ void Body::Build()
   ApplyMovement(current_mvt, current_frame);
 
   Double y_max = 0;
-  std::vector<Member*> layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
     if (member->IsNameWeapon()) {
@@ -541,7 +541,7 @@ void Body::RefreshSprites()
     return;
 #endif
 
-  std::vector<Member*> layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size(); layer++) {
     Member* member = layers[layer];
 
@@ -582,7 +582,7 @@ void Body::Draw(const Point2i & _pos)
   int draw_weapon_member = 0;
 
   // Finally draw each layer one by one
-  std::vector<Member*> layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size() ;layer++) {
     Member *member = layers[layer];
     if (member->IsNameWeapon()) {
@@ -614,7 +614,7 @@ void Body::AddChildMembers(Member * parent)
 
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
-  std::vector<Member*> layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetLayers();
   for ( ; child != parent->GetAttachedMembers().end(); ++child) {
 
     // Find if the current clothe uses this member:
@@ -644,7 +644,7 @@ void Body::BuildSqueleton()
   FreeSkeletonVector();
 
   // Find the "body" member as it is the top of the skeleton
-  std::vector<Member*> layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint lay = 0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
     if (member->GetType() == "body") {
