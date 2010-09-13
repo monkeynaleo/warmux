@@ -122,6 +122,8 @@ public:
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
+  // Optimized intersection test
+  inline bool Intersect(const PhysicalObj* object, const Rectanglei & position) const;
   const Rectanglei GetTestRect() const
   {
     int width = m_width - m_test_right - m_test_left;
