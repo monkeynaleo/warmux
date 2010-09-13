@@ -30,15 +30,11 @@
 
 class Text;
 class Button;
+class Polygon;
 
 class SpinButtonWithPicture : public AbstractSpinButton
 {
  private:
-  /* If you need this, implement it (correctly)*/
-  SpinButtonWithPicture(const SpinButtonWithPicture&);
-  SpinButtonWithPicture operator=(const SpinButtonWithPicture&);
-  /*********************************************/
-
   Surface m_image;
   Surface m_annulus_background;
   Surface m_annulus_foreground;
@@ -47,8 +43,13 @@ class SpinButtonWithPicture : public AbstractSpinButton
   Sprite *m_img_plus;
   Sprite *m_img_minus;
 
+  Polygon *poly;
+  float    last_angle;
+
  protected:
   Text *txt_label, *txt_value_white, *txt_value_black;
+
+  void RecreateTorus();
 
  public:
   SpinButtonWithPicture(const std::string &label,
