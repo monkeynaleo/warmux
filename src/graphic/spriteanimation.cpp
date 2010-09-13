@@ -30,7 +30,7 @@
 SpriteAnimation::SpriteAnimation(Sprite & p_sprite) :
   sprite(p_sprite),
   last_update(Time::GetInstance()->Read()),
-  speed_factor(1.0f),
+  speed_factor(1<<SPEED_BITS),
   frame_delta(1),
   loop_wait(0),
   loop_wait_random(0),
@@ -67,7 +67,7 @@ void SpriteAnimation::Update()
     return;
   }
 
-  if (Time::GetInstance()->Read() < (last_update + sprite.GetCurrentFrameObject().delay)) {
+  if (Time::GetInstance()->Read() < last_update + sprite.GetCurrentFrameObject().delay) {
     return;
   }
 
@@ -76,29 +76,30 @@ void SpriteAnimation::Update()
 
   //Delta to next frame used to enable frameskip
   //if delay between 2 frame is < fps
-  int delta_to_next_f = (int)((Double)((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor);
-  last_update += (int)((Double)(delta_to_next_f * sprite.GetCurrentFrameObject().delay) / speed_factor);
+  int delta_to_next_f = (((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentFrameObject().delay) * speed_factor)>>SPEED_BITS;
+  last_update += ((delta_to_next_f<<SPEED_BITS) * sprite.GetCurrentFrameObject().delay) / speed_factor;
 
   //Animation is finished, when last frame have been fully played
   bool finish;
 
+  int  delta = frame_delta * delta_to_next_f;
   if (frame_delta < 0) {
-    finish = current_frame + frame_delta * delta_to_next_f <= -1;
+    finish = current_frame + delta <= -1;
   } else {
-    finish = frame_count <= current_frame + frame_delta * delta_to_next_f;
+    finish = frame_count <= current_frame + delta;
   }
 
   if (finish && !loop && (!pingpong || frame_delta < 0)) {
      Finish();
   } else {
-    uint next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frame_count;
+    uint next_frame = (current_frame + delta) % frame_count;
 
     if (pingpong) {
-      if (frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f ) >= frame_count) {
+      if (frame_delta>0 && current_frame + delta >= frame_count) {
         next_frame = frame_count - next_frame -2;
         frame_delta = - frame_delta;
-      } else if( frame_delta<0 && ( (int)current_frame + frame_delta * delta_to_next_f ) <= -1) {
-        next_frame = (-((int)current_frame + frame_delta * delta_to_next_f )) % frame_count;
+      } else if (frame_delta<0 && current_frame + delta <= -1) {
+        next_frame = (delta-(int)current_frame) % frame_count;
         frame_delta = - frame_delta;
         CalculateWait();
       }
