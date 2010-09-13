@@ -158,7 +158,7 @@ void Keyboard::SaveConfig(xmlNode *node) const
   std::map<int, std::vector<Key_t> >::const_iterator it;
 
   for (it = layout.begin(); it != layout.end(); it++) {
-    const std::vector<Key_t> actions = it->second;
+    const std::vector<Key_t>& actions = it->second;
     for (uint i = 0; i < actions.size(); i++) {
       int key = it->first;
 
@@ -210,11 +210,10 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
     return;
 
 
-  std::vector<Key_t> keys = it->second;
+  const std::vector<Key_t>& keys = it->second;
   std::vector<Key_t>::const_iterator itv;
 
-  for(itv = keys.begin(); itv != keys.end() ; itv++)
-  {
+  for (itv = keys.begin(); itv != keys.end() ; itv++) {
     //While player writes, it cannot control the game but PAUSE.
     if (Game::GetInstance()->chatsession.CheckInput()) {
       switch (*itv) {
@@ -259,17 +258,16 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     return;
 
   Key_Event_t event_type;
-  switch(event.type)
-    {
-    case SDL_KEYDOWN:
-      event_type = KEY_PRESSED;
-      break;
-    case SDL_KEYUP:
-      event_type = KEY_RELEASED;
-      break;
-    default:
-      return;
-    }
+  switch(event.type) {
+  case SDL_KEYDOWN:
+    event_type = KEY_PRESSED;
+    break;
+  case SDL_KEYUP:
+    event_type = KEY_RELEASED;
+    break;
+  default:
+    return;
+  }
 
   //Handle input text for Chat session in Network game
   if (Game::GetInstance()->chatsession.CheckInput()) {
