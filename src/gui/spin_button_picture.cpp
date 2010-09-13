@@ -32,8 +32,10 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
                                              const std::string& resource_id,
                                              const Point2i& _size,
                                              int value, int step,
-                                             int min_value, int max_value) :
-  AbstractSpinButton(value, step, min_value, max_value)
+                                             int min_value, int max_value)
+  : AbstractSpinButton(value, step, min_value, max_value)
+  , poly(NULL)
+  , last_angle(-1.0f)
 {
   position = Point2i(-1, -1);
   size = _size;
@@ -63,12 +65,16 @@ SpinButtonWithPicture::~SpinButtonWithPicture ()
   delete txt_value_white;
   delete m_img_plus;
   delete m_img_minus;
+  if (poly)
+    delete poly;
 }
 
 void SpinButtonWithPicture::Pack()
 {
   txt_label->SetMaxWidth(size.x);
 }
+
+#define SMALL_R 25
 
 void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
 {
@@ -82,20 +88,9 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
   surf.Blit(m_annulus_background, tmp);
 
   // 2. then draw the progress annulus
-  #define SMALL_R 25
-  #define BIG_R   35
-  #define OPEN_ANGLE 0.96f // 55
-
   Point2i center = tmp + m_annulus_background.GetSize() / 2;
-  float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
-              / (GetMaxValue() - GetMinValue());
-  Polygon *p = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 30,
-                                                      angle, OPEN_ANGLE / 2);
-
-  p->SetPlaneColor(m_progress_color);
-  p->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
-  p->Draw(&surf);
-  delete(p);
+  poly->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
+  poly->Draw(&surf);
 
   // 3. then draw the annulus foreground
   surf.Blit(m_annulus_foreground, tmp);
@@ -139,6 +134,24 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
   txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
                                    GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
+void SpinButtonWithPicture::RecreateTorus()
+{
+  #define OPEN_ANGLE 0.96f // 55
+
+  float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
+              / (GetMaxValue() - GetMinValue());
+  if (last_angle != angle) {
+    delete poly;
+    poly = NULL;
+  }
+  if (!poly) {
+    #define BIG_R   35
+    poly = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 30,
+                                                  angle, OPEN_ANGLE / 2);
+
+    poly->SetPlaneColor(m_progress_color);
+  }
+}
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
@@ -172,4 +185,5 @@ void SpinButtonWithPicture::ValueHasChanged()
   std::string s(value_s.str());
   txt_value_black->SetText(s);
   txt_value_white->SetText(s);
+  RecreateTorus();
 }
