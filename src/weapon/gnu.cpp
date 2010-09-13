@@ -116,22 +116,13 @@ void Gnu::Refresh()
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norm, angle);
 
-  while(angle < -PI)
-    angle += PI;
-  while(angle > PI)
-    angle -= PI;
-
-  angle *= ONE_HALF;
-  if(m_sens == -1)
-  {
-    if(angle > ZERO)
+  angle = RestrictAngle(angle)*ONE_HALF;
+  if(m_sens == -1) {
+    if (angle > ZERO)
       angle -= HALF_PI;
     else
       angle += HALF_PI;
   }
-
-  if(angle > FOUR * PI)
-    angle = ZERO;
 
   image->SetRotation_rad(angle);
   image->Scale((Double)m_sens,1.0);

@@ -22,16 +22,18 @@
  *             Initial version
  *****************************************************************************/
 
-#include "graphic/sprite.h"
 #include <SDL.h>
 #include <iostream>
+
+#include <WORMUX_rectangle.h>
+
+#include "graphic/sprite.h"
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
-#include <WORMUX_rectangle.h>
-#include "graphic/spriteframe.h"
+#include "tool/math_tools.h"
 #include "tool/string_tools.h"
 
 // Scratch surface without alpha, not thread-safe!
@@ -123,10 +125,7 @@ void Sprite::AddFrame(const Surface &surf, uint delay){
 
 void Sprite::SetRotation_rad(Double angle_rad)
 {
-  while (angle_rad > TWO_PI)
-    angle_rad -= TWO_PI;
-  while (angle_rad <= -TWO_PI)
-    angle_rad += TWO_PI;
+  angle_rad = RestrictAngle(angle_rad);
 
   if (rotation_rad == angle_rad)
     return;

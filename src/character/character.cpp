@@ -882,10 +882,7 @@ Double Character::GetFiringAngle() const {
 
 #include <iostream>
 void Character::SetFiringAngle(Double angle) {
-  /*while(angle > 2 * PI)
-    angle -= 2 * PI;
-  while(angle <= -2 * PI)
-    angle += 2 * PI;*/
+  /* angle = RestrictAngle(angle) */
   angle = InRange_Double(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
                                 -(ActiveTeam().GetWeapon().GetMinAngle()));
   firing_angle = angle;

@@ -64,6 +64,15 @@ inline Double InverseAngleDeg (const Double &angle) {
 inline Double InverseAngleRad (const Double &angle) { return InverseAngle(angle); }
 inline float InverseAngleRad (const float angle) { return InverseAngle(angle); }
 
+inline Double RestrictAngle(Double angle)
+{
+  while (angle >= TWO_PI)
+    angle -= TWO_PI;
+  while (angle < ZERO)
+    angle += TWO_PI;
+  return angle;
+}
+
 // Absolute value
 inline Double AbsoluteValue (const Double x) { return x >= 0 ? x : -x; }
 inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPSILON; }

@@ -150,14 +150,9 @@ void Polecat::Refresh()
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norm, angle);
 
-  while (angle < -PI)
-    angle += PI;
-  while (angle > PI)
-    angle -= PI;
-
-  angle *= ONE_HALF;
+  angle = RestrictAngle(angle) * ONE_HALF;
   if (m_sens == -1) {
-    if(angle > 0)
+    if (angle > 0)
       angle -= HALF_PI;
     else
       angle += HALF_PI;

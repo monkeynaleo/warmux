@@ -22,8 +22,8 @@
  *             Initial version
  *****************************************************************************/
 
-#include "graphic/spritecache.h"
 #include "graphic/sprite.h"
+#include "tool/math_tools.h"
 
 SpriteFrameCache::SpriteFrameCache()
 {
@@ -42,27 +42,18 @@ void SpriteFrameCache::CreateRotationCache(Surface &surface, uint cache_size, bo
   }
 }
 
+static const Double ANGLE_DIV = 1 / TWO_PI;
+
 Surface SpriteFrameCache::GetFlippedSurfaceForAngle(Double angle) const
 {
-  Double angle_tmp = angle;
-  while (angle_tmp >= TWO_PI)
-    angle_tmp -= TWO_PI;
-  while (angle_tmp < ZERO)
-    angle_tmp += TWO_PI;
-  uint index = (uint)rotated_flipped_surface.size() * angle_tmp / TWO_PI;
+  uint index = (uint)rotated_flipped_surface.size() * RestrictAngle(angle) * ANGLE_DIV;
   ASSERT(rotated_flipped_surface.size()>index);
   return rotated_flipped_surface[index];
 }
 
 Surface SpriteFrameCache::GetSurfaceForAngle(Double angle) const
 {
-  Double angle_tmp = angle;
-  while (angle_tmp < ZERO)
-      angle_tmp += TWO_PI;
-  while (angle_tmp >= TWO_PI)
-    angle_tmp -= TWO_PI;
-
-  uint index = (uint)rotated_surface.size() * angle_tmp / TWO_PI;
+  uint index = (uint)rotated_surface.size() * RestrictAngle(angle) * ANGLE_DIV;
   ASSERT(rotated_surface.size()>index);
   return rotated_surface[index];
 }
@@ -190,4 +181,3 @@ void SpriteCache::InvalidLastFrame()
     return;
   last_frame.Free();
 }
-
