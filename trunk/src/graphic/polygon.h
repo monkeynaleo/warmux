@@ -190,7 +190,7 @@ public:
   { items.push_back(new PolygonItem(sprite, pos, h_a, v_a)); }
   virtual void AddItem(PolygonItem * item) { items.push_back(item); }
   void DelItem(int index);
-  std::vector<PolygonItem *> GetItem() const { return items; }
+  const std::vector<PolygonItem *>& GetItem() const { return items; }
   void ClearItem(bool free_mem = true);
 };
 
