@@ -55,25 +55,10 @@ SpriteAnimation::SpriteAnimation(const SpriteAnimation & other, Sprite & p_sprit
 {
 }
 
-void SpriteAnimation::SetSpeedFactor( Double nv_speed)
-{
-  speed_factor = nv_speed;
-}
-
 void SpriteAnimation::Start()
 {
    finished = false;
    last_update = Time::GetInstance()->Read();
-}
-
-void SpriteAnimation::SetPlayBackward(bool enable) 
-{
-  frame_delta = enable ? -1 : 1;
-}
-
-void SpriteAnimation::Finish() 
-{
-  finished = true;
 }
 
 void SpriteAnimation::Update()
@@ -86,8 +71,8 @@ void SpriteAnimation::Update()
     return;
   }
 
-  const unsigned int current_frame = sprite.GetCurrentFrame();
-  const unsigned int frame_count = sprite.GetFrameCount();
+  uint current_frame = sprite.GetCurrentFrame();
+  uint frame_count = sprite.GetFrameCount();
 
   //Delta to next frame used to enable frameskip
   //if delay between 2 frame is < fps
@@ -98,15 +83,15 @@ void SpriteAnimation::Update()
   bool finish;
 
   if (frame_delta < 0) {
-    finish = ((int)current_frame + frame_delta * delta_to_next_f) <= -1;
+    finish = current_frame + frame_delta * delta_to_next_f <= -1;
   } else {
-    finish = frame_count <= (current_frame + frame_delta * delta_to_next_f);
+    finish = frame_count <= current_frame + frame_delta * delta_to_next_f;
   }
 
   if (finish && !loop && (!pingpong || frame_delta < 0)) {
      Finish();
   } else {
-    unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frame_count;
+    uint next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frame_count;
 
     if (pingpong) {
       if (frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f ) >= frame_count) {
@@ -127,39 +112,6 @@ void SpriteAnimation::Update()
       sprite.SetCurrentFrame(next_frame);
     }
   }
-}
-
-void SpriteAnimation::SetShowOnFinish(SpriteShowOnFinish show) {
-  show_on_finish = show;
-  loop = false;
-}
-
-bool SpriteAnimation::IsFinished() const {
-  return finished;
-}
-
-void SpriteAnimation::SetLoopMode(bool enable) {
-  loop = enable;
-}
-
-void SpriteAnimation::SetPingPongMode(bool enable) {
-  pingpong = enable;
-}
-
-SpriteAnimation::SpriteShowOnFinish SpriteAnimation::GetShowOnFinish() const {
-  return show_on_finish;
-}
-
-void SpriteAnimation::SetLoopWaitRandom(int time)
-{
-  MSG_DEBUG("eye", "SetLoopWaitRandom  : %d -> %d", loop_wait_random, time);
-  loop_wait_random = time;
-}
-
-void SpriteAnimation::SetLoopWait(int time)
-{
-  MSG_DEBUG("eye", "SetLoopWait  : %d -> %d", loop_wait, time);
-  loop_wait = time;
 }
 
 void SpriteAnimation::CalculateWait()
