@@ -121,7 +121,7 @@ void Gnu::Refresh()
   while(angle > PI)
     angle -= PI;
 
-  angle /= TWO;
+  angle *= ONE_HALF;
   if(m_sens == -1)
   {
     if(angle > ZERO)

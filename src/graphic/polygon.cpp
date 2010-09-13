@@ -443,9 +443,9 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
     p3 = original_shape[(index_p1 + 2) % original_shape.size()];
 
     // compute center of [p0,p1], [p1,p2] and [p2,p3]
-    c0 = p0 + ((p1 - p0) / TWO);
-    c1 = p1 + ((p2 - p1) / TWO);
-    c2 = p2 + ((p3 - p2) / TWO);
+    c0 = p0 + ONE_HALF*(p1 - p0);
+    c1 = p1 + ONE_HALF*(p2 - p1);
+    c2 = p2 + ONE_HALF*(p3 - p2);
 
     // Distance
     l1 = p0.Distance(p1);

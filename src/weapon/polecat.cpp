@@ -155,7 +155,7 @@ void Polecat::Refresh()
   while (angle > PI)
     angle -= PI;
 
-  angle /= TWO;
+  angle *= ONE_HALF;
   if (m_sens == -1) {
     if(angle > 0)
       angle -= HALF_PI;
