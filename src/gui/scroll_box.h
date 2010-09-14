@@ -22,7 +22,8 @@
 #ifndef SCROLL_BOX_H
 #define SCROLL_BOX_H
 
-#include "widget_list.h"
+#include "gui/widget_list.h"
+#include "gui/vertical_box.h"
 
 // Forward declaration
 struct SDL_keysym;
@@ -58,8 +59,12 @@ protected:
                         const Point2i & lastMousePosition);
   Rectanglei GetScrollThumb() const;
   Rectanglei GetScrollTrack() const;
-  Point2i    GetScrollTrackPos() const;
-  int GetMaxOffset() const;
+  Point2i    GetScrollTrackPos() const
+  {
+    return Rectanglei(GetScrollTrackPos(),
+                    Point2i(scrollbar_width, GetTrackHeight()));
+  }
+  int GetMaxOffset() const { return vbox->GetSizeY() - size.y; }
   int GetTrackHeight() const;
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
 
@@ -81,11 +86,17 @@ public:
     return scroll_mode != SCROLL_MODE_NONE || Widget::Contains(point);
   }
   virtual void AddWidget(Widget* widget);
-  virtual void RemoveWidget(Widget* w);
+  virtual void RemoveWidget(Widget* w) { vbox->RemoveWidget(w); }
   virtual void RemoveFirstWidget();
-  virtual size_t WidgetCount() const;
-  virtual void Empty();
-  virtual void Clear();
+  {
+    Widget *w = vbox->GetFirstWidget();
+    if (w) {
+      RemoveWidget(w);
+    }
+  }
+  virtual size_t WidgetCount() const { return vbox->WidgetCount(); }
+  virtual void Empty() { vbox->Empty(); }
+  virtual void Clear() { vbox->Clear(); }
 };
 
 #endif  //SCROLL_BOX_H
