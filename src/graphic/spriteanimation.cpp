@@ -84,7 +84,7 @@ void SpriteAnimation::Update()
 
   int  delta = frame_delta * delta_to_next_f;
   if (frame_delta < 0) {
-    finish = current_frame + delta <= -1;
+    finish = (int(current_frame) + delta <= -1);
   } else {
     finish = frame_count <= current_frame + delta;
   }
@@ -98,7 +98,7 @@ void SpriteAnimation::Update()
       if (frame_delta>0 && current_frame + delta >= frame_count) {
         next_frame = frame_count - next_frame -2;
         frame_delta = - frame_delta;
-      } else if (frame_delta<0 && current_frame + delta <= -1) {
+      } else if (frame_delta < 0 && int(current_frame) + delta <= -1) {
         next_frame = (delta-(int)current_frame) % frame_count;
         frame_delta = - frame_delta;
         CalculateWait();
