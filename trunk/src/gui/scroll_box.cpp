@@ -310,23 +310,16 @@ void ScrollBox::Update(const Point2i &mousePosition,
 void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
+  vbox->SetPosition(position.x + border_size,
+                    position.y + border_size - offset);
   vbox->SetSizeX(size.x -2*border_size - scrollbar_width);
   vbox->Pack();
 
   //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
-  // No that we known better, account for the scrollbar
-  if (HasScrollBar()) {
-    vbox->SetPosition(position.x + border_size,
-                      position.y + border_size - offset);
-  } else {
-    vbox->SetPosition(position + border_size);
-  }
   m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - border_size,
                     position.y + border_size);
   m_down->SetPosition(position + size - m_down->GetSize() - border_size);
-
-  WidgetList::Pack();
 }
 
 bool ScrollBox::SendKey(const SDL_keysym & key)
