@@ -16,50 +16,37 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * A big Spinbutton in
+ * Cache rendering of a partial torus
  *****************************************************************************/
 
-#ifndef SPIN_BUTTON_PICTURE_H
-#define SPIN_BUTTON_PICTURE_H
+#ifndef TORUS_CACHE_H
+#define TORUS_CACHE_H
 
-#include <WORMUX_base.h>
+#include <WORMUX_rectangle.h>
 #include "graphic/surface.h"
-#include "widget.h"
-#include "abstract_spin_button.h"
-#include <string>
 
-class Text;
-class Button;
-class TorusCache;
+class Profile;
+class Sprite;
 
-
-class SpinButtonWithPicture : public AbstractSpinButton
+class TorusCache
 {
- private:
-  TorusCache *torus;
+  Surface  m_image;
 
- protected:
-  Text *txt_label, *txt_value_white, *txt_value_black;
+  float    m_last_angle;
+  Surface *m_torus;
 
-  void RecreateTorus();
+  int      m_big_r;
+  int      m_small_r;
 
- public:
-  SpinButtonWithPicture(const std::string &label,
-                        const std::string &resource_id,
-                        const Point2i &size,
-                        int value, int step,
-                        int min_value, int max_value);
-  virtual ~SpinButtonWithPicture();
+public:
+  TorusCache(Profile *res, const std::string& resource_id, int bigr, int smallr);
+  ~TorusCache();
+  void Draw(const Rectanglei& box);
+  void Refresh(float angle, float open);
+  Point2i GetCenter() const;
 
-  // From Widget
-  virtual void Pack();
-  virtual void Draw(const Point2i &mousePosition) const;
-  virtual Widget* Click(const Point2i &/*mousePosition*/, uint /*button*/) const { return NULL; };
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
-
-  // From AbstractSpinButton
-  virtual void ValueHasChanged();
+  Sprite  *m_plus;
+  Sprite  *m_minus;
 };
 
-#endif
-
+#endif //TORUS_CACHE_H
