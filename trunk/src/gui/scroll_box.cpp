@@ -284,7 +284,7 @@ void ScrollBox::Update(const Point2i &mousePosition,
 {
   // Force redrawing if we are scrolling and the mouse has moved
   if (start_drag_offset!=NO_DRAG && mousePosition!=lastMousePosition) {
-    NeedRedrawing();
+    //NeedRedrawing();
   }
 
   bool redraw = need_redrawing;
