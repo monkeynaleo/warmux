@@ -209,34 +209,10 @@ void ScrollBox::AddWidget(Widget* widget)
   }
 }
 
-void ScrollBox::RemoveWidget(Widget* w)
-{
-  vbox->RemoveWidget(w);
-}
-
-void ScrollBox::RemoveFirstWidget()
-{
-  Widget *w = vbox->GetFirstWidget();
-  if (w) {
-    RemoveWidget(w);
-  }
-}
-
-size_t ScrollBox::WidgetCount() const
-{
-  return vbox->WidgetCount();
-}
-
 Point2i ScrollBox::GetScrollTrackPos() const
 {
   return Point2i(position.x + size.x - border_size - scrollbar_width,
                  position.y + border_size + m_up->GetSizeY());
-}
-
-Rectanglei ScrollBox::GetScrollTrack() const
-{
-  return Rectanglei(GetScrollTrackPos(),
-                    Point2i(scrollbar_width, GetTrackHeight()));
 }
 
 Rectanglei ScrollBox::GetScrollThumb() const
@@ -255,28 +231,9 @@ Rectanglei ScrollBox::GetScrollThumb() const
                     scrollbar_width, tmp_h);
 }
 
-int ScrollBox::GetMaxOffset() const
-{
-  return vbox->GetSizeY() - size.y;
-}
-
 int ScrollBox::GetTrackHeight() const
 {
   return size.y - 2*(m_up->GetSizeY()+border_size);
-}
-
-void ScrollBox::Empty()
-{
-  // We want to leave around the buttons and the box
-  if (vbox)
-    vbox->Empty();
-}
-
-void ScrollBox::Clear()
-{
-  // We want to leave around the buttons and the box
-  if (vbox)
-    vbox->Clear();
 }
 
 void ScrollBox::Update(const Point2i &mousePosition,
