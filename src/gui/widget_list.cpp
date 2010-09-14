@@ -26,21 +26,23 @@
 #include "interface/mouse.h"
 #include <iostream>
 
-WidgetList::WidgetList() :
-  selected_widget(NULL)
+WidgetList::WidgetList()
+  : selected_widget(NULL)
+  , redrawbackground_once(true)
 {
 }
 
-WidgetList::WidgetList(const Point2i &size) :
-  Widget(size),
-  selected_widget(NULL)
+WidgetList::WidgetList(const Point2i &size)
+  : Widget(size)
+  , selected_widget(NULL)
+  , redrawbackground_once(true)
 {
 }
 
-WidgetList::WidgetList(Profile * profile,
-                       const xmlNode * widgetListNode) :
-  Widget(profile, widgetListNode),
-  selected_widget(NULL)
+WidgetList::WidgetList(Profile * profile, const xmlNode * widgetListNode)
+  : Widget(profile, widgetListNode)
+  , selected_widget(NULL)
+  , redrawbackground_once(true)
 {
 }
 
@@ -328,8 +330,10 @@ void WidgetList::Update(const Point2i& mousePosition,
   SwapWindowClip(wlr_tmp);
 
   // Redraw the background
-  if (need_redrawing)
+  if (redrawbackground_once) {
     RedrawBackground(wlr);
+    redrawbackground_once = false;
+  }
 
   for (std::list<Widget*>::const_iterator w=widget_list.begin();
       w != widget_list.end();

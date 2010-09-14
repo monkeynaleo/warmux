@@ -36,6 +36,7 @@ public:
 
 private:
   Widget* selected_widget;
+  bool redrawbackground_once;
 
 protected:
   std::list<Widget*> widget_list;

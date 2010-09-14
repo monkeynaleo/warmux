@@ -160,9 +160,6 @@ void TeamBox::UpdatePlayerNameColor()
 void TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
-  //Rectanglei r(GetPosition(), GetSize());
-  //SwapWindowClip(r);
-
   UpdatePlayerNameColor();
 
   Box::Update(mousePosition, lastMousePosition);
@@ -173,7 +170,7 @@ void TeamBox::Update(const Point2i &mousePosition,
   if (associated_team != NULL) {
     WidgetList::Update(mousePosition, lastMousePosition);
   } else {
-    RedrawBackground(*this);
+    //RedrawBackground(*this);
   }
 
   if (associated_team != NULL && previous_player_name != player_name->GetText()) {
