@@ -58,12 +58,12 @@ protected:
   virtual void __Update(const Point2i & mousePosition,
                         const Point2i & lastMousePosition);
   Rectanglei GetScrollThumb() const;
-  Rectanglei GetScrollTrack() const;
-  Point2i    GetScrollTrackPos() const
+  Rectanglei GetScrollTrack() const
   {
     return Rectanglei(GetScrollTrackPos(),
-                    Point2i(scrollbar_width, GetTrackHeight()));
+                      Point2i(scrollbar_width, GetTrackHeight()));
   }
+  Point2i    GetScrollTrackPos() const;
   int GetMaxOffset() const { return vbox->GetSizeY() - size.y; }
   int GetTrackHeight() const;
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
@@ -87,7 +87,7 @@ public:
   }
   virtual void AddWidget(Widget* widget);
   virtual void RemoveWidget(Widget* w) { vbox->RemoveWidget(w); }
-  virtual void RemoveFirstWidget();
+  virtual void RemoveFirstWidget()
   {
     Widget *w = vbox->GetFirstWidget();
     if (w) {
