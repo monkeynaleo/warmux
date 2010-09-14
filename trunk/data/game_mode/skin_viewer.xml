@@ -17,7 +17,7 @@
   <safe_fall>15</safe_fall>
   <damage_per_fall_unit>2</damage_per_fall_unit>
 
-  <max_teams>2</max_teams>
+  <max_teams>8</max_teams>
   <nb_characters>10</nb_characters>
 
   <character>
