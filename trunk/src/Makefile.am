@@ -131,6 +131,8 @@ wormux_SOURCES = \
         gui/talk_box.h \
         gui/text_box.cpp \
         gui/text_box.h \
+        gui/torus_cache.cpp \
+        gui/torus_cache.h \
         gui/widget.cpp \
         gui/widget.h \
         gui/widget_list.cpp \

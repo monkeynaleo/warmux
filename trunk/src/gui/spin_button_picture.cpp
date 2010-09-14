@@ -20,6 +20,7 @@
 #include <sstream>
 #include "include/app.h"
 #include "gui/spin_button_picture.h"
+#include "gui/torus_cache.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
@@ -28,25 +29,22 @@
 #include "tool/affine_transform.h"
 #include "tool/resource_manager.h"
 
+#define SMALL_R 25
+#define BIG_R   35
+#define OPEN_ANGLE 0.96f // 55
+
 SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
                                              const std::string& resource_id,
                                              const Point2i& _size,
                                              int value, int step,
                                              int min_value, int max_value)
   : AbstractSpinButton(value, step, min_value, max_value)
-  , poly(NULL)
-  , last_angle(-1.0f)
 {
   position = Point2i(-1, -1);
   size = _size;
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_image = LOAD_RES_IMAGE(resource_id);
-  m_annulus_background = LOAD_RES_IMAGE("menu/annulus_background");
-  m_annulus_foreground = LOAD_RES_IMAGE("menu/annulus_foreground");
-  m_progress_color = LOAD_RES_COLOR("menu/annulus_progress_color");
-  m_img_plus = LOAD_RES_SPRITE("menu/big_plus");
-  m_img_minus = LOAD_RES_SPRITE("menu/big_minus");
+  torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
   GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -63,10 +61,7 @@ SpinButtonWithPicture::~SpinButtonWithPicture ()
   delete txt_label;
   delete txt_value_black;
   delete txt_value_white;
-  delete m_img_plus;
-  delete m_img_minus;
-  if (poly)
-    delete poly;
+  delete torus;
 }
 
 void SpinButtonWithPicture::Pack()
@@ -74,52 +69,38 @@ void SpinButtonWithPicture::Pack()
   txt_label->SetMaxWidth(size.x);
 }
 
-#define SMALL_R 25
-
 void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
 {
   Surface& surf = GetMainWindow();
 
   //  the computed positions are to center on the image part of the widget
 
-  // 1. first draw the annulus background
-  Point2i tmp(GetPositionX() + (GetSizeX()-m_annulus_background.GetWidth())/2,
-              GetPositionY());
-  surf.Blit(m_annulus_background, tmp);
+  // 1. draw torus
+  torus->Draw(*this);
 
-  // 2. then draw the progress annulus
-  Point2i center = tmp + m_annulus_background.GetSize() / 2;
-  poly->ApplyTransformation(AffineTransform2D::Translate(center.x, center.y));
-  poly->Draw(&surf);
-
-  // 3. then draw the annulus foreground
-  surf.Blit(m_annulus_foreground, tmp);
-
-  // 4. then draw the image
-  surf.Blit(m_image, center - m_image.GetSize()/2);
-
-  // 5. then draw buttons
+  // 2. then draw buttons
   #define IMG_BUTTONS_W 5
   #define IMG_BUTTONS_H 12
 
+  Point2i center = GetPosition() + torus->GetCenter();
   if (GetValue() > GetMinValue()) {
 
     if (Contains(mousePosition) && mousePosition.x < center.x)
-      m_img_minus->SetCurrentFrame(1);
+      torus->m_minus->SetCurrentFrame(1);
     else
-      m_img_minus->SetCurrentFrame(0);
+      torus->m_minus->SetCurrentFrame(0);
 
-    m_img_minus->Blit(surf, GetPosition().x + IMG_BUTTONS_W, GetPosition().y + IMG_BUTTONS_H);
+    torus->m_minus->Blit(surf, GetPosition().x + IMG_BUTTONS_W, GetPosition().y + IMG_BUTTONS_H);
   }
 
   if (GetValue() < GetMaxValue()) {
     if (Contains(mousePosition) && mousePosition.x > center.x)
-      m_img_plus->SetCurrentFrame(1);
+      torus->m_plus->SetCurrentFrame(1);
     else
-      m_img_plus->SetCurrentFrame(0);
+      torus->m_plus->SetCurrentFrame(0);
 
-    m_img_plus->Blit(surf, GetPosition().x + GetSize().x - m_img_plus->GetWidth() - IMG_BUTTONS_W,
-                     GetPosition().y + IMG_BUTTONS_H);
+    torus->m_plus->Blit(surf, GetPosition().x + GetSize().x - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
+                        GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 6. add in the value image
@@ -137,21 +118,9 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
 
 void SpinButtonWithPicture::RecreateTorus()
 {
-  #define OPEN_ANGLE 0.96f // 55
-
   float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
               / (GetMaxValue() - GetMinValue());
-  if (last_angle != angle) {
-    delete poly;
-    poly = NULL;
-  }
-  if (!poly) {
-    #define BIG_R   35
-    poly = PolygonGenerator::GeneratePartialTorus(BIG_R * 2, SMALL_R * 2, 30,
-                                                  angle, OPEN_ANGLE / 2);
-
-    poly->SetPlaneColor(m_progress_color);
-  }
+  torus->Refresh(angle, OPEN_ANGLE);
 }
 
 Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
