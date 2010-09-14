@@ -35,7 +35,6 @@ class TorusCache;
 
 class SpinButtonWithPicture : public AbstractSpinButton
 {
- private:
   TorusCache *torus;
 
  protected:

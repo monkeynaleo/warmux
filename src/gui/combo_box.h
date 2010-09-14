@@ -30,30 +30,21 @@
 
 class Text;
 class Button;
+class TorusCache;
 
 class ComboBox : public Widget
 {
- private:
-  /* If you need this, implement it (correctly)*/
-  ComboBox(const ComboBox&);
-  ComboBox operator=(const ComboBox&);
-  /*********************************************/
+  TorusCache *torus;
 
-  Surface m_image;
-  Surface m_annulus_background;
-  Surface m_annulus_foreground;
-  Color m_progress_color;
-
-  Sprite *m_img_plus;
-  Sprite *m_img_minus;
-
- protected:
+protected:
   Text *txt_label, *txt_value_white, *txt_value_black;
 
   std::vector<std::pair <std::string, std::string> > m_choices;
   std::vector<std::string>::size_type m_index;
 
- public:
+  void RecreateTorus();
+
+public:
 
   ComboBox(const std::string &label,
            const std::string &resource_id,
