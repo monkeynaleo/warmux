@@ -252,24 +252,29 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << std::endl;
 }
 
-
 bool AppWormux::CheckInactive(SDL_Event& event)
 {
+#ifdef MAEMO
+  bool pause_all = true;
+  if (event.type==SDL_ACTIVEEVENT) {
+#else
+  bool pause_all = false;
   if (event.type==SDL_ACTIVEEVENT && event.active.state&SDL_APPACTIVE) {
+#endif
     if (Network::IsConnected()) {
       switch (event.active.gain) {
-      case 0: JukeBox::GetInstance()->Pause(); return true;
-      case 1: JukeBox::GetInstance()->Resume(); return true;
+      case 0: JukeBox::GetInstance()->Pause(pause_all); return true;
+      case 1: JukeBox::GetInstance()->Resume(pause_all); return true;
       default: break;
       }
     }
     else if (event.active.gain == 0) {
-      JukeBox::GetInstance()->Pause();
+      JukeBox::GetInstance()->Pause(pause_all);
       Time::GetInstance()->SetWaitingForUser(true);
       while (SDL_WaitEvent(&event)) {
         if (event.type == SDL_QUIT) AppWormux::EmergencyExit();
         if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) {
-          JukeBox::GetInstance()->Resume();
+          JukeBox::GetInstance()->Resume(pause_all);
           Time::GetInstance()->SetWaitingForUser(false);
           break;
         }
