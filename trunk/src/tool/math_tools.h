@@ -26,7 +26,7 @@
 
 // Template to force a value into a range.
 template <class T>
-T BorneTpl (const T &valeur, const T &min, const T &max){
+T BorneTpl(const T &valeur, const T &min, const T &max){
   if (valeur < min)
     return min;
   else if (max < valeur)
@@ -44,38 +44,38 @@ inline Double InRange_Double(const Double &valeur, const Double &min, const Doub
 }
 
 // Invert an angle along the vertical axis
-inline Double InverseAngle (const Double &angle) {
+inline Double InverseAngle(const Double &angle) {
   if (angle < 0)
     return -PI -angle;
   return PI - angle;
 }
-inline float InverseAngle (const float angle) {
+inline float InverseAngle(const float angle) {
   if (angle < 0)
     return -M_PI -angle;
   return M_PI - angle;
 }
 
-inline Double InverseAngleDeg (const Double &angle) {
+inline Double InverseAngleDeg(const Double &angle) {
   if (angle < 0)
     return -180 - angle;
   return 180 - angle;
 }
 
-inline Double InverseAngleRad (const Double &angle) { return InverseAngle(angle); }
-inline float InverseAngleRad (const float angle) { return InverseAngle(angle); }
+inline Double InverseAngleRad(const Double &angle) { return InverseAngle(angle); }
+inline float InverseAngleRad(const float angle) { return InverseAngle(angle); }
 
 inline Double RestrictAngle(Double angle)
 {
-  while (angle >= TWO_PI)
+  if (angle >= TWO_PI)
     angle -= TWO_PI;
-  while (angle < ZERO)
+  if (angle < ZERO)
     angle += TWO_PI;
   return angle;
 }
 
 // Absolute value
-inline Double AbsoluteValue (const Double x) { return x >= 0 ? x : -x; }
-inline bool EqualsZero (const Double x) { return AbsoluteValue(x) <= EPSILON; }
+inline Double AbsoluteValue(const Double x) { return x >= 0 ? x : -x; }
+inline bool EqualsZero(const Double x) { return AbsoluteValue(x) <= EPSILON; }
 
 template <class T> T max(T a, T b)
 {
