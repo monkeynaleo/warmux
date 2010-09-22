@@ -494,12 +494,6 @@ void Body::Build()
     return;
   }
 
-#if 0
-  bool visible = owner->MustBeDrawn() || owner->IsMoving();
-  if (!visible)
-    return;
-#endif
-
   ResetMovement();
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
@@ -536,11 +530,6 @@ void Body::Build()
 
 void Body::RefreshSprites()
 {
-#if 0
-  if (!owner->MustBeDrawn() && !owner->IsMoving())
-    return;
-#endif
-
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size(); layer++) {
     Member* member = layers[layer];
