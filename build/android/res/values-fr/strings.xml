@@ -13,7 +13,7 @@
     <string name="dl_from">Téléchargement à partir de %s</string>
     <string name="error_dl_from">Erreur lors du téléchargement à partir de %s</string>
     <string name="error_write">Erreur d\'écriture dans %s</string>
-    <string name="dl_progress">%.0d%% fait: fichier %s</string>
+    <string name="dl_progress">%d%% fait: fichier %s</string>
     <string name="dl_finished">Fini</string>
 
     <string name="storage_phone">Stockage interne - %d Mo de libre</string>
