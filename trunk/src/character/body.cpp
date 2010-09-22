@@ -88,7 +88,7 @@ Body::Body(const Body & _body):
   std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
 
   while (it1 != _body.members_lst.end()) {
-    if (!it1->second->IsNameWeapon()) {
+    if (it1->second->GetName() != "weapon") {
       std::pair<std::string, Member*> p;
       p.first = it1->first;
       p.second = new Member(*it1->second);
@@ -502,7 +502,7 @@ void Body::Build()
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
-    if (member->IsNameWeapon()) {
+    if (member == weapon_member) {
       continue;
     }
 
@@ -534,7 +534,7 @@ void Body::RefreshSprites()
   for (uint layer=0; layer < layers.size(); layer++) {
     Member* member = layers[layer];
 
-    if (!member->IsNameWeapon()) {
+    if (member != weapon_member) {
       member->RefreshSprite(direction);
     }
   }
@@ -574,7 +574,7 @@ void Body::Draw(const Point2i & _pos)
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size() ;layer++) {
     Member *member = layers[layer];
-    if (member->IsNameWeapon()) {
+    if (member == weapon_member) {
       // We draw the weapon member only if currently drawing the active character
       if (owner->IsActiveCharacter()) {
         ASSERT(draw_weapon_member == 0);
@@ -835,7 +835,7 @@ void Body::MakeParticles(const Point2i & pos)
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
     Member* member = current_clothe->GetLayers()[layer];
-    if (!member->IsTypeWeapon())
+    if (member != weapon_member)
       ParticleEngine::AddNow(new BodyMemberParticle(member->GetSprite(), member->GetPos()+pos));
   }
 }
@@ -846,7 +846,7 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 
   for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
     Member *member = current_clothe->GetLayers()[layer];
-    if (!member->IsTypeWeapon())
+    if (member != weapon_member)
       ParticleEngine::AddNow(new TeleportMemberParticle(member->GetSprite(),
                                                         member->GetPos()+pos, member->GetPos()+dst,
                                                         int(direction)));
