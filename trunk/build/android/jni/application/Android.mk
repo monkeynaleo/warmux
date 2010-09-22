@@ -1,5 +1,5 @@
 OTHER_PATH := $(call my-dir)
-LOCAL_PATH := $(OTHER_PATH)/../../../..
+LOCAL_PATH := $(OTHER_PATH)/../../../../
 
 include $(CLEAR_VARS)
 
