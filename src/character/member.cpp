@@ -51,7 +51,6 @@ Member::Member(const xmlNode *     xml,
 
   XmlReader::ReadStringAttr(xml, "name", name);
   ASSERT(name!="");
-  name_is_weapon = name == "weapon";
 
   // Load the sprite
   spr = GetResourceManager().LoadSprite(xml, name, main_folder);
@@ -62,7 +61,6 @@ Member::Member(const xmlNode *     xml,
   // Get the various option
   XmlReader::ReadStringAttr(xml, "type", type);
   ASSERT(type!="");
-  type_is_weapon = type == "weapon";
 
   const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
 
@@ -143,8 +141,6 @@ Member::Member(const Member & m)
   , name(m.name)
   , type(m.type)
   , anchor(m.anchor)
-  , name_is_weapon(m.name_is_weapon)
-  , type_is_weapon(m.type_is_weapon)
 {
   spr->SetRotation_HotSpot(Point2i(anchor.x, anchor.y));
 
@@ -191,7 +187,7 @@ void Member::RefreshSprite(LRDirection direction)
 {
   // The sprite pointer may be invalid at the weapon sprite.
   // Those are just asserts and not ASSERTs because they have never happened in fact
-  assert(!name_is_weapon && !type_is_weapon);
+  assert(name != "weapon");
   assert(parent != NULL || type == "body");
 
   if (DIRECTION_RIGHT == direction) {
@@ -210,7 +206,7 @@ void Member::Draw(const Point2i & _pos,
                   int             flip_center,
                   LRDirection     direction)
 {
-  assert(!name_is_weapon && !type_is_weapon);
+  assert(name != "weapon");
   assert(parent || type == "body");
 
   Point2i posi(pos.x, pos.y);
@@ -234,7 +230,7 @@ void Member::ApplySqueleton(Member * parent_member)
   }
   parent = parent_member;
 
-  assert(!parent->name_is_weapon && !parent->type_is_weapon);
+  assert(parent->name != "weapon");
 
   // Set the position
   pos = parent->pos - anchor;
@@ -312,8 +308,6 @@ WeaponMember::WeaponMember(void) :
   type   = "weapon";
   spr    = NULL;
   anchor = Point2d(0.0, 0.0);
-  name_is_weapon = true;
-  type_is_weapon = true;
 }
 
 void WeaponMember::Draw(const Point2i & /*_pos*/,
