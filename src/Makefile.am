@@ -424,6 +424,10 @@ wormux_SOURCES += wormux.rc wormux.ico
 	$(WINDRES) -I$(top_srcdir)/lib/wormux/include -D HAVE_CONFIG_H -o $@ -i $<
 endif
 
+if MAEMO
+wormux_SOURCES += maemo/osso.cpp maemo/osso.h
+endif
+
 LIBS+=@LIBINTL@
 
 if STATIC
