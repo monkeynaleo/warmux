@@ -281,6 +281,20 @@ dnl === Check for curl =========================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
+dnl === Check for libosso ==============================================================
+
+AC_ARG_ENABLE(maemo, AC_HELP_STRING([--enable-maemo], [enable Maemo support]) )
+if test "${enable_maemo}" = "yes"; then
+  PKG_CHECK_MODULES(osso, libosso,[MAEMO=yes], [AC_MSG_FAILURE([libosso not found])])
+  PKG_CHECK_MODULES(LIBGLIB, glib-2.0, [], [AC_MSG_FAILURE([glib-2.0 not found])])
+  PKG_CHECK_MODULES(LIBDBUS, dbus-1, [], [AC_MSG_FAILURE([dbus-1 not found])])
+  LIBS="$LIBS $LIBGLIB_LIBS $LIBDBUS_LIBS $osso_LIBS"
+  CFLAGS="$CFLAGS $LIBGLIB_CFLAGS $LIBDBUS_CFLAGS $osso_CFLAGS -DMAEMO"
+  CXXFLAGS="$CXXFLAGS $LIBGLIB_CFLAGS $LIBDBUS_CFLAGS $osso_CFLAGS -DMAEMO"
+fi
+
+AM_CONDITIONAL([MAEMO], [test x${enable_maemo}=xyes])
+
 dnl === Check for SDL image, mixer, etc. ==============
 
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
