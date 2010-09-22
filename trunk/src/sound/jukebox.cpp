@@ -126,6 +126,51 @@ void JukeBox::End()
   m_init = false;
 }
 
+void JukeBox::OpenDevice()
+{
+  if (m_init) return;
+  if (!m_config.music && !m_config.effects) {
+    End();
+    return;
+  }
+
+  /* Initialize the SDL library */
+  if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
+    std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
+    return;
+  }
+  m_init = true;
+
+  Uint16 audio_format = MIX_DEFAULT_FORMAT;
+  int audio_buffer = 1024;
+
+  /* Open the audio device */
+  if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
+    std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
+    End();
+    return;
+  } else {
+    Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
+    std::cout << Format(_("o Opened audio at %d Hz %d bit"),
+                        m_config.frequency, (audio_format&0xFF)) << std::endl;
+  }
+  Mix_ChannelFinished(JukeBox::EndChunk);
+  Mix_HookMusicFinished(JukeBox::EndMusic);
+
+}
+
+void JukeBox::CloseDevice()
+{
+  if (!m_init)
+    return;
+
+  Mix_CloseAudio();
+
+  if (SDL_WasInit(SDL_INIT_AUDIO))
+    SDL_QuitSubSystem(SDL_INIT_AUDIO);
+  m_init = false;
+}
+
 void JukeBox::SetFrequency(int frequency)
 {
   // We ignore frequency changes requests
