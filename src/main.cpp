@@ -46,6 +46,10 @@
 #include "particles/particle.h"
 #include "sound/jukebox.h"
 #include "tool/stats.h"
+#ifdef MAEMO
+#include "maemo/osso.h"
+#include "menu/pause_menu.h"
+#endif
 #ifdef WMX_LOG
 # include "include/debugmasks.h"
 #endif
@@ -256,6 +260,7 @@ bool AppWormux::CheckInactive(SDL_Event& event)
 {
 #ifdef MAEMO
   bool pause_all = true;
+  Osso::Process();
   if (event.type==SDL_ACTIVEEVENT) {
 #else
   bool pause_all = false;
@@ -269,12 +274,24 @@ bool AppWormux::CheckInactive(SDL_Event& event)
       }
     }
     else if (event.active.gain == 0) {
-      JukeBox::GetInstance()->Pause(pause_all);
+#ifdef MAEMO
+      JukeBox::GetInstance()->CloseDevice();
+#else
+      JukeBox::GetInstance()->Pause();
+#endif
       Time::GetInstance()->SetWaitingForUser(true);
       while (SDL_WaitEvent(&event)) {
+#ifdef MAEMO
+	Osso::Process();
+#endif
         if (event.type == SDL_QUIT) AppWormux::EmergencyExit();
         if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) {
-          JukeBox::GetInstance()->Resume(pause_all);
+#ifdef MAEMO
+	  JukeBox::GetInstance()->OpenDevice();
+	  JukeBox::GetInstance()->NextMusic();
+#else
+          JukeBox::GetInstance()->Resume();
+#endif
           Time::GetInstance()->SetWaitingForUser(false);
           break;
         }
@@ -456,6 +473,11 @@ extern "C" int main(int argc, char *argv[])
     fprintf(stderr, "Sorry, couldn't initialize SDL'!\n");
     exit(EXIT_FAILURE);
   }
+
+#ifdef MAEMO
+  Osso::Init();
+#endif
+
   AppWormux::GetInstance()->Main();
   delete AppWormux::GetInstance();
   SDL_Quit();
