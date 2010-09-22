@@ -156,7 +156,7 @@ public:
   void ScaleSize(const Point2i& size) { ScaleSize(size.x, size.y); };
 
   // Rotation
-  void SetRotation_rad( Double angle_rad);
+  void SetRotation_rad(Double angle_rad);
   const Double &GetRotation_rad() const
   {
     assert(rotation_rad > -TWO_PI && rotation_rad <= TWO_PI);
