@@ -119,6 +119,8 @@ public:
 
   void Init();
   void End();
+  void OpenDevice();
+  void CloseDevice();
 
   bool UseMusic() const { return m_config.music; }
   bool UseEffects() const { return m_config.effects; }
