@@ -577,8 +577,7 @@ void Body::Draw(const Point2i & _pos)
     if (member == weapon_member) {
       // We draw the weapon member only if currently drawing the active character
       if (owner->IsActiveCharacter()) {
-        ASSERT(draw_weapon_member == 0);
-        ASSERT(member == weapon_member);
+        assert(draw_weapon_member == 0);
         DrawWeaponMember(_pos);
         draw_weapon_member++;
       }
