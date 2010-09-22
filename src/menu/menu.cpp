@@ -351,7 +351,11 @@ bool Menu::HandleGlobalEvent(const SDL_Event & event)
 void Menu::HandleEvent(const SDL_Event& event)
 {
   if (event.type == SDL_QUIT) {
+#ifdef MAEMO
+    AppWormux::EmergencyExit();
+#else
     key_cancel();
+#endif
   } else if (event.type == SDL_KEYDOWN) {
 
     // Drop key events that are purely modifiers
