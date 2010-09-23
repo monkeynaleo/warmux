@@ -346,6 +346,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\character\member_type.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\character\movement.cpp"
 					>
 				</File>
@@ -751,6 +755,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\gui\text_box.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\torus_cache.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\torus_cache.h"
 					>
 				</File>
 				<File

@@ -26,6 +26,7 @@
 #include <WORMUX_point.h>
 #include <WORMUX_types.h>
 
+#include "character/member.h"
 #include "tool/math_tools.h"
 
 typedef struct _xmlNode xmlNode;
@@ -57,7 +58,7 @@ public:
 class Movement
 {
 public:
-  typedef std::map<std::string, class member_mvt> member_def; // Describe the position of each member for a given frame
+  typedef std::map<MemberType, class member_mvt> member_def; // Describe the position of each member for a given frame
 
 private:
   uint ref_count;

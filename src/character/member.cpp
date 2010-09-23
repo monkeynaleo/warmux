@@ -31,6 +31,24 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
+std::map<std::string, int> MemberType::Map;
+int MemberType::count = 0;
+
+Member::Member(const std::string& name_)
+  : parent(NULL)
+  , angle_rad(0)
+  , alpha(0)
+  , go_through_ground(false)
+  , attached_members()
+  , pos(0,0)
+  , scale(0,0)
+  , spr(NULL)
+  , name(name_)
+  , type(name_)
+  , anchor(0,0)
+{
+}
+
 Member::Member(const xmlNode *     xml,
                const std::string & main_folder)
   : parent(NULL)
@@ -45,10 +63,6 @@ Member::Member(const xmlNode *     xml,
   , type("")
   , anchor(0,0)
 {
-  if (NULL == xml) {
-    return;
-  }
-
   XmlReader::ReadStringAttr(xml, "name", name);
   ASSERT(name!="");
 
@@ -59,8 +73,10 @@ Member::Member(const xmlNode *     xml,
   spr->EnableLastFrameCache();
 
   // Get the various option
-  XmlReader::ReadStringAttr(xml, "type", type);
-  ASSERT(type!="");
+  std::string type_str;
+  XmlReader::ReadStringAttr(xml, "type", type_str);
+  ASSERT(type_str!="");
+  type = MemberType(type_str);
 
   const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
 
@@ -94,6 +110,7 @@ Member::Member(const xmlNode *     xml,
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
     }
+    MemberType type(att_type);
 
     XmlReader::ReadIntAttr(*it, "dx", dx);
     XmlReader::ReadIntAttr(*it, "dy", dy);
@@ -104,7 +121,7 @@ Member::Member(const xmlNode *     xml,
     if ("*" == frame_str) {
       v_attached rot_spot;
       rot_spot.assign(spr->GetFrameCount(), d);
-      attached_members[att_type] = rot_spot;
+      attached_members[type] = rot_spot;
     } else {
       int frame;
 
@@ -113,12 +130,12 @@ Member::Member(const xmlNode *     xml,
         continue;
       }
 
-      if(attached_members.find(att_type) == attached_members.end()) {
+      if(attached_members.find(type) == attached_members.end()) {
         v_attached rot_spot;
         rot_spot.resize(spr->GetFrameCount(), Point2d(0.0, 0.0));
-        attached_members[att_type] = rot_spot;
+        attached_members[type] = rot_spot;
       }
-      (attached_members.find(att_type)->second)[frame] = d;
+      (attached_members.find(type)->second)[frame] = d;
     }
   }
 
@@ -299,15 +316,6 @@ void Member::ResetMovement()
   alpha     = 1.0;
   scale.x   = 1.0;
   scale.y   = 1.0;
-}
-
-WeaponMember::WeaponMember(void) :
-  Member(NULL, "")
-{
-  name   = "weapon";
-  type   = "weapon";
-  spr    = NULL;
-  anchor = Point2d(0.0, 0.0);
 }
 
 void WeaponMember::Draw(const Point2i & /*_pos*/,
