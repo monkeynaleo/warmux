@@ -122,7 +122,7 @@ Member::Member(const xmlNode *     xml,
     }
   }
 
-  std::map<std::string, v_attached>::iterator attachment_it = attached_members.begin();
+  AttachMap::iterator attachment_it = attached_members.begin();
   for (; attachment_it != attached_members.end(); ++attachment_it)
     attachment_it->second.SetAnchor(anchor);
   
@@ -145,13 +145,13 @@ Member::Member(const Member & m)
   spr->SetRotation_HotSpot(Point2i(anchor.x, anchor.y));
 
   // TODO: Move ! ... No process in any constructor !
-  for (std::map<std::string, v_attached>::const_iterator it = m.attached_members.begin();
-      it != m.attached_members.end();
-      ++it) {
+  for (AttachMap::const_iterator it = m.attached_members.begin();
+       it != m.attached_members.end();
+       ++it) {
     attached_members[it->first] = it->second;
   }
 
-  std::map<std::string, v_attached>::iterator attachment_it = attached_members.begin();
+  AttachMap::iterator attachment_it = attached_members.begin();
   for (; attachment_it != attached_members.end(); ++attachment_it)
     attachment_it->second.SetAnchor(anchor);
 
@@ -235,7 +235,7 @@ void Member::ApplySqueleton(Member * parent_member)
   // Set the position
   pos = parent->pos - anchor;
 
-  std::map<std::string, v_attached>::iterator itAttachedMember = parent->attached_members.find(type);
+  AttachMap::iterator itAttachedMember = parent->attached_members.find(type);
 
   if (itAttachedMember != parent->attached_members.end()) {
     pos += itAttachedMember->second[parent->spr->GetCurrentFrame()].point;
@@ -256,7 +256,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
 
   // We first apply to the child (makes computations simpler in this order):
   bool check = mvt.GetAngle() != ZERO;
-  for (std::map<std::string, v_attached>::iterator child = attached_members.begin();
+  for (AttachMap::iterator child = attached_members.begin();
        child != attached_members.end();
        ++child) {
 
