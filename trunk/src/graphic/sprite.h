@@ -129,8 +129,8 @@ public:
 
   void GetScaleFactors(Double &_scale_x, Double &_scale_y) const
   {
-    _scale_x = this->scale_x;
-    _scale_y = this->scale_y;
+    _scale_x = scale_x;
+    _scale_y = scale_y;
   }
   Double GetScaleX(void) const { return scale_x; }
   Double GetScaleY(void) const { return scale_y; }
@@ -145,8 +145,10 @@ public:
 
   void Scale(Double _scale_x, Double _scale_y)
   {
-    this->scale_x = _scale_x;
-    this->scale_y = _scale_y;
+    if (scale_x==_scale_x && _scale_y==scale_y)
+      return;
+    scale_x = _scale_x;
+    scale_y = _scale_y;
     cache.InvalidLastFrame();
   }
   void ScaleSize(int width, int height)
