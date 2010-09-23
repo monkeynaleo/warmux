@@ -66,9 +66,9 @@ inline float InverseAngleRad(const float angle) { return InverseAngle(angle); }
 
 inline Double RestrictAngle(Double angle)
 {
-  if (angle >= TWO_PI)
+  while (angle >= TWO_PI)
     angle -= TWO_PI;
-  if (angle < ZERO)
+  while (angle < ZERO)
     angle += TWO_PI;
   return angle;
 }
