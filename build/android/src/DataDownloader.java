@@ -129,8 +129,8 @@ class DataDownloader extends Thread
           Parent.runOnUiThread(cb);
       }
     }
-  }
 
+  }
   public DataDownloader( MainActivity _Parent, TextView _Status )
   {
     Parent = _Parent;
@@ -155,7 +155,22 @@ class DataDownloader extends Thread
   @Override
   public void run()
   {
-    final String DownloadFlagFileName = "libsdl-DownloadFinished.flag";
+    if( ! DownloadDataFile(Globals.DataDownloadUrl, "libsdl-DownloadFinished.flag") )
+    {
+      DownloadFailed = true;
+      return;
+    }
+
+    DownloadComplete = true;
+    initParent();
+  }
+
+  public boolean DownloadDataFile(final String DataDownloadUrl, final String DownloadFlagFileName)
+  {
+    String [] downloadUrls = DataDownloadUrl.split("[|]");
+    if( downloadUrls.length < 2 )
+      return false;
+
     String path = getOutFilePath(DownloadFlagFileName);
     InputStream checkFile = null;
     try {
@@ -167,16 +182,20 @@ class DataDownloader extends Thread
       try {
         byte b[] = new byte[ Globals.DataDownloadUrl.getBytes("UTF-8").length + 1 ];
         int readed = checkFile.read(b);
-        String compare = new String( b, 0, b.length - 1, "UTF-8" );
-        //Log.i("libSDL", "Saved URL '" + compare + "' requested URL '" + Globals.DataDownloadUrl + "'");
-        if( readed != b.length - 1 )
+        String compare = new String( b, 0, readed, "UTF-8" );
+        boolean matched = false;
+        System.out.println("Read URL: '" + compare + "'");
+        for( int i = 1; i < downloadUrls.length; i++ )
+        {
+          System.out.println("Comparing: '" + downloadUrls[i] + "'");
+          if( compare.compareTo(downloadUrls[i]) == 0 )
+            matched = true;
+        }
+        System.out.println("Matched: " + String.valueOf(matched));
+        if( ! matched )
           throw new IOException();
-        if( compare.compareTo(Globals.DataDownloadUrl) != 0 )
-          throw new IOException();
-        Status.setText(res.getString(R.string.download_unneeded));
-        DownloadComplete = true;
-        initParent();
-        return;
+        Status.setText( res.getString(R.string.download_unneeded) );
+        return true;
       } catch ( IOException e ) {};
     }
     checkFile = null;
@@ -189,33 +208,36 @@ class DataDownloader extends Thread
       } catch( SecurityException e ) { };
     }
 
-    String [] downloadUrls = Globals.DataDownloadUrl.split("[|]");
-    int downloadUrlIndex = 0;
-
-    downloading:
-    while(true)
-    {
-
     HttpResponse response = null;
     HttpGet request;
     long totalLen;
     CountingInputStream stream;
     byte[] buf = new byte[16384];
+    boolean DoNotUnzip = false;
+    String url = "";
 
-    while( downloadUrlIndex < downloadUrls.length && response == null )
+    int downloadUrlIndex = 1;
+    while( downloadUrlIndex < downloadUrls.length )
     {
-      String status = res.getString(R.string.connecting_to, downloadUrls[downloadUrlIndex]);
-      System.out.println(status);
-      Status.setText(status);
-      request = new HttpGet(downloadUrls[downloadUrlIndex]);
+      System.out.println("Processing download " + downloadUrls[downloadUrlIndex]);
+      url = new String(downloadUrls[downloadUrlIndex]);
+      DoNotUnzip = false;
+      if(url.indexOf(":") == 0)
+      {
+        url = url.substring( url.indexOf(":", 1) + 1 );
+        DoNotUnzip = true;
+      }
+      String status = res.getString(R.string.connecting_to, url);
+      System.out.println( status );
+      Status.setText( status );
+      request = new HttpGet(url);
       request.addHeader("Accept", "*/*");
       try {
         DefaultHttpClient client = new DefaultHttpClient();
         client.getParams().setBooleanParameter("http.protocol.handle-redirects", true);
         response = client.execute(request);
       } catch (IOException e) {
-        System.out.println(res.getString(R.string.failed_connecting_to,
-                                         downloadUrls[downloadUrlIndex]));
+        System.out.println("Failed to connect to " + downloadUrls[downloadUrlIndex]);
         downloadUrlIndex++;
       };
       if( response != null )
@@ -223,132 +245,178 @@ class DataDownloader extends Thread
         if( response.getStatusLine().getStatusCode() != 200 )
         {
           response = null;
-          System.out.println(res.getString(R.string.failed_connecting_to,
-                                           downloadUrls[downloadUrlIndex]));
+          System.out.println("Failed to connect to " + url);
           downloadUrlIndex++;
         }
+        else
+          break;
       }
     }
-
     if( response == null )
     {
-      String status = res.getString(R.string.error_connecting_to, Globals.DataDownloadUrl);
-      System.out.println(status);
-      Status.setText(status);
-      return;
+      String status = res.getString(R.string.failed_connecting_to,
+                                    downloadUrls[downloadUrlIndex]);
+      System.out.println( status );
+      Status.setText( status );
+      return false;
     }
 
-    Status.setText(res.getString(R.string.dl_from, Globals.DataDownloadUrl));
+    Status.setText( res.getString(R.string.dl_from, url) );
     totalLen = response.getEntity().getContentLength();
     try {
       stream = new CountingInputStream(response.getEntity().getContent());
     } catch( java.io.IOException e ) {
-      Status.setText(res.getString(R.string.error_dl_from, Globals.DataDownloadUrl));
-      return;
+      Status.setText( res.getString(R.string.error_dl_from, Globals.DataDownloadUrl) );
+      return false;
     }
 
-    ZipInputStream zip = new ZipInputStream(stream);
-
-    while(true)
+    if(DoNotUnzip)
     {
-      ZipEntry entry = null;
-      try {
-        entry = zip.getNextEntry();
-      } catch( java.io.IOException e ) {
-        Status.setText(res.getString(R.string.error_dl_from, Globals.DataDownloadUrl));
-        return;
-      }
-      if( entry == null )
-        break;
-      if( entry.isDirectory() )
-      {
-        try {
-          (new File( getOutFilePath(entry.getName()) )).mkdirs();
-        } catch( SecurityException e ) { };
-        continue;
-      }
-
+      path = getOutFilePath(downloadUrls[downloadUrlIndex].substring( 1,
+          downloadUrls[downloadUrlIndex].indexOf(":", 1) ));
       OutputStream out = null;
-      path = getOutFilePath(entry.getName());
-
       try {
-        CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
-        while( check.read(buf, 0, buf.length) > 0 ) {};
-        check.close();
-        if( check.getChecksum().getValue() != entry.getCrc() )
-        {
-          File ff = new File(path);
-          ff.delete();
-          throw new Exception();
-        }
-        continue;
-      } catch( Exception e )
-      {
-      }
+        try {
+          (new File( path.substring(0, path.lastIndexOf("/") ))).mkdirs();
+        } catch( SecurityException e ) { };
 
-      try {
         out = new FileOutputStream( path );
       } catch( FileNotFoundException e ) {
       } catch( SecurityException e ) { };
       if( out == null )
       {
-        Status.setText(res.getString(R.string.error_write, path));
-        return;
+        Status.setText( res.getString(R.string.error_write, path) );
+        return false;
       }
 
-      Status.setText(res.getString(R.string.dl_progress, stream.getBytesRead() * 100 / totalLen, path));
       try {
-        int len = zip.read(buf);
+        int len = stream.read(buf);
         while (len >= 0)
         {
           if(len > 0)
             out.write(buf, 0, len);
-          len = zip.read(buf);
+          len = stream.read(buf);
 
-          Status.setText(res.getString(R.string.dl_progress,
-                                       stream.getBytesRead() * 100 / totalLen,
-                                       path));
+          Status.setText(res.getString(R.string.dl_progress, stream.getBytesRead() * 100 / totalLen, path));
         }
         out.flush();
         out.close();
         out = null;
       } catch( java.io.IOException e ) {
-        Status.setText(res.getString(R.string.error_write, path));
-        return;
+        Status.setText( res.getString(R.string.error_write, path) );
+        return false;
       }
     }
+    else
+    {
+      ZipInputStream zip = new ZipInputStream(stream);
+
+      while(true)
+      {
+        ZipEntry entry = null;
+        try {
+          entry = zip.getNextEntry();
+        } catch( java.io.IOException e ) {
+          Status.setText(res.getString(R.string.error_dl_from, url));
+          return false;
+        }
+        if( entry == null )
+          break;
+        if( entry.isDirectory() )
+        {
+          try {
+            (new File( getOutFilePath(entry.getName()) )).mkdirs();
+          } catch( SecurityException e ) { };
+          continue;
+        }
+
+        OutputStream out = null;
+        path = getOutFilePath(entry.getName());
+
+        try {
+          CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
+          while( check.read(buf, 0, buf.length) > 0 ) {};
+          check.close();
+          if( check.getChecksum().getValue() != entry.getCrc() )
+          {
+            File ff = new File(path);
+            ff.delete();
+            throw new Exception();
+          }
+          continue;
+        } catch( Exception e )
+        {
+        }
+
+        try {
+          out = new FileOutputStream( path );
+        } catch( FileNotFoundException e ) {
+        } catch( SecurityException e ) { };
+        if( out == null )
+        {
+          Status.setText( res.getString(R.string.error_write, path) );
+          return false;
+        }
+
+        Status.setText(res.getString(R.string.dl_progress, stream.getBytesRead() * 100 / totalLen, path));
+
+        try {
+          int len = zip.read(buf);
+          while (len >= 0)
+          {
+            if(len > 0)
+              out.write(buf, 0, len);
+            len = zip.read(buf);
+
+            Status.setText(res.getString(R.string.dl_progress, stream.getBytesRead() * 100 / totalLen, path));
+          }
+          out.flush();
+          out.close();
+          out = null;
+        } catch( java.io.IOException e ) {
+          Status.setText( res.getString(R.string.error_write, path) );
+          return false;
+        }
+
+        try {
+          CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
+          while( check.read(buf, 0, buf.length) > 0 ) {};
+          check.close();
+          if( check.getChecksum().getValue() != entry.getCrc() )
+          {
+            File ff = new File(path);
+            ff.delete();
+            throw new Exception();
+          }
+        } catch( Exception e )
+        {
+          Status.setText( res.getString(R.string.dl_crc_error, path) );
+          return false;
+        }
+      }
+    };
 
     OutputStream out = null;
     path = getOutFilePath(DownloadFlagFileName);
     try {
       out = new FileOutputStream( path );
-      out.write(Globals.DataDownloadUrl.getBytes("UTF-8"));
+      out.write(downloadUrls[downloadUrlIndex].getBytes("UTF-8"));
       out.flush();
       out.close();
     } catch( FileNotFoundException e ) {
     } catch( SecurityException e ) {
     } catch( java.io.IOException e ) {
-      Status.setText(res.getString(R.string.error_write, path));
-      return;
+      Status.setText( res.getString(R.string.error_write, path) );
+      return false;
     };
-
-    if( out == null )
-    {
-      Status.setText(res.getString(R.string.error_write, path));
-      return;
-    }
-
     Status.setText(res.getString(R.string.dl_finished));
-    DownloadComplete = true;
 
     try {
       stream.close();
     } catch( java.io.IOException e ) {
     };
 
-    initParent();
-    break;
-    }
+    return true;
   };
 
   private void initParent()
@@ -375,8 +443,10 @@ class DataDownloader extends Thread
   };
 
   public StatusWriter Status;
-  public boolean DownloadComplete;
+  public boolean DownloadComplete = false;
+  public boolean DownloadFailed = false;
   private MainActivity Parent;
   private String outFilesDir = null;
   private static Resources res = null;
 }
+
