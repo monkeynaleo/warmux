@@ -76,11 +76,15 @@ typedef struct _xmlNode xmlNode;
 
 class Member
 {
+public:
+  typedef std::map<std::string, v_attached> AttachMap;
+
+private:
   Member* parent;
   Double  angle_rad;
   Double  alpha;
   bool    go_through_ground;
-  std::map<std::string, v_attached> attached_members;
+  AttachMap attached_members;
   Point2d pos;
   Point2d scale;
 
@@ -123,10 +127,7 @@ public:
 
   bool IsGoingThroughGround() const { return go_through_ground; };
 
-  const std::map<std::string, v_attached> & GetAttachedMembers() const
-  {
-    return attached_members;
-  }
+  const AttachMap& GetAttachedMembers() const { return attached_members; }
 };
 
 class WeaponMember : public Member

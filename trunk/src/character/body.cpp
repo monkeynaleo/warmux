@@ -598,7 +598,7 @@ void Body::Draw(const Point2i & _pos)
 
 void Body::AddChildMembers(Member * parent)
 {
-  std::map<std::string, v_attached>::const_iterator child = parent->GetAttachedMembers().begin();
+  Member::AttachMap::const_iterator child = parent->GetAttachedMembers().begin();
 
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
