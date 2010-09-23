@@ -23,7 +23,8 @@
 #include <map>
 #include <vector>
 #include <WORMUX_point.h>
-#include "character/body.h"
+
+#include "character/member_type.h"
 
 typedef struct attachment
 {
@@ -69,7 +70,6 @@ public:
 // Forward declaration
 class Sprite;
 class c_junction; //defined in body.h
-class Movement;
 class member_mvt; //defined in movement.h
 class Profile;
 typedef struct _xmlNode xmlNode;
@@ -77,7 +77,7 @@ typedef struct _xmlNode xmlNode;
 class Member
 {
 public:
-  typedef std::map<std::string, v_attached> AttachMap;
+  typedef std::map<MemberType, v_attached> AttachMap;
 
 private:
   Member* parent;
@@ -91,12 +91,13 @@ private:
 protected:
   Sprite*     spr;
   std::string name;
-  std::string type;
+  MemberType  type;
   Point2d     anchor;
 
 public:
 
   virtual ~Member();
+  Member(const std::string& name_);
   Member(const xmlNode *     xml,
          const std::string & main_folder);
   Member(const Member & m);
@@ -109,7 +110,7 @@ public:
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(const member_mvt &                mvt,
-                     std::vector<class c_junction *> & skel_lst);
+                     std::vector<c_junction*> & skel_lst);
   void SetAngle(const Double & angle) { angle_rad = angle; };
   void RefreshSprite(LRDirection direction);
 
@@ -123,7 +124,7 @@ public:
   const Point2i GetAnchorPos() const { return Point2i(anchor.x, anchor.y); };
 
   const std::string & GetName() const { return name; };
-  const std::string & GetType() const { return type; };
+  const MemberType& GetType() const { return type; };
 
   bool IsGoingThroughGround() const { return go_through_ground; };
 
@@ -133,7 +134,7 @@ public:
 class WeaponMember : public Member
 {
 public:
-  WeaponMember(void);
+  WeaponMember(void) : Member("weapon") { }
   void Draw(const Point2i & _pos,
             int             flip_x,
             LRDirection   direction);
