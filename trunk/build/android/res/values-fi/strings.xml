@@ -13,7 +13,7 @@
     <string name="failed_connecting_to">Yhdistäminen epäonnistui %s</string>
     <string name="error_connecting_to">Virhe yhdistettäessä %s</string>
     <string name="dl_from">Ladataan kohteesta %s</string>
-    <string name="error_dl_from">Virhe ladattassa kohteesta %s</string>
+    <string name="error_dl_from">Virhe ladattaessa kohteesta %s</string>
     <string name="error_write">Virhe kirjoittaessa %s</string>
     <string name="dl_progress">%d%% valmis: tiedosto %s</string>
     <string name="dl_finished">Valmis</string>
@@ -22,7 +22,7 @@
     <string name="storage_sd">SD kortti - %d Mt vapaana</string>
     <string name="storage_question">Minne sovelluksen data ladataan</string>
 
-    <string name="controls_arrows">Nuolet / joystick / dpad</string>
+    <string name="controls_arrows">Nuolinapit / joystick / dpad</string>
     <string name="controls_trackball">Pallohiiri</string>
     <string name="controls_accel">Kiihtyvyysanturi</string>
     <string name="controls_question">Millaiset navigointinapit laittessasi on?</string>
