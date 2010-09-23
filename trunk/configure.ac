@@ -293,7 +293,7 @@ if test "${enable_maemo}" = "yes"; then
   CXXFLAGS="$CXXFLAGS $LIBGLIB_CFLAGS $LIBDBUS_CFLAGS $osso_CFLAGS -DMAEMO"
 fi
 
-AM_CONDITIONAL([MAEMO], [test x${enable_maemo}=xyes])
+AM_CONDITIONAL(MAEMO, test "x${enable_maemo}" = "xyes")
 
 dnl === Check for SDL image, mixer, etc. ==============
 
