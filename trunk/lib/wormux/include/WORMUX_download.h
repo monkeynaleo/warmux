@@ -22,6 +22,7 @@
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
 
+#include <stdio.h> // for FILE...
 #include <map>
 #include <string>
 
@@ -32,11 +33,6 @@
 
 class Downloader : public Singleton<Downloader>
 {
-  /* If you need this, implement it (correctly) */
-  Downloader(const Downloader&);
-  const Downloader& operator=(const Downloader&);
-  /**********************************************/
-
   std::string error;
 
 #ifdef HAVE_LIBCURL
