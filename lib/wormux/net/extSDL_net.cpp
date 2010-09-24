@@ -53,13 +53,20 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /* System-dependent definitions */
 #ifndef __USE_W32_SOCKETS
 #  ifdef __OS2__
-#    define closesocket     soclose
+#    define closesocket  soclose
 #  else  /* !__OS2__ */
 #    define closesocket  close
 #  endif /* __OS2__ */
+
 #  define SOCKET  int
-#  define INVALID_SOCKET  -1
-#  define SOCKET_ERROR  -1
+
+#  ifndef INVALID_SOCKET
+#    define INVALID_SOCKET  (-1)
+#  endif
+
+# ifndef SOCKET_ERROR
+#   define SOCKET_ERROR  (-1)
+# endif
 #endif /* __USE_W32_SOCKETS */
 
 #include "extSDL_net.h"
