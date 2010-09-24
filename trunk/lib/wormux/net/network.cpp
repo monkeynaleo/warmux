@@ -94,8 +94,12 @@ void WNet::Quit()
 #else
 typedef int SOCKET;
 # define SOCKET_PARAM    void
-# define SOCKET_ERROR    (-1)
-# define INVALID_SOCKET  (-1)
+# ifndef INVALID_SOCKET
+#   define INVALID_SOCKET  (-1)
+# endif
+# ifndef SOCKET_ERROR
+#   define SOCKET_ERROR    (-1)
+# endif
 # define closesocket(fd) close(fd)
 #endif
 
