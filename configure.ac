@@ -315,7 +315,6 @@ if test \
   -o x${check_sdl_gfx} = xno \
   -o x${check_sdl_net} = xno \
   -o x${check_libxml} = xno \
-  -o x${check_curl} = xno \
   ; then
   AC_MSG_RESULT([])
   if test x${check_sdl_image} = xno; then
@@ -332,9 +331,6 @@ if test \
   fi
   if test x${check_sdl_net} = xno; then
     AC_MSG_RESULT([ERROR: SDL_net library required])
-  fi
-  if test x${check_curl} = xno; then
-    AC_MSG_RESULT([ERROR: libcurl not found!])
   fi
   exit 1
 fi
