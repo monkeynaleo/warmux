@@ -100,17 +100,21 @@ fi
 # == Set flags for various environments                                  =
 # ========================================================================
 case "${host}" in
-  i[[3456789]]86-*-mingw32*)
-     WIN32="yes"
-     ;;
+  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
   *freebsd*)
-     LIBS="$LIBS -lintl" # a temporary hackish workaround
-     ;;
+    LIBS="$LIBS -lintl" # a temporary hackish workaround
+    ;;
   *cygwin*) WIN32="yes" ;;
   *-apple-darwin*)
-     OSX="yes"
-     LIBS="$LIBS -Wl,-framework,Carbon"
-     ;;
+    OSX="yes"
+    LIBS="$LIBS -Wl,-framework,Carbon"
+    ;;
+  powerpc-unknown-eabi)
+    # Supposedly Gekko system (wii/gamecube), so set proper abi flags
+    # so as to not get strange link errors
+    CFLAGS="$CFLAGS -DGEKKO -mrvl -mcpu=750 -meabi -mhard-float"
+    WIN32="no"
+    ;;
   *) WIN32="no" ;;
 esac
 AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
