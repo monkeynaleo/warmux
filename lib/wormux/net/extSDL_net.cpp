@@ -36,18 +36,31 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #  include <sys/time.h>
 #  include <unistd.h>
 #  include <fcntl.h>
-#  include <netinet/in.h>
-#  ifndef __BEOS__
-#    include <arpa/inet.h>
-#  endif
-#  ifdef linux /* FIXME: what other platforms have this? */
-#    include <netinet/tcp.h>
-#  endif
-#  ifdef __sun /* Solaris */
-#    include <sys/filio.h>
-#  endif
-#include <netdb.h>
-#include <sys/socket.h>
+
+#  ifdef GEKKO
+#    include <ogcsys.h>
+#    include <network.h>
+#    define socket  net_socket
+#    define ioctl   net_ioctl
+#    define bind    net_bind
+#    define send    net_send
+#    define connect net_connect
+#    define setsockopt net_setsockopt
+#  else
+#    include <netinet/in.h>
+#    ifndef __BEOS__
+#      include <arpa/inet.h>
+#    endif
+#    ifdef linux /* FIXME: what other platforms have this? */
+#      include <netinet/tcp.h>
+#    endif
+#    ifdef __sun /* Solaris */
+#      include <sys/filio.h>
+#    endif
+#    include <netdb.h>
+#    include <sys/socket.h>
+#  endif /* GEKKO */
+
 #endif /* WIN32 */
 
 /* System-dependent definitions */
@@ -147,7 +160,7 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
  * The following code has been written especially for Wormux
  ******************************************************************************/
 
-#ifndef WIN32
+#if !defined(WIN32) && !defined(GEKKO)
 # include <sys/ioctl.h>
 #endif
 

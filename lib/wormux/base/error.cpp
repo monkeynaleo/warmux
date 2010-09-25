@@ -39,12 +39,7 @@ static const std::string WORMUX_VERSION = PACKAGE_VERSION;
 
 void WakeUpDebugger()
 {
-#ifdef LOVE_HAYPO_HACKS
-  // Generate SIGTRAP
-  asm("int $0x03");
-#endif
-
-#if !defined(WIN32)
+#if !defined(WIN32) && !defined(GEKKO)
   kill(getpid(), SIGABRT);
 #endif
 }
