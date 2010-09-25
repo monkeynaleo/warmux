@@ -99,6 +99,9 @@ fi
 # ========================================================================
 # == Set flags for various environments                                  =
 # ========================================================================
+WIN32="no"
+GEKKO="no"
+OSX="no"
 case "${host}" in
   i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
   *freebsd*)
@@ -113,15 +116,16 @@ case "${host}" in
     # Supposedly Gekko system (wii/gamecube), so set proper abi flags
     # so as to not get strange link errors
     CFLAGS="$CFLAGS -DGEKKO -mrvl -mcpu=750 -meabi -mhard-float"
-    WIN32="no"
+    GEKKO="yes"
     ;;
-  *) WIN32="no" ;;
 esac
 AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
 
 
 if test "${WIN32}" = "yes"; then DATADIR="data"
+elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/wormux/data"
 else DATADIR="${prefix}/share/wormux"; fi
+
 AC_ARG_WITH([datadir-name],
             [AS_HELP_STRING([--with-datadir-name=DIR],
                             [specify where datas are installed (default: ${prefix}/share/wormux)])],
@@ -132,6 +136,7 @@ DATADIR="${DATADIR}/"
 
 
 if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
+elif test "${GEKKO}" = "yes"; then LOCALEDIR="sd:/apps/wormux/locale"
 else LOCALEDIR="${prefix}/share/locale"; fi
 AC_ARG_WITH([localedir-name],
             [AS_HELP_STRING([--with-localedir-name=DIR],
