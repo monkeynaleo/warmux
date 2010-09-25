@@ -459,6 +459,16 @@ extern "C" int main(int argc, char *argv[])
 #ifndef WIN32
   signal(SIGPIPE, SIG_IGN);
 #endif
+
+#ifdef GEKKO
+  // External library libfat, but let's not bother including its header
+  extern void fatInitDefault(void);
+  fatInitDefault();
+  freopen("sd:/stdout.txt", "wt", stdout);
+  freopen("sd:/stderr.txt", "wt", stderr);
+  fprintf(stdout, "Trying to force opening\n");
+#endif
+
   /* FIXME calling Config::GetInstance here means that there is no need of
    * singleton for Config but simply a global variable. This may look stange
    * but the whole system (directories, translation etc...) is needed, even for

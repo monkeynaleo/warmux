@@ -37,4 +37,8 @@
 #  define HAVE_HANDHELD
 #endif
 
+#ifdef GEKKO
+#  define HAVE_HANDHELD // Not really true, but saves memory and CPU
+#endif
+
 #endif // WORMUX_CONFIG_H

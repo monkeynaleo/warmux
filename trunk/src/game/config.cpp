@@ -76,6 +76,8 @@ static std::string GetWormuxPath()
 #else
 #  if defined(ANDROID)
 static std::string GetWormuxPath() { return "."; }
+#  elif defined(GEKKO)
+static std::string GetWormuxPath() { return "sd:/apps/Wormux"; }
 #  endif
 #  include <unistd.h> // not needed by mingw
 #endif

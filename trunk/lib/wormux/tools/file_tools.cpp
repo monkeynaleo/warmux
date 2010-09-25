@@ -62,6 +62,10 @@ bool DoesFolderExist(const std::string &name)
 
 #ifndef WIN32
 #  define MKDIR(dir) (mkdir(dir, 0750))
+#  if defined(GEKKO)
+#    define rmdir(dir) remove(dir)
+#    define dup(fd) fcntl(fd, F_DUPFD) // This is strictly not equivalent
+#  endif
 #else
 #  define MKDIR(dir) (_mkdir(dir))
 #  define rmdir(dir) (_rmdir(dir))
@@ -221,6 +225,10 @@ std::string GetTmpDir()
 std::string GetHome() { return "."; }
 std::string GetOldPersonalDir() { return ""; }
 std::string GetTmpDir() { return "."; }
+#  elif defined(GEKKO) // Wii
+std::string GetHome() { return "sd:/apps/Wormux"; }
+std::string GetOldPersonalDir() { return ""; }
+std::string GetTmpDir() { return "sd:/apps/Wormux"; }
 #  else // Linux or Apple
 std::string GetHome()
 {
@@ -334,4 +342,3 @@ std::string FormatFileName(const std::string &name)
     }
   return formated_name;
 }
-

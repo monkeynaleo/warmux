@@ -53,11 +53,20 @@
 #ifdef WIN32
 #  include <winsock2.h>
 #else
-#  include <sys/socket.h>
-#  include <netdb.h>
-#  include <netinet/in.h>
-#  include <arpa/nameser.h>
-#  include <resolv.h>
+#  ifdef GEKKO
+#    include <ogcsys.h>
+#    include <network.h>
+#    define socket  net_socket
+#    define bind    net_bind
+#    define connect net_connect
+#    define setsockopt net_setsockopt
+#  else
+#    include <sys/socket.h>
+#    include <netdb.h>
+#    include <netinet/in.h>
+#    include <arpa/nameser.h>
+#    include <resolv.h>
+#  endif
 #  include <errno.h>
 #  include <unistd.h>
 #endif

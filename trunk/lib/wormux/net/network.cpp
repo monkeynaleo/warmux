@@ -27,11 +27,20 @@
 #  include <winsock2.h>
 #  include <ws2tcpip.h>
 #else
-#  include <sys/socket.h>
-#  include <netdb.h>
-#  include <netinet/in.h>
-#  include <arpa/nameser.h>
-#  include <resolv.h>
+#  ifdef GEKKO
+#    include <ogcsys.h>
+#    include <network.h>
+#    define socket  net_socket
+#    define bind    net_bind
+#    define connect net_connect
+#    define setsockopt net_setsockopt
+#  else
+#    include <sys/socket.h>
+#    include <netdb.h>
+#    include <netinet/in.h>
+#    include <arpa/nameser.h>
+#    include <resolv.h>
+#  endif
 #  include <errno.h>
 #  include <unistd.h>
 #endif
@@ -136,6 +145,9 @@ connection_state_t WNet::GetError()
 
 connection_state_t WNet::CheckHost(const std::string &host, int prt)
 {
+#ifdef GEKKO
+  return CONN_BAD_SOCKET;
+#else
   connection_state_t s = CONN_BAD_SOCKET;
   int r;
   SOCKET sfd;
@@ -222,6 +234,7 @@ connection_state_t WNet::CheckHost(const std::string &host, int prt)
 
  err_addrinfo:
   return s;
+#endif
 }
 
 std::string WNet::IPtoDNS(IPaddress *ip)
