@@ -168,7 +168,7 @@ Config::Config()
 #  endif
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
   }
-#elif defined(_WIN32) || defined(ANDROID)
+#elif defined(_WIN32) || defined(ANDROID) || defined(GEKKO)
   std::string basepath = GetWormuxPath();
   data_dir     = basepath + PATH_SEPARATOR "data" PATH_SEPARATOR;
 #  ifdef ENABLE_NLS
@@ -180,7 +180,7 @@ Config::Config()
   personal_config_dir = GetHome() + PATH_SEPARATOR "Wormux" PATH_SEPARATOR;
   personal_data_dir = personal_config_dir;
 
-#else //Neither WIN32 nor __APPLE__
+#else //Neither WIN32, ANDROID or __APPLE__
   data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
 #  ifdef ENABLE_NLS
   locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
