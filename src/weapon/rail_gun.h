@@ -27,6 +27,7 @@
 
 class RailGun : public BaseSnipeRifle
 {
+  uint hits;
 protected:
   virtual bool p_Shoot();
   virtual void IncMissedShots();
@@ -36,6 +37,8 @@ protected:
 
 public:
   RailGun();
+
+  void IncreaseHits() { hits++; }
 
   // Must be implemented
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
