@@ -30,11 +30,9 @@
 
 class RailBullet : public WeaponBullet
 {
-  uint     hits;
 public:
   RailBullet(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
 
-  uint GetNumHits() const { return hits; }
 protected:
   ParticleEngine particle;
   void ShootSound();
@@ -49,7 +47,6 @@ protected:
 
 RailBullet::RailBullet(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher)
   : WeaponBullet("rail_bullet", cfg, p_launcher)
-  , hits(0)
 {
   explode_colliding_character = false;
   m_is_fire = true;
@@ -81,13 +78,14 @@ void RailBullet::SignalObjectCollision(const Point2d& /*my_speed_before*/,
 {
   int delta = (int)cfg.damage;
   obj->SetEnergyDelta(-delta);
-  hits++;
+  static_cast<RailGun*>(launcher)->IncreaseHits();
 }
 
 //---------------------------------------------------------------------------
 
 RailGun::RailGun()
   : BaseSnipeRifle(WEAPON_RAIL_GUN, "rail_gun")
+  , hits(0)
 {
   UpdateTranslationStrings();
   ReloadLauncher();
@@ -109,6 +107,7 @@ bool RailGun::p_Shoot()
   if (IsOnCooldownFromShot())
     return false;
 
+  hits = 0;
   projectile->Shoot(RAIL_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -117,12 +116,12 @@ bool RailGun::p_Shoot()
 
 void RailGun::IncMissedShots()
 {
-  uint hits = static_cast<RailBullet*>(projectile)->GetNumHits();
   if (!hits) {
     WeaponLauncher::IncMissedShots();
   } else if (hits > 1) {
     GameMessages::GetInstance()->Add(Format(_("Woah! Combo of %u!"), hits));
   }
+  hits = 0;
 }
 
 std::string RailGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
