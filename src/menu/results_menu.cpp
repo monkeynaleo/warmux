@@ -392,20 +392,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   tabs = new MultiTabs(tab_size);
 
-  // Create tabs for each team result
-  stats = new MultiTabs(tab_size - 2*BorderSize);
-  stats->SetMaxVisibleTabs(1);
-  for (uint i=0; i<v.size(); i++) {
-    const Team* team = v[i]->getTeam();
-    const std::string name = (team) ? team->GetName() : _("All teams");
-    stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
-  }
-  tabs->AddNewTab("TAB_team", _("Team stats"), stats);
-
-  tabs->AddNewTab("TAB_canvas", _("Team graphs"),
-                  new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
-
-  // Podium
+  // Podium, drawn as first tab
   FigureWidget::Captions captions;
   if (second_team)
     DrawTeamOnPodium(*second_team, Point2i(20,30));
@@ -444,6 +431,19 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   } else {
     tabs->AddNewTab("TAB_podium", _("Podium"), winner_box);
   }
+
+  // Create tabs for each team result
+  stats = new MultiTabs(tab_size - 2*BorderSize);
+  stats->SetMaxVisibleTabs(1);
+  for (uint i=0; i<v.size(); i++) {
+    const Team* team = v[i]->getTeam();
+    const std::string name = (team) ? team->GetName() : _("All teams");
+    stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
+  }
+  tabs->AddNewTab("TAB_team", _("Team stats"), stats);
+
+  tabs->AddNewTab("TAB_canvas", _("Team graphs"),
+                  new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
 
   // Final box
   VBox* tmp_box = new VBox(tab_size.x, false, false);
