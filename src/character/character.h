@@ -42,11 +42,6 @@ class DamageStatistics;
 
 class Character : public PhysicalObj, public MovableByUser
 {
-private:
-  /* If you need this, implement it (correctly) */
-  Character operator=(const Character&);
-  /**********************************************/
-
   std::string character_name;
 
   Team &m_team;
@@ -56,8 +51,10 @@ private:
   bool death_explosion;
   Double firing_angle;
 
+  Character *disease_dealer;
   uint disease_damage_per_turn;
   uint disease_duration; // std::numeric_limits<uint>::max() means unlimited
+
   DamageStatistics *damage_stats;
   EnergyBar * energy_bar;
 
@@ -142,9 +139,11 @@ public:
   bool IsActiveCharacter() const;
   // Disease handling
   bool IsDiseased() const { return (disease_duration > 0 && !IsDead()); };
+  const Character* GetDiseaseDealer() const { return disease_dealer; }
 
-  void SetDiseaseDamage(const uint damage_per_turn, const uint duration)
+  void SetDiseaseDamage(Character *dealer, const uint damage_per_turn, const uint duration)
   {
+    disease_dealer = dealer;
     disease_damage_per_turn = damage_per_turn;
     disease_duration = duration;
   }
@@ -157,7 +156,10 @@ public:
     if (disease_duration == std::numeric_limits<uint>::max()) return; // infinite disease duration
 
     if (disease_duration > 0) disease_duration--;
-    else disease_damage_per_turn = 0;
+    else {
+      disease_damage_per_turn = 0;
+      disease_dealer = NULL;
+    }
   }
 
   void Draw();

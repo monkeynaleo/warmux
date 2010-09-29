@@ -121,6 +121,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   back_jumping(false),
   death_explosion(true),
   firing_angle(0),
+  disease_dealer(NULL),
   disease_damage_per_turn(0),
   disease_duration(0),
   damage_stats(new DamageStatistics(*this)),
@@ -182,6 +183,7 @@ Character::Character (const Character& acharacter) :
   back_jumping(acharacter.back_jumping),
   death_explosion(acharacter.death_explosion),
   firing_angle(acharacter.firing_angle),
+  disease_dealer(acharacter.disease_dealer),
   disease_damage_per_turn(acharacter.disease_damage_per_turn),
   disease_duration(acharacter.disease_duration),
   damage_stats(new DamageStatistics(*acharacter.damage_stats, *this)),
@@ -422,8 +424,7 @@ void Character::Die()
 
   MSG_DEBUG("character", "Dying");
 
-  if (m_alive != DROWNED)
-  {
+  if (m_alive != DROWNED) {
     m_alive = DEAD;
 
     SetEnergy(0);
@@ -442,7 +443,7 @@ void Character::Die()
     ASSERT(IsDead());
 
     // Signal the death
-    Game::GetInstance()->SignalCharacterDeath (this);
+    Game::GetInstance()->SignalCharacterDeath(this);
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());

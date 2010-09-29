@@ -70,19 +70,18 @@ void Syringe::UpdateTranslationStrings()
   m_help = _("Go to opponent\nPress space to inject toxic\nOpponent will die soon");
 }
 
-bool Syringe::p_Shoot (){
+bool Syringe::p_Shoot ()
+{
   Double angle = ActiveCharacter().GetFiringAngle();
   Double radius = 0.0;
   bool end = false;
 
   JukeBox::GetInstance()->Play ("default","weapon/syringe_shoot");
 
-  do
-  {
+  do {
     // Did we have finished the computation
     radius += ONE;
-    if (cfg().range < radius)
-    {
+    if (cfg().range < radius) {
       radius = cfg().range;
       end = true;
     }
@@ -94,15 +93,14 @@ bool Syringe::p_Shoot (){
     ActiveCharacter().GetHandPosition(hand_position);
     Point2i pos_to_check = hand_position + relative_pos;
 
-    FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
-    {
-      // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
-      {
-        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-        character->SetDiseaseDamage(cfg().damage, cfg().turns);
-        end = true;
+    FOR_ALL_LIVING_CHARACTERS(team, character) {
+      if (&(*character) != &ActiveCharacter()) {
+        // Did we touch somebody ?
+        if (character->Contain(pos_to_check)) {
+          // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+          character->SetDiseaseDamage(&ActiveCharacter(), cfg().damage, cfg().turns);
+          end = true;
+        }
       }
     }
   } while (!end);
