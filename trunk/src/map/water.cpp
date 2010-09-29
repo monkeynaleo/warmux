@@ -34,20 +34,20 @@
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 
-const uint GO_UP_TIME = 1; // min
-const uint GO_UP_STEP = 15; // pixels
-const uint GO_UP_OSCILLATION_TIME = 30; // seconds
-const uint GO_UP_OSCILLATION_NBR = 30; // amplitude
-const uint MS_BETWEEN_SHIFTS = 20;
-const uint PATTERN_WIDTH = 180;
-const Double WAVE_HEIGHT_A = 5;
-const Double WAVE_HEIGHT_B = 8;
-const Double DEGREE = TWO_PI/360;
-const int WAVE_INC = 5;
-const int WAVE_COUNT = 3;
-const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
+#define GO_UP_TIME 1  // min
+#define GO_UP_STEP 15 // pixels
+#define GO_UP_OSCILLATION_TIME  30 // seconds
+#define GO_UP_OSCILLATION_NBR  30 // amplitude
+#define MS_BETWEEN_SHIFTS  20
+#define PATTERN_WIDTH  180
+#define PATTERN_HEIGHT 128
+#define WAVE_INC   5
+#define WAVE_COUNT 3
+#define WAVE_HEIGHT_A  5
+#define WAVE_HEIGHT_B  8
 
-int Water::pattern_height = 0;
+static const Double DEGREE = TWO_PI/360;
+static const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
 Water::Water()
   : type_color(NULL)
@@ -92,19 +92,10 @@ void Water::Init()
 
   surface = GetResourceManager().LoadImage(res, image, false);
 
-  image += "_bottom";
-
   type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_type));
-  pattern_height = 128;
 
-  pattern.NewSurface(Point2i(PATTERN_WIDTH, pattern_height),
+  pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
-  /* Convert the pattern into the same format than surface. This allow not to
-   * need conversions on fly and thus saves CPU */
-  pattern.SetSurface(SDL_ConvertSurface(pattern.GetSurface(),
-                                        surface.GetSurface()->format,
-                                        SDL_SWSURFACE|SDL_SRCCOLORKEY),
-                     true /* free old one */);
   pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
 
   shift1 = 0;
@@ -138,7 +129,6 @@ void Water::Free()
 
   surface.Free();
   pattern.Free();
-  pattern_height = 0;
 }
 
 void Water::Refresh()
@@ -164,7 +154,7 @@ void Water::Refresh()
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
       uint dt = now - time_raise;
-      height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
+      height_mvt = GO_UP_STEP + (int)((GO_UP_STEP *
                  sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
                      / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO_PI)
                  )/(a*dt+b));
