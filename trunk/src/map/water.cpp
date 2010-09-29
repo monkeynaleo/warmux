@@ -90,31 +90,22 @@ void Water::Init()
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  surface = GetResourceManager().LoadImage(res, image);
-  surface.SetAlpha(0, 0);
+  surface = GetResourceManager().LoadImage(res, image, false);
 
   image += "_bottom";
 
   type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_type));
-  bottom = GetResourceManager().LoadImage(res, image);
-  bottom.SetAlpha(0, 0);
-
-  pattern_height = bottom.GetHeight();
+  pattern_height = 128;
 
   pattern.NewSurface(Point2i(PATTERN_WIDTH, pattern_height),
-                     SDL_SWSURFACE|SDL_SRCALPHA, true);
+                     SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
   /* Convert the pattern into the same format than surface. This allow not to
    * need conversions on fly and thus saves CPU */
   pattern.SetSurface(SDL_ConvertSurface(pattern.GetSurface(),
                                         surface.GetSurface()->format,
-                                        SDL_SWSURFACE|SDL_SRCALPHA),
+                                        SDL_SWSURFACE|SDL_SRCCOLORKEY),
                      true /* free old one */);
-
-  // Turn on transparency for water bottom texture
-  bottom.SetSurface(SDL_ConvertSurface(bottom.GetSurface(),
-                                       bottom.GetSurface()->format,
-                                       SDL_SWSURFACE|SDL_SRCALPHA),
-                    true);
+  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
 
   shift1 = 0;
   next_wave_shift = 0;
@@ -145,7 +136,6 @@ void Water::Free()
     return;
   }
 
-  bottom.Free();
   surface.Free();
   pattern.Free();
   pattern_height = 0;
@@ -205,7 +195,7 @@ void Water::CalculateWaveHeights()
 
 void Water::CalculateWavePattern()
 {
-  pattern.SetAlpha(0, 0);
+  pattern.SetColorKey(0, 0);
   pattern.Fill(0x00000000);
 
   /* Locks on SDL_Surface must be taken when accessing pixel member */
@@ -234,7 +224,7 @@ void Water::CalculateWavePattern()
   SDL_UnlockSurface(pattern.GetSurface());
   SDL_UnlockSurface(surface.GetSurface());
 
-  pattern.SetAlpha(SDL_SRCALPHA, 0);
+  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
 }
 
 void Water::Draw()
