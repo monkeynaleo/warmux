@@ -138,7 +138,8 @@ public:
   void DisableDeathExplosion() { death_explosion = false; };
   bool IsActiveCharacter() const;
   // Disease handling
-  bool IsDiseased() const { return (disease_duration > 0 && !IsDead()); };
+  bool IsDiseased() const { return disease_duration > 0 && !IsDead(); };
+  void Cure() { disease_dealer = NULL; disease_duration = 0; disease_damage_per_turn = 0; }
   void ApplyDiseaseDamage();
 
   void SetDiseaseDamage(Character *dealer, const uint damage_per_turn, const uint duration)
