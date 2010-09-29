@@ -218,12 +218,12 @@ void Water::CalculateWavePattern()
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
   Uint32  pitch = pattern.GetSurface()->pitch;
-  Uint8 * dst;
-  Uint8 * src;
+  Uint8 * dst_origin = (Uint8*)pattern.GetSurface()->pixels + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
+  Uint8 * src_origin = (Uint8*)surface.GetSurface()->pixels;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    dst = (Uint8*)pattern.GetSurface()->pixels + x * bpp + (wave_height[0][x] + 15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
-    src = (Uint8*)surface.GetSurface()->pixels;
+    Uint8 * dst = dst_origin + x * bpp + wave_height[0][x] * pitch;
+    Uint8 * src = src_origin;
     for (uint y=0; y < (uint)surface.GetHeight(); y++) {
       memcpy(dst, src, bpp);
       dst += pitch;
