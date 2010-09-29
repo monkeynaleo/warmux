@@ -57,6 +57,8 @@ void Medkit::ApplyMedkit(Team &/*team*/, Character &player) const
   std::string txt = Format(_("%s has won %u points of energy!"),
                            player.GetName().c_str(), nbr_health);
   player.SetEnergyDelta(nbr_health, &player);
+  if (player.IsDiseased())
+    player.Cure();
   GameMessages::GetInstance()->Add(txt);
 }
 
