@@ -78,6 +78,7 @@ bool Syringe::p_Shoot ()
 
   JukeBox::GetInstance()->Play ("default","weapon/syringe_shoot");
 
+  Character* player = &ActiveCharacter();
   do {
     // Did we have finished the computation
     radius += ONE;
@@ -94,11 +95,16 @@ bool Syringe::p_Shoot ()
     Point2i pos_to_check = hand_position + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(team, character) {
-      if (&(*character) != &ActiveCharacter()) {
+      if (&(*character) != player) {
         // Did we touch somebody ?
         if (character->Contain(pos_to_check)) {
           // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-          character->SetDiseaseDamage(&ActiveCharacter(), cfg().damage, cfg().turns);
+          if (!player->GetTeam().IsSameAs(character->GetTeam()) || !player->IsDiseased())
+            character->SetDiseaseDamage(player, cfg().damage, cfg().turns);
+          else {
+            // The syringe can cure if applied to a teammate!
+            character->Cure();
+          }
           end = true;
         }
       }
