@@ -43,7 +43,6 @@ class Water
   std::vector< std::vector<int> > wave_height;
   Surface surface;
   Surface pattern;
-  Surface bottom;
   Surface wpattern;
   std::string water_type;
   uint m_last_preview_redraw;
