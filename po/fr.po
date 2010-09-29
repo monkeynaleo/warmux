@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2010-09-29 22:18+0200\n"
-"PO-Revision-Date: 2010-08-16 14:51+0100\n"
+"PO-Revision-Date: 2010-09-29 22:24+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,6 @@ msgid "%s Team - Remote"
 msgstr "Équipe %s - Distante"
 
 #: src/game/game.cpp:996
-#, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s de l'équipe %s s'est suicidé !"
 
@@ -722,12 +721,11 @@ msgstr "Diminuer le retardateur"
 
 #: src/interface/man_machine_interface.cpp:1199
 msgid "Decrease minimap size"
-msgstr ""
+msgstr "Diminuer la taille de la minimap"
 
 #: src/interface/man_machine_interface.cpp:1201
-#, fuzzy
 msgid "Decrease sound volume"
-msgstr "Diminuer le retardateur"
+msgstr "Diminuer le volume sonore"
 
 #: src/weapon/disco_grenade.cpp:157
 msgid "Disco Grenade"
@@ -906,6 +904,9 @@ msgid ""
 "Press space to inject\n"
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
+"Approchez d'un joueur\n"
+"Pressez espace pour injecter\n"
+"Soignera votre équipier ou tuera lentement votre adversaire"
 
 #: src/menu/options_menu.cpp:148
 msgid "Graphics"
@@ -972,12 +973,11 @@ msgstr "Augmenter le retardateur"
 
 #: src/interface/man_machine_interface.cpp:1200
 msgid "Increase minimap size"
-msgstr ""
+msgstr "Augmenter la taille de la minimap"
 
 #: src/interface/man_machine_interface.cpp:1202
-#, fuzzy
 msgid "Increase sound volume"
-msgstr "Augmenter le retardateur"
+msgstr "Augmenter le volume sonore"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:67
@@ -1671,7 +1671,7 @@ msgstr "Seringue"
 
 #: src/interface/man_machine_interface.cpp:1203
 msgid "Take screenshot"
-msgstr ""
+msgstr "Capture d'écran"
 
 #: src/menu/help_menu.cpp:44
 msgid "Talk in network battles"
@@ -2090,12 +2090,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid ""
-#~ "Go to opponent\n"
-#~ "Press space to inject toxic\n"
-#~ "Opponent will die soon"
-#~ msgstr ""
-#~ "Dirigez-vous vers l'adversaire\n"
-#~ "Appuyez sur espace pour lui inject le poison\n"
-#~ "L'adversaire périra bientôt"
