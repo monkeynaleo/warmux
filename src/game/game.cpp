@@ -969,8 +969,6 @@ void Game::SignalCharacterDeath(const Character *character, const Character* kil
   std::string txt;
 
   ASSERT(IsGameLaunched());
-  if (!killer)
-    killer = &ActiveCharacter();
 
   if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_BASEBALL
       && killer != character) {
@@ -1012,7 +1010,7 @@ void Game::SignalCharacterDeath(const Character *character, const Character* kil
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     }
-  } else if (killer != &ActiveCharacter()) {
+  } else if (killer != &ActiveCharacter() && killer) {
     // The killer used a weapon killing with time, like poison
     // Code duplicated a bit, but whatever
     if (killer->IsDead()) {
@@ -1025,7 +1023,7 @@ void Game::SignalCharacterDeath(const Character *character, const Character* kil
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     }
-  } else if (character->GetTeam().IsSameAs(killer->GetTeam())) {
+  } else if (killer && character->GetTeam().IsSameAs(killer->GetTeam())) {
     // The killer killed someone of his own team
     if (killer->IsDead()) {
       txt = Format(_("%s took a member of the %s team to the grave with him!"),
@@ -1067,7 +1065,7 @@ void Game::ApplyDiseaseDamage() const
 {
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     if (character->IsDiseased()) {
-      character->SetEnergyDelta(-(int)character->GetDiseaseDamage());
+      character->ApplyDiseaseDamage();
       character->DecDiseaseDuration();
     }
   }

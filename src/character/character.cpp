@@ -168,7 +168,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
 
-  SetEnergy(GameMode::GetInstance()->character.init_energy);
+  SetEnergy(NULL, GameMode::GetInstance()->character.init_energy);
 
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
@@ -212,7 +212,7 @@ Character::Character (const Character& acharacter) :
                              acharacter.energy_bar->GetMaxVal());
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
-  SetEnergy(GameMode::GetInstance()->character.init_energy);
+  SetEnergy(NULL, GameMode::GetInstance()->character.init_energy);
 
   if (acharacter.body) {
     Body * newBody = new Body(*acharacter.body);
@@ -251,9 +251,9 @@ void Character::SignalDrowning()
   Camera::GetInstance()->FollowObject(this);
 
   // Set energy
-  SetEnergy(0);
+  SetEnergy(&ActiveCharacter(), 0);
   SetMovement("drowned", true);
-  JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(),"sink");
+  JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"sink");
   Game::GetInstance()->SignalCharacterDeath (this);
 }
 
@@ -360,22 +360,32 @@ void Character::ResetDamageStats()
   damage_stats->ResetDamage();
 }
 
-void Character::SetEnergyDelta(int delta, bool do_report)
+void Character::ApplyDiseaseDamage()
+{
+  // Copy a bit SetEnergyDelta
+  // If already dead, do nothing
+  if (IsDead()) return;
+  int delta = GetDiseaseDamage();
+  disease_dealer->damage_stats->MadeDamage(-delta, *this);
+
+}
+
+void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
 {
   // If already dead, do nothing
   if (IsDead()) return;
 
-  MSG_DEBUG("character.eneforce_drawingrgy", "%s has win %d life points\n",
+  MSG_DEBUG("character.energy", "%s has win %d life points\n",
             character_name.c_str(), delta);
 
   // Report damage to damage performer
-  if (do_report)
-    ActiveCharacter().damage_stats->MadeDamage(-delta, *this);
+  if (do_report && dealer)
+    dealer->damage_stats->MadeDamage(-delta, *this);
 
   uint saved_energy = GetEnergy();
 
   // Update energy
-  SetEnergy(GetEnergy() + delta);
+  SetEnergy(dealer, GetEnergy() + delta);
 
   if (IsDead())
     return;
@@ -394,11 +404,11 @@ void Character::SetEnergyDelta(int delta, bool do_report)
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if (!IsActiveCharacter() && ActiveTeam().IsSameAs(m_team))
-    JukeBox::GetInstance()->Play (GetTeam().GetSoundProfile(), "friendly_fire");
+  if (dealer && dealer->GetTeam().IsSameAs(m_team))
+    JukeBox::GetInstance()->Play(m_team.GetSoundProfile(), "friendly_fire");
 }
 
-void Character::SetEnergy(int new_energy)
+void Character::SetEnergy(Character* dealer, int new_energy)
 {
   int diff = new_energy - m_energy;
   if (diff < 0) {
@@ -411,14 +421,14 @@ void Character::SetEnergy(int new_energy)
 
   // Change energy
   m_energy = InRange_Long((int)new_energy, 0,
-                     GameMode::GetInstance()->character.max_energy);
+                          GameMode::GetInstance()->character.max_energy);
   energy_bar->Actu(m_energy);
 
   // Dead character ?
-  if (GetEnergy() <= 0) Die();
+  if (GetEnergy() <= 0) Die(dealer);
 }
 
-void Character::Die()
+void Character::Die(Character* killer)
 {
   ASSERT (m_alive == ALIVE || m_alive == DROWNED);
 
@@ -427,7 +437,7 @@ void Character::Die()
   if (m_alive != DROWNED) {
     m_alive = DEAD;
 
-    SetEnergy(0);
+    SetEnergy(killer, 0);
 
     JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"death");
     body->SetRotation(0.0);
@@ -443,7 +453,7 @@ void Character::Die()
     ASSERT(IsDead());
 
     // Signal the death
-    Game::GetInstance()->SignalCharacterDeath(this);
+    Game::GetInstance()->SignalCharacterDeath(this, killer);
   }
 
   damage_stats->SetDeathTime(Time::GetInstance()->Read());
@@ -762,7 +772,9 @@ void Character::Collision(const Point2d& speed_vector)
 
     norm -= game_mode->safe_fall;
     Double degat = norm * game_mode->damage_per_fall_unit;
-    SetEnergyDelta (-(int)degat);
+    // If the player was clumsy and felt, he is the active character and the damage dealer
+    // If the player was blasted, this is because the weapon holder is the active character and the damage dealer
+    SetEnergyDelta(-(int)degat, &ActiveCharacter());
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
 
