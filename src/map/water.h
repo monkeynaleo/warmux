@@ -48,7 +48,6 @@ class Water
   std::string water_type;
   uint m_last_preview_redraw;
   uint next_wave_shift;
-  bool simple_mode;
 
   void Init();
   void CalculateWaveHeights();
@@ -70,7 +69,5 @@ public:
   void Splash(const Point2i& pos) const;
   void Smoke(const Point2i& pos) const;
   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
-  void SetMode(bool s) { simple_mode = s; }
-  bool GetMode() { return simple_mode; }
 };
 #endif

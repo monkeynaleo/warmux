@@ -60,11 +60,6 @@ Water::Water()
   , water_type("no")
   , m_last_preview_redraw(0)
   , next_wave_shift(0)
-#ifdef ANDROID
-  , simple_mode(true)
-#else
-  , simple_mode(false)
-#endif
 {
 }
 
@@ -179,14 +174,10 @@ void Water::Refresh()
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
       uint dt = now - time_raise;
-      if (simple_mode) {
-        height_mvt = (GO_UP_STEP*dt)/t;
-      } else {
-        height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
+      height_mvt = GO_UP_STEP + (int)(((Double)GO_UP_STEP *
                  sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
                      / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO_PI)
                  )/(a*dt+b));
-      }
     } else {
       time_raise += GO_UP_TIME * 60 * 1000;
       water_height += GO_UP_STEP;
@@ -264,43 +255,23 @@ void Water::Draw()
   int cameraRightPosition = cam->GetPosition().x + cam->GetSize().x;
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
 
-#if 0  // Refresh doesn't work, as it directly written
-  if (simple_mode) {
-    // We draw just the color, not even the pattern
-    y = screen_bottom - y;
-
-    if (y > 0) {
-      Rectanglei rect(0, cam->GetSize().y - y, cam->GetSize().x, y);
-      //printf("Drawing %ix%i at (%i,%i)\n", cam->GetSize().x, y, 0, cam->GetSize().y - y);
-
-      GetMainWindow().BoxColor(rect, *type_color);
-      //rect.SetPosition(rect.GetPosition() + cam->GetPosition());
-      //GetWorld().ToRedrawOnMap(rect);
+  for (; y < screen_bottom; y += pattern_height) {
+    for (int x = cam->GetPosition().x - x0;
+         x < cameraRightPosition;
+         x += PATTERN_WIDTH) {
+      AbsoluteDraw(bottom, Point2i(x, y));
     }
-  } else
-#endif
+  }
 
-  {
-    for (; y < screen_bottom; y += pattern_height) {
-      for (int x = cam->GetPosition().x - x0;
-           x < cameraRightPosition;
-           x += PATTERN_WIDTH) {
-        AbsoluteDraw(bottom, Point2i(x, y));
-      }
+  CalculateWavePattern();
+  y = water_top;
+  for (int wave = 0; wave < WAVE_COUNT; wave++) {
+    for (int x = cam->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
+         x < cameraRightPosition;
+         x += PATTERN_WIDTH) {
+      AbsoluteDraw(pattern, Point2i(x, y));
     }
-
-    if (!simple_mode) {
-      CalculateWavePattern();
-      y = water_top;
-      for (int wave = 0; wave < WAVE_COUNT; wave++) {
-        for (int x = cam->GetPosition().x - x0 - ((PATTERN_WIDTH/4) * wave);
-             x < cameraRightPosition;
-             x += PATTERN_WIDTH) {
-          AbsoluteDraw(pattern, Point2i(x, y));
-        }
-        y += wave * WAVE_INC;
-      }
-    }
+    y += wave * WAVE_INC;
   }
 }
 
@@ -308,7 +279,7 @@ int Water::GetHeight(int x) const
 {
   if (IsActive()) {
     //printf("Height would have been %i\n", height[x % PATTERN_WIDTH]);
-    int h = (simple_mode) ? 0 : height[x % PATTERN_WIDTH];
+    int h = height[x % PATTERN_WIDTH];
     return h + GetWorld().GetHeight() - int(water_height + height_mvt);
   } else {
     return GetWorld().GetHeight();
