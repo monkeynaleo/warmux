@@ -67,7 +67,7 @@ Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 void Syringe::UpdateTranslationStrings()
 {
   m_name = _("Syringe");
-  m_help = _("Go to opponent\nPress space to inject toxic\nOpponent will die soon");
+  m_help = _("Go to player\nPress space to inject\nWill cure your teammate or slowly kill your opponent");
 }
 
 bool Syringe::p_Shoot ()
