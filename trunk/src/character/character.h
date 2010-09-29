@@ -129,17 +129,17 @@ public:
   void StartOrStopWalkingIfNecessary();
 
   // Energy related
-  void SetEnergyDelta(int delta, bool do_report = true);
-  void SetEnergy(int new_energy);
+  void SetEnergyDelta(int delta, Character* dealer, bool do_report = true);
+  void SetEnergy(Character* dealer, int new_energy);
   inline const int & GetEnergy() const { return m_energy; };
 
   bool GotInjured() const { return lost_energy < 0; };
-  void Die();
+  void Die(Character* killer);
   void DisableDeathExplosion() { death_explosion = false; };
   bool IsActiveCharacter() const;
   // Disease handling
   bool IsDiseased() const { return (disease_duration > 0 && !IsDead()); };
-  const Character* GetDiseaseDealer() const { return disease_dealer; }
+  void ApplyDiseaseDamage();
 
   void SetDiseaseDamage(Character *dealer, const uint damage_per_turn, const uint duration)
   {

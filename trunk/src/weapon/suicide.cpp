@@ -58,11 +58,12 @@ void Suicide::Refresh()
   // The suicide sound may play at different speed for different players,
   // that's why the explosion should not depend on the fact if the sound has finished playing or not.
   uint time_since_last_fire = Time::GetInstance()->Read() - m_last_fire_time;
-  if (m_last_fire_time > 0 && time_since_last_fire > SUICIDE_SOUND_DURATION_IN_MS && !ActiveCharacter().IsDead()) {
-    ActiveCharacter().DisableDeathExplosion();
-    ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    ActiveCharacter().SetEnergy(0); // Die!
-    ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
+  Character *player = &ActiveCharacter();
+  if (m_last_fire_time > 0 && time_since_last_fire > SUICIDE_SOUND_DURATION_IN_MS && !player->IsDead()) {
+    player->DisableDeathExplosion();
+    player->body->MakeParticles(ActiveCharacter().GetPosition());
+    player->SetEnergy(player, 0); // Die!
+    ApplyExplosion(player->GetCenter(),cfg());
   }
 }
 

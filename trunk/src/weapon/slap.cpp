@@ -88,8 +88,8 @@ bool Slap::p_Shoot (){
 
   JukeBox::GetInstance()->Play ("default","weapon/slap");
 
-  do
-  {
+  Character *player = &ActiveCharacter();
+  do {
     // Did we finish the computation?
     radius += ONE;
     if (cfg().range < radius)
@@ -102,16 +102,16 @@ bool Slap::p_Shoot (){
     Point2i relative_pos(static_cast<int>(radius * cos(angle)),
                          static_cast<int>(radius * sin(angle)) );
     Point2i hand_position;
-    ActiveCharacter().GetHandPosition(hand_position);
+    player->GetHandPosition(hand_position);
     Point2i pos_to_check = hand_position + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
+    if (&(*character) != player)
     {
       // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
+      if (character->Contain(pos_to_check))
       {
         // Apply damage
-        character->SetEnergyDelta(-(int)cfg().damage);
+        character->SetEnergyDelta(-(int)cfg().damage, player);
         character->SetSpeed(cfg().strength / character->GetMass(), angle);
         character->SetMovement("fly");
         Camera::GetInstance()->FollowObject(&(*character));

@@ -107,6 +107,7 @@ void ApplyExplosion (const Point2i &pos,
   // Do not care about the death of the active character.
   Double highest_force = 0.0;
   Character* fastest_character = NULL;
+  Character* player = &ActiveCharacter();
   FOR_ALL_CHARACTERS(team, character) {
     Double distance = pos.Distance(character -> GetCenter());
     if (distance < ONE)
@@ -117,7 +118,7 @@ void ApplyExplosion (const Point2i &pos,
     if (dmg != 0) {
       MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), Double2str(distance).c_str());
       MSG_DEBUG("explosion", "hit_point_loss energy= %d", character->GetName().c_str(), dmg);
-      character->SetEnergyDelta (-dmg);
+      character->SetEnergyDelta(-dmg, player);
     }
 
     // If the character is in the blast range, apply the blast on it !
@@ -133,7 +134,7 @@ void ApplyExplosion (const Point2i &pos,
 
       Double angle;
       if (!EqualsZero(distance)) {
-        angle  = pos.ComputeAngle(character -> GetCenter());
+        angle  = pos.ComputeAngle(character->GetCenter());
         if (angle > 0)
           angle  = - angle;
       }
@@ -143,7 +144,7 @@ void ApplyExplosion (const Point2i &pos,
 
       MSG_DEBUG("explosion", "force = %s", Double2str(force).c_str());
       ASSERT(character->GetMass() != ZERO);
-      character->AddSpeed (force / character->GetMass(), angle);
+      character->AddSpeed(force / character->GetMass(), angle);
       character->SignalExplosion();
     }
   }
