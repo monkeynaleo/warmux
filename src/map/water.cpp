@@ -255,13 +255,10 @@ void Water::Draw()
   int cameraRightPosition = cam->GetPosition().x + cam->GetSize().x;
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
 
-  for (; y < screen_bottom; y += pattern_height) {
-    for (int x = cam->GetPosition().x - x0;
-         x < cameraRightPosition;
-         x += PATTERN_WIDTH) {
-      AbsoluteDraw(bottom, Point2i(x, y));
-    }
-  }
+  int h = y - cam->GetPosition().y;
+  GetMainWindow().BoxColor(Rectanglei(0, h,
+                                      cam->GetSize().x, cam->GetSize().y-h),
+                           *type_color);
 
   CalculateWavePattern();
   y = water_top;
