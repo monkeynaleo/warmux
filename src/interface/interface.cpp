@@ -397,20 +397,15 @@ void Interface::DrawMapPreview()
 
     // Draw water
     if (GetWorld().water.IsActive()) {
-      const Color * color = GetWorld().water.GetColor();
-      ASSERT(color);
+      Color color = *GetWorld().water.GetColor();
 
       // Scale water height according to preview size
       int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
       int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
-      Surface water_surf(rect_preview.GetSize() - Point2i(0, h),
-                         SDL_HWSURFACE, false);
-      water_surf.SetAlpha(SDL_SRCALPHA|SDL_RLEACCEL, 200);
-      water_surf.Fill(*color);
-
-      // Draw box with color according to water type
-      scratch->Blit(water_surf, Point2i(0, h));
+      color.SetAlpha(200);
+      scratch->BoxColor(Rectanglei(Point2i(0, h), rect_preview.GetSize() - Point2i(0, h)),
+                        color);
     }
 
     //scratch->SetAlpha(SDL_SRCALPHA, 0);
