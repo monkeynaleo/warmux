@@ -94,7 +94,7 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
   obj->SetSpeedXY(v2);
 #endif
 
-  obj->SetEnergyDelta(-(int)cfg.damage);
+  obj->SetEnergyDelta(-(int)cfg.damage, &ActiveCharacter());
   if (!obj->IsCharacter())
     Explosion();
   Ghost();

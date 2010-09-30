@@ -78,11 +78,11 @@ Anvil::~Anvil()
 }
 
 void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
-          PhysicalObj * obj,
-          const Point2d& /* obj_speed_before */)
+                                  PhysicalObj * obj,
+                                  const Point2d& /* obj_speed_before */)
 {
   merge_time = Time::GetInstance()->Read() + 5000;
-  obj->SetEnergyDelta(-200);
+  obj->SetEnergyDelta(-200, &ActiveCharacter());
   PlayCollisionSound();
 
   WeaponProjectile::Collision();

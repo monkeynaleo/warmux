@@ -163,7 +163,7 @@ void ApplyExplosion (const Point2i &pos,
 
      int dmg = GetDamageFromExplosion(config, distance);
      if (dmg != 0) {
-       obj->SetEnergyDelta(-dmg);
+       obj->SetEnergyDelta(-dmg, player);
      }
 
      if (distance <= (Double)config.blast_range) {

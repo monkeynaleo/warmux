@@ -24,6 +24,7 @@
 #include "interface/game_msg.h"
 #include "weapon/rail_gun.h"
 #include "sound/jukebox.h"
+#include "team/teams_list.h"
 #include "tool/resource_manager.h"
 
 #define RAIL_BULLET_SPEED  40
@@ -77,7 +78,7 @@ void RailBullet::SignalObjectCollision(const Point2d& /*my_speed_before*/,
                                        const Point2d& /*obj_speed*/)
 {
   int delta = (int)cfg.damage;
-  obj->SetEnergyDelta(-delta);
+  obj->SetEnergyDelta(-delta, &ActiveCharacter());
   static_cast<RailGun*>(launcher)->IncreaseHits();
 }
 

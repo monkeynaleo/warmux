@@ -172,7 +172,7 @@ void PhysicalObj::SetTestRect(uint left, uint right, uint top, uint bottom)
   ASSERT(m_test_bottom >= 0);
 }
 
-void PhysicalObj::SetEnergyDelta(int delta, bool /*do_report*/)
+void PhysicalObj::SetEnergyDelta(int delta, Character* /*dealer*/)
 {
   if (m_energy == -1)
     return;
