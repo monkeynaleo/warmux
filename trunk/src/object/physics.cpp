@@ -40,7 +40,8 @@
 // Physical constants
 static const Double STOP_REBOUND_LIMIT = 0.5;
 static const Double AIR_RESISTANCE_FACTOR = 40.0;
-static const Double PHYS_DELTA_T = 0.02;         // Physical simulation time step
+#define PHYS_DELTA_T_MS  20
+static const Double PHYS_DELTA_T = PHYS_DELTA_T_MS / 1000.0;         // Physical simulation time step
 static const Double PENDULUM_REBOUND_FACTOR = 0.8;
 
 Physics::Physics ():
@@ -440,31 +441,33 @@ Point2d Physics::ComputeNextXY(Double delta_t){
 
 void Physics::RunPhysicalEngine()
 {
-  if (m_last_physical_engine_run < m_last_move)
+  uint now = Time::GetInstance()->Read();
+  if (m_last_physical_engine_run < m_last_move) {
+    ASSERT(now >= m_last_move);
     m_last_physical_engine_run = m_last_move;
-
-  ASSERT(Time::GetInstance()->Read() >= m_last_physical_engine_run);
-  Double ms_per_s = 1000;
-  Double delta_t = (Time::GetInstance()->Read() - m_last_physical_engine_run) / ms_per_s;
+  } else {
+    ASSERT(now >= m_last_physical_engine_run);
+  }
+  uint delta_t_ms = Time::GetInstance()->Read() - m_last_physical_engine_run;
   Point2d oldPos;
   Point2d newPos;
 
-  m_last_physical_engine_run += floor(delta_t/PHYS_DELTA_T) * PHYS_DELTA_T * ms_per_s;
+  m_last_physical_engine_run += (delta_t_ms/PHYS_DELTA_T_MS) * PHYS_DELTA_T_MS;
 
   // Compute object move for each physical engine time step.
-  while (delta_t >= PHYS_DELTA_T) {
+  while (delta_t_ms >= PHYS_DELTA_T_MS) {
     oldPos = GetPos();
-    newPos = ComputeNextXY(PHYS_DELTA_T);
+    newPos = ComputeNextXY(PHYS_DELTA_T); // causes 11µs error per iteration
 
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
-      MSG_DBG_RTTI("physic.move", "%s moves (%.1f, %.1f) -> (%.1f, %.1f) - x:{%.1f, %.1f, %.1f - y:{%.1f, %.1f, %.1f} - step:%.1f",
+      MSG_DBG_RTTI("physic.move", "%s moves (%.1f, %.1f) -> (%.1f, %.1f) - x:{%.1f, %.1f, %.1f - y:{%.1f, %.1f, %.1f} - step:%ums",
                    typeid(*this).name(), oldPos.x.tofloat(), oldPos.y.tofloat(), newPos.x.tofloat(), newPos.y.tofloat(),
                    m_pos_x.x0.tofloat(), m_pos_x.x1.tofloat(), m_pos_x.x2.tofloat(),
-                   m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(), PHYS_DELTA_T.tofloat());
+                   m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(), PHYS_DELTA_T_MS);
       NotifyMove(oldPos, newPos);
     }
-    delta_t -= PHYS_DELTA_T;
+    delta_t_ms -= PHYS_DELTA_T_MS;
   }
   return;
 }
