@@ -111,7 +111,7 @@ static uint GetRandomAnimationTimeValue()
   return Time::GetInstance()->Read() + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
 }
 
-Character::Character (Team& my_team, const std::string &name, Body *char_body) :
+Character::Character(Team& my_team, const std::string &name, Body *char_body) :
   PhysicalObj("character"),
   MovableByUser(),
   character_name(name),
@@ -236,7 +236,7 @@ Character::~Character()
   if (particle_engine) {
     delete particle_engine;
   }
-  if (NULL != energy_bar) {
+  if (energy_bar) {
     delete energy_bar;
   }
   body            = NULL;
@@ -259,14 +259,14 @@ void Character::SignalDrowning()
 
 // Signal the character death (short life as you can notice)
 // May you rest in peace young one.
-void Character::SignalGhostState (bool was_dead)
+void Character::SignalGhostState(bool was_dead)
 {
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().damage_stats->MadeDamage(GetEnergy(), *this);
 
   MSG_DEBUG("character", "ghost");
   // Signal the death
-  if (!was_dead) Game::GetInstance()->SignalCharacterDeath (this);
+  if (!was_dead) Game::GetInstance()->SignalCharacterDeath(this);
 }
 
 void Character::SetDirection(LRDirection nv_direction)
@@ -280,7 +280,7 @@ void Character::SetDirection(LRDirection nv_direction)
 
 bool Character::MustDrawLostEnergy() const
 {
-  bool draw_loosing_energy = (lost_energy != 0);
+  bool draw_loosing_energy = lost_energy != 0;
   if ((IsActiveCharacter()
        && Game::GetInstance()->ReadState() != Game::END_TURN)
       || IsDead())
@@ -976,7 +976,7 @@ const std::string& Character::GetName() const
 void Character::StartOrStopWalkingIfNecessary()
 {
   const LRMoveIntention * lr_move_intention = GetLastLRMoveIntention();
-  bool should_walk = (lr_move_intention != NULL)
+  bool should_walk = lr_move_intention
     && !GetTeam().AccessWeapon().IsPreventingLRMovement()
     && HasGroundUnderFeets()
     && !IsDead();
@@ -988,7 +988,7 @@ void Character::StartOrStopWalkingIfNecessary()
   }
   if (should_walk && !IsChangingDirection()) {
     bool should_be_slowly = lr_move_intention->IsToDoItSlowly();
-    if (IsWalking() && (should_be_slowly != walking_slowly))
+    if (IsWalking() && should_be_slowly != walking_slowly)
       StopWalking();
     if (!IsWalking())
       StartWalking(should_be_slowly);
@@ -1038,7 +1038,7 @@ void Character::MakeSteps()
   uint walking_pause = GameMode::GetInstance()->character.walking_pause;
 
   const LRMoveIntention * lr_move_intention = GetLastLRMoveIntention();
-  ASSERT(lr_move_intention != NULL);
+  ASSERT(lr_move_intention);
   if (lr_move_intention->IsToDoItSlowly())
     walking_pause *= 10;
   else
@@ -1057,7 +1057,7 @@ void Character::MakeSteps()
   }
 
   // Check we can move (to go not too fast)
-  while ((rl_motion_pause + walking_pause < Time::GetInstance()->Read()) &&
+  while (rl_motion_pause+walking_pause < Time::GetInstance()->Read() &&
          ComputeHeightMovement(height)) {
     walking_time = Time::GetInstance()->Read();
     rl_motion_pause = rl_motion_pause + walking_pause;
