@@ -376,10 +376,6 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
   MSG_DEBUG("character.energy", "%s has win %d life points\n",
             character_name.c_str(), delta);
 
-  // Report damage to damage performer
-  if (dealer)
-    dealer->damage_stats->MadeDamage(-delta, *this);
-
   uint saved_energy = GetEnergy();
 
   // Update energy
@@ -400,6 +396,10 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
       JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_high");
   } else
     lost_energy = 0;
+
+  // Report damage to damage performer
+  if (dealer && lost_energy < 0)
+      dealer->damage_stats->MadeDamage(-lost_energy, *this);
 
   // "Friendly fire !!"
   if (dealer!=this && dealer->GetTeam().IsSameAs(m_team))
