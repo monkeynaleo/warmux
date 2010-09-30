@@ -269,7 +269,7 @@ void Character::SignalGhostState (bool was_dead)
   if (!was_dead) Game::GetInstance()->SignalCharacterDeath (this);
 }
 
-void Character::SetDirection (LRDirection nv_direction)
+void Character::SetDirection(LRDirection nv_direction)
 {
   body->SetDirection(nv_direction);
   uint l,r,t,b;
@@ -404,7 +404,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if (dealer && dealer->GetTeam().IsSameAs(m_team))
+  if (dealer!=this && dealer->GetTeam().IsSameAs(m_team))
     JukeBox::GetInstance()->Play(m_team.GetSoundProfile(), "friendly_fire");
 }
 
