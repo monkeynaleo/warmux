@@ -129,7 +129,7 @@ public:
   void StartOrStopWalkingIfNecessary();
 
   // Energy related
-  void SetEnergyDelta(int delta, Character* dealer, bool do_report = true);
+  void SetEnergyDelta(int delta, Character* dealer);
   void SetEnergy(int new_energy, Character* dealer);
   inline const int & GetEnergy() const { return m_energy; };
 
