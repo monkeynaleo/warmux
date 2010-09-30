@@ -90,19 +90,14 @@ public:
   Team* FindPlayingByIndex(uint index);
 };
 
-//-----------------------------------------------------------------------------
+inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
 
 // current active team
-Team& ActiveTeam();
+inline Team& ActiveTeam() { return GetTeamsList().ActiveTeam(); }
 
 // current active character
 Character& ActiveCharacter();
 
-//-----------------------------------------------------------------------------
-
 bool compareTeams(const Team *a, const Team *b);
 
-inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
-
-//-----------------------------------------------------------------------------
 #endif
