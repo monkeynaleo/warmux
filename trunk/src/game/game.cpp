@@ -1009,7 +1009,7 @@ void Game::SignalCharacterDeath(const Character *character, const Character* kil
                    character->GetName().c_str(),
                    character->GetTeam().GetName().c_str());
     }
-  } else if (killer != &ActiveCharacter() && killer) {
+  } else if (killer && killer != &ActiveCharacter()) {
     // The killer used a weapon killing with time, like poison
     // Code duplicated a bit, but whatever
     if (killer->IsDead()) {
