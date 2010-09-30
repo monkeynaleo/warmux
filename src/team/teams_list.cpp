@@ -587,25 +587,12 @@ void TeamsList::SetActive(const std::string &id)
   Error(Format(_("Can't find team %s!"), id.c_str()));
 }
 
-//-----------------------------------------------------------------------------
-
-Team& ActiveTeam()
-{
-  return GetTeamsList().ActiveTeam();
-}
-
-//-----------------------------------------------------------------------------
-
 Character& ActiveCharacter()
-{
+{ 
   return ActiveTeam().ActiveCharacter();
 }
-
-//-----------------------------------------------------------------------------
 
 bool compareTeams(const Team *a, const Team *b)
 {
   return a->GetName() < b->GetName();
 }
-
-//-----------------------------------------------------------------------------
