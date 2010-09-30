@@ -280,13 +280,12 @@ void Character::SetDirection(LRDirection nv_direction)
 
 bool Character::MustDrawLostEnergy() const
 {
-  bool draw_loosing_energy = lost_energy != 0;
   if ((IsActiveCharacter()
        && Game::GetInstance()->ReadState() != Game::END_TURN)
       || IsDead())
-    draw_loosing_energy = false;
+    return false;
 
-  return draw_loosing_energy;
+  return lost_energy != 0;
 }
 
 bool Character::MustDrawEnergyBar() const
