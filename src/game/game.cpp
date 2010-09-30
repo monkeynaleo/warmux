@@ -105,8 +105,7 @@ Game * Game::UpdateGameRules()
 {
   const std::string& config_rules = GameMode::GetRef().rules;
   printf("Current rules: %s\n", config_rules.c_str());
-  if (singleton && current_rules != config_rules)
-  {
+  if (singleton && current_rules != config_rules) {
     printf("Rules change! %s -> %s\n", current_rules.c_str(), config_rules.c_str());
     delete singleton;
   }
@@ -208,12 +207,13 @@ void Game::InitGameData_NetGameMaster()
 
 void Game::EndInitGameData_NetGameMaster()
 {
+  Network *net = Network::GetInstance();
   // Wait for all clients to be ready to play
 
   // Note that the loop also ends when there is no connected player.
   // That's important if we are connected to a dedicated server.
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_READY) != Network::GetInstance()->GetNbPlayersConnected()) {
+         && net->GetNbPlayersWithState(Player::STATE_READY) != net->GetNbPlayersConnected()) {
 
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(200);
@@ -221,34 +221,35 @@ void Game::EndInitGameData_NetGameMaster()
 
   // Before playing we should check that init phase happens correctly on all clients
   Action a(Action::ACTION_NETWORK_CHECK_PHASE1);
-  Network::GetInstance()->SendActionToAll(a);
+  net->SendActionToAll(a);
 
   // Note that the loop also ends when there is no connected player.
   // That's important if we are connected to a dedicated server.
   while (Network::IsConnected()
-         && Network::GetInstance()->GetNbPlayersWithState(Player::STATE_CHECKED) != Network::GetInstance()->GetNbPlayersConnected()) {
+         && net->GetNbPlayersWithState(Player::STATE_CHECKED) != net->GetNbPlayersConnected()) {
 
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(200);
   }
 
   // Let's play !
-  Network::GetInstance()->SetState(WNet::NETWORK_PLAYING);
-  Network::GetInstance()->SendNetworkState();
+  net->SetState(WNet::NETWORK_PLAYING);
+  net->SendNetworkState();
 }
 
 void Game::EndInitGameData_NetClient()
 {
+  Network *net = Network::GetInstance();
   // Tells server that client is ready
-  Network::GetInstance()->SetState(WNet::NETWORK_READY_TO_PLAY);
-  Network::GetInstance()->SendNetworkState();
+  net->SetState(WNet::NETWORK_READY_TO_PLAY);
+  net->SendNetworkState();
 
   // Waiting for other clients
-  std::cout << Network::GetInstance()->GetState() << " : Waiting for people over the network" << std::endl;
+  std::cout << net->GetState() << " : Waiting for people over the network" << std::endl;
 
   while (Network::IsConnected()
-         && !Network::GetInstance()->IsGameMaster()
-         && Network::GetInstance()->GetState() == WNet::NETWORK_READY_TO_PLAY)
+         && !net->IsGameMaster()
+         && net->GetState() == WNet::NETWORK_READY_TO_PLAY)
   {
     ActionHandler::GetInstance()->ExecFrameLessActions();
     SDL_Delay(100);
@@ -289,7 +290,7 @@ void Game::InitTeams()
   ActiveTeam().AccessWeapon().Select();
 
   FOR_ALL_CHARACTERS(team, character)
-    (*character).ResetDamageStats();
+    character->ResetDamageStats();
 
   ObjectsList::GetRef().PlaceMines();
 }
@@ -297,7 +298,7 @@ void Game::InitTeams()
 void Game::InitSounds()
 {
   FOR_EACH_TEAM(team)
-    if ( (**team).GetSoundProfile() != "default" )
+    if ((*team)->GetSoundProfile() != "default")
       JukeBox::GetInstance()->LoadXML((**team).GetSoundProfile()) ;
 }
 
@@ -378,7 +379,7 @@ void Game::UnloadDatas(bool game_finished) const
   if (!Network::IsConnected() || !game_finished) {
     // Fix bug #10613: ensure all teams are reseted as local teams
     FOR_EACH_TEAM(team)
-      (**team).SetDefaultPlayingConfig();
+      (*team)->SetDefaultPlayingConfig();
   }
 
   if (Network::IsConnected()) {
@@ -389,14 +390,14 @@ void Game::UnloadDatas(bool game_finished) const
 
       // Fix bug #10613: ensure all teams are reseted as local teams
       FOR_EACH_TEAM(team)
-        (**team).SetDefaultPlayingConfig();
+        (*team)->SetDefaultPlayingConfig();
     }
     // else: we will start a new round!
   } else {
 
     // Fix bug #10613: ensure all teams are reseted as local teams
     FOR_EACH_TEAM(team)
-      (**team).SetDefaultPlayingConfig();
+      (*team)->SetDefaultPlayingConfig();
   }
 
   GetTeamsList().UnloadGamingData();
@@ -516,7 +517,7 @@ void Game::RefreshObject() const
 
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
-    (**team).Refresh();
+    (*team)->Refresh();
   GetTeamsList().RefreshEnergy();
 
   ActiveTeam().AccessWeapon().Manage();
@@ -548,11 +549,11 @@ void Game::Draw()
   // 2) draw characters
   // It allows to have characters in front of names
   StatStart("GameDraw:characters");
-  FOR_ALL_CHARACTERS(team,character)
+  FOR_ALL_CHARACTERS(team, character)
     if (!character->IsActiveCharacter())
       character->DrawName();
 
-  FOR_ALL_CHARACTERS(team,character)
+  FOR_ALL_CHARACTERS(team, character)
     if (!character->IsActiveCharacter())
       character->Draw();
 
@@ -651,19 +652,17 @@ bool Game::Run()
   time_of_next_phy_frame = 0;
 
   // loop until game is finished
-  do
-    {
-      ask_for_menu = false;
-      ask_for_help_menu = false;
-      MainLoop();
+  do {
+    ask_for_menu = false;
+    ask_for_help_menu = false;
+    MainLoop();
 
-      if (ask_for_menu && MenuQuitPause())
-        break;
+    if (ask_for_menu && MenuQuitPause())
+      break;
 
-      if (ask_for_help_menu) {
-        MenuHelpPause();
-      }
-
+    if (ask_for_help_menu) {
+      MenuHelpPause();
+    }
   } while(!IsGameFinished());
 
   // the game is finished but we won't go at the results screen too fast!
@@ -1076,7 +1075,7 @@ int Game::NbrRemainingTeams() const
   uint nbr = 0;
 
   FOR_EACH_TEAM(team) {
-    if ((**team).NbAliveCharacter() > 0)
+    if ((*team)->NbAliveCharacter() > 0)
       nbr++;
   }
 
