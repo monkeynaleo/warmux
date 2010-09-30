@@ -365,12 +365,11 @@ void Character::ApplyDiseaseDamage()
   // Copy a bit SetEnergyDelta
   // If already dead, do nothing
   if (IsDead()) return;
-  int delta = GetDiseaseDamage();
-  disease_dealer->damage_stats->MadeDamage(-delta, *this);
 
+  SetEnergyDelta(-(int)GetDiseaseDamage(), disease_dealer);
 }
 
-void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
+void Character::SetEnergyDelta(int delta, Character* dealer)
 {
   // If already dead, do nothing
   if (IsDead()) return;
@@ -379,7 +378,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
             character_name.c_str(), delta);
 
   // Report damage to damage performer
-  if (do_report && dealer)
+  if (dealer)
     dealer->damage_stats->MadeDamage(-delta, *this);
 
   uint saved_energy = GetEnergy();
