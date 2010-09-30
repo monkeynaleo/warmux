@@ -202,7 +202,7 @@ void GameClassic::ApplyDeathMode () const
         // Don't report damage to the active character, it's not the responsible for this damage
         character->SetEnergyDelta(-(int)GameMode::GetInstance()->damage_per_turn_during_death_mode, NULL, false);
       else
-        character->SetEnergy(NULL, 1);
+        character->SetEnergy(1, NULL);
     }
   }
 }
