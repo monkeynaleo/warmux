@@ -130,7 +130,7 @@ public:
 
   // Energy related
   void SetEnergyDelta(int delta, Character* dealer, bool do_report = true);
-  void SetEnergy(Character* dealer, int new_energy);
+  void SetEnergy(int new_energy, Character* dealer);
   inline const int & GetEnergy() const { return m_energy; };
 
   bool GotInjured() const { return lost_energy < 0; };

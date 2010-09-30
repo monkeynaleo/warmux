@@ -62,8 +62,8 @@ void Suicide::Refresh()
   if (m_last_fire_time > 0 && time_since_last_fire > SUICIDE_SOUND_DURATION_IN_MS && !player->IsDead()) {
     player->DisableDeathExplosion();
     player->body->MakeParticles(ActiveCharacter().GetPosition());
-    player->SetEnergy(player, 0); // Die!
-    ApplyExplosion(player->GetCenter(),cfg());
+    player->SetEnergy(0, player); // Die!
+    ApplyExplosion(player->GetCenter(), cfg());
   }
 }
 

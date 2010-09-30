@@ -168,7 +168,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
 
-  SetEnergy(NULL, GameMode::GetInstance()->character.init_energy);
+  SetEnergy(GameMode::GetInstance()->character.init_energy, NULL);
 
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
@@ -212,7 +212,7 @@ Character::Character (const Character& acharacter) :
                              acharacter.energy_bar->GetMaxVal());
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
-  SetEnergy(NULL, GameMode::GetInstance()->character.init_energy);
+  SetEnergy(GameMode::GetInstance()->character.init_energy, NULL);
 
   if (acharacter.body) {
     Body * newBody = new Body(*acharacter.body);
@@ -251,7 +251,7 @@ void Character::SignalDrowning()
   Camera::GetInstance()->FollowObject(this);
 
   // Set energy
-  SetEnergy(&ActiveCharacter(), 0);
+  SetEnergy(0, &ActiveCharacter());
   SetMovement("drowned", true);
   JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"sink");
   Game::GetInstance()->SignalCharacterDeath (this);
@@ -385,7 +385,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
   uint saved_energy = GetEnergy();
 
   // Update energy
-  SetEnergy(dealer, GetEnergy() + delta);
+  SetEnergy(GetEnergy() + delta, dealer);
 
   if (IsDead())
     return;
@@ -408,7 +408,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer, bool do_report)
     JukeBox::GetInstance()->Play(m_team.GetSoundProfile(), "friendly_fire");
 }
 
-void Character::SetEnergy(Character* dealer, int new_energy)
+void Character::SetEnergy(int new_energy, Character* dealer)
 {
   int diff = new_energy - m_energy;
   if (diff < 0) {
@@ -437,7 +437,7 @@ void Character::Die(Character* killer)
   if (m_alive != DROWNED) {
     m_alive = DEAD;
 
-    SetEnergy(killer, 0);
+    SetEnergy(0, killer);
 
     JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"death");
     body->SetRotation(0.0);
