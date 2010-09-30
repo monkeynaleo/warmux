@@ -40,7 +40,9 @@ typedef enum
   DROWNED
 } alive_t;
 
+// Forward declaration
 class Action;
+class Character;
 
 #define PIXEL_PER_METER 40
 static const Double METER_PER_PIXEL(1.0/PIXEL_PER_METER);
@@ -192,7 +194,7 @@ public:
   virtual void Draw() = 0;
 
   // Damage handling
-  virtual void SetEnergyDelta(int delta, bool do_report = true);
+  virtual void SetEnergyDelta(int delta, Character* dealer);
 
   //-------- state ----
   void Init();
