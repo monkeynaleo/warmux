@@ -68,36 +68,15 @@ void JukeBox::Resume(bool all) const
 
 void JukeBox::Init()
 {
-  JukeBox::GetInstance()->ActiveMusic(Config::GetInstance()->GetSoundMusic());
-  JukeBox::GetInstance()->ActiveEffects(Config::GetInstance()->GetSoundEffects());
-  JukeBox::GetInstance()->SetFrequency(Config::GetInstance()->GetSoundFrequency());
+  ActiveMusic(Config::GetInstance()->GetSoundMusic());
+  ActiveEffects(Config::GetInstance()->GetSoundEffects());
+  SetFrequency(Config::GetInstance()->GetSoundFrequency());
 
-  if (m_init) return;
-  if (!m_config.music && !m_config.effects) {
+  if (!OpenDevice()) {
     End();
     return;
   }
 
-  /* Initialize the SDL library */
-  if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
-    std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
-    return;
-  }
-  m_init = true;
-
-  Uint16 audio_format = MIX_DEFAULT_FORMAT;
-  int audio_buffer = 1024;
-
-  /* Open the audio device */
-  if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
-    std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
-    End();
-    return;
-  } else {
-    Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
-    std::cout << Format(_("o Opened audio at %d Hz %d bit"),
-                        m_config.frequency, (audio_format&0xFF)) << std::endl;
-  }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
 
@@ -119,25 +98,22 @@ void JukeBox::End()
   m_profiles_loaded.clear();
   playlist.clear();
 
-  Mix_CloseAudio();
-
-  if (SDL_WasInit(SDL_INIT_AUDIO))
-    SDL_QuitSubSystem(SDL_INIT_AUDIO);
-  m_init = false;
+  CloseDevice();
 }
 
-void JukeBox::OpenDevice()
+bool JukeBox::OpenDevice()
 {
-  if (m_init) return;
+  if (m_init)
+    return true;
   if (!m_config.music && !m_config.effects) {
     End();
-    return;
+    return false;
   }
 
   /* Initialize the SDL library */
   if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
     std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
-    return;
+    return false;
   }
   m_init = true;
 
@@ -148,7 +124,7 @@ void JukeBox::OpenDevice()
   if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
     std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
     End();
-    return;
+    return false;
   } else {
     Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
     std::cout << Format(_("o Opened audio at %d Hz %d bit"),
@@ -156,7 +132,7 @@ void JukeBox::OpenDevice()
   }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
-
+  return true;
 }
 
 void JukeBox::CloseDevice()
