@@ -263,7 +263,13 @@ bool AppWormux::CheckInactive(SDL_Event& event)
   Osso::Process();
   if (event.type==SDL_ACTIVEEVENT) {
 #else
+
+# ifdef ANDROID
+  bool pause_all = true;
+# else
   bool pause_all = false;
+# endif
+
   if (event.type==SDL_ACTIVEEVENT && event.active.state&SDL_APPACTIVE) {
 #endif
     if (Network::IsConnected()) {
@@ -274,7 +280,7 @@ bool AppWormux::CheckInactive(SDL_Event& event)
       }
     }
     else if (event.active.gain == 0) {
-#ifdef MAEMO
+#ifdef HANDHELD
       JukeBox::GetInstance()->CloseDevice();
 #else
       JukeBox::GetInstance()->Pause();
@@ -286,7 +292,7 @@ bool AppWormux::CheckInactive(SDL_Event& event)
 #endif
         if (event.type == SDL_QUIT) AppWormux::EmergencyExit();
         if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) {
-#ifdef MAEMO
+#ifdef HANDHELD
 	  JukeBox::GetInstance()->OpenDevice();
 	  JukeBox::GetInstance()->NextMusic();
 #else
