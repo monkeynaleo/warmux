@@ -56,7 +56,6 @@ Water::Water()
   , m_last_preview_redraw(0)
   , next_wave_shift(0)
 {
-  memset(wave_height, 0, sizeof(wave_height));
   memset(height, 0, sizeof(height));
 }
 
@@ -74,9 +73,11 @@ Water::~Water()
  * The water consists of three waves, which are drawn using SIN functions in
  * different phases.
  *
- * The water is drawn in 180 x 128 blocks. The size 180 comes from SIN(2x)
- * cycle. The pattern surface is rendered using water.png (and SIN functions)
- * and water_bottom.png.
+ * The water is drawn in patterns of 180 x 128 block. The value 180 comes
+ * from SIN(2x) period.
+ *
+ * The pattern surface is rendered using water.png and SIN functions, while
+ * the bottom is just painted with a transparent color.
  */
 void Water::Init()
 {
@@ -143,7 +144,7 @@ void Water::Refresh()
   }
 
   // Height Calculation:
-  const Double t = (GO_UP_OSCILLATION_TIME*1000.0);
+  const Double t = GO_UP_OSCILLATION_TIME*1000.0;
   const Double a = GO_UP_STEP/t;
   const Double b = 1.0;
 
@@ -171,8 +172,7 @@ void Water::CalculateWaveHeights()
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
     // TODO: delete the first dimension of wave_height (now unused)
-    wave_height[0][x] = static_cast<int>(sin(angle1)*WAVE_HEIGHT_A + sin(angle2)*WAVE_HEIGHT_B);
-    height[x] = wave_height[0][x];
+    height[x] = static_cast<int>(sin(angle1)*WAVE_HEIGHT_A + sin(angle2)*WAVE_HEIGHT_B);
 
     angle1 += 2*DEGREE;
     angle2 += 4*DEGREE;
@@ -199,7 +199,7 @@ void Water::CalculateWavePattern()
   Uint8 * src_origin = (Uint8*)surface.GetSurface()->pixels;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    Uint8 * dst = dst_origin + x * bpp + wave_height[0][x] * pitch;
+    Uint8 * dst = dst_origin + x * bpp + height[x] * pitch;
     Uint8 * src = src_origin;
     for (uint y=0; y < (uint)surface.GetHeight(); y++) {
       memcpy(dst, src, bpp);

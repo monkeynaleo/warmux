@@ -40,8 +40,7 @@ class Water
   Double shift1;
   uint water_height;
   uint time_raise;
-  int height[PATTERN_WIDTH];
-  int wave_height[WAVE_COUNT][PATTERN_WIDTH];
+  int8_t height[PATTERN_WIDTH];
   Surface surface;
   Surface pattern;
   Surface wpattern;
