@@ -93,7 +93,6 @@ void Water::Init()
   surface = GetResourceManager().LoadImage(res, image, false);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
-  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
 #else
   surface = GetResourceManager().LoadImage(res, image, true);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
@@ -148,18 +147,15 @@ void Water::Refresh()
   }
 
   // Height Calculation:
-  const Double t = GO_UP_OSCILLATION_TIME*1000.0;
-  const Double a = GO_UP_STEP/t;
-  const Double b = 1.0;
-
   if (time_raise < now) {
     m_last_preview_redraw = now;
     if (time_raise + GO_UP_OSCILLATION_TIME * 1000 > now) {
+      static const Double A = GO_UP_STEP/(GO_UP_OSCILLATION_TIME*(Double)1000.0);
       uint dt = now - time_raise;
       height_mvt = GO_UP_STEP + (int)((GO_UP_STEP *
-                 sin(((Double)(dt*(GO_UP_OSCILLATION_NBR-(Double)0.25))
-                     / GO_UP_OSCILLATION_TIME/(Double)1000.0)*TWO_PI)
-                 )/(a*dt+b));
+                 sin(((dt* (GO_UP_OSCILLATION_NBR-(Double)0.25))
+                      / (GO_UP_OSCILLATION_TIME*(Double)1000.0))*TWO_PI)
+                 )/(A*dt+ONE));
     } else {
       time_raise += GO_UP_TIME * 60 * 1000;
       water_height += GO_UP_STEP;
@@ -186,7 +182,11 @@ void Water::CalculateWaveHeights()
 
 void Water::CalculateWavePattern()
 {
+#ifdef HANDHELD
   pattern.SetColorKey(0, 0);
+#else
+  pattern.SetAlpha(0, 0);
+#endif
   pattern.Fill(0x00000000);
 
   /* Locks on SDL_Surface must be taken when accessing pixel member */
@@ -215,7 +215,11 @@ void Water::CalculateWavePattern()
   SDL_UnlockSurface(pattern.GetSurface());
   SDL_UnlockSurface(surface.GetSurface());
 
+#ifdef HANDHELD
   pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
+#else
+  pattern.SetAlpha(SDL_SRCALPHA, 0);
+#endif
 }
 
 void Water::Draw()
