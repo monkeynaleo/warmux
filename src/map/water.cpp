@@ -93,6 +93,7 @@ void Water::Init()
   surface = GetResourceManager().LoadImage(res, image, false);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
+  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
 #else
   surface = GetResourceManager().LoadImage(res, image, true);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
@@ -182,25 +183,20 @@ void Water::CalculateWaveHeights()
 
 void Water::CalculateWavePattern()
 {
-#ifdef HANDHELD
-  pattern.SetColorKey(0, 0);
-#else
-  pattern.SetAlpha(0, 0);
-#endif
   pattern.Fill(0x00000000);
 
   /* Locks on SDL_Surface must be taken when accessing pixel member */
-  SDL_LockSurface(surface.GetSurface());
-  SDL_LockSurface(pattern.GetSurface());
+  surface.Lock();
+  pattern.Lock();
 
   /* Copy directly the surface image into the pattern image. This doesn't use
    * blit in order to save CPU but it makes this code not really easy to read...
    * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
 
-  Uint32  pitch = pattern.GetSurface()->pitch;
-  Uint8 * dst_origin = (Uint8*)pattern.GetSurface()->pixels + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
-  Uint8 * src_origin = (Uint8*)surface.GetSurface()->pixels;
+  Uint32  pitch = pattern.GetPitch();
+  Uint8 * dst_origin = (Uint8*)pattern.GetPixels() + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
+  Uint8 * src_origin = (Uint8*)surface.GetPixels();
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
     Uint8 * dst = dst_origin + x * bpp + height[x] * pitch;
@@ -208,18 +204,12 @@ void Water::CalculateWavePattern()
     for (uint y=0; y < (uint)surface.GetHeight(); y++) {
       memcpy(dst, src, bpp);
       dst += pitch;
-      src += bpp;
+      src += surface.GetPitch();
     }
   }
 
-  SDL_UnlockSurface(pattern.GetSurface());
-  SDL_UnlockSurface(surface.GetSurface());
-
-#ifdef HANDHELD
-  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
-#else
-  pattern.SetAlpha(SDL_SRCALPHA, 0);
-#endif
+  pattern.Unlock();
+  surface.Unlock();
 }
 
 void Water::Draw()
