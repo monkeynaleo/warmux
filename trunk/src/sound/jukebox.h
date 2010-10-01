@@ -119,7 +119,7 @@ public:
 
   void Init();
   void End();
-  void OpenDevice();
+  bool OpenDevice();
   void CloseDevice();
 
   bool UseMusic() const { return m_config.music; }
