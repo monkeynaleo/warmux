@@ -192,7 +192,7 @@ void Water::CalculateWavePattern()
   /* Copy directly the surface image into the pattern image. This doesn't use
    * blit in order to save CPU but it makes this code not really easy to read...
    * The copy is done pixel per pixel */
-  uint bpp = surface.GetSurface()->format->BytesPerPixel;
+  uint bpp = surface.GetBytesPerPixel();
 
   Uint32  pitch = pattern.GetPitch();
   Uint8 * dst_origin = (Uint8*)pattern.GetPixels() + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
