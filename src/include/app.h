@@ -57,7 +57,7 @@ public:
   int Main(void);
 
   // Calls this to check if Wormux must be moved to background
-  static bool CheckInactive(SDL_Event& event);
+  static bool CheckInactive(SDL_Event& evnt);
 };
 
 #endif

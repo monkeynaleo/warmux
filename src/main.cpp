@@ -256,12 +256,12 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << std::endl;
 }
 
-bool AppWormux::CheckInactive(SDL_Event& event)
+bool AppWormux::CheckInactive(SDL_Event& evnt)
 {
 #ifdef MAEMO
   bool pause_all = true;
   Osso::Process();
-  if (event.type==SDL_ACTIVEEVENT) {
+  if (evnt.type==SDL_ACTIVEEVENT) {
 #else
 
 # ifdef ANDROID
@@ -270,28 +270,28 @@ bool AppWormux::CheckInactive(SDL_Event& event)
   bool pause_all = false;
 # endif
 
-  if (event.type==SDL_ACTIVEEVENT && event.active.state&SDL_APPACTIVE) {
+  if (evnt.type==SDL_ACTIVEEVENT && evnt.active.state&SDL_APPACTIVE) {
 #endif
     if (Network::IsConnected()) {
-      switch (event.active.gain) {
+      switch (evnt.active.gain) {
       case 0: JukeBox::GetInstance()->Pause(pause_all); return true;
       case 1: JukeBox::GetInstance()->Resume(pause_all); return true;
       default: break;
       }
     }
-    else if (event.active.gain == 0) {
+    else if (evnt.active.gain == 0) {
 #ifdef HANDHELD
       JukeBox::GetInstance()->CloseDevice();
 #else
       JukeBox::GetInstance()->Pause();
 #endif
       Time::GetInstance()->SetWaitingForUser(true);
-      while (SDL_WaitEvent(&event)) {
+      while (SDL_WaitEvent(&evnt)) {
 #ifdef MAEMO
 	Osso::Process();
 #endif
-        if (event.type == SDL_QUIT) AppWormux::EmergencyExit();
-        if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1) {
+        if (evnt.type == SDL_QUIT) AppWormux::EmergencyExit();
+        if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
 #ifdef HANDHELD
 	  JukeBox::GetInstance()->OpenDevice();
 	  JukeBox::GetInstance()->NextMusic();
