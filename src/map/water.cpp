@@ -39,15 +39,12 @@
 #define GO_UP_OSCILLATION_TIME  30 // seconds
 #define GO_UP_OSCILLATION_NBR  30 // amplitude
 #define MS_BETWEEN_SHIFTS  20
-#define PATTERN_WIDTH  180
 #define PATTERN_HEIGHT 128
 #define WAVE_INC   5
-#define WAVE_COUNT 3
 #define WAVE_HEIGHT_A  5
 #define WAVE_HEIGHT_B  8
 
 static const Double DEGREE = TWO_PI/360;
-static const std::vector<int> EMPTY_WAVE_HEIGHT_VECTOR(PATTERN_WIDTH);
 
 Water::Water()
   : type_color(NULL)
@@ -55,12 +52,12 @@ Water::Water()
   , shift1(0)
   , water_height(0)
   , time_raise(0)
-  , height(PATTERN_WIDTH, 0)
-  , wave_height(3, EMPTY_WAVE_HEIGHT_VECTOR)
   , water_type("no")
   , m_last_preview_redraw(0)
   , next_wave_shift(0)
 {
+  memset(wave_height, 0, sizeof(wave_height));
+  memset(height, 0, sizeof(height));
 }
 
 Water::~Water()
