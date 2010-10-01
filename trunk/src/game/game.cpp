@@ -453,39 +453,39 @@ Game::~Game()
 // useful after loading screen
 void Game::IgnorePendingInputEvents() const
 {
-  SDL_Event event;
-  while(SDL_PollEvent(&event)) { ; }
+  SDL_Event evnt;
+  while(SDL_PollEvent(&evnt)) { ; }
 }
 
 void Game::RefreshInput()
 {
   // Poll and treat keyboard and mouse events
-  SDL_Event event;
-  while(SDL_PollEvent(&event)) {
+  SDL_Event evnt;
+  while(SDL_PollEvent(&evnt)) {
 
     // Emergency exit
-    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
+    if (evnt.type == SDL_KEYDOWN && evnt.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
       AppWormux::EmergencyExit();
 
-    if (event.type == SDL_QUIT) {
+    if (evnt.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       UserAsksForMenu();
       std::cout << _("END OF GAME") << std::endl;
       return;
     }
 
-    // Inactive event
-    if (AppWormux::CheckInactive(event))
+    // Inactive evnt
+    if (AppWormux::CheckInactive(evnt))
       continue;
 
-    // Mouse event
-    if (Mouse::GetInstance()->HandleEvent(event))
+    // Mouse evnt
+    if (Mouse::GetInstance()->HandleEvent(evnt))
       continue;
 
-    // Keyboard event
-    Keyboard::GetInstance()->HandleKeyEvent(event);
-    // Joystick event
-    Joystick::GetInstance()->HandleKeyEvent(event);
+    // Keyboard evnt
+    Keyboard::GetInstance()->HandleKeyEvent(evnt);
+    // Joystick evnt
+    Joystick::GetInstance()->HandleKeyEvent(evnt);
   }
 
   // Keyboard, Joystick and mouse refresh

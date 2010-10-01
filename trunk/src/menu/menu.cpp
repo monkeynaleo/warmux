@@ -412,21 +412,21 @@ void Menu::HandleEvent(const SDL_Event& event)
 void Menu::HandleEvents()
 {
   // Poll and treat events
-  SDL_Event event;
+  SDL_Event evnt;
 
-  if (!SDL_WaitEvent(&event)) {
+  if (!SDL_WaitEvent(&evnt)) {
     return;
   }
 
   do {
     // We might be set inactive while in here
-    if (AppWormux::CheckInactive(event))
+    if (AppWormux::CheckInactive(evnt))
       continue;
 
-    if (!HandleGlobalEvent(event)) {
-      HandleEvent(event);
+    if (!HandleGlobalEvent(evnt)) {
+      HandleEvent(evnt);
     }
-  } while (SDL_PollEvent(&event) && !close_menu);
+  } while (SDL_PollEvent(&evnt) && !close_menu);
 }
 
 void Menu::Run(bool skip_menu)
