@@ -88,13 +88,17 @@ void Water::Init()
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  surface = GetResourceManager().LoadImage(res, image, false);
-
   type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_type));
-
+#ifdef HANDHELD
+  surface = GetResourceManager().LoadImage(res, image, false);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
   pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
+#else
+  surface = GetResourceManager().LoadImage(res, image, true);
+  pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
+                     SDL_SWSURFACE|SDL_SRCALPHA, true);
+#endif
 
   shift1 = 0;
   next_wave_shift = 0;
