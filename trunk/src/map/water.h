@@ -26,7 +26,9 @@
 #include <WORMUX_base.h>
 #include "graphic/surface.h"
 
-const uint WATER_INITIAL_HEIGHT = 100;
+#define WATER_INITIAL_HEIGHT 100
+#define WAVE_COUNT             3
+#define PATTERN_WIDTH        180
 
 // Forward declaration
 class Color;
@@ -38,8 +40,8 @@ class Water
   Double shift1;
   uint water_height;
   uint time_raise;
-  std::vector<int> height;
-  std::vector< std::vector<int> > wave_height;
+  int height[PATTERN_WIDTH];
+  int wave_height[WAVE_COUNT][PATTERN_WIDTH];
   Surface surface;
   Surface pattern;
   Surface wpattern;
