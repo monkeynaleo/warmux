@@ -112,6 +112,7 @@ void TorusCache::Refresh(float angle, float open)
     poly->SetPlaneColor(progress_color);
     poly->ApplyTransformation(AffineTransform2D::Translate(m_big_r+1, m_big_r+1));
     poly->Draw(m_torus);
+    delete poly;
 
     m_torus->SetAlpha(SDL_SRCALPHA, 0);
   }
