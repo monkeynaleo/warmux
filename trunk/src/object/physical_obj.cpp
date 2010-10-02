@@ -143,7 +143,7 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
 
 void PhysicalObj::CheckOverlapping()
 {
-  if (m_overlapping_object == NULL)
+  if (!m_overlapping_object)
     return;
 
   // Check if we are still overlapping with this object
@@ -380,26 +380,26 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
                                             Point2d& contactPos,
                                             Double& contactAngle) const
 {
-      // Find the contact point and collision angle.
-//       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
-//       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
-//       // !!! uninitialised values of cx and cy!!
-//       if( ContactPoint(cx, cy) ){
-    int cx, cy;
+  // Find the contact point and collision angle.
+  // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
+  // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
+  // !!! uninitialised values of cx and cy!!
+  // if( ContactPoint(cx, cy) ){
+  int cx, cy;
 
-    if (ContactPoint(cx, cy)) {
-      contactAngle = GetWorld().ground.Tangent(cx, cy);
-      if(!isNaN(contactAngle)) {
-        contactPos.x = (Double)cx * METER_PER_PIXEL;
-        contactPos.y = (Double)cy * METER_PER_PIXEL;
-      } else {
-        contactAngle = - GetSpeedAngle();
-        contactPos = oldPos;
-      }
+  if (ContactPoint(cx, cy)) {
+    contactAngle = GetWorld().ground.Tangent(cx, cy);
+    if (!isNaN(contactAngle)) {
+      contactPos.x = (Double)cx * METER_PER_PIXEL;
+      contactPos.y = (Double)cy * METER_PER_PIXEL;
     } else {
       contactAngle = - GetSpeedAngle();
       contactPos = oldPos;
     }
+  } else {
+    contactAngle = - GetSpeedAngle();
+    contactPos = oldPos;
+  }
 }
 
 void PhysicalObj::UpdatePosition ()
@@ -440,10 +440,10 @@ void PhysicalObj::UpdatePosition ()
 
 bool PhysicalObj::PutOutOfGround(Double direction, Double max_distance)
 {
-  if(IsOutsideWorld(Point2i(0, 0)))
+  if (IsOutsideWorld(Point2i(0, 0)))
     return false;
 
-  if( IsInVacuum(Point2i(0, 0), false) )
+  if (IsInVacuum(Point2i(0, 0), false))
     return true;
 
   Double dx = cos(direction);
@@ -828,7 +828,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
 
     if (on_top_of_world) {
       // Give a random position for x
-      if(net_sync) {
+      if (net_sync) {
         MSG_DEBUG("random.get", "PhysicalObj::PutRandomly(...)");
         position.x = RandomSync().GetInt(0, GetWorld().GetWidth() - GetWidth());
       } else {
@@ -836,7 +836,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
       }
       position.y = -GetHeight()+1;
     } else {
-      if(net_sync) {
+      if (net_sync) {
         MSG_DEBUG("random.get", "PhysicalObj::PutRandomly(...)");
         position = RandomSync().GetPoint(GetWorld().GetSize() - GetSize() + 1);
       } else {
@@ -869,7 +869,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
       MSG_DEBUG("physic.position", "Checking distance to %s", (*character).m_name.c_str(), (*character).m_name.c_str());
       if (min_dst_with_characters == 0) {
 
-        if(Overlapse(*character)) {
+        if (Overlapse(*character)) {
             MSG_DEBUG("physic.position", "%s - Object is too close from character %s",
                       GetName().c_str(), (*character).m_name.c_str());
             ok = false;
