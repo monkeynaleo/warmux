@@ -89,7 +89,7 @@ void Water::Init()
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   type_color = new Color(GetResourceManager().LoadColor(res, "water_colors/" + water_type));
-#ifdef HANDHELD
+#ifdef HAVE_HANDHELD
   surface = GetResourceManager().LoadImage(res, image, false);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
