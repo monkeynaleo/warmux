@@ -77,8 +77,8 @@ Keyboard::GetRegisteredAction(int raw_key_code, bool ctrl, bool alt, bool shift)
 bool Keyboard::SaveKeyEvent(Key_t at, int raw_key_code,
                             bool ctrl, bool alt, bool shift)
 {
-  int key_code = raw_key_code + shift*SHIFT_OFFSET +
-                 alt*ALT_OFFSET + ctrl*CONTROL_OFFSET;
+  int key_code = raw_key_code + shift*SHIFT_OFFSET
+               + alt*ALT_OFFSET + ctrl*CONTROL_OFFSET;
   SetKeyAction(key_code, at);
   return true;
 }
@@ -104,19 +104,15 @@ void Keyboard::SetDefaultConfig()
 
 void Keyboard::SetConfig(const xmlNode *node)
 {
-  ASSERT(node != NULL);
+  ASSERT(node);
 
   //Remove old key configuration
   ClearKeyBindings();
 
   xmlNodeArray list = XmlReader::GetNamedChildren(node, "bind");
-  for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it)
-  {
+  for (xmlNodeArray::iterator it = list.begin(); it != list.end(); ++it) {
     std::string key_name, action_name;
-    bool shift, control, alt;
-    shift = false;
-    control = false;
-    alt = false;
+    bool shift = false, control = false, alt = false;
 
     //Extract XML config
     XmlReader::ReadStringAttr(*it, "key", key_name);
@@ -167,20 +163,17 @@ void Keyboard::SaveConfig(xmlNode *node) const
 
       bool shift = false, control = false, alt = false;
 
-      if (key > CONTROL_OFFSET)
-      {
+      if (key > CONTROL_OFFSET) {
         key -= CONTROL_OFFSET;
         control = true;
       }
 
-      if (key > ALT_OFFSET)
-      {
+      if (key > ALT_OFFSET) {
         key -= ALT_OFFSET;
         alt = true;
       }
 
-      if (key > SHIFT_OFFSET)
-      {
+      if (key > SHIFT_OFFSET) {
         key -= SHIFT_OFFSET;
         shift = true;
       }
@@ -206,7 +199,7 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
             key_code % MODIFIER_OFFSET);
   std::map<int, std::vector<Key_t> >::iterator it = layout.find(key_code);
 
-  if(it == layout.end())
+  if (it == layout.end())
     return;
 
 
@@ -224,12 +217,12 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
       }
     }
 
-    if(event_type == KEY_PRESSED) {
+    if (event_type == KEY_PRESSED) {
       HandleKeyPressed(*itv);
       return;
     }
 
-    if(event_type == KEY_RELEASED) {
+    if (event_type == KEY_RELEASED) {
       HandleKeyReleased(*itv);
       return;
     }
@@ -251,14 +244,14 @@ static int GetModifierBitsFromSDL() {
   return result;
 }
 
-void Keyboard::HandleKeyEvent(const SDL_Event& event)
+void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
 {
   // Not a registred event
-  if(!IsRegistredEvent(event.type))
+  if (!IsRegistredEvent(evnt.type))
     return;
 
   Key_Event_t event_type;
-  switch(event.type) {
+  switch(evnt.type) {
   case SDL_KEYDOWN:
     event_type = KEY_PRESSED;
     break;
@@ -272,15 +265,15 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
   //Handle input text for Chat session in Network game
   if (Game::GetInstance()->chatsession.CheckInput()) {
     if (event_type == KEY_PRESSED)
-      Game::GetInstance()->chatsession.HandleKeyPressed(event);
+      Game::GetInstance()->chatsession.HandleKeyPressed(evnt);
     else if (event_type == KEY_RELEASED)
-      Game::GetInstance()->chatsession.HandleKeyReleased(event);
+      Game::GetInstance()->chatsession.HandleKeyReleased(evnt);
     return;
   }
 
   int previous_modifier_bits = modifier_bits;
   modifier_bits = GetModifierBitsFromSDL();
-  SDLKey basic_key_code = event.key.keysym.sym;
+  SDLKey basic_key_code = evnt.key.keysym.sym;
   if (basic_key_code >= MODIFIER_OFFSET)
     return;
 #ifdef MAEMO
