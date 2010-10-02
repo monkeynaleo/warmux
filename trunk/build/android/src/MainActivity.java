@@ -25,7 +25,6 @@ public class MainActivity extends Activity {
     _tv = new TextView(this);
     _tv.setText(R.string.init);
     setContentView(_tv);
-
     if(mAudioThread == null) // Starting from background (should not happen)
     {
       mLoadLibraryStub = new LoadLibrary();
@@ -57,13 +56,12 @@ public class MainActivity extends Activity {
   protected void onPause() {
     if( downloader != null ) {
       synchronized( downloader ) {
-          downloader.setParent(null, null);
+        downloader.setParent(null, null);
       }
     }
-
-    super.onPause();
     if( mGLView != null )
       mGLView.onPause();
+    super.onPause();
   }
 
   @Override
@@ -71,7 +69,8 @@ public class MainActivity extends Activity {
     super.onResume();
     if( mGLView != null )
       mGLView.onResume();
-    else if( downloader != null ) {
+    else
+    if( downloader != null ) {
       synchronized( downloader ) {
         downloader.setParent(this, _tv);
         if( downloader.DownloadComplete )
@@ -81,26 +80,32 @@ public class MainActivity extends Activity {
   }
 
   @Override
-  protected void onStop()
+  protected void onDestroy()
   {
     if( downloader != null ) {
       synchronized( downloader ) {
-          downloader.setParent(null, null);
+        downloader.setParent(null, null);
       }
     }
     if( mGLView != null )
       mGLView.exitApp();
-    super.onStop();
-    finish();
+    super.onDestroy();
+    System.exit(0);
   }
 
   @Override
   public boolean onKeyDown(int keyCode, final KeyEvent event) {
     // Overrides Back key to use in our app
-     if( mGLView != null )
+    if( mGLView != null )
        mGLView.nativeKey( keyCode, 1 );
-     else if( keyCode == KeyEvent.KEYCODE_BACK && !downloader.DownloadComplete )
-       onStop();
+    else
+    if( keyCode == KeyEvent.KEYCODE_BACK && downloader != null )
+    {
+      if( downloader.DownloadFailed )
+        System.exit(1);
+      if( !downloader.DownloadComplete )
+        System.exit(1);
+    }
      return true;
   }
 
