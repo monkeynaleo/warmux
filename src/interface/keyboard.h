@@ -53,6 +53,7 @@ public:
     GetRegisteredAction(int raw_key_code, bool control, bool alt, bool shift) const;
   bool SaveKeyEvent(Key_t at, int raw_key_code,
                     bool control, bool alt, bool shift);
+  static bool IsModifier(int raw_key_code);
 };
 
 //-----------------------------------------------------------------------------
