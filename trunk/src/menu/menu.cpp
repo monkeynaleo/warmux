@@ -142,8 +142,7 @@ void Menu::LoadWidget(Profile * profile,
     currentNodeName = xmlFile->GetNodeName(currentNode);
     Widget * newWidget = CreateWidget(profile, currentNode, currentNodeName);
 
-    if (NULL != newWidget) {
-
+    if (newWidget) {
       if ("GridBox" == currentNodeName ||
           "HorizontalBox" == currentNodeName ||
           "VerticalBox" == currentNodeName) {
@@ -154,7 +153,7 @@ void Menu::LoadWidget(Profile * profile,
     currentNode = xmlFile->GetNextSibling(currentNode);
   }
 
-  if (NULL != container) {
+  if (container) {
     container->Pack();
   }
 }
@@ -191,7 +190,7 @@ Widget * Menu::CreateWidget(Profile * profile,
     widget = new Button(profile, widgetNode);
   }
 
-  if (NULL != widget) {
+  if (widget) {
     return widget->LoadXMLConfiguration() ? widget : NULL;
   }
   return NULL;
@@ -230,9 +229,9 @@ void Menu::mouse_cancel()
 
 bool Menu::BasicOnClickUp(const Point2i &mousePosition)
 {
-  if (b_ok != NULL &&  b_ok->Contains(mousePosition)) {
+  if (b_ok &&  b_ok->Contains(mousePosition)) {
     mouse_ok();
-  } else if (b_cancel != NULL && b_cancel->Contains(mousePosition)) {
+  } else if (b_cancel && b_cancel->Contains(mousePosition)) {
     mouse_cancel();
   } else {
     return false;
@@ -294,7 +293,7 @@ void Menu::DisplayError(const std::string & msg)
 
 void Menu::DrawBackground()
 {
-  if (NULL == background) {
+  if (!background) {
     return;
   }
   background->ScaleSize(GetMainWindow().GetSize()+1);
@@ -303,7 +302,7 @@ void Menu::DrawBackground()
 
 void Menu::RedrawBackground(const Rectanglei & rect) const
 {
-  if (NULL == background) {
+  if (!background) {
     return;
   }
   background->Blit(GetMainWindow(), rect, rect.GetPosition());
@@ -368,34 +367,33 @@ void Menu::HandleEvent(const SDL_Event& event)
     bool used_by_widget = widgets.SendKey(event.key.keysym);
 
     if (!used_by_widget) {
-      switch (event.key.keysym.sym)
-        {
-        case SDLK_ESCAPE:
-          key_cancel();
-          break;
-        case SDLK_RETURN:
-        case SDLK_KP_ENTER:
-          key_ok();
-          break;
-        case SDLK_UP:
-          key_up();
-          break;
-        case SDLK_DOWN:
-          key_down();
-          break;
-        case SDLK_LEFT:
-          key_left();
-          break;
-        case SDLK_RIGHT:
-          key_right();
-          break;
-        case SDLK_TAB:
-          key_tab();
-          break;
-        default:
-          // should have been handle upper!
-          break;
-        }
+      switch (event.key.keysym.sym) {
+      case SDLK_ESCAPE:
+        key_cancel();
+        break;
+      case SDLK_RETURN:
+      case SDLK_KP_ENTER:
+        key_ok();
+        break;
+      case SDLK_UP:
+        key_up();
+        break;
+      case SDLK_DOWN:
+        key_down();
+        break;
+      case SDLK_LEFT:
+        key_left();
+        break;
+      case SDLK_RIGHT:
+        key_right();
+        break;
+      case SDLK_TAB:
+        key_tab();
+        break;
+      default:
+        // should have been handle upper!
+        break;
+      }
     }
   } else if (event.type == SDL_MOUSEBUTTONUP) {
     Point2i mousePosition(event.button.x, event.button.y);
