@@ -318,29 +318,29 @@ void Menu::RedrawMenu()
 // Push a stupid user event to make the menu exits for SDL_WaitEvent
 void Menu::WakeUpOnCallback()
 {
-  SDL_Event event;
-  event.type = SDL_USEREVENT;
-  event.user.code = 0;
-  event.user.data1 = NULL;
-  event.user.data2 = NULL;
-  SDL_PushEvent(&event);
+  SDL_Event evnt;
+  evnt.type = SDL_USEREVENT;
+  evnt.user.code = 0;
+  evnt.user.data1 = NULL;
+  evnt.user.data2 = NULL;
+  SDL_PushEvent(&evnt);
 }
 
-bool Menu::HandleGlobalEvent(const SDL_Event & event)
+bool Menu::HandleGlobalEvent(const SDL_Event & evnt)
 {
-  if (event.type != SDL_KEYDOWN) {
+  if (evnt.type != SDL_KEYDOWN) {
     return false;
   }
 
   // Emergency exit
-  if (event.key.keysym.sym == SDLK_ESCAPE
+  if (evnt.key.keysym.sym == SDLK_ESCAPE
       && (SDL_GetModState() & KMOD_CTRL)) {
     AppWormux::EmergencyExit();
     return true; // never reached
   }
 
   // Toggle fullscreen
-  if (event.key.keysym.sym == SDLK_F10) {
+  if (evnt.key.keysym.sym == SDLK_F10) {
     AppWormux::GetInstance()->video->ToggleFullscreen();
     return true;
   }
@@ -348,26 +348,26 @@ bool Menu::HandleGlobalEvent(const SDL_Event & event)
   return false;
 }
 
-void Menu::HandleEvent(const SDL_Event& event)
+void Menu::HandleEvent(const SDL_Event& evnt)
 {
-  if (event.type == SDL_QUIT) {
+  if (evnt.type == SDL_QUIT) {
 #ifdef MAEMO
     AppWormux::EmergencyExit();
 #else
     key_cancel();
 #endif
-  } else if (event.type == SDL_KEYDOWN) {
+  } else if (evnt.type == SDL_KEYDOWN) {
 
     // Drop key events that are purely modifiers
-    if (Keyboard::IsModifier(event.key.keysym.sym))
+    if (Keyboard::IsModifier(evnt.key.keysym.sym))
       return;
 
     // Allow widgets to interpret any key they want,
     // and do not reserve esc/return/delete/backspace
-    bool used_by_widget = widgets.SendKey(event.key.keysym);
+    bool used_by_widget = widgets.SendKey(evnt.key.keysym);
 
     if (!used_by_widget) {
-      switch (event.key.keysym.sym) {
+      switch (evnt.key.keysym.sym) {
       case SDLK_ESCAPE:
         key_cancel();
         break;
@@ -395,15 +395,15 @@ void Menu::HandleEvent(const SDL_Event& event)
         break;
       }
     }
-  } else if (event.type == SDL_MOUSEBUTTONUP) {
-    Point2i mousePosition(event.button.x, event.button.y);
+  } else if (evnt.type == SDL_MOUSEBUTTONUP) {
+    Point2i mousePosition(evnt.button.x, evnt.button.y);
 
     if (!BasicOnClickUp(mousePosition)) {
-      OnClickUp(mousePosition, event.button.button);
+      OnClickUp(mousePosition, evnt.button.button);
     }
-  } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-    Point2i mousePosition(event.button.x, event.button.y);
-    OnClick(mousePosition, event.button.button);
+  } else if (evnt.type == SDL_MOUSEBUTTONDOWN) {
+    Point2i mousePosition(evnt.button.x, evnt.button.y);
+    OnClick(mousePosition, evnt.button.button);
   }
 }
 
