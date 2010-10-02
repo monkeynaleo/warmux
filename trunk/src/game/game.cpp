@@ -860,7 +860,7 @@ bool Game::NewBox()
   // Randomize container
   box->Randomize();
 
-  if (!box->PutRandomly(true, 0, true)) {
+  if (!box->PutRandomly(true, 20.0, true)) {
     MSG_DEBUG("box", "Missed to put a box");
     delete box;
     return false;
