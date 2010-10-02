@@ -390,11 +390,13 @@ void TileItem_ColorKey16::Empty(int start_x, int end_x, uint8_t* buf)
 void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint shift)
 {
   const Uint16 *idata  = (Uint16*)m_surface.GetPixels();
+  Uint16       *odata  = (Uint16*)out;
   uint          ipitch = m_surface.GetPitch();
   Point2i       start  = m_start_check>>shift;
   Point2i       end    = (m_end_check + (1<<shift) -1)>>shift;
 
-  out   += (x<<(2+CELL_BITS-shift)) + start.y*opitch;
+  opitch >>= 1;
+  odata += (x<<(CELL_BITS-shift)) + start.y*opitch;
   ipitch >>= 1;
   idata += (start.y<<shift)*ipitch;
 
@@ -418,23 +420,13 @@ void TileItem_ColorKey16::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 
       // Convert color_key count to alpha
       if (count) {
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN
-        out[4*i+0] = (p0 / count)>>(11-3);
-        out[4*i+1] = (p1 / count)>>(5-2);
-        out[4*i+2] = (p2 / count)<<3;
-        out[4*i+3] = (255*count)>>(2*shift);
-#else
-        out[4*i+0] = (255*count)>>(2*shift);
-        out[4*i+1] = (p2 / count)<<3;
-        out[4*i+2] = (p1 / count)>>(5-2);
-        out[4*i+3] = (p0 / count)>>(11-3);
-#endif
+        odata[i] = ((p0/count)&0xF800)|((p1/count)&0x07C0)|(p2/count);
       } else {
         // Completely transparent
-        *((Uint32*)(out+4*i)) = 0;
+        odata[i] = 0xF81F;
       }
     }
-    out   += opitch;
+    odata += opitch;
     idata += ipitch<<shift;
   }
 

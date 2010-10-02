@@ -362,38 +362,12 @@ void Interface::DrawMapPreview()
                     2*MARGIN);
   Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
 
-  if (minimap == NULL ||
-      GetWorld().ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
-      GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
+  Rectanglei clip = rect_preview;
+  SwapWindowClip(clip);
 
-    m_last_minimap_redraw = Time::GetInstance()->Read();
-    const Point2i& preview_size = GetWorld().ground.GetPreviewSize();
-
-    // Check whether the whole minimap must be updated
-    if (m_last_preview_size != preview_size) {
-      if (mask) {
-        delete mask;
-        mask = NULL;
-      }
-      if (minimap) {
-        delete minimap;
-        minimap = NULL;
-      }
-      if (scratch) {
-        delete scratch;
-        scratch = NULL;
-      }
-    }
-
-    if (!minimap)
-      minimap = new Surface(preview_size, SDL_HWSURFACE, true);
-
-    // Recreate the scratch buffer
-    if (!scratch)
-      scratch = new Surface(preview_size, SDL_HWSURFACE, true);
-
-    Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
-    scratch->Blit(*GetWorld().ground.GetPreview(), mergePos);
+  if (window.GetBytesPerPixel() == 2) {
+    window.Blit(*GetWorld().ground.GetPreview(),
+                offset-GetWorld().ground.GetPreviewRect().GetPosition());
 
     // Draw water
     if (GetWorld().water.IsActive()) {
@@ -404,28 +378,73 @@ void Interface::DrawMapPreview()
       int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
       color.SetAlpha(200);
-      scratch->BoxColor(Rectanglei(Point2i(0, h), rect_preview.GetSize() - Point2i(0, h)),
-                        color);
+      window.BoxColor(Rectanglei(Point2i(0, h)+offset, rect_preview.GetSize() - Point2i(0, h)),
+                      color);
+    }
+  } else {
+    if (minimap == NULL ||
+        GetWorld().ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
+        GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
+
+      m_last_minimap_redraw = Time::GetInstance()->Read();
+      const Point2i& preview_size = GetWorld().ground.GetPreviewSize();
+
+      // Check whether the whole minimap must be updated
+      if (m_last_preview_size != preview_size) {
+        if (mask) {
+          delete mask;
+          mask = NULL;
+        }
+        if (minimap) {
+          delete minimap;
+          minimap = NULL;
+        }
+        if (scratch) {
+          delete scratch;
+          scratch = NULL;
+        }
+      }
+
+      if (!minimap)
+        minimap = new Surface(preview_size, SDL_HWSURFACE, true);
+
+      // Recreate the scratch buffer
+      if (!scratch)
+        scratch = new Surface(preview_size, SDL_HWSURFACE, true);
+
+      Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
+      scratch->Blit(*GetWorld().ground.GetPreview(), mergePos);
+
+      // Draw water
+      if (GetWorld().water.IsActive()) {
+        Color color = *GetWorld().water.GetColor();
+
+        // Scale water height according to preview size
+        int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
+        int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
+
+        color.SetAlpha(200);
+        scratch->BoxColor(Rectanglei(Point2i(0, h), rect_preview.GetSize() - Point2i(0, h)),
+                          color);
+      }
+
+      //scratch->SetAlpha(SDL_SRCALPHA, 0);
+      if (!mask) {
+        m_last_preview_size = GetWorld().ground.GetPreviewSize();
+        mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
+
+        GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
+
+        mask->SetAlpha(0, 0);
+      }
+
+      // Compose
+      minimap->Blit(*mask);
+      minimap->Blit(*scratch);
     }
 
-    //scratch->SetAlpha(SDL_SRCALPHA, 0);
-    if (!mask) {
-      m_last_preview_size = GetWorld().ground.GetPreviewSize();
-      mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
-
-      GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
-
-      mask->SetAlpha(0, 0);
-    }
-
-    // Compose
-    minimap->Blit(*mask);
-    minimap->Blit(*scratch);
+    window.Blit(*minimap, offset);
   }
-
-  Rectanglei clip = rect_preview;
-  SwapWindowClip(clip);
-  window.Blit(*minimap, offset);
 
   Point2i coord;
 

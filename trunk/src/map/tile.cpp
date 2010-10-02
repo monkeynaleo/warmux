@@ -281,9 +281,15 @@ void Tile::InitPreview()
 
   if (m_preview)
     delete m_preview;
-  m_preview = new Surface(world_size, SDL_SWSURFACE, true);
-  // Having an alpha channel forces SDL_SRCALPHA, so we must remove it
-  m_preview->SetAlpha(0, 0);
+  if (GetMainWindow().GetBytesPerPixel() == 2) {
+    m_preview = new Surface(world_size, SDL_SWSURFACE, false);
+    m_preview->SetColorKey(SDL_SRCCOLORKEY, 0xF81F);
+    m_preview->Fill(0xF81F);
+  } else {
+    m_preview = new Surface(world_size, SDL_SWSURFACE, true);
+    // Having an alpha channel forces SDL_SRCALPHA, so we must remove it
+    m_preview->SetAlpha(0, 0);
+  }
 
   // Actual preview size from pixel-wise information
   m_preview_size = (size - m_upper_left_offset - m_lower_right_offset)>>m_shift;
@@ -301,7 +307,8 @@ void Tile::CheckPreview(bool force)
     m_last_preview_redraw = Time::GetInstance()->Read();
   }
 
-  if (!force && GetMainWindow().GetSize() == m_last_video_size)
+  const Surface& window = GetMainWindow();
+  if (!force && window.GetSize() == m_last_video_size)
     return;
 
   InitPreview();
