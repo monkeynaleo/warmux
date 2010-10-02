@@ -22,24 +22,24 @@
 #include <iostream>
 
 #include "menu/menu.h"
-#include "include/app.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "gui/big/button_pic.h"
 #include "gui/button.h"
+#include "gui/check_box.h"
 #include "gui/grid_box.h"
-#include "gui/vertical_box.h"
 #include "gui/horizontal_box.h"
+#include "gui/label.h"
+#include "gui/picture_text_cbox.h"
 #include "gui/question.h"
-#include "interface/mouse.h"
+#include "gui/spin_button.h"
+#include "gui/text_box.h"
+#include "gui/vertical_box.h"
+#include "include/app.h"
 #include "interface/keyboard.h"
+#include "interface/mouse.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
-#include "gui/big/button_pic.h"
-#include "gui/label.h"
-#include "gui/check_box.h"
-#include "gui/picture_text_cbox.h"
-#include "gui/text_box.h"
-#include "gui/spin_button.h"
 
 Menu::Menu(const std::string& bg, t_action _actions)
   : actions(_actions)
