@@ -60,7 +60,7 @@ class NetworkMenu : public Menu
   virtual void OnClick(const Point2i &mousePosition, int button);
   virtual void OnClickUp(const Point2i &mousePosition, int button);
   virtual void Draw(const Point2i &mousePosition);
-  virtual void HandleEvent(const SDL_Event& event);
+  virtual void HandleEvent(const SDL_Event& evnt);
 
   virtual void key_ok();
   virtual bool signal_ok();

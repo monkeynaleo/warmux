@@ -87,7 +87,7 @@ public:
   static Uint8 BUTTON_LEFT();
   static bool  IS_CLICK_BUTTON(uint button);
 
-  bool HandleEvent(const SDL_Event& event);
+  bool HandleEvent(const SDL_Event& evnt);
   void Refresh();
 
   Point2i GetPosition() const;

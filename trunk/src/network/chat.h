@@ -59,8 +59,8 @@ class Chat
   bool CheckInput() const;
   void Clear();
   void NewMessage(const std::string& msg);
-  void HandleKeyPressed(const SDL_Event& event);
-  void HandleKeyReleased(const SDL_Event& event);
+  void HandleKeyPressed(const SDL_Event& evnt);
+  void HandleKeyReleased(const SDL_Event& evnt);
 
   static void SendMessage(const std::string& msg);
 };

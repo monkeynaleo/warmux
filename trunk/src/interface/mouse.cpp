@@ -179,7 +179,7 @@ Uint8 Mouse::BUTTON_LEFT() // static method
   return SDL_BUTTON_LEFT;
 }
 
-bool Mouse::HandleEvent(const SDL_Event& event)
+bool Mouse::HandleEvent(const SDL_Event& evnt)
 {
   static Point2i mouse_button_down_pos = Point2i(-1,-1);
 
@@ -187,26 +187,26 @@ bool Mouse::HandleEvent(const SDL_Event& event)
     return false;
   }
 
-  if (event.type != SDL_MOUSEBUTTONDOWN &&
-      event.type != SDL_MOUSEBUTTONUP) {
+  if (evnt.type != SDL_MOUSEBUTTONDOWN &&
+      evnt.type != SDL_MOUSEBUTTONUP) {
     return false;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return true;
 
-  if (event.type == SDL_MOUSEBUTTONDOWN) {
+  if (evnt.type == SDL_MOUSEBUTTONDOWN) {
     if (Interface::GetInstance()->ActionClickDown(GetPosition()))
       return true;
-    if (event.button.button == Mouse::BUTTON_LEFT())
+    if (evnt.button.button == Mouse::BUTTON_LEFT())
       mouse_button_down_pos = GetPosition();
     return true;
   }
 
-  if (event.type == SDL_MOUSEBUTTONUP) {
+  if (evnt.type == SDL_MOUSEBUTTONUP) {
     if (Interface::GetInstance()->ActionClickUp(GetPosition()))
       return true;
-    if (event.button.button == Mouse::BUTTON_LEFT()) {
+    if (evnt.button.button == Mouse::BUTTON_LEFT()) {
       if (mouse_button_down_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_DISTANCE*MOUSE_CLICK_DISTANCE)
         return true;
     }
@@ -216,14 +216,14 @@ bool Mouse::HandleEvent(const SDL_Event& event)
     return true;
 
   bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
-  if (event.type == SDL_MOUSEBUTTONUP) {
-    if (event.button.button == Mouse::BUTTON_RIGHT())
+  if (evnt.type == SDL_MOUSEBUTTONUP) {
+    if (evnt.button.button == Mouse::BUTTON_RIGHT())
       ActionRightClick(shift);
-    else if (event.button.button == Mouse::BUTTON_LEFT())
+    else if (evnt.button.button == Mouse::BUTTON_LEFT())
       ActionLeftClick(shift);
-    else if (event.button.button == SDL_BUTTON_WHEELDOWN)
+    else if (evnt.button.button == SDL_BUTTON_WHEELDOWN)
       ActionWheelDown(shift);
-    else if (event.button.button == SDL_BUTTON_WHEELUP)
+    else if (evnt.button.button == SDL_BUTTON_WHEELUP)
       ActionWheelUp(shift);
   }
 

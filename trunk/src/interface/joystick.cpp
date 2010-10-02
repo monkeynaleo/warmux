@@ -71,54 +71,53 @@ int Joystick::GetNumberOfJoystick() const
   return (init) ? 0 : SDL_NumJoysticks();
 }
 
-void Joystick::HandleKeyEvent(const SDL_Event& event)
+void Joystick::HandleKeyEvent(const SDL_Event& evnt)
 {
   // Not a registred event
-  if(!init || !IsRegistredEvent(event.type))
+  if (!init || !IsRegistredEvent(evnt.type))
     return;
 
   if (GetNumberOfJoystick() == 0)
     return;
 
   Key_Event_t event_type;
-  switch(event.type)
-    {
-    case SDL_JOYAXISMOTION:
-      if(event.jaxis.axis == 0) {
-        event_type = X_AXIS_MOTION;
-      } else {
-        event_type = Y_AXIS_MOTION;
-      }
-      break;
-    case SDL_JOYBUTTONDOWN:
-      event_type = KEY_PRESSED;
-      break;
-    case SDL_JOYBUTTONUP:
-      event_type = KEY_RELEASED;
-      break;
-
-    default:
-      return;
+  switch (evnt.type) {
+  case SDL_JOYAXISMOTION:
+    if(evnt.jaxis.axis == 0) {
+      event_type = X_AXIS_MOTION;
+    } else {
+      event_type = Y_AXIS_MOTION;
     }
+    break;
+  case SDL_JOYBUTTONDOWN:
+    event_type = KEY_PRESSED;
+    break;
+  case SDL_JOYBUTTONUP:
+    event_type = KEY_RELEASED;
+    break;
 
-  if(event_type == X_AXIS_MOTION) {
-    if(event.jaxis.value > -100 && event.jaxis.value < 100) {
-      if(previous_x_axis != KEY_NONE)
+  default:
+    return;
+  }
+
+  if (event_type == X_AXIS_MOTION) {
+    if (evnt.jaxis.value > -100 && evnt.jaxis.value < 100) {
+      if (previous_x_axis != KEY_NONE)
         HandleKeyReleased(previous_x_axis);
     } else {
-      if(event.jaxis.value > 0)
+      if (evnt.jaxis.value > 0)
         previous_x_axis = KEY_MOVE_RIGHT;
       else
         previous_x_axis = KEY_MOVE_LEFT;
       HandleKeyPressed(previous_x_axis);
     }
     return;
-  } else if(event_type == Y_AXIS_MOTION) {
-    if(event.jaxis.value > -100 && event.jaxis.value < 100) {
+  } else if (event_type == Y_AXIS_MOTION) {
+    if (evnt.jaxis.value > -100 && evnt.jaxis.value < 100) {
       if(previous_y_axis != KEY_NONE)
         HandleKeyReleased(previous_y_axis);
     } else {
-      if(event.jaxis.value > 0)
+      if (evnt.jaxis.value > 0)
         previous_y_axis = KEY_DOWN;
       else
         previous_y_axis = KEY_UP;
@@ -127,22 +126,21 @@ void Joystick::HandleKeyEvent(const SDL_Event& event)
     return;
   }
 
-  std::map<int, std::vector<Key_t> >::iterator it = layout.find(event.jbutton.button);
+  std::map<int, std::vector<Key_t> >::iterator it = layout.find(evnt.jbutton.button);
 
-  if(it == layout.end())
+  if (it == layout.end())
     return;
 
   std::vector<Key_t> keys = it->second;
   std::vector<Key_t>::const_iterator itv;
 
-  for(itv = keys.begin(); itv != keys.end() ; itv++)
-  {
-    if(event_type == KEY_PRESSED) {
+  for (itv = keys.begin(); itv != keys.end() ; itv++) {
+    if (event_type == KEY_PRESSED) {
       HandleKeyPressed(*itv);
       return;
     }
 
-    if(event_type == KEY_RELEASED) {
+    if (event_type == KEY_RELEASED) {
       HandleKeyReleased(*itv);
       return;
     }

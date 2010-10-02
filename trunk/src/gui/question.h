@@ -75,7 +75,7 @@ class Question
     int value;
   } default_choice;
 
-  int TreatsKey (const SDL_Event &event);
+  int TreatsKey (const SDL_Event &evnt);
 
   // Message to display
   Text * text;

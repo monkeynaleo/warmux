@@ -86,7 +86,7 @@ private:
                          std::string & widgetName);
 
    bool BasicOnClickUp(const Point2i &mousePosition);
-   bool HandleGlobalEvent(const SDL_Event& event);
+   bool HandleGlobalEvent(const SDL_Event& evnt);
 
 protected:
    Button *b_cancel;
@@ -124,7 +124,7 @@ protected:
    virtual void OnClick(const Point2i &mousePosition, int button) = 0;
 
    // for heavy modification of menu behavior
-   virtual void HandleEvent(const SDL_Event& event);
+   virtual void HandleEvent(const SDL_Event& evnt);
    void HandleEvents();
 
    void SetActionButtonsXY(int x, int y);
