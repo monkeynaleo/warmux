@@ -31,6 +31,7 @@
 #include "gui/horizontal_box.h"
 #include "gui/question.h"
 #include "interface/mouse.h"
+#include "interface/keyboard.h"
 #include "sound/jukebox.h"
 #include "tool/resource_manager.h"
 #include "gui/big/button_pic.h"
@@ -359,8 +360,7 @@ void Menu::HandleEvent(const SDL_Event& event)
   } else if (event.type == SDL_KEYDOWN) {
 
     // Drop key events that are purely modifiers
-    if (event.key.keysym.sym >= SDLK_NUMLOCK &&
-        event.key.keysym.sym <= SDLK_COMPOSE)
+    if (Keyboard::IsModifier(event.key.keysym.sym))
       return;
 
     // Allow widgets to interpret any key they want,

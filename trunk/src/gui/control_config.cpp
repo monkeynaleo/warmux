@@ -106,7 +106,7 @@ public:
       return false;
 
     // Ignore modifiers-only key presses
-    if (key_code >= SDLK_NUMLOCK && key_code <= SDLK_COMPOSE)
+    if (Keyboard::IsModifier(key_code))
       return true;
 
     Keyboard *kbd = Keyboard::GetInstance();
