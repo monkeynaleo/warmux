@@ -194,9 +194,9 @@ void Water::CalculateWavePattern()
    * The copy is done pixel per pixel */
   uint bpp = surface.GetBytesPerPixel();
 
-  Uint32  pitch = pattern.GetPitch();
-  Uint8 * dst_origin = (Uint8*)pattern.GetPixels() + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
-  Uint8 * src_origin = (Uint8*)surface.GetPixels();
+  int     pitch = pattern.GetPitch();
+  Uint8 * dst_origin = pattern.GetPixels() + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
+  Uint8 * src_origin = surface.GetPixels();
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
     Uint8 * dst = dst_origin + x * bpp + height[x] * pitch;
@@ -204,7 +204,7 @@ void Water::CalculateWavePattern()
     for (uint y=0; y < (uint)surface.GetHeight(); y++) {
       memcpy(dst, src, bpp);
       dst += pitch;
-      src += surface.GetPitch();
+      src += bpp;
     }
   }
 
