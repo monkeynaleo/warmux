@@ -368,6 +368,7 @@ void ParseArgs(int argc, char * argv[])
   int option_index = 0;
   struct option long_options[] = {
     {"unrandom",   no_argument,       NULL, 'u'},
+    {"force-refresh", no_argument,    NULL, 'f'},
     {"help",       no_argument,       NULL, 'h'},
     {"blitz",      no_argument,       NULL, 'b'},
     {"version",    no_argument,       NULL, 'v'},
@@ -381,12 +382,16 @@ void ParseArgs(int argc, char * argv[])
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long (argc, argv, "uhbvpc::i::sg:d:",
+  while ((c = getopt_long (argc, argv, "ufhbvpc::i::sg:d:",
                            long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':
       RandomSync().UnRandom();
       RandomLocal().UnRandom();
+      break;
+    case 'f':
+      extern bool force_refresh;
+      force_refresh = true;
       break;
     case 'h':
       PrintUsage(argv[0]);

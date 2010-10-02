@@ -7,4 +7,4 @@ fi
 LOG=valgrind.log
 valgrind --tool=memcheck --show-reachable=yes --log-file=$LOG \
     --leak-check=yes --leak-resolution=high --num-callers=12 \
-    --suppressions=$(dirname $0)/wormux.supp $*
+    --suppressions=$(dirname $0)/wormux.supp $* -f

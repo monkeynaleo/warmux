@@ -62,13 +62,11 @@
 #include "tool/stats.h"
 #include "weapon/weapons_list.h"
 
-#ifdef DEBUG
-// Uncomment this to get an image during the game under Valgrind
+// Uncomment this to get an image during the game
 // DON'T USE THIS IF YOU INTEND TO PLAY NETWORKED GAMES!
-//#define USE_VALGRIND
-#endif
+bool force_refresh = false;
 
-const uint MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS = 500;
+#define MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS   500
 
 std::string Game::current_rules = "none";
 
@@ -605,9 +603,7 @@ void Game::Draw()
   }
 
   if (Time::GetInstance()->GetMSWaitingForNetwork() > MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS) {
-    Point2i pos;
-    pos.x = GetMainWindow().GetWidth()/2;
-    pos.y = GetMainWindow().GetHeight()/2;
+    Point2i pos = GetMainWindow().GetSize()/2;
     std::string text = Format(_("Waiting for %s"), ActiveTeam().GetPlayerName().c_str());
     waiting_for_network_text.SetText(text);
     waiting_for_network_text.DrawCenter(pos);
@@ -801,13 +797,12 @@ void Game::MainLoop()
 
   }
 
-  // try to adjust to max Frame by seconds
-  draw = time_of_next_frame < SDL_GetTicks();
-  // Only display if the physic engine isn't late
-  draw = draw && !(Time::GetInstance()->CanBeIncreased() && !Time::GetInstance()->IsWaiting());
-#ifdef USE_VALGRIND
-  draw = true;
-#endif
+  if (!force_refresh) {
+    // try to adjust to max Frame by seconds
+    draw = time_of_next_frame < SDL_GetTicks();
+    // Only display if the physic engine isn't late
+    draw = draw && !(Time::GetInstance()->CanBeIncreased() && !Time::GetInstance()->IsWaiting());
+  }
 
   if (draw) {
     StatStart("Game:Draw()");
