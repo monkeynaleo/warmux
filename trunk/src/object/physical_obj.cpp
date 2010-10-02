@@ -49,7 +49,7 @@
 
 const int Y_OBJET_MIN = -10000;
 
-PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
+PhysicalObj::PhysicalObj(const std::string &name, const std::string &xml_config) :
   m_collides_with_ground(true),
   m_collides_with_characters(false),
   m_collides_with_objects(false),
@@ -81,7 +81,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   MSG_DEBUG("physical.mem", "Construction of %s", GetName().c_str());
 }
 
-PhysicalObj::~PhysicalObj ()
+PhysicalObj::~PhysicalObj()
 {
   MSG_DEBUG("physical.mem", "Destruction of %s", GetName().c_str());
 }
@@ -109,7 +109,7 @@ void PhysicalObj::SetXY(const Point2d &position)
 void PhysicalObj::SetSize(const Point2i &newSize)
 {
   if (newSize == Point2i(0, 0))
-    Error( "New size of (0, 0) !");
+    Error("New size of (0, 0) !");
   m_width = newSize.x;
   m_height = newSize.y;
 
@@ -402,7 +402,7 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
   }
 }
 
-void PhysicalObj::UpdatePosition ()
+void PhysicalObj::UpdatePosition()
 {
   // No ghost allowed here !
   if (IsGhost()) {
@@ -433,8 +433,8 @@ void PhysicalObj::UpdatePosition ()
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
   if (m_collides_with_ground) {
-    if ( IsInWater() && m_alive != DROWNED && m_alive != DEAD) Drown();
-    else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
+    if (IsInWater() && m_alive!=DROWNED && m_alive!=DEAD) Drown();
+    else if (!IsInWater() && m_alive==DROWNED) GoOutOfWater();
   }
 }
 
@@ -498,7 +498,7 @@ void PhysicalObj::Init()
   StopMoving();
 }
 
-void PhysicalObj::Ghost ()
+void PhysicalObj::Ghost()
 {
   if (m_alive == GHOST)
     return;
@@ -592,7 +592,7 @@ void PhysicalObj::CheckRebound()
 {
   // If we bounce twice in a row at the same place, stop bouncing
   // cause it's almost sure this object is stuck bouncing indefinitely
-  if (m_rebound_position != Point2i( -1, -1)) {
+  if (m_rebound_position != Point2i(-1, -1)) {
     // allow infinite rebounds for Pendulum objects (e.g. characters on rope)
     // FIXME: test that nothing bad happens because of this
     if (Pendulum!=GetMotionType() && m_rebound_position==GetPosition()) {
@@ -634,7 +634,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
                   width, height);
 
-  return GetWorld().RectIsInVacuum (rect);
+  return GetWorld().RectIsInVacuum(rect);
 }
 
 inline bool PhysicalObj::Intersect(const PhysicalObj *object, const Rectanglei & rect) const
@@ -709,19 +709,19 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   if (m_allow_negative_y && rect.GetPositionY() < 0) {
     int b = rect.GetPositionY() + rect.GetSizeY();
 
-    rect.SetPositionY( 0 );
-    rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
+    rect.SetPositionY(0);
+    rect.SetSizeY((b > 0) ? b - rect.GetPositionY() : 0);
   }
 
   if (CollidedObjectXY(position + Point2i(0, 1)))
     return false;
 
-  return GetWorld().RectIsInVacuum (rect);
+  return GetWorld().RectIsInVacuum(rect);
 }
 
-bool PhysicalObj::IsInWater () const
+bool PhysicalObj::IsInWater() const
 {
-  ASSERT (!IsGhost());
+  ASSERT(!IsGhost());
   if (!GetWorld().water.IsActive())
     return false;
   int x = InRange_Long(GetCenterX(), 0, GetWorld().GetWidth()-1);
@@ -734,7 +734,7 @@ void PhysicalObj::DirectFall()
     SetY(GetYDouble()+ONE);
 }
 
-bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y) const
+bool PhysicalObj::ContactPoint(int & contact_x, int & contact_y) const
 {
   int x1, x2, y1, y2;
 
@@ -848,7 +848,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
               GetName().c_str(), bcl, NB_MAX_TRY, position.x, position.y);
 
     // Check physical object is not in the ground
-    ok &= !IsGhost() && GetWorld().ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
+    ok &= !IsGhost() && GetWorld().ParanoiacRectIsInVacuum(GetTestRect()) && IsInVacuum(Point2i(0, 1));
     if (!ok) {
       MSG_DEBUG("physic.position", "%s - Put it in the ground -> try again !", GetName().c_str());
       continue;
@@ -877,7 +877,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
       } else {
         Point2i p1 = character->GetCenter();
         Point2i p2 = GetCenter();
-        Double dst = p1.Distance( p2 );
+        Double dst = p1.Distance(p2);
 
         // ok this test is not perfect but quite efficient ;-)
         // else we need to check each distance between each "corner"
