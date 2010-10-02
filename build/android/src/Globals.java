@@ -31,6 +31,8 @@ class Globals {
   public static int AccelerometerSensitivity = 0;
   public static int TrackballDampening = 0;
   public static int AudioBufferConfig = 0;
+
+  public static boolean NonBlockingSwapBuffers = false;
 }
 
 class LoadLibrary {

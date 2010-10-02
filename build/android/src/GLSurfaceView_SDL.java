@@ -543,6 +543,8 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
          */
         public abstract void onSurfaceCreated(GL10 gl, EGLConfig config);
 
+        public abstract void onSurfaceDestroyed();
+
         /**
          * Called when the surface changed size.
          * <p>
@@ -584,17 +586,17 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
          * test if the interface supports GL11 or higher interfaces.
          */
         public abstract void onDrawFrame(GL10 gl);
-        
+
         public boolean SwapBuffers() {
             if( mSwapBuffersCallback != null )
                 return mSwapBuffersCallback.SwapBuffers();
             return false;
         }
-        
+
         public void setSwapBuffersCallback( SwapBuffersCallback c ) {
             mSwapBuffersCallback = c;
         }
-        
+
         private SwapBuffersCallback mSwapBuffersCallback = null;
     }
 
@@ -749,6 +751,8 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
          * @param configSpec
          */
         public void start(){
+
+            Log.v("SDL", "GLSurfaceView_SDL::EglHelper::start(): creating GL context");
             /*
              * Get an EGL instance
              */
@@ -781,6 +785,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
          * OpenGL interface that renders to that surface.
          */
         public GL createSurface(SurfaceHolder holder) {
+            Log.v("SDL", "GLSurfaceView_SDL::EglHelper::createSurface(): creating GL context");
             /*
              *  The window size has changed, so we need to create a new
              *  surface.
@@ -835,6 +840,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
         }
 
         public void finish() {
+            Log.v("SDL", "GLSurfaceView_SDL::EglHelper::finish(): destroying GL context");
             if (mEglSurface != null) {
                 mEgl.eglMakeCurrent(mEglDisplay, EGL10.EGL_NO_SURFACE,
                         EGL10.EGL_NO_SURFACE,
@@ -929,24 +935,32 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                 /*
                  *  Update the asynchronous state (window size)
                  */
+              while(true) { // Loop until we're re-created GL context and successfully called swap()
+
                 int w, h;
-                boolean changed;
+                boolean changed = false;
                 synchronized (this) {
+                    /*
                     Runnable r;
                     while ((r = getEvent()) != null) {
                         r.run();
                     }
+                    */
                     if (mPaused) {
+                        mRenderer.onSurfaceDestroyed();
                         mEglHelper.finish();
                         mNeedStart = true;
+                        if( Globals.NonBlockingSwapBuffers )
+                            return false;
                     }
                     while (needToWait()) {
+                        //Log.v("SDL", "GLSurfaceView_SDL::run(): paused");
                         wait();
                     }
                     if (mDone) {
                         return false;
                     }
-                    changed = mSizeChanged;
+                    // changed = mSizeChanged;
                     w = mWidth;
                     h = mHeight;
                     mSizeChanged = false;
@@ -974,7 +988,15 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                      * Once we're done with GL, we need to call swapBuffers()
                      * to instruct the system to display the rendered frame
                      */
-                return mEglHelper.swap();
+                if( mEglHelper.swap() )
+                    return true;
+                // We've lost GL context - recreate it
+                mRenderer.onSurfaceDestroyed();
+                mEglHelper.finish();
+                mNeedStart = true;
+                if( Globals.NonBlockingSwapBuffers )
+                    return false;
+              }
 
             } catch (java.lang.InterruptedException e) {
                return false;
@@ -1037,12 +1059,14 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
         }
 
         public void onPause() {
+            Log.v("SDL", "GLSurfaceView_SDL::onPause()");
             synchronized (this) {
                 mPaused = true;
             }
         }
 
         public void onResume() {
+            Log.v("SDL", "GLSurfaceView_SDL::onResume()");
             synchronized (this) {
                 mPaused = false;
                 notify();

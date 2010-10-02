@@ -26,6 +26,7 @@
 
 #if SDL_VERSION_ATLEAST(1,3,0)
 #include "SDL_video.h"
+#include "SDL_opengles.h"
 #include "SDL_sysvideo.h"
 #else
 #include "SDL_video-1.3.h"
@@ -313,7 +314,7 @@ GLES_CreateRenderer(SDL_Window * window, Uint32 flags)
         renderer->info.flags |= SDL_RENDERER_PRESENTVSYNC;
     }
 
-#ifdef ANDROID
+#if SDL_VERSION_ATLEAST(1,3,0)
     // Always double-buffered
 #else
     if (SDL_GL_GetAttribute(SDL_GL_DOUBLEBUFFER, &doublebuffer) == 0) {
@@ -369,7 +370,6 @@ GLES_ActivateRenderer(SDL_Renderer * renderer)
         data->glMatrixMode(GL_MODELVIEW);
         data->glLoadIdentity();
 #if SDL_VIDEO_RENDER_RESIZE
-        __android_log_print(ANDROID_LOG_INFO, "libSDL", "GLES_ActivateRenderer(): %dx%d", (int)window->display->desktop_mode.w, (int)window->display->desktop_mode.h);
         data->glViewport(0, 0, window->display->desktop_mode.w, window->display->desktop_mode.h);
         data->glOrthof(0.0, (GLfloat) window->display->desktop_mode.w, (GLfloat) window->display->desktop_mode.h,
                        0.0, 0.0, 1.0);
@@ -951,7 +951,6 @@ GLES_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
     if (data->GL_OES_draw_texture_supported && data->useDrawTexture) {
         /* this code is a little funny because the viewport is upside down vs SDL's coordinate system */
         SDL_Window *window = renderer->window;
-
         GLint cropRect[4];
         cropRect[0] = srcrect->x;
         cropRect[1] = srcrect->y + srcrect->h;

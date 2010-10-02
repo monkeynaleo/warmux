@@ -51,14 +51,15 @@ class AudioThread {
             bufSize = AudioTrack.getMinBufferSize( rate, channels, encoding );
 
           bufSize = (int)((float)bufSize * (((float)Globals.AudioBufferConfig * 2.5f) + 1.0f));
+
           mAudioBuffer = new byte[bufSize];
 
           mAudio = new AudioTrack(AudioManager.STREAM_MUSIC,
-                                  rate,
-                                  channels,
-                                  encoding,
-                                  bufSize,
-                                  AudioTrack.MODE_STREAM );
+                        rate,
+                        channels,
+                        encoding,
+                        bufSize,
+                        AudioTrack.MODE_STREAM );
           mAudio.play();
       }
       return mAudioBuffer.length;
@@ -86,6 +87,26 @@ class AudioThread {
     // Make audio thread priority higher so audio thread won't get underrun
     Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
     return 1;
+  }
+
+  public int pauseAudioPlayback()
+  {
+    if( mAudio != null )
+    {
+      mAudio.pause();
+      return 1;
+    }
+    return 0;
+  }
+
+  public int resumeAudioPlayback()
+  {
+    if( mAudio != null )
+    {
+      mAudio.play();
+      return 1;
+    }
+    return 0;
   }
 
   private native int nativeAudioInitJavaCallbacks();

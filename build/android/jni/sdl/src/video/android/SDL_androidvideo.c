@@ -41,45 +41,64 @@
 #include "../SDL_pixels_c.h"
 #include "../../events/SDL_events_c.h"
 
+#include "../SDL_sysvideo.h"
 #include "SDL_androidvideo.h"
+#include "jniwrapperstuff.h"
 
 
 // The device screen dimensions to draw on
-int SDL_ANDROID_sWindowWidth  = 800;
-int SDL_ANDROID_sWindowHeight = 480;
+int SDL_ANDROID_sWindowWidth  = 0;
+int SDL_ANDROID_sWindowHeight = 0;
 
 // Extremely wicked JNI environment to call Java functions from C code
 static JNIEnv* JavaEnv = NULL;
 static jclass JavaRendererClass = NULL;
 static jobject JavaRenderer = NULL;
 static jmethodID JavaSwapBuffers = NULL;
+static int glContextLost = 0;
+
+static void appPutToBackgroundCallbackDefault(void)
+{
+  SDL_ANDROID_PauseAudioPlayback();
+}
+static void appRestoredCallbackDefault(void)
+{
+  SDL_ANDROID_ResumeAudioPlayback();
+}
+
+static SDL_ANDROID_ApplicationPutToBackgroundCallback_t appPutToBackgroundCallback = appPutToBackgroundCallbackDefault;
+static SDL_ANDROID_ApplicationPutToBackgroundCallback_t appRestoredCallback = appRestoredCallbackDefault;
 
 int SDL_ANDROID_CallJavaSwapBuffers()
 {
   SDL_ANDROID_processAndroidTrackballDampening();
-  return (*JavaEnv)->CallIntMethod(JavaEnv, JavaRenderer, JavaSwapBuffers);
+  if( ! (*JavaEnv)->CallIntMethod( JavaEnv, JavaRenderer, JavaSwapBuffers ) )
+    return 0;
+  if( glContextLost )
+  {
+    glContextLost = 0;
+    __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context recreated, refreshing textures");
+    SDL_ANDROID_VideoContextRecreated();
+    appRestoredCallback();
+    SDL_PrivateAppActive(1, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
+  }
+  return 1;
 }
 
 
-/* JNI-C++ wrapper stuff */
-
-#ifndef SDL_JAVA_PACKAGE_PATH
-#error You have to define SDL_JAVA_PACKAGE_PATH to your package path with dots replaced with underscores, for example "com_example_SanAngeles"
-#endif
-#define JAVA_EXPORT_NAME2(name,package) Java_##package##_##name
-#define JAVA_EXPORT_NAME1(name,package) JAVA_EXPORT_NAME2(name,package)
-#define JAVA_EXPORT_NAME(name) JAVA_EXPORT_NAME1(name,SDL_JAVA_PACKAGE_PATH)
-
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeResize)(JNIEnv* env, jobject thiz, jint w, jint h)
+JAVA_EXPORT_NAME(DemoRenderer_nativeResize) ( JNIEnv*  env, jobject  thiz, jint w, jint h )
 {
-  SDL_ANDROID_sWindowWidth  = w;
-  SDL_ANDROID_sWindowHeight = h;
-  __android_log_print(ANDROID_LOG_INFO, "libSDL", "Physical screen resolution is %dx%d", w, h);
+  if( SDL_ANDROID_sWindowWidth == 0 )
+  {
+    SDL_ANDROID_sWindowWidth = w;
+    SDL_ANDROID_sWindowHeight = h;
+    __android_log_print(ANDROID_LOG_INFO, "libSDL", "Physical screen resolution is %dx%d", w, h);
+  }
 }
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeDone)(JNIEnv* env, jobject thiz)
+JAVA_EXPORT_NAME(DemoRenderer_nativeDone) ( JNIEnv*  env, jobject  thiz )
 {
   __android_log_print(ANDROID_LOG_INFO, "libSDL", "quitting...");
 #if SDL_VERSION_ATLEAST(1,3,0)
@@ -91,7 +110,17 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeDone)(JNIEnv* env, jobject thiz)
 }
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks)(JNIEnv* env, jobject thiz)
+JAVA_EXPORT_NAME(DemoRenderer_nativeGlContextLost) ( JNIEnv*  env, jobject  thiz )
+{
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context lost, waiting for new OpenGL context");
+  glContextLost = 1;
+  appPutToBackgroundCallback();
+  SDL_PrivateAppActive(0, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
+  SDL_ANDROID_VideoContextLost();
+}
+
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks) ( JNIEnv*  env, jobject thiz )
 {
   JavaEnv = env;
   JavaRenderer = thiz;
@@ -100,4 +129,19 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeInitJavaCallbacks)(JNIEnv* env, jobject thiz
   JavaSwapBuffers = (*JavaEnv)->GetMethodID(JavaEnv, JavaRendererClass, "swapBuffers", "()I");
 
   ANDROID_InitOSKeymap();
+
+}
+
+int SDL_ANDROID_SetApplicationPutToBackgroundCallback(
+    SDL_ANDROID_ApplicationPutToBackgroundCallback_t appPutToBackground,
+    SDL_ANDROID_ApplicationPutToBackgroundCallback_t appRestored )
+{
+  appPutToBackgroundCallback = appPutToBackgroundCallbackDefault;
+  appRestoredCallback = appRestoredCallbackDefault;
+
+  if( appPutToBackground )
+    appPutToBackgroundCallback = appPutToBackground;
+
+  if( appRestoredCallback )
+    appRestoredCallback = appRestored;
 }
