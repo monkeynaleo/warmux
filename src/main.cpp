@@ -280,7 +280,7 @@ bool AppWormux::CheckInactive(SDL_Event& evnt)
       }
     }
     else if (evnt.active.gain == 0) {
-#ifdef HANDHELD
+#ifdef HAVE_HANDHELD
       JukeBox::GetInstance()->CloseDevice();
 #else
       JukeBox::GetInstance()->Pause();
@@ -292,7 +292,7 @@ bool AppWormux::CheckInactive(SDL_Event& evnt)
 #endif
         if (evnt.type == SDL_QUIT) AppWormux::EmergencyExit();
         if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
-#ifdef HANDHELD
+#ifdef HAVE_HANDHELD
 	  JukeBox::GetInstance()->OpenDevice();
 	  JukeBox::GetInstance()->NextMusic();
 #else
