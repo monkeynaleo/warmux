@@ -439,10 +439,10 @@ void NetworkConnectionMenu::ThreadRefreshList()
 
 void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/) {}
 
-void NetworkConnectionMenu::HandleEvent(const SDL_Event& event)
+void NetworkConnectionMenu::HandleEvent(const SDL_Event& evnt)
 {
   __RefreshList();
-  Menu::HandleEvent(event);
+  Menu::HandleEvent(evnt);
 }
 
 void NetworkConnectionMenu::DisplayNetError(connection_state_t conn)

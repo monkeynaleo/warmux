@@ -132,9 +132,9 @@ void Chat::CloseInput()
   SDL_EnableKeyRepeat(0, 0);
 }
 
-void Chat::HandleKeyPressed(const SDL_Event& event)
+void Chat::HandleKeyPressed(const SDL_Event& evnt)
 {
-  SDL_KeyboardEvent kbd_event = event.key;
+  SDL_KeyboardEvent kbd_event = evnt.key;
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 
@@ -142,9 +142,9 @@ void Chat::HandleKeyPressed(const SDL_Event& event)
     input->SetText(txt);
 }
 
-void Chat::HandleKeyReleased(const SDL_Event& event)
+void Chat::HandleKeyReleased(const SDL_Event& evnt)
 {
-  SDL_KeyboardEvent kbd_event = event.key;
+  SDL_KeyboardEvent kbd_event = evnt.key;
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 

@@ -57,12 +57,12 @@ Question::~Question()
     delete icon;
 }
 
-int Question::TreatsKey (const SDL_Event &event){
+int Question::TreatsKey (const SDL_Event &evnt){
 
   // Tests the key
   choice_iterator it=choices.begin(), end=choices.end();
   for (; it != end; ++it){
-    if (event.key.keysym.sym == it -> key()) {
+    if (evnt.key.keysym.sym == it -> key()) {
       return it -> val();
     }
   }
