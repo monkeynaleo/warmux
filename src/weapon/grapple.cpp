@@ -292,18 +292,16 @@ void Grapple::NotifyMove(bool collision)
     return;
 
   // Check if the character collide something.
-  if (collision)
-    {
+  if (collision) {
       // Yes there has been a collision.
-      if (delta_len != ZERO)
-        {
-          // The character tryed to change the rope size.
-          // There has been a collision, so we cancel the rope length change.
-          ActiveCharacter().ChangePhysRopeSize (-delta_len);
-          delta_len = 0;
-        }
-      return;
+    if (delta_len.IsNotZero()) {
+      // The character tryed to change the rope size.
+      // There has been a collision, so we cancel the rope length change.
+      ActiveCharacter().ChangePhysRopeSize (-delta_len);
+      delta_len = 0;
     }
+    return;
+  }
 
 
   // While there is nodes to add, we add !

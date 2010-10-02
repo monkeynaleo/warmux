@@ -39,7 +39,7 @@ typedef struct attachment
   {
     Point2d child_delta = point - anchor;
     radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
-    if (ZERO != radius) {
+    if (!radius.IsNotZero()) {
       radius = sqrt_approx(radius);
       angle = child_delta.ComputeAngle();
     }
@@ -47,7 +47,7 @@ typedef struct attachment
 
   inline void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad)
   {
-    if (ZERO != radius) {
+    if (!radius.IsNotZero()) {
       Double angle_init = angle + angle_rad;
       Double angle_new  = angle_init + mvt_angle;
       pos.x  += radius * (cos(angle_new) - cos(angle_init));

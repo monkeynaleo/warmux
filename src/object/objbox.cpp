@@ -93,7 +93,7 @@ void ObjBox::SignalObjectCollision(const Point2d& my_speed_before,
                                    const Point2d& /*obj_speed_before*/)
 {
   // The box has (probably) landed on an object (a barrel for instance)
-  if (my_speed_before.Norm() != ZERO)
+  if (my_speed_before.Norm().IsNotZero())
     CloseParachute();
 
   if (obj->IsCharacter())

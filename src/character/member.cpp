@@ -272,7 +272,7 @@ void Member::ApplyMovement(const member_mvt &        mvt,
   uint frame = (spr) ? spr->GetCurrentFrame() : 0;
 
   // We first apply to the child (makes computations simpler in this order):
-  bool check = mvt.GetAngle() != ZERO;
+  bool check = mvt.GetAngle().IsNotZero();
   for (AttachMap::iterator child = attached_members.begin();
        child != attached_members.end();
        ++child) {
