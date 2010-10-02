@@ -87,7 +87,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
     flipped = NULL;
   }
 
-  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed != ZERO) {
+  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
@@ -124,7 +124,7 @@ void WindParticle::Refresh()
   if (GetAlignParticleState()) {
     sprite->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
-  else if (ActiveMap()->GetWind().rotation_speed != ZERO) // Rotate the sprite if needed
+  else if (ActiveMap()->GetWind().rotation_speed.IsNotZero()) // Rotate the sprite if needed
   {
     if (flipped && GetSpeed().x < 0) {
       Double new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;

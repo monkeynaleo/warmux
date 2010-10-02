@@ -49,8 +49,8 @@ int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
     return 0;
 
   Double dmg;
-  if( config.explosion_range != ZERO)
-    dmg = cos(HALF_PI * distance / (Double)config.explosion_range);
+  if (config.explosion_range.IsNotZero())
+    dmg = cos(HALF_PI * distance / config.explosion_range);
   else
     dmg = cos(HALF_PI * distance);
 
@@ -61,8 +61,8 @@ int GetDamageFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
 Double GetForceFromExplosion(const ExplosiveWeaponConfig &config, Double distance)
 {
   Double force;
-  if(config.blast_range != ZERO)
-    force = cos(HALF_PI * distance / (Double)config.blast_range);
+  if (config.blast_range.IsNotZero())
+    force = cos(HALF_PI * distance / config.blast_range);
   else
     force = cos(HALF_PI * distance);
 
@@ -74,8 +74,7 @@ void ApplyExplosion (const Point2i &pos,
                      const ExplosiveWeaponConfig &config,
                      const std::string& son,
                      bool fire_particle,
-                     ParticleEngine::ESmokeStyle smoke
-                     )
+                     ParticleEngine::ESmokeStyle smoke)
 {
   MSG_DEBUG("explosion", "explosion range : %s", Double2str(config.explosion_range,0).c_str());
 
@@ -95,7 +94,7 @@ void ApplyExplosion (const Point2i &pos,
 #endif
 
   // Make a hole in the ground
-  if(config.explosion_range != ZERO)
+  if (config.explosion_range.IsNotZero())
     GetWorld().Dig(pos, (int)config.explosion_range);
 
   // Play a sound
@@ -105,7 +104,7 @@ void ApplyExplosion (const Point2i &pos,
 
   // Apply damage on the character.
   // Do not care about the death of the active character.
-  Double highest_force = 0.0;
+  Double highest_force = ZERO;
   Character* fastest_character = NULL;
   Character* player = &ActiveCharacter();
   FOR_ALL_CHARACTERS(team, character) {
@@ -143,7 +142,7 @@ void ApplyExplosion (const Point2i &pos,
 
 
       MSG_DEBUG("explosion", "force = %s", Double2str(force).c_str());
-      ASSERT(character->GetMass() != ZERO);
+      ASSERT(character->GetMass().IsNotZero());
       character->AddSpeed(force / character->GetMass(), angle);
       character->SignalExplosion();
     }
@@ -174,7 +173,7 @@ void ApplyExplosion (const Point2i &pos,
        else
          angle = -HALF_PI;
 
-       ASSERT( obj->GetMass() != ZERO);
+       ASSERT(obj->GetMass().IsNotZero());
 
        obj->AddSpeed (force / obj->GetMass(), angle);
      }

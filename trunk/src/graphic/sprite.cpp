@@ -310,7 +310,7 @@ void Sprite::RefreshSurface()
       current_surface = cache.last_frame;
     }
   } else if (cache.have_flipping_cache && !cache.have_rotation_cache) {
-    if (rotation_rad != ZERO || scale_y != ONE || (scale_x != ZERO && scale_x != -ONE)) {
+    if (rotation_rad.IsNotZero() || scale_y != ONE || (scale_x.IsNotZero() && scale_x != -ONE)) {
       current_surface = frames[current_frame].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
 #ifdef DEBUG_ROTOZOOM
       rotozoom = 3;
@@ -349,7 +349,7 @@ void Sprite::RefreshSurface()
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
   rotation_point.y=0;
-  if (rot_hotspot != center || rotation_rad!=ZERO)
+  if (rot_hotspot != center || rotation_rad.IsNotZero())
     Calculate_Rotation_Offset(current_surface);
 }
 

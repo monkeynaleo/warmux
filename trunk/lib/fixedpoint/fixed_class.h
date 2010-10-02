@@ -129,6 +129,9 @@ struct fixed_point {
     static const float factor = 1.0f / (float)(1 << p);
     return factor * intValue;
   }
+
+  // Warning, this tests strict equality!
+  bool IsNotZero() const { return intValue; }
 };
 
 // Specializations for use with plain integers

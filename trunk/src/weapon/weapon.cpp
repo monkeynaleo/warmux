@@ -265,7 +265,8 @@ bool Weapon::Shoot()
     UseAmmoUnit();
   }
 
-  if (max_strength != ZERO) ActiveCharacter().previous_strength = m_strength;
+  if (max_strength.IsNotZero())
+    ActiveCharacter().previous_strength = m_strength;
 
   Game::GetInstance()->SetCharacterChosen(true);
 
@@ -312,13 +313,13 @@ void Weapon::StartShooting()
   if (ActiveCharacter().IsPreparingShoot())
     return;
 
-  if (max_strength != ZERO && IsReady())
+  if (max_strength.IsNotZero() && IsReady())
     InitLoading();
 }
 
 void Weapon::StopShooting()
 {
-  if (max_strength != ZERO && !IsLoading())
+  if (max_strength.IsNotZero() && !IsLoading())
     /* User has probably exceed the max_strength */
     return;
 
@@ -661,7 +662,7 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   XmlReader::ReadInt(elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
   XmlReader::ReadInt(elem, "ammo_per_drop", ammo_per_drop);
   XmlReader::ReadDouble(elem, "drop_probability", drop_probability);
-  if (m_initial_nb_ammo == INFINITE_AMMO && drop_probability != ZERO) {
+  if (m_initial_nb_ammo == INFINITE_AMMO && drop_probability.IsNotZero()) {
     std::cerr << Format(_("The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"), m_id.c_str());
     std::cerr << std::endl;
   }
