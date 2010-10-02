@@ -274,7 +274,9 @@ void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
   int previous_modifier_bits = modifier_bits;
   modifier_bits = GetModifierBitsFromSDL();
   SDLKey basic_key_code = evnt.key.keysym.sym;
-  if (basic_key_code >= MODIFIER_OFFSET)
+  if (basic_key_code >= MODIFIER_OFFSET ||
+      // Also ignore real key code of a modifier, fix bug #15238
+      (basic_key_code>=SDLK_NUMLOCK && basic_key_code<=SDLK_COMPOSE))
     return;
 #ifdef MAEMO
   if (SDL_GetModState() & KMOD_MODE) {
@@ -295,6 +297,7 @@ void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
       }
     }
   }
+
   if (event_type == KEY_PRESSED) {
     key_code = basic_key_code + (MODIFIER_OFFSET * modifier_bits);
     HandleKeyComboEvent(key_code, KEY_PRESSED);
