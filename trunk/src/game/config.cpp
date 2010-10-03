@@ -153,7 +153,7 @@ Config::Config()
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, default_ttf_filename);
-      personal_config_dir = GetHome() + "/Library/Application Support/Wormux";
+      personal_config_dir = GetHome() + "/Library/Application Support/Wormux/";
       personal_data_dir = personal_config_dir;
 #  ifdef ENABLE_NLS
       std::string default_locale_dir = contents + std::string("/Resources/locale/");
