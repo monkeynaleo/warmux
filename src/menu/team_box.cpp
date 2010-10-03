@@ -167,17 +167,16 @@ void TeamBox::Update(const Point2i &mousePosition,
     Draw(mousePosition);
   }
 
-  if (associated_team != NULL) {
+  if (associated_team) {
     WidgetList::Update(mousePosition, lastMousePosition);
-  } else {
-    //RedrawBackground(*this);
-  }
-
-  if (associated_team != NULL && previous_player_name != player_name->GetText()) {
-    previous_player_name = player_name->GetText();
-    if (Network::GetInstance()->IsConnected()) {
-      ValidOptions();
+    if (previous_player_name != player_name->GetText()) {
+      previous_player_name = player_name->GetText();
+      if (Network::GetInstance()->IsConnected()) {
+        ValidOptions();
+      }
     }
+  } else {
+    RedrawBackground(*this);
   }
 
   //SwapWindowClip(r);
@@ -186,7 +185,7 @@ void TeamBox::Update(const Point2i &mousePosition,
 
 Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  if (associated_team != NULL) {
+  if (associated_team) {
 
     if (!associated_team->IsLocal())
       return NULL; // it's not a local team, we can't configure it !!
@@ -203,7 +202,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
       return w;
     }
 
-    if (w == NULL) {
+    if (!w) {
       return w;
     }
 
