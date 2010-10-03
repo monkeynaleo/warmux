@@ -45,9 +45,6 @@ Menu::Menu(const std::string& bg, t_action _actions)
   : actions(_actions)
   , selected_widget(NULL)
 {
-#ifdef HAVE_TOUCHSCREEN
-  Mouse::GetInstance()->Hide();
-#endif
   close_menu = false ;
   Surface& window = GetMainWindow();
 
