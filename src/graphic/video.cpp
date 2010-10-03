@@ -157,28 +157,24 @@ void Video::ComputeAvailableConfigs()
 
 bool Video::__SetConfig(const int width, const int height, const bool _fullscreen)
 {
-  bool __fullscreen = _fullscreen;
-
-#ifdef ANDROID
-  window.SetSurface(SDL_SetVideoMode(width, height, 16, SDL_SWSURFACE));
+  int flags = SDL_SWSURFACE;
+#ifdef HAVE_TOUCHSCREEN
+  int bpp   = 16;
+  bool __fullscreen = true;
 #else
+  int bpp   = 32;
+  bool __fullscreen = _fullscreen;
+#endif
 
-
-  int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
-
-  flags |= SDL_SWSURFACE;
-  
-#ifndef __APPLE__
+  flags |= (__fullscreen) ? SDL_FULLSCREEN : 0;
+#ifndef ANDROID
+# ifdef __APPLE__
+  if (!__fullscreen)
+# endif
     flags |= SDL_DOUBLEBUF;
 #endif
-  
-#ifdef MAEMO
-  window.SetSurface(SDL_SetVideoMode(width, height, 16, flags));
-#else
-  window.SetSurface(SDL_SetVideoMode(width, height, 32, flags));
-#endif
-#endif
 
+  window.SetSurface(SDL_SetVideoMode(width, height, bpp, flags));
   if (window.IsNull())
     return false;
 
@@ -242,10 +238,8 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 void Video::ToggleFullscreen()
 {
 #ifndef WIN32
-
   SDL_WM_ToggleFullScreen(window.GetSurface());
   fullscreen = !fullscreen;
-
 #else
   SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
   AppWormux::GetInstance()->RefreshDisplay();
