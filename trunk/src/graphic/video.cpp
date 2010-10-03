@@ -162,13 +162,16 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
 #ifdef ANDROID
   window.SetSurface(SDL_SetVideoMode(width, height, 16, SDL_SWSURFACE));
 #else
-#  ifdef __APPLE__
-  __fullscreen = false; // Never set fullscreen with OSX, as it's buggy
-#  endif
+
 
   int flags = (__fullscreen) ? SDL_FULLSCREEN : 0;
 
-  flags |= SDL_SWSURFACE | SDL_DOUBLEBUF;
+  flags |= SDL_SWSURFACE;
+  
+#ifndef __APPLE__
+    flags |= SDL_DOUBLEBUF;
+#endif
+  
 #ifdef MAEMO
   window.SetSurface(SDL_SetVideoMode(width, height, 16, flags));
 #else
@@ -239,10 +242,10 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 void Video::ToggleFullscreen()
 {
 #ifndef WIN32
-#  ifndef __APPLE__ // Prevent buggy fullscreen under OSX
+
   SDL_WM_ToggleFullScreen(window.GetSurface());
   fullscreen = !fullscreen;
-#  endif
+
 #else
   SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
   AppWormux::GetInstance()->RefreshDisplay();
