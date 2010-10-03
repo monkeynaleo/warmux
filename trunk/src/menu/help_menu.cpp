@@ -31,36 +31,46 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-static const FigureWidget::Caption captions[] = {
-  { _("Quit game"), 81, 13, DEF_CAPTIONS_PARAMS },
-  { _("High jump"), 439, 326, DEF_CAPTIONS_PARAMS },
-  { _("Jump backwards"), 439, 297, DEF_CAPTIONS_PARAMS },
-  { _("Jump backwards"), 439, 356, DEF_CAPTIONS_PARAMS },
-  { _("Drag&drop: Move camera"), 520, 395, DEF_CAPTIONS_PARAMS },
-  { _("Center camera on character"), 520, 422, DEF_CAPTIONS_PARAMS },
-  { _("Show/hide the interface"), 271, 43, DEF_CAPTIONS_PARAMS },
-  { _("Toggle fullscreen"), 491, 42, DEF_CAPTIONS_PARAMS },
-  { _("Configuration menu"), 491, 72, DEF_CAPTIONS_PARAMS },
-  { _("Talk in network battles"), 92, 296, DEF_CAPTIONS_PARAMS },
-  { _("Change weapon category"), 81, 72, DEF_CAPTIONS_PARAMS },
-  { _("Change weapon countdown"), 618, 164, DEF_CAPTIONS_PARAMS },
-  { _("Change aim angle"), 618, 194, DEF_CAPTIONS_PARAMS },
-  { _("Move character"), 618, 286, DEF_CAPTIONS_PARAMS },
-  { _("On map: select a target"), 618, 225, DEF_CAPTIONS_PARAMS },
-  { _("On a character: select it"), 618, 256, DEF_CAPTIONS_PARAMS },
-  { _("Show weapons menu"), 618, 134, DEF_CAPTIONS_PARAMS },
-  { _("Smaller aim angle and walk step"), 92, 326, DEF_CAPTIONS_PARAMS },
-  { _("Move camera with mouse or arrows"), 386, 394, DEF_CAPTIONS_PARAMS },
-  { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_CAPTIONS_PARAMS },
-  { _("Toggle minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
-  { _("Change active character"), 92, 356, DEF_CAPTIONS_PARAMS },
-  { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
-  { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
-};
-
 HelpMenu::HelpMenu()
   : Menu("help/background", vCancel)
 {
+  static const FigureWidget::Caption controls_captions[] = {
+    { _("Quit game"), 81, 13, DEF_CAPTIONS_PARAMS },
+    { _("High jump"), 439, 326, DEF_CAPTIONS_PARAMS },
+    { _("Jump backwards"), 439, 297, DEF_CAPTIONS_PARAMS },
+    { _("Jump backwards"), 439, 356, DEF_CAPTIONS_PARAMS },
+    { _("Drag&drop: Move camera"), 520, 395, DEF_CAPTIONS_PARAMS },
+    { _("Center camera on character"), 520, 422, DEF_CAPTIONS_PARAMS },
+    { _("Show/hide the interface"), 271, 43, DEF_CAPTIONS_PARAMS },
+    { _("Toggle fullscreen"), 491, 42, DEF_CAPTIONS_PARAMS },
+    { _("Configuration menu"), 491, 72, DEF_CAPTIONS_PARAMS },
+    { _("Talk in network battles"), 92, 296, DEF_CAPTIONS_PARAMS },
+    { _("Change weapon category"), 81, 72, DEF_CAPTIONS_PARAMS },
+    { _("Change weapon countdown"), 618, 164, DEF_CAPTIONS_PARAMS },
+    { _("Change aim angle"), 618, 194, DEF_CAPTIONS_PARAMS },
+    { _("Move character"), 618, 286, DEF_CAPTIONS_PARAMS },
+    { _("On map: select a target"), 618, 225, DEF_CAPTIONS_PARAMS },
+    { _("On a character: select it"), 618, 256, DEF_CAPTIONS_PARAMS },
+    { _("Show weapons menu"), 618, 134, DEF_CAPTIONS_PARAMS },
+    { _("Smaller aim angle and walk step"), 92, 326, DEF_CAPTIONS_PARAMS },
+    { _("Move camera with mouse or arrows"), 386, 394, DEF_CAPTIONS_PARAMS },
+    { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_CAPTIONS_PARAMS },
+    { _("Toggle minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
+    { _("Change active character"), 92, 356, DEF_CAPTIONS_PARAMS },
+    { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
+    { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
+  };
+
+  static const FigureWidget::Caption teams_captions[] = {
+    { _("Wheelmouse or right/left click to change number of teams"), 66, 222, DEF_CAPTIONS_PARAMS },
+    { _("Change team selected"), 234, 131, DEF_CAPTIONS_PARAMS },
+    { _("Go to map selection"), 375, 131, DEF_CAPTIONS_PARAMS },
+    { _("Go to game rules edition"), 514, 131, DEF_CAPTIONS_PARAMS },
+    { _("Click to select AI/human team"), 200, 265, DEF_CAPTIONS_PARAMS },
+    { _("Enter player name by typing"), 350, 265, DEF_CAPTIONS_PARAMS },
+    { _("Changer per team number of players"), 495, 265, DEF_CAPTIONS_PARAMS },
+  };
+
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   int window_w = GetMainWindow().GetWidth();
@@ -77,10 +87,17 @@ HelpMenu::HelpMenu()
   Widget *w = new FigureWidget(Point2i(max_w,
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
                                "help/shortkeys",
-                               captions, ARRAY_SIZE(captions),
+                               controls_captions, ARRAY_SIZE(controls_captions),
                                PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/teams_selection",
+                       teams_captions, ARRAY_SIZE(teams_captions),
+                       PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Teams selection"), w);
 
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
