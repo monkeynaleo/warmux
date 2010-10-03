@@ -77,6 +77,10 @@ Mouse::Mouse():
 
   current_pointer = POINTER_STANDARD;
   GetResourceManager().UnLoadXMLProfile(res);
+
+#ifdef HAVE_TOUCHSCREEN
+  SDL_ShowCursor(false);
+#endif
 }
 
 bool Mouse::HasFocus() const
@@ -313,7 +317,11 @@ Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
   if (current_pointer == pointer) return pointer;
 
   if (pointer == POINTER_STANDARD)
+#ifndef HAVE_TOUCHSCREEN
     SDL_ShowCursor(true);
+#else
+    SDL_ShowCursor(false);
+#endif
   else
     SDL_ShowCursor(false);
 
