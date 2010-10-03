@@ -402,7 +402,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
       dealer->damage_stats->MadeDamage(-lost_energy, *this);
 
   // "Friendly fire !!"
-  if (dealer!=this && dealer->GetTeam().IsSameAs(m_team))
+  if (dealer!=this && dealer && dealer->GetTeam().IsSameAs(m_team))
     JukeBox::GetInstance()->Play(m_team.GetSoundProfile(), "friendly_fire");
 }
 
