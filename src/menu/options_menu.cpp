@@ -107,11 +107,11 @@ OptionMenu::OptionMenu() :
     new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
-#if !defined(__APPLE__) && !defined(HAVE_HANDHELD)
+
   full_screen =
     new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
-#endif
+
 
   opt_max_fps =
     new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
@@ -315,9 +315,7 @@ OptionMenu::OptionMenu() :
 #endif
   opt_display_energy->SetValue(config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue(config->GetDisplayNameCharacter());
-#if !defined(__APPLE__) && !defined(HAVE_TOUCHSCREEN)
   full_screen->SetValue(app->video->IsFullScreen());
-#endif
   music_cbox->SetValue(config->GetSoundMusic());
   effects_cbox->SetValue(config->GetSoundEffects());
   warn_cbox->SetValue(config->GetWarnOnNewPlayer());
@@ -454,12 +452,10 @@ void OptionMenu::SaveOptions()
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-# ifdef __APPLE__
-  // The mac version of SDL does not support fullscreen properly
-  app->video->SetConfig(w, h, false);
-# else
+
+
   app->video->SetConfig(w, h, full_screen->GetValue());
-# endif
+
 
   uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
   uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();

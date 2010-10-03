@@ -48,9 +48,9 @@ private:
 #ifndef HAVE_HANDHELD
   CheckBox *opt_display_multisky;
 #endif
-# ifndef __APPLE__
+
   CheckBox *full_screen;
-# endif
+
 #ifndef ANDROID
   ComboBox *cbox_video_mode;
 #endif
