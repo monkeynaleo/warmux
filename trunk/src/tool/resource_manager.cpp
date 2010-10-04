@@ -38,21 +38,7 @@
 #include "map/random_map.h"
 #include "interface/mouse_cursor.h"
 
-Profile::Profile()
-{
-   doc = NULL;
-}
-
-Profile::~Profile()
-{
-  if (doc)
-    delete doc;
-}
-
-ResourceManager& GetResourceManager()
-{
-  return ResourceManager::GetRef();
-}
+ResourceManager::ProfileMap ResourceManager::profiles;
 
 ResourceManager::ResourceManager() : base_path("")
 {
@@ -61,11 +47,8 @@ ResourceManager::ResourceManager() : base_path("")
 ResourceManager::~ResourceManager()
 {
   xmlCleanupParser();
-}
-
-void ResourceManager::SetDataPath(const std::string& base_path)
-{
-  this->base_path = base_path;
+  for (ProfileMap::iterator it = profiles.begin(); it != profiles.end(); ++it)
+    delete it->second;
 }
 
 int ResourceManager::LoadInt(const Profile *profile, const std::string& resource_name) const
@@ -104,11 +87,6 @@ Color ResourceManager::LoadColor(const Profile *profile, const std::string& reso
   }
   return Color(chanel_color[0], chanel_color[1], chanel_color[2], chanel_color[3]);
 }
-
-
-//TODO
-//Gradient ResourceManager::LoadGradientColor(const Profile *profile, const std::string& resource_name) const
-
 
 Point2i ResourceManager::LoadPoint2i(const Profile *profile, const std::string& resource_name) const
 {
@@ -180,6 +158,12 @@ Surface ResourceManager::LoadImage(const std::string& filename,
 
 Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const
 {
+  ProfileMap::iterator it = profiles.find(xml_filename);
+  if (it != profiles.end() && it->second) {
+    it->second->ref_count++;
+    return it->second;
+  }
+
   XmlReader *doc = new XmlReader;
   std::string filename, path;
   if (!is_absolute_path) {
@@ -199,7 +183,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
     return NULL;
   }
 
-  Profile *profile = new Profile;
+  Profile *profile = new Profile(xml_filename);
   profile->doc = doc;
   profile->filename = xml_filename;
   profile->relative_path = path;
@@ -208,7 +192,11 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
 
 void ResourceManager::UnLoadXMLProfile(Profile *profile) const
 {
-  delete profile;
+  --profile->ref_count;
+  if (!profile->ref_count) {
+    profiles.erase(profile->filename);
+    delete profile;
+  }
 }
 
 const xmlNode*  ResourceManager::GetElement(const Profile *profile, const std::string& resource_type,

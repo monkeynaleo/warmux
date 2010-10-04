@@ -44,7 +44,7 @@ WeaponsList::~WeaponsList()
 
   // no need to delete objects in m_weapons_launcher_list nor clear the 2 lists !
 
-  delete weapons_res_profile;
+  GetResourceManager().UnLoadXMLProfile(weapons_res_profile);
   weapons_res_profile = NULL;
 }
 
@@ -52,7 +52,7 @@ WeaponsList::~WeaponsList()
 
 WeaponsList::WeaponsList(const xmlNode* weapons_xml)
 {
-  weapons_res_profile = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
+  weapons_res_profile = GetResourceManager().LoadXMLProfile("weapons.xml", false);
 
   // First launcher weapons
   m_launcher_weapons_list.push_back(new AnvilLauncher);
