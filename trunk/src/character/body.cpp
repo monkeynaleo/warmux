@@ -489,8 +489,7 @@ void Body::Build()
     }
   }
 
-  if ((last_frame == current_frame) &&
-      !need_rebuild) {
+  if (last_frame == current_frame && !need_rebuild) {
     return;
   }
 
@@ -521,7 +520,7 @@ void Body::Build()
 
   member_mvt body_mvt;
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
+  body_mvt.pos.x = ONE_HALF*(GetSize().x - (int)skel_lst.front()->member->GetSprite().GetWidth());
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
 
@@ -662,18 +661,15 @@ void Body::SetClothe(const std::string & name)
   }
 
   std::map<std::string, Clothe *>::iterator itClothes = clothes_lst.find(name);
+  assert(itClothes != clothes_lst.end());
 
-  if (itClothes != clothes_lst.end()) {
-    current_clothe = itClothes->second;
-    BuildSqueleton();
-    main_rotation_rad = 0;
-    need_rebuild      = true;
-    previous_clothe   = NULL;
-  } else {
-    MSG_DEBUG("body", "Clothe not found");
-  }
+  current_clothe = itClothes->second;
+  BuildSqueleton();
+  main_rotation_rad = 0;
+  need_rebuild      = true;
+  previous_clothe   = NULL;
 
-  ASSERT(current_clothe != NULL);
+  assert(current_clothe != NULL);
 }
 
 void Body::SetMovement(const std::string & name)
@@ -688,20 +684,17 @@ void Body::SetMovement(const std::string & name)
     return;
   }
   std::map<std::string, Movement *>::iterator itMvt = mvt_lst.find(name);
+  assert(itMvt != mvt_lst.end());
 
-  if (itMvt != mvt_lst.end()) {
-    current_mvt       = itMvt->second;
-    current_frame     = 0;
-    current_loop      = 0;
-    last_refresh      = Time::GetInstance()->Read();
-    main_rotation_rad = 0;
-    need_rebuild      = true;
-    previous_mvt      = NULL;
-  } else {
-    MSG_DEBUG("body", "Movement not found");
-  }
+  current_mvt       = itMvt->second;
+  current_frame     = 0;
+  current_loop      = 0;
+  last_refresh      = Time::GetInstance()->Read();
+  main_rotation_rad = 0;
+  need_rebuild      = true;
+  previous_mvt      = NULL;
 
-  ASSERT(current_mvt != NULL);
+  assert(current_mvt != NULL);
 }
 
 void Body::PlayAnimation()
@@ -721,20 +714,17 @@ void Body::SetClotheOnce(const std::string & name)
   }
 
   std::map<std::string, Clothe *>::iterator itClothes = clothes_lst.find(name);
+  assert(itClothes != clothes_lst.end());
 
-  if (itClothes != clothes_lst.end()) {
-    if (!previous_clothe) {
-      previous_clothe = current_clothe;
-    }
-    current_clothe = itClothes->second;
-    BuildSqueleton();
-    main_rotation_rad = 0;
-    need_rebuild = true;
-  } else {
-    MSG_DEBUG("body", "Clothe not found");
+  if (!previous_clothe) {
+    previous_clothe = current_clothe;
   }
+  current_clothe = itClothes->second;
+  BuildSqueleton();
+  main_rotation_rad = 0;
+  need_rebuild = true;
 
-  ASSERT(current_clothe != NULL);
+  assert(current_clothe != NULL);
 }
 
 void Body::SetMovementOnce(const std::string & name)
@@ -750,22 +740,19 @@ void Body::SetMovementOnce(const std::string & name)
   }
 
   std::map<std::string, Movement *>::iterator itMvt = mvt_lst.find(name);
+  assert(itMvt != mvt_lst.end());
 
-  if (itMvt != mvt_lst.end()) {
-    if (!previous_mvt) {
-      previous_mvt = current_mvt;
-    }
-    current_mvt = itMvt->second;
-    current_frame = 0;
-    current_loop = 0;
-    last_refresh = Time::GetInstance()->Read();
-    main_rotation_rad = 0;
-    need_rebuild = true;
-  } else {
-    MSG_DEBUG("body", "Movement not found");
+  if (!previous_mvt) {
+    previous_mvt = current_mvt;
   }
+  current_mvt = itMvt->second;
+  current_frame = 0;
+  current_loop = 0;
+  last_refresh = Time::GetInstance()->Read();
+  main_rotation_rad = 0;
+  need_rebuild = true;
 
-  ASSERT(current_mvt != NULL);
+  assert(current_mvt != NULL);
 }
 
 void Body::GetTestRect(uint & l,
@@ -855,8 +842,10 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 void Body::SetRotation(Double angle)
 {
   MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
-  main_rotation_rad = angle;
-  need_rebuild = true;
+  if (main_rotation_rad != angle) {
+    main_rotation_rad = angle;
+    need_rebuild = true;
+  }
 }
 
 const std::string& Body::GetMovement() const
