@@ -56,6 +56,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   vbox = new VBox(_size.x - 2*border_size - scrollbar_width, false, force_widget_size);
   vbox->SetBorder(Point2i(0, 0));
   vbox->SetMargin(0);
+  vbox->SetBackgroundColor(transparent_color);
 
   WidgetList::AddWidget(vbox);
   WidgetList::AddWidget(m_up);
