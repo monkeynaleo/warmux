@@ -201,7 +201,7 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
 InfoMap::~InfoMap()
 {
   if (res_profile)
-    delete res_profile;
+    GetResourceManager().UnLoadXMLProfile(res_profile);
   if (normal)
     delete normal;
   if (basic)

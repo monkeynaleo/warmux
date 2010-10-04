@@ -29,6 +29,7 @@
 #define _RESOURCE_MANAGER_H
 
 #include <string>
+#include <map>
 #include <WORMUX_base.h>
 #include <WORMUX_singleton.h>
 #include "graphic/surface.h"
@@ -46,13 +47,17 @@ class MouseCursor;
 
 class Profile
 {
+protected:
+  friend class ResourceManager;
+  int ref_count;
+  std::string name;
+  Profile(const std::string& name) : ref_count(1), name(name) { doc = NULL; }
+  ~Profile() { if (doc) delete doc; }
+
 public:
   XmlReader *doc; //TODO move to private
   std::string filename;
   std::string relative_path;
-
-  Profile();
-  ~Profile();
 
   XmlReader * GetXMLDocument(void) const { return this->doc; }
 };
@@ -62,9 +67,12 @@ class ResourceManager : public Singleton<ResourceManager>
   ResourceManager();
   ~ResourceManager();
   friend class Singleton<ResourceManager>;
+  typedef std::map<std::string, Profile*> ProfileMap;
+  static ProfileMap profiles;
+  std::string base_path;
 
 public:
-  void SetDataPath(const std::string& base_path);
+  void SetDataPath(const std::string& path) { base_path = path; }
   Surface LoadImage(const std::string& ressource_str, bool alpha = false,
                     bool set_colorkey = false, Uint32 colorkey = 0) const;
 
@@ -89,12 +97,9 @@ public:
                           const int width, const int height) const;
   const xmlNode*  GetElement(const Profile *profile, const std::string& ressource_type,
                              const std::string& ressource_name) const;
-
- private:
-  std::string base_path;
 };
 
-ResourceManager& GetResourceManager();
+inline ResourceManager& GetResourceManager() { return ResourceManager::GetRef(); }
 
 #define LOAD_RES_IMAGE(name) GetResourceManager().LoadImage(res, name)
 #define LOAD_RES_SPRITE(name) GetResourceManager().LoadSprite(res, name)
