@@ -45,6 +45,7 @@ public:
   typedef std::vector<Caption> Captions;
 
 private:
+  int        box_width;
   Captions   captions;
 
 public:
@@ -52,15 +53,17 @@ public:
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Captions& caps,
-               ScalingType type = FIT_SCALING)
+               int w, ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
+    , box_width(w)
     , captions(caps)
   { }
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Caption* caps, size_t num,
-               ScalingType type = FIT_SCALING)
+               int w, ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
+    , box_width(w)
     , captions(caps, caps+num)
   { }
 

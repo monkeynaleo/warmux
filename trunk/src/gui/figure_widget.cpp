@@ -28,7 +28,7 @@ void FigureWidget::Draw(const Point2i& mousePosition) const
 
   PictureWidget::Draw(mousePosition);
 
-  uint lsize = 130*zoom.GetX() + 0.5;
+  uint lsize = box_width*zoom.GetX() + 0.5;
 
   for (uint i=0; i<captions.size(); i++) {
     Text tmp(captions[i].string,
