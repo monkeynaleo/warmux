@@ -61,15 +61,15 @@ HelpMenu::HelpMenu()
     { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
   };
 
-# define DEF_TEAMS_CAPTIONS_PARAMS  Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
-  static const FigureWidget::Caption teams_captions[] = {
-    { _("Click to change team selected"), 293, 141, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Edit player name"), 541, 141, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Go to game rules edition"), 788, 141, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Click to select AI/human team"), 325, 275, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Changer per team number of players"), 605, 275, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Change number of playing teams"), 146, 334, DEF_TEAMS_CAPTIONS_PARAMS },
-    { _("Go to game rules editing submenu"), 466, 334, DEF_TEAMS_CAPTIONS_PARAMS },
+# define DEF_STARTGAME_CAPTIONS_PARAMS  Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
+  static const FigureWidget::Caption startgame_captions[] = {
+    { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Go to game rules edition"), 788, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Click to select AI/human team"), 325, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Changer per team number of players"), 605, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Change number of playing teams"), 146, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Go to game rules editing submenu"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
   };
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -95,8 +95,8 @@ HelpMenu::HelpMenu()
 
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/teams_selection",
-                       teams_captions, ARRAY_SIZE(teams_captions),
+                       "help/startgame_menu",
+                       startgame_captions, ARRAY_SIZE(startgame_captions),
                        238, PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Teams selection"), w);
 
