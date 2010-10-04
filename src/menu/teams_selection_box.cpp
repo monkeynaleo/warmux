@@ -126,6 +126,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     // through this mechanism, but with a manual one. This manual mechanism
     // requires we have a *real* copy of the vector for when it is destroyed.
     list_box = new TeamScrollBox(teams_selections, Point2i(box_w-20, _size.y-10));
+    list_box->SetNbTeams(GetTeamsList().playing_list.size());
 
     AddWidget(list_box);
   } else {
