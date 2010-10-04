@@ -855,8 +855,10 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 void Body::SetRotation(Double angle)
 {
   MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
-  main_rotation_rad = angle;
-  need_rebuild = true;
+  if (main_rotation_rad != angle) {
+    main_rotation_rad = angle;
+    need_rebuild = true;
+  }
 }
 
 const std::string& Body::GetMovement() const
