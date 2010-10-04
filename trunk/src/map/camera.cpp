@@ -38,20 +38,19 @@
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
 
-const Point2f MAX_CAMERA_SPEED(5000, 5000);
-const Point2f MAX_CAMERA_ACCELERATION(1.5,1.5);
-const float ANTICIPATION = 18;
-const float REACTIVITY = 0.6;
-const float SPEED_REACTIVITY = 0.05;
-const int SPEED_REACTIVITY_CEIL = 4;
+static const Point2f MAX_CAMERA_SPEED(5000, 5000);
+static const Point2f MAX_CAMERA_ACCELERATION(1.5,1.5);
 
-#define SCROLL_KEYBOARD  20 // pixel
+#define REACTIVITY             0.6
+#define SPEED_REACTIVITY       0.05
+#define REALTIME_FOLLOW_FACTOR 0.15
 
-const float ADVANCE_ANTICIPATION = 30;
-const int REALTIME_FOLLOW_LIMIT = 25;
-const float REALTIME_FOLLOW_FACTOR = 0.15;
-
-uint MAX_REFRESHES_PER_SECOND = 100;
+#define ANTICIPATION               18
+#define ADVANCE_ANTICIPATION       30
+#define SPEED_REACTIVITY_CEIL       4
+#define SCROLL_KEYBOARD            20 // pixel
+#define REALTIME_FOLLOW_LIMIT      25
+#define MAX_REFRESHES_PER_SECOND  100
 
 Camera::Camera()
   : m_started_shaking(0)
@@ -86,12 +85,12 @@ void Camera::Reset()
 
 bool Camera::HasFixedX() const
 {
-  return (int)GetWorld().GetWidth() <= GetSizeX();
+  return GetWorld().GetWidth() <= GetSizeX();
 }
 
 bool Camera::HasFixedY() const
 {
-  return (int)GetWorld().GetHeight() <= GetSizeY();
+  return GetWorld().GetHeight() <= GetSizeY();
 }
 
 void Camera::SetXYabs(int x, int y)
@@ -101,17 +100,17 @@ void Camera::SetXYabs(int x, int y)
   if (!HasFixedX())
     position.x = InRange_Long(x, 0, GetWorld().GetWidth() - GetSizeX());
   else
-    position.x = - (window.GetWidth() - GetWorld().GetWidth())/2;
+    position.x = (GetWorld().GetWidth() - window.GetWidth())/2;
 
   if (!HasFixedY())
     position.y = InRange_Long(y, 0, GetWorld().GetHeight() - GetSizeY());
   else
-    position.y = - (window.GetHeight() - GetWorld().GetHeight())/2;
+    position.y = (GetWorld().GetHeight() - window.GetHeight())/2;
 }
 
 void Camera::SetXY(Point2i pos)
 {
-  pos = pos * FreeDegrees();
+  pos = pos*FreeDegrees();
   if (pos.IsNull())
     return;
 
@@ -147,12 +146,10 @@ void Camera::AutoCrop()
     target = obj_pos;
 
     if (followed_object->IsMoving()) {
-      Point2f speed(followed_object->GetSpeed().x.tofloat(),
-                    followed_object->GetSpeed().y.tofloat());
-      Point2f anticipation = ADVANCE_ANTICIPATION * speed;
+      Point2d anticipation = followed_object->GetSpeed() * ADVANCE_ANTICIPATION;
 
       //limit anticipation to screen size/3
-      Point2f anticipation_limit = GetSize()/3;
+      Point2d anticipation_limit = GetSize()/3;
       target += anticipation.clamp(-anticipation_limit, anticipation_limit);
     }
 
@@ -164,26 +161,27 @@ void Camera::AutoCrop()
   }
 
   //Compute new speed to reach target
-  Point2f acceleration = (target - ANTICIPATION*m_speed - position)*REACTIVITY;
+  Point2f acceleration = (target - m_speed*ANTICIPATION - position)*REACTIVITY;
   // Limit acceleration
   acceleration = acceleration.clamp(-MAX_CAMERA_ACCELERATION, MAX_CAMERA_ACCELERATION);
 
   // std::cout<<"acceleration before : "<<acceleration.x<<" "<<acceleration.y<<std::endl;
-  if (abs(m_speed.x) > SPEED_REACTIVITY_CEIL) {
-    acceleration.x *= (1 + SPEED_REACTIVITY * (abs(m_speed.x) - SPEED_REACTIVITY_CEIL));
+  if ((int)abs(m_speed.x) > SPEED_REACTIVITY_CEIL) {
+    acceleration.x *= (1 + SPEED_REACTIVITY * ((int)abs(m_speed.x) - SPEED_REACTIVITY_CEIL));
   }
 
-  if (abs(m_speed.y) > SPEED_REACTIVITY_CEIL) {
-    acceleration.y *= (1 + SPEED_REACTIVITY * (abs(m_speed.y) - SPEED_REACTIVITY_CEIL));
+  if ((int)abs(m_speed.y) > SPEED_REACTIVITY_CEIL) {
+    acceleration.y *= (1 + SPEED_REACTIVITY * ((int)abs(m_speed.y) - SPEED_REACTIVITY_CEIL));
   }
 
+  //printf("speed=(%.2f,%.2f)  target=(%i,%i)\n", m_speed.x, m_speed.y, target.x, target.y);
   if (stop) {
     m_speed = m_speed/2;
 
   } else {
 
     //Apply acceleration
-    m_speed = m_speed + acceleration;
+    m_speed += acceleration;
 
     // Realtime follow is enabled if object is too fast to be correctly followed
     // stop can only be true if followed_obj!=NULL
@@ -201,7 +199,8 @@ void Camera::AutoCrop()
   }
 
   //Update position
-  Point2i next_position = m_speed;
+  Point2i next_position((int)m_speed.x, (int)m_speed.y);
+  //printf("pos=(%i,%i) speed=(%.2f,%.2f)\n", next_position.x, next_position.y, m_speed.x, m_speed.y);
   SetXY(next_position);
 
   if (!m_stop && next_position.IsNull() && followed_object->GetSpeed().IsNull()) {
@@ -402,13 +401,13 @@ void Camera::HandleMoveIntentions()
 
 void Camera::Refresh(){
   // Refresh gets called very often when the game is paused.
-  // This "if" ensures that the camera doesn't move to fast.
+  // This "if" ensures that the camera doesn't move too fast.
   if (refresh_stopwatch.GetValue() >= 1000 / MAX_REFRESHES_PER_SECOND) {
     // Check if player wants the camera to move
     HandleMouseMovement();
     HandleMoveIntentions();
 
-    if (auto_crop && followed_object != NULL)
+    if (auto_crop && followed_object)
       AutoCrop();
     refresh_stopwatch.Reset(1.0);
   }
