@@ -61,14 +61,15 @@ HelpMenu::HelpMenu()
     { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
   };
 
+# define DEF_TEAMS_CAPTIONS_PARAMS  Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
   static const FigureWidget::Caption teams_captions[] = {
-    { _("Wheelmouse or right/left click to change number of teams"), 66, 222, DEF_CAPTIONS_PARAMS },
-    { _("Change team selected"), 234, 131, DEF_CAPTIONS_PARAMS },
-    { _("Go to map selection"), 375, 131, DEF_CAPTIONS_PARAMS },
-    { _("Go to game rules edition"), 514, 131, DEF_CAPTIONS_PARAMS },
-    { _("Click to select AI/human team"), 200, 265, DEF_CAPTIONS_PARAMS },
-    { _("Enter player name by typing"), 350, 265, DEF_CAPTIONS_PARAMS },
-    { _("Changer per team number of players"), 495, 265, DEF_CAPTIONS_PARAMS },
+    { _("Click to change team selected"), 293, 141, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Edit player name"), 541, 141, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Go to game rules edition"), 788, 141, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Click to select AI/human team"), 325, 275, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Changer per team number of players"), 605, 275, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Change number of playing teams"), 146, 334, DEF_TEAMS_CAPTIONS_PARAMS },
+    { _("Go to game rules editing submenu"), 466, 334, DEF_TEAMS_CAPTIONS_PARAMS },
   };
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -88,7 +89,7 @@ HelpMenu::HelpMenu()
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
                                "help/shortkeys",
                                controls_captions, ARRAY_SIZE(controls_captions),
-                               PictureWidget::FIT_SCALING);
+                               130, PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 
@@ -96,7 +97,7 @@ HelpMenu::HelpMenu()
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/teams_selection",
                        teams_captions, ARRAY_SIZE(teams_captions),
-                       PictureWidget::FIT_SCALING);
+                       238, PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Teams selection"), w);
 
   w = new ControlConfig(tabs->GetSize(), true);
