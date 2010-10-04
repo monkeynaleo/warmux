@@ -100,6 +100,7 @@ public:
     : HBox(size, false, false)
   {
     SetWidgets(type, "?", NULL);
+    Widget::SetBackgroundColor(transparent_color);
   }
   ResultBox(uint size, const std::string& type, uint score, const Character* player)
     : HBox(size, false, false)
