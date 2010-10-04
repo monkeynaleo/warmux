@@ -36,7 +36,6 @@
  */
 class Message : public Text
 {
-private:
   uint time;
 
 public:

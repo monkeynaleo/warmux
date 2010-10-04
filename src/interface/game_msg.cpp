@@ -80,6 +80,7 @@ void GameMessages::Add(const std::string &message) {
   // Add message at the end of the list
   Message * newMessage = new Message(message, white_color, Font::FONT_MEDIUM,
                                      Font::FONT_BOLD, Time::GetInstance()->Read());
+  newMessage->SetMaxWidth(GetMainWindow().GetWidth()-8);
   list.push_back(newMessage);
 
   /* if there are too many messages, remove some of them */
