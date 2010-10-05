@@ -21,4 +21,5 @@
     <character name="Shorewall" body="nupik" />
     <character name="Zorp" body="nupik" /> 
   </team>
+    <color name="teamcolor" r="166" g="111" b="2" a="255" />
 </resources>

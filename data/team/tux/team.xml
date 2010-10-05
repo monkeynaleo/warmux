@@ -21,4 +21,5 @@
     <character name="Bandit" body="tux" />
     <character name="Lea" body="tux" />   
   </team>
+    <color name="teamcolor" r="32" g="32" b="32" a="255" />
 </resources>

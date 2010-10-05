@@ -21,4 +21,5 @@
     <character name="okular" body="konqi" />
     <character name="KPDF" body="konqi" />
   </team>
+    <color name="teamcolor" r="121" g="164" b="38" a="255" />
 </resources>

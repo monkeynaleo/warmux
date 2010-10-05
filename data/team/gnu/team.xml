@@ -17,4 +17,5 @@
     <character name="Debugger" body="gnu" />
     <character name="Savannah" body="gnu" />
   </team>
+    <color name="teamcolor" r="111" g="85" b="50" a="255" />
 </resources>

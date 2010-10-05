@@ -23,6 +23,7 @@
     <character name="Yahoo!" body="pidgin"/>
     <character name="Zephyr" body="pidgin"/>
   </team>
+    <color name="teamcolor" r="131" g="80" b="142" a="255" />
 </resources>
 
 

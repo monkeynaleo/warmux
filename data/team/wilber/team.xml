@@ -21,4 +21,5 @@
     <character name="Jean-Baptiste Oudry" body="wilber" />
     <character name="Alessandro Botticelli" body="wilber" />
   </team>
+    <color name="teamcolor" r="72" g="62" b="35" a="255" />
 </resources>
