@@ -99,7 +99,7 @@ void Chat::NewMessage(const std::string &msg, const Color& color)
     last_time = now;
   }
 
-  chat.AddText(msg, MAXLINES);
+  chat.AddText(msg, color, MAXLINES);
 }
 
 void Chat::SendMessage(const std::string &msg)
