@@ -71,7 +71,10 @@ static SDL_ANDROID_ApplicationPutToBackgroundCallback_t appRestoredCallback = ap
 
 int SDL_ANDROID_CallJavaSwapBuffers()
 {
-  SDL_ANDROID_processAndroidTrackballDampening();
+  if( !glContextLost )
+  {
+    SDL_ANDROID_processAndroidTrackballDampening();
+  }
   if( ! (*JavaEnv)->CallIntMethod( JavaEnv, JavaRenderer, JavaSwapBuffers ) )
     return 0;
   if( glContextLost )
@@ -80,11 +83,16 @@ int SDL_ANDROID_CallJavaSwapBuffers()
     __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context recreated, refreshing textures");
     SDL_ANDROID_VideoContextRecreated();
     appRestoredCallback();
-    SDL_PrivateAppActive(1, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
   }
   return 1;
 }
 
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(DemoRenderer_nativeGlContextRecreated) ( JNIEnv*  env, jobject  thiz )
+{
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context recreated, sending SDL_ACTIVEEVENT");
+  SDL_PrivateAppActive(0, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
+}
 
 JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(DemoRenderer_nativeResize) ( JNIEnv*  env, jobject  thiz, jint w, jint h )

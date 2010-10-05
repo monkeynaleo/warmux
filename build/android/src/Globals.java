@@ -32,7 +32,7 @@ class Globals {
   public static int TrackballDampening = 0;
   public static int AudioBufferConfig = 0;
 
-  public static boolean NonBlockingSwapBuffers = false;
+  public static boolean NonBlockingSwapBuffers = true;
 }
 
 class LoadLibrary {
