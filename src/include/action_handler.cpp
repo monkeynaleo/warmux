@@ -61,12 +61,48 @@
 #include "weapon/weapon_launcher.h"
 #include "weapon/weapons_list.h"
 
+static const Color& DefaultCPUColor(const DistantComputer *cpu)
+{
+  const std::list<DistantComputer*>& cpus = Network::GetInstance()->GetRemoteHosts();
+  int i = 0;
+  for (std::list<DistantComputer*>::const_iterator itcpu = cpus.begin();
+       itcpu != cpus.end();
+       ++itcpu, ++i) {
+    if ((*itcpu)->GetGameId() == cpu->GetGameId()) {
+      static const Color cpu_colors[8] = { primary_green_color, white_color, yellow_color, black_color,
+                                           primary_blue_color, pink_color, green_color, gray_color };
+      assert(i < 8);
+      return cpu_colors[i];
+    }
+  }
+  return white_color;
+}
 
 static const Color& GetCPUColor(const Action* a)
 {
-  static const Color cpu_colors[8] = { primary_green_color, white_color, yellow_color, black_color,
-                                       primary_blue_color, pink_color, green_color, gray_color };
-  return cpu_colors[a->GetCreator()->GetGameId()&7];
+  const DistantComputer *cpu = a->GetCreator();
+  if (!cpu)
+    return white_color;
+  
+  const std::list<Player>& players = a->GetCreator()->GetPlayers();
+  if (players.empty())
+    return DefaultCPUColor(cpu);
+  const std::list<ConfigTeam>& teams = players.begin()->GetTeams();
+  if (teams.empty())
+    return DefaultCPUColor(cpu);
+  
+  std::list<ConfigTeam>::const_iterator it = teams.begin(), found = it;
+  for (; it != teams.end(); ++it) {
+    if (it->ai == NO_AI_NAME) {
+      found = it;
+      break;
+    }
+  }
+
+  int unused_buffer;
+  Team *team = GetTeamsList().FindById(found->id, unused_buffer);
+  
+  return (team) ? team->GetColor() : DefaultCPUColor(cpu);
 }
 
 // #############################################################################
