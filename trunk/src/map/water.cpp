@@ -192,19 +192,20 @@ void Water::CalculateWavePattern()
   /* Copy directly the surface image into the pattern image. This doesn't use
    * blit in order to save CPU but it makes this code not really easy to read...
    * The copy is done pixel per pixel */
-  uint bpp = surface.GetBytesPerPixel();
-
-  int     pitch = pattern.GetPitch();
-  Uint8 * dst_origin = pattern.GetPixels() + (15 + WAVE_INC * (WAVE_COUNT-1)) * pitch;
-  Uint8 * src_origin = surface.GetPixels();
+  uint         bpp        = surface.GetBytesPerPixel();
+  int          spitch     = surface.GetPitch();
+  int          dpitch     = pattern.GetPitch();
+  const Uint8 *src_origin = surface.GetPixels();
+  Uint8       *dst_origin = pattern.GetPixels()
+                          + (15 + WAVE_INC*(WAVE_COUNT-1)) * dpitch;
 
   for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    Uint8 * dst = dst_origin + x * bpp + height[x] * pitch;
-    Uint8 * src = src_origin;
+    const Uint8 *src = src_origin;
+    Uint8       *dst = dst_origin + x * bpp + height[x] * dpitch;
     for (uint y=0; y < (uint)surface.GetHeight(); y++) {
       memcpy(dst, src, bpp);
-      dst += pitch;
-      src += bpp;
+      dst += dpitch;
+      src += spitch;
     }
   }
 
