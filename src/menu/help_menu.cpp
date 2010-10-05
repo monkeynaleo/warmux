@@ -98,7 +98,7 @@ HelpMenu::HelpMenu()
                        "help/startgame_menu",
                        startgame_captions, ARRAY_SIZE(startgame_captions),
                        238, PictureWidget::FIT_SCALING);
-  tabs->AddNewTab("unused", _("Teams selection"), w);
+  tabs->AddNewTab("unused", _("Game menu"), w);
 
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
