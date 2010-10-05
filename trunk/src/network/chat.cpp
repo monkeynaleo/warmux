@@ -24,6 +24,7 @@
 #include "game/time.h"
 #include "graphic/text.h"
 #include "graphic/text_list.h"
+#include "graphic/video.h"
 #include "include/action.h"
 #include "include/action_handler.h"
 #include "include/app.h"
@@ -32,11 +33,11 @@
 #include "network/network.h"
 #include "tool/text_handling.h"
 
-const uint HEIGHT=15;
-const uint XPOS=25;
-const uint YPOS=130;
-const uint MAXLINES=10; //Fidel's advise
-const uint MAXSECONDS=40;
+#define HEIGHT        5
+#define XPOS         25
+#define YPOS        130
+#define MAXLINES     10 //Fidel's advise
+#define MAXSECONDS   40
 
 Chat::~Chat()
 {
@@ -51,11 +52,6 @@ Chat::Chat():
   check_input(false),
   last_time(0)
 {
-}
-
-void Chat::Clear()
-{
-  chat.Clear();
 }
 
 void Chat::Show()
@@ -88,16 +84,12 @@ void Chat::ShowInput()
   }
 
   /* FIXME where do those constants come from ?*/
-  msg->DrawLeftTop(Point2i(25, 400));
+  int ypos = GetMainWindow().GetHeight() - 100;
+  msg->DrawLeftTop(Point2i(25, ypos));
   if (input->GetText() != "") {
-    input->DrawLeftTop(Point2i(25 + msg->GetWidth() + 5, 400));
-    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, 400), cursor_pos);
+    input->DrawLeftTop(Point2i(25 + msg->GetWidth() + 5, ypos));
+    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, ypos), cursor_pos);
   }
-}
-
-bool Chat::CheckInput() const
-{
-  return check_input;
 }
 
 void Chat::NewMessage(const std::string &msg, const Color& color)
@@ -116,7 +108,7 @@ void Chat::SendMessage(const std::string &msg)
     return;
 
   Action* a = new Action(Action::ACTION_CHAT_MESSAGE);
-  a->Push(Network::GetInstance()->GetPlayer().GetNickname());
+  a->Push(Network::GetInstance()->GetPlayer().GetId());
   a->Push(msg);
   ActionHandler::GetInstance()->NewAction(a);
 }
