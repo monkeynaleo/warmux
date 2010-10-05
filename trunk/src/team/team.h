@@ -76,8 +76,7 @@ private:
   WeaponsList * weapons_list;
 
   // Colors
-  int color_id;
-  static const Color colors[8];
+  Color team_color;
 
   bool LoadCharacters();
 
@@ -196,7 +195,7 @@ public:
   bool IsAbandoned() { return abandoned; }
 
   // Color management
-  const Color& GetColor() const { return colors[color_id]; };
+  const Color& GetColor() const { return team_color; };
 };
 
 #endif /* TEAM_H */

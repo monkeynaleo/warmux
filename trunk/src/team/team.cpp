@@ -45,10 +45,6 @@
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
-static int num_id = 0;
-const Color Team::colors[8] = { primary_green_color, primary_red_color, yellow_color, black_color,
-                                primary_blue_color, pink_color, green_color, gray_color };
-
 Team* Team::LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error)
 {
   std::string nomfich = teams_dir+id+ PATH_SEPARATOR "team.xml";
@@ -87,7 +83,11 @@ Team::Team(XmlReader& doc, Profile* res,
   , active_weapon(NULL)
   , abandoned(false)
   , energy(this)
+  , team_color(white_color)
 {
+  // Load team color
+  team_color = LOAD_RES_COLOR("teamcolor");
+
   // Load flag
   flag = LOAD_RES_IMAGE("flag");
   mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
@@ -115,11 +115,6 @@ Team::Team(XmlReader& doc, Profile* res,
 
   active_character = characters.end();
   nb_characters = GameMode::GetInstance()->nb_characters;
-
-  // Set color
-  color_id = num_id++;
-  if (num_id > 7)
-    num_id = 0;
 }
 
 void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
