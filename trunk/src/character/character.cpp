@@ -152,7 +152,7 @@ Character::Character(Team& my_team, const std::string &name, Body *char_body) :
   m_allow_negative_y = true;
   // Name Text object
   if (Config::GetInstance()->GetDisplayNameCharacter())
-    name_text = new Text(character_name);
+    name_text = new Text(character_name, m_team.GetColor());
   else
     name_text = NULL;
 
@@ -334,7 +334,7 @@ void Character::DrawLostEnergy() const
   if (MustDrawName()) {
     dy = dy - HEIGHT_FONT_NAME - SPACE;
   }
-  Text text(ss.str());
+  Text text(ss.str(), m_team.GetColor());
   text.DrawCenterTop(GetPosition() - Camera::GetInstance()->GetPosition() +
                      Point2i(GetWidth()/2, dy));
 }
