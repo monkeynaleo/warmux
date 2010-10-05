@@ -98,11 +98,6 @@ Player* DistantComputer::GetPlayer(uint player_id)
   return player;
 }
 
-const std::list<Player>& DistantComputer::GetPlayers() const
-{
-  return players;
-}
-
 bool DistantComputer::SocketReady() const
 {
   return sock->IsReady();
@@ -143,11 +138,6 @@ std::string DistantComputer::GetNicknames() const
   return nicknames;
 }
 
-uint DistantComputer::GetGameId() const
-{
-  return game_id;
-}
-
 int DistantComputer::GetNumberOfPlayersWithState(Player::State state)
 {
   int counter = 0;
@@ -157,16 +147,6 @@ int DistantComputer::GetNumberOfPlayersWithState(Player::State state)
       counter++;
   }
   return counter;
-}
-
-void DistantComputer::ForceDisconnection()
-{
-  force_disconnection_called = true;
-}
-
-bool DistantComputer::MustBeDisconnected()
-{
-  return force_disconnection_called;
 }
 
 const std::string DistantComputer::ToString() const
