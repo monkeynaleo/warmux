@@ -195,18 +195,49 @@ void Water::CalculateWavePattern()
   uint         bpp        = surface.GetBytesPerPixel();
   int          spitch     = surface.GetPitch();
   int          dpitch     = pattern.GetPitch();
-  const Uint8 *src_origin = surface.GetPixels();
-  Uint8       *dst_origin = pattern.GetPixels()
-                          + (15 + WAVE_INC*(WAVE_COUNT-1)) * dpitch;
 
-  for (uint x = 0; x < PATTERN_WIDTH; x++) {
-    const Uint8 *src = src_origin;
-    Uint8       *dst = dst_origin + x * bpp + height[x] * dpitch;
-    for (uint y=0; y < (uint)surface.GetHeight(); y++) {
-      memcpy(dst, src, bpp);
-      dst += dpitch;
-      src += spitch;
+  switch (bpp)
+  {
+  case 2:
+    {
+      spitch >>= 1;
+      dpitch >>= 1;
+      const Uint16 *src_origin = (Uint16 *)surface.GetPixels();
+      Uint16       *dst_origin = (Uint16 *)pattern.GetPixels()
+                               + (15 + WAVE_INC*(WAVE_COUNT-1)) * dpitch;
+
+      for (uint x = 0; x < PATTERN_WIDTH; x++) {
+        const Uint16 *src = src_origin;
+        Uint16       *dst = dst_origin + x + height[x] * dpitch;
+        for (int y=0; y < surface.GetHeight(); y++) {
+          dst[0] = src[0];
+          dst += dpitch;
+          src += spitch;
+        }
+      }
+      break;
     }
+  case 4:
+    {
+      spitch >>= 2;
+      dpitch >>= 2;
+      const Uint32 *src_origin = (Uint32 *)surface.GetPixels();
+      Uint32       *dst_origin = (Uint32 *)pattern.GetPixels()
+                               + (15 + WAVE_INC*(WAVE_COUNT-1)) * dpitch;
+
+      for (uint x = 0; x < PATTERN_WIDTH; x++) {
+        const Uint32 *src = src_origin;
+        Uint32       *dst = dst_origin + x + height[x] * dpitch;
+        for (int y=0; y < surface.GetHeight(); y++) {
+          dst[0] = src[0];
+          dst += dpitch;
+          src += spitch;
+        }
+      }
+      break;
+    }
+  default:
+    Error("Unexpected surface format");
   }
 
   pattern.Unlock();
