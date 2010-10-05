@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Wormux Fa <behdadp@farsiweb.info>\n"
@@ -404,7 +405,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -425,7 +426,7 @@ msgstr "حمله‌ی هوایی"
 msgid "Airhammer"
 msgstr "بیل مکانیکی"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "همه‌ی تیمها"
 
@@ -525,7 +526,7 @@ msgstr "نمی‌توان پوشه‌ی تیم‌ها را باز کرد (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "نمی‌توان پوشه‌ی شخصی تیم‌ها را باز کرد (%s)!"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 #, fuzzy
 msgid "Center camera on character"
 msgstr "تعداد کاراکترها"
@@ -535,26 +536,36 @@ msgstr "تعداد کاراکترها"
 msgid "Center on active character"
 msgstr "تعداد کاراکترها"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Change active character"
 msgstr "تعداد کاراکترها"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 msgid "Change aim angle"
 msgstr ""
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "حداکثر تعداد بازیکنان: "
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "حداکثر تعداد بازیکنان: "
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "تعداد کاراکترها"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 #, fuzzy
 msgid "Change weapon category"
 msgstr "تعداد کاراکترها"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 msgid "Change weapon countdown"
 msgstr ""
 
@@ -597,12 +608,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "حالت کارگیر (کلاینت)"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "احمق‌ترین"
 
@@ -619,7 +642,7 @@ msgstr "باوکا"
 msgid "Commit Suicide"
 msgstr "خودکشی"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 #, fuzzy
 msgid "Configuration menu"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
@@ -641,7 +664,7 @@ msgstr "اتصال برقرار شد!"
 msgid "Construct"
 msgstr "سازه"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "کنترل شده بوسیله‌ی: "
 
@@ -659,7 +682,7 @@ msgstr ""
 msgid "Credits"
 msgstr "دست اندر کاران"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -699,7 +722,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -720,11 +743,16 @@ msgstr "دینامیت"
 msgid "END OF GAME"
 msgstr "پایان بازی"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "نام بازیکن؟"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr ""
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr ""
 
@@ -824,6 +852,11 @@ msgstr "تمام صفحه؟"
 msgid "Game"
 msgstr ""
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "حالت کارگیر (کلاینت)"
+
 #: src/menu/game_mode_editor.cpp:45
 #, fuzzy
 msgid "Game mode"
@@ -836,6 +869,10 @@ msgstr ""
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "گنو"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -874,7 +911,7 @@ msgstr "بازی خوبی داشته باشید!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "رئیس ارتش"
 
@@ -883,7 +920,7 @@ msgstr "رئیس ارتش"
 msgid "Help"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr ""
 
@@ -963,7 +1000,7 @@ msgstr "پک پرواز"
 msgid "Jump"
 msgstr ""
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr ""
 
@@ -986,7 +1023,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1076,23 +1113,23 @@ msgstr "موسیقی؟"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "بی اشتباه‌ترین"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "با استقامت‌ترین"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "موثرترین"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "بی‌مصرف‌ترین"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "وحشی‌ترین"
 
@@ -1116,11 +1153,11 @@ msgstr "بادکنک نجات"
 msgid "Move camera up"
 msgstr "بادکنک نجات"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 #, fuzzy
 msgid "Move character"
 msgstr "بادکنک نجات"
@@ -1206,7 +1243,7 @@ msgid "None"
 msgstr "تمام"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "تعداد کاراکترها"
 
@@ -1214,11 +1251,11 @@ msgstr "تعداد کاراکترها"
 msgid "Number of teams:"
 msgstr "تعداد تیم‌ها: "
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 msgid "On a character: select it"
 msgstr ""
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 msgid "On map: select a target"
 msgstr ""
 
@@ -1284,7 +1321,7 @@ msgstr "انرژی بازیکن؟"
 msgid "Player's name?"
 msgstr "نام بازیکن؟"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1353,7 +1390,7 @@ msgstr ""
 msgid "Public battles"
 msgstr ""
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1365,7 +1402,7 @@ msgstr "خروج"
 msgid "Quit Wormux"
 msgstr "خروج از ورموکس"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 #, fuzzy
 msgid "Quit game"
 msgstr "اجرای بازی"
@@ -1518,12 +1555,12 @@ msgstr ""
 msgid "Shotgun"
 msgstr "شاتگان"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "گزینه‌ها"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1543,7 +1580,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1609,16 +1646,16 @@ msgstr "سرنگ مسموم"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 msgid "Talk in network battles"
 msgstr ""
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 #, fuzzy
 msgid "Team graphs"
 msgstr "تیم‌ها"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 #, fuzzy
 msgid "Team stats"
 msgstr "تیم‌ها"
@@ -1737,7 +1774,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr ""
 
@@ -1766,7 +1803,7 @@ msgstr ""
 "شلیک : کلید Space\n"
 "یک ضربه در هر نوبت"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "تمام صفحه؟"
@@ -1775,7 +1812,7 @@ msgstr "تمام صفحه؟"
 msgid "Toggle interface"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 msgid "Toggle minimap"
 msgstr ""
 
@@ -1860,7 +1897,7 @@ msgstr ""
 msgid "Version"
 msgstr "نسخه"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1889,7 +1926,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -1922,7 +1959,7 @@ msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته ش�
 msgid "Wind particles?"
 msgstr "باد؟"
 
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "برنده"
 
@@ -2069,9 +2106,6 @@ msgstr "صدا با %d هرتز و %d بیت باز شد"
 #~ msgid "Join #wormux on irc.freenode.net to find some opponents."
 #~ msgstr "به #wormux در irc.freenode.net بپیوندید."
 
-#~ msgid "Max number of players:"
-#~ msgstr "حداکثر تعداد بازیکنان: "
-
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s می‌خواهد به شما وصل شود، ولی نسخه‌ی او فرق دارد: من=%s او=%s."
 
@@ -2109,10 +2143,6 @@ msgstr "صدا با %d هرتز و %d بیت باز شد"
 
 #~ msgid "Network initialization"
 #~ msgstr "در حال آغاز شبکه"
-
-#, fuzzy
-#~ msgid "Player name"
-#~ msgstr "نام بازیکن؟"
 
 #~ msgid "Refresh"
 #~ msgstr "بازخوانی"

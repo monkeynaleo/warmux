@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2010-01-10 19:51+1100\n"
 "Last-Translator: jiero <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <i10n>\n"
@@ -397,7 +398,7 @@ msgstr "(未知时间)"
 msgid "(unlimited)"
 msgstr "(无限的)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -419,7 +420,7 @@ msgstr "空袭"
 msgid "Airhammer"
 msgstr "飞锤"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "全部的队伍"
 
@@ -516,7 +517,7 @@ msgstr "打不开团队目录 (%s)！"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "打不开定制的团队目录 (%s)！"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 #, fuzzy
 msgid "Center camera on character"
 msgstr "镜头中心对准角色"
@@ -526,27 +527,37 @@ msgstr "镜头中心对准角色"
 msgid "Center on active character"
 msgstr "转换活动角色"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Change active character"
 msgstr "转换活动角色"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 #, fuzzy
 msgid "Change aim angle"
 msgstr "改变发射角度"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "玩家满员:"
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "玩家满员:"
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "改变武器分类"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 #, fuzzy
 msgid "Change weapon category"
 msgstr "改变武器分类"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "改变武器起爆时间"
@@ -588,12 +599,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "客户端模式 "
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "最笨手笨脚的"
 
@@ -609,7 +632,7 @@ msgstr "开花弹"
 msgid "Commit Suicide"
 msgstr "自杀"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 msgid "Configuration menu"
 msgstr "配置菜单"
 
@@ -629,7 +652,7 @@ msgstr "连接的玩家："
 msgid "Construct"
 msgstr "建筑工具"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "控制者: "
 
@@ -647,7 +670,7 @@ msgstr "无法打开文件%s"
 msgid "Credits"
 msgstr "贡献者"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -687,7 +710,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "拖拉：移动镜头"
@@ -709,11 +732,16 @@ msgstr "炸药"
 msgid "END OF GAME"
 msgstr "游戏结束"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "请问尊姓大名?"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr "音效大小"
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr "能量"
 
@@ -812,6 +840,11 @@ msgstr "全屏?"
 msgid "Game"
 msgstr "游戏"
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "游戏模式"
+
 #: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "游戏模式"
@@ -823,6 +856,10 @@ msgstr "游戏名:"
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛发射器"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -861,7 +898,7 @@ msgstr "来吧！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指挥官"
 
@@ -870,7 +907,7 @@ msgstr "指挥官"
 msgid "Help"
 msgstr "帮助"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr "高跳"
 
@@ -946,7 +983,7 @@ msgstr "喷射包"
 msgid "Jump"
 msgstr "跳跃"
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr "后空翻"
 
@@ -970,7 +1007,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1057,23 +1094,23 @@ msgstr "其他"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "最准"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "最卖力的"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "最有价值的"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "最失败的"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "最暴力的"
 
@@ -1097,12 +1134,12 @@ msgstr "移动"
 msgid "Move camera up"
 msgstr "移动"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "用鼠标或方向键移动镜头"
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 #, fuzzy
 msgid "Move character"
 msgstr "移动"
@@ -1185,7 +1222,7 @@ msgid "None"
 msgstr "成"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "角色数目"
 
@@ -1193,12 +1230,12 @@ msgstr "角色数目"
 msgid "Number of teams:"
 msgstr "队伍数量:"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "On a character: select it"
 msgstr "选择角色：换到一个活动角色"
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 #, fuzzy
 msgid "On map: select a target"
 msgstr "地图上：选择一个目标"
@@ -1264,7 +1301,7 @@ msgstr "耐久度?"
 msgid "Player's name?"
 msgstr "请问尊姓大名?"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1333,7 +1370,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "公开战斗"
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr "借用Ctrl快速退出游戏"
 
@@ -1345,7 +1382,7 @@ msgstr "退出"
 msgid "Quit Wormux"
 msgstr "退出"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "退出游戏"
 
@@ -1494,12 +1531,12 @@ msgstr ""
 msgid "Shotgun"
 msgstr "猎枪"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "显示武器菜单"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr "显示/隐藏界面"
 
@@ -1519,7 +1556,7 @@ msgstr "拍子"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "拍一下，让那家伙跳一跳"
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr "慢步精准"
 
@@ -1586,15 +1623,15 @@ msgstr "注射器"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 msgid "Talk in network battles"
 msgstr "网络战斗中对话"
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 msgid "Team graphs"
 msgstr "队伍图示"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 msgid "Team stats"
 msgstr "队伍状态"
 
@@ -1703,7 +1740,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr "时间"
 
@@ -1733,7 +1770,7 @@ msgstr ""
 "开火: 空格键\n"
 "每回合一个弹夹"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "全屏?"
@@ -1743,7 +1780,7 @@ msgstr "全屏?"
 msgid "Toggle interface"
 msgstr "显示/隐藏界面"
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "显示/隐藏小地图"
@@ -1826,7 +1863,7 @@ msgstr ""
 msgid "Version"
 msgstr "版本"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "版本改变失败原因: %s"
@@ -1854,7 +1891,7 @@ msgstr "等待远方的玩家"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服务吧, 现在先聊天 ！"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：开火/"
@@ -1889,7 +1926,7 @@ msgid "Wind particles?"
 msgstr "风来了?"
 
 #
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "胜者"
 
@@ -2037,9 +2074,6 @@ msgstr "o音乐 %d Hz %d bit"
 #~ msgid "Join #wormux on irc.freenode.net to find some opponents."
 #~ msgstr "加入#wormux IRC irc。freenode。net 找对手"
 
-#~ msgid "Max number of players:"
-#~ msgstr "玩家满员:"
-
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "%s 决定攻击 %s"
 
@@ -2099,9 +2133,6 @@ msgstr "o音乐 %d Hz %d bit"
 
 #~ msgid "Network initialization"
 #~ msgstr "网络初始化"
-
-#~ msgid "Player name"
-#~ msgstr "请问尊姓大名?"
 
 #~ msgid "Refresh"
 #~ msgstr "刷新"

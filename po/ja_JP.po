@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -403,7 +404,7 @@ msgstr "(不明な時間)"
 msgid "(unlimited)"
 msgstr "(無制限)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -426,7 +427,7 @@ msgstr "空爆"
 msgid "Airhammer"
 msgstr "ドリル"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "全てのチーム"
 
@@ -523,7 +524,7 @@ msgstr "チームのディレクトリが開けません (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "カスタムチームのディレクトリが開けません (%s)!"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 #, fuzzy
 msgid "Center camera on character"
 msgstr "カメラの中心をキャラクターにする"
@@ -533,27 +534,37 @@ msgstr "カメラの中心をキャラクターにする"
 msgid "Center on active character"
 msgstr "行動するキャラクターを切り替える"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Change active character"
 msgstr "行動するキャラクターを切り替える"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 #, fuzzy
 msgid "Change aim angle"
 msgstr "照準角度を変更する"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "最大プレイヤー数:"
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "最大プレイヤー数:"
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "武器カテゴリを切り替える"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 #, fuzzy
 msgid "Change weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "武器のカウントダウンを変更する"
@@ -595,12 +606,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "クライアントモード"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "不器用"
 
@@ -616,7 +639,7 @@ msgstr "クラスターバズーカ"
 msgid "Commit Suicide"
 msgstr "自殺"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 msgid "Configuration menu"
 msgstr "オプションメニュー"
 
@@ -636,7 +659,7 @@ msgstr "接続しました！"
 msgid "Construct"
 msgstr "建設資材"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "コントロール: "
 
@@ -654,7 +677,7 @@ msgstr "%s ファイルを開くことができませんでした"
 msgid "Credits"
 msgstr "クレジット"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -696,7 +719,7 @@ msgstr "ダウンロード"
 msgid "Down slowly"
 msgstr "ダウンロード"
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "ドラッグ&ドロップ:カメラの操作"
@@ -718,11 +741,16 @@ msgstr "ダイナマイト"
 msgid "END OF GAME"
 msgstr "ゲームを終了"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "プレイヤー名"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr "効果音のボリューム"
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr "ライフ"
 
@@ -826,6 +854,11 @@ msgstr "フルスクリーン？"
 msgid "Game"
 msgstr "ゲーム"
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "ゲームモード"
+
 #: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "ゲームモード"
@@ -837,6 +870,10 @@ msgstr "ゲーム名"
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu-ランチャー"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -875,7 +912,7 @@ msgstr "楽しんで！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指揮官"
 
@@ -884,7 +921,7 @@ msgstr "指揮官"
 msgid "Help"
 msgstr "ヘルプ"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr "ハイジャンプ"
 
@@ -960,7 +997,7 @@ msgstr "ジェットパック"
 msgid "Jump"
 msgstr "ジャンプ"
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr "バックジャンプ"
 
@@ -984,7 +1021,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1071,23 +1108,23 @@ msgstr "その他"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "最精密"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "最も売れている"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "最も使いやすい"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "最も失敗作"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "最も暴力的"
 
@@ -1111,12 +1148,12 @@ msgstr "キャラクターの移動"
 msgid "Move camera up"
 msgstr "キャラクターの移動"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "カーソルやマウスにカメラを追従"
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 #, fuzzy
 msgid "Move character"
 msgstr "キャラクターの移動"
@@ -1199,7 +1236,7 @@ msgid "None"
 msgstr "完了"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "キャラクター数"
 
@@ -1207,12 +1244,12 @@ msgstr "キャラクター数"
 msgid "Number of teams:"
 msgstr "チーム数:"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "On a character: select it"
 msgstr "キャラクターに関して:行動するキャラクターを切り替えます"
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 #, fuzzy
 msgid "On map: select a target"
 msgstr "マップに関して: ターゲットを選択します"
@@ -1278,7 +1315,7 @@ msgstr "プレイヤーのライフ？"
 msgid "Player's name?"
 msgstr "プレイヤーの名前？"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1347,7 +1384,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "パブリックバトル"
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr "Ctrlでクイック終了"
 
@@ -1359,7 +1396,7 @@ msgstr "終了"
 msgid "Quit Wormux"
 msgstr "Wormux を終了"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "ゲームを終了"
 
@@ -1508,12 +1545,12 @@ msgstr ""
 msgid "Shotgun"
 msgstr "ショットガン"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "武器メニューを表示"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr "インターフェースの表示/非表示"
 
@@ -1533,7 +1570,7 @@ msgstr "ビンタ"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "ビンタでは相手を少し飛ばすことができます。"
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr "照準角度と移動の微調整"
 
@@ -1601,15 +1638,15 @@ msgstr "注射器"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 msgid "Talk in network battles"
 msgstr "ネットワーク対戦で話す"
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 msgid "Team graphs"
 msgstr "チームグラフ"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 msgid "Team stats"
 msgstr "チーム統計"
 
@@ -1722,7 +1759,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr "タイム"
 
@@ -1752,7 +1789,7 @@ msgstr ""
 "投下: スペースキーを押し続けて強さを決定\n"
 "ターン毎で1つの弾薬"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "フルスクリーン？"
@@ -1762,7 +1799,7 @@ msgstr "フルスクリーン？"
 msgid "Toggle interface"
 msgstr "インターフェースの表示/非表示"
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "ミニマップの表示/非表示"
@@ -1845,7 +1882,7 @@ msgstr ""
 msgid "Version"
 msgstr "バージョン"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "バージョン確認は失敗しました。 理由: %s"
@@ -1873,7 +1910,7 @@ msgstr "リモートプレイヤーを待っています"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "サーバーを待っています。キャンセルとチャットができます！"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：攻撃 / ボーナスボックス: 急落下"
@@ -1908,7 +1945,7 @@ msgid "Wind particles?"
 msgstr "風の表示？"
 
 #
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "勝者"
 
@@ -2056,9 +2093,6 @@ msgstr "o 音楽 %d Hz %d bit"
 #~ msgid "Join #wormux on irc.freenode.net to find some opponents."
 #~ msgstr "Join #wormux on irc.freenode.net to find some opponents."
 
-#~ msgid "Max number of players:"
-#~ msgstr "最大プレイヤー数:"
-
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s は異なるバージョンで接続を試みました : client=%s, me=%s."
 
@@ -2114,9 +2148,6 @@ msgstr "o 音楽 %d Hz %d bit"
 
 #~ msgid "Network initialization"
 #~ msgstr "ネットワーク初期化"
-
-#~ msgid "Player name"
-#~ msgstr "プレイヤー名"
 
 #~ msgid "Refresh"
 #~ msgstr "リフレッシュ"

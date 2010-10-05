@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2008-05-26 21:06+0100\n"
 "Last-Translator: Yotam Benshalom <benshalom@gmail.com>\n"
 "Language-Team:  <he@li.org>\n"
@@ -432,7 +433,7 @@ msgstr ""
 msgid "(unlimited)"
 msgstr "(ללא הגבלה)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -453,7 +454,7 @@ msgstr "התקפה אווירית"
 msgid "Airhammer"
 msgstr "פטיש אוויר"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "כל הצוותים"
 
@@ -553,7 +554,7 @@ msgstr "לא ניתן לפתוח את תיקיית הצוותים (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "לא ניתן לפתוח את תיקיית הצוותים האישית (%s)!"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 #, fuzzy
 msgid "Center camera on character"
 msgstr "מספר דמויותe"
@@ -563,26 +564,36 @@ msgstr "מספר דמויותe"
 msgid "Center on active character"
 msgstr "מספר דמויותe"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Change active character"
 msgstr "מספר דמויותe"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 msgid "Change aim angle"
 msgstr ""
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "מספר שחקנים מירבי:"
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "מספר שחקנים מירבי:"
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "מספר דמויותe"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 #, fuzzy
 msgid "Change weapon category"
 msgstr "מספר דמויותe"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 msgid "Change weapon countdown"
 msgstr ""
 
@@ -625,12 +636,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "מצב לקוח"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "המגושם ביותר"
 
@@ -647,7 +670,7 @@ msgstr "בזוקה"
 msgid "Commit Suicide"
 msgstr "התאבד"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 #, fuzzy
 msgid "Configuration menu"
 msgstr "אין קובץ הגדרות!"
@@ -669,7 +692,7 @@ msgstr "מחובר!"
 msgid "Construct"
 msgstr "בנייה"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "מבוקר על ידי:"
 
@@ -687,7 +710,7 @@ msgstr "לא ניתן לטעון הגדרות"
 msgid "Credits"
 msgstr "קרדיטים"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -727,7 +750,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -748,11 +771,16 @@ msgstr "דינמיט"
 msgid "END OF GAME"
 msgstr "סוף משחק"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "שם השחקן?"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr ""
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr ""
 
@@ -852,6 +880,11 @@ msgstr "Plein Ã©cran ?"
 msgid "Game"
 msgstr ""
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "מצב לקוח"
+
 #: src/menu/game_mode_editor.cpp:45
 #, fuzzy
 msgid "Game mode"
@@ -864,6 +897,10 @@ msgstr ""
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "משגר גנו"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -902,7 +939,7 @@ msgstr "משחק מוצלח!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "מפקד"
 
@@ -911,7 +948,7 @@ msgstr "מפקד"
 msgid "Help"
 msgstr "עזרה"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr ""
 
@@ -990,7 +1027,7 @@ msgstr "רתמת טיסה"
 msgid "Jump"
 msgstr ""
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr ""
 
@@ -1014,7 +1051,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1104,23 +1141,23 @@ msgstr "מוסיקה?"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "המדויק ביותר"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "החסר ביותר"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "השימושי ביותר"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "חסר התועלת ביותר"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "האלים ביותר"
 
@@ -1144,11 +1181,11 @@ msgstr "מצנח"
 msgid "Move camera up"
 msgstr "מצנח"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 #, fuzzy
 msgid "Move character"
 msgstr "מצנח"
@@ -1234,7 +1271,7 @@ msgid "None"
 msgstr "בוצע"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "מספר דמויותe"
 
@@ -1242,11 +1279,11 @@ msgstr "מספר דמויותe"
 msgid "Number of teams:"
 msgstr "מספר צוותים:"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 msgid "On a character: select it"
 msgstr ""
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 msgid "On map: select a target"
 msgstr ""
 
@@ -1311,7 +1348,7 @@ msgstr "אנרגיה לשחקן?"
 msgid "Player's name?"
 msgstr "שם השחקן?"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1381,7 +1418,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "יציאה מן הקרב"
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1393,7 +1430,7 @@ msgstr "יציאה"
 msgid "Quit Wormux"
 msgstr "יציאה מ-Wormux"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 #, fuzzy
 msgid "Quit game"
 msgstr "הרץ משחק"
@@ -1546,12 +1583,12 @@ msgstr ""
 msgid "Shotgun"
 msgstr "שוטגאן"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "תפריט אפשרויות"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1571,7 +1608,7 @@ msgstr ""
 msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
@@ -1637,17 +1674,17 @@ msgstr "מזרק"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "בחזרה אל הקרב"
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 #, fuzzy
 msgid "Team graphs"
 msgstr "צוותים"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 #, fuzzy
 msgid "Team stats"
 msgstr "צוותים"
@@ -1767,7 +1804,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr ""
 
@@ -1797,7 +1834,7 @@ msgstr ""
 "ירי: מקש הרווח\n"
 "תחמושת לתור"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Plein Ã©cran ?"
@@ -1806,7 +1843,7 @@ msgstr "Plein Ã©cran ?"
 msgid "Toggle interface"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 msgid "Toggle minimap"
 msgstr ""
 
@@ -1890,7 +1927,7 @@ msgstr ""
 msgid "Version"
 msgstr "גירסה"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
@@ -1920,7 +1957,7 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "ממתין לשרת, כרגע תוכל רק לבטל או להשתמש בצ'אט!"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -1953,7 +1990,7 @@ msgstr "בושה וכלימה ל-%s: נהרג מכדור אקדח פשוט!"
 msgid "Wind particles?"
 msgstr "חלקיקי רוח?"
 
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "מנצח"
 
@@ -2104,9 +2141,6 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 #~ msgid "Join #wormux on irc.freenode.net to find some opponents."
 #~ msgstr "הצטרף אל #wormux ב-irc.freenode.net כדי למצוא יריבים."
 
-#~ msgid "Max number of players:"
-#~ msgstr "מספר שחקנים מירבי:"
-
 #~ msgid "%s tries to connect with a different version : client=%s, me=%s."
 #~ msgstr "%s מנסה להתחבר לגרסה אחרת: לקוח=%s, אני=%s."
 
@@ -2150,10 +2184,6 @@ msgstr "o נפתח שמע ב-%d Hz ו-%d bit"
 
 #~ msgid "Network initialization"
 #~ msgstr "אתחול רשת"
-
-#, fuzzy
-#~ msgid "Player name"
-#~ msgstr "שם השחקן?"
 
 #~ msgid "Refresh"
 #~ msgstr "רענן"

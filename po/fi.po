@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2010-01-27 06:07+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -454,7 +455,7 @@ msgstr "(tuntematon aika)"
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -477,7 +478,7 @@ msgstr "Ilmaisku"
 msgid "Airhammer"
 msgstr "Katupora"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "Kaikki joukkueet"
 
@@ -574,7 +575,7 @@ msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Keskitä kamera hahmoon"
@@ -584,27 +585,37 @@ msgstr "Keskitä kamera hahmoon"
 msgid "Center on active character"
 msgstr "Vaihda aktiivista hahmoa"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Change active character"
 msgstr "Vaihda aktiivista hahmoa"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Muuta tähtäyskulmaa"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "Pelaajien määrä joukkueessa:"
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "Pelaajien määrä joukkueessa:"
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "Vaihda aseluokkaa"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Vaihda aseluokkaa"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
@@ -646,12 +657,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "Asiakastila"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "Kömpelöin"
 
@@ -667,7 +690,7 @@ msgstr "Rypälesinko"
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
@@ -687,7 +710,7 @@ msgstr "Liittyneet pelaajat: "
 msgid "Construct"
 msgstr "Rakenna"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "Hallitsee: "
 
@@ -705,7 +728,7 @@ msgstr "Ei voitu avata tiedostoa %s"
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -745,7 +768,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Vedä&pudota: Siirrä kameraa"
@@ -767,11 +790,16 @@ msgstr "Dynamiitti"
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "Pelaajanimi"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr "Efektien voimakkuus"
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr "Energia"
 
@@ -876,6 +904,11 @@ msgstr "Kokoruutu"
 msgid "Game"
 msgstr "Peli"
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "Pelitila"
+
 #: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "Pelitila"
@@ -887,6 +920,10 @@ msgstr "Pelin nimi:"
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -925,7 +962,7 @@ msgstr "Pidähän hauskaa!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Ylikomentaja"
 
@@ -934,7 +971,7 @@ msgstr "Ylikomentaja"
 msgid "Help"
 msgstr "Ohje"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr "Korkea hyppy"
 
@@ -1012,7 +1049,7 @@ msgstr "Lentoreppu"
 msgid "Jump"
 msgstr "Hyppää"
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr "Hyppää taaksepäin"
 
@@ -1036,7 +1073,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1123,23 +1160,23 @@ msgstr "Sekalaiset"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "Tarkin"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "Petetyin"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "Hyödyllisin"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "Hyödyttömin"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "Väkivaltaisin"
 
@@ -1163,12 +1200,12 @@ msgstr "Siirrä hahmoa"
 msgid "Move camera up"
 msgstr "Siirrä hahmoa"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Siirrä kameraa hiirellä tai nuolilla"
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 #, fuzzy
 msgid "Move character"
 msgstr "Siirrä hahmoa"
@@ -1251,7 +1288,7 @@ msgid "None"
 msgstr "valmis"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "Pelaajien määrä"
 
@@ -1259,12 +1296,12 @@ msgstr "Pelaajien määrä"
 msgid "Number of teams:"
 msgstr "Joukkueita"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Hahmolla: Vaihda aktiivista"
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Kartalla: Valitse kohde"
@@ -1330,7 +1367,7 @@ msgstr "Näytä voimat"
 msgid "Player's name?"
 msgstr "Näytä nimi"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1399,7 +1436,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr "Lopeta peli nopeasti Ctrl-näppäimellä"
 
@@ -1411,7 +1448,7 @@ msgstr "Lopeta"
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Lopeta peli"
 
@@ -1560,12 +1597,12 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Haulikko"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Näytä asevalikko"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
@@ -1585,7 +1622,7 @@ msgstr "Läpsäytä"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Läpsäytä vihollista hypäyttääksesi häntä hieman."
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr "Pienempi tähtäyskulma ja kävelyaskeleet"
 
@@ -1652,15 +1689,15 @@ msgstr "Ruisku"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 msgid "Talk in network battles"
 msgstr "Puhu verkkotaisteluissa"
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 msgid "Team graphs"
 msgstr "Joukkueen graafi"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 msgid "Team stats"
 msgstr "Joukkueen tilastot"
 
@@ -1774,7 +1811,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr "Aika"
 
@@ -1804,7 +1841,7 @@ msgstr ""
 "Ammu: välilyönti\n"
 "yksi ammus per vuoro"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Kokoruutu"
@@ -1814,7 +1851,7 @@ msgstr "Kokoruutu"
 msgid "Toggle interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Näytä/piilota peinoiskartta"
@@ -1897,7 +1934,7 @@ msgstr ""
 msgid "Version"
 msgstr "Versio"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Version tarkistus epäonnistui koska: %s"
@@ -1926,7 +1963,7 @@ msgstr "Odotetaan etäpelaajia"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
@@ -1960,7 +1997,7 @@ msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "Voittaja"
 
@@ -2104,9 +2141,6 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #~ msgstr ""
 #~ "Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
-#~ msgid "Max number of players:"
-#~ msgstr "Pelaajien määrä joukkueessa:"
-
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "%s on päättänyt vahingoittaa henkilöä %s"
 
@@ -2148,9 +2182,6 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 
 #~ msgid "Network initialization"
 #~ msgstr "Verkon alustus..."
-
-#~ msgid "Player name"
-#~ msgstr "Pelaajanimi"
 
 #, fuzzy
 #~ msgid ""
