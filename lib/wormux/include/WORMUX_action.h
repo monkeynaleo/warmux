@@ -131,23 +131,23 @@ private:
 
   DistantComputer* creator;
 
-  void Init (Action_t type);
+  void Init(Action_t type);
   int  GetSize() const;
 
 public:
 
   // Action without parameter
-  Action (Action_t type);
+  Action(Action_t type);
 
   // Action with various parameter
-  Action (Action_t type, int value);
-  Action (Action_t type, Double value);
-  Action (Action_t type, const std::string& value);
-  Action (Action_t type, Double value1, int value2);
-  Action (Action_t type, Double value1, Double value2);
+  Action(Action_t type, int value);
+  Action(Action_t type, Double value);
+  Action(Action_t type, const std::string& value);
+  Action(Action_t type, Double value1, int value2);
+  Action(Action_t type, Double value1, Double value2);
 
   // Build an action from a network packet
-  Action (const char* buffer, DistantComputer* _creator);
+  Action(const char* buffer, DistantComputer* _creator);
 
   ~Action() { };
 
