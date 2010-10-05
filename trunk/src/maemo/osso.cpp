@@ -26,6 +26,7 @@
 #include <SDL/SDL_timer.h>
 #include "sound/jukebox.h"
 #include "game/time.h"
+#include "interface/mouse.h"
 
 namespace {
 
@@ -50,8 +51,11 @@ namespace {
       g_main_context_iteration(maincontext, true);
     }
 
-    JukeBox::GetInstance()->OpenDevice();
-    JukeBox::GetInstance()->NextMusic();
+    if (Mouse::GetInstance()->HasFocus()) {
+      JukeBox::GetInstance()->OpenDevice();
+      JukeBox::GetInstance()->NextMusic();
+    }
+
     Time::GetInstance()->SetWaitingForUser(false);
     SDL_InitSubSystem(SDL_INIT_TIMER);
     init_timer();
