@@ -60,14 +60,14 @@ public:
   void DelPlayer(uint player_id);
 
   Player* GetPlayer(uint player_id);
-  const std::list<Player>& GetPlayers() const;
+  const std::list<Player>& GetPlayers() const { return players; }
 
-  uint GetGameId() const;
+  uint GetGameId() const { return game_id; } 
 
   int GetNumberOfPlayersWithState(Player::State state);
 
-  void ForceDisconnection();
-  bool MustBeDisconnected();
+  void ForceDisconnection() { force_disconnection_called = true; }
+  bool MustBeDisconnected() { return force_disconnection_called; }
 
   const std::string ToString() const;
 };
