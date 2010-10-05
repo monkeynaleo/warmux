@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2010-10-05 08:05+0200\n"
 "PO-Revision-Date: 2009-01-05 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -517,7 +518,7 @@ msgstr "(čas ni znan)"
 msgid "(unlimited)"
 msgstr "(neomejeno)"
 
-#: src/menu/options_menu.cpp:529
+#: src/menu/options_menu.cpp:527
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -540,7 +541,7 @@ msgstr "Zračni napad"
 msgid "Airhammer"
 msgstr "Pnevmatsko kladivo"
 
-#: src/menu/results_menu.cpp:440
+#: src/menu/results_menu.cpp:441
 msgid "All teams"
 msgstr "Vse ekipe"
 
@@ -637,7 +638,7 @@ msgstr "Ni mogoče odpreti ekipnega imenika (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ni mogoče odpreti osebnega ekipnega imenika (%s)!"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
 msgid "Center camera on character"
 msgstr "Osredotoči kamero na člana"
 
@@ -646,24 +647,34 @@ msgstr "Osredotoči kamero na člana"
 msgid "Center on active character"
 msgstr "Zamenjaj aktivnega člana"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:59
 msgid "Change active character"
 msgstr "Zamenjaj aktivnega člana"
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:50
 msgid "Change aim angle"
 msgstr "Spremeni kot merjenja"
+
+#: src/menu/help_menu.cpp:71
+#, fuzzy
+msgid "Change number of playing teams"
+msgstr "Največje število igralcev:"
+
+#: src/menu/help_menu.cpp:70
+#, fuzzy
+msgid "Change per team number of players"
+msgstr "Največje število igralcev:"
 
 #: src/interface/man_machine_interface.cpp:1184
 #, fuzzy
 msgid "Change weapon"
 msgstr "Spremeni skupino orožja"
 
-#: src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:48
 msgid "Change weapon category"
 msgstr "Spremeni skupino orožja"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:49
 msgid "Change weapon countdown"
 msgstr "Spremeni čas do sprožitve"
 
@@ -704,12 +715,24 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
+#: src/menu/help_menu.cpp:66
+msgid "Click to change team selected"
+msgstr ""
+
+#: src/menu/help_menu.cpp:69
+msgid "Click to select AI/human team"
+msgstr ""
+
+#: src/menu/help_menu.cpp:72
+msgid "Click/wheelmouse to change map"
+msgstr ""
+
 #. Client Mode
 #: src/menu/network_menu.cpp:169 src/network/network.cpp:472
 msgid "Client mode"
 msgstr "Odjemalski način"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
 msgid "Clumsiest"
 msgstr "Najbolj neroden"
 
@@ -725,7 +748,7 @@ msgstr "Kasetna bazuka"
 msgid "Commit Suicide"
 msgstr "Samomor"
 
-#: src/menu/help_menu.cpp:43
+#: src/menu/help_menu.cpp:46
 msgid "Configuration menu"
 msgstr "Nastavitveni meni!"
 
@@ -745,7 +768,7 @@ msgstr "Povezani igralci: "
 msgid "Construct"
 msgstr "Tram"
 
-#: src/menu/results_menu.cpp:419
+#: src/menu/results_menu.cpp:420
 msgid "Controlled by: "
 msgstr "Vodja: "
 
@@ -763,7 +786,7 @@ msgstr "Ni bilo mogoče odpreti datoteke %s"
 msgid "Credits"
 msgstr "Zasluge"
 
-#: src/menu/help_menu.cpp:86
+#: src/menu/help_menu.cpp:104
 msgid "Current controls"
 msgstr ""
 
@@ -803,7 +826,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:39
+#: src/menu/help_menu.cpp:42
 msgid "Drag&drop: Move camera"
 msgstr "Povleci&spusti: premakne kamero"
 
@@ -824,11 +847,16 @@ msgstr "Dinamit"
 msgid "END OF GAME"
 msgstr "KONEC IGRE"
 
+#: src/menu/help_menu.cpp:67
+#, fuzzy
+msgid "Edit player name"
+msgstr "Ime igralca"
+
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr "Glasnost učinkov"
 
-#: src/menu/results_menu.cpp:323
+#: src/menu/results_menu.cpp:324
 msgid "Energy"
 msgstr "Energija"
 
@@ -934,6 +962,11 @@ msgstr "Celozaslonski način?"
 msgid "Game"
 msgstr "Igra"
 
+#: src/menu/help_menu.cpp:101
+#, fuzzy
+msgid "Game menu"
+msgstr "Vrsta igre"
+
 #: src/menu/game_mode_editor.cpp:45
 msgid "Game mode"
 msgstr "Vrsta igre"
@@ -945,6 +978,10 @@ msgstr "Ime igre:"
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Metalec gnuja"
+
+#: src/menu/help_menu.cpp:68
+msgid "Go to game rules editing submenu"
+msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -983,7 +1020,7 @@ msgstr "Uživajte v igri!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
 #: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
-#: src/menu/team_box.cpp:80
+#: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Poveljnik"
 
@@ -992,7 +1029,7 @@ msgstr "Poveljnik"
 msgid "Help"
 msgstr "Pomoč"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:36
+#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
 msgid "High jump"
 msgstr "Visoki skok"
 
@@ -1070,7 +1107,7 @@ msgstr "Raketni nahrbtnik"
 msgid "Jump"
 msgstr "Skok"
 
-#: src/menu/help_menu.cpp:37 src/menu/help_menu.cpp:38
+#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
 msgid "Jump backwards"
 msgstr "Skok nazaj"
 
@@ -1094,7 +1131,7 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:93
 msgid "Keyboard"
 msgstr ""
 
@@ -1181,23 +1218,23 @@ msgstr "Razno"
 msgid "Modifiers"
 msgstr ""
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
 msgstr "Najbolj natančen"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
 msgid "Most sold-out"
 msgstr "Najbolj izdan"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
 msgid "Most useful"
 msgstr "Najbolj uporaben"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
 msgid "Most useless"
 msgstr "Najbolj neuporaben"
 
-#: src/menu/results_menu.cpp:139 src/menu/results_menu.cpp:141
+#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
 msgid "Most violent"
 msgstr "Najbolj nasilen"
 
@@ -1221,11 +1258,11 @@ msgstr "Premakni člana"
 msgid "Move camera up"
 msgstr "Premakni člana"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:56
 msgid "Move camera with mouse or arrows"
 msgstr "Premakni kamero z miško ali puščicami"
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:51
 msgid "Move character"
 msgstr "Premakni člana"
 
@@ -1307,7 +1344,7 @@ msgid "None"
 msgstr "opravljeno"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:114
+#: src/menu/team_box.cpp:115
 msgid "Number of characters"
 msgstr "Število članov"
 
@@ -1315,11 +1352,11 @@ msgstr "Število članov"
 msgid "Number of teams:"
 msgstr "Število ekip:"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:53
 msgid "On a character: select it"
 msgstr "Na člana: spremeni aktivnega"
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:52
 msgid "On map: select a target"
 msgstr "Na karto: izbere tarčo"
 
@@ -1384,7 +1421,7 @@ msgstr "Energija igralca?"
 msgid "Player's name?"
 msgstr "Ime igralca?"
 
-#: src/menu/results_menu.cpp:432
+#: src/menu/results_menu.cpp:433
 msgid "Podium"
 msgstr ""
 
@@ -1453,7 +1490,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Javne bitke"
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:61
 msgid "Quickly quit game with Ctrl"
 msgstr "Takojšnji izhod iz igre (s ctrl)"
 
@@ -1465,7 +1502,7 @@ msgstr "Končaj"
 msgid "Quit Wormux"
 msgstr "Končaj Wormux"
 
-#: src/menu/help_menu.cpp:35 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Končaj igro"
 
@@ -1614,11 +1651,11 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Šibrovka"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:54
 msgid "Show weapons menu"
 msgstr "Pokaži orožni meni"
 
-#: src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:44
 msgid "Show/hide the interface"
 msgstr "Pokaži/skrij vmesnik"
 
@@ -1638,7 +1675,7 @@ msgstr "Klofuta"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Klofni sovražnika, da bo kar poskočil."
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:55
 msgid "Smaller aim angle and walk step"
 msgstr "Natančnejši merilni kot in stopinja"
 
@@ -1706,15 +1743,15 @@ msgstr "Injekcija"
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:47
 msgid "Talk in network battles"
 msgstr "Klepet v večigralski igri"
 
-#: src/menu/results_menu.cpp:445
+#: src/menu/results_menu.cpp:446
 msgid "Team graphs"
 msgstr "Ekipni grafi"
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:444
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
@@ -1831,7 +1868,7 @@ msgid "This key has already been attributed to '%s'"
 msgstr ""
 
 #. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:321
+#: src/menu/results_menu.cpp:322
 msgid "Time"
 msgstr "Čas"
 
@@ -1861,7 +1898,7 @@ msgstr ""
 "Strel: pritisnite preslednico\n"
 "ena uporaba na potezo"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:42
+#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Celozaslonski način?"
@@ -1871,7 +1908,7 @@ msgstr "Celozaslonski način?"
 msgid "Toggle interface"
 msgstr "Pokaži/skrij vmesnik"
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:55
+#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Pokaži/skrij minikarto"
@@ -1954,7 +1991,7 @@ msgstr ""
 msgid "Version"
 msgstr "Različica"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:534
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Preverjanje različice je spodletelo zaradi: %s"
@@ -1985,7 +2022,7 @@ msgstr "Čakanje na oddaljene igralce"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:57
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Orožje: streljaj / Paket: hiter padec"
 
@@ -2018,7 +2055,7 @@ msgstr "Kakšna sramota za %s - ubit je bil s preprosto pištolo!"
 msgid "Wind particles?"
 msgstr "Vetrni delci?"
 
-#: src/menu/results_menu.cpp:411
+#: src/menu/results_menu.cpp:412
 msgid "Winner"
 msgstr "Zmagovalec"
 
@@ -2164,9 +2201,6 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 #~ "Pridružite se kanalu #wormux na irc.freenode.net in si poiščite nekaj "
 #~ "nasprotnikov."
 
-#~ msgid "Max number of players:"
-#~ msgstr "Največje število igralcev:"
-
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "%s se je odločil poškodovati %s"
 
@@ -2262,9 +2296,6 @@ msgstr "o Odprt avdio na %d Hz %d bit"
 #~ msgstr ""
 #~ "Na voljo ni nobenih javnih strežnikov, ročne nastavitve pa so napačne. "
 #~ "Poskusite se povezati ročno."
-
-#~ msgid "Player name"
-#~ msgstr "Ime igralca"
 
 #~ msgid "Refresh"
 #~ msgstr "Osveži"
