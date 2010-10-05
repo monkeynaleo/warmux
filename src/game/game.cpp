@@ -863,7 +863,7 @@ bool Game::NewBox()
 
   ObjectsList::GetRef().AddObject(box);
   Camera::GetInstance()->FollowObject(box);
-  GameMessages::GetInstance()->Add(_("It's a present!"));
+  GameMessages::GetInstance()->Add(_("It's a present!"), white_color);
   SetCurrentBox(box);
 
   return true;
@@ -1037,7 +1037,7 @@ void Game::SignalCharacterDeath(const Character *character, const Character* kil
                  character->GetTeam().GetName().c_str());
   }
 
-  GameMessages::GetInstance()->Add(txt);
+  GameMessages::GetInstance()->Add(txt, character->GetTeam().GetColor());
 
   // Turn end if the playing character is dead
   // or if there is only one team alive

@@ -537,7 +537,7 @@ void WeaponLauncher::IncMissedShots()
 {
   missed_shots++;
   if (announce_missed_shots)
-    GameMessages::GetInstance()->Add(_("Your shot has missed!"));
+    GameMessages::GetInstance()->Add(_("Your shot has missed!"), ActiveTeam().GetColor());
 }
 
 void WeaponLauncher::HandleKeyReleased_Num1()

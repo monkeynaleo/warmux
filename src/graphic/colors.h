@@ -32,21 +32,20 @@ const Color light_gray_color (169, 169, 169, SDL_ALPHA_OPAQUE);
 const Color gray_color (128, 128, 128, SDL_ALPHA_OPAQUE);
 const Color dark_gray_color (64, 64, 64, SDL_ALPHA_OPAQUE);
 const Color dark_red_color (170, 0, 0, SDL_ALPHA_OPAQUE);
-
 const Color black_color (0, 0, 0, SDL_ALPHA_OPAQUE);
+
+const Color primary_red_color(255, 0, 0, SDL_ALPHA_OPAQUE);
+const Color primary_green_color(0, 255, 0, SDL_ALPHA_OPAQUE);
+const Color primary_blue_color(0, 0, 255, SDL_ALPHA_OPAQUE);
+const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);
+const Color pink_color (0xFF, 0xFF, 0x00, SDL_ALPHA_OPAQUE);
+const Color yellow_color (0x00, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
 
 const Color c_white  (0xFF, 0xFF, 0xFF, 0x70);
 const Color c_black  (0x00, 0x00, 0x00, 0x70);
 const Color c_red    (0xFF, 0x00, 0x00, 0x70);
 const Color c_yellow (0x00, 0xFF, 0xFF, 0x70);
 const Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
-
-// Green
-const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);
-
-const Color primary_red_color(255, 0, 0, SDL_ALPHA_OPAQUE);
-const Color primary_green_color(0, 255, 0, SDL_ALPHA_OPAQUE);
-const Color primary_blue_color(0, 0, 255, SDL_ALPHA_OPAQUE);
 
 // Default colors:
 const Color defaultColorBox(80, 80, 159, 206);

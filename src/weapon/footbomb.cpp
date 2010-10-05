@@ -107,7 +107,7 @@ void FootBomb::Refresh()
 
 void FootBomb::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Football Bomb has left the battlefield before it could explode."));
+  Weapon::Message(_("The Football Bomb has left the battlefield before it could explode."));
   WeaponProjectile::SignalOutOfMap();
 }
 

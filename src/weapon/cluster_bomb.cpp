@@ -142,7 +142,7 @@ void ClusterBomb::Refresh()
 
 void ClusterBomb::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Cluster Bomb has left the battlefield before it could explode."));
+  Weapon::Message(_("The Cluster Bomb has left the battlefield before it could explode."));
   WeaponProjectile::SignalOutOfMap();
 }
 

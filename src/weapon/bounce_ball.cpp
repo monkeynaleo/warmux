@@ -20,18 +20,19 @@
  * bounce since it has not collide a character
  *****************************************************************************/
 
-#include "weapon/bounce_ball.h"
-#include "weapon/weapon_cfg.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
+#include <WORMUX_debug.h>
+//-----------------------------------------------------------------------------
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "object/objects_list.h"
 #include "team/teams_list.h"
-#include <WORMUX_debug.h>
+#include "team/team.h"
 #include "tool/math_tools.h"
+#include "weapon/bounce_ball.h"
 #include "weapon/explosion.h"
+#include "weapon/weapon_cfg.h"
 //-----------------------------------------------------------------------------
 
 class BounceBall : public WeaponProjectile
@@ -69,7 +70,7 @@ void BounceBall::Refresh()
 
 void BounceBall::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The ball left the battlefield before exploding!"));
+  Weapon::Message(_("The ball left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 

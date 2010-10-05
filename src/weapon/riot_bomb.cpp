@@ -82,7 +82,7 @@ void RiotBombRocket::Refresh()
 
 void RiotBombRocket::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
+  Weapon::Message(_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 
   flying_sound.Stop();

@@ -32,6 +32,7 @@
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
+#include "interface/game_msg.h"
 #include "map/camera.h"
 #include "network/network.h"
 #include "team/macro.h"
@@ -723,4 +724,9 @@ bool Weapon::IsAngleValid(Double angle) const
 {
   angle = -angle; // work around incorrect sign
   return min_angle <= angle && angle <= max_angle;
+}
+
+void Weapon::Message(const std::string& msg)
+{
+  GameMessages::GetInstance()->Add(msg, ActiveTeam().GetColor());
 }

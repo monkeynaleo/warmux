@@ -76,6 +76,12 @@ public:
     TOOL
   } category_t;
 
+private:
+  // Angle in radian between -PI to PI
+  Double min_angle, max_angle;
+  // display crosshair ?
+  bool m_display_crosshair;
+
 protected:
   Weapon::Weapon_type m_type;
   Weapon::category_t  m_category;
@@ -169,6 +175,7 @@ protected:
 
   void StartMovingDownForAllPlayers();
   void StopMovingDownForAllPlayers();
+
 public:
   Weapon(Weapon_type type,
          const std::string &id,
@@ -348,16 +355,7 @@ public:
   virtual void SetProjectileTimeOut(int) { };
   virtual void SetAngle(Double) { }
 
-private:
-  // Angle in radian between -PI to PI
-  Double min_angle, max_angle;
-  // display crosshair ?
-  bool m_display_crosshair;
-
-  /* If you need this, implement it (correctly)*/
-  Weapon(const Weapon&);
-  const Weapon& operator=(const Weapon&);
-  /*********************************************/
+  static void Message(const std::string& msg);
 };
 
 //-----------------------------------------------------------------------------

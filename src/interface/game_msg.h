@@ -47,7 +47,7 @@ public:
     Text(new_txt, new_color, font_size, font_style),
     time(_time) {};
 
-  inline uint get_time() { return time; }
+  uint get_time() { return time; }
 };
 
 /*
@@ -71,7 +71,7 @@ public:
   void Refresh();
 
   // Add a message
-  void Add(const std::string &message);
+  void Add(const std::string &message, const Color& color);
 
 private:
   std::list<Message *> list;
