@@ -33,7 +33,7 @@
 #include "network/network.h"
 #include "tool/text_handling.h"
 
-#define HEIGHT        5
+#define HEIGHT       15
 #define XPOS         25
 #define YPOS        130
 #define MAXLINES     10 //Fidel's advise
