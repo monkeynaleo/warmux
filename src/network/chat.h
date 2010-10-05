@@ -25,6 +25,7 @@
 
 #include <string>
 #include <WORMUX_base.h>
+#include "graphic/color.h"
 #include "graphic/text_list.h"
 
 // Forward declarations
@@ -35,12 +36,7 @@ union SDL_Event;
 
 class Chat
 {
- private:
-  /* If you need this, implement it (correctly)*/
-  Chat(const Chat&);
-  const Chat& operator=(const Chat&);
-  /*********************************************/
-
+private:
   TextList chat;
   Text* input;
   Text* msg;
@@ -58,7 +54,7 @@ class Chat
   void ShowInput();
   bool CheckInput() const;
   void Clear();
-  void NewMessage(const std::string& msg);
+  void NewMessage(const std::string& msg, const Color& color);
   void HandleKeyPressed(const SDL_Event& evnt);
   void HandleKeyReleased(const SDL_Event& evnt);
 

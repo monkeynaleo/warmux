@@ -62,7 +62,7 @@ void Chat::Show()
 {
   uint now = Time::GetInstance()->ReadSec();
 
-  if((now - last_time) >= MAXSECONDS){
+  if (now - last_time >= MAXSECONDS){
     chat.DeleteLine();
     last_time = now;
   }
@@ -82,7 +82,7 @@ void Chat::ShowInput()
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
   }
 
-  if (input == NULL){
+  if (!input) {
     input = new Text("", c_white);
     msg = new Text(_("Say: "), c_red);
   }
@@ -100,7 +100,7 @@ bool Chat::CheckInput() const
   return check_input;
 }
 
-void Chat::NewMessage(const std::string &msg)
+void Chat::NewMessage(const std::string &msg, const Color& color)
 {
   if (!chat.Size()){
     uint now = Time::GetInstance()->ReadSec();

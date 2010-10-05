@@ -224,14 +224,14 @@ void AppWormux::DisplayError(const std::string &msg)
   }
 }
 
-void AppWormux::ReceiveMsgCallback(const std::string& msg)
+void AppWormux::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
   if (Game::IsRunning()) {
     if (Game::GetCurrentMenu()) {
       // Drop message, we should be paused anyway
     } else {
       // Add message to chat session in Game
-      Game::GetInstance()->chatsession.NewMessage(msg);
+      Game::GetInstance()->chatsession.NewMessage(msg, color);
     }
   } else if (GetCurrentMenu()) {
     GetCurrentMenu()->ReceiveMsgCallback(msg);
@@ -288,13 +288,13 @@ bool AppWormux::CheckInactive(SDL_Event& evnt)
       Time::GetInstance()->SetWaitingForUser(true);
       while (SDL_WaitEvent(&evnt)) {
 #ifdef MAEMO
-	Osso::Process();
+  Osso::Process();
 #endif
         if (evnt.type == SDL_QUIT) AppWormux::EmergencyExit();
         if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
 #ifdef HAVE_HANDHELD
-	  JukeBox::GetInstance()->OpenDevice();
-	  JukeBox::GetInstance()->NextMusic();
+    JukeBox::GetInstance()->OpenDevice();
+    JukeBox::GetInstance()->NextMusic();
 #else
           JukeBox::GetInstance()->Resume();
 #endif
