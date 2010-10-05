@@ -125,11 +125,6 @@ public:
   } Action_t;
 
 private:
-  /* if you need that, implement it (correctly)*/
-  Action(const Action& an_action);
-  const Action& operator=(const Action&);
-  /*********************************************/
-
   std::list<uint32_t> var;
   Action_t m_type;
   uint m_timestamp;
@@ -174,12 +169,12 @@ public:
 
   void WriteToPacket(char* & packet, int & size) const;
 
-  bool IsEmpty() const;
+  bool IsEmpty() const { return var.empty(); }
 
-  DistantComputer* GetCreator() const;
-  uint GetTimestamp() const;
-  Action_t GetType() const;
-  bool IsFrameLess() const;
+  DistantComputer* GetCreator() const { return creator; }
+  uint GetTimestamp() const { return m_timestamp; }
+  Action_t GetType() const { return m_type; }
+  bool IsFrameLess() const { return m_type <= LAST_FRAME_LESS_ACTION; }
 };
 
 // to be defined outside of the library

@@ -312,16 +312,6 @@ EulerVector Action::PopEulerVector()
 
 //-----------------------------------------------------------------------------
 
-bool Action::IsEmpty() const
-{
-  return var.empty();
-}
-
-DistantComputer* Action::GetCreator() const
-{
-  return creator;
-}
-
 int Action::GetSize() const
 {
   return sizeof(uint32_t)         // Size of packet len
@@ -329,19 +319,4 @@ int Action::GetSize() const
        + sizeof(uint32_t)         // Size of the timestamp
        + sizeof(uint32_t)         // Size of the number of variable
        + int(var.size()) * 4;
-}
-
-uint Action::GetTimestamp() const
-{
-  return m_timestamp;
-}
-
-Action::Action_t Action::GetType() const
-{
-  return m_type;
-}
-
-bool Action::IsFrameLess() const
-{
-  return m_type <= LAST_FRAME_LESS_ACTION;
 }
