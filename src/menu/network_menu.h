@@ -81,7 +81,7 @@ public:
   Team * FindUnusedTeam(const std::string default_team_id);
   bool HasOpenTeamSlot();
 
-  void ReceiveMsgCallback(const std::string& msg);
+  void ReceiveMsgCallback(const std::string& msg, const Color& color);
 };
 
 #endif

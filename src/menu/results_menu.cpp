@@ -515,9 +515,9 @@ void ResultsMenu::Draw(const Point2i &/*mousePosition*/)
   }
 }
 
-void ResultsMenu::ReceiveMsgCallback(const std::string& msg)
+void ResultsMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
   if (msg_box) {
-    msg_box->NewMessage(msg);
+    msg_box->NewMessage(msg, color);
   }
 }

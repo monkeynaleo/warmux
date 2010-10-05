@@ -65,7 +65,7 @@ public:
   ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
   ~ResultsMenu();
 
-  void ReceiveMsgCallback(const std::string& msg);
+  void ReceiveMsgCallback(const std::string& msg, const Color& color);
 };
 
 #endif //RESULTS_MENU_H
