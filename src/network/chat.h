@@ -52,8 +52,8 @@ private:
   ~Chat();
   void Show();
   void ShowInput();
-  bool CheckInput() const;
-  void Clear();
+  bool CheckInput() const { return check_input; }
+  void Clear() { chat.Clear(); }
   void NewMessage(const std::string& msg, const Color& color);
   void HandleKeyPressed(const SDL_Event& evnt);
   void HandleKeyReleased(const SDL_Event& evnt);
