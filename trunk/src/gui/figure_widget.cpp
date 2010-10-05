@@ -28,12 +28,12 @@ void FigureWidget::Draw(const Point2i& mousePosition) const
 
   PictureWidget::Draw(mousePosition);
 
-  uint lsize = box_width*zoom.GetX() + 0.5;
+  uint lsize = box_width*zoom.GetX();
 
   for (uint i=0; i<captions.size(); i++) {
     Text tmp(captions[i].string,
              captions[i].color,
-             captions[i].fsize*powf(zoom.GetX(), 0.75f),
+             captions[i].fsize*powf(zoom.GetX(), 0.85f),
              captions[i].fstyle,
              false);
     tmp.SetMaxWidth(lsize);
