@@ -65,11 +65,11 @@ HelpMenu::HelpMenu()
   static const FigureWidget::Caption startgame_captions[] = {
     { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Go to game rules edition"), 788, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Go to game rules editing submenu"), 788, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Click to select AI/human team"), 325, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Changer per team number of players"), 605, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Change number of playing teams"), 146, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Go to game rules editing submenu"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Click/wheelmouse to change map"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
   };
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
