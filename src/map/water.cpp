@@ -39,7 +39,7 @@
 #define GO_UP_OSCILLATION_TIME  30 // seconds
 #define GO_UP_OSCILLATION_NBR  30 // amplitude
 #define MS_BETWEEN_SHIFTS  20
-#define PATTERN_HEIGHT 128
+#define PATTERN_HEIGHT 64
 #define WAVE_INC   5
 #define WAVE_HEIGHT_A  5
 #define WAVE_HEIGHT_B  8
@@ -263,9 +263,10 @@ void Water::Draw()
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
 
   int h = y - cam->GetPosition().y;
-  GetMainWindow().BoxColor(Rectanglei(0, h,
-                                      cam->GetSize().x, cam->GetSize().y-h),
-                           *type_color);
+  Rectanglei bottom(0, h, cam->GetSize().x, cam->GetSize().y-h);
+  GetMainWindow().BoxColor(bottom, *type_color);
+  bottom.SetPosition(bottom.GetPosition() + cam->GetPosition());
+  GetWorld().ToRedrawOnMap(bottom);
 
   CalculateWavePattern();
   y = water_top;
