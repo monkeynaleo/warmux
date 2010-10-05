@@ -64,6 +64,7 @@ void TeamScrollBox::SetNbTeams(uint nb)
   if (nb < count) {
     count = 0;
     vbox->Empty();
+    NeedRedrawing();
   }
 
   for (uint i=count; i<nb; i++)
