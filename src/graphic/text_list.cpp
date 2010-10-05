@@ -35,8 +35,8 @@ TextList::~TextList()
   list.clear();
 }
 
-void TextList::AddText(const std::string &txt, uint maxlines){
-  Text* new_txt = new Text(txt);
+void TextList::AddText(const std::string &txt, const Color& color, uint maxlines){
+  Text* new_txt = new Text(txt, color);
   list.push_back(new_txt);
 
   if(list.size() >= maxlines)

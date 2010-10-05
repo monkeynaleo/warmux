@@ -28,6 +28,7 @@
 #include <WORMUX_base.h>
 
 class Text;
+class Color;
 
 class TextList{
  public:
@@ -39,7 +40,7 @@ class TextList{
   ~TextList();
 
   // Manage items in list
-  void AddText(const std::string &txt, uint maxlines);
+  void AddText(const std::string &txt, const Color& color, uint maxlines);
   void DeleteLine();
   void Clear();
   int Size() const;
