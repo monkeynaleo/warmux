@@ -27,6 +27,7 @@
 #include <string>
 #include "ai/ai_player.h"
 #include "team/team_energy.h"
+#include "graphic/colors.h"
 #include "graphic/surface.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
@@ -74,6 +75,9 @@ private:
   bool abandoned;
   WeaponsList * weapons_list;
 
+  // Colors
+  int color_id;
+  static const Color colors[8];
 
   bool LoadCharacters();
 
@@ -190,6 +194,9 @@ public:
 
   void Abandon() { abandoned = true; }
   bool IsAbandoned() { return abandoned; }
+
+  // Color management
+  const Color& GetColor() const { return colors[color_id]; };
 };
 
 #endif /* TEAM_H */

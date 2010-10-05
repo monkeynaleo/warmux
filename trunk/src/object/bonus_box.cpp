@@ -55,7 +55,8 @@ void BonusBox::ApplyBonus(Character * c)
 {
   std::ostringstream txt;
   if ( ExplodesInsteadOfBonus(c) ) {
-    GameMessages::GetInstance()->Add( _("Someone put a booby trap into the crate!") );
+    GameMessages::GetInstance()->Add(_("Someone put a booby trap into the crate!"),
+                                     c->GetTeam().GetColor());
     Explode();
     return;
   };
@@ -70,7 +71,7 @@ void BonusBox::ApplyBonus(Character * c)
     txt << Format(_("%s team already has infinite ammo for the %s!"),
            c->AccessTeam().GetName().c_str(), weapon->GetName().c_str());
   }
-  GameMessages::GetInstance()->Add(txt.str());
+  GameMessages::GetInstance()->Add(txt.str(), c->GetTeam().GetColor());
   JukeBox::GetInstance()->Play("default","box/picking_up");
 }
 

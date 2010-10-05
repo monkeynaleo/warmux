@@ -834,8 +834,8 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
   ChatLogger::LogMessageIfOpen(msg);
 
   if (Game::IsRunning())
-    GameMessages::GetInstance()->Add(msg);
-  else if (Network::GetInstance()->network_menu != NULL)
+    GameMessages::GetInstance()->Add(msg, primary_red_color);
+  else if (Network::GetInstance()->network_menu)
     //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);
 
@@ -949,7 +949,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
   ChatLogger::LogMessageIfOpen(msg);
 
   if (Game::IsRunning())
-    GameMessages::GetInstance()->Add(msg);
+    GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
     AppWormux::GetInstance()->ReceiveMsgCallback(msg);

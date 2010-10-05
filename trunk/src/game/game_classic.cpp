@@ -51,7 +51,7 @@ void GameClassic::EndOfGame()
 {
   SetState(END_TURN);
   duration = GameMode::GetInstance()->duration_exchange_player + 2;
-  GameMessages::GetInstance()->Add(_("And the winner is..."));
+  GameMessages::GetInstance()->Add(_("And the winner is..."), white_color);
 
   while (duration >= 1) {
     MainLoop();
@@ -193,7 +193,7 @@ void GameClassic::ApplyDeathMode () const
   if (IsGameFinished()) return;
 
   if (Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000) {
-    GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
+    GameMessages::GetInstance()->Add(_("Hurry up, you are too slow !!"), white_color);
     FOR_ALL_LIVING_CHARACTERS(team, character) {
       // If the character energy is lower than damage
       // per turn we reduce the character's health to 1

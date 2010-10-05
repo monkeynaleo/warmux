@@ -41,39 +41,35 @@ template< typename ClusterType >
 class ClusterSpawner
 {
 protected:
-    bool m_spawned_clusters;
+  bool m_spawned_clusters;
 
-    ClusterSpawner() : m_spawned_clusters( false ) {};
-    virtual ~ClusterSpawner() {};
+  ClusterSpawner() : m_spawned_clusters( false ) {};
+  virtual ~ClusterSpawner() {};
 
-    virtual void SpawnClusters( uint fragments, uint recursion_depth,
-       const Point2i pos, Double speed, Double angle, Double angle_range,
-        ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher )
-    {
+  virtual void SpawnClusters( uint fragments, uint recursion_depth,
+     const Point2i pos, Double speed, Double angle, Double angle_range,
+      ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher )
+  {
 #ifndef CLUSTERS_SPAWN_CLUSTERS
-        ASSERT(recursion_depth == 0);
+    ASSERT(recursion_depth == 0);
 #endif
 
-        // fake explosion
-        JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
-        ParticleEngine::AddExplosionSmoke( pos,
-            50,
-            ParticleEngine::LittleESmoke );
+    // fake explosion
+    JukeBox::GetInstance()->Play( "default", "weapon/cluzooka_shot" );
+    ParticleEngine::AddExplosionSmoke(pos, 50, ParticleEngine::LittleESmoke);
 
-        ClusterType * cluster;
+    ClusterType * cluster;
 
-        for (uint i = 0; i < fragments; ++i )
-        {
-            Double cluster_deviation = angle_range * i / ( Double )fragments - angle_range / TWO;
+    for (uint i = 0; i < fragments; ++i) {
+      Double cluster_deviation = (angle_range * i)/fragments - angle_range*ONE_HALF;
 
-            cluster = new ClusterType( cfg, p_launcher );
-            cluster->Shoot( pos, speed, angle + cluster_deviation, recursion_depth );
+      cluster = new ClusterType(cfg, p_launcher);
+      cluster->Shoot(pos, speed, angle+cluster_deviation, recursion_depth);
 
-            ObjectsList::GetRef().AddObject(cluster);
-        }
-        m_spawned_clusters = true;
+      ObjectsList::GetRef().AddObject(cluster);
     }
-
+    m_spawned_clusters = true;
+  }
 };
 
 class CluzookaConfig : public ExplosiveWeaponConfig
@@ -88,8 +84,8 @@ public:
 
 CluzookaConfig::CluzookaConfig() :
   ExplosiveWeaponConfig(),
-  m_fragments( 5 ),
-  m_angle_dispersion( 45 )
+  m_fragments(5),
+  m_angle_dispersion(45)
 {
 }
 
@@ -149,23 +145,22 @@ void CluzookaCluster::Shoot(const Point2i & start_pos, Double strength, Double a
   m_time_before_spawn = 750;
   // make time a bit random to unsychronize particles
 
-  m_time_before_spawn += RandomSync().GetDouble( -300, 100 );
+  m_time_before_spawn += RandomSync().GetDouble(-300, 100);
 }
 
 void CluzookaCluster::Refresh()
 {
 #ifdef CLUSTERS_SPAWN_CLUSTERS
-  if ( m_recursion_depth > 1 )
-  {
-      uint time = Time::GetInstance()->Read();
-      Double flying_time = ( Double )( time - begin_time );
+  if (m_recursion_depth > 1) {
+    uint time = Time::GetInstance()->Read();
+    Double flying_time = ( Double )( time - begin_time );
 
-      if ( flying_time >= m_time_before_spawn )
-      {
-          DoSpawn();
-          Explosion();
-          return;
-      };
+    if ( flying_time >= m_time_before_spawn )
+    {
+        DoSpawn();
+        Explosion();
+        return;
+    };
   };
 #endif
 
@@ -201,18 +196,18 @@ void CluzookaCluster::SignalOutOfMap()
 
 void CluzookaCluster::DoExplosion()
 {
-    if ( !m_spawned_clusters )
-    {
-        ApplyExplosion ( GetPosition(), cfg, "weapon/cluzooka_hit", false, ParticleEngine::LittleESmoke );
-    }
-    else
-        Ghost();    // just hide ourselvers
+  if ( !m_spawned_clusters )
+  {
+    ApplyExplosion(GetPosition(), cfg, "weapon/cluzooka_hit", false, ParticleEngine::LittleESmoke);
+  }
+  else
+    Ghost();    // just hide ourselvers
 }
 
 void CluzookaCluster::Draw()
 {
-    // custom Draw() is needed to avoid drawing timeout on top of clusters
-    image->Draw(GetPosition());
+  // custom Draw() is needed to avoid drawing timeout on top of clusters
+  image->Draw(GetPosition());
 };
 
 void CluzookaCluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
@@ -249,7 +244,7 @@ CluzookaRocket::CluzookaRocket(ExplosiveWeaponConfig& cfg,
 void CluzookaRocket::Refresh()
 {
   WeaponProjectile::Refresh();
-  if(!IsDrowned()) {
+  if (!IsDrowned()) {
     //image->SetRotation_rad(GetSpeedAngle());
     Double flying_time = ( Double )(GetMSSinceTimeoutStart());
 
@@ -325,7 +320,7 @@ void CluzookaRocket::Shoot(Double strength)
 
 void CluzookaRocket::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
+  Weapon::Message(_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 
   flying_sound.Stop();
@@ -352,9 +347,9 @@ void CluzookaRocket::Explosion()
 
 void CluzookaRocket::SignalTimeout()
 {
-    m_timed_out = true;
+  m_timed_out = true;
 
-    WeaponProjectile::SignalTimeout();
+  WeaponProjectile::SignalTimeout();
 };
 
 //-----------------------------------------------------------------------------

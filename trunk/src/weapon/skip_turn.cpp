@@ -52,8 +52,7 @@ void SkipTurn::UpdateTranslationStrings()
 bool SkipTurn::p_Shoot()
 {
   // Show message
-  GameMessages::GetInstance()->Add (Format(_("%s team has skipped its turn."),
-                                           ActiveTeam().GetName().c_str()));
+  Weapon::Message(Format(_("%s team has skipped its turn."), ActiveTeam().GetName().c_str()));
   JukeBox::GetInstance()->Play(ActiveTeam().GetSoundProfile(), "skip_turn");
   return true;
 }

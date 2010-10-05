@@ -120,7 +120,7 @@ void RailGun::IncMissedShots()
   if (!hits) {
     WeaponLauncher::IncMissedShots();
   } else if (hits > 1) {
-    GameMessages::GetInstance()->Add(Format(_("Woah! Combo of %u!"), hits));
+    Weapon::Message(Format(_("Woah! Combo of %u!"), hits));
   }
   hits = 0;
 }

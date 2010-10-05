@@ -25,9 +25,6 @@
 #include "graphic/video.h"
 #include "include/app.h"
 
-// Hauteur de la police de caractere "mini"
-#define MIN_FONT_HEIGHT 12 // pixels
-
 // Interligne police "mini" (pour les messages)
 #define MIN_LINE_SPACING 3 // pixels
 
@@ -37,7 +34,8 @@
 #define NBR_MSG_MAX  14
 
 // Clean up the message list
-void GameMessages::Reset() {
+void GameMessages::Reset()
+{
   std::list<Message *>::iterator it;
   for (it=list.begin(); it != list.end(); it++) {
     Message * msg = *it;
@@ -48,18 +46,20 @@ void GameMessages::Reset() {
   list.clear();
 }
 
-void GameMessages::Draw() {
+void GameMessages::Draw()
+{
   // Display messages
   uint msgy = 50;
 
   for (iterator i=list.begin(); i!=list.end(); ++i) {
     (*i)->DrawCenterTop(Point2i(GetMainWindow().GetWidth()/2, msgy));
-    msgy += MIN_FONT_HEIGHT + MIN_LINE_SPACING;
+    msgy += (*i)->GetHeight() + MIN_LINE_SPACING;
   }
 }
 
 // Erase messages older than MSG_LIFESPAN
-void GameMessages::Refresh() {
+void GameMessages::Refresh()
+{
   iterator i;
   for (i=list.begin(); i!=list.end();) {
     Message * msg = *i;
@@ -74,11 +74,12 @@ void GameMessages::Refresh() {
 }
 
 // Add a message to the end of a the list of messages
-void GameMessages::Add(const std::string &message) {
+void GameMessages::Add(const std::string &message, const Color& color)
+{
   // Debug message
   std::cout << "o MSG: " << message << std::endl;
   // Add message at the end of the list
-  Message * newMessage = new Message(message, white_color, Font::FONT_MEDIUM,
+  Message * newMessage = new Message(message, color, Font::FONT_MEDIUM,
                                      Font::FONT_BOLD, Time::GetInstance()->Read());
   newMessage->SetMaxWidth(GetMainWindow().GetWidth()-8);
   list.push_back(newMessage);

@@ -55,7 +55,7 @@ void Grenade::Refresh()
 
 void Grenade::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The grenade left the battlefield before exploding!"));
+  Weapon::Message(_("The grenade left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 

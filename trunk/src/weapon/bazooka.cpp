@@ -79,7 +79,7 @@ void BazookaRocket::Shoot(Double strength)
 
 void BazookaRocket::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
+  Weapon::Message(_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 
   flying_sound.Stop();

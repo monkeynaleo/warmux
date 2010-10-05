@@ -176,7 +176,7 @@ void RPG::SignalDrowning()
 
 void RPG::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
+  Weapon::Message(_("The automatic rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 
   flying_sound.Stop();

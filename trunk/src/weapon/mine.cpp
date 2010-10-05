@@ -118,9 +118,7 @@ void ObjMine::Detection()
 
   FOR_ALL_LIVING_CHARACTERS(team, character) {
     if (GetCenter().SquareDistance(character->GetCenter()) < detection_range) {
-      std::string txt = Format(_("%s is next to a mine!"),
-                               character->GetName().c_str());
-      GameMessages::GetInstance()->Add(txt);
+      Weapon::Message(Format(_("%s is next to a mine!"), character->GetName().c_str()));
       StartTimeout();
       return;
     }

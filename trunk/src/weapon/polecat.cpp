@@ -114,7 +114,7 @@ void Polecat::Refresh()
     if (!last_fart_time) {
       std::string txt = Format(_("%s has done something for the environment, he has not ordered the polecat to fart."),
              ActiveCharacter().GetName().c_str());
-      GameMessages::GetInstance()->Add (txt);
+      Weapon::Message(txt);
     }
     SignalTimeout();
   }
@@ -165,7 +165,7 @@ void Polecat::Refresh()
 
 void Polecat::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Polecat left the battlefield before exploding!"));
+  Weapon::Message(_("The Polecat left the battlefield before exploding!"));
   WeaponProjectile::SignalOutOfMap();
 }
 
