@@ -32,6 +32,7 @@
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/time.h"
+#include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "interface/interface.h"
@@ -59,6 +60,14 @@
 #include "weapon/weapon.h"
 #include "weapon/weapon_launcher.h"
 #include "weapon/weapons_list.h"
+
+
+static const Color& GetCPUColor(const Action* a)
+{
+  static const Color cpu_colors[8] = { primary_green_color, white_color, yellow_color, black_color,
+                                       primary_blue_color, pink_color, green_color, gray_color };
+  return cpu_colors[a->GetCreator()->GetGameId()&7];
+}
 
 // #############################################################################
 // #############################################################################
@@ -392,7 +401,7 @@ static void Action_ChatMessage (Action *a)
   std::string message = a->PopString();
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
-  AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message);
+  AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, GetCPUColor(a));
 }
 
 static void Action_AnnouncePause(Action *a)
@@ -400,7 +409,7 @@ static void Action_AnnouncePause(Action *a)
   DistantComputer * computer = a->GetCreator();
   std::string computer_name = computer->ToString();
   std::string message = Format(_("%s needs a pause."), computer_name.c_str());
-  AppWormux::GetInstance()->ReceiveMsgCallback(message);
+  AppWormux::GetInstance()->ReceiveMsgCallback(message, GetCPUColor(a));
 }
 
 static void _Action_SelectMap(Action *a)
@@ -837,7 +846,7 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
     GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu)
     //Network Menu
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 
   if (Config::GetInstance()->GetWarnOnNewPlayer())
     JukeBox::GetInstance()->Play("default", "menu/newcomer");
@@ -952,7 +961,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
     GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg);
+    AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 }
 
 // Used to notify clients that someone disconnected from the server

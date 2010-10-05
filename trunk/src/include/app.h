@@ -27,6 +27,7 @@
 
 class Video;
 class Menu;
+class Color;
 union SDL_Event;
 
 class AppWormux
@@ -49,7 +50,7 @@ public:
   void SetCurrentMenu(Menu *_menu) { menu = _menu; }
   void RefreshDisplay();
   static void DisplayError(const std::string &msg);
-  void ReceiveMsgCallback(const std::string& msg);
+  void ReceiveMsgCallback(const std::string& msg, const Color& color);
   static AppWormux * GetInstance();
   ~AppWormux();
   static void EmergencyExit();
