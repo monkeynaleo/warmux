@@ -385,13 +385,34 @@ void SendGameMode()
   Network::GetInstance()->SendActionToAll(a);
 }
 
+static const Color& DefaultCPUColor(const DistantComputer *cpu)
+{
+  if (!cpu)
+    return white_color; // ie local
+
+  const std::list<DistantComputer*>& cpus = Network::GetInstance()->GetRemoteHosts();
+  int i = 0;
+  for (std::list<DistantComputer*>::const_iterator itcpu = cpus.begin();
+       itcpu != cpus.end();
+       ++itcpu, ++i) {
+    if ((*itcpu)->GetGameId() == cpu->GetGameId()) {
+      static const Color cpu_colors[8] = { primary_green_color, white_color, yellow_color, black_color,
+                                           primary_blue_color, pink_color, green_color, gray_color };
+      assert(i < 8);
+      return cpu_colors[i];
+    }
+  }
+  return white_color; // ie local
+}
+
 // ########################################################
 static void Action_ChatMessage(Action *a)
 {
   uint player_id = a->PopInt();
   std::string message = a->PopString();
-  const Player* player = a->GetCreator() ? a->GetCreator()->GetPlayer(player_id)
-                                         : &Network::GetInstance()->GetPlayer();
+  DistantComputer *cpu = a->GetCreator();
+  const Player* player = cpu ? cpu->GetPlayer(player_id)
+                             : &Network::GetInstance()->GetPlayer();
 
   // Search first active team
   const std::list<ConfigTeam>& teams = player->GetTeams();
@@ -405,7 +426,8 @@ static void Action_ChatMessage(Action *a)
 
   int unused_buffer;
   Team *team = GetTeamsList().FindById(found->id, unused_buffer);
-  const Color& color = (team) ? team->GetColor() : white_color;
+  const Color& color = (team) ? team->GetColor()
+                              : DefaultCPUColor(cpu);
   const std::string& nickname = player->GetNickname();
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);

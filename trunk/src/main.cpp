@@ -234,7 +234,7 @@ void AppWormux::ReceiveMsgCallback(const std::string& msg, const Color& color)
       Game::GetInstance()->chatsession.NewMessage(msg, color);
     }
   } else if (GetCurrentMenu()) {
-    GetCurrentMenu()->ReceiveMsgCallback(msg);
+    GetCurrentMenu()->ReceiveMsgCallback(msg, color);
   }
 }
 

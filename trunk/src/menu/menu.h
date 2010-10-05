@@ -62,7 +62,7 @@ public:
    void DisplayError(const std::string &msg);
 
    // for receiving message from network
-   virtual void ReceiveMsgCallback(const std::string& /*msg*/) {};
+   virtual void ReceiveMsgCallback(const std::string& /*msg*/, const Color& /*color*/) {};
 
    // Push a stupid user event to make the menu exits for SDL_WaitEvent
    // To be called only by the ActionHandler

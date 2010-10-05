@@ -439,9 +439,9 @@ void NetworkMenu::SetGameMasterCallback()
 
 }
 
-void NetworkMenu::ReceiveMsgCallback(const std::string& msg)
+void NetworkMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
-  msg_box->NewMessage(msg);
+  msg_box->NewMessage(msg, color);
 }
 
 Team * NetworkMenu::FindUnusedTeam(const std::string default_team_id)
