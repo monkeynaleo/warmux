@@ -33,11 +33,6 @@ class WSocket;
 class DistantComputer
 {
 private:
-  /* If you need this, implement it (correctly)*/
-  DistantComputer(const DistantComputer&);
-  const DistantComputer& operator=(const DistantComputer&);
-  /*********************************************/
-
   WSocket* sock;
   uint game_id;
 
