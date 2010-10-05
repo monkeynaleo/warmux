@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-09-29 22:18+0200\n"
 "PO-Revision-Date: 2010-01-10 12:34+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -61,34 +60,34 @@ msgstr "%s-laget"
 msgid "%s Team - Remote"
 msgstr "%s-laget – frå nettet"
 
-#: src/game/game.cpp:996
+#: src/game/game.cpp:990
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s frå %s-laget gjorde sjølvmord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1022 src/game/game.cpp:1041
+#: src/game/game.cpp:1016 src/game/game.cpp:1035
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s frå %s-laget døydde!"
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:982
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s frå %s-laget fall i vatnet!"
 
-#: src/game/game.cpp:982
+#: src/game/game.cpp:976
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s frå %s-laget fall ut av kartet!"
 
-#: src/game/game.cpp:1002
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s frå %s-laget trefte bakken for hardt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1003
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s frå %s-laget døydde fordi han var klønete!"
@@ -111,7 +110,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s fekk %u livspoeng!"
 
-#: src/game/game.cpp:1033
+#: src/game/game.cpp:1027
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er vorten sinnssjuk, og har drept nokon frå %s-laget!"
@@ -271,7 +270,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s-laget vann %u fotballbombe!"
 msgstr[1] "%s-laget vann %u fotballbomber!"
 
-#: src/weapon/grapple.cpp:715
+#: src/weapon/grapple.cpp:713
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -334,7 +333,7 @@ msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "%s-laget vann %u stinkdyr! Du har hugsa gassmaske, ikkje sant?"
 msgstr[1] "%s-laget vann %u stinkdyr! Du har hugsa gassmaske, ikkje sant?"
 
-#: src/weapon/rail_gun.cpp:130
+#: src/weapon/rail_gun.cpp:131
 #, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -424,7 +423,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s-laget vart meia ned."
 
-#: src/game/game.cpp:1017 src/game/game.cpp:1029
+#: src/game/game.cpp:1011 src/game/game.cpp:1023
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tok eit medlem av %s-laget med seg i grava!"
@@ -502,7 +501,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:314
+#: src/main.cpp:320
 msgid "Authors:"
 msgstr "Utviklarar:"
 
@@ -761,7 +760,7 @@ msgstr "Rundelengd"
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:472
+#: src/game/game.cpp:471
 msgid "END OF GAME"
 msgstr "SPELET ER SLUTT"
 
@@ -978,24 +977,24 @@ msgstr ""
 "Skyt: hald inne mellomromstasten for å velja styrke\n"
 "Eitt skot per runde"
 
-#: src/game/game.cpp:131
+#: src/game/game.cpp:128
 msgid "Initialisation"
 msgstr "Startar"
 
 #. Load the map
-#: src/game/game.cpp:148
+#: src/game/game.cpp:145
 msgid "Initialise map"
 msgstr "Lagar kart"
 
-#: src/game/game.cpp:159
+#: src/game/game.cpp:156
 msgid "Initialise sounds"
 msgstr "Lastar lydar"
 
-#: src/game/game.cpp:155
+#: src/game/game.cpp:152
 msgid "Initialise teams"
 msgstr "Lastar lag"
 
-#: src/game/game.cpp:872
+#: src/game/game.cpp:866
 msgid "It's a present!"
 msgstr "Det kom ei gåve frå oven!"
 
@@ -1089,7 +1088,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartet %s er laga av: "
 
-#: src/game/game.cpp:149
+#: src/game/game.cpp:146
 msgid "Maps"
 msgstr "Kart"
 
@@ -1196,7 +1195,7 @@ msgstr "Lydstyrke: musikk"
 msgid "Music?"
 msgstr "Musikk"
 
-#: src/game/game.cpp:172
+#: src/game/game.cpp:169
 msgid "Network"
 msgstr "Nettverk"
 
@@ -1222,7 +1221,7 @@ msgstr "Varsel ved nye spelarar"
 msgid "Next character"
 msgstr "Flytt spelaren"
 
-#: src/weapon/weapon.cpp:653
+#: src/weapon/weapon.cpp:654
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Fann ikkje elementet <%s> i XML-oppsettfila."
@@ -1410,7 +1409,7 @@ msgstr "Avslutt Wormux"
 msgid "Quit game"
 msgstr "Avslutt spelet"
 
-#: src/weapon/rail_gun.cpp:96
+#: src/weapon/rail_gun.cpp:97
 msgid "Rail Gun"
 msgstr ""
 
@@ -1547,7 +1546,7 @@ msgstr ""
 msgid "Shoot"
 msgstr "Hagle"
 
-#: src/weapon/rail_gun.cpp:97
+#: src/weapon/rail_gun.cpp:98
 msgid "Shoots all players in a straight line!"
 msgstr ""
 
@@ -1620,11 +1619,11 @@ msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:161
+#: src/game/game.cpp:158
 msgid "Sounds"
 msgstr "Lydar"
 
-#: src/game/game.cpp:192
+#: src/game/game.cpp:189
 msgid "Starting a new game"
 msgstr "Startar nytt spel"
 
@@ -1660,7 +1659,7 @@ msgstr "Laggrafar"
 msgid "Team stats"
 msgstr "Lagstatistikk"
 
-#: src/game/game.cpp:156 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:153 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:100
 msgid "Teams"
 msgstr "Lag"
@@ -1722,7 +1721,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskogranaten forlot dansegolvet før han eksploderte!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:703
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spelet vart avbrote fordi du mista nettsambandet."
 
@@ -1751,7 +1750,7 @@ msgstr "Tenaren nekta tilkoplinga."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Tenaren nekta tilkoplinga: feil passord."
 
-#: src/weapon/weapon.cpp:665
+#: src/weapon/weapon.cpp:666
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1911,16 +1910,16 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! %i spelar er ikkje klar enno!"
 msgstr[1] "Vent! %i spelarar er ikkje klare enno!"
 
-#: src/game/game.cpp:610
+#: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
 msgstr "Ventar på %s"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:168
 msgid "Waiting for remote players"
 msgstr "Ventar på nettverksspelarar"
 
-#: src/menu/network_menu.cpp:506
+#: src/menu/network_menu.cpp:505
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ventar på tenaren. Du kan avbryta, eller snakka med dei andre."
 
@@ -1929,11 +1928,11 @@ msgstr "Ventar på tenaren. Du kan avbryta, eller snakka med dei andre."
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Våpen: skyt / Bonusboks: fall fort"
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:149
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:323
+#: src/main.cpp:329
 msgid "Website: "
 msgstr "Heimeside: "
 
@@ -1944,12 +1943,12 @@ msgstr "Heimeside: "
 msgid "Welcome to %s on %s!"
 msgstr "Velkommen til %s på %s!"
 
-#: src/game/game.cpp:975
+#: src/game/game.cpp:969
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Og for eit slag! %s frå %s-laget er i ei anna verd …"
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1032
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Stakkars %s, som vart drepen av ein liten pistol!"
@@ -1962,7 +1961,7 @@ msgstr "Vindpartiklar"
 msgid "Winner"
 msgstr "Vinnar"
 
-#: src/weapon/rail_gun.cpp:122
+#: src/weapon/rail_gun.cpp:123
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
@@ -1971,7 +1970,7 @@ msgstr ""
 msgid "Wormux launching..."
 msgstr "Startar Wormux …"
 
-#: src/main.cpp:313
+#: src/main.cpp:319
 msgid "Wormux version "
 msgstr "Wormux-versjon "
 
@@ -2004,7 +2003,7 @@ msgstr "Du er den nye turleiaren!"
 msgid "You need at least one valid map!"
 msgstr "Du må har minst eitt gyldig kart!"
 
-#: src/game/game.cpp:276 src/team/teams_list.cpp:163
+#: src/game/game.cpp:275 src/team/teams_list.cpp:163
 msgid "You need at least two valid teams!"
 msgstr "Du må har minst to gyldige lag!"
 
@@ -2056,16 +2055,16 @@ msgstr "frå"
 msgid "no configuration file!"
 msgstr "Manglar oppsettfil!"
 
-#: src/sound/jukebox.cpp:210
+#: src/sound/jukebox.cpp:186
 msgid "o Loading music"
 msgstr "o Lastar musikk"
 
-#: src/sound/jukebox.cpp:392
+#: src/sound/jukebox.cpp:368
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Lastar lydprofil: %s"
 
-#: src/sound/jukebox.cpp:98 src/sound/jukebox.cpp:154
+#: src/sound/jukebox.cpp:130
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"

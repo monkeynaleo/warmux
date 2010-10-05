@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-09-29 22:18+0200\n"
 "PO-Revision-Date: 2010-01-27 06:07+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -66,34 +65,34 @@ msgstr "Joukkue %s"
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
-#: src/game/game.cpp:996
+#: src/game/game.cpp:990
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1022 src/game/game.cpp:1041
+#: src/game/game.cpp:1016 src/game/game.cpp:1035
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:988
+#: src/game/game.cpp:982
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:982
+#: src/game/game.cpp:976
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:1002
+#: src/game/game.cpp:996
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1009
+#: src/game/game.cpp:1003
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -117,7 +116,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s voitti %u voimapisteen."
 
-#: src/game/game.cpp:1033
+#: src/game/game.cpp:1027
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -279,7 +278,7 @@ msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "Joukkue %s voitti %u jalkapallopommin!"
 msgstr[1] "Joukkue %s voitti %u jalkapallopommia!"
 
-#: src/weapon/grapple.cpp:715
+#: src/weapon/grapple.cpp:713
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -342,7 +341,7 @@ msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "Joukkue %s voitti %u haisunäädän! Onhan kaasunaamari mukana, onhan?"
 msgstr[1] "Joukkue %s voitti %u haisunäätää! Onhan kaasunaamari mukana, onhan?"
 
-#: src/weapon/rail_gun.cpp:130
+#: src/weapon/rail_gun.cpp:131
 #, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -427,7 +426,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:1017 src/game/game.cpp:1029
+#: src/game/game.cpp:1011 src/game/game.cpp:1023
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -505,7 +504,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasin"
 
-#: src/main.cpp:314
+#: src/main.cpp:320
 msgid "Authors:"
 msgstr "Tekijät:"
 
@@ -764,7 +763,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:472
+#: src/game/game.cpp:471
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
@@ -984,24 +983,24 @@ msgstr ""
 "Ammu : pidä välilyönti painettuna\n"
 "yksi ammus per vuoro"
 
-#: src/game/game.cpp:131
+#: src/game/game.cpp:128
 msgid "Initialisation"
 msgstr "Alustus"
 
 #. Load the map
-#: src/game/game.cpp:148
+#: src/game/game.cpp:145
 msgid "Initialise map"
 msgstr "Alusta kartta"
 
-#: src/game/game.cpp:159
+#: src/game/game.cpp:156
 msgid "Initialise sounds"
 msgstr "Alusta äänet"
 
-#: src/game/game.cpp:155
+#: src/game/game.cpp:152
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/game/game.cpp:872
+#: src/game/game.cpp:866
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -1095,7 +1094,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game.cpp:149
+#: src/game/game.cpp:146
 msgid "Maps"
 msgstr "Kartat"
 
@@ -1202,7 +1201,7 @@ msgstr "Musiikin voimakkuus"
 msgid "Music?"
 msgstr "Musiikki"
 
-#: src/game/game.cpp:172
+#: src/game/game.cpp:169
 msgid "Network"
 msgstr "Verkko"
 
@@ -1228,7 +1227,7 @@ msgstr "Varoitus uudesta pelaajasta?"
 msgid "Next character"
 msgstr "Siirrä hahmoa"
 
-#: src/weapon/weapon.cpp:653
+#: src/weapon/weapon.cpp:654
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml-tiedostosta !"
@@ -1416,7 +1415,7 @@ msgstr "Lopeta Wormux"
 msgid "Quit game"
 msgstr "Lopeta peli"
 
-#: src/weapon/rail_gun.cpp:96
+#: src/weapon/rail_gun.cpp:97
 msgid "Rail Gun"
 msgstr ""
 
@@ -1553,7 +1552,7 @@ msgstr ""
 msgid "Shoot"
 msgstr "Haulikko"
 
-#: src/weapon/rail_gun.cpp:97
+#: src/weapon/rail_gun.cpp:98
 msgid "Shoots all players in a straight line!"
 msgstr ""
 
@@ -1625,11 +1624,11 @@ msgid "Sound frequency"
 msgstr "Äänitaajuus"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:161
+#: src/game/game.cpp:158
 msgid "Sounds"
 msgstr "Ääniasetukset"
 
-#: src/game/game.cpp:192
+#: src/game/game.cpp:189
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
@@ -1665,7 +1664,7 @@ msgstr "Joukkueen graafi"
 msgid "Team stats"
 msgstr "Joukkueen tilastot"
 
-#: src/game/game.cpp:156 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:153 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:100
 msgid "Teams"
 msgstr "Joukkueet"
@@ -1725,7 +1724,7 @@ msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskokranaatti jätti tanssilattian ennen räjähtämistä!"
 
-#: src/game/game.cpp:708
+#: src/game/game.cpp:703
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
@@ -1754,7 +1753,7 @@ msgstr "Palvelin hylkäsi yhteyden."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Palvelin hylkäsi yhteyden: väärä salasana!"
 
-#: src/weapon/weapon.cpp:665
+#: src/weapon/weapon.cpp:666
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1914,16 +1913,16 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/game/game.cpp:610
+#: src/game/game.cpp:607
 #, c-format
 msgid "Waiting for %s"
 msgstr "Odotetaan henkilöä %s"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:168
 msgid "Waiting for remote players"
 msgstr "Odotetaan etäpelaajia"
 
-#: src/menu/network_menu.cpp:506
+#: src/menu/network_menu.cpp:505
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
@@ -1932,11 +1931,11 @@ msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:149
 msgid "Weapons"
 msgstr "Aseet"
 
-#: src/main.cpp:323
+#: src/main.cpp:329
 msgid "Website: "
 msgstr "Verkkosivu:"
 
@@ -1947,12 +1946,12 @@ msgstr "Verkkosivu:"
 msgid "Welcome to %s on %s!"
 msgstr "Tervetuloa kohteeseen %s paikassa %s!"
 
-#: src/game/game.cpp:975
+#: src/game/game.cpp:969
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Loistava kunnari! %s joukkueesta %s  on toisessa maailmassa..."
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1032
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -1965,7 +1964,7 @@ msgstr "Näytä tuuli"
 msgid "Winner"
 msgstr "Voittaja"
 
-#: src/weapon/rail_gun.cpp:122
+#: src/weapon/rail_gun.cpp:123
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
@@ -1974,7 +1973,7 @@ msgstr ""
 msgid "Wormux launching..."
 msgstr "Wormux käynnistyy..."
 
-#: src/main.cpp:313
+#: src/main.cpp:319
 msgid "Wormux version "
 msgstr "Wormux versio"
 
@@ -2007,7 +2006,7 @@ msgstr "Sinä olet uusi vuoromestari!"
 msgid "You need at least one valid map!"
 msgstr "Tarvitset ainakin yhden kunnollisen kartan !"
 
-#: src/game/game.cpp:276 src/team/teams_list.cpp:163
+#: src/game/game.cpp:275 src/team/teams_list.cpp:163
 msgid "You need at least two valid teams!"
 msgstr "Tarvitset ainakin kaksi kelvollista joukkuetta!"
 
@@ -2058,16 +2057,16 @@ msgstr ", "
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 
-#: src/sound/jukebox.cpp:210
+#: src/sound/jukebox.cpp:186
 msgid "o Loading music"
 msgstr "o Ladataan musiikki"
 
-#: src/sound/jukebox.cpp:392
+#: src/sound/jukebox.cpp:368
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ladataan ääniprofiili: %s"
 
-#: src/sound/jukebox.cpp:98 src/sound/jukebox.cpp:154
+#: src/sound/jukebox.cpp:130
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
