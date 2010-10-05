@@ -20,8 +20,8 @@
     <character name="Elephas recki" body="php" />
     <character name="Stegodon" body="php" />
     <character name="Mammuthus" body="php" />
-
   </team>
+    <color name="teamcolor" r="32" g="38" b="59" a="255" />
 </resources>
 
 

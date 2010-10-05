@@ -21,4 +21,5 @@
     <character name="Squadron" body="thunderbird" />
     <character name="Missile" body="thunderbird" />
   </team>
+    <color name="teamcolor" r="15" g="65" b="106" a="255" />
 </resources>

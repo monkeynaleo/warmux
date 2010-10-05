@@ -18,4 +18,5 @@
     <character name="Malaguti" body="firefox" />
     <character name="Alopex" body="firefox" />
   </team>
+    <color name="teamcolor" r="153" g="65" b="4" a="255" />
 </resources>

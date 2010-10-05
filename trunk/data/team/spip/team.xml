@@ -23,4 +23,5 @@
 	<character name="Alexandra Maison" body="spip"/>
 	<character name="izo" body="spip"/>
   </team>
+    <color name="teamcolor" r="146" g="105" b="44" a="255" />
 </resources>

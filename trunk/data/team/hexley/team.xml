@@ -18,6 +18,7 @@
     <character name="PureDarwin" body="hexley" />
 	<character name="Apple TV" body="hexley" />
   </team>
+    <color name="teamcolor" r="134" g="57" b="30" a="255" />
 </resources>
 
 

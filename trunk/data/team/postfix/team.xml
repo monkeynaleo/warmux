@@ -23,4 +23,5 @@
 	<character name="Mus nitidulus" body="postfix"/>
 	<character name="Mus spicilegus" body="postfix"/>
   </team>
+    <color name="teamcolor" r="96" g="98" b="95" a="255" />
 </resources>

@@ -19,4 +19,5 @@
 	<character name="Hemiptera" body="bugzilla"/>
 	<character name="Hybrid Dog" body="bugzilla"/>
   </team>
+    <color name="teamcolor" r="188" g="151" b="103" a="255" />
 </resources>

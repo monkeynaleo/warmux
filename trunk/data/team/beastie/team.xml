@@ -8,7 +8,6 @@
   <team>
     <character name="Beastie" body="beastie" />
     <character name="FreeBSD" body="beastie" />
-
     <character name="DragonFlyBSD" body="beastie" />
     <character name="OpenBSD" body="beastie" />
     <character name="NetBSD" body="beastie" />
@@ -19,4 +18,5 @@
     <character name="MidnightBSD" body="beastie" />
     <character name="666" body="beastie" />
   </team>
+  <color name="teamcolor" r="128" g="138" b="31" a="255" />
 </resources>

@@ -23,4 +23,5 @@
 	<character name="Chamaeleo Laurenti" body="suse"/>
 	<character name="Furcifer Fitzinger" body="suse"/>
   </team>
+    <color name="teamcolor" r="71" g="120" b="25" a="255" />
 </resources>
