@@ -42,6 +42,7 @@
 static const Point2i BORDER_POSITION(5, 5);
 
 #define MARGIN  4
+#define PRE_RENDER 1
 
 void Interface::LoadDataInternal(Profile *res)
 {
@@ -71,6 +72,14 @@ void Interface::LoadDataInternal(Profile *res)
   }
   clock_width = 70*zoom;
   small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
+
+  // Pre-render interface + wind-indicator
+  Point2i wind_pos((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
+                   (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
+#if PRE_RENDER
+  game_menu.Blit(wind_icon, wind_pos);
+  game_menu.Blit(wind_indicator, wind_pos + Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight()));
+#endif
 
   // energy bar
   if (energy_bar)
@@ -298,8 +307,10 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 
   // draw wind icon
   if (draw_icon) {
+#if !PRE_RENDER
     window.Blit(wind_icon, wind_bar_pos);
     GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
+#endif
     height = wind_icon.GetHeight() - wind_indicator.GetHeight();
   } else {
     height = MARGIN;
@@ -308,17 +319,23 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   // draw wind indicator
   Point2i wind_bar_offset = Point2i(0, height);
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
+#if !PRE_RENDER
   window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
+#endif
   wind_bar.DrawXY(tmp);
+#if PRE_RENDER
+  GetWorld().ToRedrawOnScreen(Rectanglei(tmp, wind_bar.GetSize()));
+#else
   GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset,
                                          wind_indicator.GetSize()));
+#endif
 }
 
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset = Point2i((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
-                                    (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
+  Point2i wind_pos_offset((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
+                          (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
 
