@@ -142,6 +142,9 @@ Sprite* ParticleEngine::particle_sprite[particle_spr_nbr];
 
 void ParticleEngine::Load()
 {
+  if (sprites_loaded)
+    return;
+
   // Pre-load the sprite of each particle
   Profile *res = GetResourceManager().LoadXMLProfile("weapons.xml", false);
   particle_sprite[SMOKE_spr] = LOAD_RES_SPRITE("smoke");
@@ -187,9 +190,11 @@ void ParticleEngine::Load()
 
 void ParticleEngine::FreeMem()
 {
+  // Only called at game exit: loading particles is long and costly
+  // and it would be a waste to discard the cache already available
   sprites_loaded = false;
 
-  for(int i=0; i<particle_spr_nbr ; i++)
+  for (int i=0; i<particle_spr_nbr ; i++)
     delete particle_sprite[i];
 }
 
