@@ -196,9 +196,6 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
     return false;
   }
 
-  if (Game::GetInstance()->ReadState() != Game::PLAYING)
-    return true;
-
   if (evnt.type == SDL_MOUSEBUTTONDOWN) {
     if (Interface::GetInstance()->ActionClickDown(GetPosition()))
       return true;
@@ -215,6 +212,9 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
         return true;
     }
   }
+
+  if (Game::GetInstance()->ReadState() != Game::PLAYING)
+    return true;
 
   if (!ActiveTeam().IsLocalHuman())
     return true;
