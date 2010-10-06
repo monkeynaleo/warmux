@@ -191,8 +191,11 @@ wormux_SOURCES = \
         map/water.h \
         map/wind.cpp \
         map/wind.h \
+        menu/benchmark_menu.cpp \
+        menu/benchmark_menu.h \
         menu/credits_menu.cpp \
         menu/credits_menu.h \
+        menu/game_menu.h \
         menu/game_menu.cpp \
         menu/game_menu.h \
         menu/game_mode_editor.cpp \

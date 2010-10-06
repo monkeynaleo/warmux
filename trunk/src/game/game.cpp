@@ -80,7 +80,8 @@ Game * Game::GetInstance()
 
     if (GameMode::GetRef().rules == "blitz")
       singleton = new GameBlitz();
-    else if (GameMode::GetRef().rules == "classic")
+    else if (GameMode::GetRef().rules == "classic" ||
+             GameMode::GetRef().rules == "benchmark")
       singleton = new GameClassic();
     else {
       fprintf(stderr, "%s game rules not implemented\n", GameMode::GetRef().rules.c_str());
@@ -131,7 +132,7 @@ void Game::InitEverything()
   // initialize gaming data
   if (Network::GetInstance()->IsGameMaster())
     InitGameData_NetGameMaster();
-  else if (Network::GetInstance()->IsLocal())
+  else if (Network::GetInstance()->IsLocal() && !benching)
     RandomSync().InitRandom();
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
@@ -342,8 +343,10 @@ void Game::DisplayError(const std::string &msg)
   Time::GetInstance()->SetWaitingForUser(false);
 }
 
-void Game::Start()
+uint Game::Start(bool bench)
 {
+  benching = bench;
+
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
@@ -365,6 +368,9 @@ void Game::Start()
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   JukeBox::GetInstance()->PlayMusic("menu");
+
+  benching = false;
+  return fps->GetTotalFrames();
 }
 
 void Game::UnloadDatas(bool game_finished) const
@@ -472,26 +478,32 @@ void Game::RefreshInput()
       return;
     }
 
-    // Inactive evnt
+    // Inactive event
     if (AppWormux::CheckInactive(evnt))
       continue;
 
-    // Mouse evnt
-    if (Mouse::GetInstance()->HandleEvent(evnt))
-      continue;
+    if (!benching) {
+      // Mouse event
+      if (Mouse::GetInstance()->HandleEvent(evnt))
+        continue;
 
-    // Keyboard evnt
-    Keyboard::GetInstance()->HandleKeyEvent(evnt);
-    // Joystick evnt
-    Joystick::GetInstance()->HandleKeyEvent(evnt);
+      // Keyboard event
+      Keyboard::GetInstance()->HandleKeyEvent(evnt);
+      // Joystick event
+      Joystick::GetInstance()->HandleKeyEvent(evnt);
+    } else {
+      // Handle at least keyboard event - most will be ignored
+      Keyboard::GetInstance()->HandleKeyEvent(evnt);
+    }
   }
 
   // Keyboard, Joystick and mouse refresh
-  Mouse::GetInstance()->Refresh();
+  if (!benching)
+    Mouse::GetInstance()->Refresh();
   GameMessages::GetInstance()->Refresh();
 
   if (!IsGameFinished())
-    Camera::GetInstance()->Refresh();
+    Camera::GetInstance()->Refresh(benching);
 }
 
 // ####################################################################
@@ -706,11 +718,12 @@ void Game::MessageEndOfGame() const
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
 
-  std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
-  ResultsMenu menu(*results_list, disconnected);
-  menu.Run();
-
-  TeamResults::deleteAllResults(results_list);
+  if (!benching) {
+    std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
+    ResultsMenu menu(*results_list, disconnected);
+    menu.Run();
+    TeamResults::deleteAllResults(results_list);
+  }
 }
 
 

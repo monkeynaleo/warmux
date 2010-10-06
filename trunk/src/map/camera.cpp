@@ -399,13 +399,16 @@ void Camera::HandleMoveIntentions()
     SetAutoCrop(false);
 }
 
-void Camera::Refresh(){
+void Camera::Refresh(bool ignore_user)
+{
   // Refresh gets called very often when the game is paused.
   // This "if" ensures that the camera doesn't move too fast.
   if (refresh_stopwatch.GetValue() >= 1000 / MAX_REFRESHES_PER_SECOND) {
     // Check if player wants the camera to move
-    HandleMouseMovement();
-    HandleMoveIntentions();
+    if (!ignore_user) {
+      HandleMouseMovement();
+      HandleMoveIntentions();
+    }
 
     if (auto_crop && followed_object)
       AutoCrop();

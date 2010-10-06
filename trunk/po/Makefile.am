@@ -87,6 +87,7 @@ POTFILES = \
         src/map/tileitem.cpp \
         src/map/water.cpp \
         src/map/wind.cpp \
+        src/menu/benchmark_menu.cpp \
         src/menu/credits_menu.cpp \
         src/menu/game_menu.cpp \
         src/menu/game_mode_editor.cpp \

@@ -60,6 +60,7 @@ protected:
   game_loop_state_t   state;
   bool                give_objbox;
   uint                last_clock_update;
+  bool                benching;
 
   friend class Singleton<Game>;
   Game();
@@ -154,7 +155,7 @@ public:
   // Set mode
   static Game * UpdateGameRules();
 
-  void Start();
+  uint Start(bool bench = false);
 
   bool IsCharacterAlreadyChosen() const { return character_already_chosen; }
   void SetCharacterChosen(bool chosen);

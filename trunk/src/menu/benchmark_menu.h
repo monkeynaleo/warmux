@@ -16,41 +16,33 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Calculate frame per second.
+ * Benchmark menu, where to measure various aspects of the game performance.
  *****************************************************************************/
 
-#ifndef FPS_H
-#define FPS_H
+#ifndef BENCHMARK_MENU_H
+#define BENCHMARK_MENU_H
 
-#include <list>
-#include <WORMUX_base.h>
+#include "menu.h"
 
-class Text;
+class VBox;
+class BenchItem;
 
-class FramePerSecond
+typedef enum
 {
-  // Minimum number of values needed to compute the average
-  static const uint MIN_NB_VALUES;
+  BENCH_MENU,
+  BENCH_GRAPHICS,
+} BenchType;
 
-  uint total_frames;
-
-  int nb_valid_values;
-  float average;
-  std::list<uint> nb_frames;
-  uint time_in_second;
-  Text* text;
+class BenchmarkMenu : public Menu
+{
+  VBox *tests;
+  bool Launch(BenchItem *item);
 
 public:
-  bool display;
+  BenchmarkMenu();
+  ~BenchmarkMenu();
 
-public:
-  FramePerSecond();
-  ~FramePerSecond();
-  void Reset();
-  void AddOneFrame();
-  void Refresh();
-  void Draw();
-  uint GetTotalFrames() const { return total_frames; }
+  void OnClickUp(const Point2i &mousePosition, int button);
 };
 
-#endif
+#endif //BENCHMARK_MENU_H

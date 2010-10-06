@@ -101,7 +101,7 @@ public:
 
   bool IsVisible(const PhysicalObj &obj) const;
 
-  void Refresh();
+  void Refresh(bool ignore_user = false);
 
   Point2i GetPosition() const { return position + ComputeShake(); }
 

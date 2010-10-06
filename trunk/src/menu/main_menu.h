@@ -31,8 +31,8 @@ class ButtonPic;
 
 class MainMenu : public Menu
 {
-  ButtonPic *play, *options, *help, *credits, *quit;
-  ButtonPic *network;
+  ButtonPic *play, *network, *options, *bench;
+  ButtonPic *help, *credits, *quit;
   Text * version_text, *website_text;
 
 public:
@@ -42,6 +42,7 @@ public:
     PLAY,
     NETWORK,
     OPTIONS,
+    BENCHMARK,
     HELP,
     CREDITS,
     QUIT
