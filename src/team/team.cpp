@@ -117,24 +117,32 @@ Team::Team(XmlReader& doc, Profile* res,
   nb_characters = GameMode::GetInstance()->nb_characters;
 }
 
+// Do not call UnloadGamingData in here - these data are shared!
+Team::~Team() { }
+
 void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
 {
-  Character new_character(*this, character_name, body);
-  characters.push_back(new_character);
-  active_character = characters.begin(); // we need active_character to be initialized here !!
+  // Valgrind reports a leak here of what seems to be containers for the
+  // temporaries created here (32B?). See more some lines below
+  Character new_char(*this, character_name, body);
 
-  if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters())) {
+  if (!new_char.PutRandomly(false, GetWorld().GetDistanceBetweenCharacters())) {
     // We haven't found any place to put the characters!!
-    if (!characters.back().PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
+    if (!new_char.PutRandomly(false, GetWorld().GetDistanceBetweenCharacters() / 2)) {
       std::cerr << std::endl;
       std::cerr << "Error: player " << character_name.c_str() << " will be probably misplaced!" << std::endl;
       std::cerr << std::endl;
 
       // Put it with no space...
-      characters.back().PutRandomly(false, 0);
+      new_char.PutRandomly(false, 0);
     }
   }
-  characters.back().Init();
+  new_char.Init();
+
+  // And one more leak for the actual element (created through copy, 64B)
+  // pushed to the std::list
+  // No idea why, it's eating num_games * num_chars * 2 * 32B
+  characters.push_back(new_char);
 
   MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 }
@@ -142,11 +150,10 @@ void Team::AddOnePlayingCharacter(const std::string& character_name, Body *body)
 bool Team::AddPlayingCharacters(const std::vector<std::string> names)
 {
   // Check that we have enough information
-  if (names.size() < nb_characters
-      || bodies_ids.size() < nb_characters)
+  if (names.size() < nb_characters || bodies_ids.size() < nb_characters)
     return false;
 
-  active_character = characters.begin();
+  characters.clear();
 
   // Time to effectively create the characters
   for (uint i = 0; i < nb_characters; i++) {
@@ -164,7 +171,7 @@ bool Team::AddPlayingCharacters(const std::vector<std::string> names)
   }
   active_character = characters.begin();
 
-  return (characters.size() == nb_characters);
+  return characters.size() == nb_characters;
 }
 
 bool Team::LoadCharacters()
@@ -329,7 +336,6 @@ Character& Team::ActiveCharacter() const
 
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
-
   ASSERT (type >= Weapon::FIRST && type <= Weapon::LAST);
   AccessWeapon().Deselect();
   active_weapon = weapons_list->GetWeapon(type);
@@ -432,6 +438,7 @@ void Team::UnloadGamingData()
 {
   // Clear list of characters
   characters.clear();
+
   if (ai) {
     delete ai;
     ai = NULL;
