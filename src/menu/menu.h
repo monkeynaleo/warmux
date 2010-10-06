@@ -44,91 +44,98 @@ typedef enum {
 class Menu : public Container
 {
 public:
-   WidgetList widgets;
-   const t_action actions;
+  WidgetList widgets;
+  const t_action actions;
 
-   Menu(const std::string& bg, t_action actions = vOkCancel);
-   Menu(void);
-   virtual ~Menu();
+  Menu(const std::string& bg, t_action actions = vOkCancel);
+  Menu(void);
+  virtual ~Menu();
 
-   // Start the xml menu configuration.
-   void LoadMenu(Profile * profile,
-                 const xmlNode * rootMenuNode);
+  // Start the xml menu configuration.
+  void LoadMenu(Profile * profile,
+                const xmlNode * rootMenuNode);
 
-   void Run(bool skip=false);
-   virtual void RedrawBackground(const Rectanglei& rect) const;
-   virtual void RedrawMenu();
+  void Run(bool skip=false);
+  virtual void RedrawBackground(const Rectanglei& rect) const;
+  virtual void RedrawMenu();
 
-   void DisplayError(const std::string &msg);
+  void DisplayError(const std::string &msg);
 
-   // for receiving message from network
-   virtual void ReceiveMsgCallback(const std::string& /*msg*/, const Color& /*color*/) {};
+  // for receiving message from network
+  virtual void ReceiveMsgCallback(const std::string& /*msg*/, const Color& /*color*/) {};
 
-   // Push a stupid user event to make the menu exits for SDL_WaitEvent
-   // To be called only by the ActionHandler
-   static void WakeUpOnCallback();
+  // Push a stupid user event to make the menu exits for SDL_WaitEvent
+  // To be called only by the ActionHandler
+  static void WakeUpOnCallback();
 
 private:
-   Sprite *background;
-   Widget *selected_widget;
+  Sprite *background;
+  Widget *selected_widget;
 
-   void LoadBackground(Profile * profile,
-                       const xmlNode * rootMenuNode);
+  void LoadBackground(Profile * profile,
+                      const xmlNode * rootMenuNode);
 
-   // Recursive function wich load the widgets, and fill the containers widgets.
-   void LoadWidget(Profile * profile,
-                   const xmlNode * rootMenuNode,
-                   WidgetList * container);
+  // Recursive function wich load the widgets, and fill the containers widgets.
+  void LoadWidget(Profile * profile,
+                  const xmlNode * rootMenuNode,
+                  WidgetList * container);
 
-   // Detect and instanciate a widget.
-   Widget * CreateWidget(Profile * profile,
-                         const xmlNode * rootMenuNode,
-                         std::string & widgetName);
+  // Detect and instanciate a widget.
+  Widget * CreateWidget(Profile * profile,
+                        const xmlNode * rootMenuNode,
+                        std::string & widgetName);
 
-   bool BasicOnClickUp(const Point2i &mousePosition);
-   bool HandleGlobalEvent(const SDL_Event& evnt);
+  bool BasicOnClickUp(const Point2i &mousePosition);
+  bool HandleGlobalEvent(const SDL_Event& evnt);
 
 protected:
-   Button *b_cancel;
-   Button *b_ok;
-   bool close_menu;
-   Point2i last_mouse_position;
-   /* Actions buttons  */
-   HBox *actions_buttons;
+  Button *b_cancel;
+  Button *b_ok;
+  bool close_menu;
+  Point2i last_mouse_position;
+  /* Actions buttons  */
+  HBox *actions_buttons;
 
-   void play_ok_sound();
-   void play_cancel_sound();
-   void play_error_sound();
+  void play_ok_sound();
+  void play_cancel_sound();
+  void play_error_sound();
 
-   virtual void mouse_ok();
-   virtual void mouse_cancel();
-   virtual void key_ok();
-   virtual void key_cancel();
-   virtual void key_up();
-   virtual void key_down();
-   virtual void key_left();
-   virtual void key_right();
-   virtual void key_tab();
-   virtual bool signal_ok() = 0;
-   virtual bool signal_cancel() = 0;
+  virtual void mouse_ok();
+  virtual void mouse_cancel();
+  virtual void key_ok();
+  virtual void key_cancel();
+  virtual void key_up();
+  virtual void key_down();
+  virtual void key_left();
+  virtual void key_right();
+  virtual void key_tab();
+  virtual bool signal_ok() { return true; }
+  virtual bool signal_cancel() { return true; }
 
-   virtual void signal_begin_run() {};
+  virtual void signal_begin_run() {};
 
-   virtual void DrawBackground();
-   virtual void Draw(const Point2i &mousePosition) = 0;
+  virtual void DrawBackground();
+  virtual void Draw(const Point2i& /*mousePosition*/) { };
 
-   // we have released the button
-   virtual void OnClickUp(const Point2i &mousePosition, int button) = 0;
+  // we have released the button
+  virtual void OnClickUp(const Point2i &mousePosition, int button)
+  {
+    widgets.ClickUp(mousePosition, button);
+  }
 
-   // we have clicked but still not released the button
-   virtual void OnClick(const Point2i &mousePosition, int button) = 0;
+  // we have clicked but still not released the button
+  virtual void OnClick(const Point2i &mousePosition, int button)
+  {
+    // Do nothing if user has not released the button
+    widgets.Click(mousePosition, button);
+  }
 
-   // for heavy modification of menu behavior
-   virtual void HandleEvent(const SDL_Event& evnt);
-   void HandleEvents();
+  // for heavy modification of menu behavior
+  virtual void HandleEvent(const SDL_Event& evnt);
+  void HandleEvents();
 
-   void SetActionButtonsXY(int x, int y);
-   void Display(const Point2i& mousePosition);
+  void SetActionButtonsXY(int x, int y);
+  void Display(const Point2i& mousePosition);
 };
 
 #endif

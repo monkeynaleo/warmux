@@ -50,7 +50,7 @@ MainMenu::MainMenu() :
     Menu("main_menu/bg_main", vNo)
 {
   Point2i size(120,110);
-  Box* box = new GridBox(2, 3, 16, true);
+  Box* box = new GridBox(2, 4, 6, true);
 
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
   box->AddWidget(play);
@@ -60,6 +60,9 @@ MainMenu::MainMenu() :
 
   options = new ButtonPic(_("Options"), "menu/ico_options_menu", size);
   box->AddWidget(options);
+
+  bench = new ButtonPic(_("Benchmark"), "menu/ico_options_menu", size);
+  box->AddWidget(bench);
 
   help = new ButtonPic(_("Help"), "menu/ico_help", size);
   box->AddWidget(help);
@@ -123,6 +126,9 @@ void MainMenu::SelectAction(const Widget * widget)
     close_menu = true;
   } else if (widget == options) {
     choice = OPTIONS;
+    close_menu = true;
+  } else if (widget == bench) {
+    choice = BENCHMARK;
     close_menu = true;
   } else if (widget == help) {
     choice = HELP;
@@ -212,6 +218,5 @@ void MainMenu::DrawBackground()
                             window.GetHeight() + VERSION_DY));
   website_text->DrawCenter( Point2i(window.GetWidth()/2,
                             window.GetHeight() + VERSION_DY/2));
-
 }
 

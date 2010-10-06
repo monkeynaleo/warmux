@@ -75,11 +75,11 @@ public:
   void DelTeam(const std::string &id);
   void SetActive(const std::string &id);
   void InitList(const std::list<ConfigTeam> &lst);
-  void InitEnergy ();
-  void RefreshEnergy (); //Refresh energy bar
-  void RefreshSort (); //Refresh energy bar position
-  void ChangeSelection (const std::list<uint>& liste);
-  bool IsSelected (uint index);
+  void InitEnergy();
+  void RefreshEnergy(); //Refresh energy bar
+  void RefreshSort(); //Refresh energy bar position
+  void ChangeSelection(const std::list<uint>& liste);
+  bool IsSelected(uint index);
   static bool IsLoaded() { return singleton != NULL; }
 
   // Find a team by its id or index (in full_list)
@@ -88,6 +88,13 @@ public:
   // Find a team by its id or index (in playing full_list)
   Team* FindPlayingById(const std::string &id, int &index);
   Team* FindPlayingByIndex(uint index);
+
+  std::vector<Team*>& GetPlayingList() { return playing_list; }
+  void SetPlayingList(const std::vector<Team*>& list)
+  {
+    playing_list = list;
+    active_team = playing_list.begin();
+  }
 };
 
 inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };

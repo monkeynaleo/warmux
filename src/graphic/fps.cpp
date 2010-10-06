@@ -28,28 +28,31 @@
 
 const uint FramePerSecond::MIN_NB_VALUES = 4;
 
-FramePerSecond::~FramePerSecond(){
+FramePerSecond::~FramePerSecond()
+{
   delete text;
 }
 
-FramePerSecond::FramePerSecond():
-  nb_valid_values(-1),
-  average(-1),
-  nb_frames(),
-  time_in_second(0),
-  text(NULL),
-  display(true)
+FramePerSecond::FramePerSecond()
+  : total_frames(0)
+  , nb_valid_values(-1)
+  , average(-1)
+  , time_in_second(0)
+  , text(NULL)
+  , display(true)
 {
-  for( uint i=0; i<=MIN_NB_VALUES; ++i )
-    nb_frames.push_back (0);
+  for (uint i=0; i<=MIN_NB_VALUES; ++i)
+    nb_frames.push_back(0);
 }
 
-void FramePerSecond::Reset(){
+void FramePerSecond::Reset()
+{
+  total_frames = 0;
   average = -1;
   nb_frames.clear();
 
-  for( uint i=0; i<=MIN_NB_VALUES; ++i )
-    nb_frames.push_back (0);
+  for (uint i=0; i<=MIN_NB_VALUES; ++i)
+    nb_frames.push_back(0);
 
   time_in_second = SDL_GetTicks()+1000;
   nb_valid_values = -1;
@@ -58,8 +61,10 @@ void FramePerSecond::Reset(){
     text = new Text("");
 }
 
-void FramePerSecond::AddOneFrame(){
+void FramePerSecond::AddOneFrame()
+{
   ++nb_frames.front();
+  total_frames++;
 }
 
 void FramePerSecond::Refresh()
@@ -90,7 +95,8 @@ void FramePerSecond::Refresh()
   }
 }
 
-void FramePerSecond::Draw(){
+void FramePerSecond::Draw()
+{
   if( !display )
     return;
   if( average < 0 )

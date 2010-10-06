@@ -36,6 +36,7 @@
 #include "include/app.h"
 #include "include/constant.h"
 #include "map/map.h"
+#include "menu/benchmark_menu.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
 #include "menu/help_menu.h"
@@ -124,18 +125,25 @@ int AppWormux::Main(void)
         network_connection_menu.Run(skip_menu);
         break;
       }
-      case MainMenu::HELP:
-      {
-        HelpMenu help_menu;
-        SetCurrentMenu(&help_menu);
-        help_menu.Run();
-        break;
-      }
       case MainMenu::OPTIONS:
       {
         OptionMenu options_menu;
         SetCurrentMenu(&options_menu);
         options_menu.Run();
+        break;
+      }
+      case MainMenu::BENCHMARK:
+      {
+        BenchmarkMenu bench_menu;
+        SetCurrentMenu(&bench_menu);
+        bench_menu.Run();
+        break;
+      }
+      case MainMenu::HELP:
+      {
+        HelpMenu help_menu;
+        SetCurrentMenu(&help_menu);
+        help_menu.Run();
         break;
       }
       case MainMenu::CREDITS:
