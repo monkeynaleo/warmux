@@ -302,7 +302,9 @@ void Interface::DrawClock(const Point2i &time_pos) const
 // draw wind indicator
 void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const
 {
+#if !PRE_RENDER
   Surface& window = GetMainWindow();
+#endif
   int height;
 
   // draw wind icon
