@@ -1026,6 +1026,14 @@
 				Name="menu"
 				>
 				<File
+					RelativePath="..\..\src\menu\benchmark_menu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\menu\benchmark_menu.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\menu\credits_menu.cpp"
 					>
 				</File>
