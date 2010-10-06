@@ -173,7 +173,7 @@ Character::Character(Team& my_team, const std::string &name, Body *char_body) :
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
-Character::Character (const Character& acharacter) :
+Character::Character(const Character& acharacter) :
   PhysicalObj(acharacter),
   MovableByUser(),
   character_name(acharacter.character_name),
