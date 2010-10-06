@@ -165,11 +165,11 @@ protected:
 
 public:
   // Return -1 if fails
-  int FindMapById (const std::string &id) const;
+  int FindMapById(const std::string &id) const;
   void SelectMapByName(const std::string &nom);
   void SelectRandomMapByName(const std::string &nom);
-  void SelectMapByIndex (uint index);
-  int GetActiveMapIndex () const;
+  void SelectMapByIndex(uint index);
+  int GetActiveMapIndex() const;
   InfoMap* ActiveMap();
 
   void FillActionMenuSetMap(Action& a) const;
