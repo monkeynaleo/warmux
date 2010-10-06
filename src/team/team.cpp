@@ -82,8 +82,8 @@ Team::Team(XmlReader& doc, Profile* res,
   , ai_name(NO_AI_NAME)
   , active_weapon(NULL)
   , abandoned(false)
-  , energy(this)
   , team_color(white_color)
+  , energy(this)
 {
   // Load team color
   team_color = LOAD_RES_COLOR("teamcolor");
