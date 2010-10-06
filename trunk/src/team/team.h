@@ -88,6 +88,8 @@ protected:
        const std::string& name, const std::string &id);
 
 public:
+  // Do not call UnloadGamingData in here - these data are shared!
+  ~Team();
   static Team* LoadTeam(const std::string &teams_dir, const std::string &id, std::string& error);
 
   std::vector<int> m_nb_ammos;
