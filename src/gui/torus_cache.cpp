@@ -62,6 +62,8 @@ TorusCache::~TorusCache()
 {
   delete m_plus;
   delete m_minus;
+  if (m_torus)
+    delete m_torus;
 
   // Check whether to free static resources
   ref_count--;
