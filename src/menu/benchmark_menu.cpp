@@ -186,12 +186,10 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 
       // All set, run the game!
       Stopwatch   clock;
-      float num = Game::UpdateGameRules()->Start(true);
-      uint  time = clock.GetValue();
-      uint  ot   = Time::GetInstance()->Read();
-      printf("Clock=%u   Time=%u\n", time, ot);
+      float num  = Game::UpdateGameRules()->Start(true);
+      uint  time = Time::GetInstance()->Read();
       score = (num * video->window.GetWidth()*video->window.GetHeight())
-            / clock.GetValue();
+            / time;
       fmt = "%.0f";
 
       // Restore all!
