@@ -60,7 +60,7 @@ protected:
 public:
   Text(const std::string & text,
        const Color & fontColor = white_color,
-       uint fontSize = 12,
+       uint fontSize = (uint)Font::FONT_SMALL,
        Font::font_style_t fontStyle = Font::FONT_BOLD,
        bool shadowed = true,
        const Color & shadowColor = black_color,
