@@ -200,7 +200,7 @@ void Member::RefreshSprite(LRDirection direction)
   // The sprite pointer may be invalid at the weapon sprite.
   // Those are just asserts and not ASSERTs because they have never happened in fact
   assert(name != "weapon");
-  assert(parent != NULL || type == "body");
+  assert(parent || type == "body");
 
   if (DIRECTION_RIGHT == direction) {
     spr->SetRotation_rad(angle_rad);

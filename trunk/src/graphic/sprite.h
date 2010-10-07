@@ -190,7 +190,7 @@ public:
    // Can't be combined with per pixel alpha
   void SetAlpha(Double _alpha)
   {
-    ASSERT(_alpha >= ZERO && _alpha <= ONE);
+    assert(_alpha >= ZERO && _alpha <= ONE);
     this->alpha = _alpha;
   }
   Double GetAlpha() const { return alpha; };
