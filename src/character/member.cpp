@@ -39,7 +39,7 @@ Member::Member(const std::string& name_)
   , angle_rad(0)
   , alpha(0)
   , go_through_ground(false)
-  , attached_members()
+  , member_map_built(false)
   , pos(0,0)
   , scale(0,0)
   , spr(NULL)
@@ -55,7 +55,7 @@ Member::Member(const xmlNode *     xml,
   , angle_rad(0)
   , alpha(0)
   , go_through_ground(false)
-  , attached_members()
+  , member_map_built(false)
   , pos(0,0)
   , scale(0,0)
   , spr(NULL)
@@ -80,7 +80,7 @@ Member::Member(const xmlNode *     xml,
 
   const xmlNode * el = XmlReader::GetMarker(xml, "anchor");
 
-  if (NULL != el) {
+  if (el) {
     int dx = 0, dy = 0;
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
@@ -121,7 +121,7 @@ Member::Member(const xmlNode *     xml,
     if ("*" == frame_str) {
       v_attached rot_spot;
       rot_spot.assign(spr->GetFrameCount(), d);
-      attached_members[type] = rot_spot;
+      attached_types[type] = rot_spot;
     } else {
       int frame;
 
@@ -130,17 +130,17 @@ Member::Member(const xmlNode *     xml,
         continue;
       }
 
-      if(attached_members.find(type) == attached_members.end()) {
+      if (attached_types.find(type) == attached_types.end()) {
         v_attached rot_spot;
         rot_spot.resize(spr->GetFrameCount(), Point2d(0.0, 0.0));
-        attached_members[type] = rot_spot;
+        attached_types[type] = rot_spot;
       }
-      (attached_members.find(type)->second)[frame] = d;
+      (attached_types.find(type)->second)[frame] = d;
     }
   }
 
-  AttachMap::iterator attachment_it = attached_members.begin();
-  for (; attachment_it != attached_members.end(); ++attachment_it)
+  AttachTypeMap::iterator attachment_it = attached_types.begin();
+  for (; attachment_it != attached_types.end(); ++attachment_it)
     attachment_it->second.SetAnchor(anchor);
 
   ResetMovement();
@@ -151,7 +151,7 @@ Member::Member(const Member & m)
   , angle_rad(m.angle_rad)
   , alpha(m.alpha)
   , go_through_ground(m.go_through_ground)
-  , attached_members()
+  , member_map_built(m.member_map_built)
   , pos(m.pos)
   , scale(m.scale)
   , spr(new Sprite(*m.spr))
@@ -162,15 +162,19 @@ Member::Member(const Member & m)
   spr->SetRotation_HotSpot(Point2i(anchor.x, anchor.y));
 
   // TODO: Move ! ... No process in any constructor !
-  for (AttachMap::const_iterator it = m.attached_members.begin();
-       it != m.attached_members.end();
-       ++it) {
-    attached_members[it->first] = it->second;
+  if (m.member_map_built) {
+    for (AttachMemberMap::const_iterator it = m.attached_members.begin();
+         it != m.attached_members.end();
+         ++it) {
+      attached_members[it->first] = it->second;
+    }
   }
 
-  AttachMap::iterator attachment_it = attached_members.begin();
-  for (; attachment_it != attached_members.end(); ++attachment_it)
-    attachment_it->second.SetAnchor(anchor);
+  for (AttachTypeMap::const_iterator it = m.attached_types.begin();
+       it != m.attached_types.end();
+       ++it) {
+    attached_types[it->first] = it->second;
+  }
 
   ResetMovement();
 }
@@ -179,6 +183,7 @@ Member::~Member()
 {
   delete spr;
   attached_members.clear();
+  attached_types.clear();
 }
 
 void Member::RotateSprite()
@@ -252,16 +257,15 @@ void Member::ApplySqueleton(Member * parent_member)
   // Set the position
   pos = parent->pos - anchor;
 
-  AttachMap::iterator itAttachedMember = parent->attached_members.find(type);
+  AttachTypeMap::iterator itAttachedType = parent->attached_types.find(type);
 
-  if (itAttachedMember != parent->attached_members.end()) {
-    pos += itAttachedMember->second[parent->spr->GetCurrentFrame()].point;
+  if (itAttachedType != parent->attached_types.end()) {
+    pos += itAttachedType->second[parent->spr->GetCurrentFrame()].point;
   }
 }
 
-
-// TODO lami : THE function to optimize !!! 30 % CPU !!!
-
+// We are building a cache in attached_members under the assumption that
+// the member <-> attached_type is unique (ie unique squeleton)
 void Member::ApplyMovement(const member_mvt &        mvt,
                            std::vector<junction *> & skel_lst)
 {
@@ -271,56 +275,33 @@ void Member::ApplyMovement(const member_mvt &        mvt,
   // spr == NULL when Member is the weapon
   uint frame = (spr) ? spr->GetCurrentFrame() : 0;
 
+  // Do we have to propagate the movement at all to the child?
+  bool check = mvt.GetAngle().IsNotZero();
+
   // We first apply to the child (makes computations simpler in this order):
-  if (mvt.GetAngle().IsNotZero()) {
-    for (AttachMap::iterator child = attached_members.begin();
+  if (check) {
+    for (AttachMemberMap::const_iterator child = attached_members.begin();
          child != attached_members.end();
          ++child) {
 
-      // Find this member in the skeleton:
-      for (std::vector<junction *>::iterator junction = skel_lst.begin();
-           junction != skel_lst.end();
-           ++junction) {
+      // Calculate the movement to apply to the child
+      member_mvt child_mvt;
+      child_mvt.SetAngle(mvt.GetAngle());
+      child_mvt.pos = mvt.pos;
 
-        Member *member = (*junction)->member;
-        if (member->type != child->first) {
-          continue;
-        }
-        //printf("Member %p -> attach %p\n", member, &child->second);
-        //printf("Attach %p -> member %p\n", &child->second, member);
+      (*child->second)[frame].Propagate(child_mvt.pos, mvt.GetAngle(), angle_rad);
 
-        // Calculate the movement to apply to the child
-        member_mvt child_mvt;
-        child_mvt.SetAngle(mvt.GetAngle());
-        child_mvt.pos = mvt.pos;
-
-        child->second[frame].Propagate(child_mvt.pos, mvt.GetAngle(), angle_rad);
-
-        // Apply recursively to children:
-        member->ApplyMovement(child_mvt, skel_lst);
-      }
+      // Apply recursively to children:
+      child->first->ApplyMovement(child_mvt, skel_lst);
     }
   } else {
     // No check to perform !
-    for (AttachMap::iterator child = attached_members.begin();
+    for (AttachMemberMap::iterator child = attached_members.begin();
          child != attached_members.end();
          ++child) {
 
-      // Find this member in the skeleton:
-      for (std::vector<junction *>::iterator junction = skel_lst.begin();
-           junction != skel_lst.end();
-           ++junction) {
-
-        Member *member = (*junction)->member;
-        if (member->type != child->first) {
-          continue;
-        }
-        //printf("Member %p -> attach %p\n", member, &child->second);
-        //printf("Attach %p -> member %p\n", &child->second, member);
-
-        // Apply recursively to children:
-        member->ApplyMovement(mvt, skel_lst);
-      }
+      // Apply recursively to children:
+      child->first->ApplyMovement(mvt, skel_lst);
     }
   }
 
@@ -339,6 +320,34 @@ void Member::ResetMovement()
   alpha     = 1.0;
   scale.x   = 1.0;
   scale.y   = 1.0;
+}
+
+void Member::BuildAttachMemberMap(const std::vector<c_junction*> & skel_lst)
+{
+  if (attached_types.empty())
+    return;
+  attached_members.clear();
+
+  for (AttachTypeMap::const_iterator child = attached_types.begin();
+       child != attached_types.end();
+       ++child) {
+
+    // Find this member in the skeleton:
+    for (std::vector<junction *>::const_iterator junction = skel_lst.begin();
+         junction != skel_lst.end();
+         ++junction) {
+
+      Member *member = (*junction)->member;
+      if (member->type == child->first) {
+        // Build the member map, but only have a pointer to the v_attached,
+        // in order to keep synch if needed, and save memory
+        attached_members[member] = &child->second;
+        break;
+      }
+    }
+  }
+  MSG_DEBUG("body", "Mapped %u/%u members to member %p of type %i!\n",
+            attached_members.size(), attached_types.size(), this, (int)type);
 }
 
 void WeaponMember::Draw(const Point2i & /*_pos*/,

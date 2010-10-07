@@ -39,9 +39,6 @@
 
 Body::Body(const xmlNode *     xml,
            const std::string & main_folder):
-  members_lst(),
-  clothes_lst(),
-  mvt_lst(),
   current_clothe(NULL),
   current_mvt(NULL),
   current_loop(0),
@@ -52,7 +49,6 @@ Body::Body(const xmlNode *     xml,
   last_refresh(0),
   walking(false),
   main_rotation_rad(0),
-  skel_lst(),
   direction(DIRECTION_RIGHT),
   animation_number(0),
   need_rebuild(false),
@@ -63,8 +59,6 @@ Body::Body(const xmlNode *     xml,
 }
 
 Body::Body(const Body & _body):
-  clothes_lst(),
-  mvt_lst(),
   current_clothe(NULL),
   current_mvt(NULL),
   current_loop(0),
@@ -75,7 +69,6 @@ Body::Body(const Body & _body):
   last_refresh(0),
   walking(false),
   main_rotation_rad(0),
-  skel_lst(),
   direction(DIRECTION_RIGHT),
   animation_number(_body.animation_number),
   need_rebuild(true),
@@ -246,14 +239,14 @@ Body::~Body()
   // Pointers inside those lists are freed from the body_list
   // Clean the members list
   std::map<std::string, Member*>::iterator itMember = members_lst.begin();
-  while(itMember != members_lst.end()) {
+  while (itMember != members_lst.end()) {
     delete itMember->second;
     ++itMember;
   }
 
   // Clean the clothes list
   std::map<std::string, Clothe*>::iterator itClothe = clothes_lst.begin();
-  while(itClothe != clothes_lst.end()) {
+  while (itClothe != clothes_lst.end()) {
     delete itClothe->second;
     ++itClothe;
   }
@@ -596,12 +589,13 @@ void Body::Draw(const Point2i & _pos)
 
 void Body::AddChildMembers(Member * parent)
 {
-  Member::AttachMap::const_iterator child = parent->GetAttachedMembers().begin();
+  const Member::AttachTypeMap& attached = parent->GetAttachedTypes();
+  Member::AttachTypeMap::const_iterator child = attached.begin();
 
   // Add child members of the parent member to the skeleton
   // and continue recursively with child members
   const std::vector<Member*>& layers = current_clothe->GetLayers();
-  for ( ; child != parent->GetAttachedMembers().end(); ++child) {
+  for ( ; child != attached.end(); ++child) {
 
     // Find if the current clothe uses this member:
     for (uint lay = 0; lay < layers.size(); lay++) {
@@ -614,7 +608,7 @@ void Body::AddChildMembers(Member * parent)
         skel_lst.push_back(body);
 
         // continue recursively
-        if (!member->GetAttachedMembers().empty()) {
+        if (!member->GetAttachedTypes().empty()) {
           AddChildMembers(member);
         }
       }
@@ -650,6 +644,10 @@ void Body::BuildSqueleton()
   }
 
   AddChildMembers(skel_lst.front()->member);
+
+  // Now that the skeleton is built, inform each member
+  for (uint i=0; i<skel_lst.size(); i++)
+    skel_lst[i]->member->BuildAttachMemberMap(skel_lst);
 }
 
 void Body::SetClothe(const std::string & name)

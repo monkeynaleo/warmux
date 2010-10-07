@@ -20,6 +20,8 @@
 
 #ifndef MEMBER_H
 #define MEMBER_H
+
+#include <assert.h>
 #include <map>
 #include <vector>
 #include <WORMUX_point.h>
@@ -45,7 +47,7 @@ typedef struct attachment
     }
   }
 
-  inline void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad)
+  void Propagate(Point2d& pos, const Double& mvt_angle, const Double& angle_rad) const
   {
     if (radius.IsNotZero()) {
       Double angle_init = angle + angle_rad;
@@ -77,14 +79,17 @@ typedef struct _xmlNode xmlNode;
 class Member
 {
 public:
-  typedef std::map<MemberType, v_attached> AttachMap;
+  typedef std::map<Member*, const v_attached*> AttachMemberMap;
+  typedef std::map<MemberType, v_attached> AttachTypeMap;
 
 private:
   Member* parent;
   Double  angle_rad;
   Double  alpha;
   bool    go_through_ground;
-  AttachMap attached_members;
+  AttachTypeMap   attached_types;
+  bool            member_map_built;
+  AttachMemberMap attached_members;
   Point2d pos;
   Point2d scale;
 
@@ -128,7 +133,9 @@ public:
 
   bool IsGoingThroughGround() const { return go_through_ground; };
 
-  const AttachMap& GetAttachedMembers() const { return attached_members; }
+  const AttachTypeMap&   GetAttachedTypes() const   { return attached_types; }
+
+  void BuildAttachMemberMap(const std::vector<c_junction*> & skel_lst);
 };
 
 class WeaponMember : public Member
