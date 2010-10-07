@@ -478,8 +478,9 @@ bool WeaponLauncher::p_Shoot()
 
 bool WeaponLauncher::ReloadLauncher()
 {
-  if (projectile)
+  if (projectile) {
     return false;
+  }
   projectile = GetProjectileInstance();
   return true;
 }
