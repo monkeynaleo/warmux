@@ -85,10 +85,9 @@ CreditsMenu::CreditsMenu()  :
   Menu("credit/background", vOk)
 {
   const Surface& window = GetMainWindow();
-  lbox_authors = new ScrollBox(Point2i(0.9*window.GetWidth(),
-                                       0.9*window.GetHeight() - 30));
-  lbox_authors->SetBackgroundColor(Color(0,0,0,200));
-  lbox_authors->SetPosition(0.05f*window.GetWidth(), 0.05f*window.GetHeight());
+  lbox_authors = new ScrollBox(window.GetSize()*0.9f - Point2i(0, 30));
+  lbox_authors->SetBackgroundColor(Color(0, 200));
+  lbox_authors->SetPosition(window.GetSize()*0.05f);
 
   PrepareAuthorsList();
 

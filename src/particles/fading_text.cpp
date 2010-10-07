@@ -33,7 +33,7 @@ const uint TEXT_FADE_TIME = 1000;
 FadingText::FadingText(const std::string & text) : ExplosionSmoke(20)
 {
   delete image;
-  image = new Sprite(Font::GetInstance(Font::FONT_MEDIUM)->CreateSurface(text, Color(0, 0, 0, 255)));
+  image = new Sprite(Font::GetInstance(Font::FONT_MEDIUM)->CreateSurface(text, Color(0, 255)));
   start_to_fade = Time::GetInstance()->Read() + INIT_DISPLAY_TIME;
 }
 
