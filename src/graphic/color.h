@@ -32,8 +32,19 @@ class Color
   Uint8 alpha;
 
 public:
-  Color(Uint8 r = 200, Uint8 g = 50, Uint8 b = 50, Uint8 a = 130)
+  Color()
+    { SetColor(200, 50, 50, 130); }
+  Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 130)
     { SetColor(r, g, b, a); }
+  Color(Uint8 grey, Uint8 a)
+    { SetColor(grey, grey, grey, a); }
+  Color(const Color& other)
+  {
+    red   = other.red;
+    green = other.green;
+    blue  = other.blue;
+    alpha = other.alpha;
+  }
 
   bool operator==(const Color &c) const
     { return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha; }
@@ -48,10 +59,10 @@ public:
     alpha = a;
   }
 
-  void SetRed(Uint8 r)   { this->red   = r; }
-  void SetGreen(Uint8 g) { this->green = g; }
-  void SetBlue(Uint8 b)  { this->blue  = b; }
-  void SetAlpha(Uint8 a) { this->alpha = a; }
+  void SetRed(Uint8 r)   { red   = r; }
+  void SetGreen(Uint8 g) { green = g; }
+  void SetBlue(Uint8 b)  { blue  = b; }
+  void SetAlpha(Uint8 a) { alpha = a; }
 
   Uint8 GetRed() const   { return red;   }
   Uint8 GetGreen() const { return green; }
