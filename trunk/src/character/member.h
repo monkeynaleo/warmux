@@ -79,7 +79,6 @@ typedef struct _xmlNode xmlNode;
 class Member
 {
 public:
-  typedef std::map<Member*, const v_attached*> AttachMemberMap;
   typedef std::map<MemberType, v_attached> AttachTypeMap;
 
 private:
@@ -88,10 +87,11 @@ private:
   Double  alpha;
   bool    go_through_ground;
   AttachTypeMap   attached_types;
-  bool            member_map_built;
-  AttachMemberMap attached_members;
   Point2d pos;
   Point2d scale;
+
+  typedef std::vector< std::pair<Member*, const v_attached*> > AttachMemberMap;
+  AttachMemberMap attached_members;
 
 protected:
   Sprite*     spr;
@@ -103,9 +103,9 @@ public:
 
   virtual ~Member();
   Member(const std::string& name_);
-  Member(const xmlNode *     xml,
-         const std::string & main_folder);
-  Member(const Member & m);
+  Member(const xmlNode*     xml,
+         const std::string& main_folder);
+  Member(const Member& m);
 
   virtual void Draw(const Point2i & _pos,
                     int             flip_x,
@@ -114,28 +114,27 @@ public:
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
-  void ApplyMovement(const member_mvt &                mvt,
-                     std::vector<c_junction*> & skel_lst);
-  void SetAngle(const Double & angle) { angle_rad = angle; };
+  void ApplyMovement(const member_mvt &mvt);
+  void SetAngle(const Double & angle) { angle_rad = angle; }
   void RefreshSprite(LRDirection direction);
 
-  void SetPos(const Point2d & _pos) { pos = _pos; };
+  void SetPos(const Point2d & _pos) { pos = _pos; }
 
-  const Sprite & GetSprite() const { return *spr; };
+  const Sprite & GetSprite() const { return *spr; }
 
-  const Point2i GetPos() const { return Point2i(pos.x, pos.y); };
-  const Point2d & GetPosFloat() const { return pos; };
+  const Point2i GetPos() const { return Point2i(pos.x, pos.y); }
+  const Point2d & GetPosFloat() const { return pos; }
 
-  const Point2i GetAnchorPos() const { return Point2i(anchor.x, anchor.y); };
+  const Point2i GetAnchorPos() const { return Point2i(anchor.x, anchor.y); }
 
-  const std::string & GetName() const { return name; };
-  const MemberType& GetType() const { return type; };
+  const std::string & GetName() const { return name; }
+  const MemberType& GetType() const { return type; }
 
   bool IsGoingThroughGround() const { return go_through_ground; };
 
-  const AttachTypeMap&   GetAttachedTypes() const   { return attached_types; }
+  const AttachTypeMap&   GetAttachedTypes() const { return attached_types; }
 
-  void BuildAttachMemberMap(const std::vector<c_junction*> & skel_lst);
+  void BuildAttachMemberMap(const std::vector<c_junction*>& skel_lst);
 };
 
 class WeaponMember : public Member

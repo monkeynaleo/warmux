@@ -330,7 +330,7 @@ void Body::ApplyMovement(Movement * mvt,
         ProcessFollowDirection(mb_mvt);
       }
 
-      (*member)->member->ApplyMovement(mb_mvt, skel_lst);
+      (*member)->member->ApplyMovement(mb_mvt);
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
@@ -423,7 +423,7 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
     }
 
     angle_mvt.SetAngle(angle);
-    member->ApplyMovement(angle_mvt, skel_lst);
+    member->ApplyMovement(angle_mvt);
   }
 }
 
@@ -514,7 +514,7 @@ void Body::Build()
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
   body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
   body_mvt.SetAngle(main_rotation_rad);
-  skel_lst.front()->member->ApplyMovement(body_mvt, skel_lst);
+  skel_lst.front()->member->ApplyMovement(body_mvt);
 
   need_rebuild = false;
 }
