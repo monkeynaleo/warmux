@@ -37,8 +37,9 @@ const uint BAR_HEIGHT = 50;
 // XXX Not used
 //const uint SPACING = 3;
 
-#define   ALPHA      127
-#define   BACK_ALPHA  0
+#define   ALPHA           127
+#define   BACK_ALPHA      0
+#define   BACKGROUND_GREY (255*6)/10
 
 static const Double MOVE_DURATION = 750.0;
 
@@ -85,7 +86,7 @@ TeamEnergy::TeamEnergy(Team * _team)
                              0, 0, 100, ProgressBar::PROG_BAR_VERTICAL);
 
   energy_bar->SetBorderColor(Color(255, 255, 255, ALPHA));
-  energy_bar->SetBackgroundColor(Color((255*6)/10, (255*6)/10, (255*6)/10, BACK_ALPHA));
+  energy_bar->SetBackgroundColor(Color(BACKGROUND_GREY, BACKGROUND_GREY, BACKGROUND_GREY, BACK_ALPHA));
 }
 
 TeamEnergy::~TeamEnergy()
