@@ -86,39 +86,6 @@ SpriteCache::SpriteCache(Sprite &p_sprite)
   rotation_cache_size = 0;
 }
 
-#if 0
-SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
-  sprite(p_sprite),
-  frames(other.frames)
-{
-  have_rotation_cache = false;
-  have_flipping_cache = false;
-  have_lastframe_cache = false;
-  rotation_cache_size = 0;
-
-  for (uint f=0; f<other.frames.size(); f++) {
-    Surface new_surf(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
-
-    // Disable per pixel alpha on the source surface
-    // in order to properly copy the alpha chanel to the destination suface
-    // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-    other.frames[f].surface.SetAlpha( 0, 0);
-    new_surf.Blit( other.frames[f].surface, NULL, NULL);
-
-    // re-enable the per pixel alpha in the
-    other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
-    frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
-  }
-
-  if (other.have_rotation_cache)
-    EnableRotationCache(other.rotation_cache_size);
-  if (other.have_flipping_cache)
-    EnableFlippingCache();
-  if (other.have_lastframe_cache)
-    EnableLastFrameCache();
-}
-#endif
-
 void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, uint cache_size)
 {
   //For each frame, we pre-render 'cache_size' rotated surface
@@ -153,31 +120,4 @@ void SpriteCache::EnableFlippingCache(std::vector<SpriteFrame> &sprite_frames)
 
   for (uint f=0; f<frames.size(); f++)
     frames[f].CreateFlippingCache(sprite_frames[f].surface, sprite.IsAntialiased());
-}
-
-void SpriteCache::EnableLastFrameCache()
-{
-  //The result of the last call to SDLgfx is kept in memory
-  //to display it again if rotation / scale / alpha didn't changed
-  ASSERT(!have_rotation_cache);
-  ASSERT(!have_flipping_cache);
-  have_lastframe_cache = true;
-}
-
-void SpriteCache::DisableLastFrameCache()
-{
-  //The result of the last call to SDLgfx is kept in memory
-  //to display it again if rotation / scale / alpha didn't changed
-  ASSERT(!have_rotation_cache);
-  ASSERT(!have_flipping_cache);
-  have_lastframe_cache = false;
-}
-
-void SpriteCache::InvalidLastFrame()
-{
-  //Free lastframe_cache if the next frame to be displayed
-  //is not the same as the last one.
-  if (!have_lastframe_cache)
-    return;
-  last_frame.Free();
 }

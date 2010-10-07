@@ -26,6 +26,7 @@
 #define _SPRITE_CACHE_H
 
 #include <vector>
+#include <assert.h>
 #include <WORMUX_base.h>
 #include "graphic/spriteframe.h"
 #include "graphic/surface.h"
@@ -69,11 +70,25 @@ public:
 public:
   explicit SpriteCache(Sprite &sprite);
 
-  void EnableRotationCache(std::vector<SpriteFrame> &frames, unsigned int cache_size);
+  void EnableRotationCache(std::vector<SpriteFrame> &frames, uint cache_size);
   void EnableFlippingCache(std::vector<SpriteFrame> &frames);
-  void EnableLastFrameCache();
-  void DisableLastFrameCache();
-  void InvalidLastFrame();
+  void EnableLastFrameCache()
+  {
+    //The result of the last call to SDLgfx is kept in memory
+    //to display it again if rotation / scale / alpha didn't changed
+    assert(!have_rotation_cache);
+    assert(!have_flipping_cache);
+    have_lastframe_cache = true;
+  }
+  void DisableLastFrameCache()
+  {
+    //The result of the last call to SDLgfx is kept in memory
+    //to display it again if rotation / scale / alpha didn't changed
+    assert(!have_rotation_cache);
+    assert(!have_flipping_cache);
+    have_lastframe_cache = false;
+  }
+  void InvalidLastFrame() { if (have_lastframe_cache) last_frame.Free(); }
 };
 
 #endif /* _SPRITE_CACHE_H */
