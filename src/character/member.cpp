@@ -142,7 +142,7 @@ Member::Member(const xmlNode *     xml,
   AttachMap::iterator attachment_it = attached_members.begin();
   for (; attachment_it != attached_members.end(); ++attachment_it)
     attachment_it->second.SetAnchor(anchor);
-  
+
   ResetMovement();
 }
 
@@ -272,32 +272,55 @@ void Member::ApplyMovement(const member_mvt &        mvt,
   uint frame = (spr) ? spr->GetCurrentFrame() : 0;
 
   // We first apply to the child (makes computations simpler in this order):
-  bool check = mvt.GetAngle().IsNotZero();
-  for (AttachMap::iterator child = attached_members.begin();
-       child != attached_members.end();
-       ++child) {
+  if (mvt.GetAngle().IsNotZero()) {
+    for (AttachMap::iterator child = attached_members.begin();
+         child != attached_members.end();
+         ++child) {
 
-    // Find this member in the skeleton:
-    for (std::vector<junction *>::iterator junction = skel_lst.begin();
-         junction != skel_lst.end();
-         ++junction) {
+      // Find this member in the skeleton:
+      for (std::vector<junction *>::iterator junction = skel_lst.begin();
+           junction != skel_lst.end();
+           ++junction) {
 
-      Member *member = (*junction)->member;
-      if (member->type != child->first) {
-        continue;
-      }
+        Member *member = (*junction)->member;
+        if (member->type != child->first) {
+          continue;
+        }
+        //printf("Member %p -> attach %p\n", member, &child->second);
+        //printf("Attach %p -> member %p\n", &child->second, member);
 
-      // Calculate the movement to apply to the child
-      member_mvt child_mvt;
-      child_mvt.SetAngle(mvt.GetAngle());
-      child_mvt.pos = mvt.pos;
+        // Calculate the movement to apply to the child
+        member_mvt child_mvt;
+        child_mvt.SetAngle(mvt.GetAngle());
+        child_mvt.pos = mvt.pos;
 
-      if (check) {
         child->second[frame].Propagate(child_mvt.pos, mvt.GetAngle(), angle_rad);
-      }
 
-      // Apply recursively to children:
-      member->ApplyMovement(child_mvt, skel_lst);
+        // Apply recursively to children:
+        member->ApplyMovement(child_mvt, skel_lst);
+      }
+    }
+  } else {
+    // No check to perform !
+    for (AttachMap::iterator child = attached_members.begin();
+         child != attached_members.end();
+         ++child) {
+
+      // Find this member in the skeleton:
+      for (std::vector<junction *>::iterator junction = skel_lst.begin();
+           junction != skel_lst.end();
+           ++junction) {
+
+        Member *member = (*junction)->member;
+        if (member->type != child->first) {
+          continue;
+        }
+        //printf("Member %p -> attach %p\n", member, &child->second);
+        //printf("Attach %p -> member %p\n", &child->second, member);
+
+        // Apply recursively to children:
+        member->ApplyMovement(mvt, skel_lst);
+      }
     }
   }
 

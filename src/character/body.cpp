@@ -489,10 +489,8 @@ void Body::Build()
     }
   }
 
-  if ((last_frame == current_frame) &&
-      !need_rebuild) {
+  if (last_frame == current_frame && !need_rebuild)
     return;
-  }
 
   ResetMovement();
   ApplySqueleton();
@@ -822,6 +820,8 @@ void Body::SetFrame(uint no)
             no,(int) current_mvt->GetFrames().size());
   }
 #endif
+  // no == current_frame occurs very infrequently (once when stopping walking)
+  // that it is probably more costly to check for it every time
   ASSERT(no < current_mvt->GetFrames().size());
   current_frame = no;
   current_loop  = 0;
@@ -855,7 +855,8 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 void Body::SetRotation(Double angle)
 {
   MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
-  if (main_rotation_rad != angle) {
+  // angle == main_rotation_rad is infrequent, but often enough
+  if (main_rotation_rad == angle) {
     main_rotation_rad = angle;
     need_rebuild = true;
   }
