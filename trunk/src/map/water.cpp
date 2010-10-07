@@ -262,11 +262,13 @@ void Water::Draw()
   int cameraRightPosition = cam->GetPosition().x + cam->GetSize().x;
   int y = water_top + (WAVE_HEIGHT_A + WAVE_HEIGHT_B) * 2 + WAVE_INC;
 
-  int h = y - cam->GetPosition().y;
-  Rectanglei bottom(0, h, cam->GetSize().x, cam->GetSize().y-h);
-  GetMainWindow().BoxColor(bottom, *type_color);
-  bottom.SetPosition(bottom.GetPosition() + cam->GetPosition());
-  GetWorld().ToRedrawOnMap(bottom);
+  int h = cam->GetSize().y - (y - cam->GetPosition().y);
+  if (h > 0) {
+    Rectanglei bottom(0, cam->GetSize().y-h, cam->GetSize().x, h);
+    GetMainWindow().BoxColor(bottom, *type_color);
+    bottom.SetPosition(bottom.GetPosition() + cam->GetPosition());
+    GetWorld().ToRedrawOnMap(bottom);
+  }
 
   CalculateWavePattern();
   y = water_top;
