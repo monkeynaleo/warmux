@@ -26,10 +26,17 @@
 
 class Color
 {
-  Uint8 red;
-  Uint8 green;
-  Uint8 blue;
-  Uint8 alpha;
+  union
+  {
+    struct
+    {
+      Uint8 red   : 8;
+      Uint8 green : 8;
+      Uint8 blue  : 8;
+      Uint8 alpha : 8;
+    } components;
+    Uint32 color;
+  } value;
 
 public:
   Color()
@@ -38,36 +45,28 @@ public:
     { SetColor(r, g, b, a); }
   Color(Uint8 grey, Uint8 a)
     { SetColor(grey, grey, grey, a); }
-  Color(const Color& other)
-  {
-    red   = other.red;
-    green = other.green;
-    blue  = other.blue;
-    alpha = other.alpha;
-  }
+  Color(const Color& other) { value.color = other.value.color; }
 
-  bool operator==(const Color &c) const
-    { return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha; }
-  bool operator!=(const Color &c) const
-    { return red!=c.red || green!=c.green || blue!=c.blue || alpha!=c.alpha; }
+  bool operator==(const Color &c) const { return value.color == c.value.color; }
+  bool operator!=(const Color &c) const { return value.color != c.value.color; }
 
   void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
   {
-    red   = r;
-    green = g;
-    blue  = b;
-    alpha = a;
+    value.components.red   = r;
+    value.components.green = g;
+    value.components.blue  = b;
+    value.components.alpha = a;
   }
 
-  void SetRed(Uint8 r)   { red   = r; }
-  void SetGreen(Uint8 g) { green = g; }
-  void SetBlue(Uint8 b)  { blue  = b; }
-  void SetAlpha(Uint8 a) { alpha = a; }
+  void SetRed(Uint8 r)   { value.components.red   = r; }
+  void SetGreen(Uint8 g) { value.components.green = g; }
+  void SetBlue(Uint8 b)  { value.components.blue  = b; }
+  void SetAlpha(Uint8 a) { value.components.alpha = a; }
 
-  Uint8 GetRed() const   { return red;   }
-  Uint8 GetGreen() const { return green; }
-  Uint8 GetBlue() const  { return blue;  }
-  Uint8 GetAlpha() const { return alpha; }
+  Uint8 GetRed() const   { return value.components.red;   }
+  Uint8 GetGreen() const { return value.components.green; }
+  Uint8 GetBlue() const  { return value.components.blue;  }
+  Uint8 GetAlpha() const { return value.components.alpha; }
   Uint32 GetColor() const;
 
   SDL_Color GetSDLColor() const;

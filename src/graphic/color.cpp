@@ -24,12 +24,8 @@
 
 SDL_Color Color::GetSDLColor() const
 {
-  SDL_Color sdlColor;
-
-  sdlColor.r = red;
-  sdlColor.g = green;
-  sdlColor.b = blue;
-  sdlColor.unused = alpha;
+  SDL_Color sdlColor = { value.components.red, value.components.green,
+                         value.components.blue, value.components.alpha };
 
   return sdlColor;
 }
@@ -37,8 +33,10 @@ SDL_Color Color::GetSDLColor() const
 Uint32 Color::GetColor() const
 {
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-  return (red << 24) | green << 16 | blue << 8 | alpha;
+  return (value.components.red << 24) | (value.components.green << 16) |
+         (value.components.blue << 8) | value.components.alpha;
 #else
-  return (alpha << 24) | blue << 16 | green << 8 | red;
+  return (value.components.alpha << 24) | (value.components.blue << 16) |
+         (value.components.green << 8) | value.components.red;
 #endif
 }
