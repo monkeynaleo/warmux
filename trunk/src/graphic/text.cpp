@@ -89,7 +89,7 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
     xmlText = Constants::WEB_SITE;
   }
 
-  Color textColor(0, 0, 0, 255);
+  Color textColor(0, 255);
   xmlFile->ReadHexColorAttr(textNode, "textColor", textColor);
 
   // Load the font size ... based on 72 DPI
@@ -107,7 +107,7 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
 
   bool activeShadow = false;
   xmlFile->ReadBoolAttr(textNode, "shadow", activeShadow);
-  Color shadowColor(255, 255, 255, 255);
+  Color shadowColor(255, 255);
   xmlFile->ReadHexColorAttr(textNode, "shadowColor", shadowColor);
 
   SetText(xmlText);
