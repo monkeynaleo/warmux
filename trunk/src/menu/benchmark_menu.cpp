@@ -25,6 +25,7 @@
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/stopwatch.h"
+#include "game/time.h"
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/horizontal_box.h"
@@ -168,10 +169,9 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 
       // Backup and set default map - should I save the config?
       std::string map_name = cfg->GetMapName();
-      int map_id_bak = MapsList::GetInstance()->GetActiveMapIndex();
-      int id = 6;
-      MapsList::GetInstance()->SelectMapByIndex(id);
-      if (!MapsList::GetInstance()->lst[id]->LoadBasicInfo()) {
+      MapsList *maps = MapsList::GetInstance();
+      int map_id_bak = maps->GetActiveMapIndex(); maps->SelectMapByName("banquise");
+      if (!maps->lst[maps->GetActiveMapIndex()]->LoadBasicInfo()) {
         fmt = "Error!";
         break;
       }
@@ -187,14 +187,16 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       // All set, run the game!
       Stopwatch   clock;
       float num = Game::UpdateGameRules()->Start(true);
+      uint  time = clock.GetValue();
+      uint  ot   = Time::GetInstance()->Read();
+      printf("Clock=%u   Time=%u\n", time, ot);
       score = (num * video->window.GetWidth()*video->window.GetHeight())
             / clock.GetValue();
       fmt = "%.0f";
 
       // Restore all!
       video->SetMaxFps(fps);
-      MapsList::GetInstance()->SelectMapByIndex(map_id_bak);
-      //MapsList::GetInstance()->SelectMapByName(map_name);
+      maps->SelectMapByIndex(map_id_bak);
       cfg->SetMapName(map_name);
       cfg->SetSoundEffects(sfx);
       cfg->SetSoundMusic(music);
