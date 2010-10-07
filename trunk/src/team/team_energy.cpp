@@ -63,30 +63,29 @@ void EnergyList::AddValue(uint value)
 }
 
 
-TeamEnergy::TeamEnergy(Team * _team):
-  energy_bar(NULL),
-  value(0),
-  new_value(0),
-  max_value(0),
-  team(_team),
-  icon(NULL),
-  t_team_energy(new Text("None", black_color,
-                         Font::FONT_SMALL, Font::FONT_BOLD, false)),
-  dx(0),
-  dy(0),
-  rank(0),
-  new_rank(0),
-  team_name("not initialized"),
-  move_start_time(0),
-  rank_tmp(0),
-  status(EnergyStatusOK),
-  energy_list()
+TeamEnergy::TeamEnergy(Team * _team)
+  : energy_bar(NULL)
+  , value(0)
+  , new_value(0)
+  , max_value(0)
+  , team(_team)
+  , icon(NULL)
+  , t_team_energy(new Text("None", black_color,
+                           Font::FONT_SMALL, Font::FONT_BOLD, false))
+  , dx(0)
+  , dy(0)
+  , rank(0)
+  , new_rank(0)
+  , team_name("not initialized")
+  , move_start_time(0)
+  , rank_tmp(0)
+  , status(EnergyStatusOK)
 {
   energy_bar = new EnergyBar(0, 0, BAR_WIDTH, BAR_HEIGHT,
                              0, 0, 100, ProgressBar::PROG_BAR_VERTICAL);
 
   energy_bar->SetBorderColor(Color(255, 255, 255, ALPHA));
-  energy_bar->SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
+  energy_bar->SetBackgroundColor(Color((255*6)/10, (255*6)/10, (255*6)/10, BACK_ALPHA));
 }
 
 TeamEnergy::~TeamEnergy()
@@ -94,9 +93,7 @@ TeamEnergy::~TeamEnergy()
   if (icon) delete icon;
   if (t_team_energy) delete t_team_energy;
 
-  if (NULL != energy_bar) {
-    delete energy_bar;
-  }
+  if (energy_bar) delete energy_bar;
 }
 
 void TeamEnergy::Config(uint _current_energy,
@@ -124,33 +121,33 @@ void TeamEnergy::SetIcon(const Surface & new_icon)
 void TeamEnergy::Refresh()
 {
   switch (status) {
-    // energy value from one team have changed
-    case EnergyStatusValueChange:
-      if(new_value > value)
-        value = new_value;
-      if(value > new_value)
-        --value;
-      if(value == new_value)
-        status = EnergyStatusWait;
-      break;
+  // energy value from one team have changed
+  case EnergyStatusValueChange:
+    if (new_value > value)
+      value = new_value;
+    if (value > new_value)
+      --value;
+    if (value == new_value)
+      status = EnergyStatusWait;
+    break;
 
-    // ranking is changing
-    case EnergyStatusRankChange:
-      Move();
-      break;
+  // ranking is changing
+  case EnergyStatusRankChange:
+    Move();
+    break;
 
-      // Currently no move
-    case EnergyStatusOK:
-      if( value != new_value && !IsMoving())
-        status = EnergyStatusValueChange;
-      else
-        if( rank != new_rank )
-          status = EnergyStatusRankChange;
-      break;
+    // Currently no move
+  case EnergyStatusOK:
+    if (value!=new_value && !IsMoving())
+      status = EnergyStatusValueChange;
+    else
+      if (rank != new_rank)
+        status = EnergyStatusRankChange;
+    break;
 
-    // This energy bar wait others bar before moving
-    case EnergyStatusWait:
-      break;
+  // This energy bar wait others bar before moving
+  case EnergyStatusWait:
+    break;
   }
 }
 
@@ -164,7 +161,7 @@ void TeamEnergy::Draw(const Point2i& pos)
 
 void TeamEnergy::SetValue(uint new_energy)
 {
-  if(new_energy == 0)
+  if (!new_energy)
     SetIcon(team->GetDeathFlag());
   new_value = new_energy;
   energy_list.AddValue(new_energy);
@@ -173,13 +170,13 @@ void TeamEnergy::SetValue(uint new_energy)
 // Move energy bar (change in ranking)
 void TeamEnergy::Move()
 {
-  if( value != new_value && !IsMoving()) {
+  if (value != new_value && !IsMoving()) {
     // Other energy bar are moving so waiting for others to move
     status = EnergyStatusWait;
     return;
   }
 
-  if( rank == new_rank && !IsMoving()) {
+  if (rank == new_rank && !IsMoving()) {
     // Others energy bar are moving
     status = EnergyStatusWait;
     return;
@@ -187,9 +184,8 @@ void TeamEnergy::Move()
 
   // teams ranking have changed
   Time * global_time = Time::GetInstance();
-  if( rank != new_rank )
-  {
-    if(move_start_time == 0)
+  if (rank != new_rank) {
+    if (!move_start_time)
       move_start_time = global_time->Read();
 
     dx = (int)(((Double)new_rank - rank) * (BAR_WIDTH + BAR_SPACING) * ((global_time->Read() - move_start_time) / MOVE_DURATION));
