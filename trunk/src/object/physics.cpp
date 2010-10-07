@@ -448,7 +448,7 @@ void Physics::RunPhysicalEngine()
   } else {
     ASSERT(now >= m_last_physical_engine_run);
   }
-  uint delta_t_ms = Time::GetInstance()->Read() - m_last_physical_engine_run;
+  uint delta_t_ms = now - m_last_physical_engine_run;
   Point2d oldPos;
   Point2d newPos;
 
