@@ -46,43 +46,48 @@
 
 class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList>
 {
-  private:
-    ObjectsList();
-    ~ObjectsList();
-    friend class Singleton<ObjectsList>;
+  ObjectsList();
+  ~ObjectsList();
+  friend class Singleton<ObjectsList>;
 
-    void RemoveOverlappedObjectReference(const PhysicalObj * obj);
+  void RemoveOverlappedObjectReference(const PhysicalObj * obj);
 
-  public:
-    typedef std::list<PhysicalObj*>::iterator iterator;
-    std::list<PhysicalObj*> overlapped_objects;
+public:
+  typedef std::list<PhysicalObj*>::iterator iterator;
+  std::list<PhysicalObj*> overlapped_objects;
 
-  public:
-    // Call the Refresh method of all the objects
-    void Refresh();
-    // Call the Draw method of all the objects
-    void Draw();
+public:
+  // Call the Refresh method of all the objects
+  void Refresh();
+  // Call the Draw method of all the objects
+  void Draw();
 
-    bool AllReady() const;
+  bool AllReady() const;
 
-    // Place mines randomly on the map
-    void PlaceMines();
-    // Place barrels randomly on the map
-    void PlaceBarrels();
+  // Place mines randomly on the map
+  void PlaceMines();
+  // Place barrels randomly on the map
+  void PlaceBarrels();
 
-    void FreeMem();
+  void FreeMem();
 
-    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
+  void AddObject(PhysicalObj * obj)
+  {
+    // bug #16834 and some others probably: set last runtime
+    // to a realistic value
+    obj->ResetLastRunTime();
+    push_back(obj);
+  }
 
-    // Overlapse handling
-    inline void RemoveObject(PhysicalObj * obj)
-    {
-      remove(obj);
-      RemoveOverlappedObjectReference(obj);
-    };
+  // Overlapse handling
+  void RemoveObject(PhysicalObj * obj)
+  {
+    remove(obj);
+    RemoveOverlappedObjectReference(obj);
+  }
 
-    void AddOverlappedObject(PhysicalObj * obj);
-    void RemoveOverlappedObject(PhysicalObj * obj);
+  void AddOverlappedObject(PhysicalObj * obj);
+  void RemoveOverlappedObject(PhysicalObj * obj);
 };
 
 //-----------------------------------------------------------------------------

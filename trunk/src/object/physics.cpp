@@ -439,6 +439,11 @@ Point2d Physics::ComputeNextXY(Double delta_t){
   return Point2d(m_pos_x.x0, m_pos_y.x0);
 }
 
+void Physics::ResetLastRunTime()
+{
+  m_last_physical_engine_run = Time::GetInstance()->Read();
+}
+
 void Physics::RunPhysicalEngine()
 {
   uint now = Time::GetInstance()->Read();

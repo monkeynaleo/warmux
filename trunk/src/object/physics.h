@@ -148,6 +148,7 @@ public:
 
   // Physical engine : update position (and state) with current time
   void RunPhysicalEngine();
+  void ResetLastRunTime();
 
   // Notify the son class that the object has moved.
   virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
