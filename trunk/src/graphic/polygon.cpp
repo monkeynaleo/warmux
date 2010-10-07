@@ -545,15 +545,17 @@ void Polygon::SetTexture(Surface * texture_surface)
 void Polygon::SetBorderColor(const Color & color)
 {
   if (!border_color)
-    border_color = new Color();
-  *border_color = color;
+    border_color = new Color(color);
+  else
+    *border_color = color;
 }
 
 void Polygon::SetPlaneColor(const Color & color)
 {
   if (!plane_color)
-    plane_color = new Color();
-  *plane_color = color;
+    plane_color = new Color(color);
+  else
+    *plane_color = color;
 }
 
 const Color & Polygon::GetBorderColor() const
