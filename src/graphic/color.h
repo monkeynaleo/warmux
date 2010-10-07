@@ -26,42 +26,40 @@
 
 class Color
 {
-  private:
-    Uint8 red;
-    Uint8 green;
-    Uint8 blue;
-    Uint8 alpha;
+  Uint8 red;
+  Uint8 green;
+  Uint8 blue;
+  Uint8 alpha;
 
-  public:
-    Color(Uint8 r = 200, Uint8 g = 50, Uint8 b = 50, Uint8 a = 130)
-      { SetColor(r, g, b, a); }
+public:
+  Color(Uint8 r = 200, Uint8 g = 50, Uint8 b = 50, Uint8 a = 130)
+    { SetColor(r, g, b, a); }
 
-    bool operator==(const Color &c) const
-      { return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha; }
-    bool operator!=(const Color &c) const
-      { return red!=c.red || green!=c.green || blue!=c.blue || alpha!=c.alpha; }
-    Color operator*(const Color &fact) const;
+  bool operator==(const Color &c) const
+    { return red==c.red && green==c.green && blue==c.blue && alpha==c.alpha; }
+  bool operator!=(const Color &c) const
+    { return red!=c.red || green!=c.green || blue!=c.blue || alpha!=c.alpha; }
 
-    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
-    {
-      red   = r;
-      green = g;
-      blue  = b;
-      alpha = a;
-    }
+  void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+  {
+    red   = r;
+    green = g;
+    blue  = b;
+    alpha = a;
+  }
 
-    void SetRed(Uint8 r)   { this->red   = r; }
-    void SetGreen(Uint8 g) { this->green = g; }
-    void SetBlue(Uint8 b)  { this->blue  = b; }
-    void SetAlpha(Uint8 a) { this->alpha = a; }
+  void SetRed(Uint8 r)   { this->red   = r; }
+  void SetGreen(Uint8 g) { this->green = g; }
+  void SetBlue(Uint8 b)  { this->blue  = b; }
+  void SetAlpha(Uint8 a) { this->alpha = a; }
 
-    Uint8 GetRed() const   { return red;   }
-    Uint8 GetGreen() const { return green; }
-    Uint8 GetBlue() const  { return blue;  }
-    Uint8 GetAlpha() const { return alpha; }
-    Uint32 GetColor() const;
+  Uint8 GetRed() const   { return red;   }
+  Uint8 GetGreen() const { return green; }
+  Uint8 GetBlue() const  { return blue;  }
+  Uint8 GetAlpha() const { return alpha; }
+  Uint32 GetColor() const;
 
-    SDL_Color GetSDLColor() const;
+  SDL_Color GetSDLColor() const;
 };
 
 #endif

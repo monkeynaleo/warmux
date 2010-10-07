@@ -22,22 +22,16 @@
 #include "graphic/color.h"
 #include <SDL.h>
 
-Color Color::operator*(const Color &fact) const{
-  return Color((Uint8) ((Uint32)red * fact.red / 255),
-               (Uint8) ((Uint32)green * fact.green / 255),
-               (Uint8) ((Uint32)blue * fact.blue / 255),
-               (Uint8) ((Uint32)alpha * fact.alpha / 255));
-}
+SDL_Color Color::GetSDLColor() const
+{
+  SDL_Color sdlColor;
 
-SDL_Color Color::GetSDLColor() const{
-        SDL_Color sdlColor;
+  sdlColor.r = red;
+  sdlColor.g = green;
+  sdlColor.b = blue;
+  sdlColor.unused = alpha;
 
-        sdlColor.r = red;
-        sdlColor.g = green;
-        sdlColor.b = blue;
-        sdlColor.unused = alpha;
-
-        return sdlColor;
+  return sdlColor;
 }
 
 Uint32 Color::GetColor() const
