@@ -72,7 +72,7 @@ void TextBox::BasicSetText(std::string const & new_txt)
     _new_txt.resize(max_nb_chars);
   }
 
-  const Font * font = Font::GetInstance(GetFontSize(), GetFontStyle());
+  //const Font * font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
   //if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText(_new_txt);
