@@ -306,7 +306,7 @@ void Member::ResetMovement()
   scale.y   = 1.0;
 }
 
-void Member::BuildAttachMemberMap(const std::vector<c_junction*> & skel_lst)
+void Member::BuildAttachMemberMap(const std::vector<junction*> & skel_lst)
 {
   if (attached_types.empty())
     return;

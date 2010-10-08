@@ -19,6 +19,7 @@
  * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 #include <iostream>
+#include "character/body.h"
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"

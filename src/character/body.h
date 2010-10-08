@@ -27,37 +27,20 @@
 #include <WORMUX_base.h>
 #include <WORMUX_point.h>
 #include "tool/xml_document.h"
-#include "character/movement.h"
 
 // Forward declarations
 class Character;
 class BodyList;
 class Member;
+class member_mvt;
 class Movement;
 class Clothe;
 class Profile;
+class junction;
 typedef struct _xmlNode xmlNode;
-
-/*
- * FIXME: this class is either very useless either very badly used.
- * It would be nice to keep members in private section. There is no
- * copy constructor, this is really suspect.... */
-class c_junction
-{
-public:
-  Member * member;
-  Member * parent;
-
-  c_junction():
-    member(NULL),
-    parent(NULL) {};
-};
-
-typedef class c_junction junction;
 
 class Body
 {
-private:
   friend class BodyList;
 
   std::map<std::string, Member *>   members_lst;

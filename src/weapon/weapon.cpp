@@ -43,12 +43,10 @@
 #include "tool/string_tools.h"
 
 #ifdef DEBUG
-#include "map/map.h"
-#endif
-
+# include "character/body.h"
+# include "map/map.h"
 // Enable it to debug the gun hole position
-#ifdef DEBUG
-//#define DEBUG_HOLE
+//# define DEBUG_HOLE
 #endif
 
 extern Profile *weapons_res_profile;
@@ -247,8 +245,8 @@ bool Weapon::Shoot()
             ActiveCharacter().GetY(),
             hand.GetX(),
             hand.GetY());
-  #endif
   ActiveCharacter().body->DebugState();
+  #endif
   if (!p_Shoot()) {
     MSG_DEBUG("weapon.shoot", "shoot has failed!!");
     return false;

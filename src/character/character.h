@@ -24,15 +24,14 @@
 
 #include <limits>
 #include <string>
-#include "character/body.h"
-#include "gui/energy_bar.h"
 #include <WORMUX_base.h>
 #include "object/physical_obj.h"
-#include "character/body.h"
 #include "interface/movable_by_user.h"
 
+class Body;
 class Text;
 class Team;
+class EnergyBar;
 class ParticleEngine;
 class DamageStatistics;
 
@@ -206,11 +205,15 @@ public:
   uint GetCharacterIndex() const;
 
   // Access to character info
-  const std::string& GetName() const;
-  bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
+  const std::string& GetName() const { return character_name; }
+  bool IsSameAs(const Character& other) const { return GetName() == other.GetName(); }
 
    // Hand position
-  void GetHandPosition(Point2i & result) const;
+  void GetHandPosition(Point2i & result) const
+  {
+    GetRelativeHandPosition(result);
+    result += GetPosition();
+  }
   void GetRelativeHandPosition(Point2i & result) const;
 
   // Damage report
@@ -241,14 +244,13 @@ public:
   void HandleKeyReleased_Down(bool slowly);
 
   void HandleKeyPressed_Jump();
-  void HandleKeyReleased_Jump() const {};
+  void HandleKeyReleased_Jump() const { }
 
   void HandleKeyPressed_HighJump();
-  void HandleKeyReleased_HighJump() const { };
+  void HandleKeyReleased_HighJump() const { }
 
   void HandleKeyPressed_BackJump();
-  void HandleKeyReleased_BackJump() const {};
-
+  void HandleKeyReleased_BackJump() const { }
 };
 
 #endif

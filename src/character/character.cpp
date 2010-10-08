@@ -22,6 +22,7 @@
 #include <sstream>
 #include <iostream>
 #include <WORMUX_random.h>
+#include "character/body.h"
 #include "character/character.h"
 #include "character/damage_stats.h"
 #include "game/config.h"
@@ -29,6 +30,7 @@
 #include "game/game.h"
 #include "game/time.h"
 #include "graphic/text.h"
+#include "gui/energy_bar.h"
 #include "include/action_handler.h"
 #include "interface/interface.h"
 #include "interface/cursor.h"
@@ -874,12 +876,6 @@ bool Character::IsActiveCharacter() const
 }
 
 // Hand position
-void Character::GetHandPosition(Point2i & result) const
-{
-  GetRelativeHandPosition(result);
-  result += GetPosition();
-}
-
 void Character::GetRelativeHandPosition(Point2i & result) const
 {
   body->GetRelativeHandPosition(result);
@@ -960,11 +956,6 @@ uint Character::GetCharacterIndex() const
   }
   ASSERT(false);
   return 0;
-}
-
-const std::string& Character::GetName() const
-{
-    return character_name;
 }
 
 // ###################################################################
