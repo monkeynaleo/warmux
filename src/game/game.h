@@ -74,6 +74,7 @@ private:
   // Set that the user requested a pause/end of the game
   bool                ask_for_menu;
   bool                ask_for_help_menu;
+  bool                ask_for_end;
 
   FramePerSecond      *fps;
 

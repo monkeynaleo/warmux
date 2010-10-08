@@ -19,8 +19,6 @@
  * Benchmark menu, where to measure various aspects of the game performance.
  *****************************************************************************/
 
-//#include "graphic/font.h"
-//#include "graphic/text.h"
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
@@ -176,21 +174,25 @@ bool BenchmarkMenu::Launch(BenchItem *b)
         break;
       }
 
-      // Set seeds - we'll set random ones afterwards
-      RandomLocal().SetSeed(0xABADCAFE);
-      RandomSync().SetSeed(0xABADCAFE);
-
       // Set max FPS
       Video *video = AppWormux::GetInstance()->video;
       int fps = video->GetMaxFps(); video->SetMaxFps(60);
 
+      // Set seeds - we'll set random ones afterwards
+      //RandomLocal().SetSeed(0xABADCAFE);
+      //RandomSync().SetSeed(0xABADCAFE);
+
       // All set, run the game!
-      Stopwatch   clock;
       float num  = Game::UpdateGameRules()->Start(true);
-      uint  time = Time::GetInstance()->Read();
-      score = (num * video->window.GetWidth()*video->window.GetHeight())
-            / time;
-      fmt = "%.0f";
+      if (num) {
+        uint  time = Time::GetInstance()->Read();
+        score = (num * video->window.GetWidth()*video->window.GetHeight())
+              / time;
+        if (RandomSync().GetSeed() == 3330675913U) fmt = "%.0f";
+        else fmt = "(Desynch) %.0f";
+      } else {
+        fmt = "Aborted";
+      }
 
       // Restore all!
       video->SetMaxFps(fps);
@@ -204,7 +206,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       cfg->SetGameMode(game_mode);
       GetTeamsList().SetPlayingList(list_bak);
 
-      ok = true;
+      ok = num == 0;
       break;
     }
   default: break;
