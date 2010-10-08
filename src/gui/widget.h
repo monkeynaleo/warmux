@@ -129,6 +129,10 @@ public:
   virtual bool IsWidgetBrowser() const { return false; };
 
   virtual void Pack() = 0;
+
+  // Clipping
+  Rectanglei GetClip(Rectanglei& backup) const;
+  void UnsetClip(Rectanglei& backup) const;
 };
 
 #endif
