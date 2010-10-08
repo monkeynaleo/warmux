@@ -31,9 +31,9 @@ protected:
   std::list<const LRMoveIntention *> lr_move_intentions;
   std::list<const UDMoveIntention *> ud_move_intentions;
 public:
-  const LRMoveIntention * GetLastLRMoveIntention()
+  const LRMoveIntention * GetLastLRMoveIntention() const
   {
-    return (lr_move_intentions.size() == 0) ? NULL : lr_move_intentions.back();
+    return (lr_move_intentions.empty()) ? NULL : lr_move_intentions.back();
   }
   void AddLRMoveIntention(const LRMoveIntention * intention)
   {
@@ -44,9 +44,9 @@ public:
     lr_move_intentions.remove(intention);
   }
 
-  const UDMoveIntention * GetLastUDMoveIntention()
+  const UDMoveIntention * GetLastUDMoveIntention() const
   {
-    return (ud_move_intentions.size() == 0) ? NULL : ud_move_intentions.back();
+    return (ud_move_intentions.empty()) ? NULL : ud_move_intentions.back();
   }
   void AddUDMoveIntention(const UDMoveIntention * intention)
   {
