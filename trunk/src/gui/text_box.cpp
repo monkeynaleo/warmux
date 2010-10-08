@@ -25,13 +25,14 @@
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
 
-TextBox::TextBox (const std::string &label, uint max_width,
-                  Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Label(label, max_width, fsize, fstyle,
+TextBox::TextBox(const std::string &label, uint width,
+                 Font::font_size_t fsize, Font::font_style_t fstyle) :
+  Label(label, 0, fsize, fstyle,
         white_color, Text::ALIGN_LEFT_TOP, true),
   max_nb_chars(0),
   cursor_pos(label.size())
 {
+  size.x = width;
   Widget::SetBorder(defaultOptionColorRect, 1);
   Widget::SetHighlightBgColor(highlightOptionColorBox);
 }
@@ -73,11 +74,11 @@ void TextBox::BasicSetText(std::string const & new_txt)
 
   const Font * font = Font::GetInstance(GetFontSize(), GetFontStyle());
 
-  if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
+  //if (font->GetWidth(_new_txt) < GetSizeX() - 5) {
     Label::SetText(_new_txt);
-  } else {
-    cursor_pos = GetText().size();
-  }
+  //} else {
+  //  cursor_pos = GetText().size();
+  //}
 }
 
 void TextBox::SetText(std::string const & new_txt)
@@ -110,8 +111,16 @@ bool TextBox::SendKey(const SDL_keysym & key)
 
 void TextBox::Draw(const Point2i & mousePosition) const
 {
+  Rectanglei clip;
+  Rectanglei wlr = GetClip(clip);
+  if (!wlr.GetSizeX() || !wlr.GetSizeY())
+      return;
+
   Label::Draw(mousePosition);
   DrawCursor(position, cursor_pos);
+
+  // Restore initial clip rectangle
+  UnsetClip(clip);
 }
 
 Widget * TextBox::ClickUp(const Point2i & mousePosition,
