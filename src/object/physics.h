@@ -154,7 +154,7 @@ public:
   virtual collision_t NotifyMove(Point2d oldPos, Point2d newPos) = 0;
 
   // Start moving
-  void StartMoving();
+  virtual void StartMoving();
 
   // Stop moving
   void StopMoving();
