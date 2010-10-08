@@ -71,12 +71,9 @@ bool Label::LoadXMLConfiguration()
   return true;
 }
 
-void Label::Draw(const Point2i & mousePosition) const
+void Label::Draw(const Point2i& /*mousePosition*/) const
 {
-  (void)mousePosition;
-
-  switch (align)
-  {
+  switch (align) {
   case Text::ALIGN_CENTER:
     DrawCenter(position + size/2);
     break;
@@ -104,7 +101,7 @@ void Label::Draw(const Point2i & mousePosition) const
 
 void Label::Pack()
 {
-  SetMaxWidth(size.x);
+  if (max_width) SetMaxWidth(size.x);
   size.y = GetHeight();
 }
 
@@ -114,7 +111,6 @@ void Label::SetText(const std::string & new_txt)
 
   Text::SetText(new_txt);
 
-  SetMaxWidth(size.x);
+  if (max_width) SetMaxWidth(size.x);
   size.y = GetHeight();
 }
-
