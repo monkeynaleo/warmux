@@ -70,11 +70,26 @@ public:
 };
 
 // Forward declaration
+class Member;
 class Sprite;
-class c_junction; //defined in body.h
 class member_mvt; //defined in movement.h
 class Profile;
 typedef struct _xmlNode xmlNode;
+
+/*
+ * FIXME: this class is either very useless either very badly used.
+ * It would be nice to keep members in private section. There is no
+ * copy constructor, this is really suspect.... */
+class junction
+{
+public:
+  Member * member;
+  Member * parent;
+
+  junction():
+    member(NULL),
+    parent(NULL) {};
+};
 
 class Member
 {
@@ -134,7 +149,7 @@ public:
 
   const AttachTypeMap&   GetAttachedTypes() const { return attached_types; }
 
-  void BuildAttachMemberMap(const std::vector<c_junction*>& skel_lst);
+  void BuildAttachMemberMap(const std::vector<junction*>& skel_lst);
 };
 
 class WeaponMember : public Member
