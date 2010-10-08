@@ -132,8 +132,11 @@ void Game::InitEverything()
   // initialize gaming data
   if (Network::GetInstance()->IsGameMaster())
     InitGameData_NetGameMaster();
-  else if (Network::GetInstance()->IsLocal() && !benching)
+  else if (benching) {
+    RandomSync().SetSeed(0xABADCAFE);
+  } else if (Network::GetInstance()->IsLocal()) {
     RandomSync().InitRandom();
+  }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
   // done in action_handler for clients
@@ -370,7 +373,7 @@ uint Game::Start(bool bench)
   JukeBox::GetInstance()->PlayMusic("menu");
 
   benching = false;
-  return fps->GetTotalFrames();
+  return (ask_for_end) ? 0 : fps->GetTotalFrames();
 }
 
 void Game::UnloadDatas(bool game_finished) const
@@ -432,6 +435,7 @@ Game::Game()
   , current_ObjBox(NULL)
   , ask_for_menu(false)
   , ask_for_help_menu(false)
+  , ask_for_end(false)
   , fps(new FramePerSecond())
   , delay(0)
   , time_of_next_frame(0)
@@ -482,7 +486,12 @@ void Game::RefreshInput()
     if (AppWormux::CheckInactive(evnt))
       continue;
 
-    if (!benching) {
+    if (benching) {
+      // Handle at least keyboard event - most will be ignored
+      if (SDL_KEYDOWN==evnt.type && SDLK_ESCAPE==evnt.key.keysym.sym) {
+        ask_for_end = true;
+      }
+    } else {
       // Mouse event
       if (Mouse::GetInstance()->HandleEvent(evnt))
         continue;
@@ -491,9 +500,6 @@ void Game::RefreshInput()
       Keyboard::GetInstance()->HandleKeyEvent(evnt);
       // Joystick event
       Joystick::GetInstance()->HandleKeyEvent(evnt);
-    } else {
-      // Handle at least keyboard event - most will be ignored
-      Keyboard::GetInstance()->HandleKeyEvent(evnt);
     }
   }
 
@@ -663,7 +669,12 @@ bool Game::Run()
   do {
     ask_for_menu = false;
     ask_for_help_menu = false;
+    ask_for_end = false;
     MainLoop();
+
+    if (ask_for_end) {
+      break;
+    }
 
     if (ask_for_menu && MenuQuitPause())
       break;
