@@ -330,3 +330,35 @@ void Widget::SetHighlightBgColor(const Color &_highlight_bg_color)
     NeedRedrawing();
   }
 }
+
+// backup must be passed back to UnsetClip!
+Rectanglei Widget::GetClip(Rectanglei& backup) const
+{
+  Rectanglei wlr = *this;
+  Rectanglei wlr_tmp;
+
+  // Get current clip rectangle in wlr_original, SDL clip rectangle is now garbage
+  SwapWindowClip(backup);
+  if (wlr.GetSizeX()>0 && wlr.GetSizeY()>0) {
+    // Clip widget clip rectangle with current one
+    wlr.Clip(backup);
+    if (!wlr.GetSizeX() || !wlr.GetSizeY()) {
+      SwapWindowClip(backup);
+      return wlr;
+    }
+    // Back up final clip rectangle
+    wlr_tmp = wlr;
+  } else {
+    // Clip rectangle was in fact garbage
+    wlr_tmp = wlr = backup;
+  }
+  // Set final clip rectangle, wlr_tmp now has the previous garbage clip rectangle
+  SwapWindowClip(wlr_tmp);
+
+  return wlr;
+}
+
+void Widget::UnsetClip(Rectanglei& backup) const
+{
+  SwapWindowClip(backup);
+}
