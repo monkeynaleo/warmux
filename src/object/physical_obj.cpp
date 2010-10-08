@@ -369,8 +369,8 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
   m_last_collided_object = collided_obj;
 
   // Make it rebound!!
-  MSG_DEBUG("physic.state", "m_name.c_str() rebounds at %s,%s", GetName().c_str(),
-            Double2str(contactPos.x).c_str(), Double2str(contactPos.y).c_str());
+  MSG_DEBUG("physic.state", "%s rebounds at %.3f,%.3f", GetName().c_str(),
+            contactPos.x.tofloat(), contactPos.y.tofloat());
 
   Rebound(contactPos, contactAngle);
   CheckRebound();
