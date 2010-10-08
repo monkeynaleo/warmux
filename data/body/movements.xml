@@ -16,7 +16,7 @@
 
 <!-- ###### Breathe ###### -->
 <movement name="breathe" duration_per_frame="190" nb_loops="0">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-left" dx="1"/>
@@ -70,7 +70,7 @@
 
 <!-- ###### Walk ###### -->
 <movement name="walk" duration_per_frame="30">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-left" angle="0"/>
     <member type="arm2-left" angle="0"/>
@@ -275,7 +275,7 @@
 
 <!-- ###### Jump ###### -->
 <movement name="jump" duration_per_frame="100">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_crosshair="true"/> <!-- follow_crosshair : the head rotates when we move the crosshair -->
     <member type="arm-left" angle="90" follow_speed="true"/> <!--follow_speed : rotates in the direction where the character is going -->
@@ -287,7 +287,7 @@
 
 <!-- ###### Fall ###### -->
 <movement name="fall" duration_per_frame="100">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_crosshair="true"/> <!-- follow_crosshair : the head rotates when we move the crosshair -->
     <member type="arm-left" angle="90" follow_speed="true"/> <!--follow_speed : rotates in the direction where the character is going -->
@@ -299,7 +299,7 @@
 
 <!-- ###### Hard land ###### -->
 <movement name="hard-land" duration_per_frame="50">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="foot-left" dy="-2"/>
     <member type="foot-right" dy="-2"/>
@@ -340,7 +340,7 @@
 
 <!-- ###### Drowned ###### -->
 <movement name="drowned" duration_per_frame="150">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="body" angle="90" follow_speed="true"/>
     <member type="head" angle="-140"/>
@@ -377,7 +377,7 @@
 
 <!-- ###### Fly ###### -->
 <movement name="fly" duration_per_frame="100">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="body" follow_speed="true" angle="70"/>
     <member type="head" angle="-30"/>
@@ -446,7 +446,7 @@
 
 <!-- ###### Black ###### -->
 <movement name="black" duration_per_frame="1000">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-left" angle="-40"/>
@@ -469,7 +469,7 @@
 
 <!-- ###### Yoyo ###### -->
 <movement name="animation0" duration_per_frame="5400" nb_loops="2"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-left" angle="-90"/>
     <member type="yoyo" dx="4" angle="90"/>
@@ -478,7 +478,7 @@
 
 <!-- ###### Tired ###### -->
 <movement name="animation1" duration_per_frame="100" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="body" angle="0"/>
     <member type="head" angle="0"/>
@@ -572,7 +572,7 @@
 
 <!-- ###### Hula-hoop ###### -->
 <movement name="animation2" duration_per_frame="50" nb_loops="3">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-left" angle="-110"/>
     <member type="arm-right" angle="110"/>
@@ -685,7 +685,7 @@
 
 <!-- ###### Looking around (lef/right) ###### -->
 <movement name="animation3" duration_per_frame="200" nb_loops="2"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="pupil-left" dx="0"/>
     <member type="pupil-right" dx="0"/>
@@ -754,7 +754,7 @@
 
 <!-- ###### Looking around (up/down) ###### -->
 <movement name="animation4" duration_per_frame="200" nb_loops="2"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="pupil-left" dy="0"/>
     <member type="pupil-right" dy="0"/>
@@ -830,7 +830,7 @@
 
 <!-- ###### Ninja-rope ###### -->
 <movement name="ninja-rope" duration_per_frame="100">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="body" angle="0" follow_speed="false" follow_direction="false"/>
     <member type="arm-left" angle="20"/>
@@ -844,7 +844,7 @@
 
 <!-- ###### Parachute ###### -->
 <movement name="parachute" duration_per_frame="180">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-right" angle="180"/>
     <member type="foot-left" angle="45"/>
@@ -903,7 +903,7 @@
 
 <!-- ###### Jetpack - no fire ###### -->
 <movement name="jetpack-nofire" duration_per_frame="100"> <!-- When jetpack is used, but no key is pressed -->
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-left" follow_speed="true"/>
     <member type="arm-right" follow_speed="true"/>
@@ -914,7 +914,7 @@
 
 <!-- ###### Jetpack - fire ###### -->
 <movement name="jetpack-fire" duration_per_frame="100"> <!-- When jetpack is used and a key is pressed -->
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="body" angle="45"/>
     <member type="tail" angle="-100"/>
@@ -942,7 +942,7 @@
 
 <!-- ###### Airhammer ###### -->
 <movement name="weapon-airhammer-begin-shoot" duration_per_frame="100" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="construct" angle="12" dy="-4"/>
   </frame>
@@ -950,7 +950,7 @@
 
 <!-- ###### Grenade ###### -->
 <movement name="weapon-grenade-begin-shoot" duration_per_frame="30" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="0"/>
@@ -1036,7 +1036,7 @@
 </movement>
 
 <movement name="weapon-grenade-end-shoot" duration_per_frame="30" nb_loops="50">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="false" angle="-90"/>
     <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
@@ -1059,7 +1059,7 @@
 
 <!-- ###### Bounceball ###### -->
 <movement name="weapon-bounce_ball-begin-shoot" duration_per_frame="50" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" angle="0"/>
     <member type="arm-right" angle="0"/>
@@ -1149,7 +1149,7 @@
 </movement>
 
 <movement name="weapon-bounce_ball-end-shoot" duration_per_frame="50" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" angle="40"/>
     <member type="arm-right" angle="120"/>
@@ -1204,7 +1204,7 @@
 
 <!-- ###### Bazooka ###### -->
 <movement name="weapon-bazooka-select" duration_per_frame="50" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="foot-left" dy="0"/>
     <member type="foot-right" angle="0"/>
@@ -1299,7 +1299,7 @@
 </movement>
 
 <movement name="weapon-bazooka-end-shoot" duration_per_frame="70" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="foot-left" dy="-4"/>
     <member type="foot-right" angle="90" dy="-4" dx="4"/>
@@ -1388,7 +1388,7 @@
 
 <!-- ###### gun ###### -->
 <movement name="weapon-gun-select" duration_per_frame="100" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-left" follow_crosshair="true" angle="0"/>
@@ -1409,7 +1409,7 @@
 
 <!-- ###### Dynamite ###### -->
 <movement name="weapon-dynamite-begin-shoot" duration_per_frame="30" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="0"/>
@@ -1453,7 +1453,7 @@
 </movement>
 
 <movement name="weapon-dynamite-end-shoot" duration_per_frame="30" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="-110"/>
@@ -1474,7 +1474,7 @@
 
 <!-- ###### Mine ###### -->
 <movement name="weapon-minelauncher-begin-shoot" duration_per_frame="60" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="0"/>
@@ -1502,7 +1502,7 @@
 </movement>
 
 <movement name="weapon-minelauncher-end-shoot" duration_per_frame="30" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
@@ -1535,7 +1535,7 @@
 
 <!-- ###### SuperTux ###### -->
 <movement name="weapon-tux-end-shoot" duration_per_frame="50" nb_loops="10">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="head" angle="-90"/>
     <member type="arm-left" angle="-135"/>
@@ -1640,7 +1640,7 @@
 
 <!-- ###### gnu ###### -->
 <movement name="weapon-gnulauncher-select" duration_per_frame="40" nb_loops="1">
-  <collision_rect left="4" right="5" top="0" bottom="1"/>
+  <collision_rect left="3" right="3" top="0" bottom="2"/>
   <frame>
     <member type="arm-left" follow_half_crosshair="true" angle="-15"/>
     <member type="arm-right" follow_half_crosshair="true" angle="-15"/>
