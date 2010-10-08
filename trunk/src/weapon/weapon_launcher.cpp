@@ -188,6 +188,7 @@ void WeaponProjectile::Shoot(Double strength)
 
   ShootSound();
 
+#if 0
   // bug #10236 : problem with flamethrower collision detection
   // Check if the object is colliding something between hand position and gun hole
   hand_position -= GetSize() / 2;
@@ -208,6 +209,18 @@ void WeaponProjectile::Shoot(Double strength)
     SetSpeed(strength, angle);
     PutOutOfGround(angle);
   }
+#else
+  Point2i hole_position = launcher->GetGunHolePosition() - GetSize() / 2;
+  Point2d f_hole_position = hole_position * METER_PER_PIXEL;
+  SetXY(hole_position);
+  PutOutOfGround(angle);
+  SetSpeed(strength, angle);
+
+  // Camera::FollowObject must be called after setting initial speed else
+  // camera_follow_closely will have no effect
+  Camera::GetInstance()->FollowObject(this, camera_follow_closely);
+  //PutOutOfGround(angle);
+#endif
 }
 
 void WeaponProjectile::ShootSound()
