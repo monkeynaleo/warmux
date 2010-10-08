@@ -36,7 +36,7 @@ protected:
 
 public:
   TextBox(const std::string &label,
-          uint max_width,
+          uint width,
           Font::font_size_t fsize = Font::FONT_SMALL,
           Font::font_style_t fstyle = Font::FONT_BOLD);
   TextBox(Profile * profile,
