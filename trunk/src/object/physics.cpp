@@ -412,7 +412,6 @@ void Physics::ComputeFallNextXY(Double delta_t)
 
   MSG_DBG_RTTI("physic.fall",
                "%s after - x:{%.1f, %.1f, %.1f - y:{%.1f, %.1f, %.1f} - delta:%.1f - extern_force: %.1f, %.1f",
-               typeid(*this).name(),
                typeid(*this).name(), m_pos_x.x0.tofloat(), m_pos_x.x1.tofloat(), m_pos_x.x2.tofloat(),
                m_pos_y.x0.tofloat(), m_pos_y.x1.tofloat(), m_pos_y.x2.tofloat(),
                delta_t.tofloat(), m_extern_force.x.tofloat(), m_extern_force.y.tofloat());
