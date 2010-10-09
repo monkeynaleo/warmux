@@ -145,7 +145,6 @@ void Sprite::SetRotation_HotSpot(const Point2i& new_hotspot)
 
 void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
 {
-
   const SpriteFrame & frame = GetCurrentFrameObject();
   const Surface & surface = frame.surface;
 
@@ -159,11 +158,7 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   rotation_point.x = halfWidth  - (tmp_surface.GetWidth()  >> 1);
   rotation_point.y = halfHeight - (tmp_surface.GetHeight() >> 1);
 
-  if (rot_hotspot == center) {
-    return;
-  }
-
-  if (rotation_rad == ZERO) {
+  if (rot_hotspot == center || !rotation_rad.IsNotZero()) {
     return;
   }
 
