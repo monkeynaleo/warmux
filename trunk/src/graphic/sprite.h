@@ -72,7 +72,11 @@ public:
   ~Sprite() { frames.clear(); }
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
-  Surface GetSurface() const;
+  Surface GetSurface() const
+  {
+    ASSERT(!current_surface.IsNull());
+    return current_surface;
+  }
 
   // Frame number
   uint GetCurrentFrame() const
