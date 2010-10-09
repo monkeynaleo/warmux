@@ -280,6 +280,7 @@ void Member::ApplyMovement(const member_mvt &mvt)
       // Apply recursively to children:
       attached_members[i].first->ApplyMovement(child_mvt);
     }
+    SetAngle(angle_rad + mvt.GetAngle());
   } else {
     // No check to perform !
     for (uint i=0; i<attached_members.size(); i++) {
@@ -290,7 +291,6 @@ void Member::ApplyMovement(const member_mvt &mvt)
   }
 
   // Apply the movement to the current member
-  SetAngle(angle_rad + mvt.GetAngle());
   pos   += mvt.pos;
   alpha *= mvt.alpha;
   scale = scale * mvt.scale;
