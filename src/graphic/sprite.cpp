@@ -352,9 +352,3 @@ void Sprite::RefreshSurface()
   if (rot_hotspot != center || rotation_rad.IsNotZero())
     Calculate_Rotation_Offset(current_surface);
 }
-
-Surface Sprite::GetSurface() const
-{
-  ASSERT(!current_surface.IsNull());
-  return current_surface;
-}
