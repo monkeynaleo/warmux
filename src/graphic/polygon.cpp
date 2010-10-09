@@ -45,12 +45,6 @@ PolygonBuffer::PolygonBuffer()
   buffer_size = 0;
 }
 
-PolygonBuffer::~PolygonBuffer()
-{
-  delete[] vx;
-  delete[] vy;
-}
-
 void PolygonBuffer::SetSize(const int size)
 {
   if (array_size > size) {
