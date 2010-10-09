@@ -42,7 +42,7 @@ public:
   int buffer_size;
   int array_size;
   PolygonBuffer();
-  ~PolygonBuffer();
+  ~PolygonBuffer() { delete[] vx; delete[] vy; }
   int GetSize() const { return buffer_size; }
   void SetSize(const int size);
 };

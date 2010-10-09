@@ -47,7 +47,7 @@ public:
   FramePerSecond();
   ~FramePerSecond();
   void Reset();
-  void AddOneFrame();
+  void AddOneFrame() { ++nb_frames.front(); total_frames++; }
   void Refresh();
   void Draw();
   uint GetTotalFrames() const { return total_frames; }

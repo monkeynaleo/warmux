@@ -61,12 +61,6 @@ void FramePerSecond::Reset()
     text = new Text("");
 }
 
-void FramePerSecond::AddOneFrame()
-{
-  ++nb_frames.front();
-  total_frames++;
-}
-
 void FramePerSecond::Refresh()
 {
   uint nv_temps = SDL_GetTicks();

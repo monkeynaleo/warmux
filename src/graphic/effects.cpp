@@ -32,7 +32,7 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
   Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
 
   sprite->SetSize(newSize);
-  for(unsigned int f=0; f < nbr_frames; f++){
+  for (uint f=0; f < nbr_frames; f++) {
     Surface b(newSize, SDL_SWSURFACE|SDL_SRCALPHA );
     b.Fill(0x00000000);
     b.SetAlpha(SDL_SRCALPHA, 0);
@@ -73,8 +73,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
   dy = 0;
 
   //sprite at bottom:
-  if( dt < per / 4 )
-  {
+  if (dt < per / 4) {
     Double dt2 = ((Double)((per / 4) - dt)) / ((Double)per / FOUR);
     scale_y =        TWO*dt2*dt2 - TWO*dt2 + ONE;
     scale_x = TWO - (TWO*dt2*dt2 - TWO*dt2 + ONE);
@@ -95,11 +94,10 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 // amp: amplitude of the oscillation in pixel
 // dur: duration of the oscillation in milliseconds
 // per: number of oscillations
-void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
+void Gelatine(int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
 {
   uint dt = Time::GetInstance()->Read() - t0;
-  if(dt >= dur)
-  {
+  if (dt >= dur) {
     y = 0;
     stretch_y = 0;
     return;
@@ -109,17 +107,13 @@ void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
   amp = amp * (dur - dt) / dur;
 
   //Scale
-  stretch_y = (int)(sin((Double)per * (Double)dt * TWO * PI / (Double)dur) * (Double)amp);
+  stretch_y = (int)(amp * sin((Double)per * (Double)dt * TWO * PI / (Double)dur));
 
   //Offset
-  if(stretch_y < 0.0)
-  {
+  if (stretch_y < 0) {
     y = stretch_y;
     stretch_y = -stretch_y;
-  }
-  else
-  {
+  } else {
     y = 0;
   }
 }
-
