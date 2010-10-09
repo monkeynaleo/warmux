@@ -27,27 +27,12 @@
 #include "map/map.h"
 #include "tool/affine_transform.h"
 
-CompositeShape::CompositeShape()
-{
-  layers.clear();
-}
-
-void CompositeShape::AddLayer(Polygon * poly)
-{
-  layers.push_back(poly);
-}
-
 void CompositeShape::ApplyTransformation(const AffineTransform2D & trans)
 {
   for(std::vector<Polygon *>::iterator poly = layers.begin();
       poly != layers.end(); poly++) {
     (*poly)->ApplyTransformation(trans);
   }
-}
-
-std::vector<Polygon *> CompositeShape::GetLayer() const
-{
-  return layers;
 }
 
 void CompositeShape::Draw(Surface * dest)

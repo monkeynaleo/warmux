@@ -154,50 +154,10 @@ void Font::Write(const Point2i & pos,
   GetWorld().ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
-void Font::WriteLeft(const Point2i & pos,
-                     const std::string & txt,
-                     const Color & color)
-{
-  Surface surface(Render(txt, color, true));
-  Write(pos, surface);
-}
-
-void Font::WriteLeftBottom(const Point2i & pos,
-                           const std::string & txt,
-                           const Color & color)
-{
-  Surface surface(Render(txt, color, true));
-  Write(pos - Point2i(0, surface.GetHeight()), surface);
-}
-
-void Font::WriteRight(const Point2i & pos,
-                      const std::string & txt,
-                      const Color & color)
-{
-  Surface surface(Render(txt, color, true));
-  Write(pos - Point2i(surface.GetWidth(), 0), surface);
-}
-
-void Font::WriteCenter (const Point2i & pos,
-                        const std::string & txt,
-                        const Color & color)
-{
-  Surface surface(Render(txt, color, true));
-  Write(pos - Point2i(surface.GetWidth()/2, surface.GetHeight()), surface);
-}
-
-void Font::WriteCenterTop(const Point2i & pos,
-                          const std::string & txt,
-                          const Color & color)
-{
-  Surface surface(Render(txt, color, true));
-  Write(pos - Point2i(surface.GetWidth()/2, 0), surface);
-}
-
 Surface Font::CreateSurface(const std::string & txt,
                             const Color & color)
 {
-  return Surface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor()) );
+  return Surface(TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor()));
 }
 
 Surface Font::Render(const std::string & txt,
@@ -246,11 +206,6 @@ int Font::GetHeight(const std::string & str) const
   int height = -1;
   TTF_SizeUTF8(m_font, str.c_str(), NULL, &height);
   return height;
-}
-
-Point2i Font::GetSize(const std::string & txt) const
-{
-  return Point2i(GetWidth(txt), GetHeight(txt));
 }
 
 Surface Font::GenerateSurface(const std::string & txt,

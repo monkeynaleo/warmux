@@ -29,14 +29,15 @@ class Polygon;
 class Surface;
 class AffineTransform2D;
 
-class CompositeShape {
- protected:
+class CompositeShape
+{
+protected:
   std::vector<Polygon *> layers;
- public:
-  CompositeShape();
-  void AddLayer(Polygon * poly);
+public:
+  CompositeShape() { }
+  void AddLayer(Polygon * poly) { layers.push_back(poly); }
   void ApplyTransformation(const AffineTransform2D & trans);
-  std::vector<Polygon *> GetLayer() const;
+  std::vector<Polygon *> GetLayer() const { return layers; }
   // Drawing
   void Draw(Surface * dest);
   void DrawOnScreen();
