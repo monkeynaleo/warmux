@@ -855,7 +855,7 @@ void Body::SetRotation(Double angle)
 {
   MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
   // angle == main_rotation_rad is infrequent, but often enough
-  if (main_rotation_rad == angle) {
+  if (main_rotation_rad != angle) {
     main_rotation_rad = angle;
     need_rebuild = true;
   }
