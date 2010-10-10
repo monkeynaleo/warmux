@@ -44,18 +44,3 @@ void WeaponsWeighting::RandomizeFactors()
     factor[type] = RandomLocal().GetDouble(min_factor[type], max_factor[type]).tofloat();
   }
 }
-
-float WeaponsWeighting::GetFactor(Weapon::Weapon_type type) const
-{
-  return factor[type];
-}
-
-void WeaponsWeighting::SetMinFactor(Weapon::Weapon_type type, float value)
-{
-  min_factor[type] = value;
-}
-
-void WeaponsWeighting::SetMaxFactor(Weapon::Weapon_type type, float value)
-{
-  max_factor[type] = value;
-}
