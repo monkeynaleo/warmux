@@ -118,7 +118,7 @@ public:
   void                    MakeTeleportParticles(const Point2i & pos,
                                                 const Point2i & dst);
   void                    DebugState() const;
-  void                    Rebuild(void) { need_rebuild = true; need_refreshsprites = true; }
+  void                    Rebuild(void) { need_rebuild = true; }
 
   //// SETTERS
   void                    SetClothe(const std::string & name);
@@ -146,7 +146,7 @@ public:
   uint                    GetMovementDuration() const;
   uint                    GetFrame() const { return current_frame; };
   uint                    GetFrameCount() const;
-  void                    RefreshSprites() { if (need_refreshsprites) InternalRefreshSprites(); }
+  void                    RefreshSprites() { /*if (need_refreshsprites)*/ InternalRefreshSprites(); }
 };
 
 #endif //BODY_H
