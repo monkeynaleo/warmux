@@ -97,6 +97,7 @@ class Body
   void LoadMovements(xmlNodeArray &  nodes,
                      const xmlNode * xml);
   void FreeSkeletonVector();
+  void InternalRefreshSprites();
 
 public:
   Body(const xmlNode *     xml,
@@ -110,7 +111,6 @@ public:
   void                    PlayAnimation();
   void                    Build();
   void                    UpdateWeaponPosition(const Point2i & pos);
-  void                    RefreshSprites();
   void                    StartWalking();
   void                    StopWalking();
   bool                    IsWalking() const { return walking; };
@@ -146,6 +146,7 @@ public:
   uint                    GetMovementDuration() const;
   uint                    GetFrame() const { return current_frame; };
   uint                    GetFrameCount() const;
+  void                    RefreshSprites() { if (need_refreshsprites) InternalRefreshSprites(); }
 };
 
 #endif //BODY_H
