@@ -50,7 +50,11 @@ Clothe::Clothe(const xmlNode *                  xml,
     std::map<std::string, Member *>::iterator itMember = members_lst.find(att);
 
     if (itMember != members_lst.end()) {
-      layers.push_back(itMember->second);
+      Member *member = itMember->second;
+      layers.push_back(member);
+      // Weapon member doesn't have a sprite, don't check it
+      if (member->GetType()!="weapon" && member->MustRefresh())
+        must_refresh.push_back(itMember->second);
     } else {
       std::cerr << "Undefined clothe member \"" << att << "\"" << std::endl;
     }
@@ -65,6 +69,10 @@ Clothe::Clothe(Clothe *                         c,
   for (std::vector<Member*>::iterator it = c->layers.begin();
       it != c->layers.end();
       ++it) {
-    layers.push_back(members_lst.find((*it)->GetName())->second);
+    Member *member = members_lst.find((*it)->GetName())->second;
+    layers.push_back(member);
+    // Weapon member doesn't have a sprite, don't check it
+    if (member->GetType()!="weapon" && member->MustRefresh())
+      must_refresh.push_back(member);
   }
 }

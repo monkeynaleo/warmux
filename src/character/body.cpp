@@ -522,22 +522,20 @@ void Body::Build()
   need_rebuild = false;
 }
 
-void Body::InternalRefreshSprites()
+void Body::RefreshSprites()
 {
-  if (!need_refreshsprites) {
-    return;
+  if (need_refreshsprites) {
+    const std::vector<Member*>& layers = current_clothe->GetLayers();
+    for (uint layer=0; layer < layers.size(); layer++)
+      if (layers[layer] != weapon_member)
+        layers[layer]->RefreshSprite(direction);
+
+    need_refreshsprites = false;
+  } else {
+    const std::vector<Member*>& must = current_clothe->MustRefreshMembers();
+    for (uint layer=0; layer < must.size(); layer++)
+      must[layer]->RefreshSprite(direction);
   }
-
-  const std::vector<Member*>& layers = current_clothe->GetLayers();
-  for (uint layer=0; layer < layers.size(); layer++) {
-    Member* member = layers[layer];
-
-    if (member != weapon_member) {
-      member->RefreshSprite(direction);
-    }
-  }
-
-  need_refreshsprites = false;
 }
 
 std::string Body::GetFrameLoop() const
@@ -716,6 +714,7 @@ void Body::PlayAnimation()
   std::ostringstream name;
   MSG_DEBUG("random.get", "Body::PlayAnimation()");
   name << "animation" << RandomSync().GetInt(0, animation_number - 1);
+  //name << "animation0";
   SetClotheOnce(name.str());
   SetMovementOnce(name.str());
 }

@@ -97,7 +97,6 @@ class Body
   void LoadMovements(xmlNodeArray &  nodes,
                      const xmlNode * xml);
   void FreeSkeletonVector();
-  void InternalRefreshSprites();
 
 public:
   Body(const xmlNode *     xml,
@@ -146,7 +145,7 @@ public:
   uint                    GetMovementDuration() const;
   uint                    GetFrame() const { return current_frame; };
   uint                    GetFrameCount() const;
-  void                    RefreshSprites() { /*if (need_refreshsprites)*/ InternalRefreshSprites(); }
+  void                    RefreshSprites();
 };
 
 #endif //BODY_H
