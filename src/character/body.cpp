@@ -449,7 +449,7 @@ void Body::ApplySqueleton()
 void Body::Build()
 {
   // Increase frame number if needed
-  unsigned int last_frame = current_frame;
+  uint last_frame = current_frame;
 
   if (walking || current_mvt->GetType() != "walk") {
 
@@ -466,8 +466,7 @@ void Body::Build()
         current_loop++;
 
         // Number of loops
-        if (current_mvt->GetNbLoops() != 0
-            && current_loop >= current_mvt->GetNbLoops()) {
+        if (current_mvt->GetNbLoops() && current_loop >= current_mvt->GetNbLoops()) {
 
           // animation is finished - set it to the very last frame
           current_loop = current_mvt->GetNbLoops() -1;
@@ -484,14 +483,16 @@ void Body::Build()
     }
   }
 
-  if (last_frame == current_frame && !need_rebuild)
+  if (last_frame == current_frame && !need_rebuild) {
     return;
+  }
+  need_refreshsprites = true;
 
   ResetMovement();
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  Double y_max = 0;
+  Double y_max = ZERO;
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
@@ -519,7 +520,6 @@ void Body::Build()
   skel_lst.front()->member->ApplyMovement(body_mvt);
 
   need_rebuild = false;
-  need_refreshsprites = true;
 }
 
 void Body::InternalRefreshSprites()
@@ -680,8 +680,6 @@ void Body::SetClothe(const std::string & name)
     MSG_DEBUG("body", "Clothe not found");
   }
 
-  need_refreshsprites = true;
-
   assert(current_clothe);
 }
 
@@ -709,8 +707,6 @@ void Body::SetMovement(const std::string & name)
   } else {
     MSG_DEBUG("body", "Movement not found");
   }
-
-  need_refreshsprites = true;
 
   assert(current_mvt);
 }
@@ -745,8 +741,6 @@ void Body::SetClotheOnce(const std::string & name)
     MSG_DEBUG("body", "Clothe not found");
   }
 
-  need_refreshsprites = true;
-
   assert(current_clothe);
 }
 
@@ -777,8 +771,6 @@ void Body::SetMovementOnce(const std::string & name)
   } else {
     MSG_DEBUG("body", "Movement not found");
   }
-
-  need_refreshsprites = true;
 
   assert(current_mvt);
 }
@@ -876,7 +868,6 @@ void Body::SetRotation(Double angle)
   if (main_rotation_rad != angle) {
     main_rotation_rad = angle;
     need_rebuild = true;
-    need_refreshsprites = true;
   }
 }
 
