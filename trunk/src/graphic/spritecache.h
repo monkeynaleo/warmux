@@ -51,7 +51,7 @@ public:
   Surface GetSurfaceForAngle(Double angle) const;
 
   SpriteFrameCache();
-  void CreateRotationCache(Surface &surface, unsigned int cache_size, bool smooth);
+  void CreateRotationCache(Surface &surface, uint cache_size, bool smooth);
   void CreateFlippingCache(Surface &surface, bool smooth);
 };
 
@@ -61,7 +61,7 @@ class SpriteCache
 
 public:
   bool have_rotation_cache;
-  unsigned int rotation_cache_size;
+  uint rotation_cache_size;
   bool have_flipping_cache;
   bool have_lastframe_cache;
   Surface last_frame;

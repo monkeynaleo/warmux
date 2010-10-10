@@ -27,10 +27,10 @@
 class SpriteFrame
 {
 public:
-  SpriteFrame( const Surface& surface, unsigned int delay=100);
+  SpriteFrame(const Surface& surface, uint delay=100);
 
   Surface surface;
-  unsigned int delay; // in millisecond
+  uint delay; // in millisecond
 };
 
 #endif

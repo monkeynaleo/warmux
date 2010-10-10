@@ -129,7 +129,7 @@ void Menu::LoadWidget(Profile * profile,
                       WidgetList * container)
 {
   XmlReader * xmlFile = profile->GetXMLDocument();
-  unsigned int widgetCount = xmlFile->GetNbChildren(rootMenuNode);
+  uint widgetCount = xmlFile->GetNbChildren(rootMenuNode);
   const xmlNode * currentNode = xmlFile->GetFirstChild(rootMenuNode);
   std::string currentNodeName;
 

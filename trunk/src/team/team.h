@@ -161,12 +161,12 @@ public:
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)
   int ReadNbAmmos() const;
-  int ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const;
+  int ReadNbAmmos(Weapon::Weapon_type weapon_type) const;
   int& AccessNbAmmos();
 
   // Number of current unit per ammo for the selected weapon.
   int ReadNbUnits() const;
-  int ReadNbUnits(const Weapon::Weapon_type &weapon_type) const;
+  int ReadNbUnits(Weapon::Weapon_type weapon_type) const;
   int& AccessNbUnits();
   void ResetNbUnits();
 

@@ -87,11 +87,6 @@ void TextBox::SetText(std::string const & new_txt)
   cursor_pos = GetText().size();
 }
 
-void TextBox::SetMaxNbChars(unsigned int nb_chars)
-{
-  max_nb_chars = nb_chars;
-}
-
 bool TextBox::SendKey(const SDL_keysym & key)
 {
   bool used = true;

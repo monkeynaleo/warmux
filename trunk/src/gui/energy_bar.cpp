@@ -76,7 +76,7 @@ bool EnergyBar::LoadXMLConfiguration()
   }
   XmlReader * xmlFile = profile->GetXMLDocument();
 
-  unsigned int thresholdCount = xmlFile->GetNbChildren(widgetNode);
+  uint thresholdCount = xmlFile->GetNbChildren(widgetNode);
   const xmlNode * thresholdNode = xmlFile->GetFirstChild(widgetNode);
   uint i = 0;
   float thresholdValue;

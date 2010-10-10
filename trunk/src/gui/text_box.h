@@ -30,7 +30,7 @@ struct SDL_keysym;
 class TextBox : public Label
 {
 protected:
-  unsigned int max_nb_chars;
+  uint max_nb_chars;
   std::string::size_type cursor_pos;
   virtual void BasicSetText(std::string const & new_txt);
 
@@ -46,7 +46,7 @@ public:
   virtual bool LoadXMLConfiguration();
 
   void SetText(std::string const & new_txt);
-  void SetMaxNbChars(unsigned int nb_chars);
+  void SetMaxNbChars(uint nb_chars) { max_nb_chars = nb_chars; }
 
   // From widget
   virtual bool SendKey(const SDL_keysym & key);

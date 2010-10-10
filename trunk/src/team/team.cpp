@@ -352,15 +352,15 @@ int Team::ReadNbUnits() const
   return ReadNbUnits(active_weapon->GetType());
 }
 
-int Team::ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const
+int Team::ReadNbAmmos(Weapon::Weapon_type weapon_type) const
 {
-  ASSERT((unsigned int)weapon_type < m_nb_ammos.size());
+  ASSERT((uint)weapon_type < m_nb_ammos.size());
   return m_nb_ammos[weapon_type];
 }
 
-int Team::ReadNbUnits(const Weapon::Weapon_type &weapon_type) const
+int Team::ReadNbUnits(Weapon::Weapon_type weapon_type) const
 {
-  ASSERT((unsigned int)weapon_type < m_nb_units.size());
+  ASSERT((uint)weapon_type < m_nb_units.size());
   return m_nb_units[weapon_type];
 }
 
