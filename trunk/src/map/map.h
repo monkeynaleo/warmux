@@ -118,7 +118,7 @@ public:
   // Dig the map using a picture
   void Dig(const Point2i& position, const Surface& alpha_sur);
   // Dig a circle hole in the map
-  void Dig(const Point2i& center, const uint radius);
+  void Dig(const Point2i& center, uint radius);
 
   // Insert a sprite into the ground
   void PutSprite(const Point2i& pos, const Sprite* spr);
