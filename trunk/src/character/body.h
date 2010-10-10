@@ -70,6 +70,7 @@ class Body
   LRDirection                       direction;
   int                               animation_number;
   bool                              need_rebuild;
+  bool                              need_refreshsprites;
   const Character *                 owner;
   const xmlNode *                   mainXmlNode;
   const std::string                 mainFolder;
@@ -117,7 +118,7 @@ public:
   void                    MakeTeleportParticles(const Point2i & pos,
                                                 const Point2i & dst);
   void                    DebugState() const;
-  void                    Rebuild(void) { need_rebuild = true; }
+  void                    Rebuild(void) { need_rebuild = true; need_refreshsprites = true; }
 
   //// SETTERS
   void                    SetClothe(const std::string & name);
@@ -128,8 +129,8 @@ public:
   void                    SetMovementOnce(const std::string & name);
   void                    SetRotation(Double angle);
   void                    SetFrame(uint no);
-  void                    SetDirection(LRDirection dir)    { direction = dir;      };
-  inline void             SetOwner(const Character * belonger) { owner     = belonger; };
+  void                    SetDirection(LRDirection dir)    { direction = dir; need_refreshsprites = true; }
+  inline void             SetOwner(const Character * belonger) { owner = belonger; }
 
   //// GETTERS
   static Point2i          GetSize() { return Point2i(30,45); };

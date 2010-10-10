@@ -53,6 +53,7 @@ Body::Body(const xmlNode *     xml,
   direction(DIRECTION_RIGHT),
   animation_number(0),
   need_rebuild(false),
+  need_refreshsprites(true),
   owner(NULL),
   mainXmlNode(xml),
   mainFolder(main_folder)
@@ -518,10 +519,17 @@ void Body::Build()
   skel_lst.front()->member->ApplyMovement(body_mvt);
 
   need_rebuild = false;
+  need_refreshsprites = true;
 }
 
 void Body::RefreshSprites()
 {
+  if (!need_refreshsprites) {
+    fprintf(stderr, "Saved\n");
+    return;
+  }
+  fprintf(stderr, "Done\n");
+
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size(); layer++) {
     Member* member = layers[layer];
@@ -530,6 +538,8 @@ void Body::RefreshSprites()
       member->RefreshSprite(direction);
     }
   }
+
+  need_refreshsprites = false;
 }
 
 std::string Body::GetFrameLoop() const
@@ -649,6 +659,8 @@ void Body::BuildSqueleton()
   // Now that the skeleton is built, inform each member
   for (uint i=0; i<skel_lst.size(); i++)
     skel_lst[i]->member->BuildAttachMemberMap(skel_lst);
+
+  need_refreshsprites = true;
 }
 
 void Body::SetClothe(const std::string & name)
@@ -670,7 +682,9 @@ void Body::SetClothe(const std::string & name)
     MSG_DEBUG("body", "Clothe not found");
   }
 
-  ASSERT(current_clothe != NULL);
+  need_refreshsprites = true;
+
+  assert(current_clothe);
 }
 
 void Body::SetMovement(const std::string & name)
@@ -698,7 +712,9 @@ void Body::SetMovement(const std::string & name)
     MSG_DEBUG("body", "Movement not found");
   }
 
-  ASSERT(current_mvt != NULL);
+  need_refreshsprites = true;
+
+  assert(current_mvt);
 }
 
 void Body::PlayAnimation()
@@ -731,7 +747,9 @@ void Body::SetClotheOnce(const std::string & name)
     MSG_DEBUG("body", "Clothe not found");
   }
 
-  ASSERT(current_clothe != NULL);
+  need_refreshsprites = true;
+
+  assert(current_clothe);
 }
 
 void Body::SetMovementOnce(const std::string & name)
@@ -762,7 +780,9 @@ void Body::SetMovementOnce(const std::string & name)
     MSG_DEBUG("body", "Movement not found");
   }
 
-  ASSERT(current_mvt != NULL);
+  need_refreshsprites = true;
+
+  assert(current_mvt);
 }
 
 void Body::GetTestRect(uint & l,
@@ -858,6 +878,7 @@ void Body::SetRotation(Double angle)
   if (main_rotation_rad != angle) {
     main_rotation_rad = angle;
     need_rebuild = true;
+    need_refreshsprites = true;
   }
 }
 
