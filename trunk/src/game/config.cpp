@@ -666,13 +666,13 @@ bool Config::SaveXml(bool save_current_teams)
     end = network_local_teams.end();
 
   for (int i=0; it != end; ++it, i++) {
-     std::string name = "team_"+int2str(i);
-     xmlNode* a_team = xmlAddChild(net_teams,
-                                   xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
-     doc.WriteElement(a_team, "id", (*it).id);
-     doc.WriteElement(a_team, "player_name", (*it).player_name);
-     doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
-     doc.WriteElement(a_team, "ai", (*it).ai);
+    std::string name = "team_"+int2str(i);
+    xmlNode* a_team = xmlAddChild(net_teams,
+                                  xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
+    doc.WriteElement(a_team, "id", (*it).id);
+    doc.WriteElement(a_team, "player_name", (*it).player_name);
+    doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
+    doc.WriteElement(a_team, "ai", (*it).ai);
   }
 
   //=== Misc ===

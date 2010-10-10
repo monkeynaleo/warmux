@@ -143,7 +143,7 @@ public:
   static Game * GetInstance();
   static std::string GetUniqueId();
   static void ResetUniqueIds() { last_unique_id = 0; }
-  static bool IsRunning();
+  static bool IsRunning() { return (singleton) ? singleton->IsGameLaunched() : false; }
   uint GetCurrentTurn();
   WeaponsList * GetWeaponsList() const { return weapons_list; }
   void UpdateTranslation();

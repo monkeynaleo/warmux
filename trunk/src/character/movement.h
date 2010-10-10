@@ -72,7 +72,7 @@ private:
 
 public:
   Movement(const xmlNode* xml);
-  ~Movement();
+  ~Movement() { };
 
   void SetType(const std::string& _type) { type = _type; }
   const std::string& GetType() const { return type; }

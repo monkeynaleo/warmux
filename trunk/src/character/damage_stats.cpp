@@ -58,8 +58,7 @@ void DamageStatistics::ResetDamage()
 
 void DamageStatistics::HandleMostDamage()
 {
-  if (current_total_damage > max_damage)
-  {
+  if (current_total_damage > max_damage) {
     max_damage = current_total_damage;
   }
   //MSG_DEBUG("damage", "%s most damage: %d\n", m_name, max_damage);
@@ -72,15 +71,12 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
   if (Dmg < 0) // the character have win energy with a bonus box for instance
     return;
 
-  if (owner.GetTeam().IsSameAs(other.GetTeam()))
-  {
+  if (owner.GetTeam().IsSameAs(other.GetTeam())) {
     if (owner.IsSameAs(other))
       damage_itself += Dmg;
     else
       damage_friendly_fire += Dmg;
-  }
-  else
-  {
+  } else {
     //MSG_DEBUG("damage", "%s damaged other team with %d\n", m_name, Dmg);
     damage_other_teams += Dmg;
   }

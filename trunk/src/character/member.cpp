@@ -341,7 +341,7 @@ void WeaponMember::Draw(const Point2i & /*_pos*/,
                         int /*flip_center*/,
                         LRDirection /*direction*/)
 {
-  if (!ActiveCharacter().IsDead() && (Game::END_TURN != Game::GetInstance()->ReadState()) ) {
+  if (!ActiveCharacter().IsDead() && Game::END_TURN != Game::GetInstance()->ReadState()) {
       ActiveTeam().crosshair.Draw();
       ActiveTeam().AccessWeapon().Draw();
   }
