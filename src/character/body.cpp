@@ -525,10 +525,8 @@ void Body::Build()
 void Body::RefreshSprites()
 {
   if (!need_refreshsprites) {
-    fprintf(stderr, "Saved\n");
     return;
   }
-  fprintf(stderr, "Done\n");
 
   const std::vector<Member*>& layers = current_clothe->GetLayers();
   for (uint layer=0; layer < layers.size(); layer++) {
