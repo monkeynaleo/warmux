@@ -148,7 +148,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       for (std::vector<Team*>::iterator it = list.begin(); it != list.end(); ++it) {
         printf("Setting %s\n", (*it)->GetName().c_str());
         (*it)->SetPlayerName("CPU");
-        (*it)->SetNbCharacters(20);
+        (*it)->SetNbCharacters(10);
         (*it)->SetAIName(DEFAULT_AI_NAME);
       }
 
