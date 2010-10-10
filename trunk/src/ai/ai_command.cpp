@@ -94,11 +94,6 @@ CommandList::~CommandList() {
   }
 }
 
-void CommandList::Add(AICommand * command)
-{
-  commands.push(command);
-}
-
 bool CommandList::Execute()
 {
   while (commands.size() > 0) {
@@ -111,11 +106,6 @@ bool CommandList::Execute()
     }
   }
   return true;
-}
-
-int CommandList::Size()
-{
-  return commands.size();
 }
 
 SetWeaponAngleCommand::SetWeaponAngleCommand(float angle):target_angle(angle)

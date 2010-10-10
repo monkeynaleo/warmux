@@ -84,8 +84,8 @@ class CommandList : public AICommand
     CommandList() {};
     virtual ~CommandList();
     virtual bool Execute();
-    void Add(AICommand * command);
-    int Size();
+    void Add(AICommand * command) { commands.push(command); }
+    int Size() { return commands.size(); }
 };
 
 class SetWeaponAngleCommand : public AICommand
