@@ -66,8 +66,6 @@ Member::Member(const xmlNode *     xml,
 
   // Load the sprite
   spr = GetResourceManager().LoadSprite(xml, name, main_folder);
-  //spr->EnableRotationCache(32);
-  //spr->EnableFlippingCache();
   spr->EnableLastFrameCache();
 
   // Get the various option
@@ -174,6 +172,11 @@ Member::~Member()
   delete spr;
   attached_members.clear();
   attached_types.clear();
+}
+
+bool Member::MustRefresh() const
+{
+  return spr->GetFrameCount() > 1;
 }
 
 void Member::RotateSprite()
