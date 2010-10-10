@@ -70,7 +70,7 @@ void Text::Init()
 {
   if (shadowed) {
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
-    bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
+    bg_offset = (uint)(width>>3); // shadow offset = 0.125ex
     if (bg_offset < 1) {
       bg_offset = 1;
     }

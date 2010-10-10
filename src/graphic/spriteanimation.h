@@ -45,7 +45,7 @@ private:
   Sprite &sprite;
 
   // Speed
-  unsigned int last_update;
+  uint last_update;
   int speed_factor;
   int frame_delta; // Used in Update() to get next frame
   int loop_wait;

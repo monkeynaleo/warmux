@@ -26,8 +26,8 @@
 //wave_amp is the amplitude of the wave on the left and the right side of the sprite
 //wave_per is the number of periods of the wave when it is waved at the maximum
 //used on the skin during teleportation
-Sprite* WaveSurface(Surface &a, unsigned int nbr_frames,
-                    unsigned int duration, Double wave_amp, Double wave_per){
+Sprite* WaveSurface(Surface &a, uint nbr_frames,
+                    uint duration, Double wave_amp, Double wave_per){
   Sprite* sprite = new Sprite;
   Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
 

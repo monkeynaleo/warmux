@@ -63,7 +63,7 @@ DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
 
 void DynamiteStick::Shoot(Double strength)
 {
-  unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
+  uint delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);

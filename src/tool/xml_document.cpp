@@ -366,7 +366,7 @@ bool XmlReader::ReadUint(const xmlNode* x,
   int val;
   if (!ReadInt(x, name, val)) return false;
   if (0 <= val) {
-    output = static_cast<unsigned int>(val);
+    output = (uint)val;
     return true;
   } else {
     return false;
@@ -473,12 +473,12 @@ bool XmlReader::ReadPixelAttr(const xmlNode* node,
 /** @see XmlReader::ReadString comment */
 bool XmlReader::ReadUintAttr(const xmlNode* x,
                              const std::string &name,
-                             unsigned int &output)
+                             uint &output)
 {
   int val;
   if (!ReadIntAttr(x, name, val)) return false;
   if (0 <= val) {
-    output = static_cast<unsigned int> (val);
+    output = (uint)val;
     return true;
   } else {
     return false;
@@ -529,7 +529,7 @@ bool XmlReader::ReadHexColorAttr(const xmlNode* node,
     // Error, malformed Hex Color
     return false;
   }
-  unsigned int red, green, blue, alpha;
+  uint red, green, blue, alpha;
 
   if (1 != sscanf(color.substr(0, 2).c_str(), "%2x", &red) ||
       1 != sscanf(color.substr(2, 2).c_str(), "%2x", &green) ||

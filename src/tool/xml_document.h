@@ -69,7 +69,7 @@ public:
                       int &output);
   static bool ReadUint(const xmlNode* father,
                        const std::string &name,
-                       unsigned int &output);
+                       uint &output);
   static bool ReadBool(const xmlNode* father,
                        const std::string &name,
                        bool &output);
@@ -104,7 +104,7 @@ public:
                      int & outputValue);
   static bool ReadUintAttr(const xmlNode* x,
                            const std::string &name,
-                           unsigned int &output);
+                           uint &output);
   static bool ReadBoolAttr(const xmlNode* x,
                            const std::string &name,
                            bool &output);
