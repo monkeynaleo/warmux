@@ -27,10 +27,11 @@
   <surface name="ico_quit_battle" file="menu/i_quit.png" />
 
   <surface name="ico_play" file="menu/i_play.png" />
-  <surface name="ico_options_menu" file="menu/i_options.png" />
   <surface name="ico_network_menu" file="menu/i_network.png" />
-  <surface name="ico_credits" file="menu/i_credits.png" />
+  <surface name="ico_options_menu" file="menu/i_options.png" />
+  <surface name="ico_benchmark_menu" file="menu/i_benchmark.png" />
   <surface name="ico_help" file="menu/i_help.png" />
+  <surface name="ico_credits" file="menu/i_credits.png" />
   <surface name="ico_quit" file="menu/i_quit.png" />
 
   <surface name="ico_update" file="menu/i_update.png" />

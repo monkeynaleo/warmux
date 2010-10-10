@@ -61,7 +61,7 @@ MainMenu::MainMenu() :
   options = new ButtonPic(_("Options"), "menu/ico_options_menu", size);
   box->AddWidget(options);
 
-  bench = new ButtonPic(_("Benchmark"), "menu/ico_options_menu", size);
+  bench = new ButtonPic(_("Benchmark"), "menu/ico_benchmark_menu", size);
   box->AddWidget(bench);
 
   help = new ButtonPic(_("Help"), "menu/ico_help", size);
