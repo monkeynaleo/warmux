@@ -111,7 +111,3 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
     }
   }
 }
-
-Movement::~Movement()
-{
-}
