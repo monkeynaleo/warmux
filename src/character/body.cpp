@@ -522,7 +522,7 @@ void Body::Build()
   need_refreshsprites = true;
 }
 
-void Body::RefreshSprites()
+void Body::InternalRefreshSprites()
 {
   if (!need_refreshsprites) {
     return;
