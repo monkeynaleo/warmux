@@ -53,7 +53,9 @@ Video::Video()
   icon = IMG_Load((config->GetDataDir() + "wormux_128x128.xpm").c_str());
 #endif
   // SDL_WM_SetIcon must be called before the first call to SDL_SetVideoMode
+if !defined(MAEMO)
   SDL_WM_SetIcon(icon, NULL);
+#endif
 
   window.SetSurface(NULL, false);
   window.SetAutoFree(false);
