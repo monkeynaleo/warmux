@@ -10,8 +10,8 @@
   <duration_turn>60</duration_turn>
   <duration_move_player>2</duration_move_player>
   <duration_exchange_player>1</duration_exchange_player>
-  <duration_before_death_mode>600</duration_before_death_mode>
-  <damage_per_turn_during_death_mode>5</damage_per_turn_during_death_mode>
+  <duration_before_death_mode>35</duration_before_death_mode>
+  <damage_per_turn_during_death_mode>100</damage_per_turn_during_death_mode>
 
   <gravity>30</gravity>
   <safe_fall>15</safe_fall>
@@ -21,16 +21,16 @@
   <nb_characters>6</nb_characters>
 
   <character>
-    <energy initial="100" maximum="200" />
+    <energy initial="1" maximum="200" />
     <jump strength="8" angle="-60" />
     <super_jump strength="11" angle="-80" />
     <back_jump strength="9" angle="-100" />
     <death_explosion>
-      <damage>10</damage>
+      <damage>10000</damage>
       <explosion_range>50</explosion_range>
       <particle_range>55</particle_range>
-      <blast_force>1500</blast_force>
-      <blast_range>50</blast_range>
+      <blast_force>150000</blast_force>
+      <blast_range>50000</blast_range>
     </death_explosion>
     <walking_pause>15</walking_pause>
   </character>
