@@ -103,7 +103,7 @@ public:
 
   //-------- Set position and size -------
 
-  void CanBeGhost(bool state);
+  void CanBeGhost(bool state) { can_be_ghost = state; }
 
   // Set/Get position
   void SetX(Double x) { SetXY( Point2d(x, GetYDouble()) ); };

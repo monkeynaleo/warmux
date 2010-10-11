@@ -240,7 +240,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
         tmpPos.x = InRange_Long(tmpPos.x, 0, GetWorld().GetWidth() - GetWidth() - 1);
         tmpPos.y = InRange_Long(tmpPos.y, 0, GetWorld().GetHeight() - GetHeight() - 1);
         MSG_DEBUG("physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",
-                  GetName().c_str(), tmpPos.x, tmpPos.y );
+                  GetName().c_str(), tmpPos.x, tmpPos.y);
         collision = COLLISION_ON_GROUND;
         break;
       }
@@ -258,7 +258,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     collided_obj = CollidedObjectXY(tmpPos);
     if (collided_obj) {
       if (!m_go_through_objects || m_last_collided_object != collided_obj) {
-        MSG_DEBUG("physic.state", "%s collide on %s", GetName().c_str(), collided_obj->GetName().c_str() );
+        MSG_DEBUG("physic.state", "%s collide on %s", GetName().c_str(), collided_obj->GetName().c_str());
 
         if (m_go_through_objects) {
           SignalObjectCollision(GetSpeed(), collided_obj, collided_obj->GetSpeed());
@@ -554,8 +554,8 @@ void PhysicalObj::GoOutOfWater()
 void PhysicalObj::SignalRebound()
 {
   // TO CLEAN...
-   if (!m_rebound_sound.empty())
-     JukeBox::GetInstance()->Play("default", m_rebound_sound);
+  if (!m_rebound_sound.empty())
+    JukeBox::GetInstance()->Play("default", m_rebound_sound);
 
   // It's ok to collide the same object again
   m_last_collided_object = NULL;
@@ -583,11 +583,6 @@ void PhysicalObj::SetCollisionModel(bool collides_with_ground,
   }
 }
 
-void PhysicalObj::CanBeGhost(bool state)
-{
-  can_be_ghost = state;
-}
-
 void PhysicalObj::CheckRebound()
 {
   // If we bounce twice in a row at the same place, stop bouncing
@@ -604,7 +599,8 @@ void PhysicalObj::CheckRebound()
   m_rebound_position = GetPosition();
 }
 
-bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const{
+bool PhysicalObj::IsOutsideWorldXY(const Point2i& position) const
+{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
