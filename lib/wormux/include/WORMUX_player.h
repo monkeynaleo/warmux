@@ -51,24 +51,28 @@ private:
 public:
   Player(uint player_id, const std::string& nickname);
   Player();
-  ~Player();
-  void Disconnect();
+  ~Player() { Disconnect(); }
+  void Disconnect()
+  {
+    // It's up to the program using class Player to define WORMUX_DisconnectPlayer();
+    WORMUX_DisconnectPlayer(*this);
+  }
 
-  void SetId(uint player_id);
-  uint GetId() const;
+  void SetId(uint _player_id) { player_id = _player_id; }
+  uint GetId() const { return player_id; }
 
-  void SetNickname(const std::string& nickname);
-  const std::string& GetNickname() const;
+  void SetNickname(const std::string& _nickname) { nickname = _nickname; }
+  const std::string& GetNickname() const { return nickname; }
 
   bool AddTeam(const ConfigTeam& team_conf);
   bool RemoveTeam(const std::string& team_id);
   bool UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_conf);
 
-  uint GetNbTeams() const;
-  const std::list<ConfigTeam> & GetTeams() const;
+  uint GetNbTeams() const { return owned_teams.size(); }
+  const std::list<ConfigTeam> & GetTeams() const { return owned_teams; }
 
-  void SetState(State _state);
-  State GetState() const;
+  void SetState(State _state) { state = _state; }
+  State GetState() const { return state; }
 
   static std::string GetDefaultNickname();
 };
