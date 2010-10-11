@@ -180,21 +180,6 @@ Wind::Wind():
 {
 }
 
-Wind::~Wind()
-{
-  RemoveAllParticles();
-}
-
-Double Wind::GetStrength() const
-{
-  return m_nv_val * WIND_STRENGTH / 100.0;
-}
-
-void Wind::SetVal(int val)
-{
-  m_nv_val = val;
-}
-
 void Wind::RemoveAllParticles()
 {
   iterator it = particles.begin(), end = particles.end();

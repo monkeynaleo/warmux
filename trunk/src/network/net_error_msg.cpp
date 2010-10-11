@@ -25,33 +25,15 @@
 
 const std::string NetworkErrorToString(connection_state_t err)
 {
-  std::string msg;
-  switch(err)
-  {
-  case CONNECTED:
-    msg = _("Connected !");
-    break;
-  case CONN_BAD_HOST:
-    msg = _("Unable to contact the host.");
-    break;
-  case CONN_BAD_PORT:
-    msg = _("Unable to use this port!");
-    break;
-  case CONN_BAD_SOCKET:
-    msg = _("Bad socket ...");
-    break;
-  case CONN_REJECTED:
-    msg = _("The server rejected the connection.");
-    break;
-  case CONN_TIMEOUT:
-    msg = _("The connection timed out. Check there is no firewall in the way!");
-    break;
-  case CONN_WRONG_PASSWORD:
-    msg = _("The server rejected the connection: wrong password!");
-    break;
+  switch(err) {
+  case CONNECTED:        return _("Connected !");
+  case CONN_BAD_HOST:    return _("Unable to contact the host.");
+  case CONN_BAD_PORT:    return _("Unable to use this port!");
+  case CONN_BAD_SOCKET:  return _("Bad socket ...");
+  case CONN_REJECTED:    return _("The server rejected the connection.");
+  case CONN_TIMEOUT:     return _("The connection timed out. Check there is no firewall in the way!");
+  case CONN_WRONG_PASSWORD: return _("The server rejected the connection: wrong password!");
   default: ASSERT(false);
   }
-
-  return msg;
 }
 

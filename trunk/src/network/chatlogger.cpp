@@ -54,11 +54,6 @@ ChatLogger::ChatLogger()
     this->LogMessage(timestamp);
 }
 
-ChatLogger::~ChatLogger()
-{
-  m_logfilename.close();
-}
-
 void ChatLogger::LogMessage(const std::string &msg)
 {
   time_t t;
@@ -79,14 +74,4 @@ void ChatLogger::LogMessage(const std::string &msg)
   }
 
   m_logfilename << timestamp << msg << std::endl << std::flush;
-}
-
-void ChatLogger::LogMessageIfOpen(const std::string &msg)
-{
-  if (singleton) singleton->LogMessage(msg);
-}
-
-void ChatLogger::CloseIfOpen()
-{
-  if (singleton) singleton->CleanUp();
 }
