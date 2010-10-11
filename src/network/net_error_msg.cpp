@@ -33,7 +33,7 @@ const std::string NetworkErrorToString(connection_state_t err)
   case CONN_REJECTED:    return _("The server rejected the connection.");
   case CONN_TIMEOUT:     return _("The connection timed out. Check there is no firewall in the way!");
   case CONN_WRONG_PASSWORD: return _("The server rejected the connection: wrong password!");
-  default: ASSERT(false);
+  default: ASSERT(false); return "";
   }
 }
 
