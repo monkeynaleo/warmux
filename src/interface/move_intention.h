@@ -27,18 +27,17 @@
 template<typename T>
 class MoveIntention
 {
-  private:
-    T direction;
-    bool slowly;
-  public:
-    MoveIntention(T direction, bool slowly):
-      direction(direction),
-      slowly(slowly)
-    {
-      /* see initializer list */
-    }
-    T GetDirection() const { return direction; }
-    bool IsToDoItSlowly() const { return slowly; }
+  T direction;
+  bool slowly;
+public:
+  MoveIntention(T direction, bool slowly):
+    direction(direction),
+    slowly(slowly)
+  {
+    /* see initializer list */
+  }
+  T GetDirection() const { return direction; }
+  bool IsToDoItSlowly() const { return slowly; }
 };
 
 

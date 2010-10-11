@@ -147,11 +147,6 @@ void WeaponMenuItem::Draw(Surface * dest)
   }
 }
 
-void WeaponMenuItem::SetParent(WeaponsMenu *parent)
-{
-  m_parent = parent;
-}
-
 
 WeaponsMenu::WeaponsMenu()
   : m_not_yet_available(NULL)

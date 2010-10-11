@@ -253,7 +253,7 @@ void Mouse::GetDesignatedCharacter() const
   // No character is pointed... what about the active one ?
   if (Interface::GetConstInstance()->character_under_cursor
       && ActiveCharacter().GetRect().Contains(pos_monde)) {
-      Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
+    Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
 
 }
@@ -349,8 +349,7 @@ void Mouse::Draw() const
 void Mouse::Show()
 {
 #ifndef HAVE_TOUCHSCREEN
-  if (((Time::GetConstInstance()->Read()-last_hide_time) > 10000) && (visible == MOUSE_HIDDEN))
-  {
+  if (Time::GetConstInstance()->Read()-last_hide_time > 10000 && visible == MOUSE_HIDDEN) {
     CenterPointer();
   }
 #endif
