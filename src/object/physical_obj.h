@@ -148,6 +148,8 @@ public:
   const Point2i GetCenter() const { return Point2i(GetCenterX(), GetCenterY()); };
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
   bool CollidesWithGround() const { return m_collides_with_ground; }
+  // This is a hack
+  bool CanBeBlasted() const { return m_collides_with_ground && m_go_through_objects; }
   bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------

@@ -155,13 +155,14 @@ void ApplyExplosion (const Point2i &pos,
   FOR_EACH_OBJECT(it) {
    PhysicalObj *obj = *it;
 
-   if (obj->CollidesWithGround() && !obj->IsGhost()) {
+   // CanBeBlasted() is a hack
+   if (obj->CanBeBlasted() && !obj->IsGhost()) {
      Double distance = pos.Distance(obj->GetCenter());
-     if(distance < ONE)
+     if (distance < ONE)
        distance = ONE;
 
      int dmg = GetDamageFromExplosion(config, distance);
-     if (dmg != 0) {
+     if (dmg) {
        obj->SetEnergyDelta(-dmg, player);
      }
 
@@ -175,7 +176,7 @@ void ApplyExplosion (const Point2i &pos,
 
        ASSERT(obj->GetMass().IsNotZero());
 
-       obj->AddSpeed (force / obj->GetMass(), angle);
+       obj->AddSpeed(force / obj->GetMass(), angle);
      }
    }
  }
@@ -192,12 +193,11 @@ void ApplyExplosion (const Point2i &pos,
   }
 
   // Shake the camera (FIXME: use actual vectors?)
-  if (config.explosion_range>25 && config.damage>0 )
-  {
+  if (config.explosion_range>25 && config.damage>0) {
      int reduced_range = ( int )config.explosion_range / 2;
      Camera::GetInstance()->Shake((int)(config.explosion_range * 15),
                                   Point2i(RandomLocal().GetInt(-reduced_range, reduced_range),
                                           (int)config.explosion_range),
                                   Point2i( 0, 0 ));
-  };
+  }
 }
