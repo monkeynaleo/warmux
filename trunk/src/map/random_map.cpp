@@ -72,17 +72,6 @@ RandomMap::RandomMap(Profile *profile, const int width, const int height)
   element_list.clear();
 }
 
-void RandomMap::SetSize(const int width, const int height)
-{
-  this->width = width;
-  this->height = height;
-}
-
-void RandomMap::AddElement(const Surface * object, const Point2i& position)
-{
-  element_list.push_back(MapElement(*object, position));
-}
-
 void RandomMap::DrawElement()
 {
   for (std::vector<MapElement>::iterator elt = element_list.begin(); elt != element_list.end(); elt++) {

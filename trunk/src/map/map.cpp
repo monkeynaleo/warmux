@@ -38,11 +38,6 @@ const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
 const uint AUTHOR_INFO_Y = 50;
 
-Map& GetWorld()
-{
-  return Map::GetRef();
-}
-
 Map::Map() : author_info1(NULL), author_info2(NULL)
 {
   min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
@@ -163,11 +158,6 @@ void Map::DrawSky(bool redraw_all)
   sky.Draw(redraw_all);
 }
 
-void Map::DrawWater()
-{
-  water.Draw();
-}
-
 void Map::Draw(bool redraw_all)
 {
   // This is necessary because the WindParticles Sprites will set
@@ -215,51 +205,51 @@ bool Map::VerticalLine_IsInVacuum(int x, int top, int bottom) const
 
 bool Map::RectIsInVacuum(const Rectanglei &prect) const
 {
-   // only check whether the border touch the ground
-   Rectanglei rect(prect);
+  // only check whether the border touch the ground
+  Rectanglei rect(prect);
 
-   // Clip rectangle in the the world area
-   rect.Clip(Rectanglei(Point2i(), GetSize()));
+  // Clip rectangle in the the world area
+  rect.Clip(Rectanglei(Point2i(), GetSize()));
 
-   // Only check the borders of the rectangle
-   if (rect.GetSizeX()==0 || rect.GetSizeY()==0)
-     return true;
+  // Only check the borders of the rectangle
+  if (rect.GetSizeX()==0 || rect.GetSizeY()==0)
+    return true;
 
-   if (!HorizontalLine_IsInVacuum (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
-     return false;
+  if (!HorizontalLine_IsInVacuum (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
+    return false;
 
-   if (rect.GetSizeY() > 1) {
-     if (!HorizontalLine_IsInVacuum(rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
-       return false;
-     if (!VerticalLine_IsInVacuum(rect.GetPositionX(), rect.GetPositionY(),
+  if (rect.GetSizeY() > 1) {
+    if (!HorizontalLine_IsInVacuum(rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
+      return false;
+    if (!VerticalLine_IsInVacuum(rect.GetPositionX(), rect.GetPositionY(),
+                                 rect.GetPositionY() + rect.GetSizeY() -1))
+      return false;
+
+    if (rect.GetSizeX() > 1)
+      if(!VerticalLine_IsInVacuum(rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(),
                                   rect.GetPositionY() + rect.GetSizeY() -1))
-       return false;
+        return false;
+  }
 
-     if (rect.GetSizeX() > 1)
-       if(!VerticalLine_IsInVacuum(rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(),
-                                   rect.GetPositionY() + rect.GetSizeY() -1))
-         return false;
-   }
-
-   return true;
+  return true;
 }
 
 bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 {
-   // only check whether the rectangle touch the ground pixel by pixel
-   // Prefere using the method above, as performing a pixel by pixel test is quite slow!
+  // only check whether the rectangle touch the ground pixel by pixel
+  // Prefere using the method above, as performing a pixel by pixel test is quite slow!
 
-   Rectanglei rect(prect);
+  Rectanglei rect(prect);
 
-   // Clip rectangle in the the world area
-   rect.Clip(Rectanglei(Point2i(), GetSize()));
+  // Clip rectangle in the the world area
+  rect.Clip(Rectanglei(Point2i(), GetSize()));
 
-   // Check line by line
-   for (int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++)
-     if (!HorizontalLine_IsInVacuum (rect.GetPositionX(), i, rect.GetSizeX()))
-       return false;
+  // Check line by line
+  for (int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++)
+    if (!HorizontalLine_IsInVacuum (rect.GetPositionX(), i, rect.GetSizeX()))
+      return false;
 
-   return true;
+  return true;
 }
 
 bool Map::IsInVacuum_top(const PhysicalObj &obj, int dx, int dy) const
@@ -318,9 +308,9 @@ void Map::DrawAuthorName()
   author_info2->DrawLeftTop(Point2i(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight()));
 }
 
-bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
+static inline bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
 {
-  return ( a.GetTopLeftPoint() < b.GetTopLeftPoint() );
+  return a.GetTopLeftPoint() < b.GetTopLeftPoint();
 }
 
 void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const

@@ -32,75 +32,77 @@ class Profile;
 class Polygon;
 class Sprite;
 
-class RandomElementList : public std::vector<Surface *> {
- public:
-   void AddElement(const Surface *element) { push_back(new Surface(*element)); };
-   Surface * GetRandomElement();
-   ~RandomElementList();
+class RandomElementList : public std::vector<Surface *>
+{
+public:
+  void AddElement(const Surface *element) { push_back(new Surface(*element)); };
+  Surface * GetRandomElement();
+  ~RandomElementList();
 };
 
-class MapElement {
- protected:
-   Surface element;
-   Point2i position;
+class MapElement
+{
+protected:
+  Surface element;
+  Point2i position;
  public:
-   MapElement(const Surface & obj, const Point2i & pos) { element = obj; position = pos; };
-   Surface & GetElement() { return element; };
-   Point2i & GetPosition() { return position; };
+  MapElement(const Surface & obj, const Point2i & pos) { element = obj; position = pos; };
+  Surface & GetElement() { return element; };
+  Point2i & GetPosition() { return position; };
 };
 
-class RandomMap {
-  /* if you need that, implement it (correctly)*/
-  RandomMap(const RandomMap&);
-  RandomMap operator=(const RandomMap&);
-  /*********************************************/
-
-  typedef enum {
+class RandomMap
+{
+  typedef enum
+  {
     DENTED_CIRCLE,
     DENTED_TRAPEZE,
     ROUNDED_RECTANGLE
   } Shape_type;
- protected:
-   Double border_size;
-   bool is_open;
-   int number_of_island;
-   Surface result;
-   int width;
-   int height;
+protected:
+  Double border_size;
+  bool is_open;
+  int number_of_island;
+  Surface result;
+  int width;
+  int height;
 
-   // Shape used to generate island
-   Polygon * random_shape;
-   Polygon * bezier_shape;
-   Polygon * expanded_bezier_shape;
+  // Shape used to generate island
+  Polygon * random_shape;
+  Polygon * bezier_shape;
+  Polygon * expanded_bezier_shape;
 
-   // Internal parameters
-   Profile *profile;
-   Color border_color;
-   Surface texture;
-   Surface element;
-   uint number_of_element;
+  // Internal parameters
+  Profile *profile;
+  Color border_color;
+  Surface texture;
+  Surface element;
+  uint number_of_element;
 
-   // Internal random element vector
-   RandomElementList random_element_list;
-   std::vector<MapElement> element_list;
+  // Internal random element vector
+  RandomElementList random_element_list;
+  std::vector<MapElement> element_list;
 
- public:
-   RandomMap(Profile *profile, const int width, const int height);
-   void SetSize(const int width, const int height);
-   const Point2i GetSize() const { return Point2i(width, height); };
-   int GetWidth() const { return width; };
-   int GetHeight() const { return height; };
-   void AddElement(const Surface * object, const Point2i& position);
-   void DrawElement();
-   void SetBorderSize(const Double border) { border_size = border; };
-   void SetBorderColor(const Color& color) { border_color = color; };
-   bool IsOpen() const { return is_open; };
-   void Generate(InfoMap::Island_type generator);
-   void GenerateIsland();
-   void GeneratePlatforms();
-   void GenerateGridElements();
-   std::string SaveMap();
-   Surface GetRandomMap() const { return result; };
+public:
+  RandomMap(Profile *profile, const int width, const int height);
+  void SetSize(const int w, const int h) { width = w; height = h; }
+  const Point2i GetSize() const { return Point2i(width, height); };
+  int GetWidth() const { return width; };
+  int GetHeight() const { return height; };
+  void AddElement(const Surface * object, const Point2i& position)
+  {
+    element_list.push_back(MapElement(*object, position));
+  }
+  void DrawElement();
+  void SetBorderSize(const Double border) { border_size = border; };
+  void SetBorderColor(const Color& color) { border_color = color; };
+  bool IsOpen() const { return is_open; };
+  void Generate(InfoMap::Island_type generator);
+  void GenerateIsland();
+  void GeneratePlatforms();
+  void GenerateGridElements();
+  std::string SaveMap();
+  Surface GetRandomMap() const { return result; };
 };
 
 #endif /* RANDOM_MAP_H */

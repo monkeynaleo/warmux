@@ -263,7 +263,7 @@ std::string InfoMap::GetConfigFilepath() const
 }
 
 /* ========================================================================== */
-static bool compareMaps(const InfoMap* a, const InfoMap* b)
+static inline bool compareMaps(const InfoMap* a, const InfoMap* b)
 {
   return a->GetRawName() < b->GetRawName();
 }
@@ -389,14 +389,6 @@ void MapsList::SelectMapByIndex (uint index)
   random_map = false;
 }
 
-int MapsList::GetActiveMapIndex () const
-{
-  if (!random_map)
-    return active_map_index;
-  else
-    return lst.size();
-}
-
 void MapsList::FillActionMenuSetMap(Action& a) const
 {
   if (!random_map) {
@@ -405,15 +397,4 @@ void MapsList::FillActionMenuSetMap(Action& a) const
     a.Push("random");
     a.Push(lst.at(active_map_index)->GetRawName());
   }
-}
-
-InfoMap* MapsList::ActiveMap()
-{
-  ASSERT (0 <= active_map_index);
-  return lst.at(active_map_index);
-}
-
-InfoMap* ActiveMap()
-{
-  return MapsList::GetInstance()->ActiveMap();
 }

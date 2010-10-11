@@ -44,14 +44,14 @@
 void ManMachineInterface::Reset()
 {
   for (int i = 0; i != 256; i++)
-    PressedKeys[i] = false ;
+    PressedKeys[i] = false;
 }
 
 bool ManMachineInterface::IsRegistredEvent(uint32_t event_type)
 {
   std::list<uint32_t>::iterator it;
-  for(it = registred_event.begin(); it != registred_event.end(); it ++) {
-    if(event_type == (*it))
+  for (it = registred_event.begin(); it != registred_event.end(); it ++) {
+    if (event_type == (*it))
       return true;
   }
   return false;
@@ -65,7 +65,7 @@ int ManMachineInterface::GetKeyAssociatedToAction(Key_t at) const
   for (it = layout.begin(); it != layout.end(); it++) {
     const std::vector<Key_t>& key_list = it->second;
     for (itv = key_list.begin(); itv != key_list.end(); itv++) {
-      if ( *itv == at) {
+      if (*itv == at) {
         return it->first;
       }
     }
@@ -322,7 +322,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     if (ActiveCharacter().IsDead()) return;
     if (Game::GetInstance()->ReadState() == Game::END_TURN) return;
 
-
     switch (key) {
       case KEY_MOVE_RIGHT:
         ActiveCharacter().HandleKeyReleased_MoveRight(false);
@@ -456,19 +455,17 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
     switch(key) {
 
     case KEY_NEXT_CHARACTER:
-      {
-        if (GameMode::GetInstance()->AllowCharacterSelection()) {
-          SDLMod mod = SDL_GetModState();
-          if (mod & KMOD_CTRL) {
-            ActiveTeam().PreviousCharacter();
-          } else {
-            ActiveTeam().NextCharacter();
-          }
-          Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-          uint next_character_index = ActiveCharacter().GetCharacterIndex();
-          next_character->Push((int)next_character_index);
-          ActionHandler::GetInstance()->NewAction(next_character);
+      if (GameMode::GetInstance()->AllowCharacterSelection()) {
+        SDLMod mod = SDL_GetModState();
+        if (mod & KMOD_CTRL) {
+          ActiveTeam().PreviousCharacter();
+        } else {
+          ActiveTeam().NextCharacter();
         }
+        Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
+        uint next_character_index = ActiveCharacter().GetCharacterIndex();
+        next_character->Push((int)next_character_index);
+        ActionHandler::GetInstance()->NewAction(next_character);
       }
       return;
 
@@ -1032,7 +1029,6 @@ std::string ManMachineInterface::GetKeyNameFromKey(int key) const
 
 ManMachineInterface::Key_t ManMachineInterface::GetActionFromActionName(const std::string &name) const
 {
-
   if(name == "quit") return KEY_QUIT;
   if(name == "weapons1") return KEY_WEAPONS1;
   if(name == "weapons2") return KEY_WEAPONS2;

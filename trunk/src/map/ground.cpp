@@ -23,12 +23,6 @@
 #include <iostream>
 #include <SDL_stdinc.h>
 
-// a hack I need I have no clue why
-#if 0//ndef SDL_static_cast
-#define SDL_reinterpret_cast(type, expression) ((type)(expression))
-#define SDL_static_cast(type, expression) ((type)(expression))
-#endif
-
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <limits.h>
@@ -47,7 +41,8 @@ Ground::Ground()
 { //FIXME (to erase)
 }
 
-void Ground::Init(){
+void Ground::Init()
+{
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
 
@@ -79,7 +74,8 @@ void Ground::Init(){
   std::cout << _("done") << std::endl;
 }
 
-void Ground::Reset(){
+void Ground::Reset()
+{
   Init();
   lastPos.SetValues(INT_MAX, INT_MAX);
 }
@@ -91,7 +87,8 @@ void Ground::Reset(){
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-Double Ground::Tangent(int x,int y) const {
+Double Ground::Tangent(int x,int y) const
+{
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)
@@ -126,7 +123,7 @@ Double Ground::Tangent(int x,int y) const {
   return tangeante; */
 
   //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
-  const Double table[5][5] = {
+  static const Double table[5][5] = {
     {     QUARTER_PI,          .46364,      PI,    -.46364+M_PI, PI - QUARTER_PI},
     {         1.1071,      QUARTER_PI,      PI, PI - QUARTER_PI,     1.1071+M_PI},
     {        HALF_PI,         HALF_PI, HALF_PI,         HALF_PI,         HALF_PI},

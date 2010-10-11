@@ -169,12 +169,12 @@ public:
   void SelectMapByName(const std::string &nom);
   void SelectRandomMapByName(const std::string &nom);
   void SelectMapByIndex(uint index);
-  int GetActiveMapIndex() const;
-  InfoMap* ActiveMap();
+  int GetActiveMapIndex() const { return random_map ? lst.size() : active_map_index; }
+  InfoMap* ActiveMap() { return lst.at(active_map_index); }
 
   void FillActionMenuSetMap(Action& a) const;
 };
 
-InfoMap* ActiveMap();
+inline InfoMap* ActiveMap() { return MapsList::GetInstance()->ActiveMap(); }
 
 #endif

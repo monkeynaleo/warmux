@@ -439,7 +439,7 @@ void Camera::StopFollowingObj(const PhysicalObj* obj)
 
 bool Camera::IsVisible(const PhysicalObj &obj) const
 {
-   return Intersect(obj.GetRect());
+  return Intersect(obj.GetRect());
 }
 
 void Camera::CenterOnActiveCharacter()

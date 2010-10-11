@@ -29,18 +29,3 @@ MouseCursor::MouseCursor(Mouse::pointer_t _pointer_id,
   surf.ImgLoad(filename);
   clic_pos = _clic_pos;
 }
-
-Mouse::pointer_t MouseCursor::GetPointerId() const
-{
-  return pointer_id;
-}
-
-const Surface& MouseCursor::GetSurface() const
-{
-  return surf;
-}
-
-const Point2i& MouseCursor::GetClicPos() const
-{
-  return clic_pos;
-}

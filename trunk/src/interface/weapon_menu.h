@@ -53,7 +53,7 @@ private:
   uint GetZoomTime() const { return zoom_time; };
   void SetZoomTime(uint time) { zoom_time = time; };
   Weapon * GetWeapon() const { return weapon; };
-  void SetParent(WeaponsMenu *);
+  void SetParent(WeaponsMenu *parent) { m_parent = parent; }
 };
 
 class WeaponsMenu
