@@ -134,7 +134,7 @@ static void Action_Network_ClientChangeState (Action *a)
   }
 }
 
-static void Action_Network_MasterChangeState (Action *a)
+static void Action_Network_MasterChangeState(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -226,20 +226,17 @@ enum net_error {
 
 static std::string NetErrorId_2_String(enum net_error error)
 {
-  std::string s;
-
   switch (error) {
   case WRONG_MAP_NAME:
-    s = _("Wrong map name!");
+    return _("Wrong map name!");
     break;
   case WRONG_MAP_CRC:
-    s = _("Wrong map CRC!");
+    return _("Wrong map CRC!");
     break;
   case WRONG_TEAM:
-    s = _("Wrong team!");
+    return _("Wrong team!");
     break;
   }
-  return s;
 }
 
 static void Action_Network_Disconnect_On_Error(Action *a)
@@ -688,19 +685,19 @@ void WORMUX_DisconnectPlayer(Player& player)
 
 // ########################################################
 
-static void Action_Character_Jump (Action */*a*/)
+static void Action_Character_Jump(Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
   ActiveCharacter().Jump();
 }
 
-static void Action_Character_HighJump (Action */*a*/)
+static void Action_Character_HighJump(Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
   ActiveCharacter().HighJump();
 }
 
-static void Action_Character_BackJump (Action */*a*/)
+static void Action_Character_BackJump(Action */*a*/)
 {
   Game::GetInstance()->SetCharacterChosen(true);
   ActiveCharacter().BackJump();
@@ -772,14 +769,14 @@ static void Action_Weapon_StopShooting(Action */*a*/)
   ActiveTeam().AccessWeapon().StopShooting();
 }
 
-static void Action_Weapon_SetTarget (Action *a)
+static void Action_Weapon_SetTarget(Action *a)
 {
   MSG_DEBUG("action_handler", "Set target by clicking");
 
   ActiveTeam().AccessWeapon().ChooseTarget (a->PopPoint2i());
 }
 
-static void Action_Weapon_SetTimeout (Action *a)
+static void Action_Weapon_SetTimeout(Action *a)
 {
   ActiveTeam().AccessWeapon().SetProjectileTimeOut(a->PopInt());
 }
@@ -824,14 +821,14 @@ static void Action_Weapon_StopMovingDown(Action */*a*/)
   ActiveTeam().AccessWeapon().StopMovingDown();
 }
 
-static void Action_Weapon_Construction (Action *a)
+static void Action_Weapon_Construction(Action *a)
 {
   ActiveTeam().AccessWeapon().SetAngle(a->PopDouble());
 }
 
 // ########################################################
 
-static void Action_Network_RandomInit (Action *a)
+static void Action_Network_RandomInit(Action *a)
 {
   MSG_DEBUG("random", "Initialization from network");
   RandomSync().SetSeed(a->PopInt());
@@ -840,7 +837,7 @@ static void Action_Network_RandomInit (Action *a)
 static void Action_Network_VerifyRandomSync(Action *a)
 {
   uint local_seed = RandomSync().GetSeed();
-  uint remote_seed = (uint)(a->PopInt());
+  uint remote_seed = (uint)a->PopInt();
   MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
 
   ASSERT(remote_seed == local_seed);
@@ -852,7 +849,7 @@ static void Action_Network_VerifyRandomSync(Action *a)
 static void Action_Time_VerifySync(Action *a)
 {
   uint local_time = Time::GetInstance()->Read();
-  uint remote_time = (uint)(a->PopInt());
+  uint remote_time = (uint)a->PopInt();
   MSG_DEBUG("time.verify","Verify time: %d (local) == %d (remote)", local_time, remote_time);
   ASSERT(local_time == remote_time);
 }
@@ -932,7 +929,7 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 
     for (player = players.begin(); player != players.end(); player++) {
       if (int(player->GetId()) != added_player_id) {
-        add_player_info_to_action(a, (*player));
+        add_player_info_to_action(a, *player);
       }
     }
   }
@@ -949,7 +946,7 @@ static void Action_Info_ClientConnect(Action *a)
   std::string hostname = a->PopString();
   std::string nicknames = a->PopString();
 
-  ASSERT (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
+  ASSERT(a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
   a->GetCreator()->AddPlayer(player_id);
 
 
@@ -1077,14 +1074,14 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_LEFT, "CHARACTER_start_moving_left", &Action_Character_StartMovingLeft);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_UP, "CHARACTER_start_moving_up", &Action_Character_StartMovingUp);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_UP, "CHARACTER_stop_moving_up", &Action_Character_StopMovingUp);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_DOWN, "CHARACTER_start_moving_down", &Action_Character_StartMovingDown);
- ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_DOWN, "CHARACTER_stop_moving_down", &Action_Character_StopMovingDown);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_LEFT, "CHARACTER_start_moving_left", &Action_Character_StartMovingLeft);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_LEFT, "CHARACTER_stop_moving_left", &Action_Character_StopMovingLeft);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_RIGHT, "CHARACTER_start_moving_right", &Action_Character_StartMovingRight);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_RIGHT, "CHARACTER_stop_moving_right", &Action_Character_StopMovingRight);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_UP, "CHARACTER_start_moving_up", &Action_Character_StartMovingUp);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_UP, "CHARACTER_stop_moving_up", &Action_Character_StopMovingUp);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_START_MOVING_DOWN, "CHARACTER_start_moving_down", &Action_Character_StartMovingDown);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHARACTER_STOP_MOVING_DOWN, "CHARACTER_stop_moving_down", &Action_Character_StopMovingDown);
 
   // ########################################################
   // Quite standard weapon options
@@ -1141,9 +1138,8 @@ bool ActionHandler::ExecActionsForOneFrame()
   bool frame_complete = false;
   Lock();
   it = queue.begin();
-  while (it != queue.end() && !frame_complete)
-  {
-    a = (*it);
+  while (it != queue.end() && !frame_complete) {
+    a = *it;
     if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
       frame_complete = true;
     it++;
@@ -1155,8 +1151,7 @@ bool ActionHandler::ExecActionsForOneFrame()
 
   frame_complete = false;
   it = queue.begin();
-  while (it != queue.end() && !frame_complete)
-  {
+  while (it != queue.end() && !frame_complete) {
     a = (*it);
     if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
       frame_complete = true;
@@ -1167,7 +1162,7 @@ bool ActionHandler::ExecActionsForOneFrame()
                 Time::GetInstance()->Read());
     }
 
-    Exec (a);
+    Exec(a);
 
     delete *it;
     it = queue.erase(it);
@@ -1182,8 +1177,7 @@ void ActionHandler::ExecFrameLessActions()
   std::list<Action*>::iterator it;
   Lock();
 
-  for (it = queue.begin(); it != queue.end() ;)
-  {
+  for (it = queue.begin(); it != queue.end() ;) {
     a = (*it);
 
     // only handle frame less actions.
@@ -1195,7 +1189,7 @@ void ActionHandler::ExecFrameLessActions()
     // Do not execute actions from Network if we are not connected anymore
     if (!a->GetCreator()|| Network::IsConnected()) {
 
-      Exec (a);
+      Exec(a);
 
       // To refresh the menu even if it is waiting in SDL_WaitEvent
       // One new event will be needed.
@@ -1218,4 +1212,3 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   // One new event will be needed (see ExecActions).
   Menu::WakeUpOnCallback();
 }
-
