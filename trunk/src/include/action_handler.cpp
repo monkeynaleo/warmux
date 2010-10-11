@@ -229,13 +229,11 @@ static std::string NetErrorId_2_String(enum net_error error)
   switch (error) {
   case WRONG_MAP_NAME:
     return _("Wrong map name!");
-    break;
   case WRONG_MAP_CRC:
     return _("Wrong map CRC!");
-    break;
   case WRONG_TEAM:
     return _("Wrong team!");
-    break;
+  default: return "";
   }
 }
 
