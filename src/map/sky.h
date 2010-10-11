@@ -29,21 +29,21 @@
 #include <WORMUX_rectangle.h>
 #include "graphic/surface.h"
 
-class Sky {
-  private:
-    // Only keep reference of already loaded images
-    std::vector<const Surface*> images;
-    Point2i last_pos;
+class Sky
+{
+  // Only keep reference of already loaded images
+  std::vector<const Surface*> images;
+  Point2i last_pos;
 
-    void RedrawParticleList(std::list<Rectanglei> &list) const;
-    void RedrawParticle(const Rectanglei &particle) const;
-    Point2i GetSkyPos(uint layer) const;
+  void RedrawParticleList(std::list<Rectanglei> &list) const;
+  void RedrawParticle(const Rectanglei &particle) const;
+  Point2i GetSkyPos(uint layer) const;
 
-  public:
-    void Init();
-    void Reset();
-    void Draw(bool redraw_all);
-    void Free();
+public:
+  void Init();
+  void Reset();
+  void Draw(bool redraw_all);
+  void Free() { images.clear(); }
 };
 
 #endif

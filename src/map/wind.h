@@ -36,11 +36,6 @@ typedef struct _xmlNode xmlNode;
 
 class WindParticle : public PhysicalObj
 {
-private:
-  /* You should not need this */
-  WindParticle(const WindParticle & obj);
-  const WindParticle & operator = (const WindParticle & obj);
-
   Sprite * sprite;
   Sprite * flipped;
 
@@ -54,7 +49,6 @@ public:
 
 class Wind : public Singleton<Wind>
 {
-private:
   int m_val, m_nv_val;
   uint m_last_move;
   uint m_last_part_mvt;
@@ -65,14 +59,14 @@ private:
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 
   Wind();
-  ~Wind();
+  ~Wind() { RemoveAllParticles(); }
   friend class Singleton<Wind>;
 
 public:
-  Double GetStrength() const;
+  Double GetStrength() const { return m_nv_val * WIND_STRENGTH / 100.0; }
   void ChooseRandomVal();
 
-  void SetVal(int val);
+  void SetVal(int val) { m_nv_val = val; }
   void Refresh();
   void Reset();
   void DrawParticles();

@@ -93,16 +93,6 @@ void NetworkThread::Start()
   stop_thread = false;
 }
 
-void NetworkThread::Stop()
-{
-  stop_thread = true;
-}
-
-bool NetworkThread::Continue()
-{
-  return !stop_thread;
-}
-
 void NetworkThread::Wait()
 {
   if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
@@ -208,7 +198,7 @@ int  Network::num_objects = 0;
 
 Network * Network::GetInstance()
 {
-  if (singleton == NULL) {
+  if (!singleton) {
     singleton = new NetworkLocal();
     MSG_DEBUG("singleton", "Created singleton %p of type 'NetworkLocal'\n", singleton);
   }
@@ -217,7 +207,7 @@ Network * Network::GetInstance()
 
 NetworkServer * Network::GetInstanceServer()
 {
-  if (singleton == NULL || !singleton->IsServer()) {
+  if (!singleton || !singleton->IsServer()) {
     return NULL;
   }
   return (NetworkServer*)singleton;
@@ -261,11 +251,6 @@ Network::~Network()
 }
 
 //-----------------------------------------------------------------------------
-
-std::list<DistantComputer*>& Network::GetRemoteHosts()
-{
-  return cpu;
-}
 
 std::list<DistantComputer*>& Network::LockRemoteHosts()
 {
@@ -435,16 +420,6 @@ void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_r
   free(packet);
 }
 
-//-----------------------------------------------------------------------------
-
-// Static method
-bool Network::IsConnected()
-{
-  return (!GetInstance()->IsLocal() && NetworkThread::Continue());
-}
-
-//-----------------------------------------------------------------------------
-
 // Static method
 connection_state_t Network::ClientStart(const std::string& host,
                                         const std::string& port,
@@ -513,11 +488,6 @@ void Network::SetState(WNet::net_game_state_t _state)
   state = _state;
 }
 
-WNet::net_game_state_t Network::GetState() const
-{
-  return state;
-}
-
 void Network::SendNetworkState()
 {
   ASSERT(!IsLocal());
@@ -544,36 +514,6 @@ void Network::SetGameMaster()
 {
   MSG_DEBUG("network.game_master", "we are the new game master");
   game_master_player = true;
-}
-
-bool Network::IsGameMaster() const
-{
-  return game_master_player;
-}
-
-Player& Network::GetPlayer()
-{
-  return player;
-}
-
-const Player& Network::GetPlayer() const
-{
-  return player;
-}
-
-void Network::SetGameName(const std::string& _game_name)
-{
-  game_name = _game_name;
-}
-
-const std::string& Network::GetGameName() const
-{
-  return game_name;
-}
-
-const std::string& Network::GetPassword() const
-{
-  return password;
 }
 
 int Network::CheckActivity(int timeout)

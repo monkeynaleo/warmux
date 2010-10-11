@@ -53,7 +53,6 @@ class WSocketSet;
 
 class NetworkThread
 {
-private:
   static SDL_Thread* thread; // network thread, where we receive data from network
   static bool stop_thread;
 
@@ -61,20 +60,15 @@ private:
   static int ThreadRun(void* no_param);
 public:
   static void Start();
-  static void Stop();
+  static void Stop() { stop_thread = true; }
 
-  static bool Continue();
+  static bool Continue() { return !stop_thread; }
   static void Wait();
 };
 
 
 class Network : public Singleton<Network>
 {
-private:
-  /* if you need that, implement it (correctly)*/
-  Network(const Network&);
-  const Network& operator=(const Network&);
-  /*********************************************/
   static int num_objects;
 
   std::list<DistantComputer*> cpu; // list of the connected computer
@@ -103,7 +97,7 @@ protected:
 
   void DisconnectNetwork();
 
-  void SetGameName(const std::string& game_name);
+  void SetGameName(const std::string& _game_name) { game_name = _game_name; }
 public:
   NetworkMenu* network_menu;
 
@@ -122,21 +116,21 @@ public:
                                         const std::string& password);
 
   static void Disconnect();
-  static bool IsConnected();
+  static bool IsConnected() { return !GetInstance()->IsLocal() && NetworkThread::Continue(); }
 
   virtual bool IsLocal() const { return false; }
   virtual bool IsServer() const { return false; }
   virtual bool IsClient() const { return false; }
 
   void SetGameMaster(); // useful when we re-electing a game master
-  bool IsGameMaster() const;
-  const std::string& GetGameName() const;
-  const std::string& GetPassword() const;
-  Player& GetPlayer();
-  const Player& GetPlayer() const;
+  bool IsGameMaster() const { return game_master_player; }
+  const std::string& GetGameName() const { return game_name; }
+  const std::string& GetPassword() const { return password; }
+  Player& GetPlayer() { return player; }
+  const Player& GetPlayer() const { return player; }
   Player * LockRemoteHostsAndGetPlayer(uint player_id);
 
-  std::list<DistantComputer*>& GetRemoteHosts();
+  std::list<DistantComputer*>& GetRemoteHosts() { return cpu; }
 
   std::list<DistantComputer*>& LockRemoteHosts();
   const std::list<DistantComputer*>& LockRemoteHosts() const;
@@ -156,7 +150,7 @@ public:
 
   // Manage network state
   void SetState(WNet::net_game_state_t state);
-  WNet::net_game_state_t GetState() const;
+  WNet::net_game_state_t GetState() const { return state; }
   void SendNetworkState();
 
   bool IsTurnMaster() const;

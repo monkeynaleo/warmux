@@ -49,11 +49,6 @@ void Sky::Reset()
   last_pos.SetValues(INT_MAX, INT_MAX);
 }
 
-void Sky::Free()
-{
-  images.clear();
-}
-
 void Sky::Draw(bool redraw_all)
 {
   if (last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
