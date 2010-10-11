@@ -42,37 +42,6 @@ Player::Player() :
 {
 }
 
-Player::~Player()
-{
-  Disconnect();
-}
-
-void Player::Disconnect()
-{
-  // It's up to the program using class Player to define WORMUX_DisconnectPlayer();
-  WORMUX_DisconnectPlayer(*this);
-}
-
-void Player::SetId(uint _player_id)
-{
-  player_id = _player_id;
-}
-
-uint Player::GetId() const
-{
-  return player_id;
-}
-
-void Player::SetNickname(const std::string& _nickname)
-{
-  nickname = _nickname;
-}
-
-const std::string& Player::GetNickname() const
-{
-  return nickname;
-}
-
 std::list<ConfigTeam>::iterator Player::FindTeamWithId(const std::string team_id)
 {
   std::list<ConfigTeam>::iterator it = owned_teams.begin();
@@ -137,26 +106,6 @@ bool Player::UpdateTeam(const std::string& old_team_id, const ConfigTeam& team_c
   stored_team_conf = team_conf;
   UpdateNickname();
   return true;
-}
-
-uint Player::GetNbTeams() const
-{
-  return owned_teams.size();
-}
-
-const std::list<ConfigTeam>& Player::GetTeams() const
-{
-  return owned_teams;
-}
-
-void Player::SetState(Player::State _state)
-{
-  state = _state;
-}
-
-Player::State Player::GetState() const
-{
-  return state;
 }
 
 
