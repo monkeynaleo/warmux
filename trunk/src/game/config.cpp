@@ -257,7 +257,13 @@ bool Config::MkdirChatLogDir() const
 
 bool Config::MkdirPersonalConfigDir() const
 {
-  return CreateFolder(personal_config_dir);
+  bool r = CreateFolder(personal_config_dir);
+
+  if (r) {
+    CreateFolder(personal_config_dir + "custom_team");
+  }
+
+  return r;
 }
 
 bool Config::MkdirPersonalDataDir() const
