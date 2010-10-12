@@ -388,8 +388,9 @@ void TeamsList::RefreshEnergy()
   // Actualisation des valeurs (pas d'actualisation de l'affichage)
   for (it=playing_list.begin(); it != end; ++it) {
     (**it).UpdateEnergyBar();
-    RefreshSort();
   }
+
+  RefreshSort();
 }
 //-----------------------------------------------------------------------------
 
