@@ -676,17 +676,29 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
   }
 
   if (m_collides_with_objects) {
-    FOR_EACH_OBJECT(it) {
-      PhysicalObj * object=*it;
-      // We check both objet if one overlapses the other
-      if (!m_is_character || object->m_collides_with_characters) {
-	if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this) &&
+    if (m_is_character) {
+      FOR_EACH_OBJECT(it) {
+        PhysicalObj * object=*it;
+        // We check both objet if one overlapses the other
+        if (object->m_collides_with_characters) {
+          if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this) &&
+              object->m_collides_with_objects && Intersect(object, rect)) {
+            return object;
+          }
+        }
+      }
+    } else {
+      FOR_EACH_OBJECT(it) {
+        PhysicalObj * object=*it;
+        // We check both objet if one overlapses the other
+        if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this) &&
             object->m_collides_with_objects && Intersect(object, rect)) {
-	  return object;
-	}
+          return object;
+        }
       }
     }
   }
+
   return NULL;
 }
 
