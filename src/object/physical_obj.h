@@ -125,7 +125,7 @@ public:
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
   // Optimized intersection test
-  inline bool Intersect(const PhysicalObj* object, const Rectanglei & position) const;
+  inline bool Intersect(const Rectanglei & position) const;
   const Rectanglei GetTestRect() const
   {
     int width = m_width - m_test_right - m_test_left;
@@ -149,7 +149,7 @@ public:
   const Rectanglei GetRect() const { return Rectanglei( GetX(), GetY(), m_width, m_height); };
   bool CollidesWithGround() const { return m_collides_with_ground; }
   // This is a hack
-  bool CanBeBlasted() const { return m_collides_with_ground && m_go_through_objects; }
+  bool CanBeBlasted() const { return m_collides_with_ground && !m_go_through_objects; }
   bool IsCharacter() const { return m_is_character; }
 
   //----------- Physics related function ----------
