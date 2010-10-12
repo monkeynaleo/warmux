@@ -52,10 +52,6 @@ enum // trace flags
 
 class Map : public Singleton<Map>
 {
-  /* if you need it, implement it*/
-  Map(const Map&);
-  const Map& operator=(const Map&);
-
   Text * author_info1;
   Text * author_info2;
 
