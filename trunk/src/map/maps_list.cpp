@@ -251,8 +251,9 @@ void InfoMap::FreeData()
   std::vector<Surface>::iterator it = sky_layer.begin();
   while (it != sky_layer.end()) {
     it->Free();
-    sky_layer.erase(it);
+    it++;
   }
+  sky_layer.clear();
 
   delete normal; normal = NULL;
 }
