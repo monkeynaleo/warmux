@@ -51,7 +51,6 @@ typedef enum {
 
 class Sprite
 {
-private:
   bool smooth;
   // Surface growing as need be for any temporary operation inside Sprite members
   // that need a SDL_SWSURFACE Surface without alpha.
@@ -106,7 +105,7 @@ public:
   // Size
   uint GetWidth() const
   {
-    return uint(round(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x)));
+    return uround(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x));
   }
   // gives height of the surface (takes rotations into acount)
   uint GetWidthMax() const
@@ -118,7 +117,7 @@ public:
   }
   uint GetHeight() const
   {
-    return uint(round(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y)));
+    return uround(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y));
   }
   // gives height of the surface (takes rotations into acount)
   uint GetHeightMax() const

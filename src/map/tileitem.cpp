@@ -66,7 +66,7 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
     int dac = center.y - y;
 
     //Darken the border of the removed ground
-    int blength = round(sqrt(Double(r*r - dac*dac)));
+    int blength = uround(sqrt(Double(r*r - dac*dac)));
 
     if (minx>center.x-blength)
       minx = center.x-blength;
@@ -80,7 +80,7 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
     }
 
     //Zone of the line which needs to be emptied
-    int length = round(sqrt(Double(radius*radius - dac*dac)));
+    int length = uround(sqrt(Double(radius*radius - dac*dac)));
 
     // Left half of the circle
     Darken(center.x-blength, center.x-length, buf);
