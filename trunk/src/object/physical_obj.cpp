@@ -231,7 +231,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   }
 
   do {
-    Point2i tmpPos(round(pos.x), round(pos.y));
+    Point2i tmpPos(uround(pos.x), uround(pos.y));
 
     // Check if we exit the GetWorld(). If so, we stop moving and return.
     if (IsOutsideWorldXY(tmpPos)) {
