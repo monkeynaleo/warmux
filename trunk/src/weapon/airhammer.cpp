@@ -47,10 +47,10 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 
 class AirhammerConfig : public WeaponConfig
 {
-  public:
-    uint range;
-    AirhammerConfig();
-    void LoadXml(const xmlNode* elem);
+public:
+  uint range;
+  AirhammerConfig();
+  void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ bool Airhammer::p_Shoot()
                          true, -THREE * QUARTER_PI, 5.0 + Time::GetInstance()->Read() % 5);
   ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -QUARTER_PI, 5.0 + Time::GetInstance()->Read() % 5);
-  GetWorld().Dig( pos, impact );
+  GetWorld().Dig(pos, impact);
 
   return true;
 }
@@ -172,13 +172,15 @@ std::string Airhammer::GetWeaponWinString(const char *TeamName, uint items_count
 
 //-----------------------------------------------------------------------------
 
-AirhammerConfig& Airhammer::cfg() {
+AirhammerConfig& Airhammer::cfg()
+{
   return static_cast<AirhammerConfig&>(*extra_params);
 }
 
 //-----------------------------------------------------------------------------
 
-AirhammerConfig::AirhammerConfig(){
+AirhammerConfig::AirhammerConfig()
+{
   range =  30;
 }
 
