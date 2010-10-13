@@ -81,7 +81,8 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
                                          const Point2d& /*obj_speed*/)
 {
 #if 1
-  obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
+  if (cfg.speed_on_hit.IsNotZero())
+    obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
 #else
   // multiply by ten to get something more funny
   Double bullet_mass = GetMass()/* * 10*/;
