@@ -42,38 +42,39 @@
 #include "flamethrower.h"
 #include "weapon_cfg.h"
 
-const uint    FLAMETHROWER_BULLET_SPEED       = 5;
-const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 40;
-const Double  FLAMETHROWER_RANDOM_ANGLE       = 0.06;
+const uint    FLAMETHROWER_BULLET_SPEED       = 10;
+const uint    FLAMETHROWER_TIME_BETWEEN_SHOOT = 60;
+const Double  FLAMETHROWER_RANDOM_ANGLE       = 0.03;
 
 class FlameThrowerBullet : public WeaponBullet
 {
-  public:
-    FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
-                       WeaponLauncher * p_launcher);
-    bool IsOverlapping(const PhysicalObj* obj) const;
-  protected:
-    ParticleEngine particle;
-    void ShootSound();
-    void RandomizeShoot(Double &angle, Double &strength);
-    void DoExplosion();
-    void SignalGroundCollision(const Point2d& speed_before);
-    void SignalDrowning();
+public:
+  FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
+                     WeaponLauncher * p_launcher);
+  bool IsOverlapping(const PhysicalObj* obj) const;
+protected:
+  ParticleEngine particle;
+  void ShootSound();
+  void RandomizeShoot(Double &angle, Double &strength);
+  void DoExplosion();
+  void SignalGroundCollision(const Point2d& speed_before);
+  void SignalDrowning();
 };
 
 
 FlameThrowerBullet::FlameThrowerBullet(ExplosiveWeaponConfig& cfg,
                                        WeaponLauncher * p_launcher) :
-  WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(40)
+  WeaponBullet("flamethrower_bullet", cfg, p_launcher), particle(FLAMETHROWER_TIME_BETWEEN_SHOOT)
 {
   explode_colliding_character = true;
   m_is_fire = true;
   can_drown = false;
+  SetAirResistFactor(0.1);
 }
 
 bool FlameThrowerBullet::IsOverlapping(const PhysicalObj* obj) const
 {
-  if(GetName() == obj->GetName()) return true;
+  if (GetName() == obj->GetName()) return true;
   return m_overlapping_object == obj;
 }
 
@@ -90,7 +91,7 @@ void FlameThrowerBullet::ShootSound()
 void FlameThrowerBullet::DoExplosion()
 {
   Point2i pos=GetPosition();
-  particle.AddNow(pos, 1, particle_FIRE, true, 0, 1);
+  particle.AddNow(pos, 1, particle_FIRE, true, 0, 1, FOUR);
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }
 
@@ -156,7 +157,7 @@ bool FlameThrower::p_Shoot()
 
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
-  Double angle =  - HALF_PI - ActiveCharacter().GetDirection()
+  Double angle = - HALF_PI - ActiveCharacter().GetDirection()
                * (Double)(Time::GetInstance()->Read() % 100) * QUARTER_PI / (Double)100;
 
   particle.AddNow(pos, 1, particle_SMOKE, true, angle,
@@ -195,4 +196,3 @@ std::string FlameThrower::GetWeaponWinString(const char *TeamName, uint items_co
             "%s team has won %u flame-throwers!",
             items_count), TeamName, items_count);
 }
-
