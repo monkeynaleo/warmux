@@ -81,30 +81,30 @@ struct fixed_point {
   /*explicit*/ fixed_point(size_t i) : intValue(((fixint_t)i) << p) {}
 #endif
 
-  fixed_point& operator += (fixed_point r) { intValue += r.intValue; return *this; }
-  fixed_point& operator -= (fixed_point r) { intValue -= r.intValue; return *this; }
-  fixed_point& operator *= (fixed_point r) { intValue = fixmul<p>(intValue, r.intValue); return *this; }
-  fixed_point& operator /= (fixed_point r) { intValue = fixdiv<p>(intValue, r.intValue); return *this; }
+  fixed_point& operator += (const fixed_point& r) { intValue += r.intValue; return *this; }
+  fixed_point& operator -= (const fixed_point& r) { intValue -= r.intValue; return *this; }
+  fixed_point& operator *= (const fixed_point& r) { intValue = fixmul<p>(intValue, r.intValue); return *this; }
+  fixed_point& operator /= (const fixed_point& r) { intValue = fixdiv<p>(intValue, r.intValue); return *this; }
 
   fixed_point& operator *= (int32_t r) { intValue *= r; return *this; }
   fixed_point& operator /= (int32_t r) { intValue /= r; return *this; }
 
   fixed_point operator - () const { fixed_point x; x.intValue = -intValue; return x; }
-  fixed_point operator + (fixed_point r) const { fixed_point x = *this; x += r; return x;}
-  fixed_point operator - (fixed_point r) const { fixed_point x = *this; x -= r; return x;}
-  fixed_point operator * (fixed_point r) const { fixed_point x = *this; x *= r; return x;}
-  fixed_point operator / (fixed_point r) const { fixed_point x = *this; x /= r; return x;}
+  fixed_point operator + (const fixed_point& r) const { fixed_point x = *this; x += r; return x;}
+  fixed_point operator - (const fixed_point& r) const { fixed_point x = *this; x -= r; return x;}
+  fixed_point operator * (const fixed_point& r) const { fixed_point x = *this; x *= r; return x;}
+  fixed_point operator / (const fixed_point& r) const { fixed_point x = *this; x /= r; return x;}
 
-  bool operator == (fixed_point r) const { return intValue == r.intValue; }
+  bool operator == (const fixed_point& r) const { return intValue == r.intValue; }
   bool operator == (int i) const { return intValue == (((fixint_t)i) << p); }
-  bool operator != (fixed_point r) const { return !(*this == r); }
-  bool operator <  (fixed_point r) const { return intValue < r.intValue; }
+  bool operator != (const fixed_point& r) const { return !(*this == r); }
+  bool operator <  (const fixed_point& r) const { return intValue < r.intValue; }
   bool operator < (int i) const { return intValue < (((fixint_t)i)  << p); }
-  bool operator >  (fixed_point r) const { return intValue > r.intValue; }
+  bool operator >  (const fixed_point& r) const { return intValue > r.intValue; }
   bool operator > (int i) const { return intValue > (((fixint_t)i)  << p); }
-  bool operator <= (fixed_point r) const { return intValue <= r.intValue; }
+  bool operator <= (const fixed_point& r) const { return intValue <= r.intValue; }
   bool operator <= (int i) const { return intValue <= (((fixint_t)i)  << p); }
-  bool operator >= (fixed_point r) const { return intValue >= r.intValue; }
+  bool operator >= (const fixed_point& r) const { return intValue >= r.intValue; }
   bool operator >= (int i) const { return intValue >= (((fixint_t)i) << p); }
 
   fixed_point operator + (int32_t r) const { fixed_point x = *this; x += r; return x;}
@@ -148,7 +148,7 @@ inline fixed_point<p> operator * (int32_t a, fixed_point<p> b)
 { return b * a; }
 
 template <int p>
-inline fixed_point<p> operator / (int32_t a, fixed_point<p> b)
+inline fixed_point<p> operator / (int32_t a, const fixed_point<p>& b)
 { fixed_point<p> r(a); r /= b; return r; }
 #ifdef TRACK_MINMAX
 template <int p>
@@ -159,19 +159,19 @@ fixint_t fixed_point<p>::max = LLONG_MIN;
 
 
 template <int p>
-inline fixed_point<p> operator + (unsigned int a, fixed_point<p> b)
+inline fixed_point<p> operator + (unsigned int a, const fixed_point<p>& b)
 { return b + a; }
 
 template <int p>
-inline fixed_point<p> operator - (unsigned int a, fixed_point<p> b)
+inline fixed_point<p> operator - (unsigned int a, const fixed_point<p>& b)
 { return -b + a; }
 
 template <int p>
-inline fixed_point<p> operator * (unsigned int a, fixed_point<p> b)
+inline fixed_point<p> operator * (unsigned int a, const fixed_point<p>& b)
 { return b * a; }
 
 template <int p>
-inline fixed_point<p> operator / (unsigned int a, fixed_point<p> b)
+inline fixed_point<p> operator / (unsigned int a, const fixed_point<p>& b)
 { fixed_point<p> r(a); r /= b; return r; }
 
 #ifdef SIZE_T_FIXEDPOINT_METHODS
@@ -192,19 +192,23 @@ inline fixed_point<p> operator / (size_t a, fixed_point<p> b)
 { fixed_point<p> r(a); r /= b; return r; }
 #endif
 
-template <int p>
-inline fixed_point<p> round(fixed_point<p> r)
+template<int p>
+inline fixed_point<p> round(fixed_point<p> r);
+template<>
+inline fixed_point<16> round(fixed_point<16> r)
 {
-  fixed_point<p> result = r>0? 0.5:-0.5;
-  result += r;
-  result /= (1<< p);
-  return result.intValue;
+  // Very important to have it this way: 0 would be rounded to -1 otherwise
+  r.intValue += (r.intValue<0) ? -32768 : 32768; // (1<<(16-1))
+  r.intValue &= 0xFFFFFFFFFFFF0000LL;
+  return r;
 }
 
-template <int p>
-inline int uround(fixed_point<p> r)
+template<int p>
+inline int uround(const fixed_point<p>& r);
+template<>
+inline int uround(const fixed_point<16>& r)
 {
-  return (r.intValue + (1<<(p-1)))>>p;
+  return (r.intValue + 32768)>>16;
 }
 
 namespace detail {
