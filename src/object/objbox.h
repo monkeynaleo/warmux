@@ -33,42 +33,36 @@ class Action;
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
-    /* If you need this, implement it (correctly)*/
-    ObjBox(const ObjBox&);
-    const ObjBox& operator=(const ObjBox&);
-    /*********************************************/
+  SoundSample hit;
 
-    SoundSample hit;
+  virtual void ApplyBox(Team &/*team*/, Character &/*character*/){}
+  void CloseParachute();
 
-    virtual void ApplyBox (Team &/*team*/, Character &/*character*/){}
-    void CloseParachute();
+public:
+  ObjBox(const std::string &name);
+  ~ObjBox();
 
-  public:
-    ObjBox(const std::string &name);
-    ~ObjBox();
+  void DropBox();
+  static void LoadXml(const xmlNode*  /*object*/){};
 
-    void DropBox();
-    static void LoadXml(const xmlNode*  /*object*/){};
+  void Draw();
+  virtual void Refresh();
+  virtual void Randomize() {};
+  virtual void ApplyBonus(Character *) {};
 
-    void Draw();
-    virtual void Refresh();
-    virtual void Randomize() {};
-    virtual void ApplyBonus(Character *) {};
+protected:
+  bool parachute;
+  Sprite *anim;
+  static int start_life_points;
+  void Explode();
 
-  protected:
-    bool parachute;
-    Sprite *anim;
-    static int start_life_points;
-    void Explode();
-
-    virtual void SignalGroundCollision(const Point2d& my_speed_before);
-    virtual void SignalObjectCollision(const Point2d& my_speed_before,
-                                       PhysicalObj *object,
-                                       const Point2d& object_speed);
-    virtual void SignalDrowning();
-    virtual void SignalGhostState(bool was_already_dead);
+  virtual void SignalGroundCollision(const Point2d& my_speed_before);
+  virtual void SignalObjectCollision(const Point2d& my_speed_before,
+                                     PhysicalObj *object,
+                                     const Point2d& object_speed);
+  virtual void SignalDrowning();
+  virtual void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------
 #endif /* OBJBOX_H */
-
