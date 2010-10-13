@@ -105,15 +105,17 @@ public:
 
   void CanBeGhost(bool state) { can_be_ghost = state; }
 
-  // Set/Get position
-  void SetX(Double x) { SetXY( Point2d(x, GetYDouble()) ); };
-  void SetY(Double y) { SetXY( Point2d(GetXDouble(), y) ); };
+  // Set/Get position - notice how we don't introduce rounding of the other coordinate
+  void SetX(Double x) { SetXY( Point2d(x, GetPhysY() * PIXEL_PER_METER) ); };
+  void SetY(Double y) { SetXY( Point2d(GetPhysX() * PIXEL_PER_METER, y) ); };
   void SetXY(const Point2i &position) { SetXY(Point2d(position.x, position.y)); };
   void SetXY(const Point2d &position);
-  int GetX() const { return GetXDouble(); };
-  int GetY() const { return GetYDouble(); };
-  Double GetXDouble() const { return round(GetPhysX() * PIXEL_PER_METER); };
-  Double GetYDouble() const { return round(GetPhysY() * PIXEL_PER_METER); };
+  // GetX/GetY use a hack assuming the coordinates are always positive!
+  int GetX() const { return uround(GetPhysX() * PIXEL_PER_METER); };
+  int GetY() const { return uround(GetPhysY() * PIXEL_PER_METER); };
+  // Get{X,Y} used to depend on Get{X,Y}Double, but this seems unnecessary Double roundtrips
+  Double GetXDouble() const { return GetX(); };
+  Double GetYDouble() const { return GetY(); };
   const Point2d GetPosition() const { return Point2d(GetXDouble(), GetYDouble()) ;};
 
   // Set/Get size
