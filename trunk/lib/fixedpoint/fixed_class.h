@@ -201,6 +201,12 @@ inline fixed_point<p> round(fixed_point<p> r)
   return result.intValue;
 }
 
+template <int p>
+inline int uround(fixed_point<p> r)
+{
+  return (r.intValue + (1<<(p-1)))>>p;
+}
+
 namespace detail {
   static bool isDigit(int c) {
     return c >= '0' &&  c <= '9';
