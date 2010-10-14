@@ -3,8 +3,8 @@
     <string name="init">Démarrage</string>
     <string name="readme">^Veuillez patienter pendant ques les données sont téléchargées</string>
 
-    <string name="device_config">Configuration de l\'apparel</string>
-    <string name="device_change_cfg">Changer la configuration de l\'apparel</string>
+    <string name="device_config">Configuration de l\'appareil</string>
+    <string name="device_change_cfg">Changer de configuration</string>
 
     <string name="download_unneeded">Inutile de télécharger</string>
     <string name="connecting_to">Connexion à %s</string>
