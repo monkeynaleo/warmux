@@ -91,7 +91,7 @@ void FlameThrowerBullet::ShootSound()
 void FlameThrowerBullet::DoExplosion()
 {
   Point2i pos=GetPosition();
-  particle.AddNow(pos, 1, particle_FIRE, true, 0, 1, FOUR);
+  particle.AddNow(pos, 1, particle_FIRE, true, 0, 1);
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }
 
