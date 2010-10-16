@@ -78,12 +78,7 @@ const int particle_spr_nbr = EXPLOSION_spr + 1;
 
 class Particle : public PhysicalObj
 {
-  /* If you need this, implement it (correctly)*/
-  Particle(const Particle&);
-  const Particle& operator=(const Particle&);
-  /*********************************************/
-
- protected:
+protected:
   bool on_top; // if true displayed on top of characters and weapons
   uint m_initial_time_to_live;
   uint m_left_time_to_live;
@@ -93,7 +88,7 @@ class Particle : public PhysicalObj
 
   Sprite *image;
 
- public:
+public:
   Particle(const std::string &name);
   ~Particle();
   virtual void Draw();
@@ -106,7 +101,6 @@ class Particle : public PhysicalObj
 
 class ParticleEngine
 {
- private:
   uint m_last_refresh;
   uint m_time_between_add;
 
@@ -117,7 +111,7 @@ class ParticleEngine
   static void AddLittleESmoke(const Point2i &pos, const uint &radius);
   static void AddBigESmoke(const Point2i &pos, const uint &radius);
 
- public:
+public:
   ParticleEngine(uint time=100);
   void AddPeriodic(const Point2i &position,
                    particle_t type,
