@@ -73,19 +73,19 @@ public:
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface() const
   {
-    ASSERT(!current_surface.IsNull());
+    assert(!current_surface.IsNull());
     return current_surface;
   }
 
   // Frame number
   uint GetCurrentFrame() const
   {
-    ASSERT(current_frame < frames.size());
+    assert(current_frame < frames.size());
     return current_frame;
   }
   void SetCurrentFrame(uint frame_no)
   {
-    ASSERT (frame_no < frames.size());
+    assert(frame_no < frames.size());
     if (current_frame != frame_no) {
       cache.InvalidLastFrame();
       MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
