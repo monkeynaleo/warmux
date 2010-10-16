@@ -269,7 +269,7 @@ void ParticleEngine::AddNow(const Point2i &position,
         tmp_norme = norme;
       }
 
-      if( angle == -1 ) {
+      if (angle == -1) {
         MSG_DEBUG("random.get", "ParticleEngine::AddNow(...) speed vector angle");
         tmp_angle = RandomSync().GetDouble(-3000/1000, 0);
       } else {
