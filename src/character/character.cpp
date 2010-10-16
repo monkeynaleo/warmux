@@ -493,7 +493,7 @@ void Character::Draw()
 
   DrawEnergyBar();
 
-  DrawName();
+  //DrawName();
 
   DrawLostEnergy();
 
