@@ -92,7 +92,8 @@ void ProgressBar::InitPos(uint px,
   y    = py;
   width = pwidth;
   height = pheight;
-  image.NewSurface(Point2i(width, height), SDL_SWSURFACE | SDL_SRCALPHA, true);
+  image.NewSurface(Point2i(width, height), SDL_SWSURFACE, false);
+  image.SetColorKey(SDL_SRCCOLORKEY, 0);
 }
 
 /*

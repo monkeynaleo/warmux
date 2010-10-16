@@ -55,6 +55,7 @@ EnergyBar::EnergyBar(uint _x,
     color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
     Color colors_value = GetResourceManager().LoadColor(res, color_name.str());
 
+    colors_value.SetAlpha(SDL_ALPHA_OPAQUE);
     ProcessThresholds(i, energy_step[i], colors_value);
   }
   GetResourceManager().UnLoadXMLProfile(res);
@@ -85,7 +86,7 @@ bool EnergyBar::LoadXMLConfiguration()
 
     if ("threshold" == xmlFile->GetNodeName(thresholdNode)) {
       if (xmlFile->ReadPercentageAttr(thresholdNode, "value", thresholdValue)) {
-        Color thresholdColor(0, 0, 0, 255);
+        Color thresholdColor(0, 0, 0, SDL_ALPHA_OPAQUE);
         xmlFile->ReadHexColorAttr(thresholdNode, "color", thresholdColor);
         ProcessThresholds(i++, thresholdValue, thresholdColor);
       } else {
@@ -103,7 +104,7 @@ void EnergyBar::ProcessThresholds(uint thresholdNumber,
 {
   if (1 > thresholdNumber || NB_OF_ENERGY_COLOR < thresholdNumber) {
     if (0 == thresholdNumber) {
-      Threshold first = { 0.0f, colorMax, 0.0f, 0.0f, 0.0f, 0.0f };
+      Threshold first = { 0.0f, colorMax, 0.0f, 0.0f, 0.0f };
       listThresholds.push_back(first);
     }
     return;
@@ -117,8 +118,7 @@ void EnergyBar::ProcessThresholds(uint thresholdNumber,
   Threshold newThreshold = { thresholdMax, colorMax,
                              (colorMax.GetRed()   - colorMin.GetRed())   * inv_range,
                              (colorMax.GetGreen() - colorMin.GetGreen()) * inv_range,
-                             (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_range,
-                             (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_range };
+                             (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_range };
   listThresholds.push_back(newThreshold);
 }
 
@@ -166,6 +166,5 @@ void EnergyBar::Actu(int real_energy)
   value_color.SetColor((int) (colorMin.GetRed()   + (thresholdMax.redCoef   * coefVal)),
                        (int) (colorMin.GetGreen() + (thresholdMax.greenCoef * coefVal)),
                        (int) (colorMin.GetBlue()  + (thresholdMax.blueCoef  * coefVal)),
-                       (int) (colorMin.GetAlpha() + (thresholdMax.alphaCoef * coefVal)));
+                       SDL_ALPHA_OPAQUE);
 }
-
