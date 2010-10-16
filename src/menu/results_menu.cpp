@@ -335,17 +335,15 @@ void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
             duration_scale, Time::GetInstance()->Read(), energy_scale);
 
   uint               index   = 0;
-  static const Color clist[] =
-    { black_color, primary_red_color, gray_color, primary_green_color, black_color, primary_blue_color };
   for (it=results.begin(); it!=results.end(); ++it) {
     const Team* team = (*it)->getTeam();
     if (team) {
       // Legend line
       surface.BoxColor(Rectanglei(x+w-112, y+12+index*40,
-                                  56, LINE_THICKNESS), clist[index]);
+                                  56, LINE_THICKNESS), team->GetColor());
       // Legend icon
       surface.Blit(team->GetFlag(), Point2i(x+w-48, y+12+index*40-20));
-      DrawTeamGraph(team, graph_x, y+graph_h, duration_scale, energy_scale, max_duration, clist[index]);
+      DrawTeamGraph(team, graph_x, y+graph_h, duration_scale, energy_scale, max_duration, team->GetColor());
       index++;
     }
   }
