@@ -43,7 +43,7 @@ public:
     { SetColor(200, 50, 50, 130); }
   Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a = 130)
     { SetColor(r, g, b, a); }
-  Color(Uint8 grey, Uint8 a)
+  Color(Uint8 grey, Uint8 a = SDL_ALPHA_OPAQUE)
     { SetColor(grey, grey, grey, a); }
   Color(const Color& other) { value.color = other.value.color; }
 
