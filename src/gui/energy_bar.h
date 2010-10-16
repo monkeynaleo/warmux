@@ -37,7 +37,6 @@ public:
     float redCoef;
     float greenCoef;
     float blueCoef;
-    float alphaCoef;
 
     bool operator < (const Threshold & threshold) const {
       return value < threshold.value;
