@@ -43,7 +43,6 @@ private:
   float coefRed;
   float coefGreen;
   float coefBlue;
-  float coefAlpha;
   int divisor;
   bool gradientMode;
 

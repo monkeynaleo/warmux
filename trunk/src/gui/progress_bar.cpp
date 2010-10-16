@@ -27,15 +27,9 @@
 #include "tool/math_tools.h"
 
 ProgressBar::ProgressBar() :
-  border_color(0, 0, 0, 255),
-  value_color(255, 255, 255, 255),
-  background_color(100, 100, 100, 255),
-  image(),
-  coefRed(),
-  coefGreen(),
-  coefBlue(),
-  coefAlpha(),
-  divisor(),
+  border_color(0, 0, 0, SDL_ALPHA_OPAQUE),
+  value_color(255, 255, 255, SDL_ALPHA_OPAQUE),
+  background_color(100, 100, 100, SDL_ALPHA_OPAQUE),
   gradientMode(false),
   x(0),
   y(0),
@@ -47,10 +41,7 @@ ProgressBar::ProgressBar() :
   m_use_ref_val(false),
   m_ref_val(0),
   bar_value(0),
-  orientation(),
-  colorMin(),
-  colorMax(),
-  mark()
+  orientation()
 {
 }
 
@@ -62,15 +53,9 @@ ProgressBar::ProgressBar(uint _x,
                          int minValue,
                          int maxValue,
                          enum orientation _orientation) :
-  border_color(0, 0, 0, 255),
-  value_color(255, 255, 255, 255),
-  background_color(100, 100, 100, 255),
-  image(),
-  coefRed(),
-  coefGreen(),
-  coefBlue(),
-  coefAlpha(),
-  divisor(),
+  border_color(0, 0, 0, SDL_ALPHA_OPAQUE),
+  value_color(255, 255, 255, SDL_ALPHA_OPAQUE),
+  background_color(100, 100, 100, SDL_ALPHA_OPAQUE),
   gradientMode(false),
   x(_x),
   y(_y),
@@ -82,12 +67,10 @@ ProgressBar::ProgressBar(uint _x,
   m_use_ref_val(false),
   m_ref_val(0),
   bar_value(0),
-  orientation(_orientation),
-  colorMin(),
-  colorMax(),
-  mark()
+  orientation(_orientation)
 {
-  image.NewSurface(Point2i(width, height), SDL_SWSURFACE | SDL_SRCALPHA, true);
+  image.NewSurface(Point2i(width, height), SDL_SWSURFACE, false);
+  image.SetColorKey(SDL_SRCCOLORKEY, 0);
 }
 
 void ProgressBar::SetMinMaxValueColor(const Color & min,
@@ -133,7 +116,6 @@ void ProgressBar::InitVal(int pval, int pmin, int pmax,
     coefRed   = (colorMax.GetRed()   - colorMin.GetRed())   * inv_fmax;
     coefGreen = (colorMax.GetGreen() - colorMin.GetGreen()) * inv_fmax;
     coefBlue  = (colorMax.GetBlue()  - colorMin.GetBlue())  * inv_fmax;
-    coefAlpha = (colorMax.GetAlpha() - colorMin.GetAlpha()) * inv_fmax;
   }
 }
 
@@ -147,7 +129,7 @@ void ProgressBar::UpdateValue(int pval)
     value_color.SetColor((Uint8) (colorMin.GetRed()   + (int)(coefRed   * absVal)),
                          (Uint8) (colorMin.GetGreen() + (int)(coefGreen * absVal)),
                          (Uint8) (colorMin.GetBlue()  + (int)(coefBlue  * absVal)),
-                         (Uint8) (colorMin.GetAlpha() + (int)(coefAlpha * absVal)));
+                         SDL_ALPHA_OPAQUE);
   }
 
 }
