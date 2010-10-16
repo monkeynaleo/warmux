@@ -34,7 +34,8 @@ class ProgressBar
 public:
   Color border_color, value_color, background_color;
   Surface image; // in order to pemit alpha blended progressbar
-  enum orientation {
+  enum orientation
+  {
     PROG_BAR_VERTICAL,
     PROG_BAR_HORIZONTAL
   };
@@ -63,18 +64,19 @@ protected:
   int ComputeValue(int val) const;
   uint ComputeBarValue(int val) const;
 
-  typedef struct s_mark_t {
+  typedef struct s_mark_t
+  {
     Color color;
     uint val;
   } mark_t;
 
- public:
-  void SetBorderColor(const Color & color) { border_color = color; };
-  void SetBackgroundColor(const Color & color) { background_color = color; };
-  void SetValueColor(const Color & color) { value_color = color; };
+public:
+  void SetBorderColor(const Color & color) { border_color = color; border_color.SetAlpha(SDL_ALPHA_OPAQUE); }
+  void SetBackgroundColor(const Color & color) { background_color = color; background_color.SetAlpha(0); }
+  void SetValueColor(const Color & color) { value_color = color; value_color.SetAlpha(SDL_ALPHA_OPAQUE); }
   void SetMinMaxValueColor(const Color & min, const Color & max);
 
- protected:
+protected:
   typedef std::list<mark_t>::iterator mark_it;
   typedef std::list<mark_t>::const_iterator mark_it_const;
   std::list<mark_t> mark;
@@ -96,7 +98,7 @@ public:
   int GetMaxValue() { return max; };
 
   // Update current value
-  void UpdateValue (int val);
+  void UpdateValue(int val);
 
   // Initialise la position
   virtual void InitPos(uint x, 
@@ -112,8 +114,7 @@ public:
 
   // Set reference value
   // Use it after InitVal !
-  void SetReferenceValue(bool use, 
-                         int value = 0);
+  void SetReferenceValue(bool use, int value = 0);
 
   // Draw la barre de progresssion
   void Draw() const { DrawXY(Point2i(x, y)); };
@@ -121,19 +122,18 @@ public:
   // Draw the progress bar
   virtual void DrawXY(const Point2i & pos) const;
 
-  inline const int & GetMaxVal() const { return this->max; }
-  inline const int & GetMinVal() const { return this->min; }
-  inline const int & GetVal() const { return this->val; }
+  const int GetMaxVal() const { return max; }
+  const int GetMinVal() const { return min; }
+  const int GetVal() const { return val; }
 
   int GetWidth() const { return width; }
   int GetHeight() const { return height; }
   Point2i GetSize() const { return Point2i(width, height); }
-  uint GetX() const { return this->x; }
-  uint GetY() const { return this->y; }
+  uint GetX() const { return x; }
+  uint GetY() const { return y; }
 
   // add/remove value tag
-  mark_it AddTag(int val, 
-                     const Color & coul);
+  mark_it AddTag(int val, const Color & coul);
   void ResetTag() { mark.clear(); };
 };
 

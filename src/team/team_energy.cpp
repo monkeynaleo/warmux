@@ -85,8 +85,8 @@ TeamEnergy::TeamEnergy(Team * _team)
   energy_bar = new EnergyBar(0, 0, BAR_WIDTH, BAR_HEIGHT,
                              0, 0, 100, ProgressBar::PROG_BAR_VERTICAL);
 
-  energy_bar->SetBorderColor(Color(255, ALPHA));
-  energy_bar->SetBackgroundColor(Color(BACKGROUND_GREY, BACK_ALPHA));
+  energy_bar->SetBorderColor(Color(255));
+  energy_bar->SetBackgroundColor(Color(BACKGROUND_GREY));
 }
 
 TeamEnergy::~TeamEnergy()
