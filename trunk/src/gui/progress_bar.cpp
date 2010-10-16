@@ -76,9 +76,11 @@ ProgressBar::ProgressBar(uint _x,
 void ProgressBar::SetMinMaxValueColor(const Color & min,
                                       const Color & max)
 {
-  this->gradientMode = true;
-  this->colorMin     = min;
-  this->colorMax     = max;
+  gradientMode = true;
+  colorMin     = min;
+  colorMax     = max;
+  colorMin.SetAlpha(SDL_ALPHA_OPAQUE);
+  colorMax.SetAlpha(SDL_ALPHA_OPAQUE);
 }
 
 void ProgressBar::InitPos(uint px,
@@ -86,8 +88,8 @@ void ProgressBar::InitPos(uint px,
         uint pwidth,
         uint pheight)
 {
-  ASSERT (3 <= pwidth);
-  ASSERT (3 <= pheight);
+  assert(3 <= pwidth);
+  assert(3 <= pheight);
   x    = px;
   y    = py;
   width = pwidth;
