@@ -26,6 +26,7 @@ MouseCursor::MouseCursor(Mouse::pointer_t _pointer_id,
                          std::string filename, Point2i _clic_pos)
 {
   pointer_id = _pointer_id;
-  surf.ImgLoad(filename);
+  Surface tmp(filename);
+  surf = tmp.DisplayFormatAlpha();
   clic_pos = _clic_pos;
 }
