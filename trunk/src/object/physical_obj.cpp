@@ -727,10 +727,13 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     rect.SetSizeY((b > 0) ? b - rect.GetPositionY() : 0);
   }
 
-  if (CollidedObjectXY(position + Point2i(0, 1)))
-    return false;
-
-  return GetWorld().RectIsInVacuum(rect);
+  // Check RectIsInVacuum() first, because it's much faster than CollidedObjectXY()
+  if (GetWorld().RectIsInVacuum(rect)) {
+    if (CollidedObjectXY(position + Point2i(0, 1)))
+      return false;
+    return true;
+  }
+  return false;
 }
 
 bool PhysicalObj::IsInWater() const
