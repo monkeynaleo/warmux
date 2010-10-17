@@ -47,31 +47,32 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
+#define DEF_KEY_CAPTIONS_PARAMS 130, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption controls_captions[] = {
-    { _("Quit game"), 81, 13, DEF_CAPTIONS_PARAMS },
-    { _("High jump"), 439, 326, DEF_CAPTIONS_PARAMS },
-    { _("Jump backwards"), 439, 297, DEF_CAPTIONS_PARAMS },
-    { _("Jump backwards"), 439, 356, DEF_CAPTIONS_PARAMS },
-    { _("Drag&drop: Move camera"), 520, 395, DEF_CAPTIONS_PARAMS },
-    { _("Center camera on character"), 520, 422, DEF_CAPTIONS_PARAMS },
-    { _("Show/hide the interface"), 271, 43, DEF_CAPTIONS_PARAMS },
-    { _("Toggle fullscreen"), 491, 42, DEF_CAPTIONS_PARAMS },
-    { _("Configuration menu"), 491, 72, DEF_CAPTIONS_PARAMS },
-    { _("Talk in network battles"), 92, 296, DEF_CAPTIONS_PARAMS },
-    { _("Change weapon category"), 81, 72, DEF_CAPTIONS_PARAMS },
-    { _("Change weapon countdown"), 618, 164, DEF_CAPTIONS_PARAMS },
-    { _("Change aim angle"), 618, 194, DEF_CAPTIONS_PARAMS },
-    { _("Move character"), 618, 286, DEF_CAPTIONS_PARAMS },
-    { _("On map: select a target"), 618, 225, DEF_CAPTIONS_PARAMS },
-    { _("On a character: select it"), 618, 256, DEF_CAPTIONS_PARAMS },
-    { _("Show weapons menu"), 618, 134, DEF_CAPTIONS_PARAMS },
-    { _("Smaller aim angle and walk step"), 92, 326, DEF_CAPTIONS_PARAMS },
-    { _("Move camera with mouse or arrows"), 386, 394, DEF_CAPTIONS_PARAMS },
-    { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_CAPTIONS_PARAMS },
-    { _("Toggle minimap"), 271, 72, DEF_CAPTIONS_PARAMS },
-    { _("Change active character"), 92, 356, DEF_CAPTIONS_PARAMS },
-    { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
-    { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
+    { _("Quit game"), 81, 13, DEF_KEY_CAPTIONS_PARAMS },
+    { _("High jump"), 439, 326, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Jump backwards"), 439, 297, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Jump backwards"), 439, 356, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Drag&drop: Move camera"), 520, 395, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Center camera on character"), 520, 422, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Show/hide the interface"), 271, 43, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Toggle fullscreen"), 491, 42, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Configuration menu"), 491, 72, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Talk in network battles"), 92, 296, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Change weapon category"), 81, 72, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Change weapon countdown"), 618, 164, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Change aim angle"), 618, 194, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Move character"), 618, 286, DEF_KEY_CAPTIONS_PARAMS },
+    { _("On map: select a target"), 618, 225, DEF_KEY_CAPTIONS_PARAMS },
+    { _("On a character: select it"), 618, 256, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Show weapons menu"), 618, 134, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Smaller aim angle and walk step"), 92, 326, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Move camera with mouse or arrows"), 386, 394, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Toggle minimap"), 271, 72, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Change active character"), 92, 356, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Center camera on character"), 386, 422, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Quickly quit game with Ctrl"), 81, 43, DEF_KEY_CAPTIONS_PARAMS },
   };
   Widget *w = new FigureWidget(Point2i(max_w,
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -81,7 +82,7 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 
-# define DEF_STARTGAME_CAPTIONS_PARAMS 238, Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
+# define DEF_STARTGAME_CAPTIONS_PARAMS 238, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption startgame_captions[] = {
     { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
@@ -98,14 +99,23 @@ HelpMenu::HelpMenu()
                        PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game menu"), w);
 
-#if 0
+# define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, Font::FONT_BOLD, dark_gray_color
+  static const FigureWidget::Caption gamemode_captions[] = {
+    { _("Change some game rules"), 206, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("How long you have to play per turn"), 483, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("When a character can be selected"), 761, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Initial life points"), 1038, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Maximum energy for one character"), 206, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Duration until death mode"), 482, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Damage per turn during death mode"), 761, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("The bigger the faster you'll fall!"), 1042, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+  };
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/game_mode",
-                       startgame_captions, ARRAY_SIZE(gamemode_captions),
-                       238, PictureWidget::FIT_SCALING);
+                       gamemode_captions, ARRAY_SIZE(gamemode_captions),
+                       PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game mode"), w);
-#endif
 
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
