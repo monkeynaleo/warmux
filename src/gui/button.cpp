@@ -85,8 +85,8 @@ bool Button::LoadXMLConfiguration()
   }
 
   image = new Sprite();
-  image->AddFrame(pictureUp);
-  image->AddFrame(pictureDown);
+  image->AddFrame(pictureUp.DisplayFormatAlpha());
+  image->AddFrame(pictureDown.DisplayFormatAlpha());
 
   return true;
 }
