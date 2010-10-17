@@ -35,7 +35,6 @@
 #include "gui/label.h"
 #include "gui/scroll_box.h"
 #include "gui/null_widget.h"
-#include "gui/picture_widget.h"
 #include "gui/tabs.h"
 #include "gui/talk_box.h"
 #include "include/app.h"
@@ -392,7 +391,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   tabs = new MultiTabs(tab_size);
 
   // Podium, drawn as first tab
-  FigureWidget::Captions captions;
   if (second_team)
     DrawTeamOnPodium(*second_team, Point2i(20,30));
 
