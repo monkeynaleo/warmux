@@ -29,7 +29,7 @@
 #define ARRAY_SIZE(array_) (sizeof(array_)/sizeof(*array_))
 
 /** Why can't I initialize such a simple struct like an aggregate !? */
-#define DEF_CAPTIONS_PARAMS  130, Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color
+#define DEF_CAPTIONS_PARAMS  Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color
 
 class FigureWidget : public PictureWidget
 {
