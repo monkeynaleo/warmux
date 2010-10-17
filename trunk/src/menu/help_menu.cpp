@@ -47,7 +47,7 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
-#define DEF_KEY_CAPTIONS_PARAMS 130, (Font::font_size_t)14, DEF_CAPTIONS_PARAMS
+#define DEF_KEY_CAPTIONS_PARAMS 132, (Font::font_size_t)14, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption controls_captions[] = {
     { _("Quit game"), 81, 13, DEF_KEY_CAPTIONS_PARAMS },
     { _("High jump"), 439, 326, DEF_KEY_CAPTIONS_PARAMS },
@@ -101,13 +101,13 @@ HelpMenu::HelpMenu()
 
 # define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption gamemode_captions[] = {
-    { _("Change some game rules"), 206, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("How long you have to play per turn"), 483, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("When a character can be selected"), 761, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Initial life points"), 1038, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Maximum energy for one character"), 206, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Duration until death mode"), 482, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Damage per turn during death mode"), 761, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Experiment new game rules"), 206, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this if you are a slow player"), 483, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("When a character can be switched"), 761, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("More energy, more shots needed"), 1038, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("If you like medkits, increase this"), 206, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this if you like long games"), 482, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this for faster death mode end"), 761, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
     { _("The bigger the faster you'll fall!"), 1042, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
   };
   w = new FigureWidget(Point2i(max_w,
