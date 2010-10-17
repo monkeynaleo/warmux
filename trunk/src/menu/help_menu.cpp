@@ -47,7 +47,7 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
-#define DEF_KEY_CAPTIONS_PARAMS 130, DEF_CAPTIONS_PARAMS
+#define DEF_KEY_CAPTIONS_PARAMS 130, (Font::font_size_t)14, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption controls_captions[] = {
     { _("Quit game"), 81, 13, DEF_KEY_CAPTIONS_PARAMS },
     { _("High jump"), 439, 326, DEF_KEY_CAPTIONS_PARAMS },
@@ -82,7 +82,7 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
 
-# define DEF_STARTGAME_CAPTIONS_PARAMS 238, DEF_CAPTIONS_PARAMS
+# define DEF_STARTGAME_CAPTIONS_PARAMS 238, (Font::font_size_t)22, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption startgame_captions[] = {
     { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
@@ -99,7 +99,7 @@ HelpMenu::HelpMenu()
                        PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game menu"), w);
 
-# define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, Font::FONT_BOLD, dark_gray_color
+# define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption gamemode_captions[] = {
     { _("Change some game rules"), 206, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
     { _("How long you have to play per turn"), 483, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
