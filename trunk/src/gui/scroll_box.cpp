@@ -49,7 +49,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   GetResourceManager().UnLoadXMLProfile(res);
 
   Widget::SetBorder(white_color, 1);
-  Widget::SetBackgroundColor(defaultListColor1);
+  Widget::SetBackgroundColor(transparent_color);
 
   scrollbar_width = m_up->GetSizeX();
   // Let's consider the scrollbar is not displayed for now.
