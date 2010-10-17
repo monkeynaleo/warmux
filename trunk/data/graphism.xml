@@ -183,6 +183,7 @@
   <surface name="background" file="menu/background.jpg" />
   <surface name="shortkeys" file="menu/help_shortkeys.png" />
   <surface name="startgame_menu" file="menu/help_team_selection.jpg" />
+  <surface name="game_mode" file="menu/help_game_mode.jpg" />
 </section>
 
 <section name="object">
