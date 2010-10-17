@@ -157,7 +157,11 @@ void Font::Write(const Point2i & pos,
 Surface Font::CreateSurface(const std::string & txt,
                             const Color & color)
 {
-  return Surface(TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor()));
+#ifdef HANDHELD
+  return Surface(TTF_RenderUTF8_Solid(m_font, txt.c_str(), color.GetSDLColor())).DisplayFormat();
+#else
+  return Surface(TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor())).DisplayFormatAlpha();
+#endif
 }
 
 Surface Font::Render(const std::string & txt,
