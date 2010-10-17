@@ -640,7 +640,7 @@ FT_BEGIN_HEADER
   /* files into an existing face.  Note that if set, the T1 driver will be */
   /* unable to produce kerning distances.                                  */
   /*                                                                       */
-#undef T1_CONFIG_OPTION_NO_AFM
+#define T1_CONFIG_OPTION_NO_AFM
 
 
   /*************************************************************************/
@@ -649,7 +649,7 @@ FT_BEGIN_HEADER
   /* compilation of the Multiple Masters font support in the Type 1        */
   /* driver.                                                               */
   /*                                                                       */
-#undef T1_CONFIG_OPTION_NO_MM_SUPPORT
+#define T1_CONFIG_OPTION_NO_MM_SUPPORT
 
 
   /*************************************************************************/
@@ -687,7 +687,7 @@ FT_BEGIN_HEADER
    * is recommended to disable the macro since it reduces the library's code
    * size and activates a few memory-saving optimizations as well.
    */
-#define FT_CONFIG_OPTION_OLD_INTERNALS
+#undef FT_CONFIG_OPTION_OLD_INTERNALS
 
 
   /*
