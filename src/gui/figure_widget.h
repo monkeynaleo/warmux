@@ -29,7 +29,7 @@
 #define ARRAY_SIZE(array_) (sizeof(array_)/sizeof(*array_))
 
 /** Why can't I initialize such a simple struct like an aggregate !? */
-#define DEF_CAPTIONS_PARAMS  Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color
+#define DEF_CAPTIONS_PARAMS  130, Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color
 
 class FigureWidget : public PictureWidget
 {
@@ -37,7 +37,7 @@ public:
   struct Caption
   {
     std::string        string; // gcc does not support correctly a char* here.
-    int                x, y;
+    int                x, y, w;
     Font::font_size_t  fsize;
     Font::font_style_t fstyle;
     Color              color;
@@ -45,7 +45,6 @@ public:
   typedef std::vector<Caption> Captions;
 
 private:
-  int        box_width;
   Captions   captions;
 
 public:
@@ -53,17 +52,15 @@ public:
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Captions& caps,
-               int w, ScalingType type = FIT_SCALING)
+               ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
-    , box_width(w)
     , captions(caps)
   { }
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                const Caption* caps, size_t num,
-               int w, ScalingType type = FIT_SCALING)
+               ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
-    , box_width(w)
     , captions(caps, caps+num)
   { }
 

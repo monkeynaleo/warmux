@@ -34,6 +34,19 @@
 HelpMenu::HelpMenu()
   : Menu("help/background", vCancel)
 {
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+
+  int window_w = GetMainWindow().GetWidth();
+  int window_h = GetMainWindow().GetHeight();
+
+  float factor = (window_w < 640) ? 0.02f : 0.05f;
+  int border   = window_w * factor;
+  int max_w    = window_w - 2*border;
+  int max_h    = window_h - actions_buttons->GetSizeY() - border;
+
+  MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
+  tabs->SetPosition(border, border);
+
   static const FigureWidget::Caption controls_captions[] = {
     { _("Quit game"), 81, 13, DEF_CAPTIONS_PARAMS },
     { _("High jump"), 439, 326, DEF_CAPTIONS_PARAMS },
@@ -60,8 +73,15 @@ HelpMenu::HelpMenu()
     { _("Center camera on character"), 386, 422, DEF_CAPTIONS_PARAMS },
     { _("Quickly quit game with Ctrl"), 81, 43, DEF_CAPTIONS_PARAMS },
   };
+  Widget *w = new FigureWidget(Point2i(max_w,
+                                       tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                               "help/shortkeys",
+                               controls_captions, ARRAY_SIZE(controls_captions),
+                               PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Keyboard"), w);
+  widgets.AddWidget(tabs);
 
-# define DEF_STARTGAME_CAPTIONS_PARAMS  Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
+# define DEF_STARTGAME_CAPTIONS_PARAMS 238, Font::FONT_BIG, Font::FONT_NORMAL, dark_gray_color
   static const FigureWidget::Caption startgame_captions[] = {
     { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
@@ -71,34 +91,21 @@ HelpMenu::HelpMenu()
     { _("Change number of playing teams"), 146, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
     { _("Click/wheelmouse to change map"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
   };
-
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-
-  int window_w = GetMainWindow().GetWidth();
-  int window_h = GetMainWindow().GetHeight();
-
-  float factor = (window_w < 640) ? 0.02f : 0.05f;
-  int border   = window_w * factor;
-  int max_w    = window_w - 2*border;
-  int max_h    = window_h - actions_buttons->GetSizeY() - border;
-
-  MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
-  tabs->SetPosition(border, border);
-
-  Widget *w = new FigureWidget(Point2i(max_w,
-                                       tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                               "help/shortkeys",
-                               controls_captions, ARRAY_SIZE(controls_captions),
-                               130, PictureWidget::FIT_SCALING);
-  tabs->AddNewTab("unused", _("Keyboard"), w);
-  widgets.AddWidget(tabs);
-
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/startgame_menu",
                        startgame_captions, ARRAY_SIZE(startgame_captions),
-                       238, PictureWidget::FIT_SCALING);
+                       PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game menu"), w);
+
+#if 0
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/game_mode",
+                       startgame_captions, ARRAY_SIZE(gamemode_captions),
+                       238, PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Game mode"), w);
+#endif
 
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
