@@ -222,6 +222,7 @@ ProgressBar::mark_it ProgressBar::AddTag(int val, const Color & color)
   mark_t m;
   m.val   = ComputeBarValue(val);
   m.color = color;
+  m.color.SetAlpha(SDL_ALPHA_OPAQUE);
   mark.push_back(m);
 
   return --mark.end();
