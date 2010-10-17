@@ -112,8 +112,8 @@ bool CheckBox::LoadXMLConfiguration()
   }
 
   m_checked_image = new Sprite();
-  m_checked_image->AddFrame(picChecked);
-  m_checked_image->AddFrame(picUnchecked);
+  m_checked_image->AddFrame(picChecked.DisplayFormatAlpha());
+  m_checked_image->AddFrame(picUnchecked.DisplayFormatAlpha());
 
   //m_checked_image->EnableLastFrameCache();
 
