@@ -416,6 +416,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
 
  if ( !font || !font->face ) {
    return FT_Err_Invalid_Handle;
+   TTF_SetError( "No valid font set yet" );
  }
 
  face = font->face;
@@ -426,6 +427,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
  }
  error = FT_Load_Glyph( face, cached->index, FT_LOAD_DEFAULT );
  if( error ) {
+   TTF_SetError( "Couldn't load glyph from FreeType" );
    return error;
  }
 
@@ -495,6 +497,7 @@ static FT_Error Load_Glyph( TTF_Font* font, Uint16 ch, c_glyph* cached, int want
      error = FT_Render_Glyph( glyph, ft_render_mode_normal );
    }
    if( error ) {
+     TTF_SetError( "FreeType couldn't render glyph" );
      return error;
    }
 
@@ -1104,6 +1107,7 @@ SDL_Surface *TTF_RenderUNICODE_Solid(TTF_Font *font,
  /* Create the target surface */
  textbuf = SDL_AllocSurface(SDL_SWSURFACE, width, height, 8, 0, 0, 0, 0);
  if( textbuf == NULL ) {
+   TTF_SetError( "Out of memory" );
    return NULL;
  }
 
