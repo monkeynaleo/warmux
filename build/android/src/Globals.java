@@ -29,6 +29,7 @@ class Globals {
   public static boolean PhoneHasArrowKeys = false;
   public static boolean UseAccelerometerAsArrowKeys = false;
   public static int AccelerometerSensitivity = 0;
+  public static int AccelerometerCenterPos = 0;
   public static int TrackballDampening = 0;
   public static int AudioBufferConfig = 0;
 

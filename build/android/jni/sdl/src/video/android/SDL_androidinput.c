@@ -137,7 +137,7 @@ JAVA_EXPORT_NAME(AccelerometerReader_nativeAccelerometer) ( JNIEnv*  env, jobjec
   //float accY = atan2f(accPosZ, accPosY) * M_1_PI;
   float normal = sqrt(accPosX*accPosX+accPosY*accPosY+accPosZ*accPosZ);
   if(normal <= 0.0000001f)
-    normal = 1.0f;
+    normal = 0.00001f;
 
   updateOrientation (accPosX/normal, accPosY/normal, 0.0f);
 }
@@ -297,19 +297,19 @@ void ANDROID_InitOSKeymap()
   keymap[KEYCODE_NOTIFICATION] = SDL_KEY(F7);
 }
 
-static float dx = 0.04, dy = 0.1, dz = 0.1; // For accelerometer
+static float dx = 0.04, dy = 0.1, dz = 0.1, joystickSensitivity = 400.0f; // For accelerometer
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSensitivity) ( JNIEnv*  env, jobject thiz, jint value)
+JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSensitivity) ( JNIEnv*  env, jobject thiz, jint sensitivity, jint centerPos)
 {
-  dx = 0.04; dy = 0.08; dz = 0.08; // Fast sensitivity
-  if( value == 1 ) // Medium sensitivity
+  dx = 0.04; dy = 0.08; dz = 0.08; joystickSensitivity = 32767.0f * 3.0f; // Fast sensitivity
+  if( sensitivity == 1 )
   {
-    dx = 0.1; dy = 0.15; dz = 0.15;
+    dx = 0.1; dy = 0.15; dz = 0.15; joystickSensitivity = 32767.0f * 2.0f; // Medium sensitivity
   }
-  if( value == 2 ) // Slow sensitivity
+  if( sensitivity == 2 )
   {
-    dx = 0.2; dy = 0.25; dz = 0.25;
+    dx = 0.2; dy = 0.25; dz = 0.25; joystickSensitivity = 32767.0f; // Slow sensitivity
   }
 }
 
@@ -327,26 +327,39 @@ void updateOrientation ( float accX, float accY, float accZ )
   static float midX = 0, midY = 0, midZ = 0;
   static int pressLeft = 0, pressRight = 0, pressUp = 0, pressDown = 0, pressR = 0, pressL = 0;
 
-  midX = 0.0f; // Do not remember old value for phone tilt, it feels weird
-
-  if( isJoystickUsed && CurrentJoysticks[0] ) // TODO: mutex for that stuff?
+  if( accelerometerCenterPos == ACCELEROMETER_CENTER_FIXED_START )
   {
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, (Sint16)(fmin(32767, fmax(-32768, (accX - midX) * 400.0))));
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, (Sint16)(fmin(32767, fmax(-32768, (accY - midY) * 400.0))));
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, (Sint16)(fmin(32767, fmax(-32768, (accZ - midZ) * 400.0))));
-
-    // TODO: option for fixed/floating center pos
-    if( accY < midY - dy*2 )
-      midY = accY + dy*2;
-    if( accY > midY + dy*2 )
-      midY = accY - dy*2;
-    if( accZ < midZ - dz*2 )
-      midZ = accZ + dz*2;
-    if( accZ > midZ + dz*2 )
-      midZ = accZ - dz*2;
+    accelerometerCenterPos = ACCELEROMETER_CENTER_FIXED_HORIZ;
+    midX = accX;
+    midY = accY;
+    midZ = accZ;
   }
 
-  if(isJoystickUsed)
+  // midX = 0.0f; // Do not remember old value for phone tilt, it feels weird
+
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): %f %f %f", accX, accY, accZ);
+
+  if( SDL_ANDROID_isJoystickUsed && SDL_ANDROID_CurrentJoysticks[0] ) // TODO: mutex for that stuff?
+  {
+    __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): sending joystick event");
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accX - midX) * joystickSensitivity))));
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accY - midY) * joystickSensitivity))));
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accZ - midZ) * joystickSensitivity))));
+
+    if( accelerometerCenterPos == ACCELEROMETER_CENTER_FLOATING )
+    {
+      if( accY < midY - dy*2 )
+        midY = accY + dy*2;
+      if( accY > midY + dy*2 )
+        midY = accY - dy*2;
+      if( accZ < midZ - dz*2 )
+        midZ = accZ + dz*2;
+      if( accZ > midZ + dz*2 )
+        midZ = accZ - dz*2;
+    }
+  }
+
+  if(SDL_ANDROID_isJoystickUsed)
     return;
 
   if( accX < midX - dx )
@@ -472,6 +485,7 @@ void updateOrientation ( float accX, float accY, float accZ )
     midZ = accZ - dz*2;
 
 }
+
 
 static int leftPressed = 0, rightPressed = 0, upPressed = 0, downPressed = 0;
 

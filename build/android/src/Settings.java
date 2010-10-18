@@ -244,6 +244,11 @@ class Settings
   static void showAccelerometerConfig(final MainActivity p)
   {
     Globals.AccelerometerSensitivity = 0;
+    if( ! Globals.UseAccelerometerAsArrowKeys )
+    {
+      showAccelerometerCenterConfig(p);
+      return;
+    }
 
     final CharSequence[] items = { p.getResources().getString(R.string.accel_fast),
                                    p.getResources().getString(R.string.accel_medium),
@@ -256,6 +261,36 @@ class Settings
       public void onClick(DialogInterface dialog, int item)
       {
         Globals.AccelerometerSensitivity = item;
+
+        dialog.dismiss();
+        showAccelerometerCenterConfig(p);
+      }
+    });
+    AlertDialog alert = builder.create();
+    alert.setOwnerActivity(p);
+    alert.show();
+  }
+
+  static void showAccelerometerCenterConfig(final MainActivity p)
+  {
+    Globals.AccelerometerSensitivity = 0;
+    if( ! Globals.UseAccelerometerAsArrowKeys )
+    {
+      showScreenKeyboardConfig(p);
+      return;
+    }
+
+    final CharSequence[] items = { p.getResources().getString(R.string.accel_floating),
+                    p.getResources().getString(R.string.accel_fixed_start),
+                    p.getResources().getString(R.string.accel_fixed_horiz) };
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(p);
+    builder.setTitle(R.string.accel_question_center);
+    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
+    {
+      public void onClick(DialogInterface dialog, int item)
+      {
+        Globals.AccelerometerCenterPos = item;
 
         dialog.dismiss();
         showAudioConfig(p);
@@ -321,7 +356,7 @@ class Settings
       nativeSetJoystickUsed();
     if( Globals.AppUsesMultitouch )
       nativeSetMultitouchUsed();
-    nativeSetAccelerometerSensitivity(Globals.AccelerometerSensitivity);
+    nativeSetAccelerometerSettings(Globals.AccelerometerSensitivity, Globals.AccelerometerCenterPos);
     nativeSetTrackballDampening(Globals.TrackballDampening);
     String lang = new String(Locale.getDefault().getLanguage());
     if( Locale.getDefault().getCountry().length() > 0 )
@@ -350,7 +385,7 @@ class Settings
   private static native void nativeIsSdcardUsed(int flag);
   private static native void nativeSetTrackballUsed();
   private static native void nativeSetTrackballDampening(int value);
-  private static native void nativeSetAccelerometerSensitivity(int value);
+  private static native void nativeSetAccelerometerSettings(int sensitivity, int centerPos);
   private static native void nativeSetMouseUsed();
   private static native void nativeSetJoystickUsed();
   private static native void nativeSetMultitouchUsed();
