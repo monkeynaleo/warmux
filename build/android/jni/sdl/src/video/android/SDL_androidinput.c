@@ -331,11 +331,11 @@ void updateOrientation ( float accX, float accY, float accZ )
 
   if( isJoystickUsed && CurrentJoysticks[0] ) // TODO: mutex for that stuff?
   {
-    // TODO: fix coefficients
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, (accX - midX) * 1000);
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, (accY - midY) * 1000);
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, (accZ - midZ) * 1000);
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, (Sint16)(fmin(32767, fmax(-32768, (accX - midX) * 400.0))));
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, (Sint16)(fmin(32767, fmax(-32768, (accY - midY) * 400.0))));
+    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, (Sint16)(fmin(32767, fmax(-32768, (accZ - midZ) * 400.0))));
 
+    // TODO: option for fixed/floating center pos
     if( accY < midY - dy*2 )
       midY = accY + dy*2;
     if( accY > midY + dy*2 )
@@ -344,9 +344,10 @@ void updateOrientation ( float accX, float accY, float accZ )
       midZ = accZ + dz*2;
     if( accZ > midZ + dz*2 )
       midZ = accZ - dz*2;
-    return;
   }
 
+  if(isJoystickUsed)
+    return;
 
   if( accX < midX - dx )
   {
