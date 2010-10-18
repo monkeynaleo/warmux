@@ -276,7 +276,7 @@ class Settings
     Globals.AccelerometerSensitivity = 0;
     if( ! Globals.UseAccelerometerAsArrowKeys )
     {
-      showScreenKeyboardConfig(p);
+      showAudioConfig(p);
       return;
     }
 

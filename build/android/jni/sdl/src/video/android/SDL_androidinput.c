@@ -298,9 +298,11 @@ void ANDROID_InitOSKeymap()
 }
 
 static float dx = 0.04, dy = 0.1, dz = 0.1, joystickSensitivity = 400.0f; // For accelerometer
+enum { ACCELEROMETER_CENTER_FLOATING, ACCELEROMETER_CENTER_FIXED_START, ACCELEROMETER_CENTER_FIXED_HORIZ };
+static int accelerometerCenterPos = ACCELEROMETER_CENTER_FLOATING;
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSensitivity) ( JNIEnv*  env, jobject thiz, jint sensitivity, jint centerPos)
+JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSettings) ( JNIEnv*  env, jobject thiz, jint sensitivity, jint centerPos)
 {
   dx = 0.04; dy = 0.08; dz = 0.08; joystickSensitivity = 32767.0f * 3.0f; // Fast sensitivity
   if( sensitivity == 1 )
@@ -339,7 +341,7 @@ void updateOrientation ( float accX, float accY, float accZ )
 
   __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): %f %f %f", accX, accY, accZ);
 
-  if( SDL_ANDROID_isJoystickUsed && SDL_ANDROID_CurrentJoysticks[0] ) // TODO: mutex for that stuff?
+  if( isJoystickUsed && CurrentJoysticks[0] ) // TODO: mutex for that stuff?
   {
     __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): sending joystick event");
     SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, -(Sint16)(fminf(32767.0f, fmax(-32767.0f, (accX - midX) * joystickSensitivity))));
@@ -359,7 +361,7 @@ void updateOrientation ( float accX, float accY, float accZ )
     }
   }
 
-  if(SDL_ANDROID_isJoystickUsed)
+  if(isJoystickUsed)
     return;
 
   if( accX < midX - dx )

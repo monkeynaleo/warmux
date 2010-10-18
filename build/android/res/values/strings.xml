@@ -39,6 +39,11 @@
     <string name="accel_slow">Slow</string>
     <string name="accel_question">Accelerometer sensitivity</string>
 
+    <string name="accel_floating">Floating</string>
+    <string name="accel_fixed_start">Fixed when application starts</string>
+    <string name="accel_fixed_horiz">Fixed to table desk orientation</string>
+    <string name="accel_question_center">Accelerometer center position</string>
+
     <string name="audiobuf_small">Small (fast devices)</string>
     <string name="audiobuf_medium">Medium</string>
     <string name="audiobuf_large">Large (if sound is choppy)</string>
