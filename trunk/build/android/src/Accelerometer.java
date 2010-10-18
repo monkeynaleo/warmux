@@ -51,7 +51,7 @@ class AccelerometerReader implements SensorEventListener {
         // TODO: it feels better for me to use tilt as X value instead of intuitive horizontal phone orientation
         // because then I can hold device comfortably, we need another user-configurable option for that
         // nativeOrientation(event.values[1], -event.values[2], event.values[0]); // Comfortable setting
-        nativeAccelerometer(-event.values[1], -event.values[0], event.values[2]); // Intuitive setting
+        nativeAccelerometer(event.values[1], -event.values[0], event.values[2]);
       else
         nativeAccelerometer(event.values[0], event.values[1], event.values[2]); // TODO: not tested!
     }
