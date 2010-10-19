@@ -364,6 +364,13 @@ GLES_ActivateRenderer(SDL_Renderer * renderer)
     if (SDL_GL_MakeCurrent(window, data->context) < 0) {
         return -1;
     }
+
+    /* Set up parameters for rendering */
+    data->blendMode = -1;
+    data->glDisable(GL_DEPTH_TEST);
+    data->glDisable(GL_CULL_FACE);
+    data->updateSize = SDL_TRUE;
+
     if (data->updateSize) {
         data->glMatrixMode(GL_PROJECTION);
         data->glLoadIdentity();
