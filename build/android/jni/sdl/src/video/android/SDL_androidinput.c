@@ -30,6 +30,10 @@
 #include "SDL_config.h"
 
 #include "SDL_version.h"
+#if SDL_VERSION_ATLEAST(1,3,0)
+#include "SDL_touch.h"
+#include "../../events/SDL_touch_c.h"
+#endif
 
 #include "../SDL_sysvideo.h"
 #include "SDL_androidvideo.h"
@@ -41,9 +45,9 @@ SDLKey SDL_android_keymap[KEYCODE_LAST+1];
 
 static int isTrackballUsed = 0;
 static int isMouseUsed = 0;
-static int isJoystickUsed = 0;
+int SDL_ANDROID_isJoystickUsed = 0;
 static int isMultitouchUsed = 0;
-static SDL_Joystick *CurrentJoysticks[MAX_MULTITOUCH_POINTERS+1] = {NULL};
+SDL_Joystick *SDL_ANDROID_CurrentJoysticks[MAX_MULTITOUCH_POINTERS+1] = {NULL};
 static int TrackballDampening = 0; // in milliseconds
 static int lastTrackballAction = 0;
 
@@ -73,16 +77,23 @@ JAVA_EXPORT_NAME(DemoGLSurfaceView_nativeMouse) ( JNIEnv*  env, jobject  thiz, j
 
   if( isMultitouchUsed )
   {
-    if( CurrentJoysticks[pointerId] )
+#if SDL_VERSION_ATLEAST(1,3,0)
+    // Use nifty SDL 1.3 multitouch API
+    if( action == MOUSE_MOVE )
+      SDL_SendTouchMotion(0, pointerId, 0, x, y, force*radius / 16);
+    else
+      SDL_SendFingerDown(0, pointerId, action == MOUSE_DOWN ? 1 : 0, x, y, force*radius / 16);
+#endif
+    if( SDL_ANDROID_CurrentJoysticks[pointerId] )
     {
-      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 0, x);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 1, y);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 2, force);
-      SDL_PrivateJoystickAxis(CurrentJoysticks[pointerId+1], 3, radius);
+      SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[pointerId+1], 0, x);
+      SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[pointerId+1], 1, y);
+      SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[pointerId+1], 2, force);
+      SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[pointerId+1], 3, radius);
       if( action == MOUSE_DOWN )
-        SDL_PrivateJoystickButton(CurrentJoysticks[pointerId+1], 0, SDL_PRESSED);
+        SDL_PrivateJoystickButton(SDL_ANDROID_CurrentJoysticks[pointerId+1], 0, SDL_PRESSED);
       if( action == MOUSE_UP )
-        SDL_PrivateJoystickButton(CurrentJoysticks[pointerId+1], 0, SDL_RELEASED);
+        SDL_PrivateJoystickButton(SDL_ANDROID_CurrentJoysticks[pointerId+1], 0, SDL_RELEASED);
     }
   }
   if( !isMouseUsed )
@@ -146,7 +157,7 @@ JAVA_EXPORT_NAME(AccelerometerReader_nativeAccelerometer) ( JNIEnv*  env, jobjec
 JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(AccelerometerReader_nativeOrientation) ( JNIEnv*  env, jobject  thiz, jfloat accX, jfloat accY, jfloat accZ )
 {
-  updateOrientation (accX, accY, accZ);
+  updateOrientation (accX, accY, accZ); // TODO: make values in range 0.0:1.0
 }
 
 JNIEXPORT void JNICALL
@@ -164,7 +175,7 @@ JAVA_EXPORT_NAME(Settings_nativeSetMouseUsed) ( JNIEnv*  env, jobject thiz)
 JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(Settings_nativeSetJoystickUsed) ( JNIEnv*  env, jobject thiz)
 {
-  isJoystickUsed = 1;
+  SDL_ANDROID_isJoystickUsed = 1;
 }
 
 JNIEXPORT void JNICALL
@@ -182,6 +193,24 @@ void ANDROID_InitOSKeymap()
   SDLKey defaultKeymap[SDL_NUM_SCANCODES];
   SDL_GetDefaultKeymap(defaultKeymap);
   SDL_SetKeymap(0, defaultKeymap, SDL_NUM_SCANCODES);
+
+  SDL_Touch touch;
+  memset( &touch, 0, sizeof(touch) );
+  touch.x_min = touch.y_min = touch.pressure_min = 0.0f;
+  touch.pressure_max = 1000000;
+  touch.x_max = SDL_ANDROID_sWindowWidth;
+  touch.y_max = SDL_ANDROID_sWindowHeight;
+
+  // These constants are hardcoded inside SDL_touch.c, which makes no sense for me.
+  touch.xres = touch.yres = 32768;
+  touch.native_xres = touch.native_yres = 32768.0f;
+
+  touch.pressureres = 1;
+  touch.native_pressureres = 1.0f;
+  touch.id = 0;
+
+  SDL_AddTouch(&touch, "Android touch screen");
+
 #endif
 
   // TODO: keys are mapped rather randomly
@@ -313,6 +342,7 @@ JAVA_EXPORT_NAME(Settings_nativeSetAccelerometerSettings) ( JNIEnv*  env, jobjec
   {
     dx = 0.2; dy = 0.25; dz = 0.25; joystickSensitivity = 32767.0f; // Slow sensitivity
   }
+  accelerometerCenterPos = centerPos;
 }
 
 JNIEXPORT void JNICALL
@@ -341,12 +371,12 @@ void updateOrientation ( float accX, float accY, float accZ )
 
   __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): %f %f %f", accX, accY, accZ);
 
-  if( isJoystickUsed && CurrentJoysticks[0] ) // TODO: mutex for that stuff?
+  if( SDL_ANDROID_isJoystickUsed && SDL_ANDROID_CurrentJoysticks[0] ) // TODO: mutex for that stuff?
   {
     __android_log_print(ANDROID_LOG_INFO, "libSDL", "updateOrientation(): sending joystick event");
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 0, -(Sint16)(fminf(32767.0f, fmax(-32767.0f, (accX - midX) * joystickSensitivity))));
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 1, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accY - midY) * joystickSensitivity))));
-    SDL_PrivateJoystickAxis(CurrentJoysticks[0], 2, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accZ - midZ) * joystickSensitivity))));
+    SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[0], 0, (Sint16)(fminf(32767.0f, fmax(-32767.0f, -(accX - midX) * joystickSensitivity))));
+    SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[0], 1, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accY - midY) * joystickSensitivity))));
+    SDL_PrivateJoystickAxis(SDL_ANDROID_CurrentJoysticks[0], 2, (Sint16)(fminf(32767.0f, fmax(-32767.0f, (accZ - midZ) * joystickSensitivity))));
 
     if( accelerometerCenterPos == ACCELEROMETER_CENTER_FLOATING )
     {
@@ -361,7 +391,7 @@ void updateOrientation ( float accX, float accY, float accZ )
     }
   }
 
-  if(isJoystickUsed)
+  if(SDL_ANDROID_isJoystickUsed)
     return;
 
   if( accX < midX - dx )
@@ -615,7 +645,7 @@ void SDL_ANDROID_processAndroidTrackballDampening()
 int SDL_SYS_JoystickInit(void)
 {
   SDL_numjoysticks = MAX_MULTITOUCH_POINTERS+1;
-  return(0);
+  return(SDL_numjoysticks);
 }
 
 /* Function to get the device-dependent name of a joystick */
@@ -643,7 +673,7 @@ int SDL_SYS_JoystickOpen(SDL_Joystick *joystick)
     joystick->naxes = 4;
     joystick->nbuttons = 1;
   }
-  CurrentJoysticks[joystick->index] = joystick;
+  SDL_ANDROID_CurrentJoysticks[joystick->index] = joystick;
   return(0);
 }
 
@@ -660,7 +690,7 @@ void SDL_SYS_JoystickUpdate(SDL_Joystick *joystick)
 /* Function to close a joystick after use */
 void SDL_SYS_JoystickClose(SDL_Joystick *joystick)
 {
-  CurrentJoysticks[joystick->index] = NULL;
+  SDL_ANDROID_CurrentJoysticks[joystick->index] = NULL;
   return;
 }
 
@@ -669,6 +699,6 @@ void SDL_SYS_JoystickQuit(void)
 {
   int i;
   for(i=0; i<MAX_MULTITOUCH_POINTERS+1; i++)
-    CurrentJoysticks[i] = NULL;
+    SDL_ANDROID_CurrentJoysticks[i] = NULL;
   return;
 }

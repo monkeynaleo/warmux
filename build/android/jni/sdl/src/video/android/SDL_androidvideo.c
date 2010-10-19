@@ -88,13 +88,6 @@ int SDL_ANDROID_CallJavaSwapBuffers()
 }
 
 JNIEXPORT void JNICALL
-JAVA_EXPORT_NAME(DemoRenderer_nativeGlContextRecreated) ( JNIEnv*  env, jobject  thiz )
-{
-  __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context recreated, sending SDL_ACTIVEEVENT");
-  SDL_PrivateAppActive(0, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
-}
-
-JNIEXPORT void JNICALL
 JAVA_EXPORT_NAME(DemoRenderer_nativeResize) ( JNIEnv*  env, jobject  thiz, jint w, jint h )
 {
   if( SDL_ANDROID_sWindowWidth == 0 )
@@ -123,8 +116,25 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeGlContextLost) ( JNIEnv*  env, jobject  thiz
   __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context lost, waiting for new OpenGL context");
   glContextLost = 1;
   appPutToBackgroundCallback();
+#if SDL_VERSION_ATLEAST(1,3,0)
+  if( ANDROID_CurrentWindow )
+    SDL_SendWindowEvent(ANDROID_CurrentWindow, SDL_WINDOWEVENT_MINIMIZED, 0, 0);
+#else
   SDL_PrivateAppActive(0, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
+#endif
   SDL_ANDROID_VideoContextLost();
+}
+
+JNIEXPORT void JNICALL
+JAVA_EXPORT_NAME(DemoRenderer_nativeGlContextRecreated) ( JNIEnv*  env, jobject  thiz )
+{
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "OpenGL context recreated, sending SDL_ACTIVEEVENT");
+#if SDL_VERSION_ATLEAST(1,3,0)
+  if( ANDROID_CurrentWindow )
+    SDL_SendWindowEvent(ANDROID_CurrentWindow, SDL_WINDOWEVENT_RESTORED, 0, 0);
+#else
+  SDL_PrivateAppActive(1, SDL_APPACTIVE|SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
+#endif
 }
 
 JNIEXPORT void JNICALL
