@@ -210,7 +210,7 @@ class DataDownloader extends Thread
 
     HttpResponse response = null;
     HttpGet request;
-    long totalLen;
+    long totalLen = 0;
     CountingInputStream stream;
     byte[] buf = new byte[16384];
     boolean DoNotUnzip = false;

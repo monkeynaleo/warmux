@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
       if( downloader.DownloadFailed )
         System.exit(1);
       if( !downloader.DownloadComplete )
-        System.exit(1);
+        onStop();
     }
      return true;
   }
