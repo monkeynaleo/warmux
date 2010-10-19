@@ -324,26 +324,6 @@ class Settings
     alert.show();
   }
 
-  static byte [] loadRaw(Activity p,int res)
-  {
-    byte [] buf = new byte[128];
-    byte [] a = new byte[0];
-    try{
-      InputStream is = new GZIPInputStream(p.getResources().openRawResource(res));
-      int readed = 0;
-      while( (readed = is.read(buf)) >= 0 )
-      {
-        byte [] b = new byte[a.length + readed];
-        for(int i = 0; i < a.length; i++)
-          b[i] = a[i];
-        for(int i = 0; i < readed; i++)
-          b[i+a.length] = buf[i];
-        a = b;
-      }
-    } catch(Exception e) {};
-    return a;
-  }
-
   static void Apply(Activity p)
   {
     nativeIsSdcardUsed( Globals.DownloadToSdcard ? 1 : 0 );
