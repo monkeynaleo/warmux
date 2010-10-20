@@ -660,22 +660,18 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       if (character_button.Contains(mouse_pos-bottom_bar_pos))
         return false;
 
-        // Positions are somewhat from Interface::DrawWeaponInfo()
-      Point2i bottom_right((game_menu.GetWidth() - clock_width)>>1,
-                           game_menu.GetHeight());
-      Point2i top_left;
-
       // Action that should only happen when the player is human
       if (ActiveTeam().IsLocalHuman()) {
+        // Positions are somewhat from Interface::DrawWeaponInfo()
+        Point2i BR((game_menu.GetWidth() - clock_width)>>1,
+                   game_menu.GetHeight());
         // Weapon icon original width is 48, and has a default scale of 0.75
-        top_left.SetValues((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
-        Rectanglei weapon_button(top_left, -top_left+bottom_right);
+        Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
 
+        Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
-        if (weapon_button.Contains(mouse_pos-bottom_bar_pos) && ActiveTeam().IsLocalHuman()) {
-          weapons_menu.SwitchDisplay();
-          return true;
-        }
+        if (weapon_button.Contains(mouse_pos-bottom_bar_pos))
+          return false;
 
         // Check if we clicked the shoot icon: start firing!
         Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
@@ -737,9 +733,24 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
     Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
     if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
         character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-      MSG_DEBUG("camera", "Centering");
       Camera::GetInstance()->CenterOnActiveCharacter();
       return true;
+    }
+
+    if (ActiveTeam().IsLocalHuman()) {
+      // Positions are somewhat from Interface::DrawWeaponInfo()
+      Point2i BR((game_menu.GetWidth() - clock_width)>>1,
+                 game_menu.GetHeight());
+      // Weapon icon original width is 48, and has a default scale of 0.75
+      Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
+
+      Rectanglei weapon_button(TL, BR-TL);
+      // Check if we clicked the weapon icon: toggle weapon menu
+      if (weapon_button.Contains(mouse_pos-bottom_bar_pos) &&
+          weapon_button.Contains(old_mouse_pos-bottom_bar_pos)) {
+        Weapon::Message(ActiveTeam().AccessWeapon().GetHelp());
+        return true;
+      }
     }
   }
 
@@ -760,6 +771,19 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
                                 shoot.GetWidth(), game_menu.GetHeight());
         if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
           ActionShoot(false);
+          return true;
+        }
+
+        // Positions are somewhat from Interface::DrawWeaponInfo()
+        Point2i BR((game_menu.GetWidth() - clock_width)>>1,
+                   game_menu.GetHeight());
+        // Weapon icon original width is 48, and has a default scale of 0.75
+        Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
+
+        Rectanglei weapon_button(TL, BR-TL);
+        // Check if we clicked the weapon icon: toggle weapon menu
+        if (weapon_button.Contains(mouse_pos-bottom_bar_pos)) {
+          weapons_menu.SwitchDisplay();
           return true;
         }
 
