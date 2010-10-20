@@ -814,6 +814,16 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   return false;
 }
 
+bool Interface::Intersect(const Point2i &mouse_pos) {
+  if (!IsDisplayed())
+    return false;
+
+  if ( Rectanglei(GetMenuPosition(), GetSize()).Intersect( Rectanglei(mouse_pos, Point2i(1,1))) )
+    return true;
+
+  return false;
+}
+
 void Interface::MinimapSizeDelta(int delta)
 {
   GetWorld().ground.SetPreviewSizeDelta(delta);
