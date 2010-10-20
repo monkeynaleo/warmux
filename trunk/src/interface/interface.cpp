@@ -721,7 +721,9 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
     Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
     if (rect_preview.Contains(mouse_pos)) {
       offset = GetWorld().ground.FromPreviewCoordinates(mouse_pos - offset);
-      Camera::GetInstance()->SetXYabs(offset - Camera::GetInstance()->GetSize()/2);
+      Camera *cam = Camera::GetInstance();
+      cam->SetAutoCrop(false);
+      cam->SetXYabs(offset - cam->GetSize()/2);
       return true;
     }
   }
@@ -735,7 +737,7 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
     Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
     if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
         character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-      printf("OK!\n");
+      MSG_DEBUG("camera", "Centering");
       Camera::GetInstance()->CenterOnActiveCharacter();
       return true;
     }
