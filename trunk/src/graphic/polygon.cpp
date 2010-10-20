@@ -468,11 +468,6 @@ Polygon * Polygon::GetBezierInterpolation(Double smooth_value, int num_steps, Do
   return shape;
 }
 
-PolygonBuffer * Polygon::GetPolygonBuffer()
-{
-  return shape_buffer;
-}
-
 // expand the polygon (to draw a little border for example)
 void Polygon::Expand(Double expand_value)
 {
@@ -508,33 +503,6 @@ void Polygon::Expand(Double expand_value)
   transformed_shape = original_shape = tmp_shape;
 }
 
-// Get information about Polygon
-bool Polygon::IsTextured() const
-{
-  return texture != NULL;
-}
-
-bool Polygon::IsPlaneColor() const
-{
-  return plane_color != NULL;
-}
-
-bool Polygon::IsBordered() const
-{
-  return border_color != NULL;
-}
-
-// Texture handling
-Surface * Polygon::GetTexture()
-{
-  return texture;
-}
-
-void Polygon::SetTexture(Surface * texture_surface)
-{
-  texture = texture_surface;
-}
-
 // Color handling
 void Polygon::SetBorderColor(const Color & color)
 {
@@ -550,16 +518,6 @@ void Polygon::SetPlaneColor(const Color & color)
     plane_color = new Color(color);
   else
     *plane_color = color;
-}
-
-const Color & Polygon::GetBorderColor() const
-{
-  return *border_color;
-}
-
-const Color & Polygon::GetPlaneColor() const
-{
-  return *plane_color;
 }
 
 void Polygon::Draw(Surface * dest)
@@ -635,11 +593,6 @@ void DecoratedBox::Draw(Surface * dest)
       item != items.end(); item++) {
     (*item)->Draw(dest);
   }
-}
-
-void DecoratedBox::SetStyle(DecoratedBox::Style style)
-{
-  m_style = style;
 }
 
 void DecoratedBox::SetPosition(Double x, Double y)
