@@ -141,6 +141,7 @@ public:
   bool ActionClickUp(const Point2i &mouse_pos);
   bool ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos);
   bool ActionClickDown(const Point2i &mouse_pos);
+  bool Intersect(const Point2i &mouse_pos);
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);

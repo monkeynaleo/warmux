@@ -236,6 +236,9 @@ void Camera::ScrollCamera()
 
   Point2i mousePos = Mouse::GetInstance()->GetPosition();
 
+  if (Interface::GetInstance()->Intersect(mousePos))
+    return;
+
   if (!Config::GetInstance()->GetScrollOnBorder()) {
     /* Kinetic scrolling */
     if (!SDL_GetMouseState(NULL, NULL)) {
