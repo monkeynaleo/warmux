@@ -257,7 +257,6 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       return;
     case KEY_DECREASE_VOLUME:
       {
-        printf("There!\n");
         Config *cfg = Config::GetInstance();
         int volume = cfg->GetVolumeMusic() - 5;
         if (volume > 0) {
