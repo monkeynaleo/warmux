@@ -274,9 +274,11 @@ void Camera::ScrollCamera()
               m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
               m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
 
-    SetXY(-(mousePos-m_last_mouse_pos));
-    m_last_mouse_pos = mousePos;
-    SetAutoCrop(false);
+    if (mousePos != m_last_mouse_pos) {
+      SetXY(-(mousePos-m_last_mouse_pos));
+      m_last_mouse_pos = mousePos;
+      SetAutoCrop(false);
+    }
   } else {
 
     uint zone_size = Config::GetInstance()->GetScrollBorderSize();
