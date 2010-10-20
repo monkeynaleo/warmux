@@ -266,17 +266,17 @@ void Camera::ScrollCamera()
     if (m_last_mouse_pos.IsNull())
       m_last_mouse_pos = mousePos;
 
-      m_scroll_vector = mousePos - m_scroll_start_pos;
-      m_scroll_vector = m_scroll_vector / m_mouse_counter;
-      MSG_DEBUG("camera",
-                "scroll_vector=(%.3f,%.3f) mousePos=(%i,%i) lastMousePos=(%i,%i) scrollStartPos=(%i,%i)",
-                m_scroll_vector.GetX(), m_scroll_vector.GetY(),
-                m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
-                m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
+    m_scroll_vector = mousePos - m_scroll_start_pos;
+    m_scroll_vector = m_scroll_vector / m_mouse_counter;
+    MSG_DEBUG("camera",
+              "scroll_vector=(%.3f,%.3f) mousePos=(%i,%i) lastMousePos=(%i,%i) scrollStartPos=(%i,%i)",
+              m_scroll_vector.GetX(), m_scroll_vector.GetY(),
+              m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
+              m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
 
-      SetXY(-(mousePos-m_last_mouse_pos));
-      m_last_mouse_pos = mousePos;
-      SetAutoCrop(false);
+    SetXY(-(mousePos-m_last_mouse_pos));
+    m_last_mouse_pos = mousePos;
+    SetAutoCrop(false);
   } else {
 
     uint zone_size = Config::GetInstance()->GetScrollBorderSize();
