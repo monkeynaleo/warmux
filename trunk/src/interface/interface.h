@@ -138,7 +138,7 @@ public:
   void EnableDisplayTimer(bool _display) { display_timer = _display; }
   void ToggleMinimap() { display_minimap = !display_minimap; }
   void MinimapSizeDelta(int delta);
-  bool ActionClickUp(const Point2i &mouse_pos);
+  bool ActionClickUp(const Point2i &mouse_pos, bool long_click);
   bool ActionClickDown(const Point2i &mouse_pos);
 };
 

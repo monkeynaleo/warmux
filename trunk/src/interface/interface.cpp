@@ -697,7 +697,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       // overlayed on top of it.
       return true;
     }
-
+    return true;
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {
@@ -725,30 +725,30 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   return false;
 }
 
-bool Interface::ActionClickUp(const Point2i &mouse_pos)
+bool Interface::ActionClickUp(const Point2i &mouse_pos, bool long_click)
 {
   Surface &  window  = GetMainWindow();
 
   if (display) {
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      // Action that should only happen when the player is human
-      if (ActiveTeam().IsLocalHuman()) {
-        // Check if we clicked the shoot icon: release fire!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
-                                shoot.GetWidth(), game_menu.GetHeight());
-        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-          ActionShoot(false);
-          return true;
-        }
+      bool human = ActiveTeam().IsLocalHuman();
 
-        // Check if we clicked the character icon: center on it
-        Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-        if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+      // Check if we clicked the shoot icon: release fire!
+      Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
+                              shoot.GetWidth(), game_menu.GetHeight());
+      if (human && shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
+        ActionShoot(false);
+        return true;
+      }
+
+      // Check if we clicked the character icon: center on it
+      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
+      if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+        if (true)
           Camera::GetInstance()->CenterOnActiveCharacter();
-          return true;
-        }
 
+        return true;
       }
     }
     // No button clicked, continue

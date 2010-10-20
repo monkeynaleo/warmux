@@ -96,7 +96,7 @@ bool Mouse::HasFocus() const
   return false;
 }
 
-void Mouse::ActionLeftClick(bool) const
+void Mouse::ActionLeftClick(bool /*long_click*/, bool /*shift*/) const
 {
   const Point2i pos_monde = GetWorldPosition();
 
@@ -147,17 +147,17 @@ void Mouse::ActionLeftClick(bool) const
 }
 
 
-void Mouse::ActionRightClick(bool) const
+void Mouse::ActionRightClick(bool /*long_click*/, bool /*shift*/) const
 {
   Interface::GetInstance()->weapons_menu.SwitchDisplay();
 }
 
-void Mouse::ActionWheelUp(bool shift) const
+void Mouse::ActionWheelUp(bool /*long_click*/, bool shift) const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelUp(shift);
 }
 
-void Mouse::ActionWheelDown(bool shift) const
+void Mouse::ActionWheelDown(bool /*long_click*/, bool shift) const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelDown(shift);
 }
@@ -169,23 +169,18 @@ bool Mouse::IS_CLICK_BUTTON(uint button)
 
 Uint8 Mouse::BUTTON_RIGHT() // static method
 {
-  if (Config::GetConstRef().GetLeftHandedMouse())
-    return SDL_BUTTON_LEFT;
-
-  return SDL_BUTTON_RIGHT;
+  return Config::GetConstRef().GetLeftHandedMouse() ? SDL_BUTTON_LEFT : SDL_BUTTON_RIGHT;
 }
 
 Uint8 Mouse::BUTTON_LEFT() // static method
 {
-  if (Config::GetConstRef().GetLeftHandedMouse())
-    return SDL_BUTTON_RIGHT;
-
-  return SDL_BUTTON_LEFT;
+  return Config::GetConstRef().GetLeftHandedMouse() ? SDL_BUTTON_RIGHT : SDL_BUTTON_LEFT;
 }
 
 bool Mouse::HandleEvent(const SDL_Event& evnt)
 {
-  static Point2i mouse_button_down_pos = Point2i(-1,-1);
+  static Point2i mouse_button_down_pos(-1,-1);
+  static uint    mouse_button_down_time = 0;
 
   if (!HasFocus()) {
     return false;
@@ -199,13 +194,17 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
   if (evnt.type == SDL_MOUSEBUTTONDOWN) {
     if (Interface::GetInstance()->ActionClickDown(GetPosition()))
       return true;
+    mouse_button_down_time = Time::GetInstance()->Read();
     if (evnt.button.button == Mouse::BUTTON_LEFT())
       mouse_button_down_pos = GetPosition();
     return true;
   }
 
+  bool long_click = false;
   if (evnt.type == SDL_MOUSEBUTTONUP) {
-    if (Interface::GetInstance()->ActionClickUp(GetPosition()))
+    // Wrapping around doesn't matter
+    mouse_button_down_time -= Time::GetInstance()->Read();
+    if (Interface::GetInstance()->ActionClickUp(GetPosition(), mouse_button_down_time>1000))
       return true;
     if (evnt.button.button == Mouse::BUTTON_LEFT()) {
       if (mouse_button_down_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_DISTANCE*MOUSE_CLICK_DISTANCE)
