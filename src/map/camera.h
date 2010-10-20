@@ -112,7 +112,7 @@ public:
   void Shake(uint how_long_msec, const Point2i & amplitude, const Point2i & centerpoint);
   void ResetShake();
 
-  void SetAutoCrop(bool crop) { auto_crop = crop; };
+  void SetAutoCrop(bool crop) { auto_crop = crop; }
 };
 
 #endif
