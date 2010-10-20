@@ -655,7 +655,12 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   if (display) {
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      // Positions are somewhat from Interface::DrawWeaponInfo()
+      // Check if we clicked the character icon: not handled here
+      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
+      if (character_button.Contains(mouse_pos-bottom_bar_pos))
+        return false;
+
+        // Positions are somewhat from Interface::DrawWeaponInfo()
       Point2i bottom_right((game_menu.GetWidth() - clock_width)>>1,
                            game_menu.GetHeight());
       Point2i top_left;
@@ -741,12 +746,16 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, bool long_click)
         return true;
       }
 
-      // Check if we clicked the character icon: center on it
+      // Check if we clicked the character icon: handle now that we know
+      // whether it's a long click
       Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
       if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
-        if (true)
+        if (long_click)
           Camera::GetInstance()->CenterOnActiveCharacter();
-
+        else if (human && GameMode::GetInstance()->AllowCharacterSelection()) {
+          ActiveTeam().NextCharacter();
+          ActionHandler::GetInstance()->NewActionActiveCharacter();
+        }
         return true;
       }
     }
