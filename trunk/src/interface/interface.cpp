@@ -729,7 +729,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   return false;
 }
 
-bool Interface::ActionClickUp(const Point2i &mouse_pos, bool long_click)
+bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_mouse_pos, bool long_click)
 {
   Surface &  window  = GetMainWindow();
 
@@ -749,7 +749,8 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, bool long_click)
       // Check if we clicked the character icon: handle now that we know
       // whether it's a long click
       Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-      if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+      if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
+          character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
         if (long_click)
           Camera::GetInstance()->CenterOnActiveCharacter();
         else if (human && GameMode::GetInstance()->AllowCharacterSelection()) {
