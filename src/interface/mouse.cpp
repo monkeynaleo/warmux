@@ -189,9 +189,7 @@ Uint8 Mouse::BUTTON_LEFT() // static method
 
 static Uint32 HandleLongClick(Uint32 /*interval*/, void *param)
 {
-  Mouse *mouse = (Mouse*)param;
-  mouse->is_long_click = true;
-  mouse->long_click_timer = 0;
+  ((Mouse*)param)->SetLongClick();
   return 0;
 }
 
