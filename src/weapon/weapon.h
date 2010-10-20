@@ -313,9 +313,9 @@ public:
   Double ReadStrength() const { return m_strength; };
 
   // Data access
-  const std::string& GetName() const;
-  const std::string& GetID() const;
-  const std::string& GetHelp() const;
+  const std::string& GetName() const { return m_name; }
+  const std::string& GetID() const { return m_id; }
+  const std::string& GetHelp() const { return m_help; }
   Weapon_type GetType() const { return m_type; };
 
   // For localization purposes, called when changing language
