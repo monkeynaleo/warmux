@@ -697,7 +697,6 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       // overlayed on top of it.
       return true;
     }
-    return true;
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {

@@ -461,10 +461,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
         } else {
           ActiveTeam().NextCharacter();
         }
-        Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-        uint next_character_index = ActiveCharacter().GetCharacterIndex();
-        next_character->Push((int)next_character_index);
-        ActionHandler::GetInstance()->NewAction(next_character);
+        ActionHandler::GetInstance()->NewActionActiveCharacter();
       }
       return;
 

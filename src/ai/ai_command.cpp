@@ -253,10 +253,7 @@ bool SelectCharacterCommand::Execute()
 {
   if (character->IsActiveCharacter())
     return true;
-  Action * action = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-  uint index = character->GetCharacterIndex();
-  action->Push((int)index);
-  ActionHandler::GetInstance()->NewAction(action);
+  ActionHandler::GetInstance()->NewActionActiveCharacter(character->GetCharacterIndex());
   return true;
 }
 
