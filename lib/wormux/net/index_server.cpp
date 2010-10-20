@@ -47,11 +47,6 @@ IndexServer::~IndexServer()
   action_sem = NULL;
 }
 
-bool IndexServer::IsConnected()
-{
-  return socket.IsConnected();
-}
-
 void IndexServer::Lock()
 {
   MSG_DEBUG("index_server.lock", "> Locking...");
@@ -420,11 +415,6 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
 out:
   Unlock();
   return lst;
-}
-
-const std::string& IndexServer::GetSupportedVersions() const
-{
-  return supported_versions;
 }
 
 bool IndexServer::SendPong()
