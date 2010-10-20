@@ -67,17 +67,26 @@ private:
   pointer_t current_pointer;
   uint last_hide_time;
 
+  // For timed operations
+  SDL_TimerID long_click_timer;
+  Point2i     click_pos;
+  bool        is_long_click, was_long_click;
+
+  void EndLongClickTimer();
+
   void GetDesignatedCharacter() const;
 
-  void ActionLeftClick(bool long_click, bool shift = false) const;
-  void ActionRightClick(bool long_click, bool shift = false) const;
-  void ActionWheelDown(bool long_click, bool shift = false) const;
-  void ActionWheelUp(bool long_click, bool shift = false) const;
+  void ActionLeftClick(bool shift = false) const;
+  void ActionRightClick(bool shift = false) const;
+  void ActionWheelDown(bool shift = false) const;
+  void ActionWheelUp(bool shift = false) const;
   MouseCursor& GetCursor(pointer_t pointer) const;
 
 protected:
   friend class Singleton<Mouse>;
+  friend Uint32 HandleLongClick(Uint32 interval, void *param);
   Mouse();
+  ~Mouse() { EndLongClickTimer(); }
 
 public:
 
