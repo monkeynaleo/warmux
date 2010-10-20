@@ -159,25 +159,27 @@ public:
   virtual Rectanglei GetRectangleToRefresh() const { return Rectanglei(GetIntMin(), GetIntSize()); }
 
   // Buffer of transformed point
-  PolygonBuffer * GetPolygonBuffer();
+  PolygonBuffer * GetPolygonBuffer() { return shape_buffer; }
 
   // Type of the polygon
-  bool IsTextured() const;
-  bool IsPlaneColor() const;
-  bool IsBordered() const;
+  bool IsTextured() const { return texture != NULL; }
+  bool IsPlaneColor() const { return plane_color != NULL; }
+  bool IsBordered() const { return border_color != NULL; }
   bool IsClosed() const;
+
   // Set type to Open
   void SetOpen();
   void SetClosed();
 
   // Texture handling
-  Surface * GetTexture();
-  void SetTexture(Surface * texture_surface);
+  Surface * GetTexture() { return texture; }
+  void SetTexture(Surface * texture_surface) { texture = texture_surface; }
+
   // Color handling
   void SetBorderColor(const Color & color);
   void SetPlaneColor(const Color & color);
-  const Color & GetBorderColor() const;
-  const Color & GetPlaneColor() const;
+  const Color & GetBorderColor() const { return *border_color; }
+  const Color & GetPlaneColor() const { return *plane_color; }
 
   // Drawing
   virtual void Draw(Surface * dest);
@@ -206,7 +208,7 @@ class DecoratedBox : public Polygon
   virtual void AddItem(PolygonItem * item);
   virtual void ResetTransformation();
   void SetPosition(Double x, Double y);
-  void SetStyle(Style style);
+  void SetStyle(Style style) { m_style = style; }
 
  private :
   Point2d max_refresh;
