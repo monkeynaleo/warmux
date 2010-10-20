@@ -45,11 +45,6 @@ class GameServerInfo
 
 class IndexServer : public Singleton<IndexServer>
 {
-  /* If you need this, implement it (correctly)*/
-  IndexServer(const IndexServer&);
-  const IndexServer& operator=(const IndexServer&);
-  /*********************************************/
-
   // Connection to the server
   WSocket socket;
   char    buffer[INDEX_SERVER_BUFFER_LENGTH];
@@ -102,7 +97,7 @@ public:
   connection_state_t Connect(const std::string& wormux_version);
   void Disconnect();
 
-  bool IsConnected();
+  bool IsConnected() const { return socket.IsConnected(); }
 
   // Answers to pings from the server / close connection if distantly closed
   void Refresh(bool nowait = false);
@@ -120,7 +115,7 @@ public:
   std::list<GameServerInfo> GetHostList(bool symbolic_name
                                         /*make a reverse DNS resolution*/);
 
-  const std::string& GetSupportedVersions() const;
+  const std::string& GetSupportedVersions() const { return supported_versions; }
 };
 
 #endif
