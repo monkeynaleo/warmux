@@ -120,13 +120,8 @@ void Mouse::ActionLeftClick(bool /*long_click*/, bool /*shift*/) const
     }
 
     if (character_found) {
-      while (&(*it) != &ActiveCharacter())
-        ActiveTeam().NextCharacter ();
-
-      Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
-      uint next_character_index = (*it).GetCharacterIndex();
-      next_character->Push((int)next_character_index);
-      ActionHandler::GetInstance()->NewAction(next_character);
+      ActiveTeam().SelectCharacter(&(*it));
+      ActionHandler::GetInstance()->NewActionActiveCharacter();
 
       return;
     }

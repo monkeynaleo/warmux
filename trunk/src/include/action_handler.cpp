@@ -1210,3 +1210,11 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   // One new event will be needed (see ExecActions).
   Menu::WakeUpOnCallback();
 }
+
+void ActionHandler::NewActionActiveCharacter(int index)
+{
+  Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
+  uint next_character_index = (index<0) ? ActiveCharacter().GetCharacterIndex() : index;
+  next_character->Push((int)next_character_index);
+  NewAction(next_character);
+}
