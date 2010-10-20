@@ -192,15 +192,14 @@ void Weapon::Manage()
   if (IsOnCooldownFromShot())
     return ;
 
-  if (ActiveTeam().ReadNbUnits() == 0)
-    {
-      Deselect();
+  if (ActiveTeam().ReadNbUnits() == 0) {
+    Deselect();
 
-      if (m_can_change_weapon)
-        Select();
-      else
-        game_loop->SetState(Game::HAS_PLAYED);
-    }
+    if (m_can_change_weapon)
+      Select();
+    else
+      game_loop->SetState(Game::HAS_PLAYED);
+  }
 }
 
 bool Weapon::CanChangeWeapon() const
@@ -457,21 +456,6 @@ void Weapon::UseAmmoUnit() const
   ASSERT(*unit >= 0);
 }
 
-const std::string& Weapon::GetName() const {
-  ASSERT (!m_name.empty());
-  return m_name;
-}
-
-const std::string& Weapon::GetHelp() const {
-  ASSERT (!m_help.empty());
-  return m_help;
-}
-
-const std::string& Weapon::GetID() const {
-  ASSERT (!m_id.empty());
-  return m_id;
-}
-
 void Weapon::UpdateStrength(){
   if (max_strength==0 || !m_first_time_loading)
     return ;
@@ -648,11 +632,10 @@ void Weapon::DrawAmmoUnits() const
 bool Weapon::LoadXml(const xmlNode*  weapon)
 {
   const xmlNode* elem = XmlReader::GetMarker(weapon, m_id);
-  if (elem == NULL)
-  {
-      std::cout << Format(_("No element <%s> found in the xml config file!"),
-                          m_id.c_str())
-                << std::endl;
+  if (!elem) {
+    std::cout << Format(_("No element <%s> found in the xml config file!"),
+                        m_id.c_str())
+              << std::endl;
     return false;
   }
 
@@ -687,7 +670,7 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
     m_display_crosshair = false;
 
   // Load extra parameters if existing
-  if (extra_params != NULL)
+  if (extra_params)
     extra_params->LoadXml(elem);
 
   if (drawable && origin == weapon_origin_HAND)
