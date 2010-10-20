@@ -41,7 +41,7 @@
 #include "game/time.h"
 
 #define MOUSE_CLICK_SQUARE_DISTANCE 5*5
-#define LONG_CLICK_DURATION 350
+#define LONG_CLICK_DURATION 600
 
 std::string __pointers[] = {
   "mouse/pointer_standard",
@@ -61,9 +61,13 @@ std::string __pointers[] = {
 };
 std::map<Mouse::pointer_t, MouseCursor> Mouse::cursors;
 
-Mouse::Mouse():
-  lastpos(-1,-1),
-  last_hide_time(0)
+Mouse::Mouse()
+  : lastpos(-1,-1)
+  , last_hide_time(0)
+  , long_click_timer(0)
+  , click_pos(-1,-1)
+  , is_long_click(false)
+  , was_long_click(false)
 {
   visible = MOUSE_VISIBLE;
 
@@ -84,6 +88,16 @@ Mouse::Mouse():
 #endif
 }
 
+void Mouse::EndLongClickTimer()
+{
+  if (long_click_timer) {
+    SDL_RemoveTimer(long_click_timer);
+    long_click_timer = 0;
+  }
+  is_long_click = false;
+  was_long_click = false;
+}
+
 bool Mouse::HasFocus() const
 {
   Uint8 state = SDL_GetAppState();
@@ -97,7 +111,7 @@ bool Mouse::HasFocus() const
   return false;
 }
 
-void Mouse::ActionLeftClick(bool /*long_click*/, bool /*shift*/) const
+void Mouse::ActionLeftClick(bool /*shift*/) const
 {
   const Point2i pos_monde = GetWorldPosition();
 
@@ -143,17 +157,17 @@ void Mouse::ActionLeftClick(bool /*long_click*/, bool /*shift*/) const
 }
 
 
-void Mouse::ActionRightClick(bool /*long_click*/, bool /*shift*/) const
+void Mouse::ActionRightClick(bool /*shift*/) const
 {
   Interface::GetInstance()->weapons_menu.SwitchDisplay();
 }
 
-void Mouse::ActionWheelUp(bool /*long_click*/, bool shift) const
+void Mouse::ActionWheelUp(bool shift) const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelUp(shift);
 }
 
-void Mouse::ActionWheelDown(bool /*long_click*/, bool shift) const
+void Mouse::ActionWheelDown(bool shift) const
 {
   ActiveTeam().AccessWeapon().HandleMouseWheelDown(shift);
 }
@@ -173,37 +187,62 @@ Uint8 Mouse::BUTTON_LEFT() // static method
   return Config::GetConstRef().GetLeftHandedMouse() ? SDL_BUTTON_RIGHT : SDL_BUTTON_LEFT;
 }
 
+static Uint32 HandleLongClick(Uint32 /*interval*/, void *param)
+{
+  Mouse *mouse = (Mouse*)param;
+  mouse->is_long_click = true;
+  mouse->long_click_timer = 0;
+  return 0;
+}
+
 bool Mouse::HandleEvent(const SDL_Event& evnt)
 {
-  static Point2i click_pos(-1,-1);
-  static uint    click_time = 0;
-
   if (!HasFocus()) {
     return false;
   }
 
-  if (evnt.type != SDL_MOUSEBUTTONDOWN &&
-      evnt.type != SDL_MOUSEBUTTONUP) {
+  Point2i pos = GetPosition();
+
+  if (click_pos.SquareDistance(pos) > MOUSE_CLICK_SQUARE_DISTANCE) {
+    // We have moved too much, consider we are not long-clicking
+    EndLongClickTimer();
+  }
+
+  if (is_long_click) {
+    is_long_click = false;
+    was_long_click = true;
+    if (Interface::GetInstance()->ActionLongClick(pos, click_pos))
+      return true;
+    return false;
+  }
+
+  if (evnt.type != SDL_MOUSEBUTTONDOWN && evnt.type != SDL_MOUSEBUTTONUP) {
     return false;
   }
 
   if (evnt.type==SDL_MOUSEBUTTONDOWN && evnt.button.button==BUTTON_LEFT()) {
-    if (Interface::GetInstance()->ActionClickDown(GetPosition()))
+    if (Interface::GetInstance()->ActionClickDown(pos))
       return true;
 
     // Either it's out of the menu, or we want to know how long the click was
-    click_time = Time::GetInstance()->Read();
-    click_pos = GetPosition();
+    click_pos = pos;
+    printf("Setting click position: (%i,%i)\n", click_pos.GetX(), click_pos.GetY());
+    long_click_timer = SDL_AddTimer(LONG_CLICK_DURATION, HandleLongClick, this);
     return true;
   }
 
-  bool long_click = false;
   if (evnt.type==SDL_MOUSEBUTTONUP && evnt.button.button==BUTTON_LEFT()) {
-    long_click = Time::GetInstance()->Read() - click_time > LONG_CLICK_DURATION;
-    if (Interface::GetInstance()->ActionClickUp(GetPosition(), click_pos, long_click))
+    // Ignore click-ups from long clicks
+    if (was_long_click) {
+      was_long_click = false;
       return true;
-    if (click_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_SQUARE_DISTANCE)
-      return true;
+    } else {
+      EndLongClickTimer();
+      if (Interface::GetInstance()->ActionClickUp(pos))
+        return true;
+      if (click_pos.SquareDistance(pos) > MOUSE_CLICK_SQUARE_DISTANCE)
+        return true;
+    }
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)

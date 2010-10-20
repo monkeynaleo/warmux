@@ -729,35 +729,46 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   return false;
 }
 
-bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_mouse_pos, bool long_click)
+bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos)
+{
+  if (display) {
+    Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
+    if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
+        character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
+      printf("OK!\n");
+      Camera::GetInstance()->CenterOnActiveCharacter();
+      return true;
+    }
+  }
+
+  return false;
+}
+
+bool Interface::ActionClickUp(const Point2i &mouse_pos)
 {
   Surface &  window  = GetMainWindow();
 
   if (display) {
     Rectanglei menu_button(Point2i(), game_menu.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      bool human = ActiveTeam().IsLocalHuman();
+      if (ActiveTeam().IsLocalHuman()) {
 
-      // Check if we clicked the shoot icon: release fire!
-      Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
-                              shoot.GetWidth(), game_menu.GetHeight());
-      if (human && shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-        ActionShoot(false);
-        return true;
-      }
+        // Check if we clicked the shoot icon: release fire!
+        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
+                                shoot.GetWidth(), game_menu.GetHeight());
+        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
+          ActionShoot(false);
+          return true;
+        }
 
-      // Check if we clicked the character icon: handle now that we know
-      // whether it's a long click
-      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-      if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
-          character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-        if (long_click)
-          Camera::GetInstance()->CenterOnActiveCharacter();
-        else if (human && GameMode::GetInstance()->AllowCharacterSelection()) {
+        // Check if we clicked the character icon: handle now that we know
+        // whether it's a long click
+        Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
+        if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
           ActiveTeam().NextCharacter();
           ActionHandler::GetInstance()->NewActionActiveCharacter();
+          return true;
         }
-        return true;
       }
     }
     // No button clicked, continue
