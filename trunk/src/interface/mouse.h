@@ -84,7 +84,6 @@ private:
 
 protected:
   friend class Singleton<Mouse>;
-  friend Uint32 HandleLongClick(Uint32 interval, void *param);
   Mouse();
   ~Mouse() { EndLongClickTimer(); }
 
@@ -115,6 +114,8 @@ public:
 
   bool HasFocus() const;
 
-  visibility_t GetVisibility() const { return visible; };
+  visibility_t GetVisibility() const { return visible; }
+
+  void SetLongClick() { is_long_click = true; long_click_timer = 0; }
 };
 #endif
