@@ -40,7 +40,8 @@
 #include "weapon/weapon.h"
 #include "game/time.h"
 
-#define MOUSE_CLICK_DISTANCE 5
+#define MOUSE_CLICK_SQUARE_DISTANCE 5*5
+#define LONG_CLICK_DURATION 350
 
 std::string __pointers[] = {
   "mouse/pointer_standard",
@@ -174,8 +175,8 @@ Uint8 Mouse::BUTTON_LEFT() // static method
 
 bool Mouse::HandleEvent(const SDL_Event& evnt)
 {
-  static Point2i mouse_button_down_pos(-1,-1);
-  static uint    mouse_button_down_time = 0;
+  static Point2i click_pos(-1,-1);
+  static uint    click_time = 0;
 
   if (!HasFocus()) {
     return false;
@@ -186,25 +187,28 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
     return false;
   }
 
-  if (evnt.type == SDL_MOUSEBUTTONDOWN) {
+  if (evnt.type==SDL_MOUSEBUTTONDOWN && evnt.button.button==BUTTON_LEFT()) {
     if (Interface::GetInstance()->ActionClickDown(GetPosition()))
       return true;
-    mouse_button_down_time = Time::GetInstance()->Read();
-    if (evnt.button.button == Mouse::BUTTON_LEFT())
-      mouse_button_down_pos = GetPosition();
+
+    // Either it's out of the menu, or we want to know how long the click was
+    click_time = Time::GetInstance()->Read();
+    click_pos = GetPosition();
     return true;
   }
 
   bool long_click = false;
-  if (evnt.type == SDL_MOUSEBUTTONUP) {
-    // Wrapping around doesn't matter
-    mouse_button_down_time -= Time::GetInstance()->Read();
-    if (Interface::GetInstance()->ActionClickUp(GetPosition(), mouse_button_down_time>1000))
-      return true;
-    if (evnt.button.button == Mouse::BUTTON_LEFT()) {
-      if (mouse_button_down_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_DISTANCE*MOUSE_CLICK_DISTANCE)
-        return true;
+  if (evnt.type==SDL_MOUSEBUTTONUP && evnt.button.button==BUTTON_LEFT()) {
+    if (click_pos.SquareDistance(GetPosition()) < MOUSE_CLICK_SQUARE_DISTANCE) {
+      // Wrapping around doesn't matter
+      click_time = Time::GetInstance()->Read() - click_time;
+      
+      if (Interface::GetInstance()->ActionClickUp(GetPosition(), click_time>LONG_CLICK_DURATION)) {
+        printf("Time: %u\n", click_time);
+        long_click = true;
+      }
     }
+    return true;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
