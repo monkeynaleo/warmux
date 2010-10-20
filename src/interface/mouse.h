@@ -69,10 +69,10 @@ private:
 
   void GetDesignatedCharacter() const;
 
-  void ActionLeftClick(bool shift = false) const;
-  void ActionRightClick(bool shift = false) const;
-  void ActionWheelDown(bool shift = false) const;
-  void ActionWheelUp(bool shift = false) const;
+  void ActionLeftClick(bool long_click, bool shift = false) const;
+  void ActionRightClick(bool long_click, bool shift = false) const;
+  void ActionWheelDown(bool long_click, bool shift = false) const;
+  void ActionWheelUp(bool long_click, bool shift = false) const;
   MouseCursor& GetCursor(pointer_t pointer) const;
 
 protected:
