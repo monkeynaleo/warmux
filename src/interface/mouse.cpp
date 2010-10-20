@@ -199,16 +199,11 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
 
   bool long_click = false;
   if (evnt.type==SDL_MOUSEBUTTONUP && evnt.button.button==BUTTON_LEFT()) {
-    if (click_pos.SquareDistance(GetPosition()) < MOUSE_CLICK_SQUARE_DISTANCE) {
-      // Wrapping around doesn't matter
-      click_time = Time::GetInstance()->Read() - click_time;
-      
-      if (Interface::GetInstance()->ActionClickUp(GetPosition(), click_time>LONG_CLICK_DURATION)) {
-        printf("Time: %u\n", click_time);
-        long_click = true;
-      }
-    }
-    return true;
+    long_click = Time::GetInstance()->Read() - click_time > LONG_CLICK_DURATION;
+    if (Interface::GetInstance()->ActionClickUp(GetPosition(), click_pos, long_click))
+      return true;
+    if (click_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_SQUARE_DISTANCE)
+      return true;
   }
 
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
