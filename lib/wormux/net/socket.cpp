@@ -281,11 +281,6 @@ void WSocket::Disconnect()
   UnLock();
 }
 
-bool WSocket::IsConnected() const
-{
-  return (socket != NULL);
-}
-
 bool WSocket::AddToSocketSet(WSocketSet* _socket_set)
 {
   ASSERT(socket_set == NULL);

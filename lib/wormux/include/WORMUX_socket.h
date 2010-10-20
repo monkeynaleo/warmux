@@ -104,7 +104,7 @@ public:
   WSocket* LookForClient();
 
   void Disconnect();
-  bool IsConnected() const;
+  bool IsConnected() const { return socket != NULL; }
 
   bool AddToTmpSocketSet();
   void RemoveFromTmpSocketSet();
