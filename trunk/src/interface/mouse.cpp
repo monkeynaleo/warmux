@@ -199,7 +199,7 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
 
   bool long_click = false;
   if (evnt.type==SDL_MOUSEBUTTONUP && evnt.button.button==BUTTON_LEFT()) {
-    long_click = Time::GetInstance()->Read() - click_time > LONG_CLICK_DURATION;
+    long_click = abs(Time::GetInstance()->Read() - click_time) > LONG_CLICK_DURATION;
     if (Interface::GetInstance()->ActionClickUp(GetPosition(), click_pos, long_click))
       return true;
     if (click_pos.SquareDistance(GetPosition()) > MOUSE_CLICK_SQUARE_DISTANCE)
