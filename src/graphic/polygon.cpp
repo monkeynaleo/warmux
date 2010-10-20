@@ -623,8 +623,9 @@ void DecoratedBox::Draw(Surface * dest)
 {
   if (!m_border) {
     //m_border = new Surface(Point2i(GetSize().x, GetSize().y), SDL_SWSURFACE, true);
-    m_border = new Surface(GetSize(), SDL_SWSURFACE, true);
-    GenerateStyledBorder(*m_border, m_style);
+    Surface border = Surface(GetSize(), SDL_SWSURFACE, true);
+    GenerateStyledBorder(border, m_style);
+    m_border = new Surface(border.DisplayFormatAlpha());
   }
   dest->Blit(*m_border, min);
 
