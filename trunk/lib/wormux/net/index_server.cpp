@@ -44,6 +44,7 @@ IndexServer::~IndexServer()
   Disconnect();
 
   SDL_DestroySemaphore(action_sem);
+  action_sem = NULL;
 }
 
 bool IndexServer::IsConnected()
@@ -356,9 +357,13 @@ std::list<GameServerInfo> IndexServer::GetHostList(bool symbolic_name)
 
   uint used = 0;
   NewMsg(TS_MSG_GET_LIST, buffer, used);
+  if (!socket.IsConnected())
+    goto out;
   SendMsg(socket, buffer, used);
 
   int lst_size;
+  if (!socket.IsConnected())
+    goto out;
   r = socket.ReceiveInt(lst_size);
   if (!r || lst_size == 0)
     goto out;
