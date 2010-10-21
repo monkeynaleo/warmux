@@ -26,7 +26,7 @@
 
 static int gfxPrimitivesPolyAllocated = 0;
 static int *gfxPrimitivesPolyInts = NULL;
-int gfxPrimitivesCompareInt(const void *a, const void *b)
+inline int gfxPrimitivesCompareInt(const void *a, const void *b)
 {
   return (*(const int *) a) - (*(const int *) b);
 }

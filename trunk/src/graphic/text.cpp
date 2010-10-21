@@ -62,10 +62,6 @@ Text::Text() :
 {
 }
 
-Text::~Text()
-{
-}
-
 void Text::Init()
 {
   if (shadowed) {
@@ -261,61 +257,6 @@ void Text::RenderMultiLines()
   }
 }
 
-void Text::SetText(const std::string &new_txt)
-{
-  if(txt == new_txt)
-    return;
-
-  txt = new_txt;
-
-  Render();
-}
-
-const std::string& Text::GetText() const
-{
-  return txt;
-}
-
-void Text::SetColor(const Color &new_color)
-{
-  if(color == new_color)
-    return;
-
-  color = new_color;
-
-  Render();
-}
-
-void Text::DrawCenter (const Point2i &position) const
-{
-  DrawLeftTop(position - surf.GetSize() / 2);
-}
-
-void Text::DrawRightTop (const Point2i &position) const
-{
-  DrawLeftTop(position - Point2i(surf.GetWidth(), 0));
-}
-
-void Text::DrawCenterTop (const Point2i &position) const
-{
-  DrawLeftTop(position - Point2i(surf.GetWidth()/2, 0));
-}
-
-void Text::DrawLeftCenter (const Point2i &position) const
-{
-  DrawLeftTop(position - Point2i(0, surf.GetHeight()/2));
-}
-
-void Text::DrawRightCenter (const Point2i &position) const
-{
-  DrawLeftTop(position - Point2i(surf.GetWidth(), surf.GetHeight()/2));
-}
-
-void Text::DrawCenterBottom (const Point2i &position) const
-{
-  DrawLeftTop(position - surf.GetSize());
-}
-
 void Text::DrawLeftTop(const Point2i &position) const
 {
   if(txt == "" && !dummy) return;
@@ -365,22 +306,6 @@ void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos
                              text_pos.GetY()+GetHeight()-2, c_white);
 }
 
-void Text::SetMaxWidth(uint max_w)
-{
-  if (max_width == max_w)
-    return;
-
-  max_width = max_w;
-
-  Render();
-}
-
-int Text::GetWidth() const
-{
-  if (txt=="" && !dummy) return 0;
-  return surf.GetWidth();
-}
-
 int Text::GetHeight() const
 {
   Font* font = Font::GetInstance(font_size, font_style);
@@ -426,4 +351,3 @@ void Text::SetFont(const Color &_font_color,
     Init();
   }
 }
-

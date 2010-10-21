@@ -112,7 +112,7 @@ private:
   Polygon operator=(const Polygon&);
 
 public:
-  Polygon();
+  Polygon() { Init(); }
   Polygon(const std::vector<Point2d>& shape);
   Polygon(Polygon & poly);
   virtual ~Polygon();
