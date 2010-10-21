@@ -189,12 +189,7 @@ bool Team::LoadCharacters()
   return AddPlayingCharacters(*characters_name);
 }
 
-void Team::InitEnergy (uint max)
-{
-  energy.Config(ReadEnergy(), max);
-}
-
-uint Team::ReadEnergy () const
+uint Team::ReadEnergy() const
 {
   uint total_energy = 0;
 
@@ -206,11 +201,6 @@ uint Team::ReadEnergy () const
   }
 
   return total_energy;
-}
-
-void Team::UpdateEnergyBar ()
-{
-  energy.SetValue(ReadEnergy());
 }
 
 void Team::SelectCharacter(const Character * c)
@@ -234,7 +224,7 @@ void Team::SelectCharacter(const Character * c)
 
 void Team::NextCharacter(bool newturn)
 {
-  ASSERT (0 < NbAliveCharacter());
+  ASSERT(0 < NbAliveCharacter());
 
   ActiveCharacter().StopPlaying();
 
@@ -261,7 +251,7 @@ void Team::NextCharacter(bool newturn)
 
 void Team::PreviousCharacter()
 {
-  ASSERT (0 < NbAliveCharacter());
+  ASSERT(0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do {
     if (active_character == characters.begin())
@@ -334,55 +324,13 @@ Character& Team::ActiveCharacter() const
   return (*active_character);
 }
 
-void Team::SetWeapon (Weapon::Weapon_type type)
+void Team::SetWeapon(Weapon::Weapon_type type)
 {
   ASSERT (type >= Weapon::FIRST && type <= Weapon::LAST);
   AccessWeapon().Deselect();
   active_weapon = weapons_list->GetWeapon(type);
   AccessWeapon().Select();
 }
-
-int Team::ReadNbAmmos() const
-{
-  return ReadNbAmmos(active_weapon->GetType());
-}
-
-int Team::ReadNbUnits() const
-{
-  return ReadNbUnits(active_weapon->GetType());
-}
-
-int Team::ReadNbAmmos(Weapon::Weapon_type weapon_type) const
-{
-  ASSERT((uint)weapon_type < m_nb_ammos.size());
-  return m_nb_ammos[weapon_type];
-}
-
-int Team::ReadNbUnits(Weapon::Weapon_type weapon_type) const
-{
-  ASSERT((uint)weapon_type < m_nb_units.size());
-  return m_nb_units[weapon_type];
-}
-
-int& Team::AccessNbAmmos()
-{
-  // if value not initialized, it initialize to 0 and then return 0
-  return m_nb_ammos[ active_weapon->GetType() ] ;
-}
-
-int& Team::AccessNbUnits()
-{
-  // if value not initialized, it initialize to 0 and then return 0
-  return m_nb_units[ active_weapon->GetType() ] ;
-}
-
-void Team::ResetNbUnits()
-{
-  m_nb_units[ active_weapon->GetType() ] = active_weapon->ReadInitialNbUnit();
-}
-
-Team::iterator Team::begin() { return characters.begin(); }
-Team::iterator Team::end() { return characters.end(); }
 
 Character* Team::FindByIndex(uint index)
 {
@@ -455,35 +403,10 @@ void Team::LoadAI()
   ai = new AIStupidPlayer(this);
 }
 
-void Team::SetNbCharacters(uint howmany)
-{
-  ASSERT(howmany >= 1 && howmany <= 10);
-  nb_characters = howmany;
-}
-
-void Team::DrawEnergy(const Point2i& pos)
-{
-  energy.Draw(pos);
-}
-
-void Team::Refresh()
-{
-  energy.Refresh();
-}
-
 void Team::RefreshAI()
 {
   if (ai != NULL)
     ai->Refresh();
-}
-
-Weapon& Team::AccessWeapon() const { return *active_weapon; }
-const Weapon& Team::GetWeapon() const { return *active_weapon; }
-Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
-
-bool Team::IsSameAs(const Team& other) const
-{
-  return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
 }
 
 bool Team::IsActiveTeam() const
@@ -498,11 +421,6 @@ void Team::SetDefaultPlayingConfig()
   SetNbCharacters(GameMode::GetInstance()->nb_characters);
   SetRemote(false);
   SetAIName(NO_AI_NAME);
-}
-
-void Team::SetCustomCharactersNames(const std::vector<std::string> &custom_names)
-{
-  custom_characters_names = custom_names;
 }
 
 void Team::SetCustomCharactersNamesFromAction(Action *a)
@@ -527,9 +445,4 @@ void Team::PushCustomCharactersNamesIntoAction(Action *a) const
   for (uint i = 0; i < nb_custom_names; i++) {
     a->Push(custom_characters_names[i]);
   }
-}
-
-void Team::ClearCustomCharactersNames()
-{
-  custom_characters_names.clear();
 }

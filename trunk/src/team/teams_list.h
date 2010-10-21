@@ -66,7 +66,7 @@ public:
   Team& ActiveTeam();
   void LoadGamingData(WeaponsList * weapons_list);
   void UnloadGamingData();
-  void Clear();
+  void Clear() { selection.clear(); playing_list.clear(); }
   void RandomizeFirstPlayer();
 
   // Add a new team to playing, and change active team
@@ -87,7 +87,11 @@ public:
   Team* FindByIndex (uint index);
   // Find a team by its id or index (in playing full_list)
   Team* FindPlayingById(const std::string &id, int &index);
-  Team* FindPlayingByIndex(uint index);
+  Team* FindPlayingByIndex(uint index)
+  {
+    ASSERT(index < playing_list.size());
+    return playing_list[index];
+  }
 
   std::vector<Team*>& GetPlayingList() { return playing_list; }
   void SetPlayingList(const std::vector<Team*>& list)

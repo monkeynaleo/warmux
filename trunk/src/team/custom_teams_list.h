@@ -35,12 +35,12 @@ class CustomTeam;
 class CustomTeamsList : public Singleton<CustomTeamsList>
 {
 public:
-  CustomTeamsList();
-  ~CustomTeamsList();
+  CustomTeamsList() { LoadList(); }
+  ~CustomTeamsList() { Clear(); }
   void LoadList();
-  std::vector<CustomTeam *> GetList();
+  std::vector<CustomTeam *> GetList() { return full_list; }
   CustomTeam* GetByName(std::string name);
-  unsigned GetNumCustomTeam();
+  uint GetNumCustomTeam() { return full_list.size(); }
 
 private:
   std::vector<CustomTeam *> full_list;

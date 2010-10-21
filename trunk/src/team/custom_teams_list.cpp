@@ -28,16 +28,6 @@
 #include <cstdio>
 #include <algorithm>
 
-CustomTeamsList::CustomTeamsList()
-{
-  LoadList();
-}
-
-CustomTeamsList::~CustomTeamsList()
-{
-  Clear();
-}
-
 void CustomTeamsList::Clear()
 {
   for (uint i = 0; i < full_list.size(); i++) {
@@ -54,16 +44,6 @@ CustomTeam *CustomTeamsList::GetByName(std::string name)
     }
   }
   return NULL;
-}
-
-std::vector<CustomTeam *> CustomTeamsList::GetList()
-{
-  return full_list;
-}
-
-unsigned CustomTeamsList::GetNumCustomTeam()
-{
-  return full_list.size();
 }
 
 void CustomTeamsList::LoadList()
