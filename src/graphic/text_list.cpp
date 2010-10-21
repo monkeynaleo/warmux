@@ -24,9 +24,6 @@
 #include "graphic/text_list.h"
 #include "graphic/text.h"
 
-TextList::TextList()
-{}
-
 TextList::~TextList()
 {
   for (std::list<Text*>::iterator t=list.begin(); t!=list.end(); t++)
@@ -41,19 +38,6 @@ void TextList::AddText(const std::string &txt, const Color& color, uint maxlines
 
   if(list.size() >= maxlines)
     list.pop_front();
-}
-
-int TextList::Size() const {
-  return list.size();
-}
-
-void TextList::DeleteLine(){
-  if(list.size())
-    list.pop_front();
-}
-
-void TextList::Clear(){
-  list.clear();
 }
 
 void TextList::Draw(int x, int y, int height){

@@ -134,12 +134,6 @@ Point2i PolygonItem::GetOffsetAlignment() const
 //=========== POLYGON ============ //
 // Store a vector of points and handle affine transformation,
 // Bezier interpolation handling etc.
-
-Polygon::Polygon()
-{
-  Init();
-}
-
 Polygon::Polygon(const std::vector<Point2d>& shape)
 {
   Init();
