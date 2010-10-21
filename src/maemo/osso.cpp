@@ -54,9 +54,9 @@ namespace {
     if (Mouse::GetInstance()->HasFocus()) {
       JukeBox::GetInstance()->OpenDevice();
       JukeBox::GetInstance()->NextMusic();
+      Time::GetInstance()->SetWaitingForUser(false);
     }
 
-    Time::GetInstance()->SetWaitingForUser(false);
     SDL_InitSubSystem(SDL_INIT_TIMER);
     init_timer();
 
