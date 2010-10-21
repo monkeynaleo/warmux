@@ -127,6 +127,9 @@ void Camera::AutoCrop()
   Point2i target(0,0);
   bool stop = false;
 
+  //Stop kinetic scrolling from interfering camera movement
+  m_scroll_vector = Point2f();
+
   if (followed_object && !followed_object->IsGhost()) {
 
     /* compute the ideal position!
@@ -235,10 +238,11 @@ void Camera::ScrollCamera()
     return;
 
   Point2i mousePos = Mouse::GetInstance()->GetPosition();
+  bool over_interface = Interface::GetInstance()->Intersect(mousePos);
 
   if (!Config::GetInstance()->GetScrollOnBorder()) {
     /* Kinetic scrolling */
-    if (!SDL_GetMouseState(NULL, NULL)) {
+    if (!SDL_GetMouseState(NULL, NULL) || over_interface) {
       m_scroll_start_pos = Point2i();
       m_last_mouse_pos   = Point2i();
       m_mouse_counter    = 0;
@@ -253,14 +257,13 @@ void Camera::ScrollCamera()
 
         m_scroll_vector -= brk;
         SetXY(-m_scroll_vector);
-        SetAutoCrop(false);
         if (m_scroll_vector.Norm() < 1)
           m_scroll_vector = Point2f();
       }
       return;
     }
 
-    if (Interface::GetInstance()->Intersect(mousePos))
+    if (over_interface)
       return;
 
     m_mouse_counter++;
