@@ -29,7 +29,6 @@
 
 class CustomTeam
 {
-private:
   bool is_name_changed;
   uint nb_characters;
   std::string name;
@@ -51,13 +50,17 @@ public:
 
   CustomTeam(const std::string &team_name);
   ~CustomTeam();
-  std::string GetName();
-  std::vector<std::string> GetCharactersNameList();
+  std::string GetName() { return name; }
+  std::vector<std::string> GetCharactersNameList()
+  {
+    std::vector<std::string> list = characters_name_list;
+    return list;
+  }
   bool Save();
   void Delete();
 
   void SetName(const std::string &new_name);
-  void SetCharacterName(unsigned id, const std::string &new_name);
+  void SetCharacterName(uint id, const std::string &new_name);
 };
 
 //-----------------------------------------------------------------------------

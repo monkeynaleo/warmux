@@ -254,14 +254,6 @@ Team *TeamsList::FindByIndex(uint index)
 
 //-----------------------------------------------------------------------------
 
-Team *TeamsList::FindPlayingByIndex(uint index)
-{
-  ASSERT(index < playing_list.size());
-  return playing_list[index];
-}
-
-//-----------------------------------------------------------------------------
-
 Team* TeamsList::FindPlayingById(const std::string &id, int &index)
 {
   iterator it = playing_list.begin(), end = playing_list.end();
@@ -443,12 +435,6 @@ bool TeamsList::IsSelected(uint index)
 {
   selection_iterator pos = std::find(selection.begin(), selection.end(), index);
   return pos != selection.end();
-}
-
-void TeamsList::Clear()
-{
-  selection.clear();
-  playing_list.clear();
 }
 
 //-----------------------------------------------------------------------------

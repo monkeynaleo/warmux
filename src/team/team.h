@@ -103,10 +103,14 @@ public:
   void LoadGamingData(WeaponsList * weapons);
   void UnloadGamingData();
 
-  bool IsSameAs(const Team& other) const;
+  bool IsSameAs(const Team& other) const { return m_id == other.m_id; }
 
   // Manage number of characters
-  void SetNbCharacters(uint howmany);
+  void SetNbCharacters(uint howmany)
+  {
+    assert(howmany >= 1 && howmany <= 10);
+    nb_characters = howmany;
+  }
   uint GetNbCharacters() const { return nb_characters; }
 
   // Switch to next worm.
@@ -120,24 +124,24 @@ public:
   // Access to the character.
   Character& ActiveCharacter() const;
 
-  void DrawEnergy(const Point2i& pos);
-  void Refresh();
+  void DrawEnergy(const Point2i& pos) { energy.Draw(pos); }
+  void Refresh() { energy.Refresh(); }
   void RefreshAI();
 
   // Change the weapon.
-  void SetWeapon (Weapon::Weapon_type nv_arme);
+  void SetWeapon(Weapon::Weapon_type nv_arme);
   int NbAliveCharacter() const;
 
   // Access to the active weapon.
-  Weapon& AccessWeapon() const;
-  const Weapon& GetWeapon() const;
-  Weapon::Weapon_type GetWeaponType() const;
+  Weapon& AccessWeapon() const { return *active_weapon; }
+  const Weapon& GetWeapon() const { return *active_weapon; }
+  Weapon::Weapon_type GetWeaponType() const { return GetWeapon().GetType(); }
 
   // Init the energy bar of the team.
-  void InitEnergy (uint max);
+  void InitEnergy(uint max) { energy.Config(ReadEnergy(), max); }
 
   // Update the energy bar values of the team.
-  void UpdateEnergyBar();
+  void UpdateEnergyBar() { energy.SetValue(ReadEnergy()); }
   TeamEnergy & GetEnergyBar() { return energy; };
 
   // Read the total energy of the team.
@@ -152,23 +156,33 @@ public:
   const Surface& GetMiniFlag() const { return mini_flag; }
   const Surface& GetDeathFlag() const { return death_flag; }
   const Surface& GetBigFlag() const { return big_flag; }
-  iterator begin();
-  iterator end();
+  iterator begin() { return characters.begin(); }
+  iterator end() { return characters.end(); }
   Character* FindByIndex(uint index);
 
   void SetPlayerName(const std::string& player_name) { m_player_name = player_name; };
 
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)
-  int ReadNbAmmos() const;
-  int ReadNbAmmos(Weapon::Weapon_type weapon_type) const;
-  int& AccessNbAmmos();
+  int ReadNbAmmos() const { return ReadNbAmmos(active_weapon->GetType()); }
+  int ReadNbAmmos(Weapon::Weapon_type weapon_type) const
+  {
+    ASSERT((uint)weapon_type < m_nb_ammos.size());
+    return m_nb_ammos[weapon_type];
+  }
+  // if value not initialized, it initialize to 0 and then return 0
+  int& AccessNbAmmos() { return m_nb_ammos[active_weapon->GetType()]; }
 
   // Number of current unit per ammo for the selected weapon.
-  int ReadNbUnits() const;
-  int ReadNbUnits(Weapon::Weapon_type weapon_type) const;
-  int& AccessNbUnits();
-  void ResetNbUnits();
+  int ReadNbUnits() const { return ReadNbUnits(active_weapon->GetType()); }
+  int ReadNbUnits(Weapon::Weapon_type weapon_type) const
+  {
+    ASSERT((uint)weapon_type < m_nb_units.size());
+    return m_nb_units[weapon_type];
+  }
+  // if value not initialized, it initialize to 0 and then return 0
+  int& AccessNbUnits() { return m_nb_units[active_weapon->GetType()]; }
+  void ResetNbUnits() { m_nb_units[active_weapon->GetType()] = active_weapon->ReadInitialNbUnit(); }
 
   bool IsAI() const { return ai_name != NO_AI_NAME; }
   bool IsHuman() const { return !IsAI(); }
@@ -187,8 +201,8 @@ public:
   // reset characters number, type_of_player and player name
   void SetDefaultPlayingConfig();
 
-  void SetCustomCharactersNames(const std::vector<std::string>& custom_names);
-  void ClearCustomCharactersNames();
+  void SetCustomCharactersNames(const std::vector<std::string>& custom_names) { custom_characters_names = custom_names; }
+  void ClearCustomCharactersNames() { custom_characters_names.clear(); }
 
   void SetCustomCharactersNamesFromAction(Action *a);
   void PushCustomCharactersNamesIntoAction(Action *a) const;

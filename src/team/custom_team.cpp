@@ -138,18 +138,6 @@ void CustomTeam::Delete()
   }
 }
 
-
-std::vector<std::string> CustomTeam::GetCharactersNameList()
-{
-  std::vector<std::string> list = characters_name_list;
-  return list;
-}
-
-std::string CustomTeam::GetName()
-{
-  return name;
-}
-
 bool CustomTeam::Save()
 {
   Config *config = Config::GetInstance();
@@ -231,12 +219,9 @@ void CustomTeam::SetName(const std::string &new_name)
   name = new_name;
 }
 
-void CustomTeam::SetCharacterName(unsigned id, const std::string &new_name)
+void CustomTeam::SetCharacterName(uint id, const std::string &new_name)
 {
   if (id < nb_characters) {
     characters_name_list[id] = new_name;
   }
 }
-
-
-
