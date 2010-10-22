@@ -818,7 +818,7 @@ bool Interface::Intersect(const Point2i &mouse_pos) {
   if (!IsDisplayed())
     return false;
 
-  if ( Rectanglei(GetMenuPosition(), GetSize()).Intersect( Rectanglei(mouse_pos, Point2i(1,1))) )
+  if ( Rectanglei(GetMenuPosition(), GetSize()).Contains( mouse_pos) )
     return true;
 
   return false;
