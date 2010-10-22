@@ -26,6 +26,7 @@
 #include <vector>
 #include <string>
 #include "ai/ai_player.h"
+#include "character/character.h"
 #include "team/team_energy.h"
 #include "graphic/colors.h"
 #include "graphic/surface.h"
@@ -36,7 +37,6 @@ const std::string NO_AI_NAME = "none";
 const std::string DEFAULT_AI_NAME = "default";
 
 class Body;
-class Character;
 class WeaponsList;
 class XmlReader;
 class Profile;
