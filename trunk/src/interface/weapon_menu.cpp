@@ -175,7 +175,6 @@ WeaponsMenu::WeaponsMenu()
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
   tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
-  help = NULL;
   // Setting colors
   Color plane_color = GetResourceManager().LoadColor(res, "interface/background_color");
   Color border_color = GetResourceManager().LoadColor(res, "interface/border_color");
@@ -194,8 +193,6 @@ WeaponsMenu::~WeaponsMenu()
     delete weapons_menu;
   if (tools_menu)
     delete tools_menu;
-  if (help)
-    delete help;
   if (m_not_yet_available)
     delete m_not_yet_available;
   if (nb_weapon_type)
