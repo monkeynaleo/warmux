@@ -65,7 +65,6 @@ class WeaponsMenu
  private:
   Polygon * weapons_menu;
   Polygon * tools_menu;
-  Polygon * help;
   WeaponMenuItem * current_overfly_item;
   AffineTransform2D position;
   AffineTransform2D shear;
@@ -108,4 +107,4 @@ class WeaponsMenu
   void SetRotationTime(uint time) { rotation_time = time; };
 };
 
-#endif
+#endif // WEAPON_MENU_H
