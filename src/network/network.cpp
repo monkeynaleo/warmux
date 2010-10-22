@@ -19,6 +19,9 @@
  * Network layer for Wormux.
  *****************************************************************************/
 
+#ifdef _WIN32
+#  define NOMINMAX // Avoid Windows headers to define max()
+#endif
 #include <SDL_thread.h>
 #include <SDL_timer.h>
 #include <WORMUX_debug.h>
