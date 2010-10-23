@@ -40,10 +40,9 @@
 #include "weapon/weapon.h"
 #include "weapon/weapon_strength_bar.h"
 
-static const Point2i BORDER_POSITION(5, 5);
-
-#define MARGIN  4
-#define PRE_RENDER 1
+#define BORDER_POSITION 5
+#define MARGIN          4
+#define PRE_RENDER      1
 
 void Interface::LoadDataInternal(Profile *res)
 {
@@ -206,8 +205,8 @@ void Interface::DrawCharacterInfo()
   const Team &team = character_under_cursor->GetTeam();
 
   // Display energy bar
-  Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + team.GetFlag().GetWidth(),
-                                                        team.GetFlag().GetHeight() / 2);
+  Point2i energy_bar_offset = Point2i(MARGIN + team.GetFlag().GetWidth(),
+                                      team.GetFlag().GetHeight() / 2) + BORDER_POSITION;
   energy_bar->DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
