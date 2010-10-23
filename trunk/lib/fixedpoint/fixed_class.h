@@ -118,8 +118,8 @@ struct fixed_point {
 
   operator int() const
   {
-    uint64_t sign = ((uint64_t)intValue)>>63;
-    return ((int64_t)(intValue+(sign<<p)-sign))>>p;
+    unsigned fixint_t sign = ((unsigned fixint_t)intValue)>>(FIXINT_BITS-1);
+    return ((fixint_t)(intValue+(sign<<p)-sign))>>p;
   }
 
   // Must be used explicily as we don't want to calculate with doubles!
