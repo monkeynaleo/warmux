@@ -800,14 +800,12 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   return false;
 }
 
-bool Interface::Intersect(const Point2i &mouse_pos) {
+bool Interface::Intersect(const Point2i &mouse_pos)
+{
   if (!IsDisplayed())
     return false;
 
-  if ( Rectanglei(GetMenuPosition(), GetSize()).Contains( mouse_pos) )
-    return true;
-
-  return false;
+  return Rectanglei(GetMenuPosition(), GetSize()).Contains(mouse_pos);
 }
 
 void Interface::MinimapSizeDelta(int delta)
