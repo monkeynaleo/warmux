@@ -42,7 +42,6 @@
 
 #define BORDER_POSITION 5
 #define MARGIN          4
-#define PRE_RENDER      1
 
 void Interface::LoadDataInternal(Profile *res)
 {
@@ -74,8 +73,8 @@ void Interface::LoadDataInternal(Profile *res)
   small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
 
   // Pre-render interface + wind-indicator
-  Point2i wind_pos((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
-                   (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
+  Point2i wind_pos(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
+                   (game_menu.GetHeight() - wind_icon.GetHeight())>>1);
   game_menu.Blit(wind_icon, wind_pos);
   game_menu.Blit(wind_indicator, wind_pos + Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight()));
 
@@ -206,7 +205,7 @@ void Interface::DrawCharacterInfo()
 
   // Display energy bar
   Point2i energy_bar_offset = Point2i(MARGIN + team.GetFlag().GetWidth(),
-                                      team.GetFlag().GetHeight() / 2) + BORDER_POSITION;
+                                      team.GetFlag().GetHeight()>>1) + BORDER_POSITION;
   energy_bar->DrawXY(bottom_bar_pos + energy_bar_offset);
 
   // Display team logo
@@ -217,8 +216,8 @@ void Interface::DrawCharacterInfo()
 
   // Display team name
   t_team_name->SetText(team.GetName());
-  Point2i team_name_offset = energy_bar_offset + Point2i(energy_bar->GetWidth() / 2,
-                                                         energy_bar->GetHeight() + t_team_name->GetHeight() / 2);
+  Point2i team_name_offset = energy_bar_offset + Point2i(energy_bar->GetWidth()>>1,
+                                                         energy_bar->GetHeight() + (t_team_name->GetHeight()>>1));
   t_team_name->DrawCenter(bottom_bar_pos + team_name_offset);
 
   // Display character's name
@@ -230,7 +229,7 @@ void Interface::DrawCharacterInfo()
   if (window.GetHeight() > 480) {
     t_player_name->SetText(_("Head commander") + std::string(": ") + team.GetPlayerName());
     Point2i player_name_offset = energy_bar_offset
-      + Point2i(energy_bar->GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
+      + Point2i((energy_bar->GetWidth()>>1), t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
     t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
   }
 
@@ -243,7 +242,7 @@ void Interface::DrawCharacterInfo()
     energy_bar->Actu(0);
   }
 
-  t_character_energy->DrawCenter(bottom_bar_pos + energy_bar_offset + energy_bar->GetSize()/2);
+  t_character_energy->DrawCenter(bottom_bar_pos + energy_bar_offset + (energy_bar->GetSize()>>1));
 }
 
 void Interface::DrawWeaponInfo() const
@@ -252,7 +251,7 @@ void Interface::DrawWeaponInfo() const
   int nbr_munition = ActiveTeam().ReadNbAmmos();
 
   // Draw weapon name
-  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - 24;
+  int offset = ((game_menu.GetWidth() - clock_width)>>1) - MARGIN - 24;
   t_weapon_name->SetText(weapon->GetName());
   t_weapon_name->DrawCenterTop(bottom_bar_pos + Point2i(offset, 0));
 
@@ -270,13 +269,13 @@ void Interface::DrawWeaponInfo() const
 
   // Draw shoot button
   GetMainWindow().Blit(shoot, bottom_bar_pos + Point2i(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                                       (game_menu.GetHeight() - shoot.GetHeight())/2));
+                                                       (game_menu.GetHeight() - shoot.GetHeight())>>1));
 }
 
 void Interface::DrawTimeInfo() const
 {
   Surface& window = GetMainWindow();
-  Point2i turn_time_pos((window.GetWidth() - clock_width)/2,
+  Point2i turn_time_pos((window.GetWidth() - clock_width)>>1,
                         window.GetHeight()  - GetHeight());
   Rectanglei dr(turn_time_pos, Point2i(clock_width, game_menu.GetHeight()));
 
@@ -293,7 +292,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
     timer->DrawCenter(time_pos - Point2i(0, game_menu.GetHeight()/3));
 
   // Draw clock
-  Point2i tmp_point = time_pos - clock->GetSize() / 2;
+  Point2i tmp_point = time_pos - (clock->GetSize()>>1);
   clock->Update();
   clock->DrawXY(tmp_point);
 
@@ -317,8 +316,8 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
-                          (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
+  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
+                          (game_menu.GetHeight() - wind_icon.GetHeight())>>1);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
 
@@ -331,7 +330,7 @@ void Interface::DrawSmallInterface() const
   int height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = height > 0 ? height : 0;
   height = (height < small_background_interface.GetHeight()) ? height : small_background_interface.GetHeight();
-  Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+  Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth())>>1,
                                    window.GetHeight() - height);
   window.Blit(small_background_interface, small_interface_position);
   DrawWindIndicator(small_interface_position + 2*MARGIN, false);
@@ -344,8 +343,8 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth(),
-                          (game_menu.GetHeight() - 50)/2);
+  Point2i team_bar_offset(((game_menu.GetWidth()+clock_width)>>1) + wind_icon.GetWidth(),
+                          (game_menu.GetHeight() - 50)>>1);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
@@ -460,7 +459,7 @@ void Interface::DrawMapPreview()
       }
 
       coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
-      window.Blit(icon, coord - icon.GetSize()/2);
+      window.Blit(icon, coord - (icon.GetSize()>>1));
 
       if (character->IsActiveCharacter()) {
         uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
@@ -468,7 +467,7 @@ void Interface::DrawMapPreview()
         window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);
         GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
       } else {
-        GetWorld().ToRedrawOnScreen(Rectanglei(coord - icon.GetSize()/2, icon.GetSize()));
+        GetWorld().ToRedrawOnScreen(Rectanglei(coord - (icon.GetSize()>>1), icon.GetSize()));
       }
 
     }
@@ -489,7 +488,7 @@ void Interface::Draw()
 {
   Surface &window  = GetMainWindow();
 
-  bottom_bar_pos.SetValues((window.GetWidth() - GetWidth())/2,
+  bottom_bar_pos.SetValues((window.GetWidth() - GetWidth())>>1,
                            window.GetHeight() - GetHeight());
   // Has the display size changed? Then reload data
   if (last_width != window.GetWidth()) {
@@ -500,7 +499,7 @@ void Interface::Draw()
     DrawMapPreview();
 
   // Position on the screen
-  Point2i barPos((window.GetWidth() - weapon_strength_bar.GetWidth())/2,
+  Point2i barPos((window.GetWidth() - weapon_strength_bar.GetWidth())>>1,
                  window.GetHeight() - weapon_strength_bar.GetHeight() - game_menu.GetHeight() - MARGIN);
 
   // Drawing on the screen
@@ -648,7 +647,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
+        Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
@@ -657,7 +656,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 
         // Check if we clicked the shoot icon: start firing!
         Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                (game_menu.GetHeight() - shoot.GetHeight())/2,
+                                (game_menu.GetHeight() - shoot.GetHeight())>>1,
                                 shoot.GetWidth(), shoot.GetHeight());
         if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
           ActionShoot(true);
@@ -666,7 +665,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       }
 
       // Check if we clicked the clock icon: display pause menu
-      Rectanglei clock_button((game_menu.GetWidth() - clock_width)/ 2, 0,
+      Rectanglei clock_button((game_menu.GetWidth() - clock_width)>>1, 0,
                               clock_width, game_menu.GetHeight());
       if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
         Game::GetInstance()->UserAsksForMenu();
@@ -683,7 +682,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {
-      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth())>>1,
                               window.GetHeight() - small_background_interface.GetHeight(),
                               small_background_interface.GetWidth(),
                               small_background_interface.GetHeight());
@@ -701,7 +700,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
       offset = GetWorld().ground.FromPreviewCoordinates(mouse_pos - offset);
       Camera *cam = Camera::GetInstance();
       cam->SetAutoCrop(false);
-      cam->SetXYabs(offset - cam->GetSize()/2);
+      cam->SetXYabs(offset - (cam->GetSize()>>1));
       return true;
     }
   }
@@ -723,7 +722,7 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
       // Positions are somewhat from Interface::DrawWeaponInfo()
       Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                  game_menu.GetHeight());
-      Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
+      Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
 
       Rectanglei weapon_button(TL, BR-TL);
       // Check if we clicked the weapon icon: toggle weapon menu
@@ -759,7 +758,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
+        Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
@@ -782,7 +781,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {
-      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth())>>1,
                               window.GetHeight() - small_background_interface.GetHeight(),
                               small_background_interface.GetWidth(),
                               small_background_interface.GetHeight());
