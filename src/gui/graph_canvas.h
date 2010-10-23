@@ -42,7 +42,12 @@ private:
   std::vector<Result>  results;
   uint                 thickness;
 
+  void SetAxis(const std::string& xname, const std::string& yname);
+
 public:
+  GraphCanvas(const Point2i& size,
+              const std::string& xname, const std::string& yname,
+              uint thick=2);
   GraphCanvas(const Point2i& size,
               const std::string& xname, const std::string& yname,
               std::vector<Result>& res, uint thick=2);
@@ -56,7 +61,8 @@ public:
 
   virtual void Pack() {};
 
-  void SetNewResults(std::vector<Result>& newer) { results = newer; }
+  void AddResult(const Result& newer) { results.push_back(newer); }
+  void UnsetResults() { results.clear(); }
 
   static void FindMax(Result& res);
 };

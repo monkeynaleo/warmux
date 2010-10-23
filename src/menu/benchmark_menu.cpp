@@ -26,6 +26,7 @@
 #include "game/time.h"
 #include "graphic/video.h"
 #include "gui/button.h"
+#include "gui/graph_canvas.h"
 #include "gui/horizontal_box.h"
 #include "gui/label.h"
 #include "gui/vertical_box.h"
@@ -103,11 +104,14 @@ BenchmarkMenu::BenchmarkMenu() :
   Menu("menu/bg_option", vOk)
 {
   const Surface& window = GetMainWindow();
-  tests = new VBox(window.GetWidth()*0.8f, true, true);
-  tests->SetPosition(window.GetSize()*0.1f);
+  Point2i s = window.GetSize()*0.9f;
+  tests = new VBox(s.GetX(), true, true);
+  tests->SetPosition((window.GetSize() - s)/2);
 
   tests->AddWidget(new BenchItem(BENCH_MENU, _("Menu"), 48));
   tests->AddWidget(new BenchItem(BENCH_GRAPHICS, _("Graphics"), 48));
+  graph = new GraphCanvas(Point2i(s.GetX(), s.GetY() - 2*48 - 50), _("Time"), _("FPS"));
+  tests->AddWidget(graph);
 
   widgets.AddWidget(tests);
   widgets.Pack();
@@ -189,9 +193,18 @@ bool BenchmarkMenu::Launch(BenchItem *b)
         score = (num * video->window.GetWidth()*video->window.GetHeight())
               / time;
         fmt = "%.0f";
+
+        GraphCanvas::Result res;
+        res.list = Game::GetInstance()->GetBenchResults();
+        res.item = NULL;
+        res.color = primary_red_color;
+        GraphCanvas::FindMax(res);
+        graph->AddResult(res);
       } else {
         fmt = "Aborted";
+        graph->UnsetResults();
       }
+      graph->NeedRedrawing();
 
       // Restore all!
       video->SetMaxFps(fps);
@@ -218,7 +231,12 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 void BenchmarkMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   if (tests->Contains(mousePosition)) {
-    Launch(static_cast<BenchItem*>(tests->ClickUp(mousePosition, button)));
-    RedrawMenu();
+    Widget *widget = tests->ClickUp(mousePosition, button);
+    if (widget && widget!=graph) {
+      Launch(static_cast<BenchItem*>(widget));
+      RedrawMenu();
+    } else if (widget) {
+      graph->NeedRedrawing();
+    }
   }
 }
