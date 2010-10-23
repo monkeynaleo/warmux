@@ -37,6 +37,7 @@ class Team;
 class Text;
 class Polygon;
 class Weapon;
+class WeaponHelp;
 class Profile;
 
 #ifdef WIN32
@@ -49,6 +50,7 @@ public:
   Character *character_under_cursor;
   Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
+  WeaponHelp *help;
   Team *tmp_team;
 
 private:

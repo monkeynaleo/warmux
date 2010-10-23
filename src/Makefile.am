@@ -168,6 +168,8 @@ wormux_SOURCES = \
         interface/movable_by_user.h \
         interface/move_intention.cpp \
         interface/move_intention.h \
+        interface/weapon_help.cpp \
+        interface/weapon_help.h \
         interface/weapon_menu.cpp \
         interface/weapon_menu.h \
         main.cpp \
