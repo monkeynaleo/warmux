@@ -38,33 +38,38 @@ public:
   {
     std::string        string; // gcc does not support correctly a char* here.
     int                x, y, w;
-    Font::font_size_t  fsize;
-    Font::font_style_t fstyle;
-    Color              color;
+    Caption(const std::string& caption,
+            int x, int y, int w)
+      : string(caption), x(x), y(y), w(w) { }
   };
   typedef std::vector<Caption> Captions;
 
 private:
-  Captions   captions;
+  Captions           captions;
+  Font::font_size_t  fsize;
+  Font::font_style_t fstyle;
+  Color              color;
 
 public:
-  // caps must be static const, as we aren't doing copies
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
-               const Captions& caps,
+               Font::font_size_t fsize = Font::FONT_BIG,
+               Font::font_style_t fstyle = Font::FONT_BOLD,
+               const Color& color = dark_gray_color,
                ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
-    , captions(caps)
-  { }
-  FigureWidget(const Point2i & size,
-               const std::string & resource_id,
-               const Caption* caps, size_t num,
-               ScalingType type = FIT_SCALING)
-    : PictureWidget(size, resource_id, type)
-    , captions(caps, caps+num)
+    , fsize(fsize)
+    , fstyle(fstyle)
+    , color(color)
   { }
 
   virtual void Draw(const Point2i& mousePosition) const;
+
+  void AddCaption(const std::string& caption,
+                  int x, int y, int w)
+  {
+    captions.push_back(Caption(caption, x, y, w));
+  }
 };
 
 #endif
