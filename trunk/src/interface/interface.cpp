@@ -21,6 +21,7 @@
 
 #include "include/action_handler.h"
 #include "interface/interface.h"
+#include "interface/weapon_help.h"
 #include "interface/mouse.h"
 #include "character/character.h"
 #include "game/game.h"
@@ -155,6 +156,9 @@ Interface::Interface()
   t_weapon_stock = new Text("0", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_character_energy = new Text("Dead", energy_text_color, Font::FONT_SMALL, Font::FONT_BOLD);
 
+  // Weapon help
+  help = new WeaponHelp();
+
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
@@ -176,6 +180,8 @@ Interface::~Interface()
   if (scratch) delete scratch;
 
   if (energy_bar) delete energy_bar;
+
+  delete help;
 }
 
 void Interface::Reset()
@@ -188,6 +194,7 @@ void Interface::Reset()
   character_under_cursor = NULL;
   weapon_under_cursor = NULL;
   weapons_menu.Reset();
+  help->Reset();
   energy_bar->InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
 }
 
@@ -540,6 +547,8 @@ void Interface::Draw()
   DrawTeamEnergy();
   DrawWeaponInfo();
   DrawSmallInterface();
+
+  help->Draw();
 }
 
 int Interface::GetHeight() const
@@ -748,7 +757,8 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
       // Check if we clicked the weapon icon: toggle weapon menu
       if (weapon_button.Contains(mouse_pos-bottom_bar_pos) &&
           weapon_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-        Weapon::Message(ActiveTeam().AccessWeapon().GetHelp());
+        help->SetWeapon(ActiveTeam().AccessWeapon());
+        help->SwitchDisplay();
         return true;
       }
     }
