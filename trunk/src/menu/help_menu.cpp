@@ -117,6 +117,32 @@ HelpMenu::HelpMenu()
                        PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game mode"), w);
 
+#define INGAME_CAPTIONS_PARAMS (Font::font_size_t)32, DEF_CAPTIONS_PARAMS
+  static const FigureWidget::Caption ingame_captions[] = {
+    {
+#ifdef ANDROID
+      _("To jump, press space or trackball or dpad center.\n"
+        "To aim or move more slowly, use shift/vol+.\n"
+        "To pause, click the clock or press escape/back key.\n"
+        "Click a character from your team to select it.\n"),
+#else
+      _("To jump, press space.\n"
+        "To aim or move more slowly, use shift.\n"
+        "To pause, click the clock or press escape.\n"
+        "Click a character from your team to select it.\n"),
+#endif
+      197, 337, 289, INGAME_CAPTIONS_PARAMS },
+    { _("Minimap, more details in another tab"), 543, 132, 330, INGAME_CAPTIONS_PARAMS },
+    { _("Gauge to set speed of some weapons"), 619, 494, 411, INGAME_CAPTIONS_PARAMS },
+    { _("Interface, more details in another tab"), 1003, 437, 209, INGAME_CAPTIONS_PARAMS }
+  };
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/ingame",
+                       ingame_captions, ARRAY_SIZE(ingame_captions),
+                       PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Ingame display"), w);
+
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);
 
