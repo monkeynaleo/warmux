@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-23 17:23+0200\n"
+"POT-Creation-Date: 2010-10-23 17:38+0200\n"
 "PO-Revision-Date: 2010-09-29 22:24+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -543,7 +543,7 @@ msgstr "Avant l'action"
 
 #: src/menu/main_menu.cpp:64
 msgid "Benchmark"
-msgstr ""
+msgstr "Mesures de performance"
 
 #: src/game/game_mode.cpp:343
 msgid "Blitz"
@@ -583,6 +583,7 @@ msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes personnalisées (%s) !"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 msgid "Center camera on character"
 msgstr "Centre la caméra sur le personnage"
@@ -591,18 +592,22 @@ msgstr "Centre la caméra sur le personnage"
 msgid "Center on active character"
 msgstr "Centre la caméra sur personnage courant"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:73
 msgid "Change active character"
 msgstr "Change de personnage courant"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:64
 msgid "Change aim angle"
 msgstr "Modifie l'angle de visée"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:92
 msgid "Change number of playing teams"
 msgstr "Change le nombre d'équipes en jeu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
 msgid "Change per team number of players"
 msgstr "Change le nombre de joueurs par équipe"
@@ -611,10 +616,12 @@ msgstr "Change le nombre de joueurs par équipe"
 msgid "Change weapon"
 msgstr "Change d'arme"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:62
 msgid "Change weapon category"
 msgstr "Change de catégorie d'armes"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:63
 msgid "Change weapon countdown"
 msgstr "Modifie le délai avant détonation"
@@ -665,10 +672,12 @@ msgstr ""
 msgid "Click to change team selected"
 msgstr "Clic pour changer l'équipe choisie"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr "Clic pour choisir une équipe IA/humaine"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr "Clic/molette pour changer la carte"
@@ -694,6 +703,7 @@ msgstr "Bazooka à Fragmentation"
 msgid "Commit Suicide"
 msgstr "Suicide"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "Menu de configuration"
@@ -774,6 +784,7 @@ msgstr "Bas"
 msgid "Down slowly"
 msgstr "Bas lentement"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:56
 msgid "Drag&drop: Move camera"
 msgstr "Glissez-déplacez : déplace la caméra"
@@ -795,6 +806,7 @@ msgstr "Dynamite"
 msgid "END OF GAME"
 msgstr "FIN DU JEU"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
 msgid "Edit player name"
 msgstr "Edite le nom du joueur"
@@ -891,11 +903,11 @@ msgstr "Erreur : impossible de trouver le skin \"%s\" pour l'équipe \"%s\"."
 
 #: src/menu/help_menu.cpp:104
 msgid "Experiment new game rules"
-msgstr ""
+msgstr "Testez d'autres règles de jeu!"
 
 #: src/menu/benchmark_menu.cpp:114
 msgid "FPS"
-msgstr ""
+msgstr "Cadence"
 
 #: lib/wormux/net/download.cpp:176 lib/wormux/net/download.cpp:217
 #, c-format
@@ -936,14 +948,17 @@ msgstr "Mode de jeu"
 msgid "Game name:"
 msgstr "Nom de la partie :"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
-msgid "Gauge to set speed of some weapons"
-msgstr ""
+#, fuzzy
+msgid "Gauge to set speed of some projectiles"
+msgstr "Jauge pour régler la vitesse de certains projectiles"
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Lance-Gnu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr "Va au sous-menu d'édition des règles"
@@ -997,6 +1012,7 @@ msgstr "Commandant"
 msgid "Help"
 msgstr "Aide"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "Saut en hauteur"
@@ -1017,9 +1033,10 @@ msgstr ""
 "Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à "
 "Wormux, envoyez un mail (en anglais, svp) :"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
 msgid "If you like medkits, increase this"
-msgstr ""
+msgstr "C'est fait pour vous si vous aimez ramasser des soins"
 
 #: src/interface/man_machine_interface.cpp:1187
 msgid "Increase explosion delay"
@@ -1033,22 +1050,25 @@ msgstr "Augmenter la taille de la minimap"
 msgid "Increase sound volume"
 msgstr "Augmenter le volume sonore"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Nombre de tours avant le death mode"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:105
 msgid "Increase this if you are a slow player"
-msgstr ""
+msgstr "Si vous êtes lents, augmentez-le!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:109
 msgid "Increase this if you like long games"
-msgstr ""
+msgstr "Augmente la durée des parties"
 
 #: src/menu/help_menu.cpp:144
 msgid "Ingame display"
-msgstr ""
+msgstr "Affichage en cours de jeu"
 
 #. Characters energy
 #: src/menu/game_mode_editor.cpp:67
@@ -1083,9 +1103,10 @@ msgstr "Initialisation des sons"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
 msgid "Interface, more details in another tab"
-msgstr ""
+msgstr "Interface, plus de détails dans un autre onglet"
 
 #: src/game/game.cpp:891
 msgid "It's a present!"
@@ -1099,6 +1120,7 @@ msgstr "Jetpack"
 msgid "Jump"
 msgstr "Saut"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "Saut en arrière"
@@ -1196,7 +1218,7 @@ msgstr "Nbr. max. d'img/s"
 
 #: src/menu/benchmark_menu.cpp:112
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: src/weapon/mine.cpp:208
 msgid "Mine"
@@ -1204,7 +1226,7 @@ msgstr "Mine"
 
 #: src/menu/help_menu.cpp:135
 msgid "Minimap, more details in another tab"
-msgstr ""
+msgstr "Minimap, plus de détails dans un autre onglet"
 
 #: src/menu/options_menu.cpp:257
 msgid "Misc"
@@ -1215,9 +1237,10 @@ msgstr "Divers"
 msgid "Modifiers"
 msgstr "Mods"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:107
 msgid "More energy, more shots needed"
-msgstr ""
+msgstr "Plus de tirs nécessaires?"
 
 #: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
 msgid "Most accurate"
@@ -1255,10 +1278,12 @@ msgstr "Déplace la caméra à droite"
 msgid "Move camera up"
 msgstr "Monte la caméra"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:70
 msgid "Move camera with mouse or arrows"
 msgstr "Déplace la caméra avec la souris / les flèches"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:65
 msgid "Move character"
 msgstr "Déplace le personnage"
@@ -1348,10 +1373,12 @@ msgstr "Nombre de personnages"
 msgid "Number of teams:"
 msgstr "Nombre d'équipes :"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:67
 msgid "On a character: select it"
 msgstr "Sur un personnage : change le personnage actif"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:66
 msgid "On map: select a target"
 msgstr "Sur la carte : choisir une cible"
@@ -1508,6 +1535,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Batailles Publiques"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Quitter rapidement le jeu avec la touche [Ctrl]"
@@ -1668,10 +1696,12 @@ msgstr "Touche tous les joueurs sur une ligne!"
 msgid "Shotgun"
 msgstr "Fusil à Pompe"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:68
 msgid "Show weapons menu"
 msgstr "Afficher le menu des armes"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "Afficher/Masquer l'interface"
@@ -1692,6 +1722,7 @@ msgstr "Baffe"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Baffez l'ennemi pour le faire un peu décoller."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "Angle de visée et déplacement plus précis"
@@ -1760,6 +1791,7 @@ msgstr "Seringue"
 msgid "Take screenshot"
 msgstr "Capture d'écran"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "Parler dans la bataille en réseau"
@@ -1810,9 +1842,10 @@ msgstr "La Roquette Automatique est partie dans un autre monde..."
 msgid "The ball left the battlefield before exploding!"
 msgstr "La Balle a quitté le champ de bataille avant d'exploser."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:111
 msgid "The bigger the faster you'll fall!"
-msgstr ""
+msgstr "Plus c'est grand, plus dure sera la chute!"
 
 #: src/menu/game_mode_editor.cpp:137
 msgid ""
@@ -1924,6 +1957,10 @@ msgid ""
 "To pause, click the clock or press escape/back key.\n"
 "Click a character from your team to select it.\n"
 msgstr ""
+"Pour sauter, pressez espace ou le centre du trackball ou du dpad.\n"
+"Pour viser ou bouger plus lentement, pressez shift ou vol+.Pour mettre en "
+"pause, cliquer l'horloge ou pressez ESC/Annule.\n"
+"Cliquer sur un personnage de votre équipe pour le choisir.\n"
 
 #: src/menu/help_menu.cpp:129
 msgid ""
@@ -1932,7 +1969,12 @@ msgid ""
 "To pause, click the clock or press escape.\n"
 "Click a character from your team to select it.\n"
 msgstr ""
+"Pour sauter, pressez espace.\n"
+"Pour viser ou bouger plus lentement, pressez shift.Pour mettre en pause, "
+"cliquer l'horloge ou pressez ESC.\n"
+"Cliquer sur un personnage de votre équipe pour le choisir.\n"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 msgid "Toggle fullscreen"
 msgstr "Plein écran"
@@ -1941,6 +1983,7 @@ msgstr "Plein écran"
 msgid "Toggle interface"
 msgstr "Afficher l'interface"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 msgid "Toggle minimap"
 msgstr "Afficher la mini-carte"
@@ -2053,6 +2096,7 @@ msgstr "En attente de joueurs distants"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Attente du serveur, vous pouvez seulement annuler ou discuter !"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:71
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arme : tir / Boite de bonus : chute"
@@ -2082,6 +2126,7 @@ msgstr "Homerun ! %s de l'équipe %s est dans un autre monde…"
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:106
 #, fuzzy
 msgid "When a character can be switched"

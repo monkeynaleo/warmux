@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-23 17:23+0200\n"
+"POT-Creation-Date: 2010-10-23 17:38+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -528,6 +528,7 @@ msgstr "チームのディレクトリが開けません (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "カスタムチームのディレクトリが開けません (%s)!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Center camera on character"
@@ -538,21 +539,25 @@ msgstr "カメラの中心をキャラクターにする"
 msgid "Center on active character"
 msgstr "行動するキャラクターを切り替える"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Change active character"
 msgstr "行動するキャラクターを切り替える"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:64
 #, fuzzy
 msgid "Change aim angle"
 msgstr "照準角度を変更する"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Change number of playing teams"
 msgstr "最大プレイヤー数:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Change per team number of players"
@@ -563,11 +568,13 @@ msgstr "最大プレイヤー数:"
 msgid "Change weapon"
 msgstr "武器カテゴリを切り替える"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Change weapon category"
 msgstr "武器カテゴリを切り替える"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:63
 #, fuzzy
 msgid "Change weapon countdown"
@@ -614,10 +621,12 @@ msgstr ""
 msgid "Click to change team selected"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr ""
@@ -643,6 +652,7 @@ msgstr "クラスターバズーカ"
 msgid "Commit Suicide"
 msgstr "自殺"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "オプションメニュー"
@@ -723,6 +733,7 @@ msgstr "ダウンロード"
 msgid "Down slowly"
 msgstr "ダウンロード"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Drag&drop: Move camera"
@@ -745,6 +756,7 @@ msgstr "ダイナマイト"
 msgid "END OF GAME"
 msgstr "ゲームを終了"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Edit player name"
@@ -879,14 +891,16 @@ msgstr "ゲームモード"
 msgid "Game name:"
 msgstr "ゲーム名"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
-msgid "Gauge to set speed of some weapons"
+msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu-ランチャー"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr ""
@@ -937,6 +951,7 @@ msgstr "指揮官"
 msgid "Help"
 msgstr "ヘルプ"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "ハイジャンプ"
@@ -955,6 +970,7 @@ msgid ""
 "please):"
 msgstr "もしバグを発見したり、機能要望があればE-mailを送ってください（英語で）"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
 msgid "If you like medkits, increase this"
 msgstr ""
@@ -971,15 +987,18 @@ msgstr ""
 msgid "Increase sound volume"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "デスモードに入るまで"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:105
 msgid "Increase this if you are a slow player"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:109
 msgid "Increase this if you like long games"
 msgstr ""
@@ -1022,6 +1041,7 @@ msgstr "サウンド初期化"
 msgid "Initialise teams"
 msgstr "チーム初期化"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
 msgid "Interface, more details in another tab"
 msgstr ""
@@ -1038,6 +1058,7 @@ msgstr "ジェットパック"
 msgid "Jump"
 msgstr "ジャンプ"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "バックジャンプ"
@@ -1157,6 +1178,7 @@ msgstr "その他"
 msgid "Modifiers"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:107
 msgid "More energy, more shots needed"
 msgstr ""
@@ -1201,11 +1223,13 @@ msgstr "キャラクターの移動"
 msgid "Move camera up"
 msgstr "キャラクターの移動"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "カーソルやマウスにカメラを追従"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Move character"
@@ -1297,11 +1321,13 @@ msgstr "キャラクター数"
 msgid "Number of teams:"
 msgstr "チーム数:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "On a character: select it"
 msgstr "キャラクターに関して:行動するキャラクターを切り替えます"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "On map: select a target"
@@ -1437,6 +1463,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "パブリックバトル"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Ctrlでクイック終了"
@@ -1598,11 +1625,13 @@ msgstr ""
 msgid "Shotgun"
 msgstr "ショットガン"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "武器メニューを表示"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "インターフェースの表示/非表示"
@@ -1623,6 +1652,7 @@ msgstr "ビンタ"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "ビンタでは相手を少し飛ばすことができます。"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "照準角度と移動の微調整"
@@ -1691,6 +1721,7 @@ msgstr "注射器"
 msgid "Take screenshot"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "ネットワーク対戦で話す"
@@ -1740,6 +1771,7 @@ msgstr "オートロケットは、戦場から出てしまいました。"
 msgid "The ball left the battlefield before exploding!"
 msgstr "ボールは、爆発前に戦場から出てしまいました。"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:111
 msgid "The bigger the faster you'll fall!"
 msgstr ""
@@ -1861,6 +1893,7 @@ msgid ""
 "Click a character from your team to select it.\n"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Toggle fullscreen"
@@ -1871,6 +1904,7 @@ msgstr "フルスクリーン？"
 msgid "Toggle interface"
 msgstr "インターフェースの表示/非表示"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Toggle minimap"
@@ -1982,6 +2016,7 @@ msgstr "リモートプレイヤーを待っています"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "サーバーを待っています。キャンセルとチャットができます！"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
@@ -2012,6 +2047,7 @@ msgstr "なんと美しいホームランだろう！%s (%s)は異世界へ..."
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s はハンドガンごときにやられました...これは恥ずかしい！"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:106
 #, fuzzy
 msgid "When a character can be switched"

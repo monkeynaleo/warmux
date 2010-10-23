@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.9.2\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-23 17:23+0200\n"
+"POT-Creation-Date: 2010-10-23 17:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Benčík <zrebec@zrebec.sk>\n"
 "Language-Team: zrebec <zrebec@zrebec.sk>\n"
@@ -627,6 +627,7 @@ msgstr "Nemôžem otvoriť priečinok tímu (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nemôžem otvoriť vlastný priečinok tímu (%s)!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Center camera on character"
@@ -637,21 +638,25 @@ msgstr "Zamerať kameru na postavu"
 msgid "Center on active character"
 msgstr "Zmeniť aktívnu postavu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Change active character"
 msgstr "Zmeniť aktívnu postavu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:64
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Zmeniť zameriavací uhol"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Change number of playing teams"
 msgstr "Počet tímov:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Change per team number of players"
@@ -662,11 +667,13 @@ msgstr "Počet tímov:"
 msgid "Change weapon"
 msgstr "Zmeniť kategóriu zbraní"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Zmeniť kategóriu zbraní"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:63
 #, fuzzy
 msgid "Change weapon countdown"
@@ -713,10 +720,12 @@ msgstr ""
 msgid "Click to change team selected"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr ""
@@ -742,6 +751,7 @@ msgstr "Cluzuka"
 msgid "Commit Suicide"
 msgstr "Spáchať samovraždu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "Konfiguračné menu"
@@ -820,6 +830,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Drag&drop: Move camera"
@@ -842,6 +853,7 @@ msgstr "Dynamit"
 msgid "END OF GAME"
 msgstr "KONIEC HRY"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Edit player name"
@@ -974,14 +986,16 @@ msgstr "Herný mód"
 msgid "Game name:"
 msgstr "Názov hry:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
-msgid "Gauge to set speed of some weapons"
+msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Odpaľovač Gnu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr ""
@@ -1032,6 +1046,7 @@ msgstr "Hlavný veliteľ"
 msgid "Help"
 msgstr "Pomoc"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "Vysoký skok"
@@ -1052,6 +1067,7 @@ msgstr ""
 "Ak nájdeš chybu alebo máš požiadavku na vlasnosť hry, napíš email (v "
 "angličtine prosím):"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
 msgid "If you like medkits, increase this"
 msgstr ""
@@ -1068,15 +1084,18 @@ msgstr ""
 msgid "Increase sound volume"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Dĺžka pred začiatkom smrtiaceho módu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:105
 msgid "Increase this if you are a slow player"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:109
 msgid "Increase this if you like long games"
 msgstr ""
@@ -1119,6 +1138,7 @@ msgstr "Inicializácia zvukov"
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
 msgid "Interface, more details in another tab"
 msgstr ""
@@ -1135,6 +1155,7 @@ msgstr "Tryskové vznášadlo"
 msgid "Jump"
 msgstr "Skok"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "Skok dozadu"
@@ -1254,6 +1275,7 @@ msgstr "Rôzne"
 msgid "Modifiers"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:107
 msgid "More energy, more shots needed"
 msgstr ""
@@ -1298,11 +1320,13 @@ msgstr "Padák"
 msgid "Move camera up"
 msgstr "Padák"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Posun kamery myškou alebo šípikami"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Move character"
@@ -1394,11 +1418,13 @@ msgstr "Počet postáv"
 msgid "Number of teams:"
 msgstr "Počet tímov:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Na postavu: Označiť ju"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "On map: select a target"
@@ -1534,6 +1560,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Verejné súboje"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Rýchly odchod pomocou Ctrl"
@@ -1695,11 +1722,13 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Brokovnica"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Ukázať menu so zbraňami"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "Ukázať/skryť rozhranie"
@@ -1720,6 +1749,7 @@ msgstr "Facka"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Udri nepriateľa nech trochu poskočí."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "Trochu zamieriť uhol a urobiť krok"
@@ -1787,6 +1817,7 @@ msgstr "Injekčná striekačka"
 msgid "Take screenshot"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "Rozhovor v sieťových súbojoch"
@@ -1838,6 +1869,7 @@ msgstr "Navádzaná raketa opustila bojové pole"
 msgid "The ball left the battlefield before exploding!"
 msgstr "Lopta opustila bojové pole ešte pred svojim výbuchom!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:111
 msgid "The bigger the faster you'll fall!"
 msgstr ""
@@ -1963,6 +1995,7 @@ msgid ""
 "Click a character from your team to select it.\n"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Toggle fullscreen"
@@ -1973,6 +2006,7 @@ msgstr "Na celú obrazovku"
 msgid "Toggle interface"
 msgstr "Ukázať/skryť rozhranie"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 msgid "Toggle minimap"
 msgstr ""
@@ -2087,6 +2121,7 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Čakanie na server. Všetko čo môžeš urobiť je zrušiť operáciu alebo chatovať!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
@@ -2117,6 +2152,7 @@ msgstr "To bol ale krásny homerun! %s z %s tímu sa ocitol na druhom svete..."
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba pre %s - bol zabitý obyčajnou pištoľou!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:106
 #, fuzzy
 msgid "When a character can be switched"
