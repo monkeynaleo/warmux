@@ -169,58 +169,74 @@ void Text::RenderMultiLines()
   }
 
   // Cut the text on space
-  std::vector<std::string> tokens;
-  std::string::size_type old_pos = 0, current_pos = 0;
-
-  while (old_pos < txt.size() &&
-         (current_pos = txt.find_first_of(' ', old_pos)) != std::string::npos) {
-    std::string tmp = txt.substr(old_pos, current_pos-old_pos);
-    if (tmp != " " && tmp != "") {
-      tokens.push_back(tmp);
-    }
-    old_pos = current_pos+1;
-  }
-  tokens.push_back(txt.substr(old_pos));
-
-  // Compute size
-  std::vector<std::string> lines;
-  uint index_lines = 0;
-  uint index_word = 0;
+  std::vector<std::string> ret_lines;
   uint line_width = 0;
   uint max_line_width = 0;
+  std::string::size_type ret_old_pos = 0;
+  while (ret_old_pos < txt.size()) {
+    std::string::size_type ret_current_pos = txt.find_first_of('\n', ret_old_pos);
+    std::string line = (ret_current_pos==std::string::npos)
+                     ? txt.substr(ret_old_pos, std::string::npos)
+                     : txt.substr(ret_old_pos, ret_current_pos-ret_old_pos);
+    std::string::size_type old_pos = 0, current_pos = 0;
+    std::vector<std::string> tokens;
+    uint index_word = 0;
+    uint index_lines = 0;
 
-  while (index_word < tokens.size()) {
-    if (lines.size() == index_lines) {
-      // first word of a line
-      lines.push_back(tokens.at(index_word));
-
-      // compute current line size
-      line_width = font->GetWidth(tokens.at(index_word));
-      if (line_width > max_line_width) {
-        max_line_width = line_width;
+    while (old_pos < line.size() &&
+           (current_pos = line.find_first_of(' ', old_pos)) != std::string::npos) {
+      std::string tmp = line.substr(old_pos, current_pos-old_pos);
+      if (tmp != " " && tmp != "") {
+        tokens.push_back(tmp);
       }
+      old_pos = current_pos+1;
+    }
+    tokens.push_back(line.substr(old_pos));
 
-    } else {
-      line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
+    // Compute size
+    std::vector<std::string> lines;
+    while (index_word < tokens.size()) {
+      if (lines.size() == index_lines) {
+        // first word of a line
+        lines.push_back(tokens.at(index_word));
 
-      if ( line_width > max_width ) {
-
-        // line will be too long : prepare next line!
-        index_lines++;
-        index_word--;
-
-      } else {
-        lines.at(index_lines) += " " + tokens.at(index_word);
-
-        // this is the longest line
+        // compute current line size
+        line_width = font->GetWidth(tokens.at(index_word));
         if (line_width > max_line_width) {
           max_line_width = line_width;
         }
+
+      } else {
+        line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
+
+        if ( line_width > max_width ) {
+
+          // line will be too long : prepare next line!
+          index_lines++;
+          index_word--;
+
+        } else {
+          lines.at(index_lines) += " " + tokens.at(index_word);
+
+          // this is the longest line
+          if (line_width > max_line_width) {
+            max_line_width = line_width;
+          }
+        }
+
       }
 
+      index_word++;
+    }
+    std::vector<std::string>::iterator it = lines.begin();
+    while (it != lines.end()) {
+      ret_lines.push_back(std::string(*it));
+      ++it;
     }
 
-    index_word++;
+    if (ret_current_pos == std::string::npos)
+      break;
+    ret_old_pos = ret_current_pos+1;
   }
 
   // really Render !
@@ -230,13 +246,13 @@ void Text::RenderMultiLines()
     max_line_width = max_width;
   }
 
-  Point2i size(max_line_width, GetLineHeight(font)*lines.size());
+  Point2i size(max_line_width, GetLineHeight(font)*ret_lines.size());
   Surface tmp = Surface(size, SDL_HWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each lines
-  for (uint i = 0; i < lines.size(); i++) {
-    tmp = (font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
+  for (uint i = 0; i < ret_lines.size(); i++) {
+    tmp = (font->CreateSurface(ret_lines.at(i), color)).DisplayFormatAlpha();
     tmp.SetAlpha(0, 0);
     surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
@@ -250,8 +266,8 @@ void Text::RenderMultiLines()
 
   // Putting pixels of each image in destination surface
   // for each lines
-  for (uint i = 0; i < lines.size(); i++) {
-    tmp = (font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
+  for (uint i = 0; i < ret_lines.size(); i++) {
+    tmp = (font->CreateSurface(ret_lines.at(i), black_color)).DisplayFormatAlpha();
     tmp.SetAlpha(0, 0);
     background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
