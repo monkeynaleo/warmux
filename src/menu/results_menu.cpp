@@ -32,6 +32,7 @@
 #include "gui/box.h"
 #include "gui/button.h"
 #include "gui/figure_widget.h"
+#include "gui/graph_canvas.h"
 #include "gui/label.h"
 #include "gui/scroll_box.h"
 #include "gui/null_widget.h"
@@ -213,143 +214,6 @@ bool compareTeamResults(const TeamResults* a, const TeamResults* b)
 
 //=========================================================
 
-class CanvasTeamsGraph : public Widget
-{
-private:
-  std::vector<TeamResults*>& results;
-
-public:
-  CanvasTeamsGraph(const Point2i& size,
-                   std::vector<TeamResults*>& results);
-  virtual ~CanvasTeamsGraph() {};
-  virtual void Draw(const Point2i&) const;
-
-  virtual void DrawTeamGraph(const Team *team,
-                             int x, int y,
-                             float duration_scale,
-                             float energy_scale,
-                             uint   max_duration,
-                             const Color& color) const;
-  virtual void DrawGraph(int x, int y, int w, int h) const;
-
-  virtual void Pack() {};
-};
-
-CanvasTeamsGraph::CanvasTeamsGraph(const Point2i& size,
-                                   std::vector<TeamResults*>& _results) :
-  Widget(size), results(_results)
-{}
-
-void CanvasTeamsGraph::Draw(const Point2i& /*mousePosition*/) const
-{
-  DrawGraph(position.x+DEF_BORDER, position.y+DEF_BORDER,
-            size.x-2*DEF_BORDER, size.y-2*DEF_BORDER);
-}
-
-void CanvasTeamsGraph::DrawTeamGraph(const Team *team,
-                                     int x, int y,
-                                     float duration_scale,
-                                     float energy_scale,
-                                     uint   max_duration,
-                                     const Color& color) const
-{
-  const EnergyList& list = team->energy.energy_list;
-
-  MSG_DEBUG("menu", "Drawing graph for team %s", team->GetName().c_str());
-
-  if (!list.size()) {
-    MSG_DEBUG("menu", "   No point !?!");
-    return;
-  }
-
-  int sx = x+int(list[0]->GetDuration()*duration_scale)+LINE_THICKNESS,
-      sy = y-int(list[0]->GetValue()*energy_scale);
-  Surface &surface = GetMainWindow();
-  MSG_DEBUG("menu", "   First point: (%u,%u) -> (%i,%i)",
-            list[0]->GetDuration(), list[0]->GetValue(), sx, sy);
-
-  for (uint i=0; i<list.size(); i++) {
-    EnergyValue *val = list[i];
-    int ex = x+int(val->GetDuration()*duration_scale),
-        ey = y-int(val->GetValue()*energy_scale);
-
-    MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
-              val->GetDuration(), val->GetValue(), ex, ey);
-    surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
-    surface.BoxColor(Rectanglei(ex, std::min(sy,ey), LINE_THICKNESS, abs(ey-sy)), color);
-
-    sx = ex;
-    sy = ey;
-  }
-
-  // Missing point
-  if (list[list.size()-1]->GetDuration() < max_duration) {
-    int ex = x+int(max_duration*duration_scale);
-    MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
-    surface.BoxColor(Rectanglei(sx, sy, ex-sx, LINE_THICKNESS), color);
-  }
-}
-
-void CanvasTeamsGraph::DrawGraph(int x, int y, int w, int h) const
-{
-  // Value to determine normalization
-  uint   max_value      = 0;
-  uint   max_duration   = 0;
-  uint   graph_h        = h-32;
-  uint   graph_w        = w-32;
-  uint   graph_x        = x+32;
-  std::vector<TeamResults*>::const_iterator it;
-
-  for (it=results.begin(); it!=results.end(); ++it) {
-    const Team* team = (*it)->getTeam();
-    if (team) {
-      if (team->energy.energy_list.GetMaxValue() > max_value)
-        max_value = team->energy.energy_list.GetMaxValue();
-      if (team->energy.energy_list.GetDuration() > max_duration)
-        max_duration = team->energy.energy_list.GetDuration();
-    }
-  }
-  // needed to see correctly energy at the end if two teams have same
-  // energy just before the final blow
-  max_duration += max_duration/50;
-
-  // Draw here the graph and stuff
-  Surface &surface = GetMainWindow();
-  surface.BoxColor(Rectanglei(graph_x, y, LINE_THICKNESS, graph_h), black_color);
-  surface.BoxColor(Rectanglei(graph_x, y+graph_h, graph_w, LINE_THICKNESS), black_color);
-  //DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Time"), black_color),
-               Point2i(graph_x+graph_w/2, y+graph_h+8));
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(_("Energy"), black_color).RotoZoom(M_PI/2, 1.0, 1.0, false),
-               Point2i(x+4, graph_h/2));
-  char buffer[16];
-  snprintf(buffer, 16, "%.1f", max_duration/1000.0f);
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
-               Point2i(x+graph_w-20, y+graph_h+8));
-
-  // Draw each team graph
-  float energy_scale = graph_h / (1.05f*max_value);
-  float duration_scale = graph_w / (1.05f*max_duration);
-  MSG_DEBUG("menu", "Scaling: %.1f (duration; %u) and %.1f\n",
-            duration_scale, Time::GetInstance()->Read(), energy_scale);
-
-  uint               index   = 0;
-  for (it=results.begin(); it!=results.end(); ++it) {
-    const Team* team = (*it)->getTeam();
-    if (team) {
-      // Legend line
-      surface.BoxColor(Rectanglei(x+w-112, y+12+index*40,
-                                  56, LINE_THICKNESS), team->GetColor());
-      // Legend icon
-      surface.Blit(team->GetFlag(), Point2i(x+w-48, y+12+index*40-20));
-      DrawTeamGraph(team, graph_x, y+graph_h, duration_scale, energy_scale, max_duration, team->GetColor());
-      index++;
-    }
-  }
-}
-
-//=========================================================
-
 static bool IsPodiumSeparate()
 {
   return GetMainWindow().GetSize() >= Point2i(640, 480);
@@ -439,8 +303,25 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   }
   tabs->AddNewTab("TAB_team", _("Team stats"), stats);
 
+  // Convert TeamResults to GraphCanvas::Results
+  std::vector<GraphCanvas::Result> team_results;
+  for (std::vector<TeamResults*>::const_iterator it = results.begin(); it != results.end(); ++it) {
+    const Team* team = (*it)->getTeam();
+    if (team) {
+      const EnergyList& list = team->energy.energy_list;
+      GraphCanvas::Result r;
+      r.max_value = list.GetMaxValue();
+      r.color = team->GetColor();
+      r.item = &team->GetFlag();
+      for (uint i=0; i<list.size(); i++)
+        r.list.push_back(std::make_pair(list[i]->GetDuration(), list[i]->GetValue()));
+      team_results.push_back(r);
+    }
+  }
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
-                  new CanvasTeamsGraph(tab_size - 2*BorderSize, results));
+                  new GraphCanvas(tab_size - 2*BorderSize,
+                                  _("Time"), _("Energy"),
+                                  team_results));
 
   // Final box
   VBox* tmp_box = new VBox(tab_size.x, false, false);

@@ -104,6 +104,8 @@ wormux_SOURCES = \
         gui/energy_bar.h \
         gui/figure_widget.cpp \
         gui/figure_widget.h \
+        gui/graph_canvas.cpp \
+        gui/graph_canvas.h \
         gui/label.cpp \
         gui/label.h \
         gui/msg_box.cpp \
