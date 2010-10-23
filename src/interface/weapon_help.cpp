@@ -105,11 +105,9 @@ void WeaponHelp::Draw()
 
   // Init animation parameter
   Surface& window = GetMainWindow();
-  uint x = window.GetWidth();
-  uint y = Interface::GetRef().GetMenuPosition().GetY()
-         - int(background.GetHeight()) - 10;
-  Point2i pos(x, y);
-  Point2i end(x - background.GetWidth() - 5, y);
+  uint x = (window.GetWidth() - background.GetWidth())>>1;
+  Point2i pos(x, -background.GetHeight());
+  Point2i end(x, 10);
   int   diff = Time::GetInstance()->Read() - motion_start_time;
   float coef = diff / (float)ICONS_DRAW_TIME;
   coef = coef > 0.0f ? coef : 0.0f;
