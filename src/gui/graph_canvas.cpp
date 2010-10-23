@@ -44,11 +44,9 @@ void GraphCanvas::Draw(const Point2i& /*mousePosition*/) const
             size.x-2*DEF_BORDER, size.y-2*DEF_BORDER);
 }
 
-void GraphCanvas::DrawGraph(uint i,
-                            int x, int y,
-                            float xscale,
-                            float yscale,
-                            float xmax) const
+void GraphCanvas::DrawGraph(uint i, float xmax,
+                            int x, float xscale,
+                            int y, float yscale) const
 {
   const Result &res = results[i];
   const Color& color = res.color;
@@ -89,24 +87,21 @@ void GraphCanvas::DrawGraph(uint i,
 void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
 {
   // Value to determine normalization
-  uint   max_value = 0;
-  uint   xmax      = 0;
+  float  max_value = 0;
+  float  xmax      = 0;
   uint   graph_h   = h-32;
   uint   graph_w   = w-32;
   uint   graph_x   = x+32;
 
   for (uint i=0; i<results.size(); i++) {
-    if (results[i].max_value > max_value)
-      max_value = results[i].max_value;
-    if (!results[i].list.empty()) {
-      float val = results[i].list[results[i].list.size()-1].first;
-      if (val > xmax)
-        xmax = val;
-    }
+    if (results[i].ymax > max_value)
+      max_value = results[i].ymax;
+    if (results[i].xmax > xmax)
+      xmax = results[i].xmax;
   }
   // needed to see correctly energy at the end if two teams have same
   // energy just before the final blow
-  xmax += xmax/50;
+  xmax += xmax/50.0f;
 
   // Draw here the graph and stuff
   Surface &surface = GetMainWindow();
@@ -130,6 +125,6 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
       // Legend icon
       surface.Blit(*results[i].item, Point2i(x+w-48, y+12+i*40-20));
     }
-    DrawGraph(i, graph_x, y+graph_h, xscale, yscale, xmax);
+    DrawGraph(i, xmax, graph_x, xscale, y+graph_h, yscale);
   }
 }

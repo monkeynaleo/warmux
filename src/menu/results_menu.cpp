@@ -310,7 +310,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     if (team) {
       const EnergyList& list = team->energy.energy_list;
       GraphCanvas::Result r;
-      r.max_value = list.GetMaxValue();
+      r.ymax = list.GetMaxValue();
+      r.xmax = list.GetDuration();
       r.color = team->GetColor();
       r.item = &team->GetFlag();
       for (uint i=0; i<list.size(); i++)
@@ -321,7 +322,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
                   new GraphCanvas(tab_size - 2*BorderSize,
                                   _("Time"), _("Energy"),
-                                  team_results));
+team_results));
 
   // Final box
   VBox* tmp_box = new VBox(tab_size.x, false, false);
