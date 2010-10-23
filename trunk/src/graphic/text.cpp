@@ -132,7 +132,7 @@ void Text::Render()
       return;
     }
 
-    if (max_width != 0) {
+    if (max_width != 0 || txt.find_first_of('\n', 0)!=std::string::npos) {
       RenderMultiLines();
       return;
     }
@@ -172,8 +172,8 @@ void Text::RenderMultiLines()
   std::vector<std::string> tokens;
   std::string::size_type old_pos = 0, current_pos = 0;
 
-  while ( old_pos < txt.size() &&
-          (current_pos = txt.find_first_of(" ", old_pos)) != std::string::npos ) {
+  while (old_pos < txt.size() &&
+         (current_pos = txt.find_first_of(' ', old_pos)) != std::string::npos) {
     std::string tmp = txt.substr(old_pos, current_pos-old_pos);
     if (tmp != " " && tmp != "") {
       tokens.push_back(tmp);
