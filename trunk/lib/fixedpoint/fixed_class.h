@@ -118,7 +118,7 @@ struct fixed_point {
 
   operator int() const
   {
-    unsigned fixint_t sign = ((unsigned fixint_t)intValue)>>(FIXINT_BITS-1);
+    fixuint_t sign = ((fixuint_t)intValue)>>(FIXINT_BITS-1);
     return ((fixint_t)(intValue+(sign<<p)-sign))>>p;
   }
 
