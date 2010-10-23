@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux. gl\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-23 17:23+0200\n"
+"POT-Creation-Date: 2010-10-23 17:38+0200\n"
 "PO-Revision-Date: 2010-01-07 23:04+0100\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
@@ -581,6 +581,7 @@ msgstr "Non se pode abrir o directorio de equipos (%s)!"
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Non se pode abrir o directorio de equipos personalizados (%s)!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Center camera on character"
@@ -591,21 +592,25 @@ msgstr "Centrar a cámara na personaxe"
 msgid "Center on active character"
 msgstr "Cambiar a personaxe activa"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Change active character"
 msgstr "Cambiar a personaxe activa"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:64
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Cambiar o ángulo de tiro"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Change number of playing teams"
 msgstr "Número máximo de xogadores:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Change per team number of players"
@@ -616,11 +621,13 @@ msgstr "Número máximo de xogadores:"
 msgid "Change weapon"
 msgstr "Cambiar a categoría da arma"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Cambiar a categoría da arma"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:63
 #, fuzzy
 msgid "Change weapon countdown"
@@ -667,10 +674,12 @@ msgstr ""
 msgid "Click to change team selected"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr ""
@@ -696,6 +705,7 @@ msgstr "Bazuca de fragmentación"
 msgid "Commit Suicide"
 msgstr "Suicidarse"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "Menú de configuración"
@@ -774,6 +784,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Drag&drop: Move camera"
@@ -796,6 +807,7 @@ msgstr "Dinamita"
 msgid "END OF GAME"
 msgstr "FIN DA PARTIDA"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Edit player name"
@@ -937,14 +949,16 @@ msgstr "Modo de xogo"
 msgid "Game name:"
 msgstr "Nome da partida:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
-msgid "Gauge to set speed of some weapons"
+msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gñu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr ""
@@ -995,6 +1009,7 @@ msgstr "Capitán"
 msgid "Help"
 msgstr "Axuda"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "Saltar alto"
@@ -1015,6 +1030,7 @@ msgstr ""
 "Se atopas un erro ou tes en mente algunha mellora ou nova funcionalidade que "
 "lle engadirías ao xogo, envíanos un correo electrónico (en inglés):"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
 msgid "If you like medkits, increase this"
 msgstr ""
@@ -1031,15 +1047,18 @@ msgstr ""
 msgid "Increase sound volume"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Duración antes do modo morte"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:105
 msgid "Increase this if you are a slow player"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:109
 msgid "Increase this if you like long games"
 msgstr ""
@@ -1082,6 +1101,7 @@ msgstr "Inicialización dos sons"
 msgid "Initialise teams"
 msgstr "Inicialización dos equipos"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
 msgid "Interface, more details in another tab"
 msgstr ""
@@ -1098,6 +1118,7 @@ msgstr "Jetpack"
 msgid "Jump"
 msgstr "Saltar"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "Saltar cara atrás"
@@ -1217,6 +1238,7 @@ msgstr "Varios"
 msgid "Modifiers"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:107
 msgid "More energy, more shots needed"
 msgstr ""
@@ -1261,11 +1283,13 @@ msgstr "Move a personaxe"
 msgid "Move camera up"
 msgstr "Move a personaxe"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Move a cámara co rato ou as frechas"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Move character"
@@ -1357,11 +1381,13 @@ msgstr "Número de personaxes"
 msgid "Number of teams:"
 msgstr "Número de equipos:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Nunha personaxe: selecciónaa"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "On map: select a target"
@@ -1497,6 +1523,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Batallas públicas"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Saír do xogo de seguida con Ctrl"
@@ -1658,11 +1685,13 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Escopeta"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Amosar o menú das armas"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "Amosar/ocultar a interface"
@@ -1684,6 +1713,7 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 "Darlle unha labazada ao enimigo para separar os seus pés do chan un anaco."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "Ángulo de tiro máis pequeno e dar un paso"
@@ -1752,6 +1782,7 @@ msgstr "Xeringa"
 msgid "Take screenshot"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "Falar nas batallas en liña"
@@ -1802,6 +1833,7 @@ msgstr "O cohete automático saíu do campo de batalla..."
 msgid "The ball left the battlefield before exploding!"
 msgstr "A saltariña saiu do campo de batalla antes de explotar!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:111
 msgid "The bigger the faster you'll fall!"
 msgstr ""
@@ -1926,6 +1958,7 @@ msgid ""
 "Click a character from your team to select it.\n"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Toggle fullscreen"
@@ -1936,6 +1969,7 @@ msgstr "Pantalla completa?"
 msgid "Toggle interface"
 msgstr "Amosar/ocultar a interface"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Toggle minimap"
@@ -2050,6 +2084,7 @@ msgstr ""
 "Agardando polo servidor. Todo canto podes facer é cancelar, chatear ou ir ao "
 "baño!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
@@ -2080,6 +2115,7 @@ msgstr "Vaia homerun! %s, do equipo %s, debe ser doutro mundo..."
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergoña estará a pasar %s - asasinado cunha simple pistola!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:106
 #, fuzzy
 msgid "When a character can be switched"

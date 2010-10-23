@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-23 17:23+0200\n"
+"POT-Creation-Date: 2010-10-23 17:38+0200\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -599,6 +599,7 @@ msgstr "Αδύνατον να ανοίξει ο φάκελος με τις ομ�
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις προσωπικές ομάδες (%s)!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Center camera on character"
@@ -609,21 +610,25 @@ msgstr "Κέντραρε την κάμερα στο χαρακτήρα σου"
 msgid "Center on active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Change active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:64
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Αλλαγή γωνίας σκόπευσης"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Change number of playing teams"
 msgstr "Μέγιστο πλήθος παικτών:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Change per team number of players"
@@ -634,11 +639,13 @@ msgstr "Μέγιστο πλήθος παικτών:"
 msgid "Change weapon"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:63
 #, fuzzy
 msgid "Change weapon countdown"
@@ -685,10 +692,12 @@ msgstr ""
 msgid "Click to change team selected"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr ""
@@ -716,6 +725,7 @@ msgstr "Μπαζούκα διασποράς"
 msgid "Commit Suicide"
 msgstr "Αυτοκτονία"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "Μενού Διαμόρφωσης"
@@ -795,6 +805,7 @@ msgstr ""
 msgid "Down slowly"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Drag&drop: Move camera"
@@ -817,6 +828,7 @@ msgstr "Δυναμίτης"
 msgid "END OF GAME"
 msgstr "ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Edit player name"
@@ -962,14 +974,16 @@ msgstr "Κατάσταση παιχνιδιού"
 msgid "Game name:"
 msgstr "Όνομα παιχνιδιού:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
-msgid "Gauge to set speed of some weapons"
+msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Εκτόξευση Gnu"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr ""
@@ -1020,6 +1034,7 @@ msgstr "Διοικητής"
 msgid "Help"
 msgstr "Βοήθεια"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "Ψηλό άλμα"
@@ -1041,6 +1056,7 @@ msgstr ""
 "Αν βρείτε κάποιο κόλλημα ή αν έχετε κάποια πρόταση για το Σκουλήκιουξ "
 "στείλτε ένα mail (στα αγγλικά, παρακαλώ):"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
 msgid "If you like medkits, increase this"
 msgstr ""
@@ -1057,15 +1073,18 @@ msgstr ""
 msgid "Increase sound volume"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Διάρκεια μέχρι την κατάσταση θανάτου"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:105
 msgid "Increase this if you are a slow player"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:109
 msgid "Increase this if you like long games"
 msgstr ""
@@ -1108,6 +1127,7 @@ msgstr "Αρχικοποίηση ήχων"
 msgid "Initialise teams"
 msgstr "Αρχικοποίηση ομάδων"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
 msgid "Interface, more details in another tab"
 msgstr ""
@@ -1124,6 +1144,7 @@ msgstr "Σακίδιο Τζετ"
 msgid "Jump"
 msgstr "Άλμα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "Άλμα προς τα πίσω"
@@ -1243,6 +1264,7 @@ msgstr "Διάφορα"
 msgid "Modifiers"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:107
 msgid "More energy, more shots needed"
 msgstr ""
@@ -1287,11 +1309,13 @@ msgstr "Μετακίνησε χαρακτήρα"
 msgid "Move camera up"
 msgstr "Μετακίνησε χαρακτήρα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Μετακίνησε την κάμερα με το ποντίκι ή με τα βέλη"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Move character"
@@ -1383,11 +1407,13 @@ msgstr "Πλήθος παικτών ανά ομάδα"
 msgid "Number of teams:"
 msgstr "Πλήθος ομάδων:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Πάνω σε χαρακτήρα: Αλλάζει τον ενεργό χαρακτήρα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "On map: select a target"
@@ -1524,6 +1550,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Δημόσιες μάχες"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Γρήγορα εγκατάλειψε το παιχνίδι με το Ctrl"
@@ -1688,11 +1715,13 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Καραμπίνα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Δείξε το μενού με τα όπλα"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
@@ -1714,6 +1743,7 @@ msgstr "Χαστούκι"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Χαστούκισε τον αντίπαλο για να τον κάνεις να αναπηδήσει λίγο."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "Μικρότερη γωνία σκόπευσης και βηματισμός"
@@ -1784,6 +1814,7 @@ msgstr "Σύριγγα"
 msgid "Take screenshot"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "Μίλησε σε δικτυακή μάχη"
@@ -1838,6 +1869,7 @@ msgstr "Η αυτόματη ρουκέτα έφυγε για άλλους κόσ
 msgid "The ball left the battlefield before exploding!"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:111
 msgid "The bigger the faster you'll fall!"
 msgstr ""
@@ -1968,6 +2000,7 @@ msgid ""
 "Click a character from your team to select it.\n"
 msgstr ""
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Toggle fullscreen"
@@ -1978,6 +2011,7 @@ msgstr "Πλήρης οθόνη;"
 msgid "Toggle interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Toggle minimap"
@@ -2093,6 +2127,7 @@ msgstr "Περιμένοντας για απομακρισμένους παίκ�
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
@@ -2124,6 +2159,7 @@ msgstr "Τι καλό παιχνίδι! O %s από την ομάδα %s είν�
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
 
+#. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:106
 #, fuzzy
 msgid "When a character can be switched"
