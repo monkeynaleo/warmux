@@ -117,19 +117,21 @@ HelpMenu::HelpMenu()
                        PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Game mode"), w);
 
-#define INGAME_CAPTIONS_PARAMS (Font::font_size_t)32, DEF_CAPTIONS_PARAMS
+#define INGAME_CAPTIONS_PARAMS Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption ingame_captions[] = {
     {
 #ifdef ANDROID
       _("To jump, press space or trackball or dpad center.\n"
         "To aim or move more slowly, use shift/vol+.\n"
         "To pause, click the clock or press escape/back key.\n"
-        "Click a character from your team to select it.\n"), // TRANSLATORS: please be imaginative and keep it short!
+        "Click a character from your team to select it.\n"),
+      // TRANSLATORS: please keep this help for Android smartphones short!
 #else
       _("To jump, press space.\n"
         "To aim or move more slowly, use shift.\n"
         "To pause, click the clock or press escape.\n"
-        "Click a character from your team to select it.\n"), // TRANSLATORS: please be imaginative and keep it short!
+        "Click a character from your team to select it.\n"),
+      // TRANSLATORS: please be imaginative and keep it short!
 #endif
       197, 337, 289, INGAME_CAPTIONS_PARAMS },
     { _("Minimap, more details in another tab"), 543, 132, 330, INGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
@@ -142,6 +144,24 @@ HelpMenu::HelpMenu()
                        ingame_captions, ARRAY_SIZE(ingame_captions),
                        PictureWidget::FIT_SCALING);
   tabs->AddNewTab("unused", _("Ingame display"), w);
+
+#define INTERFACE_CAPTIONS_PARAMS Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
+  static const FigureWidget::Caption interface_captions[] = {
+    { _("Character name.\nCharacter energy.\nTeam name.\nPlayer name.\n"),
+      163, 101, 302, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Time left in this turn.\nTime elapsed since game start.\n"),
+      473, 101, 262, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Team in ordre of decreasing energy"), 763, 103, 200, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Selected weapon and ammo left"), 352, 635, 255, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Wind strength and direction"), 616, 635, 245, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Fire your weapon!"), 866, 635, 221, INTERFACE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+  };
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/interface",
+                       interface_captions, ARRAY_SIZE(interface_captions),
+                       PictureWidget::FIT_SCALING);
+  tabs->AddNewTab("unused", _("Interface"), w);
 
   w = new ControlConfig(tabs->GetSize(), true);
   tabs->AddNewTab("unused", _("Current controls"), w);

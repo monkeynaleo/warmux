@@ -184,6 +184,7 @@
   <surface name="shortkeys" file="menu/help_shortkeys.png" />
   <surface name="ingame" file="menu/help_ingame.jpg" />
   <surface name="startgame_menu" file="menu/help_team_selection.jpg" />
+  <surface name="interface" file="menu/help_interface.png" />
   <surface name="game_mode" file="menu/help_game_mode.jpg" />
 </section>
 
