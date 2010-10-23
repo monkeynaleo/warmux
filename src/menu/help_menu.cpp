@@ -49,30 +49,30 @@ HelpMenu::HelpMenu()
 
 #define DEF_KEY_CAPTIONS_PARAMS 132, (Font::font_size_t)14, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption controls_captions[] = {
-    { _("Quit game"), 81, 13, DEF_KEY_CAPTIONS_PARAMS },
-    { _("High jump"), 439, 326, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Jump backwards"), 439, 297, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Jump backwards"), 439, 356, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Drag&drop: Move camera"), 520, 395, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Center camera on character"), 520, 422, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Show/hide the interface"), 271, 43, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Toggle fullscreen"), 491, 42, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Configuration menu"), 491, 72, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Talk in network battles"), 92, 296, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Change weapon category"), 81, 72, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Change weapon countdown"), 618, 164, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Change aim angle"), 618, 194, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Move character"), 618, 286, DEF_KEY_CAPTIONS_PARAMS },
-    { _("On map: select a target"), 618, 225, DEF_KEY_CAPTIONS_PARAMS },
-    { _("On a character: select it"), 618, 256, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Show weapons menu"), 618, 134, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Smaller aim angle and walk step"), 92, 326, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Move camera with mouse or arrows"), 386, 394, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Toggle minimap"), 271, 72, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Change active character"), 92, 356, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Center camera on character"), 386, 422, DEF_KEY_CAPTIONS_PARAMS },
-    { _("Quickly quit game with Ctrl"), 81, 43, DEF_KEY_CAPTIONS_PARAMS },
+    { _("Quit game"), 81, 13, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("High jump"), 439, 326, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Jump backwards"), 439, 297, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Jump backwards"), 439, 356, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Drag&drop: Move camera"), 520, 395, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Center camera on character"), 520, 422, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Show/hide the interface"), 271, 43, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Toggle fullscreen"), 491, 42, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Configuration menu"), 491, 72, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Talk in network battles"), 92, 296, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change weapon category"), 81, 72, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change weapon countdown"), 618, 164, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change aim angle"), 618, 194, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Move character"), 618, 286, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("On map: select a target"), 618, 225, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("On a character: select it"), 618, 256, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Show weapons menu"), 618, 134, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Smaller aim angle and walk step"), 92, 326, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Move camera with mouse or arrows"), 386, 394, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Weapon: Fire / Bonus box: drop"), 260, 326, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Toggle minimap"), 271, 72, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change active character"), 92, 356, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Center camera on character"), 386, 422, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Quickly quit game with Ctrl"), 81, 43, DEF_KEY_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
   };
   Widget *w = new FigureWidget(Point2i(max_w,
                                        tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -84,13 +84,13 @@ HelpMenu::HelpMenu()
 
 # define DEF_STARTGAME_CAPTIONS_PARAMS 238, (Font::font_size_t)22, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption startgame_captions[] = {
-    { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Go to game rules editing submenu"), 788, 141, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Click to select AI/human team"), 325, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Change per team number of players"), 605, 275, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Change number of playing teams"), 146, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
-    { _("Click/wheelmouse to change map"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS },
+    { _("Click to change team selected"), 293, 141, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Edit player name"), 541, 141, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Go to game rules editing submenu"), 788, 141, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Click to select AI/human team"), 325, 275, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change per team number of players"), 605, 275, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Change number of playing teams"), 146, 334, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Click/wheelmouse to change map"), 466, 334, DEF_STARTGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
   };
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -101,14 +101,14 @@ HelpMenu::HelpMenu()
 
 # define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption gamemode_captions[] = {
-    { _("Experiment new game rules"), 206, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this if you are a slow player"), 483, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("When a character can be switched"), 761, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("More energy, more shots needed"), 1038, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("If you like medkits, increase this"), 206, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this if you like long games"), 482, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this for faster death mode end"), 761, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("The bigger the faster you'll fall!"), 1042, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Experiment new game rules"), 206, 45, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Increase this if you are a slow player"), 483, 45, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("When a character can be switched"), 761, 45, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("More energy, more shots needed"), 1038, 45, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("If you like medkits, increase this"), 206, 668, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Increase this if you like long games"), 482, 668, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Increase this for faster death mode end"), 761, 668, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("The bigger the faster you'll fall!"), 1042, 668, DEF_GAMEMODE_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
   };
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -124,17 +124,17 @@ HelpMenu::HelpMenu()
       _("To jump, press space or trackball or dpad center.\n"
         "To aim or move more slowly, use shift/vol+.\n"
         "To pause, click the clock or press escape/back key.\n"
-        "Click a character from your team to select it.\n"),
+        "Click a character from your team to select it.\n"), // TRANSLATORS: please be imaginative and keep it short!
 #else
       _("To jump, press space.\n"
         "To aim or move more slowly, use shift.\n"
         "To pause, click the clock or press escape.\n"
-        "Click a character from your team to select it.\n"),
+        "Click a character from your team to select it.\n"), // TRANSLATORS: please be imaginative and keep it short!
 #endif
       197, 337, 289, INGAME_CAPTIONS_PARAMS },
-    { _("Minimap, more details in another tab"), 543, 132, 330, INGAME_CAPTIONS_PARAMS },
-    { _("Gauge to set speed of some weapons"), 619, 494, 411, INGAME_CAPTIONS_PARAMS },
-    { _("Interface, more details in another tab"), 1003, 437, 209, INGAME_CAPTIONS_PARAMS }
+    { _("Minimap, more details in another tab"), 543, 132, 330, INGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Gauge to set speed of some projectiles"), 619, 494, 411, INGAME_CAPTIONS_PARAMS }, // TRANSLATORS: please be imaginative and keep it short!
+    { _("Interface, more details in another tab"), 1003, 437, 209, INGAME_CAPTIONS_PARAMS } // TRANSLATORS: please be imaginative and keep it short!
   };
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
