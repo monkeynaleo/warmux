@@ -252,7 +252,7 @@ void Interface::DrawWeaponInfo() const
   int nbr_munition = ActiveTeam().ReadNbAmmos();
 
   // Draw weapon name
-  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - (0.75*48);
+  int offset = (game_menu.GetWidth() - clock_width) / 2 - MARGIN - 24;
   t_weapon_name->SetText(weapon->GetName());
   t_weapon_name->DrawCenterTop(bottom_bar_pos + Point2i(offset, 0));
 
@@ -309,8 +309,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   int height = (draw_icon) ? wind_icon.GetHeight() - wind_indicator.GetHeight() : MARGIN;
 
   // draw wind indicator
-  Point2i wind_bar_offset = Point2i(0, height);
-  Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
+  Point2i tmp = wind_bar_pos + Point2i(2, 2+height);
   wind_bar.DrawXY(tmp);
   GetWorld().ToRedrawOnScreen(Rectanglei(tmp, wind_bar.GetSize()));
 }
@@ -332,8 +331,8 @@ void Interface::DrawSmallInterface() const
   int height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = height > 0 ? height : 0;
   height = (height < small_background_interface.GetHeight()) ? height : small_background_interface.GetHeight();
-  Point2i small_interface_position = Point2i((window.GetWidth() - small_background_interface.GetWidth()) / 2,
-                                              window.GetHeight() - height);
+  Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth()) / 2,
+                                   window.GetHeight() - height);
   window.Blit(small_background_interface, small_interface_position);
   DrawWindIndicator(small_interface_position + 2*MARGIN, false);
   if (display_timer) {
@@ -345,8 +344,8 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset = Point2i((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth(),
-                                    (game_menu.GetHeight() - 50)/2);
+  Point2i team_bar_offset((game_menu.GetWidth()+clock_width) / 2 + wind_icon.GetWidth(),
+                          (game_menu.GetHeight() - 50)/2);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
@@ -489,9 +488,9 @@ void Interface::DrawMapPreview()
 void Interface::Draw()
 {
   Surface &window  = GetMainWindow();
-  bottom_bar_pos = Point2i((window.GetWidth() - GetWidth())/2,
-                           window.GetHeight() - GetHeight());
 
+  bottom_bar_pos.SetValues((window.GetWidth() - GetWidth())/2,
+                           window.GetHeight() - GetHeight());
   // Has the display size changed? Then reload data
   if (last_width != window.GetWidth()) {
     LoadData();
@@ -501,8 +500,8 @@ void Interface::Draw()
     DrawMapPreview();
 
   // Position on the screen
-  Point2i barPos = (window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
-                 - Point2i(0, game_menu.GetHeight() + MARGIN);
+  Point2i barPos((window.GetWidth() - weapon_strength_bar.GetWidth())/2,
+                 window.GetHeight() - weapon_strength_bar.GetHeight() - game_menu.GetHeight() - MARGIN);
 
   // Drawing on the screen
   weapon_strength_bar.DrawXY(barPos);
@@ -649,8 +648,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        // Weapon icon original width is 48, and has a default scale of 0.75
-        Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
+        Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
@@ -725,8 +723,7 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
       // Positions are somewhat from Interface::DrawWeaponInfo()
       Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                  game_menu.GetHeight());
-      // Weapon icon original width is 48, and has a default scale of 0.75
-      Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
+      Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
 
       Rectanglei weapon_button(TL, BR-TL);
       // Check if we clicked the weapon icon: toggle weapon menu
@@ -762,8 +759,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        // Weapon icon original width is 48, and has a default scale of 0.75
-        Point2i TL((game_menu.GetWidth()- 36)/ 2 - clock_width, 0);
+        Point2i TL((game_menu.GetWidth()- 48)/ 2 - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
