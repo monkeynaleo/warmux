@@ -315,7 +315,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
       r.color = team->GetColor();
       r.item = &team->GetFlag();
       for (uint i=0; i<list.size(); i++)
-        r.list.push_back(std::make_pair(list[i]->GetDuration(), list[i]->GetValue()));
+        r.list.push_back(std::make_pair(list[i]->GetDuration()/1000.0f, list[i]->GetValue()));
       team_results.push_back(r);
     }
   }

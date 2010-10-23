@@ -100,17 +100,18 @@ public:
   }
 };
 
+#define FACTOR 0.9f
+
 BenchmarkMenu::BenchmarkMenu() :
   Menu("menu/bg_option", vOk)
 {
   const Surface& window = GetMainWindow();
-  Point2i s = window.GetSize()*0.9f;
-  tests = new VBox(s.GetX(), true, true);
-  tests->SetPosition((window.GetSize() - s)/2);
+  tests = new VBox(window.GetWidth()*FACTOR, true, true);
+  tests->SetPosition(window.GetSize()* (1.0f - FACTOR)/2);
 
   tests->AddWidget(new BenchItem(BENCH_MENU, _("Menu"), 48));
   tests->AddWidget(new BenchItem(BENCH_GRAPHICS, _("Graphics"), 48));
-  graph = new GraphCanvas(Point2i(s.GetX(), s.GetY() - 2*48 - 50), _("Time"), _("FPS"));
+  graph = new GraphCanvas(Point2i(window.GetWidth(), (window.GetHeight()-50)*FACTOR - 2*(48+5)), _("Time"), _("FPS"));
   tests->AddWidget(graph);
 
   widgets.AddWidget(tests);
