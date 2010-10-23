@@ -55,6 +55,10 @@ public:
   virtual void DrawGraph(int x, int y, int w, int h) const;
 
   virtual void Pack() {};
+
+  void SetNewResults(std::vector<Result>& newer) { results = newer; }
+
+  static void FindMax(Result& res);
 };
 
 

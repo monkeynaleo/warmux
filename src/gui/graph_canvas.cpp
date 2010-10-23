@@ -19,6 +19,7 @@
  * Draw a graph of a series of points according to various parameters 
  *****************************************************************************/
 
+#include <limits>
 #include <WORMUX_debug.h>
 #include "graphic/font.h"
 #include "graphic/video.h"
@@ -126,5 +127,17 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
       surface.Blit(*results[i].item, Point2i(x+w-48, y+12+i*40-20));
     }
     DrawGraph(i, xmax, graph_x, xscale, y+graph_h, yscale);
+  }
+}
+
+void GraphCanvas::FindMax(Result& res)
+{
+  res.xmax = std::numeric_limits<float>::max();
+  res.ymax = std::numeric_limits<float>::max();
+  for (uint i=0; i<res.list.size(); i++) {
+    if (res.list[i].first > res.xmax)
+      res.xmax = res.list[i].first;
+    if (res.list[i].first > res.ymax)
+      res.ymax = res.list[i].second;
   }
 }
