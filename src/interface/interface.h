@@ -148,6 +148,6 @@ public:
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);
 void HideGameInterface();
-void ShowGameInterface();
+inline void ShowGameInterface() { Interface::GetInstance()->Show(); }
 
 #endif
