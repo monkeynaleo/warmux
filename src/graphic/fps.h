@@ -51,6 +51,7 @@ public:
   void Refresh();
   void Draw();
   uint GetTotalFrames() const { return total_frames; }
+  float GetLastValue() const { return average; }
 };
 
 #endif

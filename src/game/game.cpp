@@ -127,6 +127,7 @@ void Game::InitEverything()
     InitGameData_NetGameMaster();
   else if (benching) {
     RandomSync().SetSeed(0xABADCAFE);
+    bench_res.reserve(30);
   } else if (Network::GetInstance()->IsLocal()) {
     RandomSync().InitRandom();
   }
@@ -605,6 +606,9 @@ void Game::Draw()
 
   // Draw fps counter, even if over the minimap
   fps->Draw();
+  if (benching) {
+    bench_res.push_back(std::make_pair(Time::GetInstance()->Read()/1000.0f, fps->GetLastValue()));
+  }
 
   // Draw MsgBox for chat network
   if (Network::GetInstance()->IsConnected()) {

@@ -61,6 +61,7 @@ protected:
   bool                give_objbox;
   uint                last_clock_update;
   bool                benching;
+  std::vector<std::pair<float, float>> bench_res;
 
   friend class Singleton<Game>;
   Game();
@@ -186,5 +187,7 @@ public:
   void RequestBonusBoxDrop();
 
   static Menu* GetCurrentMenu() { return menu; }
+  const std::vector<std::pair<float,float>>& GetBenchResults() const { return bench_res; }
+
 };
 #endif // GAME_H
