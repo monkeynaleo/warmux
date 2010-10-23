@@ -101,14 +101,14 @@ HelpMenu::HelpMenu()
 
 # define DEF_GAMEMODE_CAPTIONS_PARAMS 252, Font::FONT_LARGE, DEF_CAPTIONS_PARAMS
   static const FigureWidget::Caption gamemode_captions[] = {
-    { _("Experiment new game rules"), 206, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this if you are a slow player"), 483, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("When a character can be switched"), 761, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("More energy, more shots needed"), 1038, 48, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("If you like medkits, increase this"), 206, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this if you like long games"), 482, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("Increase this for faster death mode end"), 761, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
-    { _("The bigger the faster you'll fall!"), 1042, 688, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Experiment new game rules"), 206, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this if you are a slow player"), 483, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("When a character can be switched"), 761, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("More energy, more shots needed"), 1038, 45, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("If you like medkits, increase this"), 206, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this if you like long games"), 482, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("Increase this for faster death mode end"), 761, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
+    { _("The bigger the faster you'll fall!"), 1042, 668, DEF_GAMEMODE_CAPTIONS_PARAMS },
   };
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
