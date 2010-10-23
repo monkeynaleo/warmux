@@ -269,7 +269,7 @@ template <int p>
 void printTo(std::ostream & os, const fixed_point<p> & r, int digits = -1)
 {
   if (digits == -1)
-    digits = p / 4;
+    digits = p>>2;
   fixed_point<p> rounding_correction = 0.5;
   fixed_point<p> ten = 10;
   for (int k = 0; k < digits; k++) {
@@ -353,8 +353,9 @@ inline fixed_point<p> inv(fixed_point<p> a);
 template <int p>
 inline fixed_point<p> abs(fixed_point<p> a)
 {
-  fixed_point<p> r;
-  r.intValue = a.intValue > 0 ? a.intValue : -a.intValue;
+  fixint_t sign = a.intValue >> (FIXINT_BITS-1);
+  r.intValue = a.intValue^sign;
+  r.intValue -= sign;
   return r;
 }
 
