@@ -25,16 +25,17 @@
 #include <vector>
 #include "gui/widget.h"
 
+// Currently only handles positive values
 class GraphCanvas : public Widget
 {
 public:
   typedef std::pair<float, float> Value;
   typedef struct
   {
-    std::vector<Value> list;
     const Surface      *item;
     Color              color;
-    float              max_value;
+    float              xmax, ymax;
+    std::vector<Value> list;
   } Result;
 private:
   Surface              xaxis, yaxis;
@@ -48,11 +49,9 @@ public:
   virtual ~GraphCanvas() {};
   virtual void Draw(const Point2i&) const;
 
-  virtual void DrawGraph(uint i,
-                         int x, int y,
-                         float xscale,
-                         float yscale,
-                         float xmax) const;
+  virtual void DrawGraph(uint i, float xmax,
+                         int x, float xscale,
+                         int y, float yscale) const;
   virtual void DrawGraph(int x, int y, int w, int h) const;
 
   virtual void Pack() {};
