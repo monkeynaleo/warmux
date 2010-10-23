@@ -26,6 +26,7 @@
 
 class VBox;
 class BenchItem;
+class GraphCanvas;
 
 typedef enum
 {
@@ -36,6 +37,7 @@ typedef enum
 class BenchmarkMenu : public Menu
 {
   VBox *tests;
+  GraphCanvas *graph;
   bool Launch(BenchItem *item);
 
 public:

@@ -25,7 +25,16 @@
 #include "graphic/video.h"
 #include "gui/graph_canvas.h"
 
-#define DEF_BORDER      8
+#define DEF_BORDER      4
+
+GraphCanvas::GraphCanvas(const Point2i& size,
+                         const std::string& xname, const std::string& yname,
+                         uint thick)
+  : Widget(size)
+  , thickness(thick)
+{
+  SetAxis(xname, yname);
+}
 
 GraphCanvas::GraphCanvas(const Point2i& size,
                          const std::string& xname, const std::string& yname,
@@ -33,6 +42,11 @@ GraphCanvas::GraphCanvas(const Point2i& size,
   : Widget(size)
   , results(res)
   , thickness(thick)
+{
+  SetAxis(xname, yname);
+}
+
+void GraphCanvas::SetAxis(const std::string& xname, const std::string& yname)
 {
   Font* font = Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD);
   xaxis = font->CreateSurface(xname, black_color);
@@ -87,57 +101,64 @@ void GraphCanvas::DrawGraph(uint i, float xmax,
 
 void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
 {
-  // Value to determine normalization
-  float  max_value = 0;
-  float  xmax      = 0;
-  uint   graph_h   = h-32;
-  uint   graph_w   = w-32;
-  uint   graph_x   = x+32;
+  if (!IsVisible())
+    return;
 
-  for (uint i=0; i<results.size(); i++) {
-    if (results[i].ymax > max_value)
-      max_value = results[i].ymax;
-    if (results[i].xmax > xmax)
-      xmax = results[i].xmax;
-  }
-  // needed to see correctly energy at the end if two teams have same
-  // energy just before the final blow
-  xmax += xmax/50.0f;
-
-  // Draw here the graph and stuff
   Surface &surface = GetMainWindow();
+  uint   graph_h   = h-xaxis.GetHeight()-8;
+  uint   graph_w   = w-yaxis.GetWidth()-8;
+  uint   graph_x   = x+yaxis.GetWidth()+8;
+
+  if (!results.empty()) {
+    // Value to determine normalization
+    float  max_value = 0;
+    float  xmax      = 0;
+
+    for (uint i=0; i<results.size(); i++) {
+      if (results[i].ymax > max_value)
+        max_value = results[i].ymax;
+      if (results[i].xmax > xmax)
+        xmax = results[i].xmax;
+    }
+    // needed to see correctly energy at the end if two teams have same
+    // energy just before the final blow
+    xmax += xmax/50.0f;
+
+    char buffer[16];
+    snprintf(buffer, 16, "%.1f", xmax/1000.0f);
+    surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
+                 Point2i(x+graph_w-20, y+graph_h+8));
+
+    // Draw each team graph
+    float yscale = graph_h / (1.05f*max_value);
+    float xscale = graph_w / (1.05f*xmax);
+
+    for (uint i=0; i<results.size(); i++) {
+      if (results[i].item) {
+        // Legend line
+        surface.BoxColor(Rectanglei(x+w-112, y+12+i*40, 56, thickness), results[i].color);
+        // Legend icon
+        surface.Blit(*results[i].item, Point2i(x+w-48, y+12+i*40-20));
+      }
+      DrawGraph(i, xmax, graph_x, xscale, y+graph_h, yscale);
+    }
+  }
+
+  // Draw here the axis
   surface.BoxColor(Rectanglei(graph_x, y, thickness, graph_h), black_color);
   surface.BoxColor(Rectanglei(graph_x, y+graph_h, graph_w, thickness), black_color);
   surface.Blit(xaxis, Point2i(graph_x+graph_w/2, y+graph_h+8));
-  surface.Blit(yaxis, Point2i(x+4, graph_h/2));
-  char buffer[16];
-  snprintf(buffer, 16, "%.1f", xmax/1000.0f);
-  surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
-               Point2i(x+graph_w-20, y+graph_h+8));
-
-  // Draw each team graph
-  float yscale = graph_h / (1.05f*max_value);
-  float xscale = graph_w / (1.05f*xmax);
-
-  for (uint i=0; i<results.size(); i++) {
-    if (results[i].item) {
-      // Legend line
-      surface.BoxColor(Rectanglei(x+w-112, y+12+i*40, 56, thickness), results[i].color);
-      // Legend icon
-      surface.Blit(*results[i].item, Point2i(x+w-48, y+12+i*40-20));
-    }
-    DrawGraph(i, xmax, graph_x, xscale, y+graph_h, yscale);
-  }
+  surface.Blit(yaxis, Point2i(x+4, y+graph_h/2));
 }
 
 void GraphCanvas::FindMax(Result& res)
 {
-  res.xmax = std::numeric_limits<float>::max();
-  res.ymax = std::numeric_limits<float>::max();
+  res.xmax = std::numeric_limits<float>::min();
+  res.ymax = std::numeric_limits<float>::min();
   for (uint i=0; i<res.list.size(); i++) {
     if (res.list[i].first > res.xmax)
       res.xmax = res.list[i].first;
-    if (res.list[i].first > res.ymax)
+    if (res.list[i].second > res.ymax)
       res.ymax = res.list[i].second;
   }
 }
