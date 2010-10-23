@@ -116,18 +116,22 @@ struct fixed_point {
   fixed_point operator * (unsigned int r) const { fixed_point x = *this; x *= r; return x;}
   fixed_point operator / (unsigned int r) const { fixed_point x = *this; x /= r; return x;}
 
-  operator int() const { return intValue / (1<<p); }
+  operator int() const
+  {
+    uint64_t sign = ((uint64_t)intValue)>>63;
+    return ((int64_t)(intValue+(sign<<p)-sign))>>p;
+  }
 
   // Must be used explicily as we don't want to calculate with doubles!
   double toDouble() const
   {
     static const double factor = 1.0 / (double)(1 << p);
-    return factor * intValue;
+    return intValue * factor;
   }
   float tofloat() const
   {
     static const float factor = 1.0f / (float)(1 << p);
-    return factor * intValue;
+    return intValue * factor;
   }
 
   // Warning, this tests strict equality!
