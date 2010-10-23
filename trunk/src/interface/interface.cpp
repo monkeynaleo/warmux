@@ -822,8 +822,3 @@ void HideGameInterface()
   Mouse::GetInstance()->Hide();
   Interface::GetInstance()->Hide();
 }
-
-void ShowGameInterface()
-{
-  Interface::GetInstance()->Show();
-}
