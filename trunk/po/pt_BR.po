@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-05 08:05+0200\n"
+"POT-Creation-Date: 2010-10-23 17:23+0200\n"
 "PO-Revision-Date: 2010-01-11 12:49-0300\n"
 "Last-Translator: Renan Valente Rangel <rvr777@gmail.com>\n"
 "Language-Team: Portuguese/Brazil <razor85@users.sourceforge.net>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:375
+#: src/map/maps_list.cpp:376
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
@@ -62,39 +62,39 @@ msgstr "Equipe %s"
 msgid "%s Team - Remote"
 msgstr "Equipe %s - Remoto"
 
-#: src/game/game.cpp:990
+#: src/game/game.cpp:1015
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (%s) cometeu suicídio!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1016 src/game/game.cpp:1035
+#: src/game/game.cpp:1041 src/game/game.cpp:1060
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) bateu as botas."
 
-#: src/game/game.cpp:982
+#: src/game/game.cpp:1007
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s do time %s caiu na água."
 
-#: src/game/game.cpp:976
+#: src/game/game.cpp:1001
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s do time %s caiu pra fora do mapa!"
 
-#: src/game/game.cpp:996
+#: src/game/game.cpp:1021
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s do time %s atingiu o chão com muita força!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1028
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s do time %s está morto porque é um desajeitado!"
 
-#: src/network/admin_commands.cpp:65
+#: src/network/admin_commands.cpp:66
 #, fuzzy, c-format
 msgid "%s has address %s"
 msgstr "%s mudou alvo para %s"
@@ -111,7 +111,7 @@ msgstr "%s fez algo pelo meio ambiente, ele não mandou a doninha soltar gases."
 msgid "%s has won %u points of energy!"
 msgstr "%s ganhou %u ponto de energia!"
 
-#: src/game/game.cpp:1027
+#: src/game/game.cpp:1052
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s é um psicopata, ele matou um jogador da equipe %s !"
@@ -121,18 +121,18 @@ msgstr "%s é um psicopata, ele matou um jogador da equipe %s !"
 msgid "%s is next to a mine!"
 msgstr "%s está perto de uma mina!"
 
-#: src/network/admin_commands.cpp:62
+#: src/network/admin_commands.cpp:63
 #, c-format
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:402
+#: src/include/action_handler.cpp:436
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s precisa de uma pausa."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:70
+#: src/object/bonus_box.cpp:71
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "A equipe %s já possui munição infinita para %s!"
@@ -143,7 +143,7 @@ msgstr "A equipe %s já possui munição infinita para %s!"
 msgid "%s team has skipped its turn."
 msgstr "A equipe %s pulou a vez."
 
-#: src/weapon/cluzooka.cpp:384
+#: src/weapon/cluzooka.cpp:379
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -221,7 +221,7 @@ msgstr[1] ""
 "%s ganhou %u maçaricos! Se você for menor de 18, peça permissão dos seus "
 "pais para usá-los."
 
-#: src/weapon/bounce_ball.cpp:112
+#: src/weapon/bounce_ball.cpp:113
 #, c-format
 msgid "%s team has won %u bounce ball! Boing!"
 msgid_plural "%s team has won %u bounce balls! Boing!"
@@ -261,7 +261,7 @@ msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "A equipe '%s' ganhou %u dinamite!"
 msgstr[1] "A equipe '%s' ganhou %u dinamites!"
 
-#: src/weapon/flamethrower.cpp:194
+#: src/weapon/flamethrower.cpp:195
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -317,7 +317,7 @@ msgstr[1] ""
 "A equipe '%s' ganhou %u baixa gravidade! Pequeno passo para um homem, grande "
 "salto para o software livre!"
 
-#: src/weapon/mine.cpp:251
+#: src/weapon/mine.cpp:249
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -405,7 +405,7 @@ msgid_plural "%s team has won %u teleportations!"
 msgstr[0] "A equipe '%s' ganhou %u teleporte."
 msgstr[1] "A equipe '%s' ganhou %u teleportes."
 
-#: src/weapon/skip_turn.cpp:66
+#: src/weapon/skip_turn.cpp:65
 #, c-format
 msgid "%s team has won %u turn skip! I know you'll love it."
 msgid_plural "%s team has won %u turn skips! I know you'll love them."
@@ -428,17 +428,17 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "A equipe %s foi derrotada."
 
-#: src/game/game.cpp:1011 src/game/game.cpp:1023
+#: src/game/game.cpp:1036 src/game/game.cpp:1048
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s levou um integrante do time %s para a cova com ele!"
 
-#: src/network/admin_commands.cpp:77
+#: src/network/admin_commands.cpp:78
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
 
-#: src/interface/interface.cpp:229
+#: src/interface/interface.cpp:241
 msgid "(dead)"
 msgstr "(morto)"
 
@@ -447,12 +447,12 @@ msgstr "(morto)"
 msgid "(system language)"
 msgstr "(idioma do sistema)"
 
-#: src/network/chatlogger.cpp:29 src/network/chatlogger.cpp:76
+#: src/network/chatlogger.cpp:28 src/network/chatlogger.cpp:67
 msgid "(unknown time)"
 msgstr "(tempo desconhecido)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:247
+#: src/interface/interface.cpp:259
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
@@ -479,7 +479,7 @@ msgstr "Ataque aéreo"
 msgid "Airhammer"
 msgstr "Britadeira"
 
-#: src/menu/results_menu.cpp:441
+#: src/menu/results_menu.cpp:301
 msgid "All teams"
 msgstr "Todas as equipes"
 
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Bigorna"
 
-#: src/main.cpp:320
+#: src/main.cpp:328
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -514,7 +514,7 @@ msgstr "Autores:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
 
-#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1174
 msgid "Back jump"
 msgstr ""
 
@@ -522,7 +522,7 @@ msgstr ""
 msgid "Back to battle"
 msgstr "Retornar a batalha"
 
-#: src/network/net_error_msg.cpp:41
+#: src/network/net_error_msg.cpp:32
 msgid "Bad socket ..."
 msgstr "Socket com problemas..."
 
@@ -538,6 +538,10 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Após a ação"
 
+#: src/menu/main_menu.cpp:64
+msgid "Benchmark"
+msgstr ""
+
 #: src/game/game_mode.cpp:343
 msgid "Blitz"
 msgstr "Blitz"
@@ -546,7 +550,7 @@ msgstr "Blitz"
 msgid "Blowtorch"
 msgstr "Maçarico"
 
-#: src/weapon/bounce_ball.cpp:89
+#: src/weapon/bounce_ball.cpp:90
 msgid "Bounce Ball"
 msgstr "Bola pula pula"
 
@@ -554,9 +558,9 @@ msgstr "Bola pula pula"
 msgid "Bye bye Tux..."
 msgstr "Adeus Tux..."
 
-#: src/team/teams_list.cpp:479 src/team/teams_list.cpp:514
-#: src/team/teams_list.cpp:523 src/team/teams_list.cpp:529
-#: src/team/teams_list.cpp:587
+#: src/team/teams_list.cpp:466 src/team/teams_list.cpp:501
+#: src/team/teams_list.cpp:510 src/team/teams_list.cpp:516
+#: src/team/teams_list.cpp:574
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Não foi possível encontrar a equipe %s!"
@@ -571,52 +575,52 @@ msgstr "Não foi possível abrir diretório (%s) das equipes!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
-#: src/team/custom_teams_list.cpp:84
+#: src/team/custom_teams_list.cpp:64
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
-#: src/menu/help_menu.cpp:43 src/menu/help_menu.cpp:60
+#: src/menu/help_menu.cpp:57 src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Centralizar câmera no personagem"
 
-#: src/interface/man_machine_interface.cpp:1164
+#: src/interface/man_machine_interface.cpp:1156
 #, fuzzy
 msgid "Center on active character"
 msgstr "Mudar personagem ativo"
 
-#: src/menu/help_menu.cpp:59
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Change active character"
 msgstr "Mudar personagem ativo"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:64
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Mudar ângulo da arma"
 
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Change number of playing teams"
 msgstr "Número máximo de jogadores:"
 
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:91
 #, fuzzy
 msgid "Change per team number of players"
 msgstr "Número máximo de jogadores:"
 
-#: src/interface/man_machine_interface.cpp:1184
+#: src/interface/man_machine_interface.cpp:1176
 #, fuzzy
 msgid "Change weapon"
 msgstr "Mudar categoria da arma"
 
-#: src/menu/help_menu.cpp:48
+#: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/menu/help_menu.cpp:49
+#: src/menu/help_menu.cpp:63
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Mudar contagem regressiva da arma"
@@ -629,7 +633,7 @@ msgstr "Nomes dos personagens: "
 msgid "Character switching"
 msgstr "Mudar de personagem"
 
-#: src/interface/man_machine_interface.cpp:1166
+#: src/interface/man_machine_interface.cpp:1158
 msgid "Chat"
 msgstr ""
 
@@ -658,20 +662,20 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:87
 msgid "Click to change team selected"
 msgstr ""
 
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:90
 msgid "Click to select AI/human team"
 msgstr ""
 
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:93
 msgid "Click/wheelmouse to change map"
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:472
+#: src/menu/network_menu.cpp:169 src/network/network.cpp:450
 msgid "Client mode"
 msgstr "Modo de cliente"
 
@@ -683,7 +687,7 @@ msgstr "Mais desajeitado"
 msgid "Cluster Bomb"
 msgstr "Bomba de agrupamentos"
 
-#: src/weapon/cluzooka.cpp:378
+#: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Cluzooka"
 
@@ -691,7 +695,7 @@ msgstr "Cluzooka"
 msgid "Commit Suicide"
 msgstr "Cometer suicídio"
 
-#: src/menu/help_menu.cpp:46
+#: src/menu/help_menu.cpp:60
 msgid "Configuration menu"
 msgstr "Menu de configuração"
 
@@ -699,11 +703,11 @@ msgstr "Menu de configuração"
 msgid "Connect to game"
 msgstr "Conectar ao jogo"
 
-#: src/network/net_error_msg.cpp:32
+#: src/network/net_error_msg.cpp:29
 msgid "Connected !"
 msgstr "Conectado !"
 
-#: src/network/admin_commands.cpp:92
+#: src/network/admin_commands.cpp:93
 msgid "Connected players: "
 msgstr "Jogadores conectados:"
 
@@ -711,7 +715,7 @@ msgstr "Jogadores conectados:"
 msgid "Construct"
 msgstr "Construir"
 
-#: src/menu/results_menu.cpp:420
+#: src/menu/results_menu.cpp:280
 msgid "Controlled by: "
 msgstr "Controlado por: "
 
@@ -720,16 +724,16 @@ msgstr "Controlado por: "
 msgid "Couldn't fetch last version from %s"
 msgstr "Falha ao receber ultima versão de %s"
 
-#: src/network/chatlogger.cpp:55
+#: src/network/chatlogger.cpp:52
 #, c-format
 msgid "Couldn't open file %s"
 msgstr "Falha ao abrir arquivo %s"
 
-#: src/menu/main_menu.cpp:67
+#: src/menu/main_menu.cpp:70
 msgid "Credits"
 msgstr "Créditos"
 
-#: src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:147
 msgid "Current controls"
 msgstr ""
 
@@ -737,15 +741,15 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Dano por rodada durante modo de morte"
 
-#: src/interface/man_machine_interface.cpp:1194
+#: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1199
+#: src/interface/man_machine_interface.cpp:1191
 msgid "Decrease minimap size"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1201
+#: src/interface/man_machine_interface.cpp:1193
 msgid "Decrease sound volume"
 msgstr ""
 
@@ -753,7 +757,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Granada Festiva"
 
-#: src/network/admin_commands.cpp:30
+#: src/network/admin_commands.cpp:31
 msgid "Displays this message"
 msgstr "Mostrar essa mensagem"
 
@@ -761,15 +765,15 @@ msgstr "Mostrar essa mensagem"
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Não esqueça de confirmar assim que vocẽ selecionar seu time(s)!"
 
-#: src/interface/man_machine_interface.cpp:1173
+#: src/interface/man_machine_interface.cpp:1165
 msgid "Down"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1174
+#: src/interface/man_machine_interface.cpp:1166
 msgid "Down slowly"
 msgstr ""
 
-#: src/menu/help_menu.cpp:42
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Clicar & arrastar: Mover câmera"
@@ -787,11 +791,11 @@ msgstr "Duração de uma rodada:"
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: src/game/game.cpp:471
+#: src/game/game.cpp:476
 msgid "END OF GAME"
 msgstr "FIM DO JOGO"
 
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:88
 #, fuzzy
 msgid "Edit player name"
 msgstr "Mostrar o nome dos jogadores?"
@@ -804,22 +808,22 @@ msgstr "Volume de efeitos"
 msgid "Energy"
 msgstr "Energia"
 
-#: src/include/action_handler.cpp:261
+#: src/include/action_handler.cpp:257
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Erro inicialisando conexão: Cliente %s não aceita você!! - %s"
 
-#: src/map/ground.cpp:73
+#: src/map/ground.cpp:68
 #, fuzzy
 msgid "Error loading ground"
 msgstr "Erro ao carregar a equipe :"
 
-#: src/team/custom_teams_list.cpp:111 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:91 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Erro ao carregar a equipe :"
 
-#: src/game/config.cpp:555 src/team/custom_team.cpp:167
-#: src/team/custom_team.cpp:178 src/team/custom_team.cpp:189
+#: src/game/config.cpp:561 src/team/custom_team.cpp:155
+#: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -878,10 +882,18 @@ msgstr ""
 "você não está conectado diretamente à internet, verifique a configuração do "
 "seu roteador: Porta TCP %s precisa estar redirecionada para o seu computador."
 
-#: src/team/team.cpp:151
+#: src/team/team.cpp:162
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não foi possível localizar o corpo \"%s\" para a equipe \"%s\"."
+
+#: src/menu/help_menu.cpp:104
+msgid "Experiment new game rules"
+msgstr ""
+
+#: src/menu/benchmark_menu.cpp:114
+msgid "FPS"
+msgstr ""
 
 #: lib/wormux/net/download.cpp:176 lib/wormux/net/download.cpp:217
 #, c-format
@@ -893,7 +905,7 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
-#: src/weapon/flamethrower.cpp:134
+#: src/weapon/flamethrower.cpp:135
 msgid "Flame Thrower"
 msgstr "Lança Chamas"
 
@@ -909,12 +921,12 @@ msgstr "Tela cheia?"
 msgid "Game"
 msgstr "Jogo"
 
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:100
 #, fuzzy
 msgid "Game menu"
 msgstr "Modo de jogo"
 
-#: src/menu/game_mode_editor.cpp:45
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
 msgid "Game mode"
 msgstr "Modo de jogo"
 
@@ -922,11 +934,15 @@ msgstr "Modo de jogo"
 msgid "Game name:"
 msgstr "Nome do jogo:"
 
+#: src/menu/help_menu.cpp:136
+msgid "Gauge to set speed of some weapons"
+msgstr ""
+
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Lançador Gnu"
 
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:89
 msgid "Go to game rules editing submenu"
 msgstr ""
 
@@ -937,7 +953,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/options_menu.cpp:148
+#: src/menu/benchmark_menu.cpp:113 src/menu/options_menu.cpp:148
 msgid "Graphics"
 msgstr "Gráficos"
 
@@ -953,7 +969,7 @@ msgstr "Gravidade"
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/map/ground.cpp:51
+#: src/map/ground.cpp:46
 msgid "Ground initialization..."
 msgstr "Inicialização do terreno..."
 
@@ -966,17 +982,17 @@ msgid "Have a good game!"
 msgstr "Tenha um bom jogo!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:218 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:230 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Comandante"
 
-#: src/interface/man_machine_interface.cpp:1181 src/menu/main_menu.cpp:64
+#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:67
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Ajuda"
 
-#: src/interface/man_machine_interface.cpp:1180 src/menu/help_menu.cpp:39
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:53
 msgid "High jump"
 msgstr "Pulo alto"
 
@@ -988,7 +1004,7 @@ msgstr "Sediar um jogo"
 msgid "Hurry up, you are too slow !!"
 msgstr "Corra, você está muito devagar !!"
 
-#: src/main.cpp:254
+#: src/main.cpp:262
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -996,16 +1012,37 @@ msgstr ""
 "Se você encontrou algum bug ou tem alguma sugestão, envie-nos um email (em "
 "inglês, por favor):"
 
-#: src/interface/man_machine_interface.cpp:1195
+#: src/menu/help_menu.cpp:108
+msgid "If you like medkits, increase this"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1187
 msgid "Increase explosion delay"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1200
+#: src/interface/man_machine_interface.cpp:1192
 msgid "Increase minimap size"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1202
+#: src/interface/man_machine_interface.cpp:1194
 msgid "Increase sound volume"
+msgstr ""
+
+#: src/menu/help_menu.cpp:110
+#, fuzzy
+msgid "Increase this for faster death mode end"
+msgstr "Duração depois do modo de morte"
+
+#: src/menu/help_menu.cpp:105
+msgid "Increase this if you are a slow player"
+msgstr ""
+
+#: src/menu/help_menu.cpp:109
+msgid "Increase this if you like long games"
+msgstr ""
+
+#: src/menu/help_menu.cpp:144
+msgid "Ingame display"
 msgstr ""
 
 #. Characters energy
@@ -1013,7 +1050,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:379
+#: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:374
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1026,24 +1063,28 @@ msgstr ""
 "desejada\n"
 "uma munição por rodada"
 
-#: src/game/game.cpp:128
+#: src/game/game.cpp:122
 msgid "Initialisation"
 msgstr "Inicialização"
 
 #. Load the map
-#: src/game/game.cpp:145
+#: src/game/game.cpp:144
 msgid "Initialise map"
 msgstr "Inicializar mapa"
 
-#: src/game/game.cpp:156
+#: src/game/game.cpp:155
 msgid "Initialise sounds"
 msgstr "Inicializar sons"
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:151
 msgid "Initialise teams"
 msgstr "Inicializar equipes"
 
-#: src/game/game.cpp:866
+#: src/menu/help_menu.cpp:137
+msgid "Interface, more details in another tab"
+msgstr ""
+
+#: src/game/game.cpp:891
 msgid "It's a present!"
 msgstr "É um presente!"
 
@@ -1051,11 +1092,11 @@ msgstr "É um presente!"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1171
 msgid "Jump"
 msgstr "Pular"
 
-#: src/menu/help_menu.cpp:40 src/menu/help_menu.cpp:41
+#: src/menu/help_menu.cpp:54 src/menu/help_menu.cpp:55
 msgid "Jump backwards"
 msgstr "Pular para trás"
 
@@ -1079,11 +1120,11 @@ msgstr ""
 msgid "Key bindings"
 msgstr ""
 
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:82
 msgid "Keyboard"
 msgstr ""
 
-#: src/network/admin_commands.cpp:32
+#: src/network/admin_commands.cpp:33
 #, fuzzy
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Desconecta os jogadores designados pelo <nickname>"
@@ -1096,12 +1137,12 @@ msgstr "Idioma"
 msgid "Left-handed mouse?"
 msgstr "Mouse canhoto?"
 
-#: src/network/admin_commands.cpp:34
+#: src/network/admin_commands.cpp:35
 #, fuzzy
 msgid "Lists the connected players"
 msgstr "Listar os jogadores conectados"
 
-#: src/map/maps_list.cpp:277
+#: src/map/maps_list.cpp:278
 msgid "Load maps:"
 msgstr "Carregar mapas:"
 
@@ -1109,7 +1150,7 @@ msgstr "Carregar mapas:"
 msgid "Load teams:"
 msgstr "Carregar equipes:"
 
-#: src/menu/teams_selection_box.cpp:88
+#: src/menu/teams_selection_box.cpp:89
 msgid "Local teams:"
 msgstr "Carregar equipes:"
 
@@ -1132,12 +1173,12 @@ msgstr "Mapa"
 msgid "Map %s in folder '%s' is invalid: %s"
 msgstr ""
 
-#: src/map/map.cpp:307
+#: src/map/map.cpp:300
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, uma criação de :"
 
-#: src/game/game.cpp:146
+#: src/game/game.cpp:145
 msgid "Maps"
 msgstr "Mapas"
 
@@ -1153,9 +1194,17 @@ msgstr "Energia Máxima"
 msgid "Maximum FPS"
 msgstr "FPS Máximo"
 
-#: src/weapon/mine.cpp:210
+#: src/menu/benchmark_menu.cpp:112
+msgid "Menu"
+msgstr ""
+
+#: src/weapon/mine.cpp:208
 msgid "Mine"
 msgstr "Mina"
+
+#: src/menu/help_menu.cpp:135
+msgid "Minimap, more details in another tab"
+msgstr ""
 
 #: src/menu/options_menu.cpp:257
 msgid "Misc"
@@ -1164,6 +1213,10 @@ msgstr "Misc"
 #. Modifiers
 #: src/gui/control_config.cpp:224
 msgid "Modifiers"
+msgstr ""
+
+#: src/menu/help_menu.cpp:107
+msgid "More energy, more shots needed"
 msgstr ""
 
 #: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
@@ -1186,49 +1239,49 @@ msgstr "Mais inútil"
 msgid "Most violent"
 msgstr "Mais violento"
 
-#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1170
 #, fuzzy
 msgid "Move camera down"
 msgstr "Mover o personagem"
 
-#: src/interface/man_machine_interface.cpp:1175
+#: src/interface/man_machine_interface.cpp:1167
 #, fuzzy
 msgid "Move camera left"
 msgstr "Mover o personagem"
 
-#: src/interface/man_machine_interface.cpp:1176
+#: src/interface/man_machine_interface.cpp:1168
 #, fuzzy
 msgid "Move camera right"
 msgstr "Mover o personagem"
 
-#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1169
 #, fuzzy
 msgid "Move camera up"
 msgstr "Mover o personagem"
 
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Mova a câmera com o mouse ou com as setas direcionais"
 
-#: src/menu/help_menu.cpp:51
+#: src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Move character"
 msgstr "Mover o personagem"
 
-#: src/interface/man_machine_interface.cpp:1167
+#: src/interface/man_machine_interface.cpp:1159
 msgid "Move left"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1168
+#: src/interface/man_machine_interface.cpp:1160
 msgid "Move left slowly"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1169
+#: src/interface/man_machine_interface.cpp:1161
 msgid "Move right"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1170
+#: src/interface/man_machine_interface.cpp:1162
 msgid "Move right slowly"
 msgstr ""
 
@@ -1244,7 +1297,7 @@ msgstr "Volume da música"
 msgid "Music?"
 msgstr "Música?"
 
-#: src/game/game.cpp:169
+#: src/game/game.cpp:168
 msgid "Network"
 msgstr "Jogo em Rede"
 
@@ -1257,7 +1310,7 @@ msgid "Never"
 msgstr "Nunca"
 
 #. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
-#: src/network/chatlogger.cpp:49
+#: src/network/chatlogger.cpp:46
 msgid "New network game at "
 msgstr "Novo jogo em rede "
 
@@ -1265,17 +1318,17 @@ msgstr "Novo jogo em rede "
 msgid "New player warning?"
 msgstr "Aviso ao novo jogador?"
 
-#: src/interface/man_machine_interface.cpp:1196
+#: src/interface/man_machine_interface.cpp:1188
 #, fuzzy
 msgid "Next character"
 msgstr "Mover o personagem"
 
-#: src/weapon/weapon.cpp:654
+#: src/weapon/weapon.cpp:636
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elemento <%s> não encontrado no arquivo de configuração xml!"
 
-#: src/network/admin_commands.cpp:88
+#: src/network/admin_commands.cpp:89
 msgid "No player connected"
 msgstr "Nenhum jogador conectado"
 
@@ -1288,7 +1341,7 @@ msgid "Nobody!"
 msgstr "Ninguém"
 
 #: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
-#: src/interface/man_machine_interface.cpp:1205
+#: src/interface/man_machine_interface.cpp:1197
 #, fuzzy
 msgid "None"
 msgstr "pronto"
@@ -1298,21 +1351,21 @@ msgstr "pronto"
 msgid "Number of characters"
 msgstr "Número de personagens"
 
-#: src/menu/teams_selection_box.cpp:92
+#: src/menu/teams_selection_box.cpp:93
 msgid "Number of teams:"
 msgstr "Número de equipes:"
 
-#: src/menu/help_menu.cpp:53
+#: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "On a character: select it"
 msgstr "No personagem: Selecionar personagem ativo"
 
-#: src/menu/help_menu.cpp:52
+#: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "On map: select a target"
 msgstr "No mapa: Selecionar alvo"
 
-#: src/interface/man_machine_interface.cpp:1197
+#: src/interface/man_machine_interface.cpp:1189
 #, fuzzy
 msgid "Open options menu"
 msgstr "Menu de opções"
@@ -1342,11 +1395,11 @@ msgstr ""
 msgid "Password:"
 msgstr "Senha:"
 
-#: src/interface/man_machine_interface.cpp:1161
+#: src/interface/man_machine_interface.cpp:1153
 msgid "Pause"
 msgstr "Pausa"
 
-#: src/weapon/mine.cpp:211
+#: src/weapon/mine.cpp:209
 msgid ""
 "Place mine by pressing space\n"
 "Mine explodes when someone steps onto it\n"
@@ -1361,7 +1414,7 @@ msgstr "Jogar"
 msgid "Play several times"
 msgstr "Jogar várias veses"
 
-#: src/menu/teams_selection_box.cpp:113
+#: src/menu/teams_selection_box.cpp:114
 msgid "Player"
 msgstr "Jogador"
 
@@ -1373,7 +1426,7 @@ msgstr "Mostrar a energia dos jogadores?"
 msgid "Player's name?"
 msgstr "Mostrar o nome dos jogadores?"
 
-#: src/menu/results_menu.cpp:433
+#: src/menu/results_menu.cpp:293
 msgid "Podium"
 msgstr ""
 
@@ -1411,7 +1464,7 @@ msgid ""
 "Use Up/Down to change initial angle"
 msgstr ""
 
-#: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:98
+#: src/weapon/flamethrower.cpp:136 src/weapon/submachine_gun.cpp:98
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle\n"
@@ -1442,19 +1495,19 @@ msgstr ""
 msgid "Public battles"
 msgstr "Batalhas públicas"
 
-#: src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:75
 msgid "Quickly quit game with Ctrl"
 msgstr "Sair rapidamente do jogo com Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1152 src/menu/main_menu.cpp:70
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:243
+#: src/main.cpp:251
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
-#: src/menu/help_menu.cpp:38 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:52 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Sair do jogo"
 
@@ -1471,11 +1524,11 @@ msgstr "Mapa aleatório:"
 msgid "Read only %i bytes"
 msgstr "Existe apenas %i equipe"
 
-#: src/game/config.cpp:372
+#: src/game/config.cpp:378
 msgid "Reading the default config file"
 msgstr "Lendo arquivo de configuração padrão"
 
-#: src/game/config.cpp:429
+#: src/game/config.cpp:435
 msgid "Reading the personal config file"
 msgstr "Lendo arquivo de configuração pessoal"
 
@@ -1487,11 +1540,11 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:76
+#: src/main.cpp:77
 msgid "Run game"
 msgstr "Iniciar jogo"
 
-#: src/network/chat.cpp:87
+#: src/network/chat.cpp:83
 msgid "Say: "
 msgstr "Diz: "
 
@@ -1503,42 +1556,42 @@ msgstr "Definir tamanho da borda"
 msgid "Scroll on border"
 msgstr "Mover a tela na borda"
 
-#: src/interface/man_machine_interface.cpp:1157
+#: src/interface/man_machine_interface.cpp:1149
 #, fuzzy
 msgid "Select 'Duel' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1153
+#: src/interface/man_machine_interface.cpp:1145
 #, fuzzy
 msgid "Select 'Heavy' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1158
+#: src/interface/man_machine_interface.cpp:1150
 #, fuzzy
 msgid "Select 'Move' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1154
+#: src/interface/man_machine_interface.cpp:1146
 #, fuzzy
 msgid "Select 'Rifle' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1156
+#: src/interface/man_machine_interface.cpp:1148
 #, fuzzy
 msgid "Select 'Special' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1155
+#: src/interface/man_machine_interface.cpp:1147
 #, fuzzy
 msgid "Select 'Throwing' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1159
+#: src/interface/man_machine_interface.cpp:1151
 #, fuzzy
 msgid "Select 'Tool' weapon category"
 msgstr "Mudar categoria da arma"
 
-#: src/interface/man_machine_interface.cpp:1160
+#: src/interface/man_machine_interface.cpp:1152
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Mudar categoria da arma"
@@ -1553,19 +1606,19 @@ msgid "Server available on Internet"
 msgstr "Servidor disponível na Internet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:502
+#: src/menu/network_menu.cpp:175 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Modo do Servidor"
 
+#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1180
+#: src/interface/man_machine_interface.cpp:1181
+#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1184
 #: src/interface/man_machine_interface.cpp:1185
-#: src/interface/man_machine_interface.cpp:1186
-#: src/interface/man_machine_interface.cpp:1187
-#: src/interface/man_machine_interface.cpp:1188
-#: src/interface/man_machine_interface.cpp:1189
-#: src/interface/man_machine_interface.cpp:1190
-#: src/interface/man_machine_interface.cpp:1191
-#: src/interface/man_machine_interface.cpp:1192
-#: src/interface/man_machine_interface.cpp:1193
 #, c-format
 msgid "Set explosion delay to %u"
 msgstr ""
@@ -1590,7 +1643,7 @@ msgid ""
 "Space to place dynamite"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1175
 #, fuzzy
 msgid "Shoot"
 msgstr "Espingarda"
@@ -1603,16 +1656,16 @@ msgstr ""
 msgid "Shotgun"
 msgstr "Espingarda"
 
-#: src/menu/help_menu.cpp:54
+#: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Mostrar menu de armas"
 
-#: src/menu/help_menu.cpp:44
+#: src/menu/help_menu.cpp:58
 msgid "Show/hide the interface"
 msgstr "Mostrar interface?"
 
-#: src/network/admin_commands.cpp:36
+#: src/network/admin_commands.cpp:37
 msgid "Shows the designated player address"
 msgstr ""
 
@@ -1628,7 +1681,7 @@ msgstr "Tapa"
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Dê um tapa no inimigo para fazer ele dar um pulo."
 
-#: src/menu/help_menu.cpp:55
+#: src/menu/help_menu.cpp:69
 msgid "Smaller aim angle and walk step"
 msgstr "Ângulo de mira pequeno e andar em passos"
 
@@ -1667,15 +1720,15 @@ msgid "Sound frequency"
 msgstr "Frequência do som"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:158
+#: src/game/game.cpp:157
 msgid "Sounds"
 msgstr "Sons"
 
-#: src/game/game.cpp:189
+#: src/game/game.cpp:188
 msgid "Starting a new game"
 msgstr "Iniciando um novo jogo"
 
-#: src/interface/interface.cpp:248
+#: src/interface/interface.cpp:260
 msgid "Stock:"
 msgstr "Munição:"
 
@@ -1691,23 +1744,23 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringa"
 
-#: src/interface/man_machine_interface.cpp:1203
+#: src/interface/man_machine_interface.cpp:1195
 msgid "Take screenshot"
 msgstr ""
 
-#: src/menu/help_menu.cpp:47
+#: src/menu/help_menu.cpp:61
 msgid "Talk in network battles"
 msgstr "Falar em batalha multiplayer"
 
-#: src/menu/results_menu.cpp:446
+#: src/menu/results_menu.cpp:322
 msgid "Team graphs"
 msgstr "Gráfico das equipes"
 
-#: src/menu/results_menu.cpp:444
+#: src/menu/results_menu.cpp:304
 msgid "Team stats"
 msgstr "Estatísticas das equipes"
 
-#: src/game/game.cpp:153 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:152 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:100
 msgid "Teams"
 msgstr "Equipes"
@@ -1740,9 +1793,13 @@ msgstr "A doninha deixou o cenário antes de explodir!"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O míssil automático deixou o campo de batalha..."
 
-#: src/weapon/bounce_ball.cpp:72
+#: src/weapon/bounce_ball.cpp:73
 msgid "The ball left the battlefield before exploding!"
 msgstr "A bola pula pula deixou o campo de batalha antes de explodir!"
+
+#: src/menu/help_menu.cpp:111
+msgid "The bigger the faster you'll fall!"
+msgstr ""
 
 #: src/menu/game_mode_editor.cpp:137
 msgid ""
@@ -1759,7 +1816,7 @@ msgstr ""
 "As versões do cliente e do servidor são incompatíveis (local=%s, servidor=%"
 "s). Por favor tente outro servidor."
 
-#: src/network/net_error_msg.cpp:47
+#: src/network/net_error_msg.cpp:34
 msgid "The connection timed out. Check there is no firewall in the way!"
 msgstr "A conexão expirou. Verifique se não existe um firewall no caminho!"
 
@@ -1767,7 +1824,7 @@ msgstr "A conexão expirou. Verifique se não existe um firewall no caminho!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "A granada festiva deixou a pista de dança antes de explodir!"
 
-#: src/game/game.cpp:703
+#: src/game/game.cpp:727
 msgid "The game was interrupted because you got disconnected."
 msgstr "O jogo foi interrompido porque você foi desconectado."
 
@@ -1783,20 +1840,20 @@ msgstr "Os outros estão esperando por você! ACORDA! :-)"
 msgid "The parachute is activated automatically."
 msgstr "O paraquedas é ativado automaticamente."
 
-#: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:328
+#: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:323
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "O míssil deixou o campo de batalha..."
 
-#: src/network/net_error_msg.cpp:44
+#: src/network/net_error_msg.cpp:33
 msgid "The server rejected the connection."
 msgstr "O servidor rejeitou a conexão."
 
-#: src/network/net_error_msg.cpp:50
+#: src/network/net_error_msg.cpp:35
 msgid "The server rejected the connection: wrong password!"
 msgstr "O servidor rejeitou a conexão: senha incorreta!"
 
-#: src/weapon/weapon.cpp:666
+#: src/weapon/weapon.cpp:648
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1816,8 +1873,7 @@ msgstr[1] "Existe apenas %i equipes"
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#. DrawTmpBoxText(Font::GetInstance()->, Point2i(w/2, y+graph_h+8), _("Time"), 0);
-#: src/menu/results_menu.cpp:322
+#: src/menu/benchmark_menu.cpp:114 src/menu/results_menu.cpp:324
 msgid "Time"
 msgstr "Time"
 
@@ -1835,7 +1891,7 @@ msgstr ""
 "desejada\n"
 "uma munição por rodada"
 
-#: src/weapon/bounce_ball.cpp:90
+#: src/weapon/bounce_ball.cpp:91
 #, fuzzy
 msgid ""
 "Timeout: Mouse wheel or Page Up/Down\n"
@@ -1848,49 +1904,65 @@ msgstr ""
 "Atirar : tecla de espaço\n"
 "uma munição por rodada"
 
-#: src/interface/man_machine_interface.cpp:1162 src/menu/help_menu.cpp:45
+#: src/menu/help_menu.cpp:124
+msgid ""
+"To jump, press space or trackball or dpad center.\n"
+"To aim or move more slowly, use shift/vol+.\n"
+"To pause, click the clock or press escape/back key.\n"
+"Click a character from your team to select it.\n"
+msgstr ""
+
+#: src/menu/help_menu.cpp:129
+msgid ""
+"To jump, press space.\n"
+"To aim or move more slowly, use shift.\n"
+"To pause, click the clock or press escape.\n"
+"Click a character from your team to select it.\n"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Tela cheia?"
 
-#: src/interface/man_machine_interface.cpp:1163
+#: src/interface/man_machine_interface.cpp:1155
 #, fuzzy
 msgid "Toggle interface"
 msgstr "Mostrar interface?"
 
-#: src/interface/man_machine_interface.cpp:1198 src/menu/help_menu.cpp:58
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Mostrar mini-mapa?"
 
-#: src/interface/man_machine_interface.cpp:1165
+#: src/interface/man_machine_interface.cpp:1157
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Mostrar menu de armas"
 
-#: src/network/net_error_msg.cpp:35
+#: src/network/net_error_msg.cpp:30
 msgid "Unable to contact the host."
 msgstr "Não foi possível conectar ao servidor!"
 
-#: src/map/maps_list.cpp:287
+#: src/map/maps_list.cpp:288
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
-#: src/map/maps_list.cpp:299
+#: src/map/maps_list.cpp:300
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
-#: src/network/net_error_msg.cpp:38
+#: src/network/net_error_msg.cpp:31
 msgid "Unable to use this port!"
 msgstr "Não foi possível usar essa porta!"
 
-#: src/network/admin_commands.cpp:119
+#: src/network/admin_commands.cpp:120
 msgid "Unknown command"
 msgstr "Comando desconhecido"
 
-#: src/network/admin_commands.cpp:68
+#: src/network/admin_commands.cpp:69
 #, fuzzy, c-format
 msgid "Unknown command of type %i"
 msgstr "Comando desconhecido"
@@ -1899,11 +1971,11 @@ msgstr "Comando desconhecido"
 msgid "Unlimited"
 msgstr "Ilimitado"
 
-#: src/interface/man_machine_interface.cpp:1171
+#: src/interface/man_machine_interface.cpp:1163
 msgid "Up"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1172
+#: src/interface/man_machine_interface.cpp:1164
 msgid "Up slowly"
 msgstr ""
 
@@ -1938,7 +2010,7 @@ msgstr ""
 "necessária\n"
 "uma munição por rodada"
 
-#: src/main.cpp:171
+#: src/main.cpp:179
 msgid "Version"
 msgstr "Versão"
 
@@ -1958,12 +2030,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere! %i jogador ainda não está pronto!"
 msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 
-#: src/game/game.cpp:607
+#: src/game/game.cpp:626
 #, c-format
 msgid "Waiting for %s"
 msgstr "Aguardando %s"
 
-#: src/game/game.cpp:168
+#: src/game/game.cpp:167
 msgid "Waiting for remote players"
 msgstr "Aguardando jogadores remotos"
 
@@ -1972,16 +2044,16 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Esperando pelo servidor, tudo que você pode fazer é conversar ou cancelar!"
 
-#: src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arma: Fogo / Caixa bônus: cai rápido"
 
-#: src/game/game.cpp:149
+#: src/game/game.cpp:148
 msgid "Weapons"
 msgstr "Armas:"
 
-#: src/main.cpp:329
+#: src/main.cpp:337
 msgid "Website: "
 msgstr "Site: "
 
@@ -1992,21 +2064,26 @@ msgstr "Site: "
 msgid "Welcome to %s on %s!"
 msgstr "Bem-vindo à %s em %s!"
 
-#: src/game/game.cpp:969
+#: src/game/game.cpp:994
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Que belo homerun! %s da equipe %s está em outro mundo..."
 
-#: src/game/game.cpp:1032
+#: src/game/game.cpp:1057
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
+
+#: src/menu/help_menu.cpp:106
+#, fuzzy
+msgid "When a character can be switched"
+msgstr "No personagem: Selecionar personagem ativo"
 
 #: src/menu/options_menu.cpp:92
 msgid "Wind particles?"
 msgstr "Partículas de vento?"
 
-#: src/menu/results_menu.cpp:412
+#: src/menu/results_menu.cpp:272
 msgid "Winner"
 msgstr "Vencedor"
 
@@ -2015,23 +2092,23 @@ msgstr "Vencedor"
 msgid "Woah! Combo of %u!"
 msgstr ""
 
-#: src/main.cpp:183
+#: src/main.cpp:191
 msgid "Wormux launching..."
 msgstr "Iniciando wormux..."
 
-#: src/main.cpp:319
+#: src/main.cpp:327
 msgid "Wormux version "
 msgstr "Wormux versão "
 
-#: src/include/action_handler.cpp:235
+#: src/include/action_handler.cpp:233
 msgid "Wrong map CRC!"
 msgstr "CRC do mapa errado!"
 
-#: src/include/action_handler.cpp:232
+#: src/include/action_handler.cpp:231
 msgid "Wrong map name!"
 msgstr "Nome do mapa errado!"
 
-#: src/include/action_handler.cpp:238
+#: src/include/action_handler.cpp:235
 msgid "Wrong team!"
 msgstr "Time errado!"
 
@@ -2048,11 +2125,11 @@ msgstr "Você está sozinho :-/"
 msgid "You are the new turn master!"
 msgstr "Você é o novo jogador mestre da rodada!"
 
-#: src/map/maps_list.cpp:308
+#: src/map/maps_list.cpp:309
 msgid "You need at least one valid map!"
 msgstr "Você precisa de pelo menos um mapa válido!"
 
-#: src/game/game.cpp:275 src/team/teams_list.cpp:163
+#: src/game/game.cpp:274 src/team/teams_list.cpp:163
 msgid "You need at least two valid teams!"
 msgstr "Você precisa de pelo menos duas equipes válidas!"
 
@@ -2060,7 +2137,7 @@ msgstr "Você precisa de pelo menos duas equipes válidas!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Você não conseguirá jogar antes de selecionar uma equipe!"
 
-#: src/weapon/weapon_launcher.cpp:540
+#: src/weapon/weapon_launcher.cpp:555
 msgid "Your shot has missed!"
 msgstr "Você errou o tiro!"
 
@@ -2088,7 +2165,7 @@ msgstr "falha ao carregar configuração"
 msgid "custom player"
 msgstr "jogador custumisado"
 
-#: src/map/ground.cpp:79
+#: src/map/ground.cpp:74
 msgid "done"
 msgstr "pronto"
 
