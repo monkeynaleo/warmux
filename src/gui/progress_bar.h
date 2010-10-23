@@ -122,9 +122,9 @@ public:
   // Draw the progress bar
   virtual void DrawXY(const Point2i & pos) const;
 
-  const int GetMaxVal() const { return max; }
-  const int GetMinVal() const { return min; }
-  const int GetVal() const { return val; }
+  int GetMaxVal() const { return max; }
+  int GetMinVal() const { return min; }
+  int GetVal() const { return val; }
 
   int GetWidth() const { return width; }
   int GetHeight() const { return height; }
