@@ -184,8 +184,8 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       int fps = video->GetMaxFps(); video->SetMaxFps(60);
 
       // Set seeds - we'll set random ones afterwards
-      //RandomLocal().SetSeed(0xABADCAFE);
-      //RandomSync().SetSeed(0xABADCAFE);
+      RandomLocal().SetSeed(0xABADCAFE);
+      RandomSync().SetSeed(0xABADCAFE);
 
       // All set, run the game!
       float num  = Game::UpdateGameRules()->Start(true);
