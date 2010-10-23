@@ -58,8 +58,10 @@ namespace fixedpoint {
 
 #if FIXINT_BITS == 64
 typedef int64_t fixint_t;
+typedef uint64_t fixuint_t;
 #else
 typedef int32_t fixint_t;
+typedef uint32_t fixuint_t;
 #endif
 
 // The template argument p in all of the following functions refers to the
