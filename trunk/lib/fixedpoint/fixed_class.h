@@ -354,6 +354,7 @@ template <int p>
 inline fixed_point<p> abs(fixed_point<p> a)
 {
   fixint_t sign = a.intValue >> (FIXINT_BITS-1);
+  fixed_point<p> r;
   r.intValue = a.intValue^sign;
   r.intValue -= sign;
   return r;
