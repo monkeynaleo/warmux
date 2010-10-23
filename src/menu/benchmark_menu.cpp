@@ -188,8 +188,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
         uint  time = Time::GetInstance()->Read();
         score = (num * video->window.GetWidth()*video->window.GetHeight())
               / time;
-        if (RandomSync().GetSeed() == 3330675913U) fmt = "%.0f";
-        else fmt = "(Desynch) %.0f";
+        fmt = "%.0f";
       } else {
         fmt = "Aborted";
       }
