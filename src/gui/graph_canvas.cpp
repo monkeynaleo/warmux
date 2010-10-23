@@ -125,9 +125,14 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
     xmax += xmax/50.0f;
 
     char buffer[16];
-    snprintf(buffer, 16, "%.1f", xmax/1000.0f);
+    snprintf(buffer, 16, "%.1f", xmax);
     surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
                  Point2i(x+graph_w-20, y+graph_h+8));
+#if 0 // Display max y
+    snprintf(buffer, 16, "%.1f", max_value);
+    surface.Blit(Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->CreateSurface(buffer, black_color),
+                 Point2i(x+4, y+8));
+#endif
 
     // Draw each team graph
     float yscale = graph_h / (1.05f*max_value);
