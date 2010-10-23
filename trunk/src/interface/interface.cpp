@@ -77,10 +77,8 @@ void Interface::LoadDataInternal(Profile *res)
   // Pre-render interface + wind-indicator
   Point2i wind_pos((game_menu.GetWidth() + clock_width) / 2 + MARGIN,
                    (game_menu.GetHeight() - wind_icon.GetHeight()) / 2);
-#if PRE_RENDER
   game_menu.Blit(wind_icon, wind_pos);
   game_menu.Blit(wind_indicator, wind_pos + Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight()));
-#endif
 
   // energy bar
   if (energy_bar)
@@ -309,35 +307,13 @@ void Interface::DrawClock(const Point2i &time_pos) const
 // draw wind indicator
 void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const
 {
-#if !PRE_RENDER
-  Surface& window = GetMainWindow();
-#endif
-  int height;
-
-  // draw wind icon
-  if (draw_icon) {
-#if !PRE_RENDER
-    window.Blit(wind_icon, wind_bar_pos);
-    GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
-#endif
-    height = wind_icon.GetHeight() - wind_indicator.GetHeight();
-  } else {
-    height = MARGIN;
-  }
+  int height = (draw_icon) ? wind_icon.GetHeight() - wind_indicator.GetHeight() : MARGIN;
 
   // draw wind indicator
   Point2i wind_bar_offset = Point2i(0, height);
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
-#if !PRE_RENDER
-  window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
-#endif
   wind_bar.DrawXY(tmp);
-#if PRE_RENDER
   GetWorld().ToRedrawOnScreen(Rectanglei(tmp, wind_bar.GetSize()));
-#else
-  GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset,
-                                         wind_indicator.GetSize()));
-#endif
 }
 
 // display wind info
