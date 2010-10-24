@@ -91,6 +91,7 @@ private:
   Surface wind_indicator;
   Point2i bottom_bar_pos;
   int last_width;
+  float zoom;
   Surface shoot;
 
   //Minimap
@@ -107,7 +108,7 @@ private:
   void DrawCharacterInfo();
   void DrawTeamEnergy() const;
   void DrawWeaponInfo() const;
-  void DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const;
+  void DrawWindIndicator(const Point2i &wind_bar_pos) const;
   void DrawWindInfo() const;
   void DrawClock(const Point2i &time_pos) const;
   void DrawTimeInfo() const;
