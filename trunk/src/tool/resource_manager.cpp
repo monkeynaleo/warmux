@@ -256,7 +256,7 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
         Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
     }
 
-    Surface sub_image(source_rect.GetSize(), SDL_HWSURFACE, true);
+    Surface sub_image(source_rect.GetSize(), SDL_SWSURFACE, alpha);
     image.SetAlpha(0, 0);
     sub_image.Blit(image, -source_rect.GetPosition());
     return sub_image;
