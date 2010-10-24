@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-24 07:51+0200\n"
+"POT-Creation-Date: 2010-10-24 08:01+0200\n"
 "PO-Revision-Date: 2008-11-09 22:37+0100\n"
 "Last-Translator: Varady Tamas <tvarady@freemail.hu>\n"
 "Language-Team: Hungarian\n"
@@ -620,7 +620,7 @@ msgid ""
 "Character name.\n"
 "Character energy.\n"
 "Team name.\n"
-"Player name.\n"
+"Player name."
 msgstr ""
 
 #: src/menu/options_menu.cpp:183
@@ -1808,11 +1808,6 @@ msgstr "Beszélgetés hálózati játék közben"
 msgid "Team graphs"
 msgstr "Csapat grafikonok"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:133
-msgid "Team in ordre of decreasing energy"
-msgstr ""
-
 #: src/menu/results_menu.cpp:304
 msgid "Team stats"
 msgstr "Csapat statisztikák"
@@ -1825,6 +1820,11 @@ msgstr "Csapatok"
 #: src/menu/options_menu.cpp:220
 msgid "Teams editor"
 msgstr "Csapatszerkesztõ"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:133
+msgid "Teams in decreasing order of energy"
+msgstr ""
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1945,7 +1945,7 @@ msgstr "Idõ"
 #: src/menu/help_menu.cpp:132
 msgid ""
 "Time left in this turn.\n"
-"Time elapsed since game start.\n"
+"Time elapsed since game start."
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
@@ -1980,7 +1980,7 @@ msgid ""
 "To jump, press space or trackball or dpad center.\n"
 "To aim or move more slowly, use shift/vol+.\n"
 "To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it.\n"
+"Click a character from your team to select it."
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
@@ -1989,7 +1989,7 @@ msgid ""
 "To jump, press space.\n"
 "To aim or move more slowly, use shift.\n"
 "To pause, click the clock or press escape.\n"
-"Click a character from your team to select it.\n"
+"Click a character from your team to select it."
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
