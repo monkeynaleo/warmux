@@ -143,6 +143,8 @@ bool BenchmarkMenu::Launch(BenchItem *b)
     }
   case BENCH_GRAPHICS:
     {
+      graph->UnsetResults();
+
       // Backup and set playing teams
       std::vector<Team*> list_bak = GetTeamsList().GetPlayingList();
       std::list<uint> sel; sel.push_back(1); sel.push_back(2);
@@ -203,7 +205,6 @@ bool BenchmarkMenu::Launch(BenchItem *b)
         graph->AddResult(res);
       } else {
         fmt = "Aborted";
-        graph->UnsetResults();
       }
       graph->NeedRedrawing();
 
