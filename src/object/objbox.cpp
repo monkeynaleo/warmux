@@ -168,7 +168,7 @@ Surface* ObjBox::GetIcon()
   if (new_index != icon_index) {
     if (icon) delete icon;
     icon_index = new_index;
-    icon = new Surface((*anim)[new_index].surface.RotoZoom(ZERO, 0.4, 0.4));
+    icon = new Surface(anim->GetSurface().RotoZoom(ZERO, 0.4, 0.4));
   }
   return icon;
 }
