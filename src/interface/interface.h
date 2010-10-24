@@ -98,7 +98,9 @@ private:
 
   Color m_camera_preview_color;
   Color m_playing_character_preview_color;
+  Color m_text_color, m_energy_text_color;
 
+  void FreeDrawElements();
   void DrawCharacterInfo();
   void DrawTeamEnergy() const;
   void DrawWeaponInfo() const;

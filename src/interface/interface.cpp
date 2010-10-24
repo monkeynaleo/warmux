@@ -50,6 +50,8 @@ void Interface::LoadDataInternal(Profile *res)
 {
   Surface tmp     = LOAD_RES_IMAGE("interface/background_interface");
  
+  FreeDrawElements();
+
   clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
@@ -73,18 +75,22 @@ void Interface::LoadDataInternal(Profile *res)
   clock_width = 70*zoom+0.5f;
 
   // energy bar
-  if (energy_bar)
-    delete energy_bar;
   energy_bar = new EnergyBar(0, 0, 120*zoom+0.5f, 15*zoom+0.5f,
                              0, 0,
                              GameMode::GetInstance()->character.init_energy);
 
+  // Labels
+  uint fsize = Font::FONT_SMALL*powf(zoom, 0.85)+0.5f;
+  if (fsize < 10) fsize = 10;
+  t_character_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
+  t_team_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
+  t_player_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
+  t_weapon_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
+  t_weapon_stock = new Text("0", m_text_color, fsize, Font::FONT_BOLD, false);
+  t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD);
+
   // Timer
-  if (global_timer)
-    delete global_timer;
   global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
-  if (timer)
-    delete timer;
   timer = new Text("0", black_color, Font::FONT_MEDIUM*zoom+0.5f, Font::FONT_BOLD, false);
 
   wind_bar.InitPos(0, 0, 82*zoom-1.5f, 15*zoom-1.5f);
@@ -100,12 +106,20 @@ void Interface::LoadData()
 Interface::Interface()
   : global_timer(NULL)
   , timer(NULL)
+  , t_character_name(NULL)
+  , t_team_name(NULL)
+  , t_player_name(NULL)
+  , t_weapon_name(NULL)
+  , t_weapon_stock(NULL)
+  , t_character_energy(NULL)
   , display(true)
   , start_hide_display(0)
   , start_show_display(0)
   , display_minimap(true)
   , energy_bar(NULL)
   , clock(NULL)
+  , clock_normal(NULL)
+  , clock_emergency(NULL)
   , zoom(1.0f)
   , minimap(NULL)
   , m_last_minimap_redraw(0)
@@ -114,6 +128,9 @@ Interface::Interface()
   , scratch(NULL)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+
+  m_text_color = LOAD_RES_COLOR("interface/text_color");
+  m_energy_text_color = LOAD_RES_COLOR("interface/energy_text_color");
 
   LoadDataInternal(res);
 
@@ -136,19 +153,9 @@ Interface::Interface()
   weapon_strength_bar.SetBorderColor(LOAD_RES_COLOR("interface/weapon_strength_bar_border"));
   weapon_strength_bar.SetBackgroundColor(LOAD_RES_COLOR("interface/weapon_strength_bar_background"));
 
-  Color text_color = LOAD_RES_COLOR("interface/text_color");
-  Color energy_text_color = LOAD_RES_COLOR("interface/energy_text_color");
-
   m_camera_preview_color = LOAD_RES_COLOR("interface/camera_preview_color");
 
   m_playing_character_preview_color = LOAD_RES_COLOR("interface/playing_character_preview_color");
-
-  t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_team_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_player_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_weapon_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_weapon_stock = new Text("0", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_character_energy = new Text("Dead", energy_text_color, Font::FONT_SMALL, Font::FONT_BOLD);
 
   // Weapon help
   help = new WeaponHelp();
@@ -157,6 +164,19 @@ Interface::Interface()
 }
 
 Interface::~Interface()
+{
+  FreeDrawElements();
+
+  if (minimap) delete minimap;
+  if (mask) delete mask;
+  if (scratch) delete scratch;
+
+  if (energy_bar) delete energy_bar;
+
+  delete help;
+}
+
+void Interface::FreeDrawElements()
 {
   if (clock_normal) delete clock_normal;
   if (clock_emergency) delete clock_emergency;
@@ -168,14 +188,6 @@ Interface::~Interface()
   if (t_character_energy) delete t_character_energy;
   if (t_weapon_name) delete t_weapon_name;
   if (t_weapon_stock) delete t_weapon_stock;
-
-  if (minimap) delete minimap;
-  if (mask) delete mask;
-  if (scratch) delete scratch;
-
-  if (energy_bar) delete energy_bar;
-
-  delete help;
 }
 
 void Interface::Reset()
@@ -311,7 +323,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos) const
 void Interface::DrawWindInfo() const
 {
   // The hardcoded values are from the wind indicator position in the image
-  Point2i wind_pos_offset(347*zoom, 48*zoom);
+  Point2i wind_pos_offset(347*zoom+0.75f, 48*zoom+0.75f);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
