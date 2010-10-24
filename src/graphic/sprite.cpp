@@ -354,3 +354,11 @@ void Sprite::RefreshSurface()
   if (rot_hotspot != center || rotation_rad.IsNotZero())
     Calculate_Rotation_Offset(current_surface);
 }
+
+void Sprite::ForceDisplayFormat()
+{
+  for (uint i=0; i<frames.size(); ++i) {
+    frames[i].surface.SetColorKey(SDL_SRCCOLORKEY, 0);
+    frames[i].surface = frames[i].surface.DisplayFormat();
+  }
+}
