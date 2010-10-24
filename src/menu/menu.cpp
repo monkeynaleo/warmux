@@ -49,7 +49,7 @@ Menu::Menu(const std::string& bg, t_action _actions)
   Surface& window = GetMainWindow();
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  background = new Sprite(GetResourceManager().LoadImage(res, bg), true);
+  background = new Sprite(GetResourceManager().LoadImage(res, bg, false), true);
   background->EnableLastFrameCache();
 
   b_ok = NULL;
