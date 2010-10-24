@@ -93,9 +93,9 @@ public:
               enum orientation _orientation);
   virtual ~ProgressBar() {};
 
-  int GetCurrentValue() { return val; };
-  int GetMinValue() { return min; };
-  int GetMaxValue() { return max; };
+  int GetCurrentValue() const { return val; };
+  int GetMinValue() const { return min; };
+  int GetMaxValue() const { return max; };
 
   // Update current value
   void UpdateValue(int val);
@@ -121,10 +121,6 @@ public:
 
   // Draw the progress bar
   virtual void DrawXY(const Point2i & pos) const;
-
-  int GetMaxVal() const { return max; }
-  int GetMinVal() const { return min; }
-  int GetVal() const { return val; }
 
   int GetWidth() const { return width; }
   int GetHeight() const { return height; }
