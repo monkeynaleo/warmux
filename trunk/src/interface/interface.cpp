@@ -350,8 +350,7 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset(((game_menu.GetWidth()+clock_width)>>1) + WIND_ICON_WIDTH,
-                          (game_menu.GetHeight() - 50)>>1);
+  Point2i team_bar_offset(430*zoom, (game_menu.GetHeight() - 48)>>1);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
