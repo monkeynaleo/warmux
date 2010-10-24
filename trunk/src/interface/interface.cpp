@@ -322,8 +322,8 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos) const
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + MARGIN+1,
-                          48*zoom+2.5f);
+  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + 5*zoom,
+                          48*zoom+1.5f);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
@@ -339,7 +339,7 @@ void Interface::DrawSmallInterface() const
   Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth())>>1,
                                    window.GetHeight() - height);
   window.Blit(small_background_interface, small_interface_position);
-  DrawWindIndicator(small_interface_position + 2*MARGIN);
+  DrawWindIndicator(small_interface_position + 3*MARGIN);
   if (display_timer) {
     timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
   }
