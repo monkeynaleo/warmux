@@ -32,16 +32,14 @@
 #include "include/app.h"
 
 const uint BAR_WIDTH = 13;
-const uint BAR_SPACING = 30;
-const uint BAR_HEIGHT = 50;
-// XXX Not used
-//const uint SPACING = 3;
+const uint BAR_SPACING = 20;
+const uint BAR_HEIGHT = 44;
 
 #define   ALPHA           127
 #define   BACK_ALPHA      0
 #define   BACKGROUND_GREY (255*6)/10
 
-static const Double MOVE_DURATION = 750.0;
+#define MOVE_DURATION  750.0
 
 void EnergyList::Reset()
 {
@@ -155,9 +153,9 @@ void TeamEnergy::Refresh()
 void TeamEnergy::Draw(const Point2i& pos)
 {
   energy_bar->Actu(value);
-  Point2i tmp = pos + Point2i(BAR_SPACING / 2 + rank * (BAR_WIDTH + BAR_SPACING) + dx, dy);
-  energy_bar->DrawXY(tmp);
-  icon->DrawXY(tmp + Point2i(energy_bar->GetWidth() / 2, 0));
+  Point2i tmp = pos + Point2i(rank * (BAR_WIDTH + BAR_SPACING) + dx, 0);
+  energy_bar->DrawXY(tmp + Point2i(BAR_SPACING/2-1, dy+1+icon->GetHeight()));
+  icon->DrawXY(tmp);
 }
 
 void TeamEnergy::SetValue(uint new_energy)
@@ -189,23 +187,16 @@ void TeamEnergy::Move()
     if (!move_start_time)
       move_start_time = global_time->Read();
 
-    dx = (int)(((Double)new_rank - rank) * (BAR_WIDTH + BAR_SPACING) * ((global_time->Read() - move_start_time) / MOVE_DURATION));
+    dx = 0.5f*(BAR_WIDTH + BAR_SPACING)*(new_rank - rank)*(global_time->Read() - move_start_time) / MOVE_DURATION;
+    dy = 0.5f*BAR_HEIGHT * (rank-new_rank) * sin((global_time->Read() - move_start_time)*M_PI/MOVE_DURATION);
 
-    // displacement in arc only when losing place ranking
-    if( new_rank > rank ) {
-      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * ONE_HALF *
-           sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
-    } else {
-      dy = (int)((BAR_HEIGHT * ((Double)rank - new_rank)) * ONE_HALF *
-          sin( PI * ((global_time->Read() - move_start_time) / MOVE_DURATION)));
-    }
     // End of movement ?
     if( ((long)global_time->Read() - (long)move_start_time) > (long)MOVE_DURATION)
       FinalizeMove();
   } else {
     // While moving, it came back to previous place in ranking
-    dy = (int)((Double)dy - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dy);
-    dx = (int)((Double)dx - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dx);
+    dy -= ((global_time->Read() - move_start_time) / MOVE_DURATION) * dy;
+    dx -= ((global_time->Read() - move_start_time) / MOVE_DURATION) * dx;
   }
 }
 
