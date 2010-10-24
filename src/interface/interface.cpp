@@ -50,54 +50,44 @@ void Interface::LoadDataInternal(Profile *res)
 {
   Surface tmp     = LOAD_RES_IMAGE("interface/background_interface");
  
-  zoom            = 1.0f;
   clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
   last_width = AppWormux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
-    zoom = last_width / (float)(tmp.GetWidth()+20);
-    game_menu = tmp.RotoZoom(0.0, zoom, zoom);
-    shoot = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
-#if !PRERENDER
-    wind_icon = LOAD_RES_IMAGE("interface/wind").RotoZoom(0.0, zoom, zoom);
-#endif
-    wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator").RotoZoom(0.0, zoom, zoom);
+    zoom            = last_width / (float)(tmp.GetWidth()+20);
+    game_menu       = tmp.RotoZoom(0.0, zoom, zoom);
+    shoot           = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
+    small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
     clock_normal->EnableLastFrameCache();
     clock_emergency->EnableLastFrameCache();
   }
   else {
-    game_menu = tmp;
-    shoot = LOAD_RES_IMAGE("interface/shoot");
-#if !PRERENDER
-    wind_icon = LOAD_RES_IMAGE("interface/wind");
-#endif
-    wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
+    zoom            = 1.0f;
+    game_menu       = tmp;
+    shoot           = LOAD_RES_IMAGE("interface/shoot");
+    small_interface = LOAD_RES_IMAGE("interface/small_background_interface");
   }
-  clock_width = 70*zoom;
-  small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
-
-#if !PRERENDER
-  // Pre-render interface + wind-indicator
-  Point2i wind_pos(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
-                   (game_menu.GetHeight() - wind_icon.GetHeight())>>1);
-  game_menu.Blit(wind_icon, wind_pos);
-  game_menu.Blit(wind_indicator, wind_pos + Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight()));
-#endif
+  clock_width = 70*zoom+0.5f;
 
   // energy bar
   if (energy_bar)
     delete energy_bar;
-  energy_bar = new EnergyBar(0, 0, 120*zoom, 15*zoom,
+  energy_bar = new EnergyBar(0, 0, 120*zoom+0.5f, 15*zoom+0.5f,
                              0, 0,
                              GameMode::GetInstance()->character.init_energy);
 
   // Timer
   if (global_timer)
     delete global_timer;
-  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom, Font::FONT_BOLD, false);
+  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
+  if (timer)
+    delete timer;
+  timer = new Text("0", black_color, Font::FONT_MEDIUM*zoom+0.5f, Font::FONT_BOLD, false);
+
+  wind_bar.InitPos(0, 0, 82*zoom-1.5f, 15*zoom-1.5f);
 }
 
 void Interface::LoadData()
@@ -109,6 +99,7 @@ void Interface::LoadData()
 
 Interface::Interface()
   : global_timer(NULL)
+  , timer(NULL)
   , display(true)
   , start_hide_display(0)
   , start_show_display(0)
@@ -127,7 +118,6 @@ Interface::Interface()
   LoadDataInternal(res);
 
   // wind bar
-  wind_bar.InitPos(0, 0, wind_indicator.GetWidth() - 4, wind_indicator.GetHeight() - 4);
   wind_bar.SetMinMaxValueColor(LOAD_RES_COLOR("interface/wind_color_min"),
                                LOAD_RES_COLOR("interface/wind_color_max"));
   wind_bar.InitVal(0, -100, 100);
@@ -136,11 +126,11 @@ Interface::Interface()
   wind_bar.background_color.SetColor(0, 0, 0, 0);
   //wind_bar.value_color = c_red;
 
-  wind_bar.SetReferenceValue (true, 0);
+  wind_bar.SetReferenceValue(true, 0);
 
   // strength bar initialisation
-  weapon_strength_bar.InitPos (0, 0, 300, 15);
-  weapon_strength_bar.InitVal (0, 0, 100);
+  weapon_strength_bar.InitPos(0, 0, 300, 15);
+  weapon_strength_bar.InitVal(0, 0, 100);
 
   weapon_strength_bar.SetValueColor(LOAD_RES_COLOR("interface/weapon_strength_bar_value"));
   weapon_strength_bar.SetBorderColor(LOAD_RES_COLOR("interface/weapon_strength_bar_border"));
@@ -152,8 +142,6 @@ Interface::Interface()
   m_camera_preview_color = LOAD_RES_COLOR("interface/camera_preview_color");
 
   m_playing_character_preview_color = LOAD_RES_COLOR("interface/playing_character_preview_color");
-
-  timer = new Text("0", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   t_team_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
@@ -322,8 +310,8 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos) const
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + 5*zoom,
-                          48*zoom+1.5f);
+  // The hardcoded values are from the wind indicator position in the image
+  Point2i wind_pos_offset(347*zoom, 48*zoom);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
@@ -335,15 +323,16 @@ void Interface::DrawSmallInterface() const
   Surface& window = GetMainWindow();
   int height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = height > 0 ? height : 0;
-  height = (height < small_background_interface.GetHeight()) ? height : small_background_interface.GetHeight();
-  Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth())>>1,
-                                   window.GetHeight() - height);
-  window.Blit(small_background_interface, small_interface_position);
-  DrawWindIndicator(small_interface_position + 3*MARGIN);
+  height = (height < small_interface.GetHeight()) ? height : small_interface.GetHeight();
+  Point2i position((window.GetWidth() - small_interface.GetWidth())>>1,
+                   window.GetHeight() - height);
+  window.Blit(small_interface, position);
+  // The wind indicator can be zoomed and no longer centered, so 
+  DrawWindIndicator(position + Point2i(9, 11)*zoom);
   if (display_timer) {
-    timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
+    timer->DrawLeftTop(position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
   }
-  GetWorld().ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
+  GetWorld().ToRedrawOnScreen(Rectanglei(position, small_interface.GetSize()));
 }
 
 // draw team energy
@@ -700,10 +689,10 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {
-      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth())>>1,
-                              window.GetHeight() - small_background_interface.GetHeight(),
-                              small_background_interface.GetWidth(),
-                              small_background_interface.GetHeight());
+      Rectanglei small_button((window.GetWidth() - small_interface.GetWidth())>>1,
+                              window.GetHeight() - small_interface.GetHeight(),
+                              small_interface.GetWidth(),
+                              small_interface.GetHeight());
       if (small_button.Contains(mouse_pos)) {
         return true;
       }
@@ -799,10 +788,10 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   } else {
     // Mini-interface drawn, check if we clicked on it
     if (ActiveTeam().IsLocalHuman()) {
-      Rectanglei small_button((window.GetWidth() - small_background_interface.GetWidth())>>1,
-                              window.GetHeight() - small_background_interface.GetHeight(),
-                              small_background_interface.GetWidth(),
-                              small_background_interface.GetHeight());
+      Rectanglei small_button((window.GetWidth() - small_interface.GetWidth())>>1,
+                              window.GetHeight() - small_interface.GetHeight(),
+                              small_interface.GetWidth(),
+                              small_interface.GetHeight());
       if (small_button.Contains(mouse_pos)) {
         return true;
       }

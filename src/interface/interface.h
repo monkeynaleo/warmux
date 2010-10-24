@@ -44,8 +44,6 @@ class Profile;
 #undef interface
 #endif
 
-#define PRERENDER  1
-
 class Interface : public Singleton<Interface>
 {
 public:
@@ -82,13 +80,9 @@ private:
   WeaponStrengthBar weapon_strength_bar;
 
   Surface game_menu;
-  Surface small_background_interface;
+  Surface small_interface;
   Sprite *clock, *clock_normal, *clock_emergency;
   int     clock_width;
-#if !PRERENDER
-  Surface wind_icon;
-#endif
-  Surface wind_indicator;
   Point2i bottom_bar_pos;
   int last_width;
   float zoom;
