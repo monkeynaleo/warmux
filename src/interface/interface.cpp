@@ -49,14 +49,14 @@
 void Interface::LoadDataInternal(Profile *res)
 {
   Surface tmp     = LOAD_RES_IMAGE("interface/background_interface");
-  Double  zoom    = 1.0;
-
+ 
+  zoom            = 1.0f;
   clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
   last_width = AppWormux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
-    zoom = last_width / Double(tmp.GetWidth()+20);
+    zoom = last_width / (float)(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
     shoot = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
 #if !PRERENDER
@@ -115,6 +115,7 @@ Interface::Interface()
   , display_minimap(true)
   , energy_bar(NULL)
   , clock(NULL)
+  , zoom(1.0f)
   , minimap(NULL)
   , m_last_minimap_redraw(0)
   , m_last_preview_size(0, 0)
@@ -312,22 +313,18 @@ void Interface::DrawClock(const Point2i &time_pos) const
 }
 
 // draw wind indicator
-void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const
+void Interface::DrawWindIndicator(const Point2i &wind_bar_pos) const
 {
-  int height = (draw_icon) ? 48 - wind_indicator.GetHeight() : MARGIN;
-
-  // draw wind indicator
-  Point2i tmp = wind_bar_pos + Point2i(2, 2+height);
-  wind_bar.DrawXY(tmp);
-  GetWorld().ToRedrawOnScreen(Rectanglei(tmp, wind_bar.GetSize()));
+  wind_bar.DrawXY(wind_bar_pos);
+  GetWorld().ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_bar.GetSize()));
 }
 
 // display wind info
 void Interface::DrawWindInfo() const
 {
-  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
-                          (game_menu.GetHeight() - 48)>>1);
-  DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
+  Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + MARGIN+1,
+                          48*zoom+2.5f);
+  DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
 // draw mini info when hidding interface
@@ -342,7 +339,7 @@ void Interface::DrawSmallInterface() const
   Point2i small_interface_position((window.GetWidth() - small_background_interface.GetWidth())>>1,
                                    window.GetHeight() - height);
   window.Blit(small_background_interface, small_interface_position);
-  DrawWindIndicator(small_interface_position + 2*MARGIN, false);
+  DrawWindIndicator(small_interface_position + 2*MARGIN);
   if (display_timer) {
     timer->DrawLeftTop(small_interface_position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
   }
@@ -668,7 +665,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
+        Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
@@ -743,7 +740,7 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mou
       // Positions are somewhat from Interface::DrawWeaponInfo()
       Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                  game_menu.GetHeight());
-      Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
+      Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
 
       Rectanglei weapon_button(TL, BR-TL);
       // Check if we clicked the weapon icon: toggle weapon menu
@@ -779,7 +776,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
         // Positions are somewhat from Interface::DrawWeaponInfo()
         Point2i BR((game_menu.GetWidth() - clock_width)>>1,
                    game_menu.GetHeight());
-        Point2i TL(((game_menu.GetWidth()- 48)>>1) - clock_width - 6, 0);
+        Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
 
         Rectanglei weapon_button(TL, BR-TL);
         // Check if we clicked the weapon icon: toggle weapon menu
