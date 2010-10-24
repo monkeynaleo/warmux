@@ -89,6 +89,17 @@ HelpMenu::HelpMenu()
   w->AddCaption(_("Click/wheelmouse to change map"), 466, 334, 238); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Game menu"), w);
 
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/minimap", Font::FONT_BIG);
+  w->AddCaption(_("A circle indicates the active character"), 612, 114, 159);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Frames per second indicator"), 499, 29, 220);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Area currently displayed"), 82, 119, 161);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of the other characters"), 227, 271, 217);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of bonus boxes or medkits"), 448, 251, 211);// TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Minimap"), w);
+
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/game_mode", Font::FONT_LARGE);
