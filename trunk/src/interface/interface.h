@@ -44,6 +44,8 @@ class Profile;
 #undef interface
 #endif
 
+#define PRERENDER  1
+
 class Interface : public Singleton<Interface>
 {
 public:
@@ -83,7 +85,9 @@ private:
   Surface small_background_interface;
   Sprite *clock, *clock_normal, *clock_emergency;
   int     clock_width;
+#if !PRERENDER
   Surface wind_icon;
+#endif
   Surface wind_indicator;
   Point2i bottom_bar_pos;
   int last_width;
