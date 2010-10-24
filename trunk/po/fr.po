@@ -1,4 +1,5 @@
 # translation of fr.po to
+# translation of fr.po to
 # Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
@@ -7,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-24 07:51+0200\n"
+"POT-Creation-Date: 2010-10-24 08:01+0200\n"
 "PO-Revision-Date: 2010-09-29 22:24+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -631,8 +632,12 @@ msgid ""
 "Character name.\n"
 "Character energy.\n"
 "Team name.\n"
-"Player name.\n"
+"Player name."
 msgstr ""
+"Nom du personnage.\n"
+"Energie du personnage.\n"
+"Nom de l'équipe.\n"
+"Nom du joueur."
 
 #: src/menu/options_menu.cpp:183
 msgid "Character names:"
@@ -930,7 +935,7 @@ msgstr "Impossible d'ouvrir le fichier temporaire: %s"
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:136
 msgid "Fire your weapon!"
-msgstr ""
+msgstr "Faire feu avec votre arme!"
 
 #: src/weapon/flamethrower.cpp:135
 msgid "Flame Thrower"
@@ -1118,9 +1123,8 @@ msgstr "Initialisation des équipes"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:137
-#, fuzzy
 msgid "Interface"
-msgstr "Afficher l'interface"
+msgstr "Interface"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:125
@@ -1651,9 +1655,8 @@ msgstr "Sélectionne la catégorie 8 d'armes"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:134
-#, fuzzy
 msgid "Selected weapon and ammo left"
-msgstr "Sélectionne la catégorie 8 d'armes"
+msgstr "Arme sélectionnée et munitions restantes"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Server address:"
@@ -1826,11 +1829,6 @@ msgstr "Parler dans la bataille en réseau"
 msgid "Team graphs"
 msgstr "Graphes"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:133
-msgid "Team in ordre of decreasing energy"
-msgstr ""
-
 #: src/menu/results_menu.cpp:304
 msgid "Team stats"
 msgstr "Statistiques"
@@ -1843,6 +1841,11 @@ msgstr "Équipes"
 #: src/menu/options_menu.cpp:220
 msgid "Teams editor"
 msgstr "Éditeur d'équipe"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:133
+msgid "Teams in decreasing order of energy"
+msgstr "Equipes en ordre décroisssant d'énergie"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1959,10 +1962,13 @@ msgstr "Temps"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:132
+#, fuzzy
 msgid ""
 "Time left in this turn.\n"
-"Time elapsed since game start.\n"
+"Time elapsed since game start."
 msgstr ""
+"Temps restant dans ce tour.\n"
+"Temps écoulé depuis le début de la partie."
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
 msgid ""
@@ -1990,11 +1996,12 @@ msgstr ""
 
 #. TRANSLATORS: please keep this help for Android smartphones short!
 #: src/menu/help_menu.cpp:111
+#, fuzzy
 msgid ""
 "To jump, press space or trackball or dpad center.\n"
 "To aim or move more slowly, use shift/vol+.\n"
 "To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it.\n"
+"Click a character from your team to select it."
 msgstr ""
 "Pour sauter, pressez espace ou le centre du trackball ou du dpad.\n"
 "Pour viser ou bouger plus lentement, pressez shift ou vol+.Pour mettre en "
@@ -2003,11 +2010,12 @@ msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:117
+#, fuzzy
 msgid ""
 "To jump, press space.\n"
 "To aim or move more slowly, use shift.\n"
 "To pause, click the clock or press escape.\n"
-"Click a character from your team to select it.\n"
+"Click a character from your team to select it."
 msgstr ""
 "Pour sauter, pressez espace.\n"
 "Pour viser ou bouger plus lentement, pressez shift.Pour mettre en pause, "
@@ -2170,7 +2178,7 @@ msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
 #: src/menu/help_menu.cpp:97
 #, fuzzy
 msgid "When a character can be switched"
-msgstr "Sur un personnage : change le personnage actif"
+msgstr "Quand un personnage peut être sélectionné"
 
 #: src/menu/options_menu.cpp:92
 msgid "Wind particles?"
@@ -2179,7 +2187,7 @@ msgstr "Particules du vent ?"
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:135
 msgid "Wind strength and direction"
-msgstr ""
+msgstr "Force et direction du vent"
 
 #: src/menu/results_menu.cpp:272
 msgid "Winner"
