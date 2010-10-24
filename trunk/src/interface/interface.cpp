@@ -459,9 +459,12 @@ void Interface::DrawMapPreview()
     if ((*object)->GetName()=="medkit" || (*object)->GetName()=="bonus_box") {
       ObjBox* box = static_cast<ObjBox*>(*object);
       Surface* icon = box->GetIcon();
- 
-      coord = GetWorld().ground.PreviewCoordinates(box->GetPosition()) + offset;
-      window.Blit(*icon, coord - (icon->GetSize()>>1));
+
+      // The real icon 
+      coord = GetWorld().ground.PreviewCoordinates(box->GetPosition())
+            + offset - Point2i(icon->GetWidth()>>1, (3*icon->GetHeight())>>2);
+      window.Blit(*icon, coord);
+      GetWorld().ToRedrawOnScreen(Rectanglei(coord, icon->GetSize()));
     }
   }
 
@@ -478,7 +481,8 @@ void Interface::DrawMapPreview()
       }
 
       coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
-      window.Blit(icon, coord - (icon.GetSize()>>1));
+      Point2i icoord = coord - (icon.GetSize()>>1);
+      window.Blit(icon, icoord);
 
       if (character->IsActiveCharacter()) {
         uint radius = (icon.GetSize().x < icon.GetSize().y) ? icon.GetSize().y : icon.GetSize().x;
@@ -486,7 +490,7 @@ void Interface::DrawMapPreview()
         window.CircleColor(coord.x, coord.y, radius, m_playing_character_preview_color);
         GetWorld().ToRedrawOnScreen(Rectanglei(coord.x-radius-1, coord.y-radius-1, 2*radius+2, 2*radius+2));
       } else {
-        GetWorld().ToRedrawOnScreen(Rectanglei(coord - (icon.GetSize()>>1), icon.GetSize()));
+        GetWorld().ToRedrawOnScreen(Rectanglei(icoord, icon.GetSize()));
       }
 
     }
