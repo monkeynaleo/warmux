@@ -224,7 +224,6 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
 
     // Either it's out of the menu, or we want to know how long the click was
     click_pos = pos;
-    printf("Setting click position: (%i,%i)\n", click_pos.GetX(), click_pos.GetY());
     long_click_timer = SDL_AddTimer(LONG_CLICK_DURATION, HandleLongClick, this);
     return true;
   }
