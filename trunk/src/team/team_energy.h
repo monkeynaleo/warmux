@@ -75,56 +75,50 @@ public:
 
 class TeamEnergy
 {
-  private :
-    /* If you need this, implement it (correctly) */
-    TeamEnergy(const TeamEnergy&);
-    TeamEnergy operator=(const TeamEnergy&);
-    /**********************************************/
+  EnergyBar * energy_bar;
+  // displayed value
+  uint        value;
+  // team value
+  uint        new_value;
+  // initial energy
+  uint        max_value;
 
-    EnergyBar * energy_bar;
-    // displayed value
-    uint        value;
-    // team value
-    uint        new_value;
-    // initial energy
-    uint        max_value;
+  Team        *team;
+  Sprite      *icon;
+  Text        *t_team_energy;
 
-    Team        *team;
-    Sprite      *icon;
-    Text        *t_team_energy;
+  int         dx;
+  int         dy;
 
-    int         dx;
-    int         dy;
+  uint        rank;
+  uint        new_rank;
 
-    uint        rank;
-    uint        new_rank;
+  std::string team_name;
 
-    std::string team_name;
+  uint        move_start_time;
 
-    uint        move_start_time;
+public :
+  uint        rank_tmp;
+  energy_t    status;
+  EnergyList  energy_list;
 
-  public :
-    uint        rank_tmp;
-    energy_t    status;
-    EnergyList  energy_list;
+  TeamEnergy(Team * _team);
+  ~TeamEnergy();
+  void Config(uint _current_energy, uint _max_energy);
 
-    TeamEnergy(Team * _team);
-    ~TeamEnergy();
-    void Config(uint _current_energy, uint _max_energy);
+  void Refresh();
+  void Draw(const Point2i& pos);
 
-    void Refresh();
-    void Draw(const Point2i& pos);
+  void SetIcon(const Surface & icon);
+  void SetValue(uint new_energy);
 
-    void SetIcon(const Surface & icon);
-    void SetValue(uint new_energy);
-
-    void SetRanking(uint value) { rank = new_rank = value; }
-    void NewRanking(uint value) { new_rank = value; }
-    // Move energy bar (change ranking)
-    void Move();
-    bool IsMoving() const { return (dx!=0 || dy!=0); }
-    // Move energy bar immediatly to its destination
-    void FinalizeMove();
+  void SetRanking(uint value) { rank = new_rank = value; }
+  void NewRanking(uint value) { new_rank = value; }
+  // Move energy bar (change ranking)
+  void Move();
+  bool IsMoving() const { return (dx!=0 || dy!=0); }
+  // Move energy bar immediatly to its destination
+  void FinalizeMove();
 };
 
 #endif /* TEAM_ENERGY_H */
