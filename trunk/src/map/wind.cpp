@@ -87,7 +87,8 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
     flipped = NULL;
   }
 
-  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
+  bool has_rotation = GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero();
+  if (has_rotation) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
@@ -97,15 +98,19 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
     }
   } else {
     sprite->EnableLastFrameCache();
-    if (flipped) {
+    if (flipped)
       flipped->EnableLastFrameCache();
-    }
   }
 
   // Now that caches have been set, refresh
   sprite->RefreshSurface();
-  if (flipped)
-   flipped->RefreshSurface();
+  if (!has_rotation)
+    sprite->ForceDisplayFormat();
+  if (flipped) {
+    flipped->RefreshSurface();
+    if (!has_rotation)
+      flipped->ForceDisplayFormat();
+  }
 }
 
 WindParticle::~WindParticle()
