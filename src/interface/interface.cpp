@@ -42,6 +42,7 @@
 
 #define BORDER_POSITION 5
 #define MARGIN          4
+#define WIND_ICON_WIDTH 79
 
 void Interface::LoadDataInternal(Profile *res)
 {
@@ -56,7 +57,9 @@ void Interface::LoadDataInternal(Profile *res)
     zoom = last_width / Double(tmp.GetWidth()+20);
     game_menu = tmp.RotoZoom(0.0, zoom, zoom);
     shoot = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
+#if !PRERENDER
     wind_icon = LOAD_RES_IMAGE("interface/wind").RotoZoom(0.0, zoom, zoom);
+#endif
     wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
@@ -66,17 +69,21 @@ void Interface::LoadDataInternal(Profile *res)
   else {
     game_menu = tmp;
     shoot = LOAD_RES_IMAGE("interface/shoot");
+#if !PRERENDER
     wind_icon = LOAD_RES_IMAGE("interface/wind");
+#endif
     wind_indicator = LOAD_RES_IMAGE("interface/wind_indicator");
   }
   clock_width = 70*zoom;
   small_background_interface = LOAD_RES_IMAGE("interface/small_background_interface");
 
+#if !PRERENDER
   // Pre-render interface + wind-indicator
   Point2i wind_pos(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
                    (game_menu.GetHeight() - wind_icon.GetHeight())>>1);
   game_menu.Blit(wind_icon, wind_pos);
   game_menu.Blit(wind_indicator, wind_pos + Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight()));
+#endif
 
   // energy bar
   if (energy_bar)
@@ -305,7 +312,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
 // draw wind indicator
 void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const
 {
-  int height = (draw_icon) ? wind_icon.GetHeight() - wind_indicator.GetHeight() : MARGIN;
+  int height = (draw_icon) ? 48 - wind_indicator.GetHeight() : MARGIN;
 
   // draw wind indicator
   Point2i tmp = wind_bar_pos + Point2i(2, 2+height);
@@ -317,7 +324,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 void Interface::DrawWindInfo() const
 {
   Point2i wind_pos_offset(((game_menu.GetWidth() + clock_width)>>1) + MARGIN,
-                          (game_menu.GetHeight() - wind_icon.GetHeight())>>1);
+                          (game_menu.GetHeight() - 48)>>1);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
 
@@ -343,7 +350,7 @@ void Interface::DrawSmallInterface() const
 // draw team energy
 void Interface::DrawTeamEnergy() const
 {
-  Point2i team_bar_offset(((game_menu.GetWidth()+clock_width)>>1) + wind_icon.GetWidth(),
+  Point2i team_bar_offset(((game_menu.GetWidth()+clock_width)>>1) + WIND_ICON_WIDTH,
                           (game_menu.GetHeight() - 50)>>1);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
