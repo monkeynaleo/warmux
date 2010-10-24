@@ -89,6 +89,7 @@ class TeamEnergy
 
   int         dx;
   int         dy;
+  int         height;
 
   uint        rank;
   uint        new_rank;
@@ -119,6 +120,7 @@ public :
   bool IsMoving() const { return (dx!=0 || dy!=0); }
   // Move energy bar immediatly to its destination
   void FinalizeMove();
+  void SetHeight(uint height);
 };
 
 #endif /* TEAM_ENERGY_H */
