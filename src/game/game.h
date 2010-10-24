@@ -189,5 +189,6 @@ public:
   static Menu* GetCurrentMenu() { return menu; }
   const std::vector< std::pair<float,float> >& GetBenchResults() const { return bench_res; }
 
+  float GetLastFrameRate() const;
 };
 #endif // GAME_H

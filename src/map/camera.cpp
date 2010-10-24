@@ -46,7 +46,7 @@ static const Point2f MAX_CAMERA_ACCELERATION(1.5,1.5);
 #define REALTIME_FOLLOW_FACTOR 0.15
 
 #define ANTICIPATION               18
-#define ADVANCE_ANTICIPATION       30
+#define ADVANCE_ANTICIPATION       20
 #define SPEED_REACTIVITY_CEIL       4
 #define SCROLL_KEYBOARD            20 // pixel
 #define REALTIME_FOLLOW_LIMIT      25
@@ -137,8 +137,8 @@ void Camera::AutoCrop()
      */
     obj_pos = followed_object->GetCenter();
 
-    if (obj_pos > GetPosition() + (GetSize() / 7) &&
-        obj_pos < GetPosition() + ((6 * GetSize()) / 7)) {
+    if (obj_pos > GetPosition() + (GetSize()>>3) &&
+        obj_pos < GetPosition() + ((7 * GetSize())>>3)) {
       if (m_stop)
         stop = true;
 
@@ -149,14 +149,15 @@ void Camera::AutoCrop()
     target = obj_pos;
 
     if (followed_object->IsMoving()) {
-      Point2d anticipation = followed_object->GetSpeed() * ADVANCE_ANTICIPATION;
+      Double time_delta = 1000 / (Double)Game::GetInstance()->GetLastFrameRate();
+      Point2d anticipation = followed_object->GetSpeed() * time_delta;
 
       //limit anticipation to screen size/3
       Point2d anticipation_limit = GetSize()/3;
       target += anticipation.clamp(-anticipation_limit, anticipation_limit);
     }
 
-    target -= GetSize()/2;
+    target -= GetSize()>>1;
 
   } else {
     target = GetPosition();
