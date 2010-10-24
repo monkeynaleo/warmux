@@ -33,6 +33,8 @@
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "object/objects_list.h"
+#include "object/objbox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/resource_manager.h"
@@ -454,6 +456,18 @@ void Interface::DrawMapPreview()
 
   Point2i coord;
 
+  // Add objects like medkits or bonus boxes
+  FOR_EACH_OBJECT(object) {
+    if ((*object)->GetName()=="medkit" || (*object)->GetName()=="bonus_box") {
+      ObjBox* box = static_cast<ObjBox*>(*object);
+      Surface* icon = box->GetIcon();
+ 
+      coord = GetWorld().ground.PreviewCoordinates(box->GetPosition()) + offset;
+      window.Blit(*icon, coord - (icon->GetSize()>>1));
+    }
+  }
+
+  // Add team characters
   FOR_EACH_TEAM(team) {
     const Surface & icon = (*team)->GetMiniFlag();
 

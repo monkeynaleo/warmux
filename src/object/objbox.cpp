@@ -51,6 +51,8 @@ const uint SPEED = 5; // meter / seconde
 
 ObjBox::ObjBox(const std::string &name)
   : PhysicalObj(name)
+  , icon(NULL)
+  , icon_index(-1)
 {
   m_allow_negative_y = true;
 
@@ -58,7 +60,7 @@ ObjBox::ObjBox(const std::string &name)
 
   m_energy = start_life_points;
 
-  SetSpeed (SPEED, HALF_PI);
+  SetSpeed(SPEED, HALF_PI);
   SetCollisionModel(true, false, true);
   JukeBox::GetInstance()->Play("default","box/falling");
 }
@@ -66,6 +68,7 @@ ObjBox::ObjBox(const std::string &name)
 ObjBox::~ObjBox()
 {
   delete anim;
+  if (icon) delete icon;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
 
@@ -159,7 +162,16 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
   Explode();
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
+Surface* ObjBox::GetIcon()
+{
+  int new_index = anim->GetCurrentFrame();
+  if (new_index != icon_index) {
+    if (icon) delete icon;
+    icon_index = new_index;
+    icon = new Surface((*anim)[new_index].surface.RotoZoom(ZERO, 0.4, 0.4));
+  }
+  return icon;
+}
+
 // Static methods
 int ObjBox::start_life_points = 41;

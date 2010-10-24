@@ -28,6 +28,7 @@
 class Team;
 class Character;
 class Sprite;
+class Surface;
 typedef struct _xmlNode xmlNode;
 class Action;
 
@@ -50,9 +51,13 @@ public:
   virtual void Randomize() {};
   virtual void ApplyBonus(Character *) {};
 
+  Surface* GetIcon();
+
 protected:
   bool parachute;
   Sprite *anim;
+  Surface* icon;
+  int icon_index;
   static int start_life_points;
   void Explode();
 

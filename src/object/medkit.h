@@ -32,18 +32,17 @@ class Action;
 
 class Medkit : public ObjBox//public PhysicalObj
 {
-  private:
-    //static bool enable;
-    static int nbr_health;
-    //static int start_life_points;
+  //static bool enable;
+  static int nbr_health;
+  //static int start_life_points;
 
-  private:
-    void ApplyMedkit(Team &team, Character &character) const;
-  public:
-    Medkit();
+private:
+  void ApplyMedkit(Team &team, Character &character) const;
+public:
+  Medkit();
 
-    static void LoadXml(const xmlNode * object);
-    void ApplyBonus(Character *);
+  static void LoadXml(const xmlNode * object);
+  void ApplyBonus(Character *);
 };
 
 //-----------------------------------------------------------------------------
