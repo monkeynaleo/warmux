@@ -209,9 +209,9 @@ Character::Character(const Character& acharacter) :
                              acharacter.energy_bar->GetY(),
                              acharacter.energy_bar->GetWidth(),
                              acharacter.energy_bar->GetHeight(),
-                             acharacter.energy_bar->GetVal(),
-                             acharacter.energy_bar->GetMinVal(),
-                             acharacter.energy_bar->GetMaxVal());
+                             acharacter.energy_bar->GetCurrentValue(),
+                             acharacter.energy_bar->GetMinValue(),
+                             acharacter.energy_bar->GetMaxValue());
   energy_bar->SetBorderColor(black_color);
   energy_bar->SetBackgroundColor(gray_color);
   SetEnergy(GameMode::GetInstance()->character.init_energy, NULL);
