@@ -105,6 +105,7 @@ public:
                        uint y, 
                        uint width, 
                        uint height);
+  virtual void SetHeight(uint height) { InitPos(x, y, image.GetWidth(), height); }
 
   // Initialise les valeurs
   void InitVal(int val, 

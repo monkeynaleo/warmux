@@ -83,10 +83,8 @@ void ProgressBar::SetMinMaxValueColor(const Color & min,
   colorMax.SetAlpha(SDL_ALPHA_OPAQUE);
 }
 
-void ProgressBar::InitPos(uint px,
-                          uint py,
-        uint pwidth,
-        uint pheight)
+void ProgressBar::InitPos(uint px, uint py,
+                          uint pwidth, uint pheight)
 {
   assert(3 <= pwidth);
   assert(3 <= pheight);

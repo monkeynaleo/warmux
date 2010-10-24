@@ -31,15 +31,14 @@
 #include "team/teams_list.h"
 #include "include/app.h"
 
-const uint BAR_WIDTH = 13;
-const uint BAR_SPACING = 20;
-const uint BAR_HEIGHT = 44;
+#define   BAR_WIDTH       13
+#define   BAR_SPACING     16
 
 #define   ALPHA           127
 #define   BACK_ALPHA      0
 #define   BACKGROUND_GREY (255*6)/10
 
-#define MOVE_DURATION  750.0
+#define MOVE_DURATION     750.0
 
 void EnergyList::Reset()
 {
@@ -73,6 +72,7 @@ TeamEnergy::TeamEnergy(Team * _team)
                            Font::FONT_SMALL, Font::FONT_BOLD, false))
   , dx(0)
   , dy(0)
+  , height(44)
   , rank(0)
   , new_rank(0)
   , team_name("not initialized")
@@ -80,7 +80,7 @@ TeamEnergy::TeamEnergy(Team * _team)
   , rank_tmp(0)
   , status(EnergyStatusOK)
 {
-  energy_bar = new EnergyBar(0, 0, BAR_WIDTH, BAR_HEIGHT,
+  energy_bar = new EnergyBar(0, 0, BAR_WIDTH, height,
                              0, 0, 100, ProgressBar::PROG_BAR_VERTICAL);
 
   energy_bar->SetBorderColor(Color(255));
@@ -114,7 +114,8 @@ void TeamEnergy::SetIcon(const Surface & new_icon)
     delete icon;
   icon = new Sprite(new_icon, true);
   icon->EnableLastFrameCache();
-  icon->Scale(0.8, 0.8);
+
+  icon->ScaleSize(height/3, height/3);
 }
 
 void TeamEnergy::Refresh()
@@ -153,8 +154,8 @@ void TeamEnergy::Refresh()
 void TeamEnergy::Draw(const Point2i& pos)
 {
   energy_bar->Actu(value);
-  Point2i tmp = pos + Point2i(rank * (BAR_WIDTH + BAR_SPACING) + dx, 0);
-  energy_bar->DrawXY(tmp + Point2i(BAR_SPACING/2-1, dy+1+icon->GetHeight()));
+  Point2i tmp = pos + Point2i(rank * (BAR_WIDTH + BAR_SPACING) + dx, dy);
+  energy_bar->DrawXY(tmp + Point2i(BAR_SPACING/2-3, dy+icon->GetHeight()));
   icon->DrawXY(tmp);
 }
 
@@ -188,7 +189,7 @@ void TeamEnergy::Move()
       move_start_time = global_time->Read();
 
     dx = 0.5f*(BAR_WIDTH + BAR_SPACING)*(new_rank - rank)*(global_time->Read() - move_start_time) / MOVE_DURATION;
-    dy = 0.5f*BAR_HEIGHT * (rank-new_rank) * sin((global_time->Read() - move_start_time)*M_PI/MOVE_DURATION);
+    dy = 0.5f*height*(rank-new_rank) * sin((global_time->Read() - move_start_time)*M_PI/MOVE_DURATION);
 
     // End of movement ?
     if( ((long)global_time->Read() - (long)move_start_time) > (long)MOVE_DURATION)
@@ -209,4 +210,13 @@ void TeamEnergy::FinalizeMove()
   move_start_time = 0;
   status = EnergyStatusWait;
   return;
+}
+
+void TeamEnergy::SetHeight(uint h)
+{
+  if (h==height)
+    return;
+  icon->ScaleSize(h/3, h/3);
+  height = h;
+  energy_bar->SetHeight((2*h)/3-2);
 }

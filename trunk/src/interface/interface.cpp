@@ -355,6 +355,7 @@ void Interface::DrawTeamEnergy() const
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
       team->GetEnergyBar().FinalizeMove();
+    team->GetEnergyBar().SetHeight(game_menu.GetHeight());
     team->DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
 }
