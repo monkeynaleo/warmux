@@ -157,7 +157,7 @@ void PictureWidget::SetSurface(const Surface & s,
   picture_size = s.GetSize();
   spr = new Sprite(s, antialiasing);
   spr->EnableLastFrameCache();
-  ApplyScaling(type);
+  //ApplyScaling(type);
 }
 
 void PictureWidget::SetNoSurface()
