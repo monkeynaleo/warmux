@@ -130,7 +130,7 @@ HelpMenu::HelpMenu()
                        "help/interface", Font::FONT_LARGE);
   w->AddCaption(_("Character name.\nCharacter energy.\nTeam name.\nPlayer name."), 163, 101, 302); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Time left in this turn.\nTime elapsed since game start."), 473, 101, 262); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Team in ordre of decreasing energy"), 763, 103, 200); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Teams in decreasing order of energy"), 763, 103, 200); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Selected weapon and ammo left"), 352, 635, 255); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Wind strength and direction"), 616, 635, 245); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Fire your weapon!"), 866, 635, 221); // TRANSLATORS: please be imaginative and keep it short!
