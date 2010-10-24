@@ -77,7 +77,7 @@ protected:
   // Other physics constants stored there :
   ObjectConfig m_cfg;
 public:
-  Physics ();
+  Physics();
   virtual ~Physics () {};
 
   // Set/Get position

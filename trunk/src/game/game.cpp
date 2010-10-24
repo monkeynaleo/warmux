@@ -1153,3 +1153,8 @@ void Game::UpdateTranslation()
 {
   weapons_list->UpdateTranslation();
 }
+
+float Game::GetLastFrameRate() const
+{
+  return fps->GetLastValue();
+}
