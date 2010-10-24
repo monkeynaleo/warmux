@@ -145,7 +145,7 @@ void PictureWidget::ApplyScaling(ScalingType t)
 }
 
 void PictureWidget::SetSurface(const Surface & s,
-                               ScalingType type,
+                               ScalingType type_,
                                bool antialiasing)
 {
   NeedRedrawing();
@@ -157,7 +157,8 @@ void PictureWidget::SetSurface(const Surface & s,
   picture_size = s.GetSize();
   spr = new Sprite(s, antialiasing);
   spr->EnableLastFrameCache();
-  //ApplyScaling(type);
+  // Don't call immediately ApplyScaling(type) to save on rotozooms
+  type = type_;
 }
 
 void PictureWidget::SetNoSurface()
