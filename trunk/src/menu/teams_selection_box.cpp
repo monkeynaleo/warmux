@@ -64,7 +64,6 @@ void TeamScrollBox::SetNbTeams(uint nb)
   if (nb < count) {
     count = 0;
     vbox->Empty();
-    NeedRedrawing();
   }
 
   for (uint i=count; i<nb; i++)
@@ -73,6 +72,7 @@ void TeamScrollBox::SetNbTeams(uint nb)
 
   //printf("Set nb=%u\n", nb);
   Pack();
+  NeedRedrawing();
 }
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
