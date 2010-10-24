@@ -186,6 +186,7 @@
   <surface name="startgame_menu" file="menu/help_team_selection.jpg" />
   <surface name="interface" file="menu/help_interface.png" />
   <surface name="game_mode" file="menu/help_game_mode.jpg" />
+  <surface name="minimap" file="menu/help_minimap.png" />
 </section>
 
 <section name="object">
