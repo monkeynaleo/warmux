@@ -135,15 +135,15 @@ void Map::Dig(const Point2i& center, uint radius)
   to_redraw->push_back(Rectanglei(center - ra, 2*ra));
 }
 
-void Map::PutSprite(const Point2i& pos, const Sprite* spr)
+void Map::PutSprite(const Point2i& pos, Sprite* spr)
 {
   ground.PutSprite(pos, spr);
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
-void Map::MergeSprite(const Point2i& pos, const Sprite * spr)
+void Map::MergeSprite(const Point2i& pos, Sprite * spr)
 {
-  Surface tmp = spr->GetSurface();
+  Surface& tmp = spr->GetSurface();
   ground.MergeSprite(pos, tmp);
   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }

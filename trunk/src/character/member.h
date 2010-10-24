@@ -136,6 +136,7 @@ public:
   void SetPos(const Point2d & _pos) { pos = _pos; }
 
   const Sprite & GetSprite() const { return *spr; }
+  Sprite & GetSprite() { return *spr; }
   bool MustRefresh() const;
 
   Point2i GetPos() const { return Point2i(pos.x, pos.y); }

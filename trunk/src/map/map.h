@@ -116,9 +116,9 @@ public:
   void Dig(const Point2i& center, uint radius);
 
   // Insert a sprite into the ground
-  void PutSprite(const Point2i& pos, const Sprite* spr);
+  void PutSprite(const Point2i& pos, Sprite* spr);
   // Merge a sprite into the ground
-  void MergeSprite(const Point2i& pos, const Sprite* spr);
+  void MergeSprite(const Point2i& pos, Sprite* spr);
 
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }

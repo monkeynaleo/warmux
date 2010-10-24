@@ -186,7 +186,7 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
   return new TileItem_ColorKey24(ptr, stride, m_alpha_threshold);
 }
 
-void Tile::PutSprite(const Point2i& pos, const Sprite* spr)
+void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 {
   Rectanglei rec(pos, spr->GetSizeMax());
   uint8_t    bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
