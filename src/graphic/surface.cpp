@@ -97,55 +97,54 @@ void Surface::Free()
  */
 void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha)
 {
-  Uint32 alphaMask;
-  Uint32 redMask;
-  Uint32 greenMask;
-  Uint32 blueMask;
-
   if (autoFree)
     Free();
 
   const SDL_PixelFormat* fmt = SDL_GetVideoSurface()->format;
-
   // If no alpha, use default parameters
   if (!useAlpha) {
-    alphaMask = 0;
     surface = SDL_CreateRGBSurface(flags, size.x, size.y,
-                                   fmt->BitsPerPixel, 0, 0, 0, 0);
+                                   fmt->BitsPerPixel, fmt->Rmask, fmt->Gmask, fmt->Bmask, 0);
+  } else {
+    // Code below taken from SDL_DisplayFormatAlpha
+    // Why the default parameters to SDL_CreateRGBSurface when using 32bits are
+    // not equivalent to this !?
+    Uint32 amask = 0xff000000;
+    Uint32 rmask = 0x00ff0000;
+    Uint32 gmask = 0x0000ff00;
+    Uint32 bmask = 0x000000ff;
 
-    if (!surface)
-      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
- } else {
-    // Try using display format mask
-    if (fmt->BitsPerPixel >= 24) {
-      redMask   = fmt->Rmask;
-      greenMask = fmt->Gmask;
-      blueMask  = fmt->Bmask;
-    } else {
-#if SDL_BYTEORDER != SDL_LIL_ENDIAN
-      redMask   = 0xff000000;
-      greenMask = 0x00ff0000;
-      blueMask  = 0x0000ff00;
-#else
-      redMask   = 0x000000ff;
-      greenMask = 0x0000ff00;
-      blueMask  = 0x00ff0000;
-#endif
+    switch(fmt->BytesPerPixel) {
+    case 2:
+      /* For XGY5[56]5, use, AXGY8888, where {X, Y} = {R, B}.
+         For anything else (like ARGB4444) it doesn't matter
+         since we have no special code for it anyway */
+      if (fmt->Rmask == 0x1f && (fmt->Bmask==0xf800 || fmt->Bmask==0x7c00)) {
+        rmask = 0xff;
+        bmask = 0xff0000;
+      }
+      break;
+
+    case 3:
+    case 4:
+      /* Keep the video format, as long as the high 8 bits are
+         unused or alpha */
+      if (fmt->Rmask == 0xff && fmt->Bmask == 0xff0000) {
+        rmask = 0xff;
+        bmask = 0xff0000;
+      }
+      break;
+
+    default:
+      /* We have no other optimised formats right now. When/if a new
+         optimised alpha format is written, add the converter here */
+      break;
     }
-
-    // Use the mask most obvious from the others masks
-    if (redMask==0xff || blueMask==0xff || greenMask==0xff)
-      alphaMask = 0xff000000;
-    else
-      alphaMask = 0x000000ff;
-
-    surface = SDL_CreateRGBSurface(flags, size.x, size.y, 32,
-                                   redMask, greenMask, blueMask, alphaMask);
-
-
-    if (!surface)
-      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());
+    surface = SDL_CreateRGBSurface(flags|SDL_SRCALPHA, size.x, size.y, 32,
+                                   rmask, gmask, bmask, amask);
   }
+  if (!surface)
+    Error(std::string("Can't create SDL RGB(A) surface: ") + SDL_GetError());
 }
 
 /**
@@ -685,14 +684,15 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
   return surface->format->Amask ? Surface(surf).DisplayFormatAlpha() : Surface(surf).DisplayFormat();
 }
 
-/**
- *
- */
 Surface Surface::DisplayFormatAlpha()
 {
   if (surface->format->BitsPerPixel == 24)
     return DisplayFormat();
 
+  const SDL_PixelFormat *fo = SDL_GetVideoSurface()->format,
+                        *fi = surface->format;
+  if (fi->Rmask==fo->Rmask && fi->Bmask==fo->Bmask && fi->Amask==fo->Amask)
+    return *this;
   SDL_Surface *surf = SDL_DisplayFormatAlpha(surface);
 
   if (!surf)
@@ -701,11 +701,13 @@ Surface Surface::DisplayFormatAlpha()
   return Surface(surf);
 }
 
-/**
- *
- */
 Surface Surface::DisplayFormat()
 {
+  const SDL_PixelFormat *fo = SDL_GetVideoSurface()->format,
+                        *fi = surface->format;
+  if (fi->Rmask==fo->Rmask && fi->Bmask==fo->Bmask && fi->Amask==0)
+    return *this;
+
   SDL_Surface *surf = SDL_DisplayFormat(surface);
 
   if (!surf)
@@ -854,4 +856,12 @@ Surface Surface::DisplayFormatColorKey(uint8_t alpha_threshold)
                                       surface->w, surface->h, surface->pitch, alpha_threshold);
   Unlock();
   return tmp;
+}
+
+Surface Surface::Crop(const Rectanglei& area) const
+{
+  Surface sub(area.GetSize(), SDL_SWSURFACE, surface->format->Amask!=0);
+  SDL_SetAlpha(surface, 0, 0);
+  sub.Blit(*this, -area.GetPosition());
+  return sub;
 }
