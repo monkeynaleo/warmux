@@ -26,11 +26,11 @@
 
 class Bazooka : public WeaponLauncher
 {
- public:
+public:
   Bazooka();
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
   void UpdateTranslationStrings();
- protected:
+protected:
   WeaponProjectile * GetProjectileInstance();
 };
 

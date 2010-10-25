@@ -30,24 +30,24 @@ struct target_t;
 
 class AutomaticBazooka : public WeaponLauncher
 {
-  target_t       *m_target;
-  public:
-    AutomaticBazooka();
-    ~AutomaticBazooka();
-    void Draw ();
-    bool IsReady() const;
-    virtual void ChooseTarget(Point2i mouse_pos);
-    AutomaticBazookaConfig &cfg();
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-  protected:
-    void Refresh();
-    void p_Select();
-    void p_Deselect();
+target_t       *m_target;
+public:
+  AutomaticBazooka();
+  ~AutomaticBazooka();
+  void Draw ();
+  bool IsReady() const;
+  virtual void ChooseTarget(Point2i mouse_pos);
+  AutomaticBazookaConfig &cfg();
+  void UpdateTranslationStrings();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
+protected:
+  void Refresh();
+  void p_Select();
+  void p_Deselect();
 
-    void DrawTarget() const;
+  void DrawTarget() const;
 
-    WeaponProjectile * GetProjectileInstance();
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif /* AUTO_BAZOOKA_H */

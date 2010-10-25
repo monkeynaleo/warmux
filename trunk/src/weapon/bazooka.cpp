@@ -32,7 +32,6 @@
 
 class BazookaRocket : public WeaponProjectile
 {
-private:
   ParticleEngine smoke_engine;
   SoundSample flying_sound;
 public:
@@ -46,7 +45,7 @@ protected:
 };
 
 BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
-                                 WeaponLauncher * p_launcher) :
+                             WeaponLauncher * p_launcher) :
   WeaponProjectile ("rocket", cfg,p_launcher), smoke_engine(20)
 {
   explode_colliding_character = true;
@@ -55,11 +54,10 @@ BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
 void BazookaRocket::Refresh()
 {
   WeaponProjectile::Refresh();
-  if(!IsDrowned())
-  {
+  if (!IsDrowned()) {
     image->SetRotation_rad(GetSpeedAngle());
-    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+    smoke_engine.AddPeriodic(GetPosition() + (GetSize()>>1),
+                             particle_DARK_SMOKE, false, -1, 2.0);
   }
   else
   {
