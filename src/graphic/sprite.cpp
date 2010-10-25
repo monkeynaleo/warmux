@@ -343,7 +343,7 @@ void Sprite::RefreshSurface()
 
   ASSERT(!current_surface.IsNull());
 #ifdef DEBUG_ROTOZOOM
-   if (rotozoom && scale_x!=ONE && scale_y!=ONE && scale_x==scale_y)
+   if (rotozoom /*&& scale_x!=ONE && scale_y!=ONE && scale_x==scale_y*/)
      MSG_DEBUG("sprite", "rotation: %.3f, scale_x: %.3f, scale_y: %.3f",
                rotation_rad.tofloat(), scale_x.tofloat(), scale_y.tofloat());
 #endif
@@ -353,12 +353,4 @@ void Sprite::RefreshSurface()
   rotation_point.y=0;
   if (rot_hotspot != center || rotation_rad.IsNotZero())
     Calculate_Rotation_Offset(current_surface);
-}
-
-void Sprite::ForceDisplayFormat()
-{
-  for (uint i=0; i<frames.size(); ++i) {
-    frames[i].surface.SetColorKey(SDL_SRCCOLORKEY, 0);
-    frames[i].surface = frames[i].surface.DisplayFormat();
-  }
 }

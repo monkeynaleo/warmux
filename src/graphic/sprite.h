@@ -224,7 +224,6 @@ public:
   void DrawXY(const Point2i &pos);
 
   void RefreshSurface();
-  void ForceDisplayFormat();
 
 private:
   Surface current_surface;

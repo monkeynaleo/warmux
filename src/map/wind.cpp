@@ -88,8 +88,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
     flipped = NULL;
   }
 
-  bool has_rotation = GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero();
-  if (has_rotation) {
+  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
@@ -105,12 +104,8 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
 
   // Now that caches have been set, refresh
   sprite->RefreshSurface();
-  if (!has_rotation)
-    sprite->ForceDisplayFormat();
   if (flipped) {
     flipped->RefreshSurface();
-    if (!has_rotation)
-      flipped->ForceDisplayFormat();
   }
 }
 
@@ -130,8 +125,8 @@ void WindParticle::Refresh()
   if (GetAlignParticleState()) {
     sprite->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
-  else if (ActiveMap()->GetWind().rotation_speed.IsNotZero()) // Rotate the sprite if needed
-  {
+  else if (ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
+    // Rotate the sprite if needed
     if (flipped && GetSpeed().x < 0) {
       Double new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
       flipped->SetRotation_rad(new_angle);
@@ -146,17 +141,18 @@ void WindParticle::Refresh()
   int x = GetX();
   int y = GetY();
 
-  if (GetX() > Camera::GetInstance()->GetPositionX() + Camera::GetInstance()->GetSizeX())
-    x -= Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
+  const Camera *cam = Camera::GetConstInstance();
+  if (GetX() > cam->GetPositionX() + cam->GetSizeX())
+    x -= cam->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if (GetX() + (int)sprite->GetWidth() < Camera::GetInstance()->GetPositionX())
-    x += Camera::GetInstance()->GetSizeX() + (int)sprite->GetWidth() - 1;
+  if (GetX() + (int)sprite->GetWidth() < cam->GetPositionX())
+    x += cam->GetSizeX() + (int)sprite->GetWidth() - 1;
 
-  if (GetY() > Camera::GetInstance()->GetPositionY() + Camera::GetInstance()->GetSizeY())
-    y -= Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
+  if (GetY() > cam->GetPositionY() + cam->GetSizeY())
+    y -= cam->GetSizeY() + (int)sprite->GetHeight() - 1;
 
-  if (GetY() + (int)sprite->GetHeight() < Camera::GetInstance()->GetPositionY())
-    y += Camera::GetInstance()->GetSizeY() + (int)sprite->GetHeight() - 1;
+  if (GetY() + (int)sprite->GetHeight() < cam->GetPositionY())
+    y += cam->GetSizeY() + (int)sprite->GetHeight() - 1;
 
   if (m_alive != ALIVE || x != GetX() || y != GetY()) {
     m_alive = ALIVE;
@@ -218,9 +214,9 @@ void Wind::Reset()
   std::string config_file = ActiveMap()->GetConfigFilepath();
 
   for (uint i = 0; i < nb; ++i) {
-    WindParticle * tmp = new WindParticle(config_file, (Double)i / nb);
-    particles.push_back(tmp);
+    particles.push_back(new WindParticle(config_file, (Double)i / nb));
   }
+
   RandomizeParticlesPos();
 }
 
@@ -261,15 +257,16 @@ void Wind::RandomizeParticlesPos()
 {
   iterator it = particles.begin(), end = particles.end();
 
-  MSG_DEBUG("wind", "camera position: %d, %d - %d, %d", Camera::GetInstance()->GetPositionX(),
-            Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX(),
-            Camera::GetInstance()->GetPositionY(), Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY());
+  const Camera *cam = Camera::GetConstInstance();
+  int sx = cam->GetPositionX();
+  int sy = cam->GetPositionY();
+  int ex = sx + cam->GetSizeX();
+  int ey = sy + cam->GetSizeY();
+  MSG_DEBUG("wind", "camera position: %d, %d - %d, %d", sx, ex, sy, ey);
 
   for (; it != end; ++it) {
-    (*it)->SetXY(Point2i(RandomLocal().GetInt(Camera::GetInstance()->GetPositionX(),
-                                              Camera::GetInstance()->GetPositionX()+Camera::GetInstance()->GetSizeX()),
-                         RandomLocal().GetInt(Camera::GetInstance()->GetPositionY(),
-                                              Camera::GetInstance()->GetPositionY()+Camera::GetInstance()->GetSizeY())));
+    (*it)->SetXY(Point2i(RandomLocal().GetInt(sx, ex),
+                         RandomLocal().GetInt(sy, ey)));
     MSG_DEBUG("wind", "new particule position: %d, %d", (*it)->GetX(), (*it)->GetY());
   }
 }
