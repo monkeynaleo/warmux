@@ -64,7 +64,7 @@ int ResourceManager::LoadInt(const Profile *profile, const std::string& resource
 
 Double ResourceManager::LoadDouble(const Profile *profile, const std::string& resource_name) const
 {
-  Double tmp = 0.0;
+  Double tmp = ZERO;
   const xmlNode* elem = GetElement(profile, "Double", resource_name);
   if (!elem)
     Error("ResourceManager: can't find Double resource \""+resource_name+"\" in profile "+profile->filename);
@@ -143,17 +143,12 @@ MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::
 Surface ResourceManager::LoadImage(const std::string& filename,
                                    bool alpha, bool set_colorkey, Uint32 colorkey) const
 {
-  Surface pre_surface(filename.c_str());
-  Surface end_surface;
+  Surface surface(filename.c_str());
 
   if (set_colorkey)
-    end_surface.SetColorKey(SDL_SRCCOLORKEY, colorkey);
+    surface.SetColorKey(SDL_SRCCOLORKEY, colorkey);
 
-  if (!alpha)
-    end_surface = pre_surface.DisplayFormat();
-  else
-    end_surface = pre_surface.DisplayFormatAlpha();
-  return end_surface;
+  return (alpha) ? surface.DisplayFormatAlpha() : surface.DisplayFormat();
 }
 
 Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool is_absolute_path) const
@@ -239,7 +234,7 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
   std::string    size;
 
   if (XmlReader::ReadStringAttr(elem, "size", size)) {
-    Rectanglei source_rect(0,0,image.GetSize().x,image.GetSize().y);
+    Rectanglei source_rect(0,0, image.GetWidth(), image.GetHeight());
 
     if (size.find(",") != size.npos) {
       source_rect.SetSizeX(atoi((size.substr(0, size.find(","))).c_str()));
@@ -256,10 +251,7 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
         Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
     }
 
-    Surface sub_image(source_rect.GetSize(), SDL_SWSURFACE, alpha);
-    image.SetAlpha(0, 0);
-    sub_image.Blit(image, -source_rect.GetPosition());
-    return sub_image;
+    return image.Crop(source_rect);
   }
   else {
     return image;
@@ -267,7 +259,6 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
 
   // TODO load more properties in xml : alpha, colorkey....
   //      By now force alpha and no colorkey
-
 }
 
 Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string& resource_name) const
