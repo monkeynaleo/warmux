@@ -95,7 +95,7 @@ public:
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
   bool IsOnTop() const { return on_top; }
-  bool StillUseful() const;
+  bool StillUseful() const { return m_left_time_to_live > 0; }
   bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
 };
 

@@ -25,7 +25,7 @@
 
 class DarkSmoke : public Particle
 {
- public:
+public:
   DarkSmoke();
 };
 

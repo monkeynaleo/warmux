@@ -682,7 +682,7 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
   if (!surf)
     Error("Unable to make a rotozoom on the surface !");
 
-  return Surface(surf);
+  return surface->format->Amask ? Surface(surf).DisplayFormatAlpha() : Surface(surf).DisplayFormat();
 }
 
 /**

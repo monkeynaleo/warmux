@@ -26,10 +26,11 @@
 class ExplosionParticle : public Particle
 {
   int creation_time;
- public:
-    ExplosionParticle();
-    void Draw();
-    void Refresh();
+
+public:
+  ExplosionParticle();
+  void Draw();
+  void Refresh();
 };
 
 #endif /* EXPLOSION_PARTICLE_H */

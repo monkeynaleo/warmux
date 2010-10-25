@@ -106,11 +106,6 @@ void Particle::Refresh()
   }
 }
 
-bool Particle::StillUseful() const
-{
-  return (m_left_time_to_live > 0);
-}
-
 // ==============================================
 
 ParticleEngine::ParticleEngine(uint time):

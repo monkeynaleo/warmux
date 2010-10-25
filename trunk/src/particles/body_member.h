@@ -26,10 +26,12 @@
 class BodyMemberParticle : public Particle
 {
   Double angle_rad;
- public:
-  BodyMemberParticle(Sprite& spr, const Point2i& position);
- private:
+
   void Refresh();
+
+public:
+
+  BodyMemberParticle(Sprite& spr, const Point2i& position);
 };
 
 #endif /* BODY_MEMBER_H */

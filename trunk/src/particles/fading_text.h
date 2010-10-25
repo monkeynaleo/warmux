@@ -26,9 +26,9 @@
 
 class FadingText : public ExplosionSmoke
 {
- private:
   uint start_to_fade;
- public:
+
+public:
   FadingText(const std::string & text);
   virtual void Refresh();
 };
