@@ -71,9 +71,9 @@ protected:
   } mark_t;
 
 public:
-  void SetBorderColor(const Color & color) { border_color = color; border_color.SetAlpha(SDL_ALPHA_OPAQUE); }
-  void SetBackgroundColor(const Color & color) { background_color = color; background_color.SetAlpha(0); }
-  void SetValueColor(const Color & color) { value_color = color; value_color.SetAlpha(SDL_ALPHA_OPAQUE); }
+  void SetBorderColor(const Color & color) { border_color = color; }
+  void SetBackgroundColor(const Color & color) { background_color = color; }
+  void SetValueColor(const Color & color) { value_color = color; }
   void SetMinMaxValueColor(const Color & min, const Color & max);
 
 protected:
@@ -101,16 +101,16 @@ public:
   void UpdateValue(int val);
 
   // Initialise la position
-  virtual void InitPos(uint x, 
-                       uint y, 
-                       uint width, 
+  virtual void InitPos(uint x,
+                       uint y,
+                       uint width,
                        uint height);
   virtual void SetHeight(uint height) { InitPos(x, y, image.GetWidth(), height); }
 
   // Initialise les valeurs
-  void InitVal(int val, 
-               int min, 
-               int max, 
+  void InitVal(int val,
+               int min,
+               int max,
                enum orientation orientation = PROG_BAR_HORIZONTAL);
 
   // Set reference value

@@ -25,12 +25,12 @@
 
 class IllBubble : public ExplosionSmoke
 {
-   // Dephasage of the vibration
-   uint vib_phi;
- public:
-   IllBubble();
-   virtual void Refresh();
-   void Draw();
+  // Phase of the vibration
+  uint vib_phi;
+public:
+  IllBubble();
+  virtual void Refresh();
+  void Draw();
 };
 
 #endif /* ILL_BUBBLE_H */

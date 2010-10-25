@@ -27,9 +27,9 @@
 #include "tool/math_tools.h"
 
 ProgressBar::ProgressBar() :
-  border_color(0, 0, 0, SDL_ALPHA_OPAQUE),
-  value_color(255, 255, 255, SDL_ALPHA_OPAQUE),
-  background_color(100, 100, 100, SDL_ALPHA_OPAQUE),
+  border_color(0, SDL_ALPHA_OPAQUE),
+  value_color(255, SDL_ALPHA_OPAQUE),
+  background_color(100, SDL_ALPHA_OPAQUE),
   gradientMode(false),
   x(0),
   y(0),
@@ -53,9 +53,9 @@ ProgressBar::ProgressBar(uint _x,
                          int minValue,
                          int maxValue,
                          enum orientation _orientation) :
-  border_color(0, 0, 0, SDL_ALPHA_OPAQUE),
-  value_color(255, 255, 255, SDL_ALPHA_OPAQUE),
-  background_color(100, 100, 100, SDL_ALPHA_OPAQUE),
+  border_color(0, SDL_ALPHA_OPAQUE),
+  value_color(255, SDL_ALPHA_OPAQUE),
+  background_color(100, SDL_ALPHA_OPAQUE),
   gradientMode(false),
   x(_x),
   y(_y),
@@ -79,8 +79,6 @@ void ProgressBar::SetMinMaxValueColor(const Color & min,
   gradientMode = true;
   colorMin     = min;
   colorMax     = max;
-  colorMin.SetAlpha(SDL_ALPHA_OPAQUE);
-  colorMax.SetAlpha(SDL_ALPHA_OPAQUE);
 }
 
 void ProgressBar::InitPos(uint px, uint py,
@@ -220,7 +218,6 @@ ProgressBar::mark_it ProgressBar::AddTag(int val, const Color & color)
   mark_t m;
   m.val   = ComputeBarValue(val);
   m.color = color;
-  m.color.SetAlpha(SDL_ALPHA_OPAQUE);
   mark.push_back(m);
 
   return --mark.end();

@@ -25,12 +25,12 @@
 
 class BulletParticle : public Particle
 {
-  private:
-    int start_to_fade;
-  public:
-    BulletParticle();
-    void Refresh();
-    void SignalRebound();
+  int start_to_fade;
+
+public:
+  BulletParticle();
+  void Refresh();
+  void SignalRebound();
 };
 
 #endif /* BULLET_H */

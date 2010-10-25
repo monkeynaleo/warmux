@@ -39,11 +39,11 @@ static int GetRandomDigGroundTime()
   return RandomSync().GetInt(0, dig_ground_time);
 }
 
-FireParticle::FireParticle() :
-  Particle("fire_particle"),
-  creation_time(Time::GetInstance()->Read()),
-  on_ground(false),
-  oscil_delta(GetRandomDigGroundTime())
+FireParticle::FireParticle()
+  : Particle("fire_particle")
+  , creation_time(Time::GetInstance()->Read())
+  , on_ground(false)
+  , oscil_delta(GetRandomDigGroundTime())
 {
   SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
@@ -78,8 +78,7 @@ void FireParticle::Refresh()
   scale = ONE - scale;
   image->Scale(scale, scale);
 
-  if(image->GetSize().x != 0 && image->GetSize().y != 0)
-  {
+  if (image->GetSize().x != 0 && image->GetSize().y != 0) {
     int dx = (GetWidth() - image->GetWidth()) / 2;
     int dy = std::max(0, GetHeight() - 2);
     SetTestRect(dx, dx, dy, 1);
@@ -89,14 +88,12 @@ void FireParticle::Refresh()
   // So, since we are resizing the object, we have to move it
   // to make it appear at the same place
 
-  if(on_ground || !FootsInVacuum())
-  {
-    if ( !on_ground){
+  if (on_ground || !FootsInVacuum()) {
+    if (!on_ground) {
       JukeBox::GetInstance()->Play("default","fire/touch_ground");
     }
     on_ground = true;
-    if((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time)
-    {
+    if ((now + oscil_delta) / dig_ground_time != (m_last_refresh + oscil_delta) / dig_ground_time) {
       Point2i expl_pos = GetPosition() + GetSize();
       expl_pos.x -= GetWidth()/2;
 
@@ -108,11 +105,8 @@ void FireParticle::Refresh()
 
     Double angle = cos((((now + oscil_delta) % 1000)/(Double)500.0) * PI) * ONE_HALF; // 0.5 is arbirtary
     image->SetRotation_rad( angle);
-  }
-  else
-  {
-    Double angle = GetSpeedAngle();
-    image->SetRotation_rad((angle - HALF_PI));
+  } else {
+    image->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
 
   m_last_refresh = now;

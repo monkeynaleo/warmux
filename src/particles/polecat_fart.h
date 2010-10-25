@@ -25,12 +25,11 @@
 
 class PolecatFart : public Particle
 {
-  private:
-    bool is_active;
-  public:
-    PolecatFart();
-  protected:
-    void Refresh();
+  bool is_active;
+public:
+  PolecatFart();
+protected:
+  void Refresh();
 };
 
 #endif /* POLECAT_FART_H */
