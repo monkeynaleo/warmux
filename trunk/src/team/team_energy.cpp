@@ -212,7 +212,7 @@ void TeamEnergy::FinalizeMove()
   return;
 }
 
-void TeamEnergy::SetHeight(uint h)
+void TeamEnergy::SetHeight(int h)
 {
   if (h==height)
     return;
