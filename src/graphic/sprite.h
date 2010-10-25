@@ -52,6 +52,7 @@ typedef enum {
 class Sprite
 {
   bool smooth;
+  bool fixed;
   // Surface growing as need be for any temporary operation inside Sprite members
   // that need a SDL_SWSURFACE Surface without alpha.
   // This surface is shared by all Sprite objects to save memory, but beware
@@ -139,7 +140,7 @@ public:
   Double GetScaleY(void) const { return scale_y; }
   void SetSize(uint w, uint h)
   {
-    ASSERT(frame_width_pix == 0 && frame_height_pix == 0)
+    ASSERT(frame_width_pix == 0 && frame_height_pix == 0);
 
     frame_width_pix = w;
     frame_height_pix = h;
@@ -148,7 +149,7 @@ public:
 
   void Scale(Double _scale_x, Double _scale_y)
   {
-    if (scale_x==_scale_x && _scale_y==scale_y)
+    if ((scale_x==_scale_x && _scale_y==scale_y) || fixed)
       return;
     scale_x = _scale_x;
     scale_y = _scale_y;
@@ -156,7 +157,8 @@ public:
   }
   void ScaleSize(int width, int height)
   {
-    Scale(Double(width)/frame_width_pix, Double(height)/frame_height_pix);
+    if (!fixed)
+      Scale(Double(width)/frame_width_pix, Double(height)/frame_height_pix);
   }
   void ScaleSize(const Point2i& size) { ScaleSize(size.x, size.y); };
 
@@ -224,6 +226,7 @@ public:
   void DrawXY(const Point2i &pos);
 
   void RefreshSurface();
+  void FixParameters();
 
 private:
   Surface current_surface;

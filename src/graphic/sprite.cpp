@@ -41,6 +41,7 @@ Surface Sprite::scratch;
 
 Sprite::Sprite(bool _smooth) :
   smooth(_smooth),
+  fixed(false),
   cache(*this),
   animation(*this)
 {
@@ -49,6 +50,7 @@ Sprite::Sprite(bool _smooth) :
 
 Sprite::Sprite(const Surface& surface, bool _smooth) :
   smooth(_smooth),
+  fixed(false),
   cache(*this),
   animation(*this)
 {
@@ -60,6 +62,7 @@ Sprite::Sprite(const Surface& surface, bool _smooth) :
 
 Sprite::Sprite(const Sprite &other) :
   smooth(other.smooth),
+  fixed(other.fixed),
   cache(*this),
   animation(other.animation, *this),
   frames()
@@ -107,7 +110,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
   this->frame_width_pix = frameSize.x;
   this->frame_height_pix = frameSize.y;
 
-  surface.SetAlpha( 0, 0);
+  surface.SetAlpha(0, 0);
 
   for (f.y=0; f.y<nb_frames_y; f.y++)
     for (f.x=0; f.x<nb_frames_x; f.x++) {
@@ -121,12 +124,15 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
     }
 }
 
-void Sprite::AddFrame(const Surface &surf, uint delay){
+void Sprite::AddFrame(const Surface &surf, uint delay)
+{
   frames.push_back(SpriteFrame(surf, delay));
 }
 
 void Sprite::SetRotation_rad(Double angle_rad)
 {
+  if (fixed)
+    return;
   angle_rad = RestrictAngle(angle_rad);
 
   if (rotation_rad == angle_rad)
@@ -353,4 +359,15 @@ void Sprite::RefreshSurface()
   rotation_point.y=0;
   if (rot_hotspot != center || rotation_rad.IsNotZero())
     Calculate_Rotation_Offset(current_surface);
+}
+
+void Sprite::FixParameters()
+{
+  for (uint i=0; i<frames.size(); i++) {
+    frames[i].surface = frames[i].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth).DisplayFormatColorKey(128);
+  }
+  scale_x = 1.0;
+  scale_y = 1.0;
+  rotation_rad = ZERO;
+  fixed = true;
 }
