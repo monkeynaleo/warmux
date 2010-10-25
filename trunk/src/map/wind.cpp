@@ -46,26 +46,27 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   : PhysicalObj("wind", xml_file)
 {
   SetCollisionModel(false, false, false);
-
   CanBeGhost(false);
+
   // Physic constants
-  Double mass, wind_factor ;
-  //Mass = mass_mean + or - 25%
-  mass = GetMass();
-  mass *= RandomLocal().GetDouble(0.75, 1.25);
+  Double mass = GetMass();
+  mass *= RandomLocal().GetDouble(0.75, 1.25); //Mass = mass_mean + or - 25%
   SetMass (mass);
+
   SetSize(Point2i(20,20));
-  wind_factor = GetWindFactor();
+  Double wind_factor = GetWindFactor();
   wind_factor *= RandomLocal().GetDouble(0.75, 1.25);
   SetWindFactor(wind_factor);
+
   SetAirResistFactor(GetAirResistFactor() * RandomLocal().GetDouble(0.75, 1.25));
 
-  MSG_DEBUG("wind", "Create wind particle: %s, %s, %s", xml_file.c_str(), Double2str(mass).c_str(), Double2str(wind_factor).c_str());
+  MSG_DEBUG("wind", "Create wind particle: %s, %s, %s", xml_file.c_str(),
+            Double2str(mass).c_str(), Double2str(wind_factor).c_str());
 
   // Fixe test rectangle
-  int dx = 0 ;
-  int dy = 0 ;
-  SetTestRect (dx, dx, dy, dy);
+  int dx = 0;
+  int dy = 0;
+  SetTestRect(dx, dx, dy, dy);
 
   m_allow_negative_y = true;
 
@@ -76,7 +77,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   sprite->Scale(scale, scale);
   sprite->SetAlpha(scale);
   sprite->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount() - 1));
-  SetSize( Point2i(sprite->GetWidth(), sprite->GetHeight()) );
+  SetSize(sprite->GetSize());
 
   if (ActiveMap()->GetWind().need_flip) {
     flipped = new Sprite(*sprite);
@@ -172,7 +173,8 @@ void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
   Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
-  spr->Draw(GetPosition());
+  if (!IsInWater())
+    spr->Draw(GetPosition());
 }
 
 //---------------------------------------------------
