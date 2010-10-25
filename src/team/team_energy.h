@@ -120,7 +120,7 @@ public :
   bool IsMoving() const { return (dx!=0 || dy!=0); }
   // Move energy bar immediatly to its destination
   void FinalizeMove();
-  void SetHeight(uint height);
+  void SetHeight(int height);
 };
 
 #endif /* TEAM_ENERGY_H */
