@@ -88,7 +88,8 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
     flipped = NULL;
   }
 
-  if (GetAlignParticleState() || ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
+  bool not_fixed = GetAlignParticleState()|| ActiveMap()->GetWind().rotation_speed.IsNotZero();
+  if (not_fixed) {
     sprite->EnableRotationCache(64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
@@ -103,8 +104,10 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   }
 
   // Now that caches have been set, refresh
+  //if (!not_fixed) sprite->FixParameters();
   sprite->RefreshSurface();
   if (flipped) {
+    //if (!not_fixed) flipped->FixParameters();
     flipped->RefreshSurface();
   }
 }
@@ -122,18 +125,14 @@ void WindParticle::Refresh()
   else
     sprite->Update();
 
+  const Double& rotation_speed = ActiveMap()->GetWind().rotation_speed;
   if (GetAlignParticleState()) {
     sprite->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
-  else if (ActiveMap()->GetWind().rotation_speed.IsNotZero()) {
+  else if (rotation_speed.IsNotZero()) {
     // Rotate the sprite if needed
-    if (flipped && GetSpeed().x < 0) {
-      Double new_angle = flipped->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
-      flipped->SetRotation_rad(new_angle);
-    } else {
-      Double new_angle = sprite->GetRotation_rad() + ActiveMap()->GetWind().rotation_speed;
-      sprite->SetRotation_rad(new_angle);
-    }
+    Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
+    spr->SetRotation_rad(spr->GetRotation_rad() + rotation_speed);
   }
 
   // Put particles inside of the camera view
@@ -167,10 +166,11 @@ void WindParticle::Refresh()
 
 void WindParticle::Draw()
 {
-  // Use the flipped sprite if needed and if the direction of wind changed
-  Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
-  if (!IsInWater())
+  if (!IsInWater()) {
+    // Use the flipped sprite if needed and if the direction of wind changed
+    Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
     spr->Draw(GetPosition());
+  }
 }
 
 //---------------------------------------------------

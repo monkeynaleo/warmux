@@ -816,37 +816,32 @@ SDL_Rect Surface::GetSDLRect(const Point2i &pt)
 }
 
 Surface Surface::DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *sfmt,
-                                       int w, int h, int stride, uint8_t alpha_threshold)
+                                       int w, int h, int stride, uint8_t threshold)
 {
-  SDL_PixelFormat *fmt = SDL_GetVideoSurface()->format;
-  SDL_Surface    *surf = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCCOLORKEY, w, h, 16,
-                                              fmt->Rmask, fmt->Gmask, fmt->Bmask, 0);
-  const uint32_t *src  = data;
-  int             spitch = stride>>2;
-  uint16_t       *dst, color_key;
-  int             x, y, dpitch;
+  SDL_PixelFormat *fmt   = SDL_GetVideoSurface()->format;
+  uint             bpp   = fmt->BitsPerPixel==16 ? 16 : 24;
+  Surface          surf(SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, bpp, 0, 0, 0, 0));
+  const uint32_t  *src   = data;
+  int              pitch = stride>>2;
+  Uint32           ckey  = SDL_MapRGB(surf.surface->format, 0xFF, 0, 0xFF);
 
-  SDL_LockSurface(surf);
-  dst = (uint16_t*)surf->pixels;
-  dpitch = surf->pitch>>1;
+  surf.Lock();
 
   // Set pixels considered as transparent as colorkey
-  color_key = SDL_MapRGBA(fmt, 0xFF, 0, 0xFF, 0);
-  for (y=0; y<h; y++) {
-    for (x=0; x<w; x++) {
+  for (int y=0; y<h; y++) {
+    for (int x=0; x<w; x++) {
       uint8_t r, g, b, a;
       SDL_GetRGBA(*(src + x), sfmt, &r, &g, &b, &a);
-      *(dst + x) = (a < alpha_threshold) ? color_key : SDL_MapRGBA(fmt, r, g, b, a);
+      surf.PutPixel(x, y, (a < threshold) ? ckey : SDL_MapRGB(surf.surface->format, r, g, b));
     }
 
-    src += spitch;
-    dst += dpitch;
+    src += pitch;
   }
 
-  SDL_UnlockSurface(surf);
-  SDL_SetColorKey(surf, SDL_SRCCOLORKEY, color_key);
+  surf.Unlock();
+  surf.SetColorKey(SDL_SRCCOLORKEY, ckey);
 
-  return Surface(surf);
+  return surf;
 }
 
 Surface Surface::DisplayFormatColorKey(uint8_t alpha_threshold)
