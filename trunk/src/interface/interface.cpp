@@ -793,7 +793,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
         // Check if we clicked the character icon: handle now that we know
         // whether it's a long click
         Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-        if (character_button.Contains(mouse_pos-bottom_bar_pos)) {
+        if (character_button.Contains(mouse_pos-bottom_bar_pos) && GameMode::GetInstance()->AllowCharacterSelection()) {
           ActiveTeam().NextCharacter();
           ActionHandler::GetInstance()->NewActionActiveCharacter();
           return true;
