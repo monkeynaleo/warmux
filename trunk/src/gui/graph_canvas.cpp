@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Draw a graph of a series of points according to various parameters 
+ * Draw a graph of a series of points according to various parameters
  *****************************************************************************/
 
 #include <limits>
@@ -50,7 +50,11 @@ void GraphCanvas::SetAxis(const std::string& xname, const std::string& yname)
 {
   Font* font = Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD);
   xaxis = font->CreateSurface(xname, black_color);
-  yaxis = font->CreateSurface(yname, black_color).RotoZoom(M_PI/2, 1.0, 1.0, false);
+  yaxis = font->CreateSurface(yname, black_color).RotoZoom(M_PI/2, ONE, ONE, false);
+#ifdef HAVE_HANDHELD
+  /* The text being black, after rotation, the color key has been set to white */
+  yaxis.SetColorKey(SDL_SRCCOLORKEY, 0xFFFF);
+#endif
 }
 
 void GraphCanvas::Draw(const Point2i& /*mousePosition*/) const
