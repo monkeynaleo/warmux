@@ -58,8 +58,8 @@ void Interface::LoadDataInternal(Profile *res)
   last_width = AppWormux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
     zoom            = last_width / (float)(tmp.GetWidth()+20);
-    game_menu       = tmp.RotoZoom(0.0, zoom, zoom);
-    shoot           = LOAD_RES_IMAGE("interface/shoot").RotoZoom(0.0, zoom, zoom);
+    default_toolbar = tmp.RotoZoom(0.0, zoom, zoom);
+    control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface").RotoZoom(0.0, zoom, zoom);
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
@@ -70,15 +70,14 @@ void Interface::LoadDataInternal(Profile *res)
   }
   else {
     zoom            = 1.0f;
-    game_menu       = tmp;
-    shoot           = LOAD_RES_IMAGE("interface/shoot");
+    default_toolbar = tmp;
+    control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface");
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface");
   }
   clock_width = 70*zoom+0.5f;
 
   // energy bar
-  energy_bar = new EnergyBar(0, 0, 120*zoom+0.5f, 15*zoom+0.5f,
-                             0, 0,
+  energy_bar = new EnergyBar(0, 0, 150*zoom, 15*zoom, 0, 0,
                              GameMode::GetInstance()->character.init_energy);
 
   // Labels
@@ -108,17 +107,18 @@ void Interface::LoadData()
 Interface::Interface()
   : global_timer(NULL)
   , timer(NULL)
+  , energy_bar(NULL)
   , t_character_name(NULL)
   , t_team_name(NULL)
   , t_player_name(NULL)
   , t_character_energy(NULL)
   , t_weapon_name(NULL)
   , t_weapon_stock(NULL)
+  , is_control(false)
   , display(true)
   , start_hide_display(0)
   , start_show_display(0)
   , display_minimap(true)
-  , energy_bar(NULL)
   , clock(NULL)
   , clock_normal(NULL)
   , clock_emergency(NULL)
@@ -261,27 +261,23 @@ void Interface::DrawWeaponInfo() const
 {
   Weapon* weapon = &ActiveTeam().AccessWeapon();
   int nbr_munition = ActiveTeam().ReadNbAmmos();
+  Sprite& icon = weapon->GetIcon();
+
+  icon.Scale(zoom, zoom);
 
   // Draw weapon name
-  int offset = ((game_menu.GetWidth() - clock_width)>>1) - MARGIN - 24;
+  int offset = ((default_toolbar.GetWidth() - clock_width)>>1) - icon.GetWidth();
   t_weapon_name->SetText(weapon->GetName());
-  t_weapon_name->DrawCenterTop(bottom_bar_pos + Point2i(offset, 0));
+  t_weapon_name->DrawRightCenter(bottom_bar_pos + Point2i(offset, 70*zoom));
 
   // Display number of ammo
   t_weapon_stock->SetText(nbr_munition ==  INFINITE_AMMO ? _("(unlimited)")
                                                          : _("Stock:") + Format("%i", nbr_munition));
-  t_weapon_stock->DrawCenterTop(bottom_bar_pos + Point2i(offset, t_weapon_name->GetHeight()));
+  t_weapon_stock->DrawCenterTop(bottom_bar_pos + Point2i(offset+(icon.GetWidth()>>1), MARGIN));
 
   // Draw weapon icon
-  Sprite& icon = weapon->GetIcon();
-  icon.Scale(0.75, 0.75);
-  Point2i weapon_icon_offset(offset - (icon.GetWidth()>>1),
-                             game_menu.GetHeight() - icon.GetHeight() - MARGIN);
+  Point2i weapon_icon_offset(offset, default_toolbar.GetHeight() - icon.GetHeight() - MARGIN);
   icon.DrawXY(bottom_bar_pos + weapon_icon_offset);
-
-  // Draw shoot button
-  GetMainWindow().Blit(shoot, bottom_bar_pos + Point2i(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                                       (game_menu.GetHeight() - shoot.GetHeight())>>1));
 }
 
 void Interface::DrawTimeInfo() const
@@ -289,7 +285,7 @@ void Interface::DrawTimeInfo() const
   Surface& window = GetMainWindow();
   Point2i turn_time_pos((window.GetWidth() - clock_width)>>1,
                         window.GetHeight()  - GetHeight());
-  Rectanglei dr(turn_time_pos, Point2i(clock_width, game_menu.GetHeight()));
+  Rectanglei dr(turn_time_pos, Point2i(clock_width, default_toolbar.GetHeight()));
 
   // Draw background interface
   GetWorld().ToRedrawOnScreen(dr);
@@ -301,7 +297,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
 {
   // Draw turn time
   if (display_timer)
-    timer->DrawCenter(time_pos - Point2i(0, game_menu.GetHeight()/3));
+    timer->DrawCenter(time_pos - Point2i(0, default_toolbar.GetHeight()/3));
 
   // Draw clock
   Point2i tmp_point = time_pos - (clock->GetSize()>>1);
@@ -311,7 +307,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
   // Draw global timer
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->SetText(tmp);
-  global_timer->DrawCenter(time_pos + Point2i(0, game_menu.GetHeight()/3));
+  global_timer->DrawCenter(time_pos + Point2i(0, default_toolbar.GetHeight()/3));
 }
 
 // draw wind indicator
@@ -325,7 +321,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos) const
 void Interface::DrawWindInfo() const
 {
   // The hardcoded values are from the wind indicator position in the image
-  Point2i wind_pos_offset(347*zoom+0.75f, 48*zoom+0.75f);
+  Point2i wind_pos_offset(348*zoom, 49*zoom+0.5f);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
@@ -357,7 +353,7 @@ void Interface::DrawTeamEnergy() const
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
       team->GetEnergyBar().FinalizeMove();
-    team->GetEnergyBar().SetHeight(game_menu.GetHeight());
+    team->GetEnergyBar().SetHeight(default_toolbar.GetHeight());
     team->DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
 }
@@ -525,26 +521,34 @@ void Interface::Draw()
 
   // Position on the screen
   Point2i barPos((window.GetWidth() - weapon_strength_bar.GetWidth())>>1,
-                 window.GetHeight() - weapon_strength_bar.GetHeight() - game_menu.GetHeight() - MARGIN);
+                 window.GetHeight() - weapon_strength_bar.GetHeight() - default_toolbar.GetHeight() - MARGIN);
 
   // Drawing on the screen
   weapon_strength_bar.DrawXY(barPos);
 
   weapons_menu.Draw();
 
-  // Display the background of both Character info and weapon info
-  Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
-  window.Blit(game_menu, bottom_bar_pos);
+  // Display the background
+  if (display) {
+    Rectanglei dr(bottom_bar_pos, default_toolbar.GetSize());
+    if (is_control) {
+      window.Blit(control_toolbar, bottom_bar_pos);
+    } else {
+      window.Blit(default_toolbar, bottom_bar_pos);
+      // And both Character info and weapon info
+      DrawCharacterInfo();
+      DrawTeamEnergy();
+    }
 
-  GetWorld().ToRedrawOnScreen(dr);
-
-  // display wind, character and weapon info
-  DrawWindInfo();
-  DrawTimeInfo();
-  DrawCharacterInfo();
-  DrawTeamEnergy();
-  DrawWeaponInfo();
-  DrawSmallInterface();
+    // Now display wind and time info
+    DrawWeaponInfo();
+    DrawWindInfo();
+    DrawTimeInfo();
+    GetWorld().ToRedrawOnScreen(dr);
+  } else {
+    DrawSmallInterface();
+    // The rectangle to redraw is already set there
+  }
 
   help->Draw();
 }
@@ -565,27 +569,29 @@ int Interface::GetHeight() const
 
 int Interface::GetMenuHeight() const
 {
-  return game_menu.GetHeight() + MARGIN;
+  return default_toolbar.GetHeight() + MARGIN;
 }
 
 void Interface::Show()
 {
   if (display) return;
   display = true;
-  if (start_show_display + 1000 < (int)Time::GetInstance()->Read())
-    start_show_display = Time::GetInstance()->Read();
+  uint now = Time::GetInstance()->Read();
+  if (start_show_display + 1000 < (int)now)
+    start_show_display = now;
   else
-    start_show_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_show_display));
+    start_show_display = now - (1000 - ((int)now - start_show_display));
 }
 
 void Interface::Hide()
 {
   if (!display) return;
   display = false;
-  if (start_hide_display + 1000 < (int)Time::GetInstance()->Read())
-    start_hide_display = Time::GetInstance()->Read();
+  uint now = Time::GetInstance()->Read();
+  if (start_hide_display + 1000 < (int)now)
+    start_hide_display = now;
   else
-    start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
+    start_hide_display = now - (1000 - ((int)now - start_hide_display));
 }
 
 void Interface::UpdateTimer(uint utimer, bool emergency, bool reset_anim)
@@ -638,67 +644,194 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
   GetMainWindow().Blit(s, rectSource, ptDest);
 }
 
-static void ActionShoot(bool on)
+bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
-  if (Game::GetInstance()->ReadState() != Game::PLAYING ||
-      !ActiveTeam().IsLocalHuman() ||
-      ActiveCharacter().IsDead())
-    return;
+  if (!ActiveTeam().IsLocalHuman())
+    return false;
 
-  if (on) {
-    // Start loading
-    Action *a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
-    ActionHandler::GetInstance()->NewAction(a);
-  } else {
-    Action *a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
-    ActionHandler::GetInstance()->NewAction(a);
+  Character *active_char = &ActiveCharacter();
+  Point2i button_size(56*zoom, control_toolbar.GetHeight());
+  Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
+  Rectanglei left_button(Point2i(3*zoom, 0), button_size);
+
+  old_mouse_pos -= bottom_bar_pos;
+
+  if (left_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: active_char->HandleKeyPressed_MoveLeft(false); break;
+      case CLICK_TYPE_UP: active_char->HandleKeyReleased_MoveLeft(false); break;
+    }
+    return true;
   }
+
+  Rectanglei right_button(Point2i(60*zoom, 0), button_size);
+   if (right_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: active_char->HandleKeyPressed_MoveRight(false); break;
+      case CLICK_TYPE_UP: active_char->HandleKeyReleased_MoveRight(false); break;
+    }
+    return true;
+  }
+
+  Rectanglei jump_button(Point2i(120*zoom, 0), button_size);
+   if (jump_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG:
+        if (!jump_button.Contains(old_mouse_pos))
+          return false;
+        active_char->HandleKeyPressed_HighJump();
+        break;
+      case CLICK_TYPE_DOWN: return false; // Needed to allow long clicks
+      case CLICK_TYPE_UP: active_char->HandleKeyPressed_Jump(); break;
+    }
+    return true;
+  }
+
+  Rectanglei up_button(Point2i(433*zoom, 0), button_size);
+   if (up_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: active_char->HandleKeyPressed_Up(false); break;
+      case CLICK_TYPE_UP: active_char->HandleKeyReleased_Up(false); break;
+    }
+    return true;
+  }
+
+  Rectanglei down_button(Point2i(490*zoom, 0), button_size);
+   if (down_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: active_char->HandleKeyPressed_Down(false); break;
+      case CLICK_TYPE_UP: active_char->HandleKeyReleased_Down(false); break;
+    }
+    return true;
+  }
+
+  // Check if we clicked the shoot icon: start firing!
+  Rectanglei shoot_button(Point2i(546*zoom, 0), button_size);
+  if (shoot_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN:
+      case CLICK_TYPE_UP: {
+        if (Game::GetInstance()->ReadState() != Game::PLAYING || ActiveCharacter().IsDead())
+          return false;
+        Action *a;
+        if (type == CLICK_TYPE_UP) {
+          a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
+        } else {
+          a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
+        }
+        ActionHandler::GetInstance()->NewAction(a);
+        break;
+      }
+    }
+    return true;
+  }
+
+  // No actual button clicked, just allow long clicks
+  return (type == CLICK_TYPE_DOWN) ? false : true;
+}
+
+bool Interface::DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
+{
+  Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
+  const Team& team = ActiveTeam();
+
+  Rectanglei character_button(0, 0, 36*zoom, default_toolbar.GetHeight());
+
+  old_mouse_pos -= bottom_bar_pos;
+
+  // Check if we clicked the character icon:
+  if (character_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG:
+        if (!character_button.Contains(old_mouse_pos))
+          return false;
+        Camera::GetInstance()->CenterOnActiveCharacter();
+        return true;
+      case CLICK_TYPE_DOWN: return false; // Needed to allow long clicks
+      case CLICK_TYPE_UP:
+        if (!team.IsLocalHuman() || !GameMode::GetInstance()->AllowCharacterSelection())
+          return false;
+        ActiveTeam().NextCharacter();
+        ActionHandler::GetInstance()->NewActionActiveCharacter();
+        return true;
+    }
+  }
+
+  // No actual button clicked, just allow long clicks
+  return (type == CLICK_TYPE_DOWN) ? false : true;
+}
+
+int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
+{
+  Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
+  const Team& team = ActiveTeam();
+
+  Rectanglei character_button(0, 0, 36*zoom, default_toolbar.GetHeight());
+
+  old_mouse_pos -= bottom_bar_pos;
+
+  // Check if we clicked the clock icon: toggle control toolbar
+  Rectanglei clock_button((default_toolbar.GetWidth() - clock_width)>>1, 0,
+                          clock_width, default_toolbar.GetHeight());
+  if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG:
+        if (clock_button.Contains(old_mouse_pos))
+          Game::GetInstance()->UserAsksForMenu();
+        break;
+      case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
+      case CLICK_TYPE_UP:
+        if (team.IsLocalHuman() || is_control)
+          is_control = !is_control;
+    }
+    return 1;
+  }
+
+  // Positions are somewhat from Interface::DrawWeaponInfo()
+  Point2i BR((default_toolbar.GetWidth() - clock_width)>>1,
+             default_toolbar.GetHeight());
+  Point2i TL(BR.GetX()- int(36*zoom)-3*MARGIN, 0);
+  Rectanglei weapon_button(TL, BR-TL);
+  // Check if we clicked the weapon icon: toggle weapon menu
+  if (weapon_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG:
+        if (weapon_button.Contains(old_mouse_pos)) {
+          help->SetWeapon(ActiveTeam().AccessWeapon());
+          help->SwitchDisplay();
+        }
+        break;
+      case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
+      case CLICK_TYPE_UP:
+        if (team.IsLocalHuman())
+          weapons_menu.SwitchDisplay();
+    }
+    return 1;
+  }
+
+  return -1;
 }
 
 bool Interface::ActionClickDown(const Point2i &mouse_pos)
 {
-  Surface &  window  = GetMainWindow();
+  Surface& window = GetMainWindow();
 
   if (display) {
-    Rectanglei menu_button(Point2i(), game_menu.GetSize());
+    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      // Check if we clicked the character icon: not handled here
-      Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-      if (character_button.Contains(mouse_pos-bottom_bar_pos))
-        return false;
-
-      // Action that should only happen when the player is human
-      if (ActiveTeam().IsLocalHuman()) {
-        // Positions are somewhat from Interface::DrawWeaponInfo()
-        Point2i BR((game_menu.GetWidth() - clock_width)>>1,
-                   game_menu.GetHeight());
-        Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
-
-        Rectanglei weapon_button(TL, BR-TL);
-        // Check if we clicked the weapon icon: toggle weapon menu
-        if (weapon_button.Contains(mouse_pos-bottom_bar_pos))
-          return false;
-
-        // Check if we clicked the shoot icon: start firing!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(),
-                                (game_menu.GetHeight() - shoot.GetHeight())>>1,
-                                shoot.GetWidth(), shoot.GetHeight());
-        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-          ActionShoot(true);
-          return true;
-        }
+      switch (AnyClick(mouse_pos, CLICK_TYPE_DOWN)) {
+        case -1: break;
+        case 0: return false;
+        default: return true;
       }
 
-      // Check if we clicked the clock icon: display pause menu
-      Rectanglei clock_button((game_menu.GetWidth() - clock_width)>>1, 0,
-                              clock_width, game_menu.GetHeight());
-      if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
-        Game::GetInstance()->UserAsksForMenu();
-        return true;
-      }
-
-      // No actual button clicked, but still swallow that click
-      return true;
+      return is_control ? ControlClick(mouse_pos, CLICK_TYPE_DOWN)
+                        : DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
     } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
       // Process click on weapon menu before minimap as it should be
       // overlayed on top of it.
@@ -733,31 +866,17 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   return false;
 }
 
-bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos)
+bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i& old_mouse_pos)
 {
   if (display) {
-    Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-    if (character_button.Contains(mouse_pos-bottom_bar_pos) &&
-        character_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-      Camera::GetInstance()->CenterOnActiveCharacter();
-      return true;
+    switch (AnyClick(mouse_pos, CLICK_TYPE_LONG)) {
+      case -1: break;
+      case 0: return false;
+      default: return true;
     }
 
-    if (ActiveTeam().IsLocalHuman()) {
-      // Positions are somewhat from Interface::DrawWeaponInfo()
-      Point2i BR((game_menu.GetWidth() - clock_width)>>1,
-                 game_menu.GetHeight());
-      Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
-
-      Rectanglei weapon_button(TL, BR-TL);
-      // Check if we clicked the weapon icon: toggle weapon menu
-      if (weapon_button.Contains(mouse_pos-bottom_bar_pos) &&
-          weapon_button.Contains(old_mouse_pos-bottom_bar_pos)) {
-        help->SetWeapon(ActiveTeam().AccessWeapon());
-        help->SwitchDisplay();
-        return true;
-      }
-    }
+    return is_control ? ControlClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)
+                      : DefaultClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
   }
 
   return false;
@@ -768,39 +887,16 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos)
   Surface &  window  = GetMainWindow();
 
   if (display) {
-    Rectanglei menu_button(Point2i(), game_menu.GetSize());
+    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      if (ActiveTeam().IsLocalHuman()) {
-
-        // Check if we clicked the shoot icon: release fire!
-        Rectanglei shoot_button(game_menu.GetWidth() - 2*MARGIN - shoot.GetWidth(), 0,
-                                shoot.GetWidth(), game_menu.GetHeight());
-        if (shoot_button.Contains(mouse_pos-bottom_bar_pos)) {
-          ActionShoot(false);
-          return true;
-        }
-
-        // Positions are somewhat from Interface::DrawWeaponInfo()
-        Point2i BR((game_menu.GetWidth() - clock_width)>>1,
-                   game_menu.GetHeight());
-        Point2i TL(((game_menu.GetWidth()- int(48*zoom))>>1) - clock_width - 6, 0);
-
-        Rectanglei weapon_button(TL, BR-TL);
-        // Check if we clicked the weapon icon: toggle weapon menu
-        if (weapon_button.Contains(mouse_pos-bottom_bar_pos)) {
-          weapons_menu.SwitchDisplay();
-          return true;
-        }
-
-        // Check if we clicked the character icon: handle now that we know
-        // whether it's a long click
-        Rectanglei character_button(0, 0, 36, game_menu.GetHeight());
-        if (character_button.Contains(mouse_pos-bottom_bar_pos) && GameMode::GetInstance()->AllowCharacterSelection()) {
-          ActiveTeam().NextCharacter();
-          ActionHandler::GetInstance()->NewActionActiveCharacter();
-          return true;
-        }
+      switch (AnyClick(mouse_pos, CLICK_TYPE_UP)) {
+        case -1: break;
+        case 0: return false;
+        default: return true;
       }
+
+      return is_control ? ControlClick(mouse_pos, CLICK_TYPE_UP)
+                        : DefaultClick(mouse_pos, CLICK_TYPE_UP);
     }
     // No button clicked, continue
   } else {
@@ -835,7 +931,9 @@ void Interface::MinimapSizeDelta(int delta)
 
 void HideGameInterface()
 {
-  if (Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
+  Interface *interf = Interface::GetInstance();
+  if (interf->GetWeaponsMenu().IsDisplayed() || interf->IsControl())
+    return;
   Mouse::GetInstance()->Hide();
-  Interface::GetInstance()->Hide();
+  interf->Hide();
 }
