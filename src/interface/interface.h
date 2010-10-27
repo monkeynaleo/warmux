@@ -47,6 +47,12 @@ class Profile;
 class Interface : public Singleton<Interface>
 {
 public:
+  typedef enum
+  {
+    CLICK_TYPE_LONG,
+    CLICK_TYPE_DOWN,
+    CLICK_TYPE_UP
+  } ClickType;
   Character *character_under_cursor;
   Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
@@ -54,39 +60,47 @@ public:
   Team *tmp_team;
 
 private:
+// Regular part of the interface
+  int     clock_width;
+
   // Timers
   Text * global_timer;
   Text * timer;
   uint remaining_turn_time;
 
+  ProgressBar wind_bar;
+
+// This part is for normal interface mode
+  Surface default_toolbar;
+  EnergyBar * energy_bar;
+
   // Character information
   Text * t_character_name;
   Text * t_team_name;
   Text * t_player_name;
-
   Text * t_character_energy;
 
   // Weapon information
   Text * t_weapon_name;
   Text * t_weapon_stock;
 
+// this part is for control interface mode
+  Surface control_toolbar;
+
+// Other stuff
+  bool is_control;
   bool display;
   int start_hide_display;
   int start_show_display;
   bool display_timer;
   bool display_minimap;
-  EnergyBar * energy_bar;
-  ProgressBar wind_bar;
   WeaponStrengthBar weapon_strength_bar;
 
-  Surface game_menu;
   Surface small_interface;
   Sprite *clock, *clock_normal, *clock_emergency;
-  int     clock_width;
   Point2i bottom_bar_pos;
   int last_width;
   float zoom;
-  Surface shoot;
 
   //Minimap
   Surface *minimap;
@@ -112,10 +126,16 @@ private:
   void DrawSmallInterface() const;
 
   void LoadDataInternal(Profile *res);
-  int GetWidth() const { return game_menu.GetWidth(); }
+  int GetWidth() const { return default_toolbar.GetWidth(); }
   int GetHeight() const;
   int GetMenuHeight() const;
   Point2i GetSize() const { return Point2i(GetWidth(), GetHeight()); }
+
+  // Handle clicks for various states of the interface
+  bool ControlClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
+  bool DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
+  // -1 means nothing clicked, 0 means return false, 1 means return true
+  int AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
 
 protected:
   friend class Singleton<Interface>;
@@ -131,6 +151,7 @@ public:
 
   Point2i GetMenuPosition() const { return bottom_bar_pos; }
   bool IsDisplayed () const { return display; }
+  bool IsControl() const { return is_control; }
   void EnableDisplay(bool _display) { display = _display; }
   void Show();
   void Hide();
@@ -141,10 +162,12 @@ public:
   void EnableDisplayTimer(bool _display) { display_timer = _display; }
   void ToggleMinimap() { display_minimap = !display_minimap; }
   void MinimapSizeDelta(int delta);
+  bool Intersect(const Point2i &mouse_pos);
+
   bool ActionClickUp(const Point2i &mouse_pos);
   bool ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos);
   bool ActionClickDown(const Point2i &mouse_pos);
-  bool Intersect(const Point2i &mouse_pos);
+
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);
