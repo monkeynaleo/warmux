@@ -33,15 +33,16 @@ class Action;
 
 class BonusBox : public ObjBox
 {
-  private:
-    Weapon * weapon;
+  Weapon * weapon;
+  static Sprite* icon;
 
-    bool ExplodesInsteadOfBonus(Character * c);
-    void ApplyBonus (Team &team, Character &character);
-  public:
-    BonusBox(Weapon * weapon);
+  bool ExplodesInsteadOfBonus(Character * c);
+  void ApplyBonus (Team &team, Character &character);
+public:
+  BonusBox(Weapon * weapon);
 
-    void ApplyBonus(Character *);
+  void ApplyBonus(Character *);
+  const Surface* GetIcon() const;
 };
 
 //-----------------------------------------------------------------------------

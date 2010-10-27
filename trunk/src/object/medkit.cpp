@@ -32,6 +32,8 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
+Sprite* Medkit::icon = NULL;
+
 Medkit::Medkit()
   : ObjBox("medkit") {
   SetTestRect (29, 29, 63, 6);
@@ -43,6 +45,10 @@ Medkit::Medkit()
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
+
+  if (!icon) {
+    icon = CreateIcon();
+  }
 }
 
 void Medkit::ApplyBonus(Character * c)
@@ -77,4 +83,12 @@ void Medkit::LoadXml(const xmlNode*  object)
   r = XmlReader::ReadInt(object, "energy_boost", nbr_health);
   if (!r)
     nbr_health = 24;
+}
+
+const Surface* Medkit::GetIcon() const
+{
+  ASSERT(icon);
+  icon->SetCurrentFrame(anim->GetCurrentFrame());
+  icon->RefreshSurface();
+  return &icon->GetSurface();
 }

@@ -49,7 +49,7 @@
 void Interface::LoadDataInternal(Profile *res)
 {
   Surface tmp     = LOAD_RES_IMAGE("interface/background_interface");
- 
+
   FreeDrawElements();
 
   clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
@@ -63,6 +63,8 @@ void Interface::LoadDataInternal(Profile *res)
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
+    // Scaling can't be fixed, as a change in video resolution may require
+    // scaling again. Therefore, enable last frame cache.
     clock_normal->EnableLastFrameCache();
     clock_emergency->EnableLastFrameCache();
   }
@@ -339,7 +341,7 @@ void Interface::DrawSmallInterface() const
   Point2i position((window.GetWidth() - small_interface.GetWidth())>>1,
                    window.GetHeight() - height);
   window.Blit(small_interface, position);
-  // The wind indicator can be zoomed and no longer centered, so 
+  // The wind indicator can be zoomed and no longer centered, so
   DrawWindIndicator(position + Point2i(9, 11)*zoom);
   if (display_timer) {
     timer->DrawLeftTop(position + Point2i(MARGIN * 4 + wind_bar.GetWidth(), 2*MARGIN+2));
@@ -458,9 +460,9 @@ void Interface::DrawMapPreview()
   FOR_EACH_OBJECT(object) {
     if ((*object)->GetName()=="medkit" || (*object)->GetName()=="bonus_box") {
       ObjBox* box = static_cast<ObjBox*>(*object);
-      Surface* icon = box->GetIcon();
+      const Surface* icon = box->GetIcon();
 
-      // The real icon 
+      // The real icon
       coord = GetWorld().ground.PreviewCoordinates(box->GetPosition())
             + offset - Point2i(icon->GetWidth()>>1, (3*icon->GetHeight())>>2);
       window.Blit(*icon, coord);
