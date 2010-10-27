@@ -34,6 +34,7 @@ class Medkit : public ObjBox//public PhysicalObj
 {
   //static bool enable;
   static int nbr_health;
+  static Sprite* icon;
   //static int start_life_points;
 
 private:
@@ -43,6 +44,7 @@ public:
 
   static void LoadXml(const xmlNode * object);
   void ApplyBonus(Character *);
+  const Surface* GetIcon() const;
 };
 
 //-----------------------------------------------------------------------------

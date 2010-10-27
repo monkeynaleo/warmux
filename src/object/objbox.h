@@ -51,13 +51,12 @@ public:
   virtual void Randomize() {};
   virtual void ApplyBonus(Character *) {};
 
-  Surface* GetIcon();
+  // You must implement this, ideally using a static Sprite*
+  virtual const Surface* GetIcon() const = 0;
 
 protected:
   bool parachute;
   Sprite *anim;
-  Surface* icon;
-  int icon_index;
   static int start_life_points;
   void Explode();
 
@@ -67,6 +66,9 @@ protected:
                                      const Point2d& object_speed);
   virtual void SignalDrowning();
   virtual void SignalGhostState(bool was_already_dead);
+
+  // This returns you a scaled version of your anim Sprite*
+  Sprite *CreateIcon();
 };
 
 //-----------------------------------------------------------------------------

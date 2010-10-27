@@ -36,11 +36,13 @@
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 
+Sprite* BonusBox::icon = NULL;
+
 BonusBox::BonusBox(Weapon * weapon):
   ObjBox("bonus_box"),
   weapon(weapon)
 {
-  SetTestRect (29, 29, 63, 6);
+  SetTestRect(29, 29, 63, 6);
 
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/bonus_box");
@@ -49,12 +51,16 @@ BonusBox::BonusBox(Weapon * weapon):
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
+
+  if (!icon) {
+    icon = CreateIcon();
+  }
 }
 
 void BonusBox::ApplyBonus(Character * c)
 {
   std::ostringstream txt;
-  if ( ExplodesInsteadOfBonus(c) ) {
+  if (ExplodesInsteadOfBonus(c)) {
     GameMessages::GetInstance()->Add(_("Someone put a booby trap into the crate!"),
                                      c->GetTeam().GetColor());
     Explode();
@@ -77,25 +83,33 @@ void BonusBox::ApplyBonus(Character * c)
 
 bool BonusBox::ExplodesInsteadOfBonus(Character * c)
 {
-  ASSERT(NULL != c);
+  ASSERT(c);
 
   // Empyric formula:
   // 1% chance of explosion for each 5 points of energy
   // (with max 20% for 100 energy)
-  Double explosion_probability = (Double)c->GetEnergy() / FIVE;
+  uint explosion_probability = c->GetEnergy() / 5;
 
-  Double MIN_EXPLOSION_PROBABILITY = 5;
-  Double MAX_EXPLOSION_PROPABILITY = 40;
+  #define MIN_EXPLOSION_PROBABILITY   5
+  #define MAX_EXPLOSION_PROPABILITY  40
   // clamp to some reasonable values
-  if ( explosion_probability < MIN_EXPLOSION_PROBABILITY )
+  if (explosion_probability < MIN_EXPLOSION_PROBABILITY)
     explosion_probability = MIN_EXPLOSION_PROBABILITY;
-  else if ( explosion_probability > MAX_EXPLOSION_PROPABILITY )
+  else if (explosion_probability > MAX_EXPLOSION_PROPABILITY)
     explosion_probability = MAX_EXPLOSION_PROPABILITY;
 
-  Double randval = RandomSync().GetDouble( 1, 100 );
+  uint randval = RandomSync().GetUint(1, 100);
   bool exploding = randval < explosion_probability;
-  MSG_DEBUG("bonus","explosion chance: %s%%, actual value: %s, %s",
-    Double2str(explosion_probability,2).c_str(), Double2str(randval,2).c_str(), exploding ? "exploding!" : "not exploding");
+  MSG_DEBUG("bonus","explosion chance: %u%%, actual value: %u, %sexploding",
+            explosion_probability, randval, exploding ? "" : "not ");
 
   return exploding;
+}
+
+const Surface* BonusBox::GetIcon() const
+{
+  ASSERT(icon);
+  icon->SetCurrentFrame(anim->GetCurrentFrame());
+  icon->RefreshSurface();
+  return &icon->GetSurface();
 }

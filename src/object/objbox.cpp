@@ -51,8 +51,6 @@ const uint SPEED = 5; // meter / seconde
 
 ObjBox::ObjBox(const std::string &name)
   : PhysicalObj(name)
-  , icon(NULL)
-  , icon_index(-1)
 {
   m_allow_negative_y = true;
 
@@ -68,7 +66,6 @@ ObjBox::ObjBox(const std::string &name)
 ObjBox::~ObjBox()
 {
   delete anim;
-  if (icon) delete icon;
   Game::GetInstance()->SetCurrentBox(NULL);
 }
 
@@ -162,14 +159,12 @@ void ObjBox::SignalGhostState(bool /*was_already_dead*/)
   Explode();
 }
 
-Surface* ObjBox::GetIcon()
+Sprite* ObjBox::CreateIcon()
 {
-  int new_index = anim->GetCurrentFrame();
-  if (new_index != icon_index) {
-    if (icon) delete icon;
-    icon_index = new_index;
-    icon = new Surface(anim->GetSurface().RotoZoom(ZERO, 0.4, 0.4));
-  }
+  ASSERT(anim);
+  Sprite *icon = new Sprite(*anim);
+  icon->Scale(0.4, 0.4);
+  icon->FixParameters();
   return icon;
 }
 
