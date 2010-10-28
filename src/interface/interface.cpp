@@ -808,11 +808,16 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
         break;
       case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
       case CLICK_TYPE_UP:
-        if (team.IsLocalHuman())
+        if (team.IsLocalHuman()) {
           weapons_menu.SwitchDisplay();
-        // Switch and hide the interface
-        is_control = false;
-        Hide();
+          if (ActiveTeam().ReadNbAmmos() < 1) {
+            is_control = false;
+            Hide();
+          }
+        } else { // Always witch and hide the interface
+          is_control = false;
+          Hide();
+        }
     }
     return 1;
   }
