@@ -810,6 +810,9 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_UP:
         if (team.IsLocalHuman())
           weapons_menu.SwitchDisplay();
+        // Switch and hide the interface
+        is_control = false;
+        Hide();
     }
     return 1;
   }
