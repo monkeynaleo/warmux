@@ -27,10 +27,7 @@ abstract class DifferentTouchInput
 {
   public static DifferentTouchInput getInstance()
   {
-    if (Integer.parseInt(Build.VERSION.SDK) <= 4)
-      return SingleTouchInput.Holder.sInstance;
-    else
-      return MultiTouchInput.Holder.sInstance;
+    return SingleTouchInput.Holder.sInstance;
   }
   public abstract void process(final MotionEvent event);
   private static class SingleTouchInput extends DifferentTouchInput
@@ -52,106 +49,6 @@ abstract class DifferentTouchInput
         DemoGLSurfaceView.nativeMouse( (int)event.getX(), (int)event.getY(), action, 0,
                         (int)(event.getPressure() * 1000.0),
                         (int)(event.getSize() * 1000.0) );
-    }
-  }
-  private static class MultiTouchInput extends DifferentTouchInput
-  {
-
-    private static final int touchEventMax = 16; // Max multitouch pointers
-
-    private class touchEvent
-    {
-      public boolean down = false;
-      public int x = 0;
-      public int y = 0;
-      public int pressure = 0;
-      public int size = 0;
-    }
-
-    private touchEvent touchEvents[];
-
-    MultiTouchInput()
-    {
-      touchEvents = new touchEvent[touchEventMax];
-      for( int i = 0; i < touchEventMax; i++ )
-        touchEvents[i] = new touchEvent();
-    }
-
-    private static class Holder
-    {
-      private static final MultiTouchInput sInstance = new MultiTouchInput();
-    }
-    public void process(final MotionEvent event)
-    {
-      int action = -1;
-
-      if( event.getAction() == MotionEvent.ACTION_UP )
-      {
-        action = 1;
-        for( int i = 0; i < touchEventMax; i++ )
-        {
-          if( touchEvents[i].down )
-          {
-            touchEvents[i].down = false;
-            DemoGLSurfaceView.nativeMouse( touchEvents[i].x, touchEvents[i].y, action, i, touchEvents[i].pressure, touchEvents[i].size );
-          }
-        }
-      }
-      if( event.getAction() == MotionEvent.ACTION_DOWN )
-      {
-        action = 0;
-        for( int i = 0; i < event.getPointerCount(); i++ )
-        {
-          int id = event.getPointerId(i);
-          if( id >= touchEventMax )
-            id = touchEventMax-1;
-          touchEvents[id].down = true;
-          touchEvents[id].x = (int)event.getX(i);
-          touchEvents[id].y = (int)event.getY(i);
-          touchEvents[id].pressure = (int)(event.getPressure(i) * 1000.0);
-          touchEvents[id].size = (int)(event.getSize(i) * 1000.0);
-          DemoGLSurfaceView.nativeMouse( touchEvents[i].x, touchEvents[i].y, action, id, touchEvents[i].pressure, touchEvents[i].size );
-        }
-      }
-
-      if( event.getAction() == MotionEvent.ACTION_MOVE )
-      {
-        for( int i = 0; i < touchEventMax; i++ )
-        {
-          int ii;
-          for( ii = 0; ii < event.getPointerCount(); ii++ )
-          {
-            if( i == event.getPointerId(ii) )
-              break;
-          }
-          if( ii >= event.getPointerCount() )
-          {
-            // Up event
-            if( touchEvents[i].down )
-            {
-              action = 1;
-              touchEvents[i].down = false;
-              DemoGLSurfaceView.nativeMouse( touchEvents[i].x, touchEvents[i].y, action, i, touchEvents[i].pressure, touchEvents[i].size );
-            }
-          }
-          else
-          {
-            int id = event.getPointerId(ii);
-            if( id >= touchEventMax )
-              id = touchEventMax-1;
-            if( touchEvents[id].down )
-              action = 2;
-            else
-              action = 0;
-            touchEvents[id].down = true;
-            touchEvents[id].x = (int)event.getX(i);
-            touchEvents[id].y = (int)event.getY(i);
-            touchEvents[id].pressure = (int)(event.getPressure(i) * 1000.0);
-            touchEvents[id].size = (int)(event.getSize(i) * 1000.0);
-            DemoGLSurfaceView.nativeMouse( touchEvents[i].x, touchEvents[i].y, action, id, touchEvents[i].pressure, touchEvents[i].size );
-          }
-        }
-      }
     }
   }
 }
