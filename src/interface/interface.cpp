@@ -266,15 +266,18 @@ void Interface::DrawWeaponInfo() const
 
   icon.Scale(zoom, zoom);
 
-  // Draw weapon name
   int offset = ((default_toolbar.GetWidth() - clock_width)>>1) - icon.GetWidth();
-  t_weapon_name->SetText(weapon->GetName());
-  t_weapon_name->DrawRightCenter(bottom_bar_pos + Point2i(offset, 70*zoom));
+  // The control interface doesn't look good with texts overlayed on it
+  if (!is_control) {
+    // Draw weapon name
+    t_weapon_name->SetText(weapon->GetName());
+    t_weapon_name->DrawRightCenter(bottom_bar_pos + Point2i(offset, 70*zoom));
 
-  // Display number of ammo
-  t_weapon_stock->SetText(nbr_munition ==  INFINITE_AMMO ? _("(unlimited)")
-                                                         : _("Stock:") + Format("%i", nbr_munition));
-  t_weapon_stock->DrawCenterTop(bottom_bar_pos + Point2i(offset+(icon.GetWidth()>>1), MARGIN));
+    // Display number of ammo
+    t_weapon_stock->SetText(nbr_munition ==  INFINITE_AMMO ? _("(unlimited)")
+                                                           : _("Stock:") + Format("%i", nbr_munition));
+    t_weapon_stock->DrawCenterTop(bottom_bar_pos + Point2i(offset+(icon.GetWidth()>>1), MARGIN));
+  }
 
   // Draw weapon icon
   Point2i weapon_icon_offset(offset, default_toolbar.GetHeight() - icon.GetHeight() - MARGIN);
