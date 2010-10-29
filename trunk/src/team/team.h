@@ -122,7 +122,7 @@ public:
   void PrepareTurn();
 
   // Access to the character.
-  Character& ActiveCharacter() const;
+  Character& ActiveCharacter() const { return (*active_character); }
 
   void DrawEnergy(const Point2i& pos) { energy.Draw(pos); }
   void Refresh() { energy.Refresh(); }
