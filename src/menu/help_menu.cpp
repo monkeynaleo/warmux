@@ -47,6 +47,9 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
+  tabs->AddNewTab("unused", _("Current controls"),
+                  new ControlConfig(tabs->GetSize(), true));
+
   FigureWidget *w;
 #ifndef ANDROID
   w = new FigureWidget(Point2i(max_w,
@@ -77,7 +80,6 @@ HelpMenu::HelpMenu()
   w->AddCaption(_("Center camera on character"), 386, 422, 132); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Quickly quit game with Ctrl"), 81, 43, 132); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Keyboard"), w);
-  widgets.AddWidget(tabs);
 #endif
 
   w = new FigureWidget(Point2i(max_w,
@@ -149,9 +151,7 @@ HelpMenu::HelpMenu()
   w->AddCaption(_("Fire your weapon!"), 866, 635, 221); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Interface"), w);
 
-  tabs->AddNewTab("unused", _("Current controls"),
-                  new ControlConfig(tabs->GetSize(), true));
-
   GetResourceManager().UnLoadXMLProfile(res);
+  widgets.AddWidget(tabs);
   widgets.Pack();
 }
