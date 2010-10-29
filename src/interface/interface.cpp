@@ -797,8 +797,6 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
   const Team& team = ActiveTeam();
 
-  Rectanglei character_button(0, 0, 36*zoom, default_toolbar.GetHeight());
-
   old_mouse_pos -= bottom_bar_pos;
 
   // Check if we clicked the clock icon: toggle control toolbar
