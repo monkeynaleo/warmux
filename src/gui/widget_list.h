@@ -57,7 +57,7 @@ public:
 
   virtual void Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
-  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Draw(const Point2i &mousePosition);
   // set need_redrawing to true for all sub widgets;
   virtual void NeedRedrawing();
 

@@ -104,7 +104,7 @@ bool TextBox::SendKey(const SDL_keysym & key)
   return used;
 }
 
-void TextBox::Draw(const Point2i & mousePosition) const
+void TextBox::Draw(const Point2i & mousePosition)
 {
   Rectanglei clip;
   Rectanglei wlr = GetClip(clip);

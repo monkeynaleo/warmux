@@ -69,7 +69,7 @@ void SpinButtonWithPicture::Pack()
   txt_label->SetMaxWidth(size.x);
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &mousePosition) const
+void SpinButtonWithPicture::Draw(const Point2i &mousePosition)
 {
   Surface& surf = GetMainWindow();
 

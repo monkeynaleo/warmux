@@ -332,7 +332,7 @@ void WidgetList::Update(const Point2i& mousePosition,
   need_redrawing = false;
 }
 
-void WidgetList::Draw(const Point2i &mousePosition) const
+void WidgetList::Draw(const Point2i &mousePosition)
 {
   Rectanglei clip;
   Rectanglei wlr = GetClip(clip);

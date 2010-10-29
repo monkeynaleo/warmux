@@ -57,7 +57,7 @@ void GraphCanvas::SetAxis(const std::string& xname, const std::string& yname)
 #endif
 }
 
-void GraphCanvas::Draw(const Point2i& /*mousePosition*/) const
+void GraphCanvas::Draw(const Point2i& /*mousePosition*/)
 {
   DrawGraph(position.x+DEF_BORDER, position.y+DEF_BORDER,
             size.x-2*DEF_BORDER, size.y-2*DEF_BORDER);

@@ -169,7 +169,7 @@ void SpinButton::Pack()
   size.y = txtLabel->GetHeight();
 }
 
-void SpinButton::Draw(const Point2i & mousePosition) const
+void SpinButton::Draw(const Point2i & mousePosition)
 {
   txtLabel->DrawCenterTop(position + Point2i(0, 6));
 

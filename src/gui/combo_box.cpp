@@ -82,7 +82,7 @@ void ComboBox::Pack()
   txt_label->SetMaxWidth(size.x);
 }
 
-void ComboBox::Draw(const Point2i &mousePosition) const
+void ComboBox::Draw(const Point2i &mousePosition)
 {
   Surface& window = GetMainWindow();
 

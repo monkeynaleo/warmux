@@ -91,7 +91,7 @@ bool Button::LoadXMLConfiguration()
   return true;
 }
 
-void Button::Draw(const Point2i & mousePosition) const
+void Button::Draw(const Point2i & mousePosition)
 {
   if (!IsVisible())
     return;

@@ -91,7 +91,7 @@ bool ButtonPic::LoadXMLConfiguration(void)
   return true;
 }
 
-void ButtonPic::Draw(const Point2i &mousePosition) const
+void ButtonPic::Draw(const Point2i &mousePosition)
 {
   Surface& surf = AppWormux::GetInstance()->video->window;
 

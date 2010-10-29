@@ -22,11 +22,11 @@
 #include "graphic/text.h"
 #include "gui/figure_widget.h"
 
-void FigureWidget::Draw(const Point2i& mousePosition) const
+void FigureWidget::Draw(const Point2i& mousePosition)
 {
-  Point2f zoom = GetScale();
-
   PictureWidget::Draw(mousePosition);
+
+  Point2f zoom = GetScale();
 
   for (uint i=0; i<captions.size(); i++) {
     uint lsize = captions[i].w*zoom.GetX();

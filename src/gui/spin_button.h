@@ -34,40 +34,34 @@ class Button;
 
 class SpinButton : public AbstractSpinButton
 {
-  private:
-    /* If you need this, implement it (correctly)*/
-    SpinButton(const SpinButton &);
-    SpinButton operator = (const SpinButton &);
-    /*********************************************/
+  bool     shadowed;
+  Label *  txtLabel;
+  Label *  txtValue;
+  Button * m_plus;
+  Button * m_minus;
 
-    bool     shadowed;
-    Label *  txtLabel;
-    Label *  txtValue;
-    Button * m_plus;
-    Button * m_minus;
+public:
+  SpinButton(const std::string & label,
+             int width,
+             int value,
+             int step,
+             int min_value,
+             int max_value,
+             const Color & color = white_color,
+             bool shadowed = true);
+  SpinButton(Profile * profile,
+             const xmlNode * spinButtonNode);
+  virtual ~SpinButton(void);
 
-  public:
-    SpinButton(const std::string & label, 
-               int width,
-               int value, 
-               int step, 
-               int min_value, 
-               int max_value,
-               const Color & color = white_color,  
-               bool shadowed = true);
-    SpinButton(Profile * profile,
-               const xmlNode * spinButtonNode);
-    virtual ~SpinButton(void);
+  // From Widget
+  virtual void Pack();
+  virtual void Draw(const Point2i & mousePosition);
+  virtual Widget * Click(const Point2i &/*mousePosition*/, uint /*button*/) const { return NULL; };
+  virtual Widget * ClickUp(const Point2i & mousePosition, uint button);
+  virtual bool LoadXMLConfiguration(void);
 
-    // From Widget
-    virtual void Pack();
-    virtual void Draw(const Point2i & mousePosition) const;
-    virtual Widget * Click(const Point2i &/*mousePosition*/, uint /*button*/) const { return NULL; };
-    virtual Widget * ClickUp(const Point2i & mousePosition, uint button);
-    virtual bool LoadXMLConfiguration(void);
-
-    // From AbstractSpinButton
-    virtual void ValueHasChanged();
+  // From AbstractSpinButton
+  virtual void ValueHasChanged();
 };
 
 #endif

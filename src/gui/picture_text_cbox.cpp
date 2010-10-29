@@ -118,7 +118,7 @@ bool PictureTextCBox::LoadXMLConfiguration()
   return true;
 }
 
-void PictureTextCBox::Draw(const Point2i &/*mousePosition*/) const
+void PictureTextCBox::Draw(const Point2i &/*mousePosition*/)
 {
   Surface & video_window = GetMainWindow();
 
