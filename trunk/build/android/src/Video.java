@@ -89,7 +89,6 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
     System.loadLibrary("application");
     System.loadLibrary("sdl_main");
     Settings.Apply(context);
-    accelerometer = new AccelerometerReader(context);
     URLDownloader tmp = new URLDownloader();
     // Tweak video thread priority, if user selected big audio buffer
     if(Globals.AudioBufferConfig >= 2)
@@ -123,7 +122,6 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
   public native void nativeGlContextRecreated();
 
   private Activity context = null;
-  private AccelerometerReader accelerometer = null;
 
   private EGL10 mEgl = null;
   private EGLDisplay mEglDisplay = null;
