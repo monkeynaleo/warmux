@@ -747,7 +747,7 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
         if (type == CLICK_TYPE_UP) {
           a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
           // If we don't have ammo left for the weapon,
-          if (ActiveTeam().ReadNbAmmos() < 1) {
+          if (ActiveTeam().ReadNbUnits() < 2) {
             is_control = false;
             Hide();
           }
