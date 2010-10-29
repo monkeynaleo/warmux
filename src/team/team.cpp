@@ -319,11 +319,6 @@ void Team::PrepareTurn()
     ai->PrepareTurn();
 }
 
-Character& Team::ActiveCharacter() const
-{
-  return (*active_character);
-}
-
 void Team::SetWeapon(Weapon::Weapon_type type)
 {
   ASSERT (type >= Weapon::FIRST && type <= Weapon::LAST);
