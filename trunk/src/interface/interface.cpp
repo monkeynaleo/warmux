@@ -807,16 +807,12 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
                           clock_width, default_toolbar.GetHeight());
   if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
     switch (type) {
-      case CLICK_TYPE_LONG:
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN:
         if (clock_button.Contains(old_mouse_pos))
           Game::GetInstance()->UserAsksForMenu();
         break;
-      case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
-      case CLICK_TYPE_UP:
-        if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
-            Game::GetInstance()->ReadState() != Game::PLAYING)
-          return 1;
-        is_control = !is_control;
+      case CLICK_TYPE_UP: return 1;
     }
     return 1;
   }
@@ -843,6 +839,19 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
         weapons_menu.SwitchDisplay();
     }
     return 1;
+  }
+
+  Rectanglei wind_button(343*zoom, 0, 86*zoom, default_toolbar.GetHeight());
+  if (wind_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG:
+      case CLICK_TYPE_DOWN: return 1;
+      case CLICK_TYPE_UP:
+        if (ActiveTeam().IsLocalHuman() && !ActiveCharacter().IsDead() &&
+            Game::GetInstance()->ReadState() == Game::PLAYING)
+          is_control = !is_control;
+        return 1;
+    }
   }
 
   return -1;
