@@ -647,16 +647,18 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
 
 bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
-  if (!ActiveTeam().IsLocalHuman())
+  // Make sure we don't go in there while we shouldn't
+  if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
+      Game::GetInstance()->ReadState() != Game::PLAYING)
     return false;
 
   Character *active_char = &ActiveCharacter();
   Point2i button_size(56*zoom, control_toolbar.GetHeight());
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
-  Rectanglei left_button(Point2i(3*zoom, 0), button_size);
 
   old_mouse_pos -= bottom_bar_pos;
 
+  Rectanglei left_button(Point2i(3*zoom, 0), button_size);
   if (left_button.Contains(mouse_rel_pos)) {
     switch (type) {
       case CLICK_TYPE_LONG: break;
@@ -690,6 +692,26 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
     return true;
   }
 
+  Rectanglei timerup_button(Point2i(180*zoom, 0), Point2i(40*zoom, control_toolbar.GetHeight()>>1));
+   if (timerup_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: break;
+      case CLICK_TYPE_UP: ActiveTeam().AccessWeapon().HandleKeyReleased_More(); break;
+    }
+    return true;
+  }
+  Rectanglei timerdown_button(Point2i(180*zoom, control_toolbar.GetHeight()>>1),
+                              Point2i(40*zoom, control_toolbar.GetHeight()>>1));
+   if (timerdown_button.Contains(mouse_rel_pos)) {
+    switch (type) {
+      case CLICK_TYPE_LONG: break;
+      case CLICK_TYPE_DOWN: break;
+      case CLICK_TYPE_UP: ActiveTeam().AccessWeapon().HandleKeyReleased_Less(); break;
+    }
+    return true;
+  }
+
   Rectanglei up_button(Point2i(433*zoom, 0), button_size);
    if (up_button.Contains(mouse_rel_pos)) {
     switch (type) {
@@ -717,16 +739,19 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
       case CLICK_TYPE_LONG: break;
       case CLICK_TYPE_DOWN:
       case CLICK_TYPE_UP: {
-        if (Game::GetInstance()->ReadState() != Game::PLAYING || ActiveCharacter().IsDead())
-          return false;
+        // Send the shoot action
         Action *a;
         if (type == CLICK_TYPE_UP) {
           a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
         } else {
           a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
+          // If we don't have ammo left for the weapon,
+          if (ActiveTeam().ReadNbAmmos() < 1) {
+            is_control = false;
+            Hide();
+          }
         }
         ActionHandler::GetInstance()->NewAction(a);
-        break;
       }
     }
     return true;
@@ -787,8 +812,10 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
         break;
       case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
       case CLICK_TYPE_UP:
-        if (team.IsLocalHuman() || is_control)
-          is_control = !is_control;
+        if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
+            Game::GetInstance()->ReadState() != Game::PLAYING)
+          return 1;
+        is_control = !is_control;
     }
     return 1;
   }
@@ -809,16 +836,10 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
         break;
       case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
       case CLICK_TYPE_UP:
-        if (team.IsLocalHuman()) {
-          weapons_menu.SwitchDisplay();
-          if (ActiveTeam().ReadNbAmmos() < 1) {
-            is_control = false;
-            Hide();
-          }
-        } else { // Always witch and hide the interface
-          is_control = false;
-          Hide();
-        }
+        if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
+            Game::GetInstance()->ReadState() != Game::PLAYING)
+          return 1;
+        weapons_menu.SwitchDisplay();
     }
     return 1;
   }
