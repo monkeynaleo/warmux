@@ -226,7 +226,6 @@
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapons_interface_size" x="290" y="235" />
   <point name="tools_interface_size" x="100" y="235" />
-  <surface name="shoot" file="interface/not_skin/shoot.png"/>
   <surface name="clock" file="interface/whitetheme/clock.png"/>
   <sprite name="clock_normal">
     <image file="interface/whitetheme/clock.png">
