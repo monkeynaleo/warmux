@@ -89,7 +89,6 @@ class TeamEnergy
 
   int         dx;
   int         dy;
-  int         height;
 
   uint        rank;
   uint        new_rank;
@@ -97,6 +96,9 @@ class TeamEnergy
   std::string team_name;
 
   uint        move_start_time;
+
+  static uint bar_spacing;
+  int         height;
 
 public :
   uint        rank_tmp;
@@ -121,6 +123,8 @@ public :
   // Move energy bar immediatly to its destination
   void FinalizeMove();
   void SetHeight(int height);
+
+  static void SetSpacing(uint spacing) { bar_spacing = spacing; }
 };
 
 #endif /* TEAM_ENERGY_H */

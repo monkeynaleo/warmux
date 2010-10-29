@@ -204,6 +204,7 @@ void Interface::Reset()
   weapons_menu.Reset();
   help->Reset();
   energy_bar->InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
+  TeamEnergy::SetSpacing((187-MARGIN)*zoom / TeamsList::GetInstance()->GetPlayingList().size());
 }
 
 void Interface::DrawCharacterInfo()

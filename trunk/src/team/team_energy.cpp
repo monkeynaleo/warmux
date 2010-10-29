@@ -32,7 +32,6 @@
 #include "include/app.h"
 
 #define   BAR_WIDTH       13
-#define   BAR_SPACING     16
 
 #define   ALPHA           127
 #define   BACK_ALPHA      0
@@ -60,6 +59,7 @@ void EnergyList::AddValue(uint value)
   EnergyList::push_back(eval);
 }
 
+uint TeamEnergy::bar_spacing = 16;
 
 TeamEnergy::TeamEnergy(Team * _team)
   : energy_bar(NULL)
@@ -72,11 +72,11 @@ TeamEnergy::TeamEnergy(Team * _team)
                            Font::FONT_SMALL, Font::FONT_BOLD, false))
   , dx(0)
   , dy(0)
-  , height(44)
   , rank(0)
   , new_rank(0)
   , team_name("not initialized")
   , move_start_time(0)
+  , height(44)
   , rank_tmp(0)
   , status(EnergyStatusOK)
 {
@@ -154,9 +154,9 @@ void TeamEnergy::Refresh()
 void TeamEnergy::Draw(const Point2i& pos)
 {
   energy_bar->Actu(value);
-  Point2i tmp = pos + Point2i(rank * (BAR_WIDTH + BAR_SPACING) + dx, dy);
-  energy_bar->DrawXY(tmp + Point2i(BAR_SPACING/2-3, dy+icon->GetHeight()));
-  icon->DrawXY(tmp);
+  Point2i tmp = pos + Point2i(rank*bar_spacing + bar_spacing/2 + dx, dy);
+  energy_bar->DrawXY(tmp + Point2i(0, dy+icon->GetHeight()));
+  icon->DrawXY(tmp + Point2i(4-(icon->GetWidth()>>1), 0));
 }
 
 void TeamEnergy::SetValue(uint new_energy)
@@ -188,7 +188,7 @@ void TeamEnergy::Move()
     if (!move_start_time)
       move_start_time = global_time->Read();
 
-    dx = 0.5f*(BAR_WIDTH + BAR_SPACING)*(new_rank - rank)*(global_time->Read() - move_start_time) / MOVE_DURATION;
+    dx = 0.5f*bar_spacing*(new_rank - rank)*(global_time->Read() - move_start_time) / MOVE_DURATION;
     dy = 0.5f*height*(rank-new_rank) * sin((global_time->Read() - move_start_time)*M_PI/MOVE_DURATION);
 
     // End of movement ?
