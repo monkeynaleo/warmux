@@ -103,15 +103,15 @@ HelpMenu::HelpMenu()
 
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/game_mode", Font::FONT_LARGE);
-  w->AddCaption(_("Experiment new game rules"), 206, 45, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this if you are a slow player"), 483, 45, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("When a character can be switched"), 761, 45, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("More energy, more shots needed"), 1038, 45, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("If you like medkits, increase this"), 206, 668, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this if you like long games"), 482, 668, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this for faster death mode end"), 761, 668, 252);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("The bigger the faster you'll fall!"), 1042, 668, 252);// TRANSLATORS: please be imaginative and keep it short!
+                       "help/game_mode", Font::FONT_BIG);
+  w->AddCaption(_("Experiment new game rules"), 192, 71, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this if you are a slow player"), 193, 25, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("When a character can be switched"), 607, 25, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("More energy, more shots needed"), 607, 71, 379);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("If you like medkits,\nincrease this"), 191, 361, 379);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this if you like long games"), 191, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this for faster death mode end"), 606, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("The bigger the faster you'll fall!"), 607, 361, 381);// TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Game mode"), w);
 
   w = new FigureWidget(Point2i(max_w,
