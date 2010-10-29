@@ -26,19 +26,19 @@
 
 class VBox : public Box
 {
-  protected:
-    bool force_widget_size;
+protected:
+  bool force_widget_size;
 
-  public:
-    VBox(uint width, 
-         bool draw_border = true, 
-         bool force_widget_size = true);
-    VBox(Profile * profile,
-         const xmlNode * verticalBoxNode);
-    virtual ~VBox() { }
+public:
+  VBox(uint width,
+       bool draw_border = true,
+       bool force_widget_size = true);
+  VBox(Profile * profile,
+       const xmlNode * verticalBoxNode);
+  virtual ~VBox() { }
 
-    virtual void Pack();
-    virtual bool LoadXMLConfiguration(void);
+  virtual void Pack();
+  virtual bool LoadXMLConfiguration(void);
 };
 
 #endif

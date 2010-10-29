@@ -44,6 +44,8 @@ public:
 
 private:
   bool disabled;
+  bool loaded;
+  std::string name;
   ScalingType type;
   Point2i picture_size;
   Sprite * spr;
@@ -69,8 +71,9 @@ public:
                   ScalingType type = NO_SCALING,
                   bool antialiasing = false);
   void SetNoSurface();
-  virtual void Draw(const Point2i & mousePosition) const;
-  virtual void Pack();
+
+  virtual void Draw(const Point2i & mousePosition);
+  virtual void Pack() { ApplyScaling(type); }
 
   // Apply a transparency color mask
   void Disable() { disabled = true; };

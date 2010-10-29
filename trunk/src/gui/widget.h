@@ -88,7 +88,7 @@ public:
   virtual void Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition); // Virtual for widget_list: to remove!
 
-  virtual void Draw(const Point2i & mousePosition) const = 0;
+  virtual void Draw(const Point2i & mousePosition) = 0;
   virtual void NeedRedrawing() { need_redrawing = true; }; // set need_redrawing to true; -- virtual for widget_list
 
   virtual bool SendKey(const SDL_keysym &) { return false; };

@@ -30,21 +30,20 @@ class Text;
 
 class ButtonPic : public Widget
 {
- private:
   Text * txt_label;
   Surface m_img_normal;
 
- public:
-  ButtonPic(const std::string & label, 
-            const std::string & resource_id, 
+public:
+  ButtonPic(const std::string & label,
+            const std::string & resource_id,
             const Point2i & size);
   ButtonPic(Profile * profile,
             const xmlNode * buttonPicNode);
   virtual ~ButtonPic();
 
   virtual bool LoadXMLConfiguration(void);
- 
-  virtual void Draw(const Point2i& mousePosition) const;
+
+  virtual void Draw(const Point2i& mousePosition);
   virtual void Pack();
 };
 

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Draw a graph of a series of points according to various parameters 
+ * Draw a graph of a series of points according to various parameters
  *****************************************************************************/
 
 #ifndef GRAPH_CANVAS_H
@@ -52,7 +52,7 @@ public:
               const std::string& xname, const std::string& yname,
               std::vector<Result>& res, uint thick=2);
   virtual ~GraphCanvas() {};
-  virtual void Draw(const Point2i&) const;
+  virtual void Draw(const Point2i&);
 
   virtual void DrawGraph(uint i, float xmax,
                          int x, float xscale,

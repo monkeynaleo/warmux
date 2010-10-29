@@ -191,7 +191,7 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
   }
 }
 
-void MultiTabs::Draw(const Point2i &mousePosition) const
+void MultiTabs::Draw(const Point2i &mousePosition)
 {
   if (tabs.empty())
     return;

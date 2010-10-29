@@ -34,17 +34,11 @@ class TextBox;
 
 class TalkBox : public VBox
 {
- private:
-  /* If you need this, implement it (correctly) */
-  TalkBox(const TalkBox&);
-  TalkBox operator=(const TalkBox&);
-  /**********************************************/
-
   MsgBox* msg_box;
   TextBox* line_to_send_tbox;
   Button* send_txt_bt;
 
- public:
+public:
   TalkBox(const Point2i& size, Font::font_size_t font_size, Font::font_style_t font_style);
   virtual ~TalkBox(void) {}
 

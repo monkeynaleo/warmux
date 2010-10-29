@@ -55,7 +55,7 @@ public:
   virtual ~ComboBox();
 
   virtual void Pack();
-  virtual void Draw(const Point2i &mousePosition) const;
+  virtual void Draw(const Point2i &mousePosition);
   virtual Widget* Click(const Point2i&, uint) const { return NULL; };
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 

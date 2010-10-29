@@ -28,6 +28,7 @@
 PictureWidget::PictureWidget(const Point2i & _size)
   : Widget(_size, false)
   , disabled(false)
+  , loaded(false)
   , type(NO_SCALING)
   , picture_size(0, 0)
   , spr(NULL)
@@ -37,17 +38,14 @@ PictureWidget::PictureWidget(const Point2i & _size)
 PictureWidget::PictureWidget(const Point2i & _size,
                              const std::string & resource_id,
                              ScalingType _type)
-  : Widget(size, false)
+  : Widget(_size, false)
   , disabled(false)
+  , loaded(false)
+  , name(resource_id)
   , type(_type)
+  , picture_size(0, 0)
   , spr(NULL)
 {
-  size = _size;
-
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  SetSurface(GetResourceManager().LoadImage(res, resource_id),
-             type, type != NO_SCALING);
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 PictureWidget::PictureWidget(const Surface & s, ScalingType type, bool antialiasing)
@@ -56,7 +54,6 @@ PictureWidget::PictureWidget(const Surface & s, ScalingType type, bool antialias
   , type(type)
   , spr(NULL)
 {
-  size = s.GetSize();
   SetSurface(s, type, antialiasing);
 }
 
@@ -148,8 +145,6 @@ void PictureWidget::SetSurface(const Surface & s,
                                ScalingType type_,
                                bool antialiasing)
 {
-  NeedRedrawing();
-
   if (NULL != spr) {
     delete spr;
   }
@@ -157,8 +152,10 @@ void PictureWidget::SetSurface(const Surface & s,
   picture_size = s.GetSize();
   spr = new Sprite(s, antialiasing);
   spr->EnableLastFrameCache();
-  // Don't call immediately ApplyScaling(type) to save on rotozooms
   type = type_;
+  loaded = true;
+  // Don't call immediately ApplyScaling(type) to save on rotozooms
+  NeedRedrawing();
 }
 
 void PictureWidget::SetNoSurface()
@@ -171,8 +168,18 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &/*mousePosition*/) const
+void PictureWidget::Draw(const Point2i &/*mousePosition*/)
 {
+  if (!loaded) {
+    printf("Delayed loading\n");
+    Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+    SetSurface(GetResourceManager().LoadImage(res, name), type, type != NO_SCALING);
+    GetResourceManager().UnLoadXMLProfile(res);
+
+    // Needed to set the resizing
+    ApplyScaling(type);
+  }
+
   if (NULL == spr) {
     return;
   }
@@ -196,9 +203,4 @@ Point2i PictureWidget::GetPicturePosition() const
 Point2f PictureWidget::GetScale() const
 {
   return Point2f(spr->GetScaleX().tofloat(), spr->GetScaleY().tofloat());
-}
-
-void PictureWidget::Pack()
-{
-  ApplyScaling(type);
 }

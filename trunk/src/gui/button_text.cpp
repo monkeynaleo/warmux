@@ -36,7 +36,7 @@ ButtonText::~ButtonText()
   delete text;
 }
 
-void ButtonText::Draw(const Point2i &mousePosition) const
+void ButtonText::Draw(const Point2i &mousePosition)
 {
   Point2i textPosition = position + size/2;
 

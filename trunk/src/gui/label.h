@@ -47,7 +47,7 @@ public:
   virtual ~Label();
 
   virtual bool LoadXMLConfiguration(void);
-  virtual void Draw(const Point2i & mousePosition) const;
+  virtual void Draw(const Point2i & mousePosition);
   virtual void Pack();
 
   void SetText(const std::string & new_txt);

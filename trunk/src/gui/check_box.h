@@ -45,7 +45,7 @@ public:
            const xmlNode * checkBoxNode);
   virtual ~CheckBox();
 
-  virtual void Draw(const Point2i & mousePosition) const;
+  virtual void Draw(const Point2i & mousePosition);
   virtual Widget * Click(const Point2i &, uint) { return this; };
   virtual Widget * ClickUp(const Point2i & mousePosition,
                            uint button);

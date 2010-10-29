@@ -71,7 +71,7 @@ bool Label::LoadXMLConfiguration()
   return true;
 }
 
-void Label::Draw(const Point2i& /*mousePosition*/) const
+void Label::Draw(const Point2i& /*mousePosition*/)
 {
   switch (align) {
   case Text::ALIGN_CENTER:

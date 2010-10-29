@@ -121,7 +121,7 @@ bool CheckBox::LoadXMLConfiguration()
 }
 
 
-void CheckBox::Draw(const Point2i &/*mousePosition*/) const
+void CheckBox::Draw(const Point2i &/*mousePosition*/)
 {
   Surface& surf = GetMainWindow();
 
