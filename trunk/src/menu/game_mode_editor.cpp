@@ -101,11 +101,6 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   LoadGameMode();
 }
 
-GameModeEditor::~GameModeEditor()
-{
-}
-
-
 void GameModeEditor::LoadGameMode()
 {
   std::string mode = opt_game_mode->GetValue();

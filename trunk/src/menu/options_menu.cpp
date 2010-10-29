@@ -376,11 +376,6 @@ OptionMenu::OptionMenu() :
   widgets.Pack();
 }
 
-OptionMenu::~OptionMenu()
-{
-
-}
-
 void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.ClickUp(mousePosition, button);
@@ -409,11 +404,6 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
     SelectTeam();
   }
 
-}
-
-void OptionMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
 }
 
 void OptionMenu::SaveOptions()
@@ -506,10 +496,6 @@ bool OptionMenu::signal_cancel()
   Config::GetInstance()->SetVolumeMusic(initial_vol_mus);
   Config::GetInstance()->SetVolumeEffects(initial_vol_eff);
   return true;
-}
-
-void OptionMenu::Draw(const Point2i &/*mousePosition*/)
-{
 }
 
 void OptionMenu::CheckUpdates()

@@ -34,20 +34,12 @@ class CreditsMenu : public Menu
 
   void PrepareAuthorsList();
 
-  bool signal_ok() { return true; };
-  bool signal_cancel() { return true; };
-
-  void Draw(const Point2i &mousePosition);
-
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
   void AddItem(const std::string & label,
                Font::font_size_t fsize = Font::FONT_SMALL,
                Font::font_style_t fstyle = Font::FONT_BOLD,
                const Color & color = white_color);
- public:
+public:
   CreditsMenu();
-  ~CreditsMenu();
 };
 
 #endif

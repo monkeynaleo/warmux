@@ -47,11 +47,6 @@ public:
   } network_menu_action_t;
 
 private:
-  /* If you need this, implement it (correctly)*/
-  NetworkConnectionMenu(const NetworkConnectionMenu&);
-  NetworkConnectionMenu operator=(const NetworkConnectionMenu&);
-  /********************************************/
-
   MultiTabs * tabs;
 
   TextBox* srv_port_number;
@@ -73,9 +68,7 @@ private:
   uint m_last_click_on_games_lst;
   uint m_Double_click_interval;
 
-  virtual void OnClick(const Point2i &mousePosition, int button);
   virtual void OnClickUp(const Point2i &mousePosition, int button);
-  virtual void Draw(const Point2i &mousePosition);
   virtual void HandleEvent(const SDL_Event& evnt);
 
   void DisplayNetError(connection_state_t conn);

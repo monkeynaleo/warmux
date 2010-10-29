@@ -96,11 +96,6 @@ CreditsMenu::CreditsMenu()  :
   widgets.SetFocusOn(lbox_authors);
 }
 
-CreditsMenu::~CreditsMenu()
-{
-  // Don't pass to widgets: causes a double display
-}
-
 void CreditsMenu::AddItem(const std::string & label,
                           Font::font_size_t fsize,
                           Font::font_style_t fstyle,
@@ -167,19 +162,4 @@ void CreditsMenu::PrepareAuthorsList()
       AddItem("");
     }
   }
-}
-
-void CreditsMenu::Draw(const Point2i& /*mousePosition*/)
-{
-  // Don't pass to widgets: causes a double display
-}
-
-void CreditsMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
-}
-
-void CreditsMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
 }

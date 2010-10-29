@@ -51,19 +51,14 @@ class ResultsMenu : public Menu
   Surface podium_img;
 
   void key_ok();
-  bool signal_ok() { return true;};
-  bool signal_cancel() { return true;};
 
   void ComputeTeamsOrder();
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
   void DrawPodium(const Point2i &position) const;
   void DrawTeamOnPodium(const Team& team, const Point2i& relative_position);
   void Draw(const Point2i &mousePosition);
 
 public:
   ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
-  ~ResultsMenu();
 
   void ReceiveMsgCallback(const std::string& msg, const Color& color);
 };

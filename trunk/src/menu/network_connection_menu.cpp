@@ -363,11 +363,6 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
   }
 }
 
-void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
-}
-
 void NetworkConnectionMenu::__RefreshList()
 {
   SDL_SemWait(net_info.lock);
@@ -436,8 +431,6 @@ void NetworkConnectionMenu::ThreadRefreshList()
   net_info.finished = false;
   net_info.thread_refresh = SDL_CreateThread(RefreshNetInfo, NULL);
 }
-
-void NetworkConnectionMenu::Draw(const Point2i &/*mousePosition*/) {}
 
 void NetworkConnectionMenu::HandleEvent(const SDL_Event& evnt)
 {

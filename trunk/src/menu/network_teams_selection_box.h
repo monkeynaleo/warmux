@@ -30,7 +30,6 @@ class Team;
 
 class NetworkTeamsSelectionBox : public TeamsSelectionBox
 {
-private:
   void RemoveLocalTeam(uint i);
   void SetLocalTeam(uint i, Team& team);
 
@@ -44,7 +43,7 @@ private:
   void RequestTeamRemoval();
   void UpdateNbTeams();
 
- public:
+public:
   NetworkTeamsSelectionBox(const Point2i &size, bool w_border);
 
   virtual void ValidTeamsSelection();
