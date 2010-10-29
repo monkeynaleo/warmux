@@ -47,10 +47,11 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
+  FigureWidget *w;
 #ifndef ANDROID
-  FigureWidget *w = new FigureWidget(Point2i(max_w,
-                                             tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                                     "help/shortkeys", (Font::font_size_t)14);
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/shortkeys", (Font::font_size_t)14);
   w->AddCaption(_("Quit game"), 81, 13, 132); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("High jump"), 439, 326, 132); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Jump backwards"), 439, 297, 132); // TRANSLATORS: please be imaginative and keep it short!
