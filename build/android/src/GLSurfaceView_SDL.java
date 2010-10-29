@@ -1062,6 +1062,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
             Log.v("SDL", "GLSurfaceView_SDL::onPause()");
             synchronized (this) {
                 mPaused = true;
+                notify();
             }
         }
 
