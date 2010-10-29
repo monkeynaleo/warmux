@@ -47,6 +47,7 @@ HelpMenu::HelpMenu()
   MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
   tabs->SetPosition(border, border);
 
+#ifndef ANDROID
   FigureWidget *w = new FigureWidget(Point2i(max_w,
                                              tabs->GetSizeY() - tabs->GetHeaderHeight()),
                                      "help/shortkeys", (Font::font_size_t)14);
@@ -76,17 +77,17 @@ HelpMenu::HelpMenu()
   w->AddCaption(_("Quickly quit game with Ctrl"), 81, 43, 132); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Keyboard"), w);
   widgets.AddWidget(tabs);
+#endif
 
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/startgame_menu", (Font::font_size_t)22);
-  w->AddCaption(_("Click to change team selected"), 293, 141, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Edit player name"), 541, 141, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Go to game rules editing submenu"), 788, 141, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click to select AI/human team"), 325, 275, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Change per team number of players"), 605, 275, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Change number of playing teams"), 146, 334, 238); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click/wheelmouse to change map"), 466, 334, 238); // TRANSLATORS: please be imaginative and keep it short!
+                       "help/startgame_menu", Font::FONT_BIG);
+  w->AddCaption(_("Select number of playing teams"), 220, 471-448, 432); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Change number of players per team"), 618, 471-444, 361); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click/wheelmouse to change the team.\nYou can't select the same team several times."), 167, 471-313, 325);
+  w->AddCaption(_("Click to let a player handle the team instead of the AI, and vice versa"), 576, 471-308, 445); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Map author information: name, email, nickname, country"), 511, 471-238, 557); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click on either side of the central (selected) map or use wheelmouse to change the selected map."), 388, 471-178, 753);
   tabs->AddNewTab("unused", _("Game menu"), w);
 
 
