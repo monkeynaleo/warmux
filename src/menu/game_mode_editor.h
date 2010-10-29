@@ -31,11 +31,6 @@ class CheckBox;
 
 class GameModeEditor : public GridBox
 {
-  /* If you need this, implement it (correctly)*/
-  GameModeEditor(const GameModeEditor&);
-  GameModeEditor operator=(const GameModeEditor&);
-  /********************************************/
-
   ComboBox *opt_game_mode;
 
   ComboBox *opt_allow_character_selection;
@@ -51,7 +46,6 @@ class GameModeEditor : public GridBox
 
 public:
   GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
-  ~GameModeEditor();
 
   const ComboBox* GetGameModeComboBox() const { return opt_game_mode; };
 

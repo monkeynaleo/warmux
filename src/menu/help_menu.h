@@ -24,22 +24,10 @@
 
 #include "menu/menu.h"
 
-// Forward declarations
-class FigureWidget;
-
 class HelpMenu : public Menu
 {
-  bool signal_ok();
-  bool signal_cancel();
-
-  void Draw(const Point2i &mousePosition);
-
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
-
 public:
   HelpMenu();
-  virtual ~HelpMenu();
 };
 
 #endif /* HELP_MENU_H */

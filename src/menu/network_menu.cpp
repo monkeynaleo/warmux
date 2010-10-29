@@ -179,10 +179,6 @@ NetworkMenu::NetworkMenu() :
   }
 }
 
-NetworkMenu::~NetworkMenu()
-{
-}
-
 void NetworkMenu::signal_begin_run()
 {
   ActionHandler::GetInstance()->ExecFrameLessActions();
@@ -201,16 +197,6 @@ void NetworkMenu::RequestSavedTeams()
   } else {
     team_box->RequestTeam();
   }
-}
-
-void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
-}
-
-void NetworkMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
 }
 
 void NetworkMenu::SaveOptions()

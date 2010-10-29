@@ -340,10 +340,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   widgets.Pack();
 }
 
-ResultsMenu::~ResultsMenu()
-{
-}
-
 void ResultsMenu::ComputeTeamsOrder()
 {
   std::sort(results.begin(), results.end(), compareTeamResults);
@@ -363,17 +359,6 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
 
   Surface tmp(team.GetFlag());
   podium_img.MergeSurface(tmp, position);
-}
-
-void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
-}
-
-void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  // Do nothing if user has not released the button
-  widgets.Click(mousePosition, button);
 }
 
 void ResultsMenu::key_ok()

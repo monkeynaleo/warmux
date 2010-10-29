@@ -65,10 +65,6 @@ private:
    virtual void DrawBackground();
    void OnClick(const Point2i &mousePosition, int button);
    void OnClickUp(const Point2i &mousePosition, int button);
-
-  // Main drawing function: refresh parts of screen
-   void Draw(const Point2i &/*mousePosition*/) {};
-   void button_click() const;
 };
 
 #endif

@@ -103,15 +103,6 @@ GameMenu::GameMenu() :
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
-GameMenu::~GameMenu()
-{
-}
-
-void GameMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
-}
-
 void GameMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget *w = widgets.ClickUp(mousePosition, button);

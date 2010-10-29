@@ -154,34 +154,3 @@ HelpMenu::HelpMenu()
   GetResourceManager().UnLoadXMLProfile(res);
   widgets.Pack();
 }
-
-HelpMenu::~HelpMenu()
-{
-
-}
-
-bool HelpMenu::signal_ok()
-{
-  return true;
-}
-
-bool HelpMenu::signal_cancel()
-{
-  return true;
-}
-
-void HelpMenu::Draw(const Point2i& /*mousePosition*/)
-{
-}
-
-void HelpMenu::OnClick(const Point2i &mousePosition, int button)
-{
-  widgets.Click(mousePosition, button);
-}
-
-void HelpMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
-}
-
-//-----------------------------------------------------------------------------

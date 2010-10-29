@@ -111,11 +111,6 @@ void MainMenu::Init(void)
   LoadMenu(xmlProfile, mainMenuNode);
 }
 
-void MainMenu::button_click() const
-{
-  JukeBox::GetInstance()->Play("default", "menu/clic");
-}
-
 void MainMenu::SelectAction(const Widget * widget)
 {
   if (widget == play) {
@@ -173,7 +168,7 @@ void MainMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* b = widgets.ClickUp(mousePosition,button);
   SelectAction(b);
-  button_click();
+  JukeBox::GetInstance()->Play("default", "menu/clic");
 }
 
 void MainMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
@@ -200,8 +195,8 @@ bool MainMenu::signal_cancel()
 bool MainMenu::signal_ok()
 {
   Widget * w = widgets.GetCurrentKeyboardSelectedWidget();
-  if(w != NULL) {
-    SelectAction(widgets.GetCurrentKeyboardSelectedWidget());
+  if (w) {
+    SelectAction(w);
   } else {
     choice = PLAY;
   }
@@ -214,9 +209,8 @@ void MainMenu::DrawBackground()
 
   Menu::DrawBackground();
 
-  version_text->DrawCenter( Point2i(window.GetWidth()/2,
-                            window.GetHeight() + VERSION_DY));
-  website_text->DrawCenter( Point2i(window.GetWidth()/2,
-                            window.GetHeight() + VERSION_DY/2));
+  version_text->DrawCenter(Point2i(window.GetWidth()/2,
+                                   window.GetHeight() + VERSION_DY));
+  website_text->DrawCenter(Point2i(window.GetWidth()/2,
+                                   window.GetHeight() + VERSION_DY/2));
 }
-

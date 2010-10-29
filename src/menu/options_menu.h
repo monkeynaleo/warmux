@@ -75,9 +75,7 @@ private:
 #endif
 
   void SaveOptions();
-  void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
-  void Draw(const Point2i &mousePosition);
   static uint fromVolume(uint vol);
   static uint toVolume(uint level);
 
@@ -110,7 +108,6 @@ private:
 
 public:
   OptionMenu();
-  ~OptionMenu();
   static void CheckUpdates();
 };
 

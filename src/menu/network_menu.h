@@ -33,9 +33,6 @@ class CheckBox;
 
 class NetworkMenu : public Menu
 {
-  NetworkMenu(const NetworkMenu&);
-  const NetworkMenu& operator=(const NetworkMenu&);
-
   bool waiting_for_server;
 
   /* Options controllers */
@@ -57,8 +54,6 @@ class NetworkMenu : public Menu
   void SaveOptions();
   void WaitingForGameMaster();
 
-  virtual void OnClick(const Point2i &mousePosition, int button);
-  virtual void OnClickUp(const Point2i &mousePosition, int button);
   virtual void Draw(const Point2i &mousePosition);
   virtual void HandleEvent(const SDL_Event& evnt);
 
@@ -71,7 +66,6 @@ class NetworkMenu : public Menu
 
 public:
   NetworkMenu();
-  ~NetworkMenu();
 
   void AddTeamCallback(const std::string& team_id);
   void UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id);
