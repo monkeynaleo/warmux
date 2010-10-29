@@ -25,7 +25,7 @@
 
     <string name="controls_arrows">Arrows / joystick / dpad</string>
     <string name="controls_trackball">Trackball</string>
-    <string name="controls_accel">Accelerometer</string>
+    <string name="controls_none">Nothing</string>
     <string name="controls_question">What kind of navigation keys does your device have?</string>
 
     <string name="trackball_no_dampening">No dampening</string>

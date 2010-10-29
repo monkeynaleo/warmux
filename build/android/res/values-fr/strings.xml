@@ -23,7 +23,7 @@
 
     <string name="controls_arrows">Flèches / joystick / dpad</string>
     <string name="controls_trackball">Trackball</string>
-    <string name="controls_accel">Accéléromètre</string>
+    <string name="controls_none">Rien</string>
     <string name="controls_question">Quel type de touches votre appareil a-t-il?</string>
 
     <string name="trackball_no_dampening">Sans limite</string>

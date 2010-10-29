@@ -39,8 +39,6 @@ class Settings
       out.writeBoolean(Globals.DownloadToSdcard);
       out.writeBoolean(Globals.PhoneHasArrowKeys);
       out.writeBoolean(Globals.PhoneHasTrackball);
-      out.writeBoolean(Globals.UseAccelerometerAsArrowKeys);
-      out.writeInt(Globals.AccelerometerSensitivity);
       out.writeInt(Globals.TrackballDampening);
       out.writeInt(Globals.AudioBufferConfig);
       out.close();
@@ -63,8 +61,6 @@ class Settings
       Globals.DownloadToSdcard = settingsFile.readBoolean();
       Globals.PhoneHasArrowKeys = settingsFile.readBoolean();
       Globals.PhoneHasTrackball = settingsFile.readBoolean();
-      Globals.UseAccelerometerAsArrowKeys = settingsFile.readBoolean();
-      Globals.AccelerometerSensitivity = settingsFile.readInt();
       Globals.TrackballDampening = settingsFile.readInt();
       Globals.AudioBufferConfig = settingsFile.readInt();
 
@@ -182,7 +178,7 @@ class Settings
   {
     final CharSequence[] items = { p.getResources().getString(R.string.controls_arrows),
                                    p.getResources().getString(R.string.controls_trackball),
-                                   p.getResources().getString(R.string.controls_accel) };
+                                   p.getResources().getString(R.string.controls_none) };
 
     AlertDialog.Builder builder = new AlertDialog.Builder(p);
     builder.setTitle(p.getResources().getString(R.string.controls_question));
@@ -194,14 +190,13 @@ class Settings
         Globals.PhoneHasTrackball = (item == 1);
 
         dialog.dismiss();
-        if (Globals.PhoneHasArrowKeys )
+        if (Globals.PhoneHasTrackball )
         {
-          // Force arrows only
-          Globals.UseAccelerometerAsArrowKeys = false;
-          showAudioConfig(p);
+          showTrackballConfig(p);
         }
         else
-          showTrackballConfig(p);
+          // Force arrows only
+          showAudioConfig(p);
       }
     });
     AlertDialog alert = builder.create();
@@ -214,8 +209,6 @@ class Settings
     Globals.TrackballDampening = 0;
     if( ! Globals.PhoneHasTrackball )
     {
-      Globals.UseAccelerometerAsArrowKeys = true;
-      showAccelerometerConfig(p);
       return;
     }
 
@@ -231,66 +224,6 @@ class Settings
       public void onClick(DialogInterface dialog, int item)
       {
         Globals.TrackballDampening = item;
-
-        dialog.dismiss();
-        showAudioConfig(p);
-      }
-    });
-    AlertDialog alert = builder.create();
-    alert.setOwnerActivity(p);
-    alert.show();
-  }
-
-  static void showAccelerometerConfig(final MainActivity p)
-  {
-    Globals.AccelerometerSensitivity = 0;
-    if( ! Globals.UseAccelerometerAsArrowKeys )
-    {
-      showAccelerometerCenterConfig(p);
-      return;
-    }
-
-    final CharSequence[] items = { p.getResources().getString(R.string.accel_fast),
-                                   p.getResources().getString(R.string.accel_medium),
-                                   p.getResources().getString(R.string.accel_slow) };
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle(R.string.accel_question);
-    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int item)
-      {
-        Globals.AccelerometerSensitivity = item;
-
-        dialog.dismiss();
-        showAccelerometerCenterConfig(p);
-      }
-    });
-    AlertDialog alert = builder.create();
-    alert.setOwnerActivity(p);
-    alert.show();
-  }
-
-  static void showAccelerometerCenterConfig(final MainActivity p)
-  {
-    Globals.AccelerometerSensitivity = 0;
-    if( ! Globals.UseAccelerometerAsArrowKeys )
-    {
-      showAudioConfig(p);
-      return;
-    }
-
-    final CharSequence[] items = { p.getResources().getString(R.string.accel_floating),
-                    p.getResources().getString(R.string.accel_fixed_start),
-                    p.getResources().getString(R.string.accel_fixed_horiz) };
-
-    AlertDialog.Builder builder = new AlertDialog.Builder(p);
-    builder.setTitle(R.string.accel_question_center);
-    builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int item)
-      {
-        Globals.AccelerometerCenterPos = item;
 
         dialog.dismiss();
         showAudioConfig(p);
@@ -332,11 +265,10 @@ class Settings
       nativeSetTrackballUsed();
     if( Globals.AppUsesMouse )
       nativeSetMouseUsed();
-    if( Globals.AppUsesJoystick && !Globals.UseAccelerometerAsArrowKeys )
+    if( Globals.AppUsesJoystick )
       nativeSetJoystickUsed();
     if( Globals.AppUsesMultitouch )
       nativeSetMultitouchUsed();
-    nativeSetAccelerometerSettings(Globals.AccelerometerSensitivity, Globals.AccelerometerCenterPos);
     nativeSetTrackballDampening(Globals.TrackballDampening);
     String lang = new String(Locale.getDefault().getLanguage());
     if( Locale.getDefault().getCountry().length() > 0 )
@@ -365,7 +297,6 @@ class Settings
   private static native void nativeIsSdcardUsed(int flag);
   private static native void nativeSetTrackballUsed();
   private static native void nativeSetTrackballDampening(int value);
-  private static native void nativeSetAccelerometerSettings(int sensitivity, int centerPos);
   private static native void nativeSetMouseUsed();
   private static native void nativeSetJoystickUsed();
   private static native void nativeSetMultitouchUsed();
