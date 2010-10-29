@@ -29,7 +29,8 @@ class Team;
 class Sprite;
 class Text;
 
-typedef enum {
+typedef enum
+{
   // Energy bar are waiting for a new change
   EnergyStatusOK,
 
@@ -64,13 +65,11 @@ protected:
   void Reset();
   void AddValue(uint value);
   EnergyList() : m_max_value(0), m_last_value(0) { };
-  ~EnergyList() {
-    Reset();
-  };
+  ~EnergyList() { Reset(); }
 public:
   typedef std::vector<EnergyValue*>::const_iterator const_iterator;
   uint GetMaxValue() const { return m_max_value; };
-  uint GetDuration() const { return at(size()-1)->GetDuration(); }
+  uint GetDuration() const { uint s = size(); return (s>0) ? at(s-1)->GetDuration() : 0; }
 };
 
 class TeamEnergy

@@ -309,14 +309,18 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     const Team* team = (*it)->getTeam();
     if (team) {
       const EnergyList& list = team->energy.energy_list;
-      GraphCanvas::Result r;
-      r.ymax = list.GetMaxValue();
-      r.xmax = list.GetDuration()*0.001f;
-      r.color = team->GetColor();
-      r.item = &team->GetFlag();
-      for (uint i=0; i<list.size(); i++)
-        r.list.push_back(std::make_pair(list[i]->GetDuration()*0.001f, list[i]->GetValue()));
-      team_results.push_back(r);
+
+      uint duration = list.GetDuration();
+      if (duration) {
+        GraphCanvas::Result r;
+        r.ymax = list.GetMaxValue();
+        r.xmax = duration*0.001f;
+        r.color = team->GetColor();
+        r.item = &team->GetFlag();
+        for (uint i=0; i<list.size(); i++)
+          r.list.push_back(std::make_pair(list[i]->GetDuration()*0.001f, list[i]->GetValue()));
+        team_results.push_back(r);
+      }
     }
   }
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
