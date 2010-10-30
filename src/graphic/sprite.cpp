@@ -364,7 +364,11 @@ void Sprite::RefreshSurface()
 void Sprite::FixParameters()
 {
   for (uint i=0; i<frames.size(); i++) {
+#ifdef HAVE_HANDHELD
     frames[i].surface = frames[i].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth).DisplayFormatColorKey(128);
+#else
+    frames[i].surface = frames[i].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
+#endif
   }
   scale_x = 1.0;
   scale_y = 1.0;
