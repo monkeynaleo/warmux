@@ -205,6 +205,8 @@ void Interface::Reset()
   help->Reset();
   energy_bar->InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
   TeamEnergy::SetSpacing((187-MARGIN)*zoom / TeamsList::GetInstance()->GetPlayingList().size());
+  FOR_EACH_TEAM(tmp_team)
+    (*tmp_team)->GetEnergyBar().SetHeight(default_toolbar.GetHeight());
 }
 
 void Interface::DrawCharacterInfo()
@@ -357,7 +359,6 @@ void Interface::DrawTeamEnergy() const
     Team* team = *tmp_team;
     if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
       team->GetEnergyBar().FinalizeMove();
-    team->GetEnergyBar().SetHeight(default_toolbar.GetHeight());
     team->DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
 }

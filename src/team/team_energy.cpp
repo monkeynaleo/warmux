@@ -214,8 +214,6 @@ void TeamEnergy::FinalizeMove()
 
 void TeamEnergy::SetHeight(int h)
 {
-  if (h==height)
-    return;
   icon->ScaleSize(h/3, h/3);
   icon->FixParameters();
   height = h;
