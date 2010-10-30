@@ -15,6 +15,7 @@
     <string name="dl_from">Ladataan kohteesta %s</string>
     <string name="error_dl_from">Virhe ladattaessa kohteesta %s</string>
     <string name="error_write">Virhe kirjoittaessa %s</string>
+    <string name="dl_crc_error">Tiedoston %s on vioittunut</string>
     <string name="dl_progress">%d%% valmis: tiedosto %s</string>
     <string name="dl_finished">Valmis</string>
 
@@ -24,7 +25,7 @@
 
     <string name="controls_arrows">Nuolinapit / joystick / dpad</string>
     <string name="controls_trackball">Pallohiiri</string>
-    <string name="controls_accel">Kiihtyvyysanturi</string>
+    <string name="controls_none">Ei mitään</string>
     <string name="controls_question">Millaiset navigointinapit laittessasi on?</string>
 
     <string name="trackball_no_dampening">Ei vaimennusta</string>
@@ -37,6 +38,11 @@
     <string name="accel_medium">Kohtalainen</string>
     <string name="accel_slow">Hidas</string>
     <string name="accel_question">Kiihtyvyysanturin herkkyys</string>
+
+    <string name="accel_floating">Kelluva</string>
+    <string name="accel_fixed_start">Määräytyy sovelluksen käynnistyessä</string>
+    <string name="accel_fixed_horiz">Vaakataso</string>
+    <string name="accel_question_center">Kiihtyvyysanturin keskikohta</string>
 
     <string name="audiobuf_small">Pieni (nopeat laitteet)</string>
     <string name="audiobuf_medium">Keskisuuri</string>
