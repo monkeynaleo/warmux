@@ -217,6 +217,7 @@ void TeamEnergy::SetHeight(int h)
   if (h==height)
     return;
   icon->ScaleSize(h/3, h/3);
+  icon->FixParameters();
   height = h;
   energy_bar->SetHeight((2*h)/3-2);
 }
