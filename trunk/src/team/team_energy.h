@@ -96,6 +96,7 @@ class TeamEnergy
 
   uint        move_start_time;
 
+  static const uint MAX_BAR_SPACING = 33;
   static uint bar_spacing;
   int         height;
 
@@ -123,7 +124,7 @@ public :
   void FinalizeMove();
   void SetHeight(int height);
 
-  static void SetSpacing(uint spacing) { bar_spacing = spacing; }
+  static void SetSpacing(uint spacing) { bar_spacing = std::min(MAX_BAR_SPACING, spacing); }
 };
 
 #endif /* TEAM_ENERGY_H */
