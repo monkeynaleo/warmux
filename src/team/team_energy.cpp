@@ -59,7 +59,7 @@ void EnergyList::AddValue(uint value)
   EnergyList::push_back(eval);
 }
 
-uint TeamEnergy::bar_spacing = 16;
+uint TeamEnergy::bar_spacing = MAX_BAR_SPACING;
 
 TeamEnergy::TeamEnergy(Team * _team)
   : energy_bar(NULL)
