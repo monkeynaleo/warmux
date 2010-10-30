@@ -370,6 +370,8 @@ void Sprite::FixParameters()
     frames[i].surface = frames[i].surface.RotoZoom(rotation_rad, scale_x, scale_y, smooth);
 #endif
   }
+  frame_width_pix = GetWidth();
+  frame_height_pix = GetHeight();
   scale_x = 1.0;
   scale_y = 1.0;
   rotation_rad = ZERO;
