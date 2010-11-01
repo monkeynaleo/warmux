@@ -235,7 +235,7 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
       return true;
     } else {
       EndLongClickTimer();
-      if (Interface::GetInstance()->ActionClickUp(pos))
+      if (Interface::GetInstance()->ActionClickUp(pos, click_pos))
         return true;
       if (click_pos.SquareDistance(pos) > MOUSE_CLICK_SQUARE_DISTANCE)
         return true;

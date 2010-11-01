@@ -811,7 +811,8 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_LONG: break;
       case CLICK_TYPE_DOWN: return 0;
       case CLICK_TYPE_UP:
-        Game::GetInstance()->UserAsksForMenu();
+        if (clock_button.Contains(old_mouse_pos))
+          Game::GetInstance()->UserAsksForMenu();
         break;
     }
     return 1;
@@ -836,7 +837,8 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
         if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
             Game::GetInstance()->ReadState() != Game::PLAYING)
           return 1;
-        weapons_menu.SwitchDisplay();
+        if (weapon_button.Contains(old_mouse_pos))
+          weapons_menu.SwitchDisplay();
     }
     return 1;
   }
@@ -909,7 +911,7 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i& old_mouse_pos)
 {
   if (display) {
-    switch (AnyClick(mouse_pos, CLICK_TYPE_LONG)) {
+    switch (AnyClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)) {
       case -1: break;
       case 0: return false;
       default: return true;
@@ -922,14 +924,14 @@ bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i& old_mou
   return false;
 }
 
-bool Interface::ActionClickUp(const Point2i &mouse_pos)
+bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click_pos)
 {
   Surface &  window  = GetMainWindow();
 
   if (display) {
     Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      switch (AnyClick(mouse_pos, CLICK_TYPE_UP)) {
+      switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
         case -1: break;
         case 0: return false;
         default: return true;
