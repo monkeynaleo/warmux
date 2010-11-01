@@ -44,6 +44,8 @@ typedef enum
   EnergyStatusWait
 } energy_t;
 
+static const uint MAX_BAR_SPACING = 33;
+
 class EnergyValue : public std::pair<uint, uint>
 {
 protected:
@@ -96,7 +98,6 @@ class TeamEnergy
 
   uint        move_start_time;
 
-  static const uint MAX_BAR_SPACING = 33;
   static uint bar_spacing;
   int         height;
 
