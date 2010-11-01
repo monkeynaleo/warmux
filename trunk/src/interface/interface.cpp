@@ -809,11 +809,10 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
   if (clock_button.Contains(mouse_pos-bottom_bar_pos)) {
     switch (type) {
       case CLICK_TYPE_LONG: break;
-      case CLICK_TYPE_DOWN:
-        if (clock_button.Contains(old_mouse_pos))
-          Game::GetInstance()->UserAsksForMenu();
+      case CLICK_TYPE_DOWN: return 0;
+      case CLICK_TYPE_UP:
+        Game::GetInstance()->UserAsksForMenu();
         break;
-      case CLICK_TYPE_UP: return 1;
     }
     return 1;
   }
