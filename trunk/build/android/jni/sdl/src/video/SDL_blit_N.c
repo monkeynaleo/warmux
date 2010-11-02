@@ -2164,17 +2164,17 @@ static void Blit2to2Key(SDL_BlitInfo *info)
  Uint16 *dstp = (Uint16 *)info->d_pixels;
  int dstskip = info->d_skip;
  Uint32 ckey = info->src->colorkey;
- Uint32 rgbmask = ~info->src->Amask;
+ //Uint32 rgbmask = ~info->src->Amask;
 
  /* Set up some basic variables */
-        srcskip /= 2;
-        dstskip /= 2;
- ckey &= rgbmask;
+        srcskip >>= 1;
+        dstskip >>= 1;
+ //ckey &= rgbmask;
 
  while ( height-- ) {
    DUFFS_LOOP(
    {
-     if ( (*srcp & rgbmask) != ckey ) {
+     if ( (*srcp /*& rgbmask*/) != ckey ) {
        *dstp = *srcp;
      }
      dstp++;
