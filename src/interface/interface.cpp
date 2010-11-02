@@ -929,6 +929,13 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
   Surface &  window  = GetMainWindow();
 
   if (display) {
+    if (is_control) {
+      ActiveCharacter().HandleKeyReleased_MoveLeft(false);
+      ActiveCharacter().HandleKeyReleased_MoveRight(false);
+      ActiveCharacter().HandleKeyReleased_Up(false);
+      ActiveCharacter().HandleKeyReleased_Down(false);
+    }
+
     Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
     if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
       switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
