@@ -850,7 +850,8 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_DOWN: return 1;
       case CLICK_TYPE_UP:
         if (ActiveTeam().IsLocalHuman() && !ActiveCharacter().IsDead() &&
-            Game::GetInstance()->ReadState() == Game::PLAYING)
+            Game::GetInstance()->ReadState() == Game::PLAYING &&
+            wind_button.Contains(old_mouse_pos))
           is_control = !is_control;
         return 1;
     }

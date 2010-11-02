@@ -219,11 +219,11 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
   }
 
   if (evnt.type==SDL_MOUSEBUTTONDOWN && evnt.button.button==BUTTON_LEFT()) {
+    click_pos = pos;
     if (Interface::GetInstance()->ActionClickDown(pos))
       return true;
 
     // Either it's out of the menu, or we want to know how long the click was
-    click_pos = pos;
     long_click_timer = SDL_AddTimer(LONG_CLICK_DURATION, HandleLongClick, this);
     return true;
   }
