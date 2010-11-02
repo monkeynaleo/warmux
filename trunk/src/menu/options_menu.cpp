@@ -299,7 +299,9 @@ OptionMenu::OptionMenu() :
 
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
                                  option_size, sound_freqs, current_sound_freq);
+#ifndef HAVE_HANDHELD
   sound_options->AddWidget(cbox_sound_freq);
+#endif
 
   warn_cbox = new PictureTextCBox(_("New player warning?"),
                                   "menu/warn_on_new_player", option_size);
