@@ -875,10 +875,6 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 
       return is_control ? ControlClick(mouse_pos, CLICK_TYPE_DOWN)
                         : DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
-    } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
-      // Process click on weapon menu before minimap as it should be
-      // overlayed on top of it.
-      return true;
     }
   } else {
     // Mini-interface drawn, check if we clicked on it
@@ -947,6 +943,10 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
 
       return is_control ? ControlClick(mouse_pos, CLICK_TYPE_UP)
                         : DefaultClick(mouse_pos, CLICK_TYPE_UP);
+    } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
+      // Process click on weapon menu before minimap as it should be
+      // overlayed on top of it.
+      return true;
     }
     // No button clicked, continue
   } else {
