@@ -171,9 +171,8 @@ void PictureWidget::SetNoSurface()
 void PictureWidget::Draw(const Point2i &/*mousePosition*/)
 {
   if (!loaded) {
-    printf("Delayed loading\n");
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-    SetSurface(GetResourceManager().LoadImage(res, name), type, type != NO_SCALING);
+    SetSurface(LOAD_RES_IMAGE(name), type, type != NO_SCALING);
     GetResourceManager().UnLoadXMLProfile(res);
 
     // Needed to set the resizing
