@@ -799,7 +799,7 @@ bool Interface::DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i o
 int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
-  const Team& team = ActiveTeam();
+  const Team& ateam = ActiveTeam();
 
   old_mouse_pos -= bottom_bar_pos;
 
@@ -828,13 +828,13 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
     switch (type) {
       case CLICK_TYPE_LONG:
         if (weapon_button.Contains(old_mouse_pos)) {
-          help->SetWeapon(ActiveTeam().AccessWeapon());
+          help->SetWeapon(ateam.AccessWeapon());
           help->SwitchDisplay();
         }
         break;
       case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
       case CLICK_TYPE_UP:
-        if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
+        if (!ateam.IsLocalHuman() || ActiveCharacter().IsDead() ||
             Game::GetInstance()->ReadState() != Game::PLAYING)
           return 1;
         if (weapon_button.Contains(old_mouse_pos))
@@ -849,7 +849,7 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_LONG:
       case CLICK_TYPE_DOWN: return 1;
       case CLICK_TYPE_UP:
-        if (ActiveTeam().IsLocalHuman() && !ActiveCharacter().IsDead() &&
+        if (ateam.IsLocalHuman() && !ActiveCharacter().IsDead() &&
             Game::GetInstance()->ReadState() == Game::PLAYING &&
             wind_button.Contains(old_mouse_pos))
           is_control = !is_control;
