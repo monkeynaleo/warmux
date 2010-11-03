@@ -171,6 +171,8 @@ void PictureWidget::SetNoSurface()
 void PictureWidget::Draw(const Point2i &/*mousePosition*/)
 {
   if (!loaded) {
+    if (name.empty())
+      return;
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
     SetSurface(LOAD_RES_IMAGE(name), type, type != NO_SCALING);
     GetResourceManager().UnLoadXMLProfile(res);
