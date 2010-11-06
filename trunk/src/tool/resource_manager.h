@@ -104,5 +104,6 @@ inline ResourceManager& GetResourceManager() { return ResourceManager::GetRef();
 #define LOAD_RES_IMAGE(name) GetResourceManager().LoadImage(res, name)
 #define LOAD_RES_SPRITE(name) GetResourceManager().LoadSprite(res, name)
 #define LOAD_RES_COLOR(name) GetResourceManager().LoadColor(res, name)
+#define LOAD_RES_POINT(name) GetResourceManager().LoadPoint2i(res, name)
 
 #endif /* _RESOURCE_MANAGER_H */
