@@ -168,21 +168,20 @@ WeaponsMenu::WeaponsMenu()
 {
   // Loading value from XML
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_not_yet_available = GetResourceManager().LoadSprite(res, "interface/hourglass");
+  m_not_yet_available = LOAD_RES_SPRITE("interface/hourglass");
 
   // Polygon Size
-  Point2i size = GetResourceManager().LoadPoint2i(res, "interface/weapons_interface_size");
+  Point2i size = LOAD_RES_POINT("interface/weapons_interface_size");
   weapons_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
-  size = GetResourceManager().LoadPoint2i(res, "interface/tools_interface_size");
+  size = LOAD_RES_POINT("interface/tools_interface_size");
   tools_menu = PolygonGenerator::GenerateDecoratedBox(size.x, size.y);
   // Setting colors
-  Color plane_color = GetResourceManager().LoadColor(res, "interface/background_color");
-  Color border_color = GetResourceManager().LoadColor(res, "interface/border_color");
+  Color plane_color = LOAD_RES_COLOR("interface/background_color");
+  Color border_color = LOAD_RES_COLOR("interface/border_color");
   weapons_menu->SetPlaneColor(plane_color);
   weapons_menu->SetBorderColor(border_color);
   tools_menu->SetPlaneColor(plane_color);
   tools_menu->SetBorderColor(border_color);
-
 
   GetResourceManager().UnLoadXMLProfile(res);
 }
