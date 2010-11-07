@@ -571,7 +571,7 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
 
 Surface Tile::GetPart(const Rectanglei& rec)
 {
-  Surface part(rec.GetSize(), SDL_HWSURFACE|SDL_SRCALPHA, true);
+  Surface part(rec.GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
   part.SetAlpha(0,0);
   part.Fill(0x00000000);
   part.SetAlpha(SDL_SRCALPHA,0);

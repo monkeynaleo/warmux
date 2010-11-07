@@ -247,7 +247,7 @@ void Text::RenderMultiLines()
   }
 
   Point2i size(max_line_width, GetLineHeight(font)*ret_lines.size());
-  Surface tmp = Surface(size, SDL_HWSURFACE|SDL_SRCALPHA, true);
+  Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each lines
@@ -261,7 +261,7 @@ void Text::RenderMultiLines()
   if (!shadowed)
     return;
 
-  tmp = Surface(size, SDL_HWSURFACE|SDL_SRCALPHA, true);
+  tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   background = tmp.DisplayFormatAlpha();
 
   // Putting pixels of each image in destination surface

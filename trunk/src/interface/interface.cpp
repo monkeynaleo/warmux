@@ -415,11 +415,11 @@ void Interface::DrawMapPreview()
       }
 
       if (!minimap)
-        minimap = new Surface(preview_size, SDL_HWSURFACE, true);
+        minimap = new Surface(preview_size, SDL_SWSURFACE, true);
 
       // Recreate the scratch buffer
       if (!scratch)
-        scratch = new Surface(preview_size, SDL_HWSURFACE, true);
+        scratch = new Surface(preview_size, SDL_SWSURFACE, true);
 
       Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
       scratch->Blit(*GetWorld().ground.GetPreview(), mergePos);
