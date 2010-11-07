@@ -224,7 +224,7 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
   SDL_modelist[0]->w = SDL_ANDROID_sWindowWidth; SDL_modelist[0]->h = SDL_ANDROID_sWindowHeight;
   SDL_modelist[0]->w = SDL_ANDROID_sWindowWidth;
   SDL_modelist[0]->h = SDL_ANDROID_sWindowHeight;
-  SDL_modelist[1] = NULL;
+  SDL_modelist[SDL_NUMMODES] = NULL;
 
   SDL_VideoInit_1_3(NULL, 0);
 
