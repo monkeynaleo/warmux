@@ -256,7 +256,7 @@ bool Map::IsInVacuum_top(const PhysicalObj &obj, int dx, int dy) const
 {
   const Rectanglei& rect = obj.GetTestRect();
   return HorizontalLine_IsInVacuum(rect.GetPositionX() + dx,
-                                   rect.GetPositionY() + rect.GetSizeY() + dy,
+                                   rect.GetPositionY() + rect.GetSizeY()-1 + dy,
                                    rect.GetSizeX());
 }
 
@@ -273,15 +273,15 @@ bool Map::IsInVacuum_left(const PhysicalObj &obj, int dx, int dy) const
   const Rectanglei& rect = obj.GetTestRect();
   return VerticalLine_IsInVacuum(rect.GetPositionX() + dx,
                                  rect.GetPositionY() + dy,
-                                 rect.GetPositionY() + rect.GetSizeY() + dy);
+                                 rect.GetPositionY() + rect.GetSizeY()-1 + dy);
 }
 
 bool Map::IsInVacuum_right(const PhysicalObj &obj, int dx, int dy) const
 {
   const Rectanglei& rect = obj.GetTestRect();
-  return VerticalLine_IsInVacuum(rect.GetPositionX() + rect.GetSizeX() + dx,
+  return VerticalLine_IsInVacuum(rect.GetPositionX() + rect.GetSizeX()-1 + dx,
                                  rect.GetPositionY() + dy,
-                                 rect.GetPositionY() + rect.GetSizeY() + dy);
+                                 rect.GetPositionY() + rect.GetSizeY()-1 + dy);
 }
 
 void Map::DrawAuthorName()
