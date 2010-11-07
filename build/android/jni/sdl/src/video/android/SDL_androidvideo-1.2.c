@@ -97,7 +97,7 @@ static void ANDROID_UpdateRects(_THIS, int numrects, SDL_Rect *rects);
 
 /* Private display data */
 
-#define SDL_NUMMODES 2
+#define SDL_NUMMODES 1
 static SDL_Rect *SDL_modelist[SDL_NUMMODES+1];
 
 //#define SDL_modelist    (this->hidden->SDL_modelist)
@@ -225,7 +225,6 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
   SDL_modelist[0]->w = SDL_ANDROID_sWindowWidth;
   SDL_modelist[0]->h = SDL_ANDROID_sWindowHeight;
   SDL_modelist[1] = NULL;
-  SDL_modelist[4] = NULL;
 
   SDL_VideoInit_1_3(NULL, 0);
 
