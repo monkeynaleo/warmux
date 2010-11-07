@@ -2035,7 +2035,7 @@ msgstr ""
 "Pour sauter, pressez espace ou le centre du trackball ou du dpad.\n"
 "Pour viser ou bouger plus lentement, pressez shift ou vol+.\n"
 "Pour mettre en pause, cliquer l'horloge ou pressez ESC/Annule.\n"
-"Cliquer sur un personnage de votre équipe pour le choisir.\n"
+"Cliquer sur un personnage de votre équipe pour le choisir."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:132
@@ -2048,7 +2048,7 @@ msgstr ""
 "Pour sauter, presser espace.\n"
 "Pour viser ou bouger plus lentement, presser shift.\n"
 "Pour mettre en pause, cliquer l'horloge ou presser ESC.\n"
-"Cliquer sur un personnage de votre équipe pour le choisir.\n"
+"Cliquer sur un personnage de votre équipe pour le choisir."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
