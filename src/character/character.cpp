@@ -57,7 +57,7 @@ const int HEIGHT_FONT_NAME = 13;
 // Space between the name, the skin and the energy bar
 const int SPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
-const Double MIN_SPEED_TO_FLY = 15.0;
+const Double MIN_SPEED_TO_FLY = 5.0;
 
 // Pause for the animation
 #ifdef DEBUG
