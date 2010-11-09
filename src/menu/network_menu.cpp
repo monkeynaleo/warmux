@@ -31,6 +31,8 @@
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/check_box.h"
+#include "gui/combo_box.h"
+#include "gui/grid_box.h"
 #include "gui/label.h"
 #include "gui/msg_box.h"
 #include "gui/picture_widget.h"
@@ -105,14 +107,31 @@ NetworkMenu::NetworkMenu() :
     tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
   }
 
+  // ################################################
+  // ##  GAME OPTIONS
+  // ################################################
+
+  if (Network::GetInstance()->IsGameMaster()) {
+    // Using the game mode editor but currently we are not able to send
+    // custom parameters to client
+
+    Box *box = new GridBox(4, 4, 0, false);
+
+    Point2i option_size(114, 114);
+    std::string selected_gamemode = Config::GetInstance()->GetGameMode();
+
+    opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
+				 GameMode::ListGameModes(), selected_gamemode);
+    box->AddWidget(opt_game_mode);
+
+    tabs->AddNewTab("TAB_Game", _("Game"), box);
+  }
+
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
 
   widgets.AddWidget(tabs);
   widgets.Pack();
 
-  // ################################################
-  // ##  GAME OPTIONS
-  // ################################################
 
   Box* bottom_box = new HBox(chat_box_height, false, true);
   bottom_box->SetNoBorder();
@@ -209,6 +228,10 @@ void NetworkMenu::SaveOptions()
 
   //Save options in XML
 //  Config::GetInstance()->Save();
+
+  if (Network::GetInstance()->IsGameMaster()) {
+    Config::GetInstance()->SetGameMode(opt_game_mode->GetValue());
+  }
 }
 
 void NetworkMenu::PrepareForNewGame()
