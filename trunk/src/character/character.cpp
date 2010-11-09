@@ -677,9 +677,12 @@ void Character::Refresh()
   if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
     body->StopWalking();
 
-  if (Time::GetInstance()->Read() > animation_time && !IsActiveCharacter() && !IsDead()
+  if (Time::GetInstance()->Read() > animation_time
+      && !IsActiveCharacter()
+      && !IsDead()
+      && !FootsInVacuum()
       && body->GetMovement().substr(0,9) != "animation"
-      &&  body->GetClothe().substr(0,9) != "animation") {
+      && body->GetClothe().substr(0,9) != "animation") {
     body->PlayAnimation();
     MSG_DEBUG("random.get", "Character::Refresh()");
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration()
