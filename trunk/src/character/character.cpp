@@ -681,8 +681,8 @@ void Character::Refresh()
       && !IsActiveCharacter()
       && !IsDead()
       && !IsFalling()
-      && body->GetMovement().substr(0,9) != "animation"
-      && body->GetClothe().substr(0,9) != "animation") {
+      && body->GetMovement().compare(0, 9, "animation")
+      && body->GetClothe().compare(0, 9, "animation")) {
     body->PlayAnimation();
     MSG_DEBUG("random.get", "Character::Refresh()");
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration()
