@@ -30,6 +30,7 @@ class NetworkTeamsSelectionBox;
 class TalkBox;
 class MapSelectionBox;
 class CheckBox;
+class ComboBox;
 
 class NetworkMenu : public Menu
 {
@@ -40,6 +41,7 @@ class NetworkMenu : public Menu
   Label* connected_players;
   Label* initialized_players;
   CheckBox* play_in_loop;
+  ComboBox *opt_game_mode;
 
   /* Chat controller */
   TalkBox* msg_box;
@@ -54,6 +56,8 @@ class NetworkMenu : public Menu
   void SaveOptions();
   void WaitingForGameMaster();
 
+  void ChangeGameMode();
+
   virtual void Draw(const Point2i &mousePosition);
   virtual void HandleEvent(const SDL_Event& evnt);
 
@@ -62,7 +66,7 @@ class NetworkMenu : public Menu
   virtual bool signal_cancel();
   virtual void signal_begin_run();
 
- void RequestSavedTeams();
+  void RequestSavedTeams();
 
 public:
   NetworkMenu();
