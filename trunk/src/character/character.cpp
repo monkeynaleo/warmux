@@ -680,7 +680,7 @@ void Character::Refresh()
   if (Time::GetInstance()->Read() > animation_time
       && !IsActiveCharacter()
       && !IsDead()
-      && !FootsInVacuum()
+      && !IsFalling()
       && body->GetMovement().substr(0,9) != "animation"
       && body->GetClothe().substr(0,9) != "animation") {
     body->PlayAnimation();
