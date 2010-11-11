@@ -24,7 +24,7 @@
 
   <sprite name="wind_particle">
     <image file="wp.png">
-      <grid pos="0,0" size="114,36" array="1,1"/>
+      <grid size="114,36" array="1,1"/>
     </image>
   </sprite>
  

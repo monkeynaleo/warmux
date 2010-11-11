@@ -23,7 +23,7 @@
 
   <sprite name="wind_particle">
     <image file="birds.png">
-      <grid pos="0,0" size="48,18" array="14,1"/>
+      <grid size="48,18" array="14,1"/>
     </image>
     <animation speed="100"/>
   </sprite>

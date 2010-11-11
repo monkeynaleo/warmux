@@ -120,7 +120,7 @@
 
 <sprite name="eyelid" type="eyelid">
 	<image file="eyelid.png">
-		<grid pos="0,0" size="9,7" array="7,1"/>
+		<grid size="9,7" array="7,1"/>
 	</image>
 	<anchor dx="0" dy="0"/>
 	<animation speed="200" loop_mode="pingpong" loop_wait="500" loop_wait_random="200"/>
@@ -201,7 +201,7 @@
 <!-- ###### Yoyo ###### -->
 <sprite name="yoyo" type="yoyo" go_through_ground="true">
 	<image file="&aso;yoyo.png">
-		<grid pos="0,0" size="32,42" array="36,1"/>
+		<grid size="32,42" array="36,1"/>
 	</image>
 	<anchor dx="29" dy="25"/>
 	<animation speed="150"/>
@@ -302,7 +302,7 @@
 
 <sprite name="eyelid-black" type="eyelid">
 	<image file="black_eyelid.png">
-		<grid pos="0,0" size="9,7" array="7,1"/>
+		<grid size="9,7" array="7,1"/>
 	</image>
 	<anchor dx="0" dy="0"/>
 	<animation speed="200" loop_mode="pingpong" loop_wait="500" loop_wait_random="200"/>

@@ -23,7 +23,7 @@
 
   <sprite name="wind_particle">
     <image file="star.png">
-      <grid pos="0,0" size="125,127" array="1,1"/>
+      <grid size="125,127" array="1,1"/>
     </image>
   </sprite>
 

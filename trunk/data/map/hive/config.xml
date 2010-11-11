@@ -18,7 +18,7 @@
 
     <sprite name="wind_particle">
       <image file="part_effect_strip.png">
-        <grid pos="0,0" size="100,160" array="25,1"/>
+        <grid size="100,160" array="25,1"/>
       </image>
       <animation speed="100" />
     </sprite>
