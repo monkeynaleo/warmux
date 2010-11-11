@@ -234,21 +234,21 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
   std::string    size;
 
   if (XmlReader::ReadStringAttr(elem, "size", size)) {
+    int x, y;
     Rectanglei source_rect(0,0, image.GetWidth(), image.GetHeight());
 
-    if (size.find(",") != size.npos) {
-      source_rect.SetSizeX(atoi((size.substr(0, size.find(","))).c_str()));
-      source_rect.SetSizeY(atoi((size.substr(size.find(",") + 1, size.length())).c_str()));
-    } else
-      Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
+    if (sscanf(size.c_str(), "%i,%i", &x, &y) != 2)
+      Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed size attribute");
+    source_rect.SetSizeX(x);
+    source_rect.SetSizeY(y);
 
     std::string position;
     if (XmlReader::ReadStringAttr(elem, "pos", position)) {
-      if (position.find(",") != position.npos) {
-      source_rect.SetPositionX(atoi((position.substr(0,position.find(","))).c_str()));
-      source_rect.SetPositionY(atoi((position.substr(position.find(",") + 1, position.length())).c_str()));
-      } else
-        Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed position attribute");
+      if (sscanf(position.c_str(), "%i,%i", &x, &y) != 2)
+        Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed position attribute");
+
+      source_rect.SetPositionX(x);
+      source_rect.SetPositionY(y);
     }
 
     return image.Crop(source_rect);
@@ -303,27 +303,22 @@ Sprite *ResourceManager::LoadSprite(const xmlNode* elem_sprite, const std::strin
     std::string size;
 
     if (!XmlReader::ReadStringAttr(elem_grid, "size", size))
-      Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute size");
+      Error("ResourceManager: can't load sprite resource \""+resource_name+"\", no attribute size");
 
-    if (size.find(",") != size.npos) {
-      frameSize.x = atoi((size.substr(0, size.find(","))).c_str());
-      frameSize.y = atoi((size.substr(size.find(",") + 1, size.length())).c_str());
-    } else
-      Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
+    if (sscanf(size.c_str(), "%i,%i", &frameSize.x, &frameSize.y) != 2)
+      Error("ResourceManager: can't load sprite resource \""+resource_name+"\", malformed size attribute");
 
     std::string array;
     if (!XmlReader::ReadStringAttr(elem_grid, "array", array))
-      Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute array");
+      Error("ResourceManager: can't load sprite resource \""+resource_name+"\", no attribute array");
 
-    if (array.find(",") != array.npos) {
-      nb_frames_x = atoi((array.substr(0, array.find(","))).c_str());
-      if (nb_frames_x <= 0)
-        nb_frames_x = 1;
-      nb_frames_y = atoi((array.substr(array.find(",") + 1, array.length() - array.find(",") - 1)).c_str());
-      if (nb_frames_y <= 0)
-        nb_frames_y = 1;
-    } else
-      Error("ResourceManager: can't load (sprite) resource "+resource_name);
+    if (sscanf(array.c_str(), "%i,%i", &nb_frames_x, &nb_frames_y) != 2)
+      Error("ResourceManager: can't load (sprite) resource "+resource_name+"\", malformed array attribute");
+
+    if (nb_frames_x <= 0)
+      nb_frames_x = 1;
+    if (nb_frames_y <= 0)
+      nb_frames_y = 1;
 
     Surface surface = LoadImage(main_folder+image_filename, alpha);
     sprite = new Sprite();
