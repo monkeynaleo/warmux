@@ -112,16 +112,13 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 
   surface.SetAlpha(0, 0);
 
-  for (f.y=0; f.y<nb_frames_y; f.y++)
+  Surface new_surf(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  for (f.y=0; f.y<nb_frames_y; f.y++) {
     for (f.x=0; f.x<nb_frames_x; f.x++) {
-      Surface end_surf;
-      Surface new_surf(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
-      Rectanglei sr(f * frameSize, frameSize);
-
-      new_surf.Blit(surface, sr, Point2i(0, 0));
-      end_surf = new_surf.DisplayFormatAlpha();
-      frames.push_back(SpriteFrame(end_surf));
+      new_surf.Blit(surface, Rectanglei(f * frameSize, frameSize), Point2i(0, 0));
+      frames.push_back(SpriteFrame(new_surf.DisplayFormatAlpha()));
     }
+  }
 }
 
 void Sprite::AddFrame(const Surface &surf, uint delay)
