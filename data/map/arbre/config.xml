@@ -23,7 +23,7 @@
 
   <sprite name="wind_particle">
     <image file="gland-anim.png">
-      <grid pos="0,0" size="32,32" array="9,1"/>
+      <grid size="32,32" array="9,1"/>
     </image>
     <animation speed="50"/>
   </sprite>

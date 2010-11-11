@@ -27,7 +27,7 @@
 
   <sprite name="wind_particle">
      <image file="raindrop.png">
-       <grid pos="0,0" size="3,101" array="1,1"/>
+       <grid size="3,101" array="1,1"/>
      </image>
   </sprite>
  

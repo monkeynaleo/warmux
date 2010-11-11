@@ -20,7 +20,7 @@
  
  <sprite name="wind_particle">
    <image file="goo_drop.png">
-     <grid pos="0,0" size="34,49" array="1,1"/>
+     <grid size="34,49" array="1,1"/>
    </image>
  </sprite>
 

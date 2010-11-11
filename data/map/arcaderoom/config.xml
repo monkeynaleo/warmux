@@ -20,7 +20,7 @@
  
  <sprite name="wind_particle">
    <image file="wind_particle.png">
-     <grid pos="0,0" size="59,59" array="124,1"/>
+     <grid size="59,59" array="124,1"/>
    </image>
  </sprite>
  

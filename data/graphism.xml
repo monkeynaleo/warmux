@@ -7,7 +7,7 @@
 
   <sprite name="button">
     <image file="menu/button.png">
-      <grid pos="0,0" size="402,64" array="2,1" />
+      <grid size="402,64" array="2,1" />
     </image>
   </sprite>
 </section>
@@ -91,12 +91,12 @@
   <!-- For team editor menu -->
   <sprite name="add_custom_team">
     <image file="menu/add_custom_team.png">
-      <grid pos="0,0" size="32,32" array="1,1" />
+      <grid size="32,32" array="1,1" />
     </image>
   </sprite>
   <sprite name="del_custom_team">
     <image file="menu/del_custom_team.png">
-      <grid pos="0,0" size="32,32" array="1,1" />
+      <grid size="32,32" array="1,1" />
     </image>
   </sprite>
 
@@ -104,68 +104,68 @@
 
   <sprite name="send_txt">
     <image file="menu/send_txt.png">
-      <grid pos="0,0" size="16,16" array="2,1" />
+      <grid size="16,16" array="2,1" />
     </image>
   </sprite>
 
   <sprite name="valider">
     <image file="menu/validate.png">
-      <grid pos="0,0" size="32,32" array="1,2" />
+      <grid size="32,32" array="1,2" />
     </image>
   </sprite>
   <sprite name="annuler">
     <image file="menu/cancel.png">
-      <grid pos="0,0" size="32,32" array="1,2" />
+      <grid size="32,32" array="1,2" />
     </image>
   </sprite>
   <sprite name="check">
     <image file="menu/check.png">
-      <grid pos="0,0" size="16,16" array="1,2" />
+      <grid size="16,16" array="1,2" />
     </image>
   </sprite>
   <sprite name="plus">
     <image file="menu/plus.png">
-      <grid pos="0,0" size="5,10" array="2,1" />
+      <grid size="5,10" array="2,1" />
     </image>
   </sprite>
   <sprite name="big_plus">
     <image file="menu/right.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="really_big_plus">
     <image file="menu/big_right.png">
-      <grid pos="0,0" size="40,40" array="2,1" />
+      <grid size="40,40" array="2,1" />
     </image>
   </sprite>
   <sprite name="minus">
     <image file="menu/minus.png">
-      <grid pos="0,0" size="5,10" array="2,1" />
+      <grid size="5,10" array="2,1" />
     </image>
   </sprite>
   <sprite name="big_minus">
     <image file="menu/left.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="really_big_minus">
     <image file="menu/big_left.png">
-      <grid pos="0,0" size="40,40" array="2,1" />
+      <grid size="40,40" array="2,1" />
     </image>
   </sprite>
   <sprite name="up">
     <image file="menu/up.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="down">
     <image file="menu/down.png">
-      <grid pos="0,0" size="20,20" array="2,1" />
+      <grid size="20,20" array="2,1" />
     </image>
   </sprite>
   <sprite name="refresh_small">
     <image file="menu/refresh.png">
-      <grid pos="0,0" size="20,20" array="1,1" />
+      <grid size="20,20" array="1,1" />
     </image>
   </sprite>
 
@@ -192,19 +192,19 @@
 <section name="object">
   <sprite name="bonus_box">
     <image file="object/bonus_box.png">
-      <grid pos="0,0" size="65,102" array="4,1" />
+      <grid size="65,102" array="4,1" />
     </image>
     <animation loop_mode="false"/>
   </sprite>
   <sprite name="medkit">
     <image file="object/medkit.png">
-      <grid pos="0,0" size="65,102" array="4,1" />
+      <grid size="65,102" array="4,1" />
     </image>
     <animation loop_mode="false"/>
   </sprite>
   <sprite name="barrel">
     <image file="object/barrel.png">
-      <grid pos="0,0" size="32,35" array="6,1" />
+      <grid size="32,35" array="6,1" />
     </image>
   </sprite>
 </section>
@@ -229,13 +229,13 @@
   <surface name="clock" file="interface/whitetheme/clock.png"/>
   <sprite name="clock_normal">
     <image file="interface/whitetheme/clock.png">
-      <grid pos="0,0" size="40,40" array="10,1" />
+      <grid size="40,40" array="10,1" />
     </image>
     <animation loop_mode="true" speed="6000" />
   </sprite>
   <sprite name="clock_emergency">
     <image file="interface/whitetheme/clock_emergency.png">
-      <grid pos="0,0" size="34,43" array="6,1" />
+      <grid size="34,43" array="6,1" />
     </image>
     <animation loop_mode="true" speed="70" />
   </sprite>
@@ -291,7 +291,7 @@
 
   <sprite name="hourglass">
     <image file="interface/whitetheme/hourglass.png">
-      <grid pos="0,0" size="25,25" array="29,1" />
+      <grid size="25,25" array="29,1" />
     </image>
     <animation loop_mode="true" speed="100" />
   </sprite>
@@ -329,14 +329,14 @@
 
   <sprite name="arrow-jump">
     <image file="interface/whitetheme/arrow_jump.png">
-      <grid pos="0,0" size="70,70" array="8,1" />
+      <grid size="70,70" array="8,1" />
     </image>
     <animation loop_mode="true"/>
   </sprite>
 
   <sprite name="arrow-change">
     <image file="interface/whitetheme/arrow_turn.png">
-      <grid pos="0,0" size="50,50" array="8,1" />
+      <grid size="50,50" array="8,1" />
     </image>
     <animation loop_mode="true" speed="75" />
   </sprite>

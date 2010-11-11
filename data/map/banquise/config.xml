@@ -23,7 +23,7 @@
 
   <sprite name="wind_particle">
     <image file="flocon.png">
-      <grid pos="0,0" size="16,16" array="1,1"/>
+      <grid size="16,16" array="1,1"/>
     </image>
   </sprite>
   <wind>
