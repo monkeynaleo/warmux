@@ -231,21 +231,20 @@ Surface ResourceManager::LoadImage(const Profile *profile, const std::string& re
   std::string    filename = LoadImageFilename(profile, resource_name);
   Surface        image    = LoadImage(filename, alpha);
   const xmlNode *elem     = GetElement(profile, "surface", resource_name);
-  std::string    size;
+  std::string    str;
 
-  if (XmlReader::ReadStringAttr(elem, "size", size)) {
+  if (XmlReader::ReadStringAttr(elem, "size", str)) {
     int x, y;
     Rectanglei source_rect(0,0, image.GetWidth(), image.GetHeight());
 
-    if (sscanf(size.c_str(), "%i,%i", &x, &y) != 2)
-      Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed size attribute");
+    if (sscanf(str.c_str(), "%i,%i", &x, &y) != 2)
+      Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed size attribute " + str);
     source_rect.SetSizeX(x);
     source_rect.SetSizeY(y);
 
-    std::string position;
-    if (XmlReader::ReadStringAttr(elem, "pos", position)) {
-      if (sscanf(position.c_str(), "%i,%i", &x, &y) != 2)
-        Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed position attribute");
+    if (XmlReader::ReadStringAttr(elem, "pos", str)) {
+      if (sscanf(str.c_str(), "%i,%i", &x, &y) != 2)
+        Error("ResourceManager: can't load image resource \""+resource_name+"\", malformed position attribute " + str);
 
       source_rect.SetPositionX(x);
       source_rect.SetPositionY(y);
@@ -306,12 +305,12 @@ Sprite *ResourceManager::LoadSprite(const xmlNode* elem_sprite, const std::strin
     if (!XmlReader::ReadStringAttr(elem_grid, "size", str))
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\", no attribute size");
     if (sscanf(str.c_str(), "%i,%i", &frameSize.x, &frameSize.y) != 2)
-      Error("ResourceManager: can't load sprite resource \""+resource_name+"\", malformed size attribute");
+      Error("ResourceManager: can't load sprite resource \""+resource_name+"\", malformed size attribute " + str);
 
     //array is not required, default is 1,1
     if (XmlReader::ReadStringAttr(elem_grid, "array", str)) {
       if (sscanf(str.c_str(), "%i,%i", &nb_frames_x, &nb_frames_y) != 2)
-        Error("ResourceManager: can't load (sprite) resource "+resource_name+"\", malformed array attribute");
+        Error("ResourceManager: can't load (sprite) resource "+resource_name+"\", malformed array attribute " + str);
       if (nb_frames_x <= 0)
         nb_frames_x = 1;
       if (nb_frames_y <= 0)
@@ -339,7 +338,7 @@ Sprite *ResourceManager::LoadSprite(const xmlNode* elem_sprite, const std::strin
       else if (str == "pingpong")
         sprite->animation.SetPingPongMode(true);
       else
-        std::cerr << "Unrecognized xml option loop_mode=\"" << str << "\" in resource " << resource_name;
+        Error("ResourceManager: unrecognized xml option loop_mode=\"" +str+ "\" in resource " + resource_name);
     }
 
     if (XmlReader::ReadStringAttr(elem, "loop_wait", str)) {
