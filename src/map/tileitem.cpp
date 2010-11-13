@@ -193,7 +193,7 @@ TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_thresh
   }
 
   ti->ForceEmpty();
-  
+
   return ti;
 }
 
@@ -319,8 +319,11 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
   SDL_PixelFormat fmt = { NULL /* palette */, 32 /*bpp*/, 4 /*Bpp*/,
                           0 /*Rloss*/, 0 /*Gloss*/, 0 /*Bloss*/, 0 /*Aloss*/,
                           16 /*Rshift*/, 8 /*Gshift*/, 0 /*Bshift*/, 24 /*Ashift*/,
-                          0xFF0000, 0xFF00, 0xFF, 0xFF000000,
-                          0 /*colorkey*/, 0 /*alpha*/ };
+                          0xFF0000, 0xFF00, 0xFF, 0xFF000000
+#if SDL_MINOR_VERSION != 3
+                          , 0 /*colorkey*/, 0 /*alpha*/
+#endif
+                        };
   m_surface = Surface::DisplayFormatColorKey((uint32_t *)pixels, &fmt,
                                              CELL_SIZE.x, CELL_SIZE.y, pitch, threshold);
 #else
