@@ -315,7 +315,6 @@ void TileItem_BaseColorKey::MergeSprite(const Point2i &position, Surface& spr)
 TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t threshold)
   : TileItem_BaseColorKey(threshold)
 {
-#if 1
   SDL_PixelFormat fmt = { NULL /* palette */, 32 /*bpp*/, 4 /*Bpp*/,
                           0 /*Rloss*/, 0 /*Gloss*/, 0 /*Bloss*/, 0 /*Aloss*/,
                           16 /*Rshift*/, 8 /*Gshift*/, 0 /*Bshift*/, 24 /*Ashift*/,
@@ -326,23 +325,7 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
                         };
   m_surface = Surface::DisplayFormatColorKey((uint32_t *)pixels, &fmt,
                                              CELL_SIZE.x, CELL_SIZE.y, pitch, threshold);
-#else
-  uint8_t *ptr  = (uint8_t*)pixels;
-  int      x, y;
 
-  // Set pixels considered as transparent as colorkey
-  for (y=0; y<CELL_SIZE.y; y++) {
-    for (x=0; x<CELL_SIZE.x; x++)
-      if (ptr[x*4 + ALPHA_OFFSET] < m_alpha_threshold)
-        *((Uint32*)(ptr + x*4)) = COLOR_KEY;
-    ptr += pitch;
-  }
-
-  SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_SIZE.x, CELL_SIZE.y, 32, pitch,
-                                               0xFF0000, 0xFF00, 0xFF, 0xFF000000);
-  m_surface = Surface(SDL_DisplayFormat(surf));
-  SDL_FreeSurface(surf);
-#endif
   MapColorKey();
 }
 
