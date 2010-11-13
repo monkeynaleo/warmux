@@ -331,6 +331,10 @@ do {								\
 		: "memory" );					\
 } while(0)
 #endif
+#if defined(__arm__)
+extern DECLSPEC void arm_memset32(void *dst, int c, size_t len);
+#define SDL_memset4(dst, val, len) arm_memset32(dst, val, len)
+#endif
 #ifndef SDL_memset4
 #define SDL_memset4(dst, val, len)		\
 do {						\

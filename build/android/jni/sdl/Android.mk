@@ -35,7 +35,8 @@ SDL_SRCS := \
 	src/video/android/*.c \
 	src/haptic/dummy/*.c \
 	src/loadso/dlopen/*.c \
-	src/atomic/dummy/*.c
+	src/atomic/dummy/*.c \
+	src/video/memset.arm.S
 
 LOCAL_CPP_EXTENSION := .cpp
 
