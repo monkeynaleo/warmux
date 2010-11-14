@@ -147,6 +147,11 @@ public class MainActivity extends Activity {
     this.runOnUiThread(cb);
   }
 
+  public void requestRender()
+  {
+    mGLView.requestRender();
+  }
+
   private static DemoGLSurfaceView mGLView = null;
   private static LoadLibrary mLoadLibraryStub = null;
   private static AudioThread mAudioThread = null;

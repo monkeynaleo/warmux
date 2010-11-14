@@ -56,7 +56,7 @@ abstract class DifferentTouchInput
 
 class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
-  public DemoRenderer(Activity _context)
+  public DemoRenderer(MainActivity _context)
   {
     context = _context;
   }
@@ -102,7 +102,8 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
     synchronized (this) {
       this.notify();
     }
-    if( ! super.SwapBuffers() && Globals.NonBlockingSwapBuffers )
+    //context.requestRender();
+    if( !super.SwapBuffers() && Globals.NonBlockingSwapBuffers )
       return 0;
     if(mGlContextLost) {
       mGlContextLost = false;
@@ -121,7 +122,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
   private native void nativeGlContextLost();
   public native void nativeGlContextRecreated();
 
-  private Activity context = null;
+  private MainActivity context = null;
 
   private EGL10 mEgl = null;
   private EGLDisplay mEglDisplay = null;
@@ -134,13 +135,14 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 }
 
 class DemoGLSurfaceView extends GLSurfaceView_SDL {
-  public DemoGLSurfaceView(Activity context) {
+  public DemoGLSurfaceView(MainActivity context) {
     super(context);
     mParent = context;
     touchInput = DifferentTouchInput.getInstance();
     setEGLConfigChooser(Globals.NeedDepthBuffer);
     mRenderer = new DemoRenderer(context);
     setRenderer(mRenderer);
+    //setRenderMode(RENDERMODE_WHEN_DIRTY);
   }
 
   @Override
