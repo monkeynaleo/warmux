@@ -662,7 +662,7 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
    * can also be negative. In this case the corresponding axis is flipped.
    * Note: Flipping currently only works with antialiasing turned off
    */
-  if (zoomx < ZERO || zoomy < ZERO)
+  if (zoomx == -1 && zoomy == ONE)
     smooth = SMOOTHING_OFF;
 #endif
 
