@@ -35,6 +35,7 @@
 #include "menu/benchmark_menu.h"
 #include "menu/options_menu.h"
 #include "network/randomsync.h"
+#include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 
@@ -169,8 +170,11 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       uint wind_particles = cfg->GetWindParticlesPercentage(); cfg->SetWindParticlesPercentage(100);
       bool display_energy = cfg->GetDisplayEnergyCharacter(); cfg->SetDisplayEnergyCharacter(true);
       bool display_multisky = cfg->GetDisplayMultiLayerSky(); cfg->SetDisplayMultiLayerSky(false);
-      bool music = cfg->GetSoundMusic(); cfg->SetSoundMusic(false);
-      bool sfx = cfg->GetSoundEffects(); cfg->SetSoundEffects(false);
+
+      // Mute all sounds
+      JukeBox *jbox = JukeBox::GetInstance();
+      bool music = jbox->UseMusic(); jbox->ActiveMusic(false);
+      bool sfx = jbox->UseEffects(); jbox->ActiveEffects(false);
 
       // Backup and set default map - should I save the config?
       std::string map_name = cfg->GetMapName();
@@ -210,10 +214,10 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 
       // Restore all!
       video->SetMaxFps(fps);
+      jbox->ActiveMusic(music);
+      jbox->ActiveEffects(sfx);
       maps->SelectMapByIndex(map_id_bak);
       cfg->SetMapName(map_name);
-      cfg->SetSoundEffects(sfx);
-      cfg->SetSoundMusic(music);
       cfg->SetDisplayMultiLayerSky(display_multisky);
       cfg->SetDisplayEnergyCharacter(display_energy);
       cfg->SetWindParticlesPercentage(wind_particles);
