@@ -642,6 +642,73 @@ end:
   return ret;
 }
 
+template<typename pixel>
+void
+mirror(void *d, uint dpitch,
+       const void* s, uint spitch,
+       int w, int h)
+{
+  pixel *dst = (pixel*)d;
+  const pixel *src = ((pixel*)s)+w-1;
+
+  dpitch /= sizeof(pixel);
+  spitch /= sizeof(pixel);
+  while (h--) {
+    for (int x=0; x<w; x++)
+      dst[x] = src[-x];
+    dst += dpitch;
+    src += spitch;
+  }
+}
+
+Surface Surface::Mirror()
+{
+  const SDL_PixelFormat *fmt = surface->format;
+  SDL_Surface *surf = SDL_CreateRGBSurface(surface->flags, surface->w, surface->h, fmt->BitsPerPixel,
+                                           fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
+
+  SDL_LockSurface(surface);
+  SDL_LockSurface(surf);
+
+  switch (fmt->BitsPerPixel)
+  {
+  case 8:
+    mirror<Uint8>(surf->pixels, surf->pitch, surface->pixels, surface->pitch,
+                  surf->w, surf->h);
+    break;
+  case 16:
+    mirror<Uint16>(surf->pixels, surf->pitch, surface->pixels, surface->pitch,
+                   surf->w, surf->h);
+    break;
+  case 32:
+    mirror<Uint32>(surf->pixels, surf->pitch, surface->pixels, surface->pitch,
+                   surf->w, surf->h);
+    break;
+  case 24:
+    {
+      uint8_t *dst = (uint8_t*)surf->pixels;
+      const uint8_t *src = (uint8_t*)surface->pixels;
+      src += 3*(surf->w-1);
+      for (int y=0; y<surf->h; y++) {
+        for (int x=0; x<3*surf->w; x+=3) {
+          dst[x+0] = src[0-x];
+          dst[x+1] = src[1-x];
+          dst[x+2] = src[2-x];
+        }
+        dst += surf->pitch;
+        src += surface->pitch;
+      }
+      break;
+    }
+  default: fprintf(stderr, "Unsupported bpp %i\n", fmt->BitsPerPixel); exit(1);
+  }
+
+  SDL_UnlockSurface(surf);
+  SDL_UnlockSurface(surface);
+
+  return Surface(surf);
+}
+
 /**
  *
  * @param angle in radian
@@ -662,8 +729,10 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
    * can also be negative. In this case the corresponding axis is flipped.
    * Note: Flipping currently only works with antialiasing turned off
    */
-  if (zoomx == -1 && zoomy == ONE)
-    smooth = SMOOTHING_OFF;
+  if (zoomx == -1 && zoomy == ONE) {
+    if (!angle.IsNotZero()) return Mirror();
+    smooth = 0;
+  }
 #endif
 
   if (EqualsZero(angle)) {
