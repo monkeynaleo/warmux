@@ -91,7 +91,7 @@ connection_state_t IndexServer::Connect(const std::string& wormux_version)
   if (server_lst.size() == 0) {
     Downloader *dl = Downloader::GetInstance();
     if (!dl->GetServerList(server_lst, "server_list")) {
-      fprintf(stderr, "Error: %s\n", dl->GetLastError().c_str());
+      fprintf(stderr, "Net Error: %s\n", dl->GetLastError().c_str());
       r = CONN_BAD_HOST;
       goto out;
     }
