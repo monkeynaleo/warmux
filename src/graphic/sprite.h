@@ -53,6 +53,9 @@ class Sprite
 {
   bool smooth;
   bool fixed;
+
+  SpriteCache cache;
+
   // Surface growing as need be for any temporary operation inside Sprite members
   // that need a SDL_SWSURFACE Surface without alpha.
   // This surface is shared by all Sprite objects to save memory, but beware
@@ -63,7 +66,6 @@ class Sprite
   void CheckScratch(const Point2i& size);
 
 public:
-  SpriteCache cache;
   SpriteAnimation animation;
 
   explicit Sprite(bool _smooth=false);
