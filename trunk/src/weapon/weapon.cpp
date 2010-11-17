@@ -512,21 +512,21 @@ void Weapon::Draw(){
       || ActiveCharacter().IsDead())
     return;
 
-  // Reset the Sprite:
-  m_image->SetRotation_rad(0.0);
-  m_image->Scale(1.0,1.0);
-
   // rotate weapon if needed
   if (!EqualsZero(min_angle - max_angle)) {
     if (ActiveCharacter().GetDirection() == 1)
-      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle());
+      m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle());
     else
-      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle() - PI);
+      m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle() - PI);
+  } else {
+    m_image->SetRotation_rad(ZERO);
   }
 
   // flip image if needed
   if (use_flipping) {
-    m_image->Scale(ActiveCharacter().GetDirection(), 1.0);
+    m_image->Scale(ActiveCharacter().GetDirection(), ONE);
+  } else {
+    m_image->Scale(ONE, ONE);
   }
 
   // Calculate position of the image
@@ -539,7 +539,7 @@ void Weapon::Draw(){
       Double angle = m_image->GetRotation_rad();
       angle += sin(HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
              * TWO_PI;
-      m_image->SetRotation_rad (angle);
+      m_image->SetRotation_rad(angle);
     }
     else {
       Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
