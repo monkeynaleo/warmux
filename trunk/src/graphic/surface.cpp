@@ -730,13 +730,13 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
    * Note: Flipping currently only works with antialiasing turned off
    */
   if (zoomx == -1 && zoomy == ONE) {
-    if (!angle.IsNotZero()) return Mirror();
+    if (EqualsZero(angle)) return Mirror();
     smooth = 0;
   }
 #endif
 
   if (EqualsZero(angle)) {
-    if (zoomx!=Double(1) || zoomy!=Double(1))
+    if (zoomx!=ONE || zoomy!=ONE)
       surf = zoomSurface(surface, zoomx.toDouble(), zoomy.toDouble(), smooth);
     else {
       return *this;
