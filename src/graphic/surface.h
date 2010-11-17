@@ -185,6 +185,8 @@ public:
   Surface DisplayFormatColorKey(uint8_t alpha_threshold);
 
   Surface Crop(const Rectanglei& area) const;
+
+  Surface Mirror();
 };
 
 #endif
