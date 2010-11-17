@@ -116,37 +116,44 @@ Downloader::Downloader() { }
 Downloader::~Downloader() { }
 bool Downloader::Get(const char* url, FILE* file)
 {
+  bool       ret    = false;
   jboolean   isCopy = JNI_FALSE;
+  int        written;
 
   // Attach to avoid: "JNI ERROR: non-VM thread making JNI calls"
+  // Now make sure to properly detach even in case of error
   vm->AttachCurrentThread(&env, NULL);
 
   jstring    jurl   = env->NewStringUTF(url);
   jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl);
   int        len    = env->GetArrayLength(buffer);
+  jbyte     *ptr;
 
   if (!len) {
     error = Format(_("Read only %i bytes"), len);
-    return false;
+    goto out;
   }
 
-  jbyte *ptr = env->GetByteArrayElements(buffer, &isCopy);
+  ptr = env->GetByteArrayElements(buffer, &isCopy);
   if (!ptr) {
     error = _("No pointer");
-    return false;
+    goto out;
   }
 
-  int written = fwrite(ptr, sizeof(jbyte), len, file);
+  written = fwrite(ptr, sizeof(jbyte), len, file);
   if (isCopy == JNI_TRUE)
     env->ReleaseByteArrayElements(buffer, ptr, 0);
 
+
+  if (written != len)
+    error = Format(_("Wrote %i/%i bytes"), written, len);
+  else
+    ret = true;
+
+out:
   // Done with JNI calls, detach
   vm->DetachCurrentThread();
-
-  if (written == len)
-    return true;
-  error = Format(_("Wrote %i/%i bytes"), written, len);
-  return false;
+  return ret;
 }
 #else  // waiting for an alternate implementation
 Downloader::Downloader() { }
