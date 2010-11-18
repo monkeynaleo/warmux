@@ -63,6 +63,7 @@ protected:
 
 private:
    virtual void DrawBackground();
+   virtual void RedrawBackground(const Rectanglei& rect) const;
    void OnClick(const Point2i &mousePosition, int button);
    void OnClickUp(const Point2i &mousePosition, int button);
 };

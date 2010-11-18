@@ -214,3 +214,23 @@ void MainMenu::DrawBackground()
   website_text->DrawCenter(Point2i(window.GetWidth()/2,
                                    window.GetHeight() + VERSION_DY/2));
 }
+
+void MainMenu::RedrawBackground(const Rectanglei& rect) const
+{
+  Surface& window = GetMainWindow();
+
+  Menu::RedrawBackground(rect);
+
+  Point2i version_pos(window.GetWidth()/2,
+		      window.GetHeight() + VERSION_DY);
+  Point2i website_pos(window.GetWidth()/2,
+		      window.GetHeight() + VERSION_DY/2);
+
+  if (rect.Contains(version_pos)) {
+    version_text->DrawCenter(version_pos);
+  }
+
+  if (rect.Contains(website_pos)) {
+    website_text->DrawCenter(website_pos);
+  }
+}
