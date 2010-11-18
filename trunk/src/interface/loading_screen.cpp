@@ -24,6 +24,7 @@
 #include "game/config.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
+#include "graphic/text.h"
 #include "graphic/video.h"
 #include "tool/resource_manager.h"
 
@@ -41,6 +42,9 @@ LoadingScreen::LoadingScreen(int icon_count):
   loading_bg->EnableLastFrameCache();
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
+  std::string loading_str(_("loading..."));
+  loading_text = new Text(loading_str, white_color, Font::FONT_HUGE, Font::FONT_BOLD, false);
+
   // Get profile from resource manager
   res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   DrawBackground();
@@ -56,6 +60,11 @@ void LoadingScreen::DrawBackground()
 {
   loading_bg->ScaleSize(GetMainWindow().GetWidth(), GetMainWindow().GetHeight());
   loading_bg->Blit(GetMainWindow(), 0, 0);
+
+  Point2i loading_text_pos(GetMainWindow().GetWidth()/2,
+			   GetMainWindow().GetHeight()/2 - 80);
+  loading_text->DrawCenter(loading_text_pos);
+
   AppWormux::GetInstance()->video->Flip();
 }
 

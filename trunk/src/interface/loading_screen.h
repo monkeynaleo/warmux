@@ -28,12 +28,14 @@
 // Forwar declarations
 class Profile;
 class Sprite;
+class Text;
 
 class LoadingScreen
 {
  private:
   Profile * res;
   Sprite * loading_bg;
+  Text * loading_text;
   int icon_count;
 
  public:
