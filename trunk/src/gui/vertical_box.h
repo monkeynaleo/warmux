@@ -30,8 +30,7 @@ protected:
   bool force_widget_size;
 
 public:
-  VBox(uint width,
-       bool draw_border = true,
+  VBox(uint width, bool draw_border = true, bool shadowed = true,
        bool force_widget_size = true);
   VBox(Profile * profile,
        const xmlNode * verticalBoxNode);

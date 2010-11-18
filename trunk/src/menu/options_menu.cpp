@@ -161,14 +161,14 @@ OptionMenu::OptionMenu() :
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
   if (!Game::IsRunning()) {
-    Box * teams_editor = new HBox(option_size.y, false, true);
+    Box * teams_editor = new HBox(option_size.y, false, false, true);
 
     lbox_teams = new ItemBox(option_size, false);
     teams_editor->AddWidget(lbox_teams);
 
     uint lwidth = max_w - option_size.x - 30;
-    Box * teams_editor_inf = new VBox(lwidth, true, false);
-    Box * box_team_name = new HBox(30, false, true);
+    Box * teams_editor_inf = new VBox(lwidth, true, true, false);
+    Box * box_team_name = new HBox(30, false, false, true);
 
     team_name = new Label(Format("%s:", _("Head commander")), 100,
                           Font::FONT_SMALL, Font::FONT_BOLD);
@@ -193,7 +193,7 @@ OptionMenu::OptionMenu() :
                                                      Font::FONT_SMALL, Font::FONT_BOLD));
       Label * lab = new Label(oss.str(), 30, Font::FONT_SMALL, Font::FONT_BOLD);
 
-      Box * name_box = new HBox(20, false, true);
+      Box * name_box = new HBox(20, false, false, true);
       name_box->SetNoBorder();
 
       name_box->AddWidget(lab);
@@ -204,7 +204,7 @@ OptionMenu::OptionMenu() :
 
     teams_editor_inf->AddWidget(teams_editor_names);
 
-    Box * team_action_box = new HBox(35, false, true);
+    Box * team_action_box = new HBox(35, false, false, true);
     team_action_box->SetNoBorder();
 
     add_team = new Button(res, "menu/add_custom_team");

@@ -97,20 +97,20 @@ class ResultBox : public HBox
 
 public:
   ResultBox(uint size, const std::string& type)
-    : HBox(size, false, false)
+    : HBox(size, false, false, false)
   {
     SetWidgets(type, "?", NULL);
     Widget::SetBackgroundColor(transparent_color);
   }
   ResultBox(uint size, const std::string& type, uint score, const Character* player)
-    : HBox(size, false, false)
+    : HBox(size, false, false, false)
   {
     char buffer[16];
     snprintf(buffer, 16, "%i", score);
     SetWidgets(type, buffer, player);
   }
   ResultBox(uint size, const std::string& type, float score, const Character* player)
-    : HBox(size, false, false)
+    : HBox(size, false, false, false)
   {
     char buffer[16];
     snprintf(buffer, 16, "%.1f", score);
@@ -261,7 +261,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   if (third_team)
     DrawTeamOnPodium(*third_team, Point2i(98,52));
 
-  winner_box = new VBox(240, true, true);
+  winner_box = new VBox(240, true, true, true);
   if (first_team) {
     Font::font_size_t title = (small) ? Font::FONT_MEDIUM : Font::FONT_BIG;
     Font::font_size_t txt   = (small) ? Font::FONT_SMALL : Font::FONT_MEDIUM;
@@ -327,7 +327,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
                   new GraphCanvas(tab_size - 2*BorderSize, _("Time"), _("Energy"), team_results));
 
   // Final box
-  VBox* tmp_box = new VBox(tab_size.x, false, false);
+  VBox* tmp_box = new VBox(tab_size.x, false, false, false);
   tmp_box->SetNoBorder();
   tmp_box->AddWidget(tabs);
 

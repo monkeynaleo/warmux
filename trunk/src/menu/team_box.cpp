@@ -36,7 +36,7 @@
 #include "tool/resource_manager.h"
 
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(_size.y, false, false),
+  HBox(_size.y, false, false, false),
   ai_name(NO_AI_NAME)
 {
   associated_team = NULL;
@@ -48,7 +48,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
   /********        Logos: team mascott, player type icon      ********/
-  Box * tmp_logo_box = new VBox(W_UNDEF, false, false);
+  Box * tmp_logo_box = new VBox(W_UNDEF, false, false, false);
   tmp_logo_box->SetMargin(1);
   tmp_logo_box->SetNoBorder();
 
@@ -68,7 +68,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
 
   /********    Center box: team name, commander   *********/
   int width = _size.x - (2*2+(38+2*2)+(110+2*2));
-  Box * tmp_player_box = new VBox(_size.y, false, false);
+  Box * tmp_player_box = new VBox(_size.y, false, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
 
@@ -99,7 +99,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
     player_name = new TextBox(_player_name, width - 2 * (next_custom_team->GetSizeY() + 2),
                               Font::FONT_SMALL, Font::FONT_BOLD);
 
-    Box * tmp_name_box = new HBox(player_name->GetSizeY(), false, false);
+    Box * tmp_name_box = new HBox(player_name->GetSizeY(), false, false, false);
     tmp_name_box->SetNoBorder();
     tmp_name_box->SetMargin(2);
 

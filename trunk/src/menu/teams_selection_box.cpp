@@ -76,14 +76,14 @@ void TeamScrollBox::SetNbTeams(uint nb)
 }
 
 TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_border) :
-  HBox(_size.y, w_border)
+  HBox(_size.y, w_border, false)
 {
   if (!w_border)
     SetNoBorder();
   SetMargin(0);
 
   // How many teams ?
-  VBox *tmp = new VBox(120, false, true);
+  VBox *tmp = new VBox(120, false, false, true);
   if (network) {
     local_teams_nb =
       new SpinButtonWithPicture(_("Local teams:"), "menu/team_number",

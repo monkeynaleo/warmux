@@ -34,14 +34,14 @@
 
 
 TalkBox::TalkBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_t fstyle) :
-  VBox(size.x, false, false)
+  VBox(size.x, false, false, false)
 {
   SetNoBorder();
 
   msg_box = new MsgBox(Point2i(size.x, size.y - 20), fsize, fstyle);
   AddWidget(msg_box);
 
-  HBox* tmp2_box = new HBox(16, false);
+  HBox* tmp2_box = new HBox(16, false, false);
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox("", size.x-20, fsize, fstyle);

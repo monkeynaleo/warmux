@@ -48,7 +48,7 @@ public:
   BenchType type;
 
   BenchItem(BenchType t, const std::string& name, uint height)
-    : HBox(height, false, true /* use full height */)
+    : HBox(height, false, false, true /* use full height */)
     , type(t)
   {
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -107,7 +107,7 @@ BenchmarkMenu::BenchmarkMenu() :
   Menu("menu/bg_option", vOk)
 {
   const Surface& window = GetMainWindow();
-  tests = new VBox(window.GetWidth()*FACTOR, true, true);
+  tests = new VBox(window.GetWidth()*FACTOR, true, true, true);
   tests->SetPosition(window.GetSize()* (1.0f - FACTOR)/2);
 
   tests->AddWidget(new BenchItem(BENCH_MENU, _("Menu"), 48));
