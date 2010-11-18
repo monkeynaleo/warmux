@@ -33,7 +33,7 @@
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _display_only) :
-  VBox(_size.GetX(), show_border), selected_map_index(0)
+  VBox(_size.GetX(), show_border, false), selected_map_index(0)
 {
   display_only = _display_only;
 
@@ -52,7 +52,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
   uint map_preview_height = _size.GetY() -2*10 -40;
 
   // Previews
-  Box* previews_box = new HBox(map_preview_height+10, false);
+  Box* previews_box = new HBox(map_preview_height+10, false, false);
   previews_box->SetNoBorder();
 
    // compute margin width between previews

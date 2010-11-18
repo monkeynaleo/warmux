@@ -78,7 +78,7 @@ GameMenu::GameMenu() :
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
     tabs->AddNewTab("TAB_Map", _("Map"), map_box);
   } else {
-    VBox *box = new VBox(mainBoxWidth, false, true);
+    VBox *box = new VBox(mainBoxWidth, false, false, true);
     std::string tabs_title = _("Teams") + std::string(" - ");
     tabs_title += _("Map");
 

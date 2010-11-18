@@ -53,7 +53,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
 
   scrollbar_width = m_up->GetSizeX();
   // Let's consider the scrollbar is not displayed for now.
-  vbox = new VBox(_size.x - 2*border_size - scrollbar_width, false, force_widget_size);
+  vbox = new VBox(_size.x - 2*border_size - scrollbar_width, false, false, force_widget_size);
   vbox->SetBorder(Point2i(0, 0));
   vbox->SetMargin(0);
   vbox->SetBackgroundColor(transparent_color);

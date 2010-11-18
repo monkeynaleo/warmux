@@ -21,10 +21,9 @@
 
 #include "gui/horizontal_box.h"
 
-HBox::HBox(uint height, 
-           bool draw_border, 
+HBox::HBox(uint height, bool draw_border, bool shadowed,
            bool _force_widget_size) :
-  Box(Point2i(100, height), draw_border),
+  Box(Point2i(100, height), draw_border, shadowed),
   force_widget_size(_force_widget_size)
 {
 }

@@ -21,10 +21,9 @@
 
 #include "gui/vertical_box.h"
 
-VBox::VBox(uint width, 
-           bool draw_border, 
-           bool _force_widget_size) :
-  Box(Point2i(width, 100), draw_border),
+VBox::VBox(uint width, bool draw_border, bool shadowed,
+	   bool _force_widget_size) :
+  Box(Point2i(width, 100), draw_border, shadowed),
   force_widget_size(_force_widget_size)
 {
 }

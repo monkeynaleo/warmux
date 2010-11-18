@@ -58,7 +58,7 @@ Menu::Menu(const std::string& bg, t_action _actions)
   if (actions == vNo) {
     actions_buttons = NULL;
   } else {
-    actions_buttons = new HBox(50, false);
+    actions_buttons = new HBox(50, false, false);
 
     if (actions == vOk || actions == vOkCancel) {
       b_ok = new Button(res, "menu/valider");

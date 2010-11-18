@@ -25,7 +25,7 @@ GridBox::GridBox(uint _lines,
                  uint _columns,
                  uint margin,
                  bool _draw_border) :
-  Box(Point2i(-1, -1), _draw_border),
+  Box(Point2i(-1, -1), _draw_border, _draw_border),
   autoResize(true),
   fixedMargin(margin),
   lines(_lines),
@@ -59,7 +59,7 @@ bool GridBox::LoadXMLConfiguration(void)
   if (NULL == profile || NULL == widgetNode) {
     return false;
   }
-  
+
   ParseXMLGeometry();
   ParseXMLBoxParameters();
 

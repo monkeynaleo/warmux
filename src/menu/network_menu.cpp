@@ -92,13 +92,13 @@ NetworkMenu::NetworkMenu() :
   team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
   map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight),
-                                multitabs, !Network::GetInstance()->IsGameMaster());
+				 multitabs, !Network::GetInstance()->IsGameMaster());
 
   if (!multitabs) {
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
     tabs->AddNewTab("TAB_Map", _("Map"), map_box);
   } else {
-    VBox *box = new VBox(mainBoxWidth, false, true);
+    VBox *box = new VBox(mainBoxWidth, false, false, true);
     std::string tabs_title = _("Teams") + std::string(" - ");
     tabs_title += _("Map");
 
@@ -133,10 +133,10 @@ NetworkMenu::NetworkMenu() :
   widgets.Pack();
 
 
-  Box* bottom_box = new HBox(chat_box_height, false, true);
+  Box* bottom_box = new HBox(chat_box_height, false, false, true);
   bottom_box->SetNoBorder();
 
-  Box* options_box = new VBox(200, true);
+  Box* options_box = new VBox(200, true, true);
 
   mode_label = new Label("", 0, Font::FONT_MEDIUM, Font::FONT_BOLD,
                          primary_red_color, Text::ALIGN_LEFT_TOP, true);

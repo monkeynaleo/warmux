@@ -30,8 +30,7 @@ Box::Box(void):
 {
 }
 
-Box::Box(const Point2i & size,
-         bool _draw_border) :
+Box::Box(const Point2i & size, bool _draw_border, bool shadowed) :
   WidgetList(size),
   margin(5)
 {
@@ -39,6 +38,9 @@ Box::Box(const Point2i & size,
 
   if (_draw_border) {
     Widget::SetBorder(defaultOptionColorRect, 2);
+  }
+
+  if (shadowed) {
     Widget::SetBackgroundColor(defaultOptionColorBox);
   }
 }

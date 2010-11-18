@@ -47,7 +47,7 @@ public:
   std::string port, ip_address;
   GameInfoBox(uint width, bool pwd, const std::string& ip,
               const std::string& port, const std::string& name)
-    : HBox(width, false, false)
+    : HBox(width, false, false, false)
     , password(pwd)
     , port(port)
     , ip_address(ip)
@@ -161,12 +161,12 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   // #############################
   /* client connection related widgets */
-  Box * cl_connection_box = new VBox(W_UNDEF, false, false);
+  Box * cl_connection_box = new VBox(W_UNDEF, false, false, false);
   cl_connection_box->SetBorder(Point2i(0,0));
   tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
 
   // Public battles
-  Box * cl_tmp_box = new HBox(W_UNDEF, false, false);
+  Box * cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetBorder(Point2i(0,0));
 
@@ -182,7 +182,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Server password
-  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetBorder(Point2i(0,0));
 
@@ -196,7 +196,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Manual connection
   Box *manual_connection_box;
   if (GetMainWindow().GetHeight() < 480) {
-    manual_connection_box = new VBox(W_UNDEF, false, false);
+    manual_connection_box = new VBox(W_UNDEF, false, false, false);
     manual_connection_box->SetBorder(Point2i(0,0));
     tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
   } else {
@@ -207,7 +207,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   }
 
   // Server address
-  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetBorder(Point2i(0,0));
 
@@ -218,7 +218,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   manual_connection_box->AddWidget(cl_tmp_box);
 
   // Server port
-  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetBorder(Point2i(0,0));
 
@@ -229,7 +229,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   manual_connection_box->AddWidget(cl_tmp_box);
 
   // Server password
-  cl_tmp_box = new HBox(W_UNDEF, false, false);
+  cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetBorder(Point2i(0,0));
 
@@ -241,11 +241,11 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   // #############################
   /* server connection related widgets */
-  Box * srv_connection_box = new VBox(W_UNDEF, false, false);
+  Box * srv_connection_box = new VBox(W_UNDEF, false, false, false);
   srv_connection_box->SetBorder(Point2i(0,0));
 
   // Server port
-  Box * srv_tmp_box = new HBox(W_UNDEF, false, false);
+  Box * srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetBorder(Point2i(0,0));
 
@@ -256,7 +256,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   srv_connection_box->AddWidget(srv_tmp_box);
 
   // Game name
-  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetBorder(Point2i(0,0));
 
@@ -268,7 +268,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   srv_connection_box->AddWidget(srv_tmp_box);
 
   // Server password
-  srv_tmp_box = new HBox(W_UNDEF, false, false);
+  srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetBorder(Point2i(0,0));
 

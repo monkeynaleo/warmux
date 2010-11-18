@@ -50,7 +50,7 @@ public:
   static std::vector<ControlItem*> *selves;
 
   ControlItem(int action, bool ro, uint height)
-    : HBox(height, false, true /* use full height */)
+    : HBox(height, false, false, true /* use full height */)
     , key_action((ManMachineInterface::Key_t)action)
     , read_only(ro)
   {
@@ -209,7 +209,7 @@ class HeaderItem : public HBox
 
 public:
   HeaderItem(uint height)
-    : HBox(height, false, true)
+    : HBox(height, false, false, true)
   {
     SetMargin(0);
     SetBorder(0, 0);
