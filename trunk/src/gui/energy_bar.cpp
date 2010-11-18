@@ -141,6 +141,10 @@ void EnergyBar::Actu(int real_energy)
   int i = 0;
   int nbThresholds = listThresholds.size();
 
+  // Yes, the float multiplication of (a/b)*b can be > a
+  if (currentPercentage > 100.0f)
+    currentPercentage = 100.0f;
+
   while ((i < nbThresholds) &&
          (currentPercentage > listThresholds[i].value)) {
     ++i;
