@@ -41,7 +41,7 @@ ProgressBar::ProgressBar() :
   m_use_ref_val(false),
   m_ref_val(0),
   bar_value(0),
-  orientation()
+  orientation(PROG_BAR_HORIZONTAL)
 {
 }
 
