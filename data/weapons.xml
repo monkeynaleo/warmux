@@ -10,21 +10,21 @@
 
   <sprite name="smoke_explosion">
     <image file="object/smoke3.png">
-      <grid size="150,150" array="4,1"/>
+      <grid pos="0,0" size="150,150" array="4,1"/>
     </image>
     <animation speed="50"/>
   </sprite>
 
     <sprite name="smoke_big_explosion">
     <image file="object/kaboom.png">
-      <grid size="100,100" array="9,1"/>
+      <grid pos="0,0" size="100,100" array="9,1"/>
     </image>
     <animation speed="100"/>
   </sprite>
 
   <sprite name="explosion_particle">
     <image file="object/kaboomk.png">
-      <grid size="100,100" array="4,1"/>
+      <grid pos="0,0" size="100,100" array="4,1"/>
     </image>
     <animation speed="100"/>
   </sprite>
@@ -35,7 +35,7 @@
 
   <sprite name="fire_particle">
     <image file="object/fire.png" >
-      <grid size="18,35" array="5,1" />
+      <grid pos="0,0" size="18,35" array="5,1" />
     </image>
   </sprite>
 
@@ -90,7 +90,7 @@
   <position name="air_attack" origin="over" x="0" y="-5" />
   <sprite name="air_attack_plane">
     <image file="weapon/air_attack/air_attack_plane.png">
-      <grid size="200,65" array="3,1"/>
+      <grid pos="0,0" size="200,65" array="3,1"/>
     </image>
     <animation speed="10"/>
   </sprite>
@@ -185,15 +185,15 @@
 
   <surface name="dynamite_ico" file="weapon/dynamite/dynamite_ico.png" />
   <surface name="dynamite" file="weapon/dynamite/dynamite.png" />
-  <position name="dynamite" origin="hand" x="7" y="7" />
+  <position name="dynamite" origin="hand" x="5" y="6" />
   <sprite name="dynamite_bullet">
     <image file="weapon/dynamite/dynamite_ani.png">
-      <grid size="14,15" array="11,1" />
+      <grid pos="0,0" size="14,15" array="11,1" />
     </image>
   </sprite>
   <sprite name="dynamite_anim">
     <image file="weapon/dynamite/dynamite_ani.png">
-      <grid size="14,15" array="11,1" />
+      <grid pos="0,0" size="14,15" array="11,1" />
     </image>
   </sprite>
 
@@ -254,7 +254,7 @@
   <position name="gnulauncher" origin="hand" x="20" y="20" />
   <sprite name="gnu">
     <image file="weapon/gnu/gnu.png">
-      <grid size="47,38" array="4,1" />
+      <grid pos="0,0" size="47,38" array="4,1" />
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>
@@ -269,7 +269,7 @@
   </sprite>
   <sprite name="polecat">
     <image file="weapon/polecat/polecat.png">
-      <grid size="52,25" array="1,1" />
+      <grid pos="0,0" size="52,25" array="1,1" />
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>
@@ -291,7 +291,7 @@
   <position name="minelauncher" origin="hand" x="4" y="4" />
   <sprite name="mine">
     <image file="weapon/mine/mine_anim.png">
-      <grid size="24,24" array="2,1" />
+      <grid pos="0,0" size="24,24" array="2,1" />
     </image>
     <animation speed="300" loop_mode="1" />
   </sprite>
@@ -319,7 +319,7 @@
   <position name="parachute" origin="hand" x="34" y="65" />
   <sprite name="parachute_sprite">
     <image file="weapon/parachute/parachute.png">
-      <grid size="84,71" array="3,1" />
+      <grid pos="0,0" size="84,71" array="3,1" />
     </image>
   </sprite>
 
@@ -348,7 +348,7 @@
   <position name="tux" origin="hand" x="1" y="11" />
   <sprite name="supertux">
     <image file="weapon/supertux/superman.png">
-      <grid size="23,38" array="2,1" />
+      <grid pos="0,0" size="23,38" array="2,1" />
     </image>
     <animation speed="80"/>
   </sprite>
