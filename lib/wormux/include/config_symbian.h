@@ -119,5 +119,5 @@
 #define HAVE_TOUCHSCREEN
 #define HAVE_HANDHELD
 
-#define INSTALL_DATADIR "/wormux/data"
-#define FONT_FILE "/wormux/data/font/DejaVuSans.ttf"
+#define INSTALL_DATADIR "data/"
+#define FONT_FILE "data/font/DejaVuSans.ttf"
