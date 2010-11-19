@@ -229,6 +229,10 @@ std::string GetTmpDir() { return "."; }
 std::string GetHome() { return "sd:/apps/Wormux"; }
 std::string GetOldPersonalDir() { return ""; }
 std::string GetTmpDir() { return "sd:/apps/Wormux"; }
+#  elif defined(__SYMBIAN32__)
+std::string GetHome() { return "."; }
+std::string GetOldPersonalDir() { return "."; }
+std::string GetTmpDir() { return "."; }
 #  else // Linux or Apple
 std::string GetHome()
 {
