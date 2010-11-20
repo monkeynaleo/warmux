@@ -447,10 +447,18 @@ void Physics::RunPhysicalEngine()
 {
   uint now = Time::GetInstance()->Read();
   if (m_last_physical_engine_run < m_last_move) {
-    ASSERT(now >= m_last_move);
+    if (!(now >= m_last_move))
+    {
+        fprintf(stderr, "Failed now >= m_last_move : %i, %i\n", now, m_last_move);
+        abort();
+    }
     m_last_physical_engine_run = m_last_move;
   } else {
-    ASSERT(now >= m_last_physical_engine_run);
+    if (!(now >= m_last_physical_engine_run))
+    {
+        fprintf(stderr, "Failed now >= m_last_physical_engine_run : %i, %i\n", now, m_last_physical_engine_run);
+        abort();
+    }
   }
   uint delta_t_ms = now - m_last_physical_engine_run;
   Point2d oldPos;
