@@ -51,7 +51,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   // Physic constants
   Double mass = GetMass();
   mass *= RandomLocal().GetDouble(0.75, 1.25); //Mass = mass_mean + or - 25%
-  SetMass (mass);
+  SetMass(mass);
 
   SetSize(Point2i(20,20));
   Double wind_factor = GetWindFactor();
@@ -79,47 +79,28 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   sprite->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount() - 1));
   SetSize(sprite->GetSize());
 
-  if (ActiveMap()->GetWind().need_flip) {
-    flipped = new Sprite(*sprite);
-    flipped->Scale(-scale, scale);
-    flipped->SetAlpha(scale);
-    flipped->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount()-1));
-  } else {
-    flipped = NULL;
-  }
-
   bool not_fixed = GetAlignParticleState()|| ActiveMap()->GetWind().rotation_speed.IsNotZero();
+  sprite->EnableCaches(ActiveMap()->GetWind().need_flip, not_fixed ? 64 : 0);
   if (not_fixed) {
-    sprite->EnableCaches(false, 64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
-
-    if (flipped) {
-      flipped->EnableCaches(false, 64);
-      flipped->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
-    }
   }
+  //else  sprite->FixParameters();
 
   // Now that caches have been set, refresh
-  //if (!not_fixed) sprite->FixParameters();
   sprite->RefreshSurface();
-  if (flipped) {
-    //if (!not_fixed) flipped->FixParameters();
-    flipped->RefreshSurface();
-  }
 }
 
 WindParticle::~WindParticle()
 {
   delete sprite;
-  if (flipped) delete flipped;
 }
 
 void WindParticle::Refresh()
 {
-  if (flipped && GetSpeed().x < 0)
-    flipped->Update();
-  else
-    sprite->Update();
+  if (GetSpeed().x < 0) {
+    sprite->Scale(-sprite->GetScaleX(), sprite->GetScaleY());
+  }
+  sprite->Update();
 
   const Double& rotation_speed = ActiveMap()->GetWind().rotation_speed;
   if (GetAlignParticleState()) {
@@ -127,8 +108,7 @@ void WindParticle::Refresh()
   }
   else if (rotation_speed.IsNotZero()) {
     // Rotate the sprite if needed
-    Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
-    spr->SetRotation_rad(spr->GetRotation_rad() + rotation_speed);
+    sprite->SetRotation_rad(sprite->GetRotation_rad() + rotation_speed);
   }
 
   // Put particles inside of the camera view
@@ -164,8 +144,7 @@ void WindParticle::Draw()
 {
   if (!IsInWater()) {
     // Use the flipped sprite if needed and if the direction of wind changed
-    Sprite *spr = (flipped && GetSpeed().x < 0) ? flipped : sprite;
-    spr->Draw(GetPosition());
+    sprite->Draw(GetPosition());
   }
 }
 
