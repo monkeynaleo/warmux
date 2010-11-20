@@ -96,7 +96,7 @@ public:
   // Size
   uint GetWidth() const
   {
-    return uround(frame_width_pix * (scale_x > 0 ? scale_x : -scale_x));
+    return uround(frame_width_pix *  scale_x);
   }
   // gives height of the surface (takes rotations into acount)
   uint GetWidthMax() const
@@ -108,7 +108,7 @@ public:
   }
   uint GetHeight() const
   {
-    return uround(frame_height_pix * (scale_y > 0 ? scale_y : -scale_y));
+    return uround(frame_height_pix * scale_y);
   }
   // gives height of the surface (takes rotations into acount)
   uint GetHeightMax() const

@@ -169,9 +169,14 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   }
 
   Point2i rhs_pos_tmp;
-  rhs_pos_tmp.x = int(rhs_pos.x * scale_x);
+  if (flipped) {
+    rhs_pos_tmp.x = int(rhs_pos.x * -scale_x);
+    surfaceWidth  = int(surfaceWidth  * -scale_x);
+  } else {
+    rhs_pos_tmp.x = int(rhs_pos.x * scale_x);
+    surfaceWidth  = int(surfaceWidth  * scale_x);
+  }
   rhs_pos_tmp.y = int(rhs_pos.y * scale_y);
-  surfaceWidth  = int(surfaceWidth  * scale_x);
   surfaceHeight = int(surfaceHeight * scale_y);
   //Calculate the position of the hotspot after a rotation around the center of the surface:
 
@@ -276,22 +281,25 @@ void Sprite::RefreshSurface()
   if (!current_surface.IsNull())
     return;
 
+  ASSERT(scale_x > 0);
   SpriteFrameCache& frame = cache[current_frame];
-  Double angle = rotation_rad;
+  Double angle;
   if (flipped) {
     // We should be using the flipped cache
-    if (angle.IsNotZero() && cache.HasRotationCache()) {
-      current_surface = frame.GetFlippedSurfaceForAngle(angle);
+    if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
+      current_surface = frame.GetFlippedSurfaceForAngle(rotation_rad);
       angle = ZERO;
     } else {
       current_surface = frame.flipped_surface;
+      angle = -rotation_rad;
     }
   } else {
-    if (angle.IsNotZero() && cache.HasRotationCache()) {
-      current_surface = frame.GetSurfaceForAngle(angle);
+    if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
+      current_surface = frame.GetSurfaceForAngle(rotation_rad);
       angle = ZERO;
     } else {
       current_surface = frame.normal_surface;
+      angle = -rotation_rad;
     }
   }
   current_surface = current_surface.RotoZoom(angle, scale_x, scale_y);
