@@ -298,7 +298,7 @@ void Sprite::RefreshSurface()
       current_surface = frame.normal_surface;
     }
   }
-  current_surface = current_surface.RotoZoom(angle, -scale_x, scale_y);
+  current_surface = current_surface.RotoZoom(angle, sx, scale_y);
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
