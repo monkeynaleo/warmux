@@ -512,7 +512,7 @@ void Weapon::Draw(){
 
   // rotate weapon if needed
   if (!EqualsZero(min_angle - max_angle)) {
-    if (ActiveCharacter().GetDirection() == 1)
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle());
     else
       m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle()-PI);
