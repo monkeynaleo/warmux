@@ -78,8 +78,8 @@ RequestExecutionLevel highest
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modern UI Configuration ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  !define MUI_ICON                          "${LOCAL_PATH}${SEP}install.ico"
-  !define MUI_UNICON                        "${LOCAL_PATH}${SEP}uninstall.ico"
+  !define MUI_ICON                          "${LOCAL_PATH}${SEP}icon${SEP}install.ico"
+  !define MUI_UNICON                        "${LOCAL_PATH}${SEP}icon${SEP}uninstall.ico"
   ; Alter License section
   !define MUI_LICENSEPAGE_BUTTON            \$(WORMUX_BUTTON)
   !define MUI_LICENSEPAGE_TEXT_BOTTOM       \$(WORMUX_BOTTOM_TEXT)
