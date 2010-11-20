@@ -282,25 +282,15 @@ void Sprite::RefreshSurface()
     return;
 
   ASSERT(scale_x > 0);
-  SpriteFrameCache& frame = cache[current_frame];
+  SpriteSubframeCache& frame = (flipped) ? cache[current_frame].flipped
+                                         : cache[current_frame].normal;
   Double angle;
-  if (flipped) {
-    // We should be using the flipped cache
-    if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
-      current_surface = frame.GetFlippedSurfaceForAngle(rotation_rad);
-      angle = ZERO;
-    } else {
-      current_surface = frame.flipped_surface;
-      angle = -rotation_rad;
-    }
+  if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
+    current_surface = frame.GetSurfaceForAngle(rotation_rad);
+    angle = ZERO;
   } else {
-    if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
-      current_surface = frame.GetSurfaceForAngle(rotation_rad);
-      angle = ZERO;
-    } else {
-      current_surface = frame.normal_surface;
-      angle = -rotation_rad;
-    }
+    current_surface = frame.surface;
+    angle = -rotation_rad;
   }
   current_surface = current_surface.RotoZoom(angle, scale_x, scale_y);
 
