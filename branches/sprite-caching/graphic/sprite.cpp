@@ -39,20 +39,20 @@
 // Scratch surface without alpha, not thread-safe!
 Surface Sprite::scratch;
 
-Sprite::Sprite(bool _smooth) :
-  smooth(_smooth),
-  fixed(false),
-  cache(*this),
-  animation(*this)
+Sprite::Sprite(bool _smooth)
+  : fixed(false)
+  , flipped(false)
+  , cache(*this)
+  , animation(*this)
 {
   Constructor();
 }
 
-Sprite::Sprite(const Surface& surface, bool _smooth) :
-  smooth(_smooth),
-  fixed(false),
-  cache(*this),
-  animation(*this)
+Sprite::Sprite(const Surface& surface, bool _smooth)
+  : fixed(false)
+  , flipped(false)
+  , cache(*this)
+  , animation(*this)
 {
   Constructor();
   frame_width_pix = surface.GetWidth();
@@ -60,11 +60,11 @@ Sprite::Sprite(const Surface& surface, bool _smooth) :
   AddFrame(surface);
 }
 
-Sprite::Sprite(const Sprite &other) :
-  smooth(other.smooth),
-  fixed(other.fixed),
-  cache(*this),
-  animation(other.animation, *this)
+Sprite::Sprite(const Sprite &other)
+  : fixed(other.fixed)
+  , flipped(other.flipped)
+  , cache(*this)
+  , animation(other.animation, *this)
 {
   Constructor();
   current_surface = other.current_surface;
@@ -98,8 +98,8 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 {
   Point2i f;
 
-  this->frame_width_pix = frameSize.x;
-  this->frame_height_pix = frameSize.y;
+  frame_width_pix = frameSize.x;
+  frame_height_pix = frameSize.y;
 
   surface.SetAlpha(0, 0);
 
@@ -136,7 +136,7 @@ void Sprite::SetRotation_HotSpot(const Point2i& new_hotspot)
 
 void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
 {
-  const Surface & surface = cache[current_frame].normal_surface;
+  const Surface & surface = current_surface;
 
   // Calculate offset of the surface depending on hotspot rotation position :
   int surfaceHeight = surface.GetHeight();
@@ -278,12 +278,8 @@ void Sprite::RefreshSurface()
 
   SpriteFrameCache& frame = cache[current_frame];
   Double angle = rotation_rad;
-  Double sx    = scale_x;
-  if (scale_x < ZERO) {
+  if (flipped) {
     // We should be using the flipped cache
-    assert(cache.HasFlippedCache());
-    sx = -scale_x;
-
     if (angle.IsNotZero() && cache.HasRotationCache()) {
       current_surface = frame.GetFlippedSurfaceForAngle(angle);
       angle = ZERO;
@@ -298,7 +294,7 @@ void Sprite::RefreshSurface()
       current_surface = frame.normal_surface;
     }
   }
-  current_surface = current_surface.RotoZoom(angle, sx, scale_y);
+  current_surface = current_surface.RotoZoom(angle, scale_x, scale_y);
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
