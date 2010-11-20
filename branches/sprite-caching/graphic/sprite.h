@@ -191,7 +191,10 @@ public:
   Double GetAlpha() const { return alpha; };
 
   // Cache handling
-  void EnableCaches(bool flipped, uint num=0, Double min=ZERO, Double max=TWO_PI);
+  void EnableCaches(bool flipped, uint num=0, const Double& min=ZERO, const Double& max=TWO_PI)
+  {
+    cache.EnableCaches(flipped, num, min, max);
+  }
 
   // Show flag
   void Show() { show = true; };

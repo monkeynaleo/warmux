@@ -70,7 +70,7 @@ Surface SpriteFrameCache::GetSurfaceForAngle(Double angle)
   return rotated_surface[index];
 }
 
-void SpriteCache::EnableCaches(bool flipped, uint rotation_num, Double min, Double max)
+void SpriteCache::EnableCaches(bool flipped, uint rotation_num, const Double& min, const Double& max)
 {
   //For each frame, we pre-render 'rotation_num' rotated surface
   //At runtime the prerender Surface with the nearest angle to what is asked is displayed
