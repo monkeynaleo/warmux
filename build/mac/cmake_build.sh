@@ -49,25 +49,25 @@ export PPC_BUILD=0
 # flags only used when building as UB
 export FAT_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -I/Developer/SDKs/MacOSX10.4u.sdk/usr/include -mmacosx-version-min=10.4"
 export FAT_LDFLAGS="-mmacosx-version-min=10.4 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -arch i386 -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
-
 # flags only used when cross-building to PCC
-export PPC_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -I/usr/include -mmacosx-version-min=10.4"
+
+export PPC_CFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -arch ppc -mmacosx-version-min=10.4"
 export PPC_LDFLAGS="-mmacosx-version-min=10.4 -Wl,-syslibroot,/Developer/SDKs/MacOSX10.4u.sdk -arch ppc -L/Developer/SDKs/MacOSX10.4u.sdk/usr/lib"
 
-APP_VERSION=0.8.3
-BUNDLE_NAME=Wormux
+APP_VERSION=10.12
+BUNDLE_NAME=Warmux
 DMG_TARGET="${BUNDLE_NAME}-${APP_VERSION}"
 DMG_OUT=${BUNDLE_NAME}-${APP_VERSION}-`uname -p`
 
 
 if [ "$1" = "--help" ]
 then
-    echo "This script builds Wormux on Mac OS X by using the CMake build system"
+    echo "This script builds Warmux on Mac OS X by using the CMake build system"
     echo "Requirements :"
     echo "  - CMake 2.6 +"
     echo "  - libintl (gnu gettext) headers [a universal binary of the library is included"
     echo "                                   along this script but not the headers]"
-    echo "  - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)"
+    echo "  - the mac dependencies package (http://download.gna.org/warmux/mac/mac_dependencies.zip)"
     echo "    installed in your /Library/Frameworks directory."
     echo ""
     echo "targets :"
@@ -197,10 +197,10 @@ TMP=${MAC}tmpbuild/
 #fi
 mkdir -p ${TMP}
 
-APP=${MAC}Wormux.app
+APP=${MAC}Warmux.app
 if [ -e ${APP} ]
 then
-    echo "Cleaning existing Wormux.app..."
+    echo "Cleaning existing Warmux.app..."
     rm -rf ${APP}
 fi
 
@@ -220,7 +220,7 @@ then
     echo "******************"
 fi
 
-echo "Create Wormux.app tree"
+echo "Create Warmux.app tree"
 mkdir -p ${APP}/Contents/MacOS/
 mkdir -p ${APP}/Contents/Frameworks/
 RES=${APP}/Contents/Resources/
@@ -228,9 +228,9 @@ mkdir -p ${RES}data/
 mkdir -p ${RES}locale/
 
 # Add icon and info.plist and PkgInfo
-cp ${MAC}Info.plist.in ${APP}/Contents/Info.plist
+sed s/%VERS%/${APP_VERSION}/ < ${MAC}Info.plist.in > ${APP}/Contents/Info.plist
 cp ${MAC}PkgInfo.in ${APP}/Contents/PkgInfo
-cp ${ROOT}data/wormux_128x128.icns ${RES}Wormux.icns
+cp ${ROOT}data/icon/warmux.icns ${RES}Warmux.icns
 
 
 #export CMAKE_INSTALL_PREFIX=${RES}
@@ -283,7 +283,7 @@ mv ${RES}/share/locale ${RES}
 rm -rf ${RES}/share
 
 # Do a simple test for check if data is well copied
-if [ -e ${RES}/data/wormux_default_config.xml ]
+if [ -e ${RES}/data/warmux_default_config.xml ]
 then
     echo "Default_config ok"
 else
@@ -302,7 +302,7 @@ touch ${APP}
 #cd ${MAC};
 
 # If frameworks are not available, they'll be download from this mirror
-#MIRROR=http://plorf.homeip.net/wormux/lib/
+#MIRROR=http://plorf.homeip.net/warmux/lib/
 #if [ ! -e "${MAC}frameworks.tar.bz2" ]
 #then 
 #    echo "Frameworks will be downloaded from ${MIRROR} (3MB)";

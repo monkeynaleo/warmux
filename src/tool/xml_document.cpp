@@ -28,6 +28,11 @@
 #include <libxml/parser.h>
 #include <libxml/xinclude.h>
 
+// FIXME: stupid hack, I'm not sure why I need this... perhaps the libxml headers and the binary used
+//        by CMake don't match
+#undef LIBXML_VERSION
+#define LIBXML_VERSION 1
+
 #ifdef DEBUG
 #include <cstring>
 void display_xml_tree(const xmlNode* root, uint level, bool neigh)
