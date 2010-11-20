@@ -90,17 +90,13 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
 
   bool not_fixed = GetAlignParticleState()|| ActiveMap()->GetWind().rotation_speed.IsNotZero();
   if (not_fixed) {
-    sprite->EnableRotationCache(64);
+    sprite->EnableCaches(false, 64);
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
 
     if (flipped) {
-      flipped->EnableRotationCache(64);
+      flipped->EnableCaches(false, 64);
       flipped->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
     }
-  } else {
-    sprite->EnableLastFrameCache();
-    if (flipped)
-      flipped->EnableLastFrameCache();
   }
 
   // Now that caches have been set, refresh

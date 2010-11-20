@@ -118,8 +118,8 @@ void WeaponBullet::DoExplosion()
 
 
 WeaponProjectile::WeaponProjectile(const std::string &name,
-                                    ExplosiveWeaponConfig& p_cfg,
-                                    WeaponLauncher * p_launcher):
+                                   ExplosiveWeaponConfig& p_cfg,
+                                   WeaponLauncher * p_launcher):
   PhysicalObj(name),
   timeout_start(INVALID_TIMEOUT_START),
   cfg(p_cfg)
@@ -137,7 +137,7 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   camera_follow_closely = false;
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, name);
-  image->EnableRotationCache(32);
+  image->EnableCaches(true, 32, p_launcher->GetMinAngle(), p_launcher->GetMaxAngle());
   SetSize(image->GetSize());
 
   // Set rectangle test

@@ -77,7 +77,7 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
 
   announce_missed_shots = false;
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
-  m_weapon_fire->EnableRotationCache(32);
+  m_weapon_fire->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
 
   ReloadLauncher();
 }

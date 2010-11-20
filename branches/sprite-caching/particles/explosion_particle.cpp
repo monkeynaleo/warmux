@@ -37,7 +37,7 @@ ExplosionParticle::ExplosionParticle() :
   image = ParticleEngine::GetSprite(EXPLOSION_spr);
   m_initial_time_to_live = image->GetFrameCount();
   m_left_time_to_live = m_initial_time_to_live;
-  m_time_between_scale = image->GetCurrentFrameObject().delay;
+  m_time_between_scale = image->GetCurrentDelay();
 
   image->SetCurrentFrame(0);
   image->Start();

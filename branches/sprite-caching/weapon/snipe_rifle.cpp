@@ -52,7 +52,7 @@ BaseSnipeRifle::BaseSnipeRifle(Weapon_type type, const std::string &id)
 
   last_angle = 0.0;
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
-  m_weapon_fire->EnableRotationCache(32);
+  m_weapon_fire->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
 
   targeting_something = false;
   m_laser_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_laser"));

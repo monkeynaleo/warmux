@@ -154,7 +154,7 @@ Grapple::Grapple() :
   use_unit_on_first_shoot = false;
 
   m_hook_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_hook");
-  m_hook_sprite->EnableRotationCache(32);
+  m_hook_sprite->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
   m_node_sprite = GetResourceManager().LoadSprite(weapons_res_profile,"grapple_node");
 
   attached = false;
