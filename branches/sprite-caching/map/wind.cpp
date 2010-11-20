@@ -97,8 +97,9 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-  if (GetSpeed().x < 0) {
-    sprite->Scale(-sprite->GetScaleX(), sprite->GetScaleY());
+  const Double& sx = sprite->GetScaleX();
+  if (GetSpeed().x < 0 && sx>0) {
+    sprite->Scale(-sx, sprite->GetScaleY());
   }
   sprite->Update();
 
