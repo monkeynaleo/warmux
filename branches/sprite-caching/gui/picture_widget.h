@@ -55,8 +55,7 @@ private:
 public:
   PictureWidget(const Point2i & size);
   PictureWidget(const Surface& surface,
-                ScalingType type = NO_SCALING,
-                bool antialiasing = false);
+                ScalingType type = NO_SCALING);
   PictureWidget(const Point2i & size,
                 const std::string & resource_id,
                 ScalingType type = NO_SCALING);
@@ -68,8 +67,7 @@ public:
   virtual bool LoadXMLConfiguration(void);
 
   void SetSurface(const Surface & s,
-                  ScalingType type = NO_SCALING,
-                  bool antialiasing = false);
+                  ScalingType type = NO_SCALING);
   void SetNoSurface();
 
   virtual void Draw(const Point2i & mousePosition);

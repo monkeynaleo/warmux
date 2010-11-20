@@ -49,7 +49,7 @@ Menu::Menu(const std::string& bg, t_action _actions)
   Surface& window = GetMainWindow();
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  background = new Sprite(GetResourceManager().LoadImage(res, bg, false), true);
+  background = new Sprite(GetResourceManager().LoadImage(res, bg, false));
 
   b_ok = NULL;
   b_cancel = NULL;
@@ -119,7 +119,7 @@ void Menu::LoadBackground(Profile * profile,
   xmlFile->ReadStringAttr(rootMenuNode, "backgroundPicture", file);
   file = profile->relative_path + file;
   Surface surface(file.c_str());
-  background = new Sprite(surface, true);
+  background = new Sprite(surface);
 }
 
 void Menu::LoadWidget(Profile * profile,

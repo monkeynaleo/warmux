@@ -65,8 +65,8 @@ class Sprite
 public:
   SpriteAnimation animation;
 
-  explicit Sprite(bool _smooth=false);
-  explicit Sprite(const Surface& surface, bool _smooth=false);
+  explicit Sprite();
+  explicit Sprite(const Surface& surface);
   Sprite(const Sprite &other);
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
@@ -139,8 +139,8 @@ public:
 
   void Scale(Double _scale_x, Double _scale_y)
   {
-    ASSERT(_scale_x);
-    ASSERT(_scale_y);
+    ASSERT(_scale_x>0);
+    ASSERT(_scale_y>0);
     if ((scale_x==_scale_x && _scale_y==scale_y) || fixed)
       return;
     scale_x = _scale_x;
@@ -192,7 +192,10 @@ public:
   void SetFlipped(bool f)
   {
     ASSERT(!f || cache.HasFlippedCache());
+    if (flipped == f)
+      return;
     flipped = f;
+    InvalidLastFrame();
   }
 
   // Show flag
