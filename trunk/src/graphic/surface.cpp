@@ -900,7 +900,7 @@ Surface Surface::DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *sf
   for (int y=0; y<h; y++) {
     for (int x=0; x<w; x++) {
       uint8_t r, g, b, a;
-      SDL_GetRGBA(*(src + x), (SDL_PixelFormat*)sfmt, &r, &g, &b, &a);
+      SDL_GetRGBA(*(src + x), sfmt, &r, &g, &b, &a);
       surf.PutPixel(x, y, (a < threshold) ? ckey : SDL_MapRGB(surf.surface->format, r, g, b));
     }
 
