@@ -541,9 +541,8 @@ void Weapon::Draw(){
     else {
       Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
                    / sin((Double)1.5 * HALF_PI);
-      m_image->SetFlipped(DIRECTION_LEFT == ActiveCharacter().GetDirection());
       if (scale.IsNotZero())
-      m_image->Scale(scale, scale);
+        m_image->Scale(scale, scale);
 
       // Recompute position to get the icon centered over the skin
       if (origin == weapon_origin_OVER)
@@ -570,13 +569,13 @@ void Weapon::Draw(){
               ActiveCharacter().GetX(), ActiveCharacter().GetY(),
               hand.GetX(), hand.GetY());
   }
-#endif
-#ifdef DEBUG_HOLE
-  Rectanglei rect(GetGunHolePosition() - Camera::GetInstance()->GetPosition() - 1,
-                  Point2i(3, 3));
-
-  GetWorld().ToRedrawOnMap(rect);
-  GetMainWindow().RectangleColor(rect, c_red);
+  if (IsLOGGING("weapon.hole")) {
+    Rectanglei rect(GetGunHolePosition() - Camera::GetInstance()->GetPosition() - 1,
+                    Point2i(3, 3));
+  
+    GetWorld().ToRedrawOnMap(rect);
+    GetMainWindow().RectangleColor(rect, c_red);
+  }
 #endif
 }
 
