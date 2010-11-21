@@ -442,14 +442,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\graphic\effects.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\graphic\effects.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\graphic\fading_effect.h"
 					>
 				</File>
@@ -507,14 +499,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\graphic\spritecache.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\graphic\spriteframe.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\graphic\spriteframe.h"
 					>
 				</File>
 				<File
