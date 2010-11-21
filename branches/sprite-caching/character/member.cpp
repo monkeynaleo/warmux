@@ -66,7 +66,7 @@ Member::Member(const xmlNode *     xml,
 
   // Load the sprite
   spr = GetResourceManager().LoadSprite(xml, name, main_folder);
-  spr->EnableCaches(true);
+  spr->EnableCaches(true, 0);
 
   // Get the various option
   std::string type_str;
