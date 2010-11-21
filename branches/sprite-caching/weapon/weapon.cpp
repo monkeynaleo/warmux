@@ -669,6 +669,12 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   max_angle = max_angle_deg * PI / 180;
   if (EqualsZero(min_angle - max_angle))
     m_display_crosshair = false;
+#if 0
+  if (m_weapon_fire) {
+    uint num = 32 * (max_angle - min_angle) / TWO_PI;
+    m_weapon_fire->EnableCaches(true, num, min_angle, max_angle);
+  }
+#endif
 
   // Load extra parameters if existing
   if (extra_params)

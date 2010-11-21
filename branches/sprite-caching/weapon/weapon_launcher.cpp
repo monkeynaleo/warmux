@@ -137,10 +137,6 @@ WeaponProjectile::WeaponProjectile(const std::string &name,
   camera_follow_closely = false;
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, name);
-  if (p_launcher)
-    image->EnableCaches(false, 32, p_launcher->GetMinAngle(), p_launcher->GetMaxAngle());
-  else
-    image->EnableCaches(false, 32, ZERO, TWO_PI);
   SetSize(image->GetSize());
 
   // Set rectangle test

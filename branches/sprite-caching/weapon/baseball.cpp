@@ -48,7 +48,6 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 
   m_category = DUEL;
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
-  m_weapon_fire->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
 }
 
 void Baseball::UpdateTranslationStrings()
