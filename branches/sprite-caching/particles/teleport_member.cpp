@@ -30,6 +30,7 @@ TeleportMemberParticle::TeleportMemberParticle(Sprite& spr, const Point2i& posit
   Particle("teleport_member_particle")
 {
   SetCollisionModel(false, false, false);
+  spr.RefreshSurface(); // Make sure we have something to build on
   image = new Sprite(spr.GetSurface());
 
   ASSERT(image->GetWidth() && image->GetHeight());
