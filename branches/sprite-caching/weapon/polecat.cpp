@@ -66,6 +66,8 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
   explode_with_timeout = true;
   last_fart_time = 0;
   last_rebound_time = 0;
+  // Make sure the flip cache is set
+  image->EnableCaches(true, 0);
 }
 
 void Polecat::Shoot(Double strength)
@@ -185,7 +187,6 @@ PolecatLauncher::PolecatLauncher() :
 
   // unit will be used when the polecat disappears
   use_unit_on_first_shoot = false;
-
 }
 
 void PolecatLauncher::UpdateTranslationStrings()
