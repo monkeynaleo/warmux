@@ -25,7 +25,6 @@ POTFILES = \
         src/game/time.cpp \
         src/graphic/color.cpp \
         src/graphic/composite_shape.cpp \
-        src/graphic/effects.cpp \
         src/graphic/font.cpp \
         src/graphic/fps.cpp \
         src/graphic/polygon.cpp \
@@ -33,7 +32,6 @@ POTFILES = \
         src/graphic/spriteanimation.cpp \
         src/graphic/spritecache.cpp \
         src/graphic/sprite.cpp \
-        src/graphic/spriteframe.cpp \
         src/graphic/surface.cpp \
         src/graphic/text.cpp \
         src/graphic/text_list.cpp \
