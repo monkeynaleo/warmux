@@ -24,15 +24,15 @@
 #include "graphic/sprite.h"
 #include "network/randomsync.h"
 
-BodyMemberParticle::BodyMemberParticle(Sprite& spr, const Point2i& position) :
-  Particle("body_member_particle"),
-  angle_rad(0)
+BodyMemberParticle::BodyMemberParticle(Sprite& spr, const Point2i& position)
+  : Particle("body_member_particle")
+  , angle_rad(0)
 {
   SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
   image = new Sprite(spr.GetSurface());
-  image->EnableCaches(false, 0);
-  ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
+  image->EnableCaches(false, 0); // Some generic particle code requires it to be flipped
+  ASSERT(image->GetWidth() && image->GetHeight());
   SetXY(position);
 
   SetSize(image->GetSize());
@@ -52,7 +52,7 @@ void BodyMemberParticle::Refresh()
   angle_rad += GetSpeedXY().Norm() * 20;
   angle_rad = fmod(angle_rad, 2 *PI);
   //FIXME what about negatives values ? what would happen ?
-  if(m_left_time_to_live < 50)
+  if (m_left_time_to_live < 50)
     image->SetAlpha(m_left_time_to_live / 50.0);
   image->SetRotation_rad(angle_rad);
   image->Update();

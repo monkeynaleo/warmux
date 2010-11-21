@@ -42,7 +42,7 @@ Teleportation::Teleportation() :
   m_category = MOVE;
   target_chosen = false;
   // teleportation_anim_duration is declare in particles/teleport_member.h
-  m_time_between_each_shot = teleportation_anim_duration + 100;
+  m_time_between_each_shot = TELEPORTATION_ANIM_DURATION + 100;
 }
 
 void Teleportation::UpdateTranslationStrings()
@@ -53,11 +53,12 @@ void Teleportation::UpdateTranslationStrings()
 
 bool Teleportation::p_Shoot ()
 {
+  Character& achar = ActiveCharacter();
   // Check we are not going outside of the world !
-  if( ActiveCharacter().IsOutsideWorldXY(dst) )
+  if (achar.IsOutsideWorldXY(dst))
     return false;
 
-  Rectanglei rect = ActiveCharacter().GetTestRect();
+  Rectanglei rect = achar.GetTestRect();
   rect.SetPosition(dst);
 
   // Go back to default cursor
@@ -68,8 +69,8 @@ bool Teleportation::p_Shoot ()
 
   JukeBox::GetInstance()->Play("default", "weapon/teleport_start");
 
-  ActiveCharacter().Hide();
-  ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
+  achar.Hide();
+  achar.body->MakeTeleportParticles(achar.GetPosition(), dst);
   Camera::GetInstance()->SetAutoCrop(false);
   return true;
 }
@@ -80,10 +81,11 @@ void Teleportation::Refresh()
     return;
   if (done)
     return;
-  if(Time::GetInstance()->Read() - m_last_fire_time > (int)teleportation_anim_duration) {
-    ActiveCharacter().SetXY(dst);
-    ActiveCharacter().SetSpeed(0.0, 0.0);
-    ActiveCharacter().Show();
+  if (Time::GetInstance()->Read() - m_last_fire_time > TELEPORTATION_ANIM_DURATION) {
+    Character& achar = ActiveCharacter();
+    achar.SetXY(dst);
+    achar.SetSpeed(ZERO, ZERO);
+    achar.Show();
     JukeBox::GetInstance()->Play("default", "weapon/teleport_end");
     Camera::GetInstance()->SetAutoCrop(true);
     done = true;
@@ -107,9 +109,10 @@ void Teleportation::p_Select()
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
-  dst = mouse_pos - ActiveCharacter().GetSize()/2;
-  if(!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(dst,ActiveCharacter().GetSize())) ||
-     !ActiveCharacter().IsInVacuumXY(dst))
+  Character& achar = ActiveCharacter();
+  dst = mouse_pos - achar.GetSize()/2;
+  if (!GetWorld().ParanoiacRectIsInVacuum(Rectanglei(dst, achar.GetSize())) ||
+      !achar.IsInVacuumXY(dst))
     return;
   target_chosen = true;
   Shoot();
@@ -117,10 +120,9 @@ void Teleportation::ChooseTarget(Point2i mouse_pos)
 
 std::string Teleportation::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u teleportation!",
-            "%s team has won %u teleportations!",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u teleportation!",
+                         "%s team has won %u teleportations!",
+                         items_count), TeamName, items_count);
 }
 
 WeaponConfig& Teleportation::cfg()

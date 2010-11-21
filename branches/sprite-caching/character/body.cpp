@@ -855,14 +855,13 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
     Member *member = current_clothe->GetLayers()[layer];
     if (member != weapon_member)
       ParticleEngine::AddNow(new TeleportMemberParticle(member->GetSprite(),
-                                                        member->GetPos()+pos, member->GetPos()+dst,
-                                                        int(direction)));
+                                                        member->GetPos()+pos, member->GetPos()+dst));
   }
 }
 
 void Body::SetRotation(Double angle)
 {
-  MSG_DEBUG("body", "%s -> new angle: %s", owner->GetName().c_str(), Double2str(angle,0).c_str());
+  MSG_DEBUG("body", "%s -> new angle: %.3f", owner->GetName().c_str(), angle.tofloat());
   // angle == main_rotation_rad is infrequent, but often enough
   if (main_rotation_rad != angle) {
     main_rotation_rad = angle;
