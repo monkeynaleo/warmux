@@ -134,8 +134,8 @@ public:
 
   void Scale(Double _scale_x, Double _scale_y)
   {
-    ASSERT(_scale_x>=0);
-    ASSERT(_scale_y>=0);
+    assert(_scale_x>=0);
+    assert(_scale_y>=0);
     if ((scale_x==_scale_x && _scale_y==scale_y) || fixed)
       return;
     scale_x = _scale_x;
