@@ -176,7 +176,7 @@ void Plane::Refresh()
 
 int Plane::GetDirection() const
 {
-  return image->GetFlipped() ? -1 : 1;
+  return image->IsFlipped() ? -1 : 1;
 }
 
 void Plane::Draw()
