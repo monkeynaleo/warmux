@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="wormux"
+	Name="warmux"
 	ProjectGUID="{1CD2A0F2-9AD5-48AD-89E1-7102811A81B8}"
-	RootNamespace="wormux"
+	RootNamespace="warmux"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -52,7 +52,7 @@
 				Name="VCCLCompilerTool"
 				UseUnicodeResponseFiles="false"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\warmux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
 				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;WMX_LOG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -148,7 +148,7 @@
 				FavorSizeOrSpeed="1"
 				OmitFramePointers="true"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\wormux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)..\..\src&quot;;&quot;$(ProjectDir)..\..\lib\warmux\include&quot;;&quot;$(ProjectDir)..\..\lib\fixedpoint&quot;;&quot;$(ProjectDir)..\..\src\msvc&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\DejaVuSans.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				BasicRuntimeChecks="0"
@@ -223,7 +223,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\wormux.rc"
+				RelativePath="..\..\src\warmux.rc"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2088,13 +2088,13 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="LibWormux"
+			Name="LibWarmux"
 			>
 			<Filter
 				Name="action"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\action\action.cpp"
+					RelativePath="..\..\lib\warmux\action\action.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2116,7 +2116,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\action\action_handler.cpp"
+					RelativePath="..\..\lib\warmux\action\action_handler.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2142,15 +2142,15 @@
 				Name="base"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\base\error.cpp"
+					RelativePath="..\..\lib\warmux\base\error.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\base\i18n.cpp"
+					RelativePath="..\..\lib\warmux\base\i18n.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\base\singleton.cpp"
+					RelativePath="..\..\lib\warmux\base\singleton.cpp"
 					>
 				</File>
 			</Filter>
@@ -2158,99 +2158,99 @@
 				Name="include"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\include\config_visual.h"
+					RelativePath="..\..\lib\warmux\include\config_visual.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_action.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_action.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_action_handler.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_action_handler.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_base.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_base.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_config.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_config.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_debug.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_debug.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_distant_cpu.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_distant_cpu.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_download.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_download.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_error.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_error.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_euler_vector.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_euler_vector.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_file_tools.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_file_tools.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_i18n.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_i18n.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_index_server.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_index_server.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_index_svr_msg.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_index_svr_msg.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_network.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_network.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_player.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_player.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_point.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_point.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_random.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_random.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_rectangle.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_rectangle.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_singleton.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_singleton.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_socket.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_socket.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_team_config.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_team_config.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_types.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_types.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\include\WORMUX_vector2.h"
+					RelativePath="..\..\lib\warmux\include\WARMUX_vector2.h"
 					>
 				</File>
 			</Filter>
@@ -2258,7 +2258,7 @@
 				Name="maths"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\maths\euler_vector.cpp"
+					RelativePath="..\..\lib\warmux\maths\euler_vector.cpp"
 					>
 				</File>
 			</Filter>
@@ -2266,27 +2266,27 @@
 				Name="net"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\net\distant_cpu.cpp"
+					RelativePath="..\..\lib\warmux\net\distant_cpu.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\download.cpp"
+					RelativePath="..\..\lib\warmux\net\download.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\extSDL_net.cpp"
+					RelativePath="..\..\lib\warmux\net\extSDL_net.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\extSDL_net.h"
+					RelativePath="..\..\lib\warmux\net\extSDL_net.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\index_server.cpp"
+					RelativePath="..\..\lib\warmux\net\index_server.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\network.cpp"
+					RelativePath="..\..\lib\warmux\net\network.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2308,11 +2308,11 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\player.cpp"
+					RelativePath="..\..\lib\warmux\net\player.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\net\socket.cpp"
+					RelativePath="..\..\lib\warmux\net\socket.cpp"
 					>
 				</File>
 			</Filter>
@@ -2320,15 +2320,15 @@
 				Name="tools"
 				>
 				<File
-					RelativePath="..\..\lib\wormux\tools\debug.cpp"
+					RelativePath="..\..\lib\warmux\tools\debug.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\tools\file_tools.cpp"
+					RelativePath="..\..\lib\warmux\tools\file_tools.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\wormux\tools\random.cpp"
+					RelativePath="..\..\lib\warmux\tools\random.cpp"
 					>
 				</File>
 			</Filter>
@@ -2349,7 +2349,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\Users\adm\Documents\Wormux\config.xml"
+				RelativePath="..\..\..\..\..\..\..\Users\adm\Documents\Warmux\config.xml"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2385,7 +2385,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\data\weapons.xml"
+				RelativePath="..\..\data\warmux_default_config.xml"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2397,7 +2397,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\data\wormux_default_config.xml"
+				RelativePath="..\..\data\weapons.xml"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
