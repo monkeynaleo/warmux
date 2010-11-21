@@ -186,9 +186,9 @@ public:
   }
   void SetFlipped(bool f)
   {
-    ASSERT(!f || cache.HasFlippedCache());
     if (flipped == f)
       return;
+    ASSERT(!f || cache.HasFlippedCache());
     flipped = f;
     InvalidLastFrame();
   }
