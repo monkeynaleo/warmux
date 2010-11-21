@@ -107,7 +107,7 @@ void Plane::Shoot(Double speed, const Point2i& target)
 
   Point2d speed_vector;
   if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
-    image->SetFlipped(true);
+    image->SetFlipped(false);
     speed_vector.SetValues(speed, 0);
     SetX(ONE - Double(image->GetWidth()));
     //distance_to_release -= obus_dx;
@@ -115,7 +115,7 @@ void Plane::Shoot(Double speed, const Point2i& target)
      distance_to_release = 0;
 
   } else {
-    image->SetFlipped(false);
+    image->SetFlipped(true);
     speed_vector.SetValues(-speed, 0) ;
     SetX(Double(GetWorld().GetWidth() - 1));
     //distance_to_release += obus_dx;
