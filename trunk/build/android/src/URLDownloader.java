@@ -1,4 +1,4 @@
-package org.wormux;
+package org.warmux;
 
 import java.io.*;
 
