@@ -477,10 +477,14 @@ void Game::RefreshInput()
       AppWormux::EmergencyExit();
 
     if (evnt.type == SDL_QUIT) {
+#ifdef __SYMBIAN32__
+      AppWormux::EmergencyExit();
+#else
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       UserAsksForMenu();
       std::cout << _("END OF GAME") << std::endl;
       return;
+#endif
     }
 
     // Inactive event
