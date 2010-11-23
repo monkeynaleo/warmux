@@ -176,10 +176,6 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
     flags |= SDL_DOUBLEBUF;
 #endif
 
-#ifdef __SYMBIAN32__
-  flags = 0;
-#endif
-
   window.SetSurface(SDL_SetVideoMode(width, height, bpp, flags));
   if (window.IsNull())
     return false;

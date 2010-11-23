@@ -82,10 +82,8 @@ STATICLIBRARY   sdl_image.lib
 STATICLIBRARY   SDL_mixer.lib
 STATICLIBRARY   SDL_ttf.lib
 STATICLIBRARY   libpng-1_2.lib
-STATICLIBRARY   abiv2_libjpeg-6.lib
 STATICLIBRARY   freetype.lib
-STATICLIBRARY   tremor.lib
-STATICLIBRARY   wormux_xmlengine.lib
+LIBRARY   xmlengine.lib
 
 #ifdef EPOC32
 LIBRARY         libstdcppv5.lib
@@ -101,10 +99,3 @@ OPTION CW -wchar_t on
 MACRO  _WCHAR_T_DECLARED
 
 EPOCSTACKSIZE 0x10000
-EPOCHEAPSIZE 1000000 64000000
-
-SOURCEPATH .
-START RESOURCE ../res/wormux_reg.rss
-TARGETPATH \private\10003a3f\apps
-END
-CAPABILITY ReadUserData WriteUserData

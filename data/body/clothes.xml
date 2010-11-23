@@ -8,15 +8,15 @@
 
 <!ENTITY standard_eyes "<c_member name='eyes'/><c_member name='pupil-right'/><c_member name='pupil-left'/><c_member name='eyelid'/>">
 <!ENTITY complete_face "<c_member name='head'/><c_member name='noze'/>&standard_eyes;">
-<!ENTITY complete_skinhead "<c_member name='hornunderleft'/><c_member name='hornunderright'/>&complete_face;<c_member name='hornoverleft'/><c_member name='hornoverright'/>">
-<!ENTITY complete_standard-head "&complete_skinhead;<c_member name='hat'/>">
+<!ENTITY complete_skinhead "<c_member name='hornleft'/><c_member name='hornright'/>&complete_face;">
+<!ENTITY complete_standard-head "<c_member name='hair'/>&complete_skinhead;">
 
 <!ENTITY feet "<c_member name='foot-left'/><c_member name='foot-right'/>">
 <!ENTITY complete_body-tail "<c_member name='tail'/><c_member name='back'/><c_member name='body'/>">
 
 <!ENTITY standard_lefthanded_clothe "&complete_arm-left-lefthanded;<c_member name='weapon'/>&feet;&complete_body-tail;&complete_standard-head;&complete_arm-right-lefthanded;">
 <!ENTITY standard_righthanded_clothe "&complete_arm-left-righthanded;&feet;&complete_body-tail;&complete_standard-head;<c_member name='weapon'/>&complete_arm-right-righthanded;">
-<!ENTITY standard_black "<c_member name='arm-left-black'/><c_member name='arm2-left-black'/><c_member name='arm3-left-black-L'/><c_member name='weapon'/><c_member name='foot-left-black'/><c_member name='tail-black'/><c_member name='foot-right-black'/><c_member name='back-black'/><c_member name='body-black'/><c_member name='hornunderleft-black'/><c_member name='hornunderright-black'/><c_member name='head-black'/><c_member name='hornoverleft-black'/><c_member name='hornoverright-black'/><c_member name='noze-black'/><c_member name='eyes-black'/><c_member name='pupil-right-black'/><c_member name='pupil-left-black'/><c_member name='eyelid-black'/><c_member name='hat-black'/><c_member name='arm-right-black'/><c_member name='arm2-right-black'/><c_member name='arm3-right-black-L'/>">
+<!ENTITY standard_black "<c_member name='arm-left-black'/><c_member name='arm2-left-black'/><c_member name='arm3-left-black-L'/><c_member name='weapon'/><c_member name='foot-left-black'/><c_member name='tail-black'/><c_member name='foot-right-black'/><c_member name='back-black'/><c_member name='body-black'/><c_member name='hair-black'/><c_member name='hornleft-black'/><c_member name='head-black'/><c_member name='hornright-black'/><c_member name='noze-black'/><c_member name='eyes-black'/><c_member name='pupil-right-black'/><c_member name='pupil-left-black'/><c_member name='eyelid-black'/><c_member name='arm-right-black'/><c_member name='arm2-right-black'/><c_member name='arm3-right-black-L'/>">
 
 <!ENTITY jetpacks "<c_member name='jetpack-left'/><c_member name='jetpack-right'/>">
 
@@ -158,7 +158,7 @@
 	&complete_body-tail;
 	&complete_face;
 	<c_member name="belt"/>
-	<c_member name="cowboy_hat"/>
+	<c_member name="hat"/>
 	&complete_arm-right-lefthanded;
 </clothe>
 

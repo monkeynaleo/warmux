@@ -266,7 +266,7 @@
       <max_angle>90</max_angle>
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>25</unit_per_ammo>
-      <damage>3</damage>
+      <damage>2</damage>
       <explosion_range>3</explosion_range>
       <particle_range>16</particle_range>
       <drop_probability>1</drop_probability>
@@ -464,7 +464,7 @@
       <max_angle>89</max_angle>
       <nb_ammo>1</nb_ammo>
       <unit_per_ammo>1</unit_per_ammo>
-      <damage>50</damage>
+      <damage>40</damage>
       <explosion_range>15</explosion_range>
       <particle_range>16</particle_range>
       <display_crosshair>0</display_crosshair>

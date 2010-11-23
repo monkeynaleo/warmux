@@ -11,17 +11,17 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Warmux</string>
+	<string>Wormux</string>
 	<key>CFBundleIconFile</key>
-	<string>Warmux.icns</string>
+	<string>Wormux.icns</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>Warmux %VERS%</string>
-	<key>CFBundleVersion</key>
 	<string>%VERS%</string>
+	<key>CFBundleVersion</key>
+	<string>%SERIAL%</string>
 	<key>CFBundleLongVersionString</key>
-	<string>Warmux %VERS%</string>
+	<string>Wormux %VERS%</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	

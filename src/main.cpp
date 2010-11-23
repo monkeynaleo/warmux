@@ -488,11 +488,6 @@ extern "C" int main(int argc, char *argv[])
   fprintf(stdout, "Trying to force opening\n");
 #endif
 
-#ifdef __SYMBIAN32__
-  freopen("c:/warmux_stdout.txt", "w", stdout);
-  freopen("c:/warmux_stderr.txt", "w", stderr);
-#endif
-
   /* FIXME calling Config::GetInstance here means that there is no need of
    * singleton for Config but simply a global variable. This may look stange
    * but the whole system (directories, translation etc...) is needed, even for
