@@ -348,7 +348,7 @@ bool Menu::HandleGlobalEvent(const SDL_Event & evnt)
 void Menu::HandleEvent(const SDL_Event& evnt)
 {
   if (evnt.type == SDL_QUIT) {
-#ifdef MAEMO
+#if defined MAEMO || defined __SYMBIAN32__
     AppWormux::EmergencyExit();
 #else
     key_cancel();
