@@ -27,7 +27,7 @@
 #include <WORMUX_singleton.h>
 #include "game/config.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"

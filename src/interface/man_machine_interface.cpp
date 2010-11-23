@@ -26,7 +26,7 @@
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"

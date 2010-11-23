@@ -25,7 +25,7 @@
 #include "weapon/weapon_cfg.h"
 #include <sstream>
 #include "character/character.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "game/game.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"

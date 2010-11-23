@@ -31,7 +31,7 @@
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/colors.h"
 #include "include/app.h"
 #include "include/constant.h"

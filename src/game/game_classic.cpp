@@ -22,7 +22,7 @@
 #include "character/character.h"
 #include "game/game_classic.h"
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "include/action_handler.h"
 #include "interface/cursor.h"
 #include "interface/interface.h"

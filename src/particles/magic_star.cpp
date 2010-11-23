@@ -23,7 +23,7 @@
 #include "particles/magic_star.h"
 #include "particles/particle.h"
 #include "network/randomsync.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 
 MagicStarParticle::MagicStarParticle() :

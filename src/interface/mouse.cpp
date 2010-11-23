@@ -38,7 +38,7 @@
 #include <WORMUX_point.h>
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
-#include "game/time.h"
+#include "game/game_time.h"
 
 #define MOUSE_CLICK_SQUARE_DISTANCE 5*5
 #define LONG_CLICK_DURATION 600

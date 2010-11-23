@@ -22,7 +22,7 @@
 #include "weapon/baseball.h"
 #include "weapon/weapon_cfg.h"
 #include "character/character.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "map/camera.h"
 #include "sound/jukebox.h"

@@ -21,7 +21,7 @@
 
 #include "particles/ground_particles.h"
 #include "particles/particle.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "map/map.h"
 

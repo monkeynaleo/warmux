@@ -23,7 +23,7 @@
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/stopwatch.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/graph_canvas.h"

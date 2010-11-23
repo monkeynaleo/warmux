@@ -22,7 +22,7 @@
 #include "weapon/cluzooka.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "game/config.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"

@@ -27,7 +27,7 @@
 #include "character/character.h"
 #include "game/config.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "include/action_handler.h"
 #include "map/camera.h"

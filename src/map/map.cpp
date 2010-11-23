@@ -28,7 +28,7 @@
 #include "map/camera.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "object/objbox.h"
 #include "tool/math_tools.h"
 

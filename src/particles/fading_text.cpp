@@ -22,7 +22,7 @@
 
 #include "particles/fading_text.h"
 #include "particles/explosion_smoke.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include <WORMUX_random.h>

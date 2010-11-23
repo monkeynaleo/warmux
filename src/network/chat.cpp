@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 #include <SDL_events.h>
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/text_list.h"
 #include "graphic/video.h"

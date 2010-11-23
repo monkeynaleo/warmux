@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "particles/water_drop.h"
 #include "particles/particle.h"

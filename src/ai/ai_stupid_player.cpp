@@ -27,7 +27,7 @@
 #include "character/character.h"
 #include "game/game.h"
 #include "game/stopwatch.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "team/macro.h"
 
 const uint MAX_GAME_TIME_USED_THINKING_IN_MS = 10000;

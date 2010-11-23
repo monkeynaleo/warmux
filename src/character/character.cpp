@@ -28,7 +28,7 @@
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/text.h"
 #include "gui/energy_bar.h"
 #include "include/action_handler.h"

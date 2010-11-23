@@ -22,7 +22,7 @@
 #include <sstream>
 
 #include "game/config.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "game/game.h"
 #include "graphic/font.h"
 #include "graphic/polygon_generator.h"

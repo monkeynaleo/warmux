@@ -27,7 +27,7 @@
 #include "character/clothe.h"
 #include "character/member.h"
 #include "character/movement.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "interface/mouse.h"
 #include "particles/body_member.h"
