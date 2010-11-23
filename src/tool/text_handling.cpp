@@ -19,8 +19,8 @@
  * Text typing, deleting, editing, ...
  *****************************************************************************/
 
-#include <SDL.h>
 #include "tool/text_handling.h"
+#include <SDL.h>
 #include "tool/copynpaste.h"
 
 static bool MoveCursorLeft(const std::string& text, std::string::size_type& pos)

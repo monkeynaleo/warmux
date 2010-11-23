@@ -19,8 +19,8 @@
  * Define singleton base class members
  *****************************************************************************/
 
-#include <SDL_mutex.h>
 #include <WORMUX_singleton.h>
+#include <SDL_mutex.h>
 
 SingletonList singletons;
 

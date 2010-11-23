@@ -27,11 +27,11 @@
 #include <set>
 #include <utility>
 
+#include <WORMUX_base.h>
+#include <WORMUX_singleton.h>
 #include <SDL.h>
 #include <SDL_mixer.h>
 
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
 #include "sample_cache.h"
 
 //-----------------------------------------------------------------------------

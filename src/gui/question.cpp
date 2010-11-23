@@ -19,11 +19,11 @@
  * Display a text during the game, waiting for input by the user
  *****************************************************************************/
 
+#include "graphic/video.h"
 #include <SDL_events.h>
 #include "gui/question.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"
-#include "graphic/video.h"
 #include "include/app.h"
 #include "interface/mouse.h"
 #include "tool/resource_manager.h"

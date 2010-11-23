@@ -22,9 +22,9 @@
 #ifdef _WIN32
 #  define NOMINMAX // Avoid Windows headers to define max()
 #endif
+#include <WORMUX_debug.h>
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include <WORMUX_debug.h>
 #include <WORMUX_distant_cpu.h>
 #include <WORMUX_player.h>
 #include <WORMUX_index_server.h>

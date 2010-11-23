@@ -19,9 +19,9 @@
  * Refresh water that may be placed in bottom of the ground.
  *****************************************************************************/
 
+#include "game/game_mode.h"
 #include <assert.h>
 #include <SDL.h>
-#include "game/game_mode.h"
 #include "game/game_time.h"
 #include "graphic/video.h"
 #include "interface/interface.h"

@@ -19,9 +19,9 @@
  * Socket abstraction
  *****************************************************************************/
 
+#include <WORMUX_error.h>
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include <WORMUX_error.h>
 #include <WORMUX_socket.h>
 
 #include <iostream>

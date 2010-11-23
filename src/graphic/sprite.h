@@ -25,10 +25,10 @@
 #ifndef _SPRITE_H
 #define _SPRITE_H
 
+#include <WORMUX_base.h>
 #include <SDL.h>
 #include <vector>
 #include <assert.h>
-#include <WORMUX_base.h>
 #include <WORMUX_debug.h>
 #include "spritecache.h"
 #include "spriteanimation.h"

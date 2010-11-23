@@ -22,10 +22,10 @@
 #ifndef LABEL_H
 #define LABEL_H
 
+#include <string>
 #include <WORMUX_base.h>
 #include "gui/widget.h"
 #include "graphic/text.h"
-#include <string>
 
 class Label : public Text, public Widget
 {

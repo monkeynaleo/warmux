@@ -19,8 +19,8 @@
  * Text box widget
  *****************************************************************************/
 
-#include <SDL_keyboard.h>
 #include "gui/text_box.h"
+#include <SDL_keyboard.h>
 #include "graphic/text.h"
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"

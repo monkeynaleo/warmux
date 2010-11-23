@@ -19,8 +19,8 @@
  * Weapon Strength bar.
  *****************************************************************************/
 
-#include "graphic/color.h"
 #include "weapon/weapon_strength_bar.h"
+#include "graphic/color.h"
 
 #include "graphic/sprite.h"
 #include "graphic/polygon_generator.h"
