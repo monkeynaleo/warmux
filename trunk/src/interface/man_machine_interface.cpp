@@ -19,7 +19,6 @@
  * Virtual class to handle man/machine interaction
  *****************************************************************************/
 
-#include <SDL_events.h>
 #include "interface/man_machine_interface.h"
 #include "interface/interface.h"
 #include "character/character.h"
@@ -39,6 +38,7 @@
 #include "team/team.h"
 #include "sound/jukebox.h"
 #include "weapon/weapons_list.h"
+#include <SDL_events.h>
 
 
 void ManMachineInterface::Reset()

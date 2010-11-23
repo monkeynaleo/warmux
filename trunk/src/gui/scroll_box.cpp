@@ -19,8 +19,8 @@
  * Vertical Scroll Box
  *****************************************************************************/
 
-#include <SDL.h>
 #include "graphic/video.h"
+#include <SDL.h>
 #include "gui/button.h"
 #include "gui/vertical_box.h"
 #include "gui/scroll_box.h"

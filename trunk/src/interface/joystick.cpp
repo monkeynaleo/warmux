@@ -19,8 +19,8 @@
  * Joystick management.
  *****************************************************************************/
 
-#include <SDL.h>
 #include "interface/joystick.h"
+#include <SDL.h>
 
 Joystick::Joystick()
   : ManMachineInterface()

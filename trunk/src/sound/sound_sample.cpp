@@ -20,9 +20,9 @@
  * SDL
  *****************************************************************************/
 
-#include <SDL_mixer.h>
 #include "sound/sound_sample.h"
 #include "sound/jukebox.h"
+#include <SDL_mixer.h>
 
 std::map<int, SoundSample*> SoundSample::sound_samples_channel;
 

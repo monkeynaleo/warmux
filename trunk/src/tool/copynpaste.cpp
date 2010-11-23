@@ -18,10 +18,10 @@
  *****************************************************************************
  * Retrieve string pasted depending on OS mechanisms.
  *****************************************************************************/
+#include "copynpaste.h"
 #include <WORMUX_config.h>
 
 #include <SDL_syswm.h>
-#include "copynpaste.h"
 
 #ifdef WIN32
 bool RetrieveBuffer(std::string& text, std::string::size_type& pos)

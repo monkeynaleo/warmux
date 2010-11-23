@@ -17,9 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
+#include "map/tile.h"
 #include <SDL.h>
 #include <png.h>
-#include "map/tile.h"
 #include "map/tileitem.h"
 #include "game/game.h"
 #include "game/game_time.h"

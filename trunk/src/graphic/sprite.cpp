@@ -22,8 +22,8 @@
  *             Initial version
  *****************************************************************************/
 
-#include <SDL.h>
 #include <iostream>
+#include <SDL.h>
 
 #include <WORMUX_rectangle.h>
 

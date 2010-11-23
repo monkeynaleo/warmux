@@ -23,8 +23,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SDL_net.h>
 #include <WORMUX_action.h>
+#include <SDL_net.h>
 #include <WORMUX_distant_cpu.h>
 #include <WORMUX_error.h>
 //-----------------------------------------------------------------------------

@@ -19,8 +19,8 @@
  *  The stopwatch can be used to messure how much time elapses.
  *****************************************************************************/
 
-#include <SDL.h>
 #include "game/stopwatch.h"
+#include <SDL.h>
 #include <WORMUX_error.h>
 
 Stopwatch::Stopwatch()

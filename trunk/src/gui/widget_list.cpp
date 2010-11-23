@@ -19,12 +19,12 @@
  * Widget list : store all widgets displayed on one screen
  * It is a fake widget.
  *****************************************************************************/
+#include <iostream>
 #include <SDL_keyboard.h>
 #include "graphic/video.h"
 #include "gui/widget_list.h"
 #include "gui/widget.h"
 #include "interface/mouse.h"
-#include <iostream>
 
 WidgetList::WidgetList()
   : selected_widget(NULL)
