@@ -32,7 +32,7 @@
 #include "team/teams_list.h"
 #include "tool/math_tools.h"
 #include "tool/xml_document.h"
-#include "game/time.h"
+#include "game/game_time.h"
 
 class FootBombConfig : public ExplosiveWeaponConfig
 {

@@ -22,7 +22,7 @@
 #include <WORMUX_action.h>
 #include "ai/ai_command.h"
 #include "character/character.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "include/action_handler.h"
 #include "team/team.h"
 #include "team/teams_list.h"

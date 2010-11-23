@@ -27,7 +27,7 @@
 #include "character/body.h"
 #include "map/map.h"
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "sound/jukebox.h"
 #include "team/team.h"

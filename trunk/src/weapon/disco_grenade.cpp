@@ -24,7 +24,7 @@
 
 #include <sstream>
 #include "weapon/explosion.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"

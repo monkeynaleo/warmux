@@ -25,7 +25,7 @@
 #include "game/game.h"
 #include "game/game_classic.h"
 #include "game/game_blitz.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "game/game_mode.h"
 #include "graphic/fps.h"
 #include "graphic/video.h"

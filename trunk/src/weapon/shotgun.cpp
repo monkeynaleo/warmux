@@ -25,7 +25,7 @@
 
 #include <sstream>
 #include "map/map.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "object/objects_list.h"
 #include "interface/game_msg.h"

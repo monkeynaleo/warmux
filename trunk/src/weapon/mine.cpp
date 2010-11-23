@@ -26,7 +26,7 @@
 #include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "include/constant.h"
 #include "interface/game_msg.h"

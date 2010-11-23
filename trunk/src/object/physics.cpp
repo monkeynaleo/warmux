@@ -29,7 +29,7 @@
 #include <iostream>
 #include "game/config.h"
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "map/wind.h"
 #include <WORMUX_debug.h>
 #include "tool/isnan.h"

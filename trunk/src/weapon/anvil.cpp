@@ -22,7 +22,7 @@
 #include <sstream>
 
 #include "character/character.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
 #include "interface/game_msg.h"

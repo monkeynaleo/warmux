@@ -25,7 +25,7 @@
 #include "character/character.h"
 #include "game/game_mode.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
 #include "include/action.h"

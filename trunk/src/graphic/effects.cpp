@@ -19,7 +19,7 @@
  *  Graphic effects on sprite
  *****************************************************************************/
 
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 
 //Make the sdl_surface 'a', do a wave of 'nbr_frames', and last 'duration' milliseconds.

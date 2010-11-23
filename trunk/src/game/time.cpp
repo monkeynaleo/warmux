@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"

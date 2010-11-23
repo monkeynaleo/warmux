@@ -41,7 +41,7 @@ wormux_SOURCES = \
         game/game_mode.cpp \
         game/game_mode.h \
         game/time.cpp \
-        game/time.h \
+        game/game_time.h \
         game/stopwatch.cpp \
         game/stopwatch.h \
         graphic/color.cpp \

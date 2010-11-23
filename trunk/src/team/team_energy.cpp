@@ -24,7 +24,7 @@
 #include <WORMUX_types.h>
 #include "map/camera.h"
 #include "map/map.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
 #include "team/team.h"

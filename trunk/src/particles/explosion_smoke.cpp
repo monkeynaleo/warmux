@@ -22,7 +22,7 @@
 
 #include "particles/explosion_smoke.h"
 #include "particles/particle.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "network/randomsync.h"
 

@@ -25,7 +25,7 @@
 #include <libosso.h>
 #include <SDL/SDL_timer.h>
 #include "sound/jukebox.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "interface/mouse.h"
 
 namespace {

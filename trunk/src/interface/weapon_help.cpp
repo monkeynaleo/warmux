@@ -19,7 +19,7 @@
  * Interface showing various informations about the current weapon.
  *****************************************************************************/
 
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/polygon.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"

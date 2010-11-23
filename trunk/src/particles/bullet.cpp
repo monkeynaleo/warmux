@@ -21,7 +21,7 @@
 
 #include "particles/bullet.h"
 #include "particles/particle.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/sprite.h"
 
 const int BULLET_PARTICLE_FADE_TIME = 2000;

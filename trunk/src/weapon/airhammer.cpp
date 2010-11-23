@@ -27,7 +27,7 @@
 #include <sstream>
 #include "character/character.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "include/action_handler.h"
 #include "interface/game_msg.h"
 #include "map/map.h"

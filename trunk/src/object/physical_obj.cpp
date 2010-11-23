@@ -28,7 +28,7 @@
 #include "character/character.h"
 #include "include/action.h"
 #include "game/config.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "map/map.h"
 #include "network/randomsync.h"
 #include "object/physical_obj.h"

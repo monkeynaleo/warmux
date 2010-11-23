@@ -22,7 +22,7 @@
 #include "map/tile.h"
 #include "map/tileitem.h"
 #include "game/game.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/surface.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"

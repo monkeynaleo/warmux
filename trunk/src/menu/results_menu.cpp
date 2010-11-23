@@ -24,7 +24,7 @@
 
 #include "character/character.h"
 #include "character/damage_stats.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
 #include "graphic/text.h"

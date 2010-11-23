@@ -22,7 +22,7 @@
 #include "character/character.h"
 #include "character/body.h"
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "include/action_handler.h"
 #include "interface/mouse.h"
 #include "map/camera.h"

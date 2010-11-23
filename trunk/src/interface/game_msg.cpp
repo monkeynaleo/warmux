@@ -21,7 +21,7 @@
 
 #include "interface/game_msg.h"
 #include <iostream>
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/video.h"
 #include "include/app.h"
 

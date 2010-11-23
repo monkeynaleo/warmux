@@ -27,7 +27,7 @@
 #include "character/character.h"
 #include "character/body.h"
 #include "team/teams_list.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "include/action_handler.h"
 
 const uint SUICIDE_SOUND_DURATION_IN_MS = 3600;

@@ -22,7 +22,7 @@
 #include <assert.h>
 #include <SDL.h>
 #include "game/game_mode.h"
-#include "game/time.h"
+#include "game/game_time.h"
 #include "graphic/video.h"
 #include "interface/interface.h"
 #include "map/camera.h"
