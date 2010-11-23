@@ -27,6 +27,9 @@
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xinclude.h>
+#ifdef __SYMBIAN32__
+#include <libxml/globals.h>
+#endif
 
 #ifdef DEBUG
 #include <cstring>
