@@ -66,8 +66,6 @@ wormux_SOURCES = \
         graphic/spriteanimation.h \
         graphic/spritecache.cpp \
         graphic/spritecache.h \
-        graphic/spriteframe.cpp \
-        graphic/spriteframe.h \
         graphic/surface.cpp \
         graphic/surface.h \
         graphic/text.cpp \
