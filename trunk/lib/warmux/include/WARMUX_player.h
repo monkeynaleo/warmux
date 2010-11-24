@@ -31,7 +31,7 @@
 
 class Player
 {
-  friend void WORMUX_DisconnectPlayer(Player& player);
+  friend void WARMUX_DisconnectPlayer(Player& player);
 public:
   typedef enum {
     STATE_ERROR,
@@ -54,8 +54,8 @@ public:
   ~Player() { Disconnect(); }
   void Disconnect()
   {
-    // It's up to the program using class Player to define WORMUX_DisconnectPlayer();
-    WORMUX_DisconnectPlayer(*this);
+    // It's up to the program using class Player to define WARMUX_DisconnectPlayer();
+    WARMUX_DisconnectPlayer(*this);
   }
 
   void SetId(uint _player_id) { player_id = _player_id; }
@@ -77,8 +77,8 @@ public:
   static std::string GetDefaultNickname();
 };
 
-// It's up to the program using class Player to define WORMUX_DisconnectPlayer();
-extern void WORMUX_DisconnectPlayer(Player& player);
+// It's up to the program using class Player to define WARMUX_DisconnectPlayer();
+extern void WARMUX_DisconnectPlayer(Player& player);
 
 #endif
 

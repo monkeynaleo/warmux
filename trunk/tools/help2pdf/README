@@ -1,8 +1,8 @@
-Extractor for Howto-play documentation of Wormux
+Extractor for Howto-play documentation of Warmux
 
 Documentation is generated using mozilla2ps downloaded here: http://michele.pupazzo.org/mozilla2ps/index.html
 
-Usage: /path/to/wormuxhelp2pdf.sh lang
+Usage: /path/to/warmuxhelp2pdf.sh lang
 
 
 If you have errors like:

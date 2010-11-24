@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ bool Downloader::Get(const char* url, const char* save_as)
 
 void DownloadServerList()
 {
-  // Download the server list from wormux.org
+  // Download the server list from warmux.org
   // and contact every server
   const std::string server_fn = "./server_list";
   int gid, uid;

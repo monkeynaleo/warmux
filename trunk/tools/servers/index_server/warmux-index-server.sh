@@ -1,15 +1,15 @@
 #!/bin/sh -e
 ### BEGIN INIT INFO
-# Provides:          wormux-index-server
+# Provides:          warmux-index-server
 # Required-Start:    $network
 # Required-Stop:
 # Default-Start:     S
 # Default-Stop:      0 6
-# Short-Description: Raise Wormux index server
+# Short-Description: Raise Warmux index server
 ### END INIT INFO
 
-WMX_SERVER=/usr/bin/wormux_index_server
-WMX_RUN_PID=/var/run/wormux_index_server.pid
+WMX_SERVER=/usr/bin/warmux_index_server
+WMX_RUN_PID=/var/run/warmux_index_server.pid
 
 [ -x $WMX_SERVER ] || exit 0
 . /lib/lsb/init-functions
@@ -17,7 +17,7 @@ WMX_RUN_PID=/var/run/wormux_index_server.pid
 RET=0
 
 wmx_msg() {
-  log_daemon_msg "$1ing Wormux index server" "wormux_index_server"
+  log_daemon_msg "$1ing Warmux index server" "warmux_index_server"
 }
 
 [ -r /etc/default/rcS ] && . /etc/default/rcS

@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ class Client : public NetData
   int port; // port number where a game is hosted
 
   bool HandShake(const std::string & version);
-  bool RegisterWormuxServer();
+  bool RegisterWarmuxServer();
   bool SetGameNamePasswd(const std::string & game_name,
 			 const std::string & passwd);
 
@@ -56,7 +56,7 @@ class Client : public NetData
   bool SendList();
   void AddMeToClientsList(const std::string & version);
 
-  // Tell other index server that a new wormux server just registered
+  // Tell other index server that a new warmux server just registered
   void NotifyServers(bool joining);
  public:
   Client(int client_fd,unsigned int & ip);

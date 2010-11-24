@@ -1,7 +1,7 @@
 #!/bin/bash
 DEBUG=${DEBUG:-"false"}
 if $DEBUG; then set -x; fi
-# A little script to install every needed package to compile wormux.
+# A little script to install every needed package to compile warmux.
 # Author : Yannig PERRE (drayan)
 # Creation : 2007/10/20
 # Modification : 2007/10/29 (drayan) : handling of urpmi/mandriva package
@@ -44,7 +44,7 @@ fi
 
 echo
 echo "The aim of this shell is to install a bunch of package in order to"
-echo "compile the dev version of Wormux."
+echo "compile the dev version of Warmux."
 echo
 echo "List of needed packages :"
 echo

@@ -663,7 +663,7 @@ static void Action_Game_RequestTeamRemoval(Action *a)
 }
 
 
-void WORMUX_DisconnectPlayer(Player& player)
+void WARMUX_DisconnectPlayer(Player& player)
 {
   std::list<ConfigTeam>::iterator it = player.owned_teams.begin();
   while (it != player.owned_teams.end()) {
@@ -955,7 +955,7 @@ static void Action_Info_ClientConnect(Action *a)
   }
 }
 
-void WORMUX_ConnectHost(DistantComputer& host)
+void WARMUX_ConnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();
@@ -1004,7 +1004,7 @@ static void Action_Info_ClientDisconnect(Action *a)
   }
 }
 
-void WORMUX_DisconnectHost(DistantComputer& host)
+void WARMUX_DisconnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();

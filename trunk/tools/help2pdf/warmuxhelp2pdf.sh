@@ -17,14 +17,14 @@ generate_doc() {
     echo "** Generating documentation for lang $lang"
 
     lang=$1
-    page=www.wormux.org/wiki/howto/$lang/play
-    outdir=`pwd`/wormux-doc
+    page=www.warmux.org/wiki/howto/$lang/play
+    outdir=`pwd`/warmux-doc
 
     # create the output directory
     mkdir -p $outdir
 
     # creating a temporary directory
-    tmpdir=`mktemp -d /tmp/wormux.XXXXXX`
+    tmpdir=`mktemp -d /tmp/warmux.XXXXXX`
 
     # downloading the page
     echo "* downloading the page"

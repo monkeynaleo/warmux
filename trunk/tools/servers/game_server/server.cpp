@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -287,7 +287,7 @@ bool GameServer::ConnectToIndexServer()
       fprintf(stderr,"%s\n", Format(_("Sorry, your version is not supported anymore. "
 			       "Supported versions are %s. "
 			       "You can download an updated version "
-			       "from http://www.wormux.org/wiki/download.php"),
+			       "from http://www.warmux.org/wiki/download.php"),
 			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
       fprintf(stderr, "ERROR: Fail to connect to the index server\n");
@@ -512,7 +512,7 @@ uint Action_TimeStamp()
   return 0;
 }
 
-void WORMUX_ConnectHost(DistantComputer& host)
+void WARMUX_ConnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();
@@ -527,7 +527,7 @@ void WORMUX_ConnectHost(DistantComputer& host)
   GameServer::GetInstance()->GetGame(host.GetGameId()).SendActionToAllExceptOne(a, &host);
 }
 
-void WORMUX_DisconnectHost(DistantComputer& host)
+void WARMUX_DisconnectHost(DistantComputer& host)
 {
   std::string hostname = host.GetAddress();
   std::string nicknames = host.GetNicknames();
@@ -544,7 +544,7 @@ void WORMUX_DisconnectHost(DistantComputer& host)
   GameServer::GetInstance()->GetGame(host.GetGameId()).SendActionToAll(a); // host is already removed from the list
 }
 
-void WORMUX_DisconnectPlayer(Player& /*player*/)
+void WARMUX_DisconnectPlayer(Player& /*player*/)
 {
 
 }
