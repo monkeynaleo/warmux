@@ -97,10 +97,7 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-  const Double& sx = sprite->GetScaleX();
-  if (GetSpeed().x < 0 && sx>0) {
-    sprite->Scale(-sx, sprite->GetScaleY());
-  }
+  sprite->SetFlipped(GetSpeed().x < 0);
   sprite->Update();
 
   const Double& rotation_speed = ActiveMap()->GetWind().rotation_speed;
