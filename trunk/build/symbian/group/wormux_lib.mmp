@@ -23,10 +23,20 @@ USERINCLUDE   ..\..\..\src
 DEBUGGABLE_UDEBONLY
 #endif
 
-SOURCEPATH ..\..\..\lib\fixedpoint
-SOURCE fixed_func.cpp
-
 OPTION CW -wchar_t on
 MACRO  _WCHAR_T_DECLARED
+
+SOURCEPATH ..\..\..\lib\fixedpoint
+SOURCE fixed_func.cpp
+SOURCEPATH ..\..\..\lib\warmux\action
+SOURCE action.cpp action_handler.cpp
+SOURCEPATH ..\..\..\lib\warmux\base
+SOURCE error.cpp i18n.cpp singleton.cpp
+SOURCEPATH ..\..\..\lib\warmux\maths
+SOURCE euler_vector.cpp
+SOURCEPATH ..\..\..\lib\warmux\net
+SOURCE distant_cpu.cpp download.cpp extSDL_net.cpp index_server.cpp network.cpp player.cpp socket.cpp
+SOURCEPATH ..\..\..\lib\warmux\tools
+SOURCE debug.cpp file_tools.cpp random.cpp
 
 ALWAYS_BUILD_AS_ARM
