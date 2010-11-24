@@ -48,13 +48,13 @@ PictureWidget::PictureWidget(const Point2i & _size,
 {
 }
 
-PictureWidget::PictureWidget(const Surface & s, ScalingType type, bool antialiasing)
+PictureWidget::PictureWidget(const Surface & s, ScalingType type)
   : Widget(s.GetSize(), false)
   , disabled(false)
   , type(type)
   , spr(NULL)
 {
-  SetSurface(s, type, antialiasing);
+  SetSurface(s, type);
 }
 
 PictureWidget::PictureWidget(Profile * profile,
@@ -110,10 +110,8 @@ bool PictureWidget::LoadXMLConfiguration()
 
   bool activeScale = false;
   xmlFile->ReadBoolAttr(widgetNode, "scale", activeScale);
-  bool activeAntialiasing = false;
-  xmlFile->ReadBoolAttr(widgetNode, "antialiasing", activeAntialiasing);
 
-  SetSurface(surface, activeScale ? FIT_SCALING : NO_SCALING, activeAntialiasing);
+  SetSurface(surface, activeScale ? FIT_SCALING : NO_SCALING);
   return true;
 }
 
@@ -142,15 +140,14 @@ void PictureWidget::ApplyScaling(ScalingType t)
 }
 
 void PictureWidget::SetSurface(const Surface & s,
-                               ScalingType type_,
-                               bool antialiasing)
+                               ScalingType type_)
 {
   if (NULL != spr) {
     delete spr;
   }
 
   picture_size = s.GetSize();
-  spr = new Sprite(s, antialiasing);
+  spr = new Sprite(s);
   type = type_;
   loaded = true;
   // Don't call immediately ApplyScaling(type) to save on rotozooms
@@ -173,7 +170,7 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/)
     if (name.empty())
       return;
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-    SetSurface(LOAD_RES_IMAGE(name), type, type != NO_SCALING);
+    SetSurface(LOAD_RES_IMAGE(name), type);
     GetResourceManager().UnLoadXMLProfile(res);
 
     // Needed to set the resizing
