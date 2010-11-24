@@ -1,4 +1,4 @@
-Wormux 0.8
+Warmux 0.8
 
 
 *** Translations of this document are available in doc/ subdirectory ***
@@ -12,7 +12,7 @@ Compilation/Installation under Linux
 ==============
 
 If the following software is not presently on your system, you will need to download them
-before attempting to install Wormux 0.8 on your computer...
+before attempting to install Warmux 0.8 on your computer...
 
 * All dependencies in one command (Debian/Ubuntu)
 -------------------------------------------------
@@ -25,17 +25,17 @@ sudo apt-get install g++ gettext \
 * SDL
 -----
 
-Wormux needs the SDL library version 1.2.
+Warmux needs the SDL library version 1.2.
 
 It can be downloaded of their website: http://www.libsdl.org/
 
 * SDL mixer, SDL image, SDL ttf and SDL gfx, SDL net
 ----------------------------------------------------
 
-SDL is split into small modules. Wormux needs mixer (sound), image (load
+SDL is split into small modules. Warmux needs mixer (sound), image (load
 picture file), ttf (draw text), gfx (graphical things) and net (network).
 
-You may have trouble installing SDL gfx: Wormux *needs* version 2.0.13 or
+You may have trouble installing SDL gfx: Warmux *needs* version 2.0.13 or
 greater. Download it and compile it.
 
 Here are their website:
@@ -48,7 +48,7 @@ Here are their website:
 * libxml++
 ----------
 
-Wormux uses the libxml++ library version 2.6.
+Warmux uses the libxml++ library version 2.6.
 
 Get it here: http://libxmlplusplus.sourceforge.net/
 
@@ -60,11 +60,11 @@ Under Debian, use the command:
 * Compilation / Installation
 ============================
 
-If you're using the SubVersion version of Wormux, you will have to run:
+If you're using the SubVersion version of Warmux, you will have to run:
 
     ./autogen.sh
 
-Under Linux, enter the Wormux directory, then simply type:
+Under Linux, enter the Warmux directory, then simply type:
 
 	./configure
 	make
@@ -83,7 +83,7 @@ initial configure command:
 * Uninstalling
 ==============
 
-To uninstall Wormux, go to the source directory, then (as root):
+To uninstall Warmux, go to the source directory, then (as root):
 
 	make uninstall
 
@@ -97,7 +97,7 @@ The most useful (for developers, at least) being:
 
 	./configure --enable-debug
 
-This enables you to compile Wormux with debug options, allowing you to track down bugs/other problems.
+This enables you to compile Warmux with debug options, allowing you to track down bugs/other problems.
 
 To get a list of all the other configuration options, type:
 
