@@ -47,6 +47,11 @@
 #  include <alloca.h>
 #endif
 
+#ifdef __SYMBIAN32__
+# undef alloca
+# define alloca(size)   __builtin_alloca (size)
+#endif
+
 #ifdef USE_MEMORY_H
 #  include <memory.h>
 #endif
