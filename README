@@ -1,12 +1,12 @@
-                     Wormux
+                     Warmux
                      ======
 
-These are the release notes for Wormux
+These are the release notes for Warmux
 
-1/ What is Wormux ?
+1/ What is Warmux ?
 ===================
 
-Have the mascots of your favorite free software battle in the Wormux
+Have the mascots of your favorite free software battle in the Warmux
 arena. Using dynamite, grenades, baseball bats and other weapons...
 exterminate your opponent in a 2D toon style scenery and
 a funny environment.
@@ -15,7 +15,7 @@ Each player (2 minimum, on the same PC) controls the team of his
 choice (tux, gnu, firefox, wilber,...) and must destroy his
 adversary using more or less casual weapons.
 
-Although a minimum of strategy is required to vanquish, Wormux is
+Although a minimum of strategy is required to vanquish, Warmux is
 pre-eminently a "convivial mass murder" game where, turn by turn, each
 member of each team attempts to produce a maximum of damage to his
 opponents.
@@ -23,7 +23,7 @@ opponents.
 2/ How to play ?
 ================
 
-Understanding how to play Wormux is very simple.
+Understanding how to play Warmux is very simple.
 
 2.1/ Controls
 =============
@@ -51,17 +51,17 @@ Understanding how to play Wormux is very simple.
 ====================
 
 On the website, you will find some useful help:
-* List of weapons: http://www.wormux.org/phpboost/wiki/wiki.php
-* List of maps: http://www.wormux.org/phpboost/wiki/wiki.php
-  * How to write your own map: http://www.wormux.org/phpboost/wiki/wiki.php
-* List of skins: http://www.wormux.org/phpboost/wiki/wiki.php
-* Forum: http://www.wormux.org/phpboost/forum/
+* List of weapons: http://www.warmux.org/phpboost/wiki/wiki.php
+* List of maps: http://www.warmux.org/phpboost/wiki/wiki.php
+  * How to write your own map: http://www.warmux.org/phpboost/wiki/wiki.php
+* List of skins: http://www.warmux.org/phpboost/wiki/wiki.php
+* Forum: http://www.warmux.org/phpboost/forum/
 
 3/ On which system can I play out-of-the-box ?
 ==============================================
 
-Wormux is available out-of-the-box on a wide variety of systems  (have 
-a look at http://www.wormux.org/phpboost/download for an up-to-date list):
+Warmux is available out-of-the-box on a wide variety of systems  (have 
+a look at http://www.warmux.org/phpboost/download for an up-to-date list):
 
 * Linux based systems:
   * Debian (Sarge/Etch/Sid)
@@ -85,6 +85,6 @@ a look at http://www.wormux.org/phpboost/download for an up-to-date list):
 4/ Misc links
 =============
 
-* Official web site: http://www.wormux.org/
-* Project management page: https://gna.org/projects/wormux/
+* Official web site: http://www.warmux.org/
+* Project management page: https://gna.org/projects/warmux/
 
