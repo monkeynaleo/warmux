@@ -1,8 +1,8 @@
 SUBDIRS = .
 
-bin_PROGRAMS = wormux
+bin_PROGRAMS = warmux
 
-wormux_SOURCES = \
+warmux_SOURCES = \
         ai/ai_command.cpp \
         ai/ai_command.h \
         ai/ai_idea.cpp \
@@ -413,7 +413,7 @@ wormux_SOURCES = \
         weapon/weapons_list.cpp \
         weapon/weapons_list.h
 
-wormux_LDFLAGS = -Wl,--as-needed
+warmux_LDFLAGS = -Wl,--as-needed
 
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"    \
@@ -422,13 +422,13 @@ AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
 
 
 if WIN32
-wormux_SOURCES += wormux.rc wormux.ico
+warmux_SOURCES += warmux.rc warmux.ico
 .rc.o: $(top_srcdir)/lib/warmux/include/config_autotools.h
 	$(WINDRES) -I$(top_srcdir)/lib/warmux/include -D HAVE_CONFIG_H -o $@ -i $<
 endif
 
 if MAEMO
-wormux_SOURCES += maemo/osso.cpp maemo/osso.h
+warmux_SOURCES += maemo/osso.cpp maemo/osso.h
 endif
 
 LIBS+=@LIBINTL@
@@ -439,5 +439,5 @@ else
 LIBS += @LIBCURL@
 endif
 
-wormux_LDADD=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwarmux.a
-wormux_DEPENDENCIES=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwarmux.a
+warmux_LDADD=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwarmux.a
+warmux_DEPENDENCIES=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwarmux.a
