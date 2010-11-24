@@ -515,7 +515,7 @@ void Weapon::Draw(){
     if (ActiveCharacter().GetDirection() == 1)
       m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle());
     else
-      m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle() - PI);
+      m_image->SetRotation_rad(ActiveCharacter().GetFiringAngle()-PI);
   } else {
     m_image->SetRotation_rad(ZERO);
   }
@@ -542,6 +542,7 @@ void Weapon::Draw(){
       Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
                    / sin((Double)1.5 * HALF_PI);
       m_image->SetFlipped(DIRECTION_LEFT == ActiveCharacter().GetDirection());
+      if (scale.IsNotZero())
       m_image->Scale(scale, scale);
 
       // Recompute position to get the icon centered over the skin
