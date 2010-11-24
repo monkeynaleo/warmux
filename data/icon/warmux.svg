@@ -16,8 +16,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
-   sodipodi:docname="wormux.svg"
-   inkscape:export-filename="/home/yekcim/Dev/wormux/trunk/data/wormux_512x512.png"
+   sodipodi:docname="warmux.svg"
+   inkscape:export-filename="/home/yekcim/Dev/warmux/trunk/data/wormux_512x512.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -1130,7 +1130,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="wormux 10.01"
+     inkscape:label="warmux 10.01"
      style="display:inline"
      transform="translate(49.613213,408.36742)">
     <g
