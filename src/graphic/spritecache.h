@@ -112,7 +112,7 @@ public:
       push_back(SpriteFrameCache(other[i]));
   }
   void AddFrame(const Surface& surf, uint delay=100) { push_back(SpriteFrameCache(surf, delay)); }
-  void EnableCaches(bool flipped, uint rotation_num, Double min, Double max);
+  void EnableCaches(bool flipped, uint rotation_num, const Double& min, const Double& max);
 
   //operator SpriteFrameCache& [](uint index) { return frames.at(index); }
   void SetDelay(uint delay)
