@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.4.4)
 
 # Project name
-PROJECT(Wormux)
+PROJECT(Warmux)
 SET(VERSION "svn")
 
 # change the default install prefix to /usr
@@ -18,8 +18,8 @@ IF(PREFIX)
 ENDIF(PREFIX)
 
 # Set some global variables
-SET(WORMUX_CFLAGS "-Wall") # additional compile flags for wormux
-SET(WORMUX_LDFLAGS "")		# additional linking flags for wormux
+SET(WARMUX_CFLAGS "-Wall") # additional compile flags for warmux
+SET(WARMUX_LDFLAGS "")		# additional linking flags for warmux
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/build/cmake)
 
 IF(BIN_PATH)
@@ -47,9 +47,9 @@ ELSE(DATA_PATH)
 
   # Otherwise use defaults
   IF(UNIX AND NOT WIN32)
-    SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux/)
+    SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/warmux/)
     SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
-    SET(DATA_DESTINATION "share/wormux")
+    SET(DATA_DESTINATION "share/warmux")
     SET(PO_DESTINATION "share/locale")
     SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
   ELSE(UNIX AND NOT WIN32)
@@ -70,9 +70,9 @@ ENDIF(COMMAND cmake_policy)
 INCLUDE(CPackConfig OPTIONAL)
 INCLUDE(XmlValidityTest OPTIONAL)
 
-# Use "make run" and "make debug" to run/debug wormux
-ADD_CUSTOM_TARGET(run WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf src/wormux DEPENDS src/wormux)
-ADD_CUSTOM_TARGET(debug WORMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WORMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf gdb src/wormux DEPENDS src/wormux)
+# Use "make run" and "make debug" to run/debug warmux
+ADD_CUSTOM_TARGET(run WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf src/warmux DEPENDS src/warmux)
+ADD_CUSTOM_TARGET(debug WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf gdb src/warmux DEPENDS src/warmux)
 
 
 # Required libraries
@@ -91,50 +91,50 @@ FIND_PACKAGE(FriBiDi)
 IF(APPLE)
     # to ease packaging, we'll use a static libintl
     # we also need to link against the SDL_main library (required by the mac version of SDL)
-    SET(WORMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WORMUX_LDFLAGS}")
+    SET(WARMUX_LDFLAGS "-L${PROJECT_SOURCE_DIR} -lintl -liconv -framework Carbon -lSDLmain_UB ${WARMUX_LDFLAGS}")
     # to ease packaging, we'll use a framework version of libpng
     # (with a different name so there is no confusion with the UNIX version of libpng)
-    SET(WORMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WORMUX_LDFLAGS}")
+    SET(WARMUX_LDFLAGS "-framework wmxlibpng -I/Library/Frameworks/wmxlibpng.framework/Headers/ ${WARMUX_LDFLAGS}")
     SET(GETTEXT_FOUND TRUE)
     ADD_DEFINITIONS(-DENABLE_NLS)
     #FIND_LIBRARY(GETTEXT_LIBRARY NAMES intl
     #             PATHS ${PROJECT_SOURCE_DIR} )
-    
+
     FIND_PROGRAM(GETTEXT_MSGMERGE_EXECUTABLE msgmerge)
     FIND_PROGRAM(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
     FIND_PROGRAM(GETTEXT_MSGFMT_EXECUTABLE msgfmt)
 
     # additional macro
     MACRO(GETTEXT_CREATE_TRANSLATIONS _potFile _firstPoFile)
-    
+
        SET(_gmoFiles)
        GET_FILENAME_COMPONENT(_potBasename ${_potFile} NAME_WE)
        GET_FILENAME_COMPONENT(_absPotFile ${_potFile} ABSOLUTE)
-    
+
        SET(_addToAll)
        IF(${_firstPoFile} STREQUAL "ALL")
           SET(_addToAll "ALL")
           SET(_firstPoFile)
        ENDIF(${_firstPoFile} STREQUAL "ALL")
-    
+
        FOREACH (_currentPoFile ${ARGN})
           GET_FILENAME_COMPONENT(_absFile ${_currentPoFile} ABSOLUTE)
           GET_FILENAME_COMPONENT(_abs_PATH ${_absFile} PATH)
           GET_FILENAME_COMPONENT(_lang ${_absFile} NAME_WE)
           SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
-    
-          ADD_CUSTOM_COMMAND( 
-             OUTPUT ${_gmoFile} 
+
+          ADD_CUSTOM_COMMAND(
+             OUTPUT ${_gmoFile}
              COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet --update --backup=none -s ${_absFile} ${_absPotFile}
              COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
-             DEPENDS ${_absPotFile} ${_absFile} 
+             DEPENDS ${_absPotFile} ${_absFile}
           )
-    
-          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo) 
+
+          INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_potBasename}.mo)
           SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
-    
+
        ENDFOREACH (_currentPoFile )
-    
+
        ADD_CUSTOM_TARGET(translations ${_addToAll} DEPENDS ${_gmoFiles})
 
     ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
@@ -170,26 +170,26 @@ IF(NOT WIN32)
   INCLUDE(CheckCXXCompilerFlag)
   CHECK_CXX_COMPILER_FLAG("-Wextra" COMPILER_SUPPORTS_WEXTRA)
   IF(COMPILER_SUPPORTS_WEXTRA)
-    SET(WORMUX_CFLAGS "-Wextra ${WORMUX_CFLAGS}")
+    SET(WARMUX_CFLAGS "-Wextra ${WARMUX_CFLAGS}")
   ENDIF(COMPILER_SUPPORTS_WEXTRA)
-  
+
   IF(CMAKE_BUILD_TYPE MATCHES "Debug")
-  SET(WORMUX_CFLAGS "-Werror ${WORMUX_CFLAGS}")
+  SET(WARMUX_CFLAGS "-Werror ${WARMUX_CFLAGS}")
   ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
-  
+
 ENDIF(NOT WIN32)
 IF(CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
   ADD_DEFINITIONS(-DDEBUG)
   ADD_DEFINITIONS(-DWMX_LOG)
   IF(PROFILE)
-    SET(WORMUX_CFLAGS "-pg ${WORMUX_CFLAGS}")
-    SET(WORMUX_LDFLAGS "-pg ${WORMUX_LDFLAGS}")
+    SET(WARMUX_CFLAGS "-pg ${WARMUX_CFLAGS}")
+    SET(WARMUX_LDFLAGS "-pg ${WARMUX_LDFLAGS}")
   ENDIF(PROFILE)
 ELSE(CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
   # optimise nondebug builds
-  SET(WORMUX_CFLAGS "-O2 ${WORMUX_CFLAGS}")
+  SET(WARMUX_CFLAGS "-O2 ${WARMUX_CFLAGS}")
   IF(NOT WIN32 AND NOT APPLE)
-    SET(WORMUX_CFLAGS "-march=native ${WORMUX_CFLAGS}") # native only works on x86 and x86_64
+    SET(WARMUX_CFLAGS "-march=native ${WARMUX_CFLAGS}") # native only works on x86 and x86_64
   ENDIF(NOT WIN32 AND NOT APPLE)
 ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug" OR CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
 
@@ -208,14 +208,14 @@ INSTALL(DIRECTORY data/ DESTINATION ${DATA_DESTINATION}
                         GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
   PATTERN ".svn" EXCLUDE
   PATTERN "Makefile*" EXCLUDE
-  PATTERN "wormux.desktop" EXCLUDE
+  PATTERN "warmux.desktop" EXCLUDE
   PATTERN "*.dtd" EXCLUDE
 )
 
 # Install desktop file and icon
 IF(UNIX AND NOT APPLE)
-  INSTALL(FILES data/wormux.desktop DESTINATION share/applications)
-  INSTALL(FILES data/wormux_128x128.png DESTINATION share/pixmaps)
+  INSTALL(FILES data/warmux.desktop DESTINATION share/applications)
+  INSTALL(FILES data/warmux_128x128.png DESTINATION share/pixmaps)
 ENDIF(UNIX AND NOT APPLE)
 
 # Install docs
@@ -226,7 +226,7 @@ INSTALL(DIRECTORY doc DESTINATION share/
 )
 INSTALL(FILES README README.cmake INSTALL AUTHORS AUTHORS BUGS DESTINATION share/doc)
 IF(UNIX)
-  INSTALL(FILES doc/warmux.man DESTINATION share/man/man6 RENAME wormux.6)
+  INSTALL(FILES doc/warmux.man DESTINATION share/man/man6 RENAME warmux.6)
 ENDIF(UNIX)
 
 CONFIGURE_FILE(
