@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2010, Wormux Team
+Copyright (c) 2010, Warmux Team
 
 Large parts of the code are from the fixed point library of Markus Trenkwalder
 Copyright (c) 2007, Markus Trenkwalder
