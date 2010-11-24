@@ -31,7 +31,7 @@ BodyMemberParticle::BodyMemberParticle(Sprite& spr, const Point2i& position) :
   SetCollisionModel(true, false, false);
   m_left_time_to_live = 100;
   image = new Sprite(spr.GetSurface());
-  image->EnableRotationCache(32);
+  image->EnableCaches(true, 32, 0, PI);
   ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
 

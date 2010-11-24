@@ -151,7 +151,6 @@ void PictureWidget::SetSurface(const Surface & s,
 
   picture_size = s.GetSize();
   spr = new Sprite(s, antialiasing);
-  spr->EnableLastFrameCache();
   type = type_;
   loaded = true;
   // Don't call immediately ApplyScaling(type) to save on rotozooms
