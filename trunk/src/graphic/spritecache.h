@@ -28,7 +28,6 @@
 #include <vector>
 #include <assert.h>
 #include <WORMUX_base.h>
-#include "graphic/spriteframe.h"
 #include "graphic/surface.h"
 
 class Sprite;
@@ -41,54 +40,88 @@ class Sprite;
 
 class SpriteFrameCache
 {
-  bool use_rotation;
+  uint delay;
+  Double min, max;
+
+  static Double RestrictAngle(Double angle, Double mini, Double maxi)
+  {
+    while (angle < mini)
+      angle += TWO_PI;
+    while (angle >= maxi)
+    angle -= TWO_PI;
+    ASSERT(angle>=mini && angle<maxi);
+    return angle;
+  }
+
+  Surface normal_surface;
+  Surface flipped_surface;
   std::vector<Surface> rotated_surface;
   std::vector<Surface> rotated_flipped_surface;
 
 public:
-  Surface flipped_surface;
-  Surface GetFlippedSurfaceForAngle(Double angle) const;
-  Surface GetSurfaceForAngle(Double angle) const;
+  Surface GetFlippedSurfaceForAngle(Double angle);
+  Surface GetSurfaceForAngle(Double angle);
 
-  SpriteFrameCache();
-  void CreateRotationCache(Surface &surface, uint cache_size, bool smooth);
-  void CreateFlippingCache(Surface &surface, bool smooth);
+  SpriteFrameCache(uint d = 100) { delay = d; }
+  SpriteFrameCache(const Surface& surf, uint d = 100)
+    : normal_surface(surf)
+    , delay(d)
+  { }
+  SpriteFrameCache(const SpriteFrameCache& other)
+    : delay(other.delay)
+    , min(other.min), max(other.max)
+    , normal_surface(other.normal_surface)
+    , flipped_surface(other.flipped_surface)
+    , rotated_surface(other.rotated_surface)
+    , rotated_flipped_surface(other.rotated_flipped_surface)
+  { }
+
+  ~SpriteFrameCache()
+  {
+    rotated_surface.clear();
+    rotated_flipped_surface.clear();
+    normal_surface.Free();
+    flipped_surface.Free();
+  }
+
+  void SetCaches(bool flipped, uint rotation_num, Double min, Double max);
+  uint GetDelay() const { return delay; }
+  void SetDelay(uint d) { delay = d; }
 };
 
-class SpriteCache
+class SpriteCache : public std::vector<SpriteFrameCache>
 {
   Sprite &sprite;
 
-public:
-  bool have_rotation_cache;
   uint rotation_cache_size;
   bool have_flipping_cache;
-  bool have_lastframe_cache;
   Surface last_frame;
-  std::vector<SpriteFrameCache> frames;
 
 public:
-  explicit SpriteCache(Sprite &sprite);
+  explicit SpriteCache(Sprite &spr)
+    : sprite(spr)
+    , rotation_cache_size(0)
+    , have_flipping_cache(false)
+  { }
 
-  void EnableRotationCache(std::vector<SpriteFrame> &frames, uint cache_size);
-  void EnableFlippingCache(std::vector<SpriteFrame> &frames);
-  void EnableLastFrameCache()
+  void SetFrames(SpriteCache &other)
   {
-    //The result of the last call to SDLgfx is kept in memory
-    //to display it again if rotation / scale / alpha didn't changed
-    assert(!have_rotation_cache);
-    assert(!have_flipping_cache);
-    have_lastframe_cache = true;
+    clear();
+    rotation_cache_size = other.rotation_cache_size;
+    have_flipping_cache = other.have_flipping_cache;
+    for (uint i=0; i<other.size(); i++)
+      push_back(SpriteFrameCache(other[i]));
   }
-  void DisableLastFrameCache()
+  void AddFrame(const Surface& surf, uint delay) { push_back(SpriteFrameCache(surf, delay)); }
+  void EnableCaches(bool flipped, uint rotation_num, Double min, Double max);
+  void InvalidLastFrame() { last_frame.Free(); }
+
+  //operator SpriteFrameCache& [](uint index) { return frames.at(index); }
+  void SetDelay(uint delay)
   {
-    //The result of the last call to SDLgfx is kept in memory
-    //to display it again if rotation / scale / alpha didn't changed
-    assert(!have_rotation_cache);
-    assert(!have_flipping_cache);
-    have_lastframe_cache = false;
+    for (uint i=0; i<size(); i++)
+      at(i).SetDelay(delay);
   }
-  void InvalidLastFrame() { if (have_lastframe_cache) last_frame.Free(); }
 };
 
 #endif /* _SPRITE_CACHE_H */
