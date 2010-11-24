@@ -24,7 +24,6 @@
 #include <SDL_stdinc.h>
 
 #include <SDL_video.h>
-#include <SDL_gfxPrimitives.h>
 #include <limits.h>
 #include "map/camera.h"
 #include "map/map.h"
@@ -32,10 +31,8 @@
 #include "graphic/surface.h"
 #include "graphic/video.h"
 #include "graphic/colors.h"
-#include "include/app.h"
 #include "include/constant.h"
 #include "tool/isnan.h"
-#include "tool/resource_manager.h"
 
 Ground::Ground()
 { //FIXME (to erase)
@@ -97,11 +94,10 @@ Double Ground::Tangent(int x,int y) const
    * p2 =  point on the right
    */
   Point2i p1,p2;
-  if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
+  if (!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return getNaN();
 
-  if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
-  {
+  if (!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y)) {
     p2.x = x;
     p2.y = y;
   }
@@ -130,8 +126,8 @@ Double Ground::Tangent(int x,int y) const
     {   -1.1071+M_PI, PI - QUARTER_PI,      PI,      QUARTER_PI,          1.1071},
     {PI - QUARTER_PI,     -.46364+M_PI,     PI,          .46364,     QUARTER_PI}};
 
-  ASSERT(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
-  ASSERT(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
+  assert(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
+  assert(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
 
   return table[(p2.y-p1.y)+2][(p2.x-p1.x)+2];
 }
@@ -204,8 +200,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   if (x != bad_x || y+1 != bad_y)
     if (!IsEmpty(Point2i(x,y+1))
         &&(IsEmpty(Point2i(x-1,y+1))
-        || IsEmpty(Point2i(x+1,y+1))))
-    {
+        || IsEmpty(Point2i(x+1,y+1)))) {
       p_x=x;
       p_y=y+1;
       return true;
@@ -215,8 +210,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   if (x-1 != bad_x || y+1 != bad_y)
     if (!IsEmpty(Point2i(x-1,y+1))
         &&(IsEmpty(Point2i(x-1,y))
-        || IsEmpty(Point2i(x,y+1))))
-    {
+        || IsEmpty(Point2i(x,y+1)))) {
       p_x=x-1;
       p_y=y+1;
       return true;
@@ -226,8 +220,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   if (x-1 == bad_x && y == bad_y)
     if (!IsEmpty(Point2i(x-1,y))
         &&(IsEmpty(Point2i(x-1,y-1))
-        || IsEmpty(Point2i(x-1,y+1))))
-    {
+        || IsEmpty(Point2i(x-1,y+1)))) {
       p_x=x-1;
       p_y=y;
       return true;
@@ -239,23 +232,23 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
 void Ground::Draw(bool redraw_all)
 {
   CheckEmptyTiles();
-  AppWormux * app = AppWormux::GetInstance();
+  Surface& window = GetMainWindow();
 
   Point2i cPos = Camera::GetInstance()->GetPosition();
-  Point2i windowSize = app->video->window.GetSize();
+  Point2i windowSize = window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
 
-  if( Camera::GetInstance()->HasFixedX() ){// ground is less wide than screen !
-    app->video->window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
-    app->video->window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
+  if (Camera::GetInstance()->HasFixedX()) { // ground is less wide than screen !
+    window.BoxColor(Rectanglei(0, 0, margin.x, windowSize.y), black_color);
+    window.BoxColor(Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);
   }
 
-  if( Camera::GetInstance()->HasFixedY() ){// ground is less wide than screen !
-    app->video->window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color);
-    app->video->window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
+  if (Camera::GetInstance()->HasFixedY()) { // ground is less wide than screen !
+    window.BoxColor(Rectanglei(0, 0, windowSize.x, margin.y), black_color);
+    window.BoxColor(Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
 
-  if( lastPos != cPos || redraw_all){
+  if (lastPos != cPos || redraw_all) {
     lastPos = cPos;
     DrawTile();
     return;
@@ -272,9 +265,10 @@ void Ground::Draw(bool redraw_all)
   CheckPreview();
 }
 
-void Ground::RedrawParticleList(const std::list<Rectanglei>& list) const {
+void Ground::RedrawParticleList(const std::list<Rectanglei>& list) const
+{
   std::list<Rectanglei>::const_iterator it;
 
-  for( it = list.begin(); it != list.end(); ++it )
+  for(it = list.begin(); it != list.end(); ++it)
     DrawTile_Clipped(*it);
 }
