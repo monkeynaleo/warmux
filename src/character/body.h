@@ -24,8 +24,8 @@
 #include <map>
 
 #include <vector>
-#include <WORMUX_base.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
 #include "tool/xml_document.h"
 
 // Forward declarations

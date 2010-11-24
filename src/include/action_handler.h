@@ -24,9 +24,9 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include <WORMUX_action_handler.h>
+#include <WARMUX_action_handler.h>
 #include "include/action.h"
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 
 //-----------------------------------------------------------------------------
 

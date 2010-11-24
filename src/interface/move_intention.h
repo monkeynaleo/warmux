@@ -22,7 +22,7 @@
 #ifndef _MOVE_INTENTION_H
 #define _MOVE_INTENTION_H
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 
 template<typename T>
 class MoveIntention

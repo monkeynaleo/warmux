@@ -21,9 +21,9 @@
 
 #include <iostream>
 #include <SDL_mutex.h>
-#include <WORMUX_action_handler.h>
-#include <WORMUX_debug.h>
-#include <WORMUX_error.h>
+#include <WARMUX_action_handler.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_error.h>
 
 WActionHandler::WActionHandler():
   handler(),

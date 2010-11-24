@@ -25,8 +25,8 @@
 #include "object/object_cfg.h"
 #include "game/config.h"
 #include "game/game_mode.h"
-#include <WORMUX_base.h>
-#include <WORMUX_debug.h>
+#include <WARMUX_base.h>
+#include <WARMUX_debug.h>
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 

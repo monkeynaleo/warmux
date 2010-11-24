@@ -24,7 +24,7 @@
 
 #include <limits>
 #include <string>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "object/physical_obj.h"
 #include "interface/movable_by_user.h"
 

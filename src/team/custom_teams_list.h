@@ -25,7 +25,7 @@
 
 #include <string>
 #include <vector>
-#include <WORMUX_singleton.h>
+#include <WARMUX_singleton.h>
 
 //-----------------------------------------------------------------------------
 

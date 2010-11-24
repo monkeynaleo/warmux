@@ -24,9 +24,9 @@
 
 #include <map>
 #include "graphic/surface.h"
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_point.h>
 
 // Forward declarations
 struct SDL_event;

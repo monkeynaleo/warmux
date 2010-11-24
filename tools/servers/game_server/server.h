@@ -24,12 +24,12 @@
 #include <map>
 #include <string>
 
-#include <WORMUX_action.h>
-#include <WORMUX_distant_cpu.h>
-#include <WORMUX_network.h>
-#include <WORMUX_socket.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_types.h>
+#include <WARMUX_action.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_network.h>
+#include <WARMUX_socket.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_types.h>
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
 

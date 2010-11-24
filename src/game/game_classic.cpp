@@ -39,8 +39,8 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_random.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
 
 GameClassic::GameClassic()
   : Game()

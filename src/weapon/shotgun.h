@@ -24,8 +24,8 @@
 
 #include <vector>
 #include "weapon/weapon_launcher.h"
-#include <WORMUX_base.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
 
 const int SHOTGUN_BULLETS = 4;
 

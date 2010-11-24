@@ -27,8 +27,8 @@
 #include <set>
 #include <utility>
 
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include <SDL.h>
 #include <SDL_mixer.h>
 

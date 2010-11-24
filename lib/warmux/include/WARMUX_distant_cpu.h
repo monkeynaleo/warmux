@@ -24,8 +24,8 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <string>
-#include <WORMUX_player.h>
-#include <WORMUX_types.h>
+#include <WARMUX_player.h>
+#include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
 class WSocket;

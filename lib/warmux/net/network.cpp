@@ -48,11 +48,11 @@
 //-----------------------------------------------------------------------------
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_index_svr_msg.h>
-#include <WORMUX_network.h>
-#include <WORMUX_socket.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_index_svr_msg.h>
+#include <WARMUX_network.h>
+#include <WARMUX_socket.h>
 #include "extSDL_net.h"
 
 #ifdef LOG_NETWORK

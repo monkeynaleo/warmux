@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <limits>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "gui/graph_canvas.h"

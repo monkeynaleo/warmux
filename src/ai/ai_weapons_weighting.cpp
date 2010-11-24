@@ -21,7 +21,7 @@
  * The RandomizeFactors gets called every turn so that the AI preferes different weapons each turn.
  *****************************************************************************/
 
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #include "ai/ai_weapons_weighting.h"
 
 WeaponsWeighting::WeaponsWeighting()

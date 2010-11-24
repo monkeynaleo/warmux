@@ -21,10 +21,10 @@
 #include <sstream>
 #include <iostream>
 
-#include <WORMUX_action.h>
-#include <WORMUX_debug.h>
-#include <WORMUX_file_tools.h>
-#include <WORMUX_point.h>
+#include <WARMUX_action.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_file_tools.h>
+#include <WARMUX_point.h>
 
 #include "ai/ai_stupid_player.h"
 #include "character/character.h"

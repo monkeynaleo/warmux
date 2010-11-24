@@ -23,10 +23,10 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 #include <string>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "sound/sound_sample.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_point.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_point.h>
 
 class Character;
 class Sprite;

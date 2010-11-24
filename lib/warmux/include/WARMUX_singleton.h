@@ -24,7 +24,7 @@
 
 #include <typeinfo>
 #include <list>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 // Forward declarations
 class BaseSingleton;

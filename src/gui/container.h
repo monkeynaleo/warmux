@@ -22,7 +22,7 @@
 #ifndef CONTAINER_WIDGET_H
 #define CONTAINER_WIDGET_H
 
-#include <WORMUX_rectangle.h>
+#include <WARMUX_rectangle.h>
 
 class Surface;
 

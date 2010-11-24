@@ -23,9 +23,9 @@
 #define POLYGON_H
 
 #include <vector>
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
-#include <WORMUX_types.h>
+#include <WARMUX_point.h>
+#include <WARMUX_rectangle.h>
+#include <WARMUX_types.h>
 
 // Forward declarations
 class Color;

@@ -1,7 +1,7 @@
 #ifndef WORMUX_VECTOR2_H
 #define WORMUX_VECTOR2_H
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #undef min
 #undef max
 #define VECTOR2_EPS_ZERO (0.005)

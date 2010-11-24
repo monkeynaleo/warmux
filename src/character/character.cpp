@@ -21,7 +21,7 @@
 
 #include <sstream>
 #include <iostream>
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #include "character/body.h"
 #include "character/character.h"
 #include "character/damage_stats.h"

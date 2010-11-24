@@ -21,7 +21,7 @@
 #include <sstream>
 #include <iostream>
 #include <map>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "character/body.h"
 #include "character/character.h"
 #include "character/clothe.h"

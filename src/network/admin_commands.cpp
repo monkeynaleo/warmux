@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <string>
-#include <WORMUX_distant_cpu.h>
+#include <WARMUX_distant_cpu.h>
 #include "graphic/colors.h"
 #include "include/app.h"
 #include "network/admin_commands.h"

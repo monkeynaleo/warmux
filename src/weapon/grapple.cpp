@@ -22,7 +22,7 @@
 #include "weapon/grapple.h"
 #include "weapon/weapon_cfg.h"
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include "weapon/explosion.h"
 #include "character/character.h"
 #include "game/config.h"

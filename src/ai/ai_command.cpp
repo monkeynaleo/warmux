@@ -19,7 +19,7 @@
  * Contains AICommand implementations which can be used to let the AI send actions.
  *****************************************************************************/
 
-#include <WORMUX_action.h>
+#include <WARMUX_action.h>
 #include "ai/ai_command.h"
 #include "character/character.h"
 #include "game/game_time.h"

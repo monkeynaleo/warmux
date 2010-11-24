@@ -25,8 +25,8 @@
 #ifndef _SPRITE_ANIMATION_H
 #define _SPRITE_ANIMATION_H
 
-#include <WORMUX_base.h>
-#include <WORMUX_debug.h>
+#include <WARMUX_base.h>
+#include <WARMUX_debug.h>
 
 class Sprite;
 

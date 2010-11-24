@@ -22,7 +22,7 @@
 #ifndef MSG_BOX_H
 #define MSG_BOX_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/font.h"
 #include "scroll_box.h"
 

@@ -22,8 +22,8 @@
 #include <iostream>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
-#include <WORMUX_file_tools.h>
-#include <WORMUX_debug.h>
+#include <WARMUX_file_tools.h>
+#include <WARMUX_debug.h>
 #include <libxml/tree.h>
 #include <libxml/parser.h>
 #include <libxml/xinclude.h>

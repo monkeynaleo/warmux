@@ -22,8 +22,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "map/ground.h"
 #include "map/sky.h"
 #include "map/water.h"

@@ -22,7 +22,7 @@
 #ifndef STRING_TOOLS_H
 #define STRING_TOOLS__H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include <string>
 
 // Conversion string -> type

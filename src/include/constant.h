@@ -21,11 +21,11 @@
 
 #ifndef CONSTANT_H
 #define CONSTANT_H
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include <string>
 #include <vector>
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_point.h>
 
 class Constants : public Singleton<Constants>
 {

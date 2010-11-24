@@ -26,9 +26,9 @@
 #define WORMUX_RECTANGLE_H
 
 #include <cmath>
-#include <WORMUX_error.h>
-#include <WORMUX_types.h>
-#include <WORMUX_vector2.h>
+#include <WARMUX_error.h>
+#include <WARMUX_types.h>
+#include <WARMUX_vector2.h>
 
 /**
  * This template handle rectangles.

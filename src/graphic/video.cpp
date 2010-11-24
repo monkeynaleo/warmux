@@ -20,7 +20,7 @@
 #include <algorithm>
 #include <iostream>
 #include <SDL_image.h>
-#include <WORMUX_file_tools.h>
+#include <WARMUX_file_tools.h>
 
 #include "game/config.h"
 #include "graphic/video.h"

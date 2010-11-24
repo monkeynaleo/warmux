@@ -33,10 +33,10 @@
 #include <list>
 #include <string>
 #include <map>
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
-#include <WORMUX_team_config.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_point.h>
+#include <WARMUX_team_config.h>
 
 // Forward declarations
 class ObjectConfig;

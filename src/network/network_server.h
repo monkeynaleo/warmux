@@ -22,7 +22,7 @@
 #ifndef NETWORK_SERVER_H
 #define NETWORK_SERVER_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_socket.h>
+#include <WARMUX_socket.h>
 #include "network.h"
 //-----------------------------------------------------------------------------
 

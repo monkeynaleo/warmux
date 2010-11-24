@@ -23,7 +23,7 @@
 #define WEAPON_TOOLS_H
 
 #include "particles/particle.h"
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 
 class Profile;
 class ExplosiveWeaponConfig;

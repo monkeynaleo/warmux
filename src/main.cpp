@@ -24,7 +24,7 @@
 # include <signal.h>
 #endif
 #include <SDL.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_singleton.h>
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_time.h"

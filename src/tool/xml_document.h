@@ -5,7 +5,7 @@
 #ifndef XML_DOCUMENT_H
 #define XML_DOCUMENT_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include <string>
 #include <vector>
 #include "graphic/colors.h"

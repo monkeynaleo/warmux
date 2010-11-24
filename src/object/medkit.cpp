@@ -28,7 +28,7 @@
 #include "object/objects_list.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 

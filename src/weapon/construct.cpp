@@ -19,7 +19,7 @@
  * Add a structure to the ground
  *****************************************************************************/
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include "weapon/construct.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"

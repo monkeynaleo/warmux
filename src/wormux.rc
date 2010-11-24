@@ -2,7 +2,7 @@
 
 #include <winver.h>
 #ifdef __MINGW32__
-# include <WORMUX_config.h>
+# include <WARMUX_config.h>
 #else
 #  include "..\lib\wormux\include\config_visual.h"
 // Is build automatically by a pre-built event

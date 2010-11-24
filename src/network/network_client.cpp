@@ -18,9 +18,9 @@
  ******************************************************************************
  * Network client layer for Wormux.
  *****************************************************************************/
-#include <WORMUX_socket.h>
+#include <WARMUX_socket.h>
 #include <SDL_thread.h>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 //-----------------------------------------------------------------------------
 #include "include/action_handler.h"

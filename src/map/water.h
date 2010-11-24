@@ -23,7 +23,7 @@
 #define WATER_H
 
 #include <vector>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/surface.h"
 
 #define WATER_INITIAL_HEIGHT 100

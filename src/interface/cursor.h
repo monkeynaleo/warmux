@@ -22,8 +22,8 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 class Sprite;

@@ -19,10 +19,10 @@
  * Socket abstraction
  *****************************************************************************/
 
-#include <WORMUX_error.h>
+#include <WARMUX_error.h>
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include <WORMUX_socket.h>
+#include <WARMUX_socket.h>
 
 #include <iostream>
 #include <sys/types.h>

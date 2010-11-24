@@ -24,11 +24,11 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
-#include <WORMUX_debug.h>
-#include <WORMUX_download.h>
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_file_tools.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_download.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_file_tools.h>
 
 #ifdef HAVE_LIBCURL
 # include <curl/curl.h>

@@ -22,8 +22,8 @@
 #ifndef OBJECTS_LIST_H
 #define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------

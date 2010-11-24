@@ -28,8 +28,8 @@
 #include "map/map.h"
 #include "map/maps_list.h"
 #include "network/randomsync.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_random.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"

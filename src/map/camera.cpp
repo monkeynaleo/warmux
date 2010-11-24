@@ -19,8 +19,8 @@
  * Camera : follow an object, center on it or follow mouse interaction.
  *****************************************************************************/
 
-#include <WORMUX_debug.h>
-#include <WORMUX_random.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
 
 #include "character/character.h"
 #include "game/config.h"

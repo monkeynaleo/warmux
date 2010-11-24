@@ -30,7 +30,7 @@
 #include "graphic/sprite.h"
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 class DynamiteStick : public WeaponProjectile
 {

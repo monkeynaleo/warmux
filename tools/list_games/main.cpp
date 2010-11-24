@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <WORMUX_types.h>
-#include <WORMUX_network.h>
-#include <WORMUX_index_server.h>
-#include <WORMUX_random.h>
+#include <WARMUX_types.h>
+#include <WARMUX_network.h>
+#include <WARMUX_index_server.h>
+#include <WARMUX_random.h>
 
 bool numeric_name = false;
 

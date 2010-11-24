@@ -25,8 +25,8 @@
 #include <list>
 #include <map>
 #include "weapon.h"
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 class WeaponLauncher;

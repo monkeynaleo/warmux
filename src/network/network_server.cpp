@@ -19,7 +19,7 @@
  * Network server layer for Wormux.
  *****************************************************************************/
 
-#include <WORMUX_socket.h>
+#include <WARMUX_socket.h>
 #include <SDL_thread.h>
 #include "include/action_handler.h"
 #include "network/network_server.h"

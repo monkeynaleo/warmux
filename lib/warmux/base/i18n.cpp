@@ -20,8 +20,8 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#include <WORMUX_i18n.h>
-#include <WORMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_error.h>
 #include <string>
 #include <stdio.h>
 #include <stdarg.h>

@@ -23,7 +23,7 @@
 #include <string>
 #include <list>
 #include "surface.h"
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 
 class Video
 {

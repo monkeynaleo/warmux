@@ -19,7 +19,7 @@
  * An AI player for a team.
  *****************************************************************************/
 
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #include "ai/ai_command.h"
 #include "ai/ai_idea.h"
 #include "ai/ai_strategy.h"

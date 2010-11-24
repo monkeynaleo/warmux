@@ -22,7 +22,7 @@
 #include "character/damage_stats.h"
 #include "character/character.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 DamageStatistics::DamageStatistics(const Character& _owner) :
   owner(_owner),

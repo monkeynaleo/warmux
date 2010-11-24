@@ -22,7 +22,7 @@
 #ifndef LOADING_SCREEN_H
 #define LOADING_SCREEN_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include <string>
 
 // Forwar declarations

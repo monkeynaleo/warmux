@@ -22,7 +22,7 @@
 #ifndef _DAMAGE_STATS_H
 #define _DAMAGE_STATS_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 
 class Character;
 

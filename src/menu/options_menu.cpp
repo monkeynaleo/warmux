@@ -21,7 +21,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-#include <WORMUX_download.h>
+#include <WARMUX_download.h>
 #include "menu/options_menu.h"
 #include "include/app.h"
 #include "include/constant.h"

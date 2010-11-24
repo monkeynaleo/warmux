@@ -23,8 +23,8 @@
 #include "network/randomsync.h"
 #include "network/network.h"
 #include "include/action_handler.h"
-#include <WORMUX_debug.h>
-#include <WORMUX_random.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
 
 void RandomSyncGen::InitRandom()
 {

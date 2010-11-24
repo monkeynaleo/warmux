@@ -23,9 +23,9 @@
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_index_svr_msg.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_socket.h>
+#include <WARMUX_index_svr_msg.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_socket.h>
 #include <map>
 #include <list>
 #include <string>

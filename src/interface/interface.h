@@ -22,8 +22,8 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 #include <vector>
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "weapon_menu.h"
 #include "graphic/colors.h"
 #include "gui/energy_bar.h"

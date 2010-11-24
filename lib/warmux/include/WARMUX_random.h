@@ -22,9 +22,9 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <WORMUX_singleton.h>
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_point.h>
+#include <WARMUX_rectangle.h>
 
 class RandomGenerator
 {

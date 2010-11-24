@@ -2,7 +2,7 @@ SET(EXECUTABLE wormux)
 
 FILE(GLOB_RECURSE WORMUX_SRCS *.cpp *.c)
 IF(NOT WIN32 AND NOT MSYS)
-        LIST(REMOVE_ITEM WORMUX_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/msvc/config.h
+        LIST(REMOVE_ITEM WARMUX_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/msvc/config.h
                                      ${CMAKE_CURRENT_SOURCE_DIR}/msvc/getopt.c
                                      ${CMAKE_CURRENT_SOURCE_DIR}/msvc/getopt.h
         )

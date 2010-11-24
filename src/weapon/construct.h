@@ -22,8 +22,8 @@
 #ifndef CONSTRUCT_H
 #define CONSTRUCT_H
 #include "weapon.h"
-#include <WORMUX_base.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
 
 class Sprite;
 class WeaponConfig;

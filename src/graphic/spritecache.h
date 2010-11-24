@@ -27,7 +27,7 @@
 
 #include <vector>
 #include <assert.h>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/surface.h"
 
 class Sprite;

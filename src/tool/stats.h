@@ -22,7 +22,7 @@
 #ifndef STATS_H
 #define STATS_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include <string>
 
 #ifdef DEBUG

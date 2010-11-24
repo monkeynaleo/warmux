@@ -24,7 +24,7 @@
 #include <assert.h>
 #include <map>
 #include <vector>
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 
 #include "character/member_type.h"
 

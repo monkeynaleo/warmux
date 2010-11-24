@@ -21,7 +21,7 @@
  *****************************************************************************/
 
 #include <sstream>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 //-----------------------------------------------------------------------------
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"

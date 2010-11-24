@@ -26,10 +26,10 @@
 
 #include "game/config.h"
 #include "sound/sound_sample.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
-#include <WORMUX_random.h>
-#include <WORMUX_file_tools.h>
+#include <WARMUX_random.h>
+#include <WARMUX_file_tools.h>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 
