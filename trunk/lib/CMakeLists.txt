@@ -1,3 +1,3 @@
-ADD_SUBDIRECTORY(wormux)
-ADD_SUBDIRECTORY(wormux-server)
+ADD_SUBDIRECTORY(warmux)
+ADD_SUBDIRECTORY(warmux-server)
 ADD_SUBDIRECTORY(fixedpoint)
