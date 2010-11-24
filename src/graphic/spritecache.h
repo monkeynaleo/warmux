@@ -38,54 +38,58 @@ class Sprite;
 #  define RotoZoomC(a, x, y, s) RotoZoom(a, x, y, s)
 #endif
 
-class SpriteFrameCache
+class SpriteSubframeCache
 {
-  uint delay;
+  std::vector<Surface> rotated;
   Double min, max;
 
-  static Double RestrictAngle(Double angle, Double mini, Double maxi)
+  Double RestrictAngle(Double angle) const
   {
-    while (angle < mini)
+    while (angle < min)
       angle += TWO_PI;
-    while (angle >= maxi)
+    while (angle >= max)
     angle -= TWO_PI;
-    ASSERT(angle>=mini && angle<maxi);
+    ASSERT(angle>=min && angle<max);
     return angle;
   }
 
-  std::vector<Surface> rotated_surface;
-  std::vector<Surface> rotated_flipped_surface;
-
 public:
-  Surface normal_surface;
-  Surface flipped_surface;
-  Surface GetFlippedSurfaceForAngle(Double angle);
+  Surface              surface;
+
+  SpriteSubframeCache() { };
+  SpriteSubframeCache(const Surface& surf) : surface(surf) { };
+  SpriteSubframeCache(const SpriteSubframeCache& other)
+    : min(other.min)
+    , max(other.max)
+    , surface(other.surface)
+    , rotated(other.rotated)
+  { }
+  ~SpriteSubframeCache() { rotated.clear(); surface.Free(); }
+
   Surface GetSurfaceForAngle(Double angle);
+  void SetCache(uint num, const Double& mini, const Double& maxi);
+};
+
+class SpriteFrameCache
+{
+public:
+  uint delay;
+
+  SpriteSubframeCache normal;
+  SpriteSubframeCache flipped;
 
   SpriteFrameCache(uint d = 100) { delay = d; }
   SpriteFrameCache(const Surface& surf, uint d = 100)
-    : delay(d), min(0), max(0)
-    , normal_surface(surf)
+    : delay(d)
+    , normal(surf)
   { }
   SpriteFrameCache(const SpriteFrameCache& other)
     : delay(other.delay)
-    , normal_surface(other.normal_surface)
-  {
-    SetCaches(other.flipped_surface.IsNull(),
-              other.rotated_surface.size(), other.min, other.max);
-  }
-
-  ~SpriteFrameCache()
-  {
-    rotated_surface.clear();
-    rotated_flipped_surface.clear();
-    normal_surface.Free();
-    flipped_surface.Free();
-  }
+    , normal(other.normal)
+    , flipped(other.flipped)
+  { }
 
   void SetCaches(bool flipped, uint rotation_num, Double min, Double max);
-  uint GetDelay() const { return delay; }
-  void SetDelay(uint d) { delay = d; }
 };
 
 class SpriteCache : public std::vector<SpriteFrameCache>
@@ -117,7 +121,7 @@ public:
   void SetDelay(uint delay)
   {
     for (uint i=0; i<size(); i++)
-      at(i).SetDelay(delay);
+      operator[](i).delay = delay;
   }
 
   void FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y);
