@@ -106,7 +106,7 @@ Weapon::Weapon(Weapon_type type,
 
   if (drawable) {
     m_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile, m_id));
-    m_image->EnableCaches(use_flipping);
+    m_image->EnableCaches(use_flipping, 0);
   }
 
   icon = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_ico"));
