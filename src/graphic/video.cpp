@@ -43,14 +43,14 @@ Video::Video()
 
 #ifdef WIN32
   // The SDL manual of SDL_WM_SetIcon states that "Win32 icons must be 32x32.":
-  icon = IMG_Load((config->GetDataDir() + "wormux_32x32.xpm").c_str());
+  icon = IMG_Load((config->GetDataDir() + "warmux_32x32.xpm").c_str());
 #elif !defined(ANDROID)
   // The icon must be larger then 32x32 pixels as some desktops display
   // larger icons. For example on a mac system, the icon is displayed
   // in a resolution of 64x64 pixels.
   // The even higher resolution allows the system to scale the icon down
   // to an anti-aliased version.
-  icon = IMG_Load((config->GetDataDir() + "wormux_128x128.xpm").c_str());
+  icon = IMG_Load((config->GetDataDir() + "warmux_128x128.xpm").c_str());
 #endif
   // SDL_WM_SetIcon must be called before the first call to SDL_SetVideoMode
 #ifndef MAEMO
@@ -78,7 +78,7 @@ Video::Video()
   }
   AddUniqueConfigSorted(window.GetWidth(), window.GetHeight());
 
-  SetWindowCaption(std::string("Wormux ") + Constants::WARMUX_VERSION);
+  SetWindowCaption(std::string("Warmux ") + Constants::WARMUX_VERSION);
 }
 
 Video::~Video()

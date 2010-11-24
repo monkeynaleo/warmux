@@ -48,7 +48,7 @@
  *
  * A comment is a line begined with a '#' char.
  *
- * When wormux is launched, there is a menu playlist and a ingame playlist.
+ * When warmux is launched, there is a menu playlist and a ingame playlist.
  * At startup of a playlist, a random music is selected, after that, at the end
  * of the current music, we play the next music in list. If this is the last
  * music, we go back to the first music...

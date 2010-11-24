@@ -27,8 +27,8 @@
 #include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
-const std::string WORMUX_NETWORK_PORT = "3826";
-const uint WORMUX_NETWORK_PORT_INT = 3826;
+const std::string WARMUX_NETWORK_PORT = "3826";
+const uint WARMUX_NETWORK_PORT_INT = 3826;
 
 typedef enum
 {

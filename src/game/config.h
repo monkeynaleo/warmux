@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Configuration of Wormux : store game config of every tunable variable of Wormux.
+ * Configuration of Warmux : store game config of every tunable variable of Warmux.
  * Vars have a default value and can be change with the file configuration.
  * This object aims to become the only place where the XML is read and/or
  * written. It is handled as a singleton pattern whereas one doesn't really
