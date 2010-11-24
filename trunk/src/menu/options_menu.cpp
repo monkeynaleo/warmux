@@ -503,13 +503,13 @@ bool OptionMenu::signal_cancel()
 void OptionMenu::CheckUpdates()
 {
   if (!Config::GetInstance()->GetCheckUpdates()
-      || Constants::WORMUX_VERSION.find("svn") != std::string::npos)
+      || Constants::WARMUX_VERSION.find("svn") != std::string::npos)
     return;
 
   Downloader *dl = Downloader::GetInstance();
   std::string latest_version;
   if (dl->GetLatestVersion(latest_version)) {
-      const char  *cur_version   = Constants::GetInstance()->WORMUX_VERSION.c_str();
+      const char  *cur_version   = Constants::GetInstance()->WARMUX_VERSION.c_str();
       if (latest_version != cur_version) {
         Question new_version;
         std::string txt = Format(_("A new version %s is available, while your version is %s. "

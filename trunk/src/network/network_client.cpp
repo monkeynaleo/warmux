@@ -83,7 +83,7 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   // 1) Send the version number
   MSG_DEBUG("network", "Client: sending version number");
 
-  if (!server_socket.SendStr(Constants::WORMUX_VERSION))
+  if (!server_socket.SendStr(Constants::WARMUX_VERSION))
     goto error;
 
   // is it ok ?
@@ -92,10 +92,10 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
 
   MSG_DEBUG("network", "Client: server version number is %s", version.c_str());
 
-  if (Constants::WORMUX_VERSION != version) {
+  if (Constants::WARMUX_VERSION != version) {
     std::string str = Format(_("The client and server versions are incompatible "
                                "(local=%s, server=%s). Please try another server."),
-                             Constants::WORMUX_VERSION.c_str(), version.c_str());
+                             Constants::WARMUX_VERSION.c_str(), version.c_str());
     AppWarmux::DisplayError(str);
     goto error;
   }

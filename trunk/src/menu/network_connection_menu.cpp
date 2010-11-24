@@ -116,7 +116,7 @@ static int RefreshNetInfo(void *)
   MSG_DEBUG("network.refresh_games_list", "Begin");
 
   // Connect to the index server
-  connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
+  connection_state_t conn = IndexServer::GetInstance()->Connect(Constants::WARMUX_VERSION);
   if (conn != CONNECTED) {
     SDL_SemWait(net_info.lock);
     net_info.index_conn_state = conn;
@@ -470,7 +470,7 @@ bool NetworkConnectionMenu::HostingServer(const std::string& port,
   if (internet) {
     SDL_SemWait(net_info.lock);
 
-    conn = IndexServer::GetInstance()->Connect(Constants::WORMUX_VERSION);
+    conn = IndexServer::GetInstance()->Connect(Constants::WARMUX_VERSION);
     if (conn != CONNECTED) {
       DisplayNetError(conn);
       msg_box->NewMessage(_("Error: Unable to contact the index server to host a game"), c_red);

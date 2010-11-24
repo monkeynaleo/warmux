@@ -64,7 +64,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-static const std::string WORMUX_VERSION = PACKAGE_VERSION;
+static const std::string WARMUX_VERSION = PACKAGE_VERSION;
 
 bool WNet::sdlnet_initialized = false;
 
@@ -303,10 +303,10 @@ bool WNet::Server_HandShake(WSocket& client_socket,
   if (!client_socket.ReceiveStr(version, 40))
     goto error;
 
-  if (!client_socket.SendStr(WORMUX_VERSION))
+  if (!client_socket.SendStr(WARMUX_VERSION))
     goto error;
 
-  if (WORMUX_VERSION != version) {
+  if (WARMUX_VERSION != version) {
     std::cerr << "Client disconnected: wrong version " << version.c_str()
              << std::endl;
     goto error;

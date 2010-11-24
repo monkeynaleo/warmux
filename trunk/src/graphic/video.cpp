@@ -78,7 +78,7 @@ Video::Video()
   }
   AddUniqueConfigSorted(window.GetWidth(), window.GetHeight());
 
-  SetWindowCaption(std::string("Wormux ") + Constants::WORMUX_VERSION);
+  SetWindowCaption(std::string("Wormux ") + Constants::WARMUX_VERSION);
 }
 
 Video::~Video()

@@ -176,7 +176,7 @@ void AppWarmux::DisplayLoadingPicture()
   Config *config = Config::GetInstance();
 
   std::string txt_version =
-    _("Version") + std::string(" ") + Constants::WORMUX_VERSION;
+    _("Version") + std::string(" ") + Constants::WARMUX_VERSION;
   std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "background_loading.jpg";
 
   Surface surfaceLoading(filename.c_str());
@@ -323,7 +323,7 @@ void AppWarmux::EmergencyExit()
 
 void DisplayWelcomeMessage()
 {
-  std::cout << "=== " << _("Wormux version ") << Constants::WORMUX_VERSION << std::endl;
+  std::cout << "=== " << _("Wormux version ") << Constants::WARMUX_VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
   for (std::vector < std::string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
@@ -337,7 +337,7 @@ void DisplayWelcomeMessage()
     << std::endl;
 
   // print the disclaimer
-  std::cout << "Wormux version " << Constants::WORMUX_VERSION
+  std::cout << "Wormux version " << Constants::WARMUX_VERSION
     << ", Copyright (C) 2001-2010 Warmux Team" << std::endl
     << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
     << "This is free software and you are welcome to redistribute it" << std::endl
