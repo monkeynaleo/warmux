@@ -64,16 +64,16 @@ public:
 
   SpriteFrameCache(uint d = 100) { delay = d; }
   SpriteFrameCache(const Surface& surf, uint d = 100)
-    : normal_surface(surf)
-    , delay(d)
+    : delay(d)
+    , normal_surface(surf)
   { }
   SpriteFrameCache(const SpriteFrameCache& other)
     : delay(other.delay)
     , min(other.min), max(other.max)
-    , normal_surface(other.normal_surface)
-    , flipped_surface(other.flipped_surface)
     , rotated_surface(other.rotated_surface)
     , rotated_flipped_surface(other.rotated_flipped_surface)
+    , normal_surface(other.normal_surface)
+    , flipped_surface(other.flipped_surface)
   { }
 
   ~SpriteFrameCache()
