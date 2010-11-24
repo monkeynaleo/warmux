@@ -31,11 +31,17 @@ void SpriteFrameCache::SetCaches(bool flipped, uint rotation_num, Double mini, D
 
   ASSERT(!normal_surface.IsNull());
   rotated_surface.clear();
-  rotated_surface.resize(rotation_num);
+  if (rotation_num) {
+    rotated_surface.resize(rotation_num);
+    rotated_surface[0] = normal_surface;
+  }
   if (flipped) {
     flipped_surface = normal_surface.Mirror();
     rotated_flipped_surface.clear();
-    rotated_flipped_surface.resize(rotation_num);
+    if (rotation_num) {
+      rotated_flipped_surface.resize(rotation_num);
+      rotated_flipped_surface[0] = flipped_surface;
+    }
   }
 }
 
