@@ -85,7 +85,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   m_time_between_each_shot = SUBMACHINE_TIME_BETWEEN_SHOOT;
 
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
-  m_weapon_fire->EnableRotationCache(32);
+  m_weapon_fire->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
 
   shoot_started = false;
 

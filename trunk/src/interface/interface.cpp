@@ -63,10 +63,6 @@ void Interface::LoadDataInternal(Profile *res)
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
-    // Scaling can't be fixed, as a change in video resolution may require
-    // scaling again. Therefore, enable last frame cache.
-    clock_normal->EnableLastFrameCache();
-    clock_emergency->EnableLastFrameCache();
   }
   else {
     zoom            = 1.0f;

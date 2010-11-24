@@ -56,8 +56,6 @@ void CheckBox::Init(uint width)
   m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
   GetResourceManager().UnLoadXMLProfile(res);
 
-  m_checked_image->EnableLastFrameCache();
-
   position = Point2i(W_UNDEF, W_UNDEF);
   size.x = width;
   size.y = Text::GetHeight();
