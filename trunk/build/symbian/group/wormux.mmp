@@ -15,9 +15,8 @@ SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5\stl
 SYSTEMINCLUDE   \epoc32\include\stdapis\libxml2
 SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
-SYSTEMINCLUDE   ..\..\..\lib\wormux\include
+SYSTEMINCLUDE   ..\..\..\lib\warmux\include
 SYSTEMINCLUDE   ..\..\..\lib\fixedpoint
-
 
 USERINCLUDE   ..\..\..\src
 
@@ -32,7 +31,7 @@ SOURCE body.cpp body_list.cpp character.cpp clothe.cpp damage_stats.cpp member.c
 SOURCEPATH ..\..\..\src\game
 SOURCE config.cpp game.cpp game_blitz.cpp game_classic.cpp game_mode.cpp stopwatch.cpp time.cpp
 SOURCEPATH ..\..\..\src\graphic
-SOURCE color.cpp composite_shape.cpp effects.cpp font.cpp fps.cpp polygon.cpp polygon_generator.cpp sprite.cpp spriteanimation.cpp spritecache.cpp spriteframe.cpp surface.cpp text.cpp text_list.cpp video.cpp
+SOURCE color.cpp composite_shape.cpp font.cpp fps.cpp polygon.cpp polygon_generator.cpp sprite.cpp spriteanimation.cpp spritecache.cpp surface.cpp text.cpp text_list.cpp video.cpp
 SOURCEPATH ..\..\..\src\gui
 SOURCE abstract_spin_button.cpp
 SOURCEPATH ..\..\..\src\gui\big
@@ -69,17 +68,21 @@ SOURCEPATH ..\src
 SOURCE joystick.cpp
 
 LIBRARY         libc.lib libm.lib
-LIBRARY         euser.lib
 LIBRARY         libz.lib
 
-LIBRARY	        sdl.lib
-LIBRARY	        sdlexe.lib
+LIBRARY         euser.lib fbscli.lib ws32.lib  gdi.lib
+LIBRARY         mediaclientaudiostream.lib
+LIBRARY         avkon.lib efsrv.lib bafl.lib apparc.lib
+LIBRARY         eikcore.lib cone.lib bitgdi.lib scdv.lib
+LIBRARY         hal.lib remconinterfacebase.lib remconcoreapi.lib
+LIBRARY         centralrepository.lib apgrfx.lib
 
+STATICLIBRARY   SDL_mixer.lib
+STATICLIBRARY   sdl.lib
 STATICLIBRARY   wormux_lib.lib
 STATICLIBRARY   SDL_net.lib
 STATICLIBRARY   sdl_gfx.lib
 STATICLIBRARY   sdl_image.lib
-STATICLIBRARY   SDL_mixer.lib
 STATICLIBRARY   SDL_ttf.lib
 STATICLIBRARY   libpng-1_2.lib
 STATICLIBRARY   abiv2_libjpeg-6.lib
@@ -94,17 +97,17 @@ FIRSTLIB        ../udeb/libstdcppv5.lib
 STATICLIBRARY   eexe.lib
 #endif
 
-STATICLIBRARY   sdlmain.lib
-
 //This is required even if the wchar type is not used.
 OPTION CW -wchar_t on
 MACRO  _WCHAR_T_DECLARED
 
 EPOCSTACKSIZE 0x10000
-EPOCHEAPSIZE 1000000 64000000
+EPOCHEAPSIZE 1000000 96000000
 
 SOURCEPATH .
 START RESOURCE ../res/wormux_reg.rss
 TARGETPATH \private\10003a3f\apps
 END
-CAPABILITY ReadUserData WriteUserData
+CAPABILITY NetworkServices ReadUserData WriteUserData
+
+ALWAYS_BUILD_AS_ARM
