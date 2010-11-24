@@ -1,5 +1,5 @@
 
-TARGET            wormux.exe
+TARGET            warmux.exe
 TARGETTYPE        exe
 UID               0 0xECF75E71
 
@@ -79,7 +79,7 @@ LIBRARY         centralrepository.lib apgrfx.lib
 
 STATICLIBRARY   SDL_mixer.lib
 STATICLIBRARY   sdl.lib
-STATICLIBRARY   wormux_lib.lib
+STATICLIBRARY   warmux_lib.lib
 STATICLIBRARY   SDL_net.lib
 STATICLIBRARY   sdl_gfx.lib
 STATICLIBRARY   sdl_image.lib

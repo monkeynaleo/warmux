@@ -3,5 +3,5 @@ PRJ_PLATFORMS
 DEFAULT GCCE
 
 PRJ_MMPFILES
-wormux.mmp
-wormux_lib.mmp
+warmux.mmp
+warmux_lib.mmp
