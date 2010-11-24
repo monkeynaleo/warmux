@@ -75,7 +75,7 @@ void FireParticle::Refresh()
     m_left_time_to_live = 0;
 
   Double scale = (now - creation_time)/(Double)living_time;
-  scale = ONE - scale;
+  scale = (scale > ONE) ? ZERO : ONE - scale;
   image->Scale(scale, scale);
 
   if (image->GetSize().x != 0 && image->GetSize().y != 0) {
@@ -104,7 +104,7 @@ void FireParticle::Refresh()
     }
 
     Double angle = cos((((now + oscil_delta) % 1000)/(Double)500.0) * PI) * ONE_HALF; // 0.5 is arbirtary
-    image->SetRotation_rad( angle);
+    image->SetRotation_rad(angle);
   } else {
     image->SetRotation_rad(GetSpeedAngle() - HALF_PI);
   }
@@ -116,7 +116,7 @@ void FireParticle::Draw()
 {
   Point2i draw_pos = GetPosition();
   draw_pos.y += GetHeight()/2;
-  image->Draw( draw_pos );
+  image->Draw(draw_pos);
 }
 
 void FireParticle::SignalDrowning()
