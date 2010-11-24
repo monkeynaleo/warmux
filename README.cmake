@@ -97,4 +97,4 @@ Problems:
 On problems with CMake remove the CMakeCache.txt files and CMakeFiles/
 directories manually and call "cmake ." again.
 If there are still problems, contact the Warmux Development Team by
-email to <warmux-dev@gna.org> or via IRC at #wormux in Freenode.
+email to <warmux-dev@gna.org> or via IRC at #warmux in Freenode.

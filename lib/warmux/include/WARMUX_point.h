@@ -36,4 +36,4 @@ static inline Point2f P2D_TO_P2F(const Point2d& p)
   return Point2f(p.GetX().tofloat(), p.GetY().tofloat());
 }
 
-#endif // WORMUX_POINT_H
+#endif // WARMUX_POINT_H

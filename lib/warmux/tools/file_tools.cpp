@@ -226,9 +226,9 @@ std::string GetHome() { return "."; }
 std::string GetOldPersonalDir() { return ""; }
 std::string GetTmpDir() { return "."; }
 #  elif defined(GEKKO) // Wii
-std::string GetHome() { return "sd:/apps/Wormux"; }
+std::string GetHome() { return "sd:/apps/Warmux"; }
 std::string GetOldPersonalDir() { return ""; }
-std::string GetTmpDir() { return "sd:/apps/Wormux"; }
+std::string GetTmpDir() { return "sd:/apps/Warmux"; }
 #  elif defined(__SYMBIAN32__)
 std::string GetHome() { return "."; }
 std::string GetOldPersonalDir() { return "."; }

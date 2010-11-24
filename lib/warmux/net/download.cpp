@@ -175,9 +175,9 @@ static ssize_t getline(std::string& line, FILE* file)
 
 bool Downloader::GetLatestVersion(std::string& line)
 {
-  static const char url[] = "http://www.wormux.org/last";
+  static const char url[] = "http://www.warmux.org/last";
   int fd;
-  const std::string last_file = CreateTmpFile("wormux_version", &fd);
+  const std::string last_file = CreateTmpFile("warmux_version", &fd);
 
   if (fd == -1) {
     error = Format(_("Fail to create temporary file: %s"), strerror(errno));
@@ -216,9 +216,9 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  const std::string list_url = "http://www.wormux.org/" + list_name;
+  const std::string list_url = "http://www.warmux.org/" + list_name;
   int fd;
-  const std::string server_file = CreateTmpFile("wormux_servers", &fd);
+  const std::string server_file = CreateTmpFile("warmux_servers", &fd);
 
   if (fd == -1) {
     error = Format(_("Fail to create temporary file: %s"), strerror(errno));
