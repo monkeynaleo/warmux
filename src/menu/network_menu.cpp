@@ -435,7 +435,7 @@ void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
   AppWarmux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
-                                                     Constants::WORMUX_VERSION + " - " +
+                                                     Constants::WARMUX_VERSION + " - " +
                                                      _("Master mode"));
   mode_label->SetText(_("Master mode"));
   connected_players->SetVisible(true);

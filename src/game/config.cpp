@@ -574,7 +574,7 @@ bool Config::SaveXml(bool save_current_teams)
 
   doc.Create(m_filename, "config", "1.0", "utf-8");
   xmlNode *root = doc.GetRoot();
-  doc.WriteElement(root, "version", Constants::WORMUX_VERSION);
+  doc.WriteElement(root, "version", Constants::WARMUX_VERSION);
 
   //=== Map ===
   //The map name is modified when the player validate its choice in the

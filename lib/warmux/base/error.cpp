@@ -35,7 +35,7 @@
 #  include <unistd.h>
 #endif
 
-static const std::string WORMUX_VERSION = PACKAGE_VERSION;
+static const std::string WARMUX_VERSION = PACKAGE_VERSION;
 
 void WakeUpDebugger()
 {
@@ -61,7 +61,7 @@ static std::string FormatError(const char *filename, unsigned int line,
                                const std::string &txt)
 {
   return Format(_("Error in %s:%lu (Wormux %s) : %s"),
-                filename, line, WORMUX_VERSION.c_str(), txt.c_str());
+                filename, line, WARMUX_VERSION.c_str(), txt.c_str());
 }
 
 void TriggerWarning(const char *filename, unsigned int line,

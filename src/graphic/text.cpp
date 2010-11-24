@@ -80,7 +80,7 @@ void Text::LoadXMLConfiguration(XmlReader * xmlFile,
   std::string xmlText("Text not found");
   xmlFile->ReadStringAttr(textNode, "text", xmlText);
   if ("%VERSION%" == xmlText) {
-    xmlText = Constants::WORMUX_VERSION;
+    xmlText = Constants::WARMUX_VERSION;
   } else if ("%WEB_SITE%" == xmlText) {
     xmlText = Constants::WEB_SITE;
   }
