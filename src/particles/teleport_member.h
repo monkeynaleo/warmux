@@ -23,7 +23,7 @@
 #define TELEPORT_MEMBER_H
 #include "particles/particle.h"
 
-const int teleportation_anim_duration = 1000;
+#define TELEPORTATION_ANIM_DURATION 1000
 
 class TeleportMemberParticle : public Particle
 {
@@ -32,8 +32,9 @@ class TeleportMemberParticle : public Particle
   Point2i start;
   Double sin_x_max;
   Double sin_y_max;
- public:
-  TeleportMemberParticle(Sprite& spr, const Point2i& position, const Point2i& dest, int direction);
+
+public:
+  TeleportMemberParticle(Sprite& spr, const Point2i& position, const Point2i& dest);
   ~TeleportMemberParticle();
   void Refresh();
 };
