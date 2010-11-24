@@ -1,8 +1,8 @@
 SUBDIRS = .
 
-noinst_LIBRARIES = libwormux-server.a
+noinst_LIBRARIES = libwarmux-server.a
 
-libwormux_server_a_SOURCES = \
+libwarmux_server_a_SOURCES = \
 	./include/WSERVER_config.h \
 	./include/WSERVER_clock.h \
 	./include/WSERVER_env.h \

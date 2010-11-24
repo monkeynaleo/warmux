@@ -1,8 +1,8 @@
 SUBDIRS = .
 
-noinst_LIBRARIES = libwormux.a
+noinst_LIBRARIES = libwarmux.a
 
-libwormux_a_SOURCES = \
+libwarmux_a_SOURCES = \
 	./include/WARMUX_action.h \
 	./include/WARMUX_action_handler.h \
 	./include/WARMUX_debug.h \
