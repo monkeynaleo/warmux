@@ -48,8 +48,8 @@ typedef enum {
 
 class Sprite
 {
-  bool smooth;
   bool fixed;
+  bool flipped;
 
   SpriteCache cache;
 
@@ -92,14 +92,6 @@ public:
 
   // Access current frame
   uint GetCurrentDelay() const { return cache[current_frame].GetDelay(); }
-
-  // Antialiasing
-  void SetAntialiasing(bool on)
-  {
-    smooth = on;
-    InvalidLastFrame();
-  }
-  bool IsAntialiased() const { return smooth; };
 
   // Size
   uint GetWidth() const
@@ -147,6 +139,8 @@ public:
 
   void Scale(Double _scale_x, Double _scale_y)
   {
+    ASSERT(_scale_x);
+    ASSERT(_scale_y);
     if ((scale_x==_scale_x && _scale_y==scale_y) || fixed)
       return;
     scale_x = _scale_x;
@@ -194,6 +188,11 @@ public:
   void EnableCaches(bool flipped, uint num=0, const Double& min=ZERO, const Double& max=TWO_PI)
   {
     cache.EnableCaches(flipped, num, min, max);
+  }
+  void SetFlipped(bool f)
+  {
+    ASSERT(!f || cache.HasFlippedCache());
+    flipped = f;
   }
 
   // Show flag
