@@ -26,15 +26,13 @@
 #include "graphic/sprite.h"
 #include "map/camera.h"
 
-TeleportMemberParticle::TeleportMemberParticle(Sprite& spr, const Point2i& position, const Point2i& dest, int direction) :
+TeleportMemberParticle::TeleportMemberParticle(Sprite& spr, const Point2i& position, const Point2i& dest) :
   Particle("teleport_member_particle")
 {
   SetCollisionModel(false, false, false);
   image = new Sprite(spr.GetSurface());
 
-  image->SetFlipped(direction == -1);
-
-  ASSERT(image->GetWidth() != 0 && image->GetHeight()!=0);
+  ASSERT(image->GetWidth() && image->GetHeight());
   SetXY(position);
   m_left_time_to_live = 1;
 
@@ -60,14 +58,14 @@ TeleportMemberParticle::~TeleportMemberParticle()
 void TeleportMemberParticle::Refresh()
 {
   uint now = Time::GetInstance()->Read();
-  if(now > time + teleportation_anim_duration)
+  if (now > time + TELEPORTATION_ANIM_DURATION)
     m_left_time_to_live = 0;
 
   uint dt = now - time;
-  Point2i dpos;
-  dpos.x = (int)((destination.x - start.x) * sin((Double)dt * sin_x_max / (Double)teleportation_anim_duration) / sin(sin_x_max))/* * dt / teleportation_anim_duration*/;
-  dpos.y = (int)((destination.y - start.y) * sin((Double)dt * sin_y_max / (Double)teleportation_anim_duration) / sin(sin_y_max))/* * dt / teleportation_anim_duration*/;
+  Point2i dpos = destination - start;
+  dpos.x = dpos.x * sin(dt*sin_x_max / TELEPORTATION_ANIM_DURATION) / sin(sin_x_max);
+  dpos.y = dpos.y * sin(dt*sin_y_max / TELEPORTATION_ANIM_DURATION) / sin(sin_y_max);
 
-  SetXY( start + dpos );
+  SetXY(start + dpos);
   image->Update();
 }
