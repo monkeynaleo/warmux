@@ -49,8 +49,6 @@ wormux_SOURCES = \
         graphic/colors.h \
         graphic/composite_shape.cpp \
         graphic/composite_shape.h \
-        graphic/effects.cpp \
-        graphic/effects.h \
         graphic/fading_effect.h \
         graphic/font.cpp \
         graphic/font.h \
