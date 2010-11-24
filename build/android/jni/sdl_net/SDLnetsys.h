@@ -23,6 +23,9 @@
 /* $Id: SDLnetsys.h 1720 2005-11-23 07:57:10Z icculus $ */
 
 /* Include normal system headers */
+#ifdef __SYMBIAN32__
+#include <sys/select.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
