@@ -236,7 +236,7 @@ bool Video::SetConfig(const int width, const int height, const bool _fullscreen)
 
   // refresh all the map when switching to higher resolution
   if (!window_was_null)
-    AppWormux::GetInstance()->RefreshDisplay();
+    AppWarmux::GetInstance()->RefreshDisplay();
 
   return r;
 }
@@ -248,7 +248,7 @@ void Video::ToggleFullscreen()
   fullscreen = !fullscreen;
 #else
   SetConfig(window.GetWidth(), window.GetHeight(), !fullscreen);
-  AppWormux::GetInstance()->RefreshDisplay();
+  AppWarmux::GetInstance()->RefreshDisplay();
 #endif
 }
 
@@ -303,10 +303,10 @@ bool Video::SaveScreenshot()
 
 Surface& GetMainWindow()
 {
-  return AppWormux::GetInstance()->video->window;
+  return AppWarmux::GetInstance()->video->window;
 }
 
 void SwapWindowClip(Rectanglei& r)
 {
-  AppWormux::GetInstance()->video->window.SwapClipRect(r);
+  AppWarmux::GetInstance()->video->window.SwapClipRect(r);
 }

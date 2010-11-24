@@ -77,7 +77,7 @@ int Question::TreatsKey (const SDL_Event &evnt){
 
 void Question::Draw() const
 {
-  AppWormux * app = AppWormux::GetInstance();
+  AppWarmux * app = AppWarmux::GetInstance();
 
   Point2i icon_size(0,0);
   Point2i icon_border(0,0);
@@ -101,7 +101,7 @@ void Question::Draw() const
     top_corner = app->video->window.GetSize() / 2 - rect_size / 2;
     rect = Rectanglei(top_corner, rect_size);
 
-    AppWormux * appli = AppWormux::GetInstance();
+    AppWarmux * appli = AppWarmux::GetInstance();
 
     appli->video->window.BoxColor(rect, defaultColorBox);
     appli->video->window.RectangleColor(rect, defaultColorRect);
@@ -138,7 +138,7 @@ int Question::Ask(bool onKeyUp)
       }
 
       // We might be put inactive while there
-      AppWormux::CheckInactive(evnt);
+      AppWarmux::CheckInactive(evnt);
 
       if ((onKeyUp && evnt.type == SDL_KEYUP) || evnt.type == SDL_KEYDOWN) {
         answer = TreatsKey(evnt);
@@ -154,10 +154,10 @@ int Question::Ask(bool onKeyUp)
       SDL_Delay(50);
     }
 
-    AppWormux::GetInstance()->video->Flip();
+    AppWarmux::GetInstance()->video->Flip();
   } while (!end);
 
-  AppWormux::GetInstance()->RefreshDisplay();
+  AppWarmux::GetInstance()->RefreshDisplay();
   Mouse::GetInstance()->SetPointer(prev_pointer);
 
   return answer;

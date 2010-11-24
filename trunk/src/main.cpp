@@ -59,17 +59,17 @@ static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
 static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_NOTHING;
 
-AppWormux *AppWormux::singleton = NULL;
+AppWarmux *AppWarmux::singleton = NULL;
 
-AppWormux *AppWormux::GetInstance()
+AppWarmux *AppWarmux::GetInstance()
 {
   if (!singleton) {
-    singleton = new AppWormux();
+    singleton = new AppWarmux();
   }
   return singleton;
 }
 
-AppWormux::AppWormux():
+AppWarmux::AppWarmux():
   video(new Video()),
   menu(NULL)
 {
@@ -77,7 +77,7 @@ AppWormux::AppWormux():
   std::cout << "[ " << _("Run game") << " ]" << std::endl;
 }
 
-AppWormux::~AppWormux()
+AppWarmux::~AppWarmux()
 {
   delete video;
   ParticleEngine::FreeMem();
@@ -86,7 +86,7 @@ AppWormux::~AppWormux()
   singleton = NULL;
 }
 
-int AppWormux::Main(void)
+int AppWarmux::Main(void)
 {
   bool quit = false;
 
@@ -171,7 +171,7 @@ int AppWormux::Main(void)
   return 0;
 }
 
-void AppWormux::DisplayLoadingPicture()
+void AppWarmux::DisplayLoadingPicture()
 {
   Config *config = Config::GetInstance();
 
@@ -201,7 +201,7 @@ void AppWormux::DisplayLoadingPicture()
   video->window.Flip();
 }
 
-void AppWormux::RefreshDisplay()
+void AppWarmux::RefreshDisplay()
 {
   if (Game::IsRunning()) {
     if (Game::GetCurrentMenu()) {
@@ -217,7 +217,7 @@ void AppWormux::RefreshDisplay()
   }
 }
 
-void AppWormux::DisplayError(const std::string &msg)
+void AppWarmux::DisplayError(const std::string &msg)
 {
   std::cerr << msg << std::endl;
 
@@ -231,7 +231,7 @@ void AppWormux::DisplayError(const std::string &msg)
   }
 }
 
-void AppWormux::ReceiveMsgCallback(const std::string& msg, const Color& color)
+void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
   if (Game::IsRunning()) {
     if (Game::GetCurrentMenu()) {
@@ -245,7 +245,7 @@ void AppWormux::ReceiveMsgCallback(const std::string& msg, const Color& color)
   }
 }
 
-void AppWormux::End() const
+void AppWarmux::End() const
 {
   std::cout << std::endl << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
@@ -263,7 +263,7 @@ void AppWormux::End() const
     << " " << Constants::EMAIL << std::endl;
 }
 
-bool AppWormux::CheckInactive(SDL_Event& evnt)
+bool AppWarmux::CheckInactive(SDL_Event& evnt)
 {
 #ifdef MAEMO
   bool pause_all = true;
@@ -297,7 +297,7 @@ bool AppWormux::CheckInactive(SDL_Event& evnt)
 #ifdef MAEMO
   Osso::Process();
 #endif
-        if (evnt.type == SDL_QUIT) AppWormux::EmergencyExit();
+        if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
         if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
 #ifdef HAVE_HANDHELD
     JukeBox::GetInstance()->OpenDevice();
@@ -315,9 +315,9 @@ bool AppWormux::CheckInactive(SDL_Event& evnt)
   return false;
 }
 
-void AppWormux::EmergencyExit()
+void AppWarmux::EmergencyExit()
 {
-  delete AppWormux::GetInstance();
+  delete AppWarmux::GetInstance();
   exit(EXIT_SUCCESS);
 }
 
@@ -511,8 +511,8 @@ extern "C" int main(int argc, char *argv[])
   Osso::Init();
 #endif
 
-  AppWormux::GetInstance()->Main();
-  delete AppWormux::GetInstance();
+  AppWarmux::GetInstance()->Main();
+  delete AppWarmux::GetInstance();
   SDL_Quit();
   exit(EXIT_SUCCESS);
 }

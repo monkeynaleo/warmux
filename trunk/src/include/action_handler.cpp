@@ -240,7 +240,7 @@ static std::string NetErrorId_2_String(enum net_error error)
 static void Action_Network_Disconnect_On_Error(Action *a)
 {
   enum net_error error = (enum net_error)a->PopInt();
-  AppWormux::DisplayError(NetErrorId_2_String(error));
+  AppWarmux::DisplayError(NetErrorId_2_String(error));
   Network::Disconnect();
 }
 
@@ -259,7 +259,7 @@ static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
                            NetErrorId_2_String(error).c_str());
   std::cerr << str << std::endl;
   DisconnectOnError(error);
-  AppWormux::DisplayError(str);
+  AppWarmux::DisplayError(str);
 }
 
 static void Action_Network_Check_Phase2 (Action *a)
@@ -426,7 +426,7 @@ static void Action_ChatMessage(Action *a)
   const std::string& nickname = player->GetNickname();
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
-  AppWormux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color);
 }
 
 static void Action_AnnouncePause(Action *a)
@@ -434,7 +434,7 @@ static void Action_AnnouncePause(Action *a)
   DistantComputer * computer = a->GetCreator();
   std::string computer_name = computer->ToString();
   std::string message = Format(_("%s needs a pause."), computer_name.c_str());
-  AppWormux::GetInstance()->ReceiveMsgCallback(message, white_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(message, white_color);
 }
 
 static void _Action_SelectMap(Action *a)
@@ -871,7 +871,7 @@ static void _Info_ConnectHost(const std::string& hostname, const std::string& ni
     GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu)
     //Network Menu
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 
   if (Config::GetInstance()->GetWarnOnNewPlayer())
     JukeBox::GetInstance()->Play("default", "menu/newcomer");
@@ -986,7 +986,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
     GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu != NULL)
     //Network Menu
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 }
 
 // Used to notify clients that someone disconnected from the server

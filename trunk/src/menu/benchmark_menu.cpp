@@ -186,7 +186,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       }
 
       // Set max FPS
-      Video *video = AppWormux::GetInstance()->video;
+      Video *video = AppWarmux::GetInstance()->video;
       int fps = video->GetMaxFps(); video->SetMaxFps(60);
 
       // Set seeds - we'll set random ones afterwards

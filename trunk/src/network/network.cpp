@@ -314,7 +314,7 @@ Player * Network::LockRemoteHostsAndGetPlayer(uint player_id)
 void Network::Disconnect()
 {
   // restore Windows title
-  AppWormux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") + Constants::WORMUX_VERSION);
+  AppWarmux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") + Constants::WORMUX_VERSION);
 
   // Flush all actions
   ActionHandler::GetInstance()->Flush();
@@ -445,7 +445,7 @@ connection_state_t Network::ClientStart(const std::string& host,
   } else if (prev != NULL) {
     delete prev;
   }
-  AppWormux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") +
+  AppWarmux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") +
                                                     Constants::WORMUX_VERSION + " - " +
                                                     _("Client mode"));
   return error;
@@ -475,7 +475,7 @@ connection_state_t Network::ServerStart(const std::string& port, const std::stri
   }
 
   if (error == CONNECTED) {
-    AppWormux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") +
+    AppWarmux::GetInstance()->video->SetWindowCaption(std::string("Wormux ") +
                                                       Constants::WORMUX_VERSION + " - " +
                                                       _("Server mode"));
   }

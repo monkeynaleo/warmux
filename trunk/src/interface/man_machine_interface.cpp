@@ -146,7 +146,7 @@ void ManMachineInterface::HandleKeyPressed(const Key_t &key)
         return;
       break;
     case KEY_SCREENSHOT:
-      AppWormux::GetInstance()->video->SaveScreenshot();
+      AppWarmux::GetInstance()->video->SaveScreenshot();
       return;
     default:
       // key not supported
@@ -217,7 +217,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
       Game::GetInstance()->UserAsksForMenu();
       return;
     case KEY_FULLSCREEN:
-      AppWormux::GetInstance()->video->ToggleFullscreen();
+      AppWarmux::GetInstance()->video->ToggleFullscreen();
       return;
     case KEY_CHAT:
       if(Network::IsConnected())

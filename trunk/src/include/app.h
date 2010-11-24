@@ -30,16 +30,16 @@ class Menu;
 class Color;
 union SDL_Event;
 
-class AppWormux
+class AppWarmux
 {
 public:
   Video *video;
 
 private:
   Menu *menu;
-  static AppWormux * singleton;
+  static AppWarmux * singleton;
 
-  AppWormux();
+  AppWarmux();
   void InitWindow();
   void DisplayLoadingPicture();
   void DisplayWelcomeMessage() const;
@@ -51,8 +51,8 @@ public:
   void RefreshDisplay();
   static void DisplayError(const std::string &msg);
   void ReceiveMsgCallback(const std::string& msg, const Color& color);
-  static AppWormux * GetInstance();
-  ~AppWormux();
+  static AppWarmux * GetInstance();
+  ~AppWarmux();
   static void EmergencyExit();
 
   int Main(void);

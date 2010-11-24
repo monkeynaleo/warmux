@@ -339,7 +339,7 @@ void DrawTmpBoxText(Font& font, Point2i pos,
 
   Rectanglei rect( pos - size/2, size);
 
-  AppWormux * app = AppWormux::GetInstance();
+  AppWarmux * app = AppWarmux::GetInstance();
 
   app->video->window.BoxColor(rect, boxColor);
   app->video->window.RectangleColor(rect, rectColor);
