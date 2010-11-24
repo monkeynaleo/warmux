@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -134,7 +134,7 @@ bool Client::HandShake(const std::string & version)
   return false;
 }
 
-bool Client::RegisterWormuxServer()
+bool Client::RegisterWarmuxServer()
 {
   bool r;
   std::string game_name;
@@ -224,7 +224,7 @@ bool Client::HandleMsg(enum IndexServerMsg msg_id)
   switch(msg_id)
     {
     case TS_MSG_HOSTING:
-      r =  RegisterWormuxServer();
+      r =  RegisterWarmuxServer();
       break;
 
     case TS_MSG_GET_LIST:
@@ -362,8 +362,8 @@ bool Client::SendList()
 
 void Client::NotifyServers(bool joining)
 {
-  // Tell other index server that a new wormux server just registered
-  DPRINT(MSG, "Notify of a new wormux server...");
+  // Tell other index server that a new warmux server just registered
+  DPRINT(MSG, "Notify of a new warmux server...");
 
   for (std::multimap<std::string, Client*>::iterator serv = clients.lower_bound(sync_serv_version);
        serv != clients.upper_bound(sync_serv_version);

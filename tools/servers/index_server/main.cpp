@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@
 // map < version, client >
 std::multimap<std::string, Client*> clients;
 
-std::string config_file = "wormux_index_server.conf";
+std::string config_file = "warmux_index_server.conf";
 
 void printUsage(char *argv[])
 {
@@ -82,7 +82,7 @@ void parseArgs(int argc, char *argv[])
       break;
 
     case 'v':
-      printf("Wormux index server version %s\n", PACKAGE_VERSION);
+      printf("Warmux index server version %s\n", PACKAGE_VERSION);
       exit(EXIT_SUCCESS);
       break;
 
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 
   config.Load(config_file);
 
-  DPRINT(INFO, "Wormux index server version %i", VERSION);
+  DPRINT(INFO, "Warmux index server version %i", VERSION);
   DPRINT(INFO, "%s", wx_clock.DateStr());
 
   Env::SetConfigClass(config);

@@ -73,8 +73,8 @@ public:
 };
 
 // It's up to the program using class DistantComputer to define WORMUX_[Dis]connectHost();
-extern void WORMUX_ConnectHost(DistantComputer& cpu);
-extern void WORMUX_DisconnectHost(DistantComputer& cpu);
+extern void WARMUX_ConnectHost(DistantComputer& cpu);
+extern void WARMUX_DisconnectHost(DistantComputer& cpu);
 
 #endif
 

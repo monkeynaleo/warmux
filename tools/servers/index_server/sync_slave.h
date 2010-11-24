@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ class IndexServerConn : public NetData
   bool HandleMsg(enum IndexServerMsg msg_id);
 };
 
-// List that contains informations about wormux client/server connected
+// List that contains informations about warmux client/server connected
 // on other index servers
 class SyncSlave : public std::map<std::string, IndexServerConn*>
 {

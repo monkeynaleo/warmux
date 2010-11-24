@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
   if (optind - argc >= 0) {
     fprintf(stderr,
-	    "usage: wormux-list-games [OPTIONS] <version> [<version> ...]\n"
+	    "usage: warmux-list-games [OPTIONS] <version> [<version> ...]\n"
 	    "OPTIONS\n"
 	    "\t-n\t show numerical addresses instead of trying to determine symbolic host names\n");
     exit(EXIT_FAILURE);

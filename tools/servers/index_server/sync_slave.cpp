@@ -1,6 +1,6 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2010 Wormux Team.
+ *  Warmux is a convivial mass murder game.
+ *  Copyright (C) 2001-2010 Warmux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -204,9 +204,9 @@ bool IndexServerConn::HandleMsg(enum IndexServerMsg msg_id)
 
         if (BytesReceived() < 2*sizeof(uint32_t)) // The message is not completely received
           return true;
-        if (!ReceiveInt(ip)) // Receive the IP of the wormux server
+        if (!ReceiveInt(ip)) // Receive the IP of the warmux server
           return false;
-        if (!ReceiveInt(port)) // Receive the port of the wormux server
+        if (!ReceiveInt(port)) // Receive the port of the warmux server
           return false;
 
         if (port < 0) // means it disconnected

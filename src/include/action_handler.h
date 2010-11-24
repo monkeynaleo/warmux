@@ -61,9 +61,9 @@ void SyncCharacters();
 
 void SendInitialGameInfo(DistantComputer* client, int added_player_id);
 
-void WORMUX_ConnectHost(DistantComputer& host);
-void WORMUX_DisconnectHost(DistantComputer& host);
-void WORMUX_DisconnectPlayer(Player& player);
+void WARMUX_ConnectHost(DistantComputer& host);
+void WARMUX_DisconnectHost(DistantComputer& host);
+void WARMUX_DisconnectPlayer(Player& player);
 
 //-----------------------------------------------------------------------------
 #endif

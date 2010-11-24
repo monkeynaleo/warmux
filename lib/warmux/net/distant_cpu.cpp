@@ -33,7 +33,7 @@ DistantComputer::DistantComputer(WSocket* new_sock) :
   game_id(0),
   force_disconnection_called(false)
 {
-  WORMUX_ConnectHost(*this);
+  WARMUX_ConnectHost(*this);
 }
 
 DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname, uint _game_id, uint initial_player_id) :
@@ -44,7 +44,7 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname,
   Player theplayer(initial_player_id, nickname);
   players.push_back(theplayer);
 
-  WORMUX_ConnectHost(*this);
+  WARMUX_ConnectHost(*this);
 }
 
 DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname, uint initial_player_id) :
@@ -55,12 +55,12 @@ DistantComputer::DistantComputer(WSocket* new_sock, const std::string& nickname,
   Player theplayer(initial_player_id, nickname);
   players.push_back(theplayer);
 
-  WORMUX_ConnectHost(*this);
+  WARMUX_ConnectHost(*this);
 }
 
 DistantComputer::~DistantComputer()
 {
-  WORMUX_DisconnectHost(*this);
+  WARMUX_DisconnectHost(*this);
 
   // This will call the needed player->Disconnect() for each player
   players.clear();
