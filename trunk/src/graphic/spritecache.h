@@ -48,7 +48,7 @@ class SpriteSubframeCache
     while (angle < min)
       angle += TWO_PI;
     while (angle >= max)
-    angle -= TWO_PI;
+      angle -= TWO_PI;
     ASSERT(angle>=min && angle<max);
     return angle;
   }
