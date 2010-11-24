@@ -1,10 +1,10 @@
-// Wormux resource for win32 target
+// Warmux resource for win32 target
 
 #include <winver.h>
 #ifdef __MINGW32__
 # include <WARMUX_config.h>
 #else
-#  include "..\lib\wormux\include\config_visual.h"
+#  include "..\lib\warmux\include\config_visual.h"
 // Is build automatically by a pre-built event
 #  include "../visual/resource.h"
 #  define __VERSION__ "Visual Studio"
@@ -34,13 +34,13 @@ FILETYPE VFT_APP
         {
             VALUE "Comments","Localization support: " IS_NLS_ENABLED "."
             VALUE "CompanyName", "\000"
-            VALUE "FileDescription", "Wormux is a convivial mass murder game."
+            VALUE "FileDescription", "Warmux is a convivial mass murder game."
             VALUE "FileVersion", PACKAGE_VERSION
-            VALUE "InternalName", "wormux"
-            VALUE "LegalCopyright", "Copyright (C) 2001-2010 The Wormux Project"
+            VALUE "InternalName", "warmux"
+            VALUE "LegalCopyright", "Copyright (C) 2001-2010 The Warmux Project"
             //VALUE "LegalTrademarks", "test"
-            VALUE "OriginalFilename", "wormux.exe"
-            VALUE "ProductName", "wormux"
+            VALUE "OriginalFilename", "warmux.exe"
+            VALUE "ProductName", "warmux"
             VALUE "ProductVersion", PACKAGE_VERSION
             VALUE "SpecialBuild", "$Revision$, build on " __DATE__ ", " __TIME__ " with compiler version " __VERSION__
         }
@@ -51,4 +51,4 @@ FILETYPE VFT_APP
     }
 }
 
-IDI_ICON1 ICON DISCARDABLE "wormux.ico"
+IDI_ICON1 ICON DISCARDABLE "warmux.ico"
