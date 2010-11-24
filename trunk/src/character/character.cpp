@@ -396,6 +396,16 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
       JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_medium");
     else
       JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_high");
+
+    // If energy was lost, let's stop playing the idle animation
+    if (body->GetMovement().substr(0,9) == "animation"
+        || body->GetClothe().substr(0,9) == "animation") {
+      SetClothe("normal");
+      SetMovement("breathe");
+    }
+    // Delay a bit the occurrence of the animation
+    animation_time = Time::GetInstance()->Read()
+                   + (ANIM_PAUSE_MAX + ANIM_PAUSE_MIN)/2;
   } else
     lost_energy = 0;
 
