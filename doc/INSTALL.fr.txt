@@ -1,4 +1,4 @@
-Wormux 0.7
+Warmux 0.7
 Compilation/Installation sous Linux
 -----------------------------------
 
@@ -9,7 +9,7 @@ Compilation/Installation sous Linux
 * SDL
 -----
 
-Wormux nécessite la version 1.2 de la bibliothéque SDL. 
+Warmux nécessite la version 1.2 de la bibliothéque SDL. 
 Elle peut être obtenu sur le site web : 
   http://www.libsdl.org/
 
@@ -31,7 +31,7 @@ Vous pouvez télécharger ces bibliothéques sur :
 * libxml++
 ----------
 
-Wormux utilise la librairie libxml++ version 2.6.
+Warmux utilise la librairie libxml++ version 2.6.
 
 Sous Debian, pour l'installer, utilisez la commande :
   apt-get install libxml++2.6-dev
@@ -45,7 +45,7 @@ Site web :
 
 Sous Linux, il suffit de taper :
 
-$ ./autogen.sh                 # pour la version SubVersion de Wormux
+$ ./autogen.sh                 # pour la version SubVersion de Warmux
 $ ./configure
 $ make
 $ su -c "make install"         

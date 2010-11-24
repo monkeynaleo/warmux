@@ -1,4 +1,4 @@
-﻿Wormux 0.7
+﻿Warmux 0.7
 Kompilácia/Inštalácia pod Linuxom
 -----------------------------------
 
@@ -7,12 +7,12 @@ Kompilácia/Inštalácia pod Linuxom
 ============
 
 Ak nasledujúci software nie je v tvojom systéme, budeš si ho musieť stiahnuť
-pred pokusom o inštaláciu Wormuxu 0.5 na tvoj počítač...
+pred pokusom o inštaláciu Warmuxu 0.5 na tvoj počítač...
 
 * SDL
 -----
 
-Wormux potrebuje SDL knižnicu verzie 1.2.
+Warmux potrebuje SDL knižnicu verzie 1.2.
 
 Túto verziu môžeš stiahnuť z webstránky: http://www.libsdl.org/
 
@@ -20,10 +20,10 @@ Túto verziu môžeš stiahnuť z webstránky: http://www.libsdl.org/
 -------------------------------------------
 
 
-SDL je rozdelený do malých modulov. Wormux potrebuje mixer (zvuk), image (načítanie
+SDL je rozdelený do malých modulov. Warmux potrebuje mixer (zvuk), image (načítanie
 obrazového súboru), ttf (vykreslenie textu) a gfx (grafické veci).
 
-Môžeš mať problémy pri inštalácii SDL gfx: Wormux *potrebuje* verziu 2.0.13 alebo
+Môžeš mať problémy pri inštalácii SDL gfx: Warmux *potrebuje* verziu 2.0.13 alebo
 vyššiu. Stiahni ju a skompiluj.
 
 Tu sú ich web stránky:
@@ -35,7 +35,7 @@ Tu sú ich web stránky:
 * libxml++
 ----------
 
-Wormux používa libxml++ knižnicu verzie 2.6.
+Warmux používa libxml++ knižnicu verzie 2.6.
 
 Dostaneš ju tu: http://libxmlplusplus.sourceforge.net/
 
@@ -47,11 +47,11 @@ apt-get install libxml++2.6-dev
 * Kompilácia / Inštalácia
 =========================
 
-Pokial používaš SubVerziu verzie Wormuxu zadáš najprv:
+Pokial používaš SubVerziu verzie Warmuxu zadáš najprv:
 
     ./autogen.sh
 
-Pod Linuxom, zadaj Wormux adresár, potom jednoducho zadaj:
+Pod Linuxom, zadaj Warmux adresár, potom jednoducho zadaj:
 
 ./configure
 make
@@ -71,7 +71,7 @@ počiatočného konfiguraèného príkazu:
 * Uninstalling
 ==============
 
-Pre odinštalovanie Wormuxu, choï do zdrojového adresára, potom (ako root )zadaj:
+Pre odinštalovanie Warmuxu, choï do zdrojového adresára, potom (ako root )zadaj:
 
 make uninstall
 
@@ -85,7 +85,7 @@ najužitočnejšie (pre vývojárov, najmenej) býva:
 
 ./configure --enable-debug
 
-Toto ti dovolí skompilovať Wormuxa s debug nastavením, povolí ti vysliediť chyby/dalšie problémy.
+Toto ti dovolí skompilovať Warmuxa s debug nastavením, povolí ti vysliediť chyby/dalšie problémy.
 
 Pre zoznam všetkých ïalších konfiguračných nastavení, zadaj:
 

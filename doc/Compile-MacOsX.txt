@@ -26,24 +26,24 @@
 
     o   Tarball file
         -   Download it from as example :
-                +   http://svn.gna.org/daily/wormux-snapshot.tar.gz
-            or  +   http://wormux.org/wiki/fr/download.php
+                +   http://svn.gna.org/daily/warmux-snapshot.tar.gz
+            or  +   http://warmux.org/wiki/fr/download.php
         -   Expand it
         -   Go into the folder
     
     o   SVN (recommand for working on it)
         - install svn
-        - look at : https://gna.org/svn/?group=wormux
+        - look at : https://gna.org/svn/?group=warmux
         Checkout over SVN protocol (TCP 3690):
-            svn co svn://svn.gna.org/svn/wormux/trunk wormux
+            svn co svn://svn.gna.org/svn/warmux/trunk warmux
         Checkout over http:
-            svn co http://svn.gna.org/svn/wormux/trunk wormux
+            svn co http://svn.gna.org/svn/warmux/trunk warmux
 
     o   Download SDL Frameworks, (file download by cmake_build script),
     extract it and copy files into /Developer/Frameworks
 
 
-3) Compile Wormux :
+3) Compile Warmux :
 
     o   cd mac/
     o   ./cmake_build.sh
