@@ -60,7 +60,7 @@ void MissedAssertion(const char *filename, unsigned int line,
 static std::string FormatError(const char *filename, unsigned int line,
                                const std::string &txt)
 {
-  return Format(_("Error in %s:%lu (Wormux %s) : %s"),
+  return Format(_("Error in %s:%lu (Warmux %s) : %s"),
                 filename, line, WARMUX_VERSION.c_str(), txt.c_str());
 }
 
@@ -70,7 +70,7 @@ void TriggerWarning(const char *filename, unsigned int line,
   std::string err = FormatError(filename, line, txt);
   std::cerr << "! " << err << std::endl;
 #ifdef ANDROID
-  __android_log_print(ANDROID_LOG_WARN, "Wormux", err.c_str());
+  __android_log_print(ANDROID_LOG_WARN, "Warmux", err.c_str());
 #endif
 }
 
@@ -80,7 +80,7 @@ void TriggerError(const char *filename, unsigned int line,
   std::string err = FormatError(filename, line, txt);
   std::cerr << "! " << err << std::endl;
 #ifdef ANDROID
-  __android_log_print(ANDROID_LOG_FATAL, "Wormux", err.c_str());
+  __android_log_print(ANDROID_LOG_FATAL, "Warmux", err.c_str());
 #endif
 
   ASSERT(false);

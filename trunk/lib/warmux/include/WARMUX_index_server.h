@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Notify an index server of an opened wormux server
+ * Notify an index server of an opened warmux server
  * Obtain information about running games from an index server
  *****************************************************************************/
 
@@ -78,10 +78,10 @@ class IndexServer : public Singleton<IndexServer>
   bool GetServerAddress(std::string& address, int& port, uint& nb_tries);
   // Connect to a server
   connection_state_t ConnectTo(const std::string& address, const int& port,
-                               const std::string& wormux_version);
+                               const std::string& warmux_version);
 
   // Perform a handshake with the server
-  connection_state_t HandShake(const std::string& wormux_version);
+  connection_state_t HandShake(const std::string& warmux_version);
 
   void __Disconnect();
 
@@ -94,7 +94,7 @@ public:
   ~IndexServer();
 
   // Connect/disconnect to a server
-  connection_state_t Connect(const std::string& wormux_version);
+  connection_state_t Connect(const std::string& warmux_version);
   void Disconnect();
 
   bool IsConnected() const { return socket.IsConnected(); }

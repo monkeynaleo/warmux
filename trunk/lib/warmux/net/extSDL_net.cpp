@@ -90,7 +90,7 @@ static const int MAX_PACKET_SIZE = 4096;
 
 /******************************************************************************
  * The following code comes from XMoto
- * It has been fixed for Wormux:
+ * It has been fixed for Warmux:
  *    - handles of errno == EAGAIN
  *    - packets are splitted if bigger than MAX_PACKET_SIZE (may be needed for WIN32)
  ******************************************************************************/
@@ -157,7 +157,7 @@ int SDLNet_TCP_Send_noBlocking(TCPsocket sock, const void *datap, int len)
 }
 
 /******************************************************************************
- * The following code has been written especially for Wormux
+ * The following code has been written especially for Warmux
  ******************************************************************************/
 
 #if !defined(WIN32) && !defined(GEKKO)
