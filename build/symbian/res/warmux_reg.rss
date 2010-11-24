@@ -5,5 +5,5 @@ UID3 0xECF75E71
 
 RESOURCE APP_REGISTRATION_INFO
 	{
-	app_file = "wormux";
+	app_file = "warmux";
 	}

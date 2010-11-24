@@ -10,7 +10,7 @@
 &EN
 
 ; standard SIS file header
-#{"Wormux"},(0xECF75E71),0,0,0
+#{"Warmux"},(0xECF75E71),0,0,0
 
 ;Localised Vendor name
 %{"Vendor-EN"}
@@ -26,9 +26,8 @@
 ;Files to install
 ;You should change the source paths to match that of your environment
 ;<source> <destination>
-"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\wormux.exe" - "!:\sys\bin\wormux.exe"
-"$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\wormux_reg.rsc" - "!:\private\10003a3f\import\apps\wormux_reg.rsc"
-;"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\wormux_xmlengine.lib" - "!:\private\ecf75e71\wormux_xmlengine.lib"
+"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux.exe" - "!:\sys\bin\warmux.exe"
+"$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\warmux_reg.rsc" - "!:\private\10003a3f\import\apps\warmux_reg.rsc"
 "../res/sdl_param.txt" - "c:\private\ecf75e71\sdl_param.txt"
 "../res/sdl_flags.txt" - "c:\private\ecf75e71\sdl_flags.txt"
 
@@ -1357,4 +1356,4 @@
 "../../../data/weapon/teleportation/teleportation_ico.png" - "!:\private\ecf75e71\data/weapon/teleportation/teleportation_ico.png"
 "../../../data/weapons.dtd" - "!:\private\ecf75e71\data/weapons.dtd"
 "../../../data/weapons.xml" - "!:\private\ecf75e71\data/weapons.xml"
-"../../../data/wormux_default_config.xml" - "!:\private\ecf75e71\data/wormux_default_config.xml"
+"../../../data/warmux_default_config.xml" - "!:\private\ecf75e71\data/warmux_default_config.xml"

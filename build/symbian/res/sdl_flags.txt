@@ -1,1 +1,1 @@
-drawmodegdi autoorientation disablevolumekeys
+autoorientation disablevolumekeys

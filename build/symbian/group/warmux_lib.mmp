@@ -1,5 +1,5 @@
 
-TARGET		  wormux_lib.lib
+TARGET		  warmux_lib.lib
 TARGETTYPE	  lib
 UID			 0
 
