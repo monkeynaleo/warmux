@@ -33,9 +33,6 @@
 #include "spritecache.h"
 #include "spriteanimation.h"
 
-// Forward declarations
-class SpriteFrame;
-
 typedef enum {
   top_left,
   top_center,
@@ -71,7 +68,6 @@ public:
   explicit Sprite(bool _smooth=false);
   explicit Sprite(const Surface& surface, bool _smooth=false);
   Sprite(const Sprite &other);
-  ~Sprite() { frames.clear(); }
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface& GetSurface()
@@ -81,27 +77,27 @@ public:
   }
 
   // Frame number
-  uint GetCurrentFrame() const
-  {
-    assert(current_frame < frames.size());
-    return current_frame;
-  }
+  uint GetCurrentFrame() const { return current_frame; }
   void SetCurrentFrame(uint frame_no)
   {
-    assert(frame_no < frames.size());
-    if (current_frame != frame_no) {
-      cache.InvalidLastFrame();
-      MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
-    }
+    assert(frame_no < cache.size());
+    if (current_frame == frame_no)
+      return;
+
+    InvalidLastFrame();
+    MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
     current_frame = frame_no;
   }
-  uint GetFrameCount() const { return frames.size(); };
+  uint GetFrameCount() const { return cache.size(); };
+
+  // Access current frame
+  uint GetCurrentDelay() const { return cache[current_frame].GetDelay(); }
 
   // Antialiasing
   void SetAntialiasing(bool on)
   {
     smooth = on;
-    cache.InvalidLastFrame();
+    InvalidLastFrame();
   }
   bool IsAntialiased() const { return smooth; };
 
@@ -155,7 +151,7 @@ public:
       return;
     scale_x = _scale_x;
     scale_y = _scale_y;
-    cache.InvalidLastFrame();
+    InvalidLastFrame();
   }
   void ScaleSize(int width, int height)
   {
@@ -175,17 +171,9 @@ public:
   void SetRotation_HotSpot(const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() const { return rotation_point; };
 
-  SpriteFrame& operator[] (uint index) { return frames.at(index); };
-  const SpriteFrame& operator[] (uint index) const { return frames.at(index); };
-  const SpriteFrame& GetCurrentFrameObject() const { return frames[current_frame]; };
-
   // Prepare animation
-  void AddFrame(const Surface& surf, uint delay = 100);
-  void SetFrameSpeed(uint nv_fs)
-  {
-    for (uint f=0 ; f<frames.size(); f++)
-      frames[f].delay = nv_fs;
-  }
+  void AddFrame(const Surface& surf, uint delay = 100) { cache.AddFrame(surf, delay); }
+  void SetFrameSpeed(uint nv_fs) { cache.SetDelay(nv_fs); }
 
   // Animation
   void Start();
@@ -202,10 +190,8 @@ public:
   }
   Double GetAlpha() const { return alpha; };
 
-  // Cache
-  void EnableRotationCache(uint cache_size) { cache.EnableRotationCache(frames, cache_size); }
-  void EnableFlippingCache() { cache.EnableFlippingCache(frames); }
-  void EnableLastFrameCache() { cache.EnableLastFrameCache(); }
+  // Cache handling
+  void EnableCaches(bool flipped, uint num=0, Double min=ZERO, Double max=TWO_PI);
 
   // Show flag
   void Show() { show = true; };
@@ -236,7 +222,6 @@ private:
   // Frames
   uint current_frame;
   int frame_width_pix,frame_height_pix;
-  std::vector<SpriteFrame> frames;
 
   // Gfx
   Double alpha;
@@ -248,6 +233,7 @@ private:
 
   void Constructor();
   void Calculate_Rotation_Offset(const Surface& tmp_surface);
+  void InvalidLastFrame() { current_surface.Free(); }
 };
 
 #endif /* _SPRITE_H */
