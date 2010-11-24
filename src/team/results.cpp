@@ -1,5 +1,5 @@
 /******************************************************************************
- *  Wormux is a convivial mass murder game.
+ *  Warmux is a convivial mass murder game.
  *  Copyright (C) 2001-2006 Lawrence Azzoug.
  *
  *  This program is free software; you can redistribute it and/or modify
