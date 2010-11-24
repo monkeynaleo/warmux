@@ -541,8 +541,10 @@ void Weapon::Draw(){
     else {
       Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
                    / sin((Double)1.5 * HALF_PI);
-      if (scale.IsNotZero())
+      if (scale.IsNotZero()) {
         m_image->Scale(scale, scale);
+        m_image->SetFlipped(DIRECTION_LEFT == ActiveCharacter().GetDirection());
+      }
 
       // Recompute position to get the icon centered over the skin
       if (origin == weapon_origin_OVER)
