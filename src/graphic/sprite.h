@@ -75,6 +75,7 @@ public:
     assert(!current_surface.IsNull());
     return current_surface;
   }
+  bool IsFlipped() const { return flipped; }
 
   // Frame number
   uint GetCurrentFrame() const { return current_frame; }
@@ -94,10 +95,7 @@ public:
   uint GetCurrentDelay() const { return cache[current_frame].delay; }
 
   // Size
-  uint GetWidth() const
-  {
-    return uround(frame_width_pix *  scale_x);
-  }
+  uint GetWidth() const { return uround(frame_width_pix *  scale_x); }
   // gives height of the surface (takes rotations into acount)
   uint GetWidthMax() const
   {
@@ -106,10 +104,7 @@ public:
     else
       return GetWidth();
   }
-  uint GetHeight() const
-  {
-    return uround(frame_height_pix * scale_y);
-  }
+  uint GetHeight() const { return uround(frame_height_pix * scale_y); }
   // gives height of the surface (takes rotations into acount)
   uint GetHeightMax() const
   {
