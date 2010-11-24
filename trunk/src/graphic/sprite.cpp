@@ -281,7 +281,7 @@ void Sprite::RefreshSurface()
   if (!current_surface.IsNull())
     return;
 
-  ASSERT(scale_x > 0);
+  assert(scale_x >= 0);
   SpriteSubframeCache& frame = (flipped) ? cache[current_frame].flipped
                                          : cache[current_frame].normal;
   Double angle;
