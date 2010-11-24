@@ -206,9 +206,9 @@ POTFILES = \
 
 DOMAIN = $(PACKAGE)
 
-COPYRIGHT_HOLDER = Wormux Development Team
+COPYRIGHT_HOLDER = Warmux Development Team
 
-MSGID_BUGS_ADDRESS = wormux-dev@gna.org
+MSGID_BUGS_ADDRESS = warmux-dev@gna.org
 
 localedir=@LOCALEDIR@
 
