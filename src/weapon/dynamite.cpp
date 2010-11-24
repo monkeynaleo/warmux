@@ -66,7 +66,8 @@ void DynamiteStick::Shoot(Double strength)
   uint delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
-  image->Scale(ActiveCharacter().GetDirection(), 1);
+  image->SetFlipped(ActiveCharacter().GetDirection() == DIRECTION_LEFT);
+  image->Scale(ONE, ONE);
   image->SetCurrentFrame(0);
   image->Start();
 

@@ -151,7 +151,8 @@ void Polecat::Refresh()
   GetSpeed(norm, angle);
 
   angle = RestrictAngle(angle) * ONE_HALF;
-  if (m_sens == -1) {
+  bool flipped = m_sens == -1;
+  if (flipped) {
     if (angle > 0)
       angle -= HALF_PI;
     else
@@ -159,7 +160,8 @@ void Polecat::Refresh()
   }
 
   image->SetRotation_rad(angle);
-  image->Scale((Double)m_sens,1.0);
+  image->SetFlipped(flipped);
+  image->Scale(ONE, ONE);
   image->Update();
 }
 

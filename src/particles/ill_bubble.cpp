@@ -28,7 +28,7 @@
 
 // Vibration period of the bubble
 static const uint vib_period = 250;
-static const Double MAX_SCALE = 1.0f;
+static const Double MAX_SCALE = ONE;
 static const Double MIN_SCALE = 0.25f;
 
 IllBubble::IllBubble() : ExplosionSmoke(20)
@@ -56,6 +56,7 @@ void IllBubble::Refresh()
   scale_y *= scale_factor * cos(dangle);
   scale_x = std::max(MIN_SCALE, std::min(scale_x, MAX_SCALE));
   scale_y = std::max(MIN_SCALE, std::min(scale_y, MAX_SCALE));
+  // scale_x and scale_y should be now >= 0.25f so no flipping to do.
   image->Scale(scale_x, scale_y);
 }
 
@@ -64,8 +65,9 @@ void IllBubble::Draw()
   if (m_left_time_to_live > m_initial_time_to_live - 3)
     image->SetAlpha( (Double)(m_initial_time_to_live - m_left_time_to_live) / THREE );
   else
-    image->SetAlpha(1.0);
+    image->SetAlpha(ONE);
 
   if (m_left_time_to_live > 0)
     image->Draw(GetPosition() - image->GetSize() / 2);
 }
+
