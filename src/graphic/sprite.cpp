@@ -136,7 +136,7 @@ void Sprite::SetRotation_HotSpot(const Point2i& new_hotspot)
 
 void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
 {
-  const Surface & surface = current_surface;
+  const Surface & surface = cache[current_frame].normal.surface;
 
   // Calculate offset of the surface depending on hotspot rotation position :
   int surfaceHeight = surface.GetHeight();
@@ -186,7 +186,7 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   Point2d old_hotspot_delta = old_hotspot_delta_i;
   Double rhs_dst = old_hotspot_delta.Norm();
   Double rhs_angle = 0;
-  if (rhs_dst != ZERO)
+  if (rhs_dst.IsNotZero())
     rhs_angle = -acos(-old_hotspot_delta.x / rhs_dst);
   if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0)
     rhs_angle = -rhs_angle;
