@@ -51,6 +51,7 @@ LoadingScreen::LoadingScreen(int icon_count):
 LoadingScreen::~LoadingScreen()
 {
   delete loading_bg;
+  delete loading_text;
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
