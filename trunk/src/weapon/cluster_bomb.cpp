@@ -23,7 +23,7 @@
 #include "weapon/cluster_bomb.h"
 #include "weapon/weapon_cfg.h"
 #include <sstream>
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include "weapon/explosion.h"
 #include "graphic/sprite.h"
 #include "interface/game_msg.h"

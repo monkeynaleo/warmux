@@ -24,9 +24,9 @@
 
 #include <list>
 #include <vector>
-#include <WORMUX_base.h>
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
+#include <WARMUX_rectangle.h>
 #include "graphic/surface.h"
 
 class Sky

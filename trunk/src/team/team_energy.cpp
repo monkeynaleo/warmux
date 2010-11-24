@@ -21,7 +21,7 @@
 
 #include "team/team_energy.h"
 #include <sstream>
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include "map/camera.h"
 #include "map/map.h"
 #include "game/game_time.h"

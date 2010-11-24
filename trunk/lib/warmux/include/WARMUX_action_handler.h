@@ -24,9 +24,9 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
-#include <WORMUX_action.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_types.h>
+#include <WARMUX_action.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
 // Forward declarations

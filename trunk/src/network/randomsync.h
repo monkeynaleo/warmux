@@ -22,8 +22,8 @@
 #ifndef RANDOMSYNC_H
 #define RANDOMSYNC_H
 
-#include <WORMUX_singleton.h>
-#include <WORMUX_random.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_random.h>
 
 class RandomSyncGen : public RandomGenerator, public Singleton<RandomSyncGen>
 {

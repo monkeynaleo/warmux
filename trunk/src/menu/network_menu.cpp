@@ -18,8 +18,8 @@
  ******************************************************************************
  * Game menu
  *****************************************************************************/
-#include <WORMUX_index_server.h>
-#include <WORMUX_team_config.h>
+#include <WARMUX_index_server.h>
+#include <WARMUX_team_config.h>
 
 #include "menu/network_menu.h"
 

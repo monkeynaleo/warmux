@@ -36,7 +36,7 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "network/randomsync.h"
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"

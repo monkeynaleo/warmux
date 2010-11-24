@@ -37,8 +37,8 @@
 #  include <unistd.h> // not needed by mingw
 #endif
 
-#include <WORMUX_error.h>
-#include <WORMUX_file_tools.h>
+#include <WARMUX_error.h>
+#include <WARMUX_file_tools.h>
 
 
 // Test if a file exists

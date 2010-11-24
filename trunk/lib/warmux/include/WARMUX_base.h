@@ -16,44 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Download a file using libcurl
+ * Declare types and error functions
  *****************************************************************************/
 
-#ifndef DOWNLOAD_H
-#define DOWNLOAD_H
+#ifndef BASE_H
+#define BASE_H
 
-#include <stdio.h> // for FILE...
-#include <map>
-#include <string>
-
-// Load config about download librart (curl, ...)
-#include "WORMUX_config.h"
-
-#include <WORMUX_singleton.h>
-
-class Downloader : public Singleton<Downloader>
-{
-  std::string error;
-
-#ifdef HAVE_LIBCURL
-  void* curl;
-  char* curl_error_buf;
-#endif
-
-  // Return true if the download was successful
-  bool Get(const char* url, FILE* file);
-
-protected:
-  friend class Singleton<Downloader>;
-  Downloader();
-  ~Downloader();
-
-public:
-  bool GetLatestVersion(std::string& line);
-  bool GetServerList(std::map<std::string, int>& server_lst, const std::string& list_name);
-
-  const std::string& GetLastError() const { return error; };
-};
+#include <WARMUX_types.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_error.h>
 
 #endif
-

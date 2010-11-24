@@ -22,12 +22,12 @@
 #ifdef _WIN32
 #  define NOMINMAX // Avoid Windows headers to define max()
 #endif
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include <SDL_thread.h>
 #include <SDL_timer.h>
-#include <WORMUX_distant_cpu.h>
-#include <WORMUX_player.h>
-#include <WORMUX_index_server.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_player.h>
+#include <WARMUX_index_server.h>
 #include "network/network.h"
 #include "network/network_local.h"
 #include "network/network_client.h"

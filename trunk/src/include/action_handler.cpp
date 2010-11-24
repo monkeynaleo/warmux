@@ -21,9 +21,9 @@
 
 #include <iostream>
 #include <SDL_mutex.h>
-#include <WORMUX_debug.h>
-#include <WORMUX_distant_cpu.h>
-#include <WORMUX_team_config.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_team_config.h>
 
 #include "action_handler.h"
 #include "character/character.h"

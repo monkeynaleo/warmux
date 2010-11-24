@@ -22,9 +22,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <signal.h>
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_types.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_types.h>
 
 #ifdef ANDROID
 #  include <android/log.h>

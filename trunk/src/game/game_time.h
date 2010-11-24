@@ -23,8 +23,8 @@
 #define TIME_H
 
 #include <string>
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "game/stopwatch.h"
 
 // XXX uint wrap-around (or at least system timer) not handled

@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
-#include <WORMUX_singleton.h>
+#include <WARMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
 // Forward declarations

@@ -27,7 +27,7 @@
 #include "network/randomsync.h"
 #include "tool/affine_transform.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 #include <sstream>

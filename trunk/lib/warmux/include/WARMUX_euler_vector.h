@@ -20,7 +20,7 @@
 #ifndef WORMUX_EULER_VECTOR_H
 #define WORMUX_EULER_VECTOR_H
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 
 class EulerVector{
   public:

@@ -22,7 +22,7 @@
 #ifndef GUI_BUTTON_H
 #define GUI_BUTTON_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "gui/widget.h"
 
 // Forward declarations

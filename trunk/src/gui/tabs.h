@@ -23,7 +23,7 @@
 #define GUI_TABS_H
 
 #include <vector>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "gui/widget.h"
 
 class Button;

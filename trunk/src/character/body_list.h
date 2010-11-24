@@ -21,8 +21,8 @@
 #ifndef BODY_LIST_H
 #define BODY_LIST_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------

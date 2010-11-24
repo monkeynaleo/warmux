@@ -25,8 +25,8 @@
 #include <string>
 #include <SDL_net.h>
 #include <list>
-#include <WORMUX_network.h>
-#include <WORMUX_types.h>
+#include <WARMUX_network.h>
+#include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
 class WSocket;

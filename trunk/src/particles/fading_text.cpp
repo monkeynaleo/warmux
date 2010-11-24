@@ -25,7 +25,7 @@
 #include "game/game_time.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 
 const uint INIT_DISPLAY_TIME = 200;
 const uint TEXT_FADE_TIME = 1000;

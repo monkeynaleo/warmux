@@ -22,12 +22,12 @@
 #ifndef GUI_WIDGET_H
 #define GUI_WIDGET_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/color.h"
 #include "gui/container.h"
 #include "interface/mouse.h"
-#include <WORMUX_rectangle.h>
-#include <WORMUX_point.h>
+#include <WARMUX_rectangle.h>
+#include <WARMUX_point.h>
 #include "tool/resource_manager.h"
 
 class Surface;

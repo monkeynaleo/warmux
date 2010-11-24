@@ -17,10 +17,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#include <WORMUX_action.h>
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_index_server.h>
+#include <WARMUX_action.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_index_server.h>
 #include <config.h>
 #include <server.h>
 

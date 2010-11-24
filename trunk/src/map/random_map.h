@@ -23,7 +23,7 @@
 #define RANDOM_MAP_H
 
 #include <vector>
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 #include "graphic/surface.h"
 #include "map/maps_list.h"
 

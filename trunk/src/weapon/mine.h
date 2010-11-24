@@ -22,8 +22,8 @@
 #ifndef MINE_H
 #define MINE_H
 
-#include <WORMUX_singleton.h>
-#include <WORMUX_base.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_base.h>
 #include "weapon/weapon_cfg.h"
 #include "weapon/weapon_launcher.h"
 

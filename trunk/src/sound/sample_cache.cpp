@@ -23,7 +23,7 @@
 #include <fstream>
 
 #include <assert.h>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 #include "sample_cache.h"
 

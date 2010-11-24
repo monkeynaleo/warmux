@@ -27,9 +27,9 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include <WORMUX_base.h>
-#include <WORMUX_euler_vector.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_euler_vector.h>
+#include <WARMUX_point.h>
 #include "object_cfg.h"
 
 static const Double MIN_FALL_SPEED = 0.1;

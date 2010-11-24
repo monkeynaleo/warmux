@@ -19,7 +19,7 @@
  * Particle Engine
  *****************************************************************************/
 
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 #include <SDL.h>
 #include <map>
 #include "game/game_time.h"

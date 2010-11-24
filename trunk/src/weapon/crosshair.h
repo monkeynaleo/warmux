@@ -23,8 +23,8 @@
 #define CROSSHAIR_H
 
 #include "graphic/surface.h"
-#include <WORMUX_base.h>
-#include <WORMUX_point.h>
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
 
 class CrossHair
 {

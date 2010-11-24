@@ -25,7 +25,7 @@
 
 #include <string>
 
-#include "WORMUX_config.h"
+#include "WARMUX_config.h"
 
 #ifdef ENABLE_NLS /* gettext */
 #  include <libintl.h>

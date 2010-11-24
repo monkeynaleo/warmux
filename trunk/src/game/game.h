@@ -23,8 +23,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "network/chat.h"
 #include "sound/sound_sample.h"
 #include "graphic/text.h"

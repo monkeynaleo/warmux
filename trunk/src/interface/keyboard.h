@@ -23,7 +23,7 @@
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
 #include "interface/man_machine_interface.h"
-#include <WORMUX_singleton.h>
+#include <WARMUX_singleton.h>
 #include <set>
 #include "SDL_keyboard.h"
 #include "tool/xml_document.h"

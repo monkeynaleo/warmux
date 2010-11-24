@@ -24,9 +24,9 @@
 # include <windows.h> // DWORD, GetUserName
 #endif
 
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_player.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_player.h>
 
 Player::Player(uint _player_id, const std::string& _nickname) :
   player_id(_player_id),

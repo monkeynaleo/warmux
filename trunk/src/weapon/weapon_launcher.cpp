@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include <sstream>
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include <limits.h>
 
 #include "character/character.h"

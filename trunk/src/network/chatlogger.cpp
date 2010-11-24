@@ -1,9 +1,9 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #ifdef DEBUG
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #endif
 #include "network/chatlogger.h"
 #include "game/config.h"

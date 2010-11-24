@@ -21,10 +21,10 @@
 
 #include <algorithm>  //std::find
 #include <SDL_thread.h>
-#include <WORMUX_distant_cpu.h>
-#include <WORMUX_error.h>
-#include <WORMUX_i18n.h>
-#include <WORMUX_socket.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_error.h>
+#include <WARMUX_i18n.h>
+#include <WARMUX_socket.h>
 
 static const int MAX_PACKET_SIZE = 250*1024;
 

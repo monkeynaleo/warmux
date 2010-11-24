@@ -21,7 +21,7 @@
 
 #include "game/stopwatch.h"
 #include <SDL.h>
-#include <WORMUX_error.h>
+#include <WARMUX_error.h>
 
 Stopwatch::Stopwatch()
 {

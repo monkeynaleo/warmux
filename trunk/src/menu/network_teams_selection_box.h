@@ -23,7 +23,7 @@
 #define NETWORK_TEAMS_SELECTION_BOX_H
 
 #include <vector>
-#include <WORMUX_team_config.h>
+#include <WARMUX_team_config.h>
 #include "menu/teams_selection_box.h"
 
 class Team;

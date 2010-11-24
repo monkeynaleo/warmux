@@ -22,7 +22,7 @@
 #ifndef TORUS_CACHE_H
 #define TORUS_CACHE_H
 
-#include <WORMUX_rectangle.h>
+#include <WARMUX_rectangle.h>
 #include "graphic/surface.h"
 
 class Profile;

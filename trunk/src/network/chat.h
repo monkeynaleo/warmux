@@ -24,7 +24,7 @@
 #define CHAT_H
 
 #include <string>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/color.h"
 #include "graphic/text_list.h"
 

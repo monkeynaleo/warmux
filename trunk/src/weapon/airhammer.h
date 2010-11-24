@@ -22,7 +22,7 @@
 #ifndef AIRHAMMER_H
 #define AIRHAMMER_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/surface.h"
 #include "weapon.h"
 //-----------------------------------------------------------------------------

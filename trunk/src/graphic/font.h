@@ -22,7 +22,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <map>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/colors.h"
 #include "graphic/surface.h"
 

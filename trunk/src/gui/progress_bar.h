@@ -23,7 +23,7 @@
 #define PROGRESS_BAR_H
 
 #include <list>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/color.h"
 #include "graphic/surface.h"
 

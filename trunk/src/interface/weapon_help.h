@@ -22,7 +22,7 @@
 #ifndef WEAPON_HELP_H
 #define WEAPON_HELP_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "graphic/surface.h"
 #include "graphic/text.h"
 #include "tool/affine_transform.h"

@@ -59,7 +59,7 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/results.h"
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #include "tool/stats.h"
 #include "weapon/weapons_list.h"
 

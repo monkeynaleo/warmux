@@ -22,7 +22,7 @@
 #ifndef MATH_TOOLS_H
 #define MATH_TOOLS_H
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 
 // Template to force a value into a range.
 template <class T>

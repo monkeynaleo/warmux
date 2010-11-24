@@ -23,7 +23,7 @@
 #define POLECAT_H
 
 #include "weapon/weapon_launcher.h"
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 
 class Polecat;
 

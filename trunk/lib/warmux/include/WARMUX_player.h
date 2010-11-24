@@ -25,8 +25,8 @@
 #include <SDL_net.h>
 #include <list>
 #include <string>
-#include <WORMUX_types.h>
-#include <WORMUX_team_config.h>
+#include <WARMUX_types.h>
+#include <WARMUX_team_config.h>
 //-----------------------------------------------------------------------------
 
 class Player

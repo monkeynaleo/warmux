@@ -33,11 +33,11 @@
 #include <list>
 #include <map>
 
-#include <WORMUX_index_server.h>
-#include <WORMUX_types.h>
-#include <WORMUX_network.h>
-#include <WORMUX_random.h>
-#include <WORMUX_socket.h>
+#include <WARMUX_index_server.h>
+#include <WARMUX_types.h>
+#include <WARMUX_network.h>
+#include <WARMUX_random.h>
+#include <WARMUX_socket.h>
 #include <WSERVER_config.h>
 #include <WSERVER_clock.h>
 #include <WSERVER_debug.h>

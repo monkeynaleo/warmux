@@ -27,7 +27,7 @@
 #include "include/app.h"
 #include "map/camera.h"
 #include "tool/math_tools.h"
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)

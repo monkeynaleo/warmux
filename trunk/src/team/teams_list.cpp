@@ -20,7 +20,7 @@
  *****************************************************************************/
 #include <algorithm>
 #include <iostream>
-#include <WORMUX_team_config.h>
+#include <WARMUX_team_config.h>
 #include "character/character.h"
 #include "character/body_list.h"
 #include "include/action.h"
@@ -30,7 +30,7 @@
 #include "team/team.h"
 #include "team/team_energy.h"
 #include "team/teams_list.h"
-#include <WORMUX_file_tools.h>
+#include <WARMUX_file_tools.h>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

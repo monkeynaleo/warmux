@@ -23,8 +23,8 @@
 #define WIND_H
 
 #include <list>
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "object/physical_obj.h"
 
 // Forward declarations

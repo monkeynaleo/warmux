@@ -22,7 +22,7 @@
 #ifndef TRAJECTORY_H
 #define TRAJECTORY_H
 
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 
 class Trajectory {
   private:

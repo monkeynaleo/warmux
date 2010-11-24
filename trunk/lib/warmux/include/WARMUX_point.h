@@ -16,24 +16,24 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Usefull class to manage the configuration of a team
+ * Point.h:    Standard C++ 2D Point template
+ ******************************************************************************
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
+ *             Initial version
  *****************************************************************************/
 
-#ifndef WORMUX_TEAM_CONFIG_H
-#define WORMUX_TEAM_CONFIG_H
+#ifndef WORMUX_POINT_H
+#define WORMUX_POINT_H
 
-#include <string>
+#include <WARMUX_vector2.h>
 
-#include "WORMUX_types.h"
+typedef Vector2<int32_t> Point2i;
+typedef Vector2<float>   Point2f;
+typedef Vector2<Double>  Point2d;
 
-class ConfigTeam
+static inline Point2f P2D_TO_P2F(const Point2d& p)
 {
-public:
-  std::string id;
-  std::string player_name;
-  uint nb_characters;
-  std::string ai;
-};
+  return Point2f(p.GetX().tofloat(), p.GetY().tofloat());
+}
 
-#endif
-
+#endif // WORMUX_POINT_H

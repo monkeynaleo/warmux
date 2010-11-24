@@ -22,9 +22,9 @@
 #ifndef AFFINE_TRANSFORM_2D
 #define AFFINE_TRANSFORM_2D
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include <stdio.h>
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 
 class AffineTransform2D {
  protected:

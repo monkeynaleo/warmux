@@ -3,27 +3,27 @@ SUBDIRS = .
 noinst_LIBRARIES = libwormux.a
 
 libwormux_a_SOURCES = \
-	./include/WORMUX_action.h \
-	./include/WORMUX_action_handler.h \
-	./include/WORMUX_debug.h \
-	./include/WORMUX_distant_cpu.h \
-	./include/WORMUX_download.h \
-	./include/WORMUX_error.h \
-	./include/WORMUX_euler_vector.h \
-	./include/WORMUX_file_tools.h \
-	./include/WORMUX_i18n.h \
-	./include/WORMUX_index_server.h \
-	./include/WORMUX_index_svr_msg.h \
-	./include/WORMUX_network.h \
-	./include/WORMUX_player.h \
-	./include/WORMUX_point.h \
-	./include/WORMUX_random.h \
-	./include/WORMUX_rectangle.h \
-	./include/WORMUX_singleton.h \
-	./include/WORMUX_socket.h \
-	./include/WORMUX_team_config.h \
-	./include/WORMUX_types.h \
-	./include/WORMUX_vector2.h \
+	./include/WARMUX_action.h \
+	./include/WARMUX_action_handler.h \
+	./include/WARMUX_debug.h \
+	./include/WARMUX_distant_cpu.h \
+	./include/WARMUX_download.h \
+	./include/WARMUX_error.h \
+	./include/WARMUX_euler_vector.h \
+	./include/WARMUX_file_tools.h \
+	./include/WARMUX_i18n.h \
+	./include/WARMUX_index_server.h \
+	./include/WARMUX_index_svr_msg.h \
+	./include/WARMUX_network.h \
+	./include/WARMUX_player.h \
+	./include/WARMUX_point.h \
+	./include/WARMUX_random.h \
+	./include/WARMUX_rectangle.h \
+	./include/WARMUX_singleton.h \
+	./include/WARMUX_socket.h \
+	./include/WARMUX_team_config.h \
+	./include/WARMUX_types.h \
+	./include/WARMUX_vector2.h \
 	./action/action.cpp \
 	./action/action_handler.cpp \
 	./base/error.cpp \

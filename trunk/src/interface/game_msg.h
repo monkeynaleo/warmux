@@ -22,8 +22,8 @@
 #ifndef GAME_MESSAGES_H
 #define GAME_MESSAGES_H
 //-----------------------------------------------------------------------------
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "graphic/text.h"
 #include <string>
 #include <list>

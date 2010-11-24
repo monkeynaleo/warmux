@@ -25,7 +25,7 @@
 #include <iostream>
 #include <SDL.h>
 
-#include <WORMUX_rectangle.h>
+#include <WARMUX_rectangle.h>
 
 #include "graphic/sprite.h"
 #include "graphic/surface.h"

@@ -22,11 +22,11 @@
 #ifndef SCROLLING_H
 #define SCROLLING_H
 
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "interface/mouse.h"
 #include "interface/movable_by_user.h"
-#include <WORMUX_point.h>
-#include <WORMUX_rectangle.h>
+#include <WARMUX_point.h>
+#include <WARMUX_rectangle.h>
 #include "game/stopwatch.h"
 
 

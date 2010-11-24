@@ -24,10 +24,10 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <string>
-#include <WORMUX_network.h>
-#include <WORMUX_player.h>
-#include <WORMUX_singleton.h>
-#include <WORMUX_base.h>
+#include <WARMUX_network.h>
+#include <WARMUX_player.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_base.h>
 //-----------------------------------------------------------------------------
 
 // Use this debug to store network communication to a file

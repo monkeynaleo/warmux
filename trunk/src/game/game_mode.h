@@ -25,8 +25,8 @@
 
 #include <string>
 #include <vector>
-#include <WORMUX_singleton.h>
-#include <WORMUX_base.h>
+#include <WARMUX_singleton.h>
+#include <WARMUX_base.h>
 #include "weapon/weapon_cfg.h"
 #include "tool/xml_document.h"
 

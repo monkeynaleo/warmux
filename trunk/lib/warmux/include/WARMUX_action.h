@@ -25,10 +25,10 @@
 #include <string>
 #include <iostream>
 #include <list>
-#include <WORMUX_distant_cpu.h>
-#include <WORMUX_euler_vector.h>
-#include <WORMUX_point.h>
-#include <WORMUX_types.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_euler_vector.h>
+#include <WARMUX_point.h>
+#include <WARMUX_types.h>
 
 //-----------------------------------------------------------------------------
 

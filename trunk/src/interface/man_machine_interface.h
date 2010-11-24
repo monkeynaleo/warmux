@@ -25,7 +25,7 @@
 #include <map>
 #include <list>
 #include <vector>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 //-----------------------------------------------------------------------------
 
 // Forward declarations

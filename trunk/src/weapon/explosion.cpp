@@ -34,11 +34,11 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
-#include <WORMUX_random.h>
+#include <WARMUX_random.h>
 #include "weapon/weapon.h"
 
 Profile *weapons_res_profile = NULL;

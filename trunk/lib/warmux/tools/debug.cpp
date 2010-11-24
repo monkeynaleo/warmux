@@ -30,7 +30,7 @@
 #else
 #  include <unistd.h>
 #endif
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 bool debug_all = false;
 /**

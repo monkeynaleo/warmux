@@ -23,7 +23,7 @@
 #define LABEL_H
 
 #include <string>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 #include "gui/widget.h"
 #include "graphic/text.h"
 

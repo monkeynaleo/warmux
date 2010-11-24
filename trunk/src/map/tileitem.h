@@ -20,7 +20,7 @@
 #ifndef TILEITEM_H
 #define TILEITEM_H
 
-#include <WORMUX_point.h>
+#include <WARMUX_point.h>
 #include "graphic/surface.h"
 
 // Must be at least 3

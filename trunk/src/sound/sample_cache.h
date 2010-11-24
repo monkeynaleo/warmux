@@ -24,7 +24,7 @@
 
 #include <vector>
 #include <map>
-#include <WORMUX_base.h>
+#include <WARMUX_base.h>
 
 #include <SDL.h>
 #include <SDL_mixer.h>

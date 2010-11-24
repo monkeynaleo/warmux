@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #include "tool/xml_document.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 #include "character/clothe.h"
 #include "character/member.h"
 #include <map>

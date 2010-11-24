@@ -23,7 +23,7 @@
 #define OBJECT_CFG_H
 //-----------------------------------------------------------------------------
 #include <string>
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
 class ObjectConfig

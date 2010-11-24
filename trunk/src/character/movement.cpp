@@ -23,7 +23,7 @@
 #include <cstdio>
 #include "character/movement.h"
 #include "tool/xml_document.h"
-#include <WORMUX_debug.h>
+#include <WARMUX_debug.h>
 
 Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per_frame(15), always_moving(false)
 {

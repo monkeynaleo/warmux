@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "interface/move_intention.h"
-#include <WORMUX_error.h>
+#include <WARMUX_error.h>
 
 LRMoveIntention LEFT_SLOWLY_OBJECT(DIRECTION_LEFT, true);
 LRMoveIntention LEFT_OBJECT(DIRECTION_LEFT, false);

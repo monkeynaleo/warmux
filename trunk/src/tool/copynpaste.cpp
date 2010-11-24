@@ -19,7 +19,7 @@
  * Retrieve string pasted depending on OS mechanisms.
  *****************************************************************************/
 #include "copynpaste.h"
-#include <WORMUX_config.h>
+#include <WARMUX_config.h>
 
 #include <SDL_syswm.h>
 

@@ -24,8 +24,8 @@
 
 #include <vector>
 #include <assert.h>
-#include <WORMUX_base.h>
-#include <WORMUX_singleton.h>
+#include <WARMUX_base.h>
+#include <WARMUX_singleton.h>
 #include "graphic/surface.h"
 #include "map/water.h"
 #include "tool/xml_document.h"

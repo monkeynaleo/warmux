@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 #include <time.h>
-#include <WORMUX_debug.h>
-#include <WORMUX_random.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
 
 RandomGenerator::RandomGenerator() :
   next(0), initialized(false), unrandom(false)

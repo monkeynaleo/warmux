@@ -22,7 +22,7 @@
 #ifndef AI_COMMAND_H
 #define AI_COMMAND_H
 
-#include <WORMUX_types.h>
+#include <WARMUX_types.h>
 #include <queue>
 #include "weapon/weapon.h"
 
