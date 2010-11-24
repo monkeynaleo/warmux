@@ -185,7 +185,7 @@ void Sprite::Calculate_Rotation_Offset(const Surface & tmp_surface)
   Point2i old_hotspot_delta_i = center - rhs_pos_tmp;
   Point2d old_hotspot_delta = old_hotspot_delta_i;
   Double rhs_dst = old_hotspot_delta.Norm();
-  Double rhs_angle = 0.0;
+  Double rhs_angle = 0;
   if (rhs_dst != ZERO)
     rhs_angle = -acos(-old_hotspot_delta.x / rhs_dst);
   if (halfHeight /*surfaceHeight/2*/ - rhs_pos.y < 0)
