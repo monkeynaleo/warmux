@@ -285,14 +285,16 @@ void Sprite::RefreshSurface()
   SpriteSubframeCache& frame = (flipped) ? cache[current_frame].flipped
                                          : cache[current_frame].normal;
   Double angle;
+  Surface tmp;
   if (rotation_rad.IsNotZero() && cache.HasRotationCache()) {
-    current_surface = frame.GetSurfaceForAngle(rotation_rad);
+    tmp = frame.GetSurfaceForAngle(rotation_rad);
     angle = ZERO;
   } else {
-    current_surface = frame.surface;
+    tmp = frame.surface;
     angle = -rotation_rad;
   }
-  current_surface = current_surface.RotoZoom(angle, scale_x, scale_y);
+  // RotoZoom already checks angle and scale to do the least work
+  current_surface = tmp.RotoZoom(angle, scale_x, scale_y);
 
   // Calculate offset of the sprite depending on hotspot rotation position :
   rotation_point.x=0;
