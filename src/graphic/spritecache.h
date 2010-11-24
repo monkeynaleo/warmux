@@ -59,10 +59,10 @@ public:
   SpriteSubframeCache() { };
   SpriteSubframeCache(const Surface& surf) : surface(surf) { };
   SpriteSubframeCache(const SpriteSubframeCache& other)
-    : min(other.min)
+    : rotated(other.rotated)
+    , min(other.min)
     , max(other.max)
     , surface(other.surface)
-    , rotated(other.rotated)
   { }
   ~SpriteSubframeCache() { rotated.clear(); surface.Free(); }
 
