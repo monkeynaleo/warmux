@@ -11,7 +11,7 @@ Compilacion en Linux
 * SDL
 -----
 
-Wormux usa la libreria SDL en su version 1.2, asi que tendras que 
+Warmux usa la libreria SDL en su version 1.2, asi que tendras que 
 instalarla. 
 
 Pagina web: http://www.libsdl.org/
@@ -27,7 +27,7 @@ Pagina web: http://www.libsdl.org/
 * libxml++
 ----------
 
-Wormux usa tambien la libreria libxml++ en su version 2.6, así que tambien
+Warmux usa tambien la libreria libxml++ en su version 2.6, así que tambien
 tendras que instalartela. Los usuarios de Debian podran hacerlo facilemente:
 	apt-get install libxml++2.6-dev
 
@@ -47,12 +47,12 @@ $ make
 * Instalacion / Desinstalacion
 ==============================
 
-En GNU/Linux para instalar Wormux ejecuta:
+En GNU/Linux para instalar Warmux ejecuta:
 
 $ su -c "make install"
 
 Para ejecutar el juego:
-$ wormux
+$ warmux
 
 Y para desinstalarlo:
 
@@ -71,7 +71,7 @@ Informacion del Makefile
 Opciones :
 ---------	
 
-- DIR       : Especifica el directorio donde Wormux sera (des)instalado. 
+- DIR       : Especifica el directorio donde Warmux sera (des)instalado. 
 
 
 Reglas :
@@ -87,7 +87,7 @@ Reglas :
 - make tgz-src   : Creacion de un archivo que contiene el codigo fuente
 - make info      : Muestra una pantalla de ayuda sobre el entorno y las 
 		   opciones de compilacion
-- make install   : Compila e instala el Wormux
+- make install   : Compila e instala el Warmux
 - make uninstall : Desinstalacion
 - make clean     : Limpieza de archivos objeto
 - make cleanall  : Limpieza de todo rastro binario

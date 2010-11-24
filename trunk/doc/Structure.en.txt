@@ -2,14 +2,14 @@
 					SUMMARY
 ****************************************************************************************
 
-		you'll find explanations about organization of Wormux's sourcecode
+		you'll find explanations about organization of Warmux's sourcecode
 					In english
 
 ****************************************************************************************
 					in ENGLISH
 ****************************************************************************************
 
-Wormux sourcecode is share in several parts :
+Warmux sourcecode is share in several parts :
 
 /cmake = for cmake users
 /data = pictures, sounds (music), maps, skins,...

@@ -2,14 +2,14 @@
 					RESUMO
 ****************************************************************************************
 
-	  isto é información relativa á organización do código fonte do Wormux
+	  isto é información relativa á organización do código fonte do Warmux
 
 ****************************************************************************************
 		    Tradución  ao GALEGO por Adrián Chaves Fernández
 			do Proxecto Trasno (http://www.trasno.net)
 ****************************************************************************************
 
-O código fonte do Wormux compártese en varias partes:
+O código fonte do Warmux compártese en varias partes:
 
 /cmake = para usuarios de cmake
 /data = imaxes, sons, mapas, skins...
