@@ -522,9 +522,7 @@ void Weapon::Draw(){
 
   // flip image if needed
   if (use_flipping) {
-    m_image->Scale(ActiveCharacter().GetDirection(), ONE);
-  } else {
-    m_image->Scale(ONE, ONE);
+    m_image->SetFlipped(DIRECTION_LEFT == ActiveCharacter().GetDirection());
   }
 
   // Calculate position of the image
@@ -538,17 +536,20 @@ void Weapon::Draw(){
       angle += sin(HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
              * TWO_PI;
       m_image->SetRotation_rad(angle);
+      m_image->Scale(ONE, ONE);
     }
     else {
       Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
                    / sin((Double)1.5 * HALF_PI);
-      m_image->Scale(ActiveCharacter().GetDirection() * scale,scale);
+      m_image->SetFlipped(DIRECTION_LEFT == ActiveCharacter().GetDirection());
+      m_image->Scale(scale, scale);
 
       // Recompute position to get the icon centered over the skin
       if (origin == weapon_origin_OVER)
         PosXY(x,y);
     }
-  }
+  } else
+    m_image->Scale(ONE, ONE);
 
   if (m_image)
     m_image->Blit(GetMainWindow(), Point2i(x, y) - Camera::GetInstance()->GetPosition());
