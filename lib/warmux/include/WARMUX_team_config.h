@@ -19,8 +19,8 @@
  * Usefull class to manage the configuration of a team
  *****************************************************************************/
 
-#ifndef WORMUX_TEAM_CONFIG_H
-#define WORMUX_TEAM_CONFIG_H
+#ifndef WARMUX_TEAM_CONFIG_H
+#define WARMUX_TEAM_CONFIG_H
 
 #include <string>
 

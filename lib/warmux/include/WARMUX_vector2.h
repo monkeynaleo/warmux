@@ -1,5 +1,5 @@
-#ifndef WORMUX_VECTOR2_H
-#define WORMUX_VECTOR2_H
+#ifndef WARMUX_VECTOR2_H
+#define WARMUX_VECTOR2_H
 
 #include <WARMUX_types.h>
 #undef min

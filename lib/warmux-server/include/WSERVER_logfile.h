@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef WORMUX_SERVER_LOGFILE_H
-#define WORMUX_SERVER_LOGFILE_H
+#ifndef WARMUX_SERVER_LOGFILE_H
+#define WARMUX_SERVER_LOGFILE_H
 
 #include <string>
 #include <stdio.h>

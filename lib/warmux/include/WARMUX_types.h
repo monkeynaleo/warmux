@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
-#ifndef WORMUX_TYPES_H
-#define WORMUX_TYPES_H
+#ifndef WARMUX_TYPES_H
+#define WARMUX_TYPES_H
 //-----------------------------------------------------------------------------
 #include <fixed_class.h>
 

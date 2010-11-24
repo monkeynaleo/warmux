@@ -19,8 +19,8 @@
  * Socket abstraction
  *****************************************************************************/
 
-#ifndef WORMUX_SOCKET_H
-#define WORMUX_SOCKET_H
+#ifndef WARMUX_SOCKET_H
+#define WARMUX_SOCKET_H
 //-----------------------------------------------------------------------------
 #include <string>
 #include <SDL_net.h>

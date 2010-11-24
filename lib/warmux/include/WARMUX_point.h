@@ -22,8 +22,8 @@
  *             Initial version
  *****************************************************************************/
 
-#ifndef WORMUX_POINT_H
-#define WORMUX_POINT_H
+#ifndef WARMUX_POINT_H
+#define WARMUX_POINT_H
 
 #include <WARMUX_vector2.h>
 

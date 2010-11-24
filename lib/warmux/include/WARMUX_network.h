@@ -19,8 +19,8 @@
  * Network basic layer for Wormux.
  *****************************************************************************/
 
-#ifndef WORMUX_NETWORK_H
-#define WORMUX_NETWORK_H
+#ifndef WARMUX_NETWORK_H
+#define WARMUX_NETWORK_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <string>

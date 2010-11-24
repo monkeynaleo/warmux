@@ -72,7 +72,7 @@ public:
   const std::string ToString() const;
 };
 
-// It's up to the program using class DistantComputer to define WORMUX_[Dis]connectHost();
+// It's up to the program using class DistantComputer to define WARMUX_[Dis]connectHost();
 extern void WARMUX_ConnectHost(DistantComputer& cpu);
 extern void WARMUX_DisconnectHost(DistantComputer& cpu);
 

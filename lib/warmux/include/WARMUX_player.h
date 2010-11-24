@@ -19,8 +19,8 @@
  * A network player (local or remote)
  *****************************************************************************/
 
-#ifndef WORMUX_PLAYER_H
-#define WORMUX_PLAYER_H
+#ifndef WARMUX_PLAYER_H
+#define WARMUX_PLAYER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <list>
