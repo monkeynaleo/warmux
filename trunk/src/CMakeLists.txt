@@ -33,7 +33,7 @@ TARGET_LINK_LIBRARIES( ${EXECUTABLE}
         ${PNG_LIBRARY}
         ${SDL_LIBRARY}
         ${GETTEXT_LIBRARY}
-        libwormux
+        libwarmux
         libfixedpoint
 )
 

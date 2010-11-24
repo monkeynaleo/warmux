@@ -18,5 +18,5 @@ AM_CXXFLAGS = -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" \
 
 LIBS += @LIBCURL@
 
-wormux_server_LDADD=$(top_srcdir)/lib/warmux-server/libwormux-server.a $(top_srcdir)/lib/warmux/libwormux.a
-wormux_server_DEPENDENCIES=$(top_srcdir)/lib/warmux-server/libwormux-server.a $(top_srcdir)/lib/warmux/libwormux.a
+wormux_server_LDADD=$(top_srcdir)/lib/warmux-server/libwarmux-server.a $(top_srcdir)/lib/warmux/libwarmux.a
+wormux_server_DEPENDENCIES=$(top_srcdir)/lib/warmux-server/libwarmux-server.a $(top_srcdir)/lib/warmux/libwarmux.a

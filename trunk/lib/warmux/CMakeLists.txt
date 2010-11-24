@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
   ${PROJECT_SOURCE_DIR}/lib/fixedpoint
 )
 
-ADD_LIBRARY(libwormux STATIC ${LIBWORMUX_SRCS})
-# change the prefix, so we don't end up with liblibwormux
-SET_TARGET_PROPERTIES(libwormux PROPERTIES PREFIX "")
+ADD_LIBRARY(libwarmux STATIC ${LIBWORMUX_SRCS})
+# change the prefix, so we don't end up with liblibwarmux
+SET_TARGET_PROPERTIES(libwarmux PROPERTIES PREFIX "")

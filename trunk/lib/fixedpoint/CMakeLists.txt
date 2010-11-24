@@ -7,5 +7,5 @@ INCLUDE_DIRECTORIES(
 )
 
 ADD_LIBRARY(libfixedpoint STATIC ${LIBFIXEDPOINT_SRCS})
-# change the prefix, so we don't end up with liblibwormux
+# change the prefix, so we don't end up with liblibwarmux
 SET_TARGET_PROPERTIES(libfixedpoint PROPERTIES PREFIX "")
