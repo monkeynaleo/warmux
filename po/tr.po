@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux-tr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-24 08:01+0200\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -30,13 +29,13 @@ msgstr "! %s haritası bulunamadı :-("
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
-#: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
+#: src/menu/network_menu.cpp:148 src/menu/network_menu.cpp:369
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:133 src/menu/network_menu.cpp:370
+#: src/menu/network_menu.cpp:152 src/menu/network_menu.cpp:379
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -63,34 +62,34 @@ msgstr "Takımlar"
 msgid "%s Team - Remote"
 msgstr ""
 
-#: src/game/game.cpp:1015
+#: src/game/game.cpp:1025
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s intihar etti !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1041 src/game/game.cpp:1060
+#: src/game/game.cpp:1051 src/game/game.cpp:1070
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) öldü."
 
-#: src/game/game.cpp:1007
+#: src/game/game.cpp:1017
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s suya daldı."
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1011
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1031
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 #. The playing character killed himself
-#: src/game/game.cpp:1028
+#: src/game/game.cpp:1038
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -100,19 +99,19 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s has address %s"
 msgstr ""
 
-#: src/weapon/polecat.cpp:115
+#: src/weapon/polecat.cpp:117
 #, c-format
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
 "fart."
 msgstr ""
 
-#: src/object/medkit.cpp:57
+#: src/object/medkit.cpp:63
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s takımı %u %s kazandı!"
 
-#: src/game/game.cpp:1052
+#: src/game/game.cpp:1062
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
@@ -133,7 +132,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:71
+#: src/object/bonus_box.cpp:77
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s takımı zaten %s için sınırsız cephaneye sahip!"
@@ -156,7 +155,7 @@ msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/air_attack.cpp:260
+#: src/weapon/air_attack.cpp:256
 #, fuzzy, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -178,19 +177,19 @@ msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:325
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/baseball.cpp:113
+#: src/weapon/baseball.cpp:112
 #, fuzzy, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/bazooka.cpp:128
+#: src/weapon/bazooka.cpp:126
 #, fuzzy, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -230,13 +229,13 @@ msgid_plural ""
 "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/dynamite.cpp:148
+#: src/weapon/dynamite.cpp:150
 #, fuzzy, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:194
 #, fuzzy, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -260,7 +259,7 @@ msgid "%s team has won %u grenade!"
 msgid_plural "%s team has won %u grenades!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/gun.cpp:96
+#: src/weapon/gun.cpp:95
 #, fuzzy, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -293,7 +292,7 @@ msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/polecat.cpp:270
+#: src/weapon/polecat.cpp:273
 #, fuzzy, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -311,7 +310,7 @@ msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/shotgun.cpp:128
+#: src/weapon/shotgun.cpp:127
 #, fuzzy, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -323,14 +322,14 @@ msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/snipe_rifle.cpp:254
+#: src/weapon/snipe_rifle.cpp:253
 #, fuzzy, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
 "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/submachine_gun.cpp:148
+#: src/weapon/submachine_gun.cpp:147
 #, fuzzy, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -348,7 +347,7 @@ msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
 msgstr[0] "%s takımı %u %s kazandı!"
 
-#: src/weapon/teleportation.cpp:121
+#: src/weapon/teleportation.cpp:123
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -371,7 +370,7 @@ msgstr[0] "%s takımı %u %s kazandı!"
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:1036 src/game/game.cpp:1048
+#: src/game/game.cpp:1046 src/game/game.cpp:1058
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -381,12 +380,12 @@ msgstr ""
 msgid "%s: no such nickame"
 msgstr ""
 
-#: src/interface/interface.cpp:241
+#: src/interface/interface.cpp:252
 msgid "(dead)"
 msgstr "(ölü)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:327
+#: src/menu/options_menu.cpp:329
 msgid "(system language)"
 msgstr ""
 
@@ -395,11 +394,16 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:259
+#: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
-#: src/menu/options_menu.cpp:527
+#: src/menu/help_menu.cpp:100
+#, fuzzy
+msgid "A circle indicates the active character"
+msgstr "Paraşüt"
+
+#: src/menu/options_menu.cpp:515
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -412,7 +416,7 @@ msgstr ""
 msgid "Action"
 msgstr "Seçenekler"
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:213
 msgid "Air Attack"
 msgstr "Hava Saldırısı"
 
@@ -434,7 +438,7 @@ msgstr "Oyna"
 msgid "And the winner is..."
 msgstr ""
 
-#: src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:56
 msgid ""
 "Angle: Up/Down\n"
 "Fire: space key\n"
@@ -445,11 +449,16 @@ msgstr ""
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:328
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Area currently displayed"
+msgstr ""
+
+#: src/main.cpp:327
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Otomatik Bazuka"
 
@@ -465,11 +474,11 @@ msgstr ""
 msgid "Bad socket ..."
 msgstr ""
 
-#: src/weapon/baseball.cpp:56
+#: src/weapon/baseball.cpp:55
 msgid "Baseball Bat"
 msgstr "Beyzbol Sopası"
 
-#: src/weapon/bazooka.cpp:121
+#: src/weapon/bazooka.cpp:119
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -522,7 +531,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:58 src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
 msgid "Center camera on character"
 msgstr ""
 
@@ -532,24 +541,19 @@ msgid "Center on active character"
 msgstr "Paraşüt"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:79
 #, fuzzy
 msgid "Change active character"
 msgstr "Paraşüt"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:70
 msgid "Change aim angle"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:88
-msgid "Change number of playing teams"
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:87
-msgid "Change per team number of players"
+#: src/menu/help_menu.cpp:89
+msgid "Change number of players per team"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1176
@@ -557,16 +561,16 @@ msgid "Change weapon"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63
+#: src/menu/help_menu.cpp:68
 msgid "Change weapon category"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:69
 msgid "Change weapon countdown"
 msgstr ""
 
-#: src/menu/help_menu.cpp:131
+#: src/menu/help_menu.cpp:146
 msgid ""
 "Character name.\n"
 "Character energy.\n"
@@ -592,12 +596,19 @@ msgstr ""
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:223
+#: src/menu/map_selection_box.cpp:225
 msgid "Choose randomly between the different maps"
 msgstr ""
 
 #: src/game/game_mode.cpp:341
 msgid "Classic"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:93
+msgid ""
+"Click on either side of the central (selected) map or use wheelmouse to "
+"change the selected map."
 msgstr ""
 
 #: src/weapon/teleportation.cpp:51
@@ -613,22 +624,19 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
-msgid "Click to change team selected"
+#: src/menu/help_menu.cpp:91
+msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:86
-msgid "Click to select AI/human team"
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
-msgid "Click/wheelmouse to change map"
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Click/wheelmouse to change the team.\n"
+"You can't select the same team several times."
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:450
+#: src/menu/network_menu.cpp:188 src/network/network.cpp:450
 msgid "Client mode"
 msgstr ""
 
@@ -650,7 +658,7 @@ msgid "Commit Suicide"
 msgstr "İntihar"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:66
 #, fuzzy
 msgid "Configuration menu"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -675,7 +683,7 @@ msgstr "İnşa Et"
 msgid "Controlled by: "
 msgstr ""
 
-#: lib/wormux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:198
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
@@ -689,7 +697,7 @@ msgstr "SDL kütüphanesi başlatılamadı: %s"
 msgid "Credits"
 msgstr "Hazırlayanlar"
 
-#: src/menu/help_menu.cpp:139
+#: src/menu/help_menu.cpp:50
 msgid "Current controls"
 msgstr ""
 
@@ -717,7 +725,7 @@ msgstr "Disko El Bombası"
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/network_menu.cpp:171
+#: src/menu/network_menu.cpp:190
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -730,7 +738,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:62
 msgid "Drag&drop: Move camera"
 msgstr ""
 
@@ -743,25 +751,19 @@ msgstr ""
 msgid "Duration of a turn"
 msgstr "Tur zamanı"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:118
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game.cpp:476
+#: src/game/game.cpp:485
 msgid "END OF GAME"
 msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:84
-#, fuzzy
-msgid "Edit player name"
-msgstr "Oyuncu isimleri?"
 
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr ""
 
-#: src/menu/results_menu.cpp:324
+#: src/menu/results_menu.cpp:327
 msgid "Energy"
 msgstr ""
 
@@ -770,7 +772,7 @@ msgstr ""
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
 
-#: src/map/ground.cpp:68
+#: src/map/ground.cpp:65
 #, fuzzy
 msgid "Error loading ground"
 msgstr "%s takımı yüklenirken hata:"
@@ -799,28 +801,28 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:533
+#: src/menu/network_connection_menu.cpp:526
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:483
+#: src/menu/network_connection_menu.cpp:476
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:392
+#: src/menu/network_connection_menu.cpp:387
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:511
+#: src/menu/network_connection_menu.cpp:504
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:504
+#: src/menu/network_connection_menu.cpp:497
 #: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
@@ -835,30 +837,30 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:110
 msgid "Experiment new game rules"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114
+#: src/menu/benchmark_menu.cpp:115
 msgid "FPS"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:176 lib/wormux/net/download.cpp:217
+#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:183
+#: lib/warmux/net/download.cpp:190
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "(%s) harita dizini açılamadı!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:136
+#: src/menu/help_menu.cpp:151
 msgid "Fire your weapon!"
 msgstr ""
 
-#: src/weapon/flamethrower.cpp:135
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr ""
 
@@ -867,21 +869,26 @@ msgstr ""
 msgid "Football Bomb"
 msgstr "Ses Bombası"
 
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Frames per second indicator"
+msgstr ""
+
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
-#: src/menu/game_menu.cpp:96
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:127
 msgid "Game"
 msgstr ""
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 msgid "Game menu"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:103
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr ""
 
@@ -890,18 +897,13 @@ msgid "Game name:"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:124
+#: src/menu/help_menu.cpp:139
 msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu Mancınığı"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:85
-msgid "Go to game rules editing submenu"
-msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -910,7 +912,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:113 src/menu/options_menu.cpp:148
+#: src/menu/benchmark_menu.cpp:114 src/menu/options_menu.cpp:148
 msgid "Graphics"
 msgstr ""
 
@@ -926,11 +928,11 @@ msgstr ""
 msgid "Grenade"
 msgstr "El bombası"
 
-#: src/map/ground.cpp:46
+#: src/map/ground.cpp:43
 msgid "Ground initialization..."
 msgstr "Alan oluşturuluyor..."
 
-#: src/weapon/gun.cpp:73
+#: src/weapon/gun.cpp:72
 msgid "Gun"
 msgstr "Tabanca"
 
@@ -939,7 +941,7 @@ msgid "Have a good game!"
 msgstr ""
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:230 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr ""
@@ -950,7 +952,7 @@ msgid "Help"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:54
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
 msgid "High jump"
 msgstr ""
 
@@ -962,7 +964,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
-#: src/main.cpp:262
+#: src/main.cpp:261
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -972,8 +974,10 @@ msgstr ""
 "(İngilizce olsun lütfen):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:99
-msgid "If you like medkits, increase this"
+#: src/menu/help_menu.cpp:114
+msgid ""
+"If you like medkits,\n"
+"increase this"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1187
@@ -989,22 +993,22 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:116
 msgid "Increase this for faster death mode end"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:111
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:115
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:126
+#: src/menu/help_menu.cpp:141
 msgid "Ingame display"
 msgstr ""
 
@@ -1013,7 +1017,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi"
 
-#: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -1041,16 +1045,16 @@ msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:137
+#: src/menu/help_menu.cpp:152
 msgid "Interface"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:125
+#: src/menu/help_menu.cpp:140
 msgid "Interface, more details in another tab"
 msgstr ""
 
-#: src/game/game.cpp:891
+#: src/game/game.cpp:901
 msgid "It's a present!"
 msgstr ""
 
@@ -1063,7 +1067,7 @@ msgid "Jump"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:55 src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
 msgid "Jump backwards"
 msgstr ""
 
@@ -1084,7 +1088,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:82
 msgid "Keyboard"
 msgstr ""
 
@@ -1127,7 +1131,7 @@ msgid "Manual connection"
 msgstr ""
 
 #: src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
+#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 #, fuzzy
 msgid "Map"
 msgstr "Haritalar"
@@ -1142,11 +1146,16 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
 
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:92
+msgid "Map author information: name, email, nickname, country"
+msgstr ""
+
 #: src/game/game.cpp:145
 msgid "Maps"
 msgstr "Haritalar"
 
-#: src/menu/network_menu.cpp:430 src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:439 src/menu/network_menu.cpp:440
 msgid "Master mode"
 msgstr ""
 
@@ -1159,7 +1168,7 @@ msgstr "Başlangıç enerjisi"
 msgid "Maximum FPS"
 msgstr "En fazla FPS"
 
-#: src/menu/benchmark_menu.cpp:112
+#: src/menu/benchmark_menu.cpp:113
 msgid "Menu"
 msgstr ""
 
@@ -1167,7 +1176,13 @@ msgstr ""
 msgid "Mine"
 msgstr "Mayın"
 
-#: src/menu/help_menu.cpp:123
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:105
+#, fuzzy
+msgid "Minimap"
+msgstr "Haritalar"
+
+#: src/menu/help_menu.cpp:138
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1182,7 +1197,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:113
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1227,12 +1242,12 @@ msgid "Move camera up"
 msgstr "Paraşüt"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:76
 msgid "Move camera with mouse or arrows"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Move character"
 msgstr "Paraşüt"
@@ -1284,7 +1299,7 @@ msgstr ""
 msgid "New network game at "
 msgstr "Ağ Oyunu"
 
-#: src/menu/options_menu.cpp:304
+#: src/menu/options_menu.cpp:306
 msgid "New player warning?"
 msgstr ""
 
@@ -1293,7 +1308,7 @@ msgstr ""
 msgid "Next character"
 msgstr "Paraşüt"
 
-#: src/weapon/weapon.cpp:636
+#: src/weapon/weapon.cpp:637
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
@@ -1302,7 +1317,7 @@ msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 msgid "No player connected"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:135
+#: lib/warmux/net/download.cpp:139
 msgid "No pointer"
 msgstr ""
 
@@ -1326,12 +1341,12 @@ msgid "Number of teams:"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:73
 msgid "On a character: select it"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:72
 msgid "On map: select a target"
 msgstr ""
 
@@ -1381,7 +1396,7 @@ msgstr ""
 msgid "Play"
 msgstr "Oyna"
 
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:145
 msgid "Play several times"
 msgstr ""
 
@@ -1402,7 +1417,7 @@ msgstr "Oyuncu isimleri?"
 msgid "Podium"
 msgstr ""
 
-#: src/weapon/polecat.cpp:191
+#: src/weapon/polecat.cpp:194
 msgid "Polecat Launcher"
 msgstr "Kokarca Mancınığı"
 
@@ -1410,6 +1425,18 @@ msgstr "Kokarca Mancınığı"
 #: src/menu/network_connection_menu.cpp:252
 msgid "Port:"
 msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:104
+msgid "Position of bonus boxes or medkits"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:103
+#, fuzzy
+#| msgid "Find a random position for characters"
+msgid "Position of the other characters"
+msgstr "Karakterler için rastgele yer bul"
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1429,14 +1456,14 @@ msgid ""
 "Try to have a soft landing."
 msgstr ""
 
-#: src/weapon/gun.cpp:74 src/weapon/shotgun.cpp:88
-#: src/weapon/snipe_rifle.cpp:243
+#: src/weapon/gun.cpp:73 src/weapon/shotgun.cpp:87
+#: src/weapon/snipe_rifle.cpp:242
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle"
 msgstr ""
 
-#: src/weapon/flamethrower.cpp:136 src/weapon/submachine_gun.cpp:98
+#: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:97
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle\n"
@@ -1468,7 +1495,7 @@ msgid "Public battles"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:81
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1476,11 +1503,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:251
+#: src/main.cpp:250
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/menu/help_menu.cpp:53 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
 #, fuzzy
 msgid "Quit game"
 msgstr "Oyunu çalıştır"
@@ -1489,12 +1516,12 @@ msgstr "Oyunu çalıştır"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:222
+#: src/menu/map_selection_box.cpp:224
 #, fuzzy
 msgid "Random map"
 msgstr "Haritaları yükle:"
 
-#: lib/wormux/net/download.cpp:129
+#: lib/warmux/net/download.cpp:133
 #, c-format
 msgid "Read only %i bytes"
 msgstr ""
@@ -1562,12 +1589,16 @@ msgstr ""
 msgid "Select 'Tool' weapon category"
 msgstr ""
 
+#: src/menu/help_menu.cpp:88
+msgid "Select number of playing teams"
+msgstr ""
+
 #: src/interface/man_machine_interface.cpp:1152
 msgid "Select weapon category 8"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:134
+#: src/menu/help_menu.cpp:149
 msgid "Selected weapon and ammo left"
 msgstr ""
 
@@ -1581,7 +1612,7 @@ msgid "Server available on Internet"
 msgstr ""
 
 #. Server Mode
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:480
+#: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr ""
 
@@ -1605,14 +1636,14 @@ msgid ""
 "Use Left/Right to change direction"
 msgstr ""
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:192
+#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
 "One shoot per turn"
 msgstr ""
 
-#: src/weapon/dynamite.cpp:117
+#: src/weapon/dynamite.cpp:119
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Space to place dynamite"
@@ -1627,18 +1658,18 @@ msgstr "Pompalı tüfek"
 msgid "Shoots all players in a straight line!"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:87
+#: src/weapon/shotgun.cpp:86
 msgid "Shotgun"
 msgstr "Pompalı tüfek"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Seçenekler"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:59
+#: src/menu/help_menu.cpp:64
 msgid "Show/hide the interface"
 msgstr ""
 
@@ -1659,23 +1690,23 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:75
 msgid "Smaller aim angle and walk step"
 msgstr ""
 
-#: src/weapon/snipe_rifle.cpp:242
+#: src/weapon/snipe_rifle.cpp:241
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
-#: src/object/bonus_box.cpp:58
+#: src/object/bonus_box.cpp:64
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:397
+#: src/menu/network_connection_menu.cpp:392
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
@@ -1683,7 +1714,7 @@ msgid ""
 "can download an updated version from http://www.wormux.org/wiki/download.php"
 msgstr ""
 
-#: src/menu/options_menu.cpp:308
+#: src/menu/options_menu.cpp:310
 #, fuzzy
 msgid "Sound"
 msgstr "Sesler"
@@ -1705,11 +1736,11 @@ msgstr "Sesler"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:260
+#: src/interface/interface.cpp:276
 msgid "Stock:"
 msgstr "Stok:"
 
-#: src/weapon/submachine_gun.cpp:97
+#: src/weapon/submachine_gun.cpp:96
 msgid "Submachine Gun"
 msgstr "Makinalı Tüfek"
 
@@ -1726,11 +1757,11 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:67
 msgid "Talk in network battles"
 msgstr ""
 
-#: src/menu/results_menu.cpp:322
+#: src/menu/results_menu.cpp:326
 #, fuzzy
 msgid "Team graphs"
 msgstr "Takımlar"
@@ -1741,7 +1772,7 @@ msgid "Team stats"
 msgstr "Takımlar"
 
 #: src/game/game.cpp:152 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
-#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:100
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Teams"
 msgstr "Takımlar"
 
@@ -1750,7 +1781,7 @@ msgid "Teams editor"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:133
+#: src/menu/help_menu.cpp:148
 msgid "Teams in decreasing order of energy"
 msgstr ""
 
@@ -1772,12 +1803,12 @@ msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Gnu, patlamadan savaş alanını terketti"
 
-#: src/weapon/polecat.cpp:168
+#: src/weapon/polecat.cpp:172
 #, fuzzy
 msgid "The Polecat left the battlefield before exploding!"
 msgstr "Kokarca, patlamadan savaş alanını terketti"
 
-#: src/weapon/auto_bazooka.cpp:179
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Otomatik roket savaş alanını terketti..."
 
@@ -1787,11 +1818,11 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "Top, patlamadan savaş alanını terketti"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:117
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:137
+#: src/menu/game_mode_editor.cpp:132
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -1813,7 +1844,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Disko el bombası, patlamadan dans pistini terketti"
 
-#: src/game/game.cpp:727
+#: src/game/game.cpp:737
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -1822,7 +1853,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding!"
 msgstr "El bombası, patlamadan savaş alanını terketti"
 
-#: src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:385
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr ""
 
@@ -1831,7 +1862,7 @@ msgstr ""
 msgid "The parachute is activated automatically."
 msgstr "Paraşüt otomatik olarak etkinleştirildi."
 
-#: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
@@ -1844,13 +1875,13 @@ msgstr ""
 msgid "The server rejected the connection: wrong password!"
 msgstr ""
 
-#: src/weapon/weapon.cpp:648
+#: src/weapon/weapon.cpp:649
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:277
+#: src/menu/network_menu.cpp:286
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1861,12 +1892,12 @@ msgstr[0] ""
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114 src/menu/results_menu.cpp:324
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
 msgid "Time"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
+#: src/menu/help_menu.cpp:147
 msgid ""
 "Time left in this turn.\n"
 "Time elapsed since game start."
@@ -1889,7 +1920,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:126
 msgid ""
 "To jump, press space or trackball or dpad center.\n"
 "To aim or move more slowly, use shift/vol+.\n"
@@ -1898,7 +1929,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:132
 msgid ""
 "To jump, press space.\n"
 "To aim or move more slowly, use shift.\n"
@@ -1907,7 +1938,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:60
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Tam ekran?"
@@ -1917,7 +1948,7 @@ msgid "Toggle interface"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
 msgid "Toggle minimap"
 msgstr ""
 
@@ -1981,7 +2012,7 @@ msgid ""
 "One ammo per turn"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:225
+#: src/weapon/auto_bazooka.cpp:221
 msgid ""
 "Usage: left click on the target\n"
 "Initial fire angle: Up/Down\n"
@@ -1993,22 +2024,22 @@ msgstr ""
 msgid "Version"
 msgstr "Sürüm"
 
-#: src/menu/options_menu.cpp:534
+#: src/menu/options_menu.cpp:522
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr ""
 
-#: src/menu/network_menu.cpp:438
+#: src/menu/network_menu.cpp:447
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:300
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#: src/game/game.cpp:626
+#: src/game/game.cpp:636
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -2017,12 +2048,12 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:505
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:77
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
@@ -2030,29 +2061,29 @@ msgstr ""
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:337
+#: src/main.cpp:336
 msgid "Website: "
 msgstr "Web sitesi: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:161
+#: src/menu/network_menu.cpp:180
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1004
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1057
+#: src/game/game.cpp:1067
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:112
 msgid "When a character can be switched"
 msgstr ""
 
@@ -2061,7 +2092,7 @@ msgid "Wind particles?"
 msgstr "Rüzgar parçacıkları?"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:135
+#: src/menu/help_menu.cpp:150
 msgid "Wind strength and direction"
 msgstr ""
 
@@ -2075,11 +2106,11 @@ msgstr "Mayın"
 msgid "Woah! Combo of %u!"
 msgstr ""
 
-#: src/main.cpp:191
+#: src/main.cpp:190
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:327
+#: src/main.cpp:326
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
@@ -2095,16 +2126,16 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:148
+#: lib/warmux/net/download.cpp:149
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:294 src/menu/network_menu.cpp:389
 msgid "You are alone. :-/"
 msgstr ""
 
-#: src/menu/network_menu.cpp:437
+#: src/menu/network_menu.cpp:446
 msgid "You are the new turn master!"
 msgstr ""
 
@@ -2113,16 +2144,16 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game.cpp:274 src/team/teams_list.cpp:163
+#: src/game/game.cpp:280 src/team/teams_list.cpp:163
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:270
 msgid "You won't be able to play before selecting a team!"
 msgstr ""
 
-#: src/weapon/weapon_launcher.cpp:555
+#: src/weapon/weapon_launcher.cpp:554
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 
@@ -2131,7 +2162,7 @@ msgstr "Iskaladın!"
 msgid "aka"
 msgstr "Bazuka"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:214
 msgid ""
 "attack direction: Left/Right\n"
 "Bombing: Left click on the target\n"
@@ -2147,7 +2178,7 @@ msgstr ""
 msgid "custom player"
 msgstr ""
 
-#: src/map/ground.cpp:74
+#: src/map/ground.cpp:71
 msgid "done"
 msgstr "tamam"
 
@@ -2158,6 +2189,10 @@ msgstr "Kişisel ayar dosyası okunuyor"
 
 #: src/menu/credits_menu.cpp:75
 msgid "from"
+msgstr ""
+
+#: src/interface/loading_screen.cpp:43
+msgid "loading..."
 msgstr ""
 
 #: src/map/maps_list.cpp:73
@@ -2178,6 +2213,10 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Edit player name"
+#~ msgstr "Oyuncu isimleri?"
 
 #, fuzzy
 #~ msgid "Fullscreen / window"
@@ -2260,9 +2299,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Failed to initialize network library!"
 #~ msgstr "SDL kütüphanesi başlatılamadı: %s"
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Karakterler için rastgele yer bul"
 
 #~ msgid "HOME directory (environment variable $HOME) could not be found!"
 #~ msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"

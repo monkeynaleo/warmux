@@ -6,7 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2010-10-24 08:01+0200\n"
 "PO-Revision-Date: 2010-01-10 12:34+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -26,14 +25,14 @@ msgstr "! Fann ikkje kartet «%s». :–("
 msgid "%.1f fps"
 msgstr "%.1f b/s"
 
-#: src/menu/network_menu.cpp:129 src/menu/network_menu.cpp:360
+#: src/menu/network_menu.cpp:148 src/menu/network_menu.cpp:369
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i spelar kopla til"
 msgstr[1] "%i spelarar kopla til"
 
-#: src/menu/network_menu.cpp:133 src/menu/network_menu.cpp:370
+#: src/menu/network_menu.cpp:152 src/menu/network_menu.cpp:379
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -61,34 +60,34 @@ msgstr "%s-laget"
 msgid "%s Team - Remote"
 msgstr "%s-laget – frå nettet"
 
-#: src/game/game.cpp:1015
+#: src/game/game.cpp:1025
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s frå %s-laget gjorde sjølvmord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1041 src/game/game.cpp:1060
+#: src/game/game.cpp:1051 src/game/game.cpp:1070
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s frå %s-laget døydde!"
 
-#: src/game/game.cpp:1007
+#: src/game/game.cpp:1017
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s frå %s-laget fall i vatnet!"
 
-#: src/game/game.cpp:1001
+#: src/game/game.cpp:1011
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s frå %s-laget fall ut av kartet!"
 
-#: src/game/game.cpp:1021
+#: src/game/game.cpp:1031
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s frå %s-laget trefte bakken for hardt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1028
+#: src/game/game.cpp:1038
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s frå %s-laget døydde fordi han var klønete!"
@@ -98,7 +97,7 @@ msgstr "%s frå %s-laget døydde fordi han var klønete!"
 msgid "%s has address %s"
 msgstr "%s endrar målet til %s"
 
-#: src/weapon/polecat.cpp:115
+#: src/weapon/polecat.cpp:117
 #, c-format
 msgid ""
 "%s has done something for the environment, he has not ordered the polecat to "
@@ -106,12 +105,12 @@ msgid ""
 msgstr ""
 "%s har gjort noko bra for miljøet: Han har ikkje bedt stinkdyret om å fisa."
 
-#: src/object/medkit.cpp:57
+#: src/object/medkit.cpp:63
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s fekk %u livspoeng!"
 
-#: src/game/game.cpp:1052
+#: src/game/game.cpp:1062
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er vorten sinnssjuk, og har drept nokon frå %s-laget!"
@@ -132,7 +131,7 @@ msgid "%s needs a pause."
 msgstr "%s treng ein pause."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:71
+#: src/object/bonus_box.cpp:77
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s-laget har alt uendeleg ammunisjon for %s!"
@@ -157,7 +156,7 @@ msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
 msgstr[0] "%s-laget vann %u gnu! Spreng dei alle saman, cowboy!"
 msgstr[1] "%s-laget vann %u gnuar! Spreng dei alle saman, cowboy!"
 
-#: src/weapon/air_attack.cpp:260
+#: src/weapon/air_attack.cpp:256
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -186,21 +185,21 @@ msgid_plural "%s team has won %u anvils! Splat them all!"
 msgstr[0] "%s-laget vann %u ambolt! Mos alle saman!"
 msgstr[1] "%s-laget vann %u amboltar! Mos alle saman!"
 
-#: src/weapon/auto_bazooka.cpp:332
+#: src/weapon/auto_bazooka.cpp:325
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "%s-laget vann %u laserstyrde rakett!"
 msgstr[1] "%s-laget vann %u laserstyrde rakettar!"
 
-#: src/weapon/baseball.cpp:113
+#: src/weapon/baseball.cpp:112
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
 msgstr[0] "%s-laget vann %u balltre!"
 msgstr[1] "%s-laget vann %u balltre!"
 
-#: src/weapon/bazooka.cpp:128
+#: src/weapon/bazooka.cpp:126
 #, c-format
 msgid "%s team has won %u bazooka!"
 msgid_plural "%s team has won %u bazookas!"
@@ -250,14 +249,14 @@ msgid_plural ""
 msgstr[0] "%s-laget vann %u diskogranat! Kjenn rytmen når du kastar han!"
 msgstr[1] "%s-laget vann %u diskogranat! Kjenn rytmen når du kastar dei!"
 
-#: src/weapon/dynamite.cpp:148
+#: src/weapon/dynamite.cpp:150
 #, c-format
 msgid "%s team has won %u dynamite!"
 msgid_plural "%s team has won %u dynamites!"
 msgstr[0] "%s-laget vann %u dynamittkubbe!"
 msgstr[1] "%s-laget vann %u dynamittkubbar!"
 
-#: src/weapon/flamethrower.cpp:195
+#: src/weapon/flamethrower.cpp:194
 #, c-format
 msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
@@ -285,7 +284,7 @@ msgid_plural "%s team has won %u grenades!"
 msgstr[0] "%s-laget vann %u granat!"
 msgstr[1] "%s-laget vann %u granatar!"
 
-#: src/weapon/gun.cpp:96
+#: src/weapon/gun.cpp:95
 #, c-format
 msgid "%s team has won %u gun!"
 msgid_plural "%s team has won %u guns!"
@@ -327,7 +326,7 @@ msgid_plural "%s team has won %u parachutes!"
 msgstr[0] "%s-laget vann %u fallskjerm!"
 msgstr[1] "%s-laget vann %u fallskjermar!"
 
-#: src/weapon/polecat.cpp:270
+#: src/weapon/polecat.cpp:273
 #, c-format
 msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
@@ -348,7 +347,7 @@ msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s-laget vann %u opprørsbombe!"
 msgstr[1] "%s-laget vann %u opprørsbomber!"
 
-#: src/weapon/shotgun.cpp:128
+#: src/weapon/shotgun.cpp:127
 #, c-format
 msgid "%s team has won %u shotgun!"
 msgid_plural "%s team has won %u shotguns!"
@@ -362,7 +361,7 @@ msgid_plural "%s team has won %u slaps! Dodge this!"
 msgstr[0] "%s-laget vann %u dask!"
 msgstr[1] "%s-laget vann %u daskar! Vend andre kinnet til!"
 
-#: src/weapon/snipe_rifle.cpp:254
+#: src/weapon/snipe_rifle.cpp:253
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -370,7 +369,7 @@ msgid_plural ""
 msgstr[0] "%s-laget vann %u laserrifle! Skyt han mellom auga!"
 msgstr[1] "%s-laget vann %u laserrifle! Skyt dei mellom auga!"
 
-#: src/weapon/submachine_gun.cpp:148
+#: src/weapon/submachine_gun.cpp:147
 #, c-format
 msgid "%s team has won %u submachine gun!"
 msgid_plural "%s team has won %u submachine guns!"
@@ -392,7 +391,7 @@ msgid_plural "%s team has won %u syringes!"
 msgstr[0] "%s-laget vann %u sprøyte!"
 msgstr[1] "%s-laget vann %u sprøyter!"
 
-#: src/weapon/teleportation.cpp:121
+#: src/weapon/teleportation.cpp:123
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -424,7 +423,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s-laget vart meia ned."
 
-#: src/game/game.cpp:1036 src/game/game.cpp:1048
+#: src/game/game.cpp:1046 src/game/game.cpp:1058
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tok eit medlem av %s-laget med seg i grava!"
@@ -434,12 +433,12 @@ msgstr "%s tok eit medlem av %s-laget med seg i grava!"
 msgid "%s: no such nickame"
 msgstr ""
 
-#: src/interface/interface.cpp:241
+#: src/interface/interface.cpp:252
 msgid "(dead)"
 msgstr "(død)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:327
+#: src/menu/options_menu.cpp:329
 msgid "(system language)"
 msgstr "(Systemspråket)"
 
@@ -448,11 +447,16 @@ msgid "(unknown time)"
 msgstr "(ukjend tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:259
+#: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(uendeleg)"
 
-#: src/menu/options_menu.cpp:527
+#: src/menu/help_menu.cpp:100
+#, fuzzy
+msgid "A circle indicates the active character"
+msgstr "Byt person"
+
+#: src/menu/options_menu.cpp:515
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -467,7 +471,7 @@ msgstr ""
 msgid "Action"
 msgstr "Oppsett"
 
-#: src/weapon/air_attack.cpp:217
+#: src/weapon/air_attack.cpp:213
 msgid "Air Attack"
 msgstr "Luftangrep"
 
@@ -487,7 +491,7 @@ msgstr "Alltid"
 msgid "And the winner is..."
 msgstr "Og vinnaren er …"
 
-#: src/weapon/baseball.cpp:57
+#: src/weapon/baseball.cpp:56
 #, fuzzy
 msgid ""
 "Angle: Up/Down\n"
@@ -502,11 +506,16 @@ msgstr ""
 msgid "Anvil"
 msgstr "Ambolt"
 
-#: src/main.cpp:328
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Area currently displayed"
+msgstr ""
+
+#: src/main.cpp:327
 msgid "Authors:"
 msgstr "Utviklarar:"
 
-#: src/weapon/auto_bazooka.cpp:224
+#: src/weapon/auto_bazooka.cpp:220
 msgid "Automatic Bazooka"
 msgstr "Laserstyrd rakett"
 
@@ -522,11 +531,11 @@ msgstr "Tilbake"
 msgid "Bad socket ..."
 msgstr "Dårleg tilkopling …"
 
-#: src/weapon/baseball.cpp:56
+#: src/weapon/baseball.cpp:55
 msgid "Baseball Bat"
 msgstr "Balltre"
 
-#: src/weapon/bazooka.cpp:121
+#: src/weapon/bazooka.cpp:119
 msgid "Bazooka"
 msgstr "Rakett"
 
@@ -577,7 +586,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Klarte ikkje opna den tilpassa lagmappa (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:58 src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Rett kameraet mot spelaren"
@@ -588,27 +597,21 @@ msgid "Center on active character"
 msgstr "Byt person"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:79
 #, fuzzy
 msgid "Change active character"
 msgstr "Byt person"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:65
+#: src/menu/help_menu.cpp:70
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Endra sikteretning"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:89
 #, fuzzy
-msgid "Change number of playing teams"
-msgstr "Øvre grense på spelarar:"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:87
-#, fuzzy
-msgid "Change per team number of players"
+msgid "Change number of players per team"
 msgstr "Øvre grense på spelarar:"
 
 #: src/interface/man_machine_interface.cpp:1176
@@ -617,18 +620,18 @@ msgid "Change weapon"
 msgstr "Endra våpenkategori"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63
+#: src/menu/help_menu.cpp:68
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Endra våpenkategori"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Endra våpennedteljing"
 
-#: src/menu/help_menu.cpp:131
+#: src/menu/help_menu.cpp:146
 msgid ""
 "Character name.\n"
 "Character energy.\n"
@@ -652,13 +655,20 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Sjå etter oppdateringar på Internett"
 
-#: src/menu/map_selection_box.cpp:223
+#: src/menu/map_selection_box.cpp:225
 msgid "Choose randomly between the different maps"
 msgstr "Vel eit tilfeldig kart"
 
 #: src/game/game_mode.cpp:341
 msgid "Classic"
 msgstr "Klassisk"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:93
+msgid ""
+"Click on either side of the central (selected) map or use wheelmouse to "
+"change the selected map."
+msgstr ""
 
 #: src/weapon/teleportation.cpp:51
 msgid ""
@@ -673,22 +683,19 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:83
-msgid "Click to change team selected"
+#: src/menu/help_menu.cpp:91
+msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:86
-msgid "Click to select AI/human team"
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
-msgid "Click/wheelmouse to change map"
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Click/wheelmouse to change the team.\n"
+"You can't select the same team several times."
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:169 src/network/network.cpp:450
+#: src/menu/network_menu.cpp:188 src/network/network.cpp:450
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -709,7 +716,7 @@ msgid "Commit Suicide"
 msgstr "Sjølvmordsbombe"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:66
 msgid "Configuration menu"
 msgstr "Oppsettmeny"
 
@@ -733,7 +740,7 @@ msgstr "Bygg"
 msgid "Controlled by: "
 msgstr "Lagkaptein: "
 
-#: lib/wormux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:198
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Kunne ikke hente siste versjon fra %s"
@@ -747,7 +754,7 @@ msgstr "Klarte ikkje opna fila %s"
 msgid "Credits"
 msgstr "Bidragsytarar"
 
-#: src/menu/help_menu.cpp:139
+#: src/menu/help_menu.cpp:50
 msgid "Current controls"
 msgstr ""
 
@@ -775,7 +782,7 @@ msgstr "Diskogranat"
 msgid "Displays this message"
 msgstr "Vis denne meldinga"
 
-#: src/menu/network_menu.cpp:171
+#: src/menu/network_menu.cpp:190
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Gløym ikkje å stadfesta val av lag!"
 
@@ -788,7 +795,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:62
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Dra: flytt kameraet"
@@ -802,25 +809,19 @@ msgstr "Ventetid før dødsmodus"
 msgid "Duration of a turn"
 msgstr "Rundelengd"
 
-#: src/weapon/dynamite.cpp:116
+#: src/weapon/dynamite.cpp:118
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:476
+#: src/game/game.cpp:485
 msgid "END OF GAME"
 msgstr "SPELET ER SLUTT"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:84
-#, fuzzy
-msgid "Edit player name"
-msgstr "Spillers navn ?"
 
 #: src/menu/options_menu.cpp:281
 msgid "Effects volume"
 msgstr "Lydstyrke: effektar"
 
-#: src/menu/results_menu.cpp:324
+#: src/menu/results_menu.cpp:327
 msgid "Energy"
 msgstr "Energi"
 
@@ -829,7 +830,7 @@ msgstr "Energi"
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Nettverksfeil: Klienten %s er ikkje einig med deg! – %s"
 
-#: src/map/ground.cpp:68
+#: src/map/ground.cpp:65
 #, fuzzy
 msgid "Error loading ground"
 msgstr "Klarte ikkje lasta laget:"
@@ -859,25 +860,25 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Klarte ikkje sletta fila «%s», og kan derfor ikkje sletta tilpassa lag."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:533
+#: src/menu/network_connection_menu.cpp:526
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Feil: Klarte ikkje kopla til %s:%s."
 
-#: src/menu/network_connection_menu.cpp:483
+#: src/menu/network_connection_menu.cpp:476
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Feil: Klarte ikkje kontakta hovudtenaren for å vera vert."
 
-#: src/menu/network_connection_menu.cpp:392
+#: src/menu/network_connection_menu.cpp:387
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Feil: Klarte ikkje kontakta hovudtenaren for å søkje etter spel."
 
-#: src/menu/network_connection_menu.cpp:511
+#: src/menu/network_connection_menu.cpp:504
 msgid "Error: Unable to start the server"
 msgstr "Feil: Klarte ikkje starta tenaren."
 
-#: src/menu/network_connection_menu.cpp:504
+#: src/menu/network_connection_menu.cpp:497
 #: tools/servers/game_server/server.cpp:302
 #, c-format
 msgid ""
@@ -896,30 +897,30 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Feil: Finn ikkje innhaldet «%s» til laget «%s»."
 
-#: src/menu/help_menu.cpp:95
+#: src/menu/help_menu.cpp:110
 msgid "Experiment new game rules"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114
+#: src/menu/benchmark_menu.cpp:115
 msgid "FPS"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:176 lib/wormux/net/download.cpp:217
+#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/wormux/net/download.cpp:183
+#: lib/warmux/net/download.cpp:190
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Klarte ikkje opna kartmappa (%s)."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:136
+#: src/menu/help_menu.cpp:151
 msgid "Fire your weapon!"
 msgstr ""
 
-#: src/weapon/flamethrower.cpp:135
+#: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Flammekastar"
 
@@ -927,22 +928,27 @@ msgstr "Flammekastar"
 msgid "Football Bomb"
 msgstr "Fotballbombe"
 
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Frames per second indicator"
+msgstr ""
+
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
 msgstr "Fullskjerm"
 
-#: src/menu/game_menu.cpp:96
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:127
 msgid "Game"
 msgstr "Spel"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:94
 #, fuzzy
 msgid "Game menu"
 msgstr "Spelmodus"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:103
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr "Spelmodus"
 
@@ -951,18 +957,13 @@ msgid "Game name:"
 msgstr "Spelnamn:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:124
+#: src/menu/help_menu.cpp:139
 msgid "Gauge to set speed of some projectiles"
 msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
 msgstr "Gnu"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:85
-msgid "Go to game rules editing submenu"
-msgstr ""
 
 #: src/weapon/syringe.cpp:70
 msgid ""
@@ -971,7 +972,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:113 src/menu/options_menu.cpp:148
+#: src/menu/benchmark_menu.cpp:114 src/menu/options_menu.cpp:148
 msgid "Graphics"
 msgstr "Grafikk"
 
@@ -987,11 +988,11 @@ msgstr "Astronaut"
 msgid "Grenade"
 msgstr "Granat"
 
-#: src/map/ground.cpp:46
+#: src/map/ground.cpp:43
 msgid "Ground initialization..."
 msgstr "Lagar kart …"
 
-#: src/weapon/gun.cpp:73
+#: src/weapon/gun.cpp:72
 msgid "Gun"
 msgstr "Pistol"
 
@@ -1000,7 +1001,7 @@ msgid "Have a good game!"
 msgstr "Kos deg!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:230 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Lagkaptein"
@@ -1011,7 +1012,7 @@ msgid "Help"
 msgstr "Hjelp"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:54
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
 msgid "High jump"
 msgstr "Hopp høgt"
 
@@ -1023,7 +1024,7 @@ msgstr "Ver vert for spel"
 msgid "Hurry up, you are too slow !!"
 msgstr "Kjapp deg. Du er for treg!"
 
-#: src/main.cpp:262
+#: src/main.cpp:261
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1032,8 +1033,10 @@ msgstr ""
 "(på engelsk):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:99
-msgid "If you like medkits, increase this"
+#: src/menu/help_menu.cpp:114
+msgid ""
+"If you like medkits,\n"
+"increase this"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1187
@@ -1049,23 +1052,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:116
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Ventetid før dødsmodus"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:96
+#: src/menu/help_menu.cpp:111
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:115
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:126
+#: src/menu/help_menu.cpp:141
 msgid "Ingame display"
 msgstr ""
 
@@ -1074,7 +1077,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energi ved start"
 
-#: src/weapon/bazooka.cpp:122 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1104,17 +1107,17 @@ msgid "Initialise teams"
 msgstr "Lastar lag"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:137
+#: src/menu/help_menu.cpp:152
 #, fuzzy
 msgid "Interface"
 msgstr "Vis/gøym grensesnitt"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:125
+#: src/menu/help_menu.cpp:140
 msgid "Interface, more details in another tab"
 msgstr ""
 
-#: src/game/game.cpp:891
+#: src/game/game.cpp:901
 msgid "It's a present!"
 msgstr "Det kom ei gåve frå oven!"
 
@@ -1127,7 +1130,7 @@ msgid "Jump"
 msgstr "Hopp"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:55 src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
 msgid "Jump backwards"
 msgstr "Hopp bakover"
 
@@ -1152,7 +1155,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:82
 msgid "Keyboard"
 msgstr ""
 
@@ -1196,7 +1199,7 @@ msgid "Manual connection"
 msgstr "Manuelt samband"
 
 #: src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:101
+#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Map"
 msgstr "Kart"
 
@@ -1210,11 +1213,16 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartet %s er laga av: "
 
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:92
+msgid "Map author information: name, email, nickname, country"
+msgstr ""
+
 #: src/game/game.cpp:145
 msgid "Maps"
 msgstr "Kart"
 
-#: src/menu/network_menu.cpp:430 src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:439 src/menu/network_menu.cpp:440
 msgid "Master mode"
 msgstr "Leiarmodus"
 
@@ -1226,7 +1234,7 @@ msgstr "Maksenergi"
 msgid "Maximum FPS"
 msgstr "Maksimum b/s"
 
-#: src/menu/benchmark_menu.cpp:112
+#: src/menu/benchmark_menu.cpp:113
 msgid "Menu"
 msgstr ""
 
@@ -1234,7 +1242,14 @@ msgstr ""
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/help_menu.cpp:123
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:105
+#, fuzzy
+#| msgid "Map"
+msgid "Minimap"
+msgstr "Kart"
+
+#: src/menu/help_menu.cpp:138
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1248,7 +1263,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:113
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1293,13 +1308,13 @@ msgid "Move camera up"
 msgstr "Flytt spelaren"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:76
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Flytt kameraet med musa eller pilene"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Move character"
 msgstr "Flytt spelaren"
@@ -1349,7 +1364,7 @@ msgstr "Aldri"
 msgid "New network game at "
 msgstr "Nytt nettverksspel "
 
-#: src/menu/options_menu.cpp:304
+#: src/menu/options_menu.cpp:306
 msgid "New player warning?"
 msgstr "Varsel ved nye spelarar"
 
@@ -1358,7 +1373,7 @@ msgstr "Varsel ved nye spelarar"
 msgid "Next character"
 msgstr "Flytt spelaren"
 
-#: src/weapon/weapon.cpp:636
+#: src/weapon/weapon.cpp:637
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Fann ikkje elementet <%s> i XML-oppsettfila."
@@ -1367,7 +1382,7 @@ msgstr "Fann ikkje elementet <%s> i XML-oppsettfila."
 msgid "No player connected"
 msgstr "Ingen spelarar kopla til"
 
-#: lib/wormux/net/download.cpp:135
+#: lib/warmux/net/download.cpp:139
 msgid "No pointer"
 msgstr ""
 
@@ -1391,13 +1406,13 @@ msgid "Number of teams:"
 msgstr "Talet på lag:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "On a character: select it"
 msgstr "På spelar: byt spelar"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:72
 #, fuzzy
 msgid "On map: select a target"
 msgstr "På kartet: vel mål"
@@ -1447,7 +1462,7 @@ msgstr ""
 msgid "Play"
 msgstr "Spel"
 
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:145
 msgid "Play several times"
 msgstr "Spel fleire gonger"
 
@@ -1467,7 +1482,7 @@ msgstr "Spelarnamn"
 msgid "Podium"
 msgstr ""
 
-#: src/weapon/polecat.cpp:191
+#: src/weapon/polecat.cpp:194
 msgid "Polecat Launcher"
 msgstr "Stinkdyr"
 
@@ -1475,6 +1490,16 @@ msgstr "Stinkdyr"
 #: src/menu/network_connection_menu.cpp:252
 msgid "Port:"
 msgstr "Port:"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:104
+msgid "Position of bonus boxes or medkits"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:103
+msgid "Position of the other characters"
+msgstr ""
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1494,14 +1519,14 @@ msgid ""
 "Try to have a soft landing."
 msgstr ""
 
-#: src/weapon/gun.cpp:74 src/weapon/shotgun.cpp:88
-#: src/weapon/snipe_rifle.cpp:243
+#: src/weapon/gun.cpp:73 src/weapon/shotgun.cpp:87
+#: src/weapon/snipe_rifle.cpp:242
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle"
 msgstr ""
 
-#: src/weapon/flamethrower.cpp:136 src/weapon/submachine_gun.cpp:98
+#: src/weapon/flamethrower.cpp:135 src/weapon/submachine_gun.cpp:97
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle\n"
@@ -1533,7 +1558,7 @@ msgid "Public battles"
 msgstr "Offentlege kamper"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:81
 msgid "Quickly quit game with Ctrl"
 msgstr "Avslutt direkte med «Ctrl»"
 
@@ -1541,11 +1566,11 @@ msgstr "Avslutt direkte med «Ctrl»"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:251
+#: src/main.cpp:250
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
-#: src/menu/help_menu.cpp:53 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Avslutt spelet"
 
@@ -1553,11 +1578,11 @@ msgstr "Avslutt spelet"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:222
+#: src/menu/map_selection_box.cpp:224
 msgid "Random map"
 msgstr "Tilfeldig kart"
 
-#: lib/wormux/net/download.cpp:129
+#: lib/warmux/net/download.cpp:133
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Det er berre %i lag."
@@ -1629,13 +1654,18 @@ msgstr "Endra våpenkategori"
 msgid "Select 'Tool' weapon category"
 msgstr "Endra våpenkategori"
 
+#: src/menu/help_menu.cpp:88
+#, fuzzy
+msgid "Select number of playing teams"
+msgstr "Øvre grense på spelarar:"
+
 #: src/interface/man_machine_interface.cpp:1152
 #, fuzzy
 msgid "Select weapon category 8"
 msgstr "Endra våpenkategori"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:134
+#: src/menu/help_menu.cpp:149
 #, fuzzy
 msgid "Selected weapon and ammo left"
 msgstr "Endra våpenkategori"
@@ -1650,7 +1680,7 @@ msgid "Server available on Internet"
 msgstr "Tenar tilgjengeleg på nettet"
 
 #. Server Mode
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:480
+#: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Tenarmodus"
 
@@ -1674,14 +1704,14 @@ msgid ""
 "Use Left/Right to change direction"
 msgstr ""
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:192
+#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
 "One shoot per turn"
 msgstr ""
 
-#: src/weapon/dynamite.cpp:117
+#: src/weapon/dynamite.cpp:119
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Space to place dynamite"
@@ -1696,18 +1726,18 @@ msgstr "Hagle"
 msgid "Shoots all players in a straight line!"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:87
+#: src/weapon/shotgun.cpp:86
 msgid "Shotgun"
 msgstr "Hagle"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:74
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Vis våpenmeny"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:59
+#: src/menu/help_menu.cpp:64
 msgid "Show/hide the interface"
 msgstr "Vis/gøym grensesnitt"
 
@@ -1728,23 +1758,23 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Dask til fienden for å få han til å hoppa litt."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:75
 msgid "Smaller aim angle and walk step"
 msgstr "Tregare sikt/rørsle"
 
-#: src/weapon/snipe_rifle.cpp:242
+#: src/weapon/snipe_rifle.cpp:241
 msgid "Sniper Rifle"
 msgstr "Laserrifle"
 
-#: src/object/bonus_box.cpp:58
+#: src/object/bonus_box.cpp:64
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nokon har lagt ei bombe i kassen!"
 
-#: src/menu/network_connection_menu.cpp:397
+#: src/menu/network_connection_menu.cpp:392
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Det er for tida ingen spel som ventar på spelarar."
 
-#: src/menu/network_connection_menu.cpp:453
+#: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
@@ -1755,7 +1785,7 @@ msgstr ""
 "kan lasta ned ein oppdatert versjon frå http://www.wormux.org/wiki/download."
 "php."
 
-#: src/menu/options_menu.cpp:308
+#: src/menu/options_menu.cpp:310
 msgid "Sound"
 msgstr "Lyd"
 
@@ -1776,11 +1806,11 @@ msgstr "Lydar"
 msgid "Starting a new game"
 msgstr "Startar nytt spel"
 
-#: src/interface/interface.cpp:260
+#: src/interface/interface.cpp:276
 msgid "Stock:"
 msgstr "Lager:"
 
-#: src/weapon/submachine_gun.cpp:97
+#: src/weapon/submachine_gun.cpp:96
 msgid "Submachine Gun"
 msgstr "Maskingevær"
 
@@ -1797,11 +1827,11 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:67
 msgid "Talk in network battles"
 msgstr "Snakk i nettverksspel"
 
-#: src/menu/results_menu.cpp:322
+#: src/menu/results_menu.cpp:326
 msgid "Team graphs"
 msgstr "Laggrafar"
 
@@ -1810,7 +1840,7 @@ msgid "Team stats"
 msgstr "Lagstatistikk"
 
 #: src/game/game.cpp:152 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
-#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:100
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Teams"
 msgstr "Lag"
 
@@ -1819,7 +1849,7 @@ msgid "Teams editor"
 msgstr "Rediger lag"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:133
+#: src/menu/help_menu.cpp:148
 msgid "Teams in decreasing order of energy"
 msgstr ""
 
@@ -1839,11 +1869,11 @@ msgstr "Fotballbomba forsvann frå kartet før ho eksploderte."
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Gnuen forsvann frå kartet før han eksploderte!"
 
-#: src/weapon/polecat.cpp:168
+#: src/weapon/polecat.cpp:172
 msgid "The Polecat left the battlefield before exploding!"
 msgstr "Stinkdyret forsvann frå kartet før det eksploderte!"
 
-#: src/weapon/auto_bazooka.cpp:179
+#: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Den laserstyrde raketten forsvann frå kartet før han eksploderte."
 
@@ -1852,11 +1882,11 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "Sprettballen forsvann frå karten før han eksploderte!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:117
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:137
+#: src/menu/game_mode_editor.cpp:132
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -1881,7 +1911,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskogranaten forlot dansegolvet før han eksploderte!"
 
-#: src/game/game.cpp:727
+#: src/game/game.cpp:737
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spelet vart avbrote fordi du mista nettsambandet."
 
@@ -1889,7 +1919,7 @@ msgstr "Spelet vart avbrote fordi du mista nettsambandet."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Granaten forsvann frå kartet før han eksploderte!"
 
-#: src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:385
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Dei andre ventar på deg! Vakna! :–)"
 
@@ -1897,7 +1927,7 @@ msgstr "Dei andre ventar på deg! Vakna! :–)"
 msgid "The parachute is activated automatically."
 msgstr "Fallskjermen vert automatisk løyst ut."
 
-#: src/weapon/bazooka.cpp:82 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten forsvann frå kartet før han eksploderte."
@@ -1910,7 +1940,7 @@ msgstr "Tenaren nekta tilkoplinga."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Tenaren nekta tilkoplinga: feil passord."
 
-#: src/weapon/weapon.cpp:648
+#: src/weapon/weapon.cpp:649
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
@@ -1918,7 +1948,7 @@ msgstr ""
 "%s-våpenet har uendeleg ammunisjon, men bonusboksar kan likevel ha "
 "ammunisjon for det!"
 
-#: src/menu/network_menu.cpp:277
+#: src/menu/network_menu.cpp:286
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -1930,12 +1960,12 @@ msgstr[1] "Det er berre %i lag."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114 src/menu/results_menu.cpp:324
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
 msgid "Time"
 msgstr "Tid"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
+#: src/menu/help_menu.cpp:147
 msgid ""
 "Time left in this turn.\n"
 "Time elapsed since game start."
@@ -1968,7 +1998,7 @@ msgstr ""
 "Eitt skot per runde"
 
 #. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:126
 msgid ""
 "To jump, press space or trackball or dpad center.\n"
 "To aim or move more slowly, use shift/vol+.\n"
@@ -1977,7 +2007,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:132
 msgid ""
 "To jump, press space.\n"
 "To aim or move more slowly, use shift.\n"
@@ -1986,7 +2016,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:60
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Fullskjerm"
@@ -1997,7 +2027,7 @@ msgid "Toggle interface"
 msgstr "Vis/gøym grensesnitt"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Vis/gøym minikart"
@@ -2063,7 +2093,7 @@ msgstr ""
 "Korleis bruka: venstreklikk på målet\n"
 "Éin bruk per omgang"
 
-#: src/weapon/auto_bazooka.cpp:225
+#: src/weapon/auto_bazooka.cpp:221
 #, fuzzy
 msgid ""
 "Usage: left click on the target\n"
@@ -2080,23 +2110,23 @@ msgstr ""
 msgid "Version"
 msgstr "Versjon"
 
-#: src/menu/options_menu.cpp:534
+#: src/menu/options_menu.cpp:522
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Feil ved versjonssjekk: %s"
 
-#: src/menu/network_menu.cpp:438
+#: src/menu/network_menu.cpp:447
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:300
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! %i spelar er ikkje klar enno!"
 msgstr[1] "Vent! %i spelarar er ikkje klare enno!"
 
-#: src/game/game.cpp:626
+#: src/game/game.cpp:636
 #, c-format
 msgid "Waiting for %s"
 msgstr "Ventar på %s"
@@ -2105,12 +2135,12 @@ msgstr "Ventar på %s"
 msgid "Waiting for remote players"
 msgstr "Ventar på nettverksspelarar"
 
-#: src/menu/network_menu.cpp:505
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ventar på tenaren. Du kan avbryta, eller snakka med dei andre."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:77
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Våpen: skyt / Bonusboks: fall fort"
@@ -2119,29 +2149,29 @@ msgstr "Våpen: skyt / Bonusboks: fall fort"
 msgid "Weapons"
 msgstr "Våpen"
 
-#: src/main.cpp:337
+#: src/main.cpp:336
 msgid "Website: "
 msgstr "Heimeside: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:161
+#: src/menu/network_menu.cpp:180
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Velkommen til %s på %s!"
 
-#: src/game/game.cpp:994
+#: src/game/game.cpp:1004
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Og for eit slag! %s frå %s-laget er i ei anna verd …"
 
-#: src/game/game.cpp:1057
+#: src/game/game.cpp:1067
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Stakkars %s, som vart drepen av ein liten pistol!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:112
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "På spelar: byt spelar"
@@ -2151,7 +2181,7 @@ msgid "Wind particles?"
 msgstr "Vindpartiklar"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:135
+#: src/menu/help_menu.cpp:150
 msgid "Wind strength and direction"
 msgstr ""
 
@@ -2164,11 +2194,11 @@ msgstr "Vinnar"
 msgid "Woah! Combo of %u!"
 msgstr ""
 
-#: src/main.cpp:191
+#: src/main.cpp:190
 msgid "Wormux launching..."
 msgstr "Startar Wormux …"
 
-#: src/main.cpp:327
+#: src/main.cpp:326
 msgid "Wormux version "
 msgstr "Wormux-versjon "
 
@@ -2184,16 +2214,16 @@ msgstr "Feil kartnamn."
 msgid "Wrong team!"
 msgstr "Feil lag."
 
-#: lib/wormux/net/download.cpp:148
+#: lib/warmux/net/download.cpp:149
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:285 src/menu/network_menu.cpp:380
+#: src/menu/network_menu.cpp:294 src/menu/network_menu.cpp:389
 msgid "You are alone. :-/"
 msgstr "Du er åleine. :–/"
 
-#: src/menu/network_menu.cpp:437
+#: src/menu/network_menu.cpp:446
 msgid "You are the new turn master!"
 msgstr "Du er den nye turleiaren!"
 
@@ -2201,15 +2231,15 @@ msgstr "Du er den nye turleiaren!"
 msgid "You need at least one valid map!"
 msgstr "Du må har minst eitt gyldig kart!"
 
-#: src/game/game.cpp:274 src/team/teams_list.cpp:163
+#: src/game/game.cpp:280 src/team/teams_list.cpp:163
 msgid "You need at least two valid teams!"
 msgstr "Du må har minst to gyldige lag!"
 
-#: src/menu/network_menu.cpp:261
+#: src/menu/network_menu.cpp:270
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du må velja eit lag før du kan spela!"
 
-#: src/weapon/weapon_launcher.cpp:555
+#: src/weapon/weapon_launcher.cpp:554
 msgid "Your shot has missed!"
 msgstr "Du bomma!"
 
@@ -2217,7 +2247,7 @@ msgstr "Du bomma!"
 msgid "aka"
 msgstr "alias"
 
-#: src/weapon/air_attack.cpp:218
+#: src/weapon/air_attack.cpp:214
 #, fuzzy
 msgid ""
 "attack direction: Left/Right\n"
@@ -2237,7 +2267,7 @@ msgstr "klarte ikkje lasta oppsettfila"
 msgid "custom player"
 msgstr "tilpassa spelar"
 
-#: src/map/ground.cpp:74
+#: src/map/ground.cpp:71
 msgid "done"
 msgstr "ferdig"
 
@@ -2248,6 +2278,10 @@ msgstr "feil ved lesing av oppsettfila"
 #: src/menu/credits_menu.cpp:75
 msgid "from"
 msgstr "frå"
+
+#: src/interface/loading_screen.cpp:43
+msgid "loading..."
+msgstr ""
 
 #: src/map/maps_list.cpp:73
 msgid "no configuration file!"
@@ -2266,6 +2300,14 @@ msgstr "o Lastar lydprofil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"
+
+#, fuzzy
+#~ msgid "Change per team number of players"
+#~ msgstr "Øvre grense på spelarar:"
+
+#, fuzzy
+#~ msgid "Edit player name"
+#~ msgstr "Spillers navn ?"
 
 #~ msgid "Fullscreen / window"
 #~ msgstr "Fullskjerm/vindauge"
