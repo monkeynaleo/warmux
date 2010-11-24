@@ -1,7 +1,7 @@
 xdg_appsdir = $(prefix)/share/applications
-xdg_apps_DATA = wormux.desktop
+xdg_apps_DATA = warmux.desktop
 pixmapsdir = $(prefix)/share/pixmaps
-pixmaps_DATA = icon/wormux_128x128.png
+pixmaps_DATA = icon/warmux_128x128.png
 
 nobase_dist_pkgdata_DATA = @DATA_FILES@
 pkgdatadir = @DATADIR@
