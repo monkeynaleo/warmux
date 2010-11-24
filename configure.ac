@@ -12,7 +12,7 @@ dnl ========================================================================
 dnl = Require at least automake 2.52
 AC_PREREQ(2.52)
 
-AC_INIT([Wormux], [svn], [wormux-dev@gna.org], [wormux])
+AC_INIT([Warmux], [svn], [warmux-dev@gna.org], [warmux])
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 dnl Detect the canonical host and target build environment
@@ -61,11 +61,11 @@ if ! test "$enable_servers" = "yes"; then
 fi
 
 AC_ARG_ENABLE([debug],
-              [  --enable-debug          Enable debug in Wormux],
+              [  --enable-debug          Enable debug in Warmux],
               debug=$enableval,
               debug="")
 AC_ARG_ENABLE([logging],
-              [  --enable-logging        Enable logging in Wormux],
+              [  --enable-logging        Enable logging in Warmux],
               logging=$enableval,
               logging="")
 
@@ -77,7 +77,7 @@ AC_ARG_ENABLE([profile],
                fi])
 
 AC_ARG_ENABLE([static],
-              [  --enable-static         Enable static building of wormux],
+              [  --enable-static         Enable static building of warmux],
               [static=$enableval],
               [static=no])
 
@@ -123,12 +123,12 @@ AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
 
 
 if test "${WIN32}" = "yes"; then DATADIR="data"
-elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/wormux/data"
-else DATADIR="${prefix}/share/wormux"; fi
+elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/warmux/data"
+else DATADIR="${prefix}/share/warmux"; fi
 
 AC_ARG_WITH([datadir-name],
             [AS_HELP_STRING([--with-datadir-name=DIR],
-                            [specify where datas are installed (default: ${prefix}/share/wormux)])],
+                            [specify where datas are installed (default: ${prefix}/share/warmux)])],
             [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 # ensure a trailing slash (r4255)
@@ -136,7 +136,7 @@ DATADIR="${DATADIR}/"
 
 
 if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
-elif test "${GEKKO}" = "yes"; then LOCALEDIR="sd:/apps/wormux/locale"
+elif test "${GEKKO}" = "yes"; then LOCALEDIR="sd:/apps/warmux/locale"
 else LOCALEDIR="${prefix}/share/locale"; fi
 AC_ARG_WITH([localedir-name],
             [AS_HELP_STRING([--with-localedir-name=DIR],
@@ -370,7 +370,7 @@ dnl ========================================================================
 dnl === Data file substitution.                                          ===
 dnl ========================================================================
 
-DATA_FILES=`cd data ; find . \( -name CVS -o -name ".svn*" -o -name "Makefile*" -o -name wormux.desktop \) -prune -o -name ".#*" -o -type d -o -print`
+DATA_FILES=`cd data ; find . \( -name CVS -o -name ".svn*" -o -name "Makefile*" -o -name warmux.desktop \) -prune -o -name ".#*" -o -type d -o -print`
 DATA_FILES=`echo $DATA_FILES`
 
 AC_SUBST([DATA_FILES])

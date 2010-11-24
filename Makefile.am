@@ -5,9 +5,9 @@ SUBDIRS += po
 endif
 
 EXTRA_DIST = build/visual/gettext.rules            \
-             build/visual/wormux.sln               \
-             build/visual/wormux.vcproj            \
-             data/wormux.desktop                   \
+             build/visual/warmux.sln               \
+             build/visual/warmux.vcproj            \
+             data/warmux.desktop                   \
              doc/license/COPYING.de.txt            \
              doc/license/COPYING.el.txt            \
              doc/license/COPYING.en.txt            \
@@ -61,9 +61,9 @@ endif
 #           to run make install or set the correct environment
 #           variables.
 run: all
-	WORMUX_DATADIR=@srcdir@/data/ WORMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf @srcdir@/src/wormux
+	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf @srcdir@/src/warmux
 
 # make debug: run the game in gdb without installing it.
 #             requires gdb to be in your $PATH.
 debug: all
-	WORMUX_DATADIR=@srcdir@/data/ WORMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf gdb @srcdir@/src/wormux
+	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf gdb @srcdir@/src/warmux
