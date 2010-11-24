@@ -37,7 +37,6 @@ typedef struct _xmlNode xmlNode;
 class WindParticle : public PhysicalObj
 {
   Sprite * sprite;
-  Sprite * flipped;
 
 public:
   WindParticle(const std::string & xml_file, 
