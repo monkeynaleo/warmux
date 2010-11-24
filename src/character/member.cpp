@@ -205,8 +205,13 @@ void Member::RefreshSprite(LRDirection direction)
   assert(name != "weapon");
   assert(parent || type == "body");
 
-  spr->SetFlipped(DIRECTION_LEFT == direction);
-  spr->SetRotation_rad(angle_rad);
+  if (DIRECTION_RIGHT == direction) {
+    spr->SetFlipped(false);
+    spr->SetRotation_rad(angle_rad);
+  } else {
+    spr->SetFlipped(true);
+    spr->SetRotation_rad(-angle_rad);
+  }
   spr->Scale(scale.x, scale.y);
   spr->SetAlpha(alpha);
   spr->Update();
