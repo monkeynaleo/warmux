@@ -82,6 +82,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   SetCollisionModel(false, false, false);
 
   image = GetResourceManager().LoadSprite(weapons_res_profile, "air_attack_plane");
+  image->EnableCaches(true, 0);
   SetSize(image->GetSize());
   obus_dx = 100;
   obus_dy = GetY() + GetHeight();
@@ -100,16 +101,13 @@ void Plane::Shoot(Double speed, const Point2i& target)
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
 
-  Point2d speed_vector ;
-  int dir = ActiveCharacter().GetDirection();
-
   cible_x = target.x;
   SetY(0);
   distance_to_release = (int)(speed * sqrt(TWO * (GetY() + target.y)));
 
-  image->Scale(dir, 1);
-
-  if (dir == 1) {
+  Point2d speed_vector;
+  if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT) {
+    image->SetFlipped(true);
     speed_vector.SetValues(speed, 0);
     SetX(ONE - Double(image->GetWidth()));
     //distance_to_release -= obus_dx;
@@ -117,14 +115,15 @@ void Plane::Shoot(Double speed, const Point2i& target)
      distance_to_release = 0;
 
   } else {
+    image->SetFlipped(false);
     speed_vector.SetValues(-speed, 0) ;
     SetX(Double(GetWorld().GetWidth() - 1));
     //distance_to_release += obus_dx;
-    if (distance_to_release > (GetWorld().GetWidth()-cible_x - obus_dx))
+    if (distance_to_release > GetWorld().GetWidth()-cible_x - obus_dx)
       distance_to_release = 0;
   }
 
-  SetSpeedXY (speed_vector);
+  SetSpeedXY(speed_vector);
 
   Camera::GetInstance()->FollowObject(this);
 
@@ -152,7 +151,6 @@ void Plane::DropBomb()
 
   if (nb_dropped_bombs == 1)
     Camera::GetInstance()->FollowObject(instance);
-
 }
 
 void Plane::Refresh()
@@ -178,9 +176,7 @@ void Plane::Refresh()
 
 int Plane::GetDirection() const
 {
-  Double x,y;
-  image->GetScaleFactors(x,y);
-  return (x<0)?-1:1;
+  return image->GetFlipped() ? -1 : 1;
 }
 
 void Plane::Draw()
