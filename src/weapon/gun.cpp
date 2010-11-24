@@ -64,7 +64,6 @@ Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 
   m_category = RIFLE;
   m_weapon_fire = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_fire"));
-  m_weapon_fire->EnableCaches(true, 32, GetMinAngle(), GetMaxAngle());
   ReloadLauncher();
 }
 
