@@ -30,7 +30,7 @@
 class Constants : public Singleton<Constants>
 {
 public:
-  // Version number of Wormux
+  // Version number of Warmux
   static const std::string WARMUX_VERSION;
 
   // Env variables name to override previous values

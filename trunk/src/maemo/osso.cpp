@@ -116,7 +116,7 @@ namespace Osso {
     g_type_init();
     maincontext = g_main_context_default();
     mainloop = g_main_loop_new(maincontext, false);
-    osso_context = osso_initialize("org.wormux.game", "1.0", 0, maincontext);
+    osso_context = osso_initialize("org.warmux.game", "1.0", 0, maincontext);
 
     if(!osso_context) {
       std::cerr << "could not initialize libosso\n";

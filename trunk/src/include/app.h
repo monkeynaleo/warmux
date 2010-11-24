@@ -16,11 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Application Wormux.
+ * Application Warmux.
  *****************************************************************************/
 
-#ifndef APP_WORMUX_H
-#define APP_WORMUX_H
+#ifndef APP_WARMUX_H
+#define APP_WARMUX_H
 
 #include <string>
 #include <WARMUX_base.h>
@@ -57,7 +57,7 @@ public:
 
   int Main(void);
 
-  // Calls this to check if Wormux must be moved to background
+  // Calls this to check if Warmux must be moved to background
   static bool CheckInactive(SDL_Event& evnt);
 };
 

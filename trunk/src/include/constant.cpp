@@ -23,12 +23,12 @@
 
 const std::string Constants::WARMUX_VERSION = PACKAGE_VERSION;
 
-const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
-const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";
-const std::string Constants::ENV_FONT_PATH = "WORMUX_FONT_PATH";
+const std::string Constants::ENV_DATADIR = "WARMUX_DATADIR";
+const std::string Constants::ENV_LOCALEDIR = "WARMUX_LOCALEDIR";
+const std::string Constants::ENV_FONT_PATH = "WARMUX_FONT_PATH";
 
-const std::string Constants::WEB_SITE = "http://www.wormux.org";
-const std::string Constants::EMAIL = "wormux-dev .AT. gna .DOT. org";
+const std::string Constants::WEB_SITE = "http://www.warmux.org";
+const std::string Constants::EMAIL = "warmux-dev .AT. gna .DOT. org";
 
 // Size min/max of the map (pixels)
 const Point2i Constants::MAP_MIN_SIZE = Point2i(100, 200);

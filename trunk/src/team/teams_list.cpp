@@ -130,7 +130,7 @@ void TeamsList::LoadList()
 
   const Config * config = Config::GetInstance();
 
-  // Load Wormux teams
+  // Load Warmux teams
   std::string dirname = config->GetDataDir() + "team" PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
   if (f) {

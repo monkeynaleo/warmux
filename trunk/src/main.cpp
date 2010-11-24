@@ -187,7 +187,7 @@ void AppWarmux::DisplayLoadingPicture()
 
   Time::GetInstance()->Reset();
 
-  Text text1(_("Wormux launching..."), white_color,
+  Text text1(_("Warmux launching..."), white_color,
              Font::FONT_HUGE, Font::FONT_BOLD, true);
   Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_BOLD,
              true);
@@ -247,7 +247,7 @@ void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color)
 
 void AppWarmux::End() const
 {
-  std::cout << std::endl << "[ " << _("Quit Wormux") << " ]" << std::endl;
+  std::cout << std::endl << "[ " << _("Quit Warmux") << " ]" << std::endl;
 
   /* FIXME calling Config->Save here sucks: it nothing was ever done, it loads
    * the whole stuff just before exiting... This should be moved, but where? */
@@ -323,7 +323,7 @@ void AppWarmux::EmergencyExit()
 
 void DisplayWelcomeMessage()
 {
-  std::cout << "=== " << _("Wormux version ") << Constants::WARMUX_VERSION << std::endl;
+  std::cout << "=== " << _("Warmux version ") << Constants::WARMUX_VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
   for (std::vector < std::string >::iterator it = Constants::GetInstance()->AUTHORS.begin(),
        fin = Constants::GetInstance()->AUTHORS.end(); it != fin; ++it)
@@ -337,9 +337,9 @@ void DisplayWelcomeMessage()
     << std::endl;
 
   // print the disclaimer
-  std::cout << "Wormux version " << Constants::WARMUX_VERSION
+  std::cout << "Warmux version " << Constants::WARMUX_VERSION
     << ", Copyright (C) 2001-2010 Warmux Team" << std::endl
-    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
+    << "Warmux comes with ABSOLUTELY NO WARRANTY." << std::endl
     << "This is free software and you are welcome to redistribute it" << std::endl
     << "under certain conditions." << std::endl << std::endl
     << "Read the file COPYING for details." << std::endl << std::endl;
@@ -426,7 +426,7 @@ void ParseArgs(int argc, char * argv[])
       printf("Debug: %s\n", optarg);
       AddDebugMode(optarg);
 #else
-      fprintf(stderr, "Option -d is not available. Wormux has not been compiled with debug/logging option.\n");
+      fprintf(stderr, "Option -d is not available. Warmux has not been compiled with debug/logging option.\n");
 #endif
       break;
     case 's':

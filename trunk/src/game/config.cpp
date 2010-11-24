@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Wormux configuration : all variables interesting to tweak should be here.
+ * Warmux configuration : all variables interesting to tweak should be here.
  * A default value is affected for each variable, the value can be changed by
  * the configuration file.
  *****************************************************************************/
@@ -57,7 +57,7 @@
 #  include <direct.h>
 
 // Under Windows, binary may be relocated
-static std::string GetWormuxPath()
+static std::string GetWarmuxPath()
 {
   char  buffer[MAX_PATH];
   DWORD size = GetModuleFileName(NULL, buffer, MAX_PATH);
@@ -75,9 +75,9 @@ static std::string GetWormuxPath()
 }
 #else
 #  if defined(ANDROID)
-static std::string GetWormuxPath() { return "."; }
+static std::string GetWarmuxPath() { return "."; }
 #  elif defined(GEKKO)
-static std::string GetWormuxPath() { return "sd:/apps/Wormux"; }
+static std::string GetWarmuxPath() { return "sd:/apps/Warmux"; }
 #  endif
 #  include <unistd.h> // not needed by mingw
 #endif
@@ -120,9 +120,9 @@ Config::Config()
   , check_updates(false)
   , lefthanded_mouse(false)
   , m_network_client_host("localhost")
-  , m_network_client_port(WORMUX_NETWORK_PORT)
-  , m_network_server_game_name("Wormux party")
-  , m_network_server_port(WORMUX_NETWORK_PORT)
+  , m_network_client_port(WARMUX_NETWORK_PORT)
+  , m_network_server_game_name("Warmux party")
+  , m_network_server_port(WARMUX_NETWORK_PORT)
   , m_network_server_public(true)
   , transparency(ALPHA)
 {
@@ -134,7 +134,7 @@ Config::Config()
 
   // directories
 #if defined(__APPLE__)
-  // the following code will enable wormux to find its data when placed in an app bundle on mac OS X.
+  // the following code will enable warmux to find its data when placed in an app bundle on mac OS X.
   // configure with './configure ... CPPFLAGS=-DOSX_BUNDLE' to enable
   char path[1024];
   CFBundleRef mainBundle = CFBundleGetMainBundle(); assert(mainBundle);
@@ -153,7 +153,7 @@ Config::Config()
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, default_ttf_filename);
-      personal_config_dir = GetHome() + "/Library/Application Support/Wormux/";
+      personal_config_dir = GetHome() + "/Library/Application Support/Warmux/";
       personal_data_dir = personal_config_dir;
 #  ifdef ENABLE_NLS
       std::string default_locale_dir = contents + std::string("/Resources/locale/");
@@ -169,7 +169,7 @@ Config::Config()
       ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
   }
 #elif defined(_WIN32) || defined(ANDROID) || defined(GEKKO)
-  std::string basepath = GetWormuxPath();
+  std::string basepath = GetWarmuxPath();
   data_dir     = basepath + PATH_SEPARATOR "data" PATH_SEPARATOR;
 #  ifdef ENABLE_NLS
   locale_dir   = basepath + PATH_SEPARATOR "locale" PATH_SEPARATOR;
@@ -177,7 +177,7 @@ Config::Config()
   ttf_filename = basepath + PATH_SEPARATOR FONT_FILE;
   font_dir     = data_dir + PATH_SEPARATOR "font" PATH_SEPARATOR;
 
-  personal_config_dir = GetHome() + PATH_SEPARATOR "Wormux" PATH_SEPARATOR;
+  personal_config_dir = GetHome() + PATH_SEPARATOR "Warmux" PATH_SEPARATOR;
   personal_data_dir = personal_config_dir;
 
 #else //Neither WIN32, ANDROID or __APPLE__
@@ -367,11 +367,11 @@ void Config::LoadDefaultValue()
 {
   // Load default XML conf
 #ifdef ANDROID
-  m_default_config = GetDataDir() + "wormux_default_android_config.xml";
+  m_default_config = GetDataDir() + "warmux_default_android_config.xml";
 #elif MAEMO
-  m_default_config = GetDataDir() + "wormux_default_maemo_config.xml";
+  m_default_config = GetDataDir() + "warmux_default_maemo_config.xml";
 #else
-  m_default_config = GetDataDir() + "wormux_default_config.xml";
+  m_default_config = GetDataDir() + "warmux_default_config.xml";
 #endif
   Profile *res = GetResourceManager().LoadXMLProfile(m_default_config, true);
 

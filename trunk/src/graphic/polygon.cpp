@@ -376,7 +376,7 @@ Point2d Polygon::GetRandomUpperPoint()
 }
 
 // And the famous Bezier curve. And this algorithm is that simple ? I'm so disappointed !
-// But now you can tell the world wormux is using Bezier curves.
+// But now you can tell the world warmux is using Bezier curves.
 void Polygon::AddBezierCurve(const Point2d& anchor1, const Point2d& control1,
                              const Point2d& control2, const Point2d& anchor2,
                              const int num_steps, const bool add_first_point,
