@@ -307,6 +307,8 @@ void Member::ResetMovement()
   alpha     = 1.0;
   scale.x   = 1.0;
   scale.y   = 1.0;
+  if (spr)
+    spr->SetFlipped(false);
 }
 
 void Member::BuildAttachMemberMap(const std::vector<junction*> & skel_lst)
