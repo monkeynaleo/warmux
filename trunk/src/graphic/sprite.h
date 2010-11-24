@@ -91,7 +91,7 @@ public:
   uint GetFrameCount() const { return cache.size(); };
 
   // Access current frame
-  uint GetCurrentDelay() const { return cache[current_frame].GetDelay(); }
+  uint GetCurrentDelay() const { return cache[current_frame].delay; }
 
   // Size
   uint GetWidth() const

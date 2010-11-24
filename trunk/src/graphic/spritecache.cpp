@@ -24,58 +24,41 @@
 
 #include "graphic/spritecache.h"
 
-void SpriteFrameCache::SetCaches(bool flipped, uint rotation_num, Double mini, Double maxi)
+void SpriteSubframeCache::SetCache(uint rotation_num, const Double& mini, const Double& maxi)
 {
   min = mini;
   max = maxi;
-
-  ASSERT(!normal_surface.IsNull());
-  rotated_surface.clear();
+  rotated.clear();
   if (rotation_num) {
-    rotated_surface.resize(rotation_num);
-    rotated_surface[0] = normal_surface;
-  }
-  if (flipped) {
-    flipped_surface = normal_surface.Mirror();
-    rotated_flipped_surface.clear();
-    if (rotation_num) {
-      rotated_flipped_surface.resize(rotation_num);
-      rotated_flipped_surface[0] = flipped_surface;
-    }
+    rotated.resize(rotation_num);
+    rotated[0] = surface;
   }
 }
 
-Surface SpriteFrameCache::GetFlippedSurfaceForAngle(Double angle)
+Surface SpriteSubframeCache::GetSurfaceForAngle(Double angle)
 {
   ASSERT(max - min > ZERO);
   //Double fmin = PI-max;
-  angle = RestrictAngle(angle, min, max);
-  uint index = ((uint)rotated_flipped_surface.size()*angle - min)
-             / Double(max-min);
-  ASSERT(rotated_flipped_surface.size()>index);
+  angle = RestrictAngle(angle);
+  uint index = ((uint)rotated.size()*angle - min) / Double(max-min);
+  ASSERT(rotated.size()>index);
 
   // On demand-cache
-  if (rotated_flipped_surface[index].IsNull()) {
-    angle = min + (max-min)*(1-index/(Double)rotated_flipped_surface.size());
-    rotated_flipped_surface[index] = flipped_surface.RotoZoomC(angle, ONE, ONE, true);
+  if (rotated[index].IsNull()) {
+    angle = min + (max-min)*(1-index/(Double)rotated.size());
+    rotated[index] = surface.RotoZoomC(angle, ONE, ONE, true);
   }
-  return rotated_flipped_surface[index];
+  return rotated[index];
 }
 
-Surface SpriteFrameCache::GetSurfaceForAngle(Double angle)
+void SpriteFrameCache::SetCaches(bool flip, uint rotation_num, Double mini, Double maxi)
 {
-  ASSERT(max - min > ZERO);
-  angle = RestrictAngle(angle, min, max);
-  uint index = ((uint)rotated_flipped_surface.size()*angle -min)
-             / Double(max-min);
-  ASSERT(rotated_surface.size()>index);
-
-  // On demand-cache
-  if (rotated_surface[index].IsNull()) {
-    angle = min + (max-min)*(1-index/(Double)rotated_flipped_surface.size());
-    rotated_surface[index] = normal_surface.RotoZoomC(angle, ONE, ONE, true);
+  ASSERT(!normal.surface.IsNull());
+  normal.SetCache(rotation_num, mini, maxi);
+  if (flip) {
+    flipped.surface = normal.surface.Mirror();
+    flipped.SetCache(rotation_num, mini, maxi);
   }
-  return rotated_surface[index];
 }
 
 void SpriteCache::EnableCaches(bool flipped, uint rotation_num, const Double& min, const Double& max)
@@ -97,9 +80,9 @@ void SpriteCache::FixParameters(const Double& rotation_rad, const Double& scale_
   for (uint i=0; i<size(); i++) {
     SpriteFrameCache& frame = operator[](i);
 #ifdef HAVE_HANDHELD
-    frame.normal_surface = frame.normal_surface.RotoZoom(rotation_rad, scale_x, scale_y, true).DisplayFormatColorKey(128);
+    frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true).DisplayFormatColorKey(128);
 #else
-    frame.normal_surface = frame.normal_surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
+    frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
 #endif
   }
 }
