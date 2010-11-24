@@ -1,17 +1,17 @@
 #!/bin/bash
-# Copyright (C) 2001-2008 Wormux Team.
+# Copyright (C) 2001-2008 Warmux Team.
 
 new_year="$1"
 [[ -z $new_year ]] && echo "Missing parameter: year" && exit 1
 
-[[ ! -e src ]] && echo "This script should be ran from the top wormux dir" && exit 2
+[[ ! -e src ]] && echo "This script should be ran from the top warmux dir" && exit 2
 
 tmp_file="w$RANDOM$RANDOM$RANDOM$RANDOM"
 [[ -e $tmp_file ]] && tmp_file="w$RANDOM$RANDOM$RANDOM$RANDOM"
 
 # update the dates, creating the interval if it doesn't exist yet
 find -iname "*.cpp" -or -iname "*.h" | 
-  xargs sed -i "/Copyright.*Wormux Team/ s,\(20[0-9]*\) \|\(20[0-9]*\)-20[0-9]* ,\1\2-$new_year ,"
+  xargs sed -i "/Copyright.*Warmux Team/ s,\(20[0-9]*\) \|\(20[0-9]*\)-20[0-9]* ,\1\2-$new_year ,"
 
 # do a semi-automated commit check
 svn diff > $tmp_file
