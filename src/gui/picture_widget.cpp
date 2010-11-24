@@ -121,6 +121,9 @@ void PictureWidget::ApplyScaling(ScalingType t)
     Point2d scale(Double(size.x) / picture_size.x,
                   Double(size.y) / picture_size.y);
 
+    if (size.x==0 || size.y==0)
+      return;
+
     switch (t) {
     case NO_SCALING: break;
     case X_SCALING: spr->Scale(scale.x, 1.0); break;
