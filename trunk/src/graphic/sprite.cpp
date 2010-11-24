@@ -39,7 +39,7 @@
 // Scratch surface without alpha, not thread-safe!
 Surface Sprite::scratch;
 
-Sprite::Sprite(bool _smooth)
+Sprite::Sprite()
   : fixed(false)
   , flipped(false)
   , cache(*this)
@@ -48,7 +48,7 @@ Sprite::Sprite(bool _smooth)
   Constructor();
 }
 
-Sprite::Sprite(const Surface& surface, bool _smooth)
+Sprite::Sprite(const Surface& surface)
   : fixed(false)
   , flipped(false)
   , cache(*this)

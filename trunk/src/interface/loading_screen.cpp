@@ -37,8 +37,7 @@ LoadingScreen::LoadingScreen(int icon_count):
 
   loading_bg = new Sprite(Surface((config->GetDataDir()
                                    + "menu" + PATH_SEPARATOR
-                                   + "background_loading.jpg").c_str()),
-                          true);
+                                   + "background_loading.jpg").c_str()));
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
   std::string loading_str(_("loading..."));

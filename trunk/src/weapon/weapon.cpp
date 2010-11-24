@@ -109,7 +109,7 @@ Weapon::Weapon(Weapon_type type,
     m_image->EnableCaches(use_flipping);
   }
 
-  icon = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_ico"), true);
+  icon = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_ico"));
 
   mouse_character_selection = true;
 

@@ -178,7 +178,7 @@ void Question::Set (const std::string &pmessage,
 
   if (bg_sprite != "") {
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-    background = new Sprite(GetResourceManager().LoadImage(res,bg_sprite), true);
+    background = new Sprite(LOAD_RES_IMAGE(bg_sprite));
     background->ScaleSize(GetMainWindow().GetSize());
     GetResourceManager().UnLoadXMLProfile( res);
   } else {

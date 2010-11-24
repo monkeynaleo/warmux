@@ -180,7 +180,7 @@ void AppWormux::DisplayLoadingPicture()
   std::string filename = config->GetDataDir() + "menu" PATH_SEPARATOR "background_loading.jpg";
 
   Surface surfaceLoading(filename.c_str());
-  Sprite loading_image(surfaceLoading, true);
+  Sprite loading_image(surfaceLoading);
 
   loading_image.ScaleSize(video->window.GetSize());
   loading_image.Blit(video->window, 0, 0);
