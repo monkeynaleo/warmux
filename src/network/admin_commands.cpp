@@ -29,13 +29,13 @@
 static void PrintHelp()
 {
   std::string msg = "help: " + std::string(_("Displays this message"));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
   msg = "kick <nickname>: " + std::string(_("Kicks the player designated by <nickname> out of the game"));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
   msg = "list: " + std::string(_("Lists the connected players"));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
   msg = "address: " + std::string(_("Shows the designated player address"));
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
 }
 
 typedef enum
@@ -80,17 +80,17 @@ static void UserCommand(const std::string& nick, UserCommandType type)
 
   Network::GetInstance()->UnlockRemoteHosts();
 
-  AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 }
 
 static void ListPlayers()
 {
   if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
-    AppWormux::GetInstance()->ReceiveMsgCallback(_("No player connected"), primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback(_("No player connected"), primary_red_color);
     return;
   }
 
-  AppWormux::GetInstance()->ReceiveMsgCallback(_("Connected players: "), primary_red_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(_("Connected players: "), primary_red_color);
 
   std::list<DistantComputer*>& hosts = Network::GetInstance()->LockRemoteHosts();
 
@@ -98,7 +98,7 @@ static void ListPlayers()
       cpu != hosts.end();
       ++cpu) {
     std::string msg = std::string(Format("%s (%s)", (*cpu)->GetNicknames().c_str(), (*cpu)->GetAddress().c_str()));
-    AppWormux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
   }
 
   Network::GetInstance()->UnlockRemoteHosts();
@@ -117,7 +117,7 @@ void ProcessCommand(const std::string & cmd)
   } else if (cmd.substr(0, 5) == "/list") {
     ListPlayers();
   } else {
-    AppWormux::GetInstance()->ReceiveMsgCallback(_("Unknown command"), primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback(_("Unknown command"), primary_red_color);
     PrintHelp();
   }
 }

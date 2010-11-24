@@ -474,11 +474,11 @@ void Game::RefreshInput()
 
     // Emergency exit
     if (evnt.type == SDL_KEYDOWN && evnt.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
-      AppWormux::EmergencyExit();
+      AppWarmux::EmergencyExit();
 
     if (evnt.type == SDL_QUIT) {
 #ifdef __SYMBIAN32__
-      AppWormux::EmergencyExit();
+      AppWarmux::EmergencyExit();
 #else
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       UserAsksForMenu();
@@ -488,7 +488,7 @@ void Game::RefreshInput()
     }
 
     // Inactive event
-    if (AppWormux::CheckInactive(evnt))
+    if (AppWarmux::CheckInactive(evnt))
       continue;
 
     if (benching) {
@@ -651,7 +651,7 @@ void Game::CallDraw()
 {
   Draw();
   StatStart("GameDraw:flip()");
-  AppWormux::GetInstance()->video->Flip();
+  AppWarmux::GetInstance()->video->Flip();
   StatStop("GameDraw:flip()");
 }
 
@@ -845,7 +845,7 @@ void Game::MainLoop()
     // How many frame by seconds ?
     fps->Refresh();
     StatStop("Game:Draw()");
-    uint frame_length =  AppWormux::GetInstance()->video->GetMaxDelay();
+    uint frame_length =  AppWarmux::GetInstance()->video->GetMaxDelay();
     time_of_next_frame = time_of_next_frame + frame_length;
 
     // The rate at which frames are calculated may differ over time.

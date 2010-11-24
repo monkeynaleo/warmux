@@ -97,7 +97,7 @@ Menu::Menu(void)
 
 Menu::~Menu()
 {
-  AppWormux::GetInstance()->SetCurrentMenu(NULL);
+  AppWarmux::GetInstance()->SetCurrentMenu(NULL);
   if (background) {
     delete background;
   }
@@ -330,13 +330,13 @@ bool Menu::HandleGlobalEvent(const SDL_Event & evnt)
   // Emergency exit
   if (evnt.key.keysym.sym == SDLK_ESCAPE
       && (SDL_GetModState() & KMOD_CTRL)) {
-    AppWormux::EmergencyExit();
+    AppWarmux::EmergencyExit();
     return true; // never reached
   }
 
   // Toggle fullscreen
   if (evnt.key.keysym.sym == SDLK_F10) {
-    AppWormux::GetInstance()->video->ToggleFullscreen();
+    AppWarmux::GetInstance()->video->ToggleFullscreen();
     return true;
   }
 
@@ -347,7 +347,7 @@ void Menu::HandleEvent(const SDL_Event& evnt)
 {
   if (evnt.type == SDL_QUIT) {
 #if defined MAEMO || defined __SYMBIAN32__
-    AppWormux::EmergencyExit();
+    AppWarmux::EmergencyExit();
 #else
     key_cancel();
 #endif
@@ -413,7 +413,7 @@ void Menu::HandleEvents()
 
   do {
     // We might be set inactive while in here
-    if (AppWormux::CheckInactive(evnt))
+    if (AppWarmux::CheckInactive(evnt))
       continue;
 
     if (!HandleGlobalEvent(evnt)) {
@@ -447,7 +447,7 @@ void Menu::Run(bool skip_menu)
 
   do {
     // this is the current menu (here in case we had run a submenu)
-    AppWormux::GetInstance()->SetCurrentMenu(this);
+    AppWarmux::GetInstance()->SetCurrentMenu(this);
 
     // Poll and treat events
     HandleEvents();
@@ -469,7 +469,7 @@ void Menu::Display(const Point2i& mousePosition)
 {
   widgets.Update(mousePosition, last_mouse_position);
   Draw(mousePosition);
-  AppWormux::GetInstance()->video->Flip();
+  AppWarmux::GetInstance()->video->Flip();
   last_mouse_position = mousePosition;
 }
 

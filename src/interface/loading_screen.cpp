@@ -33,7 +33,7 @@ LoadingScreen::LoadingScreen(int icon_count):
 {
   // Get the background image
   Config * config = Config::GetInstance();
-  AppWormux * app = AppWormux::GetInstance();
+  AppWarmux * app = AppWarmux::GetInstance();
 
   loading_bg = new Sprite(Surface((config->GetDataDir()
                                    + "menu" + PATH_SEPARATOR
@@ -64,7 +64,7 @@ void LoadingScreen::DrawBackground()
 			   GetMainWindow().GetHeight()/2 - 80);
   loading_text->DrawCenter(loading_text_pos);
 
-  AppWormux::GetInstance()->video->Flip();
+  AppWarmux::GetInstance()->video->Flip();
 }
 
 void LoadingScreen::StartLoading(uint nb, const std::string& resource,
@@ -83,7 +83,7 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
   Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80),
                                                     label, white_color);
 
-  AppWormux::GetInstance()->video->Flip();
+  AppWarmux::GetInstance()->video->Flip();
 }
 
 

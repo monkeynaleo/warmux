@@ -623,7 +623,7 @@ bool Config::SaveXml(bool save_current_teams)
   }
 
   //=== Video ===
-  Video * video = AppWormux::GetInstance()->video;
+  Video * video = AppWarmux::GetInstance()->video;
   xmlNode* video_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"video"));
   doc.WriteElement(video_node, "wind_particles_percentage", uint2str(wind_particles_percentage));
   doc.WriteElement(video_node, "display_multi_layer_sky", bool2str(display_multi_layer_sky));

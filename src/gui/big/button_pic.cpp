@@ -93,7 +93,7 @@ bool ButtonPic::LoadXMLConfiguration(void)
 
 void ButtonPic::Draw(const Point2i &mousePosition)
 {
-  Surface& surf = AppWormux::GetInstance()->video->window;
+  Surface& surf = AppWarmux::GetInstance()->video->window;
 
   // center the image horizontally
   uint tmp_x = GetPositionX() + (GetSizeX() - m_img_normal.GetWidth())/2 ;

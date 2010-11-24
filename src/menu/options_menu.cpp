@@ -58,7 +58,7 @@
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
-  AppWormux * app = AppWormux::GetInstance();
+  AppWarmux * app = AppWarmux::GetInstance();
   Config * config = Config::GetInstance();
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   int window_w = app->video->window.GetWidth();
@@ -437,7 +437,7 @@ void OptionMenu::SaveOptions()
   config->SetSoundMusic(music_cbox->GetValue());
   config->SetSoundEffects(effects_cbox->GetValue());
 
-  AppWormux * app = AppWormux::GetInstance();
+  AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
 
 #ifndef HAVE_TOUCHSCREEN
@@ -519,7 +519,7 @@ void OptionMenu::CheckUpdates()
         new_version.Ask();
       }
   } else {
-    AppWormux::DisplayError(Format(_("Version verification failed because: %s"),
+    AppWarmux::DisplayError(Format(_("Version verification failed because: %s"),
                                    dl->GetLastError().c_str()));
   }
 }

@@ -434,7 +434,7 @@ void NetworkMenu::ChangeMapCallback()
 void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
-  AppWormux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
+  AppWarmux::GetInstance()->video->SetWindowCaption( std::string("Wormux ") +
                                                      Constants::WORMUX_VERSION + " - " +
                                                      _("Master mode"));
   mode_label->SetText(_("Master mode"));
@@ -483,7 +483,7 @@ void NetworkMenu::HandleEvent(const SDL_Event& evnt)
       msg_box->SendChatMsg();
       break;
     case SDLK_F10:
-      AppWormux::GetInstance()->video->ToggleFullscreen();
+      AppWarmux::GetInstance()->video->ToggleFullscreen();
       break;
     default:
       widgets.SendKey(evnt.key.keysym);

@@ -55,7 +55,7 @@ void Interface::LoadDataInternal(Profile *res)
   clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
   clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
-  last_width = AppWormux::GetInstance()->video->window.GetWidth();
+  last_width = AppWarmux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
     zoom            = last_width / (float)(tmp.GetWidth()+20);
     default_toolbar = tmp.RotoZoom(0.0, zoom, zoom);
