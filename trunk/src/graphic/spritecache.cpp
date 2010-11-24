@@ -44,12 +44,12 @@ Surface SpriteFrameCache::GetFlippedSurfaceForAngle(Double angle)
   ASSERT(max - min > ZERO);
   Double fmin = PI-max;
   angle = RestrictAngle(angle, fmin, PI-min);
-  uint index = (uint)((rotated_flipped_surface.size()*angle - fmin) / (max-min));
+  uint index = (uint)(((uint)rotated_flipped_surface.size()*angle - fmin) / (max-min));
   ASSERT(rotated_flipped_surface.size()>index);
 
   // On demand-cache
   if (rotated_flipped_surface[index].IsNull()) {
-    angle = fmin + ((max-min)*index)/rotated_flipped_surface.size();
+    angle = fmin + ((max-min)*index)/(uint)rotated_flipped_surface.size();
     rotated_flipped_surface[index] = flipped_surface.RotoZoomC(angle, ONE, ONE, true);
   }
   return rotated_flipped_surface[index];
@@ -59,12 +59,12 @@ Surface SpriteFrameCache::GetSurfaceForAngle(Double angle)
 {
   ASSERT(max - min > ZERO);
   angle = RestrictAngle(angle, min, PI-max);
-  uint index = (uint)((rotated_flipped_surface.size()*angle -min) / (max-min));
+  uint index = (uint)(((uint)rotated_flipped_surface.size()*angle -min) / (max-min));
   ASSERT(rotated_surface.size()>index);
 
   // On demand-cache
   if (rotated_surface[index].IsNull()) {
-    angle = min + ((max-min)*index)/rotated_surface.size();
+    angle = min + ((max-min)*index)/(uint)rotated_surface.size();
     rotated_surface[index] = normal_surface.RotoZoomC(angle, ONE, ONE, true);
   }
   return rotated_surface[index];
