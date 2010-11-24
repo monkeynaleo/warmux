@@ -380,8 +380,8 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  lib/Makefile
                  lib/fixedpoint/Makefile
-                 lib/wormux/Makefile
-                 lib/wormux-server/Makefile
+                 lib/warmux/Makefile
+                 lib/warmux-server/Makefile
                  build/win32_setup/create_setup.sh
                  doc/Makefile
                  po/Makefile
@@ -392,7 +392,7 @@ AC_CONFIG_FILES([Makefile
                  tools/servers/index_server/Makefile
                  ], [AM_POSTPROCESS_PO_MAKEFILE])
 
-AM_CONFIG_HEADER(lib/wormux/include/config_autotools.h)
+AM_CONFIG_HEADER(lib/warmux/include/config_autotools.h)
 
 AC_OUTPUT
 chmod +x build/win32_setup/create_setup.sh

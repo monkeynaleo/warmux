@@ -418,13 +418,13 @@ wormux_LDFLAGS = -Wl,--as-needed
 AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
   -DINSTALL_LOCALEDIR=\"@LOCALEDIR@\" -DFONT_FILE=\"@FONTFILE@\"    \
   -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" @LIBCURL_CPPFLAGS@       \
-  -I$(top_srcdir)/lib/wormux/include -I$(top_srcdir)/lib/fixedpoint
+  -I$(top_srcdir)/lib/warmux/include -I$(top_srcdir)/lib/fixedpoint
 
 
 if WIN32
 wormux_SOURCES += wormux.rc wormux.ico
-.rc.o: $(top_srcdir)/lib/wormux/include/config_autotools.h
-	$(WINDRES) -I$(top_srcdir)/lib/wormux/include -D HAVE_CONFIG_H -o $@ -i $<
+.rc.o: $(top_srcdir)/lib/warmux/include/config_autotools.h
+	$(WINDRES) -I$(top_srcdir)/lib/warmux/include -D HAVE_CONFIG_H -o $@ -i $<
 endif
 
 if MAEMO
@@ -439,5 +439,5 @@ else
 LIBS += @LIBCURL@
 endif
 
-wormux_LDADD=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/wormux/libwormux.a
-wormux_DEPENDENCIES=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/wormux/libwormux.a
+wormux_LDADD=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwormux.a
+wormux_DEPENDENCIES=$(top_srcdir)/lib/fixedpoint/libfixedpoint.a $(top_srcdir)/lib/warmux/libwormux.a

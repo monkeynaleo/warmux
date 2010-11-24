@@ -1,13 +1,13 @@
 FILE(GLOB_RECURSE WORMUX_HEADLESS_SERVER_SRCS *.cpp)
 SET(EXE wormux-headless-server)
 
-INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/wormux/include
-                     ${PROJECT_SOURCE_DIR}/lib/wormux-server/include
+INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/warmux/include
+                     ${PROJECT_SOURCE_DIR}/lib/warmux-server/include
                      ${PROJECT_SOURCE_DIR}/src
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${SDLNET_INCLUDE_DIR} )
-LINK_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/wormux
-                  ${PROJECT_SOURCE_DIR}/lib/wormux-server )
+LINK_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib/warmux
+                  ${PROJECT_SOURCE_DIR}/lib/warmux-server )
 
 ADD_EXECUTABLE(${EXE} ${WORMUX_HEADLESS_SERVER_SRCS})
 SET_TARGET_PROPERTIES(${EXE} PROPERTIES LINK_FLAGS "${WORMUX_LDFLAGS}"

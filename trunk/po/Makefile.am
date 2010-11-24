@@ -9,7 +9,7 @@
 MAINTAINERCLEANFILES =
 
 POTFILES = \
-        lib/wormux/net/download.cpp \
+        lib/warmux/net/download.cpp \
         src/character/body.cpp \
         src/character/body_list.cpp \
         src/character/character.cpp \

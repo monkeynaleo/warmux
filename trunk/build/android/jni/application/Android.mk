@@ -15,7 +15,7 @@ WMX_SRCS := action/*.cpp base/*.cpp maths/*.cpp net/*.cpp tools/*.cpp
 FP_SRCS  := *.cpp
 
 APP_SRCS := $(addprefix src/, $(SRC_SRCS)) \
-            $(addprefix lib/wormux/, $(WMX_SRCS)) \
+            $(addprefix lib/warmux/, $(WMX_SRCS)) \
             $(addprefix lib/fixedpoint/, $(FP_SRCS)) \
 
 LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
@@ -26,7 +26,7 @@ LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
                 -I$(OTHER_PATH)/../stlport/stlport \
                 -I$(LOCAL_PATH)/src \
                 -I$(LOCAL_PATH)/lib/fixedpoint \
-                -I$(LOCAL_PATH)/lib/wormux/include \
+                -I$(LOCAL_PATH)/lib/warmux/include \
                 -I$(OTHER_PATH)/../sdl_net \
                 -I$(OTHER_PATH)/../xml2/include \
                 -I$(OTHER_PATH)/../png \

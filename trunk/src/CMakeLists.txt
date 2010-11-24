@@ -19,7 +19,7 @@ INCLUDE_DIRECTORIES(
         ${CURL_INCLUDE_DIRS}
         ${PNG_INCLUDE_DIR}
         ${GETTEXT_INCLUDE_DIR}
-        ${PROJECT_SOURCE_DIR}/lib/wormux/include
+        ${PROJECT_SOURCE_DIR}/lib/warmux/include
         ${PROJECT_SOURCE_DIR}/lib/fixedpoint
 )
 
