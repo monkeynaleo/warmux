@@ -53,12 +53,12 @@ class SpriteFrameCache
     return angle;
   }
 
-  Surface normal_surface;
-  Surface flipped_surface;
   std::vector<Surface> rotated_surface;
   std::vector<Surface> rotated_flipped_surface;
 
 public:
+  Surface normal_surface;
+  Surface flipped_surface;
   Surface GetFlippedSurfaceForAngle(Double angle);
   Surface GetSurfaceForAngle(Double angle);
 
@@ -95,7 +95,6 @@ class SpriteCache : public std::vector<SpriteFrameCache>
 
   uint rotation_cache_size;
   bool have_flipping_cache;
-  Surface last_frame;
 
 public:
   explicit SpriteCache(Sprite &spr)
@@ -104,7 +103,7 @@ public:
     , have_flipping_cache(false)
   { }
 
-  void SetFrames(SpriteCache &other)
+  void SetFrames(const SpriteCache &other)
   {
     clear();
     rotation_cache_size = other.rotation_cache_size;
@@ -112,9 +111,8 @@ public:
     for (uint i=0; i<other.size(); i++)
       push_back(SpriteFrameCache(other[i]));
   }
-  void AddFrame(const Surface& surf, uint delay) { push_back(SpriteFrameCache(surf, delay)); }
+  void AddFrame(const Surface& surf, uint delay=100) { push_back(SpriteFrameCache(surf, delay)); }
   void EnableCaches(bool flipped, uint rotation_num, Double min, Double max);
-  void InvalidLastFrame() { last_frame.Free(); }
 
   //operator SpriteFrameCache& [](uint index) { return frames.at(index); }
   void SetDelay(uint delay)
@@ -122,6 +120,10 @@ public:
     for (uint i=0; i<size(); i++)
       at(i).SetDelay(delay);
   }
+
+  void FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y);
+  bool HasRotationCache() const { return rotation_cache_size; }
+  bool HasFlippedCache() const { return have_flipping_cache; }
 };
 
 #endif /* _SPRITE_CACHE_H */

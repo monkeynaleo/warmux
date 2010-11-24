@@ -83,3 +83,15 @@ void SpriteCache::EnableCaches(bool flipped, uint rotation_num, Double min, Doub
     at(f).SetCaches(flipped, rotation_num, min, max);
   }
 }
+
+void SpriteCache::FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y)
+{
+  for (uint i=0; i<size(); i++) {
+    SpriteFrameCache& frame = at(i);
+#ifdef HAVE_HANDHELD
+    frame.normal_surface = frame.normal_surface.RotoZoom(rotation_rad, scale_x, scale_y, true).DisplayFormatColorKey(128);
+#else
+    frame.normal_surface = frame.normal_surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
+#endif
+  }
+}
