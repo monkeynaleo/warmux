@@ -89,11 +89,11 @@ uint RandomGenerator::GetRand()
   return((uint)(next/65536) % 32768);
 }
 
-#define WORMUX_RAND_MAX 32767
+#define WARMUX_RAND_MAX 32767
 
 bool RandomGenerator::GetBool()
 {
-  uint middle = WORMUX_RAND_MAX/2;
+  uint middle = WARMUX_RAND_MAX/2;
   uint random = GetRand();
   return (random <= middle);
 }
@@ -101,7 +101,7 @@ bool RandomGenerator::GetBool()
 //==========================================================================
 Double RandomGenerator::GetDouble()
 {
-  return GetRand()/(WORMUX_RAND_MAX + ONE);
+  return GetRand()/(WARMUX_RAND_MAX + ONE);
 }
 
 Double RandomGenerator::GetDouble(Double max)
@@ -117,7 +117,7 @@ Double RandomGenerator::GetDouble(Double min, Double max)
 //==========================================================================
 float RandomGenerator::Getfloat()
 {
-  return GetRand()/(WORMUX_RAND_MAX + 1.0f);
+  return GetRand()/(WARMUX_RAND_MAX + 1.0f);
 }
 
 float RandomGenerator::Getfloat(float max)

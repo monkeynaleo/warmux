@@ -19,8 +19,8 @@
  * Define all Wormux actions.
  *****************************************************************************/
 
-#ifndef WORMUX_ACTION_HANDLER_H
-#define WORMUX_ACTION_HANDLER_H
+#ifndef WARMUX_ACTION_HANDLER_H
+#define WARMUX_ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>

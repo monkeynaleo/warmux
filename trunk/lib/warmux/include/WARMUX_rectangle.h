@@ -22,8 +22,8 @@
  *              Initial version
  *****************************************************************************/
 
-#ifndef WORMUX_RECTANGLE_H
-#define WORMUX_RECTANGLE_H
+#ifndef WARMUX_RECTANGLE_H
+#define WARMUX_RECTANGLE_H
 
 #include <cmath>
 #include <WARMUX_error.h>

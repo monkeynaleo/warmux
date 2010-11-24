@@ -19,8 +19,8 @@
  * Define all Wormux actions.
  *****************************************************************************/
 
-#ifndef WORMUX_ACTION_H
-#define WORMUX_ACTION_H
+#ifndef WARMUX_ACTION_H
+#define WARMUX_ACTION_H
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>

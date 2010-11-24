@@ -19,8 +19,8 @@
  * Proxy header including the actual config header for the host system.
  *****************************************************************************/
 
-#ifndef WORMUX_CONFIG_H
-#define WORMUX_CONFIG_H
+#ifndef WARMUX_CONFIG_H
+#define WARMUX_CONFIG_H
 
 #ifdef _MSC_VER
 #  include "config_visual.h"
