@@ -23,13 +23,13 @@ config.status
 configure
 
 po/*.gmo
-po/wormux.pot
+po/warmux.pot
 
 src/config.h
 src/config.h.in
 src/stamp-h1
-src/wormux
+src/warmux
 
-tools/list_games/wormux-list-games
-tools/servers/game_server/wormux-server
-tools/servers/index_server/wormux-index-server
+tools/list_games/warmux-list-games
+tools/servers/game_server/warmux-server
+tools/servers/index_server/warmux-index-server
