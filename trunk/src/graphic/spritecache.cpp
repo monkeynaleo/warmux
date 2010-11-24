@@ -80,14 +80,14 @@ void SpriteCache::EnableCaches(bool flipped, uint rotation_num, const Double& mi
   assert(!empty());
 
   for (uint f=0; f<size(); f++) {
-    std::vector<SpriteFrameCache>::operator[](f).SetCaches(flipped, rotation_num, min, max);
+    operator[](f).SetCaches(flipped, rotation_num, min, max);
   }
 }
 
 void SpriteCache::FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y)
 {
   for (uint i=0; i<size(); i++) {
-    SpriteFrameCache& frame = std::vector<SpriteFrameCache>::operator[](i);
+    SpriteFrameCache& frame = operator[](i);
 #ifdef HAVE_HANDHELD
     frame.normal_surface = frame.normal_surface.RotoZoom(rotation_rad, scale_x, scale_y, true).DisplayFormatColorKey(128);
 #else
