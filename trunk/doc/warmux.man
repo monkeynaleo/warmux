@@ -15,15 +15,15 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .hy
-.TH WORMUX 6 "October 28, 2007"
+.TH WARMUX 6 "October 28, 2007"
 .SH NAME
-Wormux \- A convivial mass murder game.
+Warmux \- A convivial mass murder game.
 .SH SYNOPSIS
-.B wormux [-h|--help] [-v|--version] [-p|--play] [-i|--internet] [-s|--server] [-c|--client [ip]] [-d|--debug debug_masks]
+.B warmux [-h|--help] [-v|--version] [-p|--play] [-i|--internet] [-s|--server] [-c|--client [ip]] [-d|--debug debug_masks]
 .br
 .SH DESCRIPTION
 .PP
-Have the mascots of your favorite free software battle in the Wormux
+Have the mascots of your favorite free software battle in the Warmux
 arena using dynamite, grenades, baseball bat and other weapons ...
 Exterminate your opponent in a funny 2D toon-style scenery.
 .PP
@@ -31,7 +31,7 @@ Each player (2 minimum, on the same PC) controls the team of his
 choice (tux, gnu, firefox, wilber,...) and must destroy his
 adversaries using more or less casual weapons.
 .PP
-Although a minimum of strategy is required to be victorious, Wormux is
+Although a minimum of strategy is required to be victorious, Warmux is
 pre-eminently a "convivial mass murder" game where, turn by turn, each
 team attempts to produce maximum damage to their opponents.
 .br
@@ -74,21 +74,21 @@ team attempts to produce maximum damage to their opponents.
 .br
 .SH SEE ALSO
 .br
-Have a look at the official website http://wormux.org
+Have a look at the official website http://warmux.org
 On the website, you will find some useful help:
 .br
-* List of weapons: http://wormux.org/wiki/en/weapons.php
+* List of weapons: http://warmux.org/wiki/en/weapons.php
 .br
-* List of maps: http://wormux.org/wiki/en/maps.php
+* List of maps: http://warmux.org/wiki/en/maps.php
 .br
-  * How to write your own map: http://wormux.org/wiki/Create_your_own_map.php
+  * How to write your own map: http://warmux.org/wiki/Create_your_own_map.php
 .br
-* List of skins: http://wormux.org/wiki/en/skins.php
+* List of skins: http://warmux.org/wiki/en/skins.php
 .br
-* Forum: http://www.wormux.org/forum/
+* Forum: http://www.warmux.org/forum/
 .br
 .SH AUTHOR
-Wormux was written by:
+Warmux was written by:
 .br
 - Jean-Christophe DUBERGA <jcduberga@gmx.de>
 .br
@@ -103,4 +103,4 @@ Wormux was written by:
 - Victor STINNER <victor.stinner@haypocalc.com>
 .PP
 This manual page was originally written by Jean Parpaillon <artefact@altern.org>,
-for the Debian project (but may be used by others). It is maintained by the Wormux team.
+for the Debian project (but may be used by others). It is maintained by the Warmux team.
