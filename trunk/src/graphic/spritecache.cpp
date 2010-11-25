@@ -84,5 +84,6 @@ void SpriteCache::FixParameters(const Double& rotation_rad, const Double& scale_
 #else
     frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
 #endif
+    frame.SetCaches(false, 0, ZERO, ZERO);
   }
 }

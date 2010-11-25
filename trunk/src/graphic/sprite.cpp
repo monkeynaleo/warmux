@@ -114,8 +114,6 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
 
 void Sprite::SetRotation_rad(Double angle_rad)
 {
-  if (fixed)
-    return;
   angle_rad = RestrictAngle(angle_rad);
 
   if (rotation_rad == angle_rad)
