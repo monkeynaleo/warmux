@@ -1,5 +1,5 @@
 dnl ========================================================================
-dnl =                   W O R M U X  -  configure.ac                       =
+dnl =                   W A R M U X  -  configure.ac                       =
 dnl =                                                                      =
 dnl = Process this file with autoconf to produce a configure script.       =
 dnl ========================================================================
