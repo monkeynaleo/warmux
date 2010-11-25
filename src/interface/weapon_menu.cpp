@@ -247,7 +247,8 @@ void WeaponsMenu::Show(const Point2i& pos)
     - (weapons_menu->GetWidth() + 10 + tools_menu->GetWidth());
   if (click_pos.x > p)
     click_pos.x = p;
-  p = Interface::GetRef().GetMenuPosition().GetY() - weapons_menu->GetHeight() - 10;
+  p = window.GetHeight() - Interface::GetRef().GetMenuHeight()
+    - weapons_menu->GetHeight() - 10;
   if (click_pos.y > p)
     click_pos.y = p;
 

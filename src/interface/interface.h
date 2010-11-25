@@ -60,7 +60,7 @@ public:
   Team *tmp_team;
 
 private:
-// Regular part of the interface
+  // Regular part of the interface
   int     clock_width;
 
   // Timers
@@ -70,7 +70,7 @@ private:
 
   ProgressBar wind_bar;
 
-// This part is for normal interface mode
+  // This part is for normal interface mode
   Surface default_toolbar;
   EnergyBar * energy_bar;
 
@@ -84,10 +84,10 @@ private:
   Text * t_weapon_name;
   Text * t_weapon_stock;
 
-// this part is for control interface mode
+  // this part is for control interface mode
   Surface control_toolbar;
 
-// Other stuff
+  // Other stuff
   bool is_control;
   bool display;
   int start_hide_display;
@@ -128,7 +128,6 @@ private:
   void LoadDataInternal(Profile *res);
   int GetWidth() const { return default_toolbar.GetWidth(); }
   int GetHeight() const;
-  int GetMenuHeight() const;
   Point2i GetSize() const { return Point2i(GetWidth(), GetHeight()); }
 
   // Handle clicks for various states of the interface
@@ -168,6 +167,7 @@ public:
   bool ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos);
   bool ActionClickDown(const Point2i &mouse_pos);
 
+  int GetMenuHeight() const;
 };
 
 void AbsoluteDraw(const Surface& s, const Point2i& pos);
