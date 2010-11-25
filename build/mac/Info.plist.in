@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>Wormux</string>
+	<string>Warmux</string>
 	<key>CFBundleExecutable</key>
-	<string>wormux</string>
+	<string>warmux</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
