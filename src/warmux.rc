@@ -51,4 +51,4 @@ FILETYPE VFT_APP
     }
 }
 
-IDI_ICON1 ICON DISCARDABLE "warmux.ico"
+IDI_ICON1 ICON DISCARDABLE "..\data\icon\warmux.ico"
