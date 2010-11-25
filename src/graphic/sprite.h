@@ -136,7 +136,7 @@ public:
   {
     assert(_scale_x>=0);
     assert(_scale_y>=0);
-    if ((scale_x==_scale_x && _scale_y==scale_y) || fixed)
+    if (scale_x==_scale_x && _scale_y==scale_y)
       return;
     scale_x = _scale_x;
     scale_y = _scale_y;
@@ -144,8 +144,7 @@ public:
   }
   void ScaleSize(int width, int height)
   {
-    if (!fixed)
-      Scale(Double(width)/frame_width_pix, Double(height)/frame_height_pix);
+    Scale(Double(width)/frame_width_pix, Double(height)/frame_height_pix);
   }
   void ScaleSize(const Point2i& size) { ScaleSize(size.x, size.y); };
 
