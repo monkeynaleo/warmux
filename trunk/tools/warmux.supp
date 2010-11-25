@@ -40,3 +40,18 @@
   fun:calloc
   obj:/lib/i686/cmov/libdl-*.so
 }
+
+{
+  SDL_gfx leaking static memory
+  Memcheck:Leak
+  fun:malloc
+  fun:filledPolygonColorMT
+}
+
+{
+  SDL and X11 leaking v3
+  Memcheck:Leak
+  fun:malloc
+  ...
+  fun:XSetLocaleModifiers
+}
