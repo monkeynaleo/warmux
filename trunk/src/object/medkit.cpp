@@ -33,6 +33,7 @@
 #include "tool/xml_document.h"
 
 Sprite* Medkit::icon = NULL;
+int Medkit::icon_ref = 0;
 
 Medkit::Medkit()
   : ObjBox("medkit") {
@@ -48,6 +49,15 @@ Medkit::Medkit()
 
   if (!icon) {
     icon = CreateIcon();
+  }
+  icon_ref++;
+}
+
+Medkit::~Medkit()
+{
+  if (--icon_ref) {
+    delete icon;
+    icon = NULL;
   }
 }
 

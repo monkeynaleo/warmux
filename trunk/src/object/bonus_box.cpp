@@ -37,6 +37,7 @@
 #include "tool/string_tools.h"
 
 Sprite* BonusBox::icon = NULL;
+int BonusBox::icon_ref = 0;
 
 BonusBox::BonusBox(Weapon * weapon):
   ObjBox("bonus_box"),
@@ -54,6 +55,15 @@ BonusBox::BonusBox(Weapon * weapon):
 
   if (!icon) {
     icon = CreateIcon();
+  }
+  icon_ref++;
+}
+
+BonusBox::~BonusBox()
+{
+  if (--icon_ref) {
+    delete icon;
+    icon = NULL;
   }
 }
 
