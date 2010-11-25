@@ -4,14 +4,14 @@ Use of mac scripts
 
 First and foremost, the Xcode package must be installed in order to have gcc and other dev stuff.
 
-The cmake_build.sh script builds Wormux on Mac OS X by using the CMake build system.
+The cmake_build.sh script builds Warmux on Mac OS X by using the CMake build system.
 ./cmake_build.sh --help will list its options. They currently are :
 
 Requirements :
   - CMake 2.6 +
   - libintl (gnu gettext) headers (you can simply take the 'libintl.h' included along this
     script and copy it to /usr/local/include)
-  - the mac dependencies package (http://download.gna.org/wormux/mac/mac_dependencies.zip)
+  - the mac dependencies package (http://download.gna.org/warmux/mac/mac_dependencies.zip)
     installed in your /Library/Frameworks directory (NOT $(HOME)/Library/Frameworks)
   - xgettext, part of gnu gettext (this dependency could probably be removed by tweaking CMake
     scripts to make them not update translation files, but for now it does)
