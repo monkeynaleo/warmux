@@ -1,6 +1,6 @@
 
 # The namespace in Java file, with dots replaced with underscores
-SDL_JAVA_PACKAGE_PATH := org_wormux
+SDL_JAVA_PACKAGE_PATH := org_warmux
 
 # Android Dev Phone G1 has trackball instead of cursor keys, and
 # sends trackball movement events as rapid KeyDown/KeyUp events,

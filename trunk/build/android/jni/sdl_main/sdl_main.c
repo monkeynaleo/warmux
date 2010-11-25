@@ -29,9 +29,9 @@ JAVA_EXPORT_NAME(DemoRenderer_nativeInit) ( JNIEnv*  env, jobject thiz )
   char * argv[] = { "sdl" }; //, "-d", "network" };
 
   if (isSdcardUsed) {
-    chdir("/sdcard/Wormux");
+    chdir("/sdcard/Warmux");
   } else {
-    chdir("/data/data/org.Wormux/files");
+    chdir("/data/data/org.warmux/files");
   }
 
   // Redirect output

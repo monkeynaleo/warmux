@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Wormux</string>
+    <string name="app_name">Warmux</string>
 
     <string name="init">Initializing</string>
     <string name="readme">^Please wait while data is being downloaded</string>
