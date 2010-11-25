@@ -35,12 +35,13 @@ class Medkit : public ObjBox//public PhysicalObj
   //static bool enable;
   static int nbr_health;
   static Sprite* icon;
-  //static int start_life_points;
+  static int icon_ref;
 
 private:
   void ApplyMedkit(Team &team, Character &character) const;
 public:
   Medkit();
+  ~Medkit();
 
   static void LoadXml(const xmlNode * object);
   void ApplyBonus(Character *);
