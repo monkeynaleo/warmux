@@ -81,6 +81,7 @@ class WeaponsMenu
   int * nb_weapon_type;
 
   Mouse::pointer_t old_pointer;
+  Point2i click_pos;
 
  public:
   WeaponsMenu();
@@ -88,10 +89,10 @@ class WeaponsMenu
   void RefreshWeaponList();
   void AddWeapon(Weapon* new_item);
   void Draw();
-  void SwitchDisplay() { if(show) Hide(); else Show(); };
+  void SwitchDisplay(const Point2i& pos = Point2i(-1, -1)) { if (show) Hide(); else Show(pos); };
   AffineTransform2D ComputeWeaponTransformation();
   AffineTransform2D ComputeToolTransformation();
-  void Show();
+  void Show(const Point2i& pos);
   void Hide(bool play_sound=true);
   void Reset();
   void SetHelp(const std::ostringstream&) const { };

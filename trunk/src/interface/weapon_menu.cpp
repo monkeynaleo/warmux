@@ -225,10 +225,31 @@ void WeaponsMenu::AddWeapon(Weapon* new_item)
 }
 
 // Weapon menu display (init of the animation)
-void WeaponsMenu::Show()
+void WeaponsMenu::Show(const Point2i& pos)
 {
   if (!ActiveTeam().GetWeapon().CanChangeWeapon())
     return;
+
+  Surface& window = GetMainWindow();
+  uint scroll_border = 0;
+  
+  if (Config::GetInstance()->GetScrollOnBorder()) {
+    scroll_border = Config::GetInstance()->GetScrollBorderSize();
+  }
+
+  click_pos = pos;
+  int p = 5 + scroll_border;
+  if (click_pos.x < p)
+    click_pos.x = p;
+  if (click_pos.y < p)
+    click_pos.y = window.GetHeight(); // Force moving to bottom
+  p = window.GetWidth()-10
+    - (weapons_menu->GetWidth() + 10 + tools_menu->GetWidth());
+  if (click_pos.x > p)
+    click_pos.x = p;
+  p = Interface::GetRef().GetMenuPosition().GetY() - weapons_menu->GetHeight() - 10;
+  if (click_pos.y > p)
+    click_pos.y = p;
 
   ShowGameInterface();
   if (!show) {
@@ -316,13 +337,8 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
     scroll_border = Config::GetInstance()->GetScrollBorderSize();
   }
 
-  // Init animation parameter
-  uint x = 5 + scroll_border + int(weapons_menu->GetWidth()) + 10;
-  uint y = Interface::GetRef().GetMenuPosition().GetY()
-         - int(weapons_menu->GetHeight()) - 10;
-  Point2d start(x - weapons_menu->GetWidth() - tools_menu->GetWidth(), y);
-  // Results in end y bigger than scroll border
-  Point2i end(x, y);
+  Point2i start = click_pos - Point2i(tools_menu->GetWidth(), 0);
+  Point2i end = click_pos + Point2i(weapons_menu->GetWidth()+10, 0);
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
@@ -340,16 +356,13 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
   }
 
   // Init animation parameter
-  uint x = 5 + scroll_border;
-  uint y = Interface::GetRef().GetMenuPosition().GetY()
-         - int(weapons_menu->GetHeight()) - 10;
-  Point2d start(x - weapons_menu->GetWidth() - tools_menu->GetWidth(), y);
-  Point2i end(x, y);
+  Point2i start = click_pos
+                - Point2i(weapons_menu->GetWidth()+10+tools_menu->GetWidth(), 0);
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
                                    Time::GetInstance()->Read(),
-                                   !show, start, end);
+                                   !show, start, click_pos);
 
   return position;
 }
@@ -361,6 +374,9 @@ void WeaponsMenu::Draw()
 
   // Update animation
   m_not_yet_available->Update();
+
+  Rectanglei clip(click_pos, weapons_menu->GetSize() + Point2i(10, 0) + tools_menu->GetSize());
+  SwapWindowClip(clip);
   // Draw weapons menu
   weapons_menu->ApplyTransformation(ComputeWeaponTransformation());
   weapons_menu->DrawOnScreen();
@@ -370,6 +386,7 @@ void WeaponsMenu::Draw()
   // Update overfly weapon/tool
   if (!UpdateCurrentOverflyItem(weapons_menu))
     UpdateCurrentOverflyItem(tools_menu);
+  SwapWindowClip(clip);
 }
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(const Polygon * poly)

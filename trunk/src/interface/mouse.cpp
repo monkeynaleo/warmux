@@ -159,7 +159,7 @@ void Mouse::ActionLeftClick(bool /*shift*/) const
 
 void Mouse::ActionRightClick(bool /*shift*/) const
 {
-  Interface::GetInstance()->weapons_menu.SwitchDisplay();
+  Interface::GetInstance()->weapons_menu.SwitchDisplay(GetPosition());
 }
 
 void Mouse::ActionWheelUp(bool shift) const
