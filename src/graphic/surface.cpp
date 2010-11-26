@@ -706,6 +706,11 @@ Surface Surface::Mirror()
   SDL_UnlockSurface(surf);
   SDL_UnlockSurface(surface);
 
+  if (surface->flags & SDL_SRCALPHA)
+    SDL_SetAlpha(surf, SDL_SRCALPHA, surface->format->alpha);
+  if (surface->flags & SDL_SRCCOLORKEY)
+    SDL_SetColorKey(surf, SDL_SRCCOLORKEY, surface->format->colorkey);
+
   return Surface(surf);
 }
 
