@@ -253,7 +253,7 @@ OptionMenu::OptionMenu() :
                               option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 #endif
-#ifndef MAEMO
+#if !defined (MAEMO) && !defined (__SYMBIAN32__)
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 #endif
 
