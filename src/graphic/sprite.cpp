@@ -301,9 +301,9 @@ void Sprite::RefreshSurface()
     Calculate_Rotation_Offset(current_surface);
 }
 
-void Sprite::FixParameters()
+void Sprite::FixParameters(bool force_ckey)
 {
-  cache.FixParameters(rotation_rad, scale_x, scale_y);
+  cache.FixParameters(rotation_rad, scale_x, scale_y, force_ckey);
   frame_width_pix = GetWidth();
   frame_height_pix = GetHeight();
   scale_x = ONE;

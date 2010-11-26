@@ -124,7 +124,9 @@ public:
       operator[](i).delay = delay;
   }
 
-  void FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y);
+  void FixParameters(const Double& rotation_rad,
+                     const Double& scale_x, const Double& scale_y,
+                     bool force_color_key);
   bool HasRotationCache() const { return rotation_cache_size; }
   bool HasFlippedCache() const { return have_flipping_cache; }
 };
