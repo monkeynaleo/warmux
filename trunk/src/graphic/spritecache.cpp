@@ -75,15 +75,16 @@ void SpriteCache::EnableCaches(bool flipped, uint rotation_num, const Double& mi
   }
 }
 
-void SpriteCache::FixParameters(const Double& rotation_rad, const Double& scale_x, const Double& scale_y)
+void SpriteCache::FixParameters(const Double& rotation_rad,
+                                const Double& scale_x, const Double& scale_y,
+                                bool force_color_key)
 {
+  bool rotozoom = rotation_rad.IsNotZero() && scale_x!=ONE && scale_y!=ONE;
   for (uint i=0; i<size(); i++) {
     SpriteFrameCache& frame = operator[](i);
-#ifdef HAVE_HANDHELD
-    frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true).DisplayFormatColorKey(128);
-#else
-    frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
-#endif
-    frame.SetCaches(false, 0, ZERO, ZERO);
+    if (rotozoom)
+      frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
+    if (force_color_key)
+      frame.normal.surface = frame.normal.surface.DisplayFormatColorKey(128);
   }
 }

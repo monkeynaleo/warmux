@@ -78,7 +78,7 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
   sprite->SetAlpha(scale);
   sprite->SetCurrentFrame(RandomLocal().GetInt(0, sprite->GetFrameCount() - 1));
   SetSize(sprite->GetSize());
-  sprite->FixParameters();
+  sprite->FixParameters(true);
 
   bool not_fixed = GetAlignParticleState()|| ActiveMap()->GetWind().rotation_speed.IsNotZero();
   sprite->EnableCaches(ActiveMap()->GetWind().need_flip, not_fixed ? 64 : 0);

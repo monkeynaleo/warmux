@@ -213,7 +213,7 @@ public:
   void DrawXY(const Point2i &pos);
 
   void RefreshSurface();
-  void FixParameters();
+  void FixParameters(bool force_ckey = false);
 
 private:
   Surface current_surface;
