@@ -79,7 +79,7 @@ void SpriteCache::FixParameters(const Double& rotation_rad,
                                 const Double& scale_x, const Double& scale_y,
                                 bool force_color_key)
 {
-  bool rotozoom = rotation_rad.IsNotZero() && scale_x!=ONE && scale_y!=ONE;
+  bool rotozoom = rotation_rad.IsNotZero() || scale_x!=ONE || scale_y!=ONE;
   for (uint i=0; i<size(); i++) {
     SpriteFrameCache& frame = operator[](i);
     if (rotozoom)
