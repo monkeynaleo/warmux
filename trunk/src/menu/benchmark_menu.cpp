@@ -196,16 +196,17 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       // All set, run the game!
       float num  = Game::UpdateGameRules()->Start(true);
       if (num) {
-        uint  time = Time::GetInstance()->Read();
-        score = (num * video->window.GetWidth()*video->window.GetHeight())
-              / time;
-        fmt = "%.0f";
-
         GraphCanvas::Result res;
         res.list = Game::GetInstance()->GetBenchResults();
+        GraphCanvas::FindMax(res);
+
+        float  time = res.xmax;
+        score = (num * video->window.GetWidth()*video->window.GetHeight())
+              / (1000.0f * time);
+        fmt = "%.0f";
+
         res.item = NULL;
         res.color = primary_red_color;
-        GraphCanvas::FindMax(res);
         graph->AddResult(res);
       } else {
         fmt = "Aborted";
