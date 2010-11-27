@@ -78,8 +78,8 @@ RequestExecutionLevel highest
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modern UI Configuration ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  !define MUI_ICON                          "${LOCAL_PATH}${SEP}icon${SEP}install.ico"
-  !define MUI_UNICON                        "${LOCAL_PATH}${SEP}icon${SEP}uninstall.ico"
+  !define MUI_ICON                          "${WIN_WarmuxDIR}${SEP}data${SEP}icon${SEP}install.ico"
+  !define MUI_UNICON                        "${WIN_WarmuxDIR}${SEP}data${SEP}icon${SEP}uninstall.ico"
   ; Alter License section
   !define MUI_LICENSEPAGE_BUTTON            \$(Warmux_BUTTON)
   !define MUI_LICENSEPAGE_TEXT_BOTTOM       \$(Warmux_BOTTOM_TEXT)
@@ -297,9 +297,6 @@ Section \$(TITLE_Warmux) Sec_Warmux
   CreateDirectory "\$DOCUMENTS\\Warmux"
   ; Set output path to the installation directory.
   SetOutPath "\$INSTDIR"
-  File "${WIN_WarmuxDIR}\src\warmux.ico"
-  ; Executing in tmpdir, looking for file in folder below
-  File "${LOCAL_PATH}\uninstall.ico"
   File "${WIN_WarmuxDIR}\src\warmux.exe"
   WriteUninstaller "uninstall.exe"
   ; data
