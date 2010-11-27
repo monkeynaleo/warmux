@@ -32,6 +32,8 @@
 struct SDL_Surface;
 struct SDL_PixelFormat;
 
+#define USE_LOCK  0
+
 class Surface
 {
 private:
@@ -40,6 +42,9 @@ private:
   int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
   static SDL_Rect GetSDLRect(const Rectanglei &r);
   static SDL_Rect GetSDLRect(const Point2i &r);
+
+  int InternalLock();
+  void InternalUnlock();
 
 public:
   /**
@@ -91,8 +96,8 @@ public:
    * @param newSurface The new surface to use.
    * @param freePrevius Indicate if the old surface should be freed.
    */
-  inline void SetSurface(SDL_Surface *newSurface, bool freePrevious = true){
-    if( freePrevious )
+  void SetSurface(SDL_Surface *newSurface, bool freePrevious = true){
+    if (freePrevious)
       Free();
 
     surface = newSurface;
@@ -108,8 +113,8 @@ public:
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
   int SetAlpha(Uint32 flags, Uint8 alpha);
 
-  int Lock();
-  void Unlock();
+  int Lock() { return (USE_LOCK) ? InternalLock() : 1; }
+  void Unlock() { if (USE_LOCK) InternalUnlock(); }
 
   void SwapClipRect(Rectanglei& rect);
 

@@ -160,7 +160,7 @@ int Surface::SetAlpha(Uint32 flags, Uint8 alpha)
  * Lock the surface to permit direct access.
  *
  */
-int Surface::Lock()
+int Surface::InternalLock()
 {
   return SDL_LockSurface(surface);
 }
@@ -169,7 +169,7 @@ int Surface::Lock()
  * Unlock the surface.
  *
  */
-void Surface::Unlock()
+void Surface::InternalUnlock()
 {
   SDL_UnlockSurface(surface);
 }
@@ -667,8 +667,8 @@ Surface Surface::Mirror()
   SDL_Surface *surf = SDL_CreateRGBSurface(surface->flags, surface->w, surface->h, fmt->BitsPerPixel,
                                            fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
 
-  SDL_LockSurface(surface);
-  SDL_LockSurface(surf);
+  if (USE_LOCK) SDL_LockSurface(surface);
+  if (USE_LOCK) SDL_LockSurface(surf);
 
   switch (fmt->BitsPerPixel)
   {
@@ -703,8 +703,8 @@ Surface Surface::Mirror()
   default: fprintf(stderr, "Unsupported bpp %i\n", fmt->BitsPerPixel); exit(1);
   }
 
-  SDL_UnlockSurface(surf);
-  SDL_UnlockSurface(surface);
+  if (USE_LOCK) SDL_UnlockSurface(surf);
+  if (USE_LOCK) SDL_UnlockSurface(surface);
 
   if (surface->flags & SDL_SRCALPHA)
     SDL_SetAlpha(surf, SDL_SRCALPHA, surface->format->alpha);
