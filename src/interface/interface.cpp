@@ -436,7 +436,7 @@ void Interface::DrawMapPreview()
       //scratch->SetAlpha(SDL_SRCALPHA, 0);
       if (!mask) {
         m_last_preview_size = GetWorld().ground.GetPreviewSize();
-        mask = new Surface(m_last_preview_size, SDL_HWSURFACE, true);
+        mask = new Surface(m_last_preview_size, SDL_SWSURFACE, true);
 
         GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
 
