@@ -42,7 +42,7 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 1;
 
-static need_flip = false;
+static bool need_flip = false;
 
 WindParticle::WindParticle(const std::string &xml_file, Double scale)
   : PhysicalObj("wind", xml_file)
