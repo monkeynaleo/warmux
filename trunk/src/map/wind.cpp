@@ -42,6 +42,8 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint bar_speed = 1;
 
+static need_flip = false;
+
 WindParticle::WindParticle(const std::string &xml_file, Double scale)
   : PhysicalObj("wind", xml_file)
 {
@@ -81,7 +83,8 @@ WindParticle::WindParticle(const std::string &xml_file, Double scale)
 
   bool not_fixed = GetAlignParticleState()|| ActiveMap()->GetWind().rotation_speed.IsNotZero();
   sprite->FixParameters(!not_fixed);
-  sprite->EnableCaches(ActiveMap()->GetWind().need_flip, not_fixed ? 64 : 0);
+  need_flip = ActiveMap()->GetWind().need_flip;
+  sprite->EnableCaches(need_flip, not_fixed ? 64 : 0);
   if (not_fixed) {
     sprite->SetRotation_rad(RandomLocal().GetInt(0,628)/100.0); // 0 < angle < 2PI
   }
@@ -97,7 +100,8 @@ WindParticle::~WindParticle()
 
 void WindParticle::Refresh()
 {
-  sprite->SetFlipped(GetSpeed().x < 0);
+  if (need_flip)
+    sprite->SetFlipped(GetSpeed().x < 0);
   sprite->Update();
 
   const Double& rotation_speed = ActiveMap()->GetWind().rotation_speed;
