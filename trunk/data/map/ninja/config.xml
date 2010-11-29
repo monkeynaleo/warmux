@@ -44,6 +44,6 @@
 
   <!-- pad is given in pixel count. -->
   <add_pad>1</add_pad>
-  <point name="upper_left_pad" x="400" y="500" />
-  <point name="lower_right_pad" x="400" y="0" />
+  <point name="upper_left_pad" x="550" y="1000" />
+  <point name="lower_right_pad" x="550" y="0" />
 </resources>
