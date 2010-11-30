@@ -273,9 +273,11 @@ do {                                                            \
 } while(0)
 #endif
 
+#ifndef __SYMBIAN32__
 #if defined(__arm__)
 extern DECLSPEC void arm_memset32(void *dst, int c, size_t len);
 #define SDL_memset4(dst, val, len) arm_memset32(dst, val, len)
+#endif
 #endif
 
 #ifndef SDL_memset4
