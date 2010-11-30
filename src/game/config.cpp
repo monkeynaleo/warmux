@@ -370,6 +370,8 @@ void Config::LoadDefaultValue()
   m_default_config = GetDataDir() + "warmux_default_android_config.xml";
 #elif MAEMO
   m_default_config = GetDataDir() + "warmux_default_maemo_config.xml";
+#elif __SYMBIAN32__
+  m_default_config = GetDataDir() + "warmux_default_symbian_config.xml";
 #else
   m_default_config = GetDataDir() + "warmux_default_config.xml";
 #endif
