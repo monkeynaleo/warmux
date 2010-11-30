@@ -1473,65 +1473,67 @@
 </movement>
 
 <!-- ###### Mine ###### -->
-<movement name="weapon-minelauncher-begin-shoot" duration_per_frame="60" nb_loops="1">
+
+
+<movement name="weapon-minelauncher-select" duration_per_frame="100" nb_loops="1">
   <collision_rect left="5" right="5" top="2" bottom="3"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="0"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-30"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-60"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
+    <member type="arm-left"  angle="-85"/>
+    <member type="arm-right" angle="-85"/>
   </frame>
 </movement>
 
-<movement name="weapon-minelauncher-end-shoot" duration_per_frame="30" nb_loops="1">
+<movement name="weapon-minelauncher-begin-shoot" duration_per_frame="70" nb_loops="1">
   <collision_rect left="5" right="5" top="2" bottom="3"/>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
-  </frame>
-  <frame>
-    <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-80"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-80"/>
   </frame>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
     <member type="arm-right" follow_half_crosshair="true" angle="-60"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-60"/>
   </frame>
   <frame>
     <member type="head" follow_half_crosshair="true"/>
-    <member type="arm-right" follow_half_crosshair="true" angle="-30"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-40"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-40"/>
+  </frame>
+    <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-20"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-20"/>
+  </frame>
+    <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-20"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-20"/>
+  </frame>
+    <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-40"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-40"/>
+  </frame>
+  <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-60"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-60"/>
+  </frame>
+  <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-80"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-80"/>
+  </frame>
+  <frame>
+    <member type="head" follow_half_crosshair="true"/>
+    <member type="arm-right" follow_half_crosshair="true" angle="-90"/>
+        <member type="arm-left" follow_half_crosshair="true" angle="-90"/>
   </frame>
 </movement>
+
+
 
 <!-- ###### SuperTux ###### -->
 <movement name="weapon-tux-end-shoot" duration_per_frame="50" nb_loops="10">
