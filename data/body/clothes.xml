@@ -32,7 +32,7 @@
 <clothe name="weapon-grenade">&standard_righthanded_clothe;</clothe>
 <clothe name="weapon-gnulauncher">&standard_righthanded_clothe;</clothe>
 <clothe name="weapon-polecatlauncher">&standard_righthanded_clothe;</clothe>
-<clothe name="weapon-minelauncher">&standard_righthanded_clothe;</clothe>
+<clothe name="weapon-minelauncher">&standard_lefthanded_clothe;</clothe>
 <clothe name="weapon-syringe">&standard_righthanded_clothe;</clothe>
 <clothe name="weapon-parachute">&standard_righthanded_clothe;</clothe>
 <clothe name="weapon-bounce_ball">&standard_righthanded_clothe;</clothe>
