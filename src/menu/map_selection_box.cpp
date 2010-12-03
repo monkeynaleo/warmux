@@ -265,13 +265,12 @@ void MapSelectionBox::ValidMapSelection()
   std::string map_name;
 
   if (selected_map_index == MapsList::GetInstance()->lst.size()) {
+    // Choose one and select it!
+    map_name = "random";
 
-      // Choose one and select it!
-      map_name = "random";
-
-      if (Network::GetInstance()->IsLocal()) {
-        MapsList::GetInstance()->SelectMapByName(map_name);
-      }
+    if (Network::GetInstance()->IsLocal()) {
+      MapsList::GetInstance()->SelectMapByName(map_name);
+    }
   } else {
     map_name = MapsList::GetInstance()->lst[selected_map_index]->GetRawName();
     MapsList::GetInstance()->SelectMapByIndex(selected_map_index);

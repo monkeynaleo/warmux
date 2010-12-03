@@ -323,7 +323,7 @@ MapsList::~MapsList()
     delete lst[i];
 }
 
-void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
+void MapsList::LoadOneMap(const std::string &dir, const std::string &map_name)
 {
   if (map_name[0] == '.') return;
 
@@ -338,7 +338,7 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &map_name)
   lst.push_back(nv_terrain);
 }
 
-int MapsList::FindMapById (const std::string &id) const
+int MapsList::FindMapById(const std::string &id) const
 {
   uint i=0;
   for (; i < lst.size(); ++i)
@@ -356,7 +356,7 @@ void MapsList::SelectRandomMapByName(const std::string &name)
   random_map = true;
 }
 
-void MapsList::SelectMapByName (const std::string &name)
+void MapsList::SelectMapByName(const std::string &name)
 {
   // Random map!!
   if (name == "random") {
@@ -368,17 +368,17 @@ void MapsList::SelectMapByName (const std::string &name)
   }
 
   // standard case!
-  int index = FindMapById (name);
+  int index = FindMapById(name);
 
   if (index == -1){
     index = 0;
     if(name != "")
       std::cout << Format(_("! Map %s not found :-("), name.c_str()) << std::endl;
   }
-  SelectMapByIndex (index);
+  SelectMapByIndex(index);
 }
 
-void MapsList::SelectMapByIndex (uint index)
+void MapsList::SelectMapByIndex(uint index)
 {
   MSG_DEBUG("map", "select %u", index);
 
