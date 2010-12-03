@@ -21,13 +21,15 @@
 #ifndef MEMBER_TYPE_H
 #define MEMBER_TYPE_H
 
+#define DUMMY_MEMBER "dummy"
+
 class MemberType
 {
   typedef std::vector<std::string> Vector;
   static Vector Map;
 public:
   int type;
-  MemberType(const std::string& name)
+  MemberType(const std::string& name = DUMMY_MEMBER)
   {
     uint count;
     for (count = 0; count<Map.size(); count++) {
