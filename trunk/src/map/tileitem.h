@@ -41,6 +41,7 @@ public:
   virtual void ScalePreview(uint8_t* /*odata*/, int /*x*/,
                             uint /*opitch*/, uint /*shift*/) { };
   virtual void Draw(const Point2i &pos) = 0;
+  virtual bool NeedSynch() const = 0;
 };
 
 class TileItem_Empty : public TileItem
@@ -54,6 +55,7 @@ public:
   void Dig(const Point2i &/*center*/, const uint /*radius*/) {};
   void Draw(const Point2i&) { };
   bool IsTotallyEmpty() const { return true; };
+  bool NeedSynch() const { return false; }
 };
 
 class TileItem_NonEmpty : public TileItem
@@ -66,6 +68,7 @@ protected:
   uint8_t        m_alpha_threshold;
 
   Point2i        m_start_check, m_end_check;
+  bool           m_need_resynch;
 
   TileItem_NonEmpty(uint8_t alpha_threshold);
 
@@ -99,12 +102,12 @@ public:
     return m_empty_bitfield[(pos.y*CELL_SIZE.x + pos.x)>>3] & (1 << (pos.x&7));
   }
 
-
   uint16_t GetChecksum() const;
   void Dig(const Point2i &center, const uint radius);
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };
   void Draw(const Point2i &pos);
+  bool NeedSynch() const { return m_need_resynch; }
 };
 
 class TileItem_BaseColorKey : public TileItem_NonEmpty

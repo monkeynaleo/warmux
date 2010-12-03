@@ -173,6 +173,7 @@ void TileItem_NonEmpty::ForceRecheck()
   m_end_check.SetValues(CELL_SIZE);
   m_need_check_empty = true;
   m_is_empty = true;
+  m_need_resynch = true;
 }
 
 void TileItem_NonEmpty::ForceEmpty()
@@ -249,6 +250,7 @@ bool TileItem_BaseColorKey::CheckEmpty()
 
   m_need_check_empty = false;
   m_is_empty = true;
+  m_need_resynch = true;
 
   buf += (m_start_check.y*CELL_SIZE.x)>>3;
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
@@ -653,6 +655,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
 
   m_is_empty = true;
   m_need_check_empty = false;
+  m_need_resynch = true;
 
   ptr += m_start_check.y*pitch;
   buf += (m_start_check.y*CELL_SIZE.x)>>3;

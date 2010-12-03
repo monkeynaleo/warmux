@@ -86,6 +86,8 @@ public:
   // Check if a title is empty, so we can delete it
   void CheckEmptyTiles();
 
+  // Refresh the list of tiles to resynch
+
   uint32_t GetCRC() const { assert(crc); return crc; }
 
 protected:
