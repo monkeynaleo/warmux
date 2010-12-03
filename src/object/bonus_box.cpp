@@ -61,7 +61,8 @@ BonusBox::BonusBox(Weapon * weapon):
 
 BonusBox::~BonusBox()
 {
-  if (icon_ref--) {
+  icon_ref--;
+  if (!icon_ref) {
     delete icon;
     icon = NULL;
   }
