@@ -31,8 +31,7 @@
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 
-std::map<std::string, int> MemberType::Map;
-int MemberType::count = 0;
+std::vector<std::string> MemberType::Map;
 
 Member::Member(const std::string& name_)
   : parent(NULL)
