@@ -20,7 +20,7 @@
 
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
-#include <map>
+
 #include <vector>
 #include <WARMUX_base.h>
 #include <WARMUX_point.h>
@@ -31,16 +31,18 @@
 
 typedef struct _xmlNode xmlNode;
 
+// Position of a member relative to its superior one
 class member_mvt
-{  // Position of a member relative to its superior one
+{  
+  MemberType type;
   Double angle_rad; // angle in radian
 public:
   Point2d pos;
   Point2d scale;
   /* SetAngle take radian values */
-  inline void SetAngle(Double angle) { angle_rad = RestrictAngle(angle); }
+  void SetAngle(Double angle) { angle_rad = RestrictAngle(angle); }
   /* GetAngle returns radian values */
-  inline const Double &GetAngle() const { return angle_rad; }
+  const Double &GetAngle() const { return angle_rad; }
   Double alpha;
   int follow_cursor_limit;
   bool follow_cursor;
@@ -48,17 +50,22 @@ public:
   bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
-  member_mvt(): angle_rad(0), pos(0.0, 0.0), scale(1.0, 1.0), alpha(1),
-                follow_cursor_limit(0), follow_cursor(false),
-                follow_crosshair(false), follow_half_crosshair(false),
-                follow_speed(false), follow_direction(false)
+  member_mvt(const std::string& name = DUMMY_MEMBER)
+    : type(name)
+    , angle_rad(ZERO), pos(ZERO, ZERO), scale(ONE, ONE), alpha(ONE)
+    , follow_cursor_limit(0), follow_cursor(false)
+    , follow_crosshair(false), follow_half_crosshair(false)
+    , follow_speed(false), follow_direction(false)
   { };
+  operator const MemberType& () const { return type; }
+  bool operator==(const MemberType& other) const { return type == other; }
+  bool operator!=(const MemberType& other) const { return type == other; }
 };
 
 class Movement
 {
 public:
-  typedef std::map<MemberType, class member_mvt> member_def; // Describe the position of each member for a given frame
+  typedef std::vector<class member_mvt> member_def; // Describe the position of each member for a given frame
 
 private:
   uint ref_count;

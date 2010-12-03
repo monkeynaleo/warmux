@@ -20,7 +20,7 @@
  *****************************************************************************/
 #include <sstream>
 #include <iostream>
-#include <map>
+#include <algorithm>
 #include <WARMUX_debug.h>
 #include "character/body.h"
 #include "character/character.h"
@@ -299,7 +299,6 @@ void Body::ApplyMovement(Movement * mvt,
 
   std::vector<junction *>::iterator member = skel_lst.begin();
   bool                              useCrossHair;
-  member_mvt                        mb_mvt;
   Movement::member_def              movMember = mvt->GetFrames()[frame];
   Movement::member_def::iterator    itMember;
 
@@ -309,12 +308,13 @@ void Body::ApplyMovement(Movement * mvt,
   for (; member != skel_lst.end(); ++member) {
     ASSERT(frame < mvt->GetFrames().size());
 
-    itMember = movMember.find((*member)->member->GetType());
+    Member *mb = (*member)->member;
+    itMember = std::find(movMember.begin(), movMember.end(), mb->GetType());
 
     if (itMember != movMember.end()) {
 
       // This member needs to be moved :
-      mb_mvt       = itMember->second;
+      member_mvt& mb_mvt = *itMember;
 
       useCrossHair = ActiveTeam().AccessWeapon().UseCrossHair();
 
@@ -332,13 +332,13 @@ void Body::ApplyMovement(Movement * mvt,
         ProcessFollowDirection(mb_mvt);
       }
 
-      (*member)->member->ApplyMovement(mb_mvt);
+      mb->ApplyMovement(mb_mvt);
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
       if (mb_mvt.follow_cursor &&
           Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
-        ProcessFollowCursor(mb_mvt, (*member)->member);
+        ProcessFollowCursor(mb_mvt, mb);
       }
 
     }
