@@ -55,7 +55,7 @@ Medkit::Medkit()
 
 Medkit::~Medkit()
 {
-  if (--icon_ref) {
+  if (icon_ref--) {
     delete icon;
     icon = NULL;
   }
