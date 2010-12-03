@@ -354,11 +354,10 @@ uint Game::Start(bool bench)
   Keyboard::GetInstance()->Reset();
   Joystick::GetInstance()->Reset();
 
-  InitEverything();
-
   bool game_finished = true;
   InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
   if (basic) {
+    InitEverything();
     JukeBox::GetInstance()->PlayMusic(basic->ReadMusicPlaylist());
 
     game_finished = Run();
