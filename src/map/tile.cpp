@@ -629,4 +629,3 @@ void Tile::CheckEmptyTiles()
     }
   }
 }
-
