@@ -23,30 +23,27 @@
 
 class MemberType
 {
-  static std::map<std::string, int> Map;
-  static int count;
+  typedef std::vector<std::string> Vector;
+  static Vector Map;
 public:
   int type;
   MemberType(const std::string& name)
   {
-    std::map<std::string, int>::const_iterator found = Map.find(name);
-    if (found == Map.end()) { type = count; Map[name] = count++; }
-    else { type = Map[name]; }
+    uint count;
+    for (count = 0; count<Map.size(); count++) {
+      if (Map[count] == name) {
+        type = count;
+        return;
+      }
+    }
+    type = count;
+    Map.push_back(name);
   }
   MemberType(const MemberType& other) { type = other.type; }
   operator int() const { return type; }
-  bool operator ==(const std::string& name) const
-  {
-    std::map<std::string, int>::const_iterator found = Map.find(name);
-    if (found == Map.end()) return false;
-    return found->second == type;
-  }
-  bool operator !=(const std::string& name) const
-  {
-    std::map<std::string, int>::const_iterator found = Map.find(name);
-    if (found == Map.end()) return false;
-    return found->second != type;
-  }
+  operator const std::string&() const { return Map[type]; }
+  bool operator ==(const std::string& name) const { return Map[type] == name; }
+  bool operator !=(const std::string& name) const { return Map[type] != name; }
   bool operator==(const MemberType& other) const { return type == other.type; }
 };
 
