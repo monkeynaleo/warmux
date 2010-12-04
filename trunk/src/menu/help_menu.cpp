@@ -85,23 +85,21 @@ HelpMenu::HelpMenu()
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/startgame_menu", Font::FONT_BIG);
-  w->AddCaption(_("Select number of playing teams"), 220, 471-448, 432); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Change number of players per team"), 618, 471-444, 361); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click/wheelmouse to change the team.\nYou can't select the same team several times."), 167, 471-313, 325);
-  w->AddCaption(_("Click to let a player handle the team instead of the AI, and vice versa"), 576, 471-308, 445); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Map author information: name, email, nickname, country"), 511, 471-238, 557); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click on either side of the central (selected) map or use wheelmouse to change the selected map."), 388, 471-178, 753);
+  w->AddCaption(_("Select number of playing teams"), 220, 28, 432); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Change number of players per team"), 618, 34, 361); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click/wheelmouse to change the team.\nYou can't select the same team several times."), 167, 176, 325);
+  w->AddCaption(_("Click to let a player handle the team instead of the AI, and vice versa"), 576, 187, 445); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Map author information: name, email, nickname, country"), 511, 263, 557); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click on either side of the central (selected) map or use wheelmouse to change the selected map."), 388, 324, 753);
   tabs->AddNewTab("unused", _("Game menu"), w);
 
 
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/minimap", Font::FONT_BIG);
-  w->AddCaption(_("A circle indicates the active character"), 612, 114, 159);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Frames per second indicator"), 499, 29, 220);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Area currently displayed"), 82, 119, 161);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Position of the other characters"), 227, 271, 217);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Position of bonus boxes or medkits"), 448, 251, 211);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Area currently displayed"), 205, 270, 405);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of the characters.\nA circle surrounds the active character."), 610, 335, 375);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of bonus boxes or medkits"), 205, 403, 405);// TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Minimap"), w);
 
   w = new FigureWidget(Point2i(max_w,
@@ -120,24 +118,8 @@ HelpMenu::HelpMenu()
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/ingame", Font::FONT_LARGE);
-  w->AddCaption(
-#ifdef ANDROID
-      // TRANSLATORS: please keep this help for Android smartphones short!
-      _("To jump, press space or trackball or dpad center.\n"
-        "To aim or move more slowly, use shift/vol+.\n"
-        "To pause, click the clock or press escape/back key.\n"
-        "Click a character from your team to select it."),
-#else
-      // TRANSLATORS: please be imaginative and keep it short!
-      _("To jump, press space.\n"
-        "To aim or move more slowly, use shift.\n"
-        "To pause, click the clock or press escape.\n"
-        "Click a character from your team to select it."),
-#endif
-      197, 337, 289);
-  w->AddCaption(_("Minimap, more details in another tab"), 543, 132, 330); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Gauge to set speed of some projectiles"), 619, 494, 411); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Interface, more details in another tab"), 1003, 437, 209); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Minimap, more details in another tab"), 313, 55, 595); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Interface and touch controls, more details in other tabs"), 399, 332, 737); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Ingame display"), w);
 
   w = new FigureWidget(Point2i(max_w,
