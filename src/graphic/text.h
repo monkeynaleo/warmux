@@ -54,7 +54,7 @@ protected:
   Font::font_style_t font_style;
 
   virtual void Render();
-  int GetLineHeight(const Font *f) const { return (7*f->GetHeight())>>3; }
+  static int GetLineHeight(const Font *f) { return (7*f->GetHeight())>>3; }
   void RenderMultiLines();
 
 public:
