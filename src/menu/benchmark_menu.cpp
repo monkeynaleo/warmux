@@ -200,7 +200,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
         res.list = Game::GetInstance()->GetBenchResults();
         GraphCanvas::FindMax(res);
 
-        float  time = res.xmax;
+        float  time = res.xmax - res.list[0].first;
         score = (num * video->window.GetWidth()*video->window.GetHeight())
               / (1000.0f * time);
         fmt = "%.0f";
