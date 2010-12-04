@@ -250,14 +250,48 @@ void Text::RenderMultiLines()
   // but we still want the last line to be properly displayed
   Point2i size(max_line_width,
                GetLineHeight(font)*(ret_lines.size()-1)+font->GetHeight());
+#ifdef HAVE_HANDHELD
+  Surface tmp = Surface(size, SDL_SWSURFACE, false);
+  surf = tmp.DisplayFormat();
+
+  tmp = font->CreateSurface(ret_lines[0], color);
+  Uint32 ckey = tmp.GetSurface()->format->colorkey;
+  surf.Fill(ckey);
+  surf.SetColorKey(SDL_SRCCOLORKEY, ckey);
+  surf.Blit(tmp);
+
+  // for all remaining lines
+  for (uint i = 1; i < ret_lines.size(); i++) {
+    tmp = font->CreateSurface(ret_lines[i], color);
+    surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+  }
+
+  // Render the shadow !
+  if (!shadowed)
+    return;
+
+  tmp = Surface(size, SDL_SWSURFACE, false);
+  background = tmp.DisplayFormat();
+
+  tmp = font->CreateSurface(ret_lines[0], black_color);
+  ckey = tmp.GetSurface()->format->colorkey;
+  //background.Fill(ckey);
+  background.SetColorKey(SDL_SRCCOLORKEY, ckey);
+  background.Blit(tmp);
+
+  // Putting pixels of each image in destination surface
+  // for each lines
+  for (uint i = 1; i < ret_lines.size(); i++) {
+    tmp = font->CreateSurface(ret_lines[i], black_color);
+    background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+  }
+#else
   Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each line
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = (font->CreateSurface(ret_lines.at(i), color));
-    //tmp.SetAlpha(0, 0);
-    //surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+    tmp = font->CreateSurface(ret_lines[i], color);
     surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 
@@ -271,11 +305,10 @@ void Text::RenderMultiLines()
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = (font->CreateSurface(ret_lines.at(i), black_color));
-    //tmp.SetAlpha(0, 0);
-    //background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
-    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
+    tmp = font->CreateSurface(ret_lines[i], black_color);
+    background.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
+#endif
 }
 
 void Text::DrawLeftTop(const Point2i &position) const
