@@ -35,7 +35,16 @@ const uint EXPLOSION_BORDER_SIZE = 10;
 
 class Tile : public Rectanglei
 {
+public:
+  typedef struct
+  {
+    uint16_t index, new_crc;
+  } SynchTileInfo;
+  typedef std::vector<SynchTileInfo> SynchTileList;
+
+private:
   uint8_t m_alpha_threshold;
+
 public:
   Tile ();
   ~Tile ();
@@ -87,6 +96,7 @@ public:
   void CheckEmptyTiles();
 
   // Refresh the list of tiles to resynch
+  SynchTileList GetTilesToSynch();
 
   uint32_t GetCRC() const { assert(crc); return crc; }
 
