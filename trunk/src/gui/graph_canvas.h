@@ -54,7 +54,7 @@ public:
   virtual ~GraphCanvas() {};
   virtual void Draw(const Point2i&);
 
-  virtual void DrawGraph(uint i, float xmax,
+  virtual void DrawGraph(uint i, float xmax, float xmin,
                          int x, float xscale,
                          int y, float yscale) const;
   virtual void DrawGraph(int x, int y, int w, int h) const;

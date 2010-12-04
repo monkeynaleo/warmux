@@ -63,7 +63,7 @@ void GraphCanvas::Draw(const Point2i& /*mousePosition*/)
             size.x-2*DEF_BORDER, size.y-2*DEF_BORDER);
 }
 
-void GraphCanvas::DrawGraph(uint i, float xmax,
+void GraphCanvas::DrawGraph(uint i, float xmax, float xmin,
                             int x, float xscale,
                             int y, float yscale) const
 {
@@ -75,7 +75,7 @@ void GraphCanvas::DrawGraph(uint i, float xmax,
     return;
   }
 
-  int sx = x+int(res.list[0].first*xscale)+thickness,
+  int sx = x+int((res.list[0].first-xmin)*xscale)+thickness,
       sy = y-int(res.list[0].second*yscale);
   Surface &surface = GetMainWindow();
   MSG_DEBUG("menu", "   First point: (%.3f,%.3f) -> (%i,%i)",
@@ -83,7 +83,7 @@ void GraphCanvas::DrawGraph(uint i, float xmax,
 
   for (uint i=0; i<res.list.size(); i++) {
     const Value& val = res.list[i];
-    int ex = x+int(val.first*xscale),
+    int ex = x+int((val.first-xmin)*xscale),
         ey = y-int(val.second*yscale);
 
     MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
@@ -97,7 +97,7 @@ void GraphCanvas::DrawGraph(uint i, float xmax,
 
   // Missing point
   if (res.list[res.list.size()-1].first < xmax) {
-    int ex = x+int(xmax*xscale);
+    int ex = x+int((xmax-xmin)*xscale);
     MSG_DEBUG("menu", "   Last point -> (%i,%i)", ex, sy);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, thickness), color);
   }
@@ -117,12 +117,15 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
     // Value to determine normalization
     float  max_value = 0;
     float  xmax      = 0;
+    float  xmin      = std::numeric_limits<float>::max();
 
     for (uint i=0; i<results.size(); i++) {
       if (results[i].ymax > max_value)
         max_value = results[i].ymax;
       if (results[i].xmax > xmax)
         xmax = results[i].xmax;
+      if (results[i].list[0].first < xmin)
+        xmin = results[i].list[0].first;
     }
     // needed to see correctly energy at the end if two teams have same
     // energy just before the final blow
@@ -140,7 +143,7 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
 
     // Draw each team graph
     float yscale = graph_h / (1.05f*max_value);
-    float xscale = graph_w / (1.05f*xmax);
+    float xscale = graph_w / (1.05f*(xmax-xmin));
 
     for (uint i=0; i<results.size(); i++) {
       if (results[i].item) {
@@ -149,7 +152,7 @@ void GraphCanvas::DrawGraph(int x, int y, int w, int h) const
         // Legend icon
         surface.Blit(*results[i].item, Point2i(x+w-48, y+12+i*40-20));
       }
-      DrawGraph(i, xmax, graph_x, xscale, y+graph_h, yscale);
+      DrawGraph(i, xmax, xmin, graph_x, xscale, y+graph_h, yscale);
     }
   }
 
