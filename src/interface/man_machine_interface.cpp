@@ -1142,14 +1142,14 @@ std::string ManMachineInterface::GetActionNameFromAction(ManMachineInterface::Ke
 std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
 {
   if(key == KEY_QUIT) return _("Quit");
-  if(key == KEY_WEAPONS1) return _("Select 'Heavy' weapon category");
-  if(key == KEY_WEAPONS2) return _("Select 'Rifle' weapon category");
-  if(key == KEY_WEAPONS3) return _("Select 'Throwing' weapon category");
-  if(key == KEY_WEAPONS4) return _("Select 'Special' weapon category");
-  if(key == KEY_WEAPONS5) return _("Select 'Duel' weapon category");
-  if(key == KEY_WEAPONS6) return _("Select 'Move' weapon category");
-  if(key == KEY_WEAPONS7) return _("Select 'Tool' weapon category");
-  if(key == KEY_WEAPONS8) return _("Select weapon category 8");
+  if(key == KEY_WEAPONS1) return _("'Heavy' weapon category");
+  if(key == KEY_WEAPONS2) return _("'Rifle' weapon category");
+  if(key == KEY_WEAPONS3) return _("'Throwing' weapon category");
+  if(key == KEY_WEAPONS4) return _("'Special' weapon category");
+  if(key == KEY_WEAPONS5) return _("'Duel' weapon category");
+  if(key == KEY_WEAPONS6) return _("'Move' weapon category");
+  if(key == KEY_WEAPONS7) return _("'Tool' weapon category");
+  if(key == KEY_WEAPONS8) return _("Weapon category 8");
   if(key == KEY_PAUSE) return _("Pause");
   if(key == KEY_FULLSCREEN) return _("Toggle fullscreen");
   if(key == KEY_TOGGLE_INTERFACE) return _("Toggle interface");
@@ -1174,15 +1174,15 @@ std::string ManMachineInterface::GetHumanReadableActionName(Key_t key) const
   if(key == KEY_BACK_JUMP) return _("Back jump");
   if(key == KEY_SHOOT) return _("Shoot");
   if(key == KEY_CHANGE_WEAPON) return _("Change weapon");
-  if(key == KEY_WEAPON_1) return Format(_("Set explosion delay to %u"), 1);
-  if(key == KEY_WEAPON_2) return Format(_("Set explosion delay to %u"), 2);
-  if(key == KEY_WEAPON_3) return Format(_("Set explosion delay to %u"), 3);
-  if(key == KEY_WEAPON_4) return Format(_("Set explosion delay to %u"), 4);
-  if(key == KEY_WEAPON_5) return Format(_("Set explosion delay to %u"), 5);
-  if(key == KEY_WEAPON_6) return Format(_("Set explosion delay to %u"), 6);
-  if(key == KEY_WEAPON_7) return Format(_("Set explosion delay to %u"), 7);
-  if(key == KEY_WEAPON_8) return Format(_("Set explosion delay to %u"), 8);
-  if(key == KEY_WEAPON_9) return Format(_("Set explosion delay to %u"), 9);
+  if(key == KEY_WEAPON_1) return Format(_("Explosion delay of %u"), 1);
+  if(key == KEY_WEAPON_2) return Format(_("Explosion delay of %u"), 2);
+  if(key == KEY_WEAPON_3) return Format(_("Explosion delay of %u"), 3);
+  if(key == KEY_WEAPON_4) return Format(_("Explosion delay of %u"), 4);
+  if(key == KEY_WEAPON_5) return Format(_("Explosion delay of %u"), 5);
+  if(key == KEY_WEAPON_6) return Format(_("Explosion delay of %u"), 6);
+  if(key == KEY_WEAPON_7) return Format(_("Explosion delay of %u"), 7);
+  if(key == KEY_WEAPON_8) return Format(_("Explosion delay of %u"), 8);
+  if(key == KEY_WEAPON_9) return Format(_("Explosion delay of %u"), 9);
   if(key == KEY_WEAPON_LESS) return _("Decrease explosion delay");
   if(key == KEY_WEAPON_MORE) return _("Increase explosion delay");
   if(key == KEY_NEXT_CHARACTER) return _("Next character");
