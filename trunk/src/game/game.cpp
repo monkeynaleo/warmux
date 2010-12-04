@@ -619,12 +619,7 @@ void Game::Draw()
   if (benching) {
     float avg = fps->GetLastValue();
     if (avg > 0.0) {
-      static uint first_time = 0;
-      uint cur_time = Time::GetInstance()->Read();
-      if (!first_time) {
-        first_time = cur_time;
-      }
-      bench_res.push_back(std::make_pair((cur_time-first_time)/1000.0f, avg));
+      bench_res.push_back(std::make_pair(Time::GetInstance()->Read()/1000.0f, avg));
     }
   }
 
