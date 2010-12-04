@@ -30,7 +30,11 @@
 class SpinButtonWithPicture;
 class TeamBox;
 
+#ifndef __SYMBIAN32__
 const uint MAX_NB_TEAMS=8;
+#else
+const uint MAX_NB_TEAMS=4;
+#endif
 
 class TeamScrollBox : public ScrollBox
 {
