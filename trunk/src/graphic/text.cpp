@@ -246,13 +246,16 @@ void Text::RenderMultiLines()
     max_line_width = max_width;
   }
 
-  Point2i size(max_line_width, GetLineHeight(font)*ret_lines.size());
+  // We reduce interline space by using GetLineHeight,
+  // but we still want the last line to be properly displayed
+  Point2i size(max_line_width,
+               GetLineHeight(font)*(ret_lines.size()-1)+font->GetHeight());
   Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = (font->CreateSurface(ret_lines.at(i), color)).DisplayFormatAlpha();
+    tmp = (font->CreateSurface(ret_lines.at(i), color));
     tmp.SetAlpha(0, 0);
     surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
@@ -267,7 +270,7 @@ void Text::RenderMultiLines()
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = (font->CreateSurface(ret_lines.at(i), black_color)).DisplayFormatAlpha();
+    tmp = (font->CreateSurface(ret_lines.at(i), black_color));
     tmp.SetAlpha(0, 0);
     background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
