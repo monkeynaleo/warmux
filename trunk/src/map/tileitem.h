@@ -103,6 +103,7 @@ public:
   }
 
   uint16_t GetChecksum() const;
+  uint16_t GetSynchsum() { m_need_resynch = false; return GetChecksum(); }
   void Dig(const Point2i &center, const uint radius);
   bool IsTotallyEmpty() const { return false; };
   Surface& GetSurface() { return m_surface; };

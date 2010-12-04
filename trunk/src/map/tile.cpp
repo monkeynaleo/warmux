@@ -614,9 +614,9 @@ Surface Tile::GetPart(const Rectanglei& rec)
 
 void Tile::CheckEmptyTiles()
 {
-  int cellsCount = nbCells.x * nbCells.y;
+  uint cellsCount = nbCells.x * nbCells.y;
 
-  for (int i = 0; i < cellsCount; i++) {
+  for (uint i = 0; i < cellsCount; i++) {
     if (item[i]->IsTotallyEmpty())
       continue;
     TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
@@ -628,4 +628,23 @@ void Tile::CheckEmptyTiles()
       item[i] = &EmptyTile;
     }
   }
+}
+
+Tile::SynchTileList Tile::GetTilesToSynch()
+{
+  SynchTileList list;
+  uint cellsCount = nbCells.x * nbCells.y;
+
+  for (uint i = 0; i < cellsCount; i++) {
+    if (item[i]->IsTotallyEmpty())
+      continue;
+    TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
+
+    if (t->NeedSynch()) {
+      SynchTileInfo info = { i, t->GetSynchsum() };
+      list.push_back(info);
+    }
+  }
+
+  return list;
 }
