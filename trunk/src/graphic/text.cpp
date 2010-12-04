@@ -253,11 +253,12 @@ void Text::RenderMultiLines()
   Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = tmp.DisplayFormatAlpha();
 
-  // for each lines
+  // for each line
   for (uint i = 0; i < ret_lines.size(); i++) {
     tmp = (font->CreateSurface(ret_lines.at(i), color));
-    tmp.SetAlpha(0, 0);
-    surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+    //tmp.SetAlpha(0, 0);
+    //surf.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
@@ -271,8 +272,9 @@ void Text::RenderMultiLines()
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
     tmp = (font->CreateSurface(ret_lines.at(i), black_color));
-    tmp.SetAlpha(0, 0);
-    background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+    //tmp.SetAlpha(0, 0);
+    //background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
+    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 }
 
