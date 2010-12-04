@@ -678,23 +678,6 @@ void CSDLAppUi::ConstructL()
  	BaseConstructL(ENoAppResourceFile | EAknEnableSkin);
  	SetFullScreenApp(ETrue);
  	
- 	RLibrary lib;
- 	User::LeaveIfError(lib.Load(_L("sdlexe.dll")));
- 	TFileName name = lib.FileName();
- 	lib.Close();
- 	name.Replace(3, name.Length() - 3, _L("resource\\apps\\sdlexe.rsc"));
- 	BaflUtils::NearestLanguageFile(iEikonEnv->FsSession(), name);
- 	iResOffset = iCoeEnv->AddResourceFileL(name);
- 	
- 	name.Replace(name.Length() - 3, 3, _L("mbm"));
-	
-	//TEntry e;
-	//User::LeaveIfError(iEikonEnv->FsSession().Entry(name, e));
-	
-	iCBmp = iEikonEnv->CreateBitmapL(name, 0);
-	iAlpha = iEikonEnv->CreateBitmapL(name, 1);	
-	iCBmpMove = iEikonEnv->CreateBitmapL(name, 2);
- 	
  	iIdle = CIdle::NewL(CActive::EPriorityIdle);
  	
  	iSDLWin = new (ELeave) CSDLWin(*this);
@@ -719,7 +702,6 @@ void CSDLAppUi::ConstructL()
  					iSDLWin->GetWindow(), 
         			iEikonEnv->WsSession(),
         			*iEikonEnv->ScreenDevice());
-    iSdl->AppendOverlay(iCursor, 0);
     
     if(gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter)
         {
@@ -727,7 +709,6 @@ void CSDLAppUi::ConstructL()
         iSdl->SetBlitter(iZoomer);
         }
     
-    iCursor.Set(iSDLWin->Rect(), iCBmp, iAlpha);
         			
     iStarter = CIdle::NewL(CActive::EPriorityLow);   
     iStarter->Start(TCallBack(StartL, this));
