@@ -51,9 +51,10 @@ void Sky::Reset()
 
 void Sky::Draw(bool redraw_all)
 {
-  if (last_pos != Camera::GetInstance()->GetPosition() || redraw_all) {
-    last_pos = Camera::GetInstance()->GetPosition();
-    RedrawParticle(Rectanglei(Camera::GetInstance()->GetPosition(), GetMainWindow().GetSize()));
+  Point2i cur_pos = Camera::GetInstance()->GetPosition();
+  if (last_pos != cur_pos || redraw_all) {
+    last_pos = cur_pos;
+    RedrawParticle(Rectanglei(cur_pos, GetMainWindow().GetSize()));
     return;
   }
 
@@ -63,11 +64,8 @@ void Sky::Draw(bool redraw_all)
 
 void Sky::RedrawParticleList(std::list<Rectanglei> & list) const
 {
-  std::list<Rectanglei>::iterator it = list.begin();
-
-  for ( ; it != list.end(); ++it) {
+  for (std::list<Rectanglei>::iterator it = list.begin() ; it != list.end(); ++it)
     RedrawParticle(*it);
-  }
 }
 
 void Sky::RedrawParticle(const Rectanglei & particle) const
