@@ -1,12 +1,13 @@
-# Greek translation of the Wormux Game.
-# Copyright (C) 2007 Wormux Development Team
-# This file is distributed under the same license as the Wormux package.
+# Greek translation of the Warmux Game.
+# Copyright (C) 2007 Warmux Development Team
+# This file is distributed under the same license as the Warmux package.
 # Steve <gba2211 AT gmail DOT com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
-"Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2010-12-05 14:17+0100\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -64,34 +65,34 @@ msgstr "Ομάδα %s"
 msgid "%s Team - Remote"
 msgstr "Ομάδα %s - Απομακρυσμένη"
 
-#: src/game/game.cpp:1025
+#: src/game/game.cpp:1024
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "O %s από την ομάδα %s αυτοκτόνησε!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1051 src/game/game.cpp:1070
+#: src/game/game.cpp:1050 src/game/game.cpp:1069
 #, c-format
 msgid "%s from %s team has died."
 msgstr "O %s από την ομάδα %s πέθανε."
 
-#: src/game/game.cpp:1017
+#: src/game/game.cpp:1016
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "O %s από την ομάδα %s έπεσε στο νερό!"
 
-#: src/game/game.cpp:1011
+#: src/game/game.cpp:1010
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "O %s από την ομάδα %s έπεσε εκτός χάρτη!"
 
-#: src/game/game.cpp:1031
+#: src/game/game.cpp:1030
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Ο %s από την ομάδα %s χτύπησε στο έδαφος πολύ δυνατά!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1037
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητα!"
@@ -109,12 +110,12 @@ msgid ""
 msgstr ""
 "Ο %s έκανε κάτι για το περιβάλλον, δε διέταξε τον ασβό να αφήσει αέρια."
 
-#: src/object/medkit.cpp:63
+#: src/object/medkit.cpp:74
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "Ο παίκτης %s κέρδισε %u πόντο ζωής!"
 
-#: src/game/game.cpp:1062
+#: src/game/game.cpp:1061
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος της ομάδας του (%s)!"
@@ -135,7 +136,7 @@ msgid "%s needs a pause."
 msgstr "Ο %s χρειάζεται ένα διάλειμμα."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:77
+#: src/object/bonus_box.cpp:88
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Η ομάδα %s έχει ήδη άπειρα πυρομαχικά για  %s!"
@@ -444,7 +445,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Η ομάδα %s αποδεκατίστηκε."
 
-#: src/game/game.cpp:1046 src/game/game.cpp:1058
+#: src/game/game.cpp:1045 src/game/game.cpp:1057
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
@@ -453,6 +454,41 @@ msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του 
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1149
+#, fuzzy
+msgid "'Duel' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1145
+#, fuzzy
+msgid "'Heavy' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1150
+#, fuzzy
+msgid "'Move' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1146
+#, fuzzy
+msgid "'Rifle' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1148
+#, fuzzy
+msgid "'Special' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1147
+#, fuzzy
+msgid "'Throwing' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
+#: src/interface/man_machine_interface.cpp:1151
+#, fuzzy
+msgid "'Tool' weapon category"
+msgstr "Αλλαγή κατηγορίας όπλου"
 
 #: src/interface/interface.cpp:252
 msgid "(dead)"
@@ -471,11 +507,6 @@ msgstr "(άγνωστο χρόνο)"
 #: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
-
-#: src/menu/help_menu.cpp:100
-#, fuzzy
-msgid "A circle indicates the active character"
-msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
 #: src/menu/options_menu.cpp:515
 #, c-format
@@ -529,8 +560,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Αμόνι"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:107
 msgid "Area currently displayed"
 msgstr ""
 
@@ -566,7 +596,7 @@ msgstr "Μπαζούκα"
 msgid "Before action"
 msgstr "Πριν τη δράση"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Benchmark"
 msgstr ""
 
@@ -609,7 +639,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τις προσωπικές ομάδες (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:121 src/menu/help_menu.cpp:138
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Κέντραρε την κάμερα στο χαρακτήρα σου"
@@ -620,19 +650,19 @@ msgid "Center on active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:137
 #, fuzzy
 msgid "Change active character"
 msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:128
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Αλλαγή γωνίας σκόπευσης"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Change number of players per team"
 msgstr "Μέγιστο πλήθος παικτών:"
@@ -643,23 +673,23 @@ msgid "Change weapon"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:126
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:127
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Αλλαγή αντίστροφης μέτρησης όπλου"
 
-#: src/menu/help_menu.cpp:146
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:88
 msgid ""
 "Character name.\n"
 "Character energy.\n"
-"Team name.\n"
-"Player name."
+"Team name."
 msgstr ""
 
 #: src/menu/options_menu.cpp:183
@@ -687,7 +717,7 @@ msgid "Classic"
 msgstr "Κλασικό"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:60
 msgid ""
 "Click on either side of the central (selected) map or use wheelmouse to "
 "change the selected map."
@@ -706,12 +736,12 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:58
 msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:57
 msgid ""
 "Click/wheelmouse to change the team.\n"
 "You can't select the same team several times."
@@ -741,7 +771,7 @@ msgid "Commit Suicide"
 msgstr "Αυτοκτονία"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:124
 msgid "Configuration menu"
 msgstr "Μενού Διαμόρφωσης"
 
@@ -776,12 +806,19 @@ msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδο
 msgid "Couldn't open file %s"
 msgstr "Αδύνατον να ανοίξει το αρχείο %s"
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Απόδοση Τιμών"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:143
 msgid "Current controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Current weapon and ammo left, long click to display its help.\n"
+"Click to open selection menu."
 msgstr ""
 
 #: src/menu/game_mode_editor.cpp:88
@@ -821,7 +858,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:120
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Σύρε & άφησε: Μετακίνησε την κάμερα"
@@ -839,7 +876,7 @@ msgstr "Διάρκεια ενός γύρου"
 msgid "Dynamite"
 msgstr "Δυναμίτης"
 
-#: src/game/game.cpp:485
+#: src/game/game.cpp:484
 msgid "END OF GAME"
 msgstr "ΤΕΛΟΣ ΠΑΙΧΝΙΔΙΟΥ"
 
@@ -866,7 +903,7 @@ msgstr "Λάθος στη φόρτωση της ομάδας:"
 msgid "Error loading team :"
 msgstr "Λάθος στη φόρτωση της ομάδας:"
 
-#: src/game/config.cpp:561 src/team/custom_team.cpp:155
+#: src/game/config.cpp:563 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -935,8 +972,21 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Λάθος: αδύνατον να βρεθεί το σώμα \"%s\" για την ομάδα \"%s\"."
 
-#: src/menu/help_menu.cpp:110
+#: src/menu/help_menu.cpp:67
 msgid "Experiment new game rules"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1180
+#: src/interface/man_machine_interface.cpp:1181
+#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1184
+#: src/interface/man_machine_interface.cpp:1185
+#, c-format
+msgid "Explosion delay of %u"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:115
@@ -953,11 +1003,6 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τους χάρτες (%s)!"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:151
-msgid "Fire your weapon!"
-msgstr ""
-
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Φλογοβόλο"
@@ -967,11 +1012,6 @@ msgstr "Φλογοβόλο"
 msgid "Football Bomb"
 msgstr "Εκρηκτική μπάλα"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
-msgid "Frames per second indicator"
-msgstr ""
-
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
 msgstr "Πλήρης οθόνη;"
@@ -980,13 +1020,13 @@ msgstr "Πλήρης οθόνη;"
 msgid "Game"
 msgstr "Παιχνίδι"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:61
 #, fuzzy
 msgid "Game menu"
 msgstr "Κατάσταση παιχνιδιού"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:75
 #: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr "Κατάσταση παιχνιδιού"
@@ -994,11 +1034,6 @@ msgstr "Κατάσταση παιχνιδιού"
 #: src/menu/network_connection_menu.cpp:263
 msgid "Game name:"
 msgstr "Όνομα παιχνιδιού:"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:139
-msgid "Gauge to set speed of some projectiles"
-msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
@@ -1045,13 +1080,13 @@ msgstr "Καλό παιχνίδι!"
 msgid "Head commander"
 msgstr "Διοικητής"
 
-#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:67
+#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:69
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Βοήθεια"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
 msgid "High jump"
 msgstr "Ψηλό άλμα"
 
@@ -1063,7 +1098,7 @@ msgstr "Δημιουργήστε ένα παιχνίδι"
 msgid "Hurry up, you are too slow !!"
 msgstr "Κάνε γρήγορα, είσαι πολύ αργός!!"
 
-# Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Wormux, envoyez un mail (en anglais, svp) :
+# Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Warmux, envoyez un mail (en anglais, svp) :
 #: src/main.cpp:261
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -1073,7 +1108,7 @@ msgstr ""
 "στείλτε ένα mail (στα αγγλικά, παρακαλώ):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:114
+#: src/menu/help_menu.cpp:71
 msgid ""
 "If you like medkits,\n"
 "increase this"
@@ -1092,23 +1127,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:116
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Διάρκεια μέχρι την κατάσταση θανάτου"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:115
+#: src/menu/help_menu.cpp:72
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:141
+#: src/menu/help_menu.cpp:82
 msgid "Ingame display"
 msgstr ""
 
@@ -1147,17 +1182,17 @@ msgid "Initialise teams"
 msgstr "Αρχικοποίηση ομάδων"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:152
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:140
-msgid "Interface, more details in another tab"
+#: src/menu/help_menu.cpp:81
+msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:901
+#: src/game/game.cpp:900
 msgid "It's a present!"
 msgstr "Πάρε ένα δωράκι!"
 
@@ -1170,7 +1205,7 @@ msgid "Jump"
 msgstr "Άλμα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:118 src/menu/help_menu.cpp:119
 msgid "Jump backwards"
 msgstr "Άλμα προς τα πίσω"
 
@@ -1195,7 +1230,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:140
 msgid "Keyboard"
 msgstr ""
 
@@ -1254,7 +1289,7 @@ msgid "Map %s, a creation of: "
 msgstr "Χάρτης %s. Δημιουργός:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:59
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
@@ -1283,13 +1318,12 @@ msgid "Mine"
 msgstr "Νάρκη"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:110
 #, fuzzy
-#| msgid "Map"
 msgid "Minimap"
 msgstr "Χάρτης"
 
-#: src/menu/help_menu.cpp:138
+#: src/menu/help_menu.cpp:80
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1303,7 +1337,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:113
+#: src/menu/help_menu.cpp:70
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1348,13 +1382,13 @@ msgid "Move camera up"
 msgstr "Μετακίνησε χαρακτήρα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:134
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Μετακίνησε την κάμερα με το ποντίκι ή με τα βέλη"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:129
 #, fuzzy
 msgid "Move character"
 msgstr "Μετακίνησε χαρακτήρα"
@@ -1391,7 +1425,7 @@ msgstr "Μουσική;"
 msgid "Network"
 msgstr "Δικτυακό Παιχνίδι"
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:59
 msgid "Network Game"
 msgstr "Δικτυακό Παιχνίδι"
 
@@ -1446,13 +1480,13 @@ msgid "Number of teams:"
 msgstr "Πλήθος ομάδων:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:131
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Πάνω σε χαρακτήρα: Αλλάζει τον ενεργό χαρακτήρα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:130
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Πάνω στο χάρτη: Επέλεξε ένα στόχο"
@@ -1462,7 +1496,7 @@ msgstr "Πάνω στο χάρτη: Επέλεξε ένα στόχο"
 msgid "Open options menu"
 msgstr "Επιλογές"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Options"
 msgstr "Επιλογές"
 
@@ -1533,14 +1567,17 @@ msgid "Port:"
 msgstr "Θύρα:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:109
 msgid "Position of bonus boxes or medkits"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:103
-msgid "Position of the other characters"
-msgstr ""
+#: src/menu/help_menu.cpp:108
+#, fuzzy
+msgid ""
+"Position of the characters.\n"
+"A circle surrounds the active character."
+msgstr "Αλλάζει τον ενεργό χαρακτήρα"
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1599,20 +1636,21 @@ msgid "Public battles"
 msgstr "Δημόσιες μάχες"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:139
 msgid "Quickly quit game with Ctrl"
 msgstr "Γρήγορα εγκατάλειψε το παιχνίδι με το Ctrl"
 
 # quitter
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Εγκατάλειψε"
 
 #: src/main.cpp:250
-msgid "Quit Wormux"
-msgstr "Εγκατάλειψε το  Wormux"
+#, fuzzy
+msgid "Quit Warmux"
+msgstr "Εγκατάλειψε το  Warmux"
 
-#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:116 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Εγκατάλειψε το παιχνίδι"
 
@@ -1630,11 +1668,11 @@ msgstr "Τυχαίος χάρτης"
 msgid "Read only %i bytes"
 msgstr "Υπάρχει μόνο %i ομάδα."
 
-#: src/game/config.cpp:378
+#: src/game/config.cpp:380
 msgid "Reading the default config file"
 msgstr "Ανάγνωση προκαθορισμένου αρχείου διαμόρφωσης"
 
-#: src/game/config.cpp:435
+#: src/game/config.cpp:437
 msgid "Reading the personal config file"
 msgstr "Ανάγνωση προσωπικού αρχείου διαμόρφωσης"
 
@@ -1663,56 +1701,10 @@ msgstr "Μέγεθος ξετυλίγματος στα όρια"
 msgid "Scroll on border"
 msgstr "Ξετύλιγμα στα όρια"
 
-#: src/interface/man_machine_interface.cpp:1149
-#, fuzzy
-msgid "Select 'Duel' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1145
-#, fuzzy
-msgid "Select 'Heavy' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1150
-#, fuzzy
-msgid "Select 'Move' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1146
-#, fuzzy
-msgid "Select 'Rifle' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1148
-#, fuzzy
-msgid "Select 'Special' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1147
-#, fuzzy
-msgid "Select 'Throwing' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/interface/man_machine_interface.cpp:1151
-#, fuzzy
-msgid "Select 'Tool' weapon category"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Select number of playing teams"
 msgstr "Μέγιστο πλήθος παικτών:"
-
-#: src/interface/man_machine_interface.cpp:1152
-#, fuzzy
-msgid "Select weapon category 8"
-msgstr "Αλλαγή κατηγορίας όπλου"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:149
-#, fuzzy
-msgid "Selected weapon and ammo left"
-msgstr "Αλλαγή κατηγορίας όπλου"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Server address:"
@@ -1727,19 +1719,6 @@ msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 #: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Κατάσταση διακομιστή"
-
-#: src/interface/man_machine_interface.cpp:1177
-#: src/interface/man_machine_interface.cpp:1178
-#: src/interface/man_machine_interface.cpp:1179
-#: src/interface/man_machine_interface.cpp:1180
-#: src/interface/man_machine_interface.cpp:1181
-#: src/interface/man_machine_interface.cpp:1182
-#: src/interface/man_machine_interface.cpp:1183
-#: src/interface/man_machine_interface.cpp:1184
-#: src/interface/man_machine_interface.cpp:1185
-#, c-format
-msgid "Set explosion delay to %u"
-msgstr ""
 
 #: src/weapon/supertux.cpp:225
 msgid ""
@@ -1775,13 +1754,13 @@ msgid "Shotgun"
 msgstr "Καραμπίνα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:132
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Δείξε το μενού με τα όπλα"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:122
 msgid "Show/hide the interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
@@ -1803,7 +1782,7 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Χαστούκισε τον αντίπαλο για να τον κάνεις να αναπηδήσει λίγο."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:133
 msgid "Smaller aim angle and walk step"
 msgstr "Μικρότερη γωνία σκόπευσης και βηματισμός"
 
@@ -1812,7 +1791,7 @@ msgstr "Μικρότερη γωνία σκόπευσης και βηματισμ
 msgid "Sniper Rifle"
 msgstr "Τουφέκι με σκόπευτρο"
 
-#: src/object/bonus_box.cpp:64
+#: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 
@@ -1823,14 +1802,14 @@ msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι ν
 
 #: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
-"can download an updated version from http://www.wormux.org/wiki/download.php"
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
 "Συγγνώμη,  η έκδοσή σας δεν υποστηρίζεται τώρα. Οι υποστηριζόμενες εκδόσεις "
 "είναι οι %s. Μπορείτε να κατεβάσετε μία ενημερωμένη έκδοση στο  http://www."
-"wormux.org/wiki/download.php"
+"warmux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:310
 msgid "Sound"
@@ -1874,7 +1853,7 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:125
 msgid "Talk in network battles"
 msgstr "Μίλησε σε δικτυακή μάχη"
 
@@ -1896,8 +1875,8 @@ msgid "Teams editor"
 msgstr "Επεξεργαστής ομάδων"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:148
-msgid "Teams in decreasing order of energy"
+#: src/menu/help_menu.cpp:89
+msgid "Teams in decreasing order of total energy"
 msgstr ""
 
 #: src/weapon/teleportation.cpp:50
@@ -1934,7 +1913,7 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "Η μπάλα αναπήδησης εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:74
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
@@ -1963,7 +1942,7 @@ msgstr "Η σύνδεση έληξε. Επιβεβαίωσε ότι δεν υπ�
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Η χειροβομβίδα ντισκοτέκ εγκατέλειψε την πίστα χορού πριν την έκρηξη."
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:736
 msgid "The game was interrupted because you got disconnected."
 msgstr "Το παιχνίδι διακόπηκε διότι αποσυνδεθήκατε."
 
@@ -2023,10 +2002,10 @@ msgid "Time"
 msgstr "Χρόνος"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:147
+#: src/menu/help_menu.cpp:91
 msgid ""
-"Time left in this turn.\n"
-"Time elapsed since game start."
+"Time left in this turn and time elapsed since game start.\n"
+"Click to pause"
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
@@ -2055,26 +2034,8 @@ msgstr ""
 "Πυρ: κουμπί space\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:126
-msgid ""
-"To jump, press space or trackball or dpad center.\n"
-"To aim or move more slowly, use shift/vol+.\n"
-"To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it."
-msgstr ""
-
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
-msgid ""
-"To jump, press space.\n"
-"To aim or move more slowly, use shift.\n"
-"To pause, click the clock or press escape.\n"
-"Click a character from your team to select it."
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:123
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Πλήρης οθόνη;"
@@ -2085,7 +2046,7 @@ msgid "Toggle interface"
 msgstr "Δείξε/Κρύψε τη διεπαφή"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:136
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Δείξε/Κρύψε το μίνι χάρτη"
@@ -2094,6 +2055,36 @@ msgstr "Δείξε/Κρύψε το μίνι χάρτη"
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Δείξε το μενού με τα όπλα"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Touch controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:98
+msgid "Touch/click the left or right arrows to move respectively left or right"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:99
+msgid ""
+"Touch/click the left or right arrows to respectively raise or lower the aim"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Touch/click to change the weapon timer"
+msgstr ""
+
+#: src/menu/help_menu.cpp:97
+msgid "Touch/click to fire / start filling weapon speed gauge"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:100
+msgid "Touch/click to jump. Maintaining the touch/click to high jump."
+msgstr ""
 
 #: src/network/net_error_msg.cpp:30
 msgid "Unable to contact the host."
@@ -2186,7 +2177,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Περίμενε! %i παίκτης δεν είναι έτοιμος ακόμα!"
 msgstr[1] "Περίμενε! %i παίκτες δεν είναι έτοιμοι ακόμα!"
 
-#: src/game/game.cpp:636
+#: src/game/game.cpp:635
 #, c-format
 msgid "Waiting for %s"
 msgstr "Περιμένοντας τον %s"
@@ -2200,8 +2191,23 @@ msgstr "Περιμένοντας για απομακρισμένους παίκ�
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
+#: src/main.cpp:190
+#, fuzzy
+msgid "Warmux launching..."
+msgstr "Έναρξη του Warmux..."
+
+#: src/main.cpp:326
+#, fuzzy
+msgid "Warmux version "
+msgstr "Έκδοση του Warmux"
+
+#: src/interface/man_machine_interface.cpp:1152
+#, fuzzy
+msgid "Weapon category 8"
+msgstr "Αλλαγή κατηγορίας όπλου"
+
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:135
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Όπλο: Πυρ / Κουτί δώρο: πέφτει γρήγορα"
@@ -2221,19 +2227,19 @@ msgstr "Ιστοσελίδα: "
 msgid "Welcome to %s on %s!"
 msgstr "Καλώς ήρθες στο παιχνίδι %s στον %s!"
 
-#: src/game/game.cpp:1004
+#: src/game/game.cpp:1003
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Τι καλό παιχνίδι! O %s από την ομάδα %s είναι στον άλλο κόσμο..."
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
-#: src/game/game.cpp:1067
+#: src/game/game.cpp:1066
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:112
+#: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "Πάνω σε χαρακτήρα: Αλλάζει τον ενεργό χαρακτήρα"
@@ -2242,9 +2248,10 @@ msgstr "Πάνω σε χαρακτήρα: Αλλάζει τον ενεργό χ�
 msgid "Wind particles?"
 msgstr "Σωματίδια στον άνεμο;"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:150
-msgid "Wind strength and direction"
+#: src/menu/help_menu.cpp:87
+msgid ""
+"Wind strength and direction.\n"
+"Click here to switch to touch controls."
 msgstr ""
 
 #: src/menu/results_menu.cpp:272
@@ -2255,14 +2262,6 @@ msgstr "Νικητής"
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
-
-#: src/main.cpp:190
-msgid "Wormux launching..."
-msgstr "Έναρξη του Wormux..."
-
-#: src/main.cpp:326
-msgid "Wormux version "
-msgstr "Έκδοση του Wormux"
 
 # cyclic redundancy check (CRC) checksum
 # CRC terrain erroné !
@@ -2368,6 +2367,10 @@ msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 
 #, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "Αλλαγή κατηγορίας όπλου"
+
+#, fuzzy
 #~ msgid "Change per team number of players"
 #~ msgstr "Μέγιστο πλήθος παικτών:"
 
@@ -2404,10 +2407,10 @@ msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 #~ "Λάθος:\n"
 #~ "%s"
 
-# Venez sur #wormux-fr sur irc.freenode.net pour trouver des adversaires.
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
+# Venez sur #warmux-fr sur irc.freenode.net pour trouver des adversaires.
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
 #~ msgstr ""
-#~ "Μπείτε στο #wormux-fr στο irc.freenode.net για να βρείτε αντίπαλους."
+#~ "Μπείτε στο #warmux-fr στο irc.freenode.net για να βρείτε αντίπαλους."
 
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "Ο %s αποφάσισε να τραυματίσει τον %s"
@@ -2425,8 +2428,8 @@ msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 #~ msgid "Delete custom team"
 #~ msgstr "Διάγραψε προσωπική ομάδα."
 
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Λάθος στο %s:%lu (Wormux %s) : %s"
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "Λάθος στο %s:%lu (Warmux %s) : %s"
 
 #~ msgid ""
 #~ "Error: Your server is not reachable from the internet. Check your "
@@ -2471,12 +2474,12 @@ msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
 #, fuzzy
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
 #~ "php"
 #~ msgstr ""
 #~ "Συγγνώμη,  η έκδοσή σας δεν υποστηρίζεται τώρα. Οι υποστηριζόμενες "
 #~ "εκδόσεις είναι οι %s. Μπορείτε να κατεβάσετε μία ενημερωμένη έκδοση στο  "
-#~ "http://www.wormux.org/wiki/download.php"
+#~ "http://www.warmux.org/wiki/download.php"
 
 #~ msgid "Tools"
 #~ msgstr "Εργαλεία"

@@ -1,5 +1,5 @@
 # translation of fi.po to fi_FI
-# Copyright (C) YEAR Wormux Development Team
+# Copyright (C) YEAR Warmux Development Team
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Bastian Salmela <bastian.salmela@hel.fi>, 2006.
@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
-"Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2010-12-05 14:17+0100\n"
 "PO-Revision-Date: 2010-01-27 06:07+0200\n"
 "Last-Translator: Rami Selin <rami.selin@gmail.com>\n"
 "Language-Team: fi_FI <fi@li.org>\n"
@@ -65,34 +66,34 @@ msgstr "Joukkue %s"
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
-#: src/game/game.cpp:1025
+#: src/game/game.cpp:1024
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1051 src/game/game.cpp:1070
+#: src/game/game.cpp:1050 src/game/game.cpp:1069
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:1017
+#: src/game/game.cpp:1016
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:1011
+#: src/game/game.cpp:1010
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:1031
+#: src/game/game.cpp:1030
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1037
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -111,12 +112,12 @@ msgstr ""
 "%s on tehnyt jotakin ympäristölle, hän ei ole käskenyt haisunäätää "
 "pieraisemaan."
 
-#: src/object/medkit.cpp:63
+#: src/object/medkit.cpp:74
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s voitti %u voimapisteen."
 
-#: src/game/game.cpp:1062
+#: src/game/game.cpp:1061
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -137,7 +138,7 @@ msgid "%s needs a pause."
 msgstr "%s tarvitsee taukoa."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:77
+#: src/object/bonus_box.cpp:88
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Joukkueella %s on jo loputtomat ammukset aseelle %s!"
@@ -426,7 +427,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:1046 src/game/game.cpp:1058
+#: src/game/game.cpp:1045 src/game/game.cpp:1057
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -435,6 +436,41 @@ msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1149
+#, fuzzy
+msgid "'Duel' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1145
+#, fuzzy
+msgid "'Heavy' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1150
+#, fuzzy
+msgid "'Move' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1146
+#, fuzzy
+msgid "'Rifle' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1148
+#, fuzzy
+msgid "'Special' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1147
+#, fuzzy
+msgid "'Throwing' weapon category"
+msgstr "Vaihda aseluokkaa"
+
+#: src/interface/man_machine_interface.cpp:1151
+#, fuzzy
+msgid "'Tool' weapon category"
+msgstr "Vaihda aseluokkaa"
 
 #: src/interface/interface.cpp:252
 msgid "(dead)"
@@ -453,11 +489,6 @@ msgstr "(tuntematon aika)"
 #: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(rajaton)"
-
-#: src/menu/help_menu.cpp:100
-#, fuzzy
-msgid "A circle indicates the active character"
-msgstr "Vaihda aktiivista hahmoa"
 
 #: src/menu/options_menu.cpp:515
 #, c-format
@@ -509,8 +540,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Alasin"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:107
 msgid "Area currently displayed"
 msgstr ""
 
@@ -546,7 +576,7 @@ msgstr "Sinko"
 msgid "Before action"
 msgstr "Ennen toimintoa"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Benchmark"
 msgstr ""
 
@@ -589,7 +619,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ei voida avata henkilökohtaista joukkuehakemistoa (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:121 src/menu/help_menu.cpp:138
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Keskitä kamera hahmoon"
@@ -600,19 +630,19 @@ msgid "Center on active character"
 msgstr "Vaihda aktiivista hahmoa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:137
 #, fuzzy
 msgid "Change active character"
 msgstr "Vaihda aktiivista hahmoa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:128
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Muuta tähtäyskulmaa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Change number of players per team"
 msgstr "Pelaajien määrä joukkueessa:"
@@ -623,23 +653,23 @@ msgid "Change weapon"
 msgstr "Vaihda aseluokkaa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:126
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Vaihda aseluokkaa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:127
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Muunna aseen lähtölaskentaa"
 
-#: src/menu/help_menu.cpp:146
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:88
 msgid ""
 "Character name.\n"
 "Character energy.\n"
-"Team name.\n"
-"Player name."
+"Team name."
 msgstr ""
 
 #: src/menu/options_menu.cpp:183
@@ -667,7 +697,7 @@ msgid "Classic"
 msgstr "Klassikko"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:60
 msgid ""
 "Click on either side of the central (selected) map or use wheelmouse to "
 "change the selected map."
@@ -686,12 +716,12 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:58
 msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:57
 msgid ""
 "Click/wheelmouse to change the team.\n"
 "You can't select the same team several times."
@@ -719,7 +749,7 @@ msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:124
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
@@ -753,12 +783,19 @@ msgstr "Ei voitu hakea uusinta versiota osoitteesta %s"
 msgid "Couldn't open file %s"
 msgstr "Ei voitu avata tiedostoa %s"
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:143
 msgid "Current controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Current weapon and ammo left, long click to display its help.\n"
+"Click to open selection menu."
 msgstr ""
 
 #: src/menu/game_mode_editor.cpp:88
@@ -798,7 +835,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:120
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Vedä&pudota: Siirrä kameraa"
@@ -816,7 +853,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:485
+#: src/game/game.cpp:484
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
@@ -842,7 +879,7 @@ msgstr "Virhe ladattaessa joukkuetta :"
 msgid "Error loading team :"
 msgstr "Virhe ladattaessa joukkuetta :"
 
-#: src/game/config.cpp:561 src/team/custom_team.cpp:155
+#: src/game/config.cpp:563 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -903,8 +940,21 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
-#: src/menu/help_menu.cpp:110
+#: src/menu/help_menu.cpp:67
 msgid "Experiment new game rules"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1180
+#: src/interface/man_machine_interface.cpp:1181
+#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1184
+#: src/interface/man_machine_interface.cpp:1185
+#, c-format
+msgid "Explosion delay of %u"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:115
@@ -921,11 +971,6 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:151
-msgid "Fire your weapon!"
-msgstr ""
-
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Liekinheitin"
@@ -933,11 +978,6 @@ msgstr "Liekinheitin"
 #: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
 msgstr "Jalkapallopommi"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
-msgid "Frames per second indicator"
-msgstr ""
 
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
@@ -947,13 +987,13 @@ msgstr "Kokoruutu"
 msgid "Game"
 msgstr "Peli"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:61
 #, fuzzy
 msgid "Game menu"
 msgstr "Pelitila"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:75
 #: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr "Pelitila"
@@ -961,11 +1001,6 @@ msgstr "Pelitila"
 #: src/menu/network_connection_menu.cpp:263
 msgid "Game name:"
 msgstr "Pelin nimi:"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:139
-msgid "Gauge to set speed of some projectiles"
-msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
@@ -1012,13 +1047,13 @@ msgstr "Pidähän hauskaa!"
 msgid "Head commander"
 msgstr "Ylikomentaja"
 
-#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:67
+#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:69
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Ohje"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
 msgid "High jump"
 msgstr "Korkea hyppy"
 
@@ -1039,7 +1074,7 @@ msgstr ""
 "(englanniksi):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:114
+#: src/menu/help_menu.cpp:71
 msgid ""
 "If you like medkits,\n"
 "increase this"
@@ -1058,23 +1093,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:116
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Kesto ennen kuolon tilaa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:115
+#: src/menu/help_menu.cpp:72
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:141
+#: src/menu/help_menu.cpp:82
 msgid "Ingame display"
 msgstr ""
 
@@ -1113,17 +1148,17 @@ msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:152
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:140
-msgid "Interface, more details in another tab"
+#: src/menu/help_menu.cpp:81
+msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:901
+#: src/game/game.cpp:900
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -1136,7 +1171,7 @@ msgid "Jump"
 msgstr "Hyppää"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:118 src/menu/help_menu.cpp:119
 msgid "Jump backwards"
 msgstr "Hyppää taaksepäin"
 
@@ -1161,7 +1196,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:140
 msgid "Keyboard"
 msgstr ""
 
@@ -1220,7 +1255,7 @@ msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:59
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
@@ -1249,13 +1284,12 @@ msgid "Mine"
 msgstr "Miina"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:110
 #, fuzzy
-#| msgid "Map"
 msgid "Minimap"
 msgstr "Kartta"
 
-#: src/menu/help_menu.cpp:138
+#: src/menu/help_menu.cpp:80
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1269,7 +1303,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:113
+#: src/menu/help_menu.cpp:70
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1314,13 +1348,13 @@ msgid "Move camera up"
 msgstr "Siirrä hahmoa"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:134
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Siirrä kameraa hiirellä tai nuolilla"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:129
 #, fuzzy
 msgid "Move character"
 msgstr "Siirrä hahmoa"
@@ -1357,7 +1391,7 @@ msgstr "Musiikki"
 msgid "Network"
 msgstr "Verkko"
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:59
 msgid "Network Game"
 msgstr "Nettipeli"
 
@@ -1412,13 +1446,13 @@ msgid "Number of teams:"
 msgstr "Joukkueita"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:131
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Hahmolla: Vaihda aktiivista"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:130
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Kartalla: Valitse kohde"
@@ -1428,7 +1462,7 @@ msgstr "Kartalla: Valitse kohde"
 msgid "Open options menu"
 msgstr "Asetukset"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Options"
 msgstr "Asetukset"
 
@@ -1498,14 +1532,17 @@ msgid "Port:"
 msgstr "Portti:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:109
 msgid "Position of bonus boxes or medkits"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:103
-msgid "Position of the other characters"
-msgstr ""
+#: src/menu/help_menu.cpp:108
+#, fuzzy
+msgid ""
+"Position of the characters.\n"
+"A circle surrounds the active character."
+msgstr "Vaihda aktiivista hahmoa"
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1564,19 +1601,20 @@ msgid "Public battles"
 msgstr "Julkiset taistelut"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:139
 msgid "Quickly quit game with Ctrl"
 msgstr "Lopeta peli nopeasti Ctrl-näppäimellä"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Lopeta"
 
 #: src/main.cpp:250
-msgid "Quit Wormux"
-msgstr "Lopeta Wormux"
+#, fuzzy
+msgid "Quit Warmux"
+msgstr "Lopeta Warmux"
 
-#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:116 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Lopeta peli"
 
@@ -1593,11 +1631,11 @@ msgstr "Satunnainen kartta"
 msgid "Read only %i bytes"
 msgstr "On olemassa vain %i joukkue."
 
-#: src/game/config.cpp:378
+#: src/game/config.cpp:380
 msgid "Reading the default config file"
 msgstr "Luetaan oletusasetuksia"
 
-#: src/game/config.cpp:435
+#: src/game/config.cpp:437
 msgid "Reading the personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
@@ -1625,56 +1663,10 @@ msgstr "Reunuksen koko"
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
-#: src/interface/man_machine_interface.cpp:1149
-#, fuzzy
-msgid "Select 'Duel' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1145
-#, fuzzy
-msgid "Select 'Heavy' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1150
-#, fuzzy
-msgid "Select 'Move' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1146
-#, fuzzy
-msgid "Select 'Rifle' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1148
-#, fuzzy
-msgid "Select 'Special' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1147
-#, fuzzy
-msgid "Select 'Throwing' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/interface/man_machine_interface.cpp:1151
-#, fuzzy
-msgid "Select 'Tool' weapon category"
-msgstr "Vaihda aseluokkaa"
-
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Select number of playing teams"
 msgstr "Pelaajien määrä joukkueessa:"
-
-#: src/interface/man_machine_interface.cpp:1152
-#, fuzzy
-msgid "Select weapon category 8"
-msgstr "Vaihda aseluokkaa"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:149
-#, fuzzy
-msgid "Selected weapon and ammo left"
-msgstr "Vaihda aseluokkaa"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Server address:"
@@ -1689,19 +1681,6 @@ msgstr "Palvelimelle on pääsy internetistä"
 #: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Palvelimen tila"
-
-#: src/interface/man_machine_interface.cpp:1177
-#: src/interface/man_machine_interface.cpp:1178
-#: src/interface/man_machine_interface.cpp:1179
-#: src/interface/man_machine_interface.cpp:1180
-#: src/interface/man_machine_interface.cpp:1181
-#: src/interface/man_machine_interface.cpp:1182
-#: src/interface/man_machine_interface.cpp:1183
-#: src/interface/man_machine_interface.cpp:1184
-#: src/interface/man_machine_interface.cpp:1185
-#, c-format
-msgid "Set explosion delay to %u"
-msgstr ""
 
 #: src/weapon/supertux.cpp:225
 msgid ""
@@ -1737,13 +1716,13 @@ msgid "Shotgun"
 msgstr "Haulikko"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:132
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Näytä asevalikko"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:122
 msgid "Show/hide the interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
@@ -1764,7 +1743,7 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Läpsäytä vihollista hypäyttääksesi häntä hieman."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:133
 msgid "Smaller aim angle and walk step"
 msgstr "Pienempi tähtäyskulma ja kävelyaskeleet"
 
@@ -1772,7 +1751,7 @@ msgstr "Pienempi tähtäyskulma ja kävelyaskeleet"
 msgid "Sniper Rifle"
 msgstr "Tarkkuuskivääri"
 
-#: src/object/bonus_box.cpp:64
+#: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "Joku viritti ansan laatikkoon!"
 
@@ -1782,13 +1761,13 @@ msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
 #: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
-"can download an updated version from http://www.wormux.org/wiki/download.php"
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
 "Versiotasi ei enää tueta. Tuetut versiot ovat%s. Voit ladata päivitetyn "
-"version osoitteesta http://www.wormux.org/wiki/download.php"
+"version osoitteesta http://www.warmux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:310
 msgid "Sound"
@@ -1832,7 +1811,7 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:125
 msgid "Talk in network battles"
 msgstr "Puhu verkkotaisteluissa"
 
@@ -1854,8 +1833,8 @@ msgid "Teams editor"
 msgstr "Joukkue-editori"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:148
-msgid "Teams in decreasing order of energy"
+#: src/menu/help_menu.cpp:89
+msgid "Teams in decreasing order of total energy"
 msgstr ""
 
 #: src/weapon/teleportation.cpp:50
@@ -1887,7 +1866,7 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "Pallo poistui taistelukentältä ennen räjähtämistä!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:74
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
@@ -1914,7 +1893,7 @@ msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskokranaatti jätti tanssilattian ennen räjähtämistä!"
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:736
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
@@ -1968,10 +1947,10 @@ msgid "Time"
 msgstr "Aika"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:147
+#: src/menu/help_menu.cpp:91
 msgid ""
-"Time left in this turn.\n"
-"Time elapsed since game start."
+"Time left in this turn and time elapsed since game start.\n"
+"Click to pause"
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
@@ -2000,26 +1979,8 @@ msgstr ""
 "Ammu: välilyönti\n"
 "yksi ammus per vuoro"
 
-#. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:126
-msgid ""
-"To jump, press space or trackball or dpad center.\n"
-"To aim or move more slowly, use shift/vol+.\n"
-"To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it."
-msgstr ""
-
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
-msgid ""
-"To jump, press space.\n"
-"To aim or move more slowly, use shift.\n"
-"To pause, click the clock or press escape.\n"
-"Click a character from your team to select it."
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:123
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Kokoruutu"
@@ -2030,7 +1991,7 @@ msgid "Toggle interface"
 msgstr "Näytä/piilota käyttöliittymä"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:136
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Näytä/piilota peinoiskartta"
@@ -2039,6 +2000,36 @@ msgstr "Näytä/piilota peinoiskartta"
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Näytä asevalikko"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Touch controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:98
+msgid "Touch/click the left or right arrows to move respectively left or right"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:99
+msgid ""
+"Touch/click the left or right arrows to respectively raise or lower the aim"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Touch/click to change the weapon timer"
+msgstr ""
+
+#: src/menu/help_menu.cpp:97
+msgid "Touch/click to fire / start filling weapon speed gauge"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:100
+msgid "Touch/click to jump. Maintaining the touch/click to high jump."
+msgstr ""
 
 #: src/network/net_error_msg.cpp:30
 msgid "Unable to contact the host."
@@ -2129,7 +2120,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/game/game.cpp:636
+#: src/game/game.cpp:635
 #, c-format
 msgid "Waiting for %s"
 msgstr "Odotetaan henkilöä %s"
@@ -2142,8 +2133,23 @@ msgstr "Odotetaan etäpelaajia"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
+#: src/main.cpp:190
+#, fuzzy
+msgid "Warmux launching..."
+msgstr "Warmux käynnistyy..."
+
+#: src/main.cpp:326
+#, fuzzy
+msgid "Warmux version "
+msgstr "Warmux versio"
+
+#: src/interface/man_machine_interface.cpp:1152
+#, fuzzy
+msgid "Weapon category 8"
+msgstr "Vaihda aseluokkaa"
+
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:135
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
@@ -2163,18 +2169,18 @@ msgstr "Verkkosivu:"
 msgid "Welcome to %s on %s!"
 msgstr "Tervetuloa kohteeseen %s paikassa %s!"
 
-#: src/game/game.cpp:1004
+#: src/game/game.cpp:1003
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Loistava kunnari! %s joukkueesta %s  on toisessa maailmassa..."
 
-#: src/game/game.cpp:1067
+#: src/game/game.cpp:1066
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:112
+#: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "Hahmolla: Vaihda aktiivista"
@@ -2183,9 +2189,10 @@ msgstr "Hahmolla: Vaihda aktiivista"
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:150
-msgid "Wind strength and direction"
+#: src/menu/help_menu.cpp:87
+msgid ""
+"Wind strength and direction.\n"
+"Click here to switch to touch controls."
 msgstr ""
 
 #: src/menu/results_menu.cpp:272
@@ -2196,14 +2203,6 @@ msgstr "Voittaja"
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
-
-#: src/main.cpp:190
-msgid "Wormux launching..."
-msgstr "Wormux käynnistyy..."
-
-#: src/main.cpp:326
-msgid "Wormux version "
-msgstr "Wormux versio"
 
 #: src/include/action_handler.cpp:233
 msgid "Wrong map CRC!"
@@ -2304,6 +2303,10 @@ msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."
 
 #, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "Vaihda aseluokkaa"
+
+#, fuzzy
 #~ msgid "Change per team number of players"
 #~ msgstr "Pelaajien määrä joukkueessa:"
 
@@ -2340,9 +2343,9 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #~ "Virhe:\n"
 #~ "%s"
 
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
 #~ msgstr ""
-#~ "Liity '#wormux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
+#~ "Liity '#warmux'-kanavalle irc.freenode.netissä löytääksesi vastustajia."
 
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "%s on päättänyt vahingoittaa henkilöä %s"
@@ -2356,8 +2359,8 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #~ msgid "Delete custom team"
 #~ msgstr "Poista henkilökohtainen joukkue"
 
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Virhe kohdassa %s:%lu (Wormux %s) : %s"
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "Virhe kohdassa %s:%lu (Warmux %s) : %s"
 
 #~ msgid ""
 #~ "Error: Your server is not reachable from the internet. Check your "
@@ -2389,11 +2392,11 @@ msgstr "o Avataan äänet: %d Hz %d bittiä."
 #, fuzzy
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
 #~ "php"
 #~ msgstr ""
 #~ "Versiotasi ei enää tueta. Tuettu versio on %s. Voit ladata päivitetyn "
-#~ "version osoitteesta http://www.wormux.org/wiki/download.php"
+#~ "version osoitteesta http://www.warmux.org/wiki/download.php"
 
 #~ msgid "Tools"
 #~ msgstr "Työkalut"

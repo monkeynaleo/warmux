@@ -5,8 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Wormux 0.8\n"
-"Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"Project-Id-Version: Warmux 0.8\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2010-12-05 14:17+0100\n"
 "PO-Revision-Date: 2010-01-10 17:48+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -63,34 +64,34 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/game/game.cpp:1025
+#: src/game/game.cpp:1024
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s van team %s pleegde zelfmoord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1051 src/game/game.cpp:1070
+#: src/game/game.cpp:1050 src/game/game.cpp:1069
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s van team %s is overleden."
 
-#: src/game/game.cpp:1017
+#: src/game/game.cpp:1016
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s van team %s is in het water gevallen."
 
-#: src/game/game.cpp:1011
+#: src/game/game.cpp:1010
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s van team %s is van de kaart gevallen!"
 
-#: src/game/game.cpp:1031
+#: src/game/game.cpp:1030
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s van team %s heeft de grond te hard geraakt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1037
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
@@ -109,12 +110,12 @@ msgstr ""
 "%s heeft iets goeds voor het milieu gedaan, dankzij hem heeft het stinkdier "
 "geen bouten gelegd."
 
-#: src/object/medkit.cpp:63
+#: src/object/medkit.cpp:74
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s heeft %u punt energie gekregen!"
 
-#: src/game/game.cpp:1062
+#: src/game/game.cpp:1061
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
@@ -135,7 +136,7 @@ msgid "%s needs a pause."
 msgstr "%s heeft een momentje rust nodig."
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:77
+#: src/object/bonus_box.cpp:88
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Team %s heeft al oneindige munitie voor %s!"
@@ -439,7 +440,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Team %s is afgeslacht."
 
-#: src/game/game.cpp:1046 src/game/game.cpp:1058
+#: src/game/game.cpp:1045 src/game/game.cpp:1057
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
@@ -448,6 +449,41 @@ msgstr "%s nam een lid van team %s met zich mee in het graf!"
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1149
+#, fuzzy
+msgid "'Duel' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1145
+#, fuzzy
+msgid "'Heavy' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1150
+#, fuzzy
+msgid "'Move' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1146
+#, fuzzy
+msgid "'Rifle' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1148
+#, fuzzy
+msgid "'Special' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1147
+#, fuzzy
+msgid "'Throwing' weapon category"
+msgstr "Wapencategorie veranderen"
+
+#: src/interface/man_machine_interface.cpp:1151
+#, fuzzy
+msgid "'Tool' weapon category"
+msgstr "Wapencategorie veranderen"
 
 #: src/interface/interface.cpp:252
 msgid "(dead)"
@@ -466,11 +502,6 @@ msgstr "(onbekende tijd)"
 #: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
-
-#: src/menu/help_menu.cpp:100
-#, fuzzy
-msgid "A circle indicates the active character"
-msgstr "Het actief karakter veranderen"
 
 #: src/menu/options_menu.cpp:515
 #, c-format
@@ -522,8 +553,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:107
 msgid "Area currently displayed"
 msgstr ""
 
@@ -559,7 +589,7 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Alvorens actie"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Benchmark"
 msgstr ""
 
@@ -602,7 +632,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:121 src/menu/help_menu.cpp:138
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Camera centreren op het karakter"
@@ -613,21 +643,20 @@ msgid "Center on active character"
 msgstr "Het actief karakter veranderen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:137
 #, fuzzy
 msgid "Change active character"
 msgstr "Het actief karakter veranderen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:128
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Richthoek veranderen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:56
 #, fuzzy
-#| msgid "Number of players per team:"
 msgid "Change number of players per team"
 msgstr "Aantal spelers per team:"
 
@@ -637,23 +666,23 @@ msgid "Change weapon"
 msgstr "Wapencategorie veranderen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:126
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Wapencategorie veranderen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:127
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Wapenteller veranderen"
 
-#: src/menu/help_menu.cpp:146
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:88
 msgid ""
 "Character name.\n"
 "Character energy.\n"
-"Team name.\n"
-"Player name."
+"Team name."
 msgstr ""
 
 #: src/menu/options_menu.cpp:183
@@ -681,7 +710,7 @@ msgid "Classic"
 msgstr "Klassiek"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:60
 msgid ""
 "Click on either side of the central (selected) map or use wheelmouse to "
 "change the selected map."
@@ -700,12 +729,12 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:58
 msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:57
 msgid ""
 "Click/wheelmouse to change the team.\n"
 "You can't select the same team several times."
@@ -733,7 +762,7 @@ msgid "Commit Suicide"
 msgstr "Pleeg Zelfmoord"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:124
 msgid "Configuration menu"
 msgstr "Configuratie menu"
 
@@ -767,12 +796,19 @@ msgstr "Kon de laatste versie van %s niet verwerven"
 msgid "Couldn't open file %s"
 msgstr "Kon bestand %s niet openen"
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Credits"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:143
 msgid "Current controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Current weapon and ammo left, long click to display its help.\n"
+"Click to open selection menu."
 msgstr ""
 
 #: src/menu/game_mode_editor.cpp:88
@@ -812,7 +848,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:120
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Slepen: Camera bewegen"
@@ -830,7 +866,7 @@ msgstr "Duur van een beurt"
 msgid "Dynamite"
 msgstr "Dynamiet"
 
-#: src/game/game.cpp:485
+#: src/game/game.cpp:484
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
@@ -858,7 +894,7 @@ msgstr "Fout bij het laden van team :"
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
-#: src/game/config.cpp:561 src/team/custom_team.cpp:155
+#: src/game/config.cpp:563 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -920,8 +956,21 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan het lichaam \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/menu/help_menu.cpp:110
+#: src/menu/help_menu.cpp:67
 msgid "Experiment new game rules"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1180
+#: src/interface/man_machine_interface.cpp:1181
+#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1184
+#: src/interface/man_machine_interface.cpp:1185
+#, c-format
+msgid "Explosion delay of %u"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:115
@@ -938,11 +987,6 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Kon de kaartendirectory (%s) niet openen!"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:151
-msgid "Fire your weapon!"
-msgstr ""
-
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Vlammenwerper"
@@ -950,11 +994,6 @@ msgstr "Vlammenwerper"
 #: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
 msgstr "Voetbalbom"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
-msgid "Frames per second indicator"
-msgstr ""
 
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
@@ -964,13 +1003,13 @@ msgstr "Volledig scherm?"
 msgid "Game"
 msgstr "Spel"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:61
 #, fuzzy
 msgid "Game menu"
 msgstr "Spelmodus"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:75
 #: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr "Spelmodus"
@@ -978,11 +1017,6 @@ msgstr "Spelmodus"
 #: src/menu/network_connection_menu.cpp:263
 msgid "Game name:"
 msgstr "Spelnaam:"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:139
-msgid "Gauge to set speed of some projectiles"
-msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
@@ -1029,13 +1063,13 @@ msgstr "Succes!"
 msgid "Head commander"
 msgstr "Hoofdcommandant"
 
-#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:67
+#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:69
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Help"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
 msgid "High jump"
 msgstr "Hoge sprong"
 
@@ -1056,7 +1090,7 @@ msgstr ""
 "e-mail (graag in het Engels):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:114
+#: src/menu/help_menu.cpp:71
 msgid ""
 "If you like medkits,\n"
 "increase this"
@@ -1075,23 +1109,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:116
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Duur voor doodsmodus"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:115
+#: src/menu/help_menu.cpp:72
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:141
+#: src/menu/help_menu.cpp:82
 msgid "Ingame display"
 msgstr ""
 
@@ -1130,17 +1164,17 @@ msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:152
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Interface"
 msgstr "Interface verbergen/tonen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:140
-msgid "Interface, more details in another tab"
+#: src/menu/help_menu.cpp:81
+msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:901
+#: src/game/game.cpp:900
 msgid "It's a present!"
 msgstr "Het is een cadeau!"
 
@@ -1153,7 +1187,7 @@ msgid "Jump"
 msgstr "Sprong"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:118 src/menu/help_menu.cpp:119
 msgid "Jump backwards"
 msgstr "Achterwaartse sprong"
 
@@ -1178,7 +1212,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:140
 msgid "Keyboard"
 msgstr ""
 
@@ -1237,7 +1271,7 @@ msgid "Map %s, a creation of: "
 msgstr "Kaart %s, gemaakt door:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:59
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
@@ -1266,13 +1300,12 @@ msgid "Mine"
 msgstr "Mijn"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:110
 #, fuzzy
-#| msgid "Map"
 msgid "Minimap"
 msgstr "Kaart"
 
-#: src/menu/help_menu.cpp:138
+#: src/menu/help_menu.cpp:80
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1286,7 +1319,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:113
+#: src/menu/help_menu.cpp:70
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1331,13 +1364,13 @@ msgid "Move camera up"
 msgstr "Bewegen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:134
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Camera met muis of pijltjestoetsen bewegen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:129
 #, fuzzy
 msgid "Move character"
 msgstr "Bewegen"
@@ -1374,7 +1407,7 @@ msgstr "Muziek?"
 msgid "Network"
 msgstr "Netwerk"
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:59
 msgid "Network Game"
 msgstr "Netwerk Spel"
 
@@ -1429,13 +1462,13 @@ msgid "Number of teams:"
 msgstr "Aantal teams:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:131
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Op een karakter: Selecteren"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:130
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Op het slagveld: Een doelwit selecteren"
@@ -1445,7 +1478,7 @@ msgstr "Op het slagveld: Een doelwit selecteren"
 msgid "Open options menu"
 msgstr "Opties"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Options"
 msgstr "Opties"
 
@@ -1515,16 +1548,17 @@ msgid "Port:"
 msgstr "Poort:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:109
 msgid "Position of bonus boxes or medkits"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:103
+#: src/menu/help_menu.cpp:108
 #, fuzzy
-#| msgid "Find a random position for characters"
-msgid "Position of the other characters"
-msgstr "Zoek een willekeurige positie voor de spelers"
+msgid ""
+"Position of the characters.\n"
+"A circle surrounds the active character."
+msgstr "Het actief karakter veranderen"
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1583,19 +1617,20 @@ msgid "Public battles"
 msgstr "Openbare gevechten"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:139
 msgid "Quickly quit game with Ctrl"
 msgstr "Spel snel afsluiten met Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Afsluiten"
 
 #: src/main.cpp:250
-msgid "Quit Wormux"
-msgstr "Wormux afsluiten"
+#, fuzzy
+msgid "Quit Warmux"
+msgstr "Warmux afsluiten"
 
-#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:116 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Spel afsluiten"
 
@@ -1612,11 +1647,11 @@ msgstr "Willekeurige kaart"
 msgid "Read only %i bytes"
 msgstr "Er is maar %i team."
 
-#: src/game/config.cpp:378
+#: src/game/config.cpp:380
 msgid "Reading the default config file"
 msgstr "Standaard configbestand wordt gelezen"
 
-#: src/game/config.cpp:435
+#: src/game/config.cpp:437
 msgid "Reading the personal config file"
 msgstr "Persoonlijk configbestand wordt gelezen"
 
@@ -1644,56 +1679,10 @@ msgstr "Scroll-rand grootte"
 msgid "Scroll on border"
 msgstr "Scroll bij de rand"
 
-#: src/interface/man_machine_interface.cpp:1149
-#, fuzzy
-msgid "Select 'Duel' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1145
-#, fuzzy
-msgid "Select 'Heavy' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1150
-#, fuzzy
-msgid "Select 'Move' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1146
-#, fuzzy
-msgid "Select 'Rifle' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1148
-#, fuzzy
-msgid "Select 'Special' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1147
-#, fuzzy
-msgid "Select 'Throwing' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/interface/man_machine_interface.cpp:1151
-#, fuzzy
-msgid "Select 'Tool' weapon category"
-msgstr "Wapencategorie veranderen"
-
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Select number of playing teams"
 msgstr "Max aantal spelers:"
-
-#: src/interface/man_machine_interface.cpp:1152
-#, fuzzy
-msgid "Select weapon category 8"
-msgstr "Wapencategorie veranderen"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:149
-#, fuzzy
-msgid "Selected weapon and ammo left"
-msgstr "Wapencategorie veranderen"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Server address:"
@@ -1708,19 +1697,6 @@ msgstr "Server beschikbaar op internet"
 #: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Server modus"
-
-#: src/interface/man_machine_interface.cpp:1177
-#: src/interface/man_machine_interface.cpp:1178
-#: src/interface/man_machine_interface.cpp:1179
-#: src/interface/man_machine_interface.cpp:1180
-#: src/interface/man_machine_interface.cpp:1181
-#: src/interface/man_machine_interface.cpp:1182
-#: src/interface/man_machine_interface.cpp:1183
-#: src/interface/man_machine_interface.cpp:1184
-#: src/interface/man_machine_interface.cpp:1185
-#, c-format
-msgid "Set explosion delay to %u"
-msgstr ""
 
 #: src/weapon/supertux.cpp:225
 msgid ""
@@ -1756,13 +1732,13 @@ msgid "Shotgun"
 msgstr "Jachtgeweer"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:132
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Wapenmenu weergeven"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:122
 msgid "Show/hide the interface"
 msgstr "Interface verbergen/tonen"
 
@@ -1783,7 +1759,7 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Sla de vijand om hem een beetje te laten springen."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:133
 msgid "Smaller aim angle and walk step"
 msgstr "Nauwkeuriger richten en lopen"
 
@@ -1791,7 +1767,7 @@ msgstr "Nauwkeuriger richten en lopen"
 msgid "Sniper Rifle"
 msgstr "Scherpschuttersgeweer"
 
-#: src/object/bonus_box.cpp:64
+#: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iemand heeft een fopcadeau gemaakt!"
 
@@ -1801,13 +1777,13 @@ msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
 #: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
-"can download an updated version from http://www.wormux.org/wiki/download.php"
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
 "Sorry, uw versie wordt niet meer ondersteund. Ondersteunde versies zijn %s. "
-"U kunt een nieuwere versie downloaden op http://www.wormux.org/phpboost/"
+"U kunt een nieuwere versie downloaden op http://www.warmux.org/phpboost/"
 "download/download.php"
 
 #: src/menu/options_menu.cpp:310
@@ -1852,7 +1828,7 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:125
 msgid "Talk in network battles"
 msgstr "Chatten tijdens netwerkstrijd"
 
@@ -1874,8 +1850,8 @@ msgid "Teams editor"
 msgstr "Team-editor"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:148
-msgid "Teams in decreasing order of energy"
+#: src/menu/help_menu.cpp:89
+msgid "Teams in decreasing order of total energy"
 msgstr ""
 
 #: src/weapon/teleportation.cpp:50
@@ -1907,7 +1883,7 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "De bal heeft het slagveld verlaten alvorens te ontploffen!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:74
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
@@ -1935,7 +1911,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "De disco granaat heeft de dansvloer verlaten alvorens te ontploffen!"
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:736
 msgid "The game was interrupted because you got disconnected."
 msgstr "Het spel is onderbroken omdat uw verbinding verbroken is."
 
@@ -1989,10 +1965,10 @@ msgid "Time"
 msgstr "Tijd"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:147
+#: src/menu/help_menu.cpp:91
 msgid ""
-"Time left in this turn.\n"
-"Time elapsed since game start."
+"Time left in this turn and time elapsed since game start.\n"
+"Click to pause"
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
@@ -2021,26 +1997,8 @@ msgstr ""
 "Vuur : spatiebalk\n"
 "slechts een per beurt"
 
-#. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:126
-msgid ""
-"To jump, press space or trackball or dpad center.\n"
-"To aim or move more slowly, use shift/vol+.\n"
-"To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it."
-msgstr ""
-
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
-msgid ""
-"To jump, press space.\n"
-"To aim or move more slowly, use shift.\n"
-"To pause, click the clock or press escape.\n"
-"Click a character from your team to select it."
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:123
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Volledig scherm?"
@@ -2051,7 +2009,7 @@ msgid "Toggle interface"
 msgstr "Interface verbergen/tonen"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:136
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Minikaart verbergen/tonen"
@@ -2060,6 +2018,36 @@ msgstr "Minikaart verbergen/tonen"
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Wapenmenu weergeven"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Touch controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:98
+msgid "Touch/click the left or right arrows to move respectively left or right"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:99
+msgid ""
+"Touch/click the left or right arrows to respectively raise or lower the aim"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Touch/click to change the weapon timer"
+msgstr ""
+
+#: src/menu/help_menu.cpp:97
+msgid "Touch/click to fire / start filling weapon speed gauge"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:100
+msgid "Touch/click to jump. Maintaining the touch/click to high jump."
+msgstr ""
 
 #: src/network/net_error_msg.cpp:30
 msgid "Unable to contact the host."
@@ -2150,7 +2138,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/game/game.cpp:636
+#: src/game/game.cpp:635
 #, c-format
 msgid "Waiting for %s"
 msgstr "Wacht op %s"
@@ -2164,8 +2152,23 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
 
+#: src/main.cpp:190
+#, fuzzy
+msgid "Warmux launching..."
+msgstr "Warmux wordt gestart..."
+
+#: src/main.cpp:326
+#, fuzzy
+msgid "Warmux version "
+msgstr "Warmux versie "
+
+#: src/interface/man_machine_interface.cpp:1152
+#, fuzzy
+msgid "Weapon category 8"
+msgstr "Wapencategorie veranderen"
+
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:135
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Wapen: Vuren / Bonuskist: snel laten vallen"
@@ -2185,18 +2188,18 @@ msgstr "Website: "
 msgid "Welcome to %s on %s!"
 msgstr "Welkom bij %s op %s!"
 
-#: src/game/game.cpp:1004
+#: src/game/game.cpp:1003
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Wat een prachtige homerun! %s van team %s is in een andere wereld..."
 
-#: src/game/game.cpp:1067
+#: src/game/game.cpp:1066
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:112
+#: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "Op een karakter: Selecteren"
@@ -2205,9 +2208,10 @@ msgstr "Op een karakter: Selecteren"
 msgid "Wind particles?"
 msgstr "Wind deeltjes?"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:150
-msgid "Wind strength and direction"
+#: src/menu/help_menu.cpp:87
+msgid ""
+"Wind strength and direction.\n"
+"Click here to switch to touch controls."
 msgstr ""
 
 #: src/menu/results_menu.cpp:272
@@ -2218,14 +2222,6 @@ msgstr "Winnaar"
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
-
-#: src/main.cpp:190
-msgid "Wormux launching..."
-msgstr "Wormux wordt gestart..."
-
-#: src/main.cpp:326
-msgid "Wormux version "
-msgstr "Wormux versie "
 
 #: src/include/action_handler.cpp:233
 msgid "Wrong map CRC!"
@@ -2327,6 +2323,15 @@ msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geopend met %d Hz %d bit"
 
 #, fuzzy
+#~| msgid "Find a random position for characters"
+#~ msgid "Position of the other characters"
+#~ msgstr "Zoek een willekeurige positie voor de spelers"
+
+#, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "Wapencategorie veranderen"
+
+#, fuzzy
 #~ msgid "Change per team number of players"
 #~ msgstr "Max aantal spelers:"
 
@@ -2363,8 +2368,8 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ "Fout :\n"
 #~ "%s"
 
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
-#~ msgstr "Bezoek #wormux op irc.freenode.net om tegenstanders te vinden."
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
+#~ msgstr "Bezoek #warmux op irc.freenode.net om tegenstanders te vinden."
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "
@@ -2519,8 +2524,8 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Fout bij het laden van skin %s:"
 
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Fout in %s:%lu (Wormux %s) : %s"
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "Fout in %s:%lu (Warmux %s) : %s"
 
 #~ msgid "Error loading team's data %s:"
 #~ msgstr "Fout bij het laden van gegevens van team %s:"
@@ -2615,8 +2620,8 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #~ msgid "PAUSE"
 #~ msgstr "Pause"
 
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr "Vertel ons a.u.b. uw mening over Wormux via e-mail:"
+#~ msgid "Please tell us your opinion of Warmux via email:"
+#~ msgstr "Vertel ons a.u.b. uw mening over Warmux via e-mail:"
 
 #~ msgid "Refresh"
 #~ msgstr "Verversen"
@@ -2642,11 +2647,11 @@ msgstr "o Audio geopend met %d Hz %d bit"
 #, fuzzy
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
 #~ "php"
 #~ msgstr ""
 #~ "Sorry, uw versie wordt niet meer ondersteund. Ondersteunde versies zijn %"
-#~ "s. U kunt een nieuwere versie downloaden op http://www.wormux.org/wiki/"
+#~ "s. U kunt een nieuwere versie downloaden op http://www.warmux.org/wiki/"
 #~ "download.php"
 
 #~ msgid "Sound error :"
@@ -2694,10 +2699,10 @@ msgstr "o Audio geopend met %d Hz %d bit"
 
 #~ msgid ""
 #~ "WARNING! Disconnections are not yet handled. So you have to restart "
-#~ "Wormux after each disconnection!"
+#~ "Warmux after each disconnection!"
 #~ msgstr ""
 #~ "WAARSCHUWING! Verbroken verbindingen worden nog niet afgehandeld. Daarom "
-#~ "moet u Wormux opnieuw starten na elke verbroken verbinding!"
+#~ "moet u Warmux opnieuw starten na elke verbroken verbinding!"
 
 #~ msgid ""
 #~ "WARNING!! Network is still under developement and therefore a little "

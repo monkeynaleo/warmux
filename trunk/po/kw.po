@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kw\n"
-"Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2010-12-05 14:17+0100\n"
 "PO-Revision-Date: 2008-12-16 22:46+0100\n"
 "Last-Translator: Albert Bock <treylyansow@kernewegva.com>\n"
 "Language-Team: Treylyansow <treylyansow@kernewegva.com>\n"
@@ -63,34 +64,34 @@ msgstr "Para %s"
 msgid "%s Team - Remote"
 msgstr "Para %s - Pell"
 
-#: src/game/game.cpp:1025
+#: src/game/game.cpp:1024
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s a'n para %s a omladhas!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1051 src/game/game.cpp:1070
+#: src/game/game.cpp:1050 src/game/game.cpp:1069
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s a'n para %s re verwis."
 
-#: src/game/game.cpp:1017
+#: src/game/game.cpp:1016
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s a'n para %s re godhas y'n dowr!"
 
-#: src/game/game.cpp:1011
+#: src/game/game.cpp:1010
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s a'n para %s re godhas dhywar a'n mappa!"
 
-#: src/game/game.cpp:1031
+#: src/game/game.cpp:1030
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s a'n para %s re godhas re gales!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1037
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s a'n para %s a verwis awos ev dhe vos lorden!"
@@ -107,12 +108,12 @@ msgid ""
 "fart."
 msgstr ""
 
-#: src/object/medkit.cpp:63
+#: src/object/medkit.cpp:74
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "Gwarier %s re gavas %u poynt a nerth!"
 
-#: src/game/game.cpp:1062
+#: src/game/game.cpp:1061
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s yw gocki; ev re ladhas esel a'y bara y honan (%s)!"
@@ -133,7 +134,7 @@ msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:77
+#: src/object/bonus_box.cpp:88
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Yma gans bara %s pelennow heb finwedh rag %s seulabrys!"
@@ -507,7 +508,7 @@ msgstr[3] ""
 msgid "%s team was fragged down."
 msgstr "Para %s a veu fraggys yn tien."
 
-#: src/game/game.cpp:1046 src/game/game.cpp:1058
+#: src/game/game.cpp:1045 src/game/game.cpp:1057
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
@@ -516,6 +517,41 @@ msgstr "%s a dhros esel a'n para %s dhe'n bedh ganso!"
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1149
+#, fuzzy
+msgid "'Duel' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1145
+#, fuzzy
+msgid "'Heavy' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1150
+#, fuzzy
+msgid "'Move' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1146
+#, fuzzy
+msgid "'Rifle' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1148
+#, fuzzy
+msgid "'Special' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1147
+#, fuzzy
+msgid "'Throwing' weapon category"
+msgstr "Chanjya ehen arv"
+
+#: src/interface/man_machine_interface.cpp:1151
+#, fuzzy
+msgid "'Tool' weapon category"
+msgstr "Chanjya ehen arv"
 
 #: src/interface/interface.cpp:252
 msgid "(dead)"
@@ -534,11 +570,6 @@ msgstr "(prys ankoth)"
 #: src/interface/interface.cpp:275
 msgid "(unlimited)"
 msgstr "(heb finwedh)"
-
-#: src/menu/help_menu.cpp:100
-#, fuzzy
-msgid "A circle indicates the active character"
-msgstr "Chanjya person a-lemmyn"
 
 #: src/menu/options_menu.cpp:515
 #, fuzzy, c-format
@@ -590,8 +621,7 @@ msgstr ""
 msgid "Anvil"
 msgstr "Anwan"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:107
 msgid "Area currently displayed"
 msgstr ""
 
@@ -627,7 +657,7 @@ msgstr "Bazooka"
 msgid "Before action"
 msgstr "Kyns gwrians"
 
-#: src/menu/main_menu.cpp:64
+#: src/menu/main_menu.cpp:66
 msgid "Benchmark"
 msgstr ""
 
@@ -671,7 +701,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Ny yllir ygeri arayel an paraow personal (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:63 src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:121 src/menu/help_menu.cpp:138
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Kresenni kamera war berson"
@@ -682,19 +712,19 @@ msgid "Center on active character"
 msgstr "Chanjya person a-lemmyn"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:79
+#: src/menu/help_menu.cpp:137
 #, fuzzy
 msgid "Change active character"
 msgstr "Chanjya person a-lemmyn"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:128
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Chanjya elin medra"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:56
 #, fuzzy
 msgid "Change number of players per team"
 msgstr "Brassa niver a warioryon:"
@@ -705,23 +735,23 @@ msgid "Change weapon"
 msgstr "Chanjya ehen arv"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:126
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Chanjya ehen arv"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:127
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Chanjya eylennow-dhe-dardha an arv"
 
-#: src/menu/help_menu.cpp:146
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:88
 msgid ""
 "Character name.\n"
 "Character energy.\n"
-"Team name.\n"
-"Player name."
+"Team name."
 msgstr ""
 
 #: src/menu/options_menu.cpp:183
@@ -749,7 +779,7 @@ msgid "Classic"
 msgstr "Klassek"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:93
+#: src/menu/help_menu.cpp:60
 msgid ""
 "Click on either side of the central (selected) map or use wheelmouse to "
 "change the selected map."
@@ -768,12 +798,12 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:58
 msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:57
 msgid ""
 "Click/wheelmouse to change the team.\n"
 "You can't select the same team several times."
@@ -801,7 +831,7 @@ msgid "Commit Suicide"
 msgstr "Omladha"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:66
+#: src/menu/help_menu.cpp:124
 msgid "Configuration menu"
 msgstr "Dewisel restrans"
 
@@ -835,12 +865,19 @@ msgstr "Ny allas kyrhes an nowyttha versyon dhyworth %s"
 msgid "Couldn't open file %s"
 msgstr "Ny allas ygeri an restren %s"
 
-#: src/menu/main_menu.cpp:70
+#: src/menu/main_menu.cpp:72
 msgid "Credits"
 msgstr "Aswonvosow"
 
-#: src/menu/help_menu.cpp:50
+#: src/menu/help_menu.cpp:143
 msgid "Current controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:90
+msgid ""
+"Current weapon and ammo left, long click to display its help.\n"
+"Click to open selection menu."
 msgstr ""
 
 #: src/menu/game_mode_editor.cpp:88
@@ -880,7 +917,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:62
+#: src/menu/help_menu.cpp:120
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Halya&gasagodha: Movya an kamera"
@@ -898,7 +935,7 @@ msgstr "Pesyans unn dro"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:485
+#: src/game/game.cpp:484
 msgid "END OF GAME"
 msgstr "DIWEDH AN GWARI"
 
@@ -924,7 +961,7 @@ msgstr "Gwall pan gargas para:"
 msgid "Error loading team :"
 msgstr "Gwall pan gargas para:"
 
-#: src/game/config.cpp:561 src/team/custom_team.cpp:155
+#: src/game/config.cpp:563 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -984,8 +1021,21 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Gwall: Ny allas kavos an skyn \"%s\" rag an para \"%s\"."
 
-#: src/menu/help_menu.cpp:110
+#: src/menu/help_menu.cpp:67
 msgid "Experiment new game rules"
+msgstr ""
+
+#: src/interface/man_machine_interface.cpp:1177
+#: src/interface/man_machine_interface.cpp:1178
+#: src/interface/man_machine_interface.cpp:1179
+#: src/interface/man_machine_interface.cpp:1180
+#: src/interface/man_machine_interface.cpp:1181
+#: src/interface/man_machine_interface.cpp:1182
+#: src/interface/man_machine_interface.cpp:1183
+#: src/interface/man_machine_interface.cpp:1184
+#: src/interface/man_machine_interface.cpp:1185
+#, c-format
+msgid "Explosion delay of %u"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:115
@@ -1002,11 +1052,6 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Ny yllir ygeri an arayel vappaow (%s)!"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:151
-msgid "Fire your weapon!"
-msgstr ""
-
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Stifeller-Tan"
@@ -1014,11 +1059,6 @@ msgstr "Stifeller-Tan"
 #: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
-msgid "Frames per second indicator"
-msgstr ""
 
 #: src/menu/options_menu.cpp:112
 msgid "Fullscreen?"
@@ -1028,13 +1068,13 @@ msgstr "Skrin leun?"
 msgid "Game"
 msgstr "Gwari"
 
-#: src/menu/help_menu.cpp:94
+#: src/menu/help_menu.cpp:61
 #, fuzzy
 msgid "Game menu"
 msgstr "Modh gwari"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:118
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:75
 #: src/menu/network_menu.cpp:123
 msgid "Game mode"
 msgstr "Modh gwari"
@@ -1042,11 +1082,6 @@ msgstr "Modh gwari"
 #: src/menu/network_connection_menu.cpp:263
 msgid "Game name:"
 msgstr "Hanow an gwari ma:"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:139
-msgid "Gauge to set speed of some projectiles"
-msgstr ""
 
 #: src/weapon/gnu.cpp:164
 msgid "Gnu Launcher"
@@ -1094,13 +1129,13 @@ msgstr "Omlowenhewgh!"
 msgid "Head commander"
 msgstr "Penn an para"
 
-#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:67
+#: src/interface/man_machine_interface.cpp:1173 src/menu/main_menu.cpp:69
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "Gweres"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:59
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
 msgid "High jump"
 msgstr "Lamma yn uhel"
 
@@ -1119,10 +1154,10 @@ msgid ""
 "please):"
 msgstr ""
 "Mar kevydh pryv na dal bos y'n gwari ma, po mar krysydh del fyll neppyth dhe "
-"Wormux, danvon e-bost (yn Sowsnek, soweth) dhe: "
+"Warmux, danvon e-bost (yn Sowsnek, soweth) dhe: "
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:114
+#: src/menu/help_menu.cpp:71
 msgid ""
 "If you like medkits,\n"
 "increase this"
@@ -1141,23 +1176,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:116
+#: src/menu/help_menu.cpp:73
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Pesyans kyns modh marwel"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:111
+#: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:115
+#: src/menu/help_menu.cpp:72
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:141
+#: src/menu/help_menu.cpp:82
 msgid "Ingame display"
 msgstr ""
 
@@ -1197,17 +1232,17 @@ msgid "Initialise teams"
 msgstr "Darbari paraow"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:152
+#: src/menu/help_menu.cpp:92
 #, fuzzy
 msgid "Interface"
 msgstr "Displegya/kudha ynterfas"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:140
-msgid "Interface, more details in another tab"
+#: src/menu/help_menu.cpp:81
+msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:901
+#: src/game/game.cpp:900
 msgid "It's a present!"
 msgstr "Ro ywa!"
 
@@ -1220,7 +1255,7 @@ msgid "Jump"
 msgstr "Lamma"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:60 src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:118 src/menu/help_menu.cpp:119
 msgid "Jump backwards"
 msgstr "Killamma"
 
@@ -1245,7 +1280,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:140
 msgid "Keyboard"
 msgstr ""
 
@@ -1304,7 +1339,7 @@ msgid "Map %s, a creation of: "
 msgstr "Mappa %s, gwrys gans:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:59
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
@@ -1333,13 +1368,12 @@ msgid "Mine"
 msgstr "Krampothen dardhus"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:105
+#: src/menu/help_menu.cpp:110
 #, fuzzy
-#| msgid "Map"
 msgid "Minimap"
 msgstr "Mappa"
 
-#: src/menu/help_menu.cpp:138
+#: src/menu/help_menu.cpp:80
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1353,7 +1387,7 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:113
+#: src/menu/help_menu.cpp:70
 msgid "More energy, more shots needed"
 msgstr ""
 
@@ -1398,13 +1432,13 @@ msgid "Move camera up"
 msgstr "Movya person"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:76
+#: src/menu/help_menu.cpp:134
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Movya an kamera gans logosen po sethow"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:129
 #, fuzzy
 msgid "Move character"
 msgstr "Movya person"
@@ -1442,7 +1476,7 @@ msgstr "Ilow?"
 msgid "Network"
 msgstr "Gwari Rosweyth"
 
-#: src/menu/main_menu.cpp:58
+#: src/menu/main_menu.cpp:59
 msgid "Network Game"
 msgstr "Gwari Rosweyth"
 
@@ -1497,13 +1531,13 @@ msgid "Number of teams:"
 msgstr "Niver a baraow:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:131
 #, fuzzy
 msgid "On a character: select it"
 msgstr "War neb person: Rag chanjya an onan a-lemmyn"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:130
 #, fuzzy
 msgid "On map: select a target"
 msgstr "War an mappa: Dewis kosten"
@@ -1513,7 +1547,7 @@ msgstr "War an mappa: Dewis kosten"
 msgid "Open options menu"
 msgstr "Dewisel etholyow"
 
-#: src/menu/main_menu.cpp:61
+#: src/menu/main_menu.cpp:63
 msgid "Options"
 msgstr "Etholyow"
 
@@ -1583,14 +1617,17 @@ msgid "Port:"
 msgstr "Port:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:104
+#: src/menu/help_menu.cpp:109
 msgid "Position of bonus boxes or medkits"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:103
-msgid "Position of the other characters"
-msgstr ""
+#: src/menu/help_menu.cpp:108
+#, fuzzy
+msgid ""
+"Position of the characters.\n"
+"A circle surrounds the active character."
+msgstr "Chanjya person a-lemmyn"
 
 #: src/weapon/suicide.cpp:47
 #, fuzzy
@@ -1649,19 +1686,20 @@ msgid "Public battles"
 msgstr "Kasow poblek"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:139
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:75
 msgid "Quit"
 msgstr "Kwitya"
 
 #: src/main.cpp:250
-msgid "Quit Wormux"
-msgstr "Kwitya Wormux"
+#, fuzzy
+msgid "Quit Warmux"
+msgstr "Kwitya Warmux"
 
-#: src/menu/help_menu.cpp:58 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:116 src/menu/pause_menu.cpp:59
 msgid "Quit game"
 msgstr "Kwitya an gwari"
 
@@ -1678,12 +1716,12 @@ msgstr "Mappa dre hap"
 msgid "Read only %i bytes"
 msgstr "Nyns eus saw %i para."
 
-#: src/game/config.cpp:378
+#: src/game/config.cpp:380
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Ow redya restren restrans savonek"
 
-#: src/game/config.cpp:435
+#: src/game/config.cpp:437
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Ow redya restren restrans personel"
@@ -1712,56 +1750,10 @@ msgstr "Myns an amal skrolya"
 msgid "Scroll on border"
 msgstr "Skrolya war an emlow"
 
-#: src/interface/man_machine_interface.cpp:1149
-#, fuzzy
-msgid "Select 'Duel' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1145
-#, fuzzy
-msgid "Select 'Heavy' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1150
-#, fuzzy
-msgid "Select 'Move' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1146
-#, fuzzy
-msgid "Select 'Rifle' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1148
-#, fuzzy
-msgid "Select 'Special' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1147
-#, fuzzy
-msgid "Select 'Throwing' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/interface/man_machine_interface.cpp:1151
-#, fuzzy
-msgid "Select 'Tool' weapon category"
-msgstr "Chanjya ehen arv"
-
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:55
 #, fuzzy
 msgid "Select number of playing teams"
 msgstr "Brassa niver a warioryon:"
-
-#: src/interface/man_machine_interface.cpp:1152
-#, fuzzy
-msgid "Select weapon category 8"
-msgstr "Chanjya ehen arv"
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:149
-#, fuzzy
-msgid "Selected weapon and ammo left"
-msgstr "Chanjya ehen arv"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Server address:"
@@ -1776,19 +1768,6 @@ msgstr "Servyer kavadow y'n Gesrosweyth"
 #: src/menu/network_menu.cpp:194 src/network/network.cpp:480
 msgid "Server mode"
 msgstr "Modh servyer"
-
-#: src/interface/man_machine_interface.cpp:1177
-#: src/interface/man_machine_interface.cpp:1178
-#: src/interface/man_machine_interface.cpp:1179
-#: src/interface/man_machine_interface.cpp:1180
-#: src/interface/man_machine_interface.cpp:1181
-#: src/interface/man_machine_interface.cpp:1182
-#: src/interface/man_machine_interface.cpp:1183
-#: src/interface/man_machine_interface.cpp:1184
-#: src/interface/man_machine_interface.cpp:1185
-#, c-format
-msgid "Set explosion delay to %u"
-msgstr ""
 
 #: src/weapon/supertux.cpp:225
 msgid ""
@@ -1824,13 +1803,13 @@ msgid "Shotgun"
 msgstr "Helghwon"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:132
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Diskwedhes dewisel arvow"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:64
+#: src/menu/help_menu.cpp:122
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Displegya/kudha ynterfas"
@@ -1852,7 +1831,7 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Ri beltynk dhe'n eskar may hwra'va lamma tamm."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:75
+#: src/menu/help_menu.cpp:133
 msgid "Smaller aim angle and walk step"
 msgstr "Lehe elin medra ha kamm kerdhes"
 
@@ -1860,7 +1839,7 @@ msgstr "Lehe elin medra ha kamm kerdhes"
 msgid "Sniper Rifle"
 msgstr "Kelsethwon"
 
-#: src/object/bonus_box.cpp:64
+#: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nebonan a worras maglen voba a-berth y'n gyst!"
 
@@ -1873,11 +1852,11 @@ msgstr "Gav dhyn, mes nyns eus gwari vyth ow kortos gwarioryon"
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
-"can download an updated version from http://www.wormux.org/wiki/download.php"
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
 "Gav dhyn, mes ny skodhir dha versyon a'n gwari na fella. An versyonow "
 "skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://www."
-"wormux.org/wiki/download.php"
+"warmux.org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:310
 msgid "Sound"
@@ -1921,7 +1900,7 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:125
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Keskewsel yn kas rosweyth"
@@ -1944,8 +1923,8 @@ msgid "Teams editor"
 msgstr "Chanjyel baraow"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:148
-msgid "Teams in decreasing order of energy"
+#: src/menu/help_menu.cpp:89
+msgid "Teams in decreasing order of total energy"
 msgstr ""
 
 #: src/weapon/teleportation.cpp:50
@@ -1980,7 +1959,7 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "An bel a asas an gaslan kyns omdardha."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:117
+#: src/menu/help_menu.cpp:74
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
@@ -2008,7 +1987,7 @@ msgstr "An junyans a verwis. Check mars eus problem gans dha fos-tan!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "An pinaval tardhus disco re asas an leur-donsya kyns omdardha."
 
-#: src/game/game.cpp:737
+#: src/game/game.cpp:736
 msgid "The game was interrupted because you got disconnected."
 msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 
@@ -2065,10 +2044,10 @@ msgid "Time"
 msgstr "Termyn"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:147
+#: src/menu/help_menu.cpp:91
 msgid ""
-"Time left in this turn.\n"
-"Time elapsed since game start."
+"Time left in this turn and time elapsed since game start.\n"
+"Click to pause"
 msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
@@ -2098,26 +2077,8 @@ msgstr ""
 "Tenna : spas\n"
 "unn bellen orth an dro"
 
-#. TRANSLATORS: please keep this help for Android smartphones short!
-#: src/menu/help_menu.cpp:126
-msgid ""
-"To jump, press space or trackball or dpad center.\n"
-"To aim or move more slowly, use shift/vol+.\n"
-"To pause, click the clock or press escape/back key.\n"
-"Click a character from your team to select it."
-msgstr ""
-
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
-msgid ""
-"To jump, press space.\n"
-"To aim or move more slowly, use shift.\n"
-"To pause, click the clock or press escape.\n"
-"Click a character from your team to select it."
-msgstr ""
-
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:65
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:123
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Skrin leun?"
@@ -2128,7 +2089,7 @@ msgid "Toggle interface"
 msgstr "Displegya/kudha ynterfas"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:78
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:136
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Displegya/kudha korrvappa"
@@ -2137,6 +2098,36 @@ msgstr "Displegya/kudha korrvappa"
 #, fuzzy
 msgid "Toggle weapons menu"
 msgstr "Diskwedhes dewisel arvow"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:102
+msgid "Touch controls"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:98
+msgid "Touch/click the left or right arrows to move respectively left or right"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:99
+msgid ""
+"Touch/click the left or right arrows to respectively raise or lower the aim"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:101
+msgid "Touch/click to change the weapon timer"
+msgstr ""
+
+#: src/menu/help_menu.cpp:97
+msgid "Touch/click to fire / start filling weapon speed gauge"
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:100
+msgid "Touch/click to jump. Maintaining the touch/click to high jump."
+msgstr ""
 
 #: src/network/net_error_msg.cpp:30
 #, fuzzy
@@ -2231,7 +2222,7 @@ msgstr[1] "Gortewgh! %i warier nyns yns parys hwath!"
 msgstr[2] "Gortewgh! %i gwarier nyns yns parys hwath!"
 msgstr[3] "Gortewgh! %i gwarier nyns yns parys hwath!"
 
-#: src/game/game.cpp:636
+#: src/game/game.cpp:635
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
@@ -2245,8 +2236,23 @@ msgstr ""
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
 
+#: src/main.cpp:190
+#, fuzzy
+msgid "Warmux launching..."
+msgstr "Yma Warmux ow lonchya..."
+
+#: src/main.cpp:326
+#, fuzzy
+msgid "Warmux version "
+msgstr "Versyon Warmux"
+
+#: src/interface/man_machine_interface.cpp:1152
+#, fuzzy
+msgid "Weapon category 8"
+msgstr "Chanjya ehen arv"
+
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:77
+#: src/menu/help_menu.cpp:135
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arv: Tenna / Kyst vonus: A godh yn uskis"
@@ -2266,18 +2272,18 @@ msgstr "Gwiasva: "
 msgid "Welcome to %s on %s!"
 msgstr "Dynnargh dhe %s!"
 
-#: src/game/game.cpp:1004
+#: src/game/game.cpp:1003
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1067
+#: src/game/game.cpp:1066
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:112
+#: src/menu/help_menu.cpp:69
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "War neb person: Rag chanjya an onan a-lemmyn"
@@ -2286,9 +2292,10 @@ msgstr "War neb person: Rag chanjya an onan a-lemmyn"
 msgid "Wind particles?"
 msgstr "Manylyon gwyns?"
 
-#. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:150
-msgid "Wind strength and direction"
+#: src/menu/help_menu.cpp:87
+msgid ""
+"Wind strength and direction.\n"
+"Click here to switch to touch controls."
 msgstr ""
 
 #: src/menu/results_menu.cpp:272
@@ -2299,14 +2306,6 @@ msgstr "Gwaynyer"
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
-
-#: src/main.cpp:190
-msgid "Wormux launching..."
-msgstr "Yma Wormux ow lonchya..."
-
-#: src/main.cpp:326
-msgid "Wormux version "
-msgstr "Versyon Wormux"
 
 #: src/include/action_handler.cpp:233
 msgid "Wrong map CRC!"
@@ -2412,6 +2411,10 @@ msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Awdio ygerys orth %d Hz %d byt"
 
 #, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "Chanjya ehen arv"
+
+#, fuzzy
 #~ msgid "Change per team number of players"
 #~ msgstr "Brassa niver a warioryon:"
 
@@ -2450,8 +2453,8 @@ msgstr "o Awdio ygerys orth %d Hz %d byt"
 #~ "Gwall:\n"
 #~ "%s"
 
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
-#~ msgstr "Omjun gans #wormux war irc.freende.net rag kavos nebes eskerens."
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
+#~ msgstr "Omjun gans #warmux war irc.freende.net rag kavos nebes eskerens."
 
 #~ msgid "%s has decided to injure %s"
 #~ msgstr "%s re erviras shyndya %s"
@@ -2468,8 +2471,8 @@ msgstr "o Awdio ygerys orth %d Hz %d byt"
 #~ msgid "Delete custom team"
 #~ msgstr "Dilea para personelhes"
 
-#~ msgid "Error in %s:%lu (Wormux %s) : %s"
-#~ msgstr "Gwall yn %s:%lu (Wormux %s) : %s"
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "Gwall yn %s:%lu (Warmux %s) : %s"
 
 #~ msgid ""
 #~ "Error: Your server is not reachable from the internet. Check your "
@@ -2509,12 +2512,12 @@ msgstr "o Awdio ygerys orth %d Hz %d byt"
 #, fuzzy
 #~ msgid ""
 #~ "Sorry, your version is not supported anymore. Supported version are %s. "
-#~ "You can download a updated version on http://www.wormux.org/wiki/download."
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
 #~ "php"
 #~ msgstr ""
 #~ "Gav dhyn, mes ny skodhir dha versyon a'n gwari na fella. An versyonow "
 #~ "skodhysyw an versyons %s. Ty a yll iskarga versyon nowedhys war http://"
-#~ "www.wormux.org/wiki/download.php"
+#~ "www.warmux.org/wiki/download.php"
 
 #~ msgid "Tools"
 #~ msgstr "Toulys"
