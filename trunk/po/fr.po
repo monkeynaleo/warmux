@@ -798,7 +798,8 @@ msgstr "Contrôles actuels"
 msgid ""
 "Current weapon and ammo left, long click to display its help.\n"
 "Click to open selection menu."
-msgstr ""
+msgstr "Arme utilisée et munitions restantes, clic long pour afficher son aide.\n"
+"Clic pour ouvrir le menu de sélection."
 
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
@@ -1786,7 +1787,6 @@ msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
 #: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
-#, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
 "can download an updated version from http://www.warmux.org/wiki/download.php"
@@ -1860,9 +1860,8 @@ msgstr "Éditeur d'équipe"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:89
-#, fuzzy
 msgid "Teams in decreasing order of total energy"
-msgstr "Equipes en ordre décroisssant d'énergie"
+msgstr "Equipes en ordre décroisssant d'énergie totale"
 
 #: src/weapon/teleportation.cpp:50
 msgid "Teleportation"
@@ -1979,13 +1978,12 @@ msgstr "Temps"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:91
-#, fuzzy
 msgid ""
 "Time left in this turn and time elapsed since game start.\n"
 "Click to pause"
 msgstr ""
-"Temps restant dans ce tour.\n"
-"Temps écoulé depuis le début de la partie."
+"Temps restant dans ce tour et écoulé depuis le début de la partie.\n"
+"Clic pour mettre en pause"
 
 #: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
 msgid ""
@@ -2031,34 +2029,33 @@ msgstr "Afficher le menu des armes"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:102
-#, fuzzy
 msgid "Touch controls"
-msgstr "Contrôles actuels"
+msgstr "Contrôles tactiles"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:98
 msgid "Touch/click the left or right arrows to move respectively left or right"
-msgstr ""
+msgstr "Pressez les flèches gauche ou droite pour aller à gauche ou droite"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:99
 msgid ""
 "Touch/click the left or right arrows to respectively raise or lower the aim"
-msgstr ""
+msgstr "Pressez les flèches gauche ou droite pour lever ou baisser le viseur"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:101
 msgid "Touch/click to change the weapon timer"
-msgstr ""
+msgstr "Pressez pour changer le retardateur de l'arme"
 
 #: src/menu/help_menu.cpp:97
 msgid "Touch/click to fire / start filling weapon speed gauge"
-msgstr ""
+msgstr "Presser pour faire feu/remplir la jauge de vitesse de l'arme"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:100
 msgid "Touch/click to jump. Maintaining the touch/click to high jump."
-msgstr ""
+msgstr "Pressez pour sauter. Maintenir appuyer pour un saut haut."
 
 #: src/network/net_error_msg.cpp:30
 msgid "Unable to contact the host."
@@ -2219,7 +2216,8 @@ msgstr "Particules du vent ?"
 msgid ""
 "Wind strength and direction.\n"
 "Click here to switch to touch controls."
-msgstr ""
+msgstr "Force et direction du vent.\n"
+"Cliquer pour afficher les contrôles tactiles."
 
 #: src/menu/results_menu.cpp:272
 msgid "Winner"
@@ -2308,7 +2306,7 @@ msgstr "de"
 
 #: src/interface/loading_screen.cpp:43
 msgid "loading..."
-msgstr ""
+msgstr "chargement..."
 
 #: src/map/maps_list.cpp:73
 msgid "no configuration file!"
@@ -2327,43 +2325,3 @@ msgstr "o Chargement du profil son : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Démarrage du son à %d Hz %d bit"
-
-#~ msgid "Fire your weapon!"
-#~ msgstr "Faire feu avec votre arme!"
-
-#~ msgid "Frames per second indicator"
-#~ msgstr "Indication du nombre d'images par seconde"
-
-#~ msgid "Gauge to set speed of some projectiles"
-#~ msgstr "Jauge pour régler la vitesse de certains projectiles"
-
-#~ msgid "Position of the other characters"
-#~ msgstr "Position des autres personnages"
-
-#~ msgid "Selected weapon and ammo left"
-#~ msgstr "Arme sélectionnée et munitions restantes"
-
-#~ msgid ""
-#~ "To jump, press space or trackball or dpad center.\n"
-#~ "To aim or move more slowly, use shift/vol+.\n"
-#~ "To pause, click the clock or press escape/back key.\n"
-#~ "Click a character from your team to select it."
-#~ msgstr ""
-#~ "Pour sauter, pressez espace ou le centre du trackball ou du dpad.\n"
-#~ "Pour viser ou bouger plus lentement, pressez shift ou vol+.\n"
-#~ "Pour mettre en pause, cliquer l'horloge ou pressez ESC/Annule.\n"
-#~ "Cliquer sur un personnage de votre équipe pour le choisir."
-
-#~ msgid ""
-#~ "To jump, press space.\n"
-#~ "To aim or move more slowly, use shift.\n"
-#~ "To pause, click the clock or press escape.\n"
-#~ "Click a character from your team to select it."
-#~ msgstr ""
-#~ "Pour sauter, presser espace.\n"
-#~ "Pour viser ou bouger plus lentement, presser shift.\n"
-#~ "Pour mettre en pause, cliquer l'horloge ou presser ESC.\n"
-#~ "Cliquer sur un personnage de votre équipe pour le choisir."
-
-#~ msgid "Wind strength and direction"
-#~ msgstr "Force et direction du vent"
