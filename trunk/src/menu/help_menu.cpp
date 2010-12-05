@@ -44,13 +44,71 @@ HelpMenu::HelpMenu()
   int max_w    = window_w - 2*border;
   int max_h    = window_h - actions_buttons->GetSizeY() - border;
 
-  MultiTabs * tabs = new MultiTabs(Point2i(max_w, max_h));
+  MultiTabs    *tabs = new MultiTabs(Point2i(max_w, max_h));
+  FigureWidget *w;
   tabs->SetPosition(border, border);
 
-  tabs->AddNewTab("unused", _("Current controls"),
-                  new ControlConfig(tabs->GetSize(), true));
+  /********                     Start game menu                    ********/
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/startgame_menu", Font::FONT_BIG);
+  w->AddCaption(_("Select number of playing teams"), 216, 28, 432); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Change number of players per team"), 619, 35, 362); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click/wheelmouse to change the team.\nYou can't select the same team several times."), 167, 176, 325);
+  w->AddCaption(_("Click to let a player handle the team instead of the AI, and vice versa"), 574, 187, 445); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Map author information: name, email, nickname, country"), 511, 263, 557); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Click on either side of the central (selected) map or use wheelmouse to change the selected map."), 388, 324, 753);
+  tabs->AddNewTab("unused", _("Game menu"), w);
 
-  FigureWidget *w;
+  /********                     Game mode menu                    ********/
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/game_mode", Font::FONT_BIG);
+  w->AddCaption(_("Experiment new game rules"), 192, 70, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this if you are a slow player"), 193, 24, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("When a character can be switched"), 607, 24, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("More energy, more shots needed"), 607, 70, 379);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("If you like medkits,\nincrease this"), 191, 361, 379);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this if you like long games"), 191, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Increase this for faster death mode end"), 606, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("The bigger the faster you'll fall!"), 607, 361, 381);// TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Game mode"), w);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/ingame", Font::FONT_LARGE);
+  w->AddCaption(_("Minimap, more details in another tab"), 313, 56, 595); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Interface and touch controls, more details in other tabs"), 399, 334, 737); // TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Ingame display"), w);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/interface", Font::FONT_LARGE);
+  w->AddCaption(_("Wind strength and direction.\nClick here to switch to touch controls."), 389, 48, 775); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Character name.\nCharacter energy.\nTeam name."), 228, 152, 445); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Teams in decreasing order of total energy"), 625, 150, 331); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Current weapon and ammo left, long click to display its help.\nClick to open selection menu."), 238, 392, 474); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Time left in this turn and time elapsed since game start.\nClick to pause"), 639, 392, 315); // TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Interface"), w);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/touch interface", Font::FONT_LARGE);
+  w->AddCaption(_("Touch/click to fire / start filling weapon speed gauge"), 415, 42, 707); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Touch/click the left or right arrows to move respectively left or right"), 204, 150, 400); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Touch/click the left or right arrows to respectively raise or lower the aim"), 594, 155, 359); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Touch/click to jump. Maintaining the touch/click to high jump."), 354, 345, 705); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Touch/click to change the weapon timer"), 382, 428, 758); // TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Touch controls"), w);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/minimap", Font::FONT_BIG);
+  w->AddCaption(_("Area currently displayed"), 205, 270, 405);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of the characters.\nA circle surrounds the active character."), 610, 335, 375);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of bonus boxes or medkits"), 205, 403, 405);// TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Minimap"), w);
+
 #ifndef ANDROID
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
@@ -82,56 +140,8 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Keyboard"), w);
 #endif
 
-  w = new FigureWidget(Point2i(max_w,
-                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/startgame_menu", Font::FONT_BIG);
-  w->AddCaption(_("Select number of playing teams"), 220, 28, 432); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Change number of players per team"), 618, 34, 361); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click/wheelmouse to change the team.\nYou can't select the same team several times."), 167, 176, 325);
-  w->AddCaption(_("Click to let a player handle the team instead of the AI, and vice versa"), 576, 187, 445); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Map author information: name, email, nickname, country"), 511, 263, 557); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Click on either side of the central (selected) map or use wheelmouse to change the selected map."), 388, 324, 753);
-  tabs->AddNewTab("unused", _("Game menu"), w);
-
-
-  w = new FigureWidget(Point2i(max_w,
-                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/minimap", Font::FONT_BIG);
-  w->AddCaption(_("Area currently displayed"), 205, 270, 405);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Position of the characters.\nA circle surrounds the active character."), 610, 335, 375);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Position of bonus boxes or medkits"), 205, 403, 405);// TRANSLATORS: please be imaginative and keep it short!
-  tabs->AddNewTab("unused", _("Minimap"), w);
-
-  w = new FigureWidget(Point2i(max_w,
-                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/game_mode", Font::FONT_BIG);
-  w->AddCaption(_("Experiment new game rules"), 192, 71, 381);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this if you are a slow player"), 193, 25, 381);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("When a character can be switched"), 607, 25, 381);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("More energy, more shots needed"), 607, 71, 379);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("If you like medkits,\nincrease this"), 191, 361, 379);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this if you like long games"), 191, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Increase this for faster death mode end"), 606, 407, 381);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("The bigger the faster you'll fall!"), 607, 361, 381);// TRANSLATORS: please be imaginative and keep it short!
-  tabs->AddNewTab("unused", _("Game mode"), w);
-
-  w = new FigureWidget(Point2i(max_w,
-                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/ingame", Font::FONT_LARGE);
-  w->AddCaption(_("Minimap, more details in another tab"), 313, 55, 595); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Interface and touch controls, more details in other tabs"), 399, 332, 737); // TRANSLATORS: please be imaginative and keep it short!
-  tabs->AddNewTab("unused", _("Ingame display"), w);
-
-  w = new FigureWidget(Point2i(max_w,
-                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/interface", Font::FONT_LARGE);
-  w->AddCaption(_("Character name.\nCharacter energy.\nTeam name.\nPlayer name."), 163, 101, 302); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Time left in this turn.\nTime elapsed since game start."), 473, 101, 262); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Teams in decreasing order of energy"), 763, 103, 200); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Selected weapon and ammo left"), 352, 635, 255); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Wind strength and direction"), 616, 635, 245); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Fire your weapon!"), 866, 635, 221); // TRANSLATORS: please be imaginative and keep it short!
-  tabs->AddNewTab("unused", _("Interface"), w);
+  tabs->AddNewTab("unused", _("Current controls"),
+                  new ControlConfig(tabs->GetSize(), true));
 
   GetResourceManager().UnLoadXMLProfile(res);
   widgets.AddWidget(tabs);
