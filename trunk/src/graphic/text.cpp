@@ -275,7 +275,7 @@ void Text::RenderMultiLines()
 
   tmp = font->CreateSurface(ret_lines[0], black_color);
   ckey = tmp.GetSurface()->format->colorkey;
-  //background.Fill(ckey);
+  background.Fill(ckey);
   background.SetColorKey(SDL_SRCCOLORKEY, ckey);
   background.Blit(tmp);
 
