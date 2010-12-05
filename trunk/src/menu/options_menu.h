@@ -49,8 +49,6 @@ private:
   CheckBox *opt_display_multisky;
 #endif
 
-  CheckBox *full_screen;
-
 #ifndef ANDROID
   ComboBox *cbox_video_mode;
 #endif
@@ -69,6 +67,7 @@ private:
   /* Misc options controllers */
   CheckBox *opt_updates;
 #ifndef HAVE_TOUCHSCREEN
+  CheckBox *full_screen;
   CheckBox *opt_lefthanded_mouse;
   CheckBox *opt_scroll_on_border;
   SpinButtonWithPicture * opt_scroll_border_size;
