@@ -120,4 +120,4 @@
 #define HAVE_HANDHELD
 
 #define INSTALL_DATADIR "data/"
-#define FONT_FILE "data/font/DejaVuSans.ttf"
+#define FONT_FILE "data/font/Ubuntu-R.ttf"

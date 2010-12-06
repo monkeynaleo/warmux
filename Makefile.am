@@ -61,9 +61,9 @@ endif
 #           to run make install or set the correct environment
 #           variables.
 run: all
-	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf @srcdir@/src/warmux
+	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/Ubuntu-R.ttf @srcdir@/src/warmux
 
 # make debug: run the game in gdb without installing it.
 #             requires gdb to be in your $PATH.
 debug: all
-	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/DejaVuSans.ttf gdb @srcdir@/src/warmux
+	WARMUX_DATADIR=@srcdir@/data/ WARMUX_FONT_PATH=@srcdir@/data/font/Ubuntu-R.ttf gdb @srcdir@/src/warmux

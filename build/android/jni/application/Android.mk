@@ -33,7 +33,7 @@ LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
                 -I$(OTHER_PATH)/../intl \
                 -DINSTALL_DATADIR=\"./data/\" \
                 -DINSTALL_LOCALEDIR=\"./locale\" \
-                -DFONT_FILE=\"data/font/DejaVuSans.ttf\" \
+                -DFONT_FILE=\"data/font/Ubuntu-R.ttf\" \
                 -DPACKAGE_VERSION=\"svn\" \
                 -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH)
 

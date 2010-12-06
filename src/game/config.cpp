@@ -148,7 +148,7 @@ Config::Config()
   if(contents.find(".app") != std::string::npos){
       // executable is inside an app bundle, use app bundle-relative paths
       std::string default_data_dir = contents + std::string("/Resources/data/");
-      std::string default_ttf_filename = contents + std::string("/Resources/data/font/DejaVuSans.ttf");
+      std::string default_ttf_filename = contents + std::string("/Resources/data/font/Ubuntu-R.ttf");
 
       // if environment variables exist, they will override default values
       data_dir     = GetEnv(Constants::ENV_DATADIR, default_data_dir);
