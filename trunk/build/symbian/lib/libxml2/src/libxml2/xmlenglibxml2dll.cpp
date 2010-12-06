@@ -31,6 +31,7 @@ unsigned int xeStackLimitAddress()
     {
     TThreadStackInfo aInfo;
     RThread().StackInfo(aInfo);
+    return aInfo.iLimit;
     }
 
 /**
@@ -58,7 +59,7 @@ Sets value of tread-local storage.
 */
 void xeSetTLS(void* aPtr)
     {
-    gsptr = aPtr;
+    gsptr = (xmlGlobalStatePtr) aPtr;
     }
 
 /**
