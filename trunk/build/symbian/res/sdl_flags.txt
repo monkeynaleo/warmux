@@ -1,1 +1,1 @@
-autoorientation disablevolumekeys
+AutoOrientation
