@@ -1779,16 +1779,117 @@ static void Blit16to16SurfaceAlpha128Key(SDL_BlitInfo *info, Uint16 mask)
 	Uint16 *dstp = (Uint16 *)info->d_pixels;
 	int dstskip = info->d_skip >> 1;
         Uint16 ckey = info->src->colorkey;
+        Uint32 ckey32 = ckey<<16|ckey;
 
 	while(height--) {
-          DUFFS_LOOP4({
-            Uint16 s = *srcp++;
-            if (s != ckey)
-              *dstp = BLEND16_50(*dstp, s, mask);
-            dstp++;
-            }, width);
-            srcp += srcskip;
-	    dstp += dstskip;
+		if(((uintptr_t)srcp ^ (uintptr_t)dstp) & 2) {
+			/*
+			 * Source and destination not aligned, pipeline it.
+			 * This is mostly a win for big blits but no loss for
+			 * small ones
+			 */
+			Uint32 prev_sw;
+			int w = width;
+
+			/* handle odd destination */
+			if((uintptr_t)dstp & 2) {
+				Uint16 s = *srcp;
+                                if (s != ckey)
+				  *dstp = BLEND16_50(*dstp, s, mask);
+				dstp++;
+				srcp++;
+				w--;
+			}
+			srcp++;	/* srcp is now 32-bit aligned */
+
+			/* bootstrap pipeline with first halfword */
+			prev_sw = ((Uint32 *)srcp)[-1];
+
+			while(w > 1) {
+				Uint32 sw, dw, s;
+				sw = *(Uint32 *)srcp;
+				dw = *(Uint32 *)dstp;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+				s = (prev_sw << 16) + (sw >> 16);
+#else
+				s = (prev_sw >> 16) + (sw << 16);
+#endif
+				prev_sw = sw;
+                                if (s != ckey32)
+				  *(Uint32 *)dstp = BLEND2x16_50(dw, s, mask);
+                                else {
+                                  int i;
+                                  for (i=0; i<2; i++) {
+                                    Uint16 s16 = srcp[i];
+                                    if (s16 != ckey)
+				     dstp[i] = BLEND16_50(dstp[i], s16, mask);
+                                  }
+                                }
+				dstp += 2;
+				srcp += 2;
+				w -= 2;
+			}
+
+			/* final pixel if any */
+			if(w) {
+				Uint16 s;
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+				s = (Uint16)prev_sw;
+#else
+				s = (Uint16)(prev_sw >> 16);
+#endif
+                                if (s != ckey)
+				  *dstp = BLEND16_50(*dstp, s, mask);
+				srcp++;
+				dstp++;
+			}
+			srcp += srcskip - 1;
+			dstp += dstskip;
+		} else {
+			/* source and destination are aligned */
+			int w = width;
+
+			/* first odd pixel? */
+			if((uintptr_t)srcp & 2) {
+				Uint16 s = *srcp;
+                                if (s != ckey)
+				  *dstp = BLEND16_50(*dstp, s, mask);
+				srcp++;
+				dstp++;
+				w--;
+			}
+			/* srcp and dstp are now 32-bit aligned */
+
+			while(w > 1) {
+				Uint32 sw = *(Uint32 *)srcp;
+				Uint32 dw = *(Uint32 *)dstp;
+                                if (sw != ckey32)
+				  *(Uint32 *)dstp = BLEND2x16_50(dw, sw, mask);
+                                else {
+                                  int i;
+                                  for (i=0; i<2; i++) {
+                                    Uint16 s16 = srcp[i];
+                                    if (s16 != ckey)
+				     dstp[i] = BLEND16_50(dstp[i], s16, mask);
+                                  }
+                                }
+				srcp += 2;
+				dstp += 2;
+				w -= 2;
+			}
+
+			/* last odd pixel? */
+			if(w) {
+				Uint16 s = *srcp;
+                                if (s != ckey)
+				  *dstp = BLEND16_50(*dstp, s, mask);
+				srcp++;
+				dstp++;
+				w--;
+			}
+			srcp += srcskip;
+			dstp += dstskip;
+		}
 	}
 }
 
