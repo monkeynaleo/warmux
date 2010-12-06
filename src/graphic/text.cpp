@@ -290,8 +290,8 @@ void Text::RenderMultiLines()
 
   // for each line
   for (uint i = 0; i < ret_lines.size(); i++) {
-    surf.MergeSurface(font->CreateSurface(ret_lines[i], color),
-                      Point2i(0, GetLineHeight(font)*i));
+    Surface tmp = font->CreateSurface(ret_lines[i], color);
+    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
@@ -303,8 +303,8 @@ void Text::RenderMultiLines()
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
-    background.MergeSurface(font->CreateSurface(ret_lines[i], black_color),
-                            Point2i(0, GetLineHeight(font)*i));
+    Surface tmp = font->CreateSurface(ret_lines[i], black_color);
+    background.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 #endif
 }
