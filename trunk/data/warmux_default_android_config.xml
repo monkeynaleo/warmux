@@ -19,7 +19,8 @@
   <bind key="up" action="move_camera_up" control="true" />
   <bind key="down" action="move_camera_down" control="true" />
   <bind key="return" action="jump" />
-  <bind key="backspace" action="high_jump" />
+  <bind key="return" action="high_jump" shift="true"/>
+  <bind key="return" action="back_jump" control="true"/>
   <bind key="b" action="back_jump" />
   <bind key="space" action="shoot" />
   <bind key="tab" action="next_character" />
