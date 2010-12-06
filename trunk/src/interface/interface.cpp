@@ -71,6 +71,16 @@ void Interface::LoadDataInternal(Profile *res)
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface");
   }
   clock_width = 70*zoom+0.5f;
+#ifdef ANDROID
+  // The optimization below depends on fastpath being implemented
+  // for RGB565 with surface alpha *and* colorkey
+  default_toolbar = default_toolbar.DisplayFormatColorKey(64);
+  control_toolbar = control_toolbar.DisplayFormatColorKey(64);
+  small_interface = small_interface.DisplayFormatColorKey(64);
+  default_toolbar.SetAlpha(SDL_SRCALPHA, 128);
+  control_toolbar.SetAlpha(SDL_SRCALPHA, 128);
+  small_interface.SetAlpha(SDL_SRCALPHA, 128);
+#endif
 
   // energy bar
   energy_bar = new EnergyBar(0, 0, 150*zoom, 15*zoom, 0, 0,
