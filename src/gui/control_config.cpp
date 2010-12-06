@@ -30,10 +30,10 @@
 
 #include "control_config.h"
 
-#define MIN_ACTION_WIDTH  276
-#define MIN_KEY_WIDTH      70
+#define MIN_ACTION_WIDTH  310
+#define MIN_KEY_WIDTH      50
 #define SPACING_WIDTH       8
-#define MODIFIERS_WIDTH    86
+#define MODIFIERS_WIDTH    64
 #define CHECKBOX_WIDTH     18
 
 class ControlItem : public HBox

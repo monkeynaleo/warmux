@@ -286,27 +286,25 @@ void Text::RenderMultiLines()
     background.Blit(tmp, Point2i(0, GetLineHeight(font)*i));
   }
 #else
-  Surface tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  surf = tmp.DisplayFormatAlpha();
+  surf = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
   // for each line
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = font->CreateSurface(ret_lines[i], color);
-    surf.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
+    surf.MergeSurface(font->CreateSurface(ret_lines[i], color),
+                      Point2i(0, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
   if (!shadowed)
     return;
 
-  tmp = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
-  background = tmp.DisplayFormatAlpha();
+  background = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
   // Putting pixels of each image in destination surface
   // for each lines
   for (uint i = 0; i < ret_lines.size(); i++) {
-    tmp = font->CreateSurface(ret_lines[i], black_color);
-    background.MergeSurface(tmp, Point2i(0, GetLineHeight(font)*i));
+    background.MergeSurface(font->CreateSurface(ret_lines[i], black_color),
+                            Point2i(0, GetLineHeight(font)*i));
   }
 #endif
 }
