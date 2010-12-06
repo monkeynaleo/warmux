@@ -144,10 +144,10 @@ AC_ARG_WITH([localedir-name],
             [LOCALEDIR="$withval"])
 AC_SUBST([LOCALEDIR])
 
-FONTFILE="\${DATADIR}/font/DejaVuSans.ttf"
+FONTFILE="\${DATADIR}/font/Ubuntu-R.ttf"
 AC_ARG_WITH([font-path],
             [AS_HELP_STRING([--with-font-path=FILE],
-                            [specify the font file (default: ${datadir}/font/DejaVuSans.ttf)])],
+                            [specify the font file (default: ${datadir}/font/Ubuntu-R.ttf)])],
             [FONTFILE="$withval"])
 AC_SUBST([FONTFILE])
 

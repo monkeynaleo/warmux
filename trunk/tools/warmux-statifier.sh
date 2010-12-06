@@ -114,7 +114,7 @@ cat > SPackage/warmux.sh << EOF
 #if [ "\$pulse" -gt 1 ]; then
 #    export SDL_AUDIODRIVER=pulse
 #fi
-LD_LIBRARY_PATH=./lib WARMUX_DATADIR=./data/ WARMUX_LOCALEDIR=./data/locale WARMUX_FONT_PATH=./data/font/DejaVuSans.ttf ./lib/$LDSO ./bin/warmux
+LD_LIBRARY_PATH=./lib WARMUX_DATADIR=./data/ WARMUX_LOCALEDIR=./data/locale WARMUX_FONT_PATH=./data/font/Ubuntu-R.ttf ./lib/$LDSO ./bin/warmux
 EOF
 
 #You thaught what you read was the most awful thing you've ever seen?

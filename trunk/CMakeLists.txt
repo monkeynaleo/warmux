@@ -41,7 +41,7 @@ IF(DATA_PATH)
   SET(INSTALL_LOCALEDIR ${DATA_PATH}/locale/)
   SET(DATA_DESTINATION ${DATA_PATH}/data)
   SET(PO_DESTINATION ${DATA_PATH}/locale)
-  SET(FONT_FILE ${DATA_PATH}/data/font/DejaVuSans.ttf)
+  SET(FONT_FILE ${DATA_PATH}/data/font/Ubuntu-R.ttf)
 
 ELSE(DATA_PATH)
 
@@ -51,13 +51,13 @@ ELSE(DATA_PATH)
     SET(INSTALL_LOCALEDIR ${CMAKE_INSTALL_PREFIX}/share/locale/)
     SET(DATA_DESTINATION "share/warmux")
     SET(PO_DESTINATION "share/locale")
-    SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
+    SET(FONT_FILE ${INSTALL_DATADIR}/font/Ubuntu-R.ttf)
   ELSE(UNIX AND NOT WIN32)
     SET(INSTALL_DATADIR data/)
     SET(INSTALL_LOCALEDIR locale/)
     SET(DATA_DESTINATION "data")
     SET(PO_DESTINATION "locale")
-    SET(FONT_FILE data/font/DejaVuSans.ttf)
+    SET(FONT_FILE data/font/Ubuntu-R.ttf)
   ENDIF(UNIX AND NOT WIN32)
 
 ENDIF(DATA_PATH)
@@ -71,8 +71,8 @@ INCLUDE(CPackConfig OPTIONAL)
 INCLUDE(XmlValidityTest OPTIONAL)
 
 # Use "make run" and "make debug" to run/debug warmux
-ADD_CUSTOM_TARGET(run WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf src/warmux DEPENDS src/warmux)
-ADD_CUSTOM_TARGET(debug WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/DejaVuSans.ttf gdb src/warmux DEPENDS src/warmux)
+ADD_CUSTOM_TARGET(run WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/Ubuntu-R.ttf src/warmux DEPENDS src/warmux)
+ADD_CUSTOM_TARGET(debug WARMUX_DATADIR=${PROJECT_SOURCE_DIR}/data/ WARMUX_FONT_PATH=${PROJECT_SOURCE_DIR}/data/font/Ubuntu-R.ttf gdb src/warmux DEPENDS src/warmux)
 
 
 # Required libraries
