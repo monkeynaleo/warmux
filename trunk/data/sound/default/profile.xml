@@ -51,10 +51,14 @@
   <sound sample="weapon/disco_grenade_music"     file="weapons/disco_grenade_music.ogg" />
   <sound sample="weapon/dynamite_exp"            file="weapons/dynamite_exp.ogg" />
   <sound sample="weapon/dynamite_fuze"           file="weapons/dynamite_fuze.ogg" />
-  <sound sample="weapon/explosion"               file="weapons/explosion.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion1.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion2.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion3.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion4.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion5.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion6.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion7.ogg" />
+  <sound sample="weapon/explosion"               file="weapons/explosion8.ogg" />
   <sound sample="weapon/flamethrower"            file="weapons/flame.ogg" />
   <sound sample="weapon/gnu_bounce"              file="weapons/gnu_bounce.ogg" />
   <sound sample="weapon/grapple_attaching"       file="weapons/grapple_attaching.ogg" />
@@ -83,8 +87,9 @@
   <sound sample="weapon/cluzooka_shot"           file="weapons/cluzooka_shot.ogg" />
   <sound sample="weapon/cluzooka_hit"            file="weapons/cluzooka_hit.ogg" />
   <sound sample="weapon/jetpack"                 file="weapons/jetpack.ogg" />
-  <sound sample="fire/touch_ground"              file="weapons/embers.ogg" />
+  <sound sample="fire/touch_ground"              file="weapons/embers1.ogg" />
   <sound sample="fire/touch_ground"              file="weapons/embers2.ogg" />
+  <sound sample="fire/touch_ground"              file="weapons/embers3.ogg" />
   <sound sample="weapon/construct"               file="weapons/construct.ogg" />
   <sound sample="weapon/lowgrav"                 file="weapons/lowgravity.ogg" />
   <sound sample="weapon/polecat_fart"            file="weapons/polecat.ogg" />
