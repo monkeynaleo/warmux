@@ -15,9 +15,5 @@ PRJ_MMPFILES
 sdl_gfx.mmp
 
 PRJ_EXPORTS
-../../SDL_gfxPrimitives_font.h	SDL/SDL_gfxPrimitives_font.h  
 ../../SDL_rotozoom.h		SDL/SDL_rotozoom.h
-../../SDL_gfxBlitFunc.h		SDL/SDL_gfxBlitFunc.h
-../../SDL_imageFilter.h		SDL/SDL_imageFilter.h
-../../SDL_framerate.h		SDL/SDL_framerate.h  
 ../../SDL_gfxPrimitives.h	SDL/SDL_gfxPrimitives.h 

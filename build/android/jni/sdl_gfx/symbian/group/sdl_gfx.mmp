@@ -21,6 +21,6 @@ SYSTEMINCLUDE   \epoc32\include\SDL
 DEBUGGABLE_UDEBONLY
 #endif
 SOURCEPATH ..\..
-SOURCE SDL_framerate.c SDL_gfxBlitFunc.c SDL_gfxPrimitives.c SDL_imageFilter.c SDL_rotozoom.c
+SOURCE SDL_gfxPrimitives.c SDL_rotozoom.c
 
 ALWAYS_BUILD_AS_ARM
