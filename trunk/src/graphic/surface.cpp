@@ -656,6 +656,8 @@ mirror(void *d, uint dpitch,
   while (h--) {
     for (int x=0; x<w; x++)
       dst[x] = src[-x];
+    // Try to avoid having garbage sdl_gfx < 2.0.22 actually reads
+    memset(dst+w*sizeof(pixel), 0, (dpitch-w)*sizeof(pixel));
     dst += dpitch;
     src += spitch;
   }
