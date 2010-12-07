@@ -15,41 +15,41 @@ LGPL (c) A. Schiffler
 extern "C" {
 #endif
 
- /* --- */
+	/* --- */
 
 #include "SDL.h"
 
- /* --------- Definitions */
+	/* --------- Definitions */
 
 /*!
 \brief Highest possible rate supported by framerate controller in Hz (1/s).
 */
-#define FPS_UPPER_LIMIT    200
+#define FPS_UPPER_LIMIT		200
 
 /*!
 \brief Lowest possible rate supported by framerate controller in Hz (1/s).
 */
-#define FPS_LOWER_LIMIT    1
+#define FPS_LOWER_LIMIT		1
 
 /*!
 \brief Default rate of framerate controller in Hz (1/s).
 */
-#define FPS_DEFAULT    30
+#define FPS_DEFAULT		30
 
-/*!
-\brief Structure holding the state and timing information of the framerate controller.
+/*! 
+\brief Structure holding the state and timing information of the framerate controller. 
 */
- typedef struct {
-   Uint32 framecount;
-   float rateticks;
-   Uint32 lastticks;
-   Uint32 rate;
- } FPSmanager;
+	typedef struct {
+		Uint32 framecount;
+		float rateticks;
+		Uint32 lastticks;
+		Uint32 rate;
+	} FPSmanager;
 
- /* --------- Function prototypes */
+	/* ---- Function Prototypes */
 
-#ifdef WIN32
-#  ifdef DLL_EXPORT
+#if defined(WIN32) || defined(WIN64)
+#  if defined(DLL_EXPORT) && !defined(LIBSDL_GFX_DLL_IMPORT)
 #    define SDL_FRAMERATE_SCOPE __declspec(dllexport)
 #  else
 #    ifdef LIBSDL_GFX_DLL_IMPORT
@@ -61,19 +61,19 @@ extern "C" {
 #  define SDL_FRAMERATE_SCOPE extern
 #endif
 
- /* Functions return 0 or value for sucess and -1 for error */
+	/* Functions return 0 or value for sucess and -1 for error */
 
- SDL_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
- SDL_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, int rate);
- SDL_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
- SDL_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
- SDL_FRAMERATE_SCOPE void SDL_framerateDelay(FPSmanager * manager);
+	SDL_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
+	SDL_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, int rate);
+	SDL_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
+	SDL_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
+	SDL_FRAMERATE_SCOPE void SDL_framerateDelay(FPSmanager * manager);
 
- /* --- */
+	/* --- */
 
- /* Ends C function definitions when using C++ */
+	/* Ends C function definitions when using C++ */
 #ifdef __cplusplus
 }
 #endif
 
-#endif       /* _SDL_framerate_h */
+#endif				/* _SDL_framerate_h */
