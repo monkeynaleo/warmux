@@ -14,7 +14,7 @@
     <string name="error_dl_from">Erreur lors du téléchargement à partir de %s</string>
     <string name="error_write">Erreur d\'écriture dans %s</string>
     <string name="dl_crc_error">Fichier %s corrompu</string>
-    <string name="dl_progress">%d%% fait: fichier %s</string>
+    <string name="dl_progress">%1$d%% fait: fichier %2$s</string>
     <string name="dl_finished">Fini</string>
 
     <string name="storage_phone">Stockage interne - %d Mo de libre</string>

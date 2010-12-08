@@ -14,7 +14,7 @@
     <string name="error_dl_from">Virhe ladattaessa kohteesta %s</string>
     <string name="error_write">Virhe kirjoittaessa %s</string>
     <string name="dl_crc_error">Tiedoston %s on vioittunut</string>
-    <string name="dl_progress">%d%% valmis: tiedosto %s</string>
+    <string name="dl_progress">%1$d%% valmis: tiedosto %2$s</string>
     <string name="dl_finished">Valmis</string>
 
     <string name="storage_phone">Sisäinen muisti - %d Mt vapaana</string>
