@@ -23,7 +23,6 @@ LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
                 -I$(OTHER_PATH)/../sdl_image \
                 -I$(OTHER_PATH)/../sdl_gfx \
                 -I$(OTHER_PATH)/../sdl_ttf \
-                -I$(OTHER_PATH)/../stlport/stlport \
                 -I$(LOCAL_PATH)/src \
                 -I$(LOCAL_PATH)/lib/fixedpoint \
                 -I$(LOCAL_PATH)/lib/warmux/include \
@@ -43,7 +42,7 @@ LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := $(foreach F, $(APP_SRCS), \
                      $(addprefix $(dir $(F)), $(notdir $(wildcard $(LOCAL_PATH)/$(F)))))
 
-LOCAL_STATIC_LIBRARIES := stlport sdl_ttf xml2 png freetype intl stlport
+LOCAL_STATIC_LIBRARIES := sdl_ttf xml2 png freetype intl
 LOCAL_SHARED_LIBRARIES := sdl sdl_net sdl_mixer sdl_gfx sdl_net sdl_image
 
 LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog -lz -lGLESv1_CM
