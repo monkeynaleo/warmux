@@ -13,7 +13,6 @@ LGPL (c) A. Schiffler
 
 #include "SDL_gfxPrimitives.h"
 #include "SDL_rotozoom.h"
-#include "SDL_gfxPrimitives_font.h"
 
 /* -===================- */
 
