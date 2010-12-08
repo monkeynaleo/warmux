@@ -16,16 +16,17 @@
 ;Unique Vendor name
 :"www.warmux.org"
 
-;Supports Series 60 v 3.0
-;[0x101F7961], 0, 0, 0, {"Series60ProductID"}
+="..\..\..\data\icon\warmux.mif", "image/x-mif", ""
 
 ;*"\certificates\selfsigned.key", "\certificates\selfsigned.cer"
 
 ;Files to install
 ;You should change the source paths to match that of your environment
 ;<source> <destination>
-"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux.exe" - "!:\sys\bin\warmux.exe"
+"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux.exe" - "!:\sys\bin\Warmux.exe"
 "$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\warmux_reg.rsc" - "!:\private\10003a3f\import\apps\warmux_reg.rsc"
+"$(EPOCROOT)Epoc32\data\z\resource\apps\warmux.rsc" - "!:\resource\apps\Warmux.rsc"
+"..\..\..\data\icon\warmux.mif" - "!:\resource\apps\Warmux.mif"
 "../res/sdl_param.txt" - "c:\private\ecf75e71\sdl_param.txt"
 "../res/sdl_flags.txt" - "c:\private\ecf75e71\sdl_flags.txt"
 "../../../data/authors.dtd" - "!:\private\ecf75e71\data/authors.dtd"
