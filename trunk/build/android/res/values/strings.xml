@@ -16,7 +16,7 @@
     <string name="error_dl_from">Error downloading data from %s</string>
     <string name="error_write">Error writing to %s</string>
     <string name="dl_crc_error">File %s corrupted</string>
-    <string name="dl_progress">%d%% done: file %s</string>
+    <string name="dl_progress">%1$d%% done: file %2$s</string>
     <string name="dl_finished">Finished</string>
 
     <string name="storage_phone">Internal storage - %d MB free</string>
