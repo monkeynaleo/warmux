@@ -10,12 +10,11 @@ APP_SUBDIRS := src/autofit src/cache src/tools \
 
 # Add more subdirs here, like src/subdir1 src/subdir2
 
-LOCAL_CFLAGS := $(foreach D, $(APP_SUBDIRS), -I$(LOCAL_PATH)/$(D)) \
-                -I$(LOCAL_PATH)/include -DFT2_BUILD_LIBRARY
+LOCAL_CFLAGS := -I$(LOCAL_PATH)/include -DFT2_BUILD_LIBRARY
 
 #Change C++ file extension as appropriate
 LOCAL_CPP_EXTENSION := .cpp
-
+LOCAL_C_INCLUDES += $(foreach D, $(APP_SUBDIRS), $(LOCAL_PATH)/$(D)) $(LOCAL_PATH)/include
 LOCAL_SRC_FILES := $(foreach F, $(APP_SUBDIRS), $(addprefix $(F)/,$(notdir $(wildcard $(LOCAL_PATH)/$(F)/*.c))))
 LOCAL_LDLIBS := -lz
 

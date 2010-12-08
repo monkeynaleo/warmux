@@ -18,19 +18,7 @@ APP_SRCS := $(addprefix src/, $(SRC_SRCS)) \
             $(addprefix lib/warmux/, $(WMX_SRCS)) \
             $(addprefix lib/fixedpoint/, $(FP_SRCS)) \
 
-LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
-                -I$(OTHER_PATH)/../sdl_mixer \
-                -I$(OTHER_PATH)/../sdl_image \
-                -I$(OTHER_PATH)/../sdl_gfx \
-                -I$(OTHER_PATH)/../sdl_ttf \
-                -I$(LOCAL_PATH)/src \
-                -I$(LOCAL_PATH)/lib/fixedpoint \
-                -I$(LOCAL_PATH)/lib/warmux/include \
-                -I$(OTHER_PATH)/../sdl_net \
-                -I$(OTHER_PATH)/../xml2/include \
-                -I$(OTHER_PATH)/../png \
-                -I$(OTHER_PATH)/../intl \
-                -DINSTALL_DATADIR=\"./data/\" \
+LOCAL_CFLAGS := -DINSTALL_DATADIR=\"./data/\" \
                 -DINSTALL_LOCALEDIR=\"./locale\" \
                 -DFONT_FILE=\"data/font/Ubuntu-R.ttf\" \
                 -DPACKAGE_VERSION=\"svn\" \
@@ -41,6 +29,12 @@ LOCAL_CFLAGS := -I$(OTHER_PATH)/../sdl/include \
 LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := $(foreach F, $(APP_SRCS), \
                      $(addprefix $(dir $(F)), $(notdir $(wildcard $(LOCAL_PATH)/$(F)))))
+LOCAL_C_INCLUDES += $(OTHER_PATH)/../sdl/include $(OTHER_PATH)/../sdl_mixer \
+                    $(OTHER_PATH)/../sdl_image $(OTHER_PATH)/../sdl_gfx \
+                    $(OTHER_PATH)/../sdl_ttf $(LOCAL_PATH)/src \
+                    $(LOCAL_PATH)/lib/fixedpoint $(OTHER_PATH)/../png \
+                    $(OTHER_PATH)/../sdl_net $(OTHER_PATH)/../xml2/include \
+                    $(OTHER_PATH)/../intl $(LOCAL_PATH)/lib/warmux/include
 
 LOCAL_STATIC_LIBRARIES := sdl_ttf xml2 png freetype intl
 LOCAL_SHARED_LIBRARIES := sdl sdl_net sdl_mixer sdl_gfx sdl_net sdl_image

@@ -8,15 +8,13 @@ ifndef SDL_JAVA_PACKAGE_PATH
 $(error Please define SDL_JAVA_PACKAGE_PATH to the path of your Java package with dots replaced with underscores, for example "com_example_SanAngeles")
 endif
 
-LOCAL_CFLAGS := -I$(LOCAL_PATH)/include \
-        -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) \
-        -DSDL_VIDEO_RENDER_RESIZE=$(SDL_VIDEO_RENDER_RESIZE) \
-        -DSDL_TRACKBALL_KEYUP_DELAY=$(SDL_TRACKBALL_KEYUP_DELAY)
+LOCAL_CFLAGS := -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH) \
+                -DSDL_VIDEO_RENDER_RESIZE=$(SDL_VIDEO_RENDER_RESIZE) \
+                -DSDL_TRACKBALL_KEYUP_DELAY=$(SDL_TRACKBALL_KEYUP_DELAY)
 
 SDL_SRCS := \
 	src/*.c \
 	src/audio/*.c \
-	src/cdrom/*.c \
 	src/cpuinfo/*.c \
 	src/events/*.c \
 	src/file/*.c \
@@ -31,7 +29,6 @@ SDL_SRCS := \
 	src/thread/pthread/*.c \
 	src/timer/unix/*.c \
 	src/audio/android/*.c \
-	src/cdrom/dummy/*.c \
 	src/video/android/*.c \
 	src/haptic/dummy/*.c \
 	src/loadso/dlopen/*.c \
@@ -39,7 +36,7 @@ SDL_SRCS := \
 	src/video/memset.arm.S
 
 LOCAL_CPP_EXTENSION := .cpp
-
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
 # Note this "simple" makefile var substitution, you can find even more complex examples in different Android projects
 LOCAL_SRC_FILES := $(foreach F, $(SDL_SRCS), $(addprefix $(dir $(F)),$(notdir $(wildcard $(LOCAL_PATH)/$(F)))))
 
