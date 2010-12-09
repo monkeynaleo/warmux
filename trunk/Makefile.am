@@ -1,4 +1,4 @@
-SUBDIRS = data lib src doc
+SUBDIRS = data lib src
 
 if NLS
 SUBDIRS += po
@@ -54,7 +54,7 @@ install: all
           echo "Check build/win32_setup/installer.log for details"; \
           exit 1)
 else
-SUBDIRS+=tools
+SUBDIRS+=tools doc
 endif
 
 # make run: run the game without installing it. Saves you the hassle
