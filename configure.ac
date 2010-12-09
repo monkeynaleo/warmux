@@ -43,58 +43,7 @@ if test "x$cxx_present" != "xyes"; then
   AC_MSG_ERROR([*** No C++ compiler can be found!])
 fi
 
-dnl =========================================================================
-dnl === Options for users                                                   =
-dnl =========================================================================
-
 AX_CFLAGS_WARN_ALL([CXXFLAGS])
-
-AC_ARG_ENABLE([servers],
-              [AS_HELP_STRING([--enable-servers],
-                              [Enable building the index and game servers @<:@default=no@:>@])],
-              [],
-              [enable_servers=no])
-AM_CONDITIONAL([BUILD_SERVERS], [test "$enable_servers" = "yes"])
-
-if ! test "$enable_servers" = "yes"; then
-  AC_MSG_WARN([Building of servers is disabled. If you want build the index and servers, please use configure with this option : --enable-servers])
-fi
-
-AC_ARG_ENABLE([debug],
-              [  --enable-debug          Enable debug in Warmux],
-              debug=$enableval,
-              debug="")
-AC_ARG_ENABLE([logging],
-              [  --enable-logging        Enable logging in Warmux],
-              logging=$enableval,
-              logging="")
-
-
-AC_ARG_ENABLE([profile],
-              [  --enable-profile        Enable profiling],
-              [if test "x${enableval}" = "xyes" ; then
-                   CXXFLAGS="$CXXFLAGS -pg"
-               fi])
-
-AC_ARG_ENABLE([static],
-              [  --enable-static         Enable static building of warmux],
-              [static=$enableval],
-              [static=no])
-
-# Check whether user supplied the option to statically link binaries.
-if test "$static" = yes; then
-# if we're using gcc, add `-static' to LDFLAGS
-       if test -n "$GCC" || test "$ac_cv_prog_gcc" = "yes"; then
-               STATIC_LD="-static"
-               LDFLAGS="$LDFLAGS -static"
-               LIBCURL="$(curl-config --libs)"
-               LIBCURL="${LIBCURL:--lcurl} -lssl -lcrypto -ldl -lz"
-       fi
-fi
-
-if test "x${prefix}" = "xNONE"; then
-  prefix="${ac_default_prefix}"
-fi
 
 # ========================================================================
 # == Set flags for various environments                                  =
@@ -119,12 +68,64 @@ case "${host}" in
     GEKKO="yes"
     ;;
 esac
-AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
-
+AM_CONDITIONAL([WIN32], test "${WIN32}" = "yes")
 
 if test "${WIN32}" = "yes"; then DATADIR="data"
 elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/warmux/data"
 else DATADIR="${prefix}/share/warmux"; fi
+
+dnl =========================================================================
+dnl === Options for users                                                   =
+dnl =========================================================================
+
+dnl === Non-windows options
+AC_ARG_ENABLE([servers],
+              [AS_HELP_STRING([--enable-servers],
+                              [Enable building the index and game servers @<:@default=no@:>@])],
+              [],
+              [enable_servers=no])
+AM_CONDITIONAL([BUILD_SERVERS], [test "$enable_servers" = "yes"])
+
+if ! test "$enable_servers" = "yes"; then
+  AC_MSG_WARN([Building of servers is disabled. If you want build the index and servers, please use configure with this option : --enable-servers])
+fi
+
+AC_ARG_ENABLE([static],
+              [  --enable-static         Enable static building of warmux],
+              [static=$enableval],
+              [static=no])
+
+dnl === Regular options
+AC_ARG_ENABLE([debug],
+              [  --enable-debug          Enable debug in Warmux],
+              debug=$enableval,
+              debug="")
+AC_ARG_ENABLE([logging],
+              [  --enable-logging        Enable logging in Warmux],
+              logging=$enableval,
+              logging="")
+
+
+AC_ARG_ENABLE([profile],
+              [  --enable-profile        Enable profiling],
+              [if test "x${enableval}" = "xyes" ; then
+                   CXXFLAGS="$CXXFLAGS -pg"
+               fi])
+
+# Check whether user supplied the option to statically link binaries.
+if test "$static" = yes; then
+# if we're using gcc, add `-static' to LDFLAGS
+       if test -n "$GCC" || test "$ac_cv_prog_gcc" = "yes"; then
+               STATIC_LD="-static"
+               LDFLAGS="$LDFLAGS -static"
+               LIBCURL="$(curl-config --libs)"
+               LIBCURL="${LIBCURL:--lcurl} -lssl -lcrypto -ldl -lz"
+       fi
+fi
+
+if test "x${prefix}" = "xNONE"; then
+  prefix="${ac_default_prefix}"
+fi
 
 AC_ARG_WITH([datadir-name],
             [AS_HELP_STRING([--with-datadir-name=DIR],
@@ -381,21 +382,25 @@ AC_CONFIG_FILES([Makefile
                  lib/Makefile
                  lib/fixedpoint/Makefile
                  lib/warmux/Makefile
-                 lib/warmux-server/Makefile
-                 build/win32_setup/create_setup.sh
-                 doc/Makefile
                  po/Makefile
+                 ], [AM_POSTPROCESS_PO_MAKEFILE])
+if test "${WIN32}" = "yes"; then
+AC_CONFIG_FILES([build/win32_setup/create_setup.sh],
+                [chmod +x build/win32_setup/create_setup.sh])
+else
+AC_CONFIG_FILES([lib/warmux-server/Makefile
+                 doc/Makefile
                  tools/Makefile
                  tools/list_games/Makefile
                  tools/servers/Makefile
                  tools/servers/game_server/Makefile
                  tools/servers/index_server/Makefile
-                 ], [AM_POSTPROCESS_PO_MAKEFILE])
+                 ])
+fi
 
 AM_CONFIG_HEADER(lib/warmux/include/config_autotools.h)
 
 AC_OUTPUT
-chmod +x build/win32_setup/create_setup.sh
 
 echo "***********************************************************"
 echo "Configuration complete"
