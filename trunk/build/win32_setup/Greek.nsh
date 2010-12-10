@@ -14,6 +14,7 @@
 !define WARMUX_DESKTOP_SC_DESC  "Τοποθέτηση συντόμευσης στην επιφάνεια εργασίας για την έναρξη του Warmux"
 !define WARMUX_STARTM_SC_DESC   "Τοποθέτηση συντόμευσης στο μενού έναρξης"
 !define WARMUX_UNINST_SC_DESC   "Τοποθέτηση συντόμευσης κατάργησης στο μενού έναρξης"
+!define WARMUX_RESET_SC_DESC    "Shortcut to force reset of Warmux config file"
 !define WARMUX_SHORCUTS_TITLE   "Εγκατάσταση συντομεύσεων"
 !define WARMUX_REMOVE_TITLE     "Κατάργηση προηγούμενης έκδοσης"
 

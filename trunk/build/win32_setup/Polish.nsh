@@ -13,6 +13,7 @@
 !define WARMUX_DESKTOP_SC_DESC  "Umieœæ skrót do Wormuksa na pulpicie"
 !define WARMUX_STARTM_SC_DESC   "Umieœæ skrót w menu start, w grupie Warmux"
 !define WARMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
+!define WARMUX_RESET_SC_DESC    "Shortcut to force reset of Warmux config file"
 !define WARMUX_SHORCUTS_TITLE   "Instalacja skrótów"
 !define WARMUX_REMOVE_TITLE     "Odinstaluj poprzedni¹ wersjê"
 

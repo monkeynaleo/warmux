@@ -13,6 +13,7 @@
 !define WARMUX_DESKTOP_SC_DESC  "Place a shortcut on the desktop to run Warmux"
 !define WARMUX_STARTM_SC_DESC   "Place a shortcut in the start menu, Warmux location"
 !define WARMUX_UNINST_SC_DESC   "Place an uninstall shortcut in the start menu, Warmux location"
+!define WARMUX_RESET_SC_DESC    "Shortcut to force reset of Warmux config file"
 !define WARMUX_SHORCUTS_TITLE   "Shortcut installation"
 !define WARMUX_REMOVE_TITLE     "Uninstall previous version"
 

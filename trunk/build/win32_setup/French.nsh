@@ -13,6 +13,7 @@
 !define WARMUX_DESKTOP_SC_DESC  "Raccourci sur le bureau pour lancer Warmux"
 !define WARMUX_STARTM_SC_DESC   "Raccourci dans le menu Démarrer\Warmux"
 !define WARMUX_UNINST_SC_DESC   "Raccourci de désinstallation dans le menu Démarrer\Warmux"
+!define WARMUX_RESET_SC_DESC    "Raccourci pour réinitialiser le fichier de configuration de Warmux"
 !define WARMUX_SHORCUTS_TITLE   "Installation des raccourcis"
 !define WARMUX_REMOVE_TITLE     "Désinstallation de la version précédente"
 
