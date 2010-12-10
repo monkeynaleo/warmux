@@ -173,13 +173,6 @@ bool Video::__SetConfig(const int width, const int height, const bool _fullscree
 #endif
 
   flags |= (__fullscreen) ? SDL_FULLSCREEN : 0;
-#ifndef ANDROID
-# ifdef __APPLE__
-  if (!__fullscreen)
-# endif
-    flags |= SDL_DOUBLEBUF;
-#endif
-
 #ifdef __SYMBIAN32__
   flags = 0;
 #endif
