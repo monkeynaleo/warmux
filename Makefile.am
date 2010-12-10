@@ -4,7 +4,7 @@ if NLS
 SUBDIRS += po
 endif
 
-EXTRA_DISTDIRS = build/android/jni build/android/src build/android/res
+EXTRA_DISTDIRS = build/android/jni build/android/src build/android/res build/symbian
 EXTRA_DIST = build/visual/gettext.rules            \
              build/visual/warmux.sln               \
              build/visual/warmux.vcproj            \
