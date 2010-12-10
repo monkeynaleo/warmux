@@ -29,7 +29,6 @@ warmux_SOURCES = \
         character/member.h \
         character/movement.cpp \
         character/movement.h \
-        config.h \
         game/config.cpp \
         game/config.h \
         game/game.cpp \
@@ -140,8 +139,6 @@ warmux_SOURCES = \
         include/action_handler.cpp \
         include/action_handler.h \
         include/app.h \
-        include/base.h \
-        include/binreloc.h \
         include/constant.cpp \
         include/constant.h \
         include/debugmasks.h \
@@ -224,7 +221,6 @@ warmux_SOURCES = \
         menu/team_box.h \
         menu/teams_selection_box.cpp \
         menu/teams_selection_box.h \
-        msvc/config.h \
         msvc/getopt.h \
         network/admin_commands.cpp \
         network/admin_commands.h \
@@ -422,7 +418,7 @@ AM_CXXFLAGS = -I $(top_srcdir)/src -DINSTALL_DATADIR=\"@DATADIR@\"  \
 
 
 if WIN32
-warmux_SOURCES += warmux.rc warmux.ico
+warmux_SOURCES += warmux.rc
 .rc.o: $(top_srcdir)/lib/warmux/include/config_autotools.h
 	$(WINDRES) -I$(top_srcdir)/lib/warmux/include -D HAVE_CONFIG_H -o $@ -i $<
 endif

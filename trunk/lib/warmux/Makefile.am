@@ -3,6 +3,10 @@ SUBDIRS = .
 noinst_LIBRARIES = libwarmux.a
 
 libwarmux_a_SOURCES = \
+        ./include/config_android.h \
+        ./include/config_symbian.h \
+        ./include/config_visual.h \
+        ./include/WARMUX_config.h \
 	./include/WARMUX_action.h \
 	./include/WARMUX_action_handler.h \
 	./include/WARMUX_debug.h \

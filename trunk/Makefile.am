@@ -41,9 +41,7 @@ EXTRA_DIST = build/visual/gettext.rules            \
              build/win32_setup/French.nsh          \
              build/win32_setup/Greek.nsh           \
              build/win32_setup/Polish.nsh          \
-             build/win32_setup/langmacros.nsh      \
-             build/win32_setup/install.ico         \
-             build/win32_setup/uninstall.ico
+             build/win32_setup/langmacros.nsh
 
 if WIN32
 install: all
