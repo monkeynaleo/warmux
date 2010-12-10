@@ -70,10 +70,6 @@ case "${host}" in
 esac
 AM_CONDITIONAL([WIN32], test "${WIN32}" = "yes")
 
-if test "${WIN32}" = "yes"; then DATADIR="data"
-elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/warmux/data"
-else DATADIR="${prefix}/share/warmux"; fi
-
 dnl =========================================================================
 dnl === Options for users                                                   =
 dnl =========================================================================
@@ -126,6 +122,10 @@ fi
 if test "x${prefix}" = "xNONE"; then
   prefix="${ac_default_prefix}"
 fi
+
+if test "${WIN32}" = "yes"; then DATADIR="data"
+elif test "${GEKKO}" = "yes"; then DATADIR="sd:/apps/warmux/data"
+else DATADIR="${prefix}/share/warmux"; fi
 
 AC_ARG_WITH([datadir-name],
             [AS_HELP_STRING([--with-datadir-name=DIR],
