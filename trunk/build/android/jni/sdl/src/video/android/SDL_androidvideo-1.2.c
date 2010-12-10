@@ -227,6 +227,10 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
   SDL_modelist[SDL_NUMMODES] = NULL;
 
   SDL_VideoInit_1_3(NULL, 0);
+  // Set to 1 to allow first SemWait to pass in FlipHWSurface
+#ifdef SDL_ANDROID_USE_2BUFS
+  swap_sem = SDL_CreateSemaphore(1);
+#endif
 
   /* We're done! */
   return(0);
@@ -238,6 +242,10 @@ SDL_Rect **ANDROID_ListModes(_THIS, SDL_PixelFormat *format, Uint32 flags)
     return NULL;
   return SDL_modelist;
 }
+
+SDL_Texture *texture[2] = { NULL, };
+void *pix[2] = { NULL, };
+static int cur_pix = 0;
 
 SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
         int width, int height, int bpp, Uint32 flags)
@@ -282,20 +290,35 @@ SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
     current->hwdata = NULL;
     if( ! (flags & SDL_HWSURFACE) )
     {
-      current->pixels = SDL_malloc(width * height * ANDROID_BYTESPERPIXEL);
-      if ( ! current->pixels ) {
-        __android_log_print(ANDROID_LOG_INFO, "libSDL", "Couldn't allocate buffer for requested mode");
-        SDL_SetError("Couldn't allocate buffer for requested mode");
-        return(NULL);
+      int i;
+#if SDL_ANDROID_USE_2BUFS
+      int num = 1;
+#else
+      int num = 2;
+#endif
+      for (i=0; i<num; i++) {
+       pix[i] = SDL_malloc(width * height * ANDROID_BYTESPERPIXEL);
+        if ( ! pix[i] ) {
+          __android_log_print(ANDROID_LOG_INFO, "libSDL", "Couldn't allocate buffer for requested mode");
+          SDL_SetError("Couldn't allocate buffer for requested mode");
+          return(NULL);
+        }
+        SDL_memset(pix[i], 0xFF, width * height * ANDROID_BYTESPERPIXEL);
+        texture[i] = SDL_CreateTexture(SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STATIC, width, height);
+        if( !texture[i] ) {
+          SDL_free(pix[i]);
+          pix[i] = NULL;
+          current->pixels = NULL;
+          SDL_OutOfMemory();
+          return(NULL);
+        }
       }
-      SDL_memset(current->pixels, 0, width * height * ANDROID_BYTESPERPIXEL);
-      current->hwdata = (struct private_hwdata *)SDL_CreateTexture(SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_STATIC, width, height);
-      if( !current->hwdata ) {
-        SDL_free(current->pixels);
-        current->pixels = NULL;
-        SDL_OutOfMemory();
-        return(NULL);
-      }
+      cur_pix = 0;
+      current->pixels = pix[cur_pix];
+      //SDL_SetTextureScaleMode(tex, SDL_TEXTURESCALEMODE_NONE);
+      //SDL_SetTextureBlendMode(tex, SDL_BLENDMODE_NONE);
+      //SDL_SetTextureAlphaMod(tex, SDL_TEXTUREMODULATE_NONE);
+      current->hwdata = (struct private_hwdata *)texture[cur_pix];
       // Register main video texture to be recreated when needed
       HwSurfaceCount++;
       HwSurfaceList = SDL_realloc( HwSurfaceList, HwSurfaceCount * sizeof(SDL_Surface *) );
@@ -330,6 +353,7 @@ SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
 */
 void ANDROID_VideoQuit(_THIS)
 {
+  int i;
   if( ! sdl_opengl )
   {
     HwSurfaceCount = 0;
@@ -337,10 +361,15 @@ void ANDROID_VideoQuit(_THIS)
       SDL_free(HwSurfaceList);
     HwSurfaceList = NULL;
 
-    if( SDL_CurrentVideoSurface->hwdata )
-      SDL_DestroyTexture((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata);
-    if( SDL_CurrentVideoSurface->pixels )
-      SDL_free(SDL_CurrentVideoSurface->pixels);
+    for (i=0; i<2; i++) {
+      if( texture[i] )
+        SDL_DestroyTexture(texture[i]);
+      if( pix[i] )
+        SDL_free(pix[i]);
+      pix[i] = NULL;
+      texture[i] = NULL;
+    }
+
     SDL_CurrentVideoSurface->pixels = NULL;
     SDL_CurrentVideoSurface = NULL;
     SDL_DestroyWindow(SDL_VideoWindow);
@@ -349,8 +378,9 @@ void ANDROID_VideoQuit(_THIS)
 
   SDL_ANDROID_sFakeWindowWidth = 0;
   SDL_ANDROID_sFakeWindowWidth = 0;
-
-  int i;
+#ifdef SDL_ANDROID_USE_2BUFS
+  SDL_DestroySemaphore(swap_sem);
+#endif
 
   /* Free video mode lists */
   for ( i=0; i<SDL_NUMMODES; ++i ) {
@@ -682,20 +712,30 @@ static void ANDROID_UpdateRects(_THIS, int numrects, SDL_Rect *rects)
 
 static int ANDROID_FlipHWSurface(_THIS, SDL_Surface *surface)
 {
-
-  //__android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROID_FlipHWSurface()");
   if( SDL_CurrentVideoSurface->hwdata && SDL_CurrentVideoSurface->pixels )
   {
     SDL_Rect rect;
+#if SDL_ANDROID_USE_2BUFS
+    if (cur_pix) __android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROID_FlipHWSurface() 1");
+    else         __android_log_print(ANDROID_LOG_INFO, "libSDL", "ANDROID_FlipHWSurface() 0");
+#endif
     rect.x = 0;
     rect.y = 0;
     rect.w = SDL_CurrentVideoSurface->w;
     rect.h = SDL_CurrentVideoSurface->h;
-    SDL_UpdateTexture((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &rect, SDL_CurrentVideoSurface->pixels, SDL_CurrentVideoSurface->pitch);
-    SDL_RenderCopy((struct SDL_Texture *)SDL_CurrentVideoSurface->hwdata, &rect, &rect);
-  }
-
-  SDL_ANDROID_CallJavaSwapBuffers();
+#if SDL_ANDROID_USE_2BUFS
+    SDL_SemWait(swap_sem); // Not performing this until previous swap is finished
+#endif
+    SDL_UpdateTexture(texture[cur_pix], &rect, pix[cur_pix], SDL_CurrentVideoSurface->pitch);
+    SDL_RenderCopy(texture[cur_pix], &rect, &rect);
+    SDL_ANDROID_CallJavaSwapBuffers();
+#if SDL_ANDROID_USE_2BUFS
+    cur_pix ^= 1;
+    SDL_CurrentVideoSurface->pixels = pix[cur_pix];
+    SDL_CurrentVideoSurface->hwdata = (struct private_hwdata *)texture[cur_pix];
+#endif
+  } else
+    SDL_ANDROID_CallJavaSwapBuffers();
 
   return(0);
 };

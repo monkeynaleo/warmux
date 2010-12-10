@@ -49,6 +49,10 @@
 // The device screen dimensions to draw on
 int SDL_ANDROID_sWindowWidth  = 0;
 int SDL_ANDROID_sWindowHeight = 0;
+#ifdef SDL_ANDROID_USE_2BUFS
+SDL_sem *swap_sem = NULL;
+SDL_Thread *swap_thread = NULL;
+#endif
 
 // Extremely wicked JNI environment to call Java functions from C code
 static JNIEnv* JavaEnv = NULL;
@@ -56,6 +60,23 @@ static jclass JavaRendererClass = NULL;
 static jobject JavaRenderer = NULL;
 static jmethodID JavaSwapBuffers = NULL;
 static int glContextLost = 0;
+extern JavaVM *jniVM;
+
+#ifdef SDL_ANDROID_USE_2BUFS
+// Should ideally loop endlessly, waiting on a semaphore,
+// CallIntMethod return stored to a static value, and a loop end bool
+// to properly finish the function
+int ThreadSwap(void *data)
+{
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "doing the swap");
+  //(*jniVM)->AttachCurrentThread(jniVM, &JavaEnv, NULL);
+  int ret = (*JavaEnv)->CallIntMethod( JavaEnv, JavaRenderer, JavaSwapBuffers );
+  //(*jniVM)->DetachCurrentThread(jniVM);
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "swapped");
+  SDL_SemPost(swap_sem); // Can be called again
+  return ret;
+}
+#endif
 
 static void appPutToBackgroundCallbackDefault(void)
 {
@@ -75,8 +96,22 @@ int SDL_ANDROID_CallJavaSwapBuffers()
   {
     SDL_ANDROID_processAndroidTrackballDampening();
   }
+#ifdef SDL_ANDROID_USE_2BUFS
+  if (swap_thread) {
+    int ret;
+    __android_log_print(ANDROID_LOG_INFO, "libSDL", "doing the wait");
+    // Because of the semaphore this is useless, but this is done to get return value
+    SDL_WaitThread(swap_thread, &ret);
+    swap_thread = NULL;
+    if (!ret)
+      return 0;
+    __android_log_print(ANDROID_LOG_INFO, "libSDL", "done waiting");
+  }
+  swap_thread = SDL_CreateThread(ThreadSwap, NULL);
+#else
   if( ! (*JavaEnv)->CallIntMethod( JavaEnv, JavaRenderer, JavaSwapBuffers ) )
     return 0;
+#endif
   if( glContextLost )
   {
     glContextLost = 0;
