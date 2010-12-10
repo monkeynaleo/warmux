@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2009-07-01 16:01+0200\n"
 "Last-Translator: Ysangkok <ysangkok@gmail.com>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -463,7 +463,7 @@ msgstr "Ændr våbenkatalog"
 msgid "'Tool' weapon category"
 msgstr "Ændr våbenkatalog"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(død)"
 
@@ -477,7 +477,7 @@ msgid "(unknown time)"
 msgstr "(ukendt tid)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
@@ -1037,7 +1037,7 @@ msgid "Have a good game!"
 msgstr "Hav et godt spil!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Hovedkommandør"
@@ -1791,7 +1791,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Lager:"
 

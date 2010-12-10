@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2009-12-24 23:27+0100\n"
 "Last-Translator: Marek Rogalski <mafikpl@gmail.com>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -529,7 +529,7 @@ msgstr "Zmień kategorię uzbrojenia"
 msgid "'Tool' weapon category"
 msgstr "Zmień kategorię uzbrojenia"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(martwy)"
 
@@ -543,7 +543,7 @@ msgid "(unknown time)"
 msgstr "(brak danych)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(bez ograniczeń)"
 
@@ -1101,7 +1101,7 @@ msgid "Have a good game!"
 msgstr "Życzymy miłej gry!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Głównodowodzący"
@@ -1851,7 +1851,7 @@ msgstr "Dźwięki"
 msgid "Starting a new game"
 msgstr "Uruchamianie nowej gry"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Stan:"
 

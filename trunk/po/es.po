@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Warmux\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-01-09 09:55+0100\n"
 "Last-Translator: Juan Pujol Rojas <konker69@gmail.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -471,7 +471,7 @@ msgstr "Cambia la categoría de arma"
 msgid "'Tool' weapon category"
 msgstr "Cambia la categoría de arma"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(muerto)"
 
@@ -485,7 +485,7 @@ msgid "(unknown time)"
 msgstr "(tiempo desconocido)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
@@ -1044,7 +1044,7 @@ msgid "Have a good game!"
 msgstr "¡Que tengas una buena partida!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Comandante jefe"
@@ -1796,7 +1796,7 @@ msgstr "Opciones de sonido"
 msgid "Starting a new game"
 msgstr "Empezando un nuevo juego"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Munición:"
 

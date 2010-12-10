@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -421,7 +421,7 @@ msgstr "武器カテゴリを切り替える"
 msgid "'Tool' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(死)"
 
@@ -435,7 +435,7 @@ msgid "(unknown time)"
 msgstr "(不明な時間)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(無制限)"
 
@@ -992,7 +992,7 @@ msgid "Have a good game!"
 msgstr "楽しんで！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指揮官"
@@ -1739,7 +1739,7 @@ msgstr "サウンド"
 msgid "Starting a new game"
 msgstr "ゲームを開始中"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "残り:"
 

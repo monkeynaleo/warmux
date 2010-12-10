@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: warmux-tr\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2007-01-20 00:10+0200\n"
 "Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
 "Language-Team: Turkish <yerellestirme@kde.org.tr>\n"
@@ -409,7 +409,7 @@ msgstr ""
 msgid "'Tool' weapon category"
 msgstr ""
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(ölü)"
 
@@ -423,7 +423,7 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
@@ -969,7 +969,7 @@ msgid "Have a good game!"
 msgstr ""
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr ""
@@ -1716,7 +1716,7 @@ msgstr "Sesler"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Stok:"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-01-10 19:51+1100\n"
 "Last-Translator: jiero <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <i10n>\n"
@@ -415,7 +415,7 @@ msgstr "改变武器分类"
 msgid "'Tool' weapon category"
 msgstr "改变武器分类"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(死掉的)"
 
@@ -429,7 +429,7 @@ msgid "(unknown time)"
 msgstr "(未知时间)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(无限的)"
 
@@ -978,7 +978,7 @@ msgid "Have a good game!"
 msgstr "来吧！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指挥官"
@@ -1724,7 +1724,7 @@ msgstr "声音"
 msgid "Starting a new game"
 msgstr "重新来游戏"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "箱子:"
 

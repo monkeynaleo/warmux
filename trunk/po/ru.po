@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-05-12 23:05+0700\n"
 "Last-Translator: Vladislav 'SnoUweR' Kovalev <snouwer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -529,7 +529,7 @@ msgstr "Сменить вид оружия"
 msgid "'Tool' weapon category"
 msgstr "Сменить вид оружия"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(мёртв)"
 
@@ -543,7 +543,7 @@ msgid "(unknown time)"
 msgstr "(неизвестное время)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
@@ -1100,7 +1100,7 @@ msgid "Have a good game!"
 msgstr "Удачной игры!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Командующий"
@@ -1852,7 +1852,7 @@ msgstr "Звуки"
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Запас:"
 
