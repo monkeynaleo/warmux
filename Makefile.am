@@ -4,6 +4,7 @@ if NLS
 SUBDIRS += po
 endif
 
+EXTRA_DISTDIRS = build/android/jni build/android/src build/android/res
 EXTRA_DIST = build/visual/gettext.rules            \
              build/visual/warmux.sln               \
              build/visual/warmux.vcproj            \
@@ -41,7 +42,12 @@ EXTRA_DIST = build/visual/gettext.rules            \
              build/win32_setup/French.nsh          \
              build/win32_setup/Greek.nsh           \
              build/win32_setup/Polish.nsh          \
-             build/win32_setup/langmacros.nsh
+             build/win32_setup/langmacros.nsh      \
+             build/android/AndroidManifest.xml     \
+             build/android/build.xml               \
+             build/android/default.properties      \
+             build/android/local.properties        \
+             $(foreach D, $(EXTRA_DISTDIRS), $(shell find $(D) -name .svn -a -type d -prune -o -type f -print))
 
 if WIN32
 install: all
