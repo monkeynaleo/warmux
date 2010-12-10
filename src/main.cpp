@@ -488,8 +488,8 @@ extern "C" int main(int argc, char *argv[])
 #endif
 
 #ifdef __SYMBIAN32__
-  freopen("c:/warmux_stdout.txt", "w", stdout);
-  freopen("c:/warmux_stderr.txt", "w", stderr);
+  freopen("warmux_stdout.txt", "w", stdout);
+  freopen("warmux_stderr.txt", "w", stderr);
 #endif
 
   /* FIXME calling Config::GetInstance here means that there is no need of

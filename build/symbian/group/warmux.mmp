@@ -113,6 +113,6 @@ START RESOURCE ../res/warmux_reg.rss
 TARGETPATH \private\10003a3f\apps
 END
 
-CAPABILITY NetworkServices ReadUserData WriteUserData
+//CAPABILITY NetworkServices ReadUserData WriteUserData
 
 ALWAYS_BUILD_AS_ARM
