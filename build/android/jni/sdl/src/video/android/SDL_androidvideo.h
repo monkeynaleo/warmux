@@ -22,8 +22,14 @@
 #ifndef _SDL_androidvideo_h
 #define _SDL_androidvideo_h
 
+//#define SDL_ANDROID_USE_2BUFS
+
 #include "SDL_config.h"
 #include "SDL_video.h"
+#ifdef SDL_ANDROID_USE_2BUFS
+#  include "SDL_thread.h"
+#  include "SDL_mutex.h"
+#endif
 
 extern void ANDROID_InitOSKeymap();
 
@@ -36,6 +42,9 @@ extern void SDL_ANDROID_VideoContextLost();
 extern void SDL_ANDROID_VideoContextRecreated();
 extern void SDL_ANDROID_processAndroidTrackballDampening();
 extern SDL_VideoDevice *ANDROID_CreateDevice_1_3(int devindex);
-
+#ifdef SDL_ANDROID_USE_2BUFS
+extern SDL_sem *swap_sem;
+extern SDL_Thread *swap_thread;
+#endif
 
 #endif /* _SDL_androidvideo_h */

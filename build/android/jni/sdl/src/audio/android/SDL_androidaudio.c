@@ -133,7 +133,7 @@ static size_t audioBufferSize = 0;
 
 // Extremely wicked JNI environment to call Java functions from C code
 static jbyteArray audioBufferJNI = NULL;
-static JavaVM *jniVM = NULL;
+JavaVM *jniVM = NULL;
 static jobject JavaAudioThread = NULL;
 static jmethodID JavaInitAudio = NULL;
 static jmethodID JavaDeinitAudio = NULL;
