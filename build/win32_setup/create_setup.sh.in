@@ -13,7 +13,6 @@ BINDIR=/mingw
 HKLM_PATH="SOFTWARE\Games\Warmux"
 
 # Set compression and in/out
-COMPRESSION="/solid lzma"
 DEST=tmp-warmux-win32
 NSIS="$DEST/warmux.nsi"
 
@@ -63,7 +62,10 @@ VIAddVersionKey         "LegalCopyright"        "(C) 2001-2008 The Warmux Projec
 
 ;General
 OutFile "${LOCAL_PATH}\Warmux-Setup-@PACKAGE_VERSION@.exe"
-SetCompressor ${COMPRESSION}
+SetCompressor /SOLID lzma
+; Switching to 8 saves 40KB
+; Switching to zlib looses 4MB...
+SetCompressorDictSize 4
 ShowInstDetails show
 ShowUninstDetails show
 SetDateSave on
@@ -365,11 +367,33 @@ SectionEnd ; Installer section
 ;Shortcuts
 SectionGroup /e \$(Warmux_SHORCUTS_TITLE) Sec_Shortcuts
   ; Shortcut to config folder
+  Section \$(Warmux_RESET_SC_DESC) Sec_ResetShortcut
+    SetOutPath "\$INSTDIR"
+    SetOverwrite on
+    !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Warmux"
+    CreateShortcut  "\$SMPROGRAMS\\Warmux\\Reset.lnk" \
+      "\$INSTDIR\\warmux.exe" "-r" "\$INSTDIR\\uninstall.exe" 0
+    SetOverwrite off
+  SectionEnd
+
+  ; Shortcut to config folder
   Section \$(Warmux_CONFIG_SC_DESC) Sec_ConfigShortcut
     SetOutPath "\$INSTDIR"
     SetOverwrite on
     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Warmux"
     CreateShortcut  "\$SMPROGRAMS\\Warmux\\Config.lnk" "\$DOCUMENTS\\Warmux" "" "" 0
+    SetOverwrite off
+  SectionEnd
+
+  ; Warmux uninstall shortcut in start menu
+  ; Might be forced if user has no install rights, because it would be complex otherwise:
+  ; - No uninstall available in Windows "Program uninstall"
+  Section \$(Warmux_UNINST_SC_DESC) Sec_UninstallShortCut
+    SetOutPath "\$INSTDIR"
+    SetOverwrite on
+    !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Warmux"
+    CreateShortCut  "\$SMPROGRAMS\\Warmux\\Uninstall.lnk" \
+         "\$INSTDIR\\uninstall.exe" "" "\$INSTDIR\\uninstall.exe" 0
     SetOverwrite off
   SectionEnd
 
@@ -412,17 +436,6 @@ cat >> $NSIS <<EOF
     !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Warmux"
     CreateShortCut "\$SMPROGRAMS\\Warmux\\Warmux.lnk" \
       "\$INSTDIR\\warmux.exe" "" "\$INSTDIR\\warmux.exe" 0
-    SetOverwrite off
-  SectionEnd
-
-  ; Warmux uninstall shortcut in start menu
-  ; Might be forced if user has no install rights, because it would be complex otherwise:
-  ; - No uninstall available in Windows "Program uninstall"
-  Section \$(Warmux_UNINST_SC_DESC) Sec_UninstallShortCut
-    SetOverwrite on
-    !insertmacro CreateDirectoryOnce "\$SMPROGRAMS\\Warmux"
-    CreateShortCut  "\$SMPROGRAMS\\Warmux\\Uninstall.lnk" \
-         "\$INSTDIR\\uninstall.exe" "" "\$INSTDIR\\uninstall.exe" 0
     SetOverwrite off
   SectionEnd
 SectionGroupEnd
@@ -485,6 +498,7 @@ Function .onInit
   IntOp \$R0 \${SF_RO} | \${SF_SELECTED}
   SectionSetFlags \${Sec_Warmux} \$R0
   SectionSetFlags \${Sec_ConfigShortcut} \$R0
+  SectionSetFlags \${Sec_ResetShortcut} \$R0
   SectionSetFlags \${SecUninstallOldWarmux} \$R0
 
   ; Set install path according to user rights
