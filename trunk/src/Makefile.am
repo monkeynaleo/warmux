@@ -27,6 +27,7 @@ warmux_SOURCES = \
         character/damage_stats.h \
         character/member.cpp \
         character/member.h \
+        character/member_type.h \
         character/movement.cpp \
         character/movement.h \
         game/config.cpp \
