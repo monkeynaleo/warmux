@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-11-06 07:00+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -471,7 +471,7 @@ msgstr "Catégorie des armes à lancer"
 msgid "'Tool' weapon category"
 msgstr "Catégorie 'Outils'"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(mort)"
 
@@ -485,7 +485,7 @@ msgid "(unknown time)"
 msgstr "(temps inconnu)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
@@ -798,7 +798,8 @@ msgstr "Contrôles actuels"
 msgid ""
 "Current weapon and ammo left, long click to display its help.\n"
 "Click to open selection menu."
-msgstr "Arme utilisée et munitions restantes, clic long pour afficher son aide.\n"
+msgstr ""
+"Arme utilisée et munitions restantes, clic long pour afficher son aide.\n"
 "Clic pour ouvrir le menu de sélection."
 
 #: src/menu/game_mode_editor.cpp:88
@@ -1055,7 +1056,7 @@ msgid "Have a good game!"
 msgstr "Bonne partie !"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Commandant"
@@ -1787,6 +1788,7 @@ msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
 #: src/menu/network_connection_menu.cpp:446
 #: tools/servers/game_server/server.cpp:287
+#, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
 "can download an updated version from http://www.warmux.org/wiki/download.php"
@@ -1816,7 +1818,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Lancement d'une nouvelle partie"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Munitions :"
 
@@ -2216,7 +2218,8 @@ msgstr "Particules du vent ?"
 msgid ""
 "Wind strength and direction.\n"
 "Click here to switch to touch controls."
-msgstr "Force et direction du vent.\n"
+msgstr ""
+"Force et direction du vent.\n"
 "Cliquer pour afficher les contrôles tactiles."
 
 #: src/menu/results_menu.cpp:272

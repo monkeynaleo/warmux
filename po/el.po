@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -490,7 +490,7 @@ msgstr "Αλλαγή κατηγορίας όπλου"
 msgid "'Tool' weapon category"
 msgstr "Αλλαγή κατηγορίας όπλου"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(πεθαμένος)"
 
@@ -504,7 +504,7 @@ msgid "(unknown time)"
 msgstr "(άγνωστο χρόνο)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(απεριόριστο)"
 
@@ -1075,7 +1075,7 @@ msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Διοικητής"
@@ -1832,7 +1832,7 @@ msgstr "Ηχητικές επιλογές"
 msgid "Starting a new game"
 msgstr "Έναρξη νέου παιχνιδιού"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Απόθεμα:"
 

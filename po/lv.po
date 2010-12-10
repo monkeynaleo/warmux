@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: warmux-lv\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2007-08-25 12:48+0300\n"
 "Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -488,7 +488,7 @@ msgstr "Rakstzīmju skaits"
 msgid "'Tool' weapon category"
 msgstr "Rakstzīmju skaits"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(mirusi)"
 
@@ -502,7 +502,7 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(bezgalība)"
 
@@ -1058,7 +1058,7 @@ msgid "Have a good game!"
 msgstr "Lai jums jauka spēle!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Virspavēlnieks"
@@ -1813,7 +1813,7 @@ msgstr "Skaņas"
 msgid "Starting a new game"
 msgstr "Sāk jaunu spēli"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "Krājumā:"
 

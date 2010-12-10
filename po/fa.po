@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-05 14:17+0100\n"
+"POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Warmux Fa <behdadp@farsiweb.info>\n"
@@ -422,7 +422,7 @@ msgstr "تعداد کاراکترها"
 msgid "'Tool' weapon category"
 msgstr "تعداد کاراکترها"
 
-#: src/interface/interface.cpp:252
+#: src/interface/interface.cpp:262
 msgid "(dead)"
 msgstr "(مرده)"
 
@@ -436,7 +436,7 @@ msgid "(unknown time)"
 msgstr ""
 
 #. Display number of ammo
-#: src/interface/interface.cpp:275
+#: src/interface/interface.cpp:285
 msgid "(unlimited)"
 msgstr "(بی‌نهایت)"
 
@@ -991,7 +991,7 @@ msgid "Have a good game!"
 msgstr "بازی خوبی داشته باشید!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:241 src/menu/options_menu.cpp:173
+#: src/interface/interface.cpp:251 src/menu/options_menu.cpp:173
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "رئیس ارتش"
@@ -1745,7 +1745,7 @@ msgstr "صداها"
 msgid "Starting a new game"
 msgstr "در حال شروع یک بازی جدید"
 
-#: src/interface/interface.cpp:276
+#: src/interface/interface.cpp:286
 msgid "Stock:"
 msgstr "استوک: "
 
