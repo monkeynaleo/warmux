@@ -46,7 +46,6 @@ EXTRA_DIST = build/visual/gettext.rules            \
              build/android/AndroidManifest.xml     \
              build/android/build.xml               \
              build/android/default.properties      \
-             build/android/local.properties        \
              $(foreach D, $(EXTRA_DISTDIRS), $(shell find $(D) -name .svn -a -type d -prune -o -type f -print))
 
 if WIN32
