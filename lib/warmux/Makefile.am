@@ -9,6 +9,7 @@ libwarmux_a_SOURCES = \
         ./include/WARMUX_config.h \
 	./include/WARMUX_action.h \
 	./include/WARMUX_action_handler.h \
+        ./include/WARMUX_base.h \
 	./include/WARMUX_debug.h \
 	./include/WARMUX_distant_cpu.h \
 	./include/WARMUX_download.h \
