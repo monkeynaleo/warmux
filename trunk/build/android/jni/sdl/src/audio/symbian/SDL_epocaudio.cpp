@@ -458,7 +458,7 @@ void CEpocAudio::ThreadInitL(TAny* aDevice)
    
     iWait = CWait::NewL();
     
-    TInt vol = TInt(TReal(iPlayer->MaxVolume()) * 0.5); //Initial mastervolume
+    TInt vol = TInt(TReal(iPlayer->MaxVolume()) * 0.8); //Initial mastervolume
     
     TRAP_IGNORE(ReadValueL(KMaxVolumeId, vol));
     

@@ -344,40 +344,35 @@ NONSHARABLE_CLASS(CDsaBitgdi) : public CBitmapSurface
 	{
 public:
 	CDsaBitgdi(RWsSession& aSession);
-protected:
-	 void ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice);
-	 CBitmapContext* Gc();
-	 ~CDsaBitgdi();
-	 void CreateSurfaceL();
-	// void Free();
-	 void UpdateRequestCompleted();
 private:
-//	 void Resume();
+    void ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice);
+    CBitmapContext* Gc();
+    ~CDsaBitgdi();
+    void CreateSurfaceL();
+    void UpdateRequestCompleted();
+    void DisableDraw(TBool aDisable);
 private:	 
-	// CFbsBitGc* iGc;
-	// CFbsDevice* iDevice;
-	// CFbsBitmap* iCanvas;
-	 
 	CFbsBitGc* iOffGc;
 	CFbsDevice* iOffDevice;
 	CFbsBitmap* iOffCanvas;
 	 
-	 CFbsBitmap* iBitGdiBmp;
-	 CWindowGc* iWinGc;
+	//CFbsBitmap* iBitGdiBmp;
+	//CWindowGc* iWinGc;
 	 
-	 RWindow* iWindow;
-	 TInt iHandle;
-	 };
+	RWindow* iWindow;
+	TInt iHandle;
+	};
 
 
-CDsaBitgdi::CDsaBitgdi(RWsSession& aSession) : CBitmapSurface(aSession)
+CDsaBitgdi::CDsaBitgdi(RWsSession& aSession) : CBitmapSurface(aSession) 
 	{
 	}
 
+
 CDsaBitgdi::~CDsaBitgdi()
 	{
-	delete iWinGc;
-	delete iBitGdiBmp;
+//	delete iWinGc;
+	//delete iBitGdiBmp;
 	
 	delete iOffGc;
     delete iOffDevice; 
@@ -390,7 +385,7 @@ void CDsaBitgdi::UpdateRequestCompleted()
 	{
 	if(iHandle == 0)
 		return;
-	
+	/*
 	if(iBitGdiBmp == NULL)
 		{
 		iBitGdiBmp = new CFbsBitmap();
@@ -399,21 +394,30 @@ void CDsaBitgdi::UpdateRequestCompleted()
 		const TInt err = iBitGdiBmp->Duplicate(iHandle);
 		PANIC_IF_ERROR(err);    
 		}
+	*/
 	
-	iWindow->Invalidate();
+	reinterpret_cast<RBackedUpWindow*>(iWindow)->UpdateScreen();
 	
-	iWindow->BeginRedraw();
-	iWinGc->Activate(*iWindow);
+//	iWindow->Invalidate();
+
+	/*
+	if(iWinGc != NULL)
+	    {
+	    iWindow->BeginRedraw();
 	
-	 const TSize sz = Bmp().SizeInPixels();           
-	__ASSERT_DEBUG(sz.iHeight > 0 && sz.iHeight > 0, PANIC(KErrCorrupt));
+	    iWinGc->Activate(*iWindow);
+	
+	    const TSize sz = Bmp().SizeInPixels();           
+	    __ASSERT_DEBUG(sz.iHeight > 0 && sz.iHeight > 0, PANIC(KErrCorrupt));
 	         
 	
-	iWinGc->BitBlt(TPoint(0, 0), iOffCanvas);
+	    iWinGc->BitBlt(TPoint(0, 0), iOffCanvas);
 			
-	iWinGc->Deactivate();
-	iWindow->EndRedraw();
-	}	
+	    iWinGc->Deactivate();
+	    iWindow->EndRedraw();
+	    }
+	    */
+	}
 	
 /*
 void CDsaBitgdi::Resume()
@@ -427,19 +431,23 @@ CBitmapContext* CDsaBitgdi::Gc()
  	{
  	return iOffGc;
  	}
- 	
+
+
+void CDsaBitgdi::DisableDraw(TBool aDisable)
+    {
+    CDsa::DisableDraw(aDisable);
+    }
+
  void CDsaBitgdi::ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice)
  	{
  	_ASSERT_Update;
- 	delete iBitGdiBmp;
- 	iBitGdiBmp = NULL;
- 	delete iWinGc;
- 	iWinGc = NULL;
+ 	//delete iBitGdiBmp;
+ 	//iBitGdiBmp = NULL;
+ //	delete iWinGc;
+ //	iWinGc = NULL;
  	iHandle = 0;
  	
  	iWindow = &aWindow;
- 	User::LeaveIfError(aDevice.CreateContext(iWinGc));
- 	iWinGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
  	
  	delete iOffCanvas;
  	iOffCanvas = NULL;
@@ -451,63 +459,37 @@ CBitmapContext* CDsaBitgdi::Gc()
  	iOffGc = NULL;
  	
  	iOffCanvas = new (ELeave) CWsBitmap(Session());
- 	
-// 	iOffCanvas = new (ELeave) CFbsBitmap();
  	 
- 	TDisplayMode targetMode = iWindow->DisplayMode();
- 	if(targetMode == EColor16MA || targetMode == EColor16MAP)
+ 	TDisplayMode targetMode = iWindow->DisplayMode();         //this cause 5.x WSERV9, and in all devices it "should" be EColor16MU
+ 	if(targetMode == EColor16MA || targetMode == EColor16MAP)   //TAknScreenMode + THardwareState would be (?) a more proof way, if this not work..
  	        targetMode = EColor16MU;
  	
- 	User::LeaveIfError(iOffCanvas->Create(iWindow->Size(), targetMode));
- 	
- 	/*
- 	iOffCanvas->LockHeap();
- 	TUint8* data = reinterpret_cast<TUint8*>(iOffCanvas->DataAddress());
- 	for(TInt h = 0; h < iOffCanvas->SizeInPixels().iHeight; h++)
-        {
-        Mem::Fill(data, iOffCanvas->DataStride(), 0xF0);
-        data += iOffCanvas->DataStride();
-        }
- 	iOffCanvas->UnlockHeap();
- 	*/
- 	
- 	iOffDevice = CFbsBitmapDevice::NewL(iOffCanvas);
- 	User::LeaveIfError(iOffDevice->CreateContext(iOffGc));
- 	
- 	iOffGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
- 	
+ 	const TInt handle = reinterpret_cast<RBackedUpWindow*>(iWindow)->BitmapHandle();
+ 	User::LeaveIfError(iOffCanvas->Duplicate(handle));
+ 	//User::LeaveIfError(iOffCanvas->Create(iWindow->Size(), targetMode));
+ 	iOffDevice = CFbsBitmapDevice::NewL(iOffCanvas);	
  	
  	CDsa::ConstructL(aWindow, aDevice);
  	
+    User::LeaveIfError(iOffDevice->CreateContext(iOffGc));
+    iOffGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
+    
+    /*
+    if(EpocSdlEnv::Flags(CSDL::EDrawModeGdiGc) == CSDL::EDrawModeGdiGc)
+        {
+        User::LeaveIfError(aDevice.CreateContext(iWinGc));
+        iWinGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
+        }    
+ 	*/
  	Start();
  	}
  	
 void CDsaBitgdi::CreateSurfaceL()	
 	{
 	CBitmapSurface::CreateSurfaceL();
-	/*iSurfaceDevice = CFbsBitmapDevice::NewL(&Bmp());
-	User::LeaveIfError(iSurfaceDevice->CreateContext(iSurfaceGc));
-	
-	
-	iSurfaceGc->SetBrushStyle(CGraphicsContext::ESolidBrush);
-	iSurfaceGc->SetPenStyle(CGraphicsContext::ESolidPen);
-	iSurfaceGc->SetPenColor(KRgbMagenta);
-	iSurfaceGc->SetBrushColor(KRgbMagenta);
-	iSurfaceGc->DrawRect(TRect(TPoint(0, 0), Bmp().SizeInPixels()));
-	
-	iSurfaceGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);*/
 	iHandle = Bmp().Handle();
 	}
 	
-/*void CDsaBitgdi::Free()
-	{
-	_ASSERT_Update;
-	delete iGc;
-	iGc = NULL;
-	delete iDevice;
-	iDevice = NULL;
-	CBitmapSurface::Free();
-	}*/
 	
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -521,8 +503,6 @@ private:
 	~CDirectDsa();
 	void ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice);
 	void Stop();
-//	void Resume();
-//	void Sus
 	CBitmapContext* Gc();
     void DoBlt();
     void UpdateRequestCompleted();
@@ -577,20 +557,13 @@ void CDirectDsa::ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice)
     
     DsaLockOff();
     
-    RestartL();
-    
+    if(!iRestartRequest)
+        {
+        DisableDraw(EFalse);
+        RestartL();
+        }
     }	
 	
-/*
-void CDirectDsa::Resume()	
-	{
-	if(iDsa != NULL && !IsDsaAvailable())
-	    {
-	    TRAPD(err, RestartL());
-	    PANIC_IF_ERROR(err);
-	    }
-	}	
-*/
 
 CDirectDsa::~CDirectDsa()
 	{
@@ -607,6 +580,7 @@ void CDirectDsa::DisableDraw(TBool aDisable)
     CDsa::DisableDraw(aDisable);
     if(!aDisable && iRestartRequest)
         {
+        iRestartRequest = EFalse;
         TRAPD(err, RestartL());
         PANIC_IF_ERROR(err);
         }
@@ -618,12 +592,10 @@ void CDirectDsa::RestartL()
 
     __ASSERT_ALWAYS(iDsa != NULL, PANIC(KErrNotFound));
     
- //  __ASSERT_ALWAYS(!IsDrawDisabled(), PANIC(KErrNotReady));
+   __ASSERT_ALWAYS(!IsDrawDisabled(), PANIC(KErrNotReady));
+   __ASSERT_ALWAYS(!iRestartRequest, PANIC(KErrNotReady));
     
-    iRestartRequest = IsDrawDisabled();
-    if(iRestartRequest)
-        return;
- 
+
     DsaLockOn();
     
 
@@ -634,10 +606,15 @@ void CDirectDsa::RestartL()
     const TRect rect = r->BoundingRect();
    
     
-    if(rect != TDsa(*this).ScreenRect())
+    if( rect != TDsa(*this).ScreenRect() || rect.IsEmpty())
     	{
+    	iDsa->Cancel();  
+    	DisableDraw(ETrue);
+    	iRestartRequest = ETrue; 
+    	DsaLockOff();
     	return;	
    	 	}
+   	 	
    	 	
     iDsa->Gc()->SetClippingRegion(r);   
      
@@ -647,8 +624,6 @@ void CDirectDsa::RestartL()
    	SetTargetRect();
 	
 	Start();
-	
-	DisableDraw(EFalse);
 	
 	DsaLockOff();
 	
@@ -662,8 +637,17 @@ void CDirectDsa::AbortNow(RDirectScreenAccess::TTerminationReasons /*aReason*/)
 void CDirectDsa::Restart(RDirectScreenAccess::TTerminationReasons aReason)
 	{
 	if(aReason == RDirectScreenAccess::ETerminateRegion && !IsDsaAvailable()/*aReason != RDirectScreenAccess::ETerminateCancel && aReason != RDirectScreenAccess::ETerminateScreenMode*/) //auto restart
-		{		
-		TRAPD(err, RestartL());
+		{
+		TInt err = KErrNone;
+		if(!IsDrawDisabled())
+		    {
+		    iRestartRequest = EFalse;
+		    TRAP(err, RestartL());
+		    }
+		else
+		    {
+		    iRestartRequest = ETrue;
+		    }
 		if(err == KLeaveExit)
 			{
 			Stop();	
@@ -835,20 +819,35 @@ CDsa::~CDsa()
 void CDsa::ConstructL(RWindow& aWindow, CWsScreenDevice& /*aDevice*/)
     {			
     _ASSERT_Update;
-    if(iDsaLock.Handle() == 0)
+    const TBool init = iDsaLock.Handle() == 0;
+    
+    if(init)
         iDsaLock.CreateLocal();
+    
 	if(iLut256 == NULL)
 		iLut256 = (TUint32*) User::AllocL(256 * sizeof(TUint32));
 	
 	iTargetMode = aWindow.DisplayMode();
-	
 	
 	if(iTargetMode == EColor16MA || iTargetMode == EColor16MAP)
 	    iTargetMode = EColor16MU;
 	
 	
 	iTargetBpp = BytesPerPixel(DisplayMode());
+	
+	const TRect oldRect = iScreenRect;
+	
 	iScreenRect = TRect(aWindow.Position(), aWindow.Size());
+	
+	if(!init && oldRect != iScreenRect)
+	    {
+	    EpocSdlEnv::ScreenSizeChanged(); 
+	    TWsEvent event;
+        event.SetType(EEventScreenDeviceChanged);
+        event.SetTimeNow();
+        EpocSdlEnv::EventQueue().Append(event);
+	    }
+	    
 	SetTargetRect();
 	iWindow = &aWindow;
     }
@@ -987,7 +986,6 @@ TUint8* CDsa::LockHwSurface()
 	
 TInt CDsa::AllocSurface(TBool aHwSurface, const TSize& aSize, TDisplayMode aMode)
 	{
-	//gLastError = _L("in Alloc");
 	DsaLockOn();
 	_ASSERT_Update;
 	if(aHwSurface && aMode != DisplayMode())
@@ -1082,7 +1080,7 @@ void SaveBmp(const TDesC& aName, const TUint32* aData, const TSize& aSz)
 TBuf<16> FooName(TInt aFoo)
 	{
 	TBuf<16> b;
-	b.Format(_L("C:\\pic%d.mbm"), aFoo);
+	b.Format(_L("C:\\data\\others\\pic%d.mbm"), aFoo);
 	return b;
 	}
 	
@@ -1184,8 +1182,8 @@ TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const T
 		iStateFlags &= ~EOrientationChanged;
 		
 		DsaLockOff();
-		
-	    EpocSdlEnv::WaitDeviceChange();
+		EpocSdlEnv::ScreenSizeChanged();
+	    //EpocSdlEnv::WaitDeviceChange();
 	    return EFalse; //skip this frame as data is may be changed
 		}
 
@@ -1257,17 +1255,13 @@ void CDsa::Stop()
 void CDsa::Start()
 	{     
     EpocSdlEnv::ObserverEvent(MSDLObserver::EEventWindowReserved);	
-  
-    EpocSdlEnv::ResumeDsa();
-          
-    TWsEvent event;
-    event.SetType(EEventScreenDeviceChanged);
-    event.SetTimeNow();
-    EpocSdlEnv::EventQueue().Append(event);
+     
+    EpocSdlEnv::EnableDraw();
     
-
+    EpocSdlEnv::ResumeDsa();
     
     iStateFlags |= ERunning;
+      
 	}
 
 	
@@ -1327,6 +1321,7 @@ TRect CDsa::CalcResizeRect(const TSize& aBound, const TSize& aRatio)
 void CDsa::SetTargetRect()
 	{
 	iTargetRect = iScreenRect;
+	
 	if((iStateFlags & EResizeRequest) && EpocSdlEnv::Flags(CSDL::EAllowImageResizeKeepRatio))
 		{	
 		iTargetRect = CalcResizeRect(iScreenRect.Size(), iSwSize);
@@ -1475,8 +1470,11 @@ void CDsa::CopyMemFlipReversed(const CDsa& /*aDsa*/, TUint32* aTarget, const TUi
 NONSHARABLE_CLASS(MRgbCopy)
 	{
 	public:
-	virtual void Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TBool aReversed) = 0;
-	virtual void FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen, TBool aReversed) = 0;
+	virtual void Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes) = 0;
+	virtual void FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen) = 0;
+	virtual void CopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes) = 0;
+	virtual void FlipCopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen) = 0;
+	    
 	};
 	
 template <class T>
@@ -1485,8 +1483,11 @@ NONSHARABLE_CLASS(TRgbCopy) : public MRgbCopy
 	public:
 	TRgbCopy(TDisplayMode aMode);
 	void* operator new(TUint aBytes, TAny* aMem);
-	void Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TBool aReversed);
-	void FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen, TBool aReversed);
+	void Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes);
+	void FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen);
+	void CopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes);
+	void FlipCopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen);
+	    
 	static TUint32 Gray256(const TUint8& aPixel);
 	static TUint32 Color256(const TUint8& aPixel);
 	static TUint32 Color4K(const TUint16& aPixel);
@@ -1525,55 +1526,63 @@ TRgbCopy<T>::TRgbCopy(TDisplayMode aMode)
 
 
 template <class T>
-void TRgbCopy<T>::Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TBool aReversed)
+void TRgbCopy<T>::Copy(TUint32* aTarget, const TUint8* aSource, TInt aBytes)
 	{
 	const T* source = reinterpret_cast<const T*>(aSource);
 	TUint32* target = aTarget;
 	TUint32* endt = target + aBytes;
 	
-	if(aReversed)
-		{
-		while(target < endt)
-			{
-			const T value = *source++;
-			*(--endt) = iFunc(value);//iFunc(value).Value();
-			}
-		}
-	else
-		{
-		while(target < endt)
-			{
-			const T value = *source++;
-			*target++ = iFunc(value);//iFunc(value).Value();
-			}
+	while(target < endt)
+	    {
+		const T value = *source++;
+		*target++ = iFunc(value);//iFunc(value).Value();
 		}
 	}
-	
+
 template <class T>
-void TRgbCopy<T>::FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen, TBool aReversed)
+void TRgbCopy<T>::CopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes)
+    {
+    const T* source = reinterpret_cast<const T*>(aSource);
+    TUint32* target = aTarget;
+    TUint32* endt = target + aBytes;
+    
+    while(target < endt)
+        {
+        const T value = *source++;
+        *(--endt) = iFunc(value);//iFunc(value).Value();
+        }
+      
+    }
+
+template <class T>
+void TRgbCopy<T>::FlipCopy(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen)
 	{
 	const T* column = reinterpret_cast<const T*>(aSource);
 	TUint32* target = aTarget;
 	TUint32* endt = target + aBytes;
 	
-	if(aReversed)
-		{
-		while(target < endt)
-			{
-			*(--endt) = iFunc(*column);
-			column += aLineLen;
-			}
-		}
-	else
-		{
-		while(target < endt)
-			{
-			*target++ = iFunc(*column);
-			column += aLineLen;
-			}
-		}
+    while(target < endt)
+        {
+        *target++ = iFunc(*column);
+        column += aLineLen;
+        }
 	}	
 		
+template <class T>
+void TRgbCopy<T>::FlipCopyReversed(TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen)
+    {
+    const T* column = reinterpret_cast<const T*>(aSource);
+    TUint32* target = aTarget;
+    TUint32* endt = target + aBytes;
+   
+    while(target < endt)
+        {
+        *(--endt) = iFunc(*column);
+        column += aLineLen;
+        }
+    
+    }
+
 template <class T> TUint32 TRgbCopy<T>::Gray256(const TUint8& aPixel)
 	{
 	const TUint32 px = aPixel << 16 | aPixel << 8 | aPixel;
@@ -1652,25 +1661,25 @@ LOCAL_C MRgbCopy* GetCopy(TAny* mem, TDisplayMode aMode)
 void CDsa::CopySlowFlipReversed(const CDsa& aDsa, TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen)
 	{
 	TStackMem mem = 0;
-	GetCopy(&mem, aDsa.iSourceMode)->FlipCopy(aTarget, aSource, aBytes, aLineLen, ETrue);	
+	GetCopy(&mem, aDsa.iSourceMode)->FlipCopyReversed(aTarget, aSource, aBytes, aLineLen);	
 	}
 	
 void CDsa::CopySlowFlip(const CDsa& aDsa, TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt aLineLen)
 	{
 	TStackMem mem = 0;
-	GetCopy(&mem, aDsa.iSourceMode)->FlipCopy(aTarget, aSource, aBytes, aLineLen, EFalse);
+	GetCopy(&mem, aDsa.iSourceMode)->FlipCopy(aTarget, aSource, aBytes, aLineLen);
 	}
 	
 void CDsa::CopySlow(const CDsa& aDsa, TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt)
 	{
 	TStackMem mem = 0;
-	GetCopy(&mem, aDsa.iSourceMode)->Copy(aTarget, aSource, aBytes, EFalse);	
+	GetCopy(&mem, aDsa.iSourceMode)->Copy(aTarget, aSource, aBytes);	
 	}	
 
 void CDsa::CopySlowReversed(const CDsa& aDsa, TUint32* aTarget, const TUint8* aSource, TInt aBytes, TInt)
 	{
 	TStackMem mem = 0;
-	GetCopy(&mem, aDsa.iSourceMode)->Copy(aTarget, aSource, aBytes, ETrue);	
+	GetCopy(&mem, aDsa.iSourceMode)->CopyReversed(aTarget, aSource, aBytes);	
 	}	
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////7

@@ -299,17 +299,9 @@ int VideoInit(_THIS, SDL_PixelFormat *vformat)
     
     
     
-    if (sz.iHeight > sz.iWidth)
-        {
-        Private->iRect.h = sz.iWidth;
-        Private->iRect.w = sz.iHeight;
-        }
-    else
-        {
-        Private->iRect.w = sz.iWidth;
-        Private->iRect.h = sz.iHeight;
-        }
-    Private->iRectPtr = &Private->iRect;
+    Private->iRect.w = sz.iWidth;
+    Private->iRect.h = sz.iHeight;
+	Private->iRectPtr = &Private->iRect;
 
 	/*_this->info->hw_available    = 0;   
 	_this->info->wm_available      = 0; 
@@ -668,9 +660,7 @@ SDL_Surface *SetVideoMode(_THIS, SDL_Surface *current,
 	      //  current_video->hidden->iFlags &= ~EAutoRotationOn;
 	        }	    
  
-	
-
-	
+		
    	if(flags & SDL_OPENGL)
    		{
    	//	current_video->hidden->iFlags &= ~EContainerChange;
@@ -683,7 +673,11 @@ SDL_Surface *SetVideoMode(_THIS, SDL_Surface *current,
 		EpocSdlEnv::ApplyGlesDsa();	
 				
 		CreateGles(_this, *win, bpp, *_this->gl_data);		
-   		
+		
+		const TSize sz(width, height);
+		const TInt param = reinterpret_cast<TInt>(&sz);
+		EpocSdlEnv::ObserverEvent(MSDLObserver::EEventScreenSurfaceCreated, param);
+
    		return current;
    		}
    	
@@ -783,17 +777,23 @@ SDL_Surface *SetVideoMode(_THIS, SDL_Surface *current,
     Private->iRect.x = pos.iX;
     Private->iRect.y = pos.iY;
     
-    const TSize sz = EpocSdlEnv::WindowSize();
+    const TSize winSz = EpocSdlEnv::WindowSize();
        
-    Private->iRect.w = sz.iWidth;
-    Private->iRect.h = sz.iHeight;
-    
+    Private->iRect.w = winSz.iWidth;
+    Private->iRect.h = winSz.iHeight;
+
 
     EpocSdlEnv::EnableDraw();
+    EpocSdlEnv::ResumeDsa();
     
 	EpocSdlEnv::LockPalette(EFalse);
 	
 	Private->iFlags |= EFocusedWindow;
+	
+	const TSize sz(width, height);
+	const TInt param = reinterpret_cast<TInt>(&sz);
+	EpocSdlEnv::ObserverEvent(MSDLObserver::EEventScreenSurfaceCreated, param);
+
 	
 //	current_video->hidden->iFlags &= ~EContainerChange;
 	/* We're done */
@@ -897,11 +897,11 @@ static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
    else
     	{      
     	EpocSdlEnv::WaitDsaAvailable();              
-			}
+    	}
 	if(0 == (Private->iFlags & EFocusedWindow))
 	    {
 	    /* Bartosz Taudul idea to reduce power consumption when not focuced*/
-	    User::After(100000);
+	    User::After(300000);
 	    }
 	//gLastError = _L("out du");
 	}

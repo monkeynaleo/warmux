@@ -85,18 +85,39 @@ TInt EnvUtils::RunSingleThread()
 	{
 	if(!EnvUtils::IsOwnThreaded())
     	{
-    	const TInt count = RThread().RequestCount();
-    	if(count > 0)
-    		{	
-    		TInt err;
-    		const TInt filter = (gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::ESuspend) ? 
-    		    CActive::EPriorityIdle + 1 : CActive::EPriorityIdle;
+    	
+        /*TInt signals = 0;
+        while(gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::ESuspend)
+            {
+            CActiveScheduler::Current()->WaitForAnyRequest();
+            TInt err;
+            if(!CActiveScheduler::RunIfReady(err, CActive::EPriorityLow))
+                {
+                ++signals;
+                }
+            };
+    		    
+        while(signals)
+            {
+            RThread().RequestSignal();
+            --signals;
+            }
+        */
+    	
+    	
+    	
+        const TInt count = RThread().RequestCount();
+        if(count > 0)
+            {
+            const TInt filter = gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::ESuspend ? 
+                        CActive::EPriorityLow : CActive::EPriorityIdle; 
+            TInt err;
     		if(CActiveScheduler::RunIfReady(err, filter))
-    			{
-    			CActiveScheduler::Current()->WaitForAnyRequest();
-    			return 1;
-    			}
-    		}
+    		    {
+    		    CActiveScheduler::Current()->WaitForAnyRequest();
+    		    return 1;
+                }
+            }
     	}
 	return 0;
 	}

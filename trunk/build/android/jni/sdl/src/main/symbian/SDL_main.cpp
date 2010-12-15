@@ -294,7 +294,7 @@ EXPORT_C void CSDL::SetContainerWindowL(RWindow& aWindow, RWsSession& aSession, 
     {
     if(gEpocEnv->iDsa == NULL)
     	gEpocEnv->iDsa = CDsa::CreateL(aSession);
-    gEpocEnv->iDsa->ConstructL(aWindow, aDevice);
+    
      
     aWindow.DisablePointerMoveBuffer();
     aWindow.FreePointerMoveBuffer();
@@ -305,6 +305,8 @@ EXPORT_C void CSDL::SetContainerWindowL(RWindow& aWindow, RWsSession& aSession, 
         aWindow.AllocPointerMoveBuffer(KPointerBufferSize, 0);
         aWindow.EnablePointerMoveBuffer();
         }
+    
+    gEpocEnv->iDsa->ConstructL(aWindow, aDevice);
     }
         
  
@@ -449,7 +451,7 @@ EXPORT_C void CSDL::Resume()
 	
 EXPORT_C void CSDL::Suspend()
 	{
-	EpocSdlEnv::DoSuspend();
+	EpocSdlEnv::DoSuspend(EFalse);
 	}
 	
 EXPORT_C CSDL::CSDL()
@@ -574,7 +576,9 @@ EXPORT_C TInt CSDL::Extension_(TUint aExtensionId, TAny*& /*a0*/, TAny* a1)
     switch(aExtensionId)
         {
         case KSDLExtensionBuildDate:
-         return GetBuildDate(reinterpret_cast<TDes*>(a1));  
+            return GetBuildDate(reinterpret_cast<TDes*>(a1));  
+      //  case KSDLExtensionBitGdiCanvas:
+      //       return (gEpocEnv->iBitGdiCanvas != NULL) && (*(gEpocEnv->iBitGdiCanvas) != NULL) ? (*(gEpocEnv->iBitGdiCanvas))->Handle() : KErrNotFound;
         }
     return KErrNotSupported;
     }
