@@ -85,7 +85,7 @@ void EpocSdlEnv::WaitDsaAvailable()
 	gEpocEnv->iEpocEnvFlags |= EpocSdlEnvData::EWaitDsa;
 	EpocSdlEnv::ObserverEvent(MSDLObserver::EEventWindowNotAvailable, 0);
 	if(gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::EWaitDsa)
-	    EpocSdlEnv::DoSuspend();
+	    EpocSdlEnv::DoSuspend(ETrue);
 	//gEpocEnv->iAppSrv->Request(CSdlAppServ::EAppSrvStopThread);
 	/*if(EpocSdlEnv::Flags(CSDL::EEnableFocusStop))
 		{
@@ -94,28 +94,32 @@ void EpocSdlEnv::WaitDsaAvailable()
 	*/
 	}
 
+
 void EpocSdlEnv::ResumeDsa()
     {
     if(gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::EWaitDsa)
         EpocSdlEnv::DoResume(ETrue);
- 
     gEpocEnv->iEpocEnvFlags &= ~EpocSdlEnvData::EWaitDsa;
     }
 
-void EpocSdlEnv::DoSuspend()
+
+TBool EpocSdlEnv::IsSuspend()
+    {
+    return gEpocEnv->iEpocEnvFlags & EpocSdlEnvData::ESuspend;
+    }
+
+void EpocSdlEnv::DoSuspend(TBool aInternal)
 	{
-	EpocSdlEnv::ObserverEvent(MSDLObserver::EEventSuspend, 0);
+	EpocSdlEnv::ObserverEvent(MSDLObserver::EEventSuspend, aInternal);
 	if(EnvUtils::IsOwnThreaded())
         {
         RThread thread;
         User::LeaveIfError(thread.Open(gEpocEnv->iId));
         thread.Suspend();
         }
-    else
-        {
-        gEpocEnv->iEpocEnvFlags |= EpocSdlEnvData::ESuspend; 
-       // gEpocEnv->iCaller->Cancel();
-        }
+   
+	gEpocEnv->iEpocEnvFlags |= EpocSdlEnvData::ESuspend; 
+       
 	
 	 for(TInt i = gEpocEnv->iChildThreads->Count() - 1; i >= 0; i--)
 	    {
@@ -167,7 +171,7 @@ void EpocSdlEnv::SetWaitDsa()
 	}
 */
 
-void EpocSdlEnv::DoResume(TBool aSilent, TBool aRendezvous)
+void EpocSdlEnv::DoResume(TBool aInternal, TBool aRendezvous)
 	{
 	if(EnvUtils::IsOwnThreaded())
         {
@@ -188,6 +192,7 @@ void EpocSdlEnv::DoResume(TBool aSilent, TBool aRendezvous)
             {
             thread.Resume();
             }
+        gEpocEnv->iEpocEnvFlags &= ~EpocSdlEnvData::ESuspend; 
         thread.Close(); 
         }
     else
@@ -221,11 +226,10 @@ void EpocSdlEnv::DoResume(TBool aSilent, TBool aRendezvous)
 	if(!aRendezvous)
 	    EpocSdlEnv::EnableDraw();
 	
-	if(!aSilent)    
-	    {
-	    const TInt value = gEpocEnv->iAppSrv->ObserverEvent(MSDLObserver::EEventResume, 0);
-	    gEpocEnv->iAppSrv->HandleObserverValue(MSDLObserver::EEventResume, value, ETrue);
-	    }
+
+    const TInt value = gEpocEnv->iAppSrv->ObserverEvent(MSDLObserver::EEventResume, aInternal);
+    gEpocEnv->iAppSrv->HandleObserverValue(MSDLObserver::EEventResume, value, ETrue);
+	    
 	}
     
 
@@ -380,7 +384,7 @@ void EpocSdlEnv::ObserverEvent(TInt aService, TInt aParam)
 	const TBool sdlThread = RThread().Id() == gEpocEnv->iId;
 	const TInt valuea = gEpocEnv->iAppSrv->ObserverEvent(aService, aParam);
 	gEpocEnv->iAppSrv->HandleObserverValue(aService, valuea, !sdlThread);
-	if(sdlThread)
+	if(sdlThread && EnvUtils::IsOwnThreaded())
 		{
 		gEpocEnv->iAppSrv->SetParam(aParam);
 		const TInt valuet = gEpocEnv->iAppSrv->RequestValue(aService);
@@ -399,41 +403,76 @@ void EpocSdlEnv::PanicMain(const TDesC& aInfo, TInt aErr)
     {
     gEpocEnv->iAppSrv->PanicMain(aInfo, aErr);
     }
-
+/*
 void EpocSdlEnv::ScreenSizeChanged()
     {
  //   gEpocEnv->iDsa->WaitDeviceChange(EFalse);
     }
-
+*/
 
 //Dsa is a low priority ao, it has to wait if its pending event, but ws
 //event has been prioritized before it
 //this is not called from app thread!
-
+/*
 void EpocSdlEnv::WaitDeviceChange() 
     {
   	LockPalette(ETrue);
-  //	gEpocEnv->iDsa->SetStarted();
-    gEpocEnv->iAppSrv->RequestValue(CSdlAppServ::EAppSrvWaitDsa);
- //   __ASSERT_ALWAYS(gEpocEnv->iDsa->IsDsaAvailable(), PANIC(KErrNotReady));
-   
-  //  gEpocEnv->iDsa->WaitDeviceChange(ETrue);
+  	
+  	if(EnvUtils::IsOwnThreaded())
+  	    gEpocEnv->iAppSrv->RequestValue(CSdlAppServ::EAppSrvWaitDsa);
+ 
     
     static TSize ssz = TSize(-1, -1);
     const TSize sz = WindowSize();
     if(sz != ssz)
         {
+        DisableDraw();
         const TInt param = reinterpret_cast<TInt>(&sz);
-   // PrepareContainerWindowChanged();   
         ObserverEvent(MSDLObserver::EEventScreenSizeChanged, param);
+        
         }
     
     ContainerWindowChanged();	
   
     LockPalette(EFalse);
-   // RThread().Suspend();
     }  
+*/
+
+void EpocSdlEnv::ScreenSizeChanged() 
+    {
+    LockPalette(ETrue);
+    DisableDraw();
+    const TSize sz = WindowSize();
+    const TInt param = reinterpret_cast<TInt>(&sz);
+    ObserverEvent(MSDLObserver::EEventScreenSizeChanged, param);
+    LockPalette(EFalse);
+    ContainerWindowChanged();   
+    }  
+
+/*
+void EpocSdlEnv::WaitDeviceChange() 
+    {
+    LockPalette(ETrue);
     
+    if(EnvUtils::IsOwnThreaded())
+        gEpocEnv->iAppSrv->RequestValue(CSdlAppServ::EAppSrvWaitDsa);
+ 
+    
+    static TSize ssz = TSize(-1, -1);
+    const TSize sz = WindowSize();
+    if(sz != ssz)
+        {
+        DisableDraw();
+        const TInt param = reinterpret_cast<TInt>(&sz);
+        ObserverEvent(MSDLObserver::EEventScreenSizeChanged, param);
+        
+        }
+    
+    ContainerWindowChanged();   
+  
+    LockPalette(EFalse);
+    }  
+*/
 /*
  * This function try to find best fit if screen content does not fit in screen
  */
@@ -600,6 +639,12 @@ TUint32 EpocSdlEnv::BgColor()
     {
     return gEpocEnv->iColor;
     }
+/*
+const CFbsBitmap** EpocSdlEnv::BitGdiCanvas()
+    {
+    return gEpocEnv->iBitGdiCanvas;
+    }
+*/
 
 void EpocSdlEnv::AppendThread(TInt aThreadId)
     {

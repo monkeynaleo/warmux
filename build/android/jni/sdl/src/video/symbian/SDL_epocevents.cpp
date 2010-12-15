@@ -308,17 +308,6 @@ LOCAL_C TInt PointerEvent(_THIS, const TWsEvent& aWsEvent)
 LOCAL_C TInt KeyDownEvent(_THIS, const TWsEvent& aWsEvent)
     {
     SDL_keysym keysym;
-    
-    /*if(aWsEvent.Key()->iScanCode == EStdKeyIncVolume && KeyMap()[EStdKeyIncVolume] == SDLK_UNKNOWN)
-        {
-        ChangeVolume(+1);
-        }
-    
-    if(aWsEvent.Key()->iScanCode == EStdKeyDecVolume && KeyMap()[EStdKeyDecVolume] == SDLK_UNKNOWN)
-        {
-        ChangeVolume(-1);
-        }*/
-    
     TranslateKey(_this, aWsEvent.Key()->iScanCode, &keysym);
     return SDL_PrivateKeyboard(SDL_PRESSED, &keysym);
     }
@@ -334,7 +323,7 @@ LOCAL_C TInt FocusGainedEvent(_THIS)
     {
     Private->iFlags |= EFocusedWindow;
     DisableKeyBlocking(_this);  //Markus: guess why:-)
-    EpocSdlEnv::EnableDraw();
+    EpocSdlEnv::ResumeDsa();
     SDL_PauseAudio(0);
     return SDL_PrivateAppActive(1, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
@@ -343,6 +332,10 @@ LOCAL_C TInt FocusLostEvent(_THIS)
     {
     Private->iFlags &= ~EFocusedWindow;
     SDL_PauseAudio(1);
+    if(EpocSdlEnv::Flags(CSDL::EEnableFocusStop))
+        {
+        EpocSdlEnv::WaitDsaAvailable();
+        }
     return SDL_PrivateAppActive(0, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
@@ -373,10 +366,29 @@ LOCAL_C TInt ModifiersChangedEvent(const TWsEvent& aWsEvent)
     }
 
 
-LOCAL_C TInt PointerBufferReadyEvent(_THIS)
+LOCAL_C TInt PointerBufferReadyEvent(_THIS/*, const TTime& aEventTime*/)
     {
     // Own threaded is not supported - it is fair easy to do, but needs some work so I would implemented
     // it only upon request :-) 
+    
+    /*
+    TTime time;
+    time.UniversalTime();
+    TTimeIntervalMicroSeconds d = time.MicroSecondsFrom(aEventTime);
+    
+    TInt skipcount  = 1;
+    
+    if(d < TTimeIntervalMicroSeconds(5000))
+        skipcount = -1;
+    else if (d < TTimeIntervalMicroSeconds(50000))
+        {
+        skipcount = (50000 - d.Int64()) / 5000;
+        }
+    
+    RDebug::Print(_L("skipCount %d"), skipcount);
+    
+    TInt skip = skipcount;
+    */
     RWindow* win = EnvUtils::IsOwnThreaded() ? NULL : EpocSdlEnv::Window();
     TInt posted = 0;
     if(win != NULL)
@@ -386,14 +398,23 @@ LOCAL_C TInt PointerBufferReadyEvent(_THIS)
         User::LeaveIfError(win->RetrievePointerMoveBuffer(buf));
         const TInt count = buf.Length() / sizeof(TPoint);
         
+        
         for(TInt i = 0; i < count; i++)
             {
-            const TPoint point = points[i] - Private->iScreenPos; 
-            const TPoint mousePos = EpocSdlEnv::WindowCoordinates(point);
-            if(mousePos.iX >= 0 && mousePos.iY >= 0 && mousePos.iX < _this->screen->w && mousePos.iY < _this->screen->h)
+      /*      --skip;
+            if(!skip)
                 {
-                posted += SDL_PrivateMouseMotion(0, 0, mousePos.iX, mousePos.iY); /* Absolute position on screen */
+                skip = skipcount;
                 }
+            else
+                {*/
+                const TPoint point = points[i] - Private->iScreenPos; 
+                const TPoint mousePos = EpocSdlEnv::WindowCoordinates(point);
+                if(mousePos.iX >= 0 && mousePos.iY >= 0 && mousePos.iX < _this->screen->w && mousePos.iY < _this->screen->h)
+                    {
+                    posted += SDL_PrivateMouseMotion(0, 0, mousePos.iX, mousePos.iY); /* Absolute position on screen */
+                    }
+                //}
             }
         }
     return posted;
@@ -407,7 +428,7 @@ LOCAL_C TInt ScreenDeviceChanged()
     if(w != screenSize.iWidth || h != screenSize.iHeight)
         {
         SDL_PrivateResize(screenSize.iWidth, screenSize.iHeight);
-        EpocSdlEnv::WaitDeviceChange();          
+      //  EpocSdlEnv::WaitDeviceChange();          
         w = screenSize.iWidth;
         h = screenSize.iHeight;
         }
@@ -429,7 +450,7 @@ int HandleWsEvent(_THIS, const TWsEvent& aWsEvent)
 			SDL_PrivateQuit();
 			return 0;
     	case EEventPointerBufferReady:
-    	    return PointerBufferReadyEvent(_this);
+    	    return PointerBufferReadyEvent(_this/*, aWsEvent.Time()*/);
         case EEventPointer: /* Mouse pointer events */
             return PointerEvent(_this, aWsEvent);
         case EEventKeyDown: /* Key events */
@@ -456,7 +477,7 @@ extern "C" {
 void PumpEvents(_THIS)
     {
     MEventQueue& events = EpocSdlEnv::EventQueue();
-    while(events.HasData())
+    while(events.HasData() /*&& !EpocSdlEnv::IsSuspend()*/)
         {
         events.Lock();
        

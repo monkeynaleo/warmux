@@ -162,7 +162,7 @@ void CSdlAppServ::HandleObserverValue(TInt aService, TInt aReturnValue, TBool aM
 			case MSDLObserver::EEventScreenSizeChanged:
 		/*	if(aReturnValue == MSDLObserver::EScreenSizeChangedDefaultPalette)
 				EpocSdlEnv::LockPalette(EFalse);*/
-			EpocSdlEnv::ScreenSizeChanged();
+			//EpocSdlEnv::ScreenSizeChanged();
 			break;
 			}
 		}
@@ -227,6 +227,7 @@ void CSdlAppServ::RunL()
             case MSDLObserver::EEventWindowNotAvailable:
             case MSDLObserver::EEventMainExit:
             case MSDLObserver::EEventVolumeChange:
+            case MSDLObserver::EEventScreenSurfaceCreated:
             	iReturnValue = ObserverEvent(iService, iReturnValue);
             	HandleObserverValue(iService, iReturnValue, ETrue);
             	break;
