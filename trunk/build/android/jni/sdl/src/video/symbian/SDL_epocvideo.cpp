@@ -298,9 +298,16 @@ int VideoInit(_THIS, SDL_PixelFormat *vformat)
     Private->iRect.y = Private->iScreenPos.iY;
     
     
-    
-    Private->iRect.w = sz.iWidth;
-    Private->iRect.h = sz.iHeight;
+    if (sz.iHeight > sz.iWidth)
+        {
+        Private->iRect.h = sz.iWidth;
+	    Private->iRect.w = sz.iHeight;
+    	}
+    else
+        {
+        Private->iRect.w = sz.iWidth;
+        Private->iRect.h = sz.iHeight;
+        }
 	Private->iRectPtr = &Private->iRect;
 
 	/*_this->info->hw_available    = 0;   
