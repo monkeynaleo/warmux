@@ -20,14 +20,15 @@
 
 /*
     SDL_systimer.cpp
-
-    Epoc version by Hannu Viitala (hannu.j.viitala@mbnet.fi) 
-    S60 version Markus Mertama
+    Markus Mertama
 */
 
 #include <e32std.h>
 #include <e32hal.h>
+
+#ifndef SYMBIAN3 
 #include <hal.h>
+#endif
 
 extern "C" {
 #include "SDL_error.h"
@@ -42,7 +43,20 @@ void SDL_StartTicks(void)
 	{
 	/* Set first ticks value */
     start = User::NTickCount();
+   
+    
+#ifndef SYMBIAN3 
     HAL::Get(HAL::ENanoTickPeriod, tickPeriodMicroSeconds); 
+#else
+    if(tickPeriodMicroSeconds == 0)
+        {
+        const TInt tick1 = User::NTickCount();
+        const TInt period = 200000;
+        User::AfterHighRes(period);
+        const TInt tick2 = User::NTickCount();
+        tickPeriodMicroSeconds = period / (tick2 - tick1);
+        }
+#endif
 	}
 
 Uint32 SDL_GetTicks(void)

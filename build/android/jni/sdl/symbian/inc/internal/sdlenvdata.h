@@ -35,7 +35,7 @@ class CSdlAppServ;
 class CEikAppUi;
 
 enum {ESDLWsEvent = EEventUser + 1000};
-const TInt KVectorSize = 64;
+const TInt KVectorSize = 128;
 
 
 
@@ -61,6 +61,7 @@ public:
     CSDL::TAppOrientation   		iAppOrientation;   
     TInt iStackSize;
     TUint32                         iColor;
+ //   const CFbsBitmap**              iBitGdiCanvas;
     CArrayFix<TInt>*                iChildThreads;                      
     };
   
